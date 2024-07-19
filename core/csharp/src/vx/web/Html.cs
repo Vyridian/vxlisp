@@ -69,12 +69,12 @@ public static class Html {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else if (valsub is Vx.Web.Html.Type_divchildlist) { // default property
             ischanged = true;
@@ -90,8 +90,9 @@ public static class Html {
             ischanged = true;
             vx_p_nodes = vallist;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -115,9 +116,9 @@ public static class Html {
           switch (key) {
           case ":nodes":
             if (valsub == vx_p_nodes) {
-            } else if (valsub is Vx.Web.Html.Type_divchildlist) {
+            } else if (valsub is Vx.Web.Html.Type_divchildlist valnodes) {
               ischanged = true;
-              vx_p_nodes = (Vx.Web.Html.Type_divchildlist)valsub;
+              vx_p_nodes = valnodes;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -344,16 +345,17 @@ public static class Html {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -377,9 +379,9 @@ public static class Html {
           switch (key) {
           case ":id":
             if (valsub == vx_p_id) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valid) {
               ischanged = true;
-              vx_p_id = (Vx.Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -400,9 +402,9 @@ public static class Html {
             break;
           case ":eventmap":
             if (valsub == vx_p_eventmap) {
-            } else if (valsub is Vx.Event.Type_eventmap) {
+            } else if (valsub is Vx.Event.Type_eventmap valeventmap) {
               ischanged = true;
-              vx_p_eventmap = (Vx.Event.Type_eventmap)valsub;
+              vx_p_eventmap = valeventmap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -420,9 +422,9 @@ public static class Html {
             break;
           case ":style":
             if (valsub == vx_p_style) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle) {
               ischanged = true;
-              vx_p_style = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style = valstyle;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -440,9 +442,9 @@ public static class Html {
             break;
           case ":style-unique":
             if (valsub == vx_p_style_unique) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle_unique) {
               ischanged = true;
-              vx_p_style_unique = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style_unique = valstyle_unique;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -460,9 +462,9 @@ public static class Html {
             break;
           case ":stylelist":
             if (valsub == vx_p_stylelist) {
-            } else if (valsub is Vx.Web.Html.Type_stylelist) {
+            } else if (valsub is Vx.Web.Html.Type_stylelist valstylelist) {
               ischanged = true;
-              vx_p_stylelist = (Vx.Web.Html.Type_stylelist)valsub;
+              vx_p_stylelist = valstylelist;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -480,9 +482,9 @@ public static class Html {
             break;
           case ":summary":
             if (valsub == vx_p_summary) {
-            } else if (valsub is Vx.Web.Html.Type_divchildlist) {
+            } else if (valsub is Vx.Web.Html.Type_divchildlist valsummary) {
               ischanged = true;
-              vx_p_summary = (Vx.Web.Html.Type_divchildlist)valsub;
+              vx_p_summary = valsummary;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -500,9 +502,9 @@ public static class Html {
             break;
           case ":nodes":
             if (valsub == vx_p_nodes) {
-            } else if (valsub is Vx.Web.Html.Type_divchildlist) {
+            } else if (valsub is Vx.Web.Html.Type_divchildlist valnodes) {
               ischanged = true;
-              vx_p_nodes = (Vx.Web.Html.Type_divchildlist)valsub;
+              vx_p_nodes = valnodes;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -718,12 +720,12 @@ public static class Html {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else if (valsub is Vx.Web.Html.Type_divchildlist) { // default property
             ischanged = true;
@@ -739,8 +741,9 @@ public static class Html {
             ischanged = true;
             vx_p_nodes = vallist;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -764,9 +767,9 @@ public static class Html {
           switch (key) {
           case ":id":
             if (valsub == vx_p_id) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valid) {
               ischanged = true;
-              vx_p_id = (Vx.Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -787,9 +790,9 @@ public static class Html {
             break;
           case ":eventmap":
             if (valsub == vx_p_eventmap) {
-            } else if (valsub is Vx.Event.Type_eventmap) {
+            } else if (valsub is Vx.Event.Type_eventmap valeventmap) {
               ischanged = true;
-              vx_p_eventmap = (Vx.Event.Type_eventmap)valsub;
+              vx_p_eventmap = valeventmap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -807,9 +810,9 @@ public static class Html {
             break;
           case ":style":
             if (valsub == vx_p_style) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle) {
               ischanged = true;
-              vx_p_style = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style = valstyle;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -827,9 +830,9 @@ public static class Html {
             break;
           case ":style-unique":
             if (valsub == vx_p_style_unique) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle_unique) {
               ischanged = true;
-              vx_p_style_unique = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style_unique = valstyle_unique;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -847,9 +850,9 @@ public static class Html {
             break;
           case ":stylelist":
             if (valsub == vx_p_stylelist) {
-            } else if (valsub is Vx.Web.Html.Type_stylelist) {
+            } else if (valsub is Vx.Web.Html.Type_stylelist valstylelist) {
               ischanged = true;
-              vx_p_stylelist = (Vx.Web.Html.Type_stylelist)valsub;
+              vx_p_stylelist = valstylelist;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -867,9 +870,9 @@ public static class Html {
             break;
           case ":nodes":
             if (valsub == vx_p_nodes) {
-            } else if (valsub is Vx.Web.Html.Type_divchildlist) {
+            } else if (valsub is Vx.Web.Html.Type_divchildlist valnodes) {
               ischanged = true;
-              vx_p_nodes = (Vx.Web.Html.Type_divchildlist)valsub;
+              vx_p_nodes = valnodes;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -1077,14 +1080,13 @@ public static class Html {
         } else if (valsub is Vx.Web.Html.Type_divchild) {
           ischanged = true;
           listval.Add((Vx.Web.Html.Type_divchild)valsub);
-        } else if (valsub is Vx.Web.Html.Type_divchildlist) {
-          Type_divchildlist multi = (Type_divchildlist)valsub;
+        } else if (valsub is Vx.Web.Html.Type_divchildlist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listdivchild());
         } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
-            if (item is Vx.Web.Html.Type_divchild) {
-              Vx.Web.Html.Type_divchild valitem = (Vx.Web.Html.Type_divchild)item;
+            if (false) {
+            } else if (item is Vx.Web.Html.Type_divchild valitem) {
               ischanged = true;
               listval.Add(valitem);
             }
@@ -1203,14 +1205,13 @@ public static class Html {
         } else if (valsub is Vx.Web.Html.Type_div) {
           ischanged = true;
           listval.Add((Vx.Web.Html.Type_div)valsub);
-        } else if (valsub is Vx.Web.Html.Type_divlist) {
-          Type_divlist multi = (Type_divlist)valsub;
+        } else if (valsub is Vx.Web.Html.Type_divlist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listdiv());
         } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
-            if (item is Vx.Web.Html.Type_div) {
-              Vx.Web.Html.Type_div valitem = (Vx.Web.Html.Type_div)item;
+            if (false) {
+            } else if (item is Vx.Web.Html.Type_div valitem) {
               ischanged = true;
               listval.Add(valitem);
             }
@@ -1328,12 +1329,12 @@ public static class Html {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else if (valsub is Vx.Web.Html.Type_divchildlist) { // default property
             ischanged = true;
@@ -1349,8 +1350,9 @@ public static class Html {
             ischanged = true;
             vx_p_nodes = vallist;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -1374,9 +1376,9 @@ public static class Html {
           switch (key) {
           case ":nodes":
             if (valsub == vx_p_nodes) {
-            } else if (valsub is Vx.Web.Html.Type_divchildlist) {
+            } else if (valsub is Vx.Web.Html.Type_divchildlist valnodes) {
               ischanged = true;
-              vx_p_nodes = (Vx.Web.Html.Type_divchildlist)valsub;
+              vx_p_nodes = valnodes;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -1586,19 +1588,20 @@ public static class Html {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else if (valsub is Vx.Core.Type_string) { // default property
             ischanged = true;
             vx_p_text = (Vx.Core.Type_string)valsub;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -1628,9 +1631,9 @@ public static class Html {
           switch (key) {
           case ":id":
             if (valsub == vx_p_id) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valid) {
               ischanged = true;
-              vx_p_id = (Vx.Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -1651,9 +1654,9 @@ public static class Html {
             break;
           case ":eventmap":
             if (valsub == vx_p_eventmap) {
-            } else if (valsub is Vx.Event.Type_eventmap) {
+            } else if (valsub is Vx.Event.Type_eventmap valeventmap) {
               ischanged = true;
-              vx_p_eventmap = (Vx.Event.Type_eventmap)valsub;
+              vx_p_eventmap = valeventmap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -1671,9 +1674,9 @@ public static class Html {
             break;
           case ":style":
             if (valsub == vx_p_style) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle) {
               ischanged = true;
-              vx_p_style = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style = valstyle;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -1691,9 +1694,9 @@ public static class Html {
             break;
           case ":style-unique":
             if (valsub == vx_p_style_unique) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle_unique) {
               ischanged = true;
-              vx_p_style_unique = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style_unique = valstyle_unique;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -1711,9 +1714,9 @@ public static class Html {
             break;
           case ":stylelist":
             if (valsub == vx_p_stylelist) {
-            } else if (valsub is Vx.Web.Html.Type_stylelist) {
+            } else if (valsub is Vx.Web.Html.Type_stylelist valstylelist) {
               ischanged = true;
-              vx_p_stylelist = (Vx.Web.Html.Type_stylelist)valsub;
+              vx_p_stylelist = valstylelist;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -1731,9 +1734,9 @@ public static class Html {
             break;
           case ":text":
             if (valsub == vx_p_text) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valtext) {
               ischanged = true;
-              vx_p_text = (Vx.Core.Type_string)valsub;
+              vx_p_text = valtext;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_text = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -1951,19 +1954,20 @@ public static class Html {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else if (valsub is Vx.Core.Type_string) { // default property
             ischanged = true;
             vx_p_text = (Vx.Core.Type_string)valsub;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -1993,9 +1997,9 @@ public static class Html {
           switch (key) {
           case ":id":
             if (valsub == vx_p_id) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valid) {
               ischanged = true;
-              vx_p_id = (Vx.Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -2016,9 +2020,9 @@ public static class Html {
             break;
           case ":eventmap":
             if (valsub == vx_p_eventmap) {
-            } else if (valsub is Vx.Event.Type_eventmap) {
+            } else if (valsub is Vx.Event.Type_eventmap valeventmap) {
               ischanged = true;
-              vx_p_eventmap = (Vx.Event.Type_eventmap)valsub;
+              vx_p_eventmap = valeventmap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2036,9 +2040,9 @@ public static class Html {
             break;
           case ":style":
             if (valsub == vx_p_style) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle) {
               ischanged = true;
-              vx_p_style = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style = valstyle;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2056,9 +2060,9 @@ public static class Html {
             break;
           case ":style-unique":
             if (valsub == vx_p_style_unique) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle_unique) {
               ischanged = true;
-              vx_p_style_unique = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style_unique = valstyle_unique;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2076,9 +2080,9 @@ public static class Html {
             break;
           case ":stylelist":
             if (valsub == vx_p_stylelist) {
-            } else if (valsub is Vx.Web.Html.Type_stylelist) {
+            } else if (valsub is Vx.Web.Html.Type_stylelist valstylelist) {
               ischanged = true;
-              vx_p_stylelist = (Vx.Web.Html.Type_stylelist)valsub;
+              vx_p_stylelist = valstylelist;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2096,9 +2100,9 @@ public static class Html {
             break;
           case ":text":
             if (valsub == vx_p_text) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valtext) {
               ischanged = true;
-              vx_p_text = (Vx.Core.Type_string)valsub;
+              vx_p_text = valtext;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_text = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -2316,19 +2320,20 @@ public static class Html {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else if (valsub is Vx.Core.Type_string) { // default property
             ischanged = true;
             vx_p_text = (Vx.Core.Type_string)valsub;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -2358,9 +2363,9 @@ public static class Html {
           switch (key) {
           case ":id":
             if (valsub == vx_p_id) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valid) {
               ischanged = true;
-              vx_p_id = (Vx.Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -2381,9 +2386,9 @@ public static class Html {
             break;
           case ":eventmap":
             if (valsub == vx_p_eventmap) {
-            } else if (valsub is Vx.Event.Type_eventmap) {
+            } else if (valsub is Vx.Event.Type_eventmap valeventmap) {
               ischanged = true;
-              vx_p_eventmap = (Vx.Event.Type_eventmap)valsub;
+              vx_p_eventmap = valeventmap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2401,9 +2406,9 @@ public static class Html {
             break;
           case ":style":
             if (valsub == vx_p_style) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle) {
               ischanged = true;
-              vx_p_style = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style = valstyle;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2421,9 +2426,9 @@ public static class Html {
             break;
           case ":style-unique":
             if (valsub == vx_p_style_unique) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle_unique) {
               ischanged = true;
-              vx_p_style_unique = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style_unique = valstyle_unique;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2441,9 +2446,9 @@ public static class Html {
             break;
           case ":stylelist":
             if (valsub == vx_p_stylelist) {
-            } else if (valsub is Vx.Web.Html.Type_stylelist) {
+            } else if (valsub is Vx.Web.Html.Type_stylelist valstylelist) {
               ischanged = true;
-              vx_p_stylelist = (Vx.Web.Html.Type_stylelist)valsub;
+              vx_p_stylelist = valstylelist;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2461,9 +2466,9 @@ public static class Html {
             break;
           case ":text":
             if (valsub == vx_p_text) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valtext) {
               ischanged = true;
-              vx_p_text = (Vx.Core.Type_string)valsub;
+              vx_p_text = valtext;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_text = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -2601,12 +2606,12 @@ public static class Html {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else if (valsub is Vx.Web.Html.Type_headchildlist) { // default property
             ischanged = true;
@@ -2622,8 +2627,9 @@ public static class Html {
             ischanged = true;
             vx_p_nodes = vallist;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -2647,9 +2653,9 @@ public static class Html {
           switch (key) {
           case ":nodes":
             if (valsub == vx_p_nodes) {
-            } else if (valsub is Vx.Web.Html.Type_headchildlist) {
+            } else if (valsub is Vx.Web.Html.Type_headchildlist valnodes) {
               ischanged = true;
-              vx_p_nodes = (Vx.Web.Html.Type_headchildlist)valsub;
+              vx_p_nodes = valnodes;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2852,14 +2858,13 @@ public static class Html {
         } else if (valsub is Vx.Web.Html.Type_headchild) {
           ischanged = true;
           listval.Add((Vx.Web.Html.Type_headchild)valsub);
-        } else if (valsub is Vx.Web.Html.Type_headchildlist) {
-          Type_headchildlist multi = (Type_headchildlist)valsub;
+        } else if (valsub is Vx.Web.Html.Type_headchildlist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listheadchild());
         } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
-            if (item is Vx.Web.Html.Type_headchild) {
-              Vx.Web.Html.Type_headchild valitem = (Vx.Web.Html.Type_headchild)item;
+            if (false) {
+            } else if (item is Vx.Web.Html.Type_headchild valitem) {
               ischanged = true;
               listval.Add(valitem);
             }
@@ -3028,16 +3033,17 @@ public static class Html {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -3061,9 +3067,9 @@ public static class Html {
           switch (key) {
           case ":lang":
             if (valsub == vx_p_lang) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string vallang) {
               ischanged = true;
-              vx_p_lang = (Vx.Core.Type_string)valsub;
+              vx_p_lang = vallang;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_lang = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -3084,9 +3090,9 @@ public static class Html {
             break;
           case ":head":
             if (valsub == vx_p_head) {
-            } else if (valsub is Vx.Web.Html.Type_head) {
+            } else if (valsub is Vx.Web.Html.Type_head valhead) {
               ischanged = true;
-              vx_p_head = (Vx.Web.Html.Type_head)valsub;
+              vx_p_head = valhead;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -3104,9 +3110,9 @@ public static class Html {
             break;
           case ":body":
             if (valsub == vx_p_body) {
-            } else if (valsub is Vx.Web.Html.Type_body) {
+            } else if (valsub is Vx.Web.Html.Type_body valbody) {
               ischanged = true;
-              vx_p_body = (Vx.Web.Html.Type_body)valsub;
+              vx_p_body = valbody;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -3124,9 +3130,9 @@ public static class Html {
             break;
           case ":footer":
             if (valsub == vx_p_footer) {
-            } else if (valsub is Vx.Web.Html.Type_footer) {
+            } else if (valsub is Vx.Web.Html.Type_footer valfooter) {
               ischanged = true;
-              vx_p_footer = (Vx.Web.Html.Type_footer)valsub;
+              vx_p_footer = valfooter;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -3339,19 +3345,20 @@ public static class Html {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else if (valsub is Vx.Core.Type_string) { // default property
             ischanged = true;
             vx_p_src = (Vx.Core.Type_string)valsub;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -3381,9 +3388,9 @@ public static class Html {
           switch (key) {
           case ":id":
             if (valsub == vx_p_id) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valid) {
               ischanged = true;
-              vx_p_id = (Vx.Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -3404,9 +3411,9 @@ public static class Html {
             break;
           case ":eventmap":
             if (valsub == vx_p_eventmap) {
-            } else if (valsub is Vx.Event.Type_eventmap) {
+            } else if (valsub is Vx.Event.Type_eventmap valeventmap) {
               ischanged = true;
-              vx_p_eventmap = (Vx.Event.Type_eventmap)valsub;
+              vx_p_eventmap = valeventmap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -3424,9 +3431,9 @@ public static class Html {
             break;
           case ":style":
             if (valsub == vx_p_style) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle) {
               ischanged = true;
-              vx_p_style = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style = valstyle;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -3444,9 +3451,9 @@ public static class Html {
             break;
           case ":style-unique":
             if (valsub == vx_p_style_unique) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle_unique) {
               ischanged = true;
-              vx_p_style_unique = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style_unique = valstyle_unique;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -3464,9 +3471,9 @@ public static class Html {
             break;
           case ":stylelist":
             if (valsub == vx_p_stylelist) {
-            } else if (valsub is Vx.Web.Html.Type_stylelist) {
+            } else if (valsub is Vx.Web.Html.Type_stylelist valstylelist) {
               ischanged = true;
-              vx_p_stylelist = (Vx.Web.Html.Type_stylelist)valsub;
+              vx_p_stylelist = valstylelist;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -3484,9 +3491,9 @@ public static class Html {
             break;
           case ":src":
             if (valsub == vx_p_src) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valsrc) {
               ischanged = true;
-              vx_p_src = (Vx.Core.Type_string)valsub;
+              vx_p_src = valsrc;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_src = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -3738,16 +3745,17 @@ public static class Html {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -3771,9 +3779,9 @@ public static class Html {
           switch (key) {
           case ":id":
             if (valsub == vx_p_id) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valid) {
               ischanged = true;
-              vx_p_id = (Vx.Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -3794,9 +3802,9 @@ public static class Html {
             break;
           case ":eventmap":
             if (valsub == vx_p_eventmap) {
-            } else if (valsub is Vx.Event.Type_eventmap) {
+            } else if (valsub is Vx.Event.Type_eventmap valeventmap) {
               ischanged = true;
-              vx_p_eventmap = (Vx.Event.Type_eventmap)valsub;
+              vx_p_eventmap = valeventmap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -3814,9 +3822,9 @@ public static class Html {
             break;
           case ":style":
             if (valsub == vx_p_style) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle) {
               ischanged = true;
-              vx_p_style = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style = valstyle;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -3834,9 +3842,9 @@ public static class Html {
             break;
           case ":style-unique":
             if (valsub == vx_p_style_unique) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle_unique) {
               ischanged = true;
-              vx_p_style_unique = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style_unique = valstyle_unique;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -3854,9 +3862,9 @@ public static class Html {
             break;
           case ":stylelist":
             if (valsub == vx_p_stylelist) {
-            } else if (valsub is Vx.Web.Html.Type_stylelist) {
+            } else if (valsub is Vx.Web.Html.Type_stylelist valstylelist) {
               ischanged = true;
-              vx_p_stylelist = (Vx.Web.Html.Type_stylelist)valsub;
+              vx_p_stylelist = valstylelist;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -3874,9 +3882,9 @@ public static class Html {
             break;
           case ":charset":
             if (valsub == vx_p_charset) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valcharset) {
               ischanged = true;
-              vx_p_charset = (Vx.Core.Type_string)valsub;
+              vx_p_charset = valcharset;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_charset = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -3897,9 +3905,9 @@ public static class Html {
             break;
           case ":name":
             if (valsub == vx_p_name) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
-              vx_p_name = (Vx.Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -3920,9 +3928,9 @@ public static class Html {
             break;
           case ":content":
             if (valsub == vx_p_content) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valcontent) {
               ischanged = true;
-              vx_p_content = (Vx.Core.Type_string)valsub;
+              vx_p_content = valcontent;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_content = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -4130,16 +4138,17 @@ public static class Html {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -4163,9 +4172,9 @@ public static class Html {
           switch (key) {
           case ":id":
             if (valsub == vx_p_id) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valid) {
               ischanged = true;
-              vx_p_id = (Vx.Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -4186,9 +4195,9 @@ public static class Html {
             break;
           case ":eventmap":
             if (valsub == vx_p_eventmap) {
-            } else if (valsub is Vx.Event.Type_eventmap) {
+            } else if (valsub is Vx.Event.Type_eventmap valeventmap) {
               ischanged = true;
-              vx_p_eventmap = (Vx.Event.Type_eventmap)valsub;
+              vx_p_eventmap = valeventmap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -4206,9 +4215,9 @@ public static class Html {
             break;
           case ":style":
             if (valsub == vx_p_style) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle) {
               ischanged = true;
-              vx_p_style = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style = valstyle;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -4226,9 +4235,9 @@ public static class Html {
             break;
           case ":style-unique":
             if (valsub == vx_p_style_unique) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle_unique) {
               ischanged = true;
-              vx_p_style_unique = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style_unique = valstyle_unique;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -4246,9 +4255,9 @@ public static class Html {
             break;
           case ":stylelist":
             if (valsub == vx_p_stylelist) {
-            } else if (valsub is Vx.Web.Html.Type_stylelist) {
+            } else if (valsub is Vx.Web.Html.Type_stylelist valstylelist) {
               ischanged = true;
-              vx_p_stylelist = (Vx.Web.Html.Type_stylelist)valsub;
+              vx_p_stylelist = valstylelist;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -4383,14 +4392,13 @@ public static class Html {
         } else if (valsub is Vx.Web.Html.Type_node) {
           ischanged = true;
           listval.Add((Vx.Web.Html.Type_node)valsub);
-        } else if (valsub is Vx.Web.Html.Type_nodelist) {
-          Type_nodelist multi = (Type_nodelist)valsub;
+        } else if (valsub is Vx.Web.Html.Type_nodelist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listnode());
         } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
-            if (item is Vx.Web.Html.Type_node) {
-              Vx.Web.Html.Type_node valitem = (Vx.Web.Html.Type_node)item;
+            if (false) {
+            } else if (item is Vx.Web.Html.Type_node valitem) {
               ischanged = true;
               listval.Add(valitem);
             }
@@ -4588,19 +4596,20 @@ public static class Html {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else if (valsub is Vx.Core.Type_string) { // default property
             ischanged = true;
             vx_p_text = (Vx.Core.Type_string)valsub;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -4630,9 +4639,9 @@ public static class Html {
           switch (key) {
           case ":id":
             if (valsub == vx_p_id) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valid) {
               ischanged = true;
-              vx_p_id = (Vx.Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -4653,9 +4662,9 @@ public static class Html {
             break;
           case ":eventmap":
             if (valsub == vx_p_eventmap) {
-            } else if (valsub is Vx.Event.Type_eventmap) {
+            } else if (valsub is Vx.Event.Type_eventmap valeventmap) {
               ischanged = true;
-              vx_p_eventmap = (Vx.Event.Type_eventmap)valsub;
+              vx_p_eventmap = valeventmap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -4673,9 +4682,9 @@ public static class Html {
             break;
           case ":style":
             if (valsub == vx_p_style) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle) {
               ischanged = true;
-              vx_p_style = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style = valstyle;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -4693,9 +4702,9 @@ public static class Html {
             break;
           case ":style-unique":
             if (valsub == vx_p_style_unique) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle_unique) {
               ischanged = true;
-              vx_p_style_unique = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style_unique = valstyle_unique;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -4713,9 +4722,9 @@ public static class Html {
             break;
           case ":stylelist":
             if (valsub == vx_p_stylelist) {
-            } else if (valsub is Vx.Web.Html.Type_stylelist) {
+            } else if (valsub is Vx.Web.Html.Type_stylelist valstylelist) {
               ischanged = true;
-              vx_p_stylelist = (Vx.Web.Html.Type_stylelist)valsub;
+              vx_p_stylelist = valstylelist;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -4733,9 +4742,9 @@ public static class Html {
             break;
           case ":text":
             if (valsub == vx_p_text) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valtext) {
               ischanged = true;
-              vx_p_text = (Vx.Core.Type_string)valsub;
+              vx_p_text = valtext;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_text = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -4822,19 +4831,19 @@ public static class Html {
     public Vx.Core.Map<string, Vx.Core.Type_string> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Core.Type_string>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)this.vx_p_map;
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
 
     public Vx.Core.Type_boolean vx_set(Vx.Core.Type_string name, Vx.Core.Type_any value) {
       Vx.Core.Type_boolean output = Vx.Core.c_false;
-      if (value is Vx.Core.Type_string) {
+      if (false) {
+      } else if (value is Vx.Core.Type_string castval) {
         string key = name.vx_string();
         if (key.StartsWith(":")) {
           key = key.Substring(1);
         }
-        Vx.Core.Type_string castval = (Vx.Core.Type_string)value;
         Vx.Core.Map<string, Vx.Core.Type_string> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_string>(this.vx_p_map);
         if (castval == Vx.Core.e_string) {
           map.remove(key);
@@ -4927,8 +4936,9 @@ public static class Html {
           }
         } else {
           Vx.Core.Type_string? valany = null;
-          if (valsub is Vx.Core.Type_string) {
-            valany = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valallowed) {
+            valany = valallowed;
           } else if (valsub is string) {
             valany = Vx.Core.vx_new(Vx.Core.t_string, valsub);
           } else {
@@ -5094,16 +5104,17 @@ public static class Html {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -5127,9 +5138,9 @@ public static class Html {
           switch (key) {
           case ":name":
             if (valsub == vx_p_name) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
-              vx_p_name = (Vx.Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -5150,9 +5161,9 @@ public static class Html {
             break;
           case ":props":
             if (valsub == vx_p_props) {
-            } else if (valsub is Vx.Web.Html.Type_propmap) {
+            } else if (valsub is Vx.Web.Html.Type_propmap valprops) {
               ischanged = true;
-              vx_p_props = (Vx.Web.Html.Type_propmap)valsub;
+              vx_p_props = valprops;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -5170,9 +5181,9 @@ public static class Html {
             break;
           case ":stylelist":
             if (valsub == vx_p_stylelist) {
-            } else if (valsub is Vx.Web.Html.Type_stylelist) {
+            } else if (valsub is Vx.Web.Html.Type_stylelist valstylelist) {
               ischanged = true;
-              vx_p_stylelist = (Vx.Web.Html.Type_stylelist)valsub;
+              vx_p_stylelist = valstylelist;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -5305,14 +5316,13 @@ public static class Html {
         } else if (valsub is Vx.Web.Html.Type_style) {
           ischanged = true;
           listval.Add((Vx.Web.Html.Type_style)valsub);
-        } else if (valsub is Vx.Web.Html.Type_stylelist) {
-          Type_stylelist multi = (Type_stylelist)valsub;
+        } else if (valsub is Vx.Web.Html.Type_stylelist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_liststyle());
         } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
-            if (item is Vx.Web.Html.Type_style) {
-              Vx.Web.Html.Type_style valitem = (Vx.Web.Html.Type_style)item;
+            if (false) {
+            } else if (item is Vx.Web.Html.Type_style valitem) {
               ischanged = true;
               listval.Add(valitem);
             }
@@ -5379,19 +5389,19 @@ public static class Html {
     public Vx.Core.Map<string, Vx.Web.Html.Type_style> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Web.Html.Type_style>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)this.vx_p_map;
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
 
     public Vx.Core.Type_boolean vx_set(Vx.Core.Type_string name, Vx.Core.Type_any value) {
       Vx.Core.Type_boolean output = Vx.Core.c_false;
-      if (value is Vx.Web.Html.Type_style) {
+      if (false) {
+      } else if (value is Vx.Web.Html.Type_style castval) {
         string key = name.vx_string();
         if (key.StartsWith(":")) {
           key = key.Substring(1);
         }
-        Vx.Web.Html.Type_style castval = (Vx.Web.Html.Type_style)value;
         Vx.Core.Map<string, Vx.Web.Html.Type_style> map = new Vx.Core.LinkedHashMap<string, Vx.Web.Html.Type_style>(this.vx_p_map);
         if (castval == Vx.Web.Html.e_style) {
           map.remove(key);
@@ -5484,8 +5494,9 @@ public static class Html {
           }
         } else {
           Vx.Web.Html.Type_style? valany = null;
-          if (valsub is Vx.Web.Html.Type_style) {
-            valany = (Vx.Web.Html.Type_style)valsub;
+          if (false) {
+          } else if (valsub is Vx.Web.Html.Type_style valallowed) {
+            valany = valallowed;
           } else if (valsub is Vx.Web.Html.Type_style) {
             valany = valsub as Vx.Web.Html.Type_style;
           } else {
@@ -5731,16 +5742,17 @@ public static class Html {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -5764,9 +5776,9 @@ public static class Html {
           switch (key) {
           case ":id":
             if (valsub == vx_p_id) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valid) {
               ischanged = true;
-              vx_p_id = (Vx.Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -5787,9 +5799,9 @@ public static class Html {
             break;
           case ":eventmap":
             if (valsub == vx_p_eventmap) {
-            } else if (valsub is Vx.Event.Type_eventmap) {
+            } else if (valsub is Vx.Event.Type_eventmap valeventmap) {
               ischanged = true;
-              vx_p_eventmap = (Vx.Event.Type_eventmap)valsub;
+              vx_p_eventmap = valeventmap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -5807,9 +5819,9 @@ public static class Html {
             break;
           case ":style":
             if (valsub == vx_p_style) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle) {
               ischanged = true;
-              vx_p_style = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style = valstyle;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -5827,9 +5839,9 @@ public static class Html {
             break;
           case ":style-unique":
             if (valsub == vx_p_style_unique) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle_unique) {
               ischanged = true;
-              vx_p_style_unique = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style_unique = valstyle_unique;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -5847,9 +5859,9 @@ public static class Html {
             break;
           case ":stylelist":
             if (valsub == vx_p_stylelist) {
-            } else if (valsub is Vx.Web.Html.Type_stylelist) {
+            } else if (valsub is Vx.Web.Html.Type_stylelist valstylelist) {
               ischanged = true;
-              vx_p_stylelist = (Vx.Web.Html.Type_stylelist)valsub;
+              vx_p_stylelist = valstylelist;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -5867,9 +5879,9 @@ public static class Html {
             break;
           case ":name":
             if (valsub == vx_p_name) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
-              vx_p_name = (Vx.Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -5890,9 +5902,9 @@ public static class Html {
             break;
           case ":styles":
             if (valsub == vx_p_styles) {
-            } else if (valsub is Vx.Web.Html.Type_stylelist) {
+            } else if (valsub is Vx.Web.Html.Type_stylelist valstyles) {
               ischanged = true;
-              vx_p_styles = (Vx.Web.Html.Type_stylelist)valsub;
+              vx_p_styles = valstyles;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -5910,9 +5922,9 @@ public static class Html {
             break;
           case ":stylemap":
             if (valsub == vx_p_stylemap) {
-            } else if (valsub is Vx.Web.Html.Type_stylemap) {
+            } else if (valsub is Vx.Web.Html.Type_stylemap valstylemap) {
               ischanged = true;
-              vx_p_stylemap = (Vx.Web.Html.Type_stylemap)valsub;
+              vx_p_stylemap = valstylemap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -6146,16 +6158,17 @@ public static class Html {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -6179,9 +6192,9 @@ public static class Html {
           switch (key) {
           case ":id":
             if (valsub == vx_p_id) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valid) {
               ischanged = true;
-              vx_p_id = (Vx.Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -6202,9 +6215,9 @@ public static class Html {
             break;
           case ":eventmap":
             if (valsub == vx_p_eventmap) {
-            } else if (valsub is Vx.Event.Type_eventmap) {
+            } else if (valsub is Vx.Event.Type_eventmap valeventmap) {
               ischanged = true;
-              vx_p_eventmap = (Vx.Event.Type_eventmap)valsub;
+              vx_p_eventmap = valeventmap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -6222,9 +6235,9 @@ public static class Html {
             break;
           case ":style":
             if (valsub == vx_p_style) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle) {
               ischanged = true;
-              vx_p_style = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style = valstyle;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -6242,9 +6255,9 @@ public static class Html {
             break;
           case ":style-unique":
             if (valsub == vx_p_style_unique) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle_unique) {
               ischanged = true;
-              vx_p_style_unique = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style_unique = valstyle_unique;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -6262,9 +6275,9 @@ public static class Html {
             break;
           case ":stylelist":
             if (valsub == vx_p_stylelist) {
-            } else if (valsub is Vx.Web.Html.Type_stylelist) {
+            } else if (valsub is Vx.Web.Html.Type_stylelist valstylelist) {
               ischanged = true;
-              vx_p_stylelist = (Vx.Web.Html.Type_stylelist)valsub;
+              vx_p_stylelist = valstylelist;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -6282,9 +6295,9 @@ public static class Html {
             break;
           case ":tbody":
             if (valsub == vx_p_tbody) {
-            } else if (valsub is Vx.Web.Html.Type_tbody) {
+            } else if (valsub is Vx.Web.Html.Type_tbody valtbody) {
               ischanged = true;
-              vx_p_tbody = (Vx.Web.Html.Type_tbody)valsub;
+              vx_p_tbody = valtbody;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -6302,9 +6315,9 @@ public static class Html {
             break;
           case ":thead":
             if (valsub == vx_p_thead) {
-            } else if (valsub is Vx.Web.Html.Type_thead) {
+            } else if (valsub is Vx.Web.Html.Type_thead valthead) {
               ischanged = true;
-              vx_p_thead = (Vx.Web.Html.Type_thead)valsub;
+              vx_p_thead = valthead;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -6520,12 +6533,12 @@ public static class Html {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else if (valsub is Vx.Web.Html.Type_trlist) { // default property
             ischanged = true;
@@ -6541,8 +6554,9 @@ public static class Html {
             ischanged = true;
             vx_p_nodes = vallist;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -6566,9 +6580,9 @@ public static class Html {
           switch (key) {
           case ":id":
             if (valsub == vx_p_id) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valid) {
               ischanged = true;
-              vx_p_id = (Vx.Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -6589,9 +6603,9 @@ public static class Html {
             break;
           case ":eventmap":
             if (valsub == vx_p_eventmap) {
-            } else if (valsub is Vx.Event.Type_eventmap) {
+            } else if (valsub is Vx.Event.Type_eventmap valeventmap) {
               ischanged = true;
-              vx_p_eventmap = (Vx.Event.Type_eventmap)valsub;
+              vx_p_eventmap = valeventmap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -6609,9 +6623,9 @@ public static class Html {
             break;
           case ":style":
             if (valsub == vx_p_style) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle) {
               ischanged = true;
-              vx_p_style = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style = valstyle;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -6629,9 +6643,9 @@ public static class Html {
             break;
           case ":style-unique":
             if (valsub == vx_p_style_unique) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle_unique) {
               ischanged = true;
-              vx_p_style_unique = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style_unique = valstyle_unique;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -6649,9 +6663,9 @@ public static class Html {
             break;
           case ":stylelist":
             if (valsub == vx_p_stylelist) {
-            } else if (valsub is Vx.Web.Html.Type_stylelist) {
+            } else if (valsub is Vx.Web.Html.Type_stylelist valstylelist) {
               ischanged = true;
-              vx_p_stylelist = (Vx.Web.Html.Type_stylelist)valsub;
+              vx_p_stylelist = valstylelist;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -6669,9 +6683,9 @@ public static class Html {
             break;
           case ":nodes":
             if (valsub == vx_p_nodes) {
-            } else if (valsub is Vx.Web.Html.Type_trlist) {
+            } else if (valsub is Vx.Web.Html.Type_trlist valnodes) {
               ischanged = true;
-              vx_p_nodes = (Vx.Web.Html.Type_trlist)valsub;
+              vx_p_nodes = valnodes;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -6886,12 +6900,12 @@ public static class Html {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else if (valsub is Vx.Web.Html.Type_divchildlist) { // default property
             ischanged = true;
@@ -6907,8 +6921,9 @@ public static class Html {
             ischanged = true;
             vx_p_nodes = vallist;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -6932,9 +6947,9 @@ public static class Html {
           switch (key) {
           case ":id":
             if (valsub == vx_p_id) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valid) {
               ischanged = true;
-              vx_p_id = (Vx.Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -6955,9 +6970,9 @@ public static class Html {
             break;
           case ":eventmap":
             if (valsub == vx_p_eventmap) {
-            } else if (valsub is Vx.Event.Type_eventmap) {
+            } else if (valsub is Vx.Event.Type_eventmap valeventmap) {
               ischanged = true;
-              vx_p_eventmap = (Vx.Event.Type_eventmap)valsub;
+              vx_p_eventmap = valeventmap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -6975,9 +6990,9 @@ public static class Html {
             break;
           case ":style":
             if (valsub == vx_p_style) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle) {
               ischanged = true;
-              vx_p_style = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style = valstyle;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -6995,9 +7010,9 @@ public static class Html {
             break;
           case ":style-unique":
             if (valsub == vx_p_style_unique) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle_unique) {
               ischanged = true;
-              vx_p_style_unique = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style_unique = valstyle_unique;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -7015,9 +7030,9 @@ public static class Html {
             break;
           case ":stylelist":
             if (valsub == vx_p_stylelist) {
-            } else if (valsub is Vx.Web.Html.Type_stylelist) {
+            } else if (valsub is Vx.Web.Html.Type_stylelist valstylelist) {
               ischanged = true;
-              vx_p_stylelist = (Vx.Web.Html.Type_stylelist)valsub;
+              vx_p_stylelist = valstylelist;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -7035,9 +7050,9 @@ public static class Html {
             break;
           case ":nodes":
             if (valsub == vx_p_nodes) {
-            } else if (valsub is Vx.Web.Html.Type_divchildlist) {
+            } else if (valsub is Vx.Web.Html.Type_divchildlist valnodes) {
               ischanged = true;
-              vx_p_nodes = (Vx.Web.Html.Type_divchildlist)valsub;
+              vx_p_nodes = valnodes;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -7173,14 +7188,13 @@ public static class Html {
         } else if (valsub is Vx.Web.Html.Type_td) {
           ischanged = true;
           listval.Add((Vx.Web.Html.Type_td)valsub);
-        } else if (valsub is Vx.Web.Html.Type_tdlist) {
-          Type_tdlist multi = (Type_tdlist)valsub;
+        } else if (valsub is Vx.Web.Html.Type_tdlist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listtd());
         } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
-            if (item is Vx.Web.Html.Type_td) {
-              Vx.Web.Html.Type_td valitem = (Vx.Web.Html.Type_td)item;
+            if (false) {
+            } else if (item is Vx.Web.Html.Type_td valitem) {
               ischanged = true;
               listval.Add(valitem);
             }
@@ -7378,12 +7392,12 @@ public static class Html {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else if (valsub is Vx.Web.Html.Type_trlist) { // default property
             ischanged = true;
@@ -7399,8 +7413,9 @@ public static class Html {
             ischanged = true;
             vx_p_nodes = vallist;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -7424,9 +7439,9 @@ public static class Html {
           switch (key) {
           case ":id":
             if (valsub == vx_p_id) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valid) {
               ischanged = true;
-              vx_p_id = (Vx.Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -7447,9 +7462,9 @@ public static class Html {
             break;
           case ":eventmap":
             if (valsub == vx_p_eventmap) {
-            } else if (valsub is Vx.Event.Type_eventmap) {
+            } else if (valsub is Vx.Event.Type_eventmap valeventmap) {
               ischanged = true;
-              vx_p_eventmap = (Vx.Event.Type_eventmap)valsub;
+              vx_p_eventmap = valeventmap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -7467,9 +7482,9 @@ public static class Html {
             break;
           case ":style":
             if (valsub == vx_p_style) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle) {
               ischanged = true;
-              vx_p_style = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style = valstyle;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -7487,9 +7502,9 @@ public static class Html {
             break;
           case ":style-unique":
             if (valsub == vx_p_style_unique) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle_unique) {
               ischanged = true;
-              vx_p_style_unique = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style_unique = valstyle_unique;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -7507,9 +7522,9 @@ public static class Html {
             break;
           case ":stylelist":
             if (valsub == vx_p_stylelist) {
-            } else if (valsub is Vx.Web.Html.Type_stylelist) {
+            } else if (valsub is Vx.Web.Html.Type_stylelist valstylelist) {
               ischanged = true;
-              vx_p_stylelist = (Vx.Web.Html.Type_stylelist)valsub;
+              vx_p_stylelist = valstylelist;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -7527,9 +7542,9 @@ public static class Html {
             break;
           case ":nodes":
             if (valsub == vx_p_nodes) {
-            } else if (valsub is Vx.Web.Html.Type_trlist) {
+            } else if (valsub is Vx.Web.Html.Type_trlist valnodes) {
               ischanged = true;
-              vx_p_nodes = (Vx.Web.Html.Type_trlist)valsub;
+              vx_p_nodes = valnodes;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -7744,16 +7759,17 @@ public static class Html {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -7777,9 +7793,9 @@ public static class Html {
           switch (key) {
           case ":id":
             if (valsub == vx_p_id) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valid) {
               ischanged = true;
-              vx_p_id = (Vx.Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -7800,9 +7816,9 @@ public static class Html {
             break;
           case ":eventmap":
             if (valsub == vx_p_eventmap) {
-            } else if (valsub is Vx.Event.Type_eventmap) {
+            } else if (valsub is Vx.Event.Type_eventmap valeventmap) {
               ischanged = true;
-              vx_p_eventmap = (Vx.Event.Type_eventmap)valsub;
+              vx_p_eventmap = valeventmap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -7820,9 +7836,9 @@ public static class Html {
             break;
           case ":style":
             if (valsub == vx_p_style) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle) {
               ischanged = true;
-              vx_p_style = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style = valstyle;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -7840,9 +7856,9 @@ public static class Html {
             break;
           case ":style-unique":
             if (valsub == vx_p_style_unique) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle_unique) {
               ischanged = true;
-              vx_p_style_unique = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style_unique = valstyle_unique;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -7860,9 +7876,9 @@ public static class Html {
             break;
           case ":stylelist":
             if (valsub == vx_p_stylelist) {
-            } else if (valsub is Vx.Web.Html.Type_stylelist) {
+            } else if (valsub is Vx.Web.Html.Type_stylelist valstylelist) {
               ischanged = true;
-              vx_p_stylelist = (Vx.Web.Html.Type_stylelist)valsub;
+              vx_p_stylelist = valstylelist;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -7880,9 +7896,9 @@ public static class Html {
             break;
           case ":text":
             if (valsub == vx_p_text) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valtext) {
               ischanged = true;
-              vx_p_text = (Vx.Core.Type_string)valsub;
+              vx_p_text = valtext;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_text = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -8100,12 +8116,12 @@ public static class Html {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else if (valsub is Vx.Web.Html.Type_tdlist) { // default property
             ischanged = true;
@@ -8121,8 +8137,9 @@ public static class Html {
             ischanged = true;
             vx_p_nodes = vallist;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -8146,9 +8163,9 @@ public static class Html {
           switch (key) {
           case ":id":
             if (valsub == vx_p_id) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valid) {
               ischanged = true;
-              vx_p_id = (Vx.Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -8169,9 +8186,9 @@ public static class Html {
             break;
           case ":eventmap":
             if (valsub == vx_p_eventmap) {
-            } else if (valsub is Vx.Event.Type_eventmap) {
+            } else if (valsub is Vx.Event.Type_eventmap valeventmap) {
               ischanged = true;
-              vx_p_eventmap = (Vx.Event.Type_eventmap)valsub;
+              vx_p_eventmap = valeventmap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -8189,9 +8206,9 @@ public static class Html {
             break;
           case ":style":
             if (valsub == vx_p_style) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle) {
               ischanged = true;
-              vx_p_style = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style = valstyle;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -8209,9 +8226,9 @@ public static class Html {
             break;
           case ":style-unique":
             if (valsub == vx_p_style_unique) {
-            } else if (valsub is Vx.Web.Html.Type_style) {
+            } else if (valsub is Vx.Web.Html.Type_style valstyle_unique) {
               ischanged = true;
-              vx_p_style_unique = (Vx.Web.Html.Type_style)valsub;
+              vx_p_style_unique = valstyle_unique;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -8229,9 +8246,9 @@ public static class Html {
             break;
           case ":stylelist":
             if (valsub == vx_p_stylelist) {
-            } else if (valsub is Vx.Web.Html.Type_stylelist) {
+            } else if (valsub is Vx.Web.Html.Type_stylelist valstylelist) {
               ischanged = true;
-              vx_p_stylelist = (Vx.Web.Html.Type_stylelist)valsub;
+              vx_p_stylelist = valstylelist;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -8249,9 +8266,9 @@ public static class Html {
             break;
           case ":nodes":
             if (valsub == vx_p_nodes) {
-            } else if (valsub is Vx.Web.Html.Type_tdlist) {
+            } else if (valsub is Vx.Web.Html.Type_tdlist valnodes) {
               ischanged = true;
-              vx_p_nodes = (Vx.Web.Html.Type_tdlist)valsub;
+              vx_p_nodes = valnodes;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -8387,14 +8404,13 @@ public static class Html {
         } else if (valsub is Vx.Web.Html.Type_tr) {
           ischanged = true;
           listval.Add((Vx.Web.Html.Type_tr)valsub);
-        } else if (valsub is Vx.Web.Html.Type_trlist) {
-          Type_trlist multi = (Type_trlist)valsub;
+        } else if (valsub is Vx.Web.Html.Type_trlist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listtr());
         } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
-            if (item is Vx.Web.Html.Type_tr) {
-              Vx.Web.Html.Type_tr valitem = (Vx.Web.Html.Type_tr)item;
+            if (false) {
+            } else if (item is Vx.Web.Html.Type_tr valitem) {
               ischanged = true;
               listval.Add(valitem);
             }

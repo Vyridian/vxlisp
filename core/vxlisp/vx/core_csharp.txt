@@ -273,11 +273,81 @@
     return output;
   }
 
+  // vx_any_first_from_list_fn(generic_any_1, list, fn_any)
+  public static T vx_any_first_from_list_fn<T>(
+    T generic_any_1,
+    Core.Type_list list,
+    Func<Vx.Core.Type_any, T> fn_any)
+    where T : Vx.Core.Type_any {
+				T output = Vx.Core.f_empty(generic_any_1);
+				List<Vx.Core.Type_any> listany = list.vx_list();
+				foreach (Vx.Core.Type_any any in listany) {
+				  T tany = Vx.Core.f_any_from_any(generic_any_1, any);
+				  T val = fn_any(tany);
+				  if (val != null) {
+				    output = val;
+				    break;
+				  }
+				}
+    return output;
+  }
+
   // vx_any_from_func(generic_any_1, func, args...)
   public static T vx_any_from_func<T>(T generic_any_1, Vx.Core.Type_replfunc func, params Vx.Core.Type_any[] args) where T : Vx.Core.Type_any {
     Vx.Core.Type_anylist anylist = Vx.Core.vx_new_anylist(args);
     Vx.Core.Type_any val = func.vx_repl(anylist);
     T output = Vx.Core.f_any_from_any(generic_any_1, val);
+    return output;
+  }
+
+  // vx_any_from_list_start_reduce(any-1, list-2, any-1, any<-reduce)
+  public static T vx_any_from_list_start_reduce<T, N>(
+    T generic_any_1,
+    N list,
+    T valstart,
+    Vx.Core.Func_any_from_reduce fn_reduce)
+    where T : Vx.Core.Type_any
+    where N : Vx.Core.Type_list {
+    T output = valstart;
+    List<Vx.Core.Type_any> listval = list.vx_list();
+    foreach (Vx.Core.Type_any item in listval) {
+      output = fn_reduce.vx_any_from_reduce(generic_any_1, output, item);
+    }
+    return output;
+  }
+
+  // vx_any_from_map_start_reduce(any-1, map-2, any-1, any<-any-key-value)
+  public static T vx_any_from_map_start_reduce<T, N>(
+    T generic_any_1,
+    N map,
+    T start,
+    Vx.Core.Func_any_from_any_key_value fn_reduce)
+    where T : Core.Type_any
+    where N : Core.Type_map {
+    T output = start;
+    Vx.Core.Map<string, Core.Type_any> mapval = map.vx_map();
+    List<string> keys = mapval.keys();
+    foreach (string skey in keys) {
+      Vx.Core.Type_string key = Vx.Core.vx_new_string(skey);
+      Vx.Core.Type_any value = mapval.get(skey);
+      output = fn_reduce.vx_any_from_any_key_value(generic_any_1, output, key, value);
+    }
+    return output;
+  }
+
+  // vx_any_from_map(generic_any_1, map, string)
+  public static T vx_any_from_map<T>(
+    T generic_any_1,
+    Vx.Core.Type_map valuemap,
+    Vx.Core.Type_string key)
+    where T : Vx.Core.Type_any {
+    T output = Vx.Core.f_empty(generic_any_1);
+    string skey = key.vx_string();
+    if (skey.StartsWith(":")) {
+      skey = skey.Substring(1);
+    }
+    Vx.Core.Type_any val = valuemap.vx_map().getOrDefault(skey, output);
+    output = Vx.Core.f_any_from_any(generic_any_1, val);
     return output;
   }
 
@@ -327,6 +397,11 @@
   // vx_boolean_from_string_starts(string, string)
   public static bool vx_boolean_from_string_starts(string text, string starts) {
     return text.StartsWith(starts);
+  }
+
+  // vx_boolean_write_from_map_name_value(map, string, any)
+  public static Vx.Core.Type_boolean vx_boolean_write_from_map_name_value(Vx.Core.Type_map valuemap, Vx.Core.Type_string name, Vx.Core.Type_any value) {
+    return valuemap.vx_set(name, value);
   }
 
   // vx_eqeq(any, any)
@@ -389,7 +464,7 @@
 		  funcmap.vx_p_map = mapfunc;
     Vx.Core.Class_project global = (Vx.Core.Class_project)Vx.Core.c_global;
     Vx.Core.Class_packagemap packagemap = (Vx.Core.Class_packagemap)global.packagemap();
-    if (packagemap == null) {
+    if (packagemap != Vx.Core.e_packagemap) {
       packagemap = new Vx.Core.Class_packagemap();
       global.vx_p_packagemap = packagemap;
     }
@@ -400,6 +475,41 @@
 		  pkg.vx_p_funcmap = funcmap;
     mappackage.put(pkgname, pkg);
     packagemap.vx_p_map = mappackage;
+  }
+
+  public static T vx_if_2<T>(
+    T generic_any_1,
+    Vx.Core.Type_thenelselist thenelselist)
+    where T : Vx.Core.Type_any {
+    T output = Vx.Core.f_empty(generic_any_1);
+    Func<Vx.Core.Type_any, Vx.Core.Func_any_from_func> fnc = (any) => {
+      Vx.Core.Func_any_from_func fnany = Vx.Core.e_any_from_func;
+      if (any is Vx.Core.Type_thenelse thenelse) {
+        Vx.Core.Type_string code = thenelse.code();
+        switch (code.vx_string()) {
+        case ":then":
+          Vx.Core.Func_boolean_from_func fn_cond = thenelse.fn_cond();
+          Vx.Core.Type_boolean cond = fn_cond.vx_boolean_from_func();
+          if (cond.vx_boolean() == true) {
+            fnany = thenelse.fn_any();
+          }
+          break;
+        case ":else":
+          fnany = thenelse.fn_any();
+          break;
+        }
+      }
+      return fnany;
+    };
+    Vx.Core.Func_any_from_func fn_any = Vx.Core.vx_any_first_from_list_fn(
+      Vx.Core.t_any_from_func,
+      thenelselist,
+      fnc
+    );
+    if (fn_any != Vx.Core.e_any_from_func) {
+      output = fn_any.vx_any_from_func(generic_any_1);
+    }
+    return output;
   }
 
   // vx_int_from_string(string)
@@ -499,13 +609,33 @@
     return result;
   }
 
+  // vx_list_from_list_intany(generic_list_1, list-2, any<-int-any)
+  public static T vx_list_from_list_intany<T, U>(
+    T generic_list_1,
+    U valuelist,
+    Vx.Core.Func_any_from_int_any fn_any_from_int_any)
+    where T : Core.Type_list
+    where U : Core.Type_list {
+    T output = Vx.Core.f_empty(generic_list_1);
+    List<Vx.Core.Type_any> listany = valuelist.vx_list();
+    if (listany.Count > 0) {
+      List<Vx.Core.Type_any> listout = new List<Vx.Core.Type_any>();
+      for (int i = 0; i < listany.Count; i++) {
+        Vx.Core.Type_int vali = Vx.Core.vx_new_int(i+1);
+        Vx.Core.Type_any value = listany[i];
+        Vx.Core.Type_any outval = fn_any_from_int_any.vx_any_from_int_any(Core.t_any, vali, value);
+        listout.Add(outval);
+      }
+      output = Vx.Core.vx_new_list(generic_list_1, listout);
+    }
+    return output;
+  }
+
   // vx_log(object...)
   public static void vx_log(params Object[] values) {
     foreach (Object value in values) {
       string text = "";
-      if (value == null) {
-        text = "null";
-      } else if (value is Vx.Core.Type_string valstring) {
+      if (value is Vx.Core.Type_string valstring) {
         text = valstring.vx_string();
       } else if (value is Vx.Core.Type_any valany) {
         Vx.Core.Type_string valstring2 = Vx.Core.f_string_from_any(valany);
@@ -549,7 +679,7 @@
   public static Vx.Core.Type_msgblock vx_msgblock_from_copy_arrayval(Vx.Core.Type_any copy, params Object[] vals) {
     Vx.Core.Type_msgblock output = Vx.Core.e_msgblock;
     Vx.Core.Type_msgblock copymsgblock = copy.vx_msgblock();
-    if (copymsgblock != null) {
+    if (copymsgblock != Vx.Core.e_msgblock) {
       output = copymsgblock;
     }
     return output;
@@ -592,6 +722,26 @@
     return output;
   }
 
+  // vx_new_list(T, List<any>)
+  public static T vx_new_list<T>(
+    T generic_list_1,
+    List<Core.Type_any> listval)
+    where T : Core.Type_list {
+    Vx.Core.Type_any anylist = generic_list_1.vx_new(listval);
+    T output = Vx.Core.f_any_from_any(generic_list_1, anylist);
+    return output;
+  }
+
+  // vx_new_map(T, Map<string, any>)
+  public static T vx_new_map<T>(
+    T generic_map_1,
+    Map<string, Vx.Core.Type_any> mapval)
+    where T : Vx.Core.Type_map {
+    Vx.Core.Type_any anymap = generic_map_1.vx_new(mapval);
+    T output = Vx.Core.f_any_from_any(generic_map_1, anymap);
+    return output;
+  }
+
   public static Type_string vx_new_string(string text) {
     Type_string output;
     if ((text == "") && Vx.Core.e_string != null) {
@@ -616,34 +766,28 @@
     string output = "";
     if (indent > 50) {
       output = "Error: Max Depth Exceeded";
-    } else if (value == null) {
-      output = "null";
     } else if (value == value.vx_type()) {
-      if (value is Vx.Core.Type_func) {
-        Vx.Core.Type_func valuefunc = (Vx.Core.Type_func)value;
+      if (value is Vx.Core.Type_func valuefunc) {
         Vx.Core.Type_funcdef funcdef = valuefunc.vx_funcdef();
         output = funcdef.pkgname().vx_string() + "/" + funcdef.name().vx_string();
       } else {
         Vx.Core.Type_typedef typedef = value.vx_typedef();
         output = typedef.pkgname().vx_string() + "/" + typedef.name().vx_string();
       }
-    } else if (value is Vx.Core.Type_boolean) {
-      Vx.Core.Type_boolean valbool = Vx.Core.f_any_from_any(Vx.Core.t_boolean, value);
+    } else if (value is Vx.Core.Type_boolean valbool) {
       if (valbool.vx_boolean() == true) {
         output = "true";
       } else {
         output = "false";
       }
-    } else if (value is Vx.Core.Type_decimal) {
-      Vx.Core.Type_decimal valdec = Vx.Core.f_any_from_any(Vx.Core.t_decimal, value);
+    } else if (value is Vx.Core.Type_decimal valdec) {
       output = valdec.vx_string();
-    } else if (value is Vx.Core.Type_float) {
-      Vx.Core.Type_float valfloat = Vx.Core.f_any_from_any(Vx.Core.t_float, value);
+    } else if (value is Vx.Core.Type_float valfloat) {
       output = valfloat.vx_float().ToString();
       if (output.EndsWith(".0")) {
         output = output.Substring(0, output.Length - 2);
       }
-    } else if (value is Vx.Core.Type_int) {
+    } else if (value is Vx.Core.Type_int valint) {
       if (value == Vx.Core.c_notanumber) {
         output = "notanumber";
       } else if (value == Vx.Core.c_infinity) {
@@ -651,14 +795,11 @@
       } else if (value == Vx.Core.c_neginfinity) {
         output = "neginfinity";
       } else {
-        Vx.Core.Type_int valint = Vx.Core.f_any_from_any(Vx.Core.t_int, value);
         output = valint.vx_int().ToString();
       }
-    } else if (value is Vx.Core.Type_string) {
-      Vx.Core.Type_string valstring = Vx.Core.f_any_from_any(Vx.Core.t_string, value);
+    } else if (value is Vx.Core.Type_string valstring) {
       output = "\"" + valstring.vx_string() + "\"";
-    } else if (value is Vx.Core.vx_Type_const) {
-      Vx.Core.vx_Type_const constvalue = (Vx.Core.vx_Type_const)value;
+    } else if (value is Vx.Core.vx_Type_const constvalue) {
       Vx.Core.Type_constdef constdef = constvalue.vx_constdef();
       string constpkg = constdef.pkgname().vx_string();
       string constname = constdef.name().vx_string();
@@ -667,8 +808,7 @@
       } else {
         output = constpkg + "/" + constname;
       }
-    } else if (value is Vx.Core.Type_list) {
-      Vx.Core.Type_list vallist = Vx.Core.f_any_from_any(Vx.Core.t_list, value);
+    } else if (value is Vx.Core.Type_list vallist) {
       Vx.Core.Type_typedef typedef = vallist.vx_typedef();
       Vx.Core.Type_string typedefname = typedef.name();
       int indentint = indent;
@@ -678,13 +818,12 @@
         string valtext = Vx.Core.vx_string_from_any_indent(valsub, indentint, linefeed);
         output += "\n " + indenttext + valtext;
       }
-      if (vallist.vx_msgblock() != null) {
+      if (vallist.vx_msgblock() != Vx.Core.e_msgblock) {
         string msgtext = Vx.Core.vx_string_from_any_indent(vallist.vx_msgblock(), indentint, linefeed);
         output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
       }
       output = "(" + typedefname.vx_string() + output + ")";
-    } else if (value is Vx.Core.Type_map) {
-      Vx.Core.Type_map valmap = Vx.Core.f_any_from_any(Vx.Core.t_map, value);
+    } else if (value is Vx.Core.Type_map valmap) {
       Vx.Core.Type_typedef typedef = valmap.vx_typedef();
       Vx.Core.Type_string typedefname = typedef.name();
       int indentint = indent;
@@ -705,13 +844,12 @@
         }
         output += "\n" + indenttext + " " + key + strval;
       }
-      if (valmap.vx_msgblock() != null) {
+      if (valmap.vx_msgblock() != Vx.Core.e_msgblock) {
         string msgtext = Vx.Core.vx_string_from_any_indent(valmap.vx_msgblock(), indentint, linefeed);
         output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
       }
       output = "(" + typedefname.vx_string() + output + ")";
-    } else if (value is Vx.Core.Type_struct) {
-      Vx.Core.Type_struct valstruct = Vx.Core.f_any_from_any(Vx.Core.t_struct, value);
+    } else if (value is Vx.Core.Type_struct valstruct) {
       Vx.Core.Type_typedef typedef = valstruct.vx_typedef();
       Vx.Core.Type_string typedefname = typedef.name();
       int indentint2 = indent;
@@ -734,22 +872,30 @@
           output += "\n" + indenttext + " " + key + strval2;
         }
       }
-      if (valstruct.vx_msgblock() != null) {
+      if (valstruct.vx_msgblock() != Vx.Core.e_msgblock) {
         string msgtext2 = Vx.Core.vx_string_from_any_indent(valstruct.vx_msgblock(), indentint2, linefeed);
         output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext2;
       }
       output = "(" + typedefname.vx_string() + output + ")";
-    } else if (value is Vx.Core.Type_func) {
-      Vx.Core.Type_func valfunc = Vx.Core.f_any_from_any(Vx.Core.t_func, value);
+    } else if (value is Vx.Core.Type_func valfunc) {
       Vx.Core.Type_funcdef funcdef = valfunc.vx_funcdef();
       Vx.Core.Type_string funcdefname = Vx.Core.f_funcname_from_funcdef(funcdef);
       output = funcdefname.vx_string();
-      if (valfunc.vx_msgblock() != null) {
+      if (valfunc.vx_msgblock() != Vx.Core.e_msgblock) {
         string msgtext = Vx.Core.vx_string_from_any_indent(valfunc.vx_msgblock(), indent, linefeed);
         output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
       }
       output = "(" + output + ")";
     }
+    return output;
+  }
+
+  public static Vx.Core.Type_string vx_string_from_any_indent(
+    Vx.Core.Type_any value,
+    Vx.Core.Type_int indent,
+    Vx.Core.Type_boolean linefeed) {
+    string soutput = Vx.Core.vx_string_from_any_indent(value, indent.vx_int(), linefeed.vx_boolean());
+    Vx.Core.Type_string output = Vx.Core.vx_new_string(soutput);
     return output;
   }
 
@@ -759,6 +905,25 @@
     if (text != null) {
       output = text;
     }
+    return output;
+  }
+
+  // vx_string_from_string_find_replace(string, string, string)
+  public static string vx_string_from_string_find_replace(
+    string text,
+    string find,
+    string replace) {
+    string output = text.Replace(find, replace);
+    return output;
+  }
+
+  // vx_string_from_string_find_replace(string, string, string)
+  public static Vx.Core.Type_string vx_string_from_string_find_replace(
+    Vx.Core.Type_string text,
+    Vx.Core.Type_string find,
+    Vx.Core.Type_string replace) {
+    string stext = Vx.Core.vx_string_from_string_find_replace(text.vx_string(), find.vx_string(), replace.vx_string());
+    Vx.Core.Type_string output = Vx.Core.vx_new_string(stext);
     return output;
   }
 
@@ -820,7 +985,7 @@
       Vx.Core.Type_string value = Vx.Core.vx_new_string(svalue);
       listany.Add(value);
     }
-    Object[] arrayany = listany.ToArray();
+    Object[] arrayany = [.. listany];
     Vx.Core.Type_anylist output = Vx.Core.vx_new(Vx.Core.t_anylist, arrayany);
     return output;
   }

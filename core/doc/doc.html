@@ -4673,6 +4673,7 @@
       work = fn_reduce-&gt;vx_any_from_reduce(work, item);
     };
     output = vx_core::vx_any_from_any(generic_any_1, work);&quot;
+  :csharp :auto
   :java :auto
   :js
    &quot;output = valstart
@@ -4790,9 +4791,10 @@
   start     : any-1
   fn-reduce : any&lt;-any-key-value :: any-1 :: any-1]
  (native
-  :cpp  :auto
-  :java :auto
-  :js   :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         &quot;xayb&quot;
         (any&lt;-map-start-reduce
@@ -4898,9 +4900,10 @@
   name     : string
   value    : any-1]
  (native
-  :cpp  :auto
-  :java :auto
-  :js   :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         (stringmutablemap
          :b &quot;y&quot;
@@ -5258,6 +5261,8 @@
   :cpp
    &quot;vx_core::Type_any any = vx_core::vx_if_thenelselist(generic_any_1, thenelselist);
     output = vx_core::vx_any_from_any(generic_any_1, any);&quot;
+  :csharp :auto
+  :java :auto
   :js
    &quot;let fn_any = null
     for (const thenelseval of thenelselist) {
@@ -5281,31 +5286,6 @@
         output = fn()
         break
       }
-    }&quot;
-  :java :auto
-  :java1
-   &quot;Core.Func_any_from_func fn_any = Core.vx_any_first_from_list_fn(Core.t_any_from_func, thenelselist, (any) -&gt; {
-      Core.Func_any_from_func fnany = null;
-      if (any instanceof Core.Type_thenelse) {
-        Core.Type_thenelse thenelse = (Core.Type_thenelse)any;
-        Core.Type_string code = thenelse.code();
-        switch (code.vx_string()) {
-        case “:then”:
-          Core.Func_boolean_from_func fn_cond = thenelse.fn_cond();
-          Core.Type_boolean cond = fn_cond.vx_boolean_from_func();
-          if (cond.vx_boolean() == true) {
-            fnany = thenelse.fn_any();
-          }
-          break;
-        case “:else”:
-          fnany = thenelse.fn_any();
-          break;
-        }
-      }
-      return fnany;
-    });
-    if (fn_any != null) {
-      output = fn_any.vx_any_from_func(generic_any_1);
     }&quot;)
  :doc  &quot;Logical If function&quot;
  :test (test-true
@@ -5683,9 +5663,10 @@
  [values          : list-2
   fn-any&lt;-int-any : any&lt;-int-any]
  (native
-  :cpp  :auto
-  :java :auto
-  :js   :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         (stringlist &quot;a1&quot; &quot;b2&quot;)
         (list&lt;-list-intany : stringlist
@@ -6334,9 +6315,10 @@
   :cpp
    &quot;std::string soutput = vx_core::vx_string_from_any_indent(value, indent-&gt;vx_int(), linefeed-&gt;vx_boolean(), false);
     output = vx_core::vx_new_string(soutput);&quot;
+  :csharp :auto
+  :java :auto
   :js
-   &quot;output = vx_core.vx_string_from_any_indent(value, indent, linefeed)&quot;
-  :java :auto)
+   &quot;output = vx_core.vx_string_from_any_indent(value, indent, linefeed)&quot;)
  :doc &quot;Return a string representation of a value&quot;)
 
 (func string&lt;-func : string
@@ -6348,9 +6330,10 @@
   find    : string
   replace : string]
  (native
-  :cpp  :auto
-  :java :auto
-  :js   :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         &quot;a!b!c&quot;
         (string&lt;-string-find-replace
@@ -15923,6 +15906,7 @@ improves readability.</div>
       work = fn_reduce-&gt;vx_any_from_reduce(work, item);
     };
     output = vx_core::vx_any_from_any(generic_any_1, work);&quot;
+  :csharp :auto
   :java :auto
   :js
    &quot;output = valstart
@@ -16235,9 +16219,10 @@ improves readability.</div>
   start     : any-1
   fn-reduce : any&lt;-any-key-value :: any-1 :: any-1]
  (native
-  :cpp  :auto
-  :java :auto
-  :js   :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         &quot;xayb&quot;
         (any&lt;-map-start-reduce
@@ -17146,9 +17131,10 @@ improves readability.</div>
   name     : string
   value    : any-1]
  (native
-  :cpp  :auto
-  :java :auto
-  :js   :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         (stringmutablemap
          :b &quot;y&quot;
@@ -18782,6 +18768,8 @@ improves readability.</div>
   :cpp
    &quot;vx_core::Type_any any = vx_core::vx_if_thenelselist(generic_any_1, thenelselist);
     output = vx_core::vx_any_from_any(generic_any_1, any);&quot;
+  :csharp :auto
+  :java :auto
   :js
    &quot;let fn_any = null
     for (const thenelseval of thenelselist) {
@@ -18805,31 +18793,6 @@ improves readability.</div>
         output = fn()
         break
       }
-    }&quot;
-  :java :auto
-  :java1
-   &quot;Core.Func_any_from_func fn_any = Core.vx_any_first_from_list_fn(Core.t_any_from_func, thenelselist, (any) -&gt; {
-      Core.Func_any_from_func fnany = null;
-      if (any instanceof Core.Type_thenelse) {
-        Core.Type_thenelse thenelse = (Core.Type_thenelse)any;
-        Core.Type_string code = thenelse.code();
-        switch (code.vx_string()) {
-        case “:then”:
-          Core.Func_boolean_from_func fn_cond = thenelse.fn_cond();
-          Core.Type_boolean cond = fn_cond.vx_boolean_from_func();
-          if (cond.vx_boolean() == true) {
-            fnany = thenelse.fn_any();
-          }
-          break;
-        case “:else”:
-          fnany = thenelse.fn_any();
-          break;
-        }
-      }
-      return fnany;
-    });
-    if (fn_any != null) {
-      output = fn_any.vx_any_from_func(generic_any_1);
     }&quot;)
  :doc  &quot;Logical If function&quot;
  :test (test-true
@@ -20447,9 +20410,10 @@ improves readability.</div>
  [values          : list-2
   fn-any&lt;-int-any : any&lt;-int-any]
  (native
-  :cpp  :auto
-  :java :auto
-  :js   :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         (stringlist &quot;a1&quot; &quot;b2&quot;)
         (list&lt;-list-intany : stringlist
@@ -23720,9 +23684,10 @@ improves readability.</div>
   :cpp
    &quot;std::string soutput = vx_core::vx_string_from_any_indent(value, indent-&gt;vx_int(), linefeed-&gt;vx_boolean(), false);
     output = vx_core::vx_new_string(soutput);&quot;
+  :csharp :auto
+  :java :auto
   :js
-   &quot;output = vx_core.vx_string_from_any_indent(value, indent, linefeed)&quot;
-  :java :auto)
+   &quot;output = vx_core.vx_string_from_any_indent(value, indent, linefeed)&quot;)
  :doc &quot;Return a string representation of a value&quot;)</div>
                 </li>
               </ul>
@@ -23861,9 +23826,10 @@ improves readability.</div>
   find    : string
   replace : string]
  (native
-  :cpp  :auto
-  :java :auto
-  :js   :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         &quot;a!b!c&quot;
         (string&lt;-string-find-replace

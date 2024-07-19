@@ -173,16 +173,20 @@ public final class Tree {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -207,8 +211,9 @@ public final class Tree {
           case ":id":
             if (valsub == vx_p_id) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valid = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_id = (Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_id = Core.vx_new(Core.t_string, valsub);
@@ -231,8 +236,9 @@ public final class Tree {
           case ":brancharrow":
             if (valsub == vx_p_brancharrow) {
             } else if (valsub instanceof Tree.Type_brancharrow) {
+              Tree.Type_brancharrow valbrancharrow = (Tree.Type_brancharrow)valsub;;
               ischanged = true;
-              vx_p_brancharrow = (Tree.Type_brancharrow)valsub;
+              vx_p_brancharrow = valbrancharrow;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -252,8 +258,9 @@ public final class Tree {
           case ":branchlist":
             if (valsub == vx_p_branchlist) {
             } else if (valsub instanceof Tree.Type_branchlist) {
+              Tree.Type_branchlist valbranchlist = (Tree.Type_branchlist)valsub;;
               ischanged = true;
-              vx_p_branchlist = (Tree.Type_branchlist)valsub;
+              vx_p_branchlist = valbranchlist;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -273,8 +280,9 @@ public final class Tree {
           case ":leaflist":
             if (valsub == vx_p_leaflist) {
             } else if (valsub instanceof Tree.Type_leaflist) {
+              Tree.Type_leaflist valleaflist = (Tree.Type_leaflist)valsub;;
               ischanged = true;
-              vx_p_leaflist = (Tree.Type_leaflist)valsub;
+              vx_p_leaflist = valleaflist;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -294,8 +302,9 @@ public final class Tree {
           case ":parentbranch":
             if (valsub == vx_p_parentbranch) {
             } else if (valsub instanceof Tree.Type_branch) {
+              Tree.Type_branch valparentbranch = (Tree.Type_branch)valsub;;
               ischanged = true;
-              vx_p_parentbranch = (Tree.Type_branch)valsub;
+              vx_p_parentbranch = valparentbranch;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -315,8 +324,9 @@ public final class Tree {
           case ":tree":
             if (valsub == vx_p_tree) {
             } else if (valsub instanceof Tree.Type_tree) {
+              Tree.Type_tree valtree = (Tree.Type_tree)valsub;;
               ischanged = true;
-              vx_p_tree = (Tree.Type_tree)valsub;
+              vx_p_tree = valtree;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -537,14 +547,15 @@ public final class Tree {
           ischanged = true;
           listval.add((Tree.Type_branch)valsub);
         } else if (valsub instanceof Tree.Type_branchlist) {
-          Type_branchlist multi = (Type_branchlist)valsub;
+          Tree.Type_branchlist multi = (Tree.Type_branchlist)valsub;;
           ischanged = true;
           listval.addAll(multi.vx_listbranch());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
-            if (item instanceof Tree.Type_branch) {
-              Tree.Type_branch valitem = (Tree.Type_branch)item;
+            if (false) {
+            } else if (item instanceof Tree.Type_branch) {
+              Tree.Type_branch valitem = (Tree.Type_branch)item;;
               ischanged = true;
               listval.add(valitem);
             }
@@ -710,16 +721,20 @@ public final class Tree {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -744,8 +759,9 @@ public final class Tree {
           case ":id":
             if (valsub == vx_p_id) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valid = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_id = (Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_id = Core.vx_new(Core.t_string, valsub);
@@ -768,8 +784,9 @@ public final class Tree {
           case ":name":
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valname = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_name = (Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
@@ -792,8 +809,9 @@ public final class Tree {
           case ":value":
             if (valsub == vx_p_value) {
             } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valvalue = (Core.Type_any)valsub;;
               ischanged = true;
-              vx_p_value = (Core.Type_any)valsub;
+              vx_p_value = valvalue;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -941,14 +959,15 @@ public final class Tree {
           ischanged = true;
           listval.add((Tree.Type_leaf)valsub);
         } else if (valsub instanceof Tree.Type_leaflist) {
-          Type_leaflist multi = (Type_leaflist)valsub;
+          Tree.Type_leaflist multi = (Tree.Type_leaflist)valsub;;
           ischanged = true;
           listval.addAll(multi.vx_listleaf());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
-            if (item instanceof Tree.Type_leaf) {
-              Tree.Type_leaf valitem = (Tree.Type_leaf)item;
+            if (false) {
+            } else if (item instanceof Tree.Type_leaf) {
+              Tree.Type_leaf valitem = (Tree.Type_leaf)item;;
               ischanged = true;
               listval.add(valitem);
             }
@@ -1114,16 +1133,20 @@ public final class Tree {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -1148,8 +1171,9 @@ public final class Tree {
           case ":id":
             if (valsub == vx_p_id) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valid = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_id = (Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_id = Core.vx_new(Core.t_string, valsub);
@@ -1172,8 +1196,9 @@ public final class Tree {
           case ":name":
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valname = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_name = (Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
@@ -1196,8 +1221,9 @@ public final class Tree {
           case ":branch":
             if (valsub == vx_p_branch) {
             } else if (valsub instanceof Tree.Type_branch) {
+              Tree.Type_branch valbranch = (Tree.Type_branch)valsub;;
               ischanged = true;
-              vx_p_branch = (Tree.Type_branch)valsub;
+              vx_p_branch = valbranch;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {

@@ -69,16 +69,17 @@ public static class Db {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -102,9 +103,9 @@ public static class Db {
           switch (key) {
           case ":dbid":
             if (valsub == vx_p_dbid) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valdbid) {
               ischanged = true;
-              vx_p_dbid = (Vx.Core.Type_string)valsub;
+              vx_p_dbid = valdbid;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_dbid = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -305,16 +306,17 @@ public static class Db {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -338,9 +340,9 @@ public static class Db {
           switch (key) {
           case ":dbcellid":
             if (valsub == vx_p_dbcellid) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valdbcellid) {
               ischanged = true;
-              vx_p_dbcellid = (Vx.Core.Type_string)valsub;
+              vx_p_dbcellid = valdbcellid;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_dbcellid = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -361,9 +363,9 @@ public static class Db {
             break;
           case ":dbcellmap":
             if (valsub == vx_p_dbcellmap) {
-            } else if (valsub is Vx.Data.Db.Type_dbcellmap) {
+            } else if (valsub is Vx.Data.Db.Type_dbcellmap valdbcellmap) {
               ischanged = true;
-              vx_p_dbcellmap = (Vx.Data.Db.Type_dbcellmap)valsub;
+              vx_p_dbcellmap = valdbcellmap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -381,9 +383,9 @@ public static class Db {
             break;
           case ":dbfieldmap":
             if (valsub == vx_p_dbfieldmap) {
-            } else if (valsub is Vx.Data.Db.Type_dbfieldmap) {
+            } else if (valsub is Vx.Data.Db.Type_dbfieldmap valdbfieldmap) {
               ischanged = true;
-              vx_p_dbfieldmap = (Vx.Data.Db.Type_dbfieldmap)valsub;
+              vx_p_dbfieldmap = valdbfieldmap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -401,9 +403,9 @@ public static class Db {
             break;
           case ":dbparent":
             if (valsub == vx_p_dbparent) {
-            } else if (valsub is Vx.Data.Db.Type_dbcell) {
+            } else if (valsub is Vx.Data.Db.Type_dbcell valdbparent) {
               ischanged = true;
-              vx_p_dbparent = (Vx.Data.Db.Type_dbcell)valsub;
+              vx_p_dbparent = valdbparent;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -421,9 +423,9 @@ public static class Db {
             break;
           case ":dbtable":
             if (valsub == vx_p_dbtable) {
-            } else if (valsub is Vx.Data.Db.Type_dbtable) {
+            } else if (valsub is Vx.Data.Db.Type_dbtable valdbtable) {
               ischanged = true;
-              vx_p_dbtable = (Vx.Data.Db.Type_dbtable)valsub;
+              vx_p_dbtable = valdbtable;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -506,19 +508,19 @@ public static class Db {
     public Vx.Core.Map<string, Vx.Data.Db.Type_dbcell> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Data.Db.Type_dbcell>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)this.vx_p_map;
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
 
     public Vx.Core.Type_boolean vx_set(Vx.Core.Type_string name, Vx.Core.Type_any value) {
       Vx.Core.Type_boolean output = Vx.Core.c_false;
-      if (value is Vx.Data.Db.Type_dbcell) {
+      if (false) {
+      } else if (value is Vx.Data.Db.Type_dbcell castval) {
         string key = name.vx_string();
         if (key.StartsWith(":")) {
           key = key.Substring(1);
         }
-        Vx.Data.Db.Type_dbcell castval = (Vx.Data.Db.Type_dbcell)value;
         Vx.Core.Map<string, Vx.Data.Db.Type_dbcell> map = new Vx.Core.LinkedHashMap<string, Vx.Data.Db.Type_dbcell>(this.vx_p_map);
         if (castval == Vx.Data.Db.e_dbcell) {
           map.remove(key);
@@ -611,8 +613,9 @@ public static class Db {
           }
         } else {
           Vx.Data.Db.Type_dbcell? valany = null;
-          if (valsub is Vx.Data.Db.Type_dbcell) {
-            valany = (Vx.Data.Db.Type_dbcell)valsub;
+          if (false) {
+          } else if (valsub is Vx.Data.Db.Type_dbcell valallowed) {
+            valany = valallowed;
           } else if (valsub is Vx.Data.Db.Type_dbcell) {
             valany = valsub as Vx.Data.Db.Type_dbcell;
           } else {
@@ -778,16 +781,17 @@ public static class Db {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -811,9 +815,9 @@ public static class Db {
           switch (key) {
           case ":dbfieldid":
             if (valsub == vx_p_dbfieldid) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valdbfieldid) {
               ischanged = true;
-              vx_p_dbfieldid = (Vx.Core.Type_string)valsub;
+              vx_p_dbfieldid = valdbfieldid;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_dbfieldid = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -834,9 +838,9 @@ public static class Db {
             break;
           case ":type":
             if (valsub == vx_p_type) {
-            } else if (valsub is Vx.Core.Type_any) {
+            } else if (valsub is Vx.Core.Type_any valtype) {
               ischanged = true;
-              vx_p_type = (Vx.Core.Type_any)valsub;
+              vx_p_type = valtype;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -854,9 +858,9 @@ public static class Db {
             break;
           case ":value":
             if (valsub == vx_p_value) {
-            } else if (valsub is Vx.Core.Type_any) {
+            } else if (valsub is Vx.Core.Type_any valvalue) {
               ischanged = true;
-              vx_p_value = (Vx.Core.Type_any)valsub;
+              vx_p_value = valvalue;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -937,19 +941,19 @@ public static class Db {
     public Vx.Core.Map<string, Vx.Data.Db.Type_dbfield> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Data.Db.Type_dbfield>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)this.vx_p_map;
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
 
     public Vx.Core.Type_boolean vx_set(Vx.Core.Type_string name, Vx.Core.Type_any value) {
       Vx.Core.Type_boolean output = Vx.Core.c_false;
-      if (value is Vx.Data.Db.Type_dbfield) {
+      if (false) {
+      } else if (value is Vx.Data.Db.Type_dbfield castval) {
         string key = name.vx_string();
         if (key.StartsWith(":")) {
           key = key.Substring(1);
         }
-        Vx.Data.Db.Type_dbfield castval = (Vx.Data.Db.Type_dbfield)value;
         Vx.Core.Map<string, Vx.Data.Db.Type_dbfield> map = new Vx.Core.LinkedHashMap<string, Vx.Data.Db.Type_dbfield>(this.vx_p_map);
         if (castval == Vx.Data.Db.e_dbfield) {
           map.remove(key);
@@ -1042,8 +1046,9 @@ public static class Db {
           }
         } else {
           Vx.Data.Db.Type_dbfield? valany = null;
-          if (valsub is Vx.Data.Db.Type_dbfield) {
-            valany = (Vx.Data.Db.Type_dbfield)valsub;
+          if (false) {
+          } else if (valsub is Vx.Data.Db.Type_dbfield valallowed) {
+            valany = valallowed;
           } else if (valsub is Vx.Data.Db.Type_dbfield) {
             valany = valsub as Vx.Data.Db.Type_dbfield;
           } else {
@@ -1254,16 +1259,17 @@ public static class Db {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -1287,9 +1293,9 @@ public static class Db {
           switch (key) {
           case ":fromid":
             if (valsub == vx_p_fromid) {
-            } else if (valsub is Vx.Data.Db.Type_dbid) {
+            } else if (valsub is Vx.Data.Db.Type_dbid valfromid) {
               ischanged = true;
-              vx_p_fromid = (Vx.Data.Db.Type_dbid)valsub;
+              vx_p_fromid = valfromid;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -1307,9 +1313,9 @@ public static class Db {
             break;
           case ":toid":
             if (valsub == vx_p_toid) {
-            } else if (valsub is Vx.Data.Db.Type_dbid) {
+            } else if (valsub is Vx.Data.Db.Type_dbid valtoid) {
               ischanged = true;
-              vx_p_toid = (Vx.Data.Db.Type_dbid)valsub;
+              vx_p_toid = valtoid;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -1441,14 +1447,13 @@ public static class Db {
         } else if (valsub is Vx.Data.Db.Type_dblink) {
           ischanged = true;
           listval.Add((Vx.Data.Db.Type_dblink)valsub);
-        } else if (valsub is Vx.Data.Db.Type_dblinklist) {
-          Type_dblinklist multi = (Type_dblinklist)valsub;
+        } else if (valsub is Vx.Data.Db.Type_dblinklist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listdblink());
         } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
-            if (item is Vx.Data.Db.Type_dblink) {
-              Vx.Data.Db.Type_dblink valitem = (Vx.Data.Db.Type_dblink)item;
+            if (false) {
+            } else if (item is Vx.Data.Db.Type_dblink valitem) {
               ischanged = true;
               listval.Add(valitem);
             }
@@ -1583,16 +1588,17 @@ public static class Db {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -1616,9 +1622,9 @@ public static class Db {
           switch (key) {
           case ":dbid":
             if (valsub == vx_p_dbid) {
-            } else if (valsub is Vx.Data.Db.Type_dbid) {
+            } else if (valsub is Vx.Data.Db.Type_dbid valdbid) {
               ischanged = true;
-              vx_p_dbid = (Vx.Data.Db.Type_dbid)valsub;
+              vx_p_dbid = valdbid;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -1636,9 +1642,9 @@ public static class Db {
             break;
           case ":links":
             if (valsub == vx_p_links) {
-            } else if (valsub is Vx.Data.Db.Type_dblinklist) {
+            } else if (valsub is Vx.Data.Db.Type_dblinklist vallinks) {
               ischanged = true;
-              vx_p_links = (Vx.Data.Db.Type_dblinklist)valsub;
+              vx_p_links = vallinks;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -1837,16 +1843,17 @@ public static class Db {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -1870,9 +1877,9 @@ public static class Db {
           switch (key) {
           case ":dbid":
             if (valsub == vx_p_dbid) {
-            } else if (valsub is Vx.Data.Db.Type_dbid) {
+            } else if (valsub is Vx.Data.Db.Type_dbid valdbid) {
               ischanged = true;
-              vx_p_dbid = (Vx.Data.Db.Type_dbid)valsub;
+              vx_p_dbid = valdbid;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -1890,9 +1897,9 @@ public static class Db {
             break;
           case ":valid":
             if (valsub == vx_p_valid) {
-            } else if (valsub is Vx.Data.Db.Type_dbid) {
+            } else if (valsub is Vx.Data.Db.Type_dbid valvalid) {
               ischanged = true;
-              vx_p_valid = (Vx.Data.Db.Type_dbid)valsub;
+              vx_p_valid = valvalid;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -1910,9 +1917,9 @@ public static class Db {
             break;
           case ":noteid":
             if (valsub == vx_p_noteid) {
-            } else if (valsub is Vx.Data.Db.Type_dbid) {
+            } else if (valsub is Vx.Data.Db.Type_dbid valnoteid) {
               ischanged = true;
-              vx_p_noteid = (Vx.Data.Db.Type_dbid)valsub;
+              vx_p_noteid = valnoteid;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -1930,9 +1937,9 @@ public static class Db {
             break;
           case ":valueid":
             if (valsub == vx_p_valueid) {
-            } else if (valsub is Vx.Data.Db.Type_dbid) {
+            } else if (valsub is Vx.Data.Db.Type_dbid valvalueid) {
               ischanged = true;
-              vx_p_valueid = (Vx.Data.Db.Type_dbid)valsub;
+              vx_p_valueid = valvalueid;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -1950,9 +1957,9 @@ public static class Db {
             break;
           case ":value":
             if (valsub == vx_p_value) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valvalue) {
               ischanged = true;
-              vx_p_value = (Vx.Core.Type_string)valsub;
+              vx_p_value = valvalue;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_value = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -2140,16 +2147,17 @@ public static class Db {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -2173,9 +2181,9 @@ public static class Db {
           switch (key) {
           case ":dbtableid":
             if (valsub == vx_p_dbtableid) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valdbtableid) {
               ischanged = true;
-              vx_p_dbtableid = (Vx.Core.Type_string)valsub;
+              vx_p_dbtableid = valdbtableid;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_dbtableid = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -2196,9 +2204,9 @@ public static class Db {
             break;
           case ":db":
             if (valsub == vx_p_db) {
-            } else if (valsub is Vx.Data.Db.Type_db) {
+            } else if (valsub is Vx.Data.Db.Type_db valdb) {
               ischanged = true;
-              vx_p_db = (Vx.Data.Db.Type_db)valsub;
+              vx_p_db = valdb;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2216,9 +2224,9 @@ public static class Db {
             break;
           case ":dbcellmap":
             if (valsub == vx_p_dbcellmap) {
-            } else if (valsub is Vx.Data.Db.Type_dbcellmap) {
+            } else if (valsub is Vx.Data.Db.Type_dbcellmap valdbcellmap) {
               ischanged = true;
-              vx_p_dbcellmap = (Vx.Data.Db.Type_dbcellmap)valsub;
+              vx_p_dbcellmap = valdbcellmap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2236,9 +2244,9 @@ public static class Db {
             break;
           case ":dbfieldmap":
             if (valsub == vx_p_dbfieldmap) {
-            } else if (valsub is Vx.Data.Db.Type_dbfieldmap) {
+            } else if (valsub is Vx.Data.Db.Type_dbfieldmap valdbfieldmap) {
               ischanged = true;
-              vx_p_dbfieldmap = (Vx.Data.Db.Type_dbfieldmap)valsub;
+              vx_p_dbfieldmap = valdbfieldmap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2456,16 +2464,17 @@ public static class Db {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -2489,9 +2498,9 @@ public static class Db {
           switch (key) {
           case ":dbid":
             if (valsub == vx_p_dbid) {
-            } else if (valsub is Vx.Data.Db.Type_dbid) {
+            } else if (valsub is Vx.Data.Db.Type_dbid valdbid) {
               ischanged = true;
-              vx_p_dbid = (Vx.Data.Db.Type_dbid)valsub;
+              vx_p_dbid = valdbid;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2509,9 +2518,9 @@ public static class Db {
             break;
           case ":fromid":
             if (valsub == vx_p_fromid) {
-            } else if (valsub is Vx.Data.Db.Type_dbid) {
+            } else if (valsub is Vx.Data.Db.Type_dbid valfromid) {
               ischanged = true;
-              vx_p_fromid = (Vx.Data.Db.Type_dbid)valsub;
+              vx_p_fromid = valfromid;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2529,9 +2538,9 @@ public static class Db {
             break;
           case ":toid":
             if (valsub == vx_p_toid) {
-            } else if (valsub is Vx.Data.Db.Type_dbid) {
+            } else if (valsub is Vx.Data.Db.Type_dbid valtoid) {
               ischanged = true;
-              vx_p_toid = (Vx.Data.Db.Type_dbid)valsub;
+              vx_p_toid = valtoid;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2549,9 +2558,9 @@ public static class Db {
             break;
           case ":noteid":
             if (valsub == vx_p_noteid) {
-            } else if (valsub is Vx.Data.Db.Type_dbid) {
+            } else if (valsub is Vx.Data.Db.Type_dbid valnoteid) {
               ischanged = true;
-              vx_p_noteid = (Vx.Data.Db.Type_dbid)valsub;
+              vx_p_noteid = valnoteid;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2569,9 +2578,9 @@ public static class Db {
             break;
           case ":valid":
             if (valsub == vx_p_valid) {
-            } else if (valsub is Vx.Data.Db.Type_dbid) {
+            } else if (valsub is Vx.Data.Db.Type_dbid valvalid) {
               ischanged = true;
-              vx_p_valid = (Vx.Data.Db.Type_dbid)valsub;
+              vx_p_valid = valvalid;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2589,9 +2598,9 @@ public static class Db {
             break;
           case ":valtext":
             if (valsub == vx_p_valtext) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valvaltext) {
               ischanged = true;
-              vx_p_valtext = (Vx.Core.Type_string)valsub;
+              vx_p_valtext = valvaltext;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_valtext = Vx.Core.vx_new(Vx.Core.t_string, valsub);

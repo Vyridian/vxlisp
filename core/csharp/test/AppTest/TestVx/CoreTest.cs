@@ -1375,9 +1375,9 @@ public class CoreTest {
                 Vx.Core.t_any_from_reduce.vx_fn_new((total_any, num_any) => {
                   Vx.Core.Type_int total = Vx.Core.f_any_from_any(Vx.Core.t_int, total_any);
                   Vx.Core.Type_int num = Vx.Core.f_any_from_any(Vx.Core.t_int, num_any);
-                  Vx.Core.Type_any output_2 = 
+                  Vx.Core.Type_any output_1 = 
                     Vx.Core.f_multiply(total, num);
-                  return output_2;
+                  return output_1;
                 })
               )
             )
@@ -1457,7 +1457,7 @@ public class CoreTest {
                   Vx.Core.Type_string current = Vx.Core.f_any_from_any(Vx.Core.t_string, current_any);
                   Vx.Core.Type_string key = Vx.Core.f_any_from_any(Vx.Core.t_string, key_any);
                   Vx.Core.Type_any value = Vx.Core.f_any_from_any(Vx.Core.t_any, value_any);
-                  Vx.Core.Type_any output_3 = 
+                  Vx.Core.Type_any output_1 = 
                     Vx.Core.f_copy(
                       current,
                       Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -1465,7 +1465,7 @@ public class CoreTest {
                         key
                       )
                     );
-                  return output_3;
+                  return output_1;
                 })
               )
             )
@@ -1510,8 +1510,8 @@ public class CoreTest {
                     )
                   );
                   Vx.Core.Type_boolean iswrite = Vx.Core.f_boolean_write_from_map_name_value(smap, Vx.Core.vx_new_string(":a"), Vx.Core.vx_new_string("x"));
-                  Vx.Core.Type_any output_4 = smap;
-                  return output_4;
+                  Vx.Core.Type_any output_1 = smap;
+                  return output_1;
                 })
               )
             )
@@ -1542,8 +1542,8 @@ public class CoreTest {
                     )
                   );
                   Vx.Core.Type_boolean iswrite = Vx.Core.f_boolean_write_from_map_name_value(smap, Vx.Core.vx_new_string(":b"), Vx.Core.vx_new_string(""));
-                  Vx.Core.Type_any output_5 = smap;
-                  return output_5;
+                  Vx.Core.Type_any output_2 = smap;
+                  return output_2;
                 })
               )
             )
@@ -2381,8 +2381,8 @@ public class CoreTest {
                 Vx.Core.t_any_from_func.vx_fn_new(() => {
                   Vx.Core.Type_int v1 = Vx.Core.vx_new_int(2);
                   Vx.Core.Type_int v2 = Vx.Core.f_plus(v1, Vx.Core.vx_new_int(3));
-                  Vx.Core.Type_any output_6 = Vx.Core.f_plus(v1, v2);
-                  return output_6;
+                  Vx.Core.Type_any output_1 = Vx.Core.f_plus(v1, v2);
+                  return output_1;
                 })
               )
             )
@@ -2492,8 +2492,8 @@ public class CoreTest {
                 ),
                 Vx.Core.t_any_from_any.vx_fn_new((values_any) => {
                   Vx.Core.Type_stringlist values = Vx.Core.f_any_from_any(Vx.Core.t_stringlist, values_any);
-                  Vx.Core.Type_any output_7 = values;
-                  return output_7;
+                  Vx.Core.Type_any output_1 = values;
+                  return output_1;
                 })
               )
             )
@@ -2576,7 +2576,7 @@ public class CoreTest {
                 Vx.Core.t_any_from_int_any.vx_fn_new((index_any, value_any) => {
                   Vx.Core.Type_int index = Vx.Core.f_any_from_any(Vx.Core.t_int, index_any);
                   Vx.Core.Type_string value = Vx.Core.f_any_from_any(Vx.Core.t_string, value_any);
-                  Vx.Core.Type_any output_8 = 
+                  Vx.Core.Type_any output_1 = 
                     Vx.Core.f_new(
                       Vx.Core.t_string,
                       Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -2584,7 +2584,7 @@ public class CoreTest {
                         index
                       )
                     );
-                  return output_8;
+                  return output_1;
                 })
               )
             )
@@ -2671,7 +2671,7 @@ public class CoreTest {
                 Vx.Core.t_any_from_key_value.vx_fn_new((key_any, val_any) => {
                   Vx.Core.Type_string key = Vx.Core.f_any_from_any(Vx.Core.t_string, key_any);
                   Vx.Core.Type_string val = Vx.Core.f_any_from_any(Vx.Core.t_string, val_any);
-                  Vx.Core.Type_any output_9 = 
+                  Vx.Core.Type_any output_1 = 
                     Vx.Core.f_new(
                       Vx.Core.t_string,
                       Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -2679,7 +2679,7 @@ public class CoreTest {
                         val
                       )
                     );
-                  return output_9;
+                  return output_1;
                 })
               )
             )
@@ -2724,7 +2724,7 @@ public class CoreTest {
                 ),
                 Vx.Core.t_any_from_any.vx_fn_new((val_any) => {
                   Vx.Core.Type_string val = Vx.Core.f_any_from_any(Vx.Core.t_string, val_any);
-                  Vx.Core.Type_any output_10 = 
+                  Vx.Core.Type_any output_1 = 
                     Vx.Core.f_new(
                       Vx.Core.t_string,
                       Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -2732,7 +2732,7 @@ public class CoreTest {
                         val
                       )
                     );
-                  return output_10;
+                  return output_1;
                 })
               )
             )
@@ -2819,7 +2819,7 @@ public class CoreTest {
                 Vx.Core.t_any_from_key_value.vx_fn_new((key_any, val_any) => {
                   Vx.Core.Type_string key = Vx.Core.f_any_from_any(Vx.Core.t_string, key_any);
                   Vx.Core.Type_string val = Vx.Core.f_any_from_any(Vx.Core.t_string, val_any);
-                  Vx.Core.Type_any output_11 = 
+                  Vx.Core.Type_any output_1 = 
                     Vx.Core.f_new(
                       Vx.Core.t_string,
                       Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -2827,7 +2827,7 @@ public class CoreTest {
                         val
                       )
                     );
-                  return output_11;
+                  return output_1;
                 })
               )
             )
@@ -3099,9 +3099,9 @@ public class CoreTest {
                 Vx.Core.t_int,
                 Vx.Core.t_any_from_func.vx_fn_new(() => {
                   
-                  Vx.Core.Type_any output_12 = 
+                  Vx.Core.Type_any output_1 = 
                     Vx.Core.f_plus(Vx.Core.vx_new_int(1), Vx.Core.vx_new_int(3));
-                  return output_12;
+                  return output_1;
                 })
               )
             )
@@ -3131,9 +3131,9 @@ public class CoreTest {
                 Vx.Core.t_int,
                 Vx.Core.t_any_from_func.vx_fn_new(() => {
                   
-                  Vx.Core.Type_any output_13 = 
+                  Vx.Core.Type_any output_1 = 
                     Vx.Core.f_plus(Vx.Core.vx_new_int(1), Vx.Core.vx_new_int(3));
-                  return output_13;
+                  return output_1;
                 })
               )
             )

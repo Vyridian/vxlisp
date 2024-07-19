@@ -31,12 +31,13 @@ public final class State {
     @Override
     public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
       Core.Type_boolean output = Core.c_false;
-      if (value instanceof Core.Type_any) {
+      if (false) {
+      } else if (value instanceof Core.Type_any) {
+        Core.Type_any castval = (Core.Type_any)value;;
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
         }
-        Core.Type_any castval = (Core.Type_any)value;
         Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>(this.vx_p_map);
         if (castval == Core.e_any) {
           map.remove(key);
@@ -129,8 +130,10 @@ public final class State {
           }
         } else {
           Core.Type_any valany = null;
-          if (valsub instanceof Core.Type_any) {
-            valany = (Core.Type_any)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_any) {
+            Core.Type_any valallowed = (Core.Type_any)valsub;;
+            valany = valallowed;
           } else if (valsub instanceof Core.Type_any) {
             valany = (Core.Type_any)valsub;
           } else {

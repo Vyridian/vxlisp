@@ -153,16 +153,17 @@ public static class Tree {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -186,9 +187,9 @@ public static class Tree {
           switch (key) {
           case ":id":
             if (valsub == vx_p_id) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valid) {
               ischanged = true;
-              vx_p_id = (Vx.Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -209,9 +210,9 @@ public static class Tree {
             break;
           case ":brancharrow":
             if (valsub == vx_p_brancharrow) {
-            } else if (valsub is Vx.Data.Tree.Type_brancharrow) {
+            } else if (valsub is Vx.Data.Tree.Type_brancharrow valbrancharrow) {
               ischanged = true;
-              vx_p_brancharrow = (Vx.Data.Tree.Type_brancharrow)valsub;
+              vx_p_brancharrow = valbrancharrow;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -229,9 +230,9 @@ public static class Tree {
             break;
           case ":branchlist":
             if (valsub == vx_p_branchlist) {
-            } else if (valsub is Vx.Data.Tree.Type_branchlist) {
+            } else if (valsub is Vx.Data.Tree.Type_branchlist valbranchlist) {
               ischanged = true;
-              vx_p_branchlist = (Vx.Data.Tree.Type_branchlist)valsub;
+              vx_p_branchlist = valbranchlist;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -249,9 +250,9 @@ public static class Tree {
             break;
           case ":leaflist":
             if (valsub == vx_p_leaflist) {
-            } else if (valsub is Vx.Data.Tree.Type_leaflist) {
+            } else if (valsub is Vx.Data.Tree.Type_leaflist valleaflist) {
               ischanged = true;
-              vx_p_leaflist = (Vx.Data.Tree.Type_leaflist)valsub;
+              vx_p_leaflist = valleaflist;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -269,9 +270,9 @@ public static class Tree {
             break;
           case ":parentbranch":
             if (valsub == vx_p_parentbranch) {
-            } else if (valsub is Vx.Data.Tree.Type_branch) {
+            } else if (valsub is Vx.Data.Tree.Type_branch valparentbranch) {
               ischanged = true;
-              vx_p_parentbranch = (Vx.Data.Tree.Type_branch)valsub;
+              vx_p_parentbranch = valparentbranch;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -289,9 +290,9 @@ public static class Tree {
             break;
           case ":tree":
             if (valsub == vx_p_tree) {
-            } else if (valsub is Vx.Data.Tree.Type_tree) {
+            } else if (valsub is Vx.Data.Tree.Type_tree valtree) {
               ischanged = true;
-              vx_p_tree = (Vx.Data.Tree.Type_tree)valsub;
+              vx_p_tree = valtree;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -487,14 +488,13 @@ public static class Tree {
         } else if (valsub is Vx.Data.Tree.Type_branch) {
           ischanged = true;
           listval.Add((Vx.Data.Tree.Type_branch)valsub);
-        } else if (valsub is Vx.Data.Tree.Type_branchlist) {
-          Type_branchlist multi = (Type_branchlist)valsub;
+        } else if (valsub is Vx.Data.Tree.Type_branchlist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listbranch());
         } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
-            if (item is Vx.Data.Tree.Type_branch) {
-              Vx.Data.Tree.Type_branch valitem = (Vx.Data.Tree.Type_branch)item;
+            if (false) {
+            } else if (item is Vx.Data.Tree.Type_branch valitem) {
               ischanged = true;
               listval.Add(valitem);
             }
@@ -645,16 +645,17 @@ public static class Tree {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -678,9 +679,9 @@ public static class Tree {
           switch (key) {
           case ":id":
             if (valsub == vx_p_id) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valid) {
               ischanged = true;
-              vx_p_id = (Vx.Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -701,9 +702,9 @@ public static class Tree {
             break;
           case ":name":
             if (valsub == vx_p_name) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
-              vx_p_name = (Vx.Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -724,9 +725,9 @@ public static class Tree {
             break;
           case ":value":
             if (valsub == vx_p_value) {
-            } else if (valsub is Vx.Core.Type_any) {
+            } else if (valsub is Vx.Core.Type_any valvalue) {
               ischanged = true;
-              vx_p_value = (Vx.Core.Type_any)valsub;
+              vx_p_value = valvalue;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -858,14 +859,13 @@ public static class Tree {
         } else if (valsub is Vx.Data.Tree.Type_leaf) {
           ischanged = true;
           listval.Add((Vx.Data.Tree.Type_leaf)valsub);
-        } else if (valsub is Vx.Data.Tree.Type_leaflist) {
-          Type_leaflist multi = (Type_leaflist)valsub;
+        } else if (valsub is Vx.Data.Tree.Type_leaflist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listleaf());
         } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
-            if (item is Vx.Data.Tree.Type_leaf) {
-              Vx.Data.Tree.Type_leaf valitem = (Vx.Data.Tree.Type_leaf)item;
+            if (false) {
+            } else if (item is Vx.Data.Tree.Type_leaf valitem) {
               ischanged = true;
               listval.Add(valitem);
             }
@@ -1016,16 +1016,17 @@ public static class Tree {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -1049,9 +1050,9 @@ public static class Tree {
           switch (key) {
           case ":id":
             if (valsub == vx_p_id) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valid) {
               ischanged = true;
-              vx_p_id = (Vx.Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -1072,9 +1073,9 @@ public static class Tree {
             break;
           case ":name":
             if (valsub == vx_p_name) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
-              vx_p_name = (Vx.Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -1095,9 +1096,9 @@ public static class Tree {
             break;
           case ":branch":
             if (valsub == vx_p_branch) {
-            } else if (valsub is Vx.Data.Tree.Type_branch) {
+            } else if (valsub is Vx.Data.Tree.Type_branch valbranch) {
               ischanged = true;
-              vx_p_branch = (Vx.Data.Tree.Type_branch)valsub;
+              vx_p_branch = valbranch;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {

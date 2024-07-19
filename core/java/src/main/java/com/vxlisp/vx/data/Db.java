@@ -85,16 +85,20 @@ public final class Db {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -119,8 +123,9 @@ public final class Db {
           case ":dbid":
             if (valsub == vx_p_dbid) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valdbid = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_dbid = (Core.Type_string)valsub;
+              vx_p_dbid = valdbid;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_dbid = Core.vx_new(Core.t_string, valsub);
@@ -338,16 +343,20 @@ public final class Db {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -372,8 +381,9 @@ public final class Db {
           case ":dbcellid":
             if (valsub == vx_p_dbcellid) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valdbcellid = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_dbcellid = (Core.Type_string)valsub;
+              vx_p_dbcellid = valdbcellid;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_dbcellid = Core.vx_new(Core.t_string, valsub);
@@ -396,8 +406,9 @@ public final class Db {
           case ":dbcellmap":
             if (valsub == vx_p_dbcellmap) {
             } else if (valsub instanceof Db.Type_dbcellmap) {
+              Db.Type_dbcellmap valdbcellmap = (Db.Type_dbcellmap)valsub;;
               ischanged = true;
-              vx_p_dbcellmap = (Db.Type_dbcellmap)valsub;
+              vx_p_dbcellmap = valdbcellmap;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -417,8 +428,9 @@ public final class Db {
           case ":dbfieldmap":
             if (valsub == vx_p_dbfieldmap) {
             } else if (valsub instanceof Db.Type_dbfieldmap) {
+              Db.Type_dbfieldmap valdbfieldmap = (Db.Type_dbfieldmap)valsub;;
               ischanged = true;
-              vx_p_dbfieldmap = (Db.Type_dbfieldmap)valsub;
+              vx_p_dbfieldmap = valdbfieldmap;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -438,8 +450,9 @@ public final class Db {
           case ":dbparent":
             if (valsub == vx_p_dbparent) {
             } else if (valsub instanceof Db.Type_dbcell) {
+              Db.Type_dbcell valdbparent = (Db.Type_dbcell)valsub;;
               ischanged = true;
-              vx_p_dbparent = (Db.Type_dbcell)valsub;
+              vx_p_dbparent = valdbparent;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -459,8 +472,9 @@ public final class Db {
           case ":dbtable":
             if (valsub == vx_p_dbtable) {
             } else if (valsub instanceof Db.Type_dbtable) {
+              Db.Type_dbtable valdbtable = (Db.Type_dbtable)valsub;;
               ischanged = true;
-              vx_p_dbtable = (Db.Type_dbtable)valsub;
+              vx_p_dbtable = valdbtable;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -559,12 +573,13 @@ public final class Db {
     @Override
     public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
       Core.Type_boolean output = Core.c_false;
-      if (value instanceof Db.Type_dbcell) {
+      if (false) {
+      } else if (value instanceof Db.Type_dbcell) {
+        Db.Type_dbcell castval = (Db.Type_dbcell)value;;
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
         }
-        Db.Type_dbcell castval = (Db.Type_dbcell)value;
         Map<String, Db.Type_dbcell> map = new LinkedHashMap<String, Db.Type_dbcell>(this.vx_p_map);
         if (castval == Db.e_dbcell) {
           map.remove(key);
@@ -667,8 +682,10 @@ public final class Db {
           }
         } else {
           Db.Type_dbcell valany = null;
-          if (valsub instanceof Db.Type_dbcell) {
-            valany = (Db.Type_dbcell)valsub;
+          if (false) {
+          } else if (valsub instanceof Db.Type_dbcell) {
+            Db.Type_dbcell valallowed = (Db.Type_dbcell)valsub;;
+            valany = valallowed;
           } else if (valsub instanceof Db.Type_dbcell) {
             valany = (Db.Type_dbcell)valsub;
           } else {
@@ -849,16 +866,20 @@ public final class Db {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -883,8 +904,9 @@ public final class Db {
           case ":dbfieldid":
             if (valsub == vx_p_dbfieldid) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valdbfieldid = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_dbfieldid = (Core.Type_string)valsub;
+              vx_p_dbfieldid = valdbfieldid;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_dbfieldid = Core.vx_new(Core.t_string, valsub);
@@ -907,8 +929,9 @@ public final class Db {
           case ":type":
             if (valsub == vx_p_type) {
             } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valtype = (Core.Type_any)valsub;;
               ischanged = true;
-              vx_p_type = (Core.Type_any)valsub;
+              vx_p_type = valtype;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -928,8 +951,9 @@ public final class Db {
           case ":value":
             if (valsub == vx_p_value) {
             } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valvalue = (Core.Type_any)valsub;;
               ischanged = true;
-              vx_p_value = (Core.Type_any)valsub;
+              vx_p_value = valvalue;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -1026,12 +1050,13 @@ public final class Db {
     @Override
     public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
       Core.Type_boolean output = Core.c_false;
-      if (value instanceof Db.Type_dbfield) {
+      if (false) {
+      } else if (value instanceof Db.Type_dbfield) {
+        Db.Type_dbfield castval = (Db.Type_dbfield)value;;
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
         }
-        Db.Type_dbfield castval = (Db.Type_dbfield)value;
         Map<String, Db.Type_dbfield> map = new LinkedHashMap<String, Db.Type_dbfield>(this.vx_p_map);
         if (castval == Db.e_dbfield) {
           map.remove(key);
@@ -1134,8 +1159,10 @@ public final class Db {
           }
         } else {
           Db.Type_dbfield valany = null;
-          if (valsub instanceof Db.Type_dbfield) {
-            valany = (Db.Type_dbfield)valsub;
+          if (false) {
+          } else if (valsub instanceof Db.Type_dbfield) {
+            Db.Type_dbfield valallowed = (Db.Type_dbfield)valsub;;
+            valany = valallowed;
           } else if (valsub instanceof Db.Type_dbfield) {
             valany = (Db.Type_dbfield)valsub;
           } else {
@@ -1369,16 +1396,20 @@ public final class Db {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -1403,8 +1434,9 @@ public final class Db {
           case ":fromid":
             if (valsub == vx_p_fromid) {
             } else if (valsub instanceof Db.Type_dbid) {
+              Db.Type_dbid valfromid = (Db.Type_dbid)valsub;;
               ischanged = true;
-              vx_p_fromid = (Db.Type_dbid)valsub;
+              vx_p_fromid = valfromid;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -1424,8 +1456,9 @@ public final class Db {
           case ":toid":
             if (valsub == vx_p_toid) {
             } else if (valsub instanceof Db.Type_dbid) {
+              Db.Type_dbid valtoid = (Db.Type_dbid)valsub;;
               ischanged = true;
-              vx_p_toid = (Db.Type_dbid)valsub;
+              vx_p_toid = valtoid;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -1573,14 +1606,15 @@ public final class Db {
           ischanged = true;
           listval.add((Db.Type_dblink)valsub);
         } else if (valsub instanceof Db.Type_dblinklist) {
-          Type_dblinklist multi = (Type_dblinklist)valsub;
+          Db.Type_dblinklist multi = (Db.Type_dblinklist)valsub;;
           ischanged = true;
           listval.addAll(multi.vx_listdblink());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
-            if (item instanceof Db.Type_dblink) {
-              Db.Type_dblink valitem = (Db.Type_dblink)item;
+            if (false) {
+            } else if (item instanceof Db.Type_dblink) {
+              Db.Type_dblink valitem = (Db.Type_dblink)item;;
               ischanged = true;
               listval.add(valitem);
             }
@@ -1729,16 +1763,20 @@ public final class Db {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -1763,8 +1801,9 @@ public final class Db {
           case ":dbid":
             if (valsub == vx_p_dbid) {
             } else if (valsub instanceof Db.Type_dbid) {
+              Db.Type_dbid valdbid = (Db.Type_dbid)valsub;;
               ischanged = true;
-              vx_p_dbid = (Db.Type_dbid)valsub;
+              vx_p_dbid = valdbid;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -1784,8 +1823,9 @@ public final class Db {
           case ":links":
             if (valsub == vx_p_links) {
             } else if (valsub instanceof Db.Type_dblinklist) {
+              Db.Type_dblinklist vallinks = (Db.Type_dblinklist)valsub;;
               ischanged = true;
-              vx_p_links = (Db.Type_dblinklist)valsub;
+              vx_p_links = vallinks;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -2001,16 +2041,20 @@ public final class Db {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -2035,8 +2079,9 @@ public final class Db {
           case ":dbid":
             if (valsub == vx_p_dbid) {
             } else if (valsub instanceof Db.Type_dbid) {
+              Db.Type_dbid valdbid = (Db.Type_dbid)valsub;;
               ischanged = true;
-              vx_p_dbid = (Db.Type_dbid)valsub;
+              vx_p_dbid = valdbid;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -2056,8 +2101,9 @@ public final class Db {
           case ":valid":
             if (valsub == vx_p_valid) {
             } else if (valsub instanceof Db.Type_dbid) {
+              Db.Type_dbid valvalid = (Db.Type_dbid)valsub;;
               ischanged = true;
-              vx_p_valid = (Db.Type_dbid)valsub;
+              vx_p_valid = valvalid;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -2077,8 +2123,9 @@ public final class Db {
           case ":noteid":
             if (valsub == vx_p_noteid) {
             } else if (valsub instanceof Db.Type_dbid) {
+              Db.Type_dbid valnoteid = (Db.Type_dbid)valsub;;
               ischanged = true;
-              vx_p_noteid = (Db.Type_dbid)valsub;
+              vx_p_noteid = valnoteid;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -2098,8 +2145,9 @@ public final class Db {
           case ":valueid":
             if (valsub == vx_p_valueid) {
             } else if (valsub instanceof Db.Type_dbid) {
+              Db.Type_dbid valvalueid = (Db.Type_dbid)valsub;;
               ischanged = true;
-              vx_p_valueid = (Db.Type_dbid)valsub;
+              vx_p_valueid = valvalueid;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -2119,8 +2167,9 @@ public final class Db {
           case ":value":
             if (valsub == vx_p_value) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valvalue = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_value = (Core.Type_string)valsub;
+              vx_p_value = valvalue;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_value = Core.vx_new(Core.t_string, valsub);
@@ -2324,16 +2373,20 @@ public final class Db {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -2358,8 +2411,9 @@ public final class Db {
           case ":dbtableid":
             if (valsub == vx_p_dbtableid) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valdbtableid = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_dbtableid = (Core.Type_string)valsub;
+              vx_p_dbtableid = valdbtableid;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_dbtableid = Core.vx_new(Core.t_string, valsub);
@@ -2382,8 +2436,9 @@ public final class Db {
           case ":db":
             if (valsub == vx_p_db) {
             } else if (valsub instanceof Db.Type_db) {
+              Db.Type_db valdb = (Db.Type_db)valsub;;
               ischanged = true;
-              vx_p_db = (Db.Type_db)valsub;
+              vx_p_db = valdb;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -2403,8 +2458,9 @@ public final class Db {
           case ":dbcellmap":
             if (valsub == vx_p_dbcellmap) {
             } else if (valsub instanceof Db.Type_dbcellmap) {
+              Db.Type_dbcellmap valdbcellmap = (Db.Type_dbcellmap)valsub;;
               ischanged = true;
-              vx_p_dbcellmap = (Db.Type_dbcellmap)valsub;
+              vx_p_dbcellmap = valdbcellmap;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -2424,8 +2480,9 @@ public final class Db {
           case ":dbfieldmap":
             if (valsub == vx_p_dbfieldmap) {
             } else if (valsub instanceof Db.Type_dbfieldmap) {
+              Db.Type_dbfieldmap valdbfieldmap = (Db.Type_dbfieldmap)valsub;;
               ischanged = true;
-              vx_p_dbfieldmap = (Db.Type_dbfieldmap)valsub;
+              vx_p_dbfieldmap = valdbfieldmap;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -2661,16 +2718,20 @@ public final class Db {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -2695,8 +2756,9 @@ public final class Db {
           case ":dbid":
             if (valsub == vx_p_dbid) {
             } else if (valsub instanceof Db.Type_dbid) {
+              Db.Type_dbid valdbid = (Db.Type_dbid)valsub;;
               ischanged = true;
-              vx_p_dbid = (Db.Type_dbid)valsub;
+              vx_p_dbid = valdbid;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -2716,8 +2778,9 @@ public final class Db {
           case ":fromid":
             if (valsub == vx_p_fromid) {
             } else if (valsub instanceof Db.Type_dbid) {
+              Db.Type_dbid valfromid = (Db.Type_dbid)valsub;;
               ischanged = true;
-              vx_p_fromid = (Db.Type_dbid)valsub;
+              vx_p_fromid = valfromid;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -2737,8 +2800,9 @@ public final class Db {
           case ":toid":
             if (valsub == vx_p_toid) {
             } else if (valsub instanceof Db.Type_dbid) {
+              Db.Type_dbid valtoid = (Db.Type_dbid)valsub;;
               ischanged = true;
-              vx_p_toid = (Db.Type_dbid)valsub;
+              vx_p_toid = valtoid;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -2758,8 +2822,9 @@ public final class Db {
           case ":noteid":
             if (valsub == vx_p_noteid) {
             } else if (valsub instanceof Db.Type_dbid) {
+              Db.Type_dbid valnoteid = (Db.Type_dbid)valsub;;
               ischanged = true;
-              vx_p_noteid = (Db.Type_dbid)valsub;
+              vx_p_noteid = valnoteid;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -2779,8 +2844,9 @@ public final class Db {
           case ":valid":
             if (valsub == vx_p_valid) {
             } else if (valsub instanceof Db.Type_dbid) {
+              Db.Type_dbid valvalid = (Db.Type_dbid)valsub;;
               ischanged = true;
-              vx_p_valid = (Db.Type_dbid)valsub;
+              vx_p_valid = valvalid;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -2800,8 +2866,9 @@ public final class Db {
           case ":valtext":
             if (valsub == vx_p_valtext) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valvaltext = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_valtext = (Core.Type_string)valsub;
+              vx_p_valtext = valvaltext;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_valtext = Core.vx_new(Core.t_string, valsub);

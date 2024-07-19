@@ -15,19 +15,19 @@ public static class State {
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)this.vx_p_map;
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
 
     public Vx.Core.Type_boolean vx_set(Vx.Core.Type_string name, Vx.Core.Type_any value) {
       Vx.Core.Type_boolean output = Vx.Core.c_false;
-      if (value is Vx.Core.Type_any) {
+      if (false) {
+      } else if (value is Vx.Core.Type_any castval) {
         string key = name.vx_string();
         if (key.StartsWith(":")) {
           key = key.Substring(1);
         }
-        Vx.Core.Type_any castval = (Vx.Core.Type_any)value;
         Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>(this.vx_p_map);
         if (castval == Vx.Core.e_any) {
           map.remove(key);
@@ -112,8 +112,9 @@ public static class State {
           }
         } else {
           Vx.Core.Type_any? valany = null;
-          if (valsub is Vx.Core.Type_any) {
-            valany = (Vx.Core.Type_any)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_any valallowed) {
+            valany = valallowed;
           } else if (valsub is Vx.Core.Type_any) {
             valany = valsub as Vx.Core.Type_any;
           } else {

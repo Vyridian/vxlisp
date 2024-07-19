@@ -1,2 +1,2 @@
 cls
-dotnet test ./src/App
+dotnet test ./test/AppTest

@@ -1314,6 +1314,7 @@
       work = fn_reduce->vx_any_from_reduce(work, item);
     };
     output = vx_core::vx_any_from_any(generic_any_1, work);"
+  :csharp :auto
   :java :auto
   :js
    "output = valstart
@@ -1431,9 +1432,10 @@
   start     : any-1
   fn-reduce : any<-any-key-value :: any-1 :: any-1]
  (native
-  :cpp  :auto
-  :java :auto
-  :js   :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         "xayb"
         (any<-map-start-reduce
@@ -1539,9 +1541,10 @@
   name     : string
   value    : any-1]
  (native
-  :cpp  :auto
-  :java :auto
-  :js   :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         (stringmutablemap
          :b "y"
@@ -1899,6 +1902,8 @@
   :cpp
    "vx_core::Type_any any = vx_core::vx_if_thenelselist(generic_any_1, thenelselist);
     output = vx_core::vx_any_from_any(generic_any_1, any);"
+  :csharp :auto
+  :java :auto
   :js
    "let fn_any = null
     for (const thenelseval of thenelselist) {
@@ -1922,31 +1927,6 @@
         output = fn()
         break
       }
-    }"
-  :java :auto
-  :java1
-   "Core.Func_any_from_func fn_any = Core.vx_any_first_from_list_fn(Core.t_any_from_func, thenelselist, (any) -> {
-      Core.Func_any_from_func fnany = null;
-      if (any instanceof Core.Type_thenelse) {
-        Core.Type_thenelse thenelse = (Core.Type_thenelse)any;
-        Core.Type_string code = thenelse.code();
-        switch (code.vx_string()) {
-        case “:then”:
-          Core.Func_boolean_from_func fn_cond = thenelse.fn_cond();
-          Core.Type_boolean cond = fn_cond.vx_boolean_from_func();
-          if (cond.vx_boolean() == true) {
-            fnany = thenelse.fn_any();
-          }
-          break;
-        case “:else”:
-          fnany = thenelse.fn_any();
-          break;
-        }
-      }
-      return fnany;
-    });
-    if (fn_any != null) {
-      output = fn_any.vx_any_from_func(generic_any_1);
     }")
  :doc  "Logical If function"
  :test (test-true
@@ -2324,9 +2304,10 @@
  [values          : list-2
   fn-any<-int-any : any<-int-any]
  (native
-  :cpp  :auto
-  :java :auto
-  :js   :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         (stringlist "a1" "b2")
         (list<-list-intany : stringlist
@@ -2975,9 +2956,10 @@
   :cpp
    "std::string soutput = vx_core::vx_string_from_any_indent(value, indent->vx_int(), linefeed->vx_boolean(), false);
     output = vx_core::vx_new_string(soutput);"
+  :csharp :auto
+  :java :auto
   :js
-   "output = vx_core.vx_string_from_any_indent(value, indent, linefeed)"
-  :java :auto)
+   "output = vx_core.vx_string_from_any_indent(value, indent, linefeed)")
  :doc "Return a string representation of a value")
 
 (func string<-func : string
@@ -2989,9 +2971,10 @@
   find    : string
   replace : string]
  (native
-  :cpp  :auto
-  :java :auto
-  :js   :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         "a!b!c"
         (string<-string-find-replace

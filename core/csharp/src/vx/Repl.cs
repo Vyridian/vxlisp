@@ -70,14 +70,13 @@ public static class Repl {
         } else if (valsub is Vx.Core.Type_string) {
           ischanged = true;
           listval.Add(Vx.Core.vx_new(Vx.Core.t_string, valsub));
-        } else if (valsub is Vx.Repl.Type_liblist) {
-          Type_liblist multi = (Type_liblist)valsub;
+        } else if (valsub is Vx.Repl.Type_liblist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_liststring());
         } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
-            if (item is Vx.Core.Type_string) {
-              Vx.Core.Type_string valitem = (Vx.Core.Type_string)item;
+            if (false) {
+            } else if (item is Vx.Core.Type_string valitem) {
               ischanged = true;
               listval.Add(valitem);
             }
@@ -280,16 +279,17 @@ public static class Repl {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -313,9 +313,9 @@ public static class Repl {
           switch (key) {
           case ":name":
             if (valsub == vx_p_name) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
-              vx_p_name = (Vx.Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -336,9 +336,9 @@ public static class Repl {
             break;
           case ":type":
             if (valsub == vx_p_type) {
-            } else if (valsub is Vx.Core.Type_any) {
+            } else if (valsub is Vx.Core.Type_any valtype) {
               ischanged = true;
-              vx_p_type = (Vx.Core.Type_any)valsub;
+              vx_p_type = valtype;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -356,9 +356,9 @@ public static class Repl {
             break;
           case ":repllist":
             if (valsub == vx_p_repllist) {
-            } else if (valsub is Vx.Repl.Type_repllist) {
+            } else if (valsub is Vx.Repl.Type_repllist valrepllist) {
               ischanged = true;
-              vx_p_repllist = (Vx.Repl.Type_repllist)valsub;
+              vx_p_repllist = valrepllist;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -376,9 +376,9 @@ public static class Repl {
             break;
           case ":async":
             if (valsub == vx_p_async) {
-            } else if (valsub is Vx.Core.Type_boolean) {
+            } else if (valsub is Vx.Core.Type_boolean valasync) {
               ischanged = true;
-              vx_p_async = (Vx.Core.Type_boolean)valsub;
+              vx_p_async = valasync;
             } else if (valsub is bool) {
               ischanged = true;
               vx_p_async = Vx.Core.vx_new(Vx.Core.t_boolean, valsub);
@@ -399,9 +399,9 @@ public static class Repl {
             break;
           case ":val":
             if (valsub == vx_p_val) {
-            } else if (valsub is Vx.Core.Type_any) {
+            } else if (valsub is Vx.Core.Type_any valval) {
               ischanged = true;
-              vx_p_val = (Vx.Core.Type_any)valsub;
+              vx_p_val = valval;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -419,9 +419,9 @@ public static class Repl {
             break;
           case ":doc":
             if (valsub == vx_p_doc) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valdoc) {
               ischanged = true;
-              vx_p_doc = (Vx.Core.Type_string)valsub;
+              vx_p_doc = valdoc;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_doc = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -593,16 +593,17 @@ public static class Repl {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -626,9 +627,9 @@ public static class Repl {
           switch (key) {
           case ":key":
             if (valsub == vx_p_key) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valkey) {
               ischanged = true;
-              vx_p_key = (Vx.Core.Type_string)valsub;
+              vx_p_key = valkey;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_key = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -649,9 +650,9 @@ public static class Repl {
             break;
           case ":current":
             if (valsub == vx_p_current) {
-            } else if (valsub is Vx.Repl.Type_repl) {
+            } else if (valsub is Vx.Repl.Type_repl valcurrent) {
               ischanged = true;
-              vx_p_current = (Vx.Repl.Type_repl)valsub;
+              vx_p_current = valcurrent;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -669,9 +670,9 @@ public static class Repl {
             break;
           case ":repllist":
             if (valsub == vx_p_repllist) {
-            } else if (valsub is Vx.Repl.Type_repllist) {
+            } else if (valsub is Vx.Repl.Type_repllist valrepllist) {
               ischanged = true;
-              vx_p_repllist = (Vx.Repl.Type_repllist)valsub;
+              vx_p_repllist = valrepllist;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -804,14 +805,13 @@ public static class Repl {
         } else if (valsub is Vx.Repl.Type_repl) {
           ischanged = true;
           listval.Add((Vx.Repl.Type_repl)valsub);
-        } else if (valsub is Vx.Repl.Type_repllist) {
-          Type_repllist multi = (Type_repllist)valsub;
+        } else if (valsub is Vx.Repl.Type_repllist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listrepl());
         } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
-            if (item is Vx.Repl.Type_repl) {
-              Vx.Repl.Type_repl valitem = (Vx.Repl.Type_repl)item;
+            if (false) {
+            } else if (item is Vx.Repl.Type_repl valitem) {
               ischanged = true;
               listval.Add(valitem);
             }

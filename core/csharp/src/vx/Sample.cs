@@ -85,16 +85,17 @@ public static class Sample {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -118,9 +119,9 @@ public static class Sample {
           switch (key) {
           case ":mynum":
             if (valsub == vx_p_mynum) {
-            } else if (valsub is Vx.Core.Type_int) {
+            } else if (valsub is Vx.Core.Type_int valmynum) {
               ischanged = true;
-              vx_p_mynum = (Vx.Core.Type_int)valsub;
+              vx_p_mynum = valmynum;
             } else if (valsub is int) {
               ischanged = true;
               vx_p_mynum = Vx.Core.vx_new(Vx.Core.t_int, valsub);
@@ -141,9 +142,9 @@ public static class Sample {
             break;
           case ":mystr":
             if (valsub == vx_p_mystr) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valmystr) {
               ischanged = true;
-              vx_p_mystr = (Vx.Core.Type_string)valsub;
+              vx_p_mystr = valmystr;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_mystr = Vx.Core.vx_new(Vx.Core.t_string, valsub);

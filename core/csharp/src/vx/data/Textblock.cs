@@ -137,16 +137,17 @@ public static class Textblock {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -170,9 +171,9 @@ public static class Textblock {
           switch (key) {
           case ":name":
             if (valsub == vx_p_name) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
-              vx_p_name = (Vx.Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -193,9 +194,9 @@ public static class Textblock {
             break;
           case ":starttext":
             if (valsub == vx_p_starttext) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valstarttext) {
               ischanged = true;
-              vx_p_starttext = (Vx.Core.Type_string)valsub;
+              vx_p_starttext = valstarttext;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_starttext = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -216,9 +217,9 @@ public static class Textblock {
             break;
           case ":endtext":
             if (valsub == vx_p_endtext) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valendtext) {
               ischanged = true;
-              vx_p_endtext = (Vx.Core.Type_string)valsub;
+              vx_p_endtext = valendtext;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_endtext = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -239,9 +240,9 @@ public static class Textblock {
             break;
           case ":pos":
             if (valsub == vx_p_pos) {
-            } else if (valsub is Vx.Core.Type_int) {
+            } else if (valsub is Vx.Core.Type_int valpos) {
               ischanged = true;
-              vx_p_pos = (Vx.Core.Type_int)valsub;
+              vx_p_pos = valpos;
             } else if (valsub is int) {
               ischanged = true;
               vx_p_pos = Vx.Core.vx_new(Vx.Core.t_int, valsub);
@@ -262,9 +263,9 @@ public static class Textblock {
             break;
           case ":delimlist":
             if (valsub == vx_p_delimlist) {
-            } else if (valsub is Vx.Data.Textblock.Type_delimlist) {
+            } else if (valsub is Vx.Data.Textblock.Type_delimlist valdelimlist) {
               ischanged = true;
-              vx_p_delimlist = (Vx.Data.Textblock.Type_delimlist)valsub;
+              vx_p_delimlist = valdelimlist;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -399,14 +400,13 @@ public static class Textblock {
         } else if (valsub is Vx.Data.Textblock.Type_delim) {
           ischanged = true;
           listval.Add((Vx.Data.Textblock.Type_delim)valsub);
-        } else if (valsub is Vx.Data.Textblock.Type_delimlist) {
-          Type_delimlist multi = (Type_delimlist)valsub;
+        } else if (valsub is Vx.Data.Textblock.Type_delimlist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listdelim());
         } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
-            if (item is Vx.Data.Textblock.Type_delim) {
-              Vx.Data.Textblock.Type_delim valitem = (Vx.Data.Textblock.Type_delim)item;
+            if (false) {
+            } else if (item is Vx.Data.Textblock.Type_delim valitem) {
               ischanged = true;
               listval.Add(valitem);
             }
@@ -694,16 +694,17 @@ public static class Textblock {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -727,9 +728,9 @@ public static class Textblock {
           switch (key) {
           case ":name":
             if (valsub == vx_p_name) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
-              vx_p_name = (Vx.Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -750,9 +751,9 @@ public static class Textblock {
             break;
           case ":text":
             if (valsub == vx_p_text) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valtext) {
               ischanged = true;
-              vx_p_text = (Vx.Core.Type_string)valsub;
+              vx_p_text = valtext;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_text = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -773,9 +774,9 @@ public static class Textblock {
             break;
           case ":startpos":
             if (valsub == vx_p_startpos) {
-            } else if (valsub is Vx.Core.Type_int) {
+            } else if (valsub is Vx.Core.Type_int valstartpos) {
               ischanged = true;
-              vx_p_startpos = (Vx.Core.Type_int)valsub;
+              vx_p_startpos = valstartpos;
             } else if (valsub is int) {
               ischanged = true;
               vx_p_startpos = Vx.Core.vx_new(Vx.Core.t_int, valsub);
@@ -796,9 +797,9 @@ public static class Textblock {
             break;
           case ":endpos":
             if (valsub == vx_p_endpos) {
-            } else if (valsub is Vx.Core.Type_int) {
+            } else if (valsub is Vx.Core.Type_int valendpos) {
               ischanged = true;
-              vx_p_endpos = (Vx.Core.Type_int)valsub;
+              vx_p_endpos = valendpos;
             } else if (valsub is int) {
               ischanged = true;
               vx_p_endpos = Vx.Core.vx_new(Vx.Core.t_int, valsub);
@@ -819,9 +820,9 @@ public static class Textblock {
             break;
           case ":curpos":
             if (valsub == vx_p_curpos) {
-            } else if (valsub is Vx.Core.Type_int) {
+            } else if (valsub is Vx.Core.Type_int valcurpos) {
               ischanged = true;
-              vx_p_curpos = (Vx.Core.Type_int)valsub;
+              vx_p_curpos = valcurpos;
             } else if (valsub is int) {
               ischanged = true;
               vx_p_curpos = Vx.Core.vx_new(Vx.Core.t_int, valsub);
@@ -842,9 +843,9 @@ public static class Textblock {
             break;
           case ":line":
             if (valsub == vx_p_line) {
-            } else if (valsub is Vx.Core.Type_int) {
+            } else if (valsub is Vx.Core.Type_int valline) {
               ischanged = true;
-              vx_p_line = (Vx.Core.Type_int)valsub;
+              vx_p_line = valline;
             } else if (valsub is int) {
               ischanged = true;
               vx_p_line = Vx.Core.vx_new(Vx.Core.t_int, valsub);
@@ -865,9 +866,9 @@ public static class Textblock {
             break;
           case ":column":
             if (valsub == vx_p_column) {
-            } else if (valsub is Vx.Core.Type_int) {
+            } else if (valsub is Vx.Core.Type_int valcolumn) {
               ischanged = true;
-              vx_p_column = (Vx.Core.Type_int)valsub;
+              vx_p_column = valcolumn;
             } else if (valsub is int) {
               ischanged = true;
               vx_p_column = Vx.Core.vx_new(Vx.Core.t_int, valsub);
@@ -888,9 +889,9 @@ public static class Textblock {
             break;
           case ":delim":
             if (valsub == vx_p_delim) {
-            } else if (valsub is Vx.Data.Textblock.Type_delim) {
+            } else if (valsub is Vx.Data.Textblock.Type_delim valdelim) {
               ischanged = true;
-              vx_p_delim = (Vx.Data.Textblock.Type_delim)valsub;
+              vx_p_delim = valdelim;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -908,9 +909,9 @@ public static class Textblock {
             break;
           case ":close":
             if (valsub == vx_p_close) {
-            } else if (valsub is Vx.Data.Textblock.Type_delim) {
+            } else if (valsub is Vx.Data.Textblock.Type_delim valclose) {
               ischanged = true;
-              vx_p_close = (Vx.Data.Textblock.Type_delim)valsub;
+              vx_p_close = valclose;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -928,9 +929,9 @@ public static class Textblock {
             break;
           case ":parent":
             if (valsub == vx_p_parent) {
-            } else if (valsub is Vx.Data.Textblock.Type_textblock) {
+            } else if (valsub is Vx.Data.Textblock.Type_textblock valparent) {
               ischanged = true;
-              vx_p_parent = (Vx.Data.Textblock.Type_textblock)valsub;
+              vx_p_parent = valparent;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -948,9 +949,9 @@ public static class Textblock {
             break;
           case ":children":
             if (valsub == vx_p_children) {
-            } else if (valsub is Vx.Data.Textblock.Type_textblocklist) {
+            } else if (valsub is Vx.Data.Textblock.Type_textblocklist valchildren) {
               ischanged = true;
-              vx_p_children = (Vx.Data.Textblock.Type_textblocklist)valsub;
+              vx_p_children = valchildren;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -1091,14 +1092,13 @@ public static class Textblock {
         } else if (valsub is Vx.Data.Textblock.Type_textblock) {
           ischanged = true;
           listval.Add((Vx.Data.Textblock.Type_textblock)valsub);
-        } else if (valsub is Vx.Data.Textblock.Type_textblocklist) {
-          Type_textblocklist multi = (Type_textblocklist)valsub;
+        } else if (valsub is Vx.Data.Textblock.Type_textblocklist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listtextblock());
         } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
-            if (item is Vx.Data.Textblock.Type_textblock) {
-              Vx.Data.Textblock.Type_textblock valitem = (Vx.Data.Textblock.Type_textblock)item;
+            if (false) {
+            } else if (item is Vx.Data.Textblock.Type_textblock valitem) {
               ischanged = true;
               listval.Add(valitem);
             }

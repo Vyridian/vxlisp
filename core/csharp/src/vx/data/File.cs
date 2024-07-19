@@ -137,16 +137,17 @@ public static class File {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -170,9 +171,9 @@ public static class File {
           switch (key) {
           case ":name":
             if (valsub == vx_p_name) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
-              vx_p_name = (Vx.Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -193,9 +194,9 @@ public static class File {
             break;
           case ":format":
             if (valsub == vx_p_format) {
-            } else if (valsub is Vx.Data.File.Type_fileformat) {
+            } else if (valsub is Vx.Data.File.Type_fileformat valformat) {
               ischanged = true;
-              vx_p_format = (Vx.Data.File.Type_fileformat)valsub;
+              vx_p_format = valformat;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -213,9 +214,9 @@ public static class File {
             break;
           case ":path":
             if (valsub == vx_p_path) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valpath) {
               ischanged = true;
-              vx_p_path = (Vx.Core.Type_string)valsub;
+              vx_p_path = valpath;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_path = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -236,9 +237,9 @@ public static class File {
             break;
           case ":permission":
             if (valsub == vx_p_permission) {
-            } else if (valsub is Vx.Core.Type_permission) {
+            } else if (valsub is Vx.Core.Type_permission valpermission) {
               ischanged = true;
-              vx_p_permission = (Vx.Core.Type_permission)valsub;
+              vx_p_permission = valpermission;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -256,9 +257,9 @@ public static class File {
             break;
           case ":text":
             if (valsub == vx_p_text) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valtext) {
               ischanged = true;
-              vx_p_text = (Vx.Core.Type_string)valsub;
+              vx_p_text = valtext;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_text = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -457,14 +458,13 @@ public static class File {
         } else if (valsub is Vx.Data.File.Type_file) {
           ischanged = true;
           listval.Add((Vx.Data.File.Type_file)valsub);
-        } else if (valsub is Vx.Data.File.Type_filelist) {
-          Type_filelist multi = (Type_filelist)valsub;
+        } else if (valsub is Vx.Data.File.Type_filelist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listfile());
         } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
-            if (item is Vx.Data.File.Type_file) {
-              Vx.Data.File.Type_file valitem = (Vx.Data.File.Type_file)item;
+            if (false) {
+            } else if (item is Vx.Data.File.Type_file valitem) {
               ischanged = true;
               listval.Add(valitem);
             }

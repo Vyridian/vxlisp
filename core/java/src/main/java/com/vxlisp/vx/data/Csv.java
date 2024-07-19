@@ -102,16 +102,20 @@ public final class Csv {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -136,8 +140,9 @@ public final class Csv {
           case ":headers":
             if (valsub == vx_p_headers) {
             } else if (valsub instanceof Core.Type_stringlist) {
+              Core.Type_stringlist valheaders = (Core.Type_stringlist)valsub;;
               ischanged = true;
-              vx_p_headers = (Core.Type_stringlist)valsub;
+              vx_p_headers = valheaders;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -157,8 +162,9 @@ public final class Csv {
           case ":rows":
             if (valsub == vx_p_rows) {
             } else if (valsub instanceof Csv.Type_csvrows) {
+              Csv.Type_csvrows valrows = (Csv.Type_csvrows)valsub;;
               ischanged = true;
-              vx_p_rows = (Csv.Type_csvrows)valsub;
+              vx_p_rows = valrows;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -253,12 +259,13 @@ public final class Csv {
     @Override
     public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
       Core.Type_boolean output = Core.c_false;
-      if (value instanceof Core.Type_stringlist) {
+      if (false) {
+      } else if (value instanceof Core.Type_stringlist) {
+        Core.Type_stringlist castval = (Core.Type_stringlist)value;;
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
         }
-        Core.Type_stringlist castval = (Core.Type_stringlist)value;
         Map<String, Core.Type_stringlist> map = new LinkedHashMap<String, Core.Type_stringlist>(this.vx_p_map);
         if (castval == Core.e_stringlist) {
           map.remove(key);
@@ -361,8 +368,10 @@ public final class Csv {
           }
         } else {
           Core.Type_stringlist valany = null;
-          if (valsub instanceof Core.Type_stringlist) {
-            valany = (Core.Type_stringlist)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_stringlist) {
+            Core.Type_stringlist valallowed = (Core.Type_stringlist)valsub;;
+            valany = valallowed;
           } else if (valsub instanceof Core.Type_stringlist) {
             valany = (Core.Type_stringlist)valsub;
           } else {
@@ -510,14 +519,15 @@ public final class Csv {
           ischanged = true;
           listval.add((Core.Type_stringlist)valsub);
         } else if (valsub instanceof Csv.Type_csvrows) {
-          Type_csvrows multi = (Type_csvrows)valsub;
+          Csv.Type_csvrows multi = (Csv.Type_csvrows)valsub;;
           ischanged = true;
           listval.addAll(multi.vx_liststringlist());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
-            if (item instanceof Core.Type_stringlist) {
-              Core.Type_stringlist valitem = (Core.Type_stringlist)item;
+            if (false) {
+            } else if (item instanceof Core.Type_stringlist) {
+              Core.Type_stringlist valitem = (Core.Type_stringlist)item;;
               ischanged = true;
               listval.add(valitem);
             }

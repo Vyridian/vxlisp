@@ -120,16 +120,17 @@ public static class Test {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -153,9 +154,9 @@ public static class Test {
           switch (key) {
           case ":passfail":
             if (valsub == vx_p_passfail) {
-            } else if (valsub is Vx.Core.Type_boolean) {
+            } else if (valsub is Vx.Core.Type_boolean valpassfail) {
               ischanged = true;
-              vx_p_passfail = (Vx.Core.Type_boolean)valsub;
+              vx_p_passfail = valpassfail;
             } else if (valsub is bool) {
               ischanged = true;
               vx_p_passfail = Vx.Core.vx_new(Vx.Core.t_boolean, valsub);
@@ -176,9 +177,9 @@ public static class Test {
             break;
           case ":testpkg":
             if (valsub == vx_p_testpkg) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valtestpkg) {
               ischanged = true;
-              vx_p_testpkg = (Vx.Core.Type_string)valsub;
+              vx_p_testpkg = valtestpkg;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_testpkg = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -199,9 +200,9 @@ public static class Test {
             break;
           case ":casename":
             if (valsub == vx_p_casename) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valcasename) {
               ischanged = true;
-              vx_p_casename = (Vx.Core.Type_string)valsub;
+              vx_p_casename = valcasename;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_casename = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -222,9 +223,9 @@ public static class Test {
             break;
           case ":describelist":
             if (valsub == vx_p_describelist) {
-            } else if (valsub is Vx.Test.Type_testdescribelist) {
+            } else if (valsub is Vx.Test.Type_testdescribelist valdescribelist) {
               ischanged = true;
-              vx_p_describelist = (Vx.Test.Type_testdescribelist)valsub;
+              vx_p_describelist = valdescribelist;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -358,14 +359,13 @@ public static class Test {
         } else if (valsub is Vx.Test.Type_testcase) {
           ischanged = true;
           listval.Add((Vx.Test.Type_testcase)valsub);
-        } else if (valsub is Vx.Test.Type_testcaselist) {
-          Type_testcaselist multi = (Type_testcaselist)valsub;
+        } else if (valsub is Vx.Test.Type_testcaselist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listtestcase());
         } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
-            if (item is Vx.Test.Type_testcase) {
-              Vx.Test.Type_testcase valitem = (Vx.Test.Type_testcase)item;
+            if (false) {
+            } else if (item is Vx.Test.Type_testcase valitem) {
               ischanged = true;
               listval.Add(valitem);
             }
@@ -534,16 +534,17 @@ public static class Test {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -567,9 +568,9 @@ public static class Test {
           switch (key) {
           case ":constmap":
             if (valsub == vx_p_constmap) {
-            } else if (valsub is Vx.Core.Type_intmap) {
+            } else if (valsub is Vx.Core.Type_intmap valconstmap) {
               ischanged = true;
-              vx_p_constmap = (Vx.Core.Type_intmap)valsub;
+              vx_p_constmap = valconstmap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -587,9 +588,9 @@ public static class Test {
             break;
           case ":funcmap":
             if (valsub == vx_p_funcmap) {
-            } else if (valsub is Vx.Core.Type_intmap) {
+            } else if (valsub is Vx.Core.Type_intmap valfuncmap) {
               ischanged = true;
-              vx_p_funcmap = (Vx.Core.Type_intmap)valsub;
+              vx_p_funcmap = valfuncmap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -607,9 +608,9 @@ public static class Test {
             break;
           case ":testpkg":
             if (valsub == vx_p_testpkg) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valtestpkg) {
               ischanged = true;
-              vx_p_testpkg = (Vx.Core.Type_string)valsub;
+              vx_p_testpkg = valtestpkg;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_testpkg = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -630,9 +631,9 @@ public static class Test {
             break;
           case ":typemap":
             if (valsub == vx_p_typemap) {
-            } else if (valsub is Vx.Core.Type_intmap) {
+            } else if (valsub is Vx.Core.Type_intmap valtypemap) {
               ischanged = true;
-              vx_p_typemap = (Vx.Core.Type_intmap)valsub;
+              vx_p_typemap = valtypemap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -816,16 +817,17 @@ public static class Test {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -849,9 +851,9 @@ public static class Test {
           switch (key) {
           case ":pct":
             if (valsub == vx_p_pct) {
-            } else if (valsub is Vx.Core.Type_int) {
+            } else if (valsub is Vx.Core.Type_int valpct) {
               ischanged = true;
-              vx_p_pct = (Vx.Core.Type_int)valsub;
+              vx_p_pct = valpct;
             } else if (valsub is int) {
               ischanged = true;
               vx_p_pct = Vx.Core.vx_new(Vx.Core.t_int, valsub);
@@ -872,9 +874,9 @@ public static class Test {
             break;
           case ":testpkg":
             if (valsub == vx_p_testpkg) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valtestpkg) {
               ischanged = true;
-              vx_p_testpkg = (Vx.Core.Type_string)valsub;
+              vx_p_testpkg = valtestpkg;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_testpkg = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -895,9 +897,9 @@ public static class Test {
             break;
           case ":tests":
             if (valsub == vx_p_tests) {
-            } else if (valsub is Vx.Core.Type_int) {
+            } else if (valsub is Vx.Core.Type_int valtests) {
               ischanged = true;
-              vx_p_tests = (Vx.Core.Type_int)valsub;
+              vx_p_tests = valtests;
             } else if (valsub is int) {
               ischanged = true;
               vx_p_tests = Vx.Core.vx_new(Vx.Core.t_int, valsub);
@@ -918,9 +920,9 @@ public static class Test {
             break;
           case ":total":
             if (valsub == vx_p_total) {
-            } else if (valsub is Vx.Core.Type_int) {
+            } else if (valsub is Vx.Core.Type_int valtotal) {
               ischanged = true;
-              vx_p_total = (Vx.Core.Type_int)valsub;
+              vx_p_total = valtotal;
             } else if (valsub is int) {
               ischanged = true;
               vx_p_total = Vx.Core.vx_new(Vx.Core.t_int, valsub);
@@ -1175,16 +1177,17 @@ public static class Test {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -1208,9 +1211,9 @@ public static class Test {
           switch (key) {
           case ":bigospacenums":
             if (valsub == vx_p_bigospacenums) {
-            } else if (valsub is Vx.Test.Type_testcoveragenums) {
+            } else if (valsub is Vx.Test.Type_testcoveragenums valbigospacenums) {
               ischanged = true;
-              vx_p_bigospacenums = (Vx.Test.Type_testcoveragenums)valsub;
+              vx_p_bigospacenums = valbigospacenums;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -1228,9 +1231,9 @@ public static class Test {
             break;
           case ":bigotimenums":
             if (valsub == vx_p_bigotimenums) {
-            } else if (valsub is Vx.Test.Type_testcoveragenums) {
+            } else if (valsub is Vx.Test.Type_testcoveragenums valbigotimenums) {
               ischanged = true;
-              vx_p_bigotimenums = (Vx.Test.Type_testcoveragenums)valsub;
+              vx_p_bigotimenums = valbigotimenums;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -1248,9 +1251,9 @@ public static class Test {
             break;
           case ":constnums":
             if (valsub == vx_p_constnums) {
-            } else if (valsub is Vx.Test.Type_testcoveragenums) {
+            } else if (valsub is Vx.Test.Type_testcoveragenums valconstnums) {
               ischanged = true;
-              vx_p_constnums = (Vx.Test.Type_testcoveragenums)valsub;
+              vx_p_constnums = valconstnums;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -1268,9 +1271,9 @@ public static class Test {
             break;
           case ":docnums":
             if (valsub == vx_p_docnums) {
-            } else if (valsub is Vx.Test.Type_testcoveragenums) {
+            } else if (valsub is Vx.Test.Type_testcoveragenums valdocnums) {
               ischanged = true;
-              vx_p_docnums = (Vx.Test.Type_testcoveragenums)valsub;
+              vx_p_docnums = valdocnums;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -1288,9 +1291,9 @@ public static class Test {
             break;
           case ":funcnums":
             if (valsub == vx_p_funcnums) {
-            } else if (valsub is Vx.Test.Type_testcoveragenums) {
+            } else if (valsub is Vx.Test.Type_testcoveragenums valfuncnums) {
               ischanged = true;
-              vx_p_funcnums = (Vx.Test.Type_testcoveragenums)valsub;
+              vx_p_funcnums = valfuncnums;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -1308,9 +1311,9 @@ public static class Test {
             break;
           case ":testpkg":
             if (valsub == vx_p_testpkg) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valtestpkg) {
               ischanged = true;
-              vx_p_testpkg = (Vx.Core.Type_string)valsub;
+              vx_p_testpkg = valtestpkg;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_testpkg = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -1331,9 +1334,9 @@ public static class Test {
             break;
           case ":totalnums":
             if (valsub == vx_p_totalnums) {
-            } else if (valsub is Vx.Test.Type_testcoveragenums) {
+            } else if (valsub is Vx.Test.Type_testcoveragenums valtotalnums) {
               ischanged = true;
-              vx_p_totalnums = (Vx.Test.Type_testcoveragenums)valsub;
+              vx_p_totalnums = valtotalnums;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -1351,9 +1354,9 @@ public static class Test {
             break;
           case ":typenums":
             if (valsub == vx_p_typenums) {
-            } else if (valsub is Vx.Test.Type_testcoveragenums) {
+            } else if (valsub is Vx.Test.Type_testcoveragenums valtypenums) {
               ischanged = true;
-              vx_p_typenums = (Vx.Test.Type_testcoveragenums)valsub;
+              vx_p_typenums = valtypenums;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -1524,16 +1527,17 @@ public static class Test {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -1557,9 +1561,9 @@ public static class Test {
           switch (key) {
           case ":describename":
             if (valsub == vx_p_describename) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valdescribename) {
               ischanged = true;
-              vx_p_describename = (Vx.Core.Type_string)valsub;
+              vx_p_describename = valdescribename;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_describename = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -1580,9 +1584,9 @@ public static class Test {
             break;
           case ":testpkg":
             if (valsub == vx_p_testpkg) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valtestpkg) {
               ischanged = true;
-              vx_p_testpkg = (Vx.Core.Type_string)valsub;
+              vx_p_testpkg = valtestpkg;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_testpkg = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -1603,9 +1607,9 @@ public static class Test {
             break;
           case ":testresult":
             if (valsub == vx_p_testresult) {
-            } else if (valsub is Vx.Test.Type_testresult) {
+            } else if (valsub is Vx.Test.Type_testresult valtestresult) {
               ischanged = true;
-              vx_p_testresult = (Vx.Test.Type_testresult)valsub;
+              vx_p_testresult = valtestresult;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -1738,14 +1742,13 @@ public static class Test {
         } else if (valsub is Vx.Test.Type_testdescribe) {
           ischanged = true;
           listval.Add((Vx.Test.Type_testdescribe)valsub);
-        } else if (valsub is Vx.Test.Type_testdescribelist) {
-          Type_testdescribelist multi = (Type_testdescribelist)valsub;
+        } else if (valsub is Vx.Test.Type_testdescribelist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listtestdescribe());
         } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
-            if (item is Vx.Test.Type_testdescribe) {
-              Vx.Test.Type_testdescribe valitem = (Vx.Test.Type_testdescribe)item;
+            if (false) {
+            } else if (item is Vx.Test.Type_testdescribe valitem) {
               ischanged = true;
               listval.Add(valitem);
             }
@@ -1931,16 +1934,17 @@ public static class Test {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -1964,9 +1968,9 @@ public static class Test {
           switch (key) {
           case ":caselist":
             if (valsub == vx_p_caselist) {
-            } else if (valsub is Vx.Test.Type_testcaselist) {
+            } else if (valsub is Vx.Test.Type_testcaselist valcaselist) {
               ischanged = true;
-              vx_p_caselist = (Vx.Test.Type_testcaselist)valsub;
+              vx_p_caselist = valcaselist;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -1984,9 +1988,9 @@ public static class Test {
             break;
           case ":coveragedetail":
             if (valsub == vx_p_coveragedetail) {
-            } else if (valsub is Vx.Test.Type_testcoveragedetail) {
+            } else if (valsub is Vx.Test.Type_testcoveragedetail valcoveragedetail) {
               ischanged = true;
-              vx_p_coveragedetail = (Vx.Test.Type_testcoveragedetail)valsub;
+              vx_p_coveragedetail = valcoveragedetail;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2004,9 +2008,9 @@ public static class Test {
             break;
           case ":coveragesummary":
             if (valsub == vx_p_coveragesummary) {
-            } else if (valsub is Vx.Test.Type_testcoveragesummary) {
+            } else if (valsub is Vx.Test.Type_testcoveragesummary valcoveragesummary) {
               ischanged = true;
-              vx_p_coveragesummary = (Vx.Test.Type_testcoveragesummary)valsub;
+              vx_p_coveragesummary = valcoveragesummary;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2024,9 +2028,9 @@ public static class Test {
             break;
           case ":passfail":
             if (valsub == vx_p_passfail) {
-            } else if (valsub is Vx.Core.Type_boolean) {
+            } else if (valsub is Vx.Core.Type_boolean valpassfail) {
               ischanged = true;
-              vx_p_passfail = (Vx.Core.Type_boolean)valsub;
+              vx_p_passfail = valpassfail;
             } else if (valsub is bool) {
               ischanged = true;
               vx_p_passfail = Vx.Core.vx_new(Vx.Core.t_boolean, valsub);
@@ -2047,9 +2051,9 @@ public static class Test {
             break;
           case ":testpkg":
             if (valsub == vx_p_testpkg) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valtestpkg) {
               ischanged = true;
-              vx_p_testpkg = (Vx.Core.Type_string)valsub;
+              vx_p_testpkg = valtestpkg;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_testpkg = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -2187,14 +2191,13 @@ public static class Test {
         } else if (valsub is Vx.Test.Type_testpackage) {
           ischanged = true;
           listval.Add((Vx.Test.Type_testpackage)valsub);
-        } else if (valsub is Vx.Test.Type_testpackagelist) {
-          Type_testpackagelist multi = (Type_testpackagelist)valsub;
+        } else if (valsub is Vx.Test.Type_testpackagelist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listtestpackage());
         } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
-            if (item is Vx.Test.Type_testpackage) {
-              Vx.Test.Type_testpackage valitem = (Vx.Test.Type_testpackage)item;
+            if (false) {
+            } else if (item is Vx.Test.Type_testpackage valitem) {
               ischanged = true;
               listval.Add(valitem);
             }
@@ -2380,16 +2383,17 @@ public static class Test {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -2413,9 +2417,9 @@ public static class Test {
           switch (key) {
           case ":code":
             if (valsub == vx_p_code) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valcode) {
               ischanged = true;
-              vx_p_code = (Vx.Core.Type_string)valsub;
+              vx_p_code = valcode;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_code = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -2436,9 +2440,9 @@ public static class Test {
             break;
           case ":passfail":
             if (valsub == vx_p_passfail) {
-            } else if (valsub is Vx.Core.Type_boolean) {
+            } else if (valsub is Vx.Core.Type_boolean valpassfail) {
               ischanged = true;
-              vx_p_passfail = (Vx.Core.Type_boolean)valsub;
+              vx_p_passfail = valpassfail;
             } else if (valsub is bool) {
               ischanged = true;
               vx_p_passfail = Vx.Core.vx_new(Vx.Core.t_boolean, valsub);
@@ -2459,9 +2463,9 @@ public static class Test {
             break;
           case ":expected":
             if (valsub == vx_p_expected) {
-            } else if (valsub is Vx.Core.Type_any) {
+            } else if (valsub is Vx.Core.Type_any valexpected) {
               ischanged = true;
-              vx_p_expected = (Vx.Core.Type_any)valsub;
+              vx_p_expected = valexpected;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2479,9 +2483,9 @@ public static class Test {
             break;
           case ":actual":
             if (valsub == vx_p_actual) {
-            } else if (valsub is Vx.Core.Type_any) {
+            } else if (valsub is Vx.Core.Type_any valactual) {
               ischanged = true;
-              vx_p_actual = (Vx.Core.Type_any)valsub;
+              vx_p_actual = valactual;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2499,9 +2503,9 @@ public static class Test {
             break;
           case ":fn-actual":
             if (valsub == vx_p_fn_actual) {
-            } else if (valsub is Vx.Core.Func_any_from_func_async) {
+            } else if (valsub is Vx.Core.Func_any_from_func_async valfn_actual) {
               ischanged = true;
-              vx_p_fn_actual = (Vx.Core.Func_any_from_func_async)valsub;
+              vx_p_fn_actual = valfn_actual;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2636,14 +2640,13 @@ public static class Test {
         } else if (valsub is Vx.Test.Type_testresult) {
           ischanged = true;
           listval.Add((Vx.Test.Type_testresult)valsub);
-        } else if (valsub is Vx.Test.Type_testresultlist) {
-          Type_testresultlist multi = (Type_testresultlist)valsub;
+        } else if (valsub is Vx.Test.Type_testresultlist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listtestresult());
         } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
-            if (item is Vx.Test.Type_testresult) {
-              Vx.Test.Type_testresult valitem = (Vx.Test.Type_testresult)item;
+            if (false) {
+            } else if (item is Vx.Test.Type_testresult valitem) {
               ischanged = true;
               listval.Add(valitem);
             }

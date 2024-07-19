@@ -175,16 +175,20 @@ public final class Event {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -209,8 +213,9 @@ public final class Event {
           case ":name":
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valname = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_name = (Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
@@ -233,8 +238,9 @@ public final class Event {
           case ":from":
             if (valsub == vx_p_from) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valfrom = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_from = (Core.Type_string)valsub;
+              vx_p_from = valfrom;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_from = Core.vx_new(Core.t_string, valsub);
@@ -257,8 +263,9 @@ public final class Event {
           case ":to":
             if (valsub == vx_p_to) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valto = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_to = (Core.Type_string)valsub;
+              vx_p_to = valto;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_to = Core.vx_new(Core.t_string, valsub);
@@ -281,8 +288,9 @@ public final class Event {
           case ":datamap":
             if (valsub == vx_p_datamap) {
             } else if (valsub instanceof Core.Type_anymap) {
+              Core.Type_anymap valdatamap = (Core.Type_anymap)valsub;;
               ischanged = true;
-              vx_p_datamap = (Core.Type_anymap)valsub;
+              vx_p_datamap = valdatamap;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -302,8 +310,9 @@ public final class Event {
           case ":event<-event":
             if (valsub == vx_p_event_from_event) {
             } else if (valsub instanceof Event.Func_event_from_event) {
+              Event.Func_event_from_event valevent_from_event = (Event.Func_event_from_event)valsub;;
               ischanged = true;
-              vx_p_event_from_event = (Event.Func_event_from_event)valsub;
+              vx_p_event_from_event = valevent_from_event;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -323,8 +332,9 @@ public final class Event {
           case ":event<-event-async":
             if (valsub == vx_p_event_from_event_async) {
             } else if (valsub instanceof Event.Func_event_from_event_async) {
+              Event.Func_event_from_event_async valevent_from_event_async = (Event.Func_event_from_event_async)valsub;;
               ischanged = true;
-              vx_p_event_from_event_async = (Event.Func_event_from_event_async)valsub;
+              vx_p_event_from_event_async = valevent_from_event_async;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -476,14 +486,15 @@ public final class Event {
           ischanged = true;
           listval.add((Event.Type_event)valsub);
         } else if (valsub instanceof Event.Type_eventlist) {
-          Type_eventlist multi = (Type_eventlist)valsub;
+          Event.Type_eventlist multi = (Event.Type_eventlist)valsub;;
           ischanged = true;
           listval.addAll(multi.vx_listevent());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
-            if (item instanceof Event.Type_event) {
-              Event.Type_event valitem = (Event.Type_event)item;
+            if (false) {
+            } else if (item instanceof Event.Type_event) {
+              Event.Type_event valitem = (Event.Type_event)item;;
               ischanged = true;
               listval.add(valitem);
             }
@@ -566,12 +577,13 @@ public final class Event {
     @Override
     public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
       Core.Type_boolean output = Core.c_false;
-      if (value instanceof Event.Type_event) {
+      if (false) {
+      } else if (value instanceof Event.Type_event) {
+        Event.Type_event castval = (Event.Type_event)value;;
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
         }
-        Event.Type_event castval = (Event.Type_event)value;
         Map<String, Event.Type_event> map = new LinkedHashMap<String, Event.Type_event>(this.vx_p_map);
         if (castval == Event.e_event) {
           map.remove(key);
@@ -674,8 +686,10 @@ public final class Event {
           }
         } else {
           Event.Type_event valany = null;
-          if (valsub instanceof Event.Type_event) {
-            valany = (Event.Type_event)valsub;
+          if (false) {
+          } else if (valsub instanceof Event.Type_event) {
+            Event.Type_event valallowed = (Event.Type_event)valsub;;
+            valany = valallowed;
           } else if (valsub instanceof Event.Type_event) {
             valany = (Event.Type_event)valsub;
           } else {

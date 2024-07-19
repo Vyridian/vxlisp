@@ -126,14 +126,15 @@ public final class Repl {
           ischanged = true;
           listval.add(Core.vx_new(Core.t_string, valsub));
         } else if (valsub instanceof Repl.Type_liblist) {
-          Type_liblist multi = (Type_liblist)valsub;
+          Repl.Type_liblist multi = (Repl.Type_liblist)valsub;;
           ischanged = true;
           listval.addAll(multi.vx_liststring());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
-            if (item instanceof Core.Type_string) {
-              Core.Type_string valitem = (Core.Type_string)item;
+            if (false) {
+            } else if (item instanceof Core.Type_string) {
+              Core.Type_string valitem = (Core.Type_string)item;;
               ischanged = true;
               listval.add(valitem);
             }
@@ -354,16 +355,20 @@ public final class Repl {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -388,8 +393,9 @@ public final class Repl {
           case ":name":
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valname = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_name = (Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
@@ -412,8 +418,9 @@ public final class Repl {
           case ":type":
             if (valsub == vx_p_type) {
             } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valtype = (Core.Type_any)valsub;;
               ischanged = true;
-              vx_p_type = (Core.Type_any)valsub;
+              vx_p_type = valtype;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -433,8 +440,9 @@ public final class Repl {
           case ":repllist":
             if (valsub == vx_p_repllist) {
             } else if (valsub instanceof Repl.Type_repllist) {
+              Repl.Type_repllist valrepllist = (Repl.Type_repllist)valsub;;
               ischanged = true;
-              vx_p_repllist = (Repl.Type_repllist)valsub;
+              vx_p_repllist = valrepllist;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -454,8 +462,9 @@ public final class Repl {
           case ":async":
             if (valsub == vx_p_async) {
             } else if (valsub instanceof Core.Type_boolean) {
+              Core.Type_boolean valasync = (Core.Type_boolean)valsub;;
               ischanged = true;
-              vx_p_async = (Core.Type_boolean)valsub;
+              vx_p_async = valasync;
             } else if (valsub instanceof Boolean) {
               ischanged = true;
               vx_p_async = Core.vx_new(Core.t_boolean, valsub);
@@ -478,8 +487,9 @@ public final class Repl {
           case ":val":
             if (valsub == vx_p_val) {
             } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valval = (Core.Type_any)valsub;;
               ischanged = true;
-              vx_p_val = (Core.Type_any)valsub;
+              vx_p_val = valval;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -499,8 +509,9 @@ public final class Repl {
           case ":doc":
             if (valsub == vx_p_doc) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valdoc = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_doc = (Core.Type_string)valsub;
+              vx_p_doc = valdoc;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_doc = Core.vx_new(Core.t_string, valsub);
@@ -687,16 +698,20 @@ public final class Repl {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -721,8 +736,9 @@ public final class Repl {
           case ":key":
             if (valsub == vx_p_key) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valkey = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_key = (Core.Type_string)valsub;
+              vx_p_key = valkey;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_key = Core.vx_new(Core.t_string, valsub);
@@ -745,8 +761,9 @@ public final class Repl {
           case ":current":
             if (valsub == vx_p_current) {
             } else if (valsub instanceof Repl.Type_repl) {
+              Repl.Type_repl valcurrent = (Repl.Type_repl)valsub;;
               ischanged = true;
-              vx_p_current = (Repl.Type_repl)valsub;
+              vx_p_current = valcurrent;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -766,8 +783,9 @@ public final class Repl {
           case ":repllist":
             if (valsub == vx_p_repllist) {
             } else if (valsub instanceof Repl.Type_repllist) {
+              Repl.Type_repllist valrepllist = (Repl.Type_repllist)valsub;;
               ischanged = true;
-              vx_p_repllist = (Repl.Type_repllist)valsub;
+              vx_p_repllist = valrepllist;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -916,14 +934,15 @@ public final class Repl {
           ischanged = true;
           listval.add((Repl.Type_repl)valsub);
         } else if (valsub instanceof Repl.Type_repllist) {
-          Type_repllist multi = (Type_repllist)valsub;
+          Repl.Type_repllist multi = (Repl.Type_repllist)valsub;;
           ischanged = true;
           listval.addAll(multi.vx_listrepl());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
-            if (item instanceof Repl.Type_repl) {
-              Repl.Type_repl valitem = (Repl.Type_repl)item;
+            if (false) {
+            } else if (item instanceof Repl.Type_repl) {
+              Repl.Type_repl valitem = (Repl.Type_repl)item;;
               ischanged = true;
               listval.add(valitem);
             }

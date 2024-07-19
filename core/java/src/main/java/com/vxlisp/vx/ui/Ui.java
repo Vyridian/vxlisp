@@ -223,16 +223,20 @@ public final class Ui {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -257,8 +261,9 @@ public final class Ui {
           case ":left":
             if (valsub == vx_p_left) {
             } else if (valsub instanceof Core.Type_int) {
+              Core.Type_int valleft = (Core.Type_int)valsub;;
               ischanged = true;
-              vx_p_left = (Core.Type_int)valsub;
+              vx_p_left = valleft;
             } else if (valsub instanceof Integer) {
               ischanged = true;
               vx_p_left = Core.vx_new(Core.t_int, valsub);
@@ -281,8 +286,9 @@ public final class Ui {
           case ":right":
             if (valsub == vx_p_right) {
             } else if (valsub instanceof Core.Type_int) {
+              Core.Type_int valright = (Core.Type_int)valsub;;
               ischanged = true;
-              vx_p_right = (Core.Type_int)valsub;
+              vx_p_right = valright;
             } else if (valsub instanceof Integer) {
               ischanged = true;
               vx_p_right = Core.vx_new(Core.t_int, valsub);
@@ -305,8 +311,9 @@ public final class Ui {
           case ":top":
             if (valsub == vx_p_top) {
             } else if (valsub instanceof Core.Type_int) {
+              Core.Type_int valtop = (Core.Type_int)valsub;;
               ischanged = true;
-              vx_p_top = (Core.Type_int)valsub;
+              vx_p_top = valtop;
             } else if (valsub instanceof Integer) {
               ischanged = true;
               vx_p_top = Core.vx_new(Core.t_int, valsub);
@@ -329,8 +336,9 @@ public final class Ui {
           case ":bottom":
             if (valsub == vx_p_bottom) {
             } else if (valsub instanceof Core.Type_int) {
+              Core.Type_int valbottom = (Core.Type_int)valsub;;
               ischanged = true;
-              vx_p_bottom = (Core.Type_int)valsub;
+              vx_p_bottom = valbottom;
             } else if (valsub instanceof Integer) {
               ischanged = true;
               vx_p_bottom = Core.vx_new(Core.t_int, valsub);
@@ -769,16 +777,20 @@ public final class Ui {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -803,8 +815,9 @@ public final class Ui {
           case ":name":
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valname = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_name = (Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
@@ -827,8 +840,9 @@ public final class Ui {
           case ":fontface":
             if (valsub == vx_p_fontface) {
             } else if (valsub instanceof Ui.Type_fontface) {
+              Ui.Type_fontface valfontface = (Ui.Type_fontface)valsub;;
               ischanged = true;
-              vx_p_fontface = (Ui.Type_fontface)valsub;
+              vx_p_fontface = valfontface;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -848,8 +862,9 @@ public final class Ui {
           case ":fontsize":
             if (valsub == vx_p_fontsize) {
             } else if (valsub instanceof Core.Type_int) {
+              Core.Type_int valfontsize = (Core.Type_int)valsub;;
               ischanged = true;
-              vx_p_fontsize = (Core.Type_int)valsub;
+              vx_p_fontsize = valfontsize;
             } else if (valsub instanceof Integer) {
               ischanged = true;
               vx_p_fontsize = Core.vx_new(Core.t_int, valsub);
@@ -872,8 +887,9 @@ public final class Ui {
           case ":fontstyle":
             if (valsub == vx_p_fontstyle) {
             } else if (valsub instanceof Ui.Type_fontstyle) {
+              Ui.Type_fontstyle valfontstyle = (Ui.Type_fontstyle)valsub;;
               ischanged = true;
-              vx_p_fontstyle = (Ui.Type_fontstyle)valsub;
+              vx_p_fontstyle = valfontstyle;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -1073,16 +1089,20 @@ public final class Ui {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -1107,8 +1127,9 @@ public final class Ui {
           case ":name":
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valname = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_name = (Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
@@ -1131,8 +1152,9 @@ public final class Ui {
           case ":weight":
             if (valsub == vx_p_weight) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valweight = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_weight = (Core.Type_string)valsub;
+              vx_p_weight = valweight;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_weight = Core.vx_new(Core.t_string, valsub);
@@ -1155,8 +1177,9 @@ public final class Ui {
           case ":unicode":
             if (valsub == vx_p_unicode) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valunicode = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_unicode = (Core.Type_string)valsub;
+              vx_p_unicode = valunicode;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_unicode = Core.vx_new(Core.t_string, valsub);
@@ -1179,8 +1202,9 @@ public final class Ui {
           case ":filelist":
             if (valsub == vx_p_filelist) {
             } else if (valsub instanceof File.Type_filelist) {
+              File.Type_filelist valfilelist = (File.Type_filelist)valsub;;
               ischanged = true;
-              vx_p_filelist = (File.Type_filelist)valsub;
+              vx_p_filelist = valfilelist;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -1330,14 +1354,15 @@ public final class Ui {
           ischanged = true;
           listval.add((Ui.Type_fontface)valsub);
         } else if (valsub instanceof Ui.Type_fontfacelist) {
-          Type_fontfacelist multi = (Type_fontfacelist)valsub;
+          Ui.Type_fontfacelist multi = (Ui.Type_fontfacelist)valsub;;
           ischanged = true;
           listval.addAll(multi.vx_listfontface());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
-            if (item instanceof Ui.Type_fontface) {
-              Ui.Type_fontface valitem = (Ui.Type_fontface)item;
+            if (false) {
+            } else if (item instanceof Ui.Type_fontface) {
+              Ui.Type_fontface valitem = (Ui.Type_fontface)item;;
               ischanged = true;
               listval.add(valitem);
             }
@@ -1420,12 +1445,13 @@ public final class Ui {
     @Override
     public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
       Core.Type_boolean output = Core.c_false;
-      if (value instanceof Ui.Type_fontface) {
+      if (false) {
+      } else if (value instanceof Ui.Type_fontface) {
+        Ui.Type_fontface castval = (Ui.Type_fontface)value;;
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
         }
-        Ui.Type_fontface castval = (Ui.Type_fontface)value;
         Map<String, Ui.Type_fontface> map = new LinkedHashMap<String, Ui.Type_fontface>(this.vx_p_map);
         if (castval == Ui.e_fontface) {
           map.remove(key);
@@ -1528,8 +1554,10 @@ public final class Ui {
           }
         } else {
           Ui.Type_fontface valany = null;
-          if (valsub instanceof Ui.Type_fontface) {
-            valany = (Ui.Type_fontface)valsub;
+          if (false) {
+          } else if (valsub instanceof Ui.Type_fontface) {
+            Ui.Type_fontface valallowed = (Ui.Type_fontface)valsub;;
+            valany = valallowed;
           } else if (valsub instanceof Ui.Type_fontface) {
             valany = (Ui.Type_fontface)valsub;
           } else {
@@ -1626,12 +1654,13 @@ public final class Ui {
     @Override
     public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
       Core.Type_boolean output = Core.c_false;
-      if (value instanceof Ui.Type_font) {
+      if (false) {
+      } else if (value instanceof Ui.Type_font) {
+        Ui.Type_font castval = (Ui.Type_font)value;;
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
         }
-        Ui.Type_font castval = (Ui.Type_font)value;
         Map<String, Ui.Type_font> map = new LinkedHashMap<String, Ui.Type_font>(this.vx_p_map);
         if (castval == Ui.e_font) {
           map.remove(key);
@@ -1734,8 +1763,10 @@ public final class Ui {
           }
         } else {
           Ui.Type_font valany = null;
-          if (valsub instanceof Ui.Type_font) {
-            valany = (Ui.Type_font)valsub;
+          if (false) {
+          } else if (valsub instanceof Ui.Type_font) {
+            Ui.Type_font valallowed = (Ui.Type_font)valsub;;
+            valany = valallowed;
           } else if (valsub instanceof Ui.Type_font) {
             valany = (Ui.Type_font)valsub;
           } else {
@@ -1880,16 +1911,20 @@ public final class Ui {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -1914,8 +1949,9 @@ public final class Ui {
           case ":name":
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valname = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_name = (Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
@@ -2013,12 +2049,13 @@ public final class Ui {
     @Override
     public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
       Core.Type_boolean output = Core.c_false;
-      if (value instanceof Ui.Type_fontstyle) {
+      if (false) {
+      } else if (value instanceof Ui.Type_fontstyle) {
+        Ui.Type_fontstyle castval = (Ui.Type_fontstyle)value;;
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
         }
-        Ui.Type_fontstyle castval = (Ui.Type_fontstyle)value;
         Map<String, Ui.Type_fontstyle> map = new LinkedHashMap<String, Ui.Type_fontstyle>(this.vx_p_map);
         if (castval == Ui.e_fontstyle) {
           map.remove(key);
@@ -2121,8 +2158,10 @@ public final class Ui {
           }
         } else {
           Ui.Type_fontstyle valany = null;
-          if (valsub instanceof Ui.Type_fontstyle) {
-            valany = (Ui.Type_fontstyle)valsub;
+          if (false) {
+          } else if (valsub instanceof Ui.Type_fontstyle) {
+            Ui.Type_fontstyle valallowed = (Ui.Type_fontstyle)valsub;;
+            valany = valallowed;
           } else if (valsub instanceof Ui.Type_fontstyle) {
             valany = (Ui.Type_fontstyle)valsub;
           } else {
@@ -2303,16 +2342,20 @@ public final class Ui {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -2337,8 +2380,9 @@ public final class Ui {
           case ":name":
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valname = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_name = (Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
@@ -2361,8 +2405,9 @@ public final class Ui {
           case ":label":
             if (valsub == vx_p_label) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string vallabel = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_label = (Core.Type_string)valsub;
+              vx_p_label = vallabel;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_label = Core.vx_new(Core.t_string, valsub);
@@ -2385,8 +2430,9 @@ public final class Ui {
           case ":file":
             if (valsub == vx_p_file) {
             } else if (valsub instanceof File.Type_file) {
+              File.Type_file valfile = (File.Type_file)valsub;;
               ischanged = true;
-              vx_p_file = (File.Type_file)valsub;
+              vx_p_file = valfile;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -2549,16 +2595,20 @@ public final class Ui {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -2583,8 +2633,9 @@ public final class Ui {
           case ":name":
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valname = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_name = (Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
@@ -2607,8 +2658,9 @@ public final class Ui {
           case ":fn-layout":
             if (valsub == vx_p_fn_layout) {
             } else if (valsub instanceof Ui.Func_ui_layout_from_ui_orig_parent) {
+              Ui.Func_ui_layout_from_ui_orig_parent valfn_layout = (Ui.Func_ui_layout_from_ui_orig_parent)valsub;;
               ischanged = true;
-              vx_p_fn_layout = (Ui.Func_ui_layout_from_ui_orig_parent)valsub;
+              vx_p_fn_layout = valfn_layout;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -2878,16 +2930,20 @@ public final class Ui {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -2912,8 +2968,9 @@ public final class Ui {
           case ":name":
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valname = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_name = (Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
@@ -2936,8 +2993,9 @@ public final class Ui {
           case ":boolean-print":
             if (valsub == vx_p_boolean_print) {
             } else if (valsub instanceof Ui.Func_boolean_print) {
+              Ui.Func_boolean_print valboolean_print = (Ui.Func_boolean_print)valsub;;
               ischanged = true;
-              vx_p_boolean_print = (Ui.Func_boolean_print)valsub;
+              vx_p_boolean_print = valboolean_print;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -2957,8 +3015,9 @@ public final class Ui {
           case ":boolean-layoutremove":
             if (valsub == vx_p_boolean_layoutremove) {
             } else if (valsub instanceof Ui.Func_boolean_layoutremove_from_ui) {
+              Ui.Func_boolean_layoutremove_from_ui valboolean_layoutremove = (Ui.Func_boolean_layoutremove_from_ui)valsub;;
               ischanged = true;
-              vx_p_boolean_layoutremove = (Ui.Func_boolean_layoutremove_from_ui)valsub;
+              vx_p_boolean_layoutremove = valboolean_layoutremove;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -2978,8 +3037,9 @@ public final class Ui {
           case ":boolean-layoutselected":
             if (valsub == vx_p_boolean_layoutselected) {
             } else if (valsub instanceof Ui.Func_boolean_layoutselected_from_ui) {
+              Ui.Func_boolean_layoutselected_from_ui valboolean_layoutselected = (Ui.Func_boolean_layoutselected_from_ui)valsub;;
               ischanged = true;
-              vx_p_boolean_layoutselected = (Ui.Func_boolean_layoutselected_from_ui)valsub;
+              vx_p_boolean_layoutselected = valboolean_layoutselected;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -2999,8 +3059,9 @@ public final class Ui {
           case ":boolean-layoutvisible":
             if (valsub == vx_p_boolean_layoutvisible) {
             } else if (valsub instanceof Ui.Func_boolean_layoutvisible_from_ui) {
+              Ui.Func_boolean_layoutvisible_from_ui valboolean_layoutvisible = (Ui.Func_boolean_layoutvisible_from_ui)valsub;;
               ischanged = true;
-              vx_p_boolean_layoutvisible = (Ui.Func_boolean_layoutvisible_from_ui)valsub;
+              vx_p_boolean_layoutvisible = valboolean_layoutvisible;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -3020,8 +3081,9 @@ public final class Ui {
           case ":layoutmap":
             if (valsub == vx_p_layoutmap) {
             } else if (valsub instanceof Ui.Type_layoutmap) {
+              Ui.Type_layoutmap vallayoutmap = (Ui.Type_layoutmap)valsub;;
               ischanged = true;
-              vx_p_layoutmap = (Ui.Type_layoutmap)valsub;
+              vx_p_layoutmap = vallayoutmap;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -3041,8 +3103,9 @@ public final class Ui {
           case ":layoutelse":
             if (valsub == vx_p_layoutelse) {
             } else if (valsub instanceof Ui.Type_layout) {
+              Ui.Type_layout vallayoutelse = (Ui.Type_layout)valsub;;
               ischanged = true;
-              vx_p_layoutelse = (Ui.Type_layout)valsub;
+              vx_p_layoutelse = vallayoutelse;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -3062,8 +3125,9 @@ public final class Ui {
           case ":stylesheetrender":
             if (valsub == vx_p_stylesheetrender) {
             } else if (valsub instanceof Ui.Func_stylesheet_render) {
+              Ui.Func_stylesheet_render valstylesheetrender = (Ui.Func_stylesheet_render)valsub;;
               ischanged = true;
-              vx_p_stylesheetrender = (Ui.Func_stylesheet_render)valsub;
+              vx_p_stylesheetrender = valstylesheetrender;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -3217,14 +3281,15 @@ public final class Ui {
           ischanged = true;
           listval.add((Ui.Type_layout)valsub);
         } else if (valsub instanceof Ui.Type_layoutlist) {
-          Type_layoutlist multi = (Type_layoutlist)valsub;
+          Ui.Type_layoutlist multi = (Ui.Type_layoutlist)valsub;;
           ischanged = true;
           listval.addAll(multi.vx_listlayout());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
-            if (item instanceof Ui.Type_layout) {
-              Ui.Type_layout valitem = (Ui.Type_layout)item;
+            if (false) {
+            } else if (item instanceof Ui.Type_layout) {
+              Ui.Type_layout valitem = (Ui.Type_layout)item;;
               ischanged = true;
               listval.add(valitem);
             }
@@ -3307,12 +3372,13 @@ public final class Ui {
     @Override
     public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
       Core.Type_boolean output = Core.c_false;
-      if (value instanceof Ui.Type_layout) {
+      if (false) {
+      } else if (value instanceof Ui.Type_layout) {
+        Ui.Type_layout castval = (Ui.Type_layout)value;;
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
         }
-        Ui.Type_layout castval = (Ui.Type_layout)value;
         Map<String, Ui.Type_layout> map = new LinkedHashMap<String, Ui.Type_layout>(this.vx_p_map);
         if (castval == Ui.e_layout) {
           map.remove(key);
@@ -3415,8 +3481,10 @@ public final class Ui {
           }
         } else {
           Ui.Type_layout valany = null;
-          if (valsub instanceof Ui.Type_layout) {
-            valany = (Ui.Type_layout)valsub;
+          if (false) {
+          } else if (valsub instanceof Ui.Type_layout) {
+            Ui.Type_layout valallowed = (Ui.Type_layout)valsub;;
+            valany = valallowed;
           } else if (valsub instanceof Ui.Type_layout) {
             valany = (Ui.Type_layout)valsub;
           } else {
@@ -3561,16 +3629,20 @@ public final class Ui {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -3595,8 +3667,9 @@ public final class Ui {
           case ":name":
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valname = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_name = (Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
@@ -3832,16 +3905,20 @@ public final class Ui {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -3866,8 +3943,9 @@ public final class Ui {
           case ":x":
             if (valsub == vx_p_x) {
             } else if (valsub instanceof Core.Type_int) {
+              Core.Type_int valx = (Core.Type_int)valsub;;
               ischanged = true;
-              vx_p_x = (Core.Type_int)valsub;
+              vx_p_x = valx;
             } else if (valsub instanceof Integer) {
               ischanged = true;
               vx_p_x = Core.vx_new(Core.t_int, valsub);
@@ -3890,8 +3968,9 @@ public final class Ui {
           case ":y":
             if (valsub == vx_p_y) {
             } else if (valsub instanceof Core.Type_int) {
+              Core.Type_int valy = (Core.Type_int)valsub;;
               ischanged = true;
-              vx_p_y = (Core.Type_int)valsub;
+              vx_p_y = valy;
             } else if (valsub instanceof Integer) {
               ischanged = true;
               vx_p_y = Core.vx_new(Core.t_int, valsub);
@@ -3914,8 +3993,9 @@ public final class Ui {
           case ":z":
             if (valsub == vx_p_z) {
             } else if (valsub instanceof Core.Type_int) {
+              Core.Type_int valz = (Core.Type_int)valsub;;
               ischanged = true;
-              vx_p_z = (Core.Type_int)valsub;
+              vx_p_z = valz;
             } else if (valsub instanceof Integer) {
               ischanged = true;
               vx_p_z = Core.vx_new(Core.t_int, valsub);
@@ -3938,8 +4018,9 @@ public final class Ui {
           case ":t":
             if (valsub == vx_p_t) {
             } else if (valsub instanceof Core.Type_int) {
+              Core.Type_int valt = (Core.Type_int)valsub;;
               ischanged = true;
-              vx_p_t = (Core.Type_int)valsub;
+              vx_p_t = valt;
             } else if (valsub instanceof Integer) {
               ischanged = true;
               vx_p_t = Core.vx_new(Core.t_int, valsub);
@@ -3962,8 +4043,9 @@ public final class Ui {
           case ":i":
             if (valsub == vx_p_i) {
             } else if (valsub instanceof Core.Type_int) {
+              Core.Type_int vali = (Core.Type_int)valsub;;
               ischanged = true;
-              vx_p_i = (Core.Type_int)valsub;
+              vx_p_i = vali;
             } else if (valsub instanceof Integer) {
               ischanged = true;
               vx_p_i = Core.vx_new(Core.t_int, valsub);
@@ -3986,8 +4068,9 @@ public final class Ui {
           case ":pointtype":
             if (valsub == vx_p_pointtype) {
             } else if (valsub instanceof Ui.Type_pointtype) {
+              Ui.Type_pointtype valpointtype = (Ui.Type_pointtype)valsub;;
               ischanged = true;
-              vx_p_pointtype = (Ui.Type_pointtype)valsub;
+              vx_p_pointtype = valpointtype;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -4584,16 +4667,20 @@ public final class Ui {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -4618,8 +4705,9 @@ public final class Ui {
           case ":name":
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valname = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_name = (Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
@@ -4642,8 +4730,9 @@ public final class Ui {
           case ":align":
             if (valsub == vx_p_align) {
             } else if (valsub instanceof Ui.Type_align) {
+              Ui.Type_align valalign = (Ui.Type_align)valsub;;
               ischanged = true;
-              vx_p_align = (Ui.Type_align)valsub;
+              vx_p_align = valalign;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -4663,8 +4752,9 @@ public final class Ui {
           case ":boundsmargin":
             if (valsub == vx_p_boundsmargin) {
             } else if (valsub instanceof Ui.Type_bounds) {
+              Ui.Type_bounds valboundsmargin = (Ui.Type_bounds)valsub;;
               ischanged = true;
-              vx_p_boundsmargin = (Ui.Type_bounds)valsub;
+              vx_p_boundsmargin = valboundsmargin;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -4684,8 +4774,9 @@ public final class Ui {
           case ":boundspadding":
             if (valsub == vx_p_boundspadding) {
             } else if (valsub instanceof Ui.Type_bounds) {
+              Ui.Type_bounds valboundspadding = (Ui.Type_bounds)valsub;;
               ischanged = true;
-              vx_p_boundspadding = (Ui.Type_bounds)valsub;
+              vx_p_boundspadding = valboundspadding;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -4705,8 +4796,9 @@ public final class Ui {
           case ":color-bkg":
             if (valsub == vx_p_color_bkg) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valcolor_bkg = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_color_bkg = (Core.Type_string)valsub;
+              vx_p_color_bkg = valcolor_bkg;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_color_bkg = Core.vx_new(Core.t_string, valsub);
@@ -4729,8 +4821,9 @@ public final class Ui {
           case ":color-bkghover":
             if (valsub == vx_p_color_bkghover) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valcolor_bkghover = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_color_bkghover = (Core.Type_string)valsub;
+              vx_p_color_bkghover = valcolor_bkghover;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_color_bkghover = Core.vx_new(Core.t_string, valsub);
@@ -4753,8 +4846,9 @@ public final class Ui {
           case ":color-border":
             if (valsub == vx_p_color_border) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valcolor_border = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_color_border = (Core.Type_string)valsub;
+              vx_p_color_border = valcolor_border;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_color_border = Core.vx_new(Core.t_string, valsub);
@@ -4777,8 +4871,9 @@ public final class Ui {
           case ":color-font":
             if (valsub == vx_p_color_font) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valcolor_font = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_color_font = (Core.Type_string)valsub;
+              vx_p_color_font = valcolor_font;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_color_font = Core.vx_new(Core.t_string, valsub);
@@ -4801,8 +4896,9 @@ public final class Ui {
           case ":cursor":
             if (valsub == vx_p_cursor) {
             } else if (valsub instanceof Ui.Type_cursor) {
+              Ui.Type_cursor valcursor = (Ui.Type_cursor)valsub;;
               ischanged = true;
-              vx_p_cursor = (Ui.Type_cursor)valsub;
+              vx_p_cursor = valcursor;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -4822,8 +4918,9 @@ public final class Ui {
           case ":flip":
             if (valsub == vx_p_flip) {
             } else if (valsub instanceof Ui.Type_flip) {
+              Ui.Type_flip valflip = (Ui.Type_flip)valsub;;
               ischanged = true;
-              vx_p_flip = (Ui.Type_flip)valsub;
+              vx_p_flip = valflip;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -4843,8 +4940,9 @@ public final class Ui {
           case ":font":
             if (valsub == vx_p_font) {
             } else if (valsub instanceof Ui.Type_font) {
+              Ui.Type_font valfont = (Ui.Type_font)valsub;;
               ischanged = true;
-              vx_p_font = (Ui.Type_font)valsub;
+              vx_p_font = valfont;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -4864,8 +4962,9 @@ public final class Ui {
           case ":hidden":
             if (valsub == vx_p_hidden) {
             } else if (valsub instanceof Core.Type_boolean) {
+              Core.Type_boolean valhidden = (Core.Type_boolean)valsub;;
               ischanged = true;
-              vx_p_hidden = (Core.Type_boolean)valsub;
+              vx_p_hidden = valhidden;
             } else if (valsub instanceof Boolean) {
               ischanged = true;
               vx_p_hidden = Core.vx_new(Core.t_boolean, valsub);
@@ -4888,8 +4987,9 @@ public final class Ui {
           case ":image-bkg":
             if (valsub == vx_p_image_bkg) {
             } else if (valsub instanceof Ui.Type_image) {
+              Ui.Type_image valimage_bkg = (Ui.Type_image)valsub;;
               ischanged = true;
-              vx_p_image_bkg = (Ui.Type_image)valsub;
+              vx_p_image_bkg = valimage_bkg;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -4909,8 +5009,9 @@ public final class Ui {
           case ":layout":
             if (valsub == vx_p_layout) {
             } else if (valsub instanceof Ui.Type_layout) {
+              Ui.Type_layout vallayout = (Ui.Type_layout)valsub;;
               ischanged = true;
-              vx_p_layout = (Ui.Type_layout)valsub;
+              vx_p_layout = vallayout;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -4930,8 +5031,9 @@ public final class Ui {
           case ":type":
             if (valsub == vx_p_type) {
             } else if (valsub instanceof Ui.Type_styletype) {
+              Ui.Type_styletype valtype = (Ui.Type_styletype)valsub;;
               ischanged = true;
-              vx_p_type = (Ui.Type_styletype)valsub;
+              vx_p_type = valtype;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -4951,8 +5053,9 @@ public final class Ui {
           case ":pin":
             if (valsub == vx_p_pin) {
             } else if (valsub instanceof Ui.Type_pin) {
+              Ui.Type_pin valpin = (Ui.Type_pin)valsub;;
               ischanged = true;
-              vx_p_pin = (Ui.Type_pin)valsub;
+              vx_p_pin = valpin;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -4972,8 +5075,9 @@ public final class Ui {
           case ":pointorigin":
             if (valsub == vx_p_pointorigin) {
             } else if (valsub instanceof Ui.Type_point) {
+              Ui.Type_point valpointorigin = (Ui.Type_point)valsub;;
               ischanged = true;
-              vx_p_pointorigin = (Ui.Type_point)valsub;
+              vx_p_pointorigin = valpointorigin;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -4993,8 +5097,9 @@ public final class Ui {
           case ":pointpos":
             if (valsub == vx_p_pointpos) {
             } else if (valsub instanceof Ui.Type_point) {
+              Ui.Type_point valpointpos = (Ui.Type_point)valsub;;
               ischanged = true;
-              vx_p_pointpos = (Ui.Type_point)valsub;
+              vx_p_pointpos = valpointpos;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -5014,8 +5119,9 @@ public final class Ui {
           case ":pointrotate":
             if (valsub == vx_p_pointrotate) {
             } else if (valsub instanceof Ui.Type_point) {
+              Ui.Type_point valpointrotate = (Ui.Type_point)valsub;;
               ischanged = true;
-              vx_p_pointrotate = (Ui.Type_point)valsub;
+              vx_p_pointrotate = valpointrotate;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -5035,8 +5141,9 @@ public final class Ui {
           case ":pointsize":
             if (valsub == vx_p_pointsize) {
             } else if (valsub instanceof Ui.Type_point) {
+              Ui.Type_point valpointsize = (Ui.Type_point)valsub;;
               ischanged = true;
-              vx_p_pointsize = (Ui.Type_point)valsub;
+              vx_p_pointsize = valpointsize;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -5056,8 +5163,9 @@ public final class Ui {
           case ":scroll-x":
             if (valsub == vx_p_scroll_x) {
             } else if (valsub instanceof Core.Type_boolean) {
+              Core.Type_boolean valscroll_x = (Core.Type_boolean)valsub;;
               ischanged = true;
-              vx_p_scroll_x = (Core.Type_boolean)valsub;
+              vx_p_scroll_x = valscroll_x;
             } else if (valsub instanceof Boolean) {
               ischanged = true;
               vx_p_scroll_x = Core.vx_new(Core.t_boolean, valsub);
@@ -5080,8 +5188,9 @@ public final class Ui {
           case ":scroll-y":
             if (valsub == vx_p_scroll_y) {
             } else if (valsub instanceof Core.Type_boolean) {
+              Core.Type_boolean valscroll_y = (Core.Type_boolean)valsub;;
               ischanged = true;
-              vx_p_scroll_y = (Core.Type_boolean)valsub;
+              vx_p_scroll_y = valscroll_y;
             } else if (valsub instanceof Boolean) {
               ischanged = true;
               vx_p_scroll_y = Core.vx_new(Core.t_boolean, valsub);
@@ -5252,14 +5361,15 @@ public final class Ui {
           ischanged = true;
           listval.add((Ui.Type_style)valsub);
         } else if (valsub instanceof Ui.Type_stylelist) {
-          Type_stylelist multi = (Type_stylelist)valsub;
+          Ui.Type_stylelist multi = (Ui.Type_stylelist)valsub;;
           ischanged = true;
           listval.addAll(multi.vx_liststyle());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
-            if (item instanceof Ui.Type_style) {
-              Ui.Type_style valitem = (Ui.Type_style)item;
+            if (false) {
+            } else if (item instanceof Ui.Type_style) {
+              Ui.Type_style valitem = (Ui.Type_style)item;;
               ischanged = true;
               listval.add(valitem);
             }
@@ -5342,12 +5452,13 @@ public final class Ui {
     @Override
     public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
       Core.Type_boolean output = Core.c_false;
-      if (value instanceof Ui.Type_style) {
+      if (false) {
+      } else if (value instanceof Ui.Type_style) {
+        Ui.Type_style castval = (Ui.Type_style)value;;
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
         }
-        Ui.Type_style castval = (Ui.Type_style)value;
         Map<String, Ui.Type_style> map = new LinkedHashMap<String, Ui.Type_style>(this.vx_p_map);
         if (castval == Ui.e_style) {
           map.remove(key);
@@ -5450,8 +5561,10 @@ public final class Ui {
           }
         } else {
           Ui.Type_style valany = null;
-          if (valsub instanceof Ui.Type_style) {
-            valany = (Ui.Type_style)valsub;
+          if (false) {
+          } else if (valsub instanceof Ui.Type_style) {
+            Ui.Type_style valallowed = (Ui.Type_style)valsub;;
+            valany = valallowed;
           } else if (valsub instanceof Ui.Type_style) {
             valany = (Ui.Type_style)valsub;
           } else {
@@ -5614,16 +5727,20 @@ public final class Ui {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -5648,8 +5765,9 @@ public final class Ui {
           case ":fontfacemap":
             if (valsub == vx_p_fontfacemap) {
             } else if (valsub instanceof Ui.Type_fontfacemap) {
+              Ui.Type_fontfacemap valfontfacemap = (Ui.Type_fontfacemap)valsub;;
               ischanged = true;
-              vx_p_fontfacemap = (Ui.Type_fontfacemap)valsub;
+              vx_p_fontfacemap = valfontfacemap;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -5669,8 +5787,9 @@ public final class Ui {
           case ":stylemap":
             if (valsub == vx_p_stylemap) {
             } else if (valsub instanceof Ui.Type_stylemap) {
+              Ui.Type_stylemap valstylemap = (Ui.Type_stylemap)valsub;;
               ischanged = true;
-              vx_p_stylemap = (Ui.Type_stylemap)valsub;
+              vx_p_stylemap = valstylemap;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -6095,16 +6214,20 @@ public final class Ui {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -6129,8 +6252,9 @@ public final class Ui {
           case ":uid":
             if (valsub == vx_p_uid) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valuid = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_uid = (Core.Type_string)valsub;
+              vx_p_uid = valuid;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_uid = Core.vx_new(Core.t_string, valsub);
@@ -6153,8 +6277,9 @@ public final class Ui {
           case ":name":
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valname = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_name = (Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
@@ -6177,8 +6302,9 @@ public final class Ui {
           case ":layout":
             if (valsub == vx_p_layout) {
             } else if (valsub instanceof Ui.Type_layout) {
+              Ui.Type_layout vallayout = (Ui.Type_layout)valsub;;
               ischanged = true;
-              vx_p_layout = (Ui.Type_layout)valsub;
+              vx_p_layout = vallayout;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -6198,8 +6324,9 @@ public final class Ui {
           case ":path":
             if (valsub == vx_p_path) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valpath = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_path = (Core.Type_string)valsub;
+              vx_p_path = valpath;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_path = Core.vx_new(Core.t_string, valsub);
@@ -6222,8 +6349,9 @@ public final class Ui {
           case ":hidden":
             if (valsub == vx_p_hidden) {
             } else if (valsub instanceof Core.Type_boolean) {
+              Core.Type_boolean valhidden = (Core.Type_boolean)valsub;;
               ischanged = true;
-              vx_p_hidden = (Core.Type_boolean)valsub;
+              vx_p_hidden = valhidden;
             } else if (valsub instanceof Boolean) {
               ischanged = true;
               vx_p_hidden = Core.vx_new(Core.t_boolean, valsub);
@@ -6246,8 +6374,9 @@ public final class Ui {
           case ":selected":
             if (valsub == vx_p_selected) {
             } else if (valsub instanceof Core.Type_boolean) {
+              Core.Type_boolean valselected = (Core.Type_boolean)valsub;;
               ischanged = true;
-              vx_p_selected = (Core.Type_boolean)valsub;
+              vx_p_selected = valselected;
             } else if (valsub instanceof Boolean) {
               ischanged = true;
               vx_p_selected = Core.vx_new(Core.t_boolean, valsub);
@@ -6270,8 +6399,9 @@ public final class Ui {
           case ":selectmulti":
             if (valsub == vx_p_selectmulti) {
             } else if (valsub instanceof Core.Type_boolean) {
+              Core.Type_boolean valselectmulti = (Core.Type_boolean)valsub;;
               ischanged = true;
-              vx_p_selectmulti = (Core.Type_boolean)valsub;
+              vx_p_selectmulti = valselectmulti;
             } else if (valsub instanceof Boolean) {
               ischanged = true;
               vx_p_selectmulti = Core.vx_new(Core.t_boolean, valsub);
@@ -6294,8 +6424,9 @@ public final class Ui {
           case ":style":
             if (valsub == vx_p_style) {
             } else if (valsub instanceof Ui.Type_style) {
+              Ui.Type_style valstyle = (Ui.Type_style)valsub;;
               ischanged = true;
-              vx_p_style = (Ui.Type_style)valsub;
+              vx_p_style = valstyle;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -6315,8 +6446,9 @@ public final class Ui {
           case ":stylelist":
             if (valsub == vx_p_stylelist) {
             } else if (valsub instanceof Ui.Type_stylelist) {
+              Ui.Type_stylelist valstylelist = (Ui.Type_stylelist)valsub;;
               ischanged = true;
-              vx_p_stylelist = (Ui.Type_stylelist)valsub;
+              vx_p_stylelist = valstylelist;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -6336,8 +6468,9 @@ public final class Ui {
           case ":eventmap":
             if (valsub == vx_p_eventmap) {
             } else if (valsub instanceof Event.Type_eventmap) {
+              Event.Type_eventmap valeventmap = (Event.Type_eventmap)valsub;;
               ischanged = true;
-              vx_p_eventmap = (Event.Type_eventmap)valsub;
+              vx_p_eventmap = valeventmap;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -6357,8 +6490,9 @@ public final class Ui {
           case ":data":
             if (valsub == vx_p_data) {
             } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valdata = (Core.Type_any)valsub;;
               ischanged = true;
-              vx_p_data = (Core.Type_any)valsub;
+              vx_p_data = valdata;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -6378,8 +6512,9 @@ public final class Ui {
           case ":uimap":
             if (valsub == vx_p_uimap) {
             } else if (valsub instanceof Ui.Type_uimap) {
+              Ui.Type_uimap valuimap = (Ui.Type_uimap)valsub;;
               ischanged = true;
-              vx_p_uimap = (Ui.Type_uimap)valsub;
+              vx_p_uimap = valuimap;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -6587,16 +6722,20 @@ public final class Ui {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -6621,8 +6760,9 @@ public final class Ui {
           case ":parentmap":
             if (valsub == vx_p_parentmap) {
             } else if (valsub instanceof Ui.Type_uimap) {
+              Ui.Type_uimap valparentmap = (Ui.Type_uimap)valsub;;
               ischanged = true;
-              vx_p_parentmap = (Ui.Type_uimap)valsub;
+              vx_p_parentmap = valparentmap;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -6642,8 +6782,9 @@ public final class Ui {
           case ":layoutengine":
             if (valsub == vx_p_layoutengine) {
             } else if (valsub instanceof Ui.Type_layoutengine) {
+              Ui.Type_layoutengine vallayoutengine = (Ui.Type_layoutengine)valsub;;
               ischanged = true;
-              vx_p_layoutengine = (Ui.Type_layoutengine)valsub;
+              vx_p_layoutengine = vallayoutengine;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -6663,8 +6804,9 @@ public final class Ui {
           case ":stylesheet":
             if (valsub == vx_p_stylesheet) {
             } else if (valsub instanceof Ui.Type_stylesheet) {
+              Ui.Type_stylesheet valstylesheet = (Ui.Type_stylesheet)valsub;;
               ischanged = true;
-              vx_p_stylesheet = (Ui.Type_stylesheet)valsub;
+              vx_p_stylesheet = valstylesheet;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -6684,8 +6826,9 @@ public final class Ui {
           case ":ui":
             if (valsub == vx_p_ui) {
             } else if (valsub instanceof Ui.Type_ui) {
+              Ui.Type_ui valui = (Ui.Type_ui)valsub;;
               ischanged = true;
-              vx_p_ui = (Ui.Type_ui)valsub;
+              vx_p_ui = valui;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -6835,14 +6978,15 @@ public final class Ui {
           ischanged = true;
           listval.add((Ui.Type_ui)valsub);
         } else if (valsub instanceof Ui.Type_uilist) {
-          Type_uilist multi = (Type_uilist)valsub;
+          Ui.Type_uilist multi = (Ui.Type_uilist)valsub;;
           ischanged = true;
           listval.addAll(multi.vx_listui());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
-            if (item instanceof Ui.Type_ui) {
-              Ui.Type_ui valitem = (Ui.Type_ui)item;
+            if (false) {
+            } else if (item instanceof Ui.Type_ui) {
+              Ui.Type_ui valitem = (Ui.Type_ui)item;;
               ischanged = true;
               listval.add(valitem);
             }
@@ -6925,12 +7069,13 @@ public final class Ui {
     @Override
     public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
       Core.Type_boolean output = Core.c_false;
-      if (value instanceof Ui.Type_ui) {
+      if (false) {
+      } else if (value instanceof Ui.Type_ui) {
+        Ui.Type_ui castval = (Ui.Type_ui)value;;
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
         }
-        Ui.Type_ui castval = (Ui.Type_ui)value;
         Map<String, Ui.Type_ui> map = new LinkedHashMap<String, Ui.Type_ui>(this.vx_p_map);
         if (castval == Ui.e_ui) {
           map.remove(key);
@@ -7033,8 +7178,10 @@ public final class Ui {
           }
         } else {
           Ui.Type_ui valany = null;
-          if (valsub instanceof Ui.Type_ui) {
-            valany = (Ui.Type_ui)valsub;
+          if (false) {
+          } else if (valsub instanceof Ui.Type_ui) {
+            Ui.Type_ui valallowed = (Ui.Type_ui)valsub;;
+            valany = valallowed;
           } else if (valsub instanceof Ui.Type_ui) {
             valany = (Ui.Type_ui)valsub;
           } else {

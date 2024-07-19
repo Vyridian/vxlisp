@@ -85,16 +85,17 @@ public static class Table {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -118,9 +119,9 @@ public static class Table {
           switch (key) {
           case ":id":
             if (valsub == vx_p_id) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valid) {
               ischanged = true;
-              vx_p_id = (Vx.Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -141,9 +142,9 @@ public static class Table {
             break;
           case ":value":
             if (valsub == vx_p_value) {
-            } else if (valsub is Vx.Core.Type_any) {
+            } else if (valsub is Vx.Core.Type_any valvalue) {
               ischanged = true;
-              vx_p_value = (Vx.Core.Type_any)valsub;
+              vx_p_value = valvalue;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -274,14 +275,13 @@ public static class Table {
         } else if (valsub is Vx.Data.Table.Type_cell) {
           ischanged = true;
           listval.Add((Vx.Data.Table.Type_cell)valsub);
-        } else if (valsub is Vx.Data.Table.Type_celllist) {
-          Type_celllist multi = (Type_celllist)valsub;
+        } else if (valsub is Vx.Data.Table.Type_celllist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listcell());
         } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
-            if (item is Vx.Data.Table.Type_cell) {
-              Vx.Data.Table.Type_cell valitem = (Vx.Data.Table.Type_cell)item;
+            if (false) {
+            } else if (item is Vx.Data.Table.Type_cell valitem) {
               ischanged = true;
               listval.Add(valitem);
             }
@@ -347,19 +347,19 @@ public static class Table {
     public Vx.Core.Map<string, Vx.Data.Table.Type_cell> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Data.Table.Type_cell>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)this.vx_p_map;
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
 
     public Vx.Core.Type_boolean vx_set(Vx.Core.Type_string name, Vx.Core.Type_any value) {
       Vx.Core.Type_boolean output = Vx.Core.c_false;
-      if (value is Vx.Data.Table.Type_cell) {
+      if (false) {
+      } else if (value is Vx.Data.Table.Type_cell castval) {
         string key = name.vx_string();
         if (key.StartsWith(":")) {
           key = key.Substring(1);
         }
-        Vx.Data.Table.Type_cell castval = (Vx.Data.Table.Type_cell)value;
         Vx.Core.Map<string, Vx.Data.Table.Type_cell> map = new Vx.Core.LinkedHashMap<string, Vx.Data.Table.Type_cell>(this.vx_p_map);
         if (castval == Vx.Data.Table.e_cell) {
           map.remove(key);
@@ -452,8 +452,9 @@ public static class Table {
           }
         } else {
           Vx.Data.Table.Type_cell? valany = null;
-          if (valsub is Vx.Data.Table.Type_cell) {
-            valany = (Vx.Data.Table.Type_cell)valsub;
+          if (false) {
+          } else if (valsub is Vx.Data.Table.Type_cell valallowed) {
+            valany = valallowed;
           } else if (valsub is Vx.Data.Table.Type_cell) {
             valany = valsub as Vx.Data.Table.Type_cell;
           } else {
@@ -618,16 +619,17 @@ public static class Table {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -651,9 +653,9 @@ public static class Table {
           switch (key) {
           case ":id":
             if (valsub == vx_p_id) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valid) {
               ischanged = true;
-              vx_p_id = (Vx.Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -674,9 +676,9 @@ public static class Table {
             break;
           case ":name":
             if (valsub == vx_p_name) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
-              vx_p_name = (Vx.Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -697,9 +699,9 @@ public static class Table {
             break;
           case ":fldtype":
             if (valsub == vx_p_fldtype) {
-            } else if (valsub is Vx.Core.Type_any) {
+            } else if (valsub is Vx.Core.Type_any valfldtype) {
               ischanged = true;
-              vx_p_fldtype = (Vx.Core.Type_any)valsub;
+              vx_p_fldtype = valfldtype;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -831,14 +833,13 @@ public static class Table {
         } else if (valsub is Vx.Data.Table.Type_field) {
           ischanged = true;
           listval.Add((Vx.Data.Table.Type_field)valsub);
-        } else if (valsub is Vx.Data.Table.Type_fieldlist) {
-          Type_fieldlist multi = (Type_fieldlist)valsub;
+        } else if (valsub is Vx.Data.Table.Type_fieldlist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listfield());
         } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
-            if (item is Vx.Data.Table.Type_field) {
-              Vx.Data.Table.Type_field valitem = (Vx.Data.Table.Type_field)item;
+            if (false) {
+            } else if (item is Vx.Data.Table.Type_field valitem) {
               ischanged = true;
               listval.Add(valitem);
             }
@@ -956,14 +957,13 @@ public static class Table {
         } else if (valsub is Vx.Data.Table.Type_field) {
           ischanged = true;
           listval.Add((Vx.Data.Table.Type_field)valsub);
-        } else if (valsub is Vx.Data.Table.Type_fieldmap) {
-          Type_fieldmap multi = (Type_fieldmap)valsub;
+        } else if (valsub is Vx.Data.Table.Type_fieldmap multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listfield());
         } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
-            if (item is Vx.Data.Table.Type_field) {
-              Vx.Data.Table.Type_field valitem = (Vx.Data.Table.Type_field)item;
+            if (false) {
+            } else if (item is Vx.Data.Table.Type_field valitem) {
               ischanged = true;
               listval.Add(valitem);
             }
@@ -1114,16 +1114,17 @@ public static class Table {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -1147,9 +1148,9 @@ public static class Table {
           switch (key) {
           case ":id":
             if (valsub == vx_p_id) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valid) {
               ischanged = true;
-              vx_p_id = (Vx.Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -1170,9 +1171,9 @@ public static class Table {
             break;
           case ":name":
             if (valsub == vx_p_name) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
-              vx_p_name = (Vx.Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -1193,9 +1194,9 @@ public static class Table {
             break;
           case ":idlist":
             if (valsub == vx_p_idlist) {
-            } else if (valsub is Vx.Core.Type_stringlist) {
+            } else if (valsub is Vx.Core.Type_stringlist validlist) {
               ischanged = true;
-              vx_p_idlist = (Vx.Core.Type_stringlist)valsub;
+              vx_p_idlist = validlist;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -1360,16 +1361,17 @@ public static class Table {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -1393,9 +1395,9 @@ public static class Table {
           switch (key) {
           case ":id":
             if (valsub == vx_p_id) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valid) {
               ischanged = true;
-              vx_p_id = (Vx.Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -1416,9 +1418,9 @@ public static class Table {
             break;
           case ":cellmap":
             if (valsub == vx_p_cellmap) {
-            } else if (valsub is Vx.Data.Table.Type_cellmap) {
+            } else if (valsub is Vx.Data.Table.Type_cellmap valcellmap) {
               ischanged = true;
-              vx_p_cellmap = (Vx.Data.Table.Type_cellmap)valsub;
+              vx_p_cellmap = valcellmap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -1436,9 +1438,9 @@ public static class Table {
             break;
           case ":cellsort":
             if (valsub == vx_p_cellsort) {
-            } else if (valsub is Vx.Data.Table.Type_sort) {
+            } else if (valsub is Vx.Data.Table.Type_sort valcellsort) {
               ischanged = true;
-              vx_p_cellsort = (Vx.Data.Table.Type_sort)valsub;
+              vx_p_cellsort = valcellsort;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -1570,14 +1572,13 @@ public static class Table {
         } else if (valsub is Vx.Data.Table.Type_row) {
           ischanged = true;
           listval.Add((Vx.Data.Table.Type_row)valsub);
-        } else if (valsub is Vx.Data.Table.Type_rowlist) {
-          Type_rowlist multi = (Type_rowlist)valsub;
+        } else if (valsub is Vx.Data.Table.Type_rowlist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listrow());
         } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
-            if (item is Vx.Data.Table.Type_row) {
-              Vx.Data.Table.Type_row valitem = (Vx.Data.Table.Type_row)item;
+            if (false) {
+            } else if (item is Vx.Data.Table.Type_row valitem) {
               ischanged = true;
               listval.Add(valitem);
             }
@@ -1643,19 +1644,19 @@ public static class Table {
     public Vx.Core.Map<string, Vx.Data.Table.Type_row> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Data.Table.Type_row>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)this.vx_p_map;
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
 
     public Vx.Core.Type_boolean vx_set(Vx.Core.Type_string name, Vx.Core.Type_any value) {
       Vx.Core.Type_boolean output = Vx.Core.c_false;
-      if (value is Vx.Data.Table.Type_row) {
+      if (false) {
+      } else if (value is Vx.Data.Table.Type_row castval) {
         string key = name.vx_string();
         if (key.StartsWith(":")) {
           key = key.Substring(1);
         }
-        Vx.Data.Table.Type_row castval = (Vx.Data.Table.Type_row)value;
         Vx.Core.Map<string, Vx.Data.Table.Type_row> map = new Vx.Core.LinkedHashMap<string, Vx.Data.Table.Type_row>(this.vx_p_map);
         if (castval == Vx.Data.Table.e_row) {
           map.remove(key);
@@ -1748,8 +1749,9 @@ public static class Table {
           }
         } else {
           Vx.Data.Table.Type_row? valany = null;
-          if (valsub is Vx.Data.Table.Type_row) {
-            valany = (Vx.Data.Table.Type_row)valsub;
+          if (false) {
+          } else if (valsub is Vx.Data.Table.Type_row valallowed) {
+            valany = valallowed;
           } else if (valsub is Vx.Data.Table.Type_row) {
             valany = valsub as Vx.Data.Table.Type_row;
           } else {
@@ -1914,16 +1916,17 @@ public static class Table {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -1947,9 +1950,9 @@ public static class Table {
           switch (key) {
           case ":id":
             if (valsub == vx_p_id) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valid) {
               ischanged = true;
-              vx_p_id = (Vx.Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -1970,9 +1973,9 @@ public static class Table {
             break;
           case ":name":
             if (valsub == vx_p_name) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
-              vx_p_name = (Vx.Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -1993,9 +1996,9 @@ public static class Table {
             break;
           case ":idlist":
             if (valsub == vx_p_idlist) {
-            } else if (valsub is Vx.Core.Type_stringlist) {
+            } else if (valsub is Vx.Core.Type_stringlist validlist) {
               ischanged = true;
-              vx_p_idlist = (Vx.Core.Type_stringlist)valsub;
+              vx_p_idlist = validlist;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2228,16 +2231,17 @@ public static class Table {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -2261,9 +2265,9 @@ public static class Table {
           switch (key) {
           case ":id":
             if (valsub == vx_p_id) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valid) {
               ischanged = true;
-              vx_p_id = (Vx.Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_id = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -2284,9 +2288,9 @@ public static class Table {
             break;
           case ":name":
             if (valsub == vx_p_name) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
-              vx_p_name = (Vx.Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -2307,9 +2311,9 @@ public static class Table {
             break;
           case ":fieldmap":
             if (valsub == vx_p_fieldmap) {
-            } else if (valsub is Vx.Data.Table.Type_fieldmap) {
+            } else if (valsub is Vx.Data.Table.Type_fieldmap valfieldmap) {
               ischanged = true;
-              vx_p_fieldmap = (Vx.Data.Table.Type_fieldmap)valsub;
+              vx_p_fieldmap = valfieldmap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2327,9 +2331,9 @@ public static class Table {
             break;
           case ":fieldsort":
             if (valsub == vx_p_fieldsort) {
-            } else if (valsub is Vx.Data.Table.Type_sort) {
+            } else if (valsub is Vx.Data.Table.Type_sort valfieldsort) {
               ischanged = true;
-              vx_p_fieldsort = (Vx.Data.Table.Type_sort)valsub;
+              vx_p_fieldsort = valfieldsort;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2347,9 +2351,9 @@ public static class Table {
             break;
           case ":rowmap":
             if (valsub == vx_p_rowmap) {
-            } else if (valsub is Vx.Data.Table.Type_rowmap) {
+            } else if (valsub is Vx.Data.Table.Type_rowmap valrowmap) {
               ischanged = true;
-              vx_p_rowmap = (Vx.Data.Table.Type_rowmap)valsub;
+              vx_p_rowmap = valrowmap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2367,9 +2371,9 @@ public static class Table {
             break;
           case ":rowfilter":
             if (valsub == vx_p_rowfilter) {
-            } else if (valsub is Vx.Data.Table.Type_filter) {
+            } else if (valsub is Vx.Data.Table.Type_filter valrowfilter) {
               ischanged = true;
-              vx_p_rowfilter = (Vx.Data.Table.Type_filter)valsub;
+              vx_p_rowfilter = valrowfilter;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2387,9 +2391,9 @@ public static class Table {
             break;
           case ":rowsort":
             if (valsub == vx_p_rowsort) {
-            } else if (valsub is Vx.Data.Table.Type_sort) {
+            } else if (valsub is Vx.Data.Table.Type_sort valrowsort) {
               ischanged = true;
-              vx_p_rowsort = (Vx.Data.Table.Type_sort)valsub;
+              vx_p_rowsort = valrowsort;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {

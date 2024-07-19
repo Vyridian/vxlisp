@@ -174,16 +174,20 @@ public final class File {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -208,8 +212,9 @@ public final class File {
           case ":name":
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valname = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_name = (Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
@@ -232,8 +237,9 @@ public final class File {
           case ":format":
             if (valsub == vx_p_format) {
             } else if (valsub instanceof File.Type_fileformat) {
+              File.Type_fileformat valformat = (File.Type_fileformat)valsub;;
               ischanged = true;
-              vx_p_format = (File.Type_fileformat)valsub;
+              vx_p_format = valformat;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -253,8 +259,9 @@ public final class File {
           case ":path":
             if (valsub == vx_p_path) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valpath = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_path = (Core.Type_string)valsub;
+              vx_p_path = valpath;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_path = Core.vx_new(Core.t_string, valsub);
@@ -277,8 +284,9 @@ public final class File {
           case ":permission":
             if (valsub == vx_p_permission) {
             } else if (valsub instanceof Core.Type_permission) {
+              Core.Type_permission valpermission = (Core.Type_permission)valsub;;
               ischanged = true;
-              vx_p_permission = (Core.Type_permission)valsub;
+              vx_p_permission = valpermission;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -298,8 +306,9 @@ public final class File {
           case ":text":
             if (valsub == vx_p_text) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valtext = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_text = (Core.Type_string)valsub;
+              vx_p_text = valtext;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_text = Core.vx_new(Core.t_string, valsub);
@@ -523,14 +532,15 @@ public final class File {
           ischanged = true;
           listval.add((File.Type_file)valsub);
         } else if (valsub instanceof File.Type_filelist) {
-          Type_filelist multi = (Type_filelist)valsub;
+          File.Type_filelist multi = (File.Type_filelist)valsub;;
           ischanged = true;
           listval.addAll(multi.vx_listfile());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
-            if (item instanceof File.Type_file) {
-              File.Type_file valitem = (File.Type_file)item;
+            if (false) {
+            } else if (item instanceof File.Type_file) {
+              File.Type_file valitem = (File.Type_file)item;;
               ischanged = true;
               listval.add(valitem);
             }

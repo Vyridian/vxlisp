@@ -85,16 +85,17 @@ public static class Csv {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -118,9 +119,9 @@ public static class Csv {
           switch (key) {
           case ":headers":
             if (valsub == vx_p_headers) {
-            } else if (valsub is Vx.Core.Type_stringlist) {
+            } else if (valsub is Vx.Core.Type_stringlist valheaders) {
               ischanged = true;
-              vx_p_headers = (Vx.Core.Type_stringlist)valsub;
+              vx_p_headers = valheaders;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -138,9 +139,9 @@ public static class Csv {
             break;
           case ":rows":
             if (valsub == vx_p_rows) {
-            } else if (valsub is Vx.Data.Csv.Type_csvrows) {
+            } else if (valsub is Vx.Data.Csv.Type_csvrows valrows) {
               ischanged = true;
-              vx_p_rows = (Vx.Data.Csv.Type_csvrows)valsub;
+              vx_p_rows = valrows;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -219,19 +220,19 @@ public static class Csv {
     public Vx.Core.Map<string, Vx.Core.Type_stringlist> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Core.Type_stringlist>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)this.vx_p_map;
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
 
     public Vx.Core.Type_boolean vx_set(Vx.Core.Type_string name, Vx.Core.Type_any value) {
       Vx.Core.Type_boolean output = Vx.Core.c_false;
-      if (value is Vx.Core.Type_stringlist) {
+      if (false) {
+      } else if (value is Vx.Core.Type_stringlist castval) {
         string key = name.vx_string();
         if (key.StartsWith(":")) {
           key = key.Substring(1);
         }
-        Vx.Core.Type_stringlist castval = (Vx.Core.Type_stringlist)value;
         Vx.Core.Map<string, Vx.Core.Type_stringlist> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_stringlist>(this.vx_p_map);
         if (castval == Vx.Core.e_stringlist) {
           map.remove(key);
@@ -324,8 +325,9 @@ public static class Csv {
           }
         } else {
           Vx.Core.Type_stringlist? valany = null;
-          if (valsub is Vx.Core.Type_stringlist) {
-            valany = (Vx.Core.Type_stringlist)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_stringlist valallowed) {
+            valany = valallowed;
           } else if (valsub is Vx.Core.Type_stringlist) {
             valany = valsub as Vx.Core.Type_stringlist;
           } else {
@@ -457,14 +459,13 @@ public static class Csv {
         } else if (valsub is Vx.Core.Type_stringlist) {
           ischanged = true;
           listval.Add((Vx.Core.Type_stringlist)valsub);
-        } else if (valsub is Vx.Data.Csv.Type_csvrows) {
-          Type_csvrows multi = (Type_csvrows)valsub;
+        } else if (valsub is Vx.Data.Csv.Type_csvrows multi) {
           ischanged = true;
           listval.AddRange(multi.vx_liststringlist());
         } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
-            if (item is Vx.Core.Type_stringlist) {
-              Vx.Core.Type_stringlist valitem = (Vx.Core.Type_stringlist)item;
+            if (false) {
+            } else if (item is Vx.Core.Type_stringlist valitem) {
               ischanged = true;
               listval.Add(valitem);
             }

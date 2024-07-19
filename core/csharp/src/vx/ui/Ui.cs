@@ -192,16 +192,17 @@ public static class Ui {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -225,9 +226,9 @@ public static class Ui {
           switch (key) {
           case ":left":
             if (valsub == vx_p_left) {
-            } else if (valsub is Vx.Core.Type_int) {
+            } else if (valsub is Vx.Core.Type_int valleft) {
               ischanged = true;
-              vx_p_left = (Vx.Core.Type_int)valsub;
+              vx_p_left = valleft;
             } else if (valsub is int) {
               ischanged = true;
               vx_p_left = Vx.Core.vx_new(Vx.Core.t_int, valsub);
@@ -248,9 +249,9 @@ public static class Ui {
             break;
           case ":right":
             if (valsub == vx_p_right) {
-            } else if (valsub is Vx.Core.Type_int) {
+            } else if (valsub is Vx.Core.Type_int valright) {
               ischanged = true;
-              vx_p_right = (Vx.Core.Type_int)valsub;
+              vx_p_right = valright;
             } else if (valsub is int) {
               ischanged = true;
               vx_p_right = Vx.Core.vx_new(Vx.Core.t_int, valsub);
@@ -271,9 +272,9 @@ public static class Ui {
             break;
           case ":top":
             if (valsub == vx_p_top) {
-            } else if (valsub is Vx.Core.Type_int) {
+            } else if (valsub is Vx.Core.Type_int valtop) {
               ischanged = true;
-              vx_p_top = (Vx.Core.Type_int)valsub;
+              vx_p_top = valtop;
             } else if (valsub is int) {
               ischanged = true;
               vx_p_top = Vx.Core.vx_new(Vx.Core.t_int, valsub);
@@ -294,9 +295,9 @@ public static class Ui {
             break;
           case ":bottom":
             if (valsub == vx_p_bottom) {
-            } else if (valsub is Vx.Core.Type_int) {
+            } else if (valsub is Vx.Core.Type_int valbottom) {
               ischanged = true;
-              vx_p_bottom = (Vx.Core.Type_int)valsub;
+              vx_p_bottom = valbottom;
             } else if (valsub is int) {
               ischanged = true;
               vx_p_bottom = Vx.Core.vx_new(Vx.Core.t_int, valsub);
@@ -688,16 +689,17 @@ public static class Ui {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -721,9 +723,9 @@ public static class Ui {
           switch (key) {
           case ":name":
             if (valsub == vx_p_name) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
-              vx_p_name = (Vx.Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -744,9 +746,9 @@ public static class Ui {
             break;
           case ":fontface":
             if (valsub == vx_p_fontface) {
-            } else if (valsub is Vx.Ui.Ui.Type_fontface) {
+            } else if (valsub is Vx.Ui.Ui.Type_fontface valfontface) {
               ischanged = true;
-              vx_p_fontface = (Vx.Ui.Ui.Type_fontface)valsub;
+              vx_p_fontface = valfontface;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -764,9 +766,9 @@ public static class Ui {
             break;
           case ":fontsize":
             if (valsub == vx_p_fontsize) {
-            } else if (valsub is Vx.Core.Type_int) {
+            } else if (valsub is Vx.Core.Type_int valfontsize) {
               ischanged = true;
-              vx_p_fontsize = (Vx.Core.Type_int)valsub;
+              vx_p_fontsize = valfontsize;
             } else if (valsub is int) {
               ischanged = true;
               vx_p_fontsize = Vx.Core.vx_new(Vx.Core.t_int, valsub);
@@ -787,9 +789,9 @@ public static class Ui {
             break;
           case ":fontstyle":
             if (valsub == vx_p_fontstyle) {
-            } else if (valsub is Vx.Ui.Ui.Type_fontstyle) {
+            } else if (valsub is Vx.Ui.Ui.Type_fontstyle valfontstyle) {
               ischanged = true;
-              vx_p_fontstyle = (Vx.Ui.Ui.Type_fontstyle)valsub;
+              vx_p_fontstyle = valfontstyle;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -973,16 +975,17 @@ public static class Ui {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -1006,9 +1009,9 @@ public static class Ui {
           switch (key) {
           case ":name":
             if (valsub == vx_p_name) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
-              vx_p_name = (Vx.Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -1029,9 +1032,9 @@ public static class Ui {
             break;
           case ":weight":
             if (valsub == vx_p_weight) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valweight) {
               ischanged = true;
-              vx_p_weight = (Vx.Core.Type_string)valsub;
+              vx_p_weight = valweight;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_weight = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -1052,9 +1055,9 @@ public static class Ui {
             break;
           case ":unicode":
             if (valsub == vx_p_unicode) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valunicode) {
               ischanged = true;
-              vx_p_unicode = (Vx.Core.Type_string)valsub;
+              vx_p_unicode = valunicode;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_unicode = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -1075,9 +1078,9 @@ public static class Ui {
             break;
           case ":filelist":
             if (valsub == vx_p_filelist) {
-            } else if (valsub is Vx.Data.File.Type_filelist) {
+            } else if (valsub is Vx.Data.File.Type_filelist valfilelist) {
               ischanged = true;
-              vx_p_filelist = (Vx.Data.File.Type_filelist)valsub;
+              vx_p_filelist = valfilelist;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -1211,14 +1214,13 @@ public static class Ui {
         } else if (valsub is Vx.Ui.Ui.Type_fontface) {
           ischanged = true;
           listval.Add((Vx.Ui.Ui.Type_fontface)valsub);
-        } else if (valsub is Vx.Ui.Ui.Type_fontfacelist) {
-          Type_fontfacelist multi = (Type_fontfacelist)valsub;
+        } else if (valsub is Vx.Ui.Ui.Type_fontfacelist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listfontface());
         } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
-            if (item is Vx.Ui.Ui.Type_fontface) {
-              Vx.Ui.Ui.Type_fontface valitem = (Vx.Ui.Ui.Type_fontface)item;
+            if (false) {
+            } else if (item is Vx.Ui.Ui.Type_fontface valitem) {
               ischanged = true;
               listval.Add(valitem);
             }
@@ -1285,19 +1287,19 @@ public static class Ui {
     public Vx.Core.Map<string, Vx.Ui.Ui.Type_fontface> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Ui.Ui.Type_fontface>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)this.vx_p_map;
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
 
     public Vx.Core.Type_boolean vx_set(Vx.Core.Type_string name, Vx.Core.Type_any value) {
       Vx.Core.Type_boolean output = Vx.Core.c_false;
-      if (value is Vx.Ui.Ui.Type_fontface) {
+      if (false) {
+      } else if (value is Vx.Ui.Ui.Type_fontface castval) {
         string key = name.vx_string();
         if (key.StartsWith(":")) {
           key = key.Substring(1);
         }
-        Vx.Ui.Ui.Type_fontface castval = (Vx.Ui.Ui.Type_fontface)value;
         Vx.Core.Map<string, Vx.Ui.Ui.Type_fontface> map = new Vx.Core.LinkedHashMap<string, Vx.Ui.Ui.Type_fontface>(this.vx_p_map);
         if (castval == Vx.Ui.Ui.e_fontface) {
           map.remove(key);
@@ -1390,8 +1392,9 @@ public static class Ui {
           }
         } else {
           Vx.Ui.Ui.Type_fontface? valany = null;
-          if (valsub is Vx.Ui.Ui.Type_fontface) {
-            valany = (Vx.Ui.Ui.Type_fontface)valsub;
+          if (false) {
+          } else if (valsub is Vx.Ui.Ui.Type_fontface valallowed) {
+            valany = valallowed;
           } else if (valsub is Vx.Ui.Ui.Type_fontface) {
             valany = valsub as Vx.Ui.Ui.Type_fontface;
           } else {
@@ -1472,19 +1475,19 @@ public static class Ui {
     public Vx.Core.Map<string, Vx.Ui.Ui.Type_font> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Ui.Ui.Type_font>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)this.vx_p_map;
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
 
     public Vx.Core.Type_boolean vx_set(Vx.Core.Type_string name, Vx.Core.Type_any value) {
       Vx.Core.Type_boolean output = Vx.Core.c_false;
-      if (value is Vx.Ui.Ui.Type_font) {
+      if (false) {
+      } else if (value is Vx.Ui.Ui.Type_font castval) {
         string key = name.vx_string();
         if (key.StartsWith(":")) {
           key = key.Substring(1);
         }
-        Vx.Ui.Ui.Type_font castval = (Vx.Ui.Ui.Type_font)value;
         Vx.Core.Map<string, Vx.Ui.Ui.Type_font> map = new Vx.Core.LinkedHashMap<string, Vx.Ui.Ui.Type_font>(this.vx_p_map);
         if (castval == Vx.Ui.Ui.e_font) {
           map.remove(key);
@@ -1577,8 +1580,9 @@ public static class Ui {
           }
         } else {
           Vx.Ui.Ui.Type_font? valany = null;
-          if (valsub is Vx.Ui.Ui.Type_font) {
-            valany = (Vx.Ui.Ui.Type_font)valsub;
+          if (false) {
+          } else if (valsub is Vx.Ui.Ui.Type_font valallowed) {
+            valany = valallowed;
           } else if (valsub is Vx.Ui.Ui.Type_font) {
             valany = valsub as Vx.Ui.Ui.Type_font;
           } else {
@@ -1710,16 +1714,17 @@ public static class Ui {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -1743,9 +1748,9 @@ public static class Ui {
           switch (key) {
           case ":name":
             if (valsub == vx_p_name) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
-              vx_p_name = (Vx.Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -1827,19 +1832,19 @@ public static class Ui {
     public Vx.Core.Map<string, Vx.Ui.Ui.Type_fontstyle> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Ui.Ui.Type_fontstyle>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)this.vx_p_map;
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
 
     public Vx.Core.Type_boolean vx_set(Vx.Core.Type_string name, Vx.Core.Type_any value) {
       Vx.Core.Type_boolean output = Vx.Core.c_false;
-      if (value is Vx.Ui.Ui.Type_fontstyle) {
+      if (false) {
+      } else if (value is Vx.Ui.Ui.Type_fontstyle castval) {
         string key = name.vx_string();
         if (key.StartsWith(":")) {
           key = key.Substring(1);
         }
-        Vx.Ui.Ui.Type_fontstyle castval = (Vx.Ui.Ui.Type_fontstyle)value;
         Vx.Core.Map<string, Vx.Ui.Ui.Type_fontstyle> map = new Vx.Core.LinkedHashMap<string, Vx.Ui.Ui.Type_fontstyle>(this.vx_p_map);
         if (castval == Vx.Ui.Ui.e_fontstyle) {
           map.remove(key);
@@ -1932,8 +1937,9 @@ public static class Ui {
           }
         } else {
           Vx.Ui.Ui.Type_fontstyle? valany = null;
-          if (valsub is Vx.Ui.Ui.Type_fontstyle) {
-            valany = (Vx.Ui.Ui.Type_fontstyle)valsub;
+          if (false) {
+          } else if (valsub is Vx.Ui.Ui.Type_fontstyle valallowed) {
+            valany = valallowed;
           } else if (valsub is Vx.Ui.Ui.Type_fontstyle) {
             valany = valsub as Vx.Ui.Ui.Type_fontstyle;
           } else {
@@ -2099,16 +2105,17 @@ public static class Ui {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -2132,9 +2139,9 @@ public static class Ui {
           switch (key) {
           case ":name":
             if (valsub == vx_p_name) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
-              vx_p_name = (Vx.Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -2155,9 +2162,9 @@ public static class Ui {
             break;
           case ":label":
             if (valsub == vx_p_label) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string vallabel) {
               ischanged = true;
-              vx_p_label = (Vx.Core.Type_string)valsub;
+              vx_p_label = vallabel;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_label = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -2178,9 +2185,9 @@ public static class Ui {
             break;
           case ":file":
             if (valsub == vx_p_file) {
-            } else if (valsub is Vx.Data.File.Type_file) {
+            } else if (valsub is Vx.Data.File.Type_file valfile) {
               ischanged = true;
-              vx_p_file = (Vx.Data.File.Type_file)valsub;
+              vx_p_file = valfile;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2329,16 +2336,17 @@ public static class Ui {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -2362,9 +2370,9 @@ public static class Ui {
           switch (key) {
           case ":name":
             if (valsub == vx_p_name) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
-              vx_p_name = (Vx.Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -2385,9 +2393,9 @@ public static class Ui {
             break;
           case ":fn-layout":
             if (valsub == vx_p_fn_layout) {
-            } else if (valsub is Vx.Ui.Ui.Func_ui_layout_from_ui_orig_parent) {
+            } else if (valsub is Vx.Ui.Ui.Func_ui_layout_from_ui_orig_parent valfn_layout) {
               ischanged = true;
-              vx_p_fn_layout = (Vx.Ui.Ui.Func_ui_layout_from_ui_orig_parent)valsub;
+              vx_p_fn_layout = valfn_layout;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2637,16 +2645,17 @@ public static class Ui {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -2670,9 +2679,9 @@ public static class Ui {
           switch (key) {
           case ":name":
             if (valsub == vx_p_name) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
-              vx_p_name = (Vx.Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -2693,9 +2702,9 @@ public static class Ui {
             break;
           case ":boolean-print":
             if (valsub == vx_p_boolean_print) {
-            } else if (valsub is Vx.Ui.Ui.Func_boolean_print) {
+            } else if (valsub is Vx.Ui.Ui.Func_boolean_print valboolean_print) {
               ischanged = true;
-              vx_p_boolean_print = (Vx.Ui.Ui.Func_boolean_print)valsub;
+              vx_p_boolean_print = valboolean_print;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2713,9 +2722,9 @@ public static class Ui {
             break;
           case ":boolean-layoutremove":
             if (valsub == vx_p_boolean_layoutremove) {
-            } else if (valsub is Vx.Ui.Ui.Func_boolean_layoutremove_from_ui) {
+            } else if (valsub is Vx.Ui.Ui.Func_boolean_layoutremove_from_ui valboolean_layoutremove) {
               ischanged = true;
-              vx_p_boolean_layoutremove = (Vx.Ui.Ui.Func_boolean_layoutremove_from_ui)valsub;
+              vx_p_boolean_layoutremove = valboolean_layoutremove;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2733,9 +2742,9 @@ public static class Ui {
             break;
           case ":boolean-layoutselected":
             if (valsub == vx_p_boolean_layoutselected) {
-            } else if (valsub is Vx.Ui.Ui.Func_boolean_layoutselected_from_ui) {
+            } else if (valsub is Vx.Ui.Ui.Func_boolean_layoutselected_from_ui valboolean_layoutselected) {
               ischanged = true;
-              vx_p_boolean_layoutselected = (Vx.Ui.Ui.Func_boolean_layoutselected_from_ui)valsub;
+              vx_p_boolean_layoutselected = valboolean_layoutselected;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2753,9 +2762,9 @@ public static class Ui {
             break;
           case ":boolean-layoutvisible":
             if (valsub == vx_p_boolean_layoutvisible) {
-            } else if (valsub is Vx.Ui.Ui.Func_boolean_layoutvisible_from_ui) {
+            } else if (valsub is Vx.Ui.Ui.Func_boolean_layoutvisible_from_ui valboolean_layoutvisible) {
               ischanged = true;
-              vx_p_boolean_layoutvisible = (Vx.Ui.Ui.Func_boolean_layoutvisible_from_ui)valsub;
+              vx_p_boolean_layoutvisible = valboolean_layoutvisible;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2773,9 +2782,9 @@ public static class Ui {
             break;
           case ":layoutmap":
             if (valsub == vx_p_layoutmap) {
-            } else if (valsub is Vx.Ui.Ui.Type_layoutmap) {
+            } else if (valsub is Vx.Ui.Ui.Type_layoutmap vallayoutmap) {
               ischanged = true;
-              vx_p_layoutmap = (Vx.Ui.Ui.Type_layoutmap)valsub;
+              vx_p_layoutmap = vallayoutmap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2793,9 +2802,9 @@ public static class Ui {
             break;
           case ":layoutelse":
             if (valsub == vx_p_layoutelse) {
-            } else if (valsub is Vx.Ui.Ui.Type_layout) {
+            } else if (valsub is Vx.Ui.Ui.Type_layout vallayoutelse) {
               ischanged = true;
-              vx_p_layoutelse = (Vx.Ui.Ui.Type_layout)valsub;
+              vx_p_layoutelse = vallayoutelse;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2813,9 +2822,9 @@ public static class Ui {
             break;
           case ":stylesheetrender":
             if (valsub == vx_p_stylesheetrender) {
-            } else if (valsub is Vx.Ui.Ui.Func_stylesheet_render) {
+            } else if (valsub is Vx.Ui.Ui.Func_stylesheet_render valstylesheetrender) {
               ischanged = true;
-              vx_p_stylesheetrender = (Vx.Ui.Ui.Func_stylesheet_render)valsub;
+              vx_p_stylesheetrender = valstylesheetrender;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -2953,14 +2962,13 @@ public static class Ui {
         } else if (valsub is Vx.Ui.Ui.Type_layout) {
           ischanged = true;
           listval.Add((Vx.Ui.Ui.Type_layout)valsub);
-        } else if (valsub is Vx.Ui.Ui.Type_layoutlist) {
-          Type_layoutlist multi = (Type_layoutlist)valsub;
+        } else if (valsub is Vx.Ui.Ui.Type_layoutlist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listlayout());
         } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
-            if (item is Vx.Ui.Ui.Type_layout) {
-              Vx.Ui.Ui.Type_layout valitem = (Vx.Ui.Ui.Type_layout)item;
+            if (false) {
+            } else if (item is Vx.Ui.Ui.Type_layout valitem) {
               ischanged = true;
               listval.Add(valitem);
             }
@@ -3027,19 +3035,19 @@ public static class Ui {
     public Vx.Core.Map<string, Vx.Ui.Ui.Type_layout> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Ui.Ui.Type_layout>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)this.vx_p_map;
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
 
     public Vx.Core.Type_boolean vx_set(Vx.Core.Type_string name, Vx.Core.Type_any value) {
       Vx.Core.Type_boolean output = Vx.Core.c_false;
-      if (value is Vx.Ui.Ui.Type_layout) {
+      if (false) {
+      } else if (value is Vx.Ui.Ui.Type_layout castval) {
         string key = name.vx_string();
         if (key.StartsWith(":")) {
           key = key.Substring(1);
         }
-        Vx.Ui.Ui.Type_layout castval = (Vx.Ui.Ui.Type_layout)value;
         Vx.Core.Map<string, Vx.Ui.Ui.Type_layout> map = new Vx.Core.LinkedHashMap<string, Vx.Ui.Ui.Type_layout>(this.vx_p_map);
         if (castval == Vx.Ui.Ui.e_layout) {
           map.remove(key);
@@ -3132,8 +3140,9 @@ public static class Ui {
           }
         } else {
           Vx.Ui.Ui.Type_layout? valany = null;
-          if (valsub is Vx.Ui.Ui.Type_layout) {
-            valany = (Vx.Ui.Ui.Type_layout)valsub;
+          if (false) {
+          } else if (valsub is Vx.Ui.Ui.Type_layout valallowed) {
+            valany = valallowed;
           } else if (valsub is Vx.Ui.Ui.Type_layout) {
             valany = valsub as Vx.Ui.Ui.Type_layout;
           } else {
@@ -3265,16 +3274,17 @@ public static class Ui {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -3298,9 +3308,9 @@ public static class Ui {
           switch (key) {
           case ":name":
             if (valsub == vx_p_name) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
-              vx_p_name = (Vx.Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -3518,16 +3528,17 @@ public static class Ui {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -3551,9 +3562,9 @@ public static class Ui {
           switch (key) {
           case ":x":
             if (valsub == vx_p_x) {
-            } else if (valsub is Vx.Core.Type_int) {
+            } else if (valsub is Vx.Core.Type_int valx) {
               ischanged = true;
-              vx_p_x = (Vx.Core.Type_int)valsub;
+              vx_p_x = valx;
             } else if (valsub is int) {
               ischanged = true;
               vx_p_x = Vx.Core.vx_new(Vx.Core.t_int, valsub);
@@ -3574,9 +3585,9 @@ public static class Ui {
             break;
           case ":y":
             if (valsub == vx_p_y) {
-            } else if (valsub is Vx.Core.Type_int) {
+            } else if (valsub is Vx.Core.Type_int valy) {
               ischanged = true;
-              vx_p_y = (Vx.Core.Type_int)valsub;
+              vx_p_y = valy;
             } else if (valsub is int) {
               ischanged = true;
               vx_p_y = Vx.Core.vx_new(Vx.Core.t_int, valsub);
@@ -3597,9 +3608,9 @@ public static class Ui {
             break;
           case ":z":
             if (valsub == vx_p_z) {
-            } else if (valsub is Vx.Core.Type_int) {
+            } else if (valsub is Vx.Core.Type_int valz) {
               ischanged = true;
-              vx_p_z = (Vx.Core.Type_int)valsub;
+              vx_p_z = valz;
             } else if (valsub is int) {
               ischanged = true;
               vx_p_z = Vx.Core.vx_new(Vx.Core.t_int, valsub);
@@ -3620,9 +3631,9 @@ public static class Ui {
             break;
           case ":t":
             if (valsub == vx_p_t) {
-            } else if (valsub is Vx.Core.Type_int) {
+            } else if (valsub is Vx.Core.Type_int valt) {
               ischanged = true;
-              vx_p_t = (Vx.Core.Type_int)valsub;
+              vx_p_t = valt;
             } else if (valsub is int) {
               ischanged = true;
               vx_p_t = Vx.Core.vx_new(Vx.Core.t_int, valsub);
@@ -3643,9 +3654,9 @@ public static class Ui {
             break;
           case ":i":
             if (valsub == vx_p_i) {
-            } else if (valsub is Vx.Core.Type_int) {
+            } else if (valsub is Vx.Core.Type_int vali) {
               ischanged = true;
-              vx_p_i = (Vx.Core.Type_int)valsub;
+              vx_p_i = vali;
             } else if (valsub is int) {
               ischanged = true;
               vx_p_i = Vx.Core.vx_new(Vx.Core.t_int, valsub);
@@ -3666,9 +3677,9 @@ public static class Ui {
             break;
           case ":pointtype":
             if (valsub == vx_p_pointtype) {
-            } else if (valsub is Vx.Ui.Ui.Type_pointtype) {
+            } else if (valsub is Vx.Ui.Ui.Type_pointtype valpointtype) {
               ischanged = true;
-              vx_p_pointtype = (Vx.Ui.Ui.Type_pointtype)valsub;
+              vx_p_pointtype = valpointtype;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -4222,16 +4233,17 @@ public static class Ui {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -4255,9 +4267,9 @@ public static class Ui {
           switch (key) {
           case ":name":
             if (valsub == vx_p_name) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
-              vx_p_name = (Vx.Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -4278,9 +4290,9 @@ public static class Ui {
             break;
           case ":align":
             if (valsub == vx_p_align) {
-            } else if (valsub is Vx.Ui.Ui.Type_align) {
+            } else if (valsub is Vx.Ui.Ui.Type_align valalign) {
               ischanged = true;
-              vx_p_align = (Vx.Ui.Ui.Type_align)valsub;
+              vx_p_align = valalign;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -4298,9 +4310,9 @@ public static class Ui {
             break;
           case ":boundsmargin":
             if (valsub == vx_p_boundsmargin) {
-            } else if (valsub is Vx.Ui.Ui.Type_bounds) {
+            } else if (valsub is Vx.Ui.Ui.Type_bounds valboundsmargin) {
               ischanged = true;
-              vx_p_boundsmargin = (Vx.Ui.Ui.Type_bounds)valsub;
+              vx_p_boundsmargin = valboundsmargin;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -4318,9 +4330,9 @@ public static class Ui {
             break;
           case ":boundspadding":
             if (valsub == vx_p_boundspadding) {
-            } else if (valsub is Vx.Ui.Ui.Type_bounds) {
+            } else if (valsub is Vx.Ui.Ui.Type_bounds valboundspadding) {
               ischanged = true;
-              vx_p_boundspadding = (Vx.Ui.Ui.Type_bounds)valsub;
+              vx_p_boundspadding = valboundspadding;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -4338,9 +4350,9 @@ public static class Ui {
             break;
           case ":color-bkg":
             if (valsub == vx_p_color_bkg) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valcolor_bkg) {
               ischanged = true;
-              vx_p_color_bkg = (Vx.Core.Type_string)valsub;
+              vx_p_color_bkg = valcolor_bkg;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_color_bkg = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -4361,9 +4373,9 @@ public static class Ui {
             break;
           case ":color-bkghover":
             if (valsub == vx_p_color_bkghover) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valcolor_bkghover) {
               ischanged = true;
-              vx_p_color_bkghover = (Vx.Core.Type_string)valsub;
+              vx_p_color_bkghover = valcolor_bkghover;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_color_bkghover = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -4384,9 +4396,9 @@ public static class Ui {
             break;
           case ":color-border":
             if (valsub == vx_p_color_border) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valcolor_border) {
               ischanged = true;
-              vx_p_color_border = (Vx.Core.Type_string)valsub;
+              vx_p_color_border = valcolor_border;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_color_border = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -4407,9 +4419,9 @@ public static class Ui {
             break;
           case ":color-font":
             if (valsub == vx_p_color_font) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valcolor_font) {
               ischanged = true;
-              vx_p_color_font = (Vx.Core.Type_string)valsub;
+              vx_p_color_font = valcolor_font;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_color_font = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -4430,9 +4442,9 @@ public static class Ui {
             break;
           case ":cursor":
             if (valsub == vx_p_cursor) {
-            } else if (valsub is Vx.Ui.Ui.Type_cursor) {
+            } else if (valsub is Vx.Ui.Ui.Type_cursor valcursor) {
               ischanged = true;
-              vx_p_cursor = (Vx.Ui.Ui.Type_cursor)valsub;
+              vx_p_cursor = valcursor;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -4450,9 +4462,9 @@ public static class Ui {
             break;
           case ":flip":
             if (valsub == vx_p_flip) {
-            } else if (valsub is Vx.Ui.Ui.Type_flip) {
+            } else if (valsub is Vx.Ui.Ui.Type_flip valflip) {
               ischanged = true;
-              vx_p_flip = (Vx.Ui.Ui.Type_flip)valsub;
+              vx_p_flip = valflip;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -4470,9 +4482,9 @@ public static class Ui {
             break;
           case ":font":
             if (valsub == vx_p_font) {
-            } else if (valsub is Vx.Ui.Ui.Type_font) {
+            } else if (valsub is Vx.Ui.Ui.Type_font valfont) {
               ischanged = true;
-              vx_p_font = (Vx.Ui.Ui.Type_font)valsub;
+              vx_p_font = valfont;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -4490,9 +4502,9 @@ public static class Ui {
             break;
           case ":hidden":
             if (valsub == vx_p_hidden) {
-            } else if (valsub is Vx.Core.Type_boolean) {
+            } else if (valsub is Vx.Core.Type_boolean valhidden) {
               ischanged = true;
-              vx_p_hidden = (Vx.Core.Type_boolean)valsub;
+              vx_p_hidden = valhidden;
             } else if (valsub is bool) {
               ischanged = true;
               vx_p_hidden = Vx.Core.vx_new(Vx.Core.t_boolean, valsub);
@@ -4513,9 +4525,9 @@ public static class Ui {
             break;
           case ":image-bkg":
             if (valsub == vx_p_image_bkg) {
-            } else if (valsub is Vx.Ui.Ui.Type_image) {
+            } else if (valsub is Vx.Ui.Ui.Type_image valimage_bkg) {
               ischanged = true;
-              vx_p_image_bkg = (Vx.Ui.Ui.Type_image)valsub;
+              vx_p_image_bkg = valimage_bkg;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -4533,9 +4545,9 @@ public static class Ui {
             break;
           case ":layout":
             if (valsub == vx_p_layout) {
-            } else if (valsub is Vx.Ui.Ui.Type_layout) {
+            } else if (valsub is Vx.Ui.Ui.Type_layout vallayout) {
               ischanged = true;
-              vx_p_layout = (Vx.Ui.Ui.Type_layout)valsub;
+              vx_p_layout = vallayout;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -4553,9 +4565,9 @@ public static class Ui {
             break;
           case ":type":
             if (valsub == vx_p_type) {
-            } else if (valsub is Vx.Ui.Ui.Type_styletype) {
+            } else if (valsub is Vx.Ui.Ui.Type_styletype valtype) {
               ischanged = true;
-              vx_p_type = (Vx.Ui.Ui.Type_styletype)valsub;
+              vx_p_type = valtype;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -4573,9 +4585,9 @@ public static class Ui {
             break;
           case ":pin":
             if (valsub == vx_p_pin) {
-            } else if (valsub is Vx.Ui.Ui.Type_pin) {
+            } else if (valsub is Vx.Ui.Ui.Type_pin valpin) {
               ischanged = true;
-              vx_p_pin = (Vx.Ui.Ui.Type_pin)valsub;
+              vx_p_pin = valpin;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -4593,9 +4605,9 @@ public static class Ui {
             break;
           case ":pointorigin":
             if (valsub == vx_p_pointorigin) {
-            } else if (valsub is Vx.Ui.Ui.Type_point) {
+            } else if (valsub is Vx.Ui.Ui.Type_point valpointorigin) {
               ischanged = true;
-              vx_p_pointorigin = (Vx.Ui.Ui.Type_point)valsub;
+              vx_p_pointorigin = valpointorigin;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -4613,9 +4625,9 @@ public static class Ui {
             break;
           case ":pointpos":
             if (valsub == vx_p_pointpos) {
-            } else if (valsub is Vx.Ui.Ui.Type_point) {
+            } else if (valsub is Vx.Ui.Ui.Type_point valpointpos) {
               ischanged = true;
-              vx_p_pointpos = (Vx.Ui.Ui.Type_point)valsub;
+              vx_p_pointpos = valpointpos;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -4633,9 +4645,9 @@ public static class Ui {
             break;
           case ":pointrotate":
             if (valsub == vx_p_pointrotate) {
-            } else if (valsub is Vx.Ui.Ui.Type_point) {
+            } else if (valsub is Vx.Ui.Ui.Type_point valpointrotate) {
               ischanged = true;
-              vx_p_pointrotate = (Vx.Ui.Ui.Type_point)valsub;
+              vx_p_pointrotate = valpointrotate;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -4653,9 +4665,9 @@ public static class Ui {
             break;
           case ":pointsize":
             if (valsub == vx_p_pointsize) {
-            } else if (valsub is Vx.Ui.Ui.Type_point) {
+            } else if (valsub is Vx.Ui.Ui.Type_point valpointsize) {
               ischanged = true;
-              vx_p_pointsize = (Vx.Ui.Ui.Type_point)valsub;
+              vx_p_pointsize = valpointsize;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -4673,9 +4685,9 @@ public static class Ui {
             break;
           case ":scroll-x":
             if (valsub == vx_p_scroll_x) {
-            } else if (valsub is Vx.Core.Type_boolean) {
+            } else if (valsub is Vx.Core.Type_boolean valscroll_x) {
               ischanged = true;
-              vx_p_scroll_x = (Vx.Core.Type_boolean)valsub;
+              vx_p_scroll_x = valscroll_x;
             } else if (valsub is bool) {
               ischanged = true;
               vx_p_scroll_x = Vx.Core.vx_new(Vx.Core.t_boolean, valsub);
@@ -4696,9 +4708,9 @@ public static class Ui {
             break;
           case ":scroll-y":
             if (valsub == vx_p_scroll_y) {
-            } else if (valsub is Vx.Core.Type_boolean) {
+            } else if (valsub is Vx.Core.Type_boolean valscroll_y) {
               ischanged = true;
-              vx_p_scroll_y = (Vx.Core.Type_boolean)valsub;
+              vx_p_scroll_y = valscroll_y;
             } else if (valsub is bool) {
               ischanged = true;
               vx_p_scroll_y = Vx.Core.vx_new(Vx.Core.t_boolean, valsub);
@@ -4853,14 +4865,13 @@ public static class Ui {
         } else if (valsub is Vx.Ui.Ui.Type_style) {
           ischanged = true;
           listval.Add((Vx.Ui.Ui.Type_style)valsub);
-        } else if (valsub is Vx.Ui.Ui.Type_stylelist) {
-          Type_stylelist multi = (Type_stylelist)valsub;
+        } else if (valsub is Vx.Ui.Ui.Type_stylelist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_liststyle());
         } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
-            if (item is Vx.Ui.Ui.Type_style) {
-              Vx.Ui.Ui.Type_style valitem = (Vx.Ui.Ui.Type_style)item;
+            if (false) {
+            } else if (item is Vx.Ui.Ui.Type_style valitem) {
               ischanged = true;
               listval.Add(valitem);
             }
@@ -4927,19 +4938,19 @@ public static class Ui {
     public Vx.Core.Map<string, Vx.Ui.Ui.Type_style> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Ui.Ui.Type_style>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)this.vx_p_map;
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
 
     public Vx.Core.Type_boolean vx_set(Vx.Core.Type_string name, Vx.Core.Type_any value) {
       Vx.Core.Type_boolean output = Vx.Core.c_false;
-      if (value is Vx.Ui.Ui.Type_style) {
+      if (false) {
+      } else if (value is Vx.Ui.Ui.Type_style castval) {
         string key = name.vx_string();
         if (key.StartsWith(":")) {
           key = key.Substring(1);
         }
-        Vx.Ui.Ui.Type_style castval = (Vx.Ui.Ui.Type_style)value;
         Vx.Core.Map<string, Vx.Ui.Ui.Type_style> map = new Vx.Core.LinkedHashMap<string, Vx.Ui.Ui.Type_style>(this.vx_p_map);
         if (castval == Vx.Ui.Ui.e_style) {
           map.remove(key);
@@ -5032,8 +5043,9 @@ public static class Ui {
           }
         } else {
           Vx.Ui.Ui.Type_style? valany = null;
-          if (valsub is Vx.Ui.Ui.Type_style) {
-            valany = (Vx.Ui.Ui.Type_style)valsub;
+          if (false) {
+          } else if (valsub is Vx.Ui.Ui.Type_style valallowed) {
+            valany = valallowed;
           } else if (valsub is Vx.Ui.Ui.Type_style) {
             valany = valsub as Vx.Ui.Ui.Type_style;
           } else {
@@ -5182,16 +5194,17 @@ public static class Ui {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -5215,9 +5228,9 @@ public static class Ui {
           switch (key) {
           case ":fontfacemap":
             if (valsub == vx_p_fontfacemap) {
-            } else if (valsub is Vx.Ui.Ui.Type_fontfacemap) {
+            } else if (valsub is Vx.Ui.Ui.Type_fontfacemap valfontfacemap) {
               ischanged = true;
-              vx_p_fontfacemap = (Vx.Ui.Ui.Type_fontfacemap)valsub;
+              vx_p_fontfacemap = valfontfacemap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -5235,9 +5248,9 @@ public static class Ui {
             break;
           case ":stylemap":
             if (valsub == vx_p_stylemap) {
-            } else if (valsub is Vx.Ui.Ui.Type_stylemap) {
+            } else if (valsub is Vx.Ui.Ui.Type_stylemap valstylemap) {
               ischanged = true;
-              vx_p_stylemap = (Vx.Ui.Ui.Type_stylemap)valsub;
+              vx_p_stylemap = valstylemap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -5627,16 +5640,17 @@ public static class Ui {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -5660,9 +5674,9 @@ public static class Ui {
           switch (key) {
           case ":uid":
             if (valsub == vx_p_uid) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valuid) {
               ischanged = true;
-              vx_p_uid = (Vx.Core.Type_string)valsub;
+              vx_p_uid = valuid;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_uid = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -5683,9 +5697,9 @@ public static class Ui {
             break;
           case ":name":
             if (valsub == vx_p_name) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
-              vx_p_name = (Vx.Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -5706,9 +5720,9 @@ public static class Ui {
             break;
           case ":layout":
             if (valsub == vx_p_layout) {
-            } else if (valsub is Vx.Ui.Ui.Type_layout) {
+            } else if (valsub is Vx.Ui.Ui.Type_layout vallayout) {
               ischanged = true;
-              vx_p_layout = (Vx.Ui.Ui.Type_layout)valsub;
+              vx_p_layout = vallayout;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -5726,9 +5740,9 @@ public static class Ui {
             break;
           case ":path":
             if (valsub == vx_p_path) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valpath) {
               ischanged = true;
-              vx_p_path = (Vx.Core.Type_string)valsub;
+              vx_p_path = valpath;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_path = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -5749,9 +5763,9 @@ public static class Ui {
             break;
           case ":hidden":
             if (valsub == vx_p_hidden) {
-            } else if (valsub is Vx.Core.Type_boolean) {
+            } else if (valsub is Vx.Core.Type_boolean valhidden) {
               ischanged = true;
-              vx_p_hidden = (Vx.Core.Type_boolean)valsub;
+              vx_p_hidden = valhidden;
             } else if (valsub is bool) {
               ischanged = true;
               vx_p_hidden = Vx.Core.vx_new(Vx.Core.t_boolean, valsub);
@@ -5772,9 +5786,9 @@ public static class Ui {
             break;
           case ":selected":
             if (valsub == vx_p_selected) {
-            } else if (valsub is Vx.Core.Type_boolean) {
+            } else if (valsub is Vx.Core.Type_boolean valselected) {
               ischanged = true;
-              vx_p_selected = (Vx.Core.Type_boolean)valsub;
+              vx_p_selected = valselected;
             } else if (valsub is bool) {
               ischanged = true;
               vx_p_selected = Vx.Core.vx_new(Vx.Core.t_boolean, valsub);
@@ -5795,9 +5809,9 @@ public static class Ui {
             break;
           case ":selectmulti":
             if (valsub == vx_p_selectmulti) {
-            } else if (valsub is Vx.Core.Type_boolean) {
+            } else if (valsub is Vx.Core.Type_boolean valselectmulti) {
               ischanged = true;
-              vx_p_selectmulti = (Vx.Core.Type_boolean)valsub;
+              vx_p_selectmulti = valselectmulti;
             } else if (valsub is bool) {
               ischanged = true;
               vx_p_selectmulti = Vx.Core.vx_new(Vx.Core.t_boolean, valsub);
@@ -5818,9 +5832,9 @@ public static class Ui {
             break;
           case ":style":
             if (valsub == vx_p_style) {
-            } else if (valsub is Vx.Ui.Ui.Type_style) {
+            } else if (valsub is Vx.Ui.Ui.Type_style valstyle) {
               ischanged = true;
-              vx_p_style = (Vx.Ui.Ui.Type_style)valsub;
+              vx_p_style = valstyle;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -5838,9 +5852,9 @@ public static class Ui {
             break;
           case ":stylelist":
             if (valsub == vx_p_stylelist) {
-            } else if (valsub is Vx.Ui.Ui.Type_stylelist) {
+            } else if (valsub is Vx.Ui.Ui.Type_stylelist valstylelist) {
               ischanged = true;
-              vx_p_stylelist = (Vx.Ui.Ui.Type_stylelist)valsub;
+              vx_p_stylelist = valstylelist;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -5858,9 +5872,9 @@ public static class Ui {
             break;
           case ":eventmap":
             if (valsub == vx_p_eventmap) {
-            } else if (valsub is Vx.Event.Type_eventmap) {
+            } else if (valsub is Vx.Event.Type_eventmap valeventmap) {
               ischanged = true;
-              vx_p_eventmap = (Vx.Event.Type_eventmap)valsub;
+              vx_p_eventmap = valeventmap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -5878,9 +5892,9 @@ public static class Ui {
             break;
           case ":data":
             if (valsub == vx_p_data) {
-            } else if (valsub is Vx.Core.Type_any) {
+            } else if (valsub is Vx.Core.Type_any valdata) {
               ischanged = true;
-              vx_p_data = (Vx.Core.Type_any)valsub;
+              vx_p_data = valdata;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -5898,9 +5912,9 @@ public static class Ui {
             break;
           case ":uimap":
             if (valsub == vx_p_uimap) {
-            } else if (valsub is Vx.Ui.Ui.Type_uimap) {
+            } else if (valsub is Vx.Ui.Ui.Type_uimap valuimap) {
               ischanged = true;
-              vx_p_uimap = (Vx.Ui.Ui.Type_uimap)valsub;
+              vx_p_uimap = valuimap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -6092,16 +6106,17 @@ public static class Ui {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -6125,9 +6140,9 @@ public static class Ui {
           switch (key) {
           case ":parentmap":
             if (valsub == vx_p_parentmap) {
-            } else if (valsub is Vx.Ui.Ui.Type_uimap) {
+            } else if (valsub is Vx.Ui.Ui.Type_uimap valparentmap) {
               ischanged = true;
-              vx_p_parentmap = (Vx.Ui.Ui.Type_uimap)valsub;
+              vx_p_parentmap = valparentmap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -6145,9 +6160,9 @@ public static class Ui {
             break;
           case ":layoutengine":
             if (valsub == vx_p_layoutengine) {
-            } else if (valsub is Vx.Ui.Ui.Type_layoutengine) {
+            } else if (valsub is Vx.Ui.Ui.Type_layoutengine vallayoutengine) {
               ischanged = true;
-              vx_p_layoutengine = (Vx.Ui.Ui.Type_layoutengine)valsub;
+              vx_p_layoutengine = vallayoutengine;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -6165,9 +6180,9 @@ public static class Ui {
             break;
           case ":stylesheet":
             if (valsub == vx_p_stylesheet) {
-            } else if (valsub is Vx.Ui.Ui.Type_stylesheet) {
+            } else if (valsub is Vx.Ui.Ui.Type_stylesheet valstylesheet) {
               ischanged = true;
-              vx_p_stylesheet = (Vx.Ui.Ui.Type_stylesheet)valsub;
+              vx_p_stylesheet = valstylesheet;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -6185,9 +6200,9 @@ public static class Ui {
             break;
           case ":ui":
             if (valsub == vx_p_ui) {
-            } else if (valsub is Vx.Ui.Ui.Type_ui) {
+            } else if (valsub is Vx.Ui.Ui.Type_ui valui) {
               ischanged = true;
-              vx_p_ui = (Vx.Ui.Ui.Type_ui)valsub;
+              vx_p_ui = valui;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -6321,14 +6336,13 @@ public static class Ui {
         } else if (valsub is Vx.Ui.Ui.Type_ui) {
           ischanged = true;
           listval.Add((Vx.Ui.Ui.Type_ui)valsub);
-        } else if (valsub is Vx.Ui.Ui.Type_uilist) {
-          Type_uilist multi = (Type_uilist)valsub;
+        } else if (valsub is Vx.Ui.Ui.Type_uilist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listui());
         } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
-            if (item is Vx.Ui.Ui.Type_ui) {
-              Vx.Ui.Ui.Type_ui valitem = (Vx.Ui.Ui.Type_ui)item;
+            if (false) {
+            } else if (item is Vx.Ui.Ui.Type_ui valitem) {
               ischanged = true;
               listval.Add(valitem);
             }
@@ -6395,19 +6409,19 @@ public static class Ui {
     public Vx.Core.Map<string, Vx.Ui.Ui.Type_ui> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Ui.Ui.Type_ui>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)this.vx_p_map;
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
 
     public Vx.Core.Type_boolean vx_set(Vx.Core.Type_string name, Vx.Core.Type_any value) {
       Vx.Core.Type_boolean output = Vx.Core.c_false;
-      if (value is Vx.Ui.Ui.Type_ui) {
+      if (false) {
+      } else if (value is Vx.Ui.Ui.Type_ui castval) {
         string key = name.vx_string();
         if (key.StartsWith(":")) {
           key = key.Substring(1);
         }
-        Vx.Ui.Ui.Type_ui castval = (Vx.Ui.Ui.Type_ui)value;
         Vx.Core.Map<string, Vx.Ui.Ui.Type_ui> map = new Vx.Core.LinkedHashMap<string, Vx.Ui.Ui.Type_ui>(this.vx_p_map);
         if (castval == Vx.Ui.Ui.e_ui) {
           map.remove(key);
@@ -6500,8 +6514,9 @@ public static class Ui {
           }
         } else {
           Vx.Ui.Ui.Type_ui? valany = null;
-          if (valsub is Vx.Ui.Ui.Type_ui) {
-            valany = (Vx.Ui.Ui.Type_ui)valsub;
+          if (false) {
+          } else if (valsub is Vx.Ui.Ui.Type_ui valallowed) {
+            valany = valallowed;
           } else if (valsub is Vx.Ui.Ui.Type_ui) {
             valany = valsub as Vx.Ui.Ui.Type_ui;
           } else {

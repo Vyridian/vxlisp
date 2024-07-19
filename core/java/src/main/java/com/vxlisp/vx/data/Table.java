@@ -102,16 +102,20 @@ public final class Table {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -136,8 +140,9 @@ public final class Table {
           case ":id":
             if (valsub == vx_p_id) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valid = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_id = (Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_id = Core.vx_new(Core.t_string, valsub);
@@ -160,8 +165,9 @@ public final class Table {
           case ":value":
             if (valsub == vx_p_value) {
             } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valvalue = (Core.Type_any)valsub;;
               ischanged = true;
-              vx_p_value = (Core.Type_any)valsub;
+              vx_p_value = valvalue;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -308,14 +314,15 @@ public final class Table {
           ischanged = true;
           listval.add((Table.Type_cell)valsub);
         } else if (valsub instanceof Table.Type_celllist) {
-          Type_celllist multi = (Type_celllist)valsub;
+          Table.Type_celllist multi = (Table.Type_celllist)valsub;;
           ischanged = true;
           listval.addAll(multi.vx_listcell());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
-            if (item instanceof Table.Type_cell) {
-              Table.Type_cell valitem = (Table.Type_cell)item;
+            if (false) {
+            } else if (item instanceof Table.Type_cell) {
+              Table.Type_cell valitem = (Table.Type_cell)item;;
               ischanged = true;
               listval.add(valitem);
             }
@@ -397,12 +404,13 @@ public final class Table {
     @Override
     public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
       Core.Type_boolean output = Core.c_false;
-      if (value instanceof Table.Type_cell) {
+      if (false) {
+      } else if (value instanceof Table.Type_cell) {
+        Table.Type_cell castval = (Table.Type_cell)value;;
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
         }
-        Table.Type_cell castval = (Table.Type_cell)value;
         Map<String, Table.Type_cell> map = new LinkedHashMap<String, Table.Type_cell>(this.vx_p_map);
         if (castval == Table.e_cell) {
           map.remove(key);
@@ -505,8 +513,10 @@ public final class Table {
           }
         } else {
           Table.Type_cell valany = null;
-          if (valsub instanceof Table.Type_cell) {
-            valany = (Table.Type_cell)valsub;
+          if (false) {
+          } else if (valsub instanceof Table.Type_cell) {
+            Table.Type_cell valallowed = (Table.Type_cell)valsub;;
+            valany = valallowed;
           } else if (valsub instanceof Table.Type_cell) {
             valany = (Table.Type_cell)valsub;
           } else {
@@ -686,16 +696,20 @@ public final class Table {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -720,8 +734,9 @@ public final class Table {
           case ":id":
             if (valsub == vx_p_id) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valid = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_id = (Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_id = Core.vx_new(Core.t_string, valsub);
@@ -744,8 +759,9 @@ public final class Table {
           case ":name":
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valname = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_name = (Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
@@ -768,8 +784,9 @@ public final class Table {
           case ":fldtype":
             if (valsub == vx_p_fldtype) {
             } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valfldtype = (Core.Type_any)valsub;;
               ischanged = true;
-              vx_p_fldtype = (Core.Type_any)valsub;
+              vx_p_fldtype = valfldtype;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -917,14 +934,15 @@ public final class Table {
           ischanged = true;
           listval.add((Table.Type_field)valsub);
         } else if (valsub instanceof Table.Type_fieldlist) {
-          Type_fieldlist multi = (Type_fieldlist)valsub;
+          Table.Type_fieldlist multi = (Table.Type_fieldlist)valsub;;
           ischanged = true;
           listval.addAll(multi.vx_listfield());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
-            if (item instanceof Table.Type_field) {
-              Table.Type_field valitem = (Table.Type_field)item;
+            if (false) {
+            } else if (item instanceof Table.Type_field) {
+              Table.Type_field valitem = (Table.Type_field)item;;
               ischanged = true;
               listval.add(valitem);
             }
@@ -1058,14 +1076,15 @@ public final class Table {
           ischanged = true;
           listval.add((Table.Type_field)valsub);
         } else if (valsub instanceof Table.Type_fieldmap) {
-          Type_fieldmap multi = (Type_fieldmap)valsub;
+          Table.Type_fieldmap multi = (Table.Type_fieldmap)valsub;;
           ischanged = true;
           listval.addAll(multi.vx_listfield());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
-            if (item instanceof Table.Type_field) {
-              Table.Type_field valitem = (Table.Type_field)item;
+            if (false) {
+            } else if (item instanceof Table.Type_field) {
+              Table.Type_field valitem = (Table.Type_field)item;;
               ischanged = true;
               listval.add(valitem);
             }
@@ -1231,16 +1250,20 @@ public final class Table {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -1265,8 +1288,9 @@ public final class Table {
           case ":id":
             if (valsub == vx_p_id) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valid = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_id = (Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_id = Core.vx_new(Core.t_string, valsub);
@@ -1289,8 +1313,9 @@ public final class Table {
           case ":name":
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valname = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_name = (Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
@@ -1313,8 +1338,9 @@ public final class Table {
           case ":idlist":
             if (valsub == vx_p_idlist) {
             } else if (valsub instanceof Core.Type_stringlist) {
+              Core.Type_stringlist validlist = (Core.Type_stringlist)valsub;;
               ischanged = true;
-              vx_p_idlist = (Core.Type_stringlist)valsub;
+              vx_p_idlist = validlist;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -1494,16 +1520,20 @@ public final class Table {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -1528,8 +1558,9 @@ public final class Table {
           case ":id":
             if (valsub == vx_p_id) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valid = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_id = (Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_id = Core.vx_new(Core.t_string, valsub);
@@ -1552,8 +1583,9 @@ public final class Table {
           case ":cellmap":
             if (valsub == vx_p_cellmap) {
             } else if (valsub instanceof Table.Type_cellmap) {
+              Table.Type_cellmap valcellmap = (Table.Type_cellmap)valsub;;
               ischanged = true;
-              vx_p_cellmap = (Table.Type_cellmap)valsub;
+              vx_p_cellmap = valcellmap;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -1573,8 +1605,9 @@ public final class Table {
           case ":cellsort":
             if (valsub == vx_p_cellsort) {
             } else if (valsub instanceof Table.Type_sort) {
+              Table.Type_sort valcellsort = (Table.Type_sort)valsub;;
               ischanged = true;
-              vx_p_cellsort = (Table.Type_sort)valsub;
+              vx_p_cellsort = valcellsort;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -1722,14 +1755,15 @@ public final class Table {
           ischanged = true;
           listval.add((Table.Type_row)valsub);
         } else if (valsub instanceof Table.Type_rowlist) {
-          Type_rowlist multi = (Type_rowlist)valsub;
+          Table.Type_rowlist multi = (Table.Type_rowlist)valsub;;
           ischanged = true;
           listval.addAll(multi.vx_listrow());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
-            if (item instanceof Table.Type_row) {
-              Table.Type_row valitem = (Table.Type_row)item;
+            if (false) {
+            } else if (item instanceof Table.Type_row) {
+              Table.Type_row valitem = (Table.Type_row)item;;
               ischanged = true;
               listval.add(valitem);
             }
@@ -1811,12 +1845,13 @@ public final class Table {
     @Override
     public Core.Type_boolean vx_set(final Core.Type_string name, final Core.Type_any value) {
       Core.Type_boolean output = Core.c_false;
-      if (value instanceof Table.Type_row) {
+      if (false) {
+      } else if (value instanceof Table.Type_row) {
+        Table.Type_row castval = (Table.Type_row)value;;
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
         }
-        Table.Type_row castval = (Table.Type_row)value;
         Map<String, Table.Type_row> map = new LinkedHashMap<String, Table.Type_row>(this.vx_p_map);
         if (castval == Table.e_row) {
           map.remove(key);
@@ -1919,8 +1954,10 @@ public final class Table {
           }
         } else {
           Table.Type_row valany = null;
-          if (valsub instanceof Table.Type_row) {
-            valany = (Table.Type_row)valsub;
+          if (false) {
+          } else if (valsub instanceof Table.Type_row) {
+            Table.Type_row valallowed = (Table.Type_row)valsub;;
+            valany = valallowed;
           } else if (valsub instanceof Table.Type_row) {
             valany = (Table.Type_row)valsub;
           } else {
@@ -2100,16 +2137,20 @@ public final class Table {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -2134,8 +2175,9 @@ public final class Table {
           case ":id":
             if (valsub == vx_p_id) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valid = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_id = (Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_id = Core.vx_new(Core.t_string, valsub);
@@ -2158,8 +2200,9 @@ public final class Table {
           case ":name":
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valname = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_name = (Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
@@ -2182,8 +2225,9 @@ public final class Table {
           case ":idlist":
             if (valsub == vx_p_idlist) {
             } else if (valsub instanceof Core.Type_stringlist) {
+              Core.Type_stringlist validlist = (Core.Type_stringlist)valsub;;
               ischanged = true;
-              vx_p_idlist = (Core.Type_stringlist)valsub;
+              vx_p_idlist = validlist;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -2435,16 +2479,20 @@ public final class Table {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -2469,8 +2517,9 @@ public final class Table {
           case ":id":
             if (valsub == vx_p_id) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valid = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_id = (Core.Type_string)valsub;
+              vx_p_id = valid;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_id = Core.vx_new(Core.t_string, valsub);
@@ -2493,8 +2542,9 @@ public final class Table {
           case ":name":
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valname = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_name = (Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
@@ -2517,8 +2567,9 @@ public final class Table {
           case ":fieldmap":
             if (valsub == vx_p_fieldmap) {
             } else if (valsub instanceof Table.Type_fieldmap) {
+              Table.Type_fieldmap valfieldmap = (Table.Type_fieldmap)valsub;;
               ischanged = true;
-              vx_p_fieldmap = (Table.Type_fieldmap)valsub;
+              vx_p_fieldmap = valfieldmap;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -2538,8 +2589,9 @@ public final class Table {
           case ":fieldsort":
             if (valsub == vx_p_fieldsort) {
             } else if (valsub instanceof Table.Type_sort) {
+              Table.Type_sort valfieldsort = (Table.Type_sort)valsub;;
               ischanged = true;
-              vx_p_fieldsort = (Table.Type_sort)valsub;
+              vx_p_fieldsort = valfieldsort;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -2559,8 +2611,9 @@ public final class Table {
           case ":rowmap":
             if (valsub == vx_p_rowmap) {
             } else if (valsub instanceof Table.Type_rowmap) {
+              Table.Type_rowmap valrowmap = (Table.Type_rowmap)valsub;;
               ischanged = true;
-              vx_p_rowmap = (Table.Type_rowmap)valsub;
+              vx_p_rowmap = valrowmap;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -2580,8 +2633,9 @@ public final class Table {
           case ":rowfilter":
             if (valsub == vx_p_rowfilter) {
             } else if (valsub instanceof Table.Type_filter) {
+              Table.Type_filter valrowfilter = (Table.Type_filter)valsub;;
               ischanged = true;
-              vx_p_rowfilter = (Table.Type_filter)valsub;
+              vx_p_rowfilter = valrowfilter;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -2601,8 +2655,9 @@ public final class Table {
           case ":rowsort":
             if (valsub == vx_p_rowsort) {
             } else if (valsub instanceof Table.Type_sort) {
+              Table.Type_sort valrowsort = (Table.Type_sort)valsub;;
               ischanged = true;
-              vx_p_rowsort = (Table.Type_sort)valsub;
+              vx_p_rowsort = valrowsort;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {

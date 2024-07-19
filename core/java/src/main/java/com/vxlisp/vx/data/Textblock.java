@@ -156,16 +156,20 @@ public final class Textblock {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -190,8 +194,9 @@ public final class Textblock {
           case ":name":
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valname = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_name = (Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
@@ -214,8 +219,9 @@ public final class Textblock {
           case ":starttext":
             if (valsub == vx_p_starttext) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valstarttext = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_starttext = (Core.Type_string)valsub;
+              vx_p_starttext = valstarttext;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_starttext = Core.vx_new(Core.t_string, valsub);
@@ -238,8 +244,9 @@ public final class Textblock {
           case ":endtext":
             if (valsub == vx_p_endtext) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valendtext = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_endtext = (Core.Type_string)valsub;
+              vx_p_endtext = valendtext;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_endtext = Core.vx_new(Core.t_string, valsub);
@@ -262,8 +269,9 @@ public final class Textblock {
           case ":pos":
             if (valsub == vx_p_pos) {
             } else if (valsub instanceof Core.Type_int) {
+              Core.Type_int valpos = (Core.Type_int)valsub;;
               ischanged = true;
-              vx_p_pos = (Core.Type_int)valsub;
+              vx_p_pos = valpos;
             } else if (valsub instanceof Integer) {
               ischanged = true;
               vx_p_pos = Core.vx_new(Core.t_int, valsub);
@@ -286,8 +294,9 @@ public final class Textblock {
           case ":delimlist":
             if (valsub == vx_p_delimlist) {
             } else if (valsub instanceof Textblock.Type_delimlist) {
+              Textblock.Type_delimlist valdelimlist = (Textblock.Type_delimlist)valsub;;
               ischanged = true;
-              vx_p_delimlist = (Textblock.Type_delimlist)valsub;
+              vx_p_delimlist = valdelimlist;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -438,14 +447,15 @@ public final class Textblock {
           ischanged = true;
           listval.add((Textblock.Type_delim)valsub);
         } else if (valsub instanceof Textblock.Type_delimlist) {
-          Type_delimlist multi = (Type_delimlist)valsub;
+          Textblock.Type_delimlist multi = (Textblock.Type_delimlist)valsub;;
           ischanged = true;
           listval.addAll(multi.vx_listdelim());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
-            if (item instanceof Textblock.Type_delim) {
-              Textblock.Type_delim valitem = (Textblock.Type_delim)item;
+            if (false) {
+            } else if (item instanceof Textblock.Type_delim) {
+              Textblock.Type_delim valitem = (Textblock.Type_delim)item;;
               ischanged = true;
               listval.add(valitem);
             }
@@ -756,16 +766,20 @@ public final class Textblock {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -790,8 +804,9 @@ public final class Textblock {
           case ":name":
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valname = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_name = (Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_name = Core.vx_new(Core.t_string, valsub);
@@ -814,8 +829,9 @@ public final class Textblock {
           case ":text":
             if (valsub == vx_p_text) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valtext = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_text = (Core.Type_string)valsub;
+              vx_p_text = valtext;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_text = Core.vx_new(Core.t_string, valsub);
@@ -838,8 +854,9 @@ public final class Textblock {
           case ":startpos":
             if (valsub == vx_p_startpos) {
             } else if (valsub instanceof Core.Type_int) {
+              Core.Type_int valstartpos = (Core.Type_int)valsub;;
               ischanged = true;
-              vx_p_startpos = (Core.Type_int)valsub;
+              vx_p_startpos = valstartpos;
             } else if (valsub instanceof Integer) {
               ischanged = true;
               vx_p_startpos = Core.vx_new(Core.t_int, valsub);
@@ -862,8 +879,9 @@ public final class Textblock {
           case ":endpos":
             if (valsub == vx_p_endpos) {
             } else if (valsub instanceof Core.Type_int) {
+              Core.Type_int valendpos = (Core.Type_int)valsub;;
               ischanged = true;
-              vx_p_endpos = (Core.Type_int)valsub;
+              vx_p_endpos = valendpos;
             } else if (valsub instanceof Integer) {
               ischanged = true;
               vx_p_endpos = Core.vx_new(Core.t_int, valsub);
@@ -886,8 +904,9 @@ public final class Textblock {
           case ":curpos":
             if (valsub == vx_p_curpos) {
             } else if (valsub instanceof Core.Type_int) {
+              Core.Type_int valcurpos = (Core.Type_int)valsub;;
               ischanged = true;
-              vx_p_curpos = (Core.Type_int)valsub;
+              vx_p_curpos = valcurpos;
             } else if (valsub instanceof Integer) {
               ischanged = true;
               vx_p_curpos = Core.vx_new(Core.t_int, valsub);
@@ -910,8 +929,9 @@ public final class Textblock {
           case ":line":
             if (valsub == vx_p_line) {
             } else if (valsub instanceof Core.Type_int) {
+              Core.Type_int valline = (Core.Type_int)valsub;;
               ischanged = true;
-              vx_p_line = (Core.Type_int)valsub;
+              vx_p_line = valline;
             } else if (valsub instanceof Integer) {
               ischanged = true;
               vx_p_line = Core.vx_new(Core.t_int, valsub);
@@ -934,8 +954,9 @@ public final class Textblock {
           case ":column":
             if (valsub == vx_p_column) {
             } else if (valsub instanceof Core.Type_int) {
+              Core.Type_int valcolumn = (Core.Type_int)valsub;;
               ischanged = true;
-              vx_p_column = (Core.Type_int)valsub;
+              vx_p_column = valcolumn;
             } else if (valsub instanceof Integer) {
               ischanged = true;
               vx_p_column = Core.vx_new(Core.t_int, valsub);
@@ -958,8 +979,9 @@ public final class Textblock {
           case ":delim":
             if (valsub == vx_p_delim) {
             } else if (valsub instanceof Textblock.Type_delim) {
+              Textblock.Type_delim valdelim = (Textblock.Type_delim)valsub;;
               ischanged = true;
-              vx_p_delim = (Textblock.Type_delim)valsub;
+              vx_p_delim = valdelim;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -979,8 +1001,9 @@ public final class Textblock {
           case ":close":
             if (valsub == vx_p_close) {
             } else if (valsub instanceof Textblock.Type_delim) {
+              Textblock.Type_delim valclose = (Textblock.Type_delim)valsub;;
               ischanged = true;
-              vx_p_close = (Textblock.Type_delim)valsub;
+              vx_p_close = valclose;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -1000,8 +1023,9 @@ public final class Textblock {
           case ":parent":
             if (valsub == vx_p_parent) {
             } else if (valsub instanceof Textblock.Type_textblock) {
+              Textblock.Type_textblock valparent = (Textblock.Type_textblock)valsub;;
               ischanged = true;
-              vx_p_parent = (Textblock.Type_textblock)valsub;
+              vx_p_parent = valparent;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -1021,8 +1045,9 @@ public final class Textblock {
           case ":children":
             if (valsub == vx_p_children) {
             } else if (valsub instanceof Textblock.Type_textblocklist) {
+              Textblock.Type_textblocklist valchildren = (Textblock.Type_textblocklist)valsub;;
               ischanged = true;
-              vx_p_children = (Textblock.Type_textblocklist)valsub;
+              vx_p_children = valchildren;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
@@ -1179,14 +1204,15 @@ public final class Textblock {
           ischanged = true;
           listval.add((Textblock.Type_textblock)valsub);
         } else if (valsub instanceof Textblock.Type_textblocklist) {
-          Type_textblocklist multi = (Type_textblocklist)valsub;
+          Textblock.Type_textblocklist multi = (Textblock.Type_textblocklist)valsub;;
           ischanged = true;
           listval.addAll(multi.vx_listtextblock());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;;
           for (Object item : listunknown) {
-            if (item instanceof Textblock.Type_textblock) {
-              Textblock.Type_textblock valitem = (Textblock.Type_textblock)item;
+            if (false) {
+            } else if (item instanceof Textblock.Type_textblock) {
+              Textblock.Type_textblock valitem = (Textblock.Type_textblock)item;;
               ischanged = true;
               listval.add(valitem);
             }

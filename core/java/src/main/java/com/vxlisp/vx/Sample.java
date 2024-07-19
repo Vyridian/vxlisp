@@ -100,16 +100,20 @@ public final class Sample {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -134,8 +138,9 @@ public final class Sample {
           case ":mynum":
             if (valsub == vx_p_mynum) {
             } else if (valsub instanceof Core.Type_int) {
+              Core.Type_int valmynum = (Core.Type_int)valsub;;
               ischanged = true;
-              vx_p_mynum = (Core.Type_int)valsub;
+              vx_p_mynum = valmynum;
             } else if (valsub instanceof Integer) {
               ischanged = true;
               vx_p_mynum = Core.vx_new(Core.t_int, valsub);
@@ -158,8 +163,9 @@ public final class Sample {
           case ":mystr":
             if (valsub == vx_p_mystr) {
             } else if (valsub instanceof Core.Type_string) {
+              Core.Type_string valmystr = (Core.Type_string)valsub;;
               ischanged = true;
-              vx_p_mystr = (Core.Type_string)valsub;
+              vx_p_mystr = valmystr;
             } else if (valsub instanceof String) {
               ischanged = true;
               vx_p_mystr = Core.vx_new(Core.t_string, valsub);

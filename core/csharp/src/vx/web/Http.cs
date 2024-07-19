@@ -85,16 +85,17 @@ public static class Http {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -118,9 +119,9 @@ public static class Http {
           switch (key) {
           case ":ok":
             if (valsub == vx_p_ok) {
-            } else if (valsub is Vx.Core.Type_boolean) {
+            } else if (valsub is Vx.Core.Type_boolean valok) {
               ischanged = true;
-              vx_p_ok = (Vx.Core.Type_boolean)valsub;
+              vx_p_ok = valok;
             } else if (valsub is bool) {
               ischanged = true;
               vx_p_ok = Vx.Core.vx_new(Vx.Core.t_boolean, valsub);
@@ -141,9 +142,9 @@ public static class Http {
             break;
           case ":status":
             if (valsub == vx_p_status) {
-            } else if (valsub is Vx.Core.Type_int) {
+            } else if (valsub is Vx.Core.Type_int valstatus) {
               ischanged = true;
-              vx_p_status = (Vx.Core.Type_int)valsub;
+              vx_p_status = valstatus;
             } else if (valsub is int) {
               ischanged = true;
               vx_p_status = Vx.Core.vx_new(Vx.Core.t_int, valsub);

@@ -154,16 +154,17 @@ public static class Event {
         } else if (key == "") {
           bool istestkey = false;
           string testkey = "";
-          if (valsub is Vx.Core.Type_string) {
-            Vx.Core.Type_string valstr = (Vx.Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub is Vx.Core.Type_string valstr) {
             testkey = valstr.vx_string();
             istestkey = true;
-          } else if (valsub is string) {
-            testkey = (String)valsub;
+          } else if (valsub is string sval) {
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub is Vx.Core.Type_any) {
-              msgval = (Vx.Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub is Vx.Core.Type_any valmsg) {
+              msgval = valmsg;
             } else {
               msgval = Vx.Core.vx_new_string(Vx.Core.vx_string_from_object(valsub));
             }
@@ -187,9 +188,9 @@ public static class Event {
           switch (key) {
           case ":name":
             if (valsub == vx_p_name) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
-              vx_p_name = (Vx.Core.Type_string)valsub;
+              vx_p_name = valname;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_name = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -210,9 +211,9 @@ public static class Event {
             break;
           case ":from":
             if (valsub == vx_p_from) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valfrom) {
               ischanged = true;
-              vx_p_from = (Vx.Core.Type_string)valsub;
+              vx_p_from = valfrom;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_from = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -233,9 +234,9 @@ public static class Event {
             break;
           case ":to":
             if (valsub == vx_p_to) {
-            } else if (valsub is Vx.Core.Type_string) {
+            } else if (valsub is Vx.Core.Type_string valto) {
               ischanged = true;
-              vx_p_to = (Vx.Core.Type_string)valsub;
+              vx_p_to = valto;
             } else if (valsub is string) {
               ischanged = true;
               vx_p_to = Vx.Core.vx_new(Vx.Core.t_string, valsub);
@@ -256,9 +257,9 @@ public static class Event {
             break;
           case ":datamap":
             if (valsub == vx_p_datamap) {
-            } else if (valsub is Vx.Core.Type_anymap) {
+            } else if (valsub is Vx.Core.Type_anymap valdatamap) {
               ischanged = true;
-              vx_p_datamap = (Vx.Core.Type_anymap)valsub;
+              vx_p_datamap = valdatamap;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -276,9 +277,9 @@ public static class Event {
             break;
           case ":event<-event":
             if (valsub == vx_p_event_from_event) {
-            } else if (valsub is Vx.Event.Func_event_from_event) {
+            } else if (valsub is Vx.Event.Func_event_from_event valevent_from_event) {
               ischanged = true;
-              vx_p_event_from_event = (Vx.Event.Func_event_from_event)valsub;
+              vx_p_event_from_event = valevent_from_event;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -296,9 +297,9 @@ public static class Event {
             break;
           case ":event<-event-async":
             if (valsub == vx_p_event_from_event_async) {
-            } else if (valsub is Vx.Event.Func_event_from_event_async) {
+            } else if (valsub is Vx.Event.Func_event_from_event_async valevent_from_event_async) {
               ischanged = true;
-              vx_p_event_from_event_async = (Vx.Event.Func_event_from_event_async)valsub;
+              vx_p_event_from_event_async = valevent_from_event_async;
             } else {
               if (false) {
               } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -434,14 +435,13 @@ public static class Event {
         } else if (valsub is Vx.Event.Type_event) {
           ischanged = true;
           listval.Add((Vx.Event.Type_event)valsub);
-        } else if (valsub is Vx.Event.Type_eventlist) {
-          Type_eventlist multi = (Type_eventlist)valsub;
+        } else if (valsub is Vx.Event.Type_eventlist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listevent());
         } else if (valsub is List<object> listunknown) {
           foreach (Object item in listunknown) {
-            if (item is Vx.Event.Type_event) {
-              Vx.Event.Type_event valitem = (Vx.Event.Type_event)item;
+            if (false) {
+            } else if (item is Vx.Event.Type_event valitem) {
               ischanged = true;
               listval.Add(valitem);
             }
@@ -508,19 +508,19 @@ public static class Event {
     public Vx.Core.Map<string, Vx.Event.Type_event> vx_p_map = Vx.Core.immutablemap(new Vx.Core.LinkedHashMap<string, Vx.Event.Type_event>());
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)this.vx_p_map;
+      Vx.Core.Map<string, Vx.Core.Type_any> anymap = (Vx.Core.Map<string, Vx.Core.Type_any>)Convert.ChangeType(this.vx_p_map, typeof(Vx.Core.Map<string, Vx.Core.Type_any>));
       Vx.Core.Map<string, Vx.Core.Type_any> map = anymap.copy();
       return Vx.Core.immutablemap(map);
     }
 
     public Vx.Core.Type_boolean vx_set(Vx.Core.Type_string name, Vx.Core.Type_any value) {
       Vx.Core.Type_boolean output = Vx.Core.c_false;
-      if (value is Vx.Event.Type_event) {
+      if (false) {
+      } else if (value is Vx.Event.Type_event castval) {
         string key = name.vx_string();
         if (key.StartsWith(":")) {
           key = key.Substring(1);
         }
-        Vx.Event.Type_event castval = (Vx.Event.Type_event)value;
         Vx.Core.Map<string, Vx.Event.Type_event> map = new Vx.Core.LinkedHashMap<string, Vx.Event.Type_event>(this.vx_p_map);
         if (castval == Vx.Event.e_event) {
           map.remove(key);
@@ -613,8 +613,9 @@ public static class Event {
           }
         } else {
           Vx.Event.Type_event? valany = null;
-          if (valsub is Vx.Event.Type_event) {
-            valany = (Vx.Event.Type_event)valsub;
+          if (false) {
+          } else if (valsub is Vx.Event.Type_event valallowed) {
+            valany = valallowed;
           } else if (valsub is Vx.Event.Type_event) {
             valany = valsub as Vx.Event.Type_event;
           } else {

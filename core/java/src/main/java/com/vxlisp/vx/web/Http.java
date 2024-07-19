@@ -103,16 +103,20 @@ public final class Http {
         } else if (key == "") {
           boolean istestkey = false;
           String testkey = "";
-          if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;
+          if (false) {
+          } else if (valsub instanceof Core.Type_string) {
+            Core.Type_string valstr = (Core.Type_string)valsub;;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            testkey = (String)valsub;
+            String sval = (String)valsub;;
+            testkey = sval;
             istestkey = true;
           } else {
-            if (valsub instanceof Core.Type_any) {
-              msgval = (Core.Type_any)valsub;
+            if (false) {
+            } else if (valsub instanceof Core.Type_any) {
+              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
             }
@@ -137,8 +141,9 @@ public final class Http {
           case ":ok":
             if (valsub == vx_p_ok) {
             } else if (valsub instanceof Core.Type_boolean) {
+              Core.Type_boolean valok = (Core.Type_boolean)valsub;;
               ischanged = true;
-              vx_p_ok = (Core.Type_boolean)valsub;
+              vx_p_ok = valok;
             } else if (valsub instanceof Boolean) {
               ischanged = true;
               vx_p_ok = Core.vx_new(Core.t_boolean, valsub);
@@ -161,8 +166,9 @@ public final class Http {
           case ":status":
             if (valsub == vx_p_status) {
             } else if (valsub instanceof Core.Type_int) {
+              Core.Type_int valstatus = (Core.Type_int)valsub;;
               ischanged = true;
-              vx_p_status = (Core.Type_int)valsub;
+              vx_p_status = valstatus;
             } else if (valsub instanceof Integer) {
               ischanged = true;
               vx_p_status = Core.vx_new(Core.t_int, valsub);
