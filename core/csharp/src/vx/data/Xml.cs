@@ -125,7 +125,7 @@ public static class Xml {
       bool ischanged = false;
       Class_xml val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_tag = val.tag();
@@ -415,7 +415,7 @@ public static class Xml {
       bool ischanged = false;
       Class_xmllist val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Data.Xml.Type_xml> listval = new List<Vx.Data.Xml.Type_xml>(val.vx_listxml());
@@ -533,7 +533,7 @@ public static class Xml {
       Vx.Data.Xml.Class_xmlpropmap map = this;
       string skey = key.vx_string();
       Vx.Core.Map<string, Vx.Core.Type_string> mapval = map.vx_p_map;
-      output = mapval.getOrDefault(skey, Vx.Core.e_string);
+      output = mapval.getOrElse(skey, Vx.Core.e_string);
       return output;
     }
 
@@ -577,7 +577,7 @@ public static class Xml {
       bool ischanged = false;
       Class_xmlpropmap val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_string> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_string>(val.vx_mapstring());
@@ -679,9 +679,8 @@ public static class Xml {
    * Constant: delimxml
    * {delim}
    */
-  public class Const_delimxml : Vx.Data.Textblock.Class_delim, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_delimxml {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/data/xml", // pkgname
         "delimxml", // name
@@ -701,7 +700,9 @@ public static class Xml {
       );
     }
 
-    public static void const_new(Const_delimxml output) {
+    public static void const_new(Vx.Data.Textblock.Type_delim output) {
+      Vx.Data.Textblock.Class_delim outval = (Vx.Data.Textblock.Class_delim)output;
+      outval.vx_p_constdef = constdef();
       Vx.Data.Textblock.Type_delim val = Vx.Core.f_new(
         Vx.Data.Textblock.t_delim,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -729,26 +730,24 @@ public static class Xml {
                 )
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_starttext = val.starttext();
-      output.vx_p_endtext = val.endtext();
-      output.vx_p_pos = val.pos();
-      output.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_starttext = val.starttext();
+      outval.vx_p_endtext = val.endtext();
+      outval.vx_p_pos = val.pos();
+      outval.vx_p_delimlist = val.delimlist();
     }
-
 
   }
 
-  public static Const_delimxml c_delimxml = new Const_delimxml();
+  public static Vx.Data.Textblock.Type_delim c_delimxml = new Vx.Data.Textblock.Class_delim();
 
 
   /**
    * Constant: delimxmlcdata
    * {delim}
    */
-  public class Const_delimxmlcdata : Vx.Data.Textblock.Class_delim, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_delimxmlcdata {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/data/xml", // pkgname
         "delimxmlcdata", // name
@@ -768,7 +767,9 @@ public static class Xml {
       );
     }
 
-    public static void const_new(Const_delimxmlcdata output) {
+    public static void const_new(Vx.Data.Textblock.Type_delim output) {
+      Vx.Data.Textblock.Class_delim outval = (Vx.Data.Textblock.Class_delim)output;
+      outval.vx_p_constdef = constdef();
       Vx.Data.Textblock.Type_delim val = Vx.Core.f_new(
         Vx.Data.Textblock.t_delim,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -780,26 +781,24 @@ public static class Xml {
                 Vx.Core.vx_new_string("]]>")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_starttext = val.starttext();
-      output.vx_p_endtext = val.endtext();
-      output.vx_p_pos = val.pos();
-      output.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_starttext = val.starttext();
+      outval.vx_p_endtext = val.endtext();
+      outval.vx_p_pos = val.pos();
+      outval.vx_p_delimlist = val.delimlist();
     }
-
 
   }
 
-  public static Const_delimxmlcdata c_delimxmlcdata = new Const_delimxmlcdata();
+  public static Vx.Data.Textblock.Type_delim c_delimxmlcdata = new Vx.Data.Textblock.Class_delim();
 
 
   /**
    * Constant: delimxmlcomment
    * {delim}
    */
-  public class Const_delimxmlcomment : Vx.Data.Textblock.Class_delim, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_delimxmlcomment {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/data/xml", // pkgname
         "delimxmlcomment", // name
@@ -819,7 +818,9 @@ public static class Xml {
       );
     }
 
-    public static void const_new(Const_delimxmlcomment output) {
+    public static void const_new(Vx.Data.Textblock.Type_delim output) {
+      Vx.Data.Textblock.Class_delim outval = (Vx.Data.Textblock.Class_delim)output;
+      outval.vx_p_constdef = constdef();
       Vx.Data.Textblock.Type_delim val = Vx.Core.f_new(
         Vx.Data.Textblock.t_delim,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -831,26 +832,24 @@ public static class Xml {
                 Vx.Core.vx_new_string("-->")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_starttext = val.starttext();
-      output.vx_p_endtext = val.endtext();
-      output.vx_p_pos = val.pos();
-      output.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_starttext = val.starttext();
+      outval.vx_p_endtext = val.endtext();
+      outval.vx_p_pos = val.pos();
+      outval.vx_p_delimlist = val.delimlist();
     }
-
 
   }
 
-  public static Const_delimxmlcomment c_delimxmlcomment = new Const_delimxmlcomment();
+  public static Vx.Data.Textblock.Type_delim c_delimxmlcomment = new Vx.Data.Textblock.Class_delim();
 
 
   /**
    * Constant: delimxmlequal
    * {delim}
    */
-  public class Const_delimxmlequal : Vx.Data.Textblock.Class_delim, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_delimxmlequal {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/data/xml", // pkgname
         "delimxmlequal", // name
@@ -870,7 +869,9 @@ public static class Xml {
       );
     }
 
-    public static void const_new(Const_delimxmlequal output) {
+    public static void const_new(Vx.Data.Textblock.Type_delim output) {
+      Vx.Data.Textblock.Class_delim outval = (Vx.Data.Textblock.Class_delim)output;
+      outval.vx_p_constdef = constdef();
       Vx.Data.Textblock.Type_delim val = Vx.Core.f_new(
         Vx.Data.Textblock.t_delim,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -880,17 +881,16 @@ public static class Xml {
                 Vx.Core.vx_new_string("=")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_starttext = val.starttext();
-      output.vx_p_endtext = val.endtext();
-      output.vx_p_pos = val.pos();
-      output.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_starttext = val.starttext();
+      outval.vx_p_endtext = val.endtext();
+      outval.vx_p_pos = val.pos();
+      outval.vx_p_delimlist = val.delimlist();
     }
-
 
   }
 
-  public static Const_delimxmlequal c_delimxmlequal = new Const_delimxmlequal();
+  public static Vx.Data.Textblock.Type_delim c_delimxmlequal = new Vx.Data.Textblock.Class_delim();
 
   /**
    * @function string_decodexml_from_string

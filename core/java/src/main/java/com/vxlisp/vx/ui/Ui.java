@@ -49,7 +49,7 @@ public final class Ui {
       boolean ischanged = false;
       Class_align val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
@@ -198,7 +198,7 @@ public final class Ui {
       boolean ischanged = false;
       Class_bounds val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_int vx_p_left = val.left();
@@ -448,7 +448,7 @@ public final class Ui {
       boolean ischanged = false;
       Class_cursor val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
@@ -517,7 +517,7 @@ public final class Ui {
       boolean ischanged = false;
       Class_cursor_pointer val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
@@ -599,7 +599,7 @@ public final class Ui {
       boolean ischanged = false;
       Class_flip val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
@@ -748,7 +748,7 @@ public final class Ui {
       boolean ischanged = false;
       Class_font val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_name = val.name();
@@ -1059,7 +1059,7 @@ public final class Ui {
       boolean ischanged = false;
       Class_fontface val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_name = val.name();
@@ -1328,7 +1328,7 @@ public final class Ui {
       boolean ischanged = false;
       Class_fontfacelist val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       List<Ui.Type_fontface> listval = new ArrayList<Ui.Type_fontface>(val.vx_listfontface());
@@ -1512,7 +1512,7 @@ public final class Ui {
       boolean ischanged = false;
       Class_fontfacemap val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Map<String, Ui.Type_fontface> mapval = new LinkedHashMap<String, Ui.Type_fontface>(val.vx_mapfontface());
@@ -1720,7 +1720,7 @@ public final class Ui {
       boolean ischanged = false;
       Class_fontmap val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Map<String, Ui.Type_font> mapval = new LinkedHashMap<String, Ui.Type_font>(val.vx_mapfont());
@@ -1883,7 +1883,7 @@ public final class Ui {
       boolean ischanged = false;
       Class_fontstyle val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_name = val.name();
@@ -2113,7 +2113,7 @@ public final class Ui {
       boolean ischanged = false;
       Class_fontstylemap val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Map<String, Ui.Type_fontstyle> mapval = new LinkedHashMap<String, Ui.Type_fontstyle>(val.vx_mapfontstyle());
@@ -2308,7 +2308,7 @@ public final class Ui {
       boolean ischanged = false;
       Class_image val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_name = val.name();
@@ -2562,7 +2562,7 @@ public final class Ui {
       boolean ischanged = false;
       Class_layout val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_name = val.name();
@@ -2884,7 +2884,7 @@ public final class Ui {
       boolean ischanged = false;
       Class_layoutengine val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_name = val.name();
@@ -3247,7 +3247,7 @@ public final class Ui {
       boolean ischanged = false;
       Class_layoutlist val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       List<Ui.Type_layout> listval = new ArrayList<Ui.Type_layout>(val.vx_listlayout());
@@ -3431,7 +3431,7 @@ public final class Ui {
       boolean ischanged = false;
       Class_layoutmap val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Map<String, Ui.Type_layout> mapval = new LinkedHashMap<String, Ui.Type_layout>(val.vx_maplayout());
@@ -3594,7 +3594,7 @@ public final class Ui {
       boolean ischanged = false;
       Class_pin val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_name = val.name();
@@ -3859,7 +3859,7 @@ public final class Ui {
       boolean ischanged = false;
       Class_point val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_int vx_p_x = val.x();
@@ -4150,7 +4150,7 @@ public final class Ui {
       boolean ischanged = false;
       Class_pointtype val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
@@ -4587,7 +4587,7 @@ public final class Ui {
       boolean ischanged = false;
       Class_style val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_name = val.name();
@@ -5321,7 +5321,7 @@ public final class Ui {
       boolean ischanged = false;
       Class_stylelist val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       List<Ui.Type_style> listval = new ArrayList<Ui.Type_style>(val.vx_liststyle());
@@ -5505,7 +5505,7 @@ public final class Ui {
       boolean ischanged = false;
       Class_stylemap val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Map<String, Ui.Type_style> mapval = new LinkedHashMap<String, Ui.Type_style>(val.vx_mapstyle());
@@ -5684,7 +5684,7 @@ public final class Ui {
       boolean ischanged = false;
       Class_stylesheet val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Ui.Type_fontfacemap vx_p_fontfacemap = val.fontfacemap();
@@ -5872,7 +5872,7 @@ public final class Ui {
       boolean ischanged = false;
       Class_styletype val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
@@ -6149,7 +6149,7 @@ public final class Ui {
       boolean ischanged = false;
       Class_ui val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_uid = val.uid();
@@ -6672,7 +6672,7 @@ public final class Ui {
       boolean ischanged = false;
       Class_uiengine val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Ui.Type_uimap vx_p_parentmap = val.parentmap();
@@ -6932,7 +6932,7 @@ public final class Ui {
       boolean ischanged = false;
       Class_uilist val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       List<Ui.Type_ui> listval = new ArrayList<Ui.Type_ui>(val.vx_listui());
@@ -7116,7 +7116,7 @@ public final class Ui {
       boolean ischanged = false;
       Class_uimap val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Map<String, Ui.Type_ui> mapval = new LinkedHashMap<String, Ui.Type_ui>(val.vx_mapui());
@@ -7227,10 +7227,8 @@ public final class Ui {
    * Logical Center Align in parent
    * {align}
    */
-  public static class Const_align_center extends Ui.Class_align implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_align_center {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "align-center", // name
@@ -7250,13 +7248,14 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_align_center output) {
+    public static void const_new(Ui.Type_align output) {
+      Ui.Class_align outval = (Ui.Class_align)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static final Const_align_center c_align_center = new Const_align_center();
+  public static final Ui.Type_align c_align_center = new Ui.Class_align();
 
 
   /**
@@ -7264,10 +7263,8 @@ public final class Ui {
    * Logical Left Align in parent
    * {align}
    */
-  public static class Const_align_left extends Ui.Class_align implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_align_left {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "align-left", // name
@@ -7287,13 +7284,14 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_align_left output) {
+    public static void const_new(Ui.Type_align output) {
+      Ui.Class_align outval = (Ui.Class_align)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static final Const_align_left c_align_left = new Const_align_left();
+  public static final Ui.Type_align c_align_left = new Ui.Class_align();
 
 
   /**
@@ -7301,10 +7299,8 @@ public final class Ui {
    * Logical Right Align in parent
    * {align}
    */
-  public static class Const_align_right extends Ui.Class_align implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_align_right {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "align-right", // name
@@ -7324,13 +7320,14 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_align_right output) {
+    public static void const_new(Ui.Type_align output) {
+      Ui.Class_align outval = (Ui.Class_align)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static final Const_align_right c_align_right = new Const_align_right();
+  public static final Ui.Type_align c_align_right = new Ui.Class_align();
 
 
   /**
@@ -7338,10 +7335,8 @@ public final class Ui {
    * Logical Flip Horizontally
    * {align}
    */
-  public static class Const_flip_x extends Ui.Class_align implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_flip_x {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "flip-x", // name
@@ -7361,13 +7356,14 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_flip_x output) {
+    public static void const_new(Ui.Type_align output) {
+      Ui.Class_align outval = (Ui.Class_align)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static final Const_flip_x c_flip_x = new Const_flip_x();
+  public static final Ui.Type_align c_flip_x = new Ui.Class_align();
 
 
   /**
@@ -7375,10 +7371,8 @@ public final class Ui {
    * Logical Flip Vertically and Horizontally
    * {align}
    */
-  public static class Const_flip_xy extends Ui.Class_align implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_flip_xy {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "flip-xy", // name
@@ -7398,13 +7392,14 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_flip_xy output) {
+    public static void const_new(Ui.Type_align output) {
+      Ui.Class_align outval = (Ui.Class_align)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static final Const_flip_xy c_flip_xy = new Const_flip_xy();
+  public static final Ui.Type_align c_flip_xy = new Ui.Class_align();
 
 
   /**
@@ -7412,10 +7407,8 @@ public final class Ui {
    * Logical Flip Vertically
    * {align}
    */
-  public static class Const_flip_y extends Ui.Class_align implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_flip_y {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "flip-y", // name
@@ -7435,23 +7428,22 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_flip_y output) {
+    public static void const_new(Ui.Type_align output) {
+      Ui.Class_align outval = (Ui.Class_align)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static final Const_flip_y c_flip_y = new Const_flip_y();
+  public static final Ui.Type_align c_flip_y = new Ui.Class_align();
 
 
   /**
    * Constant: layout-app
    * {layout}
    */
-  public static class Const_layout_app extends Ui.Class_layout implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_layout_app {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-app", // name
@@ -7471,7 +7463,9 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_layout_app output) {
+    public static void const_new(Ui.Type_layout output) {
+      Ui.Class_layout outval = (Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Ui.Type_layout val = Core.f_new(
         Ui.t_layout,
         Core.vx_new(Core.t_anylist,
@@ -7479,24 +7473,21 @@ public final class Ui {
                 Core.vx_new_string("layout-app")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static final Const_layout_app c_layout_app = new Const_layout_app();
+  public static final Ui.Type_layout c_layout_app = new Ui.Class_layout();
 
 
   /**
    * Constant: layout-background
    * {layout}
    */
-  public static class Const_layout_background extends Ui.Class_layout implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_layout_background {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-background", // name
@@ -7516,7 +7507,9 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_layout_background output) {
+    public static void const_new(Ui.Type_layout output) {
+      Ui.Class_layout outval = (Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Ui.Type_layout val = Core.f_new(
         Ui.t_layout,
         Core.vx_new(Core.t_anylist,
@@ -7524,24 +7517,21 @@ public final class Ui {
                 Core.vx_new_string("layout-background")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static final Const_layout_background c_layout_background = new Const_layout_background();
+  public static final Ui.Type_layout c_layout_background = new Ui.Class_layout();
 
 
   /**
    * Constant: layout-button
    * {layout}
    */
-  public static class Const_layout_button extends Ui.Class_layout implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_layout_button {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-button", // name
@@ -7561,7 +7551,9 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_layout_button output) {
+    public static void const_new(Ui.Type_layout output) {
+      Ui.Class_layout outval = (Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Ui.Type_layout val = Core.f_new(
         Ui.t_layout,
         Core.vx_new(Core.t_anylist,
@@ -7569,24 +7561,21 @@ public final class Ui {
                 Core.vx_new_string("layout-button")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static final Const_layout_button c_layout_button = new Const_layout_button();
+  public static final Ui.Type_layout c_layout_button = new Ui.Class_layout();
 
 
   /**
    * Constant: layout-combobox
    * {layout}
    */
-  public static class Const_layout_combobox extends Ui.Class_layout implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_layout_combobox {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-combobox", // name
@@ -7606,7 +7595,9 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_layout_combobox output) {
+    public static void const_new(Ui.Type_layout output) {
+      Ui.Class_layout outval = (Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Ui.Type_layout val = Core.f_new(
         Ui.t_layout,
         Core.vx_new(Core.t_anylist,
@@ -7614,24 +7605,21 @@ public final class Ui {
                 Core.vx_new_string("layout-combobox")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static final Const_layout_combobox c_layout_combobox = new Const_layout_combobox();
+  public static final Ui.Type_layout c_layout_combobox = new Ui.Class_layout();
 
 
   /**
    * Constant: layout-else
    * {layout}
    */
-  public static class Const_layout_else extends Ui.Class_layout implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_layout_else {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-else", // name
@@ -7651,7 +7639,9 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_layout_else output) {
+    public static void const_new(Ui.Type_layout output) {
+      Ui.Class_layout outval = (Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Ui.Type_layout val = Core.f_new(
         Ui.t_layout,
         Core.vx_new(Core.t_anylist,
@@ -7659,24 +7649,21 @@ public final class Ui {
                 Core.vx_new_string("layout-else")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static final Const_layout_else c_layout_else = new Const_layout_else();
+  public static final Ui.Type_layout c_layout_else = new Ui.Class_layout();
 
 
   /**
    * Constant: layout-flow-columns
    * {layout}
    */
-  public static class Const_layout_flow_columns extends Ui.Class_layout implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_layout_flow_columns {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-flow-columns", // name
@@ -7696,7 +7683,9 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_layout_flow_columns output) {
+    public static void const_new(Ui.Type_layout output) {
+      Ui.Class_layout outval = (Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Ui.Type_layout val = Core.f_new(
         Ui.t_layout,
         Core.vx_new(Core.t_anylist,
@@ -7704,24 +7693,21 @@ public final class Ui {
                 Core.vx_new_string("layout-flow-columns")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static final Const_layout_flow_columns c_layout_flow_columns = new Const_layout_flow_columns();
+  public static final Ui.Type_layout c_layout_flow_columns = new Ui.Class_layout();
 
 
   /**
    * Constant: layout-flow-item
    * {layout}
    */
-  public static class Const_layout_flow_item extends Ui.Class_layout implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_layout_flow_item {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-flow-item", // name
@@ -7741,7 +7727,9 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_layout_flow_item output) {
+    public static void const_new(Ui.Type_layout output) {
+      Ui.Class_layout outval = (Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Ui.Type_layout val = Core.f_new(
         Ui.t_layout,
         Core.vx_new(Core.t_anylist,
@@ -7749,24 +7737,21 @@ public final class Ui {
                 Core.vx_new_string("layout-flow-item")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static final Const_layout_flow_item c_layout_flow_item = new Const_layout_flow_item();
+  public static final Ui.Type_layout c_layout_flow_item = new Ui.Class_layout();
 
 
   /**
    * Constant: layout-flow-rows
    * {layout}
    */
-  public static class Const_layout_flow_rows extends Ui.Class_layout implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_layout_flow_rows {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-flow-rows", // name
@@ -7786,7 +7771,9 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_layout_flow_rows output) {
+    public static void const_new(Ui.Type_layout output) {
+      Ui.Class_layout outval = (Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Ui.Type_layout val = Core.f_new(
         Ui.t_layout,
         Core.vx_new(Core.t_anylist,
@@ -7794,24 +7781,21 @@ public final class Ui {
                 Core.vx_new_string("layout-flow-rows")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static final Const_layout_flow_rows c_layout_flow_rows = new Const_layout_flow_rows();
+  public static final Ui.Type_layout c_layout_flow_rows = new Ui.Class_layout();
 
 
   /**
    * Constant: layout-image
    * {layout}
    */
-  public static class Const_layout_image extends Ui.Class_layout implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_layout_image {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-image", // name
@@ -7831,7 +7815,9 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_layout_image output) {
+    public static void const_new(Ui.Type_layout output) {
+      Ui.Class_layout outval = (Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Ui.Type_layout val = Core.f_new(
         Ui.t_layout,
         Core.vx_new(Core.t_anylist,
@@ -7839,24 +7825,21 @@ public final class Ui {
                 Core.vx_new_string("layout-image")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static final Const_layout_image c_layout_image = new Const_layout_image();
+  public static final Ui.Type_layout c_layout_image = new Ui.Class_layout();
 
 
   /**
    * Constant: layout-label
    * {layout}
    */
-  public static class Const_layout_label extends Ui.Class_layout implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_layout_label {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-label", // name
@@ -7876,7 +7859,9 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_layout_label output) {
+    public static void const_new(Ui.Type_layout output) {
+      Ui.Class_layout outval = (Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Ui.Type_layout val = Core.f_new(
         Ui.t_layout,
         Core.vx_new(Core.t_anylist,
@@ -7884,24 +7869,21 @@ public final class Ui {
                 Core.vx_new_string("layout-label")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static final Const_layout_label c_layout_label = new Const_layout_label();
+  public static final Ui.Type_layout c_layout_label = new Ui.Class_layout();
 
 
   /**
    * Constant: layout-main
    * {layout}
    */
-  public static class Const_layout_main extends Ui.Class_layout implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_layout_main {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-main", // name
@@ -7921,7 +7903,9 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_layout_main output) {
+    public static void const_new(Ui.Type_layout output) {
+      Ui.Class_layout outval = (Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Ui.Type_layout val = Core.f_new(
         Ui.t_layout,
         Core.vx_new(Core.t_anylist,
@@ -7929,24 +7913,21 @@ public final class Ui {
                 Core.vx_new_string("layout-main")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static final Const_layout_main c_layout_main = new Const_layout_main();
+  public static final Ui.Type_layout c_layout_main = new Ui.Class_layout();
 
 
   /**
    * Constant: layout-maxpanel
    * {layout}
    */
-  public static class Const_layout_maxpanel extends Ui.Class_layout implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_layout_maxpanel {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-maxpanel", // name
@@ -7966,7 +7947,9 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_layout_maxpanel output) {
+    public static void const_new(Ui.Type_layout output) {
+      Ui.Class_layout outval = (Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Ui.Type_layout val = Core.f_new(
         Ui.t_layout,
         Core.vx_new(Core.t_anylist,
@@ -7974,24 +7957,21 @@ public final class Ui {
                 Core.vx_new_string("layout-maxpanel")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static final Const_layout_maxpanel c_layout_maxpanel = new Const_layout_maxpanel();
+  public static final Ui.Type_layout c_layout_maxpanel = new Ui.Class_layout();
 
 
   /**
    * Constant: layout-menubar
    * {layout}
    */
-  public static class Const_layout_menubar extends Ui.Class_layout implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_layout_menubar {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-menubar", // name
@@ -8011,7 +7991,9 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_layout_menubar output) {
+    public static void const_new(Ui.Type_layout output) {
+      Ui.Class_layout outval = (Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Ui.Type_layout val = Core.f_new(
         Ui.t_layout,
         Core.vx_new(Core.t_anylist,
@@ -8019,24 +8001,21 @@ public final class Ui {
                 Core.vx_new_string("layout-menubar")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static final Const_layout_menubar c_layout_menubar = new Const_layout_menubar();
+  public static final Ui.Type_layout c_layout_menubar = new Ui.Class_layout();
 
 
   /**
    * Constant: layout-menudrawer
    * {layout}
    */
-  public static class Const_layout_menudrawer extends Ui.Class_layout implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_layout_menudrawer {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-menudrawer", // name
@@ -8056,7 +8035,9 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_layout_menudrawer output) {
+    public static void const_new(Ui.Type_layout output) {
+      Ui.Class_layout outval = (Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Ui.Type_layout val = Core.f_new(
         Ui.t_layout,
         Core.vx_new(Core.t_anylist,
@@ -8064,24 +8045,21 @@ public final class Ui {
                 Core.vx_new_string("layout-menudrawer")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static final Const_layout_menudrawer c_layout_menudrawer = new Const_layout_menudrawer();
+  public static final Ui.Type_layout c_layout_menudrawer = new Ui.Class_layout();
 
 
   /**
    * Constant: layout-msgbox
    * {layout}
    */
-  public static class Const_layout_msgbox extends Ui.Class_layout implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_layout_msgbox {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-msgbox", // name
@@ -8101,7 +8079,9 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_layout_msgbox output) {
+    public static void const_new(Ui.Type_layout output) {
+      Ui.Class_layout outval = (Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Ui.Type_layout val = Core.f_new(
         Ui.t_layout,
         Core.vx_new(Core.t_anylist,
@@ -8109,24 +8089,21 @@ public final class Ui {
                 Core.vx_new_string("layout-msgbox")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static final Const_layout_msgbox c_layout_msgbox = new Const_layout_msgbox();
+  public static final Ui.Type_layout c_layout_msgbox = new Ui.Class_layout();
 
 
   /**
    * Constant: layout-navbar
    * {layout}
    */
-  public static class Const_layout_navbar extends Ui.Class_layout implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_layout_navbar {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-navbar", // name
@@ -8146,7 +8123,9 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_layout_navbar output) {
+    public static void const_new(Ui.Type_layout output) {
+      Ui.Class_layout outval = (Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Ui.Type_layout val = Core.f_new(
         Ui.t_layout,
         Core.vx_new(Core.t_anylist,
@@ -8154,24 +8133,21 @@ public final class Ui {
                 Core.vx_new_string("layout-navbar")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static final Const_layout_navbar c_layout_navbar = new Const_layout_navbar();
+  public static final Ui.Type_layout c_layout_navbar = new Ui.Class_layout();
 
 
   /**
    * Constant: layout-navdrawer
    * {layout}
    */
-  public static class Const_layout_navdrawer extends Ui.Class_layout implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_layout_navdrawer {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-navdrawer", // name
@@ -8191,7 +8167,9 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_layout_navdrawer output) {
+    public static void const_new(Ui.Type_layout output) {
+      Ui.Class_layout outval = (Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Ui.Type_layout val = Core.f_new(
         Ui.t_layout,
         Core.vx_new(Core.t_anylist,
@@ -8199,24 +8177,21 @@ public final class Ui {
                 Core.vx_new_string("layout-navdrawer")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static final Const_layout_navdrawer c_layout_navdrawer = new Const_layout_navdrawer();
+  public static final Ui.Type_layout c_layout_navdrawer = new Ui.Class_layout();
 
 
   /**
    * Constant: layout-panel
    * {layout}
    */
-  public static class Const_layout_panel extends Ui.Class_layout implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_layout_panel {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-panel", // name
@@ -8236,7 +8211,9 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_layout_panel output) {
+    public static void const_new(Ui.Type_layout output) {
+      Ui.Class_layout outval = (Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Ui.Type_layout val = Core.f_new(
         Ui.t_layout,
         Core.vx_new(Core.t_anylist,
@@ -8244,24 +8221,21 @@ public final class Ui {
                 Core.vx_new_string("layout-panel")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static final Const_layout_panel c_layout_panel = new Const_layout_panel();
+  public static final Ui.Type_layout c_layout_panel = new Ui.Class_layout();
 
 
   /**
    * Constant: layout-parallax
    * {layout}
    */
-  public static class Const_layout_parallax extends Ui.Class_layout implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_layout_parallax {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-parallax", // name
@@ -8281,7 +8255,9 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_layout_parallax output) {
+    public static void const_new(Ui.Type_layout output) {
+      Ui.Class_layout outval = (Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Ui.Type_layout val = Core.f_new(
         Ui.t_layout,
         Core.vx_new(Core.t_anylist,
@@ -8289,24 +8265,21 @@ public final class Ui {
                 Core.vx_new_string("layout-parallax")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static final Const_layout_parallax c_layout_parallax = new Const_layout_parallax();
+  public static final Ui.Type_layout c_layout_parallax = new Ui.Class_layout();
 
 
   /**
    * Constant: layout-statusbar
    * {layout}
    */
-  public static class Const_layout_statusbar extends Ui.Class_layout implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_layout_statusbar {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-statusbar", // name
@@ -8326,7 +8299,9 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_layout_statusbar output) {
+    public static void const_new(Ui.Type_layout output) {
+      Ui.Class_layout outval = (Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Ui.Type_layout val = Core.f_new(
         Ui.t_layout,
         Core.vx_new(Core.t_anylist,
@@ -8334,24 +8309,21 @@ public final class Ui {
                 Core.vx_new_string("layout-statusbar")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static final Const_layout_statusbar c_layout_statusbar = new Const_layout_statusbar();
+  public static final Ui.Type_layout c_layout_statusbar = new Ui.Class_layout();
 
 
   /**
    * Constant: layout-statusdrawer
    * {layout}
    */
-  public static class Const_layout_statusdrawer extends Ui.Class_layout implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_layout_statusdrawer {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-statusdrawer", // name
@@ -8371,7 +8343,9 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_layout_statusdrawer output) {
+    public static void const_new(Ui.Type_layout output) {
+      Ui.Class_layout outval = (Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Ui.Type_layout val = Core.f_new(
         Ui.t_layout,
         Core.vx_new(Core.t_anylist,
@@ -8379,24 +8353,21 @@ public final class Ui {
                 Core.vx_new_string("layout-statusdrawer")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static final Const_layout_statusdrawer c_layout_statusdrawer = new Const_layout_statusdrawer();
+  public static final Ui.Type_layout c_layout_statusdrawer = new Ui.Class_layout();
 
 
   /**
    * Constant: layout-text
    * {layout}
    */
-  public static class Const_layout_text extends Ui.Class_layout implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_layout_text {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-text", // name
@@ -8416,7 +8387,9 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_layout_text output) {
+    public static void const_new(Ui.Type_layout output) {
+      Ui.Class_layout outval = (Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Ui.Type_layout val = Core.f_new(
         Ui.t_layout,
         Core.vx_new(Core.t_anylist,
@@ -8424,24 +8397,21 @@ public final class Ui {
                 Core.vx_new_string("layout-text")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static final Const_layout_text c_layout_text = new Const_layout_text();
+  public static final Ui.Type_layout c_layout_text = new Ui.Class_layout();
 
 
   /**
    * Constant: layout-textentry
    * {layout}
    */
-  public static class Const_layout_textentry extends Ui.Class_layout implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_layout_textentry {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-textentry", // name
@@ -8461,7 +8431,9 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_layout_textentry output) {
+    public static void const_new(Ui.Type_layout output) {
+      Ui.Class_layout outval = (Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Ui.Type_layout val = Core.f_new(
         Ui.t_layout,
         Core.vx_new(Core.t_anylist,
@@ -8469,24 +8441,21 @@ public final class Ui {
                 Core.vx_new_string("layout-textentry")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static final Const_layout_textentry c_layout_textentry = new Const_layout_textentry();
+  public static final Ui.Type_layout c_layout_textentry = new Ui.Class_layout();
 
 
   /**
    * Constant: layout-titlebar
    * {layout}
    */
-  public static class Const_layout_titlebar extends Ui.Class_layout implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_layout_titlebar {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-titlebar", // name
@@ -8506,7 +8475,9 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_layout_titlebar output) {
+    public static void const_new(Ui.Type_layout output) {
+      Ui.Class_layout outval = (Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Ui.Type_layout val = Core.f_new(
         Ui.t_layout,
         Core.vx_new(Core.t_anylist,
@@ -8514,24 +8485,21 @@ public final class Ui {
                 Core.vx_new_string("layout-titlebar")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static final Const_layout_titlebar c_layout_titlebar = new Const_layout_titlebar();
+  public static final Ui.Type_layout c_layout_titlebar = new Ui.Class_layout();
 
 
   /**
    * Constant: pin-bottom
    * {pin}
    */
-  public static class Const_pin_bottom extends Ui.Class_pin implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_pin_bottom {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "pin-bottom", // name
@@ -8551,23 +8519,22 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_pin_bottom output) {
+    public static void const_new(Ui.Type_pin output) {
+      Ui.Class_pin outval = (Ui.Class_pin)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static final Const_pin_bottom c_pin_bottom = new Const_pin_bottom();
+  public static final Ui.Type_pin c_pin_bottom = new Ui.Class_pin();
 
 
   /**
    * Constant: pin-center
    * {pin}
    */
-  public static class Const_pin_center extends Ui.Class_pin implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_pin_center {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "pin-center", // name
@@ -8587,23 +8554,22 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_pin_center output) {
+    public static void const_new(Ui.Type_pin output) {
+      Ui.Class_pin outval = (Ui.Class_pin)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static final Const_pin_center c_pin_center = new Const_pin_center();
+  public static final Ui.Type_pin c_pin_center = new Ui.Class_pin();
 
 
   /**
    * Constant: pin-center-h
    * {pin}
    */
-  public static class Const_pin_center_h extends Ui.Class_pin implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_pin_center_h {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "pin-center-h", // name
@@ -8623,23 +8589,22 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_pin_center_h output) {
+    public static void const_new(Ui.Type_pin output) {
+      Ui.Class_pin outval = (Ui.Class_pin)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static final Const_pin_center_h c_pin_center_h = new Const_pin_center_h();
+  public static final Ui.Type_pin c_pin_center_h = new Ui.Class_pin();
 
 
   /**
    * Constant: pin-center-v
    * {pin}
    */
-  public static class Const_pin_center_v extends Ui.Class_pin implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_pin_center_v {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "pin-center-v", // name
@@ -8659,23 +8624,22 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_pin_center_v output) {
+    public static void const_new(Ui.Type_pin output) {
+      Ui.Class_pin outval = (Ui.Class_pin)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static final Const_pin_center_v c_pin_center_v = new Const_pin_center_v();
+  public static final Ui.Type_pin c_pin_center_v = new Ui.Class_pin();
 
 
   /**
    * Constant: pin-expand
    * {pin}
    */
-  public static class Const_pin_expand extends Ui.Class_pin implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_pin_expand {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "pin-expand", // name
@@ -8695,23 +8659,22 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_pin_expand output) {
+    public static void const_new(Ui.Type_pin output) {
+      Ui.Class_pin outval = (Ui.Class_pin)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static final Const_pin_expand c_pin_expand = new Const_pin_expand();
+  public static final Ui.Type_pin c_pin_expand = new Ui.Class_pin();
 
 
   /**
    * Constant: pin-left
    * {pin}
    */
-  public static class Const_pin_left extends Ui.Class_pin implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_pin_left {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "pin-left", // name
@@ -8731,23 +8694,22 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_pin_left output) {
+    public static void const_new(Ui.Type_pin output) {
+      Ui.Class_pin outval = (Ui.Class_pin)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static final Const_pin_left c_pin_left = new Const_pin_left();
+  public static final Ui.Type_pin c_pin_left = new Ui.Class_pin();
 
 
   /**
    * Constant: pin-right
    * {pin}
    */
-  public static class Const_pin_right extends Ui.Class_pin implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_pin_right {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "pin-right", // name
@@ -8767,23 +8729,22 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_pin_right output) {
+    public static void const_new(Ui.Type_pin output) {
+      Ui.Class_pin outval = (Ui.Class_pin)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static final Const_pin_right c_pin_right = new Const_pin_right();
+  public static final Ui.Type_pin c_pin_right = new Ui.Class_pin();
 
 
   /**
    * Constant: pin-top
    * {pin}
    */
-  public static class Const_pin_top extends Ui.Class_pin implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_pin_top {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "pin-top", // name
@@ -8803,23 +8764,22 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_pin_top output) {
+    public static void const_new(Ui.Type_pin output) {
+      Ui.Class_pin outval = (Ui.Class_pin)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static final Const_pin_top c_pin_top = new Const_pin_top();
+  public static final Ui.Type_pin c_pin_top = new Ui.Class_pin();
 
 
   /**
    * Constant: point-center
    * {point}
    */
-  public static class Const_point_center extends Ui.Class_point implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_point_center {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "point-center", // name
@@ -8839,23 +8799,22 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_point_center output) {
+    public static void const_new(Ui.Type_point output) {
+      Ui.Class_point outval = (Ui.Class_point)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static final Const_point_center c_point_center = new Const_point_center();
+  public static final Ui.Type_point c_point_center = new Ui.Class_point();
 
 
   /**
    * Constant: point-lefttop
    * {point}
    */
-  public static class Const_point_lefttop extends Ui.Class_point implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_point_lefttop {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "point-lefttop", // name
@@ -8875,23 +8834,22 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_point_lefttop output) {
+    public static void const_new(Ui.Type_point output) {
+      Ui.Class_point outval = (Ui.Class_point)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static final Const_point_lefttop c_point_lefttop = new Const_point_lefttop();
+  public static final Ui.Type_point c_point_lefttop = new Ui.Class_point();
 
 
   /**
    * Constant: point-rightbottom
    * {point}
    */
-  public static class Const_point_rightbottom extends Ui.Class_point implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_point_rightbottom {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "point-rightbottom", // name
@@ -8911,23 +8869,22 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_point_rightbottom output) {
+    public static void const_new(Ui.Type_point output) {
+      Ui.Class_point outval = (Ui.Class_point)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static final Const_point_rightbottom c_point_rightbottom = new Const_point_rightbottom();
+  public static final Ui.Type_point c_point_rightbottom = new Ui.Class_point();
 
 
   /**
    * Constant: pointtype-absolute
    * {pointtype}
    */
-  public static class Const_pointtype_absolute extends Ui.Class_pointtype implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_pointtype_absolute {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "pointtype-absolute", // name
@@ -8947,23 +8904,22 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_pointtype_absolute output) {
+    public static void const_new(Ui.Type_pointtype output) {
+      Ui.Class_pointtype outval = (Ui.Class_pointtype)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static final Const_pointtype_absolute c_pointtype_absolute = new Const_pointtype_absolute();
+  public static final Ui.Type_pointtype c_pointtype_absolute = new Ui.Class_pointtype();
 
 
   /**
    * Constant: pointtype-percent
    * {pointtype}
    */
-  public static class Const_pointtype_percent extends Ui.Class_pointtype implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_pointtype_percent {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "pointtype-percent", // name
@@ -8983,23 +8939,22 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_pointtype_percent output) {
+    public static void const_new(Ui.Type_pointtype output) {
+      Ui.Class_pointtype outval = (Ui.Class_pointtype)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static final Const_pointtype_percent c_pointtype_percent = new Const_pointtype_percent();
+  public static final Ui.Type_pointtype c_pointtype_percent = new Ui.Class_pointtype();
 
 
   /**
    * Constant: pointtype-relative
    * {pointtype}
    */
-  public static class Const_pointtype_relative extends Ui.Class_pointtype implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_pointtype_relative {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "pointtype-relative", // name
@@ -9019,23 +8974,22 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_pointtype_relative output) {
+    public static void const_new(Ui.Type_pointtype output) {
+      Ui.Class_pointtype outval = (Ui.Class_pointtype)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static final Const_pointtype_relative c_pointtype_relative = new Const_pointtype_relative();
+  public static final Ui.Type_pointtype c_pointtype_relative = new Ui.Class_pointtype();
 
 
   /**
    * Constant: styletype-custom
    * {styletype}
    */
-  public static class Const_styletype_custom extends Ui.Class_styletype implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_styletype_custom {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "styletype-custom", // name
@@ -9055,23 +9009,22 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_styletype_custom output) {
+    public static void const_new(Ui.Type_styletype output) {
+      Ui.Class_styletype outval = (Ui.Class_styletype)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static final Const_styletype_custom c_styletype_custom = new Const_styletype_custom();
+  public static final Ui.Type_styletype c_styletype_custom = new Ui.Class_styletype();
 
 
   /**
    * Constant: styletype-shared
    * {styletype}
    */
-  public static class Const_styletype_shared extends Ui.Class_styletype implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_styletype_shared {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "styletype-shared", // name
@@ -9091,23 +9044,22 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_styletype_shared output) {
+    public static void const_new(Ui.Type_styletype output) {
+      Ui.Class_styletype outval = (Ui.Class_styletype)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static final Const_styletype_shared c_styletype_shared = new Const_styletype_shared();
+  public static final Ui.Type_styletype c_styletype_shared = new Ui.Class_styletype();
 
 
   /**
    * Constant: styletype-system
    * {styletype}
    */
-  public static class Const_styletype_system extends Ui.Class_styletype implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_styletype_system {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/ui", // pkgname
         "styletype-system", // name
@@ -9127,13 +9079,14 @@ public final class Ui {
       );
     }
 
-    public static void const_new(Const_styletype_system output) {
+    public static void const_new(Ui.Type_styletype output) {
+      Ui.Class_styletype outval = (Ui.Class_styletype)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static final Const_styletype_system c_styletype_system = new Const_styletype_system();
+  public static final Ui.Type_styletype c_styletype_system = new Ui.Class_styletype();
 
   /**
    * @function boolean_layout_from_ui_parent_selected

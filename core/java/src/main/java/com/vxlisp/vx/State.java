@@ -96,7 +96,7 @@ public final class State {
       boolean ischanged = false;
       Class_valuemap val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Map<String, Core.Type_any> mapval = new LinkedHashMap<String, Core.Type_any>(val.vx_map());

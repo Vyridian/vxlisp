@@ -65,7 +65,7 @@ public static class Http {
       bool ischanged = false;
       Class_response val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_boolean vx_p_ok = val.ok();

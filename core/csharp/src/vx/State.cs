@@ -45,7 +45,7 @@ public static class State {
       Vx.State.Class_valuemap map = this;
       string skey = key.vx_string();
       Vx.Core.Map<string, Vx.Core.Type_any> mapval = map.vx_p_map;
-      output = mapval.getOrDefault(skey, Vx.Core.e_any);
+      output = mapval.getOrElse(skey, Vx.Core.e_any);
       return output;
     }
 
@@ -81,7 +81,7 @@ public static class State {
       bool ischanged = false;
       Class_valuemap val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_any> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>(val.vx_map());

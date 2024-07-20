@@ -65,7 +65,7 @@ public static class Table {
       bool ischanged = false;
       Class_cell val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_id = val.id();
@@ -257,7 +257,7 @@ public static class Table {
       bool ischanged = false;
       Class_celllist val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Data.Table.Type_cell> listval = new List<Vx.Data.Table.Type_cell>(val.vx_listcell());
@@ -375,7 +375,7 @@ public static class Table {
       Vx.Data.Table.Class_cellmap map = this;
       string skey = key.vx_string();
       Vx.Core.Map<string, Vx.Data.Table.Type_cell> mapval = map.vx_p_map;
-      output = mapval.getOrDefault(skey, Vx.Data.Table.e_cell);
+      output = mapval.getOrElse(skey, Vx.Data.Table.e_cell);
       return output;
     }
 
@@ -419,7 +419,7 @@ public static class Table {
       bool ischanged = false;
       Class_cellmap val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Data.Table.Type_cell> mapval = new Vx.Core.LinkedHashMap<string, Vx.Data.Table.Type_cell>(val.vx_mapcell());
@@ -594,7 +594,7 @@ public static class Table {
       bool ischanged = false;
       Class_field val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_id = val.id();
@@ -812,7 +812,7 @@ public static class Table {
       bool ischanged = false;
       Class_fieldlist val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Data.Table.Type_field> listval = new List<Vx.Data.Table.Type_field>(val.vx_listfield());
@@ -935,7 +935,7 @@ public static class Table {
       bool ischanged = false;
       Class_fieldmap val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Data.Table.Type_field> listval = new List<Vx.Data.Table.Type_field>(val.vx_listfield());
@@ -1086,7 +1086,7 @@ public static class Table {
       bool ischanged = false;
       Class_filter val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_id = val.id();
@@ -1332,7 +1332,7 @@ public static class Table {
       bool ischanged = false;
       Class_row val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_id = val.id();
@@ -1547,7 +1547,7 @@ public static class Table {
       bool ischanged = false;
       Class_rowlist val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Data.Table.Type_row> listval = new List<Vx.Data.Table.Type_row>(val.vx_listrow());
@@ -1665,7 +1665,7 @@ public static class Table {
       Vx.Data.Table.Class_rowmap map = this;
       string skey = key.vx_string();
       Vx.Core.Map<string, Vx.Data.Table.Type_row> mapval = map.vx_p_map;
-      output = mapval.getOrDefault(skey, Vx.Data.Table.e_row);
+      output = mapval.getOrElse(skey, Vx.Data.Table.e_row);
       return output;
     }
 
@@ -1709,7 +1709,7 @@ public static class Table {
       bool ischanged = false;
       Class_rowmap val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Data.Table.Type_row> mapval = new Vx.Core.LinkedHashMap<string, Vx.Data.Table.Type_row>(val.vx_maprow());
@@ -1884,7 +1884,7 @@ public static class Table {
       bool ischanged = false;
       Class_sort val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_id = val.id();
@@ -2190,7 +2190,7 @@ public static class Table {
       bool ischanged = false;
       Class_table val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_id = val.id();

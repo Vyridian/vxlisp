@@ -8,9 +8,8 @@ public static class Uihtml {
    * Html App Renderer
    * {layout}
    */
-  public class Const_layout_app_html : Vx.Ui.Ui.Class_layout, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_layout_app_html {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/html/uihtml", // pkgname
         "layout-app-html", // name
@@ -30,7 +29,9 @@ public static class Uihtml {
       );
     }
 
-    public static void const_new(Const_layout_app_html output) {
+    public static void const_new(Vx.Ui.Ui.Type_layout output) {
+      Vx.Ui.Ui.Class_layout outval = (Vx.Ui.Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Vx.Ui.Ui.Type_layout val = Vx.Core.f_copy(
         Vx.Ui.Ui.c_layout_app,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -38,14 +39,13 @@ public static class Uihtml {
                 Vx.Ui.Html.Uihtml.t_ui_layout_app_from_ui_orig_parent
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static Const_layout_app_html c_layout_app_html = new Const_layout_app_html();
+  public static Vx.Ui.Ui.Type_layout c_layout_app_html = new Vx.Ui.Ui.Class_layout();
 
 
   /**
@@ -53,9 +53,8 @@ public static class Uihtml {
    * Html Default Renderer
    * {layout}
    */
-  public class Const_layout_else_html : Vx.Ui.Ui.Class_layout, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_layout_else_html {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/html/uihtml", // pkgname
         "layout-else-html", // name
@@ -75,7 +74,9 @@ public static class Uihtml {
       );
     }
 
-    public static void const_new(Const_layout_else_html output) {
+    public static void const_new(Vx.Ui.Ui.Type_layout output) {
+      Vx.Ui.Ui.Class_layout outval = (Vx.Ui.Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Vx.Ui.Ui.Type_layout val = Vx.Core.f_copy(
         Vx.Ui.Ui.c_layout_else,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -83,14 +84,13 @@ public static class Uihtml {
                 Vx.Ui.Html.Uihtml.t_ui_layout_default_from_ui_orig_parent
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static Const_layout_else_html c_layout_else_html = new Const_layout_else_html();
+  public static Vx.Ui.Ui.Type_layout c_layout_else_html = new Vx.Ui.Ui.Class_layout();
 
 
   /**
@@ -98,9 +98,8 @@ public static class Uihtml {
    * Html Image Renderer
    * {layout}
    */
-  public class Const_layout_image_html : Vx.Ui.Ui.Class_layout, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_layout_image_html {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/html/uihtml", // pkgname
         "layout-image-html", // name
@@ -120,7 +119,9 @@ public static class Uihtml {
       );
     }
 
-    public static void const_new(Const_layout_image_html output) {
+    public static void const_new(Vx.Ui.Ui.Type_layout output) {
+      Vx.Ui.Ui.Class_layout outval = (Vx.Ui.Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Vx.Ui.Ui.Type_layout val = Vx.Core.f_copy(
         Vx.Ui.Ui.c_layout_image,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -128,14 +129,13 @@ public static class Uihtml {
                 Vx.Ui.Html.Uihtml.t_ui_layout_image_from_ui_orig_parent
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static Const_layout_image_html c_layout_image_html = new Const_layout_image_html();
+  public static Vx.Ui.Ui.Type_layout c_layout_image_html = new Vx.Ui.Ui.Class_layout();
 
 
   /**
@@ -143,9 +143,8 @@ public static class Uihtml {
    * Html Label Renderer
    * {layout}
    */
-  public class Const_layout_label_html : Vx.Ui.Ui.Class_layout, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_layout_label_html {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/html/uihtml", // pkgname
         "layout-label-html", // name
@@ -165,7 +164,9 @@ public static class Uihtml {
       );
     }
 
-    public static void const_new(Const_layout_label_html output) {
+    public static void const_new(Vx.Ui.Ui.Type_layout output) {
+      Vx.Ui.Ui.Class_layout outval = (Vx.Ui.Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Vx.Ui.Ui.Type_layout val = Vx.Core.f_copy(
         Vx.Ui.Ui.c_layout_label,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -173,14 +174,13 @@ public static class Uihtml {
                 Vx.Ui.Html.Uihtml.t_ui_layout_label_from_ui_orig_parent
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static Const_layout_label_html c_layout_label_html = new Const_layout_label_html();
+  public static Vx.Ui.Ui.Type_layout c_layout_label_html = new Vx.Ui.Ui.Class_layout();
 
 
   /**
@@ -188,9 +188,8 @@ public static class Uihtml {
    * Html layout engine used to render html from ui and stylesheet
    * {layoutengine}
    */
-  public class Const_layoutenginehtml : Vx.Ui.Ui.Class_layoutengine, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_layoutenginehtml {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/html/uihtml", // pkgname
         "layoutenginehtml", // name
@@ -210,7 +209,9 @@ public static class Uihtml {
       );
     }
 
-    public static void const_new(Const_layoutenginehtml output) {
+    public static void const_new(Vx.Ui.Ui.Type_layoutengine output) {
+      Vx.Ui.Ui.Class_layoutengine outval = (Vx.Ui.Ui.Class_layoutengine)output;
+      outval.vx_p_constdef = constdef();
       Vx.Ui.Ui.Type_layoutengine val = Vx.Core.f_new(
         Vx.Ui.Ui.t_layoutengine,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -239,29 +240,27 @@ public static class Uihtml {
                 Vx.Ui.Html.Uihtml.t_stylesheet_layout_html
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_boolean_print = val.boolean_print();
-      output.vx_p_boolean_layoutremove = val.boolean_layoutremove();
-      output.vx_p_boolean_layoutselected = val.boolean_layoutselected();
-      output.vx_p_boolean_layoutvisible = val.boolean_layoutvisible();
-      output.vx_p_layoutmap = val.layoutmap();
-      output.vx_p_layoutelse = val.layoutelse();
-      output.vx_p_stylesheetrender = val.stylesheetrender();
+      outval.vx_p_name = val.name();
+      outval.vx_p_boolean_print = val.boolean_print();
+      outval.vx_p_boolean_layoutremove = val.boolean_layoutremove();
+      outval.vx_p_boolean_layoutselected = val.boolean_layoutselected();
+      outval.vx_p_boolean_layoutvisible = val.boolean_layoutvisible();
+      outval.vx_p_layoutmap = val.layoutmap();
+      outval.vx_p_layoutelse = val.layoutelse();
+      outval.vx_p_stylesheetrender = val.stylesheetrender();
     }
-
 
   }
 
-  public static Const_layoutenginehtml c_layoutenginehtml = new Const_layoutenginehtml();
+  public static Vx.Ui.Ui.Type_layoutengine c_layoutenginehtml = new Vx.Ui.Ui.Class_layoutengine();
 
 
   /**
    * Constant: style-hidden
    * {style}
    */
-  public class Const_style_hidden : Vx.Web.Html.Class_style, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_style_hidden {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/html/uihtml", // pkgname
         "style-hidden", // name
@@ -281,7 +280,9 @@ public static class Uihtml {
       );
     }
 
-    public static void const_new(Const_style_hidden output) {
+    public static void const_new(Vx.Web.Html.Type_style output) {
+      Vx.Web.Html.Class_style outval = (Vx.Web.Html.Class_style)output;
+      outval.vx_p_constdef = constdef();
       Vx.Web.Html.Type_style val = Vx.Core.f_new(
         Vx.Web.Html.t_style,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -289,24 +290,22 @@ public static class Uihtml {
                 Vx.Core.vx_new_string(".style-hidden")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_props = val.props();
-      output.vx_p_stylelist = val.stylelist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_props = val.props();
+      outval.vx_p_stylelist = val.stylelist();
     }
-
 
   }
 
-  public static Const_style_hidden c_style_hidden = new Const_style_hidden();
+  public static Vx.Web.Html.Type_style c_style_hidden = new Vx.Web.Html.Class_style();
 
 
   /**
    * Constant: style-selected
    * {style}
    */
-  public class Const_style_selected : Vx.Web.Html.Class_style, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_style_selected {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/html/uihtml", // pkgname
         "style-selected", // name
@@ -326,7 +325,9 @@ public static class Uihtml {
       );
     }
 
-    public static void const_new(Const_style_selected output) {
+    public static void const_new(Vx.Web.Html.Type_style output) {
+      Vx.Web.Html.Class_style outval = (Vx.Web.Html.Class_style)output;
+      outval.vx_p_constdef = constdef();
       Vx.Web.Html.Type_style val = Vx.Core.f_new(
         Vx.Web.Html.t_style,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -334,15 +335,14 @@ public static class Uihtml {
                 Vx.Core.vx_new_string(".style-selected")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_props = val.props();
-      output.vx_p_stylelist = val.stylelist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_props = val.props();
+      outval.vx_p_stylelist = val.stylelist();
     }
-
 
   }
 
-  public static Const_style_selected c_style_selected = new Const_style_selected();
+  public static Vx.Web.Html.Type_style c_style_selected = new Vx.Web.Html.Class_style();
 
   /**
    * @function boolean_layoutremove_html

@@ -6,6 +6,32 @@ namespace AppTest;
 public static class TestLib {
 
 
+  public class TestOutputWriter : TextWriter {
+
+    private readonly Xunit.Abstractions.ITestOutputHelper _output;
+
+    public TestOutputWriter(Xunit.Abstractions.ITestOutputHelper output) {
+      _output = output;
+    }
+
+    public override System.Text.Encoding Encoding => System.Text.Encoding.UTF8;
+
+			 public override void WriteLine(int message) {
+				  _output.WriteLine("" + message);
+  		}
+
+  		public override void WriteLine(string? message) {
+  				_output.WriteLine(message);
+  		}
+
+  }
+
+  public static bool EnableConsole(Xunit.Abstractions.ITestOutputHelper output) {
+    TestOutputWriter converter = new TestOutputWriter(output);
+    System.Console.SetOut(converter);
+    return true;
+  }
+
   public static bool run_testcase(Vx.Test.Type_testcase testcase) {
     string testpkg = testcase.testpkg().vx_string();
     string casename = testcase.casename().vx_string();

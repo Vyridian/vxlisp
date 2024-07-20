@@ -82,7 +82,7 @@ public final class Csv {
       boolean ischanged = false;
       Class_csv val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_stringlist vx_p_headers = val.headers();
@@ -333,7 +333,7 @@ public final class Csv {
       boolean ischanged = false;
       Class_csvrowmap val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Map<String, Core.Type_stringlist> mapval = new LinkedHashMap<String, Core.Type_stringlist>(val.vx_mapstringlist());
@@ -498,7 +498,7 @@ public final class Csv {
       boolean ischanged = false;
       Class_csvrows val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       List<Core.Type_stringlist> listval = new ArrayList<Core.Type_stringlist>(val.vx_liststringlist());
@@ -585,10 +585,8 @@ public final class Csv {
    * Csv File Delimiters
    * {delim}
    */
-  public static class Const_delimcsv extends Textblock.Class_delim implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_delimcsv {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/data/csv", // pkgname
         "delimcsv", // name
@@ -608,7 +606,9 @@ public final class Csv {
       );
     }
 
-    public static void const_new(Const_delimcsv output) {
+    public static void const_new(Textblock.Type_delim output) {
+      Textblock.Class_delim outval = (Textblock.Class_delim)output;
+      outval.vx_p_constdef = constdef();
       Textblock.Type_delim val = Core.f_new(
         Textblock.t_delim,
         Core.vx_new(Core.t_anylist,
@@ -625,17 +625,16 @@ public final class Csv {
                 )
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_starttext = val.starttext();
-      output.vx_p_endtext = val.endtext();
-      output.vx_p_pos = val.pos();
-      output.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_starttext = val.starttext();
+      outval.vx_p_endtext = val.endtext();
+      outval.vx_p_pos = val.pos();
+      outval.vx_p_delimlist = val.delimlist();
     }
-
 
   }
 
-  public static final Const_delimcsv c_delimcsv = new Const_delimcsv();
+  public static final Textblock.Type_delim c_delimcsv = new Textblock.Class_delim();
 
   /**
    * @function csv_read_from_file

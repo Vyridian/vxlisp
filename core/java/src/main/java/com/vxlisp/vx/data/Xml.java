@@ -146,7 +146,7 @@ public final class Xml {
       boolean ischanged = false;
       Class_xml val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_tag = val.tag();
@@ -464,7 +464,7 @@ public final class Xml {
       boolean ischanged = false;
       Class_xmllist val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       List<Xml.Type_xml> listval = new ArrayList<Xml.Type_xml>(val.vx_listxml());
@@ -647,7 +647,7 @@ public final class Xml {
       boolean ischanged = false;
       Class_xmlpropmap val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Map<String, Core.Type_string> mapval = new LinkedHashMap<String, Core.Type_string>(val.vx_mapstring());
@@ -757,10 +757,8 @@ public final class Xml {
    * Constant: delimxml
    * {delim}
    */
-  public static class Const_delimxml extends Textblock.Class_delim implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_delimxml {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/data/xml", // pkgname
         "delimxml", // name
@@ -780,7 +778,9 @@ public final class Xml {
       );
     }
 
-    public static void const_new(Const_delimxml output) {
+    public static void const_new(Textblock.Type_delim output) {
+      Textblock.Class_delim outval = (Textblock.Class_delim)output;
+      outval.vx_p_constdef = constdef();
       Textblock.Type_delim val = Core.f_new(
         Textblock.t_delim,
         Core.vx_new(Core.t_anylist,
@@ -808,27 +808,24 @@ public final class Xml {
                 )
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_starttext = val.starttext();
-      output.vx_p_endtext = val.endtext();
-      output.vx_p_pos = val.pos();
-      output.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_starttext = val.starttext();
+      outval.vx_p_endtext = val.endtext();
+      outval.vx_p_pos = val.pos();
+      outval.vx_p_delimlist = val.delimlist();
     }
-
 
   }
 
-  public static final Const_delimxml c_delimxml = new Const_delimxml();
+  public static final Textblock.Type_delim c_delimxml = new Textblock.Class_delim();
 
 
   /**
    * Constant: delimxmlcdata
    * {delim}
    */
-  public static class Const_delimxmlcdata extends Textblock.Class_delim implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_delimxmlcdata {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/data/xml", // pkgname
         "delimxmlcdata", // name
@@ -848,7 +845,9 @@ public final class Xml {
       );
     }
 
-    public static void const_new(Const_delimxmlcdata output) {
+    public static void const_new(Textblock.Type_delim output) {
+      Textblock.Class_delim outval = (Textblock.Class_delim)output;
+      outval.vx_p_constdef = constdef();
       Textblock.Type_delim val = Core.f_new(
         Textblock.t_delim,
         Core.vx_new(Core.t_anylist,
@@ -860,27 +859,24 @@ public final class Xml {
                 Core.vx_new_string("]]>")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_starttext = val.starttext();
-      output.vx_p_endtext = val.endtext();
-      output.vx_p_pos = val.pos();
-      output.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_starttext = val.starttext();
+      outval.vx_p_endtext = val.endtext();
+      outval.vx_p_pos = val.pos();
+      outval.vx_p_delimlist = val.delimlist();
     }
-
 
   }
 
-  public static final Const_delimxmlcdata c_delimxmlcdata = new Const_delimxmlcdata();
+  public static final Textblock.Type_delim c_delimxmlcdata = new Textblock.Class_delim();
 
 
   /**
    * Constant: delimxmlcomment
    * {delim}
    */
-  public static class Const_delimxmlcomment extends Textblock.Class_delim implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_delimxmlcomment {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/data/xml", // pkgname
         "delimxmlcomment", // name
@@ -900,7 +896,9 @@ public final class Xml {
       );
     }
 
-    public static void const_new(Const_delimxmlcomment output) {
+    public static void const_new(Textblock.Type_delim output) {
+      Textblock.Class_delim outval = (Textblock.Class_delim)output;
+      outval.vx_p_constdef = constdef();
       Textblock.Type_delim val = Core.f_new(
         Textblock.t_delim,
         Core.vx_new(Core.t_anylist,
@@ -912,27 +910,24 @@ public final class Xml {
                 Core.vx_new_string("-->")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_starttext = val.starttext();
-      output.vx_p_endtext = val.endtext();
-      output.vx_p_pos = val.pos();
-      output.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_starttext = val.starttext();
+      outval.vx_p_endtext = val.endtext();
+      outval.vx_p_pos = val.pos();
+      outval.vx_p_delimlist = val.delimlist();
     }
-
 
   }
 
-  public static final Const_delimxmlcomment c_delimxmlcomment = new Const_delimxmlcomment();
+  public static final Textblock.Type_delim c_delimxmlcomment = new Textblock.Class_delim();
 
 
   /**
    * Constant: delimxmlequal
    * {delim}
    */
-  public static class Const_delimxmlequal extends Textblock.Class_delim implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_delimxmlequal {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/data/xml", // pkgname
         "delimxmlequal", // name
@@ -952,7 +947,9 @@ public final class Xml {
       );
     }
 
-    public static void const_new(Const_delimxmlequal output) {
+    public static void const_new(Textblock.Type_delim output) {
+      Textblock.Class_delim outval = (Textblock.Class_delim)output;
+      outval.vx_p_constdef = constdef();
       Textblock.Type_delim val = Core.f_new(
         Textblock.t_delim,
         Core.vx_new(Core.t_anylist,
@@ -962,17 +959,16 @@ public final class Xml {
                 Core.vx_new_string("=")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_starttext = val.starttext();
-      output.vx_p_endtext = val.endtext();
-      output.vx_p_pos = val.pos();
-      output.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_starttext = val.starttext();
+      outval.vx_p_endtext = val.endtext();
+      outval.vx_p_pos = val.pos();
+      outval.vx_p_delimlist = val.delimlist();
     }
-
 
   }
 
-  public static final Const_delimxmlequal c_delimxmlequal = new Const_delimxmlequal();
+  public static final Textblock.Type_delim c_delimxmlequal = new Textblock.Class_delim();
 
   /**
    * @function string_decodexml_from_string

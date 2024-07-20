@@ -33,7 +33,7 @@ public static class Ui {
       bool ischanged = false;
       Class_align val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
@@ -167,7 +167,7 @@ public static class Ui {
       bool ischanged = false;
       Class_bounds val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_int vx_p_left = val.left();
@@ -395,7 +395,7 @@ public static class Ui {
       bool ischanged = false;
       Class_cursor val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
@@ -455,7 +455,7 @@ public static class Ui {
       bool ischanged = false;
       Class_cursor_pointer val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
@@ -526,7 +526,7 @@ public static class Ui {
       bool ischanged = false;
       Class_flip val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
@@ -660,7 +660,7 @@ public static class Ui {
       bool ischanged = false;
       Class_font val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_name = val.name();
@@ -945,7 +945,7 @@ public static class Ui {
       bool ischanged = false;
       Class_fontface val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_name = val.name();
@@ -1190,7 +1190,7 @@ public static class Ui {
       bool ischanged = false;
       Class_fontfacelist val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Ui.Ui.Type_fontface> listval = new List<Vx.Ui.Ui.Type_fontface>(val.vx_listfontface());
@@ -1309,7 +1309,7 @@ public static class Ui {
       Vx.Ui.Ui.Class_fontfacemap map = this;
       string skey = key.vx_string();
       Vx.Core.Map<string, Vx.Ui.Ui.Type_fontface> mapval = map.vx_p_map;
-      output = mapval.getOrDefault(skey, Vx.Ui.Ui.e_fontface);
+      output = mapval.getOrElse(skey, Vx.Ui.Ui.e_fontface);
       return output;
     }
 
@@ -1353,7 +1353,7 @@ public static class Ui {
       bool ischanged = false;
       Class_fontfacemap val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Ui.Ui.Type_fontface> mapval = new Vx.Core.LinkedHashMap<string, Vx.Ui.Ui.Type_fontface>(val.vx_mapfontface());
@@ -1496,7 +1496,7 @@ public static class Ui {
       Vx.Ui.Ui.Class_fontmap map = this;
       string skey = key.vx_string();
       Vx.Core.Map<string, Vx.Ui.Ui.Type_font> mapval = map.vx_p_map;
-      output = mapval.getOrDefault(skey, Vx.Ui.Ui.e_font);
+      output = mapval.getOrElse(skey, Vx.Ui.Ui.e_font);
       return output;
     }
 
@@ -1540,7 +1540,7 @@ public static class Ui {
       bool ischanged = false;
       Class_fontmap val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Ui.Ui.Type_font> mapval = new Vx.Core.LinkedHashMap<string, Vx.Ui.Ui.Type_font>(val.vx_mapfont());
@@ -1686,7 +1686,7 @@ public static class Ui {
       bool ischanged = false;
       Class_fontstyle val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_name = val.name();
@@ -1851,7 +1851,7 @@ public static class Ui {
       Vx.Ui.Ui.Class_fontstylemap map = this;
       string skey = key.vx_string();
       Vx.Core.Map<string, Vx.Ui.Ui.Type_fontstyle> mapval = map.vx_p_map;
-      output = mapval.getOrDefault(skey, Vx.Ui.Ui.e_fontstyle);
+      output = mapval.getOrElse(skey, Vx.Ui.Ui.e_fontstyle);
       return output;
     }
 
@@ -1895,7 +1895,7 @@ public static class Ui {
       bool ischanged = false;
       Class_fontstylemap val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Ui.Ui.Type_fontstyle> mapval = new Vx.Core.LinkedHashMap<string, Vx.Ui.Ui.Type_fontstyle>(val.vx_mapfontstyle());
@@ -2071,7 +2071,7 @@ public static class Ui {
       bool ischanged = false;
       Class_image val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_name = val.name();
@@ -2303,7 +2303,7 @@ public static class Ui {
       bool ischanged = false;
       Class_layout val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_name = val.name();
@@ -2599,7 +2599,7 @@ public static class Ui {
       bool ischanged = false;
       Class_layoutengine val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_name = val.name();
@@ -2930,7 +2930,7 @@ public static class Ui {
       bool ischanged = false;
       Class_layoutlist val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Ui.Ui.Type_layout> listval = new List<Vx.Ui.Ui.Type_layout>(val.vx_listlayout());
@@ -3049,7 +3049,7 @@ public static class Ui {
       Vx.Ui.Ui.Class_layoutmap map = this;
       string skey = key.vx_string();
       Vx.Core.Map<string, Vx.Ui.Ui.Type_layout> mapval = map.vx_p_map;
-      output = mapval.getOrDefault(skey, Vx.Ui.Ui.e_layout);
+      output = mapval.getOrElse(skey, Vx.Ui.Ui.e_layout);
       return output;
     }
 
@@ -3093,7 +3093,7 @@ public static class Ui {
       bool ischanged = false;
       Class_layoutmap val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Ui.Ui.Type_layout> mapval = new Vx.Core.LinkedHashMap<string, Vx.Ui.Ui.Type_layout>(val.vx_maplayout());
@@ -3239,7 +3239,7 @@ public static class Ui {
       bool ischanged = false;
       Class_pin val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_name = val.name();
@@ -3482,7 +3482,7 @@ public static class Ui {
       bool ischanged = false;
       Class_point val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_int vx_p_x = val.x();
@@ -3749,7 +3749,7 @@ public static class Ui {
       bool ischanged = false;
       Class_pointtype val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
@@ -4153,7 +4153,7 @@ public static class Ui {
       bool ischanged = false;
       Class_style val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_name = val.name();
@@ -4827,7 +4827,7 @@ public static class Ui {
       bool ischanged = false;
       Class_stylelist val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Ui.Ui.Type_style> listval = new List<Vx.Ui.Ui.Type_style>(val.vx_liststyle());
@@ -4946,7 +4946,7 @@ public static class Ui {
       Vx.Ui.Ui.Class_stylemap map = this;
       string skey = key.vx_string();
       Vx.Core.Map<string, Vx.Ui.Ui.Type_style> mapval = map.vx_p_map;
-      output = mapval.getOrDefault(skey, Vx.Ui.Ui.e_style);
+      output = mapval.getOrElse(skey, Vx.Ui.Ui.e_style);
       return output;
     }
 
@@ -4990,7 +4990,7 @@ public static class Ui {
       bool ischanged = false;
       Class_stylemap val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Ui.Ui.Type_style> mapval = new Vx.Core.LinkedHashMap<string, Vx.Ui.Ui.Type_style>(val.vx_mapstyle());
@@ -5151,7 +5151,7 @@ public static class Ui {
       bool ischanged = false;
       Class_stylesheet val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Ui.Ui.Type_fontfacemap vx_p_fontfacemap = val.fontfacemap();
@@ -5321,7 +5321,7 @@ public static class Ui {
       bool ischanged = false;
       Class_styletype val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
@@ -5575,7 +5575,7 @@ public static class Ui {
       bool ischanged = false;
       Class_ui val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_uid = val.uid();
@@ -6056,7 +6056,7 @@ public static class Ui {
       bool ischanged = false;
       Class_uiengine val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Ui.Ui.Type_uimap vx_p_parentmap = val.parentmap();
@@ -6292,7 +6292,7 @@ public static class Ui {
       bool ischanged = false;
       Class_uilist val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Ui.Ui.Type_ui> listval = new List<Vx.Ui.Ui.Type_ui>(val.vx_listui());
@@ -6411,7 +6411,7 @@ public static class Ui {
       Vx.Ui.Ui.Class_uimap map = this;
       string skey = key.vx_string();
       Vx.Core.Map<string, Vx.Ui.Ui.Type_ui> mapval = map.vx_p_map;
-      output = mapval.getOrDefault(skey, Vx.Ui.Ui.e_ui);
+      output = mapval.getOrElse(skey, Vx.Ui.Ui.e_ui);
       return output;
     }
 
@@ -6455,7 +6455,7 @@ public static class Ui {
       bool ischanged = false;
       Class_uimap val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Ui.Ui.Type_ui> mapval = new Vx.Core.LinkedHashMap<string, Vx.Ui.Ui.Type_ui>(val.vx_mapui());
@@ -6558,9 +6558,8 @@ public static class Ui {
    * Logical Center Align in parent
    * {align}
    */
-  public class Const_align_center : Vx.Ui.Ui.Class_align, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_align_center {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "align-center", // name
@@ -6580,13 +6579,14 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_align_center output) {
+    public static void const_new(Vx.Ui.Ui.Type_align output) {
+      Vx.Ui.Ui.Class_align outval = (Vx.Ui.Ui.Class_align)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static Const_align_center c_align_center = new Const_align_center();
+  public static Vx.Ui.Ui.Type_align c_align_center = new Vx.Ui.Ui.Class_align();
 
 
   /**
@@ -6594,9 +6594,8 @@ public static class Ui {
    * Logical Left Align in parent
    * {align}
    */
-  public class Const_align_left : Vx.Ui.Ui.Class_align, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_align_left {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "align-left", // name
@@ -6616,13 +6615,14 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_align_left output) {
+    public static void const_new(Vx.Ui.Ui.Type_align output) {
+      Vx.Ui.Ui.Class_align outval = (Vx.Ui.Ui.Class_align)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static Const_align_left c_align_left = new Const_align_left();
+  public static Vx.Ui.Ui.Type_align c_align_left = new Vx.Ui.Ui.Class_align();
 
 
   /**
@@ -6630,9 +6630,8 @@ public static class Ui {
    * Logical Right Align in parent
    * {align}
    */
-  public class Const_align_right : Vx.Ui.Ui.Class_align, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_align_right {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "align-right", // name
@@ -6652,13 +6651,14 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_align_right output) {
+    public static void const_new(Vx.Ui.Ui.Type_align output) {
+      Vx.Ui.Ui.Class_align outval = (Vx.Ui.Ui.Class_align)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static Const_align_right c_align_right = new Const_align_right();
+  public static Vx.Ui.Ui.Type_align c_align_right = new Vx.Ui.Ui.Class_align();
 
 
   /**
@@ -6666,9 +6666,8 @@ public static class Ui {
    * Logical Flip Horizontally
    * {align}
    */
-  public class Const_flip_x : Vx.Ui.Ui.Class_align, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_flip_x {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "flip-x", // name
@@ -6688,13 +6687,14 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_flip_x output) {
+    public static void const_new(Vx.Ui.Ui.Type_align output) {
+      Vx.Ui.Ui.Class_align outval = (Vx.Ui.Ui.Class_align)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static Const_flip_x c_flip_x = new Const_flip_x();
+  public static Vx.Ui.Ui.Type_align c_flip_x = new Vx.Ui.Ui.Class_align();
 
 
   /**
@@ -6702,9 +6702,8 @@ public static class Ui {
    * Logical Flip Vertically and Horizontally
    * {align}
    */
-  public class Const_flip_xy : Vx.Ui.Ui.Class_align, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_flip_xy {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "flip-xy", // name
@@ -6724,13 +6723,14 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_flip_xy output) {
+    public static void const_new(Vx.Ui.Ui.Type_align output) {
+      Vx.Ui.Ui.Class_align outval = (Vx.Ui.Ui.Class_align)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static Const_flip_xy c_flip_xy = new Const_flip_xy();
+  public static Vx.Ui.Ui.Type_align c_flip_xy = new Vx.Ui.Ui.Class_align();
 
 
   /**
@@ -6738,9 +6738,8 @@ public static class Ui {
    * Logical Flip Vertically
    * {align}
    */
-  public class Const_flip_y : Vx.Ui.Ui.Class_align, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_flip_y {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "flip-y", // name
@@ -6760,22 +6759,22 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_flip_y output) {
+    public static void const_new(Vx.Ui.Ui.Type_align output) {
+      Vx.Ui.Ui.Class_align outval = (Vx.Ui.Ui.Class_align)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static Const_flip_y c_flip_y = new Const_flip_y();
+  public static Vx.Ui.Ui.Type_align c_flip_y = new Vx.Ui.Ui.Class_align();
 
 
   /**
    * Constant: layout-app
    * {layout}
    */
-  public class Const_layout_app : Vx.Ui.Ui.Class_layout, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_layout_app {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-app", // name
@@ -6795,7 +6794,9 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_layout_app output) {
+    public static void const_new(Vx.Ui.Ui.Type_layout output) {
+      Vx.Ui.Ui.Class_layout outval = (Vx.Ui.Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Vx.Ui.Ui.Type_layout val = Vx.Core.f_new(
         Vx.Ui.Ui.t_layout,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -6803,23 +6804,21 @@ public static class Ui {
                 Vx.Core.vx_new_string("layout-app")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static Const_layout_app c_layout_app = new Const_layout_app();
+  public static Vx.Ui.Ui.Type_layout c_layout_app = new Vx.Ui.Ui.Class_layout();
 
 
   /**
    * Constant: layout-background
    * {layout}
    */
-  public class Const_layout_background : Vx.Ui.Ui.Class_layout, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_layout_background {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-background", // name
@@ -6839,7 +6838,9 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_layout_background output) {
+    public static void const_new(Vx.Ui.Ui.Type_layout output) {
+      Vx.Ui.Ui.Class_layout outval = (Vx.Ui.Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Vx.Ui.Ui.Type_layout val = Vx.Core.f_new(
         Vx.Ui.Ui.t_layout,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -6847,23 +6848,21 @@ public static class Ui {
                 Vx.Core.vx_new_string("layout-background")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static Const_layout_background c_layout_background = new Const_layout_background();
+  public static Vx.Ui.Ui.Type_layout c_layout_background = new Vx.Ui.Ui.Class_layout();
 
 
   /**
    * Constant: layout-button
    * {layout}
    */
-  public class Const_layout_button : Vx.Ui.Ui.Class_layout, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_layout_button {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-button", // name
@@ -6883,7 +6882,9 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_layout_button output) {
+    public static void const_new(Vx.Ui.Ui.Type_layout output) {
+      Vx.Ui.Ui.Class_layout outval = (Vx.Ui.Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Vx.Ui.Ui.Type_layout val = Vx.Core.f_new(
         Vx.Ui.Ui.t_layout,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -6891,23 +6892,21 @@ public static class Ui {
                 Vx.Core.vx_new_string("layout-button")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static Const_layout_button c_layout_button = new Const_layout_button();
+  public static Vx.Ui.Ui.Type_layout c_layout_button = new Vx.Ui.Ui.Class_layout();
 
 
   /**
    * Constant: layout-combobox
    * {layout}
    */
-  public class Const_layout_combobox : Vx.Ui.Ui.Class_layout, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_layout_combobox {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-combobox", // name
@@ -6927,7 +6926,9 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_layout_combobox output) {
+    public static void const_new(Vx.Ui.Ui.Type_layout output) {
+      Vx.Ui.Ui.Class_layout outval = (Vx.Ui.Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Vx.Ui.Ui.Type_layout val = Vx.Core.f_new(
         Vx.Ui.Ui.t_layout,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -6935,23 +6936,21 @@ public static class Ui {
                 Vx.Core.vx_new_string("layout-combobox")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static Const_layout_combobox c_layout_combobox = new Const_layout_combobox();
+  public static Vx.Ui.Ui.Type_layout c_layout_combobox = new Vx.Ui.Ui.Class_layout();
 
 
   /**
    * Constant: layout-else
    * {layout}
    */
-  public class Const_layout_else : Vx.Ui.Ui.Class_layout, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_layout_else {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-else", // name
@@ -6971,7 +6970,9 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_layout_else output) {
+    public static void const_new(Vx.Ui.Ui.Type_layout output) {
+      Vx.Ui.Ui.Class_layout outval = (Vx.Ui.Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Vx.Ui.Ui.Type_layout val = Vx.Core.f_new(
         Vx.Ui.Ui.t_layout,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -6979,23 +6980,21 @@ public static class Ui {
                 Vx.Core.vx_new_string("layout-else")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static Const_layout_else c_layout_else = new Const_layout_else();
+  public static Vx.Ui.Ui.Type_layout c_layout_else = new Vx.Ui.Ui.Class_layout();
 
 
   /**
    * Constant: layout-flow-columns
    * {layout}
    */
-  public class Const_layout_flow_columns : Vx.Ui.Ui.Class_layout, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_layout_flow_columns {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-flow-columns", // name
@@ -7015,7 +7014,9 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_layout_flow_columns output) {
+    public static void const_new(Vx.Ui.Ui.Type_layout output) {
+      Vx.Ui.Ui.Class_layout outval = (Vx.Ui.Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Vx.Ui.Ui.Type_layout val = Vx.Core.f_new(
         Vx.Ui.Ui.t_layout,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -7023,23 +7024,21 @@ public static class Ui {
                 Vx.Core.vx_new_string("layout-flow-columns")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static Const_layout_flow_columns c_layout_flow_columns = new Const_layout_flow_columns();
+  public static Vx.Ui.Ui.Type_layout c_layout_flow_columns = new Vx.Ui.Ui.Class_layout();
 
 
   /**
    * Constant: layout-flow-item
    * {layout}
    */
-  public class Const_layout_flow_item : Vx.Ui.Ui.Class_layout, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_layout_flow_item {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-flow-item", // name
@@ -7059,7 +7058,9 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_layout_flow_item output) {
+    public static void const_new(Vx.Ui.Ui.Type_layout output) {
+      Vx.Ui.Ui.Class_layout outval = (Vx.Ui.Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Vx.Ui.Ui.Type_layout val = Vx.Core.f_new(
         Vx.Ui.Ui.t_layout,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -7067,23 +7068,21 @@ public static class Ui {
                 Vx.Core.vx_new_string("layout-flow-item")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static Const_layout_flow_item c_layout_flow_item = new Const_layout_flow_item();
+  public static Vx.Ui.Ui.Type_layout c_layout_flow_item = new Vx.Ui.Ui.Class_layout();
 
 
   /**
    * Constant: layout-flow-rows
    * {layout}
    */
-  public class Const_layout_flow_rows : Vx.Ui.Ui.Class_layout, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_layout_flow_rows {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-flow-rows", // name
@@ -7103,7 +7102,9 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_layout_flow_rows output) {
+    public static void const_new(Vx.Ui.Ui.Type_layout output) {
+      Vx.Ui.Ui.Class_layout outval = (Vx.Ui.Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Vx.Ui.Ui.Type_layout val = Vx.Core.f_new(
         Vx.Ui.Ui.t_layout,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -7111,23 +7112,21 @@ public static class Ui {
                 Vx.Core.vx_new_string("layout-flow-rows")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static Const_layout_flow_rows c_layout_flow_rows = new Const_layout_flow_rows();
+  public static Vx.Ui.Ui.Type_layout c_layout_flow_rows = new Vx.Ui.Ui.Class_layout();
 
 
   /**
    * Constant: layout-image
    * {layout}
    */
-  public class Const_layout_image : Vx.Ui.Ui.Class_layout, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_layout_image {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-image", // name
@@ -7147,7 +7146,9 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_layout_image output) {
+    public static void const_new(Vx.Ui.Ui.Type_layout output) {
+      Vx.Ui.Ui.Class_layout outval = (Vx.Ui.Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Vx.Ui.Ui.Type_layout val = Vx.Core.f_new(
         Vx.Ui.Ui.t_layout,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -7155,23 +7156,21 @@ public static class Ui {
                 Vx.Core.vx_new_string("layout-image")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static Const_layout_image c_layout_image = new Const_layout_image();
+  public static Vx.Ui.Ui.Type_layout c_layout_image = new Vx.Ui.Ui.Class_layout();
 
 
   /**
    * Constant: layout-label
    * {layout}
    */
-  public class Const_layout_label : Vx.Ui.Ui.Class_layout, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_layout_label {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-label", // name
@@ -7191,7 +7190,9 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_layout_label output) {
+    public static void const_new(Vx.Ui.Ui.Type_layout output) {
+      Vx.Ui.Ui.Class_layout outval = (Vx.Ui.Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Vx.Ui.Ui.Type_layout val = Vx.Core.f_new(
         Vx.Ui.Ui.t_layout,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -7199,23 +7200,21 @@ public static class Ui {
                 Vx.Core.vx_new_string("layout-label")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static Const_layout_label c_layout_label = new Const_layout_label();
+  public static Vx.Ui.Ui.Type_layout c_layout_label = new Vx.Ui.Ui.Class_layout();
 
 
   /**
    * Constant: layout-main
    * {layout}
    */
-  public class Const_layout_main : Vx.Ui.Ui.Class_layout, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_layout_main {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-main", // name
@@ -7235,7 +7234,9 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_layout_main output) {
+    public static void const_new(Vx.Ui.Ui.Type_layout output) {
+      Vx.Ui.Ui.Class_layout outval = (Vx.Ui.Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Vx.Ui.Ui.Type_layout val = Vx.Core.f_new(
         Vx.Ui.Ui.t_layout,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -7243,23 +7244,21 @@ public static class Ui {
                 Vx.Core.vx_new_string("layout-main")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static Const_layout_main c_layout_main = new Const_layout_main();
+  public static Vx.Ui.Ui.Type_layout c_layout_main = new Vx.Ui.Ui.Class_layout();
 
 
   /**
    * Constant: layout-maxpanel
    * {layout}
    */
-  public class Const_layout_maxpanel : Vx.Ui.Ui.Class_layout, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_layout_maxpanel {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-maxpanel", // name
@@ -7279,7 +7278,9 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_layout_maxpanel output) {
+    public static void const_new(Vx.Ui.Ui.Type_layout output) {
+      Vx.Ui.Ui.Class_layout outval = (Vx.Ui.Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Vx.Ui.Ui.Type_layout val = Vx.Core.f_new(
         Vx.Ui.Ui.t_layout,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -7287,23 +7288,21 @@ public static class Ui {
                 Vx.Core.vx_new_string("layout-maxpanel")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static Const_layout_maxpanel c_layout_maxpanel = new Const_layout_maxpanel();
+  public static Vx.Ui.Ui.Type_layout c_layout_maxpanel = new Vx.Ui.Ui.Class_layout();
 
 
   /**
    * Constant: layout-menubar
    * {layout}
    */
-  public class Const_layout_menubar : Vx.Ui.Ui.Class_layout, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_layout_menubar {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-menubar", // name
@@ -7323,7 +7322,9 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_layout_menubar output) {
+    public static void const_new(Vx.Ui.Ui.Type_layout output) {
+      Vx.Ui.Ui.Class_layout outval = (Vx.Ui.Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Vx.Ui.Ui.Type_layout val = Vx.Core.f_new(
         Vx.Ui.Ui.t_layout,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -7331,23 +7332,21 @@ public static class Ui {
                 Vx.Core.vx_new_string("layout-menubar")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static Const_layout_menubar c_layout_menubar = new Const_layout_menubar();
+  public static Vx.Ui.Ui.Type_layout c_layout_menubar = new Vx.Ui.Ui.Class_layout();
 
 
   /**
    * Constant: layout-menudrawer
    * {layout}
    */
-  public class Const_layout_menudrawer : Vx.Ui.Ui.Class_layout, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_layout_menudrawer {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-menudrawer", // name
@@ -7367,7 +7366,9 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_layout_menudrawer output) {
+    public static void const_new(Vx.Ui.Ui.Type_layout output) {
+      Vx.Ui.Ui.Class_layout outval = (Vx.Ui.Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Vx.Ui.Ui.Type_layout val = Vx.Core.f_new(
         Vx.Ui.Ui.t_layout,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -7375,23 +7376,21 @@ public static class Ui {
                 Vx.Core.vx_new_string("layout-menudrawer")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static Const_layout_menudrawer c_layout_menudrawer = new Const_layout_menudrawer();
+  public static Vx.Ui.Ui.Type_layout c_layout_menudrawer = new Vx.Ui.Ui.Class_layout();
 
 
   /**
    * Constant: layout-msgbox
    * {layout}
    */
-  public class Const_layout_msgbox : Vx.Ui.Ui.Class_layout, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_layout_msgbox {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-msgbox", // name
@@ -7411,7 +7410,9 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_layout_msgbox output) {
+    public static void const_new(Vx.Ui.Ui.Type_layout output) {
+      Vx.Ui.Ui.Class_layout outval = (Vx.Ui.Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Vx.Ui.Ui.Type_layout val = Vx.Core.f_new(
         Vx.Ui.Ui.t_layout,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -7419,23 +7420,21 @@ public static class Ui {
                 Vx.Core.vx_new_string("layout-msgbox")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static Const_layout_msgbox c_layout_msgbox = new Const_layout_msgbox();
+  public static Vx.Ui.Ui.Type_layout c_layout_msgbox = new Vx.Ui.Ui.Class_layout();
 
 
   /**
    * Constant: layout-navbar
    * {layout}
    */
-  public class Const_layout_navbar : Vx.Ui.Ui.Class_layout, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_layout_navbar {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-navbar", // name
@@ -7455,7 +7454,9 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_layout_navbar output) {
+    public static void const_new(Vx.Ui.Ui.Type_layout output) {
+      Vx.Ui.Ui.Class_layout outval = (Vx.Ui.Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Vx.Ui.Ui.Type_layout val = Vx.Core.f_new(
         Vx.Ui.Ui.t_layout,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -7463,23 +7464,21 @@ public static class Ui {
                 Vx.Core.vx_new_string("layout-navbar")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static Const_layout_navbar c_layout_navbar = new Const_layout_navbar();
+  public static Vx.Ui.Ui.Type_layout c_layout_navbar = new Vx.Ui.Ui.Class_layout();
 
 
   /**
    * Constant: layout-navdrawer
    * {layout}
    */
-  public class Const_layout_navdrawer : Vx.Ui.Ui.Class_layout, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_layout_navdrawer {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-navdrawer", // name
@@ -7499,7 +7498,9 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_layout_navdrawer output) {
+    public static void const_new(Vx.Ui.Ui.Type_layout output) {
+      Vx.Ui.Ui.Class_layout outval = (Vx.Ui.Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Vx.Ui.Ui.Type_layout val = Vx.Core.f_new(
         Vx.Ui.Ui.t_layout,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -7507,23 +7508,21 @@ public static class Ui {
                 Vx.Core.vx_new_string("layout-navdrawer")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static Const_layout_navdrawer c_layout_navdrawer = new Const_layout_navdrawer();
+  public static Vx.Ui.Ui.Type_layout c_layout_navdrawer = new Vx.Ui.Ui.Class_layout();
 
 
   /**
    * Constant: layout-panel
    * {layout}
    */
-  public class Const_layout_panel : Vx.Ui.Ui.Class_layout, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_layout_panel {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-panel", // name
@@ -7543,7 +7542,9 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_layout_panel output) {
+    public static void const_new(Vx.Ui.Ui.Type_layout output) {
+      Vx.Ui.Ui.Class_layout outval = (Vx.Ui.Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Vx.Ui.Ui.Type_layout val = Vx.Core.f_new(
         Vx.Ui.Ui.t_layout,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -7551,23 +7552,21 @@ public static class Ui {
                 Vx.Core.vx_new_string("layout-panel")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static Const_layout_panel c_layout_panel = new Const_layout_panel();
+  public static Vx.Ui.Ui.Type_layout c_layout_panel = new Vx.Ui.Ui.Class_layout();
 
 
   /**
    * Constant: layout-parallax
    * {layout}
    */
-  public class Const_layout_parallax : Vx.Ui.Ui.Class_layout, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_layout_parallax {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-parallax", // name
@@ -7587,7 +7586,9 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_layout_parallax output) {
+    public static void const_new(Vx.Ui.Ui.Type_layout output) {
+      Vx.Ui.Ui.Class_layout outval = (Vx.Ui.Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Vx.Ui.Ui.Type_layout val = Vx.Core.f_new(
         Vx.Ui.Ui.t_layout,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -7595,23 +7596,21 @@ public static class Ui {
                 Vx.Core.vx_new_string("layout-parallax")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static Const_layout_parallax c_layout_parallax = new Const_layout_parallax();
+  public static Vx.Ui.Ui.Type_layout c_layout_parallax = new Vx.Ui.Ui.Class_layout();
 
 
   /**
    * Constant: layout-statusbar
    * {layout}
    */
-  public class Const_layout_statusbar : Vx.Ui.Ui.Class_layout, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_layout_statusbar {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-statusbar", // name
@@ -7631,7 +7630,9 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_layout_statusbar output) {
+    public static void const_new(Vx.Ui.Ui.Type_layout output) {
+      Vx.Ui.Ui.Class_layout outval = (Vx.Ui.Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Vx.Ui.Ui.Type_layout val = Vx.Core.f_new(
         Vx.Ui.Ui.t_layout,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -7639,23 +7640,21 @@ public static class Ui {
                 Vx.Core.vx_new_string("layout-statusbar")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static Const_layout_statusbar c_layout_statusbar = new Const_layout_statusbar();
+  public static Vx.Ui.Ui.Type_layout c_layout_statusbar = new Vx.Ui.Ui.Class_layout();
 
 
   /**
    * Constant: layout-statusdrawer
    * {layout}
    */
-  public class Const_layout_statusdrawer : Vx.Ui.Ui.Class_layout, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_layout_statusdrawer {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-statusdrawer", // name
@@ -7675,7 +7674,9 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_layout_statusdrawer output) {
+    public static void const_new(Vx.Ui.Ui.Type_layout output) {
+      Vx.Ui.Ui.Class_layout outval = (Vx.Ui.Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Vx.Ui.Ui.Type_layout val = Vx.Core.f_new(
         Vx.Ui.Ui.t_layout,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -7683,23 +7684,21 @@ public static class Ui {
                 Vx.Core.vx_new_string("layout-statusdrawer")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static Const_layout_statusdrawer c_layout_statusdrawer = new Const_layout_statusdrawer();
+  public static Vx.Ui.Ui.Type_layout c_layout_statusdrawer = new Vx.Ui.Ui.Class_layout();
 
 
   /**
    * Constant: layout-text
    * {layout}
    */
-  public class Const_layout_text : Vx.Ui.Ui.Class_layout, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_layout_text {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-text", // name
@@ -7719,7 +7718,9 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_layout_text output) {
+    public static void const_new(Vx.Ui.Ui.Type_layout output) {
+      Vx.Ui.Ui.Class_layout outval = (Vx.Ui.Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Vx.Ui.Ui.Type_layout val = Vx.Core.f_new(
         Vx.Ui.Ui.t_layout,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -7727,23 +7728,21 @@ public static class Ui {
                 Vx.Core.vx_new_string("layout-text")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static Const_layout_text c_layout_text = new Const_layout_text();
+  public static Vx.Ui.Ui.Type_layout c_layout_text = new Vx.Ui.Ui.Class_layout();
 
 
   /**
    * Constant: layout-textentry
    * {layout}
    */
-  public class Const_layout_textentry : Vx.Ui.Ui.Class_layout, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_layout_textentry {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-textentry", // name
@@ -7763,7 +7762,9 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_layout_textentry output) {
+    public static void const_new(Vx.Ui.Ui.Type_layout output) {
+      Vx.Ui.Ui.Class_layout outval = (Vx.Ui.Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Vx.Ui.Ui.Type_layout val = Vx.Core.f_new(
         Vx.Ui.Ui.t_layout,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -7771,23 +7772,21 @@ public static class Ui {
                 Vx.Core.vx_new_string("layout-textentry")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static Const_layout_textentry c_layout_textentry = new Const_layout_textentry();
+  public static Vx.Ui.Ui.Type_layout c_layout_textentry = new Vx.Ui.Ui.Class_layout();
 
 
   /**
    * Constant: layout-titlebar
    * {layout}
    */
-  public class Const_layout_titlebar : Vx.Ui.Ui.Class_layout, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_layout_titlebar {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "layout-titlebar", // name
@@ -7807,7 +7806,9 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_layout_titlebar output) {
+    public static void const_new(Vx.Ui.Ui.Type_layout output) {
+      Vx.Ui.Ui.Class_layout outval = (Vx.Ui.Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Vx.Ui.Ui.Type_layout val = Vx.Core.f_new(
         Vx.Ui.Ui.t_layout,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -7815,23 +7816,21 @@ public static class Ui {
                 Vx.Core.vx_new_string("layout-titlebar")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static Const_layout_titlebar c_layout_titlebar = new Const_layout_titlebar();
+  public static Vx.Ui.Ui.Type_layout c_layout_titlebar = new Vx.Ui.Ui.Class_layout();
 
 
   /**
    * Constant: pin-bottom
    * {pin}
    */
-  public class Const_pin_bottom : Vx.Ui.Ui.Class_pin, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_pin_bottom {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "pin-bottom", // name
@@ -7851,22 +7850,22 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_pin_bottom output) {
+    public static void const_new(Vx.Ui.Ui.Type_pin output) {
+      Vx.Ui.Ui.Class_pin outval = (Vx.Ui.Ui.Class_pin)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static Const_pin_bottom c_pin_bottom = new Const_pin_bottom();
+  public static Vx.Ui.Ui.Type_pin c_pin_bottom = new Vx.Ui.Ui.Class_pin();
 
 
   /**
    * Constant: pin-center
    * {pin}
    */
-  public class Const_pin_center : Vx.Ui.Ui.Class_pin, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_pin_center {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "pin-center", // name
@@ -7886,22 +7885,22 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_pin_center output) {
+    public static void const_new(Vx.Ui.Ui.Type_pin output) {
+      Vx.Ui.Ui.Class_pin outval = (Vx.Ui.Ui.Class_pin)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static Const_pin_center c_pin_center = new Const_pin_center();
+  public static Vx.Ui.Ui.Type_pin c_pin_center = new Vx.Ui.Ui.Class_pin();
 
 
   /**
    * Constant: pin-center-h
    * {pin}
    */
-  public class Const_pin_center_h : Vx.Ui.Ui.Class_pin, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_pin_center_h {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "pin-center-h", // name
@@ -7921,22 +7920,22 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_pin_center_h output) {
+    public static void const_new(Vx.Ui.Ui.Type_pin output) {
+      Vx.Ui.Ui.Class_pin outval = (Vx.Ui.Ui.Class_pin)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static Const_pin_center_h c_pin_center_h = new Const_pin_center_h();
+  public static Vx.Ui.Ui.Type_pin c_pin_center_h = new Vx.Ui.Ui.Class_pin();
 
 
   /**
    * Constant: pin-center-v
    * {pin}
    */
-  public class Const_pin_center_v : Vx.Ui.Ui.Class_pin, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_pin_center_v {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "pin-center-v", // name
@@ -7956,22 +7955,22 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_pin_center_v output) {
+    public static void const_new(Vx.Ui.Ui.Type_pin output) {
+      Vx.Ui.Ui.Class_pin outval = (Vx.Ui.Ui.Class_pin)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static Const_pin_center_v c_pin_center_v = new Const_pin_center_v();
+  public static Vx.Ui.Ui.Type_pin c_pin_center_v = new Vx.Ui.Ui.Class_pin();
 
 
   /**
    * Constant: pin-expand
    * {pin}
    */
-  public class Const_pin_expand : Vx.Ui.Ui.Class_pin, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_pin_expand {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "pin-expand", // name
@@ -7991,22 +7990,22 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_pin_expand output) {
+    public static void const_new(Vx.Ui.Ui.Type_pin output) {
+      Vx.Ui.Ui.Class_pin outval = (Vx.Ui.Ui.Class_pin)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static Const_pin_expand c_pin_expand = new Const_pin_expand();
+  public static Vx.Ui.Ui.Type_pin c_pin_expand = new Vx.Ui.Ui.Class_pin();
 
 
   /**
    * Constant: pin-left
    * {pin}
    */
-  public class Const_pin_left : Vx.Ui.Ui.Class_pin, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_pin_left {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "pin-left", // name
@@ -8026,22 +8025,22 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_pin_left output) {
+    public static void const_new(Vx.Ui.Ui.Type_pin output) {
+      Vx.Ui.Ui.Class_pin outval = (Vx.Ui.Ui.Class_pin)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static Const_pin_left c_pin_left = new Const_pin_left();
+  public static Vx.Ui.Ui.Type_pin c_pin_left = new Vx.Ui.Ui.Class_pin();
 
 
   /**
    * Constant: pin-right
    * {pin}
    */
-  public class Const_pin_right : Vx.Ui.Ui.Class_pin, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_pin_right {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "pin-right", // name
@@ -8061,22 +8060,22 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_pin_right output) {
+    public static void const_new(Vx.Ui.Ui.Type_pin output) {
+      Vx.Ui.Ui.Class_pin outval = (Vx.Ui.Ui.Class_pin)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static Const_pin_right c_pin_right = new Const_pin_right();
+  public static Vx.Ui.Ui.Type_pin c_pin_right = new Vx.Ui.Ui.Class_pin();
 
 
   /**
    * Constant: pin-top
    * {pin}
    */
-  public class Const_pin_top : Vx.Ui.Ui.Class_pin, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_pin_top {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "pin-top", // name
@@ -8096,22 +8095,22 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_pin_top output) {
+    public static void const_new(Vx.Ui.Ui.Type_pin output) {
+      Vx.Ui.Ui.Class_pin outval = (Vx.Ui.Ui.Class_pin)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static Const_pin_top c_pin_top = new Const_pin_top();
+  public static Vx.Ui.Ui.Type_pin c_pin_top = new Vx.Ui.Ui.Class_pin();
 
 
   /**
    * Constant: point-center
    * {point}
    */
-  public class Const_point_center : Vx.Ui.Ui.Class_point, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_point_center {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "point-center", // name
@@ -8131,22 +8130,22 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_point_center output) {
+    public static void const_new(Vx.Ui.Ui.Type_point output) {
+      Vx.Ui.Ui.Class_point outval = (Vx.Ui.Ui.Class_point)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static Const_point_center c_point_center = new Const_point_center();
+  public static Vx.Ui.Ui.Type_point c_point_center = new Vx.Ui.Ui.Class_point();
 
 
   /**
    * Constant: point-lefttop
    * {point}
    */
-  public class Const_point_lefttop : Vx.Ui.Ui.Class_point, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_point_lefttop {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "point-lefttop", // name
@@ -8166,22 +8165,22 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_point_lefttop output) {
+    public static void const_new(Vx.Ui.Ui.Type_point output) {
+      Vx.Ui.Ui.Class_point outval = (Vx.Ui.Ui.Class_point)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static Const_point_lefttop c_point_lefttop = new Const_point_lefttop();
+  public static Vx.Ui.Ui.Type_point c_point_lefttop = new Vx.Ui.Ui.Class_point();
 
 
   /**
    * Constant: point-rightbottom
    * {point}
    */
-  public class Const_point_rightbottom : Vx.Ui.Ui.Class_point, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_point_rightbottom {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "point-rightbottom", // name
@@ -8201,22 +8200,22 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_point_rightbottom output) {
+    public static void const_new(Vx.Ui.Ui.Type_point output) {
+      Vx.Ui.Ui.Class_point outval = (Vx.Ui.Ui.Class_point)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static Const_point_rightbottom c_point_rightbottom = new Const_point_rightbottom();
+  public static Vx.Ui.Ui.Type_point c_point_rightbottom = new Vx.Ui.Ui.Class_point();
 
 
   /**
    * Constant: pointtype-absolute
    * {pointtype}
    */
-  public class Const_pointtype_absolute : Vx.Ui.Ui.Class_pointtype, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_pointtype_absolute {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "pointtype-absolute", // name
@@ -8236,22 +8235,22 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_pointtype_absolute output) {
+    public static void const_new(Vx.Ui.Ui.Type_pointtype output) {
+      Vx.Ui.Ui.Class_pointtype outval = (Vx.Ui.Ui.Class_pointtype)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static Const_pointtype_absolute c_pointtype_absolute = new Const_pointtype_absolute();
+  public static Vx.Ui.Ui.Type_pointtype c_pointtype_absolute = new Vx.Ui.Ui.Class_pointtype();
 
 
   /**
    * Constant: pointtype-percent
    * {pointtype}
    */
-  public class Const_pointtype_percent : Vx.Ui.Ui.Class_pointtype, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_pointtype_percent {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "pointtype-percent", // name
@@ -8271,22 +8270,22 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_pointtype_percent output) {
+    public static void const_new(Vx.Ui.Ui.Type_pointtype output) {
+      Vx.Ui.Ui.Class_pointtype outval = (Vx.Ui.Ui.Class_pointtype)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static Const_pointtype_percent c_pointtype_percent = new Const_pointtype_percent();
+  public static Vx.Ui.Ui.Type_pointtype c_pointtype_percent = new Vx.Ui.Ui.Class_pointtype();
 
 
   /**
    * Constant: pointtype-relative
    * {pointtype}
    */
-  public class Const_pointtype_relative : Vx.Ui.Ui.Class_pointtype, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_pointtype_relative {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "pointtype-relative", // name
@@ -8306,22 +8305,22 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_pointtype_relative output) {
+    public static void const_new(Vx.Ui.Ui.Type_pointtype output) {
+      Vx.Ui.Ui.Class_pointtype outval = (Vx.Ui.Ui.Class_pointtype)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static Const_pointtype_relative c_pointtype_relative = new Const_pointtype_relative();
+  public static Vx.Ui.Ui.Type_pointtype c_pointtype_relative = new Vx.Ui.Ui.Class_pointtype();
 
 
   /**
    * Constant: styletype-custom
    * {styletype}
    */
-  public class Const_styletype_custom : Vx.Ui.Ui.Class_styletype, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_styletype_custom {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "styletype-custom", // name
@@ -8341,22 +8340,22 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_styletype_custom output) {
+    public static void const_new(Vx.Ui.Ui.Type_styletype output) {
+      Vx.Ui.Ui.Class_styletype outval = (Vx.Ui.Ui.Class_styletype)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static Const_styletype_custom c_styletype_custom = new Const_styletype_custom();
+  public static Vx.Ui.Ui.Type_styletype c_styletype_custom = new Vx.Ui.Ui.Class_styletype();
 
 
   /**
    * Constant: styletype-shared
    * {styletype}
    */
-  public class Const_styletype_shared : Vx.Ui.Ui.Class_styletype, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_styletype_shared {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "styletype-shared", // name
@@ -8376,22 +8375,22 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_styletype_shared output) {
+    public static void const_new(Vx.Ui.Ui.Type_styletype output) {
+      Vx.Ui.Ui.Class_styletype outval = (Vx.Ui.Ui.Class_styletype)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static Const_styletype_shared c_styletype_shared = new Const_styletype_shared();
+  public static Vx.Ui.Ui.Type_styletype c_styletype_shared = new Vx.Ui.Ui.Class_styletype();
 
 
   /**
    * Constant: styletype-system
    * {styletype}
    */
-  public class Const_styletype_system : Vx.Ui.Ui.Class_styletype, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_styletype_system {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/ui/ui", // pkgname
         "styletype-system", // name
@@ -8411,13 +8410,14 @@ public static class Ui {
       );
     }
 
-    public static void const_new(Const_styletype_system output) {
+    public static void const_new(Vx.Ui.Ui.Type_styletype output) {
+      Vx.Ui.Ui.Class_styletype outval = (Vx.Ui.Ui.Class_styletype)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static Const_styletype_system c_styletype_system = new Const_styletype_system();
+  public static Vx.Ui.Ui.Type_styletype c_styletype_system = new Vx.Ui.Ui.Class_styletype();
 
   /**
    * @function boolean_layout_from_ui_parent_selected

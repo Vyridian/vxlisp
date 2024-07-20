@@ -5,7 +5,8 @@ public static class Core {
   public interface Map<TKey, TValue> where TKey : notnull {
     public Map<TKey, TValue> copy();
     public TValue get(TKey key);
-    public TValue getOrDefault(TKey key, TValue defaultvalue);
+    public TValue? getOrDefault(TKey key);
+    public TValue getOrElse(TKey key, TValue elsevalue);
     public List<TKey> keys();
     public void put(TKey key, TValue value);
     public void remove(TKey key);
@@ -18,9 +19,12 @@ public static class Core {
     public LinkedHashMap() {
     }
     public LinkedHashMap(Map<TKey, TValue> copy) {
-      this.listkey = new List<TKey>(copy.keys());
-      foreach (TKey key in this.listkey) {
-        dict[key] = copy.get(key);
+      List<TKey> keys = new List<TKey>(copy.keys());
+      foreach (TKey key in keys) {
+        TValue? value = copy.getOrDefault(key);
+        if (value != null) {
+          this.put(key, value);
+        }
       }
     }
     public Map<TKey, TValue> copy() {
@@ -29,8 +33,15 @@ public static class Core {
     public TValue get(TKey key) {
       return dict[key];
     }
-    public TValue getOrDefault(TKey key, TValue defaultvalue) {
-      TValue output = defaultvalue;
+    public TValue? getOrDefault(TKey key) {
+      TValue? output = default(TValue);
+      if (dict.ContainsKey(key)) {
+        output = dict[key];
+      }
+      return output;
+    }
+    public TValue getOrElse(TKey key, TValue elsevalue) {
+      TValue output = elsevalue;
       if (dict.ContainsKey(key)) {
         output = dict[key];
       }
@@ -40,8 +51,12 @@ public static class Core {
       return listkey;
     }
     public void put(TKey key, TValue value) {
-      listkey.Add(key);
       dict[key] = value;
+      if (!dict.ContainsKey(key)) {
+      } else if (listkey.Contains(key)) {
+      } else {
+        listkey.Add(key);
+      }
     }
     public void remove(TKey key) {
       listkey.Remove(key);
@@ -50,10 +65,6 @@ public static class Core {
     public int size() {
       return dict.Count;
     }
-  }
-
-  public interface vx_Type_const {
-    public Vx.Core.Type_constdef vx_constdef();
   }
 
   public interface Type_replfunc {
@@ -70,6 +81,7 @@ public static class Core {
 
   public class Class_base {
     protected int vx_iref = 0;
+    public Vx.Core.Type_constdef? vx_p_constdef = null;
     protected Vx.Core.Type_msgblock? vxmsgblock = null;
     public virtual Vx.Core.Type_any vx_new(params Object[] vals) {
       return e_any;
@@ -81,14 +93,22 @@ public static class Core {
       return e_any;
     }
     public virtual Vx.Core.Type_any vx_type() {
-      return t_any;
+      return Vx.Core.t_any;
     }
     public virtual Vx.Core.Type_typedef vx_typedef() {
-      return e_typedef;
+      return Vx.Core.e_typedef;
+    }
+    public Vx.Core.Type_constdef vx_constdef() {
+      if (this.vx_p_constdef == null) {
+        return Vx.Core.e_constdef;
+      } else {
+        return this.vx_p_constdef;
+      }
     }
     public List<Type_any> vx_dispose() {
       this.vx_iref = 0;
-      this.vxmsgblock = Vx.Core.e_msgblock;
+      this.vx_p_constdef = null;
+      this.vxmsgblock = null;
       return emptylistany;
     }
     public Vx.Core.Type_msgblock vx_msgblock() {
@@ -240,7 +260,7 @@ public static class Core {
   // vx_copy(generic_any_1, args...)
   public static T vx_copy<T>(T copyval, params Object[] vals) where T : Vx.Core.Type_any {
     Vx.Core.Type_any val = copyval.vx_copy(vals);
-    T output = Vx.Core.f_any_from_any(copyval, val);
+    T output = (T)val;
     return output;
   }
 
@@ -352,7 +372,7 @@ public static class Core {
     if (skey.StartsWith(":")) {
       skey = skey.Substring(1);
     }
-    Vx.Core.Type_any val = valuemap.vx_map().getOrDefault(skey, output);
+    Vx.Core.Type_any val = valuemap.vx_map().getOrElse(skey, output);
     output = Vx.Core.f_any_from_any(generic_any_1, val);
     return output;
   }
@@ -821,12 +841,14 @@ public static class Core {
     Map<string, T> output = new LinkedHashMap<string, T>();
     List<string> keys = mapval.keys();
     foreach (string key in keys) {
-      U value = mapval.get(key);
-      try {
-        T castval = (T)value;
-        output.put(key, castval);
-      } catch (Exception ex) {
-        Vx.Core.vx_log("map<-map", ex);
+      U? value = mapval.getOrDefault(key);
+      if (value != null) {
+        try {
+          T castval = (T)value;
+          output.put(key, castval);
+        } catch (Exception ex) {
+          Vx.Core.vx_log("map<-map", ex);
+        }
       }
     }
     return output;
@@ -1007,8 +1029,8 @@ public static class Core {
       }
     } else if (value is Vx.Core.Type_string valstring) {
       output = "\"" + valstring.vx_string() + "\"";
-    } else if (value is Vx.Core.vx_Type_const constvalue) {
-      Vx.Core.Type_constdef constdef = constvalue.vx_constdef();
+    } else if (value.vx_constdef() != Vx.Core.e_constdef) {
+      Vx.Core.Type_constdef constdef = value.vx_constdef();
       string constpkg = constdef.pkgname().vx_string();
       string constname = constdef.name().vx_string();
       if (constpkg == "vx/core") {
@@ -1121,7 +1143,10 @@ public static class Core {
     string text,
     string find,
     string replace) {
-    string output = text.Replace(find, replace);
+    string output = text;
+    if (find != "") {
+      output = text.Replace(find, replace);
+    }
     return output;
   }
 
@@ -1145,10 +1170,10 @@ public static class Core {
     } else if (start > end) {
     } else if (start > maxlen) {
     } else {
-      if (end >= maxlen) {
+      if (end > maxlen) {
         end = maxlen;
       }
-      output = text.Substring(start - 1, end);
+      output = text.Substring(start - 1, end - start + 1);
     }
     return output;
   }
@@ -1270,6 +1295,7 @@ public static class Core {
     public Vx.Core.Type_any vx_empty();
     public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_typedef vx_typedef();
+    public Vx.Core.Type_constdef vx_constdef();
     public List<Type_any> vx_dispose();
     public Vx.Core.Type_msgblock vx_msgblock();
     public bool vx_release();
@@ -1288,7 +1314,7 @@ public static class Core {
       bool ischanged = false;
       Class_any val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       foreach (Object valsub in vals) {
@@ -1356,7 +1382,7 @@ public static class Core {
       bool ischanged = false;
       Class_any_async_from_func val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
@@ -1447,7 +1473,7 @@ public static class Core {
       bool ischanged = false;
       Class_any_from_anylist val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Core.Func_any_from_any> listval = new List<Vx.Core.Func_any_from_any>(val.vx_listany_from_any());
@@ -1558,7 +1584,7 @@ public static class Core {
       bool ischanged = false;
       Class_anylist val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Core.Type_any> listval = new List<Vx.Core.Type_any>(val.vx_list());
@@ -1672,7 +1698,7 @@ public static class Core {
       Vx.Core.Class_anymap map = this;
       string skey = key.vx_string();
       Vx.Core.Map<string, Vx.Core.Type_any> mapval = map.vx_p_map;
-      output = mapval.getOrDefault(skey, Vx.Core.e_any);
+      output = mapval.getOrElse(skey, Vx.Core.e_any);
       return output;
     }
 
@@ -1708,7 +1734,7 @@ public static class Core {
       bool ischanged = false;
       Class_anymap val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_any> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>(val.vx_map());
@@ -1826,7 +1852,7 @@ public static class Core {
       bool ischanged = false;
       Class_anytype val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
@@ -1960,7 +1986,7 @@ public static class Core {
       bool ischanged = false;
       Class_arg val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_name = val.name();
@@ -2202,7 +2228,7 @@ public static class Core {
       bool ischanged = false;
       Class_arglist val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Core.Type_arg> listval = new List<Vx.Core.Type_arg>(val.vx_listarg());
@@ -2321,7 +2347,7 @@ public static class Core {
       Vx.Core.Class_argmap map = this;
       string skey = key.vx_string();
       Vx.Core.Map<string, Vx.Core.Type_arg> mapval = map.vx_p_map;
-      output = mapval.getOrDefault(skey, Vx.Core.e_arg);
+      output = mapval.getOrElse(skey, Vx.Core.e_arg);
       return output;
     }
 
@@ -2365,7 +2391,7 @@ public static class Core {
       bool ischanged = false;
       Class_argmap val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_arg> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_arg>(val.vx_maparg());
@@ -2489,7 +2515,7 @@ public static class Core {
       bool ischanged = false;
       Class_boolean val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       bool booleanval = val.vx_boolean();
@@ -2595,7 +2621,7 @@ public static class Core {
       bool ischanged = false;
       Class_booleanlist val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Core.Type_boolean> listval = new List<Vx.Core.Type_boolean>(val.vx_listboolean());
@@ -2688,7 +2714,7 @@ public static class Core {
       bool ischanged = false;
       Class_collection val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
@@ -2748,7 +2774,7 @@ public static class Core {
       bool ischanged = false;
       Class_compilelanguages val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
@@ -2809,7 +2835,7 @@ public static class Core {
       bool ischanged = false;
       Class_connect val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
@@ -2900,7 +2926,7 @@ public static class Core {
       bool ischanged = false;
       Class_connectlist val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Core.Type_connect> listval = new List<Vx.Core.Type_connect>(val.vx_listconnect());
@@ -3019,7 +3045,7 @@ public static class Core {
       Vx.Core.Class_connectmap map = this;
       string skey = key.vx_string();
       Vx.Core.Map<string, Vx.Core.Type_connect> mapval = map.vx_p_map;
-      output = mapval.getOrDefault(skey, Vx.Core.e_connect);
+      output = mapval.getOrElse(skey, Vx.Core.e_connect);
       return output;
     }
 
@@ -3063,7 +3089,7 @@ public static class Core {
       bool ischanged = false;
       Class_connectmap val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_connect> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_connect>(val.vx_mapconnect());
@@ -3181,7 +3207,7 @@ public static class Core {
       bool ischanged = false;
       Class_const val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
@@ -3300,7 +3326,7 @@ public static class Core {
       bool ischanged = false;
       Class_constdef val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_pkgname = val.pkgname();
@@ -3509,7 +3535,7 @@ public static class Core {
       bool ischanged = false;
       Class_constlist val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Core.Type_any> listval = new List<Vx.Core.Type_any>(val.vx_list());
@@ -3623,7 +3649,7 @@ public static class Core {
       Vx.Core.Class_constmap map = this;
       string skey = key.vx_string();
       Vx.Core.Map<string, Vx.Core.Type_any> mapval = map.vx_p_map;
-      output = mapval.getOrDefault(skey, Vx.Core.e_any);
+      output = mapval.getOrElse(skey, Vx.Core.e_any);
       return output;
     }
 
@@ -3659,7 +3685,7 @@ public static class Core {
       bool ischanged = false;
       Class_constmap val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_any> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>(val.vx_map());
@@ -3850,7 +3876,7 @@ public static class Core {
       bool ischanged = false;
       Class_context val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_code = val.code();
@@ -4059,7 +4085,7 @@ public static class Core {
       bool ischanged = false;
       Class_date val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
@@ -4140,7 +4166,7 @@ public static class Core {
       bool ischanged = false;
       Class_decimal val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       string sval = val.vx_string();
@@ -4216,7 +4242,7 @@ public static class Core {
       bool ischanged = false;
       Class_error val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
@@ -4283,7 +4309,7 @@ public static class Core {
       bool ischanged = false;
       Class_float val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       float floatval = val.vx_float();
@@ -4378,7 +4404,7 @@ public static class Core {
       bool ischanged = false;
       Class_func val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
@@ -4527,7 +4553,7 @@ public static class Core {
       bool ischanged = false;
       Class_funcdef val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_pkgname = val.pkgname();
@@ -4798,7 +4824,7 @@ public static class Core {
       bool ischanged = false;
       Class_funclist val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Core.Type_func> listval = new List<Vx.Core.Type_func>(val.vx_listfunc());
@@ -4917,7 +4943,7 @@ public static class Core {
       Vx.Core.Class_funcmap map = this;
       string skey = key.vx_string();
       Vx.Core.Map<string, Vx.Core.Type_func> mapval = map.vx_p_map;
-      output = mapval.getOrDefault(skey, Vx.Core.e_func);
+      output = mapval.getOrElse(skey, Vx.Core.e_func);
       return output;
     }
 
@@ -4961,7 +4987,7 @@ public static class Core {
       bool ischanged = false;
       Class_funcmap val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_func> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_func>(val.vx_mapfunc());
@@ -5085,7 +5111,7 @@ public static class Core {
       bool ischanged = false;
       Class_int val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       int intval = val.vx_int();
@@ -5194,7 +5220,7 @@ public static class Core {
       bool ischanged = false;
       Class_intlist val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Core.Type_int> listval = new List<Vx.Core.Type_int>(val.vx_listint());
@@ -5313,7 +5339,7 @@ public static class Core {
       Vx.Core.Class_intmap map = this;
       string skey = key.vx_string();
       Vx.Core.Map<string, Vx.Core.Type_int> mapval = map.vx_p_map;
-      output = mapval.getOrDefault(skey, Vx.Core.e_int);
+      output = mapval.getOrElse(skey, Vx.Core.e_int);
       return output;
     }
 
@@ -5357,7 +5383,7 @@ public static class Core {
       bool ischanged = false;
       Class_intmap val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_int> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_int>(val.vx_mapint());
@@ -5497,7 +5523,7 @@ public static class Core {
       bool ischanged = false;
       Class_list val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Core.Type_any> listval = new List<Vx.Core.Type_any>(val.vx_list());
@@ -5588,7 +5614,7 @@ public static class Core {
       bool ischanged = false;
       Class_listtype val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
@@ -5659,7 +5685,7 @@ public static class Core {
       bool ischanged = false;
       Class_locale val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
@@ -5747,7 +5773,7 @@ public static class Core {
       Vx.Core.Class_map map = this;
       string skey = key.vx_string();
       Vx.Core.Map<string, Vx.Core.Type_any> mapval = map.vx_p_map;
-      output = mapval.getOrDefault(skey, Vx.Core.e_any);
+      output = mapval.getOrElse(skey, Vx.Core.e_any);
       return output;
     }
 
@@ -5783,7 +5809,7 @@ public static class Core {
       bool ischanged = false;
       Class_map val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_any> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>(val.vx_map());
@@ -5901,7 +5927,7 @@ public static class Core {
       bool ischanged = false;
       Class_maptype val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
@@ -5990,7 +6016,7 @@ public static class Core {
       bool ischanged = false;
       Class_mempool val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_value vx_p_valuepool = val.valuepool();
@@ -6216,7 +6242,7 @@ public static class Core {
       Type_msg output = this;
       bool ischanged = false;
       Class_msg val = this;
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_code = val.code();
@@ -6393,7 +6419,7 @@ public static class Core {
       bool ischanged = false;
       Class_msgblock val = this;
       Vx.Core.Type_msgblock msgblock = this;
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_msglist vx_p_msgs = val.msgs();
@@ -6570,7 +6596,7 @@ public static class Core {
       bool ischanged = false;
       Class_msgblocklist val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Core.Type_msgblock> listval = new List<Vx.Core.Type_msgblock>(val.vx_listmsgblock());
@@ -6689,7 +6715,7 @@ public static class Core {
       bool ischanged = false;
       Class_msglist val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Core.Type_msg> listval = new List<Vx.Core.Type_msg>(val.vx_listmsg());
@@ -6778,7 +6804,7 @@ public static class Core {
       bool ischanged = false;
       Class_none val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
@@ -6839,7 +6865,7 @@ public static class Core {
       bool ischanged = false;
       Class_notype val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
@@ -6900,7 +6926,7 @@ public static class Core {
       bool ischanged = false;
       Class_number val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
@@ -6991,7 +7017,7 @@ public static class Core {
       bool ischanged = false;
       Class_numberlist val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Core.Type_number> listval = new List<Vx.Core.Type_number>(val.vx_listnumber());
@@ -7110,7 +7136,7 @@ public static class Core {
       Vx.Core.Class_numbermap map = this;
       string skey = key.vx_string();
       Vx.Core.Map<string, Vx.Core.Type_number> mapval = map.vx_p_map;
-      output = mapval.getOrDefault(skey, Vx.Core.e_number);
+      output = mapval.getOrElse(skey, Vx.Core.e_number);
       return output;
     }
 
@@ -7154,7 +7180,7 @@ public static class Core {
       bool ischanged = false;
       Class_numbermap val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_number> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_number>(val.vx_mapnumber());
@@ -7360,7 +7386,7 @@ public static class Core {
       bool ischanged = false;
       Class_package val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_pkgname = val.pkgname();
@@ -7616,7 +7642,7 @@ public static class Core {
       Vx.Core.Class_packagemap map = this;
       string skey = key.vx_string();
       Vx.Core.Map<string, Vx.Core.Type_package> mapval = map.vx_p_map;
-      output = mapval.getOrDefault(skey, Vx.Core.e_package);
+      output = mapval.getOrElse(skey, Vx.Core.e_package);
       return output;
     }
 
@@ -7660,7 +7686,7 @@ public static class Core {
       bool ischanged = false;
       Class_packagemap val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_package> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_package>(val.vx_mappackage());
@@ -7806,7 +7832,7 @@ public static class Core {
       bool ischanged = false;
       Class_permission val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_id = val.id();
@@ -7976,7 +8002,7 @@ public static class Core {
       bool ischanged = false;
       Class_permissionlist val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Core.Type_permission> listval = new List<Vx.Core.Type_permission>(val.vx_listpermission());
@@ -8095,7 +8121,7 @@ public static class Core {
       Vx.Core.Class_permissionmap map = this;
       string skey = key.vx_string();
       Vx.Core.Map<string, Vx.Core.Type_permission> mapval = map.vx_p_map;
-      output = mapval.getOrDefault(skey, Vx.Core.e_permission);
+      output = mapval.getOrElse(skey, Vx.Core.e_permission);
       return output;
     }
 
@@ -8139,7 +8165,7 @@ public static class Core {
       bool ischanged = false;
       Class_permissionmap val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_permission> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_permission>(val.vx_mappermission());
@@ -8285,7 +8311,7 @@ public static class Core {
       bool ischanged = false;
       Class_project val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_packagemap vx_p_packagemap = val.packagemap();
@@ -8480,7 +8506,7 @@ public static class Core {
       bool ischanged = false;
       Class_security val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_funclist vx_p_allowfuncs = val.allowfuncs();
@@ -8766,7 +8792,7 @@ public static class Core {
       bool ischanged = false;
       Class_session val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_user vx_p_user = val.user();
@@ -9046,7 +9072,7 @@ public static class Core {
       bool ischanged = false;
       Class_setting val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_stringmap vx_p_pathmap = val.pathmap();
@@ -9211,7 +9237,7 @@ public static class Core {
       bool ischanged = false;
       Class_state val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_statelistenermap vx_p_statelistenermap = val.statelistenermap();
@@ -9405,7 +9431,7 @@ public static class Core {
       bool ischanged = false;
       Class_statelistener val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_name = val.name();
@@ -9616,7 +9642,7 @@ public static class Core {
       Vx.Core.Class_statelistenermap map = this;
       string skey = key.vx_string();
       Vx.Core.Map<string, Vx.Core.Type_statelistener> mapval = map.vx_p_map;
-      output = mapval.getOrDefault(skey, Vx.Core.e_statelistener);
+      output = mapval.getOrElse(skey, Vx.Core.e_statelistener);
       return output;
     }
 
@@ -9660,7 +9686,7 @@ public static class Core {
       bool ischanged = false;
       Class_statelistenermap val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_statelistener> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_statelistener>(val.vx_mapstatelistener());
@@ -9786,7 +9812,7 @@ public static class Core {
       bool ischanged = false;
       Class_string val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       System.Text.StringBuilder sb = new System.Text.StringBuilder(val.vx_string());
@@ -9922,7 +9948,7 @@ public static class Core {
       bool ischanged = false;
       Class_stringlist val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Core.Type_string> listval = new List<Vx.Core.Type_string>(val.vx_liststring());
@@ -10046,7 +10072,7 @@ public static class Core {
       bool ischanged = false;
       Class_stringlistlist val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Core.Type_stringlist> listval = new List<Vx.Core.Type_stringlist>(val.vx_liststringlist());
@@ -10165,7 +10191,7 @@ public static class Core {
       Vx.Core.Class_stringmap map = this;
       string skey = key.vx_string();
       Vx.Core.Map<string, Vx.Core.Type_string> mapval = map.vx_p_map;
-      output = mapval.getOrDefault(skey, Vx.Core.e_string);
+      output = mapval.getOrElse(skey, Vx.Core.e_string);
       return output;
     }
 
@@ -10209,7 +10235,7 @@ public static class Core {
       bool ischanged = false;
       Class_stringmap val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_string> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_string>(val.vx_mapstring());
@@ -10352,7 +10378,7 @@ public static class Core {
       Vx.Core.Class_stringmutablemap map = this;
       string skey = key.vx_string();
       Vx.Core.Map<string, Vx.Core.Type_string> mapval = map.vx_p_map;
-      output = mapval.getOrDefault(skey, Vx.Core.e_string);
+      output = mapval.getOrElse(skey, Vx.Core.e_string);
       return output;
     }
 
@@ -10396,7 +10422,7 @@ public static class Core {
       bool ischanged = false;
       Class_stringmutablemap val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_string> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_string>(val.vx_mapstring());
@@ -10526,7 +10552,7 @@ public static class Core {
       bool ischanged = false;
       Class_struct val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
@@ -10674,7 +10700,7 @@ public static class Core {
       bool ischanged = false;
       Class_thenelse val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_code = val.code();
@@ -10935,7 +10961,7 @@ public static class Core {
       bool ischanged = false;
       Class_thenelselist val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Core.Type_thenelse> listval = new List<Vx.Core.Type_thenelse>(val.vx_listthenelse());
@@ -11072,7 +11098,7 @@ public static class Core {
       bool ischanged = false;
       Class_translation val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_name = val.name();
@@ -11265,7 +11291,7 @@ public static class Core {
       bool ischanged = false;
       Class_translationlist val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Core.Type_translation> listval = new List<Vx.Core.Type_translation>(val.vx_listtranslation());
@@ -11384,7 +11410,7 @@ public static class Core {
       Vx.Core.Class_translationmap map = this;
       string skey = key.vx_string();
       Vx.Core.Map<string, Vx.Core.Type_translation> mapval = map.vx_p_map;
-      output = mapval.getOrDefault(skey, Vx.Core.e_translation);
+      output = mapval.getOrElse(skey, Vx.Core.e_translation);
       return output;
     }
 
@@ -11428,7 +11454,7 @@ public static class Core {
       bool ischanged = false;
       Class_translationmap val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_translation> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_translation>(val.vx_maptranslation());
@@ -11546,7 +11572,7 @@ public static class Core {
       bool ischanged = false;
       Class_type val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
@@ -11800,7 +11826,7 @@ public static class Core {
       bool ischanged = false;
       Class_typedef val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_pkgname = val.pkgname();
@@ -12219,7 +12245,7 @@ public static class Core {
       bool ischanged = false;
       Class_typelist val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Core.Type_any> listval = new List<Vx.Core.Type_any>(val.vx_list());
@@ -12333,7 +12359,7 @@ public static class Core {
       Vx.Core.Class_typemap map = this;
       string skey = key.vx_string();
       Vx.Core.Map<string, Vx.Core.Type_any> mapval = map.vx_p_map;
-      output = mapval.getOrDefault(skey, Vx.Core.e_any);
+      output = mapval.getOrElse(skey, Vx.Core.e_any);
       return output;
     }
 
@@ -12369,7 +12395,7 @@ public static class Core {
       bool ischanged = false;
       Class_typemap val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_any> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>(val.vx_map());
@@ -12545,7 +12571,7 @@ public static class Core {
       bool ischanged = false;
       Class_user val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_security vx_p_security = val.security();
@@ -12776,7 +12802,7 @@ public static class Core {
       bool ischanged = false;
       Class_value val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_any vx_p_next = val.next();
@@ -12923,9 +12949,8 @@ public static class Core {
    * Constant: false
    * {boolean}
    */
-  public class Const_false : Vx.Core.Class_boolean, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_false {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/core", // pkgname
         "false", // name
@@ -12945,18 +12970,15 @@ public static class Core {
       );
     }
 
-    public static void const_new(Const_false output) {
-    }
-
-    public 
-    new bool vx_boolean() {
-      this.vxboolean = false;
-      return this.vxboolean;
+    public static void const_new(Vx.Core.Type_boolean output) {
+      Vx.Core.Class_boolean outval = (Vx.Core.Class_boolean)output;
+      outval.vx_p_constdef = constdef();
+      outval.vxboolean = false;
     }
 
   }
 
-  public static Const_false c_false = new Const_false();
+  public static Vx.Core.Type_boolean c_false = new Vx.Core.Class_boolean();
 
   public static Type_boolean e_boolean = c_false;
 
@@ -12965,9 +12987,8 @@ public static class Core {
    * Global variable for project data.
    * {project}
    */
-  public class Const_global : Vx.Core.Class_project, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_global {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/core", // pkgname
         "global", // name
@@ -12987,13 +13008,14 @@ public static class Core {
       );
     }
 
-    public static void const_new(Const_global output) {
+    public static void const_new(Vx.Core.Type_project output) {
+      Vx.Core.Class_project outval = (Vx.Core.Class_project)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static Const_global c_global = new Const_global();
+  public static Vx.Core.Type_project c_global = new Vx.Core.Class_project();
 
 
   /**
@@ -13001,9 +13023,8 @@ public static class Core {
    * Infinity. Returned during unusual calculations.
    * {int}
    */
-  public class Const_infinity : Vx.Core.Class_int, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_infinity {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/core", // pkgname
         "infinity", // name
@@ -13023,18 +13044,15 @@ public static class Core {
       );
     }
 
-    public static void const_new(Const_infinity output) {
-    }
-
-    public 
-    new int vx_int() {
-      this.vxint = 0;
-      return this.vxint;
+    public static void const_new(Vx.Core.Type_int output) {
+      Vx.Core.Class_int outval = (Vx.Core.Class_int)output;
+      outval.vx_p_constdef = constdef();
+      outval.vxint = 0;
     }
 
   }
 
-  public static Const_infinity c_infinity = new Const_infinity();
+  public static Vx.Core.Type_int c_infinity = new Vx.Core.Class_int();
 
 
   /**
@@ -13042,9 +13060,8 @@ public static class Core {
    * Active Value Memory Pool
    * {mempool}
    */
-  public class Const_mempool_active : Vx.Core.Class_mempool, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_mempool_active {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/core", // pkgname
         "mempool-active", // name
@@ -13064,13 +13081,14 @@ public static class Core {
       );
     }
 
-    public static void const_new(Const_mempool_active output) {
+    public static void const_new(Vx.Core.Type_mempool output) {
+      Vx.Core.Class_mempool outval = (Vx.Core.Class_mempool)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static Const_mempool_active c_mempool_active = new Const_mempool_active();
+  public static Vx.Core.Type_mempool c_mempool_active = new Vx.Core.Class_mempool();
 
 
   /**
@@ -13078,9 +13096,8 @@ public static class Core {
    * Message is an Error
    * {int}
    */
-  public class Const_msg_error : Vx.Core.Class_int, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_msg_error {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/core", // pkgname
         "msg-error", // name
@@ -13100,18 +13117,15 @@ public static class Core {
       );
     }
 
-    public static void const_new(Const_msg_error output) {
-    }
-
-    public 
-    new int vx_int() {
-      this.vxint = 2;
-      return this.vxint;
+    public static void const_new(Vx.Core.Type_int output) {
+      Vx.Core.Class_int outval = (Vx.Core.Class_int)output;
+      outval.vx_p_constdef = constdef();
+      outval.vxint = 2;
     }
 
   }
 
-  public static Const_msg_error c_msg_error = new Const_msg_error();
+  public static Vx.Core.Type_int c_msg_error = new Vx.Core.Class_int();
 
 
   /**
@@ -13119,9 +13133,8 @@ public static class Core {
    * Message is just information
    * {int}
    */
-  public class Const_msg_info : Vx.Core.Class_int, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_msg_info {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/core", // pkgname
         "msg-info", // name
@@ -13141,18 +13154,15 @@ public static class Core {
       );
     }
 
-    public static void const_new(Const_msg_info output) {
-    }
-
-    public 
-    new int vx_int() {
-      this.vxint = 0;
-      return this.vxint;
+    public static void const_new(Vx.Core.Type_int output) {
+      Vx.Core.Class_int outval = (Vx.Core.Class_int)output;
+      outval.vx_p_constdef = constdef();
+      outval.vxint = 0;
     }
 
   }
 
-  public static Const_msg_info c_msg_info = new Const_msg_info();
+  public static Vx.Core.Type_int c_msg_info = new Vx.Core.Class_int();
 
 
   /**
@@ -13160,9 +13170,8 @@ public static class Core {
    * Message is a Severe Error
    * {int}
    */
-  public class Const_msg_severe : Vx.Core.Class_int, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_msg_severe {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/core", // pkgname
         "msg-severe", // name
@@ -13182,18 +13191,15 @@ public static class Core {
       );
     }
 
-    public static void const_new(Const_msg_severe output) {
-    }
-
-    public 
-    new int vx_int() {
-      this.vxint = 3;
-      return this.vxint;
+    public static void const_new(Vx.Core.Type_int output) {
+      Vx.Core.Class_int outval = (Vx.Core.Class_int)output;
+      outval.vx_p_constdef = constdef();
+      outval.vxint = 3;
     }
 
   }
 
-  public static Const_msg_severe c_msg_severe = new Const_msg_severe();
+  public static Vx.Core.Type_int c_msg_severe = new Vx.Core.Class_int();
 
 
   /**
@@ -13201,9 +13207,8 @@ public static class Core {
    * Message is a Warning
    * {int}
    */
-  public class Const_msg_warning : Vx.Core.Class_int, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_msg_warning {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/core", // pkgname
         "msg-warning", // name
@@ -13223,18 +13228,15 @@ public static class Core {
       );
     }
 
-    public static void const_new(Const_msg_warning output) {
-    }
-
-    public 
-    new int vx_int() {
-      this.vxint = 1;
-      return this.vxint;
+    public static void const_new(Vx.Core.Type_int output) {
+      Vx.Core.Class_int outval = (Vx.Core.Class_int)output;
+      outval.vx_p_constdef = constdef();
+      outval.vxint = 1;
     }
 
   }
 
-  public static Const_msg_warning c_msg_warning = new Const_msg_warning();
+  public static Vx.Core.Type_int c_msg_warning = new Vx.Core.Class_int();
 
 
   /**
@@ -13242,9 +13244,8 @@ public static class Core {
    * Negative Infinity. Returned during unusual calculations.
    * {int}
    */
-  public class Const_neginfinity : Vx.Core.Class_int, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_neginfinity {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/core", // pkgname
         "neginfinity", // name
@@ -13264,18 +13265,15 @@ public static class Core {
       );
     }
 
-    public static void const_new(Const_neginfinity output) {
-    }
-
-    public 
-    new int vx_int() {
-      this.vxint = 0;
-      return this.vxint;
+    public static void const_new(Vx.Core.Type_int output) {
+      Vx.Core.Class_int outval = (Vx.Core.Class_int)output;
+      outval.vx_p_constdef = constdef();
+      outval.vxint = 0;
     }
 
   }
 
-  public static Const_neginfinity c_neginfinity = new Const_neginfinity();
+  public static Vx.Core.Type_int c_neginfinity = new Vx.Core.Class_int();
 
 
   /**
@@ -13283,9 +13281,8 @@ public static class Core {
    * New line constant
    * {string}
    */
-  public class Const_newline : Vx.Core.Class_string, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_newline {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/core", // pkgname
         "newline", // name
@@ -13305,18 +13302,15 @@ public static class Core {
       );
     }
 
-    public static void const_new(Const_newline output) {
-    }
-
-    public 
-    new string vx_string() {
-      this.vxstring = "\n";
-      return this.vxstring;
+    public static void const_new(Vx.Core.Type_string output) {
+      Vx.Core.Class_string outval = (Vx.Core.Class_string)output;
+      outval.vx_p_constdef = constdef();
+      outval.vxstring = "\n";
     }
 
   }
 
-  public static Const_newline c_newline = new Const_newline();
+  public static Vx.Core.Type_string c_newline = new Vx.Core.Class_string();
 
 
   /**
@@ -13324,9 +13318,8 @@ public static class Core {
    * Not a number. Returned during invalid calculations.
    * {int}
    */
-  public class Const_notanumber : Vx.Core.Class_int, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_notanumber {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/core", // pkgname
         "notanumber", // name
@@ -13346,18 +13339,15 @@ public static class Core {
       );
     }
 
-    public static void const_new(Const_notanumber output) {
-    }
-
-    public 
-    new int vx_int() {
-      this.vxint = 0;
-      return this.vxint;
+    public static void const_new(Vx.Core.Type_int output) {
+      Vx.Core.Class_int outval = (Vx.Core.Class_int)output;
+      outval.vx_p_constdef = constdef();
+      outval.vxint = 0;
     }
 
   }
 
-  public static Const_notanumber c_notanumber = new Const_notanumber();
+  public static Vx.Core.Type_int c_notanumber = new Vx.Core.Class_int();
 
 
   /**
@@ -13365,9 +13355,8 @@ public static class Core {
    * Nothing Value. Opposite of every other value. e.g. Nil, Null
    * {string}
    */
-  public class Const_nothing : Vx.Core.Class_string, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_nothing {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/core", // pkgname
         "nothing", // name
@@ -13387,18 +13376,15 @@ public static class Core {
       );
     }
 
-    public static void const_new(Const_nothing output) {
-    }
-
-    public 
-    new string vx_string() {
-      this.vxstring = "nothing";
-      return this.vxstring;
+    public static void const_new(Vx.Core.Type_string output) {
+      Vx.Core.Class_string outval = (Vx.Core.Class_string)output;
+      outval.vx_p_constdef = constdef();
+      outval.vxstring = "nothing";
     }
 
   }
 
-  public static Const_nothing c_nothing = new Const_nothing();
+  public static Vx.Core.Type_string c_nothing = new Vx.Core.Class_string();
 
 
   /**
@@ -13406,9 +13392,8 @@ public static class Core {
    * Quotation mark constant
    * {string}
    */
-  public class Const_quote : Vx.Core.Class_string, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_quote {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/core", // pkgname
         "quote", // name
@@ -13428,27 +13413,23 @@ public static class Core {
       );
     }
 
-    public static void const_new(Const_quote output) {
-    }
-
-    public 
-    new string vx_string() {
-      this.vxstring = "\"";
-      return this.vxstring;
+    public static void const_new(Vx.Core.Type_string output) {
+      Vx.Core.Class_string outval = (Vx.Core.Class_string)output;
+      outval.vx_p_constdef = constdef();
+      outval.vxstring = "\"";
     }
 
   }
 
-  public static Const_quote c_quote = new Const_quote();
+  public static Vx.Core.Type_string c_quote = new Vx.Core.Class_string();
 
 
   /**
    * Constant: true
    * {boolean}
    */
-  public class Const_true : Vx.Core.Class_boolean, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_true {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/core", // pkgname
         "true", // name
@@ -13468,18 +13449,15 @@ public static class Core {
       );
     }
 
-    public static void const_new(Const_true output) {
-    }
-
-    public 
-    new bool vx_boolean() {
-      this.vxboolean = true;
-      return this.vxboolean;
+    public static void const_new(Vx.Core.Type_boolean output) {
+      Vx.Core.Class_boolean outval = (Vx.Core.Class_boolean)output;
+      outval.vx_p_constdef = constdef();
+      outval.vxboolean = true;
     }
 
   }
 
-  public static Const_true c_true = new Const_true();
+  public static Vx.Core.Type_boolean c_true = new Vx.Core.Class_boolean();
 
   /**
    * @function not
@@ -20391,7 +20369,9 @@ public static class Core {
   public static T f_copy<T>(T value, Vx.Core.Type_anylist values) where T : Vx.Core.Type_any {
     Vx.Core.Type_any[] arrayany = Vx.Core.arrayany_from_anylist(values);
     object[] arrayobj = (Vx.Core.Type_any[])arrayany;
-    T output = (T)(((T)value).vx_copy(arrayobj));
+    T tvalue = (T)value;
+    Vx.Core.Type_any anyvalue = tvalue.vx_copy(arrayobj);
+    T output = (T)anyvalue;
     return output;
   }
 

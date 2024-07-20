@@ -25,12 +25,27 @@
   public static class Class_base {
     protected int vx_iref = 0;
     protected Core.Type_msgblock vxmsgblock = null;
+    public Core.Type_constdef vx_p_constdef = null;
     public List<Type_any> vx_dispose() {
       this.vx_iref = 0;
       this.vxmsgblock = null;
+      this.vx_p_constdef = null;
       return emptylistany;
     }
-    public Core.Type_msgblock vx_msgblock() {return vxmsgblock;}
+    public Core.Type_constdef vx_constdef() {
+      if (this.vx_p_constdef == null) {
+        return Core.e_constdef;
+      } else {
+        return this.vx_p_constdef;
+      }
+    }
+    public Core.Type_msgblock vx_msgblock() {
+      if (this.vxmsgblock == null) {
+        return Core.e_msgblock;
+      } else {
+        return this.vxmsgblock;
+      }
+    }
     public boolean vx_release() {
       boolean output = false;
       if (this.vx_iref < 0) {
@@ -82,7 +97,8 @@
     List<Core.Type_any> listany = list.vx_list();
     Core.Type_msgblock msgblock = list.vx_msgblock();
     if (msgblock == null) {
-    } else if (msgblock != Core.e_msgblock) {
+    } else if (msgblock == Core.e_msgblock) {
+    } else {
      listany = new ArrayList<>(listany);
      listany.add(msgblock);
     }
@@ -625,7 +641,7 @@
   public static Core.Type_msgblock vx_msgblock_from_copy_arrayval(final Core.Type_any copy, final Object... vals) {
     Core.Type_msgblock output = Core.e_msgblock;
     Core.Type_msgblock copymsgblock = copy.vx_msgblock();
-    if (copymsgblock != null) {
+    if (copymsgblock != Core.e_msgblock) {
       output = copymsgblock;
     }
     return output;
@@ -635,7 +651,9 @@
   public static Core.Type_msgblock vx_msgblock_from_copy_listval(final Core.Type_msgblock msgblock, Core.Type_any... vals) {
     Core.Type_msgblock output = Core.e_msgblock;
     List<Core.Type_msgblock> listmsgblock = new ArrayList<>();
-    if (msgblock != null) {
+    if (msgblock == null) {
+    } else if (msgblock == Core.e_msgblock) {
+    } else {
       Core.Type_msgblock origmsgblock = msgblock.vx_msgblock();
       if (origmsgblock != Core.e_msgblock) {
         List<Core.Type_msgblock> origlistmsgblock = origmsgblock.msgblocks().vx_listmsgblock();
@@ -655,7 +673,9 @@
       Core.Class_msgblock outputclass = new Core.Class_msgblock();
       outputclass.vx_p_msgblocks = msgblocks;
       output = outputclass;
-    } else if (msgblock != null) {
+    } else if (msgblock == null) {
+    } else if (msgblock == Core.e_msgblock) {
+    } else {
       output = msgblock;
     }
     return output;
@@ -780,7 +800,7 @@
       } else {
         sval = "`" + sval + "`";
       }
-      if (valstring.vx_msgblock() != null) {
+      if (valstring.vx_msgblock() != Core.e_msgblock) {
         String msgtext = Core.vx_string_from_any_indent(valstring.vx_msgblock(), indent, linefeed);
         output  = "\n" + indenttext + "(string";
         output += "\n" + indenttext + " " + sval;
@@ -788,9 +808,8 @@
       } else {
         output = sval;
       }
-    } else if (value instanceof Core.vx_Type_const) {
-      Core.vx_Type_const constvalue = (Core.vx_Type_const)value;
-      Core.Type_constdef constdef = constvalue.vx_constdef();
+    } else if (value.vx_constdef() != Core.e_constdef) {
+      Core.Type_constdef constdef = value.vx_constdef();
       String constpkg = constdef.pkgname().vx_string();
       String constname = constdef.name().vx_string();
       if (constpkg.equals("vx/core")) {
@@ -809,7 +828,7 @@
         String valtext = Core.vx_string_from_any_indent(valsub, indentint, linefeed);
         output += "\n " + indenttext + valtext;
       }
-      if (vallist.vx_msgblock() != null) {
+      if (vallist.vx_msgblock() != Core.e_msgblock) {
         String msgtext = Core.vx_string_from_any_indent(vallist.vx_msgblock(), indent, linefeed);
         output += "\n" + indenttext + msgtext;
       }
@@ -837,7 +856,7 @@
         }
         output += "\n" + indenttext + " " + key + strval;
       }
-      if (valmap.vx_msgblock() != null) {
+      if (valmap.vx_msgblock() != Core.e_msgblock) {
         String msgtext = Core.vx_string_from_any_indent(valmap.vx_msgblock(), indent+1, linefeed);
         output += "\n " + indenttext + msgtext;
       }
@@ -868,7 +887,7 @@
       }
       if (stypedefname == "msg") {
       } else if (stypedefname == "msgblock") {
-      } else if (valstruct.vx_msgblock() != null) {
+      } else if (valstruct.vx_msgblock() != Core.e_msgblock) {
         String msgtext2 = Core.vx_string_from_any_indent(valstruct.vx_msgblock(), indent+1, linefeed);
         output += "\n " + indenttext + msgtext2;
       }
@@ -878,7 +897,7 @@
       Core.Type_funcdef funcdef = valfunc.vx_funcdef();
       Core.Type_string funcdefname = Core.f_funcname_from_funcdef(funcdef);
       output = funcdefname.vx_string();
-      if (valfunc.vx_msgblock() != null) {
+      if (valfunc.vx_msgblock() != Core.e_msgblock) {
         String msgtext = Core.vx_string_from_any_indent(valfunc.vx_msgblock(), indent, linefeed);
         output += "\n" + indenttext + msgtext;
       }
@@ -916,7 +935,7 @@
     } else if (start > end) {
     } else if (start > maxlen) {
     } else {
-      if (end >= maxlen) {
+      if (end > maxlen) {
         end = maxlen;
       }
       output = text.substring(start - 1, end);

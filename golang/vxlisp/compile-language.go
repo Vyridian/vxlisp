@@ -169,12 +169,12 @@ func LangClassHeaderFromConst(lang *vxlang, cnst *vxconst, indent int) string {
 	output := ""
 	lineindent := LangIndent(lang, indent, true)
 	constname := "Const_" + LangFromName(cnst.alias)
-	extends := LangNameClassFullFromType(lang, cnst.vxtype)
+	//extends := LangNameClassFullFromType(lang, cnst.vxtype)
 	switch lang.name {
 	case "csharp", "kotlin":
-		output = lineindent + "public class " + constname + " : " + extends + ", " + LangNameFromPkgNameDot(lang, "vx/core") + "vx_Type_const {"
+		output = lineindent + "public class " + constname + " {"
 	case "java":
-		output = lineindent + "public static class " + constname + " extends " + extends + " implements " + LangNameFromPkgNameDot(lang, "vx/core") + "vx_Type_const {"
+		output = lineindent + "public static class " + constname + " {"
 	}
 	return output
 }
@@ -480,8 +480,9 @@ func LangFromConst(lang *vxlang, cnst *vxconst, pkg *vxpackage) (string, string,
 	cnstname := LangFromName(cnst.alias)
 	cnstclassname := "Const_" + cnstname
 	cnsttypeclassname := LangNameTypeFullFromType(lang, cnsttype)
-	initval := ""
-	const_new := ""
+	const_new := "" +
+		"\n      " + LangNameClassFullFromType(lang, cnst.vxtype) + " outval = (" + LangNameClassFullFromType(lang, cnst.vxtype) + ")output" + lang.lineend +
+		"\n      outval.vx_p_constdef = constdef()" + lang.lineend
 	cnstval := StringValueFromValue(cnst.value)
 	switch NameFromType(cnsttype) {
 	case "vx/core/boolean":
@@ -498,12 +499,12 @@ func LangFromConst(lang *vxlang, cnst *vxconst, pkg *vxpackage) (string, string,
 				cnstval = "false"
 			}
 		}
-		cnstval = "\n      this.vxboolean = " + cnstval + ";"
-		initval = "" +
-			LangFuncHeader(lang, LangNameFromConst(cnst), constvxboolean, false, false) +
-			cnstval +
-			"\n      return this.vxboolean;" +
-			"\n    }"
+		const_new += "\n      outval.vxboolean = " + cnstval + ";"
+		//initval = "" +
+		//	LangFuncHeader(lang, LangNameFromConst(cnst), constvxboolean, false, //false) +
+		//	cnstval +
+		//	"\n      return this.vxboolean;" +
+		//	"\n    }"
 	case "vx/core/decimal":
 		constvxdecimal := NewFunc()
 		constvxdecimal.name = "vx_decimal"
@@ -513,12 +514,12 @@ func LangFromConst(lang *vxlang, cnst *vxconst, pkg *vxpackage) (string, string,
 		if cnstval == "" {
 			cnstval = "0"
 		}
-		cnstval = "\n      this.vxdecimal = " + cnstval + ";"
-		initval = "" +
-			LangFuncHeader(lang, LangNameFromConst(cnst), constvxdecimal, false, false) +
-			cnstval +
-			"\n      return this.vxdecimal;" +
-			"\n    }"
+		const_new += "\n      outval.vxdecimal = " + cnstval + ";"
+		//initval = "" +
+		//	LangFuncHeader(lang, LangNameFromConst(cnst), constvxdecimal, false, false) +
+		//	cnstval +
+		//	"\n      return this.vxdecimal;" +
+		//	"\n    }"
 	case "vx/core/float":
 		constvxfloat := NewFunc()
 		constvxfloat.name = "vx_float"
@@ -528,12 +529,12 @@ func LangFromConst(lang *vxlang, cnst *vxconst, pkg *vxpackage) (string, string,
 		if cnstval == "" {
 			cnstval = "f0"
 		}
-		cnstval = "\n      this.vxfloat = " + cnstval + ";"
-		initval = "" +
-			LangFuncHeader(lang, LangNameFromConst(cnst), constvxfloat, false, false) +
-			cnstval +
-			"\n      return this.vxdecimal;" +
-			"\n    }"
+		const_new = "\n      outval.vxfloat = " + cnstval + ";"
+		//initval = "" +
+		//	LangFuncHeader(lang, LangNameFromConst(cnst), constvxfloat, false, false) +
+		//	cnstval +
+		//	"\n      return this.vxdecimal;" +
+		//	"\n    }"
 	case "vx/core/int":
 		constvxint := NewFunc()
 		constvxint.name = "vx_int"
@@ -543,12 +544,12 @@ func LangFromConst(lang *vxlang, cnst *vxconst, pkg *vxpackage) (string, string,
 		if cnstval == "" {
 			cnstval = "0"
 		}
-		cnstval = "\n      this.vxint = " + cnstval + ";"
-		initval = "" +
-			LangFuncHeader(lang, LangNameFromConst(cnst), constvxint, false, false) +
-			cnstval +
-			"\n      return this.vxint;" +
-			"\n    }"
+		const_new += "\n      outval.vxint = " + cnstval + ";"
+		//initval = "" +
+		//	LangFuncHeader(lang, LangNameFromConst(cnst), constvxint, false, false) +
+		//	cnstval +
+		//	"\n      return this.vxint;" +
+		//	"\n    }"
 	case "vx/core/string":
 		constvxstring := NewFunc()
 		constvxstring.name = "vx_string"
@@ -560,12 +561,12 @@ func LangFromConst(lang *vxlang, cnst *vxconst, pkg *vxpackage) (string, string,
 			cnstval = LangFromText(cnstval)
 			cnstval = "\"" + cnstval + "\""
 		}
-		cnstval = "\n      this.vxstring = " + cnstval + ";"
-		initval = "" +
-			LangFuncHeader(lang, LangNameFromConst(cnst), constvxstring, false, false) +
-			cnstval +
-			"\n      return this.vxstring;" +
-			"\n    }"
+		const_new += "\n      outval.vxstring = " + cnstval + ";"
+		//initval = "" +
+		//	LangFuncHeader(lang, LangNameFromConst(cnst), constvxstring, false, false) +
+		//	cnstval +
+		//	"\n      return this.vxstring;" +
+		//	"\n    }"
 	default:
 		switch cnsttype.extends {
 		case ":list":
@@ -579,10 +580,10 @@ func LangFromConst(lang *vxlang, cnst *vxconst, pkg *vxpackage) (string, string,
 				}
 				const_new += "" +
 					"\n      " + cnsttypeclassname + " val = " + clstext + lang.lineend +
-					"\n      output.vx_p_list = val.vx_list" + listtypename + "()" + lang.lineend
+					"\n      outval.vx_p_list = val.vx_list" + listtypename + "()" + lang.lineend
 			}
 		case ":map":
-			clstext, msgs := LangFromValue(lang, cnst.value, cnst.pkgname, emptyfunc, 3, true, false, path)
+			clstext, msgs := LangFromValue(lang, cnst.value, cnst.pkgname, emptyfunc, 4, true, false, path)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			if clstext != "" {
 				allowtype, _ := TypeAllowFromType(cnsttype)
@@ -591,8 +592,8 @@ func LangFromConst(lang *vxlang, cnst *vxconst, pkg *vxpackage) (string, string,
 					maptypename = ""
 				}
 				const_new += "" +
-					"\n      " + cnsttypeclassname + " val = " + clstext + ";" +
-					"\n      output.vx_p_map = val.vx_map" + maptypename + "();"
+					"\n      " + cnsttypeclassname + " val = " + clstext + lang.lineend +
+					"\n      outval.vx_p_map = val.vx_map" + maptypename + "();"
 			}
 		case ":struct":
 			clstext, msgs := LangFromValue(lang, cnst.value, cnst.pkgname, emptyfunc, 3, true, false, path)
@@ -602,7 +603,7 @@ func LangFromConst(lang *vxlang, cnst *vxconst, pkg *vxpackage) (string, string,
 					"\n      " + cnsttypeclassname + " val = " + clstext + ";"
 				for _, prop := range ListPropertyTraitFromType(cnst.vxtype) {
 					const_new += "" +
-						"\n      output.vx_p_" + LangFromName(prop.name) + " = val." + LangFromName(prop.name) + "();"
+						"\n      outval.vx_p_" + LangFromName(prop.name) + " = val." + LangFromName(prop.name) + "();"
 				}
 			}
 		}
@@ -619,15 +620,13 @@ func LangFromConst(lang *vxlang, cnst *vxconst, pkg *vxpackage) (string, string,
 		"\n   */" +
 		LangClassHeaderFromConst(lang, cnst, 1) +
 		LangVxConstdef(lang, cnst) +
-		"\n    public static void const_new(" + cnstclassname + " output) {" +
+		"\n    public static void const_new(" + LangNameTypeFullFromType(lang, cnst.vxtype) + " output) {" +
 		const_new +
 		"\n    }" +
 		"\n" +
-		initval +
-		"\n" +
 		"\n  }" +
 		"\n" +
-		"\n  public static " + LangFinalVar(lang) + cnstclassname + " c_" + cnstname + " = new " + cnstclassname + "();" +
+		"\n  public static " + LangFinalVar(lang) + LangNameTypeFromType(lang, cnst.vxtype) + " c_" + cnstname + " = new " + LangNameClassFullFromType(lang, cnst.vxtype) + "()" + lang.lineend +
 		"\n" +
 		e_type +
 		"\n"
@@ -818,7 +817,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 		"\n      " + LangNameTypeFromType(lang, rawbooltype) + " ischanged = false;" +
 		"\n      Class_" + typename + " val = this;" +
 		"\n      " + LangNameTypeFromType(lang, msgblocktype) + " msgblock = " + LangNameFromPkgNameDot(lang, "vx/core") + "vx_msgblock_from_copy_arrayval(val, vals);" +
-		"\n      if (" + LangIsTypeText(lang, "this", LangNameFromPkgNameDot(lang, "vx/core")+"vx_Type_const") + ") {" +
+		"\n      if (this.vx_constdef() != " + LangNameEFromType(lang, constdeftype) + ") {" +
 		"\n        ischanged = true;" +
 		"\n      }"
 	switch NameFromType(typ) {
@@ -1291,7 +1290,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 			valcopy = "" +
 				"\n      " + LangNameTypeFromType(lang, rawbooltype) + " ischanged = false;" +
 				"\n      Class_" + typename + " val = this;" +
-				"\n      if (" + LangIsTypeText(lang, "this", LangNameFromPkgNameDot(lang, "vx/core")+"vx_Type_const") + ") {" +
+				"\n      if (this.vx_constdef() != " + LangNameEFromType(lang, constdeftype) + ") {" +
 				"\n        ischanged = true;" +
 				"\n      }"
 		case "vx/core/msgblock":
@@ -1299,7 +1298,7 @@ func LangFromType(typ *vxtype, lang *vxlang) (string, *vxmsgblock) {
 				"\n      " + LangNameTypeFromType(lang, rawbooltype) + " ischanged = false;" +
 				"\n      Class_" + typename + " val = this;" +
 				"\n      " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_msgblock msgblock = this;" +
-				"\n      if (" + LangIsTypeText(lang, "this", LangNameFromPkgNameDot(lang, "vx/core")+"vx_Type_const") + ") {" +
+				"\n      if (this.vx_constdef() != " + LangNameEFromType(lang, constdeftype) + ") {" +
 				"\n        ischanged = true;" +
 				"\n      }"
 		}
@@ -2644,8 +2643,9 @@ func LangInterfaceFromType(lang *vxlang, typ *vxtype) string {
 			LangInterfaceHeader(lang, anytype, emptylisttype, 1) +
 			basics +
 			"\n    public " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_typedef vx_typedef();" +
+			"\n    public " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_constdef vx_constdef();" +
 			"\n    public List<Type_any> vx_dispose();" +
-			"\n    public " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_msgblock vx_msgblock();" +
+			"\n    public " + LangNameTypeFromType(lang, msgblocktype) + " vx_msgblock();" +
 			LangFuncHeader(lang, LangNameFromType(lang, typ), funcvxrelease, true, false) +
 			"\n    public void vx_reserve();" +
 			"\n  }" +
@@ -4227,6 +4227,7 @@ func LangVxAllowCodeFromList(lang *vxlang, typ *vxtype) string {
 func LangVxAllowCodeFromMap(lang *vxlang, typ *vxtype) string {
 	output := ""
 	override := ""
+	getorelse := ""
 	switch lang.name {
 	case "java":
 		override = "\n    @Override"
@@ -4238,6 +4239,12 @@ func LangVxAllowCodeFromMap(lang *vxlang, typ *vxtype) string {
 		allowtype = allowtypes[0]
 		allowclass := LangNameTypeFullFromType(lang, allowtype)
 		allowempty := LangNameEFromType(lang, allowtype)
+		switch lang.name {
+		case "csharp":
+			getorelse = "mapval.getOrElse(skey, " + LangNameEFromType(lang, allowtype) + ")"
+		case "java":
+			getorelse = "mapval.getOrDefault(skey, " + LangNameEFromType(lang, allowtype) + ")"
+		}
 		allowname = LangNameFromType(lang, allowtype)
 		output = "" +
 			override +
@@ -4246,7 +4253,7 @@ func LangVxAllowCodeFromMap(lang *vxlang, typ *vxtype) string {
 			"\n      " + LangNameClassFullFromType(lang, typ) + " map = this;" +
 			LangVar(lang, "skey", rawstringtype, emptytype, "key.vx_string()", 3, false, false) +
 			LangVar(lang, "mapval", rawmaptype, allowtype, "map.vx_p_map", 3, false, false) +
-			LangVarSet(lang, "output", "mapval.getOrDefault(skey, "+allowempty+")", 3) +
+			LangVarSet(lang, "output", getorelse, 3) +
 			"\n      return output;" +
 			"\n    }" +
 			"\n"
@@ -4302,15 +4309,9 @@ func LangVxCopyFromFunc(lang *vxlang, fnc *vxfunc, isinterface bool) string {
 }
 
 func LangVxConstdef(lang *vxlang, cnst *vxconst) string {
-	override := ""
 	cnsttype := cnst.vxtype
-	switch lang.name {
-	case "java":
-		override = "\n    @Override"
-	}
 	output := "" +
-		"\n    " + override +
-		"\n    public " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_constdef vx_constdef() {" +
+		"\n    public static " + LangNameFromPkgNameDot(lang, "vx/core") + "Type_constdef constdef() {" +
 		"\n      return " + LangNameFromPkgNameDot(lang, "vx/core") + "constdef_new(" +
 		"\n        \"" + cnst.pkgname + "\", // pkgname" +
 		"\n        \"" + cnst.name + "\", // name" +
@@ -5395,7 +5396,9 @@ func LangAppTest(lang *vxlang, project *vxproject, command *vxcommand, pkgprefix
 			"\n" +
 			"\nnamespace AppTest;" +
 			"\n" +
-			"\npublic class AppTest {" +
+			"\npublic class AppTest(Xunit.Abstractions.ITestOutputHelper output) {" +
+			"\n" +
+			"\n  bool isconsole = TestLib.EnableConsole(output);" +
 			"\n"
 		namespaceclose = "" +
 			"\n}" +
@@ -5454,6 +5457,32 @@ func LangTestLib(lang *vxlang) string {
 			"\nnamespace AppTest;" +
 			"\n" +
 			namespaceopen +
+			"\n  public class TestOutputWriter : TextWriter {" +
+			"\n" +
+			"\n    private readonly Xunit.Abstractions.ITestOutputHelper _output;" +
+			"\n" +
+			"\n    public TestOutputWriter(Xunit.Abstractions.ITestOutputHelper output) {" +
+			"\n      _output = output;" +
+			"\n    }" +
+			"\n" +
+			"\n    public override System.Text.Encoding Encoding => System.Text.Encoding.UTF8;" +
+			"\n" +
+			"\n			 public override void WriteLine(int message) {" +
+			"\n				  _output.WriteLine(\"\" + message);" +
+			"\n  		}" +
+			"\n" +
+			"\n  		public override void WriteLine(string? message) {" +
+			"\n  				_output.WriteLine(message);" +
+			"\n  		}" +
+			"\n" +
+			"\n  }" +
+			"\n" +
+			"\n  public static bool EnableConsole(Xunit.Abstractions.ITestOutputHelper output) {" +
+			"\n    TestOutputWriter converter = new TestOutputWriter(output);" +
+			"\n    System.Console.SetOut(converter);" +
+			"\n    return true;" +
+			"\n  }" +
+			"\n" +
 			LangTestLib_run_testcase(lang) +
 			LangTestLib_run_testcaselist(lang) +
 			LangTestLib_run_testdescribe(lang) +

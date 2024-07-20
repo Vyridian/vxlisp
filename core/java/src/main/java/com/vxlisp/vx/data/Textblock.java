@@ -130,7 +130,7 @@ public final class Textblock {
       boolean ischanged = false;
       Class_delim val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_name = val.name();
@@ -427,7 +427,7 @@ public final class Textblock {
       boolean ischanged = false;
       Class_delimlist val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       List<Textblock.Type_delim> listval = new ArrayList<Textblock.Type_delim>(val.vx_listdelim());
@@ -726,7 +726,7 @@ public final class Textblock {
       boolean ischanged = false;
       Class_textblock val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_name = val.name();
@@ -1182,7 +1182,7 @@ public final class Textblock {
       boolean ischanged = false;
       Class_textblocklist val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       List<Textblock.Type_textblock> listval = new ArrayList<Textblock.Type_textblock>(val.vx_listtextblock());
@@ -1269,10 +1269,8 @@ public final class Textblock {
    * Angle Bracket Delimiter
    * {delim}
    */
-  public static class Const_delimbracketangle extends Textblock.Class_delim implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_delimbracketangle {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/data/textblock", // pkgname
         "delimbracketangle", // name
@@ -1292,7 +1290,9 @@ public final class Textblock {
       );
     }
 
-    public static void const_new(Const_delimbracketangle output) {
+    public static void const_new(Textblock.Type_delim output) {
+      Textblock.Class_delim outval = (Textblock.Class_delim)output;
+      outval.vx_p_constdef = constdef();
       Textblock.Type_delim val = Core.f_new(
         Textblock.t_delim,
         Core.vx_new(Core.t_anylist,
@@ -1304,17 +1304,16 @@ public final class Textblock {
                 Core.vx_new_string(">")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_starttext = val.starttext();
-      output.vx_p_endtext = val.endtext();
-      output.vx_p_pos = val.pos();
-      output.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_starttext = val.starttext();
+      outval.vx_p_endtext = val.endtext();
+      outval.vx_p_pos = val.pos();
+      outval.vx_p_delimlist = val.delimlist();
     }
-
 
   }
 
-  public static final Const_delimbracketangle c_delimbracketangle = new Const_delimbracketangle();
+  public static final Textblock.Type_delim c_delimbracketangle = new Textblock.Class_delim();
 
 
   /**
@@ -1322,10 +1321,8 @@ public final class Textblock {
    * Curly Bracket Delimiter
    * {delim}
    */
-  public static class Const_delimbracketcurly extends Textblock.Class_delim implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_delimbracketcurly {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/data/textblock", // pkgname
         "delimbracketcurly", // name
@@ -1345,7 +1342,9 @@ public final class Textblock {
       );
     }
 
-    public static void const_new(Const_delimbracketcurly output) {
+    public static void const_new(Textblock.Type_delim output) {
+      Textblock.Class_delim outval = (Textblock.Class_delim)output;
+      outval.vx_p_constdef = constdef();
       Textblock.Type_delim val = Core.f_new(
         Textblock.t_delim,
         Core.vx_new(Core.t_anylist,
@@ -1357,17 +1356,16 @@ public final class Textblock {
                 Core.vx_new_string("}")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_starttext = val.starttext();
-      output.vx_p_endtext = val.endtext();
-      output.vx_p_pos = val.pos();
-      output.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_starttext = val.starttext();
+      outval.vx_p_endtext = val.endtext();
+      outval.vx_p_pos = val.pos();
+      outval.vx_p_delimlist = val.delimlist();
     }
-
 
   }
 
-  public static final Const_delimbracketcurly c_delimbracketcurly = new Const_delimbracketcurly();
+  public static final Textblock.Type_delim c_delimbracketcurly = new Textblock.Class_delim();
 
 
   /**
@@ -1375,10 +1373,8 @@ public final class Textblock {
    * Square Bracket Delimiter
    * {delim}
    */
-  public static class Const_delimbracketsquare extends Textblock.Class_delim implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_delimbracketsquare {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/data/textblock", // pkgname
         "delimbracketsquare", // name
@@ -1398,7 +1394,9 @@ public final class Textblock {
       );
     }
 
-    public static void const_new(Const_delimbracketsquare output) {
+    public static void const_new(Textblock.Type_delim output) {
+      Textblock.Class_delim outval = (Textblock.Class_delim)output;
+      outval.vx_p_constdef = constdef();
       Textblock.Type_delim val = Core.f_new(
         Textblock.t_delim,
         Core.vx_new(Core.t_anylist,
@@ -1410,17 +1408,16 @@ public final class Textblock {
                 Core.vx_new_string("]")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_starttext = val.starttext();
-      output.vx_p_endtext = val.endtext();
-      output.vx_p_pos = val.pos();
-      output.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_starttext = val.starttext();
+      outval.vx_p_endtext = val.endtext();
+      outval.vx_p_pos = val.pos();
+      outval.vx_p_delimlist = val.delimlist();
     }
-
 
   }
 
-  public static final Const_delimbracketsquare c_delimbracketsquare = new Const_delimbracketsquare();
+  public static final Textblock.Type_delim c_delimbracketsquare = new Textblock.Class_delim();
 
 
   /**
@@ -1428,10 +1425,8 @@ public final class Textblock {
    * A placeholder delimiter used to mark the close of whatever is the current delimiter.
    * {delim}
    */
-  public static class Const_delimclose extends Textblock.Class_delim implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_delimclose {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/data/textblock", // pkgname
         "delimclose", // name
@@ -1451,7 +1446,9 @@ public final class Textblock {
       );
     }
 
-    public static void const_new(Const_delimclose output) {
+    public static void const_new(Textblock.Type_delim output) {
+      Textblock.Class_delim outval = (Textblock.Class_delim)output;
+      outval.vx_p_constdef = constdef();
       Textblock.Type_delim val = Core.f_new(
         Textblock.t_delim,
         Core.vx_new(Core.t_anylist,
@@ -1459,17 +1456,16 @@ public final class Textblock {
                 Core.vx_new_string("delimclose")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_starttext = val.starttext();
-      output.vx_p_endtext = val.endtext();
-      output.vx_p_pos = val.pos();
-      output.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_starttext = val.starttext();
+      outval.vx_p_endtext = val.endtext();
+      outval.vx_p_pos = val.pos();
+      outval.vx_p_delimlist = val.delimlist();
     }
-
 
   }
 
-  public static final Const_delimclose c_delimclose = new Const_delimclose();
+  public static final Textblock.Type_delim c_delimclose = new Textblock.Class_delim();
 
 
   /**
@@ -1477,10 +1473,8 @@ public final class Textblock {
    * A placeholder delimiter used to mark the closing of whatever is the current delimiter.
    * {delim}
    */
-  public static class Const_delimclosing extends Textblock.Class_delim implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_delimclosing {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/data/textblock", // pkgname
         "delimclosing", // name
@@ -1500,7 +1494,9 @@ public final class Textblock {
       );
     }
 
-    public static void const_new(Const_delimclosing output) {
+    public static void const_new(Textblock.Type_delim output) {
+      Textblock.Class_delim outval = (Textblock.Class_delim)output;
+      outval.vx_p_constdef = constdef();
       Textblock.Type_delim val = Core.f_new(
         Textblock.t_delim,
         Core.vx_new(Core.t_anylist,
@@ -1508,17 +1504,16 @@ public final class Textblock {
                 Core.vx_new_string("delimclosing")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_starttext = val.starttext();
-      output.vx_p_endtext = val.endtext();
-      output.vx_p_pos = val.pos();
-      output.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_starttext = val.starttext();
+      outval.vx_p_endtext = val.endtext();
+      outval.vx_p_pos = val.pos();
+      outval.vx_p_delimlist = val.delimlist();
     }
-
 
   }
 
-  public static final Const_delimclosing c_delimclosing = new Const_delimclosing();
+  public static final Textblock.Type_delim c_delimclosing = new Textblock.Class_delim();
 
 
   /**
@@ -1526,10 +1521,8 @@ public final class Textblock {
    * Comma Delimiter
    * {delim}
    */
-  public static class Const_delimcomma extends Textblock.Class_delim implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_delimcomma {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/data/textblock", // pkgname
         "delimcomma", // name
@@ -1549,7 +1542,9 @@ public final class Textblock {
       );
     }
 
-    public static void const_new(Const_delimcomma output) {
+    public static void const_new(Textblock.Type_delim output) {
+      Textblock.Class_delim outval = (Textblock.Class_delim)output;
+      outval.vx_p_constdef = constdef();
       Textblock.Type_delim val = Core.f_new(
         Textblock.t_delim,
         Core.vx_new(Core.t_anylist,
@@ -1559,17 +1554,16 @@ public final class Textblock {
                 Core.vx_new_string(",")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_starttext = val.starttext();
-      output.vx_p_endtext = val.endtext();
-      output.vx_p_pos = val.pos();
-      output.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_starttext = val.starttext();
+      outval.vx_p_endtext = val.endtext();
+      outval.vx_p_pos = val.pos();
+      outval.vx_p_delimlist = val.delimlist();
     }
-
 
   }
 
-  public static final Const_delimcomma c_delimcomma = new Const_delimcomma();
+  public static final Textblock.Type_delim c_delimcomma = new Textblock.Class_delim();
 
 
   /**
@@ -1577,10 +1571,8 @@ public final class Textblock {
    * Comment Delimiter
    * {delim}
    */
-  public static class Const_delimcomment extends Textblock.Class_delim implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_delimcomment {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/data/textblock", // pkgname
         "delimcomment", // name
@@ -1600,7 +1592,9 @@ public final class Textblock {
       );
     }
 
-    public static void const_new(Const_delimcomment output) {
+    public static void const_new(Textblock.Type_delim output) {
+      Textblock.Class_delim outval = (Textblock.Class_delim)output;
+      outval.vx_p_constdef = constdef();
       Textblock.Type_delim val = Core.f_new(
         Textblock.t_delim,
         Core.vx_new(Core.t_anylist,
@@ -1612,17 +1606,16 @@ public final class Textblock {
                 Core.vx_new_string("\n")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_starttext = val.starttext();
-      output.vx_p_endtext = val.endtext();
-      output.vx_p_pos = val.pos();
-      output.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_starttext = val.starttext();
+      outval.vx_p_endtext = val.endtext();
+      outval.vx_p_pos = val.pos();
+      outval.vx_p_delimlist = val.delimlist();
     }
-
 
   }
 
-  public static final Const_delimcomment c_delimcomment = new Const_delimcomment();
+  public static final Textblock.Type_delim c_delimcomment = new Textblock.Class_delim();
 
 
   /**
@@ -1630,10 +1623,8 @@ public final class Textblock {
    * Block Comment Delimiter
    * {delim}
    */
-  public static class Const_delimcommentblock extends Textblock.Class_delim implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_delimcommentblock {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/data/textblock", // pkgname
         "delimcommentblock", // name
@@ -1653,7 +1644,9 @@ public final class Textblock {
       );
     }
 
-    public static void const_new(Const_delimcommentblock output) {
+    public static void const_new(Textblock.Type_delim output) {
+      Textblock.Class_delim outval = (Textblock.Class_delim)output;
+      outval.vx_p_constdef = constdef();
       Textblock.Type_delim val = Core.f_new(
         Textblock.t_delim,
         Core.vx_new(Core.t_anylist,
@@ -1665,17 +1658,16 @@ public final class Textblock {
                 Core.vx_new_string("*/")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_starttext = val.starttext();
-      output.vx_p_endtext = val.endtext();
-      output.vx_p_pos = val.pos();
-      output.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_starttext = val.starttext();
+      outval.vx_p_endtext = val.endtext();
+      outval.vx_p_pos = val.pos();
+      outval.vx_p_delimlist = val.delimlist();
     }
-
 
   }
 
-  public static final Const_delimcommentblock c_delimcommentblock = new Const_delimcommentblock();
+  public static final Textblock.Type_delim c_delimcommentblock = new Textblock.Class_delim();
 
 
   /**
@@ -1683,10 +1675,8 @@ public final class Textblock {
    * New Line Delimiter
    * {delim}
    */
-  public static class Const_delimline extends Textblock.Class_delim implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_delimline {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/data/textblock", // pkgname
         "delimline", // name
@@ -1706,7 +1696,9 @@ public final class Textblock {
       );
     }
 
-    public static void const_new(Const_delimline output) {
+    public static void const_new(Textblock.Type_delim output) {
+      Textblock.Class_delim outval = (Textblock.Class_delim)output;
+      outval.vx_p_constdef = constdef();
       Textblock.Type_delim val = Core.f_new(
         Textblock.t_delim,
         Core.vx_new(Core.t_anylist,
@@ -1716,17 +1708,16 @@ public final class Textblock {
                 Core.vx_new_string("\n")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_starttext = val.starttext();
-      output.vx_p_endtext = val.endtext();
-      output.vx_p_pos = val.pos();
-      output.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_starttext = val.starttext();
+      outval.vx_p_endtext = val.endtext();
+      outval.vx_p_pos = val.pos();
+      outval.vx_p_delimlist = val.delimlist();
     }
-
 
   }
 
-  public static final Const_delimline c_delimline = new Const_delimline();
+  public static final Textblock.Type_delim c_delimline = new Textblock.Class_delim();
 
 
   /**
@@ -1734,10 +1725,8 @@ public final class Textblock {
    * A delimiter used for test suite
    * {delimlist}
    */
-  public static class Const_delimlisttest1 extends Textblock.Class_delimlist implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_delimlisttest1 {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/data/textblock", // pkgname
         "delimlisttest1", // name
@@ -1757,20 +1746,21 @@ public final class Textblock {
       );
     }
 
-    public static void const_new(Const_delimlisttest1 output) {
+    public static void const_new(Textblock.Type_delimlist output) {
+      Textblock.Class_delimlist outval = (Textblock.Class_delimlist)output;
+      outval.vx_p_constdef = constdef();
       Textblock.Type_delimlist val = Core.f_new(
         Textblock.t_delimlist,
         Core.vx_new(Core.t_anylist,
                 Textblock.c_delimtest2
         )
       );
-      output.vx_p_list = val.vx_listdelim();
+      outval.vx_p_list = val.vx_listdelim();
     }
-
 
   }
 
-  public static final Const_delimlisttest1 c_delimlisttest1 = new Const_delimlisttest1();
+  public static final Textblock.Type_delimlist c_delimlisttest1 = new Textblock.Class_delimlist();
 
 
   /**
@@ -1778,10 +1768,8 @@ public final class Textblock {
    * A delimiter used for test suite
    * {delimlist}
    */
-  public static class Const_delimlisttest2 extends Textblock.Class_delimlist implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_delimlisttest2 {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/data/textblock", // pkgname
         "delimlisttest2", // name
@@ -1801,7 +1789,9 @@ public final class Textblock {
       );
     }
 
-    public static void const_new(Const_delimlisttest2 output) {
+    public static void const_new(Textblock.Type_delimlist output) {
+      Textblock.Class_delimlist outval = (Textblock.Class_delimlist)output;
+      outval.vx_p_constdef = constdef();
       Textblock.Type_delimlist val = Core.f_new(
         Textblock.t_delimlist,
         Core.vx_new(Core.t_anylist,
@@ -1809,13 +1799,12 @@ public final class Textblock {
                 Textblock.c_delimtest3
         )
       );
-      output.vx_p_list = val.vx_listdelim();
+      outval.vx_p_list = val.vx_listdelim();
     }
-
 
   }
 
-  public static final Const_delimlisttest2 c_delimlisttest2 = new Const_delimlisttest2();
+  public static final Textblock.Type_delimlist c_delimlisttest2 = new Textblock.Class_delimlist();
 
 
   /**
@@ -1823,10 +1812,8 @@ public final class Textblock {
    * A delimiter used for test suite
    * {delimlist}
    */
-  public static class Const_delimlisttest3 extends Textblock.Class_delimlist implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_delimlisttest3 {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/data/textblock", // pkgname
         "delimlisttest3", // name
@@ -1846,7 +1833,9 @@ public final class Textblock {
       );
     }
 
-    public static void const_new(Const_delimlisttest3 output) {
+    public static void const_new(Textblock.Type_delimlist output) {
+      Textblock.Class_delimlist outval = (Textblock.Class_delimlist)output;
+      outval.vx_p_constdef = constdef();
       Textblock.Type_delimlist val = Core.f_new(
         Textblock.t_delimlist,
         Core.vx_new(Core.t_anylist,
@@ -1854,13 +1843,12 @@ public final class Textblock {
                 Textblock.c_delimwhitespace
         )
       );
-      output.vx_p_list = val.vx_listdelim();
+      outval.vx_p_list = val.vx_listdelim();
     }
-
 
   }
 
-  public static final Const_delimlisttest3 c_delimlisttest3 = new Const_delimlisttest3();
+  public static final Textblock.Type_delimlist c_delimlisttest3 = new Textblock.Class_delimlist();
 
 
   /**
@@ -1868,10 +1856,8 @@ public final class Textblock {
    * Placeholder for delimited non-whitespace
    * {delim}
    */
-  public static class Const_delimnonwhitespace extends Textblock.Class_delim implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_delimnonwhitespace {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/data/textblock", // pkgname
         "delimnonwhitespace", // name
@@ -1891,7 +1877,9 @@ public final class Textblock {
       );
     }
 
-    public static void const_new(Const_delimnonwhitespace output) {
+    public static void const_new(Textblock.Type_delim output) {
+      Textblock.Class_delim outval = (Textblock.Class_delim)output;
+      outval.vx_p_constdef = constdef();
       Textblock.Type_delim val = Core.f_new(
         Textblock.t_delim,
         Core.vx_new(Core.t_anylist,
@@ -1903,17 +1891,16 @@ public final class Textblock {
                 Core.vx_new_string(":whitespace")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_starttext = val.starttext();
-      output.vx_p_endtext = val.endtext();
-      output.vx_p_pos = val.pos();
-      output.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_starttext = val.starttext();
+      outval.vx_p_endtext = val.endtext();
+      outval.vx_p_pos = val.pos();
+      outval.vx_p_delimlist = val.delimlist();
     }
-
 
   }
 
-  public static final Const_delimnonwhitespace c_delimnonwhitespace = new Const_delimnonwhitespace();
+  public static final Textblock.Type_delim c_delimnonwhitespace = new Textblock.Class_delim();
 
 
   /**
@@ -1921,10 +1908,8 @@ public final class Textblock {
    * Parenthesis Delimiter
    * {delim}
    */
-  public static class Const_delimparen extends Textblock.Class_delim implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_delimparen {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/data/textblock", // pkgname
         "delimparen", // name
@@ -1944,7 +1929,9 @@ public final class Textblock {
       );
     }
 
-    public static void const_new(Const_delimparen output) {
+    public static void const_new(Textblock.Type_delim output) {
+      Textblock.Class_delim outval = (Textblock.Class_delim)output;
+      outval.vx_p_constdef = constdef();
       Textblock.Type_delim val = Core.f_new(
         Textblock.t_delim,
         Core.vx_new(Core.t_anylist,
@@ -1956,17 +1943,16 @@ public final class Textblock {
                 Core.vx_new_string(")")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_starttext = val.starttext();
-      output.vx_p_endtext = val.endtext();
-      output.vx_p_pos = val.pos();
-      output.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_starttext = val.starttext();
+      outval.vx_p_endtext = val.endtext();
+      outval.vx_p_pos = val.pos();
+      outval.vx_p_delimlist = val.delimlist();
     }
-
 
   }
 
-  public static final Const_delimparen c_delimparen = new Const_delimparen();
+  public static final Textblock.Type_delim c_delimparen = new Textblock.Class_delim();
 
 
   /**
@@ -1974,10 +1960,8 @@ public final class Textblock {
    * Quote Delimiter
    * {delim}
    */
-  public static class Const_delimquote extends Textblock.Class_delim implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_delimquote {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/data/textblock", // pkgname
         "delimquote", // name
@@ -1997,7 +1981,9 @@ public final class Textblock {
       );
     }
 
-    public static void const_new(Const_delimquote output) {
+    public static void const_new(Textblock.Type_delim output) {
+      Textblock.Class_delim outval = (Textblock.Class_delim)output;
+      outval.vx_p_constdef = constdef();
       Textblock.Type_delim val = Core.f_new(
         Textblock.t_delim,
         Core.vx_new(Core.t_anylist,
@@ -2009,17 +1995,16 @@ public final class Textblock {
                 Core.c_quote
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_starttext = val.starttext();
-      output.vx_p_endtext = val.endtext();
-      output.vx_p_pos = val.pos();
-      output.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_starttext = val.starttext();
+      outval.vx_p_endtext = val.endtext();
+      outval.vx_p_pos = val.pos();
+      outval.vx_p_delimlist = val.delimlist();
     }
-
 
   }
 
-  public static final Const_delimquote c_delimquote = new Const_delimquote();
+  public static final Textblock.Type_delim c_delimquote = new Textblock.Class_delim();
 
 
   /**
@@ -2027,10 +2012,8 @@ public final class Textblock {
    * Block Quote Delimiter
    * {delim}
    */
-  public static class Const_delimquoteblock extends Textblock.Class_delim implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_delimquoteblock {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/data/textblock", // pkgname
         "delimquoteblock", // name
@@ -2050,7 +2033,9 @@ public final class Textblock {
       );
     }
 
-    public static void const_new(Const_delimquoteblock output) {
+    public static void const_new(Textblock.Type_delim output) {
+      Textblock.Class_delim outval = (Textblock.Class_delim)output;
+      outval.vx_p_constdef = constdef();
       Textblock.Type_delim val = Core.f_new(
         Textblock.t_delim,
         Core.vx_new(Core.t_anylist,
@@ -2062,17 +2047,16 @@ public final class Textblock {
                 Core.vx_new_string("`")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_starttext = val.starttext();
-      output.vx_p_endtext = val.endtext();
-      output.vx_p_pos = val.pos();
-      output.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_starttext = val.starttext();
+      outval.vx_p_endtext = val.endtext();
+      outval.vx_p_pos = val.pos();
+      outval.vx_p_delimlist = val.delimlist();
     }
-
 
   }
 
-  public static final Const_delimquoteblock c_delimquoteblock = new Const_delimquoteblock();
+  public static final Textblock.Type_delim c_delimquoteblock = new Textblock.Class_delim();
 
 
   /**
@@ -2080,10 +2064,8 @@ public final class Textblock {
    * Space Delimiter
    * {delim}
    */
-  public static class Const_delimspace extends Textblock.Class_delim implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_delimspace {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/data/textblock", // pkgname
         "delimspace", // name
@@ -2103,7 +2085,9 @@ public final class Textblock {
       );
     }
 
-    public static void const_new(Const_delimspace output) {
+    public static void const_new(Textblock.Type_delim output) {
+      Textblock.Class_delim outval = (Textblock.Class_delim)output;
+      outval.vx_p_constdef = constdef();
       Textblock.Type_delim val = Core.f_new(
         Textblock.t_delim,
         Core.vx_new(Core.t_anylist,
@@ -2115,17 +2099,16 @@ public final class Textblock {
                 Core.vx_new_string(" ")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_starttext = val.starttext();
-      output.vx_p_endtext = val.endtext();
-      output.vx_p_pos = val.pos();
-      output.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_starttext = val.starttext();
+      outval.vx_p_endtext = val.endtext();
+      outval.vx_p_pos = val.pos();
+      outval.vx_p_delimlist = val.delimlist();
     }
-
 
   }
 
-  public static final Const_delimspace c_delimspace = new Const_delimspace();
+  public static final Textblock.Type_delim c_delimspace = new Textblock.Class_delim();
 
 
   /**
@@ -2133,10 +2116,8 @@ public final class Textblock {
    * A delimiter used for test suite
    * {delim}
    */
-  public static class Const_delimtest1 extends Textblock.Class_delim implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_delimtest1 {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/data/textblock", // pkgname
         "delimtest1", // name
@@ -2156,7 +2137,9 @@ public final class Textblock {
       );
     }
 
-    public static void const_new(Const_delimtest1 output) {
+    public static void const_new(Textblock.Type_delim output) {
+      Textblock.Class_delim outval = (Textblock.Class_delim)output;
+      outval.vx_p_constdef = constdef();
       Textblock.Type_delim val = Core.f_new(
         Textblock.t_delim,
         Core.vx_new(Core.t_anylist,
@@ -2164,17 +2147,16 @@ public final class Textblock {
                 Textblock.c_delimlisttest1
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_starttext = val.starttext();
-      output.vx_p_endtext = val.endtext();
-      output.vx_p_pos = val.pos();
-      output.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_starttext = val.starttext();
+      outval.vx_p_endtext = val.endtext();
+      outval.vx_p_pos = val.pos();
+      outval.vx_p_delimlist = val.delimlist();
     }
-
 
   }
 
-  public static final Const_delimtest1 c_delimtest1 = new Const_delimtest1();
+  public static final Textblock.Type_delim c_delimtest1 = new Textblock.Class_delim();
 
 
   /**
@@ -2182,10 +2164,8 @@ public final class Textblock {
    * A delimiter used for test suite
    * {delim}
    */
-  public static class Const_delimtest2 extends Textblock.Class_delim implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_delimtest2 {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/data/textblock", // pkgname
         "delimtest2", // name
@@ -2205,7 +2185,9 @@ public final class Textblock {
       );
     }
 
-    public static void const_new(Const_delimtest2 output) {
+    public static void const_new(Textblock.Type_delim output) {
+      Textblock.Class_delim outval = (Textblock.Class_delim)output;
+      outval.vx_p_constdef = constdef();
       Textblock.Type_delim val = Core.f_copy(
         Textblock.c_delimbracketangle,
         Core.vx_new(Core.t_anylist,
@@ -2213,17 +2195,16 @@ public final class Textblock {
                 Textblock.c_delimlisttest2
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_starttext = val.starttext();
-      output.vx_p_endtext = val.endtext();
-      output.vx_p_pos = val.pos();
-      output.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_starttext = val.starttext();
+      outval.vx_p_endtext = val.endtext();
+      outval.vx_p_pos = val.pos();
+      outval.vx_p_delimlist = val.delimlist();
     }
-
 
   }
 
-  public static final Const_delimtest2 c_delimtest2 = new Const_delimtest2();
+  public static final Textblock.Type_delim c_delimtest2 = new Textblock.Class_delim();
 
 
   /**
@@ -2231,10 +2212,8 @@ public final class Textblock {
    * A delimiter used for test suite
    * {delim}
    */
-  public static class Const_delimtest3 extends Textblock.Class_delim implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_delimtest3 {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/data/textblock", // pkgname
         "delimtest3", // name
@@ -2254,7 +2233,9 @@ public final class Textblock {
       );
     }
 
-    public static void const_new(Const_delimtest3 output) {
+    public static void const_new(Textblock.Type_delim output) {
+      Textblock.Class_delim outval = (Textblock.Class_delim)output;
+      outval.vx_p_constdef = constdef();
       Textblock.Type_delim val = Core.f_copy(
         Textblock.c_delimbracketcurly,
         Core.vx_new(Core.t_anylist,
@@ -2262,17 +2243,16 @@ public final class Textblock {
                 Textblock.c_delimlisttest3
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_starttext = val.starttext();
-      output.vx_p_endtext = val.endtext();
-      output.vx_p_pos = val.pos();
-      output.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_starttext = val.starttext();
+      outval.vx_p_endtext = val.endtext();
+      outval.vx_p_pos = val.pos();
+      outval.vx_p_delimlist = val.delimlist();
     }
-
 
   }
 
-  public static final Const_delimtest3 c_delimtest3 = new Const_delimtest3();
+  public static final Textblock.Type_delim c_delimtest3 = new Textblock.Class_delim();
 
 
   /**
@@ -2280,10 +2260,8 @@ public final class Textblock {
    * Placeholder for delimited text
    * {delim}
    */
-  public static class Const_delimtext extends Textblock.Class_delim implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_delimtext {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/data/textblock", // pkgname
         "delimtext", // name
@@ -2303,7 +2281,9 @@ public final class Textblock {
       );
     }
 
-    public static void const_new(Const_delimtext output) {
+    public static void const_new(Textblock.Type_delim output) {
+      Textblock.Class_delim outval = (Textblock.Class_delim)output;
+      outval.vx_p_constdef = constdef();
       Textblock.Type_delim val = Core.f_new(
         Textblock.t_delim,
         Core.vx_new(Core.t_anylist,
@@ -2311,17 +2291,16 @@ public final class Textblock {
                 Core.vx_new_string("delimtext")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_starttext = val.starttext();
-      output.vx_p_endtext = val.endtext();
-      output.vx_p_pos = val.pos();
-      output.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_starttext = val.starttext();
+      outval.vx_p_endtext = val.endtext();
+      outval.vx_p_pos = val.pos();
+      outval.vx_p_delimlist = val.delimlist();
     }
-
 
   }
 
-  public static final Const_delimtext c_delimtext = new Const_delimtext();
+  public static final Textblock.Type_delim c_delimtext = new Textblock.Class_delim();
 
 
   /**
@@ -2329,10 +2308,8 @@ public final class Textblock {
    * Placeholder for delimited whitespace
    * {delim}
    */
-  public static class Const_delimwhitespace extends Textblock.Class_delim implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_delimwhitespace {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/data/textblock", // pkgname
         "delimwhitespace", // name
@@ -2352,7 +2329,9 @@ public final class Textblock {
       );
     }
 
-    public static void const_new(Const_delimwhitespace output) {
+    public static void const_new(Textblock.Type_delim output) {
+      Textblock.Class_delim outval = (Textblock.Class_delim)output;
+      outval.vx_p_constdef = constdef();
       Textblock.Type_delim val = Core.f_new(
         Textblock.t_delim,
         Core.vx_new(Core.t_anylist,
@@ -2362,17 +2341,16 @@ public final class Textblock {
                 Core.vx_new_string(":whitespace")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_starttext = val.starttext();
-      output.vx_p_endtext = val.endtext();
-      output.vx_p_pos = val.pos();
-      output.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_starttext = val.starttext();
+      outval.vx_p_endtext = val.endtext();
+      outval.vx_p_pos = val.pos();
+      outval.vx_p_delimlist = val.delimlist();
     }
-
 
   }
 
-  public static final Const_delimwhitespace c_delimwhitespace = new Const_delimwhitespace();
+  public static final Textblock.Type_delim c_delimwhitespace = new Textblock.Class_delim();
 
   /**
    * @function children_from_textblock

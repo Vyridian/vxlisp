@@ -148,7 +148,7 @@ public final class File {
       boolean ischanged = false;
       Class_file val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_name = val.name();
@@ -407,7 +407,7 @@ public final class File {
       boolean ischanged = false;
       Class_fileformat val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
@@ -511,7 +511,7 @@ public final class File {
       boolean ischanged = false;
       Class_filelist val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       List<File.Type_file> listval = new ArrayList<File.Type_file>(val.vx_listfile());

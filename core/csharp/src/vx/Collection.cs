@@ -165,10 +165,13 @@ public static class Collection {
     } else if (istart > iend) {
     } else if (istart > maxlen) {
     } else {
-      if (iend >= maxlen) {
+      if (iend > maxlen) {
         iend = maxlen;
       }
-      List<Vx.Core.Type_any> listsub = listval.GetRange(istart - 1, iend);
+      List<Vx.Core.Type_any> listsub = listval.GetRange(
+        istart - 1,
+        iend - istart + 1
+      );
       output = Vx.Core.vx_new(generic_list_1, listsub);
     }
     return output;

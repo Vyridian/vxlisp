@@ -51,7 +51,7 @@ public static class Db {
       bool ischanged = false;
       Class_db val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_dbid = val.dbid();
@@ -279,7 +279,7 @@ public static class Db {
       bool ischanged = false;
       Class_dbcell val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_dbcellid = val.dbcellid();
@@ -536,7 +536,7 @@ public static class Db {
       Vx.Data.Db.Class_dbcellmap map = this;
       string skey = key.vx_string();
       Vx.Core.Map<string, Vx.Data.Db.Type_dbcell> mapval = map.vx_p_map;
-      output = mapval.getOrDefault(skey, Vx.Data.Db.e_dbcell);
+      output = mapval.getOrElse(skey, Vx.Data.Db.e_dbcell);
       return output;
     }
 
@@ -580,7 +580,7 @@ public static class Db {
       bool ischanged = false;
       Class_dbcellmap val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Data.Db.Type_dbcell> mapval = new Vx.Core.LinkedHashMap<string, Vx.Data.Db.Type_dbcell>(val.vx_mapdbcell());
@@ -756,7 +756,7 @@ public static class Db {
       bool ischanged = false;
       Class_dbfield val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_dbfieldid = val.dbfieldid();
@@ -967,7 +967,7 @@ public static class Db {
       Vx.Data.Db.Class_dbfieldmap map = this;
       string skey = key.vx_string();
       Vx.Core.Map<string, Vx.Data.Db.Type_dbfield> mapval = map.vx_p_map;
-      output = mapval.getOrDefault(skey, Vx.Data.Db.e_dbfield);
+      output = mapval.getOrElse(skey, Vx.Data.Db.e_dbfield);
       return output;
     }
 
@@ -1011,7 +1011,7 @@ public static class Db {
       bool ischanged = false;
       Class_dbfieldmap val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Data.Db.Type_dbfield> mapval = new Vx.Core.LinkedHashMap<string, Vx.Data.Db.Type_dbfield>(val.vx_mapdbfield());
@@ -1129,7 +1129,7 @@ public static class Db {
       bool ischanged = false;
       Class_dbid val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
@@ -1233,7 +1233,7 @@ public static class Db {
       bool ischanged = false;
       Class_dblink val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Data.Db.Type_dbid vx_p_fromid = val.fromid();
@@ -1423,7 +1423,7 @@ public static class Db {
       bool ischanged = false;
       Class_dblinklist val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Data.Db.Type_dblink> listval = new List<Vx.Data.Db.Type_dblink>(val.vx_listdblink());
@@ -1560,7 +1560,7 @@ public static class Db {
       bool ischanged = false;
       Class_dbnode val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Data.Db.Type_dbid vx_p_dbid = val.dbid();
@@ -1808,7 +1808,7 @@ public static class Db {
       bool ischanged = false;
       Class_dbnote val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Data.Db.Type_dbid vx_p_dbid = val.dbid();
@@ -2113,7 +2113,7 @@ public static class Db {
       bool ischanged = false;
       Class_dbtable val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_dbtableid = val.dbtableid();
@@ -2425,7 +2425,7 @@ public static class Db {
       bool ischanged = false;
       Class_dbvalue val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Data.Db.Type_dbid vx_p_dbid = val.dbid();

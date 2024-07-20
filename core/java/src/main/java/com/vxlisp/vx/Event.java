@@ -147,7 +147,7 @@ public final class Event {
       boolean ischanged = false;
       Class_event val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_name = val.name();
@@ -466,7 +466,7 @@ public final class Event {
       boolean ischanged = false;
       Class_eventlist val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       List<Event.Type_event> listval = new ArrayList<Event.Type_event>(val.vx_listevent());
@@ -650,7 +650,7 @@ public final class Event {
       boolean ischanged = false;
       Class_eventmap val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Map<String, Event.Type_event> mapval = new LinkedHashMap<String, Event.Type_event>(val.vx_mapevent());
@@ -761,10 +761,8 @@ public final class Event {
    * Change Event
    * {event}
    */
-  public static class Const_event_change extends Event.Class_event implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_event_change {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/event", // pkgname
         "event-change", // name
@@ -784,7 +782,9 @@ public final class Event {
       );
     }
 
-    public static void const_new(Const_event_change output) {
+    public static void const_new(Event.Type_event output) {
+      Event.Class_event outval = (Event.Class_event)output;
+      outval.vx_p_constdef = constdef();
       Event.Type_event val = Core.f_new(
         Event.t_event,
         Core.vx_new(Core.t_anylist,
@@ -792,18 +792,17 @@ public final class Event {
                 Core.vx_new_string("change")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_from = val.from();
-      output.vx_p_to = val.to();
-      output.vx_p_datamap = val.datamap();
-      output.vx_p_event_from_event = val.event_from_event();
-      output.vx_p_event_from_event_async = val.event_from_event_async();
+      outval.vx_p_name = val.name();
+      outval.vx_p_from = val.from();
+      outval.vx_p_to = val.to();
+      outval.vx_p_datamap = val.datamap();
+      outval.vx_p_event_from_event = val.event_from_event();
+      outval.vx_p_event_from_event_async = val.event_from_event_async();
     }
-
 
   }
 
-  public static final Const_event_change c_event_change = new Const_event_change();
+  public static final Event.Type_event c_event_change = new Event.Class_event();
 
 
   /**
@@ -811,10 +810,8 @@ public final class Event {
    * Click Event
    * {event}
    */
-  public static class Const_event_click extends Event.Class_event implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_event_click {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/event", // pkgname
         "event-click", // name
@@ -834,7 +831,9 @@ public final class Event {
       );
     }
 
-    public static void const_new(Const_event_click output) {
+    public static void const_new(Event.Type_event output) {
+      Event.Class_event outval = (Event.Class_event)output;
+      outval.vx_p_constdef = constdef();
       Event.Type_event val = Core.f_new(
         Event.t_event,
         Core.vx_new(Core.t_anylist,
@@ -842,18 +841,17 @@ public final class Event {
                 Core.vx_new_string("click")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_from = val.from();
-      output.vx_p_to = val.to();
-      output.vx_p_datamap = val.datamap();
-      output.vx_p_event_from_event = val.event_from_event();
-      output.vx_p_event_from_event_async = val.event_from_event_async();
+      outval.vx_p_name = val.name();
+      outval.vx_p_from = val.from();
+      outval.vx_p_to = val.to();
+      outval.vx_p_datamap = val.datamap();
+      outval.vx_p_event_from_event = val.event_from_event();
+      outval.vx_p_event_from_event_async = val.event_from_event_async();
     }
-
 
   }
 
-  public static final Const_event_click c_event_click = new Const_event_click();
+  public static final Event.Type_event c_event_click = new Event.Class_event();
 
 
   /**
@@ -861,10 +859,8 @@ public final class Event {
    * Move Event
    * {event}
    */
-  public static class Const_event_move extends Event.Class_event implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_event_move {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/event", // pkgname
         "event-move", // name
@@ -884,7 +880,9 @@ public final class Event {
       );
     }
 
-    public static void const_new(Const_event_move output) {
+    public static void const_new(Event.Type_event output) {
+      Event.Class_event outval = (Event.Class_event)output;
+      outval.vx_p_constdef = constdef();
       Event.Type_event val = Core.f_new(
         Event.t_event,
         Core.vx_new(Core.t_anylist,
@@ -892,18 +890,17 @@ public final class Event {
                 Core.vx_new_string("move")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_from = val.from();
-      output.vx_p_to = val.to();
-      output.vx_p_datamap = val.datamap();
-      output.vx_p_event_from_event = val.event_from_event();
-      output.vx_p_event_from_event_async = val.event_from_event_async();
+      outval.vx_p_name = val.name();
+      outval.vx_p_from = val.from();
+      outval.vx_p_to = val.to();
+      outval.vx_p_datamap = val.datamap();
+      outval.vx_p_event_from_event = val.event_from_event();
+      outval.vx_p_event_from_event_async = val.event_from_event_async();
     }
-
 
   }
 
-  public static final Const_event_move c_event_move = new Const_event_move();
+  public static final Event.Type_event c_event_move = new Event.Class_event();
 
 
   /**
@@ -911,10 +908,8 @@ public final class Event {
    * Move Event
    * {event}
    */
-  public static class Const_event_select extends Event.Class_event implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_event_select {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/event", // pkgname
         "event-select", // name
@@ -934,7 +929,9 @@ public final class Event {
       );
     }
 
-    public static void const_new(Const_event_select output) {
+    public static void const_new(Event.Type_event output) {
+      Event.Class_event outval = (Event.Class_event)output;
+      outval.vx_p_constdef = constdef();
       Event.Type_event val = Core.f_new(
         Event.t_event,
         Core.vx_new(Core.t_anylist,
@@ -942,18 +939,17 @@ public final class Event {
                 Core.vx_new_string("move")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_from = val.from();
-      output.vx_p_to = val.to();
-      output.vx_p_datamap = val.datamap();
-      output.vx_p_event_from_event = val.event_from_event();
-      output.vx_p_event_from_event_async = val.event_from_event_async();
+      outval.vx_p_name = val.name();
+      outval.vx_p_from = val.from();
+      outval.vx_p_to = val.to();
+      outval.vx_p_datamap = val.datamap();
+      outval.vx_p_event_from_event = val.event_from_event();
+      outval.vx_p_event_from_event_async = val.event_from_event_async();
     }
-
 
   }
 
-  public static final Const_event_select c_event_select = new Const_event_select();
+  public static final Event.Type_event c_event_select = new Event.Class_event();
 
   /**
    * @function any_from_from_event

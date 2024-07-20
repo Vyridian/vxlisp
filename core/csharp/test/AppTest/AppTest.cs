@@ -7,7 +7,9 @@ using Xunit;
 
 namespace AppTest;
 
-public class AppTest {
+public class AppTest(Xunit.Abstractions.ITestOutputHelper output) {
+
+  bool isconsole = TestLib.EnableConsole(output);
 
   public static Vx.Core.Type_anylist arglist = Vx.Core.e_anylist;
   public static Vx.Core.Type_context context = Vx.Translation.En.f_context_test(arglist);

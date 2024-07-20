@@ -67,7 +67,7 @@ public final class Db {
       boolean ischanged = false;
       Class_db val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_dbid = val.dbid();
@@ -316,7 +316,7 @@ public final class Db {
       boolean ischanged = false;
       Class_dbcell val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_dbcellid = val.dbcellid();
@@ -646,7 +646,7 @@ public final class Db {
       boolean ischanged = false;
       Class_dbcellmap val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Map<String, Db.Type_dbcell> mapval = new LinkedHashMap<String, Db.Type_dbcell>(val.vx_mapdbcell());
@@ -841,7 +841,7 @@ public final class Db {
       boolean ischanged = false;
       Class_dbfield val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_dbfieldid = val.dbfieldid();
@@ -1121,7 +1121,7 @@ public final class Db {
       boolean ischanged = false;
       Class_dbfieldmap val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Map<String, Db.Type_dbfield> mapval = new LinkedHashMap<String, Db.Type_dbfield>(val.vx_mapdbfield());
@@ -1253,7 +1253,7 @@ public final class Db {
       boolean ischanged = false;
       Class_dbid val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
@@ -1370,7 +1370,7 @@ public final class Db {
       boolean ischanged = false;
       Class_dblink val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Db.Type_dbid vx_p_fromid = val.fromid();
@@ -1580,7 +1580,7 @@ public final class Db {
       boolean ischanged = false;
       Class_dblinklist val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       List<Db.Type_dblink> listval = new ArrayList<Db.Type_dblink>(val.vx_listdblink());
@@ -1735,7 +1735,7 @@ public final class Db {
       boolean ischanged = false;
       Class_dbnode val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Db.Type_dbid vx_p_dbid = val.dbid();
@@ -2006,7 +2006,7 @@ public final class Db {
       boolean ischanged = false;
       Class_dbnote val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Db.Type_dbid vx_p_dbid = val.dbid();
@@ -2339,7 +2339,7 @@ public final class Db {
       boolean ischanged = false;
       Class_dbtable val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_dbtableid = val.dbtableid();
@@ -2679,7 +2679,7 @@ public final class Db {
       boolean ischanged = false;
       Class_dbvalue val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Db.Type_dbid vx_p_dbid = val.dbid();

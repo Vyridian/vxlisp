@@ -16,10 +16,8 @@ public final class Uihtml {
    * Html App Renderer
    * {layout}
    */
-  public static class Const_layout_app_html extends Ui.Class_layout implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_layout_app_html {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/html/uihtml", // pkgname
         "layout-app-html", // name
@@ -39,7 +37,9 @@ public final class Uihtml {
       );
     }
 
-    public static void const_new(Const_layout_app_html output) {
+    public static void const_new(Ui.Type_layout output) {
+      Ui.Class_layout outval = (Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Ui.Type_layout val = Core.f_copy(
         Ui.c_layout_app,
         Core.vx_new(Core.t_anylist,
@@ -47,14 +47,13 @@ public final class Uihtml {
                 Uihtml.t_ui_layout_app_from_ui_orig_parent
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static final Const_layout_app_html c_layout_app_html = new Const_layout_app_html();
+  public static final Ui.Type_layout c_layout_app_html = new Ui.Class_layout();
 
 
   /**
@@ -62,10 +61,8 @@ public final class Uihtml {
    * Html Default Renderer
    * {layout}
    */
-  public static class Const_layout_else_html extends Ui.Class_layout implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_layout_else_html {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/html/uihtml", // pkgname
         "layout-else-html", // name
@@ -85,7 +82,9 @@ public final class Uihtml {
       );
     }
 
-    public static void const_new(Const_layout_else_html output) {
+    public static void const_new(Ui.Type_layout output) {
+      Ui.Class_layout outval = (Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Ui.Type_layout val = Core.f_copy(
         Ui.c_layout_else,
         Core.vx_new(Core.t_anylist,
@@ -93,14 +92,13 @@ public final class Uihtml {
                 Uihtml.t_ui_layout_default_from_ui_orig_parent
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static final Const_layout_else_html c_layout_else_html = new Const_layout_else_html();
+  public static final Ui.Type_layout c_layout_else_html = new Ui.Class_layout();
 
 
   /**
@@ -108,10 +106,8 @@ public final class Uihtml {
    * Html Image Renderer
    * {layout}
    */
-  public static class Const_layout_image_html extends Ui.Class_layout implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_layout_image_html {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/html/uihtml", // pkgname
         "layout-image-html", // name
@@ -131,7 +127,9 @@ public final class Uihtml {
       );
     }
 
-    public static void const_new(Const_layout_image_html output) {
+    public static void const_new(Ui.Type_layout output) {
+      Ui.Class_layout outval = (Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Ui.Type_layout val = Core.f_copy(
         Ui.c_layout_image,
         Core.vx_new(Core.t_anylist,
@@ -139,14 +137,13 @@ public final class Uihtml {
                 Uihtml.t_ui_layout_image_from_ui_orig_parent
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static final Const_layout_image_html c_layout_image_html = new Const_layout_image_html();
+  public static final Ui.Type_layout c_layout_image_html = new Ui.Class_layout();
 
 
   /**
@@ -154,10 +151,8 @@ public final class Uihtml {
    * Html Label Renderer
    * {layout}
    */
-  public static class Const_layout_label_html extends Ui.Class_layout implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_layout_label_html {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/html/uihtml", // pkgname
         "layout-label-html", // name
@@ -177,7 +172,9 @@ public final class Uihtml {
       );
     }
 
-    public static void const_new(Const_layout_label_html output) {
+    public static void const_new(Ui.Type_layout output) {
+      Ui.Class_layout outval = (Ui.Class_layout)output;
+      outval.vx_p_constdef = constdef();
       Ui.Type_layout val = Core.f_copy(
         Ui.c_layout_label,
         Core.vx_new(Core.t_anylist,
@@ -185,14 +182,13 @@ public final class Uihtml {
                 Uihtml.t_ui_layout_label_from_ui_orig_parent
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_fn_layout = val.fn_layout();
+      outval.vx_p_name = val.name();
+      outval.vx_p_fn_layout = val.fn_layout();
     }
-
 
   }
 
-  public static final Const_layout_label_html c_layout_label_html = new Const_layout_label_html();
+  public static final Ui.Type_layout c_layout_label_html = new Ui.Class_layout();
 
 
   /**
@@ -200,10 +196,8 @@ public final class Uihtml {
    * Html layout engine used to render html from ui and stylesheet
    * {layoutengine}
    */
-  public static class Const_layoutenginehtml extends Ui.Class_layoutengine implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_layoutenginehtml {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/html/uihtml", // pkgname
         "layoutenginehtml", // name
@@ -223,7 +217,9 @@ public final class Uihtml {
       );
     }
 
-    public static void const_new(Const_layoutenginehtml output) {
+    public static void const_new(Ui.Type_layoutengine output) {
+      Ui.Class_layoutengine outval = (Ui.Class_layoutengine)output;
+      outval.vx_p_constdef = constdef();
       Ui.Type_layoutengine val = Core.f_new(
         Ui.t_layoutengine,
         Core.vx_new(Core.t_anylist,
@@ -252,30 +248,27 @@ public final class Uihtml {
                 Uihtml.t_stylesheet_layout_html
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_boolean_print = val.boolean_print();
-      output.vx_p_boolean_layoutremove = val.boolean_layoutremove();
-      output.vx_p_boolean_layoutselected = val.boolean_layoutselected();
-      output.vx_p_boolean_layoutvisible = val.boolean_layoutvisible();
-      output.vx_p_layoutmap = val.layoutmap();
-      output.vx_p_layoutelse = val.layoutelse();
-      output.vx_p_stylesheetrender = val.stylesheetrender();
+      outval.vx_p_name = val.name();
+      outval.vx_p_boolean_print = val.boolean_print();
+      outval.vx_p_boolean_layoutremove = val.boolean_layoutremove();
+      outval.vx_p_boolean_layoutselected = val.boolean_layoutselected();
+      outval.vx_p_boolean_layoutvisible = val.boolean_layoutvisible();
+      outval.vx_p_layoutmap = val.layoutmap();
+      outval.vx_p_layoutelse = val.layoutelse();
+      outval.vx_p_stylesheetrender = val.stylesheetrender();
     }
-
 
   }
 
-  public static final Const_layoutenginehtml c_layoutenginehtml = new Const_layoutenginehtml();
+  public static final Ui.Type_layoutengine c_layoutenginehtml = new Ui.Class_layoutengine();
 
 
   /**
    * Constant: style-hidden
    * {style}
    */
-  public static class Const_style_hidden extends Html.Class_style implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_style_hidden {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/html/uihtml", // pkgname
         "style-hidden", // name
@@ -295,7 +288,9 @@ public final class Uihtml {
       );
     }
 
-    public static void const_new(Const_style_hidden output) {
+    public static void const_new(Html.Type_style output) {
+      Html.Class_style outval = (Html.Class_style)output;
+      outval.vx_p_constdef = constdef();
       Html.Type_style val = Core.f_new(
         Html.t_style,
         Core.vx_new(Core.t_anylist,
@@ -303,25 +298,22 @@ public final class Uihtml {
                 Core.vx_new_string(".style-hidden")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_props = val.props();
-      output.vx_p_stylelist = val.stylelist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_props = val.props();
+      outval.vx_p_stylelist = val.stylelist();
     }
-
 
   }
 
-  public static final Const_style_hidden c_style_hidden = new Const_style_hidden();
+  public static final Html.Type_style c_style_hidden = new Html.Class_style();
 
 
   /**
    * Constant: style-selected
    * {style}
    */
-  public static class Const_style_selected extends Html.Class_style implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_style_selected {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/ui/html/uihtml", // pkgname
         "style-selected", // name
@@ -341,7 +333,9 @@ public final class Uihtml {
       );
     }
 
-    public static void const_new(Const_style_selected output) {
+    public static void const_new(Html.Type_style output) {
+      Html.Class_style outval = (Html.Class_style)output;
+      outval.vx_p_constdef = constdef();
       Html.Type_style val = Core.f_new(
         Html.t_style,
         Core.vx_new(Core.t_anylist,
@@ -349,15 +343,14 @@ public final class Uihtml {
                 Core.vx_new_string(".style-selected")
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_props = val.props();
-      output.vx_p_stylelist = val.stylelist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_props = val.props();
+      outval.vx_p_stylelist = val.stylelist();
     }
-
 
   }
 
-  public static final Const_style_selected c_style_selected = new Const_style_selected();
+  public static final Html.Type_style c_style_selected = new Html.Class_style();
 
   /**
    * @function boolean_layoutremove_html

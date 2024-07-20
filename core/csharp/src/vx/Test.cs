@@ -96,7 +96,7 @@ public static class Test {
       bool ischanged = false;
       Class_testcase val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_boolean vx_p_passfail = val.passfail();
@@ -341,7 +341,7 @@ public static class Test {
       bool ischanged = false;
       Class_testcaselist val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Test.Type_testcase> listval = new List<Vx.Test.Type_testcase>(val.vx_listtestcase());
@@ -508,7 +508,7 @@ public static class Test {
       bool ischanged = false;
       Class_testcoveragedetail val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_intmap vx_p_constmap = val.constmap();
@@ -790,7 +790,7 @@ public static class Test {
       bool ischanged = false;
       Class_testcoveragenums val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_int vx_p_pct = val.pct();
@@ -1141,7 +1141,7 @@ public static class Test {
       bool ischanged = false;
       Class_testcoveragesummary val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Test.Type_testcoveragenums vx_p_bigospacenums = val.bigospacenums();
@@ -1500,7 +1500,7 @@ public static class Test {
       bool ischanged = false;
       Class_testdescribe val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_describename = val.describename();
@@ -1719,7 +1719,7 @@ public static class Test {
       bool ischanged = false;
       Class_testdescribelist val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Test.Type_testdescribe> listval = new List<Vx.Test.Type_testdescribe>(val.vx_listtestdescribe());
@@ -1901,7 +1901,7 @@ public static class Test {
       bool ischanged = false;
       Class_testpackage val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Test.Type_testcaselist vx_p_caselist = val.caselist();
@@ -2166,7 +2166,7 @@ public static class Test {
       bool ischanged = false;
       Class_testpackagelist val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Test.Type_testpackage> listval = new List<Vx.Test.Type_testpackage>(val.vx_listtestpackage());
@@ -2348,7 +2348,7 @@ public static class Test {
       bool ischanged = false;
       Class_testresult val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_string vx_p_code = val.code();
@@ -2613,7 +2613,7 @@ public static class Test {
       bool ischanged = false;
       Class_testresultlist val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Test.Type_testresult> listval = new List<Vx.Test.Type_testresult>(val.vx_listtestresult());
@@ -2692,9 +2692,8 @@ public static class Test {
    * The default Test Stylesheet
    * {stylesheet}
    */
-  public class Const_stylesheet_test : Vx.Web.Html.Class_stylesheet, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_stylesheet_test {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/test", // pkgname
         "stylesheet-test", // name
@@ -2714,7 +2713,9 @@ public static class Test {
       );
     }
 
-    public static void const_new(Const_stylesheet_test output) {
+    public static void const_new(Vx.Web.Html.Type_stylesheet output) {
+      Vx.Web.Html.Class_stylesheet outval = (Vx.Web.Html.Class_stylesheet)output;
+      outval.vx_p_constdef = constdef();
       Vx.Web.Html.Type_stylesheet val = Vx.Web.Html.f_stylesheet_loadmap(
         Vx.Core.f_new(
           Vx.Web.Html.t_stylesheet,
@@ -3060,20 +3061,19 @@ public static class Test {
           )
         )
       );
-      output.vx_p_id = val.id();
-      output.vx_p_eventmap = val.eventmap();
-      output.vx_p_style = val.style();
-      output.vx_p_style_unique = val.style_unique();
-      output.vx_p_stylelist = val.stylelist();
-      output.vx_p_name = val.name();
-      output.vx_p_styles = val.styles();
-      output.vx_p_stylemap = val.stylemap();
+      outval.vx_p_id = val.id();
+      outval.vx_p_eventmap = val.eventmap();
+      outval.vx_p_style = val.style();
+      outval.vx_p_style_unique = val.style_unique();
+      outval.vx_p_stylelist = val.stylelist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_styles = val.styles();
+      outval.vx_p_stylemap = val.stylemap();
     }
-
 
   }
 
-  public static Const_stylesheet_test c_stylesheet_test = new Const_stylesheet_test();
+  public static Vx.Web.Html.Type_stylesheet c_stylesheet_test = new Vx.Web.Html.Class_stylesheet();
 
   /**
    * @function context_test

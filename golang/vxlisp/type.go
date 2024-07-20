@@ -52,6 +52,8 @@ var arglisttype = NewTypeList("vx/core/arglist", argtype)
 
 var booleantype = NewType("vx/core/boolean")
 
+var constdeftype = NewType("vx/core/constdef")
+
 var contexttype = NewContextType()
 
 var decimaltype = NewType("vx/core/decimal")

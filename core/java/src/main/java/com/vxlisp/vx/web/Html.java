@@ -67,7 +67,7 @@ public final class Html {
       boolean ischanged = false;
       Class_body val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Html.Type_divchildlist vx_p_nodes = val.nodes();
@@ -358,7 +358,7 @@ public final class Html {
       boolean ischanged = false;
       Class_details val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
@@ -773,7 +773,7 @@ public final class Html {
       boolean ischanged = false;
       Class_div val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
@@ -1077,7 +1077,7 @@ public final class Html {
       boolean ischanged = false;
       Class_divchild val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
@@ -1181,7 +1181,7 @@ public final class Html {
       boolean ischanged = false;
       Class_divchildlist val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       List<Html.Type_divchild> listval = new ArrayList<Html.Type_divchild>(val.vx_listdivchild());
@@ -1323,7 +1323,7 @@ public final class Html {
       boolean ischanged = false;
       Class_divlist val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       List<Html.Type_div> listval = new ArrayList<Html.Type_div>(val.vx_listdiv());
@@ -1462,7 +1462,7 @@ public final class Html {
       boolean ischanged = false;
       Class_footer val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Html.Type_divchildlist vx_p_nodes = val.nodes();
@@ -1737,7 +1737,7 @@ public final class Html {
       boolean ischanged = false;
       Class_h1 val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
@@ -2139,7 +2139,7 @@ public final class Html {
       boolean ischanged = false;
       Class_h2 val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
@@ -2541,7 +2541,7 @@ public final class Html {
       boolean ischanged = false;
       Class_h3 val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
@@ -2863,7 +2863,7 @@ public final class Html {
       boolean ischanged = false;
       Class_head val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Html.Type_headchildlist vx_p_nodes = val.nodes();
@@ -3039,7 +3039,7 @@ public final class Html {
       boolean ischanged = false;
       Class_headchild val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
@@ -3143,7 +3143,7 @@ public final class Html {
       boolean ischanged = false;
       Class_headchildlist val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       List<Html.Type_headchild> listval = new ArrayList<Html.Type_headchild>(val.vx_listheadchild());
@@ -3330,7 +3330,7 @@ public final class Html {
       boolean ischanged = false;
       Class_html val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_lang = val.lang();
@@ -3670,7 +3670,7 @@ public final class Html {
       boolean ischanged = false;
       Class_img val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
@@ -4104,7 +4104,7 @@ public final class Html {
       boolean ischanged = false;
       Class_meta val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
@@ -4537,7 +4537,7 @@ public final class Html {
       boolean ischanged = false;
       Class_node val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
@@ -4825,7 +4825,7 @@ public final class Html {
       boolean ischanged = false;
       Class_nodelist val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       List<Html.Type_node> listval = new ArrayList<Html.Type_node>(val.vx_listnode());
@@ -5044,7 +5044,7 @@ public final class Html {
       boolean ischanged = false;
       Class_p val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
@@ -5411,7 +5411,7 @@ public final class Html {
       boolean ischanged = false;
       Class_propmap val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Map<String, Core.Type_string> mapval = new LinkedHashMap<String, Core.Type_string>(val.vx_mapstring());
@@ -5606,7 +5606,7 @@ public final class Html {
       boolean ischanged = false;
       Class_style val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_name = val.name();
@@ -5844,7 +5844,7 @@ public final class Html {
       boolean ischanged = false;
       Class_stylelist val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       List<Html.Type_style> listval = new ArrayList<Html.Type_style>(val.vx_liststyle());
@@ -6028,7 +6028,7 @@ public final class Html {
       boolean ischanged = false;
       Class_stylemap val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Map<String, Html.Type_style> mapval = new LinkedHashMap<String, Html.Type_style>(val.vx_mapstyle());
@@ -6303,7 +6303,7 @@ public final class Html {
       boolean ischanged = false;
       Class_stylesheet val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
@@ -6762,7 +6762,7 @@ public final class Html {
       boolean ischanged = false;
       Class_table val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
@@ -7177,7 +7177,7 @@ public final class Html {
       boolean ischanged = false;
       Class_tbody val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
@@ -7580,7 +7580,7 @@ public final class Html {
       boolean ischanged = false;
       Class_td val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
@@ -7906,7 +7906,7 @@ public final class Html {
       boolean ischanged = false;
       Class_tdlist val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       List<Html.Type_td> listval = new ArrayList<Html.Type_td>(val.vx_listtd());
@@ -8125,7 +8125,7 @@ public final class Html {
       boolean ischanged = false;
       Class_thead val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
@@ -8528,7 +8528,7 @@ public final class Html {
       boolean ischanged = false;
       Class_title val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
@@ -8921,7 +8921,7 @@ public final class Html {
       boolean ischanged = false;
       Class_tr val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
@@ -9247,7 +9247,7 @@ public final class Html {
       boolean ischanged = false;
       Class_trlist val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       List<Html.Type_tr> listval = new ArrayList<Html.Type_tr>(val.vx_listtr());

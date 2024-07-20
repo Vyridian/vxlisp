@@ -5133,7 +5133,9 @@
   :csharp
    &quot;Vx.Core.Type_any[] arrayany = Vx.Core.arrayany_from_anylist(values);
     object[] arrayobj = (Vx.Core.Type_any[])arrayany;
-    T output = (T)(((T)value).vx_copy(arrayobj));&quot;
+    T tvalue = (T)value;
+    Vx.Core.Type_any anyvalue = tvalue.vx_copy(arrayobj);
+    T output = (T)anyvalue;&quot;
   :java
    &quot;@SuppressWarnings(“unchecked”)
     Core.Type_any[] arrayany = Core.arrayany_from_anylist(values);
@@ -17984,7 +17986,9 @@ improves readability.</div>
   :csharp
    &quot;Vx.Core.Type_any[] arrayany = Vx.Core.arrayany_from_anylist(values);
     object[] arrayobj = (Vx.Core.Type_any[])arrayany;
-    T output = (T)(((T)value).vx_copy(arrayobj));&quot;
+    T tvalue = (T)value;
+    Vx.Core.Type_any anyvalue = tvalue.vx_copy(arrayobj);
+    T output = (T)anyvalue;&quot;
   :java
    &quot;@SuppressWarnings(“unchecked”)
     Core.Type_any[] arrayany = Core.arrayany_from_anylist(values);

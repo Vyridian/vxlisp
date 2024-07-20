@@ -65,7 +65,7 @@ public static class Sample {
       bool ischanged = false;
       Class_mytype val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_int vx_p_mynum = val.mynum();
@@ -216,9 +216,8 @@ public static class Sample {
    * My Constant
    * {int}
    */
-  public class Const_myconst : Vx.Core.Class_int, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_myconst {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/sample", // pkgname
         "myconst", // name
@@ -238,18 +237,15 @@ public static class Sample {
       );
     }
 
-    public static void const_new(Const_myconst output) {
-    }
-
-    public 
-    new int vx_int() {
-      this.vxint = 4;
-      return this.vxint;
+    public static void const_new(Vx.Core.Type_int output) {
+      Vx.Core.Class_int outval = (Vx.Core.Class_int)output;
+      outval.vx_p_constdef = constdef();
+      outval.vxint = 4;
     }
 
   }
 
-  public static Const_myconst c_myconst = new Const_myconst();
+  public static Vx.Core.Type_int c_myconst = new Vx.Core.Class_int();
 
   /**
    * @function main

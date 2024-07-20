@@ -145,7 +145,7 @@ public final class Tree {
       boolean ischanged = false;
       Class_branch val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
@@ -423,7 +423,7 @@ public final class Tree {
       boolean ischanged = false;
       Class_brancharrow val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
@@ -526,7 +526,7 @@ public final class Tree {
       boolean ischanged = false;
       Class_branchlist val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       List<Tree.Type_branch> listval = new ArrayList<Tree.Type_branch>(val.vx_listbranch());
@@ -696,7 +696,7 @@ public final class Tree {
       boolean ischanged = false;
       Class_leaf val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
@@ -936,7 +936,7 @@ public final class Tree {
       boolean ischanged = false;
       Class_leaflist val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       List<Tree.Type_leaf> listval = new ArrayList<Tree.Type_leaf>(val.vx_listleaf());
@@ -1106,7 +1106,7 @@ public final class Tree {
       boolean ischanged = false;
       Class_tree val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_string vx_p_id = val.id();
@@ -1291,10 +1291,8 @@ public final class Tree {
    * Constant: brancharrow-down
    * {brancharrow}
    */
-  public static class Const_brancharrow_down extends Tree.Class_brancharrow implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_brancharrow_down {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/data/tree", // pkgname
         "brancharrow-down", // name
@@ -1314,23 +1312,22 @@ public final class Tree {
       );
     }
 
-    public static void const_new(Const_brancharrow_down output) {
+    public static void const_new(Tree.Type_brancharrow output) {
+      Tree.Class_brancharrow outval = (Tree.Class_brancharrow)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static final Const_brancharrow_down c_brancharrow_down = new Const_brancharrow_down();
+  public static final Tree.Type_brancharrow c_brancharrow_down = new Tree.Class_brancharrow();
 
 
   /**
    * Constant: brancharrow-up
    * {brancharrow}
    */
-  public static class Const_brancharrow_up extends Tree.Class_brancharrow implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_brancharrow_up {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/data/tree", // pkgname
         "brancharrow-up", // name
@@ -1350,23 +1347,22 @@ public final class Tree {
       );
     }
 
-    public static void const_new(Const_brancharrow_up output) {
+    public static void const_new(Tree.Type_brancharrow output) {
+      Tree.Class_brancharrow outval = (Tree.Class_brancharrow)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static final Const_brancharrow_up c_brancharrow_up = new Const_brancharrow_up();
+  public static final Tree.Type_brancharrow c_brancharrow_up = new Tree.Class_brancharrow();
 
 
   /**
    * Constant: brancharrow-updown
    * {brancharrow}
    */
-  public static class Const_brancharrow_updown extends Tree.Class_brancharrow implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_brancharrow_updown {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/data/tree", // pkgname
         "brancharrow-updown", // name
@@ -1386,13 +1382,14 @@ public final class Tree {
       );
     }
 
-    public static void const_new(Const_brancharrow_updown output) {
+    public static void const_new(Tree.Type_brancharrow output) {
+      Tree.Class_brancharrow outval = (Tree.Class_brancharrow)output;
+      outval.vx_p_constdef = constdef();
     }
-
 
   }
 
-  public static final Const_brancharrow_updown c_brancharrow_updown = new Const_brancharrow_updown();
+  public static final Tree.Type_brancharrow c_brancharrow_updown = new Tree.Class_brancharrow();
 
 
   static {

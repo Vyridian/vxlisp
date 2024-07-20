@@ -7,7 +7,12 @@ import java.util.Map;
 
 public final class Collection {
 
-  public static <T extends Core.Type_any> T vx_any_from_for_until_loop_max(T generic_any_1, T start, Core.Func_boolean_from_any fn_until, Core.Func_any_from_any fn_loop, Core.Type_int max) {
+  public static <T extends Core.Type_any> T vx_any_from_for_until_loop_max(
+    T generic_any_1,
+    T start,
+    Core.Func_boolean_from_any fn_until,
+    Core.Func_any_from_any fn_loop,
+    Core.Type_int max) {
     T output = start;
     boolean iscontinue = true;
     int icount = 0;
@@ -30,7 +35,12 @@ public final class Collection {
     return output;
   }
 
-  public static <T extends Core.Type_any> T vx_any_from_for_while_loop_max(T generic_any_1, T start, Core.Func_boolean_from_any fn_while, Core.Func_any_from_any fn_loop, Core.Type_int max) {
+  public static <T extends Core.Type_any> T vx_any_from_for_while_loop_max(
+    T generic_any_1,
+    T start,
+    Core.Func_boolean_from_any fn_while,
+    Core.Func_any_from_any fn_loop,
+    Core.Type_int max) {
     T output = start;
     boolean iscontinue = true;
     int icount = 0;
@@ -55,7 +65,11 @@ public final class Collection {
     return output;
   }
 
-  public static <T extends Core.Type_list> T vx_list_from_for_end_loop(T generic_list_1, Core.Type_int start, Core.Type_int end, Core.Func_any_from_int fn_loop) {
+  public static <T extends Core.Type_list> T vx_list_from_for_end_loop(
+    T generic_list_1,
+    Core.Type_int start,
+    Core.Type_int end,
+    Core.Func_any_from_int fn_loop) {
     T output = Core.f_empty(generic_list_1);
     List<Core.Type_any> listvals = new ArrayList<>();
     int istart = start.vx_int();
@@ -78,7 +92,12 @@ public final class Collection {
     return output;
   }
 
-  public static <T extends Core.Type_list> T vx_list_from_for_while_loop_max(T generic_list_1, Core.Type_any start, Core.Func_boolean_from_any fn_while, Core.Func_any_from_any fn_loop, Core.Type_int max) {
+  public static <T extends Core.Type_list> T vx_list_from_for_while_loop_max(
+    T generic_list_1,
+    Core.Type_any start,
+    Core.Func_boolean_from_any fn_while,
+    Core.Func_any_from_any fn_loop,
+    Core.Type_int max) {
     T output = Core.f_empty(generic_list_1);
     List<Core.Type_any> listvals = new ArrayList<>();
     boolean iscontinue = true;
@@ -110,7 +129,10 @@ public final class Collection {
     return output;
   }
 
-  public static <T extends Core.Type_list> T vx_list_from_list_filter(T generic_list_1, Core.Type_list vallist, Core.Func_any_from_any fn_filter) {
+  public static <T extends Core.Type_list> T vx_list_from_list_filter(
+    T generic_list_1,
+    Core.Type_list vallist,
+    Core.Func_any_from_any fn_filter) {
     T output = Core.f_empty(generic_list_1);
     List<Core.Type_any> listval = vallist.vx_list();
     List<Core.Type_any> items = new ArrayList<>();
@@ -125,7 +147,11 @@ public final class Collection {
     return output;
   }
 
-  public static <T extends Core.Type_list> T vx_list_from_list_start_end(T generic_list_1, Core.Type_list values, Core.Type_int start, Core.Type_int end) {
+  public static <T extends Core.Type_list> T vx_list_from_list_start_end(
+    T generic_list_1,
+    Core.Type_list values,
+    Core.Type_int start,
+    Core.Type_int end) {
     T output = Core.f_empty(generic_list_1);
     int istart = start.vx_int();
     int iend = end.vx_int();
@@ -147,7 +173,10 @@ public final class Collection {
     return output;
   }
   
-  public static <T extends Core.Type_map> T vx_map_from_map_keys(T generic_map_1, Core.Type_map valuemap, Core.Type_stringlist keys) {
+  public static <T extends Core.Type_map> T vx_map_from_map_keys(
+    T generic_map_1,
+    Core.Type_map valuemap,
+    Core.Type_stringlist keys) {
     T output = Core.f_empty(generic_map_1);
     List<Core.Type_string> keylist = keys.vx_liststring();
     if (keylist.size() > 0) {

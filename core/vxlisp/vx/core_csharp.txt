@@ -1,7 +1,8 @@
   public interface Map<TKey, TValue> where TKey : notnull {
     public Map<TKey, TValue> copy();
     public TValue get(TKey key);
-    public TValue getOrDefault(TKey key, TValue defaultvalue);
+    public TValue? getOrDefault(TKey key);
+    public TValue getOrElse(TKey key, TValue elsevalue);
     public List<TKey> keys();
     public void put(TKey key, TValue value);
     public void remove(TKey key);
@@ -14,9 +15,12 @@
     public LinkedHashMap() {
     }
     public LinkedHashMap(Map<TKey, TValue> copy) {
-      this.listkey = new List<TKey>(copy.keys());
-      foreach (TKey key in this.listkey) {
-        dict[key] = copy.get(key);
+      List<TKey> keys = new List<TKey>(copy.keys());
+      foreach (TKey key in keys) {
+        TValue? value = copy.getOrDefault(key);
+        if (value != null) {
+          this.put(key, value);
+        }
       }
     }
     public Map<TKey, TValue> copy() {
@@ -25,8 +29,15 @@
     public TValue get(TKey key) {
       return dict[key];
     }
-    public TValue getOrDefault(TKey key, TValue defaultvalue) {
-      TValue output = defaultvalue;
+    public TValue? getOrDefault(TKey key) {
+      TValue? output = default(TValue);
+      if (dict.ContainsKey(key)) {
+        output = dict[key];
+      }
+      return output;
+    }
+    public TValue getOrElse(TKey key, TValue elsevalue) {
+      TValue output = elsevalue;
       if (dict.ContainsKey(key)) {
         output = dict[key];
       }
@@ -36,8 +47,12 @@
       return listkey;
     }
     public void put(TKey key, TValue value) {
-      listkey.Add(key);
       dict[key] = value;
+      if (!dict.ContainsKey(key)) {
+      } else if (listkey.Contains(key)) {
+      } else {
+        listkey.Add(key);
+      }
     }
     public void remove(TKey key) {
       listkey.Remove(key);
@@ -46,10 +61,6 @@
     public int size() {
       return dict.Count;
     }
-  }
-
-  public interface vx_Type_const {
-    public Vx.Core.Type_constdef vx_constdef();
   }
 
   public interface Type_replfunc {
@@ -66,6 +77,7 @@
 
   public class Class_base {
     protected int vx_iref = 0;
+    public Vx.Core.Type_constdef? vx_p_constdef = null;
     protected Vx.Core.Type_msgblock? vxmsgblock = null;
     public virtual Vx.Core.Type_any vx_new(params Object[] vals) {
       return e_any;
@@ -77,14 +89,22 @@
       return e_any;
     }
     public virtual Vx.Core.Type_any vx_type() {
-      return t_any;
+      return Vx.Core.t_any;
     }
     public virtual Vx.Core.Type_typedef vx_typedef() {
-      return e_typedef;
+      return Vx.Core.e_typedef;
+    }
+    public Vx.Core.Type_constdef vx_constdef() {
+      if (this.vx_p_constdef == null) {
+        return Vx.Core.e_constdef;
+      } else {
+        return this.vx_p_constdef;
+      }
     }
     public List<Type_any> vx_dispose() {
       this.vx_iref = 0;
-      this.vxmsgblock = Vx.Core.e_msgblock;
+      this.vx_p_constdef = null;
+      this.vxmsgblock = null;
       return emptylistany;
     }
     public Vx.Core.Type_msgblock vx_msgblock() {
@@ -236,7 +256,7 @@
   // vx_copy(generic_any_1, args...)
   public static T vx_copy<T>(T copyval, params Object[] vals) where T : Vx.Core.Type_any {
     Vx.Core.Type_any val = copyval.vx_copy(vals);
-    T output = Vx.Core.f_any_from_any(copyval, val);
+    T output = (T)val;
     return output;
   }
 
@@ -348,7 +368,7 @@
     if (skey.StartsWith(":")) {
       skey = skey.Substring(1);
     }
-    Vx.Core.Type_any val = valuemap.vx_map().getOrDefault(skey, output);
+    Vx.Core.Type_any val = valuemap.vx_map().getOrElse(skey, output);
     output = Vx.Core.f_any_from_any(generic_any_1, val);
     return output;
   }
@@ -817,12 +837,14 @@
     Map<string, T> output = new LinkedHashMap<string, T>();
     List<string> keys = mapval.keys();
     foreach (string key in keys) {
-      U value = mapval.get(key);
-      try {
-        T castval = (T)value;
-        output.put(key, castval);
-      } catch (Exception ex) {
-        Vx.Core.vx_log("map<-map", ex);
+      U? value = mapval.getOrDefault(key);
+      if (value != null) {
+        try {
+          T castval = (T)value;
+          output.put(key, castval);
+        } catch (Exception ex) {
+          Vx.Core.vx_log("map<-map", ex);
+        }
       }
     }
     return output;
@@ -1003,8 +1025,8 @@
       }
     } else if (value is Vx.Core.Type_string valstring) {
       output = "\"" + valstring.vx_string() + "\"";
-    } else if (value is Vx.Core.vx_Type_const constvalue) {
-      Vx.Core.Type_constdef constdef = constvalue.vx_constdef();
+    } else if (value.vx_constdef() != Vx.Core.e_constdef) {
+      Vx.Core.Type_constdef constdef = value.vx_constdef();
       string constpkg = constdef.pkgname().vx_string();
       string constname = constdef.name().vx_string();
       if (constpkg == "vx/core") {
@@ -1117,7 +1139,10 @@
     string text,
     string find,
     string replace) {
-    string output = text.Replace(find, replace);
+    string output = text;
+    if (find != "") {
+      output = text.Replace(find, replace);
+    }
     return output;
   }
 
@@ -1141,10 +1166,10 @@
     } else if (start > end) {
     } else if (start > maxlen) {
     } else {
-      if (end >= maxlen) {
+      if (end > maxlen) {
         end = maxlen;
       }
-      output = text.Substring(start - 1, end);
+      output = text.Substring(start - 1, end - start + 1);
     }
     return output;
   }

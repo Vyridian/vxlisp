@@ -80,7 +80,7 @@ public final class Sample {
       boolean ischanged = false;
       Class_mytype val = this;
       Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this instanceof Core.vx_Type_const) {
+      if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       Core.Type_int vx_p_mynum = val.mynum();
@@ -241,10 +241,8 @@ public final class Sample {
    * My Constant
    * {int}
    */
-  public static class Const_myconst extends Core.Class_int implements Core.vx_Type_const {
-    
-    @Override
-    public Core.Type_constdef vx_constdef() {
+  public static class Const_myconst {
+    public static Core.Type_constdef constdef() {
       return Core.constdef_new(
         "vx/sample", // pkgname
         "myconst", // name
@@ -264,18 +262,15 @@ public final class Sample {
       );
     }
 
-    public static void const_new(Const_myconst output) {
-    }
-
-    @Override
-    public int vx_int() {
-      this.vxint = 4;
-      return this.vxint;
+    public static void const_new(Core.Type_int output) {
+      Core.Class_int outval = (Core.Class_int)output;
+      outval.vx_p_constdef = constdef();
+      outval.vxint = 4;
     }
 
   }
 
-  public static final Const_myconst c_myconst = new Const_myconst();
+  public static final Core.Type_int c_myconst = new Core.Class_int();
 
   /**
    * @function main

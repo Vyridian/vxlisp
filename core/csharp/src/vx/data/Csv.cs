@@ -65,7 +65,7 @@ public static class Csv {
       bool ischanged = false;
       Class_csv val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Type_stringlist vx_p_headers = val.headers();
@@ -249,7 +249,7 @@ public static class Csv {
       Vx.Data.Csv.Class_csvrowmap map = this;
       string skey = key.vx_string();
       Vx.Core.Map<string, Vx.Core.Type_stringlist> mapval = map.vx_p_map;
-      output = mapval.getOrDefault(skey, Vx.Core.e_stringlist);
+      output = mapval.getOrElse(skey, Vx.Core.e_stringlist);
       return output;
     }
 
@@ -293,7 +293,7 @@ public static class Csv {
       bool ischanged = false;
       Class_csvrowmap val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_stringlist> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_stringlist>(val.vx_mapstringlist());
@@ -440,7 +440,7 @@ public static class Csv {
       bool ischanged = false;
       Class_csvrows val = this;
       Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
-      if (this is Vx.Core.vx_Type_const) {
+      if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       List<Vx.Core.Type_stringlist> listval = new List<Vx.Core.Type_stringlist>(val.vx_liststringlist());
@@ -519,9 +519,8 @@ public static class Csv {
    * Csv File Delimiters
    * {delim}
    */
-  public class Const_delimcsv : Vx.Data.Textblock.Class_delim, Vx.Core.vx_Type_const {
-    
-    public Vx.Core.Type_constdef vx_constdef() {
+  public class Const_delimcsv {
+    public static Vx.Core.Type_constdef constdef() {
       return Vx.Core.constdef_new(
         "vx/data/csv", // pkgname
         "delimcsv", // name
@@ -541,7 +540,9 @@ public static class Csv {
       );
     }
 
-    public static void const_new(Const_delimcsv output) {
+    public static void const_new(Vx.Data.Textblock.Type_delim output) {
+      Vx.Data.Textblock.Class_delim outval = (Vx.Data.Textblock.Class_delim)output;
+      outval.vx_p_constdef = constdef();
       Vx.Data.Textblock.Type_delim val = Vx.Core.f_new(
         Vx.Data.Textblock.t_delim,
         Vx.Core.vx_new(Vx.Core.t_anylist,
@@ -558,17 +559,16 @@ public static class Csv {
                 )
         )
       );
-      output.vx_p_name = val.name();
-      output.vx_p_starttext = val.starttext();
-      output.vx_p_endtext = val.endtext();
-      output.vx_p_pos = val.pos();
-      output.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = val.name();
+      outval.vx_p_starttext = val.starttext();
+      outval.vx_p_endtext = val.endtext();
+      outval.vx_p_pos = val.pos();
+      outval.vx_p_delimlist = val.delimlist();
     }
-
 
   }
 
-  public static Const_delimcsv c_delimcsv = new Const_delimcsv();
+  public static Vx.Data.Textblock.Type_delim c_delimcsv = new Vx.Data.Textblock.Class_delim();
 
   /**
    * @function csv_read_from_file
