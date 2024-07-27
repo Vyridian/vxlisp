@@ -1,3 +1,8 @@
+  // vx_boolean_from_string_starts(string, string)
+  static vx_boolean_from_string_starts(text, starts) {
+    return vx_core.vx_boolean_from_string_starts(text, starts)
+  }
+
   // vx_int_from_string_find(string, string)
   static vx_int_from_string_find(text, find) {
     return text.indexOf(find) + 1
@@ -42,6 +47,14 @@
       }
     }
     output += 1
+    return output
+  }
+
+  static vx_string_from_stringlist_join(stringlist, join) {
+    let output = vx_core.e_string
+    if (stringlist.length > 0) {
+      output = stringlist.join(join)
+    }
     return output
   }
 

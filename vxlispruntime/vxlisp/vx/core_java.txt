@@ -1,12 +1,12 @@
-  public static interface vx_Type_const {
+  public interface vx_Type_const {
     public Core.Type_constdef vx_constdef();
   }
 
-  public static interface Type_replfunc {
+  public interface Type_replfunc {
     public Core.Type_any vx_repl(Core.Type_anylist arglist);
   }
 
-  public static interface Type_replfunc_async {
+  public interface Type_replfunc_async {
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist);
   }
 
@@ -24,14 +24,28 @@
 
   public static class Class_base {
     protected int vx_iref = 0;
-    protected Core.Type_constdef vxconstdef = null;
     protected Core.Type_msgblock vxmsgblock = null;
+    public Core.Type_constdef vx_p_constdef = null;
     public List<Type_any> vx_dispose() {
       this.vx_iref = 0;
       this.vxmsgblock = null;
+      this.vx_p_constdef = null;
       return emptylistany;
     }
-    public Core.Type_msgblock vx_msgblock() {return vxmsgblock;}
+    public Core.Type_constdef vx_constdef() {
+      if (this.vx_p_constdef == null) {
+        return Core.e_constdef;
+      } else {
+        return this.vx_p_constdef;
+      }
+    }
+    public Core.Type_msgblock vx_msgblock() {
+      if (this.vxmsgblock == null) {
+        return Core.e_msgblock;
+      } else {
+        return this.vxmsgblock;
+      }
+    }
     public boolean vx_release() {
       boolean output = false;
       if (this.vx_iref < 0) {
@@ -83,7 +97,8 @@
     List<Core.Type_any> listany = list.vx_list();
     Core.Type_msgblock msgblock = list.vx_msgblock();
     if (msgblock == null) {
-    } else if (msgblock != Core.e_msgblock) {
+    } else if (msgblock == Core.e_msgblock) {
+    } else {
      listany = new ArrayList<>(listany);
      listany.add(msgblock);
     }
@@ -141,36 +156,6 @@
     return output;
   }
 
-  public static <T> CompletableFuture<T> async_new_completed(final T val) {
-    CompletableFuture<T> output = CompletableFuture.completedFuture(val);
-    return output;
-  }
-
-  public static <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> async_from_async(T generic_any_1, final CompletableFuture<U> future) {
-    CompletableFuture<T> output = future.thenApply(val -> {
-      return Core.f_any_from_any(generic_any_1, val);
-    });
-    return output;
-  }
-
-  public static <T, U> CompletableFuture<T> async_from_async_fn(final CompletableFuture<U> future, final Function<? super U, ? extends T> fn) {
-    CompletableFuture<T> output = future.thenApply(fn);
-    return output;
-  }
-
-  public static <T> CompletableFuture<List<T>> async_arraylist_from_arraylist_async(final List<CompletableFuture<T>> list_future) {
-    CompletableFuture<Void> allFutures = CompletableFuture.allOf(
-      list_future.toArray(new CompletableFuture[list_future.size()])
-    );
-    CompletableFuture<List<T>> output = allFutures.thenApply(v -> {
-      List<T> list = list_future.stream()
-        .map(future -> future.join())
-        .collect(Collectors.toList());
-      return Core.immutablelist(list);
-    });
-    return output;
-  }
-
   @SafeVarargs
   public static <T> LinkedHashMap<String, T> hashmap_from_keyvalues(final KeyValue<T>... keyvalues) {
     LinkedHashMap<String, T> output = new LinkedHashMap<String, T>();
@@ -202,6 +187,89 @@
         Core.vx_log("map<-map", ex);
       }
     }
+    return output;
+  }
+
+  // vx_new(generic_any_1, args...)
+  public static <T extends Core.Type_any> T vx_new(final T generic_any_1, final Object... vals) {
+    Core.Type_any val = generic_any_1.vx_new(vals);
+    T output = Core.f_any_from_any(generic_any_1, val);
+    return output;
+  }
+
+  // vx_copy(generic_any_1, args...)
+  public static <T extends Core.Type_any> T vx_copy(final T copyval, final Object... vals) {
+    Core.Type_any val = copyval.vx_copy(vals);
+    T output = Core.f_any_from_any(copyval, val);
+    return output;
+  }
+
+  // vx_empty(generic_any_1)
+  @SuppressWarnings("unchecked")
+  public static <T extends Core.Type_any> T vx_empty(final T type) {
+    T output = (T)(type.vx_empty());
+    return output;
+  }
+
+  // vx_type(generic_any_1)
+  @SuppressWarnings("unchecked")
+  public static <T extends Core.Type_any> T vx_type(final T type) {
+    T output = (T)(type.vx_type());
+    return output;
+  }
+
+  public static <T> CompletableFuture<T> vx_async_new_from_value(final T val) {
+    CompletableFuture<T> output = CompletableFuture.completedFuture(val);
+    return output;
+  }
+
+  public static <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_async_from_async(
+    final T generic_any_1,
+    final CompletableFuture<U> future) {
+    CompletableFuture<T> output = future.thenApply(val -> {
+      return Core.f_any_from_any(generic_any_1, val);
+    });
+    return output;
+  }
+
+  public static <T, U> CompletableFuture<T> vx_async_from_async_fn(
+    final CompletableFuture<U> future,
+    final Function<? super U,
+    ? extends T> fn) {
+    CompletableFuture<T> output = future.thenApply(fn);
+    return output;
+  }
+
+  public static <T> CompletableFuture<List<T>> vx_async_arraylist_from_arraylist_async(
+    final List<CompletableFuture<T>> list_future) {
+    CompletableFuture<Void> allFutures = CompletableFuture.allOf(
+      list_future.toArray(new CompletableFuture[list_future.size()])
+    );
+    CompletableFuture<List<T>> output = allFutures.thenApply(v -> {
+      List<T> list = list_future.stream()
+        .map(future -> future.join())
+        .collect(Collectors.toList());
+      return Core.immutablelist(list);
+    });
+    return output;
+  }
+
+  // vx_any_first_from_list_fn(generic_any_1, list, fn_any)
+  public static <T extends Core.Type_any> T vx_any_first_from_list_fn(
+    final T generic_any_1,
+    final Core.Type_list list,
+    final Function<Core.Type_any, T> fn_any
+  ) {
+				T output = Core.f_empty(generic_any_1);
+				List<Core.Type_any> listany = list.vx_list();
+				for (Core.Type_any any : listany) {
+				  T tany = Core.f_any_from_any(generic_any_1, any);
+				  T val = fn_any.apply(tany);
+				  if (val != null) {
+				    output = val;
+				    break;
+				  }
+				}
     return output;
   }
 
@@ -263,11 +331,9 @@
     return text.startsWith(starts);
   }
 
-  @SuppressWarnings("unchecked")
-  public static <T extends Core.Type_any> T vx_copy(T value, Core.Type_any arg) {
-   Core.Type_any anyvalue = value.vx_copy(arg);
-   T output = (T)anyvalue;
-   return output;
+  // vx_boolean_write_from_map_name_value(map, string, any)
+  public static Core.Type_boolean vx_boolean_write_from_map_name_value(final Core.Type_map valuemap, final Core.Type_string name, final Core.Type_any value) {
+    return valuemap.vx_set(name, value);
   }
 
   // vx_eqeq(any, any)
@@ -310,6 +376,23 @@
     return output;
   }
 
+  // vx_float_from_number(number)
+  public static float vx_float_from_number(Core.Type_number num) {
+    float output = 0;
+    Core.Type_any type = num.vx_type();
+    if (type == Core.t_float) {
+      Core.Type_float floatval = Core.f_any_from_any(Core.t_float, num);
+      output = floatval.vx_float();
+    } else if (type == Core.t_int) {
+      Core.Type_int intval = Core.f_any_from_any(Core.t_int, num);
+      output = intval.vx_int();
+    } else if (type == Core.t_decimal) {
+      Core.Type_decimal decval = Core.f_any_from_any(Core.t_decimal, num);
+      output = decval.vx_float();
+    }
+    return output;
+  }
+
   // vx_float_from_string(string)
   public static float vx_float_from_string(String text) {
     float output = 0;
@@ -341,6 +424,34 @@
 		  pkg.vx_p_funcmap = funcmap;
     mappackage.put(pkgname, pkg);
     packagemap.vx_p_map = Core.immutablemap(mappackage);
+  }
+
+  public static <T extends Core.Type_any> T vx_if_2(final T generic_any_1, final Core.Type_thenelselist thenelselist) {
+    T output = Core.f_empty(generic_any_1);
+    Core.Func_any_from_func fn_any = Core.vx_any_first_from_list_fn(Core.t_any_from_func, thenelselist, (any) -> {
+      Core.Func_any_from_func fnany = null;
+      if (any instanceof Core.Type_thenelse) {
+        Core.Type_thenelse thenelse = (Core.Type_thenelse)any;
+        Core.Type_string code = thenelse.code();
+        switch (code.vx_string()) {
+        case ":then":
+          Core.Func_boolean_from_func fn_cond = thenelse.fn_cond();
+          Core.Type_boolean cond = fn_cond.vx_boolean_from_func();
+          if (cond.vx_boolean() == true) {
+            fnany = thenelse.fn_any();
+          }
+          break;
+        case ":else":
+          fnany = thenelse.fn_any();
+          break;
+        }
+      }
+      return fnany;
+    });
+    if (fn_any != null) {
+      output = fn_any.vx_any_from_func(generic_any_1);
+    }
+    return output;
   }
 
   // vx_int_from_string(string)
@@ -430,6 +541,39 @@
     return result;
   }
 
+public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFuture<X> vx_list_from_list_async(
+    final X generic_list_1,
+    final Y values,
+    final Core.Func_any_from_any_async fn_any_from_any_async) {
+    List<Core.Type_any> list_value = values.vx_list();
+    List<CompletableFuture<Core.Type_any>> list_async_result = Core.arraylist_from_arraylist_fn(list_value, (val) -> {
+      return fn_any_from_any_async.vx_any_from_any_async(generic_list_1, val);
+    });
+    CompletableFuture<List<Core.Type_any>> async_list_result = Core.vx_async_arraylist_from_arraylist_async(list_async_result);
+    CompletableFuture<X> output = Core.vx_async_from_async_fn(async_list_result, (list_result) -> {
+      X work = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(list_result));
+      return work;
+    });
+    return output;
+  }
+
+  // vx_list_from_list_intany(generic_list_1, list-2, any<-int-any)
+  public static <T extends Core.Type_list, U extends Core.Type_list> T vx_list_from_list_intany(T generic_list_1, U valuelist, Core.Func_any_from_int_any fn_any_from_int_any) {
+    T output = Core.f_empty(generic_list_1);
+    List<Core.Type_any> listany = valuelist.vx_list();
+    if (listany.size() > 0) {
+      List<Core.Type_any> listout = new ArrayList<Core.Type_any>();
+      for (int i = 0; i < listany.size(); i++) {
+        Core.Type_int vali = Core.vx_new_int(i+1);
+        Core.Type_any value = listany.get(i);
+        Core.Type_any outval = fn_any_from_int_any.vx_any_from_int_any(Core.t_any, vali, value);
+        listout.add(outval);
+      }
+      output = Core.vx_new_list(generic_list_1, listout);
+    }
+    return output;
+  }
+
   // vx_log(object...)
   public static void vx_log(Object... values) {
     for (Object value : values) {
@@ -480,17 +624,6 @@
     return output;
   }
 
-  // vx_msg_from_exception
-  public static Type_msg vx_msg_from_exception(final String path, final Exception err) {
-    Class_msg output = new Class_msg();
-    output.vx_p_path = Core.vx_new_string(path);
-    output.vx_p_code = Core.vx_new_string("exception");
-    output.vx_p_severity = Core.c_msg_severe;
-    output.err = err;
-    Core.vx_log(output);
-    return output;
-  }
-
   // vx_msg_from_error
   public static Type_msg vx_msg_from_error(final String text) {
     Class_msg output = new Class_msg();
@@ -509,11 +642,34 @@
     return output;
   }
 
+  // vx_msg_from_exception
+  public static Type_msg vx_msg_from_exception(final String path, final Exception err) {
+    Class_msg output = new Class_msg();
+    output.vx_p_path = Core.vx_new_string(path);
+    output.vx_p_code = Core.vx_new_string("exception");
+    output.vx_p_severity = Core.c_msg_severe;
+    output.err = err;
+    Core.vx_log(output);
+    return output;
+  }
+
+  // vx_msgblock_from_copy_arrayval(msgblock, any...)
+  public static Core.Type_msgblock vx_msgblock_from_copy_arrayval(final Core.Type_any copy, final Object... vals) {
+    Core.Type_msgblock output = Core.e_msgblock;
+    Core.Type_msgblock copymsgblock = copy.vx_msgblock();
+    if (copymsgblock != Core.e_msgblock) {
+      output = copymsgblock;
+    }
+    return output;
+  }
+
   // vx_msgblock_from_copy_listval(msgblock, List<any>)
   public static Core.Type_msgblock vx_msgblock_from_copy_listval(final Core.Type_msgblock msgblock, Core.Type_any... vals) {
     Core.Type_msgblock output = Core.e_msgblock;
     List<Core.Type_msgblock> listmsgblock = new ArrayList<>();
-    if (msgblock != null) {
+    if (msgblock == null) {
+    } else if (msgblock == Core.e_msgblock) {
+    } else {
       Core.Type_msgblock origmsgblock = msgblock.vx_msgblock();
       if (origmsgblock != Core.e_msgblock) {
         List<Core.Type_msgblock> origlistmsgblock = origmsgblock.msgblocks().vx_listmsgblock();
@@ -533,7 +689,9 @@
       Core.Class_msgblock outputclass = new Core.Class_msgblock();
       outputclass.vx_p_msgblocks = msgblocks;
       output = outputclass;
-    } else if (msgblock != null) {
+    } else if (msgblock == null) {
+    } else if (msgblock == Core.e_msgblock) {
+    } else {
       output = msgblock;
     }
     return output;
@@ -574,6 +732,20 @@
       output = work;
 
     }
+    return output;
+  }
+
+  // vx_new_list(T, List<any>)
+  public static <T extends Core.Type_list> T vx_new_list(T generic_list_1, List<Core.Type_any> listval) {
+    Core.Type_any anylist = generic_list_1.vx_new(listval);
+    T output = Core.f_any_from_any(generic_list_1, anylist);
+    return output;
+  }
+
+  // vx_new_map(T, Map<string, any>)
+  public static <T extends Core.Type_map> T vx_new_map(T generic_map_1, Map<String, Core.Type_any> mapval) {
+    Core.Type_any anymap = generic_map_1.vx_new(mapval);
+    T output = Core.f_any_from_any(generic_map_1, anymap);
     return output;
   }
 
@@ -644,7 +816,7 @@
       } else {
         sval = "`" + sval + "`";
       }
-      if (valstring.vx_msgblock() != null) {
+      if (valstring.vx_msgblock() != Core.e_msgblock) {
         String msgtext = Core.vx_string_from_any_indent(valstring.vx_msgblock(), indent, linefeed);
         output  = "\n" + indenttext + "(string";
         output += "\n" + indenttext + " " + sval;
@@ -652,9 +824,8 @@
       } else {
         output = sval;
       }
-    } else if (value instanceof Core.vx_Type_const) {
-      Core.vx_Type_const constvalue = (Core.vx_Type_const)value;
-      Core.Type_constdef constdef = constvalue.vx_constdef();
+    } else if (value.vx_constdef() != Core.e_constdef) {
+      Core.Type_constdef constdef = value.vx_constdef();
       String constpkg = constdef.pkgname().vx_string();
       String constname = constdef.name().vx_string();
       if (constpkg.equals("vx/core")) {
@@ -673,7 +844,7 @@
         String valtext = Core.vx_string_from_any_indent(valsub, indentint, linefeed);
         output += "\n " + indenttext + valtext;
       }
-      if (vallist.vx_msgblock() != null) {
+      if (vallist.vx_msgblock() != Core.e_msgblock) {
         String msgtext = Core.vx_string_from_any_indent(vallist.vx_msgblock(), indent, linefeed);
         output += "\n" + indenttext + msgtext;
       }
@@ -701,7 +872,7 @@
         }
         output += "\n" + indenttext + " " + key + strval;
       }
-      if (valmap.vx_msgblock() != null) {
+      if (valmap.vx_msgblock() != Core.e_msgblock) {
         String msgtext = Core.vx_string_from_any_indent(valmap.vx_msgblock(), indent+1, linefeed);
         output += "\n " + indenttext + msgtext;
       }
@@ -732,7 +903,7 @@
       }
       if (stypedefname == "msg") {
       } else if (stypedefname == "msgblock") {
-      } else if (valstruct.vx_msgblock() != null) {
+      } else if (valstruct.vx_msgblock() != Core.e_msgblock) {
         String msgtext2 = Core.vx_string_from_any_indent(valstruct.vx_msgblock(), indent+1, linefeed);
         output += "\n " + indenttext + msgtext2;
       }
@@ -742,7 +913,7 @@
       Core.Type_funcdef funcdef = valfunc.vx_funcdef();
       Core.Type_string funcdefname = Core.f_funcname_from_funcdef(funcdef);
       output = funcdefname.vx_string();
-      if (valfunc.vx_msgblock() != null) {
+      if (valfunc.vx_msgblock() != Core.e_msgblock) {
         String msgtext = Core.vx_string_from_any_indent(valfunc.vx_msgblock(), indent, linefeed);
         output += "\n" + indenttext + msgtext;
       }
@@ -780,7 +951,7 @@
     } else if (start > end) {
     } else if (start > maxlen) {
     } else {
-      if (end >= maxlen) {
+      if (end > maxlen) {
         end = maxlen;
       }
       output = text.substring(start - 1, end);
@@ -816,14 +987,14 @@
     return output;
   }
 
-  public static Core.Type_anylist vx_anylist_from_arraystring(String[] arraystring) {
+  public static Core.Type_anylist vx_anylist_from_arraystring(String... arraystring) {
     List<Object> listany = new ArrayList<>();
     for (String svalue : arraystring) {
       Core.Type_string value = Core.vx_new_string(svalue);
       listany.add(value);
     }
     Object[] arrayany = listany.toArray();
-    Core.Type_anylist output = Core.t_anylist.vx_new(arrayany);
+    Core.Type_anylist output = Core.vx_new(Core.t_anylist, arrayany);
     return output;
   }
 

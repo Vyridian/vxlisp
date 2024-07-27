@@ -23,10 +23,11 @@
   :cpp
    "bool check = vx_core::vx_boolean_from_string_ends(text->vx_string(), ends->vx_string());
     output = vx_core::vx_new_boolean(check);"
-  :js "vx_core.vx_boolean_from_string_ends(text, ends)"
+  :csharp :auto
   :java
    "boolean check = Core.vx_boolean_from_string_ends(text.vx_string(), ends.vx_string());
-    output = Core.vx_new_boolean(check);")
+    output = Core.vx_new_boolean(check);"  
+  :js "vx_core.vx_boolean_from_string_ends(text, ends)")
  :test (test-true
         (boolean<-string-ends
          "abcd"
@@ -40,10 +41,11 @@
   :cpp
    "bool check = vx_core::vx_boolean_from_string_starts(text->vx_string(), starts->vx_string());
     output = vx_core::vx_new_boolean(check);"
-  :js "vx_core.vx_boolean_from_string_starts(text, starts)"
+  :csharp :auto
   :java
    "boolean check = Core.vx_boolean_from_string_starts(text.vx_string(), starts.vx_string());
-    output = Core.vx_new_boolean(check);")
+    output = Core.vx_new_boolean(check);"
+  :js :auto)
  :test (test-true
         (boolean<-string-starts
          "abcd"
@@ -54,9 +56,10 @@
  [text : string
   find : string]
  (native
-  :cpp  :auto
-  :java :auto
-  :js   :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         3
         (int<-string-find
@@ -68,9 +71,10 @@
  [text : string
   find : string]
  (native
-  :cpp  :auto
-  :js   :auto
-  :java :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         3
         (int<-string-findkeyword
@@ -87,9 +91,10 @@
  [text     : string
   findlast : string]
  (native
-  :cpp  :auto
-  :java :auto
-  :js   :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         5
         (int<-string-findlast
@@ -165,25 +170,6 @@
          (typelist string int)))
  :doc "Returns true if val is any type in typelist.")
 
-(func length<-string : int
- [text : string]
- (native
-  :cpp
-   "long len = text->vx_string().length();
-    output = vx_core::vx_new_int(len);"
-  :js
-   "text.length"
-  :java
-   "int len = text.vx_string().length();
-    output = Core.vx_new_int(len);")
- :test (test
-        4
-        (length<-string "abcd"))
-       (test
-        0
-        (length<-string ""))
- :doc "Returns length of a string.")
-
 (func string<-int : string
  [val : int]
  (switch val : string
@@ -230,7 +216,8 @@
 (func string<-string-start : string
  [text     : string
   startpos : int]
- (string<-string-start-end text startpos (length<-string text))
+ (string<-string-start-end
+  text startpos (length text))
  :test (test
         "abcd"
         (string<-string-start
@@ -251,10 +238,11 @@
   :cpp
    "std::string str = vx_core::vx_string_from_string_start_end(text->vx_string(), start->vx_int(), end->vx_int());
     output = vx_core::vx_new_string(str);"
-  :js "vx_core.vx_string_from_string_start_end(text, start, end)"
+  :csharp :auto
   :java
    "String stext = Core.vx_string_from_string_start_end(text.vx_string(), start.vx_int(), end.vx_int());
-    output = Core.vx_new_string(stext);")
+    output = Core.vx_new_string(stext);"
+  :js "vx_core.vx_string_from_string_start_end(text, start, end)")
  :test (test
         "abc"
         (string<-string-start-end
@@ -293,8 +281,9 @@
  (native
   :cpp
    "output = vx_type::vx_string_from_stringlist_join(vals, delim);"
-  :java :auto
-  :js "vals.join(delim)")
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         "a$b$c"
         (string<-stringlist-join
@@ -305,9 +294,10 @@
 (func string-lowercase : string
  [text : string]
  (native
-  :cpp  :auto
-  :java :auto
-  :js   :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         "abc"
         (string-lowercase
@@ -317,9 +307,10 @@
 (func string-outdent : string
  [text : string]
  (let : string
-  [pos    : int    := (int<-string-findkeyword
-                       text
-                       :nonwhitespace)]
+  [pos : int :=
+    (int<-string-findkeyword
+     text
+     :nonwhitespace)]
   (if : string
    (then
     (= 0 pos)
@@ -356,9 +347,10 @@
 (func string-trim : string
  [text  : string]
  (native
-  :cpp  :auto
-  :js   :auto
-  :java :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         "ab"
         (string-trim
@@ -368,9 +360,10 @@
 (func string-uppercase : string
  [text : string]
  (native
-  :cpp  :auto
-  :java :auto
-  :js   :auto)
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         "ABC"
         (string-uppercase
@@ -383,7 +376,8 @@
  (native
   :cpp
    "vx_type::vx_stringlist_from_string_split(text, delim);"
-  :java :auto
+  :csharp :auto
+  :java   :auto
   :js "vx_type.vx_stringlist_from_string_split(text, delim)")
  :test (test
         (stringlist "a" "b" "c")

@@ -1,12 +1,151 @@
 (package vx/state
  :doc "State handler")
 
-(type value-map : map
+(type valuemap : map
  :allowtypes [any])
 
+(func any-readstate<-mapname-name : any-1
+ [mapname : string
+  name    : string]
+ (let : any-1
+  [submap : valuemap :=
+    (valuemap-readstate<-mapname
+     mapname)]
+  (any<-map : any-1
+   submap
+   name))
+ :context
+ :doc "Returns the named state value")
+
+(func any-readstate<-name : any-1
+ [name : string]
+ (any<-any : any-1
+  (value-readstate<-name
+   name))
+ :context
+ :doc "Returns the named state value")
+
+(func boolean-removestate<-name : boolean
+ [name : string]
+ (let : boolean
+  [statelistenermap : statelistenermap :=
+    (statelistenermap-readstate)]
+  (boolean-write<-map-name-value
+   statelistenermap
+   name
+   (empty statelistener)))
+ :context
+ :doc "Returns true if named statelistener was removed.")
+
+(func boolean-writestate<-mapname-name-value : boolean
+ [mapname : string
+  name    : string
+  value  : any]
+ (let : boolean
+  [valmap  : valuemap :=
+    (any-readstate<-name : valuemap
+     mapname)]
+  (if : boolean
+   (then
+    (is-empty valmap)
+    (let : boolean
+     [valmap2 : valuemap :=
+       (valuemap name value)
+      listener : statelistener :=
+       (statelistener
+        :name  mapname
+        :value valmap2)]
+     (boolean-writestate<-statelistener
+      listener)))
+   (else
+    (boolean-write<-map-name-value
+     valmap
+     name
+     value))))
+ :context
+ :sideeffects "Changes State"
+ :doc "Returns the named state value and changes it to the new value")
+
+(func boolean-writestate<-name-value : boolean
+ [name  : string
+  value : any]
+ (let : boolean
+  [listenercur : statelistener :=
+    (statelistener-readstate<-name
+     name)
+   listenerchg : statelistener :=
+    (copy listenercur
+     :name  name
+     :value value)]
+  (boolean-writestate<-statelistener
+   listenerchg))
+ :context
+ :sideeffects "Changes State"
+ :doc "Returns the named state value and changes it to the new value")
+
+(func boolean-writestate<-statelistener : boolean
+ [statelistener  : statelistener]
+ (let : boolean
+  [statelistenermap : statelistenermap :=
+    (statelistenermap-readstate)
+   name : string :=
+    (:name statelistener)]
+  (boolean-write<-map-name-value
+   statelistenermap
+   name
+   statelistener))
+ :context
+ :sideeffects "Changes State"
+ :doc "Writes statelistener into state")
+
 (func change : boolean
- [valuemap : value-map]
+ [valuemap : valuemap]
  :doc "Changes the current state")
 
 (func register : boolean
  [listener : statelistener])
+
+(func state<-context : state
+ (:state context)
+ :context
+ :doc "Returns the full current state")
+
+(func statelistener-readstate<-name : statelistener
+ [name  : string]
+ (let : statelistener
+  [statelistenermap : statelistenermap := (statelistenermap-readstate)]
+  (any<-map : statelistener
+   statelistenermap
+   name))
+ :context
+ :doc "Returns the named statelistener")
+
+(func statelistenermap-readstate : statelistenermap
+ (let : statelistenermap
+  [state : state := (state<-context)]
+  (:statelistenermap state))
+ :context
+ :doc "Returns the current state valuemap")
+
+(func value-readstate<-name : any
+ [name  : string]
+ (let : any
+  [statelistener : statelistener :=
+    (statelistener-readstate<-name
+     name)]
+  (:value statelistener))
+ :context
+ :doc "Returns the named state value")
+
+(func valuemap-readstate<-mapname : valuemap
+ [mapname : string]
+ (let : valuemap
+  [value : any :=
+    (value-readstate<-name
+     mapname)
+   valmap : valuemap :=
+    (any<-any : valuemap
+     value)]
+  valmap)
+ :context
+ :doc "Returns the current state valuemap")

@@ -121,3 +121,18 @@
     }
     return output
   }
+
+  static vx_map_from_map_keys(generic_map_1, valuemap, keys) {
+    let output = vx_core.vx_empty(generic_map_1)
+    if (keys.length > 0) {
+      const map = valuemap['vx_value']
+      const values = []
+      for (const key of keys) {
+        const value = map[key]
+        values.push(key)
+        values.push(value)
+      }
+      output = vx_core.f_new(generic_map_1, ...values)
+    }
+    return output
+  }

@@ -32,9 +32,9 @@
   :cpp
    "vx_core::Type_any any = vx_collection::vx_any_from_for_until_loop_max(generic_any_1, start, fn_until, fn_loop, max);
     output = vx_core::vx_any_from_any(generic_any_1, any);"
-  :js
-   "vx_collection.vx_any_from_for_until_loop_max(generic_any_1, start, fn_until, fn_loop, max)"
-  :java :auto)
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :doc `Returns a value using a until loop.
 output : any-1 := start
 count : int := 0
@@ -75,9 +75,9 @@ count : int := 0
   :cpp
    "vx_core::Type_any any = vx_collection::vx_any_from_for_while_loop_max(generic_any_1, start, fn_while, fn_loop, max);
     output = vx_core::vx_any_from_any(generic_any_1, any);"
-  :js
-   "vx_collection.vx_any_from_for_while_loop_max(generic_any_1, start, fn_while, fn_loop, max)"
-  :java :auto)
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :doc "Returns a value using a while loop.
        output : any-1 := start
        count : int := 0
@@ -88,6 +88,88 @@ count : int := 0
          (if continue
           count += 1
           output = (fn-loop output))))")
+
+(func any<-map-pos : any-1
+ [map : map-1
+  pos : int]
+ (let : any-1
+  [keys : stringlist := (stringlist<-map map)
+   key : string :=
+    (any<-list : string
+     keys pos)]
+  (any<-map : any-1
+   map key))
+ :doc "Returns then numbered child from a map.")
+
+(func boolean-write<-map-removekey : boolean
+ [valuemap : map-1
+  key      : string]
+ (boolean-write<-map-name-value
+  valuemap key (empty any))
+ :sideeffects
+  "Alters a mutable map. Warning: vxlisp is immutable by design, so this function can produce unexpected results."
+ :doc "Returns true if it alters a mutable map false if it fails.")
+
+(func boolean-write<-map-removekeys : boolean
+ [valuemap : map-1
+  keys     : stringlist]
+ (let : boolean
+  [writelist : booleanlist :=
+    (list<-list : booleanlist
+     keys
+     (fn : boolean
+      [key : string]
+      (boolean-write<-map-removekey
+       valuemap key)))]
+  (and writelist))
+ :sideeffects
+  "Alters a mutable map. Warning: vxlisp is immutable by design, so this function can produce unexpected results."
+ :doc "Returns true if it alters a mutable map false if it fails.")
+
+(func int<-map-key : int
+ [map : map-1
+  key : string]
+ (let : int
+  [keys : stringlist := (stringlist<-map map)]
+  (int<-stringlist-find
+   keys key))
+ :test (test
+        2
+        (int<-map-key
+         (stringmap
+          :a "x"
+          :b "y")
+         "b"))
+ :doc "Returns the position of key in any map.")
+
+(func int<-stringlist-find : int
+ [stringlist : stringlist
+  find       : string]
+ (let : int
+  [poslist : intlist :=
+    (list<-list-intany : intlist
+     stringlist
+     (fn : int
+      [pos   : int
+       value : string]
+      (if : int
+       (= find value)
+       pos
+       0)))
+   gt0list : intlist :=
+    (list<-list-filter
+     poslist
+     (fn : int
+      [item : int]
+      item))]
+  (first<-list : int
+   gt0list))
+ :test (test
+        2
+        (int<-stringlist-find
+         (stringlist "a" "b")
+         "b"))
+ :doc "Returns the position (first position is 1) of find text in a stringlist.")
 
 (func is-list : boolean
  [val : any :doc "Any value"]
@@ -111,9 +193,9 @@ count : int := 0
   :cpp
    "vx_core::Type_any list = vx_collection::vx_list_from_for_end_loop(generic_list_1, start, end, fn_loop);
     output = vx_core::vx_any_from_any(generic_list_1, list);"
-  :js
-   "vx_collection.vx_list_from_for_end_loop(generic_list_1, start, end, fn_loop)"
-  :java :auto)
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         (intlist 4 9)
         (list<-for-end-loop : intlist
@@ -163,9 +245,9 @@ output : list-1 := (empty list-1)
   :cpp
    "vx_core::Type_any list = vx_collection::vx_list_from_for_while_loop_max(generic_list_1, start, fn_while, fn_loop, max);
     output = vx_core::vx_any_from_any(generic_list_1, list);"
-  :js
-   "vx_collection.vx_list_from_for_while_loop_max(generic_list_1, start, fn_while, fn_loop, max)"
-  :java :auto)
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :doc `Returns a list of any-1 using a while loop.
 1. output : list-1 := (empty list-1)
 2. value : any-1 := start.
@@ -186,7 +268,7 @@ output : list-1 := (empty list-1)
          (stringlist
           "a" "b" "c" "d")
          3))
- :doc "Returns a sub list from positions 0 to end.")
+ :doc "Returns a sub list from positions 1 to end inclusive.")
 
 (func list<-list-filter : list-1
  [vallist   : list-2
@@ -195,9 +277,9 @@ output : list-1 := (empty list-1)
   :cpp
    "vx_core::Type_any list = vx_collection::vx_list_from_list_filter(generic_list_1, vallist, fn_filter);
     output = vx_core::vx_any_from_any(generic_list_1, list);"
-  :js
-   "vx_collection.vx_list_from_list_filter(generic_list_1, vallist, fn_filter)"
-  :java :auto)
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         (stringlist
          "a1" "b1" "c1" "d1")
@@ -234,7 +316,8 @@ output : list-1 := (empty list-1)
 (func list<-list-start : list-1
  [values : list-1
   start  : int]
- (list<-list-start-end values start (length<-list values))
+ (list<-list-start-end
+  values start (length values))
  :test (test
         (stringlist
          "b" "c" "d")
@@ -252,9 +335,9 @@ output : list-1 := (empty list-1)
   :cpp
    "vx_core::Type_any any = vx_collection::vx_list_from_list_start_end(generic_list_1, values, start, end);
     output = vx_core::vx_any_from_any(generic_list_1, any);"
-  :js
-   "vx_collection.vx_list_from_list_start_end(generic_list_1, values, start, end)"
-  :java :auto)
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
  :test (test
         (stringlist
          "b" "c")
@@ -262,4 +345,84 @@ output : list-1 := (empty list-1)
          (stringlist
           "a" "b" "c" "d")
          2 3))
- :doc "Returns a list from another list")
+ :doc "Returns a sublist from another list")
+
+(func map<-map-end : map-1
+ [valuemap : map-1
+  end      : int]
+ (map<-map-start-end
+  valuemap 1 end)
+ :test (test
+        (stringmap
+         :b "1"
+         :a "2")
+        (map<-map-end
+         (stringmap
+          :b "1"
+          :a "2"
+          :c "3")
+         2))
+ :doc "Returns a submap from key positions 1 to end inclusive.")
+
+(func map<-map-keys : map-1
+ [valuemap : map-1
+  keys     : stringlist]
+ (native
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto)
+ :test (test
+        (stringmap
+         :c "3"
+         :a "1")
+        (map<-map-keys
+         (stringmap
+          :a "1"
+          :b "2"
+          :c "3")
+         (stringlist
+          "c" "a")))
+ :doc "Returns a submap from another map using a keylist")
+
+(func map<-map-start : map-1
+ [valuemap : map-1
+  start    : int]
+ (map<-map-start-end
+  valuemap start (length valuemap))
+ :test (test
+        (stringmap
+         :a "2"
+         :c "3")
+        (map<-map-start
+         (stringmap
+          :b "1"
+          :a "2"
+          :c "3")
+         2))
+ :doc "Returns a sub map from start to map end.")
+
+(func map<-map-start-end : map-1
+ [valuemap : map-1
+  start    : int
+  end      : int]
+ (let : map-1
+  [keys1 : stringlist :=
+    (stringlist<-map valuemap)
+   keys2 : stringlist :=
+    (list<-list-start-end : stringlist
+     keys1 start end)]
+  (map<-map-keys : map-1
+   valuemap keys2))
+ :test (test
+        (stringmap
+         :a "2"
+         :c "3")
+        (map<-map-start-end
+         (stringmap
+          :b "1"
+          :a "2"
+          :c "3"
+          :d "4")
+         2 3))
+ :doc "Returns a submap from another map using the index of the keylist")

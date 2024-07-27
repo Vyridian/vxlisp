@@ -1,13 +1,15 @@
 (package vx/web/htmldoc
  :libs (lib event :path vx/event)
        (lib html  :path vx/web/html)
+       (lib ui    :path vx/ui/ui)
  :doc "Html Client-side document handler")
 
-(func any-data<-id : any
- [id : string]
+(func boolean-print<-id-stylesheettext : boolean
+ [id : string
+  stylesheettext : string]
  (native
   :js :auto)
- :doc "Returns data component from element.")
+ :doc "Print the contents of the given id.")
 
 (func boolean-replace<-id-htmltext : boolean
  [id       : string
@@ -18,16 +20,33 @@
  :clientserver :client
  :doc "Replaces an html node with given id and text.")
 
-(func boolean-replace<-id-htmltext-data-eventmap : boolean
+(func boolean-replace<-id-parent-htmltext : boolean
  [id       : string
-  htmltext : string
-  data     : any
-  eventmap : event/eventmap]
+  parent   : string
+  htmltext : string]
  (native
   :js :auto)
  :sideeffects "Changes HTML display."
  :clientserver :client
- :doc "Replaces an html node with given id and text.")
+ :doc "Replaces an html node with given id, parentid, and text.")
+
+(func boolean-remove<-id : boolean
+ [id : string]
+ (native
+  :js :auto)
+ :sideeffects "Changes HTML display."
+ :clientserver :client
+ :doc "Removes an html node with given id.")
+
+(func boolean-write<-id-attribute-value : boolean
+ [id        : string
+  attribute : string
+  value     : string]
+ (native
+  :js :auto)
+ :sideeffects "Changes HTML element value."
+ :clientserver :client
+ :doc "Writes to an html node with given id and attribute name and value.")
 
 (func boolean-write<-id-htmltext : boolean
  [id       : string
@@ -38,16 +57,24 @@
  :clientserver :client
  :doc "Writes to an html node with given id and text.")
 
+(func boolean-write<-id-visible : boolean
+ [id      : string
+  visible : boolean]
+ (native
+  :js :auto)
+ :sideeffects "Changes HTML display."
+ :clientserver :client
+ :doc "Writes to an html node changing its visibility.")
+
 (func boolean-write<-stylesheet : boolean
  [stylesheet : html/stylesheet]
  (let : boolean
-  [stylelist : stylelist := (styles<-stylesheet
-                             stylesheet)
-   text      : string    := (string<-stylelist-indent
-                             stylelist
-                             0)
-   iswrite   : boolean   := (boolean-write-stylesheet<-string
-                             text)]
+  [text : string :=
+    (string<-stylesheet
+     stylesheet)
+   iswrite : boolean :=
+    (boolean-write-stylesheet<-string
+     text)]
   iswrite)
  :async
  :sideeffects "Changes Stylesheet display."
@@ -63,9 +90,44 @@
  :clientserver :client
  :doc "Writes a css stylesheet.")
 
+(func boolean-writeevents<-ui : boolean
+ [ui : ui/ui]
+ (native
+  :js :auto)
+ :doc "Writes the eventmap from ui into dom.")
+
+(func context-read : context
+ (native
+  :js :auto)
+ :doc "Reads context from document.data.context")
+
+(func context-write : context
+ (native
+  :js :auto)
+ :context
+ :doc "Writes context to document.data.context")
+
 (func string<-id : string
  [id   : string]
  (native
   :js :auto)
  :clientserver :client
  :doc "Reads the value of an html node by id.")
+
+(func string<-stylesheet : string
+ [stylesheet : html/stylesheet]
+ (let : string
+  [stylelist : stylelist :=
+    (html/styles<-stylesheet
+     stylesheet)
+   text : string :=
+    (html/string<-stylelist-indent
+     stylelist 0)]
+  text)
+ :doc "Returns string from a given stylesheet")
+
+(func ui-readstate<-uid : any
+ [uid : string]
+ (native
+  :js :auto)
+ :doc "Returns ui component from element.")

@@ -1,4 +1,9 @@
-  public static <T extends Core.Type_any> T vx_any_from_for_until_loop_max(T generic_any_1, T start, Core.Func_boolean_from_any fn_until, Core.Func_any_from_any fn_loop, Core.Type_int max) {
+  public static <T extends Core.Type_any> T vx_any_from_for_until_loop_max(
+    T generic_any_1,
+    T start,
+    Core.Func_boolean_from_any fn_until,
+    Core.Func_any_from_any fn_loop,
+    Core.Type_int max) {
     T output = start;
     boolean iscontinue = true;
     int icount = 0;
@@ -21,7 +26,12 @@
     return output;
   }
 
-  public static <T extends Core.Type_any> T vx_any_from_for_while_loop_max(T generic_any_1, T start, Core.Func_boolean_from_any fn_while, Core.Func_any_from_any fn_loop, Core.Type_int max) {
+  public static <T extends Core.Type_any> T vx_any_from_for_while_loop_max(
+    T generic_any_1,
+    T start,
+    Core.Func_boolean_from_any fn_while,
+    Core.Func_any_from_any fn_loop,
+    Core.Type_int max) {
     T output = start;
     boolean iscontinue = true;
     int icount = 0;
@@ -46,7 +56,11 @@
     return output;
   }
 
-  public static <T extends Core.Type_list> T vx_list_from_for_end_loop(T generic_list_1, Core.Type_int start, Core.Type_int end, Core.Func_any_from_int fn_loop) {
+  public static <T extends Core.Type_list> T vx_list_from_for_end_loop(
+    T generic_list_1,
+    Core.Type_int start,
+    Core.Type_int end,
+    Core.Func_any_from_int fn_loop) {
     T output = Core.f_empty(generic_list_1);
     List<Core.Type_any> listvals = new ArrayList<>();
     int istart = start.vx_int();
@@ -63,13 +77,18 @@
       }
     }
     if (listvals.size() > 0) {
-      Core.Type_anylist anylist = Core.t_anylist.vx_new(listvals);
+      Core.Type_anylist anylist = Core.vx_new(Core.t_anylist, listvals);
       output = Core.f_new(generic_list_1, anylist);
     }
     return output;
   }
 
-  public static <T extends Core.Type_list> T vx_list_from_for_while_loop_max(T generic_list_1, Core.Type_any start, Core.Func_boolean_from_any fn_while, Core.Func_any_from_any fn_loop, Core.Type_int max) {
+  public static <T extends Core.Type_list> T vx_list_from_for_while_loop_max(
+    T generic_list_1,
+    Core.Type_any start,
+    Core.Func_boolean_from_any fn_while,
+    Core.Func_any_from_any fn_loop,
+    Core.Type_int max) {
     T output = Core.f_empty(generic_list_1);
     List<Core.Type_any> listvals = new ArrayList<>();
     boolean iscontinue = true;
@@ -95,13 +114,16 @@
       }
     }
     if (listvals.size() > 0) {
-      Core.Type_anylist anylist = Core.t_anylist.vx_new(listvals);
+      Core.Type_anylist anylist = Core.vx_new(Core.t_anylist, listvals);
       output = Core.f_new(generic_list_1, anylist);
     }
     return output;
   }
 
-  public static <T extends Core.Type_list> T vx_list_from_list_filter(T generic_list_1, Core.Type_list vallist, Core.Func_any_from_any fn_filter) {
+  public static <T extends Core.Type_list> T vx_list_from_list_filter(
+    T generic_list_1,
+    Core.Type_list vallist,
+    Core.Func_any_from_any fn_filter) {
     T output = Core.f_empty(generic_list_1);
     List<Core.Type_any> listval = vallist.vx_list();
     List<Core.Type_any> items = new ArrayList<>();
@@ -112,12 +134,15 @@
         items.add(newval);
       }
     }
-    Core.Type_any work = generic_list_1.vx_new(items);
-    output = Core.f_any_from_any(generic_list_1, work);
+    output = Core.vx_new(generic_list_1, items);
     return output;
   }
 
-  public static <T extends Core.Type_list> T vx_list_from_list_start_end(T generic_list_1, Core.Type_list values, Core.Type_int start, Core.Type_int end) {
+  public static <T extends Core.Type_list> T vx_list_from_list_start_end(
+    T generic_list_1,
+    Core.Type_list values,
+    Core.Type_int start,
+    Core.Type_int end) {
     T output = Core.f_empty(generic_list_1);
     int istart = start.vx_int();
     int iend = end.vx_int();
@@ -134,9 +159,27 @@
         iend = maxlen;
       }
       List<Core.Type_any> listsub = listval.subList(istart - 1, iend);
-      Core.Type_any work = generic_list_1.vx_new(listsub);
-      output = Core.f_any_from_any(generic_list_1, work);
+      output = Core.vx_new(generic_list_1, listsub);
     }
     return output;
   }
   
+  public static <T extends Core.Type_map> T vx_map_from_map_keys(
+    T generic_map_1,
+    Core.Type_map valuemap,
+    Core.Type_stringlist keys) {
+    T output = Core.f_empty(generic_map_1);
+    List<Core.Type_string> keylist = keys.vx_liststring();
+    if (keylist.size() > 0) {
+      Map<String, Core.Type_any> map = valuemap.vx_map();
+      List<Core.Type_any> values = new ArrayList<>();
+      for (Core.Type_string key : keylist) {
+        Core.Type_any value = map.get(key.vx_string());
+        values.add(key);
+        values.add(value);
+      }
+      Core.Type_anylist anyvalues = Core.vx_new_anylist(values);
+      output = Core.f_new(generic_map_1, anyvalues);
+    }
+    return output;
+  }

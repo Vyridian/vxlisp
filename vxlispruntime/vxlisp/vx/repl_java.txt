@@ -15,15 +15,15 @@
         } else {
           replval = Core.vx_new_string(sarg);
         }
-        Repl.Type_repl argrepl = Repl.t_repl.vx_new(
+        Repl.Type_repl argrepl = Core.vx_new(Repl.t_repl,
           Core.vx_new_string(":val"), replval
         );
         listrepl.add(argrepl);
       }
     }
-    Repl.Type_repl repl = Repl.t_repl.vx_new(
+    Repl.Type_repl repl = Core.vx_new(Repl.t_repl,
       Core.vx_new_string(":type"), type,
-      Core.vx_new_string(":repllist"), Repl.t_repllist.vx_new(listrepl)
+      Core.vx_new_string(":repllist"), Core.vx_new(Repl.t_repllist, listrepl)
     );
     Core.Type_any any = Repl.f_any_from_repl(context, repl);
     Core.Type_any anytype = any.vx_type();

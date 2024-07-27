@@ -1,24 +1,32 @@
 (package vx/data/file
- :libs (lib tb :path vx/data/textblock)
+ :libs (lib tb  :path vx/data/textblock)
+       (lib typ :path vx/type)
        (lib javaniofile)
  :doc "File handler")
 
 (type file : struct
- :properties [name       : string
-              format     : fileformat
-              path       : string
-              permission : permission
-              text       : string]
+ :properties
+  [name       : string
+   format     : fileformat
+   path       : string
+   permission : permission
+   text       : string]
  :doc "File structure")
 
+(type filelist : list
+ :allowtypes [file]
+ :doc "List of file")
+
 (type fileformat : string
- :allowvalues [:text])
+ :allowvalues [:binary
+               :text])
 
 (func boolean-exists<-file : boolean
  [file : file]
  (native
   :cpp
    "output = vx_data_file::vx_boolean_exists_from_file(file);"
+  :csharp :auto
   :java
    "Core.Type_string fullpath = File.f_pathfull_from_file(file);
     String sfullpath = fullpath.vx_string();
@@ -30,14 +38,16 @@
         (boolean-exists<-file
          (file
           :name "boolean_exists_from_file.txt"
-          :path "src/test/resources/vx")))
+          :path (string path-test-resources "/vx"))))
  :clientserver :server
  :doc "Returns true if file/path exists.")
 
 (func boolean-write<-file-any : boolean
  [file : file
   val  : any]
- (boolean-write<-file-string file (string<-any val))
+ (boolean-write<-file-string
+  file
+  (string<-any val))
  :context
  :sideeffects "Writes to file io"
  :clientserver :server
@@ -59,6 +69,7 @@
  (native
   :cpp
    "output = vx_data_file::vx_boolean_write_from_file_string(file, text);"
+  :csharp :auto
   :java
    "Core.Type_string fullpath = File.f_pathfull_from_file(file);
     String sfullpath = fullpath.vx_string();
@@ -75,10 +86,27 @@
         (boolean-write<-file-string
          (file
           :name "boolean_write_from_file_string.txt"
-          :path "src/test/resources/vx")
+          :path (string path-test-resources "/vx"))
          "writetext"))
  :clientserver :server
  :doc "Write a File to Disk")
+
+(func file<-path : file
+ [path : string]
+ (let : file
+  [pos : int :=
+    (typ/int<-string-findlast
+     path "/")
+   name : string :=
+    (typ/string<-string-start
+     path (+1 pos))
+   pth : string :=
+    (typ/string<-string-end
+     path (-1 pos))]
+  (file
+   :name name
+   :path pth))
+ :doc "Returns a file from a given path")
 
 (func file-read<-file : file
  [file : file]
@@ -90,12 +118,12 @@
  :test (test
         (file
          :name "string_read_from_file.txt"
-         :path "src/test/resources/vx"
+         :path (string path-test-resources "/vx")
          :text "testdata")
         (file-read<-file
          (file
           :name "string_read_from_file.txt"
-          :path "src/test/resources/vx")))
+          :path (string path-test-resources "/vx"))))
  :clientserver :server
  :doc "Read a Text File from Disk")
 
@@ -104,6 +132,7 @@
  (native
   :cpp
    "output = vx_data_file::vx_string_read_from_file(file);"
+  :csharp :auto
   :java
    "output = vx_string_read_from_file(file);")
  :context
@@ -114,7 +143,7 @@
         (string-read<-file
          (file
           :name "string_read_from_file.txt"
-          :path "src/test/resources/vx")))
+          :path (string path-test-resources "/vx"))))
  :clientserver :server
  :doc "Read text from a File")
 
@@ -132,6 +161,7 @@
  (native
   :cpp
    "output = vx_data_file::vx_pathcurrent_from_os();"
+  :csharp :auto
   :java
    "Path path = Paths.get(“”);
     path = path.toAbsolutePath();
@@ -145,5 +175,21 @@
  (let : string
   [path : string := (path<-file file)
    name : string := (name<-file file)]
-  (string path "/" name))
+  (if : string
+   (then
+    (is-empty path)
+    name)
+   (else
+    (string path "/" name))))
+ :test (test
+        "fname"
+        (pathfull<-file
+         (file
+          :name "fname")))
+       (test
+        "fpath/fname"
+        (pathfull<-file
+         (file
+          :path "fpath"
+          :name "fname")))
  :doc "Returns full path and name from file.")

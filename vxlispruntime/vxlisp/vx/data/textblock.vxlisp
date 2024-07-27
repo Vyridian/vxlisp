@@ -335,8 +335,7 @@
    endpos      : int       := (:endpos   textblockarg)
    pos         : int       := (:pos       close)
    textclose   : string    := (:starttext close)
-   lenclose    : int       := (length<-string
-                               textclose)
+   lenclose    : int       := (length textclose)
    posminus    : int       := (-1 pos)
    startleft   : int       := startpos
    startclose  : int       := (+
@@ -696,7 +695,7 @@
    textopen   : string    := (:starttext open)
    textclose  : string    := (:endtext   open)
    delimlistl : delimlist := (:delimlist open)
-   lenopen    : int       := (length<-string textopen)
+   lenopen    : int       := (length textopen)
    posminus   : int       := (-1 pos)
    startleft  : int       := (if : int
                               (= pos 1)
@@ -933,8 +932,7 @@
                                   pos3   : int    := (if : int
                                                       (then
                                                        (= 0 pos2)
-                                                       (length<-string
-                                                        text2))
+                                                       (length text2))
                                                       (then
                                                        (= pos2 pos)
                                                        pos2)
@@ -946,8 +944,7 @@
                                   pos3)))
                                (else origsingle))
    delimlistl  : delimlist := (:delimlist single)
-   lensingle   : int       := (length<-string
-                               textsingle)
+   lensingle   : int       := (length textsingle)
    posminus    : int       := (-1 pos)
    startleft   : int       := startpos
    startsingle : int       := (+
@@ -1360,7 +1357,7 @@
   :text text
   :delim delim
   :startpos 0
-  :endpos (length<-string text))
+  :endpos (length text))
  :test (test
         (textblock
          :text "a"
@@ -2059,8 +2056,7 @@
    endpos   : int    := (if : int
                          (= "" text)
                          0
-                         (length<-string
-                           text))]
+                         (length text))]
  (copy textblockarg
   :startpos startpos
   :endpos endpos
@@ -4862,7 +4858,7 @@
                               starttext
                               (case :nonwhitespace 0)
                               (case :whitespace    0)
-                              (else (length<-string starttext)))
+                              (else (length starttext)))
    curpos     : int       := 0]
   (if
    (then (= text "")    (empty textblock))
