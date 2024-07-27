@@ -19,13 +19,13 @@ namespace vx_test_test {
             vx_core::vx_new_string(":name"),
             vx_core::vx_new_string("testsuite.vxlisp"),
             vx_core::vx_new_string(":path"),
-            vx_core::vx_new_string("src/test/resources")
+            vx_core::c_path_test_resources
           })
         )
       )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.vxlisp\"\n   :path \"src/test/resources\")))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.vxlisp\"\n   :path path-test-resources)))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/test"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
@@ -58,13 +58,13 @@ namespace vx_test_test {
             vx_core::vx_new_string(":name"),
             vx_core::vx_new_string("testsuite.html"),
             vx_core::vx_new_string(":path"),
-            vx_core::vx_new_string("src/test/resources")
+            vx_core::c_path_test_resources
           })
         )
       )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.html\"\n   :path \"src/test/resources\")))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.html\"\n   :path path-test-resources)))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/test"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
@@ -97,13 +97,13 @@ namespace vx_test_test {
             vx_core::vx_new_string(":name"),
             vx_core::vx_new_string("testsuitenode.vxlisp"),
             vx_core::vx_new_string(":path"),
-            vx_core::vx_new_string("src/test/resources")
+            vx_core::c_path_test_resources
           })
         )
       )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuitenode.vxlisp\"\n   :path \"src/test/resources\")))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuitenode.vxlisp\"\n   :path path-test-resources)))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/test"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });

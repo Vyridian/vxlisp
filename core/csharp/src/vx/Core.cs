@@ -83,10 +83,10 @@ public static class Core {
     protected int vx_iref = 0;
     public Vx.Core.Type_constdef? vx_p_constdef = null;
     protected Vx.Core.Type_msgblock? vxmsgblock = null;
-    public virtual Vx.Core.Type_any vx_new(params Object[] vals) {
+    public virtual Vx.Core.Type_any vx_new(params object[] vals) {
       return e_any;
     }
-    public virtual Vx.Core.Type_any vx_copy(params Object[] vals) {
+    public virtual Vx.Core.Type_any vx_copy(params object[] vals) {
       return e_any;
     }
     public virtual Vx.Core.Type_any vx_empty() {
@@ -165,11 +165,13 @@ public static class Core {
     return output;
   }
 
-  public static Vx.Core.Type_any[] arrayany_from_anylist(Vx.Core.Type_anylist list) {
+  public static Vx.Core.Type_any[] arrayany_from_anylist(
+    Vx.Core.Type_anylist list) {
     return list.vx_list().ToArray();
   }
 
-  public static List<Vx.Core.Type_any> arraylist_from_array(params Vx.Core.Type_any[] items) {
+  public static List<Vx.Core.Type_any> arraylist_from_array(
+    params Vx.Core.Type_any[] items) {
     List<Vx.Core.Type_any> output = new List<Vx.Core.Type_any>(items);
     return output;
   }
@@ -251,14 +253,14 @@ public static class Core {
   }
 
   // vx_new(generic_any_1, args...)
-  public static T vx_new<T>(T generic_any_1, params Object[] vals) where T : Vx.Core.Type_any {
+  public static T vx_new<T>(T generic_any_1, params object[] vals) where T : Vx.Core.Type_any {
     Vx.Core.Type_any val = generic_any_1.vx_new(vals);
     T output = Vx.Core.f_any_from_any(generic_any_1, val);
     return output;
   }
 
   // vx_copy(generic_any_1, args...)
-  public static T vx_copy<T>(T copyval, params Object[] vals) where T : Vx.Core.Type_any {
+  public static T vx_copy<T>(T copyval, params object[] vals) where T : Vx.Core.Type_any {
     Vx.Core.Type_any val = copyval.vx_copy(vals);
     T output = (T)val;
     return output;
@@ -285,9 +287,8 @@ public static class Core {
 				T output = Vx.Core.f_empty(generic_any_1);
 				List<Vx.Core.Type_any> listany = list.vx_list();
 				foreach (Vx.Core.Type_any any in listany) {
-				  T tany = Vx.Core.f_any_from_any(generic_any_1, any);
-				  T val = fn_any(tany);
-				  if (val != null) {
+				  T val = fn_any(any);
+				  if (Vx.Core.f_notempty_1(val).vx_boolean()) {
 				    output = val;
 				    break;
 				  }
@@ -377,11 +378,6 @@ public static class Core {
     return output;
   }
 
-  public static Task<T> vx_async_new_completed<T>(T value) {
-    Task<T> output = Task.FromResult<T>(value);
-    return output;
-  }
-
   public static Task<T> vx_async_from_async<T, U>(T generic_any_1, Task<U> future) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
     Task<T> output = future.ContinueWith(tasku => {
       U tval = tasku.Result;
@@ -397,6 +393,11 @@ public static class Core {
       T tval = fn(uval);
       return tval;
     });
+    return output;
+  }
+
+  public static Task<T> vx_async_new_from_value<T>(T value) {
+    Task<T> output = Task.FromResult<T>(value);
     return output;
   }
 
@@ -704,7 +705,7 @@ public static class Core {
     X output = Vx.Core.f_empty(generic_list_1);
     List<Vx.Core.Type_any> list_value = values.vx_list();
     Func<Vx.Core.Type_any, Vx.Core.Type_any> fn = (val) => {
-      return fn_any_from_any.vx_any_from_any(generic_list_1, val);
+      return fn_any_from_any.vx_any_from_any(Vx.Core.t_any, val);
     };
     List<Vx.Core.Type_any> list_result = Vx.Core.arraylist_from_arraylist_fn<Vx.Core.Type_any, Vx.Core.Type_any>(list_value, fn);
     output = Vx.Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(list_result));
@@ -717,19 +718,29 @@ public static class Core {
     Vx.Core.Func_any_from_any_async fn_any_from_any_async)
     where X : Vx.Core.Type_list
     where Y : Vx.Core.Type_list {
-    Task<X> output = Vx.Core.vx_async_new_completed(Vx.Core.f_empty(generic_list_1));
-    List<Vx.Core.Type_any> list_value = values.vx_list();
-    Func<Vx.Core.Type_any, Task<X>> fn_future_from_any = (val) => {
-      Task<X> future_any = fn_any_from_any_async.vx_any_from_any_async(generic_list_1, val);
+     Func<Vx.Core.Type_any, Task<Vx.Core.Type_any>> fn_future_from_any = (val) => {
+      Task<Vx.Core.Type_any> future_any = fn_any_from_any_async.vx_any_from_any_async(
+        Vx.Core.t_any, val
+      );
       return future_any;
     };
-    List<Task<X>> list_async_result = Vx.Core.arraylist_from_arraylist_fn(list_value, fn_future_from_any);
-    Task<List<X>> async_list_result = Vx.Core.vx_async_arraylist_from_arraylist_async(list_async_result);
-    Func<List<X>, X> fn_any_from_list = (list_result) => {
-      X work = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(list_result));
+    Func<List<Vx.Core.Type_any>, X> fn_any_from_list = (list_result) => {
+      object[] array_result = [.. list_result];
+      Vx.Core.Type_any anylist = generic_list_1.vx_new(array_result);
+      X work = Core.f_any_from_any(
+        generic_list_1,
+        anylist
+      );
       return work;
     };
-    output = Vx.Core.vx_async_from_async_fn(async_list_result, fn_any_from_list);
+    List<Vx.Core.Type_any> list_value = values.vx_list();
+    List<Task<Vx.Core.Type_any>> list_async_result = Vx.Core.arraylist_from_arraylist_fn(
+      list_value, fn_future_from_any
+    );
+    Task<List<Vx.Core.Type_any>> async_list_result = Vx.Core.vx_async_arraylist_from_arraylist_async(list_async_result);
+    Task<X> output = Vx.Core.vx_async_from_async_fn(
+      async_list_result, fn_any_from_list
+    );
     return output;
   }
 
@@ -793,8 +804,8 @@ public static class Core {
   }
 
   // vx_log(object...)
-  public static void vx_log(params Object[] values) {
-    foreach (Object value in values) {
+  public static void vx_log(params object[] values) {
+    foreach (object value in values) {
       string text = "";
       if (value is Vx.Core.Type_string valstring) {
         text = valstring.vx_string();
@@ -906,7 +917,9 @@ public static class Core {
   }
 
   // vx_msgblock_from_copy_arrayval(msgblock, any...)
-  public static Vx.Core.Type_msgblock vx_msgblock_from_copy_arrayval(Vx.Core.Type_any copy, params Object[] vals) {
+  public static Vx.Core.Type_msgblock vx_msgblock_from_copy_arrayval(
+    Vx.Core.Type_any copy,
+    params object[] vals) {
     Vx.Core.Type_msgblock output = Vx.Core.e_msgblock;
     Vx.Core.Type_msgblock copymsgblock = copy.vx_msgblock();
     if (copymsgblock != Vx.Core.e_msgblock) {
@@ -1028,7 +1041,21 @@ public static class Core {
         output = valint.vx_int().ToString();
       }
     } else if (value is Vx.Core.Type_string valstring) {
-      output = "\"" + valstring.vx_string() + "\"";
+      string sval = valstring.vx_string();
+      if (sval.IndexOf("\"") < 0) {
+        sval = "\"" + sval + "\"";
+      } else {
+        sval = "`" + sval + "`";
+      }
+      if (valstring.vx_msgblock() != Vx.Core.e_msgblock) {
+        string msgtext = Vx.Core.vx_string_from_any_indent(
+          valstring.vx_msgblock(), indent, linefeed);
+        output  = "\n" + indenttext + "(string";
+        output += "\n" + indenttext + " " + sval;
+        output += "\n" + indenttext + " " + msgtext + ")";
+      } else {
+        output = sval;
+      }
     } else if (value.vx_constdef() != Vx.Core.e_constdef) {
       Vx.Core.Type_constdef constdef = value.vx_constdef();
       string constpkg = constdef.pkgname().vx_string();
@@ -1129,7 +1156,7 @@ public static class Core {
     return output;
   }
 
-  public static string vx_string_from_object(Object obj) {
+  public static string vx_string_from_object(object obj) {
     string output = "";
     string? text = obj.ToString();
     if (text != null) {
@@ -1260,12 +1287,12 @@ public static class Core {
   }
 
   public static Vx.Core.Type_anylist vx_anylist_from_arraystring(params string[] arraystring) {
-    List<Object> listany = new List<Object>();
+    List<object> listany = new List<object>();
     foreach (string svalue in arraystring) {
       Vx.Core.Type_string value = Vx.Core.vx_new_string(svalue);
       listany.Add(value);
     }
-    Object[] arrayany = [.. listany];
+    object[] arrayany = [.. listany];
     Vx.Core.Type_anylist output = Vx.Core.vx_new(Vx.Core.t_anylist, arrayany);
     return output;
   }
@@ -1290,8 +1317,8 @@ public static class Core {
    * (type any)
    */
   public interface Type_any {
-    public Vx.Core.Type_any vx_new(params Object[] vals);
-    public Vx.Core.Type_any vx_copy(params Object[] vals);
+    public Vx.Core.Type_any vx_new(params object[] vals);
+    public Vx.Core.Type_any vx_copy(params object[] vals);
     public Vx.Core.Type_any vx_empty();
     public Vx.Core.Type_any vx_type();
     public Vx.Core.Type_typedef vx_typedef();
@@ -1304,12 +1331,12 @@ public static class Core {
 
   public class Class_any : Vx.Core.Class_base, Type_any {
 
-    public override Vx.Core.Type_any vx_new(params Object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Core.Type_any output = Vx.Core.vx_copy(Vx.Core.e_any, vals);
       return output;
     }
 
-    public override Vx.Core.Type_any vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
       Type_any output = this;
       bool ischanged = false;
       Class_any val = this;
@@ -1317,7 +1344,7 @@ public static class Core {
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -1372,12 +1399,12 @@ public static class Core {
 
   public class Class_any_async_from_func : Vx.Core.Class_base, Type_any_async_from_func {
 
-    public override Vx.Core.Type_any_async_from_func vx_new(params Object[] vals) {
+    public override Vx.Core.Type_any_async_from_func vx_new(params object[] vals) {
       Vx.Core.Type_any_async_from_func output = Vx.Core.vx_copy(Vx.Core.e_any_async_from_func, vals);
       return output;
     }
 
-    public override Vx.Core.Type_any_async_from_func vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_any_async_from_func vx_copy(params object[] vals) {
       Type_any_async_from_func output = this;
       bool ischanged = false;
       Class_any_async_from_func val = this;
@@ -1463,12 +1490,12 @@ public static class Core {
       return this.vx_any_from_any(index);
     }
 
-    public override Vx.Core.Type_any_from_anylist vx_new(params Object[] vals) {
+    public override Vx.Core.Type_any_from_anylist vx_new(params object[] vals) {
       Vx.Core.Type_any_from_anylist output = Vx.Core.vx_copy(Vx.Core.e_any_from_anylist, vals);
       return output;
     }
 
-    public override Vx.Core.Type_any_from_anylist vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_any_from_anylist vx_copy(params object[] vals) {
       Type_any_from_anylist output = this;
       bool ischanged = false;
       Class_any_from_anylist val = this;
@@ -1478,7 +1505,7 @@ public static class Core {
       }
       List<Vx.Core.Func_any_from_any> listval = new List<Vx.Core.Func_any_from_any>(val.vx_listany_from_any());
       Vx.Core.Type_msg msg;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -1489,8 +1516,8 @@ public static class Core {
         } else if (valsub is Vx.Core.Type_any_from_anylist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listany_from_any());
-        } else if (valsub is List<object> listunknown) {
-          foreach (Object item in listunknown) {
+        } else if (valsub is List<Vx.Core.Type_any> listany) {
+          foreach (Vx.Core.Type_any item in listany) {
             if (false) {
             } else if (item is Vx.Core.Func_any_from_any valitem) {
               ischanged = true;
@@ -1574,12 +1601,12 @@ public static class Core {
       return output;
     }
 
-    public override Vx.Core.Type_anylist vx_new(params Object[] vals) {
+    public override Vx.Core.Type_anylist vx_new(params object[] vals) {
       Vx.Core.Type_anylist output = Vx.Core.vx_copy(Vx.Core.e_anylist, vals);
       return output;
     }
 
-    public override Vx.Core.Type_anylist vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_anylist vx_copy(params object[] vals) {
       Type_anylist output = this;
       bool ischanged = false;
       Class_anylist val = this;
@@ -1589,7 +1616,7 @@ public static class Core {
       }
       List<Vx.Core.Type_any> listval = new List<Vx.Core.Type_any>(val.vx_list());
       Vx.Core.Type_msg msg;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -1600,8 +1627,8 @@ public static class Core {
         } else if (valsub is Vx.Core.Type_anylist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_list());
-        } else if (valsub is List<object> listunknown) {
-          foreach (Object item in listunknown) {
+        } else if (valsub is List<Vx.Core.Type_any> listany) {
+          foreach (Vx.Core.Type_any item in listany) {
             if (false) {
             } else if (item is Vx.Core.Type_any valitem) {
               ischanged = true;
@@ -1724,12 +1751,12 @@ public static class Core {
       return output;
     }
 
-    public override Vx.Core.Type_anymap vx_new(params Object[] vals) {
+    public override Vx.Core.Type_anymap vx_new(params object[] vals) {
       Vx.Core.Type_anymap output = Vx.Core.vx_copy(Vx.Core.e_anymap, vals);
       return output;
     }
 
-    public override Vx.Core.Type_anymap vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_anymap vx_copy(params object[] vals) {
       Type_anymap output = this;
       bool ischanged = false;
       Class_anymap val = this;
@@ -1741,7 +1768,7 @@ public static class Core {
       Vx.Core.Type_msg? msg = null;
       string key = "";
       Vx.Core.Type_any? msgval = null;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -1842,12 +1869,12 @@ public static class Core {
 
   public class Class_anytype : Vx.Core.Class_base, Type_anytype {
 
-    public override Vx.Core.Type_anytype vx_new(params Object[] vals) {
+    public override Vx.Core.Type_anytype vx_new(params object[] vals) {
       Vx.Core.Type_anytype output = Vx.Core.vx_copy(Vx.Core.e_anytype, vals);
       return output;
     }
 
-    public override Vx.Core.Type_anytype vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_anytype vx_copy(params object[] vals) {
       Type_anytype output = this;
       bool ischanged = false;
       Class_anytype val = this;
@@ -1976,12 +2003,12 @@ public static class Core {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Core.Type_arg vx_new(params Object[] vals) {
+    public override Vx.Core.Type_arg vx_new(params object[] vals) {
       Vx.Core.Type_arg output = Vx.Core.vx_copy(Vx.Core.e_arg, vals);
       return output;
     }
 
-    public override Vx.Core.Type_arg vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_arg vx_copy(params object[] vals) {
       Type_arg output = this;
       bool ischanged = false;
       Class_arg val = this;
@@ -2001,7 +2028,7 @@ public static class Core {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -2218,12 +2245,12 @@ public static class Core {
       return this.vx_arg(index);
     }
 
-    public override Vx.Core.Type_arglist vx_new(params Object[] vals) {
+    public override Vx.Core.Type_arglist vx_new(params object[] vals) {
       Vx.Core.Type_arglist output = Vx.Core.vx_copy(Vx.Core.e_arglist, vals);
       return output;
     }
 
-    public override Vx.Core.Type_arglist vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_arglist vx_copy(params object[] vals) {
       Type_arglist output = this;
       bool ischanged = false;
       Class_arglist val = this;
@@ -2233,7 +2260,7 @@ public static class Core {
       }
       List<Vx.Core.Type_arg> listval = new List<Vx.Core.Type_arg>(val.vx_listarg());
       Vx.Core.Type_msg msg;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -2247,8 +2274,8 @@ public static class Core {
         } else if (valsub is Vx.Core.Type_arglist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listarg());
-        } else if (valsub is List<object> listunknown) {
-          foreach (Object item in listunknown) {
+        } else if (valsub is List<Vx.Core.Type_any> listany) {
+          foreach (Vx.Core.Type_any item in listany) {
             if (false) {
             } else if (item is Vx.Core.Type_arg valitem) {
               ischanged = true;
@@ -2381,12 +2408,12 @@ public static class Core {
       return output;
     }
 
-    public override Vx.Core.Type_argmap vx_new(params Object[] vals) {
+    public override Vx.Core.Type_argmap vx_new(params object[] vals) {
       Vx.Core.Type_argmap output = Vx.Core.vx_copy(Vx.Core.e_argmap, vals);
       return output;
     }
 
-    public override Vx.Core.Type_argmap vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_argmap vx_copy(params object[] vals) {
       Type_argmap output = this;
       bool ischanged = false;
       Class_argmap val = this;
@@ -2398,7 +2425,7 @@ public static class Core {
       Vx.Core.Type_msg? msg = null;
       string key = "";
       Vx.Core.Type_any? msgval = null;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -2505,12 +2532,12 @@ public static class Core {
     // :implements
     public bool vx_boolean() {return vxboolean;}
 
-    public override Vx.Core.Type_boolean vx_new(params Object[] vals) {
+    public override Vx.Core.Type_boolean vx_new(params object[] vals) {
       Vx.Core.Type_boolean output = Vx.Core.vx_copy(Vx.Core.e_boolean, vals);
       return output;
     }
 
-    public override Vx.Core.Type_boolean vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_boolean vx_copy(params object[] vals) {
       Type_boolean output = this;
       bool ischanged = false;
       Class_boolean val = this;
@@ -2519,7 +2546,7 @@ public static class Core {
         ischanged = true;
       }
       bool booleanval = val.vx_boolean();
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -2611,12 +2638,12 @@ public static class Core {
       return this.vx_boolean(index);
     }
 
-    public override Vx.Core.Type_booleanlist vx_new(params Object[] vals) {
+    public override Vx.Core.Type_booleanlist vx_new(params object[] vals) {
       Vx.Core.Type_booleanlist output = Vx.Core.vx_copy(Vx.Core.e_booleanlist, vals);
       return output;
     }
 
-    public override Vx.Core.Type_booleanlist vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_booleanlist vx_copy(params object[] vals) {
       Type_booleanlist output = this;
       bool ischanged = false;
       Class_booleanlist val = this;
@@ -2626,7 +2653,7 @@ public static class Core {
       }
       List<Vx.Core.Type_boolean> listval = new List<Vx.Core.Type_boolean>(val.vx_listboolean());
       Vx.Core.Type_msg msg;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -2634,14 +2661,14 @@ public static class Core {
         } else if (valsub is Vx.Core.Type_boolean allowsub) {
           ischanged = true;
           listval.Add(allowsub);
-        } else if (valsub is Vx.Core.Type_boolean) {
+        } else if (valsub is bool) {
           ischanged = true;
           listval.Add(Vx.Core.vx_new(Vx.Core.t_boolean, valsub));
         } else if (valsub is Vx.Core.Type_booleanlist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listboolean());
-        } else if (valsub is List<object> listunknown) {
-          foreach (Object item in listunknown) {
+        } else if (valsub is List<Vx.Core.Type_any> listany) {
+          foreach (Vx.Core.Type_any item in listany) {
             if (false) {
             } else if (item is Vx.Core.Type_boolean valitem) {
               ischanged = true;
@@ -2704,12 +2731,12 @@ public static class Core {
 
   public class Class_collection : Vx.Core.Class_base, Type_collection {
 
-    public override Vx.Core.Type_collection vx_new(params Object[] vals) {
+    public override Vx.Core.Type_collection vx_new(params object[] vals) {
       Vx.Core.Type_collection output = Vx.Core.vx_copy(Vx.Core.e_collection, vals);
       return output;
     }
 
-    public override Vx.Core.Type_collection vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_collection vx_copy(params object[] vals) {
       Type_collection output = this;
       bool ischanged = false;
       Class_collection val = this;
@@ -2764,12 +2791,12 @@ public static class Core {
 
   public class Class_compilelanguages : Vx.Core.Class_base, Type_compilelanguages {
 
-    public override Vx.Core.Type_compilelanguages vx_new(params Object[] vals) {
+    public override Vx.Core.Type_compilelanguages vx_new(params object[] vals) {
       Vx.Core.Type_compilelanguages output = Vx.Core.vx_copy(Vx.Core.e_compilelanguages, vals);
       return output;
     }
 
-    public override Vx.Core.Type_compilelanguages vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_compilelanguages vx_copy(params object[] vals) {
       Type_compilelanguages output = this;
       bool ischanged = false;
       Class_compilelanguages val = this;
@@ -2825,12 +2852,12 @@ public static class Core {
 
   public class Class_connect : Vx.Core.Class_base, Type_connect {
 
-    public override Vx.Core.Type_connect vx_new(params Object[] vals) {
+    public override Vx.Core.Type_connect vx_new(params object[] vals) {
       Vx.Core.Type_connect output = Vx.Core.vx_copy(Vx.Core.e_connect, vals);
       return output;
     }
 
-    public override Vx.Core.Type_connect vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_connect vx_copy(params object[] vals) {
       Type_connect output = this;
       bool ischanged = false;
       Class_connect val = this;
@@ -2916,12 +2943,12 @@ public static class Core {
       return this.vx_connect(index);
     }
 
-    public override Vx.Core.Type_connectlist vx_new(params Object[] vals) {
+    public override Vx.Core.Type_connectlist vx_new(params object[] vals) {
       Vx.Core.Type_connectlist output = Vx.Core.vx_copy(Vx.Core.e_connectlist, vals);
       return output;
     }
 
-    public override Vx.Core.Type_connectlist vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_connectlist vx_copy(params object[] vals) {
       Type_connectlist output = this;
       bool ischanged = false;
       Class_connectlist val = this;
@@ -2931,7 +2958,7 @@ public static class Core {
       }
       List<Vx.Core.Type_connect> listval = new List<Vx.Core.Type_connect>(val.vx_listconnect());
       Vx.Core.Type_msg msg;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -2945,8 +2972,8 @@ public static class Core {
         } else if (valsub is Vx.Core.Type_connectlist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listconnect());
-        } else if (valsub is List<object> listunknown) {
-          foreach (Object item in listunknown) {
+        } else if (valsub is List<Vx.Core.Type_any> listany) {
+          foreach (Vx.Core.Type_any item in listany) {
             if (false) {
             } else if (item is Vx.Core.Type_connect valitem) {
               ischanged = true;
@@ -3079,12 +3106,12 @@ public static class Core {
       return output;
     }
 
-    public override Vx.Core.Type_connectmap vx_new(params Object[] vals) {
+    public override Vx.Core.Type_connectmap vx_new(params object[] vals) {
       Vx.Core.Type_connectmap output = Vx.Core.vx_copy(Vx.Core.e_connectmap, vals);
       return output;
     }
 
-    public override Vx.Core.Type_connectmap vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_connectmap vx_copy(params object[] vals) {
       Type_connectmap output = this;
       bool ischanged = false;
       Class_connectmap val = this;
@@ -3096,7 +3123,7 @@ public static class Core {
       Vx.Core.Type_msg? msg = null;
       string key = "";
       Vx.Core.Type_any? msgval = null;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -3197,12 +3224,12 @@ public static class Core {
 
   public class Class_const : Vx.Core.Class_base, Type_const {
 
-    public override Vx.Core.Type_const vx_new(params Object[] vals) {
+    public override Vx.Core.Type_const vx_new(params object[] vals) {
       Vx.Core.Type_const output = Vx.Core.vx_copy(Vx.Core.e_const, vals);
       return output;
     }
 
-    public override Vx.Core.Type_const vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_const vx_copy(params object[] vals) {
       Type_const output = this;
       bool ischanged = false;
       Class_const val = this;
@@ -3316,12 +3343,12 @@ public static class Core {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Core.Type_constdef vx_new(params Object[] vals) {
+    public override Vx.Core.Type_constdef vx_new(params object[] vals) {
       Vx.Core.Type_constdef output = Vx.Core.vx_copy(Vx.Core.e_constdef, vals);
       return output;
     }
 
-    public override Vx.Core.Type_constdef vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_constdef vx_copy(params object[] vals) {
       Type_constdef output = this;
       bool ischanged = false;
       Class_constdef val = this;
@@ -3339,7 +3366,7 @@ public static class Core {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -3525,12 +3552,12 @@ public static class Core {
       return output;
     }
 
-    public override Vx.Core.Type_constlist vx_new(params Object[] vals) {
+    public override Vx.Core.Type_constlist vx_new(params object[] vals) {
       Vx.Core.Type_constlist output = Vx.Core.vx_copy(Vx.Core.e_constlist, vals);
       return output;
     }
 
-    public override Vx.Core.Type_constlist vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_constlist vx_copy(params object[] vals) {
       Type_constlist output = this;
       bool ischanged = false;
       Class_constlist val = this;
@@ -3540,7 +3567,7 @@ public static class Core {
       }
       List<Vx.Core.Type_any> listval = new List<Vx.Core.Type_any>(val.vx_list());
       Vx.Core.Type_msg msg;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -3551,8 +3578,8 @@ public static class Core {
         } else if (valsub is Vx.Core.Type_constlist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_list());
-        } else if (valsub is List<object> listunknown) {
-          foreach (Object item in listunknown) {
+        } else if (valsub is List<Vx.Core.Type_any> listany) {
+          foreach (Vx.Core.Type_any item in listany) {
             if (false) {
             } else if (item is Vx.Core.Type_any valitem) {
               ischanged = true;
@@ -3675,12 +3702,12 @@ public static class Core {
       return output;
     }
 
-    public override Vx.Core.Type_constmap vx_new(params Object[] vals) {
+    public override Vx.Core.Type_constmap vx_new(params object[] vals) {
       Vx.Core.Type_constmap output = Vx.Core.vx_copy(Vx.Core.e_constmap, vals);
       return output;
     }
 
-    public override Vx.Core.Type_constmap vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_constmap vx_copy(params object[] vals) {
       Type_constmap output = this;
       bool ischanged = false;
       Class_constmap val = this;
@@ -3692,7 +3719,7 @@ public static class Core {
       Vx.Core.Type_msg? msg = null;
       string key = "";
       Vx.Core.Type_any? msgval = null;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -3866,12 +3893,12 @@ public static class Core {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Core.Type_context vx_new(params Object[] vals) {
+    public override Vx.Core.Type_context vx_new(params object[] vals) {
       Vx.Core.Type_context output = Vx.Core.vx_copy(Vx.Core.e_context, vals);
       return output;
     }
 
-    public override Vx.Core.Type_context vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_context vx_copy(params object[] vals) {
       Type_context output = this;
       bool ischanged = false;
       Class_context val = this;
@@ -3891,7 +3918,7 @@ public static class Core {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -4075,12 +4102,12 @@ public static class Core {
 
   public class Class_date : Vx.Core.Class_base, Type_date {
 
-    public override Vx.Core.Type_date vx_new(params Object[] vals) {
+    public override Vx.Core.Type_date vx_new(params object[] vals) {
       Vx.Core.Type_date output = Vx.Core.vx_copy(Vx.Core.e_date, vals);
       return output;
     }
 
-    public override Vx.Core.Type_date vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_date vx_copy(params object[] vals) {
       Type_date output = this;
       bool ischanged = false;
       Class_date val = this;
@@ -4156,12 +4183,12 @@ public static class Core {
       return output;
     }
 
-    public override Vx.Core.Type_decimal vx_new(params Object[] vals) {
+    public override Vx.Core.Type_decimal vx_new(params object[] vals) {
       Vx.Core.Type_decimal output = Vx.Core.vx_copy(Vx.Core.e_decimal, vals);
       return output;
     }
 
-    public override Vx.Core.Type_decimal vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_decimal vx_copy(params object[] vals) {
       Type_decimal output = this;
       bool ischanged = false;
       Class_decimal val = this;
@@ -4170,7 +4197,7 @@ public static class Core {
         ischanged = true;
       }
       string sval = val.vx_string();
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -4232,12 +4259,12 @@ public static class Core {
 
   public class Class_error : Vx.Core.Class_base, Type_error {
 
-    public override Vx.Core.Type_error vx_new(params Object[] vals) {
+    public override Vx.Core.Type_error vx_new(params object[] vals) {
       Vx.Core.Type_error output = Vx.Core.vx_copy(Vx.Core.e_error, vals);
       return output;
     }
 
-    public override Vx.Core.Type_error vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_error vx_copy(params object[] vals) {
       Type_error output = this;
       bool ischanged = false;
       Class_error val = this;
@@ -4299,12 +4326,12 @@ public static class Core {
     // :implements
     public float vx_float() {return vxfloat;}
 
-    public override Vx.Core.Type_float vx_new(params Object[] vals) {
+    public override Vx.Core.Type_float vx_new(params object[] vals) {
       Vx.Core.Type_float output = Vx.Core.vx_copy(Vx.Core.e_float, vals);
       return output;
     }
 
-    public override Vx.Core.Type_float vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_float vx_copy(params object[] vals) {
       Type_float output = this;
       bool ischanged = false;
       Class_float val = this;
@@ -4313,7 +4340,7 @@ public static class Core {
         ischanged = true;
       }
       float floatval = val.vx_float();
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -4394,12 +4421,12 @@ public static class Core {
     public Vx.Core.Type_funcdef vx_funcdef() {
       return Vx.Core.e_funcdef;
     }
-    public override Vx.Core.Type_func vx_new(params Object[] vals) {
+    public override Vx.Core.Type_func vx_new(params object[] vals) {
       Vx.Core.Type_func output = Vx.Core.vx_copy(Vx.Core.e_func, vals);
       return output;
     }
 
-    public override Vx.Core.Type_func vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_func vx_copy(params object[] vals) {
       Type_func output = this;
       bool ischanged = false;
       Class_func val = this;
@@ -4543,12 +4570,12 @@ public static class Core {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Core.Type_funcdef vx_new(params Object[] vals) {
+    public override Vx.Core.Type_funcdef vx_new(params object[] vals) {
       Vx.Core.Type_funcdef output = Vx.Core.vx_copy(Vx.Core.e_funcdef, vals);
       return output;
     }
 
-    public override Vx.Core.Type_funcdef vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_funcdef vx_copy(params object[] vals) {
       Type_funcdef output = this;
       bool ischanged = false;
       Class_funcdef val = this;
@@ -4570,7 +4597,7 @@ public static class Core {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -4814,12 +4841,12 @@ public static class Core {
       return this.vx_func(index);
     }
 
-    public override Vx.Core.Type_funclist vx_new(params Object[] vals) {
+    public override Vx.Core.Type_funclist vx_new(params object[] vals) {
       Vx.Core.Type_funclist output = Vx.Core.vx_copy(Vx.Core.e_funclist, vals);
       return output;
     }
 
-    public override Vx.Core.Type_funclist vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_funclist vx_copy(params object[] vals) {
       Type_funclist output = this;
       bool ischanged = false;
       Class_funclist val = this;
@@ -4829,7 +4856,7 @@ public static class Core {
       }
       List<Vx.Core.Type_func> listval = new List<Vx.Core.Type_func>(val.vx_listfunc());
       Vx.Core.Type_msg msg;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -4843,8 +4870,8 @@ public static class Core {
         } else if (valsub is Vx.Core.Type_funclist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listfunc());
-        } else if (valsub is List<object> listunknown) {
-          foreach (Object item in listunknown) {
+        } else if (valsub is List<Vx.Core.Type_any> listany) {
+          foreach (Vx.Core.Type_any item in listany) {
             if (false) {
             } else if (item is Vx.Core.Type_func valitem) {
               ischanged = true;
@@ -4977,12 +5004,12 @@ public static class Core {
       return output;
     }
 
-    public override Vx.Core.Type_funcmap vx_new(params Object[] vals) {
+    public override Vx.Core.Type_funcmap vx_new(params object[] vals) {
       Vx.Core.Type_funcmap output = Vx.Core.vx_copy(Vx.Core.e_funcmap, vals);
       return output;
     }
 
-    public override Vx.Core.Type_funcmap vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_funcmap vx_copy(params object[] vals) {
       Type_funcmap output = this;
       bool ischanged = false;
       Class_funcmap val = this;
@@ -4994,7 +5021,7 @@ public static class Core {
       Vx.Core.Type_msg? msg = null;
       string key = "";
       Vx.Core.Type_any? msgval = null;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -5101,12 +5128,12 @@ public static class Core {
     // :implements
     public int vx_int() {return vxint;}
 
-    public override Vx.Core.Type_int vx_new(params Object[] vals) {
+    public override Vx.Core.Type_int vx_new(params object[] vals) {
       Vx.Core.Type_int output = Vx.Core.vx_copy(Vx.Core.e_int, vals);
       return output;
     }
 
-    public override Vx.Core.Type_int vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_int vx_copy(params object[] vals) {
       Type_int output = this;
       bool ischanged = false;
       Class_int val = this;
@@ -5115,7 +5142,7 @@ public static class Core {
         ischanged = true;
       }
       int intval = val.vx_int();
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -5210,12 +5237,12 @@ public static class Core {
       return this.vx_int(index);
     }
 
-    public override Vx.Core.Type_intlist vx_new(params Object[] vals) {
+    public override Vx.Core.Type_intlist vx_new(params object[] vals) {
       Vx.Core.Type_intlist output = Vx.Core.vx_copy(Vx.Core.e_intlist, vals);
       return output;
     }
 
-    public override Vx.Core.Type_intlist vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_intlist vx_copy(params object[] vals) {
       Type_intlist output = this;
       bool ischanged = false;
       Class_intlist val = this;
@@ -5225,7 +5252,7 @@ public static class Core {
       }
       List<Vx.Core.Type_int> listval = new List<Vx.Core.Type_int>(val.vx_listint());
       Vx.Core.Type_msg msg;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -5233,14 +5260,14 @@ public static class Core {
         } else if (valsub is Vx.Core.Type_int allowsub) {
           ischanged = true;
           listval.Add(allowsub);
-        } else if (valsub is Vx.Core.Type_int) {
+        } else if (valsub is int) {
           ischanged = true;
           listval.Add(Vx.Core.vx_new(Vx.Core.t_int, valsub));
         } else if (valsub is Vx.Core.Type_intlist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listint());
-        } else if (valsub is List<object> listunknown) {
-          foreach (Object item in listunknown) {
+        } else if (valsub is List<Vx.Core.Type_any> listany) {
+          foreach (Vx.Core.Type_any item in listany) {
             if (false) {
             } else if (item is Vx.Core.Type_int valitem) {
               ischanged = true;
@@ -5373,12 +5400,12 @@ public static class Core {
       return output;
     }
 
-    public override Vx.Core.Type_intmap vx_new(params Object[] vals) {
+    public override Vx.Core.Type_intmap vx_new(params object[] vals) {
       Vx.Core.Type_intmap output = Vx.Core.vx_copy(Vx.Core.e_intmap, vals);
       return output;
     }
 
-    public override Vx.Core.Type_intmap vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_intmap vx_copy(params object[] vals) {
       Type_intmap output = this;
       bool ischanged = false;
       Class_intmap val = this;
@@ -5390,7 +5417,7 @@ public static class Core {
       Vx.Core.Type_msg? msg = null;
       string key = "";
       Vx.Core.Type_any? msgval = null;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -5513,12 +5540,12 @@ public static class Core {
       return output;
     }
 
-    public override Vx.Core.Type_list vx_new(params Object[] vals) {
+    public override Vx.Core.Type_list vx_new(params object[] vals) {
       Vx.Core.Type_list output = Vx.Core.vx_copy(Vx.Core.e_list, vals);
       return output;
     }
 
-    public override Vx.Core.Type_list vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_list vx_copy(params object[] vals) {
       Type_list output = this;
       bool ischanged = false;
       Class_list val = this;
@@ -5528,7 +5555,7 @@ public static class Core {
       }
       List<Vx.Core.Type_any> listval = new List<Vx.Core.Type_any>(val.vx_list());
       Vx.Core.Type_msg msg;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -5539,8 +5566,8 @@ public static class Core {
         } else if (valsub is Vx.Core.Type_list multi) {
           ischanged = true;
           listval.AddRange(multi.vx_list());
-        } else if (valsub is List<object> listunknown) {
-          foreach (Object item in listunknown) {
+        } else if (valsub is List<Vx.Core.Type_any> listany) {
+          foreach (Vx.Core.Type_any item in listany) {
             if (false) {
             } else if (item is Vx.Core.Type_any valitem) {
               ischanged = true;
@@ -5604,12 +5631,12 @@ public static class Core {
 
   public class Class_listtype : Vx.Core.Class_base, Type_listtype {
 
-    public override Vx.Core.Type_listtype vx_new(params Object[] vals) {
+    public override Vx.Core.Type_listtype vx_new(params object[] vals) {
       Vx.Core.Type_listtype output = Vx.Core.vx_copy(Vx.Core.e_listtype, vals);
       return output;
     }
 
-    public override Vx.Core.Type_listtype vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_listtype vx_copy(params object[] vals) {
       Type_listtype output = this;
       bool ischanged = false;
       Class_listtype val = this;
@@ -5675,12 +5702,12 @@ public static class Core {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Core.Type_locale vx_new(params Object[] vals) {
+    public override Vx.Core.Type_locale vx_new(params object[] vals) {
       Vx.Core.Type_locale output = Vx.Core.vx_copy(Vx.Core.e_locale, vals);
       return output;
     }
 
-    public override Vx.Core.Type_locale vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_locale vx_copy(params object[] vals) {
       Type_locale output = this;
       bool ischanged = false;
       Class_locale val = this;
@@ -5799,12 +5826,12 @@ public static class Core {
       return output;
     }
 
-    public override Vx.Core.Type_map vx_new(params Object[] vals) {
+    public override Vx.Core.Type_map vx_new(params object[] vals) {
       Vx.Core.Type_map output = Vx.Core.vx_copy(Vx.Core.e_map, vals);
       return output;
     }
 
-    public override Vx.Core.Type_map vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_map vx_copy(params object[] vals) {
       Type_map output = this;
       bool ischanged = false;
       Class_map val = this;
@@ -5816,7 +5843,7 @@ public static class Core {
       Vx.Core.Type_msg? msg = null;
       string key = "";
       Vx.Core.Type_any? msgval = null;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -5917,12 +5944,12 @@ public static class Core {
 
   public class Class_maptype : Vx.Core.Class_base, Type_maptype {
 
-    public override Vx.Core.Type_maptype vx_new(params Object[] vals) {
+    public override Vx.Core.Type_maptype vx_new(params object[] vals) {
       Vx.Core.Type_maptype output = Vx.Core.vx_copy(Vx.Core.e_maptype, vals);
       return output;
     }
 
-    public override Vx.Core.Type_maptype vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_maptype vx_copy(params object[] vals) {
       Type_maptype output = this;
       bool ischanged = false;
       Class_maptype val = this;
@@ -6006,12 +6033,12 @@ public static class Core {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Core.Type_mempool vx_new(params Object[] vals) {
+    public override Vx.Core.Type_mempool vx_new(params object[] vals) {
       Vx.Core.Type_mempool output = Vx.Core.vx_copy(Vx.Core.e_mempool, vals);
       return output;
     }
 
-    public override Vx.Core.Type_mempool vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_mempool vx_copy(params object[] vals) {
       Type_mempool output = this;
       bool ischanged = false;
       Class_mempool val = this;
@@ -6025,7 +6052,7 @@ public static class Core {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -6233,12 +6260,12 @@ public static class Core {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Core.Type_msg vx_new(params Object[] vals) {
+    public override Vx.Core.Type_msg vx_new(params object[] vals) {
       Vx.Core.Type_msg output = Vx.Core.vx_copy(Vx.Core.e_msg, vals);
       return output;
     }
 
-    public override Vx.Core.Type_msg vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_msg vx_copy(params object[] vals) {
       Type_msg output = this;
       bool ischanged = false;
       Class_msg val = this;
@@ -6251,7 +6278,7 @@ public static class Core {
       Vx.Core.Type_int vx_p_severity = val.severity();
       Vx.Core.Type_string vx_p_text = val.text();
       string key = "";
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (key == "") {
           if (false) {
           } else if (valsub is Vx.Core.Type_string valstr) {
@@ -6409,12 +6436,12 @@ public static class Core {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Core.Type_msgblock vx_new(params Object[] vals) {
+    public override Vx.Core.Type_msgblock vx_new(params object[] vals) {
       Vx.Core.Type_msgblock output = Vx.Core.vx_copy(Vx.Core.e_msgblock, vals);
       return output;
     }
 
-    public override Vx.Core.Type_msgblock vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_msgblock vx_copy(params object[] vals) {
       Type_msgblock output = this;
       bool ischanged = false;
       Class_msgblock val = this;
@@ -6427,7 +6454,7 @@ public static class Core {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           if (valsub != Vx.Core.e_msgblock) {
             vx_p_msgblocks = Vx.Core.vx_copy(vx_p_msgblocks, valsub);
@@ -6515,7 +6542,7 @@ public static class Core {
     }
 
     public new Vx.Core.Type_msgblock vx_msgblock() {
-      return this;
+      return Vx.Core.e_msgblock;
     }
 
     public override Vx.Core.Type_any vx_empty() {
@@ -6586,12 +6613,12 @@ public static class Core {
       return this.vx_msgblock(index);
     }
 
-    public override Vx.Core.Type_msgblocklist vx_new(params Object[] vals) {
+    public override Vx.Core.Type_msgblocklist vx_new(params object[] vals) {
       Vx.Core.Type_msgblocklist output = Vx.Core.vx_copy(Vx.Core.e_msgblocklist, vals);
       return output;
     }
 
-    public override Vx.Core.Type_msgblocklist vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_msgblocklist vx_copy(params object[] vals) {
       Type_msgblocklist output = this;
       bool ischanged = false;
       Class_msgblocklist val = this;
@@ -6601,7 +6628,7 @@ public static class Core {
       }
       List<Vx.Core.Type_msgblock> listval = new List<Vx.Core.Type_msgblock>(val.vx_listmsgblock());
       Vx.Core.Type_msg msg;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msgblock) {
@@ -6610,8 +6637,8 @@ public static class Core {
         } else if (valsub is Vx.Core.Type_msgblocklist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listmsgblock());
-        } else if (valsub is List<object> listunknown) {
-          foreach (Object item in listunknown) {
+        } else if (valsub is List<Vx.Core.Type_any> listany) {
+          foreach (Vx.Core.Type_any item in listany) {
             if (false) {
             } else if (item is Vx.Core.Type_msgblock valitem) {
               ischanged = true;
@@ -6705,12 +6732,12 @@ public static class Core {
       return this.vx_msg(index);
     }
 
-    public override Vx.Core.Type_msglist vx_new(params Object[] vals) {
+    public override Vx.Core.Type_msglist vx_new(params object[] vals) {
       Vx.Core.Type_msglist output = Vx.Core.vx_copy(Vx.Core.e_msglist, vals);
       return output;
     }
 
-    public override Vx.Core.Type_msglist vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_msglist vx_copy(params object[] vals) {
       Type_msglist output = this;
       bool ischanged = false;
       Class_msglist val = this;
@@ -6720,7 +6747,7 @@ public static class Core {
       }
       List<Vx.Core.Type_msg> listval = new List<Vx.Core.Type_msg>(val.vx_listmsg());
       Vx.Core.Type_msg msg;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -6729,8 +6756,8 @@ public static class Core {
         } else if (valsub is Vx.Core.Type_msglist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listmsg());
-        } else if (valsub is List<object> listunknown) {
-          foreach (Object item in listunknown) {
+        } else if (valsub is List<Vx.Core.Type_any> listany) {
+          foreach (Vx.Core.Type_any item in listany) {
             if (false) {
             } else if (item is Vx.Core.Type_msg valitem) {
               ischanged = true;
@@ -6794,12 +6821,12 @@ public static class Core {
 
   public class Class_none : Vx.Core.Class_base, Type_none {
 
-    public override Vx.Core.Type_none vx_new(params Object[] vals) {
+    public override Vx.Core.Type_none vx_new(params object[] vals) {
       Vx.Core.Type_none output = Vx.Core.vx_copy(Vx.Core.e_none, vals);
       return output;
     }
 
-    public override Vx.Core.Type_none vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_none vx_copy(params object[] vals) {
       Type_none output = this;
       bool ischanged = false;
       Class_none val = this;
@@ -6855,12 +6882,12 @@ public static class Core {
 
   public class Class_notype : Vx.Core.Class_base, Type_notype {
 
-    public override Vx.Core.Type_notype vx_new(params Object[] vals) {
+    public override Vx.Core.Type_notype vx_new(params object[] vals) {
       Vx.Core.Type_notype output = Vx.Core.vx_copy(Vx.Core.e_notype, vals);
       return output;
     }
 
-    public override Vx.Core.Type_notype vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_notype vx_copy(params object[] vals) {
       Type_notype output = this;
       bool ischanged = false;
       Class_notype val = this;
@@ -6916,12 +6943,12 @@ public static class Core {
 
   public class Class_number : Vx.Core.Class_base, Type_number {
 
-    public override Vx.Core.Type_number vx_new(params Object[] vals) {
+    public override Vx.Core.Type_number vx_new(params object[] vals) {
       Vx.Core.Type_number output = Vx.Core.vx_copy(Vx.Core.e_number, vals);
       return output;
     }
 
-    public override Vx.Core.Type_number vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_number vx_copy(params object[] vals) {
       Type_number output = this;
       bool ischanged = false;
       Class_number val = this;
@@ -7007,12 +7034,12 @@ public static class Core {
       return this.vx_number(index);
     }
 
-    public override Vx.Core.Type_numberlist vx_new(params Object[] vals) {
+    public override Vx.Core.Type_numberlist vx_new(params object[] vals) {
       Vx.Core.Type_numberlist output = Vx.Core.vx_copy(Vx.Core.e_numberlist, vals);
       return output;
     }
 
-    public override Vx.Core.Type_numberlist vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_numberlist vx_copy(params object[] vals) {
       Type_numberlist output = this;
       bool ischanged = false;
       Class_numberlist val = this;
@@ -7022,7 +7049,7 @@ public static class Core {
       }
       List<Vx.Core.Type_number> listval = new List<Vx.Core.Type_number>(val.vx_listnumber());
       Vx.Core.Type_msg msg;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -7036,8 +7063,8 @@ public static class Core {
         } else if (valsub is Vx.Core.Type_numberlist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listnumber());
-        } else if (valsub is List<object> listunknown) {
-          foreach (Object item in listunknown) {
+        } else if (valsub is List<Vx.Core.Type_any> listany) {
+          foreach (Vx.Core.Type_any item in listany) {
             if (false) {
             } else if (item is Vx.Core.Type_number valitem) {
               ischanged = true;
@@ -7170,12 +7197,12 @@ public static class Core {
       return output;
     }
 
-    public override Vx.Core.Type_numbermap vx_new(params Object[] vals) {
+    public override Vx.Core.Type_numbermap vx_new(params object[] vals) {
       Vx.Core.Type_numbermap output = Vx.Core.vx_copy(Vx.Core.e_numbermap, vals);
       return output;
     }
 
-    public override Vx.Core.Type_numbermap vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_numbermap vx_copy(params object[] vals) {
       Type_numbermap output = this;
       bool ischanged = false;
       Class_numbermap val = this;
@@ -7187,7 +7214,7 @@ public static class Core {
       Vx.Core.Type_msg? msg = null;
       string key = "";
       Vx.Core.Type_any? msgval = null;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -7376,12 +7403,12 @@ public static class Core {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Core.Type_package vx_new(params Object[] vals) {
+    public override Vx.Core.Type_package vx_new(params object[] vals) {
       Vx.Core.Type_package output = Vx.Core.vx_copy(Vx.Core.e_package, vals);
       return output;
     }
 
-    public override Vx.Core.Type_package vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_package vx_copy(params object[] vals) {
       Type_package output = this;
       bool ischanged = false;
       Class_package val = this;
@@ -7403,7 +7430,7 @@ public static class Core {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -7676,12 +7703,12 @@ public static class Core {
       return output;
     }
 
-    public override Vx.Core.Type_packagemap vx_new(params Object[] vals) {
+    public override Vx.Core.Type_packagemap vx_new(params object[] vals) {
       Vx.Core.Type_packagemap output = Vx.Core.vx_copy(Vx.Core.e_packagemap, vals);
       return output;
     }
 
-    public override Vx.Core.Type_packagemap vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_packagemap vx_copy(params object[] vals) {
       Type_packagemap output = this;
       bool ischanged = false;
       Class_packagemap val = this;
@@ -7693,7 +7720,7 @@ public static class Core {
       Vx.Core.Type_msg? msg = null;
       string key = "";
       Vx.Core.Type_any? msgval = null;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -7822,12 +7849,12 @@ public static class Core {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Core.Type_permission vx_new(params Object[] vals) {
+    public override Vx.Core.Type_permission vx_new(params object[] vals) {
       Vx.Core.Type_permission output = Vx.Core.vx_copy(Vx.Core.e_permission, vals);
       return output;
     }
 
-    public override Vx.Core.Type_permission vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_permission vx_copy(params object[] vals) {
       Type_permission output = this;
       bool ischanged = false;
       Class_permission val = this;
@@ -7841,7 +7868,7 @@ public static class Core {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -7992,12 +8019,12 @@ public static class Core {
       return this.vx_permission(index);
     }
 
-    public override Vx.Core.Type_permissionlist vx_new(params Object[] vals) {
+    public override Vx.Core.Type_permissionlist vx_new(params object[] vals) {
       Vx.Core.Type_permissionlist output = Vx.Core.vx_copy(Vx.Core.e_permissionlist, vals);
       return output;
     }
 
-    public override Vx.Core.Type_permissionlist vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_permissionlist vx_copy(params object[] vals) {
       Type_permissionlist output = this;
       bool ischanged = false;
       Class_permissionlist val = this;
@@ -8007,7 +8034,7 @@ public static class Core {
       }
       List<Vx.Core.Type_permission> listval = new List<Vx.Core.Type_permission>(val.vx_listpermission());
       Vx.Core.Type_msg msg;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -8021,8 +8048,8 @@ public static class Core {
         } else if (valsub is Vx.Core.Type_permissionlist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listpermission());
-        } else if (valsub is List<object> listunknown) {
-          foreach (Object item in listunknown) {
+        } else if (valsub is List<Vx.Core.Type_any> listany) {
+          foreach (Vx.Core.Type_any item in listany) {
             if (false) {
             } else if (item is Vx.Core.Type_permission valitem) {
               ischanged = true;
@@ -8155,12 +8182,12 @@ public static class Core {
       return output;
     }
 
-    public override Vx.Core.Type_permissionmap vx_new(params Object[] vals) {
+    public override Vx.Core.Type_permissionmap vx_new(params object[] vals) {
       Vx.Core.Type_permissionmap output = Vx.Core.vx_copy(Vx.Core.e_permissionmap, vals);
       return output;
     }
 
-    public override Vx.Core.Type_permissionmap vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_permissionmap vx_copy(params object[] vals) {
       Type_permissionmap output = this;
       bool ischanged = false;
       Class_permissionmap val = this;
@@ -8172,7 +8199,7 @@ public static class Core {
       Vx.Core.Type_msg? msg = null;
       string key = "";
       Vx.Core.Type_any? msgval = null;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -8301,12 +8328,12 @@ public static class Core {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Core.Type_project vx_new(params Object[] vals) {
+    public override Vx.Core.Type_project vx_new(params object[] vals) {
       Vx.Core.Type_project output = Vx.Core.vx_copy(Vx.Core.e_project, vals);
       return output;
     }
 
-    public override Vx.Core.Type_project vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_project vx_copy(params object[] vals) {
       Type_project output = this;
       bool ischanged = false;
       Class_project val = this;
@@ -8320,7 +8347,7 @@ public static class Core {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -8496,12 +8523,12 @@ public static class Core {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Core.Type_security vx_new(params Object[] vals) {
+    public override Vx.Core.Type_security vx_new(params object[] vals) {
       Vx.Core.Type_security output = Vx.Core.vx_copy(Vx.Core.e_security, vals);
       return output;
     }
 
-    public override Vx.Core.Type_security vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_security vx_copy(params object[] vals) {
       Type_security output = this;
       bool ischanged = false;
       Class_security val = this;
@@ -8519,7 +8546,7 @@ public static class Core {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -8782,12 +8809,12 @@ public static class Core {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Core.Type_session vx_new(params Object[] vals) {
+    public override Vx.Core.Type_session vx_new(params object[] vals) {
       Vx.Core.Type_session output = Vx.Core.vx_copy(Vx.Core.e_session, vals);
       return output;
     }
 
-    public override Vx.Core.Type_session vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_session vx_copy(params object[] vals) {
       Type_session output = this;
       bool ischanged = false;
       Class_session val = this;
@@ -8811,7 +8838,7 @@ public static class Core {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -9062,12 +9089,12 @@ public static class Core {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Core.Type_setting vx_new(params Object[] vals) {
+    public override Vx.Core.Type_setting vx_new(params object[] vals) {
       Vx.Core.Type_setting output = Vx.Core.vx_copy(Vx.Core.e_setting, vals);
       return output;
     }
 
-    public override Vx.Core.Type_setting vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_setting vx_copy(params object[] vals) {
       Type_setting output = this;
       bool ischanged = false;
       Class_setting val = this;
@@ -9081,7 +9108,7 @@ public static class Core {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -9227,12 +9254,12 @@ public static class Core {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Core.Type_state vx_new(params Object[] vals) {
+    public override Vx.Core.Type_state vx_new(params object[] vals) {
       Vx.Core.Type_state output = Vx.Core.vx_copy(Vx.Core.e_state, vals);
       return output;
     }
 
-    public override Vx.Core.Type_state vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_state vx_copy(params object[] vals) {
       Type_state output = this;
       bool ischanged = false;
       Class_state val = this;
@@ -9246,7 +9273,7 @@ public static class Core {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -9421,12 +9448,12 @@ public static class Core {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Core.Type_statelistener vx_new(params Object[] vals) {
+    public override Vx.Core.Type_statelistener vx_new(params object[] vals) {
       Vx.Core.Type_statelistener output = Vx.Core.vx_copy(Vx.Core.e_statelistener, vals);
       return output;
     }
 
-    public override Vx.Core.Type_statelistener vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_statelistener vx_copy(params object[] vals) {
       Type_statelistener output = this;
       bool ischanged = false;
       Class_statelistener val = this;
@@ -9444,7 +9471,7 @@ public static class Core {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -9676,12 +9703,12 @@ public static class Core {
       return output;
     }
 
-    public override Vx.Core.Type_statelistenermap vx_new(params Object[] vals) {
+    public override Vx.Core.Type_statelistenermap vx_new(params object[] vals) {
       Vx.Core.Type_statelistenermap output = Vx.Core.vx_copy(Vx.Core.e_statelistenermap, vals);
       return output;
     }
 
-    public override Vx.Core.Type_statelistenermap vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_statelistenermap vx_copy(params object[] vals) {
       Type_statelistenermap output = this;
       bool ischanged = false;
       Class_statelistenermap val = this;
@@ -9693,7 +9720,7 @@ public static class Core {
       Vx.Core.Type_msg? msg = null;
       string key = "";
       Vx.Core.Type_any? msgval = null;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -9802,12 +9829,12 @@ public static class Core {
       return vxstring;
     }
 
-    public override Vx.Core.Type_string vx_new(params Object[] vals) {
+    public override Vx.Core.Type_string vx_new(params object[] vals) {
       Vx.Core.Type_string output = Vx.Core.vx_copy(Vx.Core.e_string, vals);
       return output;
     }
 
-    public override Vx.Core.Type_string vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_string vx_copy(params object[] vals) {
       Type_string output = this;
       bool ischanged = false;
       Class_string val = this;
@@ -9817,7 +9844,7 @@ public static class Core {
       }
       System.Text.StringBuilder sb = new System.Text.StringBuilder(val.vx_string());
       Vx.Core.Type_msg msg;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -9938,12 +9965,12 @@ public static class Core {
       return this.vx_string(index);
     }
 
-    public override Vx.Core.Type_stringlist vx_new(params Object[] vals) {
+    public override Vx.Core.Type_stringlist vx_new(params object[] vals) {
       Vx.Core.Type_stringlist output = Vx.Core.vx_copy(Vx.Core.e_stringlist, vals);
       return output;
     }
 
-    public override Vx.Core.Type_stringlist vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_stringlist vx_copy(params object[] vals) {
       Type_stringlist output = this;
       bool ischanged = false;
       Class_stringlist val = this;
@@ -9953,7 +9980,7 @@ public static class Core {
       }
       List<Vx.Core.Type_string> listval = new List<Vx.Core.Type_string>(val.vx_liststring());
       Vx.Core.Type_msg msg;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -9961,14 +9988,14 @@ public static class Core {
         } else if (valsub is Vx.Core.Type_string allowsub) {
           ischanged = true;
           listval.Add(allowsub);
-        } else if (valsub is Vx.Core.Type_string) {
+        } else if (valsub is string) {
           ischanged = true;
           listval.Add(Vx.Core.vx_new(Vx.Core.t_string, valsub));
         } else if (valsub is Vx.Core.Type_stringlist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_liststring());
-        } else if (valsub is List<object> listunknown) {
-          foreach (Object item in listunknown) {
+        } else if (valsub is List<Vx.Core.Type_any> listany) {
+          foreach (Vx.Core.Type_any item in listany) {
             if (false) {
             } else if (item is Vx.Core.Type_string valitem) {
               ischanged = true;
@@ -10062,12 +10089,12 @@ public static class Core {
       return this.vx_stringlist(index);
     }
 
-    public override Vx.Core.Type_stringlistlist vx_new(params Object[] vals) {
+    public override Vx.Core.Type_stringlistlist vx_new(params object[] vals) {
       Vx.Core.Type_stringlistlist output = Vx.Core.vx_copy(Vx.Core.e_stringlistlist, vals);
       return output;
     }
 
-    public override Vx.Core.Type_stringlistlist vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_stringlistlist vx_copy(params object[] vals) {
       Type_stringlistlist output = this;
       bool ischanged = false;
       Class_stringlistlist val = this;
@@ -10077,7 +10104,7 @@ public static class Core {
       }
       List<Vx.Core.Type_stringlist> listval = new List<Vx.Core.Type_stringlist>(val.vx_liststringlist());
       Vx.Core.Type_msg msg;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -10091,8 +10118,8 @@ public static class Core {
         } else if (valsub is Vx.Core.Type_stringlistlist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_liststringlist());
-        } else if (valsub is List<object> listunknown) {
-          foreach (Object item in listunknown) {
+        } else if (valsub is List<Vx.Core.Type_any> listany) {
+          foreach (Vx.Core.Type_any item in listany) {
             if (false) {
             } else if (item is Vx.Core.Type_stringlist valitem) {
               ischanged = true;
@@ -10225,12 +10252,12 @@ public static class Core {
       return output;
     }
 
-    public override Vx.Core.Type_stringmap vx_new(params Object[] vals) {
+    public override Vx.Core.Type_stringmap vx_new(params object[] vals) {
       Vx.Core.Type_stringmap output = Vx.Core.vx_copy(Vx.Core.e_stringmap, vals);
       return output;
     }
 
-    public override Vx.Core.Type_stringmap vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_stringmap vx_copy(params object[] vals) {
       Type_stringmap output = this;
       bool ischanged = false;
       Class_stringmap val = this;
@@ -10242,7 +10269,7 @@ public static class Core {
       Vx.Core.Type_msg? msg = null;
       string key = "";
       Vx.Core.Type_any? msgval = null;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -10412,12 +10439,12 @@ public static class Core {
       return output;
     }
 
-    public override Vx.Core.Type_stringmutablemap vx_new(params Object[] vals) {
+    public override Vx.Core.Type_stringmutablemap vx_new(params object[] vals) {
       Vx.Core.Type_stringmutablemap output = Vx.Core.vx_copy(Vx.Core.e_stringmutablemap, vals);
       return output;
     }
 
-    public override Vx.Core.Type_stringmutablemap vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_stringmutablemap vx_copy(params object[] vals) {
       Type_stringmutablemap output = this;
       bool ischanged = false;
       Class_stringmutablemap val = this;
@@ -10429,7 +10456,7 @@ public static class Core {
       Vx.Core.Type_msg? msg = null;
       string key = "";
       Vx.Core.Type_any? msgval = null;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -10542,12 +10569,12 @@ public static class Core {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Core.Type_struct vx_new(params Object[] vals) {
+    public override Vx.Core.Type_struct vx_new(params object[] vals) {
       Vx.Core.Type_struct output = Vx.Core.vx_copy(Vx.Core.e_struct, vals);
       return output;
     }
 
-    public override Vx.Core.Type_struct vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_struct vx_copy(params object[] vals) {
       Type_struct output = this;
       bool ischanged = false;
       Class_struct val = this;
@@ -10690,12 +10717,12 @@ public static class Core {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Core.Type_thenelse vx_new(params Object[] vals) {
+    public override Vx.Core.Type_thenelse vx_new(params object[] vals) {
       Vx.Core.Type_thenelse output = Vx.Core.vx_copy(Vx.Core.e_thenelse, vals);
       return output;
     }
 
-    public override Vx.Core.Type_thenelse vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_thenelse vx_copy(params object[] vals) {
       Type_thenelse output = this;
       bool ischanged = false;
       Class_thenelse val = this;
@@ -10717,7 +10744,7 @@ public static class Core {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -10951,12 +10978,12 @@ public static class Core {
       return this.vx_thenelse(index);
     }
 
-    public override Vx.Core.Type_thenelselist vx_new(params Object[] vals) {
+    public override Vx.Core.Type_thenelselist vx_new(params object[] vals) {
       Vx.Core.Type_thenelselist output = Vx.Core.vx_copy(Vx.Core.e_thenelselist, vals);
       return output;
     }
 
-    public override Vx.Core.Type_thenelselist vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_thenelselist vx_copy(params object[] vals) {
       Type_thenelselist output = this;
       bool ischanged = false;
       Class_thenelselist val = this;
@@ -10966,7 +10993,7 @@ public static class Core {
       }
       List<Vx.Core.Type_thenelse> listval = new List<Vx.Core.Type_thenelse>(val.vx_listthenelse());
       Vx.Core.Type_msg msg;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -10980,8 +11007,8 @@ public static class Core {
         } else if (valsub is Vx.Core.Type_thenelselist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listthenelse());
-        } else if (valsub is List<object> listunknown) {
-          foreach (Object item in listunknown) {
+        } else if (valsub is List<Vx.Core.Type_any> listany) {
+          foreach (Vx.Core.Type_any item in listany) {
             if (false) {
             } else if (item is Vx.Core.Type_thenelse valitem) {
               ischanged = true;
@@ -11088,12 +11115,12 @@ public static class Core {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Core.Type_translation vx_new(params Object[] vals) {
+    public override Vx.Core.Type_translation vx_new(params object[] vals) {
       Vx.Core.Type_translation output = Vx.Core.vx_copy(Vx.Core.e_translation, vals);
       return output;
     }
 
-    public override Vx.Core.Type_translation vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_translation vx_copy(params object[] vals) {
       Type_translation output = this;
       bool ischanged = false;
       Class_translation val = this;
@@ -11109,7 +11136,7 @@ public static class Core {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -11281,12 +11308,12 @@ public static class Core {
       return this.vx_translation(index);
     }
 
-    public override Vx.Core.Type_translationlist vx_new(params Object[] vals) {
+    public override Vx.Core.Type_translationlist vx_new(params object[] vals) {
       Vx.Core.Type_translationlist output = Vx.Core.vx_copy(Vx.Core.e_translationlist, vals);
       return output;
     }
 
-    public override Vx.Core.Type_translationlist vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_translationlist vx_copy(params object[] vals) {
       Type_translationlist output = this;
       bool ischanged = false;
       Class_translationlist val = this;
@@ -11296,7 +11323,7 @@ public static class Core {
       }
       List<Vx.Core.Type_translation> listval = new List<Vx.Core.Type_translation>(val.vx_listtranslation());
       Vx.Core.Type_msg msg;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -11310,8 +11337,8 @@ public static class Core {
         } else if (valsub is Vx.Core.Type_translationlist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listtranslation());
-        } else if (valsub is List<object> listunknown) {
-          foreach (Object item in listunknown) {
+        } else if (valsub is List<Vx.Core.Type_any> listany) {
+          foreach (Vx.Core.Type_any item in listany) {
             if (false) {
             } else if (item is Vx.Core.Type_translation valitem) {
               ischanged = true;
@@ -11444,12 +11471,12 @@ public static class Core {
       return output;
     }
 
-    public override Vx.Core.Type_translationmap vx_new(params Object[] vals) {
+    public override Vx.Core.Type_translationmap vx_new(params object[] vals) {
       Vx.Core.Type_translationmap output = Vx.Core.vx_copy(Vx.Core.e_translationmap, vals);
       return output;
     }
 
-    public override Vx.Core.Type_translationmap vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_translationmap vx_copy(params object[] vals) {
       Type_translationmap output = this;
       bool ischanged = false;
       Class_translationmap val = this;
@@ -11461,7 +11488,7 @@ public static class Core {
       Vx.Core.Type_msg? msg = null;
       string key = "";
       Vx.Core.Type_any? msgval = null;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -11562,12 +11589,12 @@ public static class Core {
 
   public class Class_type : Vx.Core.Class_base, Type_type {
 
-    public override Vx.Core.Type_type vx_new(params Object[] vals) {
+    public override Vx.Core.Type_type vx_new(params object[] vals) {
       Vx.Core.Type_type output = Vx.Core.vx_copy(Vx.Core.e_type, vals);
       return output;
     }
 
-    public override Vx.Core.Type_type vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_type vx_copy(params object[] vals) {
       Type_type output = this;
       bool ischanged = false;
       Class_type val = this;
@@ -11816,12 +11843,12 @@ public static class Core {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Core.Type_typedef vx_new(params Object[] vals) {
+    public override Vx.Core.Type_typedef vx_new(params object[] vals) {
       Vx.Core.Type_typedef output = Vx.Core.vx_copy(Vx.Core.e_typedef, vals);
       return output;
     }
 
-    public override Vx.Core.Type_typedef vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_typedef vx_copy(params object[] vals) {
       Type_typedef output = this;
       bool ischanged = false;
       Class_typedef val = this;
@@ -11857,7 +11884,7 @@ public static class Core {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -12235,12 +12262,12 @@ public static class Core {
       return output;
     }
 
-    public override Vx.Core.Type_typelist vx_new(params Object[] vals) {
+    public override Vx.Core.Type_typelist vx_new(params object[] vals) {
       Vx.Core.Type_typelist output = Vx.Core.vx_copy(Vx.Core.e_typelist, vals);
       return output;
     }
 
-    public override Vx.Core.Type_typelist vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_typelist vx_copy(params object[] vals) {
       Type_typelist output = this;
       bool ischanged = false;
       Class_typelist val = this;
@@ -12250,7 +12277,7 @@ public static class Core {
       }
       List<Vx.Core.Type_any> listval = new List<Vx.Core.Type_any>(val.vx_list());
       Vx.Core.Type_msg msg;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -12261,8 +12288,8 @@ public static class Core {
         } else if (valsub is Vx.Core.Type_typelist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_list());
-        } else if (valsub is List<object> listunknown) {
-          foreach (Object item in listunknown) {
+        } else if (valsub is List<Vx.Core.Type_any> listany) {
+          foreach (Vx.Core.Type_any item in listany) {
             if (false) {
             } else if (item is Vx.Core.Type_any valitem) {
               ischanged = true;
@@ -12385,12 +12412,12 @@ public static class Core {
       return output;
     }
 
-    public override Vx.Core.Type_typemap vx_new(params Object[] vals) {
+    public override Vx.Core.Type_typemap vx_new(params object[] vals) {
       Vx.Core.Type_typemap output = Vx.Core.vx_copy(Vx.Core.e_typemap, vals);
       return output;
     }
 
-    public override Vx.Core.Type_typemap vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_typemap vx_copy(params object[] vals) {
       Type_typemap output = this;
       bool ischanged = false;
       Class_typemap val = this;
@@ -12402,7 +12429,7 @@ public static class Core {
       Vx.Core.Type_msg? msg = null;
       string key = "";
       Vx.Core.Type_any? msgval = null;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -12561,12 +12588,12 @@ public static class Core {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Core.Type_user vx_new(params Object[] vals) {
+    public override Vx.Core.Type_user vx_new(params object[] vals) {
       Vx.Core.Type_user output = Vx.Core.vx_copy(Vx.Core.e_user, vals);
       return output;
     }
 
-    public override Vx.Core.Type_user vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_user vx_copy(params object[] vals) {
       Type_user output = this;
       bool ischanged = false;
       Class_user val = this;
@@ -12584,7 +12611,7 @@ public static class Core {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -12792,12 +12819,12 @@ public static class Core {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Core.Type_value vx_new(params Object[] vals) {
+    public override Vx.Core.Type_value vx_new(params object[] vals) {
       Vx.Core.Type_value output = Vx.Core.vx_copy(Vx.Core.e_value, vals);
       return output;
     }
 
-    public override Vx.Core.Type_value vx_copy(params Object[] vals) {
+    public override Vx.Core.Type_value vx_copy(params object[] vals) {
       Type_value output = this;
       bool ischanged = false;
       Class_value val = this;
@@ -12813,7 +12840,7 @@ public static class Core {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -13388,6 +13415,43 @@ public static class Core {
 
 
   /**
+   * Constant: path-test-resources
+   * The test path from project file
+   * {string}
+   */
+  public class Const_path_test_resources {
+    public static Vx.Core.Type_constdef constdef() {
+      return Vx.Core.constdef_new(
+        "vx/core", // pkgname
+        "path-test-resources", // name
+        Vx.Core.typedef_new(
+          "vx/core", // pkgname
+          "string", // name
+          ":string", // extends
+          Vx.Core.e_typelist, // traits
+          Vx.Core.e_typelist, // allowtypes
+          Vx.Core.e_typelist, // disallowtypes
+          Vx.Core.e_funclist, // allowfuncs
+          Vx.Core.e_funclist, // disallowfuncs
+          Vx.Core.e_anylist, // allowvalues
+          Vx.Core.e_anylist, // disallowvalues
+          Vx.Core.e_argmap // properties
+        )
+      );
+    }
+
+    public static void const_new(Vx.Core.Type_string output) {
+      Vx.Core.Class_string outval = (Vx.Core.Class_string)output;
+      outval.vx_p_constdef = constdef();
+      outval.vxstring = "test/resources";
+    }
+
+  }
+
+  public static Vx.Core.Type_string c_path_test_resources = new Vx.Core.Class_string();
+
+
+  /**
    * Constant: quote
    * Quotation mark constant
    * {string}
@@ -13472,12 +13536,12 @@ public static class Core {
 
   public class Class_not : Vx.Core.Class_base, Func_not {
 
-    public override Vx.Core.Func_not vx_new(params Object[] vals) {
+    public override Vx.Core.Func_not vx_new(params object[] vals) {
       Class_not output = new Class_not();
       return output;
     }
 
-    public override Vx.Core.Func_not vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_not vx_copy(params object[] vals) {
       Class_not output = new Class_not();
       return output;
     }
@@ -13563,12 +13627,12 @@ public static class Core {
 
   public class Class_notempty : Vx.Core.Class_base, Func_notempty {
 
-    public override Vx.Core.Func_notempty vx_new(params Object[] vals) {
+    public override Vx.Core.Func_notempty vx_new(params object[] vals) {
       Class_notempty output = new Class_notempty();
       return output;
     }
 
-    public override Vx.Core.Func_notempty vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_notempty vx_copy(params object[] vals) {
       Class_notempty output = new Class_notempty();
       return output;
     }
@@ -13656,12 +13720,12 @@ public static class Core {
 
   public class Class_notempty_1 : Vx.Core.Class_base, Func_notempty_1 {
 
-    public override Vx.Core.Func_notempty_1 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_notempty_1 vx_new(params object[] vals) {
       Class_notempty_1 output = new Class_notempty_1();
       return output;
     }
 
-    public override Vx.Core.Func_notempty_1 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_notempty_1 vx_copy(params object[] vals) {
       Class_notempty_1 output = new Class_notempty_1();
       return output;
     }
@@ -13750,12 +13814,12 @@ public static class Core {
 
   public class Class_ne : Vx.Core.Class_base, Func_ne {
 
-    public override Vx.Core.Func_ne vx_new(params Object[] vals) {
+    public override Vx.Core.Func_ne vx_new(params object[] vals) {
       Class_ne output = new Class_ne();
       return output;
     }
 
-    public override Vx.Core.Func_ne vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_ne vx_copy(params object[] vals) {
       Class_ne output = new Class_ne();
       return output;
     }
@@ -13833,12 +13897,12 @@ public static class Core {
 
   public class Class_neqeq : Vx.Core.Class_base, Func_neqeq {
 
-    public override Vx.Core.Func_neqeq vx_new(params Object[] vals) {
+    public override Vx.Core.Func_neqeq vx_new(params object[] vals) {
       Class_neqeq output = new Class_neqeq();
       return output;
     }
 
-    public override Vx.Core.Func_neqeq vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_neqeq vx_copy(params object[] vals) {
       Class_neqeq output = new Class_neqeq();
       return output;
     }
@@ -13916,12 +13980,12 @@ public static class Core {
 
   public class Class_multiply : Vx.Core.Class_base, Func_multiply {
 
-    public override Vx.Core.Func_multiply vx_new(params Object[] vals) {
+    public override Vx.Core.Func_multiply vx_new(params object[] vals) {
       Class_multiply output = new Class_multiply();
       return output;
     }
 
-    public override Vx.Core.Func_multiply vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_multiply vx_copy(params object[] vals) {
       Class_multiply output = new Class_multiply();
       return output;
     }
@@ -13998,12 +14062,12 @@ public static class Core {
 
   public class Class_multiply_1 : Vx.Core.Class_base, Func_multiply_1 {
 
-    public override Vx.Core.Func_multiply_1 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_multiply_1 vx_new(params object[] vals) {
       Class_multiply_1 output = new Class_multiply_1();
       return output;
     }
 
-    public override Vx.Core.Func_multiply_1 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_multiply_1 vx_copy(params object[] vals) {
       Class_multiply_1 output = new Class_multiply_1();
       return output;
     }
@@ -14079,12 +14143,12 @@ public static class Core {
 
   public class Class_multiply_2 : Vx.Core.Class_base, Func_multiply_2 {
 
-    public override Vx.Core.Func_multiply_2 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_multiply_2 vx_new(params object[] vals) {
       Class_multiply_2 output = new Class_multiply_2();
       return output;
     }
 
-    public override Vx.Core.Func_multiply_2 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_multiply_2 vx_copy(params object[] vals) {
       Class_multiply_2 output = new Class_multiply_2();
       return output;
     }
@@ -14181,12 +14245,12 @@ public static class Core {
 
   public class Class_multiply_3 : Vx.Core.Class_base, Func_multiply_3 {
 
-    public override Vx.Core.Func_multiply_3 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_multiply_3 vx_new(params object[] vals) {
       Class_multiply_3 output = new Class_multiply_3();
       return output;
     }
 
-    public override Vx.Core.Func_multiply_3 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_multiply_3 vx_copy(params object[] vals) {
       Class_multiply_3 output = new Class_multiply_3();
       return output;
     }
@@ -14284,12 +14348,12 @@ public static class Core {
 
   public class Class_plus : Vx.Core.Class_base, Func_plus {
 
-    public override Vx.Core.Func_plus vx_new(params Object[] vals) {
+    public override Vx.Core.Func_plus vx_new(params object[] vals) {
       Class_plus output = new Class_plus();
       return output;
     }
 
-    public override Vx.Core.Func_plus vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_plus vx_copy(params object[] vals) {
       Class_plus output = new Class_plus();
       return output;
     }
@@ -14366,12 +14430,12 @@ public static class Core {
 
   public class Class_plus_1 : Vx.Core.Class_base, Func_plus_1 {
 
-    public override Vx.Core.Func_plus_1 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_plus_1 vx_new(params object[] vals) {
       Class_plus_1 output = new Class_plus_1();
       return output;
     }
 
-    public override Vx.Core.Func_plus_1 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_plus_1 vx_copy(params object[] vals) {
       Class_plus_1 output = new Class_plus_1();
       return output;
     }
@@ -14447,12 +14511,12 @@ public static class Core {
 
   public class Class_plus_2 : Vx.Core.Class_base, Func_plus_2 {
 
-    public override Vx.Core.Func_plus_2 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_plus_2 vx_new(params object[] vals) {
       Class_plus_2 output = new Class_plus_2();
       return output;
     }
 
-    public override Vx.Core.Func_plus_2 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_plus_2 vx_copy(params object[] vals) {
       Class_plus_2 output = new Class_plus_2();
       return output;
     }
@@ -14549,12 +14613,12 @@ public static class Core {
 
   public class Class_plus_3 : Vx.Core.Class_base, Func_plus_3 {
 
-    public override Vx.Core.Func_plus_3 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_plus_3 vx_new(params object[] vals) {
       Class_plus_3 output = new Class_plus_3();
       return output;
     }
 
-    public override Vx.Core.Func_plus_3 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_plus_3 vx_copy(params object[] vals) {
       Class_plus_3 output = new Class_plus_3();
       return output;
     }
@@ -14651,12 +14715,12 @@ public static class Core {
 
   public class Class_plus1 : Vx.Core.Class_base, Func_plus1 {
 
-    public override Vx.Core.Func_plus1 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_plus1 vx_new(params object[] vals) {
       Class_plus1 output = new Class_plus1();
       return output;
     }
 
-    public override Vx.Core.Func_plus1 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_plus1 vx_copy(params object[] vals) {
       Class_plus1 output = new Class_plus1();
       return output;
     }
@@ -14743,12 +14807,12 @@ public static class Core {
 
   public class Class_minus : Vx.Core.Class_base, Func_minus {
 
-    public override Vx.Core.Func_minus vx_new(params Object[] vals) {
+    public override Vx.Core.Func_minus vx_new(params object[] vals) {
       Class_minus output = new Class_minus();
       return output;
     }
 
-    public override Vx.Core.Func_minus vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_minus vx_copy(params object[] vals) {
       Class_minus output = new Class_minus();
       return output;
     }
@@ -14825,12 +14889,12 @@ public static class Core {
 
   public class Class_minus_1 : Vx.Core.Class_base, Func_minus_1 {
 
-    public override Vx.Core.Func_minus_1 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_minus_1 vx_new(params object[] vals) {
       Class_minus_1 output = new Class_minus_1();
       return output;
     }
 
-    public override Vx.Core.Func_minus_1 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_minus_1 vx_copy(params object[] vals) {
       Class_minus_1 output = new Class_minus_1();
       return output;
     }
@@ -14906,12 +14970,12 @@ public static class Core {
 
   public class Class_minus_2 : Vx.Core.Class_base, Func_minus_2 {
 
-    public override Vx.Core.Func_minus_2 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_minus_2 vx_new(params object[] vals) {
       Class_minus_2 output = new Class_minus_2();
       return output;
     }
 
-    public override Vx.Core.Func_minus_2 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_minus_2 vx_copy(params object[] vals) {
       Class_minus_2 output = new Class_minus_2();
       return output;
     }
@@ -15008,12 +15072,12 @@ public static class Core {
 
   public class Class_minus_3 : Vx.Core.Class_base, Func_minus_3 {
 
-    public override Vx.Core.Func_minus_3 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_minus_3 vx_new(params object[] vals) {
       Class_minus_3 output = new Class_minus_3();
       return output;
     }
 
-    public override Vx.Core.Func_minus_3 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_minus_3 vx_copy(params object[] vals) {
       Class_minus_3 output = new Class_minus_3();
       return output;
     }
@@ -15110,12 +15174,12 @@ public static class Core {
 
   public class Class_minus1 : Vx.Core.Class_base, Func_minus1 {
 
-    public override Vx.Core.Func_minus1 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_minus1 vx_new(params object[] vals) {
       Class_minus1 output = new Class_minus1();
       return output;
     }
 
-    public override Vx.Core.Func_minus1 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_minus1 vx_copy(params object[] vals) {
       Class_minus1 output = new Class_minus1();
       return output;
     }
@@ -15203,12 +15267,12 @@ public static class Core {
 
   public class Class_dotmethod : Vx.Core.Class_base, Func_dotmethod {
 
-    public override Vx.Core.Func_dotmethod vx_new(params Object[] vals) {
+    public override Vx.Core.Func_dotmethod vx_new(params object[] vals) {
       Class_dotmethod output = new Class_dotmethod();
       return output;
     }
 
-    public override Vx.Core.Func_dotmethod vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_dotmethod vx_copy(params object[] vals) {
       Class_dotmethod output = new Class_dotmethod();
       return output;
     }
@@ -15284,12 +15348,12 @@ public static class Core {
 
   public class Class_divide : Vx.Core.Class_base, Func_divide {
 
-    public override Vx.Core.Func_divide vx_new(params Object[] vals) {
+    public override Vx.Core.Func_divide vx_new(params object[] vals) {
       Class_divide output = new Class_divide();
       return output;
     }
 
-    public override Vx.Core.Func_divide vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_divide vx_copy(params object[] vals) {
       Class_divide output = new Class_divide();
       return output;
     }
@@ -15373,12 +15437,12 @@ public static class Core {
 
   public class Class_lt : Vx.Core.Class_base, Func_lt {
 
-    public override Vx.Core.Func_lt vx_new(params Object[] vals) {
+    public override Vx.Core.Func_lt vx_new(params object[] vals) {
       Class_lt output = new Class_lt();
       return output;
     }
 
-    public override Vx.Core.Func_lt vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_lt vx_copy(params object[] vals) {
       Class_lt output = new Class_lt();
       return output;
     }
@@ -15469,12 +15533,12 @@ public static class Core {
 
   public class Class_lt_1 : Vx.Core.Class_base, Func_lt_1 {
 
-    public override Vx.Core.Func_lt_1 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_lt_1 vx_new(params object[] vals) {
       Class_lt_1 output = new Class_lt_1();
       return output;
     }
 
-    public override Vx.Core.Func_lt_1 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_lt_1 vx_copy(params object[] vals) {
       Class_lt_1 output = new Class_lt_1();
       return output;
     }
@@ -15578,12 +15642,12 @@ public static class Core {
 
   public class Class_chainfirst : Vx.Core.Class_base, Func_chainfirst {
 
-    public override Vx.Core.Func_chainfirst vx_new(params Object[] vals) {
+    public override Vx.Core.Func_chainfirst vx_new(params object[] vals) {
       Class_chainfirst output = new Class_chainfirst();
       return output;
     }
 
-    public override Vx.Core.Func_chainfirst vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_chainfirst vx_copy(params object[] vals) {
       Class_chainfirst output = new Class_chainfirst();
       return output;
     }
@@ -15661,12 +15725,12 @@ public static class Core {
 
   public class Class_chainlast : Vx.Core.Class_base, Func_chainlast {
 
-    public override Vx.Core.Func_chainlast vx_new(params Object[] vals) {
+    public override Vx.Core.Func_chainlast vx_new(params object[] vals) {
       Class_chainlast output = new Class_chainlast();
       return output;
     }
 
-    public override Vx.Core.Func_chainlast vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_chainlast vx_copy(params object[] vals) {
       Class_chainlast output = new Class_chainlast();
       return output;
     }
@@ -15742,12 +15806,12 @@ public static class Core {
 
   public class Class_le : Vx.Core.Class_base, Func_le {
 
-    public override Vx.Core.Func_le vx_new(params Object[] vals) {
+    public override Vx.Core.Func_le vx_new(params object[] vals) {
       Class_le output = new Class_le();
       return output;
     }
 
-    public override Vx.Core.Func_le vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_le vx_copy(params object[] vals) {
       Class_le output = new Class_le();
       return output;
     }
@@ -15824,12 +15888,12 @@ public static class Core {
 
   public class Class_le_1 : Vx.Core.Class_base, Func_le_1 {
 
-    public override Vx.Core.Func_le_1 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_le_1 vx_new(params object[] vals) {
       Class_le_1 output = new Class_le_1();
       return output;
     }
 
-    public override Vx.Core.Func_le_1 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_le_1 vx_copy(params object[] vals) {
       Class_le_1 output = new Class_le_1();
       return output;
     }
@@ -15918,12 +15982,12 @@ public static class Core {
 
   public class Class_eq : Vx.Core.Class_base, Func_eq {
 
-    public override Vx.Core.Func_eq vx_new(params Object[] vals) {
+    public override Vx.Core.Func_eq vx_new(params object[] vals) {
       Class_eq output = new Class_eq();
       return output;
     }
 
-    public override Vx.Core.Func_eq vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_eq vx_copy(params object[] vals) {
       Class_eq output = new Class_eq();
       return output;
     }
@@ -16008,12 +16072,12 @@ public static class Core {
 
   public class Class_eq_1 : Vx.Core.Class_base, Func_eq_1 {
 
-    public override Vx.Core.Func_eq_1 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_eq_1 vx_new(params object[] vals) {
       Class_eq_1 output = new Class_eq_1();
       return output;
     }
 
-    public override Vx.Core.Func_eq_1 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_eq_1 vx_copy(params object[] vals) {
       Class_eq_1 output = new Class_eq_1();
       return output;
     }
@@ -16115,12 +16179,12 @@ public static class Core {
 
   public class Class_eqeq : Vx.Core.Class_base, Func_eqeq {
 
-    public override Vx.Core.Func_eqeq vx_new(params Object[] vals) {
+    public override Vx.Core.Func_eqeq vx_new(params object[] vals) {
       Class_eqeq output = new Class_eqeq();
       return output;
     }
 
-    public override Vx.Core.Func_eqeq vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_eqeq vx_copy(params object[] vals) {
       Class_eqeq output = new Class_eqeq();
       return output;
     }
@@ -16197,12 +16261,12 @@ public static class Core {
 
   public class Class_gt : Vx.Core.Class_base, Func_gt {
 
-    public override Vx.Core.Func_gt vx_new(params Object[] vals) {
+    public override Vx.Core.Func_gt vx_new(params object[] vals) {
       Class_gt output = new Class_gt();
       return output;
     }
 
-    public override Vx.Core.Func_gt vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_gt vx_copy(params object[] vals) {
       Class_gt output = new Class_gt();
       return output;
     }
@@ -16293,12 +16357,12 @@ public static class Core {
 
   public class Class_gt_1 : Vx.Core.Class_base, Func_gt_1 {
 
-    public override Vx.Core.Func_gt_1 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_gt_1 vx_new(params object[] vals) {
       Class_gt_1 output = new Class_gt_1();
       return output;
     }
 
-    public override Vx.Core.Func_gt_1 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_gt_1 vx_copy(params object[] vals) {
       Class_gt_1 output = new Class_gt_1();
       return output;
     }
@@ -16400,12 +16464,12 @@ public static class Core {
 
   public class Class_ge : Vx.Core.Class_base, Func_ge {
 
-    public override Vx.Core.Func_ge vx_new(params Object[] vals) {
+    public override Vx.Core.Func_ge vx_new(params object[] vals) {
       Class_ge output = new Class_ge();
       return output;
     }
 
-    public override Vx.Core.Func_ge vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_ge vx_copy(params object[] vals) {
       Class_ge output = new Class_ge();
       return output;
     }
@@ -16482,12 +16546,12 @@ public static class Core {
 
   public class Class_ge_1 : Vx.Core.Class_base, Func_ge_1 {
 
-    public override Vx.Core.Func_ge_1 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_ge_1 vx_new(params object[] vals) {
       Class_ge_1 output = new Class_ge_1();
       return output;
     }
 
-    public override Vx.Core.Func_ge_1 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_ge_1 vx_copy(params object[] vals) {
       Class_ge_1 output = new Class_ge_1();
       return output;
     }
@@ -16575,12 +16639,12 @@ public static class Core {
 
   public class Class_allowfuncs_from_security : Vx.Core.Class_base, Func_allowfuncs_from_security {
 
-    public override Vx.Core.Func_allowfuncs_from_security vx_new(params Object[] vals) {
+    public override Vx.Core.Func_allowfuncs_from_security vx_new(params object[] vals) {
       Class_allowfuncs_from_security output = new Class_allowfuncs_from_security();
       return output;
     }
 
-    public override Vx.Core.Func_allowfuncs_from_security vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_allowfuncs_from_security vx_copy(params object[] vals) {
       Class_allowfuncs_from_security output = new Class_allowfuncs_from_security();
       return output;
     }
@@ -16666,12 +16730,12 @@ public static class Core {
 
   public class Class_allowtypenames_from_typedef : Vx.Core.Class_base, Func_allowtypenames_from_typedef {
 
-    public override Vx.Core.Func_allowtypenames_from_typedef vx_new(params Object[] vals) {
+    public override Vx.Core.Func_allowtypenames_from_typedef vx_new(params object[] vals) {
       Class_allowtypenames_from_typedef output = new Class_allowtypenames_from_typedef();
       return output;
     }
 
-    public override Vx.Core.Func_allowtypenames_from_typedef vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_allowtypenames_from_typedef vx_copy(params object[] vals) {
       Class_allowtypenames_from_typedef output = new Class_allowtypenames_from_typedef();
       return output;
     }
@@ -16759,12 +16823,12 @@ public static class Core {
 
   public class Class_allowtypes_from_typedef : Vx.Core.Class_base, Func_allowtypes_from_typedef {
 
-    public override Vx.Core.Func_allowtypes_from_typedef vx_new(params Object[] vals) {
+    public override Vx.Core.Func_allowtypes_from_typedef vx_new(params object[] vals) {
       Class_allowtypes_from_typedef output = new Class_allowtypes_from_typedef();
       return output;
     }
 
-    public override Vx.Core.Func_allowtypes_from_typedef vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_allowtypes_from_typedef vx_copy(params object[] vals) {
       Class_allowtypes_from_typedef output = new Class_allowtypes_from_typedef();
       return output;
     }
@@ -16851,12 +16915,12 @@ public static class Core {
 
   public class Class_and : Vx.Core.Class_base, Func_and {
 
-    public override Vx.Core.Func_and vx_new(params Object[] vals) {
+    public override Vx.Core.Func_and vx_new(params object[] vals) {
       Class_and output = new Class_and();
       return output;
     }
 
-    public override Vx.Core.Func_and vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_and vx_copy(params object[] vals) {
       Class_and output = new Class_and();
       return output;
     }
@@ -16935,12 +16999,12 @@ public static class Core {
 
   public class Class_and_1 : Vx.Core.Class_base, Func_and_1 {
 
-    public override Vx.Core.Func_and_1 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_and_1 vx_new(params object[] vals) {
       Class_and_1 output = new Class_and_1();
       return output;
     }
 
-    public override Vx.Core.Func_and_1 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_and_1 vx_copy(params object[] vals) {
       Class_and_1 output = new Class_and_1();
       return output;
     }
@@ -17064,12 +17128,12 @@ public static class Core {
 
   public class Class_any_from_any : Vx.Core.Class_base, Func_any_from_any {
 
-    public override Vx.Core.Func_any_from_any vx_new(params Object[] vals) {
+    public override Vx.Core.Func_any_from_any vx_new(params object[] vals) {
       Class_any_from_any output = new Class_any_from_any();
       return output;
     }
 
-    public override Vx.Core.Func_any_from_any vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_any_from_any vx_copy(params object[] vals) {
       Class_any_from_any output = new Class_any_from_any();
       return output;
     }
@@ -17164,12 +17228,12 @@ public static class Core {
 
   public class Class_any_from_any_async : Vx.Core.Class_base, Func_any_from_any_async {
 
-    public override Vx.Core.Func_any_from_any_async vx_new(params Object[] vals) {
+    public override Vx.Core.Func_any_from_any_async vx_new(params object[] vals) {
       Class_any_from_any_async output = new Class_any_from_any_async();
       return output;
     }
 
-    public override Vx.Core.Func_any_from_any_async vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_any_from_any_async vx_copy(params object[] vals) {
       Class_any_from_any_async output = new Class_any_from_any_async();
       return output;
     }
@@ -17219,7 +17283,7 @@ public static class Core {
     }
 
     public Task<Vx.Core.Type_any> vx_repl(Vx.Core.Type_anylist arglist) {
-      Task<Vx.Core.Type_any> output = Vx.Core.vx_async_new_completed(Vx.Core.e_any);
+      Task<Vx.Core.Type_any> output = Vx.Core.vx_async_new_from_value(Vx.Core.e_any);
       Vx.Core.Type_any generic_any_1 = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
       Vx.Core.Type_any value = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
       Task<Vx.Core.Type_any> future = Vx.Core.f_any_from_any_async(generic_any_1, value);
@@ -17230,7 +17294,7 @@ public static class Core {
     public Task<T> vx_any_from_any_async<T, U>(T generic_any_1, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
       Task<T> output;
       if (fn == null) {
-        output = Vx.Core.vx_async_new_completed(Vx.Core.f_empty(generic_any_1));
+        output = Vx.Core.vx_async_new_from_value(Vx.Core.f_empty(generic_any_1));
       } else {
         Task<Vx.Core.Type_any> future = fn(value);
         output = Vx.Core.vx_async_from_async(generic_any_1, future);
@@ -17244,7 +17308,7 @@ public static class Core {
   public static Func_any_from_any_async t_any_from_any_async = new Vx.Core.Class_any_from_any_async();
 
   public static Task<T> f_any_from_any_async<T, U>(T generic_any_1, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
-    Task<T> output = Vx.Core.vx_async_new_completed(Vx.Core.f_empty(generic_any_1));
+    Task<T> output = Vx.Core.vx_async_new_from_value(Vx.Core.f_empty(generic_any_1));
     return output;
   }
 
@@ -17262,12 +17326,12 @@ public static class Core {
 
   public class Class_any_from_any_context : Vx.Core.Class_base, Func_any_from_any_context {
 
-    public override Vx.Core.Func_any_from_any_context vx_new(params Object[] vals) {
+    public override Vx.Core.Func_any_from_any_context vx_new(params object[] vals) {
       Class_any_from_any_context output = new Class_any_from_any_context();
       return output;
     }
 
-    public override Vx.Core.Func_any_from_any_context vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_any_from_any_context vx_copy(params object[] vals) {
       Class_any_from_any_context output = new Class_any_from_any_context();
       return output;
     }
@@ -17363,12 +17427,12 @@ public static class Core {
 
   public class Class_any_from_any_context_async : Vx.Core.Class_base, Func_any_from_any_context_async {
 
-    public override Vx.Core.Func_any_from_any_context_async vx_new(params Object[] vals) {
+    public override Vx.Core.Func_any_from_any_context_async vx_new(params object[] vals) {
       Class_any_from_any_context_async output = new Class_any_from_any_context_async();
       return output;
     }
 
-    public override Vx.Core.Func_any_from_any_context_async vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_any_from_any_context_async vx_copy(params object[] vals) {
       Class_any_from_any_context_async output = new Class_any_from_any_context_async();
       return output;
     }
@@ -17418,7 +17482,7 @@ public static class Core {
     }
 
     public Task<Vx.Core.Type_any> vx_repl(Vx.Core.Type_anylist arglist) {
-      Task<Vx.Core.Type_any> output = Vx.Core.vx_async_new_completed(Vx.Core.e_any);
+      Task<Vx.Core.Type_any> output = Vx.Core.vx_async_new_from_value(Vx.Core.e_any);
       Vx.Core.Type_any generic_any_1 = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
       Vx.Core.Type_context context = Vx.Core.f_any_from_any(Vx.Core.t_context, arglist.vx_any(Vx.Core.vx_new_int(0)));
       Vx.Core.Type_any value = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
@@ -17430,7 +17494,7 @@ public static class Core {
     public Task<T> vx_any_from_any_context_async<T, U>(T generic_any_1, Vx.Core.Type_context context, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
       Task<T> output;
       if (fn == null) {
-        output = Vx.Core.vx_async_new_completed(Vx.Core.f_empty(generic_any_1));
+        output = Vx.Core.vx_async_new_from_value(Vx.Core.f_empty(generic_any_1));
       } else {
         Task<Vx.Core.Type_any> future = fn(context, value);
         output = Vx.Core.vx_async_from_async(generic_any_1, future);
@@ -17444,7 +17508,7 @@ public static class Core {
   public static Func_any_from_any_context_async t_any_from_any_context_async = new Vx.Core.Class_any_from_any_context_async();
 
   public static Task<T> f_any_from_any_context_async<T, U>(T generic_any_1, Vx.Core.Type_context context, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
-    Task<T> output = Vx.Core.vx_async_new_completed(Vx.Core.f_empty(generic_any_1));
+    Task<T> output = Vx.Core.vx_async_new_from_value(Vx.Core.f_empty(generic_any_1));
     return output;
   }
 
@@ -17464,12 +17528,12 @@ public static class Core {
 
   public class Class_any_from_any_key_value : Vx.Core.Class_base, Func_any_from_any_key_value {
 
-    public override Vx.Core.Func_any_from_any_key_value vx_new(params Object[] vals) {
+    public override Vx.Core.Func_any_from_any_key_value vx_new(params object[] vals) {
       Class_any_from_any_key_value output = new Class_any_from_any_key_value();
       return output;
     }
 
-    public override Vx.Core.Func_any_from_any_key_value vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_any_from_any_key_value vx_copy(params object[] vals) {
       Class_any_from_any_key_value output = new Class_any_from_any_key_value();
       return output;
     }
@@ -17560,12 +17624,12 @@ public static class Core {
 
   public class Class_any_from_func : Vx.Core.Class_base, Func_any_from_func {
 
-    public override Vx.Core.Func_any_from_func vx_new(params Object[] vals) {
+    public override Vx.Core.Func_any_from_func vx_new(params object[] vals) {
       Class_any_from_func output = new Class_any_from_func();
       return output;
     }
 
-    public override Vx.Core.Func_any_from_func vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_any_from_func vx_copy(params object[] vals) {
       Class_any_from_func output = new Class_any_from_func();
       return output;
     }
@@ -17655,12 +17719,12 @@ public static class Core {
 
   public class Class_any_from_func_async : Vx.Core.Class_base, Func_any_from_func_async {
 
-    public override Vx.Core.Func_any_from_func_async vx_new(params Object[] vals) {
+    public override Vx.Core.Func_any_from_func_async vx_new(params object[] vals) {
       Class_any_from_func_async output = new Class_any_from_func_async();
       return output;
     }
 
-    public override Vx.Core.Func_any_from_func_async vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_any_from_func_async vx_copy(params object[] vals) {
       Class_any_from_func_async output = new Class_any_from_func_async();
       return output;
     }
@@ -17710,7 +17774,7 @@ public static class Core {
     }
 
     public Task<Vx.Core.Type_any> vx_repl(Vx.Core.Type_anylist arglist) {
-      Task<Vx.Core.Type_any> output = Vx.Core.vx_async_new_completed(Vx.Core.e_any);
+      Task<Vx.Core.Type_any> output = Vx.Core.vx_async_new_from_value(Vx.Core.e_any);
       Vx.Core.Type_any generic_any_1 = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
       Task<Vx.Core.Type_any> future = Vx.Core.f_any_from_func_async(generic_any_1);
       output = Vx.Core.vx_async_from_async(Vx.Core.t_any, future);
@@ -17720,7 +17784,7 @@ public static class Core {
     public Task<T> vx_any_from_func_async<T>(T generic_any_1) where T : Vx.Core.Type_any {
       Task<T> output;
       if (fn == null) {
-        output = Vx.Core.vx_async_new_completed(Vx.Core.f_empty(generic_any_1));
+        output = Vx.Core.vx_async_new_from_value(Vx.Core.f_empty(generic_any_1));
       } else {
         Task<Vx.Core.Type_any> future = fn();
         output = Vx.Core.vx_async_from_async(generic_any_1, future);
@@ -17734,7 +17798,7 @@ public static class Core {
   public static Func_any_from_func_async t_any_from_func_async = new Vx.Core.Class_any_from_func_async();
 
   public static Task<T> f_any_from_func_async<T>(T generic_any_1) where T : Vx.Core.Type_any {
-    Task<T> output = Vx.Core.vx_async_new_completed(Vx.Core.f_empty(generic_any_1));
+    Task<T> output = Vx.Core.vx_async_new_from_value(Vx.Core.f_empty(generic_any_1));
     return output;
   }
 
@@ -17752,12 +17816,12 @@ public static class Core {
 
   public class Class_any_from_int : Vx.Core.Class_base, Func_any_from_int {
 
-    public override Vx.Core.Func_any_from_int vx_new(params Object[] vals) {
+    public override Vx.Core.Func_any_from_int vx_new(params object[] vals) {
       Class_any_from_int output = new Class_any_from_int();
       return output;
     }
 
-    public override Vx.Core.Func_any_from_int vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_any_from_int vx_copy(params object[] vals) {
       Class_any_from_int output = new Class_any_from_int();
       return output;
     }
@@ -17848,12 +17912,12 @@ public static class Core {
 
   public class Class_any_from_int_any : Vx.Core.Class_base, Func_any_from_int_any {
 
-    public override Vx.Core.Func_any_from_int_any vx_new(params Object[] vals) {
+    public override Vx.Core.Func_any_from_int_any vx_new(params object[] vals) {
       Class_any_from_int_any output = new Class_any_from_int_any();
       return output;
     }
 
-    public override Vx.Core.Func_any_from_int_any vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_any_from_int_any vx_copy(params object[] vals) {
       Class_any_from_int_any output = new Class_any_from_int_any();
       return output;
     }
@@ -17945,12 +18009,12 @@ public static class Core {
 
   public class Class_any_from_key_value : Vx.Core.Class_base, Func_any_from_key_value {
 
-    public override Vx.Core.Func_any_from_key_value vx_new(params Object[] vals) {
+    public override Vx.Core.Func_any_from_key_value vx_new(params object[] vals) {
       Class_any_from_key_value output = new Class_any_from_key_value();
       return output;
     }
 
-    public override Vx.Core.Func_any_from_key_value vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_any_from_key_value vx_copy(params object[] vals) {
       Class_any_from_key_value output = new Class_any_from_key_value();
       return output;
     }
@@ -18044,12 +18108,12 @@ public static class Core {
 
   public class Class_any_from_key_value_async : Vx.Core.Class_base, Func_any_from_key_value_async {
 
-    public override Vx.Core.Func_any_from_key_value_async vx_new(params Object[] vals) {
+    public override Vx.Core.Func_any_from_key_value_async vx_new(params object[] vals) {
       Class_any_from_key_value_async output = new Class_any_from_key_value_async();
       return output;
     }
 
-    public override Vx.Core.Func_any_from_key_value_async vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_any_from_key_value_async vx_copy(params object[] vals) {
       Class_any_from_key_value_async output = new Class_any_from_key_value_async();
       return output;
     }
@@ -18099,7 +18163,7 @@ public static class Core {
     }
 
     public Task<Vx.Core.Type_any> vx_repl(Vx.Core.Type_anylist arglist) {
-      Task<Vx.Core.Type_any> output = Vx.Core.vx_async_new_completed(Vx.Core.e_any);
+      Task<Vx.Core.Type_any> output = Vx.Core.vx_async_new_from_value(Vx.Core.e_any);
       Vx.Core.Type_any generic_any_1 = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
       Vx.Core.Type_string key = Vx.Core.f_any_from_any(Vx.Core.t_string, arglist.vx_any(Vx.Core.vx_new_int(0)));
       Vx.Core.Type_any val = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(1)));
@@ -18111,7 +18175,7 @@ public static class Core {
     public Task<T> vx_any_from_key_value_async<T, U>(T generic_any_1, Vx.Core.Type_string key, U val) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
       Task<T> output;
       if (fn == null) {
-        output = Vx.Core.vx_async_new_completed(Vx.Core.f_empty(generic_any_1));
+        output = Vx.Core.vx_async_new_from_value(Vx.Core.f_empty(generic_any_1));
       } else {
         Task<Vx.Core.Type_any> future = fn(key, val);
         output = Vx.Core.vx_async_from_async(generic_any_1, future);
@@ -18125,7 +18189,7 @@ public static class Core {
   public static Func_any_from_key_value_async t_any_from_key_value_async = new Vx.Core.Class_any_from_key_value_async();
 
   public static Task<T> f_any_from_key_value_async<T, U>(T generic_any_1, Vx.Core.Type_string key, U val) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
-    Task<T> output = Vx.Core.vx_async_new_completed(Vx.Core.f_empty(generic_any_1));
+    Task<T> output = Vx.Core.vx_async_new_from_value(Vx.Core.f_empty(generic_any_1));
     return output;
   }
 
@@ -18143,12 +18207,12 @@ public static class Core {
 
   public class Class_any_from_list : Vx.Core.Class_base, Func_any_from_list {
 
-    public override Vx.Core.Func_any_from_list vx_new(params Object[] vals) {
+    public override Vx.Core.Func_any_from_list vx_new(params object[] vals) {
       Class_any_from_list output = new Class_any_from_list();
       return output;
     }
 
-    public override Vx.Core.Func_any_from_list vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_any_from_list vx_copy(params object[] vals) {
       Class_any_from_list output = new Class_any_from_list();
       return output;
     }
@@ -18232,12 +18296,12 @@ public static class Core {
 
   public class Class_any_from_list_start_reduce : Vx.Core.Class_base, Func_any_from_list_start_reduce {
 
-    public override Vx.Core.Func_any_from_list_start_reduce vx_new(params Object[] vals) {
+    public override Vx.Core.Func_any_from_list_start_reduce vx_new(params object[] vals) {
       Class_any_from_list_start_reduce output = new Class_any_from_list_start_reduce();
       return output;
     }
 
-    public override Vx.Core.Func_any_from_list_start_reduce vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_any_from_list_start_reduce vx_copy(params object[] vals) {
       Class_any_from_list_start_reduce output = new Class_any_from_list_start_reduce();
       return output;
     }
@@ -18316,12 +18380,12 @@ public static class Core {
 
   public class Class_any_from_list_start_reduce_next : Vx.Core.Class_base, Func_any_from_list_start_reduce_next {
 
-    public override Vx.Core.Func_any_from_list_start_reduce_next vx_new(params Object[] vals) {
+    public override Vx.Core.Func_any_from_list_start_reduce_next vx_new(params object[] vals) {
       Class_any_from_list_start_reduce_next output = new Class_any_from_list_start_reduce_next();
       return output;
     }
 
-    public override Vx.Core.Func_any_from_list_start_reduce_next vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_any_from_list_start_reduce_next vx_copy(params object[] vals) {
       Class_any_from_list_start_reduce_next output = new Class_any_from_list_start_reduce_next();
       return output;
     }
@@ -18399,12 +18463,12 @@ public static class Core {
 
   public class Class_any_from_map : Vx.Core.Class_base, Func_any_from_map {
 
-    public override Vx.Core.Func_any_from_map vx_new(params Object[] vals) {
+    public override Vx.Core.Func_any_from_map vx_new(params object[] vals) {
       Class_any_from_map output = new Class_any_from_map();
       return output;
     }
 
-    public override Vx.Core.Func_any_from_map vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_any_from_map vx_copy(params object[] vals) {
       Class_any_from_map output = new Class_any_from_map();
       return output;
     }
@@ -18482,12 +18546,12 @@ public static class Core {
 
   public class Class_any_from_map_start_reduce : Vx.Core.Class_base, Func_any_from_map_start_reduce {
 
-    public override Vx.Core.Func_any_from_map_start_reduce vx_new(params Object[] vals) {
+    public override Vx.Core.Func_any_from_map_start_reduce vx_new(params object[] vals) {
       Class_any_from_map_start_reduce output = new Class_any_from_map_start_reduce();
       return output;
     }
 
-    public override Vx.Core.Func_any_from_map_start_reduce vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_any_from_map_start_reduce vx_copy(params object[] vals) {
       Class_any_from_map_start_reduce output = new Class_any_from_map_start_reduce();
       return output;
     }
@@ -18564,12 +18628,12 @@ public static class Core {
 
   public class Class_any_from_none : Vx.Core.Class_base, Func_any_from_none {
 
-    public override Vx.Core.Func_any_from_none vx_new(params Object[] vals) {
+    public override Vx.Core.Func_any_from_none vx_new(params object[] vals) {
       Class_any_from_none output = new Class_any_from_none();
       return output;
     }
 
-    public override Vx.Core.Func_any_from_none vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_any_from_none vx_copy(params object[] vals) {
       Class_any_from_none output = new Class_any_from_none();
       return output;
     }
@@ -18659,12 +18723,12 @@ public static class Core {
 
   public class Class_any_from_none_async : Vx.Core.Class_base, Func_any_from_none_async {
 
-    public override Vx.Core.Func_any_from_none_async vx_new(params Object[] vals) {
+    public override Vx.Core.Func_any_from_none_async vx_new(params object[] vals) {
       Class_any_from_none_async output = new Class_any_from_none_async();
       return output;
     }
 
-    public override Vx.Core.Func_any_from_none_async vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_any_from_none_async vx_copy(params object[] vals) {
       Class_any_from_none_async output = new Class_any_from_none_async();
       return output;
     }
@@ -18714,7 +18778,7 @@ public static class Core {
     }
 
     public Task<Vx.Core.Type_any> vx_repl(Vx.Core.Type_anylist arglist) {
-      Task<Vx.Core.Type_any> output = Vx.Core.vx_async_new_completed(Vx.Core.e_any);
+      Task<Vx.Core.Type_any> output = Vx.Core.vx_async_new_from_value(Vx.Core.e_any);
       Vx.Core.Type_any generic_any_1 = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
       Task<Vx.Core.Type_any> future = Vx.Core.f_any_from_none_async(generic_any_1);
       output = Vx.Core.vx_async_from_async(Vx.Core.t_any, future);
@@ -18724,7 +18788,7 @@ public static class Core {
     public Task<T> vx_any_from_none_async<T>(T generic_any_1) where T : Vx.Core.Type_any {
       Task<T> output;
       if (fn == null) {
-        output = Vx.Core.vx_async_new_completed(Vx.Core.f_empty(generic_any_1));
+        output = Vx.Core.vx_async_new_from_value(Vx.Core.f_empty(generic_any_1));
       } else {
         Task<Vx.Core.Type_any> future = fn();
         output = Vx.Core.vx_async_from_async(generic_any_1, future);
@@ -18738,7 +18802,7 @@ public static class Core {
   public static Func_any_from_none_async t_any_from_none_async = new Vx.Core.Class_any_from_none_async();
 
   public static Task<T> f_any_from_none_async<T>(T generic_any_1) where T : Vx.Core.Type_any {
-    Task<T> output = Vx.Core.vx_async_new_completed(Vx.Core.f_empty(generic_any_1));
+    Task<T> output = Vx.Core.vx_async_new_from_value(Vx.Core.f_empty(generic_any_1));
     return output;
   }
 
@@ -18756,12 +18820,12 @@ public static class Core {
 
   public class Class_any_from_reduce : Vx.Core.Class_base, Func_any_from_reduce {
 
-    public override Vx.Core.Func_any_from_reduce vx_new(params Object[] vals) {
+    public override Vx.Core.Func_any_from_reduce vx_new(params object[] vals) {
       Class_any_from_reduce output = new Class_any_from_reduce();
       return output;
     }
 
-    public override Vx.Core.Func_any_from_reduce vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_any_from_reduce vx_copy(params object[] vals) {
       Class_any_from_reduce output = new Class_any_from_reduce();
       return output;
     }
@@ -18854,12 +18918,12 @@ public static class Core {
 
   public class Class_any_from_reduce_async : Vx.Core.Class_base, Func_any_from_reduce_async {
 
-    public override Vx.Core.Func_any_from_reduce_async vx_new(params Object[] vals) {
+    public override Vx.Core.Func_any_from_reduce_async vx_new(params object[] vals) {
       Class_any_from_reduce_async output = new Class_any_from_reduce_async();
       return output;
     }
 
-    public override Vx.Core.Func_any_from_reduce_async vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_any_from_reduce_async vx_copy(params object[] vals) {
       Class_any_from_reduce_async output = new Class_any_from_reduce_async();
       return output;
     }
@@ -18909,7 +18973,7 @@ public static class Core {
     }
 
     public Task<Vx.Core.Type_any> vx_repl(Vx.Core.Type_anylist arglist) {
-      Task<Vx.Core.Type_any> output = Vx.Core.vx_async_new_completed(Vx.Core.e_any);
+      Task<Vx.Core.Type_any> output = Vx.Core.vx_async_new_from_value(Vx.Core.e_any);
       Vx.Core.Type_any generic_any_1 = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
       Vx.Core.Type_any result = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
       Vx.Core.Type_any item = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(1)));
@@ -18921,7 +18985,7 @@ public static class Core {
     public Task<T> vx_any_from_reduce_async<T, U>(T generic_any_1, T result, U item) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
       Task<T> output;
       if (fn == null) {
-        output = Vx.Core.vx_async_new_completed(Vx.Core.f_empty(generic_any_1));
+        output = Vx.Core.vx_async_new_from_value(Vx.Core.f_empty(generic_any_1));
       } else {
         Task<Vx.Core.Type_any> future = fn(result, item);
         output = Vx.Core.vx_async_from_async(generic_any_1, future);
@@ -18935,7 +18999,7 @@ public static class Core {
   public static Func_any_from_reduce_async t_any_from_reduce_async = new Vx.Core.Class_any_from_reduce_async();
 
   public static Task<T> f_any_from_reduce_async<T, U>(T generic_any_1, T result, U item) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
-    Task<T> output = Vx.Core.vx_async_new_completed(Vx.Core.f_empty(generic_any_1));
+    Task<T> output = Vx.Core.vx_async_new_from_value(Vx.Core.f_empty(generic_any_1));
     return output;
   }
 
@@ -18954,12 +19018,12 @@ public static class Core {
 
   public class Class_any_from_reduce_next : Vx.Core.Class_base, Func_any_from_reduce_next {
 
-    public override Vx.Core.Func_any_from_reduce_next vx_new(params Object[] vals) {
+    public override Vx.Core.Func_any_from_reduce_next vx_new(params object[] vals) {
       Class_any_from_reduce_next output = new Class_any_from_reduce_next();
       return output;
     }
 
-    public override Vx.Core.Func_any_from_reduce_next vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_any_from_reduce_next vx_copy(params object[] vals) {
       Class_any_from_reduce_next output = new Class_any_from_reduce_next();
       return output;
     }
@@ -19054,12 +19118,12 @@ public static class Core {
 
   public class Class_any_from_reduce_next_async : Vx.Core.Class_base, Func_any_from_reduce_next_async {
 
-    public override Vx.Core.Func_any_from_reduce_next_async vx_new(params Object[] vals) {
+    public override Vx.Core.Func_any_from_reduce_next_async vx_new(params object[] vals) {
       Class_any_from_reduce_next_async output = new Class_any_from_reduce_next_async();
       return output;
     }
 
-    public override Vx.Core.Func_any_from_reduce_next_async vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_any_from_reduce_next_async vx_copy(params object[] vals) {
       Class_any_from_reduce_next_async output = new Class_any_from_reduce_next_async();
       return output;
     }
@@ -19109,7 +19173,7 @@ public static class Core {
     }
 
     public Task<Vx.Core.Type_any> vx_repl(Vx.Core.Type_anylist arglist) {
-      Task<Vx.Core.Type_any> output = Vx.Core.vx_async_new_completed(Vx.Core.e_any);
+      Task<Vx.Core.Type_any> output = Vx.Core.vx_async_new_from_value(Vx.Core.e_any);
       Vx.Core.Type_any generic_any_1 = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
       Vx.Core.Type_any result = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
       Vx.Core.Type_any current = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(1)));
@@ -19122,7 +19186,7 @@ public static class Core {
     public Task<T> vx_any_from_reduce_next_async<T, U>(T generic_any_1, T result, U current, U next) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
       Task<T> output;
       if (fn == null) {
-        output = Vx.Core.vx_async_new_completed(Vx.Core.f_empty(generic_any_1));
+        output = Vx.Core.vx_async_new_from_value(Vx.Core.f_empty(generic_any_1));
       } else {
         Task<Vx.Core.Type_any> future = fn(result, current, next);
         output = Vx.Core.vx_async_from_async(generic_any_1, future);
@@ -19136,7 +19200,7 @@ public static class Core {
   public static Func_any_from_reduce_next_async t_any_from_reduce_next_async = new Vx.Core.Class_any_from_reduce_next_async();
 
   public static Task<T> f_any_from_reduce_next_async<T, U>(T generic_any_1, T result, U current, U next) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
-    Task<T> output = Vx.Core.vx_async_new_completed(Vx.Core.f_empty(generic_any_1));
+    Task<T> output = Vx.Core.vx_async_new_from_value(Vx.Core.f_empty(generic_any_1));
     return output;
   }
 
@@ -19154,12 +19218,12 @@ public static class Core {
 
   public class Class_any_from_struct : Vx.Core.Class_base, Func_any_from_struct {
 
-    public override Vx.Core.Func_any_from_struct vx_new(params Object[] vals) {
+    public override Vx.Core.Func_any_from_struct vx_new(params object[] vals) {
       Class_any_from_struct output = new Class_any_from_struct();
       return output;
     }
 
-    public override Vx.Core.Func_any_from_struct vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_any_from_struct vx_copy(params object[] vals) {
       Class_any_from_struct output = new Class_any_from_struct();
       return output;
     }
@@ -19238,12 +19302,12 @@ public static class Core {
 
   public class Class_async : Vx.Core.Class_base, Func_async {
 
-    public override Vx.Core.Func_async vx_new(params Object[] vals) {
+    public override Vx.Core.Func_async vx_new(params object[] vals) {
       Class_async output = new Class_async();
       return output;
     }
 
-    public override Vx.Core.Func_async vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_async vx_copy(params object[] vals) {
       Class_async output = new Class_async();
       return output;
     }
@@ -19293,7 +19357,7 @@ public static class Core {
     }
 
     public Task<Vx.Core.Type_any> vx_repl(Vx.Core.Type_anylist arglist) {
-      Task<Vx.Core.Type_any> output = Vx.Core.vx_async_new_completed(Vx.Core.e_any);
+      Task<Vx.Core.Type_any> output = Vx.Core.vx_async_new_from_value(Vx.Core.e_any);
       Vx.Core.Type_any generic_any_1 = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
       Vx.Core.Type_any value = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
       Task<Vx.Core.Type_any> future = Vx.Core.f_async(generic_any_1, value);
@@ -19311,8 +19375,8 @@ public static class Core {
   public static Func_async t_async = new Vx.Core.Class_async();
 
   public static Task<T> f_async<T>(T generic_any_1, T value) where T : Vx.Core.Type_any {
-    Task<T> output = Vx.Core.vx_async_new_completed(Vx.Core.f_empty(generic_any_1));
-    output = Vx.Core.vx_async_new_completed(value);
+    Task<T> output = Vx.Core.vx_async_new_from_value(Vx.Core.f_empty(generic_any_1));
+    output = Vx.Core.vx_async_new_from_value(value);
     return output;
   }
 
@@ -19329,12 +19393,12 @@ public static class Core {
 
   public class Class_boolean_permission_from_func : Vx.Core.Class_base, Func_boolean_permission_from_func {
 
-    public override Vx.Core.Func_boolean_permission_from_func vx_new(params Object[] vals) {
+    public override Vx.Core.Func_boolean_permission_from_func vx_new(params object[] vals) {
       Class_boolean_permission_from_func output = new Class_boolean_permission_from_func();
       return output;
     }
 
-    public override Vx.Core.Func_boolean_permission_from_func vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_boolean_permission_from_func vx_copy(params object[] vals) {
       Class_boolean_permission_from_func output = new Class_boolean_permission_from_func();
       return output;
     }
@@ -19428,12 +19492,12 @@ public static class Core {
 
   public class Class_boolean_write_from_map_name_value : Vx.Core.Class_base, Func_boolean_write_from_map_name_value {
 
-    public override Vx.Core.Func_boolean_write_from_map_name_value vx_new(params Object[] vals) {
+    public override Vx.Core.Func_boolean_write_from_map_name_value vx_new(params object[] vals) {
       Class_boolean_write_from_map_name_value output = new Class_boolean_write_from_map_name_value();
       return output;
     }
 
-    public override Vx.Core.Func_boolean_write_from_map_name_value vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_boolean_write_from_map_name_value vx_copy(params object[] vals) {
       Class_boolean_write_from_map_name_value output = new Class_boolean_write_from_map_name_value();
       return output;
     }
@@ -19510,12 +19574,12 @@ public static class Core {
 
   public class Class_boolean_from_any : Vx.Core.Class_base, Func_boolean_from_any {
 
-    public override Vx.Core.Func_boolean_from_any vx_new(params Object[] vals) {
+    public override Vx.Core.Func_boolean_from_any vx_new(params object[] vals) {
       Class_boolean_from_any output = new Class_boolean_from_any();
       return output;
     }
 
-    public override Vx.Core.Func_boolean_from_any vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_boolean_from_any vx_copy(params object[] vals) {
       Class_boolean_from_any output = new Class_boolean_from_any();
       return output;
     }
@@ -19603,12 +19667,12 @@ public static class Core {
 
   public class Class_boolean_from_func : Vx.Core.Class_base, Func_boolean_from_func {
 
-    public override Vx.Core.Func_boolean_from_func vx_new(params Object[] vals) {
+    public override Vx.Core.Func_boolean_from_func vx_new(params object[] vals) {
       Class_boolean_from_func output = new Class_boolean_from_func();
       return output;
     }
 
-    public override Vx.Core.Func_boolean_from_func vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_boolean_from_func vx_copy(params object[] vals) {
       Class_boolean_from_func output = new Class_boolean_from_func();
       return output;
     }
@@ -19695,12 +19759,12 @@ public static class Core {
 
   public class Class_boolean_from_none : Vx.Core.Class_base, Func_boolean_from_none {
 
-    public override Vx.Core.Func_boolean_from_none vx_new(params Object[] vals) {
+    public override Vx.Core.Func_boolean_from_none vx_new(params object[] vals) {
       Class_boolean_from_none output = new Class_boolean_from_none();
       return output;
     }
 
-    public override Vx.Core.Func_boolean_from_none vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_boolean_from_none vx_copy(params object[] vals) {
       Class_boolean_from_none output = new Class_boolean_from_none();
       return output;
     }
@@ -19787,12 +19851,12 @@ public static class Core {
 
   public class Class_case : Vx.Core.Class_base, Func_case {
 
-    public override Vx.Core.Func_case vx_new(params Object[] vals) {
+    public override Vx.Core.Func_case vx_new(params object[] vals) {
       Class_case output = new Class_case();
       return output;
     }
 
-    public override Vx.Core.Func_case vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_case vx_copy(params object[] vals) {
       Class_case output = new Class_case();
       return output;
     }
@@ -19877,12 +19941,12 @@ public static class Core {
 
   public class Class_case_1 : Vx.Core.Class_base, Func_case_1 {
 
-    public override Vx.Core.Func_case_1 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_case_1 vx_new(params object[] vals) {
       Class_case_1 output = new Class_case_1();
       return output;
     }
 
-    public override Vx.Core.Func_case_1 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_case_1 vx_copy(params object[] vals) {
       Class_case_1 output = new Class_case_1();
       return output;
     }
@@ -19968,12 +20032,12 @@ public static class Core {
 
   public class Class_compare : Vx.Core.Class_base, Func_compare {
 
-    public override Vx.Core.Func_compare vx_new(params Object[] vals) {
+    public override Vx.Core.Func_compare vx_new(params object[] vals) {
       Class_compare output = new Class_compare();
       return output;
     }
 
-    public override Vx.Core.Func_compare vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_compare vx_copy(params object[] vals) {
       Class_compare output = new Class_compare();
       return output;
     }
@@ -20049,12 +20113,12 @@ public static class Core {
 
   public class Class_contains : Vx.Core.Class_base, Func_contains {
 
-    public override Vx.Core.Func_contains vx_new(params Object[] vals) {
+    public override Vx.Core.Func_contains vx_new(params object[] vals) {
       Class_contains output = new Class_contains();
       return output;
     }
 
-    public override Vx.Core.Func_contains vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_contains vx_copy(params object[] vals) {
       Class_contains output = new Class_contains();
       return output;
     }
@@ -20131,12 +20195,12 @@ public static class Core {
 
   public class Class_contains_1 : Vx.Core.Class_base, Func_contains_1 {
 
-    public override Vx.Core.Func_contains_1 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_contains_1 vx_new(params object[] vals) {
       Class_contains_1 output = new Class_contains_1();
       return output;
     }
 
-    public override Vx.Core.Func_contains_1 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_contains_1 vx_copy(params object[] vals) {
       Class_contains_1 output = new Class_contains_1();
       return output;
     }
@@ -20211,12 +20275,12 @@ public static class Core {
 
   public class Class_context_main : Vx.Core.Class_base, Func_context_main {
 
-    public override Vx.Core.Func_context_main vx_new(params Object[] vals) {
+    public override Vx.Core.Func_context_main vx_new(params object[] vals) {
       Class_context_main output = new Class_context_main();
       return output;
     }
 
-    public override Vx.Core.Func_context_main vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_context_main vx_copy(params object[] vals) {
       Class_context_main output = new Class_context_main();
       return output;
     }
@@ -20305,12 +20369,12 @@ public static class Core {
 
   public class Class_copy : Vx.Core.Class_base, Func_copy {
 
-    public override Vx.Core.Func_copy vx_new(params Object[] vals) {
+    public override Vx.Core.Func_copy vx_new(params object[] vals) {
       Class_copy output = new Class_copy();
       return output;
     }
 
-    public override Vx.Core.Func_copy vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_copy vx_copy(params object[] vals) {
       Class_copy output = new Class_copy();
       return output;
     }
@@ -20387,12 +20451,12 @@ public static class Core {
 
   public class Class_else : Vx.Core.Class_base, Func_else {
 
-    public override Vx.Core.Func_else vx_new(params Object[] vals) {
+    public override Vx.Core.Func_else vx_new(params object[] vals) {
       Class_else output = new Class_else();
       return output;
     }
 
-    public override Vx.Core.Func_else vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_else vx_copy(params object[] vals) {
       Class_else output = new Class_else();
       return output;
     }
@@ -20486,12 +20550,12 @@ public static class Core {
 
   public class Class_empty : Vx.Core.Class_base, Func_empty {
 
-    public override Vx.Core.Func_empty vx_new(params Object[] vals) {
+    public override Vx.Core.Func_empty vx_new(params object[] vals) {
       Class_empty output = new Class_empty();
       return output;
     }
 
-    public override Vx.Core.Func_empty vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_empty vx_copy(params object[] vals) {
       Class_empty output = new Class_empty();
       return output;
     }
@@ -20575,12 +20639,12 @@ public static class Core {
 
   public class Class_extends_from_any : Vx.Core.Class_base, Func_extends_from_any {
 
-    public override Vx.Core.Func_extends_from_any vx_new(params Object[] vals) {
+    public override Vx.Core.Func_extends_from_any vx_new(params object[] vals) {
       Class_extends_from_any output = new Class_extends_from_any();
       return output;
     }
 
-    public override Vx.Core.Func_extends_from_any vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_extends_from_any vx_copy(params object[] vals) {
       Class_extends_from_any output = new Class_extends_from_any();
       return output;
     }
@@ -20668,12 +20732,12 @@ public static class Core {
 
   public class Class_extends_from_typedef : Vx.Core.Class_base, Func_extends_from_typedef {
 
-    public override Vx.Core.Func_extends_from_typedef vx_new(params Object[] vals) {
+    public override Vx.Core.Func_extends_from_typedef vx_new(params object[] vals) {
       Class_extends_from_typedef output = new Class_extends_from_typedef();
       return output;
     }
 
-    public override Vx.Core.Func_extends_from_typedef vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_extends_from_typedef vx_copy(params object[] vals) {
       Class_extends_from_typedef output = new Class_extends_from_typedef();
       return output;
     }
@@ -20759,12 +20823,12 @@ public static class Core {
 
   public class Class_first_from_list : Vx.Core.Class_base, Func_first_from_list {
 
-    public override Vx.Core.Func_first_from_list vx_new(params Object[] vals) {
+    public override Vx.Core.Func_first_from_list vx_new(params object[] vals) {
       Class_first_from_list output = new Class_first_from_list();
       return output;
     }
 
-    public override Vx.Core.Func_first_from_list vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_first_from_list vx_copy(params object[] vals) {
       Class_first_from_list output = new Class_first_from_list();
       return output;
     }
@@ -20852,12 +20916,12 @@ public static class Core {
 
   public class Class_first_from_list_any_from_any : Vx.Core.Class_base, Func_first_from_list_any_from_any {
 
-    public override Vx.Core.Func_first_from_list_any_from_any vx_new(params Object[] vals) {
+    public override Vx.Core.Func_first_from_list_any_from_any vx_new(params object[] vals) {
       Class_first_from_list_any_from_any output = new Class_first_from_list_any_from_any();
       return output;
     }
 
-    public override Vx.Core.Func_first_from_list_any_from_any vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_first_from_list_any_from_any vx_copy(params object[] vals) {
       Class_first_from_list_any_from_any output = new Class_first_from_list_any_from_any();
       return output;
     }
@@ -20939,12 +21003,12 @@ public static class Core {
 
   public class Class_float_from_string : Vx.Core.Class_base, Func_float_from_string {
 
-    public override Vx.Core.Func_float_from_string vx_new(params Object[] vals) {
+    public override Vx.Core.Func_float_from_string vx_new(params object[] vals) {
       Class_float_from_string output = new Class_float_from_string();
       return output;
     }
 
-    public override Vx.Core.Func_float_from_string vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_float_from_string vx_copy(params object[] vals) {
       Class_float_from_string output = new Class_float_from_string();
       return output;
     }
@@ -21032,12 +21096,12 @@ public static class Core {
 
   public class Class_fn : Vx.Core.Class_base, Func_fn {
 
-    public override Vx.Core.Func_fn vx_new(params Object[] vals) {
+    public override Vx.Core.Func_fn vx_new(params object[] vals) {
       Class_fn output = new Class_fn();
       return output;
     }
 
-    public override Vx.Core.Func_fn vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_fn vx_copy(params object[] vals) {
       Class_fn output = new Class_fn();
       return output;
     }
@@ -21112,12 +21176,12 @@ public static class Core {
 
   public class Class_funcdef_from_func : Vx.Core.Class_base, Func_funcdef_from_func {
 
-    public override Vx.Core.Func_funcdef_from_func vx_new(params Object[] vals) {
+    public override Vx.Core.Func_funcdef_from_func vx_new(params object[] vals) {
       Class_funcdef_from_func output = new Class_funcdef_from_func();
       return output;
     }
 
-    public override Vx.Core.Func_funcdef_from_func vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_funcdef_from_func vx_copy(params object[] vals) {
       Class_funcdef_from_func output = new Class_funcdef_from_func();
       return output;
     }
@@ -21203,12 +21267,12 @@ public static class Core {
 
   public class Class_funcname_from_funcdef : Vx.Core.Class_base, Func_funcname_from_funcdef {
 
-    public override Vx.Core.Func_funcname_from_funcdef vx_new(params Object[] vals) {
+    public override Vx.Core.Func_funcname_from_funcdef vx_new(params object[] vals) {
       Class_funcname_from_funcdef output = new Class_funcname_from_funcdef();
       return output;
     }
 
-    public override Vx.Core.Func_funcname_from_funcdef vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_funcname_from_funcdef vx_copy(params object[] vals) {
       Class_funcname_from_funcdef output = new Class_funcname_from_funcdef();
       return output;
     }
@@ -21302,12 +21366,12 @@ public static class Core {
 
   public class Class_if : Vx.Core.Class_base, Func_if {
 
-    public override Vx.Core.Func_if vx_new(params Object[] vals) {
+    public override Vx.Core.Func_if vx_new(params object[] vals) {
       Class_if output = new Class_if();
       return output;
     }
 
-    public override Vx.Core.Func_if vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_if vx_copy(params object[] vals) {
       Class_if output = new Class_if();
       return output;
     }
@@ -21387,12 +21451,12 @@ public static class Core {
 
   public class Class_if_1 : Vx.Core.Class_base, Func_if_1 {
 
-    public override Vx.Core.Func_if_1 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_if_1 vx_new(params object[] vals) {
       Class_if_1 output = new Class_if_1();
       return output;
     }
 
-    public override Vx.Core.Func_if_1 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_if_1 vx_copy(params object[] vals) {
       Class_if_1 output = new Class_if_1();
       return output;
     }
@@ -21473,12 +21537,12 @@ public static class Core {
 
   public class Class_if_2 : Vx.Core.Class_base, Func_if_2 {
 
-    public override Vx.Core.Func_if_2 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_if_2 vx_new(params object[] vals) {
       Class_if_2 output = new Class_if_2();
       return output;
     }
 
-    public override Vx.Core.Func_if_2 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_if_2 vx_copy(params object[] vals) {
       Class_if_2 output = new Class_if_2();
       return output;
     }
@@ -21565,12 +21629,12 @@ public static class Core {
 
   public class Class_int_from_func : Vx.Core.Class_base, Func_int_from_func {
 
-    public override Vx.Core.Func_int_from_func vx_new(params Object[] vals) {
+    public override Vx.Core.Func_int_from_func vx_new(params object[] vals) {
       Class_int_from_func output = new Class_int_from_func();
       return output;
     }
 
-    public override Vx.Core.Func_int_from_func vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_int_from_func vx_copy(params object[] vals) {
       Class_int_from_func output = new Class_int_from_func();
       return output;
     }
@@ -21650,12 +21714,12 @@ public static class Core {
 
   public class Class_int_from_string : Vx.Core.Class_base, Func_int_from_string {
 
-    public override Vx.Core.Func_int_from_string vx_new(params Object[] vals) {
+    public override Vx.Core.Func_int_from_string vx_new(params object[] vals) {
       Class_int_from_string output = new Class_int_from_string();
       return output;
     }
 
-    public override Vx.Core.Func_int_from_string vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_int_from_string vx_copy(params object[] vals) {
       Class_int_from_string output = new Class_int_from_string();
       return output;
     }
@@ -21776,12 +21840,12 @@ public static class Core {
 
   public class Class_is_empty : Vx.Core.Class_base, Func_is_empty {
 
-    public override Vx.Core.Func_is_empty vx_new(params Object[] vals) {
+    public override Vx.Core.Func_is_empty vx_new(params object[] vals) {
       Class_is_empty output = new Class_is_empty();
       return output;
     }
 
-    public override Vx.Core.Func_is_empty vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_is_empty vx_copy(params object[] vals) {
       Class_is_empty output = new Class_is_empty();
       return output;
     }
@@ -21869,12 +21933,12 @@ public static class Core {
 
   public class Class_is_empty_1 : Vx.Core.Class_base, Func_is_empty_1 {
 
-    public override Vx.Core.Func_is_empty_1 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_is_empty_1 vx_new(params object[] vals) {
       Class_is_empty_1 output = new Class_is_empty_1();
       return output;
     }
 
-    public override Vx.Core.Func_is_empty_1 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_is_empty_1 vx_copy(params object[] vals) {
       Class_is_empty_1 output = new Class_is_empty_1();
       return output;
     }
@@ -21965,12 +22029,12 @@ public static class Core {
 
   public class Class_is_endswith : Vx.Core.Class_base, Func_is_endswith {
 
-    public override Vx.Core.Func_is_endswith vx_new(params Object[] vals) {
+    public override Vx.Core.Func_is_endswith vx_new(params object[] vals) {
       Class_is_endswith output = new Class_is_endswith();
       return output;
     }
 
-    public override Vx.Core.Func_is_endswith vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_is_endswith vx_copy(params object[] vals) {
       Class_is_endswith output = new Class_is_endswith();
       return output;
     }
@@ -22049,12 +22113,12 @@ public static class Core {
 
   public class Class_is_float : Vx.Core.Class_base, Func_is_float {
 
-    public override Vx.Core.Func_is_float vx_new(params Object[] vals) {
+    public override Vx.Core.Func_is_float vx_new(params object[] vals) {
       Class_is_float output = new Class_is_float();
       return output;
     }
 
-    public override Vx.Core.Func_is_float vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_is_float vx_copy(params object[] vals) {
       Class_is_float output = new Class_is_float();
       return output;
     }
@@ -22141,12 +22205,12 @@ public static class Core {
 
   public class Class_is_func : Vx.Core.Class_base, Func_is_func {
 
-    public override Vx.Core.Func_is_func vx_new(params Object[] vals) {
+    public override Vx.Core.Func_is_func vx_new(params object[] vals) {
       Class_is_func output = new Class_is_func();
       return output;
     }
 
-    public override Vx.Core.Func_is_func vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_is_func vx_copy(params object[] vals) {
       Class_is_func output = new Class_is_func();
       return output;
     }
@@ -22234,12 +22298,12 @@ public static class Core {
 
   public class Class_is_int : Vx.Core.Class_base, Func_is_int {
 
-    public override Vx.Core.Func_is_int vx_new(params Object[] vals) {
+    public override Vx.Core.Func_is_int vx_new(params object[] vals) {
       Class_is_int output = new Class_is_int();
       return output;
     }
 
-    public override Vx.Core.Func_is_int vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_is_int vx_copy(params object[] vals) {
       Class_is_int output = new Class_is_int();
       return output;
     }
@@ -22326,12 +22390,12 @@ public static class Core {
 
   public class Class_is_number : Vx.Core.Class_base, Func_is_number {
 
-    public override Vx.Core.Func_is_number vx_new(params Object[] vals) {
+    public override Vx.Core.Func_is_number vx_new(params object[] vals) {
       Class_is_number output = new Class_is_number();
       return output;
     }
 
-    public override Vx.Core.Func_is_number vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_is_number vx_copy(params object[] vals) {
       Class_is_number output = new Class_is_number();
       return output;
     }
@@ -22441,12 +22505,12 @@ public static class Core {
 
   public class Class_is_pass_from_permission : Vx.Core.Class_base, Func_is_pass_from_permission {
 
-    public override Vx.Core.Func_is_pass_from_permission vx_new(params Object[] vals) {
+    public override Vx.Core.Func_is_pass_from_permission vx_new(params object[] vals) {
       Class_is_pass_from_permission output = new Class_is_pass_from_permission();
       return output;
     }
 
-    public override Vx.Core.Func_is_pass_from_permission vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_is_pass_from_permission vx_copy(params object[] vals) {
       Class_is_pass_from_permission output = new Class_is_pass_from_permission();
       return output;
     }
@@ -22541,12 +22605,12 @@ public static class Core {
 
   public class Class_last_from_list : Vx.Core.Class_base, Func_last_from_list {
 
-    public override Vx.Core.Func_last_from_list vx_new(params Object[] vals) {
+    public override Vx.Core.Func_last_from_list vx_new(params object[] vals) {
       Class_last_from_list output = new Class_last_from_list();
       return output;
     }
 
-    public override Vx.Core.Func_last_from_list vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_last_from_list vx_copy(params object[] vals) {
       Class_last_from_list output = new Class_last_from_list();
       return output;
     }
@@ -22640,12 +22704,12 @@ public static class Core {
 
   public class Class_length : Vx.Core.Class_base, Func_length {
 
-    public override Vx.Core.Func_length vx_new(params Object[] vals) {
+    public override Vx.Core.Func_length vx_new(params object[] vals) {
       Class_length output = new Class_length();
       return output;
     }
 
-    public override Vx.Core.Func_length vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_length vx_copy(params object[] vals) {
       Class_length output = new Class_length();
       return output;
     }
@@ -22732,12 +22796,12 @@ public static class Core {
 
   public class Class_length_1 : Vx.Core.Class_base, Func_length_1 {
 
-    public override Vx.Core.Func_length_1 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_length_1 vx_new(params object[] vals) {
       Class_length_1 output = new Class_length_1();
       return output;
     }
 
-    public override Vx.Core.Func_length_1 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_length_1 vx_copy(params object[] vals) {
       Class_length_1 output = new Class_length_1();
       return output;
     }
@@ -22824,12 +22888,12 @@ public static class Core {
 
   public class Class_length_2 : Vx.Core.Class_base, Func_length_2 {
 
-    public override Vx.Core.Func_length_2 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_length_2 vx_new(params object[] vals) {
       Class_length_2 output = new Class_length_2();
       return output;
     }
 
-    public override Vx.Core.Func_length_2 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_length_2 vx_copy(params object[] vals) {
       Class_length_2 output = new Class_length_2();
       return output;
     }
@@ -22917,12 +22981,12 @@ public static class Core {
 
   public class Class_let : Vx.Core.Class_base, Func_let {
 
-    public override Vx.Core.Func_let vx_new(params Object[] vals) {
+    public override Vx.Core.Func_let vx_new(params object[] vals) {
       Class_let output = new Class_let();
       return output;
     }
 
-    public override Vx.Core.Func_let vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_let vx_copy(params object[] vals) {
       Class_let output = new Class_let();
       return output;
     }
@@ -23000,12 +23064,12 @@ public static class Core {
 
   public class Class_let_async : Vx.Core.Class_base, Func_let_async {
 
-    public override Vx.Core.Func_let_async vx_new(params Object[] vals) {
+    public override Vx.Core.Func_let_async vx_new(params object[] vals) {
       Class_let_async output = new Class_let_async();
       return output;
     }
 
-    public override Vx.Core.Func_let_async vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_let_async vx_copy(params object[] vals) {
       Class_let_async output = new Class_let_async();
       return output;
     }
@@ -23045,7 +23109,7 @@ public static class Core {
     }
 
     public Task<Vx.Core.Type_any> vx_repl(Vx.Core.Type_anylist arglist) {
-      Task<Vx.Core.Type_any> output = Vx.Core.vx_async_new_completed(Vx.Core.e_any);
+      Task<Vx.Core.Type_any> output = Vx.Core.vx_async_new_from_value(Vx.Core.e_any);
       Vx.Core.Type_any generic_any_1 = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
       Vx.Core.Func_any_from_func_async fn_any_async = Vx.Core.f_any_from_any(Vx.Core.t_any_from_func_async, arglist.vx_any(Vx.Core.vx_new_int(0)));
       Task<Vx.Core.Type_any> future = Vx.Core.f_let_async(generic_any_1, fn_any_async);
@@ -23063,7 +23127,7 @@ public static class Core {
   public static Func_let_async t_let_async = new Vx.Core.Class_let_async();
 
   public static Task<T> f_let_async<T>(T generic_any_1, Vx.Core.Func_any_from_func_async fn_any_async) where T : Vx.Core.Type_any {
-    Task<T> output = Vx.Core.vx_async_new_completed(Vx.Core.f_empty(generic_any_1));
+    Task<T> output = Vx.Core.vx_async_new_from_value(Vx.Core.f_empty(generic_any_1));
     output = fn_any_async.vx_any_from_func_async(generic_any_1);
     return output;
   }
@@ -23081,12 +23145,12 @@ public static class Core {
 
   public class Class_list_join_from_list : Vx.Core.Class_base, Func_list_join_from_list {
 
-    public override Vx.Core.Func_list_join_from_list vx_new(params Object[] vals) {
+    public override Vx.Core.Func_list_join_from_list vx_new(params object[] vals) {
       Class_list_join_from_list output = new Class_list_join_from_list();
       return output;
     }
 
-    public override Vx.Core.Func_list_join_from_list vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_list_join_from_list vx_copy(params object[] vals) {
       Class_list_join_from_list output = new Class_list_join_from_list();
       return output;
     }
@@ -23182,12 +23246,12 @@ public static class Core {
 
   public class Class_list_join_from_list_1 : Vx.Core.Class_base, Func_list_join_from_list_1 {
 
-    public override Vx.Core.Func_list_join_from_list_1 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_list_join_from_list_1 vx_new(params object[] vals) {
       Class_list_join_from_list_1 output = new Class_list_join_from_list_1();
       return output;
     }
 
-    public override Vx.Core.Func_list_join_from_list_1 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_list_join_from_list_1 vx_copy(params object[] vals) {
       Class_list_join_from_list_1 output = new Class_list_join_from_list_1();
       return output;
     }
@@ -23263,12 +23327,12 @@ public static class Core {
 
   public class Class_list_from_list : Vx.Core.Class_base, Func_list_from_list {
 
-    public override Vx.Core.Func_list_from_list vx_new(params Object[] vals) {
+    public override Vx.Core.Func_list_from_list vx_new(params object[] vals) {
       Class_list_from_list output = new Class_list_from_list();
       return output;
     }
 
-    public override Vx.Core.Func_list_from_list vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_list_from_list vx_copy(params object[] vals) {
       Class_list_from_list output = new Class_list_from_list();
       return output;
     }
@@ -23364,12 +23428,12 @@ public static class Core {
 
   public class Class_list_from_list_1 : Vx.Core.Class_base, Func_list_from_list_1 {
 
-    public override Vx.Core.Func_list_from_list_1 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_list_from_list_1 vx_new(params object[] vals) {
       Class_list_from_list_1 output = new Class_list_from_list_1();
       return output;
     }
 
-    public override Vx.Core.Func_list_from_list_1 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_list_from_list_1 vx_copy(params object[] vals) {
       Class_list_from_list_1 output = new Class_list_from_list_1();
       return output;
     }
@@ -23448,12 +23512,12 @@ public static class Core {
 
   public class Class_list_from_list_async : Vx.Core.Class_base, Func_list_from_list_async {
 
-    public override Vx.Core.Func_list_from_list_async vx_new(params Object[] vals) {
+    public override Vx.Core.Func_list_from_list_async vx_new(params object[] vals) {
       Class_list_from_list_async output = new Class_list_from_list_async();
       return output;
     }
 
-    public override Vx.Core.Func_list_from_list_async vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_list_from_list_async vx_copy(params object[] vals) {
       Class_list_from_list_async output = new Class_list_from_list_async();
       return output;
     }
@@ -23493,7 +23557,7 @@ public static class Core {
     }
 
     public Task<Vx.Core.Type_any> vx_repl(Vx.Core.Type_anylist arglist) {
-      Task<Vx.Core.Type_any> output = Vx.Core.vx_async_new_completed(Vx.Core.e_any);
+      Task<Vx.Core.Type_any> output = Vx.Core.vx_async_new_from_value(Vx.Core.e_any);
       Vx.Core.Type_list generic_list_1 = Vx.Core.f_any_from_any(Vx.Core.t_list, arglist.vx_any(Vx.Core.vx_new_int(0)));
       Vx.Core.Type_list values = Vx.Core.f_any_from_any(Vx.Core.t_list, arglist.vx_any(Vx.Core.vx_new_int(0)));
       Vx.Core.Func_any_from_any_async fn_any_from_any_async = Vx.Core.f_any_from_any(Vx.Core.t_any_from_any_async, arglist.vx_any(Vx.Core.vx_new_int(1)));
@@ -23512,7 +23576,7 @@ public static class Core {
   public static Func_list_from_list_async t_list_from_list_async = new Vx.Core.Class_list_from_list_async();
 
   public static Task<X> f_list_from_list_async<X, Y>(X generic_list_1, Y values, Vx.Core.Func_any_from_any_async fn_any_from_any_async) where X : Vx.Core.Type_list where Y : Vx.Core.Type_list {
-    Task<X> output = Vx.Core.vx_async_new_completed(Vx.Core.f_empty(generic_list_1));
+    Task<X> output = Vx.Core.vx_async_new_from_value(Vx.Core.f_empty(generic_list_1));
     output = Vx.Core.vx_list_from_list_async(generic_list_1, values, fn_any_from_any_async);
     return output;
   }
@@ -23531,12 +23595,12 @@ public static class Core {
 
   public class Class_list_from_list_intany : Vx.Core.Class_base, Func_list_from_list_intany {
 
-    public override Vx.Core.Func_list_from_list_intany vx_new(params Object[] vals) {
+    public override Vx.Core.Func_list_from_list_intany vx_new(params object[] vals) {
       Class_list_from_list_intany output = new Class_list_from_list_intany();
       return output;
     }
 
-    public override Vx.Core.Func_list_from_list_intany vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_list_from_list_intany vx_copy(params object[] vals) {
       Class_list_from_list_intany output = new Class_list_from_list_intany();
       return output;
     }
@@ -23612,12 +23676,12 @@ public static class Core {
 
   public class Class_list_from_map : Vx.Core.Class_base, Func_list_from_map {
 
-    public override Vx.Core.Func_list_from_map vx_new(params Object[] vals) {
+    public override Vx.Core.Func_list_from_map vx_new(params object[] vals) {
       Class_list_from_map output = new Class_list_from_map();
       return output;
     }
 
-    public override Vx.Core.Func_list_from_map vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_list_from_map vx_copy(params object[] vals) {
       Class_list_from_map output = new Class_list_from_map();
       return output;
     }
@@ -23714,12 +23778,12 @@ public static class Core {
 
   public class Class_list_from_map_1 : Vx.Core.Class_base, Func_list_from_map_1 {
 
-    public override Vx.Core.Func_list_from_map_1 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_list_from_map_1 vx_new(params object[] vals) {
       Class_list_from_map_1 output = new Class_list_from_map_1();
       return output;
     }
 
-    public override Vx.Core.Func_list_from_map_1 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_list_from_map_1 vx_copy(params object[] vals) {
       Class_list_from_map_1 output = new Class_list_from_map_1();
       return output;
     }
@@ -23797,12 +23861,12 @@ public static class Core {
 
   public class Class_list_from_map_async : Vx.Core.Class_base, Func_list_from_map_async {
 
-    public override Vx.Core.Func_list_from_map_async vx_new(params Object[] vals) {
+    public override Vx.Core.Func_list_from_map_async vx_new(params object[] vals) {
       Class_list_from_map_async output = new Class_list_from_map_async();
       return output;
     }
 
-    public override Vx.Core.Func_list_from_map_async vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_list_from_map_async vx_copy(params object[] vals) {
       Class_list_from_map_async output = new Class_list_from_map_async();
       return output;
     }
@@ -23842,7 +23906,7 @@ public static class Core {
     }
 
     public Task<Vx.Core.Type_any> vx_repl(Vx.Core.Type_anylist arglist) {
-      Task<Vx.Core.Type_any> output = Vx.Core.vx_async_new_completed(Vx.Core.e_any);
+      Task<Vx.Core.Type_any> output = Vx.Core.vx_async_new_from_value(Vx.Core.e_any);
       Vx.Core.Type_list generic_list_1 = Vx.Core.f_any_from_any(Vx.Core.t_list, arglist.vx_any(Vx.Core.vx_new_int(0)));
       Vx.Core.Type_map valuemap = Vx.Core.f_any_from_any(Vx.Core.t_map, arglist.vx_any(Vx.Core.vx_new_int(0)));
       Vx.Core.Func_any_from_key_value_async fn_any_from_key_value_async = Vx.Core.f_any_from_any(Vx.Core.t_any_from_key_value_async, arglist.vx_any(Vx.Core.vx_new_int(1)));
@@ -23861,7 +23925,7 @@ public static class Core {
   public static Func_list_from_map_async t_list_from_map_async = new Vx.Core.Class_list_from_map_async();
 
   public static Task<X> f_list_from_map_async<O, X>(X generic_list_1, O valuemap, Vx.Core.Func_any_from_key_value_async fn_any_from_key_value_async) where O : Vx.Core.Type_map where X : Vx.Core.Type_list {
-    Task<X> output = Vx.Core.vx_async_new_completed(Vx.Core.f_empty(generic_list_1));
+    Task<X> output = Vx.Core.vx_async_new_from_value(Vx.Core.f_empty(generic_list_1));
     return output;
   }
 
@@ -23878,12 +23942,12 @@ public static class Core {
 
   public class Class_list_from_type : Vx.Core.Class_base, Func_list_from_type {
 
-    public override Vx.Core.Func_list_from_type vx_new(params Object[] vals) {
+    public override Vx.Core.Func_list_from_type vx_new(params object[] vals) {
       Class_list_from_type output = new Class_list_from_type();
       return output;
     }
 
-    public override Vx.Core.Func_list_from_type vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_list_from_type vx_copy(params object[] vals) {
       Class_list_from_type output = new Class_list_from_type();
       return output;
     }
@@ -23968,12 +24032,12 @@ public static class Core {
 
   public class Class_log : Vx.Core.Class_base, Func_log {
 
-    public override Vx.Core.Func_log vx_new(params Object[] vals) {
+    public override Vx.Core.Func_log vx_new(params object[] vals) {
       Class_log output = new Class_log();
       return output;
     }
 
-    public override Vx.Core.Func_log vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_log vx_copy(params object[] vals) {
       Class_log output = new Class_log();
       return output;
     }
@@ -24061,12 +24125,12 @@ public static class Core {
 
   public class Class_log_1 : Vx.Core.Class_base, Func_log_1 {
 
-    public override Vx.Core.Func_log_1 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_log_1 vx_new(params object[] vals) {
       Class_log_1 output = new Class_log_1();
       return output;
     }
 
-    public override Vx.Core.Func_log_1 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_log_1 vx_copy(params object[] vals) {
       Class_log_1 output = new Class_log_1();
       return output;
     }
@@ -24144,12 +24208,12 @@ public static class Core {
 
   public class Class_main : Vx.Core.Class_base, Func_main {
 
-    public override Vx.Core.Func_main vx_new(params Object[] vals) {
+    public override Vx.Core.Func_main vx_new(params object[] vals) {
       Class_main output = new Class_main();
       return output;
     }
 
-    public override Vx.Core.Func_main vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_main vx_copy(params object[] vals) {
       Class_main output = new Class_main();
       return output;
     }
@@ -24239,12 +24303,12 @@ public static class Core {
 
   public class Class_map_from_list : Vx.Core.Class_base, Func_map_from_list {
 
-    public override Vx.Core.Func_map_from_list vx_new(params Object[] vals) {
+    public override Vx.Core.Func_map_from_list vx_new(params object[] vals) {
       Class_map_from_list output = new Class_map_from_list();
       return output;
     }
 
-    public override Vx.Core.Func_map_from_list vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_map_from_list vx_copy(params object[] vals) {
       Class_map_from_list output = new Class_map_from_list();
       return output;
     }
@@ -24320,12 +24384,12 @@ public static class Core {
 
   public class Class_map_from_map : Vx.Core.Class_base, Func_map_from_map {
 
-    public override Vx.Core.Func_map_from_map vx_new(params Object[] vals) {
+    public override Vx.Core.Func_map_from_map vx_new(params object[] vals) {
       Class_map_from_map output = new Class_map_from_map();
       return output;
     }
 
-    public override Vx.Core.Func_map_from_map vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_map_from_map vx_copy(params object[] vals) {
       Class_map_from_map output = new Class_map_from_map();
       return output;
     }
@@ -24422,12 +24486,12 @@ public static class Core {
 
   public class Class_map_from_map_1 : Vx.Core.Class_base, Func_map_from_map_1 {
 
-    public override Vx.Core.Func_map_from_map_1 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_map_from_map_1 vx_new(params object[] vals) {
       Class_map_from_map_1 output = new Class_map_from_map_1();
       return output;
     }
 
-    public override Vx.Core.Func_map_from_map_1 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_map_from_map_1 vx_copy(params object[] vals) {
       Class_map_from_map_1 output = new Class_map_from_map_1();
       return output;
     }
@@ -24503,12 +24567,12 @@ public static class Core {
 
   public class Class_msg_from_error : Vx.Core.Class_base, Func_msg_from_error {
 
-    public override Vx.Core.Func_msg_from_error vx_new(params Object[] vals) {
+    public override Vx.Core.Func_msg_from_error vx_new(params object[] vals) {
       Class_msg_from_error output = new Class_msg_from_error();
       return output;
     }
 
-    public override Vx.Core.Func_msg_from_error vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_msg_from_error vx_copy(params object[] vals) {
       Class_msg_from_error output = new Class_msg_from_error();
       return output;
     }
@@ -24603,12 +24667,12 @@ public static class Core {
 
   public class Class_msg_from_error_1 : Vx.Core.Class_base, Func_msg_from_error_1 {
 
-    public override Vx.Core.Func_msg_from_error_1 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_msg_from_error_1 vx_new(params object[] vals) {
       Class_msg_from_error_1 output = new Class_msg_from_error_1();
       return output;
     }
 
-    public override Vx.Core.Func_msg_from_error_1 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_msg_from_error_1 vx_copy(params object[] vals) {
       Class_msg_from_error_1 output = new Class_msg_from_error_1();
       return output;
     }
@@ -24695,12 +24759,12 @@ public static class Core {
 
   public class Class_msg_from_error_2 : Vx.Core.Class_base, Func_msg_from_error_2 {
 
-    public override Vx.Core.Func_msg_from_error_2 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_msg_from_error_2 vx_new(params object[] vals) {
       Class_msg_from_error_2 output = new Class_msg_from_error_2();
       return output;
     }
 
-    public override Vx.Core.Func_msg_from_error_2 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_msg_from_error_2 vx_copy(params object[] vals) {
       Class_msg_from_error_2 output = new Class_msg_from_error_2();
       return output;
     }
@@ -24788,12 +24852,12 @@ public static class Core {
 
   public class Class_msg_from_warning : Vx.Core.Class_base, Func_msg_from_warning {
 
-    public override Vx.Core.Func_msg_from_warning vx_new(params Object[] vals) {
+    public override Vx.Core.Func_msg_from_warning vx_new(params object[] vals) {
       Class_msg_from_warning output = new Class_msg_from_warning();
       return output;
     }
 
-    public override Vx.Core.Func_msg_from_warning vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_msg_from_warning vx_copy(params object[] vals) {
       Class_msg_from_warning output = new Class_msg_from_warning();
       return output;
     }
@@ -24888,12 +24952,12 @@ public static class Core {
 
   public class Class_msgblock_from_msgblock_msg : Vx.Core.Class_base, Func_msgblock_from_msgblock_msg {
 
-    public override Vx.Core.Func_msgblock_from_msgblock_msg vx_new(params Object[] vals) {
+    public override Vx.Core.Func_msgblock_from_msgblock_msg vx_new(params object[] vals) {
       Class_msgblock_from_msgblock_msg output = new Class_msgblock_from_msgblock_msg();
       return output;
     }
 
-    public override Vx.Core.Func_msgblock_from_msgblock_msg vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_msgblock_from_msgblock_msg vx_copy(params object[] vals) {
       Class_msgblock_from_msgblock_msg output = new Class_msgblock_from_msgblock_msg();
       return output;
     }
@@ -24970,12 +25034,12 @@ public static class Core {
 
   public class Class_msgblock_from_msgblock_msgblock : Vx.Core.Class_base, Func_msgblock_from_msgblock_msgblock {
 
-    public override Vx.Core.Func_msgblock_from_msgblock_msgblock vx_new(params Object[] vals) {
+    public override Vx.Core.Func_msgblock_from_msgblock_msgblock vx_new(params object[] vals) {
       Class_msgblock_from_msgblock_msgblock output = new Class_msgblock_from_msgblock_msgblock();
       return output;
     }
 
-    public override Vx.Core.Func_msgblock_from_msgblock_msgblock vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_msgblock_from_msgblock_msgblock vx_copy(params object[] vals) {
       Class_msgblock_from_msgblock_msgblock output = new Class_msgblock_from_msgblock_msgblock();
       return output;
     }
@@ -25056,12 +25120,12 @@ public static class Core {
 
   public class Class_name_from_typedef : Vx.Core.Class_base, Func_name_from_typedef {
 
-    public override Vx.Core.Func_name_from_typedef vx_new(params Object[] vals) {
+    public override Vx.Core.Func_name_from_typedef vx_new(params object[] vals) {
       Class_name_from_typedef output = new Class_name_from_typedef();
       return output;
     }
 
-    public override Vx.Core.Func_name_from_typedef vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_name_from_typedef vx_copy(params object[] vals) {
       Class_name_from_typedef output = new Class_name_from_typedef();
       return output;
     }
@@ -25147,12 +25211,12 @@ public static class Core {
 
   public class Class_native : Vx.Core.Class_base, Func_native {
 
-    public override Vx.Core.Func_native vx_new(params Object[] vals) {
+    public override Vx.Core.Func_native vx_new(params object[] vals) {
       Class_native output = new Class_native();
       return output;
     }
 
-    public override Vx.Core.Func_native vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_native vx_copy(params object[] vals) {
       Class_native output = new Class_native();
       return output;
     }
@@ -25238,12 +25302,12 @@ public static class Core {
 
   public class Class_native_from_any : Vx.Core.Class_base, Func_native_from_any {
 
-    public override Vx.Core.Func_native_from_any vx_new(params Object[] vals) {
+    public override Vx.Core.Func_native_from_any vx_new(params object[] vals) {
       Class_native_from_any output = new Class_native_from_any();
       return output;
     }
 
-    public override Vx.Core.Func_native_from_any vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_native_from_any vx_copy(params object[] vals) {
       Class_native_from_any output = new Class_native_from_any();
       return output;
     }
@@ -25329,12 +25393,12 @@ public static class Core {
 
   public class Class_new : Vx.Core.Class_base, Func_new {
 
-    public override Vx.Core.Func_new vx_new(params Object[] vals) {
+    public override Vx.Core.Func_new vx_new(params object[] vals) {
       Class_new output = new Class_new();
       return output;
     }
 
-    public override Vx.Core.Func_new vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_new vx_copy(params object[] vals) {
       Class_new output = new Class_new();
       return output;
     }
@@ -25409,12 +25473,12 @@ public static class Core {
 
   public class Class_number_from_func : Vx.Core.Class_base, Func_number_from_func {
 
-    public override Vx.Core.Func_number_from_func vx_new(params Object[] vals) {
+    public override Vx.Core.Func_number_from_func vx_new(params object[] vals) {
       Class_number_from_func output = new Class_number_from_func();
       return output;
     }
 
-    public override Vx.Core.Func_number_from_func vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_number_from_func vx_copy(params object[] vals) {
       Class_number_from_func output = new Class_number_from_func();
       return output;
     }
@@ -25487,12 +25551,12 @@ public static class Core {
 
   public class Class_or : Vx.Core.Class_base, Func_or {
 
-    public override Vx.Core.Func_or vx_new(params Object[] vals) {
+    public override Vx.Core.Func_or vx_new(params object[] vals) {
       Class_or output = new Class_or();
       return output;
     }
 
-    public override Vx.Core.Func_or vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_or vx_copy(params object[] vals) {
       Class_or output = new Class_or();
       return output;
     }
@@ -25571,12 +25635,12 @@ public static class Core {
 
   public class Class_or_1 : Vx.Core.Class_base, Func_or_1 {
 
-    public override Vx.Core.Func_or_1 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_or_1 vx_new(params object[] vals) {
       Class_or_1 output = new Class_or_1();
       return output;
     }
 
-    public override Vx.Core.Func_or_1 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_or_1 vx_copy(params object[] vals) {
       Class_or_1 output = new Class_or_1();
       return output;
     }
@@ -25677,12 +25741,12 @@ public static class Core {
 
   public class Class_package_global_from_name : Vx.Core.Class_base, Func_package_global_from_name {
 
-    public override Vx.Core.Func_package_global_from_name vx_new(params Object[] vals) {
+    public override Vx.Core.Func_package_global_from_name vx_new(params object[] vals) {
       Class_package_global_from_name output = new Class_package_global_from_name();
       return output;
     }
 
-    public override Vx.Core.Func_package_global_from_name vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_package_global_from_name vx_copy(params object[] vals) {
       Class_package_global_from_name output = new Class_package_global_from_name();
       return output;
     }
@@ -25772,12 +25836,12 @@ public static class Core {
 
   public class Class_packagename_from_typedef : Vx.Core.Class_base, Func_packagename_from_typedef {
 
-    public override Vx.Core.Func_packagename_from_typedef vx_new(params Object[] vals) {
+    public override Vx.Core.Func_packagename_from_typedef vx_new(params object[] vals) {
       Class_packagename_from_typedef output = new Class_packagename_from_typedef();
       return output;
     }
 
-    public override Vx.Core.Func_packagename_from_typedef vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_packagename_from_typedef vx_copy(params object[] vals) {
       Class_packagename_from_typedef output = new Class_packagename_from_typedef();
       return output;
     }
@@ -25863,12 +25927,12 @@ public static class Core {
 
   public class Class_path_from_context_path : Vx.Core.Class_base, Func_path_from_context_path {
 
-    public override Vx.Core.Func_path_from_context_path vx_new(params Object[] vals) {
+    public override Vx.Core.Func_path_from_context_path vx_new(params object[] vals) {
       Class_path_from_context_path output = new Class_path_from_context_path();
       return output;
     }
 
-    public override Vx.Core.Func_path_from_context_path vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_path_from_context_path vx_copy(params object[] vals) {
       Class_path_from_context_path output = new Class_path_from_context_path();
       return output;
     }
@@ -25959,12 +26023,12 @@ public static class Core {
 
   public class Class_path_from_setting_path : Vx.Core.Class_base, Func_path_from_setting_path {
 
-    public override Vx.Core.Func_path_from_setting_path vx_new(params Object[] vals) {
+    public override Vx.Core.Func_path_from_setting_path vx_new(params object[] vals) {
       Class_path_from_setting_path output = new Class_path_from_setting_path();
       return output;
     }
 
-    public override Vx.Core.Func_path_from_setting_path vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_path_from_setting_path vx_copy(params object[] vals) {
       Class_path_from_setting_path output = new Class_path_from_setting_path();
       return output;
     }
@@ -26038,12 +26102,12 @@ public static class Core {
 
   public class Class_permission_from_id_context : Vx.Core.Class_base, Func_permission_from_id_context {
 
-    public override Vx.Core.Func_permission_from_id_context vx_new(params Object[] vals) {
+    public override Vx.Core.Func_permission_from_id_context vx_new(params object[] vals) {
       Class_permission_from_id_context output = new Class_permission_from_id_context();
       return output;
     }
 
-    public override Vx.Core.Func_permission_from_id_context vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_permission_from_id_context vx_copy(params object[] vals) {
       Class_permission_from_id_context output = new Class_permission_from_id_context();
       return output;
     }
@@ -26139,12 +26203,12 @@ public static class Core {
 
   public class Class_properties_from_typedef : Vx.Core.Class_base, Func_properties_from_typedef {
 
-    public override Vx.Core.Func_properties_from_typedef vx_new(params Object[] vals) {
+    public override Vx.Core.Func_properties_from_typedef vx_new(params object[] vals) {
       Class_properties_from_typedef output = new Class_properties_from_typedef();
       return output;
     }
 
-    public override Vx.Core.Func_properties_from_typedef vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_properties_from_typedef vx_copy(params object[] vals) {
       Class_properties_from_typedef output = new Class_properties_from_typedef();
       return output;
     }
@@ -26230,12 +26294,12 @@ public static class Core {
 
   public class Class_proplast_from_typedef : Vx.Core.Class_base, Func_proplast_from_typedef {
 
-    public override Vx.Core.Func_proplast_from_typedef vx_new(params Object[] vals) {
+    public override Vx.Core.Func_proplast_from_typedef vx_new(params object[] vals) {
       Class_proplast_from_typedef output = new Class_proplast_from_typedef();
       return output;
     }
 
-    public override Vx.Core.Func_proplast_from_typedef vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_proplast_from_typedef vx_copy(params object[] vals) {
       Class_proplast_from_typedef output = new Class_proplast_from_typedef();
       return output;
     }
@@ -26320,12 +26384,12 @@ public static class Core {
 
   public class Class_resolve : Vx.Core.Class_base, Func_resolve {
 
-    public override Vx.Core.Func_resolve vx_new(params Object[] vals) {
+    public override Vx.Core.Func_resolve vx_new(params object[] vals) {
       Class_resolve output = new Class_resolve();
       return output;
     }
 
-    public override Vx.Core.Func_resolve vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_resolve vx_copy(params object[] vals) {
       Class_resolve output = new Class_resolve();
       return output;
     }
@@ -26411,12 +26475,12 @@ public static class Core {
 
   public class Class_resolve_1 : Vx.Core.Class_base, Func_resolve_1 {
 
-    public override Vx.Core.Func_resolve_1 vx_new(params Object[] vals) {
+    public override Vx.Core.Func_resolve_1 vx_new(params object[] vals) {
       Class_resolve_1 output = new Class_resolve_1();
       return output;
     }
 
-    public override Vx.Core.Func_resolve_1 vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_resolve_1 vx_copy(params object[] vals) {
       Class_resolve_1 output = new Class_resolve_1();
       return output;
     }
@@ -26486,7 +26550,9 @@ public static class Core {
 
   public static T f_resolve_1<T>(T generic_any_1, Vx.Core.Func_any_from_func fn_any) where T : Vx.Core.Type_any {
     T output = Vx.Core.f_empty(generic_any_1);
-    if (fn_any != null) {
+    if (fn_any == null) {
+    } else if (fn_any == Vx.Core.e_any_from_func) {
+    } else {
       output = fn_any.vx_any_from_func(generic_any_1);
     };
     return output;
@@ -26506,12 +26572,12 @@ public static class Core {
 
   public class Class_resolve_async : Vx.Core.Class_base, Func_resolve_async {
 
-    public override Vx.Core.Func_resolve_async vx_new(params Object[] vals) {
+    public override Vx.Core.Func_resolve_async vx_new(params object[] vals) {
       Class_resolve_async output = new Class_resolve_async();
       return output;
     }
 
-    public override Vx.Core.Func_resolve_async vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_resolve_async vx_copy(params object[] vals) {
       Class_resolve_async output = new Class_resolve_async();
       return output;
     }
@@ -26561,7 +26627,7 @@ public static class Core {
     }
 
     public Task<Vx.Core.Type_any> vx_repl(Vx.Core.Type_anylist arglist) {
-      Task<Vx.Core.Type_any> output = Vx.Core.vx_async_new_completed(Vx.Core.e_any);
+      Task<Vx.Core.Type_any> output = Vx.Core.vx_async_new_from_value(Vx.Core.e_any);
       Vx.Core.Type_any generic_any_1 = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
       Vx.Core.Func_any_from_func_async fn_any = Vx.Core.f_any_from_any(Vx.Core.t_any_from_func_async, arglist.vx_any(Vx.Core.vx_new_int(0)));
       Task<Vx.Core.Type_any> future = Vx.Core.f_resolve_async(generic_any_1, fn_any);
@@ -26579,8 +26645,10 @@ public static class Core {
   public static Func_resolve_async t_resolve_async = new Vx.Core.Class_resolve_async();
 
   public static Task<T> f_resolve_async<T>(T generic_any_1, Vx.Core.Func_any_from_func_async fn_any) where T : Vx.Core.Type_any {
-    Task<T> output = Vx.Core.vx_async_new_completed(Vx.Core.f_empty(generic_any_1));
-    if (fn_any != null) {
+    Task<T> output = Vx.Core.vx_async_new_from_value(Vx.Core.f_empty(generic_any_1));
+    if (fn_any == null) {
+    } else if (fn_any == Vx.Core.e_any_from_func_async) {
+    } else {
       output = fn_any.vx_any_from_func_async(generic_any_1);
     };
     return output;
@@ -26599,12 +26667,12 @@ public static class Core {
 
   public class Class_resolve_first : Vx.Core.Class_base, Func_resolve_first {
 
-    public override Vx.Core.Func_resolve_first vx_new(params Object[] vals) {
+    public override Vx.Core.Func_resolve_first vx_new(params object[] vals) {
       Class_resolve_first output = new Class_resolve_first();
       return output;
     }
 
-    public override Vx.Core.Func_resolve_first vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_resolve_first vx_copy(params object[] vals) {
       Class_resolve_first output = new Class_resolve_first();
       return output;
     }
@@ -26694,12 +26762,12 @@ public static class Core {
 
   public class Class_resolve_list : Vx.Core.Class_base, Func_resolve_list {
 
-    public override Vx.Core.Func_resolve_list vx_new(params Object[] vals) {
+    public override Vx.Core.Func_resolve_list vx_new(params object[] vals) {
       Class_resolve_list output = new Class_resolve_list();
       return output;
     }
 
-    public override Vx.Core.Func_resolve_list vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_resolve_list vx_copy(params object[] vals) {
       Class_resolve_list output = new Class_resolve_list();
       return output;
     }
@@ -26789,12 +26857,12 @@ public static class Core {
 
   public class Class_security_from_context : Vx.Core.Class_base, Func_security_from_context {
 
-    public override Vx.Core.Func_security_from_context vx_new(params Object[] vals) {
+    public override Vx.Core.Func_security_from_context vx_new(params object[] vals) {
       Class_security_from_context output = new Class_security_from_context();
       return output;
     }
 
-    public override Vx.Core.Func_security_from_context vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_security_from_context vx_copy(params object[] vals) {
       Class_security_from_context output = new Class_security_from_context();
       return output;
     }
@@ -26870,12 +26938,12 @@ public static class Core {
 
   public class Class_security_from_user : Vx.Core.Class_base, Func_security_from_user {
 
-    public override Vx.Core.Func_security_from_user vx_new(params Object[] vals) {
+    public override Vx.Core.Func_security_from_user vx_new(params object[] vals) {
       Class_security_from_user output = new Class_security_from_user();
       return output;
     }
 
-    public override Vx.Core.Func_security_from_user vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_security_from_user vx_copy(params object[] vals) {
       Class_security_from_user output = new Class_security_from_user();
       return output;
     }
@@ -26960,12 +27028,12 @@ public static class Core {
 
   public class Class_session_from_context : Vx.Core.Class_base, Func_session_from_context {
 
-    public override Vx.Core.Func_session_from_context vx_new(params Object[] vals) {
+    public override Vx.Core.Func_session_from_context vx_new(params object[] vals) {
       Class_session_from_context output = new Class_session_from_context();
       return output;
     }
 
-    public override Vx.Core.Func_session_from_context vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_session_from_context vx_copy(params object[] vals) {
       Class_session_from_context output = new Class_session_from_context();
       return output;
     }
@@ -27038,12 +27106,12 @@ public static class Core {
 
   public class Class_setting_from_context : Vx.Core.Class_base, Func_setting_from_context {
 
-    public override Vx.Core.Func_setting_from_context vx_new(params Object[] vals) {
+    public override Vx.Core.Func_setting_from_context vx_new(params object[] vals) {
       Class_setting_from_context output = new Class_setting_from_context();
       return output;
     }
 
-    public override Vx.Core.Func_setting_from_context vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_setting_from_context vx_copy(params object[] vals) {
       Class_setting_from_context output = new Class_setting_from_context();
       return output;
     }
@@ -27117,12 +27185,12 @@ public static class Core {
 
   public class Class_string_repeat : Vx.Core.Class_base, Func_string_repeat {
 
-    public override Vx.Core.Func_string_repeat vx_new(params Object[] vals) {
+    public override Vx.Core.Func_string_repeat vx_new(params object[] vals) {
       Class_string_repeat output = new Class_string_repeat();
       return output;
     }
 
-    public override Vx.Core.Func_string_repeat vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_string_repeat vx_copy(params object[] vals) {
       Class_string_repeat output = new Class_string_repeat();
       return output;
     }
@@ -27197,12 +27265,12 @@ public static class Core {
 
   public class Class_string_from_any : Vx.Core.Class_base, Func_string_from_any {
 
-    public override Vx.Core.Func_string_from_any vx_new(params Object[] vals) {
+    public override Vx.Core.Func_string_from_any vx_new(params object[] vals) {
       Class_string_from_any output = new Class_string_from_any();
       return output;
     }
 
-    public override Vx.Core.Func_string_from_any vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_string_from_any vx_copy(params object[] vals) {
       Class_string_from_any output = new Class_string_from_any();
       return output;
     }
@@ -27294,12 +27362,12 @@ public static class Core {
 
   public class Class_string_from_any_indent : Vx.Core.Class_base, Func_string_from_any_indent {
 
-    public override Vx.Core.Func_string_from_any_indent vx_new(params Object[] vals) {
+    public override Vx.Core.Func_string_from_any_indent vx_new(params object[] vals) {
       Class_string_from_any_indent output = new Class_string_from_any_indent();
       return output;
     }
 
-    public override Vx.Core.Func_string_from_any_indent vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_string_from_any_indent vx_copy(params object[] vals) {
       Class_string_from_any_indent output = new Class_string_from_any_indent();
       return output;
     }
@@ -27375,12 +27443,12 @@ public static class Core {
 
   public class Class_string_from_func : Vx.Core.Class_base, Func_string_from_func {
 
-    public override Vx.Core.Func_string_from_func vx_new(params Object[] vals) {
+    public override Vx.Core.Func_string_from_func vx_new(params object[] vals) {
       Class_string_from_func output = new Class_string_from_func();
       return output;
     }
 
-    public override Vx.Core.Func_string_from_func vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_string_from_func vx_copy(params object[] vals) {
       Class_string_from_func output = new Class_string_from_func();
       return output;
     }
@@ -27462,12 +27530,12 @@ public static class Core {
 
   public class Class_string_from_string_find_replace : Vx.Core.Class_base, Func_string_from_string_find_replace {
 
-    public override Vx.Core.Func_string_from_string_find_replace vx_new(params Object[] vals) {
+    public override Vx.Core.Func_string_from_string_find_replace vx_new(params object[] vals) {
       Class_string_from_string_find_replace output = new Class_string_from_string_find_replace();
       return output;
     }
 
-    public override Vx.Core.Func_string_from_string_find_replace vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_string_from_string_find_replace vx_copy(params object[] vals) {
       Class_string_from_string_find_replace output = new Class_string_from_string_find_replace();
       return output;
     }
@@ -27543,12 +27611,12 @@ public static class Core {
 
   public class Class_stringlist_from_map : Vx.Core.Class_base, Func_stringlist_from_map {
 
-    public override Vx.Core.Func_stringlist_from_map vx_new(params Object[] vals) {
+    public override Vx.Core.Func_stringlist_from_map vx_new(params object[] vals) {
       Class_stringlist_from_map output = new Class_stringlist_from_map();
       return output;
     }
 
-    public override Vx.Core.Func_stringlist_from_map vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_stringlist_from_map vx_copy(params object[] vals) {
       Class_stringlist_from_map output = new Class_stringlist_from_map();
       return output;
     }
@@ -27644,12 +27712,12 @@ public static class Core {
 
   public class Class_switch : Vx.Core.Class_base, Func_switch {
 
-    public override Vx.Core.Func_switch vx_new(params Object[] vals) {
+    public override Vx.Core.Func_switch vx_new(params object[] vals) {
       Class_switch output = new Class_switch();
       return output;
     }
 
-    public override Vx.Core.Func_switch vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_switch vx_copy(params object[] vals) {
       Class_switch output = new Class_switch();
       return output;
     }
@@ -27726,12 +27794,12 @@ public static class Core {
 
   public class Class_then : Vx.Core.Class_base, Func_then {
 
-    public override Vx.Core.Func_then vx_new(params Object[] vals) {
+    public override Vx.Core.Func_then vx_new(params object[] vals) {
       Class_then output = new Class_then();
       return output;
     }
 
-    public override Vx.Core.Func_then vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_then vx_copy(params object[] vals) {
       Class_then output = new Class_then();
       return output;
     }
@@ -27816,12 +27884,12 @@ public static class Core {
 
   public class Class_traits_from_typedef : Vx.Core.Class_base, Func_traits_from_typedef {
 
-    public override Vx.Core.Func_traits_from_typedef vx_new(params Object[] vals) {
+    public override Vx.Core.Func_traits_from_typedef vx_new(params object[] vals) {
       Class_traits_from_typedef output = new Class_traits_from_typedef();
       return output;
     }
 
-    public override Vx.Core.Func_traits_from_typedef vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_traits_from_typedef vx_copy(params object[] vals) {
       Class_traits_from_typedef output = new Class_traits_from_typedef();
       return output;
     }
@@ -27907,12 +27975,12 @@ public static class Core {
 
   public class Class_type_from_any : Vx.Core.Class_base, Func_type_from_any {
 
-    public override Vx.Core.Func_type_from_any vx_new(params Object[] vals) {
+    public override Vx.Core.Func_type_from_any vx_new(params object[] vals) {
       Class_type_from_any output = new Class_type_from_any();
       return output;
     }
 
-    public override Vx.Core.Func_type_from_any vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_type_from_any vx_copy(params object[] vals) {
       Class_type_from_any output = new Class_type_from_any();
       return output;
     }
@@ -27998,12 +28066,12 @@ public static class Core {
 
   public class Class_typedef_from_any : Vx.Core.Class_base, Func_typedef_from_any {
 
-    public override Vx.Core.Func_typedef_from_any vx_new(params Object[] vals) {
+    public override Vx.Core.Func_typedef_from_any vx_new(params object[] vals) {
       Class_typedef_from_any output = new Class_typedef_from_any();
       return output;
     }
 
-    public override Vx.Core.Func_typedef_from_any vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_typedef_from_any vx_copy(params object[] vals) {
       Class_typedef_from_any output = new Class_typedef_from_any();
       return output;
     }
@@ -28091,12 +28159,12 @@ public static class Core {
 
   public class Class_typedef_from_type : Vx.Core.Class_base, Func_typedef_from_type {
 
-    public override Vx.Core.Func_typedef_from_type vx_new(params Object[] vals) {
+    public override Vx.Core.Func_typedef_from_type vx_new(params object[] vals) {
       Class_typedef_from_type output = new Class_typedef_from_type();
       return output;
     }
 
-    public override Vx.Core.Func_typedef_from_type vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_typedef_from_type vx_copy(params object[] vals) {
       Class_typedef_from_type output = new Class_typedef_from_type();
       return output;
     }
@@ -28182,12 +28250,12 @@ public static class Core {
 
   public class Class_typename_from_any : Vx.Core.Class_base, Func_typename_from_any {
 
-    public override Vx.Core.Func_typename_from_any vx_new(params Object[] vals) {
+    public override Vx.Core.Func_typename_from_any vx_new(params object[] vals) {
       Class_typename_from_any output = new Class_typename_from_any();
       return output;
     }
 
-    public override Vx.Core.Func_typename_from_any vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_typename_from_any vx_copy(params object[] vals) {
       Class_typename_from_any output = new Class_typename_from_any();
       return output;
     }
@@ -28275,12 +28343,12 @@ public static class Core {
 
   public class Class_typename_from_type : Vx.Core.Class_base, Func_typename_from_type {
 
-    public override Vx.Core.Func_typename_from_type vx_new(params Object[] vals) {
+    public override Vx.Core.Func_typename_from_type vx_new(params object[] vals) {
       Class_typename_from_type output = new Class_typename_from_type();
       return output;
     }
 
-    public override Vx.Core.Func_typename_from_type vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_typename_from_type vx_copy(params object[] vals) {
       Class_typename_from_type output = new Class_typename_from_type();
       return output;
     }
@@ -28368,12 +28436,12 @@ public static class Core {
 
   public class Class_typename_from_typedef : Vx.Core.Class_base, Func_typename_from_typedef {
 
-    public override Vx.Core.Func_typename_from_typedef vx_new(params Object[] vals) {
+    public override Vx.Core.Func_typename_from_typedef vx_new(params object[] vals) {
       Class_typename_from_typedef output = new Class_typename_from_typedef();
       return output;
     }
 
-    public override Vx.Core.Func_typename_from_typedef vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_typename_from_typedef vx_copy(params object[] vals) {
       Class_typename_from_typedef output = new Class_typename_from_typedef();
       return output;
     }
@@ -28466,12 +28534,12 @@ public static class Core {
 
   public class Class_typenames_from_typelist : Vx.Core.Class_base, Func_typenames_from_typelist {
 
-    public override Vx.Core.Func_typenames_from_typelist vx_new(params Object[] vals) {
+    public override Vx.Core.Func_typenames_from_typelist vx_new(params object[] vals) {
       Class_typenames_from_typelist output = new Class_typenames_from_typelist();
       return output;
     }
 
-    public override Vx.Core.Func_typenames_from_typelist vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_typenames_from_typelist vx_copy(params object[] vals) {
       Class_typenames_from_typelist output = new Class_typenames_from_typelist();
       return output;
     }
@@ -28565,12 +28633,12 @@ public static class Core {
 
   public class Class_user_from_context : Vx.Core.Class_base, Func_user_from_context {
 
-    public override Vx.Core.Func_user_from_context vx_new(params Object[] vals) {
+    public override Vx.Core.Func_user_from_context vx_new(params object[] vals) {
       Class_user_from_context output = new Class_user_from_context();
       return output;
     }
 
-    public override Vx.Core.Func_user_from_context vx_copy(params Object[] vals) {
+    public override Vx.Core.Func_user_from_context vx_copy(params object[] vals) {
       Class_user_from_context output = new Class_user_from_context();
       return output;
     }
@@ -28633,7 +28701,7 @@ public static class Core {
 
 
   public static class PackageRunOnce {
-    public static void RunOnce() {
+    public static bool RunOnce() {
     Const_false.const_new(c_false);
     Const_global.const_new(c_global);
     Const_infinity.const_new(c_infinity);
@@ -28646,6 +28714,7 @@ public static class Core {
     Const_newline.const_new(c_newline);
     Const_notanumber.const_new(c_notanumber);
     Const_nothing.const_new(c_nothing);
+    Const_path_test_resources.const_new(c_path_test_resources);
     Const_quote.const_new(c_quote);
     Const_true.const_new(c_true);
     Vx.Core.Map<string, Vx.Core.Type_any> maptype = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
@@ -28739,6 +28808,7 @@ public static class Core {
     mapconst.put("newline", Vx.Core.c_newline);
     mapconst.put("notanumber", Vx.Core.c_notanumber);
     mapconst.put("nothing", Vx.Core.c_nothing);
+    mapconst.put("path-test-resources", Vx.Core.c_path_test_resources);
     mapconst.put("quote", Vx.Core.c_quote);
     mapconst.put("true", Vx.Core.c_true);
     mapfunc.put("!", Vx.Core.t_not);
@@ -28908,7 +28978,10 @@ public static class Core {
     mapfunc.put("typenames<-typelist", Vx.Core.t_typenames_from_typelist);
     mapfunc.put("user<-context", Vx.Core.t_user_from_context);
     Vx.Core.vx_global_package_set("vx/core", maptype, mapconst, mapfunc);
+      return true;
     }
   }
+
+  public static bool ranonce = PackageRunOnce.RunOnce();
 
 }

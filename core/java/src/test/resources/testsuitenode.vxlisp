@@ -139,7 +139,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "36% 81/224")
+                  :text "36% 81/225")
                  (p
                   :style
                    (style
@@ -155,7 +155,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "14% 2/14")
+                  :text "13% 2/15")
                  (p
                   :style
                    (style
@@ -171,7 +171,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "90% 231/256")
+                  :text "90% 232/257")
                  (p
                   :style
                    (style
@@ -35221,7 +35221,7 @@ ab
  (boolean-exists<-file
   (file
    :name "boolean_exists_from_file.txt"
-   :path "src/test/resources/vx")))`)))
+   :path (string path-test-resources "/vx"))))`)))
                             (td
                              :nodes
                               (divchildlist
@@ -35301,7 +35301,7 @@ ab
  (boolean-write<-file-string
   (file
    :name "boolean_write_from_file_string.txt"
-   :path "src/test/resources/vx")
+   :path (string path-test-resources "/vx"))
   "writetext"))`)))
                             (td
                              :nodes
@@ -35381,12 +35381,12 @@ ab
                                  `(test
  (file
   :name "string_read_from_file.txt"
-  :path "src/test/resources/vx"
+  :path (string path-test-resources "/vx")
   :text "testdata")
  (file-read<-file
   (file
    :name "string_read_from_file.txt"
-   :path "src/test/resources/vx")))`)))
+   :path (string path-test-resources "/vx"))))`)))
                             (td
                              :nodes
                               (divchildlist
@@ -35636,7 +35636,7 @@ ab
  (string-read<-file
   (file
    :name "string_read_from_file.txt"
-   :path "src/test/resources/vx")))`)))
+   :path (string path-test-resources "/vx"))))`)))
                             (td
                              :nodes
                               (divchildlist
@@ -39291,7 +39291,7 @@ ab
  (boolean-exists<-file
   (file
    :name "testsuite.vxlisp"
-   :path "src/test/resources")))`)))
+   :path path-test-resources)))`)))
                             (td
                              :nodes
                               (divchildlist
@@ -39371,7 +39371,7 @@ ab
  (boolean-exists<-file
   (file
    :name "testsuite.html"
-   :path "src/test/resources")))`)))
+   :path path-test-resources)))`)))
                             (td
                              :nodes
                               (divchildlist
@@ -39451,7 +39451,7 @@ ab
  (boolean-exists<-file
   (file
    :name "testsuitenode.vxlisp"
-   :path "src/test/resources")))`)))
+   :path path-test-resources)))`)))
                             (td
                              :nodes
                               (divchildlist

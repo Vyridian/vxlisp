@@ -3,7 +3,7 @@ namespace AppTest.TestVx.Data;
 
 public class TextblockTest {
 
-  static Vx.Test.Type_testcase t_delimlist(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase t_delimlist(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -39,7 +39,7 @@ public class TextblockTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_delim_first_from_delim_delim(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_delim_first_from_delim_delim(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -107,7 +107,7 @@ public class TextblockTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_delim_first_from_string_delimlist(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_delim_first_from_string_delimlist(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -146,7 +146,7 @@ public class TextblockTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_delim_pos_from_string_delim(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_delim_pos_from_string_delim(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -179,7 +179,7 @@ public class TextblockTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_delimlist_pos_from_string_delimlist(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_delimlist_pos_from_string_delimlist(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -230,7 +230,7 @@ public class TextblockTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_stringlist_from_textblocklist(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_stringlist_from_textblocklist(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -280,7 +280,7 @@ public class TextblockTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_text_from_textblock(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_text_from_textblock(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -312,7 +312,7 @@ public class TextblockTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_textblock_delimnotfound(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_textblock_delimnotfound(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -1679,7 +1679,7 @@ public class TextblockTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_textblock_init(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_textblock_init(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -1737,7 +1737,7 @@ public class TextblockTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_textblock_parse(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_textblock_parse(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -1963,7 +1963,7 @@ public class TextblockTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_textblock_parse_one(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_textblock_parse_one(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -8839,7 +8839,7 @@ public class TextblockTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_textblock_startleft_from_string_delim_offset(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_textblock_startleft_from_string_delim_offset(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -8883,7 +8883,7 @@ public class TextblockTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_textblock_startright_from_string_delim_offset(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_textblock_startright_from_string_delim_offset(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -8991,7 +8991,7 @@ public class TextblockTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_textblock_from_close_textblock(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_textblock_from_close_textblock(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -9729,7 +9729,7 @@ public class TextblockTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_textblock_from_open_textblock(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_textblock_from_open_textblock(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -10117,7 +10117,7 @@ public class TextblockTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_textblock_from_single_textblock(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_textblock_from_single_textblock(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -11068,7 +11068,7 @@ public class TextblockTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_textblock_from_string_delim(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_textblock_from_string_delim(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -11107,7 +11107,7 @@ public class TextblockTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_textblocklist_from_textblocklist_remove(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_textblocklist_from_textblocklist_remove(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -11215,7 +11215,7 @@ public class TextblockTest {
   }
 
   public static Vx.Test.Type_testcaselist test_cases(Vx.Core.Type_context context) {
-    List<Vx.Core.Type_any> arraylisttestcase = Vx.Core.arraylist_from_array(
+    object[] testcases = [
       TextblockTest.t_delimlist(context),
       TextblockTest.f_delim_first_from_delim_delim(context),
       TextblockTest.f_delim_first_from_string_delimlist(context),
@@ -11234,10 +11234,10 @@ public class TextblockTest {
       TextblockTest.f_textblock_from_single_textblock(context),
       TextblockTest.f_textblock_from_string_delim(context),
       TextblockTest.f_textblocklist_from_textblocklist_remove(context)
-    );
+    ];
     Vx.Test.Type_testcaselist output = Vx.Core.vx_new(
       Vx.Test.t_testcaselist,
-      arraylisttestcase
+      testcases
     );
     return output;
   }

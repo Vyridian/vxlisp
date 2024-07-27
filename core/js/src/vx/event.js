@@ -57,7 +57,7 @@ export default class vx_event {
   /**
    * @function any_from_from_event
    * @param  {typemap} generic
-   * @param  {event} event
+   * @param  {event} evt
    * @return {any-1}
    */
   static t_any_from_from_event = {
@@ -68,14 +68,14 @@ export default class vx_event {
   }
 
   // (func any-from<-event)
-  static f_any_from_from_event(generic, event) {
+  static f_any_from_from_event(generic, evt) {
     const generic_any_1 = generic["any-1"]
     let output = vx_core.f_empty(generic_any_1)
     output = vx_core.f_let(
       {"any-1": generic_any_1, "any-2": vx_core.t_any},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
-        const value = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_event.t_event}, event, ":from")
+        const value = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_event.t_event}, evt, ":from")
         return vx_core.f_any_from_any({"any-1": generic_any_1, "any-2": vx_core.t_any}, value)
       })
     )
@@ -85,7 +85,7 @@ export default class vx_event {
   /**
    * @function event_from_event
    * Template for triggering ui events
-   * @param  {event} event
+   * @param  {event} evt
    * @return {event}
    */
   static t_event_from_event = {
@@ -96,9 +96,9 @@ export default class vx_event {
   }
 
   // (func event<-event)
-  static f_event_from_event(context, event) {
+  static f_event_from_event(context, evt) {
     let output = vx_event.e_event
-    output = event
+    output = evt
     return output
   }
 
@@ -106,7 +106,7 @@ export default class vx_event {
    * 
    * @async @function event_from_event_async
    * Template for triggering ui asynchronous events
-   * @param  {event} event
+   * @param  {event} evt
    * @return {event}
    */
   static t_event_from_event_async = {
@@ -117,7 +117,7 @@ export default class vx_event {
   }
 
   // (func event<-event-async)
-  static async f_event_from_event_async(context, event) {
+  static async f_event_from_event_async(context, evt) {
     let output = Promise.resolve(vx_event.e_event)
     return output
   }
@@ -141,8 +141,8 @@ export default class vx_event {
     output = vx_core.f_map_from_list(
       {"any-1": vx_event.t_event, "any-2": vx_event.t_event, "list-2": vx_event.t_eventlist, "map-1": vx_event.t_eventmap, "struct-2": vx_event.t_event},
       eventlist,
-      vx_core.f_new(vx_core.t_any_from_any, (event) => 
-        vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_event.t_event}, event, ":name"))
+      vx_core.f_new(vx_core.t_any_from_any, (evt) => 
+        vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_event.t_event}, evt, ":name"))
     )
     return output
   }

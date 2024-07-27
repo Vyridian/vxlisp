@@ -2255,6 +2255,7 @@
       :newline 0
       :notanumber 0
       :nothing 0
+      :path-test-resources 0
       :quote 0
       :true 1)
     :funcmap
@@ -2516,14 +2517,14 @@
       :total 166)
     :constnums
      (vx/test/testcoveragenums
-      :pct 14
+      :pct 13
       :tests 2
-      :total 14)
+      :total 15)
     :docnums
      (vx/test/testcoveragenums
-      :pct 89
-      :tests 230
-      :total 256)
+      :pct 90
+      :tests 232
+      :total 257)
     :funcnums
      (vx/test/testcoveragenums
       :pct 55
@@ -2534,7 +2535,7 @@
      (vx/test/testcoveragenums
       :pct 36
       :tests 81
-      :total 224)
+      :total 225)
     :typenums
      (vx/test/testcoveragenums
       :pct 6
@@ -14951,7 +14952,7 @@ ab
  (boolean-exists<-file
   (file
    :name \"boolean_exists_from_file.txt\"
-   :path \"src/test/resources/vx\")))"
+   :path (string path-test-resources \"/vx\"))))"
         :testpkg "vx/data/file"
         :testresult
          (vx/test/testresult
@@ -14971,7 +14972,7 @@ ab
  (boolean-write<-file-string
   (file
    :name \"boolean_write_from_file_string.txt\"
-   :path \"src/test/resources/vx\")
+   :path (string path-test-resources \"/vx\"))
   \"writetext\"))"
         :testpkg "vx/data/file"
         :testresult
@@ -14991,12 +14992,12 @@ ab
          "(test
  (file
   :name \"string_read_from_file.txt\"
-  :path \"src/test/resources/vx\"
+  :path (string path-test-resources \"/vx\")
   :text \"testdata\")
  (file-read<-file
   (file
    :name \"string_read_from_file.txt\"
-   :path \"src/test/resources/vx\")))"
+   :path (string path-test-resources \"/vx\"))))"
         :testpkg "vx/data/file"
         :testresult
          (vx/test/testresult
@@ -15060,7 +15061,7 @@ ab
  (string-read<-file
   (file
    :name \"string_read_from_file.txt\"
-   :path \"src/test/resources/vx\")))"
+   :path (string path-test-resources \"/vx\"))))"
         :testpkg "vx/data/file"
         :testresult
          (vx/test/testresult
@@ -17106,7 +17107,7 @@ ab
  (boolean-exists<-file
   (file
    :name \"testsuite.vxlisp\"
-   :path \"src/test/resources\")))"
+   :path path-test-resources)))"
         :testpkg "vx/test"
         :testresult
          (vx/test/testresult
@@ -17126,7 +17127,7 @@ ab
  (boolean-exists<-file
   (file
    :name \"testsuite.html\"
-   :path \"src/test/resources\")))"
+   :path path-test-resources)))"
         :testpkg "vx/test"
         :testresult
          (vx/test/testresult
@@ -17146,7 +17147,7 @@ ab
  (boolean-exists<-file
   (file
    :name \"testsuitenode.vxlisp\"
-   :path \"src/test/resources\")))"
+   :path path-test-resources)))"
         :testpkg "vx/test"
         :testresult
          (vx/test/testresult

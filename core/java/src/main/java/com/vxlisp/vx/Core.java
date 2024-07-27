@@ -236,7 +236,7 @@ public final class Core {
     return output;
   }
 
-  public static <T> CompletableFuture<T> vx_async_new_completed(final T val) {
+  public static <T> CompletableFuture<T> vx_async_new_from_value(final T val) {
     CompletableFuture<T> output = CompletableFuture.completedFuture(val);
     return output;
   }
@@ -557,6 +557,22 @@ public final class Core {
       result = vx_is_int(strval);
     }
     return result;
+  }
+
+public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFuture<X> vx_list_from_list_async(
+    final X generic_list_1,
+    final Y values,
+    final Core.Func_any_from_any_async fn_any_from_any_async) {
+    List<Core.Type_any> list_value = values.vx_list();
+    List<CompletableFuture<Core.Type_any>> list_async_result = Core.arraylist_from_arraylist_fn(list_value, (val) -> {
+      return fn_any_from_any_async.vx_any_from_any_async(generic_list_1, val);
+    });
+    CompletableFuture<List<Core.Type_any>> async_list_result = Core.vx_async_arraylist_from_arraylist_async(list_async_result);
+    CompletableFuture<X> output = Core.vx_async_from_async_fn(async_list_result, (list_result) -> {
+      X work = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(list_result));
+      return work;
+    });
+    return output;
   }
 
   // vx_list_from_list_intany(generic_list_1, list-2, any<-int-any)
@@ -989,7 +1005,7 @@ public final class Core {
     return output;
   }
 
-  public static Core.Type_anylist vx_anylist_from_arraystring(String[] arraystring) {
+  public static Core.Type_anylist vx_anylist_from_arraystring(String... arraystring) {
     List<Object> listany = new ArrayList<>();
     for (String svalue : arraystring) {
       Core.Type_string value = Core.vx_new_string(svalue);
@@ -6920,7 +6936,7 @@ public final class Core {
 
     @Override
     public Core.Type_msgblock vx_msgblock() {
-      return this;
+      return Core.e_msgblock;
     }
 
     @Override
@@ -14501,6 +14517,43 @@ public final class Core {
 
 
   /**
+   * Constant: path-test-resources
+   * The test path from project file
+   * {string}
+   */
+  public static class Const_path_test_resources {
+    public static Core.Type_constdef constdef() {
+      return Core.constdef_new(
+        "vx/core", // pkgname
+        "path-test-resources", // name
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "string", // name
+          ":string", // extends
+          Core.e_typelist, // traits
+          Core.e_typelist, // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        )
+      );
+    }
+
+    public static void const_new(Core.Type_string output) {
+      Core.Class_string outval = (Core.Class_string)output;
+      outval.vx_p_constdef = constdef();
+      outval.vxstring = "src/test/resources";
+    }
+
+  }
+
+  public static final Core.Type_string c_path_test_resources = new Core.Class_string();
+
+
+  /**
    * Constant: quote
    * Quotation mark constant
    * {string}
@@ -18665,7 +18718,7 @@ public final class Core {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Core.Type_any> future = Core.f_any_from_any_async(generic_any_1, value);
@@ -18677,7 +18730,7 @@ public final class Core {
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_any_async(final T generic_any_1, final U value) {
       CompletableFuture<T> output;
       if (fn == null) {
-        output = Core.vx_async_new_completed(Core.f_empty(generic_any_1));
+        output = Core.vx_async_new_from_value(Core.f_empty(generic_any_1));
       } else {
         CompletableFuture<Core.Type_any> future = fn.resolve(value);
         output = Core.vx_async_from_async(generic_any_1, future);
@@ -18691,7 +18744,7 @@ public final class Core {
   public static final Func_any_from_any_async t_any_from_any_async = new Core.Class_any_from_any_async();
 
   public static <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_async(final T generic_any_1, final U value) {
-    CompletableFuture<T> output = Core.vx_async_new_completed(Core.f_empty(generic_any_1));
+    CompletableFuture<T> output = Core.vx_async_new_from_value(Core.f_empty(generic_any_1));
     return output;
   }
 
@@ -18885,7 +18938,7 @@ public final class Core {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -18898,7 +18951,7 @@ public final class Core {
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_any_context_async(final T generic_any_1, final Core.Type_context context, final U value) {
       CompletableFuture<T> output;
       if (fn == null) {
-        output = Core.vx_async_new_completed(Core.f_empty(generic_any_1));
+        output = Core.vx_async_new_from_value(Core.f_empty(generic_any_1));
       } else {
         CompletableFuture<Core.Type_any> future = fn.resolve(context, value);
         output = Core.vx_async_from_async(generic_any_1, future);
@@ -18912,7 +18965,7 @@ public final class Core {
   public static final Func_any_from_any_context_async t_any_from_any_context_async = new Core.Class_any_from_any_context_async();
 
   public static <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_context_async(final T generic_any_1, final Core.Type_context context, final U value) {
-    CompletableFuture<T> output = Core.vx_async_new_completed(Core.f_empty(generic_any_1));
+    CompletableFuture<T> output = Core.vx_async_new_from_value(Core.f_empty(generic_any_1));
     return output;
   }
 
@@ -19210,7 +19263,7 @@ public final class Core {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Core.Type_any> future = Core.f_any_from_func_async(generic_any_1);
       output = Core.vx_async_from_async(Core.t_any, future);
@@ -19221,7 +19274,7 @@ public final class Core {
     public <T extends Core.Type_any> CompletableFuture<T> vx_any_from_func_async(final T generic_any_1) {
       CompletableFuture<T> output;
       if (fn == null) {
-        output = Core.vx_async_new_completed(Core.f_empty(generic_any_1));
+        output = Core.vx_async_new_from_value(Core.f_empty(generic_any_1));
       } else {
         CompletableFuture<Core.Type_any> future = fn.resolve();
         output = Core.vx_async_from_async(generic_any_1, future);
@@ -19235,7 +19288,7 @@ public final class Core {
   public static final Func_any_from_func_async t_any_from_func_async = new Core.Class_any_from_func_async();
 
   public static <T extends Core.Type_any> CompletableFuture<T> f_any_from_func_async(final T generic_any_1) {
-    CompletableFuture<T> output = Core.vx_async_new_completed(Core.f_empty(generic_any_1));
+    CompletableFuture<T> output = Core.vx_async_new_from_value(Core.f_empty(generic_any_1));
     return output;
   }
 
@@ -19643,7 +19696,7 @@ public final class Core {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_string key = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
@@ -19656,7 +19709,7 @@ public final class Core {
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_key_value_async(final T generic_any_1, final Core.Type_string key, final U val) {
       CompletableFuture<T> output;
       if (fn == null) {
-        output = Core.vx_async_new_completed(Core.f_empty(generic_any_1));
+        output = Core.vx_async_new_from_value(Core.f_empty(generic_any_1));
       } else {
         CompletableFuture<Core.Type_any> future = fn.resolve(key, val);
         output = Core.vx_async_from_async(generic_any_1, future);
@@ -19670,7 +19723,7 @@ public final class Core {
   public static final Func_any_from_key_value_async t_any_from_key_value_async = new Core.Class_any_from_key_value_async();
 
   public static <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_key_value_async(final T generic_any_1, final Core.Type_string key, final U val) {
-    CompletableFuture<T> output = Core.vx_async_new_completed(Core.f_empty(generic_any_1));
+    CompletableFuture<T> output = Core.vx_async_new_from_value(Core.f_empty(generic_any_1));
     return output;
   }
 
@@ -20326,7 +20379,7 @@ public final class Core {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Core.Type_any> future = Core.f_any_from_none_async(generic_any_1);
       output = Core.vx_async_from_async(Core.t_any, future);
@@ -20337,7 +20390,7 @@ public final class Core {
     public <T extends Core.Type_any> CompletableFuture<T> vx_any_from_none_async(final T generic_any_1) {
       CompletableFuture<T> output;
       if (fn == null) {
-        output = Core.vx_async_new_completed(Core.f_empty(generic_any_1));
+        output = Core.vx_async_new_from_value(Core.f_empty(generic_any_1));
       } else {
         CompletableFuture<Core.Type_any> future = fn.resolve();
         output = Core.vx_async_from_async(generic_any_1, future);
@@ -20351,7 +20404,7 @@ public final class Core {
   public static final Func_any_from_none_async t_any_from_none_async = new Core.Class_any_from_none_async();
 
   public static <T extends Core.Type_any> CompletableFuture<T> f_any_from_none_async(final T generic_any_1) {
-    CompletableFuture<T> output = Core.vx_async_new_completed(Core.f_empty(generic_any_1));
+    CompletableFuture<T> output = Core.vx_async_new_from_value(Core.f_empty(generic_any_1));
     return output;
   }
 
@@ -20543,7 +20596,7 @@ public final class Core {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_any result = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_any item = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
@@ -20556,7 +20609,7 @@ public final class Core {
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_reduce_async(final T generic_any_1, final T result, final U item) {
       CompletableFuture<T> output;
       if (fn == null) {
-        output = Core.vx_async_new_completed(Core.f_empty(generic_any_1));
+        output = Core.vx_async_new_from_value(Core.f_empty(generic_any_1));
       } else {
         CompletableFuture<Core.Type_any> future = fn.resolve(result, item);
         output = Core.vx_async_from_async(generic_any_1, future);
@@ -20570,7 +20623,7 @@ public final class Core {
   public static final Func_any_from_reduce_async t_any_from_reduce_async = new Core.Class_any_from_reduce_async();
 
   public static <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_reduce_async(final T generic_any_1, final T result, final U item) {
-    CompletableFuture<T> output = Core.vx_async_new_completed(Core.f_empty(generic_any_1));
+    CompletableFuture<T> output = Core.vx_async_new_from_value(Core.f_empty(generic_any_1));
     return output;
   }
 
@@ -20765,7 +20818,7 @@ public final class Core {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_any result = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_any current = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
@@ -20779,7 +20832,7 @@ public final class Core {
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_reduce_next_async(final T generic_any_1, final T result, final U current, final U next) {
       CompletableFuture<T> output;
       if (fn == null) {
-        output = Core.vx_async_new_completed(Core.f_empty(generic_any_1));
+        output = Core.vx_async_new_from_value(Core.f_empty(generic_any_1));
       } else {
         CompletableFuture<Core.Type_any> future = fn.resolve(result, current, next);
         output = Core.vx_async_from_async(generic_any_1, future);
@@ -20793,7 +20846,7 @@ public final class Core {
   public static final Func_any_from_reduce_next_async t_any_from_reduce_next_async = new Core.Class_any_from_reduce_next_async();
 
   public static <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_reduce_next_async(final T generic_any_1, final T result, final U current, final U next) {
-    CompletableFuture<T> output = Core.vx_async_new_completed(Core.f_empty(generic_any_1));
+    CompletableFuture<T> output = Core.vx_async_new_from_value(Core.f_empty(generic_any_1));
     return output;
   }
 
@@ -20965,7 +21018,7 @@ public final class Core {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Core.Type_any> future = Core.f_async(generic_any_1, value);
@@ -20984,8 +21037,8 @@ public final class Core {
   public static final Func_async t_async = new Core.Class_async();
 
   public static <T extends Core.Type_any> CompletableFuture<T> f_async(final T generic_any_1, final T value) {
-    CompletableFuture<T> output = Core.vx_async_new_completed(Core.f_empty(generic_any_1));
-    output = Core.vx_async_new_completed(value);
+    CompletableFuture<T> output = Core.vx_async_new_from_value(Core.f_empty(generic_any_1));
+    output = Core.vx_async_new_from_value(value);
     return output;
   }
 
@@ -25092,7 +25145,7 @@ public final class Core {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       Core.Func_any_from_func_async fn_any_async = Core.f_any_from_any(Core.t_any_from_func_async, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Core.Type_any> future = Core.f_let_async(generic_any_1, fn_any_async);
@@ -25111,7 +25164,7 @@ public final class Core {
   public static final Func_let_async t_let_async = new Core.Class_let_async();
 
   public static <T extends Core.Type_any> CompletableFuture<T> f_let_async(final T generic_any_1, Core.Func_any_from_func_async fn_any_async) {
-    CompletableFuture<T> output = Core.vx_async_new_completed(Core.f_empty(generic_any_1));
+    CompletableFuture<T> output = Core.vx_async_new_from_value(Core.f_empty(generic_any_1));
     output = fn_any_async.vx_any_from_func_async(generic_any_1);
     return output;
   }
@@ -25593,7 +25646,7 @@ public final class Core {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
       Core.Func_any_from_any_async fn_any_from_any_async = Core.f_any_from_any(Core.t_any_from_any_async, arglist.vx_any(Core.vx_new_int(1)));
@@ -25613,16 +25666,8 @@ public final class Core {
   public static final Func_list_from_list_async t_list_from_list_async = new Core.Class_list_from_list_async();
 
   public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFuture<X> f_list_from_list_async(final X generic_list_1, final Y values, final Core.Func_any_from_any_async fn_any_from_any_async) {
-    CompletableFuture<X> output = Core.vx_async_new_completed(Core.f_empty(generic_list_1));
-    List<Core.Type_any> list_value = values.vx_list();
-    List<CompletableFuture<Core.Type_any>> list_async_result = Core.arraylist_from_arraylist_fn(list_value, (val) -> {
-      return fn_any_from_any_async.vx_any_from_any_async(generic_list_1, val);
-    });
-    CompletableFuture<List<Core.Type_any>> async_list_result = Core.vx_async_arraylist_from_arraylist_async(list_async_result);
-    output = Core.vx_async_from_async_fn(async_list_result, (list_result) -> {
-      X work = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(list_result));
-      return work;
-    });
+    CompletableFuture<X> output = Core.vx_async_new_from_value(Core.f_empty(generic_list_1));
+    output = Core.vx_list_from_list_async(generic_list_1, values, fn_any_from_any_async);
     return output;
   }
 
@@ -25985,7 +26030,7 @@ public final class Core {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_map valuemap = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
       Core.Func_any_from_key_value_async fn_any_from_key_value_async = Core.f_any_from_any(Core.t_any_from_key_value_async, arglist.vx_any(Core.vx_new_int(1)));
@@ -26005,7 +26050,7 @@ public final class Core {
   public static final Func_list_from_map_async t_list_from_map_async = new Core.Class_list_from_map_async();
 
   public static <O extends Core.Type_map, X extends Core.Type_list> CompletableFuture<X> f_list_from_map_async(final X generic_list_1, final O valuemap, final Core.Func_any_from_key_value_async fn_any_from_key_value_async) {
-    CompletableFuture<X> output = Core.vx_async_new_completed(Core.f_empty(generic_list_1));
+    CompletableFuture<X> output = Core.vx_async_new_from_value(Core.f_empty(generic_list_1));
     return output;
   }
 
@@ -28876,7 +28921,9 @@ public final class Core {
 
   public static <T extends Core.Type_any> T f_resolve_1(final T generic_any_1, final Core.Func_any_from_func fn_any) {
     T output = Core.f_empty(generic_any_1);
-    if (fn_any != null) {
+    if (fn_any == null) {
+    } else if (fn_any == Core.e_any_from_func) {
+    } else {
       output = fn_any.vx_any_from_func(generic_any_1);
     };
     return output;
@@ -28959,7 +29006,7 @@ public final class Core {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       Core.Func_any_from_func_async fn_any = Core.f_any_from_any(Core.t_any_from_func_async, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Core.Type_any> future = Core.f_resolve_async(generic_any_1, fn_any);
@@ -28978,8 +29025,10 @@ public final class Core {
   public static final Func_resolve_async t_resolve_async = new Core.Class_resolve_async();
 
   public static <T extends Core.Type_any> CompletableFuture<T> f_resolve_async(final T generic_any_1, final Core.Func_any_from_func_async fn_any) {
-    CompletableFuture<T> output = Core.vx_async_new_completed(Core.f_empty(generic_any_1));
-    if (fn_any != null) {
+    CompletableFuture<T> output = Core.vx_async_new_from_value(Core.f_empty(generic_any_1));
+    if (fn_any == null) {
+    } else if (fn_any == Core.e_any_from_func_async) {
+    } else {
       output = fn_any.vx_any_from_func_async(generic_any_1);
     };
     return output;
@@ -31264,6 +31313,7 @@ public final class Core {
     Const_newline.const_new(c_newline);
     Const_notanumber.const_new(c_notanumber);
     Const_nothing.const_new(c_nothing);
+    Const_path_test_resources.const_new(c_path_test_resources);
     Const_quote.const_new(c_quote);
     Const_true.const_new(c_true);
     Map<String, Core.Type_any> maptype = new LinkedHashMap<String, Core.Type_any>();
@@ -31357,6 +31407,7 @@ public final class Core {
     mapconst.put("newline", Core.c_newline);
     mapconst.put("notanumber", Core.c_notanumber);
     mapconst.put("nothing", Core.c_nothing);
+    mapconst.put("path-test-resources", Core.c_path_test_resources);
     mapconst.put("quote", Core.c_quote);
     mapconst.put("true", Core.c_true);
     mapfunc.put("!", Core.t_not);

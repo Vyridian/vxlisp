@@ -1239,7 +1239,7 @@ public final class Event {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
       Event.Type_event evt = Core.f_any_from_any(Event.t_event, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Event.Type_event> future = Event.f_event_from_event_async(context, evt);
@@ -1258,7 +1258,7 @@ public final class Event {
   public static final Func_event_from_event_async t_event_from_event_async = new Event.Class_event_from_event_async();
 
   public static CompletableFuture<Event.Type_event> f_event_from_event_async(final Core.Type_context context, final Event.Type_event evt) {
-    CompletableFuture<Event.Type_event> output = Core.vx_async_new_completed(Event.e_event);
+    CompletableFuture<Event.Type_event> output = Core.vx_async_new_from_value(Event.e_event);
     return output;
   }
 

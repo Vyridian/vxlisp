@@ -3,7 +3,7 @@ namespace AppTest.TestVx;
 
 public class SampleTest {
 
-  static Vx.Test.Type_testcase c_myconst(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase c_myconst(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -27,7 +27,7 @@ public class SampleTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_myfunc(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_myfunc(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -52,13 +52,13 @@ public class SampleTest {
   }
 
   public static Vx.Test.Type_testcaselist test_cases(Vx.Core.Type_context context) {
-    List<Vx.Core.Type_any> arraylisttestcase = Vx.Core.arraylist_from_array(
+    object[] testcases = [
       SampleTest.c_myconst(context),
       SampleTest.f_myfunc(context)
-    );
+    ];
     Vx.Test.Type_testcaselist output = Vx.Core.vx_new(
       Vx.Test.t_testcaselist,
-      arraylisttestcase
+      testcases
     );
     return output;
   }

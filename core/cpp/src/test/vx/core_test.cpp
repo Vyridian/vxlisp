@@ -4213,14 +4213,14 @@ namespace vx_core_test {
     vx_test::Type_testcoveragesummary output = vx_core::vx_new(vx_test::t_testcoveragesummary, {
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":constnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(14), 
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(13), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(2), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(14)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(15)
       }),
       vx_core::vx_new_string(":docnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(89), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(230), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(256)
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(90), 
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(232), 
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(257)
       }),
       vx_core::vx_new_string(":funcnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(55), 
@@ -4240,7 +4240,7 @@ namespace vx_core_test {
       vx_core::vx_new_string(":totalnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(36), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(81), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(224)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(225)
       }),
       vx_core::vx_new_string(":typenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(6), 
@@ -4345,6 +4345,7 @@ namespace vx_core_test {
         vx_core::vx_new_string(":newline"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":notanumber"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":nothing"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":path-test-resources"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":quote"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":true"), vx_core::vx_new_int(1)
       }),

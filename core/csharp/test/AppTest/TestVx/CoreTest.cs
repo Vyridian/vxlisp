@@ -3,7 +3,7 @@ namespace AppTest.TestVx;
 
 public class CoreTest {
 
-  static Vx.Test.Type_testcase t_boolean(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase t_boolean(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -63,7 +63,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase t_float(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase t_float(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -92,7 +92,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase t_func(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase t_func(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -123,7 +123,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase t_int(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase t_int(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -206,7 +206,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase t_string(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase t_string(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -251,7 +251,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase c_false(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase c_false(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -274,7 +274,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase c_true(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase c_true(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -297,7 +297,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_not(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_not(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -331,7 +331,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_ne(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_ne(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -361,7 +361,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_multiply(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_multiply(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -395,7 +395,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_multiply_1(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_multiply_1(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -429,7 +429,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_multiply_2(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_multiply_2(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -475,7 +475,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_multiply_3(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_multiply_3(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -521,7 +521,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_plus(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_plus(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -555,7 +555,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_plus_1(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_plus_1(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -589,7 +589,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_plus1(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_plus1(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -623,7 +623,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_minus(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_minus(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -657,7 +657,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_minus_1(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_minus_1(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -691,7 +691,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_minus1(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_minus1(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -725,7 +725,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_divide(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_divide(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -759,7 +759,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_lt(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_lt(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -782,7 +782,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_lt_1(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_lt_1(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -820,7 +820,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_chainfirst(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_chainfirst(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -856,7 +856,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_chainlast(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_chainlast(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -892,7 +892,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_le(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_le(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -915,7 +915,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_le_1(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_le_1(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -944,7 +944,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_eq(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_eq(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -1042,7 +1042,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_eq_1(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_eq_1(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -1071,7 +1071,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_eqeq(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_eqeq(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -1103,7 +1103,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_gt(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_gt(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -1126,7 +1126,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_gt_1(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_gt_1(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -1155,7 +1155,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_ge(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_ge(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -1178,7 +1178,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_ge_1(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_ge_1(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -1207,7 +1207,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_and(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_and(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -1245,7 +1245,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_and_1(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_and_1(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -1289,7 +1289,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_any_from_list(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_any_from_list(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -1345,7 +1345,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_any_from_list_start_reduce(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_any_from_list_start_reduce(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -1387,7 +1387,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_any_from_map(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_any_from_map(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -1425,7 +1425,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_any_from_map_start_reduce(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_any_from_map_start_reduce(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -1475,7 +1475,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_boolean_write_from_map_name_value(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_boolean_write_from_map_name_value(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -1553,7 +1553,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_compare(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_compare(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -1587,7 +1587,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_contains(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_contains(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -1619,7 +1619,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_contains_1(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_contains_1(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -1690,7 +1690,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_copy(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_copy(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -1734,7 +1734,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_empty(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_empty(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -1800,7 +1800,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_first_from_list(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_first_from_list(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -1833,7 +1833,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_first_from_list_any_from_any(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_first_from_list_any_from_any(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -1868,7 +1868,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_float_from_string(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_float_from_string(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -1897,7 +1897,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_if(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_if(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -1939,7 +1939,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_if_1(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_if_1(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -1983,7 +1983,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_if_2(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_if_2(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -2033,7 +2033,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_int_from_string(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_int_from_string(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -2107,7 +2107,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_is_empty_1(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_is_empty_1(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -2167,7 +2167,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_is_int(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_is_int(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -2219,7 +2219,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_is_number(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_is_number(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -2260,7 +2260,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_last_from_list(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_last_from_list(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -2293,7 +2293,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_length(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_length(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -2327,7 +2327,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_length_1(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_length_1(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -2360,7 +2360,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_let(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_let(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -2392,7 +2392,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_list_join_from_list(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_list_join_from_list(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -2445,7 +2445,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_list_join_from_list_1(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_list_join_from_list_1(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -2503,7 +2503,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_list_from_list(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_list_from_list(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -2542,7 +2542,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_list_from_list_intany(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_list_from_list_intany(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -2594,7 +2594,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_list_from_map(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_list_from_map(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -2635,7 +2635,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_list_from_map_1(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_list_from_map_1(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -2689,7 +2689,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_map_from_list(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_map_from_list(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -2742,7 +2742,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_map_from_map(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_map_from_map(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -2781,7 +2781,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_map_from_map_1(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_map_from_map_1(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -2837,7 +2837,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_new(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_new(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -2961,7 +2961,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_or(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_or(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -3011,7 +3011,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_or_1(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_or_1(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -3055,7 +3055,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_resolve(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_resolve(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -3079,7 +3079,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_resolve_1(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_resolve_1(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -3111,7 +3111,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_resolve_async(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_resolve_async(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -3143,7 +3143,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_string_repeat(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_string_repeat(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -3167,7 +3167,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_string_from_any(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_string_from_any(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -3262,7 +3262,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_string_from_string_find_replace(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_string_from_string_find_replace(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -3286,7 +3286,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_stringlist_from_map(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_stringlist_from_map(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -3326,7 +3326,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_switch(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_switch(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -3373,7 +3373,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_type_from_any(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_type_from_any(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -3419,7 +3419,7 @@ public class CoreTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_typename_from_any(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_typename_from_any(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -3466,7 +3466,7 @@ public class CoreTest {
   }
 
   public static Vx.Test.Type_testcaselist test_cases(Vx.Core.Type_context context) {
-    List<Vx.Core.Type_any> arraylisttestcase = Vx.Core.arraylist_from_array(
+    object[] testcases = [
       CoreTest.t_boolean(context),
       CoreTest.t_float(context),
       CoreTest.t_func(context),
@@ -3548,10 +3548,10 @@ public class CoreTest {
       CoreTest.f_switch(context),
       CoreTest.f_type_from_any(context),
       CoreTest.f_typename_from_any(context)
-    );
+    ];
     Vx.Test.Type_testcaselist output = Vx.Core.vx_new(
       Vx.Test.t_testcaselist,
-      arraylisttestcase
+      testcases
     );
     return output;
   }
@@ -3560,12 +3560,12 @@ public class CoreTest {
     return Vx.Core.vx_new(
       Vx.Test.t_testcoveragesummary,
       ":testpkg", "vx/core", 
-      ":constnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 14, ":tests", 2, ":total", 14), 
-      ":docnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 90, ":tests", 231, ":total", 256), 
+      ":constnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 13, ":tests", 2, ":total", 15), 
+      ":docnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 90, ":tests", 232, ":total", 257), 
       ":funcnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 55, ":tests", 74, ":total", 134), 
       ":bigospacenums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 1, ":total", 166), 
       ":bigotimenums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 1, ":total", 166), 
-      ":totalnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 36, ":tests", 81, ":total", 224), 
+      ":totalnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 36, ":tests", 81, ":total", 225), 
       ":typenums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 6, ":tests", 5, ":total", 76)
     );
   }
@@ -3663,6 +3663,7 @@ public class CoreTest {
         ":newline", 0,
         ":notanumber", 0,
         ":nothing", 0,
+        ":path-test-resources", 0,
         ":quote", 0,
         ":true", 1
 ), ":funcmap", Vx.Core.vx_new(

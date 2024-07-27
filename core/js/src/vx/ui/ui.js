@@ -1698,8 +1698,8 @@ export default class vx_ui_ui {
 
   /**
    * @function ui_from_from_event
-   * Returns (:from event) cast as ui
-   * @param  {event} event
+   * Returns (:from evt) cast as ui
+   * @param  {event} evt
    * @return {ui}
    */
   static t_ui_from_from_event = {
@@ -1710,13 +1710,13 @@ export default class vx_ui_ui {
   }
 
   // (func ui-from<-event)
-  static f_ui_from_from_event(context, event) {
+  static f_ui_from_from_event(context, evt) {
     let output = vx_ui_ui.e_ui
     output = vx_core.f_let(
       {"any-1": vx_ui_ui.t_ui},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
-        const uid = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_event.t_event}, event, ":from")
+        const uid = vx_core.f_any_from_struct({"any-1": vx_core.t_string, "struct-2": vx_event.t_event}, evt, ":from")
         return vx_ui_ui.f_ui_readstate_from_uid(context, uid)
       })
     )

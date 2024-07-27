@@ -6,7 +6,7 @@ import com.vxlisp.vx.data.*;
 
 public final class TranslateTest {
 
-  static Test.Type_testcase f_translate(final Core.Type_context context) {
+  public static Test.Type_testcase f_translate(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -30,7 +30,7 @@ public final class TranslateTest {
     return output;
   }
 
-  static Test.Type_testcase f_translate_1(final Core.Type_context context) {
+  public static Test.Type_testcase f_translate_1(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -65,7 +65,7 @@ public final class TranslateTest {
     return output;
   }
 
-  static Test.Type_testcase f_translate_from_translation_string(final Core.Type_context context) {
+  public static Test.Type_testcase f_translate_from_translation_string(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -105,14 +105,14 @@ public final class TranslateTest {
   }
 
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
-    List<Core.Type_any> arraylisttestcase = Core.arraylist_from_array(
+    List<Core.Type_any> testcases = Core.arraylist_from_array(
       TranslateTest.f_translate(context),
       TranslateTest.f_translate_1(context),
       TranslateTest.f_translate_from_translation_string(context)
     );
     Test.Type_testcaselist output = Core.vx_new(
       Test.t_testcaselist,
-      arraylisttestcase
+      testcases
     );
     return output;
   }

@@ -5,7 +5,7 @@ import java.util.List;
 
 public final class CollectionTest {
 
-  static Test.Type_testcase f_any_from_for_until_loop(final Core.Type_context context) {
+  public static Test.Type_testcase f_any_from_for_until_loop(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -44,7 +44,7 @@ public final class CollectionTest {
     return output;
   }
 
-  static Test.Type_testcase f_any_from_for_while_loop(final Core.Type_context context) {
+  public static Test.Type_testcase f_any_from_for_while_loop(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -83,7 +83,7 @@ public final class CollectionTest {
     return output;
   }
 
-  static Test.Type_testcase f_int_from_map_key(final Core.Type_context context) {
+  public static Test.Type_testcase f_int_from_map_key(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -118,7 +118,7 @@ public final class CollectionTest {
     return output;
   }
 
-  static Test.Type_testcase f_int_from_stringlist_find(final Core.Type_context context) {
+  public static Test.Type_testcase f_int_from_stringlist_find(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -151,7 +151,7 @@ public final class CollectionTest {
     return output;
   }
 
-  static Test.Type_testcase f_is_list(final Core.Type_context context) {
+  public static Test.Type_testcase f_is_list(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -178,7 +178,7 @@ public final class CollectionTest {
     return output;
   }
 
-  static Test.Type_testcase f_is_map(final Core.Type_context context) {
+  public static Test.Type_testcase f_is_map(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -205,7 +205,7 @@ public final class CollectionTest {
     return output;
   }
 
-  static Test.Type_testcase f_list_from_for_end_loop(final Core.Type_context context) {
+  public static Test.Type_testcase f_list_from_for_end_loop(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -245,7 +245,7 @@ public final class CollectionTest {
     return output;
   }
 
-  static Test.Type_testcase f_list_from_list_end(final Core.Type_context context) {
+  public static Test.Type_testcase f_list_from_list_end(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -288,7 +288,7 @@ public final class CollectionTest {
     return output;
   }
 
-  static Test.Type_testcase f_list_from_list_filter(final Core.Type_context context) {
+  public static Test.Type_testcase f_list_from_list_filter(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -362,7 +362,7 @@ public final class CollectionTest {
     return output;
   }
 
-  static Test.Type_testcase f_list_from_list_filtertypes(final Core.Type_context context) {
+  public static Test.Type_testcase f_list_from_list_filtertypes(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -410,7 +410,7 @@ public final class CollectionTest {
     return output;
   }
 
-  static Test.Type_testcase f_list_from_list_start(final Core.Type_context context) {
+  public static Test.Type_testcase f_list_from_list_start(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -453,7 +453,7 @@ public final class CollectionTest {
     return output;
   }
 
-  static Test.Type_testcase f_list_from_list_start_end(final Core.Type_context context) {
+  public static Test.Type_testcase f_list_from_list_start_end(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -496,7 +496,7 @@ public final class CollectionTest {
     return output;
   }
 
-  static Test.Type_testcase f_map_from_map_end(final Core.Type_context context) {
+  public static Test.Type_testcase f_map_from_map_end(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -542,7 +542,7 @@ public final class CollectionTest {
     return output;
   }
 
-  static Test.Type_testcase f_map_from_map_keys(final Core.Type_context context) {
+  public static Test.Type_testcase f_map_from_map_keys(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -594,7 +594,7 @@ public final class CollectionTest {
     return output;
   }
 
-  static Test.Type_testcase f_map_from_map_start(final Core.Type_context context) {
+  public static Test.Type_testcase f_map_from_map_start(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -640,7 +640,7 @@ public final class CollectionTest {
     return output;
   }
 
-  static Test.Type_testcase f_map_from_map_start_end(final Core.Type_context context) {
+  public static Test.Type_testcase f_map_from_map_start_end(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -690,7 +690,7 @@ public final class CollectionTest {
   }
 
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
-    List<Core.Type_any> arraylisttestcase = Core.arraylist_from_array(
+    List<Core.Type_any> testcases = Core.arraylist_from_array(
       CollectionTest.f_any_from_for_until_loop(context),
       CollectionTest.f_any_from_for_while_loop(context),
       CollectionTest.f_int_from_map_key(context),
@@ -710,7 +710,7 @@ public final class CollectionTest {
     );
     Test.Type_testcaselist output = Core.vx_new(
       Test.t_testcaselist,
-      arraylisttestcase
+      testcases
     );
     return output;
   }

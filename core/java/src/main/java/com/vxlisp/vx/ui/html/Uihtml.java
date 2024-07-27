@@ -5121,7 +5121,7 @@ public final class Uihtml {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Ui.Type_stylesheet stylesheetui = Core.f_any_from_any(Ui.t_stylesheet, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Ui.Type_stylesheet> future = Uihtml.f_stylesheet_layout_html(stylesheetui);
       output = Core.vx_async_from_async(Core.t_any, future);
@@ -5139,13 +5139,13 @@ public final class Uihtml {
   public static final Func_stylesheet_layout_html t_stylesheet_layout_html = new Uihtml.Class_stylesheet_layout_html();
 
   public static CompletableFuture<Ui.Type_stylesheet> f_stylesheet_layout_html(final Ui.Type_stylesheet stylesheetui) {
-    CompletableFuture<Ui.Type_stylesheet> output = Core.vx_async_new_completed(Ui.e_stylesheet);
+    CompletableFuture<Ui.Type_stylesheet> output = Core.vx_async_new_from_value(Ui.e_stylesheet);
     output = Core.f_let_async(
       Ui.t_stylesheet,
       Core.t_any_from_func_async.vx_fn_new(() -> {
         final Html.Type_stylesheet stylesheethtml = Uihtml.f_stylesheet_from_stylesheet(stylesheetui);
         final CompletableFuture<Core.Type_boolean> future_write = Htmldoc.f_boolean_write_from_stylesheet(stylesheethtml);
-        CompletableFuture<Core.Type_any> output_1 = Core.vx_async_from_async_fn(future_write, (write) -> {;
+        CompletableFuture<Core.Type_any> output_1 = Core.vx_async_from_async_fn(future_write, (write) -> {
           Core.Type_any output_2 = stylesheetui;
           return output_2;
         });

@@ -5,7 +5,7 @@ import java.util.List;
 
 public final class SampleTest {
 
-  static Test.Type_testcase c_myconst(final Core.Type_context context) {
+  public static Test.Type_testcase c_myconst(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -29,7 +29,7 @@ public final class SampleTest {
     return output;
   }
 
-  static Test.Type_testcase f_myfunc(final Core.Type_context context) {
+  public static Test.Type_testcase f_myfunc(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -54,13 +54,13 @@ public final class SampleTest {
   }
 
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
-    List<Core.Type_any> arraylisttestcase = Core.arraylist_from_array(
+    List<Core.Type_any> testcases = Core.arraylist_from_array(
       SampleTest.c_myconst(context),
       SampleTest.f_myfunc(context)
     );
     Test.Type_testcaselist output = Core.vx_new(
       Test.t_testcaselist,
-      arraylisttestcase
+      testcases
     );
     return output;
   }

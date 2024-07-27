@@ -130,11 +130,11 @@
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/core</p>
-              <p class="coveragenums">36% 81/224</p>
+              <p class="coveragenums">36% 81/225</p>
               <p class="coveragenums">6% 5/76</p>
-              <p class="coveragenums">14% 2/14</p>
+              <p class="coveragenums">13% 2/15</p>
               <p class="coveragenums">55% 74/134</p>
-              <p class="coveragenums">90% 231/256</p>
+              <p class="coveragenums">90% 232/257</p>
               <p class="coveragenums">0% 1/166</p>
               <p class="coveragenums">0% 1/166</p>
             </summary>
@@ -15833,7 +15833,7 @@ ab
  (boolean-exists&lt;-file
   (file
    :name "boolean_exists_from_file.txt"
-   :path "src/test/resources/vx")))</p>
+   :path (string path-test-resources "/vx"))))</p>
                     </td>
                     <td>
                       <p class="preformatted">true</p>
@@ -15854,7 +15854,7 @@ ab
  (boolean-write&lt;-file-string
   (file
    :name "boolean_write_from_file_string.txt"
-   :path "src/test/resources/vx")
+   :path (string path-test-resources "/vx"))
   "writetext"))</p>
                     </td>
                     <td>
@@ -15875,12 +15875,12 @@ ab
                       <p class="preformatted">(test
  (file
   :name "string_read_from_file.txt"
-  :path "src/test/resources/vx"
+  :path (string path-test-resources "/vx")
   :text "testdata")
  (file-read&lt;-file
   (file
    :name "string_read_from_file.txt"
-   :path "src/test/resources/vx")))</p>
+   :path (string path-test-resources "/vx"))))</p>
                     </td>
                     <td>
                       <p class="preformatted">(file
@@ -15951,7 +15951,7 @@ ab
  (string-read&lt;-file
   (file
    :name "string_read_from_file.txt"
-   :path "src/test/resources/vx")))</p>
+   :path (string path-test-resources "/vx"))))</p>
                     </td>
                     <td>
                       <p class="preformatted">"testdata"</p>
@@ -18035,7 +18035,7 @@ ab
  (boolean-exists&lt;-file
   (file
    :name "testsuite.vxlisp"
-   :path "src/test/resources")))</p>
+   :path path-test-resources)))</p>
                     </td>
                     <td>
                       <p class="preformatted">true</p>
@@ -18056,7 +18056,7 @@ ab
  (boolean-exists&lt;-file
   (file
    :name "testsuite.html"
-   :path "src/test/resources")))</p>
+   :path path-test-resources)))</p>
                     </td>
                     <td>
                       <p class="preformatted">true</p>
@@ -18077,7 +18077,7 @@ ab
  (boolean-exists&lt;-file
   (file
    :name "testsuitenode.vxlisp"
-   :path "src/test/resources")))</p>
+   :path path-test-resources)))</p>
                     </td>
                     <td>
                       <p class="preformatted">true</p>

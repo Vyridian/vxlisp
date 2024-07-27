@@ -3,7 +3,7 @@ namespace AppTest.TestVx.Data;
 
 public class FileTest {
 
-  static Vx.Test.Type_testcase f_boolean_exists_from_file(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_boolean_exists_from_file(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -14,7 +14,7 @@ public class FileTest {
         Vx.Test.t_testdescribelist,
         Vx.Core.vx_new(
           Vx.Test.t_testdescribe,
-          ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"boolean_exists_from_file.txt\"\n   :path \"src/test/resources/vx\")))",
+          ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"boolean_exists_from_file.txt\"\n   :path (string path-test-resources \"/vx\"))))",
           ":testresult",
             Vx.Test.f_test_true(
               context,
@@ -25,7 +25,13 @@ public class FileTest {
                     Vx.Core.vx_new_string(":name"),
                     Vx.Core.vx_new_string("boolean_exists_from_file.txt"),
                     Vx.Core.vx_new_string(":path"),
-                    Vx.Core.vx_new_string("src/test/resources/vx")
+                    Vx.Core.f_new(
+                      Vx.Core.t_string,
+                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.c_path_test_resources,
+                        Vx.Core.vx_new_string("/vx")
+                      )
+                    )
                   )
                 )
               )
@@ -36,7 +42,7 @@ public class FileTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_boolean_write_from_file_string(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_boolean_write_from_file_string(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -47,7 +53,7 @@ public class FileTest {
         Vx.Test.t_testdescribelist,
         Vx.Core.vx_new(
           Vx.Test.t_testdescribe,
-          ":describename", "(test-true\n (boolean-write<-file-string\n  (file\n   :name \"boolean_write_from_file_string.txt\"\n   :path \"src/test/resources/vx\")\n  \"writetext\"))",
+          ":describename", "(test-true\n (boolean-write<-file-string\n  (file\n   :name \"boolean_write_from_file_string.txt\"\n   :path (string path-test-resources \"/vx\"))\n  \"writetext\"))",
           ":testresult",
             Vx.Test.f_test_true(
               context,
@@ -59,7 +65,13 @@ public class FileTest {
                     Vx.Core.vx_new_string(":name"),
                     Vx.Core.vx_new_string("boolean_write_from_file_string.txt"),
                     Vx.Core.vx_new_string(":path"),
-                    Vx.Core.vx_new_string("src/test/resources/vx")
+                    Vx.Core.f_new(
+                      Vx.Core.t_string,
+                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.c_path_test_resources,
+                        Vx.Core.vx_new_string("/vx")
+                      )
+                    )
                   )
                 ),
                 Vx.Core.vx_new_string("writetext")
@@ -71,7 +83,7 @@ public class FileTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_file_read_from_file(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_file_read_from_file(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -82,7 +94,7 @@ public class FileTest {
         Vx.Test.t_testdescribelist,
         Vx.Core.vx_new(
           Vx.Test.t_testdescribe,
-          ":describename", "(test\n (file\n  :name \"string_read_from_file.txt\"\n  :path \"src/test/resources/vx\"\n  :text \"testdata\")\n (file-read<-file\n  (file\n   :name \"string_read_from_file.txt\"\n   :path \"src/test/resources/vx\")))",
+          ":describename", "(test\n (file\n  :name \"string_read_from_file.txt\"\n  :path (string path-test-resources \"/vx\")\n  :text \"testdata\")\n (file-read<-file\n  (file\n   :name \"string_read_from_file.txt\"\n   :path (string path-test-resources \"/vx\"))))",
           ":testresult",
             Vx.Test.f_test(
               context,
@@ -92,7 +104,13 @@ public class FileTest {
                   Vx.Core.vx_new_string(":name"),
                   Vx.Core.vx_new_string("string_read_from_file.txt"),
                   Vx.Core.vx_new_string(":path"),
-                  Vx.Core.vx_new_string("src/test/resources/vx"),
+                  Vx.Core.f_new(
+                    Vx.Core.t_string,
+                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.c_path_test_resources,
+                      Vx.Core.vx_new_string("/vx")
+                    )
+                  ),
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("testdata")
                 )
@@ -105,7 +123,13 @@ public class FileTest {
                     Vx.Core.vx_new_string(":name"),
                     Vx.Core.vx_new_string("string_read_from_file.txt"),
                     Vx.Core.vx_new_string(":path"),
-                    Vx.Core.vx_new_string("src/test/resources/vx")
+                    Vx.Core.f_new(
+                      Vx.Core.t_string,
+                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.c_path_test_resources,
+                        Vx.Core.vx_new_string("/vx")
+                      )
+                    )
                   )
                 )
               )
@@ -116,7 +140,7 @@ public class FileTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_pathfull_from_file(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_pathfull_from_file(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -168,7 +192,7 @@ public class FileTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_string_read_from_file(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_string_read_from_file(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -179,7 +203,7 @@ public class FileTest {
         Vx.Test.t_testdescribelist,
         Vx.Core.vx_new(
           Vx.Test.t_testdescribe,
-          ":describename", "(test\n \"testdata\"\n (string-read<-file\n  (file\n   :name \"string_read_from_file.txt\"\n   :path \"src/test/resources/vx\")))",
+          ":describename", "(test\n \"testdata\"\n (string-read<-file\n  (file\n   :name \"string_read_from_file.txt\"\n   :path (string path-test-resources \"/vx\"))))",
           ":testresult",
             Vx.Test.f_test(
               context,
@@ -192,7 +216,13 @@ public class FileTest {
                     Vx.Core.vx_new_string(":name"),
                     Vx.Core.vx_new_string("string_read_from_file.txt"),
                     Vx.Core.vx_new_string(":path"),
-                    Vx.Core.vx_new_string("src/test/resources/vx")
+                    Vx.Core.f_new(
+                      Vx.Core.t_string,
+                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.c_path_test_resources,
+                        Vx.Core.vx_new_string("/vx")
+                      )
+                    )
                   )
                 )
               )
@@ -204,16 +234,16 @@ public class FileTest {
   }
 
   public static Vx.Test.Type_testcaselist test_cases(Vx.Core.Type_context context) {
-    List<Vx.Core.Type_any> arraylisttestcase = Vx.Core.arraylist_from_array(
+    object[] testcases = [
       FileTest.f_boolean_exists_from_file(context),
       FileTest.f_boolean_write_from_file_string(context),
       FileTest.f_file_read_from_file(context),
       FileTest.f_pathfull_from_file(context),
       FileTest.f_string_read_from_file(context)
-    );
+    ];
     Vx.Test.Type_testcaselist output = Vx.Core.vx_new(
       Vx.Test.t_testcaselist,
-      arraylisttestcase
+      testcases
     );
     return output;
   }

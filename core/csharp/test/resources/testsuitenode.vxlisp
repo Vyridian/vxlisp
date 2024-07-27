@@ -139,7 +139,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "36% 81/224")
+                  :text "36% 81/225")
                  (p
                   :style
                    (style
@@ -155,7 +155,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "14% 2/14")
+                  :text "13% 2/15")
                  (p
                   :style
                    (style
@@ -171,7 +171,7 @@
                     :props
                      (propmap
                       :width "90px"))
-                  :text "90% 231/256")
+                  :text "90% 232/257")
                  (p
                   :style
                    (style
@@ -19801,27 +19801,7 @@ ab
       (textblock
        :text "a"
        :startpos 2
-       :endpos 2))
-    (msgblock
-     :msgs
-      (msglist
-       (msg
-        :code "closedelimmissing"
-        :detail
-         (delim
-          :name "delimclose"
-          :starttext ">")
-        :severity 2)))))
- (msgblock
-  :msgs
-   (msglist
-    (msg
-     :code "closedelimmissing"
-     :detail
-      (delim
-       :name "delimclose"
-       :starttext ">")
-     :severity 2))))`)))
+       :endpos 2)))))`)))
                             (td
                              :nodes
                               (divchildlist
@@ -19857,27 +19837,7 @@ ab
       (textblock
        :text "a"
        :startpos 2
-       :endpos 2))
-    (msgblock
-     :msgs
-      (msglist
-       (msg
-        :code "closedelimmissing"
-        :detail
-         (delim
-          :name "delimclose"
-          :starttext ">")
-        :severity 2)))))
- (msgblock
-  :msgs
-   (msglist
-    (msg
-     :code "closedelimmissing"
-     :detail
-      (delim
-       :name "delimclose"
-       :starttext ">")
-     :severity 2))))`)))))
+       :endpos 2)))))`)))))
                          (tr
                           :nodes
                            (tdlist
@@ -21671,27 +21631,7 @@ ab
       (textblock
        :text "a"
        :startpos 2
-       :endpos 2))
-    (msgblock
-     :msgs
-      (msglist
-       (msg
-        :code "closedelimmissing"
-        :detail
-         (delim
-          :name "delimclose"
-          :starttext ">")
-        :severity 2)))))
- (msgblock
-  :msgs
-   (msglist
-    (msg
-     :code "closedelimmissing"
-     :detail
-      (delim
-       :name "delimclose"
-       :starttext ">")
-     :severity 2))))`)))
+       :endpos 2)))))`)))
                             (td
                              :nodes
                               (divchildlist
@@ -21727,27 +21667,7 @@ ab
       (textblock
        :text "a"
        :startpos 2
-       :endpos 2))
-    (msgblock
-     :msgs
-      (msglist
-       (msg
-        :code "closedelimmissing"
-        :detail
-         (delim
-          :name "delimclose"
-          :starttext ">")
-        :severity 2)))))
- (msgblock
-  :msgs
-   (msglist
-    (msg
-     :code "closedelimmissing"
-     :detail
-      (delim
-       :name "delimclose"
-       :starttext ">")
-     :severity 2))))`)))))
+       :endpos 2)))))`)))))
                          (tr
                           :nodes
                            (tdlist
@@ -32431,14 +32351,7 @@ ab
                                     :unicode-bidi "embed"
                                     :font-family "monospace"
                                     :white-space "pre"))
-                                :text
-                                 `(repl
- (msgblock
-  :msgs
-   (msglist
-    (msg
-     :severity 2
-     :text "Empty delim cannot have more than one child."))))`)))
+                                :text "(repl)")))
                             (td
                              :nodes
                               (divchildlist
@@ -32452,14 +32365,7 @@ ab
                                     :unicode-bidi "embed"
                                     :font-family "monospace"
                                     :white-space "pre"))
-                                :text
-                                 `(repl
- (msgblock
-  :msgs
-   (msglist
-    (msg
-     :severity 2
-     :text "Empty delim cannot have more than one child."))))`)))))
+                                :text "(repl)")))))
                          (tr
                           :nodes
                            (tdlist
@@ -35221,7 +35127,7 @@ ab
  (boolean-exists<-file
   (file
    :name "boolean_exists_from_file.txt"
-   :path "src/test/resources/vx")))`)))
+   :path (string path-test-resources "/vx"))))`)))
                             (td
                              :nodes
                               (divchildlist
@@ -35301,7 +35207,7 @@ ab
  (boolean-write<-file-string
   (file
    :name "boolean_write_from_file_string.txt"
-   :path "src/test/resources/vx")
+   :path (string path-test-resources "/vx"))
   "writetext"))`)))
                             (td
                              :nodes
@@ -35381,12 +35287,12 @@ ab
                                  `(test
  (file
   :name "string_read_from_file.txt"
-  :path "src/test/resources/vx"
+  :path (string path-test-resources "/vx")
   :text "testdata")
  (file-read<-file
   (file
    :name "string_read_from_file.txt"
-   :path "src/test/resources/vx")))`)))
+   :path (string path-test-resources "/vx"))))`)))
                             (td
                              :nodes
                               (divchildlist
@@ -35403,7 +35309,7 @@ ab
                                 :text
                                  `(file
  :name "string_read_from_file.txt"
- :path "src/test/resources/vx"
+ :path "test/resources/vx"
  :text "testdata")`)))
                             (td
                              :nodes
@@ -35421,7 +35327,7 @@ ab
                                 :text
                                  `(file
  :name "string_read_from_file.txt"
- :path "src/test/resources/vx"
+ :path "test/resources/vx"
  :text "testdata")`)))))
                          (tr
                           :nodes
@@ -35636,7 +35542,7 @@ ab
  (string-read<-file
   (file
    :name "string_read_from_file.txt"
-   :path "src/test/resources/vx")))`)))
+   :path (string path-test-resources "/vx"))))`)))
                             (td
                              :nodes
                               (divchildlist
@@ -37140,20 +37046,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  `(xml
- :tag "doc"
- (msgblock
-  :msgs
-   (msglist
-    (msg
-     :code ":invalidxmlclosetag"
-     :detail
-      (anymap
-       :tag "/wrong"
-       :startpos 0
-       :endpos 0
-       :line 0
-       :column 0)
-     :severity 2))))`)))
+ :tag "doc")`)))
                             (td
                              :nodes
                               (divchildlist
@@ -37169,20 +37062,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  `(xml
- :tag "doc"
- (msgblock
-  :msgs
-   (msglist
-    (msg
-     :code ":invalidxmlclosetag"
-     :detail
-      (anymap
-       :tag "/wrong"
-       :startpos 0
-       :endpos 0
-       :line 0
-       :column 0)
-     :severity 2))))`)))))
+ :tag "doc")`)))))
                          (tr
                           :nodes
                            (tdlist
@@ -39291,7 +39171,7 @@ ab
  (boolean-exists<-file
   (file
    :name "testsuite.vxlisp"
-   :path "src/test/resources")))`)))
+   :path path-test-resources)))`)))
                             (td
                              :nodes
                               (divchildlist
@@ -39371,7 +39251,7 @@ ab
  (boolean-exists<-file
   (file
    :name "testsuite.html"
-   :path "src/test/resources")))`)))
+   :path path-test-resources)))`)))
                             (td
                              :nodes
                               (divchildlist
@@ -39451,7 +39331,7 @@ ab
  (boolean-exists<-file
   (file
    :name "testsuitenode.vxlisp"
-   :path "src/test/resources")))`)))
+   :path path-test-resources)))`)))
                             (td
                              :nodes
                               (divchildlist

@@ -3,7 +3,7 @@ namespace AppTest.TestVx;
 
 public class ReplTest {
 
-  static Vx.Test.Type_testcase f_any_from_macro(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_any_from_macro(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -35,7 +35,7 @@ public class ReplTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_any_from_repl(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_any_from_repl(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -127,7 +127,7 @@ public class ReplTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_any_from_script(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_any_from_script(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -151,7 +151,7 @@ public class ReplTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_const_from_string(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_const_from_string(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -185,7 +185,7 @@ public class ReplTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_repl_empty_from_textblock_argmap(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_repl_empty_from_textblock_argmap(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -339,7 +339,7 @@ public class ReplTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_repl_paren_from_textblock_argmap(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_repl_paren_from_textblock_argmap(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -467,7 +467,7 @@ public class ReplTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_repl_from_macro(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_repl_from_macro(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -524,7 +524,7 @@ public class ReplTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_repl_from_script(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_repl_from_script(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -622,7 +622,7 @@ public class ReplTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_repl_from_string_argmap(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_repl_from_string_argmap(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -783,7 +783,7 @@ public class ReplTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_repl_from_textblock(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_repl_from_textblock(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -1104,7 +1104,7 @@ public class ReplTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_repl_from_textblock_argmap(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_repl_from_textblock_argmap(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -1413,7 +1413,7 @@ public class ReplTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_textblock_from_script(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_textblock_from_script(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -1596,7 +1596,7 @@ public class ReplTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_typefunc_from_string(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_typefunc_from_string(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -1631,7 +1631,7 @@ public class ReplTest {
   }
 
   public static Vx.Test.Type_testcaselist test_cases(Vx.Core.Type_context context) {
-    List<Vx.Core.Type_any> arraylisttestcase = Vx.Core.arraylist_from_array(
+    object[] testcases = [
       ReplTest.f_any_from_macro(context),
       ReplTest.f_any_from_repl(context),
       ReplTest.f_any_from_script(context),
@@ -1645,10 +1645,10 @@ public class ReplTest {
       ReplTest.f_repl_from_textblock_argmap(context),
       ReplTest.f_textblock_from_script(context),
       ReplTest.f_typefunc_from_string(context)
-    );
+    ];
     Vx.Test.Type_testcaselist output = Vx.Core.vx_new(
       Vx.Test.t_testcaselist,
-      arraylisttestcase
+      testcases
     );
     return output;
   }

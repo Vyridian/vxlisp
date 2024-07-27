@@ -22,12 +22,12 @@ export default class vx_core_test {
     return vx_core.f_new(
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/core", 
-      "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 14, ":tests", 2, ":total", 14), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 89, ":tests", 230, ":total", 256), 
+      "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 13, ":tests", 2, ":total", 15), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 90, ":tests", 232, ":total", 257), 
       "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 55, ":tests", 74, ":total", 134), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 36, ":tests", 81, ":total", 224), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 36, ":tests", 81, ":total", 225), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 6, ":tests", 5, ":total", 76)
     )
   }
@@ -131,6 +131,7 @@ export default class vx_core_test {
           "newline", 0,
           "notanumber", 0,
           "nothing", 0,
+          "path-test-resources", 0,
           "quote", 0,
           "true", 1
         ),

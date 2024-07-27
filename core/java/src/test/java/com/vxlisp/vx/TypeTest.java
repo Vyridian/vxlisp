@@ -5,7 +5,7 @@ import java.util.List;
 
 public final class TypeTest {
 
-  static Test.Type_testcase f_boolean_from_string_ends(final Core.Type_context context) {
+  public static Test.Type_testcase f_boolean_from_string_ends(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -28,7 +28,7 @@ public final class TypeTest {
     return output;
   }
 
-  static Test.Type_testcase f_boolean_from_string_starts(final Core.Type_context context) {
+  public static Test.Type_testcase f_boolean_from_string_starts(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -51,7 +51,7 @@ public final class TypeTest {
     return output;
   }
 
-  static Test.Type_testcase f_int_from_string_find(final Core.Type_context context) {
+  public static Test.Type_testcase f_int_from_string_find(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -75,7 +75,7 @@ public final class TypeTest {
     return output;
   }
 
-  static Test.Type_testcase f_int_from_string_findkeyword(final Core.Type_context context) {
+  public static Test.Type_testcase f_int_from_string_findkeyword(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -109,7 +109,7 @@ public final class TypeTest {
     return output;
   }
 
-  static Test.Type_testcase f_int_from_string_findlast(final Core.Type_context context) {
+  public static Test.Type_testcase f_int_from_string_findlast(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -133,7 +133,7 @@ public final class TypeTest {
     return output;
   }
 
-  static Test.Type_testcase f_is_string(final Core.Type_context context) {
+  public static Test.Type_testcase f_is_string(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -187,7 +187,7 @@ public final class TypeTest {
     return output;
   }
 
-  static Test.Type_testcase f_is_type(final Core.Type_context context) {
+  public static Test.Type_testcase f_is_type(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -249,7 +249,7 @@ public final class TypeTest {
     return output;
   }
 
-  static Test.Type_testcase f_is_type_from_any_typelist(final Core.Type_context context) {
+  public static Test.Type_testcase f_is_type_from_any_typelist(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -335,7 +335,7 @@ public final class TypeTest {
     return output;
   }
 
-  static Test.Type_testcase f_string_lowercase(final Core.Type_context context) {
+  public static Test.Type_testcase f_string_lowercase(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -359,7 +359,7 @@ public final class TypeTest {
     return output;
   }
 
-  static Test.Type_testcase f_string_outdent(final Core.Type_context context) {
+  public static Test.Type_testcase f_string_outdent(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -393,7 +393,7 @@ public final class TypeTest {
     return output;
   }
 
-  static Test.Type_testcase f_string_trim(final Core.Type_context context) {
+  public static Test.Type_testcase f_string_trim(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -417,7 +417,7 @@ public final class TypeTest {
     return output;
   }
 
-  static Test.Type_testcase f_string_uppercase(final Core.Type_context context) {
+  public static Test.Type_testcase f_string_uppercase(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -441,7 +441,7 @@ public final class TypeTest {
     return output;
   }
 
-  static Test.Type_testcase f_string_from_int(final Core.Type_context context) {
+  public static Test.Type_testcase f_string_from_int(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -511,7 +511,7 @@ public final class TypeTest {
     return output;
   }
 
-  static Test.Type_testcase f_string_from_string_end(final Core.Type_context context) {
+  public static Test.Type_testcase f_string_from_string_end(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -545,7 +545,7 @@ public final class TypeTest {
     return output;
   }
 
-  static Test.Type_testcase f_string_from_string_start(final Core.Type_context context) {
+  public static Test.Type_testcase f_string_from_string_start(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -579,7 +579,7 @@ public final class TypeTest {
     return output;
   }
 
-  static Test.Type_testcase f_string_from_string_start_end(final Core.Type_context context) {
+  public static Test.Type_testcase f_string_from_string_start_end(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -643,7 +643,7 @@ public final class TypeTest {
     return output;
   }
 
-  static Test.Type_testcase f_string_from_stringlist_join(final Core.Type_context context) {
+  public static Test.Type_testcase f_string_from_stringlist_join(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -677,7 +677,7 @@ public final class TypeTest {
     return output;
   }
 
-  static Test.Type_testcase f_stringlist_from_string_split(final Core.Type_context context) {
+  public static Test.Type_testcase f_stringlist_from_string_split(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -709,7 +709,7 @@ public final class TypeTest {
   }
 
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
-    List<Core.Type_any> arraylisttestcase = Core.arraylist_from_array(
+    List<Core.Type_any> testcases = Core.arraylist_from_array(
       TypeTest.f_boolean_from_string_ends(context),
       TypeTest.f_boolean_from_string_starts(context),
       TypeTest.f_int_from_string_find(context),
@@ -731,7 +731,7 @@ public final class TypeTest {
     );
     Test.Type_testcaselist output = Core.vx_new(
       Test.t_testcaselist,
-      arraylisttestcase
+      testcases
     );
     return output;
   }

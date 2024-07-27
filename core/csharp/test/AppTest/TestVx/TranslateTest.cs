@@ -3,7 +3,7 @@ namespace AppTest.TestVx;
 
 public class TranslateTest {
 
-  static Vx.Test.Type_testcase f_translate(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_translate(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -27,7 +27,7 @@ public class TranslateTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_translate_1(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_translate_1(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -62,7 +62,7 @@ public class TranslateTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_translate_from_translation_string(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_translate_from_translation_string(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -102,14 +102,14 @@ public class TranslateTest {
   }
 
   public static Vx.Test.Type_testcaselist test_cases(Vx.Core.Type_context context) {
-    List<Vx.Core.Type_any> arraylisttestcase = Vx.Core.arraylist_from_array(
+    object[] testcases = [
       TranslateTest.f_translate(context),
       TranslateTest.f_translate_1(context),
       TranslateTest.f_translate_from_translation_string(context)
-    );
+    ];
     Vx.Test.Type_testcaselist output = Vx.Core.vx_new(
       Vx.Test.t_testcaselist,
-      arraylisttestcase
+      testcases
     );
     return output;
   }

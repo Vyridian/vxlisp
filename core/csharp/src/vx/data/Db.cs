@@ -41,12 +41,12 @@ public static class Db {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Data.Db.Type_db vx_new(params Object[] vals) {
+    public override Vx.Data.Db.Type_db vx_new(params object[] vals) {
       Vx.Data.Db.Type_db output = Vx.Core.vx_copy(Vx.Data.Db.e_db, vals);
       return output;
     }
 
-    public override Vx.Data.Db.Type_db vx_copy(params Object[] vals) {
+    public override Vx.Data.Db.Type_db vx_copy(params object[] vals) {
       Type_db output = this;
       bool ischanged = false;
       Class_db val = this;
@@ -60,7 +60,7 @@ public static class Db {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -269,12 +269,12 @@ public static class Db {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Data.Db.Type_dbcell vx_new(params Object[] vals) {
+    public override Vx.Data.Db.Type_dbcell vx_new(params object[] vals) {
       Vx.Data.Db.Type_dbcell output = Vx.Core.vx_copy(Vx.Data.Db.e_dbcell, vals);
       return output;
     }
 
-    public override Vx.Data.Db.Type_dbcell vx_copy(params Object[] vals) {
+    public override Vx.Data.Db.Type_dbcell vx_copy(params object[] vals) {
       Type_dbcell output = this;
       bool ischanged = false;
       Class_dbcell val = this;
@@ -296,7 +296,7 @@ public static class Db {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -570,12 +570,12 @@ public static class Db {
       return output;
     }
 
-    public override Vx.Data.Db.Type_dbcellmap vx_new(params Object[] vals) {
+    public override Vx.Data.Db.Type_dbcellmap vx_new(params object[] vals) {
       Vx.Data.Db.Type_dbcellmap output = Vx.Core.vx_copy(Vx.Data.Db.e_dbcellmap, vals);
       return output;
     }
 
-    public override Vx.Data.Db.Type_dbcellmap vx_copy(params Object[] vals) {
+    public override Vx.Data.Db.Type_dbcellmap vx_copy(params object[] vals) {
       Type_dbcellmap output = this;
       bool ischanged = false;
       Class_dbcellmap val = this;
@@ -587,7 +587,7 @@ public static class Db {
       Vx.Core.Type_msg? msg = null;
       string key = "";
       Vx.Core.Type_any? msgval = null;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -746,12 +746,12 @@ public static class Db {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Data.Db.Type_dbfield vx_new(params Object[] vals) {
+    public override Vx.Data.Db.Type_dbfield vx_new(params object[] vals) {
       Vx.Data.Db.Type_dbfield output = Vx.Core.vx_copy(Vx.Data.Db.e_dbfield, vals);
       return output;
     }
 
-    public override Vx.Data.Db.Type_dbfield vx_copy(params Object[] vals) {
+    public override Vx.Data.Db.Type_dbfield vx_copy(params object[] vals) {
       Type_dbfield output = this;
       bool ischanged = false;
       Class_dbfield val = this;
@@ -769,7 +769,7 @@ public static class Db {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -1001,12 +1001,12 @@ public static class Db {
       return output;
     }
 
-    public override Vx.Data.Db.Type_dbfieldmap vx_new(params Object[] vals) {
+    public override Vx.Data.Db.Type_dbfieldmap vx_new(params object[] vals) {
       Vx.Data.Db.Type_dbfieldmap output = Vx.Core.vx_copy(Vx.Data.Db.e_dbfieldmap, vals);
       return output;
     }
 
-    public override Vx.Data.Db.Type_dbfieldmap vx_copy(params Object[] vals) {
+    public override Vx.Data.Db.Type_dbfieldmap vx_copy(params object[] vals) {
       Type_dbfieldmap output = this;
       bool ischanged = false;
       Class_dbfieldmap val = this;
@@ -1018,7 +1018,7 @@ public static class Db {
       Vx.Core.Type_msg? msg = null;
       string key = "";
       Vx.Core.Type_any? msgval = null;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -1119,12 +1119,12 @@ public static class Db {
 
   public class Class_dbid : Vx.Core.Class_base, Type_dbid {
 
-    public override Vx.Data.Db.Type_dbid vx_new(params Object[] vals) {
+    public override Vx.Data.Db.Type_dbid vx_new(params object[] vals) {
       Vx.Data.Db.Type_dbid output = Vx.Core.vx_copy(Vx.Data.Db.e_dbid, vals);
       return output;
     }
 
-    public override Vx.Data.Db.Type_dbid vx_copy(params Object[] vals) {
+    public override Vx.Data.Db.Type_dbid vx_copy(params object[] vals) {
       Type_dbid output = this;
       bool ischanged = false;
       Class_dbid val = this;
@@ -1223,12 +1223,12 @@ public static class Db {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Data.Db.Type_dblink vx_new(params Object[] vals) {
+    public override Vx.Data.Db.Type_dblink vx_new(params object[] vals) {
       Vx.Data.Db.Type_dblink output = Vx.Core.vx_copy(Vx.Data.Db.e_dblink, vals);
       return output;
     }
 
-    public override Vx.Data.Db.Type_dblink vx_copy(params Object[] vals) {
+    public override Vx.Data.Db.Type_dblink vx_copy(params object[] vals) {
       Type_dblink output = this;
       bool ischanged = false;
       Class_dblink val = this;
@@ -1244,7 +1244,7 @@ public static class Db {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -1413,12 +1413,12 @@ public static class Db {
       return this.vx_dblink(index);
     }
 
-    public override Vx.Data.Db.Type_dblinklist vx_new(params Object[] vals) {
+    public override Vx.Data.Db.Type_dblinklist vx_new(params object[] vals) {
       Vx.Data.Db.Type_dblinklist output = Vx.Core.vx_copy(Vx.Data.Db.e_dblinklist, vals);
       return output;
     }
 
-    public override Vx.Data.Db.Type_dblinklist vx_copy(params Object[] vals) {
+    public override Vx.Data.Db.Type_dblinklist vx_copy(params object[] vals) {
       Type_dblinklist output = this;
       bool ischanged = false;
       Class_dblinklist val = this;
@@ -1428,7 +1428,7 @@ public static class Db {
       }
       List<Vx.Data.Db.Type_dblink> listval = new List<Vx.Data.Db.Type_dblink>(val.vx_listdblink());
       Vx.Core.Type_msg msg;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -1442,8 +1442,8 @@ public static class Db {
         } else if (valsub is Vx.Data.Db.Type_dblinklist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listdblink());
-        } else if (valsub is List<object> listunknown) {
-          foreach (Object item in listunknown) {
+        } else if (valsub is List<Vx.Core.Type_any> listany) {
+          foreach (Vx.Core.Type_any item in listany) {
             if (false) {
             } else if (item is Vx.Data.Db.Type_dblink valitem) {
               ischanged = true;
@@ -1550,12 +1550,12 @@ public static class Db {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Data.Db.Type_dbnode vx_new(params Object[] vals) {
+    public override Vx.Data.Db.Type_dbnode vx_new(params object[] vals) {
       Vx.Data.Db.Type_dbnode output = Vx.Core.vx_copy(Vx.Data.Db.e_dbnode, vals);
       return output;
     }
 
-    public override Vx.Data.Db.Type_dbnode vx_copy(params Object[] vals) {
+    public override Vx.Data.Db.Type_dbnode vx_copy(params object[] vals) {
       Type_dbnode output = this;
       bool ischanged = false;
       Class_dbnode val = this;
@@ -1571,7 +1571,7 @@ public static class Db {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -1798,12 +1798,12 @@ public static class Db {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Data.Db.Type_dbnote vx_new(params Object[] vals) {
+    public override Vx.Data.Db.Type_dbnote vx_new(params object[] vals) {
       Vx.Data.Db.Type_dbnote output = Vx.Core.vx_copy(Vx.Data.Db.e_dbnote, vals);
       return output;
     }
 
-    public override Vx.Data.Db.Type_dbnote vx_copy(params Object[] vals) {
+    public override Vx.Data.Db.Type_dbnote vx_copy(params object[] vals) {
       Type_dbnote output = this;
       bool ischanged = false;
       Class_dbnote val = this;
@@ -1825,7 +1825,7 @@ public static class Db {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -2103,12 +2103,12 @@ public static class Db {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Data.Db.Type_dbtable vx_new(params Object[] vals) {
+    public override Vx.Data.Db.Type_dbtable vx_new(params object[] vals) {
       Vx.Data.Db.Type_dbtable output = Vx.Core.vx_copy(Vx.Data.Db.e_dbtable, vals);
       return output;
     }
 
-    public override Vx.Data.Db.Type_dbtable vx_copy(params Object[] vals) {
+    public override Vx.Data.Db.Type_dbtable vx_copy(params object[] vals) {
       Type_dbtable output = this;
       bool ischanged = false;
       Class_dbtable val = this;
@@ -2128,7 +2128,7 @@ public static class Db {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -2415,12 +2415,12 @@ public static class Db {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Data.Db.Type_dbvalue vx_new(params Object[] vals) {
+    public override Vx.Data.Db.Type_dbvalue vx_new(params object[] vals) {
       Vx.Data.Db.Type_dbvalue output = Vx.Core.vx_copy(Vx.Data.Db.e_dbvalue, vals);
       return output;
     }
 
-    public override Vx.Data.Db.Type_dbvalue vx_copy(params Object[] vals) {
+    public override Vx.Data.Db.Type_dbvalue vx_copy(params object[] vals) {
       Type_dbvalue output = this;
       bool ischanged = false;
       Class_dbvalue val = this;
@@ -2444,7 +2444,7 @@ public static class Db {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -2661,7 +2661,7 @@ public static class Db {
   public static Type_dbvalue t_dbvalue = new Class_dbvalue();
 
   public static class PackageRunOnce {
-    public static void RunOnce() {
+    public static bool RunOnce() {
     Vx.Core.Map<string, Vx.Core.Type_any> maptype = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
     Vx.Core.Map<string, Vx.Core.Type_any> mapconst = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
     Vx.Core.Map<string, Vx.Core.Type_func> mapfunc = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_func>();
@@ -2678,7 +2678,10 @@ public static class Db {
     maptype.put("dbtable", Vx.Data.Db.t_dbtable);
     maptype.put("dbvalue", Vx.Data.Db.t_dbvalue);
     Vx.Core.vx_global_package_set("vx/data/db", maptype, mapconst, mapfunc);
+      return true;
     }
   }
+
+  public static bool ranonce = PackageRunOnce.RunOnce();
 
 }

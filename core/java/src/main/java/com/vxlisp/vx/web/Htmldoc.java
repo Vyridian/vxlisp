@@ -450,7 +450,7 @@ public final class Htmldoc {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Core.Type_boolean> future = Htmldoc.f_boolean_write_stylesheet_from_string(text);
       output = Core.vx_async_from_async(Core.t_any, future);
@@ -468,7 +468,7 @@ public final class Htmldoc {
   public static final Func_boolean_write_stylesheet_from_string t_boolean_write_stylesheet_from_string = new Htmldoc.Class_boolean_write_stylesheet_from_string();
 
   public static CompletableFuture<Core.Type_boolean> f_boolean_write_stylesheet_from_string(final Core.Type_string text) {
-    CompletableFuture<Core.Type_boolean> output = Core.vx_async_new_completed(Core.e_boolean);
+    CompletableFuture<Core.Type_boolean> output = Core.vx_async_new_from_value(Core.e_boolean);
     return output;
   }
 
@@ -815,7 +815,7 @@ public final class Htmldoc {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Html.Type_stylesheet stylesheet = Core.f_any_from_any(Html.t_stylesheet, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Core.Type_boolean> future = Htmldoc.f_boolean_write_from_stylesheet(stylesheet);
       output = Core.vx_async_from_async(Core.t_any, future);
@@ -833,13 +833,13 @@ public final class Htmldoc {
   public static final Func_boolean_write_from_stylesheet t_boolean_write_from_stylesheet = new Htmldoc.Class_boolean_write_from_stylesheet();
 
   public static CompletableFuture<Core.Type_boolean> f_boolean_write_from_stylesheet(final Html.Type_stylesheet stylesheet) {
-    CompletableFuture<Core.Type_boolean> output = Core.vx_async_new_completed(Core.e_boolean);
+    CompletableFuture<Core.Type_boolean> output = Core.vx_async_new_from_value(Core.e_boolean);
     output = Core.f_let_async(
       Core.t_boolean,
       Core.t_any_from_func_async.vx_fn_new(() -> {
         final Core.Type_string text = Htmldoc.f_string_from_stylesheet(stylesheet);
         final CompletableFuture<Core.Type_boolean> future_iswrite = Htmldoc.f_boolean_write_stylesheet_from_string(text);
-        CompletableFuture<Core.Type_any> output_1 = Core.vx_async_from_async_fn(future_iswrite, (iswrite) -> {;
+        CompletableFuture<Core.Type_any> output_1 = Core.vx_async_from_async_fn(future_iswrite, (iswrite) -> {
           Core.Type_any output_2 = iswrite;
           return output_2;
         });

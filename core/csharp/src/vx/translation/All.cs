@@ -15,12 +15,12 @@ public static class All {
 
   public class Class_context_all : Vx.Core.Class_base, Func_context_all {
 
-    public override Vx.Translation.All.Func_context_all vx_new(params Object[] vals) {
+    public override Vx.Translation.All.Func_context_all vx_new(params object[] vals) {
       Class_context_all output = new Class_context_all();
       return output;
     }
 
-    public override Vx.Translation.All.Func_context_all vx_copy(params Object[] vals) {
+    public override Vx.Translation.All.Func_context_all vx_copy(params object[] vals) {
       Class_context_all output = new Class_context_all();
       return output;
     }
@@ -119,12 +119,12 @@ public static class All {
 
   public class Class_translationmap_all : Vx.Core.Class_base, Func_translationmap_all {
 
-    public override Vx.Translation.All.Func_translationmap_all vx_new(params Object[] vals) {
+    public override Vx.Translation.All.Func_translationmap_all vx_new(params object[] vals) {
       Class_translationmap_all output = new Class_translationmap_all();
       return output;
     }
 
-    public override Vx.Translation.All.Func_translationmap_all vx_copy(params Object[] vals) {
+    public override Vx.Translation.All.Func_translationmap_all vx_copy(params object[] vals) {
       Class_translationmap_all output = new Class_translationmap_all();
       return output;
     }
@@ -191,14 +191,17 @@ public static class All {
 
 
   public static class PackageRunOnce {
-    public static void RunOnce() {
+    public static bool RunOnce() {
     Vx.Core.Map<string, Vx.Core.Type_any> maptype = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
     Vx.Core.Map<string, Vx.Core.Type_any> mapconst = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
     Vx.Core.Map<string, Vx.Core.Type_func> mapfunc = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_func>();
     mapfunc.put("context-all", Vx.Translation.All.t_context_all);
     mapfunc.put("translationmap-all", Vx.Translation.All.t_translationmap_all);
     Vx.Core.vx_global_package_set("vx/translation/all", maptype, mapconst, mapfunc);
+      return true;
     }
   }
+
+  public static bool ranonce = PackageRunOnce.RunOnce();
 
 }

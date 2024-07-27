@@ -85,12 +85,12 @@ public static class Repl {
       return this.vx_string(index);
     }
 
-    public override Vx.Repl.Type_liblist vx_new(params Object[] vals) {
+    public override Vx.Repl.Type_liblist vx_new(params object[] vals) {
       Vx.Repl.Type_liblist output = Vx.Core.vx_copy(Vx.Repl.e_liblist, vals);
       return output;
     }
 
-    public override Vx.Repl.Type_liblist vx_copy(params Object[] vals) {
+    public override Vx.Repl.Type_liblist vx_copy(params object[] vals) {
       Type_liblist output = this;
       bool ischanged = false;
       Class_liblist val = this;
@@ -100,7 +100,7 @@ public static class Repl {
       }
       List<Vx.Core.Type_string> listval = new List<Vx.Core.Type_string>(val.vx_liststring());
       Vx.Core.Type_msg msg;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -108,14 +108,14 @@ public static class Repl {
         } else if (valsub is Vx.Core.Type_string allowsub) {
           ischanged = true;
           listval.Add(allowsub);
-        } else if (valsub is Vx.Core.Type_string) {
+        } else if (valsub is string) {
           ischanged = true;
           listval.Add(Vx.Core.vx_new(Vx.Core.t_string, valsub));
         } else if (valsub is Vx.Repl.Type_liblist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_liststring());
-        } else if (valsub is List<object> listunknown) {
-          foreach (Object item in listunknown) {
+        } else if (valsub is List<Vx.Core.Type_any> listany) {
+          foreach (Vx.Core.Type_any item in listany) {
             if (false) {
             } else if (item is Vx.Core.Type_string valitem) {
               ischanged = true;
@@ -282,12 +282,12 @@ public static class Repl {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Repl.Type_repl vx_new(params Object[] vals) {
+    public override Vx.Repl.Type_repl vx_new(params object[] vals) {
       Vx.Repl.Type_repl output = Vx.Core.vx_copy(Vx.Repl.e_repl, vals);
       return output;
     }
 
-    public override Vx.Repl.Type_repl vx_copy(params Object[] vals) {
+    public override Vx.Repl.Type_repl vx_copy(params object[] vals) {
       Type_repl output = this;
       bool ischanged = false;
       Class_repl val = this;
@@ -311,7 +311,7 @@ public static class Repl {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -601,12 +601,12 @@ public static class Repl {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Repl.Type_replarglist vx_new(params Object[] vals) {
+    public override Vx.Repl.Type_replarglist vx_new(params object[] vals) {
       Vx.Repl.Type_replarglist output = Vx.Core.vx_copy(Vx.Repl.e_replarglist, vals);
       return output;
     }
 
-    public override Vx.Repl.Type_replarglist vx_copy(params Object[] vals) {
+    public override Vx.Repl.Type_replarglist vx_copy(params object[] vals) {
       Type_replarglist output = this;
       bool ischanged = false;
       Class_replarglist val = this;
@@ -624,7 +624,7 @@ public static class Repl {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -817,12 +817,12 @@ public static class Repl {
       return this.vx_repl(index);
     }
 
-    public override Vx.Repl.Type_repllist vx_new(params Object[] vals) {
+    public override Vx.Repl.Type_repllist vx_new(params object[] vals) {
       Vx.Repl.Type_repllist output = Vx.Core.vx_copy(Vx.Repl.e_repllist, vals);
       return output;
     }
 
-    public override Vx.Repl.Type_repllist vx_copy(params Object[] vals) {
+    public override Vx.Repl.Type_repllist vx_copy(params object[] vals) {
       Type_repllist output = this;
       bool ischanged = false;
       Class_repllist val = this;
@@ -832,7 +832,7 @@ public static class Repl {
       }
       List<Vx.Repl.Type_repl> listval = new List<Vx.Repl.Type_repl>(val.vx_listrepl());
       Vx.Core.Type_msg msg;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -846,8 +846,8 @@ public static class Repl {
         } else if (valsub is Vx.Repl.Type_repllist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listrepl());
-        } else if (valsub is List<object> listunknown) {
-          foreach (Object item in listunknown) {
+        } else if (valsub is List<Vx.Core.Type_any> listany) {
+          foreach (Vx.Core.Type_any item in listany) {
             if (false) {
             } else if (item is Vx.Repl.Type_repl valitem) {
               ischanged = true;
@@ -1092,12 +1092,12 @@ public static class Repl {
 
   public class Class_any_repl_from_functype_args : Vx.Core.Class_base, Func_any_repl_from_functype_args {
 
-    public override Vx.Repl.Func_any_repl_from_functype_args vx_new(params Object[] vals) {
+    public override Vx.Repl.Func_any_repl_from_functype_args vx_new(params object[] vals) {
       Class_any_repl_from_functype_args output = new Class_any_repl_from_functype_args();
       return output;
     }
 
-    public override Vx.Repl.Func_any_repl_from_functype_args vx_copy(params Object[] vals) {
+    public override Vx.Repl.Func_any_repl_from_functype_args vx_copy(params object[] vals) {
       Class_any_repl_from_functype_args output = new Class_any_repl_from_functype_args();
       return output;
     }
@@ -1175,12 +1175,12 @@ public static class Repl {
 
   public class Class_any_from_liblist_string : Vx.Core.Class_base, Func_any_from_liblist_string {
 
-    public override Vx.Repl.Func_any_from_liblist_string vx_new(params Object[] vals) {
+    public override Vx.Repl.Func_any_from_liblist_string vx_new(params object[] vals) {
       Class_any_from_liblist_string output = new Class_any_from_liblist_string();
       return output;
     }
 
-    public override Vx.Repl.Func_any_from_liblist_string vx_copy(params Object[] vals) {
+    public override Vx.Repl.Func_any_from_liblist_string vx_copy(params object[] vals) {
       Class_any_from_liblist_string output = new Class_any_from_liblist_string();
       return output;
     }
@@ -1263,12 +1263,12 @@ public static class Repl {
 
   public class Class_any_from_macro : Vx.Core.Class_base, Func_any_from_macro {
 
-    public override Vx.Repl.Func_any_from_macro vx_new(params Object[] vals) {
+    public override Vx.Repl.Func_any_from_macro vx_new(params object[] vals) {
       Class_any_from_macro output = new Class_any_from_macro();
       return output;
     }
 
-    public override Vx.Repl.Func_any_from_macro vx_copy(params Object[] vals) {
+    public override Vx.Repl.Func_any_from_macro vx_copy(params object[] vals) {
       Class_any_from_macro output = new Class_any_from_macro();
       return output;
     }
@@ -1364,12 +1364,12 @@ public static class Repl {
 
   public class Class_any_from_repl : Vx.Core.Class_base, Func_any_from_repl {
 
-    public override Vx.Repl.Func_any_from_repl vx_new(params Object[] vals) {
+    public override Vx.Repl.Func_any_from_repl vx_new(params object[] vals) {
       Class_any_from_repl output = new Class_any_from_repl();
       return output;
     }
 
-    public override Vx.Repl.Func_any_from_repl vx_copy(params Object[] vals) {
+    public override Vx.Repl.Func_any_from_repl vx_copy(params object[] vals) {
       Class_any_from_repl output = new Class_any_from_repl();
       return output;
     }
@@ -1491,12 +1491,12 @@ public static class Repl {
 
   public class Class_any_from_script : Vx.Core.Class_base, Func_any_from_script {
 
-    public override Vx.Repl.Func_any_from_script vx_new(params Object[] vals) {
+    public override Vx.Repl.Func_any_from_script vx_new(params object[] vals) {
       Class_any_from_script output = new Class_any_from_script();
       return output;
     }
 
-    public override Vx.Repl.Func_any_from_script vx_copy(params Object[] vals) {
+    public override Vx.Repl.Func_any_from_script vx_copy(params object[] vals) {
       Class_any_from_script output = new Class_any_from_script();
       return output;
     }
@@ -1591,12 +1591,12 @@ public static class Repl {
 
   public class Class_anylist_from_repllist : Vx.Core.Class_base, Func_anylist_from_repllist {
 
-    public override Vx.Repl.Func_anylist_from_repllist vx_new(params Object[] vals) {
+    public override Vx.Repl.Func_anylist_from_repllist vx_new(params object[] vals) {
       Class_anylist_from_repllist output = new Class_anylist_from_repllist();
       return output;
     }
 
-    public override Vx.Repl.Func_anylist_from_repllist vx_copy(params Object[] vals) {
+    public override Vx.Repl.Func_anylist_from_repllist vx_copy(params object[] vals) {
       Class_anylist_from_repllist output = new Class_anylist_from_repllist();
       return output;
     }
@@ -1693,12 +1693,12 @@ public static class Repl {
 
   public class Class_argmap_from_textblock_argmap : Vx.Core.Class_base, Func_argmap_from_textblock_argmap {
 
-    public override Vx.Repl.Func_argmap_from_textblock_argmap vx_new(params Object[] vals) {
+    public override Vx.Repl.Func_argmap_from_textblock_argmap vx_new(params object[] vals) {
       Class_argmap_from_textblock_argmap output = new Class_argmap_from_textblock_argmap();
       return output;
     }
 
-    public override Vx.Repl.Func_argmap_from_textblock_argmap vx_copy(params Object[] vals) {
+    public override Vx.Repl.Func_argmap_from_textblock_argmap vx_copy(params object[] vals) {
       Class_argmap_from_textblock_argmap output = new Class_argmap_from_textblock_argmap();
       return output;
     }
@@ -1781,12 +1781,12 @@ public static class Repl {
 
   public class Class_const_from_string : Vx.Core.Class_base, Func_const_from_string {
 
-    public override Vx.Repl.Func_const_from_string vx_new(params Object[] vals) {
+    public override Vx.Repl.Func_const_from_string vx_new(params object[] vals) {
       Class_const_from_string output = new Class_const_from_string();
       return output;
     }
 
-    public override Vx.Repl.Func_const_from_string vx_copy(params Object[] vals) {
+    public override Vx.Repl.Func_const_from_string vx_copy(params object[] vals) {
       Class_const_from_string output = new Class_const_from_string();
       return output;
     }
@@ -1908,12 +1908,12 @@ public static class Repl {
 
   public class Class_repl_bracket_from_textblock_argmap : Vx.Core.Class_base, Func_repl_bracket_from_textblock_argmap {
 
-    public override Vx.Repl.Func_repl_bracket_from_textblock_argmap vx_new(params Object[] vals) {
+    public override Vx.Repl.Func_repl_bracket_from_textblock_argmap vx_new(params object[] vals) {
       Class_repl_bracket_from_textblock_argmap output = new Class_repl_bracket_from_textblock_argmap();
       return output;
     }
 
-    public override Vx.Repl.Func_repl_bracket_from_textblock_argmap vx_copy(params Object[] vals) {
+    public override Vx.Repl.Func_repl_bracket_from_textblock_argmap vx_copy(params object[] vals) {
       Class_repl_bracket_from_textblock_argmap output = new Class_repl_bracket_from_textblock_argmap();
       return output;
     }
@@ -1991,12 +1991,12 @@ public static class Repl {
 
   public class Class_repl_empty_from_textblock_argmap : Vx.Core.Class_base, Func_repl_empty_from_textblock_argmap {
 
-    public override Vx.Repl.Func_repl_empty_from_textblock_argmap vx_new(params Object[] vals) {
+    public override Vx.Repl.Func_repl_empty_from_textblock_argmap vx_new(params object[] vals) {
       Class_repl_empty_from_textblock_argmap output = new Class_repl_empty_from_textblock_argmap();
       return output;
     }
 
-    public override Vx.Repl.Func_repl_empty_from_textblock_argmap vx_copy(params Object[] vals) {
+    public override Vx.Repl.Func_repl_empty_from_textblock_argmap vx_copy(params object[] vals) {
       Class_repl_empty_from_textblock_argmap output = new Class_repl_empty_from_textblock_argmap();
       return output;
     }
@@ -2113,12 +2113,12 @@ public static class Repl {
 
   public class Class_repl_paren_from_textblock_argmap : Vx.Core.Class_base, Func_repl_paren_from_textblock_argmap {
 
-    public override Vx.Repl.Func_repl_paren_from_textblock_argmap vx_new(params Object[] vals) {
+    public override Vx.Repl.Func_repl_paren_from_textblock_argmap vx_new(params object[] vals) {
       Class_repl_paren_from_textblock_argmap output = new Class_repl_paren_from_textblock_argmap();
       return output;
     }
 
-    public override Vx.Repl.Func_repl_paren_from_textblock_argmap vx_copy(params Object[] vals) {
+    public override Vx.Repl.Func_repl_paren_from_textblock_argmap vx_copy(params object[] vals) {
       Class_repl_paren_from_textblock_argmap output = new Class_repl_paren_from_textblock_argmap();
       return output;
     }
@@ -2269,12 +2269,12 @@ public static class Repl {
 
   public class Class_repl_from_liblist_string : Vx.Core.Class_base, Func_repl_from_liblist_string {
 
-    public override Vx.Repl.Func_repl_from_liblist_string vx_new(params Object[] vals) {
+    public override Vx.Repl.Func_repl_from_liblist_string vx_new(params object[] vals) {
       Class_repl_from_liblist_string output = new Class_repl_from_liblist_string();
       return output;
     }
 
-    public override Vx.Repl.Func_repl_from_liblist_string vx_copy(params Object[] vals) {
+    public override Vx.Repl.Func_repl_from_liblist_string vx_copy(params object[] vals) {
       Class_repl_from_liblist_string output = new Class_repl_from_liblist_string();
       return output;
     }
@@ -2348,12 +2348,12 @@ public static class Repl {
 
   public class Class_repl_from_macro : Vx.Core.Class_base, Func_repl_from_macro {
 
-    public override Vx.Repl.Func_repl_from_macro vx_new(params Object[] vals) {
+    public override Vx.Repl.Func_repl_from_macro vx_new(params object[] vals) {
       Class_repl_from_macro output = new Class_repl_from_macro();
       return output;
     }
 
-    public override Vx.Repl.Func_repl_from_macro vx_copy(params Object[] vals) {
+    public override Vx.Repl.Func_repl_from_macro vx_copy(params object[] vals) {
       Class_repl_from_macro output = new Class_repl_from_macro();
       return output;
     }
@@ -2481,12 +2481,12 @@ public static class Repl {
 
   public class Class_repl_from_script : Vx.Core.Class_base, Func_repl_from_script {
 
-    public override Vx.Repl.Func_repl_from_script vx_new(params Object[] vals) {
+    public override Vx.Repl.Func_repl_from_script vx_new(params object[] vals) {
       Class_repl_from_script output = new Class_repl_from_script();
       return output;
     }
 
-    public override Vx.Repl.Func_repl_from_script vx_copy(params Object[] vals) {
+    public override Vx.Repl.Func_repl_from_script vx_copy(params object[] vals) {
       Class_repl_from_script output = new Class_repl_from_script();
       return output;
     }
@@ -2580,12 +2580,12 @@ public static class Repl {
 
   public class Class_repl_from_string_argmap : Vx.Core.Class_base, Func_repl_from_string_argmap {
 
-    public override Vx.Repl.Func_repl_from_string_argmap vx_new(params Object[] vals) {
+    public override Vx.Repl.Func_repl_from_string_argmap vx_new(params object[] vals) {
       Class_repl_from_string_argmap output = new Class_repl_from_string_argmap();
       return output;
     }
 
-    public override Vx.Repl.Func_repl_from_string_argmap vx_copy(params Object[] vals) {
+    public override Vx.Repl.Func_repl_from_string_argmap vx_copy(params object[] vals) {
       Class_repl_from_string_argmap output = new Class_repl_from_string_argmap();
       return output;
     }
@@ -2815,12 +2815,12 @@ public static class Repl {
 
   public class Class_repl_from_textblock : Vx.Core.Class_base, Func_repl_from_textblock {
 
-    public override Vx.Repl.Func_repl_from_textblock vx_new(params Object[] vals) {
+    public override Vx.Repl.Func_repl_from_textblock vx_new(params object[] vals) {
       Class_repl_from_textblock output = new Class_repl_from_textblock();
       return output;
     }
 
-    public override Vx.Repl.Func_repl_from_textblock vx_copy(params Object[] vals) {
+    public override Vx.Repl.Func_repl_from_textblock vx_copy(params object[] vals) {
       Class_repl_from_textblock output = new Class_repl_from_textblock();
       return output;
     }
@@ -2912,12 +2912,12 @@ public static class Repl {
 
   public class Class_repl_from_textblock_argmap : Vx.Core.Class_base, Func_repl_from_textblock_argmap {
 
-    public override Vx.Repl.Func_repl_from_textblock_argmap vx_new(params Object[] vals) {
+    public override Vx.Repl.Func_repl_from_textblock_argmap vx_new(params object[] vals) {
       Class_repl_from_textblock_argmap output = new Class_repl_from_textblock_argmap();
       return output;
     }
 
-    public override Vx.Repl.Func_repl_from_textblock_argmap vx_copy(params Object[] vals) {
+    public override Vx.Repl.Func_repl_from_textblock_argmap vx_copy(params object[] vals) {
       Class_repl_from_textblock_argmap output = new Class_repl_from_textblock_argmap();
       return output;
     }
@@ -3025,12 +3025,12 @@ public static class Repl {
 
   public class Class_replarglist_from_replarglist_textblock_argmap : Vx.Core.Class_base, Func_replarglist_from_replarglist_textblock_argmap {
 
-    public override Vx.Repl.Func_replarglist_from_replarglist_textblock_argmap vx_new(params Object[] vals) {
+    public override Vx.Repl.Func_replarglist_from_replarglist_textblock_argmap vx_new(params object[] vals) {
       Class_replarglist_from_replarglist_textblock_argmap output = new Class_replarglist_from_replarglist_textblock_argmap();
       return output;
     }
 
-    public override Vx.Repl.Func_replarglist_from_replarglist_textblock_argmap vx_copy(params Object[] vals) {
+    public override Vx.Repl.Func_replarglist_from_replarglist_textblock_argmap vx_copy(params object[] vals) {
       Class_replarglist_from_replarglist_textblock_argmap output = new Class_replarglist_from_replarglist_textblock_argmap();
       return output;
     }
@@ -3274,12 +3274,12 @@ public static class Repl {
 
   public class Class_repllist_from_textblocklist_argmap : Vx.Core.Class_base, Func_repllist_from_textblocklist_argmap {
 
-    public override Vx.Repl.Func_repllist_from_textblocklist_argmap vx_new(params Object[] vals) {
+    public override Vx.Repl.Func_repllist_from_textblocklist_argmap vx_new(params object[] vals) {
       Class_repllist_from_textblocklist_argmap output = new Class_repllist_from_textblocklist_argmap();
       return output;
     }
 
-    public override Vx.Repl.Func_repllist_from_textblocklist_argmap vx_copy(params Object[] vals) {
+    public override Vx.Repl.Func_repllist_from_textblocklist_argmap vx_copy(params object[] vals) {
       Class_repllist_from_textblocklist_argmap output = new Class_repllist_from_textblocklist_argmap();
       return output;
     }
@@ -3363,12 +3363,12 @@ public static class Repl {
 
   public class Class_textblock_from_script : Vx.Core.Class_base, Func_textblock_from_script {
 
-    public override Vx.Repl.Func_textblock_from_script vx_new(params Object[] vals) {
+    public override Vx.Repl.Func_textblock_from_script vx_new(params object[] vals) {
       Class_textblock_from_script output = new Class_textblock_from_script();
       return output;
     }
 
-    public override Vx.Repl.Func_textblock_from_script vx_copy(params Object[] vals) {
+    public override Vx.Repl.Func_textblock_from_script vx_copy(params object[] vals) {
       Class_textblock_from_script output = new Class_textblock_from_script();
       return output;
     }
@@ -3457,12 +3457,12 @@ public static class Repl {
 
   public class Class_typefunc_from_string : Vx.Core.Class_base, Func_typefunc_from_string {
 
-    public override Vx.Repl.Func_typefunc_from_string vx_new(params Object[] vals) {
+    public override Vx.Repl.Func_typefunc_from_string vx_new(params object[] vals) {
       Class_typefunc_from_string output = new Class_typefunc_from_string();
       return output;
     }
 
-    public override Vx.Repl.Func_typefunc_from_string vx_copy(params Object[] vals) {
+    public override Vx.Repl.Func_typefunc_from_string vx_copy(params object[] vals) {
       Class_typefunc_from_string output = new Class_typefunc_from_string();
       return output;
     }
@@ -3585,7 +3585,7 @@ public static class Repl {
 
 
   public static class PackageRunOnce {
-    public static void RunOnce() {
+    public static bool RunOnce() {
     Const_delimvxlisp.const_new(c_delimvxlisp);
     Const_delimvxlispbracket.const_new(c_delimvxlispbracket);
     Const_delimvxlispparen.const_new(c_delimvxlispparen);
@@ -3621,7 +3621,10 @@ public static class Repl {
     mapfunc.put("textblock<-script", Vx.Repl.t_textblock_from_script);
     mapfunc.put("typefunc<-string", Vx.Repl.t_typefunc_from_string);
     Vx.Core.vx_global_package_set("vx/repl", maptype, mapconst, mapfunc);
+      return true;
     }
   }
+
+  public static bool ranonce = PackageRunOnce.RunOnce();
 
 }

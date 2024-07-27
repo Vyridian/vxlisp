@@ -15,6 +15,17 @@ public class AppTest(Xunit.Abstractions.ITestOutputHelper output) {
   public static Vx.Core.Type_context context = Vx.Translation.En.f_context_test(arglist);
 
   [Fact]
+  public void test_basics() {
+    TestLib.test_helloworld();
+    TestLib.test_async_new_from_value();
+    TestLib.test_async_from_async_fn();
+    TestLib.test_list_from_list_async();
+    TestLib.test_pathfull_from_file();
+    TestLib.test_read_file();
+    TestLib.test_write_file();
+  }
+
+  [Fact]
   public void test_vx_core() {
     Vx.Test.Type_testpackage testpackage = TestVx.CoreTest.test_package(context);
     TestLib.run_testpackage_async(testpackage);

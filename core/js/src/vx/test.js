@@ -449,7 +449,7 @@ export default class vx_test {
       ":name",
       "testsuite.vxlisp",
       ":path",
-      "src/test/resources"
+      vx_core.c_path_test_resources
     )
     return output
   }
@@ -474,7 +474,7 @@ export default class vx_test {
       ":name",
       "testsuite.html",
       ":path",
-      "src/test/resources"
+      vx_core.c_path_test_resources
     )
     return output
   }
@@ -499,7 +499,7 @@ export default class vx_test {
       ":name",
       "testsuitenode.vxlisp",
       ":path",
-      "src/test/resources"
+      vx_core.c_path_test_resources
     )
     return output
   }

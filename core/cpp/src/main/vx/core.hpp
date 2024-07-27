@@ -351,6 +351,9 @@ namespace vx_core {
   class Class_nothing;
   typedef Class_nothing* Const_nothing;
   extern Const_nothing c_nothing;
+  class Class_path_test_resources;
+  typedef Class_path_test_resources* Const_path_test_resources;
+  extern Const_path_test_resources c_path_test_resources;
   class Class_quote;
   typedef Class_quote* Const_quote;
   extern Const_quote c_quote;
@@ -5767,6 +5770,13 @@ namespace vx_core {
   class Class_nothing : public vx_core::Class_string {
   public:
     static void vx_const_new(vx_core::Const_nothing output);
+    std::string vx_string() const override;
+  };
+
+  // (const path-test-resources)
+  class Class_path_test_resources : public vx_core::Class_string {
+  public:
+    static void vx_const_new(vx_core::Const_path_test_resources output);
     std::string vx_string() const override;
   };
 

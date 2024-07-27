@@ -116,12 +116,12 @@ public static class Event {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Event.Type_event vx_new(params Object[] vals) {
+    public override Vx.Event.Type_event vx_new(params object[] vals) {
       Vx.Event.Type_event output = Vx.Core.vx_copy(Vx.Event.e_event, vals);
       return output;
     }
 
-    public override Vx.Event.Type_event vx_copy(params Object[] vals) {
+    public override Vx.Event.Type_event vx_copy(params object[] vals) {
       Type_event output = this;
       bool ischanged = false;
       Class_event val = this;
@@ -145,7 +145,7 @@ public static class Event {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -407,12 +407,12 @@ public static class Event {
       return this.vx_event(index);
     }
 
-    public override Vx.Event.Type_eventlist vx_new(params Object[] vals) {
+    public override Vx.Event.Type_eventlist vx_new(params object[] vals) {
       Vx.Event.Type_eventlist output = Vx.Core.vx_copy(Vx.Event.e_eventlist, vals);
       return output;
     }
 
-    public override Vx.Event.Type_eventlist vx_copy(params Object[] vals) {
+    public override Vx.Event.Type_eventlist vx_copy(params object[] vals) {
       Type_eventlist output = this;
       bool ischanged = false;
       Class_eventlist val = this;
@@ -422,7 +422,7 @@ public static class Event {
       }
       List<Vx.Event.Type_event> listval = new List<Vx.Event.Type_event>(val.vx_listevent());
       Vx.Core.Type_msg msg;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -436,8 +436,8 @@ public static class Event {
         } else if (valsub is Vx.Event.Type_eventlist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listevent());
-        } else if (valsub is List<object> listunknown) {
-          foreach (Object item in listunknown) {
+        } else if (valsub is List<Vx.Core.Type_any> listany) {
+          foreach (Vx.Core.Type_any item in listany) {
             if (false) {
             } else if (item is Vx.Event.Type_event valitem) {
               ischanged = true;
@@ -570,12 +570,12 @@ public static class Event {
       return output;
     }
 
-    public override Vx.Event.Type_eventmap vx_new(params Object[] vals) {
+    public override Vx.Event.Type_eventmap vx_new(params object[] vals) {
       Vx.Event.Type_eventmap output = Vx.Core.vx_copy(Vx.Event.e_eventmap, vals);
       return output;
     }
 
-    public override Vx.Event.Type_eventmap vx_copy(params Object[] vals) {
+    public override Vx.Event.Type_eventmap vx_copy(params object[] vals) {
       Type_eventmap output = this;
       bool ischanged = false;
       Class_eventmap val = this;
@@ -587,7 +587,7 @@ public static class Event {
       Vx.Core.Type_msg? msg = null;
       string key = "";
       Vx.Core.Type_any? msgval = null;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -885,12 +885,12 @@ public static class Event {
 
   public class Class_any_from_from_event : Vx.Core.Class_base, Func_any_from_from_event {
 
-    public override Vx.Event.Func_any_from_from_event vx_new(params Object[] vals) {
+    public override Vx.Event.Func_any_from_from_event vx_new(params object[] vals) {
       Class_any_from_from_event output = new Class_any_from_from_event();
       return output;
     }
 
-    public override Vx.Event.Func_any_from_from_event vx_copy(params Object[] vals) {
+    public override Vx.Event.Func_any_from_from_event vx_copy(params object[] vals) {
       Class_any_from_from_event output = new Class_any_from_from_event();
       return output;
     }
@@ -984,12 +984,12 @@ public static class Event {
 
   public class Class_event_from_event : Vx.Core.Class_base, Func_event_from_event {
 
-    public override Vx.Event.Func_event_from_event vx_new(params Object[] vals) {
+    public override Vx.Event.Func_event_from_event vx_new(params object[] vals) {
       Class_event_from_event output = new Class_event_from_event();
       return output;
     }
 
-    public override Vx.Event.Func_event_from_event vx_copy(params Object[] vals) {
+    public override Vx.Event.Func_event_from_event vx_copy(params object[] vals) {
       Class_event_from_event output = new Class_event_from_event();
       return output;
     }
@@ -1078,12 +1078,12 @@ public static class Event {
 
   public class Class_event_from_event_async : Vx.Core.Class_base, Func_event_from_event_async {
 
-    public override Vx.Event.Func_event_from_event_async vx_new(params Object[] vals) {
+    public override Vx.Event.Func_event_from_event_async vx_new(params object[] vals) {
       Class_event_from_event_async output = new Class_event_from_event_async();
       return output;
     }
 
-    public override Vx.Event.Func_event_from_event_async vx_copy(params Object[] vals) {
+    public override Vx.Event.Func_event_from_event_async vx_copy(params object[] vals) {
       Class_event_from_event_async output = new Class_event_from_event_async();
       return output;
     }
@@ -1134,7 +1134,7 @@ public static class Event {
     }
 
     public Task<Vx.Core.Type_any> vx_repl(Vx.Core.Type_anylist arglist) {
-      Task<Vx.Core.Type_any> output = Vx.Core.vx_async_new_completed(Vx.Core.e_any);
+      Task<Vx.Core.Type_any> output = Vx.Core.vx_async_new_from_value(Vx.Core.e_any);
       Vx.Core.Type_context context = Vx.Core.f_any_from_any(Vx.Core.t_context, arglist.vx_any(Vx.Core.vx_new_int(0)));
       Vx.Event.Type_event evt = Vx.Core.f_any_from_any(Vx.Event.t_event, arglist.vx_any(Vx.Core.vx_new_int(0)));
       Task<Vx.Event.Type_event> future = Vx.Event.f_event_from_event_async(context, evt);
@@ -1152,7 +1152,7 @@ public static class Event {
   public static Func_event_from_event_async t_event_from_event_async = new Vx.Event.Class_event_from_event_async();
 
   public static Task<Vx.Event.Type_event> f_event_from_event_async(Vx.Core.Type_context context, Vx.Event.Type_event evt) {
-    Task<Vx.Event.Type_event> output = Vx.Core.vx_async_new_completed(Vx.Event.e_event);
+    Task<Vx.Event.Type_event> output = Vx.Core.vx_async_new_from_value(Vx.Event.e_event);
     return output;
   }
 
@@ -1169,12 +1169,12 @@ public static class Event {
 
   public class Class_eventmap_from_eventlist : Vx.Core.Class_base, Func_eventmap_from_eventlist {
 
-    public override Vx.Event.Func_eventmap_from_eventlist vx_new(params Object[] vals) {
+    public override Vx.Event.Func_eventmap_from_eventlist vx_new(params object[] vals) {
       Class_eventmap_from_eventlist output = new Class_eventmap_from_eventlist();
       return output;
     }
 
-    public override Vx.Event.Func_eventmap_from_eventlist vx_copy(params Object[] vals) {
+    public override Vx.Event.Func_eventmap_from_eventlist vx_copy(params object[] vals) {
       Class_eventmap_from_eventlist output = new Class_eventmap_from_eventlist();
       return output;
     }
@@ -1258,7 +1258,7 @@ public static class Event {
 
 
   public static class PackageRunOnce {
-    public static void RunOnce() {
+    public static bool RunOnce() {
     Const_event_change.const_new(c_event_change);
     Const_event_click.const_new(c_event_click);
     Const_event_move.const_new(c_event_move);
@@ -1278,7 +1278,10 @@ public static class Event {
     mapfunc.put("event<-event-async", Vx.Event.t_event_from_event_async);
     mapfunc.put("eventmap<-eventlist", Vx.Event.t_eventmap_from_eventlist);
     Vx.Core.vx_global_package_set("vx/event", maptype, mapconst, mapfunc);
+      return true;
     }
   }
+
+  public static bool ranonce = PackageRunOnce.RunOnce();
 
 }

@@ -6,7 +6,7 @@ import com.vxlisp.vx.*;
 
 public final class HtmlTest {
 
-  static Test.Type_testcase f_string_from_body_indent(final Core.Type_context context) {
+  public static Test.Type_testcase f_string_from_body_indent(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -55,7 +55,7 @@ public final class HtmlTest {
     return output;
   }
 
-  static Test.Type_testcase f_string_from_div_indent(final Core.Type_context context) {
+  public static Test.Type_testcase f_string_from_div_indent(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -103,7 +103,7 @@ public final class HtmlTest {
     return output;
   }
 
-  static Test.Type_testcase f_string_from_head_indent(final Core.Type_context context) {
+  public static Test.Type_testcase f_string_from_head_indent(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -132,7 +132,7 @@ public final class HtmlTest {
     return output;
   }
 
-  static Test.Type_testcase f_string_from_html(final Core.Type_context context) {
+  public static Test.Type_testcase f_string_from_html(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -170,7 +170,7 @@ public final class HtmlTest {
     return output;
   }
 
-  static Test.Type_testcase f_string_from_img_indent(final Core.Type_context context) {
+  public static Test.Type_testcase f_string_from_img_indent(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -224,7 +224,7 @@ public final class HtmlTest {
     return output;
   }
 
-  static Test.Type_testcase f_string_from_meta_indent(final Core.Type_context context) {
+  public static Test.Type_testcase f_string_from_meta_indent(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -257,7 +257,7 @@ public final class HtmlTest {
     return output;
   }
 
-  static Test.Type_testcase f_string_from_p_indent(final Core.Type_context context) {
+  public static Test.Type_testcase f_string_from_p_indent(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -312,7 +312,7 @@ public final class HtmlTest {
   }
 
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
-    List<Core.Type_any> arraylisttestcase = Core.arraylist_from_array(
+    List<Core.Type_any> testcases = Core.arraylist_from_array(
       HtmlTest.f_string_from_body_indent(context),
       HtmlTest.f_string_from_div_indent(context),
       HtmlTest.f_string_from_head_indent(context),
@@ -323,7 +323,7 @@ public final class HtmlTest {
     );
     Test.Type_testcaselist output = Core.vx_new(
       Test.t_testcaselist,
-      arraylisttestcase
+      testcases
     );
     return output;
   }

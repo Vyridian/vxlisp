@@ -3,7 +3,7 @@ namespace AppTest.TestVx;
 
 public class CollectionTest {
 
-  static Vx.Test.Type_testcase f_any_from_for_until_loop(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_any_from_for_until_loop(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -42,7 +42,7 @@ public class CollectionTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_any_from_for_while_loop(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_any_from_for_while_loop(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -81,7 +81,7 @@ public class CollectionTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_int_from_map_key(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_int_from_map_key(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -116,7 +116,7 @@ public class CollectionTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_int_from_stringlist_find(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_int_from_stringlist_find(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -149,7 +149,7 @@ public class CollectionTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_is_list(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_is_list(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -176,7 +176,7 @@ public class CollectionTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_is_map(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_is_map(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -203,7 +203,7 @@ public class CollectionTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_list_from_for_end_loop(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_list_from_for_end_loop(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -243,7 +243,7 @@ public class CollectionTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_list_from_list_end(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_list_from_list_end(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -286,7 +286,7 @@ public class CollectionTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_list_from_list_filter(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_list_from_list_filter(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -360,7 +360,7 @@ public class CollectionTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_list_from_list_filtertypes(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_list_from_list_filtertypes(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -408,7 +408,7 @@ public class CollectionTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_list_from_list_start(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_list_from_list_start(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -451,7 +451,7 @@ public class CollectionTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_list_from_list_start_end(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_list_from_list_start_end(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -494,7 +494,7 @@ public class CollectionTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_map_from_map_end(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_map_from_map_end(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -540,7 +540,7 @@ public class CollectionTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_map_from_map_keys(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_map_from_map_keys(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -592,7 +592,7 @@ public class CollectionTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_map_from_map_start(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_map_from_map_start(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -638,7 +638,7 @@ public class CollectionTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_map_from_map_start_end(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_map_from_map_start_end(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -688,7 +688,7 @@ public class CollectionTest {
   }
 
   public static Vx.Test.Type_testcaselist test_cases(Vx.Core.Type_context context) {
-    List<Vx.Core.Type_any> arraylisttestcase = Vx.Core.arraylist_from_array(
+    object[] testcases = [
       CollectionTest.f_any_from_for_until_loop(context),
       CollectionTest.f_any_from_for_while_loop(context),
       CollectionTest.f_int_from_map_key(context),
@@ -705,10 +705,10 @@ public class CollectionTest {
       CollectionTest.f_map_from_map_keys(context),
       CollectionTest.f_map_from_map_start(context),
       CollectionTest.f_map_from_map_start_end(context)
-    );
+    ];
     Vx.Test.Type_testcaselist output = Vx.Core.vx_new(
       Vx.Test.t_testcaselist,
-      arraylisttestcase
+      testcases
     );
     return output;
   }

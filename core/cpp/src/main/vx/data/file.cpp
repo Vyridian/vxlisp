@@ -13,21 +13,24 @@ namespace vx_data_file {
 
 // :body
 
-  vx_core::Type_boolean vx_boolean_exists_from_file(vx_data_file::Type_file file) {
+  vx_core::Type_boolean vx_boolean_exists_from_file(
+    vx_data_file::Type_file file) {
     vx_core::Type_boolean output = vx_core::c_false;
-		vx_core::Type_string path = vx_data_file::f_pathfull_from_file(file);
+    vx_core::Type_string path = vx_data_file::f_pathfull_from_file(file);
     std::string spath = path->vx_string();
     vx_core::vx_release(path);
-		std::ifstream f(spath);
+		  std::ifstream f(spath);
     if (f.good()) {
       output = vx_core::c_true;
-		}
+		  }
     return output;
 	}
 
-  vx_core::Type_boolean vx_boolean_write_from_file_string(vx_data_file::Type_file file, vx_core::Type_string text) {
+  vx_core::Type_boolean vx_boolean_write_from_file_string(
+    vx_data_file::Type_file file,
+    vx_core::Type_string text) {
     vx_core::Type_boolean output = vx_core::c_false;
-		vx_core::Type_string path = vx_data_file::f_pathfull_from_file(file);
+    vx_core::Type_string path = vx_data_file::f_pathfull_from_file(file);
     std::string spath = path->vx_string();
     std::string stext = text->vx_string();
     vx_core::vx_release({text, path});
@@ -35,7 +38,9 @@ namespace vx_data_file {
     return output;
 	}
 
-  vx_core::Type_boolean vx_boolean_write_from_path_text(std::string path, std::string text) {
+  vx_core::Type_boolean vx_boolean_write_from_path_text(
+    std::string path,
+    std::string text) {
     vx_core::Type_boolean output = vx_core::c_false;
     std::ofstream filestream(path, std::ios_base::binary | std::ios_base::out);
     if (filestream.is_open()) {
@@ -49,16 +54,18 @@ namespace vx_data_file {
     return output;
   }
 
-  vx_core::Type_string vx_string_read_from_file(vx_data_file::Type_file file) {
+  vx_core::Type_string vx_string_read_from_file(
+    vx_data_file::Type_file file) {
     vx_core::Type_string output = vx_core::e_string;
-		vx_core::Type_string path = vx_data_file::f_pathfull_from_file(file);
+    vx_core::Type_string path = vx_data_file::f_pathfull_from_file(file);
     std::string spath = path->vx_string();
     vx_core::vx_release(path);
-		output = vx_data_file::vx_string_read_from_path(spath);
-		return output;
-	}
+		  output = vx_data_file::vx_string_read_from_path(spath);
+		  return output;
+  }
 
-  vx_core::Type_string vx_string_read_from_path(std::string path) {
+  vx_core::Type_string vx_string_read_from_path(
+    std::string path) {
     vx_core::Type_string output = vx_core::e_string;
     std::ifstream filestream(path);
     if (filestream.is_open()) {
@@ -84,10 +91,10 @@ namespace vx_data_file {
 
   vx_core::Type_string vx_pathcurrent_from_os() {
     vx_core::Type_string output = vx_core::e_string;
-		std::string path = std::filesystem::current_path().string();
-		output = vx_core::vx_new_string(path);
+		  std::string path = std::filesystem::current_path().string();
+		  output = vx_core::vx_new_string(path);
     return output;
-	}
+ 	}
 
 
   // (type file)

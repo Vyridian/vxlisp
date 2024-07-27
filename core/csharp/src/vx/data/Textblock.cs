@@ -101,12 +101,12 @@ public static class Textblock {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Data.Textblock.Type_delim vx_new(params Object[] vals) {
+    public override Vx.Data.Textblock.Type_delim vx_new(params object[] vals) {
       Vx.Data.Textblock.Type_delim output = Vx.Core.vx_copy(Vx.Data.Textblock.e_delim, vals);
       return output;
     }
 
-    public override Vx.Data.Textblock.Type_delim vx_copy(params Object[] vals) {
+    public override Vx.Data.Textblock.Type_delim vx_copy(params object[] vals) {
       Type_delim output = this;
       bool ischanged = false;
       Class_delim val = this;
@@ -128,7 +128,7 @@ public static class Textblock {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -372,12 +372,12 @@ public static class Textblock {
       return this.vx_delim(index);
     }
 
-    public override Vx.Data.Textblock.Type_delimlist vx_new(params Object[] vals) {
+    public override Vx.Data.Textblock.Type_delimlist vx_new(params object[] vals) {
       Vx.Data.Textblock.Type_delimlist output = Vx.Core.vx_copy(Vx.Data.Textblock.e_delimlist, vals);
       return output;
     }
 
-    public override Vx.Data.Textblock.Type_delimlist vx_copy(params Object[] vals) {
+    public override Vx.Data.Textblock.Type_delimlist vx_copy(params object[] vals) {
       Type_delimlist output = this;
       bool ischanged = false;
       Class_delimlist val = this;
@@ -387,7 +387,7 @@ public static class Textblock {
       }
       List<Vx.Data.Textblock.Type_delim> listval = new List<Vx.Data.Textblock.Type_delim>(val.vx_listdelim());
       Vx.Core.Type_msg msg;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -401,8 +401,8 @@ public static class Textblock {
         } else if (valsub is Vx.Data.Textblock.Type_delimlist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listdelim());
-        } else if (valsub is List<object> listunknown) {
-          foreach (Object item in listunknown) {
+        } else if (valsub is List<Vx.Core.Type_any> listany) {
+          foreach (Vx.Core.Type_any item in listany) {
             if (false) {
             } else if (item is Vx.Data.Textblock.Type_delim valitem) {
               ischanged = true;
@@ -644,12 +644,12 @@ public static class Textblock {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Data.Textblock.Type_textblock vx_new(params Object[] vals) {
+    public override Vx.Data.Textblock.Type_textblock vx_new(params object[] vals) {
       Vx.Data.Textblock.Type_textblock output = Vx.Core.vx_copy(Vx.Data.Textblock.e_textblock, vals);
       return output;
     }
 
-    public override Vx.Data.Textblock.Type_textblock vx_copy(params Object[] vals) {
+    public override Vx.Data.Textblock.Type_textblock vx_copy(params object[] vals) {
       Type_textblock output = this;
       bool ischanged = false;
       Class_textblock val = this;
@@ -683,7 +683,7 @@ public static class Textblock {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -1062,12 +1062,12 @@ public static class Textblock {
       return this.vx_textblock(index);
     }
 
-    public override Vx.Data.Textblock.Type_textblocklist vx_new(params Object[] vals) {
+    public override Vx.Data.Textblock.Type_textblocklist vx_new(params object[] vals) {
       Vx.Data.Textblock.Type_textblocklist output = Vx.Core.vx_copy(Vx.Data.Textblock.e_textblocklist, vals);
       return output;
     }
 
-    public override Vx.Data.Textblock.Type_textblocklist vx_copy(params Object[] vals) {
+    public override Vx.Data.Textblock.Type_textblocklist vx_copy(params object[] vals) {
       Type_textblocklist output = this;
       bool ischanged = false;
       Class_textblocklist val = this;
@@ -1077,7 +1077,7 @@ public static class Textblock {
       }
       List<Vx.Data.Textblock.Type_textblock> listval = new List<Vx.Data.Textblock.Type_textblock>(val.vx_listtextblock());
       Vx.Core.Type_msg msg;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -1091,8 +1091,8 @@ public static class Textblock {
         } else if (valsub is Vx.Data.Textblock.Type_textblocklist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listtextblock());
-        } else if (valsub is List<object> listunknown) {
-          foreach (Object item in listunknown) {
+        } else if (valsub is List<Vx.Core.Type_any> listany) {
+          foreach (Vx.Core.Type_any item in listany) {
             if (false) {
             } else if (item is Vx.Data.Textblock.Type_textblock valitem) {
               ischanged = true;
@@ -2247,12 +2247,12 @@ public static class Textblock {
 
   public class Class_children_from_textblock : Vx.Core.Class_base, Func_children_from_textblock {
 
-    public override Vx.Data.Textblock.Func_children_from_textblock vx_new(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_children_from_textblock vx_new(params object[] vals) {
       Class_children_from_textblock output = new Class_children_from_textblock();
       return output;
     }
 
-    public override Vx.Data.Textblock.Func_children_from_textblock vx_copy(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_children_from_textblock vx_copy(params object[] vals) {
       Class_children_from_textblock output = new Class_children_from_textblock();
       return output;
     }
@@ -2339,12 +2339,12 @@ public static class Textblock {
 
   public class Class_delim_first_from_delim_delim : Vx.Core.Class_base, Func_delim_first_from_delim_delim {
 
-    public override Vx.Data.Textblock.Func_delim_first_from_delim_delim vx_new(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_delim_first_from_delim_delim vx_new(params object[] vals) {
       Class_delim_first_from_delim_delim output = new Class_delim_first_from_delim_delim();
       return output;
     }
 
-    public override Vx.Data.Textblock.Func_delim_first_from_delim_delim vx_copy(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_delim_first_from_delim_delim vx_copy(params object[] vals) {
       Class_delim_first_from_delim_delim output = new Class_delim_first_from_delim_delim();
       return output;
     }
@@ -2477,12 +2477,12 @@ public static class Textblock {
 
   public class Class_delim_first_from_string_delimlist : Vx.Core.Class_base, Func_delim_first_from_string_delimlist {
 
-    public override Vx.Data.Textblock.Func_delim_first_from_string_delimlist vx_new(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_delim_first_from_string_delimlist vx_new(params object[] vals) {
       Class_delim_first_from_string_delimlist output = new Class_delim_first_from_string_delimlist();
       return output;
     }
 
-    public override Vx.Data.Textblock.Func_delim_first_from_string_delimlist vx_copy(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_delim_first_from_string_delimlist vx_copy(params object[] vals) {
       Class_delim_first_from_string_delimlist output = new Class_delim_first_from_string_delimlist();
       return output;
     }
@@ -2596,12 +2596,12 @@ public static class Textblock {
 
   public class Class_delim_pos_from_string_delim : Vx.Core.Class_base, Func_delim_pos_from_string_delim {
 
-    public override Vx.Data.Textblock.Func_delim_pos_from_string_delim vx_new(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_delim_pos_from_string_delim vx_new(params object[] vals) {
       Class_delim_pos_from_string_delim output = new Class_delim_pos_from_string_delim();
       return output;
     }
 
-    public override Vx.Data.Textblock.Func_delim_pos_from_string_delim vx_copy(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_delim_pos_from_string_delim vx_copy(params object[] vals) {
       Class_delim_pos_from_string_delim output = new Class_delim_pos_from_string_delim();
       return output;
     }
@@ -2708,12 +2708,12 @@ public static class Textblock {
 
   public class Class_delimlist_pos_from_string_delimlist : Vx.Core.Class_base, Func_delimlist_pos_from_string_delimlist {
 
-    public override Vx.Data.Textblock.Func_delimlist_pos_from_string_delimlist vx_new(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_delimlist_pos_from_string_delimlist vx_new(params object[] vals) {
       Class_delimlist_pos_from_string_delimlist output = new Class_delimlist_pos_from_string_delimlist();
       return output;
     }
 
-    public override Vx.Data.Textblock.Func_delimlist_pos_from_string_delimlist vx_copy(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_delimlist_pos_from_string_delimlist vx_copy(params object[] vals) {
       Class_delimlist_pos_from_string_delimlist output = new Class_delimlist_pos_from_string_delimlist();
       return output;
     }
@@ -2797,12 +2797,12 @@ public static class Textblock {
 
   public class Class_is_close : Vx.Core.Class_base, Func_is_close {
 
-    public override Vx.Data.Textblock.Func_is_close vx_new(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_is_close vx_new(params object[] vals) {
       Class_is_close output = new Class_is_close();
       return output;
     }
 
-    public override Vx.Data.Textblock.Func_is_close vx_copy(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_is_close vx_copy(params object[] vals) {
       Class_is_close output = new Class_is_close();
       return output;
     }
@@ -2891,12 +2891,12 @@ public static class Textblock {
 
   public class Class_is_single : Vx.Core.Class_base, Func_is_single {
 
-    public override Vx.Data.Textblock.Func_is_single vx_new(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_is_single vx_new(params object[] vals) {
       Class_is_single output = new Class_is_single();
       return output;
     }
 
-    public override Vx.Data.Textblock.Func_is_single vx_copy(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_is_single vx_copy(params object[] vals) {
       Class_is_single output = new Class_is_single();
       return output;
     }
@@ -2991,12 +2991,12 @@ public static class Textblock {
 
   public class Class_stringlist_from_textblocklist : Vx.Core.Class_base, Func_stringlist_from_textblocklist {
 
-    public override Vx.Data.Textblock.Func_stringlist_from_textblocklist vx_new(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_stringlist_from_textblocklist vx_new(params object[] vals) {
       Class_stringlist_from_textblocklist output = new Class_stringlist_from_textblocklist();
       return output;
     }
 
-    public override Vx.Data.Textblock.Func_stringlist_from_textblocklist vx_copy(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_stringlist_from_textblocklist vx_copy(params object[] vals) {
       Class_stringlist_from_textblocklist output = new Class_stringlist_from_textblocklist();
       return output;
     }
@@ -3086,12 +3086,12 @@ public static class Textblock {
 
   public class Class_text_from_textblock : Vx.Core.Class_base, Func_text_from_textblock {
 
-    public override Vx.Data.Textblock.Func_text_from_textblock vx_new(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_text_from_textblock vx_new(params object[] vals) {
       Class_text_from_textblock output = new Class_text_from_textblock();
       return output;
     }
 
-    public override Vx.Data.Textblock.Func_text_from_textblock vx_copy(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_text_from_textblock vx_copy(params object[] vals) {
       Class_text_from_textblock output = new Class_text_from_textblock();
       return output;
     }
@@ -3179,12 +3179,12 @@ public static class Textblock {
 
   public class Class_textblock_addchild_from_textblock_find_child : Vx.Core.Class_base, Func_textblock_addchild_from_textblock_find_child {
 
-    public override Vx.Data.Textblock.Func_textblock_addchild_from_textblock_find_child vx_new(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_addchild_from_textblock_find_child vx_new(params object[] vals) {
       Class_textblock_addchild_from_textblock_find_child output = new Class_textblock_addchild_from_textblock_find_child();
       return output;
     }
 
-    public override Vx.Data.Textblock.Func_textblock_addchild_from_textblock_find_child vx_copy(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_addchild_from_textblock_find_child vx_copy(params object[] vals) {
       Class_textblock_addchild_from_textblock_find_child output = new Class_textblock_addchild_from_textblock_find_child();
       return output;
     }
@@ -3312,12 +3312,12 @@ public static class Textblock {
 
   public class Class_textblock_delimnotfound : Vx.Core.Class_base, Func_textblock_delimnotfound {
 
-    public override Vx.Data.Textblock.Func_textblock_delimnotfound vx_new(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_delimnotfound vx_new(params object[] vals) {
       Class_textblock_delimnotfound output = new Class_textblock_delimnotfound();
       return output;
     }
 
-    public override Vx.Data.Textblock.Func_textblock_delimnotfound vx_copy(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_delimnotfound vx_copy(params object[] vals) {
       Class_textblock_delimnotfound output = new Class_textblock_delimnotfound();
       return output;
     }
@@ -3667,12 +3667,12 @@ public static class Textblock {
 
   public class Class_textblock_findparent_from_textblock : Vx.Core.Class_base, Func_textblock_findparent_from_textblock {
 
-    public override Vx.Data.Textblock.Func_textblock_findparent_from_textblock vx_new(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_findparent_from_textblock vx_new(params object[] vals) {
       Class_textblock_findparent_from_textblock output = new Class_textblock_findparent_from_textblock();
       return output;
     }
 
-    public override Vx.Data.Textblock.Func_textblock_findparent_from_textblock vx_copy(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_findparent_from_textblock vx_copy(params object[] vals) {
       Class_textblock_findparent_from_textblock output = new Class_textblock_findparent_from_textblock();
       return output;
     }
@@ -3802,12 +3802,12 @@ public static class Textblock {
 
   public class Class_textblock_init : Vx.Core.Class_base, Func_textblock_init {
 
-    public override Vx.Data.Textblock.Func_textblock_init vx_new(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_init vx_new(params object[] vals) {
       Class_textblock_init output = new Class_textblock_init();
       return output;
     }
 
-    public override Vx.Data.Textblock.Func_textblock_init vx_copy(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_init vx_copy(params object[] vals) {
       Class_textblock_init output = new Class_textblock_init();
       return output;
     }
@@ -3934,12 +3934,12 @@ public static class Textblock {
 
   public class Class_textblock_parse : Vx.Core.Class_base, Func_textblock_parse {
 
-    public override Vx.Data.Textblock.Func_textblock_parse vx_new(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_parse vx_new(params object[] vals) {
       Class_textblock_parse output = new Class_textblock_parse();
       return output;
     }
 
-    public override Vx.Data.Textblock.Func_textblock_parse vx_copy(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_parse vx_copy(params object[] vals) {
       Class_textblock_parse output = new Class_textblock_parse();
       return output;
     }
@@ -4043,12 +4043,12 @@ public static class Textblock {
 
   public class Class_textblock_parse_one : Vx.Core.Class_base, Func_textblock_parse_one {
 
-    public override Vx.Data.Textblock.Func_textblock_parse_one vx_new(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_parse_one vx_new(params object[] vals) {
       Class_textblock_parse_one output = new Class_textblock_parse_one();
       return output;
     }
 
-    public override Vx.Data.Textblock.Func_textblock_parse_one vx_copy(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_parse_one vx_copy(params object[] vals) {
       Class_textblock_parse_one output = new Class_textblock_parse_one();
       return output;
     }
@@ -4236,12 +4236,12 @@ public static class Textblock {
 
   public class Class_textblock_parse_from_string_delim : Vx.Core.Class_base, Func_textblock_parse_from_string_delim {
 
-    public override Vx.Data.Textblock.Func_textblock_parse_from_string_delim vx_new(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_parse_from_string_delim vx_new(params object[] vals) {
       Class_textblock_parse_from_string_delim output = new Class_textblock_parse_from_string_delim();
       return output;
     }
 
-    public override Vx.Data.Textblock.Func_textblock_parse_from_string_delim vx_copy(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_parse_from_string_delim vx_copy(params object[] vals) {
       Class_textblock_parse_from_string_delim output = new Class_textblock_parse_from_string_delim();
       return output;
     }
@@ -4325,12 +4325,12 @@ public static class Textblock {
 
   public class Class_textblock_replace_from_textblock_find_replace : Vx.Core.Class_base, Func_textblock_replace_from_textblock_find_replace {
 
-    public override Vx.Data.Textblock.Func_textblock_replace_from_textblock_find_replace vx_new(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_replace_from_textblock_find_replace vx_new(params object[] vals) {
       Class_textblock_replace_from_textblock_find_replace output = new Class_textblock_replace_from_textblock_find_replace();
       return output;
     }
 
-    public override Vx.Data.Textblock.Func_textblock_replace_from_textblock_find_replace vx_copy(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_replace_from_textblock_find_replace vx_copy(params object[] vals) {
       Class_textblock_replace_from_textblock_find_replace output = new Class_textblock_replace_from_textblock_find_replace();
       return output;
     }
@@ -4449,12 +4449,12 @@ public static class Textblock {
 
   public class Class_textblock_startleft_from_string_delim_offset : Vx.Core.Class_base, Func_textblock_startleft_from_string_delim_offset {
 
-    public override Vx.Data.Textblock.Func_textblock_startleft_from_string_delim_offset vx_new(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_startleft_from_string_delim_offset vx_new(params object[] vals) {
       Class_textblock_startleft_from_string_delim_offset output = new Class_textblock_startleft_from_string_delim_offset();
       return output;
     }
 
-    public override Vx.Data.Textblock.Func_textblock_startleft_from_string_delim_offset vx_copy(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_startleft_from_string_delim_offset vx_copy(params object[] vals) {
       Class_textblock_startleft_from_string_delim_offset output = new Class_textblock_startleft_from_string_delim_offset();
       return output;
     }
@@ -4582,12 +4582,12 @@ public static class Textblock {
 
   public class Class_textblock_startright_from_string_delim_offset : Vx.Core.Class_base, Func_textblock_startright_from_string_delim_offset {
 
-    public override Vx.Data.Textblock.Func_textblock_startright_from_string_delim_offset vx_new(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_startright_from_string_delim_offset vx_new(params object[] vals) {
       Class_textblock_startright_from_string_delim_offset output = new Class_textblock_startright_from_string_delim_offset();
       return output;
     }
 
-    public override Vx.Data.Textblock.Func_textblock_startright_from_string_delim_offset vx_copy(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_startright_from_string_delim_offset vx_copy(params object[] vals) {
       Class_textblock_startright_from_string_delim_offset output = new Class_textblock_startright_from_string_delim_offset();
       return output;
     }
@@ -4767,12 +4767,12 @@ public static class Textblock {
 
   public class Class_textblock_from_close_textblock : Vx.Core.Class_base, Func_textblock_from_close_textblock {
 
-    public override Vx.Data.Textblock.Func_textblock_from_close_textblock vx_new(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_from_close_textblock vx_new(params object[] vals) {
       Class_textblock_from_close_textblock output = new Class_textblock_from_close_textblock();
       return output;
     }
 
-    public override Vx.Data.Textblock.Func_textblock_from_close_textblock vx_copy(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_from_close_textblock vx_copy(params object[] vals) {
       Class_textblock_from_close_textblock output = new Class_textblock_from_close_textblock();
       return output;
     }
@@ -4969,12 +4969,12 @@ public static class Textblock {
 
   public class Class_textblock_from_empty_textblock : Vx.Core.Class_base, Func_textblock_from_empty_textblock {
 
-    public override Vx.Data.Textblock.Func_textblock_from_empty_textblock vx_new(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_from_empty_textblock vx_new(params object[] vals) {
       Class_textblock_from_empty_textblock output = new Class_textblock_from_empty_textblock();
       return output;
     }
 
-    public override Vx.Data.Textblock.Func_textblock_from_empty_textblock vx_copy(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_from_empty_textblock vx_copy(params object[] vals) {
       Class_textblock_from_empty_textblock output = new Class_textblock_from_empty_textblock();
       return output;
     }
@@ -5049,12 +5049,12 @@ public static class Textblock {
 
   public class Class_textblock_from_open_textblock : Vx.Core.Class_base, Func_textblock_from_open_textblock {
 
-    public override Vx.Data.Textblock.Func_textblock_from_open_textblock vx_new(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_from_open_textblock vx_new(params object[] vals) {
       Class_textblock_from_open_textblock output = new Class_textblock_from_open_textblock();
       return output;
     }
 
-    public override Vx.Data.Textblock.Func_textblock_from_open_textblock vx_copy(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_from_open_textblock vx_copy(params object[] vals) {
       Class_textblock_from_open_textblock output = new Class_textblock_from_open_textblock();
       return output;
     }
@@ -5294,12 +5294,12 @@ public static class Textblock {
 
   public class Class_textblock_from_single_textblock : Vx.Core.Class_base, Func_textblock_from_single_textblock {
 
-    public override Vx.Data.Textblock.Func_textblock_from_single_textblock vx_new(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_from_single_textblock vx_new(params object[] vals) {
       Class_textblock_from_single_textblock output = new Class_textblock_from_single_textblock();
       return output;
     }
 
-    public override Vx.Data.Textblock.Func_textblock_from_single_textblock vx_copy(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_from_single_textblock vx_copy(params object[] vals) {
       Class_textblock_from_single_textblock output = new Class_textblock_from_single_textblock();
       return output;
     }
@@ -5530,12 +5530,12 @@ public static class Textblock {
 
   public class Class_textblock_from_string_delim : Vx.Core.Class_base, Func_textblock_from_string_delim {
 
-    public override Vx.Data.Textblock.Func_textblock_from_string_delim vx_new(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_from_string_delim vx_new(params object[] vals) {
       Class_textblock_from_string_delim output = new Class_textblock_from_string_delim();
       return output;
     }
 
-    public override Vx.Data.Textblock.Func_textblock_from_string_delim vx_copy(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_from_string_delim vx_copy(params object[] vals) {
       Class_textblock_from_string_delim output = new Class_textblock_from_string_delim();
       return output;
     }
@@ -5623,12 +5623,12 @@ public static class Textblock {
 
   public class Class_textblock_from_textblock_delim : Vx.Core.Class_base, Func_textblock_from_textblock_delim {
 
-    public override Vx.Data.Textblock.Func_textblock_from_textblock_delim vx_new(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_from_textblock_delim vx_new(params object[] vals) {
       Class_textblock_from_textblock_delim output = new Class_textblock_from_textblock_delim();
       return output;
     }
 
-    public override Vx.Data.Textblock.Func_textblock_from_textblock_delim vx_copy(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblock_from_textblock_delim vx_copy(params object[] vals) {
       Class_textblock_from_textblock_delim output = new Class_textblock_from_textblock_delim();
       return output;
     }
@@ -5703,12 +5703,12 @@ public static class Textblock {
 
   public class Class_textblocklist_from_textblocklist_remove : Vx.Core.Class_base, Func_textblocklist_from_textblocklist_remove {
 
-    public override Vx.Data.Textblock.Func_textblocklist_from_textblocklist_remove vx_new(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblocklist_from_textblocklist_remove vx_new(params object[] vals) {
       Class_textblocklist_from_textblocklist_remove output = new Class_textblocklist_from_textblocklist_remove();
       return output;
     }
 
-    public override Vx.Data.Textblock.Func_textblocklist_from_textblocklist_remove vx_copy(params Object[] vals) {
+    public override Vx.Data.Textblock.Func_textblocklist_from_textblocklist_remove vx_copy(params object[] vals) {
       Class_textblocklist_from_textblocklist_remove output = new Class_textblocklist_from_textblocklist_remove();
       return output;
     }
@@ -5794,7 +5794,7 @@ public static class Textblock {
 
 
   public static class PackageRunOnce {
-    public static void RunOnce() {
+    public static bool RunOnce() {
     Const_delimbracketangle.const_new(c_delimbracketangle);
     Const_delimbracketcurly.const_new(c_delimbracketcurly);
     Const_delimbracketsquare.const_new(c_delimbracketsquare);
@@ -5873,7 +5873,10 @@ public static class Textblock {
     mapfunc.put("textblock<-textblock-delim", Vx.Data.Textblock.t_textblock_from_textblock_delim);
     mapfunc.put("textblocklist<-textblocklist-remove", Vx.Data.Textblock.t_textblocklist_from_textblocklist_remove);
     Vx.Core.vx_global_package_set("vx/data/textblock", maptype, mapconst, mapfunc);
+      return true;
     }
   }
+
+  public static bool ranonce = PackageRunOnce.RunOnce();
 
 }

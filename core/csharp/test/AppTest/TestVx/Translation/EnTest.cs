@@ -3,7 +3,7 @@ namespace AppTest.TestVx.Translation;
 
 public class EnTest {
 
-  static Vx.Test.Type_testcase f_translation_en(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_translation_en(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -31,12 +31,12 @@ public class EnTest {
   }
 
   public static Vx.Test.Type_testcaselist test_cases(Vx.Core.Type_context context) {
-    List<Vx.Core.Type_any> arraylisttestcase = Vx.Core.arraylist_from_array(
+    object[] testcases = [
       EnTest.f_translation_en(context)
-    );
+    ];
     Vx.Test.Type_testcaselist output = Vx.Core.vx_new(
       Vx.Test.t_testcaselist,
-      arraylisttestcase
+      testcases
     );
     return output;
   }

@@ -20,13 +20,19 @@ namespace vx_data_file_test {
             vx_core::vx_new_string(":name"),
             vx_core::vx_new_string("boolean_exists_from_file.txt"),
             vx_core::vx_new_string(":path"),
-            vx_core::vx_new_string("src/test/resources/vx")
+            vx_core::f_new(
+              vx_core::t_string,
+              vx_core::vx_new(vx_core::t_anylist, {
+                vx_core::c_path_test_resources,
+                vx_core::vx_new_string("/vx")
+              })
+            )
           })
         )
       )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (boolean-exists<-file\n  (file\n   :name \"boolean_exists_from_file.txt\"\n   :path \"src/test/resources/vx\")))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (boolean-exists<-file\n  (file\n   :name \"boolean_exists_from_file.txt\"\n   :path (string path-test-resources \"/vx\"))))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/file"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
@@ -60,14 +66,20 @@ namespace vx_data_file_test {
             vx_core::vx_new_string(":name"),
             vx_core::vx_new_string("boolean_write_from_file_string.txt"),
             vx_core::vx_new_string(":path"),
-            vx_core::vx_new_string("src/test/resources/vx")
+            vx_core::f_new(
+              vx_core::t_string,
+              vx_core::vx_new(vx_core::t_anylist, {
+                vx_core::c_path_test_resources,
+                vx_core::vx_new_string("/vx")
+              })
+            )
           })
         ),
         vx_core::vx_new_string("writetext")
       )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (boolean-write<-file-string\n  (file\n   :name \"boolean_write_from_file_string.txt\"\n   :path \"src/test/resources/vx\")\n  \"writetext\"))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test-true\n (boolean-write<-file-string\n  (file\n   :name \"boolean_write_from_file_string.txt\"\n   :path (string path-test-resources \"/vx\"))\n  \"writetext\"))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/file"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
@@ -99,7 +111,13 @@ namespace vx_data_file_test {
           vx_core::vx_new_string(":name"),
           vx_core::vx_new_string("string_read_from_file.txt"),
           vx_core::vx_new_string(":path"),
-          vx_core::vx_new_string("src/test/resources/vx"),
+          vx_core::f_new(
+            vx_core::t_string,
+            vx_core::vx_new(vx_core::t_anylist, {
+              vx_core::c_path_test_resources,
+              vx_core::vx_new_string("/vx")
+            })
+          ),
           vx_core::vx_new_string(":text"),
           vx_core::vx_new_string("testdata")
         })
@@ -112,13 +130,19 @@ namespace vx_data_file_test {
             vx_core::vx_new_string(":name"),
             vx_core::vx_new_string("string_read_from_file.txt"),
             vx_core::vx_new_string(":path"),
-            vx_core::vx_new_string("src/test/resources/vx")
+            vx_core::f_new(
+              vx_core::t_string,
+              vx_core::vx_new(vx_core::t_anylist, {
+                vx_core::c_path_test_resources,
+                vx_core::vx_new_string("/vx")
+              })
+            )
           })
         )
       )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (file\n  :name \"string_read_from_file.txt\"\n  :path \"src/test/resources/vx\"\n  :text \"testdata\")\n (file-read<-file\n  (file\n   :name \"string_read_from_file.txt\"\n   :path \"src/test/resources/vx\")))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (file\n  :name \"string_read_from_file.txt\"\n  :path (string path-test-resources \"/vx\")\n  :text \"testdata\")\n (file-read<-file\n  (file\n   :name \"string_read_from_file.txt\"\n   :path (string path-test-resources \"/vx\"))))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/file"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
@@ -213,13 +237,19 @@ namespace vx_data_file_test {
             vx_core::vx_new_string(":name"),
             vx_core::vx_new_string("string_read_from_file.txt"),
             vx_core::vx_new_string(":path"),
-            vx_core::vx_new_string("src/test/resources/vx")
+            vx_core::f_new(
+              vx_core::t_string,
+              vx_core::vx_new(vx_core::t_anylist, {
+                vx_core::c_path_test_resources,
+                vx_core::vx_new_string("/vx")
+              })
+            )
           })
         )
       )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"testdata\"\n (string-read<-file\n  (file\n   :name \"string_read_from_file.txt\"\n   :path \"src/test/resources/vx\")))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"testdata\"\n (string-read<-file\n  (file\n   :name \"string_read_from_file.txt\"\n   :path (string path-test-resources \"/vx\"))))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/data/file"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });

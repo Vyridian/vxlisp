@@ -13513,6 +13513,21 @@ namespace vx_core {
 
   //}
 
+  // (const path-test-resources)
+  // class Class_path_test_resources {
+    // vx_const_new()
+    void vx_core::Class_path_test_resources::vx_const_new(vx_core::Const_path_test_resources output) {
+      output->vx_p_constdef = vx_core::vx_constdef_new("vx/core", "path-test-resources");
+      output->vx_p_string = "src/test/resources";
+      vx_core::vx_reserve_type(output);
+    }
+
+    std::string vx_core::Class_path_test_resources::vx_string() const {
+      return this->vx_p_string;
+    }
+
+  //}
+
   // (const quote)
   // class Class_quote {
     // vx_const_new()
@@ -23090,6 +23105,7 @@ namespace vx_core {
   }
   /**
    * @function funcdef_from_func
+   * Returns the definition of a function
    * @param  {func} val
    * @return {funcdef}
    * (func funcdef<-func)
@@ -29838,6 +29854,7 @@ namespace vx_core {
   vx_core::Const_newline c_newline = NULL;
   vx_core::Const_notanumber c_notanumber = NULL;
   vx_core::Const_nothing c_nothing = NULL;
+  vx_core::Const_path_test_resources c_path_test_resources = NULL;
   vx_core::Const_quote c_quote = NULL;
   vx_core::Const_true c_true = NULL;
   vx_core::Func_any_from_any e_any_from_any = NULL;
@@ -30190,6 +30207,7 @@ namespace vx_core {
       vx_core::c_newline = new vx_core::Class_newline();
       vx_core::c_notanumber = new vx_core::Class_notanumber();
       vx_core::c_nothing = new vx_core::Class_nothing();
+      vx_core::c_path_test_resources = new vx_core::Class_path_test_resources();
       vx_core::c_quote = new vx_core::Class_quote();
       vx_core::c_true = new vx_core::Class_true();
       vx_core::e_any = new Class_any();
@@ -31171,6 +31189,7 @@ namespace vx_core {
       vx_core::Class_newline::vx_const_new(vx_core::c_newline);
       vx_core::Class_notanumber::vx_const_new(vx_core::c_notanumber);
       vx_core::Class_nothing::vx_const_new(vx_core::c_nothing);
+      vx_core::Class_path_test_resources::vx_const_new(vx_core::c_path_test_resources);
       vx_core::Class_quote::vx_const_new(vx_core::c_quote);
       vx_core::Class_true::vx_const_new(vx_core::c_true);
       vx_core::vx_Type_mapany maptype;
@@ -31265,6 +31284,7 @@ namespace vx_core {
       mapconst["newline"] = vx_core::c_newline;
       mapconst["notanumber"] = vx_core::c_notanumber;
       mapconst["nothing"] = vx_core::c_nothing;
+      mapconst["path-test-resources"] = vx_core::c_path_test_resources;
       mapconst["quote"] = vx_core::c_quote;
       mapconst["true"] = vx_core::c_true;
       mapfunc["any<-any"] = vx_core::t_any_from_any;

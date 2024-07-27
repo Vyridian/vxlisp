@@ -14,12 +14,12 @@ public static class Es {
 
   public class Class_translation_es : Vx.Core.Class_base, Func_translation_es {
 
-    public override Vx.Translation.Es.Func_translation_es vx_new(params Object[] vals) {
+    public override Vx.Translation.Es.Func_translation_es vx_new(params object[] vals) {
       Class_translation_es output = new Class_translation_es();
       return output;
     }
 
-    public override Vx.Translation.Es.Func_translation_es vx_copy(params Object[] vals) {
+    public override Vx.Translation.Es.Func_translation_es vx_copy(params object[] vals) {
       Class_translation_es output = new Class_translation_es();
       return output;
     }
@@ -99,12 +99,12 @@ public static class Es {
 
   public class Class_words : Vx.Core.Class_base, Func_words {
 
-    public override Vx.Translation.Es.Func_words vx_new(params Object[] vals) {
+    public override Vx.Translation.Es.Func_words vx_new(params object[] vals) {
       Class_words output = new Class_words();
       return output;
     }
 
-    public override Vx.Translation.Es.Func_words vx_copy(params Object[] vals) {
+    public override Vx.Translation.Es.Func_words vx_copy(params object[] vals) {
       Class_words output = new Class_words();
       return output;
     }
@@ -174,14 +174,17 @@ public static class Es {
 
 
   public static class PackageRunOnce {
-    public static void RunOnce() {
+    public static bool RunOnce() {
     Vx.Core.Map<string, Vx.Core.Type_any> maptype = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
     Vx.Core.Map<string, Vx.Core.Type_any> mapconst = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
     Vx.Core.Map<string, Vx.Core.Type_func> mapfunc = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_func>();
     mapfunc.put("translation-es", Vx.Translation.Es.t_translation_es);
     mapfunc.put("words", Vx.Translation.Es.t_words);
     Vx.Core.vx_global_package_set("vx/translation/es", maptype, mapconst, mapfunc);
+      return true;
     }
   }
+
+  public static bool ranonce = PackageRunOnce.RunOnce();
 
 }

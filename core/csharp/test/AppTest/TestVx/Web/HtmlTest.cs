@@ -3,7 +3,7 @@ namespace AppTest.TestVx.Web;
 
 public class HtmlTest {
 
-  static Vx.Test.Type_testcase f_string_from_body_indent(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_string_from_body_indent(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -52,7 +52,7 @@ public class HtmlTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_string_from_div_indent(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_string_from_div_indent(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -100,7 +100,7 @@ public class HtmlTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_string_from_head_indent(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_string_from_head_indent(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -129,7 +129,7 @@ public class HtmlTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_string_from_html(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_string_from_html(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -167,7 +167,7 @@ public class HtmlTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_string_from_img_indent(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_string_from_img_indent(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -221,7 +221,7 @@ public class HtmlTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_string_from_meta_indent(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_string_from_meta_indent(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -254,7 +254,7 @@ public class HtmlTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_string_from_p_indent(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_string_from_p_indent(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -309,7 +309,7 @@ public class HtmlTest {
   }
 
   public static Vx.Test.Type_testcaselist test_cases(Vx.Core.Type_context context) {
-    List<Vx.Core.Type_any> arraylisttestcase = Vx.Core.arraylist_from_array(
+    object[] testcases = [
       HtmlTest.f_string_from_body_indent(context),
       HtmlTest.f_string_from_div_indent(context),
       HtmlTest.f_string_from_head_indent(context),
@@ -317,10 +317,10 @@ public class HtmlTest {
       HtmlTest.f_string_from_img_indent(context),
       HtmlTest.f_string_from_meta_indent(context),
       HtmlTest.f_string_from_p_indent(context)
-    );
+    ];
     Vx.Test.Type_testcaselist output = Vx.Core.vx_new(
       Vx.Test.t_testcaselist,
-      arraylisttestcase
+      testcases
     );
     return output;
   }

@@ -39,6 +39,16 @@ public final class AppTest {
   public static Core.Type_context context = En.f_context_test(arglist);
 
   @Test
+  void test_basics() {
+    TestLib.test_helloworld();
+    TestLib.test_async_new_from_value();
+    TestLib.test_async_from_async_fn();
+    TestLib.test_list_from_list_async();
+    TestLib.test_pathfull_from_file();
+    TestLib.test_read_file();
+    TestLib.test_write_file();
+  }
+  @Test
   @DisplayName("vx/core")
   void test_vx_core() {
     com.vxlisp.vx.Test.Type_testpackage testpackage = CoreTest.test_package(context);

@@ -6,7 +6,7 @@ import com.vxlisp.vx.*;
 
 public final class TextblockTest {
 
-  static Test.Type_testcase t_delimlist(final Core.Type_context context) {
+  public static Test.Type_testcase t_delimlist(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -42,7 +42,7 @@ public final class TextblockTest {
     return output;
   }
 
-  static Test.Type_testcase f_delim_first_from_delim_delim(final Core.Type_context context) {
+  public static Test.Type_testcase f_delim_first_from_delim_delim(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -110,7 +110,7 @@ public final class TextblockTest {
     return output;
   }
 
-  static Test.Type_testcase f_delim_first_from_string_delimlist(final Core.Type_context context) {
+  public static Test.Type_testcase f_delim_first_from_string_delimlist(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -149,7 +149,7 @@ public final class TextblockTest {
     return output;
   }
 
-  static Test.Type_testcase f_delim_pos_from_string_delim(final Core.Type_context context) {
+  public static Test.Type_testcase f_delim_pos_from_string_delim(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -182,7 +182,7 @@ public final class TextblockTest {
     return output;
   }
 
-  static Test.Type_testcase f_delimlist_pos_from_string_delimlist(final Core.Type_context context) {
+  public static Test.Type_testcase f_delimlist_pos_from_string_delimlist(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -233,7 +233,7 @@ public final class TextblockTest {
     return output;
   }
 
-  static Test.Type_testcase f_stringlist_from_textblocklist(final Core.Type_context context) {
+  public static Test.Type_testcase f_stringlist_from_textblocklist(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -283,7 +283,7 @@ public final class TextblockTest {
     return output;
   }
 
-  static Test.Type_testcase f_text_from_textblock(final Core.Type_context context) {
+  public static Test.Type_testcase f_text_from_textblock(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -315,7 +315,7 @@ public final class TextblockTest {
     return output;
   }
 
-  static Test.Type_testcase f_textblock_delimnotfound(final Core.Type_context context) {
+  public static Test.Type_testcase f_textblock_delimnotfound(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1682,7 +1682,7 @@ public final class TextblockTest {
     return output;
   }
 
-  static Test.Type_testcase f_textblock_init(final Core.Type_context context) {
+  public static Test.Type_testcase f_textblock_init(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1740,7 +1740,7 @@ public final class TextblockTest {
     return output;
   }
 
-  static Test.Type_testcase f_textblock_parse(final Core.Type_context context) {
+  public static Test.Type_testcase f_textblock_parse(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1966,7 +1966,7 @@ public final class TextblockTest {
     return output;
   }
 
-  static Test.Type_testcase f_textblock_parse_one(final Core.Type_context context) {
+  public static Test.Type_testcase f_textblock_parse_one(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -8842,7 +8842,7 @@ public final class TextblockTest {
     return output;
   }
 
-  static Test.Type_testcase f_textblock_startleft_from_string_delim_offset(final Core.Type_context context) {
+  public static Test.Type_testcase f_textblock_startleft_from_string_delim_offset(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -8886,7 +8886,7 @@ public final class TextblockTest {
     return output;
   }
 
-  static Test.Type_testcase f_textblock_startright_from_string_delim_offset(final Core.Type_context context) {
+  public static Test.Type_testcase f_textblock_startright_from_string_delim_offset(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -8994,7 +8994,7 @@ public final class TextblockTest {
     return output;
   }
 
-  static Test.Type_testcase f_textblock_from_close_textblock(final Core.Type_context context) {
+  public static Test.Type_testcase f_textblock_from_close_textblock(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -9732,7 +9732,7 @@ public final class TextblockTest {
     return output;
   }
 
-  static Test.Type_testcase f_textblock_from_open_textblock(final Core.Type_context context) {
+  public static Test.Type_testcase f_textblock_from_open_textblock(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -10120,7 +10120,7 @@ public final class TextblockTest {
     return output;
   }
 
-  static Test.Type_testcase f_textblock_from_single_textblock(final Core.Type_context context) {
+  public static Test.Type_testcase f_textblock_from_single_textblock(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -11071,7 +11071,7 @@ public final class TextblockTest {
     return output;
   }
 
-  static Test.Type_testcase f_textblock_from_string_delim(final Core.Type_context context) {
+  public static Test.Type_testcase f_textblock_from_string_delim(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -11110,7 +11110,7 @@ public final class TextblockTest {
     return output;
   }
 
-  static Test.Type_testcase f_textblocklist_from_textblocklist_remove(final Core.Type_context context) {
+  public static Test.Type_testcase f_textblocklist_from_textblocklist_remove(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -11218,7 +11218,7 @@ public final class TextblockTest {
   }
 
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
-    List<Core.Type_any> arraylisttestcase = Core.arraylist_from_array(
+    List<Core.Type_any> testcases = Core.arraylist_from_array(
       TextblockTest.t_delimlist(context),
       TextblockTest.f_delim_first_from_delim_delim(context),
       TextblockTest.f_delim_first_from_string_delimlist(context),
@@ -11240,7 +11240,7 @@ public final class TextblockTest {
     );
     Test.Type_testcaselist output = Core.vx_new(
       Test.t_testcaselist,
-      arraylisttestcase
+      testcases
     );
     return output;
   }

@@ -3804,7 +3804,7 @@ namespace vx_test {
         vx_core::vx_new_string(":name"),
         vx_core::vx_new_string("testsuite.vxlisp"),
         vx_core::vx_new_string(":path"),
-        vx_core::vx_new_string("src/test/resources")
+        vx_core::c_path_test_resources
       })
     );
     return output;
@@ -3896,7 +3896,7 @@ namespace vx_test {
         vx_core::vx_new_string(":name"),
         vx_core::vx_new_string("testsuite.html"),
         vx_core::vx_new_string(":path"),
-        vx_core::vx_new_string("src/test/resources")
+        vx_core::c_path_test_resources
       })
     );
     return output;
@@ -3988,7 +3988,7 @@ namespace vx_test {
         vx_core::vx_new_string(":name"),
         vx_core::vx_new_string("testsuitenode.vxlisp"),
         vx_core::vx_new_string(":path"),
-        vx_core::vx_new_string("src/test/resources")
+        vx_core::c_path_test_resources
       })
     );
     return output;

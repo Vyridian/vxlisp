@@ -168,7 +168,8 @@
     Vx.Core.Type_stringlist output = Vx.Core.e_stringlist;
     string stext = text.vx_string();
     string sdelim = delim.vx_string();
-    Object[] arraystring = System.Text.RegularExpressions.Regex.Split(stext, sdelim);
+    string[] delimiters = new string[] {sdelim};
+    object[] arraystring = stext.Split(delimiters, System.StringSplitOptions.None);
     output = Vx.Core.vx_new(Vx.Core.t_stringlist, arraystring);
     return output;
   }

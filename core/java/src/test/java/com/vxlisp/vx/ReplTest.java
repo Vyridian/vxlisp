@@ -6,7 +6,7 @@ import com.vxlisp.vx.data.*;
 
 public final class ReplTest {
 
-  static Test.Type_testcase f_any_from_macro(final Core.Type_context context) {
+  public static Test.Type_testcase f_any_from_macro(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -38,7 +38,7 @@ public final class ReplTest {
     return output;
   }
 
-  static Test.Type_testcase f_any_from_repl(final Core.Type_context context) {
+  public static Test.Type_testcase f_any_from_repl(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -130,7 +130,7 @@ public final class ReplTest {
     return output;
   }
 
-  static Test.Type_testcase f_any_from_script(final Core.Type_context context) {
+  public static Test.Type_testcase f_any_from_script(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -154,7 +154,7 @@ public final class ReplTest {
     return output;
   }
 
-  static Test.Type_testcase f_const_from_string(final Core.Type_context context) {
+  public static Test.Type_testcase f_const_from_string(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -188,7 +188,7 @@ public final class ReplTest {
     return output;
   }
 
-  static Test.Type_testcase f_repl_empty_from_textblock_argmap(final Core.Type_context context) {
+  public static Test.Type_testcase f_repl_empty_from_textblock_argmap(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -342,7 +342,7 @@ public final class ReplTest {
     return output;
   }
 
-  static Test.Type_testcase f_repl_paren_from_textblock_argmap(final Core.Type_context context) {
+  public static Test.Type_testcase f_repl_paren_from_textblock_argmap(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -470,7 +470,7 @@ public final class ReplTest {
     return output;
   }
 
-  static Test.Type_testcase f_repl_from_macro(final Core.Type_context context) {
+  public static Test.Type_testcase f_repl_from_macro(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -527,7 +527,7 @@ public final class ReplTest {
     return output;
   }
 
-  static Test.Type_testcase f_repl_from_script(final Core.Type_context context) {
+  public static Test.Type_testcase f_repl_from_script(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -625,7 +625,7 @@ public final class ReplTest {
     return output;
   }
 
-  static Test.Type_testcase f_repl_from_string_argmap(final Core.Type_context context) {
+  public static Test.Type_testcase f_repl_from_string_argmap(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -786,7 +786,7 @@ public final class ReplTest {
     return output;
   }
 
-  static Test.Type_testcase f_repl_from_textblock(final Core.Type_context context) {
+  public static Test.Type_testcase f_repl_from_textblock(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1107,7 +1107,7 @@ public final class ReplTest {
     return output;
   }
 
-  static Test.Type_testcase f_repl_from_textblock_argmap(final Core.Type_context context) {
+  public static Test.Type_testcase f_repl_from_textblock_argmap(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1416,7 +1416,7 @@ public final class ReplTest {
     return output;
   }
 
-  static Test.Type_testcase f_textblock_from_script(final Core.Type_context context) {
+  public static Test.Type_testcase f_textblock_from_script(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1599,7 +1599,7 @@ public final class ReplTest {
     return output;
   }
 
-  static Test.Type_testcase f_typefunc_from_string(final Core.Type_context context) {
+  public static Test.Type_testcase f_typefunc_from_string(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1634,7 +1634,7 @@ public final class ReplTest {
   }
 
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
-    List<Core.Type_any> arraylisttestcase = Core.arraylist_from_array(
+    List<Core.Type_any> testcases = Core.arraylist_from_array(
       ReplTest.f_any_from_macro(context),
       ReplTest.f_any_from_repl(context),
       ReplTest.f_any_from_script(context),
@@ -1651,7 +1651,7 @@ public final class ReplTest {
     );
     Test.Type_testcaselist output = Core.vx_new(
       Test.t_testcaselist,
-      arraylisttestcase
+      testcases
     );
     return output;
   }

@@ -115,12 +115,12 @@ public static class Tree {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Data.Tree.Type_branch vx_new(params Object[] vals) {
+    public override Vx.Data.Tree.Type_branch vx_new(params object[] vals) {
       Vx.Data.Tree.Type_branch output = Vx.Core.vx_copy(Vx.Data.Tree.e_branch, vals);
       return output;
     }
 
-    public override Vx.Data.Tree.Type_branch vx_copy(params Object[] vals) {
+    public override Vx.Data.Tree.Type_branch vx_copy(params object[] vals) {
       Type_branch output = this;
       bool ischanged = false;
       Class_branch val = this;
@@ -144,7 +144,7 @@ public static class Tree {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -369,12 +369,12 @@ public static class Tree {
 
   public class Class_brancharrow : Vx.Core.Class_base, Type_brancharrow {
 
-    public override Vx.Data.Tree.Type_brancharrow vx_new(params Object[] vals) {
+    public override Vx.Data.Tree.Type_brancharrow vx_new(params object[] vals) {
       Vx.Data.Tree.Type_brancharrow output = Vx.Core.vx_copy(Vx.Data.Tree.e_brancharrow, vals);
       return output;
     }
 
-    public override Vx.Data.Tree.Type_brancharrow vx_copy(params Object[] vals) {
+    public override Vx.Data.Tree.Type_brancharrow vx_copy(params object[] vals) {
       Type_brancharrow output = this;
       bool ischanged = false;
       Class_brancharrow val = this;
@@ -459,12 +459,12 @@ public static class Tree {
       return this.vx_branch(index);
     }
 
-    public override Vx.Data.Tree.Type_branchlist vx_new(params Object[] vals) {
+    public override Vx.Data.Tree.Type_branchlist vx_new(params object[] vals) {
       Vx.Data.Tree.Type_branchlist output = Vx.Core.vx_copy(Vx.Data.Tree.e_branchlist, vals);
       return output;
     }
 
-    public override Vx.Data.Tree.Type_branchlist vx_copy(params Object[] vals) {
+    public override Vx.Data.Tree.Type_branchlist vx_copy(params object[] vals) {
       Type_branchlist output = this;
       bool ischanged = false;
       Class_branchlist val = this;
@@ -474,7 +474,7 @@ public static class Tree {
       }
       List<Vx.Data.Tree.Type_branch> listval = new List<Vx.Data.Tree.Type_branch>(val.vx_listbranch());
       Vx.Core.Type_msg msg;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -488,8 +488,8 @@ public static class Tree {
         } else if (valsub is Vx.Data.Tree.Type_branchlist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listbranch());
-        } else if (valsub is List<object> listunknown) {
-          foreach (Object item in listunknown) {
+        } else if (valsub is List<Vx.Core.Type_any> listany) {
+          foreach (Vx.Core.Type_any item in listany) {
             if (false) {
             } else if (item is Vx.Data.Tree.Type_branch valitem) {
               ischanged = true;
@@ -610,12 +610,12 @@ public static class Tree {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Data.Tree.Type_leaf vx_new(params Object[] vals) {
+    public override Vx.Data.Tree.Type_leaf vx_new(params object[] vals) {
       Vx.Data.Tree.Type_leaf output = Vx.Core.vx_copy(Vx.Data.Tree.e_leaf, vals);
       return output;
     }
 
-    public override Vx.Data.Tree.Type_leaf vx_copy(params Object[] vals) {
+    public override Vx.Data.Tree.Type_leaf vx_copy(params object[] vals) {
       Type_leaf output = this;
       bool ischanged = false;
       Class_leaf val = this;
@@ -633,7 +633,7 @@ public static class Tree {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -828,12 +828,12 @@ public static class Tree {
       return this.vx_leaf(index);
     }
 
-    public override Vx.Data.Tree.Type_leaflist vx_new(params Object[] vals) {
+    public override Vx.Data.Tree.Type_leaflist vx_new(params object[] vals) {
       Vx.Data.Tree.Type_leaflist output = Vx.Core.vx_copy(Vx.Data.Tree.e_leaflist, vals);
       return output;
     }
 
-    public override Vx.Data.Tree.Type_leaflist vx_copy(params Object[] vals) {
+    public override Vx.Data.Tree.Type_leaflist vx_copy(params object[] vals) {
       Type_leaflist output = this;
       bool ischanged = false;
       Class_leaflist val = this;
@@ -843,7 +843,7 @@ public static class Tree {
       }
       List<Vx.Data.Tree.Type_leaf> listval = new List<Vx.Data.Tree.Type_leaf>(val.vx_listleaf());
       Vx.Core.Type_msg msg;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -857,8 +857,8 @@ public static class Tree {
         } else if (valsub is Vx.Data.Tree.Type_leaflist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listleaf());
-        } else if (valsub is List<object> listunknown) {
-          foreach (Object item in listunknown) {
+        } else if (valsub is List<Vx.Core.Type_any> listany) {
+          foreach (Vx.Core.Type_any item in listany) {
             if (false) {
             } else if (item is Vx.Data.Tree.Type_leaf valitem) {
               ischanged = true;
@@ -979,12 +979,12 @@ public static class Tree {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Data.Tree.Type_tree vx_new(params Object[] vals) {
+    public override Vx.Data.Tree.Type_tree vx_new(params object[] vals) {
       Vx.Data.Tree.Type_tree output = Vx.Core.vx_copy(Vx.Data.Tree.e_tree, vals);
       return output;
     }
 
-    public override Vx.Data.Tree.Type_tree vx_copy(params Object[] vals) {
+    public override Vx.Data.Tree.Type_tree vx_copy(params object[] vals) {
       Type_tree output = this;
       bool ischanged = false;
       Class_tree val = this;
@@ -1002,7 +1002,7 @@ public static class Tree {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -1264,7 +1264,7 @@ public static class Tree {
 
 
   public static class PackageRunOnce {
-    public static void RunOnce() {
+    public static bool RunOnce() {
     Const_brancharrow_down.const_new(c_brancharrow_down);
     Const_brancharrow_up.const_new(c_brancharrow_up);
     Const_brancharrow_updown.const_new(c_brancharrow_updown);
@@ -1281,7 +1281,10 @@ public static class Tree {
     mapconst.put("brancharrow-up", Vx.Data.Tree.c_brancharrow_up);
     mapconst.put("brancharrow-updown", Vx.Data.Tree.c_brancharrow_updown);
     Vx.Core.vx_global_package_set("vx/data/tree", maptype, mapconst, mapfunc);
+      return true;
     }
   }
+
+  public static bool ranonce = PackageRunOnce.RunOnce();
 
 }

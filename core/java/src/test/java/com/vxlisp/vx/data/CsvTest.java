@@ -6,7 +6,7 @@ import com.vxlisp.vx.*;
 
 public final class CsvTest {
 
-  static Test.Type_testcase f_textblock_csv_from_string(final Core.Type_context context) {
+  public static Test.Type_testcase f_textblock_csv_from_string(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -223,12 +223,12 @@ public final class CsvTest {
   }
 
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
-    List<Core.Type_any> arraylisttestcase = Core.arraylist_from_array(
+    List<Core.Type_any> testcases = Core.arraylist_from_array(
       CsvTest.f_textblock_csv_from_string(context)
     );
     Test.Type_testcaselist output = Core.vx_new(
       Test.t_testcaselist,
-      arraylisttestcase
+      testcases
     );
     return output;
   }

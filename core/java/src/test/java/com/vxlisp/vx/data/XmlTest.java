@@ -6,7 +6,7 @@ import com.vxlisp.vx.*;
 
 public final class XmlTest {
 
-  static Test.Type_testcase f_string_first_from_xml(final Core.Type_context context) {
+  public static Test.Type_testcase f_string_first_from_xml(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -49,7 +49,7 @@ public final class XmlTest {
     return output;
   }
 
-  static Test.Type_testcase f_textblock_xml_from_string(final Core.Type_context context) {
+  public static Test.Type_testcase f_textblock_xml_from_string(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -513,7 +513,7 @@ public final class XmlTest {
     return output;
   }
 
-  static Test.Type_testcase f_xml_angle_from_xml_textblock(final Core.Type_context context) {
+  public static Test.Type_testcase f_xml_angle_from_xml_textblock(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -889,7 +889,7 @@ public final class XmlTest {
     return output;
   }
 
-  static Test.Type_testcase f_xml_close_from_xml_textblock(final Core.Type_context context) {
+  public static Test.Type_testcase f_xml_close_from_xml_textblock(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1073,7 +1073,7 @@ public final class XmlTest {
     return output;
   }
 
-  static Test.Type_testcase f_xml_parse_from_xml_textblock(final Core.Type_context context) {
+  public static Test.Type_testcase f_xml_parse_from_xml_textblock(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1596,7 +1596,7 @@ public final class XmlTest {
     return output;
   }
 
-  static Test.Type_testcase f_xml_parse_from_xml_textblocklist(final Core.Type_context context) {
+  public static Test.Type_testcase f_xml_parse_from_xml_textblocklist(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -2127,7 +2127,7 @@ public final class XmlTest {
     return output;
   }
 
-  static Test.Type_testcase f_xml_properties_from_xml_textblocklist(final Core.Type_context context) {
+  public static Test.Type_testcase f_xml_properties_from_xml_textblocklist(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -2364,7 +2364,7 @@ public final class XmlTest {
     return output;
   }
 
-  static Test.Type_testcase f_xml_property_from_xml_textblock(final Core.Type_context context) {
+  public static Test.Type_testcase f_xml_property_from_xml_textblock(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -2502,7 +2502,7 @@ public final class XmlTest {
     return output;
   }
 
-  static Test.Type_testcase f_xml_text_from_xml_textblock(final Core.Type_context context) {
+  public static Test.Type_testcase f_xml_text_from_xml_textblock(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -2587,7 +2587,7 @@ public final class XmlTest {
     return output;
   }
 
-  static Test.Type_testcase f_xml_from_textblock(final Core.Type_context context) {
+  public static Test.Type_testcase f_xml_from_textblock(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -3128,7 +3128,7 @@ public final class XmlTest {
   }
 
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
-    List<Core.Type_any> arraylisttestcase = Core.arraylist_from_array(
+    List<Core.Type_any> testcases = Core.arraylist_from_array(
       XmlTest.f_string_first_from_xml(context),
       XmlTest.f_textblock_xml_from_string(context),
       XmlTest.f_xml_angle_from_xml_textblock(context),
@@ -3142,7 +3142,7 @@ public final class XmlTest {
     );
     Test.Type_testcaselist output = Core.vx_new(
       Test.t_testcaselist,
-      arraylisttestcase
+      testcases
     );
     return output;
   }

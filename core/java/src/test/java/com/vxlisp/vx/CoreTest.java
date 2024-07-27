@@ -5,7 +5,7 @@ import java.util.List;
 
 public final class CoreTest {
 
-  static Test.Type_testcase t_boolean(final Core.Type_context context) {
+  public static Test.Type_testcase t_boolean(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -65,7 +65,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase t_float(final Core.Type_context context) {
+  public static Test.Type_testcase t_float(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -94,7 +94,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase t_func(final Core.Type_context context) {
+  public static Test.Type_testcase t_func(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -125,7 +125,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase t_int(final Core.Type_context context) {
+  public static Test.Type_testcase t_int(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -208,7 +208,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase t_string(final Core.Type_context context) {
+  public static Test.Type_testcase t_string(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -253,7 +253,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase c_false(final Core.Type_context context) {
+  public static Test.Type_testcase c_false(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -276,7 +276,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase c_true(final Core.Type_context context) {
+  public static Test.Type_testcase c_true(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -299,7 +299,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_not(final Core.Type_context context) {
+  public static Test.Type_testcase f_not(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -333,7 +333,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_ne(final Core.Type_context context) {
+  public static Test.Type_testcase f_ne(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -363,7 +363,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_multiply(final Core.Type_context context) {
+  public static Test.Type_testcase f_multiply(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -397,7 +397,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_multiply_1(final Core.Type_context context) {
+  public static Test.Type_testcase f_multiply_1(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -431,7 +431,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_multiply_2(final Core.Type_context context) {
+  public static Test.Type_testcase f_multiply_2(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -477,7 +477,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_multiply_3(final Core.Type_context context) {
+  public static Test.Type_testcase f_multiply_3(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -523,7 +523,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_plus(final Core.Type_context context) {
+  public static Test.Type_testcase f_plus(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -557,7 +557,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_plus_1(final Core.Type_context context) {
+  public static Test.Type_testcase f_plus_1(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -591,7 +591,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_plus1(final Core.Type_context context) {
+  public static Test.Type_testcase f_plus1(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -625,7 +625,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_minus(final Core.Type_context context) {
+  public static Test.Type_testcase f_minus(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -659,7 +659,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_minus_1(final Core.Type_context context) {
+  public static Test.Type_testcase f_minus_1(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -693,7 +693,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_minus1(final Core.Type_context context) {
+  public static Test.Type_testcase f_minus1(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -727,7 +727,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_divide(final Core.Type_context context) {
+  public static Test.Type_testcase f_divide(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -761,7 +761,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_lt(final Core.Type_context context) {
+  public static Test.Type_testcase f_lt(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -784,7 +784,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_lt_1(final Core.Type_context context) {
+  public static Test.Type_testcase f_lt_1(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -822,7 +822,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_chainfirst(final Core.Type_context context) {
+  public static Test.Type_testcase f_chainfirst(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -858,7 +858,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_chainlast(final Core.Type_context context) {
+  public static Test.Type_testcase f_chainlast(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -894,7 +894,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_le(final Core.Type_context context) {
+  public static Test.Type_testcase f_le(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -917,7 +917,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_le_1(final Core.Type_context context) {
+  public static Test.Type_testcase f_le_1(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -946,7 +946,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_eq(final Core.Type_context context) {
+  public static Test.Type_testcase f_eq(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1044,7 +1044,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_eq_1(final Core.Type_context context) {
+  public static Test.Type_testcase f_eq_1(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1073,7 +1073,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_eqeq(final Core.Type_context context) {
+  public static Test.Type_testcase f_eqeq(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1105,7 +1105,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_gt(final Core.Type_context context) {
+  public static Test.Type_testcase f_gt(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1128,7 +1128,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_gt_1(final Core.Type_context context) {
+  public static Test.Type_testcase f_gt_1(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1157,7 +1157,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_ge(final Core.Type_context context) {
+  public static Test.Type_testcase f_ge(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1180,7 +1180,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_ge_1(final Core.Type_context context) {
+  public static Test.Type_testcase f_ge_1(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1209,7 +1209,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_and(final Core.Type_context context) {
+  public static Test.Type_testcase f_and(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1247,7 +1247,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_and_1(final Core.Type_context context) {
+  public static Test.Type_testcase f_and_1(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1291,7 +1291,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_any_from_list(final Core.Type_context context) {
+  public static Test.Type_testcase f_any_from_list(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1347,7 +1347,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_any_from_list_start_reduce(final Core.Type_context context) {
+  public static Test.Type_testcase f_any_from_list_start_reduce(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1389,7 +1389,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_any_from_map(final Core.Type_context context) {
+  public static Test.Type_testcase f_any_from_map(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1427,7 +1427,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_any_from_map_start_reduce(final Core.Type_context context) {
+  public static Test.Type_testcase f_any_from_map_start_reduce(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1477,7 +1477,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_boolean_write_from_map_name_value(final Core.Type_context context) {
+  public static Test.Type_testcase f_boolean_write_from_map_name_value(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1555,7 +1555,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_compare(final Core.Type_context context) {
+  public static Test.Type_testcase f_compare(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1589,7 +1589,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_contains(final Core.Type_context context) {
+  public static Test.Type_testcase f_contains(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1621,7 +1621,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_contains_1(final Core.Type_context context) {
+  public static Test.Type_testcase f_contains_1(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1692,7 +1692,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_copy(final Core.Type_context context) {
+  public static Test.Type_testcase f_copy(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1736,7 +1736,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_empty(final Core.Type_context context) {
+  public static Test.Type_testcase f_empty(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1802,7 +1802,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_first_from_list(final Core.Type_context context) {
+  public static Test.Type_testcase f_first_from_list(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1835,7 +1835,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_first_from_list_any_from_any(final Core.Type_context context) {
+  public static Test.Type_testcase f_first_from_list_any_from_any(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1870,7 +1870,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_float_from_string(final Core.Type_context context) {
+  public static Test.Type_testcase f_float_from_string(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1899,7 +1899,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_if(final Core.Type_context context) {
+  public static Test.Type_testcase f_if(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1941,7 +1941,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_if_1(final Core.Type_context context) {
+  public static Test.Type_testcase f_if_1(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -1985,7 +1985,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_if_2(final Core.Type_context context) {
+  public static Test.Type_testcase f_if_2(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -2035,7 +2035,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_int_from_string(final Core.Type_context context) {
+  public static Test.Type_testcase f_int_from_string(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -2109,7 +2109,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_is_empty_1(final Core.Type_context context) {
+  public static Test.Type_testcase f_is_empty_1(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -2169,7 +2169,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_is_int(final Core.Type_context context) {
+  public static Test.Type_testcase f_is_int(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -2221,7 +2221,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_is_number(final Core.Type_context context) {
+  public static Test.Type_testcase f_is_number(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -2262,7 +2262,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_last_from_list(final Core.Type_context context) {
+  public static Test.Type_testcase f_last_from_list(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -2295,7 +2295,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_length(final Core.Type_context context) {
+  public static Test.Type_testcase f_length(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -2329,7 +2329,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_length_1(final Core.Type_context context) {
+  public static Test.Type_testcase f_length_1(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -2362,7 +2362,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_let(final Core.Type_context context) {
+  public static Test.Type_testcase f_let(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -2394,7 +2394,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_list_join_from_list(final Core.Type_context context) {
+  public static Test.Type_testcase f_list_join_from_list(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -2447,7 +2447,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_list_join_from_list_1(final Core.Type_context context) {
+  public static Test.Type_testcase f_list_join_from_list_1(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -2505,7 +2505,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_list_from_list(final Core.Type_context context) {
+  public static Test.Type_testcase f_list_from_list(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -2544,7 +2544,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_list_from_list_intany(final Core.Type_context context) {
+  public static Test.Type_testcase f_list_from_list_intany(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -2596,7 +2596,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_list_from_map(final Core.Type_context context) {
+  public static Test.Type_testcase f_list_from_map(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -2637,7 +2637,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_list_from_map_1(final Core.Type_context context) {
+  public static Test.Type_testcase f_list_from_map_1(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -2691,7 +2691,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_map_from_list(final Core.Type_context context) {
+  public static Test.Type_testcase f_map_from_list(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -2744,7 +2744,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_map_from_map(final Core.Type_context context) {
+  public static Test.Type_testcase f_map_from_map(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -2783,7 +2783,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_map_from_map_1(final Core.Type_context context) {
+  public static Test.Type_testcase f_map_from_map_1(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -2839,7 +2839,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_new(final Core.Type_context context) {
+  public static Test.Type_testcase f_new(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -2963,7 +2963,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_or(final Core.Type_context context) {
+  public static Test.Type_testcase f_or(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -3013,7 +3013,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_or_1(final Core.Type_context context) {
+  public static Test.Type_testcase f_or_1(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -3057,7 +3057,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_resolve(final Core.Type_context context) {
+  public static Test.Type_testcase f_resolve(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -3081,7 +3081,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_resolve_1(final Core.Type_context context) {
+  public static Test.Type_testcase f_resolve_1(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -3113,7 +3113,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_resolve_async(final Core.Type_context context) {
+  public static Test.Type_testcase f_resolve_async(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -3145,7 +3145,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_string_repeat(final Core.Type_context context) {
+  public static Test.Type_testcase f_string_repeat(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -3169,7 +3169,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_string_from_any(final Core.Type_context context) {
+  public static Test.Type_testcase f_string_from_any(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -3264,7 +3264,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_string_from_string_find_replace(final Core.Type_context context) {
+  public static Test.Type_testcase f_string_from_string_find_replace(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -3288,7 +3288,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_stringlist_from_map(final Core.Type_context context) {
+  public static Test.Type_testcase f_stringlist_from_map(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -3328,7 +3328,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_switch(final Core.Type_context context) {
+  public static Test.Type_testcase f_switch(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -3375,7 +3375,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_type_from_any(final Core.Type_context context) {
+  public static Test.Type_testcase f_type_from_any(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -3421,7 +3421,7 @@ public final class CoreTest {
     return output;
   }
 
-  static Test.Type_testcase f_typename_from_any(final Core.Type_context context) {
+  public static Test.Type_testcase f_typename_from_any(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -3468,7 +3468,7 @@ public final class CoreTest {
   }
 
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
-    List<Core.Type_any> arraylisttestcase = Core.arraylist_from_array(
+    List<Core.Type_any> testcases = Core.arraylist_from_array(
       CoreTest.t_boolean(context),
       CoreTest.t_float(context),
       CoreTest.t_func(context),
@@ -3553,7 +3553,7 @@ public final class CoreTest {
     );
     Test.Type_testcaselist output = Core.vx_new(
       Test.t_testcaselist,
-      arraylisttestcase
+      testcases
     );
     return output;
   }
@@ -3562,12 +3562,12 @@ public final class CoreTest {
     return Core.vx_new(
       Test.t_testcoveragesummary,
       ":testpkg", "vx/core", 
-      ":constnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 14, ":tests", 2, ":total", 14), 
-      ":docnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 90, ":tests", 231, ":total", 256), 
+      ":constnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 13, ":tests", 2, ":total", 15), 
+      ":docnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 90, ":tests", 232, ":total", 257), 
       ":funcnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 55, ":tests", 74, ":total", 134), 
       ":bigospacenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 1, ":total", 166), 
       ":bigotimenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 1, ":total", 166), 
-      ":totalnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 36, ":tests", 81, ":total", 224), 
+      ":totalnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 36, ":tests", 81, ":total", 225), 
       ":typenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 6, ":tests", 5, ":total", 76)
     );
   }
@@ -3665,6 +3665,7 @@ public final class CoreTest {
         ":newline", 0,
         ":notanumber", 0,
         ":nothing", 0,
+        ":path-test-resources", 0,
         ":quote", 0,
         ":true", 1
 ), ":funcmap", Core.vx_new(

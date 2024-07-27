@@ -6,7 +6,7 @@ import com.vxlisp.vx.*;
 
 public final class EsTest {
 
-  static Test.Type_testcase f_translation_es(final Core.Type_context context) {
+  public static Test.Type_testcase f_translation_es(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -34,12 +34,12 @@ public final class EsTest {
   }
 
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
-    List<Core.Type_any> arraylisttestcase = Core.arraylist_from_array(
+    List<Core.Type_any> testcases = Core.arraylist_from_array(
       EsTest.f_translation_es(context)
     );
     Test.Type_testcaselist output = Core.vx_new(
       Test.t_testcaselist,
-      arraylisttestcase
+      testcases
     );
     return output;
   }

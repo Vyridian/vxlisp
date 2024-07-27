@@ -647,6 +647,9 @@
  "nothing"
  :doc "Nothing Value. Opposite of every other value. e.g. Nil, Null")
 
+(const path-test-resources : string
+ :doc "The test path from project file")
+
 (const quote : string
  `"`
  :doc "Quotation mark constant")
@@ -1580,9 +1583,9 @@
  [value : any-1]
  (native
   :csharp
-   "output = Vx.Core.vx_async_new_completed(value);"
+   "output = Vx.Core.vx_async_new_from_value(value);"
   :java
-   "output = Core.vx_async_new_completed(value);"
+   "output = Core.vx_async_new_from_value(value);"
   :js
    "value")
  :doc "Returns an asynchonous version value. This exists mostly for type-casting.")
@@ -2415,16 +2418,7 @@
     });
     output = vx_core::vx_async_new_from_listasync(generic_list_1, list_async_result);"
   :csharp :auto
-  :java
-   "List<Core.Type_any> list_value = values.vx_list();
-    List<CompletableFuture<Core.Type_any>> list_async_result = Core.arraylist_from_arraylist_fn(list_value, (val) -> {
-      return fn_any_from_any_async.vx_any_from_any_async(generic_list_1, val);
-    });
-    CompletableFuture<List<Core.Type_any>> async_list_result = Core.vx_async_arraylist_from_arraylist_async(list_async_result);
-    output = Core.vx_async_from_async_fn(async_list_result, (list_result) -> {
-      X work = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(list_result));
-      return work;
-    });"
+  :java   :auto
   :js
    "const fn = fn_any_from_any_async['vx_value']
     if (fn) {
@@ -2989,11 +2983,15 @@
       output = vx_core::vx_any_from_any(generic_any_1, any);
     }"
   :csharp
-   "if (fn_any != null) {
+   "if (fn_any == null) {
+    } else if (fn_any == Vx.Core.e_any_from_func) {
+    } else {
       output = fn_any.vx_any_from_func(generic_any_1);
     }"
   :java
-   "if (fn_any != null) {
+   "if (fn_any == null) {
+    } else if (fn_any == Core.e_any_from_func) {
+    } else {
       output = fn_any.vx_any_from_func(generic_any_1);
     }"
   :js
@@ -3020,11 +3018,15 @@
       output = fn_any->vx_any_from_func_async(generic_any_1);
     }"
   :csharp
-   "if (fn_any != null) {
+   "if (fn_any == null) {
+    } else if (fn_any == Vx.Core.e_any_from_func_async) {
+    } else {
       output = fn_any.vx_any_from_func_async(generic_any_1);
     }"
   :java
-   "if (fn_any != null) {
+   "if (fn_any == null) {
+    } else if (fn_any == Core.e_any_from_func_async) {
+    } else {
       output = fn_any.vx_any_from_func_async(generic_any_1);
     }"
   :js

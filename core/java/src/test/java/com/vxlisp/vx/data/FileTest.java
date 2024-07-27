@@ -6,7 +6,7 @@ import com.vxlisp.vx.*;
 
 public final class FileTest {
 
-  static Test.Type_testcase f_boolean_exists_from_file(final Core.Type_context context) {
+  public static Test.Type_testcase f_boolean_exists_from_file(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -17,7 +17,7 @@ public final class FileTest {
         Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
-          ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"boolean_exists_from_file.txt\"\n   :path \"src/test/resources/vx\")))",
+          ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"boolean_exists_from_file.txt\"\n   :path (string path-test-resources \"/vx\"))))",
           ":testresult",
             Test.f_test_true(
               context,
@@ -28,7 +28,13 @@ public final class FileTest {
                     Core.vx_new_string(":name"),
                     Core.vx_new_string("boolean_exists_from_file.txt"),
                     Core.vx_new_string(":path"),
-                    Core.vx_new_string("src/test/resources/vx")
+                    Core.f_new(
+                      Core.t_string,
+                      Core.vx_new(Core.t_anylist,
+                        Core.c_path_test_resources,
+                        Core.vx_new_string("/vx")
+                      )
+                    )
                   )
                 )
               )
@@ -39,7 +45,7 @@ public final class FileTest {
     return output;
   }
 
-  static Test.Type_testcase f_boolean_write_from_file_string(final Core.Type_context context) {
+  public static Test.Type_testcase f_boolean_write_from_file_string(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -50,7 +56,7 @@ public final class FileTest {
         Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
-          ":describename", "(test-true\n (boolean-write<-file-string\n  (file\n   :name \"boolean_write_from_file_string.txt\"\n   :path \"src/test/resources/vx\")\n  \"writetext\"))",
+          ":describename", "(test-true\n (boolean-write<-file-string\n  (file\n   :name \"boolean_write_from_file_string.txt\"\n   :path (string path-test-resources \"/vx\"))\n  \"writetext\"))",
           ":testresult",
             Test.f_test_true(
               context,
@@ -62,7 +68,13 @@ public final class FileTest {
                     Core.vx_new_string(":name"),
                     Core.vx_new_string("boolean_write_from_file_string.txt"),
                     Core.vx_new_string(":path"),
-                    Core.vx_new_string("src/test/resources/vx")
+                    Core.f_new(
+                      Core.t_string,
+                      Core.vx_new(Core.t_anylist,
+                        Core.c_path_test_resources,
+                        Core.vx_new_string("/vx")
+                      )
+                    )
                   )
                 ),
                 Core.vx_new_string("writetext")
@@ -74,7 +86,7 @@ public final class FileTest {
     return output;
   }
 
-  static Test.Type_testcase f_file_read_from_file(final Core.Type_context context) {
+  public static Test.Type_testcase f_file_read_from_file(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -85,7 +97,7 @@ public final class FileTest {
         Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
-          ":describename", "(test\n (file\n  :name \"string_read_from_file.txt\"\n  :path \"src/test/resources/vx\"\n  :text \"testdata\")\n (file-read<-file\n  (file\n   :name \"string_read_from_file.txt\"\n   :path \"src/test/resources/vx\")))",
+          ":describename", "(test\n (file\n  :name \"string_read_from_file.txt\"\n  :path (string path-test-resources \"/vx\")\n  :text \"testdata\")\n (file-read<-file\n  (file\n   :name \"string_read_from_file.txt\"\n   :path (string path-test-resources \"/vx\"))))",
           ":testresult",
             Test.f_test(
               context,
@@ -95,7 +107,13 @@ public final class FileTest {
                   Core.vx_new_string(":name"),
                   Core.vx_new_string("string_read_from_file.txt"),
                   Core.vx_new_string(":path"),
-                  Core.vx_new_string("src/test/resources/vx"),
+                  Core.f_new(
+                    Core.t_string,
+                    Core.vx_new(Core.t_anylist,
+                      Core.c_path_test_resources,
+                      Core.vx_new_string("/vx")
+                    )
+                  ),
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("testdata")
                 )
@@ -108,7 +126,13 @@ public final class FileTest {
                     Core.vx_new_string(":name"),
                     Core.vx_new_string("string_read_from_file.txt"),
                     Core.vx_new_string(":path"),
-                    Core.vx_new_string("src/test/resources/vx")
+                    Core.f_new(
+                      Core.t_string,
+                      Core.vx_new(Core.t_anylist,
+                        Core.c_path_test_resources,
+                        Core.vx_new_string("/vx")
+                      )
+                    )
                   )
                 )
               )
@@ -119,7 +143,7 @@ public final class FileTest {
     return output;
   }
 
-  static Test.Type_testcase f_pathfull_from_file(final Core.Type_context context) {
+  public static Test.Type_testcase f_pathfull_from_file(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -171,7 +195,7 @@ public final class FileTest {
     return output;
   }
 
-  static Test.Type_testcase f_string_read_from_file(final Core.Type_context context) {
+  public static Test.Type_testcase f_string_read_from_file(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -182,7 +206,7 @@ public final class FileTest {
         Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
-          ":describename", "(test\n \"testdata\"\n (string-read<-file\n  (file\n   :name \"string_read_from_file.txt\"\n   :path \"src/test/resources/vx\")))",
+          ":describename", "(test\n \"testdata\"\n (string-read<-file\n  (file\n   :name \"string_read_from_file.txt\"\n   :path (string path-test-resources \"/vx\"))))",
           ":testresult",
             Test.f_test(
               context,
@@ -195,7 +219,13 @@ public final class FileTest {
                     Core.vx_new_string(":name"),
                     Core.vx_new_string("string_read_from_file.txt"),
                     Core.vx_new_string(":path"),
-                    Core.vx_new_string("src/test/resources/vx")
+                    Core.f_new(
+                      Core.t_string,
+                      Core.vx_new(Core.t_anylist,
+                        Core.c_path_test_resources,
+                        Core.vx_new_string("/vx")
+                      )
+                    )
                   )
                 )
               )
@@ -207,7 +237,7 @@ public final class FileTest {
   }
 
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
-    List<Core.Type_any> arraylisttestcase = Core.arraylist_from_array(
+    List<Core.Type_any> testcases = Core.arraylist_from_array(
       FileTest.f_boolean_exists_from_file(context),
       FileTest.f_boolean_write_from_file_string(context),
       FileTest.f_file_read_from_file(context),
@@ -216,7 +246,7 @@ public final class FileTest {
     );
     Test.Type_testcaselist output = Core.vx_new(
       Test.t_testcaselist,
-      arraylisttestcase
+      testcases
     );
     return output;
   }

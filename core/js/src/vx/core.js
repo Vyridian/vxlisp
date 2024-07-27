@@ -1773,6 +1773,13 @@ export default class vx_core {
   static c_nothing = "nothing"
 
   /**
+   * Constant: path-test-resources
+   * The test path from project file
+   * {string}
+   */
+  static c_path_test_resources = "test/resources"
+
+  /**
    * Constant: quote
    * Quotation mark constant
    * {string}
@@ -3556,7 +3563,7 @@ export default class vx_core {
   /**
    * @function copy
    * Returns a copy of a given value with the given values added or updated.
-   * @param  {any} value
+   * @param  {generic_any_1} value
    * @param  {anylist} ... values
    * @return {any-1}
    */
@@ -3758,6 +3765,7 @@ export default class vx_core {
 
   /**
    * @function funcdef_from_func
+   * Returns the definition of a function
    * @param  {func} val
    * @return {funcdef}
    */
@@ -5881,6 +5889,7 @@ export default class vx_core {
       "newline": vx_core.c_newline,
       "notanumber": vx_core.c_notanumber,
       "nothing": vx_core.c_nothing,
+      "path-test-resources": vx_core.c_path_test_resources,
       "quote": vx_core.c_quote,
       "true": vx_core.c_true
     })

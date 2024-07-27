@@ -5,11 +5,12 @@
  :doc "File handler")
 
 (type file : struct
- :properties [name       : string
-              format     : fileformat
-              path       : string
-              permission : permission
-              text       : string]
+ :properties
+  [name       : string
+   format     : fileformat
+   path       : string
+   permission : permission
+   text       : string]
  :doc "File structure")
 
 (type filelist : list
@@ -37,7 +38,7 @@
         (boolean-exists<-file
          (file
           :name "boolean_exists_from_file.txt"
-          :path "src/test/resources/vx")))
+          :path (string path-test-resources "/vx"))))
  :clientserver :server
  :doc "Returns true if file/path exists.")
 
@@ -85,7 +86,7 @@
         (boolean-write<-file-string
          (file
           :name "boolean_write_from_file_string.txt"
-          :path "src/test/resources/vx")
+          :path (string path-test-resources "/vx"))
          "writetext"))
  :clientserver :server
  :doc "Write a File to Disk")
@@ -117,12 +118,12 @@
  :test (test
         (file
          :name "string_read_from_file.txt"
-         :path "src/test/resources/vx"
+         :path (string path-test-resources "/vx")
          :text "testdata")
         (file-read<-file
          (file
           :name "string_read_from_file.txt"
-          :path "src/test/resources/vx")))
+          :path (string path-test-resources "/vx"))))
  :clientserver :server
  :doc "Read a Text File from Disk")
 
@@ -142,7 +143,7 @@
         (string-read<-file
          (file
           :name "string_read_from_file.txt"
-          :path "src/test/resources/vx")))
+          :path (string path-test-resources "/vx"))))
  :clientserver :server
  :doc "Read text from a File")
 

@@ -3,7 +3,7 @@ namespace AppTest.TestVx;
 
 public class TestTest {
 
-  static Vx.Test.Type_testcase f_file_test(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_file_test(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -14,7 +14,7 @@ public class TestTest {
         Vx.Test.t_testdescribelist,
         Vx.Core.vx_new(
           Vx.Test.t_testdescribe,
-          ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.vxlisp\"\n   :path \"src/test/resources\")))",
+          ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.vxlisp\"\n   :path path-test-resources)))",
           ":testresult",
             Vx.Test.f_test_true(
               context,
@@ -25,7 +25,7 @@ public class TestTest {
                     Vx.Core.vx_new_string(":name"),
                     Vx.Core.vx_new_string("testsuite.vxlisp"),
                     Vx.Core.vx_new_string(":path"),
-                    Vx.Core.vx_new_string("src/test/resources")
+                    Vx.Core.c_path_test_resources
                   )
                 )
               )
@@ -36,7 +36,7 @@ public class TestTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_file_testhtml(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_file_testhtml(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -47,7 +47,7 @@ public class TestTest {
         Vx.Test.t_testdescribelist,
         Vx.Core.vx_new(
           Vx.Test.t_testdescribe,
-          ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.html\"\n   :path \"src/test/resources\")))",
+          ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.html\"\n   :path path-test-resources)))",
           ":testresult",
             Vx.Test.f_test_true(
               context,
@@ -58,7 +58,7 @@ public class TestTest {
                     Vx.Core.vx_new_string(":name"),
                     Vx.Core.vx_new_string("testsuite.html"),
                     Vx.Core.vx_new_string(":path"),
-                    Vx.Core.vx_new_string("src/test/resources")
+                    Vx.Core.c_path_test_resources
                   )
                 )
               )
@@ -69,7 +69,7 @@ public class TestTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_file_testnode(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_file_testnode(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -80,7 +80,7 @@ public class TestTest {
         Vx.Test.t_testdescribelist,
         Vx.Core.vx_new(
           Vx.Test.t_testdescribe,
-          ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuitenode.vxlisp\"\n   :path \"src/test/resources\")))",
+          ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuitenode.vxlisp\"\n   :path path-test-resources)))",
           ":testresult",
             Vx.Test.f_test_true(
               context,
@@ -91,7 +91,7 @@ public class TestTest {
                     Vx.Core.vx_new_string(":name"),
                     Vx.Core.vx_new_string("testsuitenode.vxlisp"),
                     Vx.Core.vx_new_string(":path"),
-                    Vx.Core.vx_new_string("src/test/resources")
+                    Vx.Core.c_path_test_resources
                   )
                 )
               )
@@ -103,14 +103,14 @@ public class TestTest {
   }
 
   public static Vx.Test.Type_testcaselist test_cases(Vx.Core.Type_context context) {
-    List<Vx.Core.Type_any> arraylisttestcase = Vx.Core.arraylist_from_array(
+    object[] testcases = [
       TestTest.f_file_test(context),
       TestTest.f_file_testhtml(context),
       TestTest.f_file_testnode(context)
-    );
+    ];
     Vx.Test.Type_testcaselist output = Vx.Core.vx_new(
       Vx.Test.t_testcaselist,
-      arraylisttestcase
+      testcases
     );
     return output;
   }

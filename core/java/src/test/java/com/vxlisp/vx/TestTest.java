@@ -7,7 +7,7 @@ import com.vxlisp.vx.web.*;
 
 public final class TestTest {
 
-  static Test.Type_testcase f_file_test(final Core.Type_context context) {
+  public static Test.Type_testcase f_file_test(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -18,7 +18,7 @@ public final class TestTest {
         Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
-          ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.vxlisp\"\n   :path \"src/test/resources\")))",
+          ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.vxlisp\"\n   :path path-test-resources)))",
           ":testresult",
             Test.f_test_true(
               context,
@@ -29,7 +29,7 @@ public final class TestTest {
                     Core.vx_new_string(":name"),
                     Core.vx_new_string("testsuite.vxlisp"),
                     Core.vx_new_string(":path"),
-                    Core.vx_new_string("src/test/resources")
+                    Core.c_path_test_resources
                   )
                 )
               )
@@ -40,7 +40,7 @@ public final class TestTest {
     return output;
   }
 
-  static Test.Type_testcase f_file_testhtml(final Core.Type_context context) {
+  public static Test.Type_testcase f_file_testhtml(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -51,7 +51,7 @@ public final class TestTest {
         Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
-          ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.html\"\n   :path \"src/test/resources\")))",
+          ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.html\"\n   :path path-test-resources)))",
           ":testresult",
             Test.f_test_true(
               context,
@@ -62,7 +62,7 @@ public final class TestTest {
                     Core.vx_new_string(":name"),
                     Core.vx_new_string("testsuite.html"),
                     Core.vx_new_string(":path"),
-                    Core.vx_new_string("src/test/resources")
+                    Core.c_path_test_resources
                   )
                 )
               )
@@ -73,7 +73,7 @@ public final class TestTest {
     return output;
   }
 
-  static Test.Type_testcase f_file_testnode(final Core.Type_context context) {
+  public static Test.Type_testcase f_file_testnode(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -84,7 +84,7 @@ public final class TestTest {
         Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
-          ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuitenode.vxlisp\"\n   :path \"src/test/resources\")))",
+          ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuitenode.vxlisp\"\n   :path path-test-resources)))",
           ":testresult",
             Test.f_test_true(
               context,
@@ -95,7 +95,7 @@ public final class TestTest {
                     Core.vx_new_string(":name"),
                     Core.vx_new_string("testsuitenode.vxlisp"),
                     Core.vx_new_string(":path"),
-                    Core.vx_new_string("src/test/resources")
+                    Core.c_path_test_resources
                   )
                 )
               )
@@ -107,14 +107,14 @@ public final class TestTest {
   }
 
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
-    List<Core.Type_any> arraylisttestcase = Core.arraylist_from_array(
+    List<Core.Type_any> testcases = Core.arraylist_from_array(
       TestTest.f_file_test(context),
       TestTest.f_file_testhtml(context),
       TestTest.f_file_testnode(context)
     );
     Test.Type_testcaselist output = Core.vx_new(
       Test.t_testcaselist,
-      arraylisttestcase
+      testcases
     );
     return output;
   }

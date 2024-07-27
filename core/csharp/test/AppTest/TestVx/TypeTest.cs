@@ -3,7 +3,7 @@ namespace AppTest.TestVx;
 
 public class TypeTest {
 
-  static Vx.Test.Type_testcase f_boolean_from_string_ends(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_boolean_from_string_ends(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -26,7 +26,7 @@ public class TypeTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_boolean_from_string_starts(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_boolean_from_string_starts(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -49,7 +49,7 @@ public class TypeTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_int_from_string_find(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_int_from_string_find(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -73,7 +73,7 @@ public class TypeTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_int_from_string_findkeyword(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_int_from_string_findkeyword(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -107,7 +107,7 @@ public class TypeTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_int_from_string_findlast(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_int_from_string_findlast(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -131,7 +131,7 @@ public class TypeTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_is_string(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_is_string(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -185,7 +185,7 @@ public class TypeTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_is_type(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_is_type(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -247,7 +247,7 @@ public class TypeTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_is_type_from_any_typelist(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_is_type_from_any_typelist(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -333,7 +333,7 @@ public class TypeTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_string_lowercase(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_string_lowercase(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -357,7 +357,7 @@ public class TypeTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_string_outdent(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_string_outdent(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -391,7 +391,7 @@ public class TypeTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_string_trim(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_string_trim(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -415,7 +415,7 @@ public class TypeTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_string_uppercase(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_string_uppercase(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -439,7 +439,7 @@ public class TypeTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_string_from_int(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_string_from_int(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -509,7 +509,7 @@ public class TypeTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_string_from_string_end(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_string_from_string_end(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -543,7 +543,7 @@ public class TypeTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_string_from_string_start(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_string_from_string_start(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -577,7 +577,7 @@ public class TypeTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_string_from_string_start_end(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_string_from_string_start_end(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -641,7 +641,7 @@ public class TypeTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_string_from_stringlist_join(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_string_from_stringlist_join(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -675,7 +675,7 @@ public class TypeTest {
     return output;
   }
 
-  static Vx.Test.Type_testcase f_stringlist_from_string_split(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_stringlist_from_string_split(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -707,7 +707,7 @@ public class TypeTest {
   }
 
   public static Vx.Test.Type_testcaselist test_cases(Vx.Core.Type_context context) {
-    List<Vx.Core.Type_any> arraylisttestcase = Vx.Core.arraylist_from_array(
+    object[] testcases = [
       TypeTest.f_boolean_from_string_ends(context),
       TypeTest.f_boolean_from_string_starts(context),
       TypeTest.f_int_from_string_find(context),
@@ -726,10 +726,10 @@ public class TypeTest {
       TypeTest.f_string_from_string_start_end(context),
       TypeTest.f_string_from_stringlist_join(context),
       TypeTest.f_stringlist_from_string_split(context)
-    );
+    ];
     Vx.Test.Type_testcaselist output = Vx.Core.vx_new(
       Vx.Test.t_testcaselist,
-      arraylisttestcase
+      testcases
     );
     return output;
   }

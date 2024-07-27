@@ -71,12 +71,12 @@ public static class State {
       return output;
     }
 
-    public override Vx.State.Type_valuemap vx_new(params Object[] vals) {
+    public override Vx.State.Type_valuemap vx_new(params object[] vals) {
       Vx.State.Type_valuemap output = Vx.Core.vx_copy(Vx.State.e_valuemap, vals);
       return output;
     }
 
-    public override Vx.State.Type_valuemap vx_copy(params Object[] vals) {
+    public override Vx.State.Type_valuemap vx_copy(params object[] vals) {
       Type_valuemap output = this;
       bool ischanged = false;
       Class_valuemap val = this;
@@ -88,7 +88,7 @@ public static class State {
       Vx.Core.Type_msg? msg = null;
       string key = "";
       Vx.Core.Type_any? msgval = null;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -192,12 +192,12 @@ public static class State {
 
   public class Class_any_readstate_from_mapname_name : Vx.Core.Class_base, Func_any_readstate_from_mapname_name {
 
-    public override Vx.State.Func_any_readstate_from_mapname_name vx_new(params Object[] vals) {
+    public override Vx.State.Func_any_readstate_from_mapname_name vx_new(params object[] vals) {
       Class_any_readstate_from_mapname_name output = new Class_any_readstate_from_mapname_name();
       return output;
     }
 
-    public override Vx.State.Func_any_readstate_from_mapname_name vx_copy(params Object[] vals) {
+    public override Vx.State.Func_any_readstate_from_mapname_name vx_copy(params object[] vals) {
       Class_any_readstate_from_mapname_name output = new Class_any_readstate_from_mapname_name();
       return output;
     }
@@ -281,12 +281,12 @@ public static class State {
 
   public class Class_any_readstate_from_name : Vx.Core.Class_base, Func_any_readstate_from_name {
 
-    public override Vx.State.Func_any_readstate_from_name vx_new(params Object[] vals) {
+    public override Vx.State.Func_any_readstate_from_name vx_new(params object[] vals) {
       Class_any_readstate_from_name output = new Class_any_readstate_from_name();
       return output;
     }
 
-    public override Vx.State.Func_any_readstate_from_name vx_copy(params Object[] vals) {
+    public override Vx.State.Func_any_readstate_from_name vx_copy(params object[] vals) {
       Class_any_readstate_from_name output = new Class_any_readstate_from_name();
       return output;
     }
@@ -377,12 +377,12 @@ public static class State {
 
   public class Class_boolean_removestate_from_name : Vx.Core.Class_base, Func_boolean_removestate_from_name {
 
-    public override Vx.State.Func_boolean_removestate_from_name vx_new(params Object[] vals) {
+    public override Vx.State.Func_boolean_removestate_from_name vx_new(params object[] vals) {
       Class_boolean_removestate_from_name output = new Class_boolean_removestate_from_name();
       return output;
     }
 
-    public override Vx.State.Func_boolean_removestate_from_name vx_copy(params Object[] vals) {
+    public override Vx.State.Func_boolean_removestate_from_name vx_copy(params object[] vals) {
       Class_boolean_removestate_from_name output = new Class_boolean_removestate_from_name();
       return output;
     }
@@ -484,12 +484,12 @@ public static class State {
 
   public class Class_boolean_writestate_from_mapname_name_value : Vx.Core.Class_base, Func_boolean_writestate_from_mapname_name_value {
 
-    public override Vx.State.Func_boolean_writestate_from_mapname_name_value vx_new(params Object[] vals) {
+    public override Vx.State.Func_boolean_writestate_from_mapname_name_value vx_new(params object[] vals) {
       Class_boolean_writestate_from_mapname_name_value output = new Class_boolean_writestate_from_mapname_name_value();
       return output;
     }
 
-    public override Vx.State.Func_boolean_writestate_from_mapname_name_value vx_copy(params Object[] vals) {
+    public override Vx.State.Func_boolean_writestate_from_mapname_name_value vx_copy(params object[] vals) {
       Class_boolean_writestate_from_mapname_name_value output = new Class_boolean_writestate_from_mapname_name_value();
       return output;
     }
@@ -613,12 +613,12 @@ public static class State {
 
   public class Class_boolean_writestate_from_name_value : Vx.Core.Class_base, Func_boolean_writestate_from_name_value {
 
-    public override Vx.State.Func_boolean_writestate_from_name_value vx_new(params Object[] vals) {
+    public override Vx.State.Func_boolean_writestate_from_name_value vx_new(params object[] vals) {
       Class_boolean_writestate_from_name_value output = new Class_boolean_writestate_from_name_value();
       return output;
     }
 
-    public override Vx.State.Func_boolean_writestate_from_name_value vx_copy(params Object[] vals) {
+    public override Vx.State.Func_boolean_writestate_from_name_value vx_copy(params object[] vals) {
       Class_boolean_writestate_from_name_value output = new Class_boolean_writestate_from_name_value();
       return output;
     }
@@ -710,12 +710,12 @@ public static class State {
 
   public class Class_boolean_writestate_from_statelistener : Vx.Core.Class_base, Func_boolean_writestate_from_statelistener {
 
-    public override Vx.State.Func_boolean_writestate_from_statelistener vx_new(params Object[] vals) {
+    public override Vx.State.Func_boolean_writestate_from_statelistener vx_new(params object[] vals) {
       Class_boolean_writestate_from_statelistener output = new Class_boolean_writestate_from_statelistener();
       return output;
     }
 
-    public override Vx.State.Func_boolean_writestate_from_statelistener vx_copy(params Object[] vals) {
+    public override Vx.State.Func_boolean_writestate_from_statelistener vx_copy(params object[] vals) {
       Class_boolean_writestate_from_statelistener output = new Class_boolean_writestate_from_statelistener();
       return output;
     }
@@ -810,12 +810,12 @@ public static class State {
 
   public class Class_change : Vx.Core.Class_base, Func_change {
 
-    public override Vx.State.Func_change vx_new(params Object[] vals) {
+    public override Vx.State.Func_change vx_new(params object[] vals) {
       Class_change output = new Class_change();
       return output;
     }
 
-    public override Vx.State.Func_change vx_copy(params Object[] vals) {
+    public override Vx.State.Func_change vx_copy(params object[] vals) {
       Class_change output = new Class_change();
       return output;
     }
@@ -899,12 +899,12 @@ public static class State {
 
   public class Class_register : Vx.Core.Class_base, Func_register {
 
-    public override Vx.State.Func_register vx_new(params Object[] vals) {
+    public override Vx.State.Func_register vx_new(params object[] vals) {
       Class_register output = new Class_register();
       return output;
     }
 
-    public override Vx.State.Func_register vx_copy(params Object[] vals) {
+    public override Vx.State.Func_register vx_copy(params object[] vals) {
       Class_register output = new Class_register();
       return output;
     }
@@ -988,12 +988,12 @@ public static class State {
 
   public class Class_state_from_context : Vx.Core.Class_base, Func_state_from_context {
 
-    public override Vx.State.Func_state_from_context vx_new(params Object[] vals) {
+    public override Vx.State.Func_state_from_context vx_new(params object[] vals) {
       Class_state_from_context output = new Class_state_from_context();
       return output;
     }
 
-    public override Vx.State.Func_state_from_context vx_copy(params Object[] vals) {
+    public override Vx.State.Func_state_from_context vx_copy(params object[] vals) {
       Class_state_from_context output = new Class_state_from_context();
       return output;
     }
@@ -1067,12 +1067,12 @@ public static class State {
 
   public class Class_statelistener_readstate_from_name : Vx.Core.Class_base, Func_statelistener_readstate_from_name {
 
-    public override Vx.State.Func_statelistener_readstate_from_name vx_new(params Object[] vals) {
+    public override Vx.State.Func_statelistener_readstate_from_name vx_new(params object[] vals) {
       Class_statelistener_readstate_from_name output = new Class_statelistener_readstate_from_name();
       return output;
     }
 
-    public override Vx.State.Func_statelistener_readstate_from_name vx_copy(params Object[] vals) {
+    public override Vx.State.Func_statelistener_readstate_from_name vx_copy(params object[] vals) {
       Class_statelistener_readstate_from_name output = new Class_statelistener_readstate_from_name();
       return output;
     }
@@ -1165,12 +1165,12 @@ public static class State {
 
   public class Class_statelistenermap_readstate : Vx.Core.Class_base, Func_statelistenermap_readstate {
 
-    public override Vx.State.Func_statelistenermap_readstate vx_new(params Object[] vals) {
+    public override Vx.State.Func_statelistenermap_readstate vx_new(params object[] vals) {
       Class_statelistenermap_readstate output = new Class_statelistenermap_readstate();
       return output;
     }
 
-    public override Vx.State.Func_statelistenermap_readstate vx_copy(params Object[] vals) {
+    public override Vx.State.Func_statelistenermap_readstate vx_copy(params object[] vals) {
       Class_statelistenermap_readstate output = new Class_statelistenermap_readstate();
       return output;
     }
@@ -1251,12 +1251,12 @@ public static class State {
 
   public class Class_value_readstate_from_name : Vx.Core.Class_base, Func_value_readstate_from_name {
 
-    public override Vx.State.Func_value_readstate_from_name vx_new(params Object[] vals) {
+    public override Vx.State.Func_value_readstate_from_name vx_new(params object[] vals) {
       Class_value_readstate_from_name output = new Class_value_readstate_from_name();
       return output;
     }
 
-    public override Vx.State.Func_value_readstate_from_name vx_copy(params Object[] vals) {
+    public override Vx.State.Func_value_readstate_from_name vx_copy(params object[] vals) {
       Class_value_readstate_from_name output = new Class_value_readstate_from_name();
       return output;
     }
@@ -1350,12 +1350,12 @@ public static class State {
 
   public class Class_valuemap_readstate_from_mapname : Vx.Core.Class_base, Func_valuemap_readstate_from_mapname {
 
-    public override Vx.State.Func_valuemap_readstate_from_mapname vx_new(params Object[] vals) {
+    public override Vx.State.Func_valuemap_readstate_from_mapname vx_new(params object[] vals) {
       Class_valuemap_readstate_from_mapname output = new Class_valuemap_readstate_from_mapname();
       return output;
     }
 
-    public override Vx.State.Func_valuemap_readstate_from_mapname vx_copy(params Object[] vals) {
+    public override Vx.State.Func_valuemap_readstate_from_mapname vx_copy(params object[] vals) {
       Class_valuemap_readstate_from_mapname output = new Class_valuemap_readstate_from_mapname();
       return output;
     }
@@ -1439,7 +1439,7 @@ public static class State {
 
 
   public static class PackageRunOnce {
-    public static void RunOnce() {
+    public static bool RunOnce() {
     Vx.Core.Map<string, Vx.Core.Type_any> maptype = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
     Vx.Core.Map<string, Vx.Core.Type_any> mapconst = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
     Vx.Core.Map<string, Vx.Core.Type_func> mapfunc = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_func>();
@@ -1458,7 +1458,10 @@ public static class State {
     mapfunc.put("value-readstate<-name", Vx.State.t_value_readstate_from_name);
     mapfunc.put("valuemap-readstate<-mapname", Vx.State.t_valuemap_readstate_from_mapname);
     Vx.Core.vx_global_package_set("vx/state", maptype, mapconst, mapfunc);
+      return true;
     }
   }
+
+  public static bool ranonce = PackageRunOnce.RunOnce();
 
 }

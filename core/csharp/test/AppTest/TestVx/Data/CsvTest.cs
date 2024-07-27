@@ -3,7 +3,7 @@ namespace AppTest.TestVx.Data;
 
 public class CsvTest {
 
-  static Vx.Test.Type_testcase f_textblock_csv_from_string(Vx.Core.Type_context context) {
+  public static Vx.Test.Type_testcase f_textblock_csv_from_string(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
       ":passfail", false,
@@ -220,12 +220,12 @@ public class CsvTest {
   }
 
   public static Vx.Test.Type_testcaselist test_cases(Vx.Core.Type_context context) {
-    List<Vx.Core.Type_any> arraylisttestcase = Vx.Core.arraylist_from_array(
+    object[] testcases = [
       CsvTest.f_textblock_csv_from_string(context)
-    );
+    ];
     Vx.Test.Type_testcaselist output = Vx.Core.vx_new(
       Vx.Test.t_testcaselist,
-      arraylisttestcase
+      testcases
     );
     return output;
   }

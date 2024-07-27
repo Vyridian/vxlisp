@@ -69,7 +69,7 @@ let text = await httpget("http:..");
 Sample vxlisp:
 
 (func httpget : string
- [url :string]
+ [url : string]
  ...
  (string)
 :async)

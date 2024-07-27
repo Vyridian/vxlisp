@@ -218,7 +218,7 @@
     return output;
   }
 
-  public static <T> CompletableFuture<T> vx_async_new_completed(final T val) {
+  public static <T> CompletableFuture<T> vx_async_new_from_value(final T val) {
     CompletableFuture<T> output = CompletableFuture.completedFuture(val);
     return output;
   }
@@ -539,6 +539,22 @@
       result = vx_is_int(strval);
     }
     return result;
+  }
+
+public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFuture<X> vx_list_from_list_async(
+    final X generic_list_1,
+    final Y values,
+    final Core.Func_any_from_any_async fn_any_from_any_async) {
+    List<Core.Type_any> list_value = values.vx_list();
+    List<CompletableFuture<Core.Type_any>> list_async_result = Core.arraylist_from_arraylist_fn(list_value, (val) -> {
+      return fn_any_from_any_async.vx_any_from_any_async(generic_list_1, val);
+    });
+    CompletableFuture<List<Core.Type_any>> async_list_result = Core.vx_async_arraylist_from_arraylist_async(list_async_result);
+    CompletableFuture<X> output = Core.vx_async_from_async_fn(async_list_result, (list_result) -> {
+      X work = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(list_result));
+      return work;
+    });
+    return output;
   }
 
   // vx_list_from_list_intany(generic_list_1, list-2, any<-int-any)
@@ -971,7 +987,7 @@
     return output;
   }
 
-  public static Core.Type_anylist vx_anylist_from_arraystring(String[] arraystring) {
+  public static Core.Type_anylist vx_anylist_from_arraystring(String... arraystring) {
     List<Object> listany = new ArrayList<>();
     for (String svalue : arraystring) {
       Core.Type_string value = Core.vx_new_string(svalue);

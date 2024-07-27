@@ -2102,6 +2102,7 @@
       :newline 0
       :notanumber 0
       :nothing 0
+      :path-test-resources 0
       :quote 0
       :true 1)
     :funcmap
@@ -2365,14 +2366,14 @@
       :total 166)
     :constnums
      (testcoveragenums
-      :pct 14
+      :pct 13
       :tests 2
-      :total 14)
+      :total 15)
     :docnums
      (testcoveragenums
       :pct 90
-      :tests 231
-      :total 256)
+      :tests 232
+      :total 257)
     :funcnums
      (testcoveragenums
       :pct 55
@@ -2383,7 +2384,7 @@
      (testcoveragenums
       :pct 36
       :tests 81
-      :total 224)
+      :total 225)
     :typenums
      (testcoveragenums
       :pct 6
@@ -14846,7 +14847,7 @@ ab
  (boolean-exists<-file
   (file
    :name "boolean_exists_from_file.txt"
-   :path "src/test/resources/vx")))`
+   :path (string path-test-resources "/vx"))))`
         :testresult
          (testresult
           :code ":true"
@@ -14865,7 +14866,7 @@ ab
  (boolean-write<-file-string
   (file
    :name "boolean_write_from_file_string.txt"
-   :path "src/test/resources/vx")
+   :path (string path-test-resources "/vx"))
   "writetext"))`
         :testresult
          (testresult
@@ -14884,12 +14885,12 @@ ab
          `(test
  (file
   :name "string_read_from_file.txt"
-  :path "src/test/resources/vx"
+  :path (string path-test-resources "/vx")
   :text "testdata")
  (file-read<-file
   (file
    :name "string_read_from_file.txt"
-   :path "src/test/resources/vx")))`
+   :path (string path-test-resources "/vx"))))`
         :testresult
          (testresult
           :code ":eq"
@@ -14950,7 +14951,7 @@ ab
  (string-read<-file
   (file
    :name "string_read_from_file.txt"
-   :path "src/test/resources/vx")))`
+   :path (string path-test-resources "/vx"))))`
         :testresult
          (testresult
           :code ":eq"
@@ -17015,7 +17016,7 @@ ab
  (boolean-exists<-file
   (file
    :name "testsuite.vxlisp"
-   :path "src/test/resources")))`
+   :path path-test-resources)))`
         :testresult
          (testresult
           :code ":true"
@@ -17034,7 +17035,7 @@ ab
  (boolean-exists<-file
   (file
    :name "testsuite.html"
-   :path "src/test/resources")))`
+   :path path-test-resources)))`
         :testresult
          (testresult
           :code ":true"
@@ -17053,7 +17054,7 @@ ab
  (boolean-exists<-file
   (file
    :name "testsuitenode.vxlisp"
-   :path "src/test/resources")))`
+   :path path-test-resources)))`
         :testresult
          (testresult
           :code ":true"

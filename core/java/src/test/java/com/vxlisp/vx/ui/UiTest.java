@@ -7,7 +7,7 @@ import com.vxlisp.vx.data.*;
 
 public final class UiTest {
 
-  static Test.Type_testcase f_boolean_writestate_from_uiapp(final Core.Type_context context) {
+  public static Test.Type_testcase f_boolean_writestate_from_uiapp(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -55,7 +55,7 @@ public final class UiTest {
     return output;
   }
 
-  static Test.Type_testcase f_string_parentuid_from_uid(final Core.Type_context context) {
+  public static Test.Type_testcase f_string_parentuid_from_uid(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -89,7 +89,7 @@ public final class UiTest {
     return output;
   }
 
-  static Test.Type_testcase f_ui_readstate_uiapp(final Core.Type_context context) {
+  public static Test.Type_testcase f_ui_readstate_uiapp(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -135,7 +135,7 @@ public final class UiTest {
     return output;
   }
 
-  static Test.Type_testcase f_ui_readstate_from_uid(final Core.Type_context context) {
+  public static Test.Type_testcase f_ui_readstate_from_uid(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -205,7 +205,7 @@ public final class UiTest {
     return output;
   }
 
-  static Test.Type_testcase f_ui_write_from_ui_visible(final Core.Type_context context) {
+  public static Test.Type_testcase f_ui_write_from_ui_visible(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -288,7 +288,7 @@ public final class UiTest {
     return output;
   }
 
-  static Test.Type_testcase f_ui_from_ui_find(final Core.Type_context context) {
+  public static Test.Type_testcase f_ui_from_ui_find(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -355,7 +355,7 @@ public final class UiTest {
     return output;
   }
 
-  static Test.Type_testcase f_ui_from_ui_selected(final Core.Type_context context) {
+  public static Test.Type_testcase f_ui_from_ui_selected(final Core.Type_context context) {
     Test.Type_testcase output = Core.vx_new(
       Test.t_testcase,
       ":passfail", false,
@@ -439,7 +439,7 @@ public final class UiTest {
   }
 
   public static Test.Type_testcaselist test_cases(final Core.Type_context context) {
-    List<Core.Type_any> arraylisttestcase = Core.arraylist_from_array(
+    List<Core.Type_any> testcases = Core.arraylist_from_array(
       UiTest.f_boolean_writestate_from_uiapp(context),
       UiTest.f_string_parentuid_from_uid(context),
       UiTest.f_ui_readstate_uiapp(context),
@@ -450,7 +450,7 @@ public final class UiTest {
     );
     Test.Type_testcaselist output = Core.vx_new(
       Test.t_testcaselist,
-      arraylisttestcase
+      testcases
     );
     return output;
   }

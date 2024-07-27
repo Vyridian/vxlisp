@@ -4,10 +4,11 @@
  :doc  "Test Suite builder")
 
 (type testcase : struct
- :properties [passfail     : boolean
-              testpkg      : string
-              casename     : string
-              describelist : testdescribelist]
+ :properties
+  [passfail     : boolean
+   testpkg      : string
+   casename     : string
+   describelist : testdescribelist]
  :doc        "Structure to describe a test case")
 
 (type testcaselist : list
@@ -15,34 +16,38 @@
  :doc        "List of test cases")
 
 (type testcoveragedetail : struct
- :properties [constmap : intmap
-              funcmap  : intmap
-              testpkg  : string
-              typemap  : intmap]
+ :properties
+  [constmap : intmap
+   funcmap  : intmap
+   testpkg  : string
+   typemap  : intmap]
  :doc        "Structure to describe a test coverage detail")
 
 (type testcoveragenums : struct
- :properties [pct     : int
-              testpkg : string
-              tests   : int
-              total   : int]
+ :properties
+  [pct     : int
+   testpkg : string
+   tests   : int
+   total   : int]
  :doc        "Structure to describe a test coverage summary")
 
 (type testcoveragesummary : struct
- :properties [bigospacenums : testcoveragenums
-              bigotimenums  : testcoveragenums
-              constnums     : testcoveragenums
-              docnums       : testcoveragenums
-              funcnums      : testcoveragenums
-              testpkg       : string
-              totalnums     : testcoveragenums
-              typenums      : testcoveragenums]
+ :properties
+  [bigospacenums : testcoveragenums
+   bigotimenums  : testcoveragenums
+   constnums     : testcoveragenums
+   docnums       : testcoveragenums
+   funcnums      : testcoveragenums
+   testpkg       : string
+   totalnums     : testcoveragenums
+   typenums      : testcoveragenums]
  :doc        "Structure to describe a test coverage summary")
 
 (type testdescribe : struct
- :properties [describename : string
-              testpkg      : string
-              testresult   : testresult]
+ :properties
+  [describename : string
+   testpkg      : string
+   testresult   : testresult]
  :doc        "Structure to describe test results")
 
 (type testdescribelist : list
@@ -50,11 +55,12 @@
  :doc        "List of testdescribe")
 
 (type testpackage : struct
- :properties [caselist        : testcaselist
-              coveragedetail  : testcoveragedetail
-              coveragesummary : testcoveragesummary
-              passfail        : boolean
-              testpkg         : string]
+ :properties
+  [caselist        : testcaselist
+   coveragedetail  : testcoveragedetail
+   coveragesummary : testcoveragesummary
+   passfail        : boolean
+   testpkg         : string]
  :doc        "Structure to hold all tests for a package")
 
 (type testpackagelist : list
@@ -62,11 +68,12 @@
  :doc        "List of testpackage")
 
 (type testresult : struct
- :properties [code      : string
-              passfail  : boolean
-              expected  : any
-              actual    : any
-              fn-actual : any<-func-async]
+ :properties
+  [code      : string
+   passfail  : boolean
+   expected  : any
+   actual    : any
+   fn-actual : any<-func-async]
  :doc        "Structure to hold test results")
 
 (type testresultlist : list
@@ -80,107 +87,126 @@
    :styles
     (stylelist
      (style
-      :name  "body"
-      :props (propmap
-              "font-size"        "0.9em"
-              "font-family"      "sans-serif"))
+      :name "body"
+      :props
+       (propmap
+        "font-size"   "0.9em"
+        "font-family" "sans-serif"))
      (style
-      :name  "details summary"
-      :props (propmap
-              "cursor"           "pointer"
-              "display"          "inline-flex"
-              "gap"              "10px"))
+      :name "details summary"
+      :props
+       (propmap
+        "cursor"  "pointer"
+        "display" "inline-flex"
+        "gap"     "10px"))
      (style
-      :name  "table"
-      :props (propmap
-              "vertical-align"   "top"
-              "border-collapse"  "collapse"
-              "margin"           "25px 0"
-              "min-width"        "400px"
-              "box-shadow"       "0 0 20px rgba(0, 0, 0, 0.15)"))
+      :name "table"
+      :props
+       (propmap
+        "vertical-align"  "top"
+        "border-collapse" "collapse"
+        "margin"          "25px 0"
+        "min-width"       "400px"
+        "box-shadow"      "0 0 20px rgba(0, 0, 0, 0.15)"))
      (style
-      :name  "thead tr"
-      :props (propmap
-              "background-color" "#009879"
-              "color"            "#ffffff"
-              "text-align"       "left"))
+      :name "thead tr"
+      :props
+       (propmap
+        "background-color" "#009879"
+        "color"            "#ffffff"
+        "text-align"       "left"))
      (style
-      :name  "td"
-      :props (propmap
-              "padding"           "10px 10px"
-              "vertical-align"    "top"))
+      :name "td"
+      :props
+       (propmap
+        "padding"        "10px 10px"
+        "vertical-align" "top"))
      (style
-      :name  "tbody tr"
-      :props (propmap
-              "border-bottom"     "1px solid #dddddd"))
+      :name "tbody tr"
+      :props
+       (propmap
+        "border-bottom" "1px solid #dddddd"))
      (style
-      :name  "tbody tr:nth-of-type(even)"
-      :props (propmap
-              "background-color"  "#f3f3f3"))
+      :name "tbody tr:nth-of-type(even)"
+      :props
+       (propmap
+        "background-color" "#f3f3f3"))
      (style
-      :name  "tbody tr:last-of-type"
-      :props (propmap
-              "border-bottom"     "2px solid #009879"))
+      :name "tbody tr:last-of-type"
+      :props
+       (propmap
+        "border-bottom" "2px solid #009879"))
      (style
-      :name  "tbody tr.active-row"
-      :props (propmap
-              "font-weight"       "bold"
-              "color"             "#009879"))
+      :name "tbody tr.active-row"
+      :props
+       (propmap
+        "font-weight" "bold"
+        "color"       "#009879"))
      (style
-      :name  ".failflag"
-      :props (propmap
-              "background-color"  "red"
-              "color"             "white"
-              "padding-left"      "4px"
-              "padding-right"     "4px"
-              "padding-top"       "1px"
-              "padding-bottom"    "1px"))
+      :name
+       ".failflag"
+      :props
+       (propmap
+        "background-color" "red"
+        "color"            "white"
+        "padding-left"     "4px"
+        "padding-right"    "4px"
+        "padding-top"      "1px"
+        "padding-bottom"   "1px"))
      (style
-      :name  ".passflag"
-      :props (propmap
-              "background-color"  "green"
-              "color"             "white"
-              "padding-left"      "4px"
-              "padding-right"     "4px"
-              "padding-top"       "1px"
-              "padding-bottom"    "1px"))
+      :name ".passflag"
+      :props
+       (propmap
+        "background-color" "green"
+        "color"            "white"
+        "padding-left"     "4px"
+        "padding-right"    "4px"
+        "padding-top"      "1px"
+        "padding-bottom"   "1px"))
      (style
-      :name  ".coveragenums"
-      :props (propmap
-              "width"             "90px"))
+      :name ".coveragenums"
+      :props
+       (propmap
+        "width" "90px"))
      (style
-      :name  ".coveragepct"
-      :props (propmap
-              "text-align"        "right"))
+      :name ".coveragepct"
+      :props
+       (propmap
+        "text-align" "right"))
      (style
-      :name  ".coveragepctgreen"
-      :props (propmap
-              "background-color"  "green"
-              "color"             "white"
-              "text-align"        "right"))
+      :name ".coveragepctgreen"
+      :props
+       (propmap
+        "background-color" "green"
+        "color"            "white"
+        "text-align"       "right"))
      (style
-      :name  ".coveragepctred"
-      :props (propmap
-              "background-color"  "red"
-              "color"             "white"
-              "text-align"        "right"))
+      :name ".coveragepctred"
+      :props
+       (propmap
+        "background-color" "red"
+        "color"            "white"
+        "text-align"       "right"))
      (style
-      :name  ".pkgheader"
-      :props (propmap
-              "display"          "inline-flex"
-              "gap"              "10px"))
+      :name ".pkgheader"
+      :props
+       (propmap
+        "display" "inline-flex"
+        "gap"     "10px"))
      (style
-      :name  ".pkgname"
-      :props (propmap
-              "font-weight"       "bold"
-              "width"             "180px"))
+      :name ".pkgname"
+      :props
+       (propmap
+        "font-weight" "bold"
+        "width"       "180px"))
      (style
-      :name  ".preformatted"
-      :props (propmap
-              "display"           "block"
-              "unicode-bidi"      "embed"
-              "font-family"       "monospace"
-              "white-space"       "pre"))
+      :name ".preformatted"
+      :props
+       (propmap
+        "display"      "block"
+        "unicode-bidi" "embed"
+        "font-family"  "monospace"
+        "white-space"  "pre"))
     )
   )
  )
@@ -217,33 +243,57 @@
 (func div<-testpackage : div
  [testpackage : testpackage]
  (let : div
-  [testcoveragesummary : testcoveragesummary := (:coveragesummary testpackage)
-   pkgname             : string              := (:testpkg testpackage)
-   caselist            : testcaselist        := (:caselist testpackage)
-   passfail            : boolean             := (:passfail testpackage)
-   pkgnamestyle        : style               := (style<-stylesheet-name stylesheet-test ".pkgname")
-   node                : div                 := (div<-testcaselist caselist)
-   nodes               : divchildlist        := (divchildlist node)
-   p-passfail          : p                   := (p<-passfail passfail)
-   p-pkgname           : p                   := (p :style pkgnamestyle :text pkgname)
-   p-totalnums         : p                   := (p<-testcoveragenums (:totalnums     testcoveragesummary))
-   p-coveragenums      : p                   := (p<-testcoveragenums (:typenums      testcoveragesummary))
-   p-constnums         : p                   := (p<-testcoveragenums (:constnums     testcoveragesummary))
-   p-funcnums          : p                   := (p<-testcoveragenums (:funcnums      testcoveragesummary))
-   p-docnums           : p                   := (p<-testcoveragenums (:docnums       testcoveragesummary))
-   p-bigospacenums     : p                   := (p<-testcoveragenums (:bigospacenums testcoveragesummary))
-   p-bigotimenums      : p                   := (p<-testcoveragenums (:bigotimenums  testcoveragesummary))
-   summary             : divchildlist        := (divchildlist
-                                                 p-passfail
-                                                 p-pkgname
-                                                 p-totalnums
-                                                 p-coveragenums
-                                                 p-constnums
-                                                 p-funcnums
-                                                 p-docnums
-                                                 p-bigospacenums
-                                                 p-bigotimenums)
-   details             : details              := (details :summary summary :nodes nodes)]
+  [testcoveragesummary : testcoveragesummary :=
+    (:coveragesummary testpackage)
+   pkgname : string :=
+    (:testpkg testpackage)
+   caselist : testcaselist :=
+    (:caselist testpackage)
+   passfail : boolean :=
+    (:passfail testpackage)
+   pkgnamestyle : style :=
+    (style<-stylesheet-name
+     stylesheet-test ".pkgname")
+   node : div := (div<-testcaselist caselist)
+   nodes : divchildlist := (divchildlist node)
+   p-passfail : p := (p<-passfail passfail)
+   p-pkgname : p := (p :style pkgnamestyle :text pkgname)
+   p-totalnums : p :=
+    (p<-testcoveragenums
+     (:totalnums testcoveragesummary))
+   p-coveragenums : p :=
+    (p<-testcoveragenums
+     (:typenums testcoveragesummary))
+   p-constnums : p :=
+    (p<-testcoveragenums
+     (:constnums testcoveragesummary))
+   p-funcnums : p :=
+    (p<-testcoveragenums
+     (:funcnums testcoveragesummary))
+   p-docnums : p :=
+    (p<-testcoveragenums
+     (:docnums testcoveragesummary))
+   p-bigospacenums : p :=
+    (p<-testcoveragenums
+     (:bigospacenums testcoveragesummary))
+   p-bigotimenums : p :=
+    (p<-testcoveragenums
+     (:bigotimenums testcoveragesummary))
+   summary : divchildlist :=
+    (divchildlist
+     p-passfail
+     p-pkgname
+     p-totalnums
+     p-coveragenums
+     p-constnums
+     p-funcnums
+     p-docnums
+     p-bigospacenums
+     p-bigotimenums)
+   details : details :=
+    (details
+     :summary summary
+     :nodes nodes)]
   (div details)
  )
  :doc "Retuns a div from a test package")
@@ -251,10 +301,18 @@
 (func div<-testpackagelist : div
  [testpackagelist : testpackagelist]
  (let : div
-  [stylepassfail    : style := (style<-stylesheet-name stylesheet-test ".passfail")
-   stylepkgname     : style := (style<-stylesheet-name stylesheet-test ".pkgname")
-   stylepkgheader   : style := (style<-stylesheet-name stylesheet-test ".pkgheader")
-   stylecoveragenum : style := (style<-stylesheet-name stylesheet-test ".coveragenums")]
+  [stylepassfail : style :=
+   (style<-stylesheet-name
+    stylesheet-test ".passfail")
+   stylepkgname : style :=
+    (style<-stylesheet-name
+     stylesheet-test ".pkgname")
+   stylepkgheader : style :=
+    (style<-stylesheet-name
+     stylesheet-test ".pkgheader")
+   stylecoveragenum : style :=
+    (style<-stylesheet-name
+     stylesheet-test ".coveragenums")]
   (div
    (div :style stylepkgheader
     (p :style stylepassfail    :text "Pass?")
@@ -281,36 +339,36 @@
 (func file-test : file/file
  (file
   :name "testsuite.vxlisp"
-  :path "src/test/resources")
+  :path path-test-resources)
  :test (test-true
         (boolean-exists<-file
          (file
           :name "testsuite.vxlisp"
-          :path "src/test/resources")))
+          :path path-test-resources)))
  :clientserver :server
  :doc "Default file location for testsuite.vxlisp")
 
 (func file-testnode : file/file
  (file
   :name "testsuitenode.vxlisp"
-  :path "src/test/resources")
+  :path path-test-resources)
  :test (test-true
         (boolean-exists<-file
          (file
           :name "testsuitenode.vxlisp"
-          :path "src/test/resources")))
+          :path path-test-resources)))
  :clientserver :server
  :doc "Default file location for testsuitenode.vxlisp")
 
 (func file-testhtml : file/file
  (file
   :name "testsuite.html"
-  :path "src/test/resources")
+  :path path-test-resources)
  :test (test-true
         (boolean-exists<-file
          (file
           :name "testsuite.html"
-          :path "src/test/resources")))
+          :path path-test-resources)))
  :clientserver :server
  :doc "Default file location for testsuite.html")
 
@@ -335,9 +393,12 @@
 (func p<-passfail : p
  [passfail : boolean]
  (let
-  [text      : string := (if passfail "Pass" "Fail")
-   stylename : string := (if passfail ".passflag" ".failflag")
-   style     : style  := (style<-stylesheet-name stylesheet-test stylename)]
+  [text : string :=
+    (if passfail "Pass" "Fail")
+   stylename : string :=
+    (if passfail ".passflag" ".failflag")
+   style : style :=
+    (style<-stylesheet-name stylesheet-test stylename)]
   (p
    :style style
    :text  text))
@@ -346,23 +407,31 @@
 (func p<-testcoveragenums : p
  [nums  : testcoveragenums]
  (p
-  :style (style<-stylesheet-name stylesheet-test ".coveragenums")
-  :text  (string (:pct nums) "% " (:tests nums) "/" (:total nums)))
+  :style
+   (style<-stylesheet-name
+    stylesheet-test ".coveragenums")
+  :text
+   (string
+    (:pct nums) "% " (:tests nums) "/" (:total nums)))
  :doc "Returns <p>tests / total (pct%)</p> from testcoveragenums")
 
 (func resolve-testcase : testcase :async
  [testcase : testcase]
  (let
-  [describelist : testdescribelist := (:describelist testcase)
-   resolvedlist : testdescribelist := (resolve-testdescribelist describelist)
-   passfaillist : booleanlist      := (list<-list : booleanlist
-                                       resolvedlist
-                                       (fn : boolean
-                                        [testdescribe : testdescribe]
-                                        (let : boolean
-                                         [testresult : testresult := (:testresult testdescribe)]
-                                         (:passfail testresult))))
-   passfail         : boolean      := (and passfaillist)]
+  [describelist : testdescribelist :=
+    (:describelist testcase)
+   resolvedlist : testdescribelist :=
+    (resolve-testdescribelist describelist)
+   passfaillist : booleanlist :=
+    (list<-list : booleanlist
+     resolvedlist
+     (fn : boolean
+      [testdescribe : testdescribe]
+      (let : boolean
+       [testresult : testresult := (:testresult testdescribe)]
+       (:passfail testresult))))
+   passfail : boolean :=
+    (and passfaillist)]
    (copy
     testcase
     :passfail     passfail
@@ -392,16 +461,19 @@
 (func resolve-testpackage : testpackage :async
  [testpackage : testpackage]
  (let
-  [testcaselist : testcaselist := (:caselist testpackage)
-   resolvedlist : testcaselist := (resolve-testcaselist testcaselist)
-   passfaillist : booleanlist  := (list<-list : booleanlist
-                                   resolvedlist
-                                   (fn : boolean
-                                    [testcase : testcase]
-                                    (:passfail testcase)
-                                   )
-                                  )
-   passfail     : boolean := (and passfaillist)]
+  [testcaselist : testcaselist :=
+    (:caselist testpackage)
+   resolvedlist : testcaselist :=
+    (resolve-testcaselist testcaselist)
+   passfaillist : booleanlist  :=
+    (list<-list : booleanlist
+     resolvedlist
+     (fn : boolean
+      [testcase : testcase]
+      (:passfail testcase)
+     )
+    )
+   passfail : boolean := (and passfaillist)]
   (copy
    testpackage
    :passfail passfail
@@ -539,9 +611,10 @@
  [expected : any
   actual   : any]
  (testresult
-  :passfail (=
-             (string<-any expected)
-             (string<-any actual))
+  :passfail
+   (=
+    (string<-any expected)
+    (string<-any actual))
   :expected expected
   :actual   actual)
  :context
@@ -584,12 +657,19 @@
  [testdescribe : testdescribe
   casename     : string]
  (let : tr
-  [describename : string     := (:describename testdescribe)
-   result       : testresult := (:testresult testdescribe)
-   passfail     : boolean    := (:passfail result)
-   expected     : string     := (string<-any (:expected result))
-   actual       : string     := (string<-any (:actual result))
-   prestyle     : style      := (style<-stylesheet-name stylesheet-test ".preformatted")]
+  [describename : string :=
+    (:describename testdescribe)
+   result : testresult :=
+    (:testresult testdescribe)
+   passfail : boolean :=
+    (:passfail result)
+   expected : string :=
+    (string<-any (:expected result))
+   actual : string :=
+    (string<-any (:actual result))
+   prestyle : style :=
+    (style<-stylesheet-name
+     stylesheet-test ".preformatted")]
   (tr
    (td (p<-passfail passfail))
    (td (p :style prestyle :text casename))
@@ -603,8 +683,10 @@
 (func trlist<-testcase : trlist
  [testcase : testcase]
  (let : trlist
-  [describelist : testdescribelist := (:describelist testcase)
-   casename     : string           := (:casename testcase)]
+  [describelist : testdescribelist :=
+    (:describelist testcase)
+   casename : string :=
+    (:casename testcase)]
   (list<-list : trlist
    describelist
    (fn : tr

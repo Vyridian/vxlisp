@@ -446,6 +446,9 @@
           <li class="nconst" onclick="docjs.navigate('const_vx/core/nothing')">
             (c) nothing
           </li>
+          <li class="nconst" onclick="docjs.navigate('const_vx/core/path-test-resources')">
+            (c) path-test-resources
+          </li>
           <li class="nconst" onclick="docjs.navigate('const_vx/core/quote')">
             (c) quote
           </li>
@@ -3337,7 +3340,7 @@
           </summary>
           <ul>
             <li>
-      <span class="nconst" onclick="docjs.navigate('const_vx/core/false')">false</span>, <span class="nconst" onclick="docjs.navigate('const_vx/core/global')">global</span>, <span class="nconst" onclick="docjs.navigate('const_vx/core/infinity')">infinity</span>, <span class="nconst" onclick="docjs.navigate('const_vx/core/mempool-active')">mempool-active</span>, <span class="nconst" onclick="docjs.navigate('const_vx/core/msg-info')">msg-info</span>, <span class="nconst" onclick="docjs.navigate('const_vx/core/msg-warning')">msg-warning</span>, <span class="nconst" onclick="docjs.navigate('const_vx/core/msg-error')">msg-error</span>, <span class="nconst" onclick="docjs.navigate('const_vx/core/msg-severe')">msg-severe</span>, <span class="nconst" onclick="docjs.navigate('const_vx/core/neginfinity')">neginfinity</span>, <span class="nconst" onclick="docjs.navigate('const_vx/core/newline')">newline</span>, <span class="nconst" onclick="docjs.navigate('const_vx/core/notanumber')">notanumber</span>, <span class="nconst" onclick="docjs.navigate('const_vx/core/nothing')">nothing</span>, <span class="nconst" onclick="docjs.navigate('const_vx/core/quote')">quote</span>, <span class="nconst" onclick="docjs.navigate('const_vx/core/true')">true</span>
+      <span class="nconst" onclick="docjs.navigate('const_vx/core/false')">false</span>, <span class="nconst" onclick="docjs.navigate('const_vx/core/global')">global</span>, <span class="nconst" onclick="docjs.navigate('const_vx/core/infinity')">infinity</span>, <span class="nconst" onclick="docjs.navigate('const_vx/core/mempool-active')">mempool-active</span>, <span class="nconst" onclick="docjs.navigate('const_vx/core/msg-info')">msg-info</span>, <span class="nconst" onclick="docjs.navigate('const_vx/core/msg-warning')">msg-warning</span>, <span class="nconst" onclick="docjs.navigate('const_vx/core/msg-error')">msg-error</span>, <span class="nconst" onclick="docjs.navigate('const_vx/core/msg-severe')">msg-severe</span>, <span class="nconst" onclick="docjs.navigate('const_vx/core/neginfinity')">neginfinity</span>, <span class="nconst" onclick="docjs.navigate('const_vx/core/newline')">newline</span>, <span class="nconst" onclick="docjs.navigate('const_vx/core/notanumber')">notanumber</span>, <span class="nconst" onclick="docjs.navigate('const_vx/core/nothing')">nothing</span>, <span class="nconst" onclick="docjs.navigate('const_vx/core/path-test-resources')">path-test-resources</span>, <span class="nconst" onclick="docjs.navigate('const_vx/core/quote')">quote</span>, <span class="nconst" onclick="docjs.navigate('const_vx/core/true')">true</span>
             </li>
           </ul>
         </details>
@@ -4005,6 +4008,9 @@
 (const nothing : string
  &quot;nothing&quot;
  :doc &quot;Nothing Value. Opposite of every other value. e.g. Nil, Null&quot;)
+
+(const path-test-resources : string
+ :doc &quot;The test path from project file&quot;)
 
 (const quote : string
  `&quot;`
@@ -4939,9 +4945,9 @@
  [value : any-1]
  (native
   :csharp
-   &quot;output = Vx.Core.vx_async_new_completed(value);&quot;
+   &quot;output = Vx.Core.vx_async_new_from_value(value);&quot;
   :java
-   &quot;output = Core.vx_async_new_completed(value);&quot;
+   &quot;output = Core.vx_async_new_from_value(value);&quot;
   :js
    &quot;value&quot;)
  :doc &quot;Returns an asynchonous version value. This exists mostly for type-casting.&quot;)
@@ -5774,16 +5780,7 @@
     });
     output = vx_core::vx_async_new_from_listasync(generic_list_1, list_async_result);&quot;
   :csharp :auto
-  :java
-   &quot;List&lt;Core.Type_any&gt; list_value = values.vx_list();
-    List&lt;CompletableFuture&lt;Core.Type_any&gt;&gt; list_async_result = Core.arraylist_from_arraylist_fn(list_value, (val) -&gt; {
-      return fn_any_from_any_async.vx_any_from_any_async(generic_list_1, val);
-    });
-    CompletableFuture&lt;List&lt;Core.Type_any&gt;&gt; async_list_result = Core.vx_async_arraylist_from_arraylist_async(list_async_result);
-    output = Core.vx_async_from_async_fn(async_list_result, (list_result) -&gt; {
-      X work = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(list_result));
-      return work;
-    });&quot;
+  :java   :auto
   :js
    &quot;const fn = fn_any_from_any_async['vx_value']
     if (fn) {
@@ -6348,11 +6345,15 @@
       output = vx_core::vx_any_from_any(generic_any_1, any);
     }&quot;
   :csharp
-   &quot;if (fn_any != null) {
+   &quot;if (fn_any == null) {
+    } else if (fn_any == Vx.Core.e_any_from_func) {
+    } else {
       output = fn_any.vx_any_from_func(generic_any_1);
     }&quot;
   :java
-   &quot;if (fn_any != null) {
+   &quot;if (fn_any == null) {
+    } else if (fn_any == Core.e_any_from_func) {
+    } else {
       output = fn_any.vx_any_from_func(generic_any_1);
     }&quot;
   :js
@@ -6379,11 +6380,15 @@
       output = fn_any-&gt;vx_any_from_func_async(generic_any_1);
     }&quot;
   :csharp
-   &quot;if (fn_any != null) {
+   &quot;if (fn_any == null) {
+    } else if (fn_any == Vx.Core.e_any_from_func_async) {
+    } else {
       output = fn_any.vx_any_from_func_async(generic_any_1);
     }&quot;
   :java
-   &quot;if (fn_any != null) {
+   &quot;if (fn_any == null) {
+    } else if (fn_any == Core.e_any_from_func_async) {
+    } else {
       output = fn_any.vx_any_from_func_async(generic_any_1);
     }&quot;
   :js
@@ -12094,6 +12099,45 @@
               </ul>
             </details>
           </div>
+          <div class="d" id="d_const_vx/core/path-test-resources">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/core')">vx/core</span> / <span class="nconst" onclick="docjs.navigate('const_vx/core/path-test-resources')">path-test-resources</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">The test path from project file</div>
+              </li>
+            </ul>
+            <div class="lbl">Constant Name:</div>
+            <ul>
+              <li>
+                <div class="txt">path-test-resources</div>
+              </li>
+            </ul>
+            <div class="lbl">Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+              </li>
+            </ul>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(const path-test-resources : string
+ :doc &quot;The test path from project file&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
           <div class="d" id="d_const_vx/core/quote">
             <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/core')">vx/core</span> / <span class="nconst" onclick="docjs.navigate('const_vx/core/quote')">quote</span></div>
             <div class="lbl">Description:</div>
@@ -17025,9 +17069,9 @@ improves readability.</div>
  [value : any-1]
  (native
   :csharp
-   &quot;output = Vx.Core.vx_async_new_completed(value);&quot;
+   &quot;output = Vx.Core.vx_async_new_from_value(value);&quot;
   :java
-   &quot;output = Core.vx_async_new_completed(value);&quot;
+   &quot;output = Core.vx_async_new_from_value(value);&quot;
   :js
    &quot;value&quot;)
  :doc &quot;Returns an asynchonous version value. This exists mostly for type-casting.&quot;)</div>
@@ -20619,16 +20663,7 @@ improves readability.</div>
     });
     output = vx_core::vx_async_new_from_listasync(generic_list_1, list_async_result);&quot;
   :csharp :auto
-  :java
-   &quot;List&lt;Core.Type_any&gt; list_value = values.vx_list();
-    List&lt;CompletableFuture&lt;Core.Type_any&gt;&gt; list_async_result = Core.arraylist_from_arraylist_fn(list_value, (val) -&gt; {
-      return fn_any_from_any_async.vx_any_from_any_async(generic_list_1, val);
-    });
-    CompletableFuture&lt;List&lt;Core.Type_any&gt;&gt; async_list_result = Core.vx_async_arraylist_from_arraylist_async(list_async_result);
-    output = Core.vx_async_from_async_fn(async_list_result, (list_result) -&gt; {
-      X work = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(list_result));
-      return work;
-    });&quot;
+  :java   :auto
   :js
    &quot;const fn = fn_any_from_any_async['vx_value']
     if (fn) {
@@ -23289,11 +23324,15 @@ improves readability.</div>
       output = vx_core::vx_any_from_any(generic_any_1, any);
     }&quot;
   :csharp
-   &quot;if (fn_any != null) {
+   &quot;if (fn_any == null) {
+    } else if (fn_any == Vx.Core.e_any_from_func) {
+    } else {
       output = fn_any.vx_any_from_func(generic_any_1);
     }&quot;
   :java
-   &quot;if (fn_any != null) {
+   &quot;if (fn_any == null) {
+    } else if (fn_any == Core.e_any_from_func) {
+    } else {
       output = fn_any.vx_any_from_func(generic_any_1);
     }&quot;
   :js
@@ -23379,11 +23418,15 @@ improves readability.</div>
       output = fn_any-&gt;vx_any_from_func_async(generic_any_1);
     }&quot;
   :csharp
-   &quot;if (fn_any != null) {
+   &quot;if (fn_any == null) {
+    } else if (fn_any == Vx.Core.e_any_from_func_async) {
+    } else {
       output = fn_any.vx_any_from_func_async(generic_any_1);
     }&quot;
   :java
-   &quot;if (fn_any != null) {
+   &quot;if (fn_any == null) {
+    } else if (fn_any == Core.e_any_from_func_async) {
+    } else {
       output = fn_any.vx_any_from_func_async(generic_any_1);
     }&quot;
   :js
@@ -62769,11 +62812,12 @@ output : list-1 := (empty list-1)
  :doc &quot;File handler&quot;)
 
 (type file : struct
- :properties [name       : string
-              format     : fileformat
-              path       : string
-              permission : permission
-              text       : string]
+ :properties
+  [name       : string
+   format     : fileformat
+   path       : string
+   permission : permission
+   text       : string]
  :doc &quot;File structure&quot;)
 
 (type filelist : list
@@ -62801,7 +62845,7 @@ output : list-1 := (empty list-1)
         (boolean-exists&lt;-file
          (file
           :name &quot;boolean_exists_from_file.txt&quot;
-          :path &quot;src/test/resources/vx&quot;)))
+          :path (string path-test-resources &quot;/vx&quot;))))
  :clientserver :server
  :doc &quot;Returns true if file/path exists.&quot;)
 
@@ -62849,7 +62893,7 @@ output : list-1 := (empty list-1)
         (boolean-write&lt;-file-string
          (file
           :name &quot;boolean_write_from_file_string.txt&quot;
-          :path &quot;src/test/resources/vx&quot;)
+          :path (string path-test-resources &quot;/vx&quot;))
          &quot;writetext&quot;))
  :clientserver :server
  :doc &quot;Write a File to Disk&quot;)
@@ -62881,12 +62925,12 @@ output : list-1 := (empty list-1)
  :test (test
         (file
          :name &quot;string_read_from_file.txt&quot;
-         :path &quot;src/test/resources/vx&quot;
+         :path (string path-test-resources &quot;/vx&quot;)
          :text &quot;testdata&quot;)
         (file-read&lt;-file
          (file
           :name &quot;string_read_from_file.txt&quot;
-          :path &quot;src/test/resources/vx&quot;)))
+          :path (string path-test-resources &quot;/vx&quot;))))
  :clientserver :server
  :doc &quot;Read a Text File from Disk&quot;)
 
@@ -62906,7 +62950,7 @@ output : list-1 := (empty list-1)
         (string-read&lt;-file
          (file
           :name &quot;string_read_from_file.txt&quot;
-          :path &quot;src/test/resources/vx&quot;)))
+          :path (string path-test-resources &quot;/vx&quot;))))
  :clientserver :server
  :doc &quot;Read text from a File&quot;)
 
@@ -63054,11 +63098,12 @@ output : list-1 := (empty list-1)
               <ul>
                 <li>
                   <div class="source">(type file : struct
- :properties [name       : string
-              format     : fileformat
-              path       : string
-              permission : permission
-              text       : string]
+ :properties
+  [name       : string
+   format     : fileformat
+   path       : string
+   permission : permission
+   text       : string]
  :doc &quot;File structure&quot;)</div>
                 </li>
               </ul>
@@ -63213,7 +63258,7 @@ output : list-1 := (empty list-1)
  (boolean-exists&lt;-file
   (file
    :name &quot;boolean_exists_from_file.txt&quot;
-   :path &quot;src/test/resources/vx&quot;)))</div></li>
+   :path (string path-test-resources &quot;/vx&quot;))))</div></li>
               </ul>
             </details>
             <details open="true">
@@ -63239,7 +63284,7 @@ output : list-1 := (empty list-1)
         (boolean-exists&lt;-file
          (file
           :name &quot;boolean_exists_from_file.txt&quot;
-          :path &quot;src/test/resources/vx&quot;)))
+          :path (string path-test-resources &quot;/vx&quot;))))
  :clientserver :server
  :doc &quot;Returns true if file/path exists.&quot;)</div>
                 </li>
@@ -63444,7 +63489,7 @@ output : list-1 := (empty list-1)
  (boolean-write&lt;-file-string
   (file
    :name &quot;boolean_write_from_file_string.txt&quot;
-   :path &quot;src/test/resources/vx&quot;)
+   :path (string path-test-resources &quot;/vx&quot;))
   &quot;writetext&quot;))</div></li>
               </ul>
             </details>
@@ -63477,7 +63522,7 @@ output : list-1 := (empty list-1)
         (boolean-write&lt;-file-string
          (file
           :name &quot;boolean_write_from_file_string.txt&quot;
-          :path &quot;src/test/resources/vx&quot;)
+          :path (string path-test-resources &quot;/vx&quot;))
          &quot;writetext&quot;))
  :clientserver :server
  :doc &quot;Write a File to Disk&quot;)</div>
@@ -63610,12 +63655,12 @@ output : list-1 := (empty list-1)
                 <li><div class="test">(test
  (file
   :name &quot;string_read_from_file.txt&quot;
-  :path &quot;src/test/resources/vx&quot;
+  :path (string path-test-resources &quot;/vx&quot;)
   :text &quot;testdata&quot;)
  (file-read&lt;-file
   (file
    :name &quot;string_read_from_file.txt&quot;
-   :path &quot;src/test/resources/vx&quot;)))</div></li>
+   :path (string path-test-resources &quot;/vx&quot;))))</div></li>
               </ul>
             </details>
             <details open="true">
@@ -63634,12 +63679,12 @@ output : list-1 := (empty list-1)
  :test (test
         (file
          :name &quot;string_read_from_file.txt&quot;
-         :path &quot;src/test/resources/vx&quot;
+         :path (string path-test-resources &quot;/vx&quot;)
          :text &quot;testdata&quot;)
         (file-read&lt;-file
          (file
           :name &quot;string_read_from_file.txt&quot;
-          :path &quot;src/test/resources/vx&quot;)))
+          :path (string path-test-resources &quot;/vx&quot;))))
  :clientserver :server
  :doc &quot;Read a Text File from Disk&quot;)</div>
                 </li>
@@ -63698,7 +63743,7 @@ output : list-1 := (empty list-1)
  (string-read&lt;-file
   (file
    :name &quot;string_read_from_file.txt&quot;
-   :path &quot;src/test/resources/vx&quot;)))</div></li>
+   :path (string path-test-resources &quot;/vx&quot;))))</div></li>
               </ul>
             </details>
             <details open="true">
@@ -63723,7 +63768,7 @@ output : list-1 := (empty list-1)
         (string-read&lt;-file
          (file
           :name &quot;string_read_from_file.txt&quot;
-          :path &quot;src/test/resources/vx&quot;)))
+          :path (string path-test-resources &quot;/vx&quot;))))
  :clientserver :server
  :doc &quot;Read text from a File&quot;)</div>
                 </li>
@@ -69012,10 +69057,11 @@ output : list-1 := (empty list-1)
  :doc  &quot;Test Suite builder&quot;)
 
 (type testcase : struct
- :properties [passfail     : boolean
-              testpkg      : string
-              casename     : string
-              describelist : testdescribelist]
+ :properties
+  [passfail     : boolean
+   testpkg      : string
+   casename     : string
+   describelist : testdescribelist]
  :doc        &quot;Structure to describe a test case&quot;)
 
 (type testcaselist : list
@@ -69023,34 +69069,38 @@ output : list-1 := (empty list-1)
  :doc        &quot;List of test cases&quot;)
 
 (type testcoveragedetail : struct
- :properties [constmap : intmap
-              funcmap  : intmap
-              testpkg  : string
-              typemap  : intmap]
+ :properties
+  [constmap : intmap
+   funcmap  : intmap
+   testpkg  : string
+   typemap  : intmap]
  :doc        &quot;Structure to describe a test coverage detail&quot;)
 
 (type testcoveragenums : struct
- :properties [pct     : int
-              testpkg : string
-              tests   : int
-              total   : int]
+ :properties
+  [pct     : int
+   testpkg : string
+   tests   : int
+   total   : int]
  :doc        &quot;Structure to describe a test coverage summary&quot;)
 
 (type testcoveragesummary : struct
- :properties [bigospacenums : testcoveragenums
-              bigotimenums  : testcoveragenums
-              constnums     : testcoveragenums
-              docnums       : testcoveragenums
-              funcnums      : testcoveragenums
-              testpkg       : string
-              totalnums     : testcoveragenums
-              typenums      : testcoveragenums]
+ :properties
+  [bigospacenums : testcoveragenums
+   bigotimenums  : testcoveragenums
+   constnums     : testcoveragenums
+   docnums       : testcoveragenums
+   funcnums      : testcoveragenums
+   testpkg       : string
+   totalnums     : testcoveragenums
+   typenums      : testcoveragenums]
  :doc        &quot;Structure to describe a test coverage summary&quot;)
 
 (type testdescribe : struct
- :properties [describename : string
-              testpkg      : string
-              testresult   : testresult]
+ :properties
+  [describename : string
+   testpkg      : string
+   testresult   : testresult]
  :doc        &quot;Structure to describe test results&quot;)
 
 (type testdescribelist : list
@@ -69058,11 +69108,12 @@ output : list-1 := (empty list-1)
  :doc        &quot;List of testdescribe&quot;)
 
 (type testpackage : struct
- :properties [caselist        : testcaselist
-              coveragedetail  : testcoveragedetail
-              coveragesummary : testcoveragesummary
-              passfail        : boolean
-              testpkg         : string]
+ :properties
+  [caselist        : testcaselist
+   coveragedetail  : testcoveragedetail
+   coveragesummary : testcoveragesummary
+   passfail        : boolean
+   testpkg         : string]
  :doc        &quot;Structure to hold all tests for a package&quot;)
 
 (type testpackagelist : list
@@ -69070,11 +69121,12 @@ output : list-1 := (empty list-1)
  :doc        &quot;List of testpackage&quot;)
 
 (type testresult : struct
- :properties [code      : string
-              passfail  : boolean
-              expected  : any
-              actual    : any
-              fn-actual : any&lt;-func-async]
+ :properties
+  [code      : string
+   passfail  : boolean
+   expected  : any
+   actual    : any
+   fn-actual : any&lt;-func-async]
  :doc        &quot;Structure to hold test results&quot;)
 
 (type testresultlist : list
@@ -69088,107 +69140,126 @@ output : list-1 := (empty list-1)
    :styles
     (stylelist
      (style
-      :name  &quot;body&quot;
-      :props (propmap
-              &quot;font-size&quot;        &quot;0.9em&quot;
-              &quot;font-family&quot;      &quot;sans-serif&quot;))
+      :name &quot;body&quot;
+      :props
+       (propmap
+        &quot;font-size&quot;   &quot;0.9em&quot;
+        &quot;font-family&quot; &quot;sans-serif&quot;))
      (style
-      :name  &quot;details summary&quot;
-      :props (propmap
-              &quot;cursor&quot;           &quot;pointer&quot;
-              &quot;display&quot;          &quot;inline-flex&quot;
-              &quot;gap&quot;              &quot;10px&quot;))
+      :name &quot;details summary&quot;
+      :props
+       (propmap
+        &quot;cursor&quot;  &quot;pointer&quot;
+        &quot;display&quot; &quot;inline-flex&quot;
+        &quot;gap&quot;     &quot;10px&quot;))
      (style
-      :name  &quot;table&quot;
-      :props (propmap
-              &quot;vertical-align&quot;   &quot;top&quot;
-              &quot;border-collapse&quot;  &quot;collapse&quot;
-              &quot;margin&quot;           &quot;25px 0&quot;
-              &quot;min-width&quot;        &quot;400px&quot;
-              &quot;box-shadow&quot;       &quot;0 0 20px rgba(0, 0, 0, 0.15)&quot;))
+      :name &quot;table&quot;
+      :props
+       (propmap
+        &quot;vertical-align&quot;  &quot;top&quot;
+        &quot;border-collapse&quot; &quot;collapse&quot;
+        &quot;margin&quot;          &quot;25px 0&quot;
+        &quot;min-width&quot;       &quot;400px&quot;
+        &quot;box-shadow&quot;      &quot;0 0 20px rgba(0, 0, 0, 0.15)&quot;))
      (style
-      :name  &quot;thead tr&quot;
-      :props (propmap
-              &quot;background-color&quot; &quot;#009879&quot;
-              &quot;color&quot;            &quot;#ffffff&quot;
-              &quot;text-align&quot;       &quot;left&quot;))
+      :name &quot;thead tr&quot;
+      :props
+       (propmap
+        &quot;background-color&quot; &quot;#009879&quot;
+        &quot;color&quot;            &quot;#ffffff&quot;
+        &quot;text-align&quot;       &quot;left&quot;))
      (style
-      :name  &quot;td&quot;
-      :props (propmap
-              &quot;padding&quot;           &quot;10px 10px&quot;
-              &quot;vertical-align&quot;    &quot;top&quot;))
+      :name &quot;td&quot;
+      :props
+       (propmap
+        &quot;padding&quot;        &quot;10px 10px&quot;
+        &quot;vertical-align&quot; &quot;top&quot;))
      (style
-      :name  &quot;tbody tr&quot;
-      :props (propmap
-              &quot;border-bottom&quot;     &quot;1px solid #dddddd&quot;))
+      :name &quot;tbody tr&quot;
+      :props
+       (propmap
+        &quot;border-bottom&quot; &quot;1px solid #dddddd&quot;))
      (style
-      :name  &quot;tbody tr:nth-of-type(even)&quot;
-      :props (propmap
-              &quot;background-color&quot;  &quot;#f3f3f3&quot;))
+      :name &quot;tbody tr:nth-of-type(even)&quot;
+      :props
+       (propmap
+        &quot;background-color&quot; &quot;#f3f3f3&quot;))
      (style
-      :name  &quot;tbody tr:last-of-type&quot;
-      :props (propmap
-              &quot;border-bottom&quot;     &quot;2px solid #009879&quot;))
+      :name &quot;tbody tr:last-of-type&quot;
+      :props
+       (propmap
+        &quot;border-bottom&quot; &quot;2px solid #009879&quot;))
      (style
-      :name  &quot;tbody tr.active-row&quot;
-      :props (propmap
-              &quot;font-weight&quot;       &quot;bold&quot;
-              &quot;color&quot;             &quot;#009879&quot;))
+      :name &quot;tbody tr.active-row&quot;
+      :props
+       (propmap
+        &quot;font-weight&quot; &quot;bold&quot;
+        &quot;color&quot;       &quot;#009879&quot;))
      (style
-      :name  &quot;.failflag&quot;
-      :props (propmap
-              &quot;background-color&quot;  &quot;red&quot;
-              &quot;color&quot;             &quot;white&quot;
-              &quot;padding-left&quot;      &quot;4px&quot;
-              &quot;padding-right&quot;     &quot;4px&quot;
-              &quot;padding-top&quot;       &quot;1px&quot;
-              &quot;padding-bottom&quot;    &quot;1px&quot;))
+      :name
+       &quot;.failflag&quot;
+      :props
+       (propmap
+        &quot;background-color&quot; &quot;red&quot;
+        &quot;color&quot;            &quot;white&quot;
+        &quot;padding-left&quot;     &quot;4px&quot;
+        &quot;padding-right&quot;    &quot;4px&quot;
+        &quot;padding-top&quot;      &quot;1px&quot;
+        &quot;padding-bottom&quot;   &quot;1px&quot;))
      (style
-      :name  &quot;.passflag&quot;
-      :props (propmap
-              &quot;background-color&quot;  &quot;green&quot;
-              &quot;color&quot;             &quot;white&quot;
-              &quot;padding-left&quot;      &quot;4px&quot;
-              &quot;padding-right&quot;     &quot;4px&quot;
-              &quot;padding-top&quot;       &quot;1px&quot;
-              &quot;padding-bottom&quot;    &quot;1px&quot;))
+      :name &quot;.passflag&quot;
+      :props
+       (propmap
+        &quot;background-color&quot; &quot;green&quot;
+        &quot;color&quot;            &quot;white&quot;
+        &quot;padding-left&quot;     &quot;4px&quot;
+        &quot;padding-right&quot;    &quot;4px&quot;
+        &quot;padding-top&quot;      &quot;1px&quot;
+        &quot;padding-bottom&quot;   &quot;1px&quot;))
      (style
-      :name  &quot;.coveragenums&quot;
-      :props (propmap
-              &quot;width&quot;             &quot;90px&quot;))
+      :name &quot;.coveragenums&quot;
+      :props
+       (propmap
+        &quot;width&quot; &quot;90px&quot;))
      (style
-      :name  &quot;.coveragepct&quot;
-      :props (propmap
-              &quot;text-align&quot;        &quot;right&quot;))
+      :name &quot;.coveragepct&quot;
+      :props
+       (propmap
+        &quot;text-align&quot; &quot;right&quot;))
      (style
-      :name  &quot;.coveragepctgreen&quot;
-      :props (propmap
-              &quot;background-color&quot;  &quot;green&quot;
-              &quot;color&quot;             &quot;white&quot;
-              &quot;text-align&quot;        &quot;right&quot;))
+      :name &quot;.coveragepctgreen&quot;
+      :props
+       (propmap
+        &quot;background-color&quot; &quot;green&quot;
+        &quot;color&quot;            &quot;white&quot;
+        &quot;text-align&quot;       &quot;right&quot;))
      (style
-      :name  &quot;.coveragepctred&quot;
-      :props (propmap
-              &quot;background-color&quot;  &quot;red&quot;
-              &quot;color&quot;             &quot;white&quot;
-              &quot;text-align&quot;        &quot;right&quot;))
+      :name &quot;.coveragepctred&quot;
+      :props
+       (propmap
+        &quot;background-color&quot; &quot;red&quot;
+        &quot;color&quot;            &quot;white&quot;
+        &quot;text-align&quot;       &quot;right&quot;))
      (style
-      :name  &quot;.pkgheader&quot;
-      :props (propmap
-              &quot;display&quot;          &quot;inline-flex&quot;
-              &quot;gap&quot;              &quot;10px&quot;))
+      :name &quot;.pkgheader&quot;
+      :props
+       (propmap
+        &quot;display&quot; &quot;inline-flex&quot;
+        &quot;gap&quot;     &quot;10px&quot;))
      (style
-      :name  &quot;.pkgname&quot;
-      :props (propmap
-              &quot;font-weight&quot;       &quot;bold&quot;
-              &quot;width&quot;             &quot;180px&quot;))
+      :name &quot;.pkgname&quot;
+      :props
+       (propmap
+        &quot;font-weight&quot; &quot;bold&quot;
+        &quot;width&quot;       &quot;180px&quot;))
      (style
-      :name  &quot;.preformatted&quot;
-      :props (propmap
-              &quot;display&quot;           &quot;block&quot;
-              &quot;unicode-bidi&quot;      &quot;embed&quot;
-              &quot;font-family&quot;       &quot;monospace&quot;
-              &quot;white-space&quot;       &quot;pre&quot;))
+      :name &quot;.preformatted&quot;
+      :props
+       (propmap
+        &quot;display&quot;      &quot;block&quot;
+        &quot;unicode-bidi&quot; &quot;embed&quot;
+        &quot;font-family&quot;  &quot;monospace&quot;
+        &quot;white-space&quot;  &quot;pre&quot;))
     )
   )
  )
@@ -69225,33 +69296,57 @@ output : list-1 := (empty list-1)
 (func div&lt;-testpackage : div
  [testpackage : testpackage]
  (let : div
-  [testcoveragesummary : testcoveragesummary := (:coveragesummary testpackage)
-   pkgname             : string              := (:testpkg testpackage)
-   caselist            : testcaselist        := (:caselist testpackage)
-   passfail            : boolean             := (:passfail testpackage)
-   pkgnamestyle        : style               := (style&lt;-stylesheet-name stylesheet-test &quot;.pkgname&quot;)
-   node                : div                 := (div&lt;-testcaselist caselist)
-   nodes               : divchildlist        := (divchildlist node)
-   p-passfail          : p                   := (p&lt;-passfail passfail)
-   p-pkgname           : p                   := (p :style pkgnamestyle :text pkgname)
-   p-totalnums         : p                   := (p&lt;-testcoveragenums (:totalnums     testcoveragesummary))
-   p-coveragenums      : p                   := (p&lt;-testcoveragenums (:typenums      testcoveragesummary))
-   p-constnums         : p                   := (p&lt;-testcoveragenums (:constnums     testcoveragesummary))
-   p-funcnums          : p                   := (p&lt;-testcoveragenums (:funcnums      testcoveragesummary))
-   p-docnums           : p                   := (p&lt;-testcoveragenums (:docnums       testcoveragesummary))
-   p-bigospacenums     : p                   := (p&lt;-testcoveragenums (:bigospacenums testcoveragesummary))
-   p-bigotimenums      : p                   := (p&lt;-testcoveragenums (:bigotimenums  testcoveragesummary))
-   summary             : divchildlist        := (divchildlist
-                                                 p-passfail
-                                                 p-pkgname
-                                                 p-totalnums
-                                                 p-coveragenums
-                                                 p-constnums
-                                                 p-funcnums
-                                                 p-docnums
-                                                 p-bigospacenums
-                                                 p-bigotimenums)
-   details             : details              := (details :summary summary :nodes nodes)]
+  [testcoveragesummary : testcoveragesummary :=
+    (:coveragesummary testpackage)
+   pkgname : string :=
+    (:testpkg testpackage)
+   caselist : testcaselist :=
+    (:caselist testpackage)
+   passfail : boolean :=
+    (:passfail testpackage)
+   pkgnamestyle : style :=
+    (style&lt;-stylesheet-name
+     stylesheet-test &quot;.pkgname&quot;)
+   node : div := (div&lt;-testcaselist caselist)
+   nodes : divchildlist := (divchildlist node)
+   p-passfail : p := (p&lt;-passfail passfail)
+   p-pkgname : p := (p :style pkgnamestyle :text pkgname)
+   p-totalnums : p :=
+    (p&lt;-testcoveragenums
+     (:totalnums testcoveragesummary))
+   p-coveragenums : p :=
+    (p&lt;-testcoveragenums
+     (:typenums testcoveragesummary))
+   p-constnums : p :=
+    (p&lt;-testcoveragenums
+     (:constnums testcoveragesummary))
+   p-funcnums : p :=
+    (p&lt;-testcoveragenums
+     (:funcnums testcoveragesummary))
+   p-docnums : p :=
+    (p&lt;-testcoveragenums
+     (:docnums testcoveragesummary))
+   p-bigospacenums : p :=
+    (p&lt;-testcoveragenums
+     (:bigospacenums testcoveragesummary))
+   p-bigotimenums : p :=
+    (p&lt;-testcoveragenums
+     (:bigotimenums testcoveragesummary))
+   summary : divchildlist :=
+    (divchildlist
+     p-passfail
+     p-pkgname
+     p-totalnums
+     p-coveragenums
+     p-constnums
+     p-funcnums
+     p-docnums
+     p-bigospacenums
+     p-bigotimenums)
+   details : details :=
+    (details
+     :summary summary
+     :nodes nodes)]
   (div details)
  )
  :doc &quot;Retuns a div from a test package&quot;)
@@ -69259,10 +69354,18 @@ output : list-1 := (empty list-1)
 (func div&lt;-testpackagelist : div
  [testpackagelist : testpackagelist]
  (let : div
-  [stylepassfail    : style := (style&lt;-stylesheet-name stylesheet-test &quot;.passfail&quot;)
-   stylepkgname     : style := (style&lt;-stylesheet-name stylesheet-test &quot;.pkgname&quot;)
-   stylepkgheader   : style := (style&lt;-stylesheet-name stylesheet-test &quot;.pkgheader&quot;)
-   stylecoveragenum : style := (style&lt;-stylesheet-name stylesheet-test &quot;.coveragenums&quot;)]
+  [stylepassfail : style :=
+   (style&lt;-stylesheet-name
+    stylesheet-test &quot;.passfail&quot;)
+   stylepkgname : style :=
+    (style&lt;-stylesheet-name
+     stylesheet-test &quot;.pkgname&quot;)
+   stylepkgheader : style :=
+    (style&lt;-stylesheet-name
+     stylesheet-test &quot;.pkgheader&quot;)
+   stylecoveragenum : style :=
+    (style&lt;-stylesheet-name
+     stylesheet-test &quot;.coveragenums&quot;)]
   (div
    (div :style stylepkgheader
     (p :style stylepassfail    :text &quot;Pass?&quot;)
@@ -69289,36 +69392,36 @@ output : list-1 := (empty list-1)
 (func file-test : file/file
  (file
   :name &quot;testsuite.vxlisp&quot;
-  :path &quot;src/test/resources&quot;)
+  :path path-test-resources)
  :test (test-true
         (boolean-exists&lt;-file
          (file
           :name &quot;testsuite.vxlisp&quot;
-          :path &quot;src/test/resources&quot;)))
+          :path path-test-resources)))
  :clientserver :server
  :doc &quot;Default file location for testsuite.vxlisp&quot;)
 
 (func file-testnode : file/file
  (file
   :name &quot;testsuitenode.vxlisp&quot;
-  :path &quot;src/test/resources&quot;)
+  :path path-test-resources)
  :test (test-true
         (boolean-exists&lt;-file
          (file
           :name &quot;testsuitenode.vxlisp&quot;
-          :path &quot;src/test/resources&quot;)))
+          :path path-test-resources)))
  :clientserver :server
  :doc &quot;Default file location for testsuitenode.vxlisp&quot;)
 
 (func file-testhtml : file/file
  (file
   :name &quot;testsuite.html&quot;
-  :path &quot;src/test/resources&quot;)
+  :path path-test-resources)
  :test (test-true
         (boolean-exists&lt;-file
          (file
           :name &quot;testsuite.html&quot;
-          :path &quot;src/test/resources&quot;)))
+          :path path-test-resources)))
  :clientserver :server
  :doc &quot;Default file location for testsuite.html&quot;)
 
@@ -69343,9 +69446,12 @@ output : list-1 := (empty list-1)
 (func p&lt;-passfail : p
  [passfail : boolean]
  (let
-  [text      : string := (if passfail &quot;Pass&quot; &quot;Fail&quot;)
-   stylename : string := (if passfail &quot;.passflag&quot; &quot;.failflag&quot;)
-   style     : style  := (style&lt;-stylesheet-name stylesheet-test stylename)]
+  [text : string :=
+    (if passfail &quot;Pass&quot; &quot;Fail&quot;)
+   stylename : string :=
+    (if passfail &quot;.passflag&quot; &quot;.failflag&quot;)
+   style : style :=
+    (style&lt;-stylesheet-name stylesheet-test stylename)]
   (p
    :style style
    :text  text))
@@ -69354,23 +69460,31 @@ output : list-1 := (empty list-1)
 (func p&lt;-testcoveragenums : p
  [nums  : testcoveragenums]
  (p
-  :style (style&lt;-stylesheet-name stylesheet-test &quot;.coveragenums&quot;)
-  :text  (string (:pct nums) &quot;% &quot; (:tests nums) &quot;/&quot; (:total nums)))
+  :style
+   (style&lt;-stylesheet-name
+    stylesheet-test &quot;.coveragenums&quot;)
+  :text
+   (string
+    (:pct nums) &quot;% &quot; (:tests nums) &quot;/&quot; (:total nums)))
  :doc &quot;Returns &lt;p&gt;tests / total (pct%)&lt;/p&gt; from testcoveragenums&quot;)
 
 (func resolve-testcase : testcase :async
  [testcase : testcase]
  (let
-  [describelist : testdescribelist := (:describelist testcase)
-   resolvedlist : testdescribelist := (resolve-testdescribelist describelist)
-   passfaillist : booleanlist      := (list&lt;-list : booleanlist
-                                       resolvedlist
-                                       (fn : boolean
-                                        [testdescribe : testdescribe]
-                                        (let : boolean
-                                         [testresult : testresult := (:testresult testdescribe)]
-                                         (:passfail testresult))))
-   passfail         : boolean      := (and passfaillist)]
+  [describelist : testdescribelist :=
+    (:describelist testcase)
+   resolvedlist : testdescribelist :=
+    (resolve-testdescribelist describelist)
+   passfaillist : booleanlist :=
+    (list&lt;-list : booleanlist
+     resolvedlist
+     (fn : boolean
+      [testdescribe : testdescribe]
+      (let : boolean
+       [testresult : testresult := (:testresult testdescribe)]
+       (:passfail testresult))))
+   passfail : boolean :=
+    (and passfaillist)]
    (copy
     testcase
     :passfail     passfail
@@ -69400,16 +69514,19 @@ output : list-1 := (empty list-1)
 (func resolve-testpackage : testpackage :async
  [testpackage : testpackage]
  (let
-  [testcaselist : testcaselist := (:caselist testpackage)
-   resolvedlist : testcaselist := (resolve-testcaselist testcaselist)
-   passfaillist : booleanlist  := (list&lt;-list : booleanlist
-                                   resolvedlist
-                                   (fn : boolean
-                                    [testcase : testcase]
-                                    (:passfail testcase)
-                                   )
-                                  )
-   passfail     : boolean := (and passfaillist)]
+  [testcaselist : testcaselist :=
+    (:caselist testpackage)
+   resolvedlist : testcaselist :=
+    (resolve-testcaselist testcaselist)
+   passfaillist : booleanlist  :=
+    (list&lt;-list : booleanlist
+     resolvedlist
+     (fn : boolean
+      [testcase : testcase]
+      (:passfail testcase)
+     )
+    )
+   passfail : boolean := (and passfaillist)]
   (copy
    testpackage
    :passfail passfail
@@ -69547,9 +69664,10 @@ output : list-1 := (empty list-1)
  [expected : any
   actual   : any]
  (testresult
-  :passfail (=
-             (string&lt;-any expected)
-             (string&lt;-any actual))
+  :passfail
+   (=
+    (string&lt;-any expected)
+    (string&lt;-any actual))
   :expected expected
   :actual   actual)
  :context
@@ -69592,12 +69710,19 @@ output : list-1 := (empty list-1)
  [testdescribe : testdescribe
   casename     : string]
  (let : tr
-  [describename : string     := (:describename testdescribe)
-   result       : testresult := (:testresult testdescribe)
-   passfail     : boolean    := (:passfail result)
-   expected     : string     := (string&lt;-any (:expected result))
-   actual       : string     := (string&lt;-any (:actual result))
-   prestyle     : style      := (style&lt;-stylesheet-name stylesheet-test &quot;.preformatted&quot;)]
+  [describename : string :=
+    (:describename testdescribe)
+   result : testresult :=
+    (:testresult testdescribe)
+   passfail : boolean :=
+    (:passfail result)
+   expected : string :=
+    (string&lt;-any (:expected result))
+   actual : string :=
+    (string&lt;-any (:actual result))
+   prestyle : style :=
+    (style&lt;-stylesheet-name
+     stylesheet-test &quot;.preformatted&quot;)]
   (tr
    (td (p&lt;-passfail passfail))
    (td (p :style prestyle :text casename))
@@ -69611,8 +69736,10 @@ output : list-1 := (empty list-1)
 (func trlist&lt;-testcase : trlist
  [testcase : testcase]
  (let : trlist
-  [describelist : testdescribelist := (:describelist testcase)
-   casename     : string           := (:casename testcase)]
+  [describelist : testdescribelist :=
+    (:describelist testcase)
+   casename : string :=
+    (:casename testcase)]
   (list&lt;-list : trlist
    describelist
    (fn : tr
@@ -69719,10 +69846,11 @@ output : list-1 := (empty list-1)
               <ul>
                 <li>
                   <div class="source">(type testcase : struct
- :properties [passfail     : boolean
-              testpkg      : string
-              casename     : string
-              describelist : testdescribelist]
+ :properties
+  [passfail     : boolean
+   testpkg      : string
+   casename     : string
+   describelist : testdescribelist]
  :doc        &quot;Structure to describe a test case&quot;)</div>
                 </li>
               </ul>
@@ -69866,10 +69994,11 @@ output : list-1 := (empty list-1)
               <ul>
                 <li>
                   <div class="source">(type testcoveragedetail : struct
- :properties [constmap : intmap
-              funcmap  : intmap
-              testpkg  : string
-              typemap  : intmap]
+ :properties
+  [constmap : intmap
+   funcmap  : intmap
+   testpkg  : string
+   typemap  : intmap]
  :doc        &quot;Structure to describe a test coverage detail&quot;)</div>
                 </li>
               </ul>
@@ -69961,10 +70090,11 @@ output : list-1 := (empty list-1)
               <ul>
                 <li>
                   <div class="source">(type testcoveragenums : struct
- :properties [pct     : int
-              testpkg : string
-              tests   : int
-              total   : int]
+ :properties
+  [pct     : int
+   testpkg : string
+   tests   : int
+   total   : int]
  :doc        &quot;Structure to describe a test coverage summary&quot;)</div>
                 </li>
               </ul>
@@ -70084,14 +70214,15 @@ output : list-1 := (empty list-1)
               <ul>
                 <li>
                   <div class="source">(type testcoveragesummary : struct
- :properties [bigospacenums : testcoveragenums
-              bigotimenums  : testcoveragenums
-              constnums     : testcoveragenums
-              docnums       : testcoveragenums
-              funcnums      : testcoveragenums
-              testpkg       : string
-              totalnums     : testcoveragenums
-              typenums      : testcoveragenums]
+ :properties
+  [bigospacenums : testcoveragenums
+   bigotimenums  : testcoveragenums
+   constnums     : testcoveragenums
+   docnums       : testcoveragenums
+   funcnums      : testcoveragenums
+   testpkg       : string
+   totalnums     : testcoveragenums
+   typenums      : testcoveragenums]
  :doc        &quot;Structure to describe a test coverage summary&quot;)</div>
                 </li>
               </ul>
@@ -70176,9 +70307,10 @@ output : list-1 := (empty list-1)
               <ul>
                 <li>
                   <div class="source">(type testdescribe : struct
- :properties [describename : string
-              testpkg      : string
-              testresult   : testresult]
+ :properties
+  [describename : string
+   testpkg      : string
+   testresult   : testresult]
  :doc        &quot;Structure to describe test results&quot;)</div>
                 </li>
               </ul>
@@ -70329,11 +70461,12 @@ output : list-1 := (empty list-1)
               <ul>
                 <li>
                   <div class="source">(type testpackage : struct
- :properties [caselist        : testcaselist
-              coveragedetail  : testcoveragedetail
-              coveragesummary : testcoveragesummary
-              passfail        : boolean
-              testpkg         : string]
+ :properties
+  [caselist        : testcaselist
+   coveragedetail  : testcoveragedetail
+   coveragesummary : testcoveragesummary
+   passfail        : boolean
+   testpkg         : string]
  :doc        &quot;Structure to hold all tests for a package&quot;)</div>
                 </li>
               </ul>
@@ -70484,11 +70617,12 @@ output : list-1 := (empty list-1)
               <ul>
                 <li>
                   <div class="source">(type testresult : struct
- :properties [code      : string
-              passfail  : boolean
-              expected  : any
-              actual    : any
-              fn-actual : any&lt;-func-async]
+ :properties
+  [code      : string
+   passfail  : boolean
+   expected  : any
+   actual    : any
+   fn-actual : any&lt;-func-async]
  :doc        &quot;Structure to hold test results&quot;)</div>
                 </li>
               </ul>
@@ -70586,107 +70720,126 @@ output : list-1 := (empty list-1)
    :styles
     (stylelist
      (style
-      :name  &quot;body&quot;
-      :props (propmap
-              &quot;font-size&quot;        &quot;0.9em&quot;
-              &quot;font-family&quot;      &quot;sans-serif&quot;))
+      :name &quot;body&quot;
+      :props
+       (propmap
+        &quot;font-size&quot;   &quot;0.9em&quot;
+        &quot;font-family&quot; &quot;sans-serif&quot;))
      (style
-      :name  &quot;details summary&quot;
-      :props (propmap
-              &quot;cursor&quot;           &quot;pointer&quot;
-              &quot;display&quot;          &quot;inline-flex&quot;
-              &quot;gap&quot;              &quot;10px&quot;))
+      :name &quot;details summary&quot;
+      :props
+       (propmap
+        &quot;cursor&quot;  &quot;pointer&quot;
+        &quot;display&quot; &quot;inline-flex&quot;
+        &quot;gap&quot;     &quot;10px&quot;))
      (style
-      :name  &quot;table&quot;
-      :props (propmap
-              &quot;vertical-align&quot;   &quot;top&quot;
-              &quot;border-collapse&quot;  &quot;collapse&quot;
-              &quot;margin&quot;           &quot;25px 0&quot;
-              &quot;min-width&quot;        &quot;400px&quot;
-              &quot;box-shadow&quot;       &quot;0 0 20px rgba(0, 0, 0, 0.15)&quot;))
+      :name &quot;table&quot;
+      :props
+       (propmap
+        &quot;vertical-align&quot;  &quot;top&quot;
+        &quot;border-collapse&quot; &quot;collapse&quot;
+        &quot;margin&quot;          &quot;25px 0&quot;
+        &quot;min-width&quot;       &quot;400px&quot;
+        &quot;box-shadow&quot;      &quot;0 0 20px rgba(0, 0, 0, 0.15)&quot;))
      (style
-      :name  &quot;thead tr&quot;
-      :props (propmap
-              &quot;background-color&quot; &quot;#009879&quot;
-              &quot;color&quot;            &quot;#ffffff&quot;
-              &quot;text-align&quot;       &quot;left&quot;))
+      :name &quot;thead tr&quot;
+      :props
+       (propmap
+        &quot;background-color&quot; &quot;#009879&quot;
+        &quot;color&quot;            &quot;#ffffff&quot;
+        &quot;text-align&quot;       &quot;left&quot;))
      (style
-      :name  &quot;td&quot;
-      :props (propmap
-              &quot;padding&quot;           &quot;10px 10px&quot;
-              &quot;vertical-align&quot;    &quot;top&quot;))
+      :name &quot;td&quot;
+      :props
+       (propmap
+        &quot;padding&quot;        &quot;10px 10px&quot;
+        &quot;vertical-align&quot; &quot;top&quot;))
      (style
-      :name  &quot;tbody tr&quot;
-      :props (propmap
-              &quot;border-bottom&quot;     &quot;1px solid #dddddd&quot;))
+      :name &quot;tbody tr&quot;
+      :props
+       (propmap
+        &quot;border-bottom&quot; &quot;1px solid #dddddd&quot;))
      (style
-      :name  &quot;tbody tr:nth-of-type(even)&quot;
-      :props (propmap
-              &quot;background-color&quot;  &quot;#f3f3f3&quot;))
+      :name &quot;tbody tr:nth-of-type(even)&quot;
+      :props
+       (propmap
+        &quot;background-color&quot; &quot;#f3f3f3&quot;))
      (style
-      :name  &quot;tbody tr:last-of-type&quot;
-      :props (propmap
-              &quot;border-bottom&quot;     &quot;2px solid #009879&quot;))
+      :name &quot;tbody tr:last-of-type&quot;
+      :props
+       (propmap
+        &quot;border-bottom&quot; &quot;2px solid #009879&quot;))
      (style
-      :name  &quot;tbody tr.active-row&quot;
-      :props (propmap
-              &quot;font-weight&quot;       &quot;bold&quot;
-              &quot;color&quot;             &quot;#009879&quot;))
+      :name &quot;tbody tr.active-row&quot;
+      :props
+       (propmap
+        &quot;font-weight&quot; &quot;bold&quot;
+        &quot;color&quot;       &quot;#009879&quot;))
      (style
-      :name  &quot;.failflag&quot;
-      :props (propmap
-              &quot;background-color&quot;  &quot;red&quot;
-              &quot;color&quot;             &quot;white&quot;
-              &quot;padding-left&quot;      &quot;4px&quot;
-              &quot;padding-right&quot;     &quot;4px&quot;
-              &quot;padding-top&quot;       &quot;1px&quot;
-              &quot;padding-bottom&quot;    &quot;1px&quot;))
+      :name
+       &quot;.failflag&quot;
+      :props
+       (propmap
+        &quot;background-color&quot; &quot;red&quot;
+        &quot;color&quot;            &quot;white&quot;
+        &quot;padding-left&quot;     &quot;4px&quot;
+        &quot;padding-right&quot;    &quot;4px&quot;
+        &quot;padding-top&quot;      &quot;1px&quot;
+        &quot;padding-bottom&quot;   &quot;1px&quot;))
      (style
-      :name  &quot;.passflag&quot;
-      :props (propmap
-              &quot;background-color&quot;  &quot;green&quot;
-              &quot;color&quot;             &quot;white&quot;
-              &quot;padding-left&quot;      &quot;4px&quot;
-              &quot;padding-right&quot;     &quot;4px&quot;
-              &quot;padding-top&quot;       &quot;1px&quot;
-              &quot;padding-bottom&quot;    &quot;1px&quot;))
+      :name &quot;.passflag&quot;
+      :props
+       (propmap
+        &quot;background-color&quot; &quot;green&quot;
+        &quot;color&quot;            &quot;white&quot;
+        &quot;padding-left&quot;     &quot;4px&quot;
+        &quot;padding-right&quot;    &quot;4px&quot;
+        &quot;padding-top&quot;      &quot;1px&quot;
+        &quot;padding-bottom&quot;   &quot;1px&quot;))
      (style
-      :name  &quot;.coveragenums&quot;
-      :props (propmap
-              &quot;width&quot;             &quot;90px&quot;))
+      :name &quot;.coveragenums&quot;
+      :props
+       (propmap
+        &quot;width&quot; &quot;90px&quot;))
      (style
-      :name  &quot;.coveragepct&quot;
-      :props (propmap
-              &quot;text-align&quot;        &quot;right&quot;))
+      :name &quot;.coveragepct&quot;
+      :props
+       (propmap
+        &quot;text-align&quot; &quot;right&quot;))
      (style
-      :name  &quot;.coveragepctgreen&quot;
-      :props (propmap
-              &quot;background-color&quot;  &quot;green&quot;
-              &quot;color&quot;             &quot;white&quot;
-              &quot;text-align&quot;        &quot;right&quot;))
+      :name &quot;.coveragepctgreen&quot;
+      :props
+       (propmap
+        &quot;background-color&quot; &quot;green&quot;
+        &quot;color&quot;            &quot;white&quot;
+        &quot;text-align&quot;       &quot;right&quot;))
      (style
-      :name  &quot;.coveragepctred&quot;
-      :props (propmap
-              &quot;background-color&quot;  &quot;red&quot;
-              &quot;color&quot;             &quot;white&quot;
-              &quot;text-align&quot;        &quot;right&quot;))
+      :name &quot;.coveragepctred&quot;
+      :props
+       (propmap
+        &quot;background-color&quot; &quot;red&quot;
+        &quot;color&quot;            &quot;white&quot;
+        &quot;text-align&quot;       &quot;right&quot;))
      (style
-      :name  &quot;.pkgheader&quot;
-      :props (propmap
-              &quot;display&quot;          &quot;inline-flex&quot;
-              &quot;gap&quot;              &quot;10px&quot;))
+      :name &quot;.pkgheader&quot;
+      :props
+       (propmap
+        &quot;display&quot; &quot;inline-flex&quot;
+        &quot;gap&quot;     &quot;10px&quot;))
      (style
-      :name  &quot;.pkgname&quot;
-      :props (propmap
-              &quot;font-weight&quot;       &quot;bold&quot;
-              &quot;width&quot;             &quot;180px&quot;))
+      :name &quot;.pkgname&quot;
+      :props
+       (propmap
+        &quot;font-weight&quot; &quot;bold&quot;
+        &quot;width&quot;       &quot;180px&quot;))
      (style
-      :name  &quot;.preformatted&quot;
-      :props (propmap
-              &quot;display&quot;           &quot;block&quot;
-              &quot;unicode-bidi&quot;      &quot;embed&quot;
-              &quot;font-family&quot;       &quot;monospace&quot;
-              &quot;white-space&quot;       &quot;pre&quot;))
+      :name &quot;.preformatted&quot;
+      :props
+       (propmap
+        &quot;display&quot;      &quot;block&quot;
+        &quot;unicode-bidi&quot; &quot;embed&quot;
+        &quot;font-family&quot;  &quot;monospace&quot;
+        &quot;white-space&quot;  &quot;pre&quot;))
     )
   )
  )
@@ -70897,33 +71050,57 @@ output : list-1 := (empty list-1)
                   <div class="source">(func div&lt;-testpackage : div
  [testpackage : testpackage]
  (let : div
-  [testcoveragesummary : testcoveragesummary := (:coveragesummary testpackage)
-   pkgname             : string              := (:testpkg testpackage)
-   caselist            : testcaselist        := (:caselist testpackage)
-   passfail            : boolean             := (:passfail testpackage)
-   pkgnamestyle        : style               := (style&lt;-stylesheet-name stylesheet-test &quot;.pkgname&quot;)
-   node                : div                 := (div&lt;-testcaselist caselist)
-   nodes               : divchildlist        := (divchildlist node)
-   p-passfail          : p                   := (p&lt;-passfail passfail)
-   p-pkgname           : p                   := (p :style pkgnamestyle :text pkgname)
-   p-totalnums         : p                   := (p&lt;-testcoveragenums (:totalnums     testcoveragesummary))
-   p-coveragenums      : p                   := (p&lt;-testcoveragenums (:typenums      testcoveragesummary))
-   p-constnums         : p                   := (p&lt;-testcoveragenums (:constnums     testcoveragesummary))
-   p-funcnums          : p                   := (p&lt;-testcoveragenums (:funcnums      testcoveragesummary))
-   p-docnums           : p                   := (p&lt;-testcoveragenums (:docnums       testcoveragesummary))
-   p-bigospacenums     : p                   := (p&lt;-testcoveragenums (:bigospacenums testcoveragesummary))
-   p-bigotimenums      : p                   := (p&lt;-testcoveragenums (:bigotimenums  testcoveragesummary))
-   summary             : divchildlist        := (divchildlist
-                                                 p-passfail
-                                                 p-pkgname
-                                                 p-totalnums
-                                                 p-coveragenums
-                                                 p-constnums
-                                                 p-funcnums
-                                                 p-docnums
-                                                 p-bigospacenums
-                                                 p-bigotimenums)
-   details             : details              := (details :summary summary :nodes nodes)]
+  [testcoveragesummary : testcoveragesummary :=
+    (:coveragesummary testpackage)
+   pkgname : string :=
+    (:testpkg testpackage)
+   caselist : testcaselist :=
+    (:caselist testpackage)
+   passfail : boolean :=
+    (:passfail testpackage)
+   pkgnamestyle : style :=
+    (style&lt;-stylesheet-name
+     stylesheet-test &quot;.pkgname&quot;)
+   node : div := (div&lt;-testcaselist caselist)
+   nodes : divchildlist := (divchildlist node)
+   p-passfail : p := (p&lt;-passfail passfail)
+   p-pkgname : p := (p :style pkgnamestyle :text pkgname)
+   p-totalnums : p :=
+    (p&lt;-testcoveragenums
+     (:totalnums testcoveragesummary))
+   p-coveragenums : p :=
+    (p&lt;-testcoveragenums
+     (:typenums testcoveragesummary))
+   p-constnums : p :=
+    (p&lt;-testcoveragenums
+     (:constnums testcoveragesummary))
+   p-funcnums : p :=
+    (p&lt;-testcoveragenums
+     (:funcnums testcoveragesummary))
+   p-docnums : p :=
+    (p&lt;-testcoveragenums
+     (:docnums testcoveragesummary))
+   p-bigospacenums : p :=
+    (p&lt;-testcoveragenums
+     (:bigospacenums testcoveragesummary))
+   p-bigotimenums : p :=
+    (p&lt;-testcoveragenums
+     (:bigotimenums testcoveragesummary))
+   summary : divchildlist :=
+    (divchildlist
+     p-passfail
+     p-pkgname
+     p-totalnums
+     p-coveragenums
+     p-constnums
+     p-funcnums
+     p-docnums
+     p-bigospacenums
+     p-bigotimenums)
+   details : details :=
+    (details
+     :summary summary
+     :nodes nodes)]
   (div details)
  )
  :doc &quot;Retuns a div from a test package&quot;)</div>
@@ -70989,10 +71166,18 @@ output : list-1 := (empty list-1)
                   <div class="source">(func div&lt;-testpackagelist : div
  [testpackagelist : testpackagelist]
  (let : div
-  [stylepassfail    : style := (style&lt;-stylesheet-name stylesheet-test &quot;.passfail&quot;)
-   stylepkgname     : style := (style&lt;-stylesheet-name stylesheet-test &quot;.pkgname&quot;)
-   stylepkgheader   : style := (style&lt;-stylesheet-name stylesheet-test &quot;.pkgheader&quot;)
-   stylecoveragenum : style := (style&lt;-stylesheet-name stylesheet-test &quot;.coveragenums&quot;)]
+  [stylepassfail : style :=
+   (style&lt;-stylesheet-name
+    stylesheet-test &quot;.passfail&quot;)
+   stylepkgname : style :=
+    (style&lt;-stylesheet-name
+     stylesheet-test &quot;.pkgname&quot;)
+   stylepkgheader : style :=
+    (style&lt;-stylesheet-name
+     stylesheet-test &quot;.pkgheader&quot;)
+   stylecoveragenum : style :=
+    (style&lt;-stylesheet-name
+     stylesheet-test &quot;.coveragenums&quot;)]
   (div
    (div :style stylepkgheader
     (p :style stylepassfail    :text &quot;Pass?&quot;)
@@ -71123,7 +71308,7 @@ output : list-1 := (empty list-1)
  (boolean-exists&lt;-file
   (file
    :name &quot;testsuite.vxlisp&quot;
-   :path &quot;src/test/resources&quot;)))</div></li>
+   :path path-test-resources)))</div></li>
               </ul>
             </details>
             <details open="true">
@@ -71135,12 +71320,12 @@ output : list-1 := (empty list-1)
                   <div class="source">(func file-test : file/file
  (file
   :name &quot;testsuite.vxlisp&quot;
-  :path &quot;src/test/resources&quot;)
+  :path path-test-resources)
  :test (test-true
         (boolean-exists&lt;-file
          (file
           :name &quot;testsuite.vxlisp&quot;
-          :path &quot;src/test/resources&quot;)))
+          :path path-test-resources)))
  :clientserver :server
  :doc &quot;Default file location for testsuite.vxlisp&quot;)</div>
                 </li>
@@ -71193,7 +71378,7 @@ output : list-1 := (empty list-1)
  (boolean-exists&lt;-file
   (file
    :name &quot;testsuitenode.vxlisp&quot;
-   :path &quot;src/test/resources&quot;)))</div></li>
+   :path path-test-resources)))</div></li>
               </ul>
             </details>
             <details open="true">
@@ -71205,12 +71390,12 @@ output : list-1 := (empty list-1)
                   <div class="source">(func file-testnode : file/file
  (file
   :name &quot;testsuitenode.vxlisp&quot;
-  :path &quot;src/test/resources&quot;)
+  :path path-test-resources)
  :test (test-true
         (boolean-exists&lt;-file
          (file
           :name &quot;testsuitenode.vxlisp&quot;
-          :path &quot;src/test/resources&quot;)))
+          :path path-test-resources)))
  :clientserver :server
  :doc &quot;Default file location for testsuitenode.vxlisp&quot;)</div>
                 </li>
@@ -71263,7 +71448,7 @@ output : list-1 := (empty list-1)
  (boolean-exists&lt;-file
   (file
    :name &quot;testsuite.html&quot;
-   :path &quot;src/test/resources&quot;)))</div></li>
+   :path path-test-resources)))</div></li>
               </ul>
             </details>
             <details open="true">
@@ -71275,12 +71460,12 @@ output : list-1 := (empty list-1)
                   <div class="source">(func file-testhtml : file/file
  (file
   :name &quot;testsuite.html&quot;
-  :path &quot;src/test/resources&quot;)
+  :path path-test-resources)
  :test (test-true
         (boolean-exists&lt;-file
          (file
           :name &quot;testsuite.html&quot;
-          :path &quot;src/test/resources&quot;)))
+          :path path-test-resources)))
  :clientserver :server
  :doc &quot;Default file location for testsuite.html&quot;)</div>
                 </li>
@@ -71421,9 +71606,12 @@ output : list-1 := (empty list-1)
                   <div class="source">(func p&lt;-passfail : p
  [passfail : boolean]
  (let
-  [text      : string := (if passfail &quot;Pass&quot; &quot;Fail&quot;)
-   stylename : string := (if passfail &quot;.passflag&quot; &quot;.failflag&quot;)
-   style     : style  := (style&lt;-stylesheet-name stylesheet-test stylename)]
+  [text : string :=
+    (if passfail &quot;Pass&quot; &quot;Fail&quot;)
+   stylename : string :=
+    (if passfail &quot;.passflag&quot; &quot;.failflag&quot;)
+   style : style :=
+    (style&lt;-stylesheet-name stylesheet-test stylename)]
   (p
    :style style
    :text  text))
@@ -71490,8 +71678,12 @@ output : list-1 := (empty list-1)
                   <div class="source">(func p&lt;-testcoveragenums : p
  [nums  : testcoveragenums]
  (p
-  :style (style&lt;-stylesheet-name stylesheet-test &quot;.coveragenums&quot;)
-  :text  (string (:pct nums) &quot;% &quot; (:tests nums) &quot;/&quot; (:total nums)))
+  :style
+   (style&lt;-stylesheet-name
+    stylesheet-test &quot;.coveragenums&quot;)
+  :text
+   (string
+    (:pct nums) &quot;% &quot; (:tests nums) &quot;/&quot; (:total nums)))
  :doc &quot;Returns &lt;p&gt;tests / total (pct%)&lt;/p&gt; from testcoveragenums&quot;)</div>
                 </li>
               </ul>
@@ -71555,16 +71747,20 @@ output : list-1 := (empty list-1)
                   <div class="source">(func resolve-testcase : testcase :async
  [testcase : testcase]
  (let
-  [describelist : testdescribelist := (:describelist testcase)
-   resolvedlist : testdescribelist := (resolve-testdescribelist describelist)
-   passfaillist : booleanlist      := (list&lt;-list : booleanlist
-                                       resolvedlist
-                                       (fn : boolean
-                                        [testdescribe : testdescribe]
-                                        (let : boolean
-                                         [testresult : testresult := (:testresult testdescribe)]
-                                         (:passfail testresult))))
-   passfail         : boolean      := (and passfaillist)]
+  [describelist : testdescribelist :=
+    (:describelist testcase)
+   resolvedlist : testdescribelist :=
+    (resolve-testdescribelist describelist)
+   passfaillist : booleanlist :=
+    (list&lt;-list : booleanlist
+     resolvedlist
+     (fn : boolean
+      [testdescribe : testdescribe]
+      (let : boolean
+       [testresult : testresult := (:testresult testdescribe)]
+       (:passfail testresult))))
+   passfail : boolean :=
+    (and passfaillist)]
    (copy
     testcase
     :passfail     passfail
@@ -71826,16 +72022,19 @@ output : list-1 := (empty list-1)
                   <div class="source">(func resolve-testpackage : testpackage :async
  [testpackage : testpackage]
  (let
-  [testcaselist : testcaselist := (:caselist testpackage)
-   resolvedlist : testcaselist := (resolve-testcaselist testcaselist)
-   passfaillist : booleanlist  := (list&lt;-list : booleanlist
-                                   resolvedlist
-                                   (fn : boolean
-                                    [testcase : testcase]
-                                    (:passfail testcase)
-                                   )
-                                  )
-   passfail     : boolean := (and passfaillist)]
+  [testcaselist : testcaselist :=
+    (:caselist testpackage)
+   resolvedlist : testcaselist :=
+    (resolve-testcaselist testcaselist)
+   passfaillist : booleanlist  :=
+    (list&lt;-list : booleanlist
+     resolvedlist
+     (fn : boolean
+      [testcase : testcase]
+      (:passfail testcase)
+     )
+    )
+   passfail : boolean := (and passfaillist)]
   (copy
    testpackage
    :passfail passfail
@@ -72699,9 +72898,10 @@ output : list-1 := (empty list-1)
  [expected : any
   actual   : any]
  (testresult
-  :passfail (=
-             (string&lt;-any expected)
-             (string&lt;-any actual))
+  :passfail
+   (=
+    (string&lt;-any expected)
+    (string&lt;-any actual))
   :expected expected
   :actual   actual)
  :context
@@ -72986,12 +73186,19 @@ output : list-1 := (empty list-1)
  [testdescribe : testdescribe
   casename     : string]
  (let : tr
-  [describename : string     := (:describename testdescribe)
-   result       : testresult := (:testresult testdescribe)
-   passfail     : boolean    := (:passfail result)
-   expected     : string     := (string&lt;-any (:expected result))
-   actual       : string     := (string&lt;-any (:actual result))
-   prestyle     : style      := (style&lt;-stylesheet-name stylesheet-test &quot;.preformatted&quot;)]
+  [describename : string :=
+    (:describename testdescribe)
+   result : testresult :=
+    (:testresult testdescribe)
+   passfail : boolean :=
+    (:passfail result)
+   expected : string :=
+    (string&lt;-any (:expected result))
+   actual : string :=
+    (string&lt;-any (:actual result))
+   prestyle : style :=
+    (style&lt;-stylesheet-name
+     stylesheet-test &quot;.preformatted&quot;)]
   (tr
    (td (p&lt;-passfail passfail))
    (td (p :style prestyle :text casename))
@@ -73063,8 +73270,10 @@ output : list-1 := (empty list-1)
                   <div class="source">(func trlist&lt;-testcase : trlist
  [testcase : testcase]
  (let : trlist
-  [describelist : testdescribelist := (:describelist testcase)
-   casename     : string           := (:casename testcase)]
+  [describelist : testdescribelist :=
+    (:describelist testcase)
+   casename : string :=
+    (:casename testcase)]
   (list&lt;-list : trlist
    describelist
    (fn : tr

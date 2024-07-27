@@ -4245,7 +4245,7 @@ public final class Test {
         Core.vx_new_string(":name"),
         Core.vx_new_string("testsuite.vxlisp"),
         Core.vx_new_string(":path"),
-        Core.vx_new_string("src/test/resources")
+        Core.c_path_test_resources
       )
     );
     return output;
@@ -4337,7 +4337,7 @@ public final class Test {
         Core.vx_new_string(":name"),
         Core.vx_new_string("testsuite.html"),
         Core.vx_new_string(":path"),
-        Core.vx_new_string("src/test/resources")
+        Core.c_path_test_resources
       )
     );
     return output;
@@ -4429,7 +4429,7 @@ public final class Test {
         Core.vx_new_string(":name"),
         Core.vx_new_string("testsuitenode.vxlisp"),
         Core.vx_new_string(":path"),
-        Core.vx_new_string("src/test/resources")
+        Core.c_path_test_resources
       )
     );
     return output;
@@ -4909,7 +4909,7 @@ public final class Test {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Test.Type_testcase testcase = Core.f_any_from_any(Test.t_testcase, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Test.Type_testcase> future = Test.f_resolve_testcase(testcase);
       output = Core.vx_async_from_async(Core.t_any, future);
@@ -4927,13 +4927,13 @@ public final class Test {
   public static final Func_resolve_testcase t_resolve_testcase = new Test.Class_resolve_testcase();
 
   public static CompletableFuture<Test.Type_testcase> f_resolve_testcase(final Test.Type_testcase testcase) {
-    CompletableFuture<Test.Type_testcase> output = Core.vx_async_new_completed(Test.e_testcase);
+    CompletableFuture<Test.Type_testcase> output = Core.vx_async_new_from_value(Test.e_testcase);
     output = Core.f_let_async(
       Test.t_testcase,
       Core.t_any_from_func_async.vx_fn_new(() -> {
         final Test.Type_testdescribelist describelist = testcase.describelist();
         final CompletableFuture<Test.Type_testdescribelist> future_resolvedlist = Test.f_resolve_testdescribelist(describelist);
-        CompletableFuture<Core.Type_any> output_1 = Core.vx_async_from_async_fn(future_resolvedlist, (resolvedlist) -> {;
+        CompletableFuture<Core.Type_any> output_1 = Core.vx_async_from_async_fn(future_resolvedlist, (resolvedlist) -> {
           final Core.Type_booleanlist passfaillist = Core.f_list_from_list_1(
             Core.t_booleanlist,
             resolvedlist,
@@ -5049,7 +5049,7 @@ public final class Test {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Test.Type_testcaselist testcaselist = Core.f_any_from_any(Test.t_testcaselist, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Test.Type_testcaselist> future = Test.f_resolve_testcaselist(testcaselist);
       output = Core.vx_async_from_async(Core.t_any, future);
@@ -5067,7 +5067,7 @@ public final class Test {
   public static final Func_resolve_testcaselist t_resolve_testcaselist = new Test.Class_resolve_testcaselist();
 
   public static CompletableFuture<Test.Type_testcaselist> f_resolve_testcaselist(final Test.Type_testcaselist testcaselist) {
-    CompletableFuture<Test.Type_testcaselist> output = Core.vx_async_new_completed(Test.e_testcaselist);
+    CompletableFuture<Test.Type_testcaselist> output = Core.vx_async_new_from_value(Test.e_testcaselist);
     output = Core.f_list_from_list_async(
       Test.t_testcaselist,
       testcaselist,
@@ -5156,7 +5156,7 @@ public final class Test {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Test.Type_testdescribe testdescribe = Core.f_any_from_any(Test.t_testdescribe, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Test.Type_testdescribe> future = Test.f_resolve_testdescribe(testdescribe);
       output = Core.vx_async_from_async(Core.t_any, future);
@@ -5174,13 +5174,13 @@ public final class Test {
   public static final Func_resolve_testdescribe t_resolve_testdescribe = new Test.Class_resolve_testdescribe();
 
   public static CompletableFuture<Test.Type_testdescribe> f_resolve_testdescribe(final Test.Type_testdescribe testdescribe) {
-    CompletableFuture<Test.Type_testdescribe> output = Core.vx_async_new_completed(Test.e_testdescribe);
+    CompletableFuture<Test.Type_testdescribe> output = Core.vx_async_new_from_value(Test.e_testdescribe);
     output = Core.f_let_async(
       Test.t_testdescribe,
       Core.t_any_from_func_async.vx_fn_new(() -> {
         final Test.Type_testresult testresult = testdescribe.testresult();
         final CompletableFuture<Test.Type_testresult> future_resolved = Test.f_resolve_testresult(testresult);
-        CompletableFuture<Core.Type_any> output_1 = Core.vx_async_from_async_fn(future_resolved, (resolved) -> {;
+        CompletableFuture<Core.Type_any> output_1 = Core.vx_async_from_async_fn(future_resolved, (resolved) -> {
           Core.Type_any output_2 = Core.f_copy(
             testdescribe,
             Core.vx_new(Core.t_anylist,
@@ -5276,7 +5276,7 @@ public final class Test {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Test.Type_testdescribelist testdescribelist = Core.f_any_from_any(Test.t_testdescribelist, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Test.Type_testdescribelist> future = Test.f_resolve_testdescribelist(testdescribelist);
       output = Core.vx_async_from_async(Core.t_any, future);
@@ -5294,7 +5294,7 @@ public final class Test {
   public static final Func_resolve_testdescribelist t_resolve_testdescribelist = new Test.Class_resolve_testdescribelist();
 
   public static CompletableFuture<Test.Type_testdescribelist> f_resolve_testdescribelist(final Test.Type_testdescribelist testdescribelist) {
-    CompletableFuture<Test.Type_testdescribelist> output = Core.vx_async_new_completed(Test.e_testdescribelist);
+    CompletableFuture<Test.Type_testdescribelist> output = Core.vx_async_new_from_value(Test.e_testdescribelist);
     output = Core.f_list_from_list_async(
       Test.t_testdescribelist,
       testdescribelist,
@@ -5383,7 +5383,7 @@ public final class Test {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Test.Type_testpackage testpackage = Core.f_any_from_any(Test.t_testpackage, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Test.Type_testpackage> future = Test.f_resolve_testpackage(testpackage);
       output = Core.vx_async_from_async(Core.t_any, future);
@@ -5401,13 +5401,13 @@ public final class Test {
   public static final Func_resolve_testpackage t_resolve_testpackage = new Test.Class_resolve_testpackage();
 
   public static CompletableFuture<Test.Type_testpackage> f_resolve_testpackage(final Test.Type_testpackage testpackage) {
-    CompletableFuture<Test.Type_testpackage> output = Core.vx_async_new_completed(Test.e_testpackage);
+    CompletableFuture<Test.Type_testpackage> output = Core.vx_async_new_from_value(Test.e_testpackage);
     output = Core.f_let_async(
       Test.t_testpackage,
       Core.t_any_from_func_async.vx_fn_new(() -> {
         final Test.Type_testcaselist testcaselist = testpackage.caselist();
         final CompletableFuture<Test.Type_testcaselist> future_resolvedlist = Test.f_resolve_testcaselist(testcaselist);
-        CompletableFuture<Core.Type_any> output_1 = Core.vx_async_from_async_fn(future_resolvedlist, (resolvedlist) -> {;
+        CompletableFuture<Core.Type_any> output_1 = Core.vx_async_from_async_fn(future_resolvedlist, (resolvedlist) -> {
           final Core.Type_booleanlist passfaillist = Core.f_list_from_list_1(
             Core.t_booleanlist,
             resolvedlist,
@@ -5516,7 +5516,7 @@ public final class Test {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Test.Type_testpackagelist testpackagelist = Core.f_any_from_any(Test.t_testpackagelist, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Test.Type_testpackagelist> future = Test.f_resolve_testpackagelist(testpackagelist);
       output = Core.vx_async_from_async(Core.t_any, future);
@@ -5534,7 +5534,7 @@ public final class Test {
   public static final Func_resolve_testpackagelist t_resolve_testpackagelist = new Test.Class_resolve_testpackagelist();
 
   public static CompletableFuture<Test.Type_testpackagelist> f_resolve_testpackagelist(final Test.Type_testpackagelist testpackagelist) {
-    CompletableFuture<Test.Type_testpackagelist> output = Core.vx_async_new_completed(Test.e_testpackagelist);
+    CompletableFuture<Test.Type_testpackagelist> output = Core.vx_async_new_from_value(Test.e_testpackagelist);
     output = Core.f_list_from_list_async(
       Test.t_testpackagelist,
       testpackagelist,
@@ -5623,7 +5623,7 @@ public final class Test {
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
-      CompletableFuture<Core.Type_any> output = Core.vx_async_new_completed(Core.e_any);
+      CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Test.Type_testresult testresult = Core.f_any_from_any(Test.t_testresult, arglist.vx_any(Core.vx_new_int(0)));
       CompletableFuture<Test.Type_testresult> future = Test.f_resolve_testresult(testresult);
       output = Core.vx_async_from_async(Core.t_any, future);
@@ -5641,14 +5641,14 @@ public final class Test {
   public static final Func_resolve_testresult t_resolve_testresult = new Test.Class_resolve_testresult();
 
   public static CompletableFuture<Test.Type_testresult> f_resolve_testresult(final Test.Type_testresult testresult) {
-    CompletableFuture<Test.Type_testresult> output = Core.vx_async_new_completed(Test.e_testresult);
+    CompletableFuture<Test.Type_testresult> output = Core.vx_async_new_from_value(Test.e_testresult);
     output = Core.f_let_async(
       Test.t_testresult,
       Core.t_any_from_func_async.vx_fn_new(() -> {
         final Core.Func_any_from_func_async fn_actual = testresult.fn_actual();
         final Core.Type_any expected = testresult.expected();
         final CompletableFuture<Core.Type_any> future_actual = Core.f_resolve_async(Core.t_any, fn_actual);
-        CompletableFuture<Core.Type_any> output_1 = Core.vx_async_from_async_fn(future_actual, (actual) -> {;
+        CompletableFuture<Core.Type_any> output_1 = Core.vx_async_from_async_fn(future_actual, (actual) -> {
           Core.Type_any output_3 = Core.f_if_2(
             Test.t_testresult,
             Core.vx_new(Core.t_thenelselist,

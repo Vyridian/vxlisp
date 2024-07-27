@@ -15,12 +15,12 @@ public static class En {
 
   public class Class_context_en : Vx.Core.Class_base, Func_context_en {
 
-    public override Vx.Translation.En.Func_context_en vx_new(params Object[] vals) {
+    public override Vx.Translation.En.Func_context_en vx_new(params object[] vals) {
       Class_context_en output = new Class_context_en();
       return output;
     }
 
-    public override Vx.Translation.En.Func_context_en vx_copy(params Object[] vals) {
+    public override Vx.Translation.En.Func_context_en vx_copy(params object[] vals) {
       Class_context_en output = new Class_context_en();
       return output;
     }
@@ -118,12 +118,12 @@ public static class En {
 
   public class Class_context_test : Vx.Core.Class_base, Func_context_test {
 
-    public override Vx.Translation.En.Func_context_test vx_new(params Object[] vals) {
+    public override Vx.Translation.En.Func_context_test vx_new(params object[] vals) {
       Class_context_test output = new Class_context_test();
       return output;
     }
 
-    public override Vx.Translation.En.Func_context_test vx_copy(params Object[] vals) {
+    public override Vx.Translation.En.Func_context_test vx_copy(params object[] vals) {
       Class_context_test output = new Class_context_test();
       return output;
     }
@@ -228,12 +228,12 @@ public static class En {
 
   public class Class_securitydata_test : Vx.Core.Class_base, Func_securitydata_test {
 
-    public override Vx.Translation.En.Func_securitydata_test vx_new(params Object[] vals) {
+    public override Vx.Translation.En.Func_securitydata_test vx_new(params object[] vals) {
       Class_securitydata_test output = new Class_securitydata_test();
       return output;
     }
 
-    public override Vx.Translation.En.Func_securitydata_test vx_copy(params Object[] vals) {
+    public override Vx.Translation.En.Func_securitydata_test vx_copy(params object[] vals) {
       Class_securitydata_test output = new Class_securitydata_test();
       return output;
     }
@@ -319,12 +319,12 @@ public static class En {
 
   public class Class_translation_en : Vx.Core.Class_base, Func_translation_en {
 
-    public override Vx.Translation.En.Func_translation_en vx_new(params Object[] vals) {
+    public override Vx.Translation.En.Func_translation_en vx_new(params object[] vals) {
       Class_translation_en output = new Class_translation_en();
       return output;
     }
 
-    public override Vx.Translation.En.Func_translation_en vx_copy(params Object[] vals) {
+    public override Vx.Translation.En.Func_translation_en vx_copy(params object[] vals) {
       Class_translation_en output = new Class_translation_en();
       return output;
     }
@@ -404,12 +404,12 @@ public static class En {
 
   public class Class_words : Vx.Core.Class_base, Func_words {
 
-    public override Vx.Translation.En.Func_words vx_new(params Object[] vals) {
+    public override Vx.Translation.En.Func_words vx_new(params object[] vals) {
       Class_words output = new Class_words();
       return output;
     }
 
-    public override Vx.Translation.En.Func_words vx_copy(params Object[] vals) {
+    public override Vx.Translation.En.Func_words vx_copy(params object[] vals) {
       Class_words output = new Class_words();
       return output;
     }
@@ -485,7 +485,7 @@ public static class En {
 
 
   public static class PackageRunOnce {
-    public static void RunOnce() {
+    public static bool RunOnce() {
     Vx.Core.Map<string, Vx.Core.Type_any> maptype = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
     Vx.Core.Map<string, Vx.Core.Type_any> mapconst = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
     Vx.Core.Map<string, Vx.Core.Type_func> mapfunc = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_func>();
@@ -495,7 +495,10 @@ public static class En {
     mapfunc.put("translation-en", Vx.Translation.En.t_translation_en);
     mapfunc.put("words", Vx.Translation.En.t_words);
     Vx.Core.vx_global_package_set("vx/translation/en", maptype, mapconst, mapfunc);
+      return true;
     }
   }
+
+  public static bool ranonce = PackageRunOnce.RunOnce();
 
 }

@@ -55,12 +55,12 @@ public static class Sample {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Sample.Type_mytype vx_new(params Object[] vals) {
+    public override Vx.Sample.Type_mytype vx_new(params object[] vals) {
       Vx.Sample.Type_mytype output = Vx.Core.vx_copy(Vx.Sample.e_mytype, vals);
       return output;
     }
 
-    public override Vx.Sample.Type_mytype vx_copy(params Object[] vals) {
+    public override Vx.Sample.Type_mytype vx_copy(params object[] vals) {
       Type_mytype output = this;
       bool ischanged = false;
       Class_mytype val = this;
@@ -76,7 +76,7 @@ public static class Sample {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -258,12 +258,12 @@ public static class Sample {
 
   public class Class_main : Vx.Core.Class_base, Func_main {
 
-    public override Vx.Sample.Func_main vx_new(params Object[] vals) {
+    public override Vx.Sample.Func_main vx_new(params object[] vals) {
       Class_main output = new Class_main();
       return output;
     }
 
-    public override Vx.Sample.Func_main vx_copy(params Object[] vals) {
+    public override Vx.Sample.Func_main vx_copy(params object[] vals) {
       Class_main output = new Class_main();
       return output;
     }
@@ -333,12 +333,12 @@ public static class Sample {
 
   public class Class_myfunc : Vx.Core.Class_base, Func_myfunc {
 
-    public override Vx.Sample.Func_myfunc vx_new(params Object[] vals) {
+    public override Vx.Sample.Func_myfunc vx_new(params object[] vals) {
       Class_myfunc output = new Class_myfunc();
       return output;
     }
 
-    public override Vx.Sample.Func_myfunc vx_copy(params Object[] vals) {
+    public override Vx.Sample.Func_myfunc vx_copy(params object[] vals) {
       Class_myfunc output = new Class_myfunc();
       return output;
     }
@@ -416,7 +416,7 @@ public static class Sample {
 
 
   public static class PackageRunOnce {
-    public static void RunOnce() {
+    public static bool RunOnce() {
     Const_myconst.const_new(c_myconst);
     Vx.Core.Map<string, Vx.Core.Type_any> maptype = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
     Vx.Core.Map<string, Vx.Core.Type_any> mapconst = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
@@ -426,7 +426,10 @@ public static class Sample {
     mapfunc.put("main", Vx.Sample.t_main);
     mapfunc.put("myfunc", Vx.Sample.t_myfunc);
     Vx.Core.vx_global_package_set("vx/sample", maptype, mapconst, mapfunc);
+      return true;
     }
   }
+
+  public static bool ranonce = PackageRunOnce.RunOnce();
 
 }

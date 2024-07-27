@@ -55,12 +55,12 @@ public static class Table {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Data.Table.Type_cell vx_new(params Object[] vals) {
+    public override Vx.Data.Table.Type_cell vx_new(params object[] vals) {
       Vx.Data.Table.Type_cell output = Vx.Core.vx_copy(Vx.Data.Table.e_cell, vals);
       return output;
     }
 
-    public override Vx.Data.Table.Type_cell vx_copy(params Object[] vals) {
+    public override Vx.Data.Table.Type_cell vx_copy(params object[] vals) {
       Type_cell output = this;
       bool ischanged = false;
       Class_cell val = this;
@@ -76,7 +76,7 @@ public static class Table {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -247,12 +247,12 @@ public static class Table {
       return this.vx_cell(index);
     }
 
-    public override Vx.Data.Table.Type_celllist vx_new(params Object[] vals) {
+    public override Vx.Data.Table.Type_celllist vx_new(params object[] vals) {
       Vx.Data.Table.Type_celllist output = Vx.Core.vx_copy(Vx.Data.Table.e_celllist, vals);
       return output;
     }
 
-    public override Vx.Data.Table.Type_celllist vx_copy(params Object[] vals) {
+    public override Vx.Data.Table.Type_celllist vx_copy(params object[] vals) {
       Type_celllist output = this;
       bool ischanged = false;
       Class_celllist val = this;
@@ -262,7 +262,7 @@ public static class Table {
       }
       List<Vx.Data.Table.Type_cell> listval = new List<Vx.Data.Table.Type_cell>(val.vx_listcell());
       Vx.Core.Type_msg msg;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -276,8 +276,8 @@ public static class Table {
         } else if (valsub is Vx.Data.Table.Type_celllist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listcell());
-        } else if (valsub is List<object> listunknown) {
-          foreach (Object item in listunknown) {
+        } else if (valsub is List<Vx.Core.Type_any> listany) {
+          foreach (Vx.Core.Type_any item in listany) {
             if (false) {
             } else if (item is Vx.Data.Table.Type_cell valitem) {
               ischanged = true;
@@ -409,12 +409,12 @@ public static class Table {
       return output;
     }
 
-    public override Vx.Data.Table.Type_cellmap vx_new(params Object[] vals) {
+    public override Vx.Data.Table.Type_cellmap vx_new(params object[] vals) {
       Vx.Data.Table.Type_cellmap output = Vx.Core.vx_copy(Vx.Data.Table.e_cellmap, vals);
       return output;
     }
 
-    public override Vx.Data.Table.Type_cellmap vx_copy(params Object[] vals) {
+    public override Vx.Data.Table.Type_cellmap vx_copy(params object[] vals) {
       Type_cellmap output = this;
       bool ischanged = false;
       Class_cellmap val = this;
@@ -426,7 +426,7 @@ public static class Table {
       Vx.Core.Type_msg? msg = null;
       string key = "";
       Vx.Core.Type_any? msgval = null;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -584,12 +584,12 @@ public static class Table {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Data.Table.Type_field vx_new(params Object[] vals) {
+    public override Vx.Data.Table.Type_field vx_new(params object[] vals) {
       Vx.Data.Table.Type_field output = Vx.Core.vx_copy(Vx.Data.Table.e_field, vals);
       return output;
     }
 
-    public override Vx.Data.Table.Type_field vx_copy(params Object[] vals) {
+    public override Vx.Data.Table.Type_field vx_copy(params object[] vals) {
       Type_field output = this;
       bool ischanged = false;
       Class_field val = this;
@@ -607,7 +607,7 @@ public static class Table {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -802,12 +802,12 @@ public static class Table {
       return this.vx_field(index);
     }
 
-    public override Vx.Data.Table.Type_fieldlist vx_new(params Object[] vals) {
+    public override Vx.Data.Table.Type_fieldlist vx_new(params object[] vals) {
       Vx.Data.Table.Type_fieldlist output = Vx.Core.vx_copy(Vx.Data.Table.e_fieldlist, vals);
       return output;
     }
 
-    public override Vx.Data.Table.Type_fieldlist vx_copy(params Object[] vals) {
+    public override Vx.Data.Table.Type_fieldlist vx_copy(params object[] vals) {
       Type_fieldlist output = this;
       bool ischanged = false;
       Class_fieldlist val = this;
@@ -817,7 +817,7 @@ public static class Table {
       }
       List<Vx.Data.Table.Type_field> listval = new List<Vx.Data.Table.Type_field>(val.vx_listfield());
       Vx.Core.Type_msg msg;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -831,8 +831,8 @@ public static class Table {
         } else if (valsub is Vx.Data.Table.Type_fieldlist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listfield());
-        } else if (valsub is List<object> listunknown) {
-          foreach (Object item in listunknown) {
+        } else if (valsub is List<Vx.Core.Type_any> listany) {
+          foreach (Vx.Core.Type_any item in listany) {
             if (false) {
             } else if (item is Vx.Data.Table.Type_field valitem) {
               ischanged = true;
@@ -925,12 +925,12 @@ public static class Table {
       return this.vx_field(index);
     }
 
-    public override Vx.Data.Table.Type_fieldmap vx_new(params Object[] vals) {
+    public override Vx.Data.Table.Type_fieldmap vx_new(params object[] vals) {
       Vx.Data.Table.Type_fieldmap output = Vx.Core.vx_copy(Vx.Data.Table.e_fieldmap, vals);
       return output;
     }
 
-    public override Vx.Data.Table.Type_fieldmap vx_copy(params Object[] vals) {
+    public override Vx.Data.Table.Type_fieldmap vx_copy(params object[] vals) {
       Type_fieldmap output = this;
       bool ischanged = false;
       Class_fieldmap val = this;
@@ -940,7 +940,7 @@ public static class Table {
       }
       List<Vx.Data.Table.Type_field> listval = new List<Vx.Data.Table.Type_field>(val.vx_listfield());
       Vx.Core.Type_msg msg;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -954,8 +954,8 @@ public static class Table {
         } else if (valsub is Vx.Data.Table.Type_fieldmap multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listfield());
-        } else if (valsub is List<object> listunknown) {
-          foreach (Object item in listunknown) {
+        } else if (valsub is List<Vx.Core.Type_any> listany) {
+          foreach (Vx.Core.Type_any item in listany) {
             if (false) {
             } else if (item is Vx.Data.Table.Type_field valitem) {
               ischanged = true;
@@ -1076,12 +1076,12 @@ public static class Table {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Data.Table.Type_filter vx_new(params Object[] vals) {
+    public override Vx.Data.Table.Type_filter vx_new(params object[] vals) {
       Vx.Data.Table.Type_filter output = Vx.Core.vx_copy(Vx.Data.Table.e_filter, vals);
       return output;
     }
 
-    public override Vx.Data.Table.Type_filter vx_copy(params Object[] vals) {
+    public override Vx.Data.Table.Type_filter vx_copy(params object[] vals) {
       Type_filter output = this;
       bool ischanged = false;
       Class_filter val = this;
@@ -1099,7 +1099,7 @@ public static class Table {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -1322,12 +1322,12 @@ public static class Table {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Data.Table.Type_row vx_new(params Object[] vals) {
+    public override Vx.Data.Table.Type_row vx_new(params object[] vals) {
       Vx.Data.Table.Type_row output = Vx.Core.vx_copy(Vx.Data.Table.e_row, vals);
       return output;
     }
 
-    public override Vx.Data.Table.Type_row vx_copy(params Object[] vals) {
+    public override Vx.Data.Table.Type_row vx_copy(params object[] vals) {
       Type_row output = this;
       bool ischanged = false;
       Class_row val = this;
@@ -1345,7 +1345,7 @@ public static class Table {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -1537,12 +1537,12 @@ public static class Table {
       return this.vx_row(index);
     }
 
-    public override Vx.Data.Table.Type_rowlist vx_new(params Object[] vals) {
+    public override Vx.Data.Table.Type_rowlist vx_new(params object[] vals) {
       Vx.Data.Table.Type_rowlist output = Vx.Core.vx_copy(Vx.Data.Table.e_rowlist, vals);
       return output;
     }
 
-    public override Vx.Data.Table.Type_rowlist vx_copy(params Object[] vals) {
+    public override Vx.Data.Table.Type_rowlist vx_copy(params object[] vals) {
       Type_rowlist output = this;
       bool ischanged = false;
       Class_rowlist val = this;
@@ -1552,7 +1552,7 @@ public static class Table {
       }
       List<Vx.Data.Table.Type_row> listval = new List<Vx.Data.Table.Type_row>(val.vx_listrow());
       Vx.Core.Type_msg msg;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -1566,8 +1566,8 @@ public static class Table {
         } else if (valsub is Vx.Data.Table.Type_rowlist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listrow());
-        } else if (valsub is List<object> listunknown) {
-          foreach (Object item in listunknown) {
+        } else if (valsub is List<Vx.Core.Type_any> listany) {
+          foreach (Vx.Core.Type_any item in listany) {
             if (false) {
             } else if (item is Vx.Data.Table.Type_row valitem) {
               ischanged = true;
@@ -1699,12 +1699,12 @@ public static class Table {
       return output;
     }
 
-    public override Vx.Data.Table.Type_rowmap vx_new(params Object[] vals) {
+    public override Vx.Data.Table.Type_rowmap vx_new(params object[] vals) {
       Vx.Data.Table.Type_rowmap output = Vx.Core.vx_copy(Vx.Data.Table.e_rowmap, vals);
       return output;
     }
 
-    public override Vx.Data.Table.Type_rowmap vx_copy(params Object[] vals) {
+    public override Vx.Data.Table.Type_rowmap vx_copy(params object[] vals) {
       Type_rowmap output = this;
       bool ischanged = false;
       Class_rowmap val = this;
@@ -1716,7 +1716,7 @@ public static class Table {
       Vx.Core.Type_msg? msg = null;
       string key = "";
       Vx.Core.Type_any? msgval = null;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -1874,12 +1874,12 @@ public static class Table {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Data.Table.Type_sort vx_new(params Object[] vals) {
+    public override Vx.Data.Table.Type_sort vx_new(params object[] vals) {
       Vx.Data.Table.Type_sort output = Vx.Core.vx_copy(Vx.Data.Table.e_sort, vals);
       return output;
     }
 
-    public override Vx.Data.Table.Type_sort vx_copy(params Object[] vals) {
+    public override Vx.Data.Table.Type_sort vx_copy(params object[] vals) {
       Type_sort output = this;
       bool ischanged = false;
       Class_sort val = this;
@@ -1897,7 +1897,7 @@ public static class Table {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -2180,12 +2180,12 @@ public static class Table {
       return Vx.Core.immutablemap(output);
     }
 
-    public override Vx.Data.Table.Type_table vx_new(params Object[] vals) {
+    public override Vx.Data.Table.Type_table vx_new(params object[] vals) {
       Vx.Data.Table.Type_table output = Vx.Core.vx_copy(Vx.Data.Table.e_table, vals);
       return output;
     }
 
-    public override Vx.Data.Table.Type_table vx_copy(params Object[] vals) {
+    public override Vx.Data.Table.Type_table vx_copy(params object[] vals) {
       Type_table output = this;
       bool ischanged = false;
       Class_table val = this;
@@ -2211,7 +2211,7 @@ public static class Table {
       string key = "";
       Vx.Core.Type_msg msg;
       Vx.Core.Type_any msgval;
-      foreach (Object valsub in vals) {
+      foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
@@ -2452,7 +2452,7 @@ public static class Table {
   public static Type_table t_table = new Class_table();
 
   public static class PackageRunOnce {
-    public static void RunOnce() {
+    public static bool RunOnce() {
     Vx.Core.Map<string, Vx.Core.Type_any> maptype = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
     Vx.Core.Map<string, Vx.Core.Type_any> mapconst = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
     Vx.Core.Map<string, Vx.Core.Type_func> mapfunc = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_func>();
@@ -2469,7 +2469,10 @@ public static class Table {
     maptype.put("sort", Vx.Data.Table.t_sort);
     maptype.put("table", Vx.Data.Table.t_table);
     Vx.Core.vx_global_package_set("vx/data/table", maptype, mapconst, mapfunc);
+      return true;
     }
   }
+
+  public static bool ranonce = PackageRunOnce.RunOnce();
 
 }
