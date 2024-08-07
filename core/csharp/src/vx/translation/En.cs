@@ -16,21 +16,22 @@ public static class En {
   public class Class_context_en : Vx.Core.Class_base, Func_context_en {
 
     public override Vx.Translation.En.Func_context_en vx_new(params object[] vals) {
-      Class_context_en output = new Class_context_en();
+      Vx.Translation.En.Class_context_en output = new Vx.Translation.En.Class_context_en();
       return output;
     }
 
-    public override Vx.Translation.En.Func_context_en vx_copy(params object[] vals) {
-      Class_context_en output = new Class_context_en();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Translation.En.Class_context_en output = new Vx.Translation.En.Class_context_en();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/translation/en", // pkgname
         "context-en", // name
         0, // idx
@@ -49,14 +50,17 @@ public static class En {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_context_en;
+      Vx.Core.Type_any output = Vx.Translation.En.e_context_en;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_context_en;
+      Vx.Core.Type_any output = Vx.Translation.En.t_context_en;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -84,18 +88,20 @@ public static class En {
 
   }
 
-  public static Func_context_en e_context_en = new Vx.Translation.En.Class_context_en();
-  public static Func_context_en t_context_en = new Vx.Translation.En.Class_context_en();
+  public static Vx.Translation.En.Func_context_en e_context_en = new Vx.Translation.En.Class_context_en();
+  public static Vx.Translation.En.Func_context_en t_context_en = new Vx.Translation.En.Class_context_en();
 
   public static Vx.Core.Type_context f_context_en(Vx.Core.Type_anylist args) {
     Vx.Core.Type_context output = Vx.Core.e_context;
     output = Vx.Core.f_new(
       Vx.Core.t_context,
-      Vx.Core.vx_new(Vx.Core.t_anylist,
+      Vx.Core.vx_new(
+        Vx.Core.t_anylist,
         Vx.Core.vx_new_string(":session"),
         Vx.Core.f_new(
           Vx.Core.t_session,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
             Vx.Core.vx_new_string(":translation"),
             Vx.Translation.En.f_translation_en()
           )
@@ -119,21 +125,22 @@ public static class En {
   public class Class_context_test : Vx.Core.Class_base, Func_context_test {
 
     public override Vx.Translation.En.Func_context_test vx_new(params object[] vals) {
-      Class_context_test output = new Class_context_test();
+      Vx.Translation.En.Class_context_test output = new Vx.Translation.En.Class_context_test();
       return output;
     }
 
-    public override Vx.Translation.En.Func_context_test vx_copy(params object[] vals) {
-      Class_context_test output = new Class_context_test();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Translation.En.Class_context_test output = new Vx.Translation.En.Class_context_test();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/translation/en", // pkgname
         "context-test", // name
         0, // idx
@@ -152,14 +159,17 @@ public static class En {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_context_test;
+      Vx.Core.Type_any output = Vx.Translation.En.e_context_test;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_context_test;
+      Vx.Core.Type_any output = Vx.Translation.En.t_context_test;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -187,24 +197,27 @@ public static class En {
 
   }
 
-  public static Func_context_test e_context_test = new Vx.Translation.En.Class_context_test();
-  public static Func_context_test t_context_test = new Vx.Translation.En.Class_context_test();
+  public static Vx.Translation.En.Func_context_test e_context_test = new Vx.Translation.En.Class_context_test();
+  public static Vx.Translation.En.Func_context_test t_context_test = new Vx.Translation.En.Class_context_test();
 
   public static Vx.Core.Type_context f_context_test(Vx.Core.Type_anylist args) {
     Vx.Core.Type_context output = Vx.Core.e_context;
     output = Vx.Core.f_new(
       Vx.Core.t_context,
-      Vx.Core.vx_new(Vx.Core.t_anylist,
+      Vx.Core.vx_new(
+        Vx.Core.t_anylist,
         Vx.Core.vx_new_string(":session"),
         Vx.Core.f_new(
           Vx.Core.t_session,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
             Vx.Core.vx_new_string(":translation"),
             Vx.Translation.En.f_translation_en(),
             Vx.Core.vx_new_string(":user"),
             Vx.Core.f_new(
               Vx.Core.t_user,
-              Vx.Core.vx_new(Vx.Core.t_anylist,
+              Vx.Core.vx_new(
+                Vx.Core.t_anylist,
                 Vx.Core.vx_new_string(":security"),
                 Vx.Translation.En.f_securitydata_test()
               )
@@ -229,21 +242,22 @@ public static class En {
   public class Class_securitydata_test : Vx.Core.Class_base, Func_securitydata_test {
 
     public override Vx.Translation.En.Func_securitydata_test vx_new(params object[] vals) {
-      Class_securitydata_test output = new Class_securitydata_test();
+      Vx.Translation.En.Class_securitydata_test output = new Vx.Translation.En.Class_securitydata_test();
       return output;
     }
 
-    public override Vx.Translation.En.Func_securitydata_test vx_copy(params object[] vals) {
-      Class_securitydata_test output = new Class_securitydata_test();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Translation.En.Class_securitydata_test output = new Vx.Translation.En.Class_securitydata_test();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/translation/en", // pkgname
         "securitydata-test", // name
         0, // idx
@@ -262,14 +276,17 @@ public static class En {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_securitydata_test;
+      Vx.Core.Type_any output = Vx.Translation.En.e_securitydata_test;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_securitydata_test;
+      Vx.Core.Type_any output = Vx.Translation.En.t_securitydata_test;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -284,18 +301,20 @@ public static class En {
 
   }
 
-  public static Func_securitydata_test e_securitydata_test = new Vx.Translation.En.Class_securitydata_test();
-  public static Func_securitydata_test t_securitydata_test = new Vx.Translation.En.Class_securitydata_test();
+  public static Vx.Translation.En.Func_securitydata_test e_securitydata_test = new Vx.Translation.En.Class_securitydata_test();
+  public static Vx.Translation.En.Func_securitydata_test t_securitydata_test = new Vx.Translation.En.Class_securitydata_test();
 
   public static Vx.Core.Type_security f_securitydata_test() {
     Vx.Core.Type_security output = Vx.Core.e_security;
     output = Vx.Core.f_new(
       Vx.Core.t_security,
-      Vx.Core.vx_new(Vx.Core.t_anylist,
+      Vx.Core.vx_new(
+        Vx.Core.t_anylist,
         Vx.Core.vx_new_string(":allowfuncs"),
         Vx.Core.f_new(
           Vx.Core.t_funclist,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
             Vx.Data.File.t_boolean_write_from_file_any,
             Vx.Data.File.t_boolean_write_from_file_string,
             Vx.Data.File.t_file_read_from_file,
@@ -320,21 +339,22 @@ public static class En {
   public class Class_translation_en : Vx.Core.Class_base, Func_translation_en {
 
     public override Vx.Translation.En.Func_translation_en vx_new(params object[] vals) {
-      Class_translation_en output = new Class_translation_en();
+      Vx.Translation.En.Class_translation_en output = new Vx.Translation.En.Class_translation_en();
       return output;
     }
 
-    public override Vx.Translation.En.Func_translation_en vx_copy(params object[] vals) {
-      Class_translation_en output = new Class_translation_en();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Translation.En.Class_translation_en output = new Vx.Translation.En.Class_translation_en();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/translation/en", // pkgname
         "translation-en", // name
         0, // idx
@@ -353,14 +373,17 @@ public static class En {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_translation_en;
+      Vx.Core.Type_any output = Vx.Translation.En.e_translation_en;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_translation_en;
+      Vx.Core.Type_any output = Vx.Translation.En.t_translation_en;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -375,14 +398,15 @@ public static class En {
 
   }
 
-  public static Func_translation_en e_translation_en = new Vx.Translation.En.Class_translation_en();
-  public static Func_translation_en t_translation_en = new Vx.Translation.En.Class_translation_en();
+  public static Vx.Translation.En.Func_translation_en e_translation_en = new Vx.Translation.En.Class_translation_en();
+  public static Vx.Translation.En.Func_translation_en t_translation_en = new Vx.Translation.En.Class_translation_en();
 
   public static Vx.Core.Type_translation f_translation_en() {
     Vx.Core.Type_translation output = Vx.Core.e_translation;
     output = Vx.Core.f_new(
       Vx.Core.t_translation,
-      Vx.Core.vx_new(Vx.Core.t_anylist,
+      Vx.Core.vx_new(
+        Vx.Core.t_anylist,
         Vx.Core.vx_new_string(":name"),
         Vx.Core.vx_new_string("en"),
         Vx.Core.vx_new_string(":wordmap"),
@@ -405,21 +429,22 @@ public static class En {
   public class Class_words : Vx.Core.Class_base, Func_words {
 
     public override Vx.Translation.En.Func_words vx_new(params object[] vals) {
-      Class_words output = new Class_words();
+      Vx.Translation.En.Class_words output = new Vx.Translation.En.Class_words();
       return output;
     }
 
-    public override Vx.Translation.En.Func_words vx_copy(params object[] vals) {
-      Class_words output = new Class_words();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Translation.En.Class_words output = new Vx.Translation.En.Class_words();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/translation/en", // pkgname
         "words", // name
         0, // idx
@@ -438,14 +463,17 @@ public static class En {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_words;
+      Vx.Core.Type_any output = Vx.Translation.En.e_words;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_words;
+      Vx.Core.Type_any output = Vx.Translation.En.t_words;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -460,14 +488,15 @@ public static class En {
 
   }
 
-  public static Func_words e_words = new Vx.Translation.En.Class_words();
-  public static Func_words t_words = new Vx.Translation.En.Class_words();
+  public static Vx.Translation.En.Func_words e_words = new Vx.Translation.En.Class_words();
+  public static Vx.Translation.En.Func_words t_words = new Vx.Translation.En.Class_words();
 
   public static Vx.Core.Type_stringmap f_words() {
     Vx.Core.Type_stringmap output = Vx.Core.e_stringmap;
     output = Vx.Core.f_new(
       Vx.Core.t_stringmap,
-      Vx.Core.vx_new(Vx.Core.t_anylist,
+      Vx.Core.vx_new(
+        Vx.Core.t_anylist,
         Vx.Core.vx_new_string("Hello"),
         Vx.Core.vx_new_string("Hello"),
         Vx.Core.vx_new_string("World"),

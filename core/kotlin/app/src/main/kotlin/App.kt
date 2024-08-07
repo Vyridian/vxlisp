@@ -1,10 +1,8 @@
 /**
  * App
  */
-import vx.core
-import vx.translation.en
-
-package App
+import com.vxlisp.vx.vx_core
+import com.vxlisp.vx.translation.vx_translation_en
 
   fun main(args : Array<String>) {
     try {

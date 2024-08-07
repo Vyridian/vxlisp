@@ -52,7 +52,8 @@ public static class Http {
       Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
       output.put(":ok", this.ok());
       output.put(":status", this.status());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Web.Http.Type_response vx_new(params object[] vals) {
@@ -60,16 +61,16 @@ public static class Http {
       return output;
     }
 
-    public override Vx.Web.Http.Type_response vx_copy(params object[] vals) {
-      Type_response output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Http.Type_response output = this;
       bool ischanged = false;
-      Class_response val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Http.Class_response value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Type_boolean vx_p_ok = val.ok();
-      Vx.Core.Type_int vx_p_status = val.status();
+      Vx.Core.Type_boolean vx_p_ok = value.ok();
+      Vx.Core.Type_int vx_p_status = value.status();
       List<string> validkeys = new List<string>();
       validkeys.Add(":ok");
       validkeys.Add(":status");
@@ -172,7 +173,7 @@ public static class Http {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_response work = new Class_response();
+        Vx.Web.Http.Class_response work = new Vx.Web.Http.Class_response();
         work.vx_p_ok = vx_p_ok;
         work.vx_p_status = vx_p_status;
         if (msgblock != Vx.Core.e_msgblock) {
@@ -184,14 +185,17 @@ public static class Http {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_response;
+      Vx.Core.Type_any output = Vx.Web.Http.e_response;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_response;
+      Vx.Core.Type_any output = Vx.Web.Http.t_response;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/http", // pkgname
         "response", // name
         ":struct", // extends
@@ -204,12 +208,13 @@ public static class Http {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_response e_response = new Class_response();
-  public static Type_response t_response = new Class_response();
+  public static Vx.Web.Http.Type_response e_response = new Vx.Web.Http.Class_response();
+  public static Vx.Web.Http.Type_response t_response = new Vx.Web.Http.Class_response();
   /**
    * 
    * @async
@@ -226,21 +231,22 @@ public static class Http {
   public class Class_csv_from_httpget : Vx.Core.Class_base, Func_csv_from_httpget {
 
     public override Vx.Web.Http.Func_csv_from_httpget vx_new(params object[] vals) {
-      Class_csv_from_httpget output = new Class_csv_from_httpget();
+      Vx.Web.Http.Class_csv_from_httpget output = new Vx.Web.Http.Class_csv_from_httpget();
       return output;
     }
 
-    public override Vx.Web.Http.Func_csv_from_httpget vx_copy(params object[] vals) {
-      Class_csv_from_httpget output = new Class_csv_from_httpget();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Http.Class_csv_from_httpget output = new Vx.Web.Http.Class_csv_from_httpget();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/http", // pkgname
         "csv<-httpget", // name
         0, // idx
@@ -259,14 +265,17 @@ public static class Http {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_csv_from_httpget;
+      Vx.Core.Type_any output = Vx.Web.Http.e_csv_from_httpget;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_csv_from_httpget;
+      Vx.Core.Type_any output = Vx.Web.Http.t_csv_from_httpget;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any_async vx_fn_new(Vx.Core.Class_any_from_any_async.IFn fn) {
@@ -294,8 +303,8 @@ public static class Http {
 
   }
 
-  public static Func_csv_from_httpget e_csv_from_httpget = new Vx.Web.Http.Class_csv_from_httpget();
-  public static Func_csv_from_httpget t_csv_from_httpget = new Vx.Web.Http.Class_csv_from_httpget();
+  public static Vx.Web.Http.Func_csv_from_httpget e_csv_from_httpget = new Vx.Web.Http.Class_csv_from_httpget();
+  public static Vx.Web.Http.Func_csv_from_httpget t_csv_from_httpget = new Vx.Web.Http.Class_csv_from_httpget();
 
   public static Task<Vx.Data.Csv.Type_csv> f_csv_from_httpget(Vx.Core.Type_string url) {
     Task<Vx.Data.Csv.Type_csv> output = Vx.Core.vx_async_new_from_value(Vx.Data.Csv.e_csv);
@@ -329,21 +338,22 @@ public static class Http {
   public class Class_json_from_httpget : Vx.Core.Class_base, Func_json_from_httpget {
 
     public override Vx.Web.Http.Func_json_from_httpget vx_new(params object[] vals) {
-      Class_json_from_httpget output = new Class_json_from_httpget();
+      Vx.Web.Http.Class_json_from_httpget output = new Vx.Web.Http.Class_json_from_httpget();
       return output;
     }
 
-    public override Vx.Web.Http.Func_json_from_httpget vx_copy(params object[] vals) {
-      Class_json_from_httpget output = new Class_json_from_httpget();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Http.Class_json_from_httpget output = new Vx.Web.Http.Class_json_from_httpget();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/http", // pkgname
         "json<-httpget", // name
         0, // idx
@@ -362,14 +372,17 @@ public static class Http {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_json_from_httpget;
+      Vx.Core.Type_any output = Vx.Web.Http.e_json_from_httpget;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_json_from_httpget;
+      Vx.Core.Type_any output = Vx.Web.Http.t_json_from_httpget;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any_async vx_fn_new(Vx.Core.Class_any_from_any_async.IFn fn) {
@@ -397,8 +410,8 @@ public static class Http {
 
   }
 
-  public static Func_json_from_httpget e_json_from_httpget = new Vx.Web.Http.Class_json_from_httpget();
-  public static Func_json_from_httpget t_json_from_httpget = new Vx.Web.Http.Class_json_from_httpget();
+  public static Vx.Web.Http.Func_json_from_httpget e_json_from_httpget = new Vx.Web.Http.Class_json_from_httpget();
+  public static Vx.Web.Http.Func_json_from_httpget t_json_from_httpget = new Vx.Web.Http.Class_json_from_httpget();
 
   public static Task<Vx.Web.Http.Type_response> f_json_from_httpget(Vx.Core.Type_string url) {
     Task<Vx.Web.Http.Type_response> output = Vx.Core.vx_async_new_from_value(Vx.Web.Http.e_response);
@@ -433,21 +446,22 @@ public static class Http {
   public class Class_response_from_httpget : Vx.Core.Class_base, Func_response_from_httpget {
 
     public override Vx.Web.Http.Func_response_from_httpget vx_new(params object[] vals) {
-      Class_response_from_httpget output = new Class_response_from_httpget();
+      Vx.Web.Http.Class_response_from_httpget output = new Vx.Web.Http.Class_response_from_httpget();
       return output;
     }
 
-    public override Vx.Web.Http.Func_response_from_httpget vx_copy(params object[] vals) {
-      Class_response_from_httpget output = new Class_response_from_httpget();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Http.Class_response_from_httpget output = new Vx.Web.Http.Class_response_from_httpget();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/http", // pkgname
         "response<-httpget", // name
         0, // idx
@@ -466,14 +480,17 @@ public static class Http {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_response_from_httpget;
+      Vx.Core.Type_any output = Vx.Web.Http.e_response_from_httpget;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_response_from_httpget;
+      Vx.Core.Type_any output = Vx.Web.Http.t_response_from_httpget;
+      return output;
     }
 
     public Task<Vx.Core.Type_any> vx_repl(Vx.Core.Type_anylist arglist) {
@@ -491,8 +508,8 @@ public static class Http {
 
   }
 
-  public static Func_response_from_httpget e_response_from_httpget = new Vx.Web.Http.Class_response_from_httpget();
-  public static Func_response_from_httpget t_response_from_httpget = new Vx.Web.Http.Class_response_from_httpget();
+  public static Vx.Web.Http.Func_response_from_httpget e_response_from_httpget = new Vx.Web.Http.Class_response_from_httpget();
+  public static Vx.Web.Http.Func_response_from_httpget t_response_from_httpget = new Vx.Web.Http.Class_response_from_httpget();
 
   public static Task<Vx.Web.Http.Type_response> f_response_from_httpget(Vx.Core.Type_string url, Vx.Core.Type_string contenttype) {
     Task<Vx.Web.Http.Type_response> output = Vx.Core.vx_async_new_from_value(Vx.Web.Http.e_response);
@@ -515,21 +532,22 @@ public static class Http {
   public class Class_text_from_httpget : Vx.Core.Class_base, Func_text_from_httpget {
 
     public override Vx.Web.Http.Func_text_from_httpget vx_new(params object[] vals) {
-      Class_text_from_httpget output = new Class_text_from_httpget();
+      Vx.Web.Http.Class_text_from_httpget output = new Vx.Web.Http.Class_text_from_httpget();
       return output;
     }
 
-    public override Vx.Web.Http.Func_text_from_httpget vx_copy(params object[] vals) {
-      Class_text_from_httpget output = new Class_text_from_httpget();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Http.Class_text_from_httpget output = new Vx.Web.Http.Class_text_from_httpget();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/http", // pkgname
         "text<-httpget", // name
         0, // idx
@@ -548,14 +566,17 @@ public static class Http {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_text_from_httpget;
+      Vx.Core.Type_any output = Vx.Web.Http.e_text_from_httpget;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_text_from_httpget;
+      Vx.Core.Type_any output = Vx.Web.Http.t_text_from_httpget;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any_async vx_fn_new(Vx.Core.Class_any_from_any_async.IFn fn) {
@@ -583,8 +604,8 @@ public static class Http {
 
   }
 
-  public static Func_text_from_httpget e_text_from_httpget = new Vx.Web.Http.Class_text_from_httpget();
-  public static Func_text_from_httpget t_text_from_httpget = new Vx.Web.Http.Class_text_from_httpget();
+  public static Vx.Web.Http.Func_text_from_httpget e_text_from_httpget = new Vx.Web.Http.Class_text_from_httpget();
+  public static Vx.Web.Http.Func_text_from_httpget t_text_from_httpget = new Vx.Web.Http.Class_text_from_httpget();
 
   public static Task<Vx.Core.Type_string> f_text_from_httpget(Vx.Core.Type_string url) {
     Task<Vx.Core.Type_string> output = Vx.Core.vx_async_new_from_value(Vx.Core.e_string);
@@ -616,21 +637,22 @@ public static class Http {
   public class Class_text_from_response : Vx.Core.Class_base, Func_text_from_response {
 
     public override Vx.Web.Http.Func_text_from_response vx_new(params object[] vals) {
-      Class_text_from_response output = new Class_text_from_response();
+      Vx.Web.Http.Class_text_from_response output = new Vx.Web.Http.Class_text_from_response();
       return output;
     }
 
-    public override Vx.Web.Http.Func_text_from_response vx_copy(params object[] vals) {
-      Class_text_from_response output = new Class_text_from_response();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Http.Class_text_from_response output = new Vx.Web.Http.Class_text_from_response();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/http", // pkgname
         "text<-response", // name
         0, // idx
@@ -649,14 +671,17 @@ public static class Http {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_text_from_response;
+      Vx.Core.Type_any output = Vx.Web.Http.e_text_from_response;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_text_from_response;
+      Vx.Core.Type_any output = Vx.Web.Http.t_text_from_response;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -684,8 +709,8 @@ public static class Http {
 
   }
 
-  public static Func_text_from_response e_text_from_response = new Vx.Web.Http.Class_text_from_response();
-  public static Func_text_from_response t_text_from_response = new Vx.Web.Http.Class_text_from_response();
+  public static Vx.Web.Http.Func_text_from_response e_text_from_response = new Vx.Web.Http.Class_text_from_response();
+  public static Vx.Web.Http.Func_text_from_response t_text_from_response = new Vx.Web.Http.Class_text_from_response();
 
   public static Vx.Core.Type_string f_text_from_response(Vx.Web.Http.Type_response response) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -709,21 +734,22 @@ public static class Http {
   public class Class_textblock_from_httpget : Vx.Core.Class_base, Func_textblock_from_httpget {
 
     public override Vx.Web.Http.Func_textblock_from_httpget vx_new(params object[] vals) {
-      Class_textblock_from_httpget output = new Class_textblock_from_httpget();
+      Vx.Web.Http.Class_textblock_from_httpget output = new Vx.Web.Http.Class_textblock_from_httpget();
       return output;
     }
 
-    public override Vx.Web.Http.Func_textblock_from_httpget vx_copy(params object[] vals) {
-      Class_textblock_from_httpget output = new Class_textblock_from_httpget();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Http.Class_textblock_from_httpget output = new Vx.Web.Http.Class_textblock_from_httpget();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/http", // pkgname
         "textblock<-httpget", // name
         0, // idx
@@ -742,14 +768,17 @@ public static class Http {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_textblock_from_httpget;
+      Vx.Core.Type_any output = Vx.Web.Http.e_textblock_from_httpget;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_textblock_from_httpget;
+      Vx.Core.Type_any output = Vx.Web.Http.t_textblock_from_httpget;
+      return output;
     }
 
     public Task<Vx.Core.Type_any> vx_repl(Vx.Core.Type_anylist arglist) {
@@ -767,8 +796,8 @@ public static class Http {
 
   }
 
-  public static Func_textblock_from_httpget e_textblock_from_httpget = new Vx.Web.Http.Class_textblock_from_httpget();
-  public static Func_textblock_from_httpget t_textblock_from_httpget = new Vx.Web.Http.Class_textblock_from_httpget();
+  public static Vx.Web.Http.Func_textblock_from_httpget e_textblock_from_httpget = new Vx.Web.Http.Class_textblock_from_httpget();
+  public static Vx.Web.Http.Func_textblock_from_httpget t_textblock_from_httpget = new Vx.Web.Http.Class_textblock_from_httpget();
 
   public static Task<Vx.Data.Textblock.Type_textblock> f_textblock_from_httpget(Vx.Core.Type_string url, Vx.Core.Type_string contenttype) {
     Task<Vx.Data.Textblock.Type_textblock> output = Vx.Core.vx_async_new_from_value(Vx.Data.Textblock.e_textblock);
@@ -800,21 +829,22 @@ public static class Http {
   public class Class_textblock_from_response : Vx.Core.Class_base, Func_textblock_from_response {
 
     public override Vx.Web.Http.Func_textblock_from_response vx_new(params object[] vals) {
-      Class_textblock_from_response output = new Class_textblock_from_response();
+      Vx.Web.Http.Class_textblock_from_response output = new Vx.Web.Http.Class_textblock_from_response();
       return output;
     }
 
-    public override Vx.Web.Http.Func_textblock_from_response vx_copy(params object[] vals) {
-      Class_textblock_from_response output = new Class_textblock_from_response();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Http.Class_textblock_from_response output = new Vx.Web.Http.Class_textblock_from_response();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/http", // pkgname
         "textblock<-response", // name
         0, // idx
@@ -833,14 +863,17 @@ public static class Http {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_textblock_from_response;
+      Vx.Core.Type_any output = Vx.Web.Http.e_textblock_from_response;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_textblock_from_response;
+      Vx.Core.Type_any output = Vx.Web.Http.t_textblock_from_response;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -868,14 +901,15 @@ public static class Http {
 
   }
 
-  public static Func_textblock_from_response e_textblock_from_response = new Vx.Web.Http.Class_textblock_from_response();
-  public static Func_textblock_from_response t_textblock_from_response = new Vx.Web.Http.Class_textblock_from_response();
+  public static Vx.Web.Http.Func_textblock_from_response e_textblock_from_response = new Vx.Web.Http.Class_textblock_from_response();
+  public static Vx.Web.Http.Func_textblock_from_response t_textblock_from_response = new Vx.Web.Http.Class_textblock_from_response();
 
   public static Vx.Data.Textblock.Type_textblock f_textblock_from_response(Vx.Web.Http.Type_response response) {
     Vx.Data.Textblock.Type_textblock output = Vx.Data.Textblock.e_textblock;
     output = Vx.Core.f_new(
       Vx.Data.Textblock.t_textblock,
-      Vx.Core.vx_new(Vx.Core.t_anylist,
+      Vx.Core.vx_new(
+        Vx.Core.t_anylist,
         Vx.Core.vx_new_string(":text"),
         Vx.Web.Http.f_text_from_response(response)
       )
@@ -899,21 +933,22 @@ public static class Http {
   public class Class_xml_from_httpget : Vx.Core.Class_base, Func_xml_from_httpget {
 
     public override Vx.Web.Http.Func_xml_from_httpget vx_new(params object[] vals) {
-      Class_xml_from_httpget output = new Class_xml_from_httpget();
+      Vx.Web.Http.Class_xml_from_httpget output = new Vx.Web.Http.Class_xml_from_httpget();
       return output;
     }
 
-    public override Vx.Web.Http.Func_xml_from_httpget vx_copy(params object[] vals) {
-      Class_xml_from_httpget output = new Class_xml_from_httpget();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Http.Class_xml_from_httpget output = new Vx.Web.Http.Class_xml_from_httpget();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/http", // pkgname
         "xml<-httpget", // name
         0, // idx
@@ -932,14 +967,17 @@ public static class Http {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_xml_from_httpget;
+      Vx.Core.Type_any output = Vx.Web.Http.e_xml_from_httpget;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_xml_from_httpget;
+      Vx.Core.Type_any output = Vx.Web.Http.t_xml_from_httpget;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any_async vx_fn_new(Vx.Core.Class_any_from_any_async.IFn fn) {
@@ -967,8 +1005,8 @@ public static class Http {
 
   }
 
-  public static Func_xml_from_httpget e_xml_from_httpget = new Vx.Web.Http.Class_xml_from_httpget();
-  public static Func_xml_from_httpget t_xml_from_httpget = new Vx.Web.Http.Class_xml_from_httpget();
+  public static Vx.Web.Http.Func_xml_from_httpget e_xml_from_httpget = new Vx.Web.Http.Class_xml_from_httpget();
+  public static Vx.Web.Http.Func_xml_from_httpget t_xml_from_httpget = new Vx.Web.Http.Class_xml_from_httpget();
 
   public static Task<Vx.Data.Xml.Type_xml> f_xml_from_httpget(Vx.Core.Type_string url) {
     Task<Vx.Data.Xml.Type_xml> output = Vx.Core.vx_async_new_from_value(Vx.Data.Xml.e_xml);

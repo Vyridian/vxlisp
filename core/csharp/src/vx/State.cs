@@ -55,12 +55,12 @@ public static class State {
       Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
       List<string> keys = mapval.keys();
       foreach (string key in keys) {
-        Vx.Core.Type_any val = mapval.get(key);
+        Vx.Core.Type_any value = mapval.get(key);
         if (false) {
-        } else if (val is Vx.Core.Type_any castval) {
+        } else if (value is Vx.Core.Type_any castval) {
           map.put(key, castval);
         } else {
-          Vx.Core.Type_msg msg = Vx.Core.vx_msg_from_error("vx/state/valuemap", ":invalidvalue", val);
+          Vx.Core.Type_msg msg = Vx.Core.vx_msg_from_error("vx/state/valuemap", ":invalidvalue", value);
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         }
       }
@@ -76,15 +76,15 @@ public static class State {
       return output;
     }
 
-    public override Vx.State.Type_valuemap vx_copy(params object[] vals) {
-      Type_valuemap output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.State.Type_valuemap output = this;
       bool ischanged = false;
-      Class_valuemap val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.State.Class_valuemap value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Map<string, Vx.Core.Type_any> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>(val.vx_map());
+      Vx.Core.Map<string, Vx.Core.Type_any> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>(value.vx_map());
       Vx.Core.Type_msg? msg = null;
       string key = "";
       Vx.Core.Type_any? msgval = null;
@@ -115,7 +115,7 @@ public static class State {
           } else if (valsub is Vx.Core.Type_any valallowed) {
             valany = valallowed;
           } else if (valsub is Vx.Core.Type_any) {
-            valany = valsub as Vx.Core.Type_any;
+            valany = (Vx.Core.Type_any)valsub;
           } else {
             if (false) {
             } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -141,7 +141,7 @@ public static class State {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_valuemap work = new Class_valuemap();
+        Vx.State.Class_valuemap work = new Vx.State.Class_valuemap();
         work.vx_p_map = Vx.Core.immutablemap(mapval);
         if (msgblock != Vx.Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -152,14 +152,17 @@ public static class State {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_valuemap;
+      Vx.Core.Type_any output = Vx.State.e_valuemap;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_valuemap;
+      Vx.Core.Type_any output = Vx.State.t_valuemap;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/state", // pkgname
         "valuemap", // name
         ":map", // extends
@@ -172,12 +175,13 @@ public static class State {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_valuemap e_valuemap = new Class_valuemap();
-  public static Type_valuemap t_valuemap = new Class_valuemap();
+  public static Vx.State.Type_valuemap e_valuemap = new Vx.State.Class_valuemap();
+  public static Vx.State.Type_valuemap t_valuemap = new Vx.State.Class_valuemap();
   /**
    * @function any_readstate_from_mapname_name
    * Returns the named state value
@@ -193,21 +197,22 @@ public static class State {
   public class Class_any_readstate_from_mapname_name : Vx.Core.Class_base, Func_any_readstate_from_mapname_name {
 
     public override Vx.State.Func_any_readstate_from_mapname_name vx_new(params object[] vals) {
-      Class_any_readstate_from_mapname_name output = new Class_any_readstate_from_mapname_name();
+      Vx.State.Class_any_readstate_from_mapname_name output = new Vx.State.Class_any_readstate_from_mapname_name();
       return output;
     }
 
-    public override Vx.State.Func_any_readstate_from_mapname_name vx_copy(params object[] vals) {
-      Class_any_readstate_from_mapname_name output = new Class_any_readstate_from_mapname_name();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.State.Class_any_readstate_from_mapname_name output = new Vx.State.Class_any_readstate_from_mapname_name();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/state", // pkgname
         "any-readstate<-mapname-name", // name
         0, // idx
@@ -226,14 +231,17 @@ public static class State {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_any_readstate_from_mapname_name;
+      Vx.Core.Type_any output = Vx.State.e_any_readstate_from_mapname_name;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_any_readstate_from_mapname_name;
+      Vx.Core.Type_any output = Vx.State.t_any_readstate_from_mapname_name;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -252,8 +260,8 @@ public static class State {
 
   }
 
-  public static Func_any_readstate_from_mapname_name e_any_readstate_from_mapname_name = new Vx.State.Class_any_readstate_from_mapname_name();
-  public static Func_any_readstate_from_mapname_name t_any_readstate_from_mapname_name = new Vx.State.Class_any_readstate_from_mapname_name();
+  public static Vx.State.Func_any_readstate_from_mapname_name e_any_readstate_from_mapname_name = new Vx.State.Class_any_readstate_from_mapname_name();
+  public static Vx.State.Func_any_readstate_from_mapname_name t_any_readstate_from_mapname_name = new Vx.State.Class_any_readstate_from_mapname_name();
 
   public static T f_any_readstate_from_mapname_name<T>(T generic_any_1, Vx.Core.Type_context context, Vx.Core.Type_string mapname, Vx.Core.Type_string name) where T : Vx.Core.Type_any {
     T output = Vx.Core.f_empty(generic_any_1);
@@ -282,21 +290,22 @@ public static class State {
   public class Class_any_readstate_from_name : Vx.Core.Class_base, Func_any_readstate_from_name {
 
     public override Vx.State.Func_any_readstate_from_name vx_new(params object[] vals) {
-      Class_any_readstate_from_name output = new Class_any_readstate_from_name();
+      Vx.State.Class_any_readstate_from_name output = new Vx.State.Class_any_readstate_from_name();
       return output;
     }
 
-    public override Vx.State.Func_any_readstate_from_name vx_copy(params object[] vals) {
-      Class_any_readstate_from_name output = new Class_any_readstate_from_name();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.State.Class_any_readstate_from_name output = new Vx.State.Class_any_readstate_from_name();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/state", // pkgname
         "any-readstate<-name", // name
         0, // idx
@@ -315,14 +324,17 @@ public static class State {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_any_readstate_from_name;
+      Vx.Core.Type_any output = Vx.State.e_any_readstate_from_name;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_any_readstate_from_name;
+      Vx.Core.Type_any output = Vx.State.t_any_readstate_from_name;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any_context vx_fn_new(Vx.Core.Class_any_from_any_context.IFn fn) {
@@ -352,8 +364,8 @@ public static class State {
 
   }
 
-  public static Func_any_readstate_from_name e_any_readstate_from_name = new Vx.State.Class_any_readstate_from_name();
-  public static Func_any_readstate_from_name t_any_readstate_from_name = new Vx.State.Class_any_readstate_from_name();
+  public static Vx.State.Func_any_readstate_from_name e_any_readstate_from_name = new Vx.State.Class_any_readstate_from_name();
+  public static Vx.State.Func_any_readstate_from_name t_any_readstate_from_name = new Vx.State.Class_any_readstate_from_name();
 
   public static T f_any_readstate_from_name<T>(T generic_any_1, Vx.Core.Type_context context, Vx.Core.Type_string name) where T : Vx.Core.Type_any {
     T output = Vx.Core.f_empty(generic_any_1);
@@ -378,21 +390,22 @@ public static class State {
   public class Class_boolean_removestate_from_name : Vx.Core.Class_base, Func_boolean_removestate_from_name {
 
     public override Vx.State.Func_boolean_removestate_from_name vx_new(params object[] vals) {
-      Class_boolean_removestate_from_name output = new Class_boolean_removestate_from_name();
+      Vx.State.Class_boolean_removestate_from_name output = new Vx.State.Class_boolean_removestate_from_name();
       return output;
     }
 
-    public override Vx.State.Func_boolean_removestate_from_name vx_copy(params object[] vals) {
-      Class_boolean_removestate_from_name output = new Class_boolean_removestate_from_name();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.State.Class_boolean_removestate_from_name output = new Vx.State.Class_boolean_removestate_from_name();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/state", // pkgname
         "boolean-removestate<-name", // name
         0, // idx
@@ -411,14 +424,17 @@ public static class State {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_boolean_removestate_from_name;
+      Vx.Core.Type_any output = Vx.State.e_boolean_removestate_from_name;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_boolean_removestate_from_name;
+      Vx.Core.Type_any output = Vx.State.t_boolean_removestate_from_name;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any_context vx_fn_new(Vx.Core.Class_any_from_any_context.IFn fn) {
@@ -447,8 +463,8 @@ public static class State {
 
   }
 
-  public static Func_boolean_removestate_from_name e_boolean_removestate_from_name = new Vx.State.Class_boolean_removestate_from_name();
-  public static Func_boolean_removestate_from_name t_boolean_removestate_from_name = new Vx.State.Class_boolean_removestate_from_name();
+  public static Vx.State.Func_boolean_removestate_from_name e_boolean_removestate_from_name = new Vx.State.Class_boolean_removestate_from_name();
+  public static Vx.State.Func_boolean_removestate_from_name t_boolean_removestate_from_name = new Vx.State.Class_boolean_removestate_from_name();
 
   public static Vx.Core.Type_boolean f_boolean_removestate_from_name(Vx.Core.Type_context context, Vx.Core.Type_string name) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -485,21 +501,22 @@ public static class State {
   public class Class_boolean_writestate_from_mapname_name_value : Vx.Core.Class_base, Func_boolean_writestate_from_mapname_name_value {
 
     public override Vx.State.Func_boolean_writestate_from_mapname_name_value vx_new(params object[] vals) {
-      Class_boolean_writestate_from_mapname_name_value output = new Class_boolean_writestate_from_mapname_name_value();
+      Vx.State.Class_boolean_writestate_from_mapname_name_value output = new Vx.State.Class_boolean_writestate_from_mapname_name_value();
       return output;
     }
 
-    public override Vx.State.Func_boolean_writestate_from_mapname_name_value vx_copy(params object[] vals) {
-      Class_boolean_writestate_from_mapname_name_value output = new Class_boolean_writestate_from_mapname_name_value();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.State.Class_boolean_writestate_from_mapname_name_value output = new Vx.State.Class_boolean_writestate_from_mapname_name_value();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/state", // pkgname
         "boolean-writestate<-mapname-name-value", // name
         0, // idx
@@ -518,14 +535,17 @@ public static class State {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_boolean_writestate_from_mapname_name_value;
+      Vx.Core.Type_any output = Vx.State.e_boolean_writestate_from_mapname_name_value;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_boolean_writestate_from_mapname_name_value;
+      Vx.Core.Type_any output = Vx.State.t_boolean_writestate_from_mapname_name_value;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -544,8 +564,8 @@ public static class State {
 
   }
 
-  public static Func_boolean_writestate_from_mapname_name_value e_boolean_writestate_from_mapname_name_value = new Vx.State.Class_boolean_writestate_from_mapname_name_value();
-  public static Func_boolean_writestate_from_mapname_name_value t_boolean_writestate_from_mapname_name_value = new Vx.State.Class_boolean_writestate_from_mapname_name_value();
+  public static Vx.State.Func_boolean_writestate_from_mapname_name_value e_boolean_writestate_from_mapname_name_value = new Vx.State.Class_boolean_writestate_from_mapname_name_value();
+  public static Vx.State.Func_boolean_writestate_from_mapname_name_value t_boolean_writestate_from_mapname_name_value = new Vx.State.Class_boolean_writestate_from_mapname_name_value();
 
   public static Vx.Core.Type_boolean f_boolean_writestate_from_mapname_name_value(Vx.Core.Type_context context, Vx.Core.Type_string mapname, Vx.Core.Type_string name, Vx.Core.Type_any value) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -555,7 +575,8 @@ public static class State {
         Vx.State.Type_valuemap valmap = Vx.State.f_any_readstate_from_name(Vx.State.t_valuemap, context, mapname);
         Vx.Core.Type_any output_2 = Vx.Core.f_if_2(
           Vx.Core.t_boolean,
-          Vx.Core.vx_new(Vx.Core.t_thenelselist,
+          Vx.Core.vx_new(
+            Vx.Core.t_thenelselist,
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
                 return Vx.Core.f_is_empty_1(valmap);
@@ -566,18 +587,20 @@ public static class State {
                   Vx.Core.t_any_from_func.vx_fn_new(() => {
                     Vx.State.Type_valuemap valmap2 = Vx.Core.f_new(
                       Vx.State.t_valuemap,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
-                          name,
-                          value
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
+                        name,
+                        value
                       )
                     );
                     Vx.Core.Type_statelistener listener = Vx.Core.f_new(
                       Vx.Core.t_statelistener,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
-                          Vx.Core.vx_new_string(":name"),
-                          mapname,
-                          Vx.Core.vx_new_string(":value"),
-                          valmap2
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
+                        Vx.Core.vx_new_string(":name"),
+                        mapname,
+                        Vx.Core.vx_new_string(":value"),
+                        valmap2
                       )
                     );
                     Vx.Core.Type_any output_1 = Vx.State.f_boolean_writestate_from_statelistener(context, listener);
@@ -614,21 +637,22 @@ public static class State {
   public class Class_boolean_writestate_from_name_value : Vx.Core.Class_base, Func_boolean_writestate_from_name_value {
 
     public override Vx.State.Func_boolean_writestate_from_name_value vx_new(params object[] vals) {
-      Class_boolean_writestate_from_name_value output = new Class_boolean_writestate_from_name_value();
+      Vx.State.Class_boolean_writestate_from_name_value output = new Vx.State.Class_boolean_writestate_from_name_value();
       return output;
     }
 
-    public override Vx.State.Func_boolean_writestate_from_name_value vx_copy(params object[] vals) {
-      Class_boolean_writestate_from_name_value output = new Class_boolean_writestate_from_name_value();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.State.Class_boolean_writestate_from_name_value output = new Vx.State.Class_boolean_writestate_from_name_value();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/state", // pkgname
         "boolean-writestate<-name-value", // name
         0, // idx
@@ -647,14 +671,17 @@ public static class State {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_boolean_writestate_from_name_value;
+      Vx.Core.Type_any output = Vx.State.e_boolean_writestate_from_name_value;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_boolean_writestate_from_name_value;
+      Vx.Core.Type_any output = Vx.State.t_boolean_writestate_from_name_value;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -672,8 +699,8 @@ public static class State {
 
   }
 
-  public static Func_boolean_writestate_from_name_value e_boolean_writestate_from_name_value = new Vx.State.Class_boolean_writestate_from_name_value();
-  public static Func_boolean_writestate_from_name_value t_boolean_writestate_from_name_value = new Vx.State.Class_boolean_writestate_from_name_value();
+  public static Vx.State.Func_boolean_writestate_from_name_value e_boolean_writestate_from_name_value = new Vx.State.Class_boolean_writestate_from_name_value();
+  public static Vx.State.Func_boolean_writestate_from_name_value t_boolean_writestate_from_name_value = new Vx.State.Class_boolean_writestate_from_name_value();
 
   public static Vx.Core.Type_boolean f_boolean_writestate_from_name_value(Vx.Core.Type_context context, Vx.Core.Type_string name, Vx.Core.Type_any value) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -683,11 +710,12 @@ public static class State {
         Vx.Core.Type_statelistener listenercur = Vx.State.f_statelistener_readstate_from_name(context, name);
         Vx.Core.Type_statelistener listenerchg = Vx.Core.f_copy(
           listenercur,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
-              Vx.Core.vx_new_string(":name"),
-              name,
-              Vx.Core.vx_new_string(":value"),
-              value
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
+            Vx.Core.vx_new_string(":name"),
+            name,
+            Vx.Core.vx_new_string(":value"),
+            value
           )
         );
         Vx.Core.Type_any output_1 = Vx.State.f_boolean_writestate_from_statelistener(context, listenerchg);
@@ -711,21 +739,22 @@ public static class State {
   public class Class_boolean_writestate_from_statelistener : Vx.Core.Class_base, Func_boolean_writestate_from_statelistener {
 
     public override Vx.State.Func_boolean_writestate_from_statelistener vx_new(params object[] vals) {
-      Class_boolean_writestate_from_statelistener output = new Class_boolean_writestate_from_statelistener();
+      Vx.State.Class_boolean_writestate_from_statelistener output = new Vx.State.Class_boolean_writestate_from_statelistener();
       return output;
     }
 
-    public override Vx.State.Func_boolean_writestate_from_statelistener vx_copy(params object[] vals) {
-      Class_boolean_writestate_from_statelistener output = new Class_boolean_writestate_from_statelistener();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.State.Class_boolean_writestate_from_statelistener output = new Vx.State.Class_boolean_writestate_from_statelistener();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/state", // pkgname
         "boolean-writestate<-statelistener", // name
         0, // idx
@@ -744,14 +773,17 @@ public static class State {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_boolean_writestate_from_statelistener;
+      Vx.Core.Type_any output = Vx.State.e_boolean_writestate_from_statelistener;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_boolean_writestate_from_statelistener;
+      Vx.Core.Type_any output = Vx.State.t_boolean_writestate_from_statelistener;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any_context vx_fn_new(Vx.Core.Class_any_from_any_context.IFn fn) {
@@ -780,8 +812,8 @@ public static class State {
 
   }
 
-  public static Func_boolean_writestate_from_statelistener e_boolean_writestate_from_statelistener = new Vx.State.Class_boolean_writestate_from_statelistener();
-  public static Func_boolean_writestate_from_statelistener t_boolean_writestate_from_statelistener = new Vx.State.Class_boolean_writestate_from_statelistener();
+  public static Vx.State.Func_boolean_writestate_from_statelistener e_boolean_writestate_from_statelistener = new Vx.State.Class_boolean_writestate_from_statelistener();
+  public static Vx.State.Func_boolean_writestate_from_statelistener t_boolean_writestate_from_statelistener = new Vx.State.Class_boolean_writestate_from_statelistener();
 
   public static Vx.Core.Type_boolean f_boolean_writestate_from_statelistener(Vx.Core.Type_context context, Vx.Core.Type_statelistener statelistener) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -811,21 +843,22 @@ public static class State {
   public class Class_change : Vx.Core.Class_base, Func_change {
 
     public override Vx.State.Func_change vx_new(params object[] vals) {
-      Class_change output = new Class_change();
+      Vx.State.Class_change output = new Vx.State.Class_change();
       return output;
     }
 
-    public override Vx.State.Func_change vx_copy(params object[] vals) {
-      Class_change output = new Class_change();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.State.Class_change output = new Vx.State.Class_change();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/state", // pkgname
         "change", // name
         0, // idx
@@ -844,14 +877,17 @@ public static class State {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_change;
+      Vx.Core.Type_any output = Vx.State.e_change;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_change;
+      Vx.Core.Type_any output = Vx.State.t_change;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -879,8 +915,8 @@ public static class State {
 
   }
 
-  public static Func_change e_change = new Vx.State.Class_change();
-  public static Func_change t_change = new Vx.State.Class_change();
+  public static Vx.State.Func_change e_change = new Vx.State.Class_change();
+  public static Vx.State.Func_change t_change = new Vx.State.Class_change();
 
   public static Vx.Core.Type_boolean f_change(Vx.State.Type_valuemap valuemap) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -900,21 +936,22 @@ public static class State {
   public class Class_register : Vx.Core.Class_base, Func_register {
 
     public override Vx.State.Func_register vx_new(params object[] vals) {
-      Class_register output = new Class_register();
+      Vx.State.Class_register output = new Vx.State.Class_register();
       return output;
     }
 
-    public override Vx.State.Func_register vx_copy(params object[] vals) {
-      Class_register output = new Class_register();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.State.Class_register output = new Vx.State.Class_register();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/state", // pkgname
         "register", // name
         0, // idx
@@ -933,14 +970,17 @@ public static class State {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_register;
+      Vx.Core.Type_any output = Vx.State.e_register;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_register;
+      Vx.Core.Type_any output = Vx.State.t_register;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -968,8 +1008,8 @@ public static class State {
 
   }
 
-  public static Func_register e_register = new Vx.State.Class_register();
-  public static Func_register t_register = new Vx.State.Class_register();
+  public static Vx.State.Func_register e_register = new Vx.State.Class_register();
+  public static Vx.State.Func_register t_register = new Vx.State.Class_register();
 
   public static Vx.Core.Type_boolean f_register(Vx.Core.Type_statelistener listener) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -989,21 +1029,22 @@ public static class State {
   public class Class_state_from_context : Vx.Core.Class_base, Func_state_from_context {
 
     public override Vx.State.Func_state_from_context vx_new(params object[] vals) {
-      Class_state_from_context output = new Class_state_from_context();
+      Vx.State.Class_state_from_context output = new Vx.State.Class_state_from_context();
       return output;
     }
 
-    public override Vx.State.Func_state_from_context vx_copy(params object[] vals) {
-      Class_state_from_context output = new Class_state_from_context();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.State.Class_state_from_context output = new Vx.State.Class_state_from_context();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/state", // pkgname
         "state<-context", // name
         0, // idx
@@ -1022,14 +1063,17 @@ public static class State {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_state_from_context;
+      Vx.Core.Type_any output = Vx.State.e_state_from_context;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_state_from_context;
+      Vx.Core.Type_any output = Vx.State.t_state_from_context;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -1045,8 +1089,8 @@ public static class State {
 
   }
 
-  public static Func_state_from_context e_state_from_context = new Vx.State.Class_state_from_context();
-  public static Func_state_from_context t_state_from_context = new Vx.State.Class_state_from_context();
+  public static Vx.State.Func_state_from_context e_state_from_context = new Vx.State.Class_state_from_context();
+  public static Vx.State.Func_state_from_context t_state_from_context = new Vx.State.Class_state_from_context();
 
   public static Vx.Core.Type_state f_state_from_context(Vx.Core.Type_context context) {
     Vx.Core.Type_state output = Vx.Core.e_state;
@@ -1068,21 +1112,22 @@ public static class State {
   public class Class_statelistener_readstate_from_name : Vx.Core.Class_base, Func_statelistener_readstate_from_name {
 
     public override Vx.State.Func_statelistener_readstate_from_name vx_new(params object[] vals) {
-      Class_statelistener_readstate_from_name output = new Class_statelistener_readstate_from_name();
+      Vx.State.Class_statelistener_readstate_from_name output = new Vx.State.Class_statelistener_readstate_from_name();
       return output;
     }
 
-    public override Vx.State.Func_statelistener_readstate_from_name vx_copy(params object[] vals) {
-      Class_statelistener_readstate_from_name output = new Class_statelistener_readstate_from_name();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.State.Class_statelistener_readstate_from_name output = new Vx.State.Class_statelistener_readstate_from_name();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/state", // pkgname
         "statelistener-readstate<-name", // name
         0, // idx
@@ -1101,14 +1146,17 @@ public static class State {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_statelistener_readstate_from_name;
+      Vx.Core.Type_any output = Vx.State.e_statelistener_readstate_from_name;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_statelistener_readstate_from_name;
+      Vx.Core.Type_any output = Vx.State.t_statelistener_readstate_from_name;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any_context vx_fn_new(Vx.Core.Class_any_from_any_context.IFn fn) {
@@ -1137,8 +1185,8 @@ public static class State {
 
   }
 
-  public static Func_statelistener_readstate_from_name e_statelistener_readstate_from_name = new Vx.State.Class_statelistener_readstate_from_name();
-  public static Func_statelistener_readstate_from_name t_statelistener_readstate_from_name = new Vx.State.Class_statelistener_readstate_from_name();
+  public static Vx.State.Func_statelistener_readstate_from_name e_statelistener_readstate_from_name = new Vx.State.Class_statelistener_readstate_from_name();
+  public static Vx.State.Func_statelistener_readstate_from_name t_statelistener_readstate_from_name = new Vx.State.Class_statelistener_readstate_from_name();
 
   public static Vx.Core.Type_statelistener f_statelistener_readstate_from_name(Vx.Core.Type_context context, Vx.Core.Type_string name) {
     Vx.Core.Type_statelistener output = Vx.Core.e_statelistener;
@@ -1166,21 +1214,22 @@ public static class State {
   public class Class_statelistenermap_readstate : Vx.Core.Class_base, Func_statelistenermap_readstate {
 
     public override Vx.State.Func_statelistenermap_readstate vx_new(params object[] vals) {
-      Class_statelistenermap_readstate output = new Class_statelistenermap_readstate();
+      Vx.State.Class_statelistenermap_readstate output = new Vx.State.Class_statelistenermap_readstate();
       return output;
     }
 
-    public override Vx.State.Func_statelistenermap_readstate vx_copy(params object[] vals) {
-      Class_statelistenermap_readstate output = new Class_statelistenermap_readstate();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.State.Class_statelistenermap_readstate output = new Vx.State.Class_statelistenermap_readstate();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/state", // pkgname
         "statelistenermap-readstate", // name
         0, // idx
@@ -1199,14 +1248,17 @@ public static class State {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_statelistenermap_readstate;
+      Vx.Core.Type_any output = Vx.State.e_statelistenermap_readstate;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_statelistenermap_readstate;
+      Vx.Core.Type_any output = Vx.State.t_statelistenermap_readstate;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -1222,8 +1274,8 @@ public static class State {
 
   }
 
-  public static Func_statelistenermap_readstate e_statelistenermap_readstate = new Vx.State.Class_statelistenermap_readstate();
-  public static Func_statelistenermap_readstate t_statelistenermap_readstate = new Vx.State.Class_statelistenermap_readstate();
+  public static Vx.State.Func_statelistenermap_readstate e_statelistenermap_readstate = new Vx.State.Class_statelistenermap_readstate();
+  public static Vx.State.Func_statelistenermap_readstate t_statelistenermap_readstate = new Vx.State.Class_statelistenermap_readstate();
 
   public static Vx.Core.Type_statelistenermap f_statelistenermap_readstate(Vx.Core.Type_context context) {
     Vx.Core.Type_statelistenermap output = Vx.Core.e_statelistenermap;
@@ -1252,21 +1304,22 @@ public static class State {
   public class Class_value_readstate_from_name : Vx.Core.Class_base, Func_value_readstate_from_name {
 
     public override Vx.State.Func_value_readstate_from_name vx_new(params object[] vals) {
-      Class_value_readstate_from_name output = new Class_value_readstate_from_name();
+      Vx.State.Class_value_readstate_from_name output = new Vx.State.Class_value_readstate_from_name();
       return output;
     }
 
-    public override Vx.State.Func_value_readstate_from_name vx_copy(params object[] vals) {
-      Class_value_readstate_from_name output = new Class_value_readstate_from_name();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.State.Class_value_readstate_from_name output = new Vx.State.Class_value_readstate_from_name();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/state", // pkgname
         "value-readstate<-name", // name
         0, // idx
@@ -1285,14 +1338,17 @@ public static class State {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_value_readstate_from_name;
+      Vx.Core.Type_any output = Vx.State.e_value_readstate_from_name;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_value_readstate_from_name;
+      Vx.Core.Type_any output = Vx.State.t_value_readstate_from_name;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any_context vx_fn_new(Vx.Core.Class_any_from_any_context.IFn fn) {
@@ -1321,8 +1377,8 @@ public static class State {
 
   }
 
-  public static Func_value_readstate_from_name e_value_readstate_from_name = new Vx.State.Class_value_readstate_from_name();
-  public static Func_value_readstate_from_name t_value_readstate_from_name = new Vx.State.Class_value_readstate_from_name();
+  public static Vx.State.Func_value_readstate_from_name e_value_readstate_from_name = new Vx.State.Class_value_readstate_from_name();
+  public static Vx.State.Func_value_readstate_from_name t_value_readstate_from_name = new Vx.State.Class_value_readstate_from_name();
 
   public static Vx.Core.Type_any f_value_readstate_from_name(Vx.Core.Type_context context, Vx.Core.Type_string name) {
     Vx.Core.Type_any output = Vx.Core.e_any;
@@ -1351,21 +1407,22 @@ public static class State {
   public class Class_valuemap_readstate_from_mapname : Vx.Core.Class_base, Func_valuemap_readstate_from_mapname {
 
     public override Vx.State.Func_valuemap_readstate_from_mapname vx_new(params object[] vals) {
-      Class_valuemap_readstate_from_mapname output = new Class_valuemap_readstate_from_mapname();
+      Vx.State.Class_valuemap_readstate_from_mapname output = new Vx.State.Class_valuemap_readstate_from_mapname();
       return output;
     }
 
-    public override Vx.State.Func_valuemap_readstate_from_mapname vx_copy(params object[] vals) {
-      Class_valuemap_readstate_from_mapname output = new Class_valuemap_readstate_from_mapname();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.State.Class_valuemap_readstate_from_mapname output = new Vx.State.Class_valuemap_readstate_from_mapname();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/state", // pkgname
         "valuemap-readstate<-mapname", // name
         0, // idx
@@ -1384,14 +1441,17 @@ public static class State {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_valuemap_readstate_from_mapname;
+      Vx.Core.Type_any output = Vx.State.e_valuemap_readstate_from_mapname;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_valuemap_readstate_from_mapname;
+      Vx.Core.Type_any output = Vx.State.t_valuemap_readstate_from_mapname;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any_context vx_fn_new(Vx.Core.Class_any_from_any_context.IFn fn) {
@@ -1420,8 +1480,8 @@ public static class State {
 
   }
 
-  public static Func_valuemap_readstate_from_mapname e_valuemap_readstate_from_mapname = new Vx.State.Class_valuemap_readstate_from_mapname();
-  public static Func_valuemap_readstate_from_mapname t_valuemap_readstate_from_mapname = new Vx.State.Class_valuemap_readstate_from_mapname();
+  public static Vx.State.Func_valuemap_readstate_from_mapname e_valuemap_readstate_from_mapname = new Vx.State.Class_valuemap_readstate_from_mapname();
+  public static Vx.State.Func_valuemap_readstate_from_mapname t_valuemap_readstate_from_mapname = new Vx.State.Class_valuemap_readstate_from_mapname();
 
   public static Vx.State.Type_valuemap f_valuemap_readstate_from_mapname(Vx.Core.Type_context context, Vx.Core.Type_string mapname) {
     Vx.State.Type_valuemap output = Vx.State.e_valuemap;

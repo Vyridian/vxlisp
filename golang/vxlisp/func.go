@@ -58,10 +58,12 @@ func NewFuncCopy(fnc *vxfunc) *vxfunc {
 	output.vxtype = fnc.vxtype
 	output.async = fnc.async
 	output.deprecated = fnc.deprecated
+	output.generictype = fnc.generictype
 	output.iscopied = true
 	output.isgeneric = fnc.isgeneric
 	output.listarg = NewListArgCopy(fnc.listarg)
 	output.listtestvalue = emptyvalues
+	output.mapgeneric = fnc.mapgeneric
 	output.parallel = fnc.parallel
 	output.permission = fnc.permission
 	output.generictype = fnc.generictype
@@ -423,7 +425,11 @@ func MapFuncFromListFunc(listfunc []*vxfunc) map[string][]*vxfunc {
 }
 
 func NameFromFunc(fnc *vxfunc) string {
-	return fnc.pkgname + "/" + fnc.name
+	output := fnc.name
+	if fnc.pkgname != "" {
+		output = fnc.pkgname + "/" + fnc.name
+	}
+	return output
 }
 
 func ScopeFromFunc(fnc *vxfunc) vxscope {

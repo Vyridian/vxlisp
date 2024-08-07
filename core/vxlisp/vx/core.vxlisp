@@ -59,12 +59,23 @@
     "internal bool vxboolean = false;
 
      // :implements
-     public bool vx_boolean() {return vxboolean;}"
+     public bool vx_boolean() {
+       return vxboolean;
+     }"
    :java
     "protected boolean vxboolean = false;
 
      @Override
-     public boolean vx_boolean() {return vxboolean;}")
+     public boolean vx_boolean() {
+       return vxboolean;
+     }"
+   :kotlin
+    "internal val vxboolean : Boolean = false
+
+     // :implements
+     override fun vx_boolean() : Boolean {
+       return vxboolean;
+     }")
  :test (test-true true)
        (test-false false)
        (test-true (boolean true))
@@ -138,7 +149,9 @@
      }
 
      // :implements
-     public string vx_string() {return vxdecimal;}
+     public string vx_string() {
+       return vxdecimal;
+     }
 
      // :implements
      public Type_decimal vx_new_from_string(string sval) {
@@ -155,7 +168,9 @@
      }
 
      @Override
-     public String vx_string() {return vxdecimal;}
+     public String vx_string() {
+       return vxdecimal;
+     }
 
      @Override
      public Type_decimal vx_new_from_string(final String sval) {
@@ -181,12 +196,23 @@
     "internal float vxfloat = 0;
 
      // :implements
-     public float vx_float() {return vxfloat;}"
+     public float vx_float() {
+       return vxfloat;
+     }"
    :java
     "protected float vxfloat = 0;
 
      @Override
-     public float vx_float() {return vxfloat;}")
+     public float vx_float() {
+       return vxfloat;
+     }"
+   :kotlin
+    "internal val vxfloat : float = 0
+
+     // :implements
+     override fun float vx_float() {
+       return vxfloat
+     }")
  :test (test 4.5 (float 4.5))
  :doc  "Standard Floating Point Number")
 
@@ -245,12 +271,23 @@
     "internal int vxint = 0;
 
      // :implements
-     public int vx_int() {return vxint;}"
+     public int vx_int() {
+       return vxint;
+     }"
    :java
     "protected int vxint = 0;
 
      @Override
-     public int vx_int() {return vxint;}")
+     public int vx_int() {
+       return vxint;
+     }"
+   :kotlin
+    "internal val vxint : int = 0
+
+     // :implements
+     override fun vx_int() : int {
+       return vxint
+     }")
  :test (test-true  (is-int 4))
        (test-true  (is-int "4"))
        (test-true  (is-int infinity))
@@ -492,6 +529,13 @@
      @Override
      public String vx_string() {
        return vxstring;
+     }"
+   :kotlin
+    "internal var vxstring : String = “”
+
+     // :implements
+     override fun vx_string() : String {
+       return vxstring
      }")
  :test (test "a" (string "a"))
        (test "ab" (string "a" "b"))
@@ -1013,7 +1057,10 @@
    "boolean isequal = Core.vx_eqeq(val1, val2);
     output = Core.vx_new_boolean(isequal);"
   :js
-   "output = val1 == val2")
+   "output = val1 == val2"
+  :kotlin
+   "val isequal : Boolean = vx_core.vx_eqeq(val1, val2)
+    output = vx_core.vx_new_boolean(isequal)")
  :alias "eqeq"
  :test (test-true (== 0 0))
        (test-true (== "" ""))
@@ -1025,7 +1072,8 @@
   :cpp    "vx_core::vx_new_boolean(!val->vx_boolean());"
   :csharp "Vx.Core.vx_new_boolean(!val.vx_boolean());"
   :java   "Core.vx_new_boolean(!val.vx_boolean());"
-  :js     "!val")
+  :js     "!val"
+  :kotlin "vx_core.vx_new_boolean(!val.vx_boolean())")
  :alias "not"
  :test (test-false false)
        (test-false (! true))
@@ -1198,7 +1246,9 @@
   :java
    "vtypedef.allowtypes();"
   :js
-   "vtypedef['vx_value']['allowtypes']")
+   "vtypedef['vx_value']['allowtypes']"
+  :kotlin
+   "vtypedef.allowtypes()")
  :doc "Return allow type list from type")
 
 (func and : boolean
@@ -1228,6 +1278,12 @@
       output = true
     } else {
       output = false
+    }"
+  :kotlin
+   "if (val1.vx_boolean() && val2.vx_boolean()) {
+      output = vx_core.c_true
+    } else {
+      output = vx_core.c_false
     }")
  :test (test-true
         (and true true))
@@ -1270,7 +1326,10 @@
    "@SuppressWarnings(“unchecked”)
     output = (T)value;"
   :js
-   "value")
+   "value"
+  :kotlin
+   "@Suppress(“UNCHECKED_CAST”)
+    output = value as T")
  :doc "Function Type taking any value any-2 and returning generic any-1")
 
 (func any<-any-async : any-1
@@ -1287,7 +1346,11 @@
     }"
   :java
    "@SuppressWarnings(“unchecked”)
-    output = (T)value;")
+    output = (T)value;"
+  :kotlin
+   "if (value is T) {
+      output = (value as T)
+    }")
  :context
  :doc "Function Type taking any value any-2 and returning generic any-1 using context")
 
@@ -1363,6 +1426,14 @@
   :js
    "if (index <= values.length) {
       output = values[index - 1]
+    }"
+  :kotlin
+   "val intindex : int = index.vx_int()
+    val intsize : int = values.vx_list().size()
+    if (intindex <= intsize) {
+      val listvalue : List<vx_core.Type_any> = values.vx_list()
+      val value : vx_core.Type_any = listvalue.get(intindex - 1)
+      output = vx_core.f_any_from_any(generic_any_1, value)
     }")
  :test (test
         "b"
@@ -1387,7 +1458,7 @@
     };
     output = vx_core::vx_any_from_any(generic_any_1, work);"
   :csharp :auto
-  :java :auto
+  :java   :auto
   :js
    "output = valstart
     const fn = fn_reduce['vx_value']
@@ -1395,7 +1466,8 @@
       for (const item of list) {
         output = fn(output, item)
       }
-    }")
+    }"
+  :kotlin :auto)
  :test (test
         24
         (any<-list-start-reduce : int
@@ -1465,7 +1537,9 @@
     let val = mapval[key]
     if (val != undefined) {
       output = val
-    }")
+    }"
+  :kotlin
+   "vx_core.vx_any_from_map(generic_any_1, valuemap, key)")
  :test (test
         "v2"
         (any<-map
@@ -1510,7 +1584,8 @@
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         "xayb"
         (any<-map-start-reduce
@@ -1576,7 +1651,10 @@
       if (val != undefined) {
         output = val
       }
-    }")
+    }"
+  :kotlin
+   "val value : vx_core.Type_any = vstruct.vx_any(key)
+    output = vx_core.f_any_from_any(generic_any_1, value);")
  :doc "Returns value from a struct")
 
 (func async : any-1 :async
@@ -1587,7 +1665,9 @@
   :java
    "output = Core.vx_async_new_from_value(value);"
   :js
-   "value")
+   "value"
+  :kotlin
+   "output = vx_core.vx_async_new_from_value(value)")
  :doc "Returns an asynchonous version value. This exists mostly for type-casting.")
 
 (func boolean<-any : boolean
@@ -1619,7 +1699,8 @@
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         (stringmutablemap
          :b "y"
@@ -1702,7 +1783,8 @@
       output = -1
     } else {
       output = 1
-    }")
+    }"
+  :kotlin :auto)
  :test (test 1 (compare 3 2))
        (test 1 (compare "z" "a"))
  :doc "Returns 0 if vals are equal, 1 if val1 > val2, -1 if val1 < val2")
@@ -1718,10 +1800,17 @@
    "bool check = vx_boolean_from_string_find(text.vx_string(), find.vx_string());
     output = Vx.Core.vx_new_boolean(check);"
   :java
-   "boolean check = vx_boolean_from_string_find(text.vx_string(), find.vx_string());
+   "boolean check = vx_boolean_from_string_find(
+      text.vx_string(),
+      find.vx_string());
     output = Core.vx_new_boolean(check);"
   :js
-   "vx_core.vx_boolean_from_string_find(text, find)")
+   "vx_core.vx_boolean_from_string_find(text, find)"
+  :kotlin
+   "val check : Boolean = vx_boolean_from_string_find(
+      text.vx_string(),
+      find.vx_string())
+    output = vx_core.vx_new_boolean(check)")
  :test (test-true  (contains "abcde" "cd"))
        (test-false (contains "abcde" "dc"))
  :doc  "Returns true if the given list contains the given value.")
@@ -1754,7 +1843,8 @@
     }
     output = Core.vx_new_boolean(booleanresult);"
   :js
-   "values.includes(find)")
+   "values.includes(find)"
+  :kotlin :auto)
  :test (test-true
         (contains (stringlist "1" "2" "3") "2"))
        (test-true
@@ -1782,11 +1872,17 @@
     T output = (T)anyvalue;"
   :java
    "@SuppressWarnings(“unchecked”)
-    Core.Type_any[] arrayany = Core.arrayany_from_anylist(values);
+    Core.Type_any[] arrayany = Core.arrayany_from_anylist(
+      values);
     Object[] arrayobj = (Core.Type_any[])arrayany;
     T output = (T)(value.vx_copy(arrayobj));"
   :js
-   "vx_core.f_new(value, ...values)")
+   "vx_core.f_new(value, ...values)"
+  :kotlin
+   "val arrayany : vx_core.Type_any[] = vx_core.arrayany_from_anylist(
+      values)
+    val arrayobj : Any[] = arrayany as vx_core.Type_any[]
+    T output = (T)(value.vx_copy(arrayobj))")
  :bigospace :n
  :bigotime :n
  :test (test
@@ -1814,7 +1910,9 @@
   :java
    "T output = Core.vx_empty(type);"
   :js
-   "vx_core.vx_empty(type)")
+   "vx_core.vx_empty(type)"
+  :kotlin
+   "val output : T = vx_core.vx_empty(type)")
  :test (test false  (empty boolean))
        (test ""     (empty string))
        (test (list) (empty list))
@@ -1880,6 +1978,14 @@
           break
         }
       }
+    }"
+  :kotlin
+   "val listvalue : List<vx_core.Type_any> = values.vx_list()
+    for (value : vx_core.Type_any in listvalue) {
+      if (value != vx_core.c_nothing) {
+        output = fn_any_from_any.vx_any_from_any(generic_any_1, value)
+        break
+      }
     }")
  :doc "Returns first value that is not nothing"
  :test (test
@@ -1901,7 +2007,10 @@
    "float num = Core.vx_float_from_string(text.vx_string());
     output = Core.vx_new_float(num);"
   :js
-   "vx_core.vx_float_from_string(text);")
+   "vx_core.vx_float_from_string(text);"
+  :kotlin
+   "val num : float = vx_core.vx_float_from_string(text.vx_string())
+    output = vx_core.vx_new_float(num)")
  :test (test
         (float 2.3)
         (float<-string
@@ -1921,7 +2030,9 @@
   :csharp
    "val.vx_funcdef();"
   :java
-   "val.vx_funcdef();")
+   "val.vx_funcdef();"
+  :kotlin
+   "val.vx_funcdef()")
  :doc "Returns the definition of a function")
 
 (func funcname<-funcdef : string
@@ -1947,6 +2058,10 @@
     }"
   :js
    "if (clause) {
+      output = then
+    }"
+  :kotlin
+   "if (clause.vx_boolean()) {
       output = then
     }")
  :test (test
@@ -1984,6 +2099,12 @@
     }"
   :js
    "if (clause) {
+      output = thenval
+    } else {
+      output = elseval
+    }"
+  :kotlin
+   "if (clause.vx_boolean()) {
       output = thenval
     } else {
       output = elseval
@@ -2033,7 +2154,8 @@
         output = fn()
         break
       }
-    }")
+    }"
+  :kotlin :auto)
  :doc  "Logical If function"
  :test (test-true
         (if
@@ -2116,6 +2238,10 @@
   :js
    "if (text.length == 0) {
       output = vx_core.c_true
+    }"
+  :kotlin
+   "if (text.vx_string().Length == 0) {
+      output = vx_core.c_true
     }")
  :doc "Returns true if text is empty.")
 
@@ -2141,6 +2267,12 @@
   :js
    "const type = vx_core.f_type_from_any(value)
     if (value == vx_core.f_empty(type)) {
+      output = vx_core.c_true
+    } else {
+      output = vx_core.c_false
+    }"
+  :kotlin
+   "if (value == value.vx_empty()) {
       output = vx_core.c_true
     } else {
       output = vx_core.c_false
@@ -2176,6 +2308,12 @@
   :js
    "if (text.endsWith(find)) {
       output = vx_core.c_true
+    }"
+  :kotlin
+   "val stext : String = text.vx_string()
+    val sfind : String = find.vx_string()
+    if (stext.endsWith(sfind)) {
+      output = vx_core.c_true
     }")
  :doc "Returns true if text ends with find.")
 
@@ -2201,6 +2339,10 @@
    "const extend = " (extends<-any val) "
     if (extend == ':func') {
       output = vx_core.c_true
+    }"
+  :kotlin
+   "if (val is vx_core.Type_func) {
+      output = vx_core.c_true
     }")
  :doc "Returns true if val is a function.")
 
@@ -2216,7 +2358,10 @@
   :java
    "boolean result = Core.vx_is_int(value);
     output = Core.vx_new_boolean(result);"
-  :js "vx_core.vx_is_int(value)")
+  :js "vx_core.vx_is_int(value)"
+  :kotlin
+   "val result : boolean = vx_core.vx_is_int(value)
+    output = vx_core.vx_new_boolean(result)")
  :test (test-true
         (is-int 2))
        (test-true
@@ -2239,7 +2384,10 @@
   :java
    "boolean result = Core.vx_is_float(value);
     output = Core.vx_new_boolean(result);"
-  :js "vx_core.vx_is_float(value)")
+  :js "vx_core.vx_is_float(value)"
+  :kotlin
+   "val result : Boolean = vx_core.vx_is_float(value)
+    output = vx_core.vx_new_boolean(result)")
  :doc "Returns true if the value is a float.")
 
 (func is-number : boolean
@@ -2292,7 +2440,10 @@
    "int len = text.vx_string().length();
     output = Core.vx_new_int(len);"
   :js
-   "text.length")
+   "text.length"
+  :kotlin
+   "val len : int = text.vx_string().length()
+    output = vx_core.vx_new_int(len)")
  :test (test
         4
         (length "abcd"))
@@ -2315,7 +2466,10 @@
   :java
    "int intresult = values.vx_list().size();
     output = Core.vx_new_int(intresult);"
-  :js "values.length")
+  :js "values.length"
+  :kotlin
+   "val intresult : int = values.vx_list().size()
+    output = vx_core.vx_new_int(intresult)")
  :test (test
         3
         (length
@@ -2343,7 +2497,9 @@
    "const fn = fn_any['vx_value']
     if (fn) {
       output = fn()
-    }")
+    }"
+  :kotlin
+   "fn_any.vx_any_from_func(generic_any_1)")
  :test (test
         7
         (let
@@ -2365,7 +2521,9 @@
    "const fn = fn_any_async['vx_value']
     if (fn) {
       output = await fn()
-    }")
+    }"
+  :kotlin
+   "fn_any_async.vx_any_from_func_async(generic_any_1)")
  :doc "Same as normal let but returns async values.")
 
 (func list<-list : list-1
@@ -2404,7 +2562,8 @@
     if (fn) {
       output = values.map(fn)
       output['vx_type'] = generic_list_1
-    }")
+    }"
+  :kotlin :auto)
  :doc "Returns a list of processed items from another list")
 
 (func list<-list-async  : list-1 :async
@@ -2426,7 +2585,8 @@
       const future = Promise.all(listfuture)
       output = await future
       output['vx_type'] = generic_list_1
-    }")
+    }"
+  :kotlin :auto)
  :doc "Returns an asynchronous list of the processed asynchronous items from another list")
 
 (func list<-list-intany : list-1
@@ -2436,7 +2596,8 @@
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         (stringlist "a1" "b2")
         (list<-list-intany : stringlist
@@ -2477,7 +2638,8 @@
     });
     output = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(listresult));"
   :js
-   "vx_core.vx_list_from_map_fn(generic_list_1, valuemap, fn_any_from_key_value)")
+   "vx_core.vx_list_from_map_fn(generic_list_1, valuemap, fn_any_from_key_value)"
+  :kotlin :auto)
  :test (test
         (stringlist "a1" "b2")
         (list<-map : stringlist
@@ -2541,7 +2703,8 @@
       const listoflist = values.map(fn)
       output = listoflist.flat()
       output['vx_type'] = generic_list_1
-    }")
+    }"
+  :kotlin :auto)
  :test (test
         (stringlist "a" "b" "c" "d")
         (list-join<-list : stringlist
@@ -2563,13 +2726,14 @@
    "Vx.Core.vx_log(value);
     output = value;"
   :java
-   "Core.Type_string stringtext = Core.f_string_from_any(value);
-    String text = stringtext.vx_string();
-    System.out.println(text);
+   "Core.vx_log(value);
     output = value;"
   :js
    "const text = vx_core.f_string_from_any(value)
     console.log(text)
+    output = value"
+  :kotlin
+   "vx_core.vx_log(value)
     output = value")
  :doc "Writes a value to the console.")
 
@@ -2593,6 +2757,10 @@
    "console.log(text)
     const svalue = vx_core.f_string_from_any(value)
     console.log(svalue)
+    output = value"
+  :kotlin
+   "vx_core.vx_log(text)
+    vx_core.vx_log(value)
     output = value")
  :doc "Writes a string and a value to the console.")
 
@@ -2628,7 +2796,8 @@
     output = {
       vx_type: generic_map_1,
       vx_value: valmap
-    }")
+    }"
+  :kotlin :auto)
  :test (test
         (stringmap
          "keya" "a"
@@ -2664,9 +2833,17 @@
   :csharp
    "Vx.Core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value);"
   :java
-   "Core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value);"
+   "Core.vx_map_from_map_fn(
+      generic_map_1,
+      valuemap,
+      fn_any_from_key_value);"
   :js
-   "vx_core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value)")
+   "vx_core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value)"
+  :kotlin
+   "vx_core.vx_map_from_map_fn(
+      generic_map_1,
+      valuemap,
+      fn_any_from_key_value)")
  :test (test
         (stringmap
          :a "a1"
@@ -2680,89 +2857,6 @@
            val : string]
           (string key val))))
  :doc "Returns a map from a map by applying a function to each key value.")
-
-/*
-(func mempool-addref : none
- [values : anylist :...]
- (native
-  :js
-   "for (const value of values) {
-      const value = values[i]
-      if (value.refs) {
-        value.refs += 1
-      }
-    }")
- :doc "Add Value Reference")
-
-(func mempool-reserve : value
- []
- (native
-  :js
-   "mempool = " mempool-active "
-    output = mempool.valuepool
-    if (output == null) {
-      output = {
-        refs: 0
-      }
-    } else {
-      const next = output.next
-      if (next == null) {
-        mempool.valuepool = null
-      } else {
-        mempool.valuepool = next
-        output.next = null
-      }
-    }")
- :doc "Returns a recycled Value or creates a new one.")
-
-(func mempool-release : none
- [value : value]
- (native
-  :js
-   "const mempool = " mempool-active "
-    value.length = 0
-    for (const key in value) {
-      delete value[key]
-    }
-    next = mempool.valuepool
-    value.next = next
-    mempool.valuepool = value")
- :doc "Recycles a Value and adds it to the valuepool.")
-
-(func mempool-removeref : none
- [values : anylist :...]
- (native
-  :js
-   "for (const value of values) {
-      const value = values[i]
-      if (value.refs) {
-        value.refs -= 1
-        if (value.refs == 0) {
-          vx_core.f_mempool_removerefchildren(value)
-          vx_core.f_mempool_recyclevalue(value)
-        }
-      }
-    }")
- :doc "Remove Value Reference")
-
-(func mempool-removerefchildren : none
- [values : anylist :...]
- (native
-  :js
-   "for (const value of values) {
-      const extend = " (extends<-any value) "
-      switch (extend) {
-      case ':list':
-        vx_core.f_mempool_removeref(...value['vx_value'])
-        break
-      case ':map':
-      case ':struct':
-        vx_core.f_mempool_removeref(...Object.entities(value['vx_value']))
-        break
-      }
-    }")
- :doc "Remove Value Child References")
-*/
 
 (func msg<-error : msg
  [error : string]
@@ -2860,7 +2954,12 @@
     Object[] arrayobj = (Core.Type_any[])arrayany;
     T output = (T)(type.vx_new(arrayobj));"
   :js
-   "vx_core.vx_new(type, values)")
+   "vx_core.vx_new(type, values)"
+  :kotlin
+   "val arrayany : Array<vx_core.Type_any> = vx_core.arrayany_from_anylist(values)
+    val arrayobj : Array<Any> = arrayany as (Array<Any>)
+    val anyvalue : vx_core.Type_any = type.vx_new(arrayobj)
+    val output : T = (anyvalue) as T")
  :doc "Create a new Value of Type A"
  :test (test true (new boolean true))
        (test 4 (new int 4))

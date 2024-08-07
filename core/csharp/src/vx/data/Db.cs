@@ -38,7 +38,8 @@ public static class Db {
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
       Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
       output.put(":dbid", this.dbid());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Data.Db.Type_db vx_new(params object[] vals) {
@@ -46,15 +47,15 @@ public static class Db {
       return output;
     }
 
-    public override Vx.Data.Db.Type_db vx_copy(params object[] vals) {
-      Type_db output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.Db.Type_db output = this;
       bool ischanged = false;
-      Class_db val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Data.Db.Class_db value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Type_string vx_p_dbid = val.dbid();
+      Vx.Core.Type_string vx_p_dbid = value.dbid();
       List<string> validkeys = new List<string>();
       validkeys.Add(":dbid");
       string key = "";
@@ -133,7 +134,7 @@ public static class Db {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_db work = new Class_db();
+        Vx.Data.Db.Class_db work = new Vx.Data.Db.Class_db();
         work.vx_p_dbid = vx_p_dbid;
         if (msgblock != Vx.Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -144,14 +145,17 @@ public static class Db {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_db;
+      Vx.Core.Type_any output = Vx.Data.Db.e_db;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_db;
+      Vx.Core.Type_any output = Vx.Data.Db.t_db;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/data/db", // pkgname
         "db", // name
         ":struct", // extends
@@ -164,12 +168,13 @@ public static class Db {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_db e_db = new Class_db();
-  public static Type_db t_db = new Class_db();
+  public static Vx.Data.Db.Type_db e_db = new Vx.Data.Db.Class_db();
+  public static Vx.Data.Db.Type_db t_db = new Vx.Data.Db.Class_db();
 
   /**
    * type: dbcell
@@ -266,7 +271,8 @@ public static class Db {
       output.put(":dbfieldmap", this.dbfieldmap());
       output.put(":dbparent", this.dbparent());
       output.put(":dbtable", this.dbtable());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Data.Db.Type_dbcell vx_new(params object[] vals) {
@@ -274,19 +280,19 @@ public static class Db {
       return output;
     }
 
-    public override Vx.Data.Db.Type_dbcell vx_copy(params object[] vals) {
-      Type_dbcell output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.Db.Type_dbcell output = this;
       bool ischanged = false;
-      Class_dbcell val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Data.Db.Class_dbcell value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Type_string vx_p_dbcellid = val.dbcellid();
-      Vx.Data.Db.Type_dbcellmap vx_p_dbcellmap = val.dbcellmap();
-      Vx.Data.Db.Type_dbfieldmap vx_p_dbfieldmap = val.dbfieldmap();
-      Vx.Data.Db.Type_dbcell vx_p_dbparent = val.dbparent();
-      Vx.Data.Db.Type_dbtable vx_p_dbtable = val.dbtable();
+      Vx.Core.Type_string vx_p_dbcellid = value.dbcellid();
+      Vx.Data.Db.Type_dbcellmap vx_p_dbcellmap = value.dbcellmap();
+      Vx.Data.Db.Type_dbfieldmap vx_p_dbfieldmap = value.dbfieldmap();
+      Vx.Data.Db.Type_dbcell vx_p_dbparent = value.dbparent();
+      Vx.Data.Db.Type_dbtable vx_p_dbtable = value.dbtable();
       List<string> validkeys = new List<string>();
       validkeys.Add(":dbcellid");
       validkeys.Add(":dbcellmap");
@@ -449,7 +455,7 @@ public static class Db {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_dbcell work = new Class_dbcell();
+        Vx.Data.Db.Class_dbcell work = new Vx.Data.Db.Class_dbcell();
         work.vx_p_dbcellid = vx_p_dbcellid;
         work.vx_p_dbcellmap = vx_p_dbcellmap;
         work.vx_p_dbfieldmap = vx_p_dbfieldmap;
@@ -464,14 +470,17 @@ public static class Db {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_dbcell;
+      Vx.Core.Type_any output = Vx.Data.Db.e_dbcell;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_dbcell;
+      Vx.Core.Type_any output = Vx.Data.Db.t_dbcell;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/data/db", // pkgname
         "dbcell", // name
         ":struct", // extends
@@ -484,12 +493,13 @@ public static class Db {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_dbcell e_dbcell = new Class_dbcell();
-  public static Type_dbcell t_dbcell = new Class_dbcell();
+  public static Vx.Data.Db.Type_dbcell e_dbcell = new Vx.Data.Db.Class_dbcell();
+  public static Vx.Data.Db.Type_dbcell t_dbcell = new Vx.Data.Db.Class_dbcell();
 
   /**
    * type: dbcellmap
@@ -541,12 +551,15 @@ public static class Db {
     }
 
     public Vx.Core.Map<string, Vx.Data.Db.Type_dbcell> vx_mapdbcell() {
-      return vx_p_map;
+      Vx.Core.Map<string, Vx.Data.Db.Type_dbcell> output = this.vx_p_map;
+      return output;
     }
 
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
-      return this.vx_dbcell(key);
+      Vx.Core.Type_any output = this.vx_dbcell(key);
+      return output;
     }
+
 
     public Vx.Core.Type_map vx_new_from_map(Vx.Core.Map<string, Vx.Core.Type_any> mapval) {
       Vx.Data.Db.Class_dbcellmap output = new Vx.Data.Db.Class_dbcellmap();
@@ -554,12 +567,12 @@ public static class Db {
       Vx.Core.Map<string, Vx.Data.Db.Type_dbcell> map = new Vx.Core.LinkedHashMap<string, Vx.Data.Db.Type_dbcell>();
       List<string> keys = mapval.keys();
       foreach (string key in keys) {
-        Vx.Core.Type_any val = mapval.get(key);
+        Vx.Core.Type_any value = mapval.get(key);
         if (false) {
-        } else if (val is Vx.Data.Db.Type_dbcell castval) {
+        } else if (value is Vx.Data.Db.Type_dbcell castval) {
           map.put(key, castval);
         } else {
-          Vx.Core.Type_msg msg = Vx.Core.vx_msg_from_error("vx/data/db/dbcellmap", ":invalidvalue", val);
+          Vx.Core.Type_msg msg = Vx.Core.vx_msg_from_error("vx/data/db/dbcellmap", ":invalidvalue", value);
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         }
       }
@@ -575,15 +588,15 @@ public static class Db {
       return output;
     }
 
-    public override Vx.Data.Db.Type_dbcellmap vx_copy(params object[] vals) {
-      Type_dbcellmap output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.Db.Type_dbcellmap output = this;
       bool ischanged = false;
-      Class_dbcellmap val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Data.Db.Class_dbcellmap value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Map<string, Vx.Data.Db.Type_dbcell> mapval = new Vx.Core.LinkedHashMap<string, Vx.Data.Db.Type_dbcell>(val.vx_mapdbcell());
+      Vx.Core.Map<string, Vx.Data.Db.Type_dbcell> mapval = new Vx.Core.LinkedHashMap<string, Vx.Data.Db.Type_dbcell>(value.vx_mapdbcell());
       Vx.Core.Type_msg? msg = null;
       string key = "";
       Vx.Core.Type_any? msgval = null;
@@ -614,7 +627,7 @@ public static class Db {
           } else if (valsub is Vx.Data.Db.Type_dbcell valallowed) {
             valany = valallowed;
           } else if (valsub is Vx.Data.Db.Type_dbcell) {
-            valany = valsub as Vx.Data.Db.Type_dbcell;
+            valany = (Vx.Data.Db.Type_dbcell)valsub;
           } else {
             if (false) {
             } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -640,7 +653,7 @@ public static class Db {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_dbcellmap work = new Class_dbcellmap();
+        Vx.Data.Db.Class_dbcellmap work = new Vx.Data.Db.Class_dbcellmap();
         work.vx_p_map = Vx.Core.immutablemap(mapval);
         if (msgblock != Vx.Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -651,14 +664,17 @@ public static class Db {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_dbcellmap;
+      Vx.Core.Type_any output = Vx.Data.Db.e_dbcellmap;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_dbcellmap;
+      Vx.Core.Type_any output = Vx.Data.Db.t_dbcellmap;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/data/db", // pkgname
         "dbcellmap", // name
         ":map", // extends
@@ -671,12 +687,13 @@ public static class Db {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_dbcellmap e_dbcellmap = new Class_dbcellmap();
-  public static Type_dbcellmap t_dbcellmap = new Class_dbcellmap();
+  public static Vx.Data.Db.Type_dbcellmap e_dbcellmap = new Vx.Data.Db.Class_dbcellmap();
+  public static Vx.Data.Db.Type_dbcellmap t_dbcellmap = new Vx.Data.Db.Class_dbcellmap();
 
   /**
    * type: dbfield
@@ -743,7 +760,8 @@ public static class Db {
       output.put(":dbfieldid", this.dbfieldid());
       output.put(":type", this.type());
       output.put(":value", this.value());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Data.Db.Type_dbfield vx_new(params object[] vals) {
@@ -751,17 +769,17 @@ public static class Db {
       return output;
     }
 
-    public override Vx.Data.Db.Type_dbfield vx_copy(params object[] vals) {
-      Type_dbfield output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.Db.Type_dbfield output = this;
       bool ischanged = false;
-      Class_dbfield val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Data.Db.Class_dbfield value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Type_string vx_p_dbfieldid = val.dbfieldid();
-      Vx.Core.Type_any vx_p_type = val.type();
-      Vx.Core.Type_any vx_p_value = val.value();
+      Vx.Core.Type_string vx_p_dbfieldid = value.dbfieldid();
+      Vx.Core.Type_any vx_p_type = value.type();
+      Vx.Core.Type_any vx_p_value = value.value();
       List<string> validkeys = new List<string>();
       validkeys.Add(":dbfieldid");
       validkeys.Add(":type");
@@ -882,7 +900,7 @@ public static class Db {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_dbfield work = new Class_dbfield();
+        Vx.Data.Db.Class_dbfield work = new Vx.Data.Db.Class_dbfield();
         work.vx_p_dbfieldid = vx_p_dbfieldid;
         work.vx_p_type = vx_p_type;
         work.vx_p_value = vx_p_value;
@@ -895,14 +913,17 @@ public static class Db {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_dbfield;
+      Vx.Core.Type_any output = Vx.Data.Db.e_dbfield;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_dbfield;
+      Vx.Core.Type_any output = Vx.Data.Db.t_dbfield;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/data/db", // pkgname
         "dbfield", // name
         ":struct", // extends
@@ -915,12 +936,13 @@ public static class Db {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_dbfield e_dbfield = new Class_dbfield();
-  public static Type_dbfield t_dbfield = new Class_dbfield();
+  public static Vx.Data.Db.Type_dbfield e_dbfield = new Vx.Data.Db.Class_dbfield();
+  public static Vx.Data.Db.Type_dbfield t_dbfield = new Vx.Data.Db.Class_dbfield();
 
   /**
    * type: dbfieldmap
@@ -972,12 +994,15 @@ public static class Db {
     }
 
     public Vx.Core.Map<string, Vx.Data.Db.Type_dbfield> vx_mapdbfield() {
-      return vx_p_map;
+      Vx.Core.Map<string, Vx.Data.Db.Type_dbfield> output = this.vx_p_map;
+      return output;
     }
 
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
-      return this.vx_dbfield(key);
+      Vx.Core.Type_any output = this.vx_dbfield(key);
+      return output;
     }
+
 
     public Vx.Core.Type_map vx_new_from_map(Vx.Core.Map<string, Vx.Core.Type_any> mapval) {
       Vx.Data.Db.Class_dbfieldmap output = new Vx.Data.Db.Class_dbfieldmap();
@@ -985,12 +1010,12 @@ public static class Db {
       Vx.Core.Map<string, Vx.Data.Db.Type_dbfield> map = new Vx.Core.LinkedHashMap<string, Vx.Data.Db.Type_dbfield>();
       List<string> keys = mapval.keys();
       foreach (string key in keys) {
-        Vx.Core.Type_any val = mapval.get(key);
+        Vx.Core.Type_any value = mapval.get(key);
         if (false) {
-        } else if (val is Vx.Data.Db.Type_dbfield castval) {
+        } else if (value is Vx.Data.Db.Type_dbfield castval) {
           map.put(key, castval);
         } else {
-          Vx.Core.Type_msg msg = Vx.Core.vx_msg_from_error("vx/data/db/dbfieldmap", ":invalidvalue", val);
+          Vx.Core.Type_msg msg = Vx.Core.vx_msg_from_error("vx/data/db/dbfieldmap", ":invalidvalue", value);
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         }
       }
@@ -1006,15 +1031,15 @@ public static class Db {
       return output;
     }
 
-    public override Vx.Data.Db.Type_dbfieldmap vx_copy(params object[] vals) {
-      Type_dbfieldmap output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.Db.Type_dbfieldmap output = this;
       bool ischanged = false;
-      Class_dbfieldmap val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Data.Db.Class_dbfieldmap value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Map<string, Vx.Data.Db.Type_dbfield> mapval = new Vx.Core.LinkedHashMap<string, Vx.Data.Db.Type_dbfield>(val.vx_mapdbfield());
+      Vx.Core.Map<string, Vx.Data.Db.Type_dbfield> mapval = new Vx.Core.LinkedHashMap<string, Vx.Data.Db.Type_dbfield>(value.vx_mapdbfield());
       Vx.Core.Type_msg? msg = null;
       string key = "";
       Vx.Core.Type_any? msgval = null;
@@ -1045,7 +1070,7 @@ public static class Db {
           } else if (valsub is Vx.Data.Db.Type_dbfield valallowed) {
             valany = valallowed;
           } else if (valsub is Vx.Data.Db.Type_dbfield) {
-            valany = valsub as Vx.Data.Db.Type_dbfield;
+            valany = (Vx.Data.Db.Type_dbfield)valsub;
           } else {
             if (false) {
             } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -1071,7 +1096,7 @@ public static class Db {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_dbfieldmap work = new Class_dbfieldmap();
+        Vx.Data.Db.Class_dbfieldmap work = new Vx.Data.Db.Class_dbfieldmap();
         work.vx_p_map = Vx.Core.immutablemap(mapval);
         if (msgblock != Vx.Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -1082,14 +1107,17 @@ public static class Db {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_dbfieldmap;
+      Vx.Core.Type_any output = Vx.Data.Db.e_dbfieldmap;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_dbfieldmap;
+      Vx.Core.Type_any output = Vx.Data.Db.t_dbfieldmap;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/data/db", // pkgname
         "dbfieldmap", // name
         ":map", // extends
@@ -1102,12 +1130,13 @@ public static class Db {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_dbfieldmap e_dbfieldmap = new Class_dbfieldmap();
-  public static Type_dbfieldmap t_dbfieldmap = new Class_dbfieldmap();
+  public static Vx.Data.Db.Type_dbfieldmap e_dbfieldmap = new Vx.Data.Db.Class_dbfieldmap();
+  public static Vx.Data.Db.Type_dbfieldmap t_dbfieldmap = new Vx.Data.Db.Class_dbfieldmap();
 
   /**
    * type: dbid
@@ -1124,16 +1153,16 @@ public static class Db {
       return output;
     }
 
-    public override Vx.Data.Db.Type_dbid vx_copy(params object[] vals) {
-      Type_dbid output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.Db.Type_dbid output = this;
       bool ischanged = false;
-      Class_dbid val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Data.Db.Class_dbid value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_dbid work = new Class_dbid();
+        Vx.Data.Db.Class_dbid work = new Vx.Data.Db.Class_dbid();
         if (msgblock != Vx.Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -1143,14 +1172,17 @@ public static class Db {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_dbid;
+      Vx.Core.Type_any output = Vx.Data.Db.e_dbid;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_dbid;
+      Vx.Core.Type_any output = Vx.Data.Db.t_dbid;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/data/db", // pkgname
         "dbid", // name
         ":string", // extends
@@ -1163,12 +1195,13 @@ public static class Db {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_dbid e_dbid = new Class_dbid();
-  public static Type_dbid t_dbid = new Class_dbid();
+  public static Vx.Data.Db.Type_dbid e_dbid = new Vx.Data.Db.Class_dbid();
+  public static Vx.Data.Db.Type_dbid t_dbid = new Vx.Data.Db.Class_dbid();
 
   /**
    * type: dblink
@@ -1220,7 +1253,8 @@ public static class Db {
       Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
       output.put(":fromid", this.fromid());
       output.put(":toid", this.toid());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Data.Db.Type_dblink vx_new(params object[] vals) {
@@ -1228,16 +1262,16 @@ public static class Db {
       return output;
     }
 
-    public override Vx.Data.Db.Type_dblink vx_copy(params object[] vals) {
-      Type_dblink output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.Db.Type_dblink output = this;
       bool ischanged = false;
-      Class_dblink val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Data.Db.Class_dblink value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Data.Db.Type_dbid vx_p_fromid = val.fromid();
-      Vx.Data.Db.Type_dbid vx_p_toid = val.toid();
+      Vx.Data.Db.Type_dbid vx_p_fromid = value.fromid();
+      Vx.Data.Db.Type_dbid vx_p_toid = value.toid();
       List<string> validkeys = new List<string>();
       validkeys.Add(":fromid");
       validkeys.Add(":toid");
@@ -1334,7 +1368,7 @@ public static class Db {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_dblink work = new Class_dblink();
+        Vx.Data.Db.Class_dblink work = new Vx.Data.Db.Class_dblink();
         work.vx_p_fromid = vx_p_fromid;
         work.vx_p_toid = vx_p_toid;
         if (msgblock != Vx.Core.e_msgblock) {
@@ -1346,14 +1380,17 @@ public static class Db {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_dblink;
+      Vx.Core.Type_any output = Vx.Data.Db.e_dblink;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_dblink;
+      Vx.Core.Type_any output = Vx.Data.Db.t_dblink;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/data/db", // pkgname
         "dblink", // name
         ":struct", // extends
@@ -1366,12 +1403,13 @@ public static class Db {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_dblink e_dblink = new Class_dblink();
-  public static Type_dblink t_dblink = new Class_dblink();
+  public static Vx.Data.Db.Type_dblink e_dblink = new Vx.Data.Db.Class_dblink();
+  public static Vx.Data.Db.Type_dblink t_dblink = new Vx.Data.Db.Class_dblink();
 
   /**
    * type: dblinklist
@@ -1385,7 +1423,9 @@ public static class Db {
 
   public class Class_dblinklist : Vx.Core.Class_base, Type_dblinklist {
 
-    public List<Vx.Data.Db.Type_dblink> vx_p_list = Vx.Core.immutablelist(new List<Vx.Data.Db.Type_dblink>());
+    public List<Vx.Data.Db.Type_dblink> vx_p_list = Vx.Core.immutablelist(
+      new List<Vx.Data.Db.Type_dblink>()
+    );
 
     public List<Vx.Core.Type_any> vx_list() {
       List<Vx.Core.Type_any> output = Vx.Core.immutablelist(
@@ -1406,11 +1446,13 @@ public static class Db {
     }
 
     public List<Vx.Data.Db.Type_dblink> vx_listdblink() {
-      return vx_p_list;
+      List<Vx.Data.Db.Type_dblink> output = this.vx_p_list;
+      return output;
     }
 
     public Vx.Core.Type_any vx_any(Vx.Core.Type_int index) {
-      return this.vx_dblink(index);
+      Vx.Data.Db.Type_dblink output = this.vx_dblink(index);
+      return output;
     }
 
     public override Vx.Data.Db.Type_dblinklist vx_new(params object[] vals) {
@@ -1418,15 +1460,15 @@ public static class Db {
       return output;
     }
 
-    public override Vx.Data.Db.Type_dblinklist vx_copy(params object[] vals) {
-      Type_dblinklist output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.Db.Type_dblinklist output = this;
       bool ischanged = false;
-      Class_dblinklist val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Data.Db.Class_dblinklist value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      List<Vx.Data.Db.Type_dblink> listval = new List<Vx.Data.Db.Type_dblink>(val.vx_listdblink());
+      List<Vx.Data.Db.Type_dblink> listval = new List<Vx.Data.Db.Type_dblink>(value.vx_listdblink());
       Vx.Core.Type_msg msg;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
@@ -1459,7 +1501,7 @@ public static class Db {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_dblinklist work = new Class_dblinklist();
+        Vx.Data.Db.Class_dblinklist work = new Vx.Data.Db.Class_dblinklist();
         work.vx_p_list = Vx.Core.immutablelist(listval);
         if (msgblock != Vx.Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -1470,14 +1512,17 @@ public static class Db {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_dblinklist;
+      Vx.Core.Type_any output = Vx.Data.Db.e_dblinklist;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_dblinklist;
+      Vx.Core.Type_any output = Vx.Data.Db.t_dblinklist;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/data/db", // pkgname
         "dblinklist", // name
         ":list", // extends
@@ -1490,12 +1535,13 @@ public static class Db {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_dblinklist e_dblinklist = new Class_dblinklist();
-  public static Type_dblinklist t_dblinklist = new Class_dblinklist();
+  public static Vx.Data.Db.Type_dblinklist e_dblinklist = new Vx.Data.Db.Class_dblinklist();
+  public static Vx.Data.Db.Type_dblinklist t_dblinklist = new Vx.Data.Db.Class_dblinklist();
 
   /**
    * type: dbnode
@@ -1547,7 +1593,8 @@ public static class Db {
       Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
       output.put(":dbid", this.dbid());
       output.put(":links", this.links());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Data.Db.Type_dbnode vx_new(params object[] vals) {
@@ -1555,16 +1602,16 @@ public static class Db {
       return output;
     }
 
-    public override Vx.Data.Db.Type_dbnode vx_copy(params object[] vals) {
-      Type_dbnode output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.Db.Type_dbnode output = this;
       bool ischanged = false;
-      Class_dbnode val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Data.Db.Class_dbnode value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Data.Db.Type_dbid vx_p_dbid = val.dbid();
-      Vx.Data.Db.Type_dblinklist vx_p_links = val.links();
+      Vx.Data.Db.Type_dbid vx_p_dbid = value.dbid();
+      Vx.Data.Db.Type_dblinklist vx_p_links = value.links();
       List<string> validkeys = new List<string>();
       validkeys.Add(":dbid");
       validkeys.Add(":links");
@@ -1661,7 +1708,7 @@ public static class Db {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_dbnode work = new Class_dbnode();
+        Vx.Data.Db.Class_dbnode work = new Vx.Data.Db.Class_dbnode();
         work.vx_p_dbid = vx_p_dbid;
         work.vx_p_links = vx_p_links;
         if (msgblock != Vx.Core.e_msgblock) {
@@ -1673,14 +1720,17 @@ public static class Db {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_dbnode;
+      Vx.Core.Type_any output = Vx.Data.Db.e_dbnode;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_dbnode;
+      Vx.Core.Type_any output = Vx.Data.Db.t_dbnode;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/data/db", // pkgname
         "dbnode", // name
         ":struct", // extends
@@ -1693,12 +1743,13 @@ public static class Db {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_dbnode e_dbnode = new Class_dbnode();
-  public static Type_dbnode t_dbnode = new Class_dbnode();
+  public static Vx.Data.Db.Type_dbnode e_dbnode = new Vx.Data.Db.Class_dbnode();
+  public static Vx.Data.Db.Type_dbnode t_dbnode = new Vx.Data.Db.Class_dbnode();
 
   /**
    * type: dbnote
@@ -1795,7 +1846,8 @@ public static class Db {
       output.put(":noteid", this.noteid());
       output.put(":valueid", this.valueid());
       output.put(":value", this.value());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Data.Db.Type_dbnote vx_new(params object[] vals) {
@@ -1803,19 +1855,19 @@ public static class Db {
       return output;
     }
 
-    public override Vx.Data.Db.Type_dbnote vx_copy(params object[] vals) {
-      Type_dbnote output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.Db.Type_dbnote output = this;
       bool ischanged = false;
-      Class_dbnote val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Data.Db.Class_dbnote value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Data.Db.Type_dbid vx_p_dbid = val.dbid();
-      Vx.Data.Db.Type_dbid vx_p_valid = val.valid();
-      Vx.Data.Db.Type_dbid vx_p_noteid = val.noteid();
-      Vx.Data.Db.Type_dbid vx_p_valueid = val.valueid();
-      Vx.Core.Type_string vx_p_value = val.value();
+      Vx.Data.Db.Type_dbid vx_p_dbid = value.dbid();
+      Vx.Data.Db.Type_dbid vx_p_valid = value.valid();
+      Vx.Data.Db.Type_dbid vx_p_noteid = value.noteid();
+      Vx.Data.Db.Type_dbid vx_p_valueid = value.valueid();
+      Vx.Core.Type_string vx_p_value = value.value();
       List<string> validkeys = new List<string>();
       validkeys.Add(":dbid");
       validkeys.Add(":valid");
@@ -1978,7 +2030,7 @@ public static class Db {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_dbnote work = new Class_dbnote();
+        Vx.Data.Db.Class_dbnote work = new Vx.Data.Db.Class_dbnote();
         work.vx_p_dbid = vx_p_dbid;
         work.vx_p_valid = vx_p_valid;
         work.vx_p_noteid = vx_p_noteid;
@@ -1993,14 +2045,17 @@ public static class Db {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_dbnote;
+      Vx.Core.Type_any output = Vx.Data.Db.e_dbnote;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_dbnote;
+      Vx.Core.Type_any output = Vx.Data.Db.t_dbnote;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/data/db", // pkgname
         "dbnote", // name
         ":struct", // extends
@@ -2013,12 +2068,13 @@ public static class Db {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_dbnote e_dbnote = new Class_dbnote();
-  public static Type_dbnote t_dbnote = new Class_dbnote();
+  public static Vx.Data.Db.Type_dbnote e_dbnote = new Vx.Data.Db.Class_dbnote();
+  public static Vx.Data.Db.Type_dbnote t_dbnote = new Vx.Data.Db.Class_dbnote();
 
   /**
    * type: dbtable
@@ -2100,7 +2156,8 @@ public static class Db {
       output.put(":db", this.db());
       output.put(":dbcellmap", this.dbcellmap());
       output.put(":dbfieldmap", this.dbfieldmap());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Data.Db.Type_dbtable vx_new(params object[] vals) {
@@ -2108,18 +2165,18 @@ public static class Db {
       return output;
     }
 
-    public override Vx.Data.Db.Type_dbtable vx_copy(params object[] vals) {
-      Type_dbtable output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.Db.Type_dbtable output = this;
       bool ischanged = false;
-      Class_dbtable val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Data.Db.Class_dbtable value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Type_string vx_p_dbtableid = val.dbtableid();
-      Vx.Data.Db.Type_db vx_p_db = val.db();
-      Vx.Data.Db.Type_dbcellmap vx_p_dbcellmap = val.dbcellmap();
-      Vx.Data.Db.Type_dbfieldmap vx_p_dbfieldmap = val.dbfieldmap();
+      Vx.Core.Type_string vx_p_dbtableid = value.dbtableid();
+      Vx.Data.Db.Type_db vx_p_db = value.db();
+      Vx.Data.Db.Type_dbcellmap vx_p_dbcellmap = value.dbcellmap();
+      Vx.Data.Db.Type_dbfieldmap vx_p_dbfieldmap = value.dbfieldmap();
       List<string> validkeys = new List<string>();
       validkeys.Add(":dbtableid");
       validkeys.Add(":db");
@@ -2261,7 +2318,7 @@ public static class Db {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_dbtable work = new Class_dbtable();
+        Vx.Data.Db.Class_dbtable work = new Vx.Data.Db.Class_dbtable();
         work.vx_p_dbtableid = vx_p_dbtableid;
         work.vx_p_db = vx_p_db;
         work.vx_p_dbcellmap = vx_p_dbcellmap;
@@ -2275,14 +2332,17 @@ public static class Db {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_dbtable;
+      Vx.Core.Type_any output = Vx.Data.Db.e_dbtable;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_dbtable;
+      Vx.Core.Type_any output = Vx.Data.Db.t_dbtable;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/data/db", // pkgname
         "dbtable", // name
         ":struct", // extends
@@ -2295,12 +2355,13 @@ public static class Db {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_dbtable e_dbtable = new Class_dbtable();
-  public static Type_dbtable t_dbtable = new Class_dbtable();
+  public static Vx.Data.Db.Type_dbtable e_dbtable = new Vx.Data.Db.Class_dbtable();
+  public static Vx.Data.Db.Type_dbtable t_dbtable = new Vx.Data.Db.Class_dbtable();
 
   /**
    * type: dbvalue
@@ -2412,7 +2473,8 @@ public static class Db {
       output.put(":noteid", this.noteid());
       output.put(":valid", this.valid());
       output.put(":valtext", this.valtext());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Data.Db.Type_dbvalue vx_new(params object[] vals) {
@@ -2420,20 +2482,20 @@ public static class Db {
       return output;
     }
 
-    public override Vx.Data.Db.Type_dbvalue vx_copy(params object[] vals) {
-      Type_dbvalue output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.Db.Type_dbvalue output = this;
       bool ischanged = false;
-      Class_dbvalue val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Data.Db.Class_dbvalue value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Data.Db.Type_dbid vx_p_dbid = val.dbid();
-      Vx.Data.Db.Type_dbid vx_p_fromid = val.fromid();
-      Vx.Data.Db.Type_dbid vx_p_toid = val.toid();
-      Vx.Data.Db.Type_dbid vx_p_noteid = val.noteid();
-      Vx.Data.Db.Type_dbid vx_p_valid = val.valid();
-      Vx.Core.Type_string vx_p_valtext = val.valtext();
+      Vx.Data.Db.Type_dbid vx_p_dbid = value.dbid();
+      Vx.Data.Db.Type_dbid vx_p_fromid = value.fromid();
+      Vx.Data.Db.Type_dbid vx_p_toid = value.toid();
+      Vx.Data.Db.Type_dbid vx_p_noteid = value.noteid();
+      Vx.Data.Db.Type_dbid vx_p_valid = value.valid();
+      Vx.Core.Type_string vx_p_valtext = value.valtext();
       List<string> validkeys = new List<string>();
       validkeys.Add(":dbid");
       validkeys.Add(":fromid");
@@ -2617,7 +2679,7 @@ public static class Db {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_dbvalue work = new Class_dbvalue();
+        Vx.Data.Db.Class_dbvalue work = new Vx.Data.Db.Class_dbvalue();
         work.vx_p_dbid = vx_p_dbid;
         work.vx_p_fromid = vx_p_fromid;
         work.vx_p_toid = vx_p_toid;
@@ -2633,14 +2695,17 @@ public static class Db {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_dbvalue;
+      Vx.Core.Type_any output = Vx.Data.Db.e_dbvalue;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_dbvalue;
+      Vx.Core.Type_any output = Vx.Data.Db.t_dbvalue;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/data/db", // pkgname
         "dbvalue", // name
         ":struct", // extends
@@ -2653,12 +2718,13 @@ public static class Db {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_dbvalue e_dbvalue = new Class_dbvalue();
-  public static Type_dbvalue t_dbvalue = new Class_dbvalue();
+  public static Vx.Data.Db.Type_dbvalue e_dbvalue = new Vx.Data.Db.Class_dbvalue();
+  public static Vx.Data.Db.Type_dbvalue t_dbvalue = new Vx.Data.Db.Class_dbvalue();
 
   public static class PackageRunOnce {
     public static bool RunOnce() {

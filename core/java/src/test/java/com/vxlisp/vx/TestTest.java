@@ -25,7 +25,8 @@ public final class TestTest {
               File.f_boolean_exists_from_file(
                 Core.f_new(
                   File.t_file,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":name"),
                     Core.vx_new_string("testsuite.vxlisp"),
                     Core.vx_new_string(":path"),
@@ -58,7 +59,8 @@ public final class TestTest {
               File.f_boolean_exists_from_file(
                 Core.f_new(
                   File.t_file,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":name"),
                     Core.vx_new_string("testsuite.html"),
                     Core.vx_new_string(":path"),
@@ -91,7 +93,8 @@ public final class TestTest {
               File.f_boolean_exists_from_file(
                 Core.f_new(
                   File.t_file,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":name"),
                     Core.vx_new_string("testsuitenode.vxlisp"),
                     Core.vx_new_string(":path"),

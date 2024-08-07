@@ -23,7 +23,8 @@ public final class CsvTest {
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("\"a\",\"b\"\n1,\"2\""),
                   Core.vx_new_string(":startpos"),
@@ -33,10 +34,12 @@ public final class CsvTest {
                   Core.vx_new_string(":children"),
                   Core.f_new(
                     Textblock.t_textblocklist,
-                    Core.vx_new(Core.t_anylist,
+                    Core.vx_new(
+                      Core.t_anylist,
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("\"a\""),
                           Core.vx_new_string(":startpos"),
@@ -46,7 +49,8 @@ public final class CsvTest {
                           Core.vx_new_string(":delim"),
                           Core.f_copy(
                             Textblock.c_delimquote,
-                            Core.vx_new(Core.t_anylist,
+                            Core.vx_new(
+                              Core.t_anylist,
                               Core.vx_new_string(":pos"),
                               Core.vx_new_int(0)
                             )
@@ -54,10 +58,12 @@ public final class CsvTest {
                           Core.vx_new_string(":children"),
                           Core.f_new(
                             Textblock.t_textblocklist,
-                            Core.vx_new(Core.t_anylist,
+                            Core.vx_new(
+                              Core.t_anylist,
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.vx_new(Core.t_anylist,
+                                Core.vx_new(
+                                  Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("a"),
                                   Core.vx_new_string(":startpos"),
@@ -72,7 +78,8 @@ public final class CsvTest {
                       ),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string(","),
                           Core.vx_new_string(":startpos"),
@@ -82,7 +89,8 @@ public final class CsvTest {
                           Core.vx_new_string(":delim"),
                           Core.f_copy(
                             Textblock.c_delimcomma,
-                            Core.vx_new(Core.t_anylist,
+                            Core.vx_new(
+                              Core.t_anylist,
                               Core.vx_new_string(":pos"),
                               Core.vx_new_int(0)
                             )
@@ -91,7 +99,8 @@ public final class CsvTest {
                       ),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("\"b\""),
                           Core.vx_new_string(":startpos"),
@@ -101,7 +110,8 @@ public final class CsvTest {
                           Core.vx_new_string(":delim"),
                           Core.f_copy(
                             Textblock.c_delimquote,
-                            Core.vx_new(Core.t_anylist,
+                            Core.vx_new(
+                              Core.t_anylist,
                               Core.vx_new_string(":pos"),
                               Core.vx_new_int(0)
                             )
@@ -109,10 +119,12 @@ public final class CsvTest {
                           Core.vx_new_string(":children"),
                           Core.f_new(
                             Textblock.t_textblocklist,
-                            Core.vx_new(Core.t_anylist,
+                            Core.vx_new(
+                              Core.t_anylist,
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.vx_new(Core.t_anylist,
+                                Core.vx_new(
+                                  Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("b"),
                                   Core.vx_new_string(":startpos"),
@@ -127,7 +139,8 @@ public final class CsvTest {
                       ),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("\n"),
                           Core.vx_new_string(":startpos"),
@@ -137,7 +150,8 @@ public final class CsvTest {
                           Core.vx_new_string(":delim"),
                           Core.f_copy(
                             Textblock.c_delimline,
-                            Core.vx_new(Core.t_anylist,
+                            Core.vx_new(
+                              Core.t_anylist,
                               Core.vx_new_string(":pos"),
                               Core.vx_new_int(0)
                             )
@@ -146,7 +160,8 @@ public final class CsvTest {
                       ),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("1"),
                           Core.vx_new_string(":startpos"),
@@ -157,7 +172,8 @@ public final class CsvTest {
                       ),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string(","),
                           Core.vx_new_string(":startpos"),
@@ -167,7 +183,8 @@ public final class CsvTest {
                           Core.vx_new_string(":delim"),
                           Core.f_copy(
                             Textblock.c_delimcomma,
-                            Core.vx_new(Core.t_anylist,
+                            Core.vx_new(
+                              Core.t_anylist,
                               Core.vx_new_string(":pos"),
                               Core.vx_new_int(0)
                             )
@@ -176,7 +193,8 @@ public final class CsvTest {
                       ),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("\"2\""),
                           Core.vx_new_string(":startpos"),
@@ -186,7 +204,8 @@ public final class CsvTest {
                           Core.vx_new_string(":delim"),
                           Core.f_copy(
                             Textblock.c_delimquote,
-                            Core.vx_new(Core.t_anylist,
+                            Core.vx_new(
+                              Core.t_anylist,
                               Core.vx_new_string(":pos"),
                               Core.vx_new_int(0)
                             )
@@ -194,10 +213,12 @@ public final class CsvTest {
                           Core.vx_new_string(":children"),
                           Core.f_new(
                             Textblock.t_textblocklist,
-                            Core.vx_new(Core.t_anylist,
+                            Core.vx_new(
+                              Core.t_anylist,
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.vx_new(Core.t_anylist,
+                                Core.vx_new(
+                                  Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("2"),
                                   Core.vx_new_string(":startpos"),

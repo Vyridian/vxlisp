@@ -179,7 +179,8 @@ public static class File {
       output.put(":path", this.path());
       output.put(":permission", this.permission());
       output.put(":text", this.text());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Data.File.Type_file vx_new(params object[] vals) {
@@ -187,19 +188,19 @@ public static class File {
       return output;
     }
 
-    public override Vx.Data.File.Type_file vx_copy(params object[] vals) {
-      Type_file output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.File.Type_file output = this;
       bool ischanged = false;
-      Class_file val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Data.File.Class_file value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Type_string vx_p_name = val.name();
-      Vx.Data.File.Type_fileformat vx_p_format = val.format();
-      Vx.Core.Type_string vx_p_path = val.path();
-      Vx.Core.Type_permission vx_p_permission = val.permission();
-      Vx.Core.Type_string vx_p_text = val.text();
+      Vx.Core.Type_string vx_p_name = value.name();
+      Vx.Data.File.Type_fileformat vx_p_format = value.format();
+      Vx.Core.Type_string vx_p_path = value.path();
+      Vx.Core.Type_permission vx_p_permission = value.permission();
+      Vx.Core.Type_string vx_p_text = value.text();
       List<string> validkeys = new List<string>();
       validkeys.Add(":name");
       validkeys.Add(":format");
@@ -368,7 +369,7 @@ public static class File {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_file work = new Class_file();
+        Vx.Data.File.Class_file work = new Vx.Data.File.Class_file();
         work.vx_p_name = vx_p_name;
         work.vx_p_format = vx_p_format;
         work.vx_p_path = vx_p_path;
@@ -383,14 +384,17 @@ public static class File {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_file;
+      Vx.Core.Type_any output = Vx.Data.File.e_file;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_file;
+      Vx.Core.Type_any output = Vx.Data.File.t_file;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/data/file", // pkgname
         "file", // name
         ":struct", // extends
@@ -403,12 +407,13 @@ public static class File {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_file e_file = new Class_file();
-  public static Type_file t_file = new Class_file();
+  public static Vx.Data.File.Type_file e_file = new Vx.Data.File.Class_file();
+  public static Vx.Data.File.Type_file t_file = new Vx.Data.File.Class_file();
 
   /**
    * type: fileformat
@@ -424,16 +429,16 @@ public static class File {
       return output;
     }
 
-    public override Vx.Data.File.Type_fileformat vx_copy(params object[] vals) {
-      Type_fileformat output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.File.Type_fileformat output = this;
       bool ischanged = false;
-      Class_fileformat val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Data.File.Class_fileformat value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_fileformat work = new Class_fileformat();
+        Vx.Data.File.Class_fileformat work = new Vx.Data.File.Class_fileformat();
         if (msgblock != Vx.Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -443,14 +448,17 @@ public static class File {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_fileformat;
+      Vx.Core.Type_any output = Vx.Data.File.e_fileformat;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_fileformat;
+      Vx.Core.Type_any output = Vx.Data.File.t_fileformat;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/data/file", // pkgname
         "fileformat", // name
         ":string", // extends
@@ -463,12 +471,13 @@ public static class File {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_fileformat e_fileformat = new Class_fileformat();
-  public static Type_fileformat t_fileformat = new Class_fileformat();
+  public static Vx.Data.File.Type_fileformat e_fileformat = new Vx.Data.File.Class_fileformat();
+  public static Vx.Data.File.Type_fileformat t_fileformat = new Vx.Data.File.Class_fileformat();
 
   /**
    * type: filelist
@@ -482,7 +491,9 @@ public static class File {
 
   public class Class_filelist : Vx.Core.Class_base, Type_filelist {
 
-    public List<Vx.Data.File.Type_file> vx_p_list = Vx.Core.immutablelist(new List<Vx.Data.File.Type_file>());
+    public List<Vx.Data.File.Type_file> vx_p_list = Vx.Core.immutablelist(
+      new List<Vx.Data.File.Type_file>()
+    );
 
     public List<Vx.Core.Type_any> vx_list() {
       List<Vx.Core.Type_any> output = Vx.Core.immutablelist(
@@ -503,11 +514,13 @@ public static class File {
     }
 
     public List<Vx.Data.File.Type_file> vx_listfile() {
-      return vx_p_list;
+      List<Vx.Data.File.Type_file> output = this.vx_p_list;
+      return output;
     }
 
     public Vx.Core.Type_any vx_any(Vx.Core.Type_int index) {
-      return this.vx_file(index);
+      Vx.Data.File.Type_file output = this.vx_file(index);
+      return output;
     }
 
     public override Vx.Data.File.Type_filelist vx_new(params object[] vals) {
@@ -515,15 +528,15 @@ public static class File {
       return output;
     }
 
-    public override Vx.Data.File.Type_filelist vx_copy(params object[] vals) {
-      Type_filelist output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.File.Type_filelist output = this;
       bool ischanged = false;
-      Class_filelist val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Data.File.Class_filelist value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      List<Vx.Data.File.Type_file> listval = new List<Vx.Data.File.Type_file>(val.vx_listfile());
+      List<Vx.Data.File.Type_file> listval = new List<Vx.Data.File.Type_file>(value.vx_listfile());
       Vx.Core.Type_msg msg;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
@@ -556,7 +569,7 @@ public static class File {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_filelist work = new Class_filelist();
+        Vx.Data.File.Class_filelist work = new Vx.Data.File.Class_filelist();
         work.vx_p_list = Vx.Core.immutablelist(listval);
         if (msgblock != Vx.Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -567,14 +580,17 @@ public static class File {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_filelist;
+      Vx.Core.Type_any output = Vx.Data.File.e_filelist;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_filelist;
+      Vx.Core.Type_any output = Vx.Data.File.t_filelist;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/data/file", // pkgname
         "filelist", // name
         ":list", // extends
@@ -587,12 +603,13 @@ public static class File {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_filelist e_filelist = new Class_filelist();
-  public static Type_filelist t_filelist = new Class_filelist();
+  public static Vx.Data.File.Type_filelist e_filelist = new Vx.Data.File.Class_filelist();
+  public static Vx.Data.File.Type_filelist t_filelist = new Vx.Data.File.Class_filelist();
   /**
    * @function boolean_exists_from_file
    * Returns true if file/path exists.
@@ -607,21 +624,22 @@ public static class File {
   public class Class_boolean_exists_from_file : Vx.Core.Class_base, Func_boolean_exists_from_file {
 
     public override Vx.Data.File.Func_boolean_exists_from_file vx_new(params object[] vals) {
-      Class_boolean_exists_from_file output = new Class_boolean_exists_from_file();
+      Vx.Data.File.Class_boolean_exists_from_file output = new Vx.Data.File.Class_boolean_exists_from_file();
       return output;
     }
 
-    public override Vx.Data.File.Func_boolean_exists_from_file vx_copy(params object[] vals) {
-      Class_boolean_exists_from_file output = new Class_boolean_exists_from_file();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.File.Class_boolean_exists_from_file output = new Vx.Data.File.Class_boolean_exists_from_file();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/data/file", // pkgname
         "boolean-exists<-file", // name
         0, // idx
@@ -640,14 +658,17 @@ public static class File {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_boolean_exists_from_file;
+      Vx.Core.Type_any output = Vx.Data.File.e_boolean_exists_from_file;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_boolean_exists_from_file;
+      Vx.Core.Type_any output = Vx.Data.File.t_boolean_exists_from_file;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -675,8 +696,8 @@ public static class File {
 
   }
 
-  public static Func_boolean_exists_from_file e_boolean_exists_from_file = new Vx.Data.File.Class_boolean_exists_from_file();
-  public static Func_boolean_exists_from_file t_boolean_exists_from_file = new Vx.Data.File.Class_boolean_exists_from_file();
+  public static Vx.Data.File.Func_boolean_exists_from_file e_boolean_exists_from_file = new Vx.Data.File.Class_boolean_exists_from_file();
+  public static Vx.Data.File.Func_boolean_exists_from_file t_boolean_exists_from_file = new Vx.Data.File.Class_boolean_exists_from_file();
 
   public static Vx.Core.Type_boolean f_boolean_exists_from_file(Vx.Data.File.Type_file file) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -698,21 +719,22 @@ public static class File {
   public class Class_boolean_write_from_file : Vx.Core.Class_base, Func_boolean_write_from_file {
 
     public override Vx.Data.File.Func_boolean_write_from_file vx_new(params object[] vals) {
-      Class_boolean_write_from_file output = new Class_boolean_write_from_file();
+      Vx.Data.File.Class_boolean_write_from_file output = new Vx.Data.File.Class_boolean_write_from_file();
       return output;
     }
 
-    public override Vx.Data.File.Func_boolean_write_from_file vx_copy(params object[] vals) {
-      Class_boolean_write_from_file output = new Class_boolean_write_from_file();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.File.Class_boolean_write_from_file output = new Vx.Data.File.Class_boolean_write_from_file();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/data/file", // pkgname
         "boolean-write<-file", // name
         0, // idx
@@ -731,14 +753,17 @@ public static class File {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_boolean_write_from_file;
+      Vx.Core.Type_any output = Vx.Data.File.e_boolean_write_from_file;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_boolean_write_from_file;
+      Vx.Core.Type_any output = Vx.Data.File.t_boolean_write_from_file;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any_context vx_fn_new(Vx.Core.Class_any_from_any_context.IFn fn) {
@@ -767,8 +792,8 @@ public static class File {
 
   }
 
-  public static Func_boolean_write_from_file e_boolean_write_from_file = new Vx.Data.File.Class_boolean_write_from_file();
-  public static Func_boolean_write_from_file t_boolean_write_from_file = new Vx.Data.File.Class_boolean_write_from_file();
+  public static Vx.Data.File.Func_boolean_write_from_file e_boolean_write_from_file = new Vx.Data.File.Class_boolean_write_from_file();
+  public static Vx.Data.File.Func_boolean_write_from_file t_boolean_write_from_file = new Vx.Data.File.Class_boolean_write_from_file();
 
   public static Vx.Core.Type_boolean f_boolean_write_from_file(Vx.Core.Type_context context, Vx.Data.File.Type_file file) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -795,21 +820,22 @@ public static class File {
   public class Class_boolean_write_from_file_any : Vx.Core.Class_base, Func_boolean_write_from_file_any {
 
     public override Vx.Data.File.Func_boolean_write_from_file_any vx_new(params object[] vals) {
-      Class_boolean_write_from_file_any output = new Class_boolean_write_from_file_any();
+      Vx.Data.File.Class_boolean_write_from_file_any output = new Vx.Data.File.Class_boolean_write_from_file_any();
       return output;
     }
 
-    public override Vx.Data.File.Func_boolean_write_from_file_any vx_copy(params object[] vals) {
-      Class_boolean_write_from_file_any output = new Class_boolean_write_from_file_any();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.File.Class_boolean_write_from_file_any output = new Vx.Data.File.Class_boolean_write_from_file_any();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/data/file", // pkgname
         "boolean-write<-file-any", // name
         0, // idx
@@ -828,14 +854,17 @@ public static class File {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_boolean_write_from_file_any;
+      Vx.Core.Type_any output = Vx.Data.File.e_boolean_write_from_file_any;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_boolean_write_from_file_any;
+      Vx.Core.Type_any output = Vx.Data.File.t_boolean_write_from_file_any;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -853,8 +882,8 @@ public static class File {
 
   }
 
-  public static Func_boolean_write_from_file_any e_boolean_write_from_file_any = new Vx.Data.File.Class_boolean_write_from_file_any();
-  public static Func_boolean_write_from_file_any t_boolean_write_from_file_any = new Vx.Data.File.Class_boolean_write_from_file_any();
+  public static Vx.Data.File.Func_boolean_write_from_file_any e_boolean_write_from_file_any = new Vx.Data.File.Class_boolean_write_from_file_any();
+  public static Vx.Data.File.Func_boolean_write_from_file_any t_boolean_write_from_file_any = new Vx.Data.File.Class_boolean_write_from_file_any();
 
   public static Vx.Core.Type_boolean f_boolean_write_from_file_any(Vx.Core.Type_context context, Vx.Data.File.Type_file file, Vx.Core.Type_any val) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -881,21 +910,22 @@ public static class File {
   public class Class_boolean_write_from_file_string : Vx.Core.Class_base, Func_boolean_write_from_file_string {
 
     public override Vx.Data.File.Func_boolean_write_from_file_string vx_new(params object[] vals) {
-      Class_boolean_write_from_file_string output = new Class_boolean_write_from_file_string();
+      Vx.Data.File.Class_boolean_write_from_file_string output = new Vx.Data.File.Class_boolean_write_from_file_string();
       return output;
     }
 
-    public override Vx.Data.File.Func_boolean_write_from_file_string vx_copy(params object[] vals) {
-      Class_boolean_write_from_file_string output = new Class_boolean_write_from_file_string();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.File.Class_boolean_write_from_file_string output = new Vx.Data.File.Class_boolean_write_from_file_string();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/data/file", // pkgname
         "boolean-write<-file-string", // name
         0, // idx
@@ -914,14 +944,17 @@ public static class File {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_boolean_write_from_file_string;
+      Vx.Core.Type_any output = Vx.Data.File.e_boolean_write_from_file_string;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_boolean_write_from_file_string;
+      Vx.Core.Type_any output = Vx.Data.File.t_boolean_write_from_file_string;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -939,8 +972,8 @@ public static class File {
 
   }
 
-  public static Func_boolean_write_from_file_string e_boolean_write_from_file_string = new Vx.Data.File.Class_boolean_write_from_file_string();
-  public static Func_boolean_write_from_file_string t_boolean_write_from_file_string = new Vx.Data.File.Class_boolean_write_from_file_string();
+  public static Vx.Data.File.Func_boolean_write_from_file_string e_boolean_write_from_file_string = new Vx.Data.File.Class_boolean_write_from_file_string();
+  public static Vx.Data.File.Func_boolean_write_from_file_string t_boolean_write_from_file_string = new Vx.Data.File.Class_boolean_write_from_file_string();
 
   public static Vx.Core.Type_boolean f_boolean_write_from_file_string(Vx.Core.Type_context context, Vx.Data.File.Type_file file, Vx.Core.Type_string text) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -972,21 +1005,22 @@ public static class File {
   public class Class_file_read_from_file : Vx.Core.Class_base, Func_file_read_from_file {
 
     public override Vx.Data.File.Func_file_read_from_file vx_new(params object[] vals) {
-      Class_file_read_from_file output = new Class_file_read_from_file();
+      Vx.Data.File.Class_file_read_from_file output = new Vx.Data.File.Class_file_read_from_file();
       return output;
     }
 
-    public override Vx.Data.File.Func_file_read_from_file vx_copy(params object[] vals) {
-      Class_file_read_from_file output = new Class_file_read_from_file();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.File.Class_file_read_from_file output = new Vx.Data.File.Class_file_read_from_file();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/data/file", // pkgname
         "file-read<-file", // name
         0, // idx
@@ -1005,14 +1039,17 @@ public static class File {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_file_read_from_file;
+      Vx.Core.Type_any output = Vx.Data.File.e_file_read_from_file;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_file_read_from_file;
+      Vx.Core.Type_any output = Vx.Data.File.t_file_read_from_file;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any_context vx_fn_new(Vx.Core.Class_any_from_any_context.IFn fn) {
@@ -1041,15 +1078,16 @@ public static class File {
 
   }
 
-  public static Func_file_read_from_file e_file_read_from_file = new Vx.Data.File.Class_file_read_from_file();
-  public static Func_file_read_from_file t_file_read_from_file = new Vx.Data.File.Class_file_read_from_file();
+  public static Vx.Data.File.Func_file_read_from_file e_file_read_from_file = new Vx.Data.File.Class_file_read_from_file();
+  public static Vx.Data.File.Func_file_read_from_file t_file_read_from_file = new Vx.Data.File.Class_file_read_from_file();
 
   public static Vx.Data.File.Type_file f_file_read_from_file(Vx.Core.Type_context context, Vx.Data.File.Type_file file) {
     Vx.Data.File.Type_file output = Vx.Data.File.e_file;
     if (Vx.Core.f_boolean_permission_from_func(context, Vx.Data.File.t_file_read_from_file).vx_boolean()) {
       output = Vx.Core.f_copy(
         file,
-        Vx.Core.vx_new(Vx.Core.t_anylist,
+        Vx.Core.vx_new(
+          Vx.Core.t_anylist,
           Vx.Core.vx_new_string(":text"),
           Vx.Data.File.f_string_read_from_file(context, file)
         )
@@ -1075,21 +1113,22 @@ public static class File {
   public class Class_file_from_path : Vx.Core.Class_base, Func_file_from_path {
 
     public override Vx.Data.File.Func_file_from_path vx_new(params object[] vals) {
-      Class_file_from_path output = new Class_file_from_path();
+      Vx.Data.File.Class_file_from_path output = new Vx.Data.File.Class_file_from_path();
       return output;
     }
 
-    public override Vx.Data.File.Func_file_from_path vx_copy(params object[] vals) {
-      Class_file_from_path output = new Class_file_from_path();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.File.Class_file_from_path output = new Vx.Data.File.Class_file_from_path();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/data/file", // pkgname
         "file<-path", // name
         0, // idx
@@ -1108,14 +1147,17 @@ public static class File {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_file_from_path;
+      Vx.Core.Type_any output = Vx.Data.File.e_file_from_path;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_file_from_path;
+      Vx.Core.Type_any output = Vx.Data.File.t_file_from_path;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -1143,8 +1185,8 @@ public static class File {
 
   }
 
-  public static Func_file_from_path e_file_from_path = new Vx.Data.File.Class_file_from_path();
-  public static Func_file_from_path t_file_from_path = new Vx.Data.File.Class_file_from_path();
+  public static Vx.Data.File.Func_file_from_path e_file_from_path = new Vx.Data.File.Class_file_from_path();
+  public static Vx.Data.File.Func_file_from_path t_file_from_path = new Vx.Data.File.Class_file_from_path();
 
   public static Vx.Data.File.Type_file f_file_from_path(Vx.Core.Type_string path) {
     Vx.Data.File.Type_file output = Vx.Data.File.e_file;
@@ -1162,7 +1204,8 @@ public static class File {
         );
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Data.File.t_file,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
             Vx.Core.vx_new_string(":name"),
             name,
             Vx.Core.vx_new_string(":path"),
@@ -1189,21 +1232,22 @@ public static class File {
   public class Class_name_from_file : Vx.Core.Class_base, Func_name_from_file {
 
     public override Vx.Data.File.Func_name_from_file vx_new(params object[] vals) {
-      Class_name_from_file output = new Class_name_from_file();
+      Vx.Data.File.Class_name_from_file output = new Vx.Data.File.Class_name_from_file();
       return output;
     }
 
-    public override Vx.Data.File.Func_name_from_file vx_copy(params object[] vals) {
-      Class_name_from_file output = new Class_name_from_file();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.File.Class_name_from_file output = new Vx.Data.File.Class_name_from_file();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/data/file", // pkgname
         "name<-file", // name
         0, // idx
@@ -1222,14 +1266,17 @@ public static class File {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_name_from_file;
+      Vx.Core.Type_any output = Vx.Data.File.e_name_from_file;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_name_from_file;
+      Vx.Core.Type_any output = Vx.Data.File.t_name_from_file;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -1257,8 +1304,8 @@ public static class File {
 
   }
 
-  public static Func_name_from_file e_name_from_file = new Vx.Data.File.Class_name_from_file();
-  public static Func_name_from_file t_name_from_file = new Vx.Data.File.Class_name_from_file();
+  public static Vx.Data.File.Func_name_from_file e_name_from_file = new Vx.Data.File.Class_name_from_file();
+  public static Vx.Data.File.Func_name_from_file t_name_from_file = new Vx.Data.File.Class_name_from_file();
 
   public static Vx.Core.Type_string f_name_from_file(Vx.Data.File.Type_file file) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -1280,21 +1327,22 @@ public static class File {
   public class Class_path_from_file : Vx.Core.Class_base, Func_path_from_file {
 
     public override Vx.Data.File.Func_path_from_file vx_new(params object[] vals) {
-      Class_path_from_file output = new Class_path_from_file();
+      Vx.Data.File.Class_path_from_file output = new Vx.Data.File.Class_path_from_file();
       return output;
     }
 
-    public override Vx.Data.File.Func_path_from_file vx_copy(params object[] vals) {
-      Class_path_from_file output = new Class_path_from_file();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.File.Class_path_from_file output = new Vx.Data.File.Class_path_from_file();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/data/file", // pkgname
         "path<-file", // name
         0, // idx
@@ -1313,14 +1361,17 @@ public static class File {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_path_from_file;
+      Vx.Core.Type_any output = Vx.Data.File.e_path_from_file;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_path_from_file;
+      Vx.Core.Type_any output = Vx.Data.File.t_path_from_file;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -1348,8 +1399,8 @@ public static class File {
 
   }
 
-  public static Func_path_from_file e_path_from_file = new Vx.Data.File.Class_path_from_file();
-  public static Func_path_from_file t_path_from_file = new Vx.Data.File.Class_path_from_file();
+  public static Vx.Data.File.Func_path_from_file e_path_from_file = new Vx.Data.File.Class_path_from_file();
+  public static Vx.Data.File.Func_path_from_file t_path_from_file = new Vx.Data.File.Class_path_from_file();
 
   public static Vx.Core.Type_string f_path_from_file(Vx.Data.File.Type_file file) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -1370,21 +1421,22 @@ public static class File {
   public class Class_pathcurrent_from_os : Vx.Core.Class_base, Func_pathcurrent_from_os {
 
     public override Vx.Data.File.Func_pathcurrent_from_os vx_new(params object[] vals) {
-      Class_pathcurrent_from_os output = new Class_pathcurrent_from_os();
+      Vx.Data.File.Class_pathcurrent_from_os output = new Vx.Data.File.Class_pathcurrent_from_os();
       return output;
     }
 
-    public override Vx.Data.File.Func_pathcurrent_from_os vx_copy(params object[] vals) {
-      Class_pathcurrent_from_os output = new Class_pathcurrent_from_os();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.File.Class_pathcurrent_from_os output = new Vx.Data.File.Class_pathcurrent_from_os();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/data/file", // pkgname
         "pathcurrent<-os", // name
         0, // idx
@@ -1403,14 +1455,17 @@ public static class File {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_pathcurrent_from_os;
+      Vx.Core.Type_any output = Vx.Data.File.e_pathcurrent_from_os;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_pathcurrent_from_os;
+      Vx.Core.Type_any output = Vx.Data.File.t_pathcurrent_from_os;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -1425,8 +1480,8 @@ public static class File {
 
   }
 
-  public static Func_pathcurrent_from_os e_pathcurrent_from_os = new Vx.Data.File.Class_pathcurrent_from_os();
-  public static Func_pathcurrent_from_os t_pathcurrent_from_os = new Vx.Data.File.Class_pathcurrent_from_os();
+  public static Vx.Data.File.Func_pathcurrent_from_os e_pathcurrent_from_os = new Vx.Data.File.Class_pathcurrent_from_os();
+  public static Vx.Data.File.Func_pathcurrent_from_os t_pathcurrent_from_os = new Vx.Data.File.Class_pathcurrent_from_os();
 
   public static Vx.Core.Type_string f_pathcurrent_from_os() {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -1448,21 +1503,22 @@ public static class File {
   public class Class_pathfull_from_file : Vx.Core.Class_base, Func_pathfull_from_file {
 
     public override Vx.Data.File.Func_pathfull_from_file vx_new(params object[] vals) {
-      Class_pathfull_from_file output = new Class_pathfull_from_file();
+      Vx.Data.File.Class_pathfull_from_file output = new Vx.Data.File.Class_pathfull_from_file();
       return output;
     }
 
-    public override Vx.Data.File.Func_pathfull_from_file vx_copy(params object[] vals) {
-      Class_pathfull_from_file output = new Class_pathfull_from_file();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.File.Class_pathfull_from_file output = new Vx.Data.File.Class_pathfull_from_file();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/data/file", // pkgname
         "pathfull<-file", // name
         0, // idx
@@ -1481,14 +1537,17 @@ public static class File {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_pathfull_from_file;
+      Vx.Core.Type_any output = Vx.Data.File.e_pathfull_from_file;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_pathfull_from_file;
+      Vx.Core.Type_any output = Vx.Data.File.t_pathfull_from_file;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -1516,8 +1575,8 @@ public static class File {
 
   }
 
-  public static Func_pathfull_from_file e_pathfull_from_file = new Vx.Data.File.Class_pathfull_from_file();
-  public static Func_pathfull_from_file t_pathfull_from_file = new Vx.Data.File.Class_pathfull_from_file();
+  public static Vx.Data.File.Func_pathfull_from_file e_pathfull_from_file = new Vx.Data.File.Class_pathfull_from_file();
+  public static Vx.Data.File.Func_pathfull_from_file t_pathfull_from_file = new Vx.Data.File.Class_pathfull_from_file();
 
   public static Vx.Core.Type_string f_pathfull_from_file(Vx.Data.File.Type_file file) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -1528,7 +1587,8 @@ public static class File {
         Vx.Core.Type_string name = Vx.Data.File.f_name_from_file(file);
         Vx.Core.Type_any output_1 = Vx.Core.f_if_2(
           Vx.Core.t_string,
-          Vx.Core.vx_new(Vx.Core.t_thenelselist,
+          Vx.Core.vx_new(
+            Vx.Core.t_thenelselist,
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
                 return Vx.Core.f_is_empty(path);
@@ -1541,10 +1601,11 @@ public static class File {
               Vx.Core.t_any_from_func.vx_fn_new(() => {
                 return Vx.Core.f_new(
                   Vx.Core.t_string,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
-                      path,
-                      Vx.Core.vx_new_string("/"),
-                      name
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
+                    path,
+                    Vx.Core.vx_new_string("/"),
+                    name
                   )
                 );
               })
@@ -1571,21 +1632,22 @@ public static class File {
   public class Class_string_read_from_file : Vx.Core.Class_base, Func_string_read_from_file {
 
     public override Vx.Data.File.Func_string_read_from_file vx_new(params object[] vals) {
-      Class_string_read_from_file output = new Class_string_read_from_file();
+      Vx.Data.File.Class_string_read_from_file output = new Vx.Data.File.Class_string_read_from_file();
       return output;
     }
 
-    public override Vx.Data.File.Func_string_read_from_file vx_copy(params object[] vals) {
-      Class_string_read_from_file output = new Class_string_read_from_file();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.File.Class_string_read_from_file output = new Vx.Data.File.Class_string_read_from_file();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/data/file", // pkgname
         "string-read<-file", // name
         0, // idx
@@ -1604,14 +1666,17 @@ public static class File {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_read_from_file;
+      Vx.Core.Type_any output = Vx.Data.File.e_string_read_from_file;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_read_from_file;
+      Vx.Core.Type_any output = Vx.Data.File.t_string_read_from_file;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any_context vx_fn_new(Vx.Core.Class_any_from_any_context.IFn fn) {
@@ -1640,8 +1705,8 @@ public static class File {
 
   }
 
-  public static Func_string_read_from_file e_string_read_from_file = new Vx.Data.File.Class_string_read_from_file();
-  public static Func_string_read_from_file t_string_read_from_file = new Vx.Data.File.Class_string_read_from_file();
+  public static Vx.Data.File.Func_string_read_from_file e_string_read_from_file = new Vx.Data.File.Class_string_read_from_file();
+  public static Vx.Data.File.Func_string_read_from_file t_string_read_from_file = new Vx.Data.File.Class_string_read_from_file();
 
   public static Vx.Core.Type_string f_string_read_from_file(Vx.Core.Type_context context, Vx.Data.File.Type_file file) {
     Vx.Core.Type_string output = Vx.Core.e_string;

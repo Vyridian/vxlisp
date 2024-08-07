@@ -47,7 +47,8 @@ public class TranslateTest {
                 context,
                 Vx.Core.f_new(
                   Vx.Core.t_msg,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":path"),
                     Vx.Core.vx_new_string("vx/repl/repl/repl<-string-argmap"),
                     Vx.Core.vx_new_string(":code"),
@@ -81,11 +82,13 @@ public class TranslateTest {
               Vx.Translate.f_translate_from_translation_string(
                 Vx.Core.f_new(
                   Vx.Core.t_translation,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":wordmap"),
                     Vx.Core.f_new(
                       Vx.Core.t_stringmap,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string("Hello"),
                         Vx.Core.vx_new_string("Hola")
                       )

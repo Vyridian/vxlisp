@@ -26,6 +26,7 @@ type vxtype struct {
 	createvalue  vxvalue
 	destroyvalue vxvalue
 	emptyvalue   vxvalue
+	subtype      *vxtype
 	testvalues   []vxvalue
 	textblock    *vxtextblock
 }
@@ -39,6 +40,8 @@ var emptytype = NewType("")
 var emptylisttype = []*vxtype{}
 
 var anylisttype = NewTypeList("vx/core/anylist", anytype)
+
+var anymaptype = NewTypeMap("vx/core/anymap", anytype)
 
 var anytype = NewType("vx/core/any")
 
@@ -96,6 +99,8 @@ var msgblocklisttype = NewType("vx/core/msgblocklist")
 
 var msglisttype = NewType("vx/core/msglist")
 
+var nonetype = NewType("vx/core/none")
+
 var numbertype = NewType("vx/core/number")
 
 var rawbooltype = NewType("rawbool")
@@ -127,6 +132,8 @@ var rawmapanytype = NewType("rawmapany")
 var rawobjecttype = NewType("rawobject")
 
 var rawstringtype = NewType("rawstring")
+
+var rawvoidtype = NewType("void")
 
 var sessiontype = NewTypeStruct("vx/core/session")
 
@@ -331,6 +338,12 @@ func NewTypeStruct(typename string) *vxtype {
 		typ.isgeneric = true
 	}
 	return typ
+}
+
+func NewTypeSubtype(typ *vxtype, subtype *vxtype) *vxtype {
+	output := NewTypeCopy(typ)
+	output.subtype = subtype
+	return output
 }
 
 func BooleanAllowFromTypeConst(typ *vxtype, cnst *vxconst) (bool, *vxmsgblock) {

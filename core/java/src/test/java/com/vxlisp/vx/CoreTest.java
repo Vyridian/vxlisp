@@ -40,7 +40,8 @@ public final class CoreTest {
               context,
               Core.f_new(
                 Core.t_boolean,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_boolean(true)
                 )
               )
@@ -54,7 +55,8 @@ public final class CoreTest {
               context,
               Core.f_new(
                 Core.t_boolean,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_boolean(false)
                 )
               )
@@ -83,7 +85,8 @@ public final class CoreTest {
               Core.t_decimal.vx_new_from_string("4.5"),
               Core.f_new(
                 Core.t_float,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.t_decimal.vx_new_from_string("4.5")
                 )
               )
@@ -226,7 +229,8 @@ public final class CoreTest {
               Core.vx_new_string("a"),
               Core.f_new(
                 Core.t_string,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string("a")
                 )
               )
@@ -241,7 +245,8 @@ public final class CoreTest {
               Core.vx_new_string("ab"),
               Core.f_new(
                 Core.t_string,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string("a"),
                   Core.vx_new_string("b")
                 )
@@ -448,7 +453,8 @@ public final class CoreTest {
               context,
               Core.vx_new_int(24),
               Core.f_multiply_2(
-                Core.vx_new(Core.t_intlist,
+                Core.vx_new(
+                  Core.t_intlist,
                   Core.vx_new_int(3),
                   Core.vx_new_int(2),
                   Core.vx_new_int(4)
@@ -464,7 +470,8 @@ public final class CoreTest {
               context,
               Core.vx_new_int(-20),
               Core.f_multiply_2(
-                Core.vx_new(Core.t_intlist,
+                Core.vx_new(
+                  Core.t_intlist,
                   Core.vx_new_int(5),
                   Core.vx_new_int(-2),
                   Core.vx_new_int(2)
@@ -494,7 +501,8 @@ public final class CoreTest {
               context,
               Core.vx_new_int(24),
               Core.f_multiply_2(
-                Core.vx_new(Core.t_intlist,
+                Core.vx_new(
+                  Core.t_intlist,
                   Core.vx_new_int(3),
                   Core.vx_new_int(2),
                   Core.vx_new_int(4)
@@ -510,7 +518,8 @@ public final class CoreTest {
               context,
               Core.vx_new_int(-20),
               Core.f_multiply_2(
-                Core.vx_new(Core.t_intlist,
+                Core.vx_new(
+                  Core.t_intlist,
                   Core.vx_new_int(5),
                   Core.vx_new_int(-2),
                   Core.vx_new_int(2)
@@ -809,7 +818,8 @@ public final class CoreTest {
             Test.f_test_true(
               context,
               Core.f_lt_1(
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string("b"),
                   Core.vx_new_string("d"),
                   Core.vx_new_string("z")
@@ -933,7 +943,8 @@ public final class CoreTest {
             Test.f_test_true(
               context,
               Core.f_le_1(
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string("b"),
                   Core.vx_new_string("d"),
                   Core.vx_new_string("z")
@@ -994,7 +1005,8 @@ public final class CoreTest {
               Core.f_eq(
                 Core.f_new(
                   Core.t_stringlist,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string("a"),
                     Core.vx_new_string("b"),
                     Core.vx_new_string("c")
@@ -1002,7 +1014,8 @@ public final class CoreTest {
                 ),
                 Core.f_new(
                   Core.t_stringlist,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string("a"),
                     Core.vx_new_string("b"),
                     Core.vx_new_string("c")
@@ -1020,7 +1033,8 @@ public final class CoreTest {
               Core.f_eq(
                 Core.f_new(
                   Core.t_stringmap,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":a"),
                     Core.vx_new_string("1"),
                     Core.vx_new_string(":b"),
@@ -1029,7 +1043,8 @@ public final class CoreTest {
                 ),
                 Core.f_new(
                   Core.t_stringmap,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":a"),
                     Core.vx_new_string("1"),
                     Core.vx_new_string(":b"),
@@ -1060,7 +1075,8 @@ public final class CoreTest {
             Test.f_test_false(
               context,
               Core.f_eq_1(
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_int(2),
                   Core.vx_new_int(2),
                   Core.vx_new_int(3)
@@ -1144,7 +1160,8 @@ public final class CoreTest {
             Test.f_test_true(
               context,
               Core.f_gt_1(
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string("z"),
                   Core.vx_new_string("y"),
                   Core.vx_new_string("b")
@@ -1196,7 +1213,8 @@ public final class CoreTest {
             Test.f_test_true(
               context,
               Core.f_ge_1(
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string("z"),
                   Core.vx_new_string("b"),
                   Core.vx_new_string("b")
@@ -1263,7 +1281,8 @@ public final class CoreTest {
             Test.f_test_true(
               context,
               Core.f_and_1(
-                Core.vx_new(Core.t_booleanlist,
+                Core.vx_new(
+                  Core.t_booleanlist,
                   Core.vx_new_boolean(true),
                   Core.vx_new_boolean(true),
                   Core.vx_new_boolean(true)
@@ -1278,7 +1297,8 @@ public final class CoreTest {
             Test.f_test_false(
               context,
               Core.f_and_1(
-                Core.vx_new(Core.t_booleanlist,
+                Core.vx_new(
+                  Core.t_booleanlist,
                   Core.vx_new_boolean(true),
                   Core.vx_new_boolean(true),
                   Core.vx_new_boolean(false)
@@ -1311,7 +1331,8 @@ public final class CoreTest {
                 Core.t_any,
                 Core.f_new(
                   Core.t_list,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string("a"),
                     Core.vx_new_string("b"),
                     Core.vx_new_string("c")
@@ -1332,7 +1353,8 @@ public final class CoreTest {
                 Core.t_string,
                 Core.f_new(
                   Core.t_stringlist,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string("a"),
                     Core.vx_new_string("b"),
                     Core.vx_new_string("c")
@@ -1367,7 +1389,8 @@ public final class CoreTest {
                 Core.t_int,
                 Core.f_new(
                   Core.t_intlist,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_int(3),
                     Core.vx_new_int(2),
                     Core.vx_new_int(4)
@@ -1409,7 +1432,8 @@ public final class CoreTest {
                 Core.t_string,
                 Core.f_new(
                   Core.t_stringmap,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":a"),
                     Core.vx_new_string("v1"),
                     Core.vx_new_string(":b"),
@@ -1447,7 +1471,8 @@ public final class CoreTest {
                 Core.t_string,
                 Core.f_new(
                   Core.t_stringmap,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":a"),
                     Core.vx_new_string("x"),
                     Core.vx_new_string(":b"),
@@ -1462,7 +1487,8 @@ public final class CoreTest {
                   Core.Type_any output_1 = 
                     Core.f_copy(
                       current,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         value,
                         key
                       )
@@ -1494,7 +1520,8 @@ public final class CoreTest {
               context,
               Core.f_new(
                 Core.t_stringmutablemap,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":b"),
                   Core.vx_new_string("y"),
                   Core.vx_new_string(":a"),
@@ -1506,9 +1533,10 @@ public final class CoreTest {
                 Core.t_any_from_func.vx_fn_new(() -> {
                   Core.Type_stringmutablemap smap = Core.f_new(
                     Core.t_stringmutablemap,
-                    Core.vx_new(Core.t_anylist,
-                        Core.vx_new_string(":b"),
-                        Core.vx_new_string("y")
+                    Core.vx_new(
+                      Core.t_anylist,
+                      Core.vx_new_string(":b"),
+                      Core.vx_new_string("y")
                     )
                   );
                   Core.Type_boolean iswrite = Core.f_boolean_write_from_map_name_value(smap, Core.vx_new_string(":a"), Core.vx_new_string("x"));
@@ -1526,7 +1554,8 @@ public final class CoreTest {
               context,
               Core.f_new(
                 Core.t_stringmutablemap,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":a"),
                   Core.vx_new_string("x")
                 )
@@ -1536,11 +1565,12 @@ public final class CoreTest {
                 Core.t_any_from_func.vx_fn_new(() -> {
                   Core.Type_stringmutablemap smap = Core.f_new(
                     Core.t_stringmutablemap,
-                    Core.vx_new(Core.t_anylist,
-                        Core.vx_new_string(":b"),
-                        Core.vx_new_string("y"),
-                        Core.vx_new_string(":a"),
-                        Core.vx_new_string("x")
+                    Core.vx_new(
+                      Core.t_anylist,
+                      Core.vx_new_string(":b"),
+                      Core.vx_new_string("y"),
+                      Core.vx_new_string(":a"),
+                      Core.vx_new_string("x")
                     )
                   );
                   Core.Type_boolean iswrite = Core.f_boolean_write_from_map_name_value(smap, Core.vx_new_string(":b"), Core.vx_new_string(""));
@@ -1639,7 +1669,8 @@ public final class CoreTest {
               Core.f_contains_1(
                 Core.f_new(
                   Core.t_stringlist,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string("1"),
                     Core.vx_new_string("2"),
                     Core.vx_new_string("3")
@@ -1658,7 +1689,8 @@ public final class CoreTest {
               Core.f_contains_1(
                 Core.f_new(
                   Core.t_intlist,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_int(1),
                     Core.vx_new_int(2),
                     Core.vx_new_int(3)
@@ -1677,7 +1709,8 @@ public final class CoreTest {
               Core.f_contains_1(
                 Core.f_new(
                   Core.t_list,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_int(1),
                     Core.vx_new_string("2"),
                     Core.vx_new_int(3)
@@ -1709,7 +1742,8 @@ public final class CoreTest {
               context,
               Core.f_new(
                 Core.t_stringmap,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":a"),
                   Core.vx_new_string("1"),
                   Core.vx_new_string(":b"),
@@ -1719,12 +1753,14 @@ public final class CoreTest {
               Core.f_copy(
                 Core.f_new(
                   Core.t_stringmap,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":a"),
                     Core.vx_new_string("1")
                   )
                 ),
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":b"),
                   Core.vx_new_string("2")
                 )
@@ -1822,7 +1858,8 @@ public final class CoreTest {
                 Core.t_string,
                 Core.f_new(
                   Core.t_stringlist,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string("b"),
                     Core.vx_new_string("c")
                   )
@@ -1855,7 +1892,8 @@ public final class CoreTest {
                 Core.t_string,
                 Core.f_new(
                   Core.t_list,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.c_nothing,
                     Core.vx_new_string("b"),
                     Core.vx_new_string("c")
@@ -1887,7 +1925,8 @@ public final class CoreTest {
               context,
               Core.f_new(
                 Core.t_float,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.t_decimal.vx_new_from_string("2.3")
                 )
               ),
@@ -2002,7 +2041,8 @@ public final class CoreTest {
               context,
               Core.f_if_2(
                 Core.t_any,
-                Core.vx_new(Core.t_thenelselist,
+                Core.vx_new(
+                  Core.t_thenelselist,
                   Core.f_then(
                     Core.t_boolean_from_func.vx_fn_new(() -> {
                       return Core.f_eq(Core.vx_new_int(2), Core.vx_new_int(3));
@@ -2282,7 +2322,8 @@ public final class CoreTest {
                 Core.t_string,
                 Core.f_new(
                   Core.t_stringlist,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string("b"),
                     Core.vx_new_string("c")
                   )
@@ -2348,7 +2389,8 @@ public final class CoreTest {
               Core.f_length_1(
                 Core.f_new(
                   Core.t_stringlist,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string("a"),
                     Core.vx_new_string("b"),
                     Core.vx_new_string("c")
@@ -2411,7 +2453,8 @@ public final class CoreTest {
               context,
               Core.f_new(
                 Core.t_stringlist,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string("a"),
                   Core.vx_new_string("b"),
                   Core.vx_new_string("c"),
@@ -2422,17 +2465,20 @@ public final class CoreTest {
                 Core.t_stringlist,
                 Core.f_new(
                   Core.t_stringlistlist,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.f_new(
                       Core.t_stringlist,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string("a"),
                         Core.vx_new_string("b")
                       )
                     ),
                     Core.f_new(
                       Core.t_stringlist,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string("c"),
                         Core.vx_new_string("d")
                       )
@@ -2464,7 +2510,8 @@ public final class CoreTest {
               context,
               Core.f_new(
                 Core.t_stringlist,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string("a"),
                   Core.vx_new_string("b"),
                   Core.vx_new_string("c"),
@@ -2475,17 +2522,20 @@ public final class CoreTest {
                 Core.t_stringlist,
                 Core.f_new(
                   Core.t_stringlistlist,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.f_new(
                       Core.t_stringlist,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string("a"),
                         Core.vx_new_string("b")
                       )
                     ),
                     Core.f_new(
                       Core.t_stringlist,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string("c"),
                         Core.vx_new_string("d")
                       )
@@ -2522,7 +2572,8 @@ public final class CoreTest {
               context,
               Core.f_new(
                 Core.t_stringlist,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string("10"),
                   Core.vx_new_string("20")
                 )
@@ -2531,7 +2582,8 @@ public final class CoreTest {
                 Core.t_stringlist,
                 Core.f_new(
                   Core.t_anylist,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string("10"),
                     Core.vx_new_string("20")
                   )
@@ -2561,7 +2613,8 @@ public final class CoreTest {
               context,
               Core.f_new(
                 Core.t_stringlist,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string("a1"),
                   Core.vx_new_string("b2")
                 )
@@ -2570,7 +2623,8 @@ public final class CoreTest {
                 Core.t_stringlist,
                 Core.f_new(
                   Core.t_stringlist,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string("a"),
                     Core.vx_new_string("b")
                   )
@@ -2581,7 +2635,8 @@ public final class CoreTest {
                   Core.Type_any output_1 = 
                     Core.f_new(
                       Core.t_string,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         value,
                         index
                       )
@@ -2613,7 +2668,8 @@ public final class CoreTest {
               context,
               Core.f_new(
                 Core.t_stringlist,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string("a1"),
                   Core.vx_new_string("b2")
                 )
@@ -2622,7 +2678,8 @@ public final class CoreTest {
                 Core.t_stringlist,
                 Core.f_new(
                   Core.t_stringmap,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":x"),
                     Core.vx_new_string("a1"),
                     Core.vx_new_string(":y"),
@@ -2654,7 +2711,8 @@ public final class CoreTest {
               context,
               Core.f_new(
                 Core.t_stringlist,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string("a1"),
                   Core.vx_new_string("b2")
                 )
@@ -2663,7 +2721,8 @@ public final class CoreTest {
                 Core.t_stringlist,
                 Core.f_new(
                   Core.t_stringmap,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string("a"),
                     Core.vx_new_string("1"),
                     Core.vx_new_string("b"),
@@ -2676,7 +2735,8 @@ public final class CoreTest {
                   Core.Type_any output_1 = 
                     Core.f_new(
                       Core.t_string,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         key,
                         val
                       )
@@ -2708,7 +2768,8 @@ public final class CoreTest {
               context,
               Core.f_new(
                 Core.t_stringmap,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string("keya"),
                   Core.vx_new_string("a"),
                   Core.vx_new_string("keyb"),
@@ -2719,7 +2780,8 @@ public final class CoreTest {
                 Core.t_stringmap,
                 Core.f_new(
                   Core.t_stringlist,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string("a"),
                     Core.vx_new_string("b")
                   )
@@ -2729,7 +2791,8 @@ public final class CoreTest {
                   Core.Type_any output_1 = 
                     Core.f_new(
                       Core.t_string,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string("key"),
                         val
                       )
@@ -2761,7 +2824,8 @@ public final class CoreTest {
               context,
               Core.f_new(
                 Core.t_stringmap,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":a"),
                   Core.vx_new_string("1")
                 )
@@ -2770,7 +2834,8 @@ public final class CoreTest {
                 Core.t_stringmap,
                 Core.f_new(
                   Core.t_anymap,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":a"),
                     Core.vx_new_string("1")
                   )
@@ -2800,7 +2865,8 @@ public final class CoreTest {
               context,
               Core.f_new(
                 Core.t_stringmap,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":a"),
                   Core.vx_new_string("a1"),
                   Core.vx_new_string(":b"),
@@ -2811,7 +2877,8 @@ public final class CoreTest {
                 Core.t_stringmap,
                 Core.f_new(
                   Core.t_stringmap,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":a"),
                     Core.vx_new_string("1"),
                     Core.vx_new_string(":b"),
@@ -2824,7 +2891,8 @@ public final class CoreTest {
                   Core.Type_any output_1 = 
                     Core.f_new(
                       Core.t_string,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         key,
                         val
                       )
@@ -2857,7 +2925,8 @@ public final class CoreTest {
               Core.vx_new_boolean(true),
               Core.f_new(
                 Core.t_boolean,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_boolean(true)
                 )
               )
@@ -2872,7 +2941,8 @@ public final class CoreTest {
               Core.vx_new_int(4),
               Core.f_new(
                 Core.t_int,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_int(4)
                 )
               )
@@ -2887,7 +2957,8 @@ public final class CoreTest {
               Core.t_decimal.vx_new_from_string("5.4"),
               Core.f_new(
                 Core.t_float,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.t_decimal.vx_new_from_string("5.4")
                 )
               )
@@ -2902,7 +2973,8 @@ public final class CoreTest {
               Core.vx_new_string("a"),
               Core.f_new(
                 Core.t_string,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string("a")
                 )
               )
@@ -2916,7 +2988,8 @@ public final class CoreTest {
               context,
               Core.f_new(
                 Core.t_stringlist,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string("a"),
                   Core.vx_new_string("b"),
                   Core.vx_new_string("c")
@@ -2924,7 +2997,8 @@ public final class CoreTest {
               ),
               Core.f_new(
                 Core.t_stringlist,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string("a"),
                   Core.vx_new_string("b"),
                   Core.vx_new_string("c")
@@ -2940,7 +3014,8 @@ public final class CoreTest {
               context,
               Core.f_new(
                 Core.t_stringmap,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":a"),
                   Core.vx_new_string("1"),
                   Core.vx_new_string(":b"),
@@ -2949,7 +3024,8 @@ public final class CoreTest {
               ),
               Core.f_new(
                 Core.t_stringmap,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":a"),
                   Core.vx_new_string("1"),
                   Core.vx_new_string(":b"),
@@ -3029,7 +3105,8 @@ public final class CoreTest {
             Test.f_test_true(
               context,
               Core.f_or_1(
-                Core.vx_new(Core.t_booleanlist,
+                Core.vx_new(
+                  Core.t_booleanlist,
                   Core.vx_new_boolean(false),
                   Core.vx_new_boolean(true),
                   Core.vx_new_boolean(false)
@@ -3044,7 +3121,8 @@ public final class CoreTest {
             Test.f_test_false(
               context,
               Core.f_or_1(
-                Core.vx_new(Core.t_booleanlist,
+                Core.vx_new(
+                  Core.t_booleanlist,
                   Core.vx_new_boolean(false),
                   Core.vx_new_boolean(false),
                   Core.vx_new_boolean(false)
@@ -3230,7 +3308,8 @@ public final class CoreTest {
               Core.f_string_from_any(
                 Core.f_new(
                   Core.t_stringlist,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string("a"),
                     Core.vx_new_string("b"),
                     Core.vx_new_string("c")
@@ -3249,7 +3328,8 @@ public final class CoreTest {
               Core.f_string_from_any(
                 Core.f_new(
                   Core.t_stringmap,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":a"),
                     Core.vx_new_string("1"),
                     Core.vx_new_string(":b"),
@@ -3305,7 +3385,8 @@ public final class CoreTest {
               context,
               Core.f_new(
                 Core.t_stringlist,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string("b"),
                   Core.vx_new_string("a")
                 )
@@ -3313,7 +3394,8 @@ public final class CoreTest {
               Core.f_stringlist_from_map(
                 Core.f_new(
                   Core.t_intmap,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":b"),
                     Core.vx_new_int(1),
                     Core.vx_new_string(":a"),
@@ -3347,11 +3429,13 @@ public final class CoreTest {
               Core.f_switch(
                 Core.t_int,
                 Core.vx_new_string("d"),
-                Core.vx_new(Core.t_thenelselist,
+                Core.vx_new(
+                  Core.t_thenelselist,
                   Core.f_case(
                     Core.f_new(
                       Core.t_list,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string("b"),
                         Core.vx_new_string("c"),
                         Core.vx_new_string("d")

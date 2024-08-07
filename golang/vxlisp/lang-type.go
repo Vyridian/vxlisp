@@ -1,0 +1,2024 @@
+package vxlisp
+
+import "strings"
+
+func LangType(lang *vxlang, typ *vxtype) (string, *vxmsgblock) {
+	msgblock := NewMsgBlock("LangType")
+	output := ""
+	path := typ.pkgname + "/" + typ.name
+	g_ifuncdepth = 0
+	doc := "" +
+		"type: " + typ.name
+	if typ.doc != "" {
+		doc += "\n" + typ.doc
+	}
+	if typ.deprecated != "" {
+		doc += "\n" + typ.deprecated
+	}
+	typename := LangFromName(typ.alias)
+	typepath := NameFromType(typ)
+	instancefuncs := ""
+	createtext, msgs := LangFromValue(lang, typ.createvalue, "", emptyfunc, 2, true, false, path)
+	msgblock = MsgblockAddBlock(msgblock, msgs)
+	if createtext != "" {
+		instancefuncs += "\n    " + createtext + "\n"
+	}
+	switch NameFromType(typ) {
+	case "vx/core/func":
+		instancefuncs += "" +
+			LangTypeVxFuncdef(lang, typ, false)
+	}
+	switch typ.extends {
+	case ":list":
+		allowtype := anytype
+		allowname := "any"
+		allowtypes := ListAllowTypeFromType(typ)
+		if len(allowtypes) > 0 {
+			allowtype = allowtypes[0]
+			allowname = LangNameFromType(lang, allowtype)
+		}
+		if allowname == "any" {
+			allowname = ""
+		}
+		instancefuncs += "" +
+			LangVarProp(lang, "vx_p_list", rawlisttype, allowtype, 2,
+				LangPkgNameDot(lang, "vx/core")+"immutablelist("+
+					"\n      "+LangVxNewList(lang, allowtype, "")+
+					"\n    )") +
+			"\n" +
+			LangTypeVxList(lang, typ, false) +
+			LangTypeVxAllowList(lang, typ, false)
+	case ":map":
+		allowtype := anytype
+		allowname := "any"
+		allowtypes := ListAllowTypeFromType(typ)
+		if len(allowtypes) > 0 {
+			allowtype = allowtypes[0]
+			allowname = LangNameFromType(lang, allowtype)
+		}
+		if allowname == "any" {
+			allowname = ""
+		}
+		instancefuncs += "" +
+			LangVarProp(lang, "vx_p_map", rawmaptype, allowtype, 2,
+				LangPkgNameDot(lang, "vx/core")+
+					"immutablemap("+
+					LangVxNewMap(lang, allowtype, "")+
+					")") +
+			"\n" +
+			LangTypeVxMap(lang, allowtype) +
+			LangTypeVxSet(lang, typ) +
+			LangTypeVxAllowMap(lang, typ, false) +
+			LangTypeVxNewMap(lang, typ, false)
+	case ":struct":
+		vx_any := ""
+		valcopyend := ""
+		props := ListPropertyTraitFromType(typ)
+		switch len(props) {
+		case 0:
+		default:
+			validkeys := "\n      List<" + LangTypeName(lang, rawstringtype) + "> validkeys = " + LangVxNewList(lang, rawstringtype, "") + lang.lineend
+			valnewswitch := ""
+			for _, arg := range props {
+				validkeys += "\n      " + LangVxListAdd(lang, "validkeys", "\":"+arg.name+"\"") + lang.lineend
+				argname := LangFromName(arg.name)
+				valcopyend += "" +
+					"\n        work.vx_p_" + argname + " = vx_p_" + argname + lang.lineend
+				vx_any += "" +
+					"\n      case \":" + arg.name + "\":" +
+					"\n        output = this." + argname + "()" + lang.lineend +
+					"\n        break" + lang.lineend
+				argalt := ""
+				switch NameFromType(arg.vxtype) {
+				case "vx/core/boolean":
+					argalt = "" +
+						"\n            } else if (" + LangIsType(lang, "valsub", rawbooleantype) + ") {" +
+						LangVarSet(lang, "ischanged", 7, "true") +
+						"\n              vx_p_" + argname + " = " + LangPkgNameDot(lang, "vx/core") + "vx_new(" + LangPkgNameDot(lang, "vx/core") + "t_boolean, valsub)" + lang.lineend
+				case "vx/core/int":
+					argalt = "" +
+						"\n            } else if (" + LangIsType(lang, "valsub", rawintegertype) + ") {" +
+						LangVarSet(lang, "ischanged", 7, "true") +
+						"\n              vx_p_" + argname + " = " + LangPkgNameDot(lang, "vx/core") + "vx_new(" + LangPkgNameDot(lang, "vx/core") + "t_int, valsub)" + lang.lineend
+				case "vx/core/float":
+					argalt = "" +
+						"\n            } else if (" + LangIsType(lang, "valsub", rawfloattype) + ") {" +
+						LangVarSet(lang, "ischanged", 7, "true") +
+						"\n              vx_p_" + argname + " = " + LangPkgNameDot(lang, "vx/core") + "vx_new(" + LangPkgNameDot(lang, "vx/core") + "t_float, valsub)" + lang.lineend
+				case "vx/core/string":
+					argalt = "" +
+						"\n            } else if (" + LangIsType(lang, "valsub", rawstringtype) + ") {" +
+						LangVarSet(lang, "ischanged", 7, "true") +
+						"\n              vx_p_" + argname + " = " + LangPkgNameDot(lang, "vx/core") + "vx_new(" + LangPkgNameDot(lang, "vx/core") + "t_string, valsub)" + lang.lineend
+				}
+				valnewswitcherr := ""
+				switch NameFromType(typ) {
+				case "vx/core/msg":
+				default:
+					valnewswitcherr = "" +
+						"\n            } else {" +
+						"\n              if (false) {" +
+						LangElseIfType(lang, anytype, emptytype, "valsub", "valinvalid", 7, false) +
+						LangVarSet(lang, "msgval", 8, "valinvalid") +
+						"\n              } else {" +
+						LangVarSet(lang, "msgval", 8,
+							LangPkgNameDot(lang, "vx/core")+
+								"vx_new_string("+LangVxToString(lang, "valsub")+")") +
+						"\n              }" +
+						LangVarCollection(lang, "mapany", rawmaptype, anytype, 7,
+							LangVxNewMap(lang, anytype, "")) +
+						"\n              mapany.put(\"key\", " + LangPkgNameDot(lang, "vx/core") + "vx_new_string(\"" + arg.name + "\"))" + lang.lineend +
+						"\n              mapany.put(\"value\", msgval)" + lang.lineend +
+						LangVar(lang, "msgmap", maptype, 7,
+							LangTypeT(lang, anymaptype)+".vx_new_from_map(mapany)") +
+						"\n              msg = " + LangPkgNameDot(lang, "vx/core") + "vx_msg_from_error(\"" + typepath + "\", \":invalidvalue\", msgmap)" + lang.lineend +
+						"\n              msgblock = " + LangPkgNameDot(lang, "vx/core") + "vx_copy(msgblock, msg)" + lang.lineend
+				}
+				valnewswitch += "" +
+					"\n          case \":" + arg.name + "\":" +
+					"\n            if (valsub == vx_p_" + argname + ") {" +
+					LangElseIfType(lang, arg.vxtype, emptytype, "valsub", "val"+argname, 6, false) +
+					LangVarSet(lang, "ischanged", 7, "true") +
+					"\n              vx_p_" + argname + " = val" + argname + lang.lineend +
+					argalt +
+					valnewswitcherr +
+					"\n            }" +
+					"\n            break" + lang.lineend
+				instancefuncs += "" +
+					LangVarProp(lang, "vx_p_"+argname, arg.vxtype, emptytype, 2, "null") +
+					"\n" +
+					LangVxArgFromArg(lang, LangNameFromType(lang, typ), arg)
+			}
+			defaultkey := ""
+			defaultstring := ""
+			lastarg := props[len(props)-1]
+			if lastarg.isdefault {
+				lastargname := LangFromName(lastarg.name)
+				argclassname := LangTypeName(lang, lastarg.vxtype)
+				defaultkey += "" +
+					"\n          } else if (" + LangIsType(lang, "valsub", lastarg.vxtype) + ") { // default property" +
+					LangVarSet(lang, "ischanged", 6, "true") +
+					"\n            vx_p_" + lastargname + " = (" + argclassname + ")valsub" + lang.lineend
+				switch NameFromType(lastarg.vxtype) {
+				case "vx/core/boolean":
+					defaultkey += "" +
+						"\n          } else if (" + LangIsType(lang, "valsub", rawbooleantype) + ") { // default property" +
+						LangVarSet(lang, "ischanged", 6, "true") +
+						"\n            vx_p_" + lastargname + " = " + LangPkgNameDot(lang, "vx/core") + "vx_new(" + LangTypeT(lang, booleantype) + ", valsub)" + lang.lineend
+				case "vx/core/int":
+					defaultkey += "" +
+						"\n          } else if (" + LangIsType(lang, "valsub", rawintegertype) + ") { // default property" +
+						LangVarSet(lang, "ischanged", 6, "true") +
+						"\n            vx_p_" + lastargname + " = " + LangPkgNameDot(lang, "vx/core") + "vx_new(" + LangTypeT(lang, inttype) + ", valsub)" + lang.lineend
+				case "vx/core/float":
+					defaultkey += "" +
+						"\n          } else if (" + LangIsType(lang, "valsub", rawfloattype) + ") { // default property" +
+						LangVarSet(lang, "ischanged", 6, "true") +
+						LangVarSet(lang, "vx_p_"+lastargname, 6,
+							LangPkgNameDot(lang, "vx/core")+
+								"vx_new("+LangTypeT(lang, floattype)+", valsub)")
+				case "vx/core/string":
+					defaultstring += "" +
+						LangElseIfType(lang, stringtype, emptytype, "valsub", "valstr", 6, false) +
+						LangVarSet(lang, "ischanged", 7, "true") +
+						LangVarSet(lang, "vx_p_"+lastargname, 7, "valstr") +
+						LangElseIfType(lang, rawstringtype, emptytype, "valsub", "", 6, false) +
+						LangVarSet(lang, "ischanged", 7, "true") +
+						LangVarSet(lang, "vx_p_"+lastargname, 7,
+							LangPkgNameDot(lang, "vx/core")+
+								"vx_new("+LangTypeT(lang, stringtype)+", valsub)")
+				}
+				if lastarg.vxtype.extends == ":list" {
+					for _, allowtype := range lastarg.vxtype.allowtypes {
+						subargclassname := LangTypeName(lang, allowtype)
+						defaultkey += "" +
+							"\n          } else if (" + LangIsType(lang, "valsub", allowtype) + ") { // default property" +
+							"\n            " + subargclassname + " valdefault = (" + subargclassname + ")valsub" + lang.lineend +
+							"\n            " + argclassname + " vallist = vx_p_" + lastargname + lang.lineend +
+							"\n            if (vallist == null) {" +
+							"\n              vallist = " + LangPkgNameDot(lang, "vx/core") + "vx_new(" + LangTypeT(lang, lastarg.vxtype) + ", valdefault)" + lang.lineend +
+							"\n            } else {" +
+							"\n              vallist = " + LangPkgNameDot(lang, "vx/core") + "vx_copy(vallist, valdefault)" + lang.lineend +
+
+							"\n            }" +
+							LangVarSet(lang, "ischanged", 6, "true") +
+							"\n            vx_p_" + lastargname + " = vallist" + lang.lineend
+					}
+				}
+			}
+		}
+		prefix := LangNameFromType(lang, typ)
+		argkey := NewArg("key")
+		argkey.vxtype = stringtype
+		listarg := NewListArg()
+		listarg = append(listarg, argkey)
+		funcvxany := NewFunc()
+		funcvxany.name = "vx_any"
+		funcvxany.isimplement = true
+		funcvxany.vxtype = anytype
+		funcvxany.listarg = listarg
+		skeyswitch := ""
+		if len(vx_any) > 0 {
+			skeyswitch = "" +
+				LangVar(lang, "skey", rawstringtype, 3, "key.vx_string()") +
+				"\n      switch (skey) {" +
+				vx_any +
+				"\n      }"
+		}
+		instancefuncs += "" +
+			LangFuncHeader(lang, prefix, funcvxany, 2, 0,
+				LangVar(lang, "output", anytype, 3,
+					LangTypeE(lang, anytype))+
+					skeyswitch) +
+			LangTypeVxMapStruct(lang, typ, false)
+	}
+	e_type := ""
+	switch NameFromType(typ) {
+	case "vx/core/boolean":
+	default:
+		e_type = LangValStatic(lang, "e_"+typename, typ, 1, ":new")
+	}
+	t_type := LangValStatic(lang, "t_"+typename, typ, 1, ":new")
+	doc = "" +
+		"\n  /**" +
+		"\n   * " + StringFromStringIndent(doc, "   * ") +
+		"\n   * (type " + typ.name + ")" +
+		"\n   */"
+	/// FIXME
+	switch lang.name {
+	case "kotlin":
+		doc = ""
+	}
+	output += "" +
+		doc +
+		LangTypeInterface(lang, typ) +
+		LangTypeClassHeader(lang, typ, 1) +
+		"\n" +
+		instancefuncs +
+		LangTypeVxNew(lang, typ, false) +
+		LangTypeVxCopy(lang, typ, false) +
+		LangTypeVxMsgblock(lang, typ, false) +
+		LangTypeVxEmpty(lang, typ, false) +
+		LangTypeVxType(lang, typ, false) +
+		LangTypeVxTypedef(lang, typ, false) +
+		"\n  }" +
+		"\n" +
+		e_type +
+		t_type +
+		"\n"
+	return output, msgblock
+}
+
+func LangTypeClassHeader(lang *vxlang, typ *vxtype, indent int) string {
+	output := ""
+	lineindent := LangIndent(lang, indent, true)
+	typename := LangFromName(typ.alias)
+	switch lang.name {
+	case "csharp":
+		output = lineindent + "public class Class_" + typename + " : " + LangPkgNameDot(lang, "vx/core") + "Class_base, Type_" + LangNameFromType(lang, typ) + " {"
+	case "java":
+		output = lineindent + "public static class Class_" + typename + " extends " + LangPkgNameDot(lang, "vx/core") + "Class_base implements Type_" + LangNameFromType(lang, typ) + " {"
+	case "kotlin":
+		output = "" +
+			lineindent + "class Class_" + typename + " : " + LangPkgNameDot(lang, "vx/core") + "Class_base, Type_" + LangNameFromType(lang, typ) + " {" +
+			lineindent + "  constructor() {}"
+	}
+	return output
+}
+
+func LangTypeDef(lang *vxlang, typ *vxtype, indent int) string {
+	lineindent := LangIndent(lang, indent, true)
+	allowtypes := LangTypeListFromListType(lang, typ.allowtypes)
+	disallowtypes := LangTypeListFromListType(lang, typ.disallowtypes)
+	allowfuncs := LangPkgNameDot(lang, "vx/core") + "e_funclist"
+	disallowfuncs := LangPkgNameDot(lang, "vx/core") + "e_funclist"
+	allowvalues := LangPkgNameDot(lang, "vx/core") + "e_anylist"
+	disallowvalues := LangPkgNameDot(lang, "vx/core") + "e_anylist"
+	properties := LangPkgNameDot(lang, "vx/core") + "e_argmap"
+	traits := LangTypeListFromListType(lang, typ.traits)
+	output := "" +
+		LangPkgNameDot(lang, "vx/core") + "typedef_new(" +
+		lineindent + "  \"" + typ.pkgname + "\", // pkgname" +
+		lineindent + "  \"" + typ.name + "\", // name" +
+		lineindent + "  \"" + typ.extends + "\", // extends" +
+		lineindent + "  " + traits + ", // traits" +
+		lineindent + "  " + allowtypes + ", // allowtypes" +
+		lineindent + "  " + disallowtypes + ", // disallowtypes" +
+		lineindent + "  " + allowfuncs + ", // allowfuncs" +
+		lineindent + "  " + disallowfuncs + ", // disallowfuncs" +
+		lineindent + "  " + allowvalues + ", // allowvalues" +
+		lineindent + "  " + disallowvalues + ", // disallowvalues" +
+		lineindent + "  " + properties + " // properties" +
+		lineindent + ")"
+	return output
+}
+
+func LangTypeEmptyValue(lang *vxlang, typ *vxtype, indent string) string {
+	output := "\"\""
+	if len(indent) < 10 {
+		output = typ.defaultvalue
+		switch typ.extends {
+		case "string":
+			output = "\"" + output + "\""
+		case ":list":
+			output = LangPkgNameDot(lang, "vx/core") + "f_type_to_list(" + LangNameFromPkgName(lang, typ.pkgname) + ".t_" + typ.name + ")"
+		default:
+			if len(typ.properties) > 0 {
+				output = "{\n"
+				for _, property := range typ.properties {
+					propdefault := LangTypeEmptyValue(lang, property.vxtype, indent+"  ")
+					output += indent + "    " + LangFromName(property.name) + ": " + propdefault + ","
+					if property.doc != "" {
+						output += " // " + property.doc
+					}
+					output += "\n"
+				}
+				output += "" +
+					indent + "    vxtype: " + LangNameFromPkgName(lang, typ.pkgname) + ".t_" + LangFromName(typ.name) +
+					"\n" + indent + "  }"
+			} else if output == "" || strings.HasPrefix(output, ":") {
+				output = "\"" + output + "\""
+			}
+		}
+	}
+	return output
+}
+
+func LangTypeInterface(lang *vxlang, typ *vxtype) string {
+	output := ""
+	typename := LangNameTypeFullFromType(lang, typ)
+	isbasics := true
+	switch lang.name {
+	case "csharp", "java", "kotlin":
+		switch NameFromType(typ) {
+		case "vx/core/any":
+		default:
+			isbasics = false
+		}
+	}
+	basics := ""
+	if isbasics {
+		basics = "" +
+			LangTypeVxNew(lang, typ, true) +
+			LangTypeVxCopy(lang, typ, true) +
+			LangTypeVxEmpty(lang, typ, true) +
+			LangTypeVxType(lang, typ, true)
+	}
+	createtext, _ := LangFromValue(lang, typ.createvalue, "", emptyfunc, 0, true, false, "")
+	if createtext != "" {
+		createlines := ListStringFromStringSplit(createtext, "\n")
+		isoverride := false
+		for _, createline := range createlines {
+			if (createline == "@Override") || (createline == "// :implements") {
+				isoverride = true
+			} else if isoverride {
+				ipos1 := 0
+				if BooleanFromStringStarts(createline, "override ") {
+					ipos1 += 9
+				}
+				ipos2 := IntFromStringFindLast(createline, "{")
+				createline = createline[ipos1:ipos2-1] + lang.lineend
+				basics += "\n    " + createline
+				isoverride = false
+			}
+		}
+	}
+	switch NameFromType(typ) {
+	case "vx/core/any":
+		funcvxtypedef := NewFunc()
+		funcvxtypedef.name = "vx_typedef"
+		funcvxtypedef.vxtype = typedeftype
+		funcvxconstdef := NewFunc()
+		funcvxconstdef.name = "vx_constdef"
+		funcvxconstdef.vxtype = constdeftype
+		funcvxdispose := NewFunc()
+		funcvxdispose.name = "vx_dispose"
+		funcvxdispose.vxtype = rawlistanytype
+		funcvxrelease := NewFunc()
+		funcvxrelease.name = "vx_release"
+		funcvxrelease.vxtype = rawbooltype
+		funcvxreserve := NewFunc()
+		funcvxreserve.name = "vx_reserve"
+		funcvxreserve.vxtype = nonetype
+		output = "" +
+			LangTypeInterfaceHeader(lang, anytype, emptylisttype, 1,
+				basics+
+					LangFuncHeaderOld(lang, typename, funcvxtypedef, true, false)+
+					LangFuncHeaderOld(lang, typename, funcvxconstdef, true, false)+
+					LangFuncHeaderOld(lang, typename, funcvxdispose, true, false)+
+					LangTypeVxMsgblock(lang, typ, true)+
+					LangFuncHeaderOld(lang, typename, funcvxrelease, true, false)+
+					LangFuncHeaderOld(lang, typename, funcvxreserve, true, false))
+	case "vx/core/boolean":
+		output = "" +
+			LangTypeInterfaceHeader(lang, booleantype, []*vxtype{anytype}, 1, basics)
+	case "vx/core/decimal":
+		output = "" +
+			LangTypeInterfaceHeader(lang, decimaltype, []*vxtype{numbertype}, 1, basics)
+	case "vx/core/float":
+		output = "" +
+			LangTypeInterfaceHeader(lang, floattype, []*vxtype{numbertype}, 1, basics)
+	case "vx/core/func":
+		output = "" +
+			LangTypeInterfaceHeader(lang, functype, []*vxtype{anytype}, 1,
+				basics+
+					LangTypeVxFuncdef(lang, typ, true))
+	case "vx/core/int":
+		output = "" +
+			LangTypeInterfaceHeader(lang, inttype, []*vxtype{numbertype}, 1, basics)
+	case "vx/core/string":
+		output = "" +
+			LangTypeInterfaceHeader(lang, stringtype, []*vxtype{anytype}, 1, basics)
+	case "vx/core/list":
+		funcvxlist := NewFunc()
+		funcvxlist.name = "vx_list"
+		funcvxlist.vxtype = rawlistanytype
+		argindex := NewArg("index")
+		argindex.vxtype = inttype
+		arglist := NewListArg()
+		arglist = append(arglist, argindex)
+		funcvxany := NewFunc()
+		funcvxany.name = "vx_any"
+		funcvxany.vxtype = anytype
+		funcvxany.listarg = arglist
+		output = "" +
+			LangTypeInterfaceHeader(lang, listtype, []*vxtype{anytype}, 1,
+				basics+
+					LangFuncHeaderInterface(lang, typename, funcvxlist, 2)+
+					LangFuncHeaderInterface(lang, typename, funcvxany, 2))
+	case "vx/core/map":
+		argindex := NewArg("key")
+		argindex.vxtype = stringtype
+		arglist := NewListArg()
+		arglist = append(arglist, argindex)
+		funcvxany := NewFunc()
+		funcvxany.name = "vx_any"
+		funcvxany.vxtype = anytype
+		funcvxany.listarg = arglist
+		funcvxmap := NewFunc()
+		funcvxmap.name = "vx_map"
+		funcvxmap.vxtype = rawmapanytype
+		argmapval := NewArg("mapval")
+		argmapval.vxtype = rawmapanytype
+		arglist = NewListArg()
+		arglist = append(arglist, argmapval)
+		funcvxnewfrommap := NewFunc()
+		funcvxnewfrommap.name = "vx_new_from_map"
+		funcvxnewfrommap.vxtype = maptype
+		funcvxnewfrommap.listarg = arglist
+		argname := NewArg("name")
+		argname.vxtype = stringtype
+		argvalue := NewArg("value")
+		argvalue.vxtype = anytype
+		arglist = NewListArg()
+		arglist = append(arglist, argname)
+		arglist = append(arglist, argvalue)
+		funcvxset := NewFunc()
+		funcvxset.name = "vx_set"
+		funcvxset.vxtype = booleantype
+		funcvxset.listarg = arglist
+		output = "" +
+			LangTypeInterfaceHeader(lang, maptype, []*vxtype{anytype}, 1,
+				basics+
+					LangFuncHeaderInterface(lang, typename, funcvxnewfrommap, 2)+
+					LangFuncHeaderInterface(lang, typename, funcvxany, 2)+
+					LangFuncHeaderInterface(lang, typename, funcvxmap, 2)+
+					LangFuncHeaderInterface(lang, typename, funcvxset, 2))
+	case "vx/core/struct":
+		argindex := NewArg("key")
+		argindex.vxtype = stringtype
+		arglist := NewListArg()
+		arglist = append(arglist, argindex)
+		funcvxany := NewFunc()
+		funcvxany.name = "vx_any"
+		funcvxany.vxtype = anytype
+		funcvxany.listarg = arglist
+		funcvxmap := NewFunc()
+		funcvxmap.name = "vx_map"
+		funcvxmap.vxtype = rawmapanytype
+		output = "" +
+			LangTypeInterfaceHeader(lang, structtype, []*vxtype{anytype}, 1,
+				basics+
+					LangFuncHeaderInterface(lang, typename, funcvxany, 2)+
+					LangFuncHeaderInterface(lang, typename, funcvxmap, 2))
+	default:
+		extras := ""
+		var extends []*vxtype
+		switch typ.extends {
+		case "boolean":
+			extends = append(extends, booleantype)
+		case "decimal":
+			extends = append(extends, decimaltype)
+		case "float":
+			extends = append(extends, floattype)
+		case "int":
+			extends = append(extends, inttype)
+		case "string":
+			extends = append(extends, stringtype)
+		case ":list":
+			extends = append(extends, listtype)
+			allowtypes := ListAllowTypeFromType(typ)
+			if len(allowtypes) > 0 {
+				allowtype := allowtypes[0]
+				allowname := LangNameFromType(lang, allowtype)
+				if allowname != "any" {
+					argindex := NewArg("index")
+					argindex.vxtype = inttype
+					arglist := NewListArg()
+					arglist = append(arglist, argindex)
+					funcvxallow := NewFunc()
+					funcvxallow.name = LangFromName("vx_" + allowname)
+					funcvxallow.vxtype = allowtype
+					funcvxallow.listarg = arglist
+					funcvxlistallow := NewFunc()
+					funcvxlistallow.name = LangFromName("vx_list" + allowname)
+					funcvxlistallow.vxtype = NewTypeSubtype(rawlisttype, allowtype)
+					extras += "" +
+						LangFuncHeaderInterface(lang, typename, funcvxlistallow, 2) +
+						LangFuncHeaderInterface(lang, typename, funcvxallow, 2)
+				}
+			}
+		case ":map":
+			extends = append(extends, maptype)
+			allowtypes := ListAllowTypeFromType(typ)
+			if len(allowtypes) > 0 {
+				allowtype := allowtypes[0]
+				allowname := LangNameFromType(lang, allowtype)
+				if allowname != "any" {
+					argkey := NewArg("key")
+					argkey.vxtype = stringtype
+					arglist := NewListArg()
+					arglist = append(arglist, argkey)
+					funcvxallow := NewFunc()
+					funcvxallow.name = LangFromName("vx_" + allowname)
+					funcvxallow.vxtype = allowtype
+					funcvxallow.listarg = arglist
+					funcvxmapallow := NewFunc()
+					funcvxmapallow.name = LangFromName("vx_map" + allowname)
+					funcvxmapallow.vxtype = NewTypeSubtype(rawmaptype, allowtype)
+					extras += "" +
+						LangFuncHeaderInterface(lang, typename, funcvxmapallow, 2) +
+						LangFuncHeaderInterface(lang, typename, funcvxallow, 2)
+				}
+			}
+		case ":struct":
+			extends = append(extends, structtype)
+			if len(typ.traits) > 0 {
+				extends = append(extends, typ.traits...)
+			}
+			var typeproperties []vxarg
+			switch lang.name {
+			case "csharp", "kotlin", "swift":
+				typeproperties = typ.properties
+			default:
+				typeproperties = ListPropertyTraitFromType(typ)
+			}
+			for _, arg := range typeproperties {
+				funcvxprop := NewFunc()
+				funcvxprop.name = LangFromName(arg.alias)
+				funcvxprop.vxtype = arg.vxtype
+				extras += "" +
+					LangFuncHeaderOld(lang, typename, funcvxprop, true, false)
+			}
+		default:
+			extends = append(extends, anytype)
+		}
+		output = "" +
+			LangTypeInterfaceHeader(lang, typ, extends, 1,
+				basics+
+					extras)
+	}
+	return output
+}
+
+func LangTypeInterfaceHeader(
+	lang *vxlang,
+	typ *vxtype,
+	extendtypes []*vxtype,
+	indent int,
+	body string) string {
+	lineindent := LangIndent(lang, indent, true)
+	output := ""
+	extendtext := ""
+	var extendtexts []string
+	for _, extendtype := range extendtypes {
+		extendpart := LangTypeName(lang, extendtype)
+		extendtexts = append(extendtexts, extendpart)
+	}
+	extendtext = StringFromListStringJoin(extendtexts, ", ")
+	switch lang.name {
+	case "csharp":
+		if extendtext != "" {
+			extendtext = " : " + extendtext
+		}
+		output = lineindent + "public interface Type_" + LangNameFromType(lang, typ) + extendtext + " {" +
+			body +
+			lineindent + "}\n"
+	case "java":
+		if extendtext != "" {
+			extendtext = " extends " + extendtext
+		}
+		output = lineindent + "public interface Type_" + LangNameFromType(lang, typ) + extendtext + " {" +
+			body +
+			lineindent + "}\n"
+	case "kotlin":
+		if extendtext != "" {
+			extendtext = " : " + extendtext
+		}
+		output = lineindent + "interface Type_" + LangNameFromType(lang, typ) + extendtext + " {" +
+			body +
+			lineindent + "}\n"
+	}
+	return output
+}
+
+func LangTypeIntValNew(lang *vxlang, val int) string {
+	return LangPkgNameDot(lang, "vx/core") + "vx_new_int(" + StringFromInt(val) + ")"
+}
+
+func LangTypeListFromListType(lang *vxlang, listtype []*vxtype) string {
+	output := LangPkgNameDot(lang, "vx/core") + "e_typelist"
+	if len(listtype) > 0 {
+		var listtext []string
+		for _, typ := range listtype {
+			typetext := LangTypeT(lang, typ)
+			listtext = append(listtext, typetext)
+		}
+		output = "" +
+			LangPkgNameDot(lang, "vx/core") + "vx_new(" + LangPkgNameDot(lang, "vx/core") + "t_typelist, " + StringFromListStringJoin(listtext, ", ") + ")"
+	}
+	return output
+}
+
+func LangTypeName(lang *vxlang, typ *vxtype) string {
+	return LangNameTypeFromTypeSimple(lang, typ, false)
+}
+
+func LangTypeStringValNew(lang *vxlang, val string) string {
+	valstr := StringFromStringFindReplace(val, "\n", "\\n")
+	return LangPkgNameDot(lang, "vx/core") + "vx_new_string(\"" + valstr + "\")"
+}
+
+func LangTypeT(lang *vxlang, typ *vxtype) string {
+	return LangTypeTSimple(lang, typ, false)
+}
+
+func LangTypeTGeneric(
+	lang *vxlang,
+	typ *vxtype) string {
+	name := ""
+	if typ.isgeneric {
+		name = "generic_" + LangFromName(typ.name)
+	} else {
+		name = LangTypeT(lang, typ)
+	}
+	return name
+}
+
+func LangTypeTSimple(lang *vxlang, typ *vxtype, simple bool) string {
+	name := "t_" + LangTypeNameSimple(lang, typ, simple)
+	if typ.pkgname != "" {
+		name = LangNameFromPkgName(lang, typ.pkgname) + lang.pkgref + name
+	}
+	return name
+}
+
+func LangTypeVxAllowList(
+	lang *vxlang,
+	typ *vxtype,
+	isinterface bool) string {
+	output := ""
+	typename := LangNameFromType(lang, typ)
+	allowname := "any"
+	allowtypes := ListAllowTypeFromType(typ)
+	if len(allowtypes) > 0 {
+		allowtype := allowtypes[0]
+		allowname = LangNameFromType(lang, allowtype)
+		listarg := NewListArg()
+		argindex := NewArg("index")
+		argindex.vxtype = inttype
+		listarg = append(listarg, argindex)
+		funcvxallow := NewFunc()
+		funcvxallow.name = "vx_" + allowname
+		funcvxallow.vxtype = allowtype
+		funcvxallow.listarg = listarg
+		funcvxany := NewFunc()
+		funcvxany.name = "vx_any"
+		funcvxany.vxtype = anytype
+		funcvxany.listarg = listarg
+		funcvxlistallow := NewFunc()
+		funcvxlistallow.name = "vx_list" + allowname
+		funcvxlistallow.vxtype = NewTypeSubtype(rawlisttype, allowtype)
+		funcvxany.listarg = listarg
+		if isinterface {
+			output = LangFuncHeaderInterface(lang, typename, funcvxallow, 2)
+			if allowname != "any" {
+				output = LangFuncHeaderInterface(lang, typename, funcvxany, 2)
+			}
+		} else {
+			funcvxallow.isimplement = true
+			funcvxany.isimplement = true
+			funcvxlistallow.isimplement = true
+			output = "" +
+				LangFuncHeader(lang, typename, funcvxallow, 2, 0,
+					LangVar(lang, "output", allowtype, 3,
+						LangTypeE(lang, allowtype))+
+						LangVarClass(lang, "list", typ, 3, "this")+
+						LangVar(lang, "iindex", rawinttype, 3, "index.vx_int()")+
+						LangVarCollection(lang, "listval", rawlisttype, allowtype, 3,
+							"list.vx_p_list")+
+						"\n      if (iindex < "+LangVxListSize(lang, "listval")+") {"+
+						LangVarSet(lang, "output", 4, LangVxListGet(lang, "listval", "iindex"))+
+						"\n      }")
+		}
+		if allowname != "any" {
+			output += "" +
+				LangFuncHeader(lang, typename, funcvxlistallow, 2, 0,
+					LangVarCollection(lang, "output", rawlisttype, allowtype, 3,
+						"this.vx_p_list")) +
+				LangFuncHeader(lang, typename, funcvxany, 2, 0,
+					LangVar(lang, "output", allowtype, 3,
+						"this.vx_"+allowname+"(index)"))
+		}
+	}
+	return output
+}
+
+func LangTypeVxAllowMap(
+	lang *vxlang,
+	typ *vxtype,
+	isinterface bool) string {
+	output := ""
+	getorelse := ""
+	typename := LangNameFromType(lang, typ)
+	allowname := "any"
+	allowtype := anytype
+	allowtypes := ListAllowTypeFromType(typ)
+	if len(allowtypes) > 0 {
+		allowtype = allowtypes[0]
+		allowempty := LangTypeE(lang, allowtype)
+		switch lang.name {
+		case "csharp":
+			getorelse = "mapval.getOrElse(skey, " + LangTypeE(lang, allowtype) + ")"
+		case "java":
+			getorelse = "mapval.getOrDefault(skey, " + LangTypeE(lang, allowtype) + ")"
+		}
+		allowname = LangNameFromType(lang, allowtype)
+		argkey := NewArg("key")
+		argkey.vxtype = stringtype
+		listarg := NewListArg()
+		listarg = append(listarg, argkey)
+		funcvxallow := NewFunc()
+		funcvxallow.name = "vx_" + allowname
+		funcvxallow.vxtype = allowtype
+		funcvxallow.listarg = listarg
+		if isinterface {
+			output += LangFuncInterface(lang, funcvxallow)
+		} else {
+			funcvxallow.isimplement = true
+			output += "" +
+				LangFuncHeader(lang, typename, funcvxallow, 2, 0,
+					LangVar(lang, "output", allowtype, 3, allowempty)+
+						LangVarClass(lang, "map", typ, 3, "this")+
+						LangVar(lang, "skey", rawstringtype, 3, "key.vx_string()")+
+						LangVarCollection(lang, "mapval", rawmaptype, allowtype, 3, "map.vx_p_map")+
+						LangVarSet(lang, "output", 3, getorelse))
+		}
+	}
+	if allowname == "any" {
+	} else {
+		argkey := NewArg("key")
+		argkey.vxtype = stringtype
+		listarg := NewListArg()
+		listarg = append(listarg, argkey)
+		funcvxany := NewFunc()
+		funcvxany.name = "vx_any"
+		funcvxany.vxtype = anytype
+		funcvxany.listarg = listarg
+		funcvxmapallow := NewFunc()
+		funcvxmapallow.name = "vx_map" + allowname
+		funcvxmapallow.vxtype = NewTypeSubtype(rawmaptype, allowtype)
+		if isinterface {
+			output += "" +
+				LangFuncHeaderInterface(lang, typename, funcvxany, 2) +
+				LangFuncHeaderInterface(lang, typename, funcvxmapallow, 2)
+		} else {
+			funcvxmapallow.isimplement = true
+			funcvxany.isimplement = true
+			output += "" +
+				LangFuncHeader(lang, typename, funcvxmapallow, 2, 0,
+					LangVarCollection(lang, "output", rawmaptype, allowtype, 3, "this.vx_p_map")) +
+				LangFuncHeader(lang, typename, funcvxany, 2, 0,
+					LangVar(lang, "output", anytype, 3, "this.vx_"+allowname+"(key)")) +
+				"\n"
+		}
+	}
+	return output
+}
+
+func LangTypeVxCopy(
+	lang *vxlang,
+	typ *vxtype,
+	isinterface bool) string {
+	argvals := NewArg("vals")
+	argvals.vxtype = rawobjecttype
+	argvals.multi = true
+	argvals.isfinal = true
+	arglist := NewListArg()
+	arglist = append(arglist, argvals)
+	funcvxcopy := NewFunc()
+	funcvxcopy.name = "vx_copy"
+	funcvxcopy.vxtype = anytype
+	funcvxcopy.listarg = arglist
+	typename := LangNameFromType(lang, typ)
+	output := ""
+	if isinterface {
+		output = LangFuncHeaderInterface(lang, typename, funcvxcopy, 2)
+	} else {
+		typepath := NameFromType(typ)
+		valnew := ""
+		valcopy := "" +
+			LangVar(lang, "ischanged", rawbooltype, 3, "false") +
+			LangVarClass(lang, "value", typ, 3, "this") +
+			LangVar(lang, "msgblock", msgblocktype, 3,
+				LangPkgNameDot(lang, "vx/core")+"vx_msgblock_from_copy_arrayval(value, vals)") +
+			"\n      if (this.vx_constdef() != " + LangTypeE(lang, constdeftype) + ") {" +
+			LangVarSet(lang, "ischanged", 4, "true") +
+			"\n      }"
+		switch NameFromType(typ) {
+		case "vx/core/any":
+			valnew += "" +
+				LangForList(lang, "valsub", rawobjecttype, "vals", 3,
+					"\n        if ("+LangIsType(lang, "valsub", msgblocktype)+") {"+
+						"\n          msgblock = "+LangPkgNameDot(lang, "vx/core")+"vx_copy(msgblock, valsub)"+lang.lineend+
+						"\n        } else if ("+LangIsType(lang, "valsub", msgtype)+") {"+
+						"\n          msgblock = "+LangPkgNameDot(lang, "vx/core")+"vx_copy(msgblock, valsub)"+lang.lineend+
+						"\n        }") +
+				"\n      if (ischanged || (msgblock != " + LangTypeE(lang, msgblocktype) + ")) {" +
+				LangVarClass(lang, "work", anytype, 4, ":new") +
+				"\n        if (msgblock != " + LangTypeE(lang, msgblocktype) + ") {" +
+				"\n          work.vxmsgblock = msgblock" + lang.lineend +
+				"\n        }" +
+				"\n        output = work" + lang.lineend +
+				"\n      }"
+		case "vx/core/anytype":
+		case "vx/core/const":
+		case "vx/core/list":
+		case "vx/core/map":
+		case "vx/core/struct":
+		case "vx/core/func":
+		case "vx/core/type":
+		case "vx/core/boolean":
+			valcopy += "" +
+				LangVar(lang, "booleanval", rawbooltype, 3, "value.vx_boolean()")
+			valnew = "" +
+				LangForList(lang, "valsub", rawobjecttype, "vals", 3,
+					"\n        if ("+LangIsType(lang, "valsub", msgblocktype)+") {"+
+						"\n          msgblock = "+LangPkgNameDot(lang, "vx/core")+"vx_copy(msgblock, valsub)"+lang.lineend+
+						"\n        } else if ("+LangIsType(lang, "valsub", msgtype)+") {"+
+						"\n          msgblock = "+LangPkgNameDot(lang, "vx/core")+"vx_copy(msgblock, valsub)"+lang.lineend+
+						LangElseIfType(lang, booleantype, emptytype, "valsub", "valboolean", 4, false)+
+						"\n          booleanval = booleanval || valboolean.vx_boolean()"+lang.lineend+
+						LangElseIfType(lang, rawbooleantype, emptytype, "valsub", "issubval", 4, false)+
+						"\n          booleanval = booleanval || issubval"+lang.lineend+
+						"\n        }") +
+				"\n      if (ischanged || (msgblock != " + LangTypeE(lang, msgblocktype) + ")) {" +
+				LangVarClass(lang, "work", booleantype, 4, ":new") +
+				"\n        work.vxboolean = booleanval" + lang.lineend +
+				"\n        if (msgblock != " + LangTypeE(lang, msgblocktype) + ") {" +
+				"\n          work.vxmsgblock = msgblock" + lang.lineend +
+				"\n        }" +
+				"\n        output = work" + lang.lineend +
+				"\n      } else if (booleanval) {" +
+				"\n        output = " + LangPkgNameDot(lang, "vx/core") + "c_true" + lang.lineend +
+				"\n      } else {" +
+				"\n        output = " + LangPkgNameDot(lang, "vx/core") + "c_false" + lang.lineend +
+				"\n      }"
+		case "vx/core/decimal":
+			valcopy += "" +
+				"\n      " + LangTypeName(lang, rawstringtype) + " sval = value.vx_string()" + lang.lineend
+			valnew = "" +
+				LangForListHeader(lang, "valsub", rawobjecttype, "vals", 3) +
+				"\n        if (" + LangIsType(lang, "valsub", msgblocktype) + ") {" +
+				"\n          msgblock = " + LangPkgNameDot(lang, "vx/core") + "vx_copy(msgblock, valsub)" + lang.lineend +
+				"\n        } else if (" + LangIsType(lang, "valsub", msgtype) + ") {" +
+				"\n          msgblock = " + LangPkgNameDot(lang, "vx/core") + "vx_copy(msgblock, valsub)" + lang.lineend +
+				LangElseIfType(lang, stringtype, emptytype, "valsub", "valstring", 4, false) +
+				"\n          ischanged = true" + lang.lineend +
+				"\n          sval = valstring.vx_string()" + lang.lineend +
+				LangElseIfType(lang, rawstringtype, emptytype, "valsub", "svalsub", 4, false) +
+				"\n          ischanged = true" + lang.lineend +
+				"\n          sval = svalsub" + lang.lineend +
+				"\n        }" +
+				"\n      }" +
+				"\n      if (ischanged || (msgblock != " + LangTypeE(lang, msgblocktype) + ")) {" +
+				LangVarClass(lang, "work", decimaltype, 4, ":new") +
+				"\n        work.vxdecimal = sval" + lang.lineend +
+				"\n        if (msgblock != " + LangTypeE(lang, msgblocktype) + ") {" +
+				"\n          work.vxmsgblock = msgblock" + lang.lineend +
+				"\n        }" +
+				"\n        output = work" + lang.lineend +
+				"\n      }"
+		case "vx/core/float":
+			valcopy += "" +
+				"\n      float floatval = value.vx_float()" + lang.lineend
+			valnew = "" +
+				LangForListHeader(lang, "valsub", rawobjecttype, "vals", 3) +
+				"\n        if (" + LangIsType(lang, "valsub", msgblocktype) + ") {" +
+				"\n          msgblock = " + LangPkgNameDot(lang, "vx/core") + "vx_copy(msgblock, valsub)" + lang.lineend +
+				"\n        } else if (" + LangIsType(lang, "valsub", msgtype) + ") {" +
+				"\n          msgblock = " + LangPkgNameDot(lang, "vx/core") + "vx_copy(msgblock, valsub)" + lang.lineend +
+				LangElseIfType(lang, decimaltype, emptytype, "valsub", "valdecimal", 4, false) +
+				"\n          ischanged = true" + lang.lineend +
+				"\n          floatval += valdecimal.vx_float()" + lang.lineend +
+				LangElseIfType(lang, floattype, emptytype, "valsub", "valfloat", 4, false) +
+				"\n          ischanged = true" + lang.lineend +
+				"\n          floatval += valfloat.vx_float()" + lang.lineend +
+				LangElseIfType(lang, inttype, emptytype, "valsub", "valint", 4, false) +
+				"\n          ischanged = true" + lang.lineend +
+				"\n          floatval += valint.vx_int()" + lang.lineend +
+				LangElseIfType(lang, stringtype, emptytype, "valsub", "valstring", 4, false) +
+				"\n          ischanged = true" + lang.lineend +
+				"\n          floatval += " + LangVxFloatFromString(lang, "valstring.vx_string()") + lang.lineend +
+				LangElseIfType(lang, rawfloattype, emptytype, "valsub", "fval", 4, false) +
+				"\n          ischanged = true" + lang.lineend +
+				"\n          floatval += fval" + lang.lineend +
+				LangElseIfType(lang, rawintegertype, emptytype, "valsub", "ival", 4, false) +
+				"\n          ischanged = true" + lang.lineend +
+				"\n          floatval += ival" + lang.lineend +
+				LangElseIfType(lang, rawstringtype, emptytype, "valsub", "sval", 4, false) +
+				"\n          ischanged = true" + lang.lineend +
+				"\n          floatval += " + LangVxFloatFromString(lang, "sval") + lang.lineend +
+				"\n        }" +
+				"\n      }" +
+				"\n      if (ischanged || (msgblock != " + LangTypeE(lang, msgblocktype) + ")) {" +
+				LangVarClass(lang, "work", floattype, 4, ":new") +
+				"\n        work.vxfloat = floatval" + lang.lineend +
+				"\n        if (msgblock != " + LangTypeE(lang, msgblocktype) + ") {" +
+				"\n          work.vxmsgblock = msgblock" + lang.lineend +
+				"\n        }" +
+				"\n        output = work" + lang.lineend +
+				"\n      }"
+		case "vx/core/int":
+			valcopy += "" +
+				"\n      int intval = value.vx_int()" + lang.lineend
+			valnew = "" +
+				LangForList(lang, "valsub", rawobjecttype, "vals", 3,
+					"\n        if ("+LangIsType(lang, "valsub", msgblocktype)+") {"+
+						"\n          msgblock = "+LangPkgNameDot(lang, "vx/core")+"vx_copy(msgblock, valsub)"+lang.lineend+
+						"\n        } else if ("+LangIsType(lang, "valsub", msgtype)+") {"+
+						"\n          msgblock = "+LangPkgNameDot(lang, "vx/core")+"vx_copy(msgblock, valsub)"+lang.lineend+
+						LangElseIfType(lang, inttype, emptytype, "valsub", "valint", 4, false)+
+						"\n          ischanged = true"+lang.lineend+
+						"\n          intval += valint.vx_int()"+lang.lineend+
+						LangElseIfType(lang, rawintegertype, emptytype, "valsub", "ival", 4, false)+
+						"\n          ischanged = true"+lang.lineend+
+						"\n          intval += ival"+lang.lineend+
+						LangElseIfType(lang, rawstringtype, emptytype, "valsub", "sval", 4, false)+
+						"\n          ischanged = true"+lang.lineend+
+						"\n          intval += "+LangVxIntFromString(lang, "sval")+lang.lineend+
+						"\n        }") +
+				"\n      if (ischanged || (msgblock != " + LangTypeE(lang, msgblocktype) + ")) {" +
+				LangVarClass(lang, "work", inttype, 4, ":new") +
+				"\n        work.vxint = intval" + lang.lineend +
+				"\n        if (msgblock != " + LangTypeE(lang, msgblocktype) + ") {" +
+				"\n          work.vxmsgblock = msgblock" + lang.lineend +
+				"\n        }" +
+				"\n        output = work" + lang.lineend +
+				"\n      }"
+		case "vx/core/msg":
+		case "vx/core/msgblock":
+		case "vx/core/string":
+			vxappend := ""
+			switch lang.name {
+			case "csharp":
+				vxappend = ".Append"
+				valcopy += "" +
+					"\n      System.Text.StringBuilder sb = new System.Text.StringBuilder(value.vx_string())" + lang.lineend
+			case "java":
+				vxappend = ".append"
+				valcopy += "" +
+					"\n      StringBuilder sb = new StringBuilder(value.vx_string())" + lang.lineend
+			case "kotlin":
+				vxappend = ".append"
+				valcopy += "" +
+					"\n      var sb : kotlin.text.StringBuilder = StringBuilder(value.vx_string())"
+			}
+			valnew = "" +
+				"\n      " + LangPkgNameDot(lang, "vx/core") + "Type_msg msg" + lang.lineend +
+				LangForList(lang, "valsub", rawobjecttype, "vals", 3,
+					"\n        if ("+LangIsType(lang, "valsub", msgblocktype)+") {"+
+						"\n          msgblock = "+LangPkgNameDot(lang, "vx/core")+"vx_copy(msgblock, valsub)"+lang.lineend+
+						"\n        } else if ("+LangIsType(lang, "valsub", msgtype)+") {"+
+						"\n          msgblock = "+LangPkgNameDot(lang, "vx/core")+"vx_copy(msgblock, valsub)"+lang.lineend+
+						LangElseIfType(lang, stringtype, emptytype, "valsub", "valstring", 4, false)+
+						LangVar(lang, "ssub", rawstringtype, 5, "valstring.vx_string()")+
+						"\n          if ("+LangVxEqualsString(lang, "ssub", "\"\"")+") {"+
+						"\n          } else {"+
+						LangVarSet(lang, "ischanged", 6, "true")+
+						"\n            sb"+vxappend+"(ssub)"+lang.lineend+
+						"\n          }"+
+						LangElseIfType(lang, inttype, emptytype, "valsub", "valint", 4, false)+
+						LangVarSet(lang, "ischanged", 5, "true")+
+						"\n          sb"+vxappend+"(valint.vx_int())"+lang.lineend+
+						LangElseIfType(lang, floattype, emptytype, "valsub", "valfloat", 4, false)+
+						LangVarSet(lang, "ischanged", 5, "true")+
+						"\n          sb"+vxappend+"(valfloat.vx_float())"+lang.lineend+
+						LangElseIfType(lang, decimaltype, emptytype, "valsub", "valdecimal", 4, false)+
+						LangVarSet(lang, "ischanged", 5, "true")+
+						"\n          sb"+vxappend+"(valdecimal.vx_string())"+lang.lineend+
+						LangElseIfType(lang, rawstringtype, emptytype, "valsub", "sval", 4, false)+
+						"\n          if ("+LangVxEqualsString(lang, "sval", "\"\"")+") {"+
+						"\n          } else {"+
+						LangVarSet(lang, "ischanged", 6, "true")+
+						"\n            sb"+vxappend+"(sval)"+lang.lineend+
+						"\n          }"+
+						LangElseIfType(lang, rawintegertype, emptytype, "valsub", "ival", 4, false)+
+						LangVarSet(lang, "ischanged", 5, "true")+
+						"\n          sb"+vxappend+"(ival)"+lang.lineend+
+						LangElseIfType(lang, rawfloattype, emptytype, "valsub", "fval", 4, false)+
+						"\n          ischanged = true"+lang.lineend+
+						"\n          sb"+vxappend+"(fval)"+lang.lineend+
+						LangElseIfType(lang, anytype, emptytype, "valsub", "anysub", 4, false)+
+						"\n          msg = "+LangPkgNameDot(lang, "vx/core")+"vx_msg_from_error(\""+typepath+"\", \":invalidtype\", anysub)"+lang.lineend+
+						"\n          msgblock = "+LangPkgNameDot(lang, "vx/core")+"vx_copy(msgblock, msg)"+lang.lineend+
+						"\n        } else {"+
+						"\n          msg = "+LangPkgNameDot(lang, "vx/core")+"vx_msg_from_error(\""+typepath+"\", \":invalidtype\", "+LangPkgNameDot(lang, "vx/core")+"vx_new_string("+LangVxToString(lang, "valsub")+"))"+lang.lineend+
+						"\n          msgblock = "+LangPkgNameDot(lang, "vx/core")+"vx_copy(msgblock, msg)"+lang.lineend+
+						"\n        }") +
+				"\n      if (ischanged || (msgblock != " + LangTypeE(lang, msgblocktype) + ")) {" +
+				LangVar(lang, "vxstring", rawstringtype, 4,
+					LangVxToString(lang, "sb")) +
+				LangVarClass(lang, "work", stringtype, 4, ":new") +
+				"\n        work.vxstring = vxstring" + lang.lineend +
+				"\n        if (msgblock != " + LangTypeE(lang, msgblocktype) + ") {" +
+				"\n          work.vxmsgblock = msgblock" + lang.lineend +
+				"\n        }" +
+				"\n        output = work" + lang.lineend +
+				"\n      }"
+		}
+		switch typ.extends {
+		case ":list":
+			allowtype := anytype
+			allowname := "any"
+			allowclass := LangTypeName(lang, anytype)
+			allowtypes := ListAllowTypeFromType(typ)
+			if len(allowtypes) > 0 {
+				allowtype = allowtypes[0]
+				allowclass = LangNameTypeFullFromType(lang, allowtype)
+				allowname = LangNameFromType(lang, allowtype)
+			}
+			if allowname == "any" {
+				allowname = ""
+			}
+			valcopy += "" +
+				LangVarCollection(lang, "listval", rawlisttype, allowtype, 3,
+					LangVxNewList(lang, allowtype, "value.vx_list"+allowname+"()"))
+			switch typ.name {
+			case "msgblocklist":
+				valnew = "" +
+					LangVar(lang, "msg", msgtype, 3, "") +
+					LangForListHeader(lang, "valsub", rawobjecttype, "vals", 3) +
+					"\n        if (" + LangIsType(lang, "valsub", msgtype) + ") {" +
+					LangVarSet(lang, "msgblock", 5,
+						LangPkgNameDot(lang, "vx/core")+"vx_copy(msgblock, valsub)")
+			case "msglist":
+				valnew = "" +
+					LangVar(lang, "msg", msgtype, 3, "") +
+					LangForListHeader(lang, "valsub", rawobjecttype, "vals", 3) +
+					"\n        if (" + LangIsType(lang, "valsub", msgblocktype) + ") {" +
+					LangVarSet(lang, "msgblock", 5,
+						LangPkgNameDot(lang, "vx/core")+"vx_copy(msgblock, valsub)")
+			default:
+				valnew = "" +
+					LangVar(lang, "msg", msgtype, 3, "") +
+					LangForListHeader(lang, "valsub", rawobjecttype, "vals", 3) +
+					"\n        if (" + LangIsType(lang, "valsub", msgblocktype) + ") {" +
+					LangVarSet(lang, "msgblock", 5,
+						LangPkgNameDot(lang, "vx/core")+"vx_copy(msgblock, valsub)") +
+					"\n        } else if (" + LangIsType(lang, "valsub", msgtype) + ") {" +
+					LangVarSet(lang, "msgblock", 5,
+						LangPkgNameDot(lang, "vx/core")+"vx_copy(msgblock, valsub)") +
+					LangElseIfType(lang, allowtype, emptytype, "valsub", "allowsub", 4, false) +
+					"\n          ischanged = true" + lang.lineend +
+					"\n          " + LangVxListAdd(lang, "listval", "allowsub") + lang.lineend
+			}
+			for _, allowedtype := range typ.allowtypes {
+				allowedtypename := LangTypeName(lang, allowedtype)
+				castval := "(" + allowedtypename + ")valsub"
+				if allowedtypename == allowclass {
+					switch NameFromType(allowedtype) {
+					case "vx/core/boolean":
+						switch lang.name {
+						case "csharp":
+							allowedtypename = "bool"
+						case "java":
+							allowedtypename = "Boolean"
+						}
+						castval = LangPkgNameDot(lang, "vx/core") + "vx_new(" + LangTypeT(lang, booleantype) + ", valsub)"
+					case "vx/core/int":
+						switch lang.name {
+						case "csharp":
+							allowedtypename = "int"
+						default:
+							allowedtypename = "Integer"
+						}
+						castval = LangPkgNameDot(lang, "vx/core") + "vx_new(" + LangTypeT(lang, inttype) + ", valsub)"
+					case "vx/core/float":
+						switch lang.name {
+						case "csharp":
+							allowedtypename = "float"
+						default:
+							allowedtypename = "Float"
+						}
+						castval = LangPkgNameDot(lang, "vx/core") + "vx_new(" + LangTypeT(lang, floattype) + ", valsub)"
+					case "vx/core/string":
+						switch lang.name {
+						case "cpp":
+							allowedtypename = "std::string"
+						case "csharp":
+							allowedtypename = "string"
+						default:
+							allowedtypename = "String"
+						}
+						castval = LangPkgNameDot(lang, "vx/core") + "vx_new(" + LangTypeT(lang, stringtype) + ", valsub)"
+					}
+				}
+				if allowedtypename == "" {
+				} else if allowedtype.name == "any" {
+				} else {
+					valnew += "" +
+						"\n        } else if (" + LangIsTypeText(lang, "valsub", allowedtypename) + ") {" +
+						LangVarSet(lang, "ischanged", 5, "true") +
+						"\n          " + LangVxListAdd(lang, "listval", castval) + lang.lineend
+				}
+			}
+			elseiflistany := ""
+			switch lang.name {
+			case "csharp":
+				elseiflistany = "" +
+					LangElseIfType(lang, rawlistanytype, emptytype, "valsub", "listany", 4, false) +
+					LangForListHeader(lang, "item", anytype, "listany", 5) +
+					"\n            if (false) {" +
+					LangElseIfType(lang, allowtype, emptytype, "item", "valitem", 6, false) +
+					LangVarSet(lang, "ischanged", 7, "true") +
+					"\n              " + LangVxListAdd(lang, "listval", "valitem") + lang.lineend +
+					"\n            }" +
+					"\n          }"
+			case "java":
+				elseiflistany = "" +
+					LangElseIfType(lang, rawlistunknowntype, emptytype, "valsub", "listunknown", 4, false) +
+					LangForListHeader(lang, "item", rawobjecttype, "listunknown", 5) +
+					"\n            if (false) {" +
+					LangElseIfType(lang, allowtype, emptytype, "item", "valitem", 6, false) +
+					LangVarSet(lang, "ischanged", 7, "true") +
+					"\n              " + LangVxListAdd(lang, "listval", "valitem") + lang.lineend +
+					"\n            }" +
+					"\n          }"
+			}
+			valnew += "" +
+				LangElseIfType(lang, typ, emptytype, "valsub", "multi", 4, false) +
+				LangVarSet(lang, "ischanged", 5, "true") +
+				"\n          " + LangVxListAddList(lang, "listval", "multi.vx_list"+allowname+"()") + lang.lineend +
+				elseiflistany +
+				LangElseIfType(lang, anytype, emptytype, "valsub", "anyinvalid", 4, false) +
+				LangVarSet(lang, "msg", 5,
+					LangPkgNameDot(lang, "vx/core")+
+						"vx_msg_from_error(\""+
+						typepath+
+						"\", \":invalidtype\", anyinvalid)") +
+				LangVarSet(lang, "msgblock", 5,
+					LangPkgNameDot(lang, "vx/core")+
+						"vx_copy(msgblock, msg)") +
+				"\n        } else {" +
+				LangVarSet(lang, "msg", 5,
+					LangPkgNameDot(lang, "vx/core")+
+						"vx_msg_from_error(\""+
+						typepath+
+						"\", \":invalidtype\", "+
+						LangPkgNameDot(lang, "vx/core")+
+						"vx_new_string("+
+						LangVxToString(lang, "valsub")+
+						"))") +
+				LangVarSet(lang, "msgblock", 5,
+					LangPkgNameDot(lang, "vx/core")+
+						"vx_copy(msgblock, msg)") +
+				"\n        }" +
+				"\n      }" +
+				"\n      if (ischanged || (msgblock != " + LangTypeE(lang, msgblocktype) + ")) {" +
+				LangVarClass(lang, "work", typ, 4, ":new") +
+				"\n        work.vx_p_list = " + LangPkgNameDot(lang, "vx/core") + "immutablelist(listval)" + lang.lineend +
+				"\n        if (msgblock != " + LangTypeE(lang, msgblocktype) + ") {" +
+				"\n          work.vxmsgblock = msgblock" + lang.lineend +
+				"\n        }" +
+				LangVarSet(lang, "output", 4, "work") +
+				"\n      }"
+			if len(typ.allowtypes) == 0 && len(typ.allowfuncs) == 0 && len(typ.allowvalues) == 0 {
+				MsgLog("Missing allowed types", typ.name)
+			}
+		case ":map":
+			allowtype := anytype
+			allowname := "any"
+			allowclass := LangTypeName(lang, anytype)
+			allowtypes := ListAllowTypeFromType(typ)
+			if len(allowtypes) > 0 {
+				allowtype = allowtypes[0]
+				allowclass = LangNameTypeFullFromType(lang, allowtype)
+				allowname = LangNameFromType(lang, allowtype)
+			}
+			if allowname == "any" {
+				allowname = ""
+			}
+			valcopy += "" +
+				LangVarCollection(lang, "mapval", rawmaptype, allowtype, 3,
+					LangVxNewMap(lang, allowtype, "value.vx_map"+allowname+"()"))
+			valnew = "" +
+				LangVar(lang, "msg", msgtype, 3, "null") +
+				LangVar(lang, "key", rawstringtype, 3, "\"\"") +
+				LangVar(lang, "msgval", anytype, 3, "null") +
+				LangForListHeader(lang, "valsub", rawobjecttype, "vals", 3) +
+				"\n        if (" + LangIsType(lang, "valsub", msgblocktype) + ") {" +
+				LangVarSet(lang, "msgblock", 5,
+					LangPkgNameDot(lang, "vx/core")+"vx_copy(msgblock, valsub)") +
+				"\n        } else if (" + LangIsType(lang, "valsub", msgtype) + ") {" +
+				LangVarSet(lang, "msgblock", 5,
+					LangPkgNameDot(lang, "vx/core")+"vx_copy(msgblock, valsub)") +
+				"\n        } else if (" + LangVxEqualsString(lang, "key", "\"\"") + ") {" +
+				"\n          if (false) {" +
+				LangElseIfType(lang, stringtype, emptytype, "valsub", "valstring", 5, false) +
+				LangVarSet(lang, "key", 6, "valstring.vx_string()") +
+				LangElseIfType(lang, rawstringtype, emptytype, "valsub", "sval", 5, false) +
+				LangVarSet(lang, "key", 6, "sval") +
+				"\n          } else {" +
+				"\n            if (false) {" +
+				LangElseIfType(lang, anytype, emptytype, "valsub", "valinvalid", 6, false) +
+				LangVarSet(lang, "msgval", 7, "valinvalid") +
+				"\n            } else {" +
+				LangVarSet(lang, "msgval", 7,
+					LangPkgNameDot(lang, "vx/core")+"vx_new_string("+LangVxToString(lang, "valsub")+")") +
+				"\n            }" +
+				LangVarSet(lang, "msg", 6,
+					LangPkgNameDot(lang, "vx/core")+
+						"vx_msg_from_error(\""+
+						typepath+
+						"\", \":keyexpected\", msgval)") +
+				LangVarSet(lang, "msgblock", 6,
+					LangPkgNameDot(lang, "vx/core")+
+						"vx_copy(msgblock, msg)") +
+				"\n          }" +
+				"\n        } else {" +
+				LangVar(lang, "valany", allowtype, 5, "null") +
+				"\n          if (false) {" +
+				LangElseIfType(lang, allowtype, emptytype, "valsub", "valallowed", 5, false) +
+				LangVarSet(lang, "valany", 6, "valallowed")
+			for _, allowedtype := range typ.allowtypes {
+				allowedtypename := LangTypeName(lang, allowedtype)
+				castval := LangAsType(lang, "valsub", allowedtype)
+				if allowedtypename == allowclass {
+					switch NameFromType(allowedtype) {
+					case "vx/core/boolean":
+						allowedtype = rawbooltype
+						castval = LangPkgNameDot(lang, "vx/core") + "vx_new(" + LangTypeT(lang, booleantype) + ", valsub)"
+					case "vx/core/int":
+						allowedtype = rawintegertype
+						castval = LangPkgNameDot(lang, "vx/core") + "vx_new(" + LangTypeT(lang, inttype) + ", valsub)"
+					case "vx/core/float":
+						allowedtype = rawfloattype
+						castval = LangPkgNameDot(lang, "vx/core") + "vx_new(" + LangTypeT(lang, floattype) + ", valsub)"
+					case "vx/core/string":
+						allowedtype = rawstringtype
+						castval = LangPkgNameDot(lang, "vx/core") + "vx_new(" + LangTypeT(lang, stringtype) + ", valsub)"
+					}
+				}
+				if allowedtypename != "" {
+					valnew += "" +
+						//	LangElseIfType(lang, allowedtype, emptytype, "valsub", "valany", 5, false)
+						"\n          } else if (" + LangIsType(lang, "valsub", allowedtype) + ") {" +
+						LangVarSet(lang, "valany", 6, castval)
+				}
+			}
+			valnew += "" +
+				"\n          } else {" +
+				"\n            if (false) {" +
+				LangElseIfType(lang, anytype, emptytype, "valsub", "valinvalid", 6, false) +
+				LangVarSet(lang, "msgval", 7, "valinvalid") +
+				"\n            } else {" +
+				LangVarSet(lang, "msgval", 7, LangPkgNameDot(lang, "vx/core")+"vx_new_string("+LangVxToString(lang, "valsub")+")") +
+				"\n            }" +
+				LangVarCollection(lang, "mapany", rawmaptype, anytype, 6, LangVxNewMap(lang, anytype, "")) +
+				"\n            mapany.put(\"key\", " + LangPkgNameDot(lang, "vx/core") + "vx_new_string(key))" + lang.lineend +
+				"\n            mapany.put(\"value\", msgval)" + lang.lineend +
+				LangVar(lang, "msgmap", maptype, 6,
+					LangTypeT(lang, anymaptype)+".vx_new_from_map(mapany)") +
+				LangVarSet(lang, "msg", 6,
+					LangPkgNameDot(lang, "vx/core")+
+						"vx_msg_from_error(\""+
+						typepath+"\", \":invalidkeyvalue\", msgmap)") +
+				LangVarSet(lang, "msgblock", 6,
+					LangPkgNameDot(lang, "vx/core")+"vx_copy(msgblock, msg)") +
+				"\n          }" +
+				"\n          if (valany != null) {" +
+				LangVarSet(lang, "ischanged", 6, "true") +
+				"\n            if (" + LangVxStartswith(lang, "key", "\":\"") + ") {" +
+				LangVarSet(lang, "key", 7,
+					LangVxSubstring(lang, "key", "1", "")) +
+				"\n            }" +
+				"\n            mapval.put(key, valany)" + lang.lineend +
+				LangVarSet(lang, "key", 6, "\"\"") +
+				"\n          }" +
+				"\n        }" +
+				"\n      }" +
+				"\n      if (ischanged || (msgblock != " + LangTypeE(lang, msgblocktype) + ")) {" +
+				LangVarClass(lang, "work", typ, 4, ":new") +
+				"\n        work.vx_p_map = " + LangPkgNameDot(lang, "vx/core") + "immutablemap(mapval)" + lang.lineend +
+				"\n        if (msgblock != " + LangTypeE(lang, msgblocktype) + ") {" +
+				"\n          work.vxmsgblock = msgblock" + lang.lineend +
+				"\n        }" +
+				LangVarSet(lang, "output", 4, "work") +
+				"\n      }"
+			if len(typ.allowtypes) == 0 && len(typ.allowfuncs) == 0 && len(typ.allowvalues) == 0 {
+				MsgLog("Missing allowed types", typ.name)
+			}
+		case ":struct":
+			vx_any := ""
+			valcopyend := ""
+			switch NameFromType(typ) {
+			case "vx/core/msg":
+				valcopy = "" +
+					LangVar(lang, "ischanged", rawbooltype, 3, "false") +
+					LangVarClass(lang, "value", typ, 3, "this") +
+					"\n      if (this.vx_constdef() != " + LangTypeE(lang, constdeftype) + ") {" +
+					LangVarSet(lang, "ischanged", 4, "true") +
+					"\n      }"
+			case "vx/core/msgblock":
+				valcopy = "" +
+					LangVar(lang, "ischanged", rawbooltype, 3, "false") +
+					LangVarClass(lang, "value", msgblocktype, 3, "this") +
+					LangVar(lang, "msgblock", msgblocktype, 3, "this") +
+					"\n      if (this.vx_constdef() != " + LangTypeE(lang, constdeftype) + ") {" +
+					LangVarSet(lang, "ischanged", 4, "true") +
+					"\n      }"
+			}
+			props := ListPropertyTraitFromType(typ)
+			switch len(props) {
+			case 0:
+				valnew = "" +
+					"\n      if (ischanged || (msgblock != " + LangTypeE(lang, msgblocktype) + ")) {" +
+					LangVarClass(lang, "work", typ, 4, ":new") +
+					"\n        if (msgblock != " + LangTypeE(lang, msgblocktype) + ") {" +
+					"\n          work.vxmsgblock = msgblock" + lang.lineend +
+					"\n        }" +
+					LangVarSet(lang, "output", 4, "work") +
+					"\n      }"
+			default:
+				validkeys := "\n      List<" + LangTypeName(lang, rawstringtype) + "> validkeys = " + LangVxNewList(lang, rawstringtype, "") + lang.lineend
+				valnewswitch := ""
+				for _, arg := range props {
+					validkeys += "\n      " + LangVxListAdd(lang, "validkeys", "\":"+arg.name+"\"") + lang.lineend
+					argname := LangFromName(arg.name)
+					valcopy += "" +
+						LangVar(lang, "vx_p_"+argname, arg.vxtype, 3,
+							"value."+argname+"()")
+					valcopyend += "" +
+						"\n        work.vx_p_" + argname + " = vx_p_" + argname + lang.lineend
+					vx_any += "" +
+						"\n      case \":" + arg.name + "\":" +
+						"\n        output = this." + argname + "()" + lang.lineend +
+						"\n        break" + lang.lineend
+					argalt := ""
+					switch NameFromType(arg.vxtype) {
+					case "vx/core/boolean":
+						argalt = "" +
+							"\n            } else if (" + LangIsType(lang, "valsub", rawbooleantype) + ") {" +
+							LangVarSet(lang, "ischanged", 7, "true") +
+							"\n              vx_p_" + argname + " = " + LangPkgNameDot(lang, "vx/core") + "vx_new(" + LangPkgNameDot(lang, "vx/core") + "t_boolean, valsub)" + lang.lineend
+					case "vx/core/int":
+						argalt = "" +
+							"\n            } else if (" + LangIsType(lang, "valsub", rawintegertype) + ") {" +
+							LangVarSet(lang, "ischanged", 7, "true") +
+							"\n              vx_p_" + argname + " = " + LangPkgNameDot(lang, "vx/core") + "vx_new(" + LangPkgNameDot(lang, "vx/core") + "t_int, valsub)" + lang.lineend
+					case "vx/core/float":
+						argalt = "" +
+							"\n            } else if (" + LangIsType(lang, "valsub", rawfloattype) + ") {" +
+							LangVarSet(lang, "ischanged", 7, "true") +
+							"\n              vx_p_" + argname + " = " + LangPkgNameDot(lang, "vx/core") + "vx_new(" + LangPkgNameDot(lang, "vx/core") + "t_float, valsub)" + lang.lineend
+					case "vx/core/string":
+						argalt = "" +
+							"\n            } else if (" + LangIsType(lang, "valsub", rawstringtype) + ") {" +
+							LangVarSet(lang, "ischanged", 7, "true") +
+							"\n              vx_p_" + argname + " = " + LangPkgNameDot(lang, "vx/core") + "vx_new(" + LangPkgNameDot(lang, "vx/core") + "t_string, valsub)" + lang.lineend
+					}
+					valnewswitcherr := ""
+					switch NameFromType(typ) {
+					case "vx/core/msg":
+					default:
+						valnewswitcherr = "" +
+							"\n            } else {" +
+							"\n              if (false) {" +
+							LangElseIfType(lang, anytype, emptytype, "valsub", "valinvalid", 7, false) +
+							LangVarSet(lang, "msgval", 8, "valinvalid") +
+							"\n              } else {" +
+							LangVarSet(lang, "msgval", 8,
+								LangPkgNameDot(lang, "vx/core")+
+									"vx_new_string("+LangVxToString(lang, "valsub")+")") +
+							"\n              }" +
+							LangVarCollection(lang, "mapany", rawmaptype, anytype, 7,
+								LangVxNewMap(lang, anytype, "")) +
+							"\n              mapany.put(\"key\", " + LangPkgNameDot(lang, "vx/core") + "vx_new_string(\"" + arg.name + "\"))" + lang.lineend +
+							"\n              mapany.put(\"value\", msgval)" + lang.lineend +
+							LangVar(lang, "msgmap", maptype, 7,
+								LangTypeT(lang, anymaptype)+".vx_new_from_map(mapany)") +
+							"\n              msg = " + LangPkgNameDot(lang, "vx/core") + "vx_msg_from_error(\"" + typepath + "\", \":invalidvalue\", msgmap)" + lang.lineend +
+							"\n              msgblock = " + LangPkgNameDot(lang, "vx/core") + "vx_copy(msgblock, msg)" + lang.lineend
+					}
+					valnewswitch += "" +
+						"\n          case \":" + arg.name + "\":" +
+						"\n            if (valsub == vx_p_" + argname + ") {" +
+						LangElseIfType(lang, arg.vxtype, emptytype, "valsub", "val"+argname, 6, false) +
+						LangVarSet(lang, "ischanged", 7, "true") +
+						"\n              vx_p_" + argname + " = val" + argname + lang.lineend +
+						argalt +
+						valnewswitcherr +
+						"\n            }" +
+						"\n            break" + lang.lineend
+				}
+				defaultkey := ""
+				defaultstring := ""
+				lastarg := props[len(props)-1]
+				if lastarg.isdefault {
+					lastargname := LangFromName(lastarg.name)
+					argclassname := LangTypeName(lang, lastarg.vxtype)
+					defaultkey += "" +
+						"\n          } else if (" + LangIsType(lang, "valsub", lastarg.vxtype) + ") { // default property" +
+						LangVarSet(lang, "ischanged", 6, "true") +
+						"\n            vx_p_" + lastargname + " = (" + argclassname + ")valsub" + lang.lineend
+					switch NameFromType(lastarg.vxtype) {
+					case "vx/core/boolean":
+						defaultkey += "" +
+							"\n          } else if (" + LangIsType(lang, "valsub", rawbooleantype) + ") { // default property" +
+							LangVarSet(lang, "ischanged", 6, "true") +
+							LangVarSet(lang, "vx_p_"+lastargname, 6,
+								LangPkgNameDot(lang, "vx/core")+
+									"vx_new("+
+									LangTypeT(lang, booleantype)+
+									", valsub)")
+					case "vx/core/int":
+						defaultkey += "" +
+							"\n          } else if (" + LangIsType(lang, "valsub", rawintegertype) + ") { // default property" +
+							LangVarSet(lang, "ischanged", 6, "true") +
+							LangVarSet(lang, "vx_p_"+lastargname, 6,
+								LangPkgNameDot(lang, "vx/core")+
+									"vx_new("+LangTypeT(lang, inttype)+
+									", valsub)")
+					case "vx/core/float":
+						defaultkey += "" +
+							"\n          } else if (" + LangIsType(lang, "valsub", rawfloattype) + ") { // default property" +
+							LangVarSet(lang, "ischanged", 6, "true") +
+							LangVarSet(lang, "vx_p_"+lastargname, 6,
+								LangPkgNameDot(lang, "vx/core")+
+									"vx_new("+
+									LangTypeT(lang, floattype)+
+									", valsub)")
+					case "vx/core/string":
+						defaultstring += "" +
+							LangElseIfType(lang, stringtype, emptytype, "valsub", "valstr", 6, false) +
+							LangVarSet(lang, "ischanged", 7, "true") +
+							LangVarSet(lang, "vx_p_"+lastargname, 7, "valstr") +
+							LangElseIfType(lang, rawstringtype, emptytype, "valsub", "", 6, false) +
+							LangVarSet(lang, "ischanged", 7, "true") +
+							LangVarSet(lang, "vx_p_"+lastargname, 7,
+								LangPkgNameDot(lang, "vx/core")+
+									"vx_new("+
+									LangTypeT(lang, stringtype)+
+									", valsub)")
+					}
+					if lastarg.vxtype.extends == ":list" {
+						for _, allowtype := range lastarg.vxtype.allowtypes {
+							subargclassname := LangTypeName(lang, allowtype)
+							defaultkey += "" +
+								"\n          } else if (" + LangIsType(lang, "valsub", allowtype) + ") { // default property" +
+								"\n            " + subargclassname + " valdefault = (" + subargclassname + ")valsub" + lang.lineend +
+								"\n            " + argclassname + " vallist = vx_p_" + lastargname + lang.lineend +
+								"\n            if (vallist == null) {" +
+								"\n              vallist = " + LangPkgNameDot(lang, "vx/core") + "vx_new(" + LangTypeT(lang, lastarg.vxtype) + ", valdefault)" + lang.lineend +
+								"\n            } else {" +
+								"\n              vallist = " + LangPkgNameDot(lang, "vx/core") + "vx_copy(vallist, valdefault)" + lang.lineend +
+
+								"\n            }" +
+								LangVarSet(lang, "ischanged", 6, "true") +
+								LangVarSet(lang, "vx_p_"+lastargname, 6, "vallist")
+						}
+					}
+				}
+				switch NameFromType(typ) {
+				case "vx/core/msg":
+					valnew = "" +
+						LangVar(lang, "key", rawstringtype, 3, "\"\"") +
+						LangForList(lang, "valsub", rawobjecttype, "vals", 3,
+							"\n        if ("+LangVxEqualsString(lang, "key", "\"\"")+") {"+
+								"\n          if (false) {"+
+								LangElseIfType(lang, stringtype, emptytype, "valsub", "valstr", 5, false)+
+								LangVarSet(lang, "key", 6, "valstr.vx_string()")+
+								LangElseIfType(lang, rawstringtype, emptytype, "valsub", "sval", 5, false)+
+								LangVarSet(lang, "key", 6, "sval")+
+								"\n          }"+
+								"\n        } else {"+
+								"\n          switch (key) {"+
+								valnewswitch+
+								"\n          }"+
+								LangVarSet(lang, "key", 5, "\"\"")+
+								"\n        }") +
+						"\n      if (ischanged) {" +
+						LangVarClass(lang, "work", typ, 4, ":new") +
+						valcopyend +
+						LangVarSet(lang, "output", 4, "work") +
+						"\n      }"
+				case "vx/core/msgblock":
+					valnew = "" +
+						"\n      " + LangTypeName(lang, rawstringtype) + " key = \"\"" + lang.lineend +
+						"\n      " + LangPkgNameDot(lang, "vx/core") + "Type_msg msg" + lang.lineend +
+						"\n      " + LangTypeName(lang, anytype) + " msgval" + lang.lineend +
+						LangForList(lang, "valsub", rawobjecttype, "vals", 3,
+							"\n        if ("+LangIsType(lang, "valsub", msgblocktype)+") {"+
+								"\n          if (valsub != "+LangTypeE(lang, msgblocktype)+") {"+
+								"\n            vx_p_msgblocks = "+LangPkgNameDot(lang, "vx/core")+"vx_copy(vx_p_msgblocks, valsub)"+lang.lineend+
+								LangVarSet(lang, "ischanged", 6, "true")+
+								"\n          }"+
+								"\n        } else if ("+LangIsType(lang, "valsub", msgblocklisttype)+") {"+
+								"\n          if (valsub != "+LangTypeE(lang, msgblocklisttype)+") {"+
+								"\n            vx_p_msgblocks = "+LangPkgNameDot(lang, "vx/core")+"vx_copy(vx_p_msgblocks, valsub)"+lang.lineend+
+								LangVarSet(lang, "ischanged", 6, "true")+
+								"\n          }"+
+								"\n        } else if ("+LangIsType(lang, "valsub", msgtype)+") {"+
+								"\n          if (valsub != "+LangTypeE(lang, msgtype)+") {"+
+								"\n            vx_p_msgs = "+LangPkgNameDot(lang, "vx/core")+"vx_copy(vx_p_msgs, valsub)"+lang.lineend+
+								LangVarSet(lang, "ischanged", 6, "true")+
+								"\n          }"+
+								"\n        } else if ("+LangIsType(lang, "valsub", msglisttype)+") {"+
+								"\n          if (valsub != "+LangTypeE(lang, msglisttype)+") {"+
+								"\n            vx_p_msgs = "+LangPkgNameDot(lang, "vx/core")+"vx_copy(vx_p_msgs, valsub)"+lang.lineend+
+								LangVarSet(lang, "ischanged", 6, "true")+
+								"\n          }"+
+								"\n        } else if ("+LangVxEqualsString(lang, "key", "\"\"")+") {"+
+								"\n          if (false) {"+
+								LangElseIfType(lang, stringtype, emptytype, "valsub", "valstr", 5, false)+
+								"\n            key = valstr.vx_string()"+lang.lineend+
+								LangElseIfType(lang, rawstringtype, emptytype, "valsub", "sval", 5, false)+
+								"\n            key = sval"+lang.lineend+
+								"\n          }"+
+								"\n        } else {"+
+								"\n          switch (key) {"+
+								valnewswitch+
+								"\n          }"+
+								"\n          key = \"\""+lang.lineend+
+								"\n        }") +
+						"\n      if (ischanged) {" +
+						"\n        if ((" + LangVxListSize(lang, "vx_p_msgs.vx_list()") + " == 0) && (" + LangVxListSize(lang, "vx_p_msgblocks.vx_list()") + " == 1)) {" +
+						"\n          output = " + LangVxListGet(lang, "vx_p_msgblocks.vx_listmsgblock()", "0") + lang.lineend +
+						"\n        } else {" +
+						LangVarClass(lang, "work", typ, 5, ":new") +
+						"\n          work.vx_p_msgs = vx_p_msgs" + lang.lineend +
+						"\n          work.vx_p_msgblocks = vx_p_msgblocks" + lang.lineend +
+						"\n          output = work" + lang.lineend +
+						"\n        }" +
+						"\n      }"
+				default:
+					valnew = "" +
+						validkeys +
+						"\n      " + LangTypeName(lang, rawstringtype) + " key = \"\"" + lang.lineend +
+						"\n      " + LangTypeName(lang, msgtype) + " msg" + lang.lineend +
+						"\n      " + LangTypeName(lang, anytype) + " msgval" + lang.lineend +
+						LangForList(lang, "valsub", rawobjecttype, "vals", 3,
+							"\n        if ("+LangIsType(lang, "valsub", msgblocktype)+") {"+
+								"\n          msgblock = "+LangPkgNameDot(lang, "vx/core")+"vx_copy(msgblock, valsub)"+lang.lineend+
+								"\n        } else if ("+LangIsType(lang, "valsub", msgtype)+") {"+
+								"\n          msgblock = "+LangPkgNameDot(lang, "vx/core")+"vx_copy(msgblock, valsub)"+lang.lineend+
+								"\n        } else if ("+LangVxEqualsString(lang, "key", "\"\"")+") {"+
+								LangVar(lang, "istestkey", rawbooltype, 5, "false")+
+								LangVar(lang, "testkey", rawstringtype, 5, "\"\"")+
+								"\n          if (false) {"+
+								LangElseIfType(lang, stringtype, emptytype, "valsub", "valstr", 5, false)+
+								"\n            testkey = valstr.vx_string()"+lang.lineend+
+								"\n            istestkey = true"+lang.lineend+
+								LangElseIfType(lang, rawstringtype, emptytype, "valsub", "sval", 5, false)+
+								"\n            testkey = sval"+lang.lineend+
+								"\n            istestkey = true"+lang.lineend+
+								defaultkey+
+								"\n          } else {"+
+								"\n            if (false) {"+
+								LangElseIfType(lang, anytype, emptytype, "valsub", "valmsg", 6, false)+
+								"\n              msgval = valmsg"+lang.lineend+
+								"\n            } else {"+
+								"\n              msgval = "+LangPkgNameDot(lang, "vx/core")+"vx_new_string("+LangVxToString(lang, "valsub")+")"+lang.lineend+
+								"\n            }"+
+								"\n            msg = "+LangPkgNameDot(lang, "vx/core")+"vx_msg_from_error(\""+typepath+"\", \":invalidkeytype\", msgval)"+lang.lineend+
+								"\n            msgblock = "+LangPkgNameDot(lang, "vx/core")+"vx_copy(msgblock, msg)"+lang.lineend+
+								"\n          }"+
+								"\n          if (istestkey) {"+
+								"\n            if (!"+LangVxStartswith(lang, "testkey", "\":\"")+") {"+
+								"\n              testkey = \":\" + testkey"+lang.lineend+
+								"\n            }"+
+								LangVar(lang, "isvalidkey", rawbooltype, 6,
+									LangVxContains(lang, "validkeys", "testkey"))+
+								"\n            if (isvalidkey) {"+
+								"\n              key = testkey"+lang.lineend+
+								defaultstring+
+								"\n            } else {"+
+								"\n              msgval = "+LangPkgNameDot(lang, "vx/core")+"vx_new_string(testkey)"+lang.lineend+
+								"\n              msg = "+LangPkgNameDot(lang, "vx/core")+"vx_msg_from_error(\""+typepath+"\", \":invalidkey\", msgval)"+lang.lineend+
+								"\n              msgblock = "+LangPkgNameDot(lang, "vx/core")+"vx_copy(msgblock, msg)"+lang.lineend+
+								"\n            }"+
+								"\n          }"+
+								"\n        } else {"+
+								"\n          switch (key) {"+
+								valnewswitch+
+								"\n          default:"+
+								"\n            msgval = "+LangPkgNameDot(lang, "vx/core")+"vx_new_string(key)"+lang.lineend+
+								"\n            msg = "+LangPkgNameDot(lang, "vx/core")+"vx_msg_from_error(\""+typepath+"\", \":invalidkey\", msgval)"+lang.lineend+
+								"\n            msgblock = "+LangPkgNameDot(lang, "vx/core")+"vx_copy(msgblock, msg)"+lang.lineend+
+								"\n            break"+lang.lineend+
+								"\n          }"+
+								"\n          key = \"\""+lang.lineend+
+								"\n        }") +
+						"\n      if (ischanged || (msgblock != " + LangTypeE(lang, msgblocktype) + ")) {" +
+						LangVarClass(lang, "work", typ, 4, ":new") +
+						valcopyend +
+						"\n        if (msgblock != " + LangTypeE(lang, msgblocktype) + ") {" +
+						"\n          work.vxmsgblock = msgblock" + lang.lineend +
+						"\n        }" +
+						"\n        output = work" + lang.lineend +
+						"\n      }"
+				}
+			}
+		default:
+			if valnew == "" {
+				valnew = "" +
+					"\n      if (ischanged || (msgblock != " + LangTypeE(lang, msgblocktype) + ")) {" +
+					LangVarClass(lang, "work", typ, 4, ":new") +
+					"\n        if (msgblock != " + LangTypeE(lang, msgblocktype) + ") {" +
+					"\n          work.vxmsgblock = msgblock" + lang.lineend +
+					"\n        }" +
+					"\n        output = work" + lang.lineend +
+					"\n      }"
+			}
+		}
+		funcvxcopy.isoverride = true
+		output = "" +
+			LangFuncHeader(lang, typename, funcvxcopy, 2, 0,
+				LangVar(lang, "output", typ, 3, "this")+
+					valcopy+
+					valnew)
+	}
+	return output
+}
+
+func LangTypeVxEmpty(
+	lang *vxlang,
+	typ *vxtype,
+	isinterface bool) string {
+	funcvxempty := NewFunc()
+	funcvxempty.name = "vx_empty"
+	funcvxempty.vxtype = anytype
+	typename := LangTypeName(lang, typ)
+	output := ""
+	if isinterface {
+		output = LangFuncHeaderInterface(lang, typename, funcvxempty, 2)
+	} else {
+		funcvxempty.isoverride = true
+		output = "" +
+			LangFuncHeader(lang, typename, funcvxempty, 2, 0,
+				LangVar(lang, "output", anytype, 3,
+					LangTypeE(lang, typ)))
+	}
+	return output
+}
+
+func LangTypeVxFuncdef(
+	lang *vxlang,
+	typ *vxtype,
+	isinterface bool) string {
+	funcvxfuncdef := NewFunc()
+	funcvxfuncdef.name = "vx_funcdef"
+	funcvxfuncdef.vxtype = funcdeftype
+	prefix := LangNameFromType(lang, typ)
+	output := ""
+	if isinterface {
+		output = LangFuncHeaderInterface(lang, prefix, funcvxfuncdef, 2)
+	} else {
+		funcvxfuncdef.isimplement = true
+		output = "" +
+			LangFuncHeader(lang, prefix, funcvxfuncdef, 2, 0,
+				LangVar(lang, "output", funcdeftype, 3,
+					LangTypeE(lang, funcdeftype)))
+	}
+	return output
+}
+
+func LangTypeVxList(
+	lang *vxlang,
+	typ *vxtype,
+	isinterface bool) string {
+	funcvxlist := NewFunc()
+	funcvxlist.name = "vx_list"
+	funcvxlist.vxtype = rawlistanytype
+	funcvxlist.isimplement = true
+	typename := LangTypeName(lang, typ)
+	output := ""
+	if isinterface {
+		output = LangFuncInterface(lang, funcvxlist)
+	} else {
+		castlist := ""
+		switch lang.name {
+		case "swift":
+			castlist = "self.vx_p_list"
+		default:
+			castlist = "this.vx_p_list"
+		}
+		output = "" +
+			LangFuncHeader(lang, typename, funcvxlist, 2, 0,
+				LangVarCollection(lang, "output", rawlisttype, anytype, 3,
+					LangPkgNameDot(lang, "vx/core")+
+						"immutablelist("+
+						"\n        "+LangVxNewList(lang, anytype, castlist)+
+						"\n      )"))
+	}
+	return output
+}
+
+func LangTypeVxMap(lang *vxlang, typ *vxtype) string {
+	funcvxmap := NewFunc()
+	funcvxmap.name = "vx_map"
+	funcvxmap.vxtype = rawmapanytype
+	funcvxmap.isimplement = true
+	copymap := ""
+	switch lang.name {
+	case "csharp":
+		convertmap := ""
+		if typ.name == "any" {
+			convertmap = "this.vx_p_map"
+		} else {
+			convertmap = LangPkgNameDot(lang, "vx/core") + "vx_map_from_map<" + LangTypeName(lang, anytype) + ", " + LangTypeName(lang, typ) + ">(this.vx_p_map)"
+		}
+		copymap = "" +
+			LangVarCollection(lang, "anymap", rawmaptype, anytype, 3, convertmap) +
+			LangVarCollection(lang, "map", rawmaptype, anytype, 3, "anymap.copy()")
+	case "java":
+		copymap = "" +
+			LangVarCollection(lang, "map", rawmaptype, anytype, 3,
+				LangVxNewMap(lang, anytype, "this.vx_p_map"))
+	}
+	prefix := LangTypeName(lang, typ)
+	output := "" +
+		LangFuncHeaderOld(lang, prefix, funcvxmap, false, false) +
+		copymap +
+		"\n      return " + LangPkgNameDot(lang, "vx/core") + "immutablemap(map)" + lang.lineend +
+		"\n    }" +
+		"\n"
+	return output
+}
+
+func LangTypeVxMapStruct(
+	lang *vxlang,
+	typ *vxtype,
+	isinterface bool) string {
+	output := ""
+	typename := LangNameFromType(lang, typ)
+	funcvxmap := NewFunc()
+	funcvxmap.name = "vx_map"
+	funcvxmap.vxtype = NewTypeSubtype(rawmaptype, anytype)
+	if isinterface {
+		output = LangFuncInterface(lang, funcvxmap)
+	} else {
+		vx_map := ""
+		props := ListPropertyTraitFromType(typ)
+		for _, arg := range props {
+			argname := LangFromName(arg.name)
+			vx_map += "\n      output.put(\":" + arg.name + "\", this." + argname + "())" + lang.lineend
+		}
+		funcvxmap.isimplement = true
+		output += "" +
+			LangFuncHeader(lang, typename, funcvxmap, 2, 0,
+				LangVarCollection(lang, "output", rawmaptype, anytype, 3,
+					LangVxNewMap(lang, anytype, ""))+
+					vx_map+
+					LangVarSet(lang, "output", 3,
+						LangPkgNameDot(lang, "vx/core")+"immutablemap(output)"))
+	}
+	return output
+}
+
+func LangTypeVxMsgblock(
+	lang *vxlang,
+	typ *vxtype,
+	isinterface bool) string {
+	output := ""
+	funcvxmsgblock := NewFunc()
+	funcvxmsgblock.name = "vx_msgblock"
+	funcvxmsgblock.vxtype = msgblocktype
+	typename := LangNameFromType(lang, typ)
+	if isinterface {
+		output = LangFuncHeaderInterface(lang, typename, funcvxmsgblock, 2)
+		/*
+			} else {
+				switch NameFromType(typ) {
+				case "vx/core/msg", "vx/core/msgblock":
+					funcvxmsgblock.isoverride = true
+					output = "" +
+						LangFuncHeader(lang, typename, funcvxmsgblock, 2, 0,
+							LangVar(lang, "output", msgblocktype, 3,
+								LangTypeE(lang, msgblocktype)))
+				}
+		*/
+	}
+	return output
+}
+
+func LangTypeVxNew(
+	lang *vxlang,
+	typ *vxtype,
+	isinterface bool) string {
+	funcvxnew := LangTypeVxNewModel(typ)
+	typename := LangNameFromType(lang, typ)
+	output := ""
+	if isinterface {
+		output = LangFuncHeaderInterface(lang, typename, funcvxnew, 2)
+	} else {
+		funcvxnew.isoverride = true
+		output = "" +
+			LangFuncHeader(lang, typename, funcvxnew, 2, 0,
+				LangVar(lang, "output", typ, 3,
+					LangPkgNameDot(lang, "vx/core")+
+						"vx_copy("+
+						LangTypeE(lang, typ)+
+						", vals)"))
+	}
+	return output
+}
+
+func LangTypeVxNewModel(returntype *vxtype) *vxfunc {
+	argvals := NewArg("vals")
+	argvals.vxtype = rawobjecttype
+	argvals.multi = true
+	argvals.isfinal = true
+	arglist := NewListArg()
+	arglist = append(arglist, argvals)
+	funcvxnew := NewFunc()
+	funcvxnew.name = "vx_new"
+	funcvxnew.vxtype = returntype
+	funcvxnew.listarg = arglist
+	return funcvxnew
+}
+
+func LangTypeVxNewMap(
+	lang *vxlang,
+	typ *vxtype,
+	isinterface bool) string {
+	output := ""
+	allowname := "any"
+	allowtype := anytype
+	allowtypes := ListAllowTypeFromType(typ)
+	if len(allowtypes) > 0 {
+		allowtype = allowtypes[0]
+		allowname = LangNameFromType(lang, allowtype)
+	}
+	if allowname == "any" {
+		allowname = ""
+	}
+	typepath := NameFromType(typ)
+	keyset := ""
+	switch lang.name {
+	case "csharp":
+		keyset = "\n      List<string> keys = mapval.keys()" + lang.lineend
+	case "java", "kotlin":
+		keyset = "\n      Set<String> keys = mapval.keySet()" + lang.lineend
+	}
+	argmapval := NewArg("mapval")
+	argmapval.vxtype = rawmapanytype
+	listarg := NewListArg()
+	listarg = append(listarg, argmapval)
+	funcvxnewmap := NewFunc()
+	funcvxnewmap.name = "vx_new_from_map"
+	funcvxnewmap.vxtype = maptype
+	funcvxnewmap.listarg = listarg
+	typename := LangTypeName(lang, typ)
+	if isinterface {
+		output += "" +
+			LangFuncHeaderInterface(lang, typename, funcvxnewmap, 2)
+	} else {
+		funcvxnewmap.isimplement = true
+		output += "" +
+			LangFuncHeader(lang, typename, funcvxnewmap, 2, 0,
+				LangVarClass(lang, "output", typ, 3, ":new")+
+					LangVar(lang, "msgblock", msgblocktype, 3,
+						LangTypeE(lang, msgblocktype))+
+					LangVarCollection(lang, "map", rawmaptype, allowtype, 3, LangVxNewMap(lang, allowtype, ""))+
+					keyset+
+					LangForList(lang, "key", rawstringtype, "keys", 3,
+						LangVar(lang, "value", anytype, 4, "mapval.get(key)")+
+							"\n        if (false) {"+
+							LangElseIfType(lang, allowtype, emptytype, "value", "castval", 4, false)+
+							"\n          map.put(key, castval)"+lang.lineend+
+							"\n        } else {"+
+							LangVar(lang, "msg", msgtype, 5,
+								LangPkgNameDot(lang, "vx/core")+"vx_msg_from_error(\""+typepath+"\", \":invalidvalue\", value)")+
+							LangVarSet(lang, "msgblock", 5,
+								LangPkgNameDot(lang, "vx/core")+"vx_copy(msgblock, msg)")+
+							"\n        }")+
+					"\n      output.vx_p_map = "+LangPkgNameDot(lang, "vx/core")+"immutablemap(map)"+lang.lineend+
+					"\n      if (msgblock != "+LangTypeE(lang, msgblocktype)+") {"+
+					"\n        output.vxmsgblock = msgblock"+lang.lineend+
+					"\n      }")
+	}
+	return output
+}
+
+func LangTypeVxSet(lang *vxlang, typ *vxtype) string {
+	argname := NewArg("name")
+	argname.vxtype = stringtype
+	argvalue := NewArg("value")
+	argvalue.vxtype = anytype
+	listarg := NewListArg()
+	listarg = append(listarg, argname, argvalue)
+	funcvxmap := NewFunc()
+	funcvxmap.name = "vx_set"
+	funcvxmap.vxtype = booleantype
+	funcvxmap.isimplement = true
+	funcvxmap.listarg = listarg
+	prefix := LangTypeName(lang, typ)
+	allowtype := anytype
+	allowname := "any"
+	allowtypes := ListAllowTypeFromType(typ)
+	allowempty := LangTypeE(lang, anytype)
+	if len(allowtypes) > 0 {
+		allowtype = allowtypes[0]
+		allowempty = LangTypeE(lang, allowtype)
+		allowname = LangNameFromType(lang, allowtype)
+	}
+	if allowname == "any" {
+		allowname = ""
+	}
+	body := "" +
+		LangVar(lang, "output", booleantype, 3, LangPkgNameDot(lang, "vx/core")+"c_false") +
+		"\n      if (false) {" +
+		LangElseIfType(lang, allowtype, emptytype, "value", "castval", 3, false) +
+		"\n        " + LangTypeName(lang, rawstringtype) + " key = name.vx_string()" + lang.lineend +
+		"\n        if (" + LangVxStartswith(lang, "key", "\":\"") + ") {" +
+		"\n          key = " + LangVxSubstring(lang, "key", "1", "") + lang.lineend +
+		"\n        }" +
+		LangVarCollection(lang, "map", rawmaptype, allowtype, 4,
+			LangVxNewMap(lang, allowtype, "this.vx_p_map")) +
+		"\n        if (castval == " + allowempty + ") {" +
+		"\n          map.remove(key)" + lang.lineend +
+		"\n        } else {" +
+		"\n          map.put(key, castval)" + lang.lineend +
+		"\n        }" +
+		"\n        this.vx_p_map = " + LangPkgNameDot(lang, "vx/core") + "immutablemap(map)" + lang.lineend +
+		"\n        output = " + LangPkgNameDot(lang, "vx/core") + "c_true" + lang.lineend +
+		"\n      }"
+	output := "" +
+		LangFuncHeader(lang, prefix, funcvxmap, 2, 0, body)
+	return output
+}
+
+func LangTypeVxType(
+	lang *vxlang,
+	typ *vxtype,
+	isinterface bool) string {
+	funcvxtype := NewFunc()
+	funcvxtype.name = "vx_type"
+	funcvxtype.vxtype = anytype
+	output := ""
+	typename := LangNameFromType(lang, typ)
+	if isinterface {
+		output = LangFuncHeaderInterface(lang, typename, funcvxtype, 2)
+	} else {
+		funcvxtype.isoverride = true
+		output = "" +
+			LangFuncHeader(lang, typename, funcvxtype, 2, 0,
+				LangVar(lang, "output", anytype, 3,
+					LangTypeT(lang, typ)))
+	}
+	return output
+}
+
+func LangTypeVxTypedef(
+	lang *vxlang,
+	typ *vxtype,
+	isinterface bool) string {
+	funcvxtypedef := NewFunc()
+	funcvxtypedef.name = "vx_typedef"
+	funcvxtypedef.vxtype = typedeftype
+	output := ""
+	if isinterface {
+		typename := LangNameTypeFullFromType(lang, typ)
+		output = LangFuncHeaderOld(lang, typename, funcvxtypedef, true, false)
+	} else {
+		funcvxtypedef.isoverride = true
+		prefix := LangNameFromType(lang, typ)
+		output = "" +
+			LangFuncHeader(lang, prefix, funcvxtypedef, 2, 0,
+				LangVar(lang, "output", typedeftype, 3,
+					LangTypeDef(lang, typ, 3)))
+	}
+	return output
+}

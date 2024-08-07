@@ -16,21 +16,22 @@ public static class All {
   public class Class_context_all : Vx.Core.Class_base, Func_context_all {
 
     public override Vx.Translation.All.Func_context_all vx_new(params object[] vals) {
-      Class_context_all output = new Class_context_all();
+      Vx.Translation.All.Class_context_all output = new Vx.Translation.All.Class_context_all();
       return output;
     }
 
-    public override Vx.Translation.All.Func_context_all vx_copy(params object[] vals) {
-      Class_context_all output = new Class_context_all();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Translation.All.Class_context_all output = new Vx.Translation.All.Class_context_all();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/translation/all", // pkgname
         "context-all", // name
         0, // idx
@@ -49,14 +50,17 @@ public static class All {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_context_all;
+      Vx.Core.Type_any output = Vx.Translation.All.e_context_all;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_context_all;
+      Vx.Core.Type_any output = Vx.Translation.All.t_context_all;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -84,18 +88,20 @@ public static class All {
 
   }
 
-  public static Func_context_all e_context_all = new Vx.Translation.All.Class_context_all();
-  public static Func_context_all t_context_all = new Vx.Translation.All.Class_context_all();
+  public static Vx.Translation.All.Func_context_all e_context_all = new Vx.Translation.All.Class_context_all();
+  public static Vx.Translation.All.Func_context_all t_context_all = new Vx.Translation.All.Class_context_all();
 
   public static Vx.Core.Type_context f_context_all(Vx.Core.Type_anylist args) {
     Vx.Core.Type_context output = Vx.Core.e_context;
     output = Vx.Core.f_new(
       Vx.Core.t_context,
-      Vx.Core.vx_new(Vx.Core.t_anylist,
+      Vx.Core.vx_new(
+        Vx.Core.t_anylist,
         Vx.Core.vx_new_string(":session"),
         Vx.Core.f_new(
           Vx.Core.t_session,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
             Vx.Core.vx_new_string(":translation"),
             Vx.Translation.En.f_translation_en(),
             Vx.Core.vx_new_string(":translationmap"),
@@ -120,21 +126,22 @@ public static class All {
   public class Class_translationmap_all : Vx.Core.Class_base, Func_translationmap_all {
 
     public override Vx.Translation.All.Func_translationmap_all vx_new(params object[] vals) {
-      Class_translationmap_all output = new Class_translationmap_all();
+      Vx.Translation.All.Class_translationmap_all output = new Vx.Translation.All.Class_translationmap_all();
       return output;
     }
 
-    public override Vx.Translation.All.Func_translationmap_all vx_copy(params object[] vals) {
-      Class_translationmap_all output = new Class_translationmap_all();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Translation.All.Class_translationmap_all output = new Vx.Translation.All.Class_translationmap_all();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/translation/all", // pkgname
         "translationmap-all", // name
         0, // idx
@@ -153,14 +160,17 @@ public static class All {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_translationmap_all;
+      Vx.Core.Type_any output = Vx.Translation.All.e_translationmap_all;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_translationmap_all;
+      Vx.Core.Type_any output = Vx.Translation.All.t_translationmap_all;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -175,13 +185,14 @@ public static class All {
 
   }
 
-  public static Func_translationmap_all e_translationmap_all = new Vx.Translation.All.Class_translationmap_all();
-  public static Func_translationmap_all t_translationmap_all = new Vx.Translation.All.Class_translationmap_all();
+  public static Vx.Translation.All.Func_translationmap_all e_translationmap_all = new Vx.Translation.All.Class_translationmap_all();
+  public static Vx.Translation.All.Func_translationmap_all t_translationmap_all = new Vx.Translation.All.Class_translationmap_all();
 
   public static Vx.Core.Type_translationmap f_translationmap_all() {
     Vx.Core.Type_translationmap output = Vx.Core.e_translationmap;
     output = Vx.Translate.f_translationmap_from_translations(
-      Vx.Core.vx_new(Vx.Core.t_translationlist,
+      Vx.Core.vx_new(
+        Vx.Core.t_translationlist,
         Vx.Translation.En.f_translation_en(),
         Vx.Translation.Es.f_translation_es()
       )

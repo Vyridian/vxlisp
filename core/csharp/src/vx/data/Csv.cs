@@ -52,7 +52,8 @@ public static class Csv {
       Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
       output.put(":headers", this.headers());
       output.put(":rows", this.rows());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Data.Csv.Type_csv vx_new(params object[] vals) {
@@ -60,16 +61,16 @@ public static class Csv {
       return output;
     }
 
-    public override Vx.Data.Csv.Type_csv vx_copy(params object[] vals) {
-      Type_csv output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.Csv.Type_csv output = this;
       bool ischanged = false;
-      Class_csv val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Data.Csv.Class_csv value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Type_stringlist vx_p_headers = val.headers();
-      Vx.Data.Csv.Type_csvrows vx_p_rows = val.rows();
+      Vx.Core.Type_stringlist vx_p_headers = value.headers();
+      Vx.Data.Csv.Type_csvrows vx_p_rows = value.rows();
       List<string> validkeys = new List<string>();
       validkeys.Add(":headers");
       validkeys.Add(":rows");
@@ -166,7 +167,7 @@ public static class Csv {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_csv work = new Class_csv();
+        Vx.Data.Csv.Class_csv work = new Vx.Data.Csv.Class_csv();
         work.vx_p_headers = vx_p_headers;
         work.vx_p_rows = vx_p_rows;
         if (msgblock != Vx.Core.e_msgblock) {
@@ -178,14 +179,17 @@ public static class Csv {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_csv;
+      Vx.Core.Type_any output = Vx.Data.Csv.e_csv;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_csv;
+      Vx.Core.Type_any output = Vx.Data.Csv.t_csv;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/data/csv", // pkgname
         "csv", // name
         ":struct", // extends
@@ -198,12 +202,13 @@ public static class Csv {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_csv e_csv = new Class_csv();
-  public static Type_csv t_csv = new Class_csv();
+  public static Vx.Data.Csv.Type_csv e_csv = new Vx.Data.Csv.Class_csv();
+  public static Vx.Data.Csv.Type_csv t_csv = new Vx.Data.Csv.Class_csv();
 
   /**
    * type: csvrowmap
@@ -254,12 +259,15 @@ public static class Csv {
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_stringlist> vx_mapstringlist() {
-      return vx_p_map;
+      Vx.Core.Map<string, Vx.Core.Type_stringlist> output = this.vx_p_map;
+      return output;
     }
 
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
-      return this.vx_stringlist(key);
+      Vx.Core.Type_any output = this.vx_stringlist(key);
+      return output;
     }
+
 
     public Vx.Core.Type_map vx_new_from_map(Vx.Core.Map<string, Vx.Core.Type_any> mapval) {
       Vx.Data.Csv.Class_csvrowmap output = new Vx.Data.Csv.Class_csvrowmap();
@@ -267,12 +275,12 @@ public static class Csv {
       Vx.Core.Map<string, Vx.Core.Type_stringlist> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_stringlist>();
       List<string> keys = mapval.keys();
       foreach (string key in keys) {
-        Vx.Core.Type_any val = mapval.get(key);
+        Vx.Core.Type_any value = mapval.get(key);
         if (false) {
-        } else if (val is Vx.Core.Type_stringlist castval) {
+        } else if (value is Vx.Core.Type_stringlist castval) {
           map.put(key, castval);
         } else {
-          Vx.Core.Type_msg msg = Vx.Core.vx_msg_from_error("vx/data/csv/csvrowmap", ":invalidvalue", val);
+          Vx.Core.Type_msg msg = Vx.Core.vx_msg_from_error("vx/data/csv/csvrowmap", ":invalidvalue", value);
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         }
       }
@@ -288,15 +296,15 @@ public static class Csv {
       return output;
     }
 
-    public override Vx.Data.Csv.Type_csvrowmap vx_copy(params object[] vals) {
-      Type_csvrowmap output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.Csv.Type_csvrowmap output = this;
       bool ischanged = false;
-      Class_csvrowmap val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Data.Csv.Class_csvrowmap value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Map<string, Vx.Core.Type_stringlist> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_stringlist>(val.vx_mapstringlist());
+      Vx.Core.Map<string, Vx.Core.Type_stringlist> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_stringlist>(value.vx_mapstringlist());
       Vx.Core.Type_msg? msg = null;
       string key = "";
       Vx.Core.Type_any? msgval = null;
@@ -327,7 +335,7 @@ public static class Csv {
           } else if (valsub is Vx.Core.Type_stringlist valallowed) {
             valany = valallowed;
           } else if (valsub is Vx.Core.Type_stringlist) {
-            valany = valsub as Vx.Core.Type_stringlist;
+            valany = (Vx.Core.Type_stringlist)valsub;
           } else {
             if (false) {
             } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -353,7 +361,7 @@ public static class Csv {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_csvrowmap work = new Class_csvrowmap();
+        Vx.Data.Csv.Class_csvrowmap work = new Vx.Data.Csv.Class_csvrowmap();
         work.vx_p_map = Vx.Core.immutablemap(mapval);
         if (msgblock != Vx.Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -364,14 +372,17 @@ public static class Csv {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_csvrowmap;
+      Vx.Core.Type_any output = Vx.Data.Csv.e_csvrowmap;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_csvrowmap;
+      Vx.Core.Type_any output = Vx.Data.Csv.t_csvrowmap;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/data/csv", // pkgname
         "csvrowmap", // name
         ":map", // extends
@@ -384,12 +395,13 @@ public static class Csv {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_csvrowmap e_csvrowmap = new Class_csvrowmap();
-  public static Type_csvrowmap t_csvrowmap = new Class_csvrowmap();
+  public static Vx.Data.Csv.Type_csvrowmap e_csvrowmap = new Vx.Data.Csv.Class_csvrowmap();
+  public static Vx.Data.Csv.Type_csvrowmap t_csvrowmap = new Vx.Data.Csv.Class_csvrowmap();
 
   /**
    * type: csvrows
@@ -402,7 +414,9 @@ public static class Csv {
 
   public class Class_csvrows : Vx.Core.Class_base, Type_csvrows {
 
-    public List<Vx.Core.Type_stringlist> vx_p_list = Vx.Core.immutablelist(new List<Vx.Core.Type_stringlist>());
+    public List<Vx.Core.Type_stringlist> vx_p_list = Vx.Core.immutablelist(
+      new List<Vx.Core.Type_stringlist>()
+    );
 
     public List<Vx.Core.Type_any> vx_list() {
       List<Vx.Core.Type_any> output = Vx.Core.immutablelist(
@@ -423,11 +437,13 @@ public static class Csv {
     }
 
     public List<Vx.Core.Type_stringlist> vx_liststringlist() {
-      return vx_p_list;
+      List<Vx.Core.Type_stringlist> output = this.vx_p_list;
+      return output;
     }
 
     public Vx.Core.Type_any vx_any(Vx.Core.Type_int index) {
-      return this.vx_stringlist(index);
+      Vx.Core.Type_stringlist output = this.vx_stringlist(index);
+      return output;
     }
 
     public override Vx.Data.Csv.Type_csvrows vx_new(params object[] vals) {
@@ -435,15 +451,15 @@ public static class Csv {
       return output;
     }
 
-    public override Vx.Data.Csv.Type_csvrows vx_copy(params object[] vals) {
-      Type_csvrows output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.Csv.Type_csvrows output = this;
       bool ischanged = false;
-      Class_csvrows val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Data.Csv.Class_csvrows value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      List<Vx.Core.Type_stringlist> listval = new List<Vx.Core.Type_stringlist>(val.vx_liststringlist());
+      List<Vx.Core.Type_stringlist> listval = new List<Vx.Core.Type_stringlist>(value.vx_liststringlist());
       Vx.Core.Type_msg msg;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
@@ -476,7 +492,7 @@ public static class Csv {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_csvrows work = new Class_csvrows();
+        Vx.Data.Csv.Class_csvrows work = new Vx.Data.Csv.Class_csvrows();
         work.vx_p_list = Vx.Core.immutablelist(listval);
         if (msgblock != Vx.Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -487,14 +503,17 @@ public static class Csv {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_csvrows;
+      Vx.Core.Type_any output = Vx.Data.Csv.e_csvrows;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_csvrows;
+      Vx.Core.Type_any output = Vx.Data.Csv.t_csvrows;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/data/csv", // pkgname
         "csvrows", // name
         ":list", // extends
@@ -507,12 +526,13 @@ public static class Csv {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_csvrows e_csvrows = new Class_csvrows();
-  public static Type_csvrows t_csvrows = new Class_csvrows();
+  public static Vx.Data.Csv.Type_csvrows e_csvrows = new Vx.Data.Csv.Class_csvrows();
+  public static Vx.Data.Csv.Type_csvrows t_csvrows = new Vx.Data.Csv.Class_csvrows();
 
   /**
    * Constant: delimcsv
@@ -521,7 +541,7 @@ public static class Csv {
    */
   public class Const_delimcsv {
     public static Vx.Core.Type_constdef constdef() {
-      return Vx.Core.constdef_new(
+      Vx.Core.Type_constdef output = Vx.Core.constdef_new(
         "vx/data/csv", // pkgname
         "delimcsv", // name
         Vx.Core.typedef_new(
@@ -538,32 +558,35 @@ public static class Csv {
           Vx.Core.e_argmap // properties
         )
       );
+      return output;
     }
 
     public static void const_new(Vx.Data.Textblock.Type_delim output) {
       Vx.Data.Textblock.Class_delim outval = (Vx.Data.Textblock.Class_delim)output;
       outval.vx_p_constdef = constdef();
-      Vx.Data.Textblock.Type_delim val = Vx.Core.f_new(
+      Vx.Data.Textblock.Type_delim value = Vx.Core.f_new(
         Vx.Data.Textblock.t_delim,
-        Vx.Core.vx_new(Vx.Core.t_anylist,
-                Vx.Core.vx_new_string(":name"),
-                Vx.Core.vx_new_string("delimcsv"),
-                Vx.Core.vx_new_string(":delimlist"),
-                Vx.Core.f_new(
-                  Vx.Data.Textblock.t_delimlist,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
-                    Vx.Data.Textblock.c_delimline,
-                    Vx.Data.Textblock.c_delimquote,
-                    Vx.Data.Textblock.c_delimcomma
-                  )
-                )
+        Vx.Core.vx_new(
+          Vx.Core.t_anylist,
+          Vx.Core.vx_new_string(":name"),
+          Vx.Core.vx_new_string("delimcsv"),
+          Vx.Core.vx_new_string(":delimlist"),
+          Vx.Core.f_new(
+            Vx.Data.Textblock.t_delimlist,
+            Vx.Core.vx_new(
+              Vx.Core.t_anylist,
+              Vx.Data.Textblock.c_delimline,
+              Vx.Data.Textblock.c_delimquote,
+              Vx.Data.Textblock.c_delimcomma
+            )
+          )
         )
       );
-      outval.vx_p_name = val.name();
-      outval.vx_p_starttext = val.starttext();
-      outval.vx_p_endtext = val.endtext();
-      outval.vx_p_pos = val.pos();
-      outval.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = value.name();
+      outval.vx_p_starttext = value.starttext();
+      outval.vx_p_endtext = value.endtext();
+      outval.vx_p_pos = value.pos();
+      outval.vx_p_delimlist = value.delimlist();
     }
 
   }
@@ -584,21 +607,22 @@ public static class Csv {
   public class Class_csv_read_from_file : Vx.Core.Class_base, Func_csv_read_from_file {
 
     public override Vx.Data.Csv.Func_csv_read_from_file vx_new(params object[] vals) {
-      Class_csv_read_from_file output = new Class_csv_read_from_file();
+      Vx.Data.Csv.Class_csv_read_from_file output = new Vx.Data.Csv.Class_csv_read_from_file();
       return output;
     }
 
-    public override Vx.Data.Csv.Func_csv_read_from_file vx_copy(params object[] vals) {
-      Class_csv_read_from_file output = new Class_csv_read_from_file();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.Csv.Class_csv_read_from_file output = new Vx.Data.Csv.Class_csv_read_from_file();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/data/csv", // pkgname
         "csv-read<-file", // name
         0, // idx
@@ -617,14 +641,17 @@ public static class Csv {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_csv_read_from_file;
+      Vx.Core.Type_any output = Vx.Data.Csv.e_csv_read_from_file;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_csv_read_from_file;
+      Vx.Core.Type_any output = Vx.Data.Csv.t_csv_read_from_file;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any_context vx_fn_new(Vx.Core.Class_any_from_any_context.IFn fn) {
@@ -653,8 +680,8 @@ public static class Csv {
 
   }
 
-  public static Func_csv_read_from_file e_csv_read_from_file = new Vx.Data.Csv.Class_csv_read_from_file();
-  public static Func_csv_read_from_file t_csv_read_from_file = new Vx.Data.Csv.Class_csv_read_from_file();
+  public static Vx.Data.Csv.Func_csv_read_from_file e_csv_read_from_file = new Vx.Data.Csv.Class_csv_read_from_file();
+  public static Vx.Data.Csv.Func_csv_read_from_file t_csv_read_from_file = new Vx.Data.Csv.Class_csv_read_from_file();
 
   public static Vx.Data.Csv.Type_csv f_csv_read_from_file(Vx.Core.Type_context context, Vx.Data.File.Type_file file) {
     Vx.Data.Csv.Type_csv output = Vx.Data.Csv.e_csv;
@@ -683,21 +710,22 @@ public static class Csv {
   public class Class_csv_from_file : Vx.Core.Class_base, Func_csv_from_file {
 
     public override Vx.Data.Csv.Func_csv_from_file vx_new(params object[] vals) {
-      Class_csv_from_file output = new Class_csv_from_file();
+      Vx.Data.Csv.Class_csv_from_file output = new Vx.Data.Csv.Class_csv_from_file();
       return output;
     }
 
-    public override Vx.Data.Csv.Func_csv_from_file vx_copy(params object[] vals) {
-      Class_csv_from_file output = new Class_csv_from_file();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.Csv.Class_csv_from_file output = new Vx.Data.Csv.Class_csv_from_file();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/data/csv", // pkgname
         "csv<-file", // name
         0, // idx
@@ -716,14 +744,17 @@ public static class Csv {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_csv_from_file;
+      Vx.Core.Type_any output = Vx.Data.Csv.e_csv_from_file;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_csv_from_file;
+      Vx.Core.Type_any output = Vx.Data.Csv.t_csv_from_file;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -751,8 +782,8 @@ public static class Csv {
 
   }
 
-  public static Func_csv_from_file e_csv_from_file = new Vx.Data.Csv.Class_csv_from_file();
-  public static Func_csv_from_file t_csv_from_file = new Vx.Data.Csv.Class_csv_from_file();
+  public static Vx.Data.Csv.Func_csv_from_file e_csv_from_file = new Vx.Data.Csv.Class_csv_from_file();
+  public static Vx.Data.Csv.Func_csv_from_file t_csv_from_file = new Vx.Data.Csv.Class_csv_from_file();
 
   public static Vx.Data.Csv.Type_csv f_csv_from_file(Vx.Data.File.Type_file file) {
     Vx.Data.Csv.Type_csv output = Vx.Data.Csv.e_csv;
@@ -781,21 +812,22 @@ public static class Csv {
   public class Class_csv_from_string : Vx.Core.Class_base, Func_csv_from_string {
 
     public override Vx.Data.Csv.Func_csv_from_string vx_new(params object[] vals) {
-      Class_csv_from_string output = new Class_csv_from_string();
+      Vx.Data.Csv.Class_csv_from_string output = new Vx.Data.Csv.Class_csv_from_string();
       return output;
     }
 
-    public override Vx.Data.Csv.Func_csv_from_string vx_copy(params object[] vals) {
-      Class_csv_from_string output = new Class_csv_from_string();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.Csv.Class_csv_from_string output = new Vx.Data.Csv.Class_csv_from_string();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/data/csv", // pkgname
         "csv<-string", // name
         0, // idx
@@ -814,14 +846,17 @@ public static class Csv {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_csv_from_string;
+      Vx.Core.Type_any output = Vx.Data.Csv.e_csv_from_string;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_csv_from_string;
+      Vx.Core.Type_any output = Vx.Data.Csv.t_csv_from_string;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -849,8 +884,8 @@ public static class Csv {
 
   }
 
-  public static Func_csv_from_string e_csv_from_string = new Vx.Data.Csv.Class_csv_from_string();
-  public static Func_csv_from_string t_csv_from_string = new Vx.Data.Csv.Class_csv_from_string();
+  public static Vx.Data.Csv.Func_csv_from_string e_csv_from_string = new Vx.Data.Csv.Class_csv_from_string();
+  public static Vx.Data.Csv.Func_csv_from_string t_csv_from_string = new Vx.Data.Csv.Class_csv_from_string();
 
   public static Vx.Data.Csv.Type_csv f_csv_from_string(Vx.Core.Type_string text) {
     Vx.Data.Csv.Type_csv output = Vx.Data.Csv.e_csv;
@@ -877,21 +912,22 @@ public static class Csv {
   public class Class_csv_from_textblock : Vx.Core.Class_base, Func_csv_from_textblock {
 
     public override Vx.Data.Csv.Func_csv_from_textblock vx_new(params object[] vals) {
-      Class_csv_from_textblock output = new Class_csv_from_textblock();
+      Vx.Data.Csv.Class_csv_from_textblock output = new Vx.Data.Csv.Class_csv_from_textblock();
       return output;
     }
 
-    public override Vx.Data.Csv.Func_csv_from_textblock vx_copy(params object[] vals) {
-      Class_csv_from_textblock output = new Class_csv_from_textblock();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.Csv.Class_csv_from_textblock output = new Vx.Data.Csv.Class_csv_from_textblock();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/data/csv", // pkgname
         "csv<-textblock", // name
         0, // idx
@@ -910,14 +946,17 @@ public static class Csv {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_csv_from_textblock;
+      Vx.Core.Type_any output = Vx.Data.Csv.e_csv_from_textblock;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_csv_from_textblock;
+      Vx.Core.Type_any output = Vx.Data.Csv.t_csv_from_textblock;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -945,8 +984,8 @@ public static class Csv {
 
   }
 
-  public static Func_csv_from_textblock e_csv_from_textblock = new Vx.Data.Csv.Class_csv_from_textblock();
-  public static Func_csv_from_textblock t_csv_from_textblock = new Vx.Data.Csv.Class_csv_from_textblock();
+  public static Vx.Data.Csv.Func_csv_from_textblock e_csv_from_textblock = new Vx.Data.Csv.Class_csv_from_textblock();
+  public static Vx.Data.Csv.Func_csv_from_textblock t_csv_from_textblock = new Vx.Data.Csv.Class_csv_from_textblock();
 
   public static Vx.Data.Csv.Type_csv f_csv_from_textblock(Vx.Data.Textblock.Type_textblock textblock) {
     Vx.Data.Csv.Type_csv output = Vx.Data.Csv.e_csv;
@@ -958,7 +997,8 @@ public static class Csv {
         Vx.Data.Csv.Type_csvrows rows = Vx.Collection.f_list_from_list_end(Vx.Data.Csv.t_csvrows, allrows, Vx.Core.vx_new_int(2));
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Data.Csv.t_csv,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
             Vx.Core.vx_new_string(":headers"),
             headers,
             Vx.Core.vx_new_string(":rows"),
@@ -984,21 +1024,22 @@ public static class Csv {
   public class Class_csvrows_from_textblock : Vx.Core.Class_base, Func_csvrows_from_textblock {
 
     public override Vx.Data.Csv.Func_csvrows_from_textblock vx_new(params object[] vals) {
-      Class_csvrows_from_textblock output = new Class_csvrows_from_textblock();
+      Vx.Data.Csv.Class_csvrows_from_textblock output = new Vx.Data.Csv.Class_csvrows_from_textblock();
       return output;
     }
 
-    public override Vx.Data.Csv.Func_csvrows_from_textblock vx_copy(params object[] vals) {
-      Class_csvrows_from_textblock output = new Class_csvrows_from_textblock();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.Csv.Class_csvrows_from_textblock output = new Vx.Data.Csv.Class_csvrows_from_textblock();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/data/csv", // pkgname
         "csvrows<-textblock", // name
         0, // idx
@@ -1017,14 +1058,17 @@ public static class Csv {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_csvrows_from_textblock;
+      Vx.Core.Type_any output = Vx.Data.Csv.e_csvrows_from_textblock;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_csvrows_from_textblock;
+      Vx.Core.Type_any output = Vx.Data.Csv.t_csvrows_from_textblock;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -1052,8 +1096,8 @@ public static class Csv {
 
   }
 
-  public static Func_csvrows_from_textblock e_csvrows_from_textblock = new Vx.Data.Csv.Class_csvrows_from_textblock();
-  public static Func_csvrows_from_textblock t_csvrows_from_textblock = new Vx.Data.Csv.Class_csvrows_from_textblock();
+  public static Vx.Data.Csv.Func_csvrows_from_textblock e_csvrows_from_textblock = new Vx.Data.Csv.Class_csvrows_from_textblock();
+  public static Vx.Data.Csv.Func_csvrows_from_textblock t_csvrows_from_textblock = new Vx.Data.Csv.Class_csvrows_from_textblock();
 
   public static Vx.Data.Csv.Type_csvrows f_csvrows_from_textblock(Vx.Data.Textblock.Type_textblock textblock) {
     Vx.Data.Csv.Type_csvrows output = Vx.Data.Csv.e_csvrows;
@@ -1068,7 +1112,8 @@ public static class Csv {
         Vx.Core.Type_stringlist strings = Vx.Data.Textblock.f_stringlist_from_textblocklist(children);
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Data.Csv.t_csvrows,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
             strings
           )
         );
@@ -1092,21 +1137,22 @@ public static class Csv {
   public class Class_stringmap_from_csv : Vx.Core.Class_base, Func_stringmap_from_csv {
 
     public override Vx.Data.Csv.Func_stringmap_from_csv vx_new(params object[] vals) {
-      Class_stringmap_from_csv output = new Class_stringmap_from_csv();
+      Vx.Data.Csv.Class_stringmap_from_csv output = new Vx.Data.Csv.Class_stringmap_from_csv();
       return output;
     }
 
-    public override Vx.Data.Csv.Func_stringmap_from_csv vx_copy(params object[] vals) {
-      Class_stringmap_from_csv output = new Class_stringmap_from_csv();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.Csv.Class_stringmap_from_csv output = new Vx.Data.Csv.Class_stringmap_from_csv();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/data/csv", // pkgname
         "stringmap<-csv", // name
         0, // idx
@@ -1125,14 +1171,17 @@ public static class Csv {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_stringmap_from_csv;
+      Vx.Core.Type_any output = Vx.Data.Csv.e_stringmap_from_csv;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_stringmap_from_csv;
+      Vx.Core.Type_any output = Vx.Data.Csv.t_stringmap_from_csv;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -1160,8 +1209,8 @@ public static class Csv {
 
   }
 
-  public static Func_stringmap_from_csv e_stringmap_from_csv = new Vx.Data.Csv.Class_stringmap_from_csv();
-  public static Func_stringmap_from_csv t_stringmap_from_csv = new Vx.Data.Csv.Class_stringmap_from_csv();
+  public static Vx.Data.Csv.Func_stringmap_from_csv e_stringmap_from_csv = new Vx.Data.Csv.Class_stringmap_from_csv();
+  public static Vx.Data.Csv.Func_stringmap_from_csv t_stringmap_from_csv = new Vx.Data.Csv.Class_stringmap_from_csv();
 
   public static Vx.Core.Type_stringmap f_stringmap_from_csv(Vx.Data.Csv.Type_csv csv) {
     Vx.Core.Type_stringmap output = Vx.Core.e_stringmap;
@@ -1210,21 +1259,22 @@ public static class Csv {
   public class Class_textblock_csv_from_string : Vx.Core.Class_base, Func_textblock_csv_from_string {
 
     public override Vx.Data.Csv.Func_textblock_csv_from_string vx_new(params object[] vals) {
-      Class_textblock_csv_from_string output = new Class_textblock_csv_from_string();
+      Vx.Data.Csv.Class_textblock_csv_from_string output = new Vx.Data.Csv.Class_textblock_csv_from_string();
       return output;
     }
 
-    public override Vx.Data.Csv.Func_textblock_csv_from_string vx_copy(params object[] vals) {
-      Class_textblock_csv_from_string output = new Class_textblock_csv_from_string();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Data.Csv.Class_textblock_csv_from_string output = new Vx.Data.Csv.Class_textblock_csv_from_string();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/data/csv", // pkgname
         "textblock-csv<-string", // name
         0, // idx
@@ -1243,14 +1293,17 @@ public static class Csv {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_textblock_csv_from_string;
+      Vx.Core.Type_any output = Vx.Data.Csv.e_textblock_csv_from_string;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_textblock_csv_from_string;
+      Vx.Core.Type_any output = Vx.Data.Csv.t_textblock_csv_from_string;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -1278,8 +1331,8 @@ public static class Csv {
 
   }
 
-  public static Func_textblock_csv_from_string e_textblock_csv_from_string = new Vx.Data.Csv.Class_textblock_csv_from_string();
-  public static Func_textblock_csv_from_string t_textblock_csv_from_string = new Vx.Data.Csv.Class_textblock_csv_from_string();
+  public static Vx.Data.Csv.Func_textblock_csv_from_string e_textblock_csv_from_string = new Vx.Data.Csv.Class_textblock_csv_from_string();
+  public static Vx.Data.Csv.Func_textblock_csv_from_string t_textblock_csv_from_string = new Vx.Data.Csv.Class_textblock_csv_from_string();
 
   public static Vx.Data.Textblock.Type_textblock f_textblock_csv_from_string(Vx.Core.Type_string text) {
     Vx.Data.Textblock.Type_textblock output = Vx.Data.Textblock.e_textblock;

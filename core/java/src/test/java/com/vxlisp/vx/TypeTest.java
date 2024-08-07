@@ -268,7 +268,8 @@ public final class TypeTest {
                 Core.vx_new_boolean(false),
                 Core.f_new(
                   Core.t_typelist,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.t_int,
                     Core.t_boolean
                   )
@@ -286,7 +287,8 @@ public final class TypeTest {
                 Core.vx_new_string("a"),
                 Core.f_new(
                   Core.t_typelist,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.t_number,
                     Core.t_string
                   )
@@ -304,7 +306,8 @@ public final class TypeTest {
                 Core.t_decimal.vx_new_from_string("5.5"),
                 Core.f_new(
                   Core.t_typelist,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.t_string,
                     Core.t_number
                   )
@@ -322,7 +325,8 @@ public final class TypeTest {
                 Core.vx_new_int(4),
                 Core.f_new(
                   Core.t_typelist,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.t_string,
                     Core.t_int
                   )
@@ -662,7 +666,8 @@ public final class TypeTest {
               Type.f_string_from_stringlist_join(
                 Core.f_new(
                   Core.t_stringlist,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string("a"),
                     Core.vx_new_string("b"),
                     Core.vx_new_string("c")
@@ -694,7 +699,8 @@ public final class TypeTest {
               context,
               Core.f_new(
                 Core.t_stringlist,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string("a"),
                   Core.vx_new_string("b"),
                   Core.vx_new_string("c")

@@ -213,21 +213,22 @@ public static class Collection {
   public class Class_any_from_for_until_loop : Vx.Core.Class_base, Func_any_from_for_until_loop {
 
     public override Vx.Collection.Func_any_from_for_until_loop vx_new(params object[] vals) {
-      Class_any_from_for_until_loop output = new Class_any_from_for_until_loop();
+      Vx.Collection.Class_any_from_for_until_loop output = new Vx.Collection.Class_any_from_for_until_loop();
       return output;
     }
 
-    public override Vx.Collection.Func_any_from_for_until_loop vx_copy(params object[] vals) {
-      Class_any_from_for_until_loop output = new Class_any_from_for_until_loop();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Collection.Class_any_from_for_until_loop output = new Vx.Collection.Class_any_from_for_until_loop();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/collection", // pkgname
         "any<-for-until-loop", // name
         0, // idx
@@ -246,14 +247,17 @@ public static class Collection {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_any_from_for_until_loop;
+      Vx.Core.Type_any output = Vx.Collection.e_any_from_for_until_loop;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_any_from_for_until_loop;
+      Vx.Core.Type_any output = Vx.Collection.t_any_from_for_until_loop;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -272,8 +276,8 @@ public static class Collection {
 
   }
 
-  public static Func_any_from_for_until_loop e_any_from_for_until_loop = new Vx.Collection.Class_any_from_for_until_loop();
-  public static Func_any_from_for_until_loop t_any_from_for_until_loop = new Vx.Collection.Class_any_from_for_until_loop();
+  public static Vx.Collection.Func_any_from_for_until_loop e_any_from_for_until_loop = new Vx.Collection.Class_any_from_for_until_loop();
+  public static Vx.Collection.Func_any_from_for_until_loop t_any_from_for_until_loop = new Vx.Collection.Class_any_from_for_until_loop();
 
   public static T f_any_from_for_until_loop<T>(T generic_any_1, T start, Vx.Core.Func_boolean_from_any fn_until, Vx.Core.Func_any_from_any fn_loop) where T : Vx.Core.Type_any {
     T output = Vx.Core.f_empty(generic_any_1);
@@ -306,21 +310,22 @@ public static class Collection {
   public class Class_any_from_for_until_loop_max : Vx.Core.Class_base, Func_any_from_for_until_loop_max {
 
     public override Vx.Collection.Func_any_from_for_until_loop_max vx_new(params object[] vals) {
-      Class_any_from_for_until_loop_max output = new Class_any_from_for_until_loop_max();
+      Vx.Collection.Class_any_from_for_until_loop_max output = new Vx.Collection.Class_any_from_for_until_loop_max();
       return output;
     }
 
-    public override Vx.Collection.Func_any_from_for_until_loop_max vx_copy(params object[] vals) {
-      Class_any_from_for_until_loop_max output = new Class_any_from_for_until_loop_max();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Collection.Class_any_from_for_until_loop_max output = new Vx.Collection.Class_any_from_for_until_loop_max();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/collection", // pkgname
         "any<-for-until-loop-max", // name
         0, // idx
@@ -339,14 +344,17 @@ public static class Collection {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_any_from_for_until_loop_max;
+      Vx.Core.Type_any output = Vx.Collection.e_any_from_for_until_loop_max;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_any_from_for_until_loop_max;
+      Vx.Core.Type_any output = Vx.Collection.t_any_from_for_until_loop_max;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -366,8 +374,8 @@ public static class Collection {
 
   }
 
-  public static Func_any_from_for_until_loop_max e_any_from_for_until_loop_max = new Vx.Collection.Class_any_from_for_until_loop_max();
-  public static Func_any_from_for_until_loop_max t_any_from_for_until_loop_max = new Vx.Collection.Class_any_from_for_until_loop_max();
+  public static Vx.Collection.Func_any_from_for_until_loop_max e_any_from_for_until_loop_max = new Vx.Collection.Class_any_from_for_until_loop_max();
+  public static Vx.Collection.Func_any_from_for_until_loop_max t_any_from_for_until_loop_max = new Vx.Collection.Class_any_from_for_until_loop_max();
 
   public static T f_any_from_for_until_loop_max<T>(T generic_any_1, T start, Vx.Core.Func_boolean_from_any fn_until, Vx.Core.Func_any_from_any fn_loop, Vx.Core.Type_int max) where T : Vx.Core.Type_any {
     T output = Vx.Core.f_empty(generic_any_1);
@@ -391,21 +399,22 @@ public static class Collection {
   public class Class_any_from_for_while_loop : Vx.Core.Class_base, Func_any_from_for_while_loop {
 
     public override Vx.Collection.Func_any_from_for_while_loop vx_new(params object[] vals) {
-      Class_any_from_for_while_loop output = new Class_any_from_for_while_loop();
+      Vx.Collection.Class_any_from_for_while_loop output = new Vx.Collection.Class_any_from_for_while_loop();
       return output;
     }
 
-    public override Vx.Collection.Func_any_from_for_while_loop vx_copy(params object[] vals) {
-      Class_any_from_for_while_loop output = new Class_any_from_for_while_loop();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Collection.Class_any_from_for_while_loop output = new Vx.Collection.Class_any_from_for_while_loop();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/collection", // pkgname
         "any<-for-while-loop", // name
         0, // idx
@@ -424,14 +433,17 @@ public static class Collection {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_any_from_for_while_loop;
+      Vx.Core.Type_any output = Vx.Collection.e_any_from_for_while_loop;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_any_from_for_while_loop;
+      Vx.Core.Type_any output = Vx.Collection.t_any_from_for_while_loop;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -450,8 +462,8 @@ public static class Collection {
 
   }
 
-  public static Func_any_from_for_while_loop e_any_from_for_while_loop = new Vx.Collection.Class_any_from_for_while_loop();
-  public static Func_any_from_for_while_loop t_any_from_for_while_loop = new Vx.Collection.Class_any_from_for_while_loop();
+  public static Vx.Collection.Func_any_from_for_while_loop e_any_from_for_while_loop = new Vx.Collection.Class_any_from_for_while_loop();
+  public static Vx.Collection.Func_any_from_for_while_loop t_any_from_for_while_loop = new Vx.Collection.Class_any_from_for_while_loop();
 
   public static T f_any_from_for_while_loop<T>(T generic_any_1, T start, Vx.Core.Func_boolean_from_any fn_while, Vx.Core.Func_any_from_any fn_loop) where T : Vx.Core.Type_any {
     T output = Vx.Core.f_empty(generic_any_1);
@@ -485,21 +497,22 @@ public static class Collection {
   public class Class_any_from_for_while_loop_max : Vx.Core.Class_base, Func_any_from_for_while_loop_max {
 
     public override Vx.Collection.Func_any_from_for_while_loop_max vx_new(params object[] vals) {
-      Class_any_from_for_while_loop_max output = new Class_any_from_for_while_loop_max();
+      Vx.Collection.Class_any_from_for_while_loop_max output = new Vx.Collection.Class_any_from_for_while_loop_max();
       return output;
     }
 
-    public override Vx.Collection.Func_any_from_for_while_loop_max vx_copy(params object[] vals) {
-      Class_any_from_for_while_loop_max output = new Class_any_from_for_while_loop_max();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Collection.Class_any_from_for_while_loop_max output = new Vx.Collection.Class_any_from_for_while_loop_max();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/collection", // pkgname
         "any<-for-while-loop-max", // name
         0, // idx
@@ -518,14 +531,17 @@ public static class Collection {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_any_from_for_while_loop_max;
+      Vx.Core.Type_any output = Vx.Collection.e_any_from_for_while_loop_max;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_any_from_for_while_loop_max;
+      Vx.Core.Type_any output = Vx.Collection.t_any_from_for_while_loop_max;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -545,8 +561,8 @@ public static class Collection {
 
   }
 
-  public static Func_any_from_for_while_loop_max e_any_from_for_while_loop_max = new Vx.Collection.Class_any_from_for_while_loop_max();
-  public static Func_any_from_for_while_loop_max t_any_from_for_while_loop_max = new Vx.Collection.Class_any_from_for_while_loop_max();
+  public static Vx.Collection.Func_any_from_for_while_loop_max e_any_from_for_while_loop_max = new Vx.Collection.Class_any_from_for_while_loop_max();
+  public static Vx.Collection.Func_any_from_for_while_loop_max t_any_from_for_while_loop_max = new Vx.Collection.Class_any_from_for_while_loop_max();
 
   public static T f_any_from_for_while_loop_max<T>(T generic_any_1, T start, Vx.Core.Func_boolean_from_any fn_while, Vx.Core.Func_any_from_any fn_loop, Vx.Core.Type_int max) where T : Vx.Core.Type_any {
     T output = Vx.Core.f_empty(generic_any_1);
@@ -569,21 +585,22 @@ public static class Collection {
   public class Class_any_from_map_pos : Vx.Core.Class_base, Func_any_from_map_pos {
 
     public override Vx.Collection.Func_any_from_map_pos vx_new(params object[] vals) {
-      Class_any_from_map_pos output = new Class_any_from_map_pos();
+      Vx.Collection.Class_any_from_map_pos output = new Vx.Collection.Class_any_from_map_pos();
       return output;
     }
 
-    public override Vx.Collection.Func_any_from_map_pos vx_copy(params object[] vals) {
-      Class_any_from_map_pos output = new Class_any_from_map_pos();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Collection.Class_any_from_map_pos output = new Vx.Collection.Class_any_from_map_pos();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/collection", // pkgname
         "any<-map-pos", // name
         0, // idx
@@ -602,14 +619,17 @@ public static class Collection {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_any_from_map_pos;
+      Vx.Core.Type_any output = Vx.Collection.e_any_from_map_pos;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_any_from_map_pos;
+      Vx.Core.Type_any output = Vx.Collection.t_any_from_map_pos;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -627,8 +647,8 @@ public static class Collection {
 
   }
 
-  public static Func_any_from_map_pos e_any_from_map_pos = new Vx.Collection.Class_any_from_map_pos();
-  public static Func_any_from_map_pos t_any_from_map_pos = new Vx.Collection.Class_any_from_map_pos();
+  public static Vx.Collection.Func_any_from_map_pos e_any_from_map_pos = new Vx.Collection.Class_any_from_map_pos();
+  public static Vx.Collection.Func_any_from_map_pos t_any_from_map_pos = new Vx.Collection.Class_any_from_map_pos();
 
   public static T f_any_from_map_pos<N, T>(T generic_any_1, N map, Vx.Core.Type_int pos) where N : Vx.Core.Type_map where T : Vx.Core.Type_any {
     T output = Vx.Core.f_empty(generic_any_1);
@@ -659,21 +679,22 @@ public static class Collection {
   public class Class_boolean_write_from_map_removekey : Vx.Core.Class_base, Func_boolean_write_from_map_removekey {
 
     public override Vx.Collection.Func_boolean_write_from_map_removekey vx_new(params object[] vals) {
-      Class_boolean_write_from_map_removekey output = new Class_boolean_write_from_map_removekey();
+      Vx.Collection.Class_boolean_write_from_map_removekey output = new Vx.Collection.Class_boolean_write_from_map_removekey();
       return output;
     }
 
-    public override Vx.Collection.Func_boolean_write_from_map_removekey vx_copy(params object[] vals) {
-      Class_boolean_write_from_map_removekey output = new Class_boolean_write_from_map_removekey();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Collection.Class_boolean_write_from_map_removekey output = new Vx.Collection.Class_boolean_write_from_map_removekey();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/collection", // pkgname
         "boolean-write<-map-removekey", // name
         0, // idx
@@ -692,14 +713,17 @@ public static class Collection {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_boolean_write_from_map_removekey;
+      Vx.Core.Type_any output = Vx.Collection.e_boolean_write_from_map_removekey;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_boolean_write_from_map_removekey;
+      Vx.Core.Type_any output = Vx.Collection.t_boolean_write_from_map_removekey;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -716,8 +740,8 @@ public static class Collection {
 
   }
 
-  public static Func_boolean_write_from_map_removekey e_boolean_write_from_map_removekey = new Vx.Collection.Class_boolean_write_from_map_removekey();
-  public static Func_boolean_write_from_map_removekey t_boolean_write_from_map_removekey = new Vx.Collection.Class_boolean_write_from_map_removekey();
+  public static Vx.Collection.Func_boolean_write_from_map_removekey e_boolean_write_from_map_removekey = new Vx.Collection.Class_boolean_write_from_map_removekey();
+  public static Vx.Collection.Func_boolean_write_from_map_removekey t_boolean_write_from_map_removekey = new Vx.Collection.Class_boolean_write_from_map_removekey();
 
   public static Vx.Core.Type_boolean f_boolean_write_from_map_removekey(Vx.Core.Type_map valuemap, Vx.Core.Type_string key) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -746,21 +770,22 @@ public static class Collection {
   public class Class_boolean_write_from_map_removekeys : Vx.Core.Class_base, Func_boolean_write_from_map_removekeys {
 
     public override Vx.Collection.Func_boolean_write_from_map_removekeys vx_new(params object[] vals) {
-      Class_boolean_write_from_map_removekeys output = new Class_boolean_write_from_map_removekeys();
+      Vx.Collection.Class_boolean_write_from_map_removekeys output = new Vx.Collection.Class_boolean_write_from_map_removekeys();
       return output;
     }
 
-    public override Vx.Collection.Func_boolean_write_from_map_removekeys vx_copy(params object[] vals) {
-      Class_boolean_write_from_map_removekeys output = new Class_boolean_write_from_map_removekeys();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Collection.Class_boolean_write_from_map_removekeys output = new Vx.Collection.Class_boolean_write_from_map_removekeys();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/collection", // pkgname
         "boolean-write<-map-removekeys", // name
         0, // idx
@@ -779,14 +804,17 @@ public static class Collection {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_boolean_write_from_map_removekeys;
+      Vx.Core.Type_any output = Vx.Collection.e_boolean_write_from_map_removekeys;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_boolean_write_from_map_removekeys;
+      Vx.Core.Type_any output = Vx.Collection.t_boolean_write_from_map_removekeys;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -803,8 +831,8 @@ public static class Collection {
 
   }
 
-  public static Func_boolean_write_from_map_removekeys e_boolean_write_from_map_removekeys = new Vx.Collection.Class_boolean_write_from_map_removekeys();
-  public static Func_boolean_write_from_map_removekeys t_boolean_write_from_map_removekeys = new Vx.Collection.Class_boolean_write_from_map_removekeys();
+  public static Vx.Collection.Func_boolean_write_from_map_removekeys e_boolean_write_from_map_removekeys = new Vx.Collection.Class_boolean_write_from_map_removekeys();
+  public static Vx.Collection.Func_boolean_write_from_map_removekeys t_boolean_write_from_map_removekeys = new Vx.Collection.Class_boolean_write_from_map_removekeys();
 
   public static Vx.Core.Type_boolean f_boolean_write_from_map_removekeys(Vx.Core.Type_map valuemap, Vx.Core.Type_stringlist keys) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -843,21 +871,22 @@ public static class Collection {
   public class Class_int_from_map_key : Vx.Core.Class_base, Func_int_from_map_key {
 
     public override Vx.Collection.Func_int_from_map_key vx_new(params object[] vals) {
-      Class_int_from_map_key output = new Class_int_from_map_key();
+      Vx.Collection.Class_int_from_map_key output = new Vx.Collection.Class_int_from_map_key();
       return output;
     }
 
-    public override Vx.Collection.Func_int_from_map_key vx_copy(params object[] vals) {
-      Class_int_from_map_key output = new Class_int_from_map_key();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Collection.Class_int_from_map_key output = new Vx.Collection.Class_int_from_map_key();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/collection", // pkgname
         "int<-map-key", // name
         0, // idx
@@ -876,14 +905,17 @@ public static class Collection {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_int_from_map_key;
+      Vx.Core.Type_any output = Vx.Collection.e_int_from_map_key;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_int_from_map_key;
+      Vx.Core.Type_any output = Vx.Collection.t_int_from_map_key;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -900,8 +932,8 @@ public static class Collection {
 
   }
 
-  public static Func_int_from_map_key e_int_from_map_key = new Vx.Collection.Class_int_from_map_key();
-  public static Func_int_from_map_key t_int_from_map_key = new Vx.Collection.Class_int_from_map_key();
+  public static Vx.Collection.Func_int_from_map_key e_int_from_map_key = new Vx.Collection.Class_int_from_map_key();
+  public static Vx.Collection.Func_int_from_map_key t_int_from_map_key = new Vx.Collection.Class_int_from_map_key();
 
   public static Vx.Core.Type_int f_int_from_map_key(Vx.Core.Type_map map, Vx.Core.Type_string key) {
     Vx.Core.Type_int output = Vx.Core.e_int;
@@ -931,21 +963,22 @@ public static class Collection {
   public class Class_int_from_stringlist_find : Vx.Core.Class_base, Func_int_from_stringlist_find {
 
     public override Vx.Collection.Func_int_from_stringlist_find vx_new(params object[] vals) {
-      Class_int_from_stringlist_find output = new Class_int_from_stringlist_find();
+      Vx.Collection.Class_int_from_stringlist_find output = new Vx.Collection.Class_int_from_stringlist_find();
       return output;
     }
 
-    public override Vx.Collection.Func_int_from_stringlist_find vx_copy(params object[] vals) {
-      Class_int_from_stringlist_find output = new Class_int_from_stringlist_find();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Collection.Class_int_from_stringlist_find output = new Vx.Collection.Class_int_from_stringlist_find();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/collection", // pkgname
         "int<-stringlist-find", // name
         0, // idx
@@ -964,14 +997,17 @@ public static class Collection {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_int_from_stringlist_find;
+      Vx.Core.Type_any output = Vx.Collection.e_int_from_stringlist_find;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_int_from_stringlist_find;
+      Vx.Core.Type_any output = Vx.Collection.t_int_from_stringlist_find;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -988,8 +1024,8 @@ public static class Collection {
 
   }
 
-  public static Func_int_from_stringlist_find e_int_from_stringlist_find = new Vx.Collection.Class_int_from_stringlist_find();
-  public static Func_int_from_stringlist_find t_int_from_stringlist_find = new Vx.Collection.Class_int_from_stringlist_find();
+  public static Vx.Collection.Func_int_from_stringlist_find e_int_from_stringlist_find = new Vx.Collection.Class_int_from_stringlist_find();
+  public static Vx.Collection.Func_int_from_stringlist_find t_int_from_stringlist_find = new Vx.Collection.Class_int_from_stringlist_find();
 
   public static Vx.Core.Type_int f_int_from_stringlist_find(Vx.Core.Type_stringlist stringlist, Vx.Core.Type_string find) {
     Vx.Core.Type_int output = Vx.Core.e_int;
@@ -1042,21 +1078,22 @@ public static class Collection {
   public class Class_is_list : Vx.Core.Class_base, Func_is_list {
 
     public override Vx.Collection.Func_is_list vx_new(params object[] vals) {
-      Class_is_list output = new Class_is_list();
+      Vx.Collection.Class_is_list output = new Vx.Collection.Class_is_list();
       return output;
     }
 
-    public override Vx.Collection.Func_is_list vx_copy(params object[] vals) {
-      Class_is_list output = new Class_is_list();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Collection.Class_is_list output = new Vx.Collection.Class_is_list();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/collection", // pkgname
         "is-list", // name
         0, // idx
@@ -1075,14 +1112,17 @@ public static class Collection {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_is_list;
+      Vx.Core.Type_any output = Vx.Collection.e_is_list;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_is_list;
+      Vx.Core.Type_any output = Vx.Collection.t_is_list;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -1110,8 +1150,8 @@ public static class Collection {
 
   }
 
-  public static Func_is_list e_is_list = new Vx.Collection.Class_is_list();
-  public static Func_is_list t_is_list = new Vx.Collection.Class_is_list();
+  public static Vx.Collection.Func_is_list e_is_list = new Vx.Collection.Class_is_list();
+  public static Vx.Collection.Func_is_list t_is_list = new Vx.Collection.Class_is_list();
 
   public static Vx.Core.Type_boolean f_is_list(Vx.Core.Type_any val) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -1136,21 +1176,22 @@ public static class Collection {
   public class Class_is_map : Vx.Core.Class_base, Func_is_map {
 
     public override Vx.Collection.Func_is_map vx_new(params object[] vals) {
-      Class_is_map output = new Class_is_map();
+      Vx.Collection.Class_is_map output = new Vx.Collection.Class_is_map();
       return output;
     }
 
-    public override Vx.Collection.Func_is_map vx_copy(params object[] vals) {
-      Class_is_map output = new Class_is_map();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Collection.Class_is_map output = new Vx.Collection.Class_is_map();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/collection", // pkgname
         "is-map", // name
         0, // idx
@@ -1169,14 +1210,17 @@ public static class Collection {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_is_map;
+      Vx.Core.Type_any output = Vx.Collection.e_is_map;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_is_map;
+      Vx.Core.Type_any output = Vx.Collection.t_is_map;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -1204,8 +1248,8 @@ public static class Collection {
 
   }
 
-  public static Func_is_map e_is_map = new Vx.Collection.Class_is_map();
-  public static Func_is_map t_is_map = new Vx.Collection.Class_is_map();
+  public static Vx.Collection.Func_is_map e_is_map = new Vx.Collection.Class_is_map();
+  public static Vx.Collection.Func_is_map t_is_map = new Vx.Collection.Class_is_map();
 
   public static Vx.Core.Type_boolean f_is_map(Vx.Core.Type_any val) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -1237,27 +1281,28 @@ public static class Collection {
    * (func list<-for-end-loop)
    */
   public interface Func_list_from_for_end_loop : Vx.Core.Type_func, Vx.Core.Type_replfunc {
-    public X vx_list_from_for_end_loop<X>(X generic_any_1, Vx.Core.Type_int start, Vx.Core.Type_int end, Vx.Core.Func_any_from_int fn_loop) where X : Vx.Core.Type_list;
+    public X vx_list_from_for_end_loop<X>(X generic_list_1, Vx.Core.Type_int start, Vx.Core.Type_int end, Vx.Core.Func_any_from_int fn_loop) where X : Vx.Core.Type_list;
   }
 
   public class Class_list_from_for_end_loop : Vx.Core.Class_base, Func_list_from_for_end_loop {
 
     public override Vx.Collection.Func_list_from_for_end_loop vx_new(params object[] vals) {
-      Class_list_from_for_end_loop output = new Class_list_from_for_end_loop();
+      Vx.Collection.Class_list_from_for_end_loop output = new Vx.Collection.Class_list_from_for_end_loop();
       return output;
     }
 
-    public override Vx.Collection.Func_list_from_for_end_loop vx_copy(params object[] vals) {
-      Class_list_from_for_end_loop output = new Class_list_from_for_end_loop();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Collection.Class_list_from_for_end_loop output = new Vx.Collection.Class_list_from_for_end_loop();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/collection", // pkgname
         "list<-for-end-loop", // name
         0, // idx
@@ -1276,14 +1321,17 @@ public static class Collection {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_list_from_for_end_loop;
+      Vx.Core.Type_any output = Vx.Collection.e_list_from_for_end_loop;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_list_from_for_end_loop;
+      Vx.Core.Type_any output = Vx.Collection.t_list_from_for_end_loop;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -1302,8 +1350,8 @@ public static class Collection {
 
   }
 
-  public static Func_list_from_for_end_loop e_list_from_for_end_loop = new Vx.Collection.Class_list_from_for_end_loop();
-  public static Func_list_from_for_end_loop t_list_from_for_end_loop = new Vx.Collection.Class_list_from_for_end_loop();
+  public static Vx.Collection.Func_list_from_for_end_loop e_list_from_for_end_loop = new Vx.Collection.Class_list_from_for_end_loop();
+  public static Vx.Collection.Func_list_from_for_end_loop t_list_from_for_end_loop = new Vx.Collection.Class_list_from_for_end_loop();
 
   public static X f_list_from_for_end_loop<X>(X generic_list_1, Vx.Core.Type_int start, Vx.Core.Type_int end, Vx.Core.Func_any_from_int fn_loop) where X : Vx.Core.Type_list {
     X output = Vx.Core.f_empty(generic_list_1);
@@ -1321,27 +1369,28 @@ public static class Collection {
    * (func list<-for-while-loop)
    */
   public interface Func_list_from_for_while_loop : Vx.Core.Type_func, Vx.Core.Type_replfunc {
-    public X vx_list_from_for_while_loop<T, X>(X generic_any_1, T start, Vx.Core.Func_boolean_from_any fn_while, Vx.Core.Func_any_from_any fn_loop) where T : Vx.Core.Type_any where X : Vx.Core.Type_list;
+    public X vx_list_from_for_while_loop<T, X>(X generic_list_1, T start, Vx.Core.Func_boolean_from_any fn_while, Vx.Core.Func_any_from_any fn_loop) where T : Vx.Core.Type_any where X : Vx.Core.Type_list;
   }
 
   public class Class_list_from_for_while_loop : Vx.Core.Class_base, Func_list_from_for_while_loop {
 
     public override Vx.Collection.Func_list_from_for_while_loop vx_new(params object[] vals) {
-      Class_list_from_for_while_loop output = new Class_list_from_for_while_loop();
+      Vx.Collection.Class_list_from_for_while_loop output = new Vx.Collection.Class_list_from_for_while_loop();
       return output;
     }
 
-    public override Vx.Collection.Func_list_from_for_while_loop vx_copy(params object[] vals) {
-      Class_list_from_for_while_loop output = new Class_list_from_for_while_loop();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Collection.Class_list_from_for_while_loop output = new Vx.Collection.Class_list_from_for_while_loop();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/collection", // pkgname
         "list<-for-while-loop", // name
         0, // idx
@@ -1360,14 +1409,17 @@ public static class Collection {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_list_from_for_while_loop;
+      Vx.Core.Type_any output = Vx.Collection.e_list_from_for_while_loop;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_list_from_for_while_loop;
+      Vx.Core.Type_any output = Vx.Collection.t_list_from_for_while_loop;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -1386,8 +1438,8 @@ public static class Collection {
 
   }
 
-  public static Func_list_from_for_while_loop e_list_from_for_while_loop = new Vx.Collection.Class_list_from_for_while_loop();
-  public static Func_list_from_for_while_loop t_list_from_for_while_loop = new Vx.Collection.Class_list_from_for_while_loop();
+  public static Vx.Collection.Func_list_from_for_while_loop e_list_from_for_while_loop = new Vx.Collection.Class_list_from_for_while_loop();
+  public static Vx.Collection.Func_list_from_for_while_loop t_list_from_for_while_loop = new Vx.Collection.Class_list_from_for_while_loop();
 
   public static X f_list_from_for_while_loop<T, X>(X generic_list_1, T start, Vx.Core.Func_boolean_from_any fn_while, Vx.Core.Func_any_from_any fn_loop) where T : Vx.Core.Type_any where X : Vx.Core.Type_list {
     X output = Vx.Core.f_empty(generic_list_1);
@@ -1412,27 +1464,28 @@ public static class Collection {
    * (func list<-for-while-loop-max)
    */
   public interface Func_list_from_for_while_loop_max : Vx.Core.Type_func, Vx.Core.Type_replfunc {
-    public X vx_list_from_for_while_loop_max<T, X>(X generic_any_1, T start, Vx.Core.Func_boolean_from_any fn_while, Vx.Core.Func_any_from_any fn_loop, Vx.Core.Type_int max) where T : Vx.Core.Type_any where X : Vx.Core.Type_list;
+    public X vx_list_from_for_while_loop_max<T, X>(X generic_list_1, T start, Vx.Core.Func_boolean_from_any fn_while, Vx.Core.Func_any_from_any fn_loop, Vx.Core.Type_int max) where T : Vx.Core.Type_any where X : Vx.Core.Type_list;
   }
 
   public class Class_list_from_for_while_loop_max : Vx.Core.Class_base, Func_list_from_for_while_loop_max {
 
     public override Vx.Collection.Func_list_from_for_while_loop_max vx_new(params object[] vals) {
-      Class_list_from_for_while_loop_max output = new Class_list_from_for_while_loop_max();
+      Vx.Collection.Class_list_from_for_while_loop_max output = new Vx.Collection.Class_list_from_for_while_loop_max();
       return output;
     }
 
-    public override Vx.Collection.Func_list_from_for_while_loop_max vx_copy(params object[] vals) {
-      Class_list_from_for_while_loop_max output = new Class_list_from_for_while_loop_max();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Collection.Class_list_from_for_while_loop_max output = new Vx.Collection.Class_list_from_for_while_loop_max();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/collection", // pkgname
         "list<-for-while-loop-max", // name
         0, // idx
@@ -1451,14 +1504,17 @@ public static class Collection {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_list_from_for_while_loop_max;
+      Vx.Core.Type_any output = Vx.Collection.e_list_from_for_while_loop_max;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_list_from_for_while_loop_max;
+      Vx.Core.Type_any output = Vx.Collection.t_list_from_for_while_loop_max;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -1478,8 +1534,8 @@ public static class Collection {
 
   }
 
-  public static Func_list_from_for_while_loop_max e_list_from_for_while_loop_max = new Vx.Collection.Class_list_from_for_while_loop_max();
-  public static Func_list_from_for_while_loop_max t_list_from_for_while_loop_max = new Vx.Collection.Class_list_from_for_while_loop_max();
+  public static Vx.Collection.Func_list_from_for_while_loop_max e_list_from_for_while_loop_max = new Vx.Collection.Class_list_from_for_while_loop_max();
+  public static Vx.Collection.Func_list_from_for_while_loop_max t_list_from_for_while_loop_max = new Vx.Collection.Class_list_from_for_while_loop_max();
 
   public static X f_list_from_for_while_loop_max<T, X>(X generic_list_1, T start, Vx.Core.Func_boolean_from_any fn_while, Vx.Core.Func_any_from_any fn_loop, Vx.Core.Type_int max) where T : Vx.Core.Type_any where X : Vx.Core.Type_list {
     X output = Vx.Core.f_empty(generic_list_1);
@@ -1496,27 +1552,28 @@ public static class Collection {
    * (func list<-list-end)
    */
   public interface Func_list_from_list_end : Vx.Core.Type_func, Vx.Core.Type_replfunc {
-    public X vx_list_from_list_end<X>(X generic_any_1, X values, Vx.Core.Type_int end) where X : Vx.Core.Type_list;
+    public X vx_list_from_list_end<X>(X generic_list_1, X values, Vx.Core.Type_int end) where X : Vx.Core.Type_list;
   }
 
   public class Class_list_from_list_end : Vx.Core.Class_base, Func_list_from_list_end {
 
     public override Vx.Collection.Func_list_from_list_end vx_new(params object[] vals) {
-      Class_list_from_list_end output = new Class_list_from_list_end();
+      Vx.Collection.Class_list_from_list_end output = new Vx.Collection.Class_list_from_list_end();
       return output;
     }
 
-    public override Vx.Collection.Func_list_from_list_end vx_copy(params object[] vals) {
-      Class_list_from_list_end output = new Class_list_from_list_end();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Collection.Class_list_from_list_end output = new Vx.Collection.Class_list_from_list_end();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/collection", // pkgname
         "list<-list-end", // name
         0, // idx
@@ -1535,14 +1592,17 @@ public static class Collection {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_list_from_list_end;
+      Vx.Core.Type_any output = Vx.Collection.e_list_from_list_end;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_list_from_list_end;
+      Vx.Core.Type_any output = Vx.Collection.t_list_from_list_end;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -1560,8 +1620,8 @@ public static class Collection {
 
   }
 
-  public static Func_list_from_list_end e_list_from_list_end = new Vx.Collection.Class_list_from_list_end();
-  public static Func_list_from_list_end t_list_from_list_end = new Vx.Collection.Class_list_from_list_end();
+  public static Vx.Collection.Func_list_from_list_end e_list_from_list_end = new Vx.Collection.Class_list_from_list_end();
+  public static Vx.Collection.Func_list_from_list_end t_list_from_list_end = new Vx.Collection.Class_list_from_list_end();
 
   public static X f_list_from_list_end<X>(X generic_list_1, X values, Vx.Core.Type_int end) where X : Vx.Core.Type_list {
     X output = Vx.Core.f_empty(generic_list_1);
@@ -1578,27 +1638,28 @@ public static class Collection {
    * (func list<-list-filter)
    */
   public interface Func_list_from_list_filter : Vx.Core.Type_func, Vx.Core.Type_replfunc {
-    public X vx_list_from_list_filter<X, Y>(X generic_any_1, Y vallist, Vx.Core.Func_any_from_any fn_filter) where X : Vx.Core.Type_list where Y : Vx.Core.Type_list;
+    public X vx_list_from_list_filter<X, Y>(X generic_list_1, Y vallist, Vx.Core.Func_any_from_any fn_filter) where X : Vx.Core.Type_list where Y : Vx.Core.Type_list;
   }
 
   public class Class_list_from_list_filter : Vx.Core.Class_base, Func_list_from_list_filter {
 
     public override Vx.Collection.Func_list_from_list_filter vx_new(params object[] vals) {
-      Class_list_from_list_filter output = new Class_list_from_list_filter();
+      Vx.Collection.Class_list_from_list_filter output = new Vx.Collection.Class_list_from_list_filter();
       return output;
     }
 
-    public override Vx.Collection.Func_list_from_list_filter vx_copy(params object[] vals) {
-      Class_list_from_list_filter output = new Class_list_from_list_filter();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Collection.Class_list_from_list_filter output = new Vx.Collection.Class_list_from_list_filter();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/collection", // pkgname
         "list<-list-filter", // name
         0, // idx
@@ -1617,14 +1678,17 @@ public static class Collection {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_list_from_list_filter;
+      Vx.Core.Type_any output = Vx.Collection.e_list_from_list_filter;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_list_from_list_filter;
+      Vx.Core.Type_any output = Vx.Collection.t_list_from_list_filter;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -1642,8 +1706,8 @@ public static class Collection {
 
   }
 
-  public static Func_list_from_list_filter e_list_from_list_filter = new Vx.Collection.Class_list_from_list_filter();
-  public static Func_list_from_list_filter t_list_from_list_filter = new Vx.Collection.Class_list_from_list_filter();
+  public static Vx.Collection.Func_list_from_list_filter e_list_from_list_filter = new Vx.Collection.Class_list_from_list_filter();
+  public static Vx.Collection.Func_list_from_list_filter t_list_from_list_filter = new Vx.Collection.Class_list_from_list_filter();
 
   public static X f_list_from_list_filter<X, Y>(X generic_list_1, Y vallist, Vx.Core.Func_any_from_any fn_filter) where X : Vx.Core.Type_list where Y : Vx.Core.Type_list {
     X output = Vx.Core.f_empty(generic_list_1);
@@ -1660,27 +1724,28 @@ public static class Collection {
    * (func list<-list-filtertypes)
    */
   public interface Func_list_from_list_filtertypes : Vx.Core.Type_func, Vx.Core.Type_replfunc {
-    public X vx_list_from_list_filtertypes<X, Y>(X generic_any_1, Y vallist, Vx.Core.Type_typelist filtertypes) where X : Vx.Core.Type_list where Y : Vx.Core.Type_list;
+    public X vx_list_from_list_filtertypes<X, Y>(X generic_list_1, Y vallist, Vx.Core.Type_typelist filtertypes) where X : Vx.Core.Type_list where Y : Vx.Core.Type_list;
   }
 
   public class Class_list_from_list_filtertypes : Vx.Core.Class_base, Func_list_from_list_filtertypes {
 
     public override Vx.Collection.Func_list_from_list_filtertypes vx_new(params object[] vals) {
-      Class_list_from_list_filtertypes output = new Class_list_from_list_filtertypes();
+      Vx.Collection.Class_list_from_list_filtertypes output = new Vx.Collection.Class_list_from_list_filtertypes();
       return output;
     }
 
-    public override Vx.Collection.Func_list_from_list_filtertypes vx_copy(params object[] vals) {
-      Class_list_from_list_filtertypes output = new Class_list_from_list_filtertypes();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Collection.Class_list_from_list_filtertypes output = new Vx.Collection.Class_list_from_list_filtertypes();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/collection", // pkgname
         "list<-list-filtertypes", // name
         0, // idx
@@ -1699,14 +1764,17 @@ public static class Collection {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_list_from_list_filtertypes;
+      Vx.Core.Type_any output = Vx.Collection.e_list_from_list_filtertypes;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_list_from_list_filtertypes;
+      Vx.Core.Type_any output = Vx.Collection.t_list_from_list_filtertypes;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -1724,8 +1792,8 @@ public static class Collection {
 
   }
 
-  public static Func_list_from_list_filtertypes e_list_from_list_filtertypes = new Vx.Collection.Class_list_from_list_filtertypes();
-  public static Func_list_from_list_filtertypes t_list_from_list_filtertypes = new Vx.Collection.Class_list_from_list_filtertypes();
+  public static Vx.Collection.Func_list_from_list_filtertypes e_list_from_list_filtertypes = new Vx.Collection.Class_list_from_list_filtertypes();
+  public static Vx.Collection.Func_list_from_list_filtertypes t_list_from_list_filtertypes = new Vx.Collection.Class_list_from_list_filtertypes();
 
   public static X f_list_from_list_filtertypes<X, Y>(X generic_list_1, Y vallist, Vx.Core.Type_typelist filtertypes) where X : Vx.Core.Type_list where Y : Vx.Core.Type_list {
     X output = Vx.Core.f_empty(generic_list_1);
@@ -1755,27 +1823,28 @@ public static class Collection {
    * (func list<-list-start)
    */
   public interface Func_list_from_list_start : Vx.Core.Type_func, Vx.Core.Type_replfunc {
-    public X vx_list_from_list_start<X>(X generic_any_1, X values, Vx.Core.Type_int start) where X : Vx.Core.Type_list;
+    public X vx_list_from_list_start<X>(X generic_list_1, X values, Vx.Core.Type_int start) where X : Vx.Core.Type_list;
   }
 
   public class Class_list_from_list_start : Vx.Core.Class_base, Func_list_from_list_start {
 
     public override Vx.Collection.Func_list_from_list_start vx_new(params object[] vals) {
-      Class_list_from_list_start output = new Class_list_from_list_start();
+      Vx.Collection.Class_list_from_list_start output = new Vx.Collection.Class_list_from_list_start();
       return output;
     }
 
-    public override Vx.Collection.Func_list_from_list_start vx_copy(params object[] vals) {
-      Class_list_from_list_start output = new Class_list_from_list_start();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Collection.Class_list_from_list_start output = new Vx.Collection.Class_list_from_list_start();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/collection", // pkgname
         "list<-list-start", // name
         0, // idx
@@ -1794,14 +1863,17 @@ public static class Collection {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_list_from_list_start;
+      Vx.Core.Type_any output = Vx.Collection.e_list_from_list_start;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_list_from_list_start;
+      Vx.Core.Type_any output = Vx.Collection.t_list_from_list_start;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -1819,8 +1891,8 @@ public static class Collection {
 
   }
 
-  public static Func_list_from_list_start e_list_from_list_start = new Vx.Collection.Class_list_from_list_start();
-  public static Func_list_from_list_start t_list_from_list_start = new Vx.Collection.Class_list_from_list_start();
+  public static Vx.Collection.Func_list_from_list_start e_list_from_list_start = new Vx.Collection.Class_list_from_list_start();
+  public static Vx.Collection.Func_list_from_list_start t_list_from_list_start = new Vx.Collection.Class_list_from_list_start();
 
   public static X f_list_from_list_start<X>(X generic_list_1, X values, Vx.Core.Type_int start) where X : Vx.Core.Type_list {
     X output = Vx.Core.f_empty(generic_list_1);
@@ -1843,27 +1915,28 @@ public static class Collection {
    * (func list<-list-start-end)
    */
   public interface Func_list_from_list_start_end : Vx.Core.Type_func, Vx.Core.Type_replfunc {
-    public X vx_list_from_list_start_end<X>(X generic_any_1, X values, Vx.Core.Type_int start, Vx.Core.Type_int end) where X : Vx.Core.Type_list;
+    public X vx_list_from_list_start_end<X>(X generic_list_1, X values, Vx.Core.Type_int start, Vx.Core.Type_int end) where X : Vx.Core.Type_list;
   }
 
   public class Class_list_from_list_start_end : Vx.Core.Class_base, Func_list_from_list_start_end {
 
     public override Vx.Collection.Func_list_from_list_start_end vx_new(params object[] vals) {
-      Class_list_from_list_start_end output = new Class_list_from_list_start_end();
+      Vx.Collection.Class_list_from_list_start_end output = new Vx.Collection.Class_list_from_list_start_end();
       return output;
     }
 
-    public override Vx.Collection.Func_list_from_list_start_end vx_copy(params object[] vals) {
-      Class_list_from_list_start_end output = new Class_list_from_list_start_end();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Collection.Class_list_from_list_start_end output = new Vx.Collection.Class_list_from_list_start_end();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/collection", // pkgname
         "list<-list-start-end", // name
         0, // idx
@@ -1882,14 +1955,17 @@ public static class Collection {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_list_from_list_start_end;
+      Vx.Core.Type_any output = Vx.Collection.e_list_from_list_start_end;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_list_from_list_start_end;
+      Vx.Core.Type_any output = Vx.Collection.t_list_from_list_start_end;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -1908,8 +1984,8 @@ public static class Collection {
 
   }
 
-  public static Func_list_from_list_start_end e_list_from_list_start_end = new Vx.Collection.Class_list_from_list_start_end();
-  public static Func_list_from_list_start_end t_list_from_list_start_end = new Vx.Collection.Class_list_from_list_start_end();
+  public static Vx.Collection.Func_list_from_list_start_end e_list_from_list_start_end = new Vx.Collection.Class_list_from_list_start_end();
+  public static Vx.Collection.Func_list_from_list_start_end t_list_from_list_start_end = new Vx.Collection.Class_list_from_list_start_end();
 
   public static X f_list_from_list_start_end<X>(X generic_list_1, X values, Vx.Core.Type_int start, Vx.Core.Type_int end) where X : Vx.Core.Type_list {
     X output = Vx.Core.f_empty(generic_list_1);
@@ -1926,27 +2002,28 @@ public static class Collection {
    * (func map<-map-end)
    */
   public interface Func_map_from_map_end : Vx.Core.Type_func, Vx.Core.Type_replfunc {
-    public N vx_map_from_map_end<N>(N generic_any_1, N valuemap, Vx.Core.Type_int end) where N : Vx.Core.Type_map;
+    public N vx_map_from_map_end<N>(N generic_map_1, N valuemap, Vx.Core.Type_int end) where N : Vx.Core.Type_map;
   }
 
   public class Class_map_from_map_end : Vx.Core.Class_base, Func_map_from_map_end {
 
     public override Vx.Collection.Func_map_from_map_end vx_new(params object[] vals) {
-      Class_map_from_map_end output = new Class_map_from_map_end();
+      Vx.Collection.Class_map_from_map_end output = new Vx.Collection.Class_map_from_map_end();
       return output;
     }
 
-    public override Vx.Collection.Func_map_from_map_end vx_copy(params object[] vals) {
-      Class_map_from_map_end output = new Class_map_from_map_end();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Collection.Class_map_from_map_end output = new Vx.Collection.Class_map_from_map_end();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/collection", // pkgname
         "map<-map-end", // name
         0, // idx
@@ -1965,14 +2042,17 @@ public static class Collection {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_map_from_map_end;
+      Vx.Core.Type_any output = Vx.Collection.e_map_from_map_end;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_map_from_map_end;
+      Vx.Core.Type_any output = Vx.Collection.t_map_from_map_end;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -1990,8 +2070,8 @@ public static class Collection {
 
   }
 
-  public static Func_map_from_map_end e_map_from_map_end = new Vx.Collection.Class_map_from_map_end();
-  public static Func_map_from_map_end t_map_from_map_end = new Vx.Collection.Class_map_from_map_end();
+  public static Vx.Collection.Func_map_from_map_end e_map_from_map_end = new Vx.Collection.Class_map_from_map_end();
+  public static Vx.Collection.Func_map_from_map_end t_map_from_map_end = new Vx.Collection.Class_map_from_map_end();
 
   public static N f_map_from_map_end<N>(N generic_map_1, N valuemap, Vx.Core.Type_int end) where N : Vx.Core.Type_map {
     N output = Vx.Core.f_empty(generic_map_1);
@@ -2008,27 +2088,28 @@ public static class Collection {
    * (func map<-map-keys)
    */
   public interface Func_map_from_map_keys : Vx.Core.Type_func, Vx.Core.Type_replfunc {
-    public N vx_map_from_map_keys<N>(N generic_any_1, N valuemap, Vx.Core.Type_stringlist keys) where N : Vx.Core.Type_map;
+    public N vx_map_from_map_keys<N>(N generic_map_1, N valuemap, Vx.Core.Type_stringlist keys) where N : Vx.Core.Type_map;
   }
 
   public class Class_map_from_map_keys : Vx.Core.Class_base, Func_map_from_map_keys {
 
     public override Vx.Collection.Func_map_from_map_keys vx_new(params object[] vals) {
-      Class_map_from_map_keys output = new Class_map_from_map_keys();
+      Vx.Collection.Class_map_from_map_keys output = new Vx.Collection.Class_map_from_map_keys();
       return output;
     }
 
-    public override Vx.Collection.Func_map_from_map_keys vx_copy(params object[] vals) {
-      Class_map_from_map_keys output = new Class_map_from_map_keys();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Collection.Class_map_from_map_keys output = new Vx.Collection.Class_map_from_map_keys();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/collection", // pkgname
         "map<-map-keys", // name
         0, // idx
@@ -2047,14 +2128,17 @@ public static class Collection {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_map_from_map_keys;
+      Vx.Core.Type_any output = Vx.Collection.e_map_from_map_keys;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_map_from_map_keys;
+      Vx.Core.Type_any output = Vx.Collection.t_map_from_map_keys;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -2072,8 +2156,8 @@ public static class Collection {
 
   }
 
-  public static Func_map_from_map_keys e_map_from_map_keys = new Vx.Collection.Class_map_from_map_keys();
-  public static Func_map_from_map_keys t_map_from_map_keys = new Vx.Collection.Class_map_from_map_keys();
+  public static Vx.Collection.Func_map_from_map_keys e_map_from_map_keys = new Vx.Collection.Class_map_from_map_keys();
+  public static Vx.Collection.Func_map_from_map_keys t_map_from_map_keys = new Vx.Collection.Class_map_from_map_keys();
 
   public static N f_map_from_map_keys<N>(N generic_map_1, N valuemap, Vx.Core.Type_stringlist keys) where N : Vx.Core.Type_map {
     N output = Vx.Core.f_empty(generic_map_1);
@@ -2090,27 +2174,28 @@ public static class Collection {
    * (func map<-map-start)
    */
   public interface Func_map_from_map_start : Vx.Core.Type_func, Vx.Core.Type_replfunc {
-    public N vx_map_from_map_start<N>(N generic_any_1, N valuemap, Vx.Core.Type_int start) where N : Vx.Core.Type_map;
+    public N vx_map_from_map_start<N>(N generic_map_1, N valuemap, Vx.Core.Type_int start) where N : Vx.Core.Type_map;
   }
 
   public class Class_map_from_map_start : Vx.Core.Class_base, Func_map_from_map_start {
 
     public override Vx.Collection.Func_map_from_map_start vx_new(params object[] vals) {
-      Class_map_from_map_start output = new Class_map_from_map_start();
+      Vx.Collection.Class_map_from_map_start output = new Vx.Collection.Class_map_from_map_start();
       return output;
     }
 
-    public override Vx.Collection.Func_map_from_map_start vx_copy(params object[] vals) {
-      Class_map_from_map_start output = new Class_map_from_map_start();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Collection.Class_map_from_map_start output = new Vx.Collection.Class_map_from_map_start();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/collection", // pkgname
         "map<-map-start", // name
         0, // idx
@@ -2129,14 +2214,17 @@ public static class Collection {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_map_from_map_start;
+      Vx.Core.Type_any output = Vx.Collection.e_map_from_map_start;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_map_from_map_start;
+      Vx.Core.Type_any output = Vx.Collection.t_map_from_map_start;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -2154,8 +2242,8 @@ public static class Collection {
 
   }
 
-  public static Func_map_from_map_start e_map_from_map_start = new Vx.Collection.Class_map_from_map_start();
-  public static Func_map_from_map_start t_map_from_map_start = new Vx.Collection.Class_map_from_map_start();
+  public static Vx.Collection.Func_map_from_map_start e_map_from_map_start = new Vx.Collection.Class_map_from_map_start();
+  public static Vx.Collection.Func_map_from_map_start t_map_from_map_start = new Vx.Collection.Class_map_from_map_start();
 
   public static N f_map_from_map_start<N>(N generic_map_1, N valuemap, Vx.Core.Type_int start) where N : Vx.Core.Type_map {
     N output = Vx.Core.f_empty(generic_map_1);
@@ -2178,27 +2266,28 @@ public static class Collection {
    * (func map<-map-start-end)
    */
   public interface Func_map_from_map_start_end : Vx.Core.Type_func, Vx.Core.Type_replfunc {
-    public N vx_map_from_map_start_end<N>(N generic_any_1, N valuemap, Vx.Core.Type_int start, Vx.Core.Type_int end) where N : Vx.Core.Type_map;
+    public N vx_map_from_map_start_end<N>(N generic_map_1, N valuemap, Vx.Core.Type_int start, Vx.Core.Type_int end) where N : Vx.Core.Type_map;
   }
 
   public class Class_map_from_map_start_end : Vx.Core.Class_base, Func_map_from_map_start_end {
 
     public override Vx.Collection.Func_map_from_map_start_end vx_new(params object[] vals) {
-      Class_map_from_map_start_end output = new Class_map_from_map_start_end();
+      Vx.Collection.Class_map_from_map_start_end output = new Vx.Collection.Class_map_from_map_start_end();
       return output;
     }
 
-    public override Vx.Collection.Func_map_from_map_start_end vx_copy(params object[] vals) {
-      Class_map_from_map_start_end output = new Class_map_from_map_start_end();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Collection.Class_map_from_map_start_end output = new Vx.Collection.Class_map_from_map_start_end();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/collection", // pkgname
         "map<-map-start-end", // name
         0, // idx
@@ -2217,14 +2306,17 @@ public static class Collection {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_map_from_map_start_end;
+      Vx.Core.Type_any output = Vx.Collection.e_map_from_map_start_end;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_map_from_map_start_end;
+      Vx.Core.Type_any output = Vx.Collection.t_map_from_map_start_end;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -2243,8 +2335,8 @@ public static class Collection {
 
   }
 
-  public static Func_map_from_map_start_end e_map_from_map_start_end = new Vx.Collection.Class_map_from_map_start_end();
-  public static Func_map_from_map_start_end t_map_from_map_start_end = new Vx.Collection.Class_map_from_map_start_end();
+  public static Vx.Collection.Func_map_from_map_start_end e_map_from_map_start_end = new Vx.Collection.Class_map_from_map_start_end();
+  public static Vx.Collection.Func_map_from_map_start_end t_map_from_map_start_end = new Vx.Collection.Class_map_from_map_start_end();
 
   public static N f_map_from_map_start_end<N>(N generic_map_1, N valuemap, Vx.Core.Type_int start, Vx.Core.Type_int end) where N : Vx.Core.Type_map {
     N output = Vx.Core.f_empty(generic_map_1);

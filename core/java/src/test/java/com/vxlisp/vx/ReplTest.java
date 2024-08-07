@@ -25,7 +25,8 @@ public final class ReplTest {
               Repl.f_any_from_macro(
                 Core.t_int,
                 context,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string("(+ "),
                   Core.f_minus(Core.vx_new_int(7), Core.vx_new_int(5)),
                   Core.vx_new_string(" 3)")
@@ -58,23 +59,27 @@ public final class ReplTest {
                 context,
                 Core.f_new(
                   Repl.t_repl,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":type"),
                     Core.t_string,
                     Core.vx_new_string(":repllist"),
                     Core.f_new(
                       Repl.t_repllist,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.f_new(
                           Repl.t_repl,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":val"),
                             Core.vx_new_string("Hello")
                           )
                         ),
                         Core.f_new(
                           Repl.t_repl,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":val"),
                             Core.vx_new_string("World")
                           )
@@ -97,23 +102,27 @@ public final class ReplTest {
                 context,
                 Core.f_new(
                   Repl.t_repl,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":type"),
                     Core.t_plus,
                     Core.vx_new_string(":repllist"),
                     Core.f_new(
                       Repl.t_repllist,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.f_new(
                           Repl.t_repl,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":val"),
                             Core.vx_new_int(2)
                           )
                         ),
                         Core.f_new(
                           Repl.t_repl,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":val"),
                             Core.vx_new_int(3)
                           )
@@ -205,7 +214,8 @@ public final class ReplTest {
               context,
               Core.f_new(
                 Repl.t_repl,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":val"),
                   Core.vx_new_int(2)
                 )
@@ -213,7 +223,8 @@ public final class ReplTest {
               Repl.f_repl_empty_from_textblock_argmap(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("2")
                   )
@@ -232,7 +243,8 @@ public final class ReplTest {
               context,
               Core.f_new(
                 Repl.t_repl,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":type"),
                   Core.t_plus
                 )
@@ -240,7 +252,8 @@ public final class ReplTest {
               Repl.f_repl_empty_from_textblock_argmap(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("+")
                   )
@@ -259,7 +272,8 @@ public final class ReplTest {
               context,
               Core.f_new(
                 Repl.t_repl,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":val"),
                   Core.vx_new_int(2)
                 )
@@ -267,16 +281,19 @@ public final class ReplTest {
               Repl.f_repl_empty_from_textblock_argmap(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("1"),
                     Core.vx_new_string(":children"),
                     Core.f_new(
                       Textblock.t_textblocklist,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("2")
                           )
@@ -299,30 +316,35 @@ public final class ReplTest {
               context,
               Core.f_new(
                 Repl.t_repl,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.f_msg_from_error(Core.vx_new_string("Empty delim cannot have more than one child."))
                 )
               ),
               Repl.f_repl_empty_from_textblock_argmap(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("1"),
                     Core.vx_new_string(":children"),
                     Core.f_new(
                       Textblock.t_textblocklist,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("2")
                           )
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("3")
                           )
@@ -359,23 +381,27 @@ public final class ReplTest {
               context,
               Core.f_new(
                 Repl.t_repl,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":type"),
                   Core.t_plus,
                   Core.vx_new_string(":repllist"),
                   Core.f_new(
                     Repl.t_repllist,
-                    Core.vx_new(Core.t_anylist,
+                    Core.vx_new(
+                      Core.t_anylist,
                       Core.f_new(
                         Repl.t_repl,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":val"),
                           Core.vx_new_int(2)
                         )
                       ),
                       Core.f_new(
                         Repl.t_repl,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":val"),
                           Core.vx_new_int(3)
                         )
@@ -387,13 +413,15 @@ public final class ReplTest {
               Repl.f_repl_paren_from_textblock_argmap(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("(+ 2 3)"),
                     Core.vx_new_string(":delim"),
                     Core.f_copy(
                       Repl.c_delimvxlispparen,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":delimlist"),
                         Core.f_empty(
                           Textblock.t_delimlist
@@ -403,23 +431,27 @@ public final class ReplTest {
                     Core.vx_new_string(":children"),
                     Core.f_new(
                       Textblock.t_textblocklist,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("+")
                           )
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string(" "),
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimwhitespace,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -428,20 +460,23 @@ public final class ReplTest {
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("2")
                           )
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string(" "),
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimwhitespace,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -450,7 +485,8 @@ public final class ReplTest {
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("3")
                           )
@@ -487,23 +523,27 @@ public final class ReplTest {
               context,
               Core.f_new(
                 Repl.t_repl,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":type"),
                   Core.t_plus,
                   Core.vx_new_string(":repllist"),
                   Core.f_new(
                     Repl.t_repllist,
-                    Core.vx_new(Core.t_anylist,
+                    Core.vx_new(
+                      Core.t_anylist,
                       Core.f_new(
                         Repl.t_repl,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":val"),
                           Core.vx_new_int(2)
                         )
                       ),
                       Core.f_new(
                         Repl.t_repl,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":val"),
                           Core.vx_new_int(3)
                         )
@@ -514,7 +554,8 @@ public final class ReplTest {
               ),
               Repl.f_repl_from_macro(
                 context,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string("(+ "),
                   Core.f_minus(Core.vx_new_int(7), Core.vx_new_int(5)),
                   Core.vx_new_string(" 3)")
@@ -544,7 +585,8 @@ public final class ReplTest {
               context,
               Core.f_new(
                 Repl.t_repl,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":val"),
                   Core.vx_new_int(2)
                 )
@@ -560,7 +602,8 @@ public final class ReplTest {
               context,
               Core.f_new(
                 Repl.t_repl,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":val"),
                   Core.c_infinity
                 )
@@ -576,7 +619,8 @@ public final class ReplTest {
               context,
               Core.f_new(
                 Repl.t_repl,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":type"),
                   Core.t_plus
                 )
@@ -592,23 +636,27 @@ public final class ReplTest {
               context,
               Core.f_new(
                 Repl.t_repl,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":type"),
                   Core.t_plus,
                   Core.vx_new_string(":repllist"),
                   Core.f_new(
                     Repl.t_repllist,
-                    Core.vx_new(Core.t_anylist,
+                    Core.vx_new(
+                      Core.t_anylist,
                       Core.f_new(
                         Repl.t_repl,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":val"),
                           Core.vx_new_int(2)
                         )
                       ),
                       Core.f_new(
                         Repl.t_repl,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":val"),
                           Core.vx_new_int(3)
                         )
@@ -642,7 +690,8 @@ public final class ReplTest {
               context,
               Core.f_new(
                 Repl.t_repl,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":val"),
                   Core.vx_new_string("Hello")
                 )
@@ -663,7 +712,8 @@ public final class ReplTest {
               context,
               Core.f_new(
                 Repl.t_repl,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":val"),
                   Core.vx_new_int(2)
                 )
@@ -684,7 +734,8 @@ public final class ReplTest {
               context,
               Core.f_new(
                 Repl.t_repl,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":val"),
                   Core.t_decimal.vx_new_from_string("2.3")
                 )
@@ -705,7 +756,8 @@ public final class ReplTest {
               context,
               Core.f_new(
                 Repl.t_repl,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":val"),
                   Core.c_infinity
                 )
@@ -726,7 +778,8 @@ public final class ReplTest {
               context,
               Core.f_new(
                 Repl.t_repl,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":val"),
                   Textblock.c_delimcomma
                 )
@@ -747,7 +800,8 @@ public final class ReplTest {
               context,
               Core.f_new(
                 Repl.t_repl,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":type"),
                   Core.t_string
                 )
@@ -768,7 +822,8 @@ public final class ReplTest {
               context,
               Core.f_new(
                 Repl.t_repl,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":type"),
                   Core.t_plus
                 )
@@ -803,7 +858,8 @@ public final class ReplTest {
               context,
               Core.f_new(
                 Repl.t_repl,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":val"),
                   Core.vx_new_int(2)
                 )
@@ -811,7 +867,8 @@ public final class ReplTest {
               Repl.f_repl_from_textblock(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("2")
                   )
@@ -827,7 +884,8 @@ public final class ReplTest {
               context,
               Core.f_new(
                 Repl.t_repl,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":type"),
                   Core.t_plus
                 )
@@ -835,7 +893,8 @@ public final class ReplTest {
               Repl.f_repl_from_textblock(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("+")
                   )
@@ -851,7 +910,8 @@ public final class ReplTest {
               context,
               Core.f_new(
                 Repl.t_repl,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":type"),
                   Core.t_plus
                 )
@@ -859,7 +919,8 @@ public final class ReplTest {
               Repl.f_repl_from_textblock(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("+")
                   )
@@ -875,23 +936,27 @@ public final class ReplTest {
               context,
               Core.f_new(
                 Repl.t_repl,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":type"),
                   Core.t_plus,
                   Core.vx_new_string(":repllist"),
                   Core.f_new(
                     Repl.t_repllist,
-                    Core.vx_new(Core.t_anylist,
+                    Core.vx_new(
+                      Core.t_anylist,
                       Core.f_new(
                         Repl.t_repl,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":val"),
                           Core.vx_new_int(2)
                         )
                       ),
                       Core.f_new(
                         Repl.t_repl,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":val"),
                           Core.vx_new_int(3)
                         )
@@ -903,13 +968,15 @@ public final class ReplTest {
               Repl.f_repl_from_textblock(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("(+ 2 3)"),
                     Core.vx_new_string(":delim"),
                     Core.f_copy(
                       Repl.c_delimvxlispparen,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":delimlist"),
                         Core.f_empty(
                           Textblock.t_delimlist
@@ -919,23 +986,27 @@ public final class ReplTest {
                     Core.vx_new_string(":children"),
                     Core.f_new(
                       Textblock.t_textblocklist,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("+")
                           )
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string(" "),
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimwhitespace,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -944,20 +1015,23 @@ public final class ReplTest {
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("2")
                           )
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string(" "),
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimwhitespace,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -966,7 +1040,8 @@ public final class ReplTest {
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("3")
                           )
@@ -986,23 +1061,27 @@ public final class ReplTest {
               context,
               Core.f_new(
                 Repl.t_repl,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":type"),
                   Core.t_plus,
                   Core.vx_new_string(":repllist"),
                   Core.f_new(
                     Repl.t_repllist,
-                    Core.vx_new(Core.t_anylist,
+                    Core.vx_new(
+                      Core.t_anylist,
                       Core.f_new(
                         Repl.t_repl,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":val"),
                           Core.vx_new_int(2)
                         )
                       ),
                       Core.f_new(
                         Repl.t_repl,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":val"),
                           Core.vx_new_int(3)
                         )
@@ -1014,22 +1093,26 @@ public final class ReplTest {
               Repl.f_repl_from_textblock(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("(+ 2 3)"),
                     Core.vx_new_string(":children"),
                     Core.f_new(
                       Textblock.t_textblocklist,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("(+ 2 3)"),
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Repl.c_delimvxlispparen,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":delimlist"),
                                 Core.f_empty(
                                   Textblock.t_delimlist
@@ -1039,23 +1122,27 @@ public final class ReplTest {
                             Core.vx_new_string(":children"),
                             Core.f_new(
                               Textblock.t_textblocklist,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("+")
                                   )
                                 ),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string(" "),
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Textblock.c_delimwhitespace,
-                                      Core.vx_new(Core.t_anylist,
+                                      Core.vx_new(
+                                        Core.t_anylist,
                                         Core.vx_new_string(":pos"),
                                         Core.vx_new_int(0)
                                       )
@@ -1064,20 +1151,23 @@ public final class ReplTest {
                                 ),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("2")
                                   )
                                 ),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string(" "),
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Textblock.c_delimwhitespace,
-                                      Core.vx_new(Core.t_anylist,
+                                      Core.vx_new(
+                                        Core.t_anylist,
                                         Core.vx_new_string(":pos"),
                                         Core.vx_new_int(0)
                                       )
@@ -1086,7 +1176,8 @@ public final class ReplTest {
                                 ),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("3")
                                   )
@@ -1124,7 +1215,8 @@ public final class ReplTest {
               context,
               Core.f_new(
                 Repl.t_repl,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":val"),
                   Core.vx_new_int(2)
                 )
@@ -1132,7 +1224,8 @@ public final class ReplTest {
               Repl.f_repl_from_textblock_argmap(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("2")
                   )
@@ -1151,7 +1244,8 @@ public final class ReplTest {
               context,
               Core.f_new(
                 Repl.t_repl,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":type"),
                   Core.t_plus
                 )
@@ -1159,7 +1253,8 @@ public final class ReplTest {
               Repl.f_repl_from_textblock_argmap(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("+")
                   )
@@ -1178,23 +1273,27 @@ public final class ReplTest {
               context,
               Core.f_new(
                 Repl.t_repl,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":type"),
                   Core.t_plus,
                   Core.vx_new_string(":repllist"),
                   Core.f_new(
                     Repl.t_repllist,
-                    Core.vx_new(Core.t_anylist,
+                    Core.vx_new(
+                      Core.t_anylist,
                       Core.f_new(
                         Repl.t_repl,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":val"),
                           Core.vx_new_int(2)
                         )
                       ),
                       Core.f_new(
                         Repl.t_repl,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":val"),
                           Core.vx_new_int(3)
                         )
@@ -1206,13 +1305,15 @@ public final class ReplTest {
               Repl.f_repl_from_textblock_argmap(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("(+ 2 3)"),
                     Core.vx_new_string(":delim"),
                     Core.f_copy(
                       Repl.c_delimvxlispparen,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":delimlist"),
                         Core.f_empty(
                           Textblock.t_delimlist
@@ -1222,23 +1323,27 @@ public final class ReplTest {
                     Core.vx_new_string(":children"),
                     Core.f_new(
                       Textblock.t_textblocklist,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("+")
                           )
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string(" "),
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimwhitespace,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -1247,20 +1352,23 @@ public final class ReplTest {
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("2")
                           )
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string(" "),
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimwhitespace,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -1269,7 +1377,8 @@ public final class ReplTest {
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("3")
                           )
@@ -1292,23 +1401,27 @@ public final class ReplTest {
               context,
               Core.f_new(
                 Repl.t_repl,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":type"),
                   Core.t_plus,
                   Core.vx_new_string(":repllist"),
                   Core.f_new(
                     Repl.t_repllist,
-                    Core.vx_new(Core.t_anylist,
+                    Core.vx_new(
+                      Core.t_anylist,
                       Core.f_new(
                         Repl.t_repl,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":val"),
                           Core.vx_new_int(2)
                         )
                       ),
                       Core.f_new(
                         Repl.t_repl,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":val"),
                           Core.vx_new_int(3)
                         )
@@ -1320,22 +1433,26 @@ public final class ReplTest {
               Repl.f_repl_from_textblock_argmap(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("(+ 2 3)"),
                     Core.vx_new_string(":children"),
                     Core.f_new(
                       Textblock.t_textblocklist,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("(+ 2 3)"),
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Repl.c_delimvxlispparen,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":delimlist"),
                                 Core.f_empty(
                                   Textblock.t_delimlist
@@ -1345,23 +1462,27 @@ public final class ReplTest {
                             Core.vx_new_string(":children"),
                             Core.f_new(
                               Textblock.t_textblocklist,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("+")
                                   )
                                 ),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string(" "),
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Textblock.c_delimwhitespace,
-                                      Core.vx_new(Core.t_anylist,
+                                      Core.vx_new(
+                                        Core.t_anylist,
                                         Core.vx_new_string(":pos"),
                                         Core.vx_new_int(0)
                                       )
@@ -1370,20 +1491,23 @@ public final class ReplTest {
                                 ),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("2")
                                   )
                                 ),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string(" "),
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Textblock.c_delimwhitespace,
-                                      Core.vx_new(Core.t_anylist,
+                                      Core.vx_new(
+                                        Core.t_anylist,
                                         Core.vx_new_string(":pos"),
                                         Core.vx_new_int(0)
                                       )
@@ -1392,7 +1516,8 @@ public final class ReplTest {
                                 ),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("3")
                                   )
@@ -1433,7 +1558,8 @@ public final class ReplTest {
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("infinity"),
                   Core.vx_new_string(":startpos"),
@@ -1443,10 +1569,12 @@ public final class ReplTest {
                   Core.vx_new_string(":children"),
                   Core.f_new(
                     Textblock.t_textblocklist,
-                    Core.vx_new(Core.t_anylist,
+                    Core.vx_new(
+                      Core.t_anylist,
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("infinity"),
                           Core.vx_new_string(":startpos"),
@@ -1456,7 +1584,8 @@ public final class ReplTest {
                           Core.vx_new_string(":delim"),
                           Core.f_new(
                             Textblock.t_delim,
-                            Core.vx_new(Core.t_anylist,
+                            Core.vx_new(
+                              Core.t_anylist,
                               Core.vx_new_string(":name"),
                               Core.vx_new_string("delimvxlisp")
                             )
@@ -1478,7 +1607,8 @@ public final class ReplTest {
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("(+ 2 3)"),
                   Core.vx_new_string(":startpos"),
@@ -1488,10 +1618,12 @@ public final class ReplTest {
                   Core.vx_new_string(":children"),
                   Core.f_new(
                     Textblock.t_textblocklist,
-                    Core.vx_new(Core.t_anylist,
+                    Core.vx_new(
+                      Core.t_anylist,
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("(+ 2 3)"),
                           Core.vx_new_string(":startpos"),
@@ -1501,7 +1633,8 @@ public final class ReplTest {
                           Core.vx_new_string(":delim"),
                           Core.f_copy(
                             Repl.c_delimvxlispparen,
-                            Core.vx_new(Core.t_anylist,
+                            Core.vx_new(
+                              Core.t_anylist,
                               Core.vx_new_string(":delimlist"),
                               Core.f_empty(
                                 Textblock.t_delimlist
@@ -1511,10 +1644,12 @@ public final class ReplTest {
                           Core.vx_new_string(":children"),
                           Core.f_new(
                             Textblock.t_textblocklist,
-                            Core.vx_new(Core.t_anylist,
+                            Core.vx_new(
+                              Core.t_anylist,
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.vx_new(Core.t_anylist,
+                                Core.vx_new(
+                                  Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("+"),
                                   Core.vx_new_string(":startpos"),
@@ -1525,7 +1660,8 @@ public final class ReplTest {
                               ),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.vx_new(Core.t_anylist,
+                                Core.vx_new(
+                                  Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string(" "),
                                   Core.vx_new_string(":startpos"),
@@ -1535,7 +1671,8 @@ public final class ReplTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimwhitespace,
-                                    Core.vx_new(Core.t_anylist,
+                                    Core.vx_new(
+                                      Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -1544,7 +1681,8 @@ public final class ReplTest {
                               ),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.vx_new(Core.t_anylist,
+                                Core.vx_new(
+                                  Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("2"),
                                   Core.vx_new_string(":startpos"),
@@ -1555,7 +1693,8 @@ public final class ReplTest {
                               ),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.vx_new(Core.t_anylist,
+                                Core.vx_new(
+                                  Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string(" "),
                                   Core.vx_new_string(":startpos"),
@@ -1565,7 +1704,8 @@ public final class ReplTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimwhitespace,
-                                    Core.vx_new(Core.t_anylist,
+                                    Core.vx_new(
+                                      Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -1574,7 +1714,8 @@ public final class ReplTest {
                               ),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.vx_new(Core.t_anylist,
+                                Core.vx_new(
+                                  Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("3"),
                                   Core.vx_new_string(":startpos"),

@@ -24,13 +24,15 @@ public final class FileTest {
               File.f_boolean_exists_from_file(
                 Core.f_new(
                   File.t_file,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":name"),
                     Core.vx_new_string("boolean_exists_from_file.txt"),
                     Core.vx_new_string(":path"),
                     Core.f_new(
                       Core.t_string,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.c_path_test_resources,
                         Core.vx_new_string("/vx")
                       )
@@ -64,13 +66,15 @@ public final class FileTest {
                 context,
                 Core.f_new(
                   File.t_file,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":name"),
                     Core.vx_new_string("boolean_write_from_file_string.txt"),
                     Core.vx_new_string(":path"),
                     Core.f_new(
                       Core.t_string,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.c_path_test_resources,
                         Core.vx_new_string("/vx")
                       )
@@ -103,13 +107,15 @@ public final class FileTest {
               context,
               Core.f_new(
                 File.t_file,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":name"),
                   Core.vx_new_string("string_read_from_file.txt"),
                   Core.vx_new_string(":path"),
                   Core.f_new(
                     Core.t_string,
-                    Core.vx_new(Core.t_anylist,
+                    Core.vx_new(
+                      Core.t_anylist,
                       Core.c_path_test_resources,
                       Core.vx_new_string("/vx")
                     )
@@ -122,13 +128,15 @@ public final class FileTest {
                 context,
                 Core.f_new(
                   File.t_file,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":name"),
                     Core.vx_new_string("string_read_from_file.txt"),
                     Core.vx_new_string(":path"),
                     Core.f_new(
                       Core.t_string,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.c_path_test_resources,
                         Core.vx_new_string("/vx")
                       )
@@ -162,7 +170,8 @@ public final class FileTest {
               File.f_pathfull_from_file(
                 Core.f_new(
                   File.t_file,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":name"),
                     Core.vx_new_string("fname")
                   )
@@ -180,7 +189,8 @@ public final class FileTest {
               File.f_pathfull_from_file(
                 Core.f_new(
                   File.t_file,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":path"),
                     Core.vx_new_string("fpath"),
                     Core.vx_new_string(":name"),
@@ -215,13 +225,15 @@ public final class FileTest {
                 context,
                 Core.f_new(
                   File.t_file,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":name"),
                     Core.vx_new_string("string_read_from_file.txt"),
                     Core.vx_new_string(":path"),
                     Core.f_new(
                       Core.t_string,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.c_path_test_resources,
                         Core.vx_new_string("/vx")
                       )

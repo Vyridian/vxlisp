@@ -20,7 +20,8 @@ public class UiTest {
               context,
               Vx.Core.f_new(
                 Vx.Ui.Ui.t_ui,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":uid"),
                   Vx.Core.vx_new_string("app")
                 )
@@ -32,7 +33,8 @@ public class UiTest {
                     context,
                     Vx.Core.f_new(
                       Vx.Ui.Ui.t_ui,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":uid"),
                         Vx.Core.vx_new_string("app")
                       )
@@ -102,7 +104,8 @@ public class UiTest {
               context,
               Vx.Core.f_new(
                 Vx.Ui.Ui.t_ui,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":uid"),
                   Vx.Core.vx_new_string("myapp")
                 )
@@ -114,7 +117,8 @@ public class UiTest {
                     context,
                     Vx.Core.f_new(
                       Vx.Ui.Ui.t_ui,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":uid"),
                         Vx.Core.vx_new_string("myapp")
                       )
@@ -148,7 +152,8 @@ public class UiTest {
               context,
               Vx.Core.f_new(
                 Vx.Ui.Ui.t_ui,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":uid"),
                   Vx.Core.vx_new_string("a/b/c")
                 )
@@ -158,26 +163,30 @@ public class UiTest {
                 Vx.Core.t_any_from_func.vx_fn_new(() => {
                   Vx.Ui.Ui.Type_ui uiapp = Vx.Core.f_new(
                     Vx.Ui.Ui.t_ui,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
-                        Vx.Core.vx_new_string(":uid"),
-                        Vx.Core.vx_new_string("a"),
-                        Vx.Core.vx_new_string(":uimap"),
-                        Vx.Ui.Ui.f_uimap_from_uilist(
-                          Vx.Core.vx_new(Vx.Ui.Ui.t_uilist,
-                            Vx.Core.f_new(
-                              Vx.Ui.Ui.t_ui,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
-                                Vx.Core.vx_new_string(":uid"),
-                                Vx.Core.vx_new_string("a/b"),
-                                Vx.Core.vx_new_string(":uimap"),
-                                Vx.Ui.Ui.f_uimap_from_uilist(
-                                  Vx.Core.vx_new(Vx.Ui.Ui.t_uilist,
-                                    Vx.Core.f_new(
-                                      Vx.Ui.Ui.t_ui,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
-                                        Vx.Core.vx_new_string(":uid"),
-                                        Vx.Core.vx_new_string("a/b/c")
-                                      )
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
+                      Vx.Core.vx_new_string(":uid"),
+                      Vx.Core.vx_new_string("a"),
+                      Vx.Core.vx_new_string(":uimap"),
+                      Vx.Ui.Ui.f_uimap_from_uilist(
+                        Vx.Core.vx_new(
+                          Vx.Ui.Ui.t_uilist,
+                          Vx.Core.f_new(
+                            Vx.Ui.Ui.t_ui,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
+                              Vx.Core.vx_new_string(":uid"),
+                              Vx.Core.vx_new_string("a/b"),
+                              Vx.Core.vx_new_string(":uimap"),
+                              Vx.Ui.Ui.f_uimap_from_uilist(
+                                Vx.Core.vx_new(
+                                  Vx.Ui.Ui.t_uilist,
+                                  Vx.Core.f_new(
+                                    Vx.Ui.Ui.t_ui,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
+                                      Vx.Core.vx_new_string(":uid"),
+                                      Vx.Core.vx_new_string("a/b/c")
                                     )
                                   )
                                 )
@@ -185,6 +194,7 @@ public class UiTest {
                             )
                           )
                         )
+                      )
                     )
                   );
                   Vx.Core.Type_boolean iswrite = Vx.Ui.Ui.f_boolean_writestate_from_uiapp(context, uiapp);
@@ -218,15 +228,18 @@ public class UiTest {
               context,
               Vx.Core.f_new(
                 Vx.Ui.Ui.t_ui,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":uimap"),
                   Vx.Core.f_new(
                     Vx.Ui.Ui.t_uimap,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":a"),
                       Vx.Core.f_new(
                         Vx.Ui.Ui.t_ui,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":uid"),
                           Vx.Core.vx_new_string("a"),
                           Vx.Core.vx_new_string(":hidden"),
@@ -236,7 +249,8 @@ public class UiTest {
                       Vx.Core.vx_new_string(":b"),
                       Vx.Core.f_new(
                         Vx.Ui.Ui.t_ui,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":uid"),
                           Vx.Core.vx_new_string("b")
                         )
@@ -248,15 +262,18 @@ public class UiTest {
               Vx.Ui.Ui.f_ui_write_from_ui_visible(
                 Vx.Core.f_new(
                   Vx.Ui.Ui.t_ui,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":uimap"),
                     Vx.Core.f_new(
                       Vx.Ui.Ui.t_uimap,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":a"),
                         Vx.Core.f_new(
                           Vx.Ui.Ui.t_ui,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":uid"),
                             Vx.Core.vx_new_string("a")
                           )
@@ -264,7 +281,8 @@ public class UiTest {
                         Vx.Core.vx_new_string(":b"),
                         Vx.Core.f_new(
                           Vx.Ui.Ui.t_ui,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":uid"),
                             Vx.Core.vx_new_string("b"),
                             Vx.Core.vx_new_string(":hidden"),
@@ -301,7 +319,8 @@ public class UiTest {
               context,
               Vx.Core.f_new(
                 Vx.Ui.Ui.t_ui,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":uid"),
                   Vx.Core.vx_new_string("a/b/c")
                 )
@@ -309,27 +328,32 @@ public class UiTest {
               Vx.Ui.Ui.f_ui_from_ui_find(
                 Vx.Core.f_new(
                   Vx.Ui.Ui.t_ui,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":uid"),
                     Vx.Core.vx_new_string("a"),
                     Vx.Core.vx_new_string(":uimap"),
                     Vx.Core.f_new(
                       Vx.Ui.Ui.t_uimap,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":a/b"),
                         Vx.Core.f_new(
                           Vx.Ui.Ui.t_ui,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":uid"),
                             Vx.Core.vx_new_string("a/b"),
                             Vx.Core.vx_new_string(":uimap"),
                             Vx.Core.f_new(
                               Vx.Ui.Ui.t_uimap,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":a/b/c"),
                                 Vx.Core.f_new(
                                   Vx.Ui.Ui.t_ui,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":uid"),
                                     Vx.Core.vx_new_string("a/b/c")
                                   )
@@ -368,15 +392,18 @@ public class UiTest {
               context,
               Vx.Core.f_new(
                 Vx.Ui.Ui.t_ui,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":uimap"),
                   Vx.Core.f_new(
                     Vx.Ui.Ui.t_uimap,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":a"),
                       Vx.Core.f_new(
                         Vx.Ui.Ui.t_ui,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":uid"),
                           Vx.Core.vx_new_string("a")
                         )
@@ -384,7 +411,8 @@ public class UiTest {
                       Vx.Core.vx_new_string(":b"),
                       Vx.Core.f_new(
                         Vx.Ui.Ui.t_ui,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":uid"),
                           Vx.Core.vx_new_string("b"),
                           Vx.Core.vx_new_string(":selected"),
@@ -398,15 +426,18 @@ public class UiTest {
               Vx.Ui.Ui.f_ui_from_ui_selected(
                 Vx.Core.f_new(
                   Vx.Ui.Ui.t_ui,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":uimap"),
                     Vx.Core.f_new(
                       Vx.Ui.Ui.t_uimap,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":a"),
                         Vx.Core.f_new(
                           Vx.Ui.Ui.t_ui,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":uid"),
                             Vx.Core.vx_new_string("a"),
                             Vx.Core.vx_new_string(":selected"),
@@ -416,7 +447,8 @@ public class UiTest {
                         Vx.Core.vx_new_string(":b"),
                         Vx.Core.f_new(
                           Vx.Ui.Ui.t_ui,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":uid"),
                             Vx.Core.vx_new_string("b")
                           )

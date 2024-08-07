@@ -40,7 +40,8 @@ public final class HtmlTest {
               Html.f_string_from_body_indent(
                 Core.f_new(
                   Html.t_body,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.f_empty(
                       Html.t_div
                     )
@@ -89,7 +90,8 @@ public final class HtmlTest {
               Html.f_string_from_div_indent(
                 Core.f_new(
                   Html.t_div,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":id"),
                     Core.vx_new_string("myid")
                   )
@@ -151,7 +153,8 @@ public final class HtmlTest {
               Html.f_string_from_html(
                 Core.f_new(
                   Html.t_html,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":head"),
                     Core.f_empty(
                       Html.t_head
@@ -189,7 +192,8 @@ public final class HtmlTest {
               Html.f_string_from_img_indent(
                 Core.f_new(
                   Html.t_img,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":src"),
                     Core.vx_new_string("test.svg")
                   )
@@ -208,7 +212,8 @@ public final class HtmlTest {
               Html.f_string_from_img_indent(
                 Core.f_new(
                   Html.t_img,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":id"),
                     Core.vx_new_string("myid"),
                     Core.vx_new_string(":src"),
@@ -243,7 +248,8 @@ public final class HtmlTest {
               Html.f_string_from_meta_indent(
                 Core.f_new(
                   Html.t_meta,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":charset"),
                     Core.vx_new_string("utf-8")
                   )
@@ -276,7 +282,8 @@ public final class HtmlTest {
               Html.f_string_from_p_indent(
                 Core.f_new(
                   Html.t_p,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("data")
                   )
@@ -295,7 +302,8 @@ public final class HtmlTest {
               Html.f_string_from_p_indent(
                 Core.f_new(
                   Html.t_p,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":id"),
                     Core.vx_new_string("myid"),
                     Core.vx_new_string(":text"),

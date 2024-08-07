@@ -24,12 +24,15 @@ var emptyarg = NewArg("")
 
 var argcontext = NewArgContext()
 
+var arggenericany1 = NewArgGenericAny1()
+
 func NewArg(name string) vxarg {
 	output := *new(vxarg)
 	output.name = name
 	output.alias = name
 	output.vxtype = emptytype
 	output.value = emptyvalue
+	output.isfinal = true
 	return output
 }
 
@@ -41,6 +44,7 @@ func NewArgCopy(arg vxarg) vxarg {
 	output.multi = arg.multi
 	output.isdefault = arg.isdefault
 	output.isgeneric = arg.isgeneric
+	output.isfinal = arg.isfinal
 	output.generictype = arg.generictype
 	output.mapgeneric = arg.mapgeneric
 	output.vxtype = arg.vxtype
@@ -49,17 +53,25 @@ func NewArgCopy(arg vxarg) vxarg {
 }
 
 func NewArgContext() vxarg {
-	output := *new(vxarg)
-	output.name = "context"
-	output.alias = "context"
+	output := NewArg("context")
 	output.vxtype = contexttype
 	output.value = emptyvalue
+	output.isfinal = true
 	return output
 }
 
 func NewArgFromType(typ *vxtype) vxarg {
 	output := NewArg(typ.name)
 	output.value = NewValueFromType(typ)
+	return output
+}
+
+func NewArgGenericAny1() vxarg {
+	output := NewArg("generic_any_1")
+	output.generictype = anytype1
+	output.vxtype = anytype1
+	output.value = emptyvalue
+	output.isgeneric = true
 	return output
 }
 

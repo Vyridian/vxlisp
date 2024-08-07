@@ -22,7 +22,8 @@ public class ReplTest {
               Vx.Repl.f_any_from_macro(
                 Vx.Core.t_int,
                 context,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string("(+ "),
                   Vx.Core.f_minus(Vx.Core.vx_new_int(7), Vx.Core.vx_new_int(5)),
                   Vx.Core.vx_new_string(" 3)")
@@ -55,23 +56,27 @@ public class ReplTest {
                 context,
                 Vx.Core.f_new(
                   Vx.Repl.t_repl,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":type"),
                     Vx.Core.t_string,
                     Vx.Core.vx_new_string(":repllist"),
                     Vx.Core.f_new(
                       Vx.Repl.t_repllist,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.f_new(
                           Vx.Repl.t_repl,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":val"),
                             Vx.Core.vx_new_string("Hello")
                           )
                         ),
                         Vx.Core.f_new(
                           Vx.Repl.t_repl,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":val"),
                             Vx.Core.vx_new_string("World")
                           )
@@ -94,23 +99,27 @@ public class ReplTest {
                 context,
                 Vx.Core.f_new(
                   Vx.Repl.t_repl,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":type"),
                     Vx.Core.t_plus,
                     Vx.Core.vx_new_string(":repllist"),
                     Vx.Core.f_new(
                       Vx.Repl.t_repllist,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.f_new(
                           Vx.Repl.t_repl,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":val"),
                             Vx.Core.vx_new_int(2)
                           )
                         ),
                         Vx.Core.f_new(
                           Vx.Repl.t_repl,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":val"),
                             Vx.Core.vx_new_int(3)
                           )
@@ -202,7 +211,8 @@ public class ReplTest {
               context,
               Vx.Core.f_new(
                 Vx.Repl.t_repl,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":val"),
                   Vx.Core.vx_new_int(2)
                 )
@@ -210,7 +220,8 @@ public class ReplTest {
               Vx.Repl.f_repl_empty_from_textblock_argmap(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("2")
                   )
@@ -229,7 +240,8 @@ public class ReplTest {
               context,
               Vx.Core.f_new(
                 Vx.Repl.t_repl,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":type"),
                   Vx.Core.t_plus
                 )
@@ -237,7 +249,8 @@ public class ReplTest {
               Vx.Repl.f_repl_empty_from_textblock_argmap(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("+")
                   )
@@ -256,7 +269,8 @@ public class ReplTest {
               context,
               Vx.Core.f_new(
                 Vx.Repl.t_repl,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":val"),
                   Vx.Core.vx_new_int(2)
                 )
@@ -264,16 +278,19 @@ public class ReplTest {
               Vx.Repl.f_repl_empty_from_textblock_argmap(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("1"),
                     Vx.Core.vx_new_string(":children"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblocklist,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("2")
                           )
@@ -296,30 +313,35 @@ public class ReplTest {
               context,
               Vx.Core.f_new(
                 Vx.Repl.t_repl,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.f_msg_from_error(Vx.Core.vx_new_string("Empty delim cannot have more than one child."))
                 )
               ),
               Vx.Repl.f_repl_empty_from_textblock_argmap(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("1"),
                     Vx.Core.vx_new_string(":children"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblocklist,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("2")
                           )
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("3")
                           )
@@ -356,23 +378,27 @@ public class ReplTest {
               context,
               Vx.Core.f_new(
                 Vx.Repl.t_repl,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":type"),
                   Vx.Core.t_plus,
                   Vx.Core.vx_new_string(":repllist"),
                   Vx.Core.f_new(
                     Vx.Repl.t_repllist,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.f_new(
                         Vx.Repl.t_repl,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":val"),
                           Vx.Core.vx_new_int(2)
                         )
                       ),
                       Vx.Core.f_new(
                         Vx.Repl.t_repl,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":val"),
                           Vx.Core.vx_new_int(3)
                         )
@@ -384,13 +410,15 @@ public class ReplTest {
               Vx.Repl.f_repl_paren_from_textblock_argmap(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("(+ 2 3)"),
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_copy(
                       Vx.Repl.c_delimvxlispparen,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":delimlist"),
                         Vx.Core.f_empty(
                           Vx.Data.Textblock.t_delimlist
@@ -400,23 +428,27 @@ public class ReplTest {
                     Vx.Core.vx_new_string(":children"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblocklist,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("+")
                           )
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string(" "),
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimwhitespace,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -425,20 +457,23 @@ public class ReplTest {
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("2")
                           )
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string(" "),
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimwhitespace,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -447,7 +482,8 @@ public class ReplTest {
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("3")
                           )
@@ -484,23 +520,27 @@ public class ReplTest {
               context,
               Vx.Core.f_new(
                 Vx.Repl.t_repl,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":type"),
                   Vx.Core.t_plus,
                   Vx.Core.vx_new_string(":repllist"),
                   Vx.Core.f_new(
                     Vx.Repl.t_repllist,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.f_new(
                         Vx.Repl.t_repl,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":val"),
                           Vx.Core.vx_new_int(2)
                         )
                       ),
                       Vx.Core.f_new(
                         Vx.Repl.t_repl,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":val"),
                           Vx.Core.vx_new_int(3)
                         )
@@ -511,7 +551,8 @@ public class ReplTest {
               ),
               Vx.Repl.f_repl_from_macro(
                 context,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string("(+ "),
                   Vx.Core.f_minus(Vx.Core.vx_new_int(7), Vx.Core.vx_new_int(5)),
                   Vx.Core.vx_new_string(" 3)")
@@ -541,7 +582,8 @@ public class ReplTest {
               context,
               Vx.Core.f_new(
                 Vx.Repl.t_repl,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":val"),
                   Vx.Core.vx_new_int(2)
                 )
@@ -557,7 +599,8 @@ public class ReplTest {
               context,
               Vx.Core.f_new(
                 Vx.Repl.t_repl,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":val"),
                   Vx.Core.c_infinity
                 )
@@ -573,7 +616,8 @@ public class ReplTest {
               context,
               Vx.Core.f_new(
                 Vx.Repl.t_repl,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":type"),
                   Vx.Core.t_plus
                 )
@@ -589,23 +633,27 @@ public class ReplTest {
               context,
               Vx.Core.f_new(
                 Vx.Repl.t_repl,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":type"),
                   Vx.Core.t_plus,
                   Vx.Core.vx_new_string(":repllist"),
                   Vx.Core.f_new(
                     Vx.Repl.t_repllist,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.f_new(
                         Vx.Repl.t_repl,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":val"),
                           Vx.Core.vx_new_int(2)
                         )
                       ),
                       Vx.Core.f_new(
                         Vx.Repl.t_repl,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":val"),
                           Vx.Core.vx_new_int(3)
                         )
@@ -639,7 +687,8 @@ public class ReplTest {
               context,
               Vx.Core.f_new(
                 Vx.Repl.t_repl,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":val"),
                   Vx.Core.vx_new_string("Hello")
                 )
@@ -660,7 +709,8 @@ public class ReplTest {
               context,
               Vx.Core.f_new(
                 Vx.Repl.t_repl,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":val"),
                   Vx.Core.vx_new_int(2)
                 )
@@ -681,7 +731,8 @@ public class ReplTest {
               context,
               Vx.Core.f_new(
                 Vx.Repl.t_repl,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":val"),
                   Vx.Core.t_decimal.vx_new_from_string("2.3")
                 )
@@ -702,7 +753,8 @@ public class ReplTest {
               context,
               Vx.Core.f_new(
                 Vx.Repl.t_repl,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":val"),
                   Vx.Core.c_infinity
                 )
@@ -723,7 +775,8 @@ public class ReplTest {
               context,
               Vx.Core.f_new(
                 Vx.Repl.t_repl,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":val"),
                   Vx.Data.Textblock.c_delimcomma
                 )
@@ -744,7 +797,8 @@ public class ReplTest {
               context,
               Vx.Core.f_new(
                 Vx.Repl.t_repl,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":type"),
                   Vx.Core.t_string
                 )
@@ -765,7 +819,8 @@ public class ReplTest {
               context,
               Vx.Core.f_new(
                 Vx.Repl.t_repl,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":type"),
                   Vx.Core.t_plus
                 )
@@ -800,7 +855,8 @@ public class ReplTest {
               context,
               Vx.Core.f_new(
                 Vx.Repl.t_repl,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":val"),
                   Vx.Core.vx_new_int(2)
                 )
@@ -808,7 +864,8 @@ public class ReplTest {
               Vx.Repl.f_repl_from_textblock(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("2")
                   )
@@ -824,7 +881,8 @@ public class ReplTest {
               context,
               Vx.Core.f_new(
                 Vx.Repl.t_repl,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":type"),
                   Vx.Core.t_plus
                 )
@@ -832,7 +890,8 @@ public class ReplTest {
               Vx.Repl.f_repl_from_textblock(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("+")
                   )
@@ -848,7 +907,8 @@ public class ReplTest {
               context,
               Vx.Core.f_new(
                 Vx.Repl.t_repl,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":type"),
                   Vx.Core.t_plus
                 )
@@ -856,7 +916,8 @@ public class ReplTest {
               Vx.Repl.f_repl_from_textblock(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("+")
                   )
@@ -872,23 +933,27 @@ public class ReplTest {
               context,
               Vx.Core.f_new(
                 Vx.Repl.t_repl,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":type"),
                   Vx.Core.t_plus,
                   Vx.Core.vx_new_string(":repllist"),
                   Vx.Core.f_new(
                     Vx.Repl.t_repllist,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.f_new(
                         Vx.Repl.t_repl,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":val"),
                           Vx.Core.vx_new_int(2)
                         )
                       ),
                       Vx.Core.f_new(
                         Vx.Repl.t_repl,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":val"),
                           Vx.Core.vx_new_int(3)
                         )
@@ -900,13 +965,15 @@ public class ReplTest {
               Vx.Repl.f_repl_from_textblock(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("(+ 2 3)"),
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_copy(
                       Vx.Repl.c_delimvxlispparen,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":delimlist"),
                         Vx.Core.f_empty(
                           Vx.Data.Textblock.t_delimlist
@@ -916,23 +983,27 @@ public class ReplTest {
                     Vx.Core.vx_new_string(":children"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblocklist,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("+")
                           )
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string(" "),
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimwhitespace,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -941,20 +1012,23 @@ public class ReplTest {
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("2")
                           )
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string(" "),
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimwhitespace,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -963,7 +1037,8 @@ public class ReplTest {
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("3")
                           )
@@ -983,23 +1058,27 @@ public class ReplTest {
               context,
               Vx.Core.f_new(
                 Vx.Repl.t_repl,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":type"),
                   Vx.Core.t_plus,
                   Vx.Core.vx_new_string(":repllist"),
                   Vx.Core.f_new(
                     Vx.Repl.t_repllist,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.f_new(
                         Vx.Repl.t_repl,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":val"),
                           Vx.Core.vx_new_int(2)
                         )
                       ),
                       Vx.Core.f_new(
                         Vx.Repl.t_repl,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":val"),
                           Vx.Core.vx_new_int(3)
                         )
@@ -1011,22 +1090,26 @@ public class ReplTest {
               Vx.Repl.f_repl_from_textblock(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("(+ 2 3)"),
                     Vx.Core.vx_new_string(":children"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblocklist,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("(+ 2 3)"),
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Repl.c_delimvxlispparen,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":delimlist"),
                                 Vx.Core.f_empty(
                                   Vx.Data.Textblock.t_delimlist
@@ -1036,23 +1119,27 @@ public class ReplTest {
                             Vx.Core.vx_new_string(":children"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblocklist,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("+")
                                   )
                                 ),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string(" "),
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Textblock.c_delimwhitespace,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":pos"),
                                         Vx.Core.vx_new_int(0)
                                       )
@@ -1061,20 +1148,23 @@ public class ReplTest {
                                 ),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("2")
                                   )
                                 ),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string(" "),
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Textblock.c_delimwhitespace,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":pos"),
                                         Vx.Core.vx_new_int(0)
                                       )
@@ -1083,7 +1173,8 @@ public class ReplTest {
                                 ),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("3")
                                   )
@@ -1121,7 +1212,8 @@ public class ReplTest {
               context,
               Vx.Core.f_new(
                 Vx.Repl.t_repl,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":val"),
                   Vx.Core.vx_new_int(2)
                 )
@@ -1129,7 +1221,8 @@ public class ReplTest {
               Vx.Repl.f_repl_from_textblock_argmap(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("2")
                   )
@@ -1148,7 +1241,8 @@ public class ReplTest {
               context,
               Vx.Core.f_new(
                 Vx.Repl.t_repl,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":type"),
                   Vx.Core.t_plus
                 )
@@ -1156,7 +1250,8 @@ public class ReplTest {
               Vx.Repl.f_repl_from_textblock_argmap(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("+")
                   )
@@ -1175,23 +1270,27 @@ public class ReplTest {
               context,
               Vx.Core.f_new(
                 Vx.Repl.t_repl,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":type"),
                   Vx.Core.t_plus,
                   Vx.Core.vx_new_string(":repllist"),
                   Vx.Core.f_new(
                     Vx.Repl.t_repllist,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.f_new(
                         Vx.Repl.t_repl,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":val"),
                           Vx.Core.vx_new_int(2)
                         )
                       ),
                       Vx.Core.f_new(
                         Vx.Repl.t_repl,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":val"),
                           Vx.Core.vx_new_int(3)
                         )
@@ -1203,13 +1302,15 @@ public class ReplTest {
               Vx.Repl.f_repl_from_textblock_argmap(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("(+ 2 3)"),
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_copy(
                       Vx.Repl.c_delimvxlispparen,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":delimlist"),
                         Vx.Core.f_empty(
                           Vx.Data.Textblock.t_delimlist
@@ -1219,23 +1320,27 @@ public class ReplTest {
                     Vx.Core.vx_new_string(":children"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblocklist,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("+")
                           )
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string(" "),
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimwhitespace,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -1244,20 +1349,23 @@ public class ReplTest {
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("2")
                           )
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string(" "),
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimwhitespace,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -1266,7 +1374,8 @@ public class ReplTest {
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("3")
                           )
@@ -1289,23 +1398,27 @@ public class ReplTest {
               context,
               Vx.Core.f_new(
                 Vx.Repl.t_repl,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":type"),
                   Vx.Core.t_plus,
                   Vx.Core.vx_new_string(":repllist"),
                   Vx.Core.f_new(
                     Vx.Repl.t_repllist,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.f_new(
                         Vx.Repl.t_repl,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":val"),
                           Vx.Core.vx_new_int(2)
                         )
                       ),
                       Vx.Core.f_new(
                         Vx.Repl.t_repl,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":val"),
                           Vx.Core.vx_new_int(3)
                         )
@@ -1317,22 +1430,26 @@ public class ReplTest {
               Vx.Repl.f_repl_from_textblock_argmap(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("(+ 2 3)"),
                     Vx.Core.vx_new_string(":children"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblocklist,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("(+ 2 3)"),
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Repl.c_delimvxlispparen,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":delimlist"),
                                 Vx.Core.f_empty(
                                   Vx.Data.Textblock.t_delimlist
@@ -1342,23 +1459,27 @@ public class ReplTest {
                             Vx.Core.vx_new_string(":children"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblocklist,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("+")
                                   )
                                 ),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string(" "),
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Textblock.c_delimwhitespace,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":pos"),
                                         Vx.Core.vx_new_int(0)
                                       )
@@ -1367,20 +1488,23 @@ public class ReplTest {
                                 ),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("2")
                                   )
                                 ),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string(" "),
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Textblock.c_delimwhitespace,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":pos"),
                                         Vx.Core.vx_new_int(0)
                                       )
@@ -1389,7 +1513,8 @@ public class ReplTest {
                                 ),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("3")
                                   )
@@ -1430,7 +1555,8 @@ public class ReplTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("infinity"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -1440,10 +1566,12 @@ public class ReplTest {
                   Vx.Core.vx_new_string(":children"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblocklist,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("infinity"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -1453,7 +1581,8 @@ public class ReplTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_delim,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":name"),
                               Vx.Core.vx_new_string("delimvxlisp")
                             )
@@ -1475,7 +1604,8 @@ public class ReplTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("(+ 2 3)"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -1485,10 +1615,12 @@ public class ReplTest {
                   Vx.Core.vx_new_string(":children"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblocklist,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("(+ 2 3)"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -1498,7 +1630,8 @@ public class ReplTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_copy(
                             Vx.Repl.c_delimvxlispparen,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":delimlist"),
                               Vx.Core.f_empty(
                                 Vx.Data.Textblock.t_delimlist
@@ -1508,10 +1641,12 @@ public class ReplTest {
                           Vx.Core.vx_new_string(":children"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblocklist,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("+"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -1522,7 +1657,8 @@ public class ReplTest {
                               ),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string(" "),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -1532,7 +1668,8 @@ public class ReplTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimwhitespace,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -1541,7 +1678,8 @@ public class ReplTest {
                               ),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("2"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -1552,7 +1690,8 @@ public class ReplTest {
                               ),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string(" "),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -1562,7 +1701,8 @@ public class ReplTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimwhitespace,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -1571,7 +1711,8 @@ public class ReplTest {
                               ),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("3"),
                                   Vx.Core.vx_new_string(":startpos"),

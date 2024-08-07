@@ -16,7 +16,7 @@ public final class TestLib {
     File.Type_file output = Core.vx_copy(
       file,
       Core.vx_new_string(":path"), spath);
-			 return output;
+    return output;
   }
 
   public static String read_test_file(final String path, final String filename) {
@@ -26,7 +26,7 @@ public final class TestLib {
       Core.vx_new_string(":name"), Core.vx_new_string("string_read_from_file.txt"));
     Core.Type_string string_file = File.vx_string_read_from_file(file);
     String output = string_file.vx_string();
-			 return output;
+    return output;
   }
 
   public static boolean test(final String testname, final String expected, final String actual) {
@@ -48,7 +48,7 @@ public final class TestLib {
     String expected = "Hello World";
     String actual = helloworld.vx_string();
     boolean output = TestLib.test(testname, expected, actual);
-  		return output;
+    return output;
   }
 
   public static boolean test_async_new_from_value() {
@@ -59,7 +59,7 @@ public final class TestLib {
     String expected = "Hello World";
     String actual = sync.vx_string();
     boolean output = TestLib.test(testname, expected, actual);
-  		return output;
+    return output;
   }
 
   public static boolean test_async_from_async_fn() {
@@ -73,7 +73,7 @@ public final class TestLib {
     String expected = "Hello World";
     String actual = sync.vx_string();
     boolean output = TestLib.test(testname, expected, actual);
-  		return output;
+    return output;
   }
 
   public static boolean test_list_from_list_async() {
@@ -92,7 +92,7 @@ public final class TestLib {
     String expected = "(stringlist\n \"hello!\"\n \"world!\")";
     String actual = Core.vx_string_from_any(sync);
     boolean output = TestLib.test(testname, expected, actual);
-  		return output;
+    return output;
   }
 
   public static boolean test_pathfull_from_file() {
@@ -105,7 +105,7 @@ public final class TestLib {
     String expected = spath + "/vx/string_read_from_file.txt";
     String actual = string_path.vx_string();
     boolean output = TestLib.test(testname, expected, actual);
-			 return output;
+    return output;
   }
 
   public static boolean test_read_file() {
@@ -113,7 +113,7 @@ public final class TestLib {
     String expected = "testdata";
     String actual = read_test_file(spath + "/vx", "string_read_from_file.txt");
     boolean output = TestLib.test(testname, expected, actual);
-			 return output;
+    return output;
   }
 
   public static boolean test_write_file() {
@@ -126,7 +126,7 @@ public final class TestLib {
     String expected = spath + "/vx/string_read_from_file.txt";
     String actual = string_path.vx_string();
     boolean output = TestLib.test(testname, expected, actual);
-			 return output;
+    return output;
   }
 
   public static boolean run_testcase(final Test.Type_testcase testcase) {
@@ -151,7 +151,8 @@ public final class TestLib {
     for (Test.Type_testcase testcase : listtestcase) {
       run_testcase(testcase);
     }
-    return true;
+    boolean output = true;
+    return output;
   }
 
   public static boolean run_testdescribe(final String testpkg, final String casename, final Test.Type_testdescribe describe) {
@@ -211,7 +212,8 @@ public final class TestLib {
   				assertEquals(expected, actual, msg);
   				break;
   		}
-  		return true;
+    final boolean output = true;
+    return output;
   }
 
   // Blocking
@@ -232,7 +234,7 @@ public final class TestLib {
     Core.Type_string shtml = Html.f_string_from_html(htmlnode);
     valboolean = File.f_boolean_write_from_file_string(context, filehtml, shtml);
     output = output && valboolean.vx_boolean();
-			 return output;
+    return output;
   }
 
 

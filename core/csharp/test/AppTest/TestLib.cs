@@ -39,7 +39,7 @@ public static class TestLib {
     Vx.Data.File.Type_file output = Vx.Core.vx_copy(
       file,
       Vx.Core.vx_new_string(":path"), spath);
-			 return output;
+    return output;
   }
 
   public static string read_test_file(string path, string filename) {
@@ -49,7 +49,7 @@ public static class TestLib {
       Vx.Core.vx_new_string(":name"), Vx.Core.vx_new_string("string_read_from_file.txt"));
     Vx.Core.Type_string string_file = Vx.Data.File.vx_string_read_from_file(file);
     string output = string_file.vx_string();
-			 return output;
+    return output;
   }
 
   public static bool test(string testname, string expected, string actual) {
@@ -71,7 +71,7 @@ public static class TestLib {
     string expected = "Hello World";
     string actual = helloworld.vx_string();
     bool output = TestLib.test(testname, expected, actual);
-  		return output;
+    return output;
   }
 
   public static bool test_async_new_from_value() {
@@ -82,7 +82,7 @@ public static class TestLib {
     string expected = "Hello World";
     string actual = sync.vx_string();
     bool output = TestLib.test(testname, expected, actual);
-  		return output;
+    return output;
   }
 
   public static bool test_async_from_async_fn() {
@@ -96,7 +96,7 @@ public static class TestLib {
     string expected = "Hello World";
     string actual = sync.vx_string();
     bool output = TestLib.test(testname, expected, actual);
-  		return output;
+    return output;
   }
 
   public static bool test_list_from_list_async() {
@@ -115,7 +115,7 @@ public static class TestLib {
     string expected = "(stringlist\n \"hello!\"\n \"world!\")";
     string actual = Vx.Core.vx_string_from_any(sync);
     bool output = TestLib.test(testname, expected, actual);
-  		return output;
+    return output;
   }
 
   public static bool test_pathfull_from_file() {
@@ -128,7 +128,7 @@ public static class TestLib {
     string expected = spath + "/vx/string_read_from_file.txt";
     string actual = string_path.vx_string();
     bool output = TestLib.test(testname, expected, actual);
-			 return output;
+    return output;
   }
 
   public static bool test_read_file() {
@@ -136,7 +136,7 @@ public static class TestLib {
     string expected = "testdata";
     string actual = read_test_file(spath + "/vx", "string_read_from_file.txt");
     bool output = TestLib.test(testname, expected, actual);
-			 return output;
+    return output;
   }
 
   public static bool test_write_file() {
@@ -149,7 +149,7 @@ public static class TestLib {
     string expected = spath + "/vx/string_read_from_file.txt";
     string actual = string_path.vx_string();
     bool output = TestLib.test(testname, expected, actual);
-			 return output;
+    return output;
   }
 
   public static bool run_testcase(Vx.Test.Type_testcase testcase) {
@@ -174,7 +174,8 @@ public static class TestLib {
     foreach (Vx.Test.Type_testcase testcase in listtestcase) {
       run_testcase(testcase);
     }
-    return true;
+    bool output = true;
+    return output;
   }
 
   public static bool run_testdescribe(string testpkg, string casename, Vx.Test.Type_testdescribe describe) {
@@ -234,7 +235,8 @@ public static class TestLib {
   				Assert.Equal(expected, actual);
   				break;
   		}
-  		return true;
+    bool output = true;
+    return output;
   }
 
   // Blocking
@@ -255,7 +257,7 @@ public static class TestLib {
     Vx.Core.Type_string shtml = Vx.Web.Html.f_string_from_html(htmlnode);
     valboolean = Vx.Data.File.f_boolean_write_from_file_string(context, filehtml, shtml);
     output = output && valboolean.vx_boolean();
-			 return output;
+    return output;
   }
 
 }

@@ -16,10 +16,6 @@ public final class Http {
    * (type response)
    */
   public interface Type_response extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Core.Type_boolean ok();
     public Core.Type_int status();
   }
@@ -68,7 +64,8 @@ public final class Http {
       Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":ok", this.ok());
       output.put(":status", this.status());
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -78,16 +75,16 @@ public final class Http {
     }
 
     @Override
-    public Http.Type_response vx_copy(final Object... vals) {
-      Type_response output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Http.Type_response output = this;
       boolean ischanged = false;
-      Class_response val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Http.Class_response value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Core.Type_boolean vx_p_ok = val.ok();
-      Core.Type_int vx_p_status = val.status();
+      Core.Type_boolean vx_p_ok = value.ok();
+      Core.Type_int vx_p_status = value.status();
       List<String> validkeys = new ArrayList<String>();
       validkeys.add(":ok");
       validkeys.add(":status");
@@ -99,22 +96,22 @@ public final class Http {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (key == "") {
+        } else if (key.equals("")) {
           boolean istestkey = false;
           String testkey = "";
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;;
+            Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             testkey = sval;
             istestkey = true;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              Core.Type_any valmsg = (Core.Type_any)valsub;
               msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -140,7 +137,7 @@ public final class Http {
           case ":ok":
             if (valsub == vx_p_ok) {
             } else if (valsub instanceof Core.Type_boolean) {
-              Core.Type_boolean valok = (Core.Type_boolean)valsub;;
+              Core.Type_boolean valok = (Core.Type_boolean)valsub;
               ischanged = true;
               vx_p_ok = valok;
             } else if (valsub instanceof Boolean) {
@@ -149,7 +146,7 @@ public final class Http {
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -165,7 +162,7 @@ public final class Http {
           case ":status":
             if (valsub == vx_p_status) {
             } else if (valsub instanceof Core.Type_int) {
-              Core.Type_int valstatus = (Core.Type_int)valsub;;
+              Core.Type_int valstatus = (Core.Type_int)valsub;
               ischanged = true;
               vx_p_status = valstatus;
             } else if (valsub instanceof Integer) {
@@ -174,7 +171,7 @@ public final class Http {
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -197,7 +194,7 @@ public final class Http {
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_response work = new Class_response();
+        Http.Class_response work = new Http.Class_response();
         work.vx_p_ok = vx_p_ok;
         work.vx_p_status = vx_p_status;
         if (msgblock != Core.e_msgblock) {
@@ -210,16 +207,19 @@ public final class Http {
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_response;
+      Core.Type_any output = Http.e_response;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_response;
+      Core.Type_any output = Http.t_response;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/web/http", // pkgname
         "response", // name
         ":struct", // extends
@@ -232,12 +232,13 @@ public final class Http {
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_response e_response = new Class_response();
-  public static final Type_response t_response = new Class_response();
+  public static final Http.Type_response e_response = new Http.Class_response();
+  public static final Http.Type_response t_response = new Http.Class_response();
   /**
    * 
    * @async
@@ -255,24 +256,25 @@ public final class Http {
 
     @Override
     public Http.Func_csv_from_httpget vx_new(final Object... vals) {
-      Class_csv_from_httpget output = new Class_csv_from_httpget();
+      Http.Class_csv_from_httpget output = new Http.Class_csv_from_httpget();
       return output;
     }
 
     @Override
-    public Http.Func_csv_from_httpget vx_copy(final Object... vals) {
-      Class_csv_from_httpget output = new Class_csv_from_httpget();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Http.Class_csv_from_httpget output = new Http.Class_csv_from_httpget();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/web/http", // pkgname
         "csv<-httpget", // name
         0, // idx
@@ -291,16 +293,19 @@ public final class Http {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_csv_from_httpget;
+      Core.Type_any output = Http.e_csv_from_httpget;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_csv_from_httpget;
+      Core.Type_any output = Http.t_csv_from_httpget;
+      return output;
     }
 
     @Override
@@ -332,8 +337,8 @@ public final class Http {
 
   }
 
-  public static final Func_csv_from_httpget e_csv_from_httpget = new Http.Class_csv_from_httpget();
-  public static final Func_csv_from_httpget t_csv_from_httpget = new Http.Class_csv_from_httpget();
+  public static final Http.Func_csv_from_httpget e_csv_from_httpget = new Http.Class_csv_from_httpget();
+  public static final Http.Func_csv_from_httpget t_csv_from_httpget = new Http.Class_csv_from_httpget();
 
   public static CompletableFuture<Csv.Type_csv> f_csv_from_httpget(final Core.Type_string url) {
     CompletableFuture<Csv.Type_csv> output = Core.vx_async_new_from_value(Csv.e_csv);
@@ -368,24 +373,25 @@ public final class Http {
 
     @Override
     public Http.Func_json_from_httpget vx_new(final Object... vals) {
-      Class_json_from_httpget output = new Class_json_from_httpget();
+      Http.Class_json_from_httpget output = new Http.Class_json_from_httpget();
       return output;
     }
 
     @Override
-    public Http.Func_json_from_httpget vx_copy(final Object... vals) {
-      Class_json_from_httpget output = new Class_json_from_httpget();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Http.Class_json_from_httpget output = new Http.Class_json_from_httpget();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/web/http", // pkgname
         "json<-httpget", // name
         0, // idx
@@ -404,16 +410,19 @@ public final class Http {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_json_from_httpget;
+      Core.Type_any output = Http.e_json_from_httpget;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_json_from_httpget;
+      Core.Type_any output = Http.t_json_from_httpget;
+      return output;
     }
 
     @Override
@@ -445,8 +454,8 @@ public final class Http {
 
   }
 
-  public static final Func_json_from_httpget e_json_from_httpget = new Http.Class_json_from_httpget();
-  public static final Func_json_from_httpget t_json_from_httpget = new Http.Class_json_from_httpget();
+  public static final Http.Func_json_from_httpget e_json_from_httpget = new Http.Class_json_from_httpget();
+  public static final Http.Func_json_from_httpget t_json_from_httpget = new Http.Class_json_from_httpget();
 
   public static CompletableFuture<Http.Type_response> f_json_from_httpget(final Core.Type_string url) {
     CompletableFuture<Http.Type_response> output = Core.vx_async_new_from_value(Http.e_response);
@@ -482,24 +491,25 @@ public final class Http {
 
     @Override
     public Http.Func_response_from_httpget vx_new(final Object... vals) {
-      Class_response_from_httpget output = new Class_response_from_httpget();
+      Http.Class_response_from_httpget output = new Http.Class_response_from_httpget();
       return output;
     }
 
     @Override
-    public Http.Func_response_from_httpget vx_copy(final Object... vals) {
-      Class_response_from_httpget output = new Class_response_from_httpget();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Http.Class_response_from_httpget output = new Http.Class_response_from_httpget();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/web/http", // pkgname
         "response<-httpget", // name
         0, // idx
@@ -518,16 +528,19 @@ public final class Http {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_response_from_httpget;
+      Core.Type_any output = Http.e_response_from_httpget;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_response_from_httpget;
+      Core.Type_any output = Http.t_response_from_httpget;
+      return output;
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
@@ -546,8 +559,8 @@ public final class Http {
 
   }
 
-  public static final Func_response_from_httpget e_response_from_httpget = new Http.Class_response_from_httpget();
-  public static final Func_response_from_httpget t_response_from_httpget = new Http.Class_response_from_httpget();
+  public static final Http.Func_response_from_httpget e_response_from_httpget = new Http.Class_response_from_httpget();
+  public static final Http.Func_response_from_httpget t_response_from_httpget = new Http.Class_response_from_httpget();
 
   public static CompletableFuture<Http.Type_response> f_response_from_httpget(final Core.Type_string url, final Core.Type_string contenttype) {
     CompletableFuture<Http.Type_response> output = Core.vx_async_new_from_value(Http.e_response);
@@ -571,24 +584,25 @@ public final class Http {
 
     @Override
     public Http.Func_text_from_httpget vx_new(final Object... vals) {
-      Class_text_from_httpget output = new Class_text_from_httpget();
+      Http.Class_text_from_httpget output = new Http.Class_text_from_httpget();
       return output;
     }
 
     @Override
-    public Http.Func_text_from_httpget vx_copy(final Object... vals) {
-      Class_text_from_httpget output = new Class_text_from_httpget();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Http.Class_text_from_httpget output = new Http.Class_text_from_httpget();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/web/http", // pkgname
         "text<-httpget", // name
         0, // idx
@@ -607,16 +621,19 @@ public final class Http {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_text_from_httpget;
+      Core.Type_any output = Http.e_text_from_httpget;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_text_from_httpget;
+      Core.Type_any output = Http.t_text_from_httpget;
+      return output;
     }
 
     @Override
@@ -648,8 +665,8 @@ public final class Http {
 
   }
 
-  public static final Func_text_from_httpget e_text_from_httpget = new Http.Class_text_from_httpget();
-  public static final Func_text_from_httpget t_text_from_httpget = new Http.Class_text_from_httpget();
+  public static final Http.Func_text_from_httpget e_text_from_httpget = new Http.Class_text_from_httpget();
+  public static final Http.Func_text_from_httpget t_text_from_httpget = new Http.Class_text_from_httpget();
 
   public static CompletableFuture<Core.Type_string> f_text_from_httpget(final Core.Type_string url) {
     CompletableFuture<Core.Type_string> output = Core.vx_async_new_from_value(Core.e_string);
@@ -682,24 +699,25 @@ public final class Http {
 
     @Override
     public Http.Func_text_from_response vx_new(final Object... vals) {
-      Class_text_from_response output = new Class_text_from_response();
+      Http.Class_text_from_response output = new Http.Class_text_from_response();
       return output;
     }
 
     @Override
-    public Http.Func_text_from_response vx_copy(final Object... vals) {
-      Class_text_from_response output = new Class_text_from_response();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Http.Class_text_from_response output = new Http.Class_text_from_response();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/web/http", // pkgname
         "text<-response", // name
         0, // idx
@@ -718,16 +736,19 @@ public final class Http {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_text_from_response;
+      Core.Type_any output = Http.e_text_from_response;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_text_from_response;
+      Core.Type_any output = Http.t_text_from_response;
+      return output;
     }
 
     @Override
@@ -758,8 +779,8 @@ public final class Http {
 
   }
 
-  public static final Func_text_from_response e_text_from_response = new Http.Class_text_from_response();
-  public static final Func_text_from_response t_text_from_response = new Http.Class_text_from_response();
+  public static final Http.Func_text_from_response e_text_from_response = new Http.Class_text_from_response();
+  public static final Http.Func_text_from_response t_text_from_response = new Http.Class_text_from_response();
 
   public static Core.Type_string f_text_from_response(final Http.Type_response response) {
     Core.Type_string output = Core.e_string;
@@ -784,24 +805,25 @@ public final class Http {
 
     @Override
     public Http.Func_textblock_from_httpget vx_new(final Object... vals) {
-      Class_textblock_from_httpget output = new Class_textblock_from_httpget();
+      Http.Class_textblock_from_httpget output = new Http.Class_textblock_from_httpget();
       return output;
     }
 
     @Override
-    public Http.Func_textblock_from_httpget vx_copy(final Object... vals) {
-      Class_textblock_from_httpget output = new Class_textblock_from_httpget();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Http.Class_textblock_from_httpget output = new Http.Class_textblock_from_httpget();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/web/http", // pkgname
         "textblock<-httpget", // name
         0, // idx
@@ -820,16 +842,19 @@ public final class Http {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_textblock_from_httpget;
+      Core.Type_any output = Http.e_textblock_from_httpget;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_textblock_from_httpget;
+      Core.Type_any output = Http.t_textblock_from_httpget;
+      return output;
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
@@ -848,8 +873,8 @@ public final class Http {
 
   }
 
-  public static final Func_textblock_from_httpget e_textblock_from_httpget = new Http.Class_textblock_from_httpget();
-  public static final Func_textblock_from_httpget t_textblock_from_httpget = new Http.Class_textblock_from_httpget();
+  public static final Http.Func_textblock_from_httpget e_textblock_from_httpget = new Http.Class_textblock_from_httpget();
+  public static final Http.Func_textblock_from_httpget t_textblock_from_httpget = new Http.Class_textblock_from_httpget();
 
   public static CompletableFuture<Textblock.Type_textblock> f_textblock_from_httpget(final Core.Type_string url, final Core.Type_string contenttype) {
     CompletableFuture<Textblock.Type_textblock> output = Core.vx_async_new_from_value(Textblock.e_textblock);
@@ -882,24 +907,25 @@ public final class Http {
 
     @Override
     public Http.Func_textblock_from_response vx_new(final Object... vals) {
-      Class_textblock_from_response output = new Class_textblock_from_response();
+      Http.Class_textblock_from_response output = new Http.Class_textblock_from_response();
       return output;
     }
 
     @Override
-    public Http.Func_textblock_from_response vx_copy(final Object... vals) {
-      Class_textblock_from_response output = new Class_textblock_from_response();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Http.Class_textblock_from_response output = new Http.Class_textblock_from_response();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/web/http", // pkgname
         "textblock<-response", // name
         0, // idx
@@ -918,16 +944,19 @@ public final class Http {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_textblock_from_response;
+      Core.Type_any output = Http.e_textblock_from_response;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_textblock_from_response;
+      Core.Type_any output = Http.t_textblock_from_response;
+      return output;
     }
 
     @Override
@@ -958,14 +987,15 @@ public final class Http {
 
   }
 
-  public static final Func_textblock_from_response e_textblock_from_response = new Http.Class_textblock_from_response();
-  public static final Func_textblock_from_response t_textblock_from_response = new Http.Class_textblock_from_response();
+  public static final Http.Func_textblock_from_response e_textblock_from_response = new Http.Class_textblock_from_response();
+  public static final Http.Func_textblock_from_response t_textblock_from_response = new Http.Class_textblock_from_response();
 
   public static Textblock.Type_textblock f_textblock_from_response(final Http.Type_response response) {
     Textblock.Type_textblock output = Textblock.e_textblock;
     output = Core.f_new(
       Textblock.t_textblock,
-      Core.vx_new(Core.t_anylist,
+      Core.vx_new(
+        Core.t_anylist,
         Core.vx_new_string(":text"),
         Http.f_text_from_response(response)
       )
@@ -990,24 +1020,25 @@ public final class Http {
 
     @Override
     public Http.Func_xml_from_httpget vx_new(final Object... vals) {
-      Class_xml_from_httpget output = new Class_xml_from_httpget();
+      Http.Class_xml_from_httpget output = new Http.Class_xml_from_httpget();
       return output;
     }
 
     @Override
-    public Http.Func_xml_from_httpget vx_copy(final Object... vals) {
-      Class_xml_from_httpget output = new Class_xml_from_httpget();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Http.Class_xml_from_httpget output = new Http.Class_xml_from_httpget();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/web/http", // pkgname
         "xml<-httpget", // name
         0, // idx
@@ -1026,16 +1057,19 @@ public final class Http {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_xml_from_httpget;
+      Core.Type_any output = Http.e_xml_from_httpget;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_xml_from_httpget;
+      Core.Type_any output = Http.t_xml_from_httpget;
+      return output;
     }
 
     @Override
@@ -1067,8 +1101,8 @@ public final class Http {
 
   }
 
-  public static final Func_xml_from_httpget e_xml_from_httpget = new Http.Class_xml_from_httpget();
-  public static final Func_xml_from_httpget t_xml_from_httpget = new Http.Class_xml_from_httpget();
+  public static final Http.Func_xml_from_httpget e_xml_from_httpget = new Http.Class_xml_from_httpget();
+  public static final Http.Func_xml_from_httpget t_xml_from_httpget = new Http.Class_xml_from_httpget();
 
   public static CompletableFuture<Xml.Type_xml> f_xml_from_httpget(final Core.Type_string url) {
     CompletableFuture<Xml.Type_xml> output = Core.vx_async_new_from_value(Xml.e_xml);

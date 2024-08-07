@@ -50,7 +50,8 @@ public final class TranslateTest {
                 context,
                 Core.f_new(
                   Core.t_msg,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":path"),
                     Core.vx_new_string("vx/repl/repl/repl<-string-argmap"),
                     Core.vx_new_string(":code"),
@@ -84,11 +85,13 @@ public final class TranslateTest {
               Translate.f_translate_from_translation_string(
                 Core.f_new(
                   Core.t_translation,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":wordmap"),
                     Core.f_new(
                       Core.t_stringmap,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string("Hello"),
                         Core.vx_new_string("Hola")
                       )

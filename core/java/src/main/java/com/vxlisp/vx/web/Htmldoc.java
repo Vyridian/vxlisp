@@ -24,24 +24,25 @@ public final class Htmldoc {
 
     @Override
     public Htmldoc.Func_boolean_print_from_id_stylesheettext vx_new(final Object... vals) {
-      Class_boolean_print_from_id_stylesheettext output = new Class_boolean_print_from_id_stylesheettext();
+      Htmldoc.Class_boolean_print_from_id_stylesheettext output = new Htmldoc.Class_boolean_print_from_id_stylesheettext();
       return output;
     }
 
     @Override
-    public Htmldoc.Func_boolean_print_from_id_stylesheettext vx_copy(final Object... vals) {
-      Class_boolean_print_from_id_stylesheettext output = new Class_boolean_print_from_id_stylesheettext();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Htmldoc.Class_boolean_print_from_id_stylesheettext output = new Htmldoc.Class_boolean_print_from_id_stylesheettext();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
         "boolean-print<-id-stylesheettext", // name
         0, // idx
@@ -60,16 +61,19 @@ public final class Htmldoc {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_boolean_print_from_id_stylesheettext;
+      Core.Type_any output = Htmldoc.e_boolean_print_from_id_stylesheettext;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_boolean_print_from_id_stylesheettext;
+      Core.Type_any output = Htmldoc.t_boolean_print_from_id_stylesheettext;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -87,8 +91,8 @@ public final class Htmldoc {
 
   }
 
-  public static final Func_boolean_print_from_id_stylesheettext e_boolean_print_from_id_stylesheettext = new Htmldoc.Class_boolean_print_from_id_stylesheettext();
-  public static final Func_boolean_print_from_id_stylesheettext t_boolean_print_from_id_stylesheettext = new Htmldoc.Class_boolean_print_from_id_stylesheettext();
+  public static final Htmldoc.Func_boolean_print_from_id_stylesheettext e_boolean_print_from_id_stylesheettext = new Htmldoc.Class_boolean_print_from_id_stylesheettext();
+  public static final Htmldoc.Func_boolean_print_from_id_stylesheettext t_boolean_print_from_id_stylesheettext = new Htmldoc.Class_boolean_print_from_id_stylesheettext();
 
   public static Core.Type_boolean f_boolean_print_from_id_stylesheettext(final Core.Type_string id, final Core.Type_string stylesheettext) {
     Core.Type_boolean output = Core.e_boolean;
@@ -110,24 +114,25 @@ public final class Htmldoc {
 
     @Override
     public Htmldoc.Func_boolean_remove_from_id vx_new(final Object... vals) {
-      Class_boolean_remove_from_id output = new Class_boolean_remove_from_id();
+      Htmldoc.Class_boolean_remove_from_id output = new Htmldoc.Class_boolean_remove_from_id();
       return output;
     }
 
     @Override
-    public Htmldoc.Func_boolean_remove_from_id vx_copy(final Object... vals) {
-      Class_boolean_remove_from_id output = new Class_boolean_remove_from_id();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Htmldoc.Class_boolean_remove_from_id output = new Htmldoc.Class_boolean_remove_from_id();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
         "boolean-remove<-id", // name
         0, // idx
@@ -146,16 +151,19 @@ public final class Htmldoc {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_boolean_remove_from_id;
+      Core.Type_any output = Htmldoc.e_boolean_remove_from_id;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_boolean_remove_from_id;
+      Core.Type_any output = Htmldoc.t_boolean_remove_from_id;
+      return output;
     }
 
     @Override
@@ -186,8 +194,8 @@ public final class Htmldoc {
 
   }
 
-  public static final Func_boolean_remove_from_id e_boolean_remove_from_id = new Htmldoc.Class_boolean_remove_from_id();
-  public static final Func_boolean_remove_from_id t_boolean_remove_from_id = new Htmldoc.Class_boolean_remove_from_id();
+  public static final Htmldoc.Func_boolean_remove_from_id e_boolean_remove_from_id = new Htmldoc.Class_boolean_remove_from_id();
+  public static final Htmldoc.Func_boolean_remove_from_id t_boolean_remove_from_id = new Htmldoc.Class_boolean_remove_from_id();
 
   public static Core.Type_boolean f_boolean_remove_from_id(final Core.Type_string id) {
     Core.Type_boolean output = Core.e_boolean;
@@ -210,24 +218,25 @@ public final class Htmldoc {
 
     @Override
     public Htmldoc.Func_boolean_replace_from_id_htmltext vx_new(final Object... vals) {
-      Class_boolean_replace_from_id_htmltext output = new Class_boolean_replace_from_id_htmltext();
+      Htmldoc.Class_boolean_replace_from_id_htmltext output = new Htmldoc.Class_boolean_replace_from_id_htmltext();
       return output;
     }
 
     @Override
-    public Htmldoc.Func_boolean_replace_from_id_htmltext vx_copy(final Object... vals) {
-      Class_boolean_replace_from_id_htmltext output = new Class_boolean_replace_from_id_htmltext();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Htmldoc.Class_boolean_replace_from_id_htmltext output = new Htmldoc.Class_boolean_replace_from_id_htmltext();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
         "boolean-replace<-id-htmltext", // name
         0, // idx
@@ -246,16 +255,19 @@ public final class Htmldoc {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_boolean_replace_from_id_htmltext;
+      Core.Type_any output = Htmldoc.e_boolean_replace_from_id_htmltext;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_boolean_replace_from_id_htmltext;
+      Core.Type_any output = Htmldoc.t_boolean_replace_from_id_htmltext;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -273,8 +285,8 @@ public final class Htmldoc {
 
   }
 
-  public static final Func_boolean_replace_from_id_htmltext e_boolean_replace_from_id_htmltext = new Htmldoc.Class_boolean_replace_from_id_htmltext();
-  public static final Func_boolean_replace_from_id_htmltext t_boolean_replace_from_id_htmltext = new Htmldoc.Class_boolean_replace_from_id_htmltext();
+  public static final Htmldoc.Func_boolean_replace_from_id_htmltext e_boolean_replace_from_id_htmltext = new Htmldoc.Class_boolean_replace_from_id_htmltext();
+  public static final Htmldoc.Func_boolean_replace_from_id_htmltext t_boolean_replace_from_id_htmltext = new Htmldoc.Class_boolean_replace_from_id_htmltext();
 
   public static Core.Type_boolean f_boolean_replace_from_id_htmltext(final Core.Type_string id, final Core.Type_string htmltext) {
     Core.Type_boolean output = Core.e_boolean;
@@ -298,24 +310,25 @@ public final class Htmldoc {
 
     @Override
     public Htmldoc.Func_boolean_replace_from_id_parent_htmltext vx_new(final Object... vals) {
-      Class_boolean_replace_from_id_parent_htmltext output = new Class_boolean_replace_from_id_parent_htmltext();
+      Htmldoc.Class_boolean_replace_from_id_parent_htmltext output = new Htmldoc.Class_boolean_replace_from_id_parent_htmltext();
       return output;
     }
 
     @Override
-    public Htmldoc.Func_boolean_replace_from_id_parent_htmltext vx_copy(final Object... vals) {
-      Class_boolean_replace_from_id_parent_htmltext output = new Class_boolean_replace_from_id_parent_htmltext();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Htmldoc.Class_boolean_replace_from_id_parent_htmltext output = new Htmldoc.Class_boolean_replace_from_id_parent_htmltext();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
         "boolean-replace<-id-parent-htmltext", // name
         0, // idx
@@ -334,16 +347,19 @@ public final class Htmldoc {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_boolean_replace_from_id_parent_htmltext;
+      Core.Type_any output = Htmldoc.e_boolean_replace_from_id_parent_htmltext;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_boolean_replace_from_id_parent_htmltext;
+      Core.Type_any output = Htmldoc.t_boolean_replace_from_id_parent_htmltext;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -362,8 +378,8 @@ public final class Htmldoc {
 
   }
 
-  public static final Func_boolean_replace_from_id_parent_htmltext e_boolean_replace_from_id_parent_htmltext = new Htmldoc.Class_boolean_replace_from_id_parent_htmltext();
-  public static final Func_boolean_replace_from_id_parent_htmltext t_boolean_replace_from_id_parent_htmltext = new Htmldoc.Class_boolean_replace_from_id_parent_htmltext();
+  public static final Htmldoc.Func_boolean_replace_from_id_parent_htmltext e_boolean_replace_from_id_parent_htmltext = new Htmldoc.Class_boolean_replace_from_id_parent_htmltext();
+  public static final Htmldoc.Func_boolean_replace_from_id_parent_htmltext t_boolean_replace_from_id_parent_htmltext = new Htmldoc.Class_boolean_replace_from_id_parent_htmltext();
 
   public static Core.Type_boolean f_boolean_replace_from_id_parent_htmltext(final Core.Type_string id, final Core.Type_string parent, final Core.Type_string htmltext) {
     Core.Type_boolean output = Core.e_boolean;
@@ -387,24 +403,25 @@ public final class Htmldoc {
 
     @Override
     public Htmldoc.Func_boolean_write_stylesheet_from_string vx_new(final Object... vals) {
-      Class_boolean_write_stylesheet_from_string output = new Class_boolean_write_stylesheet_from_string();
+      Htmldoc.Class_boolean_write_stylesheet_from_string output = new Htmldoc.Class_boolean_write_stylesheet_from_string();
       return output;
     }
 
     @Override
-    public Htmldoc.Func_boolean_write_stylesheet_from_string vx_copy(final Object... vals) {
-      Class_boolean_write_stylesheet_from_string output = new Class_boolean_write_stylesheet_from_string();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Htmldoc.Class_boolean_write_stylesheet_from_string output = new Htmldoc.Class_boolean_write_stylesheet_from_string();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
         "boolean-write-stylesheet<-string", // name
         0, // idx
@@ -423,16 +440,19 @@ public final class Htmldoc {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_boolean_write_stylesheet_from_string;
+      Core.Type_any output = Htmldoc.e_boolean_write_stylesheet_from_string;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_boolean_write_stylesheet_from_string;
+      Core.Type_any output = Htmldoc.t_boolean_write_stylesheet_from_string;
+      return output;
     }
 
     @Override
@@ -464,8 +484,8 @@ public final class Htmldoc {
 
   }
 
-  public static final Func_boolean_write_stylesheet_from_string e_boolean_write_stylesheet_from_string = new Htmldoc.Class_boolean_write_stylesheet_from_string();
-  public static final Func_boolean_write_stylesheet_from_string t_boolean_write_stylesheet_from_string = new Htmldoc.Class_boolean_write_stylesheet_from_string();
+  public static final Htmldoc.Func_boolean_write_stylesheet_from_string e_boolean_write_stylesheet_from_string = new Htmldoc.Class_boolean_write_stylesheet_from_string();
+  public static final Htmldoc.Func_boolean_write_stylesheet_from_string t_boolean_write_stylesheet_from_string = new Htmldoc.Class_boolean_write_stylesheet_from_string();
 
   public static CompletableFuture<Core.Type_boolean> f_boolean_write_stylesheet_from_string(final Core.Type_string text) {
     CompletableFuture<Core.Type_boolean> output = Core.vx_async_new_from_value(Core.e_boolean);
@@ -489,24 +509,25 @@ public final class Htmldoc {
 
     @Override
     public Htmldoc.Func_boolean_write_from_id_attribute_value vx_new(final Object... vals) {
-      Class_boolean_write_from_id_attribute_value output = new Class_boolean_write_from_id_attribute_value();
+      Htmldoc.Class_boolean_write_from_id_attribute_value output = new Htmldoc.Class_boolean_write_from_id_attribute_value();
       return output;
     }
 
     @Override
-    public Htmldoc.Func_boolean_write_from_id_attribute_value vx_copy(final Object... vals) {
-      Class_boolean_write_from_id_attribute_value output = new Class_boolean_write_from_id_attribute_value();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Htmldoc.Class_boolean_write_from_id_attribute_value output = new Htmldoc.Class_boolean_write_from_id_attribute_value();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
         "boolean-write<-id-attribute-value", // name
         0, // idx
@@ -525,16 +546,19 @@ public final class Htmldoc {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_boolean_write_from_id_attribute_value;
+      Core.Type_any output = Htmldoc.e_boolean_write_from_id_attribute_value;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_boolean_write_from_id_attribute_value;
+      Core.Type_any output = Htmldoc.t_boolean_write_from_id_attribute_value;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -553,8 +577,8 @@ public final class Htmldoc {
 
   }
 
-  public static final Func_boolean_write_from_id_attribute_value e_boolean_write_from_id_attribute_value = new Htmldoc.Class_boolean_write_from_id_attribute_value();
-  public static final Func_boolean_write_from_id_attribute_value t_boolean_write_from_id_attribute_value = new Htmldoc.Class_boolean_write_from_id_attribute_value();
+  public static final Htmldoc.Func_boolean_write_from_id_attribute_value e_boolean_write_from_id_attribute_value = new Htmldoc.Class_boolean_write_from_id_attribute_value();
+  public static final Htmldoc.Func_boolean_write_from_id_attribute_value t_boolean_write_from_id_attribute_value = new Htmldoc.Class_boolean_write_from_id_attribute_value();
 
   public static Core.Type_boolean f_boolean_write_from_id_attribute_value(final Core.Type_string id, final Core.Type_string attribute, final Core.Type_string value) {
     Core.Type_boolean output = Core.e_boolean;
@@ -577,24 +601,25 @@ public final class Htmldoc {
 
     @Override
     public Htmldoc.Func_boolean_write_from_id_htmltext vx_new(final Object... vals) {
-      Class_boolean_write_from_id_htmltext output = new Class_boolean_write_from_id_htmltext();
+      Htmldoc.Class_boolean_write_from_id_htmltext output = new Htmldoc.Class_boolean_write_from_id_htmltext();
       return output;
     }
 
     @Override
-    public Htmldoc.Func_boolean_write_from_id_htmltext vx_copy(final Object... vals) {
-      Class_boolean_write_from_id_htmltext output = new Class_boolean_write_from_id_htmltext();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Htmldoc.Class_boolean_write_from_id_htmltext output = new Htmldoc.Class_boolean_write_from_id_htmltext();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
         "boolean-write<-id-htmltext", // name
         0, // idx
@@ -613,16 +638,19 @@ public final class Htmldoc {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_boolean_write_from_id_htmltext;
+      Core.Type_any output = Htmldoc.e_boolean_write_from_id_htmltext;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_boolean_write_from_id_htmltext;
+      Core.Type_any output = Htmldoc.t_boolean_write_from_id_htmltext;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -640,8 +668,8 @@ public final class Htmldoc {
 
   }
 
-  public static final Func_boolean_write_from_id_htmltext e_boolean_write_from_id_htmltext = new Htmldoc.Class_boolean_write_from_id_htmltext();
-  public static final Func_boolean_write_from_id_htmltext t_boolean_write_from_id_htmltext = new Htmldoc.Class_boolean_write_from_id_htmltext();
+  public static final Htmldoc.Func_boolean_write_from_id_htmltext e_boolean_write_from_id_htmltext = new Htmldoc.Class_boolean_write_from_id_htmltext();
+  public static final Htmldoc.Func_boolean_write_from_id_htmltext t_boolean_write_from_id_htmltext = new Htmldoc.Class_boolean_write_from_id_htmltext();
 
   public static Core.Type_boolean f_boolean_write_from_id_htmltext(final Core.Type_string id, final Core.Type_string htmltext) {
     Core.Type_boolean output = Core.e_boolean;
@@ -664,24 +692,25 @@ public final class Htmldoc {
 
     @Override
     public Htmldoc.Func_boolean_write_from_id_visible vx_new(final Object... vals) {
-      Class_boolean_write_from_id_visible output = new Class_boolean_write_from_id_visible();
+      Htmldoc.Class_boolean_write_from_id_visible output = new Htmldoc.Class_boolean_write_from_id_visible();
       return output;
     }
 
     @Override
-    public Htmldoc.Func_boolean_write_from_id_visible vx_copy(final Object... vals) {
-      Class_boolean_write_from_id_visible output = new Class_boolean_write_from_id_visible();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Htmldoc.Class_boolean_write_from_id_visible output = new Htmldoc.Class_boolean_write_from_id_visible();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
         "boolean-write<-id-visible", // name
         0, // idx
@@ -700,16 +729,19 @@ public final class Htmldoc {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_boolean_write_from_id_visible;
+      Core.Type_any output = Htmldoc.e_boolean_write_from_id_visible;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_boolean_write_from_id_visible;
+      Core.Type_any output = Htmldoc.t_boolean_write_from_id_visible;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -727,8 +759,8 @@ public final class Htmldoc {
 
   }
 
-  public static final Func_boolean_write_from_id_visible e_boolean_write_from_id_visible = new Htmldoc.Class_boolean_write_from_id_visible();
-  public static final Func_boolean_write_from_id_visible t_boolean_write_from_id_visible = new Htmldoc.Class_boolean_write_from_id_visible();
+  public static final Htmldoc.Func_boolean_write_from_id_visible e_boolean_write_from_id_visible = new Htmldoc.Class_boolean_write_from_id_visible();
+  public static final Htmldoc.Func_boolean_write_from_id_visible t_boolean_write_from_id_visible = new Htmldoc.Class_boolean_write_from_id_visible();
 
   public static Core.Type_boolean f_boolean_write_from_id_visible(final Core.Type_string id, final Core.Type_boolean visible) {
     Core.Type_boolean output = Core.e_boolean;
@@ -752,24 +784,25 @@ public final class Htmldoc {
 
     @Override
     public Htmldoc.Func_boolean_write_from_stylesheet vx_new(final Object... vals) {
-      Class_boolean_write_from_stylesheet output = new Class_boolean_write_from_stylesheet();
+      Htmldoc.Class_boolean_write_from_stylesheet output = new Htmldoc.Class_boolean_write_from_stylesheet();
       return output;
     }
 
     @Override
-    public Htmldoc.Func_boolean_write_from_stylesheet vx_copy(final Object... vals) {
-      Class_boolean_write_from_stylesheet output = new Class_boolean_write_from_stylesheet();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Htmldoc.Class_boolean_write_from_stylesheet output = new Htmldoc.Class_boolean_write_from_stylesheet();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
         "boolean-write<-stylesheet", // name
         0, // idx
@@ -788,16 +821,19 @@ public final class Htmldoc {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_boolean_write_from_stylesheet;
+      Core.Type_any output = Htmldoc.e_boolean_write_from_stylesheet;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_boolean_write_from_stylesheet;
+      Core.Type_any output = Htmldoc.t_boolean_write_from_stylesheet;
+      return output;
     }
 
     @Override
@@ -829,8 +865,8 @@ public final class Htmldoc {
 
   }
 
-  public static final Func_boolean_write_from_stylesheet e_boolean_write_from_stylesheet = new Htmldoc.Class_boolean_write_from_stylesheet();
-  public static final Func_boolean_write_from_stylesheet t_boolean_write_from_stylesheet = new Htmldoc.Class_boolean_write_from_stylesheet();
+  public static final Htmldoc.Func_boolean_write_from_stylesheet e_boolean_write_from_stylesheet = new Htmldoc.Class_boolean_write_from_stylesheet();
+  public static final Htmldoc.Func_boolean_write_from_stylesheet t_boolean_write_from_stylesheet = new Htmldoc.Class_boolean_write_from_stylesheet();
 
   public static CompletableFuture<Core.Type_boolean> f_boolean_write_from_stylesheet(final Html.Type_stylesheet stylesheet) {
     CompletableFuture<Core.Type_boolean> output = Core.vx_async_new_from_value(Core.e_boolean);
@@ -864,24 +900,25 @@ public final class Htmldoc {
 
     @Override
     public Htmldoc.Func_boolean_writeevents_from_ui vx_new(final Object... vals) {
-      Class_boolean_writeevents_from_ui output = new Class_boolean_writeevents_from_ui();
+      Htmldoc.Class_boolean_writeevents_from_ui output = new Htmldoc.Class_boolean_writeevents_from_ui();
       return output;
     }
 
     @Override
-    public Htmldoc.Func_boolean_writeevents_from_ui vx_copy(final Object... vals) {
-      Class_boolean_writeevents_from_ui output = new Class_boolean_writeevents_from_ui();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Htmldoc.Class_boolean_writeevents_from_ui output = new Htmldoc.Class_boolean_writeevents_from_ui();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
         "boolean-writeevents<-ui", // name
         0, // idx
@@ -900,16 +937,19 @@ public final class Htmldoc {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_boolean_writeevents_from_ui;
+      Core.Type_any output = Htmldoc.e_boolean_writeevents_from_ui;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_boolean_writeevents_from_ui;
+      Core.Type_any output = Htmldoc.t_boolean_writeevents_from_ui;
+      return output;
     }
 
     @Override
@@ -940,8 +980,8 @@ public final class Htmldoc {
 
   }
 
-  public static final Func_boolean_writeevents_from_ui e_boolean_writeevents_from_ui = new Htmldoc.Class_boolean_writeevents_from_ui();
-  public static final Func_boolean_writeevents_from_ui t_boolean_writeevents_from_ui = new Htmldoc.Class_boolean_writeevents_from_ui();
+  public static final Htmldoc.Func_boolean_writeevents_from_ui e_boolean_writeevents_from_ui = new Htmldoc.Class_boolean_writeevents_from_ui();
+  public static final Htmldoc.Func_boolean_writeevents_from_ui t_boolean_writeevents_from_ui = new Htmldoc.Class_boolean_writeevents_from_ui();
 
   public static Core.Type_boolean f_boolean_writeevents_from_ui(final Ui.Type_ui ui) {
     Core.Type_boolean output = Core.e_boolean;
@@ -962,24 +1002,25 @@ public final class Htmldoc {
 
     @Override
     public Htmldoc.Func_context_read vx_new(final Object... vals) {
-      Class_context_read output = new Class_context_read();
+      Htmldoc.Class_context_read output = new Htmldoc.Class_context_read();
       return output;
     }
 
     @Override
-    public Htmldoc.Func_context_read vx_copy(final Object... vals) {
-      Class_context_read output = new Class_context_read();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Htmldoc.Class_context_read output = new Htmldoc.Class_context_read();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
         "context-read", // name
         0, // idx
@@ -998,16 +1039,19 @@ public final class Htmldoc {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_context_read;
+      Core.Type_any output = Htmldoc.e_context_read;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_context_read;
+      Core.Type_any output = Htmldoc.t_context_read;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -1023,8 +1067,8 @@ public final class Htmldoc {
 
   }
 
-  public static final Func_context_read e_context_read = new Htmldoc.Class_context_read();
-  public static final Func_context_read t_context_read = new Htmldoc.Class_context_read();
+  public static final Htmldoc.Func_context_read e_context_read = new Htmldoc.Class_context_read();
+  public static final Htmldoc.Func_context_read t_context_read = new Htmldoc.Class_context_read();
 
   public static Core.Type_context f_context_read() {
     Core.Type_context output = Core.e_context;
@@ -1045,24 +1089,25 @@ public final class Htmldoc {
 
     @Override
     public Htmldoc.Func_context_write vx_new(final Object... vals) {
-      Class_context_write output = new Class_context_write();
+      Htmldoc.Class_context_write output = new Htmldoc.Class_context_write();
       return output;
     }
 
     @Override
-    public Htmldoc.Func_context_write vx_copy(final Object... vals) {
-      Class_context_write output = new Class_context_write();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Htmldoc.Class_context_write output = new Htmldoc.Class_context_write();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
         "context-write", // name
         0, // idx
@@ -1081,16 +1126,19 @@ public final class Htmldoc {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_context_write;
+      Core.Type_any output = Htmldoc.e_context_write;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_context_write;
+      Core.Type_any output = Htmldoc.t_context_write;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -1107,8 +1155,8 @@ public final class Htmldoc {
 
   }
 
-  public static final Func_context_write e_context_write = new Htmldoc.Class_context_write();
-  public static final Func_context_write t_context_write = new Htmldoc.Class_context_write();
+  public static final Htmldoc.Func_context_write e_context_write = new Htmldoc.Class_context_write();
+  public static final Htmldoc.Func_context_write t_context_write = new Htmldoc.Class_context_write();
 
   public static Core.Type_context f_context_write(final Core.Type_context context) {
     Core.Type_context output = Core.e_context;
@@ -1130,24 +1178,25 @@ public final class Htmldoc {
 
     @Override
     public Htmldoc.Func_string_from_id vx_new(final Object... vals) {
-      Class_string_from_id output = new Class_string_from_id();
+      Htmldoc.Class_string_from_id output = new Htmldoc.Class_string_from_id();
       return output;
     }
 
     @Override
-    public Htmldoc.Func_string_from_id vx_copy(final Object... vals) {
-      Class_string_from_id output = new Class_string_from_id();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Htmldoc.Class_string_from_id output = new Htmldoc.Class_string_from_id();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
         "string<-id", // name
         0, // idx
@@ -1166,16 +1215,19 @@ public final class Htmldoc {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_string_from_id;
+      Core.Type_any output = Htmldoc.e_string_from_id;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_string_from_id;
+      Core.Type_any output = Htmldoc.t_string_from_id;
+      return output;
     }
 
     @Override
@@ -1206,8 +1258,8 @@ public final class Htmldoc {
 
   }
 
-  public static final Func_string_from_id e_string_from_id = new Htmldoc.Class_string_from_id();
-  public static final Func_string_from_id t_string_from_id = new Htmldoc.Class_string_from_id();
+  public static final Htmldoc.Func_string_from_id e_string_from_id = new Htmldoc.Class_string_from_id();
+  public static final Htmldoc.Func_string_from_id t_string_from_id = new Htmldoc.Class_string_from_id();
 
   public static Core.Type_string f_string_from_id(final Core.Type_string id) {
     Core.Type_string output = Core.e_string;
@@ -1229,24 +1281,25 @@ public final class Htmldoc {
 
     @Override
     public Htmldoc.Func_string_from_stylesheet vx_new(final Object... vals) {
-      Class_string_from_stylesheet output = new Class_string_from_stylesheet();
+      Htmldoc.Class_string_from_stylesheet output = new Htmldoc.Class_string_from_stylesheet();
       return output;
     }
 
     @Override
-    public Htmldoc.Func_string_from_stylesheet vx_copy(final Object... vals) {
-      Class_string_from_stylesheet output = new Class_string_from_stylesheet();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Htmldoc.Class_string_from_stylesheet output = new Htmldoc.Class_string_from_stylesheet();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
         "string<-stylesheet", // name
         0, // idx
@@ -1265,16 +1318,19 @@ public final class Htmldoc {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_string_from_stylesheet;
+      Core.Type_any output = Htmldoc.e_string_from_stylesheet;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_string_from_stylesheet;
+      Core.Type_any output = Htmldoc.t_string_from_stylesheet;
+      return output;
     }
 
     @Override
@@ -1305,8 +1361,8 @@ public final class Htmldoc {
 
   }
 
-  public static final Func_string_from_stylesheet e_string_from_stylesheet = new Htmldoc.Class_string_from_stylesheet();
-  public static final Func_string_from_stylesheet t_string_from_stylesheet = new Htmldoc.Class_string_from_stylesheet();
+  public static final Htmldoc.Func_string_from_stylesheet e_string_from_stylesheet = new Htmldoc.Class_string_from_stylesheet();
+  public static final Htmldoc.Func_string_from_stylesheet t_string_from_stylesheet = new Htmldoc.Class_string_from_stylesheet();
 
   public static Core.Type_string f_string_from_stylesheet(final Html.Type_stylesheet stylesheet) {
     Core.Type_string output = Core.e_string;
@@ -1337,24 +1393,25 @@ public final class Htmldoc {
 
     @Override
     public Htmldoc.Func_ui_readstate_from_uid vx_new(final Object... vals) {
-      Class_ui_readstate_from_uid output = new Class_ui_readstate_from_uid();
+      Htmldoc.Class_ui_readstate_from_uid output = new Htmldoc.Class_ui_readstate_from_uid();
       return output;
     }
 
     @Override
-    public Htmldoc.Func_ui_readstate_from_uid vx_copy(final Object... vals) {
-      Class_ui_readstate_from_uid output = new Class_ui_readstate_from_uid();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Htmldoc.Class_ui_readstate_from_uid output = new Htmldoc.Class_ui_readstate_from_uid();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
         "ui-readstate<-uid", // name
         0, // idx
@@ -1373,16 +1430,19 @@ public final class Htmldoc {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_ui_readstate_from_uid;
+      Core.Type_any output = Htmldoc.e_ui_readstate_from_uid;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_ui_readstate_from_uid;
+      Core.Type_any output = Htmldoc.t_ui_readstate_from_uid;
+      return output;
     }
 
     @Override
@@ -1413,8 +1473,8 @@ public final class Htmldoc {
 
   }
 
-  public static final Func_ui_readstate_from_uid e_ui_readstate_from_uid = new Htmldoc.Class_ui_readstate_from_uid();
-  public static final Func_ui_readstate_from_uid t_ui_readstate_from_uid = new Htmldoc.Class_ui_readstate_from_uid();
+  public static final Htmldoc.Func_ui_readstate_from_uid e_ui_readstate_from_uid = new Htmldoc.Class_ui_readstate_from_uid();
+  public static final Htmldoc.Func_ui_readstate_from_uid t_ui_readstate_from_uid = new Htmldoc.Class_ui_readstate_from_uid();
 
   public static Core.Type_any f_ui_readstate_from_uid(final Core.Type_string uid) {
     Core.Type_any output = Core.e_any;

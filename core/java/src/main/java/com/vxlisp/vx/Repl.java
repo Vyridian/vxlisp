@@ -53,17 +53,15 @@ public final class Repl {
    * (type liblist)
    */
   public interface Type_liblist extends Core.Type_list {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public List<Core.Type_string> vx_liststring();
     public Core.Type_string vx_string(final Core.Type_int index);
   }
 
   public static class Class_liblist extends Core.Class_base implements Type_liblist {
 
-    public List<Core.Type_string> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_string>());
+    public List<Core.Type_string> vx_p_list = Core.immutablelist(
+      new ArrayList<Core.Type_string>()
+    );
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -87,12 +85,14 @@ public final class Repl {
 
     @Override
     public List<Core.Type_string> vx_liststring() {
-      return vx_p_list;
+      List<Core.Type_string> output = this.vx_p_list;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
-      return this.vx_string(index);
+      Core.Type_string output = this.vx_string(index);
+      return output;
     }
 
     @Override
@@ -102,15 +102,15 @@ public final class Repl {
     }
 
     @Override
-    public Repl.Type_liblist vx_copy(final Object... vals) {
-      Type_liblist output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Repl.Type_liblist output = this;
       boolean ischanged = false;
-      Class_liblist val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Repl.Class_liblist value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      List<Core.Type_string> listval = new ArrayList<Core.Type_string>(val.vx_liststring());
+      List<Core.Type_string> listval = new ArrayList<Core.Type_string>(value.vx_liststring());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -118,28 +118,28 @@ public final class Repl {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_string) {
-          Core.Type_string allowsub = (Core.Type_string)valsub;;
+          Core.Type_string allowsub = (Core.Type_string)valsub;
           ischanged = true;
           listval.add(allowsub);
         } else if (valsub instanceof String) {
           ischanged = true;
           listval.add(Core.vx_new(Core.t_string, valsub));
         } else if (valsub instanceof Repl.Type_liblist) {
-          Repl.Type_liblist multi = (Repl.Type_liblist)valsub;;
+          Repl.Type_liblist multi = (Repl.Type_liblist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_liststring());
         } else if (valsub instanceof List<?>) {
-          List<?> listunknown = (List<?>)valsub;;
+          List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (false) {
             } else if (item instanceof Core.Type_string) {
-              Core.Type_string valitem = (Core.Type_string)item;;
+              Core.Type_string valitem = (Core.Type_string)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/repl/liblist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
@@ -148,7 +148,7 @@ public final class Repl {
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_liblist work = new Class_liblist();
+        Repl.Class_liblist work = new Repl.Class_liblist();
         work.vx_p_list = Core.immutablelist(listval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -160,16 +160,19 @@ public final class Repl {
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_liblist;
+      Core.Type_any output = Repl.e_liblist;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_liblist;
+      Core.Type_any output = Repl.t_liblist;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/repl", // pkgname
         "liblist", // name
         ":list", // extends
@@ -182,12 +185,13 @@ public final class Repl {
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_liblist e_liblist = new Class_liblist();
-  public static final Type_liblist t_liblist = new Class_liblist();
+  public static final Repl.Type_liblist e_liblist = new Repl.Class_liblist();
+  public static final Repl.Type_liblist t_liblist = new Repl.Class_liblist();
 
   /**
    * type: repl
@@ -195,10 +199,6 @@ public final class Repl {
    * (type repl)
    */
   public interface Type_repl extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Core.Type_string name();
     public Core.Type_any type();
     public Repl.Type_repllist repllist();
@@ -311,7 +311,8 @@ public final class Repl {
       output.put(":async", this.async());
       output.put(":val", this.val());
       output.put(":doc", this.doc());
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -321,20 +322,20 @@ public final class Repl {
     }
 
     @Override
-    public Repl.Type_repl vx_copy(final Object... vals) {
-      Type_repl output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Repl.Type_repl output = this;
       boolean ischanged = false;
-      Class_repl val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Repl.Class_repl value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Core.Type_string vx_p_name = val.name();
-      Core.Type_any vx_p_type = val.type();
-      Repl.Type_repllist vx_p_repllist = val.repllist();
-      Core.Type_boolean vx_p_async = val.async();
-      Core.Type_any vx_p_val = val.val();
-      Core.Type_string vx_p_doc = val.doc();
+      Core.Type_string vx_p_name = value.name();
+      Core.Type_any vx_p_type = value.type();
+      Repl.Type_repllist vx_p_repllist = value.repllist();
+      Core.Type_boolean vx_p_async = value.async();
+      Core.Type_any vx_p_val = value.val();
+      Core.Type_string vx_p_doc = value.doc();
       List<String> validkeys = new ArrayList<String>();
       validkeys.add(":name");
       validkeys.add(":type");
@@ -350,22 +351,22 @@ public final class Repl {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (key == "") {
+        } else if (key.equals("")) {
           boolean istestkey = false;
           String testkey = "";
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;;
+            Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             testkey = sval;
             istestkey = true;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              Core.Type_any valmsg = (Core.Type_any)valsub;
               msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -391,7 +392,7 @@ public final class Repl {
           case ":name":
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
-              Core.Type_string valname = (Core.Type_string)valsub;;
+              Core.Type_string valname = (Core.Type_string)valsub;
               ischanged = true;
               vx_p_name = valname;
             } else if (valsub instanceof String) {
@@ -400,7 +401,7 @@ public final class Repl {
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -416,13 +417,13 @@ public final class Repl {
           case ":type":
             if (valsub == vx_p_type) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valtype = (Core.Type_any)valsub;;
+              Core.Type_any valtype = (Core.Type_any)valsub;
               ischanged = true;
               vx_p_type = valtype;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -438,13 +439,13 @@ public final class Repl {
           case ":repllist":
             if (valsub == vx_p_repllist) {
             } else if (valsub instanceof Repl.Type_repllist) {
-              Repl.Type_repllist valrepllist = (Repl.Type_repllist)valsub;;
+              Repl.Type_repllist valrepllist = (Repl.Type_repllist)valsub;
               ischanged = true;
               vx_p_repllist = valrepllist;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -460,7 +461,7 @@ public final class Repl {
           case ":async":
             if (valsub == vx_p_async) {
             } else if (valsub instanceof Core.Type_boolean) {
-              Core.Type_boolean valasync = (Core.Type_boolean)valsub;;
+              Core.Type_boolean valasync = (Core.Type_boolean)valsub;
               ischanged = true;
               vx_p_async = valasync;
             } else if (valsub instanceof Boolean) {
@@ -469,7 +470,7 @@ public final class Repl {
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -485,13 +486,13 @@ public final class Repl {
           case ":val":
             if (valsub == vx_p_val) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valval = (Core.Type_any)valsub;;
+              Core.Type_any valval = (Core.Type_any)valsub;
               ischanged = true;
               vx_p_val = valval;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -507,7 +508,7 @@ public final class Repl {
           case ":doc":
             if (valsub == vx_p_doc) {
             } else if (valsub instanceof Core.Type_string) {
-              Core.Type_string valdoc = (Core.Type_string)valsub;;
+              Core.Type_string valdoc = (Core.Type_string)valsub;
               ischanged = true;
               vx_p_doc = valdoc;
             } else if (valsub instanceof String) {
@@ -516,7 +517,7 @@ public final class Repl {
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -539,7 +540,7 @@ public final class Repl {
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_repl work = new Class_repl();
+        Repl.Class_repl work = new Repl.Class_repl();
         work.vx_p_name = vx_p_name;
         work.vx_p_type = vx_p_type;
         work.vx_p_repllist = vx_p_repllist;
@@ -556,16 +557,19 @@ public final class Repl {
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_repl;
+      Core.Type_any output = Repl.e_repl;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_repl;
+      Core.Type_any output = Repl.t_repl;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/repl", // pkgname
         "repl", // name
         ":struct", // extends
@@ -578,12 +582,13 @@ public final class Repl {
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_repl e_repl = new Class_repl();
-  public static final Type_repl t_repl = new Class_repl();
+  public static final Repl.Type_repl e_repl = new Repl.Class_repl();
+  public static final Repl.Type_repl t_repl = new Repl.Class_repl();
 
   /**
    * type: replarglist
@@ -591,10 +596,6 @@ public final class Repl {
    * (type replarglist)
    */
   public interface Type_replarglist extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Core.Type_string key();
     public Repl.Type_repl current();
     public Repl.Type_repllist repllist();
@@ -659,7 +660,8 @@ public final class Repl {
       output.put(":key", this.key());
       output.put(":current", this.current());
       output.put(":repllist", this.repllist());
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -669,17 +671,17 @@ public final class Repl {
     }
 
     @Override
-    public Repl.Type_replarglist vx_copy(final Object... vals) {
-      Type_replarglist output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Repl.Type_replarglist output = this;
       boolean ischanged = false;
-      Class_replarglist val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Repl.Class_replarglist value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Core.Type_string vx_p_key = val.key();
-      Repl.Type_repl vx_p_current = val.current();
-      Repl.Type_repllist vx_p_repllist = val.repllist();
+      Core.Type_string vx_p_key = value.key();
+      Repl.Type_repl vx_p_current = value.current();
+      Repl.Type_repllist vx_p_repllist = value.repllist();
       List<String> validkeys = new ArrayList<String>();
       validkeys.add(":key");
       validkeys.add(":current");
@@ -692,22 +694,22 @@ public final class Repl {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (key == "") {
+        } else if (key.equals("")) {
           boolean istestkey = false;
           String testkey = "";
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;;
+            Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             testkey = sval;
             istestkey = true;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              Core.Type_any valmsg = (Core.Type_any)valsub;
               msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -733,7 +735,7 @@ public final class Repl {
           case ":key":
             if (valsub == vx_p_key) {
             } else if (valsub instanceof Core.Type_string) {
-              Core.Type_string valkey = (Core.Type_string)valsub;;
+              Core.Type_string valkey = (Core.Type_string)valsub;
               ischanged = true;
               vx_p_key = valkey;
             } else if (valsub instanceof String) {
@@ -742,7 +744,7 @@ public final class Repl {
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -758,13 +760,13 @@ public final class Repl {
           case ":current":
             if (valsub == vx_p_current) {
             } else if (valsub instanceof Repl.Type_repl) {
-              Repl.Type_repl valcurrent = (Repl.Type_repl)valsub;;
+              Repl.Type_repl valcurrent = (Repl.Type_repl)valsub;
               ischanged = true;
               vx_p_current = valcurrent;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -780,13 +782,13 @@ public final class Repl {
           case ":repllist":
             if (valsub == vx_p_repllist) {
             } else if (valsub instanceof Repl.Type_repllist) {
-              Repl.Type_repllist valrepllist = (Repl.Type_repllist)valsub;;
+              Repl.Type_repllist valrepllist = (Repl.Type_repllist)valsub;
               ischanged = true;
               vx_p_repllist = valrepllist;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -809,7 +811,7 @@ public final class Repl {
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_replarglist work = new Class_replarglist();
+        Repl.Class_replarglist work = new Repl.Class_replarglist();
         work.vx_p_key = vx_p_key;
         work.vx_p_current = vx_p_current;
         work.vx_p_repllist = vx_p_repllist;
@@ -823,16 +825,19 @@ public final class Repl {
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_replarglist;
+      Core.Type_any output = Repl.e_replarglist;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_replarglist;
+      Core.Type_any output = Repl.t_replarglist;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/repl", // pkgname
         "replarglist", // name
         ":struct", // extends
@@ -845,12 +850,13 @@ public final class Repl {
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_replarglist e_replarglist = new Class_replarglist();
-  public static final Type_replarglist t_replarglist = new Class_replarglist();
+  public static final Repl.Type_replarglist e_replarglist = new Repl.Class_replarglist();
+  public static final Repl.Type_replarglist t_replarglist = new Repl.Class_replarglist();
 
   /**
    * type: repllist
@@ -858,17 +864,15 @@ public final class Repl {
    * (type repllist)
    */
   public interface Type_repllist extends Core.Type_list {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public List<Repl.Type_repl> vx_listrepl();
     public Repl.Type_repl vx_repl(final Core.Type_int index);
   }
 
   public static class Class_repllist extends Core.Class_base implements Type_repllist {
 
-    public List<Repl.Type_repl> vx_p_list = Core.immutablelist(new ArrayList<Repl.Type_repl>());
+    public List<Repl.Type_repl> vx_p_list = Core.immutablelist(
+      new ArrayList<Repl.Type_repl>()
+    );
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -892,12 +896,14 @@ public final class Repl {
 
     @Override
     public List<Repl.Type_repl> vx_listrepl() {
-      return vx_p_list;
+      List<Repl.Type_repl> output = this.vx_p_list;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
-      return this.vx_repl(index);
+      Repl.Type_repl output = this.vx_repl(index);
+      return output;
     }
 
     @Override
@@ -907,15 +913,15 @@ public final class Repl {
     }
 
     @Override
-    public Repl.Type_repllist vx_copy(final Object... vals) {
-      Type_repllist output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Repl.Type_repllist output = this;
       boolean ischanged = false;
-      Class_repllist val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Repl.Class_repllist value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      List<Repl.Type_repl> listval = new ArrayList<Repl.Type_repl>(val.vx_listrepl());
+      List<Repl.Type_repl> listval = new ArrayList<Repl.Type_repl>(value.vx_listrepl());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -923,28 +929,28 @@ public final class Repl {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Repl.Type_repl) {
-          Repl.Type_repl allowsub = (Repl.Type_repl)valsub;;
+          Repl.Type_repl allowsub = (Repl.Type_repl)valsub;
           ischanged = true;
           listval.add(allowsub);
         } else if (valsub instanceof Repl.Type_repl) {
           ischanged = true;
           listval.add((Repl.Type_repl)valsub);
         } else if (valsub instanceof Repl.Type_repllist) {
-          Repl.Type_repllist multi = (Repl.Type_repllist)valsub;;
+          Repl.Type_repllist multi = (Repl.Type_repllist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listrepl());
         } else if (valsub instanceof List<?>) {
-          List<?> listunknown = (List<?>)valsub;;
+          List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (false) {
             } else if (item instanceof Repl.Type_repl) {
-              Repl.Type_repl valitem = (Repl.Type_repl)item;;
+              Repl.Type_repl valitem = (Repl.Type_repl)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/repl/repllist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
@@ -953,7 +959,7 @@ public final class Repl {
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_repllist work = new Class_repllist();
+        Repl.Class_repllist work = new Repl.Class_repllist();
         work.vx_p_list = Core.immutablelist(listval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -965,16 +971,19 @@ public final class Repl {
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_repllist;
+      Core.Type_any output = Repl.e_repllist;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_repllist;
+      Core.Type_any output = Repl.t_repllist;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/repl", // pkgname
         "repllist", // name
         ":list", // extends
@@ -987,12 +996,13 @@ public final class Repl {
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_repllist e_repllist = new Class_repllist();
-  public static final Type_repllist t_repllist = new Class_repllist();
+  public static final Repl.Type_repllist e_repllist = new Repl.Class_repllist();
+  public static final Repl.Type_repllist t_repllist = new Repl.Class_repllist();
 
   /**
    * Constant: delimvxlisp
@@ -1001,7 +1011,7 @@ public final class Repl {
    */
   public static class Const_delimvxlisp {
     public static Core.Type_constdef constdef() {
-      return Core.constdef_new(
+      Core.Type_constdef output = Core.constdef_new(
         "vx/repl", // pkgname
         "delimvxlisp", // name
         Core.typedef_new(
@@ -1018,32 +1028,35 @@ public final class Repl {
           Core.e_argmap // properties
         )
       );
+      return output;
     }
 
     public static void const_new(Textblock.Type_delim output) {
       Textblock.Class_delim outval = (Textblock.Class_delim)output;
       outval.vx_p_constdef = constdef();
-      Textblock.Type_delim val = Core.f_new(
+      Textblock.Type_delim value = Core.f_new(
         Textblock.t_delim,
-        Core.vx_new(Core.t_anylist,
-                Core.vx_new_string(":name"),
-                Core.vx_new_string("delimvxlisp"),
-                Core.vx_new_string(":delimlist"),
-                Core.f_new(
-                  Textblock.t_delimlist,
-                  Core.vx_new(Core.t_anylist,
-                    Repl.c_delimvxlispparen,
-                    Textblock.c_delimcomment,
-                    Textblock.c_delimcommentblock
-                  )
-                )
+        Core.vx_new(
+          Core.t_anylist,
+          Core.vx_new_string(":name"),
+          Core.vx_new_string("delimvxlisp"),
+          Core.vx_new_string(":delimlist"),
+          Core.f_new(
+            Textblock.t_delimlist,
+            Core.vx_new(
+              Core.t_anylist,
+              Repl.c_delimvxlispparen,
+              Textblock.c_delimcomment,
+              Textblock.c_delimcommentblock
+            )
+          )
         )
       );
-      outval.vx_p_name = val.name();
-      outval.vx_p_starttext = val.starttext();
-      outval.vx_p_endtext = val.endtext();
-      outval.vx_p_pos = val.pos();
-      outval.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = value.name();
+      outval.vx_p_starttext = value.starttext();
+      outval.vx_p_endtext = value.endtext();
+      outval.vx_p_pos = value.pos();
+      outval.vx_p_delimlist = value.delimlist();
     }
 
   }
@@ -1058,7 +1071,7 @@ public final class Repl {
    */
   public static class Const_delimvxlispbracket {
     public static Core.Type_constdef constdef() {
-      return Core.constdef_new(
+      Core.Type_constdef output = Core.constdef_new(
         "vx/repl", // pkgname
         "delimvxlispbracket", // name
         Core.typedef_new(
@@ -1075,35 +1088,38 @@ public final class Repl {
           Core.e_argmap // properties
         )
       );
+      return output;
     }
 
     public static void const_new(Textblock.Type_delim output) {
       Textblock.Class_delim outval = (Textblock.Class_delim)output;
       outval.vx_p_constdef = constdef();
-      Textblock.Type_delim val = Core.f_copy(
+      Textblock.Type_delim value = Core.f_copy(
         Textblock.c_delimbracketsquare,
-        Core.vx_new(Core.t_anylist,
-                Core.vx_new_string(":name"),
-                Core.vx_new_string("delimvxlispbracketsquare"),
-                Core.vx_new_string(":delimlist"),
-                Core.f_new(
-                  Textblock.t_delimlist,
-                  Core.vx_new(Core.t_anylist,
-                    Textblock.c_delimcomment,
-                    Textblock.c_delimcommentblock,
-                    Textblock.c_delimquote,
-                    Textblock.c_delimquoteblock,
-                    Textblock.c_delimwhitespace,
-                    Repl.c_delimvxlispparen
-                  )
-                )
+        Core.vx_new(
+          Core.t_anylist,
+          Core.vx_new_string(":name"),
+          Core.vx_new_string("delimvxlispbracketsquare"),
+          Core.vx_new_string(":delimlist"),
+          Core.f_new(
+            Textblock.t_delimlist,
+            Core.vx_new(
+              Core.t_anylist,
+              Textblock.c_delimcomment,
+              Textblock.c_delimcommentblock,
+              Textblock.c_delimquote,
+              Textblock.c_delimquoteblock,
+              Textblock.c_delimwhitespace,
+              Repl.c_delimvxlispparen
+            )
+          )
         )
       );
-      outval.vx_p_name = val.name();
-      outval.vx_p_starttext = val.starttext();
-      outval.vx_p_endtext = val.endtext();
-      outval.vx_p_pos = val.pos();
-      outval.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = value.name();
+      outval.vx_p_starttext = value.starttext();
+      outval.vx_p_endtext = value.endtext();
+      outval.vx_p_pos = value.pos();
+      outval.vx_p_delimlist = value.delimlist();
     }
 
   }
@@ -1118,7 +1134,7 @@ public final class Repl {
    */
   public static class Const_delimvxlispparen {
     public static Core.Type_constdef constdef() {
-      return Core.constdef_new(
+      Core.Type_constdef output = Core.constdef_new(
         "vx/repl", // pkgname
         "delimvxlispparen", // name
         Core.typedef_new(
@@ -1135,36 +1151,39 @@ public final class Repl {
           Core.e_argmap // properties
         )
       );
+      return output;
     }
 
     public static void const_new(Textblock.Type_delim output) {
       Textblock.Class_delim outval = (Textblock.Class_delim)output;
       outval.vx_p_constdef = constdef();
-      Textblock.Type_delim val = Core.f_copy(
+      Textblock.Type_delim value = Core.f_copy(
         Textblock.c_delimparen,
-        Core.vx_new(Core.t_anylist,
-                Core.vx_new_string(":name"),
-                Core.vx_new_string("delimvxlispparen"),
-                Core.vx_new_string(":delimlist"),
-                Core.f_new(
-                  Textblock.t_delimlist,
-                  Core.vx_new(Core.t_anylist,
-                    Textblock.c_delimcomment,
-                    Textblock.c_delimcommentblock,
-                    Textblock.c_delimquote,
-                    Textblock.c_delimquoteblock,
-                    Textblock.c_delimwhitespace,
-                    Repl.c_delimvxlispbracket,
-                    Repl.c_delimvxlispparen
-                  )
-                )
+        Core.vx_new(
+          Core.t_anylist,
+          Core.vx_new_string(":name"),
+          Core.vx_new_string("delimvxlispparen"),
+          Core.vx_new_string(":delimlist"),
+          Core.f_new(
+            Textblock.t_delimlist,
+            Core.vx_new(
+              Core.t_anylist,
+              Textblock.c_delimcomment,
+              Textblock.c_delimcommentblock,
+              Textblock.c_delimquote,
+              Textblock.c_delimquoteblock,
+              Textblock.c_delimwhitespace,
+              Repl.c_delimvxlispbracket,
+              Repl.c_delimvxlispparen
+            )
+          )
         )
       );
-      outval.vx_p_name = val.name();
-      outval.vx_p_starttext = val.starttext();
-      outval.vx_p_endtext = val.endtext();
-      outval.vx_p_pos = val.pos();
-      outval.vx_p_delimlist = val.delimlist();
+      outval.vx_p_name = value.name();
+      outval.vx_p_starttext = value.starttext();
+      outval.vx_p_endtext = value.endtext();
+      outval.vx_p_pos = value.pos();
+      outval.vx_p_delimlist = value.delimlist();
     }
 
   }
@@ -1187,24 +1206,25 @@ public final class Repl {
 
     @Override
     public Repl.Func_any_repl_from_functype_args vx_new(final Object... vals) {
-      Class_any_repl_from_functype_args output = new Class_any_repl_from_functype_args();
+      Repl.Class_any_repl_from_functype_args output = new Repl.Class_any_repl_from_functype_args();
       return output;
     }
 
     @Override
-    public Repl.Func_any_repl_from_functype_args vx_copy(final Object... vals) {
-      Class_any_repl_from_functype_args output = new Class_any_repl_from_functype_args();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Repl.Class_any_repl_from_functype_args output = new Repl.Class_any_repl_from_functype_args();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/repl", // pkgname
         "any-repl<-functype-args", // name
         0, // idx
@@ -1223,16 +1243,19 @@ public final class Repl {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_repl_from_functype_args;
+      Core.Type_any output = Repl.e_any_repl_from_functype_args;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_any_repl_from_functype_args;
+      Core.Type_any output = Repl.t_any_repl_from_functype_args;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -1250,8 +1273,8 @@ public final class Repl {
 
   }
 
-  public static final Func_any_repl_from_functype_args e_any_repl_from_functype_args = new Repl.Class_any_repl_from_functype_args();
-  public static final Func_any_repl_from_functype_args t_any_repl_from_functype_args = new Repl.Class_any_repl_from_functype_args();
+  public static final Repl.Func_any_repl_from_functype_args e_any_repl_from_functype_args = new Repl.Class_any_repl_from_functype_args();
+  public static final Repl.Func_any_repl_from_functype_args t_any_repl_from_functype_args = new Repl.Class_any_repl_from_functype_args();
 
   public static Core.Type_any f_any_repl_from_functype_args(final Core.Type_any type, final Core.Type_anylist args) {
     Core.Type_any output = Core.e_any;
@@ -1278,24 +1301,25 @@ public final class Repl {
 
     @Override
     public Repl.Func_any_from_liblist_string vx_new(final Object... vals) {
-      Class_any_from_liblist_string output = new Class_any_from_liblist_string();
+      Repl.Class_any_from_liblist_string output = new Repl.Class_any_from_liblist_string();
       return output;
     }
 
     @Override
-    public Repl.Func_any_from_liblist_string vx_copy(final Object... vals) {
-      Class_any_from_liblist_string output = new Class_any_from_liblist_string();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Repl.Class_any_from_liblist_string output = new Repl.Class_any_from_liblist_string();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/repl", // pkgname
         "any<-liblist-string", // name
         0, // idx
@@ -1314,16 +1338,19 @@ public final class Repl {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_from_liblist_string;
+      Core.Type_any output = Repl.e_any_from_liblist_string;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_any_from_liblist_string;
+      Core.Type_any output = Repl.t_any_from_liblist_string;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -1342,8 +1369,8 @@ public final class Repl {
 
   }
 
-  public static final Func_any_from_liblist_string e_any_from_liblist_string = new Repl.Class_any_from_liblist_string();
-  public static final Func_any_from_liblist_string t_any_from_liblist_string = new Repl.Class_any_from_liblist_string();
+  public static final Repl.Func_any_from_liblist_string e_any_from_liblist_string = new Repl.Class_any_from_liblist_string();
+  public static final Repl.Func_any_from_liblist_string t_any_from_liblist_string = new Repl.Class_any_from_liblist_string();
 
   public static Core.Type_any f_any_from_liblist_string(final Core.Type_context context, final Repl.Type_liblist liblist, final Core.Type_string text) {
     Core.Type_any output = Core.e_any;
@@ -1373,24 +1400,25 @@ public final class Repl {
 
     @Override
     public Repl.Func_any_from_macro vx_new(final Object... vals) {
-      Class_any_from_macro output = new Class_any_from_macro();
+      Repl.Class_any_from_macro output = new Repl.Class_any_from_macro();
       return output;
     }
 
     @Override
-    public Repl.Func_any_from_macro vx_copy(final Object... vals) {
-      Class_any_from_macro output = new Class_any_from_macro();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Repl.Class_any_from_macro output = new Repl.Class_any_from_macro();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/repl", // pkgname
         "any<-macro", // name
         0, // idx
@@ -1409,16 +1437,19 @@ public final class Repl {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_from_macro;
+      Core.Type_any output = Repl.e_any_from_macro;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_any_from_macro;
+      Core.Type_any output = Repl.t_any_from_macro;
+      return output;
     }
 
     @Override
@@ -1451,8 +1482,8 @@ public final class Repl {
 
   }
 
-  public static final Func_any_from_macro e_any_from_macro = new Repl.Class_any_from_macro();
-  public static final Func_any_from_macro t_any_from_macro = new Repl.Class_any_from_macro();
+  public static final Repl.Func_any_from_macro e_any_from_macro = new Repl.Class_any_from_macro();
+  public static final Repl.Func_any_from_macro t_any_from_macro = new Repl.Class_any_from_macro();
 
   public static <T extends Core.Type_any> T f_any_from_macro(final T generic_any_1, final Core.Type_context context, final Core.Type_anylist anylist) {
     T output = Core.f_empty(generic_any_1);
@@ -1483,24 +1514,25 @@ public final class Repl {
 
     @Override
     public Repl.Func_any_from_repl vx_new(final Object... vals) {
-      Class_any_from_repl output = new Class_any_from_repl();
+      Repl.Class_any_from_repl output = new Repl.Class_any_from_repl();
       return output;
     }
 
     @Override
-    public Repl.Func_any_from_repl vx_copy(final Object... vals) {
-      Class_any_from_repl output = new Class_any_from_repl();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Repl.Class_any_from_repl output = new Repl.Class_any_from_repl();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/repl", // pkgname
         "any<-repl", // name
         0, // idx
@@ -1519,16 +1551,19 @@ public final class Repl {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_from_repl;
+      Core.Type_any output = Repl.e_any_from_repl;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_any_from_repl;
+      Core.Type_any output = Repl.t_any_from_repl;
+      return output;
     }
 
     @Override
@@ -1560,8 +1595,8 @@ public final class Repl {
 
   }
 
-  public static final Func_any_from_repl e_any_from_repl = new Repl.Class_any_from_repl();
-  public static final Func_any_from_repl t_any_from_repl = new Repl.Class_any_from_repl();
+  public static final Repl.Func_any_from_repl e_any_from_repl = new Repl.Class_any_from_repl();
+  public static final Repl.Func_any_from_repl t_any_from_repl = new Repl.Class_any_from_repl();
 
   public static Core.Type_any f_any_from_repl(final Core.Type_context context, final Repl.Type_repl repl) {
     Core.Type_any output = Core.e_any;
@@ -1574,7 +1609,8 @@ public final class Repl {
         Core.Type_anylist args = Repl.f_anylist_from_repllist(context, repllist);
         Core.Type_any output_1 = Core.f_if_2(
           Core.t_any,
-          Core.vx_new(Core.t_thenelselist,
+          Core.vx_new(
+            Core.t_thenelselist,
             Core.f_then(
               Core.t_boolean_from_func.vx_fn_new(() -> {
                 return Core.f_notempty_1(val);
@@ -1619,24 +1655,25 @@ public final class Repl {
 
     @Override
     public Repl.Func_any_from_script vx_new(final Object... vals) {
-      Class_any_from_script output = new Class_any_from_script();
+      Repl.Class_any_from_script output = new Repl.Class_any_from_script();
       return output;
     }
 
     @Override
-    public Repl.Func_any_from_script vx_copy(final Object... vals) {
-      Class_any_from_script output = new Class_any_from_script();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Repl.Class_any_from_script output = new Repl.Class_any_from_script();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/repl", // pkgname
         "any<-script", // name
         0, // idx
@@ -1655,16 +1692,19 @@ public final class Repl {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_from_script;
+      Core.Type_any output = Repl.e_any_from_script;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_any_from_script;
+      Core.Type_any output = Repl.t_any_from_script;
+      return output;
     }
 
     @Override
@@ -1696,8 +1736,8 @@ public final class Repl {
 
   }
 
-  public static final Func_any_from_script e_any_from_script = new Repl.Class_any_from_script();
-  public static final Func_any_from_script t_any_from_script = new Repl.Class_any_from_script();
+  public static final Repl.Func_any_from_script e_any_from_script = new Repl.Class_any_from_script();
+  public static final Repl.Func_any_from_script t_any_from_script = new Repl.Class_any_from_script();
 
   public static Core.Type_any f_any_from_script(final Core.Type_context context, final Core.Type_string script) {
     Core.Type_any output = Core.e_any;
@@ -1728,24 +1768,25 @@ public final class Repl {
 
     @Override
     public Repl.Func_anylist_from_repllist vx_new(final Object... vals) {
-      Class_anylist_from_repllist output = new Class_anylist_from_repllist();
+      Repl.Class_anylist_from_repllist output = new Repl.Class_anylist_from_repllist();
       return output;
     }
 
     @Override
-    public Repl.Func_anylist_from_repllist vx_copy(final Object... vals) {
-      Class_anylist_from_repllist output = new Class_anylist_from_repllist();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Repl.Class_anylist_from_repllist output = new Repl.Class_anylist_from_repllist();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/repl", // pkgname
         "anylist<-repllist", // name
         0, // idx
@@ -1764,16 +1805,19 @@ public final class Repl {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_anylist_from_repllist;
+      Core.Type_any output = Repl.e_anylist_from_repllist;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_anylist_from_repllist;
+      Core.Type_any output = Repl.t_anylist_from_repllist;
+      return output;
     }
 
     @Override
@@ -1805,8 +1849,8 @@ public final class Repl {
 
   }
 
-  public static final Func_anylist_from_repllist e_anylist_from_repllist = new Repl.Class_anylist_from_repllist();
-  public static final Func_anylist_from_repllist t_anylist_from_repllist = new Repl.Class_anylist_from_repllist();
+  public static final Repl.Func_anylist_from_repllist e_anylist_from_repllist = new Repl.Class_anylist_from_repllist();
+  public static final Repl.Func_anylist_from_repllist t_anylist_from_repllist = new Repl.Class_anylist_from_repllist();
 
   public static Core.Type_anylist f_anylist_from_repllist(final Core.Type_context context, final Repl.Type_repllist repllist) {
     Core.Type_anylist output = Core.e_anylist;
@@ -1839,24 +1883,25 @@ public final class Repl {
 
     @Override
     public Repl.Func_argmap_from_textblock_argmap vx_new(final Object... vals) {
-      Class_argmap_from_textblock_argmap output = new Class_argmap_from_textblock_argmap();
+      Repl.Class_argmap_from_textblock_argmap output = new Repl.Class_argmap_from_textblock_argmap();
       return output;
     }
 
     @Override
-    public Repl.Func_argmap_from_textblock_argmap vx_copy(final Object... vals) {
-      Class_argmap_from_textblock_argmap output = new Class_argmap_from_textblock_argmap();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Repl.Class_argmap_from_textblock_argmap output = new Repl.Class_argmap_from_textblock_argmap();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/repl", // pkgname
         "argmap<-textblock-argmap", // name
         0, // idx
@@ -1875,16 +1920,19 @@ public final class Repl {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_argmap_from_textblock_argmap;
+      Core.Type_any output = Repl.e_argmap_from_textblock_argmap;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_argmap_from_textblock_argmap;
+      Core.Type_any output = Repl.t_argmap_from_textblock_argmap;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -1902,8 +1950,8 @@ public final class Repl {
 
   }
 
-  public static final Func_argmap_from_textblock_argmap e_argmap_from_textblock_argmap = new Repl.Class_argmap_from_textblock_argmap();
-  public static final Func_argmap_from_textblock_argmap t_argmap_from_textblock_argmap = new Repl.Class_argmap_from_textblock_argmap();
+  public static final Repl.Func_argmap_from_textblock_argmap e_argmap_from_textblock_argmap = new Repl.Class_argmap_from_textblock_argmap();
+  public static final Repl.Func_argmap_from_textblock_argmap t_argmap_from_textblock_argmap = new Repl.Class_argmap_from_textblock_argmap();
 
   public static Core.Type_argmap f_argmap_from_textblock_argmap(final Textblock.Type_textblock textblock, final Core.Type_argmap argmap) {
     Core.Type_argmap output = Core.e_argmap;
@@ -1934,24 +1982,25 @@ public final class Repl {
 
     @Override
     public Repl.Func_const_from_string vx_new(final Object... vals) {
-      Class_const_from_string output = new Class_const_from_string();
+      Repl.Class_const_from_string output = new Repl.Class_const_from_string();
       return output;
     }
 
     @Override
-    public Repl.Func_const_from_string vx_copy(final Object... vals) {
-      Class_const_from_string output = new Class_const_from_string();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Repl.Class_const_from_string output = new Repl.Class_const_from_string();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/repl", // pkgname
         "const<-string", // name
         0, // idx
@@ -1970,16 +2019,19 @@ public final class Repl {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_const_from_string;
+      Core.Type_any output = Repl.e_const_from_string;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_const_from_string;
+      Core.Type_any output = Repl.t_const_from_string;
+      return output;
     }
 
     @Override
@@ -2010,8 +2062,8 @@ public final class Repl {
 
   }
 
-  public static final Func_const_from_string e_const_from_string = new Repl.Class_const_from_string();
-  public static final Func_const_from_string t_const_from_string = new Repl.Class_const_from_string();
+  public static final Repl.Func_const_from_string e_const_from_string = new Repl.Class_const_from_string();
+  public static final Repl.Func_const_from_string t_const_from_string = new Repl.Class_const_from_string();
 
   public static Core.Type_any f_const_from_string(final Core.Type_string text) {
     Core.Type_any output = Core.e_any;
@@ -2070,24 +2122,25 @@ public final class Repl {
 
     @Override
     public Repl.Func_repl_bracket_from_textblock_argmap vx_new(final Object... vals) {
-      Class_repl_bracket_from_textblock_argmap output = new Class_repl_bracket_from_textblock_argmap();
+      Repl.Class_repl_bracket_from_textblock_argmap output = new Repl.Class_repl_bracket_from_textblock_argmap();
       return output;
     }
 
     @Override
-    public Repl.Func_repl_bracket_from_textblock_argmap vx_copy(final Object... vals) {
-      Class_repl_bracket_from_textblock_argmap output = new Class_repl_bracket_from_textblock_argmap();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Repl.Class_repl_bracket_from_textblock_argmap output = new Repl.Class_repl_bracket_from_textblock_argmap();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/repl", // pkgname
         "repl-bracket<-textblock-argmap", // name
         0, // idx
@@ -2106,16 +2159,19 @@ public final class Repl {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_repl_bracket_from_textblock_argmap;
+      Core.Type_any output = Repl.e_repl_bracket_from_textblock_argmap;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_repl_bracket_from_textblock_argmap;
+      Core.Type_any output = Repl.t_repl_bracket_from_textblock_argmap;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -2133,8 +2189,8 @@ public final class Repl {
 
   }
 
-  public static final Func_repl_bracket_from_textblock_argmap e_repl_bracket_from_textblock_argmap = new Repl.Class_repl_bracket_from_textblock_argmap();
-  public static final Func_repl_bracket_from_textblock_argmap t_repl_bracket_from_textblock_argmap = new Repl.Class_repl_bracket_from_textblock_argmap();
+  public static final Repl.Func_repl_bracket_from_textblock_argmap e_repl_bracket_from_textblock_argmap = new Repl.Class_repl_bracket_from_textblock_argmap();
+  public static final Repl.Func_repl_bracket_from_textblock_argmap t_repl_bracket_from_textblock_argmap = new Repl.Class_repl_bracket_from_textblock_argmap();
 
   public static Repl.Type_repl f_repl_bracket_from_textblock_argmap(final Textblock.Type_textblock textblock, final Core.Type_argmap argmap) {
     Repl.Type_repl output = Repl.e_repl;
@@ -2160,24 +2216,25 @@ public final class Repl {
 
     @Override
     public Repl.Func_repl_empty_from_textblock_argmap vx_new(final Object... vals) {
-      Class_repl_empty_from_textblock_argmap output = new Class_repl_empty_from_textblock_argmap();
+      Repl.Class_repl_empty_from_textblock_argmap output = new Repl.Class_repl_empty_from_textblock_argmap();
       return output;
     }
 
     @Override
-    public Repl.Func_repl_empty_from_textblock_argmap vx_copy(final Object... vals) {
-      Class_repl_empty_from_textblock_argmap output = new Class_repl_empty_from_textblock_argmap();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Repl.Class_repl_empty_from_textblock_argmap output = new Repl.Class_repl_empty_from_textblock_argmap();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/repl", // pkgname
         "repl-empty<-textblock-argmap", // name
         0, // idx
@@ -2196,16 +2253,19 @@ public final class Repl {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_repl_empty_from_textblock_argmap;
+      Core.Type_any output = Repl.e_repl_empty_from_textblock_argmap;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_repl_empty_from_textblock_argmap;
+      Core.Type_any output = Repl.t_repl_empty_from_textblock_argmap;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -2223,8 +2283,8 @@ public final class Repl {
 
   }
 
-  public static final Func_repl_empty_from_textblock_argmap e_repl_empty_from_textblock_argmap = new Repl.Class_repl_empty_from_textblock_argmap();
-  public static final Func_repl_empty_from_textblock_argmap t_repl_empty_from_textblock_argmap = new Repl.Class_repl_empty_from_textblock_argmap();
+  public static final Repl.Func_repl_empty_from_textblock_argmap e_repl_empty_from_textblock_argmap = new Repl.Class_repl_empty_from_textblock_argmap();
+  public static final Repl.Func_repl_empty_from_textblock_argmap t_repl_empty_from_textblock_argmap = new Repl.Class_repl_empty_from_textblock_argmap();
 
   public static Repl.Type_repl f_repl_empty_from_textblock_argmap(final Textblock.Type_textblock textblock, final Core.Type_argmap argmap) {
     Repl.Type_repl output = Repl.e_repl;
@@ -2236,7 +2296,8 @@ public final class Repl {
         Core.Type_any output_1 = Core.f_switch(
           Repl.t_repl,
           len,
-          Core.vx_new(Core.t_thenelselist,
+          Core.vx_new(
+            Core.t_thenelselist,
             Core.f_case_1(
               Core.vx_new_int(0),
               Core.t_any_from_func.vx_fn_new(() -> {
@@ -2259,8 +2320,9 @@ public final class Repl {
               Core.t_any_from_func.vx_fn_new(() -> {
                 return Core.f_new(
                   Repl.t_repl,
-                  Core.vx_new(Core.t_anylist,
-                      Core.f_msg_from_error(Core.vx_new_string("Empty delim cannot have more than one child."))
+                  Core.vx_new(
+                    Core.t_anylist,
+                    Core.f_msg_from_error(Core.vx_new_string("Empty delim cannot have more than one child."))
                   )
                 );
               })
@@ -2289,24 +2351,25 @@ public final class Repl {
 
     @Override
     public Repl.Func_repl_paren_from_textblock_argmap vx_new(final Object... vals) {
-      Class_repl_paren_from_textblock_argmap output = new Class_repl_paren_from_textblock_argmap();
+      Repl.Class_repl_paren_from_textblock_argmap output = new Repl.Class_repl_paren_from_textblock_argmap();
       return output;
     }
 
     @Override
-    public Repl.Func_repl_paren_from_textblock_argmap vx_copy(final Object... vals) {
-      Class_repl_paren_from_textblock_argmap output = new Class_repl_paren_from_textblock_argmap();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Repl.Class_repl_paren_from_textblock_argmap output = new Repl.Class_repl_paren_from_textblock_argmap();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/repl", // pkgname
         "repl-paren<-textblock-argmap", // name
         0, // idx
@@ -2325,16 +2388,19 @@ public final class Repl {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_repl_paren_from_textblock_argmap;
+      Core.Type_any output = Repl.e_repl_paren_from_textblock_argmap;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_repl_paren_from_textblock_argmap;
+      Core.Type_any output = Repl.t_repl_paren_from_textblock_argmap;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -2352,8 +2418,8 @@ public final class Repl {
 
   }
 
-  public static final Func_repl_paren_from_textblock_argmap e_repl_paren_from_textblock_argmap = new Repl.Class_repl_paren_from_textblock_argmap();
-  public static final Func_repl_paren_from_textblock_argmap t_repl_paren_from_textblock_argmap = new Repl.Class_repl_paren_from_textblock_argmap();
+  public static final Repl.Func_repl_paren_from_textblock_argmap e_repl_paren_from_textblock_argmap = new Repl.Class_repl_paren_from_textblock_argmap();
+  public static final Repl.Func_repl_paren_from_textblock_argmap t_repl_paren_from_textblock_argmap = new Repl.Class_repl_paren_from_textblock_argmap();
 
   public static Repl.Type_repl f_repl_paren_from_textblock_argmap(final Textblock.Type_textblock textblock, final Core.Type_argmap argmap) {
     Repl.Type_repl output = Repl.e_repl;
@@ -2372,60 +2438,63 @@ public final class Repl {
         Core.Type_int posarg = Core.f_switch(
           Core.t_int,
           typefunc,
-          Core.vx_new(Core.t_thenelselist,
-              Core.f_case_1(
-                Core.t_let,
-                Core.t_any_from_func.vx_fn_new(() -> {
-                  return Core.vx_new_int(3);
-                })
-              ),
-              Core.f_case_1(
-                Core.t_fn,
-                Core.t_any_from_func.vx_fn_new(() -> {
-                  return Core.vx_new_int(3);
-                })
-              ),
-              Core.f_else(
-                Core.t_any_from_func.vx_fn_new(() -> {
-                  return Core.vx_new_int(2);
-                })
-              )
+          Core.vx_new(
+            Core.t_thenelselist,
+            Core.f_case_1(
+              Core.t_let,
+              Core.t_any_from_func.vx_fn_new(() -> {
+                return Core.vx_new_int(3);
+              })
+            ),
+            Core.f_case_1(
+              Core.t_fn,
+              Core.t_any_from_func.vx_fn_new(() -> {
+                return Core.vx_new_int(3);
+              })
+            ),
+            Core.f_else(
+              Core.t_any_from_func.vx_fn_new(() -> {
+                return Core.vx_new_int(2);
+              })
+            )
           )
         );
         Core.Type_argmap argmap2 = Core.f_switch(
           Core.t_argmap,
           typefunc,
-          Core.vx_new(Core.t_thenelselist,
-              Core.f_case_1(
-                Core.t_let,
-                Core.t_any_from_func.vx_fn_new(() -> {
-                  return Repl.f_argmap_from_textblock_argmap(
-                    Core.f_any_from_list(Textblock.t_textblock, children, Core.vx_new_int(3)),
-                    argmap
-                  );
-                })
-              ),
-              Core.f_case_1(
-                Core.t_fn,
-                Core.t_any_from_func.vx_fn_new(() -> {
-                  return Repl.f_argmap_from_textblock_argmap(
-                    Core.f_any_from_list(Textblock.t_textblock, children, Core.vx_new_int(3)),
-                    argmap
-                  );
-                })
-              ),
-              Core.f_else(
-                Core.t_any_from_func.vx_fn_new(() -> {
-                  return argmap;
-                })
-              )
+          Core.vx_new(
+            Core.t_thenelselist,
+            Core.f_case_1(
+              Core.t_let,
+              Core.t_any_from_func.vx_fn_new(() -> {
+                return Repl.f_argmap_from_textblock_argmap(
+                  Core.f_any_from_list(Textblock.t_textblock, children, Core.vx_new_int(3)),
+                  argmap
+                );
+              })
+            ),
+            Core.f_case_1(
+              Core.t_fn,
+              Core.t_any_from_func.vx_fn_new(() -> {
+                return Repl.f_argmap_from_textblock_argmap(
+                  Core.f_any_from_list(Textblock.t_textblock, children, Core.vx_new_int(3)),
+                  argmap
+                );
+              })
+            ),
+            Core.f_else(
+              Core.t_any_from_func.vx_fn_new(() -> {
+                return argmap;
+              })
+            )
           )
         );
         Textblock.Type_textblocklist tbargs = Collection.f_list_from_list_start(Textblock.t_textblocklist, children, posarg);
         Repl.Type_repllist replargs = Repl.f_repllist_from_textblocklist_argmap(tbargs, argmap);
         Core.Type_any output_1 = Core.f_copy(
           replfunc,
-          Core.vx_new(Core.t_anylist,
+          Core.vx_new(
+            Core.t_anylist,
             Core.vx_new_string(":repllist"),
             replargs
           )
@@ -2452,24 +2521,25 @@ public final class Repl {
 
     @Override
     public Repl.Func_repl_from_liblist_string vx_new(final Object... vals) {
-      Class_repl_from_liblist_string output = new Class_repl_from_liblist_string();
+      Repl.Class_repl_from_liblist_string output = new Repl.Class_repl_from_liblist_string();
       return output;
     }
 
     @Override
-    public Repl.Func_repl_from_liblist_string vx_copy(final Object... vals) {
-      Class_repl_from_liblist_string output = new Class_repl_from_liblist_string();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Repl.Class_repl_from_liblist_string output = new Repl.Class_repl_from_liblist_string();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/repl", // pkgname
         "repl<-liblist-string", // name
         0, // idx
@@ -2488,16 +2558,19 @@ public final class Repl {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_repl_from_liblist_string;
+      Core.Type_any output = Repl.e_repl_from_liblist_string;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_repl_from_liblist_string;
+      Core.Type_any output = Repl.t_repl_from_liblist_string;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -2515,8 +2588,8 @@ public final class Repl {
 
   }
 
-  public static final Func_repl_from_liblist_string e_repl_from_liblist_string = new Repl.Class_repl_from_liblist_string();
-  public static final Func_repl_from_liblist_string t_repl_from_liblist_string = new Repl.Class_repl_from_liblist_string();
+  public static final Repl.Func_repl_from_liblist_string e_repl_from_liblist_string = new Repl.Class_repl_from_liblist_string();
+  public static final Repl.Func_repl_from_liblist_string t_repl_from_liblist_string = new Repl.Class_repl_from_liblist_string();
 
   public static Repl.Type_repl f_repl_from_liblist_string(final Repl.Type_liblist liblist, final Core.Type_string text) {
     Repl.Type_repl output = Repl.e_repl;
@@ -2538,24 +2611,25 @@ public final class Repl {
 
     @Override
     public Repl.Func_repl_from_macro vx_new(final Object... vals) {
-      Class_repl_from_macro output = new Class_repl_from_macro();
+      Repl.Class_repl_from_macro output = new Repl.Class_repl_from_macro();
       return output;
     }
 
     @Override
-    public Repl.Func_repl_from_macro vx_copy(final Object... vals) {
-      Class_repl_from_macro output = new Class_repl_from_macro();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Repl.Class_repl_from_macro output = new Repl.Class_repl_from_macro();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/repl", // pkgname
         "repl<-macro", // name
         0, // idx
@@ -2574,16 +2648,19 @@ public final class Repl {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_repl_from_macro;
+      Core.Type_any output = Repl.e_repl_from_macro;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_repl_from_macro;
+      Core.Type_any output = Repl.t_repl_from_macro;
+      return output;
     }
 
     @Override
@@ -2615,8 +2692,8 @@ public final class Repl {
 
   }
 
-  public static final Func_repl_from_macro e_repl_from_macro = new Repl.Class_repl_from_macro();
-  public static final Func_repl_from_macro t_repl_from_macro = new Repl.Class_repl_from_macro();
+  public static final Repl.Func_repl_from_macro e_repl_from_macro = new Repl.Class_repl_from_macro();
+  public static final Repl.Func_repl_from_macro t_repl_from_macro = new Repl.Class_repl_from_macro();
 
   public static Repl.Type_repl f_repl_from_macro(final Core.Type_context context, final Core.Type_anylist anylist) {
     Repl.Type_repl output = Repl.e_repl;
@@ -2636,7 +2713,8 @@ public final class Repl {
                     Core.Type_any output_2 = Core.f_switch(
                       Core.t_string,
                       typ,
-                      Core.vx_new(Core.t_thenelselist,
+                      Core.vx_new(
+                        Core.t_thenelselist,
                         Core.f_case_1(
                           Core.t_string,
                           Core.t_any_from_func.vx_fn_new(() -> {
@@ -2680,24 +2758,25 @@ public final class Repl {
 
     @Override
     public Repl.Func_repl_from_script vx_new(final Object... vals) {
-      Class_repl_from_script output = new Class_repl_from_script();
+      Repl.Class_repl_from_script output = new Repl.Class_repl_from_script();
       return output;
     }
 
     @Override
-    public Repl.Func_repl_from_script vx_copy(final Object... vals) {
-      Class_repl_from_script output = new Class_repl_from_script();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Repl.Class_repl_from_script output = new Repl.Class_repl_from_script();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/repl", // pkgname
         "repl<-script", // name
         0, // idx
@@ -2716,16 +2795,19 @@ public final class Repl {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_repl_from_script;
+      Core.Type_any output = Repl.e_repl_from_script;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_repl_from_script;
+      Core.Type_any output = Repl.t_repl_from_script;
+      return output;
     }
 
     @Override
@@ -2756,8 +2838,8 @@ public final class Repl {
 
   }
 
-  public static final Func_repl_from_script e_repl_from_script = new Repl.Class_repl_from_script();
-  public static final Func_repl_from_script t_repl_from_script = new Repl.Class_repl_from_script();
+  public static final Repl.Func_repl_from_script e_repl_from_script = new Repl.Class_repl_from_script();
+  public static final Repl.Func_repl_from_script t_repl_from_script = new Repl.Class_repl_from_script();
 
   public static Repl.Type_repl f_repl_from_script(final Core.Type_string script) {
     Repl.Type_repl output = Repl.e_repl;
@@ -2788,24 +2870,25 @@ public final class Repl {
 
     @Override
     public Repl.Func_repl_from_string_argmap vx_new(final Object... vals) {
-      Class_repl_from_string_argmap output = new Class_repl_from_string_argmap();
+      Repl.Class_repl_from_string_argmap output = new Repl.Class_repl_from_string_argmap();
       return output;
     }
 
     @Override
-    public Repl.Func_repl_from_string_argmap vx_copy(final Object... vals) {
-      Class_repl_from_string_argmap output = new Class_repl_from_string_argmap();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Repl.Class_repl_from_string_argmap output = new Repl.Class_repl_from_string_argmap();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/repl", // pkgname
         "repl<-string-argmap", // name
         0, // idx
@@ -2824,16 +2907,19 @@ public final class Repl {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_repl_from_string_argmap;
+      Core.Type_any output = Repl.e_repl_from_string_argmap;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_repl_from_string_argmap;
+      Core.Type_any output = Repl.t_repl_from_string_argmap;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -2851,14 +2937,15 @@ public final class Repl {
 
   }
 
-  public static final Func_repl_from_string_argmap e_repl_from_string_argmap = new Repl.Class_repl_from_string_argmap();
-  public static final Func_repl_from_string_argmap t_repl_from_string_argmap = new Repl.Class_repl_from_string_argmap();
+  public static final Repl.Func_repl_from_string_argmap e_repl_from_string_argmap = new Repl.Class_repl_from_string_argmap();
+  public static final Repl.Func_repl_from_string_argmap t_repl_from_string_argmap = new Repl.Class_repl_from_string_argmap();
 
   public static Repl.Type_repl f_repl_from_string_argmap(final Core.Type_string text, final Core.Type_argmap argmap) {
     Repl.Type_repl output = Repl.e_repl;
     output = Core.f_if_2(
       Repl.t_repl,
-      Core.vx_new(Core.t_thenelselist,
+      Core.vx_new(
+        Core.t_thenelselist,
         Core.f_then(
           Core.t_boolean_from_func.vx_fn_new(() -> {
             return Core.f_and(
@@ -2875,9 +2962,10 @@ public final class Repl {
           Core.t_any_from_func.vx_fn_new(() -> {
             return Core.f_new(
               Repl.t_repl,
-              Core.vx_new(Core.t_anylist,
-                  Core.vx_new_string(":val"),
-                  Type.f_string_from_string_start_end(text, Core.vx_new_int(2), Core.vx_new_int(-1))
+              Core.vx_new(
+                Core.t_anylist,
+                Core.vx_new_string(":val"),
+                Type.f_string_from_string_start_end(text, Core.vx_new_int(2), Core.vx_new_int(-1))
               )
             );
           })
@@ -2889,9 +2977,10 @@ public final class Repl {
           Core.t_any_from_func.vx_fn_new(() -> {
             return Core.f_new(
               Repl.t_repl,
-              Core.vx_new(Core.t_anylist,
-                  Core.vx_new_string(":val"),
-                  Core.f_int_from_string(text)
+              Core.vx_new(
+                Core.t_anylist,
+                Core.vx_new_string(":val"),
+                Core.f_int_from_string(text)
               )
             );
           })
@@ -2903,9 +2992,10 @@ public final class Repl {
           Core.t_any_from_func.vx_fn_new(() -> {
             return Core.f_new(
               Repl.t_repl,
-              Core.vx_new(Core.t_anylist,
-                  Core.vx_new_string(":val"),
-                  Core.f_float_from_string(text)
+              Core.vx_new(
+                Core.t_anylist,
+                Core.vx_new_string(":val"),
+                Core.f_float_from_string(text)
               )
             );
           })
@@ -2918,7 +3008,8 @@ public final class Repl {
                 Core.Type_any arg = Core.f_any_from_map(Core.t_any, argmap, text);
                 Core.Type_any output_3 = Core.f_if_2(
                   Repl.t_repl,
-                  Core.vx_new(Core.t_thenelselist,
+                  Core.vx_new(
+                    Core.t_thenelselist,
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
                         return Core.f_notempty_1(arg);
@@ -2926,9 +3017,10 @@ public final class Repl {
                       Core.t_any_from_func.vx_fn_new(() -> {
                         return Core.f_new(
                           Repl.t_repl,
-                          Core.vx_new(Core.t_anylist,
-                              Core.vx_new_string(":val"),
-                              arg
+                          Core.vx_new(
+                            Core.t_anylist,
+                            Core.vx_new_string(":val"),
+                            arg
                           )
                         );
                       })
@@ -2941,7 +3033,8 @@ public final class Repl {
                             Core.Type_any cnst = Repl.f_const_from_string(text);
                             Core.Type_any output_2 = Core.f_if_2(
                               Repl.t_repl,
-                              Core.vx_new(Core.t_thenelselist,
+                              Core.vx_new(
+                                Core.t_thenelselist,
                                 Core.f_then(
                                   Core.t_boolean_from_func.vx_fn_new(() -> {
                                     return Core.f_notempty_1(cnst);
@@ -2949,9 +3042,10 @@ public final class Repl {
                                   Core.t_any_from_func.vx_fn_new(() -> {
                                     return Core.f_new(
                                       Repl.t_repl,
-                                      Core.vx_new(Core.t_anylist,
-                                          Core.vx_new_string(":val"),
-                                          cnst
+                                      Core.vx_new(
+                                        Core.t_anylist,
+                                        Core.vx_new_string(":val"),
+                                        cnst
                                       )
                                     );
                                   })
@@ -2964,7 +3058,8 @@ public final class Repl {
                                         Core.Type_any typefunc = Repl.f_typefunc_from_string(text);
                                         Core.Type_any output_1 = Core.f_if_2(
                                           Repl.t_repl,
-                                          Core.vx_new(Core.t_thenelselist,
+                                          Core.vx_new(
+                                            Core.t_thenelselist,
                                             Core.f_then(
                                               Core.t_boolean_from_func.vx_fn_new(() -> {
                                                 return Core.f_notempty_1(typefunc);
@@ -2972,9 +3067,10 @@ public final class Repl {
                                               Core.t_any_from_func.vx_fn_new(() -> {
                                                 return Core.f_new(
                                                   Repl.t_repl,
-                                                  Core.vx_new(Core.t_anylist,
-                                                      Core.vx_new_string(":type"),
-                                                      typefunc
+                                                  Core.vx_new(
+                                                    Core.t_anylist,
+                                                    Core.vx_new_string(":type"),
+                                                    typefunc
                                                   )
                                                 );
                                               })
@@ -2983,8 +3079,9 @@ public final class Repl {
                                               Core.t_any_from_func.vx_fn_new(() -> {
                                                 return Core.f_new(
                                                   Repl.t_repl,
-                                                  Core.vx_new(Core.t_anylist,
-                                                      Core.f_msg_from_error_1(Core.vx_new_string(":repltypenotfound"), text)
+                                                  Core.vx_new(
+                                                    Core.t_anylist,
+                                                    Core.f_msg_from_error_1(Core.vx_new_string(":repltypenotfound"), text)
                                                   )
                                                 );
                                               })
@@ -3030,24 +3127,25 @@ public final class Repl {
 
     @Override
     public Repl.Func_repl_from_textblock vx_new(final Object... vals) {
-      Class_repl_from_textblock output = new Class_repl_from_textblock();
+      Repl.Class_repl_from_textblock output = new Repl.Class_repl_from_textblock();
       return output;
     }
 
     @Override
-    public Repl.Func_repl_from_textblock vx_copy(final Object... vals) {
-      Class_repl_from_textblock output = new Class_repl_from_textblock();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Repl.Class_repl_from_textblock output = new Repl.Class_repl_from_textblock();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/repl", // pkgname
         "repl<-textblock", // name
         0, // idx
@@ -3066,16 +3164,19 @@ public final class Repl {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_repl_from_textblock;
+      Core.Type_any output = Repl.e_repl_from_textblock;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_repl_from_textblock;
+      Core.Type_any output = Repl.t_repl_from_textblock;
+      return output;
     }
 
     @Override
@@ -3106,8 +3207,8 @@ public final class Repl {
 
   }
 
-  public static final Func_repl_from_textblock e_repl_from_textblock = new Repl.Class_repl_from_textblock();
-  public static final Func_repl_from_textblock t_repl_from_textblock = new Repl.Class_repl_from_textblock();
+  public static final Repl.Func_repl_from_textblock e_repl_from_textblock = new Repl.Class_repl_from_textblock();
+  public static final Repl.Func_repl_from_textblock t_repl_from_textblock = new Repl.Class_repl_from_textblock();
 
   public static Repl.Type_repl f_repl_from_textblock(final Textblock.Type_textblock textblock) {
     Repl.Type_repl output = Repl.e_repl;
@@ -3136,24 +3237,25 @@ public final class Repl {
 
     @Override
     public Repl.Func_repl_from_textblock_argmap vx_new(final Object... vals) {
-      Class_repl_from_textblock_argmap output = new Class_repl_from_textblock_argmap();
+      Repl.Class_repl_from_textblock_argmap output = new Repl.Class_repl_from_textblock_argmap();
       return output;
     }
 
     @Override
-    public Repl.Func_repl_from_textblock_argmap vx_copy(final Object... vals) {
-      Class_repl_from_textblock_argmap output = new Class_repl_from_textblock_argmap();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Repl.Class_repl_from_textblock_argmap output = new Repl.Class_repl_from_textblock_argmap();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/repl", // pkgname
         "repl<-textblock-argmap", // name
         0, // idx
@@ -3172,16 +3274,19 @@ public final class Repl {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_repl_from_textblock_argmap;
+      Core.Type_any output = Repl.e_repl_from_textblock_argmap;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_repl_from_textblock_argmap;
+      Core.Type_any output = Repl.t_repl_from_textblock_argmap;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -3199,8 +3304,8 @@ public final class Repl {
 
   }
 
-  public static final Func_repl_from_textblock_argmap e_repl_from_textblock_argmap = new Repl.Class_repl_from_textblock_argmap();
-  public static final Func_repl_from_textblock_argmap t_repl_from_textblock_argmap = new Repl.Class_repl_from_textblock_argmap();
+  public static final Repl.Func_repl_from_textblock_argmap e_repl_from_textblock_argmap = new Repl.Class_repl_from_textblock_argmap();
+  public static final Repl.Func_repl_from_textblock_argmap t_repl_from_textblock_argmap = new Repl.Class_repl_from_textblock_argmap();
 
   public static Repl.Type_repl f_repl_from_textblock_argmap(final Textblock.Type_textblock textblock, final Core.Type_argmap argmap) {
     Repl.Type_repl output = Repl.e_repl;
@@ -3212,7 +3317,8 @@ public final class Repl {
         Core.Type_any output_1 = Core.f_switch(
           Repl.t_repl,
           starttext,
-          Core.vx_new(Core.t_thenelselist,
+          Core.vx_new(
+            Core.t_thenelselist,
             Core.f_case_1(
               Core.vx_new_string(""),
               Core.t_any_from_func.vx_fn_new(() -> {
@@ -3256,24 +3362,25 @@ public final class Repl {
 
     @Override
     public Repl.Func_replarglist_from_replarglist_textblock_argmap vx_new(final Object... vals) {
-      Class_replarglist_from_replarglist_textblock_argmap output = new Class_replarglist_from_replarglist_textblock_argmap();
+      Repl.Class_replarglist_from_replarglist_textblock_argmap output = new Repl.Class_replarglist_from_replarglist_textblock_argmap();
       return output;
     }
 
     @Override
-    public Repl.Func_replarglist_from_replarglist_textblock_argmap vx_copy(final Object... vals) {
-      Class_replarglist_from_replarglist_textblock_argmap output = new Class_replarglist_from_replarglist_textblock_argmap();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Repl.Class_replarglist_from_replarglist_textblock_argmap output = new Repl.Class_replarglist_from_replarglist_textblock_argmap();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/repl", // pkgname
         "replarglist<-replarglist-textblock-argmap", // name
         0, // idx
@@ -3292,16 +3399,19 @@ public final class Repl {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_replarglist_from_replarglist_textblock_argmap;
+      Core.Type_any output = Repl.e_replarglist_from_replarglist_textblock_argmap;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_replarglist_from_replarglist_textblock_argmap;
+      Core.Type_any output = Repl.t_replarglist_from_replarglist_textblock_argmap;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -3320,8 +3430,8 @@ public final class Repl {
 
   }
 
-  public static final Func_replarglist_from_replarglist_textblock_argmap e_replarglist_from_replarglist_textblock_argmap = new Repl.Class_replarglist_from_replarglist_textblock_argmap();
-  public static final Func_replarglist_from_replarglist_textblock_argmap t_replarglist_from_replarglist_textblock_argmap = new Repl.Class_replarglist_from_replarglist_textblock_argmap();
+  public static final Repl.Func_replarglist_from_replarglist_textblock_argmap e_replarglist_from_replarglist_textblock_argmap = new Repl.Class_replarglist_from_replarglist_textblock_argmap();
+  public static final Repl.Func_replarglist_from_replarglist_textblock_argmap t_replarglist_from_replarglist_textblock_argmap = new Repl.Class_replarglist_from_replarglist_textblock_argmap();
 
   public static Repl.Type_replarglist f_replarglist_from_replarglist_textblock_argmap(final Repl.Type_replarglist replargs, final Textblock.Type_textblock tb, final Core.Type_argmap argmap) {
     Repl.Type_replarglist output = Repl.e_replarglist;
@@ -3335,7 +3445,8 @@ public final class Repl {
         Core.Type_string text = Textblock.t_textblock.text();
         Core.Type_any output_1 = Core.f_if_2(
           Repl.t_replarglist,
-          Core.vx_new(Core.t_thenelselist,
+          Core.vx_new(
+            Core.t_thenelselist,
             Core.f_then(
               Core.t_boolean_from_func.vx_fn_new(() -> {
                 return Core.f_eq(key, Core.vx_new_string(""));
@@ -3343,93 +3454,104 @@ public final class Repl {
               Core.t_any_from_func.vx_fn_new(() -> {
                 return Core.f_if_2(
                   Repl.t_replarglist,
-                  Core.vx_new(Core.t_thenelselist,
-                      Core.f_then(
-                        Core.t_boolean_from_func.vx_fn_new(() -> {
-                          return Core.f_eq_1(Core.vx_new(Core.t_anylist,
-                            text));
-                        }),
-                        Core.t_any_from_func.vx_fn_new(() -> {
-                          return Core.f_copy(
-                            replargs,
-                            Core.vx_new(Core.t_anylist,
-                                Core.vx_new_string(":key"),
+                  Core.vx_new(
+                    Core.t_thenelselist,
+                    Core.f_then(
+                      Core.t_boolean_from_func.vx_fn_new(() -> {
+                        return Core.f_eq_1(Core.vx_new(
+                        Core.t_anylist,
+                        text));
+                      }),
+                      Core.t_any_from_func.vx_fn_new(() -> {
+                        return Core.f_copy(
+                          replargs,
+                          Core.vx_new(
+                            Core.t_anylist,
+                            Core.vx_new_string(":key"),
+                            text
+                          )
+                        );
+                      })
+                    ),
+                    Core.f_then(
+                      Core.t_boolean_from_func.vx_fn_new(() -> {
+                        return Core.f_eq(text, Core.vx_new_string(":="));
+                      }),
+                      Core.t_any_from_func.vx_fn_new(() -> {
+                        return Core.f_copy(
+                          replargs,
+                          Core.vx_new(
+                            Core.t_anylist,
+                            Core.vx_new_string(":key"),
+                            text
+                          )
+                        );
+                      })
+                    ),
+                    Core.f_then(
+                      Core.t_boolean_from_func.vx_fn_new(() -> {
+                        return Core.f_eq(text, Core.vx_new_string(":doc"));
+                      }),
+                      Core.t_any_from_func.vx_fn_new(() -> {
+                        return Core.f_copy(
+                          replargs,
+                          Core.vx_new(
+                            Core.t_anylist,
+                            Core.vx_new_string(":key"),
+                            text
+                          )
+                        );
+                      })
+                    ),
+                    Core.f_else(
+                      Core.t_any_from_func.vx_fn_new(() -> {
+                        return Core.f_copy(
+                          replargs,
+                          Core.vx_new(
+                            Core.t_anylist,
+                            Core.vx_new_string(":current"),
+                            Core.f_new(
+                              Repl.t_repl,
+                              Core.vx_new(
+                                Core.t_anylist,
+                                Core.vx_new_string(":name"),
                                 text
-                            )
-                          );
-                        })
-                      ),
-                      Core.f_then(
-                        Core.t_boolean_from_func.vx_fn_new(() -> {
-                          return Core.f_eq(text, Core.vx_new_string(":="));
-                        }),
-                        Core.t_any_from_func.vx_fn_new(() -> {
-                          return Core.f_copy(
-                            replargs,
-                            Core.vx_new(Core.t_anylist,
-                                Core.vx_new_string(":key"),
-                                text
-                            )
-                          );
-                        })
-                      ),
-                      Core.f_then(
-                        Core.t_boolean_from_func.vx_fn_new(() -> {
-                          return Core.f_eq(text, Core.vx_new_string(":doc"));
-                        }),
-                        Core.t_any_from_func.vx_fn_new(() -> {
-                          return Core.f_copy(
-                            replargs,
-                            Core.vx_new(Core.t_anylist,
-                                Core.vx_new_string(":key"),
-                                text
-                            )
-                          );
-                        })
-                      ),
-                      Core.f_else(
-                        Core.t_any_from_func.vx_fn_new(() -> {
-                          return Core.f_copy(
-                            replargs,
-                            Core.vx_new(Core.t_anylist,
-                                Core.vx_new_string(":current"),
-                                Core.f_new(
-                                  Repl.t_repl,
-                                  Core.vx_new(Core.t_anylist,
-                                    Core.vx_new_string(":name"),
-                                    text
-                                  )
-                                ),
-                                Core.vx_new_string(":repllist"),
-                                Core.f_copy(repllist, Core.vx_new(Core.t_anylist,
-                                  current))
-                            )
-                          );
-                        })
-                      )
+                              )
+                            ),
+                            Core.vx_new_string(":repllist"),
+                            Core.f_copy(repllist, Core.vx_new(
+                              Core.t_anylist,
+                              current))
+                          )
+                        );
+                      })
+                    )
                   )
                 );
               })
             ),
             Core.f_then(
               Core.t_boolean_from_func.vx_fn_new(() -> {
-                return Core.f_eq_1(Core.vx_new(Core.t_anylist,
-                  key));
+                return Core.f_eq_1(Core.vx_new(
+                Core.t_anylist,
+                key));
               }),
               Core.t_any_from_func.vx_fn_new(() -> {
                 return Core.f_copy(
                   replargs,
-                  Core.vx_new(Core.t_anylist,
-                      Core.vx_new_string(":key"),
-                      Core.vx_new_string(""),
-                      Core.vx_new_string(":current"),
-                      Core.f_copy(
-                        current,
-                        Core.vx_new(Core.t_anylist,
-                          Core.vx_new_string(":type"),
-                          text
-                        )
+                  Core.vx_new(
+                    Core.t_anylist,
+                    Core.vx_new_string(":key"),
+                    Core.vx_new_string(""),
+                    Core.vx_new_string(":current"),
+                    Core.f_copy(
+                      current,
+                      Core.vx_new(
+                        Core.t_anylist,
+                        Core.vx_new_string(":type"),
+                        text
                       )
+                    )
                   )
                 );
               })
@@ -3441,22 +3563,25 @@ public final class Repl {
               Core.t_any_from_func.vx_fn_new(() -> {
                 return Core.f_copy(
                   replargs,
-                  Core.vx_new(Core.t_anylist,
-                      Core.vx_new_string(":key"),
-                      Core.vx_new_string(""),
-                      Core.vx_new_string(":current"),
-                      Core.f_copy(
-                        current,
-                        Core.vx_new(Core.t_anylist,
-                          Core.vx_new_string(":repllist"),
-                          Core.f_copy(
-                            currlist,
-                            Core.vx_new(Core.t_anylist,
-                              Repl.f_repl_from_textblock_argmap(tb, argmap)
-                            )
+                  Core.vx_new(
+                    Core.t_anylist,
+                    Core.vx_new_string(":key"),
+                    Core.vx_new_string(""),
+                    Core.vx_new_string(":current"),
+                    Core.f_copy(
+                      current,
+                      Core.vx_new(
+                        Core.t_anylist,
+                        Core.vx_new_string(":repllist"),
+                        Core.f_copy(
+                          currlist,
+                          Core.vx_new(
+                            Core.t_anylist,
+                            Repl.f_repl_from_textblock_argmap(tb, argmap)
                           )
                         )
                       )
+                    )
                   )
                 );
               })
@@ -3468,17 +3593,19 @@ public final class Repl {
               Core.t_any_from_func.vx_fn_new(() -> {
                 return Core.f_copy(
                   replargs,
-                  Core.vx_new(Core.t_anylist,
-                      Core.vx_new_string(":key"),
-                      Core.vx_new_string(""),
-                      Core.vx_new_string(":current"),
-                      Core.f_copy(
-                        current,
-                        Core.vx_new(Core.t_anylist,
-                          Core.vx_new_string(":doc"),
-                          text
-                        )
+                  Core.vx_new(
+                    Core.t_anylist,
+                    Core.vx_new_string(":key"),
+                    Core.vx_new_string(""),
+                    Core.vx_new_string(":current"),
+                    Core.f_copy(
+                      current,
+                      Core.vx_new(
+                        Core.t_anylist,
+                        Core.vx_new_string(":doc"),
+                        text
                       )
+                    )
                   )
                 );
               })
@@ -3512,24 +3639,25 @@ public final class Repl {
 
     @Override
     public Repl.Func_repllist_from_textblocklist_argmap vx_new(final Object... vals) {
-      Class_repllist_from_textblocklist_argmap output = new Class_repllist_from_textblocklist_argmap();
+      Repl.Class_repllist_from_textblocklist_argmap output = new Repl.Class_repllist_from_textblocklist_argmap();
       return output;
     }
 
     @Override
-    public Repl.Func_repllist_from_textblocklist_argmap vx_copy(final Object... vals) {
-      Class_repllist_from_textblocklist_argmap output = new Class_repllist_from_textblocklist_argmap();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Repl.Class_repllist_from_textblocklist_argmap output = new Repl.Class_repllist_from_textblocklist_argmap();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/repl", // pkgname
         "repllist<-textblocklist-argmap", // name
         0, // idx
@@ -3548,16 +3676,19 @@ public final class Repl {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_repllist_from_textblocklist_argmap;
+      Core.Type_any output = Repl.e_repllist_from_textblocklist_argmap;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_repllist_from_textblocklist_argmap;
+      Core.Type_any output = Repl.t_repllist_from_textblocklist_argmap;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -3575,8 +3706,8 @@ public final class Repl {
 
   }
 
-  public static final Func_repllist_from_textblocklist_argmap e_repllist_from_textblocklist_argmap = new Repl.Class_repllist_from_textblocklist_argmap();
-  public static final Func_repllist_from_textblocklist_argmap t_repllist_from_textblocklist_argmap = new Repl.Class_repllist_from_textblocklist_argmap();
+  public static final Repl.Func_repllist_from_textblocklist_argmap e_repllist_from_textblocklist_argmap = new Repl.Class_repllist_from_textblocklist_argmap();
+  public static final Repl.Func_repllist_from_textblocklist_argmap t_repllist_from_textblocklist_argmap = new Repl.Class_repllist_from_textblocklist_argmap();
 
   public static Repl.Type_repllist f_repllist_from_textblocklist_argmap(final Textblock.Type_textblocklist textblocklist, final Core.Type_argmap argmap) {
     Repl.Type_repllist output = Repl.e_repllist;
@@ -3608,24 +3739,25 @@ public final class Repl {
 
     @Override
     public Repl.Func_textblock_from_script vx_new(final Object... vals) {
-      Class_textblock_from_script output = new Class_textblock_from_script();
+      Repl.Class_textblock_from_script output = new Repl.Class_textblock_from_script();
       return output;
     }
 
     @Override
-    public Repl.Func_textblock_from_script vx_copy(final Object... vals) {
-      Class_textblock_from_script output = new Class_textblock_from_script();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Repl.Class_textblock_from_script output = new Repl.Class_textblock_from_script();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/repl", // pkgname
         "textblock<-script", // name
         0, // idx
@@ -3644,16 +3776,19 @@ public final class Repl {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_textblock_from_script;
+      Core.Type_any output = Repl.e_textblock_from_script;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_textblock_from_script;
+      Core.Type_any output = Repl.t_textblock_from_script;
+      return output;
     }
 
     @Override
@@ -3684,8 +3819,8 @@ public final class Repl {
 
   }
 
-  public static final Func_textblock_from_script e_textblock_from_script = new Repl.Class_textblock_from_script();
-  public static final Func_textblock_from_script t_textblock_from_script = new Repl.Class_textblock_from_script();
+  public static final Repl.Func_textblock_from_script e_textblock_from_script = new Repl.Class_textblock_from_script();
+  public static final Repl.Func_textblock_from_script t_textblock_from_script = new Repl.Class_textblock_from_script();
 
   public static Textblock.Type_textblock f_textblock_from_script(final Core.Type_string script) {
     Textblock.Type_textblock output = Textblock.e_textblock;
@@ -3711,24 +3846,25 @@ public final class Repl {
 
     @Override
     public Repl.Func_typefunc_from_string vx_new(final Object... vals) {
-      Class_typefunc_from_string output = new Class_typefunc_from_string();
+      Repl.Class_typefunc_from_string output = new Repl.Class_typefunc_from_string();
       return output;
     }
 
     @Override
-    public Repl.Func_typefunc_from_string vx_copy(final Object... vals) {
-      Class_typefunc_from_string output = new Class_typefunc_from_string();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Repl.Class_typefunc_from_string output = new Repl.Class_typefunc_from_string();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/repl", // pkgname
         "typefunc<-string", // name
         0, // idx
@@ -3747,16 +3883,19 @@ public final class Repl {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_typefunc_from_string;
+      Core.Type_any output = Repl.e_typefunc_from_string;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_typefunc_from_string;
+      Core.Type_any output = Repl.t_typefunc_from_string;
+      return output;
     }
 
     @Override
@@ -3787,8 +3926,8 @@ public final class Repl {
 
   }
 
-  public static final Func_typefunc_from_string e_typefunc_from_string = new Repl.Class_typefunc_from_string();
-  public static final Func_typefunc_from_string t_typefunc_from_string = new Repl.Class_typefunc_from_string();
+  public static final Repl.Func_typefunc_from_string e_typefunc_from_string = new Repl.Class_typefunc_from_string();
+  public static final Repl.Func_typefunc_from_string t_typefunc_from_string = new Repl.Class_typefunc_from_string();
 
   public static Core.Type_any f_typefunc_from_string(final Core.Type_string text) {
     Core.Type_any output = Core.e_any;

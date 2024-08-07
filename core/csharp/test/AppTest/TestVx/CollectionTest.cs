@@ -100,7 +100,8 @@ public class CollectionTest {
               Vx.Collection.f_int_from_map_key(
                 Vx.Core.f_new(
                   Vx.Core.t_stringmap,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":a"),
                     Vx.Core.vx_new_string("x"),
                     Vx.Core.vx_new_string(":b"),
@@ -135,7 +136,8 @@ public class CollectionTest {
               Vx.Collection.f_int_from_stringlist_find(
                 Vx.Core.f_new(
                   Vx.Core.t_stringlist,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string("a"),
                     Vx.Core.vx_new_string("b")
                   )
@@ -220,7 +222,8 @@ public class CollectionTest {
               context,
               Vx.Core.f_new(
                 Vx.Core.t_intlist,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_int(4),
                   Vx.Core.vx_new_int(9)
                 )
@@ -260,7 +263,8 @@ public class CollectionTest {
               context,
               Vx.Core.f_new(
                 Vx.Core.t_stringlist,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string("a"),
                   Vx.Core.vx_new_string("b"),
                   Vx.Core.vx_new_string("c")
@@ -270,7 +274,8 @@ public class CollectionTest {
                 Vx.Core.t_stringlist,
                 Vx.Core.f_new(
                   Vx.Core.t_stringlist,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string("a"),
                     Vx.Core.vx_new_string("b"),
                     Vx.Core.vx_new_string("c"),
@@ -303,7 +308,8 @@ public class CollectionTest {
               context,
               Vx.Core.f_new(
                 Vx.Core.t_stringlist,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string("a1"),
                   Vx.Core.vx_new_string("b1"),
                   Vx.Core.vx_new_string("c1"),
@@ -314,7 +320,8 @@ public class CollectionTest {
                 Vx.Core.t_stringlist,
                 Vx.Core.f_new(
                   Vx.Core.t_list,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string("a"),
                     Vx.Core.vx_new_int(4),
                     Vx.Core.vx_new_string("b"),
@@ -333,7 +340,8 @@ public class CollectionTest {
                   Vx.Core.Type_any output_1 = 
                     Vx.Core.f_if_2(
                       Vx.Core.t_string,
-                      Vx.Core.vx_new(Vx.Core.t_thenelselist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_thenelselist,
                         Vx.Core.f_then(
                           Vx.Core.t_boolean_from_func.vx_fn_new(() => {
                             return Vx.Type.f_is_string(val);
@@ -341,9 +349,10 @@ public class CollectionTest {
                           Vx.Core.t_any_from_func.vx_fn_new(() => {
                             return Vx.Core.f_new(
                               Vx.Core.t_string,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
-                                  val,
-                                  Vx.Core.vx_new_string("1")
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
+                                val,
+                                Vx.Core.vx_new_string("1")
                               )
                             );
                           })
@@ -377,7 +386,8 @@ public class CollectionTest {
               context,
               Vx.Core.f_new(
                 Vx.Core.t_list,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string("a"),
                   Vx.Core.vx_new_int(1),
                   Vx.Core.vx_new_string("b"),
@@ -388,7 +398,8 @@ public class CollectionTest {
                 Vx.Core.t_list,
                 Vx.Core.f_new(
                   Vx.Core.t_list,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string("a"),
                     Vx.Core.vx_new_int(1),
                     Vx.Core.vx_new_string("b"),
@@ -396,7 +407,8 @@ public class CollectionTest {
                     Vx.Core.t_decimal.vx_new_from_string("4.5")
                   )
                 ),
-                Vx.Core.vx_new(Vx.Core.t_typelist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_typelist,
                   Vx.Core.t_string,
                   Vx.Core.t_int
                 )
@@ -425,7 +437,8 @@ public class CollectionTest {
               context,
               Vx.Core.f_new(
                 Vx.Core.t_stringlist,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string("b"),
                   Vx.Core.vx_new_string("c"),
                   Vx.Core.vx_new_string("d")
@@ -435,7 +448,8 @@ public class CollectionTest {
                 Vx.Core.t_stringlist,
                 Vx.Core.f_new(
                   Vx.Core.t_stringlist,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string("a"),
                     Vx.Core.vx_new_string("b"),
                     Vx.Core.vx_new_string("c"),
@@ -468,7 +482,8 @@ public class CollectionTest {
               context,
               Vx.Core.f_new(
                 Vx.Core.t_stringlist,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string("b"),
                   Vx.Core.vx_new_string("c")
                 )
@@ -477,7 +492,8 @@ public class CollectionTest {
                 Vx.Core.t_stringlist,
                 Vx.Core.f_new(
                   Vx.Core.t_stringlist,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string("a"),
                     Vx.Core.vx_new_string("b"),
                     Vx.Core.vx_new_string("c"),
@@ -511,7 +527,8 @@ public class CollectionTest {
               context,
               Vx.Core.f_new(
                 Vx.Core.t_stringmap,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":b"),
                   Vx.Core.vx_new_string("1"),
                   Vx.Core.vx_new_string(":a"),
@@ -522,7 +539,8 @@ public class CollectionTest {
                 Vx.Core.t_stringmap,
                 Vx.Core.f_new(
                   Vx.Core.t_stringmap,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":b"),
                     Vx.Core.vx_new_string("1"),
                     Vx.Core.vx_new_string(":a"),
@@ -557,7 +575,8 @@ public class CollectionTest {
               context,
               Vx.Core.f_new(
                 Vx.Core.t_stringmap,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":c"),
                   Vx.Core.vx_new_string("3"),
                   Vx.Core.vx_new_string(":a"),
@@ -568,7 +587,8 @@ public class CollectionTest {
                 Vx.Core.t_stringmap,
                 Vx.Core.f_new(
                   Vx.Core.t_stringmap,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":a"),
                     Vx.Core.vx_new_string("1"),
                     Vx.Core.vx_new_string(":b"),
@@ -579,7 +599,8 @@ public class CollectionTest {
                 ),
                 Vx.Core.f_new(
                   Vx.Core.t_stringlist,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string("c"),
                     Vx.Core.vx_new_string("a")
                   )
@@ -609,7 +630,8 @@ public class CollectionTest {
               context,
               Vx.Core.f_new(
                 Vx.Core.t_stringmap,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":a"),
                   Vx.Core.vx_new_string("2"),
                   Vx.Core.vx_new_string(":c"),
@@ -620,7 +642,8 @@ public class CollectionTest {
                 Vx.Core.t_stringmap,
                 Vx.Core.f_new(
                   Vx.Core.t_stringmap,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":b"),
                     Vx.Core.vx_new_string("1"),
                     Vx.Core.vx_new_string(":a"),
@@ -655,7 +678,8 @@ public class CollectionTest {
               context,
               Vx.Core.f_new(
                 Vx.Core.t_stringmap,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":a"),
                   Vx.Core.vx_new_string("2"),
                   Vx.Core.vx_new_string(":c"),
@@ -666,7 +690,8 @@ public class CollectionTest {
                 Vx.Core.t_stringmap,
                 Vx.Core.f_new(
                   Vx.Core.t_stringmap,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":b"),
                     Vx.Core.vx_new_string("1"),
                     Vx.Core.vx_new_string(":a"),

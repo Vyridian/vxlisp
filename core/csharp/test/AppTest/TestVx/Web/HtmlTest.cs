@@ -37,7 +37,8 @@ public class HtmlTest {
               Vx.Web.Html.f_string_from_body_indent(
                 Vx.Core.f_new(
                   Vx.Web.Html.t_body,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.f_empty(
                       Vx.Web.Html.t_div
                     )
@@ -86,7 +87,8 @@ public class HtmlTest {
               Vx.Web.Html.f_string_from_div_indent(
                 Vx.Core.f_new(
                   Vx.Web.Html.t_div,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":id"),
                     Vx.Core.vx_new_string("myid")
                   )
@@ -148,7 +150,8 @@ public class HtmlTest {
               Vx.Web.Html.f_string_from_html(
                 Vx.Core.f_new(
                   Vx.Web.Html.t_html,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":head"),
                     Vx.Core.f_empty(
                       Vx.Web.Html.t_head
@@ -186,7 +189,8 @@ public class HtmlTest {
               Vx.Web.Html.f_string_from_img_indent(
                 Vx.Core.f_new(
                   Vx.Web.Html.t_img,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":src"),
                     Vx.Core.vx_new_string("test.svg")
                   )
@@ -205,7 +209,8 @@ public class HtmlTest {
               Vx.Web.Html.f_string_from_img_indent(
                 Vx.Core.f_new(
                   Vx.Web.Html.t_img,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":id"),
                     Vx.Core.vx_new_string("myid"),
                     Vx.Core.vx_new_string(":src"),
@@ -240,7 +245,8 @@ public class HtmlTest {
               Vx.Web.Html.f_string_from_meta_indent(
                 Vx.Core.f_new(
                   Vx.Web.Html.t_meta,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":charset"),
                     Vx.Core.vx_new_string("utf-8")
                   )
@@ -273,7 +279,8 @@ public class HtmlTest {
               Vx.Web.Html.f_string_from_p_indent(
                 Vx.Core.f_new(
                   Vx.Web.Html.t_p,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("data")
                   )
@@ -292,7 +299,8 @@ public class HtmlTest {
               Vx.Web.Html.f_string_from_p_indent(
                 Vx.Core.f_new(
                   Vx.Web.Html.t_p,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":id"),
                     Vx.Core.vx_new_string("myid"),
                     Vx.Core.vx_new_string(":text"),

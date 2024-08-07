@@ -20,14 +20,16 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_delimlist,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Data.Textblock.c_delimcomma,
                   Vx.Data.Textblock.c_delimwhitespace
                 )
               ),
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_delimlist,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Data.Textblock.c_delimcomma,
                   Vx.Data.Textblock.c_delimwhitespace
                 )
@@ -56,7 +58,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_copy(
                 Vx.Data.Textblock.c_delimcomma,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":pos"),
                   Vx.Core.vx_new_int(1)
                 )
@@ -64,14 +67,16 @@ public class TextblockTest {
               Vx.Data.Textblock.f_delim_first_from_delim_delim(
                 Vx.Core.f_copy(
                   Vx.Data.Textblock.c_delimspace,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":pos"),
                     Vx.Core.vx_new_int(2)
                   )
                 ),
                 Vx.Core.f_copy(
                   Vx.Data.Textblock.c_delimcomma,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":pos"),
                     Vx.Core.vx_new_int(1)
                   )
@@ -91,7 +96,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_delim_first_from_delim_delim(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_delim,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":pos"),
                     Vx.Core.vx_new_int(0)
                   )
@@ -124,7 +130,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_copy(
                 Vx.Data.Textblock.c_delimcomma,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":pos"),
                   Vx.Core.vx_new_int(2)
                 )
@@ -133,7 +140,8 @@ public class TextblockTest {
                 Vx.Core.vx_new_string("a, b"),
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_delimlist,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Data.Textblock.c_delimspace,
                     Vx.Data.Textblock.c_delimcomma
                   )
@@ -163,7 +171,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_copy(
                 Vx.Data.Textblock.c_delimcomma,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":pos"),
                   Vx.Core.vx_new_int(2)
                 )
@@ -196,17 +205,20 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_delimlist,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.f_copy(
                     Vx.Data.Textblock.c_delimspace,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":pos"),
                       Vx.Core.vx_new_int(3)
                     )
                   ),
                   Vx.Core.f_copy(
                     Vx.Data.Textblock.c_delimcomma,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":pos"),
                       Vx.Core.vx_new_int(2)
                     )
@@ -217,7 +229,8 @@ public class TextblockTest {
                 Vx.Core.vx_new_string("a, b"),
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_delimlist,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Data.Textblock.c_delimspace,
                     Vx.Data.Textblock.c_delimcomma
                   )
@@ -247,7 +260,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Core.t_stringlist,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string("a"),
                   Vx.Core.vx_new_string("b")
                 )
@@ -255,17 +269,20 @@ public class TextblockTest {
               Vx.Data.Textblock.f_stringlist_from_textblocklist(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblocklist,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("a")
                       )
                     ),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("b")
                       )
@@ -299,7 +316,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_text_from_textblock(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("a")
                   )
@@ -329,7 +347,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("<a"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -339,10 +358,12 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":children"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblocklist,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("<a"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -352,7 +373,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimbracketangle,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":delimlist"),
                               Vx.Data.Textblock.c_delimlisttest1
                             )
@@ -360,10 +382,12 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":children"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblocklist,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("a"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -376,16 +400,19 @@ public class TextblockTest {
                           ),
                           Vx.Core.f_new(
                             Vx.Core.t_msgblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.f_new(
                                 Vx.Core.t_msg,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":code"),
                                   Vx.Core.vx_new_string("closedelimmissing"),
                                   Vx.Core.vx_new_string(":detail"),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_delim,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":name"),
                                       Vx.Core.vx_new_string("delimclose"),
                                       Vx.Core.vx_new_string(":starttext"),
@@ -404,16 +431,19 @@ public class TextblockTest {
                   ),
                   Vx.Core.f_new(
                     Vx.Core.t_msgblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.f_new(
                         Vx.Core.t_msg,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":code"),
                           Vx.Core.vx_new_string("closedelimmissing"),
                           Vx.Core.vx_new_string(":detail"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_delim,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":name"),
                               Vx.Core.vx_new_string("delimclose"),
                               Vx.Core.vx_new_string(":starttext"),
@@ -431,7 +461,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_delimnotfound(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("a"),
                     Vx.Core.vx_new_string(":startpos"),
@@ -441,7 +472,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_delim,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":delimlist"),
                         Vx.Data.Textblock.c_delimlisttest2
                       )
@@ -449,7 +481,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":close"),
                     Vx.Core.f_copy(
                       Vx.Data.Textblock.c_delimclose,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":starttext"),
                         Vx.Core.vx_new_string(">")
                       )
@@ -457,7 +490,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("<a"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -467,7 +501,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimbracketangle,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":delimlist"),
                             Vx.Data.Textblock.c_delimlisttest1
                           )
@@ -475,7 +510,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":parent"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("<a"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -499,7 +535,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string(","),
                   Vx.Core.vx_new_string(":startpos"),
@@ -509,7 +546,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":delim"),
                   Vx.Core.f_copy(
                     Vx.Data.Textblock.c_delimcomma,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":pos"),
                       Vx.Core.vx_new_int(0)
                     )
@@ -517,7 +555,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string("b},{c d}>"),
                       Vx.Core.vx_new_string(":startpos"),
@@ -527,7 +566,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":delim"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_delim,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":delimlist"),
                           Vx.Data.Textblock.c_delimlisttest3
                         )
@@ -535,7 +575,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":close"),
                       Vx.Core.f_copy(
                         Vx.Data.Textblock.c_delimclose,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":starttext"),
                           Vx.Core.vx_new_string("}")
                         )
@@ -543,7 +584,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":parent"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("{a,b},{c d}>"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -553,7 +595,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimbracketcurly,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":pos"),
                               Vx.Core.vx_new_int(0)
                             )
@@ -561,7 +604,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":close"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimclose,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":starttext"),
                               Vx.Core.vx_new_string(">")
                             )
@@ -569,7 +613,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":parent"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string("<{a,b},{c d}>"),
                               Vx.Core.vx_new_string(":startpos"),
@@ -579,7 +624,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":delim"),
                               Vx.Core.f_copy(
                                 Vx.Data.Textblock.c_delimbracketangle,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":pos"),
                                   Vx.Core.vx_new_int(0)
                                 )
@@ -587,7 +633,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":parent"),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -601,10 +648,12 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":children"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblocklist,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("a"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -624,7 +673,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_delimnotfound(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("a"),
                     Vx.Core.vx_new_string(":startpos"),
@@ -634,7 +684,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string(","),
                         Vx.Core.vx_new_string(":startpos"),
@@ -644,7 +695,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimcomma,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":pos"),
                             Vx.Core.vx_new_int(0)
                           )
@@ -652,7 +704,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":parent"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("b},{c d}>"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -662,7 +715,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_delim,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":delimlist"),
                                 Vx.Data.Textblock.c_delimlisttest3
                               )
@@ -670,7 +724,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":close"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimclose,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":starttext"),
                                 Vx.Core.vx_new_string("}")
                               )
@@ -678,7 +733,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":parent"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("{a,b},{c d}>"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -688,7 +744,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":delim"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Textblock.c_delimbracketcurly,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":pos"),
                                     Vx.Core.vx_new_int(0)
                                   )
@@ -696,7 +753,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":close"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Textblock.c_delimclose,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":starttext"),
                                     Vx.Core.vx_new_string(">")
                                   )
@@ -704,7 +762,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":parent"),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -714,7 +773,8 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Textblock.c_delimbracketangle,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":pos"),
                                         Vx.Core.vx_new_int(0)
                                       )
@@ -722,7 +782,8 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":parent"),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -752,7 +813,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string(",{c d}>"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -762,7 +824,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":delim"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_delim,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":delimlist"),
                       Vx.Data.Textblock.c_delimlisttest3
                     )
@@ -770,7 +833,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":close"),
                   Vx.Core.f_copy(
                     Vx.Data.Textblock.c_delimclose,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":starttext"),
                       Vx.Core.vx_new_string(">")
                     )
@@ -778,7 +842,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string("<{a,b},{c d}>"),
                       Vx.Core.vx_new_string(":startpos"),
@@ -788,7 +853,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":delim"),
                       Vx.Core.f_copy(
                         Vx.Data.Textblock.c_delimbracketangle,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":pos"),
                           Vx.Core.vx_new_int(0)
                         )
@@ -796,7 +862,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":parent"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("<{a,b},{c d}>"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -808,10 +875,12 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":children"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblocklist,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string("{a,b}"),
                               Vx.Core.vx_new_string(":startpos"),
@@ -821,7 +890,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":delim"),
                               Vx.Core.f_copy(
                                 Vx.Data.Textblock.c_delimbracketcurly,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":pos"),
                                   Vx.Core.vx_new_int(0)
                                 )
@@ -829,10 +899,12 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":children"),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblocklist,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string("a"),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -843,7 +915,8 @@ public class TextblockTest {
                                   ),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string(","),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -853,7 +926,8 @@ public class TextblockTest {
                                       Vx.Core.vx_new_string(":delim"),
                                       Vx.Core.f_copy(
                                         Vx.Data.Textblock.c_delimcomma,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":pos"),
                                           Vx.Core.vx_new_int(0)
                                         )
@@ -862,7 +936,8 @@ public class TextblockTest {
                                   ),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string("b"),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -884,7 +959,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_delimnotfound(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("b"),
                     Vx.Core.vx_new_string(":startpos"),
@@ -894,7 +970,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string(",{c d}>"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -904,7 +981,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_delim,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":delimlist"),
                             Vx.Data.Textblock.c_delimlisttest3
                           )
@@ -912,7 +990,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":close"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimclose,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":starttext"),
                             Vx.Core.vx_new_string(">")
                           )
@@ -920,7 +999,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":parent"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("{a,b}"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -930,7 +1010,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimbracketcurly,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -940,7 +1021,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":parent"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -950,7 +1032,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":delim"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Textblock.c_delimbracketangle,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":pos"),
                                     Vx.Core.vx_new_int(0)
                                   )
@@ -958,7 +1041,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":parent"),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -972,10 +1056,12 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":children"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblocklist,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("a"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -986,7 +1072,8 @@ public class TextblockTest {
                                 ),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string(","),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -996,7 +1083,8 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Textblock.c_delimcomma,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":pos"),
                                         Vx.Core.vx_new_int(0)
                                       )
@@ -1022,7 +1110,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":startpos"),
                   Vx.Core.vx_new_int(14),
                   Vx.Core.vx_new_string(":endpos"),
@@ -1030,7 +1119,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":delim"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_delim,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":delimlist"),
                       Vx.Data.Textblock.c_delimlisttest1
                     )
@@ -1038,7 +1128,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string("<{a,b},{c d}>"),
                       Vx.Core.vx_new_string(":startpos"),
@@ -1048,10 +1139,12 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":children"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblocklist,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string("<{a,b},{c d}>"),
                               Vx.Core.vx_new_string(":startpos"),
@@ -1061,7 +1154,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":delim"),
                               Vx.Core.f_copy(
                                 Vx.Data.Textblock.c_delimbracketangle,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":pos"),
                                   Vx.Core.vx_new_int(0)
                                 )
@@ -1069,10 +1163,12 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":children"),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblocklist,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string("{a,b}"),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -1082,7 +1178,8 @@ public class TextblockTest {
                                       Vx.Core.vx_new_string(":delim"),
                                       Vx.Core.f_copy(
                                         Vx.Data.Textblock.c_delimbracketcurly,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":pos"),
                                           Vx.Core.vx_new_int(0)
                                         )
@@ -1090,10 +1187,12 @@ public class TextblockTest {
                                       Vx.Core.vx_new_string(":children"),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblocklist,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.f_new(
                                             Vx.Data.Textblock.t_textblock,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":text"),
                                               Vx.Core.vx_new_string("a"),
                                               Vx.Core.vx_new_string(":startpos"),
@@ -1104,7 +1203,8 @@ public class TextblockTest {
                                           ),
                                           Vx.Core.f_new(
                                             Vx.Data.Textblock.t_textblock,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":text"),
                                               Vx.Core.vx_new_string(","),
                                               Vx.Core.vx_new_string(":startpos"),
@@ -1114,7 +1214,8 @@ public class TextblockTest {
                                               Vx.Core.vx_new_string(":delim"),
                                               Vx.Core.f_copy(
                                                 Vx.Data.Textblock.c_delimcomma,
-                                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                                Vx.Core.vx_new(
+                                                  Vx.Core.t_anylist,
                                                   Vx.Core.vx_new_string(":pos"),
                                                   Vx.Core.vx_new_int(0)
                                                 )
@@ -1123,7 +1224,8 @@ public class TextblockTest {
                                           ),
                                           Vx.Core.f_new(
                                             Vx.Data.Textblock.t_textblock,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":text"),
                                               Vx.Core.vx_new_string("b"),
                                               Vx.Core.vx_new_string(":startpos"),
@@ -1138,7 +1240,8 @@ public class TextblockTest {
                                   ),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string(","),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -1148,7 +1251,8 @@ public class TextblockTest {
                                       Vx.Core.vx_new_string(":delim"),
                                       Vx.Core.f_copy(
                                         Vx.Data.Textblock.c_delimcomma,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":pos"),
                                           Vx.Core.vx_new_int(0)
                                         )
@@ -1157,7 +1261,8 @@ public class TextblockTest {
                                   ),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string("{c d}"),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -1167,7 +1272,8 @@ public class TextblockTest {
                                       Vx.Core.vx_new_string(":delim"),
                                       Vx.Core.f_copy(
                                         Vx.Data.Textblock.c_delimbracketcurly,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":pos"),
                                           Vx.Core.vx_new_int(0)
                                         )
@@ -1175,10 +1281,12 @@ public class TextblockTest {
                                       Vx.Core.vx_new_string(":children"),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblocklist,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.f_new(
                                             Vx.Data.Textblock.t_textblock,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":text"),
                                               Vx.Core.vx_new_string("c"),
                                               Vx.Core.vx_new_string(":startpos"),
@@ -1189,7 +1297,8 @@ public class TextblockTest {
                                           ),
                                           Vx.Core.f_new(
                                             Vx.Data.Textblock.t_textblock,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":text"),
                                               Vx.Core.vx_new_string(" "),
                                               Vx.Core.vx_new_string(":startpos"),
@@ -1199,7 +1308,8 @@ public class TextblockTest {
                                               Vx.Core.vx_new_string(":delim"),
                                               Vx.Core.f_copy(
                                                 Vx.Data.Textblock.c_delimwhitespace,
-                                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                                Vx.Core.vx_new(
+                                                  Vx.Core.t_anylist,
                                                   Vx.Core.vx_new_string(":pos"),
                                                   Vx.Core.vx_new_int(0)
                                                 )
@@ -1208,7 +1318,8 @@ public class TextblockTest {
                                           ),
                                           Vx.Core.f_new(
                                             Vx.Data.Textblock.t_textblock,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":text"),
                                               Vx.Core.vx_new_string("d"),
                                               Vx.Core.vx_new_string(":startpos"),
@@ -1234,7 +1345,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_delimnotfound(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":startpos"),
                     Vx.Core.vx_new_int(13),
                     Vx.Core.vx_new_string(":endpos"),
@@ -1242,7 +1354,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":startpos"),
                         Vx.Core.vx_new_int(14),
                         Vx.Core.vx_new_string(":endpos"),
@@ -1250,7 +1363,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_delim,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":delimlist"),
                             Vx.Data.Textblock.c_delimlisttest1
                           )
@@ -1258,7 +1372,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":parent"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("<{a,b},{c d}>"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -1268,7 +1383,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimbracketangle,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -1278,7 +1394,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":parent"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -1290,10 +1407,12 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":children"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblocklist,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("{a,b}"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -1303,7 +1422,8 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Textblock.c_delimbracketcurly,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":pos"),
                                         Vx.Core.vx_new_int(0)
                                       )
@@ -1311,10 +1431,12 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":children"),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblocklist,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string("a"),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -1325,7 +1447,8 @@ public class TextblockTest {
                                         ),
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string(","),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -1335,7 +1458,8 @@ public class TextblockTest {
                                             Vx.Core.vx_new_string(":delim"),
                                             Vx.Core.f_copy(
                                               Vx.Data.Textblock.c_delimcomma,
-                                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                                              Vx.Core.vx_new(
+                                                Vx.Core.t_anylist,
                                                 Vx.Core.vx_new_string(":pos"),
                                                 Vx.Core.vx_new_int(0)
                                               )
@@ -1344,7 +1468,8 @@ public class TextblockTest {
                                         ),
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string("b"),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -1359,7 +1484,8 @@ public class TextblockTest {
                                 ),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string(","),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -1369,7 +1495,8 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Textblock.c_delimcomma,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":pos"),
                                         Vx.Core.vx_new_int(0)
                                       )
@@ -1378,7 +1505,8 @@ public class TextblockTest {
                                 ),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("{c d}"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -1388,7 +1516,8 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Textblock.c_delimbracketcurly,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":pos"),
                                         Vx.Core.vx_new_int(0)
                                       )
@@ -1396,10 +1525,12 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":children"),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblocklist,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string("c"),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -1410,7 +1541,8 @@ public class TextblockTest {
                                         ),
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string(" "),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -1420,7 +1552,8 @@ public class TextblockTest {
                                             Vx.Core.vx_new_string(":delim"),
                                             Vx.Core.f_copy(
                                               Vx.Data.Textblock.c_delimwhitespace,
-                                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                                              Vx.Core.vx_new(
+                                                Vx.Core.t_anylist,
                                                 Vx.Core.vx_new_string(":pos"),
                                                 Vx.Core.vx_new_int(0)
                                               )
@@ -1429,7 +1562,8 @@ public class TextblockTest {
                                         ),
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string("d"),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -1461,7 +1595,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("\"b\"\n1,\"2\""),
                   Vx.Core.vx_new_string(":startpos"),
@@ -1471,11 +1606,13 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":delim"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_delim,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":delimlist"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_delimlist,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Data.Textblock.c_delimline,
                           Vx.Data.Textblock.c_delimquote,
                           Vx.Data.Textblock.c_delimcomma
@@ -1486,7 +1623,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string("\"a\",\"b\"\n1,\"2\""),
                       Vx.Core.vx_new_string(":startpos"),
@@ -1496,10 +1634,12 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":children"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblocklist,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string("\"a\""),
                               Vx.Core.vx_new_string(":startpos"),
@@ -1509,7 +1649,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":delim"),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_delim,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":name"),
                                   Vx.Core.vx_new_string("delimquote"),
                                   Vx.Core.vx_new_string(":starttext"),
@@ -1521,10 +1662,12 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":children"),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblocklist,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string("a"),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -1539,7 +1682,8 @@ public class TextblockTest {
                           ),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string(","),
                               Vx.Core.vx_new_string(":startpos"),
@@ -1549,7 +1693,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":delim"),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_delim,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":name"),
                                   Vx.Core.vx_new_string("delimcomma"),
                                   Vx.Core.vx_new_string(":starttext"),
@@ -1567,7 +1712,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_delimnotfound(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string(","),
                     Vx.Core.vx_new_string(":startpos"),
@@ -1577,7 +1723,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_delim,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":name"),
                         Vx.Core.vx_new_string("delimcomma"),
                         Vx.Core.vx_new_string(":starttext"),
@@ -1587,7 +1734,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("\"b\"\n1,\"2\""),
                         Vx.Core.vx_new_string(":startpos"),
@@ -1597,11 +1745,13 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_delim,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":delimlist"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_delimlist,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Data.Textblock.c_delimline,
                                 Vx.Data.Textblock.c_delimquote,
                                 Vx.Data.Textblock.c_delimcomma
@@ -1612,7 +1762,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":parent"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("\"a\",\"b\"\n1,\"2\""),
                             Vx.Core.vx_new_string(":startpos"),
@@ -1622,10 +1773,12 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":children"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblocklist,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("\"a\""),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -1635,7 +1788,8 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_delim,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":name"),
                                         Vx.Core.vx_new_string("delimquote"),
                                         Vx.Core.vx_new_string(":starttext"),
@@ -1647,10 +1801,12 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":children"),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblocklist,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string("a"),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -1696,7 +1852,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("<{a,b},{c d}>"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -1708,7 +1865,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string("<{a,b},{c d}>"),
                       Vx.Core.vx_new_string(":startpos"),
@@ -1722,7 +1880,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_init(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("<{a,b},{c d}>"),
                     Vx.Core.vx_new_string(":delim"),
@@ -1754,7 +1913,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("<{a,b},{c d}>"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -1764,10 +1924,12 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":children"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblocklist,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("<{a,b},{c d}>"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -1777,7 +1939,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimbracketangle,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":pos"),
                               Vx.Core.vx_new_int(0)
                             )
@@ -1785,10 +1948,12 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":children"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblocklist,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("{a,b}"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -1798,7 +1963,8 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimbracketcurly,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -1806,10 +1972,12 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":children"),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblocklist,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string("a"),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -1820,7 +1988,8 @@ public class TextblockTest {
                                       ),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string(","),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -1830,7 +1999,8 @@ public class TextblockTest {
                                           Vx.Core.vx_new_string(":delim"),
                                           Vx.Core.f_copy(
                                             Vx.Data.Textblock.c_delimcomma,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":pos"),
                                               Vx.Core.vx_new_int(0)
                                             )
@@ -1839,7 +2009,8 @@ public class TextblockTest {
                                       ),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string("b"),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -1854,7 +2025,8 @@ public class TextblockTest {
                               ),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string(","),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -1864,7 +2036,8 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimcomma,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -1873,7 +2046,8 @@ public class TextblockTest {
                               ),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("{c d}"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -1883,7 +2057,8 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimbracketcurly,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -1891,10 +2066,12 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":children"),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblocklist,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string("c"),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -1905,7 +2082,8 @@ public class TextblockTest {
                                       ),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string(" "),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -1915,7 +2093,8 @@ public class TextblockTest {
                                           Vx.Core.vx_new_string(":delim"),
                                           Vx.Core.f_copy(
                                             Vx.Data.Textblock.c_delimwhitespace,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":pos"),
                                               Vx.Core.vx_new_int(0)
                                             )
@@ -1924,7 +2103,8 @@ public class TextblockTest {
                                       ),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string("d"),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -1948,7 +2128,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_parse(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("<{a,b},{c d}>"),
                     Vx.Core.vx_new_string(":delim"),
@@ -1980,7 +2161,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("<a"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -1990,10 +2172,12 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":children"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblocklist,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("<a"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -2003,7 +2187,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimbracketangle,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":delimlist"),
                               Vx.Data.Textblock.c_delimlisttest1
                             )
@@ -2011,10 +2196,12 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":children"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblocklist,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("a"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -2027,16 +2214,19 @@ public class TextblockTest {
                           ),
                           Vx.Core.f_new(
                             Vx.Core.t_msgblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.f_new(
                                 Vx.Core.t_msg,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":code"),
                                   Vx.Core.vx_new_string("closedelimmissing"),
                                   Vx.Core.vx_new_string(":detail"),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_delim,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":name"),
                                       Vx.Core.vx_new_string("delimclose"),
                                       Vx.Core.vx_new_string(":starttext"),
@@ -2055,16 +2245,19 @@ public class TextblockTest {
                   ),
                   Vx.Core.f_new(
                     Vx.Core.t_msgblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.f_new(
                         Vx.Core.t_msg,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":code"),
                           Vx.Core.vx_new_string("closedelimmissing"),
                           Vx.Core.vx_new_string(":detail"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_delim,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":name"),
                               Vx.Core.vx_new_string("delimclose"),
                               Vx.Core.vx_new_string(":starttext"),
@@ -2082,7 +2275,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_parse_one(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("a"),
                     Vx.Core.vx_new_string(":startpos"),
@@ -2092,7 +2286,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_delim,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":delimlist"),
                         Vx.Data.Textblock.c_delimlisttest2
                       )
@@ -2100,7 +2295,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":close"),
                     Vx.Core.f_copy(
                       Vx.Data.Textblock.c_delimclose,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":starttext"),
                         Vx.Core.vx_new_string(">")
                       )
@@ -2108,7 +2304,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("<a"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -2118,7 +2315,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimbracketangle,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":delimlist"),
                             Vx.Data.Textblock.c_delimlisttest1
                           )
@@ -2126,7 +2324,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":parent"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("<a"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -2150,7 +2349,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("<{a,b},{c d}>"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -2162,7 +2362,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string("<{a,b},{c d}>"),
                       Vx.Core.vx_new_string(":startpos"),
@@ -2176,7 +2377,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_parse_one(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("<{a,b},{c d}>"),
                     Vx.Core.vx_new_string(":delim"),
@@ -2194,7 +2396,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("{a,b},{c d}>"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -2204,7 +2407,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":delim"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_delim,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":delimlist"),
                       Vx.Data.Textblock.c_delimlisttest2
                     )
@@ -2212,7 +2416,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":close"),
                   Vx.Core.f_copy(
                     Vx.Data.Textblock.c_delimclose,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":starttext"),
                       Vx.Core.vx_new_string(">")
                     )
@@ -2220,7 +2425,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string("<{a,b},{c d}>"),
                       Vx.Core.vx_new_string(":startpos"),
@@ -2230,7 +2436,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":delim"),
                       Vx.Core.f_copy(
                         Vx.Data.Textblock.c_delimbracketangle,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":delimlist"),
                           Vx.Data.Textblock.c_delimlisttest1
                         )
@@ -2238,7 +2445,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":parent"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("<{a,b},{c d}>"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -2254,7 +2462,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_parse_one(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("<{a,b},{c d}>"),
                     Vx.Core.vx_new_string(":startpos"),
@@ -2266,7 +2475,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("<{a,b},{c d}>"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -2288,7 +2498,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("a,b},{c d}>"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -2298,7 +2509,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":delim"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_delim,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":delimlist"),
                       Vx.Data.Textblock.c_delimlisttest3
                     )
@@ -2306,7 +2518,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":close"),
                   Vx.Core.f_copy(
                     Vx.Data.Textblock.c_delimclose,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":starttext"),
                       Vx.Core.vx_new_string("}")
                     )
@@ -2314,7 +2527,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string("{a,b},{c d}>"),
                       Vx.Core.vx_new_string(":startpos"),
@@ -2324,7 +2538,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":delim"),
                       Vx.Core.f_copy(
                         Vx.Data.Textblock.c_delimbracketcurly,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":delimlist"),
                           Vx.Data.Textblock.c_delimlisttest2
                         )
@@ -2332,7 +2547,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":close"),
                       Vx.Core.f_copy(
                         Vx.Data.Textblock.c_delimclose,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":starttext"),
                           Vx.Core.vx_new_string(">")
                         )
@@ -2340,7 +2556,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":parent"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("<{a,b},{c d}>"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -2350,7 +2567,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimbracketangle,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":delimlist"),
                               Vx.Data.Textblock.c_delimlisttest1
                             )
@@ -2358,7 +2576,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":parent"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string("<{a,b},{c d}>"),
                               Vx.Core.vx_new_string(":startpos"),
@@ -2376,7 +2595,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_parse_one(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("{a,b},{c d}>"),
                     Vx.Core.vx_new_string(":startpos"),
@@ -2386,7 +2606,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_delim,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":delimlist"),
                         Vx.Data.Textblock.c_delimlisttest2
                       )
@@ -2394,7 +2615,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":close"),
                     Vx.Core.f_copy(
                       Vx.Data.Textblock.c_delimclose,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":starttext"),
                         Vx.Core.vx_new_string(">")
                       )
@@ -2402,7 +2624,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("<{a,b},{c d}>"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -2412,7 +2635,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimbracketangle,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":delimlist"),
                             Vx.Data.Textblock.c_delimlisttest1
                           )
@@ -2420,7 +2644,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":parent"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("<{a,b},{c d}>"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -2444,7 +2669,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("a"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -2454,7 +2680,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string(","),
                       Vx.Core.vx_new_string(":startpos"),
@@ -2464,7 +2691,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":delim"),
                       Vx.Core.f_copy(
                         Vx.Data.Textblock.c_delimcomma,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":pos"),
                           Vx.Core.vx_new_int(0)
                         )
@@ -2472,7 +2700,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":parent"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("b},{c d}>"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -2482,7 +2711,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_delim,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":delimlist"),
                               Vx.Data.Textblock.c_delimlisttest3
                             )
@@ -2490,7 +2720,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":close"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimclose,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":starttext"),
                               Vx.Core.vx_new_string("}")
                             )
@@ -2498,7 +2729,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":parent"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string("{a,b},{c d}>"),
                               Vx.Core.vx_new_string(":startpos"),
@@ -2508,7 +2740,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":delim"),
                               Vx.Core.f_copy(
                                 Vx.Data.Textblock.c_delimbracketcurly,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":delimlist"),
                                   Vx.Data.Textblock.c_delimlisttest2
                                 )
@@ -2516,7 +2749,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":close"),
                               Vx.Core.f_copy(
                                 Vx.Data.Textblock.c_delimclose,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":starttext"),
                                   Vx.Core.vx_new_string(">")
                                 )
@@ -2524,7 +2758,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":parent"),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -2534,7 +2769,8 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimbracketangle,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":delimlist"),
                                       Vx.Data.Textblock.c_delimlisttest1
                                     )
@@ -2542,7 +2778,8 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":parent"),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -2564,7 +2801,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_parse_one(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("a,b},{c d}>"),
                     Vx.Core.vx_new_string(":startpos"),
@@ -2574,7 +2812,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_delim,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":delimlist"),
                         Vx.Data.Textblock.c_delimlisttest3
                       )
@@ -2582,7 +2821,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":close"),
                     Vx.Core.f_copy(
                       Vx.Data.Textblock.c_delimclose,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":starttext"),
                         Vx.Core.vx_new_string("}")
                       )
@@ -2590,7 +2830,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("{a,b},{c d}>"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -2600,7 +2841,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimbracketcurly,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":delimlist"),
                             Vx.Data.Textblock.c_delimlisttest2
                           )
@@ -2608,7 +2850,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":close"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimclose,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":starttext"),
                             Vx.Core.vx_new_string(">")
                           )
@@ -2616,7 +2859,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":parent"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("<{a,b},{c d}>"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -2626,7 +2870,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimbracketangle,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":delimlist"),
                                 Vx.Data.Textblock.c_delimlisttest1
                               )
@@ -2634,7 +2879,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":parent"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -2660,7 +2906,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string(","),
                   Vx.Core.vx_new_string(":startpos"),
@@ -2670,7 +2917,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":delim"),
                   Vx.Core.f_copy(
                     Vx.Data.Textblock.c_delimcomma,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":pos"),
                       Vx.Core.vx_new_int(0)
                     )
@@ -2678,7 +2926,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string("b},{c d}>"),
                       Vx.Core.vx_new_string(":startpos"),
@@ -2688,7 +2937,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":delim"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_delim,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":delimlist"),
                           Vx.Data.Textblock.c_delimlisttest3
                         )
@@ -2696,7 +2946,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":close"),
                       Vx.Core.f_copy(
                         Vx.Data.Textblock.c_delimclose,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":starttext"),
                           Vx.Core.vx_new_string("}")
                         )
@@ -2704,7 +2955,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":parent"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("{a,b},{c d}>"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -2714,7 +2966,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimbracketcurly,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":delimlist"),
                               Vx.Data.Textblock.c_delimlisttest2
                             )
@@ -2722,7 +2975,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":close"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimclose,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":starttext"),
                               Vx.Core.vx_new_string(">")
                             )
@@ -2730,7 +2984,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":parent"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string("<{a,b},{c d}>"),
                               Vx.Core.vx_new_string(":startpos"),
@@ -2740,7 +2995,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":delim"),
                               Vx.Core.f_copy(
                                 Vx.Data.Textblock.c_delimbracketangle,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":delimlist"),
                                   Vx.Data.Textblock.c_delimlisttest1
                                 )
@@ -2748,7 +3004,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":parent"),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -2762,10 +3019,12 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":children"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblocklist,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("a"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -2785,7 +3044,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_parse_one(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("a"),
                     Vx.Core.vx_new_string(":startpos"),
@@ -2795,7 +3055,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string(","),
                         Vx.Core.vx_new_string(":startpos"),
@@ -2805,7 +3066,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimcomma,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":pos"),
                             Vx.Core.vx_new_int(0)
                           )
@@ -2813,7 +3075,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":parent"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("b},{c d}>"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -2823,7 +3086,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_delim,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":delimlist"),
                                 Vx.Data.Textblock.c_delimlisttest3
                               )
@@ -2831,7 +3095,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":close"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimclose,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":starttext"),
                                 Vx.Core.vx_new_string("}")
                               )
@@ -2839,7 +3104,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":parent"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("{a,b},{c d}>"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -2849,7 +3115,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":delim"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Textblock.c_delimbracketcurly,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":delimlist"),
                                     Vx.Data.Textblock.c_delimlisttest2
                                   )
@@ -2857,7 +3124,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":close"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Textblock.c_delimclose,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":starttext"),
                                     Vx.Core.vx_new_string(">")
                                   )
@@ -2865,7 +3133,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":parent"),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -2875,7 +3144,8 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Textblock.c_delimbracketangle,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":delimlist"),
                                         Vx.Data.Textblock.c_delimlisttest1
                                       )
@@ -2883,7 +3153,8 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":parent"),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -2913,7 +3184,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("b},{c d}>"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -2923,7 +3195,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":delim"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_delim,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":delimlist"),
                       Vx.Data.Textblock.c_delimlisttest3
                     )
@@ -2931,7 +3204,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":close"),
                   Vx.Core.f_copy(
                     Vx.Data.Textblock.c_delimclose,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":starttext"),
                       Vx.Core.vx_new_string("}")
                     )
@@ -2939,7 +3213,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string("{a,b},{c d}>"),
                       Vx.Core.vx_new_string(":startpos"),
@@ -2949,7 +3224,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":delim"),
                       Vx.Core.f_copy(
                         Vx.Data.Textblock.c_delimbracketcurly,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":delimlist"),
                           Vx.Data.Textblock.c_delimlisttest2
                         )
@@ -2957,7 +3233,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":close"),
                       Vx.Core.f_copy(
                         Vx.Data.Textblock.c_delimclose,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":starttext"),
                           Vx.Core.vx_new_string(">")
                         )
@@ -2965,7 +3242,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":parent"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("<{a,b},{c d}>"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -2975,7 +3253,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimbracketangle,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":delimlist"),
                               Vx.Data.Textblock.c_delimlisttest1
                             )
@@ -2983,7 +3262,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":parent"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string("<{a,b},{c d}>"),
                               Vx.Core.vx_new_string(":startpos"),
@@ -2997,10 +3277,12 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":children"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblocklist,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string("a"),
                               Vx.Core.vx_new_string(":startpos"),
@@ -3011,7 +3293,8 @@ public class TextblockTest {
                           ),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string(","),
                               Vx.Core.vx_new_string(":startpos"),
@@ -3021,7 +3304,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":delim"),
                               Vx.Core.f_copy(
                                 Vx.Data.Textblock.c_delimcomma,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":pos"),
                                   Vx.Core.vx_new_int(0)
                                 )
@@ -3037,7 +3321,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_parse_one(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string(","),
                     Vx.Core.vx_new_string(":startpos"),
@@ -3047,7 +3332,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_copy(
                       Vx.Data.Textblock.c_delimcomma,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":pos"),
                         Vx.Core.vx_new_int(0)
                       )
@@ -3055,7 +3341,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("b},{c d}>"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -3065,7 +3352,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_delim,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":delimlist"),
                             Vx.Data.Textblock.c_delimlisttest3
                           )
@@ -3073,7 +3361,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":close"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimclose,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":starttext"),
                             Vx.Core.vx_new_string("}")
                           )
@@ -3081,7 +3370,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":parent"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("{a,b},{c d}>"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -3091,7 +3381,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimbracketcurly,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":delimlist"),
                                 Vx.Data.Textblock.c_delimlisttest2
                               )
@@ -3099,7 +3390,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":close"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimclose,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":starttext"),
                                 Vx.Core.vx_new_string(">")
                               )
@@ -3107,7 +3399,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":parent"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -3117,7 +3410,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":delim"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Textblock.c_delimbracketangle,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":delimlist"),
                                     Vx.Data.Textblock.c_delimlisttest1
                                   )
@@ -3125,7 +3419,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":parent"),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -3139,10 +3434,12 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":children"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblocklist,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("a"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -3170,7 +3467,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("b"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -3180,7 +3478,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string(",{c d}>"),
                       Vx.Core.vx_new_string(":startpos"),
@@ -3190,7 +3489,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":delim"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_delim,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":delimlist"),
                           Vx.Data.Textblock.c_delimlisttest2
                         )
@@ -3198,7 +3498,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":close"),
                       Vx.Core.f_copy(
                         Vx.Data.Textblock.c_delimclose,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":starttext"),
                           Vx.Core.vx_new_string(">")
                         )
@@ -3206,7 +3507,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":parent"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("{a,b}"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -3216,7 +3518,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimbracketcurly,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":pos"),
                               Vx.Core.vx_new_int(0)
                             )
@@ -3226,7 +3529,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":parent"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string("<{a,b},{c d}>"),
                               Vx.Core.vx_new_string(":startpos"),
@@ -3236,7 +3540,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":delim"),
                               Vx.Core.f_copy(
                                 Vx.Data.Textblock.c_delimbracketangle,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":delimlist"),
                                   Vx.Data.Textblock.c_delimlisttest1
                                 )
@@ -3244,7 +3549,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":parent"),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -3258,10 +3564,12 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":children"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblocklist,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("a"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -3272,7 +3580,8 @@ public class TextblockTest {
                               ),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string(","),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -3282,7 +3591,8 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimcomma,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -3300,7 +3610,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_parse_one(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("b},{c d}>"),
                     Vx.Core.vx_new_string(":startpos"),
@@ -3310,7 +3621,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_delim,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":delimlist"),
                         Vx.Data.Textblock.c_delimlisttest3
                       )
@@ -3318,7 +3630,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":close"),
                     Vx.Core.f_copy(
                       Vx.Data.Textblock.c_delimclose,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":starttext"),
                         Vx.Core.vx_new_string("}")
                       )
@@ -3326,7 +3639,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("{a,b},{c d}>"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -3336,7 +3650,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimbracketcurly,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":delimlist"),
                             Vx.Data.Textblock.c_delimlisttest2
                           )
@@ -3344,7 +3659,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":close"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimclose,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":starttext"),
                             Vx.Core.vx_new_string(">")
                           )
@@ -3352,7 +3668,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":parent"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("<{a,b},{c d}>"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -3362,7 +3679,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimbracketangle,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":delimlist"),
                                 Vx.Data.Textblock.c_delimlisttest1
                               )
@@ -3370,7 +3688,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":parent"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -3384,10 +3703,12 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":children"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblocklist,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("a"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -3398,7 +3719,8 @@ public class TextblockTest {
                             ),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string(","),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -3408,7 +3730,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":delim"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Textblock.c_delimcomma,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":pos"),
                                     Vx.Core.vx_new_int(0)
                                   )
@@ -3432,7 +3755,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string(",{c d}>"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -3442,7 +3766,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":delim"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_delim,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":delimlist"),
                       Vx.Data.Textblock.c_delimlisttest2
                     )
@@ -3450,7 +3775,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":close"),
                   Vx.Core.f_copy(
                     Vx.Data.Textblock.c_delimclose,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":starttext"),
                       Vx.Core.vx_new_string(">")
                     )
@@ -3458,7 +3784,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string("<{a,b},{c d}>"),
                       Vx.Core.vx_new_string(":startpos"),
@@ -3468,7 +3795,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":delim"),
                       Vx.Core.f_copy(
                         Vx.Data.Textblock.c_delimbracketangle,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":delimlist"),
                           Vx.Data.Textblock.c_delimlisttest1
                         )
@@ -3476,7 +3804,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":parent"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("<{a,b},{c d}>"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -3488,10 +3817,12 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":children"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblocklist,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string("{a,b}"),
                               Vx.Core.vx_new_string(":startpos"),
@@ -3501,7 +3832,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":delim"),
                               Vx.Core.f_copy(
                                 Vx.Data.Textblock.c_delimbracketcurly,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":pos"),
                                   Vx.Core.vx_new_int(0)
                                 )
@@ -3509,10 +3841,12 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":children"),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblocklist,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string("a"),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -3523,7 +3857,8 @@ public class TextblockTest {
                                   ),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string(","),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -3533,7 +3868,8 @@ public class TextblockTest {
                                       Vx.Core.vx_new_string(":delim"),
                                       Vx.Core.f_copy(
                                         Vx.Data.Textblock.c_delimcomma,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":pos"),
                                           Vx.Core.vx_new_int(0)
                                         )
@@ -3542,7 +3878,8 @@ public class TextblockTest {
                                   ),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string("b"),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -3564,7 +3901,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_parse_one(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("b"),
                     Vx.Core.vx_new_string(":startpos"),
@@ -3574,7 +3912,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string(",{c d}>"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -3584,7 +3923,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_delim,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":delimlist"),
                             Vx.Data.Textblock.c_delimlisttest2
                           )
@@ -3592,7 +3932,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":close"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimclose,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":starttext"),
                             Vx.Core.vx_new_string(">")
                           )
@@ -3600,7 +3941,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":parent"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("{a,b}"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -3610,7 +3952,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimbracketcurly,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -3620,7 +3963,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":parent"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -3630,7 +3974,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":delim"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Textblock.c_delimbracketangle,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":delimlist"),
                                     Vx.Data.Textblock.c_delimlisttest1
                                   )
@@ -3638,7 +3983,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":parent"),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -3652,10 +3998,12 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":children"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblocklist,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("a"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -3666,7 +4014,8 @@ public class TextblockTest {
                                 ),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string(","),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -3676,7 +4025,8 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Textblock.c_delimcomma,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":pos"),
                                         Vx.Core.vx_new_int(0)
                                       )
@@ -3702,7 +4052,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":startpos"),
                   Vx.Core.vx_new_int(7),
                   Vx.Core.vx_new_string(":endpos"),
@@ -3710,7 +4061,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string(","),
                       Vx.Core.vx_new_string(":startpos"),
@@ -3720,7 +4072,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":delim"),
                       Vx.Core.f_copy(
                         Vx.Data.Textblock.c_delimcomma,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":pos"),
                           Vx.Core.vx_new_int(0)
                         )
@@ -3728,7 +4081,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":parent"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("{c d}>"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -3738,7 +4092,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_delim,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":delimlist"),
                               Vx.Data.Textblock.c_delimlisttest2
                             )
@@ -3746,7 +4101,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":close"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimclose,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":starttext"),
                               Vx.Core.vx_new_string(">")
                             )
@@ -3754,7 +4110,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":parent"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string("<{a,b},{c d}>"),
                               Vx.Core.vx_new_string(":startpos"),
@@ -3764,7 +4121,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":delim"),
                               Vx.Core.f_copy(
                                 Vx.Data.Textblock.c_delimbracketangle,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":delimlist"),
                                   Vx.Data.Textblock.c_delimlisttest1
                                 )
@@ -3772,7 +4130,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":parent"),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -3784,10 +4143,12 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":children"),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblocklist,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string("{a,b}"),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -3797,7 +4158,8 @@ public class TextblockTest {
                                       Vx.Core.vx_new_string(":delim"),
                                       Vx.Core.f_copy(
                                         Vx.Data.Textblock.c_delimbracketcurly,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":pos"),
                                           Vx.Core.vx_new_int(0)
                                         )
@@ -3805,10 +4167,12 @@ public class TextblockTest {
                                       Vx.Core.vx_new_string(":children"),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblocklist,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.f_new(
                                             Vx.Data.Textblock.t_textblock,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":text"),
                                               Vx.Core.vx_new_string("a"),
                                               Vx.Core.vx_new_string(":startpos"),
@@ -3819,7 +4183,8 @@ public class TextblockTest {
                                           ),
                                           Vx.Core.f_new(
                                             Vx.Data.Textblock.t_textblock,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":text"),
                                               Vx.Core.vx_new_string(","),
                                               Vx.Core.vx_new_string(":startpos"),
@@ -3829,7 +4194,8 @@ public class TextblockTest {
                                               Vx.Core.vx_new_string(":delim"),
                                               Vx.Core.f_copy(
                                                 Vx.Data.Textblock.c_delimcomma,
-                                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                                Vx.Core.vx_new(
+                                                  Vx.Core.t_anylist,
                                                   Vx.Core.vx_new_string(":pos"),
                                                   Vx.Core.vx_new_int(0)
                                                 )
@@ -3838,7 +4204,8 @@ public class TextblockTest {
                                           ),
                                           Vx.Core.f_new(
                                             Vx.Data.Textblock.t_textblock,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":text"),
                                               Vx.Core.vx_new_string("b"),
                                               Vx.Core.vx_new_string(":startpos"),
@@ -3864,7 +4231,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_parse_one(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string(",{c d}>"),
                     Vx.Core.vx_new_string(":startpos"),
@@ -3874,7 +4242,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_delim,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":delimlist"),
                         Vx.Data.Textblock.c_delimlisttest2
                       )
@@ -3882,7 +4251,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":close"),
                     Vx.Core.f_copy(
                       Vx.Data.Textblock.c_delimclose,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":starttext"),
                         Vx.Core.vx_new_string(">")
                       )
@@ -3890,7 +4260,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("<{a,b},{c d}>"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -3900,7 +4271,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimbracketangle,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":delimlist"),
                             Vx.Data.Textblock.c_delimlisttest1
                           )
@@ -3908,7 +4280,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":parent"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("<{a,b},{c d}>"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -3920,10 +4293,12 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":children"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblocklist,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("{a,b}"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -3933,7 +4308,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":delim"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Textblock.c_delimbracketcurly,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":pos"),
                                     Vx.Core.vx_new_int(0)
                                   )
@@ -3941,10 +4317,12 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":children"),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblocklist,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string("a"),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -3955,7 +4333,8 @@ public class TextblockTest {
                                     ),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string(","),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -3965,7 +4344,8 @@ public class TextblockTest {
                                         Vx.Core.vx_new_string(":delim"),
                                         Vx.Core.f_copy(
                                           Vx.Data.Textblock.c_delimcomma,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":pos"),
                                             Vx.Core.vx_new_int(0)
                                           )
@@ -3974,7 +4354,8 @@ public class TextblockTest {
                                     ),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string("b"),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -4004,7 +4385,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string(","),
                   Vx.Core.vx_new_string(":startpos"),
@@ -4014,7 +4396,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":delim"),
                   Vx.Core.f_copy(
                     Vx.Data.Textblock.c_delimcomma,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":pos"),
                       Vx.Core.vx_new_int(0)
                     )
@@ -4022,7 +4405,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string("{c d}>"),
                       Vx.Core.vx_new_string(":startpos"),
@@ -4032,7 +4416,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":delim"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_delim,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":delimlist"),
                           Vx.Data.Textblock.c_delimlisttest2
                         )
@@ -4040,7 +4425,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":close"),
                       Vx.Core.f_copy(
                         Vx.Data.Textblock.c_delimclose,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":starttext"),
                           Vx.Core.vx_new_string(">")
                         )
@@ -4048,7 +4434,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":parent"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("<{a,b},{c d}>"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -4058,7 +4445,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimbracketangle,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":delimlist"),
                               Vx.Data.Textblock.c_delimlisttest1
                             )
@@ -4066,7 +4454,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":parent"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string("<{a,b},{c d}>"),
                               Vx.Core.vx_new_string(":startpos"),
@@ -4078,10 +4467,12 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":children"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblocklist,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("{a,b}"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -4091,7 +4482,8 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimbracketcurly,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -4099,10 +4491,12 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":children"),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblocklist,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string("a"),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -4113,7 +4507,8 @@ public class TextblockTest {
                                       ),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string(","),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -4123,7 +4518,8 @@ public class TextblockTest {
                                           Vx.Core.vx_new_string(":delim"),
                                           Vx.Core.f_copy(
                                             Vx.Data.Textblock.c_delimcomma,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":pos"),
                                               Vx.Core.vx_new_int(0)
                                             )
@@ -4132,7 +4528,8 @@ public class TextblockTest {
                                       ),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string("b"),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -4156,7 +4553,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_parse_one(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":startpos"),
                     Vx.Core.vx_new_int(7),
                     Vx.Core.vx_new_string(":endpos"),
@@ -4164,7 +4562,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string(","),
                         Vx.Core.vx_new_string(":startpos"),
@@ -4174,7 +4573,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimcomma,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":pos"),
                             Vx.Core.vx_new_int(0)
                           )
@@ -4182,7 +4582,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":parent"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("{c d}>"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -4192,7 +4593,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_delim,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":delimlist"),
                                 Vx.Data.Textblock.c_delimlisttest2
                               )
@@ -4200,7 +4602,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":close"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimclose,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":starttext"),
                                 Vx.Core.vx_new_string(">")
                               )
@@ -4208,7 +4611,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":parent"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -4218,7 +4622,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":delim"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Textblock.c_delimbracketangle,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":delimlist"),
                                     Vx.Data.Textblock.c_delimlisttest1
                                   )
@@ -4226,7 +4631,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":parent"),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -4238,10 +4644,12 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":children"),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblocklist,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string("{a,b}"),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -4251,7 +4659,8 @@ public class TextblockTest {
                                         Vx.Core.vx_new_string(":delim"),
                                         Vx.Core.f_copy(
                                           Vx.Data.Textblock.c_delimbracketcurly,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":pos"),
                                             Vx.Core.vx_new_int(0)
                                           )
@@ -4259,10 +4668,12 @@ public class TextblockTest {
                                         Vx.Core.vx_new_string(":children"),
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblocklist,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.f_new(
                                               Vx.Data.Textblock.t_textblock,
-                                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                                              Vx.Core.vx_new(
+                                                Vx.Core.t_anylist,
                                                 Vx.Core.vx_new_string(":text"),
                                                 Vx.Core.vx_new_string("a"),
                                                 Vx.Core.vx_new_string(":startpos"),
@@ -4273,7 +4684,8 @@ public class TextblockTest {
                                             ),
                                             Vx.Core.f_new(
                                               Vx.Data.Textblock.t_textblock,
-                                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                                              Vx.Core.vx_new(
+                                                Vx.Core.t_anylist,
                                                 Vx.Core.vx_new_string(":text"),
                                                 Vx.Core.vx_new_string(","),
                                                 Vx.Core.vx_new_string(":startpos"),
@@ -4283,7 +4695,8 @@ public class TextblockTest {
                                                 Vx.Core.vx_new_string(":delim"),
                                                 Vx.Core.f_copy(
                                                   Vx.Data.Textblock.c_delimcomma,
-                                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                                  Vx.Core.vx_new(
+                                                    Vx.Core.t_anylist,
                                                     Vx.Core.vx_new_string(":pos"),
                                                     Vx.Core.vx_new_int(0)
                                                   )
@@ -4292,7 +4705,8 @@ public class TextblockTest {
                                             ),
                                             Vx.Core.f_new(
                                               Vx.Data.Textblock.t_textblock,
-                                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                                              Vx.Core.vx_new(
+                                                Vx.Core.t_anylist,
                                                 Vx.Core.vx_new_string(":text"),
                                                 Vx.Core.vx_new_string("b"),
                                                 Vx.Core.vx_new_string(":startpos"),
@@ -4326,7 +4740,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("{c d}>"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -4336,7 +4751,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":delim"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_delim,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":delimlist"),
                       Vx.Data.Textblock.c_delimlisttest2
                     )
@@ -4344,7 +4760,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":close"),
                   Vx.Core.f_copy(
                     Vx.Data.Textblock.c_delimclose,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":starttext"),
                       Vx.Core.vx_new_string(">")
                     )
@@ -4352,7 +4769,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string("<{a,b},{c d}>"),
                       Vx.Core.vx_new_string(":startpos"),
@@ -4362,7 +4780,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":delim"),
                       Vx.Core.f_copy(
                         Vx.Data.Textblock.c_delimbracketangle,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":delimlist"),
                           Vx.Data.Textblock.c_delimlisttest1
                         )
@@ -4370,7 +4789,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":parent"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("<{a,b},{c d}>"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -4382,10 +4802,12 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":children"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblocklist,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string("{a,b}"),
                               Vx.Core.vx_new_string(":startpos"),
@@ -4395,7 +4817,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":delim"),
                               Vx.Core.f_copy(
                                 Vx.Data.Textblock.c_delimbracketcurly,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":pos"),
                                   Vx.Core.vx_new_int(0)
                                 )
@@ -4403,10 +4826,12 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":children"),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblocklist,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string("a"),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -4417,7 +4842,8 @@ public class TextblockTest {
                                   ),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string(","),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -4427,7 +4853,8 @@ public class TextblockTest {
                                       Vx.Core.vx_new_string(":delim"),
                                       Vx.Core.f_copy(
                                         Vx.Data.Textblock.c_delimcomma,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":pos"),
                                           Vx.Core.vx_new_int(0)
                                         )
@@ -4436,7 +4863,8 @@ public class TextblockTest {
                                   ),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string("b"),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -4451,7 +4879,8 @@ public class TextblockTest {
                           ),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string(","),
                               Vx.Core.vx_new_string(":startpos"),
@@ -4461,7 +4890,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":delim"),
                               Vx.Core.f_copy(
                                 Vx.Data.Textblock.c_delimcomma,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":pos"),
                                   Vx.Core.vx_new_int(0)
                                 )
@@ -4477,7 +4907,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_parse_one(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string(","),
                     Vx.Core.vx_new_string(":startpos"),
@@ -4487,7 +4918,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_copy(
                       Vx.Data.Textblock.c_delimcomma,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":pos"),
                         Vx.Core.vx_new_int(0)
                       )
@@ -4495,7 +4927,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("{c d}>"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -4505,7 +4938,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_delim,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":delimlist"),
                             Vx.Data.Textblock.c_delimlisttest2
                           )
@@ -4513,7 +4947,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":close"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimclose,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":starttext"),
                             Vx.Core.vx_new_string(">")
                           )
@@ -4521,7 +4956,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":parent"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("<{a,b},{c d}>"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -4531,7 +4967,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimbracketangle,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":delimlist"),
                                 Vx.Data.Textblock.c_delimlisttest1
                               )
@@ -4539,7 +4976,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":parent"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -4551,10 +4989,12 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":children"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblocklist,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("{a,b}"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -4564,7 +5004,8 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Textblock.c_delimbracketcurly,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":pos"),
                                         Vx.Core.vx_new_int(0)
                                       )
@@ -4572,10 +5013,12 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":children"),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblocklist,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string("a"),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -4586,7 +5029,8 @@ public class TextblockTest {
                                         ),
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string(","),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -4596,7 +5040,8 @@ public class TextblockTest {
                                             Vx.Core.vx_new_string(":delim"),
                                             Vx.Core.f_copy(
                                               Vx.Data.Textblock.c_delimcomma,
-                                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                                              Vx.Core.vx_new(
+                                                Vx.Core.t_anylist,
                                                 Vx.Core.vx_new_string(":pos"),
                                                 Vx.Core.vx_new_int(0)
                                               )
@@ -4605,7 +5050,8 @@ public class TextblockTest {
                                         ),
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string("b"),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -4637,7 +5083,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("c d}>"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -4647,7 +5094,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":delim"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_delim,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":delimlist"),
                       Vx.Data.Textblock.c_delimlisttest3
                     )
@@ -4655,7 +5103,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":close"),
                   Vx.Core.f_copy(
                     Vx.Data.Textblock.c_delimclose,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":starttext"),
                       Vx.Core.vx_new_string("}")
                     )
@@ -4663,7 +5112,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string("{c d}>"),
                       Vx.Core.vx_new_string(":startpos"),
@@ -4673,7 +5123,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":delim"),
                       Vx.Core.f_copy(
                         Vx.Data.Textblock.c_delimbracketcurly,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":delimlist"),
                           Vx.Data.Textblock.c_delimlisttest2
                         )
@@ -4681,7 +5132,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":close"),
                       Vx.Core.f_copy(
                         Vx.Data.Textblock.c_delimclose,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":starttext"),
                           Vx.Core.vx_new_string(">")
                         )
@@ -4689,7 +5141,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":parent"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("<{a,b},{c d}>"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -4699,7 +5152,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimbracketangle,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":delimlist"),
                               Vx.Data.Textblock.c_delimlisttest1
                             )
@@ -4707,7 +5161,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":parent"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string("<{a,b},{c d}>"),
                               Vx.Core.vx_new_string(":startpos"),
@@ -4719,10 +5174,12 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":children"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblocklist,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("{a,b}"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -4732,7 +5189,8 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimbracketcurly,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -4740,10 +5198,12 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":children"),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblocklist,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string("a"),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -4754,7 +5214,8 @@ public class TextblockTest {
                                       ),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string(","),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -4764,7 +5225,8 @@ public class TextblockTest {
                                           Vx.Core.vx_new_string(":delim"),
                                           Vx.Core.f_copy(
                                             Vx.Data.Textblock.c_delimcomma,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":pos"),
                                               Vx.Core.vx_new_int(0)
                                             )
@@ -4773,7 +5235,8 @@ public class TextblockTest {
                                       ),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string("b"),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -4788,7 +5251,8 @@ public class TextblockTest {
                               ),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string(","),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -4798,7 +5262,8 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimcomma,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -4816,7 +5281,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_parse_one(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("{c d}>"),
                     Vx.Core.vx_new_string(":startpos"),
@@ -4826,7 +5292,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_delim,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":delimlist"),
                         Vx.Data.Textblock.c_delimlisttest2
                       )
@@ -4834,7 +5301,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":close"),
                     Vx.Core.f_copy(
                       Vx.Data.Textblock.c_delimclose,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":starttext"),
                         Vx.Core.vx_new_string(">")
                       )
@@ -4842,7 +5310,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("<{a,b},{c d}>"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -4852,7 +5321,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimbracketangle,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":delimlist"),
                             Vx.Data.Textblock.c_delimlisttest1
                           )
@@ -4860,7 +5330,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":parent"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("<{a,b},{c d}>"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -4872,10 +5343,12 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":children"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblocklist,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("{a,b}"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -4885,7 +5358,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":delim"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Textblock.c_delimbracketcurly,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":pos"),
                                     Vx.Core.vx_new_int(0)
                                   )
@@ -4893,10 +5367,12 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":children"),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblocklist,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string("a"),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -4907,7 +5383,8 @@ public class TextblockTest {
                                     ),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string(","),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -4917,7 +5394,8 @@ public class TextblockTest {
                                         Vx.Core.vx_new_string(":delim"),
                                         Vx.Core.f_copy(
                                           Vx.Data.Textblock.c_delimcomma,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":pos"),
                                             Vx.Core.vx_new_int(0)
                                           )
@@ -4926,7 +5404,8 @@ public class TextblockTest {
                                     ),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string("b"),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -4941,7 +5420,8 @@ public class TextblockTest {
                             ),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string(","),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -4951,7 +5431,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":delim"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Textblock.c_delimcomma,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":pos"),
                                     Vx.Core.vx_new_int(0)
                                   )
@@ -4975,7 +5456,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("c"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -4985,7 +5467,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string(" "),
                       Vx.Core.vx_new_string(":startpos"),
@@ -4995,7 +5478,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":delim"),
                       Vx.Core.f_copy(
                         Vx.Data.Textblock.c_delimwhitespace,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":pos"),
                           Vx.Core.vx_new_int(0)
                         )
@@ -5003,7 +5487,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":parent"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("d}>"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -5013,7 +5498,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_delim,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":delimlist"),
                               Vx.Data.Textblock.c_delimlisttest3
                             )
@@ -5021,7 +5507,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":close"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimclose,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":starttext"),
                               Vx.Core.vx_new_string("}")
                             )
@@ -5029,7 +5516,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":parent"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string("{c d}>"),
                               Vx.Core.vx_new_string(":startpos"),
@@ -5039,7 +5527,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":delim"),
                               Vx.Core.f_copy(
                                 Vx.Data.Textblock.c_delimbracketcurly,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":delimlist"),
                                   Vx.Data.Textblock.c_delimlisttest2
                                 )
@@ -5047,7 +5536,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":close"),
                               Vx.Core.f_copy(
                                 Vx.Data.Textblock.c_delimclose,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":starttext"),
                                   Vx.Core.vx_new_string(">")
                                 )
@@ -5055,7 +5545,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":parent"),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -5065,7 +5556,8 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimbracketangle,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":delimlist"),
                                       Vx.Data.Textblock.c_delimlisttest1
                                     )
@@ -5073,7 +5565,8 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":parent"),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -5085,10 +5578,12 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":children"),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblocklist,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string("{a,b}"),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -5098,7 +5593,8 @@ public class TextblockTest {
                                           Vx.Core.vx_new_string(":delim"),
                                           Vx.Core.f_copy(
                                             Vx.Data.Textblock.c_delimbracketcurly,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":pos"),
                                               Vx.Core.vx_new_int(0)
                                             )
@@ -5106,10 +5602,12 @@ public class TextblockTest {
                                           Vx.Core.vx_new_string(":children"),
                                           Vx.Core.f_new(
                                             Vx.Data.Textblock.t_textblocklist,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.f_new(
                                                 Vx.Data.Textblock.t_textblock,
-                                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                                Vx.Core.vx_new(
+                                                  Vx.Core.t_anylist,
                                                   Vx.Core.vx_new_string(":text"),
                                                   Vx.Core.vx_new_string("a"),
                                                   Vx.Core.vx_new_string(":startpos"),
@@ -5120,7 +5618,8 @@ public class TextblockTest {
                                               ),
                                               Vx.Core.f_new(
                                                 Vx.Data.Textblock.t_textblock,
-                                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                                Vx.Core.vx_new(
+                                                  Vx.Core.t_anylist,
                                                   Vx.Core.vx_new_string(":text"),
                                                   Vx.Core.vx_new_string(","),
                                                   Vx.Core.vx_new_string(":startpos"),
@@ -5130,7 +5629,8 @@ public class TextblockTest {
                                                   Vx.Core.vx_new_string(":delim"),
                                                   Vx.Core.f_copy(
                                                     Vx.Data.Textblock.c_delimcomma,
-                                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                                    Vx.Core.vx_new(
+                                                      Vx.Core.t_anylist,
                                                       Vx.Core.vx_new_string(":pos"),
                                                       Vx.Core.vx_new_int(0)
                                                     )
@@ -5139,7 +5639,8 @@ public class TextblockTest {
                                               ),
                                               Vx.Core.f_new(
                                                 Vx.Data.Textblock.t_textblock,
-                                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                                Vx.Core.vx_new(
+                                                  Vx.Core.t_anylist,
                                                   Vx.Core.vx_new_string(":text"),
                                                   Vx.Core.vx_new_string("b"),
                                                   Vx.Core.vx_new_string(":startpos"),
@@ -5154,7 +5655,8 @@ public class TextblockTest {
                                       ),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string(","),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -5164,7 +5666,8 @@ public class TextblockTest {
                                           Vx.Core.vx_new_string(":delim"),
                                           Vx.Core.f_copy(
                                             Vx.Data.Textblock.c_delimcomma,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":pos"),
                                               Vx.Core.vx_new_int(0)
                                             )
@@ -5186,7 +5689,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_parse_one(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("c d}>"),
                     Vx.Core.vx_new_string(":startpos"),
@@ -5196,7 +5700,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_delim,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":delimlist"),
                         Vx.Data.Textblock.c_delimlisttest3
                       )
@@ -5204,7 +5709,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":close"),
                     Vx.Core.f_copy(
                       Vx.Data.Textblock.c_delimclose,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":starttext"),
                         Vx.Core.vx_new_string("}")
                       )
@@ -5212,7 +5718,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("{c d}>"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -5222,7 +5729,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimbracketcurly,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":delimlist"),
                             Vx.Data.Textblock.c_delimlisttest2
                           )
@@ -5230,7 +5738,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":close"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimclose,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":starttext"),
                             Vx.Core.vx_new_string(">")
                           )
@@ -5238,7 +5747,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":parent"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("<{a,b},{c d}>"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -5248,7 +5758,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimbracketangle,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":delimlist"),
                                 Vx.Data.Textblock.c_delimlisttest1
                               )
@@ -5256,7 +5767,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":parent"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -5268,10 +5780,12 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":children"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblocklist,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("{a,b}"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -5281,7 +5795,8 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Textblock.c_delimbracketcurly,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":pos"),
                                         Vx.Core.vx_new_int(0)
                                       )
@@ -5289,10 +5804,12 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":children"),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblocklist,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string("a"),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -5303,7 +5820,8 @@ public class TextblockTest {
                                         ),
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string(","),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -5313,7 +5831,8 @@ public class TextblockTest {
                                             Vx.Core.vx_new_string(":delim"),
                                             Vx.Core.f_copy(
                                               Vx.Data.Textblock.c_delimcomma,
-                                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                                              Vx.Core.vx_new(
+                                                Vx.Core.t_anylist,
                                                 Vx.Core.vx_new_string(":pos"),
                                                 Vx.Core.vx_new_int(0)
                                               )
@@ -5322,7 +5841,8 @@ public class TextblockTest {
                                         ),
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string("b"),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -5337,7 +5857,8 @@ public class TextblockTest {
                                 ),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string(","),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -5347,7 +5868,8 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Textblock.c_delimcomma,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":pos"),
                                         Vx.Core.vx_new_int(0)
                                       )
@@ -5373,7 +5895,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string(" "),
                   Vx.Core.vx_new_string(":startpos"),
@@ -5383,7 +5906,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":delim"),
                   Vx.Core.f_copy(
                     Vx.Data.Textblock.c_delimwhitespace,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":pos"),
                       Vx.Core.vx_new_int(0)
                     )
@@ -5391,7 +5915,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string("d}>"),
                       Vx.Core.vx_new_string(":startpos"),
@@ -5401,7 +5926,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":delim"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_delim,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":delimlist"),
                           Vx.Data.Textblock.c_delimlisttest3
                         )
@@ -5409,7 +5935,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":close"),
                       Vx.Core.f_copy(
                         Vx.Data.Textblock.c_delimclose,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":starttext"),
                           Vx.Core.vx_new_string("}")
                         )
@@ -5417,7 +5944,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":parent"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("{c d}>"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -5427,7 +5955,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimbracketcurly,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":delimlist"),
                               Vx.Data.Textblock.c_delimlisttest2
                             )
@@ -5435,7 +5964,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":close"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimclose,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":starttext"),
                               Vx.Core.vx_new_string(">")
                             )
@@ -5443,7 +5973,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":parent"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string("<{a,b},{c d}>"),
                               Vx.Core.vx_new_string(":startpos"),
@@ -5453,7 +5984,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":delim"),
                               Vx.Core.f_copy(
                                 Vx.Data.Textblock.c_delimbracketangle,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":delimlist"),
                                   Vx.Data.Textblock.c_delimlisttest1
                                 )
@@ -5461,7 +5993,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":parent"),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -5473,10 +6006,12 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":children"),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblocklist,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string("{a,b}"),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -5486,7 +6021,8 @@ public class TextblockTest {
                                       Vx.Core.vx_new_string(":delim"),
                                       Vx.Core.f_copy(
                                         Vx.Data.Textblock.c_delimbracketcurly,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":pos"),
                                           Vx.Core.vx_new_int(0)
                                         )
@@ -5494,10 +6030,12 @@ public class TextblockTest {
                                       Vx.Core.vx_new_string(":children"),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblocklist,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.f_new(
                                             Vx.Data.Textblock.t_textblock,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":text"),
                                               Vx.Core.vx_new_string("a"),
                                               Vx.Core.vx_new_string(":startpos"),
@@ -5508,7 +6046,8 @@ public class TextblockTest {
                                           ),
                                           Vx.Core.f_new(
                                             Vx.Data.Textblock.t_textblock,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":text"),
                                               Vx.Core.vx_new_string(","),
                                               Vx.Core.vx_new_string(":startpos"),
@@ -5518,7 +6057,8 @@ public class TextblockTest {
                                               Vx.Core.vx_new_string(":delim"),
                                               Vx.Core.f_copy(
                                                 Vx.Data.Textblock.c_delimcomma,
-                                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                                Vx.Core.vx_new(
+                                                  Vx.Core.t_anylist,
                                                   Vx.Core.vx_new_string(":pos"),
                                                   Vx.Core.vx_new_int(0)
                                                 )
@@ -5527,7 +6067,8 @@ public class TextblockTest {
                                           ),
                                           Vx.Core.f_new(
                                             Vx.Data.Textblock.t_textblock,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":text"),
                                               Vx.Core.vx_new_string("b"),
                                               Vx.Core.vx_new_string(":startpos"),
@@ -5542,7 +6083,8 @@ public class TextblockTest {
                                   ),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string(","),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -5552,7 +6094,8 @@ public class TextblockTest {
                                       Vx.Core.vx_new_string(":delim"),
                                       Vx.Core.f_copy(
                                         Vx.Data.Textblock.c_delimcomma,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":pos"),
                                           Vx.Core.vx_new_int(0)
                                         )
@@ -5566,10 +6109,12 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":children"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblocklist,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("c"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -5589,7 +6134,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_parse_one(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("c"),
                     Vx.Core.vx_new_string(":startpos"),
@@ -5599,7 +6145,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string(" "),
                         Vx.Core.vx_new_string(":startpos"),
@@ -5609,7 +6156,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimwhitespace,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":pos"),
                             Vx.Core.vx_new_int(0)
                           )
@@ -5617,7 +6165,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":parent"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("d}>"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -5627,7 +6176,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_delim,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":delimlist"),
                                 Vx.Data.Textblock.c_delimlisttest3
                               )
@@ -5635,7 +6185,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":close"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimclose,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":starttext"),
                                 Vx.Core.vx_new_string("}")
                               )
@@ -5643,7 +6194,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":parent"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("{c d}>"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -5653,7 +6205,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":delim"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Textblock.c_delimbracketcurly,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":delimlist"),
                                     Vx.Data.Textblock.c_delimlisttest2
                                   )
@@ -5661,7 +6214,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":close"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Textblock.c_delimclose,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":starttext"),
                                     Vx.Core.vx_new_string(">")
                                   )
@@ -5669,7 +6223,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":parent"),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -5679,7 +6234,8 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Textblock.c_delimbracketangle,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":delimlist"),
                                         Vx.Data.Textblock.c_delimlisttest1
                                       )
@@ -5687,7 +6243,8 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":parent"),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -5699,10 +6256,12 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":children"),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblocklist,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string("{a,b}"),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -5712,7 +6271,8 @@ public class TextblockTest {
                                             Vx.Core.vx_new_string(":delim"),
                                             Vx.Core.f_copy(
                                               Vx.Data.Textblock.c_delimbracketcurly,
-                                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                                              Vx.Core.vx_new(
+                                                Vx.Core.t_anylist,
                                                 Vx.Core.vx_new_string(":pos"),
                                                 Vx.Core.vx_new_int(0)
                                               )
@@ -5720,10 +6280,12 @@ public class TextblockTest {
                                             Vx.Core.vx_new_string(":children"),
                                             Vx.Core.f_new(
                                               Vx.Data.Textblock.t_textblocklist,
-                                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                                              Vx.Core.vx_new(
+                                                Vx.Core.t_anylist,
                                                 Vx.Core.f_new(
                                                   Vx.Data.Textblock.t_textblock,
-                                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                                  Vx.Core.vx_new(
+                                                    Vx.Core.t_anylist,
                                                     Vx.Core.vx_new_string(":text"),
                                                     Vx.Core.vx_new_string("a"),
                                                     Vx.Core.vx_new_string(":startpos"),
@@ -5734,7 +6296,8 @@ public class TextblockTest {
                                                 ),
                                                 Vx.Core.f_new(
                                                   Vx.Data.Textblock.t_textblock,
-                                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                                  Vx.Core.vx_new(
+                                                    Vx.Core.t_anylist,
                                                     Vx.Core.vx_new_string(":text"),
                                                     Vx.Core.vx_new_string(","),
                                                     Vx.Core.vx_new_string(":startpos"),
@@ -5744,7 +6307,8 @@ public class TextblockTest {
                                                     Vx.Core.vx_new_string(":delim"),
                                                     Vx.Core.f_copy(
                                                       Vx.Data.Textblock.c_delimcomma,
-                                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                                      Vx.Core.vx_new(
+                                                        Vx.Core.t_anylist,
                                                         Vx.Core.vx_new_string(":pos"),
                                                         Vx.Core.vx_new_int(0)
                                                       )
@@ -5753,7 +6317,8 @@ public class TextblockTest {
                                                 ),
                                                 Vx.Core.f_new(
                                                   Vx.Data.Textblock.t_textblock,
-                                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                                  Vx.Core.vx_new(
+                                                    Vx.Core.t_anylist,
                                                     Vx.Core.vx_new_string(":text"),
                                                     Vx.Core.vx_new_string("b"),
                                                     Vx.Core.vx_new_string(":startpos"),
@@ -5768,7 +6333,8 @@ public class TextblockTest {
                                         ),
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string(","),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -5778,7 +6344,8 @@ public class TextblockTest {
                                             Vx.Core.vx_new_string(":delim"),
                                             Vx.Core.f_copy(
                                               Vx.Data.Textblock.c_delimcomma,
-                                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                                              Vx.Core.vx_new(
+                                                Vx.Core.t_anylist,
                                                 Vx.Core.vx_new_string(":pos"),
                                                 Vx.Core.vx_new_int(0)
                                               )
@@ -5808,7 +6375,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("d}>"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -5818,7 +6386,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":delim"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_delim,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":delimlist"),
                       Vx.Data.Textblock.c_delimlisttest3
                     )
@@ -5826,7 +6395,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":close"),
                   Vx.Core.f_copy(
                     Vx.Data.Textblock.c_delimclose,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":starttext"),
                       Vx.Core.vx_new_string("}")
                     )
@@ -5834,7 +6404,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string("{c d}>"),
                       Vx.Core.vx_new_string(":startpos"),
@@ -5844,7 +6415,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":delim"),
                       Vx.Core.f_copy(
                         Vx.Data.Textblock.c_delimbracketcurly,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":delimlist"),
                           Vx.Data.Textblock.c_delimlisttest2
                         )
@@ -5852,7 +6424,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":close"),
                       Vx.Core.f_copy(
                         Vx.Data.Textblock.c_delimclose,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":starttext"),
                           Vx.Core.vx_new_string(">")
                         )
@@ -5860,7 +6433,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":parent"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("<{a,b},{c d}>"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -5870,7 +6444,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_delim,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":name"),
                               Vx.Core.vx_new_string("delimbracketangle"),
                               Vx.Core.vx_new_string(":starttext"),
@@ -5884,7 +6459,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":parent"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string("<{a,b},{c d}>"),
                               Vx.Core.vx_new_string(":startpos"),
@@ -5896,10 +6472,12 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":children"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblocklist,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("{a,b}"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -5909,7 +6487,8 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimbracketcurly,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -5917,10 +6496,12 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":children"),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblocklist,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string("a"),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -5931,7 +6512,8 @@ public class TextblockTest {
                                       ),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string(","),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -5941,7 +6523,8 @@ public class TextblockTest {
                                           Vx.Core.vx_new_string(":delim"),
                                           Vx.Core.f_copy(
                                             Vx.Data.Textblock.c_delimcomma,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":pos"),
                                               Vx.Core.vx_new_int(0)
                                             )
@@ -5950,7 +6533,8 @@ public class TextblockTest {
                                       ),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string("b"),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -5965,7 +6549,8 @@ public class TextblockTest {
                               ),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string(","),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -5975,7 +6560,8 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimcomma,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -5989,10 +6575,12 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":children"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblocklist,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string("c"),
                               Vx.Core.vx_new_string(":startpos"),
@@ -6003,7 +6591,8 @@ public class TextblockTest {
                           ),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string(" "),
                               Vx.Core.vx_new_string(":startpos"),
@@ -6013,7 +6602,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":delim"),
                               Vx.Core.f_copy(
                                 Vx.Data.Textblock.c_delimwhitespace,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":pos"),
                                   Vx.Core.vx_new_int(0)
                                 )
@@ -6029,7 +6619,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_parse_one(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string(" "),
                     Vx.Core.vx_new_string(":startpos"),
@@ -6039,7 +6630,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_copy(
                       Vx.Data.Textblock.c_delimwhitespace,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":pos"),
                         Vx.Core.vx_new_int(0)
                       )
@@ -6047,7 +6639,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("d}>"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -6057,7 +6650,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_delim,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":delimlist"),
                             Vx.Data.Textblock.c_delimlisttest3
                           )
@@ -6065,7 +6659,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":close"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimclose,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":starttext"),
                             Vx.Core.vx_new_string("}")
                           )
@@ -6073,7 +6668,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":parent"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("{c d}>"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -6083,7 +6679,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimbracketcurly,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":delimlist"),
                                 Vx.Data.Textblock.c_delimlisttest2
                               )
@@ -6091,7 +6688,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":close"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimclose,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":starttext"),
                                 Vx.Core.vx_new_string(">")
                               )
@@ -6099,7 +6697,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":parent"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -6109,7 +6708,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":delim"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Textblock.c_delimbracketangle,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":delimlist"),
                                     Vx.Data.Textblock.c_delimlisttest1
                                   )
@@ -6117,7 +6717,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":parent"),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -6129,10 +6730,12 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":children"),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblocklist,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string("{a,b}"),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -6142,7 +6745,8 @@ public class TextblockTest {
                                         Vx.Core.vx_new_string(":delim"),
                                         Vx.Core.f_copy(
                                           Vx.Data.Textblock.c_delimbracketcurly,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":pos"),
                                             Vx.Core.vx_new_int(0)
                                           )
@@ -6150,10 +6754,12 @@ public class TextblockTest {
                                         Vx.Core.vx_new_string(":children"),
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblocklist,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.f_new(
                                               Vx.Data.Textblock.t_textblock,
-                                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                                              Vx.Core.vx_new(
+                                                Vx.Core.t_anylist,
                                                 Vx.Core.vx_new_string(":text"),
                                                 Vx.Core.vx_new_string("a"),
                                                 Vx.Core.vx_new_string(":startpos"),
@@ -6164,7 +6770,8 @@ public class TextblockTest {
                                             ),
                                             Vx.Core.f_new(
                                               Vx.Data.Textblock.t_textblock,
-                                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                                              Vx.Core.vx_new(
+                                                Vx.Core.t_anylist,
                                                 Vx.Core.vx_new_string(":text"),
                                                 Vx.Core.vx_new_string(","),
                                                 Vx.Core.vx_new_string(":startpos"),
@@ -6174,7 +6781,8 @@ public class TextblockTest {
                                                 Vx.Core.vx_new_string(":delim"),
                                                 Vx.Core.f_copy(
                                                   Vx.Data.Textblock.c_delimcomma,
-                                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                                  Vx.Core.vx_new(
+                                                    Vx.Core.t_anylist,
                                                     Vx.Core.vx_new_string(":pos"),
                                                     Vx.Core.vx_new_int(0)
                                                   )
@@ -6183,7 +6791,8 @@ public class TextblockTest {
                                             ),
                                             Vx.Core.f_new(
                                               Vx.Data.Textblock.t_textblock,
-                                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                                              Vx.Core.vx_new(
+                                                Vx.Core.t_anylist,
                                                 Vx.Core.vx_new_string(":text"),
                                                 Vx.Core.vx_new_string("b"),
                                                 Vx.Core.vx_new_string(":startpos"),
@@ -6198,7 +6807,8 @@ public class TextblockTest {
                                     ),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string(","),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -6208,7 +6818,8 @@ public class TextblockTest {
                                         Vx.Core.vx_new_string(":delim"),
                                         Vx.Core.f_copy(
                                           Vx.Data.Textblock.c_delimcomma,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":pos"),
                                             Vx.Core.vx_new_int(0)
                                           )
@@ -6222,10 +6833,12 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":children"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblocklist,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("c"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -6253,7 +6866,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("d"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -6263,7 +6877,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string(">"),
                       Vx.Core.vx_new_string(":startpos"),
@@ -6273,7 +6888,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":delim"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_delim,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":delimlist"),
                           Vx.Data.Textblock.c_delimlisttest2
                         )
@@ -6281,7 +6897,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":close"),
                       Vx.Core.f_copy(
                         Vx.Data.Textblock.c_delimclose,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":starttext"),
                           Vx.Core.vx_new_string(">")
                         )
@@ -6289,7 +6906,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":parent"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("{c d}"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -6299,7 +6917,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimbracketcurly,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":pos"),
                               Vx.Core.vx_new_int(0)
                             )
@@ -6309,7 +6928,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":parent"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string("<{a,b},{c d}>"),
                               Vx.Core.vx_new_string(":startpos"),
@@ -6319,7 +6939,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":delim"),
                               Vx.Core.f_copy(
                                 Vx.Data.Textblock.c_delimbracketangle,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":delimlist"),
                                   Vx.Data.Textblock.c_delimlisttest1
                                 )
@@ -6327,7 +6948,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":parent"),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -6339,10 +6961,12 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":children"),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblocklist,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string("{a,b}"),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -6352,7 +6976,8 @@ public class TextblockTest {
                                       Vx.Core.vx_new_string(":delim"),
                                       Vx.Core.f_copy(
                                         Vx.Data.Textblock.c_delimbracketcurly,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":pos"),
                                           Vx.Core.vx_new_int(0)
                                         )
@@ -6360,10 +6985,12 @@ public class TextblockTest {
                                       Vx.Core.vx_new_string(":children"),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblocklist,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.f_new(
                                             Vx.Data.Textblock.t_textblock,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":text"),
                                               Vx.Core.vx_new_string("a"),
                                               Vx.Core.vx_new_string(":startpos"),
@@ -6374,7 +7001,8 @@ public class TextblockTest {
                                           ),
                                           Vx.Core.f_new(
                                             Vx.Data.Textblock.t_textblock,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":text"),
                                               Vx.Core.vx_new_string(","),
                                               Vx.Core.vx_new_string(":startpos"),
@@ -6384,7 +7012,8 @@ public class TextblockTest {
                                               Vx.Core.vx_new_string(":delim"),
                                               Vx.Core.f_copy(
                                                 Vx.Data.Textblock.c_delimcomma,
-                                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                                Vx.Core.vx_new(
+                                                  Vx.Core.t_anylist,
                                                   Vx.Core.vx_new_string(":pos"),
                                                   Vx.Core.vx_new_int(0)
                                                 )
@@ -6393,7 +7022,8 @@ public class TextblockTest {
                                           ),
                                           Vx.Core.f_new(
                                             Vx.Data.Textblock.t_textblock,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":text"),
                                               Vx.Core.vx_new_string("b"),
                                               Vx.Core.vx_new_string(":startpos"),
@@ -6408,7 +7038,8 @@ public class TextblockTest {
                                   ),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string(","),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -6418,7 +7049,8 @@ public class TextblockTest {
                                       Vx.Core.vx_new_string(":delim"),
                                       Vx.Core.f_copy(
                                         Vx.Data.Textblock.c_delimcomma,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":pos"),
                                           Vx.Core.vx_new_int(0)
                                         )
@@ -6432,10 +7064,12 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":children"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblocklist,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("c"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -6446,7 +7080,8 @@ public class TextblockTest {
                               ),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string(" "),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -6456,7 +7091,8 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimwhitespace,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -6474,7 +7110,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_parse_one(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("d}>"),
                     Vx.Core.vx_new_string(":startpos"),
@@ -6484,7 +7121,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_delim,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":delimlist"),
                         Vx.Data.Textblock.c_delimlisttest3
                       )
@@ -6492,7 +7130,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":close"),
                     Vx.Core.f_copy(
                       Vx.Data.Textblock.c_delimclose,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":starttext"),
                         Vx.Core.vx_new_string("}")
                       )
@@ -6500,7 +7139,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("{c d}>"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -6510,7 +7150,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimbracketcurly,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":delimlist"),
                             Vx.Data.Textblock.c_delimlisttest2
                           )
@@ -6518,7 +7159,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":close"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimclose,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":starttext"),
                             Vx.Core.vx_new_string(">")
                           )
@@ -6526,7 +7168,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":parent"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("<{a,b},{c d}>"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -6536,7 +7179,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_delim,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":name"),
                                 Vx.Core.vx_new_string("delimbracketangle"),
                                 Vx.Core.vx_new_string(":starttext"),
@@ -6550,7 +7194,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":parent"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -6562,10 +7207,12 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":children"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblocklist,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("{a,b}"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -6575,7 +7222,8 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Textblock.c_delimbracketcurly,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":pos"),
                                         Vx.Core.vx_new_int(0)
                                       )
@@ -6583,10 +7231,12 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":children"),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblocklist,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string("a"),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -6597,7 +7247,8 @@ public class TextblockTest {
                                         ),
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string(","),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -6607,7 +7258,8 @@ public class TextblockTest {
                                             Vx.Core.vx_new_string(":delim"),
                                             Vx.Core.f_copy(
                                               Vx.Data.Textblock.c_delimcomma,
-                                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                                              Vx.Core.vx_new(
+                                                Vx.Core.t_anylist,
                                                 Vx.Core.vx_new_string(":pos"),
                                                 Vx.Core.vx_new_int(0)
                                               )
@@ -6616,7 +7268,8 @@ public class TextblockTest {
                                         ),
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string("b"),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -6631,7 +7284,8 @@ public class TextblockTest {
                                 ),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string(","),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -6641,7 +7295,8 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Textblock.c_delimcomma,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":pos"),
                                         Vx.Core.vx_new_int(0)
                                       )
@@ -6655,10 +7310,12 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":children"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblocklist,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("c"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -6669,7 +7326,8 @@ public class TextblockTest {
                             ),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string(" "),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -6679,7 +7337,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":delim"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Textblock.c_delimwhitespace,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":pos"),
                                     Vx.Core.vx_new_int(0)
                                   )
@@ -6703,7 +7362,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string(">"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -6713,7 +7373,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":delim"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_delim,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":delimlist"),
                       Vx.Data.Textblock.c_delimlisttest2
                     )
@@ -6721,7 +7382,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":close"),
                   Vx.Core.f_copy(
                     Vx.Data.Textblock.c_delimclose,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":starttext"),
                       Vx.Core.vx_new_string(">")
                     )
@@ -6729,7 +7391,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string("<{a,b},{c d}>"),
                       Vx.Core.vx_new_string(":startpos"),
@@ -6739,7 +7402,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":delim"),
                       Vx.Core.f_copy(
                         Vx.Data.Textblock.c_delimbracketangle,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":delimlist"),
                           Vx.Data.Textblock.c_delimlisttest1
                         )
@@ -6747,7 +7411,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":parent"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("<{a,b},{c d}>"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -6759,10 +7424,12 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":children"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblocklist,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string("{a,b}"),
                               Vx.Core.vx_new_string(":startpos"),
@@ -6772,7 +7439,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":delim"),
                               Vx.Core.f_copy(
                                 Vx.Data.Textblock.c_delimbracketcurly,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":pos"),
                                   Vx.Core.vx_new_int(0)
                                 )
@@ -6780,10 +7448,12 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":children"),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblocklist,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string("a"),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -6794,7 +7464,8 @@ public class TextblockTest {
                                   ),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string(","),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -6804,7 +7475,8 @@ public class TextblockTest {
                                       Vx.Core.vx_new_string(":delim"),
                                       Vx.Core.f_copy(
                                         Vx.Data.Textblock.c_delimcomma,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":pos"),
                                           Vx.Core.vx_new_int(0)
                                         )
@@ -6813,7 +7485,8 @@ public class TextblockTest {
                                   ),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string("b"),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -6828,7 +7501,8 @@ public class TextblockTest {
                           ),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string(","),
                               Vx.Core.vx_new_string(":startpos"),
@@ -6838,7 +7512,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":delim"),
                               Vx.Core.f_copy(
                                 Vx.Data.Textblock.c_delimcomma,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":pos"),
                                   Vx.Core.vx_new_int(0)
                                 )
@@ -6847,7 +7522,8 @@ public class TextblockTest {
                           ),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string("{c d}"),
                               Vx.Core.vx_new_string(":startpos"),
@@ -6857,7 +7533,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":delim"),
                               Vx.Core.f_copy(
                                 Vx.Data.Textblock.c_delimbracketcurly,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":pos"),
                                   Vx.Core.vx_new_int(0)
                                 )
@@ -6865,10 +7542,12 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":children"),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblocklist,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string("c"),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -6879,7 +7558,8 @@ public class TextblockTest {
                                   ),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string(" "),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -6889,7 +7569,8 @@ public class TextblockTest {
                                       Vx.Core.vx_new_string(":delim"),
                                       Vx.Core.f_copy(
                                         Vx.Data.Textblock.c_delimwhitespace,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":pos"),
                                           Vx.Core.vx_new_int(0)
                                         )
@@ -6898,7 +7579,8 @@ public class TextblockTest {
                                   ),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string("d"),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -6920,7 +7602,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_parse_one(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("d"),
                     Vx.Core.vx_new_string(":startpos"),
@@ -6930,7 +7613,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string(">"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -6940,7 +7624,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_delim,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":delimlist"),
                             Vx.Data.Textblock.c_delimlisttest2
                           )
@@ -6948,7 +7633,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":close"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimclose,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":starttext"),
                             Vx.Core.vx_new_string(">")
                           )
@@ -6956,7 +7642,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":parent"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("{c d}"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -6966,7 +7653,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimbracketcurly,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -6976,7 +7664,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":parent"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -6986,7 +7675,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":delim"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Textblock.c_delimbracketangle,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":delimlist"),
                                     Vx.Data.Textblock.c_delimlisttest1
                                   )
@@ -6994,7 +7684,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":parent"),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -7006,10 +7697,12 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":children"),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblocklist,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string("{a,b}"),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -7019,7 +7712,8 @@ public class TextblockTest {
                                         Vx.Core.vx_new_string(":delim"),
                                         Vx.Core.f_copy(
                                           Vx.Data.Textblock.c_delimbracketcurly,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":pos"),
                                             Vx.Core.vx_new_int(0)
                                           )
@@ -7027,10 +7721,12 @@ public class TextblockTest {
                                         Vx.Core.vx_new_string(":children"),
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblocklist,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.f_new(
                                               Vx.Data.Textblock.t_textblock,
-                                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                                              Vx.Core.vx_new(
+                                                Vx.Core.t_anylist,
                                                 Vx.Core.vx_new_string(":text"),
                                                 Vx.Core.vx_new_string("a"),
                                                 Vx.Core.vx_new_string(":startpos"),
@@ -7041,7 +7737,8 @@ public class TextblockTest {
                                             ),
                                             Vx.Core.f_new(
                                               Vx.Data.Textblock.t_textblock,
-                                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                                              Vx.Core.vx_new(
+                                                Vx.Core.t_anylist,
                                                 Vx.Core.vx_new_string(":text"),
                                                 Vx.Core.vx_new_string(","),
                                                 Vx.Core.vx_new_string(":startpos"),
@@ -7051,7 +7748,8 @@ public class TextblockTest {
                                                 Vx.Core.vx_new_string(":delim"),
                                                 Vx.Core.f_copy(
                                                   Vx.Data.Textblock.c_delimcomma,
-                                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                                  Vx.Core.vx_new(
+                                                    Vx.Core.t_anylist,
                                                     Vx.Core.vx_new_string(":pos"),
                                                     Vx.Core.vx_new_int(0)
                                                   )
@@ -7060,7 +7758,8 @@ public class TextblockTest {
                                             ),
                                             Vx.Core.f_new(
                                               Vx.Data.Textblock.t_textblock,
-                                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                                              Vx.Core.vx_new(
+                                                Vx.Core.t_anylist,
                                                 Vx.Core.vx_new_string(":text"),
                                                 Vx.Core.vx_new_string("b"),
                                                 Vx.Core.vx_new_string(":startpos"),
@@ -7075,7 +7774,8 @@ public class TextblockTest {
                                     ),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string(","),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -7085,7 +7785,8 @@ public class TextblockTest {
                                         Vx.Core.vx_new_string(":delim"),
                                         Vx.Core.f_copy(
                                           Vx.Data.Textblock.c_delimcomma,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":pos"),
                                             Vx.Core.vx_new_int(0)
                                           )
@@ -7099,10 +7800,12 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":children"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblocklist,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("c"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -7113,7 +7816,8 @@ public class TextblockTest {
                                 ),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string(" "),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -7123,7 +7827,8 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Textblock.c_delimwhitespace,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":pos"),
                                         Vx.Core.vx_new_int(0)
                                       )
@@ -7149,7 +7854,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":startpos"),
                   Vx.Core.vx_new_int(13),
                   Vx.Core.vx_new_string(":endpos"),
@@ -7157,7 +7863,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":startpos"),
                       Vx.Core.vx_new_int(14),
                       Vx.Core.vx_new_string(":endpos"),
@@ -7165,7 +7872,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":delim"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_delim,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":delimlist"),
                           Vx.Data.Textblock.c_delimlisttest1
                         )
@@ -7173,7 +7881,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":parent"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("<{a,b},{c d}>"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -7183,7 +7892,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimbracketangle,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":pos"),
                               Vx.Core.vx_new_int(0)
                             )
@@ -7193,7 +7903,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":parent"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string("<{a,b},{c d}>"),
                               Vx.Core.vx_new_string(":startpos"),
@@ -7205,10 +7916,12 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":children"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblocklist,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("{a,b}"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -7218,7 +7931,8 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimbracketcurly,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -7226,10 +7940,12 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":children"),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblocklist,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string("a"),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -7240,7 +7956,8 @@ public class TextblockTest {
                                       ),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string(","),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -7250,7 +7967,8 @@ public class TextblockTest {
                                           Vx.Core.vx_new_string(":delim"),
                                           Vx.Core.f_copy(
                                             Vx.Data.Textblock.c_delimcomma,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":pos"),
                                               Vx.Core.vx_new_int(0)
                                             )
@@ -7259,7 +7977,8 @@ public class TextblockTest {
                                       ),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string("b"),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -7274,7 +7993,8 @@ public class TextblockTest {
                               ),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string(","),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -7284,7 +8004,8 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimcomma,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -7293,7 +8014,8 @@ public class TextblockTest {
                               ),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("{c d}"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -7303,7 +8025,8 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimbracketcurly,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -7311,10 +8034,12 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":children"),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblocklist,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string("c"),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -7325,7 +8050,8 @@ public class TextblockTest {
                                       ),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string(" "),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -7335,7 +8061,8 @@ public class TextblockTest {
                                           Vx.Core.vx_new_string(":delim"),
                                           Vx.Core.f_copy(
                                             Vx.Data.Textblock.c_delimwhitespace,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":pos"),
                                               Vx.Core.vx_new_int(0)
                                             )
@@ -7344,7 +8071,8 @@ public class TextblockTest {
                                       ),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string("d"),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -7368,7 +8096,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_parse_one(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string(">"),
                     Vx.Core.vx_new_string(":startpos"),
@@ -7378,7 +8107,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_delim,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":delimlist"),
                         Vx.Data.Textblock.c_delimlisttest2
                       )
@@ -7386,7 +8116,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":close"),
                     Vx.Core.f_copy(
                       Vx.Data.Textblock.c_delimclose,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":starttext"),
                         Vx.Core.vx_new_string(">")
                       )
@@ -7394,7 +8125,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("<{a,b},{c d}>"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -7404,7 +8136,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimbracketangle,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":delimlist"),
                             Vx.Data.Textblock.c_delimlisttest1
                           )
@@ -7412,7 +8145,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":parent"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("<{a,b},{c d}>"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -7424,10 +8158,12 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":children"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblocklist,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("{a,b}"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -7437,7 +8173,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":delim"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Textblock.c_delimbracketcurly,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":pos"),
                                     Vx.Core.vx_new_int(0)
                                   )
@@ -7445,10 +8182,12 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":children"),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblocklist,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string("a"),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -7459,7 +8198,8 @@ public class TextblockTest {
                                     ),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string(","),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -7469,7 +8209,8 @@ public class TextblockTest {
                                         Vx.Core.vx_new_string(":delim"),
                                         Vx.Core.f_copy(
                                           Vx.Data.Textblock.c_delimcomma,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":pos"),
                                             Vx.Core.vx_new_int(0)
                                           )
@@ -7478,7 +8219,8 @@ public class TextblockTest {
                                     ),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string("b"),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -7493,7 +8235,8 @@ public class TextblockTest {
                             ),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string(","),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -7503,7 +8246,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":delim"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Textblock.c_delimcomma,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":pos"),
                                     Vx.Core.vx_new_int(0)
                                   )
@@ -7512,7 +8256,8 @@ public class TextblockTest {
                             ),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("{c d}"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -7522,7 +8267,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":delim"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Textblock.c_delimbracketcurly,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":pos"),
                                     Vx.Core.vx_new_int(0)
                                   )
@@ -7530,10 +8276,12 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":children"),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblocklist,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string("c"),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -7544,7 +8292,8 @@ public class TextblockTest {
                                     ),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string(" "),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -7554,7 +8303,8 @@ public class TextblockTest {
                                         Vx.Core.vx_new_string(":delim"),
                                         Vx.Core.f_copy(
                                           Vx.Data.Textblock.c_delimwhitespace,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":pos"),
                                             Vx.Core.vx_new_int(0)
                                           )
@@ -7563,7 +8313,8 @@ public class TextblockTest {
                                     ),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string("d"),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -7593,7 +8344,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":startpos"),
                   Vx.Core.vx_new_int(14),
                   Vx.Core.vx_new_string(":endpos"),
@@ -7601,7 +8353,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":delim"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_delim,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":delimlist"),
                       Vx.Data.Textblock.c_delimlisttest1
                     )
@@ -7609,7 +8362,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string("<{a,b},{c d}>"),
                       Vx.Core.vx_new_string(":startpos"),
@@ -7619,10 +8373,12 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":children"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblocklist,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string("<{a,b},{c d}>"),
                               Vx.Core.vx_new_string(":startpos"),
@@ -7632,7 +8388,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":delim"),
                               Vx.Core.f_copy(
                                 Vx.Data.Textblock.c_delimbracketangle,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":pos"),
                                   Vx.Core.vx_new_int(0)
                                 )
@@ -7640,10 +8397,12 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":children"),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblocklist,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string("{a,b}"),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -7653,7 +8412,8 @@ public class TextblockTest {
                                       Vx.Core.vx_new_string(":delim"),
                                       Vx.Core.f_copy(
                                         Vx.Data.Textblock.c_delimbracketcurly,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":pos"),
                                           Vx.Core.vx_new_int(0)
                                         )
@@ -7661,10 +8421,12 @@ public class TextblockTest {
                                       Vx.Core.vx_new_string(":children"),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblocklist,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.f_new(
                                             Vx.Data.Textblock.t_textblock,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":text"),
                                               Vx.Core.vx_new_string("a"),
                                               Vx.Core.vx_new_string(":startpos"),
@@ -7675,7 +8437,8 @@ public class TextblockTest {
                                           ),
                                           Vx.Core.f_new(
                                             Vx.Data.Textblock.t_textblock,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":text"),
                                               Vx.Core.vx_new_string(","),
                                               Vx.Core.vx_new_string(":startpos"),
@@ -7685,7 +8448,8 @@ public class TextblockTest {
                                               Vx.Core.vx_new_string(":delim"),
                                               Vx.Core.f_copy(
                                                 Vx.Data.Textblock.c_delimcomma,
-                                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                                Vx.Core.vx_new(
+                                                  Vx.Core.t_anylist,
                                                   Vx.Core.vx_new_string(":pos"),
                                                   Vx.Core.vx_new_int(0)
                                                 )
@@ -7694,7 +8458,8 @@ public class TextblockTest {
                                           ),
                                           Vx.Core.f_new(
                                             Vx.Data.Textblock.t_textblock,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":text"),
                                               Vx.Core.vx_new_string("b"),
                                               Vx.Core.vx_new_string(":startpos"),
@@ -7709,7 +8474,8 @@ public class TextblockTest {
                                   ),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string(","),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -7719,7 +8485,8 @@ public class TextblockTest {
                                       Vx.Core.vx_new_string(":delim"),
                                       Vx.Core.f_copy(
                                         Vx.Data.Textblock.c_delimcomma,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":pos"),
                                           Vx.Core.vx_new_int(0)
                                         )
@@ -7728,7 +8495,8 @@ public class TextblockTest {
                                   ),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string("{c d}"),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -7738,7 +8506,8 @@ public class TextblockTest {
                                       Vx.Core.vx_new_string(":delim"),
                                       Vx.Core.f_copy(
                                         Vx.Data.Textblock.c_delimbracketcurly,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":pos"),
                                           Vx.Core.vx_new_int(0)
                                         )
@@ -7746,10 +8515,12 @@ public class TextblockTest {
                                       Vx.Core.vx_new_string(":children"),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblocklist,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.f_new(
                                             Vx.Data.Textblock.t_textblock,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":text"),
                                               Vx.Core.vx_new_string("c"),
                                               Vx.Core.vx_new_string(":startpos"),
@@ -7760,7 +8531,8 @@ public class TextblockTest {
                                           ),
                                           Vx.Core.f_new(
                                             Vx.Data.Textblock.t_textblock,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":text"),
                                               Vx.Core.vx_new_string(" "),
                                               Vx.Core.vx_new_string(":startpos"),
@@ -7770,7 +8542,8 @@ public class TextblockTest {
                                               Vx.Core.vx_new_string(":delim"),
                                               Vx.Core.f_copy(
                                                 Vx.Data.Textblock.c_delimwhitespace,
-                                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                                Vx.Core.vx_new(
+                                                  Vx.Core.t_anylist,
                                                   Vx.Core.vx_new_string(":pos"),
                                                   Vx.Core.vx_new_int(0)
                                                 )
@@ -7779,7 +8552,8 @@ public class TextblockTest {
                                           ),
                                           Vx.Core.f_new(
                                             Vx.Data.Textblock.t_textblock,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":text"),
                                               Vx.Core.vx_new_string("d"),
                                               Vx.Core.vx_new_string(":startpos"),
@@ -7805,7 +8579,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_parse_one(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":startpos"),
                     Vx.Core.vx_new_int(13),
                     Vx.Core.vx_new_string(":endpos"),
@@ -7813,7 +8588,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":startpos"),
                         Vx.Core.vx_new_int(14),
                         Vx.Core.vx_new_string(":endpos"),
@@ -7821,7 +8597,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_delim,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":delimlist"),
                             Vx.Data.Textblock.c_delimlisttest1
                           )
@@ -7829,7 +8606,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":parent"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("<{a,b},{c d}>"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -7839,7 +8617,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimbracketangle,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -7849,7 +8628,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":parent"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -7861,10 +8641,12 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":children"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblocklist,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("{a,b}"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -7874,7 +8656,8 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Textblock.c_delimbracketcurly,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":pos"),
                                         Vx.Core.vx_new_int(0)
                                       )
@@ -7882,10 +8665,12 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":children"),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblocklist,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string("a"),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -7896,7 +8681,8 @@ public class TextblockTest {
                                         ),
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string(","),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -7906,7 +8692,8 @@ public class TextblockTest {
                                             Vx.Core.vx_new_string(":delim"),
                                             Vx.Core.f_copy(
                                               Vx.Data.Textblock.c_delimcomma,
-                                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                                              Vx.Core.vx_new(
+                                                Vx.Core.t_anylist,
                                                 Vx.Core.vx_new_string(":pos"),
                                                 Vx.Core.vx_new_int(0)
                                               )
@@ -7915,7 +8702,8 @@ public class TextblockTest {
                                         ),
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string("b"),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -7930,7 +8718,8 @@ public class TextblockTest {
                                 ),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string(","),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -7940,7 +8729,8 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Textblock.c_delimcomma,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":pos"),
                                         Vx.Core.vx_new_int(0)
                                       )
@@ -7949,7 +8739,8 @@ public class TextblockTest {
                                 ),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("{c d}"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -7959,7 +8750,8 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Textblock.c_delimbracketcurly,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":pos"),
                                         Vx.Core.vx_new_int(0)
                                       )
@@ -7967,10 +8759,12 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":children"),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblocklist,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string("c"),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -7981,7 +8775,8 @@ public class TextblockTest {
                                         ),
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string(" "),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -7991,7 +8786,8 @@ public class TextblockTest {
                                             Vx.Core.vx_new_string(":delim"),
                                             Vx.Core.f_copy(
                                               Vx.Data.Textblock.c_delimwhitespace,
-                                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                                              Vx.Core.vx_new(
+                                                Vx.Core.t_anylist,
                                                 Vx.Core.vx_new_string(":pos"),
                                                 Vx.Core.vx_new_int(0)
                                               )
@@ -8000,7 +8796,8 @@ public class TextblockTest {
                                         ),
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string("d"),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -8032,7 +8829,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("<{a,b},{c d}>"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -8042,10 +8840,12 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":children"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblocklist,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("<{a,b},{c d}>"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -8055,7 +8855,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimbracketangle,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":pos"),
                               Vx.Core.vx_new_int(0)
                             )
@@ -8063,10 +8864,12 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":children"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblocklist,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("{a,b}"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -8076,7 +8879,8 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimbracketcurly,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -8084,10 +8888,12 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":children"),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblocklist,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string("a"),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -8098,7 +8904,8 @@ public class TextblockTest {
                                       ),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string(","),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -8108,7 +8915,8 @@ public class TextblockTest {
                                           Vx.Core.vx_new_string(":delim"),
                                           Vx.Core.f_copy(
                                             Vx.Data.Textblock.c_delimcomma,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":pos"),
                                               Vx.Core.vx_new_int(0)
                                             )
@@ -8117,7 +8925,8 @@ public class TextblockTest {
                                       ),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string("b"),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -8132,7 +8941,8 @@ public class TextblockTest {
                               ),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string(","),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -8142,7 +8952,8 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimcomma,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -8151,7 +8962,8 @@ public class TextblockTest {
                               ),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("{c d}"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -8161,7 +8973,8 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimbracketcurly,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -8169,10 +8982,12 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":children"),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblocklist,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string("c"),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -8183,7 +8998,8 @@ public class TextblockTest {
                                       ),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string(" "),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -8193,7 +9009,8 @@ public class TextblockTest {
                                           Vx.Core.vx_new_string(":delim"),
                                           Vx.Core.f_copy(
                                             Vx.Data.Textblock.c_delimwhitespace,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":pos"),
                                               Vx.Core.vx_new_int(0)
                                             )
@@ -8202,7 +9019,8 @@ public class TextblockTest {
                                       ),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string("d"),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -8226,7 +9044,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_parse_one(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":startpos"),
                     Vx.Core.vx_new_int(14),
                     Vx.Core.vx_new_string(":endpos"),
@@ -8234,7 +9053,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_delim,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":delimlist"),
                         Vx.Data.Textblock.c_delimlisttest1
                       )
@@ -8242,7 +9062,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("<{a,b},{c d}>"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -8252,10 +9073,12 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":children"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblocklist,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -8265,7 +9088,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":delim"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Textblock.c_delimbracketangle,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":pos"),
                                     Vx.Core.vx_new_int(0)
                                   )
@@ -8273,10 +9097,12 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":children"),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblocklist,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string("{a,b}"),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -8286,7 +9112,8 @@ public class TextblockTest {
                                         Vx.Core.vx_new_string(":delim"),
                                         Vx.Core.f_copy(
                                           Vx.Data.Textblock.c_delimbracketcurly,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":pos"),
                                             Vx.Core.vx_new_int(0)
                                           )
@@ -8294,10 +9121,12 @@ public class TextblockTest {
                                         Vx.Core.vx_new_string(":children"),
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblocklist,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.f_new(
                                               Vx.Data.Textblock.t_textblock,
-                                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                                              Vx.Core.vx_new(
+                                                Vx.Core.t_anylist,
                                                 Vx.Core.vx_new_string(":text"),
                                                 Vx.Core.vx_new_string("a"),
                                                 Vx.Core.vx_new_string(":startpos"),
@@ -8308,7 +9137,8 @@ public class TextblockTest {
                                             ),
                                             Vx.Core.f_new(
                                               Vx.Data.Textblock.t_textblock,
-                                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                                              Vx.Core.vx_new(
+                                                Vx.Core.t_anylist,
                                                 Vx.Core.vx_new_string(":text"),
                                                 Vx.Core.vx_new_string(","),
                                                 Vx.Core.vx_new_string(":startpos"),
@@ -8318,7 +9148,8 @@ public class TextblockTest {
                                                 Vx.Core.vx_new_string(":delim"),
                                                 Vx.Core.f_copy(
                                                   Vx.Data.Textblock.c_delimcomma,
-                                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                                  Vx.Core.vx_new(
+                                                    Vx.Core.t_anylist,
                                                     Vx.Core.vx_new_string(":pos"),
                                                     Vx.Core.vx_new_int(0)
                                                   )
@@ -8327,7 +9158,8 @@ public class TextblockTest {
                                             ),
                                             Vx.Core.f_new(
                                               Vx.Data.Textblock.t_textblock,
-                                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                                              Vx.Core.vx_new(
+                                                Vx.Core.t_anylist,
                                                 Vx.Core.vx_new_string(":text"),
                                                 Vx.Core.vx_new_string("b"),
                                                 Vx.Core.vx_new_string(":startpos"),
@@ -8342,7 +9174,8 @@ public class TextblockTest {
                                     ),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string(","),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -8352,7 +9185,8 @@ public class TextblockTest {
                                         Vx.Core.vx_new_string(":delim"),
                                         Vx.Core.f_copy(
                                           Vx.Data.Textblock.c_delimcomma,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":pos"),
                                             Vx.Core.vx_new_int(0)
                                           )
@@ -8361,7 +9195,8 @@ public class TextblockTest {
                                     ),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string("{c d}"),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -8371,7 +9206,8 @@ public class TextblockTest {
                                         Vx.Core.vx_new_string(":delim"),
                                         Vx.Core.f_copy(
                                           Vx.Data.Textblock.c_delimbracketcurly,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":pos"),
                                             Vx.Core.vx_new_int(0)
                                           )
@@ -8379,10 +9215,12 @@ public class TextblockTest {
                                         Vx.Core.vx_new_string(":children"),
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblocklist,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.f_new(
                                               Vx.Data.Textblock.t_textblock,
-                                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                                              Vx.Core.vx_new(
+                                                Vx.Core.t_anylist,
                                                 Vx.Core.vx_new_string(":text"),
                                                 Vx.Core.vx_new_string("c"),
                                                 Vx.Core.vx_new_string(":startpos"),
@@ -8393,7 +9231,8 @@ public class TextblockTest {
                                             ),
                                             Vx.Core.f_new(
                                               Vx.Data.Textblock.t_textblock,
-                                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                                              Vx.Core.vx_new(
+                                                Vx.Core.t_anylist,
                                                 Vx.Core.vx_new_string(":text"),
                                                 Vx.Core.vx_new_string(" "),
                                                 Vx.Core.vx_new_string(":startpos"),
@@ -8403,7 +9242,8 @@ public class TextblockTest {
                                                 Vx.Core.vx_new_string(":delim"),
                                                 Vx.Core.f_copy(
                                                   Vx.Data.Textblock.c_delimwhitespace,
-                                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                                  Vx.Core.vx_new(
+                                                    Vx.Core.t_anylist,
                                                     Vx.Core.vx_new_string(":pos"),
                                                     Vx.Core.vx_new_int(0)
                                                   )
@@ -8412,7 +9252,8 @@ public class TextblockTest {
                                             ),
                                             Vx.Core.f_new(
                                               Vx.Data.Textblock.t_textblock,
-                                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                                              Vx.Core.vx_new(
+                                                Vx.Core.t_anylist,
                                                 Vx.Core.vx_new_string(":text"),
                                                 Vx.Core.vx_new_string("d"),
                                                 Vx.Core.vx_new_string(":startpos"),
@@ -8446,7 +9287,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("<{a,b},{c d}>"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -8456,10 +9298,12 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":children"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblocklist,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("<{a,b},{c d}>"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -8469,7 +9313,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimbracketangle,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":pos"),
                               Vx.Core.vx_new_int(0)
                             )
@@ -8477,10 +9322,12 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":children"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblocklist,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("{a,b}"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -8490,7 +9337,8 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimbracketcurly,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -8498,10 +9346,12 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":children"),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblocklist,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string("a"),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -8512,7 +9362,8 @@ public class TextblockTest {
                                       ),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string(","),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -8522,7 +9373,8 @@ public class TextblockTest {
                                           Vx.Core.vx_new_string(":delim"),
                                           Vx.Core.f_copy(
                                             Vx.Data.Textblock.c_delimcomma,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":pos"),
                                               Vx.Core.vx_new_int(0)
                                             )
@@ -8531,7 +9383,8 @@ public class TextblockTest {
                                       ),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string("b"),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -8546,7 +9399,8 @@ public class TextblockTest {
                               ),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string(","),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -8556,7 +9410,8 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimcomma,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -8565,7 +9420,8 @@ public class TextblockTest {
                               ),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("{c d}"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -8575,7 +9431,8 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimbracketcurly,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -8583,10 +9440,12 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":children"),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblocklist,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string("c"),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -8597,7 +9456,8 @@ public class TextblockTest {
                                       ),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string(" "),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -8607,7 +9467,8 @@ public class TextblockTest {
                                           Vx.Core.vx_new_string(":delim"),
                                           Vx.Core.f_copy(
                                             Vx.Data.Textblock.c_delimwhitespace,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":pos"),
                                               Vx.Core.vx_new_int(0)
                                             )
@@ -8616,7 +9477,8 @@ public class TextblockTest {
                                       ),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string("d"),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -8640,7 +9502,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_parse_one(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("<{a,b},{c d}>"),
                     Vx.Core.vx_new_string(":startpos"),
@@ -8650,10 +9513,12 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":children"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblocklist,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("<{a,b},{c d}>"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -8663,7 +9528,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimbracketangle,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -8671,10 +9537,12 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":children"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblocklist,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("{a,b}"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -8684,7 +9552,8 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Textblock.c_delimbracketcurly,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":pos"),
                                         Vx.Core.vx_new_int(0)
                                       )
@@ -8692,10 +9561,12 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":children"),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblocklist,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string("a"),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -8706,7 +9577,8 @@ public class TextblockTest {
                                         ),
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string(","),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -8716,7 +9588,8 @@ public class TextblockTest {
                                             Vx.Core.vx_new_string(":delim"),
                                             Vx.Core.f_copy(
                                               Vx.Data.Textblock.c_delimcomma,
-                                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                                              Vx.Core.vx_new(
+                                                Vx.Core.t_anylist,
                                                 Vx.Core.vx_new_string(":pos"),
                                                 Vx.Core.vx_new_int(0)
                                               )
@@ -8725,7 +9598,8 @@ public class TextblockTest {
                                         ),
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string("b"),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -8740,7 +9614,8 @@ public class TextblockTest {
                                 ),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string(","),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -8750,7 +9625,8 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Textblock.c_delimcomma,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":pos"),
                                         Vx.Core.vx_new_int(0)
                                       )
@@ -8759,7 +9635,8 @@ public class TextblockTest {
                                 ),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("{c d}"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -8769,7 +9646,8 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Textblock.c_delimbracketcurly,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":pos"),
                                         Vx.Core.vx_new_int(0)
                                       )
@@ -8777,10 +9655,12 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":children"),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblocklist,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string("c"),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -8791,7 +9671,8 @@ public class TextblockTest {
                                         ),
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string(" "),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -8801,7 +9682,8 @@ public class TextblockTest {
                                             Vx.Core.vx_new_string(":delim"),
                                             Vx.Core.f_copy(
                                               Vx.Data.Textblock.c_delimwhitespace,
-                                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                                              Vx.Core.vx_new(
+                                                Vx.Core.t_anylist,
                                                 Vx.Core.vx_new_string(":pos"),
                                                 Vx.Core.vx_new_int(0)
                                               )
@@ -8810,7 +9692,8 @@ public class TextblockTest {
                                         ),
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string("d"),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -8856,7 +9739,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("a"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -8869,7 +9753,8 @@ public class TextblockTest {
                 Vx.Core.vx_new_string("a,b"),
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_delim,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":pos"),
                     Vx.Core.vx_new_int(2)
                   )
@@ -8900,7 +9785,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string(",b"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -8908,7 +9794,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":delim"),
                   Vx.Core.f_copy(
                     Vx.Data.Textblock.c_delimcomma,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":pos"),
                       Vx.Core.vx_new_int(2)
                     )
@@ -8919,7 +9806,8 @@ public class TextblockTest {
                 Vx.Core.vx_new_string("a,b"),
                 Vx.Core.f_copy(
                   Vx.Data.Textblock.c_delimcomma,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":pos"),
                     Vx.Core.vx_new_int(2)
                   )
@@ -8936,7 +9824,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("<b>c"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -8944,13 +9833,15 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":delim"),
                   Vx.Core.f_copy(
                     Vx.Data.Textblock.c_delimbracketangle,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":pos"),
                       Vx.Core.vx_new_int(2),
                       Vx.Core.vx_new_string(":delimlist"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_delimlist,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Data.Textblock.c_delimbracketcurly
                         )
                       )
@@ -8959,7 +9850,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":close"),
                   Vx.Core.f_copy(
                     Vx.Data.Textblock.c_delimclose,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":starttext"),
                       Vx.Core.vx_new_string(">")
                     )
@@ -8970,13 +9862,15 @@ public class TextblockTest {
                 Vx.Core.vx_new_string("a<b>c"),
                 Vx.Core.f_copy(
                   Vx.Data.Textblock.c_delimbracketangle,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":pos"),
                     Vx.Core.vx_new_int(2),
                     Vx.Core.vx_new_string(":delimlist"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_delimlist,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Data.Textblock.c_delimbracketcurly
                       )
                     )
@@ -9008,7 +9902,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("b"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -9018,7 +9913,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string(",{c d}>"),
                       Vx.Core.vx_new_string(":startpos"),
@@ -9028,7 +9924,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":delim"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_delim,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":delimlist"),
                           Vx.Data.Textblock.c_delimlisttest2
                         )
@@ -9036,7 +9933,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":close"),
                       Vx.Core.f_copy(
                         Vx.Data.Textblock.c_delimclose,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":starttext"),
                           Vx.Core.vx_new_string(">")
                         )
@@ -9044,7 +9942,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":parent"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("{a,b}"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -9054,7 +9953,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimbracketcurly,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":pos"),
                               Vx.Core.vx_new_int(0)
                             )
@@ -9064,7 +9964,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":parent"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string("<{a,b},{c d}>"),
                               Vx.Core.vx_new_string(":startpos"),
@@ -9074,7 +9975,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":delim"),
                               Vx.Core.f_copy(
                                 Vx.Data.Textblock.c_delimbracketangle,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":delimlist"),
                                   Vx.Data.Textblock.c_delimlisttest1
                                 )
@@ -9082,7 +9984,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":parent"),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -9096,10 +9999,12 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":children"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblocklist,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("a"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -9110,7 +10015,8 @@ public class TextblockTest {
                               ),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string(","),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -9120,7 +10026,8 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimcomma,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -9138,7 +10045,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_from_close_textblock(
                 Vx.Core.f_copy(
                   Vx.Data.Textblock.c_delimclose,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":starttext"),
                     Vx.Core.vx_new_string("}"),
                     Vx.Core.vx_new_string(":pos"),
@@ -9147,7 +10055,8 @@ public class TextblockTest {
                 ),
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("b},{c d}>"),
                     Vx.Core.vx_new_string(":startpos"),
@@ -9157,7 +10066,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_delim,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":delimlist"),
                         Vx.Data.Textblock.c_delimlisttest3
                       )
@@ -9165,7 +10075,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":close"),
                     Vx.Core.f_copy(
                       Vx.Data.Textblock.c_delimclose,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":starttext"),
                         Vx.Core.vx_new_string("}")
                       )
@@ -9173,7 +10084,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("{a,b},{c d}>"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -9183,7 +10095,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimbracketcurly,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":delimlist"),
                             Vx.Data.Textblock.c_delimlisttest2
                           )
@@ -9191,7 +10104,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":close"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimclose,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":starttext"),
                             Vx.Core.vx_new_string(">")
                           )
@@ -9199,7 +10113,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":parent"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("<{a,b},{c d}>"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -9209,7 +10124,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimbracketangle,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":delimlist"),
                                 Vx.Data.Textblock.c_delimlisttest1
                               )
@@ -9217,7 +10133,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":parent"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -9231,10 +10148,12 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":children"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblocklist,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("a"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -9245,7 +10164,8 @@ public class TextblockTest {
                             ),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string(","),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -9255,7 +10175,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":delim"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Textblock.c_delimcomma,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":pos"),
                                     Vx.Core.vx_new_int(0)
                                   )
@@ -9279,7 +10200,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":startpos"),
                   Vx.Core.vx_new_int(13),
                   Vx.Core.vx_new_string(":endpos"),
@@ -9287,7 +10209,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":startpos"),
                       Vx.Core.vx_new_int(14),
                       Vx.Core.vx_new_string(":endpos"),
@@ -9295,7 +10218,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":delim"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_delim,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":delimlist"),
                           Vx.Data.Textblock.c_delimlisttest1
                         )
@@ -9303,7 +10227,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":parent"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("<{a,b},{c d}>"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -9313,7 +10238,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimbracketangle,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":pos"),
                               Vx.Core.vx_new_int(0)
                             )
@@ -9323,7 +10249,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":parent"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string("<{a,b},{c d}>"),
                               Vx.Core.vx_new_string(":startpos"),
@@ -9335,10 +10262,12 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":children"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblocklist,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("{a,b}"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -9348,7 +10277,8 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimbracketcurly,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -9356,10 +10286,12 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":children"),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblocklist,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string("a"),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -9370,7 +10302,8 @@ public class TextblockTest {
                                       ),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string(","),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -9380,7 +10313,8 @@ public class TextblockTest {
                                           Vx.Core.vx_new_string(":delim"),
                                           Vx.Core.f_copy(
                                             Vx.Data.Textblock.c_delimcomma,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":pos"),
                                               Vx.Core.vx_new_int(0)
                                             )
@@ -9389,7 +10323,8 @@ public class TextblockTest {
                                       ),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string("b"),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -9404,7 +10339,8 @@ public class TextblockTest {
                               ),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string(","),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -9414,7 +10350,8 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimcomma,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -9423,7 +10360,8 @@ public class TextblockTest {
                               ),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("{c d}"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -9433,7 +10371,8 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimbracketcurly,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -9441,10 +10380,12 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":children"),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblocklist,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string("c"),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -9455,7 +10396,8 @@ public class TextblockTest {
                                       ),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string(" "),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -9465,7 +10407,8 @@ public class TextblockTest {
                                           Vx.Core.vx_new_string(":delim"),
                                           Vx.Core.f_copy(
                                             Vx.Data.Textblock.c_delimwhitespace,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":pos"),
                                               Vx.Core.vx_new_int(0)
                                             )
@@ -9474,7 +10417,8 @@ public class TextblockTest {
                                       ),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string("d"),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -9498,7 +10442,8 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_from_close_textblock(
                 Vx.Core.f_copy(
                   Vx.Data.Textblock.c_delimclose,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":starttext"),
                     Vx.Core.vx_new_string(">"),
                     Vx.Core.vx_new_string(":pos"),
@@ -9507,7 +10452,8 @@ public class TextblockTest {
                 ),
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string(">"),
                     Vx.Core.vx_new_string(":startpos"),
@@ -9517,7 +10463,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_delim,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":delimlist"),
                         Vx.Data.Textblock.c_delimlisttest2
                       )
@@ -9525,7 +10472,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":close"),
                     Vx.Core.f_copy(
                       Vx.Data.Textblock.c_delimclose,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":starttext"),
                         Vx.Core.vx_new_string(">")
                       )
@@ -9533,7 +10481,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("<{a,b},{c d}>"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -9543,7 +10492,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimbracketangle,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":delimlist"),
                             Vx.Data.Textblock.c_delimlisttest1
                           )
@@ -9551,7 +10501,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":parent"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("<{a,b},{c d}>"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -9563,10 +10514,12 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":children"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblocklist,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("{a,b}"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -9576,7 +10529,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":delim"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Textblock.c_delimbracketcurly,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":pos"),
                                     Vx.Core.vx_new_int(0)
                                   )
@@ -9584,10 +10538,12 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":children"),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblocklist,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string("a"),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -9598,7 +10554,8 @@ public class TextblockTest {
                                     ),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string(","),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -9608,7 +10565,8 @@ public class TextblockTest {
                                         Vx.Core.vx_new_string(":delim"),
                                         Vx.Core.f_copy(
                                           Vx.Data.Textblock.c_delimcomma,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":pos"),
                                             Vx.Core.vx_new_int(0)
                                           )
@@ -9617,7 +10575,8 @@ public class TextblockTest {
                                     ),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string("b"),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -9632,7 +10591,8 @@ public class TextblockTest {
                             ),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string(","),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -9642,7 +10602,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":delim"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Textblock.c_delimcomma,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":pos"),
                                     Vx.Core.vx_new_int(0)
                                   )
@@ -9651,7 +10612,8 @@ public class TextblockTest {
                             ),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("{c d}"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -9661,7 +10623,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":delim"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Textblock.c_delimbracketcurly,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":pos"),
                                     Vx.Core.vx_new_int(0)
                                   )
@@ -9669,10 +10632,12 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":children"),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblocklist,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string("c"),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -9683,7 +10648,8 @@ public class TextblockTest {
                                     ),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string(" "),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -9693,7 +10659,8 @@ public class TextblockTest {
                                         Vx.Core.vx_new_string(":delim"),
                                         Vx.Core.f_copy(
                                           Vx.Data.Textblock.c_delimwhitespace,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":pos"),
                                             Vx.Core.vx_new_int(0)
                                           )
@@ -9702,7 +10669,8 @@ public class TextblockTest {
                                     ),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string("d"),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -9746,7 +10714,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("c}"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -9756,7 +10725,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":close"),
                   Vx.Core.f_copy(
                     Vx.Data.Textblock.c_delimclose,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":starttext"),
                       Vx.Core.vx_new_string("}")
                     )
@@ -9764,7 +10734,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string("{c}"),
                       Vx.Core.vx_new_string(":startpos"),
@@ -9774,7 +10745,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":delim"),
                       Vx.Core.f_copy(
                         Vx.Data.Textblock.c_delimbracketcurly,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":pos"),
                           Vx.Core.vx_new_int(0)
                         )
@@ -9782,7 +10754,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":parent"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("ab{c}"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -9792,10 +10765,12 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":children"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblocklist,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("ab"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -9815,14 +10790,16 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_from_open_textblock(
                 Vx.Core.f_copy(
                   Vx.Data.Textblock.c_delimbracketcurly,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":pos"),
                     Vx.Core.vx_new_int(3)
                   )
                 ),
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("ab{c}"),
                     Vx.Core.vx_new_string(":startpos"),
@@ -9834,7 +10811,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("ab{c}"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -9856,7 +10834,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("{a,b},{c d}>"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -9866,7 +10845,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":delim"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_delim,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":delimlist"),
                       Vx.Data.Textblock.c_delimlisttest2
                     )
@@ -9874,7 +10854,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":close"),
                   Vx.Core.f_copy(
                     Vx.Data.Textblock.c_delimclose,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":starttext"),
                       Vx.Core.vx_new_string(">")
                     )
@@ -9882,7 +10863,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string("<{a,b},{c d}>"),
                       Vx.Core.vx_new_string(":startpos"),
@@ -9892,7 +10874,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":delim"),
                       Vx.Core.f_copy(
                         Vx.Data.Textblock.c_delimbracketangle,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":delimlist"),
                           Vx.Data.Textblock.c_delimlisttest1
                         )
@@ -9900,7 +10883,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":parent"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("<{a,b},{c d}>"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -9916,14 +10900,16 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_from_open_textblock(
                 Vx.Core.f_copy(
                   Vx.Data.Textblock.c_delimtest2,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":pos"),
                     Vx.Core.vx_new_int(1)
                   )
                 ),
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("<{a,b},{c d}>"),
                     Vx.Core.vx_new_string(":startpos"),
@@ -9935,7 +10921,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("<{a,b},{c d}>"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -9957,7 +10944,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("a,b},{c d}>"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -9967,7 +10955,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":delim"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_delim,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":delimlist"),
                       Vx.Data.Textblock.c_delimlisttest3
                     )
@@ -9975,7 +10964,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":close"),
                   Vx.Core.f_copy(
                     Vx.Data.Textblock.c_delimclose,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":starttext"),
                       Vx.Core.vx_new_string("}")
                     )
@@ -9983,7 +10973,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string("{a,b},{c d}>"),
                       Vx.Core.vx_new_string(":startpos"),
@@ -9993,7 +10984,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":delim"),
                       Vx.Core.f_copy(
                         Vx.Data.Textblock.c_delimbracketcurly,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":delimlist"),
                           Vx.Data.Textblock.c_delimlisttest2
                         )
@@ -10001,7 +10993,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":close"),
                       Vx.Core.f_copy(
                         Vx.Data.Textblock.c_delimclose,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":starttext"),
                           Vx.Core.vx_new_string(">")
                         )
@@ -10009,7 +11002,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":parent"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("<{a,b},{c d}>"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -10019,7 +11013,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimbracketangle,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":pos"),
                               Vx.Core.vx_new_int(0)
                             )
@@ -10027,7 +11022,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":parent"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string("<{a,b},{c d}>"),
                               Vx.Core.vx_new_string(":startpos"),
@@ -10045,14 +11041,16 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_from_open_textblock(
                 Vx.Core.f_copy(
                   Vx.Data.Textblock.c_delimtest3,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":pos"),
                     Vx.Core.vx_new_int(1)
                   )
                 ),
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("{a,b},{c d}>"),
                     Vx.Core.vx_new_string(":startpos"),
@@ -10062,7 +11060,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_delim,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":delimlist"),
                         Vx.Data.Textblock.c_delimlisttest2
                       )
@@ -10070,7 +11069,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":close"),
                     Vx.Core.f_copy(
                       Vx.Data.Textblock.c_delimclose,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":starttext"),
                         Vx.Core.vx_new_string(">")
                       )
@@ -10078,7 +11078,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("<{a,b},{c d}>"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -10088,7 +11089,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimbracketangle,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":pos"),
                             Vx.Core.vx_new_int(0)
                           )
@@ -10096,7 +11098,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":parent"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("<{a,b},{c d}>"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -10134,7 +11137,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("a"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -10144,7 +11148,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string(","),
                       Vx.Core.vx_new_string(":startpos"),
@@ -10154,7 +11159,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":delim"),
                       Vx.Core.f_copy(
                         Vx.Data.Textblock.c_delimcomma,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":pos"),
                           Vx.Core.vx_new_int(0)
                         )
@@ -10162,7 +11168,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":parent"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("b},{c d}>"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -10172,7 +11179,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_delim,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":delimlist"),
                               Vx.Data.Textblock.c_delimlisttest3
                             )
@@ -10180,7 +11188,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":close"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimclose,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":starttext"),
                               Vx.Core.vx_new_string("}")
                             )
@@ -10188,7 +11197,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":parent"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string("{a,b},{c d}>"),
                               Vx.Core.vx_new_string(":startpos"),
@@ -10198,7 +11208,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":delim"),
                               Vx.Core.f_copy(
                                 Vx.Data.Textblock.c_delimbracketcurly,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":pos"),
                                   Vx.Core.vx_new_int(0)
                                 )
@@ -10206,7 +11217,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":close"),
                               Vx.Core.f_copy(
                                 Vx.Data.Textblock.c_delimclose,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":starttext"),
                                   Vx.Core.vx_new_string(">")
                                 )
@@ -10214,7 +11226,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":parent"),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -10224,7 +11237,8 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimbracketangle,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -10232,7 +11246,8 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":parent"),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -10254,14 +11269,16 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_from_single_textblock(
                 Vx.Core.f_copy(
                   Vx.Data.Textblock.c_delimcomma,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":pos"),
                     Vx.Core.vx_new_int(2)
                   )
                 ),
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("a,b},{c d}>"),
                     Vx.Core.vx_new_string(":startpos"),
@@ -10271,7 +11288,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_delim,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":delimlist"),
                         Vx.Data.Textblock.c_delimlisttest3
                       )
@@ -10279,7 +11297,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":close"),
                     Vx.Core.f_copy(
                       Vx.Data.Textblock.c_delimclose,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":starttext"),
                         Vx.Core.vx_new_string("}")
                       )
@@ -10287,7 +11306,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("{a,b},{c d}>"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -10297,7 +11317,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimbracketcurly,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":pos"),
                             Vx.Core.vx_new_int(0)
                           )
@@ -10305,7 +11326,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":close"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimclose,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":starttext"),
                             Vx.Core.vx_new_string(">")
                           )
@@ -10313,7 +11335,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":parent"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("<{a,b},{c d}>"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -10323,7 +11346,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimbracketangle,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -10331,7 +11355,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":parent"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -10357,7 +11382,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":startpos"),
                   Vx.Core.vx_new_int(7),
                   Vx.Core.vx_new_string(":endpos"),
@@ -10365,7 +11391,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string(","),
                       Vx.Core.vx_new_string(":startpos"),
@@ -10375,7 +11402,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":delim"),
                       Vx.Core.f_copy(
                         Vx.Data.Textblock.c_delimcomma,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":pos"),
                           Vx.Core.vx_new_int(0)
                         )
@@ -10383,7 +11411,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":parent"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("{c d}>"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -10393,7 +11422,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_delim,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":delimlist"),
                               Vx.Data.Textblock.c_delimlisttest3
                             )
@@ -10401,7 +11431,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":close"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimclose,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":starttext"),
                               Vx.Core.vx_new_string(">")
                             )
@@ -10409,7 +11440,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":parent"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string("<{a,b},{c d}>"),
                               Vx.Core.vx_new_string(":startpos"),
@@ -10419,7 +11451,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":delim"),
                               Vx.Core.f_copy(
                                 Vx.Data.Textblock.c_delimbracketangle,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":pos"),
                                   Vx.Core.vx_new_int(0)
                                 )
@@ -10427,7 +11460,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":parent"),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -10439,10 +11473,12 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":children"),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblocklist,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string("{a,b}"),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -10452,7 +11488,8 @@ public class TextblockTest {
                                       Vx.Core.vx_new_string(":delim"),
                                       Vx.Core.f_copy(
                                         Vx.Data.Textblock.c_delimbracketcurly,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":pos"),
                                           Vx.Core.vx_new_int(0)
                                         )
@@ -10460,10 +11497,12 @@ public class TextblockTest {
                                       Vx.Core.vx_new_string(":children"),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblocklist,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.f_new(
                                             Vx.Data.Textblock.t_textblock,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":text"),
                                               Vx.Core.vx_new_string("a"),
                                               Vx.Core.vx_new_string(":startpos"),
@@ -10474,7 +11513,8 @@ public class TextblockTest {
                                           ),
                                           Vx.Core.f_new(
                                             Vx.Data.Textblock.t_textblock,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":text"),
                                               Vx.Core.vx_new_string(","),
                                               Vx.Core.vx_new_string(":startpos"),
@@ -10484,7 +11524,8 @@ public class TextblockTest {
                                               Vx.Core.vx_new_string(":delim"),
                                               Vx.Core.f_copy(
                                                 Vx.Data.Textblock.c_delimcomma,
-                                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                                Vx.Core.vx_new(
+                                                  Vx.Core.t_anylist,
                                                   Vx.Core.vx_new_string(":pos"),
                                                   Vx.Core.vx_new_int(0)
                                                 )
@@ -10493,7 +11534,8 @@ public class TextblockTest {
                                           ),
                                           Vx.Core.f_new(
                                             Vx.Data.Textblock.t_textblock,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":text"),
                                               Vx.Core.vx_new_string("b"),
                                               Vx.Core.vx_new_string(":startpos"),
@@ -10519,14 +11561,16 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_from_single_textblock(
                 Vx.Core.f_copy(
                   Vx.Data.Textblock.c_delimcomma,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":pos"),
                     Vx.Core.vx_new_int(1)
                   )
                 ),
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string(",{c d}>"),
                     Vx.Core.vx_new_string(":startpos"),
@@ -10536,7 +11580,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_delim,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":delimlist"),
                         Vx.Data.Textblock.c_delimlisttest3
                       )
@@ -10544,7 +11589,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":close"),
                     Vx.Core.f_copy(
                       Vx.Data.Textblock.c_delimclose,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":starttext"),
                         Vx.Core.vx_new_string(">")
                       )
@@ -10552,7 +11598,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("<{a,b},{c d}>"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -10562,7 +11609,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimbracketangle,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":pos"),
                             Vx.Core.vx_new_int(0)
                           )
@@ -10570,7 +11618,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":parent"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("<{a,b},{c d}>"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -10582,10 +11631,12 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":children"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblocklist,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("{a,b}"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -10595,7 +11646,8 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":delim"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Textblock.c_delimbracketcurly,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":pos"),
                                     Vx.Core.vx_new_int(0)
                                   )
@@ -10603,10 +11655,12 @@ public class TextblockTest {
                                 Vx.Core.vx_new_string(":children"),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblocklist,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string("a"),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -10617,7 +11671,8 @@ public class TextblockTest {
                                     ),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string(","),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -10627,7 +11682,8 @@ public class TextblockTest {
                                         Vx.Core.vx_new_string(":delim"),
                                         Vx.Core.f_copy(
                                           Vx.Data.Textblock.c_delimcomma,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":pos"),
                                             Vx.Core.vx_new_int(0)
                                           )
@@ -10636,7 +11692,8 @@ public class TextblockTest {
                                     ),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string("b"),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -10666,7 +11723,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("c"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -10676,7 +11734,8 @@ public class TextblockTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string(" "),
                       Vx.Core.vx_new_string(":startpos"),
@@ -10686,7 +11745,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":delim"),
                       Vx.Core.f_copy(
                         Vx.Data.Textblock.c_delimwhitespace,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":pos"),
                           Vx.Core.vx_new_int(0)
                         )
@@ -10694,7 +11754,8 @@ public class TextblockTest {
                       Vx.Core.vx_new_string(":parent"),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("d}>"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -10704,7 +11765,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_delim,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":delimlist"),
                               Vx.Data.Textblock.c_delimlisttest3
                             )
@@ -10712,7 +11774,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":close"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimclose,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":starttext"),
                               Vx.Core.vx_new_string("}")
                             )
@@ -10720,7 +11783,8 @@ public class TextblockTest {
                           Vx.Core.vx_new_string(":parent"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblock,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":text"),
                               Vx.Core.vx_new_string("{c d}>"),
                               Vx.Core.vx_new_string(":startpos"),
@@ -10730,7 +11794,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":delim"),
                               Vx.Core.f_copy(
                                 Vx.Data.Textblock.c_delimbracketcurly,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":delimlist"),
                                   Vx.Data.Textblock.c_delimlisttest2
                                 )
@@ -10738,7 +11803,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":close"),
                               Vx.Core.f_copy(
                                 Vx.Data.Textblock.c_delimclose,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":starttext"),
                                   Vx.Core.vx_new_string(">")
                                 )
@@ -10746,7 +11812,8 @@ public class TextblockTest {
                               Vx.Core.vx_new_string(":parent"),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -10756,7 +11823,8 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimbracketangle,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":delimlist"),
                                       Vx.Data.Textblock.c_delimlisttest1
                                     )
@@ -10764,7 +11832,8 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":parent"),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblock,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":text"),
                                       Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                       Vx.Core.vx_new_string(":startpos"),
@@ -10776,10 +11845,12 @@ public class TextblockTest {
                                   Vx.Core.vx_new_string(":children"),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblocklist,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string("{a,b}"),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -10789,7 +11860,8 @@ public class TextblockTest {
                                           Vx.Core.vx_new_string(":delim"),
                                           Vx.Core.f_copy(
                                             Vx.Data.Textblock.c_delimbracketcurly,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":pos"),
                                               Vx.Core.vx_new_int(0)
                                             )
@@ -10797,10 +11869,12 @@ public class TextblockTest {
                                           Vx.Core.vx_new_string(":children"),
                                           Vx.Core.f_new(
                                             Vx.Data.Textblock.t_textblocklist,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.f_new(
                                                 Vx.Data.Textblock.t_textblock,
-                                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                                Vx.Core.vx_new(
+                                                  Vx.Core.t_anylist,
                                                   Vx.Core.vx_new_string(":text"),
                                                   Vx.Core.vx_new_string("a"),
                                                   Vx.Core.vx_new_string(":startpos"),
@@ -10811,7 +11885,8 @@ public class TextblockTest {
                                               ),
                                               Vx.Core.f_new(
                                                 Vx.Data.Textblock.t_textblock,
-                                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                                Vx.Core.vx_new(
+                                                  Vx.Core.t_anylist,
                                                   Vx.Core.vx_new_string(":text"),
                                                   Vx.Core.vx_new_string(","),
                                                   Vx.Core.vx_new_string(":startpos"),
@@ -10821,7 +11896,8 @@ public class TextblockTest {
                                                   Vx.Core.vx_new_string(":delim"),
                                                   Vx.Core.f_copy(
                                                     Vx.Data.Textblock.c_delimcomma,
-                                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                                    Vx.Core.vx_new(
+                                                      Vx.Core.t_anylist,
                                                       Vx.Core.vx_new_string(":pos"),
                                                       Vx.Core.vx_new_int(0)
                                                     )
@@ -10830,7 +11906,8 @@ public class TextblockTest {
                                               ),
                                               Vx.Core.f_new(
                                                 Vx.Data.Textblock.t_textblock,
-                                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                                Vx.Core.vx_new(
+                                                  Vx.Core.t_anylist,
                                                   Vx.Core.vx_new_string(":text"),
                                                   Vx.Core.vx_new_string("b"),
                                                   Vx.Core.vx_new_string(":startpos"),
@@ -10845,7 +11922,8 @@ public class TextblockTest {
                                       ),
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string(","),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -10855,7 +11933,8 @@ public class TextblockTest {
                                           Vx.Core.vx_new_string(":delim"),
                                           Vx.Core.f_copy(
                                             Vx.Data.Textblock.c_delimcomma,
-                                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                                            Vx.Core.vx_new(
+                                              Vx.Core.t_anylist,
                                               Vx.Core.vx_new_string(":pos"),
                                               Vx.Core.vx_new_int(0)
                                             )
@@ -10877,14 +11956,16 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblock_from_single_textblock(
                 Vx.Core.f_copy(
                   Vx.Data.Textblock.c_delimwhitespace,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":pos"),
                     Vx.Core.vx_new_int(2)
                   )
                 ),
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("c d}>"),
                     Vx.Core.vx_new_string(":startpos"),
@@ -10894,7 +11975,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_delim,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":delimlist"),
                         Vx.Data.Textblock.c_delimlisttest3
                       )
@@ -10902,7 +11984,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":close"),
                     Vx.Core.f_copy(
                       Vx.Data.Textblock.c_delimclose,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":starttext"),
                         Vx.Core.vx_new_string("}")
                       )
@@ -10910,7 +11993,8 @@ public class TextblockTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("{c d}>"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -10920,7 +12004,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimbracketcurly,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":delimlist"),
                             Vx.Data.Textblock.c_delimlisttest2
                           )
@@ -10928,7 +12013,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":close"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimclose,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":starttext"),
                             Vx.Core.vx_new_string(">")
                           )
@@ -10936,7 +12022,8 @@ public class TextblockTest {
                         Vx.Core.vx_new_string(":parent"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("<{a,b},{c d}>"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -10946,7 +12033,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimbracketangle,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":delimlist"),
                                 Vx.Data.Textblock.c_delimlisttest1
                               )
@@ -10954,7 +12042,8 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":parent"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("<{a,b},{c d}>"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -10966,10 +12055,12 @@ public class TextblockTest {
                             Vx.Core.vx_new_string(":children"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblocklist,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("{a,b}"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -10979,7 +12070,8 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Textblock.c_delimbracketcurly,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":pos"),
                                         Vx.Core.vx_new_int(0)
                                       )
@@ -10987,10 +12079,12 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":children"),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblocklist,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string("a"),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -11001,7 +12095,8 @@ public class TextblockTest {
                                         ),
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string(","),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -11011,7 +12106,8 @@ public class TextblockTest {
                                             Vx.Core.vx_new_string(":delim"),
                                             Vx.Core.f_copy(
                                               Vx.Data.Textblock.c_delimcomma,
-                                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                                              Vx.Core.vx_new(
+                                                Vx.Core.t_anylist,
                                                 Vx.Core.vx_new_string(":pos"),
                                                 Vx.Core.vx_new_int(0)
                                               )
@@ -11020,7 +12116,8 @@ public class TextblockTest {
                                         ),
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string("b"),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -11035,7 +12132,8 @@ public class TextblockTest {
                                 ),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string(","),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -11045,7 +12143,8 @@ public class TextblockTest {
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Textblock.c_delimcomma,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":pos"),
                                         Vx.Core.vx_new_int(0)
                                       )
@@ -11085,7 +12184,8 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("a"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -11124,24 +12224,28 @@ public class TextblockTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblocklist,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string("+")
                     )
                   ),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string("2")
                     )
                   ),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblock,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":text"),
                       Vx.Core.vx_new_string("3")
                     )
@@ -11151,23 +12255,27 @@ public class TextblockTest {
               Vx.Data.Textblock.f_textblocklist_from_textblocklist_remove(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblocklist,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("+")
                       )
                     ),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string(" "),
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimwhitespace,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":pos"),
                             Vx.Core.vx_new_int(0)
                           )
@@ -11176,20 +12284,23 @@ public class TextblockTest {
                     ),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("2")
                       )
                     ),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string(" "),
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimwhitespace,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":pos"),
                             Vx.Core.vx_new_int(0)
                           )
@@ -11198,7 +12309,8 @@ public class TextblockTest {
                     ),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("3")
                       )

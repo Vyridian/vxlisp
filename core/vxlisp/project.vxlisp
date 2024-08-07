@@ -81,14 +81,14 @@
   (cmd srckotlin
    :code    :source
    :lang    :kotlin
-   :path    ../kotlin/app/src/main/kotlin/app
+   :path    ../kotlin/app/src/main/kotlin
    :main    vx/core/main
    :context vx/translation/en/context-en
    :doc     "Build Kotlin Source Code")
   (cmd testkotlin
    :code    :test
    :lang    :kotlin
-   :path    ../kotlin/app/src/test/kotlin/app
+   :path    ../kotlin/app/src/test/kotlin
    :context vx/translation/en/context-test
    :doc     "Build Kotlin Test Code")
   (cmd srcswift

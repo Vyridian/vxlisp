@@ -57,7 +57,7 @@ func JsEmptyValueFromTypeIndent(lang *vxlang, typ *vxtype, indent string) string
 			output = "\"" + output + "\""
 		case ":list":
 			//			output = "vx_core.f_type_to_list(" + LangFromName(typ.pkgname) + ".t_" + typ.name + ")"
-			output = LangNameEFromType(lang, typ)
+			output = LangTypeE(lang, typ)
 		default:
 			properties := ListPropertyTraitFromType(typ)
 			if len(properties) > 0 {
@@ -141,7 +141,7 @@ func JsFromArg(lang *vxlang, arg vxarg, indent string) string {
 	if arg.name != "" {
 		var props []string
 		key := arg.name
-		typ := LangNameTFromType(lang, arg.vxtype)
+		typ := LangTypeT(lang, arg.vxtype)
 		props = append(props, "\"name\" : \""+key+"\"")
 		props = append(props, "\"type\" : "+typ)
 		props = append(props, "\"multi\": "+StringFromBoolean(arg.multi))
@@ -214,7 +214,7 @@ func JsFromConst(
 	case "vx/core/string":
 		startval = value
 	default:
-		startval = "{vx_type: " + LangNameTFromType(lang, cnsttype) + ", vx_constdef: {pkgname: '" + cnst.pkgname + "', name: '" + cnst.name + "'}}"
+		startval = "{vx_type: " + LangTypeT(lang, cnsttype) + ", vx_constdef: {pkgname: '" + cnst.pkgname + "', name: '" + cnst.name + "'}}"
 		switch cnst.vxtype.extends {
 		case ":list":
 			startval = "Object.assign([], " + startval + ")"
@@ -342,7 +342,7 @@ func JsFromFunc(lang *vxlang, fnc *vxfunc) (string, string, *vxmsgblock) {
 		}
 		for _, arg := range fnc.listarg {
 			if arg.multi {
-				defaultvalue += lineindent + arg.alias + " = vx_core.f_new(" + LangNameTFromTypeGeneric(lang, arg.vxtype) + ", ..." + arg.alias + ")"
+				defaultvalue += lineindent + arg.alias + " = vx_core.f_new(" + LangTypeTGeneric(lang, arg.vxtype) + ", ..." + arg.alias + ")"
 			}
 		}
 	}
@@ -678,7 +678,7 @@ func JsFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc, 
 		subpath += "/" + fnc.name + JsIndexFromFunc(fnc)
 		funcname := NameFromFunc(fnc)
 		if fnc.debug {
-			output += "vx_core.f_log_1({\"any-1\": " + LangNameTFromType(lang, fnc.vxtype) + "}, \"" + subpath + "\", "
+			output += "vx_core.f_log_1({\"any-1\": " + LangTypeT(lang, fnc.vxtype) + "}, \"" + subpath + "\", "
 		}
 		switch fnc.name {
 		case "native":
@@ -751,10 +751,10 @@ func JsFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc, 
 			default:
 				if fnc.argname != "" {
 					output += LangNameFromPkgName(lang, "vx/core") + lang.pkgref + "vx_any_from_func("
-					argtexts = append(argtexts, LangNameTFromType(lang, fnc.vxtype))
+					argtexts = append(argtexts, LangTypeT(lang, fnc.vxtype))
 					argtexts = append(argtexts, LangFromName(fnc.argname))
 				} else {
-					output += LangNameFromPkgName(lang, fnc.pkgname) + lang.pkgref + "f_" + LangNameFromFunc(fnc) + "("
+					output += LangNameFromPkgName(lang, fnc.pkgname) + lang.pkgref + "f_" + LangFuncName(fnc) + "("
 				}
 			}
 			switch funcname {
@@ -790,7 +790,7 @@ func JsFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc, 
 						} else {
 							argtext = "(" + lambdatext + ") => " + work
 						}
-						argtext = "vx_core.f_new(" + LangNameTFromType(lang, funcarg.vxtype) + ", " + argtext + ")"
+						argtext = "vx_core.f_new(" + LangTypeT(lang, funcarg.vxtype) + ", " + argtext + ")"
 					} else if funcname == "vx/core/let" {
 						var lambdaargs []string
 						arglist := ListLocalArgFromFunc(fnc)
@@ -814,7 +814,7 @@ func JsFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc, 
 							if parentfn.async {
 								argtext = "async " + argtext
 							}
-							argtext = "vx_core.f_new(" + LangNameTFromTypeGeneric(lang, funcarg.vxtype) + ", " + argtext + ")"
+							argtext = "vx_core.f_new(" + LangTypeTGeneric(lang, funcarg.vxtype) + ", " + argtext + ")"
 						}
 					} else if funcname == "vx/core/fn" {
 					} else if funcarg.vxtype.isfunc {
@@ -836,7 +836,7 @@ func JsFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc, 
 							argtext = "() => {return " + work + "}"
 						}
 						if iswrapnew {
-							argtext = "vx_core.f_new(" + LangNameTFromType(lang, funcarg.vxtype) + ", " + argtext + ")"
+							argtext = "vx_core.f_new(" + LangTypeT(lang, funcarg.vxtype) + ", " + argtext + ")"
 						}
 					}
 					if argtext == "" {
@@ -994,7 +994,7 @@ func JsNamesFromListFunc(listfunc []*vxfunc) string {
 func JsNamesTFromListType(lang *vxlang, listtype []*vxtype) string {
 	var outputtypes []string
 	for _, typ := range listtype {
-		name := LangNameTFromType(lang, typ)
+		name := LangTypeT(lang, typ)
 		outputtypes = append(outputtypes, name)
 	}
 	return "[" + strings.Join(outputtypes, ", ") + "]"
@@ -1021,7 +1021,7 @@ func JsNamesTFromMapType(lang *vxlang, maptype map[string]*vxtype) string {
 	sort.Strings(listkey)
 	for _, key := range listkey {
 		typ := maptype[key]
-		name := LangNameTFromTypeGeneric(lang, typ)
+		name := LangTypeTGeneric(lang, typ)
 		outputtypes = append(outputtypes, "\""+key+"\": "+name)
 	}
 	return "{" + strings.Join(outputtypes, ", ") + "}"

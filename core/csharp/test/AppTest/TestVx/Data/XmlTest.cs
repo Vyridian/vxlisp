@@ -22,14 +22,17 @@ public class XmlTest {
               Vx.Data.Xml.f_string_first_from_xml(
                 Vx.Core.f_new(
                   Vx.Data.Xml.t_xml,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":children"),
                     Vx.Core.f_new(
                       Vx.Data.Xml.t_xmllist,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.f_new(
                           Vx.Data.Xml.t_xml,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("text")
                           )
@@ -63,7 +66,8 @@ public class XmlTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("<doc>\n  <tag1>\n    <tag2 prop1=\"val1\" prop2=\"val2\" />\n  </tag1>\n</doc>"),
                   Vx.Core.vx_new_string(":startpos"),
@@ -73,10 +77,12 @@ public class XmlTest {
                   Vx.Core.vx_new_string(":children"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblocklist,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("<doc>"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -86,7 +92,8 @@ public class XmlTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimbracketangle,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":pos"),
                               Vx.Core.vx_new_int(0)
                             )
@@ -94,10 +101,12 @@ public class XmlTest {
                           Vx.Core.vx_new_string(":children"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblocklist,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("doc"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -112,7 +121,8 @@ public class XmlTest {
                       ),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("\n  "),
                           Vx.Core.vx_new_string(":startpos"),
@@ -123,7 +133,8 @@ public class XmlTest {
                       ),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("<tag1>"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -133,7 +144,8 @@ public class XmlTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimbracketangle,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":pos"),
                               Vx.Core.vx_new_int(0)
                             )
@@ -141,10 +153,12 @@ public class XmlTest {
                           Vx.Core.vx_new_string(":children"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblocklist,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("tag1"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -159,7 +173,8 @@ public class XmlTest {
                       ),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("\n    "),
                           Vx.Core.vx_new_string(":startpos"),
@@ -170,7 +185,8 @@ public class XmlTest {
                       ),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("<tag2 prop1=\"val1\" prop2=\"val2\" />"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -180,7 +196,8 @@ public class XmlTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimbracketangle,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":pos"),
                               Vx.Core.vx_new_int(0)
                             )
@@ -188,10 +205,12 @@ public class XmlTest {
                           Vx.Core.vx_new_string(":children"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblocklist,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("tag2"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -202,7 +221,8 @@ public class XmlTest {
                               ),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string(" "),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -212,7 +232,8 @@ public class XmlTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimwhitespace,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -221,7 +242,8 @@ public class XmlTest {
                               ),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("prop1"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -232,7 +254,8 @@ public class XmlTest {
                               ),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("="),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -242,7 +265,8 @@ public class XmlTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Xml.c_delimxmlequal,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -251,7 +275,8 @@ public class XmlTest {
                               ),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("\"val1\""),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -261,7 +286,8 @@ public class XmlTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimquote,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -269,10 +295,12 @@ public class XmlTest {
                                   Vx.Core.vx_new_string(":children"),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblocklist,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string("val1"),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -287,7 +315,8 @@ public class XmlTest {
                               ),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string(" "),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -297,7 +326,8 @@ public class XmlTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimwhitespace,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -306,7 +336,8 @@ public class XmlTest {
                               ),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("prop2"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -317,7 +348,8 @@ public class XmlTest {
                               ),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("="),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -327,7 +359,8 @@ public class XmlTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Xml.c_delimxmlequal,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -336,7 +369,8 @@ public class XmlTest {
                               ),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("\"val2\""),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -346,7 +380,8 @@ public class XmlTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimquote,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -354,10 +389,12 @@ public class XmlTest {
                                   Vx.Core.vx_new_string(":children"),
                                   Vx.Core.f_new(
                                     Vx.Data.Textblock.t_textblocklist,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.f_new(
                                         Vx.Data.Textblock.t_textblock,
-                                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                                        Vx.Core.vx_new(
+                                          Vx.Core.t_anylist,
                                           Vx.Core.vx_new_string(":text"),
                                           Vx.Core.vx_new_string("val2"),
                                           Vx.Core.vx_new_string(":startpos"),
@@ -372,7 +409,8 @@ public class XmlTest {
                               ),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string(" "),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -382,7 +420,8 @@ public class XmlTest {
                                   Vx.Core.vx_new_string(":delim"),
                                   Vx.Core.f_copy(
                                     Vx.Data.Textblock.c_delimwhitespace,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":pos"),
                                       Vx.Core.vx_new_int(0)
                                     )
@@ -391,7 +430,8 @@ public class XmlTest {
                               ),
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("/"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -406,7 +446,8 @@ public class XmlTest {
                       ),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("\n  "),
                           Vx.Core.vx_new_string(":startpos"),
@@ -417,7 +458,8 @@ public class XmlTest {
                       ),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("</tag1>"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -427,7 +469,8 @@ public class XmlTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimbracketangle,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":pos"),
                               Vx.Core.vx_new_int(0)
                             )
@@ -435,10 +478,12 @@ public class XmlTest {
                           Vx.Core.vx_new_string(":children"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblocklist,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("/tag1"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -453,7 +498,8 @@ public class XmlTest {
                       ),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("\n"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -464,7 +510,8 @@ public class XmlTest {
                       ),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("</doc>"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -474,7 +521,8 @@ public class XmlTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimbracketangle,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":pos"),
                               Vx.Core.vx_new_int(0)
                             )
@@ -482,10 +530,12 @@ public class XmlTest {
                           Vx.Core.vx_new_string(":children"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblocklist,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("/doc"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -527,7 +577,8 @@ public class XmlTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Xml.t_xml,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":tag"),
                   Vx.Core.vx_new_string(":notag")
                 )
@@ -550,7 +601,8 @@ public class XmlTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Xml.t_xml,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":tag"),
                   Vx.Core.vx_new_string("doc")
                 )
@@ -561,7 +613,8 @@ public class XmlTest {
                 ),
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("<doc>"),
                     Vx.Core.vx_new_string(":startpos"),
@@ -571,7 +624,8 @@ public class XmlTest {
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_copy(
                       Vx.Data.Textblock.c_delimbracketangle,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":pos"),
                         Vx.Core.vx_new_int(0)
                       )
@@ -579,10 +633,12 @@ public class XmlTest {
                     Vx.Core.vx_new_string(":children"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblocklist,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("doc"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -606,22 +662,26 @@ public class XmlTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Xml.t_xml,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":tag"),
                   Vx.Core.vx_new_string("tag1"),
                   Vx.Core.vx_new_string(":children"),
                   Vx.Core.f_new(
                     Vx.Data.Xml.t_xmllist,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.f_new(
                         Vx.Data.Xml.t_xml,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":tag"),
                           Vx.Core.vx_new_string("tag2"),
                           Vx.Core.vx_new_string(":propmap"),
                           Vx.Core.f_new(
                             Vx.Core.t_stringmap,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":prop1"),
                               Vx.Core.vx_new_string("val1"),
                               Vx.Core.vx_new_string(":prop2"),
@@ -637,14 +697,16 @@ public class XmlTest {
               Vx.Data.Xml.f_xml_angle_from_xml_textblock(
                 Vx.Core.f_new(
                   Vx.Data.Xml.t_xml,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":tag"),
                     Vx.Core.vx_new_string("tag1")
                   )
                 ),
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("<tag2 prop1=\"val1\" prop2=\"val2\" />"),
                     Vx.Core.vx_new_string(":startpos"),
@@ -654,7 +716,8 @@ public class XmlTest {
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_copy(
                       Vx.Data.Textblock.c_delimbracketangle,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":pos"),
                         Vx.Core.vx_new_int(0)
                       )
@@ -662,10 +725,12 @@ public class XmlTest {
                     Vx.Core.vx_new_string(":children"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblocklist,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("tag2"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -676,7 +741,8 @@ public class XmlTest {
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string(" "),
                             Vx.Core.vx_new_string(":startpos"),
@@ -686,7 +752,8 @@ public class XmlTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimwhitespace,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -695,7 +762,8 @@ public class XmlTest {
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("prop1"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -706,7 +774,8 @@ public class XmlTest {
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("="),
                             Vx.Core.vx_new_string(":startpos"),
@@ -716,7 +785,8 @@ public class XmlTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Xml.c_delimxmlequal,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -725,7 +795,8 @@ public class XmlTest {
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("\"val1\""),
                             Vx.Core.vx_new_string(":startpos"),
@@ -735,7 +806,8 @@ public class XmlTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimquote,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -743,10 +815,12 @@ public class XmlTest {
                             Vx.Core.vx_new_string(":children"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblocklist,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("val1"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -761,7 +835,8 @@ public class XmlTest {
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string(" "),
                             Vx.Core.vx_new_string(":startpos"),
@@ -771,7 +846,8 @@ public class XmlTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimwhitespace,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -780,7 +856,8 @@ public class XmlTest {
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("prop2"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -791,7 +868,8 @@ public class XmlTest {
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("="),
                             Vx.Core.vx_new_string(":startpos"),
@@ -801,7 +879,8 @@ public class XmlTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Xml.c_delimxmlequal,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -810,7 +889,8 @@ public class XmlTest {
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("\"val2\""),
                             Vx.Core.vx_new_string(":startpos"),
@@ -820,7 +900,8 @@ public class XmlTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimquote,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -828,10 +909,12 @@ public class XmlTest {
                             Vx.Core.vx_new_string(":children"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblocklist,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("val2"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -846,7 +929,8 @@ public class XmlTest {
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string(" "),
                             Vx.Core.vx_new_string(":startpos"),
@@ -856,7 +940,8 @@ public class XmlTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimwhitespace,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -865,7 +950,8 @@ public class XmlTest {
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("/"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -903,7 +989,8 @@ public class XmlTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Xml.t_xml,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":tag"),
                   Vx.Core.vx_new_string("doc")
                 )
@@ -911,14 +998,16 @@ public class XmlTest {
               Vx.Data.Xml.f_xml_close_from_xml_textblock(
                 Vx.Core.f_new(
                   Vx.Data.Xml.t_xml,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":tag"),
                     Vx.Core.vx_new_string("doc")
                   )
                 ),
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("/")
                   )
@@ -934,7 +1023,8 @@ public class XmlTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Xml.t_xml,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":tag"),
                   Vx.Core.vx_new_string("doc")
                 )
@@ -942,14 +1032,16 @@ public class XmlTest {
               Vx.Data.Xml.f_xml_close_from_xml_textblock(
                 Vx.Core.f_new(
                   Vx.Data.Xml.t_xml,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":tag"),
                     Vx.Core.vx_new_string("doc")
                   )
                 ),
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("</doc>")
                   )
@@ -965,18 +1057,21 @@ public class XmlTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Xml.t_xml,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":tag"),
                   Vx.Core.vx_new_string("doc"),
                   Vx.Core.f_new(
                     Vx.Core.t_msg,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":code"),
                       Vx.Core.vx_new_string(":invalidxmlclosetag"),
                       Vx.Core.vx_new_string(":detail"),
                       Vx.Core.f_new(
                         Vx.Core.t_anymap,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":tag"),
                           Vx.Core.vx_new_string("/wrong"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -998,14 +1093,16 @@ public class XmlTest {
               Vx.Data.Xml.f_xml_close_from_xml_textblock(
                 Vx.Core.f_new(
                   Vx.Data.Xml.t_xml,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":tag"),
                     Vx.Core.vx_new_string("doc")
                   )
                 ),
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("/wrong")
                   )
@@ -1021,16 +1118,19 @@ public class XmlTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Xml.t_xml,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":tag"),
                   Vx.Core.vx_new_string("top"),
                   Vx.Core.vx_new_string(":children"),
                   Vx.Core.f_new(
                     Vx.Data.Xml.t_xmllist,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.f_new(
                         Vx.Data.Xml.t_xml,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":tag"),
                           Vx.Core.vx_new_string("doc")
                         )
@@ -1042,13 +1142,15 @@ public class XmlTest {
               Vx.Data.Xml.f_xml_close_from_xml_textblock(
                 Vx.Core.f_new(
                   Vx.Data.Xml.t_xml,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":tag"),
                     Vx.Core.vx_new_string("doc"),
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Xml.t_xml,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":tag"),
                         Vx.Core.vx_new_string("top")
                       )
@@ -1057,7 +1159,8 @@ public class XmlTest {
                 ),
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("/")
                   )
@@ -1087,7 +1190,8 @@ public class XmlTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Xml.t_xml,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":tag"),
                   Vx.Core.vx_new_string("doc")
                 )
@@ -1098,13 +1202,15 @@ public class XmlTest {
                 ),
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("<doc>"),
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_copy(
                       Vx.Data.Textblock.c_delimbracketangle,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":pos"),
                         Vx.Core.vx_new_int(0)
                       )
@@ -1112,10 +1218,12 @@ public class XmlTest {
                     Vx.Core.vx_new_string(":children"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblocklist,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("doc")
                           )
@@ -1135,7 +1243,8 @@ public class XmlTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Xml.t_xml,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":tag"),
                   Vx.Core.vx_new_string("doc")
                 )
@@ -1143,20 +1252,23 @@ public class XmlTest {
               Vx.Data.Xml.f_xml_parse_from_xml_textblock(
                 Vx.Core.f_new(
                   Vx.Data.Xml.t_xml,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":tag"),
                     Vx.Core.vx_new_string("doc")
                   )
                 ),
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("\n  "),
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_copy(
                       Vx.Data.Textblock.c_delimwhitespace,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":pos"),
                         Vx.Core.vx_new_int(0)
                       )
@@ -1174,13 +1286,15 @@ public class XmlTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Xml.t_xml,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":tag"),
                   Vx.Core.vx_new_string("tag1"),
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Xml.t_xml,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":tag"),
                       Vx.Core.vx_new_string("doc")
                     )
@@ -1190,20 +1304,23 @@ public class XmlTest {
               Vx.Data.Xml.f_xml_parse_from_xml_textblock(
                 Vx.Core.f_new(
                   Vx.Data.Xml.t_xml,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":tag"),
                     Vx.Core.vx_new_string("doc")
                   )
                 ),
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("<tag1>"),
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_copy(
                       Vx.Data.Textblock.c_delimbracketangle,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":pos"),
                         Vx.Core.vx_new_int(0)
                       )
@@ -1211,10 +1328,12 @@ public class XmlTest {
                     Vx.Core.vx_new_string(":children"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblocklist,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("tag1")
                           )
@@ -1234,22 +1353,26 @@ public class XmlTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Xml.t_xml,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":tag"),
                   Vx.Core.vx_new_string("tag1"),
                   Vx.Core.vx_new_string(":children"),
                   Vx.Core.f_new(
                     Vx.Data.Xml.t_xmllist,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.f_new(
                         Vx.Data.Xml.t_xml,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":tag"),
                           Vx.Core.vx_new_string("tag2"),
                           Vx.Core.vx_new_string(":propmap"),
                           Vx.Core.f_new(
                             Vx.Core.t_stringmap,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":prop1"),
                               Vx.Core.vx_new_string("val1"),
                               Vx.Core.vx_new_string(":prop2"),
@@ -1263,7 +1386,8 @@ public class XmlTest {
                   Vx.Core.vx_new_string(":parent"),
                   Vx.Core.f_new(
                     Vx.Data.Xml.t_xml,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":tag"),
                       Vx.Core.vx_new_string("doc")
                     )
@@ -1273,13 +1397,15 @@ public class XmlTest {
               Vx.Data.Xml.f_xml_parse_from_xml_textblock(
                 Vx.Core.f_new(
                   Vx.Data.Xml.t_xml,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":tag"),
                     Vx.Core.vx_new_string("tag1"),
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Xml.t_xml,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":tag"),
                         Vx.Core.vx_new_string("doc")
                       )
@@ -1288,13 +1414,15 @@ public class XmlTest {
                 ),
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("<tag2 prop1=\"val1\" prop2=\"val2\" />"),
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_copy(
                       Vx.Data.Textblock.c_delimbracketangle,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":pos"),
                         Vx.Core.vx_new_int(0)
                       )
@@ -1302,23 +1430,27 @@ public class XmlTest {
                     Vx.Core.vx_new_string(":children"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblocklist,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("tag2")
                           )
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string(" "),
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimwhitespace,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -1327,20 +1459,23 @@ public class XmlTest {
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("prop1")
                           )
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("="),
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Xml.c_delimxmlequal,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -1349,13 +1484,15 @@ public class XmlTest {
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("\"val1\""),
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimquote,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -1363,10 +1500,12 @@ public class XmlTest {
                             Vx.Core.vx_new_string(":children"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblocklist,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("val1")
                                   )
@@ -1377,13 +1516,15 @@ public class XmlTest {
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string(" "),
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimwhitespace,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -1392,20 +1533,23 @@ public class XmlTest {
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("prop2")
                           )
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("="),
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Xml.c_delimxmlequal,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -1414,13 +1558,15 @@ public class XmlTest {
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("\"val2\""),
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimquote,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -1428,10 +1574,12 @@ public class XmlTest {
                             Vx.Core.vx_new_string(":children"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblocklist,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("val2")
                                   )
@@ -1442,13 +1590,15 @@ public class XmlTest {
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string(" "),
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimwhitespace,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -1457,7 +1607,8 @@ public class XmlTest {
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("/")
                           )
@@ -1477,31 +1628,37 @@ public class XmlTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Xml.t_xml,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":tag"),
                   Vx.Core.vx_new_string("doc"),
                   Vx.Core.vx_new_string(":children"),
                   Vx.Core.f_new(
                     Vx.Data.Xml.t_xmllist,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.f_new(
                         Vx.Data.Xml.t_xml,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":tag"),
                           Vx.Core.vx_new_string("tag1"),
                           Vx.Core.vx_new_string(":children"),
                           Vx.Core.f_new(
                             Vx.Data.Xml.t_xmllist,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.f_new(
                                 Vx.Data.Xml.t_xml,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":tag"),
                                   Vx.Core.vx_new_string("tag2"),
                                   Vx.Core.vx_new_string(":propmap"),
                                   Vx.Core.f_new(
                                     Vx.Core.t_stringmap,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":prop1"),
                                       Vx.Core.vx_new_string("val1"),
                                       Vx.Core.vx_new_string(":prop2"),
@@ -1521,22 +1678,26 @@ public class XmlTest {
               Vx.Data.Xml.f_xml_parse_from_xml_textblock(
                 Vx.Core.f_new(
                   Vx.Data.Xml.t_xml,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":tag"),
                     Vx.Core.vx_new_string("tag1"),
                     Vx.Core.vx_new_string(":children"),
                     Vx.Core.f_new(
                       Vx.Data.Xml.t_xmllist,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.f_new(
                           Vx.Data.Xml.t_xml,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":tag"),
                             Vx.Core.vx_new_string("tag2"),
                             Vx.Core.vx_new_string(":propmap"),
                             Vx.Core.f_new(
                               Vx.Core.t_stringmap,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":prop1"),
                                 Vx.Core.vx_new_string("val1"),
                                 Vx.Core.vx_new_string(":prop2"),
@@ -1550,7 +1711,8 @@ public class XmlTest {
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Xml.t_xml,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":tag"),
                         Vx.Core.vx_new_string("doc")
                       )
@@ -1559,13 +1721,15 @@ public class XmlTest {
                 ),
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("</tag1>"),
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_copy(
                       Vx.Data.Textblock.c_delimbracketangle,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":pos"),
                         Vx.Core.vx_new_int(0)
                       )
@@ -1573,10 +1737,12 @@ public class XmlTest {
                     Vx.Core.vx_new_string(":children"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblocklist,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("/tag1")
                           )
@@ -1610,31 +1776,37 @@ public class XmlTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Xml.t_xml,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":tag"),
                   Vx.Core.vx_new_string("doc"),
                   Vx.Core.vx_new_string(":children"),
                   Vx.Core.f_new(
                     Vx.Data.Xml.t_xmllist,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.f_new(
                         Vx.Data.Xml.t_xml,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":tag"),
                           Vx.Core.vx_new_string("tag1"),
                           Vx.Core.vx_new_string(":children"),
                           Vx.Core.f_new(
                             Vx.Data.Xml.t_xmllist,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.f_new(
                                 Vx.Data.Xml.t_xml,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":tag"),
                                   Vx.Core.vx_new_string("tag2"),
                                   Vx.Core.vx_new_string(":propmap"),
                                   Vx.Core.f_new(
                                     Vx.Core.t_stringmap,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":prop1"),
                                       Vx.Core.vx_new_string("val1"),
                                       Vx.Core.vx_new_string(":prop2"),
@@ -1657,10 +1829,12 @@ public class XmlTest {
                 ),
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblocklist,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("<doc>"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -1670,7 +1844,8 @@ public class XmlTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimbracketangle,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":pos"),
                             Vx.Core.vx_new_int(0)
                           )
@@ -1678,10 +1853,12 @@ public class XmlTest {
                         Vx.Core.vx_new_string(":children"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblocklist,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("doc"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -1696,7 +1873,8 @@ public class XmlTest {
                     ),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("\n  "),
                         Vx.Core.vx_new_string(":startpos"),
@@ -1706,7 +1884,8 @@ public class XmlTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimwhitespace,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":pos"),
                             Vx.Core.vx_new_int(0)
                           )
@@ -1715,7 +1894,8 @@ public class XmlTest {
                     ),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("<tag1>"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -1725,7 +1905,8 @@ public class XmlTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimbracketangle,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":pos"),
                             Vx.Core.vx_new_int(0)
                           )
@@ -1733,10 +1914,12 @@ public class XmlTest {
                         Vx.Core.vx_new_string(":children"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblocklist,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("tag1"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -1751,7 +1934,8 @@ public class XmlTest {
                     ),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("\n    "),
                         Vx.Core.vx_new_string(":startpos"),
@@ -1761,7 +1945,8 @@ public class XmlTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimwhitespace,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":pos"),
                             Vx.Core.vx_new_int(0)
                           )
@@ -1770,7 +1955,8 @@ public class XmlTest {
                     ),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("<tag2 prop1=\"val1\" prop2=\"val2\" />"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -1780,7 +1966,8 @@ public class XmlTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimbracketangle,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":pos"),
                             Vx.Core.vx_new_int(0)
                           )
@@ -1788,10 +1975,12 @@ public class XmlTest {
                         Vx.Core.vx_new_string(":children"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblocklist,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("tag2"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -1802,7 +1991,8 @@ public class XmlTest {
                             ),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string(" "),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -1812,7 +2002,8 @@ public class XmlTest {
                                 Vx.Core.vx_new_string(":delim"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Textblock.c_delimwhitespace,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":pos"),
                                     Vx.Core.vx_new_int(0)
                                   )
@@ -1821,7 +2012,8 @@ public class XmlTest {
                             ),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("prop1"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -1832,7 +2024,8 @@ public class XmlTest {
                             ),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("="),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -1842,7 +2035,8 @@ public class XmlTest {
                                 Vx.Core.vx_new_string(":delim"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Xml.c_delimxmlequal,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":pos"),
                                     Vx.Core.vx_new_int(0)
                                   )
@@ -1851,7 +2045,8 @@ public class XmlTest {
                             ),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("\"val1\""),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -1861,7 +2056,8 @@ public class XmlTest {
                                 Vx.Core.vx_new_string(":delim"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Textblock.c_delimquote,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":pos"),
                                     Vx.Core.vx_new_int(0)
                                   )
@@ -1869,10 +2065,12 @@ public class XmlTest {
                                 Vx.Core.vx_new_string(":children"),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblocklist,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string("val1"),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -1887,7 +2085,8 @@ public class XmlTest {
                             ),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string(" "),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -1897,7 +2096,8 @@ public class XmlTest {
                                 Vx.Core.vx_new_string(":delim"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Textblock.c_delimwhitespace,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":pos"),
                                     Vx.Core.vx_new_int(0)
                                   )
@@ -1906,7 +2106,8 @@ public class XmlTest {
                             ),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("prop2"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -1917,7 +2118,8 @@ public class XmlTest {
                             ),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("="),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -1927,7 +2129,8 @@ public class XmlTest {
                                 Vx.Core.vx_new_string(":delim"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Xml.c_delimxmlequal,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":pos"),
                                     Vx.Core.vx_new_int(0)
                                   )
@@ -1936,7 +2139,8 @@ public class XmlTest {
                             ),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("\"val2\""),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -1946,7 +2150,8 @@ public class XmlTest {
                                 Vx.Core.vx_new_string(":delim"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Textblock.c_delimquote,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":pos"),
                                     Vx.Core.vx_new_int(0)
                                   )
@@ -1954,10 +2159,12 @@ public class XmlTest {
                                 Vx.Core.vx_new_string(":children"),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblocklist,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblock,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":text"),
                                         Vx.Core.vx_new_string("val2"),
                                         Vx.Core.vx_new_string(":startpos"),
@@ -1972,7 +2179,8 @@ public class XmlTest {
                             ),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string(" "),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -1982,7 +2190,8 @@ public class XmlTest {
                                 Vx.Core.vx_new_string(":delim"),
                                 Vx.Core.f_copy(
                                   Vx.Data.Textblock.c_delimwhitespace,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":pos"),
                                     Vx.Core.vx_new_int(0)
                                   )
@@ -1991,7 +2200,8 @@ public class XmlTest {
                             ),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("/"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -2006,7 +2216,8 @@ public class XmlTest {
                     ),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("\n  "),
                         Vx.Core.vx_new_string(":startpos"),
@@ -2016,7 +2227,8 @@ public class XmlTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimwhitespace,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":pos"),
                             Vx.Core.vx_new_int(0)
                           )
@@ -2025,7 +2237,8 @@ public class XmlTest {
                     ),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("</tag1>"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -2035,7 +2248,8 @@ public class XmlTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimbracketangle,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":pos"),
                             Vx.Core.vx_new_int(0)
                           )
@@ -2043,10 +2257,12 @@ public class XmlTest {
                         Vx.Core.vx_new_string(":children"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblocklist,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("/tag1"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -2061,7 +2277,8 @@ public class XmlTest {
                     ),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("\n"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -2071,7 +2288,8 @@ public class XmlTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimwhitespace,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":pos"),
                             Vx.Core.vx_new_int(0)
                           )
@@ -2080,7 +2298,8 @@ public class XmlTest {
                     ),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("</doc>"),
                         Vx.Core.vx_new_string(":startpos"),
@@ -2090,7 +2309,8 @@ public class XmlTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimbracketangle,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":pos"),
                             Vx.Core.vx_new_int(0)
                           )
@@ -2098,10 +2318,12 @@ public class XmlTest {
                         Vx.Core.vx_new_string(":children"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblocklist,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("/doc"),
                                 Vx.Core.vx_new_string(":startpos"),
@@ -2141,22 +2363,26 @@ public class XmlTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Xml.t_xml,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":tag"),
                   Vx.Core.vx_new_string("doc"),
                   Vx.Core.vx_new_string(":children"),
                   Vx.Core.f_new(
                     Vx.Data.Xml.t_xmllist,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.f_new(
                         Vx.Data.Xml.t_xml,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":tag"),
                           Vx.Core.vx_new_string("tag2"),
                           Vx.Core.vx_new_string(":propmap"),
                           Vx.Core.f_new(
                             Vx.Core.t_stringmap,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":prop1"),
                               Vx.Core.vx_new_string("val1"),
                               Vx.Core.vx_new_string(":prop2"),
@@ -2172,13 +2398,15 @@ public class XmlTest {
               Vx.Data.Xml.f_xml_properties_from_xml_textblocklist(
                 Vx.Core.f_new(
                   Vx.Data.Xml.t_xml,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":tag"),
                     Vx.Core.vx_new_string(":notag"),
                     Vx.Core.vx_new_string(":parent"),
                     Vx.Core.f_new(
                       Vx.Data.Xml.t_xml,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":tag"),
                         Vx.Core.vx_new_string("doc")
                       )
@@ -2187,23 +2415,27 @@ public class XmlTest {
                 ),
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblocklist,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("tag2")
                       )
                     ),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string(" "),
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimwhitespace,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":pos"),
                             Vx.Core.vx_new_int(0)
                           )
@@ -2212,20 +2444,23 @@ public class XmlTest {
                     ),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("prop1")
                       )
                     ),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("="),
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Xml.c_delimxmlequal,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":pos"),
                             Vx.Core.vx_new_int(0)
                           )
@@ -2234,7 +2469,8 @@ public class XmlTest {
                     ),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("\"val1\""),
                         Vx.Core.vx_new_string(":startpos"),
@@ -2244,7 +2480,8 @@ public class XmlTest {
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimquote,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":pos"),
                             Vx.Core.vx_new_int(0)
                           )
@@ -2252,10 +2489,12 @@ public class XmlTest {
                         Vx.Core.vx_new_string(":children"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblocklist,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("val1")
                               )
@@ -2266,13 +2505,15 @@ public class XmlTest {
                     ),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string(" "),
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimwhitespace,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":pos"),
                             Vx.Core.vx_new_int(0)
                           )
@@ -2281,20 +2522,23 @@ public class XmlTest {
                     ),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("prop2")
                       )
                     ),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("="),
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Xml.c_delimxmlequal,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":pos"),
                             Vx.Core.vx_new_int(0)
                           )
@@ -2303,13 +2547,15 @@ public class XmlTest {
                     ),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("\"val2\""),
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimquote,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":pos"),
                             Vx.Core.vx_new_int(0)
                           )
@@ -2317,10 +2563,12 @@ public class XmlTest {
                         Vx.Core.vx_new_string(":children"),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblocklist,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblock,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":text"),
                                 Vx.Core.vx_new_string("val2")
                               )
@@ -2331,13 +2579,15 @@ public class XmlTest {
                     ),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string(" "),
                         Vx.Core.vx_new_string(":delim"),
                         Vx.Core.f_copy(
                           Vx.Data.Textblock.c_delimwhitespace,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":pos"),
                             Vx.Core.vx_new_int(0)
                           )
@@ -2346,7 +2596,8 @@ public class XmlTest {
                     ),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":text"),
                         Vx.Core.vx_new_string("/")
                       )
@@ -2378,7 +2629,8 @@ public class XmlTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Xml.t_xml,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":tag"),
                   Vx.Core.vx_new_string("tag1")
                 )
@@ -2386,14 +2638,16 @@ public class XmlTest {
               Vx.Data.Xml.f_xml_property_from_xml_textblock(
                 Vx.Core.f_new(
                   Vx.Data.Xml.t_xml,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":tag"),
                     Vx.Core.vx_new_string(":notag")
                   )
                 ),
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("tag1")
                   )
@@ -2409,7 +2663,8 @@ public class XmlTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Xml.t_xml,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":tag"),
                   Vx.Core.vx_new_string("tag1"),
                   Vx.Core.vx_new_string(":prop"),
@@ -2419,14 +2674,16 @@ public class XmlTest {
               Vx.Data.Xml.f_xml_property_from_xml_textblock(
                 Vx.Core.f_new(
                   Vx.Data.Xml.t_xml,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":tag"),
                     Vx.Core.vx_new_string("tag1")
                   )
                 ),
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("prop1")
                   )
@@ -2442,13 +2699,15 @@ public class XmlTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Xml.t_xml,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":tag"),
                   Vx.Core.vx_new_string("tag1"),
                   Vx.Core.vx_new_string(":propmap"),
                   Vx.Core.f_new(
                     Vx.Core.t_stringmap,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(":prop1"),
                       Vx.Core.vx_new_string("val1")
                     )
@@ -2458,7 +2717,8 @@ public class XmlTest {
               Vx.Data.Xml.f_xml_property_from_xml_textblock(
                 Vx.Core.f_new(
                   Vx.Data.Xml.t_xml,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":tag"),
                     Vx.Core.vx_new_string("tag1"),
                     Vx.Core.vx_new_string(":prop"),
@@ -2467,11 +2727,13 @@ public class XmlTest {
                 ),
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":delim"),
                     Vx.Core.f_copy(
                       Vx.Data.Textblock.c_delimquote,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string(":pos"),
                         Vx.Core.vx_new_int(0)
                       )
@@ -2479,10 +2741,12 @@ public class XmlTest {
                     Vx.Core.vx_new_string(":children"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblocklist,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("val1")
                           )
@@ -2516,7 +2780,8 @@ public class XmlTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Xml.t_xml,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("text1")
                 )
@@ -2527,7 +2792,8 @@ public class XmlTest {
                 ),
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("text1")
                   )
@@ -2543,16 +2809,19 @@ public class XmlTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Xml.t_xml,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":tag"),
                   Vx.Core.vx_new_string("doc"),
                   Vx.Core.vx_new_string(":children"),
                   Vx.Core.f_new(
                     Vx.Data.Xml.t_xmllist,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.f_new(
                         Vx.Data.Xml.t_xml,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("text1")
                         )
@@ -2564,14 +2833,16 @@ public class XmlTest {
               Vx.Data.Xml.f_xml_text_from_xml_textblock(
                 Vx.Core.f_new(
                   Vx.Data.Xml.t_xml,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":tag"),
                     Vx.Core.vx_new_string("doc")
                   )
                 ),
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("text1")
                   )
@@ -2601,31 +2872,37 @@ public class XmlTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Xml.t_xml,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":tag"),
                   Vx.Core.vx_new_string("doc"),
                   Vx.Core.vx_new_string(":children"),
                   Vx.Core.f_new(
                     Vx.Data.Xml.t_xmllist,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.f_new(
                         Vx.Data.Xml.t_xml,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":tag"),
                           Vx.Core.vx_new_string("tag1"),
                           Vx.Core.vx_new_string(":children"),
                           Vx.Core.f_new(
                             Vx.Data.Xml.t_xmllist,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.f_new(
                                 Vx.Data.Xml.t_xml,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":tag"),
                                   Vx.Core.vx_new_string("tag2"),
                                   Vx.Core.vx_new_string(":propmap"),
                                   Vx.Core.f_new(
                                     Vx.Core.t_stringmap,
-                                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                                    Vx.Core.vx_new(
+                                      Vx.Core.t_anylist,
                                       Vx.Core.vx_new_string(":prop1"),
                                       Vx.Core.vx_new_string("val1"),
                                       Vx.Core.vx_new_string(":prop2"),
@@ -2645,7 +2922,8 @@ public class XmlTest {
               Vx.Data.Xml.f_xml_from_textblock(
                 Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
                     Vx.Core.vx_new_string("<doc>\n  <tag1>\n    <tag2 prop1=\"val1\" prop2=\"val2\" />\n  </tag1>\n</doc>"),
                     Vx.Core.vx_new_string(":startpos"),
@@ -2655,10 +2933,12 @@ public class XmlTest {
                     Vx.Core.vx_new_string(":children"),
                     Vx.Core.f_new(
                       Vx.Data.Textblock.t_textblocklist,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("<doc>"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -2668,7 +2948,8 @@ public class XmlTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimbracketangle,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -2676,10 +2957,12 @@ public class XmlTest {
                             Vx.Core.vx_new_string(":children"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblocklist,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("doc"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -2694,7 +2977,8 @@ public class XmlTest {
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("\n  "),
                             Vx.Core.vx_new_string(":startpos"),
@@ -2704,7 +2988,8 @@ public class XmlTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimwhitespace,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -2713,7 +2998,8 @@ public class XmlTest {
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("<tag1>"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -2723,7 +3009,8 @@ public class XmlTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimbracketangle,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -2731,10 +3018,12 @@ public class XmlTest {
                             Vx.Core.vx_new_string(":children"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblocklist,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("tag1"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -2749,7 +3038,8 @@ public class XmlTest {
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("\n    "),
                             Vx.Core.vx_new_string(":startpos"),
@@ -2759,7 +3049,8 @@ public class XmlTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimwhitespace,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -2768,7 +3059,8 @@ public class XmlTest {
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("<tag2 prop1=\"val1\" prop2=\"val2\" />"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -2778,7 +3070,8 @@ public class XmlTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimbracketangle,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -2786,10 +3079,12 @@ public class XmlTest {
                             Vx.Core.vx_new_string(":children"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblocklist,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("tag2"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -2800,7 +3095,8 @@ public class XmlTest {
                                 ),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string(" "),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -2810,7 +3106,8 @@ public class XmlTest {
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Textblock.c_delimwhitespace,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":pos"),
                                         Vx.Core.vx_new_int(0)
                                       )
@@ -2819,7 +3116,8 @@ public class XmlTest {
                                 ),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("prop1"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -2830,7 +3128,8 @@ public class XmlTest {
                                 ),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("="),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -2840,7 +3139,8 @@ public class XmlTest {
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Xml.c_delimxmlequal,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":pos"),
                                         Vx.Core.vx_new_int(0)
                                       )
@@ -2849,7 +3149,8 @@ public class XmlTest {
                                 ),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("\"val1\""),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -2859,7 +3160,8 @@ public class XmlTest {
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Textblock.c_delimquote,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":pos"),
                                         Vx.Core.vx_new_int(0)
                                       )
@@ -2867,10 +3169,12 @@ public class XmlTest {
                                     Vx.Core.vx_new_string(":children"),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblocklist,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string("val1"),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -2885,7 +3189,8 @@ public class XmlTest {
                                 ),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string(" "),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -2895,7 +3200,8 @@ public class XmlTest {
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Textblock.c_delimwhitespace,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":pos"),
                                         Vx.Core.vx_new_int(0)
                                       )
@@ -2904,7 +3210,8 @@ public class XmlTest {
                                 ),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("prop2"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -2915,7 +3222,8 @@ public class XmlTest {
                                 ),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("="),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -2925,7 +3233,8 @@ public class XmlTest {
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Xml.c_delimxmlequal,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":pos"),
                                         Vx.Core.vx_new_int(0)
                                       )
@@ -2934,7 +3243,8 @@ public class XmlTest {
                                 ),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("\"val2\""),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -2944,7 +3254,8 @@ public class XmlTest {
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Textblock.c_delimquote,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":pos"),
                                         Vx.Core.vx_new_int(0)
                                       )
@@ -2952,10 +3263,12 @@ public class XmlTest {
                                     Vx.Core.vx_new_string(":children"),
                                     Vx.Core.f_new(
                                       Vx.Data.Textblock.t_textblocklist,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.f_new(
                                           Vx.Data.Textblock.t_textblock,
-                                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                                          Vx.Core.vx_new(
+                                            Vx.Core.t_anylist,
                                             Vx.Core.vx_new_string(":text"),
                                             Vx.Core.vx_new_string("val2"),
                                             Vx.Core.vx_new_string(":startpos"),
@@ -2970,7 +3283,8 @@ public class XmlTest {
                                 ),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string(" "),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -2980,7 +3294,8 @@ public class XmlTest {
                                     Vx.Core.vx_new_string(":delim"),
                                     Vx.Core.f_copy(
                                       Vx.Data.Textblock.c_delimwhitespace,
-                                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                                      Vx.Core.vx_new(
+                                        Vx.Core.t_anylist,
                                         Vx.Core.vx_new_string(":pos"),
                                         Vx.Core.vx_new_int(0)
                                       )
@@ -2989,7 +3304,8 @@ public class XmlTest {
                                 ),
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("/"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -3004,7 +3320,8 @@ public class XmlTest {
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("\n  "),
                             Vx.Core.vx_new_string(":startpos"),
@@ -3014,7 +3331,8 @@ public class XmlTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimwhitespace,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -3023,7 +3341,8 @@ public class XmlTest {
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("</tag1>"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -3033,7 +3352,8 @@ public class XmlTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimbracketangle,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -3041,10 +3361,12 @@ public class XmlTest {
                             Vx.Core.vx_new_string(":children"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblocklist,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("/tag1"),
                                     Vx.Core.vx_new_string(":startpos"),
@@ -3059,7 +3381,8 @@ public class XmlTest {
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("\n"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -3069,7 +3392,8 @@ public class XmlTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimwhitespace,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -3078,7 +3402,8 @@ public class XmlTest {
                         ),
                         Vx.Core.f_new(
                           Vx.Data.Textblock.t_textblock,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("</doc>"),
                             Vx.Core.vx_new_string(":startpos"),
@@ -3088,7 +3413,8 @@ public class XmlTest {
                             Vx.Core.vx_new_string(":delim"),
                             Vx.Core.f_copy(
                               Vx.Data.Textblock.c_delimbracketangle,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.vx_new_string(":pos"),
                                 Vx.Core.vx_new_int(0)
                               )
@@ -3096,10 +3422,12 @@ public class XmlTest {
                             Vx.Core.vx_new_string(":children"),
                             Vx.Core.f_new(
                               Vx.Data.Textblock.t_textblocklist,
-                              Vx.Core.vx_new(Vx.Core.t_anylist,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
                                 Vx.Core.f_new(
                                   Vx.Data.Textblock.t_textblock,
-                                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                                  Vx.Core.vx_new(
+                                    Vx.Core.t_anylist,
                                     Vx.Core.vx_new_string(":text"),
                                     Vx.Core.vx_new_string("/doc"),
                                     Vx.Core.vx_new_string(":startpos"),

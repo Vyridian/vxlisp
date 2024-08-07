@@ -83,7 +83,8 @@ public static class Test {
       output.put(":testpkg", this.testpkg());
       output.put(":casename", this.casename());
       output.put(":describelist", this.describelist());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Test.Type_testcase vx_new(params object[] vals) {
@@ -91,18 +92,18 @@ public static class Test {
       return output;
     }
 
-    public override Vx.Test.Type_testcase vx_copy(params object[] vals) {
-      Type_testcase output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Type_testcase output = this;
       bool ischanged = false;
-      Class_testcase val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Test.Class_testcase value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Type_boolean vx_p_passfail = val.passfail();
-      Vx.Core.Type_string vx_p_testpkg = val.testpkg();
-      Vx.Core.Type_string vx_p_casename = val.casename();
-      Vx.Test.Type_testdescribelist vx_p_describelist = val.describelist();
+      Vx.Core.Type_boolean vx_p_passfail = value.passfail();
+      Vx.Core.Type_string vx_p_testpkg = value.testpkg();
+      Vx.Core.Type_string vx_p_casename = value.casename();
+      Vx.Test.Type_testdescribelist vx_p_describelist = value.describelist();
       List<string> validkeys = new List<string>();
       validkeys.Add(":passfail");
       validkeys.Add(":testpkg");
@@ -250,7 +251,7 @@ public static class Test {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_testcase work = new Class_testcase();
+        Vx.Test.Class_testcase work = new Vx.Test.Class_testcase();
         work.vx_p_passfail = vx_p_passfail;
         work.vx_p_testpkg = vx_p_testpkg;
         work.vx_p_casename = vx_p_casename;
@@ -264,14 +265,17 @@ public static class Test {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_testcase;
+      Vx.Core.Type_any output = Vx.Test.e_testcase;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_testcase;
+      Vx.Core.Type_any output = Vx.Test.t_testcase;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/test", // pkgname
         "testcase", // name
         ":struct", // extends
@@ -284,12 +288,13 @@ public static class Test {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_testcase e_testcase = new Class_testcase();
-  public static Type_testcase t_testcase = new Class_testcase();
+  public static Vx.Test.Type_testcase e_testcase = new Vx.Test.Class_testcase();
+  public static Vx.Test.Type_testcase t_testcase = new Vx.Test.Class_testcase();
 
   /**
    * type: testcaselist
@@ -303,7 +308,9 @@ public static class Test {
 
   public class Class_testcaselist : Vx.Core.Class_base, Type_testcaselist {
 
-    public List<Vx.Test.Type_testcase> vx_p_list = Vx.Core.immutablelist(new List<Vx.Test.Type_testcase>());
+    public List<Vx.Test.Type_testcase> vx_p_list = Vx.Core.immutablelist(
+      new List<Vx.Test.Type_testcase>()
+    );
 
     public List<Vx.Core.Type_any> vx_list() {
       List<Vx.Core.Type_any> output = Vx.Core.immutablelist(
@@ -324,11 +331,13 @@ public static class Test {
     }
 
     public List<Vx.Test.Type_testcase> vx_listtestcase() {
-      return vx_p_list;
+      List<Vx.Test.Type_testcase> output = this.vx_p_list;
+      return output;
     }
 
     public Vx.Core.Type_any vx_any(Vx.Core.Type_int index) {
-      return this.vx_testcase(index);
+      Vx.Test.Type_testcase output = this.vx_testcase(index);
+      return output;
     }
 
     public override Vx.Test.Type_testcaselist vx_new(params object[] vals) {
@@ -336,15 +345,15 @@ public static class Test {
       return output;
     }
 
-    public override Vx.Test.Type_testcaselist vx_copy(params object[] vals) {
-      Type_testcaselist output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Type_testcaselist output = this;
       bool ischanged = false;
-      Class_testcaselist val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Test.Class_testcaselist value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      List<Vx.Test.Type_testcase> listval = new List<Vx.Test.Type_testcase>(val.vx_listtestcase());
+      List<Vx.Test.Type_testcase> listval = new List<Vx.Test.Type_testcase>(value.vx_listtestcase());
       Vx.Core.Type_msg msg;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
@@ -377,7 +386,7 @@ public static class Test {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_testcaselist work = new Class_testcaselist();
+        Vx.Test.Class_testcaselist work = new Vx.Test.Class_testcaselist();
         work.vx_p_list = Vx.Core.immutablelist(listval);
         if (msgblock != Vx.Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -388,14 +397,17 @@ public static class Test {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_testcaselist;
+      Vx.Core.Type_any output = Vx.Test.e_testcaselist;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_testcaselist;
+      Vx.Core.Type_any output = Vx.Test.t_testcaselist;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/test", // pkgname
         "testcaselist", // name
         ":list", // extends
@@ -408,12 +420,13 @@ public static class Test {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_testcaselist e_testcaselist = new Class_testcaselist();
-  public static Type_testcaselist t_testcaselist = new Class_testcaselist();
+  public static Vx.Test.Type_testcaselist e_testcaselist = new Vx.Test.Class_testcaselist();
+  public static Vx.Test.Type_testcaselist t_testcaselist = new Vx.Test.Class_testcaselist();
 
   /**
    * type: testcoveragedetail
@@ -495,7 +508,8 @@ public static class Test {
       output.put(":funcmap", this.funcmap());
       output.put(":testpkg", this.testpkg());
       output.put(":typemap", this.typemap());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Test.Type_testcoveragedetail vx_new(params object[] vals) {
@@ -503,18 +517,18 @@ public static class Test {
       return output;
     }
 
-    public override Vx.Test.Type_testcoveragedetail vx_copy(params object[] vals) {
-      Type_testcoveragedetail output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Type_testcoveragedetail output = this;
       bool ischanged = false;
-      Class_testcoveragedetail val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Test.Class_testcoveragedetail value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Type_intmap vx_p_constmap = val.constmap();
-      Vx.Core.Type_intmap vx_p_funcmap = val.funcmap();
-      Vx.Core.Type_string vx_p_testpkg = val.testpkg();
-      Vx.Core.Type_intmap vx_p_typemap = val.typemap();
+      Vx.Core.Type_intmap vx_p_constmap = value.constmap();
+      Vx.Core.Type_intmap vx_p_funcmap = value.funcmap();
+      Vx.Core.Type_string vx_p_testpkg = value.testpkg();
+      Vx.Core.Type_intmap vx_p_typemap = value.typemap();
       List<string> validkeys = new List<string>();
       validkeys.Add(":constmap");
       validkeys.Add(":funcmap");
@@ -656,7 +670,7 @@ public static class Test {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_testcoveragedetail work = new Class_testcoveragedetail();
+        Vx.Test.Class_testcoveragedetail work = new Vx.Test.Class_testcoveragedetail();
         work.vx_p_constmap = vx_p_constmap;
         work.vx_p_funcmap = vx_p_funcmap;
         work.vx_p_testpkg = vx_p_testpkg;
@@ -670,14 +684,17 @@ public static class Test {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_testcoveragedetail;
+      Vx.Core.Type_any output = Vx.Test.e_testcoveragedetail;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_testcoveragedetail;
+      Vx.Core.Type_any output = Vx.Test.t_testcoveragedetail;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/test", // pkgname
         "testcoveragedetail", // name
         ":struct", // extends
@@ -690,12 +707,13 @@ public static class Test {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_testcoveragedetail e_testcoveragedetail = new Class_testcoveragedetail();
-  public static Type_testcoveragedetail t_testcoveragedetail = new Class_testcoveragedetail();
+  public static Vx.Test.Type_testcoveragedetail e_testcoveragedetail = new Vx.Test.Class_testcoveragedetail();
+  public static Vx.Test.Type_testcoveragedetail t_testcoveragedetail = new Vx.Test.Class_testcoveragedetail();
 
   /**
    * type: testcoveragenums
@@ -777,7 +795,8 @@ public static class Test {
       output.put(":testpkg", this.testpkg());
       output.put(":tests", this.tests());
       output.put(":total", this.total());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Test.Type_testcoveragenums vx_new(params object[] vals) {
@@ -785,18 +804,18 @@ public static class Test {
       return output;
     }
 
-    public override Vx.Test.Type_testcoveragenums vx_copy(params object[] vals) {
-      Type_testcoveragenums output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Type_testcoveragenums output = this;
       bool ischanged = false;
-      Class_testcoveragenums val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Test.Class_testcoveragenums value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Type_int vx_p_pct = val.pct();
-      Vx.Core.Type_string vx_p_testpkg = val.testpkg();
-      Vx.Core.Type_int vx_p_tests = val.tests();
-      Vx.Core.Type_int vx_p_total = val.total();
+      Vx.Core.Type_int vx_p_pct = value.pct();
+      Vx.Core.Type_string vx_p_testpkg = value.testpkg();
+      Vx.Core.Type_int vx_p_tests = value.tests();
+      Vx.Core.Type_int vx_p_total = value.total();
       List<string> validkeys = new List<string>();
       validkeys.Add(":pct");
       validkeys.Add(":testpkg");
@@ -947,7 +966,7 @@ public static class Test {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_testcoveragenums work = new Class_testcoveragenums();
+        Vx.Test.Class_testcoveragenums work = new Vx.Test.Class_testcoveragenums();
         work.vx_p_pct = vx_p_pct;
         work.vx_p_testpkg = vx_p_testpkg;
         work.vx_p_tests = vx_p_tests;
@@ -961,14 +980,17 @@ public static class Test {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_testcoveragenums;
+      Vx.Core.Type_any output = Vx.Test.e_testcoveragenums;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_testcoveragenums;
+      Vx.Core.Type_any output = Vx.Test.t_testcoveragenums;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/test", // pkgname
         "testcoveragenums", // name
         ":struct", // extends
@@ -981,12 +1003,13 @@ public static class Test {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_testcoveragenums e_testcoveragenums = new Class_testcoveragenums();
-  public static Type_testcoveragenums t_testcoveragenums = new Class_testcoveragenums();
+  public static Vx.Test.Type_testcoveragenums e_testcoveragenums = new Vx.Test.Class_testcoveragenums();
+  public static Vx.Test.Type_testcoveragenums t_testcoveragenums = new Vx.Test.Class_testcoveragenums();
 
   /**
    * type: testcoveragesummary
@@ -1128,7 +1151,8 @@ public static class Test {
       output.put(":testpkg", this.testpkg());
       output.put(":totalnums", this.totalnums());
       output.put(":typenums", this.typenums());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Test.Type_testcoveragesummary vx_new(params object[] vals) {
@@ -1136,22 +1160,22 @@ public static class Test {
       return output;
     }
 
-    public override Vx.Test.Type_testcoveragesummary vx_copy(params object[] vals) {
-      Type_testcoveragesummary output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Type_testcoveragesummary output = this;
       bool ischanged = false;
-      Class_testcoveragesummary val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Test.Class_testcoveragesummary value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Test.Type_testcoveragenums vx_p_bigospacenums = val.bigospacenums();
-      Vx.Test.Type_testcoveragenums vx_p_bigotimenums = val.bigotimenums();
-      Vx.Test.Type_testcoveragenums vx_p_constnums = val.constnums();
-      Vx.Test.Type_testcoveragenums vx_p_docnums = val.docnums();
-      Vx.Test.Type_testcoveragenums vx_p_funcnums = val.funcnums();
-      Vx.Core.Type_string vx_p_testpkg = val.testpkg();
-      Vx.Test.Type_testcoveragenums vx_p_totalnums = val.totalnums();
-      Vx.Test.Type_testcoveragenums vx_p_typenums = val.typenums();
+      Vx.Test.Type_testcoveragenums vx_p_bigospacenums = value.bigospacenums();
+      Vx.Test.Type_testcoveragenums vx_p_bigotimenums = value.bigotimenums();
+      Vx.Test.Type_testcoveragenums vx_p_constnums = value.constnums();
+      Vx.Test.Type_testcoveragenums vx_p_docnums = value.docnums();
+      Vx.Test.Type_testcoveragenums vx_p_funcnums = value.funcnums();
+      Vx.Core.Type_string vx_p_testpkg = value.testpkg();
+      Vx.Test.Type_testcoveragenums vx_p_totalnums = value.totalnums();
+      Vx.Test.Type_testcoveragenums vx_p_typenums = value.typenums();
       List<string> validkeys = new List<string>();
       validkeys.Add(":bigospacenums");
       validkeys.Add(":bigotimenums");
@@ -1377,7 +1401,7 @@ public static class Test {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_testcoveragesummary work = new Class_testcoveragesummary();
+        Vx.Test.Class_testcoveragesummary work = new Vx.Test.Class_testcoveragesummary();
         work.vx_p_bigospacenums = vx_p_bigospacenums;
         work.vx_p_bigotimenums = vx_p_bigotimenums;
         work.vx_p_constnums = vx_p_constnums;
@@ -1395,14 +1419,17 @@ public static class Test {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_testcoveragesummary;
+      Vx.Core.Type_any output = Vx.Test.e_testcoveragesummary;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_testcoveragesummary;
+      Vx.Core.Type_any output = Vx.Test.t_testcoveragesummary;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/test", // pkgname
         "testcoveragesummary", // name
         ":struct", // extends
@@ -1415,12 +1442,13 @@ public static class Test {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_testcoveragesummary e_testcoveragesummary = new Class_testcoveragesummary();
-  public static Type_testcoveragesummary t_testcoveragesummary = new Class_testcoveragesummary();
+  public static Vx.Test.Type_testcoveragesummary e_testcoveragesummary = new Vx.Test.Class_testcoveragesummary();
+  public static Vx.Test.Type_testcoveragesummary t_testcoveragesummary = new Vx.Test.Class_testcoveragesummary();
 
   /**
    * type: testdescribe
@@ -1487,7 +1515,8 @@ public static class Test {
       output.put(":describename", this.describename());
       output.put(":testpkg", this.testpkg());
       output.put(":testresult", this.testresult());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Test.Type_testdescribe vx_new(params object[] vals) {
@@ -1495,17 +1524,17 @@ public static class Test {
       return output;
     }
 
-    public override Vx.Test.Type_testdescribe vx_copy(params object[] vals) {
-      Type_testdescribe output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Type_testdescribe output = this;
       bool ischanged = false;
-      Class_testdescribe val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Test.Class_testdescribe value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Type_string vx_p_describename = val.describename();
-      Vx.Core.Type_string vx_p_testpkg = val.testpkg();
-      Vx.Test.Type_testresult vx_p_testresult = val.testresult();
+      Vx.Core.Type_string vx_p_describename = value.describename();
+      Vx.Core.Type_string vx_p_testpkg = value.testpkg();
+      Vx.Test.Type_testresult vx_p_testresult = value.testresult();
       List<string> validkeys = new List<string>();
       validkeys.Add(":describename");
       validkeys.Add(":testpkg");
@@ -1629,7 +1658,7 @@ public static class Test {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_testdescribe work = new Class_testdescribe();
+        Vx.Test.Class_testdescribe work = new Vx.Test.Class_testdescribe();
         work.vx_p_describename = vx_p_describename;
         work.vx_p_testpkg = vx_p_testpkg;
         work.vx_p_testresult = vx_p_testresult;
@@ -1642,14 +1671,17 @@ public static class Test {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_testdescribe;
+      Vx.Core.Type_any output = Vx.Test.e_testdescribe;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_testdescribe;
+      Vx.Core.Type_any output = Vx.Test.t_testdescribe;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/test", // pkgname
         "testdescribe", // name
         ":struct", // extends
@@ -1662,12 +1694,13 @@ public static class Test {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_testdescribe e_testdescribe = new Class_testdescribe();
-  public static Type_testdescribe t_testdescribe = new Class_testdescribe();
+  public static Vx.Test.Type_testdescribe e_testdescribe = new Vx.Test.Class_testdescribe();
+  public static Vx.Test.Type_testdescribe t_testdescribe = new Vx.Test.Class_testdescribe();
 
   /**
    * type: testdescribelist
@@ -1681,7 +1714,9 @@ public static class Test {
 
   public class Class_testdescribelist : Vx.Core.Class_base, Type_testdescribelist {
 
-    public List<Vx.Test.Type_testdescribe> vx_p_list = Vx.Core.immutablelist(new List<Vx.Test.Type_testdescribe>());
+    public List<Vx.Test.Type_testdescribe> vx_p_list = Vx.Core.immutablelist(
+      new List<Vx.Test.Type_testdescribe>()
+    );
 
     public List<Vx.Core.Type_any> vx_list() {
       List<Vx.Core.Type_any> output = Vx.Core.immutablelist(
@@ -1702,11 +1737,13 @@ public static class Test {
     }
 
     public List<Vx.Test.Type_testdescribe> vx_listtestdescribe() {
-      return vx_p_list;
+      List<Vx.Test.Type_testdescribe> output = this.vx_p_list;
+      return output;
     }
 
     public Vx.Core.Type_any vx_any(Vx.Core.Type_int index) {
-      return this.vx_testdescribe(index);
+      Vx.Test.Type_testdescribe output = this.vx_testdescribe(index);
+      return output;
     }
 
     public override Vx.Test.Type_testdescribelist vx_new(params object[] vals) {
@@ -1714,15 +1751,15 @@ public static class Test {
       return output;
     }
 
-    public override Vx.Test.Type_testdescribelist vx_copy(params object[] vals) {
-      Type_testdescribelist output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Type_testdescribelist output = this;
       bool ischanged = false;
-      Class_testdescribelist val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Test.Class_testdescribelist value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      List<Vx.Test.Type_testdescribe> listval = new List<Vx.Test.Type_testdescribe>(val.vx_listtestdescribe());
+      List<Vx.Test.Type_testdescribe> listval = new List<Vx.Test.Type_testdescribe>(value.vx_listtestdescribe());
       Vx.Core.Type_msg msg;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
@@ -1755,7 +1792,7 @@ public static class Test {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_testdescribelist work = new Class_testdescribelist();
+        Vx.Test.Class_testdescribelist work = new Vx.Test.Class_testdescribelist();
         work.vx_p_list = Vx.Core.immutablelist(listval);
         if (msgblock != Vx.Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -1766,14 +1803,17 @@ public static class Test {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_testdescribelist;
+      Vx.Core.Type_any output = Vx.Test.e_testdescribelist;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_testdescribelist;
+      Vx.Core.Type_any output = Vx.Test.t_testdescribelist;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/test", // pkgname
         "testdescribelist", // name
         ":list", // extends
@@ -1786,12 +1826,13 @@ public static class Test {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_testdescribelist e_testdescribelist = new Class_testdescribelist();
-  public static Type_testdescribelist t_testdescribelist = new Class_testdescribelist();
+  public static Vx.Test.Type_testdescribelist e_testdescribelist = new Vx.Test.Class_testdescribelist();
+  public static Vx.Test.Type_testdescribelist t_testdescribelist = new Vx.Test.Class_testdescribelist();
 
   /**
    * type: testpackage
@@ -1888,7 +1929,8 @@ public static class Test {
       output.put(":coveragesummary", this.coveragesummary());
       output.put(":passfail", this.passfail());
       output.put(":testpkg", this.testpkg());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Test.Type_testpackage vx_new(params object[] vals) {
@@ -1896,19 +1938,19 @@ public static class Test {
       return output;
     }
 
-    public override Vx.Test.Type_testpackage vx_copy(params object[] vals) {
-      Type_testpackage output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Type_testpackage output = this;
       bool ischanged = false;
-      Class_testpackage val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Test.Class_testpackage value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Test.Type_testcaselist vx_p_caselist = val.caselist();
-      Vx.Test.Type_testcoveragedetail vx_p_coveragedetail = val.coveragedetail();
-      Vx.Test.Type_testcoveragesummary vx_p_coveragesummary = val.coveragesummary();
-      Vx.Core.Type_boolean vx_p_passfail = val.passfail();
-      Vx.Core.Type_string vx_p_testpkg = val.testpkg();
+      Vx.Test.Type_testcaselist vx_p_caselist = value.caselist();
+      Vx.Test.Type_testcoveragedetail vx_p_coveragedetail = value.coveragedetail();
+      Vx.Test.Type_testcoveragesummary vx_p_coveragesummary = value.coveragesummary();
+      Vx.Core.Type_boolean vx_p_passfail = value.passfail();
+      Vx.Core.Type_string vx_p_testpkg = value.testpkg();
       List<string> validkeys = new List<string>();
       validkeys.Add(":caselist");
       validkeys.Add(":coveragedetail");
@@ -2074,7 +2116,7 @@ public static class Test {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_testpackage work = new Class_testpackage();
+        Vx.Test.Class_testpackage work = new Vx.Test.Class_testpackage();
         work.vx_p_caselist = vx_p_caselist;
         work.vx_p_coveragedetail = vx_p_coveragedetail;
         work.vx_p_coveragesummary = vx_p_coveragesummary;
@@ -2089,14 +2131,17 @@ public static class Test {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_testpackage;
+      Vx.Core.Type_any output = Vx.Test.e_testpackage;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_testpackage;
+      Vx.Core.Type_any output = Vx.Test.t_testpackage;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/test", // pkgname
         "testpackage", // name
         ":struct", // extends
@@ -2109,12 +2154,13 @@ public static class Test {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_testpackage e_testpackage = new Class_testpackage();
-  public static Type_testpackage t_testpackage = new Class_testpackage();
+  public static Vx.Test.Type_testpackage e_testpackage = new Vx.Test.Class_testpackage();
+  public static Vx.Test.Type_testpackage t_testpackage = new Vx.Test.Class_testpackage();
 
   /**
    * type: testpackagelist
@@ -2128,7 +2174,9 @@ public static class Test {
 
   public class Class_testpackagelist : Vx.Core.Class_base, Type_testpackagelist {
 
-    public List<Vx.Test.Type_testpackage> vx_p_list = Vx.Core.immutablelist(new List<Vx.Test.Type_testpackage>());
+    public List<Vx.Test.Type_testpackage> vx_p_list = Vx.Core.immutablelist(
+      new List<Vx.Test.Type_testpackage>()
+    );
 
     public List<Vx.Core.Type_any> vx_list() {
       List<Vx.Core.Type_any> output = Vx.Core.immutablelist(
@@ -2149,11 +2197,13 @@ public static class Test {
     }
 
     public List<Vx.Test.Type_testpackage> vx_listtestpackage() {
-      return vx_p_list;
+      List<Vx.Test.Type_testpackage> output = this.vx_p_list;
+      return output;
     }
 
     public Vx.Core.Type_any vx_any(Vx.Core.Type_int index) {
-      return this.vx_testpackage(index);
+      Vx.Test.Type_testpackage output = this.vx_testpackage(index);
+      return output;
     }
 
     public override Vx.Test.Type_testpackagelist vx_new(params object[] vals) {
@@ -2161,15 +2211,15 @@ public static class Test {
       return output;
     }
 
-    public override Vx.Test.Type_testpackagelist vx_copy(params object[] vals) {
-      Type_testpackagelist output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Type_testpackagelist output = this;
       bool ischanged = false;
-      Class_testpackagelist val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Test.Class_testpackagelist value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      List<Vx.Test.Type_testpackage> listval = new List<Vx.Test.Type_testpackage>(val.vx_listtestpackage());
+      List<Vx.Test.Type_testpackage> listval = new List<Vx.Test.Type_testpackage>(value.vx_listtestpackage());
       Vx.Core.Type_msg msg;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
@@ -2202,7 +2252,7 @@ public static class Test {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_testpackagelist work = new Class_testpackagelist();
+        Vx.Test.Class_testpackagelist work = new Vx.Test.Class_testpackagelist();
         work.vx_p_list = Vx.Core.immutablelist(listval);
         if (msgblock != Vx.Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -2213,14 +2263,17 @@ public static class Test {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_testpackagelist;
+      Vx.Core.Type_any output = Vx.Test.e_testpackagelist;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_testpackagelist;
+      Vx.Core.Type_any output = Vx.Test.t_testpackagelist;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/test", // pkgname
         "testpackagelist", // name
         ":list", // extends
@@ -2233,12 +2286,13 @@ public static class Test {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_testpackagelist e_testpackagelist = new Class_testpackagelist();
-  public static Type_testpackagelist t_testpackagelist = new Class_testpackagelist();
+  public static Vx.Test.Type_testpackagelist e_testpackagelist = new Vx.Test.Class_testpackagelist();
+  public static Vx.Test.Type_testpackagelist t_testpackagelist = new Vx.Test.Class_testpackagelist();
 
   /**
    * type: testresult
@@ -2335,7 +2389,8 @@ public static class Test {
       output.put(":expected", this.expected());
       output.put(":actual", this.actual());
       output.put(":fn-actual", this.fn_actual());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Test.Type_testresult vx_new(params object[] vals) {
@@ -2343,19 +2398,19 @@ public static class Test {
       return output;
     }
 
-    public override Vx.Test.Type_testresult vx_copy(params object[] vals) {
-      Type_testresult output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Type_testresult output = this;
       bool ischanged = false;
-      Class_testresult val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Test.Class_testresult value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Type_string vx_p_code = val.code();
-      Vx.Core.Type_boolean vx_p_passfail = val.passfail();
-      Vx.Core.Type_any vx_p_expected = val.expected();
-      Vx.Core.Type_any vx_p_actual = val.actual();
-      Vx.Core.Func_any_from_func_async vx_p_fn_actual = val.fn_actual();
+      Vx.Core.Type_string vx_p_code = value.code();
+      Vx.Core.Type_boolean vx_p_passfail = value.passfail();
+      Vx.Core.Type_any vx_p_expected = value.expected();
+      Vx.Core.Type_any vx_p_actual = value.actual();
+      Vx.Core.Func_any_from_func_async vx_p_fn_actual = value.fn_actual();
       List<string> validkeys = new List<string>();
       validkeys.Add(":code");
       validkeys.Add(":passfail");
@@ -2521,7 +2576,7 @@ public static class Test {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_testresult work = new Class_testresult();
+        Vx.Test.Class_testresult work = new Vx.Test.Class_testresult();
         work.vx_p_code = vx_p_code;
         work.vx_p_passfail = vx_p_passfail;
         work.vx_p_expected = vx_p_expected;
@@ -2536,14 +2591,17 @@ public static class Test {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_testresult;
+      Vx.Core.Type_any output = Vx.Test.e_testresult;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_testresult;
+      Vx.Core.Type_any output = Vx.Test.t_testresult;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/test", // pkgname
         "testresult", // name
         ":struct", // extends
@@ -2556,12 +2614,13 @@ public static class Test {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_testresult e_testresult = new Class_testresult();
-  public static Type_testresult t_testresult = new Class_testresult();
+  public static Vx.Test.Type_testresult e_testresult = new Vx.Test.Class_testresult();
+  public static Vx.Test.Type_testresult t_testresult = new Vx.Test.Class_testresult();
 
   /**
    * type: testresultlist
@@ -2575,7 +2634,9 @@ public static class Test {
 
   public class Class_testresultlist : Vx.Core.Class_base, Type_testresultlist {
 
-    public List<Vx.Test.Type_testresult> vx_p_list = Vx.Core.immutablelist(new List<Vx.Test.Type_testresult>());
+    public List<Vx.Test.Type_testresult> vx_p_list = Vx.Core.immutablelist(
+      new List<Vx.Test.Type_testresult>()
+    );
 
     public List<Vx.Core.Type_any> vx_list() {
       List<Vx.Core.Type_any> output = Vx.Core.immutablelist(
@@ -2596,11 +2657,13 @@ public static class Test {
     }
 
     public List<Vx.Test.Type_testresult> vx_listtestresult() {
-      return vx_p_list;
+      List<Vx.Test.Type_testresult> output = this.vx_p_list;
+      return output;
     }
 
     public Vx.Core.Type_any vx_any(Vx.Core.Type_int index) {
-      return this.vx_testresult(index);
+      Vx.Test.Type_testresult output = this.vx_testresult(index);
+      return output;
     }
 
     public override Vx.Test.Type_testresultlist vx_new(params object[] vals) {
@@ -2608,15 +2671,15 @@ public static class Test {
       return output;
     }
 
-    public override Vx.Test.Type_testresultlist vx_copy(params object[] vals) {
-      Type_testresultlist output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Type_testresultlist output = this;
       bool ischanged = false;
-      Class_testresultlist val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Test.Class_testresultlist value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      List<Vx.Test.Type_testresult> listval = new List<Vx.Test.Type_testresult>(val.vx_listtestresult());
+      List<Vx.Test.Type_testresult> listval = new List<Vx.Test.Type_testresult>(value.vx_listtestresult());
       Vx.Core.Type_msg msg;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
@@ -2649,7 +2712,7 @@ public static class Test {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_testresultlist work = new Class_testresultlist();
+        Vx.Test.Class_testresultlist work = new Vx.Test.Class_testresultlist();
         work.vx_p_list = Vx.Core.immutablelist(listval);
         if (msgblock != Vx.Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -2660,14 +2723,17 @@ public static class Test {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_testresultlist;
+      Vx.Core.Type_any output = Vx.Test.e_testresultlist;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_testresultlist;
+      Vx.Core.Type_any output = Vx.Test.t_testresultlist;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/test", // pkgname
         "testresultlist", // name
         ":list", // extends
@@ -2680,12 +2746,13 @@ public static class Test {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_testresultlist e_testresultlist = new Class_testresultlist();
-  public static Type_testresultlist t_testresultlist = new Class_testresultlist();
+  public static Vx.Test.Type_testresultlist e_testresultlist = new Vx.Test.Class_testresultlist();
+  public static Vx.Test.Type_testresultlist t_testresultlist = new Vx.Test.Class_testresultlist();
 
   /**
    * Constant: stylesheet-test
@@ -2694,7 +2761,7 @@ public static class Test {
    */
   public class Const_stylesheet_test {
     public static Vx.Core.Type_constdef constdef() {
-      return Vx.Core.constdef_new(
+      Vx.Core.Type_constdef output = Vx.Core.constdef_new(
         "vx/test", // pkgname
         "stylesheet-test", // name
         Vx.Core.typedef_new(
@@ -2711,30 +2778,35 @@ public static class Test {
           Vx.Core.e_argmap // properties
         )
       );
+      return output;
     }
 
     public static void const_new(Vx.Web.Html.Type_stylesheet output) {
       Vx.Web.Html.Class_stylesheet outval = (Vx.Web.Html.Class_stylesheet)output;
       outval.vx_p_constdef = constdef();
-      Vx.Web.Html.Type_stylesheet val = Vx.Web.Html.f_stylesheet_loadmap(
+      Vx.Web.Html.Type_stylesheet value = Vx.Web.Html.f_stylesheet_loadmap(
         Vx.Core.f_new(
           Vx.Web.Html.t_stylesheet,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
             Vx.Core.vx_new_string(":name"),
             Vx.Core.vx_new_string("Test Suite"),
             Vx.Core.vx_new_string(":styles"),
             Vx.Core.f_new(
               Vx.Web.Html.t_stylelist,
-              Vx.Core.vx_new(Vx.Core.t_anylist,
+              Vx.Core.vx_new(
+                Vx.Core.t_anylist,
                 Vx.Core.f_new(
                   Vx.Web.Html.t_style,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":name"),
                     Vx.Core.vx_new_string("body"),
                     Vx.Core.vx_new_string(":props"),
                     Vx.Core.f_new(
                       Vx.Web.Html.t_propmap,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string("font-size"),
                         Vx.Core.vx_new_string("0.9em"),
                         Vx.Core.vx_new_string("font-family"),
@@ -2745,13 +2817,15 @@ public static class Test {
                 ),
                 Vx.Core.f_new(
                   Vx.Web.Html.t_style,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":name"),
                     Vx.Core.vx_new_string("details summary"),
                     Vx.Core.vx_new_string(":props"),
                     Vx.Core.f_new(
                       Vx.Web.Html.t_propmap,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string("cursor"),
                         Vx.Core.vx_new_string("pointer"),
                         Vx.Core.vx_new_string("display"),
@@ -2764,13 +2838,15 @@ public static class Test {
                 ),
                 Vx.Core.f_new(
                   Vx.Web.Html.t_style,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":name"),
                     Vx.Core.vx_new_string("table"),
                     Vx.Core.vx_new_string(":props"),
                     Vx.Core.f_new(
                       Vx.Web.Html.t_propmap,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string("vertical-align"),
                         Vx.Core.vx_new_string("top"),
                         Vx.Core.vx_new_string("border-collapse"),
@@ -2787,13 +2863,15 @@ public static class Test {
                 ),
                 Vx.Core.f_new(
                   Vx.Web.Html.t_style,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":name"),
                     Vx.Core.vx_new_string("thead tr"),
                     Vx.Core.vx_new_string(":props"),
                     Vx.Core.f_new(
                       Vx.Web.Html.t_propmap,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string("background-color"),
                         Vx.Core.vx_new_string("#009879"),
                         Vx.Core.vx_new_string("color"),
@@ -2806,13 +2884,15 @@ public static class Test {
                 ),
                 Vx.Core.f_new(
                   Vx.Web.Html.t_style,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":name"),
                     Vx.Core.vx_new_string("td"),
                     Vx.Core.vx_new_string(":props"),
                     Vx.Core.f_new(
                       Vx.Web.Html.t_propmap,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string("padding"),
                         Vx.Core.vx_new_string("10px 10px"),
                         Vx.Core.vx_new_string("vertical-align"),
@@ -2823,13 +2903,15 @@ public static class Test {
                 ),
                 Vx.Core.f_new(
                   Vx.Web.Html.t_style,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":name"),
                     Vx.Core.vx_new_string("tbody tr"),
                     Vx.Core.vx_new_string(":props"),
                     Vx.Core.f_new(
                       Vx.Web.Html.t_propmap,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string("border-bottom"),
                         Vx.Core.vx_new_string("1px solid #dddddd")
                       )
@@ -2838,13 +2920,15 @@ public static class Test {
                 ),
                 Vx.Core.f_new(
                   Vx.Web.Html.t_style,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":name"),
                     Vx.Core.vx_new_string("tbody tr:nth-of-type(even)"),
                     Vx.Core.vx_new_string(":props"),
                     Vx.Core.f_new(
                       Vx.Web.Html.t_propmap,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string("background-color"),
                         Vx.Core.vx_new_string("#f3f3f3")
                       )
@@ -2853,13 +2937,15 @@ public static class Test {
                 ),
                 Vx.Core.f_new(
                   Vx.Web.Html.t_style,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":name"),
                     Vx.Core.vx_new_string("tbody tr:last-of-type"),
                     Vx.Core.vx_new_string(":props"),
                     Vx.Core.f_new(
                       Vx.Web.Html.t_propmap,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string("border-bottom"),
                         Vx.Core.vx_new_string("2px solid #009879")
                       )
@@ -2868,13 +2954,15 @@ public static class Test {
                 ),
                 Vx.Core.f_new(
                   Vx.Web.Html.t_style,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":name"),
                     Vx.Core.vx_new_string("tbody tr.active-row"),
                     Vx.Core.vx_new_string(":props"),
                     Vx.Core.f_new(
                       Vx.Web.Html.t_propmap,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string("font-weight"),
                         Vx.Core.vx_new_string("bold"),
                         Vx.Core.vx_new_string("color"),
@@ -2885,13 +2973,15 @@ public static class Test {
                 ),
                 Vx.Core.f_new(
                   Vx.Web.Html.t_style,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":name"),
                     Vx.Core.vx_new_string(".failflag"),
                     Vx.Core.vx_new_string(":props"),
                     Vx.Core.f_new(
                       Vx.Web.Html.t_propmap,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string("background-color"),
                         Vx.Core.vx_new_string("red"),
                         Vx.Core.vx_new_string("color"),
@@ -2910,13 +3000,15 @@ public static class Test {
                 ),
                 Vx.Core.f_new(
                   Vx.Web.Html.t_style,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":name"),
                     Vx.Core.vx_new_string(".passflag"),
                     Vx.Core.vx_new_string(":props"),
                     Vx.Core.f_new(
                       Vx.Web.Html.t_propmap,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string("background-color"),
                         Vx.Core.vx_new_string("green"),
                         Vx.Core.vx_new_string("color"),
@@ -2935,13 +3027,15 @@ public static class Test {
                 ),
                 Vx.Core.f_new(
                   Vx.Web.Html.t_style,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":name"),
                     Vx.Core.vx_new_string(".coveragenums"),
                     Vx.Core.vx_new_string(":props"),
                     Vx.Core.f_new(
                       Vx.Web.Html.t_propmap,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string("width"),
                         Vx.Core.vx_new_string("90px")
                       )
@@ -2950,13 +3044,15 @@ public static class Test {
                 ),
                 Vx.Core.f_new(
                   Vx.Web.Html.t_style,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":name"),
                     Vx.Core.vx_new_string(".coveragepct"),
                     Vx.Core.vx_new_string(":props"),
                     Vx.Core.f_new(
                       Vx.Web.Html.t_propmap,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string("text-align"),
                         Vx.Core.vx_new_string("right")
                       )
@@ -2965,13 +3061,15 @@ public static class Test {
                 ),
                 Vx.Core.f_new(
                   Vx.Web.Html.t_style,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":name"),
                     Vx.Core.vx_new_string(".coveragepctgreen"),
                     Vx.Core.vx_new_string(":props"),
                     Vx.Core.f_new(
                       Vx.Web.Html.t_propmap,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string("background-color"),
                         Vx.Core.vx_new_string("green"),
                         Vx.Core.vx_new_string("color"),
@@ -2984,13 +3082,15 @@ public static class Test {
                 ),
                 Vx.Core.f_new(
                   Vx.Web.Html.t_style,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":name"),
                     Vx.Core.vx_new_string(".coveragepctred"),
                     Vx.Core.vx_new_string(":props"),
                     Vx.Core.f_new(
                       Vx.Web.Html.t_propmap,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string("background-color"),
                         Vx.Core.vx_new_string("red"),
                         Vx.Core.vx_new_string("color"),
@@ -3003,13 +3103,15 @@ public static class Test {
                 ),
                 Vx.Core.f_new(
                   Vx.Web.Html.t_style,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":name"),
                     Vx.Core.vx_new_string(".pkgheader"),
                     Vx.Core.vx_new_string(":props"),
                     Vx.Core.f_new(
                       Vx.Web.Html.t_propmap,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string("display"),
                         Vx.Core.vx_new_string("inline-flex"),
                         Vx.Core.vx_new_string("gap"),
@@ -3020,13 +3122,15 @@ public static class Test {
                 ),
                 Vx.Core.f_new(
                   Vx.Web.Html.t_style,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":name"),
                     Vx.Core.vx_new_string(".pkgname"),
                     Vx.Core.vx_new_string(":props"),
                     Vx.Core.f_new(
                       Vx.Web.Html.t_propmap,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string("font-weight"),
                         Vx.Core.vx_new_string("bold"),
                         Vx.Core.vx_new_string("width"),
@@ -3037,13 +3141,15 @@ public static class Test {
                 ),
                 Vx.Core.f_new(
                   Vx.Web.Html.t_style,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":name"),
                     Vx.Core.vx_new_string(".preformatted"),
                     Vx.Core.vx_new_string(":props"),
                     Vx.Core.f_new(
                       Vx.Web.Html.t_propmap,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.vx_new_string("display"),
                         Vx.Core.vx_new_string("block"),
                         Vx.Core.vx_new_string("unicode-bidi"),
@@ -3061,14 +3167,14 @@ public static class Test {
           )
         )
       );
-      outval.vx_p_id = val.id();
-      outval.vx_p_eventmap = val.eventmap();
-      outval.vx_p_style = val.style();
-      outval.vx_p_style_unique = val.style_unique();
-      outval.vx_p_stylelist = val.stylelist();
-      outval.vx_p_name = val.name();
-      outval.vx_p_styles = val.styles();
-      outval.vx_p_stylemap = val.stylemap();
+      outval.vx_p_id = value.id();
+      outval.vx_p_eventmap = value.eventmap();
+      outval.vx_p_style = value.style();
+      outval.vx_p_style_unique = value.style_unique();
+      outval.vx_p_stylelist = value.stylelist();
+      outval.vx_p_name = value.name();
+      outval.vx_p_styles = value.styles();
+      outval.vx_p_stylemap = value.stylemap();
     }
 
   }
@@ -3089,21 +3195,22 @@ public static class Test {
   public class Class_context_test : Vx.Core.Class_base, Func_context_test {
 
     public override Vx.Test.Func_context_test vx_new(params object[] vals) {
-      Class_context_test output = new Class_context_test();
+      Vx.Test.Class_context_test output = new Vx.Test.Class_context_test();
       return output;
     }
 
-    public override Vx.Test.Func_context_test vx_copy(params object[] vals) {
-      Class_context_test output = new Class_context_test();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_context_test output = new Vx.Test.Class_context_test();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "context-test", // name
         0, // idx
@@ -3122,14 +3229,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_context_test;
+      Vx.Core.Type_any output = Vx.Test.e_context_test;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_context_test;
+      Vx.Core.Type_any output = Vx.Test.t_context_test;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -3157,22 +3267,25 @@ public static class Test {
 
   }
 
-  public static Func_context_test e_context_test = new Vx.Test.Class_context_test();
-  public static Func_context_test t_context_test = new Vx.Test.Class_context_test();
+  public static Vx.Test.Func_context_test e_context_test = new Vx.Test.Class_context_test();
+  public static Vx.Test.Func_context_test t_context_test = new Vx.Test.Class_context_test();
 
   public static Vx.Core.Type_context f_context_test(Vx.Core.Type_anylist args) {
     Vx.Core.Type_context output = Vx.Core.e_context;
     output = Vx.Core.f_new(
       Vx.Core.t_context,
-      Vx.Core.vx_new(Vx.Core.t_anylist,
+      Vx.Core.vx_new(
+        Vx.Core.t_anylist,
         Vx.Core.vx_new_string(":session"),
         Vx.Core.f_new(
           Vx.Core.t_session,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
             Vx.Core.vx_new_string(":user"),
             Vx.Core.f_new(
               Vx.Core.t_user,
-              Vx.Core.vx_new(Vx.Core.t_anylist,
+              Vx.Core.vx_new(
+                Vx.Core.t_anylist,
                 Vx.Core.vx_new_string(":security"),
                 Vx.Test.f_security_test()
               )
@@ -3197,21 +3310,22 @@ public static class Test {
   public class Class_div_from_testcaselist : Vx.Core.Class_base, Func_div_from_testcaselist {
 
     public override Vx.Test.Func_div_from_testcaselist vx_new(params object[] vals) {
-      Class_div_from_testcaselist output = new Class_div_from_testcaselist();
+      Vx.Test.Class_div_from_testcaselist output = new Vx.Test.Class_div_from_testcaselist();
       return output;
     }
 
-    public override Vx.Test.Func_div_from_testcaselist vx_copy(params object[] vals) {
-      Class_div_from_testcaselist output = new Class_div_from_testcaselist();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_div_from_testcaselist output = new Vx.Test.Class_div_from_testcaselist();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "div<-testcaselist", // name
         0, // idx
@@ -3230,14 +3344,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_div_from_testcaselist;
+      Vx.Core.Type_any output = Vx.Test.e_div_from_testcaselist;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_div_from_testcaselist;
+      Vx.Core.Type_any output = Vx.Test.t_div_from_testcaselist;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -3265,30 +3382,36 @@ public static class Test {
 
   }
 
-  public static Func_div_from_testcaselist e_div_from_testcaselist = new Vx.Test.Class_div_from_testcaselist();
-  public static Func_div_from_testcaselist t_div_from_testcaselist = new Vx.Test.Class_div_from_testcaselist();
+  public static Vx.Test.Func_div_from_testcaselist e_div_from_testcaselist = new Vx.Test.Class_div_from_testcaselist();
+  public static Vx.Test.Func_div_from_testcaselist t_div_from_testcaselist = new Vx.Test.Class_div_from_testcaselist();
 
   public static Vx.Web.Html.Type_div f_div_from_testcaselist(Vx.Test.Type_testcaselist testcaselist) {
     Vx.Web.Html.Type_div output = Vx.Web.Html.e_div;
     output = Vx.Core.f_new(
       Vx.Web.Html.t_div,
-      Vx.Core.vx_new(Vx.Core.t_anylist,
+      Vx.Core.vx_new(
+        Vx.Core.t_anylist,
         Vx.Core.f_new(
           Vx.Web.Html.t_table,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
             Vx.Core.vx_new_string(":thead"),
             Vx.Core.f_new(
               Vx.Web.Html.t_thead,
-              Vx.Core.vx_new(Vx.Core.t_anylist,
+              Vx.Core.vx_new(
+                Vx.Core.t_anylist,
                 Vx.Core.f_new(
                   Vx.Web.Html.t_tr,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.f_new(
                       Vx.Web.Html.t_td,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.f_new(
                           Vx.Web.Html.t_p,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("Pass?")
                           )
@@ -3297,10 +3420,12 @@ public static class Test {
                     ),
                     Vx.Core.f_new(
                       Vx.Web.Html.t_td,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.f_new(
                           Vx.Web.Html.t_p,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("Name")
                           )
@@ -3309,10 +3434,12 @@ public static class Test {
                     ),
                     Vx.Core.f_new(
                       Vx.Web.Html.t_td,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.f_new(
                           Vx.Web.Html.t_p,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("Test")
                           )
@@ -3321,10 +3448,12 @@ public static class Test {
                     ),
                     Vx.Core.f_new(
                       Vx.Web.Html.t_td,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.f_new(
                           Vx.Web.Html.t_p,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("Expected")
                           )
@@ -3333,10 +3462,12 @@ public static class Test {
                     ),
                     Vx.Core.f_new(
                       Vx.Web.Html.t_td,
-                      Vx.Core.vx_new(Vx.Core.t_anylist,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
                         Vx.Core.f_new(
                           Vx.Web.Html.t_p,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
                             Vx.Core.vx_new_string(":text"),
                             Vx.Core.vx_new_string("Actual")
                           )
@@ -3350,7 +3481,8 @@ public static class Test {
             Vx.Core.vx_new_string(":tbody"),
             Vx.Core.f_new(
               Vx.Web.Html.t_tbody,
-              Vx.Core.vx_new(Vx.Core.t_anylist,
+              Vx.Core.vx_new(
+                Vx.Core.t_anylist,
                 Vx.Test.f_trlist_from_testcaselist(testcaselist)
               )
             )
@@ -3375,21 +3507,22 @@ public static class Test {
   public class Class_div_from_testpackage : Vx.Core.Class_base, Func_div_from_testpackage {
 
     public override Vx.Test.Func_div_from_testpackage vx_new(params object[] vals) {
-      Class_div_from_testpackage output = new Class_div_from_testpackage();
+      Vx.Test.Class_div_from_testpackage output = new Vx.Test.Class_div_from_testpackage();
       return output;
     }
 
-    public override Vx.Test.Func_div_from_testpackage vx_copy(params object[] vals) {
-      Class_div_from_testpackage output = new Class_div_from_testpackage();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_div_from_testpackage output = new Vx.Test.Class_div_from_testpackage();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "div<-testpackage", // name
         0, // idx
@@ -3408,14 +3541,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_div_from_testpackage;
+      Vx.Core.Type_any output = Vx.Test.e_div_from_testpackage;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_div_from_testpackage;
+      Vx.Core.Type_any output = Vx.Test.t_div_from_testpackage;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -3443,8 +3579,8 @@ public static class Test {
 
   }
 
-  public static Func_div_from_testpackage e_div_from_testpackage = new Vx.Test.Class_div_from_testpackage();
-  public static Func_div_from_testpackage t_div_from_testpackage = new Vx.Test.Class_div_from_testpackage();
+  public static Vx.Test.Func_div_from_testpackage e_div_from_testpackage = new Vx.Test.Class_div_from_testpackage();
+  public static Vx.Test.Func_div_from_testpackage t_div_from_testpackage = new Vx.Test.Class_div_from_testpackage();
 
   public static Vx.Web.Html.Type_div f_div_from_testpackage(Vx.Test.Type_testpackage testpackage) {
     Vx.Web.Html.Type_div output = Vx.Web.Html.e_div;
@@ -3462,18 +3598,20 @@ public static class Test {
         Vx.Web.Html.Type_div node = Vx.Test.f_div_from_testcaselist(caselist);
         Vx.Web.Html.Type_divchildlist nodes = Vx.Core.f_new(
           Vx.Web.Html.t_divchildlist,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
-              node
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
+            node
           )
         );
         Vx.Web.Html.Type_p p_passfail = Vx.Test.f_p_from_passfail(passfail);
         Vx.Web.Html.Type_p p_pkgname = Vx.Core.f_new(
           Vx.Web.Html.t_p,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
-              Vx.Core.vx_new_string(":style"),
-              pkgnamestyle,
-              Vx.Core.vx_new_string(":text"),
-              pkgname
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
+            Vx.Core.vx_new_string(":style"),
+            pkgnamestyle,
+            Vx.Core.vx_new_string(":text"),
+            pkgname
           )
         );
         Vx.Web.Html.Type_p p_totalnums = Vx.Test.f_p_from_testcoveragenums(
@@ -3499,30 +3637,33 @@ public static class Test {
         );
         Vx.Web.Html.Type_divchildlist summary = Vx.Core.f_new(
           Vx.Web.Html.t_divchildlist,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
-              p_passfail,
-              p_pkgname,
-              p_totalnums,
-              p_coveragenums,
-              p_constnums,
-              p_funcnums,
-              p_docnums,
-              p_bigospacenums,
-              p_bigotimenums
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
+            p_passfail,
+            p_pkgname,
+            p_totalnums,
+            p_coveragenums,
+            p_constnums,
+            p_funcnums,
+            p_docnums,
+            p_bigospacenums,
+            p_bigotimenums
           )
         );
         Vx.Web.Html.Type_details details = Vx.Core.f_new(
           Vx.Web.Html.t_details,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
-              Vx.Core.vx_new_string(":summary"),
-              summary,
-              Vx.Core.vx_new_string(":nodes"),
-              nodes
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
+            Vx.Core.vx_new_string(":summary"),
+            summary,
+            Vx.Core.vx_new_string(":nodes"),
+            nodes
           )
         );
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Web.Html.t_div,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
             details
           )
         );
@@ -3545,21 +3686,22 @@ public static class Test {
   public class Class_div_from_testpackagelist : Vx.Core.Class_base, Func_div_from_testpackagelist {
 
     public override Vx.Test.Func_div_from_testpackagelist vx_new(params object[] vals) {
-      Class_div_from_testpackagelist output = new Class_div_from_testpackagelist();
+      Vx.Test.Class_div_from_testpackagelist output = new Vx.Test.Class_div_from_testpackagelist();
       return output;
     }
 
-    public override Vx.Test.Func_div_from_testpackagelist vx_copy(params object[] vals) {
-      Class_div_from_testpackagelist output = new Class_div_from_testpackagelist();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_div_from_testpackagelist output = new Vx.Test.Class_div_from_testpackagelist();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "div<-testpackagelist", // name
         0, // idx
@@ -3578,14 +3720,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_div_from_testpackagelist;
+      Vx.Core.Type_any output = Vx.Test.e_div_from_testpackagelist;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_div_from_testpackagelist;
+      Vx.Core.Type_any output = Vx.Test.t_div_from_testpackagelist;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -3613,8 +3758,8 @@ public static class Test {
 
   }
 
-  public static Func_div_from_testpackagelist e_div_from_testpackagelist = new Vx.Test.Class_div_from_testpackagelist();
-  public static Func_div_from_testpackagelist t_div_from_testpackagelist = new Vx.Test.Class_div_from_testpackagelist();
+  public static Vx.Test.Func_div_from_testpackagelist e_div_from_testpackagelist = new Vx.Test.Class_div_from_testpackagelist();
+  public static Vx.Test.Func_div_from_testpackagelist t_div_from_testpackagelist = new Vx.Test.Class_div_from_testpackagelist();
 
   public static Vx.Web.Html.Type_div f_div_from_testpackagelist(Vx.Test.Type_testpackagelist testpackagelist) {
     Vx.Web.Html.Type_div output = Vx.Web.Html.e_div;
@@ -3639,15 +3784,18 @@ public static class Test {
         );
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Web.Html.t_div,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
             Vx.Core.f_new(
               Vx.Web.Html.t_div,
-              Vx.Core.vx_new(Vx.Core.t_anylist,
+              Vx.Core.vx_new(
+                Vx.Core.t_anylist,
                 Vx.Core.vx_new_string(":style"),
                 stylepkgheader,
                 Vx.Core.f_new(
                   Vx.Web.Html.t_p,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":style"),
                     stylepassfail,
                     Vx.Core.vx_new_string(":text"),
@@ -3656,7 +3804,8 @@ public static class Test {
                 ),
                 Vx.Core.f_new(
                   Vx.Web.Html.t_p,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":style"),
                     stylepkgname,
                     Vx.Core.vx_new_string(":text"),
@@ -3665,7 +3814,8 @@ public static class Test {
                 ),
                 Vx.Core.f_new(
                   Vx.Web.Html.t_p,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":style"),
                     stylecoveragenum,
                     Vx.Core.vx_new_string(":text"),
@@ -3674,7 +3824,8 @@ public static class Test {
                 ),
                 Vx.Core.f_new(
                   Vx.Web.Html.t_p,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":style"),
                     stylecoveragenum,
                     Vx.Core.vx_new_string(":text"),
@@ -3683,7 +3834,8 @@ public static class Test {
                 ),
                 Vx.Core.f_new(
                   Vx.Web.Html.t_p,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":style"),
                     stylecoveragenum,
                     Vx.Core.vx_new_string(":text"),
@@ -3692,7 +3844,8 @@ public static class Test {
                 ),
                 Vx.Core.f_new(
                   Vx.Web.Html.t_p,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":style"),
                     stylecoveragenum,
                     Vx.Core.vx_new_string(":text"),
@@ -3701,7 +3854,8 @@ public static class Test {
                 ),
                 Vx.Core.f_new(
                   Vx.Web.Html.t_p,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":style"),
                     stylecoveragenum,
                     Vx.Core.vx_new_string(":text"),
@@ -3710,7 +3864,8 @@ public static class Test {
                 ),
                 Vx.Core.f_new(
                   Vx.Web.Html.t_p,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":style"),
                     stylecoveragenum,
                     Vx.Core.vx_new_string(":text"),
@@ -3719,7 +3874,8 @@ public static class Test {
                 ),
                 Vx.Core.f_new(
                   Vx.Web.Html.t_p,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":style"),
                     stylecoveragenum,
                     Vx.Core.vx_new_string(":text"),
@@ -3730,7 +3886,8 @@ public static class Test {
             ),
             Vx.Core.f_new(
               Vx.Web.Html.t_div,
-              Vx.Core.vx_new(Vx.Core.t_anylist,
+              Vx.Core.vx_new(
+                Vx.Core.t_anylist,
                 Vx.Test.f_divchildlist_from_testpackagelist(testpackagelist)
               )
             )
@@ -3756,21 +3913,22 @@ public static class Test {
   public class Class_divchildlist_from_testpackagelist : Vx.Core.Class_base, Func_divchildlist_from_testpackagelist {
 
     public override Vx.Test.Func_divchildlist_from_testpackagelist vx_new(params object[] vals) {
-      Class_divchildlist_from_testpackagelist output = new Class_divchildlist_from_testpackagelist();
+      Vx.Test.Class_divchildlist_from_testpackagelist output = new Vx.Test.Class_divchildlist_from_testpackagelist();
       return output;
     }
 
-    public override Vx.Test.Func_divchildlist_from_testpackagelist vx_copy(params object[] vals) {
-      Class_divchildlist_from_testpackagelist output = new Class_divchildlist_from_testpackagelist();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_divchildlist_from_testpackagelist output = new Vx.Test.Class_divchildlist_from_testpackagelist();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "divchildlist<-testpackagelist", // name
         0, // idx
@@ -3789,14 +3947,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_divchildlist_from_testpackagelist;
+      Vx.Core.Type_any output = Vx.Test.e_divchildlist_from_testpackagelist;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_divchildlist_from_testpackagelist;
+      Vx.Core.Type_any output = Vx.Test.t_divchildlist_from_testpackagelist;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -3824,8 +3985,8 @@ public static class Test {
 
   }
 
-  public static Func_divchildlist_from_testpackagelist e_divchildlist_from_testpackagelist = new Vx.Test.Class_divchildlist_from_testpackagelist();
-  public static Func_divchildlist_from_testpackagelist t_divchildlist_from_testpackagelist = new Vx.Test.Class_divchildlist_from_testpackagelist();
+  public static Vx.Test.Func_divchildlist_from_testpackagelist e_divchildlist_from_testpackagelist = new Vx.Test.Class_divchildlist_from_testpackagelist();
+  public static Vx.Test.Func_divchildlist_from_testpackagelist t_divchildlist_from_testpackagelist = new Vx.Test.Class_divchildlist_from_testpackagelist();
 
   public static Vx.Web.Html.Type_divchildlist f_divchildlist_from_testpackagelist(Vx.Test.Type_testpackagelist testpackagelist) {
     Vx.Web.Html.Type_divchildlist output = Vx.Web.Html.e_divchildlist;
@@ -3850,21 +4011,22 @@ public static class Test {
   public class Class_file_test : Vx.Core.Class_base, Func_file_test {
 
     public override Vx.Test.Func_file_test vx_new(params object[] vals) {
-      Class_file_test output = new Class_file_test();
+      Vx.Test.Class_file_test output = new Vx.Test.Class_file_test();
       return output;
     }
 
-    public override Vx.Test.Func_file_test vx_copy(params object[] vals) {
-      Class_file_test output = new Class_file_test();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_file_test output = new Vx.Test.Class_file_test();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "file-test", // name
         0, // idx
@@ -3883,14 +4045,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_file_test;
+      Vx.Core.Type_any output = Vx.Test.e_file_test;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_file_test;
+      Vx.Core.Type_any output = Vx.Test.t_file_test;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -3905,14 +4070,15 @@ public static class Test {
 
   }
 
-  public static Func_file_test e_file_test = new Vx.Test.Class_file_test();
-  public static Func_file_test t_file_test = new Vx.Test.Class_file_test();
+  public static Vx.Test.Func_file_test e_file_test = new Vx.Test.Class_file_test();
+  public static Vx.Test.Func_file_test t_file_test = new Vx.Test.Class_file_test();
 
   public static Vx.Data.File.Type_file f_file_test() {
     Vx.Data.File.Type_file output = Vx.Data.File.e_file;
     output = Vx.Core.f_new(
       Vx.Data.File.t_file,
-      Vx.Core.vx_new(Vx.Core.t_anylist,
+      Vx.Core.vx_new(
+        Vx.Core.t_anylist,
         Vx.Core.vx_new_string(":name"),
         Vx.Core.vx_new_string("testsuite.vxlisp"),
         Vx.Core.vx_new_string(":path"),
@@ -3935,21 +4101,22 @@ public static class Test {
   public class Class_file_testhtml : Vx.Core.Class_base, Func_file_testhtml {
 
     public override Vx.Test.Func_file_testhtml vx_new(params object[] vals) {
-      Class_file_testhtml output = new Class_file_testhtml();
+      Vx.Test.Class_file_testhtml output = new Vx.Test.Class_file_testhtml();
       return output;
     }
 
-    public override Vx.Test.Func_file_testhtml vx_copy(params object[] vals) {
-      Class_file_testhtml output = new Class_file_testhtml();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_file_testhtml output = new Vx.Test.Class_file_testhtml();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "file-testhtml", // name
         0, // idx
@@ -3968,14 +4135,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_file_testhtml;
+      Vx.Core.Type_any output = Vx.Test.e_file_testhtml;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_file_testhtml;
+      Vx.Core.Type_any output = Vx.Test.t_file_testhtml;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -3990,14 +4160,15 @@ public static class Test {
 
   }
 
-  public static Func_file_testhtml e_file_testhtml = new Vx.Test.Class_file_testhtml();
-  public static Func_file_testhtml t_file_testhtml = new Vx.Test.Class_file_testhtml();
+  public static Vx.Test.Func_file_testhtml e_file_testhtml = new Vx.Test.Class_file_testhtml();
+  public static Vx.Test.Func_file_testhtml t_file_testhtml = new Vx.Test.Class_file_testhtml();
 
   public static Vx.Data.File.Type_file f_file_testhtml() {
     Vx.Data.File.Type_file output = Vx.Data.File.e_file;
     output = Vx.Core.f_new(
       Vx.Data.File.t_file,
-      Vx.Core.vx_new(Vx.Core.t_anylist,
+      Vx.Core.vx_new(
+        Vx.Core.t_anylist,
         Vx.Core.vx_new_string(":name"),
         Vx.Core.vx_new_string("testsuite.html"),
         Vx.Core.vx_new_string(":path"),
@@ -4020,21 +4191,22 @@ public static class Test {
   public class Class_file_testnode : Vx.Core.Class_base, Func_file_testnode {
 
     public override Vx.Test.Func_file_testnode vx_new(params object[] vals) {
-      Class_file_testnode output = new Class_file_testnode();
+      Vx.Test.Class_file_testnode output = new Vx.Test.Class_file_testnode();
       return output;
     }
 
-    public override Vx.Test.Func_file_testnode vx_copy(params object[] vals) {
-      Class_file_testnode output = new Class_file_testnode();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_file_testnode output = new Vx.Test.Class_file_testnode();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "file-testnode", // name
         0, // idx
@@ -4053,14 +4225,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_file_testnode;
+      Vx.Core.Type_any output = Vx.Test.e_file_testnode;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_file_testnode;
+      Vx.Core.Type_any output = Vx.Test.t_file_testnode;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -4075,14 +4250,15 @@ public static class Test {
 
   }
 
-  public static Func_file_testnode e_file_testnode = new Vx.Test.Class_file_testnode();
-  public static Func_file_testnode t_file_testnode = new Vx.Test.Class_file_testnode();
+  public static Vx.Test.Func_file_testnode e_file_testnode = new Vx.Test.Class_file_testnode();
+  public static Vx.Test.Func_file_testnode t_file_testnode = new Vx.Test.Class_file_testnode();
 
   public static Vx.Data.File.Type_file f_file_testnode() {
     Vx.Data.File.Type_file output = Vx.Data.File.e_file;
     output = Vx.Core.f_new(
       Vx.Data.File.t_file,
-      Vx.Core.vx_new(Vx.Core.t_anylist,
+      Vx.Core.vx_new(
+        Vx.Core.t_anylist,
         Vx.Core.vx_new_string(":name"),
         Vx.Core.vx_new_string("testsuitenode.vxlisp"),
         Vx.Core.vx_new_string(":path"),
@@ -4106,21 +4282,22 @@ public static class Test {
   public class Class_html_from_divtest : Vx.Core.Class_base, Func_html_from_divtest {
 
     public override Vx.Test.Func_html_from_divtest vx_new(params object[] vals) {
-      Class_html_from_divtest output = new Class_html_from_divtest();
+      Vx.Test.Class_html_from_divtest output = new Vx.Test.Class_html_from_divtest();
       return output;
     }
 
-    public override Vx.Test.Func_html_from_divtest vx_copy(params object[] vals) {
-      Class_html_from_divtest output = new Class_html_from_divtest();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_html_from_divtest output = new Vx.Test.Class_html_from_divtest();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "html<-divtest", // name
         0, // idx
@@ -4139,14 +4316,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_html_from_divtest;
+      Vx.Core.Type_any output = Vx.Test.e_html_from_divtest;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_html_from_divtest;
+      Vx.Core.Type_any output = Vx.Test.t_html_from_divtest;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -4174,30 +4354,34 @@ public static class Test {
 
   }
 
-  public static Func_html_from_divtest e_html_from_divtest = new Vx.Test.Class_html_from_divtest();
-  public static Func_html_from_divtest t_html_from_divtest = new Vx.Test.Class_html_from_divtest();
+  public static Vx.Test.Func_html_from_divtest e_html_from_divtest = new Vx.Test.Class_html_from_divtest();
+  public static Vx.Test.Func_html_from_divtest t_html_from_divtest = new Vx.Test.Class_html_from_divtest();
 
   public static Vx.Web.Html.Type_html f_html_from_divtest(Vx.Web.Html.Type_div divtest) {
     Vx.Web.Html.Type_html output = Vx.Web.Html.e_html;
     output = Vx.Core.f_new(
       Vx.Web.Html.t_html,
-      Vx.Core.vx_new(Vx.Core.t_anylist,
+      Vx.Core.vx_new(
+        Vx.Core.t_anylist,
         Vx.Core.vx_new_string(":lang"),
         Vx.Core.vx_new_string("en"),
         Vx.Core.vx_new_string(":head"),
         Vx.Core.f_new(
           Vx.Web.Html.t_head,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
             Vx.Core.f_new(
               Vx.Web.Html.t_meta,
-              Vx.Core.vx_new(Vx.Core.t_anylist,
+              Vx.Core.vx_new(
+                Vx.Core.t_anylist,
                 Vx.Core.vx_new_string(":charset"),
                 Vx.Core.vx_new_string("utf-8")
               )
             ),
             Vx.Core.f_new(
               Vx.Web.Html.t_meta,
-              Vx.Core.vx_new(Vx.Core.t_anylist,
+              Vx.Core.vx_new(
+                Vx.Core.t_anylist,
                 Vx.Core.vx_new_string(":name"),
                 Vx.Core.vx_new_string("viewport"),
                 Vx.Core.vx_new_string(":content"),
@@ -4206,7 +4390,8 @@ public static class Test {
             ),
             Vx.Core.f_new(
               Vx.Web.Html.t_title,
-              Vx.Core.vx_new(Vx.Core.t_anylist,
+              Vx.Core.vx_new(
+                Vx.Core.t_anylist,
                 Vx.Core.vx_new_string(":text"),
                 Vx.Core.vx_new_string("Test Suite")
               )
@@ -4217,13 +4402,16 @@ public static class Test {
         Vx.Core.vx_new_string(":body"),
         Vx.Core.f_new(
           Vx.Web.Html.t_body,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
             Vx.Core.f_new(
               Vx.Web.Html.t_div,
-              Vx.Core.vx_new(Vx.Core.t_anylist,
+              Vx.Core.vx_new(
+                Vx.Core.t_anylist,
                 Vx.Core.f_new(
                   Vx.Web.Html.t_h1,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string("Test Suite")
                   )
                 )
@@ -4251,21 +4439,22 @@ public static class Test {
   public class Class_p_from_passfail : Vx.Core.Class_base, Func_p_from_passfail {
 
     public override Vx.Test.Func_p_from_passfail vx_new(params object[] vals) {
-      Class_p_from_passfail output = new Class_p_from_passfail();
+      Vx.Test.Class_p_from_passfail output = new Vx.Test.Class_p_from_passfail();
       return output;
     }
 
-    public override Vx.Test.Func_p_from_passfail vx_copy(params object[] vals) {
-      Class_p_from_passfail output = new Class_p_from_passfail();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_p_from_passfail output = new Vx.Test.Class_p_from_passfail();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "p<-passfail", // name
         0, // idx
@@ -4284,14 +4473,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_p_from_passfail;
+      Vx.Core.Type_any output = Vx.Test.e_p_from_passfail;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_p_from_passfail;
+      Vx.Core.Type_any output = Vx.Test.t_p_from_passfail;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -4319,8 +4511,8 @@ public static class Test {
 
   }
 
-  public static Func_p_from_passfail e_p_from_passfail = new Vx.Test.Class_p_from_passfail();
-  public static Func_p_from_passfail t_p_from_passfail = new Vx.Test.Class_p_from_passfail();
+  public static Vx.Test.Func_p_from_passfail e_p_from_passfail = new Vx.Test.Class_p_from_passfail();
+  public static Vx.Test.Func_p_from_passfail t_p_from_passfail = new Vx.Test.Class_p_from_passfail();
 
   public static Vx.Web.Html.Type_p f_p_from_passfail(Vx.Core.Type_boolean passfail) {
     Vx.Web.Html.Type_p output = Vx.Web.Html.e_p;
@@ -4335,7 +4527,8 @@ public static class Test {
         );
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Web.Html.t_p,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
             Vx.Core.vx_new_string(":style"),
             style,
             Vx.Core.vx_new_string(":text"),
@@ -4362,21 +4555,22 @@ public static class Test {
   public class Class_p_from_testcoveragenums : Vx.Core.Class_base, Func_p_from_testcoveragenums {
 
     public override Vx.Test.Func_p_from_testcoveragenums vx_new(params object[] vals) {
-      Class_p_from_testcoveragenums output = new Class_p_from_testcoveragenums();
+      Vx.Test.Class_p_from_testcoveragenums output = new Vx.Test.Class_p_from_testcoveragenums();
       return output;
     }
 
-    public override Vx.Test.Func_p_from_testcoveragenums vx_copy(params object[] vals) {
-      Class_p_from_testcoveragenums output = new Class_p_from_testcoveragenums();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_p_from_testcoveragenums output = new Vx.Test.Class_p_from_testcoveragenums();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "p<-testcoveragenums", // name
         0, // idx
@@ -4395,14 +4589,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_p_from_testcoveragenums;
+      Vx.Core.Type_any output = Vx.Test.e_p_from_testcoveragenums;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_p_from_testcoveragenums;
+      Vx.Core.Type_any output = Vx.Test.t_p_from_testcoveragenums;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -4430,14 +4627,15 @@ public static class Test {
 
   }
 
-  public static Func_p_from_testcoveragenums e_p_from_testcoveragenums = new Vx.Test.Class_p_from_testcoveragenums();
-  public static Func_p_from_testcoveragenums t_p_from_testcoveragenums = new Vx.Test.Class_p_from_testcoveragenums();
+  public static Vx.Test.Func_p_from_testcoveragenums e_p_from_testcoveragenums = new Vx.Test.Class_p_from_testcoveragenums();
+  public static Vx.Test.Func_p_from_testcoveragenums t_p_from_testcoveragenums = new Vx.Test.Class_p_from_testcoveragenums();
 
   public static Vx.Web.Html.Type_p f_p_from_testcoveragenums(Vx.Test.Type_testcoveragenums nums) {
     Vx.Web.Html.Type_p output = Vx.Web.Html.e_p;
     output = Vx.Core.f_new(
       Vx.Web.Html.t_p,
-      Vx.Core.vx_new(Vx.Core.t_anylist,
+      Vx.Core.vx_new(
+        Vx.Core.t_anylist,
         Vx.Core.vx_new_string(":style"),
         Vx.Web.Html.f_style_from_stylesheet_name(
           Vx.Test.c_stylesheet_test,
@@ -4446,7 +4644,8 @@ public static class Test {
         Vx.Core.vx_new_string(":text"),
         Vx.Core.f_new(
           Vx.Core.t_string,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
             nums.pct(),
             Vx.Core.vx_new_string("% "),
             nums.tests(),
@@ -4475,21 +4674,22 @@ public static class Test {
   public class Class_resolve_testcase : Vx.Core.Class_base, Func_resolve_testcase {
 
     public override Vx.Test.Func_resolve_testcase vx_new(params object[] vals) {
-      Class_resolve_testcase output = new Class_resolve_testcase();
+      Vx.Test.Class_resolve_testcase output = new Vx.Test.Class_resolve_testcase();
       return output;
     }
 
-    public override Vx.Test.Func_resolve_testcase vx_copy(params object[] vals) {
-      Class_resolve_testcase output = new Class_resolve_testcase();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_resolve_testcase output = new Vx.Test.Class_resolve_testcase();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "resolve-testcase", // name
         0, // idx
@@ -4508,14 +4708,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_resolve_testcase;
+      Vx.Core.Type_any output = Vx.Test.e_resolve_testcase;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_resolve_testcase;
+      Vx.Core.Type_any output = Vx.Test.t_resolve_testcase;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any_async vx_fn_new(Vx.Core.Class_any_from_any_async.IFn fn) {
@@ -4543,8 +4746,8 @@ public static class Test {
 
   }
 
-  public static Func_resolve_testcase e_resolve_testcase = new Vx.Test.Class_resolve_testcase();
-  public static Func_resolve_testcase t_resolve_testcase = new Vx.Test.Class_resolve_testcase();
+  public static Vx.Test.Func_resolve_testcase e_resolve_testcase = new Vx.Test.Class_resolve_testcase();
+  public static Vx.Test.Func_resolve_testcase t_resolve_testcase = new Vx.Test.Class_resolve_testcase();
 
   public static Task<Vx.Test.Type_testcase> f_resolve_testcase(Vx.Test.Type_testcase testcase) {
     Task<Vx.Test.Type_testcase> output = Vx.Core.vx_async_new_from_value(Vx.Test.e_testcase);
@@ -4574,11 +4777,12 @@ public static class Test {
           Vx.Core.Type_boolean passfail = Vx.Core.f_and_1(passfaillist);
           Vx.Core.Type_any output_4 = Vx.Core.f_copy(
             testcase,
-            Vx.Core.vx_new(Vx.Core.t_anylist,
-                  Vx.Core.vx_new_string(":passfail"),
-                  passfail,
-                  Vx.Core.vx_new_string(":describelist"),
-                  resolvedlist
+            Vx.Core.vx_new(
+              Vx.Core.t_anylist,
+              Vx.Core.vx_new_string(":passfail"),
+              passfail,
+              Vx.Core.vx_new_string(":describelist"),
+              resolvedlist
             )
           );
           return output_4;
@@ -4605,21 +4809,22 @@ public static class Test {
   public class Class_resolve_testcaselist : Vx.Core.Class_base, Func_resolve_testcaselist {
 
     public override Vx.Test.Func_resolve_testcaselist vx_new(params object[] vals) {
-      Class_resolve_testcaselist output = new Class_resolve_testcaselist();
+      Vx.Test.Class_resolve_testcaselist output = new Vx.Test.Class_resolve_testcaselist();
       return output;
     }
 
-    public override Vx.Test.Func_resolve_testcaselist vx_copy(params object[] vals) {
-      Class_resolve_testcaselist output = new Class_resolve_testcaselist();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_resolve_testcaselist output = new Vx.Test.Class_resolve_testcaselist();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "resolve-testcaselist", // name
         0, // idx
@@ -4638,14 +4843,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_resolve_testcaselist;
+      Vx.Core.Type_any output = Vx.Test.e_resolve_testcaselist;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_resolve_testcaselist;
+      Vx.Core.Type_any output = Vx.Test.t_resolve_testcaselist;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any_async vx_fn_new(Vx.Core.Class_any_from_any_async.IFn fn) {
@@ -4673,8 +4881,8 @@ public static class Test {
 
   }
 
-  public static Func_resolve_testcaselist e_resolve_testcaselist = new Vx.Test.Class_resolve_testcaselist();
-  public static Func_resolve_testcaselist t_resolve_testcaselist = new Vx.Test.Class_resolve_testcaselist();
+  public static Vx.Test.Func_resolve_testcaselist e_resolve_testcaselist = new Vx.Test.Class_resolve_testcaselist();
+  public static Vx.Test.Func_resolve_testcaselist t_resolve_testcaselist = new Vx.Test.Class_resolve_testcaselist();
 
   public static Task<Vx.Test.Type_testcaselist> f_resolve_testcaselist(Vx.Test.Type_testcaselist testcaselist) {
     Task<Vx.Test.Type_testcaselist> output = Vx.Core.vx_async_new_from_value(Vx.Test.e_testcaselist);
@@ -4702,21 +4910,22 @@ public static class Test {
   public class Class_resolve_testdescribe : Vx.Core.Class_base, Func_resolve_testdescribe {
 
     public override Vx.Test.Func_resolve_testdescribe vx_new(params object[] vals) {
-      Class_resolve_testdescribe output = new Class_resolve_testdescribe();
+      Vx.Test.Class_resolve_testdescribe output = new Vx.Test.Class_resolve_testdescribe();
       return output;
     }
 
-    public override Vx.Test.Func_resolve_testdescribe vx_copy(params object[] vals) {
-      Class_resolve_testdescribe output = new Class_resolve_testdescribe();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_resolve_testdescribe output = new Vx.Test.Class_resolve_testdescribe();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "resolve-testdescribe", // name
         0, // idx
@@ -4735,14 +4944,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_resolve_testdescribe;
+      Vx.Core.Type_any output = Vx.Test.e_resolve_testdescribe;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_resolve_testdescribe;
+      Vx.Core.Type_any output = Vx.Test.t_resolve_testdescribe;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any_async vx_fn_new(Vx.Core.Class_any_from_any_async.IFn fn) {
@@ -4770,8 +4982,8 @@ public static class Test {
 
   }
 
-  public static Func_resolve_testdescribe e_resolve_testdescribe = new Vx.Test.Class_resolve_testdescribe();
-  public static Func_resolve_testdescribe t_resolve_testdescribe = new Vx.Test.Class_resolve_testdescribe();
+  public static Vx.Test.Func_resolve_testdescribe e_resolve_testdescribe = new Vx.Test.Class_resolve_testdescribe();
+  public static Vx.Test.Func_resolve_testdescribe t_resolve_testdescribe = new Vx.Test.Class_resolve_testdescribe();
 
   public static Task<Vx.Test.Type_testdescribe> f_resolve_testdescribe(Vx.Test.Type_testdescribe testdescribe) {
     Task<Vx.Test.Type_testdescribe> output = Vx.Core.vx_async_new_from_value(Vx.Test.e_testdescribe);
@@ -4783,9 +4995,10 @@ public static class Test {
         Task<Vx.Core.Type_any> output_1 = Vx.Core.vx_async_from_async_fn(future_resolved, (resolved) => {
           Vx.Core.Type_any output_2 = Vx.Core.f_copy(
             testdescribe,
-            Vx.Core.vx_new(Vx.Core.t_anylist,
-                  Vx.Core.vx_new_string(":testresult"),
-                  resolved
+            Vx.Core.vx_new(
+              Vx.Core.t_anylist,
+              Vx.Core.vx_new_string(":testresult"),
+              resolved
             )
           );
           return output_2;
@@ -4812,21 +5025,22 @@ public static class Test {
   public class Class_resolve_testdescribelist : Vx.Core.Class_base, Func_resolve_testdescribelist {
 
     public override Vx.Test.Func_resolve_testdescribelist vx_new(params object[] vals) {
-      Class_resolve_testdescribelist output = new Class_resolve_testdescribelist();
+      Vx.Test.Class_resolve_testdescribelist output = new Vx.Test.Class_resolve_testdescribelist();
       return output;
     }
 
-    public override Vx.Test.Func_resolve_testdescribelist vx_copy(params object[] vals) {
-      Class_resolve_testdescribelist output = new Class_resolve_testdescribelist();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_resolve_testdescribelist output = new Vx.Test.Class_resolve_testdescribelist();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "resolve-testdescribelist", // name
         0, // idx
@@ -4845,14 +5059,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_resolve_testdescribelist;
+      Vx.Core.Type_any output = Vx.Test.e_resolve_testdescribelist;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_resolve_testdescribelist;
+      Vx.Core.Type_any output = Vx.Test.t_resolve_testdescribelist;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any_async vx_fn_new(Vx.Core.Class_any_from_any_async.IFn fn) {
@@ -4880,8 +5097,8 @@ public static class Test {
 
   }
 
-  public static Func_resolve_testdescribelist e_resolve_testdescribelist = new Vx.Test.Class_resolve_testdescribelist();
-  public static Func_resolve_testdescribelist t_resolve_testdescribelist = new Vx.Test.Class_resolve_testdescribelist();
+  public static Vx.Test.Func_resolve_testdescribelist e_resolve_testdescribelist = new Vx.Test.Class_resolve_testdescribelist();
+  public static Vx.Test.Func_resolve_testdescribelist t_resolve_testdescribelist = new Vx.Test.Class_resolve_testdescribelist();
 
   public static Task<Vx.Test.Type_testdescribelist> f_resolve_testdescribelist(Vx.Test.Type_testdescribelist testdescribelist) {
     Task<Vx.Test.Type_testdescribelist> output = Vx.Core.vx_async_new_from_value(Vx.Test.e_testdescribelist);
@@ -4909,21 +5126,22 @@ public static class Test {
   public class Class_resolve_testpackage : Vx.Core.Class_base, Func_resolve_testpackage {
 
     public override Vx.Test.Func_resolve_testpackage vx_new(params object[] vals) {
-      Class_resolve_testpackage output = new Class_resolve_testpackage();
+      Vx.Test.Class_resolve_testpackage output = new Vx.Test.Class_resolve_testpackage();
       return output;
     }
 
-    public override Vx.Test.Func_resolve_testpackage vx_copy(params object[] vals) {
-      Class_resolve_testpackage output = new Class_resolve_testpackage();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_resolve_testpackage output = new Vx.Test.Class_resolve_testpackage();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "resolve-testpackage", // name
         0, // idx
@@ -4942,14 +5160,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_resolve_testpackage;
+      Vx.Core.Type_any output = Vx.Test.e_resolve_testpackage;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_resolve_testpackage;
+      Vx.Core.Type_any output = Vx.Test.t_resolve_testpackage;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any_async vx_fn_new(Vx.Core.Class_any_from_any_async.IFn fn) {
@@ -4977,8 +5198,8 @@ public static class Test {
 
   }
 
-  public static Func_resolve_testpackage e_resolve_testpackage = new Vx.Test.Class_resolve_testpackage();
-  public static Func_resolve_testpackage t_resolve_testpackage = new Vx.Test.Class_resolve_testpackage();
+  public static Vx.Test.Func_resolve_testpackage e_resolve_testpackage = new Vx.Test.Class_resolve_testpackage();
+  public static Vx.Test.Func_resolve_testpackage t_resolve_testpackage = new Vx.Test.Class_resolve_testpackage();
 
   public static Task<Vx.Test.Type_testpackage> f_resolve_testpackage(Vx.Test.Type_testpackage testpackage) {
     Task<Vx.Test.Type_testpackage> output = Vx.Core.vx_async_new_from_value(Vx.Test.e_testpackage);
@@ -5001,11 +5222,12 @@ public static class Test {
           Vx.Core.Type_boolean passfail = Vx.Core.f_and_1(passfaillist);
           Vx.Core.Type_any output_3 = Vx.Core.f_copy(
             testpackage,
-            Vx.Core.vx_new(Vx.Core.t_anylist,
-                  Vx.Core.vx_new_string(":passfail"),
-                  passfail,
-                  Vx.Core.vx_new_string(":caselist"),
-                  resolvedlist
+            Vx.Core.vx_new(
+              Vx.Core.t_anylist,
+              Vx.Core.vx_new_string(":passfail"),
+              passfail,
+              Vx.Core.vx_new_string(":caselist"),
+              resolvedlist
             )
           );
           return output_3;
@@ -5032,21 +5254,22 @@ public static class Test {
   public class Class_resolve_testpackagelist : Vx.Core.Class_base, Func_resolve_testpackagelist {
 
     public override Vx.Test.Func_resolve_testpackagelist vx_new(params object[] vals) {
-      Class_resolve_testpackagelist output = new Class_resolve_testpackagelist();
+      Vx.Test.Class_resolve_testpackagelist output = new Vx.Test.Class_resolve_testpackagelist();
       return output;
     }
 
-    public override Vx.Test.Func_resolve_testpackagelist vx_copy(params object[] vals) {
-      Class_resolve_testpackagelist output = new Class_resolve_testpackagelist();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_resolve_testpackagelist output = new Vx.Test.Class_resolve_testpackagelist();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "resolve-testpackagelist", // name
         0, // idx
@@ -5065,14 +5288,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_resolve_testpackagelist;
+      Vx.Core.Type_any output = Vx.Test.e_resolve_testpackagelist;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_resolve_testpackagelist;
+      Vx.Core.Type_any output = Vx.Test.t_resolve_testpackagelist;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any_async vx_fn_new(Vx.Core.Class_any_from_any_async.IFn fn) {
@@ -5100,8 +5326,8 @@ public static class Test {
 
   }
 
-  public static Func_resolve_testpackagelist e_resolve_testpackagelist = new Vx.Test.Class_resolve_testpackagelist();
-  public static Func_resolve_testpackagelist t_resolve_testpackagelist = new Vx.Test.Class_resolve_testpackagelist();
+  public static Vx.Test.Func_resolve_testpackagelist e_resolve_testpackagelist = new Vx.Test.Class_resolve_testpackagelist();
+  public static Vx.Test.Func_resolve_testpackagelist t_resolve_testpackagelist = new Vx.Test.Class_resolve_testpackagelist();
 
   public static Task<Vx.Test.Type_testpackagelist> f_resolve_testpackagelist(Vx.Test.Type_testpackagelist testpackagelist) {
     Task<Vx.Test.Type_testpackagelist> output = Vx.Core.vx_async_new_from_value(Vx.Test.e_testpackagelist);
@@ -5129,21 +5355,22 @@ public static class Test {
   public class Class_resolve_testresult : Vx.Core.Class_base, Func_resolve_testresult {
 
     public override Vx.Test.Func_resolve_testresult vx_new(params object[] vals) {
-      Class_resolve_testresult output = new Class_resolve_testresult();
+      Vx.Test.Class_resolve_testresult output = new Vx.Test.Class_resolve_testresult();
       return output;
     }
 
-    public override Vx.Test.Func_resolve_testresult vx_copy(params object[] vals) {
-      Class_resolve_testresult output = new Class_resolve_testresult();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_resolve_testresult output = new Vx.Test.Class_resolve_testresult();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "resolve-testresult", // name
         0, // idx
@@ -5162,14 +5389,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_resolve_testresult;
+      Vx.Core.Type_any output = Vx.Test.e_resolve_testresult;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_resolve_testresult;
+      Vx.Core.Type_any output = Vx.Test.t_resolve_testresult;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any_async vx_fn_new(Vx.Core.Class_any_from_any_async.IFn fn) {
@@ -5197,8 +5427,8 @@ public static class Test {
 
   }
 
-  public static Func_resolve_testresult e_resolve_testresult = new Vx.Test.Class_resolve_testresult();
-  public static Func_resolve_testresult t_resolve_testresult = new Vx.Test.Class_resolve_testresult();
+  public static Vx.Test.Func_resolve_testresult e_resolve_testresult = new Vx.Test.Class_resolve_testresult();
+  public static Vx.Test.Func_resolve_testresult t_resolve_testresult = new Vx.Test.Class_resolve_testresult();
 
   public static Task<Vx.Test.Type_testresult> f_resolve_testresult(Vx.Test.Type_testresult testresult) {
     Task<Vx.Test.Type_testresult> output = Vx.Core.vx_async_new_from_value(Vx.Test.e_testresult);
@@ -5211,35 +5441,37 @@ public static class Test {
         Task<Vx.Core.Type_any> output_1 = Vx.Core.vx_async_from_async_fn(future_actual, (actual) => {
           Vx.Core.Type_any output_3 = Vx.Core.f_if_2(
             Vx.Test.t_testresult,
-            Vx.Core.vx_new(Vx.Core.t_thenelselist,
-                  Vx.Core.f_then(
-                    Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                      return Vx.Core.f_is_empty_1(fn_actual);
-                    }),
+            Vx.Core.vx_new(
+              Vx.Core.t_thenelselist,
+              Vx.Core.f_then(
+                Vx.Core.t_boolean_from_func.vx_fn_new(() => {
+                  return Vx.Core.f_is_empty_1(fn_actual);
+                }),
+                Vx.Core.t_any_from_func.vx_fn_new(() => {
+                  return testresult;
+                })
+              ),
+              Vx.Core.f_else(
+                Vx.Core.t_any_from_func.vx_fn_new(() => {
+                  return Vx.Core.f_let(
+                    Vx.Test.t_testresult,
                     Vx.Core.t_any_from_func.vx_fn_new(() => {
-                      return testresult;
-                    })
-                  ),
-                  Vx.Core.f_else(
-                    Vx.Core.t_any_from_func.vx_fn_new(() => {
-                      return Vx.Core.f_let(
-                        Vx.Test.t_testresult,
-                        Vx.Core.t_any_from_func.vx_fn_new(() => {
-                          Vx.Core.Type_boolean passfail = Vx.Core.f_eq(expected, actual);
-                          Vx.Core.Type_any output_2 = Vx.Core.f_copy(
-                            testresult,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
-                              Vx.Core.vx_new_string(":passfail"),
-                              passfail,
-                              Vx.Core.vx_new_string(":actual"),
-                              actual
-                            )
-                          );
-                          return output_2;
-                        })
+                      Vx.Core.Type_boolean passfail = Vx.Core.f_eq(expected, actual);
+                      Vx.Core.Type_any output_2 = Vx.Core.f_copy(
+                        testresult,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
+                          Vx.Core.vx_new_string(":passfail"),
+                          passfail,
+                          Vx.Core.vx_new_string(":actual"),
+                          actual
+                        )
                       );
+                      return output_2;
                     })
-                  )
+                  );
+                })
+              )
             )
           );
           return output_3;
@@ -5263,21 +5495,22 @@ public static class Test {
   public class Class_security_test : Vx.Core.Class_base, Func_security_test {
 
     public override Vx.Test.Func_security_test vx_new(params object[] vals) {
-      Class_security_test output = new Class_security_test();
+      Vx.Test.Class_security_test output = new Vx.Test.Class_security_test();
       return output;
     }
 
-    public override Vx.Test.Func_security_test vx_copy(params object[] vals) {
-      Class_security_test output = new Class_security_test();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_security_test output = new Vx.Test.Class_security_test();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "security-test", // name
         0, // idx
@@ -5296,14 +5529,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_security_test;
+      Vx.Core.Type_any output = Vx.Test.e_security_test;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_security_test;
+      Vx.Core.Type_any output = Vx.Test.t_security_test;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -5318,18 +5554,20 @@ public static class Test {
 
   }
 
-  public static Func_security_test e_security_test = new Vx.Test.Class_security_test();
-  public static Func_security_test t_security_test = new Vx.Test.Class_security_test();
+  public static Vx.Test.Func_security_test e_security_test = new Vx.Test.Class_security_test();
+  public static Vx.Test.Func_security_test t_security_test = new Vx.Test.Class_security_test();
 
   public static Vx.Core.Type_security f_security_test() {
     Vx.Core.Type_security output = Vx.Core.e_security;
     output = Vx.Core.f_new(
       Vx.Core.t_security,
-      Vx.Core.vx_new(Vx.Core.t_anylist,
+      Vx.Core.vx_new(
+        Vx.Core.t_anylist,
         Vx.Core.vx_new_string(":allowfuncs"),
         Vx.Core.f_new(
           Vx.Core.t_funclist,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
             Vx.Data.File.t_boolean_write_from_file_any,
             Vx.Data.File.t_boolean_write_from_file_string,
             Vx.Data.File.t_file_read_from_file,
@@ -5356,21 +5594,22 @@ public static class Test {
   public class Class_test : Vx.Core.Class_base, Func_test {
 
     public override Vx.Test.Func_test vx_new(params object[] vals) {
-      Class_test output = new Class_test();
+      Vx.Test.Class_test output = new Vx.Test.Class_test();
       return output;
     }
 
-    public override Vx.Test.Func_test vx_copy(params object[] vals) {
-      Class_test output = new Class_test();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_test output = new Vx.Test.Class_test();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "test", // name
         0, // idx
@@ -5389,14 +5628,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_test;
+      Vx.Core.Type_any output = Vx.Test.e_test;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_test;
+      Vx.Core.Type_any output = Vx.Test.t_test;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -5414,15 +5656,16 @@ public static class Test {
 
   }
 
-  public static Func_test e_test = new Vx.Test.Class_test();
-  public static Func_test t_test = new Vx.Test.Class_test();
+  public static Vx.Test.Func_test e_test = new Vx.Test.Class_test();
+  public static Vx.Test.Func_test t_test = new Vx.Test.Class_test();
 
   public static Vx.Test.Type_testresult f_test(Vx.Core.Type_context context, Vx.Core.Type_any expected, Vx.Core.Type_any actual) {
     Vx.Test.Type_testresult output = Vx.Test.e_testresult;
     try {
       output = Vx.Core.f_new(
         Vx.Test.t_testresult,
-        Vx.Core.vx_new(Vx.Core.t_anylist,
+        Vx.Core.vx_new(
+          Vx.Core.t_anylist,
           Vx.Core.vx_new_string(":code"),
           Vx.Core.vx_new_string(":eq"),
           Vx.Core.vx_new_string(":passfail"),
@@ -5455,21 +5698,22 @@ public static class Test {
   public class Class_test_1 : Vx.Core.Class_base, Func_test_1 {
 
     public override Vx.Test.Func_test_1 vx_new(params object[] vals) {
-      Class_test_1 output = new Class_test_1();
+      Vx.Test.Class_test_1 output = new Vx.Test.Class_test_1();
       return output;
     }
 
-    public override Vx.Test.Func_test_1 vx_copy(params object[] vals) {
-      Class_test_1 output = new Class_test_1();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_test_1 output = new Vx.Test.Class_test_1();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "test", // name
         1, // idx
@@ -5488,14 +5732,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_test_1;
+      Vx.Core.Type_any output = Vx.Test.e_test_1;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_test_1;
+      Vx.Core.Type_any output = Vx.Test.t_test_1;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -5513,15 +5760,16 @@ public static class Test {
 
   }
 
-  public static Func_test_1 e_test_1 = new Vx.Test.Class_test_1();
-  public static Func_test_1 t_test_1 = new Vx.Test.Class_test_1();
+  public static Vx.Test.Func_test_1 e_test_1 = new Vx.Test.Class_test_1();
+  public static Vx.Test.Func_test_1 t_test_1 = new Vx.Test.Class_test_1();
 
   public static Vx.Test.Type_testresult f_test_1(Vx.Core.Type_context context, Vx.Core.Type_any expected, Vx.Core.Func_any_from_func_async fn_actual) {
     Vx.Test.Type_testresult output = Vx.Test.e_testresult;
     try {
       output = Vx.Core.f_new(
         Vx.Test.t_testresult,
-        Vx.Core.vx_new(Vx.Core.t_anylist,
+        Vx.Core.vx_new(
+          Vx.Core.t_anylist,
           Vx.Core.vx_new_string(":code"),
           Vx.Core.vx_new_string(":eq"),
           Vx.Core.vx_new_string(":expected"),
@@ -5551,21 +5799,22 @@ public static class Test {
   public class Class_test_false : Vx.Core.Class_base, Func_test_false {
 
     public override Vx.Test.Func_test_false vx_new(params object[] vals) {
-      Class_test_false output = new Class_test_false();
+      Vx.Test.Class_test_false output = new Vx.Test.Class_test_false();
       return output;
     }
 
-    public override Vx.Test.Func_test_false vx_copy(params object[] vals) {
-      Class_test_false output = new Class_test_false();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_test_false output = new Vx.Test.Class_test_false();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "test-false", // name
         0, // idx
@@ -5584,14 +5833,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_test_false;
+      Vx.Core.Type_any output = Vx.Test.e_test_false;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_test_false;
+      Vx.Core.Type_any output = Vx.Test.t_test_false;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any_context vx_fn_new(Vx.Core.Class_any_from_any_context.IFn fn) {
@@ -5620,15 +5872,16 @@ public static class Test {
 
   }
 
-  public static Func_test_false e_test_false = new Vx.Test.Class_test_false();
-  public static Func_test_false t_test_false = new Vx.Test.Class_test_false();
+  public static Vx.Test.Func_test_false e_test_false = new Vx.Test.Class_test_false();
+  public static Vx.Test.Func_test_false t_test_false = new Vx.Test.Class_test_false();
 
   public static Vx.Test.Type_testresult f_test_false(Vx.Core.Type_context context, Vx.Core.Type_any actual) {
     Vx.Test.Type_testresult output = Vx.Test.e_testresult;
     try {
       output = Vx.Core.f_new(
         Vx.Test.t_testresult,
-        Vx.Core.vx_new(Vx.Core.t_anylist,
+        Vx.Core.vx_new(
+          Vx.Core.t_anylist,
           Vx.Core.vx_new_string(":code"),
           Vx.Core.vx_new_string(":false"),
           Vx.Core.vx_new_string(":passfail"),
@@ -5663,21 +5916,22 @@ public static class Test {
   public class Class_test_false_1 : Vx.Core.Class_base, Func_test_false_1 {
 
     public override Vx.Test.Func_test_false_1 vx_new(params object[] vals) {
-      Class_test_false_1 output = new Class_test_false_1();
+      Vx.Test.Class_test_false_1 output = new Vx.Test.Class_test_false_1();
       return output;
     }
 
-    public override Vx.Test.Func_test_false_1 vx_copy(params object[] vals) {
-      Class_test_false_1 output = new Class_test_false_1();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_test_false_1 output = new Vx.Test.Class_test_false_1();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "test-false", // name
         1, // idx
@@ -5696,14 +5950,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_test_false_1;
+      Vx.Core.Type_any output = Vx.Test.e_test_false_1;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_test_false_1;
+      Vx.Core.Type_any output = Vx.Test.t_test_false_1;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any_context vx_fn_new(Vx.Core.Class_any_from_any_context.IFn fn) {
@@ -5732,15 +5989,16 @@ public static class Test {
 
   }
 
-  public static Func_test_false_1 e_test_false_1 = new Vx.Test.Class_test_false_1();
-  public static Func_test_false_1 t_test_false_1 = new Vx.Test.Class_test_false_1();
+  public static Vx.Test.Func_test_false_1 e_test_false_1 = new Vx.Test.Class_test_false_1();
+  public static Vx.Test.Func_test_false_1 t_test_false_1 = new Vx.Test.Class_test_false_1();
 
   public static Vx.Test.Type_testresult f_test_false_1(Vx.Core.Type_context context, Vx.Core.Func_any_from_func_async fn_actual) {
     Vx.Test.Type_testresult output = Vx.Test.e_testresult;
     try {
       output = Vx.Core.f_new(
         Vx.Test.t_testresult,
-        Vx.Core.vx_new(Vx.Core.t_anylist,
+        Vx.Core.vx_new(
+          Vx.Core.t_anylist,
           Vx.Core.vx_new_string(":code"),
           Vx.Core.vx_new_string(":false"),
           Vx.Core.vx_new_string(":expected"),
@@ -5771,21 +6029,22 @@ public static class Test {
   public class Class_test_gt : Vx.Core.Class_base, Func_test_gt {
 
     public override Vx.Test.Func_test_gt vx_new(params object[] vals) {
-      Class_test_gt output = new Class_test_gt();
+      Vx.Test.Class_test_gt output = new Vx.Test.Class_test_gt();
       return output;
     }
 
-    public override Vx.Test.Func_test_gt vx_copy(params object[] vals) {
-      Class_test_gt output = new Class_test_gt();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_test_gt output = new Vx.Test.Class_test_gt();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "test-gt", // name
         0, // idx
@@ -5804,14 +6063,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_test_gt;
+      Vx.Core.Type_any output = Vx.Test.e_test_gt;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_test_gt;
+      Vx.Core.Type_any output = Vx.Test.t_test_gt;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -5829,15 +6091,16 @@ public static class Test {
 
   }
 
-  public static Func_test_gt e_test_gt = new Vx.Test.Class_test_gt();
-  public static Func_test_gt t_test_gt = new Vx.Test.Class_test_gt();
+  public static Vx.Test.Func_test_gt e_test_gt = new Vx.Test.Class_test_gt();
+  public static Vx.Test.Func_test_gt t_test_gt = new Vx.Test.Class_test_gt();
 
   public static Vx.Test.Type_testresult f_test_gt(Vx.Core.Type_context context, Vx.Core.Type_any expected, Vx.Core.Type_any actual) {
     Vx.Test.Type_testresult output = Vx.Test.e_testresult;
     try {
       output = Vx.Core.f_new(
         Vx.Test.t_testresult,
-        Vx.Core.vx_new(Vx.Core.t_anylist,
+        Vx.Core.vx_new(
+          Vx.Core.t_anylist,
           Vx.Core.vx_new_string(":code"),
           Vx.Core.vx_new_string(":gt"),
           Vx.Core.vx_new_string(":passfail"),
@@ -5870,21 +6133,22 @@ public static class Test {
   public class Class_test_gt_1 : Vx.Core.Class_base, Func_test_gt_1 {
 
     public override Vx.Test.Func_test_gt_1 vx_new(params object[] vals) {
-      Class_test_gt_1 output = new Class_test_gt_1();
+      Vx.Test.Class_test_gt_1 output = new Vx.Test.Class_test_gt_1();
       return output;
     }
 
-    public override Vx.Test.Func_test_gt_1 vx_copy(params object[] vals) {
-      Class_test_gt_1 output = new Class_test_gt_1();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_test_gt_1 output = new Vx.Test.Class_test_gt_1();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "test-gt", // name
         1, // idx
@@ -5903,14 +6167,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_test_gt_1;
+      Vx.Core.Type_any output = Vx.Test.e_test_gt_1;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_test_gt_1;
+      Vx.Core.Type_any output = Vx.Test.t_test_gt_1;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -5928,15 +6195,16 @@ public static class Test {
 
   }
 
-  public static Func_test_gt_1 e_test_gt_1 = new Vx.Test.Class_test_gt_1();
-  public static Func_test_gt_1 t_test_gt_1 = new Vx.Test.Class_test_gt_1();
+  public static Vx.Test.Func_test_gt_1 e_test_gt_1 = new Vx.Test.Class_test_gt_1();
+  public static Vx.Test.Func_test_gt_1 t_test_gt_1 = new Vx.Test.Class_test_gt_1();
 
   public static Vx.Test.Type_testresult f_test_gt_1(Vx.Core.Type_context context, Vx.Core.Type_any expected, Vx.Core.Func_any_from_func_async fn_actual) {
     Vx.Test.Type_testresult output = Vx.Test.e_testresult;
     try {
       output = Vx.Core.f_new(
         Vx.Test.t_testresult,
-        Vx.Core.vx_new(Vx.Core.t_anylist,
+        Vx.Core.vx_new(
+          Vx.Core.t_anylist,
           Vx.Core.vx_new_string(":code"),
           Vx.Core.vx_new_string(":gt"),
           Vx.Core.vx_new_string(":expected"),
@@ -5967,21 +6235,22 @@ public static class Test {
   public class Class_test_ne : Vx.Core.Class_base, Func_test_ne {
 
     public override Vx.Test.Func_test_ne vx_new(params object[] vals) {
-      Class_test_ne output = new Class_test_ne();
+      Vx.Test.Class_test_ne output = new Vx.Test.Class_test_ne();
       return output;
     }
 
-    public override Vx.Test.Func_test_ne vx_copy(params object[] vals) {
-      Class_test_ne output = new Class_test_ne();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_test_ne output = new Vx.Test.Class_test_ne();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "test-ne", // name
         0, // idx
@@ -6000,14 +6269,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_test_ne;
+      Vx.Core.Type_any output = Vx.Test.e_test_ne;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_test_ne;
+      Vx.Core.Type_any output = Vx.Test.t_test_ne;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -6025,15 +6297,16 @@ public static class Test {
 
   }
 
-  public static Func_test_ne e_test_ne = new Vx.Test.Class_test_ne();
-  public static Func_test_ne t_test_ne = new Vx.Test.Class_test_ne();
+  public static Vx.Test.Func_test_ne e_test_ne = new Vx.Test.Class_test_ne();
+  public static Vx.Test.Func_test_ne t_test_ne = new Vx.Test.Class_test_ne();
 
   public static Vx.Test.Type_testresult f_test_ne(Vx.Core.Type_context context, Vx.Core.Type_any expected, Vx.Core.Type_any actual) {
     Vx.Test.Type_testresult output = Vx.Test.e_testresult;
     try {
       output = Vx.Core.f_new(
         Vx.Test.t_testresult,
-        Vx.Core.vx_new(Vx.Core.t_anylist,
+        Vx.Core.vx_new(
+          Vx.Core.t_anylist,
           Vx.Core.vx_new_string(":code"),
           Vx.Core.vx_new_string(":ne"),
           Vx.Core.vx_new_string(":passfail"),
@@ -6066,21 +6339,22 @@ public static class Test {
   public class Class_test_ne_1 : Vx.Core.Class_base, Func_test_ne_1 {
 
     public override Vx.Test.Func_test_ne_1 vx_new(params object[] vals) {
-      Class_test_ne_1 output = new Class_test_ne_1();
+      Vx.Test.Class_test_ne_1 output = new Vx.Test.Class_test_ne_1();
       return output;
     }
 
-    public override Vx.Test.Func_test_ne_1 vx_copy(params object[] vals) {
-      Class_test_ne_1 output = new Class_test_ne_1();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_test_ne_1 output = new Vx.Test.Class_test_ne_1();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "test-ne", // name
         1, // idx
@@ -6099,14 +6373,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_test_ne_1;
+      Vx.Core.Type_any output = Vx.Test.e_test_ne_1;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_test_ne_1;
+      Vx.Core.Type_any output = Vx.Test.t_test_ne_1;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -6124,15 +6401,16 @@ public static class Test {
 
   }
 
-  public static Func_test_ne_1 e_test_ne_1 = new Vx.Test.Class_test_ne_1();
-  public static Func_test_ne_1 t_test_ne_1 = new Vx.Test.Class_test_ne_1();
+  public static Vx.Test.Func_test_ne_1 e_test_ne_1 = new Vx.Test.Class_test_ne_1();
+  public static Vx.Test.Func_test_ne_1 t_test_ne_1 = new Vx.Test.Class_test_ne_1();
 
   public static Vx.Test.Type_testresult f_test_ne_1(Vx.Core.Type_context context, Vx.Core.Type_any expected, Vx.Core.Func_any_from_func_async fn_actual) {
     Vx.Test.Type_testresult output = Vx.Test.e_testresult;
     try {
       output = Vx.Core.f_new(
         Vx.Test.t_testresult,
-        Vx.Core.vx_new(Vx.Core.t_anylist,
+        Vx.Core.vx_new(
+          Vx.Core.t_anylist,
           Vx.Core.vx_new_string(":code"),
           Vx.Core.vx_new_string(":ne"),
           Vx.Core.vx_new_string(":expected"),
@@ -6163,21 +6441,22 @@ public static class Test {
   public class Class_test_string : Vx.Core.Class_base, Func_test_string {
 
     public override Vx.Test.Func_test_string vx_new(params object[] vals) {
-      Class_test_string output = new Class_test_string();
+      Vx.Test.Class_test_string output = new Vx.Test.Class_test_string();
       return output;
     }
 
-    public override Vx.Test.Func_test_string vx_copy(params object[] vals) {
-      Class_test_string output = new Class_test_string();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_test_string output = new Vx.Test.Class_test_string();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "test-string", // name
         0, // idx
@@ -6196,14 +6475,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_test_string;
+      Vx.Core.Type_any output = Vx.Test.e_test_string;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_test_string;
+      Vx.Core.Type_any output = Vx.Test.t_test_string;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -6221,15 +6503,16 @@ public static class Test {
 
   }
 
-  public static Func_test_string e_test_string = new Vx.Test.Class_test_string();
-  public static Func_test_string t_test_string = new Vx.Test.Class_test_string();
+  public static Vx.Test.Func_test_string e_test_string = new Vx.Test.Class_test_string();
+  public static Vx.Test.Func_test_string t_test_string = new Vx.Test.Class_test_string();
 
   public static Vx.Test.Type_testresult f_test_string(Vx.Core.Type_context context, Vx.Core.Type_any expected, Vx.Core.Type_any actual) {
     Vx.Test.Type_testresult output = Vx.Test.e_testresult;
     try {
       output = Vx.Core.f_new(
         Vx.Test.t_testresult,
-        Vx.Core.vx_new(Vx.Core.t_anylist,
+        Vx.Core.vx_new(
+          Vx.Core.t_anylist,
           Vx.Core.vx_new_string(":passfail"),
           Vx.Core.f_eq(
             Vx.Core.f_string_from_any(expected),
@@ -6263,21 +6546,22 @@ public static class Test {
   public class Class_test_string_1 : Vx.Core.Class_base, Func_test_string_1 {
 
     public override Vx.Test.Func_test_string_1 vx_new(params object[] vals) {
-      Class_test_string_1 output = new Class_test_string_1();
+      Vx.Test.Class_test_string_1 output = new Vx.Test.Class_test_string_1();
       return output;
     }
 
-    public override Vx.Test.Func_test_string_1 vx_copy(params object[] vals) {
-      Class_test_string_1 output = new Class_test_string_1();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_test_string_1 output = new Vx.Test.Class_test_string_1();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "test-string", // name
         1, // idx
@@ -6296,14 +6580,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_test_string_1;
+      Vx.Core.Type_any output = Vx.Test.e_test_string_1;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_test_string_1;
+      Vx.Core.Type_any output = Vx.Test.t_test_string_1;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -6321,15 +6608,16 @@ public static class Test {
 
   }
 
-  public static Func_test_string_1 e_test_string_1 = new Vx.Test.Class_test_string_1();
-  public static Func_test_string_1 t_test_string_1 = new Vx.Test.Class_test_string_1();
+  public static Vx.Test.Func_test_string_1 e_test_string_1 = new Vx.Test.Class_test_string_1();
+  public static Vx.Test.Func_test_string_1 t_test_string_1 = new Vx.Test.Class_test_string_1();
 
   public static Vx.Test.Type_testresult f_test_string_1(Vx.Core.Type_context context, Vx.Core.Type_any expected, Vx.Core.Func_any_from_func_async fn_actual) {
     Vx.Test.Type_testresult output = Vx.Test.e_testresult;
     try {
       output = Vx.Core.f_new(
         Vx.Test.t_testresult,
-        Vx.Core.vx_new(Vx.Core.t_anylist,
+        Vx.Core.vx_new(
+          Vx.Core.t_anylist,
           Vx.Core.vx_new_string(":code"),
           Vx.Core.vx_new_string(":string"),
           Vx.Core.vx_new_string(":expected"),
@@ -6359,21 +6647,22 @@ public static class Test {
   public class Class_test_true : Vx.Core.Class_base, Func_test_true {
 
     public override Vx.Test.Func_test_true vx_new(params object[] vals) {
-      Class_test_true output = new Class_test_true();
+      Vx.Test.Class_test_true output = new Vx.Test.Class_test_true();
       return output;
     }
 
-    public override Vx.Test.Func_test_true vx_copy(params object[] vals) {
-      Class_test_true output = new Class_test_true();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_test_true output = new Vx.Test.Class_test_true();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "test-true", // name
         0, // idx
@@ -6392,14 +6681,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_test_true;
+      Vx.Core.Type_any output = Vx.Test.e_test_true;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_test_true;
+      Vx.Core.Type_any output = Vx.Test.t_test_true;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any_context vx_fn_new(Vx.Core.Class_any_from_any_context.IFn fn) {
@@ -6428,15 +6720,16 @@ public static class Test {
 
   }
 
-  public static Func_test_true e_test_true = new Vx.Test.Class_test_true();
-  public static Func_test_true t_test_true = new Vx.Test.Class_test_true();
+  public static Vx.Test.Func_test_true e_test_true = new Vx.Test.Class_test_true();
+  public static Vx.Test.Func_test_true t_test_true = new Vx.Test.Class_test_true();
 
   public static Vx.Test.Type_testresult f_test_true(Vx.Core.Type_context context, Vx.Core.Type_any actual) {
     Vx.Test.Type_testresult output = Vx.Test.e_testresult;
     try {
       output = Vx.Core.f_new(
         Vx.Test.t_testresult,
-        Vx.Core.vx_new(Vx.Core.t_anylist,
+        Vx.Core.vx_new(
+          Vx.Core.t_anylist,
           Vx.Core.vx_new_string(":code"),
           Vx.Core.vx_new_string(":true"),
           Vx.Core.vx_new_string(":passfail"),
@@ -6471,21 +6764,22 @@ public static class Test {
   public class Class_test_true_1 : Vx.Core.Class_base, Func_test_true_1 {
 
     public override Vx.Test.Func_test_true_1 vx_new(params object[] vals) {
-      Class_test_true_1 output = new Class_test_true_1();
+      Vx.Test.Class_test_true_1 output = new Vx.Test.Class_test_true_1();
       return output;
     }
 
-    public override Vx.Test.Func_test_true_1 vx_copy(params object[] vals) {
-      Class_test_true_1 output = new Class_test_true_1();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_test_true_1 output = new Vx.Test.Class_test_true_1();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "test-true", // name
         1, // idx
@@ -6504,14 +6798,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_test_true_1;
+      Vx.Core.Type_any output = Vx.Test.e_test_true_1;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_test_true_1;
+      Vx.Core.Type_any output = Vx.Test.t_test_true_1;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any_context vx_fn_new(Vx.Core.Class_any_from_any_context.IFn fn) {
@@ -6540,15 +6837,16 @@ public static class Test {
 
   }
 
-  public static Func_test_true_1 e_test_true_1 = new Vx.Test.Class_test_true_1();
-  public static Func_test_true_1 t_test_true_1 = new Vx.Test.Class_test_true_1();
+  public static Vx.Test.Func_test_true_1 e_test_true_1 = new Vx.Test.Class_test_true_1();
+  public static Vx.Test.Func_test_true_1 t_test_true_1 = new Vx.Test.Class_test_true_1();
 
   public static Vx.Test.Type_testresult f_test_true_1(Vx.Core.Type_context context, Vx.Core.Func_any_from_func_async fn_actual) {
     Vx.Test.Type_testresult output = Vx.Test.e_testresult;
     try {
       output = Vx.Core.f_new(
         Vx.Test.t_testresult,
-        Vx.Core.vx_new(Vx.Core.t_anylist,
+        Vx.Core.vx_new(
+          Vx.Core.t_anylist,
           Vx.Core.vx_new_string(":code"),
           Vx.Core.vx_new_string(":true"),
           Vx.Core.vx_new_string(":expected"),
@@ -6579,21 +6877,22 @@ public static class Test {
   public class Class_tr_from_testdescribe_casename : Vx.Core.Class_base, Func_tr_from_testdescribe_casename {
 
     public override Vx.Test.Func_tr_from_testdescribe_casename vx_new(params object[] vals) {
-      Class_tr_from_testdescribe_casename output = new Class_tr_from_testdescribe_casename();
+      Vx.Test.Class_tr_from_testdescribe_casename output = new Vx.Test.Class_tr_from_testdescribe_casename();
       return output;
     }
 
-    public override Vx.Test.Func_tr_from_testdescribe_casename vx_copy(params object[] vals) {
-      Class_tr_from_testdescribe_casename output = new Class_tr_from_testdescribe_casename();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_tr_from_testdescribe_casename output = new Vx.Test.Class_tr_from_testdescribe_casename();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "tr<-testdescribe-casename", // name
         0, // idx
@@ -6612,14 +6911,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_tr_from_testdescribe_casename;
+      Vx.Core.Type_any output = Vx.Test.e_tr_from_testdescribe_casename;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_tr_from_testdescribe_casename;
+      Vx.Core.Type_any output = Vx.Test.t_tr_from_testdescribe_casename;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -6636,8 +6938,8 @@ public static class Test {
 
   }
 
-  public static Func_tr_from_testdescribe_casename e_tr_from_testdescribe_casename = new Vx.Test.Class_tr_from_testdescribe_casename();
-  public static Func_tr_from_testdescribe_casename t_tr_from_testdescribe_casename = new Vx.Test.Class_tr_from_testdescribe_casename();
+  public static Vx.Test.Func_tr_from_testdescribe_casename e_tr_from_testdescribe_casename = new Vx.Test.Class_tr_from_testdescribe_casename();
+  public static Vx.Test.Func_tr_from_testdescribe_casename t_tr_from_testdescribe_casename = new Vx.Test.Class_tr_from_testdescribe_casename();
 
   public static Vx.Web.Html.Type_tr f_tr_from_testdescribe_casename(Vx.Test.Type_testdescribe testdescribe, Vx.Core.Type_string casename) {
     Vx.Web.Html.Type_tr output = Vx.Web.Html.e_tr;
@@ -6659,19 +6961,23 @@ public static class Test {
         );
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Web.Html.t_tr,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
             Vx.Core.f_new(
               Vx.Web.Html.t_td,
-              Vx.Core.vx_new(Vx.Core.t_anylist,
+              Vx.Core.vx_new(
+                Vx.Core.t_anylist,
                 Vx.Test.f_p_from_passfail(passfail)
               )
             ),
             Vx.Core.f_new(
               Vx.Web.Html.t_td,
-              Vx.Core.vx_new(Vx.Core.t_anylist,
+              Vx.Core.vx_new(
+                Vx.Core.t_anylist,
                 Vx.Core.f_new(
                   Vx.Web.Html.t_p,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":style"),
                     prestyle,
                     Vx.Core.vx_new_string(":text"),
@@ -6682,10 +6988,12 @@ public static class Test {
             ),
             Vx.Core.f_new(
               Vx.Web.Html.t_td,
-              Vx.Core.vx_new(Vx.Core.t_anylist,
+              Vx.Core.vx_new(
+                Vx.Core.t_anylist,
                 Vx.Core.f_new(
                   Vx.Web.Html.t_p,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":style"),
                     prestyle,
                     Vx.Core.vx_new_string(":text"),
@@ -6696,10 +7004,12 @@ public static class Test {
             ),
             Vx.Core.f_new(
               Vx.Web.Html.t_td,
-              Vx.Core.vx_new(Vx.Core.t_anylist,
+              Vx.Core.vx_new(
+                Vx.Core.t_anylist,
                 Vx.Core.f_new(
                   Vx.Web.Html.t_p,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":style"),
                     prestyle,
                     Vx.Core.vx_new_string(":text"),
@@ -6710,10 +7020,12 @@ public static class Test {
             ),
             Vx.Core.f_new(
               Vx.Web.Html.t_td,
-              Vx.Core.vx_new(Vx.Core.t_anylist,
+              Vx.Core.vx_new(
+                Vx.Core.t_anylist,
                 Vx.Core.f_new(
                   Vx.Web.Html.t_p,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":style"),
                     prestyle,
                     Vx.Core.vx_new_string(":text"),
@@ -6743,21 +7055,22 @@ public static class Test {
   public class Class_trlist_from_testcase : Vx.Core.Class_base, Func_trlist_from_testcase {
 
     public override Vx.Test.Func_trlist_from_testcase vx_new(params object[] vals) {
-      Class_trlist_from_testcase output = new Class_trlist_from_testcase();
+      Vx.Test.Class_trlist_from_testcase output = new Vx.Test.Class_trlist_from_testcase();
       return output;
     }
 
-    public override Vx.Test.Func_trlist_from_testcase vx_copy(params object[] vals) {
-      Class_trlist_from_testcase output = new Class_trlist_from_testcase();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_trlist_from_testcase output = new Vx.Test.Class_trlist_from_testcase();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "trlist<-testcase", // name
         0, // idx
@@ -6776,14 +7089,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_trlist_from_testcase;
+      Vx.Core.Type_any output = Vx.Test.e_trlist_from_testcase;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_trlist_from_testcase;
+      Vx.Core.Type_any output = Vx.Test.t_trlist_from_testcase;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -6811,8 +7127,8 @@ public static class Test {
 
   }
 
-  public static Func_trlist_from_testcase e_trlist_from_testcase = new Vx.Test.Class_trlist_from_testcase();
-  public static Func_trlist_from_testcase t_trlist_from_testcase = new Vx.Test.Class_trlist_from_testcase();
+  public static Vx.Test.Func_trlist_from_testcase e_trlist_from_testcase = new Vx.Test.Class_trlist_from_testcase();
+  public static Vx.Test.Func_trlist_from_testcase t_trlist_from_testcase = new Vx.Test.Class_trlist_from_testcase();
 
   public static Vx.Web.Html.Type_trlist f_trlist_from_testcase(Vx.Test.Type_testcase testcase) {
     Vx.Web.Html.Type_trlist output = Vx.Web.Html.e_trlist;
@@ -6851,21 +7167,22 @@ public static class Test {
   public class Class_trlist_from_testcaselist : Vx.Core.Class_base, Func_trlist_from_testcaselist {
 
     public override Vx.Test.Func_trlist_from_testcaselist vx_new(params object[] vals) {
-      Class_trlist_from_testcaselist output = new Class_trlist_from_testcaselist();
+      Vx.Test.Class_trlist_from_testcaselist output = new Vx.Test.Class_trlist_from_testcaselist();
       return output;
     }
 
-    public override Vx.Test.Func_trlist_from_testcaselist vx_copy(params object[] vals) {
-      Class_trlist_from_testcaselist output = new Class_trlist_from_testcaselist();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Test.Class_trlist_from_testcaselist output = new Vx.Test.Class_trlist_from_testcaselist();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/test", // pkgname
         "trlist<-testcaselist", // name
         0, // idx
@@ -6884,14 +7201,17 @@ public static class Test {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_trlist_from_testcaselist;
+      Vx.Core.Type_any output = Vx.Test.e_trlist_from_testcaselist;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_trlist_from_testcaselist;
+      Vx.Core.Type_any output = Vx.Test.t_trlist_from_testcaselist;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -6919,8 +7239,8 @@ public static class Test {
 
   }
 
-  public static Func_trlist_from_testcaselist e_trlist_from_testcaselist = new Vx.Test.Class_trlist_from_testcaselist();
-  public static Func_trlist_from_testcaselist t_trlist_from_testcaselist = new Vx.Test.Class_trlist_from_testcaselist();
+  public static Vx.Test.Func_trlist_from_testcaselist e_trlist_from_testcaselist = new Vx.Test.Class_trlist_from_testcaselist();
+  public static Vx.Test.Func_trlist_from_testcaselist t_trlist_from_testcaselist = new Vx.Test.Class_trlist_from_testcaselist();
 
   public static Vx.Web.Html.Type_trlist f_trlist_from_testcaselist(Vx.Test.Type_testcaselist testcaselist) {
     Vx.Web.Html.Type_trlist output = Vx.Web.Html.e_trlist;

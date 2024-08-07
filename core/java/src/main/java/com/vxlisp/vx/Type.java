@@ -131,24 +131,25 @@ public final class Type {
 
     @Override
     public Type.Func_allowtypenames_from_type vx_new(final Object... vals) {
-      Class_allowtypenames_from_type output = new Class_allowtypenames_from_type();
+      Type.Class_allowtypenames_from_type output = new Type.Class_allowtypenames_from_type();
       return output;
     }
 
     @Override
-    public Type.Func_allowtypenames_from_type vx_copy(final Object... vals) {
-      Class_allowtypenames_from_type output = new Class_allowtypenames_from_type();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Type.Class_allowtypenames_from_type output = new Type.Class_allowtypenames_from_type();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/type", // pkgname
         "allowtypenames<-type", // name
         0, // idx
@@ -167,16 +168,19 @@ public final class Type {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_allowtypenames_from_type;
+      Core.Type_any output = Type.e_allowtypenames_from_type;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_allowtypenames_from_type;
+      Core.Type_any output = Type.t_allowtypenames_from_type;
+      return output;
     }
 
     @Override
@@ -207,8 +211,8 @@ public final class Type {
 
   }
 
-  public static final Func_allowtypenames_from_type e_allowtypenames_from_type = new Type.Class_allowtypenames_from_type();
-  public static final Func_allowtypenames_from_type t_allowtypenames_from_type = new Type.Class_allowtypenames_from_type();
+  public static final Type.Func_allowtypenames_from_type e_allowtypenames_from_type = new Type.Class_allowtypenames_from_type();
+  public static final Type.Func_allowtypenames_from_type t_allowtypenames_from_type = new Type.Class_allowtypenames_from_type();
 
   public static Core.Type_stringlist f_allowtypenames_from_type(final Core.Type_any type) {
     Core.Type_stringlist output = Core.e_stringlist;
@@ -233,24 +237,25 @@ public final class Type {
 
     @Override
     public Type.Func_allowtypes_from_type vx_new(final Object... vals) {
-      Class_allowtypes_from_type output = new Class_allowtypes_from_type();
+      Type.Class_allowtypes_from_type output = new Type.Class_allowtypes_from_type();
       return output;
     }
 
     @Override
-    public Type.Func_allowtypes_from_type vx_copy(final Object... vals) {
-      Class_allowtypes_from_type output = new Class_allowtypes_from_type();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Type.Class_allowtypes_from_type output = new Type.Class_allowtypes_from_type();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/type", // pkgname
         "allowtypes<-type", // name
         0, // idx
@@ -269,16 +274,19 @@ public final class Type {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_allowtypes_from_type;
+      Core.Type_any output = Type.e_allowtypes_from_type;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_allowtypes_from_type;
+      Core.Type_any output = Type.t_allowtypes_from_type;
+      return output;
     }
 
     @Override
@@ -309,8 +317,8 @@ public final class Type {
 
   }
 
-  public static final Func_allowtypes_from_type e_allowtypes_from_type = new Type.Class_allowtypes_from_type();
-  public static final Func_allowtypes_from_type t_allowtypes_from_type = new Type.Class_allowtypes_from_type();
+  public static final Type.Func_allowtypes_from_type e_allowtypes_from_type = new Type.Class_allowtypes_from_type();
+  public static final Type.Func_allowtypes_from_type t_allowtypes_from_type = new Type.Class_allowtypes_from_type();
 
   public static Core.Type_typelist f_allowtypes_from_type(final Core.Type_any type) {
     Core.Type_typelist output = Core.e_typelist;
@@ -333,24 +341,25 @@ public final class Type {
 
     @Override
     public Type.Func_any_from_int vx_new(final Object... vals) {
-      Class_any_from_int output = new Class_any_from_int();
+      Type.Class_any_from_int output = new Type.Class_any_from_int();
       return output;
     }
 
     @Override
-    public Type.Func_any_from_int vx_copy(final Object... vals) {
-      Class_any_from_int output = new Class_any_from_int();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Type.Class_any_from_int output = new Type.Class_any_from_int();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/type", // pkgname
         "any<-int", // name
         0, // idx
@@ -369,16 +378,19 @@ public final class Type {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_from_int;
+      Core.Type_any output = Type.e_any_from_int;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_any_from_int;
+      Core.Type_any output = Type.t_any_from_int;
+      return output;
     }
 
     @Override
@@ -410,8 +422,8 @@ public final class Type {
 
   }
 
-  public static final Func_any_from_int e_any_from_int = new Type.Class_any_from_int();
-  public static final Func_any_from_int t_any_from_int = new Type.Class_any_from_int();
+  public static final Type.Func_any_from_int e_any_from_int = new Type.Class_any_from_int();
+  public static final Type.Func_any_from_int t_any_from_int = new Type.Class_any_from_int();
 
   public static <T extends Core.Type_any> T f_any_from_int(final T generic_any_1, final Core.Type_int val) {
     T output = Core.f_empty(generic_any_1);
@@ -434,24 +446,25 @@ public final class Type {
 
     @Override
     public Type.Func_boolean_from_string_ends vx_new(final Object... vals) {
-      Class_boolean_from_string_ends output = new Class_boolean_from_string_ends();
+      Type.Class_boolean_from_string_ends output = new Type.Class_boolean_from_string_ends();
       return output;
     }
 
     @Override
-    public Type.Func_boolean_from_string_ends vx_copy(final Object... vals) {
-      Class_boolean_from_string_ends output = new Class_boolean_from_string_ends();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Type.Class_boolean_from_string_ends output = new Type.Class_boolean_from_string_ends();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/type", // pkgname
         "boolean<-string-ends", // name
         0, // idx
@@ -470,16 +483,19 @@ public final class Type {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_boolean_from_string_ends;
+      Core.Type_any output = Type.e_boolean_from_string_ends;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_boolean_from_string_ends;
+      Core.Type_any output = Type.t_boolean_from_string_ends;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -497,8 +513,8 @@ public final class Type {
 
   }
 
-  public static final Func_boolean_from_string_ends e_boolean_from_string_ends = new Type.Class_boolean_from_string_ends();
-  public static final Func_boolean_from_string_ends t_boolean_from_string_ends = new Type.Class_boolean_from_string_ends();
+  public static final Type.Func_boolean_from_string_ends e_boolean_from_string_ends = new Type.Class_boolean_from_string_ends();
+  public static final Type.Func_boolean_from_string_ends t_boolean_from_string_ends = new Type.Class_boolean_from_string_ends();
 
   public static Core.Type_boolean f_boolean_from_string_ends(final Core.Type_string text, final Core.Type_string ends) {
     Core.Type_boolean output = Core.e_boolean;
@@ -523,24 +539,25 @@ public final class Type {
 
     @Override
     public Type.Func_boolean_from_string_starts vx_new(final Object... vals) {
-      Class_boolean_from_string_starts output = new Class_boolean_from_string_starts();
+      Type.Class_boolean_from_string_starts output = new Type.Class_boolean_from_string_starts();
       return output;
     }
 
     @Override
-    public Type.Func_boolean_from_string_starts vx_copy(final Object... vals) {
-      Class_boolean_from_string_starts output = new Class_boolean_from_string_starts();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Type.Class_boolean_from_string_starts output = new Type.Class_boolean_from_string_starts();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/type", // pkgname
         "boolean<-string-starts", // name
         0, // idx
@@ -559,16 +576,19 @@ public final class Type {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_boolean_from_string_starts;
+      Core.Type_any output = Type.e_boolean_from_string_starts;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_boolean_from_string_starts;
+      Core.Type_any output = Type.t_boolean_from_string_starts;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -586,8 +606,8 @@ public final class Type {
 
   }
 
-  public static final Func_boolean_from_string_starts e_boolean_from_string_starts = new Type.Class_boolean_from_string_starts();
-  public static final Func_boolean_from_string_starts t_boolean_from_string_starts = new Type.Class_boolean_from_string_starts();
+  public static final Type.Func_boolean_from_string_starts e_boolean_from_string_starts = new Type.Class_boolean_from_string_starts();
+  public static final Type.Func_boolean_from_string_starts t_boolean_from_string_starts = new Type.Class_boolean_from_string_starts();
 
   public static Core.Type_boolean f_boolean_from_string_starts(final Core.Type_string text, final Core.Type_string starts) {
     Core.Type_boolean output = Core.e_boolean;
@@ -612,24 +632,25 @@ public final class Type {
 
     @Override
     public Type.Func_int_from_string_find vx_new(final Object... vals) {
-      Class_int_from_string_find output = new Class_int_from_string_find();
+      Type.Class_int_from_string_find output = new Type.Class_int_from_string_find();
       return output;
     }
 
     @Override
-    public Type.Func_int_from_string_find vx_copy(final Object... vals) {
-      Class_int_from_string_find output = new Class_int_from_string_find();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Type.Class_int_from_string_find output = new Type.Class_int_from_string_find();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/type", // pkgname
         "int<-string-find", // name
         0, // idx
@@ -648,16 +669,19 @@ public final class Type {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_int_from_string_find;
+      Core.Type_any output = Type.e_int_from_string_find;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_int_from_string_find;
+      Core.Type_any output = Type.t_int_from_string_find;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -675,8 +699,8 @@ public final class Type {
 
   }
 
-  public static final Func_int_from_string_find e_int_from_string_find = new Type.Class_int_from_string_find();
-  public static final Func_int_from_string_find t_int_from_string_find = new Type.Class_int_from_string_find();
+  public static final Type.Func_int_from_string_find e_int_from_string_find = new Type.Class_int_from_string_find();
+  public static final Type.Func_int_from_string_find t_int_from_string_find = new Type.Class_int_from_string_find();
 
   public static Core.Type_int f_int_from_string_find(final Core.Type_string text, final Core.Type_string find) {
     Core.Type_int output = Core.e_int;
@@ -700,24 +724,25 @@ public final class Type {
 
     @Override
     public Type.Func_int_from_string_findkeyword vx_new(final Object... vals) {
-      Class_int_from_string_findkeyword output = new Class_int_from_string_findkeyword();
+      Type.Class_int_from_string_findkeyword output = new Type.Class_int_from_string_findkeyword();
       return output;
     }
 
     @Override
-    public Type.Func_int_from_string_findkeyword vx_copy(final Object... vals) {
-      Class_int_from_string_findkeyword output = new Class_int_from_string_findkeyword();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Type.Class_int_from_string_findkeyword output = new Type.Class_int_from_string_findkeyword();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/type", // pkgname
         "int<-string-findkeyword", // name
         0, // idx
@@ -736,16 +761,19 @@ public final class Type {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_int_from_string_findkeyword;
+      Core.Type_any output = Type.e_int_from_string_findkeyword;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_int_from_string_findkeyword;
+      Core.Type_any output = Type.t_int_from_string_findkeyword;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -763,8 +791,8 @@ public final class Type {
 
   }
 
-  public static final Func_int_from_string_findkeyword e_int_from_string_findkeyword = new Type.Class_int_from_string_findkeyword();
-  public static final Func_int_from_string_findkeyword t_int_from_string_findkeyword = new Type.Class_int_from_string_findkeyword();
+  public static final Type.Func_int_from_string_findkeyword e_int_from_string_findkeyword = new Type.Class_int_from_string_findkeyword();
+  public static final Type.Func_int_from_string_findkeyword t_int_from_string_findkeyword = new Type.Class_int_from_string_findkeyword();
 
   public static Core.Type_int f_int_from_string_findkeyword(final Core.Type_string text, final Core.Type_string find) {
     Core.Type_int output = Core.e_int;
@@ -788,24 +816,25 @@ public final class Type {
 
     @Override
     public Type.Func_int_from_string_findlast vx_new(final Object... vals) {
-      Class_int_from_string_findlast output = new Class_int_from_string_findlast();
+      Type.Class_int_from_string_findlast output = new Type.Class_int_from_string_findlast();
       return output;
     }
 
     @Override
-    public Type.Func_int_from_string_findlast vx_copy(final Object... vals) {
-      Class_int_from_string_findlast output = new Class_int_from_string_findlast();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Type.Class_int_from_string_findlast output = new Type.Class_int_from_string_findlast();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/type", // pkgname
         "int<-string-findlast", // name
         0, // idx
@@ -824,16 +853,19 @@ public final class Type {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_int_from_string_findlast;
+      Core.Type_any output = Type.e_int_from_string_findlast;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_int_from_string_findlast;
+      Core.Type_any output = Type.t_int_from_string_findlast;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -851,8 +883,8 @@ public final class Type {
 
   }
 
-  public static final Func_int_from_string_findlast e_int_from_string_findlast = new Type.Class_int_from_string_findlast();
-  public static final Func_int_from_string_findlast t_int_from_string_findlast = new Type.Class_int_from_string_findlast();
+  public static final Type.Func_int_from_string_findlast e_int_from_string_findlast = new Type.Class_int_from_string_findlast();
+  public static final Type.Func_int_from_string_findlast t_int_from_string_findlast = new Type.Class_int_from_string_findlast();
 
   public static Core.Type_int f_int_from_string_findlast(final Core.Type_string text, final Core.Type_string findlast) {
     Core.Type_int output = Core.e_int;
@@ -874,24 +906,25 @@ public final class Type {
 
     @Override
     public Type.Func_is_boolean vx_new(final Object... vals) {
-      Class_is_boolean output = new Class_is_boolean();
+      Type.Class_is_boolean output = new Type.Class_is_boolean();
       return output;
     }
 
     @Override
-    public Type.Func_is_boolean vx_copy(final Object... vals) {
-      Class_is_boolean output = new Class_is_boolean();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Type.Class_is_boolean output = new Type.Class_is_boolean();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/type", // pkgname
         "is-boolean", // name
         0, // idx
@@ -910,16 +943,19 @@ public final class Type {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_is_boolean;
+      Core.Type_any output = Type.e_is_boolean;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_is_boolean;
+      Core.Type_any output = Type.t_is_boolean;
+      return output;
     }
 
     @Override
@@ -950,8 +986,8 @@ public final class Type {
 
   }
 
-  public static final Func_is_boolean e_is_boolean = new Type.Class_is_boolean();
-  public static final Func_is_boolean t_is_boolean = new Type.Class_is_boolean();
+  public static final Type.Func_is_boolean e_is_boolean = new Type.Class_is_boolean();
+  public static final Type.Func_is_boolean t_is_boolean = new Type.Class_is_boolean();
 
   public static Core.Type_boolean f_is_boolean(final Core.Type_any value) {
     Core.Type_boolean output = Core.e_boolean;
@@ -976,24 +1012,25 @@ public final class Type {
 
     @Override
     public Type.Func_is_decimal vx_new(final Object... vals) {
-      Class_is_decimal output = new Class_is_decimal();
+      Type.Class_is_decimal output = new Type.Class_is_decimal();
       return output;
     }
 
     @Override
-    public Type.Func_is_decimal vx_copy(final Object... vals) {
-      Class_is_decimal output = new Class_is_decimal();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Type.Class_is_decimal output = new Type.Class_is_decimal();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/type", // pkgname
         "is-decimal", // name
         0, // idx
@@ -1012,16 +1049,19 @@ public final class Type {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_is_decimal;
+      Core.Type_any output = Type.e_is_decimal;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_is_decimal;
+      Core.Type_any output = Type.t_is_decimal;
+      return output;
     }
 
     @Override
@@ -1052,8 +1092,8 @@ public final class Type {
 
   }
 
-  public static final Func_is_decimal e_is_decimal = new Type.Class_is_decimal();
-  public static final Func_is_decimal t_is_decimal = new Type.Class_is_decimal();
+  public static final Type.Func_is_decimal e_is_decimal = new Type.Class_is_decimal();
+  public static final Type.Func_is_decimal t_is_decimal = new Type.Class_is_decimal();
 
   public static Core.Type_boolean f_is_decimal(final Core.Type_any value) {
     Core.Type_boolean output = Core.e_boolean;
@@ -1078,24 +1118,25 @@ public final class Type {
 
     @Override
     public Type.Func_is_none vx_new(final Object... vals) {
-      Class_is_none output = new Class_is_none();
+      Type.Class_is_none output = new Type.Class_is_none();
       return output;
     }
 
     @Override
-    public Type.Func_is_none vx_copy(final Object... vals) {
-      Class_is_none output = new Class_is_none();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Type.Class_is_none output = new Type.Class_is_none();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/type", // pkgname
         "is-none", // name
         0, // idx
@@ -1114,16 +1155,19 @@ public final class Type {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_is_none;
+      Core.Type_any output = Type.e_is_none;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_is_none;
+      Core.Type_any output = Type.t_is_none;
+      return output;
     }
 
     @Override
@@ -1154,8 +1198,8 @@ public final class Type {
 
   }
 
-  public static final Func_is_none e_is_none = new Type.Class_is_none();
-  public static final Func_is_none t_is_none = new Type.Class_is_none();
+  public static final Type.Func_is_none e_is_none = new Type.Class_is_none();
+  public static final Type.Func_is_none t_is_none = new Type.Class_is_none();
 
   public static Core.Type_boolean f_is_none(final Core.Type_any value) {
     Core.Type_boolean output = Core.e_boolean;
@@ -1180,24 +1224,25 @@ public final class Type {
 
     @Override
     public Type.Func_is_string vx_new(final Object... vals) {
-      Class_is_string output = new Class_is_string();
+      Type.Class_is_string output = new Type.Class_is_string();
       return output;
     }
 
     @Override
-    public Type.Func_is_string vx_copy(final Object... vals) {
-      Class_is_string output = new Class_is_string();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Type.Class_is_string output = new Type.Class_is_string();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/type", // pkgname
         "is-string", // name
         0, // idx
@@ -1216,16 +1261,19 @@ public final class Type {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_is_string;
+      Core.Type_any output = Type.e_is_string;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_is_string;
+      Core.Type_any output = Type.t_is_string;
+      return output;
     }
 
     @Override
@@ -1256,8 +1304,8 @@ public final class Type {
 
   }
 
-  public static final Func_is_string e_is_string = new Type.Class_is_string();
-  public static final Func_is_string t_is_string = new Type.Class_is_string();
+  public static final Type.Func_is_string e_is_string = new Type.Class_is_string();
+  public static final Type.Func_is_string t_is_string = new Type.Class_is_string();
 
   public static Core.Type_boolean f_is_string(final Core.Type_any value) {
     Core.Type_boolean output = Core.e_boolean;
@@ -1283,24 +1331,25 @@ public final class Type {
 
     @Override
     public Type.Func_is_type vx_new(final Object... vals) {
-      Class_is_type output = new Class_is_type();
+      Type.Class_is_type output = new Type.Class_is_type();
       return output;
     }
 
     @Override
-    public Type.Func_is_type vx_copy(final Object... vals) {
-      Class_is_type output = new Class_is_type();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Type.Class_is_type output = new Type.Class_is_type();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/type", // pkgname
         "is-type", // name
         0, // idx
@@ -1319,16 +1368,19 @@ public final class Type {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_is_type;
+      Core.Type_any output = Type.e_is_type;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_is_type;
+      Core.Type_any output = Type.t_is_type;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -1346,13 +1398,14 @@ public final class Type {
 
   }
 
-  public static final Func_is_type e_is_type = new Type.Class_is_type();
-  public static final Func_is_type t_is_type = new Type.Class_is_type();
+  public static final Type.Func_is_type e_is_type = new Type.Class_is_type();
+  public static final Type.Func_is_type t_is_type = new Type.Class_is_type();
 
   public static Core.Type_boolean f_is_type(final Core.Type_any val, final Core.Type_any type) {
     Core.Type_boolean output = Core.e_boolean;
     output = Core.f_or_1(
-      Core.vx_new(Core.t_booleanlist,
+      Core.vx_new(
+        Core.t_booleanlist,
         Core.f_eq(
           Core.f_typename_from_type(type),
           Core.f_typename_from_any(val)
@@ -1386,24 +1439,25 @@ public final class Type {
 
     @Override
     public Type.Func_is_type_from_any_typelist vx_new(final Object... vals) {
-      Class_is_type_from_any_typelist output = new Class_is_type_from_any_typelist();
+      Type.Class_is_type_from_any_typelist output = new Type.Class_is_type_from_any_typelist();
       return output;
     }
 
     @Override
-    public Type.Func_is_type_from_any_typelist vx_copy(final Object... vals) {
-      Class_is_type_from_any_typelist output = new Class_is_type_from_any_typelist();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Type.Class_is_type_from_any_typelist output = new Type.Class_is_type_from_any_typelist();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/type", // pkgname
         "is-type<-any-typelist", // name
         0, // idx
@@ -1422,16 +1476,19 @@ public final class Type {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_is_type_from_any_typelist;
+      Core.Type_any output = Type.e_is_type_from_any_typelist;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_is_type_from_any_typelist;
+      Core.Type_any output = Type.t_is_type_from_any_typelist;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -1449,8 +1506,8 @@ public final class Type {
 
   }
 
-  public static final Func_is_type_from_any_typelist e_is_type_from_any_typelist = new Type.Class_is_type_from_any_typelist();
-  public static final Func_is_type_from_any_typelist t_is_type_from_any_typelist = new Type.Class_is_type_from_any_typelist();
+  public static final Type.Func_is_type_from_any_typelist e_is_type_from_any_typelist = new Type.Class_is_type_from_any_typelist();
+  public static final Type.Func_is_type_from_any_typelist t_is_type_from_any_typelist = new Type.Class_is_type_from_any_typelist();
 
   public static Core.Type_boolean f_is_type_from_any_typelist(final Core.Type_any val, final Core.Type_typelist typelist) {
     Core.Type_boolean output = Core.e_boolean;
@@ -1487,24 +1544,25 @@ public final class Type {
 
     @Override
     public Type.Func_string_lowercase vx_new(final Object... vals) {
-      Class_string_lowercase output = new Class_string_lowercase();
+      Type.Class_string_lowercase output = new Type.Class_string_lowercase();
       return output;
     }
 
     @Override
-    public Type.Func_string_lowercase vx_copy(final Object... vals) {
-      Class_string_lowercase output = new Class_string_lowercase();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Type.Class_string_lowercase output = new Type.Class_string_lowercase();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/type", // pkgname
         "string-lowercase", // name
         0, // idx
@@ -1523,16 +1581,19 @@ public final class Type {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_string_lowercase;
+      Core.Type_any output = Type.e_string_lowercase;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_string_lowercase;
+      Core.Type_any output = Type.t_string_lowercase;
+      return output;
     }
 
     @Override
@@ -1563,8 +1624,8 @@ public final class Type {
 
   }
 
-  public static final Func_string_lowercase e_string_lowercase = new Type.Class_string_lowercase();
-  public static final Func_string_lowercase t_string_lowercase = new Type.Class_string_lowercase();
+  public static final Type.Func_string_lowercase e_string_lowercase = new Type.Class_string_lowercase();
+  public static final Type.Func_string_lowercase t_string_lowercase = new Type.Class_string_lowercase();
 
   public static Core.Type_string f_string_lowercase(final Core.Type_string text) {
     Core.Type_string output = Core.e_string;
@@ -1587,24 +1648,25 @@ public final class Type {
 
     @Override
     public Type.Func_string_outdent vx_new(final Object... vals) {
-      Class_string_outdent output = new Class_string_outdent();
+      Type.Class_string_outdent output = new Type.Class_string_outdent();
       return output;
     }
 
     @Override
-    public Type.Func_string_outdent vx_copy(final Object... vals) {
-      Class_string_outdent output = new Class_string_outdent();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Type.Class_string_outdent output = new Type.Class_string_outdent();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/type", // pkgname
         "string-outdent", // name
         0, // idx
@@ -1623,16 +1685,19 @@ public final class Type {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_string_outdent;
+      Core.Type_any output = Type.e_string_outdent;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_string_outdent;
+      Core.Type_any output = Type.t_string_outdent;
+      return output;
     }
 
     @Override
@@ -1663,8 +1728,8 @@ public final class Type {
 
   }
 
-  public static final Func_string_outdent e_string_outdent = new Type.Class_string_outdent();
-  public static final Func_string_outdent t_string_outdent = new Type.Class_string_outdent();
+  public static final Type.Func_string_outdent e_string_outdent = new Type.Class_string_outdent();
+  public static final Type.Func_string_outdent t_string_outdent = new Type.Class_string_outdent();
 
   public static Core.Type_string f_string_outdent(final Core.Type_string text) {
     Core.Type_string output = Core.e_string;
@@ -1674,7 +1739,8 @@ public final class Type {
         Core.Type_int pos = Type.f_int_from_string_findkeyword(text, Core.vx_new_string(":nonwhitespace"));
         Core.Type_any output_2 = Core.f_if_2(
           Core.t_string,
-          Core.vx_new(Core.t_thenelselist,
+          Core.vx_new(
+            Core.t_thenelselist,
             Core.f_then(
               Core.t_boolean_from_func.vx_fn_new(() -> {
                 return Core.f_eq(Core.vx_new_int(0), pos);
@@ -1729,24 +1795,25 @@ public final class Type {
 
     @Override
     public Type.Func_string_trim vx_new(final Object... vals) {
-      Class_string_trim output = new Class_string_trim();
+      Type.Class_string_trim output = new Type.Class_string_trim();
       return output;
     }
 
     @Override
-    public Type.Func_string_trim vx_copy(final Object... vals) {
-      Class_string_trim output = new Class_string_trim();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Type.Class_string_trim output = new Type.Class_string_trim();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/type", // pkgname
         "string-trim", // name
         0, // idx
@@ -1765,16 +1832,19 @@ public final class Type {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_string_trim;
+      Core.Type_any output = Type.e_string_trim;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_string_trim;
+      Core.Type_any output = Type.t_string_trim;
+      return output;
     }
 
     @Override
@@ -1805,8 +1875,8 @@ public final class Type {
 
   }
 
-  public static final Func_string_trim e_string_trim = new Type.Class_string_trim();
-  public static final Func_string_trim t_string_trim = new Type.Class_string_trim();
+  public static final Type.Func_string_trim e_string_trim = new Type.Class_string_trim();
+  public static final Type.Func_string_trim t_string_trim = new Type.Class_string_trim();
 
   public static Core.Type_string f_string_trim(final Core.Type_string text) {
     Core.Type_string output = Core.e_string;
@@ -1829,24 +1899,25 @@ public final class Type {
 
     @Override
     public Type.Func_string_uppercase vx_new(final Object... vals) {
-      Class_string_uppercase output = new Class_string_uppercase();
+      Type.Class_string_uppercase output = new Type.Class_string_uppercase();
       return output;
     }
 
     @Override
-    public Type.Func_string_uppercase vx_copy(final Object... vals) {
-      Class_string_uppercase output = new Class_string_uppercase();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Type.Class_string_uppercase output = new Type.Class_string_uppercase();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/type", // pkgname
         "string-uppercase", // name
         0, // idx
@@ -1865,16 +1936,19 @@ public final class Type {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_string_uppercase;
+      Core.Type_any output = Type.e_string_uppercase;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_string_uppercase;
+      Core.Type_any output = Type.t_string_uppercase;
+      return output;
     }
 
     @Override
@@ -1905,8 +1979,8 @@ public final class Type {
 
   }
 
-  public static final Func_string_uppercase e_string_uppercase = new Type.Class_string_uppercase();
-  public static final Func_string_uppercase t_string_uppercase = new Type.Class_string_uppercase();
+  public static final Type.Func_string_uppercase e_string_uppercase = new Type.Class_string_uppercase();
+  public static final Type.Func_string_uppercase t_string_uppercase = new Type.Class_string_uppercase();
 
   public static Core.Type_string f_string_uppercase(final Core.Type_string text) {
     Core.Type_string output = Core.e_string;
@@ -1929,24 +2003,25 @@ public final class Type {
 
     @Override
     public Type.Func_string_from_int vx_new(final Object... vals) {
-      Class_string_from_int output = new Class_string_from_int();
+      Type.Class_string_from_int output = new Type.Class_string_from_int();
       return output;
     }
 
     @Override
-    public Type.Func_string_from_int vx_copy(final Object... vals) {
-      Class_string_from_int output = new Class_string_from_int();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Type.Class_string_from_int output = new Type.Class_string_from_int();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/type", // pkgname
         "string<-int", // name
         0, // idx
@@ -1965,16 +2040,19 @@ public final class Type {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_string_from_int;
+      Core.Type_any output = Type.e_string_from_int;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_string_from_int;
+      Core.Type_any output = Type.t_string_from_int;
+      return output;
     }
 
     @Override
@@ -2005,15 +2083,16 @@ public final class Type {
 
   }
 
-  public static final Func_string_from_int e_string_from_int = new Type.Class_string_from_int();
-  public static final Func_string_from_int t_string_from_int = new Type.Class_string_from_int();
+  public static final Type.Func_string_from_int e_string_from_int = new Type.Class_string_from_int();
+  public static final Type.Func_string_from_int t_string_from_int = new Type.Class_string_from_int();
 
   public static Core.Type_string f_string_from_int(final Core.Type_int val) {
     Core.Type_string output = Core.e_string;
     output = Core.f_switch(
       Core.t_string,
       val,
-      Core.vx_new(Core.t_thenelselist,
+      Core.vx_new(
+        Core.t_thenelselist,
         Core.f_case_1(
           Core.c_infinity,
           Core.t_any_from_func.vx_fn_new(() -> {
@@ -2036,8 +2115,9 @@ public final class Type {
           Core.t_any_from_func.vx_fn_new(() -> {
             return Core.f_new(
               Core.t_string,
-              Core.vx_new(Core.t_anylist,
-                  val
+              Core.vx_new(
+                Core.t_anylist,
+                val
               )
             );
           })
@@ -2063,24 +2143,25 @@ public final class Type {
 
     @Override
     public Type.Func_string_from_string_end vx_new(final Object... vals) {
-      Class_string_from_string_end output = new Class_string_from_string_end();
+      Type.Class_string_from_string_end output = new Type.Class_string_from_string_end();
       return output;
     }
 
     @Override
-    public Type.Func_string_from_string_end vx_copy(final Object... vals) {
-      Class_string_from_string_end output = new Class_string_from_string_end();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Type.Class_string_from_string_end output = new Type.Class_string_from_string_end();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/type", // pkgname
         "string<-string-end", // name
         0, // idx
@@ -2099,16 +2180,19 @@ public final class Type {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_string_from_string_end;
+      Core.Type_any output = Type.e_string_from_string_end;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_string_from_string_end;
+      Core.Type_any output = Type.t_string_from_string_end;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -2126,8 +2210,8 @@ public final class Type {
 
   }
 
-  public static final Func_string_from_string_end e_string_from_string_end = new Type.Class_string_from_string_end();
-  public static final Func_string_from_string_end t_string_from_string_end = new Type.Class_string_from_string_end();
+  public static final Type.Func_string_from_string_end e_string_from_string_end = new Type.Class_string_from_string_end();
+  public static final Type.Func_string_from_string_end t_string_from_string_end = new Type.Class_string_from_string_end();
 
   public static Core.Type_string f_string_from_string_end(final Core.Type_string text, final Core.Type_int endpos) {
     Core.Type_string output = Core.e_string;
@@ -2151,24 +2235,25 @@ public final class Type {
 
     @Override
     public Type.Func_string_from_string_start vx_new(final Object... vals) {
-      Class_string_from_string_start output = new Class_string_from_string_start();
+      Type.Class_string_from_string_start output = new Type.Class_string_from_string_start();
       return output;
     }
 
     @Override
-    public Type.Func_string_from_string_start vx_copy(final Object... vals) {
-      Class_string_from_string_start output = new Class_string_from_string_start();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Type.Class_string_from_string_start output = new Type.Class_string_from_string_start();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/type", // pkgname
         "string<-string-start", // name
         0, // idx
@@ -2187,16 +2272,19 @@ public final class Type {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_string_from_string_start;
+      Core.Type_any output = Type.e_string_from_string_start;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_string_from_string_start;
+      Core.Type_any output = Type.t_string_from_string_start;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -2214,8 +2302,8 @@ public final class Type {
 
   }
 
-  public static final Func_string_from_string_start e_string_from_string_start = new Type.Class_string_from_string_start();
-  public static final Func_string_from_string_start t_string_from_string_start = new Type.Class_string_from_string_start();
+  public static final Type.Func_string_from_string_start e_string_from_string_start = new Type.Class_string_from_string_start();
+  public static final Type.Func_string_from_string_start t_string_from_string_start = new Type.Class_string_from_string_start();
 
   public static Core.Type_string f_string_from_string_start(final Core.Type_string text, final Core.Type_int startpos) {
     Core.Type_string output = Core.e_string;
@@ -2244,24 +2332,25 @@ public final class Type {
 
     @Override
     public Type.Func_string_from_string_start_end vx_new(final Object... vals) {
-      Class_string_from_string_start_end output = new Class_string_from_string_start_end();
+      Type.Class_string_from_string_start_end output = new Type.Class_string_from_string_start_end();
       return output;
     }
 
     @Override
-    public Type.Func_string_from_string_start_end vx_copy(final Object... vals) {
-      Class_string_from_string_start_end output = new Class_string_from_string_start_end();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Type.Class_string_from_string_start_end output = new Type.Class_string_from_string_start_end();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/type", // pkgname
         "string<-string-start-end", // name
         0, // idx
@@ -2280,16 +2369,19 @@ public final class Type {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_string_from_string_start_end;
+      Core.Type_any output = Type.e_string_from_string_start_end;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_string_from_string_start_end;
+      Core.Type_any output = Type.t_string_from_string_start_end;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -2308,8 +2400,8 @@ public final class Type {
 
   }
 
-  public static final Func_string_from_string_start_end e_string_from_string_start_end = new Type.Class_string_from_string_start_end();
-  public static final Func_string_from_string_start_end t_string_from_string_start_end = new Type.Class_string_from_string_start_end();
+  public static final Type.Func_string_from_string_start_end e_string_from_string_start_end = new Type.Class_string_from_string_start_end();
+  public static final Type.Func_string_from_string_start_end t_string_from_string_start_end = new Type.Class_string_from_string_start_end();
 
   public static Core.Type_string f_string_from_string_start_end(final Core.Type_string text, final Core.Type_int start, final Core.Type_int end) {
     Core.Type_string output = Core.e_string;
@@ -2334,24 +2426,25 @@ public final class Type {
 
     @Override
     public Type.Func_string_from_stringlist_join vx_new(final Object... vals) {
-      Class_string_from_stringlist_join output = new Class_string_from_stringlist_join();
+      Type.Class_string_from_stringlist_join output = new Type.Class_string_from_stringlist_join();
       return output;
     }
 
     @Override
-    public Type.Func_string_from_stringlist_join vx_copy(final Object... vals) {
-      Class_string_from_stringlist_join output = new Class_string_from_stringlist_join();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Type.Class_string_from_stringlist_join output = new Type.Class_string_from_stringlist_join();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/type", // pkgname
         "string<-stringlist-join", // name
         0, // idx
@@ -2370,16 +2463,19 @@ public final class Type {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_string_from_stringlist_join;
+      Core.Type_any output = Type.e_string_from_stringlist_join;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_string_from_stringlist_join;
+      Core.Type_any output = Type.t_string_from_stringlist_join;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -2397,8 +2493,8 @@ public final class Type {
 
   }
 
-  public static final Func_string_from_stringlist_join e_string_from_stringlist_join = new Type.Class_string_from_stringlist_join();
-  public static final Func_string_from_stringlist_join t_string_from_stringlist_join = new Type.Class_string_from_stringlist_join();
+  public static final Type.Func_string_from_stringlist_join e_string_from_stringlist_join = new Type.Class_string_from_stringlist_join();
+  public static final Type.Func_string_from_stringlist_join t_string_from_stringlist_join = new Type.Class_string_from_stringlist_join();
 
   public static Core.Type_string f_string_from_stringlist_join(final Core.Type_stringlist vals, final Core.Type_string delim) {
     Core.Type_string output = Core.e_string;
@@ -2422,24 +2518,25 @@ public final class Type {
 
     @Override
     public Type.Func_stringlist_from_string_split vx_new(final Object... vals) {
-      Class_stringlist_from_string_split output = new Class_stringlist_from_string_split();
+      Type.Class_stringlist_from_string_split output = new Type.Class_stringlist_from_string_split();
       return output;
     }
 
     @Override
-    public Type.Func_stringlist_from_string_split vx_copy(final Object... vals) {
-      Class_stringlist_from_string_split output = new Class_stringlist_from_string_split();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Type.Class_stringlist_from_string_split output = new Type.Class_stringlist_from_string_split();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/type", // pkgname
         "stringlist<-string-split", // name
         0, // idx
@@ -2458,16 +2555,19 @@ public final class Type {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_stringlist_from_string_split;
+      Core.Type_any output = Type.e_stringlist_from_string_split;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_stringlist_from_string_split;
+      Core.Type_any output = Type.t_stringlist_from_string_split;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -2485,8 +2585,8 @@ public final class Type {
 
   }
 
-  public static final Func_stringlist_from_string_split e_stringlist_from_string_split = new Type.Class_stringlist_from_string_split();
-  public static final Func_stringlist_from_string_split t_stringlist_from_string_split = new Type.Class_stringlist_from_string_split();
+  public static final Type.Func_stringlist_from_string_split e_stringlist_from_string_split = new Type.Class_stringlist_from_string_split();
+  public static final Type.Func_stringlist_from_string_split t_stringlist_from_string_split = new Type.Class_stringlist_from_string_split();
 
   public static Core.Type_stringlist f_stringlist_from_string_split(final Core.Type_string text, final Core.Type_string delim) {
     Core.Type_stringlist output = Core.e_stringlist;
@@ -2509,24 +2609,25 @@ public final class Type {
 
     @Override
     public Type.Func_traitnames_from_any vx_new(final Object... vals) {
-      Class_traitnames_from_any output = new Class_traitnames_from_any();
+      Type.Class_traitnames_from_any output = new Type.Class_traitnames_from_any();
       return output;
     }
 
     @Override
-    public Type.Func_traitnames_from_any vx_copy(final Object... vals) {
-      Class_traitnames_from_any output = new Class_traitnames_from_any();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Type.Class_traitnames_from_any output = new Type.Class_traitnames_from_any();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/type", // pkgname
         "traitnames<-any", // name
         0, // idx
@@ -2545,16 +2646,19 @@ public final class Type {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_traitnames_from_any;
+      Core.Type_any output = Type.e_traitnames_from_any;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_traitnames_from_any;
+      Core.Type_any output = Type.t_traitnames_from_any;
+      return output;
     }
 
     @Override
@@ -2585,8 +2689,8 @@ public final class Type {
 
   }
 
-  public static final Func_traitnames_from_any e_traitnames_from_any = new Type.Class_traitnames_from_any();
-  public static final Func_traitnames_from_any t_traitnames_from_any = new Type.Class_traitnames_from_any();
+  public static final Type.Func_traitnames_from_any e_traitnames_from_any = new Type.Class_traitnames_from_any();
+  public static final Type.Func_traitnames_from_any t_traitnames_from_any = new Type.Class_traitnames_from_any();
 
   public static Core.Type_stringlist f_traitnames_from_any(final Core.Type_any val) {
     Core.Type_stringlist output = Core.e_stringlist;
@@ -2611,24 +2715,25 @@ public final class Type {
 
     @Override
     public Type.Func_traits_from_any vx_new(final Object... vals) {
-      Class_traits_from_any output = new Class_traits_from_any();
+      Type.Class_traits_from_any output = new Type.Class_traits_from_any();
       return output;
     }
 
     @Override
-    public Type.Func_traits_from_any vx_copy(final Object... vals) {
-      Class_traits_from_any output = new Class_traits_from_any();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Type.Class_traits_from_any output = new Type.Class_traits_from_any();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/type", // pkgname
         "traits<-any", // name
         0, // idx
@@ -2647,16 +2752,19 @@ public final class Type {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_traits_from_any;
+      Core.Type_any output = Type.e_traits_from_any;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_traits_from_any;
+      Core.Type_any output = Type.t_traits_from_any;
+      return output;
     }
 
     @Override
@@ -2687,8 +2795,8 @@ public final class Type {
 
   }
 
-  public static final Func_traits_from_any e_traits_from_any = new Type.Class_traits_from_any();
-  public static final Func_traits_from_any t_traits_from_any = new Type.Class_traits_from_any();
+  public static final Type.Func_traits_from_any e_traits_from_any = new Type.Class_traits_from_any();
+  public static final Type.Func_traits_from_any t_traits_from_any = new Type.Class_traits_from_any();
 
   public static Core.Type_typelist f_traits_from_any(final Core.Type_any val) {
     Core.Type_typelist output = Core.e_typelist;
@@ -2713,24 +2821,25 @@ public final class Type {
 
     @Override
     public Type.Func_traits_from_typedef vx_new(final Object... vals) {
-      Class_traits_from_typedef output = new Class_traits_from_typedef();
+      Type.Class_traits_from_typedef output = new Type.Class_traits_from_typedef();
       return output;
     }
 
     @Override
-    public Type.Func_traits_from_typedef vx_copy(final Object... vals) {
-      Class_traits_from_typedef output = new Class_traits_from_typedef();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Type.Class_traits_from_typedef output = new Type.Class_traits_from_typedef();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/type", // pkgname
         "traits<-typedef", // name
         0, // idx
@@ -2749,16 +2858,19 @@ public final class Type {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_traits_from_typedef;
+      Core.Type_any output = Type.e_traits_from_typedef;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_traits_from_typedef;
+      Core.Type_any output = Type.t_traits_from_typedef;
+      return output;
     }
 
     @Override
@@ -2789,8 +2901,8 @@ public final class Type {
 
   }
 
-  public static final Func_traits_from_typedef e_traits_from_typedef = new Type.Class_traits_from_typedef();
-  public static final Func_traits_from_typedef t_traits_from_typedef = new Type.Class_traits_from_typedef();
+  public static final Type.Func_traits_from_typedef e_traits_from_typedef = new Type.Class_traits_from_typedef();
+  public static final Type.Func_traits_from_typedef t_traits_from_typedef = new Type.Class_traits_from_typedef();
 
   public static Core.Type_typelist f_traits_from_typedef(final Core.Type_typedef vtypedef) {
     Core.Type_typelist output = Core.e_typelist;

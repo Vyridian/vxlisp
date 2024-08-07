@@ -25,14 +25,17 @@ public final class XmlTest {
               Xml.f_string_first_from_xml(
                 Core.f_new(
                   Xml.t_xml,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":children"),
                     Core.f_new(
                       Xml.t_xmllist,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.f_new(
                           Xml.t_xml,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("text")
                           )
@@ -66,7 +69,8 @@ public final class XmlTest {
               context,
               Core.f_new(
                 Textblock.t_textblock,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("<doc>\n  <tag1>\n    <tag2 prop1=\"val1\" prop2=\"val2\" />\n  </tag1>\n</doc>"),
                   Core.vx_new_string(":startpos"),
@@ -76,10 +80,12 @@ public final class XmlTest {
                   Core.vx_new_string(":children"),
                   Core.f_new(
                     Textblock.t_textblocklist,
-                    Core.vx_new(Core.t_anylist,
+                    Core.vx_new(
+                      Core.t_anylist,
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("<doc>"),
                           Core.vx_new_string(":startpos"),
@@ -89,7 +95,8 @@ public final class XmlTest {
                           Core.vx_new_string(":delim"),
                           Core.f_copy(
                             Textblock.c_delimbracketangle,
-                            Core.vx_new(Core.t_anylist,
+                            Core.vx_new(
+                              Core.t_anylist,
                               Core.vx_new_string(":pos"),
                               Core.vx_new_int(0)
                             )
@@ -97,10 +104,12 @@ public final class XmlTest {
                           Core.vx_new_string(":children"),
                           Core.f_new(
                             Textblock.t_textblocklist,
-                            Core.vx_new(Core.t_anylist,
+                            Core.vx_new(
+                              Core.t_anylist,
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.vx_new(Core.t_anylist,
+                                Core.vx_new(
+                                  Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("doc"),
                                   Core.vx_new_string(":startpos"),
@@ -115,7 +124,8 @@ public final class XmlTest {
                       ),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("\n  "),
                           Core.vx_new_string(":startpos"),
@@ -126,7 +136,8 @@ public final class XmlTest {
                       ),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("<tag1>"),
                           Core.vx_new_string(":startpos"),
@@ -136,7 +147,8 @@ public final class XmlTest {
                           Core.vx_new_string(":delim"),
                           Core.f_copy(
                             Textblock.c_delimbracketangle,
-                            Core.vx_new(Core.t_anylist,
+                            Core.vx_new(
+                              Core.t_anylist,
                               Core.vx_new_string(":pos"),
                               Core.vx_new_int(0)
                             )
@@ -144,10 +156,12 @@ public final class XmlTest {
                           Core.vx_new_string(":children"),
                           Core.f_new(
                             Textblock.t_textblocklist,
-                            Core.vx_new(Core.t_anylist,
+                            Core.vx_new(
+                              Core.t_anylist,
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.vx_new(Core.t_anylist,
+                                Core.vx_new(
+                                  Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("tag1"),
                                   Core.vx_new_string(":startpos"),
@@ -162,7 +176,8 @@ public final class XmlTest {
                       ),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("\n    "),
                           Core.vx_new_string(":startpos"),
@@ -173,7 +188,8 @@ public final class XmlTest {
                       ),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("<tag2 prop1=\"val1\" prop2=\"val2\" />"),
                           Core.vx_new_string(":startpos"),
@@ -183,7 +199,8 @@ public final class XmlTest {
                           Core.vx_new_string(":delim"),
                           Core.f_copy(
                             Textblock.c_delimbracketangle,
-                            Core.vx_new(Core.t_anylist,
+                            Core.vx_new(
+                              Core.t_anylist,
                               Core.vx_new_string(":pos"),
                               Core.vx_new_int(0)
                             )
@@ -191,10 +208,12 @@ public final class XmlTest {
                           Core.vx_new_string(":children"),
                           Core.f_new(
                             Textblock.t_textblocklist,
-                            Core.vx_new(Core.t_anylist,
+                            Core.vx_new(
+                              Core.t_anylist,
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.vx_new(Core.t_anylist,
+                                Core.vx_new(
+                                  Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("tag2"),
                                   Core.vx_new_string(":startpos"),
@@ -205,7 +224,8 @@ public final class XmlTest {
                               ),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.vx_new(Core.t_anylist,
+                                Core.vx_new(
+                                  Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string(" "),
                                   Core.vx_new_string(":startpos"),
@@ -215,7 +235,8 @@ public final class XmlTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimwhitespace,
-                                    Core.vx_new(Core.t_anylist,
+                                    Core.vx_new(
+                                      Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -224,7 +245,8 @@ public final class XmlTest {
                               ),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.vx_new(Core.t_anylist,
+                                Core.vx_new(
+                                  Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("prop1"),
                                   Core.vx_new_string(":startpos"),
@@ -235,7 +257,8 @@ public final class XmlTest {
                               ),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.vx_new(Core.t_anylist,
+                                Core.vx_new(
+                                  Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("="),
                                   Core.vx_new_string(":startpos"),
@@ -245,7 +268,8 @@ public final class XmlTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Xml.c_delimxmlequal,
-                                    Core.vx_new(Core.t_anylist,
+                                    Core.vx_new(
+                                      Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -254,7 +278,8 @@ public final class XmlTest {
                               ),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.vx_new(Core.t_anylist,
+                                Core.vx_new(
+                                  Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("\"val1\""),
                                   Core.vx_new_string(":startpos"),
@@ -264,7 +289,8 @@ public final class XmlTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimquote,
-                                    Core.vx_new(Core.t_anylist,
+                                    Core.vx_new(
+                                      Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -272,10 +298,12 @@ public final class XmlTest {
                                   Core.vx_new_string(":children"),
                                   Core.f_new(
                                     Textblock.t_textblocklist,
-                                    Core.vx_new(Core.t_anylist,
+                                    Core.vx_new(
+                                      Core.t_anylist,
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.vx_new(Core.t_anylist,
+                                        Core.vx_new(
+                                          Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string("val1"),
                                           Core.vx_new_string(":startpos"),
@@ -290,7 +318,8 @@ public final class XmlTest {
                               ),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.vx_new(Core.t_anylist,
+                                Core.vx_new(
+                                  Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string(" "),
                                   Core.vx_new_string(":startpos"),
@@ -300,7 +329,8 @@ public final class XmlTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimwhitespace,
-                                    Core.vx_new(Core.t_anylist,
+                                    Core.vx_new(
+                                      Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -309,7 +339,8 @@ public final class XmlTest {
                               ),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.vx_new(Core.t_anylist,
+                                Core.vx_new(
+                                  Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("prop2"),
                                   Core.vx_new_string(":startpos"),
@@ -320,7 +351,8 @@ public final class XmlTest {
                               ),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.vx_new(Core.t_anylist,
+                                Core.vx_new(
+                                  Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("="),
                                   Core.vx_new_string(":startpos"),
@@ -330,7 +362,8 @@ public final class XmlTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Xml.c_delimxmlequal,
-                                    Core.vx_new(Core.t_anylist,
+                                    Core.vx_new(
+                                      Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -339,7 +372,8 @@ public final class XmlTest {
                               ),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.vx_new(Core.t_anylist,
+                                Core.vx_new(
+                                  Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("\"val2\""),
                                   Core.vx_new_string(":startpos"),
@@ -349,7 +383,8 @@ public final class XmlTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimquote,
-                                    Core.vx_new(Core.t_anylist,
+                                    Core.vx_new(
+                                      Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -357,10 +392,12 @@ public final class XmlTest {
                                   Core.vx_new_string(":children"),
                                   Core.f_new(
                                     Textblock.t_textblocklist,
-                                    Core.vx_new(Core.t_anylist,
+                                    Core.vx_new(
+                                      Core.t_anylist,
                                       Core.f_new(
                                         Textblock.t_textblock,
-                                        Core.vx_new(Core.t_anylist,
+                                        Core.vx_new(
+                                          Core.t_anylist,
                                           Core.vx_new_string(":text"),
                                           Core.vx_new_string("val2"),
                                           Core.vx_new_string(":startpos"),
@@ -375,7 +412,8 @@ public final class XmlTest {
                               ),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.vx_new(Core.t_anylist,
+                                Core.vx_new(
+                                  Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string(" "),
                                   Core.vx_new_string(":startpos"),
@@ -385,7 +423,8 @@ public final class XmlTest {
                                   Core.vx_new_string(":delim"),
                                   Core.f_copy(
                                     Textblock.c_delimwhitespace,
-                                    Core.vx_new(Core.t_anylist,
+                                    Core.vx_new(
+                                      Core.t_anylist,
                                       Core.vx_new_string(":pos"),
                                       Core.vx_new_int(0)
                                     )
@@ -394,7 +433,8 @@ public final class XmlTest {
                               ),
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.vx_new(Core.t_anylist,
+                                Core.vx_new(
+                                  Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("/"),
                                   Core.vx_new_string(":startpos"),
@@ -409,7 +449,8 @@ public final class XmlTest {
                       ),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("\n  "),
                           Core.vx_new_string(":startpos"),
@@ -420,7 +461,8 @@ public final class XmlTest {
                       ),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("</tag1>"),
                           Core.vx_new_string(":startpos"),
@@ -430,7 +472,8 @@ public final class XmlTest {
                           Core.vx_new_string(":delim"),
                           Core.f_copy(
                             Textblock.c_delimbracketangle,
-                            Core.vx_new(Core.t_anylist,
+                            Core.vx_new(
+                              Core.t_anylist,
                               Core.vx_new_string(":pos"),
                               Core.vx_new_int(0)
                             )
@@ -438,10 +481,12 @@ public final class XmlTest {
                           Core.vx_new_string(":children"),
                           Core.f_new(
                             Textblock.t_textblocklist,
-                            Core.vx_new(Core.t_anylist,
+                            Core.vx_new(
+                              Core.t_anylist,
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.vx_new(Core.t_anylist,
+                                Core.vx_new(
+                                  Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("/tag1"),
                                   Core.vx_new_string(":startpos"),
@@ -456,7 +501,8 @@ public final class XmlTest {
                       ),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("\n"),
                           Core.vx_new_string(":startpos"),
@@ -467,7 +513,8 @@ public final class XmlTest {
                       ),
                       Core.f_new(
                         Textblock.t_textblock,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("</doc>"),
                           Core.vx_new_string(":startpos"),
@@ -477,7 +524,8 @@ public final class XmlTest {
                           Core.vx_new_string(":delim"),
                           Core.f_copy(
                             Textblock.c_delimbracketangle,
-                            Core.vx_new(Core.t_anylist,
+                            Core.vx_new(
+                              Core.t_anylist,
                               Core.vx_new_string(":pos"),
                               Core.vx_new_int(0)
                             )
@@ -485,10 +533,12 @@ public final class XmlTest {
                           Core.vx_new_string(":children"),
                           Core.f_new(
                             Textblock.t_textblocklist,
-                            Core.vx_new(Core.t_anylist,
+                            Core.vx_new(
+                              Core.t_anylist,
                               Core.f_new(
                                 Textblock.t_textblock,
-                                Core.vx_new(Core.t_anylist,
+                                Core.vx_new(
+                                  Core.t_anylist,
                                   Core.vx_new_string(":text"),
                                   Core.vx_new_string("/doc"),
                                   Core.vx_new_string(":startpos"),
@@ -530,7 +580,8 @@ public final class XmlTest {
               context,
               Core.f_new(
                 Xml.t_xml,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":tag"),
                   Core.vx_new_string(":notag")
                 )
@@ -553,7 +604,8 @@ public final class XmlTest {
               context,
               Core.f_new(
                 Xml.t_xml,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":tag"),
                   Core.vx_new_string("doc")
                 )
@@ -564,7 +616,8 @@ public final class XmlTest {
                 ),
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("<doc>"),
                     Core.vx_new_string(":startpos"),
@@ -574,7 +627,8 @@ public final class XmlTest {
                     Core.vx_new_string(":delim"),
                     Core.f_copy(
                       Textblock.c_delimbracketangle,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":pos"),
                         Core.vx_new_int(0)
                       )
@@ -582,10 +636,12 @@ public final class XmlTest {
                     Core.vx_new_string(":children"),
                     Core.f_new(
                       Textblock.t_textblocklist,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("doc"),
                             Core.vx_new_string(":startpos"),
@@ -609,22 +665,26 @@ public final class XmlTest {
               context,
               Core.f_new(
                 Xml.t_xml,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":tag"),
                   Core.vx_new_string("tag1"),
                   Core.vx_new_string(":children"),
                   Core.f_new(
                     Xml.t_xmllist,
-                    Core.vx_new(Core.t_anylist,
+                    Core.vx_new(
+                      Core.t_anylist,
                       Core.f_new(
                         Xml.t_xml,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":tag"),
                           Core.vx_new_string("tag2"),
                           Core.vx_new_string(":propmap"),
                           Core.f_new(
                             Core.t_stringmap,
-                            Core.vx_new(Core.t_anylist,
+                            Core.vx_new(
+                              Core.t_anylist,
                               Core.vx_new_string(":prop1"),
                               Core.vx_new_string("val1"),
                               Core.vx_new_string(":prop2"),
@@ -640,14 +700,16 @@ public final class XmlTest {
               Xml.f_xml_angle_from_xml_textblock(
                 Core.f_new(
                   Xml.t_xml,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":tag"),
                     Core.vx_new_string("tag1")
                   )
                 ),
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("<tag2 prop1=\"val1\" prop2=\"val2\" />"),
                     Core.vx_new_string(":startpos"),
@@ -657,7 +719,8 @@ public final class XmlTest {
                     Core.vx_new_string(":delim"),
                     Core.f_copy(
                       Textblock.c_delimbracketangle,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":pos"),
                         Core.vx_new_int(0)
                       )
@@ -665,10 +728,12 @@ public final class XmlTest {
                     Core.vx_new_string(":children"),
                     Core.f_new(
                       Textblock.t_textblocklist,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("tag2"),
                             Core.vx_new_string(":startpos"),
@@ -679,7 +744,8 @@ public final class XmlTest {
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string(" "),
                             Core.vx_new_string(":startpos"),
@@ -689,7 +755,8 @@ public final class XmlTest {
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimwhitespace,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -698,7 +765,8 @@ public final class XmlTest {
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("prop1"),
                             Core.vx_new_string(":startpos"),
@@ -709,7 +777,8 @@ public final class XmlTest {
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("="),
                             Core.vx_new_string(":startpos"),
@@ -719,7 +788,8 @@ public final class XmlTest {
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Xml.c_delimxmlequal,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -728,7 +798,8 @@ public final class XmlTest {
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("\"val1\""),
                             Core.vx_new_string(":startpos"),
@@ -738,7 +809,8 @@ public final class XmlTest {
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimquote,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -746,10 +818,12 @@ public final class XmlTest {
                             Core.vx_new_string(":children"),
                             Core.f_new(
                               Textblock.t_textblocklist,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("val1"),
                                     Core.vx_new_string(":startpos"),
@@ -764,7 +838,8 @@ public final class XmlTest {
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string(" "),
                             Core.vx_new_string(":startpos"),
@@ -774,7 +849,8 @@ public final class XmlTest {
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimwhitespace,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -783,7 +859,8 @@ public final class XmlTest {
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("prop2"),
                             Core.vx_new_string(":startpos"),
@@ -794,7 +871,8 @@ public final class XmlTest {
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("="),
                             Core.vx_new_string(":startpos"),
@@ -804,7 +882,8 @@ public final class XmlTest {
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Xml.c_delimxmlequal,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -813,7 +892,8 @@ public final class XmlTest {
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("\"val2\""),
                             Core.vx_new_string(":startpos"),
@@ -823,7 +903,8 @@ public final class XmlTest {
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimquote,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -831,10 +912,12 @@ public final class XmlTest {
                             Core.vx_new_string(":children"),
                             Core.f_new(
                               Textblock.t_textblocklist,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("val2"),
                                     Core.vx_new_string(":startpos"),
@@ -849,7 +932,8 @@ public final class XmlTest {
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string(" "),
                             Core.vx_new_string(":startpos"),
@@ -859,7 +943,8 @@ public final class XmlTest {
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimwhitespace,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -868,7 +953,8 @@ public final class XmlTest {
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("/"),
                             Core.vx_new_string(":startpos"),
@@ -906,7 +992,8 @@ public final class XmlTest {
               context,
               Core.f_new(
                 Xml.t_xml,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":tag"),
                   Core.vx_new_string("doc")
                 )
@@ -914,14 +1001,16 @@ public final class XmlTest {
               Xml.f_xml_close_from_xml_textblock(
                 Core.f_new(
                   Xml.t_xml,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":tag"),
                     Core.vx_new_string("doc")
                   )
                 ),
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("/")
                   )
@@ -937,7 +1026,8 @@ public final class XmlTest {
               context,
               Core.f_new(
                 Xml.t_xml,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":tag"),
                   Core.vx_new_string("doc")
                 )
@@ -945,14 +1035,16 @@ public final class XmlTest {
               Xml.f_xml_close_from_xml_textblock(
                 Core.f_new(
                   Xml.t_xml,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":tag"),
                     Core.vx_new_string("doc")
                   )
                 ),
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("</doc>")
                   )
@@ -968,18 +1060,21 @@ public final class XmlTest {
               context,
               Core.f_new(
                 Xml.t_xml,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":tag"),
                   Core.vx_new_string("doc"),
                   Core.f_new(
                     Core.t_msg,
-                    Core.vx_new(Core.t_anylist,
+                    Core.vx_new(
+                      Core.t_anylist,
                       Core.vx_new_string(":code"),
                       Core.vx_new_string(":invalidxmlclosetag"),
                       Core.vx_new_string(":detail"),
                       Core.f_new(
                         Core.t_anymap,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":tag"),
                           Core.vx_new_string("/wrong"),
                           Core.vx_new_string(":startpos"),
@@ -1001,14 +1096,16 @@ public final class XmlTest {
               Xml.f_xml_close_from_xml_textblock(
                 Core.f_new(
                   Xml.t_xml,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":tag"),
                     Core.vx_new_string("doc")
                   )
                 ),
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("/wrong")
                   )
@@ -1024,16 +1121,19 @@ public final class XmlTest {
               context,
               Core.f_new(
                 Xml.t_xml,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":tag"),
                   Core.vx_new_string("top"),
                   Core.vx_new_string(":children"),
                   Core.f_new(
                     Xml.t_xmllist,
-                    Core.vx_new(Core.t_anylist,
+                    Core.vx_new(
+                      Core.t_anylist,
                       Core.f_new(
                         Xml.t_xml,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":tag"),
                           Core.vx_new_string("doc")
                         )
@@ -1045,13 +1145,15 @@ public final class XmlTest {
               Xml.f_xml_close_from_xml_textblock(
                 Core.f_new(
                   Xml.t_xml,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":tag"),
                     Core.vx_new_string("doc"),
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Xml.t_xml,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":tag"),
                         Core.vx_new_string("top")
                       )
@@ -1060,7 +1162,8 @@ public final class XmlTest {
                 ),
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("/")
                   )
@@ -1090,7 +1193,8 @@ public final class XmlTest {
               context,
               Core.f_new(
                 Xml.t_xml,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":tag"),
                   Core.vx_new_string("doc")
                 )
@@ -1101,13 +1205,15 @@ public final class XmlTest {
                 ),
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("<doc>"),
                     Core.vx_new_string(":delim"),
                     Core.f_copy(
                       Textblock.c_delimbracketangle,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":pos"),
                         Core.vx_new_int(0)
                       )
@@ -1115,10 +1221,12 @@ public final class XmlTest {
                     Core.vx_new_string(":children"),
                     Core.f_new(
                       Textblock.t_textblocklist,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("doc")
                           )
@@ -1138,7 +1246,8 @@ public final class XmlTest {
               context,
               Core.f_new(
                 Xml.t_xml,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":tag"),
                   Core.vx_new_string("doc")
                 )
@@ -1146,20 +1255,23 @@ public final class XmlTest {
               Xml.f_xml_parse_from_xml_textblock(
                 Core.f_new(
                   Xml.t_xml,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":tag"),
                     Core.vx_new_string("doc")
                   )
                 ),
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("\n  "),
                     Core.vx_new_string(":delim"),
                     Core.f_copy(
                       Textblock.c_delimwhitespace,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":pos"),
                         Core.vx_new_int(0)
                       )
@@ -1177,13 +1289,15 @@ public final class XmlTest {
               context,
               Core.f_new(
                 Xml.t_xml,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":tag"),
                   Core.vx_new_string("tag1"),
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Xml.t_xml,
-                    Core.vx_new(Core.t_anylist,
+                    Core.vx_new(
+                      Core.t_anylist,
                       Core.vx_new_string(":tag"),
                       Core.vx_new_string("doc")
                     )
@@ -1193,20 +1307,23 @@ public final class XmlTest {
               Xml.f_xml_parse_from_xml_textblock(
                 Core.f_new(
                   Xml.t_xml,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":tag"),
                     Core.vx_new_string("doc")
                   )
                 ),
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("<tag1>"),
                     Core.vx_new_string(":delim"),
                     Core.f_copy(
                       Textblock.c_delimbracketangle,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":pos"),
                         Core.vx_new_int(0)
                       )
@@ -1214,10 +1331,12 @@ public final class XmlTest {
                     Core.vx_new_string(":children"),
                     Core.f_new(
                       Textblock.t_textblocklist,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("tag1")
                           )
@@ -1237,22 +1356,26 @@ public final class XmlTest {
               context,
               Core.f_new(
                 Xml.t_xml,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":tag"),
                   Core.vx_new_string("tag1"),
                   Core.vx_new_string(":children"),
                   Core.f_new(
                     Xml.t_xmllist,
-                    Core.vx_new(Core.t_anylist,
+                    Core.vx_new(
+                      Core.t_anylist,
                       Core.f_new(
                         Xml.t_xml,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":tag"),
                           Core.vx_new_string("tag2"),
                           Core.vx_new_string(":propmap"),
                           Core.f_new(
                             Core.t_stringmap,
-                            Core.vx_new(Core.t_anylist,
+                            Core.vx_new(
+                              Core.t_anylist,
                               Core.vx_new_string(":prop1"),
                               Core.vx_new_string("val1"),
                               Core.vx_new_string(":prop2"),
@@ -1266,7 +1389,8 @@ public final class XmlTest {
                   Core.vx_new_string(":parent"),
                   Core.f_new(
                     Xml.t_xml,
-                    Core.vx_new(Core.t_anylist,
+                    Core.vx_new(
+                      Core.t_anylist,
                       Core.vx_new_string(":tag"),
                       Core.vx_new_string("doc")
                     )
@@ -1276,13 +1400,15 @@ public final class XmlTest {
               Xml.f_xml_parse_from_xml_textblock(
                 Core.f_new(
                   Xml.t_xml,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":tag"),
                     Core.vx_new_string("tag1"),
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Xml.t_xml,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":tag"),
                         Core.vx_new_string("doc")
                       )
@@ -1291,13 +1417,15 @@ public final class XmlTest {
                 ),
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("<tag2 prop1=\"val1\" prop2=\"val2\" />"),
                     Core.vx_new_string(":delim"),
                     Core.f_copy(
                       Textblock.c_delimbracketangle,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":pos"),
                         Core.vx_new_int(0)
                       )
@@ -1305,23 +1433,27 @@ public final class XmlTest {
                     Core.vx_new_string(":children"),
                     Core.f_new(
                       Textblock.t_textblocklist,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("tag2")
                           )
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string(" "),
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimwhitespace,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -1330,20 +1462,23 @@ public final class XmlTest {
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("prop1")
                           )
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("="),
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Xml.c_delimxmlequal,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -1352,13 +1487,15 @@ public final class XmlTest {
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("\"val1\""),
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimquote,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -1366,10 +1503,12 @@ public final class XmlTest {
                             Core.vx_new_string(":children"),
                             Core.f_new(
                               Textblock.t_textblocklist,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("val1")
                                   )
@@ -1380,13 +1519,15 @@ public final class XmlTest {
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string(" "),
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimwhitespace,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -1395,20 +1536,23 @@ public final class XmlTest {
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("prop2")
                           )
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("="),
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Xml.c_delimxmlequal,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -1417,13 +1561,15 @@ public final class XmlTest {
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("\"val2\""),
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimquote,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -1431,10 +1577,12 @@ public final class XmlTest {
                             Core.vx_new_string(":children"),
                             Core.f_new(
                               Textblock.t_textblocklist,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("val2")
                                   )
@@ -1445,13 +1593,15 @@ public final class XmlTest {
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string(" "),
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimwhitespace,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -1460,7 +1610,8 @@ public final class XmlTest {
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("/")
                           )
@@ -1480,31 +1631,37 @@ public final class XmlTest {
               context,
               Core.f_new(
                 Xml.t_xml,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":tag"),
                   Core.vx_new_string("doc"),
                   Core.vx_new_string(":children"),
                   Core.f_new(
                     Xml.t_xmllist,
-                    Core.vx_new(Core.t_anylist,
+                    Core.vx_new(
+                      Core.t_anylist,
                       Core.f_new(
                         Xml.t_xml,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":tag"),
                           Core.vx_new_string("tag1"),
                           Core.vx_new_string(":children"),
                           Core.f_new(
                             Xml.t_xmllist,
-                            Core.vx_new(Core.t_anylist,
+                            Core.vx_new(
+                              Core.t_anylist,
                               Core.f_new(
                                 Xml.t_xml,
-                                Core.vx_new(Core.t_anylist,
+                                Core.vx_new(
+                                  Core.t_anylist,
                                   Core.vx_new_string(":tag"),
                                   Core.vx_new_string("tag2"),
                                   Core.vx_new_string(":propmap"),
                                   Core.f_new(
                                     Core.t_stringmap,
-                                    Core.vx_new(Core.t_anylist,
+                                    Core.vx_new(
+                                      Core.t_anylist,
                                       Core.vx_new_string(":prop1"),
                                       Core.vx_new_string("val1"),
                                       Core.vx_new_string(":prop2"),
@@ -1524,22 +1681,26 @@ public final class XmlTest {
               Xml.f_xml_parse_from_xml_textblock(
                 Core.f_new(
                   Xml.t_xml,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":tag"),
                     Core.vx_new_string("tag1"),
                     Core.vx_new_string(":children"),
                     Core.f_new(
                       Xml.t_xmllist,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.f_new(
                           Xml.t_xml,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":tag"),
                             Core.vx_new_string("tag2"),
                             Core.vx_new_string(":propmap"),
                             Core.f_new(
                               Core.t_stringmap,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":prop1"),
                                 Core.vx_new_string("val1"),
                                 Core.vx_new_string(":prop2"),
@@ -1553,7 +1714,8 @@ public final class XmlTest {
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Xml.t_xml,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":tag"),
                         Core.vx_new_string("doc")
                       )
@@ -1562,13 +1724,15 @@ public final class XmlTest {
                 ),
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("</tag1>"),
                     Core.vx_new_string(":delim"),
                     Core.f_copy(
                       Textblock.c_delimbracketangle,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":pos"),
                         Core.vx_new_int(0)
                       )
@@ -1576,10 +1740,12 @@ public final class XmlTest {
                     Core.vx_new_string(":children"),
                     Core.f_new(
                       Textblock.t_textblocklist,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("/tag1")
                           )
@@ -1613,31 +1779,37 @@ public final class XmlTest {
               context,
               Core.f_new(
                 Xml.t_xml,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":tag"),
                   Core.vx_new_string("doc"),
                   Core.vx_new_string(":children"),
                   Core.f_new(
                     Xml.t_xmllist,
-                    Core.vx_new(Core.t_anylist,
+                    Core.vx_new(
+                      Core.t_anylist,
                       Core.f_new(
                         Xml.t_xml,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":tag"),
                           Core.vx_new_string("tag1"),
                           Core.vx_new_string(":children"),
                           Core.f_new(
                             Xml.t_xmllist,
-                            Core.vx_new(Core.t_anylist,
+                            Core.vx_new(
+                              Core.t_anylist,
                               Core.f_new(
                                 Xml.t_xml,
-                                Core.vx_new(Core.t_anylist,
+                                Core.vx_new(
+                                  Core.t_anylist,
                                   Core.vx_new_string(":tag"),
                                   Core.vx_new_string("tag2"),
                                   Core.vx_new_string(":propmap"),
                                   Core.f_new(
                                     Core.t_stringmap,
-                                    Core.vx_new(Core.t_anylist,
+                                    Core.vx_new(
+                                      Core.t_anylist,
                                       Core.vx_new_string(":prop1"),
                                       Core.vx_new_string("val1"),
                                       Core.vx_new_string(":prop2"),
@@ -1660,10 +1832,12 @@ public final class XmlTest {
                 ),
                 Core.f_new(
                   Textblock.t_textblocklist,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("<doc>"),
                         Core.vx_new_string(":startpos"),
@@ -1673,7 +1847,8 @@ public final class XmlTest {
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimbracketangle,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":pos"),
                             Core.vx_new_int(0)
                           )
@@ -1681,10 +1856,12 @@ public final class XmlTest {
                         Core.vx_new_string(":children"),
                         Core.f_new(
                           Textblock.t_textblocklist,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("doc"),
                                 Core.vx_new_string(":startpos"),
@@ -1699,7 +1876,8 @@ public final class XmlTest {
                     ),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("\n  "),
                         Core.vx_new_string(":startpos"),
@@ -1709,7 +1887,8 @@ public final class XmlTest {
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimwhitespace,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":pos"),
                             Core.vx_new_int(0)
                           )
@@ -1718,7 +1897,8 @@ public final class XmlTest {
                     ),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("<tag1>"),
                         Core.vx_new_string(":startpos"),
@@ -1728,7 +1908,8 @@ public final class XmlTest {
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimbracketangle,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":pos"),
                             Core.vx_new_int(0)
                           )
@@ -1736,10 +1917,12 @@ public final class XmlTest {
                         Core.vx_new_string(":children"),
                         Core.f_new(
                           Textblock.t_textblocklist,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("tag1"),
                                 Core.vx_new_string(":startpos"),
@@ -1754,7 +1937,8 @@ public final class XmlTest {
                     ),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("\n    "),
                         Core.vx_new_string(":startpos"),
@@ -1764,7 +1948,8 @@ public final class XmlTest {
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimwhitespace,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":pos"),
                             Core.vx_new_int(0)
                           )
@@ -1773,7 +1958,8 @@ public final class XmlTest {
                     ),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("<tag2 prop1=\"val1\" prop2=\"val2\" />"),
                         Core.vx_new_string(":startpos"),
@@ -1783,7 +1969,8 @@ public final class XmlTest {
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimbracketangle,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":pos"),
                             Core.vx_new_int(0)
                           )
@@ -1791,10 +1978,12 @@ public final class XmlTest {
                         Core.vx_new_string(":children"),
                         Core.f_new(
                           Textblock.t_textblocklist,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("tag2"),
                                 Core.vx_new_string(":startpos"),
@@ -1805,7 +1994,8 @@ public final class XmlTest {
                             ),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string(" "),
                                 Core.vx_new_string(":startpos"),
@@ -1815,7 +2005,8 @@ public final class XmlTest {
                                 Core.vx_new_string(":delim"),
                                 Core.f_copy(
                                   Textblock.c_delimwhitespace,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":pos"),
                                     Core.vx_new_int(0)
                                   )
@@ -1824,7 +2015,8 @@ public final class XmlTest {
                             ),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("prop1"),
                                 Core.vx_new_string(":startpos"),
@@ -1835,7 +2027,8 @@ public final class XmlTest {
                             ),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("="),
                                 Core.vx_new_string(":startpos"),
@@ -1845,7 +2038,8 @@ public final class XmlTest {
                                 Core.vx_new_string(":delim"),
                                 Core.f_copy(
                                   Xml.c_delimxmlequal,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":pos"),
                                     Core.vx_new_int(0)
                                   )
@@ -1854,7 +2048,8 @@ public final class XmlTest {
                             ),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("\"val1\""),
                                 Core.vx_new_string(":startpos"),
@@ -1864,7 +2059,8 @@ public final class XmlTest {
                                 Core.vx_new_string(":delim"),
                                 Core.f_copy(
                                   Textblock.c_delimquote,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":pos"),
                                     Core.vx_new_int(0)
                                   )
@@ -1872,10 +2068,12 @@ public final class XmlTest {
                                 Core.vx_new_string(":children"),
                                 Core.f_new(
                                   Textblock.t_textblocklist,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.vx_new(Core.t_anylist,
+                                      Core.vx_new(
+                                        Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string("val1"),
                                         Core.vx_new_string(":startpos"),
@@ -1890,7 +2088,8 @@ public final class XmlTest {
                             ),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string(" "),
                                 Core.vx_new_string(":startpos"),
@@ -1900,7 +2099,8 @@ public final class XmlTest {
                                 Core.vx_new_string(":delim"),
                                 Core.f_copy(
                                   Textblock.c_delimwhitespace,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":pos"),
                                     Core.vx_new_int(0)
                                   )
@@ -1909,7 +2109,8 @@ public final class XmlTest {
                             ),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("prop2"),
                                 Core.vx_new_string(":startpos"),
@@ -1920,7 +2121,8 @@ public final class XmlTest {
                             ),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("="),
                                 Core.vx_new_string(":startpos"),
@@ -1930,7 +2132,8 @@ public final class XmlTest {
                                 Core.vx_new_string(":delim"),
                                 Core.f_copy(
                                   Xml.c_delimxmlequal,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":pos"),
                                     Core.vx_new_int(0)
                                   )
@@ -1939,7 +2142,8 @@ public final class XmlTest {
                             ),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("\"val2\""),
                                 Core.vx_new_string(":startpos"),
@@ -1949,7 +2153,8 @@ public final class XmlTest {
                                 Core.vx_new_string(":delim"),
                                 Core.f_copy(
                                   Textblock.c_delimquote,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":pos"),
                                     Core.vx_new_int(0)
                                   )
@@ -1957,10 +2162,12 @@ public final class XmlTest {
                                 Core.vx_new_string(":children"),
                                 Core.f_new(
                                   Textblock.t_textblocklist,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.f_new(
                                       Textblock.t_textblock,
-                                      Core.vx_new(Core.t_anylist,
+                                      Core.vx_new(
+                                        Core.t_anylist,
                                         Core.vx_new_string(":text"),
                                         Core.vx_new_string("val2"),
                                         Core.vx_new_string(":startpos"),
@@ -1975,7 +2182,8 @@ public final class XmlTest {
                             ),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string(" "),
                                 Core.vx_new_string(":startpos"),
@@ -1985,7 +2193,8 @@ public final class XmlTest {
                                 Core.vx_new_string(":delim"),
                                 Core.f_copy(
                                   Textblock.c_delimwhitespace,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":pos"),
                                     Core.vx_new_int(0)
                                   )
@@ -1994,7 +2203,8 @@ public final class XmlTest {
                             ),
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("/"),
                                 Core.vx_new_string(":startpos"),
@@ -2009,7 +2219,8 @@ public final class XmlTest {
                     ),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("\n  "),
                         Core.vx_new_string(":startpos"),
@@ -2019,7 +2230,8 @@ public final class XmlTest {
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimwhitespace,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":pos"),
                             Core.vx_new_int(0)
                           )
@@ -2028,7 +2240,8 @@ public final class XmlTest {
                     ),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("</tag1>"),
                         Core.vx_new_string(":startpos"),
@@ -2038,7 +2251,8 @@ public final class XmlTest {
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimbracketangle,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":pos"),
                             Core.vx_new_int(0)
                           )
@@ -2046,10 +2260,12 @@ public final class XmlTest {
                         Core.vx_new_string(":children"),
                         Core.f_new(
                           Textblock.t_textblocklist,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("/tag1"),
                                 Core.vx_new_string(":startpos"),
@@ -2064,7 +2280,8 @@ public final class XmlTest {
                     ),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("\n"),
                         Core.vx_new_string(":startpos"),
@@ -2074,7 +2291,8 @@ public final class XmlTest {
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimwhitespace,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":pos"),
                             Core.vx_new_int(0)
                           )
@@ -2083,7 +2301,8 @@ public final class XmlTest {
                     ),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("</doc>"),
                         Core.vx_new_string(":startpos"),
@@ -2093,7 +2312,8 @@ public final class XmlTest {
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimbracketangle,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":pos"),
                             Core.vx_new_int(0)
                           )
@@ -2101,10 +2321,12 @@ public final class XmlTest {
                         Core.vx_new_string(":children"),
                         Core.f_new(
                           Textblock.t_textblocklist,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("/doc"),
                                 Core.vx_new_string(":startpos"),
@@ -2144,22 +2366,26 @@ public final class XmlTest {
               context,
               Core.f_new(
                 Xml.t_xml,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":tag"),
                   Core.vx_new_string("doc"),
                   Core.vx_new_string(":children"),
                   Core.f_new(
                     Xml.t_xmllist,
-                    Core.vx_new(Core.t_anylist,
+                    Core.vx_new(
+                      Core.t_anylist,
                       Core.f_new(
                         Xml.t_xml,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":tag"),
                           Core.vx_new_string("tag2"),
                           Core.vx_new_string(":propmap"),
                           Core.f_new(
                             Core.t_stringmap,
-                            Core.vx_new(Core.t_anylist,
+                            Core.vx_new(
+                              Core.t_anylist,
                               Core.vx_new_string(":prop1"),
                               Core.vx_new_string("val1"),
                               Core.vx_new_string(":prop2"),
@@ -2175,13 +2401,15 @@ public final class XmlTest {
               Xml.f_xml_properties_from_xml_textblocklist(
                 Core.f_new(
                   Xml.t_xml,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":tag"),
                     Core.vx_new_string(":notag"),
                     Core.vx_new_string(":parent"),
                     Core.f_new(
                       Xml.t_xml,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":tag"),
                         Core.vx_new_string("doc")
                       )
@@ -2190,23 +2418,27 @@ public final class XmlTest {
                 ),
                 Core.f_new(
                   Textblock.t_textblocklist,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("tag2")
                       )
                     ),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string(" "),
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimwhitespace,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":pos"),
                             Core.vx_new_int(0)
                           )
@@ -2215,20 +2447,23 @@ public final class XmlTest {
                     ),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("prop1")
                       )
                     ),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("="),
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Xml.c_delimxmlequal,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":pos"),
                             Core.vx_new_int(0)
                           )
@@ -2237,7 +2472,8 @@ public final class XmlTest {
                     ),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("\"val1\""),
                         Core.vx_new_string(":startpos"),
@@ -2247,7 +2483,8 @@ public final class XmlTest {
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimquote,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":pos"),
                             Core.vx_new_int(0)
                           )
@@ -2255,10 +2492,12 @@ public final class XmlTest {
                         Core.vx_new_string(":children"),
                         Core.f_new(
                           Textblock.t_textblocklist,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("val1")
                               )
@@ -2269,13 +2508,15 @@ public final class XmlTest {
                     ),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string(" "),
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimwhitespace,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":pos"),
                             Core.vx_new_int(0)
                           )
@@ -2284,20 +2525,23 @@ public final class XmlTest {
                     ),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("prop2")
                       )
                     ),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("="),
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Xml.c_delimxmlequal,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":pos"),
                             Core.vx_new_int(0)
                           )
@@ -2306,13 +2550,15 @@ public final class XmlTest {
                     ),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("\"val2\""),
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimquote,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":pos"),
                             Core.vx_new_int(0)
                           )
@@ -2320,10 +2566,12 @@ public final class XmlTest {
                         Core.vx_new_string(":children"),
                         Core.f_new(
                           Textblock.t_textblocklist,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.f_new(
                               Textblock.t_textblock,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":text"),
                                 Core.vx_new_string("val2")
                               )
@@ -2334,13 +2582,15 @@ public final class XmlTest {
                     ),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string(" "),
                         Core.vx_new_string(":delim"),
                         Core.f_copy(
                           Textblock.c_delimwhitespace,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":pos"),
                             Core.vx_new_int(0)
                           )
@@ -2349,7 +2599,8 @@ public final class XmlTest {
                     ),
                     Core.f_new(
                       Textblock.t_textblock,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":text"),
                         Core.vx_new_string("/")
                       )
@@ -2381,7 +2632,8 @@ public final class XmlTest {
               context,
               Core.f_new(
                 Xml.t_xml,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":tag"),
                   Core.vx_new_string("tag1")
                 )
@@ -2389,14 +2641,16 @@ public final class XmlTest {
               Xml.f_xml_property_from_xml_textblock(
                 Core.f_new(
                   Xml.t_xml,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":tag"),
                     Core.vx_new_string(":notag")
                   )
                 ),
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("tag1")
                   )
@@ -2412,7 +2666,8 @@ public final class XmlTest {
               context,
               Core.f_new(
                 Xml.t_xml,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":tag"),
                   Core.vx_new_string("tag1"),
                   Core.vx_new_string(":prop"),
@@ -2422,14 +2677,16 @@ public final class XmlTest {
               Xml.f_xml_property_from_xml_textblock(
                 Core.f_new(
                   Xml.t_xml,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":tag"),
                     Core.vx_new_string("tag1")
                   )
                 ),
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("prop1")
                   )
@@ -2445,13 +2702,15 @@ public final class XmlTest {
               context,
               Core.f_new(
                 Xml.t_xml,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":tag"),
                   Core.vx_new_string("tag1"),
                   Core.vx_new_string(":propmap"),
                   Core.f_new(
                     Core.t_stringmap,
-                    Core.vx_new(Core.t_anylist,
+                    Core.vx_new(
+                      Core.t_anylist,
                       Core.vx_new_string(":prop1"),
                       Core.vx_new_string("val1")
                     )
@@ -2461,7 +2720,8 @@ public final class XmlTest {
               Xml.f_xml_property_from_xml_textblock(
                 Core.f_new(
                   Xml.t_xml,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":tag"),
                     Core.vx_new_string("tag1"),
                     Core.vx_new_string(":prop"),
@@ -2470,11 +2730,13 @@ public final class XmlTest {
                 ),
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":delim"),
                     Core.f_copy(
                       Textblock.c_delimquote,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":pos"),
                         Core.vx_new_int(0)
                       )
@@ -2482,10 +2744,12 @@ public final class XmlTest {
                     Core.vx_new_string(":children"),
                     Core.f_new(
                       Textblock.t_textblocklist,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("val1")
                           )
@@ -2519,7 +2783,8 @@ public final class XmlTest {
               context,
               Core.f_new(
                 Xml.t_xml,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":text"),
                   Core.vx_new_string("text1")
                 )
@@ -2530,7 +2795,8 @@ public final class XmlTest {
                 ),
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("text1")
                   )
@@ -2546,16 +2812,19 @@ public final class XmlTest {
               context,
               Core.f_new(
                 Xml.t_xml,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":tag"),
                   Core.vx_new_string("doc"),
                   Core.vx_new_string(":children"),
                   Core.f_new(
                     Xml.t_xmllist,
-                    Core.vx_new(Core.t_anylist,
+                    Core.vx_new(
+                      Core.t_anylist,
                       Core.f_new(
                         Xml.t_xml,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":text"),
                           Core.vx_new_string("text1")
                         )
@@ -2567,14 +2836,16 @@ public final class XmlTest {
               Xml.f_xml_text_from_xml_textblock(
                 Core.f_new(
                   Xml.t_xml,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":tag"),
                     Core.vx_new_string("doc")
                   )
                 ),
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("text1")
                   )
@@ -2604,31 +2875,37 @@ public final class XmlTest {
               context,
               Core.f_new(
                 Xml.t_xml,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":tag"),
                   Core.vx_new_string("doc"),
                   Core.vx_new_string(":children"),
                   Core.f_new(
                     Xml.t_xmllist,
-                    Core.vx_new(Core.t_anylist,
+                    Core.vx_new(
+                      Core.t_anylist,
                       Core.f_new(
                         Xml.t_xml,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":tag"),
                           Core.vx_new_string("tag1"),
                           Core.vx_new_string(":children"),
                           Core.f_new(
                             Xml.t_xmllist,
-                            Core.vx_new(Core.t_anylist,
+                            Core.vx_new(
+                              Core.t_anylist,
                               Core.f_new(
                                 Xml.t_xml,
-                                Core.vx_new(Core.t_anylist,
+                                Core.vx_new(
+                                  Core.t_anylist,
                                   Core.vx_new_string(":tag"),
                                   Core.vx_new_string("tag2"),
                                   Core.vx_new_string(":propmap"),
                                   Core.f_new(
                                     Core.t_stringmap,
-                                    Core.vx_new(Core.t_anylist,
+                                    Core.vx_new(
+                                      Core.t_anylist,
                                       Core.vx_new_string(":prop1"),
                                       Core.vx_new_string("val1"),
                                       Core.vx_new_string(":prop2"),
@@ -2648,7 +2925,8 @@ public final class XmlTest {
               Xml.f_xml_from_textblock(
                 Core.f_new(
                   Textblock.t_textblock,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":text"),
                     Core.vx_new_string("<doc>\n  <tag1>\n    <tag2 prop1=\"val1\" prop2=\"val2\" />\n  </tag1>\n</doc>"),
                     Core.vx_new_string(":startpos"),
@@ -2658,10 +2936,12 @@ public final class XmlTest {
                     Core.vx_new_string(":children"),
                     Core.f_new(
                       Textblock.t_textblocklist,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("<doc>"),
                             Core.vx_new_string(":startpos"),
@@ -2671,7 +2951,8 @@ public final class XmlTest {
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimbracketangle,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -2679,10 +2960,12 @@ public final class XmlTest {
                             Core.vx_new_string(":children"),
                             Core.f_new(
                               Textblock.t_textblocklist,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("doc"),
                                     Core.vx_new_string(":startpos"),
@@ -2697,7 +2980,8 @@ public final class XmlTest {
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("\n  "),
                             Core.vx_new_string(":startpos"),
@@ -2707,7 +2991,8 @@ public final class XmlTest {
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimwhitespace,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -2716,7 +3001,8 @@ public final class XmlTest {
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("<tag1>"),
                             Core.vx_new_string(":startpos"),
@@ -2726,7 +3012,8 @@ public final class XmlTest {
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimbracketangle,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -2734,10 +3021,12 @@ public final class XmlTest {
                             Core.vx_new_string(":children"),
                             Core.f_new(
                               Textblock.t_textblocklist,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("tag1"),
                                     Core.vx_new_string(":startpos"),
@@ -2752,7 +3041,8 @@ public final class XmlTest {
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("\n    "),
                             Core.vx_new_string(":startpos"),
@@ -2762,7 +3052,8 @@ public final class XmlTest {
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimwhitespace,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -2771,7 +3062,8 @@ public final class XmlTest {
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("<tag2 prop1=\"val1\" prop2=\"val2\" />"),
                             Core.vx_new_string(":startpos"),
@@ -2781,7 +3073,8 @@ public final class XmlTest {
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimbracketangle,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -2789,10 +3082,12 @@ public final class XmlTest {
                             Core.vx_new_string(":children"),
                             Core.f_new(
                               Textblock.t_textblocklist,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("tag2"),
                                     Core.vx_new_string(":startpos"),
@@ -2803,7 +3098,8 @@ public final class XmlTest {
                                 ),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string(" "),
                                     Core.vx_new_string(":startpos"),
@@ -2813,7 +3109,8 @@ public final class XmlTest {
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Textblock.c_delimwhitespace,
-                                      Core.vx_new(Core.t_anylist,
+                                      Core.vx_new(
+                                        Core.t_anylist,
                                         Core.vx_new_string(":pos"),
                                         Core.vx_new_int(0)
                                       )
@@ -2822,7 +3119,8 @@ public final class XmlTest {
                                 ),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("prop1"),
                                     Core.vx_new_string(":startpos"),
@@ -2833,7 +3131,8 @@ public final class XmlTest {
                                 ),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("="),
                                     Core.vx_new_string(":startpos"),
@@ -2843,7 +3142,8 @@ public final class XmlTest {
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Xml.c_delimxmlequal,
-                                      Core.vx_new(Core.t_anylist,
+                                      Core.vx_new(
+                                        Core.t_anylist,
                                         Core.vx_new_string(":pos"),
                                         Core.vx_new_int(0)
                                       )
@@ -2852,7 +3152,8 @@ public final class XmlTest {
                                 ),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("\"val1\""),
                                     Core.vx_new_string(":startpos"),
@@ -2862,7 +3163,8 @@ public final class XmlTest {
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Textblock.c_delimquote,
-                                      Core.vx_new(Core.t_anylist,
+                                      Core.vx_new(
+                                        Core.t_anylist,
                                         Core.vx_new_string(":pos"),
                                         Core.vx_new_int(0)
                                       )
@@ -2870,10 +3172,12 @@ public final class XmlTest {
                                     Core.vx_new_string(":children"),
                                     Core.f_new(
                                       Textblock.t_textblocklist,
-                                      Core.vx_new(Core.t_anylist,
+                                      Core.vx_new(
+                                        Core.t_anylist,
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.vx_new(Core.t_anylist,
+                                          Core.vx_new(
+                                            Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string("val1"),
                                             Core.vx_new_string(":startpos"),
@@ -2888,7 +3192,8 @@ public final class XmlTest {
                                 ),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string(" "),
                                     Core.vx_new_string(":startpos"),
@@ -2898,7 +3203,8 @@ public final class XmlTest {
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Textblock.c_delimwhitespace,
-                                      Core.vx_new(Core.t_anylist,
+                                      Core.vx_new(
+                                        Core.t_anylist,
                                         Core.vx_new_string(":pos"),
                                         Core.vx_new_int(0)
                                       )
@@ -2907,7 +3213,8 @@ public final class XmlTest {
                                 ),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("prop2"),
                                     Core.vx_new_string(":startpos"),
@@ -2918,7 +3225,8 @@ public final class XmlTest {
                                 ),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("="),
                                     Core.vx_new_string(":startpos"),
@@ -2928,7 +3236,8 @@ public final class XmlTest {
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Xml.c_delimxmlequal,
-                                      Core.vx_new(Core.t_anylist,
+                                      Core.vx_new(
+                                        Core.t_anylist,
                                         Core.vx_new_string(":pos"),
                                         Core.vx_new_int(0)
                                       )
@@ -2937,7 +3246,8 @@ public final class XmlTest {
                                 ),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("\"val2\""),
                                     Core.vx_new_string(":startpos"),
@@ -2947,7 +3257,8 @@ public final class XmlTest {
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Textblock.c_delimquote,
-                                      Core.vx_new(Core.t_anylist,
+                                      Core.vx_new(
+                                        Core.t_anylist,
                                         Core.vx_new_string(":pos"),
                                         Core.vx_new_int(0)
                                       )
@@ -2955,10 +3266,12 @@ public final class XmlTest {
                                     Core.vx_new_string(":children"),
                                     Core.f_new(
                                       Textblock.t_textblocklist,
-                                      Core.vx_new(Core.t_anylist,
+                                      Core.vx_new(
+                                        Core.t_anylist,
                                         Core.f_new(
                                           Textblock.t_textblock,
-                                          Core.vx_new(Core.t_anylist,
+                                          Core.vx_new(
+                                            Core.t_anylist,
                                             Core.vx_new_string(":text"),
                                             Core.vx_new_string("val2"),
                                             Core.vx_new_string(":startpos"),
@@ -2973,7 +3286,8 @@ public final class XmlTest {
                                 ),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string(" "),
                                     Core.vx_new_string(":startpos"),
@@ -2983,7 +3297,8 @@ public final class XmlTest {
                                     Core.vx_new_string(":delim"),
                                     Core.f_copy(
                                       Textblock.c_delimwhitespace,
-                                      Core.vx_new(Core.t_anylist,
+                                      Core.vx_new(
+                                        Core.t_anylist,
                                         Core.vx_new_string(":pos"),
                                         Core.vx_new_int(0)
                                       )
@@ -2992,7 +3307,8 @@ public final class XmlTest {
                                 ),
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("/"),
                                     Core.vx_new_string(":startpos"),
@@ -3007,7 +3323,8 @@ public final class XmlTest {
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("\n  "),
                             Core.vx_new_string(":startpos"),
@@ -3017,7 +3334,8 @@ public final class XmlTest {
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimwhitespace,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -3026,7 +3344,8 @@ public final class XmlTest {
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("</tag1>"),
                             Core.vx_new_string(":startpos"),
@@ -3036,7 +3355,8 @@ public final class XmlTest {
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimbracketangle,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -3044,10 +3364,12 @@ public final class XmlTest {
                             Core.vx_new_string(":children"),
                             Core.f_new(
                               Textblock.t_textblocklist,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("/tag1"),
                                     Core.vx_new_string(":startpos"),
@@ -3062,7 +3384,8 @@ public final class XmlTest {
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("\n"),
                             Core.vx_new_string(":startpos"),
@@ -3072,7 +3395,8 @@ public final class XmlTest {
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimwhitespace,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -3081,7 +3405,8 @@ public final class XmlTest {
                         ),
                         Core.f_new(
                           Textblock.t_textblock,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":text"),
                             Core.vx_new_string("</doc>"),
                             Core.vx_new_string(":startpos"),
@@ -3091,7 +3416,8 @@ public final class XmlTest {
                             Core.vx_new_string(":delim"),
                             Core.f_copy(
                               Textblock.c_delimbracketangle,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":pos"),
                                 Core.vx_new_int(0)
                               )
@@ -3099,10 +3425,12 @@ public final class XmlTest {
                             Core.vx_new_string(":children"),
                             Core.f_new(
                               Textblock.t_textblocklist,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.f_new(
                                   Textblock.t_textblock,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":text"),
                                     Core.vx_new_string("/doc"),
                                     Core.vx_new_string(":startpos"),

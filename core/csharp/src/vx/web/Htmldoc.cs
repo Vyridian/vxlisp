@@ -17,21 +17,22 @@ public static class Htmldoc {
   public class Class_boolean_print_from_id_stylesheettext : Vx.Core.Class_base, Func_boolean_print_from_id_stylesheettext {
 
     public override Vx.Web.Htmldoc.Func_boolean_print_from_id_stylesheettext vx_new(params object[] vals) {
-      Class_boolean_print_from_id_stylesheettext output = new Class_boolean_print_from_id_stylesheettext();
+      Vx.Web.Htmldoc.Class_boolean_print_from_id_stylesheettext output = new Vx.Web.Htmldoc.Class_boolean_print_from_id_stylesheettext();
       return output;
     }
 
-    public override Vx.Web.Htmldoc.Func_boolean_print_from_id_stylesheettext vx_copy(params object[] vals) {
-      Class_boolean_print_from_id_stylesheettext output = new Class_boolean_print_from_id_stylesheettext();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Htmldoc.Class_boolean_print_from_id_stylesheettext output = new Vx.Web.Htmldoc.Class_boolean_print_from_id_stylesheettext();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
         "boolean-print<-id-stylesheettext", // name
         0, // idx
@@ -50,14 +51,17 @@ public static class Htmldoc {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_boolean_print_from_id_stylesheettext;
+      Vx.Core.Type_any output = Vx.Web.Htmldoc.e_boolean_print_from_id_stylesheettext;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_boolean_print_from_id_stylesheettext;
+      Vx.Core.Type_any output = Vx.Web.Htmldoc.t_boolean_print_from_id_stylesheettext;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -74,8 +78,8 @@ public static class Htmldoc {
 
   }
 
-  public static Func_boolean_print_from_id_stylesheettext e_boolean_print_from_id_stylesheettext = new Vx.Web.Htmldoc.Class_boolean_print_from_id_stylesheettext();
-  public static Func_boolean_print_from_id_stylesheettext t_boolean_print_from_id_stylesheettext = new Vx.Web.Htmldoc.Class_boolean_print_from_id_stylesheettext();
+  public static Vx.Web.Htmldoc.Func_boolean_print_from_id_stylesheettext e_boolean_print_from_id_stylesheettext = new Vx.Web.Htmldoc.Class_boolean_print_from_id_stylesheettext();
+  public static Vx.Web.Htmldoc.Func_boolean_print_from_id_stylesheettext t_boolean_print_from_id_stylesheettext = new Vx.Web.Htmldoc.Class_boolean_print_from_id_stylesheettext();
 
   public static Vx.Core.Type_boolean f_boolean_print_from_id_stylesheettext(Vx.Core.Type_string id, Vx.Core.Type_string stylesheettext) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -96,21 +100,22 @@ public static class Htmldoc {
   public class Class_boolean_remove_from_id : Vx.Core.Class_base, Func_boolean_remove_from_id {
 
     public override Vx.Web.Htmldoc.Func_boolean_remove_from_id vx_new(params object[] vals) {
-      Class_boolean_remove_from_id output = new Class_boolean_remove_from_id();
+      Vx.Web.Htmldoc.Class_boolean_remove_from_id output = new Vx.Web.Htmldoc.Class_boolean_remove_from_id();
       return output;
     }
 
-    public override Vx.Web.Htmldoc.Func_boolean_remove_from_id vx_copy(params object[] vals) {
-      Class_boolean_remove_from_id output = new Class_boolean_remove_from_id();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Htmldoc.Class_boolean_remove_from_id output = new Vx.Web.Htmldoc.Class_boolean_remove_from_id();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
         "boolean-remove<-id", // name
         0, // idx
@@ -129,14 +134,17 @@ public static class Htmldoc {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_boolean_remove_from_id;
+      Vx.Core.Type_any output = Vx.Web.Htmldoc.e_boolean_remove_from_id;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_boolean_remove_from_id;
+      Vx.Core.Type_any output = Vx.Web.Htmldoc.t_boolean_remove_from_id;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -164,8 +172,8 @@ public static class Htmldoc {
 
   }
 
-  public static Func_boolean_remove_from_id e_boolean_remove_from_id = new Vx.Web.Htmldoc.Class_boolean_remove_from_id();
-  public static Func_boolean_remove_from_id t_boolean_remove_from_id = new Vx.Web.Htmldoc.Class_boolean_remove_from_id();
+  public static Vx.Web.Htmldoc.Func_boolean_remove_from_id e_boolean_remove_from_id = new Vx.Web.Htmldoc.Class_boolean_remove_from_id();
+  public static Vx.Web.Htmldoc.Func_boolean_remove_from_id t_boolean_remove_from_id = new Vx.Web.Htmldoc.Class_boolean_remove_from_id();
 
   public static Vx.Core.Type_boolean f_boolean_remove_from_id(Vx.Core.Type_string id) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -187,21 +195,22 @@ public static class Htmldoc {
   public class Class_boolean_replace_from_id_htmltext : Vx.Core.Class_base, Func_boolean_replace_from_id_htmltext {
 
     public override Vx.Web.Htmldoc.Func_boolean_replace_from_id_htmltext vx_new(params object[] vals) {
-      Class_boolean_replace_from_id_htmltext output = new Class_boolean_replace_from_id_htmltext();
+      Vx.Web.Htmldoc.Class_boolean_replace_from_id_htmltext output = new Vx.Web.Htmldoc.Class_boolean_replace_from_id_htmltext();
       return output;
     }
 
-    public override Vx.Web.Htmldoc.Func_boolean_replace_from_id_htmltext vx_copy(params object[] vals) {
-      Class_boolean_replace_from_id_htmltext output = new Class_boolean_replace_from_id_htmltext();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Htmldoc.Class_boolean_replace_from_id_htmltext output = new Vx.Web.Htmldoc.Class_boolean_replace_from_id_htmltext();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
         "boolean-replace<-id-htmltext", // name
         0, // idx
@@ -220,14 +229,17 @@ public static class Htmldoc {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_boolean_replace_from_id_htmltext;
+      Vx.Core.Type_any output = Vx.Web.Htmldoc.e_boolean_replace_from_id_htmltext;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_boolean_replace_from_id_htmltext;
+      Vx.Core.Type_any output = Vx.Web.Htmldoc.t_boolean_replace_from_id_htmltext;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -244,8 +256,8 @@ public static class Htmldoc {
 
   }
 
-  public static Func_boolean_replace_from_id_htmltext e_boolean_replace_from_id_htmltext = new Vx.Web.Htmldoc.Class_boolean_replace_from_id_htmltext();
-  public static Func_boolean_replace_from_id_htmltext t_boolean_replace_from_id_htmltext = new Vx.Web.Htmldoc.Class_boolean_replace_from_id_htmltext();
+  public static Vx.Web.Htmldoc.Func_boolean_replace_from_id_htmltext e_boolean_replace_from_id_htmltext = new Vx.Web.Htmldoc.Class_boolean_replace_from_id_htmltext();
+  public static Vx.Web.Htmldoc.Func_boolean_replace_from_id_htmltext t_boolean_replace_from_id_htmltext = new Vx.Web.Htmldoc.Class_boolean_replace_from_id_htmltext();
 
   public static Vx.Core.Type_boolean f_boolean_replace_from_id_htmltext(Vx.Core.Type_string id, Vx.Core.Type_string htmltext) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -268,21 +280,22 @@ public static class Htmldoc {
   public class Class_boolean_replace_from_id_parent_htmltext : Vx.Core.Class_base, Func_boolean_replace_from_id_parent_htmltext {
 
     public override Vx.Web.Htmldoc.Func_boolean_replace_from_id_parent_htmltext vx_new(params object[] vals) {
-      Class_boolean_replace_from_id_parent_htmltext output = new Class_boolean_replace_from_id_parent_htmltext();
+      Vx.Web.Htmldoc.Class_boolean_replace_from_id_parent_htmltext output = new Vx.Web.Htmldoc.Class_boolean_replace_from_id_parent_htmltext();
       return output;
     }
 
-    public override Vx.Web.Htmldoc.Func_boolean_replace_from_id_parent_htmltext vx_copy(params object[] vals) {
-      Class_boolean_replace_from_id_parent_htmltext output = new Class_boolean_replace_from_id_parent_htmltext();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Htmldoc.Class_boolean_replace_from_id_parent_htmltext output = new Vx.Web.Htmldoc.Class_boolean_replace_from_id_parent_htmltext();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
         "boolean-replace<-id-parent-htmltext", // name
         0, // idx
@@ -301,14 +314,17 @@ public static class Htmldoc {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_boolean_replace_from_id_parent_htmltext;
+      Vx.Core.Type_any output = Vx.Web.Htmldoc.e_boolean_replace_from_id_parent_htmltext;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_boolean_replace_from_id_parent_htmltext;
+      Vx.Core.Type_any output = Vx.Web.Htmldoc.t_boolean_replace_from_id_parent_htmltext;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -326,8 +342,8 @@ public static class Htmldoc {
 
   }
 
-  public static Func_boolean_replace_from_id_parent_htmltext e_boolean_replace_from_id_parent_htmltext = new Vx.Web.Htmldoc.Class_boolean_replace_from_id_parent_htmltext();
-  public static Func_boolean_replace_from_id_parent_htmltext t_boolean_replace_from_id_parent_htmltext = new Vx.Web.Htmldoc.Class_boolean_replace_from_id_parent_htmltext();
+  public static Vx.Web.Htmldoc.Func_boolean_replace_from_id_parent_htmltext e_boolean_replace_from_id_parent_htmltext = new Vx.Web.Htmldoc.Class_boolean_replace_from_id_parent_htmltext();
+  public static Vx.Web.Htmldoc.Func_boolean_replace_from_id_parent_htmltext t_boolean_replace_from_id_parent_htmltext = new Vx.Web.Htmldoc.Class_boolean_replace_from_id_parent_htmltext();
 
   public static Vx.Core.Type_boolean f_boolean_replace_from_id_parent_htmltext(Vx.Core.Type_string id, Vx.Core.Type_string parent, Vx.Core.Type_string htmltext) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -350,21 +366,22 @@ public static class Htmldoc {
   public class Class_boolean_write_stylesheet_from_string : Vx.Core.Class_base, Func_boolean_write_stylesheet_from_string {
 
     public override Vx.Web.Htmldoc.Func_boolean_write_stylesheet_from_string vx_new(params object[] vals) {
-      Class_boolean_write_stylesheet_from_string output = new Class_boolean_write_stylesheet_from_string();
+      Vx.Web.Htmldoc.Class_boolean_write_stylesheet_from_string output = new Vx.Web.Htmldoc.Class_boolean_write_stylesheet_from_string();
       return output;
     }
 
-    public override Vx.Web.Htmldoc.Func_boolean_write_stylesheet_from_string vx_copy(params object[] vals) {
-      Class_boolean_write_stylesheet_from_string output = new Class_boolean_write_stylesheet_from_string();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Htmldoc.Class_boolean_write_stylesheet_from_string output = new Vx.Web.Htmldoc.Class_boolean_write_stylesheet_from_string();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
         "boolean-write-stylesheet<-string", // name
         0, // idx
@@ -383,14 +400,17 @@ public static class Htmldoc {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_boolean_write_stylesheet_from_string;
+      Vx.Core.Type_any output = Vx.Web.Htmldoc.e_boolean_write_stylesheet_from_string;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_boolean_write_stylesheet_from_string;
+      Vx.Core.Type_any output = Vx.Web.Htmldoc.t_boolean_write_stylesheet_from_string;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any_async vx_fn_new(Vx.Core.Class_any_from_any_async.IFn fn) {
@@ -418,8 +438,8 @@ public static class Htmldoc {
 
   }
 
-  public static Func_boolean_write_stylesheet_from_string e_boolean_write_stylesheet_from_string = new Vx.Web.Htmldoc.Class_boolean_write_stylesheet_from_string();
-  public static Func_boolean_write_stylesheet_from_string t_boolean_write_stylesheet_from_string = new Vx.Web.Htmldoc.Class_boolean_write_stylesheet_from_string();
+  public static Vx.Web.Htmldoc.Func_boolean_write_stylesheet_from_string e_boolean_write_stylesheet_from_string = new Vx.Web.Htmldoc.Class_boolean_write_stylesheet_from_string();
+  public static Vx.Web.Htmldoc.Func_boolean_write_stylesheet_from_string t_boolean_write_stylesheet_from_string = new Vx.Web.Htmldoc.Class_boolean_write_stylesheet_from_string();
 
   public static Task<Vx.Core.Type_boolean> f_boolean_write_stylesheet_from_string(Vx.Core.Type_string text) {
     Task<Vx.Core.Type_boolean> output = Vx.Core.vx_async_new_from_value(Vx.Core.e_boolean);
@@ -442,21 +462,22 @@ public static class Htmldoc {
   public class Class_boolean_write_from_id_attribute_value : Vx.Core.Class_base, Func_boolean_write_from_id_attribute_value {
 
     public override Vx.Web.Htmldoc.Func_boolean_write_from_id_attribute_value vx_new(params object[] vals) {
-      Class_boolean_write_from_id_attribute_value output = new Class_boolean_write_from_id_attribute_value();
+      Vx.Web.Htmldoc.Class_boolean_write_from_id_attribute_value output = new Vx.Web.Htmldoc.Class_boolean_write_from_id_attribute_value();
       return output;
     }
 
-    public override Vx.Web.Htmldoc.Func_boolean_write_from_id_attribute_value vx_copy(params object[] vals) {
-      Class_boolean_write_from_id_attribute_value output = new Class_boolean_write_from_id_attribute_value();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Htmldoc.Class_boolean_write_from_id_attribute_value output = new Vx.Web.Htmldoc.Class_boolean_write_from_id_attribute_value();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
         "boolean-write<-id-attribute-value", // name
         0, // idx
@@ -475,14 +496,17 @@ public static class Htmldoc {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_boolean_write_from_id_attribute_value;
+      Vx.Core.Type_any output = Vx.Web.Htmldoc.e_boolean_write_from_id_attribute_value;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_boolean_write_from_id_attribute_value;
+      Vx.Core.Type_any output = Vx.Web.Htmldoc.t_boolean_write_from_id_attribute_value;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -500,8 +524,8 @@ public static class Htmldoc {
 
   }
 
-  public static Func_boolean_write_from_id_attribute_value e_boolean_write_from_id_attribute_value = new Vx.Web.Htmldoc.Class_boolean_write_from_id_attribute_value();
-  public static Func_boolean_write_from_id_attribute_value t_boolean_write_from_id_attribute_value = new Vx.Web.Htmldoc.Class_boolean_write_from_id_attribute_value();
+  public static Vx.Web.Htmldoc.Func_boolean_write_from_id_attribute_value e_boolean_write_from_id_attribute_value = new Vx.Web.Htmldoc.Class_boolean_write_from_id_attribute_value();
+  public static Vx.Web.Htmldoc.Func_boolean_write_from_id_attribute_value t_boolean_write_from_id_attribute_value = new Vx.Web.Htmldoc.Class_boolean_write_from_id_attribute_value();
 
   public static Vx.Core.Type_boolean f_boolean_write_from_id_attribute_value(Vx.Core.Type_string id, Vx.Core.Type_string attribute, Vx.Core.Type_string value) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -523,21 +547,22 @@ public static class Htmldoc {
   public class Class_boolean_write_from_id_htmltext : Vx.Core.Class_base, Func_boolean_write_from_id_htmltext {
 
     public override Vx.Web.Htmldoc.Func_boolean_write_from_id_htmltext vx_new(params object[] vals) {
-      Class_boolean_write_from_id_htmltext output = new Class_boolean_write_from_id_htmltext();
+      Vx.Web.Htmldoc.Class_boolean_write_from_id_htmltext output = new Vx.Web.Htmldoc.Class_boolean_write_from_id_htmltext();
       return output;
     }
 
-    public override Vx.Web.Htmldoc.Func_boolean_write_from_id_htmltext vx_copy(params object[] vals) {
-      Class_boolean_write_from_id_htmltext output = new Class_boolean_write_from_id_htmltext();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Htmldoc.Class_boolean_write_from_id_htmltext output = new Vx.Web.Htmldoc.Class_boolean_write_from_id_htmltext();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
         "boolean-write<-id-htmltext", // name
         0, // idx
@@ -556,14 +581,17 @@ public static class Htmldoc {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_boolean_write_from_id_htmltext;
+      Vx.Core.Type_any output = Vx.Web.Htmldoc.e_boolean_write_from_id_htmltext;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_boolean_write_from_id_htmltext;
+      Vx.Core.Type_any output = Vx.Web.Htmldoc.t_boolean_write_from_id_htmltext;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -580,8 +608,8 @@ public static class Htmldoc {
 
   }
 
-  public static Func_boolean_write_from_id_htmltext e_boolean_write_from_id_htmltext = new Vx.Web.Htmldoc.Class_boolean_write_from_id_htmltext();
-  public static Func_boolean_write_from_id_htmltext t_boolean_write_from_id_htmltext = new Vx.Web.Htmldoc.Class_boolean_write_from_id_htmltext();
+  public static Vx.Web.Htmldoc.Func_boolean_write_from_id_htmltext e_boolean_write_from_id_htmltext = new Vx.Web.Htmldoc.Class_boolean_write_from_id_htmltext();
+  public static Vx.Web.Htmldoc.Func_boolean_write_from_id_htmltext t_boolean_write_from_id_htmltext = new Vx.Web.Htmldoc.Class_boolean_write_from_id_htmltext();
 
   public static Vx.Core.Type_boolean f_boolean_write_from_id_htmltext(Vx.Core.Type_string id, Vx.Core.Type_string htmltext) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -603,21 +631,22 @@ public static class Htmldoc {
   public class Class_boolean_write_from_id_visible : Vx.Core.Class_base, Func_boolean_write_from_id_visible {
 
     public override Vx.Web.Htmldoc.Func_boolean_write_from_id_visible vx_new(params object[] vals) {
-      Class_boolean_write_from_id_visible output = new Class_boolean_write_from_id_visible();
+      Vx.Web.Htmldoc.Class_boolean_write_from_id_visible output = new Vx.Web.Htmldoc.Class_boolean_write_from_id_visible();
       return output;
     }
 
-    public override Vx.Web.Htmldoc.Func_boolean_write_from_id_visible vx_copy(params object[] vals) {
-      Class_boolean_write_from_id_visible output = new Class_boolean_write_from_id_visible();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Htmldoc.Class_boolean_write_from_id_visible output = new Vx.Web.Htmldoc.Class_boolean_write_from_id_visible();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
         "boolean-write<-id-visible", // name
         0, // idx
@@ -636,14 +665,17 @@ public static class Htmldoc {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_boolean_write_from_id_visible;
+      Vx.Core.Type_any output = Vx.Web.Htmldoc.e_boolean_write_from_id_visible;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_boolean_write_from_id_visible;
+      Vx.Core.Type_any output = Vx.Web.Htmldoc.t_boolean_write_from_id_visible;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -660,8 +692,8 @@ public static class Htmldoc {
 
   }
 
-  public static Func_boolean_write_from_id_visible e_boolean_write_from_id_visible = new Vx.Web.Htmldoc.Class_boolean_write_from_id_visible();
-  public static Func_boolean_write_from_id_visible t_boolean_write_from_id_visible = new Vx.Web.Htmldoc.Class_boolean_write_from_id_visible();
+  public static Vx.Web.Htmldoc.Func_boolean_write_from_id_visible e_boolean_write_from_id_visible = new Vx.Web.Htmldoc.Class_boolean_write_from_id_visible();
+  public static Vx.Web.Htmldoc.Func_boolean_write_from_id_visible t_boolean_write_from_id_visible = new Vx.Web.Htmldoc.Class_boolean_write_from_id_visible();
 
   public static Vx.Core.Type_boolean f_boolean_write_from_id_visible(Vx.Core.Type_string id, Vx.Core.Type_boolean visible) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -684,21 +716,22 @@ public static class Htmldoc {
   public class Class_boolean_write_from_stylesheet : Vx.Core.Class_base, Func_boolean_write_from_stylesheet {
 
     public override Vx.Web.Htmldoc.Func_boolean_write_from_stylesheet vx_new(params object[] vals) {
-      Class_boolean_write_from_stylesheet output = new Class_boolean_write_from_stylesheet();
+      Vx.Web.Htmldoc.Class_boolean_write_from_stylesheet output = new Vx.Web.Htmldoc.Class_boolean_write_from_stylesheet();
       return output;
     }
 
-    public override Vx.Web.Htmldoc.Func_boolean_write_from_stylesheet vx_copy(params object[] vals) {
-      Class_boolean_write_from_stylesheet output = new Class_boolean_write_from_stylesheet();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Htmldoc.Class_boolean_write_from_stylesheet output = new Vx.Web.Htmldoc.Class_boolean_write_from_stylesheet();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
         "boolean-write<-stylesheet", // name
         0, // idx
@@ -717,14 +750,17 @@ public static class Htmldoc {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_boolean_write_from_stylesheet;
+      Vx.Core.Type_any output = Vx.Web.Htmldoc.e_boolean_write_from_stylesheet;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_boolean_write_from_stylesheet;
+      Vx.Core.Type_any output = Vx.Web.Htmldoc.t_boolean_write_from_stylesheet;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any_async vx_fn_new(Vx.Core.Class_any_from_any_async.IFn fn) {
@@ -752,8 +788,8 @@ public static class Htmldoc {
 
   }
 
-  public static Func_boolean_write_from_stylesheet e_boolean_write_from_stylesheet = new Vx.Web.Htmldoc.Class_boolean_write_from_stylesheet();
-  public static Func_boolean_write_from_stylesheet t_boolean_write_from_stylesheet = new Vx.Web.Htmldoc.Class_boolean_write_from_stylesheet();
+  public static Vx.Web.Htmldoc.Func_boolean_write_from_stylesheet e_boolean_write_from_stylesheet = new Vx.Web.Htmldoc.Class_boolean_write_from_stylesheet();
+  public static Vx.Web.Htmldoc.Func_boolean_write_from_stylesheet t_boolean_write_from_stylesheet = new Vx.Web.Htmldoc.Class_boolean_write_from_stylesheet();
 
   public static Task<Vx.Core.Type_boolean> f_boolean_write_from_stylesheet(Vx.Web.Html.Type_stylesheet stylesheet) {
     Task<Vx.Core.Type_boolean> output = Vx.Core.vx_async_new_from_value(Vx.Core.e_boolean);
@@ -786,21 +822,22 @@ public static class Htmldoc {
   public class Class_boolean_writeevents_from_ui : Vx.Core.Class_base, Func_boolean_writeevents_from_ui {
 
     public override Vx.Web.Htmldoc.Func_boolean_writeevents_from_ui vx_new(params object[] vals) {
-      Class_boolean_writeevents_from_ui output = new Class_boolean_writeevents_from_ui();
+      Vx.Web.Htmldoc.Class_boolean_writeevents_from_ui output = new Vx.Web.Htmldoc.Class_boolean_writeevents_from_ui();
       return output;
     }
 
-    public override Vx.Web.Htmldoc.Func_boolean_writeevents_from_ui vx_copy(params object[] vals) {
-      Class_boolean_writeevents_from_ui output = new Class_boolean_writeevents_from_ui();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Htmldoc.Class_boolean_writeevents_from_ui output = new Vx.Web.Htmldoc.Class_boolean_writeevents_from_ui();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
         "boolean-writeevents<-ui", // name
         0, // idx
@@ -819,14 +856,17 @@ public static class Htmldoc {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_boolean_writeevents_from_ui;
+      Vx.Core.Type_any output = Vx.Web.Htmldoc.e_boolean_writeevents_from_ui;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_boolean_writeevents_from_ui;
+      Vx.Core.Type_any output = Vx.Web.Htmldoc.t_boolean_writeevents_from_ui;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -854,8 +894,8 @@ public static class Htmldoc {
 
   }
 
-  public static Func_boolean_writeevents_from_ui e_boolean_writeevents_from_ui = new Vx.Web.Htmldoc.Class_boolean_writeevents_from_ui();
-  public static Func_boolean_writeevents_from_ui t_boolean_writeevents_from_ui = new Vx.Web.Htmldoc.Class_boolean_writeevents_from_ui();
+  public static Vx.Web.Htmldoc.Func_boolean_writeevents_from_ui e_boolean_writeevents_from_ui = new Vx.Web.Htmldoc.Class_boolean_writeevents_from_ui();
+  public static Vx.Web.Htmldoc.Func_boolean_writeevents_from_ui t_boolean_writeevents_from_ui = new Vx.Web.Htmldoc.Class_boolean_writeevents_from_ui();
 
   public static Vx.Core.Type_boolean f_boolean_writeevents_from_ui(Vx.Ui.Ui.Type_ui ui) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
@@ -875,21 +915,22 @@ public static class Htmldoc {
   public class Class_context_read : Vx.Core.Class_base, Func_context_read {
 
     public override Vx.Web.Htmldoc.Func_context_read vx_new(params object[] vals) {
-      Class_context_read output = new Class_context_read();
+      Vx.Web.Htmldoc.Class_context_read output = new Vx.Web.Htmldoc.Class_context_read();
       return output;
     }
 
-    public override Vx.Web.Htmldoc.Func_context_read vx_copy(params object[] vals) {
-      Class_context_read output = new Class_context_read();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Htmldoc.Class_context_read output = new Vx.Web.Htmldoc.Class_context_read();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
         "context-read", // name
         0, // idx
@@ -908,14 +949,17 @@ public static class Htmldoc {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_context_read;
+      Vx.Core.Type_any output = Vx.Web.Htmldoc.e_context_read;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_context_read;
+      Vx.Core.Type_any output = Vx.Web.Htmldoc.t_context_read;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -930,8 +974,8 @@ public static class Htmldoc {
 
   }
 
-  public static Func_context_read e_context_read = new Vx.Web.Htmldoc.Class_context_read();
-  public static Func_context_read t_context_read = new Vx.Web.Htmldoc.Class_context_read();
+  public static Vx.Web.Htmldoc.Func_context_read e_context_read = new Vx.Web.Htmldoc.Class_context_read();
+  public static Vx.Web.Htmldoc.Func_context_read t_context_read = new Vx.Web.Htmldoc.Class_context_read();
 
   public static Vx.Core.Type_context f_context_read() {
     Vx.Core.Type_context output = Vx.Core.e_context;
@@ -951,21 +995,22 @@ public static class Htmldoc {
   public class Class_context_write : Vx.Core.Class_base, Func_context_write {
 
     public override Vx.Web.Htmldoc.Func_context_write vx_new(params object[] vals) {
-      Class_context_write output = new Class_context_write();
+      Vx.Web.Htmldoc.Class_context_write output = new Vx.Web.Htmldoc.Class_context_write();
       return output;
     }
 
-    public override Vx.Web.Htmldoc.Func_context_write vx_copy(params object[] vals) {
-      Class_context_write output = new Class_context_write();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Htmldoc.Class_context_write output = new Vx.Web.Htmldoc.Class_context_write();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
         "context-write", // name
         0, // idx
@@ -984,14 +1029,17 @@ public static class Htmldoc {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_context_write;
+      Vx.Core.Type_any output = Vx.Web.Htmldoc.e_context_write;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_context_write;
+      Vx.Core.Type_any output = Vx.Web.Htmldoc.t_context_write;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -1007,8 +1055,8 @@ public static class Htmldoc {
 
   }
 
-  public static Func_context_write e_context_write = new Vx.Web.Htmldoc.Class_context_write();
-  public static Func_context_write t_context_write = new Vx.Web.Htmldoc.Class_context_write();
+  public static Vx.Web.Htmldoc.Func_context_write e_context_write = new Vx.Web.Htmldoc.Class_context_write();
+  public static Vx.Web.Htmldoc.Func_context_write t_context_write = new Vx.Web.Htmldoc.Class_context_write();
 
   public static Vx.Core.Type_context f_context_write(Vx.Core.Type_context context) {
     Vx.Core.Type_context output = Vx.Core.e_context;
@@ -1029,21 +1077,22 @@ public static class Htmldoc {
   public class Class_string_from_id : Vx.Core.Class_base, Func_string_from_id {
 
     public override Vx.Web.Htmldoc.Func_string_from_id vx_new(params object[] vals) {
-      Class_string_from_id output = new Class_string_from_id();
+      Vx.Web.Htmldoc.Class_string_from_id output = new Vx.Web.Htmldoc.Class_string_from_id();
       return output;
     }
 
-    public override Vx.Web.Htmldoc.Func_string_from_id vx_copy(params object[] vals) {
-      Class_string_from_id output = new Class_string_from_id();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Htmldoc.Class_string_from_id output = new Vx.Web.Htmldoc.Class_string_from_id();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
         "string<-id", // name
         0, // idx
@@ -1062,14 +1111,17 @@ public static class Htmldoc {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_id;
+      Vx.Core.Type_any output = Vx.Web.Htmldoc.e_string_from_id;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_id;
+      Vx.Core.Type_any output = Vx.Web.Htmldoc.t_string_from_id;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -1097,8 +1149,8 @@ public static class Htmldoc {
 
   }
 
-  public static Func_string_from_id e_string_from_id = new Vx.Web.Htmldoc.Class_string_from_id();
-  public static Func_string_from_id t_string_from_id = new Vx.Web.Htmldoc.Class_string_from_id();
+  public static Vx.Web.Htmldoc.Func_string_from_id e_string_from_id = new Vx.Web.Htmldoc.Class_string_from_id();
+  public static Vx.Web.Htmldoc.Func_string_from_id t_string_from_id = new Vx.Web.Htmldoc.Class_string_from_id();
 
   public static Vx.Core.Type_string f_string_from_id(Vx.Core.Type_string id) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -1119,21 +1171,22 @@ public static class Htmldoc {
   public class Class_string_from_stylesheet : Vx.Core.Class_base, Func_string_from_stylesheet {
 
     public override Vx.Web.Htmldoc.Func_string_from_stylesheet vx_new(params object[] vals) {
-      Class_string_from_stylesheet output = new Class_string_from_stylesheet();
+      Vx.Web.Htmldoc.Class_string_from_stylesheet output = new Vx.Web.Htmldoc.Class_string_from_stylesheet();
       return output;
     }
 
-    public override Vx.Web.Htmldoc.Func_string_from_stylesheet vx_copy(params object[] vals) {
-      Class_string_from_stylesheet output = new Class_string_from_stylesheet();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Htmldoc.Class_string_from_stylesheet output = new Vx.Web.Htmldoc.Class_string_from_stylesheet();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
         "string<-stylesheet", // name
         0, // idx
@@ -1152,14 +1205,17 @@ public static class Htmldoc {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_stylesheet;
+      Vx.Core.Type_any output = Vx.Web.Htmldoc.e_string_from_stylesheet;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_stylesheet;
+      Vx.Core.Type_any output = Vx.Web.Htmldoc.t_string_from_stylesheet;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -1187,8 +1243,8 @@ public static class Htmldoc {
 
   }
 
-  public static Func_string_from_stylesheet e_string_from_stylesheet = new Vx.Web.Htmldoc.Class_string_from_stylesheet();
-  public static Func_string_from_stylesheet t_string_from_stylesheet = new Vx.Web.Htmldoc.Class_string_from_stylesheet();
+  public static Vx.Web.Htmldoc.Func_string_from_stylesheet e_string_from_stylesheet = new Vx.Web.Htmldoc.Class_string_from_stylesheet();
+  public static Vx.Web.Htmldoc.Func_string_from_stylesheet t_string_from_stylesheet = new Vx.Web.Htmldoc.Class_string_from_stylesheet();
 
   public static Vx.Core.Type_string f_string_from_stylesheet(Vx.Web.Html.Type_stylesheet stylesheet) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -1218,21 +1274,22 @@ public static class Htmldoc {
   public class Class_ui_readstate_from_uid : Vx.Core.Class_base, Func_ui_readstate_from_uid {
 
     public override Vx.Web.Htmldoc.Func_ui_readstate_from_uid vx_new(params object[] vals) {
-      Class_ui_readstate_from_uid output = new Class_ui_readstate_from_uid();
+      Vx.Web.Htmldoc.Class_ui_readstate_from_uid output = new Vx.Web.Htmldoc.Class_ui_readstate_from_uid();
       return output;
     }
 
-    public override Vx.Web.Htmldoc.Func_ui_readstate_from_uid vx_copy(params object[] vals) {
-      Class_ui_readstate_from_uid output = new Class_ui_readstate_from_uid();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Htmldoc.Class_ui_readstate_from_uid output = new Vx.Web.Htmldoc.Class_ui_readstate_from_uid();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/htmldoc", // pkgname
         "ui-readstate<-uid", // name
         0, // idx
@@ -1251,14 +1308,17 @@ public static class Htmldoc {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_ui_readstate_from_uid;
+      Vx.Core.Type_any output = Vx.Web.Htmldoc.e_ui_readstate_from_uid;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_ui_readstate_from_uid;
+      Vx.Core.Type_any output = Vx.Web.Htmldoc.t_ui_readstate_from_uid;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -1286,8 +1346,8 @@ public static class Htmldoc {
 
   }
 
-  public static Func_ui_readstate_from_uid e_ui_readstate_from_uid = new Vx.Web.Htmldoc.Class_ui_readstate_from_uid();
-  public static Func_ui_readstate_from_uid t_ui_readstate_from_uid = new Vx.Web.Htmldoc.Class_ui_readstate_from_uid();
+  public static Vx.Web.Htmldoc.Func_ui_readstate_from_uid e_ui_readstate_from_uid = new Vx.Web.Htmldoc.Class_ui_readstate_from_uid();
+  public static Vx.Web.Htmldoc.Func_ui_readstate_from_uid t_ui_readstate_from_uid = new Vx.Web.Htmldoc.Class_ui_readstate_from_uid();
 
   public static Vx.Core.Type_any f_ui_readstate_from_uid(Vx.Core.Type_string uid) {
     Vx.Core.Type_any output = Vx.Core.e_any;

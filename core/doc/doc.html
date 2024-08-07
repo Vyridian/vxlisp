@@ -3087,7 +3087,7 @@
                 <div class="tr">
                   <div class="td">srckotlin</div>
                   <div class="td">:source</div>
-                  <div class="td">../kotlin/app/src/main/kotlin/app</div>
+                  <div class="td">../kotlin/app/src/main/kotlin</div>
                   <div class="td">:kotlin</div>
                   <div class="td">vx/core/main</div>
                   <div class="td">vx/translation/en/context-en</div>
@@ -3097,7 +3097,7 @@
                 <div class="tr">
                   <div class="td">testkotlin</div>
                   <div class="td">:test</div>
-                  <div class="td">../kotlin/app/src/test/kotlin/app</div>
+                  <div class="td">../kotlin/app/src/test/kotlin</div>
                   <div class="td">:kotlin</div>
                   <div class="td"></div>
                   <div class="td">vx/translation/en/context-test</div>
@@ -3249,14 +3249,14 @@
   (cmd srckotlin
    :code    :source
    :lang    :kotlin
-   :path    ../kotlin/app/src/main/kotlin/app
+   :path    ../kotlin/app/src/main/kotlin
    :main    vx/core/main
    :context vx/translation/en/context-en
    :doc     &quot;Build Kotlin Source Code&quot;)
   (cmd testkotlin
    :code    :test
    :lang    :kotlin
-   :path    ../kotlin/app/src/test/kotlin/app
+   :path    ../kotlin/app/src/test/kotlin
    :context vx/translation/en/context-test
    :doc     &quot;Build Kotlin Test Code&quot;)
   (cmd srcswift
@@ -3421,12 +3421,23 @@
     &quot;internal bool vxboolean = false;
 
      // :implements
-     public bool vx_boolean() {return vxboolean;}&quot;
+     public bool vx_boolean() {
+       return vxboolean;
+     }&quot;
    :java
     &quot;protected boolean vxboolean = false;
 
      @Override
-     public boolean vx_boolean() {return vxboolean;}&quot;)
+     public boolean vx_boolean() {
+       return vxboolean;
+     }&quot;
+   :kotlin
+    &quot;internal val vxboolean : Boolean = false
+
+     // :implements
+     override fun vx_boolean() : Boolean {
+       return vxboolean;
+     }&quot;)
  :test (test-true true)
        (test-false false)
        (test-true (boolean true))
@@ -3500,7 +3511,9 @@
      }
 
      // :implements
-     public string vx_string() {return vxdecimal;}
+     public string vx_string() {
+       return vxdecimal;
+     }
 
      // :implements
      public Type_decimal vx_new_from_string(string sval) {
@@ -3517,7 +3530,9 @@
      }
 
      @Override
-     public String vx_string() {return vxdecimal;}
+     public String vx_string() {
+       return vxdecimal;
+     }
 
      @Override
      public Type_decimal vx_new_from_string(final String sval) {
@@ -3543,12 +3558,23 @@
     &quot;internal float vxfloat = 0;
 
      // :implements
-     public float vx_float() {return vxfloat;}&quot;
+     public float vx_float() {
+       return vxfloat;
+     }&quot;
    :java
     &quot;protected float vxfloat = 0;
 
      @Override
-     public float vx_float() {return vxfloat;}&quot;)
+     public float vx_float() {
+       return vxfloat;
+     }&quot;
+   :kotlin
+    &quot;internal val vxfloat : float = 0
+
+     // :implements
+     override fun float vx_float() {
+       return vxfloat
+     }&quot;)
  :test (test 4.5 (float 4.5))
  :doc  &quot;Standard Floating Point Number&quot;)
 
@@ -3607,12 +3633,23 @@
     &quot;internal int vxint = 0;
 
      // :implements
-     public int vx_int() {return vxint;}&quot;
+     public int vx_int() {
+       return vxint;
+     }&quot;
    :java
     &quot;protected int vxint = 0;
 
      @Override
-     public int vx_int() {return vxint;}&quot;)
+     public int vx_int() {
+       return vxint;
+     }&quot;
+   :kotlin
+    &quot;internal val vxint : int = 0
+
+     // :implements
+     override fun vx_int() : int {
+       return vxint
+     }&quot;)
  :test (test-true  (is-int 4))
        (test-true  (is-int &quot;4&quot;))
        (test-true  (is-int infinity))
@@ -3854,6 +3891,13 @@
      @Override
      public String vx_string() {
        return vxstring;
+     }&quot;
+   :kotlin
+    &quot;internal var vxstring : String = “”
+
+     // :implements
+     override fun vx_string() : String {
+       return vxstring
      }&quot;)
  :test (test &quot;a&quot; (string &quot;a&quot;))
        (test &quot;ab&quot; (string &quot;a&quot; &quot;b&quot;))
@@ -4375,7 +4419,10 @@
    &quot;boolean isequal = Core.vx_eqeq(val1, val2);
     output = Core.vx_new_boolean(isequal);&quot;
   :js
-   &quot;output = val1 == val2&quot;)
+   &quot;output = val1 == val2&quot;
+  :kotlin
+   &quot;val isequal : Boolean = vx_core.vx_eqeq(val1, val2)
+    output = vx_core.vx_new_boolean(isequal)&quot;)
  :alias &quot;eqeq&quot;
  :test (test-true (== 0 0))
        (test-true (== &quot;&quot; &quot;&quot;))
@@ -4387,7 +4434,8 @@
   :cpp    &quot;vx_core::vx_new_boolean(!val-&gt;vx_boolean());&quot;
   :csharp &quot;Vx.Core.vx_new_boolean(!val.vx_boolean());&quot;
   :java   &quot;Core.vx_new_boolean(!val.vx_boolean());&quot;
-  :js     &quot;!val&quot;)
+  :js     &quot;!val&quot;
+  :kotlin &quot;vx_core.vx_new_boolean(!val.vx_boolean())&quot;)
  :alias &quot;not&quot;
  :test (test-false false)
        (test-false (! true))
@@ -4560,7 +4608,9 @@
   :java
    &quot;vtypedef.allowtypes();&quot;
   :js
-   &quot;vtypedef['vx_value']['allowtypes']&quot;)
+   &quot;vtypedef['vx_value']['allowtypes']&quot;
+  :kotlin
+   &quot;vtypedef.allowtypes()&quot;)
  :doc &quot;Return allow type list from type&quot;)
 
 (func and : boolean
@@ -4590,6 +4640,12 @@
       output = true
     } else {
       output = false
+    }&quot;
+  :kotlin
+   &quot;if (val1.vx_boolean() &amp;&amp; val2.vx_boolean()) {
+      output = vx_core.c_true
+    } else {
+      output = vx_core.c_false
     }&quot;)
  :test (test-true
         (and true true))
@@ -4632,7 +4688,10 @@
    &quot;@SuppressWarnings(“unchecked”)
     output = (T)value;&quot;
   :js
-   &quot;value&quot;)
+   &quot;value&quot;
+  :kotlin
+   &quot;@Suppress(“UNCHECKED_CAST”)
+    output = value as T&quot;)
  :doc &quot;Function Type taking any value any-2 and returning generic any-1&quot;)
 
 (func any&lt;-any-async : any-1
@@ -4649,7 +4708,11 @@
     }&quot;
   :java
    &quot;@SuppressWarnings(“unchecked”)
-    output = (T)value;&quot;)
+    output = (T)value;&quot;
+  :kotlin
+   &quot;if (value is T) {
+      output = (value as T)
+    }&quot;)
  :context
  :doc &quot;Function Type taking any value any-2 and returning generic any-1 using context&quot;)
 
@@ -4725,6 +4788,14 @@
   :js
    &quot;if (index &lt;= values.length) {
       output = values[index - 1]
+    }&quot;
+  :kotlin
+   &quot;val intindex : int = index.vx_int()
+    val intsize : int = values.vx_list().size()
+    if (intindex &lt;= intsize) {
+      val listvalue : List&lt;vx_core.Type_any&gt; = values.vx_list()
+      val value : vx_core.Type_any = listvalue.get(intindex - 1)
+      output = vx_core.f_any_from_any(generic_any_1, value)
     }&quot;)
  :test (test
         &quot;b&quot;
@@ -4749,7 +4820,7 @@
     };
     output = vx_core::vx_any_from_any(generic_any_1, work);&quot;
   :csharp :auto
-  :java :auto
+  :java   :auto
   :js
    &quot;output = valstart
     const fn = fn_reduce['vx_value']
@@ -4757,7 +4828,8 @@
       for (const item of list) {
         output = fn(output, item)
       }
-    }&quot;)
+    }&quot;
+  :kotlin :auto)
  :test (test
         24
         (any&lt;-list-start-reduce : int
@@ -4827,7 +4899,9 @@
     let val = mapval[key]
     if (val != undefined) {
       output = val
-    }&quot;)
+    }&quot;
+  :kotlin
+   &quot;vx_core.vx_any_from_map(generic_any_1, valuemap, key)&quot;)
  :test (test
         &quot;v2&quot;
         (any&lt;-map
@@ -4872,7 +4946,8 @@
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         &quot;xayb&quot;
         (any&lt;-map-start-reduce
@@ -4938,7 +5013,10 @@
       if (val != undefined) {
         output = val
       }
-    }&quot;)
+    }&quot;
+  :kotlin
+   &quot;val value : vx_core.Type_any = vstruct.vx_any(key)
+    output = vx_core.f_any_from_any(generic_any_1, value);&quot;)
  :doc &quot;Returns value from a struct&quot;)
 
 (func async : any-1 :async
@@ -4949,7 +5027,9 @@
   :java
    &quot;output = Core.vx_async_new_from_value(value);&quot;
   :js
-   &quot;value&quot;)
+   &quot;value&quot;
+  :kotlin
+   &quot;output = vx_core.vx_async_new_from_value(value)&quot;)
  :doc &quot;Returns an asynchonous version value. This exists mostly for type-casting.&quot;)
 
 (func boolean&lt;-any : boolean
@@ -4981,7 +5061,8 @@
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         (stringmutablemap
          :b &quot;y&quot;
@@ -5064,7 +5145,8 @@
       output = -1
     } else {
       output = 1
-    }&quot;)
+    }&quot;
+  :kotlin :auto)
  :test (test 1 (compare 3 2))
        (test 1 (compare &quot;z&quot; &quot;a&quot;))
  :doc &quot;Returns 0 if vals are equal, 1 if val1 &gt; val2, -1 if val1 &lt; val2&quot;)
@@ -5080,10 +5162,17 @@
    &quot;bool check = vx_boolean_from_string_find(text.vx_string(), find.vx_string());
     output = Vx.Core.vx_new_boolean(check);&quot;
   :java
-   &quot;boolean check = vx_boolean_from_string_find(text.vx_string(), find.vx_string());
+   &quot;boolean check = vx_boolean_from_string_find(
+      text.vx_string(),
+      find.vx_string());
     output = Core.vx_new_boolean(check);&quot;
   :js
-   &quot;vx_core.vx_boolean_from_string_find(text, find)&quot;)
+   &quot;vx_core.vx_boolean_from_string_find(text, find)&quot;
+  :kotlin
+   &quot;val check : Boolean = vx_boolean_from_string_find(
+      text.vx_string(),
+      find.vx_string())
+    output = vx_core.vx_new_boolean(check)&quot;)
  :test (test-true  (contains &quot;abcde&quot; &quot;cd&quot;))
        (test-false (contains &quot;abcde&quot; &quot;dc&quot;))
  :doc  &quot;Returns true if the given list contains the given value.&quot;)
@@ -5116,7 +5205,8 @@
     }
     output = Core.vx_new_boolean(booleanresult);&quot;
   :js
-   &quot;values.includes(find)&quot;)
+   &quot;values.includes(find)&quot;
+  :kotlin :auto)
  :test (test-true
         (contains (stringlist &quot;1&quot; &quot;2&quot; &quot;3&quot;) &quot;2&quot;))
        (test-true
@@ -5144,11 +5234,17 @@
     T output = (T)anyvalue;&quot;
   :java
    &quot;@SuppressWarnings(“unchecked”)
-    Core.Type_any[] arrayany = Core.arrayany_from_anylist(values);
+    Core.Type_any[] arrayany = Core.arrayany_from_anylist(
+      values);
     Object[] arrayobj = (Core.Type_any[])arrayany;
     T output = (T)(value.vx_copy(arrayobj));&quot;
   :js
-   &quot;vx_core.f_new(value, ...values)&quot;)
+   &quot;vx_core.f_new(value, ...values)&quot;
+  :kotlin
+   &quot;val arrayany : vx_core.Type_any[] = vx_core.arrayany_from_anylist(
+      values)
+    val arrayobj : Any[] = arrayany as vx_core.Type_any[]
+    T output = (T)(value.vx_copy(arrayobj))&quot;)
  :bigospace :n
  :bigotime :n
  :test (test
@@ -5176,7 +5272,9 @@
   :java
    &quot;T output = Core.vx_empty(type);&quot;
   :js
-   &quot;vx_core.vx_empty(type)&quot;)
+   &quot;vx_core.vx_empty(type)&quot;
+  :kotlin
+   &quot;val output : T = vx_core.vx_empty(type)&quot;)
  :test (test false  (empty boolean))
        (test &quot;&quot;     (empty string))
        (test (list) (empty list))
@@ -5242,6 +5340,14 @@
           break
         }
       }
+    }&quot;
+  :kotlin
+   &quot;val listvalue : List&lt;vx_core.Type_any&gt; = values.vx_list()
+    for (value : vx_core.Type_any in listvalue) {
+      if (value != vx_core.c_nothing) {
+        output = fn_any_from_any.vx_any_from_any(generic_any_1, value)
+        break
+      }
     }&quot;)
  :doc &quot;Returns first value that is not nothing&quot;
  :test (test
@@ -5263,7 +5369,10 @@
    &quot;float num = Core.vx_float_from_string(text.vx_string());
     output = Core.vx_new_float(num);&quot;
   :js
-   &quot;vx_core.vx_float_from_string(text);&quot;)
+   &quot;vx_core.vx_float_from_string(text);&quot;
+  :kotlin
+   &quot;val num : float = vx_core.vx_float_from_string(text.vx_string())
+    output = vx_core.vx_new_float(num)&quot;)
  :test (test
         (float 2.3)
         (float&lt;-string
@@ -5283,7 +5392,9 @@
   :csharp
    &quot;val.vx_funcdef();&quot;
   :java
-   &quot;val.vx_funcdef();&quot;)
+   &quot;val.vx_funcdef();&quot;
+  :kotlin
+   &quot;val.vx_funcdef()&quot;)
  :doc &quot;Returns the definition of a function&quot;)
 
 (func funcname&lt;-funcdef : string
@@ -5309,6 +5420,10 @@
     }&quot;
   :js
    &quot;if (clause) {
+      output = then
+    }&quot;
+  :kotlin
+   &quot;if (clause.vx_boolean()) {
       output = then
     }&quot;)
  :test (test
@@ -5346,6 +5461,12 @@
     }&quot;
   :js
    &quot;if (clause) {
+      output = thenval
+    } else {
+      output = elseval
+    }&quot;
+  :kotlin
+   &quot;if (clause.vx_boolean()) {
       output = thenval
     } else {
       output = elseval
@@ -5395,7 +5516,8 @@
         output = fn()
         break
       }
-    }&quot;)
+    }&quot;
+  :kotlin :auto)
  :doc  &quot;Logical If function&quot;
  :test (test-true
         (if
@@ -5478,6 +5600,10 @@
   :js
    &quot;if (text.length == 0) {
       output = vx_core.c_true
+    }&quot;
+  :kotlin
+   &quot;if (text.vx_string().Length == 0) {
+      output = vx_core.c_true
     }&quot;)
  :doc &quot;Returns true if text is empty.&quot;)
 
@@ -5503,6 +5629,12 @@
   :js
    &quot;const type = vx_core.f_type_from_any(value)
     if (value == vx_core.f_empty(type)) {
+      output = vx_core.c_true
+    } else {
+      output = vx_core.c_false
+    }&quot;
+  :kotlin
+   &quot;if (value == value.vx_empty()) {
       output = vx_core.c_true
     } else {
       output = vx_core.c_false
@@ -5538,6 +5670,12 @@
   :js
    &quot;if (text.endsWith(find)) {
       output = vx_core.c_true
+    }&quot;
+  :kotlin
+   &quot;val stext : String = text.vx_string()
+    val sfind : String = find.vx_string()
+    if (stext.endsWith(sfind)) {
+      output = vx_core.c_true
     }&quot;)
  :doc &quot;Returns true if text ends with find.&quot;)
 
@@ -5563,6 +5701,10 @@
    &quot;const extend = &quot; (extends&lt;-any val) &quot;
     if (extend == ':func') {
       output = vx_core.c_true
+    }&quot;
+  :kotlin
+   &quot;if (val is vx_core.Type_func) {
+      output = vx_core.c_true
     }&quot;)
  :doc &quot;Returns true if val is a function.&quot;)
 
@@ -5578,7 +5720,10 @@
   :java
    &quot;boolean result = Core.vx_is_int(value);
     output = Core.vx_new_boolean(result);&quot;
-  :js &quot;vx_core.vx_is_int(value)&quot;)
+  :js &quot;vx_core.vx_is_int(value)&quot;
+  :kotlin
+   &quot;val result : boolean = vx_core.vx_is_int(value)
+    output = vx_core.vx_new_boolean(result)&quot;)
  :test (test-true
         (is-int 2))
        (test-true
@@ -5601,7 +5746,10 @@
   :java
    &quot;boolean result = Core.vx_is_float(value);
     output = Core.vx_new_boolean(result);&quot;
-  :js &quot;vx_core.vx_is_float(value)&quot;)
+  :js &quot;vx_core.vx_is_float(value)&quot;
+  :kotlin
+   &quot;val result : Boolean = vx_core.vx_is_float(value)
+    output = vx_core.vx_new_boolean(result)&quot;)
  :doc &quot;Returns true if the value is a float.&quot;)
 
 (func is-number : boolean
@@ -5654,7 +5802,10 @@
    &quot;int len = text.vx_string().length();
     output = Core.vx_new_int(len);&quot;
   :js
-   &quot;text.length&quot;)
+   &quot;text.length&quot;
+  :kotlin
+   &quot;val len : int = text.vx_string().length()
+    output = vx_core.vx_new_int(len)&quot;)
  :test (test
         4
         (length &quot;abcd&quot;))
@@ -5677,7 +5828,10 @@
   :java
    &quot;int intresult = values.vx_list().size();
     output = Core.vx_new_int(intresult);&quot;
-  :js &quot;values.length&quot;)
+  :js &quot;values.length&quot;
+  :kotlin
+   &quot;val intresult : int = values.vx_list().size()
+    output = vx_core.vx_new_int(intresult)&quot;)
  :test (test
         3
         (length
@@ -5705,7 +5859,9 @@
    &quot;const fn = fn_any['vx_value']
     if (fn) {
       output = fn()
-    }&quot;)
+    }&quot;
+  :kotlin
+   &quot;fn_any.vx_any_from_func(generic_any_1)&quot;)
  :test (test
         7
         (let
@@ -5727,7 +5883,9 @@
    &quot;const fn = fn_any_async['vx_value']
     if (fn) {
       output = await fn()
-    }&quot;)
+    }&quot;
+  :kotlin
+   &quot;fn_any_async.vx_any_from_func_async(generic_any_1)&quot;)
  :doc &quot;Same as normal let but returns async values.&quot;)
 
 (func list&lt;-list : list-1
@@ -5766,7 +5924,8 @@
     if (fn) {
       output = values.map(fn)
       output['vx_type'] = generic_list_1
-    }&quot;)
+    }&quot;
+  :kotlin :auto)
  :doc &quot;Returns a list of processed items from another list&quot;)
 
 (func list&lt;-list-async  : list-1 :async
@@ -5788,7 +5947,8 @@
       const future = Promise.all(listfuture)
       output = await future
       output['vx_type'] = generic_list_1
-    }&quot;)
+    }&quot;
+  :kotlin :auto)
  :doc &quot;Returns an asynchronous list of the processed asynchronous items from another list&quot;)
 
 (func list&lt;-list-intany : list-1
@@ -5798,7 +5958,8 @@
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         (stringlist &quot;a1&quot; &quot;b2&quot;)
         (list&lt;-list-intany : stringlist
@@ -5839,7 +6000,8 @@
     });
     output = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(listresult));&quot;
   :js
-   &quot;vx_core.vx_list_from_map_fn(generic_list_1, valuemap, fn_any_from_key_value)&quot;)
+   &quot;vx_core.vx_list_from_map_fn(generic_list_1, valuemap, fn_any_from_key_value)&quot;
+  :kotlin :auto)
  :test (test
         (stringlist &quot;a1&quot; &quot;b2&quot;)
         (list&lt;-map : stringlist
@@ -5903,7 +6065,8 @@
       const listoflist = values.map(fn)
       output = listoflist.flat()
       output['vx_type'] = generic_list_1
-    }&quot;)
+    }&quot;
+  :kotlin :auto)
  :test (test
         (stringlist &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot;)
         (list-join&lt;-list : stringlist
@@ -5925,13 +6088,14 @@
    &quot;Vx.Core.vx_log(value);
     output = value;&quot;
   :java
-   &quot;Core.Type_string stringtext = Core.f_string_from_any(value);
-    String text = stringtext.vx_string();
-    System.out.println(text);
+   &quot;Core.vx_log(value);
     output = value;&quot;
   :js
    &quot;const text = vx_core.f_string_from_any(value)
     console.log(text)
+    output = value&quot;
+  :kotlin
+   &quot;vx_core.vx_log(value)
     output = value&quot;)
  :doc &quot;Writes a value to the console.&quot;)
 
@@ -5955,6 +6119,10 @@
    &quot;console.log(text)
     const svalue = vx_core.f_string_from_any(value)
     console.log(svalue)
+    output = value&quot;
+  :kotlin
+   &quot;vx_core.vx_log(text)
+    vx_core.vx_log(value)
     output = value&quot;)
  :doc &quot;Writes a string and a value to the console.&quot;)
 
@@ -5990,7 +6158,8 @@
     output = {
       vx_type: generic_map_1,
       vx_value: valmap
-    }&quot;)
+    }&quot;
+  :kotlin :auto)
  :test (test
         (stringmap
          &quot;keya&quot; &quot;a&quot;
@@ -6026,9 +6195,17 @@
   :csharp
    &quot;Vx.Core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value);&quot;
   :java
-   &quot;Core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value);&quot;
+   &quot;Core.vx_map_from_map_fn(
+      generic_map_1,
+      valuemap,
+      fn_any_from_key_value);&quot;
   :js
-   &quot;vx_core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value)&quot;)
+   &quot;vx_core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value)&quot;
+  :kotlin
+   &quot;vx_core.vx_map_from_map_fn(
+      generic_map_1,
+      valuemap,
+      fn_any_from_key_value)&quot;)
  :test (test
         (stringmap
          :a &quot;a1&quot;
@@ -6042,89 +6219,6 @@
            val : string]
           (string key val))))
  :doc &quot;Returns a map from a map by applying a function to each key value.&quot;)
-
-/*
-(func mempool-addref : none
- [values : anylist :...]
- (native
-  :js
-   &quot;for (const value of values) {
-      const value = values[i]
-      if (value.refs) {
-        value.refs += 1
-      }
-    }&quot;)
- :doc &quot;Add Value Reference&quot;)
-
-(func mempool-reserve : value
- []
- (native
-  :js
-   &quot;mempool = &quot; mempool-active &quot;
-    output = mempool.valuepool
-    if (output == null) {
-      output = {
-        refs: 0
-      }
-    } else {
-      const next = output.next
-      if (next == null) {
-        mempool.valuepool = null
-      } else {
-        mempool.valuepool = next
-        output.next = null
-      }
-    }&quot;)
- :doc &quot;Returns a recycled Value or creates a new one.&quot;)
-
-(func mempool-release : none
- [value : value]
- (native
-  :js
-   &quot;const mempool = &quot; mempool-active &quot;
-    value.length = 0
-    for (const key in value) {
-      delete value[key]
-    }
-    next = mempool.valuepool
-    value.next = next
-    mempool.valuepool = value&quot;)
- :doc &quot;Recycles a Value and adds it to the valuepool.&quot;)
-
-(func mempool-removeref : none
- [values : anylist :...]
- (native
-  :js
-   &quot;for (const value of values) {
-      const value = values[i]
-      if (value.refs) {
-        value.refs -= 1
-        if (value.refs == 0) {
-          vx_core.f_mempool_removerefchildren(value)
-          vx_core.f_mempool_recyclevalue(value)
-        }
-      }
-    }&quot;)
- :doc &quot;Remove Value Reference&quot;)
-
-(func mempool-removerefchildren : none
- [values : anylist :...]
- (native
-  :js
-   &quot;for (const value of values) {
-      const extend = &quot; (extends&lt;-any value) &quot;
-      switch (extend) {
-      case ':list':
-        vx_core.f_mempool_removeref(...value['vx_value'])
-        break
-      case ':map':
-      case ':struct':
-        vx_core.f_mempool_removeref(...Object.entities(value['vx_value']))
-        break
-      }
-    }&quot;)
- :doc &quot;Remove Value Child References&quot;)
-*/
 
 (func msg&lt;-error : msg
  [error : string]
@@ -6222,7 +6316,12 @@
     Object[] arrayobj = (Core.Type_any[])arrayany;
     T output = (T)(type.vx_new(arrayobj));&quot;
   :js
-   &quot;vx_core.vx_new(type, values)&quot;)
+   &quot;vx_core.vx_new(type, values)&quot;
+  :kotlin
+   &quot;val arrayany : Array&lt;vx_core.Type_any&gt; = vx_core.arrayany_from_anylist(values)
+    val arrayobj : Array&lt;Any&gt; = arrayany as (Array&lt;Any&gt;)
+    val anyvalue : vx_core.Type_any = type.vx_new(arrayobj)
+    val output : T = (anyvalue) as T&quot;)
  :doc &quot;Create a new Value of Type A&quot;
  :test (test true (new boolean true))
        (test 4 (new int 4))
@@ -7302,12 +7401,23 @@
     &quot;internal bool vxboolean = false;
 
      // :implements
-     public bool vx_boolean() {return vxboolean;}&quot;
+     public bool vx_boolean() {
+       return vxboolean;
+     }&quot;
    :java
     &quot;protected boolean vxboolean = false;
 
      @Override
-     public boolean vx_boolean() {return vxboolean;}&quot;)
+     public boolean vx_boolean() {
+       return vxboolean;
+     }&quot;
+   :kotlin
+    &quot;internal val vxboolean : Boolean = false
+
+     // :implements
+     override fun vx_boolean() : Boolean {
+       return vxboolean;
+     }&quot;)
  :test (test-true true)
        (test-false false)
        (test-true (boolean true))
@@ -8051,7 +8161,9 @@
      }
 
      // :implements
-     public string vx_string() {return vxdecimal;}
+     public string vx_string() {
+       return vxdecimal;
+     }
 
      // :implements
      public Type_decimal vx_new_from_string(string sval) {
@@ -8068,7 +8180,9 @@
      }
 
      @Override
-     public String vx_string() {return vxdecimal;}
+     public String vx_string() {
+       return vxdecimal;
+     }
 
      @Override
      public Type_decimal vx_new_from_string(final String sval) {
@@ -8179,12 +8293,23 @@
     &quot;internal float vxfloat = 0;
 
      // :implements
-     public float vx_float() {return vxfloat;}&quot;
+     public float vx_float() {
+       return vxfloat;
+     }&quot;
    :java
     &quot;protected float vxfloat = 0;
 
      @Override
-     public float vx_float() {return vxfloat;}&quot;)
+     public float vx_float() {
+       return vxfloat;
+     }&quot;
+   :kotlin
+    &quot;internal val vxfloat : float = 0
+
+     // :implements
+     override fun float vx_float() {
+       return vxfloat
+     }&quot;)
  :test (test 4.5 (float 4.5))
  :doc  &quot;Standard Floating Point Number&quot;)</div>
                 </li>
@@ -8530,12 +8655,23 @@
     &quot;internal int vxint = 0;
 
      // :implements
-     public int vx_int() {return vxint;}&quot;
+     public int vx_int() {
+       return vxint;
+     }&quot;
    :java
     &quot;protected int vxint = 0;
 
      @Override
-     public int vx_int() {return vxint;}&quot;)
+     public int vx_int() {
+       return vxint;
+     }&quot;
+   :kotlin
+    &quot;internal val vxint : int = 0
+
+     // :implements
+     override fun vx_int() : int {
+       return vxint
+     }&quot;)
  :test (test-true  (is-int 4))
        (test-true  (is-int &quot;4&quot;))
        (test-true  (is-int infinity))
@@ -10524,6 +10660,13 @@
      @Override
      public String vx_string() {
        return vxstring;
+     }&quot;
+   :kotlin
+    &quot;internal var vxstring : String = “”
+
+     // :implements
+     override fun vx_string() : String {
+       return vxstring
      }&quot;)
  :test (test &quot;a&quot; (string &quot;a&quot;))
        (test &quot;ab&quot; (string &quot;a&quot; &quot;b&quot;))
@@ -13764,7 +13907,10 @@
    &quot;boolean isequal = Core.vx_eqeq(val1, val2);
     output = Core.vx_new_boolean(isequal);&quot;
   :js
-   &quot;output = val1 == val2&quot;)
+   &quot;output = val1 == val2&quot;
+  :kotlin
+   &quot;val isequal : Boolean = vx_core.vx_eqeq(val1, val2)
+    output = vx_core.vx_new_boolean(isequal)&quot;)
  :alias &quot;eqeq&quot;
  :test (test-true (== 0 0))
        (test-true (== &quot;&quot; &quot;&quot;))
@@ -13836,7 +13982,8 @@
   :cpp    &quot;vx_core::vx_new_boolean(!val-&gt;vx_boolean());&quot;
   :csharp &quot;Vx.Core.vx_new_boolean(!val.vx_boolean());&quot;
   :java   &quot;Core.vx_new_boolean(!val.vx_boolean());&quot;
-  :js     &quot;!val&quot;)
+  :js     &quot;!val&quot;
+  :kotlin &quot;vx_core.vx_new_boolean(!val.vx_boolean())&quot;)
  :alias &quot;not&quot;
  :test (test-false false)
        (test-false (! true))
@@ -15070,7 +15217,9 @@ improves readability.</div>
   :java
    &quot;vtypedef.allowtypes();&quot;
   :js
-   &quot;vtypedef['vx_value']['allowtypes']&quot;)
+   &quot;vtypedef['vx_value']['allowtypes']&quot;
+  :kotlin
+   &quot;vtypedef.allowtypes()&quot;)
  :doc &quot;Return allow type list from type&quot;)</div>
                 </li>
               </ul>
@@ -15167,6 +15316,12 @@ improves readability.</div>
       output = true
     } else {
       output = false
+    }&quot;
+  :kotlin
+   &quot;if (val1.vx_boolean() &amp;&amp; val2.vx_boolean()) {
+      output = vx_core.c_true
+    } else {
+      output = vx_core.c_false
     }&quot;)
  :test (test-true
         (and true true))
@@ -15329,7 +15484,10 @@ improves readability.</div>
    &quot;@SuppressWarnings(“unchecked”)
     output = (T)value;&quot;
   :js
-   &quot;value&quot;)
+   &quot;value&quot;
+  :kotlin
+   &quot;@Suppress(“UNCHECKED_CAST”)
+    output = value as T&quot;)
  :doc &quot;Function Type taking any value any-2 and returning generic any-1&quot;)</div>
                 </li>
               </ul>
@@ -15462,7 +15620,11 @@ improves readability.</div>
     }&quot;
   :java
    &quot;@SuppressWarnings(“unchecked”)
-    output = (T)value;&quot;)
+    output = (T)value;&quot;
+  :kotlin
+   &quot;if (value is T) {
+      output = (value as T)
+    }&quot;)
  :context
  :doc &quot;Function Type taking any value any-2 and returning generic any-1 using context&quot;)</div>
                 </li>
@@ -16088,6 +16250,14 @@ improves readability.</div>
   :js
    &quot;if (index &lt;= values.length) {
       output = values[index - 1]
+    }&quot;
+  :kotlin
+   &quot;val intindex : int = index.vx_int()
+    val intsize : int = values.vx_list().size()
+    if (intindex &lt;= intsize) {
+      val listvalue : List&lt;vx_core.Type_any&gt; = values.vx_list()
+      val value : vx_core.Type_any = listvalue.get(intindex - 1)
+      output = vx_core.f_any_from_any(generic_any_1, value)
     }&quot;)
  :test (test
         &quot;b&quot;
@@ -16189,7 +16359,7 @@ improves readability.</div>
     };
     output = vx_core::vx_any_from_any(generic_any_1, work);&quot;
   :csharp :auto
-  :java :auto
+  :java   :auto
   :js
    &quot;output = valstart
     const fn = fn_reduce['vx_value']
@@ -16197,7 +16367,8 @@ improves readability.</div>
       for (const item of list) {
         output = fn(output, item)
       }
-    }&quot;)
+    }&quot;
+  :kotlin :auto)
  :test (test
         24
         (any&lt;-list-start-reduce : int
@@ -16406,7 +16577,9 @@ improves readability.</div>
     let val = mapval[key]
     if (val != undefined) {
       output = val
-    }&quot;)
+    }&quot;
+  :kotlin
+   &quot;vx_core.vx_any_from_map(generic_any_1, valuemap, key)&quot;)
  :test (test
         &quot;v2&quot;
         (any&lt;-map
@@ -16507,7 +16680,8 @@ improves readability.</div>
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         &quot;xayb&quot;
         (any&lt;-map-start-reduce
@@ -17004,7 +17178,10 @@ improves readability.</div>
       if (val != undefined) {
         output = val
       }
-    }&quot;)
+    }&quot;
+  :kotlin
+   &quot;val value : vx_core.Type_any = vstruct.vx_any(key)
+    output = vx_core.f_any_from_any(generic_any_1, value);&quot;)
  :doc &quot;Returns value from a struct&quot;)</div>
                 </li>
               </ul>
@@ -17073,7 +17250,9 @@ improves readability.</div>
   :java
    &quot;output = Core.vx_async_new_from_value(value);&quot;
   :js
-   &quot;value&quot;)
+   &quot;value&quot;
+  :kotlin
+   &quot;output = vx_core.vx_async_new_from_value(value)&quot;)
  :doc &quot;Returns an asynchonous version value. This exists mostly for type-casting.&quot;)</div>
                 </li>
               </ul>
@@ -17419,7 +17598,8 @@ improves readability.</div>
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         (stringmutablemap
          :b &quot;y&quot;
@@ -17693,7 +17873,8 @@ improves readability.</div>
       output = -1
     } else {
       output = 1
-    }&quot;)
+    }&quot;
+  :kotlin :auto)
  :test (test 1 (compare 3 2))
        (test 1 (compare &quot;z&quot; &quot;a&quot;))
  :doc &quot;Returns 0 if vals are equal, 1 if val1 &gt; val2, -1 if val1 &lt; val2&quot;)</div>
@@ -17774,10 +17955,17 @@ improves readability.</div>
    &quot;bool check = vx_boolean_from_string_find(text.vx_string(), find.vx_string());
     output = Vx.Core.vx_new_boolean(check);&quot;
   :java
-   &quot;boolean check = vx_boolean_from_string_find(text.vx_string(), find.vx_string());
+   &quot;boolean check = vx_boolean_from_string_find(
+      text.vx_string(),
+      find.vx_string());
     output = Core.vx_new_boolean(check);&quot;
   :js
-   &quot;vx_core.vx_boolean_from_string_find(text, find)&quot;)
+   &quot;vx_core.vx_boolean_from_string_find(text, find)&quot;
+  :kotlin
+   &quot;val check : Boolean = vx_boolean_from_string_find(
+      text.vx_string(),
+      find.vx_string())
+    output = vx_core.vx_new_boolean(check)&quot;)
  :test (test-true  (contains &quot;abcde&quot; &quot;cd&quot;))
        (test-false (contains &quot;abcde&quot; &quot;dc&quot;))
  :doc  &quot;Returns true if the given list contains the given value.&quot;)</div>
@@ -17879,7 +18067,8 @@ improves readability.</div>
     }
     output = Core.vx_new_boolean(booleanresult);&quot;
   :js
-   &quot;values.includes(find)&quot;)
+   &quot;values.includes(find)&quot;
+  :kotlin :auto)
  :test (test-true
         (contains (stringlist &quot;1&quot; &quot;2&quot; &quot;3&quot;) &quot;2&quot;))
        (test-true
@@ -18035,11 +18224,17 @@ improves readability.</div>
     T output = (T)anyvalue;&quot;
   :java
    &quot;@SuppressWarnings(“unchecked”)
-    Core.Type_any[] arrayany = Core.arrayany_from_anylist(values);
+    Core.Type_any[] arrayany = Core.arrayany_from_anylist(
+      values);
     Object[] arrayobj = (Core.Type_any[])arrayany;
     T output = (T)(value.vx_copy(arrayobj));&quot;
   :js
-   &quot;vx_core.f_new(value, ...values)&quot;)
+   &quot;vx_core.f_new(value, ...values)&quot;
+  :kotlin
+   &quot;val arrayany : vx_core.Type_any[] = vx_core.arrayany_from_anylist(
+      values)
+    val arrayobj : Any[] = arrayany as vx_core.Type_any[]
+    T output = (T)(value.vx_copy(arrayobj))&quot;)
  :bigospace :n
  :bigotime :n
  :test (test
@@ -18187,7 +18382,9 @@ improves readability.</div>
   :java
    &quot;T output = Core.vx_empty(type);&quot;
   :js
-   &quot;vx_core.vx_empty(type)&quot;)
+   &quot;vx_core.vx_empty(type)&quot;
+  :kotlin
+   &quot;val output : T = vx_core.vx_empty(type)&quot;)
  :test (test false  (empty boolean))
        (test &quot;&quot;     (empty string))
        (test (list) (empty list))
@@ -18501,6 +18698,14 @@ improves readability.</div>
           break
         }
       }
+    }&quot;
+  :kotlin
+   &quot;val listvalue : List&lt;vx_core.Type_any&gt; = values.vx_list()
+    for (value : vx_core.Type_any in listvalue) {
+      if (value != vx_core.c_nothing) {
+        output = fn_any_from_any.vx_any_from_any(generic_any_1, value)
+        break
+      }
     }&quot;)
  :doc &quot;Returns first value that is not nothing&quot;
  :test (test
@@ -18584,7 +18789,10 @@ improves readability.</div>
    &quot;float num = Core.vx_float_from_string(text.vx_string());
     output = Core.vx_new_float(num);&quot;
   :js
-   &quot;vx_core.vx_float_from_string(text);&quot;)
+   &quot;vx_core.vx_float_from_string(text);&quot;
+  :kotlin
+   &quot;val num : float = vx_core.vx_float_from_string(text.vx_string())
+    output = vx_core.vx_new_float(num)&quot;)
  :test (test
         (float 2.3)
         (float&lt;-string
@@ -18725,7 +18933,9 @@ improves readability.</div>
   :csharp
    &quot;val.vx_funcdef();&quot;
   :java
-   &quot;val.vx_funcdef();&quot;)
+   &quot;val.vx_funcdef();&quot;
+  :kotlin
+   &quot;val.vx_funcdef()&quot;)
  :doc &quot;Returns the definition of a function&quot;)</div>
                 </li>
               </ul>
@@ -18881,6 +19091,10 @@ improves readability.</div>
   :js
    &quot;if (clause) {
       output = then
+    }&quot;
+  :kotlin
+   &quot;if (clause.vx_boolean()) {
+      output = then
     }&quot;)
  :test (test
         &quot;a&quot;
@@ -19000,6 +19214,12 @@ improves readability.</div>
       output = thenval
     } else {
       output = elseval
+    }&quot;
+  :kotlin
+   &quot;if (clause.vx_boolean()) {
+      output = thenval
+    } else {
+      output = elseval
     }&quot;)
  :test (test
         &quot;a&quot;
@@ -19109,7 +19329,8 @@ improves readability.</div>
         output = fn()
         break
       }
-    }&quot;)
+    }&quot;
+  :kotlin :auto)
  :doc  &quot;Logical If function&quot;
  :test (test-true
         (if
@@ -19367,6 +19588,10 @@ improves readability.</div>
   :js
    &quot;if (text.length == 0) {
       output = vx_core.c_true
+    }&quot;
+  :kotlin
+   &quot;if (text.vx_string().Length == 0) {
+      output = vx_core.c_true
     }&quot;)
  :doc &quot;Returns true if text is empty.&quot;)</div>
                 </li>
@@ -19454,6 +19679,12 @@ improves readability.</div>
   :js
    &quot;const type = vx_core.f_type_from_any(value)
     if (value == vx_core.f_empty(type)) {
+      output = vx_core.c_true
+    } else {
+      output = vx_core.c_false
+    }&quot;
+  :kotlin
+   &quot;if (value == value.vx_empty()) {
       output = vx_core.c_true
     } else {
       output = vx_core.c_false
@@ -19552,6 +19783,12 @@ improves readability.</div>
   :js
    &quot;if (text.endsWith(find)) {
       output = vx_core.c_true
+    }&quot;
+  :kotlin
+   &quot;val stext : String = text.vx_string()
+    val sfind : String = find.vx_string()
+    if (stext.endsWith(sfind)) {
+      output = vx_core.c_true
     }&quot;)
  :doc &quot;Returns true if text ends with find.&quot;)</div>
                 </li>
@@ -19635,6 +19872,10 @@ improves readability.</div>
    &quot;const extend = &quot; (extends&lt;-any val) &quot;
     if (extend == ':func') {
       output = vx_core.c_true
+    }&quot;
+  :kotlin
+   &quot;if (val is vx_core.Type_func) {
+      output = vx_core.c_true
     }&quot;)
  :doc &quot;Returns true if val is a function.&quot;)</div>
                 </li>
@@ -19716,7 +19957,10 @@ improves readability.</div>
   :java
    &quot;boolean result = Core.vx_is_int(value);
     output = Core.vx_new_boolean(result);&quot;
-  :js &quot;vx_core.vx_is_int(value)&quot;)
+  :js &quot;vx_core.vx_is_int(value)&quot;
+  :kotlin
+   &quot;val result : boolean = vx_core.vx_is_int(value)
+    output = vx_core.vx_new_boolean(result)&quot;)
  :test (test-true
         (is-int 2))
        (test-true
@@ -19797,7 +20041,10 @@ improves readability.</div>
   :java
    &quot;boolean result = Core.vx_is_float(value);
     output = Core.vx_new_boolean(result);&quot;
-  :js &quot;vx_core.vx_is_float(value)&quot;)
+  :js &quot;vx_core.vx_is_float(value)&quot;
+  :kotlin
+   &quot;val result : Boolean = vx_core.vx_is_float(value)
+    output = vx_core.vx_new_boolean(result)&quot;)
  :doc &quot;Returns true if the value is a float.&quot;)</div>
                 </li>
               </ul>
@@ -20097,7 +20344,10 @@ improves readability.</div>
    &quot;int len = text.vx_string().length();
     output = Core.vx_new_int(len);&quot;
   :js
-   &quot;text.length&quot;)
+   &quot;text.length&quot;
+  :kotlin
+   &quot;val len : int = text.vx_string().length()
+    output = vx_core.vx_new_int(len)&quot;)
  :test (test
         4
         (length &quot;abcd&quot;))
@@ -20182,7 +20432,10 @@ improves readability.</div>
   :java
    &quot;int intresult = values.vx_list().size();
     output = Core.vx_new_int(intresult);&quot;
-  :js &quot;values.length&quot;)
+  :js &quot;values.length&quot;
+  :kotlin
+   &quot;val intresult : int = values.vx_list().size()
+    output = vx_core.vx_new_int(intresult)&quot;)
  :test (test
         3
         (length
@@ -20337,7 +20590,9 @@ improves readability.</div>
    &quot;const fn = fn_any['vx_value']
     if (fn) {
       output = fn()
-    }&quot;)
+    }&quot;
+  :kotlin
+   &quot;fn_any.vx_any_from_func(generic_any_1)&quot;)
  :test (test
         7
         (let
@@ -20422,7 +20677,9 @@ improves readability.</div>
    &quot;const fn = fn_any_async['vx_value']
     if (fn) {
       output = await fn()
-    }&quot;)
+    }&quot;
+  :kotlin
+   &quot;fn_any_async.vx_any_from_func_async(generic_any_1)&quot;)
  :doc &quot;Same as normal let but returns async values.&quot;)</div>
                 </li>
               </ul>
@@ -20586,7 +20843,8 @@ improves readability.</div>
     if (fn) {
       output = values.map(fn)
       output['vx_type'] = generic_list_1
-    }&quot;)
+    }&quot;
+  :kotlin :auto)
  :doc &quot;Returns a list of processed items from another list&quot;)</div>
                 </li>
               </ul>
@@ -20671,7 +20929,8 @@ improves readability.</div>
       const future = Promise.all(listfuture)
       output = await future
       output['vx_type'] = generic_list_1
-    }&quot;)
+    }&quot;
+  :kotlin :auto)
  :doc &quot;Returns an asynchronous list of the processed asynchronous items from another list&quot;)</div>
                 </li>
               </ul>
@@ -20752,7 +21011,8 @@ improves readability.</div>
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         (stringlist &quot;a1&quot; &quot;b2&quot;)
         (list&lt;-list-intany : stringlist
@@ -20928,7 +21188,8 @@ improves readability.</div>
     });
     output = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(listresult));&quot;
   :js
-   &quot;vx_core.vx_list_from_map_fn(generic_list_1, valuemap, fn_any_from_key_value)&quot;)
+   &quot;vx_core.vx_list_from_map_fn(generic_list_1, valuemap, fn_any_from_key_value)&quot;
+  :kotlin :auto)
  :test (test
         (stringlist &quot;a1&quot; &quot;b2&quot;)
         (list&lt;-map : stringlist
@@ -21249,7 +21510,8 @@ improves readability.</div>
       const listoflist = values.map(fn)
       output = listoflist.flat()
       output['vx_type'] = generic_list_1
-    }&quot;)
+    }&quot;
+  :kotlin :auto)
  :test (test
         (stringlist &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot;)
         (list-join&lt;-list : stringlist
@@ -21329,13 +21591,14 @@ improves readability.</div>
    &quot;Vx.Core.vx_log(value);
     output = value;&quot;
   :java
-   &quot;Core.Type_string stringtext = Core.f_string_from_any(value);
-    String text = stringtext.vx_string();
-    System.out.println(text);
+   &quot;Core.vx_log(value);
     output = value;&quot;
   :js
    &quot;const text = vx_core.f_string_from_any(value)
     console.log(text)
+    output = value&quot;
+  :kotlin
+   &quot;vx_core.vx_log(value)
     output = value&quot;)
  :doc &quot;Writes a value to the console.&quot;)</div>
                 </li>
@@ -21422,6 +21685,10 @@ improves readability.</div>
    &quot;console.log(text)
     const svalue = vx_core.f_string_from_any(value)
     console.log(svalue)
+    output = value&quot;
+  :kotlin
+   &quot;vx_core.vx_log(text)
+    vx_core.vx_log(value)
     output = value&quot;)
  :doc &quot;Writes a string and a value to the console.&quot;)</div>
                 </li>
@@ -21587,7 +21854,8 @@ improves readability.</div>
     output = {
       vx_type: generic_map_1,
       vx_value: valmap
-    }&quot;)
+    }&quot;
+  :kotlin :auto)
  :test (test
         (stringmap
          &quot;keya&quot; &quot;a&quot;
@@ -21760,9 +22028,17 @@ improves readability.</div>
   :csharp
    &quot;Vx.Core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value);&quot;
   :java
-   &quot;Core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value);&quot;
+   &quot;Core.vx_map_from_map_fn(
+      generic_map_1,
+      valuemap,
+      fn_any_from_key_value);&quot;
   :js
-   &quot;vx_core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value)&quot;)
+   &quot;vx_core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value)&quot;
+  :kotlin
+   &quot;vx_core.vx_map_from_map_fn(
+      generic_map_1,
+      valuemap,
+      fn_any_from_key_value)&quot;)
  :test (test
         (stringmap
          :a &quot;a1&quot;
@@ -22493,7 +22769,12 @@ improves readability.</div>
     Object[] arrayobj = (Core.Type_any[])arrayany;
     T output = (T)(type.vx_new(arrayobj));&quot;
   :js
-   &quot;vx_core.vx_new(type, values)&quot;)
+   &quot;vx_core.vx_new(type, values)&quot;
+  :kotlin
+   &quot;val arrayany : Array&lt;vx_core.Type_any&gt; = vx_core.arrayany_from_anylist(values)
+    val arrayobj : Array&lt;Any&gt; = arrayany as (Array&lt;Any&gt;)
+    val anyvalue : vx_core.Type_any = type.vx_new(arrayobj)
+    val output : T = (anyvalue) as T&quot;)
  :doc &quot;Create a new Value of Type A&quot;
  :test (test true (new boolean true))
        (test 4 (new int 4))

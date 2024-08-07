@@ -1,7 +1,3 @@
-  public interface vx_Type_const {
-    public Core.Type_constdef vx_constdef();
-  }
-
   public interface Type_replfunc {
     public Core.Type_any vx_repl(Core.Type_anylist arglist);
   }
@@ -26,18 +22,18 @@
     protected int vx_iref = 0;
     protected Core.Type_msgblock vxmsgblock = null;
     public Core.Type_constdef vx_p_constdef = null;
-    public List<Type_any> vx_dispose() {
-      this.vx_iref = 0;
-      this.vxmsgblock = null;
-      this.vx_p_constdef = null;
-      return emptylistany;
-    }
     public Core.Type_constdef vx_constdef() {
       if (this.vx_p_constdef == null) {
         return Core.e_constdef;
       } else {
         return this.vx_p_constdef;
       }
+    }
+    public List<Type_any> vx_dispose() {
+      this.vx_iref = 0;
+      this.vxmsgblock = null;
+      this.vx_p_constdef = null;
+      return Core.emptylistany;
     }
     public Core.Type_msgblock vx_msgblock() {
       if (this.vxmsgblock == null) {
@@ -93,7 +89,9 @@
     return output;
   }
 
-  public static Core.Type_any[] arrayany_from_anylist(final Core.Type_anylist list) {
+  public static Core.Type_any[] arrayany_from_anylist(
+    final Core.Type_anylist list
+  ) {
     List<Core.Type_any> listany = list.vx_list();
     Core.Type_msgblock msgblock = list.vx_msgblock();
     if (msgblock == null) {
@@ -987,7 +985,9 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     return output;
   }
 
-  public static Core.Type_anylist vx_anylist_from_arraystring(String... arraystring) {
+  public static Core.Type_anylist vx_anylist_from_arraystring(
+    String... arraystring
+  ) {
     List<Object> listany = new ArrayList<>();
     for (String svalue : arraystring) {
       Core.Type_string value = Core.vx_new_string(svalue);

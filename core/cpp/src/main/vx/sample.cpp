@@ -207,7 +207,7 @@ namespace vx_sample {
   //}
 
   // (func main)
-  void f_main() {
+  vx_core::Type_none f_main() {
     vx_sample::f_myfunc(vx_core::vx_new_int(2));
   }
   /**

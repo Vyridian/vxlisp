@@ -266,7 +266,8 @@ public class TypeTest {
                 Vx.Core.vx_new_boolean(false),
                 Vx.Core.f_new(
                   Vx.Core.t_typelist,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.t_int,
                     Vx.Core.t_boolean
                   )
@@ -284,7 +285,8 @@ public class TypeTest {
                 Vx.Core.vx_new_string("a"),
                 Vx.Core.f_new(
                   Vx.Core.t_typelist,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.t_number,
                     Vx.Core.t_string
                   )
@@ -302,7 +304,8 @@ public class TypeTest {
                 Vx.Core.t_decimal.vx_new_from_string("5.5"),
                 Vx.Core.f_new(
                   Vx.Core.t_typelist,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.t_string,
                     Vx.Core.t_number
                   )
@@ -320,7 +323,8 @@ public class TypeTest {
                 Vx.Core.vx_new_int(4),
                 Vx.Core.f_new(
                   Vx.Core.t_typelist,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.t_string,
                     Vx.Core.t_int
                   )
@@ -660,7 +664,8 @@ public class TypeTest {
               Vx.Type.f_string_from_stringlist_join(
                 Vx.Core.f_new(
                   Vx.Core.t_stringlist,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string("a"),
                     Vx.Core.vx_new_string("b"),
                     Vx.Core.vx_new_string("c")
@@ -692,7 +697,8 @@ public class TypeTest {
               context,
               Vx.Core.f_new(
                 Vx.Core.t_stringlist,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string("a"),
                   Vx.Core.vx_new_string("b"),
                   Vx.Core.vx_new_string("c")

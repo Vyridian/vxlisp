@@ -22,7 +22,7 @@ namespace vx_sample {
   extern Func_myfunc e_myfunc;
   extern Func_myfunc t_myfunc;
   // (func main)
-  void f_main();
+  vx_core::Type_none f_main();
 
   // (func myfunc)
   vx_core::Type_int f_myfunc(vx_core::Type_int myarg);

@@ -20,24 +20,25 @@ public final class Es {
 
     @Override
     public Es.Func_translation_es vx_new(final Object... vals) {
-      Class_translation_es output = new Class_translation_es();
+      Es.Class_translation_es output = new Es.Class_translation_es();
       return output;
     }
 
     @Override
-    public Es.Func_translation_es vx_copy(final Object... vals) {
-      Class_translation_es output = new Class_translation_es();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Es.Class_translation_es output = new Es.Class_translation_es();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/translation/es", // pkgname
         "translation-es", // name
         0, // idx
@@ -56,16 +57,19 @@ public final class Es {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_translation_es;
+      Core.Type_any output = Es.e_translation_es;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_translation_es;
+      Core.Type_any output = Es.t_translation_es;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -81,14 +85,15 @@ public final class Es {
 
   }
 
-  public static final Func_translation_es e_translation_es = new Es.Class_translation_es();
-  public static final Func_translation_es t_translation_es = new Es.Class_translation_es();
+  public static final Es.Func_translation_es e_translation_es = new Es.Class_translation_es();
+  public static final Es.Func_translation_es t_translation_es = new Es.Class_translation_es();
 
   public static Core.Type_translation f_translation_es() {
     Core.Type_translation output = Core.e_translation;
     output = Core.f_new(
       Core.t_translation,
-      Core.vx_new(Core.t_anylist,
+      Core.vx_new(
+        Core.t_anylist,
         Core.vx_new_string(":name"),
         Core.vx_new_string("es"),
         Core.vx_new_string(":wordmap"),
@@ -112,24 +117,25 @@ public final class Es {
 
     @Override
     public Es.Func_words vx_new(final Object... vals) {
-      Class_words output = new Class_words();
+      Es.Class_words output = new Es.Class_words();
       return output;
     }
 
     @Override
-    public Es.Func_words vx_copy(final Object... vals) {
-      Class_words output = new Class_words();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Es.Class_words output = new Es.Class_words();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/translation/es", // pkgname
         "words", // name
         0, // idx
@@ -148,16 +154,19 @@ public final class Es {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_words;
+      Core.Type_any output = Es.e_words;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_words;
+      Core.Type_any output = Es.t_words;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -173,14 +182,15 @@ public final class Es {
 
   }
 
-  public static final Func_words e_words = new Es.Class_words();
-  public static final Func_words t_words = new Es.Class_words();
+  public static final Es.Func_words e_words = new Es.Class_words();
+  public static final Es.Func_words t_words = new Es.Class_words();
 
   public static Core.Type_stringmap f_words() {
     Core.Type_stringmap output = Core.e_stringmap;
     output = Core.f_new(
       Core.t_stringmap,
-      Core.vx_new(Core.t_anylist,
+      Core.vx_new(
+        Core.t_anylist,
         Core.vx_new_string("Hello"),
         Core.vx_new_string("Hola"),
         Core.vx_new_string("World"),

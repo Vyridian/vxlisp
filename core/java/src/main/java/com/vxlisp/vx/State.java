@@ -12,10 +12,6 @@ public final class State {
    * (type valuemap)
    */
   public interface Type_valuemap extends Core.Type_map {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
   }
 
   public static class Class_valuemap extends Core.Class_base implements Type_valuemap {
@@ -33,7 +29,7 @@ public final class State {
       Core.Type_boolean output = Core.c_false;
       if (false) {
       } else if (value instanceof Core.Type_any) {
-        Core.Type_any castval = (Core.Type_any)value;;
+        Core.Type_any castval = (Core.Type_any)value;
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -67,13 +63,13 @@ public final class State {
       Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
-        Core.Type_any val = mapval.get(key);
+        Core.Type_any value = mapval.get(key);
         if (false) {
-        } else if (val instanceof Core.Type_any) {
-          Core.Type_any castval = (Core.Type_any)val;;
+        } else if (value instanceof Core.Type_any) {
+          Core.Type_any castval = (Core.Type_any)value;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.vx_msg_from_error("vx/state/valuemap", ":invalidvalue", val);
+          Core.Type_msg msg = Core.vx_msg_from_error("vx/state/valuemap", ":invalidvalue", value);
           msgblock = Core.vx_copy(msgblock, msg);
         }
       }
@@ -91,15 +87,15 @@ public final class State {
     }
 
     @Override
-    public State.Type_valuemap vx_copy(final Object... vals) {
-      Type_valuemap output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      State.Type_valuemap output = this;
       boolean ischanged = false;
-      Class_valuemap val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      State.Class_valuemap value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Map<String, Core.Type_any> mapval = new LinkedHashMap<String, Core.Type_any>(val.vx_map());
+      Map<String, Core.Type_any> mapval = new LinkedHashMap<String, Core.Type_any>(value.vx_map());
       Core.Type_msg msg = null;
       String key = "";
       Core.Type_any msgval = null;
@@ -111,15 +107,15 @@ public final class State {
         } else if (key.equals("")) {
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstring = (Core.Type_string)valsub;;
+            Core.Type_string valstring = (Core.Type_string)valsub;
             key = valstring.vx_string();
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             key = sval;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -131,14 +127,14 @@ public final class State {
           Core.Type_any valany = null;
           if (false) {
           } else if (valsub instanceof Core.Type_any) {
-            Core.Type_any valallowed = (Core.Type_any)valsub;;
+            Core.Type_any valallowed = (Core.Type_any)valsub;
             valany = valallowed;
           } else if (valsub instanceof Core.Type_any) {
             valany = (Core.Type_any)valsub;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -161,7 +157,7 @@ public final class State {
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_valuemap work = new Class_valuemap();
+        State.Class_valuemap work = new State.Class_valuemap();
         work.vx_p_map = Core.immutablemap(mapval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -173,16 +169,19 @@ public final class State {
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_valuemap;
+      Core.Type_any output = State.e_valuemap;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_valuemap;
+      Core.Type_any output = State.t_valuemap;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/state", // pkgname
         "valuemap", // name
         ":map", // extends
@@ -195,12 +194,13 @@ public final class State {
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_valuemap e_valuemap = new Class_valuemap();
-  public static final Type_valuemap t_valuemap = new Class_valuemap();
+  public static final State.Type_valuemap e_valuemap = new State.Class_valuemap();
+  public static final State.Type_valuemap t_valuemap = new State.Class_valuemap();
   /**
    * @function any_readstate_from_mapname_name
    * Returns the named state value
@@ -217,24 +217,25 @@ public final class State {
 
     @Override
     public State.Func_any_readstate_from_mapname_name vx_new(final Object... vals) {
-      Class_any_readstate_from_mapname_name output = new Class_any_readstate_from_mapname_name();
+      State.Class_any_readstate_from_mapname_name output = new State.Class_any_readstate_from_mapname_name();
       return output;
     }
 
     @Override
-    public State.Func_any_readstate_from_mapname_name vx_copy(final Object... vals) {
-      Class_any_readstate_from_mapname_name output = new Class_any_readstate_from_mapname_name();
+    public Core.Type_any vx_copy(final Object... vals) {
+      State.Class_any_readstate_from_mapname_name output = new State.Class_any_readstate_from_mapname_name();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/state", // pkgname
         "any-readstate<-mapname-name", // name
         0, // idx
@@ -253,16 +254,19 @@ public final class State {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_readstate_from_mapname_name;
+      Core.Type_any output = State.e_any_readstate_from_mapname_name;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_any_readstate_from_mapname_name;
+      Core.Type_any output = State.t_any_readstate_from_mapname_name;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -282,8 +286,8 @@ public final class State {
 
   }
 
-  public static final Func_any_readstate_from_mapname_name e_any_readstate_from_mapname_name = new State.Class_any_readstate_from_mapname_name();
-  public static final Func_any_readstate_from_mapname_name t_any_readstate_from_mapname_name = new State.Class_any_readstate_from_mapname_name();
+  public static final State.Func_any_readstate_from_mapname_name e_any_readstate_from_mapname_name = new State.Class_any_readstate_from_mapname_name();
+  public static final State.Func_any_readstate_from_mapname_name t_any_readstate_from_mapname_name = new State.Class_any_readstate_from_mapname_name();
 
   public static <T extends Core.Type_any> T f_any_readstate_from_mapname_name(final T generic_any_1, final Core.Type_context context, final Core.Type_string mapname, final Core.Type_string name) {
     T output = Core.f_empty(generic_any_1);
@@ -313,24 +317,25 @@ public final class State {
 
     @Override
     public State.Func_any_readstate_from_name vx_new(final Object... vals) {
-      Class_any_readstate_from_name output = new Class_any_readstate_from_name();
+      State.Class_any_readstate_from_name output = new State.Class_any_readstate_from_name();
       return output;
     }
 
     @Override
-    public State.Func_any_readstate_from_name vx_copy(final Object... vals) {
-      Class_any_readstate_from_name output = new Class_any_readstate_from_name();
+    public Core.Type_any vx_copy(final Object... vals) {
+      State.Class_any_readstate_from_name output = new State.Class_any_readstate_from_name();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/state", // pkgname
         "any-readstate<-name", // name
         0, // idx
@@ -349,16 +354,19 @@ public final class State {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_readstate_from_name;
+      Core.Type_any output = State.e_any_readstate_from_name;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_any_readstate_from_name;
+      Core.Type_any output = State.t_any_readstate_from_name;
+      return output;
     }
 
     @Override
@@ -391,8 +399,8 @@ public final class State {
 
   }
 
-  public static final Func_any_readstate_from_name e_any_readstate_from_name = new State.Class_any_readstate_from_name();
-  public static final Func_any_readstate_from_name t_any_readstate_from_name = new State.Class_any_readstate_from_name();
+  public static final State.Func_any_readstate_from_name e_any_readstate_from_name = new State.Class_any_readstate_from_name();
+  public static final State.Func_any_readstate_from_name t_any_readstate_from_name = new State.Class_any_readstate_from_name();
 
   public static <T extends Core.Type_any> T f_any_readstate_from_name(final T generic_any_1, final Core.Type_context context, final Core.Type_string name) {
     T output = Core.f_empty(generic_any_1);
@@ -418,24 +426,25 @@ public final class State {
 
     @Override
     public State.Func_boolean_removestate_from_name vx_new(final Object... vals) {
-      Class_boolean_removestate_from_name output = new Class_boolean_removestate_from_name();
+      State.Class_boolean_removestate_from_name output = new State.Class_boolean_removestate_from_name();
       return output;
     }
 
     @Override
-    public State.Func_boolean_removestate_from_name vx_copy(final Object... vals) {
-      Class_boolean_removestate_from_name output = new Class_boolean_removestate_from_name();
+    public Core.Type_any vx_copy(final Object... vals) {
+      State.Class_boolean_removestate_from_name output = new State.Class_boolean_removestate_from_name();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/state", // pkgname
         "boolean-removestate<-name", // name
         0, // idx
@@ -454,16 +463,19 @@ public final class State {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_boolean_removestate_from_name;
+      Core.Type_any output = State.e_boolean_removestate_from_name;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_boolean_removestate_from_name;
+      Core.Type_any output = State.t_boolean_removestate_from_name;
+      return output;
     }
 
     @Override
@@ -495,8 +507,8 @@ public final class State {
 
   }
 
-  public static final Func_boolean_removestate_from_name e_boolean_removestate_from_name = new State.Class_boolean_removestate_from_name();
-  public static final Func_boolean_removestate_from_name t_boolean_removestate_from_name = new State.Class_boolean_removestate_from_name();
+  public static final State.Func_boolean_removestate_from_name e_boolean_removestate_from_name = new State.Class_boolean_removestate_from_name();
+  public static final State.Func_boolean_removestate_from_name t_boolean_removestate_from_name = new State.Class_boolean_removestate_from_name();
 
   public static Core.Type_boolean f_boolean_removestate_from_name(final Core.Type_context context, final Core.Type_string name) {
     Core.Type_boolean output = Core.e_boolean;
@@ -534,24 +546,25 @@ public final class State {
 
     @Override
     public State.Func_boolean_writestate_from_mapname_name_value vx_new(final Object... vals) {
-      Class_boolean_writestate_from_mapname_name_value output = new Class_boolean_writestate_from_mapname_name_value();
+      State.Class_boolean_writestate_from_mapname_name_value output = new State.Class_boolean_writestate_from_mapname_name_value();
       return output;
     }
 
     @Override
-    public State.Func_boolean_writestate_from_mapname_name_value vx_copy(final Object... vals) {
-      Class_boolean_writestate_from_mapname_name_value output = new Class_boolean_writestate_from_mapname_name_value();
+    public Core.Type_any vx_copy(final Object... vals) {
+      State.Class_boolean_writestate_from_mapname_name_value output = new State.Class_boolean_writestate_from_mapname_name_value();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/state", // pkgname
         "boolean-writestate<-mapname-name-value", // name
         0, // idx
@@ -570,16 +583,19 @@ public final class State {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_boolean_writestate_from_mapname_name_value;
+      Core.Type_any output = State.e_boolean_writestate_from_mapname_name_value;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_boolean_writestate_from_mapname_name_value;
+      Core.Type_any output = State.t_boolean_writestate_from_mapname_name_value;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -599,8 +615,8 @@ public final class State {
 
   }
 
-  public static final Func_boolean_writestate_from_mapname_name_value e_boolean_writestate_from_mapname_name_value = new State.Class_boolean_writestate_from_mapname_name_value();
-  public static final Func_boolean_writestate_from_mapname_name_value t_boolean_writestate_from_mapname_name_value = new State.Class_boolean_writestate_from_mapname_name_value();
+  public static final State.Func_boolean_writestate_from_mapname_name_value e_boolean_writestate_from_mapname_name_value = new State.Class_boolean_writestate_from_mapname_name_value();
+  public static final State.Func_boolean_writestate_from_mapname_name_value t_boolean_writestate_from_mapname_name_value = new State.Class_boolean_writestate_from_mapname_name_value();
 
   public static Core.Type_boolean f_boolean_writestate_from_mapname_name_value(final Core.Type_context context, final Core.Type_string mapname, final Core.Type_string name, final Core.Type_any value) {
     Core.Type_boolean output = Core.e_boolean;
@@ -610,7 +626,8 @@ public final class State {
         State.Type_valuemap valmap = State.f_any_readstate_from_name(State.t_valuemap, context, mapname);
         Core.Type_any output_2 = Core.f_if_2(
           Core.t_boolean,
-          Core.vx_new(Core.t_thenelselist,
+          Core.vx_new(
+            Core.t_thenelselist,
             Core.f_then(
               Core.t_boolean_from_func.vx_fn_new(() -> {
                 return Core.f_is_empty_1(valmap);
@@ -621,18 +638,20 @@ public final class State {
                   Core.t_any_from_func.vx_fn_new(() -> {
                     State.Type_valuemap valmap2 = Core.f_new(
                       State.t_valuemap,
-                      Core.vx_new(Core.t_anylist,
-                          name,
-                          value
+                      Core.vx_new(
+                        Core.t_anylist,
+                        name,
+                        value
                       )
                     );
                     Core.Type_statelistener listener = Core.f_new(
                       Core.t_statelistener,
-                      Core.vx_new(Core.t_anylist,
-                          Core.vx_new_string(":name"),
-                          mapname,
-                          Core.vx_new_string(":value"),
-                          valmap2
+                      Core.vx_new(
+                        Core.t_anylist,
+                        Core.vx_new_string(":name"),
+                        mapname,
+                        Core.vx_new_string(":value"),
+                        valmap2
                       )
                     );
                     Core.Type_any output_1 = State.f_boolean_writestate_from_statelistener(context, listener);
@@ -670,24 +689,25 @@ public final class State {
 
     @Override
     public State.Func_boolean_writestate_from_name_value vx_new(final Object... vals) {
-      Class_boolean_writestate_from_name_value output = new Class_boolean_writestate_from_name_value();
+      State.Class_boolean_writestate_from_name_value output = new State.Class_boolean_writestate_from_name_value();
       return output;
     }
 
     @Override
-    public State.Func_boolean_writestate_from_name_value vx_copy(final Object... vals) {
-      Class_boolean_writestate_from_name_value output = new Class_boolean_writestate_from_name_value();
+    public Core.Type_any vx_copy(final Object... vals) {
+      State.Class_boolean_writestate_from_name_value output = new State.Class_boolean_writestate_from_name_value();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/state", // pkgname
         "boolean-writestate<-name-value", // name
         0, // idx
@@ -706,16 +726,19 @@ public final class State {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_boolean_writestate_from_name_value;
+      Core.Type_any output = State.e_boolean_writestate_from_name_value;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_boolean_writestate_from_name_value;
+      Core.Type_any output = State.t_boolean_writestate_from_name_value;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -734,8 +757,8 @@ public final class State {
 
   }
 
-  public static final Func_boolean_writestate_from_name_value e_boolean_writestate_from_name_value = new State.Class_boolean_writestate_from_name_value();
-  public static final Func_boolean_writestate_from_name_value t_boolean_writestate_from_name_value = new State.Class_boolean_writestate_from_name_value();
+  public static final State.Func_boolean_writestate_from_name_value e_boolean_writestate_from_name_value = new State.Class_boolean_writestate_from_name_value();
+  public static final State.Func_boolean_writestate_from_name_value t_boolean_writestate_from_name_value = new State.Class_boolean_writestate_from_name_value();
 
   public static Core.Type_boolean f_boolean_writestate_from_name_value(final Core.Type_context context, final Core.Type_string name, final Core.Type_any value) {
     Core.Type_boolean output = Core.e_boolean;
@@ -745,11 +768,12 @@ public final class State {
         Core.Type_statelistener listenercur = State.f_statelistener_readstate_from_name(context, name);
         Core.Type_statelistener listenerchg = Core.f_copy(
           listenercur,
-          Core.vx_new(Core.t_anylist,
-              Core.vx_new_string(":name"),
-              name,
-              Core.vx_new_string(":value"),
-              value
+          Core.vx_new(
+            Core.t_anylist,
+            Core.vx_new_string(":name"),
+            name,
+            Core.vx_new_string(":value"),
+            value
           )
         );
         Core.Type_any output_1 = State.f_boolean_writestate_from_statelistener(context, listenerchg);
@@ -774,24 +798,25 @@ public final class State {
 
     @Override
     public State.Func_boolean_writestate_from_statelistener vx_new(final Object... vals) {
-      Class_boolean_writestate_from_statelistener output = new Class_boolean_writestate_from_statelistener();
+      State.Class_boolean_writestate_from_statelistener output = new State.Class_boolean_writestate_from_statelistener();
       return output;
     }
 
     @Override
-    public State.Func_boolean_writestate_from_statelistener vx_copy(final Object... vals) {
-      Class_boolean_writestate_from_statelistener output = new Class_boolean_writestate_from_statelistener();
+    public Core.Type_any vx_copy(final Object... vals) {
+      State.Class_boolean_writestate_from_statelistener output = new State.Class_boolean_writestate_from_statelistener();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/state", // pkgname
         "boolean-writestate<-statelistener", // name
         0, // idx
@@ -810,16 +835,19 @@ public final class State {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_boolean_writestate_from_statelistener;
+      Core.Type_any output = State.e_boolean_writestate_from_statelistener;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_boolean_writestate_from_statelistener;
+      Core.Type_any output = State.t_boolean_writestate_from_statelistener;
+      return output;
     }
 
     @Override
@@ -851,8 +879,8 @@ public final class State {
 
   }
 
-  public static final Func_boolean_writestate_from_statelistener e_boolean_writestate_from_statelistener = new State.Class_boolean_writestate_from_statelistener();
-  public static final Func_boolean_writestate_from_statelistener t_boolean_writestate_from_statelistener = new State.Class_boolean_writestate_from_statelistener();
+  public static final State.Func_boolean_writestate_from_statelistener e_boolean_writestate_from_statelistener = new State.Class_boolean_writestate_from_statelistener();
+  public static final State.Func_boolean_writestate_from_statelistener t_boolean_writestate_from_statelistener = new State.Class_boolean_writestate_from_statelistener();
 
   public static Core.Type_boolean f_boolean_writestate_from_statelistener(final Core.Type_context context, final Core.Type_statelistener statelistener) {
     Core.Type_boolean output = Core.e_boolean;
@@ -883,24 +911,25 @@ public final class State {
 
     @Override
     public State.Func_change vx_new(final Object... vals) {
-      Class_change output = new Class_change();
+      State.Class_change output = new State.Class_change();
       return output;
     }
 
     @Override
-    public State.Func_change vx_copy(final Object... vals) {
-      Class_change output = new Class_change();
+    public Core.Type_any vx_copy(final Object... vals) {
+      State.Class_change output = new State.Class_change();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/state", // pkgname
         "change", // name
         0, // idx
@@ -919,16 +948,19 @@ public final class State {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_change;
+      Core.Type_any output = State.e_change;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_change;
+      Core.Type_any output = State.t_change;
+      return output;
     }
 
     @Override
@@ -959,8 +991,8 @@ public final class State {
 
   }
 
-  public static final Func_change e_change = new State.Class_change();
-  public static final Func_change t_change = new State.Class_change();
+  public static final State.Func_change e_change = new State.Class_change();
+  public static final State.Func_change t_change = new State.Class_change();
 
   public static Core.Type_boolean f_change(final State.Type_valuemap valuemap) {
     Core.Type_boolean output = Core.e_boolean;
@@ -981,24 +1013,25 @@ public final class State {
 
     @Override
     public State.Func_register vx_new(final Object... vals) {
-      Class_register output = new Class_register();
+      State.Class_register output = new State.Class_register();
       return output;
     }
 
     @Override
-    public State.Func_register vx_copy(final Object... vals) {
-      Class_register output = new Class_register();
+    public Core.Type_any vx_copy(final Object... vals) {
+      State.Class_register output = new State.Class_register();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/state", // pkgname
         "register", // name
         0, // idx
@@ -1017,16 +1050,19 @@ public final class State {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_register;
+      Core.Type_any output = State.e_register;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_register;
+      Core.Type_any output = State.t_register;
+      return output;
     }
 
     @Override
@@ -1057,8 +1093,8 @@ public final class State {
 
   }
 
-  public static final Func_register e_register = new State.Class_register();
-  public static final Func_register t_register = new State.Class_register();
+  public static final State.Func_register e_register = new State.Class_register();
+  public static final State.Func_register t_register = new State.Class_register();
 
   public static Core.Type_boolean f_register(final Core.Type_statelistener listener) {
     Core.Type_boolean output = Core.e_boolean;
@@ -1079,24 +1115,25 @@ public final class State {
 
     @Override
     public State.Func_state_from_context vx_new(final Object... vals) {
-      Class_state_from_context output = new Class_state_from_context();
+      State.Class_state_from_context output = new State.Class_state_from_context();
       return output;
     }
 
     @Override
-    public State.Func_state_from_context vx_copy(final Object... vals) {
-      Class_state_from_context output = new Class_state_from_context();
+    public Core.Type_any vx_copy(final Object... vals) {
+      State.Class_state_from_context output = new State.Class_state_from_context();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/state", // pkgname
         "state<-context", // name
         0, // idx
@@ -1115,16 +1152,19 @@ public final class State {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_state_from_context;
+      Core.Type_any output = State.e_state_from_context;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_state_from_context;
+      Core.Type_any output = State.t_state_from_context;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -1141,8 +1181,8 @@ public final class State {
 
   }
 
-  public static final Func_state_from_context e_state_from_context = new State.Class_state_from_context();
-  public static final Func_state_from_context t_state_from_context = new State.Class_state_from_context();
+  public static final State.Func_state_from_context e_state_from_context = new State.Class_state_from_context();
+  public static final State.Func_state_from_context t_state_from_context = new State.Class_state_from_context();
 
   public static Core.Type_state f_state_from_context(final Core.Type_context context) {
     Core.Type_state output = Core.e_state;
@@ -1165,24 +1205,25 @@ public final class State {
 
     @Override
     public State.Func_statelistener_readstate_from_name vx_new(final Object... vals) {
-      Class_statelistener_readstate_from_name output = new Class_statelistener_readstate_from_name();
+      State.Class_statelistener_readstate_from_name output = new State.Class_statelistener_readstate_from_name();
       return output;
     }
 
     @Override
-    public State.Func_statelistener_readstate_from_name vx_copy(final Object... vals) {
-      Class_statelistener_readstate_from_name output = new Class_statelistener_readstate_from_name();
+    public Core.Type_any vx_copy(final Object... vals) {
+      State.Class_statelistener_readstate_from_name output = new State.Class_statelistener_readstate_from_name();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/state", // pkgname
         "statelistener-readstate<-name", // name
         0, // idx
@@ -1201,16 +1242,19 @@ public final class State {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_statelistener_readstate_from_name;
+      Core.Type_any output = State.e_statelistener_readstate_from_name;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_statelistener_readstate_from_name;
+      Core.Type_any output = State.t_statelistener_readstate_from_name;
+      return output;
     }
 
     @Override
@@ -1242,8 +1286,8 @@ public final class State {
 
   }
 
-  public static final Func_statelistener_readstate_from_name e_statelistener_readstate_from_name = new State.Class_statelistener_readstate_from_name();
-  public static final Func_statelistener_readstate_from_name t_statelistener_readstate_from_name = new State.Class_statelistener_readstate_from_name();
+  public static final State.Func_statelistener_readstate_from_name e_statelistener_readstate_from_name = new State.Class_statelistener_readstate_from_name();
+  public static final State.Func_statelistener_readstate_from_name t_statelistener_readstate_from_name = new State.Class_statelistener_readstate_from_name();
 
   public static Core.Type_statelistener f_statelistener_readstate_from_name(final Core.Type_context context, final Core.Type_string name) {
     Core.Type_statelistener output = Core.e_statelistener;
@@ -1272,24 +1316,25 @@ public final class State {
 
     @Override
     public State.Func_statelistenermap_readstate vx_new(final Object... vals) {
-      Class_statelistenermap_readstate output = new Class_statelistenermap_readstate();
+      State.Class_statelistenermap_readstate output = new State.Class_statelistenermap_readstate();
       return output;
     }
 
     @Override
-    public State.Func_statelistenermap_readstate vx_copy(final Object... vals) {
-      Class_statelistenermap_readstate output = new Class_statelistenermap_readstate();
+    public Core.Type_any vx_copy(final Object... vals) {
+      State.Class_statelistenermap_readstate output = new State.Class_statelistenermap_readstate();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/state", // pkgname
         "statelistenermap-readstate", // name
         0, // idx
@@ -1308,16 +1353,19 @@ public final class State {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_statelistenermap_readstate;
+      Core.Type_any output = State.e_statelistenermap_readstate;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_statelistenermap_readstate;
+      Core.Type_any output = State.t_statelistenermap_readstate;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -1334,8 +1382,8 @@ public final class State {
 
   }
 
-  public static final Func_statelistenermap_readstate e_statelistenermap_readstate = new State.Class_statelistenermap_readstate();
-  public static final Func_statelistenermap_readstate t_statelistenermap_readstate = new State.Class_statelistenermap_readstate();
+  public static final State.Func_statelistenermap_readstate e_statelistenermap_readstate = new State.Class_statelistenermap_readstate();
+  public static final State.Func_statelistenermap_readstate t_statelistenermap_readstate = new State.Class_statelistenermap_readstate();
 
   public static Core.Type_statelistenermap f_statelistenermap_readstate(final Core.Type_context context) {
     Core.Type_statelistenermap output = Core.e_statelistenermap;
@@ -1365,24 +1413,25 @@ public final class State {
 
     @Override
     public State.Func_value_readstate_from_name vx_new(final Object... vals) {
-      Class_value_readstate_from_name output = new Class_value_readstate_from_name();
+      State.Class_value_readstate_from_name output = new State.Class_value_readstate_from_name();
       return output;
     }
 
     @Override
-    public State.Func_value_readstate_from_name vx_copy(final Object... vals) {
-      Class_value_readstate_from_name output = new Class_value_readstate_from_name();
+    public Core.Type_any vx_copy(final Object... vals) {
+      State.Class_value_readstate_from_name output = new State.Class_value_readstate_from_name();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/state", // pkgname
         "value-readstate<-name", // name
         0, // idx
@@ -1401,16 +1450,19 @@ public final class State {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_value_readstate_from_name;
+      Core.Type_any output = State.e_value_readstate_from_name;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_value_readstate_from_name;
+      Core.Type_any output = State.t_value_readstate_from_name;
+      return output;
     }
 
     @Override
@@ -1442,8 +1494,8 @@ public final class State {
 
   }
 
-  public static final Func_value_readstate_from_name e_value_readstate_from_name = new State.Class_value_readstate_from_name();
-  public static final Func_value_readstate_from_name t_value_readstate_from_name = new State.Class_value_readstate_from_name();
+  public static final State.Func_value_readstate_from_name e_value_readstate_from_name = new State.Class_value_readstate_from_name();
+  public static final State.Func_value_readstate_from_name t_value_readstate_from_name = new State.Class_value_readstate_from_name();
 
   public static Core.Type_any f_value_readstate_from_name(final Core.Type_context context, final Core.Type_string name) {
     Core.Type_any output = Core.e_any;
@@ -1473,24 +1525,25 @@ public final class State {
 
     @Override
     public State.Func_valuemap_readstate_from_mapname vx_new(final Object... vals) {
-      Class_valuemap_readstate_from_mapname output = new Class_valuemap_readstate_from_mapname();
+      State.Class_valuemap_readstate_from_mapname output = new State.Class_valuemap_readstate_from_mapname();
       return output;
     }
 
     @Override
-    public State.Func_valuemap_readstate_from_mapname vx_copy(final Object... vals) {
-      Class_valuemap_readstate_from_mapname output = new Class_valuemap_readstate_from_mapname();
+    public Core.Type_any vx_copy(final Object... vals) {
+      State.Class_valuemap_readstate_from_mapname output = new State.Class_valuemap_readstate_from_mapname();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/state", // pkgname
         "valuemap-readstate<-mapname", // name
         0, // idx
@@ -1509,16 +1562,19 @@ public final class State {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_valuemap_readstate_from_mapname;
+      Core.Type_any output = State.e_valuemap_readstate_from_mapname;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_valuemap_readstate_from_mapname;
+      Core.Type_any output = State.t_valuemap_readstate_from_mapname;
+      return output;
     }
 
     @Override
@@ -1550,8 +1606,8 @@ public final class State {
 
   }
 
-  public static final Func_valuemap_readstate_from_mapname e_valuemap_readstate_from_mapname = new State.Class_valuemap_readstate_from_mapname();
-  public static final Func_valuemap_readstate_from_mapname t_valuemap_readstate_from_mapname = new State.Class_valuemap_readstate_from_mapname();
+  public static final State.Func_valuemap_readstate_from_mapname e_valuemap_readstate_from_mapname = new State.Class_valuemap_readstate_from_mapname();
+  public static final State.Func_valuemap_readstate_from_mapname t_valuemap_readstate_from_mapname = new State.Class_valuemap_readstate_from_mapname();
 
   public static State.Type_valuemap f_valuemap_readstate_from_mapname(final Core.Type_context context, final Core.Type_string mapname) {
     State.Type_valuemap output = State.e_valuemap;

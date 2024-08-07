@@ -20,7 +20,8 @@ public class CsvTest {
               context,
               Vx.Core.f_new(
                 Vx.Data.Textblock.t_textblock,
-                Vx.Core.vx_new(Vx.Core.t_anylist,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":text"),
                   Vx.Core.vx_new_string("\"a\",\"b\"\n1,\"2\""),
                   Vx.Core.vx_new_string(":startpos"),
@@ -30,10 +31,12 @@ public class CsvTest {
                   Vx.Core.vx_new_string(":children"),
                   Vx.Core.f_new(
                     Vx.Data.Textblock.t_textblocklist,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("\"a\""),
                           Vx.Core.vx_new_string(":startpos"),
@@ -43,7 +46,8 @@ public class CsvTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimquote,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":pos"),
                               Vx.Core.vx_new_int(0)
                             )
@@ -51,10 +55,12 @@ public class CsvTest {
                           Vx.Core.vx_new_string(":children"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblocklist,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("a"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -69,7 +75,8 @@ public class CsvTest {
                       ),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string(","),
                           Vx.Core.vx_new_string(":startpos"),
@@ -79,7 +86,8 @@ public class CsvTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimcomma,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":pos"),
                               Vx.Core.vx_new_int(0)
                             )
@@ -88,7 +96,8 @@ public class CsvTest {
                       ),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("\"b\""),
                           Vx.Core.vx_new_string(":startpos"),
@@ -98,7 +107,8 @@ public class CsvTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimquote,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":pos"),
                               Vx.Core.vx_new_int(0)
                             )
@@ -106,10 +116,12 @@ public class CsvTest {
                           Vx.Core.vx_new_string(":children"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblocklist,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("b"),
                                   Vx.Core.vx_new_string(":startpos"),
@@ -124,7 +136,8 @@ public class CsvTest {
                       ),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("\n"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -134,7 +147,8 @@ public class CsvTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimline,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":pos"),
                               Vx.Core.vx_new_int(0)
                             )
@@ -143,7 +157,8 @@ public class CsvTest {
                       ),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("1"),
                           Vx.Core.vx_new_string(":startpos"),
@@ -154,7 +169,8 @@ public class CsvTest {
                       ),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string(","),
                           Vx.Core.vx_new_string(":startpos"),
@@ -164,7 +180,8 @@ public class CsvTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimcomma,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":pos"),
                               Vx.Core.vx_new_int(0)
                             )
@@ -173,7 +190,8 @@ public class CsvTest {
                       ),
                       Vx.Core.f_new(
                         Vx.Data.Textblock.t_textblock,
-                        Vx.Core.vx_new(Vx.Core.t_anylist,
+                        Vx.Core.vx_new(
+                          Vx.Core.t_anylist,
                           Vx.Core.vx_new_string(":text"),
                           Vx.Core.vx_new_string("\"2\""),
                           Vx.Core.vx_new_string(":startpos"),
@@ -183,7 +201,8 @@ public class CsvTest {
                           Vx.Core.vx_new_string(":delim"),
                           Vx.Core.f_copy(
                             Vx.Data.Textblock.c_delimquote,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.vx_new_string(":pos"),
                               Vx.Core.vx_new_int(0)
                             )
@@ -191,10 +210,12 @@ public class CsvTest {
                           Vx.Core.vx_new_string(":children"),
                           Vx.Core.f_new(
                             Vx.Data.Textblock.t_textblocklist,
-                            Vx.Core.vx_new(Vx.Core.t_anylist,
+                            Vx.Core.vx_new(
+                              Vx.Core.t_anylist,
                               Vx.Core.f_new(
                                 Vx.Data.Textblock.t_textblock,
-                                Vx.Core.vx_new(Vx.Core.t_anylist,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
                                   Vx.Core.vx_new_string(":text"),
                                   Vx.Core.vx_new_string("2"),
                                   Vx.Core.vx_new_string(":startpos"),

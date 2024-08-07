@@ -21,7 +21,8 @@ public class TestTest {
               Vx.Data.File.f_boolean_exists_from_file(
                 Vx.Core.f_new(
                   Vx.Data.File.t_file,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":name"),
                     Vx.Core.vx_new_string("testsuite.vxlisp"),
                     Vx.Core.vx_new_string(":path"),
@@ -54,7 +55,8 @@ public class TestTest {
               Vx.Data.File.f_boolean_exists_from_file(
                 Vx.Core.f_new(
                   Vx.Data.File.t_file,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":name"),
                     Vx.Core.vx_new_string("testsuite.html"),
                     Vx.Core.vx_new_string(":path"),
@@ -87,7 +89,8 @@ public class TestTest {
               Vx.Data.File.f_boolean_exists_from_file(
                 Vx.Core.f_new(
                   Vx.Data.File.t_file,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":name"),
                     Vx.Core.vx_new_string("testsuitenode.vxlisp"),
                     Vx.Core.vx_new_string(":path"),

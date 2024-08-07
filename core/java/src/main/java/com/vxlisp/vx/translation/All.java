@@ -21,24 +21,25 @@ public final class All {
 
     @Override
     public All.Func_context_all vx_new(final Object... vals) {
-      Class_context_all output = new Class_context_all();
+      All.Class_context_all output = new All.Class_context_all();
       return output;
     }
 
     @Override
-    public All.Func_context_all vx_copy(final Object... vals) {
-      Class_context_all output = new Class_context_all();
+    public Core.Type_any vx_copy(final Object... vals) {
+      All.Class_context_all output = new All.Class_context_all();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/translation/all", // pkgname
         "context-all", // name
         0, // idx
@@ -57,16 +58,19 @@ public final class All {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_context_all;
+      Core.Type_any output = All.e_context_all;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_context_all;
+      Core.Type_any output = All.t_context_all;
+      return output;
     }
 
     @Override
@@ -97,18 +101,20 @@ public final class All {
 
   }
 
-  public static final Func_context_all e_context_all = new All.Class_context_all();
-  public static final Func_context_all t_context_all = new All.Class_context_all();
+  public static final All.Func_context_all e_context_all = new All.Class_context_all();
+  public static final All.Func_context_all t_context_all = new All.Class_context_all();
 
   public static Core.Type_context f_context_all(final Core.Type_anylist args) {
     Core.Type_context output = Core.e_context;
     output = Core.f_new(
       Core.t_context,
-      Core.vx_new(Core.t_anylist,
+      Core.vx_new(
+        Core.t_anylist,
         Core.vx_new_string(":session"),
         Core.f_new(
           Core.t_session,
-          Core.vx_new(Core.t_anylist,
+          Core.vx_new(
+            Core.t_anylist,
             Core.vx_new_string(":translation"),
             En.f_translation_en(),
             Core.vx_new_string(":translationmap"),
@@ -134,24 +140,25 @@ public final class All {
 
     @Override
     public All.Func_translationmap_all vx_new(final Object... vals) {
-      Class_translationmap_all output = new Class_translationmap_all();
+      All.Class_translationmap_all output = new All.Class_translationmap_all();
       return output;
     }
 
     @Override
-    public All.Func_translationmap_all vx_copy(final Object... vals) {
-      Class_translationmap_all output = new Class_translationmap_all();
+    public Core.Type_any vx_copy(final Object... vals) {
+      All.Class_translationmap_all output = new All.Class_translationmap_all();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/translation/all", // pkgname
         "translationmap-all", // name
         0, // idx
@@ -170,16 +177,19 @@ public final class All {
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_translationmap_all;
+      Core.Type_any output = All.e_translationmap_all;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_translationmap_all;
+      Core.Type_any output = All.t_translationmap_all;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -195,13 +205,14 @@ public final class All {
 
   }
 
-  public static final Func_translationmap_all e_translationmap_all = new All.Class_translationmap_all();
-  public static final Func_translationmap_all t_translationmap_all = new All.Class_translationmap_all();
+  public static final All.Func_translationmap_all e_translationmap_all = new All.Class_translationmap_all();
+  public static final All.Func_translationmap_all t_translationmap_all = new All.Class_translationmap_all();
 
   public static Core.Type_translationmap f_translationmap_all() {
     Core.Type_translationmap output = Core.e_translationmap;
     output = Translate.f_translationmap_from_translations(
-      Core.vx_new(Core.t_translationlist,
+      Core.vx_new(
+        Core.t_translationlist,
         En.f_translation_en(),
         Es.f_translation_es()
       )

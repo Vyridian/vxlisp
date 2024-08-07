@@ -49,7 +49,8 @@ public static class Html {
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
       Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
       output.put(":nodes", this.nodes());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Web.Html.Type_body vx_new(params object[] vals) {
@@ -57,15 +58,15 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_body vx_copy(params object[] vals) {
-      Type_body output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_body output = this;
       bool ischanged = false;
-      Class_body val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_body value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Web.Html.Type_divchildlist vx_p_nodes = val.nodes();
+      Vx.Web.Html.Type_divchildlist vx_p_nodes = value.nodes();
       List<string> validkeys = new List<string>();
       validkeys.Add(":nodes");
       string key = "";
@@ -154,7 +155,7 @@ public static class Html {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_body work = new Class_body();
+        Vx.Web.Html.Class_body work = new Vx.Web.Html.Class_body();
         work.vx_p_nodes = vx_p_nodes;
         if (msgblock != Vx.Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -165,14 +166,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_body;
+      Vx.Core.Type_any output = Vx.Web.Html.e_body;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_body;
+      Vx.Core.Type_any output = Vx.Web.Html.t_body;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "body", // name
         ":struct", // extends
@@ -185,12 +189,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_body e_body = new Class_body();
-  public static Type_body t_body = new Class_body();
+  public static Vx.Web.Html.Type_body e_body = new Vx.Web.Html.Class_body();
+  public static Vx.Web.Html.Type_body t_body = new Vx.Web.Html.Class_body();
 
   /**
    * type: details
@@ -312,7 +317,8 @@ public static class Html {
       output.put(":stylelist", this.stylelist());
       output.put(":summary", this.summary());
       output.put(":nodes", this.nodes());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Web.Html.Type_details vx_new(params object[] vals) {
@@ -320,21 +326,21 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_details vx_copy(params object[] vals) {
-      Type_details output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_details output = this;
       bool ischanged = false;
-      Class_details val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_details value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Type_string vx_p_id = val.id();
-      Vx.Event.Type_eventmap vx_p_eventmap = val.eventmap();
-      Vx.Web.Html.Type_style vx_p_style = val.style();
-      Vx.Web.Html.Type_style vx_p_style_unique = val.style_unique();
-      Vx.Web.Html.Type_stylelist vx_p_stylelist = val.stylelist();
-      Vx.Web.Html.Type_divchildlist vx_p_summary = val.summary();
-      Vx.Web.Html.Type_divchildlist vx_p_nodes = val.nodes();
+      Vx.Core.Type_string vx_p_id = value.id();
+      Vx.Event.Type_eventmap vx_p_eventmap = value.eventmap();
+      Vx.Web.Html.Type_style vx_p_style = value.style();
+      Vx.Web.Html.Type_style vx_p_style_unique = value.style_unique();
+      Vx.Web.Html.Type_stylelist vx_p_stylelist = value.stylelist();
+      Vx.Web.Html.Type_divchildlist vx_p_summary = value.summary();
+      Vx.Web.Html.Type_divchildlist vx_p_nodes = value.nodes();
       List<string> validkeys = new List<string>();
       validkeys.Add(":id");
       validkeys.Add(":eventmap");
@@ -539,7 +545,7 @@ public static class Html {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_details work = new Class_details();
+        Vx.Web.Html.Class_details work = new Vx.Web.Html.Class_details();
         work.vx_p_id = vx_p_id;
         work.vx_p_eventmap = vx_p_eventmap;
         work.vx_p_style = vx_p_style;
@@ -556,14 +562,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_details;
+      Vx.Core.Type_any output = Vx.Web.Html.e_details;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_details;
+      Vx.Core.Type_any output = Vx.Web.Html.t_details;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "details", // name
         ":struct", // extends
@@ -576,12 +585,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_details e_details = new Class_details();
-  public static Type_details t_details = new Class_details();
+  public static Vx.Web.Html.Type_details e_details = new Vx.Web.Html.Class_details();
+  public static Vx.Web.Html.Type_details t_details = new Vx.Web.Html.Class_details();
 
   /**
    * type: div
@@ -688,7 +698,8 @@ public static class Html {
       output.put(":style-unique", this.style_unique());
       output.put(":stylelist", this.stylelist());
       output.put(":nodes", this.nodes());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Web.Html.Type_div vx_new(params object[] vals) {
@@ -696,20 +707,20 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_div vx_copy(params object[] vals) {
-      Type_div output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_div output = this;
       bool ischanged = false;
-      Class_div val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_div value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Type_string vx_p_id = val.id();
-      Vx.Event.Type_eventmap vx_p_eventmap = val.eventmap();
-      Vx.Web.Html.Type_style vx_p_style = val.style();
-      Vx.Web.Html.Type_style vx_p_style_unique = val.style_unique();
-      Vx.Web.Html.Type_stylelist vx_p_stylelist = val.stylelist();
-      Vx.Web.Html.Type_divchildlist vx_p_nodes = val.nodes();
+      Vx.Core.Type_string vx_p_id = value.id();
+      Vx.Event.Type_eventmap vx_p_eventmap = value.eventmap();
+      Vx.Web.Html.Type_style vx_p_style = value.style();
+      Vx.Web.Html.Type_style vx_p_style_unique = value.style_unique();
+      Vx.Web.Html.Type_stylelist vx_p_stylelist = value.stylelist();
+      Vx.Web.Html.Type_divchildlist vx_p_nodes = value.nodes();
       List<string> validkeys = new List<string>();
       validkeys.Add(":id");
       validkeys.Add(":eventmap");
@@ -906,7 +917,7 @@ public static class Html {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_div work = new Class_div();
+        Vx.Web.Html.Class_div work = new Vx.Web.Html.Class_div();
         work.vx_p_id = vx_p_id;
         work.vx_p_eventmap = vx_p_eventmap;
         work.vx_p_style = vx_p_style;
@@ -922,14 +933,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_div;
+      Vx.Core.Type_any output = Vx.Web.Html.e_div;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_div;
+      Vx.Core.Type_any output = Vx.Web.Html.t_div;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "div", // name
         ":struct", // extends
@@ -942,12 +956,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_div e_div = new Class_div();
-  public static Type_div t_div = new Class_div();
+  public static Vx.Web.Html.Type_div e_div = new Vx.Web.Html.Class_div();
+  public static Vx.Web.Html.Type_div t_div = new Vx.Web.Html.Class_div();
 
   /**
    * type: divchild
@@ -966,7 +981,8 @@ public static class Html {
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
       Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Web.Html.Type_divchild vx_new(params object[] vals) {
@@ -974,16 +990,16 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_divchild vx_copy(params object[] vals) {
-      Type_divchild output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_divchild output = this;
       bool ischanged = false;
-      Class_divchild val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_divchild value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_divchild work = new Class_divchild();
+        Vx.Web.Html.Class_divchild work = new Vx.Web.Html.Class_divchild();
         if (msgblock != Vx.Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -993,14 +1009,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_divchild;
+      Vx.Core.Type_any output = Vx.Web.Html.e_divchild;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_divchild;
+      Vx.Core.Type_any output = Vx.Web.Html.t_divchild;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "divchild", // name
         ":struct", // extends
@@ -1013,12 +1032,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_divchild e_divchild = new Class_divchild();
-  public static Type_divchild t_divchild = new Class_divchild();
+  public static Vx.Web.Html.Type_divchild e_divchild = new Vx.Web.Html.Class_divchild();
+  public static Vx.Web.Html.Type_divchild t_divchild = new Vx.Web.Html.Class_divchild();
 
   /**
    * type: divchildlist
@@ -1032,7 +1052,9 @@ public static class Html {
 
   public class Class_divchildlist : Vx.Core.Class_base, Type_divchildlist {
 
-    public List<Vx.Web.Html.Type_divchild> vx_p_list = Vx.Core.immutablelist(new List<Vx.Web.Html.Type_divchild>());
+    public List<Vx.Web.Html.Type_divchild> vx_p_list = Vx.Core.immutablelist(
+      new List<Vx.Web.Html.Type_divchild>()
+    );
 
     public List<Vx.Core.Type_any> vx_list() {
       List<Vx.Core.Type_any> output = Vx.Core.immutablelist(
@@ -1053,11 +1075,13 @@ public static class Html {
     }
 
     public List<Vx.Web.Html.Type_divchild> vx_listdivchild() {
-      return vx_p_list;
+      List<Vx.Web.Html.Type_divchild> output = this.vx_p_list;
+      return output;
     }
 
     public Vx.Core.Type_any vx_any(Vx.Core.Type_int index) {
-      return this.vx_divchild(index);
+      Vx.Web.Html.Type_divchild output = this.vx_divchild(index);
+      return output;
     }
 
     public override Vx.Web.Html.Type_divchildlist vx_new(params object[] vals) {
@@ -1065,15 +1089,15 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_divchildlist vx_copy(params object[] vals) {
-      Type_divchildlist output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_divchildlist output = this;
       bool ischanged = false;
-      Class_divchildlist val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_divchildlist value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      List<Vx.Web.Html.Type_divchild> listval = new List<Vx.Web.Html.Type_divchild>(val.vx_listdivchild());
+      List<Vx.Web.Html.Type_divchild> listval = new List<Vx.Web.Html.Type_divchild>(value.vx_listdivchild());
       Vx.Core.Type_msg msg;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
@@ -1106,7 +1130,7 @@ public static class Html {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_divchildlist work = new Class_divchildlist();
+        Vx.Web.Html.Class_divchildlist work = new Vx.Web.Html.Class_divchildlist();
         work.vx_p_list = Vx.Core.immutablelist(listval);
         if (msgblock != Vx.Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -1117,14 +1141,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_divchildlist;
+      Vx.Core.Type_any output = Vx.Web.Html.e_divchildlist;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_divchildlist;
+      Vx.Core.Type_any output = Vx.Web.Html.t_divchildlist;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "divchildlist", // name
         ":list", // extends
@@ -1137,12 +1164,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_divchildlist e_divchildlist = new Class_divchildlist();
-  public static Type_divchildlist t_divchildlist = new Class_divchildlist();
+  public static Vx.Web.Html.Type_divchildlist e_divchildlist = new Vx.Web.Html.Class_divchildlist();
+  public static Vx.Web.Html.Type_divchildlist t_divchildlist = new Vx.Web.Html.Class_divchildlist();
 
   /**
    * type: divlist
@@ -1156,7 +1184,9 @@ public static class Html {
 
   public class Class_divlist : Vx.Core.Class_base, Type_divlist {
 
-    public List<Vx.Web.Html.Type_div> vx_p_list = Vx.Core.immutablelist(new List<Vx.Web.Html.Type_div>());
+    public List<Vx.Web.Html.Type_div> vx_p_list = Vx.Core.immutablelist(
+      new List<Vx.Web.Html.Type_div>()
+    );
 
     public List<Vx.Core.Type_any> vx_list() {
       List<Vx.Core.Type_any> output = Vx.Core.immutablelist(
@@ -1177,11 +1207,13 @@ public static class Html {
     }
 
     public List<Vx.Web.Html.Type_div> vx_listdiv() {
-      return vx_p_list;
+      List<Vx.Web.Html.Type_div> output = this.vx_p_list;
+      return output;
     }
 
     public Vx.Core.Type_any vx_any(Vx.Core.Type_int index) {
-      return this.vx_div(index);
+      Vx.Web.Html.Type_div output = this.vx_div(index);
+      return output;
     }
 
     public override Vx.Web.Html.Type_divlist vx_new(params object[] vals) {
@@ -1189,15 +1221,15 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_divlist vx_copy(params object[] vals) {
-      Type_divlist output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_divlist output = this;
       bool ischanged = false;
-      Class_divlist val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_divlist value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      List<Vx.Web.Html.Type_div> listval = new List<Vx.Web.Html.Type_div>(val.vx_listdiv());
+      List<Vx.Web.Html.Type_div> listval = new List<Vx.Web.Html.Type_div>(value.vx_listdiv());
       Vx.Core.Type_msg msg;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
@@ -1230,7 +1262,7 @@ public static class Html {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_divlist work = new Class_divlist();
+        Vx.Web.Html.Class_divlist work = new Vx.Web.Html.Class_divlist();
         work.vx_p_list = Vx.Core.immutablelist(listval);
         if (msgblock != Vx.Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -1241,14 +1273,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_divlist;
+      Vx.Core.Type_any output = Vx.Web.Html.e_divlist;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_divlist;
+      Vx.Core.Type_any output = Vx.Web.Html.t_divlist;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "divlist", // name
         ":list", // extends
@@ -1261,12 +1296,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_divlist e_divlist = new Class_divlist();
-  public static Type_divlist t_divlist = new Class_divlist();
+  public static Vx.Web.Html.Type_divlist e_divlist = new Vx.Web.Html.Class_divlist();
+  public static Vx.Web.Html.Type_divlist t_divlist = new Vx.Web.Html.Class_divlist();
 
   /**
    * type: footer
@@ -1303,7 +1339,8 @@ public static class Html {
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
       Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
       output.put(":nodes", this.nodes());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Web.Html.Type_footer vx_new(params object[] vals) {
@@ -1311,15 +1348,15 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_footer vx_copy(params object[] vals) {
-      Type_footer output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_footer output = this;
       bool ischanged = false;
-      Class_footer val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_footer value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Web.Html.Type_divchildlist vx_p_nodes = val.nodes();
+      Vx.Web.Html.Type_divchildlist vx_p_nodes = value.nodes();
       List<string> validkeys = new List<string>();
       validkeys.Add(":nodes");
       string key = "";
@@ -1408,7 +1445,7 @@ public static class Html {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_footer work = new Class_footer();
+        Vx.Web.Html.Class_footer work = new Vx.Web.Html.Class_footer();
         work.vx_p_nodes = vx_p_nodes;
         if (msgblock != Vx.Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -1419,14 +1456,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_footer;
+      Vx.Core.Type_any output = Vx.Web.Html.e_footer;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_footer;
+      Vx.Core.Type_any output = Vx.Web.Html.t_footer;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "footer", // name
         ":struct", // extends
@@ -1439,12 +1479,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_footer e_footer = new Class_footer();
-  public static Type_footer t_footer = new Class_footer();
+  public static Vx.Web.Html.Type_footer e_footer = new Vx.Web.Html.Class_footer();
+  public static Vx.Web.Html.Type_footer t_footer = new Vx.Web.Html.Class_footer();
 
   /**
    * type: h1
@@ -1551,7 +1592,8 @@ public static class Html {
       output.put(":style-unique", this.style_unique());
       output.put(":stylelist", this.stylelist());
       output.put(":text", this.text());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Web.Html.Type_h1 vx_new(params object[] vals) {
@@ -1559,20 +1601,20 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_h1 vx_copy(params object[] vals) {
-      Type_h1 output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_h1 output = this;
       bool ischanged = false;
-      Class_h1 val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_h1 value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Type_string vx_p_id = val.id();
-      Vx.Event.Type_eventmap vx_p_eventmap = val.eventmap();
-      Vx.Web.Html.Type_style vx_p_style = val.style();
-      Vx.Web.Html.Type_style vx_p_style_unique = val.style_unique();
-      Vx.Web.Html.Type_stylelist vx_p_stylelist = val.stylelist();
-      Vx.Core.Type_string vx_p_text = val.text();
+      Vx.Core.Type_string vx_p_id = value.id();
+      Vx.Event.Type_eventmap vx_p_eventmap = value.eventmap();
+      Vx.Web.Html.Type_style vx_p_style = value.style();
+      Vx.Web.Html.Type_style vx_p_style_unique = value.style_unique();
+      Vx.Web.Html.Type_stylelist vx_p_stylelist = value.stylelist();
+      Vx.Core.Type_string vx_p_text = value.text();
       List<string> validkeys = new List<string>();
       validkeys.Add(":id");
       validkeys.Add(":eventmap");
@@ -1618,10 +1660,10 @@ public static class Html {
             bool isvalidkey = validkeys.Contains(testkey);
             if (isvalidkey) {
               key = testkey;
-            } else if (valsub is Vx.Core.Type_string) { // default property
+            } else if (valsub is Vx.Core.Type_string valstr) {
               ischanged = true;
-              vx_p_text = (Vx.Core.Type_string)valsub;
-            } else if (valsub is string) { // default property
+              vx_p_text = valstr;
+            } else if (valsub is string) {
               ischanged = true;
               vx_p_text = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
@@ -1768,7 +1810,7 @@ public static class Html {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_h1 work = new Class_h1();
+        Vx.Web.Html.Class_h1 work = new Vx.Web.Html.Class_h1();
         work.vx_p_id = vx_p_id;
         work.vx_p_eventmap = vx_p_eventmap;
         work.vx_p_style = vx_p_style;
@@ -1784,14 +1826,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_h1;
+      Vx.Core.Type_any output = Vx.Web.Html.e_h1;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_h1;
+      Vx.Core.Type_any output = Vx.Web.Html.t_h1;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "h1", // name
         ":struct", // extends
@@ -1804,12 +1849,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_h1 e_h1 = new Class_h1();
-  public static Type_h1 t_h1 = new Class_h1();
+  public static Vx.Web.Html.Type_h1 e_h1 = new Vx.Web.Html.Class_h1();
+  public static Vx.Web.Html.Type_h1 t_h1 = new Vx.Web.Html.Class_h1();
 
   /**
    * type: h2
@@ -1916,7 +1962,8 @@ public static class Html {
       output.put(":style-unique", this.style_unique());
       output.put(":stylelist", this.stylelist());
       output.put(":text", this.text());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Web.Html.Type_h2 vx_new(params object[] vals) {
@@ -1924,20 +1971,20 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_h2 vx_copy(params object[] vals) {
-      Type_h2 output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_h2 output = this;
       bool ischanged = false;
-      Class_h2 val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_h2 value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Type_string vx_p_id = val.id();
-      Vx.Event.Type_eventmap vx_p_eventmap = val.eventmap();
-      Vx.Web.Html.Type_style vx_p_style = val.style();
-      Vx.Web.Html.Type_style vx_p_style_unique = val.style_unique();
-      Vx.Web.Html.Type_stylelist vx_p_stylelist = val.stylelist();
-      Vx.Core.Type_string vx_p_text = val.text();
+      Vx.Core.Type_string vx_p_id = value.id();
+      Vx.Event.Type_eventmap vx_p_eventmap = value.eventmap();
+      Vx.Web.Html.Type_style vx_p_style = value.style();
+      Vx.Web.Html.Type_style vx_p_style_unique = value.style_unique();
+      Vx.Web.Html.Type_stylelist vx_p_stylelist = value.stylelist();
+      Vx.Core.Type_string vx_p_text = value.text();
       List<string> validkeys = new List<string>();
       validkeys.Add(":id");
       validkeys.Add(":eventmap");
@@ -1983,10 +2030,10 @@ public static class Html {
             bool isvalidkey = validkeys.Contains(testkey);
             if (isvalidkey) {
               key = testkey;
-            } else if (valsub is Vx.Core.Type_string) { // default property
+            } else if (valsub is Vx.Core.Type_string valstr) {
               ischanged = true;
-              vx_p_text = (Vx.Core.Type_string)valsub;
-            } else if (valsub is string) { // default property
+              vx_p_text = valstr;
+            } else if (valsub is string) {
               ischanged = true;
               vx_p_text = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
@@ -2133,7 +2180,7 @@ public static class Html {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_h2 work = new Class_h2();
+        Vx.Web.Html.Class_h2 work = new Vx.Web.Html.Class_h2();
         work.vx_p_id = vx_p_id;
         work.vx_p_eventmap = vx_p_eventmap;
         work.vx_p_style = vx_p_style;
@@ -2149,14 +2196,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_h2;
+      Vx.Core.Type_any output = Vx.Web.Html.e_h2;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_h2;
+      Vx.Core.Type_any output = Vx.Web.Html.t_h2;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "h2", // name
         ":struct", // extends
@@ -2169,12 +2219,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_h2 e_h2 = new Class_h2();
-  public static Type_h2 t_h2 = new Class_h2();
+  public static Vx.Web.Html.Type_h2 e_h2 = new Vx.Web.Html.Class_h2();
+  public static Vx.Web.Html.Type_h2 t_h2 = new Vx.Web.Html.Class_h2();
 
   /**
    * type: h3
@@ -2281,7 +2332,8 @@ public static class Html {
       output.put(":style-unique", this.style_unique());
       output.put(":stylelist", this.stylelist());
       output.put(":text", this.text());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Web.Html.Type_h3 vx_new(params object[] vals) {
@@ -2289,20 +2341,20 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_h3 vx_copy(params object[] vals) {
-      Type_h3 output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_h3 output = this;
       bool ischanged = false;
-      Class_h3 val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_h3 value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Type_string vx_p_id = val.id();
-      Vx.Event.Type_eventmap vx_p_eventmap = val.eventmap();
-      Vx.Web.Html.Type_style vx_p_style = val.style();
-      Vx.Web.Html.Type_style vx_p_style_unique = val.style_unique();
-      Vx.Web.Html.Type_stylelist vx_p_stylelist = val.stylelist();
-      Vx.Core.Type_string vx_p_text = val.text();
+      Vx.Core.Type_string vx_p_id = value.id();
+      Vx.Event.Type_eventmap vx_p_eventmap = value.eventmap();
+      Vx.Web.Html.Type_style vx_p_style = value.style();
+      Vx.Web.Html.Type_style vx_p_style_unique = value.style_unique();
+      Vx.Web.Html.Type_stylelist vx_p_stylelist = value.stylelist();
+      Vx.Core.Type_string vx_p_text = value.text();
       List<string> validkeys = new List<string>();
       validkeys.Add(":id");
       validkeys.Add(":eventmap");
@@ -2348,10 +2400,10 @@ public static class Html {
             bool isvalidkey = validkeys.Contains(testkey);
             if (isvalidkey) {
               key = testkey;
-            } else if (valsub is Vx.Core.Type_string) { // default property
+            } else if (valsub is Vx.Core.Type_string valstr) {
               ischanged = true;
-              vx_p_text = (Vx.Core.Type_string)valsub;
-            } else if (valsub is string) { // default property
+              vx_p_text = valstr;
+            } else if (valsub is string) {
               ischanged = true;
               vx_p_text = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
@@ -2498,7 +2550,7 @@ public static class Html {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_h3 work = new Class_h3();
+        Vx.Web.Html.Class_h3 work = new Vx.Web.Html.Class_h3();
         work.vx_p_id = vx_p_id;
         work.vx_p_eventmap = vx_p_eventmap;
         work.vx_p_style = vx_p_style;
@@ -2514,14 +2566,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_h3;
+      Vx.Core.Type_any output = Vx.Web.Html.e_h3;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_h3;
+      Vx.Core.Type_any output = Vx.Web.Html.t_h3;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "h3", // name
         ":struct", // extends
@@ -2534,12 +2589,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_h3 e_h3 = new Class_h3();
-  public static Type_h3 t_h3 = new Class_h3();
+  public static Vx.Web.Html.Type_h3 e_h3 = new Vx.Web.Html.Class_h3();
+  public static Vx.Web.Html.Type_h3 t_h3 = new Vx.Web.Html.Class_h3();
 
   /**
    * type: head
@@ -2576,7 +2632,8 @@ public static class Html {
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
       Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
       output.put(":nodes", this.nodes());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Web.Html.Type_head vx_new(params object[] vals) {
@@ -2584,15 +2641,15 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_head vx_copy(params object[] vals) {
-      Type_head output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_head output = this;
       bool ischanged = false;
-      Class_head val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_head value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Web.Html.Type_headchildlist vx_p_nodes = val.nodes();
+      Vx.Web.Html.Type_headchildlist vx_p_nodes = value.nodes();
       List<string> validkeys = new List<string>();
       validkeys.Add(":nodes");
       string key = "";
@@ -2681,7 +2738,7 @@ public static class Html {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_head work = new Class_head();
+        Vx.Web.Html.Class_head work = new Vx.Web.Html.Class_head();
         work.vx_p_nodes = vx_p_nodes;
         if (msgblock != Vx.Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -2692,14 +2749,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_head;
+      Vx.Core.Type_any output = Vx.Web.Html.e_head;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_head;
+      Vx.Core.Type_any output = Vx.Web.Html.t_head;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "head", // name
         ":struct", // extends
@@ -2712,12 +2772,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_head e_head = new Class_head();
-  public static Type_head t_head = new Class_head();
+  public static Vx.Web.Html.Type_head e_head = new Vx.Web.Html.Class_head();
+  public static Vx.Web.Html.Type_head t_head = new Vx.Web.Html.Class_head();
 
   /**
    * type: headchild
@@ -2736,7 +2797,8 @@ public static class Html {
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
       Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Web.Html.Type_headchild vx_new(params object[] vals) {
@@ -2744,16 +2806,16 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_headchild vx_copy(params object[] vals) {
-      Type_headchild output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_headchild output = this;
       bool ischanged = false;
-      Class_headchild val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_headchild value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_headchild work = new Class_headchild();
+        Vx.Web.Html.Class_headchild work = new Vx.Web.Html.Class_headchild();
         if (msgblock != Vx.Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -2763,14 +2825,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_headchild;
+      Vx.Core.Type_any output = Vx.Web.Html.e_headchild;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_headchild;
+      Vx.Core.Type_any output = Vx.Web.Html.t_headchild;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "headchild", // name
         ":struct", // extends
@@ -2783,12 +2848,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_headchild e_headchild = new Class_headchild();
-  public static Type_headchild t_headchild = new Class_headchild();
+  public static Vx.Web.Html.Type_headchild e_headchild = new Vx.Web.Html.Class_headchild();
+  public static Vx.Web.Html.Type_headchild t_headchild = new Vx.Web.Html.Class_headchild();
 
   /**
    * type: headchildlist
@@ -2802,7 +2868,9 @@ public static class Html {
 
   public class Class_headchildlist : Vx.Core.Class_base, Type_headchildlist {
 
-    public List<Vx.Web.Html.Type_headchild> vx_p_list = Vx.Core.immutablelist(new List<Vx.Web.Html.Type_headchild>());
+    public List<Vx.Web.Html.Type_headchild> vx_p_list = Vx.Core.immutablelist(
+      new List<Vx.Web.Html.Type_headchild>()
+    );
 
     public List<Vx.Core.Type_any> vx_list() {
       List<Vx.Core.Type_any> output = Vx.Core.immutablelist(
@@ -2823,11 +2891,13 @@ public static class Html {
     }
 
     public List<Vx.Web.Html.Type_headchild> vx_listheadchild() {
-      return vx_p_list;
+      List<Vx.Web.Html.Type_headchild> output = this.vx_p_list;
+      return output;
     }
 
     public Vx.Core.Type_any vx_any(Vx.Core.Type_int index) {
-      return this.vx_headchild(index);
+      Vx.Web.Html.Type_headchild output = this.vx_headchild(index);
+      return output;
     }
 
     public override Vx.Web.Html.Type_headchildlist vx_new(params object[] vals) {
@@ -2835,15 +2905,15 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_headchildlist vx_copy(params object[] vals) {
-      Type_headchildlist output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_headchildlist output = this;
       bool ischanged = false;
-      Class_headchildlist val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_headchildlist value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      List<Vx.Web.Html.Type_headchild> listval = new List<Vx.Web.Html.Type_headchild>(val.vx_listheadchild());
+      List<Vx.Web.Html.Type_headchild> listval = new List<Vx.Web.Html.Type_headchild>(value.vx_listheadchild());
       Vx.Core.Type_msg msg;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
@@ -2876,7 +2946,7 @@ public static class Html {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_headchildlist work = new Class_headchildlist();
+        Vx.Web.Html.Class_headchildlist work = new Vx.Web.Html.Class_headchildlist();
         work.vx_p_list = Vx.Core.immutablelist(listval);
         if (msgblock != Vx.Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -2887,14 +2957,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_headchildlist;
+      Vx.Core.Type_any output = Vx.Web.Html.e_headchildlist;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_headchildlist;
+      Vx.Core.Type_any output = Vx.Web.Html.t_headchildlist;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "headchildlist", // name
         ":list", // extends
@@ -2907,12 +2980,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_headchildlist e_headchildlist = new Class_headchildlist();
-  public static Type_headchildlist t_headchildlist = new Class_headchildlist();
+  public static Vx.Web.Html.Type_headchildlist e_headchildlist = new Vx.Web.Html.Class_headchildlist();
+  public static Vx.Web.Html.Type_headchildlist t_headchildlist = new Vx.Web.Html.Class_headchildlist();
 
   /**
    * type: html
@@ -2994,7 +3068,8 @@ public static class Html {
       output.put(":head", this.head());
       output.put(":body", this.body());
       output.put(":footer", this.footer());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Web.Html.Type_html vx_new(params object[] vals) {
@@ -3002,18 +3077,18 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_html vx_copy(params object[] vals) {
-      Type_html output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_html output = this;
       bool ischanged = false;
-      Class_html val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_html value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Type_string vx_p_lang = val.lang();
-      Vx.Web.Html.Type_head vx_p_head = val.head();
-      Vx.Web.Html.Type_body vx_p_body = val.body();
-      Vx.Web.Html.Type_footer vx_p_footer = val.footer();
+      Vx.Core.Type_string vx_p_lang = value.lang();
+      Vx.Web.Html.Type_head vx_p_head = value.head();
+      Vx.Web.Html.Type_body vx_p_body = value.body();
+      Vx.Web.Html.Type_footer vx_p_footer = value.footer();
       List<string> validkeys = new List<string>();
       validkeys.Add(":lang");
       validkeys.Add(":head");
@@ -3155,7 +3230,7 @@ public static class Html {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_html work = new Class_html();
+        Vx.Web.Html.Class_html work = new Vx.Web.Html.Class_html();
         work.vx_p_lang = vx_p_lang;
         work.vx_p_head = vx_p_head;
         work.vx_p_body = vx_p_body;
@@ -3169,14 +3244,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_html;
+      Vx.Core.Type_any output = Vx.Web.Html.e_html;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_html;
+      Vx.Core.Type_any output = Vx.Web.Html.t_html;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "html", // name
         ":struct", // extends
@@ -3189,12 +3267,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_html e_html = new Class_html();
-  public static Type_html t_html = new Class_html();
+  public static Vx.Web.Html.Type_html e_html = new Vx.Web.Html.Class_html();
+  public static Vx.Web.Html.Type_html t_html = new Vx.Web.Html.Class_html();
 
   /**
    * type: img
@@ -3301,7 +3380,8 @@ public static class Html {
       output.put(":style-unique", this.style_unique());
       output.put(":stylelist", this.stylelist());
       output.put(":src", this.src());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Web.Html.Type_img vx_new(params object[] vals) {
@@ -3309,20 +3389,20 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_img vx_copy(params object[] vals) {
-      Type_img output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_img output = this;
       bool ischanged = false;
-      Class_img val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_img value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Type_string vx_p_id = val.id();
-      Vx.Event.Type_eventmap vx_p_eventmap = val.eventmap();
-      Vx.Web.Html.Type_style vx_p_style = val.style();
-      Vx.Web.Html.Type_style vx_p_style_unique = val.style_unique();
-      Vx.Web.Html.Type_stylelist vx_p_stylelist = val.stylelist();
-      Vx.Core.Type_string vx_p_src = val.src();
+      Vx.Core.Type_string vx_p_id = value.id();
+      Vx.Event.Type_eventmap vx_p_eventmap = value.eventmap();
+      Vx.Web.Html.Type_style vx_p_style = value.style();
+      Vx.Web.Html.Type_style vx_p_style_unique = value.style_unique();
+      Vx.Web.Html.Type_stylelist vx_p_stylelist = value.stylelist();
+      Vx.Core.Type_string vx_p_src = value.src();
       List<string> validkeys = new List<string>();
       validkeys.Add(":id");
       validkeys.Add(":eventmap");
@@ -3368,10 +3448,10 @@ public static class Html {
             bool isvalidkey = validkeys.Contains(testkey);
             if (isvalidkey) {
               key = testkey;
-            } else if (valsub is Vx.Core.Type_string) { // default property
+            } else if (valsub is Vx.Core.Type_string valstr) {
               ischanged = true;
-              vx_p_src = (Vx.Core.Type_string)valsub;
-            } else if (valsub is string) { // default property
+              vx_p_src = valstr;
+            } else if (valsub is string) {
               ischanged = true;
               vx_p_src = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
@@ -3518,7 +3598,7 @@ public static class Html {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_img work = new Class_img();
+        Vx.Web.Html.Class_img work = new Vx.Web.Html.Class_img();
         work.vx_p_id = vx_p_id;
         work.vx_p_eventmap = vx_p_eventmap;
         work.vx_p_style = vx_p_style;
@@ -3534,14 +3614,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_img;
+      Vx.Core.Type_any output = Vx.Web.Html.e_img;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_img;
+      Vx.Core.Type_any output = Vx.Web.Html.t_img;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "img", // name
         ":struct", // extends
@@ -3554,12 +3637,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_img e_img = new Class_img();
-  public static Type_img t_img = new Class_img();
+  public static Vx.Web.Html.Type_img e_img = new Vx.Web.Html.Class_img();
+  public static Vx.Web.Html.Type_img t_img = new Vx.Web.Html.Class_img();
 
   /**
    * type: meta
@@ -3696,7 +3780,8 @@ public static class Html {
       output.put(":charset", this.charset());
       output.put(":name", this.name());
       output.put(":content", this.content());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Web.Html.Type_meta vx_new(params object[] vals) {
@@ -3704,22 +3789,22 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_meta vx_copy(params object[] vals) {
-      Type_meta output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_meta output = this;
       bool ischanged = false;
-      Class_meta val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_meta value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Type_string vx_p_id = val.id();
-      Vx.Event.Type_eventmap vx_p_eventmap = val.eventmap();
-      Vx.Web.Html.Type_style vx_p_style = val.style();
-      Vx.Web.Html.Type_style vx_p_style_unique = val.style_unique();
-      Vx.Web.Html.Type_stylelist vx_p_stylelist = val.stylelist();
-      Vx.Core.Type_string vx_p_charset = val.charset();
-      Vx.Core.Type_string vx_p_name = val.name();
-      Vx.Core.Type_string vx_p_content = val.content();
+      Vx.Core.Type_string vx_p_id = value.id();
+      Vx.Event.Type_eventmap vx_p_eventmap = value.eventmap();
+      Vx.Web.Html.Type_style vx_p_style = value.style();
+      Vx.Web.Html.Type_style vx_p_style_unique = value.style_unique();
+      Vx.Web.Html.Type_stylelist vx_p_stylelist = value.stylelist();
+      Vx.Core.Type_string vx_p_charset = value.charset();
+      Vx.Core.Type_string vx_p_name = value.name();
+      Vx.Core.Type_string vx_p_content = value.content();
       List<string> validkeys = new List<string>();
       validkeys.Add(":id");
       validkeys.Add(":eventmap");
@@ -3954,7 +4039,7 @@ public static class Html {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_meta work = new Class_meta();
+        Vx.Web.Html.Class_meta work = new Vx.Web.Html.Class_meta();
         work.vx_p_id = vx_p_id;
         work.vx_p_eventmap = vx_p_eventmap;
         work.vx_p_style = vx_p_style;
@@ -3972,14 +4057,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_meta;
+      Vx.Core.Type_any output = Vx.Web.Html.e_meta;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_meta;
+      Vx.Core.Type_any output = Vx.Web.Html.t_meta;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "meta", // name
         ":struct", // extends
@@ -3992,12 +4080,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_meta e_meta = new Class_meta();
-  public static Type_meta t_meta = new Class_meta();
+  public static Vx.Web.Html.Type_meta e_meta = new Vx.Web.Html.Class_meta();
+  public static Vx.Web.Html.Type_meta t_meta = new Vx.Web.Html.Class_meta();
 
   /**
    * type: node
@@ -4094,7 +4183,8 @@ public static class Html {
       output.put(":style", this.style());
       output.put(":style-unique", this.style_unique());
       output.put(":stylelist", this.stylelist());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Web.Html.Type_node vx_new(params object[] vals) {
@@ -4102,19 +4192,19 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_node vx_copy(params object[] vals) {
-      Type_node output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_node output = this;
       bool ischanged = false;
-      Class_node val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_node value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Type_string vx_p_id = val.id();
-      Vx.Event.Type_eventmap vx_p_eventmap = val.eventmap();
-      Vx.Web.Html.Type_style vx_p_style = val.style();
-      Vx.Web.Html.Type_style vx_p_style_unique = val.style_unique();
-      Vx.Web.Html.Type_stylelist vx_p_stylelist = val.stylelist();
+      Vx.Core.Type_string vx_p_id = value.id();
+      Vx.Event.Type_eventmap vx_p_eventmap = value.eventmap();
+      Vx.Web.Html.Type_style vx_p_style = value.style();
+      Vx.Web.Html.Type_style vx_p_style_unique = value.style_unique();
+      Vx.Web.Html.Type_stylelist vx_p_stylelist = value.stylelist();
       List<string> validkeys = new List<string>();
       validkeys.Add(":id");
       validkeys.Add(":eventmap");
@@ -4277,7 +4367,7 @@ public static class Html {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_node work = new Class_node();
+        Vx.Web.Html.Class_node work = new Vx.Web.Html.Class_node();
         work.vx_p_id = vx_p_id;
         work.vx_p_eventmap = vx_p_eventmap;
         work.vx_p_style = vx_p_style;
@@ -4292,14 +4382,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_node;
+      Vx.Core.Type_any output = Vx.Web.Html.e_node;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_node;
+      Vx.Core.Type_any output = Vx.Web.Html.t_node;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "node", // name
         ":struct", // extends
@@ -4312,12 +4405,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_node e_node = new Class_node();
-  public static Type_node t_node = new Class_node();
+  public static Vx.Web.Html.Type_node e_node = new Vx.Web.Html.Class_node();
+  public static Vx.Web.Html.Type_node t_node = new Vx.Web.Html.Class_node();
 
   /**
    * type: nodelist
@@ -4331,7 +4425,9 @@ public static class Html {
 
   public class Class_nodelist : Vx.Core.Class_base, Type_nodelist {
 
-    public List<Vx.Web.Html.Type_node> vx_p_list = Vx.Core.immutablelist(new List<Vx.Web.Html.Type_node>());
+    public List<Vx.Web.Html.Type_node> vx_p_list = Vx.Core.immutablelist(
+      new List<Vx.Web.Html.Type_node>()
+    );
 
     public List<Vx.Core.Type_any> vx_list() {
       List<Vx.Core.Type_any> output = Vx.Core.immutablelist(
@@ -4352,11 +4448,13 @@ public static class Html {
     }
 
     public List<Vx.Web.Html.Type_node> vx_listnode() {
-      return vx_p_list;
+      List<Vx.Web.Html.Type_node> output = this.vx_p_list;
+      return output;
     }
 
     public Vx.Core.Type_any vx_any(Vx.Core.Type_int index) {
-      return this.vx_node(index);
+      Vx.Web.Html.Type_node output = this.vx_node(index);
+      return output;
     }
 
     public override Vx.Web.Html.Type_nodelist vx_new(params object[] vals) {
@@ -4364,15 +4462,15 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_nodelist vx_copy(params object[] vals) {
-      Type_nodelist output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_nodelist output = this;
       bool ischanged = false;
-      Class_nodelist val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_nodelist value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      List<Vx.Web.Html.Type_node> listval = new List<Vx.Web.Html.Type_node>(val.vx_listnode());
+      List<Vx.Web.Html.Type_node> listval = new List<Vx.Web.Html.Type_node>(value.vx_listnode());
       Vx.Core.Type_msg msg;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
@@ -4405,7 +4503,7 @@ public static class Html {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_nodelist work = new Class_nodelist();
+        Vx.Web.Html.Class_nodelist work = new Vx.Web.Html.Class_nodelist();
         work.vx_p_list = Vx.Core.immutablelist(listval);
         if (msgblock != Vx.Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -4416,14 +4514,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_nodelist;
+      Vx.Core.Type_any output = Vx.Web.Html.e_nodelist;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_nodelist;
+      Vx.Core.Type_any output = Vx.Web.Html.t_nodelist;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "nodelist", // name
         ":list", // extends
@@ -4436,12 +4537,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_nodelist e_nodelist = new Class_nodelist();
-  public static Type_nodelist t_nodelist = new Class_nodelist();
+  public static Vx.Web.Html.Type_nodelist e_nodelist = new Vx.Web.Html.Class_nodelist();
+  public static Vx.Web.Html.Type_nodelist t_nodelist = new Vx.Web.Html.Class_nodelist();
 
   /**
    * type: p
@@ -4548,7 +4650,8 @@ public static class Html {
       output.put(":style-unique", this.style_unique());
       output.put(":stylelist", this.stylelist());
       output.put(":text", this.text());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Web.Html.Type_p vx_new(params object[] vals) {
@@ -4556,20 +4659,20 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_p vx_copy(params object[] vals) {
-      Type_p output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_p output = this;
       bool ischanged = false;
-      Class_p val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_p value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Type_string vx_p_id = val.id();
-      Vx.Event.Type_eventmap vx_p_eventmap = val.eventmap();
-      Vx.Web.Html.Type_style vx_p_style = val.style();
-      Vx.Web.Html.Type_style vx_p_style_unique = val.style_unique();
-      Vx.Web.Html.Type_stylelist vx_p_stylelist = val.stylelist();
-      Vx.Core.Type_string vx_p_text = val.text();
+      Vx.Core.Type_string vx_p_id = value.id();
+      Vx.Event.Type_eventmap vx_p_eventmap = value.eventmap();
+      Vx.Web.Html.Type_style vx_p_style = value.style();
+      Vx.Web.Html.Type_style vx_p_style_unique = value.style_unique();
+      Vx.Web.Html.Type_stylelist vx_p_stylelist = value.stylelist();
+      Vx.Core.Type_string vx_p_text = value.text();
       List<string> validkeys = new List<string>();
       validkeys.Add(":id");
       validkeys.Add(":eventmap");
@@ -4615,10 +4718,10 @@ public static class Html {
             bool isvalidkey = validkeys.Contains(testkey);
             if (isvalidkey) {
               key = testkey;
-            } else if (valsub is Vx.Core.Type_string) { // default property
+            } else if (valsub is Vx.Core.Type_string valstr) {
               ischanged = true;
-              vx_p_text = (Vx.Core.Type_string)valsub;
-            } else if (valsub is string) { // default property
+              vx_p_text = valstr;
+            } else if (valsub is string) {
               ischanged = true;
               vx_p_text = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             } else {
@@ -4765,7 +4868,7 @@ public static class Html {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_p work = new Class_p();
+        Vx.Web.Html.Class_p work = new Vx.Web.Html.Class_p();
         work.vx_p_id = vx_p_id;
         work.vx_p_eventmap = vx_p_eventmap;
         work.vx_p_style = vx_p_style;
@@ -4781,14 +4884,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_p;
+      Vx.Core.Type_any output = Vx.Web.Html.e_p;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_p;
+      Vx.Core.Type_any output = Vx.Web.Html.t_p;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "p", // name
         ":struct", // extends
@@ -4801,12 +4907,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_p e_p = new Class_p();
-  public static Type_p t_p = new Class_p();
+  public static Vx.Web.Html.Type_p e_p = new Vx.Web.Html.Class_p();
+  public static Vx.Web.Html.Type_p t_p = new Vx.Web.Html.Class_p();
 
   /**
    * type: propmap
@@ -4858,12 +4965,15 @@ public static class Html {
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_string> vx_mapstring() {
-      return vx_p_map;
+      Vx.Core.Map<string, Vx.Core.Type_string> output = this.vx_p_map;
+      return output;
     }
 
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
-      return this.vx_string(key);
+      Vx.Core.Type_any output = this.vx_string(key);
+      return output;
     }
+
 
     public Vx.Core.Type_map vx_new_from_map(Vx.Core.Map<string, Vx.Core.Type_any> mapval) {
       Vx.Web.Html.Class_propmap output = new Vx.Web.Html.Class_propmap();
@@ -4871,12 +4981,12 @@ public static class Html {
       Vx.Core.Map<string, Vx.Core.Type_string> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_string>();
       List<string> keys = mapval.keys();
       foreach (string key in keys) {
-        Vx.Core.Type_any val = mapval.get(key);
+        Vx.Core.Type_any value = mapval.get(key);
         if (false) {
-        } else if (val is Vx.Core.Type_string castval) {
+        } else if (value is Vx.Core.Type_string castval) {
           map.put(key, castval);
         } else {
-          Vx.Core.Type_msg msg = Vx.Core.vx_msg_from_error("vx/web/html/propmap", ":invalidvalue", val);
+          Vx.Core.Type_msg msg = Vx.Core.vx_msg_from_error("vx/web/html/propmap", ":invalidvalue", value);
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         }
       }
@@ -4892,15 +5002,15 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_propmap vx_copy(params object[] vals) {
-      Type_propmap output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_propmap output = this;
       bool ischanged = false;
-      Class_propmap val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_propmap value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Map<string, Vx.Core.Type_string> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_string>(val.vx_mapstring());
+      Vx.Core.Map<string, Vx.Core.Type_string> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_string>(value.vx_mapstring());
       Vx.Core.Type_msg? msg = null;
       string key = "";
       Vx.Core.Type_any? msgval = null;
@@ -4957,7 +5067,7 @@ public static class Html {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_propmap work = new Class_propmap();
+        Vx.Web.Html.Class_propmap work = new Vx.Web.Html.Class_propmap();
         work.vx_p_map = Vx.Core.immutablemap(mapval);
         if (msgblock != Vx.Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -4968,14 +5078,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_propmap;
+      Vx.Core.Type_any output = Vx.Web.Html.e_propmap;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_propmap;
+      Vx.Core.Type_any output = Vx.Web.Html.t_propmap;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "propmap", // name
         ":map", // extends
@@ -4988,12 +5101,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_propmap e_propmap = new Class_propmap();
-  public static Type_propmap t_propmap = new Class_propmap();
+  public static Vx.Web.Html.Type_propmap e_propmap = new Vx.Web.Html.Class_propmap();
+  public static Vx.Web.Html.Type_propmap t_propmap = new Vx.Web.Html.Class_propmap();
 
   /**
    * type: style
@@ -5060,7 +5174,8 @@ public static class Html {
       output.put(":name", this.name());
       output.put(":props", this.props());
       output.put(":stylelist", this.stylelist());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Web.Html.Type_style vx_new(params object[] vals) {
@@ -5068,17 +5183,17 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_style vx_copy(params object[] vals) {
-      Type_style output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_style output = this;
       bool ischanged = false;
-      Class_style val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_style value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Type_string vx_p_name = val.name();
-      Vx.Web.Html.Type_propmap vx_p_props = val.props();
-      Vx.Web.Html.Type_stylelist vx_p_stylelist = val.stylelist();
+      Vx.Core.Type_string vx_p_name = value.name();
+      Vx.Web.Html.Type_propmap vx_p_props = value.props();
+      Vx.Web.Html.Type_stylelist vx_p_stylelist = value.stylelist();
       List<string> validkeys = new List<string>();
       validkeys.Add(":name");
       validkeys.Add(":props");
@@ -5199,7 +5314,7 @@ public static class Html {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_style work = new Class_style();
+        Vx.Web.Html.Class_style work = new Vx.Web.Html.Class_style();
         work.vx_p_name = vx_p_name;
         work.vx_p_props = vx_p_props;
         work.vx_p_stylelist = vx_p_stylelist;
@@ -5212,14 +5327,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_style;
+      Vx.Core.Type_any output = Vx.Web.Html.e_style;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_style;
+      Vx.Core.Type_any output = Vx.Web.Html.t_style;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "style", // name
         ":struct", // extends
@@ -5232,12 +5350,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_style e_style = new Class_style();
-  public static Type_style t_style = new Class_style();
+  public static Vx.Web.Html.Type_style e_style = new Vx.Web.Html.Class_style();
+  public static Vx.Web.Html.Type_style t_style = new Vx.Web.Html.Class_style();
 
   /**
    * type: stylelist
@@ -5251,7 +5370,9 @@ public static class Html {
 
   public class Class_stylelist : Vx.Core.Class_base, Type_stylelist {
 
-    public List<Vx.Web.Html.Type_style> vx_p_list = Vx.Core.immutablelist(new List<Vx.Web.Html.Type_style>());
+    public List<Vx.Web.Html.Type_style> vx_p_list = Vx.Core.immutablelist(
+      new List<Vx.Web.Html.Type_style>()
+    );
 
     public List<Vx.Core.Type_any> vx_list() {
       List<Vx.Core.Type_any> output = Vx.Core.immutablelist(
@@ -5272,11 +5393,13 @@ public static class Html {
     }
 
     public List<Vx.Web.Html.Type_style> vx_liststyle() {
-      return vx_p_list;
+      List<Vx.Web.Html.Type_style> output = this.vx_p_list;
+      return output;
     }
 
     public Vx.Core.Type_any vx_any(Vx.Core.Type_int index) {
-      return this.vx_style(index);
+      Vx.Web.Html.Type_style output = this.vx_style(index);
+      return output;
     }
 
     public override Vx.Web.Html.Type_stylelist vx_new(params object[] vals) {
@@ -5284,15 +5407,15 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_stylelist vx_copy(params object[] vals) {
-      Type_stylelist output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_stylelist output = this;
       bool ischanged = false;
-      Class_stylelist val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_stylelist value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      List<Vx.Web.Html.Type_style> listval = new List<Vx.Web.Html.Type_style>(val.vx_liststyle());
+      List<Vx.Web.Html.Type_style> listval = new List<Vx.Web.Html.Type_style>(value.vx_liststyle());
       Vx.Core.Type_msg msg;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
@@ -5325,7 +5448,7 @@ public static class Html {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_stylelist work = new Class_stylelist();
+        Vx.Web.Html.Class_stylelist work = new Vx.Web.Html.Class_stylelist();
         work.vx_p_list = Vx.Core.immutablelist(listval);
         if (msgblock != Vx.Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -5336,14 +5459,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_stylelist;
+      Vx.Core.Type_any output = Vx.Web.Html.e_stylelist;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_stylelist;
+      Vx.Core.Type_any output = Vx.Web.Html.t_stylelist;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "stylelist", // name
         ":list", // extends
@@ -5356,12 +5482,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_stylelist e_stylelist = new Class_stylelist();
-  public static Type_stylelist t_stylelist = new Class_stylelist();
+  public static Vx.Web.Html.Type_stylelist e_stylelist = new Vx.Web.Html.Class_stylelist();
+  public static Vx.Web.Html.Type_stylelist t_stylelist = new Vx.Web.Html.Class_stylelist();
 
   /**
    * type: stylemap
@@ -5413,12 +5540,15 @@ public static class Html {
     }
 
     public Vx.Core.Map<string, Vx.Web.Html.Type_style> vx_mapstyle() {
-      return vx_p_map;
+      Vx.Core.Map<string, Vx.Web.Html.Type_style> output = this.vx_p_map;
+      return output;
     }
 
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
-      return this.vx_style(key);
+      Vx.Core.Type_any output = this.vx_style(key);
+      return output;
     }
+
 
     public Vx.Core.Type_map vx_new_from_map(Vx.Core.Map<string, Vx.Core.Type_any> mapval) {
       Vx.Web.Html.Class_stylemap output = new Vx.Web.Html.Class_stylemap();
@@ -5426,12 +5556,12 @@ public static class Html {
       Vx.Core.Map<string, Vx.Web.Html.Type_style> map = new Vx.Core.LinkedHashMap<string, Vx.Web.Html.Type_style>();
       List<string> keys = mapval.keys();
       foreach (string key in keys) {
-        Vx.Core.Type_any val = mapval.get(key);
+        Vx.Core.Type_any value = mapval.get(key);
         if (false) {
-        } else if (val is Vx.Web.Html.Type_style castval) {
+        } else if (value is Vx.Web.Html.Type_style castval) {
           map.put(key, castval);
         } else {
-          Vx.Core.Type_msg msg = Vx.Core.vx_msg_from_error("vx/web/html/stylemap", ":invalidvalue", val);
+          Vx.Core.Type_msg msg = Vx.Core.vx_msg_from_error("vx/web/html/stylemap", ":invalidvalue", value);
           msgblock = Vx.Core.vx_copy(msgblock, msg);
         }
       }
@@ -5447,15 +5577,15 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_stylemap vx_copy(params object[] vals) {
-      Type_stylemap output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_stylemap output = this;
       bool ischanged = false;
-      Class_stylemap val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_stylemap value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Map<string, Vx.Web.Html.Type_style> mapval = new Vx.Core.LinkedHashMap<string, Vx.Web.Html.Type_style>(val.vx_mapstyle());
+      Vx.Core.Map<string, Vx.Web.Html.Type_style> mapval = new Vx.Core.LinkedHashMap<string, Vx.Web.Html.Type_style>(value.vx_mapstyle());
       Vx.Core.Type_msg? msg = null;
       string key = "";
       Vx.Core.Type_any? msgval = null;
@@ -5486,7 +5616,7 @@ public static class Html {
           } else if (valsub is Vx.Web.Html.Type_style valallowed) {
             valany = valallowed;
           } else if (valsub is Vx.Web.Html.Type_style) {
-            valany = valsub as Vx.Web.Html.Type_style;
+            valany = (Vx.Web.Html.Type_style)valsub;
           } else {
             if (false) {
             } else if (valsub is Vx.Core.Type_any valinvalid) {
@@ -5512,7 +5642,7 @@ public static class Html {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_stylemap work = new Class_stylemap();
+        Vx.Web.Html.Class_stylemap work = new Vx.Web.Html.Class_stylemap();
         work.vx_p_map = Vx.Core.immutablemap(mapval);
         if (msgblock != Vx.Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -5523,14 +5653,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_stylemap;
+      Vx.Core.Type_any output = Vx.Web.Html.e_stylemap;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_stylemap;
+      Vx.Core.Type_any output = Vx.Web.Html.t_stylemap;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "stylemap", // name
         ":map", // extends
@@ -5543,12 +5676,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_stylemap e_stylemap = new Class_stylemap();
-  public static Type_stylemap t_stylemap = new Class_stylemap();
+  public static Vx.Web.Html.Type_stylemap e_stylemap = new Vx.Web.Html.Class_stylemap();
+  public static Vx.Web.Html.Type_stylemap t_stylemap = new Vx.Web.Html.Class_stylemap();
 
   /**
    * type: stylesheet
@@ -5685,7 +5819,8 @@ public static class Html {
       output.put(":name", this.name());
       output.put(":styles", this.styles());
       output.put(":stylemap", this.stylemap());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Web.Html.Type_stylesheet vx_new(params object[] vals) {
@@ -5693,22 +5828,22 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_stylesheet vx_copy(params object[] vals) {
-      Type_stylesheet output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_stylesheet output = this;
       bool ischanged = false;
-      Class_stylesheet val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_stylesheet value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Type_string vx_p_id = val.id();
-      Vx.Event.Type_eventmap vx_p_eventmap = val.eventmap();
-      Vx.Web.Html.Type_style vx_p_style = val.style();
-      Vx.Web.Html.Type_style vx_p_style_unique = val.style_unique();
-      Vx.Web.Html.Type_stylelist vx_p_stylelist = val.stylelist();
-      Vx.Core.Type_string vx_p_name = val.name();
-      Vx.Web.Html.Type_stylelist vx_p_styles = val.styles();
-      Vx.Web.Html.Type_stylemap vx_p_stylemap = val.stylemap();
+      Vx.Core.Type_string vx_p_id = value.id();
+      Vx.Event.Type_eventmap vx_p_eventmap = value.eventmap();
+      Vx.Web.Html.Type_style vx_p_style = value.style();
+      Vx.Web.Html.Type_style vx_p_style_unique = value.style_unique();
+      Vx.Web.Html.Type_stylelist vx_p_stylelist = value.stylelist();
+      Vx.Core.Type_string vx_p_name = value.name();
+      Vx.Web.Html.Type_stylelist vx_p_styles = value.styles();
+      Vx.Web.Html.Type_stylemap vx_p_stylemap = value.stylemap();
       List<string> validkeys = new List<string>();
       validkeys.Add(":id");
       validkeys.Add(":eventmap");
@@ -5937,7 +6072,7 @@ public static class Html {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_stylesheet work = new Class_stylesheet();
+        Vx.Web.Html.Class_stylesheet work = new Vx.Web.Html.Class_stylesheet();
         work.vx_p_id = vx_p_id;
         work.vx_p_eventmap = vx_p_eventmap;
         work.vx_p_style = vx_p_style;
@@ -5955,14 +6090,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_stylesheet;
+      Vx.Core.Type_any output = Vx.Web.Html.e_stylesheet;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_stylesheet;
+      Vx.Core.Type_any output = Vx.Web.Html.t_stylesheet;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "stylesheet", // name
         ":struct", // extends
@@ -5975,12 +6113,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_stylesheet e_stylesheet = new Class_stylesheet();
-  public static Type_stylesheet t_stylesheet = new Class_stylesheet();
+  public static Vx.Web.Html.Type_stylesheet e_stylesheet = new Vx.Web.Html.Class_stylesheet();
+  public static Vx.Web.Html.Type_stylesheet t_stylesheet = new Vx.Web.Html.Class_stylesheet();
 
   /**
    * type: table
@@ -6102,7 +6241,8 @@ public static class Html {
       output.put(":stylelist", this.stylelist());
       output.put(":tbody", this.tbody());
       output.put(":thead", this.thead());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Web.Html.Type_table vx_new(params object[] vals) {
@@ -6110,21 +6250,21 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_table vx_copy(params object[] vals) {
-      Type_table output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_table output = this;
       bool ischanged = false;
-      Class_table val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_table value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Type_string vx_p_id = val.id();
-      Vx.Event.Type_eventmap vx_p_eventmap = val.eventmap();
-      Vx.Web.Html.Type_style vx_p_style = val.style();
-      Vx.Web.Html.Type_style vx_p_style_unique = val.style_unique();
-      Vx.Web.Html.Type_stylelist vx_p_stylelist = val.stylelist();
-      Vx.Web.Html.Type_tbody vx_p_tbody = val.tbody();
-      Vx.Web.Html.Type_thead vx_p_thead = val.thead();
+      Vx.Core.Type_string vx_p_id = value.id();
+      Vx.Event.Type_eventmap vx_p_eventmap = value.eventmap();
+      Vx.Web.Html.Type_style vx_p_style = value.style();
+      Vx.Web.Html.Type_style vx_p_style_unique = value.style_unique();
+      Vx.Web.Html.Type_stylelist vx_p_stylelist = value.stylelist();
+      Vx.Web.Html.Type_tbody vx_p_tbody = value.tbody();
+      Vx.Web.Html.Type_thead vx_p_thead = value.thead();
       List<string> validkeys = new List<string>();
       validkeys.Add(":id");
       validkeys.Add(":eventmap");
@@ -6329,7 +6469,7 @@ public static class Html {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_table work = new Class_table();
+        Vx.Web.Html.Class_table work = new Vx.Web.Html.Class_table();
         work.vx_p_id = vx_p_id;
         work.vx_p_eventmap = vx_p_eventmap;
         work.vx_p_style = vx_p_style;
@@ -6346,14 +6486,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_table;
+      Vx.Core.Type_any output = Vx.Web.Html.e_table;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_table;
+      Vx.Core.Type_any output = Vx.Web.Html.t_table;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "table", // name
         ":struct", // extends
@@ -6366,12 +6509,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_table e_table = new Class_table();
-  public static Type_table t_table = new Class_table();
+  public static Vx.Web.Html.Type_table e_table = new Vx.Web.Html.Class_table();
+  public static Vx.Web.Html.Type_table t_table = new Vx.Web.Html.Class_table();
 
   /**
    * type: tbody
@@ -6478,7 +6622,8 @@ public static class Html {
       output.put(":style-unique", this.style_unique());
       output.put(":stylelist", this.stylelist());
       output.put(":nodes", this.nodes());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Web.Html.Type_tbody vx_new(params object[] vals) {
@@ -6486,20 +6631,20 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_tbody vx_copy(params object[] vals) {
-      Type_tbody output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_tbody output = this;
       bool ischanged = false;
-      Class_tbody val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_tbody value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Type_string vx_p_id = val.id();
-      Vx.Event.Type_eventmap vx_p_eventmap = val.eventmap();
-      Vx.Web.Html.Type_style vx_p_style = val.style();
-      Vx.Web.Html.Type_style vx_p_style_unique = val.style_unique();
-      Vx.Web.Html.Type_stylelist vx_p_stylelist = val.stylelist();
-      Vx.Web.Html.Type_trlist vx_p_nodes = val.nodes();
+      Vx.Core.Type_string vx_p_id = value.id();
+      Vx.Event.Type_eventmap vx_p_eventmap = value.eventmap();
+      Vx.Web.Html.Type_style vx_p_style = value.style();
+      Vx.Web.Html.Type_style vx_p_style_unique = value.style_unique();
+      Vx.Web.Html.Type_stylelist vx_p_stylelist = value.stylelist();
+      Vx.Web.Html.Type_trlist vx_p_nodes = value.nodes();
       List<string> validkeys = new List<string>();
       validkeys.Add(":id");
       validkeys.Add(":eventmap");
@@ -6696,7 +6841,7 @@ public static class Html {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_tbody work = new Class_tbody();
+        Vx.Web.Html.Class_tbody work = new Vx.Web.Html.Class_tbody();
         work.vx_p_id = vx_p_id;
         work.vx_p_eventmap = vx_p_eventmap;
         work.vx_p_style = vx_p_style;
@@ -6712,14 +6857,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_tbody;
+      Vx.Core.Type_any output = Vx.Web.Html.e_tbody;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_tbody;
+      Vx.Core.Type_any output = Vx.Web.Html.t_tbody;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "tbody", // name
         ":struct", // extends
@@ -6732,12 +6880,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_tbody e_tbody = new Class_tbody();
-  public static Type_tbody t_tbody = new Class_tbody();
+  public static Vx.Web.Html.Type_tbody e_tbody = new Vx.Web.Html.Class_tbody();
+  public static Vx.Web.Html.Type_tbody t_tbody = new Vx.Web.Html.Class_tbody();
 
   /**
    * type: td
@@ -6844,7 +6993,8 @@ public static class Html {
       output.put(":style-unique", this.style_unique());
       output.put(":stylelist", this.stylelist());
       output.put(":nodes", this.nodes());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Web.Html.Type_td vx_new(params object[] vals) {
@@ -6852,20 +7002,20 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_td vx_copy(params object[] vals) {
-      Type_td output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_td output = this;
       bool ischanged = false;
-      Class_td val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_td value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Type_string vx_p_id = val.id();
-      Vx.Event.Type_eventmap vx_p_eventmap = val.eventmap();
-      Vx.Web.Html.Type_style vx_p_style = val.style();
-      Vx.Web.Html.Type_style vx_p_style_unique = val.style_unique();
-      Vx.Web.Html.Type_stylelist vx_p_stylelist = val.stylelist();
-      Vx.Web.Html.Type_divchildlist vx_p_nodes = val.nodes();
+      Vx.Core.Type_string vx_p_id = value.id();
+      Vx.Event.Type_eventmap vx_p_eventmap = value.eventmap();
+      Vx.Web.Html.Type_style vx_p_style = value.style();
+      Vx.Web.Html.Type_style vx_p_style_unique = value.style_unique();
+      Vx.Web.Html.Type_stylelist vx_p_stylelist = value.stylelist();
+      Vx.Web.Html.Type_divchildlist vx_p_nodes = value.nodes();
       List<string> validkeys = new List<string>();
       validkeys.Add(":id");
       validkeys.Add(":eventmap");
@@ -7062,7 +7212,7 @@ public static class Html {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_td work = new Class_td();
+        Vx.Web.Html.Class_td work = new Vx.Web.Html.Class_td();
         work.vx_p_id = vx_p_id;
         work.vx_p_eventmap = vx_p_eventmap;
         work.vx_p_style = vx_p_style;
@@ -7078,14 +7228,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_td;
+      Vx.Core.Type_any output = Vx.Web.Html.e_td;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_td;
+      Vx.Core.Type_any output = Vx.Web.Html.t_td;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "td", // name
         ":struct", // extends
@@ -7098,12 +7251,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_td e_td = new Class_td();
-  public static Type_td t_td = new Class_td();
+  public static Vx.Web.Html.Type_td e_td = new Vx.Web.Html.Class_td();
+  public static Vx.Web.Html.Type_td t_td = new Vx.Web.Html.Class_td();
 
   /**
    * type: tdlist
@@ -7117,7 +7271,9 @@ public static class Html {
 
   public class Class_tdlist : Vx.Core.Class_base, Type_tdlist {
 
-    public List<Vx.Web.Html.Type_td> vx_p_list = Vx.Core.immutablelist(new List<Vx.Web.Html.Type_td>());
+    public List<Vx.Web.Html.Type_td> vx_p_list = Vx.Core.immutablelist(
+      new List<Vx.Web.Html.Type_td>()
+    );
 
     public List<Vx.Core.Type_any> vx_list() {
       List<Vx.Core.Type_any> output = Vx.Core.immutablelist(
@@ -7138,11 +7294,13 @@ public static class Html {
     }
 
     public List<Vx.Web.Html.Type_td> vx_listtd() {
-      return vx_p_list;
+      List<Vx.Web.Html.Type_td> output = this.vx_p_list;
+      return output;
     }
 
     public Vx.Core.Type_any vx_any(Vx.Core.Type_int index) {
-      return this.vx_td(index);
+      Vx.Web.Html.Type_td output = this.vx_td(index);
+      return output;
     }
 
     public override Vx.Web.Html.Type_tdlist vx_new(params object[] vals) {
@@ -7150,15 +7308,15 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_tdlist vx_copy(params object[] vals) {
-      Type_tdlist output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_tdlist output = this;
       bool ischanged = false;
-      Class_tdlist val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_tdlist value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      List<Vx.Web.Html.Type_td> listval = new List<Vx.Web.Html.Type_td>(val.vx_listtd());
+      List<Vx.Web.Html.Type_td> listval = new List<Vx.Web.Html.Type_td>(value.vx_listtd());
       Vx.Core.Type_msg msg;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
@@ -7191,7 +7349,7 @@ public static class Html {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_tdlist work = new Class_tdlist();
+        Vx.Web.Html.Class_tdlist work = new Vx.Web.Html.Class_tdlist();
         work.vx_p_list = Vx.Core.immutablelist(listval);
         if (msgblock != Vx.Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -7202,14 +7360,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_tdlist;
+      Vx.Core.Type_any output = Vx.Web.Html.e_tdlist;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_tdlist;
+      Vx.Core.Type_any output = Vx.Web.Html.t_tdlist;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "tdlist", // name
         ":list", // extends
@@ -7222,12 +7383,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_tdlist e_tdlist = new Class_tdlist();
-  public static Type_tdlist t_tdlist = new Class_tdlist();
+  public static Vx.Web.Html.Type_tdlist e_tdlist = new Vx.Web.Html.Class_tdlist();
+  public static Vx.Web.Html.Type_tdlist t_tdlist = new Vx.Web.Html.Class_tdlist();
 
   /**
    * type: thead
@@ -7334,7 +7496,8 @@ public static class Html {
       output.put(":style-unique", this.style_unique());
       output.put(":stylelist", this.stylelist());
       output.put(":nodes", this.nodes());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Web.Html.Type_thead vx_new(params object[] vals) {
@@ -7342,20 +7505,20 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_thead vx_copy(params object[] vals) {
-      Type_thead output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_thead output = this;
       bool ischanged = false;
-      Class_thead val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_thead value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Type_string vx_p_id = val.id();
-      Vx.Event.Type_eventmap vx_p_eventmap = val.eventmap();
-      Vx.Web.Html.Type_style vx_p_style = val.style();
-      Vx.Web.Html.Type_style vx_p_style_unique = val.style_unique();
-      Vx.Web.Html.Type_stylelist vx_p_stylelist = val.stylelist();
-      Vx.Web.Html.Type_trlist vx_p_nodes = val.nodes();
+      Vx.Core.Type_string vx_p_id = value.id();
+      Vx.Event.Type_eventmap vx_p_eventmap = value.eventmap();
+      Vx.Web.Html.Type_style vx_p_style = value.style();
+      Vx.Web.Html.Type_style vx_p_style_unique = value.style_unique();
+      Vx.Web.Html.Type_stylelist vx_p_stylelist = value.stylelist();
+      Vx.Web.Html.Type_trlist vx_p_nodes = value.nodes();
       List<string> validkeys = new List<string>();
       validkeys.Add(":id");
       validkeys.Add(":eventmap");
@@ -7552,7 +7715,7 @@ public static class Html {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_thead work = new Class_thead();
+        Vx.Web.Html.Class_thead work = new Vx.Web.Html.Class_thead();
         work.vx_p_id = vx_p_id;
         work.vx_p_eventmap = vx_p_eventmap;
         work.vx_p_style = vx_p_style;
@@ -7568,14 +7731,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_thead;
+      Vx.Core.Type_any output = Vx.Web.Html.e_thead;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_thead;
+      Vx.Core.Type_any output = Vx.Web.Html.t_thead;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "thead", // name
         ":struct", // extends
@@ -7588,12 +7754,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_thead e_thead = new Class_thead();
-  public static Type_thead t_thead = new Class_thead();
+  public static Vx.Web.Html.Type_thead e_thead = new Vx.Web.Html.Class_thead();
+  public static Vx.Web.Html.Type_thead t_thead = new Vx.Web.Html.Class_thead();
 
   /**
    * type: title
@@ -7700,7 +7867,8 @@ public static class Html {
       output.put(":style-unique", this.style_unique());
       output.put(":stylelist", this.stylelist());
       output.put(":text", this.text());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Web.Html.Type_title vx_new(params object[] vals) {
@@ -7708,20 +7876,20 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_title vx_copy(params object[] vals) {
-      Type_title output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_title output = this;
       bool ischanged = false;
-      Class_title val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_title value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Type_string vx_p_id = val.id();
-      Vx.Event.Type_eventmap vx_p_eventmap = val.eventmap();
-      Vx.Web.Html.Type_style vx_p_style = val.style();
-      Vx.Web.Html.Type_style vx_p_style_unique = val.style_unique();
-      Vx.Web.Html.Type_stylelist vx_p_stylelist = val.stylelist();
-      Vx.Core.Type_string vx_p_text = val.text();
+      Vx.Core.Type_string vx_p_id = value.id();
+      Vx.Event.Type_eventmap vx_p_eventmap = value.eventmap();
+      Vx.Web.Html.Type_style vx_p_style = value.style();
+      Vx.Web.Html.Type_style vx_p_style_unique = value.style_unique();
+      Vx.Web.Html.Type_stylelist vx_p_stylelist = value.stylelist();
+      Vx.Core.Type_string vx_p_text = value.text();
       List<string> validkeys = new List<string>();
       validkeys.Add(":id");
       validkeys.Add(":eventmap");
@@ -7908,7 +8076,7 @@ public static class Html {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_title work = new Class_title();
+        Vx.Web.Html.Class_title work = new Vx.Web.Html.Class_title();
         work.vx_p_id = vx_p_id;
         work.vx_p_eventmap = vx_p_eventmap;
         work.vx_p_style = vx_p_style;
@@ -7924,14 +8092,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_title;
+      Vx.Core.Type_any output = Vx.Web.Html.e_title;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_title;
+      Vx.Core.Type_any output = Vx.Web.Html.t_title;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "title", // name
         ":struct", // extends
@@ -7944,12 +8115,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_title e_title = new Class_title();
-  public static Type_title t_title = new Class_title();
+  public static Vx.Web.Html.Type_title e_title = new Vx.Web.Html.Class_title();
+  public static Vx.Web.Html.Type_title t_title = new Vx.Web.Html.Class_title();
 
   /**
    * type: tr
@@ -8056,7 +8228,8 @@ public static class Html {
       output.put(":style-unique", this.style_unique());
       output.put(":stylelist", this.stylelist());
       output.put(":nodes", this.nodes());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Web.Html.Type_tr vx_new(params object[] vals) {
@@ -8064,20 +8237,20 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_tr vx_copy(params object[] vals) {
-      Type_tr output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_tr output = this;
       bool ischanged = false;
-      Class_tr val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_tr value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Type_string vx_p_id = val.id();
-      Vx.Event.Type_eventmap vx_p_eventmap = val.eventmap();
-      Vx.Web.Html.Type_style vx_p_style = val.style();
-      Vx.Web.Html.Type_style vx_p_style_unique = val.style_unique();
-      Vx.Web.Html.Type_stylelist vx_p_stylelist = val.stylelist();
-      Vx.Web.Html.Type_tdlist vx_p_nodes = val.nodes();
+      Vx.Core.Type_string vx_p_id = value.id();
+      Vx.Event.Type_eventmap vx_p_eventmap = value.eventmap();
+      Vx.Web.Html.Type_style vx_p_style = value.style();
+      Vx.Web.Html.Type_style vx_p_style_unique = value.style_unique();
+      Vx.Web.Html.Type_stylelist vx_p_stylelist = value.stylelist();
+      Vx.Web.Html.Type_tdlist vx_p_nodes = value.nodes();
       List<string> validkeys = new List<string>();
       validkeys.Add(":id");
       validkeys.Add(":eventmap");
@@ -8274,7 +8447,7 @@ public static class Html {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_tr work = new Class_tr();
+        Vx.Web.Html.Class_tr work = new Vx.Web.Html.Class_tr();
         work.vx_p_id = vx_p_id;
         work.vx_p_eventmap = vx_p_eventmap;
         work.vx_p_style = vx_p_style;
@@ -8290,14 +8463,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_tr;
+      Vx.Core.Type_any output = Vx.Web.Html.e_tr;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_tr;
+      Vx.Core.Type_any output = Vx.Web.Html.t_tr;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "tr", // name
         ":struct", // extends
@@ -8310,12 +8486,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_tr e_tr = new Class_tr();
-  public static Type_tr t_tr = new Class_tr();
+  public static Vx.Web.Html.Type_tr e_tr = new Vx.Web.Html.Class_tr();
+  public static Vx.Web.Html.Type_tr t_tr = new Vx.Web.Html.Class_tr();
 
   /**
    * type: trlist
@@ -8329,7 +8506,9 @@ public static class Html {
 
   public class Class_trlist : Vx.Core.Class_base, Type_trlist {
 
-    public List<Vx.Web.Html.Type_tr> vx_p_list = Vx.Core.immutablelist(new List<Vx.Web.Html.Type_tr>());
+    public List<Vx.Web.Html.Type_tr> vx_p_list = Vx.Core.immutablelist(
+      new List<Vx.Web.Html.Type_tr>()
+    );
 
     public List<Vx.Core.Type_any> vx_list() {
       List<Vx.Core.Type_any> output = Vx.Core.immutablelist(
@@ -8350,11 +8529,13 @@ public static class Html {
     }
 
     public List<Vx.Web.Html.Type_tr> vx_listtr() {
-      return vx_p_list;
+      List<Vx.Web.Html.Type_tr> output = this.vx_p_list;
+      return output;
     }
 
     public Vx.Core.Type_any vx_any(Vx.Core.Type_int index) {
-      return this.vx_tr(index);
+      Vx.Web.Html.Type_tr output = this.vx_tr(index);
+      return output;
     }
 
     public override Vx.Web.Html.Type_trlist vx_new(params object[] vals) {
@@ -8362,15 +8543,15 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_trlist vx_copy(params object[] vals) {
-      Type_trlist output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Type_trlist output = this;
       bool ischanged = false;
-      Class_trlist val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Web.Html.Class_trlist value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      List<Vx.Web.Html.Type_tr> listval = new List<Vx.Web.Html.Type_tr>(val.vx_listtr());
+      List<Vx.Web.Html.Type_tr> listval = new List<Vx.Web.Html.Type_tr>(value.vx_listtr());
       Vx.Core.Type_msg msg;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
@@ -8403,7 +8584,7 @@ public static class Html {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_trlist work = new Class_trlist();
+        Vx.Web.Html.Class_trlist work = new Vx.Web.Html.Class_trlist();
         work.vx_p_list = Vx.Core.immutablelist(listval);
         if (msgblock != Vx.Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -8414,14 +8595,17 @@ public static class Html {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_trlist;
+      Vx.Core.Type_any output = Vx.Web.Html.e_trlist;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_trlist;
+      Vx.Core.Type_any output = Vx.Web.Html.t_trlist;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/web/html", // pkgname
         "trlist", // name
         ":list", // extends
@@ -8434,12 +8618,13 @@ public static class Html {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_trlist e_trlist = new Class_trlist();
-  public static Type_trlist t_trlist = new Class_trlist();
+  public static Vx.Web.Html.Type_trlist e_trlist = new Vx.Web.Html.Class_trlist();
+  public static Vx.Web.Html.Type_trlist t_trlist = new Vx.Web.Html.Class_trlist();
   /**
    * @function htmlstring_from_string
    * Convert text to HTML string
@@ -8454,21 +8639,22 @@ public static class Html {
   public class Class_htmlstring_from_string : Vx.Core.Class_base, Func_htmlstring_from_string {
 
     public override Vx.Web.Html.Func_htmlstring_from_string vx_new(params object[] vals) {
-      Class_htmlstring_from_string output = new Class_htmlstring_from_string();
+      Vx.Web.Html.Class_htmlstring_from_string output = new Vx.Web.Html.Class_htmlstring_from_string();
       return output;
     }
 
-    public override Vx.Web.Html.Func_htmlstring_from_string vx_copy(params object[] vals) {
-      Class_htmlstring_from_string output = new Class_htmlstring_from_string();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_htmlstring_from_string output = new Vx.Web.Html.Class_htmlstring_from_string();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "htmlstring<-string", // name
         0, // idx
@@ -8487,14 +8673,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_htmlstring_from_string;
+      Vx.Core.Type_any output = Vx.Web.Html.e_htmlstring_from_string;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_htmlstring_from_string;
+      Vx.Core.Type_any output = Vx.Web.Html.t_htmlstring_from_string;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -8522,8 +8711,8 @@ public static class Html {
 
   }
 
-  public static Func_htmlstring_from_string e_htmlstring_from_string = new Vx.Web.Html.Class_htmlstring_from_string();
-  public static Func_htmlstring_from_string t_htmlstring_from_string = new Vx.Web.Html.Class_htmlstring_from_string();
+  public static Vx.Web.Html.Func_htmlstring_from_string e_htmlstring_from_string = new Vx.Web.Html.Class_htmlstring_from_string();
+  public static Vx.Web.Html.Func_htmlstring_from_string t_htmlstring_from_string = new Vx.Web.Html.Class_htmlstring_from_string();
 
   public static Vx.Core.Type_string f_htmlstring_from_string(Vx.Core.Type_string text) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -8544,21 +8733,22 @@ public static class Html {
   public class Class_string_indent : Vx.Core.Class_base, Func_string_indent {
 
     public override Vx.Web.Html.Func_string_indent vx_new(params object[] vals) {
-      Class_string_indent output = new Class_string_indent();
+      Vx.Web.Html.Class_string_indent output = new Vx.Web.Html.Class_string_indent();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_indent vx_copy(params object[] vals) {
-      Class_string_indent output = new Class_string_indent();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_indent output = new Vx.Web.Html.Class_string_indent();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string-indent", // name
         0, // idx
@@ -8577,14 +8767,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_indent;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_indent;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -8612,8 +8805,8 @@ public static class Html {
 
   }
 
-  public static Func_string_indent e_string_indent = new Vx.Web.Html.Class_string_indent();
-  public static Func_string_indent t_string_indent = new Vx.Web.Html.Class_string_indent();
+  public static Vx.Web.Html.Func_string_indent e_string_indent = new Vx.Web.Html.Class_string_indent();
+  public static Vx.Web.Html.Func_string_indent t_string_indent = new Vx.Web.Html.Class_string_indent();
 
   public static Vx.Core.Type_string f_string_indent(Vx.Core.Type_int indent) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -8636,21 +8829,22 @@ public static class Html {
   public class Class_string_from_body_indent : Vx.Core.Class_base, Func_string_from_body_indent {
 
     public override Vx.Web.Html.Func_string_from_body_indent vx_new(params object[] vals) {
-      Class_string_from_body_indent output = new Class_string_from_body_indent();
+      Vx.Web.Html.Class_string_from_body_indent output = new Vx.Web.Html.Class_string_from_body_indent();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_body_indent vx_copy(params object[] vals) {
-      Class_string_from_body_indent output = new Class_string_from_body_indent();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_body_indent output = new Vx.Web.Html.Class_string_from_body_indent();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-body-indent", // name
         0, // idx
@@ -8669,14 +8863,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_body_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_body_indent;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_body_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_body_indent;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -8693,8 +8890,8 @@ public static class Html {
 
   }
 
-  public static Func_string_from_body_indent e_string_from_body_indent = new Vx.Web.Html.Class_string_from_body_indent();
-  public static Func_string_from_body_indent t_string_from_body_indent = new Vx.Web.Html.Class_string_from_body_indent();
+  public static Vx.Web.Html.Func_string_from_body_indent e_string_from_body_indent = new Vx.Web.Html.Class_string_from_body_indent();
+  public static Vx.Web.Html.Func_string_from_body_indent t_string_from_body_indent = new Vx.Web.Html.Class_string_from_body_indent();
 
   public static Vx.Core.Type_string f_string_from_body_indent(Vx.Web.Html.Type_body body, Vx.Core.Type_int indent) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -8724,21 +8921,22 @@ public static class Html {
   public class Class_string_from_details_indent : Vx.Core.Class_base, Func_string_from_details_indent {
 
     public override Vx.Web.Html.Func_string_from_details_indent vx_new(params object[] vals) {
-      Class_string_from_details_indent output = new Class_string_from_details_indent();
+      Vx.Web.Html.Class_string_from_details_indent output = new Vx.Web.Html.Class_string_from_details_indent();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_details_indent vx_copy(params object[] vals) {
-      Class_string_from_details_indent output = new Class_string_from_details_indent();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_details_indent output = new Vx.Web.Html.Class_string_from_details_indent();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-details-indent", // name
         0, // idx
@@ -8757,14 +8955,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_details_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_details_indent;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_details_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_details_indent;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -8781,8 +8982,8 @@ public static class Html {
 
   }
 
-  public static Func_string_from_details_indent e_string_from_details_indent = new Vx.Web.Html.Class_string_from_details_indent();
-  public static Func_string_from_details_indent t_string_from_details_indent = new Vx.Web.Html.Class_string_from_details_indent();
+  public static Vx.Web.Html.Func_string_from_details_indent e_string_from_details_indent = new Vx.Web.Html.Class_string_from_details_indent();
+  public static Vx.Web.Html.Func_string_from_details_indent t_string_from_details_indent = new Vx.Web.Html.Class_string_from_details_indent();
 
   public static Vx.Core.Type_string f_string_from_details_indent(Vx.Web.Html.Type_details details, Vx.Core.Type_int indent) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -8802,7 +9003,8 @@ public static class Html {
         );
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Core.t_string,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
             sindent,
             Vx.Core.vx_new_string("<details>"),
             sindent,
@@ -8836,21 +9038,22 @@ public static class Html {
   public class Class_string_from_div_indent : Vx.Core.Class_base, Func_string_from_div_indent {
 
     public override Vx.Web.Html.Func_string_from_div_indent vx_new(params object[] vals) {
-      Class_string_from_div_indent output = new Class_string_from_div_indent();
+      Vx.Web.Html.Class_string_from_div_indent output = new Vx.Web.Html.Class_string_from_div_indent();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_div_indent vx_copy(params object[] vals) {
-      Class_string_from_div_indent output = new Class_string_from_div_indent();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_div_indent output = new Vx.Web.Html.Class_string_from_div_indent();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-div-indent", // name
         0, // idx
@@ -8869,14 +9072,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_div_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_div_indent;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_div_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_div_indent;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -8893,8 +9099,8 @@ public static class Html {
 
   }
 
-  public static Func_string_from_div_indent e_string_from_div_indent = new Vx.Web.Html.Class_string_from_div_indent();
-  public static Func_string_from_div_indent t_string_from_div_indent = new Vx.Web.Html.Class_string_from_div_indent();
+  public static Vx.Web.Html.Func_string_from_div_indent e_string_from_div_indent = new Vx.Web.Html.Class_string_from_div_indent();
+  public static Vx.Web.Html.Func_string_from_div_indent t_string_from_div_indent = new Vx.Web.Html.Class_string_from_div_indent();
 
   public static Vx.Core.Type_string f_string_from_div_indent(Vx.Web.Html.Type_div div, Vx.Core.Type_int indent) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -8918,7 +9124,8 @@ public static class Html {
           Vx.Core.vx_new_string("div"),
           Vx.Core.f_new(
             Vx.Core.t_string,
-            Vx.Core.vx_new(Vx.Core.t_anylist,
+            Vx.Core.vx_new(
+              Vx.Core.t_anylist,
               sid,
               sclass,
               sstyle
@@ -8947,21 +9154,22 @@ public static class Html {
   public class Class_string_from_footer_indent : Vx.Core.Class_base, Func_string_from_footer_indent {
 
     public override Vx.Web.Html.Func_string_from_footer_indent vx_new(params object[] vals) {
-      Class_string_from_footer_indent output = new Class_string_from_footer_indent();
+      Vx.Web.Html.Class_string_from_footer_indent output = new Vx.Web.Html.Class_string_from_footer_indent();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_footer_indent vx_copy(params object[] vals) {
-      Class_string_from_footer_indent output = new Class_string_from_footer_indent();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_footer_indent output = new Vx.Web.Html.Class_string_from_footer_indent();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-footer-indent", // name
         0, // idx
@@ -8980,14 +9188,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_footer_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_footer_indent;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_footer_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_footer_indent;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -9004,8 +9215,8 @@ public static class Html {
 
   }
 
-  public static Func_string_from_footer_indent e_string_from_footer_indent = new Vx.Web.Html.Class_string_from_footer_indent();
-  public static Func_string_from_footer_indent t_string_from_footer_indent = new Vx.Web.Html.Class_string_from_footer_indent();
+  public static Vx.Web.Html.Func_string_from_footer_indent e_string_from_footer_indent = new Vx.Web.Html.Class_string_from_footer_indent();
+  public static Vx.Web.Html.Func_string_from_footer_indent t_string_from_footer_indent = new Vx.Web.Html.Class_string_from_footer_indent();
 
   public static Vx.Core.Type_string f_string_from_footer_indent(Vx.Web.Html.Type_footer footer, Vx.Core.Type_int indent) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -9035,21 +9246,22 @@ public static class Html {
   public class Class_string_from_h1_indent : Vx.Core.Class_base, Func_string_from_h1_indent {
 
     public override Vx.Web.Html.Func_string_from_h1_indent vx_new(params object[] vals) {
-      Class_string_from_h1_indent output = new Class_string_from_h1_indent();
+      Vx.Web.Html.Class_string_from_h1_indent output = new Vx.Web.Html.Class_string_from_h1_indent();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_h1_indent vx_copy(params object[] vals) {
-      Class_string_from_h1_indent output = new Class_string_from_h1_indent();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_h1_indent output = new Vx.Web.Html.Class_string_from_h1_indent();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-h1-indent", // name
         0, // idx
@@ -9068,14 +9280,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_h1_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_h1_indent;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_h1_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_h1_indent;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -9092,8 +9307,8 @@ public static class Html {
 
   }
 
-  public static Func_string_from_h1_indent e_string_from_h1_indent = new Vx.Web.Html.Class_string_from_h1_indent();
-  public static Func_string_from_h1_indent t_string_from_h1_indent = new Vx.Web.Html.Class_string_from_h1_indent();
+  public static Vx.Web.Html.Func_string_from_h1_indent e_string_from_h1_indent = new Vx.Web.Html.Class_string_from_h1_indent();
+  public static Vx.Web.Html.Func_string_from_h1_indent t_string_from_h1_indent = new Vx.Web.Html.Class_string_from_h1_indent();
 
   public static Vx.Core.Type_string f_string_from_h1_indent(Vx.Web.Html.Type_h1 h1, Vx.Core.Type_int indent) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -9108,7 +9323,8 @@ public static class Html {
         );
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Core.t_string,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
             sindent,
             Vx.Core.vx_new_string("<h1"),
             sid,
@@ -9138,21 +9354,22 @@ public static class Html {
   public class Class_string_from_h2_indent : Vx.Core.Class_base, Func_string_from_h2_indent {
 
     public override Vx.Web.Html.Func_string_from_h2_indent vx_new(params object[] vals) {
-      Class_string_from_h2_indent output = new Class_string_from_h2_indent();
+      Vx.Web.Html.Class_string_from_h2_indent output = new Vx.Web.Html.Class_string_from_h2_indent();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_h2_indent vx_copy(params object[] vals) {
-      Class_string_from_h2_indent output = new Class_string_from_h2_indent();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_h2_indent output = new Vx.Web.Html.Class_string_from_h2_indent();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-h2-indent", // name
         0, // idx
@@ -9171,14 +9388,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_h2_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_h2_indent;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_h2_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_h2_indent;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -9195,8 +9415,8 @@ public static class Html {
 
   }
 
-  public static Func_string_from_h2_indent e_string_from_h2_indent = new Vx.Web.Html.Class_string_from_h2_indent();
-  public static Func_string_from_h2_indent t_string_from_h2_indent = new Vx.Web.Html.Class_string_from_h2_indent();
+  public static Vx.Web.Html.Func_string_from_h2_indent e_string_from_h2_indent = new Vx.Web.Html.Class_string_from_h2_indent();
+  public static Vx.Web.Html.Func_string_from_h2_indent t_string_from_h2_indent = new Vx.Web.Html.Class_string_from_h2_indent();
 
   public static Vx.Core.Type_string f_string_from_h2_indent(Vx.Web.Html.Type_h2 h2, Vx.Core.Type_int indent) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -9211,7 +9431,8 @@ public static class Html {
         );
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Core.t_string,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
             sindent,
             Vx.Core.vx_new_string("<h2"),
             sid,
@@ -9241,21 +9462,22 @@ public static class Html {
   public class Class_string_from_h3_indent : Vx.Core.Class_base, Func_string_from_h3_indent {
 
     public override Vx.Web.Html.Func_string_from_h3_indent vx_new(params object[] vals) {
-      Class_string_from_h3_indent output = new Class_string_from_h3_indent();
+      Vx.Web.Html.Class_string_from_h3_indent output = new Vx.Web.Html.Class_string_from_h3_indent();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_h3_indent vx_copy(params object[] vals) {
-      Class_string_from_h3_indent output = new Class_string_from_h3_indent();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_h3_indent output = new Vx.Web.Html.Class_string_from_h3_indent();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-h3-indent", // name
         0, // idx
@@ -9274,14 +9496,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_h3_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_h3_indent;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_h3_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_h3_indent;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -9298,8 +9523,8 @@ public static class Html {
 
   }
 
-  public static Func_string_from_h3_indent e_string_from_h3_indent = new Vx.Web.Html.Class_string_from_h3_indent();
-  public static Func_string_from_h3_indent t_string_from_h3_indent = new Vx.Web.Html.Class_string_from_h3_indent();
+  public static Vx.Web.Html.Func_string_from_h3_indent e_string_from_h3_indent = new Vx.Web.Html.Class_string_from_h3_indent();
+  public static Vx.Web.Html.Func_string_from_h3_indent t_string_from_h3_indent = new Vx.Web.Html.Class_string_from_h3_indent();
 
   public static Vx.Core.Type_string f_string_from_h3_indent(Vx.Web.Html.Type_h3 h3, Vx.Core.Type_int indent) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -9314,7 +9539,8 @@ public static class Html {
         );
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Core.t_string,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
             sindent,
             Vx.Core.vx_new_string("<h3"),
             sid,
@@ -9344,21 +9570,22 @@ public static class Html {
   public class Class_string_from_head_indent : Vx.Core.Class_base, Func_string_from_head_indent {
 
     public override Vx.Web.Html.Func_string_from_head_indent vx_new(params object[] vals) {
-      Class_string_from_head_indent output = new Class_string_from_head_indent();
+      Vx.Web.Html.Class_string_from_head_indent output = new Vx.Web.Html.Class_string_from_head_indent();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_head_indent vx_copy(params object[] vals) {
-      Class_string_from_head_indent output = new Class_string_from_head_indent();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_head_indent output = new Vx.Web.Html.Class_string_from_head_indent();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-head-indent", // name
         0, // idx
@@ -9377,14 +9604,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_head_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_head_indent;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_head_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_head_indent;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -9401,8 +9631,8 @@ public static class Html {
 
   }
 
-  public static Func_string_from_head_indent e_string_from_head_indent = new Vx.Web.Html.Class_string_from_head_indent();
-  public static Func_string_from_head_indent t_string_from_head_indent = new Vx.Web.Html.Class_string_from_head_indent();
+  public static Vx.Web.Html.Func_string_from_head_indent e_string_from_head_indent = new Vx.Web.Html.Class_string_from_head_indent();
+  public static Vx.Web.Html.Func_string_from_head_indent t_string_from_head_indent = new Vx.Web.Html.Class_string_from_head_indent();
 
   public static Vx.Core.Type_string f_string_from_head_indent(Vx.Web.Html.Type_head head, Vx.Core.Type_int indent) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -9431,21 +9661,22 @@ public static class Html {
   public class Class_string_from_html : Vx.Core.Class_base, Func_string_from_html {
 
     public override Vx.Web.Html.Func_string_from_html vx_new(params object[] vals) {
-      Class_string_from_html output = new Class_string_from_html();
+      Vx.Web.Html.Class_string_from_html output = new Vx.Web.Html.Class_string_from_html();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_html vx_copy(params object[] vals) {
-      Class_string_from_html output = new Class_string_from_html();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_html output = new Vx.Web.Html.Class_string_from_html();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-html", // name
         0, // idx
@@ -9464,14 +9695,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_html;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_html;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_html;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_html;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -9499,8 +9733,8 @@ public static class Html {
 
   }
 
-  public static Func_string_from_html e_string_from_html = new Vx.Web.Html.Class_string_from_html();
-  public static Func_string_from_html t_string_from_html = new Vx.Web.Html.Class_string_from_html();
+  public static Vx.Web.Html.Func_string_from_html e_string_from_html = new Vx.Web.Html.Class_string_from_html();
+  public static Vx.Web.Html.Func_string_from_html t_string_from_html = new Vx.Web.Html.Class_string_from_html();
 
   public static Vx.Core.Type_string f_string_from_html(Vx.Web.Html.Type_html html) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -9519,7 +9753,8 @@ public static class Html {
         Vx.Core.Type_string sfooter = Vx.Web.Html.f_string_from_footer_indent(footer, Vx.Core.vx_new_int(1));
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Core.t_string,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
             Vx.Core.vx_new_string("<!DOCTYPE html>"),
             Vx.Core.c_newline,
             Vx.Core.vx_new_string("<html"),
@@ -9553,21 +9788,22 @@ public static class Html {
   public class Class_string_from_img_indent : Vx.Core.Class_base, Func_string_from_img_indent {
 
     public override Vx.Web.Html.Func_string_from_img_indent vx_new(params object[] vals) {
-      Class_string_from_img_indent output = new Class_string_from_img_indent();
+      Vx.Web.Html.Class_string_from_img_indent output = new Vx.Web.Html.Class_string_from_img_indent();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_img_indent vx_copy(params object[] vals) {
-      Class_string_from_img_indent output = new Class_string_from_img_indent();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_img_indent output = new Vx.Web.Html.Class_string_from_img_indent();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-img-indent", // name
         0, // idx
@@ -9586,14 +9822,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_img_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_img_indent;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_img_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_img_indent;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -9610,8 +9849,8 @@ public static class Html {
 
   }
 
-  public static Func_string_from_img_indent e_string_from_img_indent = new Vx.Web.Html.Class_string_from_img_indent();
-  public static Func_string_from_img_indent t_string_from_img_indent = new Vx.Web.Html.Class_string_from_img_indent();
+  public static Vx.Web.Html.Func_string_from_img_indent e_string_from_img_indent = new Vx.Web.Html.Class_string_from_img_indent();
+  public static Vx.Web.Html.Func_string_from_img_indent t_string_from_img_indent = new Vx.Web.Html.Class_string_from_img_indent();
 
   public static Vx.Core.Type_string f_string_from_img_indent(Vx.Web.Html.Type_img img, Vx.Core.Type_int indent) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -9636,7 +9875,8 @@ public static class Html {
         );
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Core.t_string,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
             sindent,
             Vx.Core.vx_new_string("<img"),
             sid,
@@ -9666,21 +9906,22 @@ public static class Html {
   public class Class_string_from_indent : Vx.Core.Class_base, Func_string_from_indent {
 
     public override Vx.Web.Html.Func_string_from_indent vx_new(params object[] vals) {
-      Class_string_from_indent output = new Class_string_from_indent();
+      Vx.Web.Html.Class_string_from_indent output = new Vx.Web.Html.Class_string_from_indent();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_indent vx_copy(params object[] vals) {
-      Class_string_from_indent output = new Class_string_from_indent();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_indent output = new Vx.Web.Html.Class_string_from_indent();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-indent", // name
         0, // idx
@@ -9699,14 +9940,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_indent;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_indent;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -9734,8 +9978,8 @@ public static class Html {
 
   }
 
-  public static Func_string_from_indent e_string_from_indent = new Vx.Web.Html.Class_string_from_indent();
-  public static Func_string_from_indent t_string_from_indent = new Vx.Web.Html.Class_string_from_indent();
+  public static Vx.Web.Html.Func_string_from_indent e_string_from_indent = new Vx.Web.Html.Class_string_from_indent();
+  public static Vx.Web.Html.Func_string_from_indent t_string_from_indent = new Vx.Web.Html.Class_string_from_indent();
 
   public static Vx.Core.Type_string f_string_from_indent(Vx.Core.Type_int indent) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -9745,7 +9989,8 @@ public static class Html {
       Vx.Core.vx_new_string(""),
       Vx.Core.f_new(
         Vx.Core.t_string,
-        Vx.Core.vx_new(Vx.Core.t_anylist,
+        Vx.Core.vx_new(
+          Vx.Core.t_anylist,
           Vx.Core.c_newline,
           Vx.Web.Html.f_string_indent(indent)
         )
@@ -9769,21 +10014,22 @@ public static class Html {
   public class Class_string_from_meta_indent : Vx.Core.Class_base, Func_string_from_meta_indent {
 
     public override Vx.Web.Html.Func_string_from_meta_indent vx_new(params object[] vals) {
-      Class_string_from_meta_indent output = new Class_string_from_meta_indent();
+      Vx.Web.Html.Class_string_from_meta_indent output = new Vx.Web.Html.Class_string_from_meta_indent();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_meta_indent vx_copy(params object[] vals) {
-      Class_string_from_meta_indent output = new Class_string_from_meta_indent();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_meta_indent output = new Vx.Web.Html.Class_string_from_meta_indent();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-meta-indent", // name
         0, // idx
@@ -9802,14 +10048,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_meta_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_meta_indent;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_meta_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_meta_indent;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -9826,8 +10075,8 @@ public static class Html {
 
   }
 
-  public static Func_string_from_meta_indent e_string_from_meta_indent = new Vx.Web.Html.Class_string_from_meta_indent();
-  public static Func_string_from_meta_indent t_string_from_meta_indent = new Vx.Web.Html.Class_string_from_meta_indent();
+  public static Vx.Web.Html.Func_string_from_meta_indent e_string_from_meta_indent = new Vx.Web.Html.Class_string_from_meta_indent();
+  public static Vx.Web.Html.Func_string_from_meta_indent t_string_from_meta_indent = new Vx.Web.Html.Class_string_from_meta_indent();
 
   public static Vx.Core.Type_string f_string_from_meta_indent(Vx.Web.Html.Type_meta meta, Vx.Core.Type_int indent) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -9840,46 +10089,50 @@ public static class Html {
         Vx.Core.Type_string content = meta.content();
         Vx.Core.Type_string scharset = Vx.Core.f_if_2(
           Vx.Core.t_string,
-          Vx.Core.vx_new(Vx.Core.t_thenelselist,
-              Vx.Core.f_then(
-                Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                  return Vx.Core.f_ne(Vx.Core.vx_new_string(""), charset);
-                }),
-                Vx.Core.t_any_from_func.vx_fn_new(() => {
-                  return Vx.Web.Html.f_string_from_propname_val(Vx.Core.vx_new_string("charset"), charset);
-                })
-              )
+          Vx.Core.vx_new(
+            Vx.Core.t_thenelselist,
+            Vx.Core.f_then(
+              Vx.Core.t_boolean_from_func.vx_fn_new(() => {
+                return Vx.Core.f_ne(Vx.Core.vx_new_string(""), charset);
+              }),
+              Vx.Core.t_any_from_func.vx_fn_new(() => {
+                return Vx.Web.Html.f_string_from_propname_val(Vx.Core.vx_new_string("charset"), charset);
+              })
+            )
           )
         );
         Vx.Core.Type_string sname = Vx.Core.f_if_2(
           Vx.Core.t_string,
-          Vx.Core.vx_new(Vx.Core.t_thenelselist,
-              Vx.Core.f_then(
-                Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                  return Vx.Core.f_ne(Vx.Core.vx_new_string(""), name);
-                }),
-                Vx.Core.t_any_from_func.vx_fn_new(() => {
-                  return Vx.Web.Html.f_string_from_propname_val(Vx.Core.vx_new_string("name"), name);
-                })
-              )
+          Vx.Core.vx_new(
+            Vx.Core.t_thenelselist,
+            Vx.Core.f_then(
+              Vx.Core.t_boolean_from_func.vx_fn_new(() => {
+                return Vx.Core.f_ne(Vx.Core.vx_new_string(""), name);
+              }),
+              Vx.Core.t_any_from_func.vx_fn_new(() => {
+                return Vx.Web.Html.f_string_from_propname_val(Vx.Core.vx_new_string("name"), name);
+              })
+            )
           )
         );
         Vx.Core.Type_string scontext = Vx.Core.f_if_2(
           Vx.Core.t_string,
-          Vx.Core.vx_new(Vx.Core.t_thenelselist,
-              Vx.Core.f_then(
-                Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                  return Vx.Core.f_ne(Vx.Core.vx_new_string(""), content);
-                }),
-                Vx.Core.t_any_from_func.vx_fn_new(() => {
-                  return Vx.Web.Html.f_string_from_propname_val(Vx.Core.vx_new_string("content"), content);
-                })
-              )
+          Vx.Core.vx_new(
+            Vx.Core.t_thenelselist,
+            Vx.Core.f_then(
+              Vx.Core.t_boolean_from_func.vx_fn_new(() => {
+                return Vx.Core.f_ne(Vx.Core.vx_new_string(""), content);
+              }),
+              Vx.Core.t_any_from_func.vx_fn_new(() => {
+                return Vx.Web.Html.f_string_from_propname_val(Vx.Core.vx_new_string("content"), content);
+              })
+            )
           )
         );
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Core.t_string,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
             sindent,
             Vx.Core.vx_new_string("<meta"),
             scharset,
@@ -9909,21 +10162,22 @@ public static class Html {
   public class Class_string_from_node_indent : Vx.Core.Class_base, Func_string_from_node_indent {
 
     public override Vx.Web.Html.Func_string_from_node_indent vx_new(params object[] vals) {
-      Class_string_from_node_indent output = new Class_string_from_node_indent();
+      Vx.Web.Html.Class_string_from_node_indent output = new Vx.Web.Html.Class_string_from_node_indent();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_node_indent vx_copy(params object[] vals) {
-      Class_string_from_node_indent output = new Class_string_from_node_indent();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_node_indent output = new Vx.Web.Html.Class_string_from_node_indent();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-node-indent", // name
         0, // idx
@@ -9942,14 +10196,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_node_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_node_indent;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_node_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_node_indent;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -9966,15 +10223,16 @@ public static class Html {
 
   }
 
-  public static Func_string_from_node_indent e_string_from_node_indent = new Vx.Web.Html.Class_string_from_node_indent();
-  public static Func_string_from_node_indent t_string_from_node_indent = new Vx.Web.Html.Class_string_from_node_indent();
+  public static Vx.Web.Html.Func_string_from_node_indent e_string_from_node_indent = new Vx.Web.Html.Class_string_from_node_indent();
+  public static Vx.Web.Html.Func_string_from_node_indent t_string_from_node_indent = new Vx.Web.Html.Class_string_from_node_indent();
 
   public static Vx.Core.Type_string f_string_from_node_indent(Vx.Core.Type_any node, Vx.Core.Type_int indent) {
     Vx.Core.Type_string output = Vx.Core.e_string;
     output = Vx.Core.f_switch(
       Vx.Core.t_string,
       Vx.Core.f_type_from_any(node),
-      Vx.Core.vx_new(Vx.Core.t_thenelselist,
+      Vx.Core.vx_new(
+        Vx.Core.t_thenelselist,
         Vx.Core.f_case_1(
           Vx.Web.Html.t_body,
           Vx.Core.t_any_from_func.vx_fn_new(() => {
@@ -10157,21 +10415,22 @@ public static class Html {
   public class Class_string_from_nodelist_indent : Vx.Core.Class_base, Func_string_from_nodelist_indent {
 
     public override Vx.Web.Html.Func_string_from_nodelist_indent vx_new(params object[] vals) {
-      Class_string_from_nodelist_indent output = new Class_string_from_nodelist_indent();
+      Vx.Web.Html.Class_string_from_nodelist_indent output = new Vx.Web.Html.Class_string_from_nodelist_indent();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_nodelist_indent vx_copy(params object[] vals) {
-      Class_string_from_nodelist_indent output = new Class_string_from_nodelist_indent();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_nodelist_indent output = new Vx.Web.Html.Class_string_from_nodelist_indent();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-nodelist-indent", // name
         0, // idx
@@ -10190,14 +10449,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_nodelist_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_nodelist_indent;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_nodelist_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_nodelist_indent;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -10214,8 +10476,8 @@ public static class Html {
 
   }
 
-  public static Func_string_from_nodelist_indent e_string_from_nodelist_indent = new Vx.Web.Html.Class_string_from_nodelist_indent();
-  public static Func_string_from_nodelist_indent t_string_from_nodelist_indent = new Vx.Web.Html.Class_string_from_nodelist_indent();
+  public static Vx.Web.Html.Func_string_from_nodelist_indent e_string_from_nodelist_indent = new Vx.Web.Html.Class_string_from_nodelist_indent();
+  public static Vx.Web.Html.Func_string_from_nodelist_indent t_string_from_nodelist_indent = new Vx.Web.Html.Class_string_from_nodelist_indent();
 
   public static Vx.Core.Type_string f_string_from_nodelist_indent(Vx.Core.Type_list nodelist, Vx.Core.Type_int indent) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -10256,21 +10518,22 @@ public static class Html {
   public class Class_string_from_nodelist_tag_prop_indent : Vx.Core.Class_base, Func_string_from_nodelist_tag_prop_indent {
 
     public override Vx.Web.Html.Func_string_from_nodelist_tag_prop_indent vx_new(params object[] vals) {
-      Class_string_from_nodelist_tag_prop_indent output = new Class_string_from_nodelist_tag_prop_indent();
+      Vx.Web.Html.Class_string_from_nodelist_tag_prop_indent output = new Vx.Web.Html.Class_string_from_nodelist_tag_prop_indent();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_nodelist_tag_prop_indent vx_copy(params object[] vals) {
-      Class_string_from_nodelist_tag_prop_indent output = new Class_string_from_nodelist_tag_prop_indent();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_nodelist_tag_prop_indent output = new Vx.Web.Html.Class_string_from_nodelist_tag_prop_indent();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-nodelist-tag-prop-indent", // name
         0, // idx
@@ -10289,14 +10552,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_nodelist_tag_prop_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_nodelist_tag_prop_indent;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_nodelist_tag_prop_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_nodelist_tag_prop_indent;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -10315,8 +10581,8 @@ public static class Html {
 
   }
 
-  public static Func_string_from_nodelist_tag_prop_indent e_string_from_nodelist_tag_prop_indent = new Vx.Web.Html.Class_string_from_nodelist_tag_prop_indent();
-  public static Func_string_from_nodelist_tag_prop_indent t_string_from_nodelist_tag_prop_indent = new Vx.Web.Html.Class_string_from_nodelist_tag_prop_indent();
+  public static Vx.Web.Html.Func_string_from_nodelist_tag_prop_indent e_string_from_nodelist_tag_prop_indent = new Vx.Web.Html.Class_string_from_nodelist_tag_prop_indent();
+  public static Vx.Web.Html.Func_string_from_nodelist_tag_prop_indent t_string_from_nodelist_tag_prop_indent = new Vx.Web.Html.Class_string_from_nodelist_tag_prop_indent();
 
   public static Vx.Core.Type_string f_string_from_nodelist_tag_prop_indent(Vx.Core.Type_list nodes, Vx.Core.Type_string tag, Vx.Core.Type_string prop, Vx.Core.Type_int indent) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -10330,33 +10596,35 @@ public static class Html {
         Vx.Core.Type_string sindent = Vx.Web.Html.f_string_from_indent(indent);
         Vx.Core.Type_string eindent = Vx.Core.f_if_2(
           Vx.Core.t_string,
-          Vx.Core.vx_new(Vx.Core.t_thenelselist,
-              Vx.Core.f_then(
-                Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                  return Vx.Core.f_is_empty(text);
-                }),
-                Vx.Core.t_any_from_func.vx_fn_new(() => {
-                  return Vx.Core.vx_new_string("");
-                })
-              ),
-              Vx.Core.f_then(
-                Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                  return Vx.Core.f_is_empty(sindent);
-                }),
-                Vx.Core.t_any_from_func.vx_fn_new(() => {
-                  return Vx.Core.c_newline;
-                })
-              ),
-              Vx.Core.f_else(
-                Vx.Core.t_any_from_func.vx_fn_new(() => {
-                  return sindent;
-                })
-              )
+          Vx.Core.vx_new(
+            Vx.Core.t_thenelselist,
+            Vx.Core.f_then(
+              Vx.Core.t_boolean_from_func.vx_fn_new(() => {
+                return Vx.Core.f_is_empty(text);
+              }),
+              Vx.Core.t_any_from_func.vx_fn_new(() => {
+                return Vx.Core.vx_new_string("");
+              })
+            ),
+            Vx.Core.f_then(
+              Vx.Core.t_boolean_from_func.vx_fn_new(() => {
+                return Vx.Core.f_is_empty(sindent);
+              }),
+              Vx.Core.t_any_from_func.vx_fn_new(() => {
+                return Vx.Core.c_newline;
+              })
+            ),
+            Vx.Core.f_else(
+              Vx.Core.t_any_from_func.vx_fn_new(() => {
+                return sindent;
+              })
+            )
           )
         );
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Core.t_string,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
             sindent,
             Vx.Core.vx_new_string("<"),
             tag,
@@ -10390,21 +10658,22 @@ public static class Html {
   public class Class_string_from_p_indent : Vx.Core.Class_base, Func_string_from_p_indent {
 
     public override Vx.Web.Html.Func_string_from_p_indent vx_new(params object[] vals) {
-      Class_string_from_p_indent output = new Class_string_from_p_indent();
+      Vx.Web.Html.Class_string_from_p_indent output = new Vx.Web.Html.Class_string_from_p_indent();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_p_indent vx_copy(params object[] vals) {
-      Class_string_from_p_indent output = new Class_string_from_p_indent();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_p_indent output = new Vx.Web.Html.Class_string_from_p_indent();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-p-indent", // name
         0, // idx
@@ -10423,14 +10692,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_p_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_p_indent;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_p_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_p_indent;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -10447,8 +10719,8 @@ public static class Html {
 
   }
 
-  public static Func_string_from_p_indent e_string_from_p_indent = new Vx.Web.Html.Class_string_from_p_indent();
-  public static Func_string_from_p_indent t_string_from_p_indent = new Vx.Web.Html.Class_string_from_p_indent();
+  public static Vx.Web.Html.Func_string_from_p_indent e_string_from_p_indent = new Vx.Web.Html.Class_string_from_p_indent();
+  public static Vx.Web.Html.Func_string_from_p_indent t_string_from_p_indent = new Vx.Web.Html.Class_string_from_p_indent();
 
   public static Vx.Core.Type_string f_string_from_p_indent(Vx.Web.Html.Type_p p, Vx.Core.Type_int indent) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -10472,7 +10744,8 @@ public static class Html {
         );
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Core.t_string,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
             sindent,
             Vx.Core.vx_new_string("<p"),
             sid,
@@ -10504,21 +10777,22 @@ public static class Html {
   public class Class_string_from_propname_val : Vx.Core.Class_base, Func_string_from_propname_val {
 
     public override Vx.Web.Html.Func_string_from_propname_val vx_new(params object[] vals) {
-      Class_string_from_propname_val output = new Class_string_from_propname_val();
+      Vx.Web.Html.Class_string_from_propname_val output = new Vx.Web.Html.Class_string_from_propname_val();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_propname_val vx_copy(params object[] vals) {
-      Class_string_from_propname_val output = new Class_string_from_propname_val();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_propname_val output = new Vx.Web.Html.Class_string_from_propname_val();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-propname-val", // name
         0, // idx
@@ -10537,14 +10811,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_propname_val;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_propname_val;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_propname_val;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_propname_val;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -10561,8 +10838,8 @@ public static class Html {
 
   }
 
-  public static Func_string_from_propname_val e_string_from_propname_val = new Vx.Web.Html.Class_string_from_propname_val();
-  public static Func_string_from_propname_val t_string_from_propname_val = new Vx.Web.Html.Class_string_from_propname_val();
+  public static Vx.Web.Html.Func_string_from_propname_val e_string_from_propname_val = new Vx.Web.Html.Class_string_from_propname_val();
+  public static Vx.Web.Html.Func_string_from_propname_val t_string_from_propname_val = new Vx.Web.Html.Class_string_from_propname_val();
 
   public static Vx.Core.Type_string f_string_from_propname_val(Vx.Core.Type_string key, Vx.Core.Type_string val) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -10571,7 +10848,8 @@ public static class Html {
       Vx.Core.f_notempty(val),
       Vx.Core.f_new(
         Vx.Core.t_string,
-        Vx.Core.vx_new(Vx.Core.t_anylist,
+        Vx.Core.vx_new(
+          Vx.Core.t_anylist,
           Vx.Core.vx_new_string(" "),
           key,
           Vx.Core.vx_new_string("="),
@@ -10598,21 +10876,22 @@ public static class Html {
   public class Class_string_from_propstyle : Vx.Core.Class_base, Func_string_from_propstyle {
 
     public override Vx.Web.Html.Func_string_from_propstyle vx_new(params object[] vals) {
-      Class_string_from_propstyle output = new Class_string_from_propstyle();
+      Vx.Web.Html.Class_string_from_propstyle output = new Vx.Web.Html.Class_string_from_propstyle();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_propstyle vx_copy(params object[] vals) {
-      Class_string_from_propstyle output = new Class_string_from_propstyle();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_propstyle output = new Vx.Web.Html.Class_string_from_propstyle();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-propstyle", // name
         0, // idx
@@ -10631,14 +10910,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_propstyle;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_propstyle;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_propstyle;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_propstyle;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -10666,14 +10948,15 @@ public static class Html {
 
   }
 
-  public static Func_string_from_propstyle e_string_from_propstyle = new Vx.Web.Html.Class_string_from_propstyle();
-  public static Func_string_from_propstyle t_string_from_propstyle = new Vx.Web.Html.Class_string_from_propstyle();
+  public static Vx.Web.Html.Func_string_from_propstyle e_string_from_propstyle = new Vx.Web.Html.Class_string_from_propstyle();
+  public static Vx.Web.Html.Func_string_from_propstyle t_string_from_propstyle = new Vx.Web.Html.Class_string_from_propstyle();
 
   public static Vx.Core.Type_string f_string_from_propstyle(Vx.Web.Html.Type_style style) {
     Vx.Core.Type_string output = Vx.Core.e_string;
     output = Vx.Core.f_if_2(
       Vx.Core.t_string,
-      Vx.Core.vx_new(Vx.Core.t_thenelselist,
+      Vx.Core.vx_new(
+        Vx.Core.t_thenelselist,
         Vx.Core.f_then(
           Vx.Core.t_boolean_from_func.vx_fn_new(() => {
             return Vx.Core.f_notempty_1(style);
@@ -10681,14 +10964,15 @@ public static class Html {
           Vx.Core.t_any_from_func.vx_fn_new(() => {
             return Vx.Core.f_new(
               Vx.Core.t_string,
-              Vx.Core.vx_new(Vx.Core.t_anylist,
-                  Vx.Core.vx_new_string(" class="),
-                  Vx.Core.c_quote,
-                  Vx.Type.f_string_from_string_start(
-                    style.name(),
-                    Vx.Core.vx_new_int(2)
-                  ),
-                  Vx.Core.c_quote
+              Vx.Core.vx_new(
+                Vx.Core.t_anylist,
+                Vx.Core.vx_new_string(" class="),
+                Vx.Core.c_quote,
+                Vx.Type.f_string_from_string_start(
+                  style.name(),
+                  Vx.Core.vx_new_int(2)
+                ),
+                Vx.Core.c_quote
               )
             );
           })
@@ -10713,21 +10997,22 @@ public static class Html {
   public class Class_string_from_propstyle_stylelist : Vx.Core.Class_base, Func_string_from_propstyle_stylelist {
 
     public override Vx.Web.Html.Func_string_from_propstyle_stylelist vx_new(params object[] vals) {
-      Class_string_from_propstyle_stylelist output = new Class_string_from_propstyle_stylelist();
+      Vx.Web.Html.Class_string_from_propstyle_stylelist output = new Vx.Web.Html.Class_string_from_propstyle_stylelist();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_propstyle_stylelist vx_copy(params object[] vals) {
-      Class_string_from_propstyle_stylelist output = new Class_string_from_propstyle_stylelist();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_propstyle_stylelist output = new Vx.Web.Html.Class_string_from_propstyle_stylelist();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-propstyle-stylelist", // name
         0, // idx
@@ -10746,14 +11031,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_propstyle_stylelist;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_propstyle_stylelist;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_propstyle_stylelist;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_propstyle_stylelist;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -10770,14 +11058,15 @@ public static class Html {
 
   }
 
-  public static Func_string_from_propstyle_stylelist e_string_from_propstyle_stylelist = new Vx.Web.Html.Class_string_from_propstyle_stylelist();
-  public static Func_string_from_propstyle_stylelist t_string_from_propstyle_stylelist = new Vx.Web.Html.Class_string_from_propstyle_stylelist();
+  public static Vx.Web.Html.Func_string_from_propstyle_stylelist e_string_from_propstyle_stylelist = new Vx.Web.Html.Class_string_from_propstyle_stylelist();
+  public static Vx.Web.Html.Func_string_from_propstyle_stylelist t_string_from_propstyle_stylelist = new Vx.Web.Html.Class_string_from_propstyle_stylelist();
 
   public static Vx.Core.Type_string f_string_from_propstyle_stylelist(Vx.Web.Html.Type_style style, Vx.Web.Html.Type_stylelist stylelist) {
     Vx.Core.Type_string output = Vx.Core.e_string;
     output = Vx.Core.f_if_2(
       Vx.Core.t_string,
-      Vx.Core.vx_new(Vx.Core.t_thenelselist,
+      Vx.Core.vx_new(
+        Vx.Core.t_thenelselist,
         Vx.Core.f_then(
           Vx.Core.t_boolean_from_func.vx_fn_new(() => {
             return Vx.Core.f_notempty_1(style);
@@ -10813,21 +11102,22 @@ public static class Html {
   public class Class_string_from_propstylelist : Vx.Core.Class_base, Func_string_from_propstylelist {
 
     public override Vx.Web.Html.Func_string_from_propstylelist vx_new(params object[] vals) {
-      Class_string_from_propstylelist output = new Class_string_from_propstylelist();
+      Vx.Web.Html.Class_string_from_propstylelist output = new Vx.Web.Html.Class_string_from_propstylelist();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_propstylelist vx_copy(params object[] vals) {
-      Class_string_from_propstylelist output = new Class_string_from_propstylelist();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_propstylelist output = new Vx.Web.Html.Class_string_from_propstylelist();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-propstylelist", // name
         0, // idx
@@ -10846,14 +11136,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_propstylelist;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_propstylelist;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_propstylelist;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_propstylelist;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -10881,14 +11174,15 @@ public static class Html {
 
   }
 
-  public static Func_string_from_propstylelist e_string_from_propstylelist = new Vx.Web.Html.Class_string_from_propstylelist();
-  public static Func_string_from_propstylelist t_string_from_propstylelist = new Vx.Web.Html.Class_string_from_propstylelist();
+  public static Vx.Web.Html.Func_string_from_propstylelist e_string_from_propstylelist = new Vx.Web.Html.Class_string_from_propstylelist();
+  public static Vx.Web.Html.Func_string_from_propstylelist t_string_from_propstylelist = new Vx.Web.Html.Class_string_from_propstylelist();
 
   public static Vx.Core.Type_string f_string_from_propstylelist(Vx.Web.Html.Type_stylelist stylelist) {
     Vx.Core.Type_string output = Vx.Core.e_string;
     output = Vx.Core.f_if_2(
       Vx.Core.t_string,
-      Vx.Core.vx_new(Vx.Core.t_thenelselist,
+      Vx.Core.vx_new(
+        Vx.Core.t_thenelselist,
         Vx.Core.f_then(
           Vx.Core.t_boolean_from_func.vx_fn_new(() => {
             return Vx.Core.f_notempty_1(stylelist);
@@ -10903,7 +11197,8 @@ public static class Html {
                   Vx.Core.f_ne(Vx.Core.vx_new_string(""), joined),
                   Vx.Core.f_new(
                     Vx.Core.t_string,
-                    Vx.Core.vx_new(Vx.Core.t_anylist,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
                       Vx.Core.vx_new_string(" class="),
                       Vx.Core.c_quote,
                       joined,
@@ -10935,21 +11230,22 @@ public static class Html {
   public class Class_string_from_propstyleunique : Vx.Core.Class_base, Func_string_from_propstyleunique {
 
     public override Vx.Web.Html.Func_string_from_propstyleunique vx_new(params object[] vals) {
-      Class_string_from_propstyleunique output = new Class_string_from_propstyleunique();
+      Vx.Web.Html.Class_string_from_propstyleunique output = new Vx.Web.Html.Class_string_from_propstyleunique();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_propstyleunique vx_copy(params object[] vals) {
-      Class_string_from_propstyleunique output = new Class_string_from_propstyleunique();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_propstyleunique output = new Vx.Web.Html.Class_string_from_propstyleunique();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-propstyleunique", // name
         0, // idx
@@ -10968,14 +11264,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_propstyleunique;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_propstyleunique;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_propstyleunique;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_propstyleunique;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -11003,14 +11302,15 @@ public static class Html {
 
   }
 
-  public static Func_string_from_propstyleunique e_string_from_propstyleunique = new Vx.Web.Html.Class_string_from_propstyleunique();
-  public static Func_string_from_propstyleunique t_string_from_propstyleunique = new Vx.Web.Html.Class_string_from_propstyleunique();
+  public static Vx.Web.Html.Func_string_from_propstyleunique e_string_from_propstyleunique = new Vx.Web.Html.Class_string_from_propstyleunique();
+  public static Vx.Web.Html.Func_string_from_propstyleunique t_string_from_propstyleunique = new Vx.Web.Html.Class_string_from_propstyleunique();
 
   public static Vx.Core.Type_string f_string_from_propstyleunique(Vx.Web.Html.Type_style style) {
     Vx.Core.Type_string output = Vx.Core.e_string;
     output = Vx.Core.f_if_2(
       Vx.Core.t_string,
-      Vx.Core.vx_new(Vx.Core.t_thenelselist,
+      Vx.Core.vx_new(
+        Vx.Core.t_thenelselist,
         Vx.Core.f_then(
           Vx.Core.t_boolean_from_func.vx_fn_new(() => {
             return Vx.Core.f_notempty_1(style);
@@ -11023,7 +11323,8 @@ public static class Html {
                 Vx.Core.Type_string text = Vx.Web.Html.f_string_from_stylepropmap_indent(props, Vx.Core.vx_new_int(0));
                 Vx.Core.Type_any output_1 = Vx.Core.f_if_2(
                   Vx.Core.t_string,
-                  Vx.Core.vx_new(Vx.Core.t_thenelselist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_thenelselist,
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
                         return Vx.Core.f_notempty(text);
@@ -11031,11 +11332,12 @@ public static class Html {
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
                         return Vx.Core.f_new(
                           Vx.Core.t_string,
-                          Vx.Core.vx_new(Vx.Core.t_anylist,
-                              Vx.Core.vx_new_string(" style="),
-                              Vx.Core.c_quote,
-                              text,
-                              Vx.Core.c_quote
+                          Vx.Core.vx_new(
+                            Vx.Core.t_anylist,
+                            Vx.Core.vx_new_string(" style="),
+                            Vx.Core.c_quote,
+                            text,
+                            Vx.Core.c_quote
                           )
                         );
                       })
@@ -11067,21 +11369,22 @@ public static class Html {
   public class Class_string_from_style_indent : Vx.Core.Class_base, Func_string_from_style_indent {
 
     public override Vx.Web.Html.Func_string_from_style_indent vx_new(params object[] vals) {
-      Class_string_from_style_indent output = new Class_string_from_style_indent();
+      Vx.Web.Html.Class_string_from_style_indent output = new Vx.Web.Html.Class_string_from_style_indent();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_style_indent vx_copy(params object[] vals) {
-      Class_string_from_style_indent output = new Class_string_from_style_indent();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_style_indent output = new Vx.Web.Html.Class_string_from_style_indent();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-style-indent", // name
         0, // idx
@@ -11100,14 +11403,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_style_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_style_indent;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_style_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_style_indent;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -11124,8 +11430,8 @@ public static class Html {
 
   }
 
-  public static Func_string_from_style_indent e_string_from_style_indent = new Vx.Web.Html.Class_string_from_style_indent();
-  public static Func_string_from_style_indent t_string_from_style_indent = new Vx.Web.Html.Class_string_from_style_indent();
+  public static Vx.Web.Html.Func_string_from_style_indent e_string_from_style_indent = new Vx.Web.Html.Class_string_from_style_indent();
+  public static Vx.Web.Html.Func_string_from_style_indent t_string_from_style_indent = new Vx.Web.Html.Class_string_from_style_indent();
 
   public static Vx.Core.Type_string f_string_from_style_indent(Vx.Web.Html.Type_style style, Vx.Core.Type_int indent) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -11146,7 +11452,8 @@ public static class Html {
         );
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Core.t_string,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
             sindent,
             name,
             Vx.Core.vx_new_string(" {"),
@@ -11176,21 +11483,22 @@ public static class Html {
   public class Class_string_from_stylelist : Vx.Core.Class_base, Func_string_from_stylelist {
 
     public override Vx.Web.Html.Func_string_from_stylelist vx_new(params object[] vals) {
-      Class_string_from_stylelist output = new Class_string_from_stylelist();
+      Vx.Web.Html.Class_string_from_stylelist output = new Vx.Web.Html.Class_string_from_stylelist();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_stylelist vx_copy(params object[] vals) {
-      Class_string_from_stylelist output = new Class_string_from_stylelist();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_stylelist output = new Vx.Web.Html.Class_string_from_stylelist();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-stylelist", // name
         0, // idx
@@ -11209,14 +11517,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_stylelist;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_stylelist;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_stylelist;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_stylelist;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -11244,8 +11555,8 @@ public static class Html {
 
   }
 
-  public static Func_string_from_stylelist e_string_from_stylelist = new Vx.Web.Html.Class_string_from_stylelist();
-  public static Func_string_from_stylelist t_string_from_stylelist = new Vx.Web.Html.Class_string_from_stylelist();
+  public static Vx.Web.Html.Func_string_from_stylelist e_string_from_stylelist = new Vx.Web.Html.Class_string_from_stylelist();
+  public static Vx.Web.Html.Func_string_from_stylelist t_string_from_stylelist = new Vx.Web.Html.Class_string_from_stylelist();
 
   public static Vx.Core.Type_string f_string_from_stylelist(Vx.Web.Html.Type_stylelist stylelist) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -11287,21 +11598,22 @@ public static class Html {
   public class Class_string_from_stylelist_indent : Vx.Core.Class_base, Func_string_from_stylelist_indent {
 
     public override Vx.Web.Html.Func_string_from_stylelist_indent vx_new(params object[] vals) {
-      Class_string_from_stylelist_indent output = new Class_string_from_stylelist_indent();
+      Vx.Web.Html.Class_string_from_stylelist_indent output = new Vx.Web.Html.Class_string_from_stylelist_indent();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_stylelist_indent vx_copy(params object[] vals) {
-      Class_string_from_stylelist_indent output = new Class_string_from_stylelist_indent();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_stylelist_indent output = new Vx.Web.Html.Class_string_from_stylelist_indent();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-stylelist-indent", // name
         0, // idx
@@ -11320,14 +11632,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_stylelist_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_stylelist_indent;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_stylelist_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_stylelist_indent;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -11344,8 +11659,8 @@ public static class Html {
 
   }
 
-  public static Func_string_from_stylelist_indent e_string_from_stylelist_indent = new Vx.Web.Html.Class_string_from_stylelist_indent();
-  public static Func_string_from_stylelist_indent t_string_from_stylelist_indent = new Vx.Web.Html.Class_string_from_stylelist_indent();
+  public static Vx.Web.Html.Func_string_from_stylelist_indent e_string_from_stylelist_indent = new Vx.Web.Html.Class_string_from_stylelist_indent();
+  public static Vx.Web.Html.Func_string_from_stylelist_indent t_string_from_stylelist_indent = new Vx.Web.Html.Class_string_from_stylelist_indent();
 
   public static Vx.Core.Type_string f_string_from_stylelist_indent(Vx.Web.Html.Type_stylelist stylelist, Vx.Core.Type_int indent) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -11387,21 +11702,22 @@ public static class Html {
   public class Class_string_from_stylepropmap_indent : Vx.Core.Class_base, Func_string_from_stylepropmap_indent {
 
     public override Vx.Web.Html.Func_string_from_stylepropmap_indent vx_new(params object[] vals) {
-      Class_string_from_stylepropmap_indent output = new Class_string_from_stylepropmap_indent();
+      Vx.Web.Html.Class_string_from_stylepropmap_indent output = new Vx.Web.Html.Class_string_from_stylepropmap_indent();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_stylepropmap_indent vx_copy(params object[] vals) {
-      Class_string_from_stylepropmap_indent output = new Class_string_from_stylepropmap_indent();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_stylepropmap_indent output = new Vx.Web.Html.Class_string_from_stylepropmap_indent();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-stylepropmap-indent", // name
         0, // idx
@@ -11420,14 +11736,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_stylepropmap_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_stylepropmap_indent;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_stylepropmap_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_stylepropmap_indent;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -11444,8 +11763,8 @@ public static class Html {
 
   }
 
-  public static Func_string_from_stylepropmap_indent e_string_from_stylepropmap_indent = new Vx.Web.Html.Class_string_from_stylepropmap_indent();
-  public static Func_string_from_stylepropmap_indent t_string_from_stylepropmap_indent = new Vx.Web.Html.Class_string_from_stylepropmap_indent();
+  public static Vx.Web.Html.Func_string_from_stylepropmap_indent e_string_from_stylepropmap_indent = new Vx.Web.Html.Class_string_from_stylepropmap_indent();
+  public static Vx.Web.Html.Func_string_from_stylepropmap_indent t_string_from_stylepropmap_indent = new Vx.Web.Html.Class_string_from_stylepropmap_indent();
 
   public static Vx.Core.Type_string f_string_from_stylepropmap_indent(Vx.Web.Html.Type_propmap propmap, Vx.Core.Type_int indent) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -11462,7 +11781,8 @@ public static class Html {
             Vx.Core.Type_any output_1 = 
                 Vx.Core.f_new(
                   Vx.Core.t_string,
-                  Vx.Core.vx_new(Vx.Core.t_anylist,
+                  Vx.Core.vx_new(
+                    Vx.Core.t_anylist,
                     sindent,
                     key,
                     Vx.Core.vx_new_string(": "),
@@ -11495,21 +11815,22 @@ public static class Html {
   public class Class_string_from_stylesheet_indent : Vx.Core.Class_base, Func_string_from_stylesheet_indent {
 
     public override Vx.Web.Html.Func_string_from_stylesheet_indent vx_new(params object[] vals) {
-      Class_string_from_stylesheet_indent output = new Class_string_from_stylesheet_indent();
+      Vx.Web.Html.Class_string_from_stylesheet_indent output = new Vx.Web.Html.Class_string_from_stylesheet_indent();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_stylesheet_indent vx_copy(params object[] vals) {
-      Class_string_from_stylesheet_indent output = new Class_string_from_stylesheet_indent();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_stylesheet_indent output = new Vx.Web.Html.Class_string_from_stylesheet_indent();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-stylesheet-indent", // name
         0, // idx
@@ -11528,14 +11849,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_stylesheet_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_stylesheet_indent;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_stylesheet_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_stylesheet_indent;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -11552,8 +11876,8 @@ public static class Html {
 
   }
 
-  public static Func_string_from_stylesheet_indent e_string_from_stylesheet_indent = new Vx.Web.Html.Class_string_from_stylesheet_indent();
-  public static Func_string_from_stylesheet_indent t_string_from_stylesheet_indent = new Vx.Web.Html.Class_string_from_stylesheet_indent();
+  public static Vx.Web.Html.Func_string_from_stylesheet_indent e_string_from_stylesheet_indent = new Vx.Web.Html.Class_string_from_stylesheet_indent();
+  public static Vx.Web.Html.Func_string_from_stylesheet_indent t_string_from_stylesheet_indent = new Vx.Web.Html.Class_string_from_stylesheet_indent();
 
   public static Vx.Core.Type_string f_string_from_stylesheet_indent(Vx.Web.Html.Type_stylesheet stylesheet, Vx.Core.Type_int indent) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -11573,7 +11897,8 @@ public static class Html {
         );
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Core.t_string,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
             sindent,
             Vx.Core.vx_new_string("<style>"),
             sstyles,
@@ -11602,21 +11927,22 @@ public static class Html {
   public class Class_string_from_table_indent : Vx.Core.Class_base, Func_string_from_table_indent {
 
     public override Vx.Web.Html.Func_string_from_table_indent vx_new(params object[] vals) {
-      Class_string_from_table_indent output = new Class_string_from_table_indent();
+      Vx.Web.Html.Class_string_from_table_indent output = new Vx.Web.Html.Class_string_from_table_indent();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_table_indent vx_copy(params object[] vals) {
-      Class_string_from_table_indent output = new Class_string_from_table_indent();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_table_indent output = new Vx.Web.Html.Class_string_from_table_indent();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-table-indent", // name
         0, // idx
@@ -11635,14 +11961,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_table_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_table_indent;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_table_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_table_indent;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -11659,8 +11988,8 @@ public static class Html {
 
   }
 
-  public static Func_string_from_table_indent e_string_from_table_indent = new Vx.Web.Html.Class_string_from_table_indent();
-  public static Func_string_from_table_indent t_string_from_table_indent = new Vx.Web.Html.Class_string_from_table_indent();
+  public static Vx.Web.Html.Func_string_from_table_indent e_string_from_table_indent = new Vx.Web.Html.Class_string_from_table_indent();
+  public static Vx.Web.Html.Func_string_from_table_indent t_string_from_table_indent = new Vx.Web.Html.Class_string_from_table_indent();
 
   public static Vx.Core.Type_string f_string_from_table_indent(Vx.Web.Html.Type_table table, Vx.Core.Type_int indent) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -11684,7 +12013,8 @@ public static class Html {
         );
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Core.t_string,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
             sindent,
             Vx.Core.vx_new_string("<table"),
             sid,
@@ -11716,21 +12046,22 @@ public static class Html {
   public class Class_string_from_tbody_indent : Vx.Core.Class_base, Func_string_from_tbody_indent {
 
     public override Vx.Web.Html.Func_string_from_tbody_indent vx_new(params object[] vals) {
-      Class_string_from_tbody_indent output = new Class_string_from_tbody_indent();
+      Vx.Web.Html.Class_string_from_tbody_indent output = new Vx.Web.Html.Class_string_from_tbody_indent();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_tbody_indent vx_copy(params object[] vals) {
-      Class_string_from_tbody_indent output = new Class_string_from_tbody_indent();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_tbody_indent output = new Vx.Web.Html.Class_string_from_tbody_indent();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-tbody-indent", // name
         0, // idx
@@ -11749,14 +12080,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_tbody_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_tbody_indent;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_tbody_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_tbody_indent;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -11773,8 +12107,8 @@ public static class Html {
 
   }
 
-  public static Func_string_from_tbody_indent e_string_from_tbody_indent = new Vx.Web.Html.Class_string_from_tbody_indent();
-  public static Func_string_from_tbody_indent t_string_from_tbody_indent = new Vx.Web.Html.Class_string_from_tbody_indent();
+  public static Vx.Web.Html.Func_string_from_tbody_indent e_string_from_tbody_indent = new Vx.Web.Html.Class_string_from_tbody_indent();
+  public static Vx.Web.Html.Func_string_from_tbody_indent t_string_from_tbody_indent = new Vx.Web.Html.Class_string_from_tbody_indent();
 
   public static Vx.Core.Type_string f_string_from_tbody_indent(Vx.Web.Html.Type_tbody tbody, Vx.Core.Type_int indent) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -11804,21 +12138,22 @@ public static class Html {
   public class Class_string_from_td_indent : Vx.Core.Class_base, Func_string_from_td_indent {
 
     public override Vx.Web.Html.Func_string_from_td_indent vx_new(params object[] vals) {
-      Class_string_from_td_indent output = new Class_string_from_td_indent();
+      Vx.Web.Html.Class_string_from_td_indent output = new Vx.Web.Html.Class_string_from_td_indent();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_td_indent vx_copy(params object[] vals) {
-      Class_string_from_td_indent output = new Class_string_from_td_indent();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_td_indent output = new Vx.Web.Html.Class_string_from_td_indent();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-td-indent", // name
         0, // idx
@@ -11837,14 +12172,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_td_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_td_indent;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_td_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_td_indent;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -11861,8 +12199,8 @@ public static class Html {
 
   }
 
-  public static Func_string_from_td_indent e_string_from_td_indent = new Vx.Web.Html.Class_string_from_td_indent();
-  public static Func_string_from_td_indent t_string_from_td_indent = new Vx.Web.Html.Class_string_from_td_indent();
+  public static Vx.Web.Html.Func_string_from_td_indent e_string_from_td_indent = new Vx.Web.Html.Class_string_from_td_indent();
+  public static Vx.Web.Html.Func_string_from_td_indent t_string_from_td_indent = new Vx.Web.Html.Class_string_from_td_indent();
 
   public static Vx.Core.Type_string f_string_from_td_indent(Vx.Web.Html.Type_td td, Vx.Core.Type_int indent) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -11892,21 +12230,22 @@ public static class Html {
   public class Class_string_from_thead_indent : Vx.Core.Class_base, Func_string_from_thead_indent {
 
     public override Vx.Web.Html.Func_string_from_thead_indent vx_new(params object[] vals) {
-      Class_string_from_thead_indent output = new Class_string_from_thead_indent();
+      Vx.Web.Html.Class_string_from_thead_indent output = new Vx.Web.Html.Class_string_from_thead_indent();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_thead_indent vx_copy(params object[] vals) {
-      Class_string_from_thead_indent output = new Class_string_from_thead_indent();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_thead_indent output = new Vx.Web.Html.Class_string_from_thead_indent();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-thead-indent", // name
         0, // idx
@@ -11925,14 +12264,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_thead_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_thead_indent;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_thead_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_thead_indent;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -11949,8 +12291,8 @@ public static class Html {
 
   }
 
-  public static Func_string_from_thead_indent e_string_from_thead_indent = new Vx.Web.Html.Class_string_from_thead_indent();
-  public static Func_string_from_thead_indent t_string_from_thead_indent = new Vx.Web.Html.Class_string_from_thead_indent();
+  public static Vx.Web.Html.Func_string_from_thead_indent e_string_from_thead_indent = new Vx.Web.Html.Class_string_from_thead_indent();
+  public static Vx.Web.Html.Func_string_from_thead_indent t_string_from_thead_indent = new Vx.Web.Html.Class_string_from_thead_indent();
 
   public static Vx.Core.Type_string f_string_from_thead_indent(Vx.Web.Html.Type_thead thead, Vx.Core.Type_int indent) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -11980,21 +12322,22 @@ public static class Html {
   public class Class_string_from_title_indent : Vx.Core.Class_base, Func_string_from_title_indent {
 
     public override Vx.Web.Html.Func_string_from_title_indent vx_new(params object[] vals) {
-      Class_string_from_title_indent output = new Class_string_from_title_indent();
+      Vx.Web.Html.Class_string_from_title_indent output = new Vx.Web.Html.Class_string_from_title_indent();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_title_indent vx_copy(params object[] vals) {
-      Class_string_from_title_indent output = new Class_string_from_title_indent();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_title_indent output = new Vx.Web.Html.Class_string_from_title_indent();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-title-indent", // name
         0, // idx
@@ -12013,14 +12356,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_title_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_title_indent;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_title_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_title_indent;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -12037,8 +12383,8 @@ public static class Html {
 
   }
 
-  public static Func_string_from_title_indent e_string_from_title_indent = new Vx.Web.Html.Class_string_from_title_indent();
-  public static Func_string_from_title_indent t_string_from_title_indent = new Vx.Web.Html.Class_string_from_title_indent();
+  public static Vx.Web.Html.Func_string_from_title_indent e_string_from_title_indent = new Vx.Web.Html.Class_string_from_title_indent();
+  public static Vx.Web.Html.Func_string_from_title_indent t_string_from_title_indent = new Vx.Web.Html.Class_string_from_title_indent();
 
   public static Vx.Core.Type_string f_string_from_title_indent(Vx.Web.Html.Type_title title, Vx.Core.Type_int indent) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -12049,7 +12395,8 @@ public static class Html {
         Vx.Core.Type_string text = title.text();
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Core.t_string,
-          Vx.Core.vx_new(Vx.Core.t_anylist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
             sindent,
             Vx.Core.vx_new_string("<title>"),
             text,
@@ -12077,21 +12424,22 @@ public static class Html {
   public class Class_string_from_tr_indent : Vx.Core.Class_base, Func_string_from_tr_indent {
 
     public override Vx.Web.Html.Func_string_from_tr_indent vx_new(params object[] vals) {
-      Class_string_from_tr_indent output = new Class_string_from_tr_indent();
+      Vx.Web.Html.Class_string_from_tr_indent output = new Vx.Web.Html.Class_string_from_tr_indent();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_tr_indent vx_copy(params object[] vals) {
-      Class_string_from_tr_indent output = new Class_string_from_tr_indent();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_tr_indent output = new Vx.Web.Html.Class_string_from_tr_indent();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-tr-indent", // name
         0, // idx
@@ -12110,14 +12458,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_tr_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_tr_indent;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_tr_indent;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_tr_indent;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -12134,8 +12485,8 @@ public static class Html {
 
   }
 
-  public static Func_string_from_tr_indent e_string_from_tr_indent = new Vx.Web.Html.Class_string_from_tr_indent();
-  public static Func_string_from_tr_indent t_string_from_tr_indent = new Vx.Web.Html.Class_string_from_tr_indent();
+  public static Vx.Web.Html.Func_string_from_tr_indent e_string_from_tr_indent = new Vx.Web.Html.Class_string_from_tr_indent();
+  public static Vx.Web.Html.Func_string_from_tr_indent t_string_from_tr_indent = new Vx.Web.Html.Class_string_from_tr_indent();
 
   public static Vx.Core.Type_string f_string_from_tr_indent(Vx.Web.Html.Type_tr tr, Vx.Core.Type_int indent) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -12164,21 +12515,22 @@ public static class Html {
   public class Class_string_from_uri : Vx.Core.Class_base, Func_string_from_uri {
 
     public override Vx.Web.Html.Func_string_from_uri vx_new(params object[] vals) {
-      Class_string_from_uri output = new Class_string_from_uri();
+      Vx.Web.Html.Class_string_from_uri output = new Vx.Web.Html.Class_string_from_uri();
       return output;
     }
 
-    public override Vx.Web.Html.Func_string_from_uri vx_copy(params object[] vals) {
-      Class_string_from_uri output = new Class_string_from_uri();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_uri output = new Vx.Web.Html.Class_string_from_uri();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "string<-uri", // name
         0, // idx
@@ -12197,14 +12549,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_string_from_uri;
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_uri;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_string_from_uri;
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_uri;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -12232,8 +12587,8 @@ public static class Html {
 
   }
 
-  public static Func_string_from_uri e_string_from_uri = new Vx.Web.Html.Class_string_from_uri();
-  public static Func_string_from_uri t_string_from_uri = new Vx.Web.Html.Class_string_from_uri();
+  public static Vx.Web.Html.Func_string_from_uri e_string_from_uri = new Vx.Web.Html.Class_string_from_uri();
+  public static Vx.Web.Html.Func_string_from_uri t_string_from_uri = new Vx.Web.Html.Class_string_from_uri();
 
   public static Vx.Core.Type_string f_string_from_uri(Vx.Core.Type_string uri) {
     Vx.Core.Type_string output = Vx.Core.e_string;
@@ -12255,21 +12610,22 @@ public static class Html {
   public class Class_style_from_stylesheet_name : Vx.Core.Class_base, Func_style_from_stylesheet_name {
 
     public override Vx.Web.Html.Func_style_from_stylesheet_name vx_new(params object[] vals) {
-      Class_style_from_stylesheet_name output = new Class_style_from_stylesheet_name();
+      Vx.Web.Html.Class_style_from_stylesheet_name output = new Vx.Web.Html.Class_style_from_stylesheet_name();
       return output;
     }
 
-    public override Vx.Web.Html.Func_style_from_stylesheet_name vx_copy(params object[] vals) {
-      Class_style_from_stylesheet_name output = new Class_style_from_stylesheet_name();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_style_from_stylesheet_name output = new Vx.Web.Html.Class_style_from_stylesheet_name();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "style<-stylesheet-name", // name
         0, // idx
@@ -12288,14 +12644,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_style_from_stylesheet_name;
+      Vx.Core.Type_any output = Vx.Web.Html.e_style_from_stylesheet_name;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_style_from_stylesheet_name;
+      Vx.Core.Type_any output = Vx.Web.Html.t_style_from_stylesheet_name;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
@@ -12312,8 +12671,8 @@ public static class Html {
 
   }
 
-  public static Func_style_from_stylesheet_name e_style_from_stylesheet_name = new Vx.Web.Html.Class_style_from_stylesheet_name();
-  public static Func_style_from_stylesheet_name t_style_from_stylesheet_name = new Vx.Web.Html.Class_style_from_stylesheet_name();
+  public static Vx.Web.Html.Func_style_from_stylesheet_name e_style_from_stylesheet_name = new Vx.Web.Html.Class_style_from_stylesheet_name();
+  public static Vx.Web.Html.Func_style_from_stylesheet_name t_style_from_stylesheet_name = new Vx.Web.Html.Class_style_from_stylesheet_name();
 
   public static Vx.Web.Html.Type_style f_style_from_stylesheet_name(Vx.Web.Html.Type_stylesheet stylesheet, Vx.Core.Type_string name) {
     Vx.Web.Html.Type_style output = Vx.Web.Html.e_style;
@@ -12339,21 +12698,22 @@ public static class Html {
   public class Class_stylemap_from_stylelist : Vx.Core.Class_base, Func_stylemap_from_stylelist {
 
     public override Vx.Web.Html.Func_stylemap_from_stylelist vx_new(params object[] vals) {
-      Class_stylemap_from_stylelist output = new Class_stylemap_from_stylelist();
+      Vx.Web.Html.Class_stylemap_from_stylelist output = new Vx.Web.Html.Class_stylemap_from_stylelist();
       return output;
     }
 
-    public override Vx.Web.Html.Func_stylemap_from_stylelist vx_copy(params object[] vals) {
-      Class_stylemap_from_stylelist output = new Class_stylemap_from_stylelist();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_stylemap_from_stylelist output = new Vx.Web.Html.Class_stylemap_from_stylelist();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "stylemap<-stylelist", // name
         0, // idx
@@ -12372,14 +12732,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_stylemap_from_stylelist;
+      Vx.Core.Type_any output = Vx.Web.Html.e_stylemap_from_stylelist;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_stylemap_from_stylelist;
+      Vx.Core.Type_any output = Vx.Web.Html.t_stylemap_from_stylelist;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -12407,8 +12770,8 @@ public static class Html {
 
   }
 
-  public static Func_stylemap_from_stylelist e_stylemap_from_stylelist = new Vx.Web.Html.Class_stylemap_from_stylelist();
-  public static Func_stylemap_from_stylelist t_stylemap_from_stylelist = new Vx.Web.Html.Class_stylemap_from_stylelist();
+  public static Vx.Web.Html.Func_stylemap_from_stylelist e_stylemap_from_stylelist = new Vx.Web.Html.Class_stylemap_from_stylelist();
+  public static Vx.Web.Html.Func_stylemap_from_stylelist t_stylemap_from_stylelist = new Vx.Web.Html.Class_stylemap_from_stylelist();
 
   public static Vx.Web.Html.Type_stylemap f_stylemap_from_stylelist(Vx.Web.Html.Type_stylelist stylelist) {
     Vx.Web.Html.Type_stylemap output = Vx.Web.Html.e_stylemap;
@@ -12439,21 +12802,22 @@ public static class Html {
   public class Class_stylemap_from_stylesheet : Vx.Core.Class_base, Func_stylemap_from_stylesheet {
 
     public override Vx.Web.Html.Func_stylemap_from_stylesheet vx_new(params object[] vals) {
-      Class_stylemap_from_stylesheet output = new Class_stylemap_from_stylesheet();
+      Vx.Web.Html.Class_stylemap_from_stylesheet output = new Vx.Web.Html.Class_stylemap_from_stylesheet();
       return output;
     }
 
-    public override Vx.Web.Html.Func_stylemap_from_stylesheet vx_copy(params object[] vals) {
-      Class_stylemap_from_stylesheet output = new Class_stylemap_from_stylesheet();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_stylemap_from_stylesheet output = new Vx.Web.Html.Class_stylemap_from_stylesheet();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "stylemap<-stylesheet", // name
         0, // idx
@@ -12472,14 +12836,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_stylemap_from_stylesheet;
+      Vx.Core.Type_any output = Vx.Web.Html.e_stylemap_from_stylesheet;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_stylemap_from_stylesheet;
+      Vx.Core.Type_any output = Vx.Web.Html.t_stylemap_from_stylesheet;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -12507,8 +12874,8 @@ public static class Html {
 
   }
 
-  public static Func_stylemap_from_stylesheet e_stylemap_from_stylesheet = new Vx.Web.Html.Class_stylemap_from_stylesheet();
-  public static Func_stylemap_from_stylesheet t_stylemap_from_stylesheet = new Vx.Web.Html.Class_stylemap_from_stylesheet();
+  public static Vx.Web.Html.Func_stylemap_from_stylesheet e_stylemap_from_stylesheet = new Vx.Web.Html.Class_stylemap_from_stylesheet();
+  public static Vx.Web.Html.Func_stylemap_from_stylesheet t_stylemap_from_stylesheet = new Vx.Web.Html.Class_stylemap_from_stylesheet();
 
   public static Vx.Web.Html.Type_stylemap f_stylemap_from_stylesheet(Vx.Web.Html.Type_stylesheet stylesheet) {
     Vx.Web.Html.Type_stylemap output = Vx.Web.Html.e_stylemap;
@@ -12530,21 +12897,22 @@ public static class Html {
   public class Class_styles_from_stylesheet : Vx.Core.Class_base, Func_styles_from_stylesheet {
 
     public override Vx.Web.Html.Func_styles_from_stylesheet vx_new(params object[] vals) {
-      Class_styles_from_stylesheet output = new Class_styles_from_stylesheet();
+      Vx.Web.Html.Class_styles_from_stylesheet output = new Vx.Web.Html.Class_styles_from_stylesheet();
       return output;
     }
 
-    public override Vx.Web.Html.Func_styles_from_stylesheet vx_copy(params object[] vals) {
-      Class_styles_from_stylesheet output = new Class_styles_from_stylesheet();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_styles_from_stylesheet output = new Vx.Web.Html.Class_styles_from_stylesheet();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "styles<-stylesheet", // name
         0, // idx
@@ -12563,14 +12931,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_styles_from_stylesheet;
+      Vx.Core.Type_any output = Vx.Web.Html.e_styles_from_stylesheet;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_styles_from_stylesheet;
+      Vx.Core.Type_any output = Vx.Web.Html.t_styles_from_stylesheet;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -12598,8 +12969,8 @@ public static class Html {
 
   }
 
-  public static Func_styles_from_stylesheet e_styles_from_stylesheet = new Vx.Web.Html.Class_styles_from_stylesheet();
-  public static Func_styles_from_stylesheet t_styles_from_stylesheet = new Vx.Web.Html.Class_styles_from_stylesheet();
+  public static Vx.Web.Html.Func_styles_from_stylesheet e_styles_from_stylesheet = new Vx.Web.Html.Class_styles_from_stylesheet();
+  public static Vx.Web.Html.Func_styles_from_stylesheet t_styles_from_stylesheet = new Vx.Web.Html.Class_styles_from_stylesheet();
 
   public static Vx.Web.Html.Type_stylelist f_styles_from_stylesheet(Vx.Web.Html.Type_stylesheet stylesheet) {
     Vx.Web.Html.Type_stylelist output = Vx.Web.Html.e_stylelist;
@@ -12621,21 +12992,22 @@ public static class Html {
   public class Class_stylesheet_loadmap : Vx.Core.Class_base, Func_stylesheet_loadmap {
 
     public override Vx.Web.Html.Func_stylesheet_loadmap vx_new(params object[] vals) {
-      Class_stylesheet_loadmap output = new Class_stylesheet_loadmap();
+      Vx.Web.Html.Class_stylesheet_loadmap output = new Vx.Web.Html.Class_stylesheet_loadmap();
       return output;
     }
 
-    public override Vx.Web.Html.Func_stylesheet_loadmap vx_copy(params object[] vals) {
-      Class_stylesheet_loadmap output = new Class_stylesheet_loadmap();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_stylesheet_loadmap output = new Vx.Web.Html.Class_stylesheet_loadmap();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "stylesheet-loadmap", // name
         0, // idx
@@ -12654,14 +13026,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_stylesheet_loadmap;
+      Vx.Core.Type_any output = Vx.Web.Html.e_stylesheet_loadmap;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_stylesheet_loadmap;
+      Vx.Core.Type_any output = Vx.Web.Html.t_stylesheet_loadmap;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -12689,14 +13064,15 @@ public static class Html {
 
   }
 
-  public static Func_stylesheet_loadmap e_stylesheet_loadmap = new Vx.Web.Html.Class_stylesheet_loadmap();
-  public static Func_stylesheet_loadmap t_stylesheet_loadmap = new Vx.Web.Html.Class_stylesheet_loadmap();
+  public static Vx.Web.Html.Func_stylesheet_loadmap e_stylesheet_loadmap = new Vx.Web.Html.Class_stylesheet_loadmap();
+  public static Vx.Web.Html.Func_stylesheet_loadmap t_stylesheet_loadmap = new Vx.Web.Html.Class_stylesheet_loadmap();
 
   public static Vx.Web.Html.Type_stylesheet f_stylesheet_loadmap(Vx.Web.Html.Type_stylesheet stylesheet) {
     Vx.Web.Html.Type_stylesheet output = Vx.Web.Html.e_stylesheet;
     output = Vx.Core.f_copy(
       stylesheet,
-      Vx.Core.vx_new(Vx.Core.t_anylist,
+      Vx.Core.vx_new(
+        Vx.Core.t_anylist,
         Vx.Core.vx_new_string(":stylemap"),
         Vx.Web.Html.f_stylemap_from_stylelist(
           stylesheet.styles()
@@ -12720,21 +13096,22 @@ public static class Html {
   public class Class_uri_from_string : Vx.Core.Class_base, Func_uri_from_string {
 
     public override Vx.Web.Html.Func_uri_from_string vx_new(params object[] vals) {
-      Class_uri_from_string output = new Class_uri_from_string();
+      Vx.Web.Html.Class_uri_from_string output = new Vx.Web.Html.Class_uri_from_string();
       return output;
     }
 
-    public override Vx.Web.Html.Func_uri_from_string vx_copy(params object[] vals) {
-      Class_uri_from_string output = new Class_uri_from_string();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_uri_from_string output = new Vx.Web.Html.Class_uri_from_string();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/web/html", // pkgname
         "uri<-string", // name
         0, // idx
@@ -12753,14 +13130,17 @@ public static class Html {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_uri_from_string;
+      Vx.Core.Type_any output = Vx.Web.Html.e_uri_from_string;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_uri_from_string;
+      Vx.Core.Type_any output = Vx.Web.Html.t_uri_from_string;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -12788,8 +13168,8 @@ public static class Html {
 
   }
 
-  public static Func_uri_from_string e_uri_from_string = new Vx.Web.Html.Class_uri_from_string();
-  public static Func_uri_from_string t_uri_from_string = new Vx.Web.Html.Class_uri_from_string();
+  public static Vx.Web.Html.Func_uri_from_string e_uri_from_string = new Vx.Web.Html.Class_uri_from_string();
+  public static Vx.Web.Html.Func_uri_from_string t_uri_from_string = new Vx.Web.Html.Class_uri_from_string();
 
   public static Vx.Core.Type_string f_uri_from_string(Vx.Core.Type_string text) {
     Vx.Core.Type_string output = Vx.Core.e_string;

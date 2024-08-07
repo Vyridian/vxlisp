@@ -1,5 +1,13 @@
 # vxlisp
 
+## Links
+* [Test Suite Js](core/html/testjs.html)
+* [Test Suite Java](core/java/src/test/resources/testsuite.html)
+* [Test Suite C++](core/cpp/src/test/resources/testsuite.html)
+* [Test Suite CSharp](core/csharp/test/resources/testsuite.html)
+* [API Documentation](core/doc/doc.html)
+* [Source Code](https://github.com/Vyridian/vxlisp)
+
 ## Overview
 
 * What is vxlisp?
@@ -72,14 +80,6 @@ To improve the art. I find most languages to have ugly, confusing syntax, and po
             "John Doe"          // expect "John Doe"
             (fullname johndoe)) // actual
      :doc  "Returns fullname from any person type.")
-
-## Links
-* [Test Suite Js](core/html/testjs.html)
-* [Test Suite Java](core/java/src/test/resources/testsuite.html)
-* [Test Suite C++](core/cpp/src/test/resources/testsuite.html)
-* [Test Suite CSharp](core/csharp/test/resources/testsuite.html)
-* [API Documentation](core/doc/doc.html)
-* [Source Code](https://github.com/Vyridian/vxlisp)
 
 ## Folder Structure
 

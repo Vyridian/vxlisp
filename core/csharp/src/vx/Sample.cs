@@ -52,7 +52,8 @@ public static class Sample {
       Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
       output.put(":mynum", this.mynum());
       output.put(":mystr", this.mystr());
-      return Vx.Core.immutablemap(output);
+      output = Vx.Core.immutablemap(output);
+      return output;
     }
 
     public override Vx.Sample.Type_mytype vx_new(params object[] vals) {
@@ -60,16 +61,16 @@ public static class Sample {
       return output;
     }
 
-    public override Vx.Sample.Type_mytype vx_copy(params object[] vals) {
-      Type_mytype output = this;
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Sample.Type_mytype output = this;
       bool ischanged = false;
-      Class_mytype val = this;
-      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Vx.Sample.Class_mytype value = this;
+      Vx.Core.Type_msgblock msgblock = Vx.Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Vx.Core.e_constdef) {
         ischanged = true;
       }
-      Vx.Core.Type_int vx_p_mynum = val.mynum();
-      Vx.Core.Type_string vx_p_mystr = val.mystr();
+      Vx.Core.Type_int vx_p_mynum = value.mynum();
+      Vx.Core.Type_string vx_p_mystr = value.mystr();
       List<string> validkeys = new List<string>();
       validkeys.Add(":mynum");
       validkeys.Add(":mystr");
@@ -172,7 +173,7 @@ public static class Sample {
         }
       }
       if (ischanged || (msgblock != Vx.Core.e_msgblock)) {
-        Class_mytype work = new Class_mytype();
+        Vx.Sample.Class_mytype work = new Vx.Sample.Class_mytype();
         work.vx_p_mynum = vx_p_mynum;
         work.vx_p_mystr = vx_p_mystr;
         if (msgblock != Vx.Core.e_msgblock) {
@@ -184,14 +185,17 @@ public static class Sample {
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_mytype;
+      Vx.Core.Type_any output = Vx.Sample.e_mytype;
+      return output;
     }
+
     public override Vx.Core.Type_any vx_type() {
-      return t_mytype;
+      Vx.Core.Type_any output = Vx.Sample.t_mytype;
+      return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.typedef_new(
+      Vx.Core.Type_typedef output = Vx.Core.typedef_new(
         "vx/sample", // pkgname
         "mytype", // name
         ":struct", // extends
@@ -204,12 +208,13 @@ public static class Sample {
         Vx.Core.e_anylist, // disallowvalues
         Vx.Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static Type_mytype e_mytype = new Class_mytype();
-  public static Type_mytype t_mytype = new Class_mytype();
+  public static Vx.Sample.Type_mytype e_mytype = new Vx.Sample.Class_mytype();
+  public static Vx.Sample.Type_mytype t_mytype = new Vx.Sample.Class_mytype();
 
   /**
    * Constant: myconst
@@ -218,7 +223,7 @@ public static class Sample {
    */
   public class Const_myconst {
     public static Vx.Core.Type_constdef constdef() {
-      return Vx.Core.constdef_new(
+      Vx.Core.Type_constdef output = Vx.Core.constdef_new(
         "vx/sample", // pkgname
         "myconst", // name
         Vx.Core.typedef_new(
@@ -235,6 +240,7 @@ public static class Sample {
           Vx.Core.e_argmap // properties
         )
       );
+      return output;
     }
 
     public static void const_new(Vx.Core.Type_int output) {
@@ -253,27 +259,28 @@ public static class Sample {
    * (func main)
    */
   public interface Func_main : Vx.Core.Type_func, Vx.Core.Type_replfunc {
-    public void vx_main();
+    public Vx.Core.Type_none vx_main();
   }
 
   public class Class_main : Vx.Core.Class_base, Func_main {
 
     public override Vx.Sample.Func_main vx_new(params object[] vals) {
-      Class_main output = new Class_main();
+      Vx.Sample.Class_main output = new Vx.Sample.Class_main();
       return output;
     }
 
-    public override Vx.Sample.Func_main vx_copy(params object[] vals) {
-      Class_main output = new Class_main();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Sample.Class_main output = new Vx.Sample.Class_main();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/sample", // pkgname
         "main", // name
         0, // idx
@@ -292,32 +299,38 @@ public static class Sample {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_main;
+      Vx.Core.Type_any output = Vx.Sample.e_main;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_main;
+      Vx.Core.Type_any output = Vx.Sample.t_main;
+      return output;
     }
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
       Vx.Core.Type_any output = Vx.Core.e_any;
-      Vx.Sample.f_main();
+      output = Vx.Sample.f_main();
       return output;
     }
 
-    public void vx_main() {Vx.Sample.f_main();
+    public Vx.Core.Type_none vx_main() {
+      return Vx.Sample.f_main();
     }
 
   }
 
-  public static Func_main e_main = new Vx.Sample.Class_main();
-  public static Func_main t_main = new Vx.Sample.Class_main();
+  public static Vx.Sample.Func_main e_main = new Vx.Sample.Class_main();
+  public static Vx.Sample.Func_main t_main = new Vx.Sample.Class_main();
 
-  public static void f_main() {
+  public static Vx.Core.Type_none f_main() {
+    Vx.Core.Type_none output = Vx.Core.e_none;
     Vx.Sample.f_myfunc(Vx.Core.vx_new_int(2));
+    return output;
   }
 
   /**
@@ -334,21 +347,22 @@ public static class Sample {
   public class Class_myfunc : Vx.Core.Class_base, Func_myfunc {
 
     public override Vx.Sample.Func_myfunc vx_new(params object[] vals) {
-      Class_myfunc output = new Class_myfunc();
+      Vx.Sample.Class_myfunc output = new Vx.Sample.Class_myfunc();
       return output;
     }
 
-    public override Vx.Sample.Func_myfunc vx_copy(params object[] vals) {
-      Class_myfunc output = new Class_myfunc();
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Sample.Class_myfunc output = new Vx.Sample.Class_myfunc();
       return output;
     }
 
     public override Vx.Core.Type_typedef vx_typedef() {
-      return Vx.Core.t_func.vx_typedef();
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
     }
 
     public Vx.Core.Type_funcdef vx_funcdef() {
-      return Vx.Core.funcdef_new(
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
         "vx/sample", // pkgname
         "myfunc", // name
         0, // idx
@@ -367,14 +381,17 @@ public static class Sample {
           Vx.Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     public override Vx.Core.Type_any vx_empty() {
-      return e_myfunc;
+      Vx.Core.Type_any output = Vx.Sample.e_myfunc;
+      return output;
     }
 
     public override Vx.Core.Type_any vx_type() {
-      return t_myfunc;
+      Vx.Core.Type_any output = Vx.Sample.t_myfunc;
+      return output;
     }
 
     public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
@@ -402,8 +419,8 @@ public static class Sample {
 
   }
 
-  public static Func_myfunc e_myfunc = new Vx.Sample.Class_myfunc();
-  public static Func_myfunc t_myfunc = new Vx.Sample.Class_myfunc();
+  public static Vx.Sample.Func_myfunc e_myfunc = new Vx.Sample.Class_myfunc();
+  public static Vx.Sample.Func_myfunc t_myfunc = new Vx.Sample.Class_myfunc();
 
   public static Vx.Core.Type_int f_myfunc(Vx.Core.Type_int myarg) {
     Vx.Core.Type_int output = Vx.Core.e_int;

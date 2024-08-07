@@ -16,10 +16,6 @@ public final class Db {
    * (type db)
    */
   public interface Type_db extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Core.Type_string dbid();
   }
 
@@ -52,7 +48,8 @@ public final class Db {
     public Map<String, Core.Type_any> vx_map() {
       Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":dbid", this.dbid());
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -62,15 +59,15 @@ public final class Db {
     }
 
     @Override
-    public Db.Type_db vx_copy(final Object... vals) {
-      Type_db output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Db.Type_db output = this;
       boolean ischanged = false;
-      Class_db val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Db.Class_db value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Core.Type_string vx_p_dbid = val.dbid();
+      Core.Type_string vx_p_dbid = value.dbid();
       List<String> validkeys = new ArrayList<String>();
       validkeys.add(":dbid");
       String key = "";
@@ -81,22 +78,22 @@ public final class Db {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (key == "") {
+        } else if (key.equals("")) {
           boolean istestkey = false;
           String testkey = "";
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;;
+            Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             testkey = sval;
             istestkey = true;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              Core.Type_any valmsg = (Core.Type_any)valsub;
               msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -122,7 +119,7 @@ public final class Db {
           case ":dbid":
             if (valsub == vx_p_dbid) {
             } else if (valsub instanceof Core.Type_string) {
-              Core.Type_string valdbid = (Core.Type_string)valsub;;
+              Core.Type_string valdbid = (Core.Type_string)valsub;
               ischanged = true;
               vx_p_dbid = valdbid;
             } else if (valsub instanceof String) {
@@ -131,7 +128,7 @@ public final class Db {
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -154,7 +151,7 @@ public final class Db {
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_db work = new Class_db();
+        Db.Class_db work = new Db.Class_db();
         work.vx_p_dbid = vx_p_dbid;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -166,16 +163,19 @@ public final class Db {
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_db;
+      Core.Type_any output = Db.e_db;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_db;
+      Core.Type_any output = Db.t_db;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/data/db", // pkgname
         "db", // name
         ":struct", // extends
@@ -188,12 +188,13 @@ public final class Db {
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_db e_db = new Class_db();
-  public static final Type_db t_db = new Class_db();
+  public static final Db.Type_db e_db = new Db.Class_db();
+  public static final Db.Type_db t_db = new Db.Class_db();
 
   /**
    * type: dbcell
@@ -201,10 +202,6 @@ public final class Db {
    * (type dbcell)
    */
   public interface Type_dbcell extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Core.Type_string dbcellid();
     public Db.Type_dbcellmap dbcellmap();
     public Db.Type_dbfieldmap dbfieldmap();
@@ -301,7 +298,8 @@ public final class Db {
       output.put(":dbfieldmap", this.dbfieldmap());
       output.put(":dbparent", this.dbparent());
       output.put(":dbtable", this.dbtable());
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -311,19 +309,19 @@ public final class Db {
     }
 
     @Override
-    public Db.Type_dbcell vx_copy(final Object... vals) {
-      Type_dbcell output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Db.Type_dbcell output = this;
       boolean ischanged = false;
-      Class_dbcell val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Db.Class_dbcell value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Core.Type_string vx_p_dbcellid = val.dbcellid();
-      Db.Type_dbcellmap vx_p_dbcellmap = val.dbcellmap();
-      Db.Type_dbfieldmap vx_p_dbfieldmap = val.dbfieldmap();
-      Db.Type_dbcell vx_p_dbparent = val.dbparent();
-      Db.Type_dbtable vx_p_dbtable = val.dbtable();
+      Core.Type_string vx_p_dbcellid = value.dbcellid();
+      Db.Type_dbcellmap vx_p_dbcellmap = value.dbcellmap();
+      Db.Type_dbfieldmap vx_p_dbfieldmap = value.dbfieldmap();
+      Db.Type_dbcell vx_p_dbparent = value.dbparent();
+      Db.Type_dbtable vx_p_dbtable = value.dbtable();
       List<String> validkeys = new ArrayList<String>();
       validkeys.add(":dbcellid");
       validkeys.add(":dbcellmap");
@@ -338,22 +336,22 @@ public final class Db {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (key == "") {
+        } else if (key.equals("")) {
           boolean istestkey = false;
           String testkey = "";
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;;
+            Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             testkey = sval;
             istestkey = true;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              Core.Type_any valmsg = (Core.Type_any)valsub;
               msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -379,7 +377,7 @@ public final class Db {
           case ":dbcellid":
             if (valsub == vx_p_dbcellid) {
             } else if (valsub instanceof Core.Type_string) {
-              Core.Type_string valdbcellid = (Core.Type_string)valsub;;
+              Core.Type_string valdbcellid = (Core.Type_string)valsub;
               ischanged = true;
               vx_p_dbcellid = valdbcellid;
             } else if (valsub instanceof String) {
@@ -388,7 +386,7 @@ public final class Db {
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -404,13 +402,13 @@ public final class Db {
           case ":dbcellmap":
             if (valsub == vx_p_dbcellmap) {
             } else if (valsub instanceof Db.Type_dbcellmap) {
-              Db.Type_dbcellmap valdbcellmap = (Db.Type_dbcellmap)valsub;;
+              Db.Type_dbcellmap valdbcellmap = (Db.Type_dbcellmap)valsub;
               ischanged = true;
               vx_p_dbcellmap = valdbcellmap;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -426,13 +424,13 @@ public final class Db {
           case ":dbfieldmap":
             if (valsub == vx_p_dbfieldmap) {
             } else if (valsub instanceof Db.Type_dbfieldmap) {
-              Db.Type_dbfieldmap valdbfieldmap = (Db.Type_dbfieldmap)valsub;;
+              Db.Type_dbfieldmap valdbfieldmap = (Db.Type_dbfieldmap)valsub;
               ischanged = true;
               vx_p_dbfieldmap = valdbfieldmap;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -448,13 +446,13 @@ public final class Db {
           case ":dbparent":
             if (valsub == vx_p_dbparent) {
             } else if (valsub instanceof Db.Type_dbcell) {
-              Db.Type_dbcell valdbparent = (Db.Type_dbcell)valsub;;
+              Db.Type_dbcell valdbparent = (Db.Type_dbcell)valsub;
               ischanged = true;
               vx_p_dbparent = valdbparent;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -470,13 +468,13 @@ public final class Db {
           case ":dbtable":
             if (valsub == vx_p_dbtable) {
             } else if (valsub instanceof Db.Type_dbtable) {
-              Db.Type_dbtable valdbtable = (Db.Type_dbtable)valsub;;
+              Db.Type_dbtable valdbtable = (Db.Type_dbtable)valsub;
               ischanged = true;
               vx_p_dbtable = valdbtable;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -499,7 +497,7 @@ public final class Db {
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_dbcell work = new Class_dbcell();
+        Db.Class_dbcell work = new Db.Class_dbcell();
         work.vx_p_dbcellid = vx_p_dbcellid;
         work.vx_p_dbcellmap = vx_p_dbcellmap;
         work.vx_p_dbfieldmap = vx_p_dbfieldmap;
@@ -515,16 +513,19 @@ public final class Db {
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_dbcell;
+      Core.Type_any output = Db.e_dbcell;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_dbcell;
+      Core.Type_any output = Db.t_dbcell;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/data/db", // pkgname
         "dbcell", // name
         ":struct", // extends
@@ -537,12 +538,13 @@ public final class Db {
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_dbcell e_dbcell = new Class_dbcell();
-  public static final Type_dbcell t_dbcell = new Class_dbcell();
+  public static final Db.Type_dbcell e_dbcell = new Db.Class_dbcell();
+  public static final Db.Type_dbcell t_dbcell = new Db.Class_dbcell();
 
   /**
    * type: dbcellmap
@@ -550,10 +552,6 @@ public final class Db {
    * (type dbcellmap)
    */
   public interface Type_dbcellmap extends Core.Type_map {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Map<String, Db.Type_dbcell> vx_mapdbcell();
     public Db.Type_dbcell vx_dbcell(final Core.Type_string key);
   }
@@ -573,7 +571,7 @@ public final class Db {
       Core.Type_boolean output = Core.c_false;
       if (false) {
       } else if (value instanceof Db.Type_dbcell) {
-        Db.Type_dbcell castval = (Db.Type_dbcell)value;;
+        Db.Type_dbcell castval = (Db.Type_dbcell)value;
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -602,13 +600,16 @@ public final class Db {
 
     @Override
     public Map<String, Db.Type_dbcell> vx_mapdbcell() {
-      return vx_p_map;
+      Map<String, Db.Type_dbcell> output = this.vx_p_map;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
-      return this.vx_dbcell(key);
+      Core.Type_any output = this.vx_dbcell(key);
+      return output;
     }
+
 
     @Override
     public Core.Type_map vx_new_from_map(final Map<String, Core.Type_any> mapval) {
@@ -617,13 +618,13 @@ public final class Db {
       Map<String, Db.Type_dbcell> map = new LinkedHashMap<String, Db.Type_dbcell>();
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
-        Core.Type_any val = mapval.get(key);
+        Core.Type_any value = mapval.get(key);
         if (false) {
-        } else if (val instanceof Db.Type_dbcell) {
-          Db.Type_dbcell castval = (Db.Type_dbcell)val;;
+        } else if (value instanceof Db.Type_dbcell) {
+          Db.Type_dbcell castval = (Db.Type_dbcell)value;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.vx_msg_from_error("vx/data/db/dbcellmap", ":invalidvalue", val);
+          Core.Type_msg msg = Core.vx_msg_from_error("vx/data/db/dbcellmap", ":invalidvalue", value);
           msgblock = Core.vx_copy(msgblock, msg);
         }
       }
@@ -641,15 +642,15 @@ public final class Db {
     }
 
     @Override
-    public Db.Type_dbcellmap vx_copy(final Object... vals) {
-      Type_dbcellmap output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Db.Type_dbcellmap output = this;
       boolean ischanged = false;
-      Class_dbcellmap val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Db.Class_dbcellmap value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Map<String, Db.Type_dbcell> mapval = new LinkedHashMap<String, Db.Type_dbcell>(val.vx_mapdbcell());
+      Map<String, Db.Type_dbcell> mapval = new LinkedHashMap<String, Db.Type_dbcell>(value.vx_mapdbcell());
       Core.Type_msg msg = null;
       String key = "";
       Core.Type_any msgval = null;
@@ -661,15 +662,15 @@ public final class Db {
         } else if (key.equals("")) {
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstring = (Core.Type_string)valsub;;
+            Core.Type_string valstring = (Core.Type_string)valsub;
             key = valstring.vx_string();
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             key = sval;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -681,14 +682,14 @@ public final class Db {
           Db.Type_dbcell valany = null;
           if (false) {
           } else if (valsub instanceof Db.Type_dbcell) {
-            Db.Type_dbcell valallowed = (Db.Type_dbcell)valsub;;
+            Db.Type_dbcell valallowed = (Db.Type_dbcell)valsub;
             valany = valallowed;
           } else if (valsub instanceof Db.Type_dbcell) {
             valany = (Db.Type_dbcell)valsub;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -711,7 +712,7 @@ public final class Db {
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_dbcellmap work = new Class_dbcellmap();
+        Db.Class_dbcellmap work = new Db.Class_dbcellmap();
         work.vx_p_map = Core.immutablemap(mapval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -723,16 +724,19 @@ public final class Db {
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_dbcellmap;
+      Core.Type_any output = Db.e_dbcellmap;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_dbcellmap;
+      Core.Type_any output = Db.t_dbcellmap;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/data/db", // pkgname
         "dbcellmap", // name
         ":map", // extends
@@ -745,12 +749,13 @@ public final class Db {
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_dbcellmap e_dbcellmap = new Class_dbcellmap();
-  public static final Type_dbcellmap t_dbcellmap = new Class_dbcellmap();
+  public static final Db.Type_dbcellmap e_dbcellmap = new Db.Class_dbcellmap();
+  public static final Db.Type_dbcellmap t_dbcellmap = new Db.Class_dbcellmap();
 
   /**
    * type: dbfield
@@ -758,10 +763,6 @@ public final class Db {
    * (type dbfield)
    */
   public interface Type_dbfield extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Core.Type_string dbfieldid();
     public Core.Type_any type();
     public Core.Type_any value();
@@ -826,7 +827,8 @@ public final class Db {
       output.put(":dbfieldid", this.dbfieldid());
       output.put(":type", this.type());
       output.put(":value", this.value());
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -836,17 +838,17 @@ public final class Db {
     }
 
     @Override
-    public Db.Type_dbfield vx_copy(final Object... vals) {
-      Type_dbfield output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Db.Type_dbfield output = this;
       boolean ischanged = false;
-      Class_dbfield val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Db.Class_dbfield value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Core.Type_string vx_p_dbfieldid = val.dbfieldid();
-      Core.Type_any vx_p_type = val.type();
-      Core.Type_any vx_p_value = val.value();
+      Core.Type_string vx_p_dbfieldid = value.dbfieldid();
+      Core.Type_any vx_p_type = value.type();
+      Core.Type_any vx_p_value = value.value();
       List<String> validkeys = new ArrayList<String>();
       validkeys.add(":dbfieldid");
       validkeys.add(":type");
@@ -859,22 +861,22 @@ public final class Db {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (key == "") {
+        } else if (key.equals("")) {
           boolean istestkey = false;
           String testkey = "";
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;;
+            Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             testkey = sval;
             istestkey = true;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              Core.Type_any valmsg = (Core.Type_any)valsub;
               msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -900,7 +902,7 @@ public final class Db {
           case ":dbfieldid":
             if (valsub == vx_p_dbfieldid) {
             } else if (valsub instanceof Core.Type_string) {
-              Core.Type_string valdbfieldid = (Core.Type_string)valsub;;
+              Core.Type_string valdbfieldid = (Core.Type_string)valsub;
               ischanged = true;
               vx_p_dbfieldid = valdbfieldid;
             } else if (valsub instanceof String) {
@@ -909,7 +911,7 @@ public final class Db {
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -925,13 +927,13 @@ public final class Db {
           case ":type":
             if (valsub == vx_p_type) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valtype = (Core.Type_any)valsub;;
+              Core.Type_any valtype = (Core.Type_any)valsub;
               ischanged = true;
               vx_p_type = valtype;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -947,13 +949,13 @@ public final class Db {
           case ":value":
             if (valsub == vx_p_value) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valvalue = (Core.Type_any)valsub;;
+              Core.Type_any valvalue = (Core.Type_any)valsub;
               ischanged = true;
               vx_p_value = valvalue;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -976,7 +978,7 @@ public final class Db {
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_dbfield work = new Class_dbfield();
+        Db.Class_dbfield work = new Db.Class_dbfield();
         work.vx_p_dbfieldid = vx_p_dbfieldid;
         work.vx_p_type = vx_p_type;
         work.vx_p_value = vx_p_value;
@@ -990,16 +992,19 @@ public final class Db {
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_dbfield;
+      Core.Type_any output = Db.e_dbfield;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_dbfield;
+      Core.Type_any output = Db.t_dbfield;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/data/db", // pkgname
         "dbfield", // name
         ":struct", // extends
@@ -1012,12 +1017,13 @@ public final class Db {
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_dbfield e_dbfield = new Class_dbfield();
-  public static final Type_dbfield t_dbfield = new Class_dbfield();
+  public static final Db.Type_dbfield e_dbfield = new Db.Class_dbfield();
+  public static final Db.Type_dbfield t_dbfield = new Db.Class_dbfield();
 
   /**
    * type: dbfieldmap
@@ -1025,10 +1031,6 @@ public final class Db {
    * (type dbfieldmap)
    */
   public interface Type_dbfieldmap extends Core.Type_map {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Map<String, Db.Type_dbfield> vx_mapdbfield();
     public Db.Type_dbfield vx_dbfield(final Core.Type_string key);
   }
@@ -1048,7 +1050,7 @@ public final class Db {
       Core.Type_boolean output = Core.c_false;
       if (false) {
       } else if (value instanceof Db.Type_dbfield) {
-        Db.Type_dbfield castval = (Db.Type_dbfield)value;;
+        Db.Type_dbfield castval = (Db.Type_dbfield)value;
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -1077,13 +1079,16 @@ public final class Db {
 
     @Override
     public Map<String, Db.Type_dbfield> vx_mapdbfield() {
-      return vx_p_map;
+      Map<String, Db.Type_dbfield> output = this.vx_p_map;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
-      return this.vx_dbfield(key);
+      Core.Type_any output = this.vx_dbfield(key);
+      return output;
     }
+
 
     @Override
     public Core.Type_map vx_new_from_map(final Map<String, Core.Type_any> mapval) {
@@ -1092,13 +1097,13 @@ public final class Db {
       Map<String, Db.Type_dbfield> map = new LinkedHashMap<String, Db.Type_dbfield>();
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
-        Core.Type_any val = mapval.get(key);
+        Core.Type_any value = mapval.get(key);
         if (false) {
-        } else if (val instanceof Db.Type_dbfield) {
-          Db.Type_dbfield castval = (Db.Type_dbfield)val;;
+        } else if (value instanceof Db.Type_dbfield) {
+          Db.Type_dbfield castval = (Db.Type_dbfield)value;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.vx_msg_from_error("vx/data/db/dbfieldmap", ":invalidvalue", val);
+          Core.Type_msg msg = Core.vx_msg_from_error("vx/data/db/dbfieldmap", ":invalidvalue", value);
           msgblock = Core.vx_copy(msgblock, msg);
         }
       }
@@ -1116,15 +1121,15 @@ public final class Db {
     }
 
     @Override
-    public Db.Type_dbfieldmap vx_copy(final Object... vals) {
-      Type_dbfieldmap output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Db.Type_dbfieldmap output = this;
       boolean ischanged = false;
-      Class_dbfieldmap val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Db.Class_dbfieldmap value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Map<String, Db.Type_dbfield> mapval = new LinkedHashMap<String, Db.Type_dbfield>(val.vx_mapdbfield());
+      Map<String, Db.Type_dbfield> mapval = new LinkedHashMap<String, Db.Type_dbfield>(value.vx_mapdbfield());
       Core.Type_msg msg = null;
       String key = "";
       Core.Type_any msgval = null;
@@ -1136,15 +1141,15 @@ public final class Db {
         } else if (key.equals("")) {
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstring = (Core.Type_string)valsub;;
+            Core.Type_string valstring = (Core.Type_string)valsub;
             key = valstring.vx_string();
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             key = sval;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -1156,14 +1161,14 @@ public final class Db {
           Db.Type_dbfield valany = null;
           if (false) {
           } else if (valsub instanceof Db.Type_dbfield) {
-            Db.Type_dbfield valallowed = (Db.Type_dbfield)valsub;;
+            Db.Type_dbfield valallowed = (Db.Type_dbfield)valsub;
             valany = valallowed;
           } else if (valsub instanceof Db.Type_dbfield) {
             valany = (Db.Type_dbfield)valsub;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -1186,7 +1191,7 @@ public final class Db {
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_dbfieldmap work = new Class_dbfieldmap();
+        Db.Class_dbfieldmap work = new Db.Class_dbfieldmap();
         work.vx_p_map = Core.immutablemap(mapval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -1198,16 +1203,19 @@ public final class Db {
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_dbfieldmap;
+      Core.Type_any output = Db.e_dbfieldmap;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_dbfieldmap;
+      Core.Type_any output = Db.t_dbfieldmap;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/data/db", // pkgname
         "dbfieldmap", // name
         ":map", // extends
@@ -1220,12 +1228,13 @@ public final class Db {
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_dbfieldmap e_dbfieldmap = new Class_dbfieldmap();
-  public static final Type_dbfieldmap t_dbfieldmap = new Class_dbfieldmap();
+  public static final Db.Type_dbfieldmap e_dbfieldmap = new Db.Class_dbfieldmap();
+  public static final Db.Type_dbfieldmap t_dbfieldmap = new Db.Class_dbfieldmap();
 
   /**
    * type: dbid
@@ -1233,10 +1242,6 @@ public final class Db {
    * (type dbid)
    */
   public interface Type_dbid extends Core.Type_any {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
   }
 
   public static class Class_dbid extends Core.Class_base implements Type_dbid {
@@ -1248,16 +1253,16 @@ public final class Db {
     }
 
     @Override
-    public Db.Type_dbid vx_copy(final Object... vals) {
-      Type_dbid output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Db.Type_dbid output = this;
       boolean ischanged = false;
-      Class_dbid val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Db.Class_dbid value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_dbid work = new Class_dbid();
+        Db.Class_dbid work = new Db.Class_dbid();
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -1268,16 +1273,19 @@ public final class Db {
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_dbid;
+      Core.Type_any output = Db.e_dbid;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_dbid;
+      Core.Type_any output = Db.t_dbid;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/data/db", // pkgname
         "dbid", // name
         ":string", // extends
@@ -1290,12 +1298,13 @@ public final class Db {
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_dbid e_dbid = new Class_dbid();
-  public static final Type_dbid t_dbid = new Class_dbid();
+  public static final Db.Type_dbid e_dbid = new Db.Class_dbid();
+  public static final Db.Type_dbid t_dbid = new Db.Class_dbid();
 
   /**
    * type: dblink
@@ -1303,10 +1312,6 @@ public final class Db {
    * (type dblink)
    */
   public interface Type_dblink extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Db.Type_dbid fromid();
     public Db.Type_dbid toid();
   }
@@ -1355,7 +1360,8 @@ public final class Db {
       Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":fromid", this.fromid());
       output.put(":toid", this.toid());
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -1365,16 +1371,16 @@ public final class Db {
     }
 
     @Override
-    public Db.Type_dblink vx_copy(final Object... vals) {
-      Type_dblink output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Db.Type_dblink output = this;
       boolean ischanged = false;
-      Class_dblink val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Db.Class_dblink value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Db.Type_dbid vx_p_fromid = val.fromid();
-      Db.Type_dbid vx_p_toid = val.toid();
+      Db.Type_dbid vx_p_fromid = value.fromid();
+      Db.Type_dbid vx_p_toid = value.toid();
       List<String> validkeys = new ArrayList<String>();
       validkeys.add(":fromid");
       validkeys.add(":toid");
@@ -1386,22 +1392,22 @@ public final class Db {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (key == "") {
+        } else if (key.equals("")) {
           boolean istestkey = false;
           String testkey = "";
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;;
+            Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             testkey = sval;
             istestkey = true;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              Core.Type_any valmsg = (Core.Type_any)valsub;
               msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -1427,13 +1433,13 @@ public final class Db {
           case ":fromid":
             if (valsub == vx_p_fromid) {
             } else if (valsub instanceof Db.Type_dbid) {
-              Db.Type_dbid valfromid = (Db.Type_dbid)valsub;;
+              Db.Type_dbid valfromid = (Db.Type_dbid)valsub;
               ischanged = true;
               vx_p_fromid = valfromid;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -1449,13 +1455,13 @@ public final class Db {
           case ":toid":
             if (valsub == vx_p_toid) {
             } else if (valsub instanceof Db.Type_dbid) {
-              Db.Type_dbid valtoid = (Db.Type_dbid)valsub;;
+              Db.Type_dbid valtoid = (Db.Type_dbid)valsub;
               ischanged = true;
               vx_p_toid = valtoid;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -1478,7 +1484,7 @@ public final class Db {
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_dblink work = new Class_dblink();
+        Db.Class_dblink work = new Db.Class_dblink();
         work.vx_p_fromid = vx_p_fromid;
         work.vx_p_toid = vx_p_toid;
         if (msgblock != Core.e_msgblock) {
@@ -1491,16 +1497,19 @@ public final class Db {
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_dblink;
+      Core.Type_any output = Db.e_dblink;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_dblink;
+      Core.Type_any output = Db.t_dblink;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/data/db", // pkgname
         "dblink", // name
         ":struct", // extends
@@ -1513,12 +1522,13 @@ public final class Db {
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_dblink e_dblink = new Class_dblink();
-  public static final Type_dblink t_dblink = new Class_dblink();
+  public static final Db.Type_dblink e_dblink = new Db.Class_dblink();
+  public static final Db.Type_dblink t_dblink = new Db.Class_dblink();
 
   /**
    * type: dblinklist
@@ -1526,17 +1536,15 @@ public final class Db {
    * (type dblinklist)
    */
   public interface Type_dblinklist extends Core.Type_list {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public List<Db.Type_dblink> vx_listdblink();
     public Db.Type_dblink vx_dblink(final Core.Type_int index);
   }
 
   public static class Class_dblinklist extends Core.Class_base implements Type_dblinklist {
 
-    public List<Db.Type_dblink> vx_p_list = Core.immutablelist(new ArrayList<Db.Type_dblink>());
+    public List<Db.Type_dblink> vx_p_list = Core.immutablelist(
+      new ArrayList<Db.Type_dblink>()
+    );
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -1560,12 +1568,14 @@ public final class Db {
 
     @Override
     public List<Db.Type_dblink> vx_listdblink() {
-      return vx_p_list;
+      List<Db.Type_dblink> output = this.vx_p_list;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
-      return this.vx_dblink(index);
+      Db.Type_dblink output = this.vx_dblink(index);
+      return output;
     }
 
     @Override
@@ -1575,15 +1585,15 @@ public final class Db {
     }
 
     @Override
-    public Db.Type_dblinklist vx_copy(final Object... vals) {
-      Type_dblinklist output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Db.Type_dblinklist output = this;
       boolean ischanged = false;
-      Class_dblinklist val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Db.Class_dblinklist value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      List<Db.Type_dblink> listval = new ArrayList<Db.Type_dblink>(val.vx_listdblink());
+      List<Db.Type_dblink> listval = new ArrayList<Db.Type_dblink>(value.vx_listdblink());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -1591,28 +1601,28 @@ public final class Db {
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Db.Type_dblink) {
-          Db.Type_dblink allowsub = (Db.Type_dblink)valsub;;
+          Db.Type_dblink allowsub = (Db.Type_dblink)valsub;
           ischanged = true;
           listval.add(allowsub);
         } else if (valsub instanceof Db.Type_dblink) {
           ischanged = true;
           listval.add((Db.Type_dblink)valsub);
         } else if (valsub instanceof Db.Type_dblinklist) {
-          Db.Type_dblinklist multi = (Db.Type_dblinklist)valsub;;
+          Db.Type_dblinklist multi = (Db.Type_dblinklist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listdblink());
         } else if (valsub instanceof List<?>) {
-          List<?> listunknown = (List<?>)valsub;;
+          List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (false) {
             } else if (item instanceof Db.Type_dblink) {
-              Db.Type_dblink valitem = (Db.Type_dblink)item;;
+              Db.Type_dblink valitem = (Db.Type_dblink)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/data/db/dblinklist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
@@ -1621,7 +1631,7 @@ public final class Db {
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_dblinklist work = new Class_dblinklist();
+        Db.Class_dblinklist work = new Db.Class_dblinklist();
         work.vx_p_list = Core.immutablelist(listval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -1633,16 +1643,19 @@ public final class Db {
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_dblinklist;
+      Core.Type_any output = Db.e_dblinklist;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_dblinklist;
+      Core.Type_any output = Db.t_dblinklist;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/data/db", // pkgname
         "dblinklist", // name
         ":list", // extends
@@ -1655,12 +1668,13 @@ public final class Db {
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_dblinklist e_dblinklist = new Class_dblinklist();
-  public static final Type_dblinklist t_dblinklist = new Class_dblinklist();
+  public static final Db.Type_dblinklist e_dblinklist = new Db.Class_dblinklist();
+  public static final Db.Type_dblinklist t_dblinklist = new Db.Class_dblinklist();
 
   /**
    * type: dbnode
@@ -1668,10 +1682,6 @@ public final class Db {
    * (type dbnode)
    */
   public interface Type_dbnode extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Db.Type_dbid dbid();
     public Db.Type_dblinklist links();
   }
@@ -1720,7 +1730,8 @@ public final class Db {
       Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":dbid", this.dbid());
       output.put(":links", this.links());
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -1730,16 +1741,16 @@ public final class Db {
     }
 
     @Override
-    public Db.Type_dbnode vx_copy(final Object... vals) {
-      Type_dbnode output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Db.Type_dbnode output = this;
       boolean ischanged = false;
-      Class_dbnode val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Db.Class_dbnode value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Db.Type_dbid vx_p_dbid = val.dbid();
-      Db.Type_dblinklist vx_p_links = val.links();
+      Db.Type_dbid vx_p_dbid = value.dbid();
+      Db.Type_dblinklist vx_p_links = value.links();
       List<String> validkeys = new ArrayList<String>();
       validkeys.add(":dbid");
       validkeys.add(":links");
@@ -1751,22 +1762,22 @@ public final class Db {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (key == "") {
+        } else if (key.equals("")) {
           boolean istestkey = false;
           String testkey = "";
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;;
+            Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             testkey = sval;
             istestkey = true;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              Core.Type_any valmsg = (Core.Type_any)valsub;
               msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -1792,13 +1803,13 @@ public final class Db {
           case ":dbid":
             if (valsub == vx_p_dbid) {
             } else if (valsub instanceof Db.Type_dbid) {
-              Db.Type_dbid valdbid = (Db.Type_dbid)valsub;;
+              Db.Type_dbid valdbid = (Db.Type_dbid)valsub;
               ischanged = true;
               vx_p_dbid = valdbid;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -1814,13 +1825,13 @@ public final class Db {
           case ":links":
             if (valsub == vx_p_links) {
             } else if (valsub instanceof Db.Type_dblinklist) {
-              Db.Type_dblinklist vallinks = (Db.Type_dblinklist)valsub;;
+              Db.Type_dblinklist vallinks = (Db.Type_dblinklist)valsub;
               ischanged = true;
               vx_p_links = vallinks;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -1843,7 +1854,7 @@ public final class Db {
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_dbnode work = new Class_dbnode();
+        Db.Class_dbnode work = new Db.Class_dbnode();
         work.vx_p_dbid = vx_p_dbid;
         work.vx_p_links = vx_p_links;
         if (msgblock != Core.e_msgblock) {
@@ -1856,16 +1867,19 @@ public final class Db {
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_dbnode;
+      Core.Type_any output = Db.e_dbnode;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_dbnode;
+      Core.Type_any output = Db.t_dbnode;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/data/db", // pkgname
         "dbnode", // name
         ":struct", // extends
@@ -1878,12 +1892,13 @@ public final class Db {
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_dbnode e_dbnode = new Class_dbnode();
-  public static final Type_dbnode t_dbnode = new Class_dbnode();
+  public static final Db.Type_dbnode e_dbnode = new Db.Class_dbnode();
+  public static final Db.Type_dbnode t_dbnode = new Db.Class_dbnode();
 
   /**
    * type: dbnote
@@ -1891,10 +1906,6 @@ public final class Db {
    * (type dbnote)
    */
   public interface Type_dbnote extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Db.Type_dbid dbid();
     public Db.Type_dbid valid();
     public Db.Type_dbid noteid();
@@ -1991,7 +2002,8 @@ public final class Db {
       output.put(":noteid", this.noteid());
       output.put(":valueid", this.valueid());
       output.put(":value", this.value());
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -2001,19 +2013,19 @@ public final class Db {
     }
 
     @Override
-    public Db.Type_dbnote vx_copy(final Object... vals) {
-      Type_dbnote output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Db.Type_dbnote output = this;
       boolean ischanged = false;
-      Class_dbnote val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Db.Class_dbnote value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Db.Type_dbid vx_p_dbid = val.dbid();
-      Db.Type_dbid vx_p_valid = val.valid();
-      Db.Type_dbid vx_p_noteid = val.noteid();
-      Db.Type_dbid vx_p_valueid = val.valueid();
-      Core.Type_string vx_p_value = val.value();
+      Db.Type_dbid vx_p_dbid = value.dbid();
+      Db.Type_dbid vx_p_valid = value.valid();
+      Db.Type_dbid vx_p_noteid = value.noteid();
+      Db.Type_dbid vx_p_valueid = value.valueid();
+      Core.Type_string vx_p_value = value.value();
       List<String> validkeys = new ArrayList<String>();
       validkeys.add(":dbid");
       validkeys.add(":valid");
@@ -2028,22 +2040,22 @@ public final class Db {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (key == "") {
+        } else if (key.equals("")) {
           boolean istestkey = false;
           String testkey = "";
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;;
+            Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             testkey = sval;
             istestkey = true;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              Core.Type_any valmsg = (Core.Type_any)valsub;
               msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -2069,13 +2081,13 @@ public final class Db {
           case ":dbid":
             if (valsub == vx_p_dbid) {
             } else if (valsub instanceof Db.Type_dbid) {
-              Db.Type_dbid valdbid = (Db.Type_dbid)valsub;;
+              Db.Type_dbid valdbid = (Db.Type_dbid)valsub;
               ischanged = true;
               vx_p_dbid = valdbid;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -2091,13 +2103,13 @@ public final class Db {
           case ":valid":
             if (valsub == vx_p_valid) {
             } else if (valsub instanceof Db.Type_dbid) {
-              Db.Type_dbid valvalid = (Db.Type_dbid)valsub;;
+              Db.Type_dbid valvalid = (Db.Type_dbid)valsub;
               ischanged = true;
               vx_p_valid = valvalid;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -2113,13 +2125,13 @@ public final class Db {
           case ":noteid":
             if (valsub == vx_p_noteid) {
             } else if (valsub instanceof Db.Type_dbid) {
-              Db.Type_dbid valnoteid = (Db.Type_dbid)valsub;;
+              Db.Type_dbid valnoteid = (Db.Type_dbid)valsub;
               ischanged = true;
               vx_p_noteid = valnoteid;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -2135,13 +2147,13 @@ public final class Db {
           case ":valueid":
             if (valsub == vx_p_valueid) {
             } else if (valsub instanceof Db.Type_dbid) {
-              Db.Type_dbid valvalueid = (Db.Type_dbid)valsub;;
+              Db.Type_dbid valvalueid = (Db.Type_dbid)valsub;
               ischanged = true;
               vx_p_valueid = valvalueid;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -2157,7 +2169,7 @@ public final class Db {
           case ":value":
             if (valsub == vx_p_value) {
             } else if (valsub instanceof Core.Type_string) {
-              Core.Type_string valvalue = (Core.Type_string)valsub;;
+              Core.Type_string valvalue = (Core.Type_string)valsub;
               ischanged = true;
               vx_p_value = valvalue;
             } else if (valsub instanceof String) {
@@ -2166,7 +2178,7 @@ public final class Db {
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -2189,7 +2201,7 @@ public final class Db {
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_dbnote work = new Class_dbnote();
+        Db.Class_dbnote work = new Db.Class_dbnote();
         work.vx_p_dbid = vx_p_dbid;
         work.vx_p_valid = vx_p_valid;
         work.vx_p_noteid = vx_p_noteid;
@@ -2205,16 +2217,19 @@ public final class Db {
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_dbnote;
+      Core.Type_any output = Db.e_dbnote;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_dbnote;
+      Core.Type_any output = Db.t_dbnote;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/data/db", // pkgname
         "dbnote", // name
         ":struct", // extends
@@ -2227,12 +2242,13 @@ public final class Db {
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_dbnote e_dbnote = new Class_dbnote();
-  public static final Type_dbnote t_dbnote = new Class_dbnote();
+  public static final Db.Type_dbnote e_dbnote = new Db.Class_dbnote();
+  public static final Db.Type_dbnote t_dbnote = new Db.Class_dbnote();
 
   /**
    * type: dbtable
@@ -2240,10 +2256,6 @@ public final class Db {
    * (type dbtable)
    */
   public interface Type_dbtable extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Core.Type_string dbtableid();
     public Db.Type_db db();
     public Db.Type_dbcellmap dbcellmap();
@@ -2324,7 +2336,8 @@ public final class Db {
       output.put(":db", this.db());
       output.put(":dbcellmap", this.dbcellmap());
       output.put(":dbfieldmap", this.dbfieldmap());
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -2334,18 +2347,18 @@ public final class Db {
     }
 
     @Override
-    public Db.Type_dbtable vx_copy(final Object... vals) {
-      Type_dbtable output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Db.Type_dbtable output = this;
       boolean ischanged = false;
-      Class_dbtable val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Db.Class_dbtable value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Core.Type_string vx_p_dbtableid = val.dbtableid();
-      Db.Type_db vx_p_db = val.db();
-      Db.Type_dbcellmap vx_p_dbcellmap = val.dbcellmap();
-      Db.Type_dbfieldmap vx_p_dbfieldmap = val.dbfieldmap();
+      Core.Type_string vx_p_dbtableid = value.dbtableid();
+      Db.Type_db vx_p_db = value.db();
+      Db.Type_dbcellmap vx_p_dbcellmap = value.dbcellmap();
+      Db.Type_dbfieldmap vx_p_dbfieldmap = value.dbfieldmap();
       List<String> validkeys = new ArrayList<String>();
       validkeys.add(":dbtableid");
       validkeys.add(":db");
@@ -2359,22 +2372,22 @@ public final class Db {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (key == "") {
+        } else if (key.equals("")) {
           boolean istestkey = false;
           String testkey = "";
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;;
+            Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             testkey = sval;
             istestkey = true;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              Core.Type_any valmsg = (Core.Type_any)valsub;
               msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -2400,7 +2413,7 @@ public final class Db {
           case ":dbtableid":
             if (valsub == vx_p_dbtableid) {
             } else if (valsub instanceof Core.Type_string) {
-              Core.Type_string valdbtableid = (Core.Type_string)valsub;;
+              Core.Type_string valdbtableid = (Core.Type_string)valsub;
               ischanged = true;
               vx_p_dbtableid = valdbtableid;
             } else if (valsub instanceof String) {
@@ -2409,7 +2422,7 @@ public final class Db {
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -2425,13 +2438,13 @@ public final class Db {
           case ":db":
             if (valsub == vx_p_db) {
             } else if (valsub instanceof Db.Type_db) {
-              Db.Type_db valdb = (Db.Type_db)valsub;;
+              Db.Type_db valdb = (Db.Type_db)valsub;
               ischanged = true;
               vx_p_db = valdb;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -2447,13 +2460,13 @@ public final class Db {
           case ":dbcellmap":
             if (valsub == vx_p_dbcellmap) {
             } else if (valsub instanceof Db.Type_dbcellmap) {
-              Db.Type_dbcellmap valdbcellmap = (Db.Type_dbcellmap)valsub;;
+              Db.Type_dbcellmap valdbcellmap = (Db.Type_dbcellmap)valsub;
               ischanged = true;
               vx_p_dbcellmap = valdbcellmap;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -2469,13 +2482,13 @@ public final class Db {
           case ":dbfieldmap":
             if (valsub == vx_p_dbfieldmap) {
             } else if (valsub instanceof Db.Type_dbfieldmap) {
-              Db.Type_dbfieldmap valdbfieldmap = (Db.Type_dbfieldmap)valsub;;
+              Db.Type_dbfieldmap valdbfieldmap = (Db.Type_dbfieldmap)valsub;
               ischanged = true;
               vx_p_dbfieldmap = valdbfieldmap;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -2498,7 +2511,7 @@ public final class Db {
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_dbtable work = new Class_dbtable();
+        Db.Class_dbtable work = new Db.Class_dbtable();
         work.vx_p_dbtableid = vx_p_dbtableid;
         work.vx_p_db = vx_p_db;
         work.vx_p_dbcellmap = vx_p_dbcellmap;
@@ -2513,16 +2526,19 @@ public final class Db {
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_dbtable;
+      Core.Type_any output = Db.e_dbtable;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_dbtable;
+      Core.Type_any output = Db.t_dbtable;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/data/db", // pkgname
         "dbtable", // name
         ":struct", // extends
@@ -2535,12 +2551,13 @@ public final class Db {
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_dbtable e_dbtable = new Class_dbtable();
-  public static final Type_dbtable t_dbtable = new Class_dbtable();
+  public static final Db.Type_dbtable e_dbtable = new Db.Class_dbtable();
+  public static final Db.Type_dbtable t_dbtable = new Db.Class_dbtable();
 
   /**
    * type: dbvalue
@@ -2548,10 +2565,6 @@ public final class Db {
    * (type dbvalue)
    */
   public interface Type_dbvalue extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Db.Type_dbid dbid();
     public Db.Type_dbid fromid();
     public Db.Type_dbid toid();
@@ -2664,7 +2677,8 @@ public final class Db {
       output.put(":noteid", this.noteid());
       output.put(":valid", this.valid());
       output.put(":valtext", this.valtext());
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -2674,20 +2688,20 @@ public final class Db {
     }
 
     @Override
-    public Db.Type_dbvalue vx_copy(final Object... vals) {
-      Type_dbvalue output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Db.Type_dbvalue output = this;
       boolean ischanged = false;
-      Class_dbvalue val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Db.Class_dbvalue value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Db.Type_dbid vx_p_dbid = val.dbid();
-      Db.Type_dbid vx_p_fromid = val.fromid();
-      Db.Type_dbid vx_p_toid = val.toid();
-      Db.Type_dbid vx_p_noteid = val.noteid();
-      Db.Type_dbid vx_p_valid = val.valid();
-      Core.Type_string vx_p_valtext = val.valtext();
+      Db.Type_dbid vx_p_dbid = value.dbid();
+      Db.Type_dbid vx_p_fromid = value.fromid();
+      Db.Type_dbid vx_p_toid = value.toid();
+      Db.Type_dbid vx_p_noteid = value.noteid();
+      Db.Type_dbid vx_p_valid = value.valid();
+      Core.Type_string vx_p_valtext = value.valtext();
       List<String> validkeys = new ArrayList<String>();
       validkeys.add(":dbid");
       validkeys.add(":fromid");
@@ -2703,22 +2717,22 @@ public final class Db {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (key == "") {
+        } else if (key.equals("")) {
           boolean istestkey = false;
           String testkey = "";
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;;
+            Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             testkey = sval;
             istestkey = true;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              Core.Type_any valmsg = (Core.Type_any)valsub;
               msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -2744,13 +2758,13 @@ public final class Db {
           case ":dbid":
             if (valsub == vx_p_dbid) {
             } else if (valsub instanceof Db.Type_dbid) {
-              Db.Type_dbid valdbid = (Db.Type_dbid)valsub;;
+              Db.Type_dbid valdbid = (Db.Type_dbid)valsub;
               ischanged = true;
               vx_p_dbid = valdbid;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -2766,13 +2780,13 @@ public final class Db {
           case ":fromid":
             if (valsub == vx_p_fromid) {
             } else if (valsub instanceof Db.Type_dbid) {
-              Db.Type_dbid valfromid = (Db.Type_dbid)valsub;;
+              Db.Type_dbid valfromid = (Db.Type_dbid)valsub;
               ischanged = true;
               vx_p_fromid = valfromid;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -2788,13 +2802,13 @@ public final class Db {
           case ":toid":
             if (valsub == vx_p_toid) {
             } else if (valsub instanceof Db.Type_dbid) {
-              Db.Type_dbid valtoid = (Db.Type_dbid)valsub;;
+              Db.Type_dbid valtoid = (Db.Type_dbid)valsub;
               ischanged = true;
               vx_p_toid = valtoid;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -2810,13 +2824,13 @@ public final class Db {
           case ":noteid":
             if (valsub == vx_p_noteid) {
             } else if (valsub instanceof Db.Type_dbid) {
-              Db.Type_dbid valnoteid = (Db.Type_dbid)valsub;;
+              Db.Type_dbid valnoteid = (Db.Type_dbid)valsub;
               ischanged = true;
               vx_p_noteid = valnoteid;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -2832,13 +2846,13 @@ public final class Db {
           case ":valid":
             if (valsub == vx_p_valid) {
             } else if (valsub instanceof Db.Type_dbid) {
-              Db.Type_dbid valvalid = (Db.Type_dbid)valsub;;
+              Db.Type_dbid valvalid = (Db.Type_dbid)valsub;
               ischanged = true;
               vx_p_valid = valvalid;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -2854,7 +2868,7 @@ public final class Db {
           case ":valtext":
             if (valsub == vx_p_valtext) {
             } else if (valsub instanceof Core.Type_string) {
-              Core.Type_string valvaltext = (Core.Type_string)valsub;;
+              Core.Type_string valvaltext = (Core.Type_string)valsub;
               ischanged = true;
               vx_p_valtext = valvaltext;
             } else if (valsub instanceof String) {
@@ -2863,7 +2877,7 @@ public final class Db {
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -2886,7 +2900,7 @@ public final class Db {
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_dbvalue work = new Class_dbvalue();
+        Db.Class_dbvalue work = new Db.Class_dbvalue();
         work.vx_p_dbid = vx_p_dbid;
         work.vx_p_fromid = vx_p_fromid;
         work.vx_p_toid = vx_p_toid;
@@ -2903,16 +2917,19 @@ public final class Db {
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_dbvalue;
+      Core.Type_any output = Db.e_dbvalue;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_dbvalue;
+      Core.Type_any output = Db.t_dbvalue;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/data/db", // pkgname
         "dbvalue", // name
         ":struct", // extends
@@ -2925,12 +2942,13 @@ public final class Db {
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_dbvalue e_dbvalue = new Class_dbvalue();
-  public static final Type_dbvalue t_dbvalue = new Class_dbvalue();
+  public static final Db.Type_dbvalue e_dbvalue = new Db.Class_dbvalue();
+  public static final Db.Type_dbvalue t_dbvalue = new Db.Class_dbvalue();
 
   static {
     Map<String, Core.Type_any> maptype = new LinkedHashMap<String, Core.Type_any>();

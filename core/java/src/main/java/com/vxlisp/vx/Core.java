@@ -16,10 +16,6 @@ import java.util.stream.Collectors;
 
 public final class Core {
 
-  public interface vx_Type_const {
-    public Core.Type_constdef vx_constdef();
-  }
-
   public interface Type_replfunc {
     public Core.Type_any vx_repl(Core.Type_anylist arglist);
   }
@@ -44,18 +40,18 @@ public final class Core {
     protected int vx_iref = 0;
     protected Core.Type_msgblock vxmsgblock = null;
     public Core.Type_constdef vx_p_constdef = null;
-    public List<Type_any> vx_dispose() {
-      this.vx_iref = 0;
-      this.vxmsgblock = null;
-      this.vx_p_constdef = null;
-      return emptylistany;
-    }
     public Core.Type_constdef vx_constdef() {
       if (this.vx_p_constdef == null) {
         return Core.e_constdef;
       } else {
         return this.vx_p_constdef;
       }
+    }
+    public List<Type_any> vx_dispose() {
+      this.vx_iref = 0;
+      this.vxmsgblock = null;
+      this.vx_p_constdef = null;
+      return Core.emptylistany;
     }
     public Core.Type_msgblock vx_msgblock() {
       if (this.vxmsgblock == null) {
@@ -111,7 +107,9 @@ public final class Core {
     return output;
   }
 
-  public static Core.Type_any[] arrayany_from_anylist(final Core.Type_anylist list) {
+  public static Core.Type_any[] arrayany_from_anylist(
+    final Core.Type_anylist list
+  ) {
     List<Core.Type_any> listany = list.vx_list();
     Core.Type_msgblock msgblock = list.vx_msgblock();
     if (msgblock == null) {
@@ -1005,7 +1003,9 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     return output;
   }
 
-  public static Core.Type_anylist vx_anylist_from_arraystring(String... arraystring) {
+  public static Core.Type_anylist vx_anylist_from_arraystring(
+    String... arraystring
+  ) {
     List<Object> listany = new ArrayList<>();
     for (String svalue : arraystring) {
       Core.Type_string value = Core.vx_new_string(svalue);
@@ -1041,7 +1041,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     public Core.Type_any vx_type();
     public Core.Type_typedef vx_typedef();
     public Core.Type_constdef vx_constdef();
-    public List<Type_any> vx_dispose();
+    public List<Core.Type_any> vx_dispose();
     public Core.Type_msgblock vx_msgblock();
     public boolean vx_release();
     public void vx_reserve();
@@ -1057,10 +1057,10 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_copy(final Object... vals) {
-      Type_any output = this;
+      Core.Type_any output = this;
       boolean ischanged = false;
-      Class_any val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_any value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
@@ -1072,7 +1072,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_any work = new Class_any();
+        Core.Class_any work = new Core.Class_any();
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -1083,16 +1083,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any;
+      Core.Type_any output = Core.e_any;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_any;
+      Core.Type_any output = Core.t_any;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "any", // name
         "", // extends
@@ -1105,12 +1108,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_any e_any = new Class_any();
-  public static final Type_any t_any = new Class_any();
+  public static final Core.Type_any e_any = new Core.Class_any();
+  public static final Core.Type_any t_any = new Core.Class_any();
 
   /**
    * type: any-async<-func
@@ -1118,10 +1122,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type any-async<-func)
    */
   public interface Type_any_async_from_func extends Core.Type_any {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
   }
 
   public static class Class_any_async_from_func extends Core.Class_base implements Type_any_async_from_func {
@@ -1133,16 +1133,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_any_async_from_func vx_copy(final Object... vals) {
-      Type_any_async_from_func output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_any_async_from_func output = this;
       boolean ischanged = false;
-      Class_any_async_from_func val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_any_async_from_func value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_any_async_from_func work = new Class_any_async_from_func();
+        Core.Class_any_async_from_func work = new Core.Class_any_async_from_func();
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -1153,16 +1153,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_async_from_func;
+      Core.Type_any output = Core.e_any_async_from_func;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_any_async_from_func;
+      Core.Type_any output = Core.t_any_async_from_func;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "any-async<-func", // name
         ":func", // extends
@@ -1175,12 +1178,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_any_async_from_func e_any_async_from_func = new Class_any_async_from_func();
-  public static final Type_any_async_from_func t_any_async_from_func = new Class_any_async_from_func();
+  public static final Core.Type_any_async_from_func e_any_async_from_func = new Core.Class_any_async_from_func();
+  public static final Core.Type_any_async_from_func t_any_async_from_func = new Core.Class_any_async_from_func();
 
   /**
    * type: any<-anylist
@@ -1188,17 +1192,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type any<-anylist)
    */
   public interface Type_any_from_anylist extends Core.Type_list {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public List<Core.Func_any_from_any> vx_listany_from_any();
     public Core.Func_any_from_any vx_any_from_any(final Core.Type_int index);
   }
 
   public static class Class_any_from_anylist extends Core.Class_base implements Type_any_from_anylist {
 
-    public List<Core.Func_any_from_any> vx_p_list = Core.immutablelist(new ArrayList<Core.Func_any_from_any>());
+    public List<Core.Func_any_from_any> vx_p_list = Core.immutablelist(
+      new ArrayList<Core.Func_any_from_any>()
+    );
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -1222,12 +1224,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public List<Core.Func_any_from_any> vx_listany_from_any() {
-      return vx_p_list;
+      List<Core.Func_any_from_any> output = this.vx_p_list;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
-      return this.vx_any_from_any(index);
+      Core.Func_any_from_any output = this.vx_any_from_any(index);
+      return output;
     }
 
     @Override
@@ -1237,15 +1241,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_any_from_anylist vx_copy(final Object... vals) {
-      Type_any_from_anylist output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_any_from_anylist output = this;
       boolean ischanged = false;
-      Class_any_from_anylist val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_any_from_anylist value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      List<Core.Func_any_from_any> listval = new ArrayList<Core.Func_any_from_any>(val.vx_listany_from_any());
+      List<Core.Func_any_from_any> listval = new ArrayList<Core.Func_any_from_any>(value.vx_listany_from_any());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -1253,25 +1257,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Func_any_from_any) {
-          Core.Func_any_from_any allowsub = (Core.Func_any_from_any)valsub;;
+          Core.Func_any_from_any allowsub = (Core.Func_any_from_any)valsub;
           ischanged = true;
           listval.add(allowsub);
         } else if (valsub instanceof Core.Type_any_from_anylist) {
-          Core.Type_any_from_anylist multi = (Core.Type_any_from_anylist)valsub;;
+          Core.Type_any_from_anylist multi = (Core.Type_any_from_anylist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listany_from_any());
         } else if (valsub instanceof List<?>) {
-          List<?> listunknown = (List<?>)valsub;;
+          List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (false) {
             } else if (item instanceof Core.Func_any_from_any) {
-              Core.Func_any_from_any valitem = (Core.Func_any_from_any)item;;
+              Core.Func_any_from_any valitem = (Core.Func_any_from_any)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/core/any<-anylist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
@@ -1280,7 +1284,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_any_from_anylist work = new Class_any_from_anylist();
+        Core.Class_any_from_anylist work = new Core.Class_any_from_anylist();
         work.vx_p_list = Core.immutablelist(listval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -1292,16 +1296,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_from_anylist;
+      Core.Type_any output = Core.e_any_from_anylist;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_any_from_anylist;
+      Core.Type_any output = Core.t_any_from_anylist;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "any<-anylist", // name
         ":list", // extends
@@ -1314,12 +1321,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_any_from_anylist e_any_from_anylist = new Class_any_from_anylist();
-  public static final Type_any_from_anylist t_any_from_anylist = new Class_any_from_anylist();
+  public static final Core.Type_any_from_anylist e_any_from_anylist = new Core.Class_any_from_anylist();
+  public static final Core.Type_any_from_anylist t_any_from_anylist = new Core.Class_any_from_anylist();
 
   /**
    * type: anylist
@@ -1327,15 +1335,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type anylist)
    */
   public interface Type_anylist extends Core.Type_list {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
   }
 
   public static class Class_anylist extends Core.Class_base implements Type_anylist {
 
-    public List<Core.Type_any> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_any>());
+    public List<Core.Type_any> vx_p_list = Core.immutablelist(
+      new ArrayList<Core.Type_any>()
+    );
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -1364,15 +1370,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_anylist vx_copy(final Object... vals) {
-      Type_anylist output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_anylist output = this;
       boolean ischanged = false;
-      Class_anylist val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_anylist value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      List<Core.Type_any> listval = new ArrayList<Core.Type_any>(val.vx_list());
+      List<Core.Type_any> listval = new ArrayList<Core.Type_any>(value.vx_list());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -1380,25 +1386,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any allowsub = (Core.Type_any)valsub;;
+          Core.Type_any allowsub = (Core.Type_any)valsub;
           ischanged = true;
           listval.add(allowsub);
         } else if (valsub instanceof Core.Type_anylist) {
-          Core.Type_anylist multi = (Core.Type_anylist)valsub;;
+          Core.Type_anylist multi = (Core.Type_anylist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_list());
         } else if (valsub instanceof List<?>) {
-          List<?> listunknown = (List<?>)valsub;;
+          List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (false) {
             } else if (item instanceof Core.Type_any) {
-              Core.Type_any valitem = (Core.Type_any)item;;
+              Core.Type_any valitem = (Core.Type_any)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/core/anylist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
@@ -1407,7 +1413,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_anylist work = new Class_anylist();
+        Core.Class_anylist work = new Core.Class_anylist();
         work.vx_p_list = Core.immutablelist(listval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -1419,16 +1425,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_anylist;
+      Core.Type_any output = Core.e_anylist;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_anylist;
+      Core.Type_any output = Core.t_anylist;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "anylist", // name
         ":list", // extends
@@ -1441,12 +1450,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_anylist e_anylist = new Class_anylist();
-  public static final Type_anylist t_anylist = new Class_anylist();
+  public static final Core.Type_anylist e_anylist = new Core.Class_anylist();
+  public static final Core.Type_anylist t_anylist = new Core.Class_anylist();
 
   /**
    * type: anymap
@@ -1454,10 +1464,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type anymap)
    */
   public interface Type_anymap extends Core.Type_map {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
   }
 
   public static class Class_anymap extends Core.Class_base implements Type_anymap {
@@ -1475,7 +1481,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Core.Type_boolean output = Core.c_false;
       if (false) {
       } else if (value instanceof Core.Type_any) {
-        Core.Type_any castval = (Core.Type_any)value;;
+        Core.Type_any castval = (Core.Type_any)value;
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -1509,13 +1515,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
-        Core.Type_any val = mapval.get(key);
+        Core.Type_any value = mapval.get(key);
         if (false) {
-        } else if (val instanceof Core.Type_any) {
-          Core.Type_any castval = (Core.Type_any)val;;
+        } else if (value instanceof Core.Type_any) {
+          Core.Type_any castval = (Core.Type_any)value;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/anymap", ":invalidvalue", val);
+          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/anymap", ":invalidvalue", value);
           msgblock = Core.vx_copy(msgblock, msg);
         }
       }
@@ -1533,15 +1539,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_anymap vx_copy(final Object... vals) {
-      Type_anymap output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_anymap output = this;
       boolean ischanged = false;
-      Class_anymap val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_anymap value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Map<String, Core.Type_any> mapval = new LinkedHashMap<String, Core.Type_any>(val.vx_map());
+      Map<String, Core.Type_any> mapval = new LinkedHashMap<String, Core.Type_any>(value.vx_map());
       Core.Type_msg msg = null;
       String key = "";
       Core.Type_any msgval = null;
@@ -1553,15 +1559,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (key.equals("")) {
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstring = (Core.Type_string)valsub;;
+            Core.Type_string valstring = (Core.Type_string)valsub;
             key = valstring.vx_string();
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             key = sval;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -1573,14 +1579,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.Type_any valany = null;
           if (false) {
           } else if (valsub instanceof Core.Type_any) {
-            Core.Type_any valallowed = (Core.Type_any)valsub;;
+            Core.Type_any valallowed = (Core.Type_any)valsub;
             valany = valallowed;
           } else if (valsub instanceof Core.Type_any) {
             valany = (Core.Type_any)valsub;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -1603,7 +1609,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_anymap work = new Class_anymap();
+        Core.Class_anymap work = new Core.Class_anymap();
         work.vx_p_map = Core.immutablemap(mapval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -1615,16 +1621,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_anymap;
+      Core.Type_any output = Core.e_anymap;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_anymap;
+      Core.Type_any output = Core.t_anymap;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "anymap", // name
         ":map", // extends
@@ -1637,12 +1646,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_anymap e_anymap = new Class_anymap();
-  public static final Type_anymap t_anymap = new Class_anymap();
+  public static final Core.Type_anymap e_anymap = new Core.Class_anymap();
+  public static final Core.Type_anymap t_anymap = new Core.Class_anymap();
 
   /**
    * type: anytype
@@ -1650,10 +1660,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type anytype)
    */
   public interface Type_anytype extends Core.Type_any {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
   }
 
   public static class Class_anytype extends Core.Class_base implements Type_anytype {
@@ -1665,16 +1671,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_anytype vx_copy(final Object... vals) {
-      Type_anytype output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_anytype output = this;
       boolean ischanged = false;
-      Class_anytype val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_anytype value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_anytype work = new Class_anytype();
+        Core.Class_anytype work = new Core.Class_anytype();
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -1685,16 +1691,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_anytype;
+      Core.Type_any output = Core.e_anytype;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_anytype;
+      Core.Type_any output = Core.t_anytype;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "anytype", // name
         ":type", // extends
@@ -1707,12 +1716,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_anytype e_anytype = new Class_anytype();
-  public static final Type_anytype t_anytype = new Class_anytype();
+  public static final Core.Type_anytype e_anytype = new Core.Class_anytype();
+  public static final Core.Type_anytype t_anytype = new Core.Class_anytype();
 
   /**
    * type: arg
@@ -1720,10 +1730,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type arg)
    */
   public interface Type_arg extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Core.Type_string name();
     public Core.Type_any argtype();
     public Core.Func_any_from_func fn_any();
@@ -1804,7 +1810,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       output.put(":argtype", this.argtype());
       output.put(":fn-any", this.fn_any());
       output.put(":doc", this.doc());
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -1814,18 +1821,18 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_arg vx_copy(final Object... vals) {
-      Type_arg output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_arg output = this;
       boolean ischanged = false;
-      Class_arg val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_arg value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Core.Type_string vx_p_name = val.name();
-      Core.Type_any vx_p_argtype = val.argtype();
-      Core.Func_any_from_func vx_p_fn_any = val.fn_any();
-      Core.Type_string vx_p_doc = val.doc();
+      Core.Type_string vx_p_name = value.name();
+      Core.Type_any vx_p_argtype = value.argtype();
+      Core.Func_any_from_func vx_p_fn_any = value.fn_any();
+      Core.Type_string vx_p_doc = value.doc();
       List<String> validkeys = new ArrayList<String>();
       validkeys.add(":name");
       validkeys.add(":argtype");
@@ -1839,22 +1846,22 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (key == "") {
+        } else if (key.equals("")) {
           boolean istestkey = false;
           String testkey = "";
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;;
+            Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             testkey = sval;
             istestkey = true;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              Core.Type_any valmsg = (Core.Type_any)valsub;
               msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -1880,7 +1887,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":name":
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
-              Core.Type_string valname = (Core.Type_string)valsub;;
+              Core.Type_string valname = (Core.Type_string)valsub;
               ischanged = true;
               vx_p_name = valname;
             } else if (valsub instanceof String) {
@@ -1889,7 +1896,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -1905,13 +1912,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":argtype":
             if (valsub == vx_p_argtype) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valargtype = (Core.Type_any)valsub;;
+              Core.Type_any valargtype = (Core.Type_any)valsub;
               ischanged = true;
               vx_p_argtype = valargtype;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -1927,13 +1934,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":fn-any":
             if (valsub == vx_p_fn_any) {
             } else if (valsub instanceof Core.Func_any_from_func) {
-              Core.Func_any_from_func valfn_any = (Core.Func_any_from_func)valsub;;
+              Core.Func_any_from_func valfn_any = (Core.Func_any_from_func)valsub;
               ischanged = true;
               vx_p_fn_any = valfn_any;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -1949,7 +1956,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":doc":
             if (valsub == vx_p_doc) {
             } else if (valsub instanceof Core.Type_string) {
-              Core.Type_string valdoc = (Core.Type_string)valsub;;
+              Core.Type_string valdoc = (Core.Type_string)valsub;
               ischanged = true;
               vx_p_doc = valdoc;
             } else if (valsub instanceof String) {
@@ -1958,7 +1965,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -1981,7 +1988,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_arg work = new Class_arg();
+        Core.Class_arg work = new Core.Class_arg();
         work.vx_p_name = vx_p_name;
         work.vx_p_argtype = vx_p_argtype;
         work.vx_p_fn_any = vx_p_fn_any;
@@ -1996,16 +2003,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_arg;
+      Core.Type_any output = Core.e_arg;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_arg;
+      Core.Type_any output = Core.t_arg;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "arg", // name
         ":struct", // extends
@@ -2018,12 +2028,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_arg e_arg = new Class_arg();
-  public static final Type_arg t_arg = new Class_arg();
+  public static final Core.Type_arg e_arg = new Core.Class_arg();
+  public static final Core.Type_arg t_arg = new Core.Class_arg();
 
   /**
    * type: arglist
@@ -2031,17 +2042,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type arglist)
    */
   public interface Type_arglist extends Core.Type_list {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public List<Core.Type_arg> vx_listarg();
     public Core.Type_arg vx_arg(final Core.Type_int index);
   }
 
   public static class Class_arglist extends Core.Class_base implements Type_arglist {
 
-    public List<Core.Type_arg> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_arg>());
+    public List<Core.Type_arg> vx_p_list = Core.immutablelist(
+      new ArrayList<Core.Type_arg>()
+    );
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -2065,12 +2074,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public List<Core.Type_arg> vx_listarg() {
-      return vx_p_list;
+      List<Core.Type_arg> output = this.vx_p_list;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
-      return this.vx_arg(index);
+      Core.Type_arg output = this.vx_arg(index);
+      return output;
     }
 
     @Override
@@ -2080,15 +2091,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_arglist vx_copy(final Object... vals) {
-      Type_arglist output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_arglist output = this;
       boolean ischanged = false;
-      Class_arglist val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_arglist value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      List<Core.Type_arg> listval = new ArrayList<Core.Type_arg>(val.vx_listarg());
+      List<Core.Type_arg> listval = new ArrayList<Core.Type_arg>(value.vx_listarg());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -2096,28 +2107,28 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_arg) {
-          Core.Type_arg allowsub = (Core.Type_arg)valsub;;
+          Core.Type_arg allowsub = (Core.Type_arg)valsub;
           ischanged = true;
           listval.add(allowsub);
         } else if (valsub instanceof Core.Type_arg) {
           ischanged = true;
           listval.add((Core.Type_arg)valsub);
         } else if (valsub instanceof Core.Type_arglist) {
-          Core.Type_arglist multi = (Core.Type_arglist)valsub;;
+          Core.Type_arglist multi = (Core.Type_arglist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listarg());
         } else if (valsub instanceof List<?>) {
-          List<?> listunknown = (List<?>)valsub;;
+          List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (false) {
             } else if (item instanceof Core.Type_arg) {
-              Core.Type_arg valitem = (Core.Type_arg)item;;
+              Core.Type_arg valitem = (Core.Type_arg)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/core/arglist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
@@ -2126,7 +2137,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_arglist work = new Class_arglist();
+        Core.Class_arglist work = new Core.Class_arglist();
         work.vx_p_list = Core.immutablelist(listval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -2138,16 +2149,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_arglist;
+      Core.Type_any output = Core.e_arglist;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_arglist;
+      Core.Type_any output = Core.t_arglist;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "arglist", // name
         ":list", // extends
@@ -2160,12 +2174,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_arglist e_arglist = new Class_arglist();
-  public static final Type_arglist t_arglist = new Class_arglist();
+  public static final Core.Type_arglist e_arglist = new Core.Class_arglist();
+  public static final Core.Type_arglist t_arglist = new Core.Class_arglist();
 
   /**
    * type: argmap
@@ -2173,10 +2188,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type argmap)
    */
   public interface Type_argmap extends Core.Type_map {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Map<String, Core.Type_arg> vx_maparg();
     public Core.Type_arg vx_arg(final Core.Type_string key);
   }
@@ -2196,7 +2207,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Core.Type_boolean output = Core.c_false;
       if (false) {
       } else if (value instanceof Core.Type_arg) {
-        Core.Type_arg castval = (Core.Type_arg)value;;
+        Core.Type_arg castval = (Core.Type_arg)value;
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -2225,13 +2236,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Map<String, Core.Type_arg> vx_maparg() {
-      return vx_p_map;
+      Map<String, Core.Type_arg> output = this.vx_p_map;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
-      return this.vx_arg(key);
+      Core.Type_any output = this.vx_arg(key);
+      return output;
     }
+
 
     @Override
     public Core.Type_map vx_new_from_map(final Map<String, Core.Type_any> mapval) {
@@ -2240,13 +2254,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Map<String, Core.Type_arg> map = new LinkedHashMap<String, Core.Type_arg>();
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
-        Core.Type_any val = mapval.get(key);
+        Core.Type_any value = mapval.get(key);
         if (false) {
-        } else if (val instanceof Core.Type_arg) {
-          Core.Type_arg castval = (Core.Type_arg)val;;
+        } else if (value instanceof Core.Type_arg) {
+          Core.Type_arg castval = (Core.Type_arg)value;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/argmap", ":invalidvalue", val);
+          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/argmap", ":invalidvalue", value);
           msgblock = Core.vx_copy(msgblock, msg);
         }
       }
@@ -2264,15 +2278,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_argmap vx_copy(final Object... vals) {
-      Type_argmap output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_argmap output = this;
       boolean ischanged = false;
-      Class_argmap val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_argmap value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Map<String, Core.Type_arg> mapval = new LinkedHashMap<String, Core.Type_arg>(val.vx_maparg());
+      Map<String, Core.Type_arg> mapval = new LinkedHashMap<String, Core.Type_arg>(value.vx_maparg());
       Core.Type_msg msg = null;
       String key = "";
       Core.Type_any msgval = null;
@@ -2284,15 +2298,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (key.equals("")) {
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstring = (Core.Type_string)valsub;;
+            Core.Type_string valstring = (Core.Type_string)valsub;
             key = valstring.vx_string();
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             key = sval;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -2304,14 +2318,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.Type_arg valany = null;
           if (false) {
           } else if (valsub instanceof Core.Type_arg) {
-            Core.Type_arg valallowed = (Core.Type_arg)valsub;;
+            Core.Type_arg valallowed = (Core.Type_arg)valsub;
             valany = valallowed;
           } else if (valsub instanceof Core.Type_arg) {
             valany = (Core.Type_arg)valsub;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -2334,7 +2348,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_argmap work = new Class_argmap();
+        Core.Class_argmap work = new Core.Class_argmap();
         work.vx_p_map = Core.immutablemap(mapval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -2346,16 +2360,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_argmap;
+      Core.Type_any output = Core.e_argmap;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_argmap;
+      Core.Type_any output = Core.t_argmap;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "argmap", // name
         ":map", // extends
@@ -2368,12 +2385,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_argmap e_argmap = new Class_argmap();
-  public static final Type_argmap t_argmap = new Class_argmap();
+  public static final Core.Type_argmap e_argmap = new Core.Class_argmap();
+  public static final Core.Type_argmap t_argmap = new Core.Class_argmap();
 
   /**
    * type: boolean
@@ -2381,10 +2399,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type boolean)
    */
   public interface Type_boolean extends Core.Type_any {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public boolean vx_boolean();
   }
 
@@ -2393,7 +2407,9 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     protected boolean vxboolean = false;
     
     @Override
-    public boolean vx_boolean() {return vxboolean;}
+    public boolean vx_boolean() {
+      return vxboolean;
+    }
 
     @Override
     public Core.Type_boolean vx_new(final Object... vals) {
@@ -2402,30 +2418,30 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_boolean vx_copy(final Object... vals) {
-      Type_boolean output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_boolean output = this;
       boolean ischanged = false;
-      Class_boolean val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_boolean value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      boolean booleanval = val.vx_boolean();
+      boolean booleanval = value.vx_boolean();
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_boolean) {
-          Core.Type_boolean valboolean = (Core.Type_boolean)valsub;;
+          Core.Type_boolean valboolean = (Core.Type_boolean)valsub;
           booleanval = booleanval || valboolean.vx_boolean();
         } else if (valsub instanceof Boolean) {
-          Boolean issubval = (Boolean)valsub;;
+          Boolean issubval = (Boolean)valsub;
           booleanval = booleanval || issubval;
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_boolean work = new Class_boolean();
+        Core.Class_boolean work = new Core.Class_boolean();
         work.vxboolean = booleanval;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -2441,16 +2457,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_boolean;
+      Core.Type_any output = Core.e_boolean;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_boolean;
+      Core.Type_any output = Core.t_boolean;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "boolean", // name
         "", // extends
@@ -2463,28 +2482,27 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_boolean t_boolean = new Class_boolean();
+  public static final Core.Type_boolean t_boolean = new Core.Class_boolean();
 
   /**
    * type: booleanlist
    * (type booleanlist)
    */
   public interface Type_booleanlist extends Core.Type_list {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public List<Core.Type_boolean> vx_listboolean();
     public Core.Type_boolean vx_boolean(final Core.Type_int index);
   }
 
   public static class Class_booleanlist extends Core.Class_base implements Type_booleanlist {
 
-    public List<Core.Type_boolean> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_boolean>());
+    public List<Core.Type_boolean> vx_p_list = Core.immutablelist(
+      new ArrayList<Core.Type_boolean>()
+    );
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -2508,12 +2526,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public List<Core.Type_boolean> vx_listboolean() {
-      return vx_p_list;
+      List<Core.Type_boolean> output = this.vx_p_list;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
-      return this.vx_boolean(index);
+      Core.Type_boolean output = this.vx_boolean(index);
+      return output;
     }
 
     @Override
@@ -2523,15 +2543,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_booleanlist vx_copy(final Object... vals) {
-      Type_booleanlist output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_booleanlist output = this;
       boolean ischanged = false;
-      Class_booleanlist val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_booleanlist value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      List<Core.Type_boolean> listval = new ArrayList<Core.Type_boolean>(val.vx_listboolean());
+      List<Core.Type_boolean> listval = new ArrayList<Core.Type_boolean>(value.vx_listboolean());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -2539,28 +2559,28 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_boolean) {
-          Core.Type_boolean allowsub = (Core.Type_boolean)valsub;;
+          Core.Type_boolean allowsub = (Core.Type_boolean)valsub;
           ischanged = true;
           listval.add(allowsub);
         } else if (valsub instanceof Boolean) {
           ischanged = true;
           listval.add(Core.vx_new(Core.t_boolean, valsub));
         } else if (valsub instanceof Core.Type_booleanlist) {
-          Core.Type_booleanlist multi = (Core.Type_booleanlist)valsub;;
+          Core.Type_booleanlist multi = (Core.Type_booleanlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listboolean());
         } else if (valsub instanceof List<?>) {
-          List<?> listunknown = (List<?>)valsub;;
+          List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (false) {
             } else if (item instanceof Core.Type_boolean) {
-              Core.Type_boolean valitem = (Core.Type_boolean)item;;
+              Core.Type_boolean valitem = (Core.Type_boolean)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/core/booleanlist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
@@ -2569,7 +2589,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_booleanlist work = new Class_booleanlist();
+        Core.Class_booleanlist work = new Core.Class_booleanlist();
         work.vx_p_list = Core.immutablelist(listval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -2581,16 +2601,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_booleanlist;
+      Core.Type_any output = Core.e_booleanlist;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_booleanlist;
+      Core.Type_any output = Core.t_booleanlist;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "booleanlist", // name
         ":list", // extends
@@ -2603,22 +2626,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_booleanlist e_booleanlist = new Class_booleanlist();
-  public static final Type_booleanlist t_booleanlist = new Class_booleanlist();
+  public static final Core.Type_booleanlist e_booleanlist = new Core.Class_booleanlist();
+  public static final Core.Type_booleanlist t_booleanlist = new Core.Class_booleanlist();
 
   /**
    * type: collection
    * (type collection)
    */
   public interface Type_collection extends Core.Type_any {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
   }
 
   public static class Class_collection extends Core.Class_base implements Type_collection {
@@ -2630,16 +2650,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_collection vx_copy(final Object... vals) {
-      Type_collection output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_collection output = this;
       boolean ischanged = false;
-      Class_collection val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_collection value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_collection work = new Class_collection();
+        Core.Class_collection work = new Core.Class_collection();
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -2650,16 +2670,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_collection;
+      Core.Type_any output = Core.e_collection;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_collection;
+      Core.Type_any output = Core.t_collection;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "collection", // name
         "", // extends
@@ -2672,22 +2695,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_collection e_collection = new Class_collection();
-  public static final Type_collection t_collection = new Class_collection();
+  public static final Core.Type_collection e_collection = new Core.Class_collection();
+  public static final Core.Type_collection t_collection = new Core.Class_collection();
 
   /**
    * type: compilelanguages
    * (type compilelanguages)
    */
   public interface Type_compilelanguages extends Core.Type_any {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
   }
 
   public static class Class_compilelanguages extends Core.Class_base implements Type_compilelanguages {
@@ -2699,16 +2719,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_compilelanguages vx_copy(final Object... vals) {
-      Type_compilelanguages output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_compilelanguages output = this;
       boolean ischanged = false;
-      Class_compilelanguages val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_compilelanguages value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_compilelanguages work = new Class_compilelanguages();
+        Core.Class_compilelanguages work = new Core.Class_compilelanguages();
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -2719,16 +2739,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_compilelanguages;
+      Core.Type_any output = Core.e_compilelanguages;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_compilelanguages;
+      Core.Type_any output = Core.t_compilelanguages;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "compilelanguages", // name
         "", // extends
@@ -2741,12 +2764,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_compilelanguages e_compilelanguages = new Class_compilelanguages();
-  public static final Type_compilelanguages t_compilelanguages = new Class_compilelanguages();
+  public static final Core.Type_compilelanguages e_compilelanguages = new Core.Class_compilelanguages();
+  public static final Core.Type_compilelanguages t_compilelanguages = new Core.Class_compilelanguages();
 
   /**
    * type: connect
@@ -2754,10 +2778,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type connect)
    */
   public interface Type_connect extends Core.Type_any {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
   }
 
   public static class Class_connect extends Core.Class_base implements Type_connect {
@@ -2769,16 +2789,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_connect vx_copy(final Object... vals) {
-      Type_connect output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_connect output = this;
       boolean ischanged = false;
-      Class_connect val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_connect value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_connect work = new Class_connect();
+        Core.Class_connect work = new Core.Class_connect();
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -2789,16 +2809,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_connect;
+      Core.Type_any output = Core.e_connect;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_connect;
+      Core.Type_any output = Core.t_connect;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "connect", // name
         "", // extends
@@ -2811,12 +2834,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_connect e_connect = new Class_connect();
-  public static final Type_connect t_connect = new Class_connect();
+  public static final Core.Type_connect e_connect = new Core.Class_connect();
+  public static final Core.Type_connect t_connect = new Core.Class_connect();
 
   /**
    * type: connectlist
@@ -2824,17 +2848,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type connectlist)
    */
   public interface Type_connectlist extends Core.Type_list {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public List<Core.Type_connect> vx_listconnect();
     public Core.Type_connect vx_connect(final Core.Type_int index);
   }
 
   public static class Class_connectlist extends Core.Class_base implements Type_connectlist {
 
-    public List<Core.Type_connect> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_connect>());
+    public List<Core.Type_connect> vx_p_list = Core.immutablelist(
+      new ArrayList<Core.Type_connect>()
+    );
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -2858,12 +2880,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public List<Core.Type_connect> vx_listconnect() {
-      return vx_p_list;
+      List<Core.Type_connect> output = this.vx_p_list;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
-      return this.vx_connect(index);
+      Core.Type_connect output = this.vx_connect(index);
+      return output;
     }
 
     @Override
@@ -2873,15 +2897,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_connectlist vx_copy(final Object... vals) {
-      Type_connectlist output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_connectlist output = this;
       boolean ischanged = false;
-      Class_connectlist val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_connectlist value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      List<Core.Type_connect> listval = new ArrayList<Core.Type_connect>(val.vx_listconnect());
+      List<Core.Type_connect> listval = new ArrayList<Core.Type_connect>(value.vx_listconnect());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -2889,28 +2913,28 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_connect) {
-          Core.Type_connect allowsub = (Core.Type_connect)valsub;;
+          Core.Type_connect allowsub = (Core.Type_connect)valsub;
           ischanged = true;
           listval.add(allowsub);
         } else if (valsub instanceof Core.Type_connect) {
           ischanged = true;
           listval.add((Core.Type_connect)valsub);
         } else if (valsub instanceof Core.Type_connectlist) {
-          Core.Type_connectlist multi = (Core.Type_connectlist)valsub;;
+          Core.Type_connectlist multi = (Core.Type_connectlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listconnect());
         } else if (valsub instanceof List<?>) {
-          List<?> listunknown = (List<?>)valsub;;
+          List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (false) {
             } else if (item instanceof Core.Type_connect) {
-              Core.Type_connect valitem = (Core.Type_connect)item;;
+              Core.Type_connect valitem = (Core.Type_connect)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/core/connectlist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
@@ -2919,7 +2943,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_connectlist work = new Class_connectlist();
+        Core.Class_connectlist work = new Core.Class_connectlist();
         work.vx_p_list = Core.immutablelist(listval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -2931,16 +2955,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_connectlist;
+      Core.Type_any output = Core.e_connectlist;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_connectlist;
+      Core.Type_any output = Core.t_connectlist;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "connectlist", // name
         ":list", // extends
@@ -2953,12 +2980,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_connectlist e_connectlist = new Class_connectlist();
-  public static final Type_connectlist t_connectlist = new Class_connectlist();
+  public static final Core.Type_connectlist e_connectlist = new Core.Class_connectlist();
+  public static final Core.Type_connectlist t_connectlist = new Core.Class_connectlist();
 
   /**
    * type: connectmap
@@ -2966,10 +2994,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type connectmap)
    */
   public interface Type_connectmap extends Core.Type_map {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Map<String, Core.Type_connect> vx_mapconnect();
     public Core.Type_connect vx_connect(final Core.Type_string key);
   }
@@ -2989,7 +3013,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Core.Type_boolean output = Core.c_false;
       if (false) {
       } else if (value instanceof Core.Type_connect) {
-        Core.Type_connect castval = (Core.Type_connect)value;;
+        Core.Type_connect castval = (Core.Type_connect)value;
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -3018,13 +3042,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Map<String, Core.Type_connect> vx_mapconnect() {
-      return vx_p_map;
+      Map<String, Core.Type_connect> output = this.vx_p_map;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
-      return this.vx_connect(key);
+      Core.Type_any output = this.vx_connect(key);
+      return output;
     }
+
 
     @Override
     public Core.Type_map vx_new_from_map(final Map<String, Core.Type_any> mapval) {
@@ -3033,13 +3060,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Map<String, Core.Type_connect> map = new LinkedHashMap<String, Core.Type_connect>();
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
-        Core.Type_any val = mapval.get(key);
+        Core.Type_any value = mapval.get(key);
         if (false) {
-        } else if (val instanceof Core.Type_connect) {
-          Core.Type_connect castval = (Core.Type_connect)val;;
+        } else if (value instanceof Core.Type_connect) {
+          Core.Type_connect castval = (Core.Type_connect)value;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/connectmap", ":invalidvalue", val);
+          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/connectmap", ":invalidvalue", value);
           msgblock = Core.vx_copy(msgblock, msg);
         }
       }
@@ -3057,15 +3084,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_connectmap vx_copy(final Object... vals) {
-      Type_connectmap output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_connectmap output = this;
       boolean ischanged = false;
-      Class_connectmap val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_connectmap value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Map<String, Core.Type_connect> mapval = new LinkedHashMap<String, Core.Type_connect>(val.vx_mapconnect());
+      Map<String, Core.Type_connect> mapval = new LinkedHashMap<String, Core.Type_connect>(value.vx_mapconnect());
       Core.Type_msg msg = null;
       String key = "";
       Core.Type_any msgval = null;
@@ -3077,15 +3104,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (key.equals("")) {
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstring = (Core.Type_string)valsub;;
+            Core.Type_string valstring = (Core.Type_string)valsub;
             key = valstring.vx_string();
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             key = sval;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -3097,14 +3124,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.Type_connect valany = null;
           if (false) {
           } else if (valsub instanceof Core.Type_connect) {
-            Core.Type_connect valallowed = (Core.Type_connect)valsub;;
+            Core.Type_connect valallowed = (Core.Type_connect)valsub;
             valany = valallowed;
           } else if (valsub instanceof Core.Type_connect) {
             valany = (Core.Type_connect)valsub;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -3127,7 +3154,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_connectmap work = new Class_connectmap();
+        Core.Class_connectmap work = new Core.Class_connectmap();
         work.vx_p_map = Core.immutablemap(mapval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -3139,16 +3166,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_connectmap;
+      Core.Type_any output = Core.e_connectmap;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_connectmap;
+      Core.Type_any output = Core.t_connectmap;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "connectmap", // name
         ":map", // extends
@@ -3161,12 +3191,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_connectmap e_connectmap = new Class_connectmap();
-  public static final Type_connectmap t_connectmap = new Class_connectmap();
+  public static final Core.Type_connectmap e_connectmap = new Core.Class_connectmap();
+  public static final Core.Type_connectmap t_connectmap = new Core.Class_connectmap();
 
   /**
    * type: const
@@ -3174,10 +3205,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type const)
    */
   public interface Type_const extends Core.Type_any {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
   }
 
   public static class Class_const extends Core.Class_base implements Type_const {
@@ -3189,16 +3216,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_const vx_copy(final Object... vals) {
-      Type_const output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_const output = this;
       boolean ischanged = false;
-      Class_const val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_const value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_const work = new Class_const();
+        Core.Class_const work = new Core.Class_const();
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -3209,16 +3236,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_const;
+      Core.Type_any output = Core.e_const;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_const;
+      Core.Type_any output = Core.t_const;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "const", // name
         ":const", // extends
@@ -3231,12 +3261,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_const e_const = new Class_const();
-  public static final Type_const t_const = new Class_const();
+  public static final Core.Type_const e_const = new Core.Class_const();
+  public static final Core.Type_const t_const = new Core.Class_const();
 
   /**
    * type: constdef
@@ -3244,10 +3275,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type constdef)
    */
   public interface Type_constdef extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Core.Type_string pkgname();
     public Core.Type_string name();
     public Core.Type_any type();
@@ -3312,7 +3339,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       output.put(":pkgname", this.pkgname());
       output.put(":name", this.name());
       output.put(":type", this.type());
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -3322,17 +3350,17 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_constdef vx_copy(final Object... vals) {
-      Type_constdef output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_constdef output = this;
       boolean ischanged = false;
-      Class_constdef val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_constdef value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Core.Type_string vx_p_pkgname = val.pkgname();
-      Core.Type_string vx_p_name = val.name();
-      Core.Type_any vx_p_type = val.type();
+      Core.Type_string vx_p_pkgname = value.pkgname();
+      Core.Type_string vx_p_name = value.name();
+      Core.Type_any vx_p_type = value.type();
       List<String> validkeys = new ArrayList<String>();
       validkeys.add(":pkgname");
       validkeys.add(":name");
@@ -3345,22 +3373,22 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (key == "") {
+        } else if (key.equals("")) {
           boolean istestkey = false;
           String testkey = "";
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;;
+            Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             testkey = sval;
             istestkey = true;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              Core.Type_any valmsg = (Core.Type_any)valsub;
               msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -3386,7 +3414,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":pkgname":
             if (valsub == vx_p_pkgname) {
             } else if (valsub instanceof Core.Type_string) {
-              Core.Type_string valpkgname = (Core.Type_string)valsub;;
+              Core.Type_string valpkgname = (Core.Type_string)valsub;
               ischanged = true;
               vx_p_pkgname = valpkgname;
             } else if (valsub instanceof String) {
@@ -3395,7 +3423,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -3411,7 +3439,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":name":
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
-              Core.Type_string valname = (Core.Type_string)valsub;;
+              Core.Type_string valname = (Core.Type_string)valsub;
               ischanged = true;
               vx_p_name = valname;
             } else if (valsub instanceof String) {
@@ -3420,7 +3448,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -3436,13 +3464,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":type":
             if (valsub == vx_p_type) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valtype = (Core.Type_any)valsub;;
+              Core.Type_any valtype = (Core.Type_any)valsub;
               ischanged = true;
               vx_p_type = valtype;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -3465,7 +3493,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_constdef work = new Class_constdef();
+        Core.Class_constdef work = new Core.Class_constdef();
         work.vx_p_pkgname = vx_p_pkgname;
         work.vx_p_name = vx_p_name;
         work.vx_p_type = vx_p_type;
@@ -3479,16 +3507,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_constdef;
+      Core.Type_any output = Core.e_constdef;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_constdef;
+      Core.Type_any output = Core.t_constdef;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "constdef", // name
         ":struct", // extends
@@ -3501,12 +3532,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_constdef e_constdef = new Class_constdef();
-  public static final Type_constdef t_constdef = new Class_constdef();
+  public static final Core.Type_constdef e_constdef = new Core.Class_constdef();
+  public static final Core.Type_constdef t_constdef = new Core.Class_constdef();
 
   /**
    * type: constlist
@@ -3514,15 +3546,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type constlist)
    */
   public interface Type_constlist extends Core.Type_list {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
   }
 
   public static class Class_constlist extends Core.Class_base implements Type_constlist {
 
-    public List<Core.Type_any> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_any>());
+    public List<Core.Type_any> vx_p_list = Core.immutablelist(
+      new ArrayList<Core.Type_any>()
+    );
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -3551,15 +3581,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_constlist vx_copy(final Object... vals) {
-      Type_constlist output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_constlist output = this;
       boolean ischanged = false;
-      Class_constlist val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_constlist value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      List<Core.Type_any> listval = new ArrayList<Core.Type_any>(val.vx_list());
+      List<Core.Type_any> listval = new ArrayList<Core.Type_any>(value.vx_list());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -3567,25 +3597,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any allowsub = (Core.Type_any)valsub;;
+          Core.Type_any allowsub = (Core.Type_any)valsub;
           ischanged = true;
           listval.add(allowsub);
         } else if (valsub instanceof Core.Type_constlist) {
-          Core.Type_constlist multi = (Core.Type_constlist)valsub;;
+          Core.Type_constlist multi = (Core.Type_constlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_list());
         } else if (valsub instanceof List<?>) {
-          List<?> listunknown = (List<?>)valsub;;
+          List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (false) {
             } else if (item instanceof Core.Type_any) {
-              Core.Type_any valitem = (Core.Type_any)item;;
+              Core.Type_any valitem = (Core.Type_any)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/core/constlist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
@@ -3594,7 +3624,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_constlist work = new Class_constlist();
+        Core.Class_constlist work = new Core.Class_constlist();
         work.vx_p_list = Core.immutablelist(listval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -3606,16 +3636,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_constlist;
+      Core.Type_any output = Core.e_constlist;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_constlist;
+      Core.Type_any output = Core.t_constlist;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "constlist", // name
         ":list", // extends
@@ -3628,12 +3661,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_constlist e_constlist = new Class_constlist();
-  public static final Type_constlist t_constlist = new Class_constlist();
+  public static final Core.Type_constlist e_constlist = new Core.Class_constlist();
+  public static final Core.Type_constlist t_constlist = new Core.Class_constlist();
 
   /**
    * type: constmap
@@ -3641,10 +3675,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type constmap)
    */
   public interface Type_constmap extends Core.Type_map {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
   }
 
   public static class Class_constmap extends Core.Class_base implements Type_constmap {
@@ -3662,7 +3692,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Core.Type_boolean output = Core.c_false;
       if (false) {
       } else if (value instanceof Core.Type_any) {
-        Core.Type_any castval = (Core.Type_any)value;;
+        Core.Type_any castval = (Core.Type_any)value;
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -3696,13 +3726,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
-        Core.Type_any val = mapval.get(key);
+        Core.Type_any value = mapval.get(key);
         if (false) {
-        } else if (val instanceof Core.Type_any) {
-          Core.Type_any castval = (Core.Type_any)val;;
+        } else if (value instanceof Core.Type_any) {
+          Core.Type_any castval = (Core.Type_any)value;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/constmap", ":invalidvalue", val);
+          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/constmap", ":invalidvalue", value);
           msgblock = Core.vx_copy(msgblock, msg);
         }
       }
@@ -3720,15 +3750,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_constmap vx_copy(final Object... vals) {
-      Type_constmap output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_constmap output = this;
       boolean ischanged = false;
-      Class_constmap val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_constmap value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Map<String, Core.Type_any> mapval = new LinkedHashMap<String, Core.Type_any>(val.vx_map());
+      Map<String, Core.Type_any> mapval = new LinkedHashMap<String, Core.Type_any>(value.vx_map());
       Core.Type_msg msg = null;
       String key = "";
       Core.Type_any msgval = null;
@@ -3740,15 +3770,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (key.equals("")) {
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstring = (Core.Type_string)valsub;;
+            Core.Type_string valstring = (Core.Type_string)valsub;
             key = valstring.vx_string();
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             key = sval;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -3760,14 +3790,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.Type_any valany = null;
           if (false) {
           } else if (valsub instanceof Core.Type_any) {
-            Core.Type_any valallowed = (Core.Type_any)valsub;;
+            Core.Type_any valallowed = (Core.Type_any)valsub;
             valany = valallowed;
           } else if (valsub instanceof Core.Type_any) {
             valany = (Core.Type_any)valsub;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -3790,7 +3820,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_constmap work = new Class_constmap();
+        Core.Class_constmap work = new Core.Class_constmap();
         work.vx_p_map = Core.immutablemap(mapval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -3802,16 +3832,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_constmap;
+      Core.Type_any output = Core.e_constmap;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_constmap;
+      Core.Type_any output = Core.t_constmap;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "constmap", // name
         ":map", // extends
@@ -3824,12 +3857,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_constmap e_constmap = new Class_constmap();
-  public static final Type_constmap t_constmap = new Class_constmap();
+  public static final Core.Type_constmap e_constmap = new Core.Class_constmap();
+  public static final Core.Type_constmap t_constmap = new Core.Class_constmap();
 
   /**
    * type: context
@@ -3837,10 +3871,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type context)
    */
   public interface Type_context extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Core.Type_string code();
     public Core.Type_session session();
     public Core.Type_setting setting();
@@ -3921,7 +3951,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       output.put(":session", this.session());
       output.put(":setting", this.setting());
       output.put(":state", this.state());
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -3931,18 +3962,18 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_context vx_copy(final Object... vals) {
-      Type_context output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_context output = this;
       boolean ischanged = false;
-      Class_context val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_context value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Core.Type_string vx_p_code = val.code();
-      Core.Type_session vx_p_session = val.session();
-      Core.Type_setting vx_p_setting = val.setting();
-      Core.Type_state vx_p_state = val.state();
+      Core.Type_string vx_p_code = value.code();
+      Core.Type_session vx_p_session = value.session();
+      Core.Type_setting vx_p_setting = value.setting();
+      Core.Type_state vx_p_state = value.state();
       List<String> validkeys = new ArrayList<String>();
       validkeys.add(":code");
       validkeys.add(":session");
@@ -3956,22 +3987,22 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (key == "") {
+        } else if (key.equals("")) {
           boolean istestkey = false;
           String testkey = "";
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;;
+            Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             testkey = sval;
             istestkey = true;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              Core.Type_any valmsg = (Core.Type_any)valsub;
               msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -3997,7 +4028,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":code":
             if (valsub == vx_p_code) {
             } else if (valsub instanceof Core.Type_string) {
-              Core.Type_string valcode = (Core.Type_string)valsub;;
+              Core.Type_string valcode = (Core.Type_string)valsub;
               ischanged = true;
               vx_p_code = valcode;
             } else if (valsub instanceof String) {
@@ -4006,7 +4037,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -4022,13 +4053,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":session":
             if (valsub == vx_p_session) {
             } else if (valsub instanceof Core.Type_session) {
-              Core.Type_session valsession = (Core.Type_session)valsub;;
+              Core.Type_session valsession = (Core.Type_session)valsub;
               ischanged = true;
               vx_p_session = valsession;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -4044,13 +4075,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":setting":
             if (valsub == vx_p_setting) {
             } else if (valsub instanceof Core.Type_setting) {
-              Core.Type_setting valsetting = (Core.Type_setting)valsub;;
+              Core.Type_setting valsetting = (Core.Type_setting)valsub;
               ischanged = true;
               vx_p_setting = valsetting;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -4066,13 +4097,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":state":
             if (valsub == vx_p_state) {
             } else if (valsub instanceof Core.Type_state) {
-              Core.Type_state valstate = (Core.Type_state)valsub;;
+              Core.Type_state valstate = (Core.Type_state)valsub;
               ischanged = true;
               vx_p_state = valstate;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -4095,7 +4126,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_context work = new Class_context();
+        Core.Class_context work = new Core.Class_context();
         work.vx_p_code = vx_p_code;
         work.vx_p_session = vx_p_session;
         work.vx_p_setting = vx_p_setting;
@@ -4110,16 +4141,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_context;
+      Core.Type_any output = Core.e_context;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_context;
+      Core.Type_any output = Core.t_context;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "context", // name
         ":struct", // extends
@@ -4132,12 +4166,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_context e_context = new Class_context();
-  public static final Type_context t_context = new Class_context();
+  public static final Core.Type_context e_context = new Core.Class_context();
+  public static final Core.Type_context t_context = new Core.Class_context();
 
   /**
    * type: date
@@ -4145,10 +4180,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type date)
    */
   public interface Type_date extends Core.Type_any {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
   }
 
   public static class Class_date extends Core.Class_base implements Type_date {
@@ -4160,16 +4191,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_date vx_copy(final Object... vals) {
-      Type_date output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_date output = this;
       boolean ischanged = false;
-      Class_date val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_date value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_date work = new Class_date();
+        Core.Class_date work = new Core.Class_date();
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -4180,16 +4211,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_date;
+      Core.Type_any output = Core.e_date;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_date;
+      Core.Type_any output = Core.t_date;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "date", // name
         ":string", // extends
@@ -4202,12 +4236,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_date e_date = new Class_date();
-  public static final Type_date t_date = new Class_date();
+  public static final Core.Type_date e_date = new Core.Class_date();
+  public static final Core.Type_date t_date = new Core.Class_date();
 
   /**
    * type: decimal
@@ -4215,10 +4250,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type decimal)
    */
   public interface Type_decimal extends Core.Type_number {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public float vx_float();
     public String vx_string();
     public Type_decimal vx_new_from_string(final String sval);
@@ -4234,7 +4265,9 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
     
     @Override
-    public String vx_string() {return vxdecimal;}
+    public String vx_string() {
+      return vxdecimal;
+    }
     
     @Override
     public Type_decimal vx_new_from_string(final String sval) {
@@ -4250,32 +4283,32 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_decimal vx_copy(final Object... vals) {
-      Type_decimal output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_decimal output = this;
       boolean ischanged = false;
-      Class_decimal val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_decimal value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      String sval = val.vx_string();
+      String sval = value.vx_string();
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_string) {
-          Core.Type_string valstring = (Core.Type_string)valsub;;
+          Core.Type_string valstring = (Core.Type_string)valsub;
           ischanged = true;
           sval = valstring.vx_string();
         } else if (valsub instanceof String) {
-          String svalsub = (String)valsub;;
+          String svalsub = (String)valsub;
           ischanged = true;
           sval = svalsub;
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_decimal work = new Class_decimal();
+        Core.Class_decimal work = new Core.Class_decimal();
         work.vxdecimal = sval;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -4287,16 +4320,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_decimal;
+      Core.Type_any output = Core.e_decimal;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_decimal;
+      Core.Type_any output = Core.t_decimal;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "decimal", // name
         "", // extends
@@ -4309,12 +4345,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_decimal e_decimal = new Class_decimal();
-  public static final Type_decimal t_decimal = new Class_decimal();
+  public static final Core.Type_decimal e_decimal = new Core.Class_decimal();
+  public static final Core.Type_decimal t_decimal = new Core.Class_decimal();
 
   /**
    * type: error
@@ -4322,10 +4359,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type error)
    */
   public interface Type_error extends Core.Type_any {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
   }
 
   public static class Class_error extends Core.Class_base implements Type_error {
@@ -4337,16 +4370,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_error vx_copy(final Object... vals) {
-      Type_error output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_error output = this;
       boolean ischanged = false;
-      Class_error val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_error value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_error work = new Class_error();
+        Core.Class_error work = new Core.Class_error();
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -4357,16 +4390,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_error;
+      Core.Type_any output = Core.e_error;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_error;
+      Core.Type_any output = Core.t_error;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "error", // name
         "", // extends
@@ -4379,12 +4415,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_error e_error = new Class_error();
-  public static final Type_error t_error = new Class_error();
+  public static final Core.Type_error e_error = new Core.Class_error();
+  public static final Core.Type_error t_error = new Core.Class_error();
 
   /**
    * type: float
@@ -4392,10 +4429,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type float)
    */
   public interface Type_float extends Core.Type_number {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public float vx_float();
   }
 
@@ -4404,7 +4437,9 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     protected float vxfloat = 0;
     
     @Override
-    public float vx_float() {return vxfloat;}
+    public float vx_float() {
+      return vxfloat;
+    }
 
     @Override
     public Core.Type_float vx_new(final Object... vals) {
@@ -4413,52 +4448,52 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_float vx_copy(final Object... vals) {
-      Type_float output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_float output = this;
       boolean ischanged = false;
-      Class_float val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_float value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      float floatval = val.vx_float();
+      float floatval = value.vx_float();
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_decimal) {
-          Core.Type_decimal valdecimal = (Core.Type_decimal)valsub;;
+          Core.Type_decimal valdecimal = (Core.Type_decimal)valsub;
           ischanged = true;
           floatval += valdecimal.vx_float();
         } else if (valsub instanceof Core.Type_float) {
-          Core.Type_float valfloat = (Core.Type_float)valsub;;
+          Core.Type_float valfloat = (Core.Type_float)valsub;
           ischanged = true;
           floatval += valfloat.vx_float();
         } else if (valsub instanceof Core.Type_int) {
-          Core.Type_int valint = (Core.Type_int)valsub;;
+          Core.Type_int valint = (Core.Type_int)valsub;
           ischanged = true;
           floatval += valint.vx_int();
         } else if (valsub instanceof Core.Type_string) {
-          Core.Type_string valstring = (Core.Type_string)valsub;;
+          Core.Type_string valstring = (Core.Type_string)valsub;
           ischanged = true;
           floatval += Float.parseFloat(valstring.vx_string());
         } else if (valsub instanceof Float) {
-          Float fval = (Float)valsub;;
+          Float fval = (Float)valsub;
           ischanged = true;
           floatval += fval;
         } else if (valsub instanceof Integer) {
-          Integer ival = (Integer)valsub;;
+          Integer ival = (Integer)valsub;
           ischanged = true;
           floatval += ival;
         } else if (valsub instanceof String) {
-          String sval = (String)valsub;;
+          String sval = (String)valsub;
           ischanged = true;
           floatval += Float.parseFloat(sval);
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_float work = new Class_float();
+        Core.Class_float work = new Core.Class_float();
         work.vxfloat = floatval;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -4470,16 +4505,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_float;
+      Core.Type_any output = Core.e_float;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_float;
+      Core.Type_any output = Core.t_float;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "float", // name
         "", // extends
@@ -4492,12 +4530,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_float e_float = new Class_float();
-  public static final Type_float t_float = new Class_float();
+  public static final Core.Type_float e_float = new Core.Class_float();
+  public static final Core.Type_float t_float = new Core.Class_float();
 
   /**
    * type: func
@@ -4505,18 +4544,17 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type func)
    */
   public interface Type_func extends Core.Type_any {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
-	   public Core.Type_funcdef vx_funcdef();
+    public Core.Type_funcdef vx_funcdef();
   }
 
   public static class Class_func extends Core.Class_base implements Type_func {
 
+    @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.e_funcdef;
+      Core.Type_funcdef output = Core.e_funcdef;
+      return output;
     }
+
     @Override
     public Core.Type_func vx_new(final Object... vals) {
       Core.Type_func output = Core.vx_copy(Core.e_func, vals);
@@ -4524,16 +4562,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_func vx_copy(final Object... vals) {
-      Type_func output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_func output = this;
       boolean ischanged = false;
-      Class_func val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_func value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_func work = new Class_func();
+        Core.Class_func work = new Core.Class_func();
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -4544,16 +4582,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_func;
+      Core.Type_any output = Core.e_func;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_func;
+      Core.Type_any output = Core.t_func;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "func", // name
         ":func", // extends
@@ -4566,12 +4607,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_func e_func = new Class_func();
-  public static final Type_func t_func = new Class_func();
+  public static final Core.Type_func e_func = new Core.Class_func();
+  public static final Core.Type_func t_func = new Core.Class_func();
 
   /**
    * type: funcdef
@@ -4579,10 +4621,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type funcdef)
    */
   public interface Type_funcdef extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Core.Type_string pkgname();
     public Core.Type_string name();
     public Core.Type_int idx();
@@ -4679,7 +4717,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       output.put(":idx", this.idx());
       output.put(":type", this.type());
       output.put(":async", this.async());
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -4689,19 +4728,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_funcdef vx_copy(final Object... vals) {
-      Type_funcdef output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_funcdef output = this;
       boolean ischanged = false;
-      Class_funcdef val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_funcdef value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Core.Type_string vx_p_pkgname = val.pkgname();
-      Core.Type_string vx_p_name = val.name();
-      Core.Type_int vx_p_idx = val.idx();
-      Core.Type_any vx_p_type = val.type();
-      Core.Type_boolean vx_p_async = val.async();
+      Core.Type_string vx_p_pkgname = value.pkgname();
+      Core.Type_string vx_p_name = value.name();
+      Core.Type_int vx_p_idx = value.idx();
+      Core.Type_any vx_p_type = value.type();
+      Core.Type_boolean vx_p_async = value.async();
       List<String> validkeys = new ArrayList<String>();
       validkeys.add(":pkgname");
       validkeys.add(":name");
@@ -4716,22 +4755,22 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (key == "") {
+        } else if (key.equals("")) {
           boolean istestkey = false;
           String testkey = "";
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;;
+            Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             testkey = sval;
             istestkey = true;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              Core.Type_any valmsg = (Core.Type_any)valsub;
               msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -4757,7 +4796,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":pkgname":
             if (valsub == vx_p_pkgname) {
             } else if (valsub instanceof Core.Type_string) {
-              Core.Type_string valpkgname = (Core.Type_string)valsub;;
+              Core.Type_string valpkgname = (Core.Type_string)valsub;
               ischanged = true;
               vx_p_pkgname = valpkgname;
             } else if (valsub instanceof String) {
@@ -4766,7 +4805,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -4782,7 +4821,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":name":
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
-              Core.Type_string valname = (Core.Type_string)valsub;;
+              Core.Type_string valname = (Core.Type_string)valsub;
               ischanged = true;
               vx_p_name = valname;
             } else if (valsub instanceof String) {
@@ -4791,7 +4830,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -4807,7 +4846,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":idx":
             if (valsub == vx_p_idx) {
             } else if (valsub instanceof Core.Type_int) {
-              Core.Type_int validx = (Core.Type_int)valsub;;
+              Core.Type_int validx = (Core.Type_int)valsub;
               ischanged = true;
               vx_p_idx = validx;
             } else if (valsub instanceof Integer) {
@@ -4816,7 +4855,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -4832,13 +4871,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":type":
             if (valsub == vx_p_type) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valtype = (Core.Type_any)valsub;;
+              Core.Type_any valtype = (Core.Type_any)valsub;
               ischanged = true;
               vx_p_type = valtype;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -4854,7 +4893,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":async":
             if (valsub == vx_p_async) {
             } else if (valsub instanceof Core.Type_boolean) {
-              Core.Type_boolean valasync = (Core.Type_boolean)valsub;;
+              Core.Type_boolean valasync = (Core.Type_boolean)valsub;
               ischanged = true;
               vx_p_async = valasync;
             } else if (valsub instanceof Boolean) {
@@ -4863,7 +4902,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -4886,7 +4925,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_funcdef work = new Class_funcdef();
+        Core.Class_funcdef work = new Core.Class_funcdef();
         work.vx_p_pkgname = vx_p_pkgname;
         work.vx_p_name = vx_p_name;
         work.vx_p_idx = vx_p_idx;
@@ -4902,16 +4941,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_funcdef;
+      Core.Type_any output = Core.e_funcdef;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_funcdef;
+      Core.Type_any output = Core.t_funcdef;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "funcdef", // name
         ":struct", // extends
@@ -4924,12 +4966,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_funcdef e_funcdef = new Class_funcdef();
-  public static final Type_funcdef t_funcdef = new Class_funcdef();
+  public static final Core.Type_funcdef e_funcdef = new Core.Class_funcdef();
+  public static final Core.Type_funcdef t_funcdef = new Core.Class_funcdef();
 
   /**
    * type: funclist
@@ -4937,17 +4980,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type funclist)
    */
   public interface Type_funclist extends Core.Type_list {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public List<Core.Type_func> vx_listfunc();
     public Core.Type_func vx_func(final Core.Type_int index);
   }
 
   public static class Class_funclist extends Core.Class_base implements Type_funclist {
 
-    public List<Core.Type_func> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_func>());
+    public List<Core.Type_func> vx_p_list = Core.immutablelist(
+      new ArrayList<Core.Type_func>()
+    );
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -4971,12 +5012,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public List<Core.Type_func> vx_listfunc() {
-      return vx_p_list;
+      List<Core.Type_func> output = this.vx_p_list;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
-      return this.vx_func(index);
+      Core.Type_func output = this.vx_func(index);
+      return output;
     }
 
     @Override
@@ -4986,15 +5029,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_funclist vx_copy(final Object... vals) {
-      Type_funclist output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_funclist output = this;
       boolean ischanged = false;
-      Class_funclist val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_funclist value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      List<Core.Type_func> listval = new ArrayList<Core.Type_func>(val.vx_listfunc());
+      List<Core.Type_func> listval = new ArrayList<Core.Type_func>(value.vx_listfunc());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -5002,28 +5045,28 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_func) {
-          Core.Type_func allowsub = (Core.Type_func)valsub;;
+          Core.Type_func allowsub = (Core.Type_func)valsub;
           ischanged = true;
           listval.add(allowsub);
         } else if (valsub instanceof Core.Type_func) {
           ischanged = true;
           listval.add((Core.Type_func)valsub);
         } else if (valsub instanceof Core.Type_funclist) {
-          Core.Type_funclist multi = (Core.Type_funclist)valsub;;
+          Core.Type_funclist multi = (Core.Type_funclist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listfunc());
         } else if (valsub instanceof List<?>) {
-          List<?> listunknown = (List<?>)valsub;;
+          List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (false) {
             } else if (item instanceof Core.Type_func) {
-              Core.Type_func valitem = (Core.Type_func)item;;
+              Core.Type_func valitem = (Core.Type_func)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/core/funclist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
@@ -5032,7 +5075,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_funclist work = new Class_funclist();
+        Core.Class_funclist work = new Core.Class_funclist();
         work.vx_p_list = Core.immutablelist(listval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -5044,16 +5087,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_funclist;
+      Core.Type_any output = Core.e_funclist;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_funclist;
+      Core.Type_any output = Core.t_funclist;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "funclist", // name
         ":list", // extends
@@ -5066,12 +5112,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_funclist e_funclist = new Class_funclist();
-  public static final Type_funclist t_funclist = new Class_funclist();
+  public static final Core.Type_funclist e_funclist = new Core.Class_funclist();
+  public static final Core.Type_funclist t_funclist = new Core.Class_funclist();
 
   /**
    * type: funcmap
@@ -5079,10 +5126,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type funcmap)
    */
   public interface Type_funcmap extends Core.Type_map {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Map<String, Core.Type_func> vx_mapfunc();
     public Core.Type_func vx_func(final Core.Type_string key);
   }
@@ -5102,7 +5145,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Core.Type_boolean output = Core.c_false;
       if (false) {
       } else if (value instanceof Core.Type_func) {
-        Core.Type_func castval = (Core.Type_func)value;;
+        Core.Type_func castval = (Core.Type_func)value;
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -5131,13 +5174,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Map<String, Core.Type_func> vx_mapfunc() {
-      return vx_p_map;
+      Map<String, Core.Type_func> output = this.vx_p_map;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
-      return this.vx_func(key);
+      Core.Type_any output = this.vx_func(key);
+      return output;
     }
+
 
     @Override
     public Core.Type_map vx_new_from_map(final Map<String, Core.Type_any> mapval) {
@@ -5146,13 +5192,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Map<String, Core.Type_func> map = new LinkedHashMap<String, Core.Type_func>();
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
-        Core.Type_any val = mapval.get(key);
+        Core.Type_any value = mapval.get(key);
         if (false) {
-        } else if (val instanceof Core.Type_func) {
-          Core.Type_func castval = (Core.Type_func)val;;
+        } else if (value instanceof Core.Type_func) {
+          Core.Type_func castval = (Core.Type_func)value;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/funcmap", ":invalidvalue", val);
+          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/funcmap", ":invalidvalue", value);
           msgblock = Core.vx_copy(msgblock, msg);
         }
       }
@@ -5170,15 +5216,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_funcmap vx_copy(final Object... vals) {
-      Type_funcmap output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_funcmap output = this;
       boolean ischanged = false;
-      Class_funcmap val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_funcmap value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Map<String, Core.Type_func> mapval = new LinkedHashMap<String, Core.Type_func>(val.vx_mapfunc());
+      Map<String, Core.Type_func> mapval = new LinkedHashMap<String, Core.Type_func>(value.vx_mapfunc());
       Core.Type_msg msg = null;
       String key = "";
       Core.Type_any msgval = null;
@@ -5190,15 +5236,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (key.equals("")) {
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstring = (Core.Type_string)valsub;;
+            Core.Type_string valstring = (Core.Type_string)valsub;
             key = valstring.vx_string();
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             key = sval;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -5210,14 +5256,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.Type_func valany = null;
           if (false) {
           } else if (valsub instanceof Core.Type_func) {
-            Core.Type_func valallowed = (Core.Type_func)valsub;;
+            Core.Type_func valallowed = (Core.Type_func)valsub;
             valany = valallowed;
           } else if (valsub instanceof Core.Type_func) {
             valany = (Core.Type_func)valsub;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -5240,7 +5286,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_funcmap work = new Class_funcmap();
+        Core.Class_funcmap work = new Core.Class_funcmap();
         work.vx_p_map = Core.immutablemap(mapval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -5252,16 +5298,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_funcmap;
+      Core.Type_any output = Core.e_funcmap;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_funcmap;
+      Core.Type_any output = Core.t_funcmap;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "funcmap", // name
         ":map", // extends
@@ -5274,12 +5323,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_funcmap e_funcmap = new Class_funcmap();
-  public static final Type_funcmap t_funcmap = new Class_funcmap();
+  public static final Core.Type_funcmap e_funcmap = new Core.Class_funcmap();
+  public static final Core.Type_funcmap t_funcmap = new Core.Class_funcmap();
 
   /**
    * type: int
@@ -5287,10 +5337,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type int)
    */
   public interface Type_int extends Core.Type_number {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public int vx_int();
   }
 
@@ -5299,7 +5345,9 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     protected int vxint = 0;
     
     @Override
-    public int vx_int() {return vxint;}
+    public int vx_int() {
+      return vxint;
+    }
 
     @Override
     public Core.Type_int vx_new(final Object... vals) {
@@ -5308,36 +5356,36 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_int vx_copy(final Object... vals) {
-      Type_int output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_int output = this;
       boolean ischanged = false;
-      Class_int val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_int value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      int intval = val.vx_int();
+      int intval = value.vx_int();
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_int) {
-          Core.Type_int valint = (Core.Type_int)valsub;;
+          Core.Type_int valint = (Core.Type_int)valsub;
           ischanged = true;
           intval += valint.vx_int();
         } else if (valsub instanceof Integer) {
-          Integer ival = (Integer)valsub;;
+          Integer ival = (Integer)valsub;
           ischanged = true;
           intval += ival;
         } else if (valsub instanceof String) {
-          String sval = (String)valsub;;
+          String sval = (String)valsub;
           ischanged = true;
           intval += Integer.parseInt(sval);
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_int work = new Class_int();
+        Core.Class_int work = new Core.Class_int();
         work.vxint = intval;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -5349,16 +5397,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_int;
+      Core.Type_any output = Core.e_int;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_int;
+      Core.Type_any output = Core.t_int;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "int", // name
         "", // extends
@@ -5371,12 +5422,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_int e_int = new Class_int();
-  public static final Type_int t_int = new Class_int();
+  public static final Core.Type_int e_int = new Core.Class_int();
+  public static final Core.Type_int t_int = new Core.Class_int();
 
   /**
    * type: intlist
@@ -5384,17 +5436,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type intlist)
    */
   public interface Type_intlist extends Core.Type_list {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public List<Core.Type_int> vx_listint();
     public Core.Type_int vx_int(final Core.Type_int index);
   }
 
   public static class Class_intlist extends Core.Class_base implements Type_intlist {
 
-    public List<Core.Type_int> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_int>());
+    public List<Core.Type_int> vx_p_list = Core.immutablelist(
+      new ArrayList<Core.Type_int>()
+    );
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -5418,12 +5468,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public List<Core.Type_int> vx_listint() {
-      return vx_p_list;
+      List<Core.Type_int> output = this.vx_p_list;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
-      return this.vx_int(index);
+      Core.Type_int output = this.vx_int(index);
+      return output;
     }
 
     @Override
@@ -5433,15 +5485,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_intlist vx_copy(final Object... vals) {
-      Type_intlist output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_intlist output = this;
       boolean ischanged = false;
-      Class_intlist val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_intlist value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      List<Core.Type_int> listval = new ArrayList<Core.Type_int>(val.vx_listint());
+      List<Core.Type_int> listval = new ArrayList<Core.Type_int>(value.vx_listint());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -5449,28 +5501,28 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_int) {
-          Core.Type_int allowsub = (Core.Type_int)valsub;;
+          Core.Type_int allowsub = (Core.Type_int)valsub;
           ischanged = true;
           listval.add(allowsub);
         } else if (valsub instanceof Integer) {
           ischanged = true;
           listval.add(Core.vx_new(Core.t_int, valsub));
         } else if (valsub instanceof Core.Type_intlist) {
-          Core.Type_intlist multi = (Core.Type_intlist)valsub;;
+          Core.Type_intlist multi = (Core.Type_intlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listint());
         } else if (valsub instanceof List<?>) {
-          List<?> listunknown = (List<?>)valsub;;
+          List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (false) {
             } else if (item instanceof Core.Type_int) {
-              Core.Type_int valitem = (Core.Type_int)item;;
+              Core.Type_int valitem = (Core.Type_int)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/core/intlist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
@@ -5479,7 +5531,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_intlist work = new Class_intlist();
+        Core.Class_intlist work = new Core.Class_intlist();
         work.vx_p_list = Core.immutablelist(listval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -5491,16 +5543,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_intlist;
+      Core.Type_any output = Core.e_intlist;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_intlist;
+      Core.Type_any output = Core.t_intlist;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "intlist", // name
         ":list", // extends
@@ -5513,12 +5568,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_intlist e_intlist = new Class_intlist();
-  public static final Type_intlist t_intlist = new Class_intlist();
+  public static final Core.Type_intlist e_intlist = new Core.Class_intlist();
+  public static final Core.Type_intlist t_intlist = new Core.Class_intlist();
 
   /**
    * type: intmap
@@ -5526,10 +5582,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type intmap)
    */
   public interface Type_intmap extends Core.Type_map {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Map<String, Core.Type_int> vx_mapint();
     public Core.Type_int vx_int(final Core.Type_string key);
   }
@@ -5549,7 +5601,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Core.Type_boolean output = Core.c_false;
       if (false) {
       } else if (value instanceof Core.Type_int) {
-        Core.Type_int castval = (Core.Type_int)value;;
+        Core.Type_int castval = (Core.Type_int)value;
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -5578,13 +5630,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Map<String, Core.Type_int> vx_mapint() {
-      return vx_p_map;
+      Map<String, Core.Type_int> output = this.vx_p_map;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
-      return this.vx_int(key);
+      Core.Type_any output = this.vx_int(key);
+      return output;
     }
+
 
     @Override
     public Core.Type_map vx_new_from_map(final Map<String, Core.Type_any> mapval) {
@@ -5593,13 +5648,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Map<String, Core.Type_int> map = new LinkedHashMap<String, Core.Type_int>();
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
-        Core.Type_any val = mapval.get(key);
+        Core.Type_any value = mapval.get(key);
         if (false) {
-        } else if (val instanceof Core.Type_int) {
-          Core.Type_int castval = (Core.Type_int)val;;
+        } else if (value instanceof Core.Type_int) {
+          Core.Type_int castval = (Core.Type_int)value;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/intmap", ":invalidvalue", val);
+          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/intmap", ":invalidvalue", value);
           msgblock = Core.vx_copy(msgblock, msg);
         }
       }
@@ -5617,15 +5672,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_intmap vx_copy(final Object... vals) {
-      Type_intmap output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_intmap output = this;
       boolean ischanged = false;
-      Class_intmap val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_intmap value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Map<String, Core.Type_int> mapval = new LinkedHashMap<String, Core.Type_int>(val.vx_mapint());
+      Map<String, Core.Type_int> mapval = new LinkedHashMap<String, Core.Type_int>(value.vx_mapint());
       Core.Type_msg msg = null;
       String key = "";
       Core.Type_any msgval = null;
@@ -5637,15 +5692,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (key.equals("")) {
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstring = (Core.Type_string)valsub;;
+            Core.Type_string valstring = (Core.Type_string)valsub;
             key = valstring.vx_string();
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             key = sval;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -5657,14 +5712,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.Type_int valany = null;
           if (false) {
           } else if (valsub instanceof Core.Type_int) {
-            Core.Type_int valallowed = (Core.Type_int)valsub;;
+            Core.Type_int valallowed = (Core.Type_int)valsub;
             valany = valallowed;
           } else if (valsub instanceof Integer) {
             valany = Core.vx_new(Core.t_int, valsub);
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -5687,7 +5742,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_intmap work = new Class_intmap();
+        Core.Class_intmap work = new Core.Class_intmap();
         work.vx_p_map = Core.immutablemap(mapval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -5699,16 +5754,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_intmap;
+      Core.Type_any output = Core.e_intmap;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_intmap;
+      Core.Type_any output = Core.t_intmap;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "intmap", // name
         ":map", // extends
@@ -5721,12 +5779,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_intmap e_intmap = new Class_intmap();
-  public static final Type_intmap t_intmap = new Class_intmap();
+  public static final Core.Type_intmap e_intmap = new Core.Class_intmap();
+  public static final Core.Type_intmap t_intmap = new Core.Class_intmap();
 
   /**
    * type: list
@@ -5734,17 +5793,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type list)
    */
   public interface Type_list extends Core.Type_any {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public List<Core.Type_any> vx_list();
     public Core.Type_any vx_any(final Core.Type_int index);
   }
 
   public static class Class_list extends Core.Class_base implements Type_list {
 
-    public List<Core.Type_any> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_any>());
+    public List<Core.Type_any> vx_p_list = Core.immutablelist(
+      new ArrayList<Core.Type_any>()
+    );
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -5773,15 +5830,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_list vx_copy(final Object... vals) {
-      Type_list output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_list output = this;
       boolean ischanged = false;
-      Class_list val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_list value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      List<Core.Type_any> listval = new ArrayList<Core.Type_any>(val.vx_list());
+      List<Core.Type_any> listval = new ArrayList<Core.Type_any>(value.vx_list());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -5789,25 +5846,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any allowsub = (Core.Type_any)valsub;;
+          Core.Type_any allowsub = (Core.Type_any)valsub;
           ischanged = true;
           listval.add(allowsub);
         } else if (valsub instanceof Core.Type_list) {
-          Core.Type_list multi = (Core.Type_list)valsub;;
+          Core.Type_list multi = (Core.Type_list)valsub;
           ischanged = true;
           listval.addAll(multi.vx_list());
         } else if (valsub instanceof List<?>) {
-          List<?> listunknown = (List<?>)valsub;;
+          List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (false) {
             } else if (item instanceof Core.Type_any) {
-              Core.Type_any valitem = (Core.Type_any)item;;
+              Core.Type_any valitem = (Core.Type_any)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/core/list", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
@@ -5816,7 +5873,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_list work = new Class_list();
+        Core.Class_list work = new Core.Class_list();
         work.vx_p_list = Core.immutablelist(listval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -5828,16 +5885,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_list;
+      Core.Type_any output = Core.e_list;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_list;
+      Core.Type_any output = Core.t_list;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "list", // name
         ":list", // extends
@@ -5850,12 +5910,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_list e_list = new Class_list();
-  public static final Type_list t_list = new Class_list();
+  public static final Core.Type_list e_list = new Core.Class_list();
+  public static final Core.Type_list t_list = new Core.Class_list();
 
   /**
    * type: listtype
@@ -5863,10 +5924,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type listtype)
    */
   public interface Type_listtype extends Core.Type_any {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
   }
 
   public static class Class_listtype extends Core.Class_base implements Type_listtype {
@@ -5878,16 +5935,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_listtype vx_copy(final Object... vals) {
-      Type_listtype output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_listtype output = this;
       boolean ischanged = false;
-      Class_listtype val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_listtype value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_listtype work = new Class_listtype();
+        Core.Class_listtype work = new Core.Class_listtype();
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -5898,16 +5955,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_listtype;
+      Core.Type_any output = Core.e_listtype;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_listtype;
+      Core.Type_any output = Core.t_listtype;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "listtype", // name
         ":type", // extends
@@ -5920,12 +5980,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_listtype e_listtype = new Class_listtype();
-  public static final Type_listtype t_listtype = new Class_listtype();
+  public static final Core.Type_listtype e_listtype = new Core.Class_listtype();
+  public static final Core.Type_listtype t_listtype = new Core.Class_listtype();
 
   /**
    * type: locale
@@ -5933,10 +5994,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type locale)
    */
   public interface Type_locale extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
   }
 
   public static class Class_locale extends Core.Class_base implements Type_locale {
@@ -5950,7 +6007,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     @Override
     public Map<String, Core.Type_any> vx_map() {
       Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -5960,16 +6018,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_locale vx_copy(final Object... vals) {
-      Type_locale output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_locale output = this;
       boolean ischanged = false;
-      Class_locale val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_locale value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_locale work = new Class_locale();
+        Core.Class_locale work = new Core.Class_locale();
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -5980,16 +6038,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_locale;
+      Core.Type_any output = Core.e_locale;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_locale;
+      Core.Type_any output = Core.t_locale;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "locale", // name
         ":struct", // extends
@@ -6002,12 +6063,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_locale e_locale = new Class_locale();
-  public static final Type_locale t_locale = new Class_locale();
+  public static final Core.Type_locale e_locale = new Core.Class_locale();
+  public static final Core.Type_locale t_locale = new Core.Class_locale();
 
   /**
    * type: map
@@ -6015,10 +6077,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type map)
    */
   public interface Type_map extends Core.Type_any {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Core.Type_map vx_new_from_map(final Map<String, Core.Type_any> mapval);
     public Core.Type_any vx_any(final Core.Type_string key);
     public Map<String, Core.Type_any> vx_map();
@@ -6040,7 +6098,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Core.Type_boolean output = Core.c_false;
       if (false) {
       } else if (value instanceof Core.Type_any) {
-        Core.Type_any castval = (Core.Type_any)value;;
+        Core.Type_any castval = (Core.Type_any)value;
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -6074,13 +6132,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
-        Core.Type_any val = mapval.get(key);
+        Core.Type_any value = mapval.get(key);
         if (false) {
-        } else if (val instanceof Core.Type_any) {
-          Core.Type_any castval = (Core.Type_any)val;;
+        } else if (value instanceof Core.Type_any) {
+          Core.Type_any castval = (Core.Type_any)value;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/map", ":invalidvalue", val);
+          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/map", ":invalidvalue", value);
           msgblock = Core.vx_copy(msgblock, msg);
         }
       }
@@ -6098,15 +6156,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_map vx_copy(final Object... vals) {
-      Type_map output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_map output = this;
       boolean ischanged = false;
-      Class_map val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_map value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Map<String, Core.Type_any> mapval = new LinkedHashMap<String, Core.Type_any>(val.vx_map());
+      Map<String, Core.Type_any> mapval = new LinkedHashMap<String, Core.Type_any>(value.vx_map());
       Core.Type_msg msg = null;
       String key = "";
       Core.Type_any msgval = null;
@@ -6118,15 +6176,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (key.equals("")) {
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstring = (Core.Type_string)valsub;;
+            Core.Type_string valstring = (Core.Type_string)valsub;
             key = valstring.vx_string();
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             key = sval;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -6138,14 +6196,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.Type_any valany = null;
           if (false) {
           } else if (valsub instanceof Core.Type_any) {
-            Core.Type_any valallowed = (Core.Type_any)valsub;;
+            Core.Type_any valallowed = (Core.Type_any)valsub;
             valany = valallowed;
           } else if (valsub instanceof Core.Type_any) {
             valany = (Core.Type_any)valsub;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -6168,7 +6226,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_map work = new Class_map();
+        Core.Class_map work = new Core.Class_map();
         work.vx_p_map = Core.immutablemap(mapval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -6180,16 +6238,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_map;
+      Core.Type_any output = Core.e_map;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_map;
+      Core.Type_any output = Core.t_map;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "map", // name
         ":map", // extends
@@ -6202,12 +6263,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_map e_map = new Class_map();
-  public static final Type_map t_map = new Class_map();
+  public static final Core.Type_map e_map = new Core.Class_map();
+  public static final Core.Type_map t_map = new Core.Class_map();
 
   /**
    * type: maptype
@@ -6215,10 +6277,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type maptype)
    */
   public interface Type_maptype extends Core.Type_any {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
   }
 
   public static class Class_maptype extends Core.Class_base implements Type_maptype {
@@ -6230,16 +6288,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_maptype vx_copy(final Object... vals) {
-      Type_maptype output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_maptype output = this;
       boolean ischanged = false;
-      Class_maptype val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_maptype value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_maptype work = new Class_maptype();
+        Core.Class_maptype work = new Core.Class_maptype();
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -6250,16 +6308,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_maptype;
+      Core.Type_any output = Core.e_maptype;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_maptype;
+      Core.Type_any output = Core.t_maptype;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "maptype", // name
         ":type", // extends
@@ -6272,12 +6333,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_maptype e_maptype = new Class_maptype();
-  public static final Type_maptype t_maptype = new Class_maptype();
+  public static final Core.Type_maptype e_maptype = new Core.Class_maptype();
+  public static final Core.Type_maptype t_maptype = new Core.Class_maptype();
 
   /**
    * type: mempool
@@ -6285,10 +6347,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type mempool)
    */
   public interface Type_mempool extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public <T extends Core.Type_any> T vx_restore(final T generic_any_1);
     public void vx_recycle(final Core.Type_any addany);
     public void vx_recyclelist(final List<Core.Type_any> addlistany);
@@ -6373,7 +6431,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     public Map<String, Core.Type_any> vx_map() {
       Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":valuepool", this.valuepool());
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -6383,15 +6442,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_mempool vx_copy(final Object... vals) {
-      Type_mempool output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_mempool output = this;
       boolean ischanged = false;
-      Class_mempool val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_mempool value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Core.Type_value vx_p_valuepool = val.valuepool();
+      Core.Type_value vx_p_valuepool = value.valuepool();
       List<String> validkeys = new ArrayList<String>();
       validkeys.add(":valuepool");
       String key = "";
@@ -6402,22 +6461,22 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (key == "") {
+        } else if (key.equals("")) {
           boolean istestkey = false;
           String testkey = "";
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;;
+            Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             testkey = sval;
             istestkey = true;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              Core.Type_any valmsg = (Core.Type_any)valsub;
               msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -6443,13 +6502,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":valuepool":
             if (valsub == vx_p_valuepool) {
             } else if (valsub instanceof Core.Type_value) {
-              Core.Type_value valvaluepool = (Core.Type_value)valsub;;
+              Core.Type_value valvaluepool = (Core.Type_value)valsub;
               ischanged = true;
               vx_p_valuepool = valvaluepool;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -6472,7 +6531,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_mempool work = new Class_mempool();
+        Core.Class_mempool work = new Core.Class_mempool();
         work.vx_p_valuepool = vx_p_valuepool;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -6484,16 +6543,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_mempool;
+      Core.Type_any output = Core.e_mempool;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_mempool;
+      Core.Type_any output = Core.t_mempool;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "mempool", // name
         ":struct", // extends
@@ -6506,12 +6568,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_mempool e_mempool = new Class_mempool();
-  public static final Type_mempool t_mempool = new Class_mempool();
+  public static final Core.Type_mempool e_mempool = new Core.Class_mempool();
+  public static final Core.Type_mempool t_mempool = new Core.Class_mempool();
 
   /**
    * type: msg
@@ -6519,10 +6582,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type msg)
    */
   public interface Type_msg extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Core.Type_string code();
     public Core.Type_any detail();
     public Core.Type_string path();
@@ -6621,7 +6680,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       output.put(":path", this.path());
       output.put(":severity", this.severity());
       output.put(":text", this.text());
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -6631,27 +6691,27 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_msg vx_copy(final Object... vals) {
-      Type_msg output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_msg output = this;
       boolean ischanged = false;
-      Class_msg val = this;
+      Core.Class_msg value = this;
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Core.Type_string vx_p_code = val.code();
-      Core.Type_any vx_p_detail = val.detail();
-      Core.Type_string vx_p_path = val.path();
-      Core.Type_int vx_p_severity = val.severity();
-      Core.Type_string vx_p_text = val.text();
+      Core.Type_string vx_p_code = value.code();
+      Core.Type_any vx_p_detail = value.detail();
+      Core.Type_string vx_p_path = value.path();
+      Core.Type_int vx_p_severity = value.severity();
+      Core.Type_string vx_p_text = value.text();
       String key = "";
       for (Object valsub : vals) {
-        if (key == "") {
+        if (key.equals("")) {
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;;
+            Core.Type_string valstr = (Core.Type_string)valsub;
             key = valstr.vx_string();
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             key = sval;
           }
         } else {
@@ -6659,7 +6719,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":code":
             if (valsub == vx_p_code) {
             } else if (valsub instanceof Core.Type_string) {
-              Core.Type_string valcode = (Core.Type_string)valsub;;
+              Core.Type_string valcode = (Core.Type_string)valsub;
               ischanged = true;
               vx_p_code = valcode;
             } else if (valsub instanceof String) {
@@ -6670,7 +6730,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":detail":
             if (valsub == vx_p_detail) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valdetail = (Core.Type_any)valsub;;
+              Core.Type_any valdetail = (Core.Type_any)valsub;
               ischanged = true;
               vx_p_detail = valdetail;
             }
@@ -6678,7 +6738,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":path":
             if (valsub == vx_p_path) {
             } else if (valsub instanceof Core.Type_string) {
-              Core.Type_string valpath = (Core.Type_string)valsub;;
+              Core.Type_string valpath = (Core.Type_string)valsub;
               ischanged = true;
               vx_p_path = valpath;
             } else if (valsub instanceof String) {
@@ -6689,7 +6749,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":severity":
             if (valsub == vx_p_severity) {
             } else if (valsub instanceof Core.Type_int) {
-              Core.Type_int valseverity = (Core.Type_int)valsub;;
+              Core.Type_int valseverity = (Core.Type_int)valsub;
               ischanged = true;
               vx_p_severity = valseverity;
             } else if (valsub instanceof Integer) {
@@ -6700,7 +6760,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":text":
             if (valsub == vx_p_text) {
             } else if (valsub instanceof Core.Type_string) {
-              Core.Type_string valtext = (Core.Type_string)valsub;;
+              Core.Type_string valtext = (Core.Type_string)valsub;
               ischanged = true;
               vx_p_text = valtext;
             } else if (valsub instanceof String) {
@@ -6713,7 +6773,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged) {
-        Class_msg work = new Class_msg();
+        Core.Class_msg work = new Core.Class_msg();
         work.vx_p_code = vx_p_code;
         work.vx_p_detail = vx_p_detail;
         work.vx_p_path = vx_p_path;
@@ -6725,22 +6785,20 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_msgblock vx_msgblock() {
-      return Core.e_msgblock;
+    public Core.Type_any vx_empty() {
+      Core.Type_any output = Core.e_msg;
+      return output;
     }
 
     @Override
-    public Core.Type_any vx_empty() {
-      return e_msg;
-    }
-    @Override
     public Core.Type_any vx_type() {
-      return t_msg;
+      Core.Type_any output = Core.t_msg;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "msg", // name
         ":struct", // extends
@@ -6753,12 +6811,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_msg e_msg = new Class_msg();
-  public static final Type_msg t_msg = new Class_msg();
+  public static final Core.Type_msg e_msg = new Core.Class_msg();
+  public static final Core.Type_msg t_msg = new Core.Class_msg();
 
   /**
    * type: msgblock
@@ -6766,10 +6825,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type msgblock)
    */
   public interface Type_msgblock extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Core.Type_msglist msgs();
     public Core.Type_msgblocklist msgblocks();
   }
@@ -6818,7 +6873,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":msgs", this.msgs());
       output.put(":msgblocks", this.msgblocks());
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -6828,16 +6884,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_msgblock vx_copy(final Object... vals) {
-      Type_msgblock output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_msgblock output = this;
       boolean ischanged = false;
-      Class_msgblock val = this;
+      Core.Class_msgblock value = this;
       Core.Type_msgblock msgblock = this;
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Core.Type_msglist vx_p_msgs = val.msgs();
-      Core.Type_msgblocklist vx_p_msgblocks = val.msgblocks();
+      Core.Type_msglist vx_p_msgs = value.msgs();
+      Core.Type_msgblocklist vx_p_msgblocks = value.msgblocks();
       String key = "";
       Core.Type_msg msg;
       Core.Type_any msgval;
@@ -6862,13 +6918,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
             vx_p_msgs = Core.vx_copy(vx_p_msgs, valsub);
             ischanged = true;
           }
-        } else if (key == "") {
+        } else if (key.equals("")) {
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;;
+            Core.Type_string valstr = (Core.Type_string)valsub;
             key = valstr.vx_string();
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             key = sval;
           }
         } else {
@@ -6876,13 +6932,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":msgs":
             if (valsub == vx_p_msgs) {
             } else if (valsub instanceof Core.Type_msglist) {
-              Core.Type_msglist valmsgs = (Core.Type_msglist)valsub;;
+              Core.Type_msglist valmsgs = (Core.Type_msglist)valsub;
               ischanged = true;
               vx_p_msgs = valmsgs;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -6898,13 +6954,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":msgblocks":
             if (valsub == vx_p_msgblocks) {
             } else if (valsub instanceof Core.Type_msgblocklist) {
-              Core.Type_msgblocklist valmsgblocks = (Core.Type_msgblocklist)valsub;;
+              Core.Type_msgblocklist valmsgblocks = (Core.Type_msgblocklist)valsub;
               ischanged = true;
               vx_p_msgblocks = valmsgblocks;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -6925,7 +6981,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         if ((vx_p_msgs.vx_list().size() == 0) && (vx_p_msgblocks.vx_list().size() == 1)) {
           output = vx_p_msgblocks.vx_listmsgblock().get(0);
         } else {
-          Class_msgblock work = new Class_msgblock();
+          Core.Class_msgblock work = new Core.Class_msgblock();
           work.vx_p_msgs = vx_p_msgs;
           work.vx_p_msgblocks = vx_p_msgblocks;
           output = work;
@@ -6935,22 +6991,20 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_msgblock vx_msgblock() {
-      return Core.e_msgblock;
+    public Core.Type_any vx_empty() {
+      Core.Type_any output = Core.e_msgblock;
+      return output;
     }
 
     @Override
-    public Core.Type_any vx_empty() {
-      return e_msgblock;
-    }
-    @Override
     public Core.Type_any vx_type() {
-      return t_msgblock;
+      Core.Type_any output = Core.t_msgblock;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "msgblock", // name
         ":struct", // extends
@@ -6963,12 +7017,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_msgblock e_msgblock = new Class_msgblock();
-  public static final Type_msgblock t_msgblock = new Class_msgblock();
+  public static final Core.Type_msgblock e_msgblock = new Core.Class_msgblock();
+  public static final Core.Type_msgblock t_msgblock = new Core.Class_msgblock();
 
   /**
    * type: msgblocklist
@@ -6976,17 +7031,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type msgblocklist)
    */
   public interface Type_msgblocklist extends Core.Type_list {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public List<Core.Type_msgblock> vx_listmsgblock();
     public Core.Type_msgblock vx_msgblock(final Core.Type_int index);
   }
 
   public static class Class_msgblocklist extends Core.Class_base implements Type_msgblocklist {
 
-    public List<Core.Type_msgblock> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_msgblock>());
+    public List<Core.Type_msgblock> vx_p_list = Core.immutablelist(
+      new ArrayList<Core.Type_msgblock>()
+    );
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -7010,12 +7063,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public List<Core.Type_msgblock> vx_listmsgblock() {
-      return vx_p_list;
+      List<Core.Type_msgblock> output = this.vx_p_list;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
-      return this.vx_msgblock(index);
+      Core.Type_msgblock output = this.vx_msgblock(index);
+      return output;
     }
 
     @Override
@@ -7025,15 +7080,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_msgblocklist vx_copy(final Object... vals) {
-      Type_msgblocklist output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_msgblocklist output = this;
       boolean ischanged = false;
-      Class_msgblocklist val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_msgblocklist value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      List<Core.Type_msgblock> listval = new ArrayList<Core.Type_msgblock>(val.vx_listmsgblock());
+      List<Core.Type_msgblock> listval = new ArrayList<Core.Type_msgblock>(value.vx_listmsgblock());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msg) {
@@ -7042,21 +7097,21 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           ischanged = true;
           listval.add((Core.Type_msgblock)valsub);
         } else if (valsub instanceof Core.Type_msgblocklist) {
-          Core.Type_msgblocklist multi = (Core.Type_msgblocklist)valsub;;
+          Core.Type_msgblocklist multi = (Core.Type_msgblocklist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listmsgblock());
         } else if (valsub instanceof List<?>) {
-          List<?> listunknown = (List<?>)valsub;;
+          List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (false) {
             } else if (item instanceof Core.Type_msgblock) {
-              Core.Type_msgblock valitem = (Core.Type_msgblock)item;;
+              Core.Type_msgblock valitem = (Core.Type_msgblock)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/core/msgblocklist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
@@ -7065,7 +7120,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_msgblocklist work = new Class_msgblocklist();
+        Core.Class_msgblocklist work = new Core.Class_msgblocklist();
         work.vx_p_list = Core.immutablelist(listval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -7077,16 +7132,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_msgblocklist;
+      Core.Type_any output = Core.e_msgblocklist;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_msgblocklist;
+      Core.Type_any output = Core.t_msgblocklist;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "msgblocklist", // name
         ":list", // extends
@@ -7099,12 +7157,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_msgblocklist e_msgblocklist = new Class_msgblocklist();
-  public static final Type_msgblocklist t_msgblocklist = new Class_msgblocklist();
+  public static final Core.Type_msgblocklist e_msgblocklist = new Core.Class_msgblocklist();
+  public static final Core.Type_msgblocklist t_msgblocklist = new Core.Class_msgblocklist();
 
   /**
    * type: msglist
@@ -7112,17 +7171,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type msglist)
    */
   public interface Type_msglist extends Core.Type_list {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public List<Core.Type_msg> vx_listmsg();
     public Core.Type_msg vx_msg(final Core.Type_int index);
   }
 
   public static class Class_msglist extends Core.Class_base implements Type_msglist {
 
-    public List<Core.Type_msg> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_msg>());
+    public List<Core.Type_msg> vx_p_list = Core.immutablelist(
+      new ArrayList<Core.Type_msg>()
+    );
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -7146,12 +7203,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public List<Core.Type_msg> vx_listmsg() {
-      return vx_p_list;
+      List<Core.Type_msg> output = this.vx_p_list;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
-      return this.vx_msg(index);
+      Core.Type_msg output = this.vx_msg(index);
+      return output;
     }
 
     @Override
@@ -7161,15 +7220,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_msglist vx_copy(final Object... vals) {
-      Type_msglist output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_msglist output = this;
       boolean ischanged = false;
-      Class_msglist val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_msglist value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      List<Core.Type_msg> listval = new ArrayList<Core.Type_msg>(val.vx_listmsg());
+      List<Core.Type_msg> listval = new ArrayList<Core.Type_msg>(value.vx_listmsg());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -7178,21 +7237,21 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           ischanged = true;
           listval.add((Core.Type_msg)valsub);
         } else if (valsub instanceof Core.Type_msglist) {
-          Core.Type_msglist multi = (Core.Type_msglist)valsub;;
+          Core.Type_msglist multi = (Core.Type_msglist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listmsg());
         } else if (valsub instanceof List<?>) {
-          List<?> listunknown = (List<?>)valsub;;
+          List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (false) {
             } else if (item instanceof Core.Type_msg) {
-              Core.Type_msg valitem = (Core.Type_msg)item;;
+              Core.Type_msg valitem = (Core.Type_msg)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/core/msglist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
@@ -7201,7 +7260,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_msglist work = new Class_msglist();
+        Core.Class_msglist work = new Core.Class_msglist();
         work.vx_p_list = Core.immutablelist(listval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -7213,16 +7272,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_msglist;
+      Core.Type_any output = Core.e_msglist;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_msglist;
+      Core.Type_any output = Core.t_msglist;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "msglist", // name
         ":list", // extends
@@ -7235,12 +7297,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_msglist e_msglist = new Class_msglist();
-  public static final Type_msglist t_msglist = new Class_msglist();
+  public static final Core.Type_msglist e_msglist = new Core.Class_msglist();
+  public static final Core.Type_msglist t_msglist = new Core.Class_msglist();
 
   /**
    * type: none
@@ -7248,10 +7311,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type none)
    */
   public interface Type_none extends Core.Type_any {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
   }
 
   public static class Class_none extends Core.Class_base implements Type_none {
@@ -7263,16 +7322,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_none vx_copy(final Object... vals) {
-      Type_none output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_none output = this;
       boolean ischanged = false;
-      Class_none val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_none value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_none work = new Class_none();
+        Core.Class_none work = new Core.Class_none();
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -7283,16 +7342,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_none;
+      Core.Type_any output = Core.e_none;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_none;
+      Core.Type_any output = Core.t_none;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "none", // name
         "", // extends
@@ -7305,12 +7367,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_none e_none = new Class_none();
-  public static final Type_none t_none = new Class_none();
+  public static final Core.Type_none e_none = new Core.Class_none();
+  public static final Core.Type_none t_none = new Core.Class_none();
 
   /**
    * type: notype
@@ -7318,10 +7381,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type notype)
    */
   public interface Type_notype extends Core.Type_any {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
   }
 
   public static class Class_notype extends Core.Class_base implements Type_notype {
@@ -7333,16 +7392,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_notype vx_copy(final Object... vals) {
-      Type_notype output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_notype output = this;
       boolean ischanged = false;
-      Class_notype val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_notype value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_notype work = new Class_notype();
+        Core.Class_notype work = new Core.Class_notype();
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -7353,16 +7412,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_notype;
+      Core.Type_any output = Core.e_notype;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_notype;
+      Core.Type_any output = Core.t_notype;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "notype", // name
         "", // extends
@@ -7375,12 +7437,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_notype e_notype = new Class_notype();
-  public static final Type_notype t_notype = new Class_notype();
+  public static final Core.Type_notype e_notype = new Core.Class_notype();
+  public static final Core.Type_notype t_notype = new Core.Class_notype();
 
   /**
    * type: number
@@ -7388,10 +7451,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type number)
    */
   public interface Type_number extends Core.Type_any {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
   }
 
   public static class Class_number extends Core.Class_base implements Type_number {
@@ -7403,16 +7462,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_number vx_copy(final Object... vals) {
-      Type_number output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_number output = this;
       boolean ischanged = false;
-      Class_number val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_number value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_number work = new Class_number();
+        Core.Class_number work = new Core.Class_number();
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -7423,16 +7482,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_number;
+      Core.Type_any output = Core.e_number;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_number;
+      Core.Type_any output = Core.t_number;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "number", // name
         "", // extends
@@ -7445,12 +7507,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_number e_number = new Class_number();
-  public static final Type_number t_number = new Class_number();
+  public static final Core.Type_number e_number = new Core.Class_number();
+  public static final Core.Type_number t_number = new Core.Class_number();
 
   /**
    * type: numberlist
@@ -7458,17 +7521,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type numberlist)
    */
   public interface Type_numberlist extends Core.Type_list {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public List<Core.Type_number> vx_listnumber();
     public Core.Type_number vx_number(final Core.Type_int index);
   }
 
   public static class Class_numberlist extends Core.Class_base implements Type_numberlist {
 
-    public List<Core.Type_number> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_number>());
+    public List<Core.Type_number> vx_p_list = Core.immutablelist(
+      new ArrayList<Core.Type_number>()
+    );
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -7492,12 +7553,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public List<Core.Type_number> vx_listnumber() {
-      return vx_p_list;
+      List<Core.Type_number> output = this.vx_p_list;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
-      return this.vx_number(index);
+      Core.Type_number output = this.vx_number(index);
+      return output;
     }
 
     @Override
@@ -7507,15 +7570,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_numberlist vx_copy(final Object... vals) {
-      Type_numberlist output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_numberlist output = this;
       boolean ischanged = false;
-      Class_numberlist val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_numberlist value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      List<Core.Type_number> listval = new ArrayList<Core.Type_number>(val.vx_listnumber());
+      List<Core.Type_number> listval = new ArrayList<Core.Type_number>(value.vx_listnumber());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -7523,28 +7586,28 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_number) {
-          Core.Type_number allowsub = (Core.Type_number)valsub;;
+          Core.Type_number allowsub = (Core.Type_number)valsub;
           ischanged = true;
           listval.add(allowsub);
         } else if (valsub instanceof Core.Type_number) {
           ischanged = true;
           listval.add((Core.Type_number)valsub);
         } else if (valsub instanceof Core.Type_numberlist) {
-          Core.Type_numberlist multi = (Core.Type_numberlist)valsub;;
+          Core.Type_numberlist multi = (Core.Type_numberlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listnumber());
         } else if (valsub instanceof List<?>) {
-          List<?> listunknown = (List<?>)valsub;;
+          List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (false) {
             } else if (item instanceof Core.Type_number) {
-              Core.Type_number valitem = (Core.Type_number)item;;
+              Core.Type_number valitem = (Core.Type_number)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/core/numberlist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
@@ -7553,7 +7616,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_numberlist work = new Class_numberlist();
+        Core.Class_numberlist work = new Core.Class_numberlist();
         work.vx_p_list = Core.immutablelist(listval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -7565,16 +7628,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_numberlist;
+      Core.Type_any output = Core.e_numberlist;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_numberlist;
+      Core.Type_any output = Core.t_numberlist;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "numberlist", // name
         ":list", // extends
@@ -7587,12 +7653,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_numberlist e_numberlist = new Class_numberlist();
-  public static final Type_numberlist t_numberlist = new Class_numberlist();
+  public static final Core.Type_numberlist e_numberlist = new Core.Class_numberlist();
+  public static final Core.Type_numberlist t_numberlist = new Core.Class_numberlist();
 
   /**
    * type: numbermap
@@ -7600,10 +7667,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type numbermap)
    */
   public interface Type_numbermap extends Core.Type_map {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Map<String, Core.Type_number> vx_mapnumber();
     public Core.Type_number vx_number(final Core.Type_string key);
   }
@@ -7623,7 +7686,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Core.Type_boolean output = Core.c_false;
       if (false) {
       } else if (value instanceof Core.Type_number) {
-        Core.Type_number castval = (Core.Type_number)value;;
+        Core.Type_number castval = (Core.Type_number)value;
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -7652,13 +7715,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Map<String, Core.Type_number> vx_mapnumber() {
-      return vx_p_map;
+      Map<String, Core.Type_number> output = this.vx_p_map;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
-      return this.vx_number(key);
+      Core.Type_any output = this.vx_number(key);
+      return output;
     }
+
 
     @Override
     public Core.Type_map vx_new_from_map(final Map<String, Core.Type_any> mapval) {
@@ -7667,13 +7733,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Map<String, Core.Type_number> map = new LinkedHashMap<String, Core.Type_number>();
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
-        Core.Type_any val = mapval.get(key);
+        Core.Type_any value = mapval.get(key);
         if (false) {
-        } else if (val instanceof Core.Type_number) {
-          Core.Type_number castval = (Core.Type_number)val;;
+        } else if (value instanceof Core.Type_number) {
+          Core.Type_number castval = (Core.Type_number)value;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/numbermap", ":invalidvalue", val);
+          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/numbermap", ":invalidvalue", value);
           msgblock = Core.vx_copy(msgblock, msg);
         }
       }
@@ -7691,15 +7757,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_numbermap vx_copy(final Object... vals) {
-      Type_numbermap output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_numbermap output = this;
       boolean ischanged = false;
-      Class_numbermap val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_numbermap value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Map<String, Core.Type_number> mapval = new LinkedHashMap<String, Core.Type_number>(val.vx_mapnumber());
+      Map<String, Core.Type_number> mapval = new LinkedHashMap<String, Core.Type_number>(value.vx_mapnumber());
       Core.Type_msg msg = null;
       String key = "";
       Core.Type_any msgval = null;
@@ -7711,15 +7777,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (key.equals("")) {
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstring = (Core.Type_string)valsub;;
+            Core.Type_string valstring = (Core.Type_string)valsub;
             key = valstring.vx_string();
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             key = sval;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -7731,14 +7797,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.Type_number valany = null;
           if (false) {
           } else if (valsub instanceof Core.Type_number) {
-            Core.Type_number valallowed = (Core.Type_number)valsub;;
+            Core.Type_number valallowed = (Core.Type_number)valsub;
             valany = valallowed;
           } else if (valsub instanceof Core.Type_number) {
             valany = (Core.Type_number)valsub;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -7761,7 +7827,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_numbermap work = new Class_numbermap();
+        Core.Class_numbermap work = new Core.Class_numbermap();
         work.vx_p_map = Core.immutablemap(mapval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -7773,16 +7839,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_numbermap;
+      Core.Type_any output = Core.e_numbermap;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_numbermap;
+      Core.Type_any output = Core.t_numbermap;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "numbermap", // name
         ":map", // extends
@@ -7795,12 +7864,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_numbermap e_numbermap = new Class_numbermap();
-  public static final Type_numbermap t_numbermap = new Class_numbermap();
+  public static final Core.Type_numbermap e_numbermap = new Core.Class_numbermap();
+  public static final Core.Type_numbermap t_numbermap = new Core.Class_numbermap();
 
   /**
    * type: package
@@ -7808,10 +7878,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type package)
    */
   public interface Type_package extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Core.Type_string pkgname();
     public Core.Type_constmap constmap();
     public Core.Type_funcmap funcmap();
@@ -7908,7 +7974,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       output.put(":funcmap", this.funcmap());
       output.put(":typemap", this.typemap());
       output.put(":emptymap", this.emptymap());
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -7918,19 +7985,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_package vx_copy(final Object... vals) {
-      Type_package output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_package output = this;
       boolean ischanged = false;
-      Class_package val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_package value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Core.Type_string vx_p_pkgname = val.pkgname();
-      Core.Type_constmap vx_p_constmap = val.constmap();
-      Core.Type_funcmap vx_p_funcmap = val.funcmap();
-      Core.Type_typemap vx_p_typemap = val.typemap();
-      Core.Type_map vx_p_emptymap = val.emptymap();
+      Core.Type_string vx_p_pkgname = value.pkgname();
+      Core.Type_constmap vx_p_constmap = value.constmap();
+      Core.Type_funcmap vx_p_funcmap = value.funcmap();
+      Core.Type_typemap vx_p_typemap = value.typemap();
+      Core.Type_map vx_p_emptymap = value.emptymap();
       List<String> validkeys = new ArrayList<String>();
       validkeys.add(":pkgname");
       validkeys.add(":constmap");
@@ -7945,22 +8012,22 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (key == "") {
+        } else if (key.equals("")) {
           boolean istestkey = false;
           String testkey = "";
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;;
+            Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             testkey = sval;
             istestkey = true;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              Core.Type_any valmsg = (Core.Type_any)valsub;
               msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -7986,7 +8053,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":pkgname":
             if (valsub == vx_p_pkgname) {
             } else if (valsub instanceof Core.Type_string) {
-              Core.Type_string valpkgname = (Core.Type_string)valsub;;
+              Core.Type_string valpkgname = (Core.Type_string)valsub;
               ischanged = true;
               vx_p_pkgname = valpkgname;
             } else if (valsub instanceof String) {
@@ -7995,7 +8062,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -8011,13 +8078,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":constmap":
             if (valsub == vx_p_constmap) {
             } else if (valsub instanceof Core.Type_constmap) {
-              Core.Type_constmap valconstmap = (Core.Type_constmap)valsub;;
+              Core.Type_constmap valconstmap = (Core.Type_constmap)valsub;
               ischanged = true;
               vx_p_constmap = valconstmap;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -8033,13 +8100,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":funcmap":
             if (valsub == vx_p_funcmap) {
             } else if (valsub instanceof Core.Type_funcmap) {
-              Core.Type_funcmap valfuncmap = (Core.Type_funcmap)valsub;;
+              Core.Type_funcmap valfuncmap = (Core.Type_funcmap)valsub;
               ischanged = true;
               vx_p_funcmap = valfuncmap;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -8055,13 +8122,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":typemap":
             if (valsub == vx_p_typemap) {
             } else if (valsub instanceof Core.Type_typemap) {
-              Core.Type_typemap valtypemap = (Core.Type_typemap)valsub;;
+              Core.Type_typemap valtypemap = (Core.Type_typemap)valsub;
               ischanged = true;
               vx_p_typemap = valtypemap;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -8077,13 +8144,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":emptymap":
             if (valsub == vx_p_emptymap) {
             } else if (valsub instanceof Core.Type_map) {
-              Core.Type_map valemptymap = (Core.Type_map)valsub;;
+              Core.Type_map valemptymap = (Core.Type_map)valsub;
               ischanged = true;
               vx_p_emptymap = valemptymap;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -8106,7 +8173,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_package work = new Class_package();
+        Core.Class_package work = new Core.Class_package();
         work.vx_p_pkgname = vx_p_pkgname;
         work.vx_p_constmap = vx_p_constmap;
         work.vx_p_funcmap = vx_p_funcmap;
@@ -8122,16 +8189,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_package;
+      Core.Type_any output = Core.e_package;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_package;
+      Core.Type_any output = Core.t_package;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "package", // name
         ":struct", // extends
@@ -8144,22 +8214,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_package e_package = new Class_package();
-  public static final Type_package t_package = new Class_package();
+  public static final Core.Type_package e_package = new Core.Class_package();
+  public static final Core.Type_package t_package = new Core.Class_package();
 
   /**
    * type: packagemap
    * (type packagemap)
    */
   public interface Type_packagemap extends Core.Type_map {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Map<String, Core.Type_package> vx_mappackage();
     public Core.Type_package vx_package(final Core.Type_string key);
   }
@@ -8179,7 +8246,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Core.Type_boolean output = Core.c_false;
       if (false) {
       } else if (value instanceof Core.Type_package) {
-        Core.Type_package castval = (Core.Type_package)value;;
+        Core.Type_package castval = (Core.Type_package)value;
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -8208,13 +8275,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Map<String, Core.Type_package> vx_mappackage() {
-      return vx_p_map;
+      Map<String, Core.Type_package> output = this.vx_p_map;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
-      return this.vx_package(key);
+      Core.Type_any output = this.vx_package(key);
+      return output;
     }
+
 
     @Override
     public Core.Type_map vx_new_from_map(final Map<String, Core.Type_any> mapval) {
@@ -8223,13 +8293,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Map<String, Core.Type_package> map = new LinkedHashMap<String, Core.Type_package>();
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
-        Core.Type_any val = mapval.get(key);
+        Core.Type_any value = mapval.get(key);
         if (false) {
-        } else if (val instanceof Core.Type_package) {
-          Core.Type_package castval = (Core.Type_package)val;;
+        } else if (value instanceof Core.Type_package) {
+          Core.Type_package castval = (Core.Type_package)value;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/packagemap", ":invalidvalue", val);
+          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/packagemap", ":invalidvalue", value);
           msgblock = Core.vx_copy(msgblock, msg);
         }
       }
@@ -8247,15 +8317,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_packagemap vx_copy(final Object... vals) {
-      Type_packagemap output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_packagemap output = this;
       boolean ischanged = false;
-      Class_packagemap val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_packagemap value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Map<String, Core.Type_package> mapval = new LinkedHashMap<String, Core.Type_package>(val.vx_mappackage());
+      Map<String, Core.Type_package> mapval = new LinkedHashMap<String, Core.Type_package>(value.vx_mappackage());
       Core.Type_msg msg = null;
       String key = "";
       Core.Type_any msgval = null;
@@ -8267,15 +8337,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (key.equals("")) {
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstring = (Core.Type_string)valsub;;
+            Core.Type_string valstring = (Core.Type_string)valsub;
             key = valstring.vx_string();
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             key = sval;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -8287,14 +8357,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.Type_package valany = null;
           if (false) {
           } else if (valsub instanceof Core.Type_package) {
-            Core.Type_package valallowed = (Core.Type_package)valsub;;
+            Core.Type_package valallowed = (Core.Type_package)valsub;
             valany = valallowed;
           } else if (valsub instanceof Core.Type_package) {
             valany = (Core.Type_package)valsub;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -8317,7 +8387,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_packagemap work = new Class_packagemap();
+        Core.Class_packagemap work = new Core.Class_packagemap();
         work.vx_p_map = Core.immutablemap(mapval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -8329,16 +8399,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_packagemap;
+      Core.Type_any output = Core.e_packagemap;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_packagemap;
+      Core.Type_any output = Core.t_packagemap;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "packagemap", // name
         ":map", // extends
@@ -8351,12 +8424,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_packagemap e_packagemap = new Class_packagemap();
-  public static final Type_packagemap t_packagemap = new Class_packagemap();
+  public static final Core.Type_packagemap e_packagemap = new Core.Class_packagemap();
+  public static final Core.Type_packagemap t_packagemap = new Core.Class_packagemap();
 
   /**
    * type: permission
@@ -8364,10 +8438,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type permission)
    */
   public interface Type_permission extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Core.Type_string id();
   }
 
@@ -8400,7 +8470,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     public Map<String, Core.Type_any> vx_map() {
       Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":id", this.id());
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -8410,15 +8481,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_permission vx_copy(final Object... vals) {
-      Type_permission output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_permission output = this;
       boolean ischanged = false;
-      Class_permission val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_permission value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Core.Type_string vx_p_id = val.id();
+      Core.Type_string vx_p_id = value.id();
       List<String> validkeys = new ArrayList<String>();
       validkeys.add(":id");
       String key = "";
@@ -8429,22 +8500,22 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (key == "") {
+        } else if (key.equals("")) {
           boolean istestkey = false;
           String testkey = "";
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;;
+            Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             testkey = sval;
             istestkey = true;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              Core.Type_any valmsg = (Core.Type_any)valsub;
               msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -8470,7 +8541,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":id":
             if (valsub == vx_p_id) {
             } else if (valsub instanceof Core.Type_string) {
-              Core.Type_string valid = (Core.Type_string)valsub;;
+              Core.Type_string valid = (Core.Type_string)valsub;
               ischanged = true;
               vx_p_id = valid;
             } else if (valsub instanceof String) {
@@ -8479,7 +8550,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -8502,7 +8573,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_permission work = new Class_permission();
+        Core.Class_permission work = new Core.Class_permission();
         work.vx_p_id = vx_p_id;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -8514,16 +8585,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_permission;
+      Core.Type_any output = Core.e_permission;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_permission;
+      Core.Type_any output = Core.t_permission;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "permission", // name
         ":struct", // extends
@@ -8536,12 +8610,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_permission e_permission = new Class_permission();
-  public static final Type_permission t_permission = new Class_permission();
+  public static final Core.Type_permission e_permission = new Core.Class_permission();
+  public static final Core.Type_permission t_permission = new Core.Class_permission();
 
   /**
    * type: permissionlist
@@ -8549,17 +8624,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type permissionlist)
    */
   public interface Type_permissionlist extends Core.Type_list {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public List<Core.Type_permission> vx_listpermission();
     public Core.Type_permission vx_permission(final Core.Type_int index);
   }
 
   public static class Class_permissionlist extends Core.Class_base implements Type_permissionlist {
 
-    public List<Core.Type_permission> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_permission>());
+    public List<Core.Type_permission> vx_p_list = Core.immutablelist(
+      new ArrayList<Core.Type_permission>()
+    );
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -8583,12 +8656,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public List<Core.Type_permission> vx_listpermission() {
-      return vx_p_list;
+      List<Core.Type_permission> output = this.vx_p_list;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
-      return this.vx_permission(index);
+      Core.Type_permission output = this.vx_permission(index);
+      return output;
     }
 
     @Override
@@ -8598,15 +8673,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_permissionlist vx_copy(final Object... vals) {
-      Type_permissionlist output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_permissionlist output = this;
       boolean ischanged = false;
-      Class_permissionlist val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_permissionlist value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      List<Core.Type_permission> listval = new ArrayList<Core.Type_permission>(val.vx_listpermission());
+      List<Core.Type_permission> listval = new ArrayList<Core.Type_permission>(value.vx_listpermission());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -8614,28 +8689,28 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_permission) {
-          Core.Type_permission allowsub = (Core.Type_permission)valsub;;
+          Core.Type_permission allowsub = (Core.Type_permission)valsub;
           ischanged = true;
           listval.add(allowsub);
         } else if (valsub instanceof Core.Type_permission) {
           ischanged = true;
           listval.add((Core.Type_permission)valsub);
         } else if (valsub instanceof Core.Type_permissionlist) {
-          Core.Type_permissionlist multi = (Core.Type_permissionlist)valsub;;
+          Core.Type_permissionlist multi = (Core.Type_permissionlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listpermission());
         } else if (valsub instanceof List<?>) {
-          List<?> listunknown = (List<?>)valsub;;
+          List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (false) {
             } else if (item instanceof Core.Type_permission) {
-              Core.Type_permission valitem = (Core.Type_permission)item;;
+              Core.Type_permission valitem = (Core.Type_permission)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/core/permissionlist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
@@ -8644,7 +8719,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_permissionlist work = new Class_permissionlist();
+        Core.Class_permissionlist work = new Core.Class_permissionlist();
         work.vx_p_list = Core.immutablelist(listval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -8656,16 +8731,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_permissionlist;
+      Core.Type_any output = Core.e_permissionlist;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_permissionlist;
+      Core.Type_any output = Core.t_permissionlist;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "permissionlist", // name
         ":list", // extends
@@ -8678,12 +8756,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_permissionlist e_permissionlist = new Class_permissionlist();
-  public static final Type_permissionlist t_permissionlist = new Class_permissionlist();
+  public static final Core.Type_permissionlist e_permissionlist = new Core.Class_permissionlist();
+  public static final Core.Type_permissionlist t_permissionlist = new Core.Class_permissionlist();
 
   /**
    * type: permissionmap
@@ -8691,10 +8770,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type permissionmap)
    */
   public interface Type_permissionmap extends Core.Type_map {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Map<String, Core.Type_permission> vx_mappermission();
     public Core.Type_permission vx_permission(final Core.Type_string key);
   }
@@ -8714,7 +8789,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Core.Type_boolean output = Core.c_false;
       if (false) {
       } else if (value instanceof Core.Type_permission) {
-        Core.Type_permission castval = (Core.Type_permission)value;;
+        Core.Type_permission castval = (Core.Type_permission)value;
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -8743,13 +8818,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Map<String, Core.Type_permission> vx_mappermission() {
-      return vx_p_map;
+      Map<String, Core.Type_permission> output = this.vx_p_map;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
-      return this.vx_permission(key);
+      Core.Type_any output = this.vx_permission(key);
+      return output;
     }
+
 
     @Override
     public Core.Type_map vx_new_from_map(final Map<String, Core.Type_any> mapval) {
@@ -8758,13 +8836,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Map<String, Core.Type_permission> map = new LinkedHashMap<String, Core.Type_permission>();
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
-        Core.Type_any val = mapval.get(key);
+        Core.Type_any value = mapval.get(key);
         if (false) {
-        } else if (val instanceof Core.Type_permission) {
-          Core.Type_permission castval = (Core.Type_permission)val;;
+        } else if (value instanceof Core.Type_permission) {
+          Core.Type_permission castval = (Core.Type_permission)value;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/permissionmap", ":invalidvalue", val);
+          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/permissionmap", ":invalidvalue", value);
           msgblock = Core.vx_copy(msgblock, msg);
         }
       }
@@ -8782,15 +8860,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_permissionmap vx_copy(final Object... vals) {
-      Type_permissionmap output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_permissionmap output = this;
       boolean ischanged = false;
-      Class_permissionmap val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_permissionmap value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Map<String, Core.Type_permission> mapval = new LinkedHashMap<String, Core.Type_permission>(val.vx_mappermission());
+      Map<String, Core.Type_permission> mapval = new LinkedHashMap<String, Core.Type_permission>(value.vx_mappermission());
       Core.Type_msg msg = null;
       String key = "";
       Core.Type_any msgval = null;
@@ -8802,15 +8880,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (key.equals("")) {
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstring = (Core.Type_string)valsub;;
+            Core.Type_string valstring = (Core.Type_string)valsub;
             key = valstring.vx_string();
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             key = sval;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -8822,14 +8900,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.Type_permission valany = null;
           if (false) {
           } else if (valsub instanceof Core.Type_permission) {
-            Core.Type_permission valallowed = (Core.Type_permission)valsub;;
+            Core.Type_permission valallowed = (Core.Type_permission)valsub;
             valany = valallowed;
           } else if (valsub instanceof Core.Type_permission) {
             valany = (Core.Type_permission)valsub;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -8852,7 +8930,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_permissionmap work = new Class_permissionmap();
+        Core.Class_permissionmap work = new Core.Class_permissionmap();
         work.vx_p_map = Core.immutablemap(mapval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -8864,16 +8942,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_permissionmap;
+      Core.Type_any output = Core.e_permissionmap;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_permissionmap;
+      Core.Type_any output = Core.t_permissionmap;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "permissionmap", // name
         ":map", // extends
@@ -8886,12 +8967,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_permissionmap e_permissionmap = new Class_permissionmap();
-  public static final Type_permissionmap t_permissionmap = new Class_permissionmap();
+  public static final Core.Type_permissionmap e_permissionmap = new Core.Class_permissionmap();
+  public static final Core.Type_permissionmap t_permissionmap = new Core.Class_permissionmap();
 
   /**
    * type: project
@@ -8899,10 +8981,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type project)
    */
   public interface Type_project extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Core.Type_packagemap packagemap();
   }
 
@@ -8935,7 +9013,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     public Map<String, Core.Type_any> vx_map() {
       Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":packagemap", this.packagemap());
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -8945,15 +9024,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_project vx_copy(final Object... vals) {
-      Type_project output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_project output = this;
       boolean ischanged = false;
-      Class_project val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_project value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Core.Type_packagemap vx_p_packagemap = val.packagemap();
+      Core.Type_packagemap vx_p_packagemap = value.packagemap();
       List<String> validkeys = new ArrayList<String>();
       validkeys.add(":packagemap");
       String key = "";
@@ -8964,22 +9043,22 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (key == "") {
+        } else if (key.equals("")) {
           boolean istestkey = false;
           String testkey = "";
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;;
+            Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             testkey = sval;
             istestkey = true;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              Core.Type_any valmsg = (Core.Type_any)valsub;
               msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -9005,13 +9084,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":packagemap":
             if (valsub == vx_p_packagemap) {
             } else if (valsub instanceof Core.Type_packagemap) {
-              Core.Type_packagemap valpackagemap = (Core.Type_packagemap)valsub;;
+              Core.Type_packagemap valpackagemap = (Core.Type_packagemap)valsub;
               ischanged = true;
               vx_p_packagemap = valpackagemap;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -9034,7 +9113,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_project work = new Class_project();
+        Core.Class_project work = new Core.Class_project();
         work.vx_p_packagemap = vx_p_packagemap;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -9046,16 +9125,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_project;
+      Core.Type_any output = Core.e_project;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_project;
+      Core.Type_any output = Core.t_project;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "project", // name
         ":struct", // extends
@@ -9068,12 +9150,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_project e_project = new Class_project();
-  public static final Type_project t_project = new Class_project();
+  public static final Core.Type_project e_project = new Core.Class_project();
+  public static final Core.Type_project t_project = new Core.Class_project();
 
   /**
    * type: security
@@ -9081,10 +9164,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type security)
    */
   public interface Type_security extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Core.Type_funclist allowfuncs();
     public Core.Type_permissionlist permissions();
     public Core.Type_permissionmap permissionmap();
@@ -9149,7 +9228,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       output.put(":allowfuncs", this.allowfuncs());
       output.put(":permissions", this.permissions());
       output.put(":permissionmap", this.permissionmap());
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -9159,17 +9239,17 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_security vx_copy(final Object... vals) {
-      Type_security output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_security output = this;
       boolean ischanged = false;
-      Class_security val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_security value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Core.Type_funclist vx_p_allowfuncs = val.allowfuncs();
-      Core.Type_permissionlist vx_p_permissions = val.permissions();
-      Core.Type_permissionmap vx_p_permissionmap = val.permissionmap();
+      Core.Type_funclist vx_p_allowfuncs = value.allowfuncs();
+      Core.Type_permissionlist vx_p_permissions = value.permissions();
+      Core.Type_permissionmap vx_p_permissionmap = value.permissionmap();
       List<String> validkeys = new ArrayList<String>();
       validkeys.add(":allowfuncs");
       validkeys.add(":permissions");
@@ -9182,22 +9262,22 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (key == "") {
+        } else if (key.equals("")) {
           boolean istestkey = false;
           String testkey = "";
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;;
+            Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             testkey = sval;
             istestkey = true;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              Core.Type_any valmsg = (Core.Type_any)valsub;
               msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -9223,13 +9303,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":allowfuncs":
             if (valsub == vx_p_allowfuncs) {
             } else if (valsub instanceof Core.Type_funclist) {
-              Core.Type_funclist valallowfuncs = (Core.Type_funclist)valsub;;
+              Core.Type_funclist valallowfuncs = (Core.Type_funclist)valsub;
               ischanged = true;
               vx_p_allowfuncs = valallowfuncs;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -9245,13 +9325,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":permissions":
             if (valsub == vx_p_permissions) {
             } else if (valsub instanceof Core.Type_permissionlist) {
-              Core.Type_permissionlist valpermissions = (Core.Type_permissionlist)valsub;;
+              Core.Type_permissionlist valpermissions = (Core.Type_permissionlist)valsub;
               ischanged = true;
               vx_p_permissions = valpermissions;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -9267,13 +9347,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":permissionmap":
             if (valsub == vx_p_permissionmap) {
             } else if (valsub instanceof Core.Type_permissionmap) {
-              Core.Type_permissionmap valpermissionmap = (Core.Type_permissionmap)valsub;;
+              Core.Type_permissionmap valpermissionmap = (Core.Type_permissionmap)valsub;
               ischanged = true;
               vx_p_permissionmap = valpermissionmap;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -9296,7 +9376,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_security work = new Class_security();
+        Core.Class_security work = new Core.Class_security();
         work.vx_p_allowfuncs = vx_p_allowfuncs;
         work.vx_p_permissions = vx_p_permissions;
         work.vx_p_permissionmap = vx_p_permissionmap;
@@ -9310,16 +9390,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_security;
+      Core.Type_any output = Core.e_security;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_security;
+      Core.Type_any output = Core.t_security;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "security", // name
         ":struct", // extends
@@ -9332,12 +9415,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_security e_security = new Class_security();
-  public static final Type_security t_security = new Class_security();
+  public static final Core.Type_security e_security = new Core.Class_security();
+  public static final Core.Type_security t_security = new Core.Class_security();
 
   /**
    * type: session
@@ -9345,10 +9429,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type session)
    */
   public interface Type_session extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Core.Type_user user();
     public Core.Type_connectlist connectlist();
     public Core.Type_connectmap connectmap();
@@ -9461,7 +9541,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       output.put(":locale", this.locale());
       output.put(":translation", this.translation());
       output.put(":translationmap", this.translationmap());
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -9471,20 +9552,20 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_session vx_copy(final Object... vals) {
-      Type_session output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_session output = this;
       boolean ischanged = false;
-      Class_session val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_session value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Core.Type_user vx_p_user = val.user();
-      Core.Type_connectlist vx_p_connectlist = val.connectlist();
-      Core.Type_connectmap vx_p_connectmap = val.connectmap();
-      Core.Type_locale vx_p_locale = val.locale();
-      Core.Type_translation vx_p_translation = val.translation();
-      Core.Type_translationmap vx_p_translationmap = val.translationmap();
+      Core.Type_user vx_p_user = value.user();
+      Core.Type_connectlist vx_p_connectlist = value.connectlist();
+      Core.Type_connectmap vx_p_connectmap = value.connectmap();
+      Core.Type_locale vx_p_locale = value.locale();
+      Core.Type_translation vx_p_translation = value.translation();
+      Core.Type_translationmap vx_p_translationmap = value.translationmap();
       List<String> validkeys = new ArrayList<String>();
       validkeys.add(":user");
       validkeys.add(":connectlist");
@@ -9500,22 +9581,22 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (key == "") {
+        } else if (key.equals("")) {
           boolean istestkey = false;
           String testkey = "";
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;;
+            Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             testkey = sval;
             istestkey = true;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              Core.Type_any valmsg = (Core.Type_any)valsub;
               msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -9541,13 +9622,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":user":
             if (valsub == vx_p_user) {
             } else if (valsub instanceof Core.Type_user) {
-              Core.Type_user valuser = (Core.Type_user)valsub;;
+              Core.Type_user valuser = (Core.Type_user)valsub;
               ischanged = true;
               vx_p_user = valuser;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -9563,13 +9644,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":connectlist":
             if (valsub == vx_p_connectlist) {
             } else if (valsub instanceof Core.Type_connectlist) {
-              Core.Type_connectlist valconnectlist = (Core.Type_connectlist)valsub;;
+              Core.Type_connectlist valconnectlist = (Core.Type_connectlist)valsub;
               ischanged = true;
               vx_p_connectlist = valconnectlist;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -9585,13 +9666,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":connectmap":
             if (valsub == vx_p_connectmap) {
             } else if (valsub instanceof Core.Type_connectmap) {
-              Core.Type_connectmap valconnectmap = (Core.Type_connectmap)valsub;;
+              Core.Type_connectmap valconnectmap = (Core.Type_connectmap)valsub;
               ischanged = true;
               vx_p_connectmap = valconnectmap;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -9607,13 +9688,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":locale":
             if (valsub == vx_p_locale) {
             } else if (valsub instanceof Core.Type_locale) {
-              Core.Type_locale vallocale = (Core.Type_locale)valsub;;
+              Core.Type_locale vallocale = (Core.Type_locale)valsub;
               ischanged = true;
               vx_p_locale = vallocale;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -9629,13 +9710,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":translation":
             if (valsub == vx_p_translation) {
             } else if (valsub instanceof Core.Type_translation) {
-              Core.Type_translation valtranslation = (Core.Type_translation)valsub;;
+              Core.Type_translation valtranslation = (Core.Type_translation)valsub;
               ischanged = true;
               vx_p_translation = valtranslation;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -9651,13 +9732,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":translationmap":
             if (valsub == vx_p_translationmap) {
             } else if (valsub instanceof Core.Type_translationmap) {
-              Core.Type_translationmap valtranslationmap = (Core.Type_translationmap)valsub;;
+              Core.Type_translationmap valtranslationmap = (Core.Type_translationmap)valsub;
               ischanged = true;
               vx_p_translationmap = valtranslationmap;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -9680,7 +9761,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_session work = new Class_session();
+        Core.Class_session work = new Core.Class_session();
         work.vx_p_user = vx_p_user;
         work.vx_p_connectlist = vx_p_connectlist;
         work.vx_p_connectmap = vx_p_connectmap;
@@ -9697,16 +9778,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_session;
+      Core.Type_any output = Core.e_session;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_session;
+      Core.Type_any output = Core.t_session;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "session", // name
         ":struct", // extends
@@ -9719,12 +9803,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_session e_session = new Class_session();
-  public static final Type_session t_session = new Class_session();
+  public static final Core.Type_session e_session = new Core.Class_session();
+  public static final Core.Type_session t_session = new Core.Class_session();
 
   /**
    * type: setting
@@ -9732,10 +9817,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type setting)
    */
   public interface Type_setting extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Core.Type_stringmap pathmap();
   }
 
@@ -9768,7 +9849,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     public Map<String, Core.Type_any> vx_map() {
       Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":pathmap", this.pathmap());
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -9778,15 +9860,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_setting vx_copy(final Object... vals) {
-      Type_setting output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_setting output = this;
       boolean ischanged = false;
-      Class_setting val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_setting value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Core.Type_stringmap vx_p_pathmap = val.pathmap();
+      Core.Type_stringmap vx_p_pathmap = value.pathmap();
       List<String> validkeys = new ArrayList<String>();
       validkeys.add(":pathmap");
       String key = "";
@@ -9797,22 +9879,22 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (key == "") {
+        } else if (key.equals("")) {
           boolean istestkey = false;
           String testkey = "";
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;;
+            Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             testkey = sval;
             istestkey = true;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              Core.Type_any valmsg = (Core.Type_any)valsub;
               msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -9838,13 +9920,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":pathmap":
             if (valsub == vx_p_pathmap) {
             } else if (valsub instanceof Core.Type_stringmap) {
-              Core.Type_stringmap valpathmap = (Core.Type_stringmap)valsub;;
+              Core.Type_stringmap valpathmap = (Core.Type_stringmap)valsub;
               ischanged = true;
               vx_p_pathmap = valpathmap;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -9867,7 +9949,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_setting work = new Class_setting();
+        Core.Class_setting work = new Core.Class_setting();
         work.vx_p_pathmap = vx_p_pathmap;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -9879,16 +9961,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_setting;
+      Core.Type_any output = Core.e_setting;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_setting;
+      Core.Type_any output = Core.t_setting;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "setting", // name
         ":struct", // extends
@@ -9901,12 +9986,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_setting e_setting = new Class_setting();
-  public static final Type_setting t_setting = new Class_setting();
+  public static final Core.Type_setting e_setting = new Core.Class_setting();
+  public static final Core.Type_setting t_setting = new Core.Class_setting();
 
   /**
    * type: state
@@ -9914,10 +10000,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type state)
    */
   public interface Type_state extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Core.Type_statelistenermap statelistenermap();
   }
 
@@ -9950,7 +10032,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     public Map<String, Core.Type_any> vx_map() {
       Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":statelistenermap", this.statelistenermap());
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -9960,15 +10043,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_state vx_copy(final Object... vals) {
-      Type_state output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_state output = this;
       boolean ischanged = false;
-      Class_state val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_state value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Core.Type_statelistenermap vx_p_statelistenermap = val.statelistenermap();
+      Core.Type_statelistenermap vx_p_statelistenermap = value.statelistenermap();
       List<String> validkeys = new ArrayList<String>();
       validkeys.add(":statelistenermap");
       String key = "";
@@ -9979,22 +10062,22 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (key == "") {
+        } else if (key.equals("")) {
           boolean istestkey = false;
           String testkey = "";
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;;
+            Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             testkey = sval;
             istestkey = true;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              Core.Type_any valmsg = (Core.Type_any)valsub;
               msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -10020,13 +10103,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":statelistenermap":
             if (valsub == vx_p_statelistenermap) {
             } else if (valsub instanceof Core.Type_statelistenermap) {
-              Core.Type_statelistenermap valstatelistenermap = (Core.Type_statelistenermap)valsub;;
+              Core.Type_statelistenermap valstatelistenermap = (Core.Type_statelistenermap)valsub;
               ischanged = true;
               vx_p_statelistenermap = valstatelistenermap;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -10049,7 +10132,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_state work = new Class_state();
+        Core.Class_state work = new Core.Class_state();
         work.vx_p_statelistenermap = vx_p_statelistenermap;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -10061,16 +10144,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_state;
+      Core.Type_any output = Core.e_state;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_state;
+      Core.Type_any output = Core.t_state;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "state", // name
         ":struct", // extends
@@ -10083,22 +10169,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_state e_state = new Class_state();
-  public static final Type_state t_state = new Class_state();
+  public static final Core.Type_state e_state = new Core.Class_state();
+  public static final Core.Type_state t_state = new Core.Class_state();
 
   /**
    * type: statelistener
    * (type statelistener)
    */
   public interface Type_statelistener extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Core.Type_string name();
     public Core.Type_any value();
     public Core.Func_boolean_from_none fn_boolean();
@@ -10163,7 +10246,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       output.put(":name", this.name());
       output.put(":value", this.value());
       output.put(":fn-boolean", this.fn_boolean());
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -10173,17 +10257,17 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_statelistener vx_copy(final Object... vals) {
-      Type_statelistener output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_statelistener output = this;
       boolean ischanged = false;
-      Class_statelistener val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_statelistener value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Core.Type_string vx_p_name = val.name();
-      Core.Type_any vx_p_value = val.value();
-      Core.Func_boolean_from_none vx_p_fn_boolean = val.fn_boolean();
+      Core.Type_string vx_p_name = value.name();
+      Core.Type_any vx_p_value = value.value();
+      Core.Func_boolean_from_none vx_p_fn_boolean = value.fn_boolean();
       List<String> validkeys = new ArrayList<String>();
       validkeys.add(":name");
       validkeys.add(":value");
@@ -10196,22 +10280,22 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (key == "") {
+        } else if (key.equals("")) {
           boolean istestkey = false;
           String testkey = "";
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;;
+            Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             testkey = sval;
             istestkey = true;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              Core.Type_any valmsg = (Core.Type_any)valsub;
               msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -10237,7 +10321,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":name":
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
-              Core.Type_string valname = (Core.Type_string)valsub;;
+              Core.Type_string valname = (Core.Type_string)valsub;
               ischanged = true;
               vx_p_name = valname;
             } else if (valsub instanceof String) {
@@ -10246,7 +10330,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -10262,13 +10346,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":value":
             if (valsub == vx_p_value) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valvalue = (Core.Type_any)valsub;;
+              Core.Type_any valvalue = (Core.Type_any)valsub;
               ischanged = true;
               vx_p_value = valvalue;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -10284,13 +10368,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":fn-boolean":
             if (valsub == vx_p_fn_boolean) {
             } else if (valsub instanceof Core.Func_boolean_from_none) {
-              Core.Func_boolean_from_none valfn_boolean = (Core.Func_boolean_from_none)valsub;;
+              Core.Func_boolean_from_none valfn_boolean = (Core.Func_boolean_from_none)valsub;
               ischanged = true;
               vx_p_fn_boolean = valfn_boolean;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -10313,7 +10397,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_statelistener work = new Class_statelistener();
+        Core.Class_statelistener work = new Core.Class_statelistener();
         work.vx_p_name = vx_p_name;
         work.vx_p_value = vx_p_value;
         work.vx_p_fn_boolean = vx_p_fn_boolean;
@@ -10327,16 +10411,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_statelistener;
+      Core.Type_any output = Core.e_statelistener;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_statelistener;
+      Core.Type_any output = Core.t_statelistener;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "statelistener", // name
         ":struct", // extends
@@ -10349,12 +10436,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_statelistener e_statelistener = new Class_statelistener();
-  public static final Type_statelistener t_statelistener = new Class_statelistener();
+  public static final Core.Type_statelistener e_statelistener = new Core.Class_statelistener();
+  public static final Core.Type_statelistener t_statelistener = new Core.Class_statelistener();
 
   /**
    * type: statelistenermap
@@ -10362,10 +10450,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type statelistenermap)
    */
   public interface Type_statelistenermap extends Core.Type_map {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Map<String, Core.Type_statelistener> vx_mapstatelistener();
     public Core.Type_statelistener vx_statelistener(final Core.Type_string key);
   }
@@ -10385,7 +10469,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Core.Type_boolean output = Core.c_false;
       if (false) {
       } else if (value instanceof Core.Type_statelistener) {
-        Core.Type_statelistener castval = (Core.Type_statelistener)value;;
+        Core.Type_statelistener castval = (Core.Type_statelistener)value;
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -10414,13 +10498,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Map<String, Core.Type_statelistener> vx_mapstatelistener() {
-      return vx_p_map;
+      Map<String, Core.Type_statelistener> output = this.vx_p_map;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
-      return this.vx_statelistener(key);
+      Core.Type_any output = this.vx_statelistener(key);
+      return output;
     }
+
 
     @Override
     public Core.Type_map vx_new_from_map(final Map<String, Core.Type_any> mapval) {
@@ -10429,13 +10516,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Map<String, Core.Type_statelistener> map = new LinkedHashMap<String, Core.Type_statelistener>();
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
-        Core.Type_any val = mapval.get(key);
+        Core.Type_any value = mapval.get(key);
         if (false) {
-        } else if (val instanceof Core.Type_statelistener) {
-          Core.Type_statelistener castval = (Core.Type_statelistener)val;;
+        } else if (value instanceof Core.Type_statelistener) {
+          Core.Type_statelistener castval = (Core.Type_statelistener)value;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/statelistenermap", ":invalidvalue", val);
+          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/statelistenermap", ":invalidvalue", value);
           msgblock = Core.vx_copy(msgblock, msg);
         }
       }
@@ -10453,15 +10540,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_statelistenermap vx_copy(final Object... vals) {
-      Type_statelistenermap output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_statelistenermap output = this;
       boolean ischanged = false;
-      Class_statelistenermap val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_statelistenermap value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Map<String, Core.Type_statelistener> mapval = new LinkedHashMap<String, Core.Type_statelistener>(val.vx_mapstatelistener());
+      Map<String, Core.Type_statelistener> mapval = new LinkedHashMap<String, Core.Type_statelistener>(value.vx_mapstatelistener());
       Core.Type_msg msg = null;
       String key = "";
       Core.Type_any msgval = null;
@@ -10473,15 +10560,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (key.equals("")) {
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstring = (Core.Type_string)valsub;;
+            Core.Type_string valstring = (Core.Type_string)valsub;
             key = valstring.vx_string();
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             key = sval;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -10493,14 +10580,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.Type_statelistener valany = null;
           if (false) {
           } else if (valsub instanceof Core.Type_statelistener) {
-            Core.Type_statelistener valallowed = (Core.Type_statelistener)valsub;;
+            Core.Type_statelistener valallowed = (Core.Type_statelistener)valsub;
             valany = valallowed;
           } else if (valsub instanceof Core.Type_statelistener) {
             valany = (Core.Type_statelistener)valsub;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -10523,7 +10610,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_statelistenermap work = new Class_statelistenermap();
+        Core.Class_statelistenermap work = new Core.Class_statelistenermap();
         work.vx_p_map = Core.immutablemap(mapval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -10535,16 +10622,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_statelistenermap;
+      Core.Type_any output = Core.e_statelistenermap;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_statelistenermap;
+      Core.Type_any output = Core.t_statelistenermap;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "statelistenermap", // name
         ":map", // extends
@@ -10557,12 +10647,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_statelistenermap e_statelistenermap = new Class_statelistenermap();
-  public static final Type_statelistenermap t_statelistenermap = new Class_statelistenermap();
+  public static final Core.Type_statelistenermap e_statelistenermap = new Core.Class_statelistenermap();
+  public static final Core.Type_statelistenermap t_statelistenermap = new Core.Class_statelistenermap();
 
   /**
    * type: string
@@ -10570,10 +10661,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type string)
    */
   public interface Type_string extends Core.Type_any {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public String vx_string();
   }
 
@@ -10593,15 +10680,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_string vx_copy(final Object... vals) {
-      Type_string output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_string output = this;
       boolean ischanged = false;
-      Class_string val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_string value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      StringBuilder sb = new StringBuilder(val.vx_string());
+      StringBuilder sb = new StringBuilder(value.vx_string());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -10609,7 +10696,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_string) {
-          Core.Type_string valstring = (Core.Type_string)valsub;;
+          Core.Type_string valstring = (Core.Type_string)valsub;
           String ssub = valstring.vx_string();
           if (ssub.equals("")) {
           } else {
@@ -10617,34 +10704,34 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
             sb.append(ssub);
           }
         } else if (valsub instanceof Core.Type_int) {
-          Core.Type_int valint = (Core.Type_int)valsub;;
+          Core.Type_int valint = (Core.Type_int)valsub;
           ischanged = true;
           sb.append(valint.vx_int());
         } else if (valsub instanceof Core.Type_float) {
-          Core.Type_float valfloat = (Core.Type_float)valsub;;
+          Core.Type_float valfloat = (Core.Type_float)valsub;
           ischanged = true;
           sb.append(valfloat.vx_float());
         } else if (valsub instanceof Core.Type_decimal) {
-          Core.Type_decimal valdecimal = (Core.Type_decimal)valsub;;
+          Core.Type_decimal valdecimal = (Core.Type_decimal)valsub;
           ischanged = true;
           sb.append(valdecimal.vx_string());
         } else if (valsub instanceof String) {
-          String sval = (String)valsub;;
+          String sval = (String)valsub;
           if (sval.equals("")) {
           } else {
             ischanged = true;
             sb.append(sval);
           }
         } else if (valsub instanceof Integer) {
-          Integer ival = (Integer)valsub;;
+          Integer ival = (Integer)valsub;
           ischanged = true;
           sb.append(ival);
         } else if (valsub instanceof Float) {
-          Float fval = (Float)valsub;;
+          Float fval = (Float)valsub;
           ischanged = true;
           sb.append(fval);
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anysub = (Core.Type_any)valsub;;
+          Core.Type_any anysub = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/core/string", ":invalidtype", anysub);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
@@ -10654,7 +10741,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
         String vxstring = sb.toString();
-        Class_string work = new Class_string();
+        Core.Class_string work = new Core.Class_string();
         work.vxstring = vxstring;
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -10666,16 +10753,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_string;
+      Core.Type_any output = Core.e_string;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_string;
+      Core.Type_any output = Core.t_string;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "string", // name
         ":string", // extends
@@ -10688,12 +10778,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_string e_string = new Class_string();
-  public static final Type_string t_string = new Class_string();
+  public static final Core.Type_string e_string = new Core.Class_string();
+  public static final Core.Type_string t_string = new Core.Class_string();
 
   /**
    * type: stringlist
@@ -10701,17 +10792,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type stringlist)
    */
   public interface Type_stringlist extends Core.Type_list {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public List<Core.Type_string> vx_liststring();
     public Core.Type_string vx_string(final Core.Type_int index);
   }
 
   public static class Class_stringlist extends Core.Class_base implements Type_stringlist {
 
-    public List<Core.Type_string> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_string>());
+    public List<Core.Type_string> vx_p_list = Core.immutablelist(
+      new ArrayList<Core.Type_string>()
+    );
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -10735,12 +10824,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public List<Core.Type_string> vx_liststring() {
-      return vx_p_list;
+      List<Core.Type_string> output = this.vx_p_list;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
-      return this.vx_string(index);
+      Core.Type_string output = this.vx_string(index);
+      return output;
     }
 
     @Override
@@ -10750,15 +10841,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_stringlist vx_copy(final Object... vals) {
-      Type_stringlist output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_stringlist output = this;
       boolean ischanged = false;
-      Class_stringlist val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_stringlist value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      List<Core.Type_string> listval = new ArrayList<Core.Type_string>(val.vx_liststring());
+      List<Core.Type_string> listval = new ArrayList<Core.Type_string>(value.vx_liststring());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -10766,28 +10857,28 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_string) {
-          Core.Type_string allowsub = (Core.Type_string)valsub;;
+          Core.Type_string allowsub = (Core.Type_string)valsub;
           ischanged = true;
           listval.add(allowsub);
         } else if (valsub instanceof String) {
           ischanged = true;
           listval.add(Core.vx_new(Core.t_string, valsub));
         } else if (valsub instanceof Core.Type_stringlist) {
-          Core.Type_stringlist multi = (Core.Type_stringlist)valsub;;
+          Core.Type_stringlist multi = (Core.Type_stringlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_liststring());
         } else if (valsub instanceof List<?>) {
-          List<?> listunknown = (List<?>)valsub;;
+          List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (false) {
             } else if (item instanceof Core.Type_string) {
-              Core.Type_string valitem = (Core.Type_string)item;;
+              Core.Type_string valitem = (Core.Type_string)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/core/stringlist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
@@ -10796,7 +10887,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_stringlist work = new Class_stringlist();
+        Core.Class_stringlist work = new Core.Class_stringlist();
         work.vx_p_list = Core.immutablelist(listval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -10808,16 +10899,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_stringlist;
+      Core.Type_any output = Core.e_stringlist;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_stringlist;
+      Core.Type_any output = Core.t_stringlist;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "stringlist", // name
         ":list", // extends
@@ -10830,12 +10924,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_stringlist e_stringlist = new Class_stringlist();
-  public static final Type_stringlist t_stringlist = new Class_stringlist();
+  public static final Core.Type_stringlist e_stringlist = new Core.Class_stringlist();
+  public static final Core.Type_stringlist t_stringlist = new Core.Class_stringlist();
 
   /**
    * type: stringlistlist
@@ -10843,17 +10938,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type stringlistlist)
    */
   public interface Type_stringlistlist extends Core.Type_list {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public List<Core.Type_stringlist> vx_liststringlist();
     public Core.Type_stringlist vx_stringlist(final Core.Type_int index);
   }
 
   public static class Class_stringlistlist extends Core.Class_base implements Type_stringlistlist {
 
-    public List<Core.Type_stringlist> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_stringlist>());
+    public List<Core.Type_stringlist> vx_p_list = Core.immutablelist(
+      new ArrayList<Core.Type_stringlist>()
+    );
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -10877,12 +10970,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public List<Core.Type_stringlist> vx_liststringlist() {
-      return vx_p_list;
+      List<Core.Type_stringlist> output = this.vx_p_list;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
-      return this.vx_stringlist(index);
+      Core.Type_stringlist output = this.vx_stringlist(index);
+      return output;
     }
 
     @Override
@@ -10892,15 +10987,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_stringlistlist vx_copy(final Object... vals) {
-      Type_stringlistlist output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_stringlistlist output = this;
       boolean ischanged = false;
-      Class_stringlistlist val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_stringlistlist value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      List<Core.Type_stringlist> listval = new ArrayList<Core.Type_stringlist>(val.vx_liststringlist());
+      List<Core.Type_stringlist> listval = new ArrayList<Core.Type_stringlist>(value.vx_liststringlist());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -10908,28 +11003,28 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_stringlist) {
-          Core.Type_stringlist allowsub = (Core.Type_stringlist)valsub;;
+          Core.Type_stringlist allowsub = (Core.Type_stringlist)valsub;
           ischanged = true;
           listval.add(allowsub);
         } else if (valsub instanceof Core.Type_stringlist) {
           ischanged = true;
           listval.add((Core.Type_stringlist)valsub);
         } else if (valsub instanceof Core.Type_stringlistlist) {
-          Core.Type_stringlistlist multi = (Core.Type_stringlistlist)valsub;;
+          Core.Type_stringlistlist multi = (Core.Type_stringlistlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_liststringlist());
         } else if (valsub instanceof List<?>) {
-          List<?> listunknown = (List<?>)valsub;;
+          List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (false) {
             } else if (item instanceof Core.Type_stringlist) {
-              Core.Type_stringlist valitem = (Core.Type_stringlist)item;;
+              Core.Type_stringlist valitem = (Core.Type_stringlist)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/core/stringlistlist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
@@ -10938,7 +11033,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_stringlistlist work = new Class_stringlistlist();
+        Core.Class_stringlistlist work = new Core.Class_stringlistlist();
         work.vx_p_list = Core.immutablelist(listval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -10950,16 +11045,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_stringlistlist;
+      Core.Type_any output = Core.e_stringlistlist;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_stringlistlist;
+      Core.Type_any output = Core.t_stringlistlist;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "stringlistlist", // name
         ":list", // extends
@@ -10972,12 +11070,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_stringlistlist e_stringlistlist = new Class_stringlistlist();
-  public static final Type_stringlistlist t_stringlistlist = new Class_stringlistlist();
+  public static final Core.Type_stringlistlist e_stringlistlist = new Core.Class_stringlistlist();
+  public static final Core.Type_stringlistlist t_stringlistlist = new Core.Class_stringlistlist();
 
   /**
    * type: stringmap
@@ -10985,10 +11084,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type stringmap)
    */
   public interface Type_stringmap extends Core.Type_map {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Map<String, Core.Type_string> vx_mapstring();
     public Core.Type_string vx_string(final Core.Type_string key);
   }
@@ -11008,7 +11103,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Core.Type_boolean output = Core.c_false;
       if (false) {
       } else if (value instanceof Core.Type_string) {
-        Core.Type_string castval = (Core.Type_string)value;;
+        Core.Type_string castval = (Core.Type_string)value;
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -11037,13 +11132,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Map<String, Core.Type_string> vx_mapstring() {
-      return vx_p_map;
+      Map<String, Core.Type_string> output = this.vx_p_map;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
-      return this.vx_string(key);
+      Core.Type_any output = this.vx_string(key);
+      return output;
     }
+
 
     @Override
     public Core.Type_map vx_new_from_map(final Map<String, Core.Type_any> mapval) {
@@ -11052,13 +11150,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Map<String, Core.Type_string> map = new LinkedHashMap<String, Core.Type_string>();
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
-        Core.Type_any val = mapval.get(key);
+        Core.Type_any value = mapval.get(key);
         if (false) {
-        } else if (val instanceof Core.Type_string) {
-          Core.Type_string castval = (Core.Type_string)val;;
+        } else if (value instanceof Core.Type_string) {
+          Core.Type_string castval = (Core.Type_string)value;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/stringmap", ":invalidvalue", val);
+          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/stringmap", ":invalidvalue", value);
           msgblock = Core.vx_copy(msgblock, msg);
         }
       }
@@ -11076,15 +11174,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_stringmap vx_copy(final Object... vals) {
-      Type_stringmap output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_stringmap output = this;
       boolean ischanged = false;
-      Class_stringmap val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_stringmap value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Map<String, Core.Type_string> mapval = new LinkedHashMap<String, Core.Type_string>(val.vx_mapstring());
+      Map<String, Core.Type_string> mapval = new LinkedHashMap<String, Core.Type_string>(value.vx_mapstring());
       Core.Type_msg msg = null;
       String key = "";
       Core.Type_any msgval = null;
@@ -11096,15 +11194,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (key.equals("")) {
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstring = (Core.Type_string)valsub;;
+            Core.Type_string valstring = (Core.Type_string)valsub;
             key = valstring.vx_string();
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             key = sval;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -11116,14 +11214,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.Type_string valany = null;
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valallowed = (Core.Type_string)valsub;;
+            Core.Type_string valallowed = (Core.Type_string)valsub;
             valany = valallowed;
           } else if (valsub instanceof String) {
             valany = Core.vx_new(Core.t_string, valsub);
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -11146,7 +11244,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_stringmap work = new Class_stringmap();
+        Core.Class_stringmap work = new Core.Class_stringmap();
         work.vx_p_map = Core.immutablemap(mapval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -11158,16 +11256,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_stringmap;
+      Core.Type_any output = Core.e_stringmap;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_stringmap;
+      Core.Type_any output = Core.t_stringmap;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "stringmap", // name
         ":map", // extends
@@ -11180,12 +11281,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_stringmap e_stringmap = new Class_stringmap();
-  public static final Type_stringmap t_stringmap = new Class_stringmap();
+  public static final Core.Type_stringmap e_stringmap = new Core.Class_stringmap();
+  public static final Core.Type_stringmap t_stringmap = new Core.Class_stringmap();
 
   /**
    * type: stringmutablemap
@@ -11193,10 +11295,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type stringmutablemap)
    */
   public interface Type_stringmutablemap extends Core.Type_map {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Map<String, Core.Type_string> vx_mapstring();
     public Core.Type_string vx_string(final Core.Type_string key);
   }
@@ -11216,7 +11314,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Core.Type_boolean output = Core.c_false;
       if (false) {
       } else if (value instanceof Core.Type_string) {
-        Core.Type_string castval = (Core.Type_string)value;;
+        Core.Type_string castval = (Core.Type_string)value;
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -11245,13 +11343,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Map<String, Core.Type_string> vx_mapstring() {
-      return vx_p_map;
+      Map<String, Core.Type_string> output = this.vx_p_map;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
-      return this.vx_string(key);
+      Core.Type_any output = this.vx_string(key);
+      return output;
     }
+
 
     @Override
     public Core.Type_map vx_new_from_map(final Map<String, Core.Type_any> mapval) {
@@ -11260,13 +11361,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Map<String, Core.Type_string> map = new LinkedHashMap<String, Core.Type_string>();
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
-        Core.Type_any val = mapval.get(key);
+        Core.Type_any value = mapval.get(key);
         if (false) {
-        } else if (val instanceof Core.Type_string) {
-          Core.Type_string castval = (Core.Type_string)val;;
+        } else if (value instanceof Core.Type_string) {
+          Core.Type_string castval = (Core.Type_string)value;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/stringmutablemap", ":invalidvalue", val);
+          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/stringmutablemap", ":invalidvalue", value);
           msgblock = Core.vx_copy(msgblock, msg);
         }
       }
@@ -11284,15 +11385,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_stringmutablemap vx_copy(final Object... vals) {
-      Type_stringmutablemap output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_stringmutablemap output = this;
       boolean ischanged = false;
-      Class_stringmutablemap val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_stringmutablemap value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Map<String, Core.Type_string> mapval = new LinkedHashMap<String, Core.Type_string>(val.vx_mapstring());
+      Map<String, Core.Type_string> mapval = new LinkedHashMap<String, Core.Type_string>(value.vx_mapstring());
       Core.Type_msg msg = null;
       String key = "";
       Core.Type_any msgval = null;
@@ -11304,15 +11405,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (key.equals("")) {
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstring = (Core.Type_string)valsub;;
+            Core.Type_string valstring = (Core.Type_string)valsub;
             key = valstring.vx_string();
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             key = sval;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -11324,14 +11425,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.Type_string valany = null;
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valallowed = (Core.Type_string)valsub;;
+            Core.Type_string valallowed = (Core.Type_string)valsub;
             valany = valallowed;
           } else if (valsub instanceof String) {
             valany = Core.vx_new(Core.t_string, valsub);
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -11354,7 +11455,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_stringmutablemap work = new Class_stringmutablemap();
+        Core.Class_stringmutablemap work = new Core.Class_stringmutablemap();
         work.vx_p_map = Core.immutablemap(mapval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -11366,16 +11467,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_stringmutablemap;
+      Core.Type_any output = Core.e_stringmutablemap;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_stringmutablemap;
+      Core.Type_any output = Core.t_stringmutablemap;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "stringmutablemap", // name
         ":map", // extends
@@ -11388,12 +11492,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_stringmutablemap e_stringmutablemap = new Class_stringmutablemap();
-  public static final Type_stringmutablemap t_stringmutablemap = new Class_stringmutablemap();
+  public static final Core.Type_stringmutablemap e_stringmutablemap = new Core.Class_stringmutablemap();
+  public static final Core.Type_stringmutablemap t_stringmutablemap = new Core.Class_stringmutablemap();
 
   /**
    * type: struct
@@ -11401,10 +11506,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type struct)
    */
   public interface Type_struct extends Core.Type_any {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Core.Type_any vx_any(final Core.Type_string key);
     public Map<String, Core.Type_any> vx_map();
   }
@@ -11420,7 +11521,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     @Override
     public Map<String, Core.Type_any> vx_map() {
       Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -11430,16 +11532,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_struct vx_copy(final Object... vals) {
-      Type_struct output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_struct output = this;
       boolean ischanged = false;
-      Class_struct val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_struct value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_struct work = new Class_struct();
+        Core.Class_struct work = new Core.Class_struct();
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -11450,16 +11552,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_struct;
+      Core.Type_any output = Core.e_struct;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_struct;
+      Core.Type_any output = Core.t_struct;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "struct", // name
         ":struct", // extends
@@ -11472,22 +11577,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_struct e_struct = new Class_struct();
-  public static final Type_struct t_struct = new Class_struct();
+  public static final Core.Type_struct e_struct = new Core.Class_struct();
+  public static final Core.Type_struct t_struct = new Core.Class_struct();
 
   /**
    * type: thenelse
    * (type thenelse)
    */
   public interface Type_thenelse extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Core.Type_string code();
     public Core.Type_any value();
     public Core.Type_list values();
@@ -11584,7 +11686,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       output.put(":values", this.values());
       output.put(":fn-cond", this.fn_cond());
       output.put(":fn-any", this.fn_any());
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -11594,19 +11697,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_thenelse vx_copy(final Object... vals) {
-      Type_thenelse output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_thenelse output = this;
       boolean ischanged = false;
-      Class_thenelse val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_thenelse value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Core.Type_string vx_p_code = val.code();
-      Core.Type_any vx_p_value = val.value();
-      Core.Type_list vx_p_values = val.values();
-      Core.Func_boolean_from_func vx_p_fn_cond = val.fn_cond();
-      Core.Func_any_from_func vx_p_fn_any = val.fn_any();
+      Core.Type_string vx_p_code = value.code();
+      Core.Type_any vx_p_value = value.value();
+      Core.Type_list vx_p_values = value.values();
+      Core.Func_boolean_from_func vx_p_fn_cond = value.fn_cond();
+      Core.Func_any_from_func vx_p_fn_any = value.fn_any();
       List<String> validkeys = new ArrayList<String>();
       validkeys.add(":code");
       validkeys.add(":value");
@@ -11621,22 +11724,22 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (key == "") {
+        } else if (key.equals("")) {
           boolean istestkey = false;
           String testkey = "";
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;;
+            Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             testkey = sval;
             istestkey = true;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              Core.Type_any valmsg = (Core.Type_any)valsub;
               msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -11662,7 +11765,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":code":
             if (valsub == vx_p_code) {
             } else if (valsub instanceof Core.Type_string) {
-              Core.Type_string valcode = (Core.Type_string)valsub;;
+              Core.Type_string valcode = (Core.Type_string)valsub;
               ischanged = true;
               vx_p_code = valcode;
             } else if (valsub instanceof String) {
@@ -11671,7 +11774,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -11687,13 +11790,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":value":
             if (valsub == vx_p_value) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valvalue = (Core.Type_any)valsub;;
+              Core.Type_any valvalue = (Core.Type_any)valsub;
               ischanged = true;
               vx_p_value = valvalue;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -11709,13 +11812,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":values":
             if (valsub == vx_p_values) {
             } else if (valsub instanceof Core.Type_list) {
-              Core.Type_list valvalues = (Core.Type_list)valsub;;
+              Core.Type_list valvalues = (Core.Type_list)valsub;
               ischanged = true;
               vx_p_values = valvalues;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -11731,13 +11834,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":fn-cond":
             if (valsub == vx_p_fn_cond) {
             } else if (valsub instanceof Core.Func_boolean_from_func) {
-              Core.Func_boolean_from_func valfn_cond = (Core.Func_boolean_from_func)valsub;;
+              Core.Func_boolean_from_func valfn_cond = (Core.Func_boolean_from_func)valsub;
               ischanged = true;
               vx_p_fn_cond = valfn_cond;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -11753,13 +11856,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":fn-any":
             if (valsub == vx_p_fn_any) {
             } else if (valsub instanceof Core.Func_any_from_func) {
-              Core.Func_any_from_func valfn_any = (Core.Func_any_from_func)valsub;;
+              Core.Func_any_from_func valfn_any = (Core.Func_any_from_func)valsub;
               ischanged = true;
               vx_p_fn_any = valfn_any;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -11782,7 +11885,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_thenelse work = new Class_thenelse();
+        Core.Class_thenelse work = new Core.Class_thenelse();
         work.vx_p_code = vx_p_code;
         work.vx_p_value = vx_p_value;
         work.vx_p_values = vx_p_values;
@@ -11798,16 +11901,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_thenelse;
+      Core.Type_any output = Core.e_thenelse;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_thenelse;
+      Core.Type_any output = Core.t_thenelse;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "thenelse", // name
         ":struct", // extends
@@ -11820,29 +11926,28 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_thenelse e_thenelse = new Class_thenelse();
-  public static final Type_thenelse t_thenelse = new Class_thenelse();
+  public static final Core.Type_thenelse e_thenelse = new Core.Class_thenelse();
+  public static final Core.Type_thenelse t_thenelse = new Core.Class_thenelse();
 
   /**
    * type: thenelselist
    * (type thenelselist)
    */
   public interface Type_thenelselist extends Core.Type_list {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public List<Core.Type_thenelse> vx_listthenelse();
     public Core.Type_thenelse vx_thenelse(final Core.Type_int index);
   }
 
   public static class Class_thenelselist extends Core.Class_base implements Type_thenelselist {
 
-    public List<Core.Type_thenelse> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_thenelse>());
+    public List<Core.Type_thenelse> vx_p_list = Core.immutablelist(
+      new ArrayList<Core.Type_thenelse>()
+    );
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -11866,12 +11971,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public List<Core.Type_thenelse> vx_listthenelse() {
-      return vx_p_list;
+      List<Core.Type_thenelse> output = this.vx_p_list;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
-      return this.vx_thenelse(index);
+      Core.Type_thenelse output = this.vx_thenelse(index);
+      return output;
     }
 
     @Override
@@ -11881,15 +11988,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_thenelselist vx_copy(final Object... vals) {
-      Type_thenelselist output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_thenelselist output = this;
       boolean ischanged = false;
-      Class_thenelselist val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_thenelselist value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      List<Core.Type_thenelse> listval = new ArrayList<Core.Type_thenelse>(val.vx_listthenelse());
+      List<Core.Type_thenelse> listval = new ArrayList<Core.Type_thenelse>(value.vx_listthenelse());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -11897,28 +12004,28 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_thenelse) {
-          Core.Type_thenelse allowsub = (Core.Type_thenelse)valsub;;
+          Core.Type_thenelse allowsub = (Core.Type_thenelse)valsub;
           ischanged = true;
           listval.add(allowsub);
         } else if (valsub instanceof Core.Type_thenelse) {
           ischanged = true;
           listval.add((Core.Type_thenelse)valsub);
         } else if (valsub instanceof Core.Type_thenelselist) {
-          Core.Type_thenelselist multi = (Core.Type_thenelselist)valsub;;
+          Core.Type_thenelselist multi = (Core.Type_thenelselist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listthenelse());
         } else if (valsub instanceof List<?>) {
-          List<?> listunknown = (List<?>)valsub;;
+          List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (false) {
             } else if (item instanceof Core.Type_thenelse) {
-              Core.Type_thenelse valitem = (Core.Type_thenelse)item;;
+              Core.Type_thenelse valitem = (Core.Type_thenelse)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/core/thenelselist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
@@ -11927,7 +12034,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_thenelselist work = new Class_thenelselist();
+        Core.Class_thenelselist work = new Core.Class_thenelselist();
         work.vx_p_list = Core.immutablelist(listval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -11939,16 +12046,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_thenelselist;
+      Core.Type_any output = Core.e_thenelselist;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_thenelselist;
+      Core.Type_any output = Core.t_thenelselist;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "thenelselist", // name
         ":list", // extends
@@ -11961,12 +12071,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_thenelselist e_thenelselist = new Class_thenelselist();
-  public static final Type_thenelselist t_thenelselist = new Class_thenelselist();
+  public static final Core.Type_thenelselist e_thenelselist = new Core.Class_thenelselist();
+  public static final Core.Type_thenelselist t_thenelselist = new Core.Class_thenelselist();
 
   /**
    * type: translation
@@ -11974,10 +12085,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type translation)
    */
   public interface Type_translation extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Core.Type_string name();
     public Core.Type_stringmap wordmap();
   }
@@ -12026,7 +12133,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":name", this.name());
       output.put(":wordmap", this.wordmap());
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -12036,16 +12144,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_translation vx_copy(final Object... vals) {
-      Type_translation output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_translation output = this;
       boolean ischanged = false;
-      Class_translation val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_translation value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Core.Type_string vx_p_name = val.name();
-      Core.Type_stringmap vx_p_wordmap = val.wordmap();
+      Core.Type_string vx_p_name = value.name();
+      Core.Type_stringmap vx_p_wordmap = value.wordmap();
       List<String> validkeys = new ArrayList<String>();
       validkeys.add(":name");
       validkeys.add(":wordmap");
@@ -12057,22 +12165,22 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (key == "") {
+        } else if (key.equals("")) {
           boolean istestkey = false;
           String testkey = "";
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;;
+            Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             testkey = sval;
             istestkey = true;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              Core.Type_any valmsg = (Core.Type_any)valsub;
               msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -12098,7 +12206,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":name":
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
-              Core.Type_string valname = (Core.Type_string)valsub;;
+              Core.Type_string valname = (Core.Type_string)valsub;
               ischanged = true;
               vx_p_name = valname;
             } else if (valsub instanceof String) {
@@ -12107,7 +12215,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -12123,13 +12231,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":wordmap":
             if (valsub == vx_p_wordmap) {
             } else if (valsub instanceof Core.Type_stringmap) {
-              Core.Type_stringmap valwordmap = (Core.Type_stringmap)valsub;;
+              Core.Type_stringmap valwordmap = (Core.Type_stringmap)valsub;
               ischanged = true;
               vx_p_wordmap = valwordmap;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -12152,7 +12260,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_translation work = new Class_translation();
+        Core.Class_translation work = new Core.Class_translation();
         work.vx_p_name = vx_p_name;
         work.vx_p_wordmap = vx_p_wordmap;
         if (msgblock != Core.e_msgblock) {
@@ -12165,16 +12273,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_translation;
+      Core.Type_any output = Core.e_translation;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_translation;
+      Core.Type_any output = Core.t_translation;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "translation", // name
         ":struct", // extends
@@ -12187,12 +12298,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_translation e_translation = new Class_translation();
-  public static final Type_translation t_translation = new Class_translation();
+  public static final Core.Type_translation e_translation = new Core.Class_translation();
+  public static final Core.Type_translation t_translation = new Core.Class_translation();
 
   /**
    * type: translationlist
@@ -12200,17 +12312,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type translationlist)
    */
   public interface Type_translationlist extends Core.Type_list {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public List<Core.Type_translation> vx_listtranslation();
     public Core.Type_translation vx_translation(final Core.Type_int index);
   }
 
   public static class Class_translationlist extends Core.Class_base implements Type_translationlist {
 
-    public List<Core.Type_translation> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_translation>());
+    public List<Core.Type_translation> vx_p_list = Core.immutablelist(
+      new ArrayList<Core.Type_translation>()
+    );
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -12234,12 +12344,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public List<Core.Type_translation> vx_listtranslation() {
-      return vx_p_list;
+      List<Core.Type_translation> output = this.vx_p_list;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_int index) {
-      return this.vx_translation(index);
+      Core.Type_translation output = this.vx_translation(index);
+      return output;
     }
 
     @Override
@@ -12249,15 +12361,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_translationlist vx_copy(final Object... vals) {
-      Type_translationlist output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_translationlist output = this;
       boolean ischanged = false;
-      Class_translationlist val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_translationlist value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      List<Core.Type_translation> listval = new ArrayList<Core.Type_translation>(val.vx_listtranslation());
+      List<Core.Type_translation> listval = new ArrayList<Core.Type_translation>(value.vx_listtranslation());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -12265,28 +12377,28 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_translation) {
-          Core.Type_translation allowsub = (Core.Type_translation)valsub;;
+          Core.Type_translation allowsub = (Core.Type_translation)valsub;
           ischanged = true;
           listval.add(allowsub);
         } else if (valsub instanceof Core.Type_translation) {
           ischanged = true;
           listval.add((Core.Type_translation)valsub);
         } else if (valsub instanceof Core.Type_translationlist) {
-          Core.Type_translationlist multi = (Core.Type_translationlist)valsub;;
+          Core.Type_translationlist multi = (Core.Type_translationlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listtranslation());
         } else if (valsub instanceof List<?>) {
-          List<?> listunknown = (List<?>)valsub;;
+          List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (false) {
             } else if (item instanceof Core.Type_translation) {
-              Core.Type_translation valitem = (Core.Type_translation)item;;
+              Core.Type_translation valitem = (Core.Type_translation)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/core/translationlist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
@@ -12295,7 +12407,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_translationlist work = new Class_translationlist();
+        Core.Class_translationlist work = new Core.Class_translationlist();
         work.vx_p_list = Core.immutablelist(listval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -12307,16 +12419,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_translationlist;
+      Core.Type_any output = Core.e_translationlist;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_translationlist;
+      Core.Type_any output = Core.t_translationlist;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "translationlist", // name
         ":list", // extends
@@ -12329,12 +12444,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_translationlist e_translationlist = new Class_translationlist();
-  public static final Type_translationlist t_translationlist = new Class_translationlist();
+  public static final Core.Type_translationlist e_translationlist = new Core.Class_translationlist();
+  public static final Core.Type_translationlist t_translationlist = new Core.Class_translationlist();
 
   /**
    * type: translationmap
@@ -12342,10 +12458,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type translationmap)
    */
   public interface Type_translationmap extends Core.Type_map {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Map<String, Core.Type_translation> vx_maptranslation();
     public Core.Type_translation vx_translation(final Core.Type_string key);
   }
@@ -12365,7 +12477,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Core.Type_boolean output = Core.c_false;
       if (false) {
       } else if (value instanceof Core.Type_translation) {
-        Core.Type_translation castval = (Core.Type_translation)value;;
+        Core.Type_translation castval = (Core.Type_translation)value;
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -12394,13 +12506,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Map<String, Core.Type_translation> vx_maptranslation() {
-      return vx_p_map;
+      Map<String, Core.Type_translation> output = this.vx_p_map;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_any(final Core.Type_string key) {
-      return this.vx_translation(key);
+      Core.Type_any output = this.vx_translation(key);
+      return output;
     }
+
 
     @Override
     public Core.Type_map vx_new_from_map(final Map<String, Core.Type_any> mapval) {
@@ -12409,13 +12524,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Map<String, Core.Type_translation> map = new LinkedHashMap<String, Core.Type_translation>();
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
-        Core.Type_any val = mapval.get(key);
+        Core.Type_any value = mapval.get(key);
         if (false) {
-        } else if (val instanceof Core.Type_translation) {
-          Core.Type_translation castval = (Core.Type_translation)val;;
+        } else if (value instanceof Core.Type_translation) {
+          Core.Type_translation castval = (Core.Type_translation)value;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/translationmap", ":invalidvalue", val);
+          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/translationmap", ":invalidvalue", value);
           msgblock = Core.vx_copy(msgblock, msg);
         }
       }
@@ -12433,15 +12548,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_translationmap vx_copy(final Object... vals) {
-      Type_translationmap output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_translationmap output = this;
       boolean ischanged = false;
-      Class_translationmap val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_translationmap value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Map<String, Core.Type_translation> mapval = new LinkedHashMap<String, Core.Type_translation>(val.vx_maptranslation());
+      Map<String, Core.Type_translation> mapval = new LinkedHashMap<String, Core.Type_translation>(value.vx_maptranslation());
       Core.Type_msg msg = null;
       String key = "";
       Core.Type_any msgval = null;
@@ -12453,15 +12568,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (key.equals("")) {
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstring = (Core.Type_string)valsub;;
+            Core.Type_string valstring = (Core.Type_string)valsub;
             key = valstring.vx_string();
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             key = sval;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -12473,14 +12588,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.Type_translation valany = null;
           if (false) {
           } else if (valsub instanceof Core.Type_translation) {
-            Core.Type_translation valallowed = (Core.Type_translation)valsub;;
+            Core.Type_translation valallowed = (Core.Type_translation)valsub;
             valany = valallowed;
           } else if (valsub instanceof Core.Type_translation) {
             valany = (Core.Type_translation)valsub;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -12503,7 +12618,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_translationmap work = new Class_translationmap();
+        Core.Class_translationmap work = new Core.Class_translationmap();
         work.vx_p_map = Core.immutablemap(mapval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -12515,16 +12630,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_translationmap;
+      Core.Type_any output = Core.e_translationmap;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_translationmap;
+      Core.Type_any output = Core.t_translationmap;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "translationmap", // name
         ":map", // extends
@@ -12537,12 +12655,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_translationmap e_translationmap = new Class_translationmap();
-  public static final Type_translationmap t_translationmap = new Class_translationmap();
+  public static final Core.Type_translationmap e_translationmap = new Core.Class_translationmap();
+  public static final Core.Type_translationmap t_translationmap = new Core.Class_translationmap();
 
   /**
    * type: type
@@ -12550,10 +12669,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type type)
    */
   public interface Type_type extends Core.Type_any {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
   }
 
   public static class Class_type extends Core.Class_base implements Type_type {
@@ -12565,16 +12680,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_type vx_copy(final Object... vals) {
-      Type_type output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_type output = this;
       boolean ischanged = false;
-      Class_type val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_type value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_type work = new Class_type();
+        Core.Class_type work = new Core.Class_type();
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
         }
@@ -12585,16 +12700,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_type;
+      Core.Type_any output = Core.e_type;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_type;
+      Core.Type_any output = Core.t_type;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "type", // name
         ":type", // extends
@@ -12607,12 +12725,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_type e_type = new Class_type();
-  public static final Type_type t_type = new Class_type();
+  public static final Core.Type_type e_type = new Core.Class_type();
+  public static final Core.Type_type t_type = new Core.Class_type();
 
   /**
    * type: typedef
@@ -12620,10 +12739,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type typedef)
    */
   public interface Type_typedef extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Core.Type_string pkgname();
     public Core.Type_string name();
     public Core.Type_string extend();
@@ -12832,7 +12947,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       output.put(":properties", this.properties());
       output.put(":proplast", this.proplast());
       output.put(":traits", this.traits());
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -12842,26 +12958,26 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_typedef vx_copy(final Object... vals) {
-      Type_typedef output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_typedef output = this;
       boolean ischanged = false;
-      Class_typedef val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_typedef value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Core.Type_string vx_p_pkgname = val.pkgname();
-      Core.Type_string vx_p_name = val.name();
-      Core.Type_string vx_p_extend = val.extend();
-      Core.Type_funclist vx_p_allowfuncs = val.allowfuncs();
-      Core.Type_typelist vx_p_allowtypes = val.allowtypes();
-      Core.Type_anylist vx_p_allowvalues = val.allowvalues();
-      Core.Type_funclist vx_p_disallowfuncs = val.disallowfuncs();
-      Core.Type_typelist vx_p_disallowtypes = val.disallowtypes();
-      Core.Type_anylist vx_p_disallowvalues = val.disallowvalues();
-      Core.Type_argmap vx_p_properties = val.properties();
-      Core.Type_arg vx_p_proplast = val.proplast();
-      Core.Type_typelist vx_p_traits = val.traits();
+      Core.Type_string vx_p_pkgname = value.pkgname();
+      Core.Type_string vx_p_name = value.name();
+      Core.Type_string vx_p_extend = value.extend();
+      Core.Type_funclist vx_p_allowfuncs = value.allowfuncs();
+      Core.Type_typelist vx_p_allowtypes = value.allowtypes();
+      Core.Type_anylist vx_p_allowvalues = value.allowvalues();
+      Core.Type_funclist vx_p_disallowfuncs = value.disallowfuncs();
+      Core.Type_typelist vx_p_disallowtypes = value.disallowtypes();
+      Core.Type_anylist vx_p_disallowvalues = value.disallowvalues();
+      Core.Type_argmap vx_p_properties = value.properties();
+      Core.Type_arg vx_p_proplast = value.proplast();
+      Core.Type_typelist vx_p_traits = value.traits();
       List<String> validkeys = new ArrayList<String>();
       validkeys.add(":pkgname");
       validkeys.add(":name");
@@ -12883,22 +12999,22 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (key == "") {
+        } else if (key.equals("")) {
           boolean istestkey = false;
           String testkey = "";
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;;
+            Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             testkey = sval;
             istestkey = true;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              Core.Type_any valmsg = (Core.Type_any)valsub;
               msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -12924,7 +13040,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":pkgname":
             if (valsub == vx_p_pkgname) {
             } else if (valsub instanceof Core.Type_string) {
-              Core.Type_string valpkgname = (Core.Type_string)valsub;;
+              Core.Type_string valpkgname = (Core.Type_string)valsub;
               ischanged = true;
               vx_p_pkgname = valpkgname;
             } else if (valsub instanceof String) {
@@ -12933,7 +13049,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -12949,7 +13065,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":name":
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
-              Core.Type_string valname = (Core.Type_string)valsub;;
+              Core.Type_string valname = (Core.Type_string)valsub;
               ischanged = true;
               vx_p_name = valname;
             } else if (valsub instanceof String) {
@@ -12958,7 +13074,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -12974,7 +13090,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":extends":
             if (valsub == vx_p_extend) {
             } else if (valsub instanceof Core.Type_string) {
-              Core.Type_string valextend = (Core.Type_string)valsub;;
+              Core.Type_string valextend = (Core.Type_string)valsub;
               ischanged = true;
               vx_p_extend = valextend;
             } else if (valsub instanceof String) {
@@ -12983,7 +13099,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -12999,13 +13115,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":allowfuncs":
             if (valsub == vx_p_allowfuncs) {
             } else if (valsub instanceof Core.Type_funclist) {
-              Core.Type_funclist valallowfuncs = (Core.Type_funclist)valsub;;
+              Core.Type_funclist valallowfuncs = (Core.Type_funclist)valsub;
               ischanged = true;
               vx_p_allowfuncs = valallowfuncs;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -13021,13 +13137,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":allowtypes":
             if (valsub == vx_p_allowtypes) {
             } else if (valsub instanceof Core.Type_typelist) {
-              Core.Type_typelist valallowtypes = (Core.Type_typelist)valsub;;
+              Core.Type_typelist valallowtypes = (Core.Type_typelist)valsub;
               ischanged = true;
               vx_p_allowtypes = valallowtypes;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -13043,13 +13159,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":allowvalues":
             if (valsub == vx_p_allowvalues) {
             } else if (valsub instanceof Core.Type_anylist) {
-              Core.Type_anylist valallowvalues = (Core.Type_anylist)valsub;;
+              Core.Type_anylist valallowvalues = (Core.Type_anylist)valsub;
               ischanged = true;
               vx_p_allowvalues = valallowvalues;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -13065,13 +13181,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":disallowfuncs":
             if (valsub == vx_p_disallowfuncs) {
             } else if (valsub instanceof Core.Type_funclist) {
-              Core.Type_funclist valdisallowfuncs = (Core.Type_funclist)valsub;;
+              Core.Type_funclist valdisallowfuncs = (Core.Type_funclist)valsub;
               ischanged = true;
               vx_p_disallowfuncs = valdisallowfuncs;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -13087,13 +13203,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":disallowtypes":
             if (valsub == vx_p_disallowtypes) {
             } else if (valsub instanceof Core.Type_typelist) {
-              Core.Type_typelist valdisallowtypes = (Core.Type_typelist)valsub;;
+              Core.Type_typelist valdisallowtypes = (Core.Type_typelist)valsub;
               ischanged = true;
               vx_p_disallowtypes = valdisallowtypes;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -13109,13 +13225,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":disallowvalues":
             if (valsub == vx_p_disallowvalues) {
             } else if (valsub instanceof Core.Type_anylist) {
-              Core.Type_anylist valdisallowvalues = (Core.Type_anylist)valsub;;
+              Core.Type_anylist valdisallowvalues = (Core.Type_anylist)valsub;
               ischanged = true;
               vx_p_disallowvalues = valdisallowvalues;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -13131,13 +13247,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":properties":
             if (valsub == vx_p_properties) {
             } else if (valsub instanceof Core.Type_argmap) {
-              Core.Type_argmap valproperties = (Core.Type_argmap)valsub;;
+              Core.Type_argmap valproperties = (Core.Type_argmap)valsub;
               ischanged = true;
               vx_p_properties = valproperties;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -13153,13 +13269,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":proplast":
             if (valsub == vx_p_proplast) {
             } else if (valsub instanceof Core.Type_arg) {
-              Core.Type_arg valproplast = (Core.Type_arg)valsub;;
+              Core.Type_arg valproplast = (Core.Type_arg)valsub;
               ischanged = true;
               vx_p_proplast = valproplast;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -13175,13 +13291,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":traits":
             if (valsub == vx_p_traits) {
             } else if (valsub instanceof Core.Type_typelist) {
-              Core.Type_typelist valtraits = (Core.Type_typelist)valsub;;
+              Core.Type_typelist valtraits = (Core.Type_typelist)valsub;
               ischanged = true;
               vx_p_traits = valtraits;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -13204,7 +13320,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_typedef work = new Class_typedef();
+        Core.Class_typedef work = new Core.Class_typedef();
         work.vx_p_pkgname = vx_p_pkgname;
         work.vx_p_name = vx_p_name;
         work.vx_p_extend = vx_p_extend;
@@ -13227,16 +13343,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_typedef;
+      Core.Type_any output = Core.e_typedef;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_typedef;
+      Core.Type_any output = Core.t_typedef;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "typedef", // name
         ":struct", // extends
@@ -13249,12 +13368,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_typedef e_typedef = new Class_typedef();
-  public static final Type_typedef t_typedef = new Class_typedef();
+  public static final Core.Type_typedef e_typedef = new Core.Class_typedef();
+  public static final Core.Type_typedef t_typedef = new Core.Class_typedef();
 
   /**
    * type: typelist
@@ -13262,15 +13382,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type typelist)
    */
   public interface Type_typelist extends Core.Type_list {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
   }
 
   public static class Class_typelist extends Core.Class_base implements Type_typelist {
 
-    public List<Core.Type_any> vx_p_list = Core.immutablelist(new ArrayList<Core.Type_any>());
+    public List<Core.Type_any> vx_p_list = Core.immutablelist(
+      new ArrayList<Core.Type_any>()
+    );
 
     @Override
     public List<Core.Type_any> vx_list() {
@@ -13299,15 +13417,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_typelist vx_copy(final Object... vals) {
-      Type_typelist output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_typelist output = this;
       boolean ischanged = false;
-      Class_typelist val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_typelist value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      List<Core.Type_any> listval = new ArrayList<Core.Type_any>(val.vx_list());
+      List<Core.Type_any> listval = new ArrayList<Core.Type_any>(value.vx_list());
       Core.Type_msg msg;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
@@ -13315,25 +13433,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any allowsub = (Core.Type_any)valsub;;
+          Core.Type_any allowsub = (Core.Type_any)valsub;
           ischanged = true;
           listval.add(allowsub);
         } else if (valsub instanceof Core.Type_typelist) {
-          Core.Type_typelist multi = (Core.Type_typelist)valsub;;
+          Core.Type_typelist multi = (Core.Type_typelist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_list());
         } else if (valsub instanceof List<?>) {
-          List<?> listunknown = (List<?>)valsub;;
+          List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
             if (false) {
             } else if (item instanceof Core.Type_any) {
-              Core.Type_any valitem = (Core.Type_any)item;;
+              Core.Type_any valitem = (Core.Type_any)item;
               ischanged = true;
               listval.add(valitem);
             }
           }
         } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any anyinvalid = (Core.Type_any)valsub;;
+          Core.Type_any anyinvalid = (Core.Type_any)valsub;
           msg = Core.vx_msg_from_error("vx/core/typelist", ":invalidtype", anyinvalid);
           msgblock = Core.vx_copy(msgblock, msg);
         } else {
@@ -13342,7 +13460,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_typelist work = new Class_typelist();
+        Core.Class_typelist work = new Core.Class_typelist();
         work.vx_p_list = Core.immutablelist(listval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -13354,16 +13472,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_typelist;
+      Core.Type_any output = Core.e_typelist;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_typelist;
+      Core.Type_any output = Core.t_typelist;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "typelist", // name
         ":list", // extends
@@ -13376,12 +13497,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_typelist e_typelist = new Class_typelist();
-  public static final Type_typelist t_typelist = new Class_typelist();
+  public static final Core.Type_typelist e_typelist = new Core.Class_typelist();
+  public static final Core.Type_typelist t_typelist = new Core.Class_typelist();
 
   /**
    * type: typemap
@@ -13389,10 +13511,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type typemap)
    */
   public interface Type_typemap extends Core.Type_map {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
   }
 
   public static class Class_typemap extends Core.Class_base implements Type_typemap {
@@ -13410,7 +13528,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Core.Type_boolean output = Core.c_false;
       if (false) {
       } else if (value instanceof Core.Type_any) {
-        Core.Type_any castval = (Core.Type_any)value;;
+        Core.Type_any castval = (Core.Type_any)value;
         String key = name.vx_string();
         if (key.startsWith(":")) {
           key = key.substring(1);
@@ -13444,13 +13562,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
       Set<String> keys = mapval.keySet();
       for (String key : keys) {
-        Core.Type_any val = mapval.get(key);
+        Core.Type_any value = mapval.get(key);
         if (false) {
-        } else if (val instanceof Core.Type_any) {
-          Core.Type_any castval = (Core.Type_any)val;;
+        } else if (value instanceof Core.Type_any) {
+          Core.Type_any castval = (Core.Type_any)value;
           map.put(key, castval);
         } else {
-          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/typemap", ":invalidvalue", val);
+          Core.Type_msg msg = Core.vx_msg_from_error("vx/core/typemap", ":invalidvalue", value);
           msgblock = Core.vx_copy(msgblock, msg);
         }
       }
@@ -13468,15 +13586,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_typemap vx_copy(final Object... vals) {
-      Type_typemap output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_typemap output = this;
       boolean ischanged = false;
-      Class_typemap val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_typemap value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Map<String, Core.Type_any> mapval = new LinkedHashMap<String, Core.Type_any>(val.vx_map());
+      Map<String, Core.Type_any> mapval = new LinkedHashMap<String, Core.Type_any>(value.vx_map());
       Core.Type_msg msg = null;
       String key = "";
       Core.Type_any msgval = null;
@@ -13488,15 +13606,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (key.equals("")) {
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstring = (Core.Type_string)valsub;;
+            Core.Type_string valstring = (Core.Type_string)valsub;
             key = valstring.vx_string();
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             key = sval;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -13508,14 +13626,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.Type_any valany = null;
           if (false) {
           } else if (valsub instanceof Core.Type_any) {
-            Core.Type_any valallowed = (Core.Type_any)valsub;;
+            Core.Type_any valallowed = (Core.Type_any)valsub;
             valany = valallowed;
           } else if (valsub instanceof Core.Type_any) {
             valany = (Core.Type_any)valsub;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valinvalid = (Core.Type_any)valsub;;
+              Core.Type_any valinvalid = (Core.Type_any)valsub;
               msgval = valinvalid;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -13538,7 +13656,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_typemap work = new Class_typemap();
+        Core.Class_typemap work = new Core.Class_typemap();
         work.vx_p_map = Core.immutablemap(mapval);
         if (msgblock != Core.e_msgblock) {
           work.vxmsgblock = msgblock;
@@ -13550,16 +13668,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_typemap;
+      Core.Type_any output = Core.e_typemap;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_typemap;
+      Core.Type_any output = Core.t_typemap;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "typemap", // name
         ":map", // extends
@@ -13572,12 +13693,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_typemap e_typemap = new Class_typemap();
-  public static final Type_typemap t_typemap = new Class_typemap();
+  public static final Core.Type_typemap e_typemap = new Core.Class_typemap();
+  public static final Core.Type_typemap t_typemap = new Core.Class_typemap();
 
   /**
    * type: user
@@ -13585,10 +13707,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (type user)
    */
   public interface Type_user extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Core.Type_security security();
     public Core.Type_string username();
     public Core.Type_string token();
@@ -13653,7 +13771,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       output.put(":security", this.security());
       output.put(":username", this.username());
       output.put(":token", this.token());
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -13663,17 +13782,17 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_user vx_copy(final Object... vals) {
-      Type_user output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_user output = this;
       boolean ischanged = false;
-      Class_user val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_user value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Core.Type_security vx_p_security = val.security();
-      Core.Type_string vx_p_username = val.username();
-      Core.Type_string vx_p_token = val.token();
+      Core.Type_security vx_p_security = value.security();
+      Core.Type_string vx_p_username = value.username();
+      Core.Type_string vx_p_token = value.token();
       List<String> validkeys = new ArrayList<String>();
       validkeys.add(":security");
       validkeys.add(":username");
@@ -13686,22 +13805,22 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (key == "") {
+        } else if (key.equals("")) {
           boolean istestkey = false;
           String testkey = "";
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;;
+            Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             testkey = sval;
             istestkey = true;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              Core.Type_any valmsg = (Core.Type_any)valsub;
               msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -13727,13 +13846,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":security":
             if (valsub == vx_p_security) {
             } else if (valsub instanceof Core.Type_security) {
-              Core.Type_security valsecurity = (Core.Type_security)valsub;;
+              Core.Type_security valsecurity = (Core.Type_security)valsub;
               ischanged = true;
               vx_p_security = valsecurity;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -13749,7 +13868,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":username":
             if (valsub == vx_p_username) {
             } else if (valsub instanceof Core.Type_string) {
-              Core.Type_string valusername = (Core.Type_string)valsub;;
+              Core.Type_string valusername = (Core.Type_string)valsub;
               ischanged = true;
               vx_p_username = valusername;
             } else if (valsub instanceof String) {
@@ -13758,7 +13877,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -13774,7 +13893,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":token":
             if (valsub == vx_p_token) {
             } else if (valsub instanceof Core.Type_string) {
-              Core.Type_string valtoken = (Core.Type_string)valsub;;
+              Core.Type_string valtoken = (Core.Type_string)valsub;
               ischanged = true;
               vx_p_token = valtoken;
             } else if (valsub instanceof String) {
@@ -13783,7 +13902,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -13806,7 +13925,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_user work = new Class_user();
+        Core.Class_user work = new Core.Class_user();
         work.vx_p_security = vx_p_security;
         work.vx_p_username = vx_p_username;
         work.vx_p_token = vx_p_token;
@@ -13820,16 +13939,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_user;
+      Core.Type_any output = Core.e_user;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_user;
+      Core.Type_any output = Core.t_user;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "user", // name
         ":struct", // extends
@@ -13842,22 +13964,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_user e_user = new Class_user();
-  public static final Type_user t_user = new Class_user();
+  public static final Core.Type_user e_user = new Core.Class_user();
+  public static final Core.Type_user t_user = new Core.Class_user();
 
   /**
    * type: value
    * (type value)
    */
   public interface Type_value extends Core.Type_struct {
-    public Core.Type_any vx_new(final Object... vals);
-    public Core.Type_any vx_copy(final Object... vals);
-    public Core.Type_any vx_empty();
-    public Core.Type_any vx_type();
     public Core.Type_any next();
     public Core.Type_int refs();
   }
@@ -13906,7 +14025,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
       output.put(":next", this.next());
       output.put(":refs", this.refs());
-      return Core.immutablemap(output);
+      output = Core.immutablemap(output);
+      return output;
     }
 
     @Override
@@ -13916,16 +14036,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_value vx_copy(final Object... vals) {
-      Type_value output = this;
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Type_value output = this;
       boolean ischanged = false;
-      Class_value val = this;
-      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(val, vals);
+      Core.Class_value value = this;
+      Core.Type_msgblock msgblock = Core.vx_msgblock_from_copy_arrayval(value, vals);
       if (this.vx_constdef() != Core.e_constdef) {
         ischanged = true;
       }
-      Core.Type_any vx_p_next = val.next();
-      Core.Type_int vx_p_refs = val.refs();
+      Core.Type_any vx_p_next = value.next();
+      Core.Type_int vx_p_refs = value.refs();
       List<String> validkeys = new ArrayList<String>();
       validkeys.add(":next");
       validkeys.add(":refs");
@@ -13937,22 +14057,22 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (key == "") {
+        } else if (key.equals("")) {
           boolean istestkey = false;
           String testkey = "";
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
-            Core.Type_string valstr = (Core.Type_string)valsub;;
+            Core.Type_string valstr = (Core.Type_string)valsub;
             testkey = valstr.vx_string();
             istestkey = true;
           } else if (valsub instanceof String) {
-            String sval = (String)valsub;;
+            String sval = (String)valsub;
             testkey = sval;
             istestkey = true;
           } else {
             if (false) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valmsg = (Core.Type_any)valsub;;
+              Core.Type_any valmsg = (Core.Type_any)valsub;
               msgval = valmsg;
             } else {
               msgval = Core.vx_new_string(valsub.toString());
@@ -13978,13 +14098,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":next":
             if (valsub == vx_p_next) {
             } else if (valsub instanceof Core.Type_any) {
-              Core.Type_any valnext = (Core.Type_any)valsub;;
+              Core.Type_any valnext = (Core.Type_any)valsub;
               ischanged = true;
               vx_p_next = valnext;
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -14000,7 +14120,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           case ":refs":
             if (valsub == vx_p_refs) {
             } else if (valsub instanceof Core.Type_int) {
-              Core.Type_int valrefs = (Core.Type_int)valsub;;
+              Core.Type_int valrefs = (Core.Type_int)valsub;
               ischanged = true;
               vx_p_refs = valrefs;
             } else if (valsub instanceof Integer) {
@@ -14009,7 +14129,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
             } else {
               if (false) {
               } else if (valsub instanceof Core.Type_any) {
-                Core.Type_any valinvalid = (Core.Type_any)valsub;;
+                Core.Type_any valinvalid = (Core.Type_any)valsub;
                 msgval = valinvalid;
               } else {
                 msgval = Core.vx_new_string(valsub.toString());
@@ -14032,7 +14152,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         }
       }
       if (ischanged || (msgblock != Core.e_msgblock)) {
-        Class_value work = new Class_value();
+        Core.Class_value work = new Core.Class_value();
         work.vx_p_next = vx_p_next;
         work.vx_p_refs = vx_p_refs;
         if (msgblock != Core.e_msgblock) {
@@ -14045,16 +14165,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_value;
+      Core.Type_any output = Core.e_value;
+      return output;
     }
+
     @Override
     public Core.Type_any vx_type() {
-      return t_value;
+      Core.Type_any output = Core.t_value;
+      return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.typedef_new(
+      Core.Type_typedef output = Core.typedef_new(
         "vx/core", // pkgname
         "value", // name
         ":struct", // extends
@@ -14067,12 +14190,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.e_anylist, // disallowvalues
         Core.e_argmap // properties
       );
+      return output;
     }
 
   }
 
-  public static final Type_value e_value = new Class_value();
-  public static final Type_value t_value = new Class_value();
+  public static final Core.Type_value e_value = new Core.Class_value();
+  public static final Core.Type_value t_value = new Core.Class_value();
 
   /**
    * Constant: false
@@ -14080,7 +14204,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    */
   public static class Const_false {
     public static Core.Type_constdef constdef() {
-      return Core.constdef_new(
+      Core.Type_constdef output = Core.constdef_new(
         "vx/core", // pkgname
         "false", // name
         Core.typedef_new(
@@ -14097,6 +14221,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         )
       );
+      return output;
     }
 
     public static void const_new(Core.Type_boolean output) {
@@ -14109,7 +14234,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   public static final Core.Type_boolean c_false = new Core.Class_boolean();
 
-  public static final Type_boolean e_boolean = c_false;
+  public static final Core.Type_boolean e_boolean = Core.c_false;
 
   /**
    * Constant: global
@@ -14118,7 +14243,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    */
   public static class Const_global {
     public static Core.Type_constdef constdef() {
-      return Core.constdef_new(
+      Core.Type_constdef output = Core.constdef_new(
         "vx/core", // pkgname
         "global", // name
         Core.typedef_new(
@@ -14135,6 +14260,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         )
       );
+      return output;
     }
 
     public static void const_new(Core.Type_project output) {
@@ -14154,7 +14280,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    */
   public static class Const_infinity {
     public static Core.Type_constdef constdef() {
-      return Core.constdef_new(
+      Core.Type_constdef output = Core.constdef_new(
         "vx/core", // pkgname
         "infinity", // name
         Core.typedef_new(
@@ -14171,6 +14297,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         )
       );
+      return output;
     }
 
     public static void const_new(Core.Type_int output) {
@@ -14191,7 +14318,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    */
   public static class Const_mempool_active {
     public static Core.Type_constdef constdef() {
-      return Core.constdef_new(
+      Core.Type_constdef output = Core.constdef_new(
         "vx/core", // pkgname
         "mempool-active", // name
         Core.typedef_new(
@@ -14208,6 +14335,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         )
       );
+      return output;
     }
 
     public static void const_new(Core.Type_mempool output) {
@@ -14227,7 +14355,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    */
   public static class Const_msg_error {
     public static Core.Type_constdef constdef() {
-      return Core.constdef_new(
+      Core.Type_constdef output = Core.constdef_new(
         "vx/core", // pkgname
         "msg-error", // name
         Core.typedef_new(
@@ -14244,6 +14372,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         )
       );
+      return output;
     }
 
     public static void const_new(Core.Type_int output) {
@@ -14264,7 +14393,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    */
   public static class Const_msg_info {
     public static Core.Type_constdef constdef() {
-      return Core.constdef_new(
+      Core.Type_constdef output = Core.constdef_new(
         "vx/core", // pkgname
         "msg-info", // name
         Core.typedef_new(
@@ -14281,6 +14410,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         )
       );
+      return output;
     }
 
     public static void const_new(Core.Type_int output) {
@@ -14301,7 +14431,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    */
   public static class Const_msg_severe {
     public static Core.Type_constdef constdef() {
-      return Core.constdef_new(
+      Core.Type_constdef output = Core.constdef_new(
         "vx/core", // pkgname
         "msg-severe", // name
         Core.typedef_new(
@@ -14318,6 +14448,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         )
       );
+      return output;
     }
 
     public static void const_new(Core.Type_int output) {
@@ -14338,7 +14469,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    */
   public static class Const_msg_warning {
     public static Core.Type_constdef constdef() {
-      return Core.constdef_new(
+      Core.Type_constdef output = Core.constdef_new(
         "vx/core", // pkgname
         "msg-warning", // name
         Core.typedef_new(
@@ -14355,6 +14486,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         )
       );
+      return output;
     }
 
     public static void const_new(Core.Type_int output) {
@@ -14375,7 +14507,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    */
   public static class Const_neginfinity {
     public static Core.Type_constdef constdef() {
-      return Core.constdef_new(
+      Core.Type_constdef output = Core.constdef_new(
         "vx/core", // pkgname
         "neginfinity", // name
         Core.typedef_new(
@@ -14392,6 +14524,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         )
       );
+      return output;
     }
 
     public static void const_new(Core.Type_int output) {
@@ -14412,7 +14545,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    */
   public static class Const_newline {
     public static Core.Type_constdef constdef() {
-      return Core.constdef_new(
+      Core.Type_constdef output = Core.constdef_new(
         "vx/core", // pkgname
         "newline", // name
         Core.typedef_new(
@@ -14429,6 +14562,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         )
       );
+      return output;
     }
 
     public static void const_new(Core.Type_string output) {
@@ -14449,7 +14583,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    */
   public static class Const_notanumber {
     public static Core.Type_constdef constdef() {
-      return Core.constdef_new(
+      Core.Type_constdef output = Core.constdef_new(
         "vx/core", // pkgname
         "notanumber", // name
         Core.typedef_new(
@@ -14466,6 +14600,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         )
       );
+      return output;
     }
 
     public static void const_new(Core.Type_int output) {
@@ -14486,7 +14621,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    */
   public static class Const_nothing {
     public static Core.Type_constdef constdef() {
-      return Core.constdef_new(
+      Core.Type_constdef output = Core.constdef_new(
         "vx/core", // pkgname
         "nothing", // name
         Core.typedef_new(
@@ -14503,6 +14638,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         )
       );
+      return output;
     }
 
     public static void const_new(Core.Type_string output) {
@@ -14523,7 +14659,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    */
   public static class Const_path_test_resources {
     public static Core.Type_constdef constdef() {
-      return Core.constdef_new(
+      Core.Type_constdef output = Core.constdef_new(
         "vx/core", // pkgname
         "path-test-resources", // name
         Core.typedef_new(
@@ -14540,6 +14676,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         )
       );
+      return output;
     }
 
     public static void const_new(Core.Type_string output) {
@@ -14560,7 +14697,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    */
   public static class Const_quote {
     public static Core.Type_constdef constdef() {
-      return Core.constdef_new(
+      Core.Type_constdef output = Core.constdef_new(
         "vx/core", // pkgname
         "quote", // name
         Core.typedef_new(
@@ -14577,6 +14714,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         )
       );
+      return output;
     }
 
     public static void const_new(Core.Type_string output) {
@@ -14596,7 +14734,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    */
   public static class Const_true {
     public static Core.Type_constdef constdef() {
-      return Core.constdef_new(
+      Core.Type_constdef output = Core.constdef_new(
         "vx/core", // pkgname
         "true", // name
         Core.typedef_new(
@@ -14613,6 +14751,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         )
       );
+      return output;
     }
 
     public static void const_new(Core.Type_boolean output) {
@@ -14640,24 +14779,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_not vx_new(final Object... vals) {
-      Class_not output = new Class_not();
+      Core.Class_not output = new Core.Class_not();
       return output;
     }
 
     @Override
-    public Core.Func_not vx_copy(final Object... vals) {
-      Class_not output = new Class_not();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_not output = new Core.Class_not();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "!", // name
         0, // idx
@@ -14676,16 +14816,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_not;
+      Core.Type_any output = Core.e_not;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_not;
+      Core.Type_any output = Core.t_not;
+      return output;
     }
 
     @Override
@@ -14716,8 +14859,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_not e_not = new Core.Class_not();
-  public static final Func_not t_not = new Core.Class_not();
+  public static final Core.Func_not e_not = new Core.Class_not();
+  public static final Core.Func_not t_not = new Core.Class_not();
 
   public static Core.Type_boolean f_not(final Core.Type_boolean val) {
     Core.Type_boolean output = Core.e_boolean;
@@ -14740,24 +14883,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_notempty vx_new(final Object... vals) {
-      Class_notempty output = new Class_notempty();
+      Core.Class_notempty output = new Core.Class_notempty();
       return output;
     }
 
     @Override
-    public Core.Func_notempty vx_copy(final Object... vals) {
-      Class_notempty output = new Class_notempty();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_notempty output = new Core.Class_notempty();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "!-empty", // name
         0, // idx
@@ -14776,16 +14920,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_notempty;
+      Core.Type_any output = Core.e_notempty;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_notempty;
+      Core.Type_any output = Core.t_notempty;
+      return output;
     }
 
     @Override
@@ -14816,8 +14963,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_notempty e_notempty = new Core.Class_notempty();
-  public static final Func_notempty t_notempty = new Core.Class_notempty();
+  public static final Core.Func_notempty e_notempty = new Core.Class_notempty();
+  public static final Core.Func_notempty t_notempty = new Core.Class_notempty();
 
   public static Core.Type_boolean f_notempty(final Core.Type_string text) {
     Core.Type_boolean output = Core.e_boolean;
@@ -14842,24 +14989,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_notempty_1 vx_new(final Object... vals) {
-      Class_notempty_1 output = new Class_notempty_1();
+      Core.Class_notempty_1 output = new Core.Class_notempty_1();
       return output;
     }
 
     @Override
-    public Core.Func_notempty_1 vx_copy(final Object... vals) {
-      Class_notempty_1 output = new Class_notempty_1();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_notempty_1 output = new Core.Class_notempty_1();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "!-empty", // name
         1, // idx
@@ -14878,16 +15026,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_notempty_1;
+      Core.Type_any output = Core.e_notempty_1;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_notempty_1;
+      Core.Type_any output = Core.t_notempty_1;
+      return output;
     }
 
     @Override
@@ -14918,8 +15069,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_notempty_1 e_notempty_1 = new Core.Class_notempty_1();
-  public static final Func_notempty_1 t_notempty_1 = new Core.Class_notempty_1();
+  public static final Core.Func_notempty_1 e_notempty_1 = new Core.Class_notempty_1();
+  public static final Core.Func_notempty_1 t_notempty_1 = new Core.Class_notempty_1();
 
   public static Core.Type_boolean f_notempty_1(final Core.Type_any val) {
     Core.Type_boolean output = Core.e_boolean;
@@ -14945,24 +15096,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_ne vx_new(final Object... vals) {
-      Class_ne output = new Class_ne();
+      Core.Class_ne output = new Core.Class_ne();
       return output;
     }
 
     @Override
-    public Core.Func_ne vx_copy(final Object... vals) {
-      Class_ne output = new Class_ne();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_ne output = new Core.Class_ne();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "!=", // name
         0, // idx
@@ -14981,16 +15133,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_ne;
+      Core.Type_any output = Core.e_ne;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_ne;
+      Core.Type_any output = Core.t_ne;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -15008,8 +15163,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_ne e_ne = new Core.Class_ne();
-  public static final Func_ne t_ne = new Core.Class_ne();
+  public static final Core.Func_ne e_ne = new Core.Class_ne();
+  public static final Core.Func_ne t_ne = new Core.Class_ne();
 
   public static Core.Type_boolean f_ne(final Core.Type_any val1, final Core.Type_any val2) {
     Core.Type_boolean output = Core.e_boolean;
@@ -15035,24 +15190,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_neqeq vx_new(final Object... vals) {
-      Class_neqeq output = new Class_neqeq();
+      Core.Class_neqeq output = new Core.Class_neqeq();
       return output;
     }
 
     @Override
-    public Core.Func_neqeq vx_copy(final Object... vals) {
-      Class_neqeq output = new Class_neqeq();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_neqeq output = new Core.Class_neqeq();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "!==", // name
         0, // idx
@@ -15071,16 +15227,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_neqeq;
+      Core.Type_any output = Core.e_neqeq;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_neqeq;
+      Core.Type_any output = Core.t_neqeq;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -15098,8 +15257,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_neqeq e_neqeq = new Core.Class_neqeq();
-  public static final Func_neqeq t_neqeq = new Core.Class_neqeq();
+  public static final Core.Func_neqeq e_neqeq = new Core.Class_neqeq();
+  public static final Core.Func_neqeq t_neqeq = new Core.Class_neqeq();
 
   public static Core.Type_boolean f_neqeq(final Core.Type_any val1, final Core.Type_any val2) {
     Core.Type_boolean output = Core.e_boolean;
@@ -15125,24 +15284,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_multiply vx_new(final Object... vals) {
-      Class_multiply output = new Class_multiply();
+      Core.Class_multiply output = new Core.Class_multiply();
       return output;
     }
 
     @Override
-    public Core.Func_multiply vx_copy(final Object... vals) {
-      Class_multiply output = new Class_multiply();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_multiply output = new Core.Class_multiply();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "*", // name
         0, // idx
@@ -15161,16 +15321,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_multiply;
+      Core.Type_any output = Core.e_multiply;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_multiply;
+      Core.Type_any output = Core.t_multiply;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -15188,8 +15351,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_multiply e_multiply = new Core.Class_multiply();
-  public static final Func_multiply t_multiply = new Core.Class_multiply();
+  public static final Core.Func_multiply e_multiply = new Core.Class_multiply();
+  public static final Core.Func_multiply t_multiply = new Core.Class_multiply();
 
   public static Core.Type_int f_multiply(final Core.Type_int num1, final Core.Type_int num2) {
     Core.Type_int output = Core.e_int;
@@ -15214,24 +15377,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_multiply_1 vx_new(final Object... vals) {
-      Class_multiply_1 output = new Class_multiply_1();
+      Core.Class_multiply_1 output = new Core.Class_multiply_1();
       return output;
     }
 
     @Override
-    public Core.Func_multiply_1 vx_copy(final Object... vals) {
-      Class_multiply_1 output = new Class_multiply_1();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_multiply_1 output = new Core.Class_multiply_1();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "*", // name
         1, // idx
@@ -15250,16 +15414,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_multiply_1;
+      Core.Type_any output = Core.e_multiply_1;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_multiply_1;
+      Core.Type_any output = Core.t_multiply_1;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -15277,8 +15444,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_multiply_1 e_multiply_1 = new Core.Class_multiply_1();
-  public static final Func_multiply_1 t_multiply_1 = new Core.Class_multiply_1();
+  public static final Core.Func_multiply_1 e_multiply_1 = new Core.Class_multiply_1();
+  public static final Core.Func_multiply_1 t_multiply_1 = new Core.Class_multiply_1();
 
   public static Core.Type_number f_multiply_1(final Core.Type_number num1, final Core.Type_number num2) {
     Core.Type_number output = Core.e_number;
@@ -15302,24 +15469,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_multiply_2 vx_new(final Object... vals) {
-      Class_multiply_2 output = new Class_multiply_2();
+      Core.Class_multiply_2 output = new Core.Class_multiply_2();
       return output;
     }
 
     @Override
-    public Core.Func_multiply_2 vx_copy(final Object... vals) {
-      Class_multiply_2 output = new Class_multiply_2();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_multiply_2 output = new Core.Class_multiply_2();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "*", // name
         2, // idx
@@ -15338,16 +15506,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_multiply_2;
+      Core.Type_any output = Core.e_multiply_2;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_multiply_2;
+      Core.Type_any output = Core.t_multiply_2;
+      return output;
     }
 
     @Override
@@ -15378,8 +15549,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_multiply_2 e_multiply_2 = new Core.Class_multiply_2();
-  public static final Func_multiply_2 t_multiply_2 = new Core.Class_multiply_2();
+  public static final Core.Func_multiply_2 e_multiply_2 = new Core.Class_multiply_2();
+  public static final Core.Func_multiply_2 t_multiply_2 = new Core.Class_multiply_2();
 
   public static Core.Type_int f_multiply_2(final Core.Type_intlist nums) {
     Core.Type_int output = Core.e_int;
@@ -15413,24 +15584,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_multiply_3 vx_new(final Object... vals) {
-      Class_multiply_3 output = new Class_multiply_3();
+      Core.Class_multiply_3 output = new Core.Class_multiply_3();
       return output;
     }
 
     @Override
-    public Core.Func_multiply_3 vx_copy(final Object... vals) {
-      Class_multiply_3 output = new Class_multiply_3();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_multiply_3 output = new Core.Class_multiply_3();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "*", // name
         3, // idx
@@ -15449,16 +15621,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_multiply_3;
+      Core.Type_any output = Core.e_multiply_3;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_multiply_3;
+      Core.Type_any output = Core.t_multiply_3;
+      return output;
     }
 
     @Override
@@ -15489,8 +15664,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_multiply_3 e_multiply_3 = new Core.Class_multiply_3();
-  public static final Func_multiply_3 t_multiply_3 = new Core.Class_multiply_3();
+  public static final Core.Func_multiply_3 e_multiply_3 = new Core.Class_multiply_3();
+  public static final Core.Func_multiply_3 t_multiply_3 = new Core.Class_multiply_3();
 
   public static Core.Type_number f_multiply_3(final Core.Type_numberlist nums) {
     Core.Type_number output = Core.e_number;
@@ -15525,24 +15700,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_plus vx_new(final Object... vals) {
-      Class_plus output = new Class_plus();
+      Core.Class_plus output = new Core.Class_plus();
       return output;
     }
 
     @Override
-    public Core.Func_plus vx_copy(final Object... vals) {
-      Class_plus output = new Class_plus();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_plus output = new Core.Class_plus();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "+", // name
         0, // idx
@@ -15561,16 +15737,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_plus;
+      Core.Type_any output = Core.e_plus;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_plus;
+      Core.Type_any output = Core.t_plus;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -15588,8 +15767,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_plus e_plus = new Core.Class_plus();
-  public static final Func_plus t_plus = new Core.Class_plus();
+  public static final Core.Func_plus e_plus = new Core.Class_plus();
+  public static final Core.Func_plus t_plus = new Core.Class_plus();
 
   public static Core.Type_int f_plus(final Core.Type_int num1, final Core.Type_int num2) {
     Core.Type_int output = Core.e_int;
@@ -15614,24 +15793,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_plus_1 vx_new(final Object... vals) {
-      Class_plus_1 output = new Class_plus_1();
+      Core.Class_plus_1 output = new Core.Class_plus_1();
       return output;
     }
 
     @Override
-    public Core.Func_plus_1 vx_copy(final Object... vals) {
-      Class_plus_1 output = new Class_plus_1();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_plus_1 output = new Core.Class_plus_1();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "+", // name
         1, // idx
@@ -15650,16 +15830,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_plus_1;
+      Core.Type_any output = Core.e_plus_1;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_plus_1;
+      Core.Type_any output = Core.t_plus_1;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -15677,8 +15860,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_plus_1 e_plus_1 = new Core.Class_plus_1();
-  public static final Func_plus_1 t_plus_1 = new Core.Class_plus_1();
+  public static final Core.Func_plus_1 e_plus_1 = new Core.Class_plus_1();
+  public static final Core.Func_plus_1 t_plus_1 = new Core.Class_plus_1();
 
   public static Core.Type_number f_plus_1(final Core.Type_number num1, final Core.Type_number num2) {
     Core.Type_number output = Core.e_number;
@@ -15702,24 +15885,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_plus_2 vx_new(final Object... vals) {
-      Class_plus_2 output = new Class_plus_2();
+      Core.Class_plus_2 output = new Core.Class_plus_2();
       return output;
     }
 
     @Override
-    public Core.Func_plus_2 vx_copy(final Object... vals) {
-      Class_plus_2 output = new Class_plus_2();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_plus_2 output = new Core.Class_plus_2();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "+", // name
         2, // idx
@@ -15738,16 +15922,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_plus_2;
+      Core.Type_any output = Core.e_plus_2;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_plus_2;
+      Core.Type_any output = Core.t_plus_2;
+      return output;
     }
 
     @Override
@@ -15778,8 +15965,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_plus_2 e_plus_2 = new Core.Class_plus_2();
-  public static final Func_plus_2 t_plus_2 = new Core.Class_plus_2();
+  public static final Core.Func_plus_2 e_plus_2 = new Core.Class_plus_2();
+  public static final Core.Func_plus_2 t_plus_2 = new Core.Class_plus_2();
 
   public static Core.Type_int f_plus_2(final Core.Type_intlist nums) {
     Core.Type_int output = Core.e_int;
@@ -15813,24 +16000,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_plus_3 vx_new(final Object... vals) {
-      Class_plus_3 output = new Class_plus_3();
+      Core.Class_plus_3 output = new Core.Class_plus_3();
       return output;
     }
 
     @Override
-    public Core.Func_plus_3 vx_copy(final Object... vals) {
-      Class_plus_3 output = new Class_plus_3();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_plus_3 output = new Core.Class_plus_3();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "+", // name
         3, // idx
@@ -15849,16 +16037,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_plus_3;
+      Core.Type_any output = Core.e_plus_3;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_plus_3;
+      Core.Type_any output = Core.t_plus_3;
+      return output;
     }
 
     @Override
@@ -15889,8 +16080,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_plus_3 e_plus_3 = new Core.Class_plus_3();
-  public static final Func_plus_3 t_plus_3 = new Core.Class_plus_3();
+  public static final Core.Func_plus_3 e_plus_3 = new Core.Class_plus_3();
+  public static final Core.Func_plus_3 t_plus_3 = new Core.Class_plus_3();
 
   public static Core.Type_number f_plus_3(final Core.Type_numberlist nums) {
     Core.Type_number output = Core.e_number;
@@ -15924,24 +16115,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_plus1 vx_new(final Object... vals) {
-      Class_plus1 output = new Class_plus1();
+      Core.Class_plus1 output = new Core.Class_plus1();
       return output;
     }
 
     @Override
-    public Core.Func_plus1 vx_copy(final Object... vals) {
-      Class_plus1 output = new Class_plus1();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_plus1 output = new Core.Class_plus1();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "+1", // name
         0, // idx
@@ -15960,16 +16152,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_plus1;
+      Core.Type_any output = Core.e_plus1;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_plus1;
+      Core.Type_any output = Core.t_plus1;
+      return output;
     }
 
     @Override
@@ -16000,8 +16195,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_plus1 e_plus1 = new Core.Class_plus1();
-  public static final Func_plus1 t_plus1 = new Core.Class_plus1();
+  public static final Core.Func_plus1 e_plus1 = new Core.Class_plus1();
+  public static final Core.Func_plus1 t_plus1 = new Core.Class_plus1();
 
   public static Core.Type_int f_plus1(final Core.Type_int num) {
     Core.Type_int output = Core.e_int;
@@ -16025,24 +16220,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_minus vx_new(final Object... vals) {
-      Class_minus output = new Class_minus();
+      Core.Class_minus output = new Core.Class_minus();
       return output;
     }
 
     @Override
-    public Core.Func_minus vx_copy(final Object... vals) {
-      Class_minus output = new Class_minus();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_minus output = new Core.Class_minus();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "-", // name
         0, // idx
@@ -16061,16 +16257,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_minus;
+      Core.Type_any output = Core.e_minus;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_minus;
+      Core.Type_any output = Core.t_minus;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -16088,8 +16287,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_minus e_minus = new Core.Class_minus();
-  public static final Func_minus t_minus = new Core.Class_minus();
+  public static final Core.Func_minus e_minus = new Core.Class_minus();
+  public static final Core.Func_minus t_minus = new Core.Class_minus();
 
   public static Core.Type_int f_minus(final Core.Type_int num1, final Core.Type_int num2) {
     Core.Type_int output = Core.e_int;
@@ -16114,24 +16313,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_minus_1 vx_new(final Object... vals) {
-      Class_minus_1 output = new Class_minus_1();
+      Core.Class_minus_1 output = new Core.Class_minus_1();
       return output;
     }
 
     @Override
-    public Core.Func_minus_1 vx_copy(final Object... vals) {
-      Class_minus_1 output = new Class_minus_1();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_minus_1 output = new Core.Class_minus_1();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "-", // name
         1, // idx
@@ -16150,16 +16350,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_minus_1;
+      Core.Type_any output = Core.e_minus_1;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_minus_1;
+      Core.Type_any output = Core.t_minus_1;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -16177,8 +16380,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_minus_1 e_minus_1 = new Core.Class_minus_1();
-  public static final Func_minus_1 t_minus_1 = new Core.Class_minus_1();
+  public static final Core.Func_minus_1 e_minus_1 = new Core.Class_minus_1();
+  public static final Core.Func_minus_1 t_minus_1 = new Core.Class_minus_1();
 
   public static Core.Type_number f_minus_1(final Core.Type_number num1, final Core.Type_number num2) {
     Core.Type_number output = Core.e_number;
@@ -16202,24 +16405,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_minus_2 vx_new(final Object... vals) {
-      Class_minus_2 output = new Class_minus_2();
+      Core.Class_minus_2 output = new Core.Class_minus_2();
       return output;
     }
 
     @Override
-    public Core.Func_minus_2 vx_copy(final Object... vals) {
-      Class_minus_2 output = new Class_minus_2();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_minus_2 output = new Core.Class_minus_2();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "-", // name
         2, // idx
@@ -16238,16 +16442,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_minus_2;
+      Core.Type_any output = Core.e_minus_2;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_minus_2;
+      Core.Type_any output = Core.t_minus_2;
+      return output;
     }
 
     @Override
@@ -16278,8 +16485,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_minus_2 e_minus_2 = new Core.Class_minus_2();
-  public static final Func_minus_2 t_minus_2 = new Core.Class_minus_2();
+  public static final Core.Func_minus_2 e_minus_2 = new Core.Class_minus_2();
+  public static final Core.Func_minus_2 t_minus_2 = new Core.Class_minus_2();
 
   public static Core.Type_int f_minus_2(final Core.Type_intlist nums) {
     Core.Type_int output = Core.e_int;
@@ -16313,24 +16520,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_minus_3 vx_new(final Object... vals) {
-      Class_minus_3 output = new Class_minus_3();
+      Core.Class_minus_3 output = new Core.Class_minus_3();
       return output;
     }
 
     @Override
-    public Core.Func_minus_3 vx_copy(final Object... vals) {
-      Class_minus_3 output = new Class_minus_3();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_minus_3 output = new Core.Class_minus_3();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "-", // name
         3, // idx
@@ -16349,16 +16557,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_minus_3;
+      Core.Type_any output = Core.e_minus_3;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_minus_3;
+      Core.Type_any output = Core.t_minus_3;
+      return output;
     }
 
     @Override
@@ -16389,8 +16600,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_minus_3 e_minus_3 = new Core.Class_minus_3();
-  public static final Func_minus_3 t_minus_3 = new Core.Class_minus_3();
+  public static final Core.Func_minus_3 e_minus_3 = new Core.Class_minus_3();
+  public static final Core.Func_minus_3 t_minus_3 = new Core.Class_minus_3();
 
   public static Core.Type_number f_minus_3(final Core.Type_numberlist nums) {
     Core.Type_number output = Core.e_number;
@@ -16424,24 +16635,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_minus1 vx_new(final Object... vals) {
-      Class_minus1 output = new Class_minus1();
+      Core.Class_minus1 output = new Core.Class_minus1();
       return output;
     }
 
     @Override
-    public Core.Func_minus1 vx_copy(final Object... vals) {
-      Class_minus1 output = new Class_minus1();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_minus1 output = new Core.Class_minus1();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "-1", // name
         0, // idx
@@ -16460,16 +16672,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_minus1;
+      Core.Type_any output = Core.e_minus1;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_minus1;
+      Core.Type_any output = Core.t_minus1;
+      return output;
     }
 
     @Override
@@ -16500,8 +16715,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_minus1 e_minus1 = new Core.Class_minus1();
-  public static final Func_minus1 t_minus1 = new Core.Class_minus1();
+  public static final Core.Func_minus1 e_minus1 = new Core.Class_minus1();
+  public static final Core.Func_minus1 t_minus1 = new Core.Class_minus1();
 
   public static Core.Type_int f_minus1(final Core.Type_int num) {
     Core.Type_int output = Core.e_int;
@@ -16526,24 +16741,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_dotmethod vx_new(final Object... vals) {
-      Class_dotmethod output = new Class_dotmethod();
+      Core.Class_dotmethod output = new Core.Class_dotmethod();
       return output;
     }
 
     @Override
-    public Core.Func_dotmethod vx_copy(final Object... vals) {
-      Class_dotmethod output = new Class_dotmethod();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_dotmethod output = new Core.Class_dotmethod();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         ".", // name
         0, // idx
@@ -16562,16 +16778,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_dotmethod;
+      Core.Type_any output = Core.e_dotmethod;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_dotmethod;
+      Core.Type_any output = Core.t_dotmethod;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -16590,8 +16809,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_dotmethod e_dotmethod = new Core.Class_dotmethod();
-  public static final Func_dotmethod t_dotmethod = new Core.Class_dotmethod();
+  public static final Core.Func_dotmethod e_dotmethod = new Core.Class_dotmethod();
+  public static final Core.Func_dotmethod t_dotmethod = new Core.Class_dotmethod();
 
   public static Core.Type_any f_dotmethod(final Core.Type_any target, final Core.Type_string method, final Core.Type_anylist parameters) {
     Core.Type_any output = Core.e_any;
@@ -16614,24 +16833,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_divide vx_new(final Object... vals) {
-      Class_divide output = new Class_divide();
+      Core.Class_divide output = new Core.Class_divide();
       return output;
     }
 
     @Override
-    public Core.Func_divide vx_copy(final Object... vals) {
-      Class_divide output = new Class_divide();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_divide output = new Core.Class_divide();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "/", // name
         0, // idx
@@ -16650,16 +16870,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_divide;
+      Core.Type_any output = Core.e_divide;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_divide;
+      Core.Type_any output = Core.t_divide;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -16677,8 +16900,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_divide e_divide = new Core.Class_divide();
-  public static final Func_divide t_divide = new Core.Class_divide();
+  public static final Core.Func_divide e_divide = new Core.Class_divide();
+  public static final Core.Func_divide t_divide = new Core.Class_divide();
 
   public static Core.Type_number f_divide(final Core.Type_number num1, final Core.Type_number num2) {
     Core.Type_number output = Core.e_number;
@@ -16710,24 +16933,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_lt vx_new(final Object... vals) {
-      Class_lt output = new Class_lt();
+      Core.Class_lt output = new Core.Class_lt();
       return output;
     }
 
     @Override
-    public Core.Func_lt vx_copy(final Object... vals) {
-      Class_lt output = new Class_lt();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_lt output = new Core.Class_lt();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "<", // name
         0, // idx
@@ -16746,16 +16970,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_lt;
+      Core.Type_any output = Core.e_lt;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_lt;
+      Core.Type_any output = Core.t_lt;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -16773,15 +17000,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_lt e_lt = new Core.Class_lt();
-  public static final Func_lt t_lt = new Core.Class_lt();
+  public static final Core.Func_lt e_lt = new Core.Class_lt();
+  public static final Core.Func_lt t_lt = new Core.Class_lt();
 
   public static Core.Type_boolean f_lt(final Core.Type_any val1, final Core.Type_any val2) {
     Core.Type_boolean output = Core.e_boolean;
     output = Core.f_switch(
       Core.t_boolean,
       Core.f_compare(val1, val2),
-      Core.vx_new(Core.t_thenelselist,
+      Core.vx_new(
+        Core.t_thenelselist,
         Core.f_case_1(
           Core.vx_new_int(-1),
           Core.t_any_from_func.vx_fn_new(() -> {
@@ -16813,24 +17041,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_lt_1 vx_new(final Object... vals) {
-      Class_lt_1 output = new Class_lt_1();
+      Core.Class_lt_1 output = new Core.Class_lt_1();
       return output;
     }
 
     @Override
-    public Core.Func_lt_1 vx_copy(final Object... vals) {
-      Class_lt_1 output = new Class_lt_1();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_lt_1 output = new Core.Class_lt_1();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "<", // name
         1, // idx
@@ -16849,16 +17078,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_lt_1;
+      Core.Type_any output = Core.e_lt_1;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_lt_1;
+      Core.Type_any output = Core.t_lt_1;
+      return output;
     }
 
     @Override
@@ -16889,8 +17121,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_lt_1 e_lt_1 = new Core.Class_lt_1();
-  public static final Func_lt_1 t_lt_1 = new Core.Class_lt_1();
+  public static final Core.Func_lt_1 e_lt_1 = new Core.Class_lt_1();
+  public static final Core.Func_lt_1 t_lt_1 = new Core.Class_lt_1();
 
   public static Core.Type_boolean f_lt_1(final Core.Type_anylist values) {
     Core.Type_boolean output = Core.e_boolean;
@@ -16931,24 +17163,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_chainfirst vx_new(final Object... vals) {
-      Class_chainfirst output = new Class_chainfirst();
+      Core.Class_chainfirst output = new Core.Class_chainfirst();
       return output;
     }
 
     @Override
-    public Core.Func_chainfirst vx_copy(final Object... vals) {
-      Class_chainfirst output = new Class_chainfirst();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_chainfirst output = new Core.Class_chainfirst();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "<-", // name
         0, // idx
@@ -16967,16 +17200,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_chainfirst;
+      Core.Type_any output = Core.e_chainfirst;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_chainfirst;
+      Core.Type_any output = Core.t_chainfirst;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -16995,8 +17231,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_chainfirst e_chainfirst = new Core.Class_chainfirst();
-  public static final Func_chainfirst t_chainfirst = new Core.Class_chainfirst();
+  public static final Core.Func_chainfirst e_chainfirst = new Core.Class_chainfirst();
+  public static final Core.Func_chainfirst t_chainfirst = new Core.Class_chainfirst();
 
   public static <T extends Core.Type_any> T f_chainfirst(final T generic_any_1, final T value, final Core.Type_any_from_anylist fnlist) {
     T output = Core.f_empty(generic_any_1);
@@ -17021,24 +17257,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_chainlast vx_new(final Object... vals) {
-      Class_chainlast output = new Class_chainlast();
+      Core.Class_chainlast output = new Core.Class_chainlast();
       return output;
     }
 
     @Override
-    public Core.Func_chainlast vx_copy(final Object... vals) {
-      Class_chainlast output = new Class_chainlast();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_chainlast output = new Core.Class_chainlast();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "<<-", // name
         0, // idx
@@ -17057,16 +17294,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_chainlast;
+      Core.Type_any output = Core.e_chainlast;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_chainlast;
+      Core.Type_any output = Core.t_chainlast;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -17085,8 +17325,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_chainlast e_chainlast = new Core.Class_chainlast();
-  public static final Func_chainlast t_chainlast = new Core.Class_chainlast();
+  public static final Core.Func_chainlast e_chainlast = new Core.Class_chainlast();
+  public static final Core.Func_chainlast t_chainlast = new Core.Class_chainlast();
 
   public static <T extends Core.Type_any> T f_chainlast(final T generic_any_1, final T value, final Core.Type_any_from_anylist fnlist) {
     T output = Core.f_empty(generic_any_1);
@@ -17109,24 +17349,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_le vx_new(final Object... vals) {
-      Class_le output = new Class_le();
+      Core.Class_le output = new Core.Class_le();
       return output;
     }
 
     @Override
-    public Core.Func_le vx_copy(final Object... vals) {
-      Class_le output = new Class_le();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_le output = new Core.Class_le();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "<=", // name
         0, // idx
@@ -17145,16 +17386,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_le;
+      Core.Type_any output = Core.e_le;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_le;
+      Core.Type_any output = Core.t_le;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -17172,8 +17416,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_le e_le = new Core.Class_le();
-  public static final Func_le t_le = new Core.Class_le();
+  public static final Core.Func_le e_le = new Core.Class_le();
+  public static final Core.Func_le t_le = new Core.Class_le();
 
   public static Core.Type_boolean f_le(final Core.Type_any val1, final Core.Type_any val2) {
     Core.Type_boolean output = Core.e_boolean;
@@ -17198,24 +17442,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_le_1 vx_new(final Object... vals) {
-      Class_le_1 output = new Class_le_1();
+      Core.Class_le_1 output = new Core.Class_le_1();
       return output;
     }
 
     @Override
-    public Core.Func_le_1 vx_copy(final Object... vals) {
-      Class_le_1 output = new Class_le_1();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_le_1 output = new Core.Class_le_1();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "<=", // name
         1, // idx
@@ -17234,16 +17479,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_le_1;
+      Core.Type_any output = Core.e_le_1;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_le_1;
+      Core.Type_any output = Core.t_le_1;
+      return output;
     }
 
     @Override
@@ -17274,8 +17522,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_le_1 e_le_1 = new Core.Class_le_1();
-  public static final Func_le_1 t_le_1 = new Core.Class_le_1();
+  public static final Core.Func_le_1 e_le_1 = new Core.Class_le_1();
+  public static final Core.Func_le_1 t_le_1 = new Core.Class_le_1();
 
   public static Core.Type_boolean f_le_1(final Core.Type_anylist args) {
     Core.Type_boolean output = Core.e_boolean;
@@ -17301,24 +17549,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_eq vx_new(final Object... vals) {
-      Class_eq output = new Class_eq();
+      Core.Class_eq output = new Core.Class_eq();
       return output;
     }
 
     @Override
-    public Core.Func_eq vx_copy(final Object... vals) {
-      Class_eq output = new Class_eq();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_eq output = new Core.Class_eq();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "=", // name
         0, // idx
@@ -17337,16 +17586,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_eq;
+      Core.Type_any output = Core.e_eq;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_eq;
+      Core.Type_any output = Core.t_eq;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -17364,8 +17616,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_eq e_eq = new Core.Class_eq();
-  public static final Func_eq t_eq = new Core.Class_eq();
+  public static final Core.Func_eq e_eq = new Core.Class_eq();
+  public static final Core.Func_eq t_eq = new Core.Class_eq();
 
   public static Core.Type_boolean f_eq(final Core.Type_any val1, final Core.Type_any val2) {
     Core.Type_boolean output = Core.e_boolean;
@@ -17398,24 +17650,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_eq_1 vx_new(final Object... vals) {
-      Class_eq_1 output = new Class_eq_1();
+      Core.Class_eq_1 output = new Core.Class_eq_1();
       return output;
     }
 
     @Override
-    public Core.Func_eq_1 vx_copy(final Object... vals) {
-      Class_eq_1 output = new Class_eq_1();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_eq_1 output = new Core.Class_eq_1();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "=", // name
         1, // idx
@@ -17434,16 +17687,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_eq_1;
+      Core.Type_any output = Core.e_eq_1;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_eq_1;
+      Core.Type_any output = Core.t_eq_1;
+      return output;
     }
 
     @Override
@@ -17474,8 +17730,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_eq_1 e_eq_1 = new Core.Class_eq_1();
-  public static final Func_eq_1 t_eq_1 = new Core.Class_eq_1();
+  public static final Core.Func_eq_1 e_eq_1 = new Core.Class_eq_1();
+  public static final Core.Func_eq_1 t_eq_1 = new Core.Class_eq_1();
 
   public static Core.Type_boolean f_eq_1(final Core.Type_anylist values) {
     Core.Type_boolean output = Core.e_boolean;
@@ -17514,24 +17770,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_eqeq vx_new(final Object... vals) {
-      Class_eqeq output = new Class_eqeq();
+      Core.Class_eqeq output = new Core.Class_eqeq();
       return output;
     }
 
     @Override
-    public Core.Func_eqeq vx_copy(final Object... vals) {
-      Class_eqeq output = new Class_eqeq();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_eqeq output = new Core.Class_eqeq();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "==", // name
         0, // idx
@@ -17550,16 +17807,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_eqeq;
+      Core.Type_any output = Core.e_eqeq;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_eqeq;
+      Core.Type_any output = Core.t_eqeq;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -17577,8 +17837,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_eqeq e_eqeq = new Core.Class_eqeq();
-  public static final Func_eqeq t_eqeq = new Core.Class_eqeq();
+  public static final Core.Func_eqeq e_eqeq = new Core.Class_eqeq();
+  public static final Core.Func_eqeq t_eqeq = new Core.Class_eqeq();
 
   public static Core.Type_boolean f_eqeq(final Core.Type_any val1, final Core.Type_any val2) {
     Core.Type_boolean output = Core.e_boolean;
@@ -17603,24 +17863,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_gt vx_new(final Object... vals) {
-      Class_gt output = new Class_gt();
+      Core.Class_gt output = new Core.Class_gt();
       return output;
     }
 
     @Override
-    public Core.Func_gt vx_copy(final Object... vals) {
-      Class_gt output = new Class_gt();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_gt output = new Core.Class_gt();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         ">", // name
         0, // idx
@@ -17639,16 +17900,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_gt;
+      Core.Type_any output = Core.e_gt;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_gt;
+      Core.Type_any output = Core.t_gt;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -17666,15 +17930,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_gt e_gt = new Core.Class_gt();
-  public static final Func_gt t_gt = new Core.Class_gt();
+  public static final Core.Func_gt e_gt = new Core.Class_gt();
+  public static final Core.Func_gt t_gt = new Core.Class_gt();
 
   public static Core.Type_boolean f_gt(final Core.Type_any val1, final Core.Type_any val2) {
     Core.Type_boolean output = Core.e_boolean;
     output = Core.f_switch(
       Core.t_boolean,
       Core.f_compare(val1, val2),
-      Core.vx_new(Core.t_thenelselist,
+      Core.vx_new(
+        Core.t_thenelselist,
         Core.f_case_1(
           Core.vx_new_int(1),
           Core.t_any_from_func.vx_fn_new(() -> {
@@ -17706,24 +17971,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_gt_1 vx_new(final Object... vals) {
-      Class_gt_1 output = new Class_gt_1();
+      Core.Class_gt_1 output = new Core.Class_gt_1();
       return output;
     }
 
     @Override
-    public Core.Func_gt_1 vx_copy(final Object... vals) {
-      Class_gt_1 output = new Class_gt_1();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_gt_1 output = new Core.Class_gt_1();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         ">", // name
         1, // idx
@@ -17742,16 +18008,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_gt_1;
+      Core.Type_any output = Core.e_gt_1;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_gt_1;
+      Core.Type_any output = Core.t_gt_1;
+      return output;
     }
 
     @Override
@@ -17782,8 +18051,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_gt_1 e_gt_1 = new Core.Class_gt_1();
-  public static final Func_gt_1 t_gt_1 = new Core.Class_gt_1();
+  public static final Core.Func_gt_1 e_gt_1 = new Core.Class_gt_1();
+  public static final Core.Func_gt_1 t_gt_1 = new Core.Class_gt_1();
 
   public static Core.Type_boolean f_gt_1(final Core.Type_anylist values) {
     Core.Type_boolean output = Core.e_boolean;
@@ -17822,24 +18091,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_ge vx_new(final Object... vals) {
-      Class_ge output = new Class_ge();
+      Core.Class_ge output = new Core.Class_ge();
       return output;
     }
 
     @Override
-    public Core.Func_ge vx_copy(final Object... vals) {
-      Class_ge output = new Class_ge();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_ge output = new Core.Class_ge();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         ">=", // name
         0, // idx
@@ -17858,16 +18128,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_ge;
+      Core.Type_any output = Core.e_ge;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_ge;
+      Core.Type_any output = Core.t_ge;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -17885,8 +18158,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_ge e_ge = new Core.Class_ge();
-  public static final Func_ge t_ge = new Core.Class_ge();
+  public static final Core.Func_ge e_ge = new Core.Class_ge();
+  public static final Core.Func_ge t_ge = new Core.Class_ge();
 
   public static Core.Type_boolean f_ge(final Core.Type_any val1, final Core.Type_any val2) {
     Core.Type_boolean output = Core.e_boolean;
@@ -17911,24 +18184,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_ge_1 vx_new(final Object... vals) {
-      Class_ge_1 output = new Class_ge_1();
+      Core.Class_ge_1 output = new Core.Class_ge_1();
       return output;
     }
 
     @Override
-    public Core.Func_ge_1 vx_copy(final Object... vals) {
-      Class_ge_1 output = new Class_ge_1();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_ge_1 output = new Core.Class_ge_1();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         ">=", // name
         1, // idx
@@ -17947,16 +18221,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_ge_1;
+      Core.Type_any output = Core.e_ge_1;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_ge_1;
+      Core.Type_any output = Core.t_ge_1;
+      return output;
     }
 
     @Override
@@ -17987,8 +18264,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_ge_1 e_ge_1 = new Core.Class_ge_1();
-  public static final Func_ge_1 t_ge_1 = new Core.Class_ge_1();
+  public static final Core.Func_ge_1 e_ge_1 = new Core.Class_ge_1();
+  public static final Core.Func_ge_1 t_ge_1 = new Core.Class_ge_1();
 
   public static Core.Type_boolean f_ge_1(final Core.Type_anylist args) {
     Core.Type_boolean output = Core.e_boolean;
@@ -18013,24 +18290,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_allowfuncs_from_security vx_new(final Object... vals) {
-      Class_allowfuncs_from_security output = new Class_allowfuncs_from_security();
+      Core.Class_allowfuncs_from_security output = new Core.Class_allowfuncs_from_security();
       return output;
     }
 
     @Override
-    public Core.Func_allowfuncs_from_security vx_copy(final Object... vals) {
-      Class_allowfuncs_from_security output = new Class_allowfuncs_from_security();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_allowfuncs_from_security output = new Core.Class_allowfuncs_from_security();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "allowfuncs<-security", // name
         0, // idx
@@ -18049,16 +18327,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_allowfuncs_from_security;
+      Core.Type_any output = Core.e_allowfuncs_from_security;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_allowfuncs_from_security;
+      Core.Type_any output = Core.t_allowfuncs_from_security;
+      return output;
     }
 
     @Override
@@ -18089,8 +18370,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_allowfuncs_from_security e_allowfuncs_from_security = new Core.Class_allowfuncs_from_security();
-  public static final Func_allowfuncs_from_security t_allowfuncs_from_security = new Core.Class_allowfuncs_from_security();
+  public static final Core.Func_allowfuncs_from_security e_allowfuncs_from_security = new Core.Class_allowfuncs_from_security();
+  public static final Core.Func_allowfuncs_from_security t_allowfuncs_from_security = new Core.Class_allowfuncs_from_security();
 
   public static Core.Type_funclist f_allowfuncs_from_security(final Core.Type_security security) {
     Core.Type_funclist output = Core.e_funclist;
@@ -18113,24 +18394,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_allowtypenames_from_typedef vx_new(final Object... vals) {
-      Class_allowtypenames_from_typedef output = new Class_allowtypenames_from_typedef();
+      Core.Class_allowtypenames_from_typedef output = new Core.Class_allowtypenames_from_typedef();
       return output;
     }
 
     @Override
-    public Core.Func_allowtypenames_from_typedef vx_copy(final Object... vals) {
-      Class_allowtypenames_from_typedef output = new Class_allowtypenames_from_typedef();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_allowtypenames_from_typedef output = new Core.Class_allowtypenames_from_typedef();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "allowtypenames<-typedef", // name
         0, // idx
@@ -18149,16 +18431,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_allowtypenames_from_typedef;
+      Core.Type_any output = Core.e_allowtypenames_from_typedef;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_allowtypenames_from_typedef;
+      Core.Type_any output = Core.t_allowtypenames_from_typedef;
+      return output;
     }
 
     @Override
@@ -18189,8 +18474,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_allowtypenames_from_typedef e_allowtypenames_from_typedef = new Core.Class_allowtypenames_from_typedef();
-  public static final Func_allowtypenames_from_typedef t_allowtypenames_from_typedef = new Core.Class_allowtypenames_from_typedef();
+  public static final Core.Func_allowtypenames_from_typedef e_allowtypenames_from_typedef = new Core.Class_allowtypenames_from_typedef();
+  public static final Core.Func_allowtypenames_from_typedef t_allowtypenames_from_typedef = new Core.Class_allowtypenames_from_typedef();
 
   public static Core.Type_stringlist f_allowtypenames_from_typedef(final Core.Type_typedef vtypedef) {
     Core.Type_stringlist output = Core.e_stringlist;
@@ -18215,24 +18500,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_allowtypes_from_typedef vx_new(final Object... vals) {
-      Class_allowtypes_from_typedef output = new Class_allowtypes_from_typedef();
+      Core.Class_allowtypes_from_typedef output = new Core.Class_allowtypes_from_typedef();
       return output;
     }
 
     @Override
-    public Core.Func_allowtypes_from_typedef vx_copy(final Object... vals) {
-      Class_allowtypes_from_typedef output = new Class_allowtypes_from_typedef();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_allowtypes_from_typedef output = new Core.Class_allowtypes_from_typedef();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "allowtypes<-typedef", // name
         0, // idx
@@ -18251,16 +18537,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_allowtypes_from_typedef;
+      Core.Type_any output = Core.e_allowtypes_from_typedef;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_allowtypes_from_typedef;
+      Core.Type_any output = Core.t_allowtypes_from_typedef;
+      return output;
     }
 
     @Override
@@ -18291,8 +18580,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_allowtypes_from_typedef e_allowtypes_from_typedef = new Core.Class_allowtypes_from_typedef();
-  public static final Func_allowtypes_from_typedef t_allowtypes_from_typedef = new Core.Class_allowtypes_from_typedef();
+  public static final Core.Func_allowtypes_from_typedef e_allowtypes_from_typedef = new Core.Class_allowtypes_from_typedef();
+  public static final Core.Func_allowtypes_from_typedef t_allowtypes_from_typedef = new Core.Class_allowtypes_from_typedef();
 
   public static Core.Type_typelist f_allowtypes_from_typedef(final Core.Type_typedef vtypedef) {
     Core.Type_typelist output = Core.e_typelist;
@@ -18316,24 +18605,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_and vx_new(final Object... vals) {
-      Class_and output = new Class_and();
+      Core.Class_and output = new Core.Class_and();
       return output;
     }
 
     @Override
-    public Core.Func_and vx_copy(final Object... vals) {
-      Class_and output = new Class_and();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_and output = new Core.Class_and();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "and", // name
         0, // idx
@@ -18352,16 +18642,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_and;
+      Core.Type_any output = Core.e_and;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_and;
+      Core.Type_any output = Core.t_and;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -18379,8 +18672,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_and e_and = new Core.Class_and();
-  public static final Func_and t_and = new Core.Class_and();
+  public static final Core.Func_and e_and = new Core.Class_and();
+  public static final Core.Func_and t_and = new Core.Class_and();
 
   public static Core.Type_boolean f_and(final Core.Type_boolean val1, final Core.Type_boolean val2) {
     Core.Type_boolean output = Core.e_boolean;
@@ -18407,24 +18700,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_and_1 vx_new(final Object... vals) {
-      Class_and_1 output = new Class_and_1();
+      Core.Class_and_1 output = new Core.Class_and_1();
       return output;
     }
 
     @Override
-    public Core.Func_and_1 vx_copy(final Object... vals) {
-      Class_and_1 output = new Class_and_1();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_and_1 output = new Core.Class_and_1();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "and", // name
         1, // idx
@@ -18443,16 +18737,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_and_1;
+      Core.Type_any output = Core.e_and_1;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_and_1;
+      Core.Type_any output = Core.t_and_1;
+      return output;
     }
 
     @Override
@@ -18483,15 +18780,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_and_1 e_and_1 = new Core.Class_and_1();
-  public static final Func_and_1 t_and_1 = new Core.Class_and_1();
+  public static final Core.Func_and_1 e_and_1 = new Core.Class_and_1();
+  public static final Core.Func_and_1 t_and_1 = new Core.Class_and_1();
 
   public static Core.Type_boolean f_and_1(final Core.Type_booleanlist values) {
     Core.Type_boolean output = Core.e_boolean;
     output = Core.f_switch(
       Core.t_boolean,
       Core.f_length_1(values),
-      Core.vx_new(Core.t_thenelselist,
+      Core.vx_new(
+        Core.t_thenelselist,
         Core.f_case_1(
           Core.vx_new_int(0),
           Core.t_any_from_func.vx_fn_new(() -> {
@@ -18537,32 +18835,33 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func any<-any)
    */
   public interface Func_any_from_any extends Core.Type_func, Core.Type_replfunc {
-    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value);
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn);
   }
 
   public static class Class_any_from_any extends Core.Class_base implements Func_any_from_any {
 
     @Override
     public Core.Func_any_from_any vx_new(final Object... vals) {
-      Class_any_from_any output = new Class_any_from_any();
+      Core.Class_any_from_any output = new Core.Class_any_from_any();
       return output;
     }
 
     @Override
-    public Core.Func_any_from_any vx_copy(final Object... vals) {
-      Class_any_from_any output = new Class_any_from_any();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_any_from_any output = new Core.Class_any_from_any();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "any<-any", // name
         0, // idx
@@ -18581,16 +18880,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_from_any;
+      Core.Type_any output = Core.e_any_from_any;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_any_from_any;
+      Core.Type_any output = Core.t_any_from_any;
+      return output;
     }
 
     @FunctionalInterface
@@ -18598,11 +18900,11 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       public Core.Type_any resolve(Core.Type_any value);
     }
 
-    public IFn fn = null;
+    public Core.Class_any_from_any.IFn fn = null;
 
     @Override
     public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
-      Class_any_from_any output = new Class_any_from_any();
+      Core.Class_any_from_any output = new Core.Class_any_from_any();
       output.fn = fn;
       return output;
     }
@@ -18627,8 +18929,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_any_from_any e_any_from_any = new Core.Class_any_from_any();
-  public static final Func_any_from_any t_any_from_any = new Core.Class_any_from_any();
+  public static final Core.Func_any_from_any e_any_from_any = new Core.Class_any_from_any();
+  public static final Core.Func_any_from_any t_any_from_any = new Core.Class_any_from_any();
 
   @SuppressWarnings("unchecked")
   public static <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any(final T generic_any_1, final U value) {
@@ -18647,32 +18949,33 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func any<-any-async)
    */
   public interface Func_any_from_any_async extends Core.Type_func, Core.Type_replfunc_async {
-    public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_any_async(final T generic_any_1, final U value);
+    public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn);
   }
 
   public static class Class_any_from_any_async extends Core.Class_base implements Func_any_from_any_async {
 
     @Override
     public Core.Func_any_from_any_async vx_new(final Object... vals) {
-      Class_any_from_any_async output = new Class_any_from_any_async();
+      Core.Class_any_from_any_async output = new Core.Class_any_from_any_async();
       return output;
     }
 
     @Override
-    public Core.Func_any_from_any_async vx_copy(final Object... vals) {
-      Class_any_from_any_async output = new Class_any_from_any_async();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_any_from_any_async output = new Core.Class_any_from_any_async();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "any<-any-async", // name
         0, // idx
@@ -18691,16 +18994,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_from_any_async;
+      Core.Type_any output = Core.e_any_from_any_async;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_any_from_any_async;
+      Core.Type_any output = Core.t_any_from_any_async;
+      return output;
     }
 
     @FunctionalInterface
@@ -18708,11 +19014,11 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       public CompletableFuture<Core.Type_any> resolve(Core.Type_any value);
     }
 
-    public IFn fn = null;
+    public Core.Class_any_from_any_async.IFn fn = null;
 
     @Override
     public Core.Func_any_from_any_async vx_fn_new(Core.Class_any_from_any_async.IFn fn) {
-      Class_any_from_any_async output = new Class_any_from_any_async();
+      Core.Class_any_from_any_async output = new Core.Class_any_from_any_async();
       output.fn = fn;
       return output;
     }
@@ -18740,8 +19046,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_any_from_any_async e_any_from_any_async = new Core.Class_any_from_any_async();
-  public static final Func_any_from_any_async t_any_from_any_async = new Core.Class_any_from_any_async();
+  public static final Core.Func_any_from_any_async e_any_from_any_async = new Core.Class_any_from_any_async();
+  public static final Core.Func_any_from_any_async t_any_from_any_async = new Core.Class_any_from_any_async();
 
   public static <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_async(final T generic_any_1, final U value) {
     CompletableFuture<T> output = Core.vx_async_new_from_value(Core.f_empty(generic_any_1));
@@ -18756,32 +19062,33 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func any<-any-context)
    */
   public interface Func_any_from_any_context extends Core.Type_func, Core.Type_replfunc {
-    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value);
+    public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn);
   }
 
   public static class Class_any_from_any_context extends Core.Class_base implements Func_any_from_any_context {
 
     @Override
     public Core.Func_any_from_any_context vx_new(final Object... vals) {
-      Class_any_from_any_context output = new Class_any_from_any_context();
+      Core.Class_any_from_any_context output = new Core.Class_any_from_any_context();
       return output;
     }
 
     @Override
-    public Core.Func_any_from_any_context vx_copy(final Object... vals) {
-      Class_any_from_any_context output = new Class_any_from_any_context();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_any_from_any_context output = new Core.Class_any_from_any_context();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "any<-any-context", // name
         0, // idx
@@ -18800,16 +19107,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_from_any_context;
+      Core.Type_any output = Core.e_any_from_any_context;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_any_from_any_context;
+      Core.Type_any output = Core.t_any_from_any_context;
+      return output;
     }
 
     @FunctionalInterface
@@ -18817,11 +19127,11 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       public Core.Type_any resolve(Core.Type_context context, Core.Type_any value);
     }
 
-    public IFn fn = null;
+    public Core.Class_any_from_any_context.IFn fn = null;
 
     @Override
     public Core.Func_any_from_any_context vx_fn_new(Core.Class_any_from_any_context.IFn fn) {
-      Class_any_from_any_context output = new Class_any_from_any_context();
+      Core.Class_any_from_any_context output = new Core.Class_any_from_any_context();
       output.fn = fn;
       return output;
     }
@@ -18847,8 +19157,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_any_from_any_context e_any_from_any_context = new Core.Class_any_from_any_context();
-  public static final Func_any_from_any_context t_any_from_any_context = new Core.Class_any_from_any_context();
+  public static final Core.Func_any_from_any_context e_any_from_any_context = new Core.Class_any_from_any_context();
+  public static final Core.Func_any_from_any_context t_any_from_any_context = new Core.Class_any_from_any_context();
 
   @SuppressWarnings("unchecked")
   public static <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_context(final T generic_any_1, final Core.Type_context context, final U value) {
@@ -18867,32 +19177,33 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func any<-any-context-async)
    */
   public interface Func_any_from_any_context_async extends Core.Type_func, Core.Type_replfunc_async {
-    public Core.Func_any_from_any_context_async vx_fn_new(Core.Class_any_from_any_context_async.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_any_context_async(final T generic_any_1, final Core.Type_context context, final U value);
+    public Core.Func_any_from_any_context_async vx_fn_new(Core.Class_any_from_any_context_async.IFn fn);
   }
 
   public static class Class_any_from_any_context_async extends Core.Class_base implements Func_any_from_any_context_async {
 
     @Override
     public Core.Func_any_from_any_context_async vx_new(final Object... vals) {
-      Class_any_from_any_context_async output = new Class_any_from_any_context_async();
+      Core.Class_any_from_any_context_async output = new Core.Class_any_from_any_context_async();
       return output;
     }
 
     @Override
-    public Core.Func_any_from_any_context_async vx_copy(final Object... vals) {
-      Class_any_from_any_context_async output = new Class_any_from_any_context_async();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_any_from_any_context_async output = new Core.Class_any_from_any_context_async();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "any<-any-context-async", // name
         0, // idx
@@ -18911,16 +19222,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_from_any_context_async;
+      Core.Type_any output = Core.e_any_from_any_context_async;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_any_from_any_context_async;
+      Core.Type_any output = Core.t_any_from_any_context_async;
+      return output;
     }
 
     @FunctionalInterface
@@ -18928,11 +19242,11 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       public CompletableFuture<Core.Type_any> resolve(Core.Type_context context, Core.Type_any value);
     }
 
-    public IFn fn = null;
+    public Core.Class_any_from_any_context_async.IFn fn = null;
 
     @Override
     public Core.Func_any_from_any_context_async vx_fn_new(Core.Class_any_from_any_context_async.IFn fn) {
-      Class_any_from_any_context_async output = new Class_any_from_any_context_async();
+      Core.Class_any_from_any_context_async output = new Core.Class_any_from_any_context_async();
       output.fn = fn;
       return output;
     }
@@ -18961,8 +19275,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_any_from_any_context_async e_any_from_any_context_async = new Core.Class_any_from_any_context_async();
-  public static final Func_any_from_any_context_async t_any_from_any_context_async = new Core.Class_any_from_any_context_async();
+  public static final Core.Func_any_from_any_context_async e_any_from_any_context_async = new Core.Class_any_from_any_context_async();
+  public static final Core.Func_any_from_any_context_async t_any_from_any_context_async = new Core.Class_any_from_any_context_async();
 
   public static <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_any_context_async(final T generic_any_1, final Core.Type_context context, final U value) {
     CompletableFuture<T> output = Core.vx_async_new_from_value(Core.f_empty(generic_any_1));
@@ -18979,32 +19293,33 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func any<-any-key-value)
    */
   public interface Func_any_from_any_key_value extends Core.Type_func, Core.Type_replfunc {
-    public Core.Func_any_from_any_key_value vx_fn_new(Core.Class_any_from_any_key_value.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any_key_value(final T generic_any_1, final T current, final Core.Type_string key, final U value);
+    public Core.Func_any_from_any_key_value vx_fn_new(Core.Class_any_from_any_key_value.IFn fn);
   }
 
   public static class Class_any_from_any_key_value extends Core.Class_base implements Func_any_from_any_key_value {
 
     @Override
     public Core.Func_any_from_any_key_value vx_new(final Object... vals) {
-      Class_any_from_any_key_value output = new Class_any_from_any_key_value();
+      Core.Class_any_from_any_key_value output = new Core.Class_any_from_any_key_value();
       return output;
     }
 
     @Override
-    public Core.Func_any_from_any_key_value vx_copy(final Object... vals) {
-      Class_any_from_any_key_value output = new Class_any_from_any_key_value();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_any_from_any_key_value output = new Core.Class_any_from_any_key_value();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "any<-any-key-value", // name
         0, // idx
@@ -19023,16 +19338,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_from_any_key_value;
+      Core.Type_any output = Core.e_any_from_any_key_value;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_any_from_any_key_value;
+      Core.Type_any output = Core.t_any_from_any_key_value;
+      return output;
     }
 
     @FunctionalInterface
@@ -19040,11 +19358,11 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       public Core.Type_any resolve(Core.Type_any current, Core.Type_string key, Core.Type_any value);
     }
 
-    public IFn fn = null;
+    public Core.Class_any_from_any_key_value.IFn fn = null;
 
     @Override
     public Core.Func_any_from_any_key_value vx_fn_new(Core.Class_any_from_any_key_value.IFn fn) {
-      Class_any_from_any_key_value output = new Class_any_from_any_key_value();
+      Core.Class_any_from_any_key_value output = new Core.Class_any_from_any_key_value();
       output.fn = fn;
       return output;
     }
@@ -19071,8 +19389,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_any_from_any_key_value e_any_from_any_key_value = new Core.Class_any_from_any_key_value();
-  public static final Func_any_from_any_key_value t_any_from_any_key_value = new Core.Class_any_from_any_key_value();
+  public static final Core.Func_any_from_any_key_value e_any_from_any_key_value = new Core.Class_any_from_any_key_value();
+  public static final Core.Func_any_from_any_key_value t_any_from_any_key_value = new Core.Class_any_from_any_key_value();
 
   public static <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_any_key_value(final T generic_any_1, final T current, final Core.Type_string key, final U value) {
     T output = Core.f_empty(generic_any_1);
@@ -19086,32 +19404,33 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func any<-func)
    */
   public interface Func_any_from_func extends Core.Type_func, Core.Type_replfunc {
-    public Core.Func_any_from_func vx_fn_new(Core.Class_any_from_func.IFn fn);
     public <T extends Core.Type_any> T vx_any_from_func(final T generic_any_1);
+    public Core.Func_any_from_func vx_fn_new(Core.Class_any_from_func.IFn fn);
   }
 
   public static class Class_any_from_func extends Core.Class_base implements Func_any_from_func {
 
     @Override
     public Core.Func_any_from_func vx_new(final Object... vals) {
-      Class_any_from_func output = new Class_any_from_func();
+      Core.Class_any_from_func output = new Core.Class_any_from_func();
       return output;
     }
 
     @Override
-    public Core.Func_any_from_func vx_copy(final Object... vals) {
-      Class_any_from_func output = new Class_any_from_func();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_any_from_func output = new Core.Class_any_from_func();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "any<-func", // name
         0, // idx
@@ -19130,16 +19449,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_from_func;
+      Core.Type_any output = Core.e_any_from_func;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_any_from_func;
+      Core.Type_any output = Core.t_any_from_func;
+      return output;
     }
 
     @FunctionalInterface
@@ -19147,11 +19469,11 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       public Core.Type_any resolve();
     }
 
-    public IFn fn = null;
+    public Core.Class_any_from_func.IFn fn = null;
 
     @Override
     public Core.Func_any_from_func vx_fn_new(Core.Class_any_from_func.IFn fn) {
-      Class_any_from_func output = new Class_any_from_func();
+      Core.Class_any_from_func output = new Core.Class_any_from_func();
       output.fn = fn;
       return output;
     }
@@ -19175,8 +19497,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_any_from_func e_any_from_func = new Core.Class_any_from_func();
-  public static final Func_any_from_func t_any_from_func = new Core.Class_any_from_func();
+  public static final Core.Func_any_from_func e_any_from_func = new Core.Class_any_from_func();
+  public static final Core.Func_any_from_func t_any_from_func = new Core.Class_any_from_func();
 
   public static <T extends Core.Type_any> T f_any_from_func(final T generic_any_1) {
     T output = Core.f_empty(generic_any_1);
@@ -19192,32 +19514,33 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func any<-func-async)
    */
   public interface Func_any_from_func_async extends Core.Type_func, Core.Type_replfunc_async {
-    public Core.Func_any_from_func_async vx_fn_new(Core.Class_any_from_func_async.IFn fn);
     public <T extends Core.Type_any> CompletableFuture<T> vx_any_from_func_async(final T generic_any_1);
+    public Core.Func_any_from_func_async vx_fn_new(Core.Class_any_from_func_async.IFn fn);
   }
 
   public static class Class_any_from_func_async extends Core.Class_base implements Func_any_from_func_async {
 
     @Override
     public Core.Func_any_from_func_async vx_new(final Object... vals) {
-      Class_any_from_func_async output = new Class_any_from_func_async();
+      Core.Class_any_from_func_async output = new Core.Class_any_from_func_async();
       return output;
     }
 
     @Override
-    public Core.Func_any_from_func_async vx_copy(final Object... vals) {
-      Class_any_from_func_async output = new Class_any_from_func_async();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_any_from_func_async output = new Core.Class_any_from_func_async();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "any<-func-async", // name
         0, // idx
@@ -19236,16 +19559,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_from_func_async;
+      Core.Type_any output = Core.e_any_from_func_async;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_any_from_func_async;
+      Core.Type_any output = Core.t_any_from_func_async;
+      return output;
     }
 
     @FunctionalInterface
@@ -19253,11 +19579,11 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       public CompletableFuture<Core.Type_any> resolve();
     }
 
-    public IFn fn = null;
+    public Core.Class_any_from_func_async.IFn fn = null;
 
     @Override
     public Core.Func_any_from_func_async vx_fn_new(Core.Class_any_from_func_async.IFn fn) {
-      Class_any_from_func_async output = new Class_any_from_func_async();
+      Core.Class_any_from_func_async output = new Core.Class_any_from_func_async();
       output.fn = fn;
       return output;
     }
@@ -19284,8 +19610,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_any_from_func_async e_any_from_func_async = new Core.Class_any_from_func_async();
-  public static final Func_any_from_func_async t_any_from_func_async = new Core.Class_any_from_func_async();
+  public static final Core.Func_any_from_func_async e_any_from_func_async = new Core.Class_any_from_func_async();
+  public static final Core.Func_any_from_func_async t_any_from_func_async = new Core.Class_any_from_func_async();
 
   public static <T extends Core.Type_any> CompletableFuture<T> f_any_from_func_async(final T generic_any_1) {
     CompletableFuture<T> output = Core.vx_async_new_from_value(Core.f_empty(generic_any_1));
@@ -19300,32 +19626,33 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func any<-int)
    */
   public interface Func_any_from_int extends Core.Type_func, Core.Type_replfunc {
-    public Core.Func_any_from_int vx_fn_new(Core.Class_any_from_int.IFn fn);
     public <T extends Core.Type_any> T vx_any_from_int(final T generic_any_1, final Core.Type_int value);
+    public Core.Func_any_from_int vx_fn_new(Core.Class_any_from_int.IFn fn);
   }
 
   public static class Class_any_from_int extends Core.Class_base implements Func_any_from_int {
 
     @Override
     public Core.Func_any_from_int vx_new(final Object... vals) {
-      Class_any_from_int output = new Class_any_from_int();
+      Core.Class_any_from_int output = new Core.Class_any_from_int();
       return output;
     }
 
     @Override
-    public Core.Func_any_from_int vx_copy(final Object... vals) {
-      Class_any_from_int output = new Class_any_from_int();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_any_from_int output = new Core.Class_any_from_int();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "any<-int", // name
         0, // idx
@@ -19344,16 +19671,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_from_int;
+      Core.Type_any output = Core.e_any_from_int;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_any_from_int;
+      Core.Type_any output = Core.t_any_from_int;
+      return output;
     }
 
     @FunctionalInterface
@@ -19361,11 +19691,11 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       public Core.Type_any resolve(Core.Type_int value);
     }
 
-    public IFn fn = null;
+    public Core.Class_any_from_int.IFn fn = null;
 
     @Override
     public Core.Func_any_from_int vx_fn_new(Core.Class_any_from_int.IFn fn) {
-      Class_any_from_int output = new Class_any_from_int();
+      Core.Class_any_from_int output = new Core.Class_any_from_int();
       output.fn = fn;
       return output;
     }
@@ -19390,8 +19720,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_any_from_int e_any_from_int = new Core.Class_any_from_int();
-  public static final Func_any_from_int t_any_from_int = new Core.Class_any_from_int();
+  public static final Core.Func_any_from_int e_any_from_int = new Core.Class_any_from_int();
+  public static final Core.Func_any_from_int t_any_from_int = new Core.Class_any_from_int();
 
   public static <T extends Core.Type_any> T f_any_from_int(final T generic_any_1, final Core.Type_int value) {
     T output = Core.f_empty(generic_any_1);
@@ -19407,32 +19737,33 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func any<-int-any)
    */
   public interface Func_any_from_int_any extends Core.Type_func, Core.Type_replfunc {
-    public Core.Func_any_from_int_any vx_fn_new(Core.Class_any_from_int_any.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_int_any(final T generic_any_1, final Core.Type_int num, final U val);
+    public Core.Func_any_from_int_any vx_fn_new(Core.Class_any_from_int_any.IFn fn);
   }
 
   public static class Class_any_from_int_any extends Core.Class_base implements Func_any_from_int_any {
 
     @Override
     public Core.Func_any_from_int_any vx_new(final Object... vals) {
-      Class_any_from_int_any output = new Class_any_from_int_any();
+      Core.Class_any_from_int_any output = new Core.Class_any_from_int_any();
       return output;
     }
 
     @Override
-    public Core.Func_any_from_int_any vx_copy(final Object... vals) {
-      Class_any_from_int_any output = new Class_any_from_int_any();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_any_from_int_any output = new Core.Class_any_from_int_any();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "any<-int-any", // name
         0, // idx
@@ -19451,16 +19782,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_from_int_any;
+      Core.Type_any output = Core.e_any_from_int_any;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_any_from_int_any;
+      Core.Type_any output = Core.t_any_from_int_any;
+      return output;
     }
 
     @FunctionalInterface
@@ -19468,11 +19802,11 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       public Core.Type_any resolve(Core.Type_int num, Core.Type_any val);
     }
 
-    public IFn fn = null;
+    public Core.Class_any_from_int_any.IFn fn = null;
 
     @Override
     public Core.Func_any_from_int_any vx_fn_new(Core.Class_any_from_int_any.IFn fn) {
-      Class_any_from_int_any output = new Class_any_from_int_any();
+      Core.Class_any_from_int_any output = new Core.Class_any_from_int_any();
       output.fn = fn;
       return output;
     }
@@ -19498,8 +19832,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_any_from_int_any e_any_from_int_any = new Core.Class_any_from_int_any();
-  public static final Func_any_from_int_any t_any_from_int_any = new Core.Class_any_from_int_any();
+  public static final Core.Func_any_from_int_any e_any_from_int_any = new Core.Class_any_from_int_any();
+  public static final Core.Func_any_from_int_any t_any_from_int_any = new Core.Class_any_from_int_any();
 
   public static <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_int_any(final T generic_any_1, final Core.Type_int num, final U val) {
     T output = Core.f_empty(generic_any_1);
@@ -19515,32 +19849,33 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func any<-key-value)
    */
   public interface Func_any_from_key_value extends Core.Type_func, Core.Type_replfunc {
-    public Core.Func_any_from_key_value vx_fn_new(Core.Class_any_from_key_value.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_key_value(final T generic_any_1, final Core.Type_string key, final U val);
+    public Core.Func_any_from_key_value vx_fn_new(Core.Class_any_from_key_value.IFn fn);
   }
 
   public static class Class_any_from_key_value extends Core.Class_base implements Func_any_from_key_value {
 
     @Override
     public Core.Func_any_from_key_value vx_new(final Object... vals) {
-      Class_any_from_key_value output = new Class_any_from_key_value();
+      Core.Class_any_from_key_value output = new Core.Class_any_from_key_value();
       return output;
     }
 
     @Override
-    public Core.Func_any_from_key_value vx_copy(final Object... vals) {
-      Class_any_from_key_value output = new Class_any_from_key_value();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_any_from_key_value output = new Core.Class_any_from_key_value();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "any<-key-value", // name
         0, // idx
@@ -19559,16 +19894,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_from_key_value;
+      Core.Type_any output = Core.e_any_from_key_value;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_any_from_key_value;
+      Core.Type_any output = Core.t_any_from_key_value;
+      return output;
     }
 
     @FunctionalInterface
@@ -19576,11 +19914,11 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       public Core.Type_any resolve(Core.Type_string key, Core.Type_any val);
     }
 
-    public IFn fn = null;
+    public Core.Class_any_from_key_value.IFn fn = null;
 
     @Override
     public Core.Func_any_from_key_value vx_fn_new(Core.Class_any_from_key_value.IFn fn) {
-      Class_any_from_key_value output = new Class_any_from_key_value();
+      Core.Class_any_from_key_value output = new Core.Class_any_from_key_value();
       output.fn = fn;
       return output;
     }
@@ -19606,8 +19944,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_any_from_key_value e_any_from_key_value = new Core.Class_any_from_key_value();
-  public static final Func_any_from_key_value t_any_from_key_value = new Core.Class_any_from_key_value();
+  public static final Core.Func_any_from_key_value e_any_from_key_value = new Core.Class_any_from_key_value();
+  public static final Core.Func_any_from_key_value t_any_from_key_value = new Core.Class_any_from_key_value();
 
   public static <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_key_value(final T generic_any_1, final Core.Type_string key, final U val) {
     T output = Core.f_empty(generic_any_1);
@@ -19625,32 +19963,33 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func any<-key-value-async)
    */
   public interface Func_any_from_key_value_async extends Core.Type_func, Core.Type_replfunc_async {
-    public Core.Func_any_from_key_value_async vx_fn_new(Core.Class_any_from_key_value_async.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_key_value_async(final T generic_any_1, final Core.Type_string key, final U val);
+    public Core.Func_any_from_key_value_async vx_fn_new(Core.Class_any_from_key_value_async.IFn fn);
   }
 
   public static class Class_any_from_key_value_async extends Core.Class_base implements Func_any_from_key_value_async {
 
     @Override
     public Core.Func_any_from_key_value_async vx_new(final Object... vals) {
-      Class_any_from_key_value_async output = new Class_any_from_key_value_async();
+      Core.Class_any_from_key_value_async output = new Core.Class_any_from_key_value_async();
       return output;
     }
 
     @Override
-    public Core.Func_any_from_key_value_async vx_copy(final Object... vals) {
-      Class_any_from_key_value_async output = new Class_any_from_key_value_async();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_any_from_key_value_async output = new Core.Class_any_from_key_value_async();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "any<-key-value-async", // name
         0, // idx
@@ -19669,16 +20008,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_from_key_value_async;
+      Core.Type_any output = Core.e_any_from_key_value_async;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_any_from_key_value_async;
+      Core.Type_any output = Core.t_any_from_key_value_async;
+      return output;
     }
 
     @FunctionalInterface
@@ -19686,11 +20028,11 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       public CompletableFuture<Core.Type_any> resolve(Core.Type_string key, Core.Type_any val);
     }
 
-    public IFn fn = null;
+    public Core.Class_any_from_key_value_async.IFn fn = null;
 
     @Override
     public Core.Func_any_from_key_value_async vx_fn_new(Core.Class_any_from_key_value_async.IFn fn) {
-      Class_any_from_key_value_async output = new Class_any_from_key_value_async();
+      Core.Class_any_from_key_value_async output = new Core.Class_any_from_key_value_async();
       output.fn = fn;
       return output;
     }
@@ -19719,8 +20061,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_any_from_key_value_async e_any_from_key_value_async = new Core.Class_any_from_key_value_async();
-  public static final Func_any_from_key_value_async t_any_from_key_value_async = new Core.Class_any_from_key_value_async();
+  public static final Core.Func_any_from_key_value_async e_any_from_key_value_async = new Core.Class_any_from_key_value_async();
+  public static final Core.Func_any_from_key_value_async t_any_from_key_value_async = new Core.Class_any_from_key_value_async();
 
   public static <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_key_value_async(final T generic_any_1, final Core.Type_string key, final U val) {
     CompletableFuture<T> output = Core.vx_async_new_from_value(Core.f_empty(generic_any_1));
@@ -19743,24 +20085,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_any_from_list vx_new(final Object... vals) {
-      Class_any_from_list output = new Class_any_from_list();
+      Core.Class_any_from_list output = new Core.Class_any_from_list();
       return output;
     }
 
     @Override
-    public Core.Func_any_from_list vx_copy(final Object... vals) {
-      Class_any_from_list output = new Class_any_from_list();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_any_from_list output = new Core.Class_any_from_list();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "any<-list", // name
         0, // idx
@@ -19779,16 +20122,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_from_list;
+      Core.Type_any output = Core.e_any_from_list;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_any_from_list;
+      Core.Type_any output = Core.t_any_from_list;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -19807,8 +20153,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_any_from_list e_any_from_list = new Core.Class_any_from_list();
-  public static final Func_any_from_list t_any_from_list = new Core.Class_any_from_list();
+  public static final Core.Func_any_from_list e_any_from_list = new Core.Class_any_from_list();
+  public static final Core.Func_any_from_list t_any_from_list = new Core.Class_any_from_list();
 
   public static <T extends Core.Type_any, X extends Core.Type_list> T f_any_from_list(final T generic_any_1, final X values, final Core.Type_int index) {
     T output = Core.f_empty(generic_any_1);
@@ -19839,24 +20185,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_any_from_list_start_reduce vx_new(final Object... vals) {
-      Class_any_from_list_start_reduce output = new Class_any_from_list_start_reduce();
+      Core.Class_any_from_list_start_reduce output = new Core.Class_any_from_list_start_reduce();
       return output;
     }
 
     @Override
-    public Core.Func_any_from_list_start_reduce vx_copy(final Object... vals) {
-      Class_any_from_list_start_reduce output = new Class_any_from_list_start_reduce();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_any_from_list_start_reduce output = new Core.Class_any_from_list_start_reduce();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "any<-list-start-reduce", // name
         0, // idx
@@ -19875,16 +20222,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_from_list_start_reduce;
+      Core.Type_any output = Core.e_any_from_list_start_reduce;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_any_from_list_start_reduce;
+      Core.Type_any output = Core.t_any_from_list_start_reduce;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -19904,8 +20254,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_any_from_list_start_reduce e_any_from_list_start_reduce = new Core.Class_any_from_list_start_reduce();
-  public static final Func_any_from_list_start_reduce t_any_from_list_start_reduce = new Core.Class_any_from_list_start_reduce();
+  public static final Core.Func_any_from_list_start_reduce e_any_from_list_start_reduce = new Core.Class_any_from_list_start_reduce();
+  public static final Core.Func_any_from_list_start_reduce t_any_from_list_start_reduce = new Core.Class_any_from_list_start_reduce();
 
   public static <T extends Core.Type_any, Y extends Core.Type_list> T f_any_from_list_start_reduce(final T generic_any_1, final Y list, final T valstart, final Core.Func_any_from_reduce fn_reduce) {
     T output = Core.f_empty(generic_any_1);
@@ -19930,24 +20280,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_any_from_list_start_reduce_next vx_new(final Object... vals) {
-      Class_any_from_list_start_reduce_next output = new Class_any_from_list_start_reduce_next();
+      Core.Class_any_from_list_start_reduce_next output = new Core.Class_any_from_list_start_reduce_next();
       return output;
     }
 
     @Override
-    public Core.Func_any_from_list_start_reduce_next vx_copy(final Object... vals) {
-      Class_any_from_list_start_reduce_next output = new Class_any_from_list_start_reduce_next();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_any_from_list_start_reduce_next output = new Core.Class_any_from_list_start_reduce_next();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "any<-list-start-reduce-next", // name
         0, // idx
@@ -19966,16 +20317,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_from_list_start_reduce_next;
+      Core.Type_any output = Core.e_any_from_list_start_reduce_next;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_any_from_list_start_reduce_next;
+      Core.Type_any output = Core.t_any_from_list_start_reduce_next;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -19995,8 +20349,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_any_from_list_start_reduce_next e_any_from_list_start_reduce_next = new Core.Class_any_from_list_start_reduce_next();
-  public static final Func_any_from_list_start_reduce_next t_any_from_list_start_reduce_next = new Core.Class_any_from_list_start_reduce_next();
+  public static final Core.Func_any_from_list_start_reduce_next e_any_from_list_start_reduce_next = new Core.Class_any_from_list_start_reduce_next();
+  public static final Core.Func_any_from_list_start_reduce_next t_any_from_list_start_reduce_next = new Core.Class_any_from_list_start_reduce_next();
 
   public static <T extends Core.Type_any, Y extends Core.Type_list> T f_any_from_list_start_reduce_next(final T generic_any_1, final Y list, final T valstart, final Core.Func_any_from_reduce_next fn_reduce_next) {
     T output = Core.f_empty(generic_any_1);
@@ -20031,24 +20385,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_any_from_map vx_new(final Object... vals) {
-      Class_any_from_map output = new Class_any_from_map();
+      Core.Class_any_from_map output = new Core.Class_any_from_map();
       return output;
     }
 
     @Override
-    public Core.Func_any_from_map vx_copy(final Object... vals) {
-      Class_any_from_map output = new Class_any_from_map();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_any_from_map output = new Core.Class_any_from_map();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "any<-map", // name
         0, // idx
@@ -20067,16 +20422,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_from_map;
+      Core.Type_any output = Core.e_any_from_map;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_any_from_map;
+      Core.Type_any output = Core.t_any_from_map;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -20095,8 +20453,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_any_from_map e_any_from_map = new Core.Class_any_from_map();
-  public static final Func_any_from_map t_any_from_map = new Core.Class_any_from_map();
+  public static final Core.Func_any_from_map e_any_from_map = new Core.Class_any_from_map();
+  public static final Core.Func_any_from_map t_any_from_map = new Core.Class_any_from_map();
 
   public static <N extends Core.Type_map, T extends Core.Type_any> T f_any_from_map(final T generic_any_1, final N valuemap, final Core.Type_string key) {
     T output = Core.f_empty(generic_any_1);
@@ -20121,24 +20479,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_any_from_map_start_reduce vx_new(final Object... vals) {
-      Class_any_from_map_start_reduce output = new Class_any_from_map_start_reduce();
+      Core.Class_any_from_map_start_reduce output = new Core.Class_any_from_map_start_reduce();
       return output;
     }
 
     @Override
-    public Core.Func_any_from_map_start_reduce vx_copy(final Object... vals) {
-      Class_any_from_map_start_reduce output = new Class_any_from_map_start_reduce();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_any_from_map_start_reduce output = new Core.Class_any_from_map_start_reduce();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "any<-map-start-reduce", // name
         0, // idx
@@ -20157,16 +20516,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_from_map_start_reduce;
+      Core.Type_any output = Core.e_any_from_map_start_reduce;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_any_from_map_start_reduce;
+      Core.Type_any output = Core.t_any_from_map_start_reduce;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -20186,8 +20548,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_any_from_map_start_reduce e_any_from_map_start_reduce = new Core.Class_any_from_map_start_reduce();
-  public static final Func_any_from_map_start_reduce t_any_from_map_start_reduce = new Core.Class_any_from_map_start_reduce();
+  public static final Core.Func_any_from_map_start_reduce e_any_from_map_start_reduce = new Core.Class_any_from_map_start_reduce();
+  public static final Core.Func_any_from_map_start_reduce t_any_from_map_start_reduce = new Core.Class_any_from_map_start_reduce();
 
   public static <N extends Core.Type_map, T extends Core.Type_any> T f_any_from_map_start_reduce(final T generic_any_1, final N map, final T start, final Core.Func_any_from_any_key_value fn_reduce) {
     T output = Core.f_empty(generic_any_1);
@@ -20202,32 +20564,33 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func any<-none)
    */
   public interface Func_any_from_none extends Core.Type_func, Core.Type_replfunc {
-    public Core.Func_any_from_none vx_fn_new(Core.Class_any_from_none.IFn fn);
     public <T extends Core.Type_any> T vx_any_from_none(final T generic_any_1);
+    public Core.Func_any_from_none vx_fn_new(Core.Class_any_from_none.IFn fn);
   }
 
   public static class Class_any_from_none extends Core.Class_base implements Func_any_from_none {
 
     @Override
     public Core.Func_any_from_none vx_new(final Object... vals) {
-      Class_any_from_none output = new Class_any_from_none();
+      Core.Class_any_from_none output = new Core.Class_any_from_none();
       return output;
     }
 
     @Override
-    public Core.Func_any_from_none vx_copy(final Object... vals) {
-      Class_any_from_none output = new Class_any_from_none();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_any_from_none output = new Core.Class_any_from_none();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "any<-none", // name
         0, // idx
@@ -20246,16 +20609,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_from_none;
+      Core.Type_any output = Core.e_any_from_none;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_any_from_none;
+      Core.Type_any output = Core.t_any_from_none;
+      return output;
     }
 
     @FunctionalInterface
@@ -20263,11 +20629,11 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       public Core.Type_any resolve();
     }
 
-    public IFn fn = null;
+    public Core.Class_any_from_none.IFn fn = null;
 
     @Override
     public Core.Func_any_from_none vx_fn_new(Core.Class_any_from_none.IFn fn) {
-      Class_any_from_none output = new Class_any_from_none();
+      Core.Class_any_from_none output = new Core.Class_any_from_none();
       output.fn = fn;
       return output;
     }
@@ -20291,8 +20657,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_any_from_none e_any_from_none = new Core.Class_any_from_none();
-  public static final Func_any_from_none t_any_from_none = new Core.Class_any_from_none();
+  public static final Core.Func_any_from_none e_any_from_none = new Core.Class_any_from_none();
+  public static final Core.Func_any_from_none t_any_from_none = new Core.Class_any_from_none();
 
   public static <T extends Core.Type_any> T f_any_from_none(final T generic_any_1) {
     T output = Core.f_empty(generic_any_1);
@@ -20308,32 +20674,33 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func any<-none-async)
    */
   public interface Func_any_from_none_async extends Core.Type_func, Core.Type_replfunc_async {
-    public Core.Func_any_from_none_async vx_fn_new(Core.Class_any_from_none_async.IFn fn);
     public <T extends Core.Type_any> CompletableFuture<T> vx_any_from_none_async(final T generic_any_1);
+    public Core.Func_any_from_none_async vx_fn_new(Core.Class_any_from_none_async.IFn fn);
   }
 
   public static class Class_any_from_none_async extends Core.Class_base implements Func_any_from_none_async {
 
     @Override
     public Core.Func_any_from_none_async vx_new(final Object... vals) {
-      Class_any_from_none_async output = new Class_any_from_none_async();
+      Core.Class_any_from_none_async output = new Core.Class_any_from_none_async();
       return output;
     }
 
     @Override
-    public Core.Func_any_from_none_async vx_copy(final Object... vals) {
-      Class_any_from_none_async output = new Class_any_from_none_async();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_any_from_none_async output = new Core.Class_any_from_none_async();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "any<-none-async", // name
         0, // idx
@@ -20352,16 +20719,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_from_none_async;
+      Core.Type_any output = Core.e_any_from_none_async;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_any_from_none_async;
+      Core.Type_any output = Core.t_any_from_none_async;
+      return output;
     }
 
     @FunctionalInterface
@@ -20369,11 +20739,11 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       public CompletableFuture<Core.Type_any> resolve();
     }
 
-    public IFn fn = null;
+    public Core.Class_any_from_none_async.IFn fn = null;
 
     @Override
     public Core.Func_any_from_none_async vx_fn_new(Core.Class_any_from_none_async.IFn fn) {
-      Class_any_from_none_async output = new Class_any_from_none_async();
+      Core.Class_any_from_none_async output = new Core.Class_any_from_none_async();
       output.fn = fn;
       return output;
     }
@@ -20400,8 +20770,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_any_from_none_async e_any_from_none_async = new Core.Class_any_from_none_async();
-  public static final Func_any_from_none_async t_any_from_none_async = new Core.Class_any_from_none_async();
+  public static final Core.Func_any_from_none_async e_any_from_none_async = new Core.Class_any_from_none_async();
+  public static final Core.Func_any_from_none_async t_any_from_none_async = new Core.Class_any_from_none_async();
 
   public static <T extends Core.Type_any> CompletableFuture<T> f_any_from_none_async(final T generic_any_1) {
     CompletableFuture<T> output = Core.vx_async_new_from_value(Core.f_empty(generic_any_1));
@@ -20416,32 +20786,33 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func any<-reduce)
    */
   public interface Func_any_from_reduce extends Core.Type_func, Core.Type_replfunc {
-    public Core.Func_any_from_reduce vx_fn_new(Core.Class_any_from_reduce.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_reduce(final T generic_any_1, final T result, final U item);
+    public Core.Func_any_from_reduce vx_fn_new(Core.Class_any_from_reduce.IFn fn);
   }
 
   public static class Class_any_from_reduce extends Core.Class_base implements Func_any_from_reduce {
 
     @Override
     public Core.Func_any_from_reduce vx_new(final Object... vals) {
-      Class_any_from_reduce output = new Class_any_from_reduce();
+      Core.Class_any_from_reduce output = new Core.Class_any_from_reduce();
       return output;
     }
 
     @Override
-    public Core.Func_any_from_reduce vx_copy(final Object... vals) {
-      Class_any_from_reduce output = new Class_any_from_reduce();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_any_from_reduce output = new Core.Class_any_from_reduce();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "any<-reduce", // name
         0, // idx
@@ -20460,16 +20831,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_from_reduce;
+      Core.Type_any output = Core.e_any_from_reduce;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_any_from_reduce;
+      Core.Type_any output = Core.t_any_from_reduce;
+      return output;
     }
 
     @FunctionalInterface
@@ -20477,11 +20851,11 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       public Core.Type_any resolve(Core.Type_any result, Core.Type_any item);
     }
 
-    public IFn fn = null;
+    public Core.Class_any_from_reduce.IFn fn = null;
 
     @Override
     public Core.Func_any_from_reduce vx_fn_new(Core.Class_any_from_reduce.IFn fn) {
-      Class_any_from_reduce output = new Class_any_from_reduce();
+      Core.Class_any_from_reduce output = new Core.Class_any_from_reduce();
       output.fn = fn;
       return output;
     }
@@ -20507,8 +20881,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_any_from_reduce e_any_from_reduce = new Core.Class_any_from_reduce();
-  public static final Func_any_from_reduce t_any_from_reduce = new Core.Class_any_from_reduce();
+  public static final Core.Func_any_from_reduce e_any_from_reduce = new Core.Class_any_from_reduce();
+  public static final Core.Func_any_from_reduce t_any_from_reduce = new Core.Class_any_from_reduce();
 
   public static <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_reduce(final T generic_any_1, final T result, final U item) {
     T output = Core.f_empty(generic_any_1);
@@ -20525,32 +20899,33 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func any<-reduce-async)
    */
   public interface Func_any_from_reduce_async extends Core.Type_func, Core.Type_replfunc_async {
-    public Core.Func_any_from_reduce_async vx_fn_new(Core.Class_any_from_reduce_async.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_reduce_async(final T generic_any_1, final T result, final U item);
+    public Core.Func_any_from_reduce_async vx_fn_new(Core.Class_any_from_reduce_async.IFn fn);
   }
 
   public static class Class_any_from_reduce_async extends Core.Class_base implements Func_any_from_reduce_async {
 
     @Override
     public Core.Func_any_from_reduce_async vx_new(final Object... vals) {
-      Class_any_from_reduce_async output = new Class_any_from_reduce_async();
+      Core.Class_any_from_reduce_async output = new Core.Class_any_from_reduce_async();
       return output;
     }
 
     @Override
-    public Core.Func_any_from_reduce_async vx_copy(final Object... vals) {
-      Class_any_from_reduce_async output = new Class_any_from_reduce_async();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_any_from_reduce_async output = new Core.Class_any_from_reduce_async();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "any<-reduce-async", // name
         0, // idx
@@ -20569,16 +20944,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_from_reduce_async;
+      Core.Type_any output = Core.e_any_from_reduce_async;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_any_from_reduce_async;
+      Core.Type_any output = Core.t_any_from_reduce_async;
+      return output;
     }
 
     @FunctionalInterface
@@ -20586,11 +20964,11 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       public CompletableFuture<Core.Type_any> resolve(Core.Type_any result, Core.Type_any item);
     }
 
-    public IFn fn = null;
+    public Core.Class_any_from_reduce_async.IFn fn = null;
 
     @Override
     public Core.Func_any_from_reduce_async vx_fn_new(Core.Class_any_from_reduce_async.IFn fn) {
-      Class_any_from_reduce_async output = new Class_any_from_reduce_async();
+      Core.Class_any_from_reduce_async output = new Core.Class_any_from_reduce_async();
       output.fn = fn;
       return output;
     }
@@ -20619,8 +20997,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_any_from_reduce_async e_any_from_reduce_async = new Core.Class_any_from_reduce_async();
-  public static final Func_any_from_reduce_async t_any_from_reduce_async = new Core.Class_any_from_reduce_async();
+  public static final Core.Func_any_from_reduce_async e_any_from_reduce_async = new Core.Class_any_from_reduce_async();
+  public static final Core.Func_any_from_reduce_async t_any_from_reduce_async = new Core.Class_any_from_reduce_async();
 
   public static <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_reduce_async(final T generic_any_1, final T result, final U item) {
     CompletableFuture<T> output = Core.vx_async_new_from_value(Core.f_empty(generic_any_1));
@@ -20636,32 +21014,33 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func any<-reduce-next)
    */
   public interface Func_any_from_reduce_next extends Core.Type_func, Core.Type_replfunc {
-    public Core.Func_any_from_reduce_next vx_fn_new(Core.Class_any_from_reduce_next.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_reduce_next(final T generic_any_1, final T result, final U current, final U next);
+    public Core.Func_any_from_reduce_next vx_fn_new(Core.Class_any_from_reduce_next.IFn fn);
   }
 
   public static class Class_any_from_reduce_next extends Core.Class_base implements Func_any_from_reduce_next {
 
     @Override
     public Core.Func_any_from_reduce_next vx_new(final Object... vals) {
-      Class_any_from_reduce_next output = new Class_any_from_reduce_next();
+      Core.Class_any_from_reduce_next output = new Core.Class_any_from_reduce_next();
       return output;
     }
 
     @Override
-    public Core.Func_any_from_reduce_next vx_copy(final Object... vals) {
-      Class_any_from_reduce_next output = new Class_any_from_reduce_next();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_any_from_reduce_next output = new Core.Class_any_from_reduce_next();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "any<-reduce-next", // name
         0, // idx
@@ -20680,16 +21059,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_from_reduce_next;
+      Core.Type_any output = Core.e_any_from_reduce_next;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_any_from_reduce_next;
+      Core.Type_any output = Core.t_any_from_reduce_next;
+      return output;
     }
 
     @FunctionalInterface
@@ -20697,11 +21079,11 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       public Core.Type_any resolve(Core.Type_any result, Core.Type_any current, Core.Type_any next);
     }
 
-    public IFn fn = null;
+    public Core.Class_any_from_reduce_next.IFn fn = null;
 
     @Override
     public Core.Func_any_from_reduce_next vx_fn_new(Core.Class_any_from_reduce_next.IFn fn) {
-      Class_any_from_reduce_next output = new Class_any_from_reduce_next();
+      Core.Class_any_from_reduce_next output = new Core.Class_any_from_reduce_next();
       output.fn = fn;
       return output;
     }
@@ -20728,8 +21110,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_any_from_reduce_next e_any_from_reduce_next = new Core.Class_any_from_reduce_next();
-  public static final Func_any_from_reduce_next t_any_from_reduce_next = new Core.Class_any_from_reduce_next();
+  public static final Core.Func_any_from_reduce_next e_any_from_reduce_next = new Core.Class_any_from_reduce_next();
+  public static final Core.Func_any_from_reduce_next t_any_from_reduce_next = new Core.Class_any_from_reduce_next();
 
   public static <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_reduce_next(final T generic_any_1, final T result, final U current, final U next) {
     T output = Core.f_empty(generic_any_1);
@@ -20747,32 +21129,33 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func any<-reduce-next-async)
    */
   public interface Func_any_from_reduce_next_async extends Core.Type_func, Core.Type_replfunc_async {
-    public Core.Func_any_from_reduce_next_async vx_fn_new(Core.Class_any_from_reduce_next_async.IFn fn);
     public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_reduce_next_async(final T generic_any_1, final T result, final U current, final U next);
+    public Core.Func_any_from_reduce_next_async vx_fn_new(Core.Class_any_from_reduce_next_async.IFn fn);
   }
 
   public static class Class_any_from_reduce_next_async extends Core.Class_base implements Func_any_from_reduce_next_async {
 
     @Override
     public Core.Func_any_from_reduce_next_async vx_new(final Object... vals) {
-      Class_any_from_reduce_next_async output = new Class_any_from_reduce_next_async();
+      Core.Class_any_from_reduce_next_async output = new Core.Class_any_from_reduce_next_async();
       return output;
     }
 
     @Override
-    public Core.Func_any_from_reduce_next_async vx_copy(final Object... vals) {
-      Class_any_from_reduce_next_async output = new Class_any_from_reduce_next_async();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_any_from_reduce_next_async output = new Core.Class_any_from_reduce_next_async();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "any<-reduce-next-async", // name
         0, // idx
@@ -20791,16 +21174,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_from_reduce_next_async;
+      Core.Type_any output = Core.e_any_from_reduce_next_async;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_any_from_reduce_next_async;
+      Core.Type_any output = Core.t_any_from_reduce_next_async;
+      return output;
     }
 
     @FunctionalInterface
@@ -20808,11 +21194,11 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       public CompletableFuture<Core.Type_any> resolve(Core.Type_any result, Core.Type_any current, Core.Type_any next);
     }
 
-    public IFn fn = null;
+    public Core.Class_any_from_reduce_next_async.IFn fn = null;
 
     @Override
     public Core.Func_any_from_reduce_next_async vx_fn_new(Core.Class_any_from_reduce_next_async.IFn fn) {
-      Class_any_from_reduce_next_async output = new Class_any_from_reduce_next_async();
+      Core.Class_any_from_reduce_next_async output = new Core.Class_any_from_reduce_next_async();
       output.fn = fn;
       return output;
     }
@@ -20842,8 +21228,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_any_from_reduce_next_async e_any_from_reduce_next_async = new Core.Class_any_from_reduce_next_async();
-  public static final Func_any_from_reduce_next_async t_any_from_reduce_next_async = new Core.Class_any_from_reduce_next_async();
+  public static final Core.Func_any_from_reduce_next_async e_any_from_reduce_next_async = new Core.Class_any_from_reduce_next_async();
+  public static final Core.Func_any_from_reduce_next_async t_any_from_reduce_next_async = new Core.Class_any_from_reduce_next_async();
 
   public static <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_reduce_next_async(final T generic_any_1, final T result, final U current, final U next) {
     CompletableFuture<T> output = Core.vx_async_new_from_value(Core.f_empty(generic_any_1));
@@ -20866,24 +21252,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_any_from_struct vx_new(final Object... vals) {
-      Class_any_from_struct output = new Class_any_from_struct();
+      Core.Class_any_from_struct output = new Core.Class_any_from_struct();
       return output;
     }
 
     @Override
-    public Core.Func_any_from_struct vx_copy(final Object... vals) {
-      Class_any_from_struct output = new Class_any_from_struct();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_any_from_struct output = new Core.Class_any_from_struct();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "any<-struct", // name
         0, // idx
@@ -20902,16 +21289,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_any_from_struct;
+      Core.Type_any output = Core.e_any_from_struct;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_any_from_struct;
+      Core.Type_any output = Core.t_any_from_struct;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -20930,8 +21320,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_any_from_struct e_any_from_struct = new Core.Class_any_from_struct();
-  public static final Func_any_from_struct t_any_from_struct = new Core.Class_any_from_struct();
+  public static final Core.Func_any_from_struct e_any_from_struct = new Core.Class_any_from_struct();
+  public static final Core.Func_any_from_struct t_any_from_struct = new Core.Class_any_from_struct();
 
   public static <R extends Core.Type_struct, T extends Core.Type_any> T f_any_from_struct(final T generic_any_1, final R vstruct, final Core.Type_string key) {
     T output = Core.f_empty(generic_any_1);
@@ -20957,24 +21347,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_async vx_new(final Object... vals) {
-      Class_async output = new Class_async();
+      Core.Class_async output = new Core.Class_async();
       return output;
     }
 
     @Override
-    public Core.Func_async vx_copy(final Object... vals) {
-      Class_async output = new Class_async();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_async output = new Core.Class_async();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "async", // name
         0, // idx
@@ -20993,16 +21384,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_async;
+      Core.Type_any output = Core.e_async;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_async;
+      Core.Type_any output = Core.t_async;
+      return output;
     }
 
     @Override
@@ -21033,8 +21427,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_async e_async = new Core.Class_async();
-  public static final Func_async t_async = new Core.Class_async();
+  public static final Core.Func_async e_async = new Core.Class_async();
+  public static final Core.Func_async t_async = new Core.Class_async();
 
   public static <T extends Core.Type_any> CompletableFuture<T> f_async(final T generic_any_1, final T value) {
     CompletableFuture<T> output = Core.vx_async_new_from_value(Core.f_empty(generic_any_1));
@@ -21057,24 +21451,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_boolean_permission_from_func vx_new(final Object... vals) {
-      Class_boolean_permission_from_func output = new Class_boolean_permission_from_func();
+      Core.Class_boolean_permission_from_func output = new Core.Class_boolean_permission_from_func();
       return output;
     }
 
     @Override
-    public Core.Func_boolean_permission_from_func vx_copy(final Object... vals) {
-      Class_boolean_permission_from_func output = new Class_boolean_permission_from_func();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_boolean_permission_from_func output = new Core.Class_boolean_permission_from_func();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "boolean-permission<-func", // name
         0, // idx
@@ -21093,16 +21488,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_boolean_permission_from_func;
+      Core.Type_any output = Core.e_boolean_permission_from_func;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_boolean_permission_from_func;
+      Core.Type_any output = Core.t_boolean_permission_from_func;
+      return output;
     }
 
     @Override
@@ -21134,8 +21532,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_boolean_permission_from_func e_boolean_permission_from_func = new Core.Class_boolean_permission_from_func();
-  public static final Func_boolean_permission_from_func t_boolean_permission_from_func = new Core.Class_boolean_permission_from_func();
+  public static final Core.Func_boolean_permission_from_func e_boolean_permission_from_func = new Core.Class_boolean_permission_from_func();
+  public static final Core.Func_boolean_permission_from_func t_boolean_permission_from_func = new Core.Class_boolean_permission_from_func();
 
   public static Core.Type_boolean f_boolean_permission_from_func(final Core.Type_context context, final Core.Type_func func) {
     Core.Type_boolean output = Core.e_boolean;
@@ -21165,24 +21563,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_boolean_write_from_map_name_value vx_new(final Object... vals) {
-      Class_boolean_write_from_map_name_value output = new Class_boolean_write_from_map_name_value();
+      Core.Class_boolean_write_from_map_name_value output = new Core.Class_boolean_write_from_map_name_value();
       return output;
     }
 
     @Override
-    public Core.Func_boolean_write_from_map_name_value vx_copy(final Object... vals) {
-      Class_boolean_write_from_map_name_value output = new Class_boolean_write_from_map_name_value();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_boolean_write_from_map_name_value output = new Core.Class_boolean_write_from_map_name_value();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "boolean-write<-map-name-value", // name
         0, // idx
@@ -21201,16 +21600,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_boolean_write_from_map_name_value;
+      Core.Type_any output = Core.e_boolean_write_from_map_name_value;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_boolean_write_from_map_name_value;
+      Core.Type_any output = Core.t_boolean_write_from_map_name_value;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -21229,8 +21631,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_boolean_write_from_map_name_value e_boolean_write_from_map_name_value = new Core.Class_boolean_write_from_map_name_value();
-  public static final Func_boolean_write_from_map_name_value t_boolean_write_from_map_name_value = new Core.Class_boolean_write_from_map_name_value();
+  public static final Core.Func_boolean_write_from_map_name_value e_boolean_write_from_map_name_value = new Core.Class_boolean_write_from_map_name_value();
+  public static final Core.Func_boolean_write_from_map_name_value t_boolean_write_from_map_name_value = new Core.Class_boolean_write_from_map_name_value();
 
   public static Core.Type_boolean f_boolean_write_from_map_name_value(final Core.Type_map valuemap, final Core.Type_string name, final Core.Type_any value) {
     Core.Type_boolean output = Core.e_boolean;
@@ -21246,32 +21648,33 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func boolean<-any)
    */
   public interface Func_boolean_from_any extends Core.Type_func, Core.Type_replfunc {
-    public Core.Func_boolean_from_any vx_fn_new(Core.Class_boolean_from_any.IFn fn);
     public Core.Type_boolean vx_boolean_from_any(final Core.Type_any value);
+    public Core.Func_boolean_from_any vx_fn_new(Core.Class_boolean_from_any.IFn fn);
   }
 
   public static class Class_boolean_from_any extends Core.Class_base implements Func_boolean_from_any {
 
     @Override
     public Core.Func_boolean_from_any vx_new(final Object... vals) {
-      Class_boolean_from_any output = new Class_boolean_from_any();
+      Core.Class_boolean_from_any output = new Core.Class_boolean_from_any();
       return output;
     }
 
     @Override
-    public Core.Func_boolean_from_any vx_copy(final Object... vals) {
-      Class_boolean_from_any output = new Class_boolean_from_any();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_boolean_from_any output = new Core.Class_boolean_from_any();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "boolean<-any", // name
         0, // idx
@@ -21290,16 +21693,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_boolean_from_any;
+      Core.Type_any output = Core.e_boolean_from_any;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_boolean_from_any;
+      Core.Type_any output = Core.t_boolean_from_any;
+      return output;
     }
 
     @FunctionalInterface
@@ -21307,11 +21713,11 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       public Core.Type_any resolve(Core.Type_any value);
     }
 
-    public IFn fn = null;
+    public Core.Class_boolean_from_any.IFn fn = null;
 
     @Override
     public Core.Func_boolean_from_any vx_fn_new(Core.Class_boolean_from_any.IFn fn) {
-      Class_boolean_from_any output = new Class_boolean_from_any();
+      Core.Class_boolean_from_any output = new Core.Class_boolean_from_any();
       output.fn = fn;
       return output;
     }
@@ -21335,8 +21741,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_boolean_from_any e_boolean_from_any = new Core.Class_boolean_from_any();
-  public static final Func_boolean_from_any t_boolean_from_any = new Core.Class_boolean_from_any();
+  public static final Core.Func_boolean_from_any e_boolean_from_any = new Core.Class_boolean_from_any();
+  public static final Core.Func_boolean_from_any t_boolean_from_any = new Core.Class_boolean_from_any();
 
   public static Core.Type_boolean f_boolean_from_any(final Core.Type_any value) {
     Core.Type_boolean output = Core.e_boolean;
@@ -21350,32 +21756,33 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func boolean<-func)
    */
   public interface Func_boolean_from_func extends Core.Type_func, Core.Type_replfunc {
-    public Core.Func_boolean_from_func vx_fn_new(Core.Class_any_from_func.IFn fn);
     public Core.Type_boolean vx_boolean_from_func();
+    public Core.Func_boolean_from_func vx_fn_new(Core.Class_any_from_func.IFn fn);
   }
 
   public static class Class_boolean_from_func extends Core.Class_base implements Func_boolean_from_func {
 
     @Override
     public Core.Func_boolean_from_func vx_new(final Object... vals) {
-      Class_boolean_from_func output = new Class_boolean_from_func();
+      Core.Class_boolean_from_func output = new Core.Class_boolean_from_func();
       return output;
     }
 
     @Override
-    public Core.Func_boolean_from_func vx_copy(final Object... vals) {
-      Class_boolean_from_func output = new Class_boolean_from_func();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_boolean_from_func output = new Core.Class_boolean_from_func();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "boolean<-func", // name
         0, // idx
@@ -21394,16 +21801,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_boolean_from_func;
+      Core.Type_any output = Core.e_boolean_from_func;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_boolean_from_func;
+      Core.Type_any output = Core.t_boolean_from_func;
+      return output;
     }
 
     @FunctionalInterface
@@ -21415,7 +21825,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_boolean_from_func vx_fn_new(Core.Class_any_from_func.IFn fn) {
-      Class_boolean_from_func output = new Class_boolean_from_func();
+      Core.Class_boolean_from_func output = new Core.Class_boolean_from_func();
       output.fn = fn;
       return output;
     }
@@ -21438,8 +21848,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_boolean_from_func e_boolean_from_func = new Core.Class_boolean_from_func();
-  public static final Func_boolean_from_func t_boolean_from_func = new Core.Class_boolean_from_func();
+  public static final Core.Func_boolean_from_func e_boolean_from_func = new Core.Class_boolean_from_func();
+  public static final Core.Func_boolean_from_func t_boolean_from_func = new Core.Class_boolean_from_func();
 
   public static Core.Type_boolean f_boolean_from_func() {
     Core.Type_boolean output = Core.e_boolean;
@@ -21453,32 +21863,33 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func boolean<-none)
    */
   public interface Func_boolean_from_none extends Core.Type_func, Core.Type_replfunc {
-    public Core.Func_boolean_from_none vx_fn_new(Core.Class_any_from_func.IFn fn);
     public Core.Type_boolean vx_boolean_from_none();
+    public Core.Func_boolean_from_none vx_fn_new(Core.Class_any_from_func.IFn fn);
   }
 
   public static class Class_boolean_from_none extends Core.Class_base implements Func_boolean_from_none {
 
     @Override
     public Core.Func_boolean_from_none vx_new(final Object... vals) {
-      Class_boolean_from_none output = new Class_boolean_from_none();
+      Core.Class_boolean_from_none output = new Core.Class_boolean_from_none();
       return output;
     }
 
     @Override
-    public Core.Func_boolean_from_none vx_copy(final Object... vals) {
-      Class_boolean_from_none output = new Class_boolean_from_none();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_boolean_from_none output = new Core.Class_boolean_from_none();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "boolean<-none", // name
         0, // idx
@@ -21497,16 +21908,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_boolean_from_none;
+      Core.Type_any output = Core.e_boolean_from_none;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_boolean_from_none;
+      Core.Type_any output = Core.t_boolean_from_none;
+      return output;
     }
 
     @FunctionalInterface
@@ -21518,7 +21932,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_boolean_from_none vx_fn_new(Core.Class_any_from_func.IFn fn) {
-      Class_boolean_from_none output = new Class_boolean_from_none();
+      Core.Class_boolean_from_none output = new Core.Class_boolean_from_none();
       output.fn = fn;
       return output;
     }
@@ -21541,8 +21955,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_boolean_from_none e_boolean_from_none = new Core.Class_boolean_from_none();
-  public static final Func_boolean_from_none t_boolean_from_none = new Core.Class_boolean_from_none();
+  public static final Core.Func_boolean_from_none e_boolean_from_none = new Core.Class_boolean_from_none();
+  public static final Core.Func_boolean_from_none t_boolean_from_none = new Core.Class_boolean_from_none();
 
   public static Core.Type_boolean f_boolean_from_none() {
     Core.Type_boolean output = Core.e_boolean;
@@ -21564,24 +21978,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_case vx_new(final Object... vals) {
-      Class_case output = new Class_case();
+      Core.Class_case output = new Core.Class_case();
       return output;
     }
 
     @Override
-    public Core.Func_case vx_copy(final Object... vals) {
-      Class_case output = new Class_case();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_case output = new Core.Class_case();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "case", // name
         0, // idx
@@ -21600,16 +22015,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_case;
+      Core.Type_any output = Core.e_case;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_case;
+      Core.Type_any output = Core.t_case;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -21627,14 +22045,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_case e_case = new Core.Class_case();
-  public static final Func_case t_case = new Core.Class_case();
+  public static final Core.Func_case e_case = new Core.Class_case();
+  public static final Core.Func_case t_case = new Core.Class_case();
 
   public static Core.Type_thenelse f_case(final Core.Type_list values, final Core.Func_any_from_func fn_any) {
     Core.Type_thenelse output = Core.e_thenelse;
     output = Core.f_new(
       Core.t_thenelse,
-      Core.vx_new(Core.t_anylist,
+      Core.vx_new(
+        Core.t_anylist,
         Core.vx_new_string(":code"),
         Core.vx_new_string(":casemany"),
         Core.vx_new_string(":values"),
@@ -21661,24 +22080,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_case_1 vx_new(final Object... vals) {
-      Class_case_1 output = new Class_case_1();
+      Core.Class_case_1 output = new Core.Class_case_1();
       return output;
     }
 
     @Override
-    public Core.Func_case_1 vx_copy(final Object... vals) {
-      Class_case_1 output = new Class_case_1();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_case_1 output = new Core.Class_case_1();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "case", // name
         1, // idx
@@ -21697,16 +22117,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_case_1;
+      Core.Type_any output = Core.e_case_1;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_case_1;
+      Core.Type_any output = Core.t_case_1;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -21724,14 +22147,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_case_1 e_case_1 = new Core.Class_case_1();
-  public static final Func_case_1 t_case_1 = new Core.Class_case_1();
+  public static final Core.Func_case_1 e_case_1 = new Core.Class_case_1();
+  public static final Core.Func_case_1 t_case_1 = new Core.Class_case_1();
 
   public static Core.Type_thenelse f_case_1(final Core.Type_any value, final Core.Func_any_from_func fn_any) {
     Core.Type_thenelse output = Core.e_thenelse;
     output = Core.f_new(
       Core.t_thenelse,
-      Core.vx_new(Core.t_anylist,
+      Core.vx_new(
+        Core.t_anylist,
         Core.vx_new_string(":code"),
         Core.vx_new_string(":case"),
         Core.vx_new_string(":value"),
@@ -21759,24 +22183,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_compare vx_new(final Object... vals) {
-      Class_compare output = new Class_compare();
+      Core.Class_compare output = new Core.Class_compare();
       return output;
     }
 
     @Override
-    public Core.Func_compare vx_copy(final Object... vals) {
-      Class_compare output = new Class_compare();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_compare output = new Core.Class_compare();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "compare", // name
         0, // idx
@@ -21795,16 +22220,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_compare;
+      Core.Type_any output = Core.e_compare;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_compare;
+      Core.Type_any output = Core.t_compare;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -21822,8 +22250,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_compare e_compare = new Core.Class_compare();
-  public static final Func_compare t_compare = new Core.Class_compare();
+  public static final Core.Func_compare e_compare = new Core.Class_compare();
+  public static final Core.Func_compare t_compare = new Core.Class_compare();
 
   public static Core.Type_int f_compare(final Core.Type_any val1, final Core.Type_any val2) {
     Core.Type_int output = Core.e_int;
@@ -21868,24 +22296,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_contains vx_new(final Object... vals) {
-      Class_contains output = new Class_contains();
+      Core.Class_contains output = new Core.Class_contains();
       return output;
     }
 
     @Override
-    public Core.Func_contains vx_copy(final Object... vals) {
-      Class_contains output = new Class_contains();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_contains output = new Core.Class_contains();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "contains", // name
         0, // idx
@@ -21904,16 +22333,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_contains;
+      Core.Type_any output = Core.e_contains;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_contains;
+      Core.Type_any output = Core.t_contains;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -21931,12 +22363,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_contains e_contains = new Core.Class_contains();
-  public static final Func_contains t_contains = new Core.Class_contains();
+  public static final Core.Func_contains e_contains = new Core.Class_contains();
+  public static final Core.Func_contains t_contains = new Core.Class_contains();
 
   public static Core.Type_boolean f_contains(final Core.Type_string text, final Core.Type_string find) {
     Core.Type_boolean output = Core.e_boolean;
-    boolean check = vx_boolean_from_string_find(text.vx_string(), find.vx_string());
+    boolean check = vx_boolean_from_string_find(
+      text.vx_string(),
+      find.vx_string());
     output = Core.vx_new_boolean(check);
     return output;
   }
@@ -21957,24 +22391,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_contains_1 vx_new(final Object... vals) {
-      Class_contains_1 output = new Class_contains_1();
+      Core.Class_contains_1 output = new Core.Class_contains_1();
       return output;
     }
 
     @Override
-    public Core.Func_contains_1 vx_copy(final Object... vals) {
-      Class_contains_1 output = new Class_contains_1();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_contains_1 output = new Core.Class_contains_1();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "contains", // name
         1, // idx
@@ -21993,16 +22428,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_contains_1;
+      Core.Type_any output = Core.e_contains_1;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_contains_1;
+      Core.Type_any output = Core.t_contains_1;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -22020,8 +22458,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_contains_1 e_contains_1 = new Core.Class_contains_1();
-  public static final Func_contains_1 t_contains_1 = new Core.Class_contains_1();
+  public static final Core.Func_contains_1 e_contains_1 = new Core.Class_contains_1();
+  public static final Core.Func_contains_1 t_contains_1 = new Core.Class_contains_1();
 
   public static Core.Type_boolean f_contains_1(final Core.Type_list values, final Core.Type_any find) {
     Core.Type_boolean output = Core.e_boolean;
@@ -22053,24 +22491,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_context_main vx_new(final Object... vals) {
-      Class_context_main output = new Class_context_main();
+      Core.Class_context_main output = new Core.Class_context_main();
       return output;
     }
 
     @Override
-    public Core.Func_context_main vx_copy(final Object... vals) {
-      Class_context_main output = new Class_context_main();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_context_main output = new Core.Class_context_main();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "context-main", // name
         0, // idx
@@ -22089,16 +22528,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_context_main;
+      Core.Type_any output = Core.e_context_main;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_context_main;
+      Core.Type_any output = Core.t_context_main;
+      return output;
     }
 
     @Override
@@ -22129,8 +22571,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_context_main e_context_main = new Core.Class_context_main();
-  public static final Func_context_main t_context_main = new Core.Class_context_main();
+  public static final Core.Func_context_main e_context_main = new Core.Class_context_main();
+  public static final Core.Func_context_main t_context_main = new Core.Class_context_main();
 
   public static Core.Type_context f_context_main(final Core.Type_anylist args) {
     Core.Type_context output = Core.e_context;
@@ -22156,24 +22598,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_copy vx_new(final Object... vals) {
-      Class_copy output = new Class_copy();
+      Core.Class_copy output = new Core.Class_copy();
       return output;
     }
 
     @Override
-    public Core.Func_copy vx_copy(final Object... vals) {
-      Class_copy output = new Class_copy();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_copy output = new Core.Class_copy();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "copy", // name
         0, // idx
@@ -22192,16 +22635,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_copy;
+      Core.Type_any output = Core.e_copy;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_copy;
+      Core.Type_any output = Core.t_copy;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -22219,12 +22665,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_copy e_copy = new Core.Class_copy();
-  public static final Func_copy t_copy = new Core.Class_copy();
+  public static final Core.Func_copy e_copy = new Core.Class_copy();
+  public static final Core.Func_copy t_copy = new Core.Class_copy();
 
   @SuppressWarnings("unchecked")
   public static <T extends Core.Type_any> T f_copy(final T value, final Core.Type_anylist values) {
-    Core.Type_any[] arrayany = Core.arrayany_from_anylist(values);
+    Core.Type_any[] arrayany = Core.arrayany_from_anylist(
+      values);
     Object[] arrayobj = (Core.Type_any[])arrayany;
     T output = (T)(value.vx_copy(arrayobj));
     return output;
@@ -22244,24 +22691,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_else vx_new(final Object... vals) {
-      Class_else output = new Class_else();
+      Core.Class_else output = new Core.Class_else();
       return output;
     }
 
     @Override
-    public Core.Func_else vx_copy(final Object... vals) {
-      Class_else output = new Class_else();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_else output = new Core.Class_else();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "else", // name
         0, // idx
@@ -22280,16 +22728,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_else;
+      Core.Type_any output = Core.e_else;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_else;
+      Core.Type_any output = Core.t_else;
+      return output;
     }
 
     @Override
@@ -22320,14 +22771,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_else e_else = new Core.Class_else();
-  public static final Func_else t_else = new Core.Class_else();
+  public static final Core.Func_else e_else = new Core.Class_else();
+  public static final Core.Func_else t_else = new Core.Class_else();
 
   public static Core.Type_thenelse f_else(final Core.Func_any_from_func fn_any) {
     Core.Type_thenelse output = Core.e_thenelse;
     output = Core.f_new(
       Core.t_thenelse,
-      Core.vx_new(Core.t_anylist,
+      Core.vx_new(
+        Core.t_anylist,
         Core.vx_new_string(":code"),
         Core.vx_new_string(":else"),
         Core.vx_new_string(":fn-any"),
@@ -22352,24 +22804,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_empty vx_new(final Object... vals) {
-      Class_empty output = new Class_empty();
+      Core.Class_empty output = new Core.Class_empty();
       return output;
     }
 
     @Override
-    public Core.Func_empty vx_copy(final Object... vals) {
-      Class_empty output = new Class_empty();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_empty output = new Core.Class_empty();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "empty", // name
         0, // idx
@@ -22388,16 +22841,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_empty;
+      Core.Type_any output = Core.e_empty;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_empty;
+      Core.Type_any output = Core.t_empty;
+      return output;
     }
 
     @Override
@@ -22428,8 +22884,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_empty e_empty = new Core.Class_empty();
-  public static final Func_empty t_empty = new Core.Class_empty();
+  public static final Core.Func_empty e_empty = new Core.Class_empty();
+  public static final Core.Func_empty t_empty = new Core.Class_empty();
 
   public static <T extends Core.Type_any> T f_empty(final T type) {
     T output = Core.vx_empty(type);
@@ -22450,24 +22906,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_extends_from_any vx_new(final Object... vals) {
-      Class_extends_from_any output = new Class_extends_from_any();
+      Core.Class_extends_from_any output = new Core.Class_extends_from_any();
       return output;
     }
 
     @Override
-    public Core.Func_extends_from_any vx_copy(final Object... vals) {
-      Class_extends_from_any output = new Class_extends_from_any();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_extends_from_any output = new Core.Class_extends_from_any();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "extends<-any", // name
         0, // idx
@@ -22486,16 +22943,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_extends_from_any;
+      Core.Type_any output = Core.e_extends_from_any;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_extends_from_any;
+      Core.Type_any output = Core.t_extends_from_any;
+      return output;
     }
 
     @Override
@@ -22526,8 +22986,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_extends_from_any e_extends_from_any = new Core.Class_extends_from_any();
-  public static final Func_extends_from_any t_extends_from_any = new Core.Class_extends_from_any();
+  public static final Core.Func_extends_from_any e_extends_from_any = new Core.Class_extends_from_any();
+  public static final Core.Func_extends_from_any t_extends_from_any = new Core.Class_extends_from_any();
 
   public static Core.Type_string f_extends_from_any(final Core.Type_any val) {
     Core.Type_string output = Core.e_string;
@@ -22552,24 +23012,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_extends_from_typedef vx_new(final Object... vals) {
-      Class_extends_from_typedef output = new Class_extends_from_typedef();
+      Core.Class_extends_from_typedef output = new Core.Class_extends_from_typedef();
       return output;
     }
 
     @Override
-    public Core.Func_extends_from_typedef vx_copy(final Object... vals) {
-      Class_extends_from_typedef output = new Class_extends_from_typedef();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_extends_from_typedef output = new Core.Class_extends_from_typedef();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "extends<-typedef", // name
         0, // idx
@@ -22588,16 +23049,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_extends_from_typedef;
+      Core.Type_any output = Core.e_extends_from_typedef;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_extends_from_typedef;
+      Core.Type_any output = Core.t_extends_from_typedef;
+      return output;
     }
 
     @Override
@@ -22628,8 +23092,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_extends_from_typedef e_extends_from_typedef = new Core.Class_extends_from_typedef();
-  public static final Func_extends_from_typedef t_extends_from_typedef = new Core.Class_extends_from_typedef();
+  public static final Core.Func_extends_from_typedef e_extends_from_typedef = new Core.Class_extends_from_typedef();
+  public static final Core.Func_extends_from_typedef t_extends_from_typedef = new Core.Class_extends_from_typedef();
 
   public static Core.Type_string f_extends_from_typedef(final Core.Type_typedef vtypedef) {
     Core.Type_string output = Core.e_string;
@@ -22652,24 +23116,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_first_from_list vx_new(final Object... vals) {
-      Class_first_from_list output = new Class_first_from_list();
+      Core.Class_first_from_list output = new Core.Class_first_from_list();
       return output;
     }
 
     @Override
-    public Core.Func_first_from_list vx_copy(final Object... vals) {
-      Class_first_from_list output = new Class_first_from_list();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_first_from_list output = new Core.Class_first_from_list();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "first<-list", // name
         0, // idx
@@ -22688,16 +23153,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_first_from_list;
+      Core.Type_any output = Core.e_first_from_list;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_first_from_list;
+      Core.Type_any output = Core.t_first_from_list;
+      return output;
     }
 
     @Override
@@ -22729,8 +23197,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_first_from_list e_first_from_list = new Core.Class_first_from_list();
-  public static final Func_first_from_list t_first_from_list = new Core.Class_first_from_list();
+  public static final Core.Func_first_from_list e_first_from_list = new Core.Class_first_from_list();
+  public static final Core.Func_first_from_list t_first_from_list = new Core.Class_first_from_list();
 
   public static <T extends Core.Type_any, X extends Core.Type_list> T f_first_from_list(final T generic_any_1, final X values) {
     T output = Core.f_empty(generic_any_1);
@@ -22754,24 +23222,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_first_from_list_any_from_any vx_new(final Object... vals) {
-      Class_first_from_list_any_from_any output = new Class_first_from_list_any_from_any();
+      Core.Class_first_from_list_any_from_any output = new Core.Class_first_from_list_any_from_any();
       return output;
     }
 
     @Override
-    public Core.Func_first_from_list_any_from_any vx_copy(final Object... vals) {
-      Class_first_from_list_any_from_any output = new Class_first_from_list_any_from_any();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_first_from_list_any_from_any output = new Core.Class_first_from_list_any_from_any();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "first<-list-any<-any", // name
         0, // idx
@@ -22790,16 +23259,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_first_from_list_any_from_any;
+      Core.Type_any output = Core.e_first_from_list_any_from_any;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_first_from_list_any_from_any;
+      Core.Type_any output = Core.t_first_from_list_any_from_any;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -22818,8 +23290,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_first_from_list_any_from_any e_first_from_list_any_from_any = new Core.Class_first_from_list_any_from_any();
-  public static final Func_first_from_list_any_from_any t_first_from_list_any_from_any = new Core.Class_first_from_list_any_from_any();
+  public static final Core.Func_first_from_list_any_from_any e_first_from_list_any_from_any = new Core.Class_first_from_list_any_from_any();
+  public static final Core.Func_first_from_list_any_from_any t_first_from_list_any_from_any = new Core.Class_first_from_list_any_from_any();
 
   public static <T extends Core.Type_any, X extends Core.Type_list> T f_first_from_list_any_from_any(final T generic_any_1, final X values, final Core.Func_any_from_any fn_any_from_any) {
     T output = Core.f_empty(generic_any_1);
@@ -22848,24 +23320,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_float_from_string vx_new(final Object... vals) {
-      Class_float_from_string output = new Class_float_from_string();
+      Core.Class_float_from_string output = new Core.Class_float_from_string();
       return output;
     }
 
     @Override
-    public Core.Func_float_from_string vx_copy(final Object... vals) {
-      Class_float_from_string output = new Class_float_from_string();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_float_from_string output = new Core.Class_float_from_string();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "float<-string", // name
         0, // idx
@@ -22884,16 +23357,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_float_from_string;
+      Core.Type_any output = Core.e_float_from_string;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_float_from_string;
+      Core.Type_any output = Core.t_float_from_string;
+      return output;
     }
 
     @Override
@@ -22924,8 +23400,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_float_from_string e_float_from_string = new Core.Class_float_from_string();
-  public static final Func_float_from_string t_float_from_string = new Core.Class_float_from_string();
+  public static final Core.Func_float_from_string e_float_from_string = new Core.Class_float_from_string();
+  public static final Core.Func_float_from_string t_float_from_string = new Core.Class_float_from_string();
 
   public static Core.Type_float f_float_from_string(final Core.Type_string text) {
     Core.Type_float output = Core.e_float;
@@ -22950,24 +23426,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_fn vx_new(final Object... vals) {
-      Class_fn output = new Class_fn();
+      Core.Class_fn output = new Core.Class_fn();
       return output;
     }
 
     @Override
-    public Core.Func_fn vx_copy(final Object... vals) {
-      Class_fn output = new Class_fn();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_fn output = new Core.Class_fn();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "fn", // name
         0, // idx
@@ -22986,16 +23463,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_fn;
+      Core.Type_any output = Core.e_fn;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_fn;
+      Core.Type_any output = Core.t_fn;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -23014,8 +23494,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_fn e_fn = new Core.Class_fn();
-  public static final Func_fn t_fn = new Core.Class_fn();
+  public static final Core.Func_fn e_fn = new Core.Class_fn();
+  public static final Core.Func_fn t_fn = new Core.Class_fn();
 
   public static <T extends Core.Type_any> T f_fn(final T generic_any_1, final Core.Type_arglist parameters, final Core.Func_any_from_func fn_any) {
     T output = Core.f_empty(generic_any_1);
@@ -23037,24 +23517,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_funcdef_from_func vx_new(final Object... vals) {
-      Class_funcdef_from_func output = new Class_funcdef_from_func();
+      Core.Class_funcdef_from_func output = new Core.Class_funcdef_from_func();
       return output;
     }
 
     @Override
-    public Core.Func_funcdef_from_func vx_copy(final Object... vals) {
-      Class_funcdef_from_func output = new Class_funcdef_from_func();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_funcdef_from_func output = new Core.Class_funcdef_from_func();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "funcdef<-func", // name
         0, // idx
@@ -23073,16 +23554,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_funcdef_from_func;
+      Core.Type_any output = Core.e_funcdef_from_func;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_funcdef_from_func;
+      Core.Type_any output = Core.t_funcdef_from_func;
+      return output;
     }
 
     @Override
@@ -23113,8 +23597,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_funcdef_from_func e_funcdef_from_func = new Core.Class_funcdef_from_func();
-  public static final Func_funcdef_from_func t_funcdef_from_func = new Core.Class_funcdef_from_func();
+  public static final Core.Func_funcdef_from_func e_funcdef_from_func = new Core.Class_funcdef_from_func();
+  public static final Core.Func_funcdef_from_func t_funcdef_from_func = new Core.Class_funcdef_from_func();
 
   public static Core.Type_funcdef f_funcdef_from_func(final Core.Type_func val) {
     Core.Type_funcdef output = Core.e_funcdef;
@@ -23137,24 +23621,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_funcname_from_funcdef vx_new(final Object... vals) {
-      Class_funcname_from_funcdef output = new Class_funcname_from_funcdef();
+      Core.Class_funcname_from_funcdef output = new Core.Class_funcname_from_funcdef();
       return output;
     }
 
     @Override
-    public Core.Func_funcname_from_funcdef vx_copy(final Object... vals) {
-      Class_funcname_from_funcdef output = new Class_funcname_from_funcdef();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_funcname_from_funcdef output = new Core.Class_funcname_from_funcdef();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "funcname<-funcdef", // name
         0, // idx
@@ -23173,16 +23658,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_funcname_from_funcdef;
+      Core.Type_any output = Core.e_funcname_from_funcdef;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_funcname_from_funcdef;
+      Core.Type_any output = Core.t_funcname_from_funcdef;
+      return output;
     }
 
     @Override
@@ -23213,14 +23701,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_funcname_from_funcdef e_funcname_from_funcdef = new Core.Class_funcname_from_funcdef();
-  public static final Func_funcname_from_funcdef t_funcname_from_funcdef = new Core.Class_funcname_from_funcdef();
+  public static final Core.Func_funcname_from_funcdef e_funcname_from_funcdef = new Core.Class_funcname_from_funcdef();
+  public static final Core.Func_funcname_from_funcdef t_funcname_from_funcdef = new Core.Class_funcname_from_funcdef();
 
   public static Core.Type_string f_funcname_from_funcdef(final Core.Type_funcdef funcdef) {
     Core.Type_string output = Core.e_string;
     output = Core.f_new(
       Core.t_string,
-      Core.vx_new(Core.t_anylist,
+      Core.vx_new(
+        Core.t_anylist,
         funcdef.pkgname(),
         Core.vx_new_string("/"),
         funcdef.name()
@@ -23245,24 +23734,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_if vx_new(final Object... vals) {
-      Class_if output = new Class_if();
+      Core.Class_if output = new Core.Class_if();
       return output;
     }
 
     @Override
-    public Core.Func_if vx_copy(final Object... vals) {
-      Class_if output = new Class_if();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_if output = new Core.Class_if();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "if", // name
         0, // idx
@@ -23281,16 +23771,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_if;
+      Core.Type_any output = Core.e_if;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_if;
+      Core.Type_any output = Core.t_if;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -23309,8 +23802,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_if e_if = new Core.Class_if();
-  public static final Func_if t_if = new Core.Class_if();
+  public static final Core.Func_if e_if = new Core.Class_if();
+  public static final Core.Func_if t_if = new Core.Class_if();
 
   public static <T extends Core.Type_any> T f_if(final T generic_any_1, final Core.Type_boolean clause, final T then) {
     T output = Core.f_empty(generic_any_1);
@@ -23337,24 +23830,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_if_1 vx_new(final Object... vals) {
-      Class_if_1 output = new Class_if_1();
+      Core.Class_if_1 output = new Core.Class_if_1();
       return output;
     }
 
     @Override
-    public Core.Func_if_1 vx_copy(final Object... vals) {
-      Class_if_1 output = new Class_if_1();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_if_1 output = new Core.Class_if_1();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "if", // name
         1, // idx
@@ -23373,16 +23867,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_if_1;
+      Core.Type_any output = Core.e_if_1;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_if_1;
+      Core.Type_any output = Core.t_if_1;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -23402,8 +23899,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_if_1 e_if_1 = new Core.Class_if_1();
-  public static final Func_if_1 t_if_1 = new Core.Class_if_1();
+  public static final Core.Func_if_1 e_if_1 = new Core.Class_if_1();
+  public static final Core.Func_if_1 t_if_1 = new Core.Class_if_1();
 
   public static <T extends Core.Type_any> T f_if_1(final T generic_any_1, final Core.Type_boolean clause, final T thenval, final T elseval) {
     T output = Core.f_empty(generic_any_1);
@@ -23430,24 +23927,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_if_2 vx_new(final Object... vals) {
-      Class_if_2 output = new Class_if_2();
+      Core.Class_if_2 output = new Core.Class_if_2();
       return output;
     }
 
     @Override
-    public Core.Func_if_2 vx_copy(final Object... vals) {
-      Class_if_2 output = new Class_if_2();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_if_2 output = new Core.Class_if_2();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "if", // name
         2, // idx
@@ -23466,16 +23964,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_if_2;
+      Core.Type_any output = Core.e_if_2;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_if_2;
+      Core.Type_any output = Core.t_if_2;
+      return output;
     }
 
     @Override
@@ -23507,8 +24008,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_if_2 e_if_2 = new Core.Class_if_2();
-  public static final Func_if_2 t_if_2 = new Core.Class_if_2();
+  public static final Core.Func_if_2 e_if_2 = new Core.Class_if_2();
+  public static final Core.Func_if_2 t_if_2 = new Core.Class_if_2();
 
   public static <T extends Core.Type_any> T f_if_2(final T generic_any_1, final Core.Type_thenelselist thenelselist) {
     T output = Core.f_empty(generic_any_1);
@@ -23523,32 +24024,33 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func int<-func)
    */
   public interface Func_int_from_func extends Core.Type_func, Core.Type_replfunc {
-    public Core.Func_int_from_func vx_fn_new(Core.Class_any_from_func.IFn fn);
     public Core.Type_int vx_int_from_func();
+    public Core.Func_int_from_func vx_fn_new(Core.Class_any_from_func.IFn fn);
   }
 
   public static class Class_int_from_func extends Core.Class_base implements Func_int_from_func {
 
     @Override
     public Core.Func_int_from_func vx_new(final Object... vals) {
-      Class_int_from_func output = new Class_int_from_func();
+      Core.Class_int_from_func output = new Core.Class_int_from_func();
       return output;
     }
 
     @Override
-    public Core.Func_int_from_func vx_copy(final Object... vals) {
-      Class_int_from_func output = new Class_int_from_func();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_int_from_func output = new Core.Class_int_from_func();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "int<-func", // name
         0, // idx
@@ -23567,23 +24069,26 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_int_from_func;
+      Core.Type_any output = Core.e_int_from_func;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_int_from_func;
+      Core.Type_any output = Core.t_int_from_func;
+      return output;
     }
 
     public Core.Class_any_from_func.IFn fn = null;
 
     @Override
     public Core.Func_int_from_func vx_fn_new(Core.Class_any_from_func.IFn fn) {
-      Class_int_from_func output = new Class_int_from_func();
+      Core.Class_int_from_func output = new Core.Class_int_from_func();
       output.fn = fn;
       return output;
     }
@@ -23601,8 +24106,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_int_from_func e_int_from_func = new Core.Class_int_from_func();
-  public static final Func_int_from_func t_int_from_func = new Core.Class_int_from_func();
+  public static final Core.Func_int_from_func e_int_from_func = new Core.Class_int_from_func();
+  public static final Core.Func_int_from_func t_int_from_func = new Core.Class_int_from_func();
 
   public static Core.Type_int f_int_from_func() {
     Core.Type_int output = Core.e_int;
@@ -23624,24 +24129,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_int_from_string vx_new(final Object... vals) {
-      Class_int_from_string output = new Class_int_from_string();
+      Core.Class_int_from_string output = new Core.Class_int_from_string();
       return output;
     }
 
     @Override
-    public Core.Func_int_from_string vx_copy(final Object... vals) {
-      Class_int_from_string output = new Class_int_from_string();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_int_from_string output = new Core.Class_int_from_string();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "int<-string", // name
         0, // idx
@@ -23660,16 +24166,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_int_from_string;
+      Core.Type_any output = Core.e_int_from_string;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_int_from_string;
+      Core.Type_any output = Core.t_int_from_string;
+      return output;
     }
 
     @Override
@@ -23700,15 +24209,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_int_from_string e_int_from_string = new Core.Class_int_from_string();
-  public static final Func_int_from_string t_int_from_string = new Core.Class_int_from_string();
+  public static final Core.Func_int_from_string e_int_from_string = new Core.Class_int_from_string();
+  public static final Core.Func_int_from_string t_int_from_string = new Core.Class_int_from_string();
 
   public static Core.Type_int f_int_from_string(final Core.Type_string val) {
     Core.Type_int output = Core.e_int;
     output = Core.f_switch(
       Core.t_int,
       val,
-      Core.vx_new(Core.t_thenelselist,
+      Core.vx_new(
+        Core.t_thenelselist,
         Core.f_case_1(
           Core.vx_new_string("notanumber"),
           Core.t_any_from_func.vx_fn_new(() -> {
@@ -23759,24 +24269,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_is_empty vx_new(final Object... vals) {
-      Class_is_empty output = new Class_is_empty();
+      Core.Class_is_empty output = new Core.Class_is_empty();
       return output;
     }
 
     @Override
-    public Core.Func_is_empty vx_copy(final Object... vals) {
-      Class_is_empty output = new Class_is_empty();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_is_empty output = new Core.Class_is_empty();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "is-empty", // name
         0, // idx
@@ -23795,16 +24306,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_is_empty;
+      Core.Type_any output = Core.e_is_empty;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_is_empty;
+      Core.Type_any output = Core.t_is_empty;
+      return output;
     }
 
     @Override
@@ -23835,8 +24349,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_is_empty e_is_empty = new Core.Class_is_empty();
-  public static final Func_is_empty t_is_empty = new Core.Class_is_empty();
+  public static final Core.Func_is_empty e_is_empty = new Core.Class_is_empty();
+  public static final Core.Func_is_empty t_is_empty = new Core.Class_is_empty();
 
   public static Core.Type_boolean f_is_empty(final Core.Type_string text) {
     Core.Type_boolean output = Core.e_boolean;
@@ -23861,24 +24375,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_is_empty_1 vx_new(final Object... vals) {
-      Class_is_empty_1 output = new Class_is_empty_1();
+      Core.Class_is_empty_1 output = new Core.Class_is_empty_1();
       return output;
     }
 
     @Override
-    public Core.Func_is_empty_1 vx_copy(final Object... vals) {
-      Class_is_empty_1 output = new Class_is_empty_1();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_is_empty_1 output = new Core.Class_is_empty_1();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "is-empty", // name
         1, // idx
@@ -23897,16 +24412,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_is_empty_1;
+      Core.Type_any output = Core.e_is_empty_1;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_is_empty_1;
+      Core.Type_any output = Core.t_is_empty_1;
+      return output;
     }
 
     @Override
@@ -23937,8 +24455,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_is_empty_1 e_is_empty_1 = new Core.Class_is_empty_1();
-  public static final Func_is_empty_1 t_is_empty_1 = new Core.Class_is_empty_1();
+  public static final Core.Func_is_empty_1 e_is_empty_1 = new Core.Class_is_empty_1();
+  public static final Core.Func_is_empty_1 t_is_empty_1 = new Core.Class_is_empty_1();
 
   public static Core.Type_boolean f_is_empty_1(final Core.Type_any value) {
     Core.Type_boolean output = Core.e_boolean;
@@ -23966,24 +24484,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_is_endswith vx_new(final Object... vals) {
-      Class_is_endswith output = new Class_is_endswith();
+      Core.Class_is_endswith output = new Core.Class_is_endswith();
       return output;
     }
 
     @Override
-    public Core.Func_is_endswith vx_copy(final Object... vals) {
-      Class_is_endswith output = new Class_is_endswith();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_is_endswith output = new Core.Class_is_endswith();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "is-endswith", // name
         0, // idx
@@ -24002,16 +24521,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_is_endswith;
+      Core.Type_any output = Core.e_is_endswith;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_is_endswith;
+      Core.Type_any output = Core.t_is_endswith;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -24029,8 +24551,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_is_endswith e_is_endswith = new Core.Class_is_endswith();
-  public static final Func_is_endswith t_is_endswith = new Core.Class_is_endswith();
+  public static final Core.Func_is_endswith e_is_endswith = new Core.Class_is_endswith();
+  public static final Core.Func_is_endswith t_is_endswith = new Core.Class_is_endswith();
 
   public static Core.Type_boolean f_is_endswith(final Core.Type_string text, final Core.Type_string find) {
     Core.Type_boolean output = Core.e_boolean;
@@ -24057,24 +24579,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_is_float vx_new(final Object... vals) {
-      Class_is_float output = new Class_is_float();
+      Core.Class_is_float output = new Core.Class_is_float();
       return output;
     }
 
     @Override
-    public Core.Func_is_float vx_copy(final Object... vals) {
-      Class_is_float output = new Class_is_float();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_is_float output = new Core.Class_is_float();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "is-float", // name
         0, // idx
@@ -24093,16 +24616,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_is_float;
+      Core.Type_any output = Core.e_is_float;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_is_float;
+      Core.Type_any output = Core.t_is_float;
+      return output;
     }
 
     @Override
@@ -24133,8 +24659,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_is_float e_is_float = new Core.Class_is_float();
-  public static final Func_is_float t_is_float = new Core.Class_is_float();
+  public static final Core.Func_is_float e_is_float = new Core.Class_is_float();
+  public static final Core.Func_is_float t_is_float = new Core.Class_is_float();
 
   public static Core.Type_boolean f_is_float(final Core.Type_any value) {
     Core.Type_boolean output = Core.e_boolean;
@@ -24158,24 +24684,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_is_func vx_new(final Object... vals) {
-      Class_is_func output = new Class_is_func();
+      Core.Class_is_func output = new Core.Class_is_func();
       return output;
     }
 
     @Override
-    public Core.Func_is_func vx_copy(final Object... vals) {
-      Class_is_func output = new Class_is_func();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_is_func output = new Core.Class_is_func();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "is-func", // name
         0, // idx
@@ -24194,16 +24721,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_is_func;
+      Core.Type_any output = Core.e_is_func;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_is_func;
+      Core.Type_any output = Core.t_is_func;
+      return output;
     }
 
     @Override
@@ -24234,8 +24764,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_is_func e_is_func = new Core.Class_is_func();
-  public static final Func_is_func t_is_func = new Core.Class_is_func();
+  public static final Core.Func_is_func e_is_func = new Core.Class_is_func();
+  public static final Core.Func_is_func t_is_func = new Core.Class_is_func();
 
   public static Core.Type_boolean f_is_func(final Core.Type_any val) {
     Core.Type_boolean output = Core.e_boolean;
@@ -24260,24 +24790,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_is_int vx_new(final Object... vals) {
-      Class_is_int output = new Class_is_int();
+      Core.Class_is_int output = new Core.Class_is_int();
       return output;
     }
 
     @Override
-    public Core.Func_is_int vx_copy(final Object... vals) {
-      Class_is_int output = new Class_is_int();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_is_int output = new Core.Class_is_int();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "is-int", // name
         0, // idx
@@ -24296,16 +24827,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_is_int;
+      Core.Type_any output = Core.e_is_int;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_is_int;
+      Core.Type_any output = Core.t_is_int;
+      return output;
     }
 
     @Override
@@ -24336,8 +24870,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_is_int e_is_int = new Core.Class_is_int();
-  public static final Func_is_int t_is_int = new Core.Class_is_int();
+  public static final Core.Func_is_int e_is_int = new Core.Class_is_int();
+  public static final Core.Func_is_int t_is_int = new Core.Class_is_int();
 
   public static Core.Type_boolean f_is_int(final Core.Type_any value) {
     Core.Type_boolean output = Core.e_boolean;
@@ -24361,24 +24895,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_is_number vx_new(final Object... vals) {
-      Class_is_number output = new Class_is_number();
+      Core.Class_is_number output = new Core.Class_is_number();
       return output;
     }
 
     @Override
-    public Core.Func_is_number vx_copy(final Object... vals) {
-      Class_is_number output = new Class_is_number();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_is_number output = new Core.Class_is_number();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "is-number", // name
         0, // idx
@@ -24397,16 +24932,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_is_number;
+      Core.Type_any output = Core.e_is_number;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_is_number;
+      Core.Type_any output = Core.t_is_number;
+      return output;
     }
 
     @Override
@@ -24437,19 +24975,21 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_is_number e_is_number = new Core.Class_is_number();
-  public static final Func_is_number t_is_number = new Core.Class_is_number();
+  public static final Core.Func_is_number e_is_number = new Core.Class_is_number();
+  public static final Core.Func_is_number t_is_number = new Core.Class_is_number();
 
   public static Core.Type_boolean f_is_number(final Core.Type_any value) {
     Core.Type_boolean output = Core.e_boolean;
     output = Core.f_switch(
       Core.t_boolean,
       Core.f_typename_from_any(value),
-      Core.vx_new(Core.t_thenelselist,
+      Core.vx_new(
+        Core.t_thenelselist,
         Core.f_case(
           Core.f_new(
             Core.t_list,
-            Core.vx_new(Core.t_anylist,
+            Core.vx_new(
+              Core.t_anylist,
               Core.vx_new_string("vx/core/decimal"),
               Core.vx_new_string("vx/core/float"),
               Core.vx_new_string("vx/core/int"),
@@ -24485,24 +25025,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_is_pass_from_permission vx_new(final Object... vals) {
-      Class_is_pass_from_permission output = new Class_is_pass_from_permission();
+      Core.Class_is_pass_from_permission output = new Core.Class_is_pass_from_permission();
       return output;
     }
 
     @Override
-    public Core.Func_is_pass_from_permission vx_copy(final Object... vals) {
-      Class_is_pass_from_permission output = new Class_is_pass_from_permission();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_is_pass_from_permission output = new Core.Class_is_pass_from_permission();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "is-pass<-permission", // name
         0, // idx
@@ -24521,16 +25062,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_is_pass_from_permission;
+      Core.Type_any output = Core.e_is_pass_from_permission;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_is_pass_from_permission;
+      Core.Type_any output = Core.t_is_pass_from_permission;
+      return output;
     }
 
     @Override
@@ -24562,8 +25106,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_is_pass_from_permission e_is_pass_from_permission = new Core.Class_is_pass_from_permission();
-  public static final Func_is_pass_from_permission t_is_pass_from_permission = new Core.Class_is_pass_from_permission();
+  public static final Core.Func_is_pass_from_permission e_is_pass_from_permission = new Core.Class_is_pass_from_permission();
+  public static final Core.Func_is_pass_from_permission t_is_pass_from_permission = new Core.Class_is_pass_from_permission();
 
   public static Core.Type_boolean f_is_pass_from_permission(final Core.Type_context context, final Core.Type_permission permission) {
     Core.Type_boolean output = Core.e_boolean;
@@ -24594,24 +25138,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_last_from_list vx_new(final Object... vals) {
-      Class_last_from_list output = new Class_last_from_list();
+      Core.Class_last_from_list output = new Core.Class_last_from_list();
       return output;
     }
 
     @Override
-    public Core.Func_last_from_list vx_copy(final Object... vals) {
-      Class_last_from_list output = new Class_last_from_list();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_last_from_list output = new Core.Class_last_from_list();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "last<-list", // name
         0, // idx
@@ -24630,16 +25175,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_last_from_list;
+      Core.Type_any output = Core.e_last_from_list;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_last_from_list;
+      Core.Type_any output = Core.t_last_from_list;
+      return output;
     }
 
     @Override
@@ -24671,8 +25219,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_last_from_list e_last_from_list = new Core.Class_last_from_list();
-  public static final Func_last_from_list t_last_from_list = new Core.Class_last_from_list();
+  public static final Core.Func_last_from_list e_last_from_list = new Core.Class_last_from_list();
+  public static final Core.Func_last_from_list t_last_from_list = new Core.Class_last_from_list();
 
   public static <T extends Core.Type_any, X extends Core.Type_list> T f_last_from_list(final T generic_any_1, final X values) {
     T output = Core.f_empty(generic_any_1);
@@ -24702,24 +25250,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_length vx_new(final Object... vals) {
-      Class_length output = new Class_length();
+      Core.Class_length output = new Core.Class_length();
       return output;
     }
 
     @Override
-    public Core.Func_length vx_copy(final Object... vals) {
-      Class_length output = new Class_length();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_length output = new Core.Class_length();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "length", // name
         0, // idx
@@ -24738,16 +25287,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_length;
+      Core.Type_any output = Core.e_length;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_length;
+      Core.Type_any output = Core.t_length;
+      return output;
     }
 
     @Override
@@ -24778,8 +25330,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_length e_length = new Core.Class_length();
-  public static final Func_length t_length = new Core.Class_length();
+  public static final Core.Func_length e_length = new Core.Class_length();
+  public static final Core.Func_length t_length = new Core.Class_length();
 
   public static Core.Type_int f_length(final Core.Type_string text) {
     Core.Type_int output = Core.e_int;
@@ -24803,24 +25355,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_length_1 vx_new(final Object... vals) {
-      Class_length_1 output = new Class_length_1();
+      Core.Class_length_1 output = new Core.Class_length_1();
       return output;
     }
 
     @Override
-    public Core.Func_length_1 vx_copy(final Object... vals) {
-      Class_length_1 output = new Class_length_1();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_length_1 output = new Core.Class_length_1();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "length", // name
         1, // idx
@@ -24839,16 +25392,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_length_1;
+      Core.Type_any output = Core.e_length_1;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_length_1;
+      Core.Type_any output = Core.t_length_1;
+      return output;
     }
 
     @Override
@@ -24879,8 +25435,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_length_1 e_length_1 = new Core.Class_length_1();
-  public static final Func_length_1 t_length_1 = new Core.Class_length_1();
+  public static final Core.Func_length_1 e_length_1 = new Core.Class_length_1();
+  public static final Core.Func_length_1 t_length_1 = new Core.Class_length_1();
 
   public static Core.Type_int f_length_1(final Core.Type_list values) {
     Core.Type_int output = Core.e_int;
@@ -24904,24 +25460,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_length_2 vx_new(final Object... vals) {
-      Class_length_2 output = new Class_length_2();
+      Core.Class_length_2 output = new Core.Class_length_2();
       return output;
     }
 
     @Override
-    public Core.Func_length_2 vx_copy(final Object... vals) {
-      Class_length_2 output = new Class_length_2();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_length_2 output = new Core.Class_length_2();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "length", // name
         2, // idx
@@ -24940,16 +25497,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_length_2;
+      Core.Type_any output = Core.e_length_2;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_length_2;
+      Core.Type_any output = Core.t_length_2;
+      return output;
     }
 
     @Override
@@ -24980,8 +25540,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_length_2 e_length_2 = new Core.Class_length_2();
-  public static final Func_length_2 t_length_2 = new Core.Class_length_2();
+  public static final Core.Func_length_2 e_length_2 = new Core.Class_length_2();
+  public static final Core.Func_length_2 t_length_2 = new Core.Class_length_2();
 
   public static Core.Type_int f_length_2(final Core.Type_map valuemap) {
     Core.Type_int output = Core.e_int;
@@ -25006,24 +25566,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_let vx_new(final Object... vals) {
-      Class_let output = new Class_let();
+      Core.Class_let output = new Core.Class_let();
       return output;
     }
 
     @Override
-    public Core.Func_let vx_copy(final Object... vals) {
-      Class_let output = new Class_let();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_let output = new Core.Class_let();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "let", // name
         0, // idx
@@ -25042,16 +25603,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_let;
+      Core.Type_any output = Core.e_let;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_let;
+      Core.Type_any output = Core.t_let;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -25069,10 +25633,10 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_let e_let = new Core.Class_let();
-  public static final Func_let t_let = new Core.Class_let();
+  public static final Core.Func_let e_let = new Core.Class_let();
+  public static final Core.Func_let t_let = new Core.Class_let();
 
-  public static <T extends Core.Type_any> T f_let(final T generic_any_1, Core.Func_any_from_func fn_any) {
+  public static <T extends Core.Type_any> T f_let(final T generic_any_1, final Core.Func_any_from_func fn_any) {
     T output = Core.f_empty(generic_any_1);
     output = fn_any.vx_any_from_func(generic_any_1);
     return output;
@@ -25096,24 +25660,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_let_async vx_new(final Object... vals) {
-      Class_let_async output = new Class_let_async();
+      Core.Class_let_async output = new Core.Class_let_async();
       return output;
     }
 
     @Override
-    public Core.Func_let_async vx_copy(final Object... vals) {
-      Class_let_async output = new Class_let_async();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_let_async output = new Core.Class_let_async();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "let-async", // name
         0, // idx
@@ -25132,16 +25697,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_let_async;
+      Core.Type_any output = Core.e_let_async;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_let_async;
+      Core.Type_any output = Core.t_let_async;
+      return output;
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
@@ -25160,10 +25728,10 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_let_async e_let_async = new Core.Class_let_async();
-  public static final Func_let_async t_let_async = new Core.Class_let_async();
+  public static final Core.Func_let_async e_let_async = new Core.Class_let_async();
+  public static final Core.Func_let_async t_let_async = new Core.Class_let_async();
 
-  public static <T extends Core.Type_any> CompletableFuture<T> f_let_async(final T generic_any_1, Core.Func_any_from_func_async fn_any_async) {
+  public static <T extends Core.Type_any> CompletableFuture<T> f_let_async(final T generic_any_1, final Core.Func_any_from_func_async fn_any_async) {
     CompletableFuture<T> output = Core.vx_async_new_from_value(Core.f_empty(generic_any_1));
     output = fn_any_async.vx_any_from_func_async(generic_any_1);
     return output;
@@ -25177,31 +25745,32 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func list-join<-list)
    */
   public interface Func_list_join_from_list extends Core.Func_any_from_any {
-    public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_join_from_list(final X generic_any_1, final Y values);
+    public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_join_from_list(final X generic_list_1, final Y values);
   }
 
   public static class Class_list_join_from_list extends Core.Class_base implements Func_list_join_from_list {
 
     @Override
     public Core.Func_list_join_from_list vx_new(final Object... vals) {
-      Class_list_join_from_list output = new Class_list_join_from_list();
+      Core.Class_list_join_from_list output = new Core.Class_list_join_from_list();
       return output;
     }
 
     @Override
-    public Core.Func_list_join_from_list vx_copy(final Object... vals) {
-      Class_list_join_from_list output = new Class_list_join_from_list();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_list_join_from_list output = new Core.Class_list_join_from_list();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "list-join<-list", // name
         0, // idx
@@ -25220,16 +25789,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_list_join_from_list;
+      Core.Type_any output = Core.e_list_join_from_list;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_list_join_from_list;
+      Core.Type_any output = Core.t_list_join_from_list;
+      return output;
     }
 
     @Override
@@ -25261,8 +25833,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_list_join_from_list e_list_join_from_list = new Core.Class_list_join_from_list();
-  public static final Func_list_join_from_list t_list_join_from_list = new Core.Class_list_join_from_list();
+  public static final Core.Func_list_join_from_list e_list_join_from_list = new Core.Class_list_join_from_list();
+  public static final Core.Func_list_join_from_list t_list_join_from_list = new Core.Class_list_join_from_list();
 
   public static <X extends Core.Type_list, Y extends Core.Type_list> X f_list_join_from_list(final X generic_list_1, final Y values) {
     X output = Core.f_empty(generic_list_1);
@@ -25287,31 +25859,32 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func list-join<-list)
    */
   public interface Func_list_join_from_list_1 extends Core.Type_func, Core.Type_replfunc {
-    public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_join_from_list_1(final X generic_any_1, final Y values, final Core.Func_any_from_any fn_any_from_any);
+    public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_join_from_list_1(final X generic_list_1, final Y values, final Core.Func_any_from_any fn_any_from_any);
   }
 
   public static class Class_list_join_from_list_1 extends Core.Class_base implements Func_list_join_from_list_1 {
 
     @Override
     public Core.Func_list_join_from_list_1 vx_new(final Object... vals) {
-      Class_list_join_from_list_1 output = new Class_list_join_from_list_1();
+      Core.Class_list_join_from_list_1 output = new Core.Class_list_join_from_list_1();
       return output;
     }
 
     @Override
-    public Core.Func_list_join_from_list_1 vx_copy(final Object... vals) {
-      Class_list_join_from_list_1 output = new Class_list_join_from_list_1();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_list_join_from_list_1 output = new Core.Class_list_join_from_list_1();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "list-join<-list", // name
         1, // idx
@@ -25330,16 +25903,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_list_join_from_list_1;
+      Core.Type_any output = Core.e_list_join_from_list_1;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_list_join_from_list_1;
+      Core.Type_any output = Core.t_list_join_from_list_1;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -25358,8 +25934,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_list_join_from_list_1 e_list_join_from_list_1 = new Core.Class_list_join_from_list_1();
-  public static final Func_list_join_from_list_1 t_list_join_from_list_1 = new Core.Class_list_join_from_list_1();
+  public static final Core.Func_list_join_from_list_1 e_list_join_from_list_1 = new Core.Class_list_join_from_list_1();
+  public static final Core.Func_list_join_from_list_1 t_list_join_from_list_1 = new Core.Class_list_join_from_list_1();
 
   public static <X extends Core.Type_list, Y extends Core.Type_list> X f_list_join_from_list_1(final X generic_list_1, final Y values, final Core.Func_any_from_any fn_any_from_any) {
     X output = Core.f_empty(generic_list_1);
@@ -25385,31 +25961,32 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func list<-list)
    */
   public interface Func_list_from_list extends Core.Func_any_from_any {
-    public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_from_list(final X generic_any_1, final Y values);
+    public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_from_list(final X generic_list_1, final Y values);
   }
 
   public static class Class_list_from_list extends Core.Class_base implements Func_list_from_list {
 
     @Override
     public Core.Func_list_from_list vx_new(final Object... vals) {
-      Class_list_from_list output = new Class_list_from_list();
+      Core.Class_list_from_list output = new Core.Class_list_from_list();
       return output;
     }
 
     @Override
-    public Core.Func_list_from_list vx_copy(final Object... vals) {
-      Class_list_from_list output = new Class_list_from_list();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_list_from_list output = new Core.Class_list_from_list();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "list<-list", // name
         0, // idx
@@ -25428,16 +26005,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_list_from_list;
+      Core.Type_any output = Core.e_list_from_list;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_list_from_list;
+      Core.Type_any output = Core.t_list_from_list;
+      return output;
     }
 
     @Override
@@ -25469,8 +26049,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_list_from_list e_list_from_list = new Core.Class_list_from_list();
-  public static final Func_list_from_list t_list_from_list = new Core.Class_list_from_list();
+  public static final Core.Func_list_from_list e_list_from_list = new Core.Class_list_from_list();
+  public static final Core.Func_list_from_list t_list_from_list = new Core.Class_list_from_list();
 
   public static <X extends Core.Type_list, Y extends Core.Type_list> X f_list_from_list(final X generic_list_1, final Y values) {
     X output = Core.f_empty(generic_list_1);
@@ -25495,31 +26075,32 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func list<-list)
    */
   public interface Func_list_from_list_1 extends Core.Type_func, Core.Type_replfunc {
-    public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_from_list_1(final X generic_any_1, final Y values, final Core.Func_any_from_any fn_any_from_any);
+    public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_from_list_1(final X generic_list_1, final Y values, final Core.Func_any_from_any fn_any_from_any);
   }
 
   public static class Class_list_from_list_1 extends Core.Class_base implements Func_list_from_list_1 {
 
     @Override
     public Core.Func_list_from_list_1 vx_new(final Object... vals) {
-      Class_list_from_list_1 output = new Class_list_from_list_1();
+      Core.Class_list_from_list_1 output = new Core.Class_list_from_list_1();
       return output;
     }
 
     @Override
-    public Core.Func_list_from_list_1 vx_copy(final Object... vals) {
-      Class_list_from_list_1 output = new Class_list_from_list_1();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_list_from_list_1 output = new Core.Class_list_from_list_1();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "list<-list", // name
         1, // idx
@@ -25538,16 +26119,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_list_from_list_1;
+      Core.Type_any output = Core.e_list_from_list_1;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_list_from_list_1;
+      Core.Type_any output = Core.t_list_from_list_1;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -25566,8 +26150,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_list_from_list_1 e_list_from_list_1 = new Core.Class_list_from_list_1();
-  public static final Func_list_from_list_1 t_list_from_list_1 = new Core.Class_list_from_list_1();
+  public static final Core.Func_list_from_list_1 e_list_from_list_1 = new Core.Class_list_from_list_1();
+  public static final Core.Func_list_from_list_1 t_list_from_list_1 = new Core.Class_list_from_list_1();
 
   public static <X extends Core.Type_list, Y extends Core.Type_list> X f_list_from_list_1(final X generic_list_1, final Y values, final Core.Func_any_from_any fn_any_from_any) {
     X output = Core.f_empty(generic_list_1);
@@ -25590,31 +26174,32 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func list<-list-async)
    */
   public interface Func_list_from_list_async extends Core.Type_func, Core.Type_replfunc_async {
-    public <X extends Core.Type_list, Y extends Core.Type_list> CompletableFuture<X> vx_list_from_list_async(final X generic_any_1, final Y values, final Core.Func_any_from_any_async fn_any_from_any_async);
+    public <X extends Core.Type_list, Y extends Core.Type_list> CompletableFuture<X> vx_list_from_list_async(final X generic_list_1, final Y values, final Core.Func_any_from_any_async fn_any_from_any_async);
   }
 
   public static class Class_list_from_list_async extends Core.Class_base implements Func_list_from_list_async {
 
     @Override
     public Core.Func_list_from_list_async vx_new(final Object... vals) {
-      Class_list_from_list_async output = new Class_list_from_list_async();
+      Core.Class_list_from_list_async output = new Core.Class_list_from_list_async();
       return output;
     }
 
     @Override
-    public Core.Func_list_from_list_async vx_copy(final Object... vals) {
-      Class_list_from_list_async output = new Class_list_from_list_async();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_list_from_list_async output = new Core.Class_list_from_list_async();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "list<-list-async", // name
         0, // idx
@@ -25633,16 +26218,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_list_from_list_async;
+      Core.Type_any output = Core.e_list_from_list_async;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_list_from_list_async;
+      Core.Type_any output = Core.t_list_from_list_async;
+      return output;
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
@@ -25662,8 +26250,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_list_from_list_async e_list_from_list_async = new Core.Class_list_from_list_async();
-  public static final Func_list_from_list_async t_list_from_list_async = new Core.Class_list_from_list_async();
+  public static final Core.Func_list_from_list_async e_list_from_list_async = new Core.Class_list_from_list_async();
+  public static final Core.Func_list_from_list_async t_list_from_list_async = new Core.Class_list_from_list_async();
 
   public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFuture<X> f_list_from_list_async(final X generic_list_1, final Y values, final Core.Func_any_from_any_async fn_any_from_any_async) {
     CompletableFuture<X> output = Core.vx_async_new_from_value(Core.f_empty(generic_list_1));
@@ -25680,31 +26268,32 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func list<-list-intany)
    */
   public interface Func_list_from_list_intany extends Core.Type_func, Core.Type_replfunc {
-    public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_from_list_intany(final X generic_any_1, final Y values, final Core.Func_any_from_int_any fn_any_from_int_any);
+    public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_from_list_intany(final X generic_list_1, final Y values, final Core.Func_any_from_int_any fn_any_from_int_any);
   }
 
   public static class Class_list_from_list_intany extends Core.Class_base implements Func_list_from_list_intany {
 
     @Override
     public Core.Func_list_from_list_intany vx_new(final Object... vals) {
-      Class_list_from_list_intany output = new Class_list_from_list_intany();
+      Core.Class_list_from_list_intany output = new Core.Class_list_from_list_intany();
       return output;
     }
 
     @Override
-    public Core.Func_list_from_list_intany vx_copy(final Object... vals) {
-      Class_list_from_list_intany output = new Class_list_from_list_intany();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_list_from_list_intany output = new Core.Class_list_from_list_intany();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "list<-list-intany", // name
         0, // idx
@@ -25723,16 +26312,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_list_from_list_intany;
+      Core.Type_any output = Core.e_list_from_list_intany;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_list_from_list_intany;
+      Core.Type_any output = Core.t_list_from_list_intany;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -25751,8 +26343,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_list_from_list_intany e_list_from_list_intany = new Core.Class_list_from_list_intany();
-  public static final Func_list_from_list_intany t_list_from_list_intany = new Core.Class_list_from_list_intany();
+  public static final Core.Func_list_from_list_intany e_list_from_list_intany = new Core.Class_list_from_list_intany();
+  public static final Core.Func_list_from_list_intany t_list_from_list_intany = new Core.Class_list_from_list_intany();
 
   public static <X extends Core.Type_list, Y extends Core.Type_list> X f_list_from_list_intany(final X generic_list_1, final Y values, final Core.Func_any_from_int_any fn_any_from_int_any) {
     X output = Core.f_empty(generic_list_1);
@@ -25768,31 +26360,32 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func list<-map)
    */
   public interface Func_list_from_map extends Core.Func_any_from_any {
-    public <O extends Core.Type_map, X extends Core.Type_list> X vx_list_from_map(final X generic_any_1, final O valuemap);
+    public <O extends Core.Type_map, X extends Core.Type_list> X vx_list_from_map(final X generic_list_1, final O valuemap);
   }
 
   public static class Class_list_from_map extends Core.Class_base implements Func_list_from_map {
 
     @Override
     public Core.Func_list_from_map vx_new(final Object... vals) {
-      Class_list_from_map output = new Class_list_from_map();
+      Core.Class_list_from_map output = new Core.Class_list_from_map();
       return output;
     }
 
     @Override
-    public Core.Func_list_from_map vx_copy(final Object... vals) {
-      Class_list_from_map output = new Class_list_from_map();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_list_from_map output = new Core.Class_list_from_map();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "list<-map", // name
         0, // idx
@@ -25811,16 +26404,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_list_from_map;
+      Core.Type_any output = Core.e_list_from_map;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_list_from_map;
+      Core.Type_any output = Core.t_list_from_map;
+      return output;
     }
 
     @Override
@@ -25852,8 +26448,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_list_from_map e_list_from_map = new Core.Class_list_from_map();
-  public static final Func_list_from_map t_list_from_map = new Core.Class_list_from_map();
+  public static final Core.Func_list_from_map e_list_from_map = new Core.Class_list_from_map();
+  public static final Core.Func_list_from_map t_list_from_map = new Core.Class_list_from_map();
 
   public static <O extends Core.Type_map, X extends Core.Type_list> X f_list_from_map(final X generic_list_1, final O valuemap) {
     X output = Core.f_empty(generic_list_1);
@@ -25879,31 +26475,32 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func list<-map)
    */
   public interface Func_list_from_map_1 extends Core.Type_func, Core.Type_replfunc {
-    public <O extends Core.Type_map, X extends Core.Type_list> X vx_list_from_map_1(final X generic_any_1, final O valuemap, final Core.Func_any_from_key_value fn_any_from_key_value);
+    public <O extends Core.Type_map, X extends Core.Type_list> X vx_list_from_map_1(final X generic_list_1, final O valuemap, final Core.Func_any_from_key_value fn_any_from_key_value);
   }
 
   public static class Class_list_from_map_1 extends Core.Class_base implements Func_list_from_map_1 {
 
     @Override
     public Core.Func_list_from_map_1 vx_new(final Object... vals) {
-      Class_list_from_map_1 output = new Class_list_from_map_1();
+      Core.Class_list_from_map_1 output = new Core.Class_list_from_map_1();
       return output;
     }
 
     @Override
-    public Core.Func_list_from_map_1 vx_copy(final Object... vals) {
-      Class_list_from_map_1 output = new Class_list_from_map_1();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_list_from_map_1 output = new Core.Class_list_from_map_1();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "list<-map", // name
         1, // idx
@@ -25922,16 +26519,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_list_from_map_1;
+      Core.Type_any output = Core.e_list_from_map_1;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_list_from_map_1;
+      Core.Type_any output = Core.t_list_from_map_1;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -25950,8 +26550,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_list_from_map_1 e_list_from_map_1 = new Core.Class_list_from_map_1();
-  public static final Func_list_from_map_1 t_list_from_map_1 = new Core.Class_list_from_map_1();
+  public static final Core.Func_list_from_map_1 e_list_from_map_1 = new Core.Class_list_from_map_1();
+  public static final Core.Func_list_from_map_1 t_list_from_map_1 = new Core.Class_list_from_map_1();
 
   public static <O extends Core.Type_map, X extends Core.Type_list> X f_list_from_map_1(final X generic_list_1, final O valuemap, final Core.Func_any_from_key_value fn_any_from_key_value) {
     X output = Core.f_empty(generic_list_1);
@@ -25974,31 +26574,32 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func list<-map-async)
    */
   public interface Func_list_from_map_async extends Core.Type_func, Core.Type_replfunc_async {
-    public <O extends Core.Type_map, X extends Core.Type_list> CompletableFuture<X> vx_list_from_map_async(final X generic_any_1, final O valuemap, final Core.Func_any_from_key_value_async fn_any_from_key_value_async);
+    public <O extends Core.Type_map, X extends Core.Type_list> CompletableFuture<X> vx_list_from_map_async(final X generic_list_1, final O valuemap, final Core.Func_any_from_key_value_async fn_any_from_key_value_async);
   }
 
   public static class Class_list_from_map_async extends Core.Class_base implements Func_list_from_map_async {
 
     @Override
     public Core.Func_list_from_map_async vx_new(final Object... vals) {
-      Class_list_from_map_async output = new Class_list_from_map_async();
+      Core.Class_list_from_map_async output = new Core.Class_list_from_map_async();
       return output;
     }
 
     @Override
-    public Core.Func_list_from_map_async vx_copy(final Object... vals) {
-      Class_list_from_map_async output = new Class_list_from_map_async();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_list_from_map_async output = new Core.Class_list_from_map_async();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "list<-map-async", // name
         0, // idx
@@ -26017,16 +26618,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_list_from_map_async;
+      Core.Type_any output = Core.e_list_from_map_async;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_list_from_map_async;
+      Core.Type_any output = Core.t_list_from_map_async;
+      return output;
     }
 
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
@@ -26046,8 +26650,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_list_from_map_async e_list_from_map_async = new Core.Class_list_from_map_async();
-  public static final Func_list_from_map_async t_list_from_map_async = new Core.Class_list_from_map_async();
+  public static final Core.Func_list_from_map_async e_list_from_map_async = new Core.Class_list_from_map_async();
+  public static final Core.Func_list_from_map_async t_list_from_map_async = new Core.Class_list_from_map_async();
 
   public static <O extends Core.Type_map, X extends Core.Type_list> CompletableFuture<X> f_list_from_map_async(final X generic_list_1, final O valuemap, final Core.Func_any_from_key_value_async fn_any_from_key_value_async) {
     CompletableFuture<X> output = Core.vx_async_new_from_value(Core.f_empty(generic_list_1));
@@ -26069,24 +26673,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_list_from_type vx_new(final Object... vals) {
-      Class_list_from_type output = new Class_list_from_type();
+      Core.Class_list_from_type output = new Core.Class_list_from_type();
       return output;
     }
 
     @Override
-    public Core.Func_list_from_type vx_copy(final Object... vals) {
-      Class_list_from_type output = new Class_list_from_type();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_list_from_type output = new Core.Class_list_from_type();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "list<-type", // name
         0, // idx
@@ -26105,16 +26710,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_list_from_type;
+      Core.Type_any output = Core.e_list_from_type;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_list_from_type;
+      Core.Type_any output = Core.t_list_from_type;
+      return output;
     }
 
     @Override
@@ -26145,8 +26753,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_list_from_type e_list_from_type = new Core.Class_list_from_type();
-  public static final Func_list_from_type t_list_from_type = new Core.Class_list_from_type();
+  public static final Core.Func_list_from_type e_list_from_type = new Core.Class_list_from_type();
+  public static final Core.Func_list_from_type t_list_from_type = new Core.Class_list_from_type();
 
   public static Core.Type_any f_list_from_type(final Core.Type_any type) {
     Core.Type_any output = Core.e_any;
@@ -26168,24 +26776,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_log vx_new(final Object... vals) {
-      Class_log output = new Class_log();
+      Core.Class_log output = new Core.Class_log();
       return output;
     }
 
     @Override
-    public Core.Func_log vx_copy(final Object... vals) {
-      Class_log output = new Class_log();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_log output = new Core.Class_log();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "log", // name
         0, // idx
@@ -26204,16 +26813,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_log;
+      Core.Type_any output = Core.e_log;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_log;
+      Core.Type_any output = Core.t_log;
+      return output;
     }
 
     @Override
@@ -26244,14 +26856,12 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_log e_log = new Core.Class_log();
-  public static final Func_log t_log = new Core.Class_log();
+  public static final Core.Func_log e_log = new Core.Class_log();
+  public static final Core.Func_log t_log = new Core.Class_log();
 
   public static Core.Type_any f_log(final Core.Type_any value) {
     Core.Type_any output = Core.e_any;
-    Core.Type_string stringtext = Core.f_string_from_any(value);
-    String text = stringtext.vx_string();
-    System.out.println(text);
+    Core.vx_log(value);
     output = value;
     return output;
   }
@@ -26272,24 +26882,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_log_1 vx_new(final Object... vals) {
-      Class_log_1 output = new Class_log_1();
+      Core.Class_log_1 output = new Core.Class_log_1();
       return output;
     }
 
     @Override
-    public Core.Func_log_1 vx_copy(final Object... vals) {
-      Class_log_1 output = new Class_log_1();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_log_1 output = new Core.Class_log_1();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "log", // name
         1, // idx
@@ -26308,16 +26919,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_log_1;
+      Core.Type_any output = Core.e_log_1;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_log_1;
+      Core.Type_any output = Core.t_log_1;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -26336,8 +26950,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_log_1 e_log_1 = new Core.Class_log_1();
-  public static final Func_log_1 t_log_1 = new Core.Class_log_1();
+  public static final Core.Func_log_1 e_log_1 = new Core.Class_log_1();
+  public static final Core.Func_log_1 t_log_1 = new Core.Class_log_1();
 
   public static <T extends Core.Type_any> T f_log_1(final T generic_any_1, final Core.Type_string text, final T value) {
     T output = Core.f_empty(generic_any_1);
@@ -26362,24 +26976,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_main vx_new(final Object... vals) {
-      Class_main output = new Class_main();
+      Core.Class_main output = new Core.Class_main();
       return output;
     }
 
     @Override
-    public Core.Func_main vx_copy(final Object... vals) {
-      Class_main output = new Class_main();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_main output = new Core.Class_main();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "main", // name
         0, // idx
@@ -26398,16 +27013,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_main;
+      Core.Type_any output = Core.e_main;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_main;
+      Core.Type_any output = Core.t_main;
+      return output;
     }
 
     @Override
@@ -26438,8 +27056,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_main e_main = new Core.Class_main();
-  public static final Func_main t_main = new Core.Class_main();
+  public static final Core.Func_main e_main = new Core.Class_main();
+  public static final Core.Func_main t_main = new Core.Class_main();
 
   public static Core.Type_string f_main(final Core.Type_anylist args) {
     Core.Type_string output = Core.e_string;
@@ -26459,31 +27077,32 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func map<-list)
    */
   public interface Func_map_from_list extends Core.Type_func, Core.Type_replfunc {
-    public <N extends Core.Type_map, Y extends Core.Type_list> N vx_map_from_list(final N generic_any_1, final Y vallist, final Core.Func_any_from_any fn_any_from_any);
+    public <N extends Core.Type_map, Y extends Core.Type_list> N vx_map_from_list(final N generic_map_1, final Y vallist, final Core.Func_any_from_any fn_any_from_any);
   }
 
   public static class Class_map_from_list extends Core.Class_base implements Func_map_from_list {
 
     @Override
     public Core.Func_map_from_list vx_new(final Object... vals) {
-      Class_map_from_list output = new Class_map_from_list();
+      Core.Class_map_from_list output = new Core.Class_map_from_list();
       return output;
     }
 
     @Override
-    public Core.Func_map_from_list vx_copy(final Object... vals) {
-      Class_map_from_list output = new Class_map_from_list();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_map_from_list output = new Core.Class_map_from_list();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "map<-list", // name
         0, // idx
@@ -26502,16 +27121,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_map_from_list;
+      Core.Type_any output = Core.e_map_from_list;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_map_from_list;
+      Core.Type_any output = Core.t_map_from_list;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -26530,8 +27152,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_map_from_list e_map_from_list = new Core.Class_map_from_list();
-  public static final Func_map_from_list t_map_from_list = new Core.Class_map_from_list();
+  public static final Core.Func_map_from_list e_map_from_list = new Core.Class_map_from_list();
+  public static final Core.Func_map_from_list t_map_from_list = new Core.Class_map_from_list();
 
   public static <N extends Core.Type_map, Y extends Core.Type_list> N f_map_from_list(final N generic_map_1, final Y vallist, final Core.Func_any_from_any fn_any_from_any) {
     N output = Core.f_empty(generic_map_1);
@@ -26551,31 +27173,32 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func map<-map)
    */
   public interface Func_map_from_map extends Core.Func_any_from_any {
-    public <N extends Core.Type_map, O extends Core.Type_map> N vx_map_from_map(final N generic_any_1, final O valuemap);
+    public <N extends Core.Type_map, O extends Core.Type_map> N vx_map_from_map(final N generic_map_1, final O valuemap);
   }
 
   public static class Class_map_from_map extends Core.Class_base implements Func_map_from_map {
 
     @Override
     public Core.Func_map_from_map vx_new(final Object... vals) {
-      Class_map_from_map output = new Class_map_from_map();
+      Core.Class_map_from_map output = new Core.Class_map_from_map();
       return output;
     }
 
     @Override
-    public Core.Func_map_from_map vx_copy(final Object... vals) {
-      Class_map_from_map output = new Class_map_from_map();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_map_from_map output = new Core.Class_map_from_map();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "map<-map", // name
         0, // idx
@@ -26594,16 +27217,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_map_from_map;
+      Core.Type_any output = Core.e_map_from_map;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_map_from_map;
+      Core.Type_any output = Core.t_map_from_map;
+      return output;
     }
 
     @Override
@@ -26635,8 +27261,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_map_from_map e_map_from_map = new Core.Class_map_from_map();
-  public static final Func_map_from_map t_map_from_map = new Core.Class_map_from_map();
+  public static final Core.Func_map_from_map e_map_from_map = new Core.Class_map_from_map();
+  public static final Core.Func_map_from_map t_map_from_map = new Core.Class_map_from_map();
 
   public static <N extends Core.Type_map, O extends Core.Type_map> N f_map_from_map(final N generic_map_1, final O valuemap) {
     N output = Core.f_empty(generic_map_1);
@@ -26662,31 +27288,32 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func map<-map)
    */
   public interface Func_map_from_map_1 extends Core.Type_func, Core.Type_replfunc {
-    public <N extends Core.Type_map, O extends Core.Type_map> N vx_map_from_map_1(final N generic_any_1, final O valuemap, final Core.Func_any_from_key_value fn_any_from_key_value);
+    public <N extends Core.Type_map, O extends Core.Type_map> N vx_map_from_map_1(final N generic_map_1, final O valuemap, final Core.Func_any_from_key_value fn_any_from_key_value);
   }
 
   public static class Class_map_from_map_1 extends Core.Class_base implements Func_map_from_map_1 {
 
     @Override
     public Core.Func_map_from_map_1 vx_new(final Object... vals) {
-      Class_map_from_map_1 output = new Class_map_from_map_1();
+      Core.Class_map_from_map_1 output = new Core.Class_map_from_map_1();
       return output;
     }
 
     @Override
-    public Core.Func_map_from_map_1 vx_copy(final Object... vals) {
-      Class_map_from_map_1 output = new Class_map_from_map_1();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_map_from_map_1 output = new Core.Class_map_from_map_1();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "map<-map", // name
         1, // idx
@@ -26705,16 +27332,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_map_from_map_1;
+      Core.Type_any output = Core.e_map_from_map_1;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_map_from_map_1;
+      Core.Type_any output = Core.t_map_from_map_1;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -26733,12 +27363,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_map_from_map_1 e_map_from_map_1 = new Core.Class_map_from_map_1();
-  public static final Func_map_from_map_1 t_map_from_map_1 = new Core.Class_map_from_map_1();
+  public static final Core.Func_map_from_map_1 e_map_from_map_1 = new Core.Class_map_from_map_1();
+  public static final Core.Func_map_from_map_1 t_map_from_map_1 = new Core.Class_map_from_map_1();
 
   public static <N extends Core.Type_map, O extends Core.Type_map> N f_map_from_map_1(final N generic_map_1, final O valuemap, final Core.Func_any_from_key_value fn_any_from_key_value) {
     N output = Core.f_empty(generic_map_1);
-    output = Core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value);
+    output = Core.vx_map_from_map_fn(
+      generic_map_1,
+      valuemap,
+      fn_any_from_key_value);
     return output;
   }
 
@@ -26757,24 +27390,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_msg_from_error vx_new(final Object... vals) {
-      Class_msg_from_error output = new Class_msg_from_error();
+      Core.Class_msg_from_error output = new Core.Class_msg_from_error();
       return output;
     }
 
     @Override
-    public Core.Func_msg_from_error vx_copy(final Object... vals) {
-      Class_msg_from_error output = new Class_msg_from_error();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_msg_from_error output = new Core.Class_msg_from_error();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "msg<-error", // name
         0, // idx
@@ -26793,16 +27427,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_msg_from_error;
+      Core.Type_any output = Core.e_msg_from_error;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_msg_from_error;
+      Core.Type_any output = Core.t_msg_from_error;
+      return output;
     }
 
     @Override
@@ -26833,14 +27470,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_msg_from_error e_msg_from_error = new Core.Class_msg_from_error();
-  public static final Func_msg_from_error t_msg_from_error = new Core.Class_msg_from_error();
+  public static final Core.Func_msg_from_error e_msg_from_error = new Core.Class_msg_from_error();
+  public static final Core.Func_msg_from_error t_msg_from_error = new Core.Class_msg_from_error();
 
   public static Core.Type_msg f_msg_from_error(final Core.Type_string error) {
     Core.Type_msg output = Core.e_msg;
     output = Core.f_new(
       Core.t_msg,
-      Core.vx_new(Core.t_anylist,
+      Core.vx_new(
+        Core.t_anylist,
         Core.vx_new_string(":severity"),
         Core.c_msg_error,
         Core.vx_new_string(":text"),
@@ -26866,24 +27504,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_msg_from_error_1 vx_new(final Object... vals) {
-      Class_msg_from_error_1 output = new Class_msg_from_error_1();
+      Core.Class_msg_from_error_1 output = new Core.Class_msg_from_error_1();
       return output;
     }
 
     @Override
-    public Core.Func_msg_from_error_1 vx_copy(final Object... vals) {
-      Class_msg_from_error_1 output = new Class_msg_from_error_1();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_msg_from_error_1 output = new Core.Class_msg_from_error_1();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "msg<-error", // name
         1, // idx
@@ -26902,16 +27541,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_msg_from_error_1;
+      Core.Type_any output = Core.e_msg_from_error_1;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_msg_from_error_1;
+      Core.Type_any output = Core.t_msg_from_error_1;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -26929,14 +27571,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_msg_from_error_1 e_msg_from_error_1 = new Core.Class_msg_from_error_1();
-  public static final Func_msg_from_error_1 t_msg_from_error_1 = new Core.Class_msg_from_error_1();
+  public static final Core.Func_msg_from_error_1 e_msg_from_error_1 = new Core.Class_msg_from_error_1();
+  public static final Core.Func_msg_from_error_1 t_msg_from_error_1 = new Core.Class_msg_from_error_1();
 
   public static Core.Type_msg f_msg_from_error_1(final Core.Type_string code, final Core.Type_any detail) {
     Core.Type_msg output = Core.e_msg;
     output = Core.f_new(
       Core.t_msg,
-      Core.vx_new(Core.t_anylist,
+      Core.vx_new(
+        Core.t_anylist,
         Core.vx_new_string(":code"),
         code,
         Core.vx_new_string(":detail"),
@@ -26965,24 +27608,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_msg_from_error_2 vx_new(final Object... vals) {
-      Class_msg_from_error_2 output = new Class_msg_from_error_2();
+      Core.Class_msg_from_error_2 output = new Core.Class_msg_from_error_2();
       return output;
     }
 
     @Override
-    public Core.Func_msg_from_error_2 vx_copy(final Object... vals) {
-      Class_msg_from_error_2 output = new Class_msg_from_error_2();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_msg_from_error_2 output = new Core.Class_msg_from_error_2();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "msg<-error", // name
         2, // idx
@@ -27001,16 +27645,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_msg_from_error_2;
+      Core.Type_any output = Core.e_msg_from_error_2;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_msg_from_error_2;
+      Core.Type_any output = Core.t_msg_from_error_2;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -27029,14 +27676,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_msg_from_error_2 e_msg_from_error_2 = new Core.Class_msg_from_error_2();
-  public static final Func_msg_from_error_2 t_msg_from_error_2 = new Core.Class_msg_from_error_2();
+  public static final Core.Func_msg_from_error_2 e_msg_from_error_2 = new Core.Class_msg_from_error_2();
+  public static final Core.Func_msg_from_error_2 t_msg_from_error_2 = new Core.Class_msg_from_error_2();
 
   public static Core.Type_msg f_msg_from_error_2(final Core.Type_string path, final Core.Type_string code, final Core.Type_any detail) {
     Core.Type_msg output = Core.e_msg;
     output = Core.f_new(
       Core.t_msg,
-      Core.vx_new(Core.t_anylist,
+      Core.vx_new(
+        Core.t_anylist,
         Core.vx_new_string(":code"),
         code,
         Core.vx_new_string(":path"),
@@ -27065,24 +27713,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_msg_from_warning vx_new(final Object... vals) {
-      Class_msg_from_warning output = new Class_msg_from_warning();
+      Core.Class_msg_from_warning output = new Core.Class_msg_from_warning();
       return output;
     }
 
     @Override
-    public Core.Func_msg_from_warning vx_copy(final Object... vals) {
-      Class_msg_from_warning output = new Class_msg_from_warning();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_msg_from_warning output = new Core.Class_msg_from_warning();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "msg<-warning", // name
         0, // idx
@@ -27101,16 +27750,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_msg_from_warning;
+      Core.Type_any output = Core.e_msg_from_warning;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_msg_from_warning;
+      Core.Type_any output = Core.t_msg_from_warning;
+      return output;
     }
 
     @Override
@@ -27141,14 +27793,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_msg_from_warning e_msg_from_warning = new Core.Class_msg_from_warning();
-  public static final Func_msg_from_warning t_msg_from_warning = new Core.Class_msg_from_warning();
+  public static final Core.Func_msg_from_warning e_msg_from_warning = new Core.Class_msg_from_warning();
+  public static final Core.Func_msg_from_warning t_msg_from_warning = new Core.Class_msg_from_warning();
 
   public static Core.Type_msg f_msg_from_warning(final Core.Type_string warning) {
     Core.Type_msg output = Core.e_msg;
     output = Core.f_new(
       Core.t_msg,
-      Core.vx_new(Core.t_anylist,
+      Core.vx_new(
+        Core.t_anylist,
         Core.vx_new_string(":severity"),
         Core.c_msg_warning,
         Core.vx_new_string(":text"),
@@ -27174,24 +27827,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_msgblock_from_msgblock_msg vx_new(final Object... vals) {
-      Class_msgblock_from_msgblock_msg output = new Class_msgblock_from_msgblock_msg();
+      Core.Class_msgblock_from_msgblock_msg output = new Core.Class_msgblock_from_msgblock_msg();
       return output;
     }
 
     @Override
-    public Core.Func_msgblock_from_msgblock_msg vx_copy(final Object... vals) {
-      Class_msgblock_from_msgblock_msg output = new Class_msgblock_from_msgblock_msg();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_msgblock_from_msgblock_msg output = new Core.Class_msgblock_from_msgblock_msg();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "msgblock<-msgblock-msg", // name
         0, // idx
@@ -27210,16 +27864,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_msgblock_from_msgblock_msg;
+      Core.Type_any output = Core.e_msgblock_from_msgblock_msg;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_msgblock_from_msgblock_msg;
+      Core.Type_any output = Core.t_msgblock_from_msgblock_msg;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -27237,12 +27894,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_msgblock_from_msgblock_msg e_msgblock_from_msgblock_msg = new Core.Class_msgblock_from_msgblock_msg();
-  public static final Func_msgblock_from_msgblock_msg t_msgblock_from_msgblock_msg = new Core.Class_msgblock_from_msgblock_msg();
+  public static final Core.Func_msgblock_from_msgblock_msg e_msgblock_from_msgblock_msg = new Core.Class_msgblock_from_msgblock_msg();
+  public static final Core.Func_msgblock_from_msgblock_msg t_msgblock_from_msgblock_msg = new Core.Class_msgblock_from_msgblock_msg();
 
   public static Core.Type_msgblock f_msgblock_from_msgblock_msg(final Core.Type_msgblock origblock, final Core.Type_msg addmsg) {
     Core.Type_msgblock output = Core.e_msgblock;
-    output = Core.f_copy(origblock, Core.vx_new(Core.t_anylist,
+    output = Core.f_copy(origblock, Core.vx_new(
+      Core.t_anylist,
       addmsg));
     return output;
   }
@@ -27263,24 +27921,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_msgblock_from_msgblock_msgblock vx_new(final Object... vals) {
-      Class_msgblock_from_msgblock_msgblock output = new Class_msgblock_from_msgblock_msgblock();
+      Core.Class_msgblock_from_msgblock_msgblock output = new Core.Class_msgblock_from_msgblock_msgblock();
       return output;
     }
 
     @Override
-    public Core.Func_msgblock_from_msgblock_msgblock vx_copy(final Object... vals) {
-      Class_msgblock_from_msgblock_msgblock output = new Class_msgblock_from_msgblock_msgblock();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_msgblock_from_msgblock_msgblock output = new Core.Class_msgblock_from_msgblock_msgblock();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "msgblock<-msgblock-msgblock", // name
         0, // idx
@@ -27299,16 +27958,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_msgblock_from_msgblock_msgblock;
+      Core.Type_any output = Core.e_msgblock_from_msgblock_msgblock;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_msgblock_from_msgblock_msgblock;
+      Core.Type_any output = Core.t_msgblock_from_msgblock_msgblock;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -27326,14 +27988,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_msgblock_from_msgblock_msgblock e_msgblock_from_msgblock_msgblock = new Core.Class_msgblock_from_msgblock_msgblock();
-  public static final Func_msgblock_from_msgblock_msgblock t_msgblock_from_msgblock_msgblock = new Core.Class_msgblock_from_msgblock_msgblock();
+  public static final Core.Func_msgblock_from_msgblock_msgblock e_msgblock_from_msgblock_msgblock = new Core.Class_msgblock_from_msgblock_msgblock();
+  public static final Core.Func_msgblock_from_msgblock_msgblock t_msgblock_from_msgblock_msgblock = new Core.Class_msgblock_from_msgblock_msgblock();
 
   public static Core.Type_msgblock f_msgblock_from_msgblock_msgblock(final Core.Type_msgblock origblock, final Core.Type_msgblock addblock) {
     Core.Type_msgblock output = Core.e_msgblock;
     output = Core.f_new(
       Core.t_msgblock,
-      Core.vx_new(Core.t_anylist,
+      Core.vx_new(
+        Core.t_anylist,
         origblock,
         addblock
       )
@@ -27356,24 +28019,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_name_from_typedef vx_new(final Object... vals) {
-      Class_name_from_typedef output = new Class_name_from_typedef();
+      Core.Class_name_from_typedef output = new Core.Class_name_from_typedef();
       return output;
     }
 
     @Override
-    public Core.Func_name_from_typedef vx_copy(final Object... vals) {
-      Class_name_from_typedef output = new Class_name_from_typedef();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_name_from_typedef output = new Core.Class_name_from_typedef();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "name<-typedef", // name
         0, // idx
@@ -27392,16 +28056,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_name_from_typedef;
+      Core.Type_any output = Core.e_name_from_typedef;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_name_from_typedef;
+      Core.Type_any output = Core.t_name_from_typedef;
+      return output;
     }
 
     @Override
@@ -27432,8 +28099,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_name_from_typedef e_name_from_typedef = new Core.Class_name_from_typedef();
-  public static final Func_name_from_typedef t_name_from_typedef = new Core.Class_name_from_typedef();
+  public static final Core.Func_name_from_typedef e_name_from_typedef = new Core.Class_name_from_typedef();
+  public static final Core.Func_name_from_typedef t_name_from_typedef = new Core.Class_name_from_typedef();
 
   public static Core.Type_string f_name_from_typedef(final Core.Type_typedef vtypedef) {
     Core.Type_string output = Core.e_string;
@@ -27456,24 +28123,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_native vx_new(final Object... vals) {
-      Class_native output = new Class_native();
+      Core.Class_native output = new Core.Class_native();
       return output;
     }
 
     @Override
-    public Core.Func_native vx_copy(final Object... vals) {
-      Class_native output = new Class_native();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_native output = new Core.Class_native();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "native", // name
         0, // idx
@@ -27492,16 +28160,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_native;
+      Core.Type_any output = Core.e_native;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_native;
+      Core.Type_any output = Core.t_native;
+      return output;
     }
 
     @Override
@@ -27533,8 +28204,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_native e_native = new Core.Class_native();
-  public static final Func_native t_native = new Core.Class_native();
+  public static final Core.Func_native e_native = new Core.Class_native();
+  public static final Core.Func_native t_native = new Core.Class_native();
 
   public static <T extends Core.Type_any> T f_native(final T generic_any_1, final Core.Type_anylist clauses) {
     T output = Core.f_empty(generic_any_1);
@@ -27556,24 +28227,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_native_from_any vx_new(final Object... vals) {
-      Class_native_from_any output = new Class_native_from_any();
+      Core.Class_native_from_any output = new Core.Class_native_from_any();
       return output;
     }
 
     @Override
-    public Core.Func_native_from_any vx_copy(final Object... vals) {
-      Class_native_from_any output = new Class_native_from_any();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_native_from_any output = new Core.Class_native_from_any();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "native<-any", // name
         0, // idx
@@ -27592,16 +28264,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_native_from_any;
+      Core.Type_any output = Core.e_native_from_any;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_native_from_any;
+      Core.Type_any output = Core.t_native_from_any;
+      return output;
     }
 
     @Override
@@ -27632,8 +28307,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_native_from_any e_native_from_any = new Core.Class_native_from_any();
-  public static final Func_native_from_any t_native_from_any = new Core.Class_native_from_any();
+  public static final Core.Func_native_from_any e_native_from_any = new Core.Class_native_from_any();
+  public static final Core.Func_native_from_any t_native_from_any = new Core.Class_native_from_any();
 
   public static Core.Type_any f_native_from_any(final Core.Type_any value) {
     Core.Type_any output = Core.e_any;
@@ -27656,24 +28331,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_new vx_new(final Object... vals) {
-      Class_new output = new Class_new();
+      Core.Class_new output = new Core.Class_new();
       return output;
     }
 
     @Override
-    public Core.Func_new vx_copy(final Object... vals) {
-      Class_new output = new Class_new();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_new output = new Core.Class_new();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "new", // name
         0, // idx
@@ -27692,16 +28368,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_new;
+      Core.Type_any output = Core.e_new;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_new;
+      Core.Type_any output = Core.t_new;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -27719,8 +28398,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_new e_new = new Core.Class_new();
-  public static final Func_new t_new = new Core.Class_new();
+  public static final Core.Func_new e_new = new Core.Class_new();
+  public static final Core.Func_new t_new = new Core.Class_new();
 
   @SuppressWarnings("unchecked")
   public static <T extends Core.Type_any> T f_new(final T type, final Core.Type_anylist values) {
@@ -27744,24 +28423,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_number_from_func vx_new(final Object... vals) {
-      Class_number_from_func output = new Class_number_from_func();
+      Core.Class_number_from_func output = new Core.Class_number_from_func();
       return output;
     }
 
     @Override
-    public Core.Func_number_from_func vx_copy(final Object... vals) {
-      Class_number_from_func output = new Class_number_from_func();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_number_from_func output = new Core.Class_number_from_func();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "number<-func", // name
         0, // idx
@@ -27780,16 +28460,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_number_from_func;
+      Core.Type_any output = Core.e_number_from_func;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_number_from_func;
+      Core.Type_any output = Core.t_number_from_func;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -27805,8 +28488,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_number_from_func e_number_from_func = new Core.Class_number_from_func();
-  public static final Func_number_from_func t_number_from_func = new Core.Class_number_from_func();
+  public static final Core.Func_number_from_func e_number_from_func = new Core.Class_number_from_func();
+  public static final Core.Func_number_from_func t_number_from_func = new Core.Class_number_from_func();
 
   public static Core.Type_number f_number_from_func() {
     Core.Type_number output = Core.e_number;
@@ -27829,24 +28512,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_or vx_new(final Object... vals) {
-      Class_or output = new Class_or();
+      Core.Class_or output = new Core.Class_or();
       return output;
     }
 
     @Override
-    public Core.Func_or vx_copy(final Object... vals) {
-      Class_or output = new Class_or();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_or output = new Core.Class_or();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "or", // name
         0, // idx
@@ -27865,16 +28549,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_or;
+      Core.Type_any output = Core.e_or;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_or;
+      Core.Type_any output = Core.t_or;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -27892,8 +28579,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_or e_or = new Core.Class_or();
-  public static final Func_or t_or = new Core.Class_or();
+  public static final Core.Func_or e_or = new Core.Class_or();
+  public static final Core.Func_or t_or = new Core.Class_or();
 
   public static Core.Type_boolean f_or(final Core.Type_boolean val1, final Core.Type_boolean val2) {
     Core.Type_boolean output = Core.e_boolean;
@@ -27920,24 +28607,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_or_1 vx_new(final Object... vals) {
-      Class_or_1 output = new Class_or_1();
+      Core.Class_or_1 output = new Core.Class_or_1();
       return output;
     }
 
     @Override
-    public Core.Func_or_1 vx_copy(final Object... vals) {
-      Class_or_1 output = new Class_or_1();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_or_1 output = new Core.Class_or_1();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "or", // name
         1, // idx
@@ -27956,16 +28644,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_or_1;
+      Core.Type_any output = Core.e_or_1;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_or_1;
+      Core.Type_any output = Core.t_or_1;
+      return output;
     }
 
     @Override
@@ -27996,8 +28687,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_or_1 e_or_1 = new Core.Class_or_1();
-  public static final Func_or_1 t_or_1 = new Core.Class_or_1();
+  public static final Core.Func_or_1 e_or_1 = new Core.Class_or_1();
+  public static final Core.Func_or_1 t_or_1 = new Core.Class_or_1();
 
   public static Core.Type_boolean f_or_1(final Core.Type_booleanlist values) {
     Core.Type_boolean output = Core.e_boolean;
@@ -28035,24 +28726,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_package_global_from_name vx_new(final Object... vals) {
-      Class_package_global_from_name output = new Class_package_global_from_name();
+      Core.Class_package_global_from_name output = new Core.Class_package_global_from_name();
       return output;
     }
 
     @Override
-    public Core.Func_package_global_from_name vx_copy(final Object... vals) {
-      Class_package_global_from_name output = new Class_package_global_from_name();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_package_global_from_name output = new Core.Class_package_global_from_name();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "package-global<-name", // name
         0, // idx
@@ -28071,16 +28763,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_package_global_from_name;
+      Core.Type_any output = Core.e_package_global_from_name;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_package_global_from_name;
+      Core.Type_any output = Core.t_package_global_from_name;
+      return output;
     }
 
     @Override
@@ -28111,8 +28806,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_package_global_from_name e_package_global_from_name = new Core.Class_package_global_from_name();
-  public static final Func_package_global_from_name t_package_global_from_name = new Core.Class_package_global_from_name();
+  public static final Core.Func_package_global_from_name e_package_global_from_name = new Core.Class_package_global_from_name();
+  public static final Core.Func_package_global_from_name t_package_global_from_name = new Core.Class_package_global_from_name();
 
   public static Core.Type_package f_package_global_from_name(final Core.Type_string name) {
     Core.Type_package output = Core.e_package;
@@ -28139,24 +28834,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_packagename_from_typedef vx_new(final Object... vals) {
-      Class_packagename_from_typedef output = new Class_packagename_from_typedef();
+      Core.Class_packagename_from_typedef output = new Core.Class_packagename_from_typedef();
       return output;
     }
 
     @Override
-    public Core.Func_packagename_from_typedef vx_copy(final Object... vals) {
-      Class_packagename_from_typedef output = new Class_packagename_from_typedef();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_packagename_from_typedef output = new Core.Class_packagename_from_typedef();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "packagename<-typedef", // name
         0, // idx
@@ -28175,16 +28871,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_packagename_from_typedef;
+      Core.Type_any output = Core.e_packagename_from_typedef;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_packagename_from_typedef;
+      Core.Type_any output = Core.t_packagename_from_typedef;
+      return output;
     }
 
     @Override
@@ -28215,8 +28914,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_packagename_from_typedef e_packagename_from_typedef = new Core.Class_packagename_from_typedef();
-  public static final Func_packagename_from_typedef t_packagename_from_typedef = new Core.Class_packagename_from_typedef();
+  public static final Core.Func_packagename_from_typedef e_packagename_from_typedef = new Core.Class_packagename_from_typedef();
+  public static final Core.Func_packagename_from_typedef t_packagename_from_typedef = new Core.Class_packagename_from_typedef();
 
   public static Core.Type_string f_packagename_from_typedef(final Core.Type_typedef vtypedef) {
     Core.Type_string output = Core.e_string;
@@ -28239,24 +28938,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_path_from_context_path vx_new(final Object... vals) {
-      Class_path_from_context_path output = new Class_path_from_context_path();
+      Core.Class_path_from_context_path output = new Core.Class_path_from_context_path();
       return output;
     }
 
     @Override
-    public Core.Func_path_from_context_path vx_copy(final Object... vals) {
-      Class_path_from_context_path output = new Class_path_from_context_path();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_path_from_context_path output = new Core.Class_path_from_context_path();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "path<-context-path", // name
         0, // idx
@@ -28275,16 +28975,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_path_from_context_path;
+      Core.Type_any output = Core.e_path_from_context_path;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_path_from_context_path;
+      Core.Type_any output = Core.t_path_from_context_path;
+      return output;
     }
 
     @Override
@@ -28316,8 +29019,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_path_from_context_path e_path_from_context_path = new Core.Class_path_from_context_path();
-  public static final Func_path_from_context_path t_path_from_context_path = new Core.Class_path_from_context_path();
+  public static final Core.Func_path_from_context_path e_path_from_context_path = new Core.Class_path_from_context_path();
+  public static final Core.Func_path_from_context_path t_path_from_context_path = new Core.Class_path_from_context_path();
 
   public static Core.Type_string f_path_from_context_path(final Core.Type_context context, final Core.Type_string path) {
     Core.Type_string output = Core.e_string;
@@ -28344,24 +29047,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_path_from_setting_path vx_new(final Object... vals) {
-      Class_path_from_setting_path output = new Class_path_from_setting_path();
+      Core.Class_path_from_setting_path output = new Core.Class_path_from_setting_path();
       return output;
     }
 
     @Override
-    public Core.Func_path_from_setting_path vx_copy(final Object... vals) {
-      Class_path_from_setting_path output = new Class_path_from_setting_path();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_path_from_setting_path output = new Core.Class_path_from_setting_path();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "path<-setting-path", // name
         0, // idx
@@ -28380,16 +29084,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_path_from_setting_path;
+      Core.Type_any output = Core.e_path_from_setting_path;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_path_from_setting_path;
+      Core.Type_any output = Core.t_path_from_setting_path;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -28407,8 +29114,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_path_from_setting_path e_path_from_setting_path = new Core.Class_path_from_setting_path();
-  public static final Func_path_from_setting_path t_path_from_setting_path = new Core.Class_path_from_setting_path();
+  public static final Core.Func_path_from_setting_path e_path_from_setting_path = new Core.Class_path_from_setting_path();
+  public static final Core.Func_path_from_setting_path t_path_from_setting_path = new Core.Class_path_from_setting_path();
 
   public static Core.Type_string f_path_from_setting_path(final Core.Type_setting session, final Core.Type_string path) {
     Core.Type_string output = Core.e_string;
@@ -28430,24 +29137,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_permission_from_id_context vx_new(final Object... vals) {
-      Class_permission_from_id_context output = new Class_permission_from_id_context();
+      Core.Class_permission_from_id_context output = new Core.Class_permission_from_id_context();
       return output;
     }
 
     @Override
-    public Core.Func_permission_from_id_context vx_copy(final Object... vals) {
-      Class_permission_from_id_context output = new Class_permission_from_id_context();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_permission_from_id_context output = new Core.Class_permission_from_id_context();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "permission<-id-context", // name
         0, // idx
@@ -28466,16 +29174,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_permission_from_id_context;
+      Core.Type_any output = Core.e_permission_from_id_context;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_permission_from_id_context;
+      Core.Type_any output = Core.t_permission_from_id_context;
+      return output;
     }
 
     @Override
@@ -28507,8 +29218,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_permission_from_id_context e_permission_from_id_context = new Core.Class_permission_from_id_context();
-  public static final Func_permission_from_id_context t_permission_from_id_context = new Core.Class_permission_from_id_context();
+  public static final Core.Func_permission_from_id_context e_permission_from_id_context = new Core.Class_permission_from_id_context();
+  public static final Core.Func_permission_from_id_context t_permission_from_id_context = new Core.Class_permission_from_id_context();
 
   public static Core.Type_permission f_permission_from_id_context(final Core.Type_context context, final Core.Type_string id) {
     Core.Type_permission output = Core.e_permission;
@@ -28540,24 +29251,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_properties_from_typedef vx_new(final Object... vals) {
-      Class_properties_from_typedef output = new Class_properties_from_typedef();
+      Core.Class_properties_from_typedef output = new Core.Class_properties_from_typedef();
       return output;
     }
 
     @Override
-    public Core.Func_properties_from_typedef vx_copy(final Object... vals) {
-      Class_properties_from_typedef output = new Class_properties_from_typedef();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_properties_from_typedef output = new Core.Class_properties_from_typedef();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "properties<-typedef", // name
         0, // idx
@@ -28576,16 +29288,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_properties_from_typedef;
+      Core.Type_any output = Core.e_properties_from_typedef;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_properties_from_typedef;
+      Core.Type_any output = Core.t_properties_from_typedef;
+      return output;
     }
 
     @Override
@@ -28616,8 +29331,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_properties_from_typedef e_properties_from_typedef = new Core.Class_properties_from_typedef();
-  public static final Func_properties_from_typedef t_properties_from_typedef = new Core.Class_properties_from_typedef();
+  public static final Core.Func_properties_from_typedef e_properties_from_typedef = new Core.Class_properties_from_typedef();
+  public static final Core.Func_properties_from_typedef t_properties_from_typedef = new Core.Class_properties_from_typedef();
 
   public static Core.Type_argmap f_properties_from_typedef(final Core.Type_typedef vtypedef) {
     Core.Type_argmap output = Core.e_argmap;
@@ -28640,24 +29355,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_proplast_from_typedef vx_new(final Object... vals) {
-      Class_proplast_from_typedef output = new Class_proplast_from_typedef();
+      Core.Class_proplast_from_typedef output = new Core.Class_proplast_from_typedef();
       return output;
     }
 
     @Override
-    public Core.Func_proplast_from_typedef vx_copy(final Object... vals) {
-      Class_proplast_from_typedef output = new Class_proplast_from_typedef();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_proplast_from_typedef output = new Core.Class_proplast_from_typedef();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "proplast<-typedef", // name
         0, // idx
@@ -28676,16 +29392,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_proplast_from_typedef;
+      Core.Type_any output = Core.e_proplast_from_typedef;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_proplast_from_typedef;
+      Core.Type_any output = Core.t_proplast_from_typedef;
+      return output;
     }
 
     @Override
@@ -28716,8 +29435,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_proplast_from_typedef e_proplast_from_typedef = new Core.Class_proplast_from_typedef();
-  public static final Func_proplast_from_typedef t_proplast_from_typedef = new Core.Class_proplast_from_typedef();
+  public static final Core.Func_proplast_from_typedef e_proplast_from_typedef = new Core.Class_proplast_from_typedef();
+  public static final Core.Func_proplast_from_typedef t_proplast_from_typedef = new Core.Class_proplast_from_typedef();
 
   public static Core.Type_arg f_proplast_from_typedef(final Core.Type_typedef vtypedef) {
     Core.Type_arg output = Core.e_arg;
@@ -28739,24 +29458,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_resolve vx_new(final Object... vals) {
-      Class_resolve output = new Class_resolve();
+      Core.Class_resolve output = new Core.Class_resolve();
       return output;
     }
 
     @Override
-    public Core.Func_resolve vx_copy(final Object... vals) {
-      Class_resolve output = new Class_resolve();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_resolve output = new Core.Class_resolve();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "resolve", // name
         0, // idx
@@ -28775,16 +29495,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_resolve;
+      Core.Type_any output = Core.e_resolve;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_resolve;
+      Core.Type_any output = Core.t_resolve;
+      return output;
     }
 
     @Override
@@ -28816,8 +29539,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_resolve e_resolve = new Core.Class_resolve();
-  public static final Func_resolve t_resolve = new Core.Class_resolve();
+  public static final Core.Func_resolve e_resolve = new Core.Class_resolve();
+  public static final Core.Func_resolve t_resolve = new Core.Class_resolve();
 
   public static <T extends Core.Type_any> T f_resolve(final T generic_any_1, final T value) {
     T output = Core.f_empty(generic_any_1);
@@ -28839,24 +29562,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_resolve_1 vx_new(final Object... vals) {
-      Class_resolve_1 output = new Class_resolve_1();
+      Core.Class_resolve_1 output = new Core.Class_resolve_1();
       return output;
     }
 
     @Override
-    public Core.Func_resolve_1 vx_copy(final Object... vals) {
-      Class_resolve_1 output = new Class_resolve_1();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_resolve_1 output = new Core.Class_resolve_1();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "resolve", // name
         1, // idx
@@ -28875,16 +29599,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_resolve_1;
+      Core.Type_any output = Core.e_resolve_1;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_resolve_1;
+      Core.Type_any output = Core.t_resolve_1;
+      return output;
     }
 
     @Override
@@ -28916,8 +29643,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_resolve_1 e_resolve_1 = new Core.Class_resolve_1();
-  public static final Func_resolve_1 t_resolve_1 = new Core.Class_resolve_1();
+  public static final Core.Func_resolve_1 e_resolve_1 = new Core.Class_resolve_1();
+  public static final Core.Func_resolve_1 t_resolve_1 = new Core.Class_resolve_1();
 
   public static <T extends Core.Type_any> T f_resolve_1(final T generic_any_1, final Core.Func_any_from_func fn_any) {
     T output = Core.f_empty(generic_any_1);
@@ -28945,24 +29672,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_resolve_async vx_new(final Object... vals) {
-      Class_resolve_async output = new Class_resolve_async();
+      Core.Class_resolve_async output = new Core.Class_resolve_async();
       return output;
     }
 
     @Override
-    public Core.Func_resolve_async vx_copy(final Object... vals) {
-      Class_resolve_async output = new Class_resolve_async();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_resolve_async output = new Core.Class_resolve_async();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "resolve-async", // name
         0, // idx
@@ -28981,16 +29709,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_resolve_async;
+      Core.Type_any output = Core.e_resolve_async;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_resolve_async;
+      Core.Type_any output = Core.t_resolve_async;
+      return output;
     }
 
     @Override
@@ -29021,8 +29752,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_resolve_async e_resolve_async = new Core.Class_resolve_async();
-  public static final Func_resolve_async t_resolve_async = new Core.Class_resolve_async();
+  public static final Core.Func_resolve_async e_resolve_async = new Core.Class_resolve_async();
+  public static final Core.Func_resolve_async t_resolve_async = new Core.Class_resolve_async();
 
   public static <T extends Core.Type_any> CompletableFuture<T> f_resolve_async(final T generic_any_1, final Core.Func_any_from_func_async fn_any) {
     CompletableFuture<T> output = Core.vx_async_new_from_value(Core.f_empty(generic_any_1));
@@ -29049,24 +29780,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_resolve_first vx_new(final Object... vals) {
-      Class_resolve_first output = new Class_resolve_first();
+      Core.Class_resolve_first output = new Core.Class_resolve_first();
       return output;
     }
 
     @Override
-    public Core.Func_resolve_first vx_copy(final Object... vals) {
-      Class_resolve_first output = new Class_resolve_first();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_resolve_first output = new Core.Class_resolve_first();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "resolve-first", // name
         0, // idx
@@ -29085,16 +29817,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_resolve_first;
+      Core.Type_any output = Core.e_resolve_first;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_resolve_first;
+      Core.Type_any output = Core.t_resolve_first;
+      return output;
     }
 
     @Override
@@ -29126,8 +29861,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_resolve_first e_resolve_first = new Core.Class_resolve_first();
-  public static final Func_resolve_first t_resolve_first = new Core.Class_resolve_first();
+  public static final Core.Func_resolve_first e_resolve_first = new Core.Class_resolve_first();
+  public static final Core.Func_resolve_first t_resolve_first = new Core.Class_resolve_first();
 
   public static <T extends Core.Type_any, X extends Core.Type_list> T f_resolve_first(final T generic_any_1, final X clauses) {
     T output = Core.f_empty(generic_any_1);
@@ -29146,31 +29881,32 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func resolve-list)
    */
   public interface Func_resolve_list extends Core.Func_any_from_any {
-    public <X extends Core.Type_list> X vx_resolve_list(final X generic_any_1, final X clauses);
+    public <X extends Core.Type_list> X vx_resolve_list(final X generic_list_1, final X clauses);
   }
 
   public static class Class_resolve_list extends Core.Class_base implements Func_resolve_list {
 
     @Override
     public Core.Func_resolve_list vx_new(final Object... vals) {
-      Class_resolve_list output = new Class_resolve_list();
+      Core.Class_resolve_list output = new Core.Class_resolve_list();
       return output;
     }
 
     @Override
-    public Core.Func_resolve_list vx_copy(final Object... vals) {
-      Class_resolve_list output = new Class_resolve_list();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_resolve_list output = new Core.Class_resolve_list();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "resolve-list", // name
         0, // idx
@@ -29189,16 +29925,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_resolve_list;
+      Core.Type_any output = Core.e_resolve_list;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_resolve_list;
+      Core.Type_any output = Core.t_resolve_list;
+      return output;
     }
 
     @Override
@@ -29230,8 +29969,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_resolve_list e_resolve_list = new Core.Class_resolve_list();
-  public static final Func_resolve_list t_resolve_list = new Core.Class_resolve_list();
+  public static final Core.Func_resolve_list e_resolve_list = new Core.Class_resolve_list();
+  public static final Core.Func_resolve_list t_resolve_list = new Core.Class_resolve_list();
 
   public static <X extends Core.Type_list> X f_resolve_list(final X generic_list_1, final X clauses) {
     X output = Core.f_empty(generic_list_1);
@@ -29257,24 +29996,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_security_from_context vx_new(final Object... vals) {
-      Class_security_from_context output = new Class_security_from_context();
+      Core.Class_security_from_context output = new Core.Class_security_from_context();
       return output;
     }
 
     @Override
-    public Core.Func_security_from_context vx_copy(final Object... vals) {
-      Class_security_from_context output = new Class_security_from_context();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_security_from_context output = new Core.Class_security_from_context();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "security<-context", // name
         0, // idx
@@ -29293,16 +30033,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_security_from_context;
+      Core.Type_any output = Core.e_security_from_context;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_security_from_context;
+      Core.Type_any output = Core.t_security_from_context;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -29319,8 +30062,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_security_from_context e_security_from_context = new Core.Class_security_from_context();
-  public static final Func_security_from_context t_security_from_context = new Core.Class_security_from_context();
+  public static final Core.Func_security_from_context e_security_from_context = new Core.Class_security_from_context();
+  public static final Core.Func_security_from_context t_security_from_context = new Core.Class_security_from_context();
 
   public static Core.Type_security f_security_from_context(final Core.Type_context context) {
     Core.Type_security output = Core.e_security;
@@ -29345,24 +30088,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_security_from_user vx_new(final Object... vals) {
-      Class_security_from_user output = new Class_security_from_user();
+      Core.Class_security_from_user output = new Core.Class_security_from_user();
       return output;
     }
 
     @Override
-    public Core.Func_security_from_user vx_copy(final Object... vals) {
-      Class_security_from_user output = new Class_security_from_user();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_security_from_user output = new Core.Class_security_from_user();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "security<-user", // name
         0, // idx
@@ -29381,16 +30125,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_security_from_user;
+      Core.Type_any output = Core.e_security_from_user;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_security_from_user;
+      Core.Type_any output = Core.t_security_from_user;
+      return output;
     }
 
     @Override
@@ -29421,8 +30168,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_security_from_user e_security_from_user = new Core.Class_security_from_user();
-  public static final Func_security_from_user t_security_from_user = new Core.Class_security_from_user();
+  public static final Core.Func_security_from_user e_security_from_user = new Core.Class_security_from_user();
+  public static final Core.Func_security_from_user t_security_from_user = new Core.Class_security_from_user();
 
   public static Core.Type_security f_security_from_user(final Core.Type_user user) {
     Core.Type_security output = Core.e_security;
@@ -29444,24 +30191,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_session_from_context vx_new(final Object... vals) {
-      Class_session_from_context output = new Class_session_from_context();
+      Core.Class_session_from_context output = new Core.Class_session_from_context();
       return output;
     }
 
     @Override
-    public Core.Func_session_from_context vx_copy(final Object... vals) {
-      Class_session_from_context output = new Class_session_from_context();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_session_from_context output = new Core.Class_session_from_context();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "session<-context", // name
         0, // idx
@@ -29480,16 +30228,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_session_from_context;
+      Core.Type_any output = Core.e_session_from_context;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_session_from_context;
+      Core.Type_any output = Core.t_session_from_context;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -29506,8 +30257,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_session_from_context e_session_from_context = new Core.Class_session_from_context();
-  public static final Func_session_from_context t_session_from_context = new Core.Class_session_from_context();
+  public static final Core.Func_session_from_context e_session_from_context = new Core.Class_session_from_context();
+  public static final Core.Func_session_from_context t_session_from_context = new Core.Class_session_from_context();
 
   public static Core.Type_session f_session_from_context(final Core.Type_context context) {
     Core.Type_session output = Core.e_session;
@@ -29529,24 +30280,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_setting_from_context vx_new(final Object... vals) {
-      Class_setting_from_context output = new Class_setting_from_context();
+      Core.Class_setting_from_context output = new Core.Class_setting_from_context();
       return output;
     }
 
     @Override
-    public Core.Func_setting_from_context vx_copy(final Object... vals) {
-      Class_setting_from_context output = new Class_setting_from_context();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_setting_from_context output = new Core.Class_setting_from_context();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "setting<-context", // name
         0, // idx
@@ -29565,16 +30317,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_setting_from_context;
+      Core.Type_any output = Core.e_setting_from_context;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_setting_from_context;
+      Core.Type_any output = Core.t_setting_from_context;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -29591,8 +30346,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_setting_from_context e_setting_from_context = new Core.Class_setting_from_context();
-  public static final Func_setting_from_context t_setting_from_context = new Core.Class_setting_from_context();
+  public static final Core.Func_setting_from_context e_setting_from_context = new Core.Class_setting_from_context();
+  public static final Core.Func_setting_from_context t_setting_from_context = new Core.Class_setting_from_context();
 
   public static Core.Type_setting f_setting_from_context(final Core.Type_context context) {
     Core.Type_setting output = Core.e_setting;
@@ -29615,24 +30370,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_string_repeat vx_new(final Object... vals) {
-      Class_string_repeat output = new Class_string_repeat();
+      Core.Class_string_repeat output = new Core.Class_string_repeat();
       return output;
     }
 
     @Override
-    public Core.Func_string_repeat vx_copy(final Object... vals) {
-      Class_string_repeat output = new Class_string_repeat();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_string_repeat output = new Core.Class_string_repeat();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "string-repeat", // name
         0, // idx
@@ -29651,16 +30407,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_string_repeat;
+      Core.Type_any output = Core.e_string_repeat;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_string_repeat;
+      Core.Type_any output = Core.t_string_repeat;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -29678,8 +30437,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_string_repeat e_string_repeat = new Core.Class_string_repeat();
-  public static final Func_string_repeat t_string_repeat = new Core.Class_string_repeat();
+  public static final Core.Func_string_repeat e_string_repeat = new Core.Class_string_repeat();
+  public static final Core.Func_string_repeat t_string_repeat = new Core.Class_string_repeat();
 
   public static Core.Type_string f_string_repeat(final Core.Type_string text, final Core.Type_int repeat) {
     Core.Type_string output = Core.e_string;
@@ -29705,24 +30464,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_string_from_any vx_new(final Object... vals) {
-      Class_string_from_any output = new Class_string_from_any();
+      Core.Class_string_from_any output = new Core.Class_string_from_any();
       return output;
     }
 
     @Override
-    public Core.Func_string_from_any vx_copy(final Object... vals) {
-      Class_string_from_any output = new Class_string_from_any();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_string_from_any output = new Core.Class_string_from_any();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "string<-any", // name
         0, // idx
@@ -29741,16 +30501,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_string_from_any;
+      Core.Type_any output = Core.e_string_from_any;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_string_from_any;
+      Core.Type_any output = Core.t_string_from_any;
+      return output;
     }
 
     @Override
@@ -29781,8 +30544,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_string_from_any e_string_from_any = new Core.Class_string_from_any();
-  public static final Func_string_from_any t_string_from_any = new Core.Class_string_from_any();
+  public static final Core.Func_string_from_any e_string_from_any = new Core.Class_string_from_any();
+  public static final Core.Func_string_from_any t_string_from_any = new Core.Class_string_from_any();
 
   public static Core.Type_string f_string_from_any(final Core.Type_any value) {
     Core.Type_string output = Core.e_string;
@@ -29811,24 +30574,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_string_from_any_indent vx_new(final Object... vals) {
-      Class_string_from_any_indent output = new Class_string_from_any_indent();
+      Core.Class_string_from_any_indent output = new Core.Class_string_from_any_indent();
       return output;
     }
 
     @Override
-    public Core.Func_string_from_any_indent vx_copy(final Object... vals) {
-      Class_string_from_any_indent output = new Class_string_from_any_indent();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_string_from_any_indent output = new Core.Class_string_from_any_indent();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "string<-any-indent", // name
         0, // idx
@@ -29847,16 +30611,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_string_from_any_indent;
+      Core.Type_any output = Core.e_string_from_any_indent;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_string_from_any_indent;
+      Core.Type_any output = Core.t_string_from_any_indent;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -29875,8 +30642,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_string_from_any_indent e_string_from_any_indent = new Core.Class_string_from_any_indent();
-  public static final Func_string_from_any_indent t_string_from_any_indent = new Core.Class_string_from_any_indent();
+  public static final Core.Func_string_from_any_indent e_string_from_any_indent = new Core.Class_string_from_any_indent();
+  public static final Core.Func_string_from_any_indent t_string_from_any_indent = new Core.Class_string_from_any_indent();
 
   public static Core.Type_string f_string_from_any_indent(final Core.Type_any value, final Core.Type_int indent, final Core.Type_boolean linefeed) {
     Core.Type_string output = Core.e_string;
@@ -29891,32 +30658,33 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * (func string<-func)
    */
   public interface Func_string_from_func extends Core.Type_func, Core.Type_replfunc {
-    public Core.Func_string_from_func vx_fn_new(Core.Class_any_from_func.IFn fn);
     public Core.Type_string vx_string_from_func();
+    public Core.Func_string_from_func vx_fn_new(Core.Class_any_from_func.IFn fn);
   }
 
   public static class Class_string_from_func extends Core.Class_base implements Func_string_from_func {
 
     @Override
     public Core.Func_string_from_func vx_new(final Object... vals) {
-      Class_string_from_func output = new Class_string_from_func();
+      Core.Class_string_from_func output = new Core.Class_string_from_func();
       return output;
     }
 
     @Override
-    public Core.Func_string_from_func vx_copy(final Object... vals) {
-      Class_string_from_func output = new Class_string_from_func();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_string_from_func output = new Core.Class_string_from_func();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "string<-func", // name
         0, // idx
@@ -29935,23 +30703,26 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_string_from_func;
+      Core.Type_any output = Core.e_string_from_func;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_string_from_func;
+      Core.Type_any output = Core.t_string_from_func;
+      return output;
     }
 
     public Core.Class_any_from_func.IFn fn = null;
 
     @Override
     public Core.Func_string_from_func vx_fn_new(Core.Class_any_from_func.IFn fn) {
-      Class_string_from_func output = new Class_string_from_func();
+      Core.Class_string_from_func output = new Core.Class_string_from_func();
       output.fn = fn;
       return output;
     }
@@ -29969,8 +30740,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_string_from_func e_string_from_func = new Core.Class_string_from_func();
-  public static final Func_string_from_func t_string_from_func = new Core.Class_string_from_func();
+  public static final Core.Func_string_from_func e_string_from_func = new Core.Class_string_from_func();
+  public static final Core.Func_string_from_func t_string_from_func = new Core.Class_string_from_func();
 
   public static Core.Type_string f_string_from_func() {
     Core.Type_string output = Core.e_string;
@@ -29994,24 +30765,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_string_from_string_find_replace vx_new(final Object... vals) {
-      Class_string_from_string_find_replace output = new Class_string_from_string_find_replace();
+      Core.Class_string_from_string_find_replace output = new Core.Class_string_from_string_find_replace();
       return output;
     }
 
     @Override
-    public Core.Func_string_from_string_find_replace vx_copy(final Object... vals) {
-      Class_string_from_string_find_replace output = new Class_string_from_string_find_replace();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_string_from_string_find_replace output = new Core.Class_string_from_string_find_replace();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "string<-string-find-replace", // name
         0, // idx
@@ -30030,16 +30802,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_string_from_string_find_replace;
+      Core.Type_any output = Core.e_string_from_string_find_replace;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_string_from_string_find_replace;
+      Core.Type_any output = Core.t_string_from_string_find_replace;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -30058,8 +30833,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_string_from_string_find_replace e_string_from_string_find_replace = new Core.Class_string_from_string_find_replace();
-  public static final Func_string_from_string_find_replace t_string_from_string_find_replace = new Core.Class_string_from_string_find_replace();
+  public static final Core.Func_string_from_string_find_replace e_string_from_string_find_replace = new Core.Class_string_from_string_find_replace();
+  public static final Core.Func_string_from_string_find_replace t_string_from_string_find_replace = new Core.Class_string_from_string_find_replace();
 
   public static Core.Type_string f_string_from_string_find_replace(final Core.Type_string text, final Core.Type_string find, final Core.Type_string replace) {
     Core.Type_string output = Core.e_string;
@@ -30082,24 +30857,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_stringlist_from_map vx_new(final Object... vals) {
-      Class_stringlist_from_map output = new Class_stringlist_from_map();
+      Core.Class_stringlist_from_map output = new Core.Class_stringlist_from_map();
       return output;
     }
 
     @Override
-    public Core.Func_stringlist_from_map vx_copy(final Object... vals) {
-      Class_stringlist_from_map output = new Class_stringlist_from_map();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_stringlist_from_map output = new Core.Class_stringlist_from_map();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "stringlist<-map", // name
         0, // idx
@@ -30118,16 +30894,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_stringlist_from_map;
+      Core.Type_any output = Core.e_stringlist_from_map;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_stringlist_from_map;
+      Core.Type_any output = Core.t_stringlist_from_map;
+      return output;
     }
 
     @Override
@@ -30158,8 +30937,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_stringlist_from_map e_stringlist_from_map = new Core.Class_stringlist_from_map();
-  public static final Func_stringlist_from_map t_stringlist_from_map = new Core.Class_stringlist_from_map();
+  public static final Core.Func_stringlist_from_map e_stringlist_from_map = new Core.Class_stringlist_from_map();
+  public static final Core.Func_stringlist_from_map t_stringlist_from_map = new Core.Class_stringlist_from_map();
 
   public static Core.Type_stringlist f_stringlist_from_map(final Core.Type_map map) {
     Core.Type_stringlist output = Core.e_stringlist;
@@ -30192,24 +30971,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_switch vx_new(final Object... vals) {
-      Class_switch output = new Class_switch();
+      Core.Class_switch output = new Core.Class_switch();
       return output;
     }
 
     @Override
-    public Core.Func_switch vx_copy(final Object... vals) {
-      Class_switch output = new Class_switch();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_switch output = new Core.Class_switch();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "switch", // name
         0, // idx
@@ -30228,16 +31008,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_switch;
+      Core.Type_any output = Core.e_switch;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_switch;
+      Core.Type_any output = Core.t_switch;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -30256,8 +31039,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_switch e_switch = new Core.Class_switch();
-  public static final Func_switch t_switch = new Core.Class_switch();
+  public static final Core.Func_switch e_switch = new Core.Class_switch();
+  public static final Core.Func_switch t_switch = new Core.Class_switch();
 
   public static <T extends Core.Type_any, U extends Core.Type_any> T f_switch(final T generic_any_1, final U val, final Core.Type_thenelselist thenelselist) {
     T output = Core.f_empty(generic_any_1);
@@ -30310,24 +31093,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_then vx_new(final Object... vals) {
-      Class_then output = new Class_then();
+      Core.Class_then output = new Core.Class_then();
       return output;
     }
 
     @Override
-    public Core.Func_then vx_copy(final Object... vals) {
-      Class_then output = new Class_then();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_then output = new Core.Class_then();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "then", // name
         0, // idx
@@ -30346,16 +31130,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_then;
+      Core.Type_any output = Core.e_then;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_then;
+      Core.Type_any output = Core.t_then;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -30373,14 +31160,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_then e_then = new Core.Class_then();
-  public static final Func_then t_then = new Core.Class_then();
+  public static final Core.Func_then e_then = new Core.Class_then();
+  public static final Core.Func_then t_then = new Core.Class_then();
 
   public static Core.Type_thenelse f_then(final Core.Func_boolean_from_func fn_cond, final Core.Func_any_from_func fn_any) {
     Core.Type_thenelse output = Core.e_thenelse;
     output = Core.f_new(
       Core.t_thenelse,
-      Core.vx_new(Core.t_anylist,
+      Core.vx_new(
+        Core.t_anylist,
         Core.vx_new_string(":code"),
         Core.vx_new_string(":then"),
         Core.vx_new_string(":fn-cond"),
@@ -30407,24 +31195,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_traits_from_typedef vx_new(final Object... vals) {
-      Class_traits_from_typedef output = new Class_traits_from_typedef();
+      Core.Class_traits_from_typedef output = new Core.Class_traits_from_typedef();
       return output;
     }
 
     @Override
-    public Core.Func_traits_from_typedef vx_copy(final Object... vals) {
-      Class_traits_from_typedef output = new Class_traits_from_typedef();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_traits_from_typedef output = new Core.Class_traits_from_typedef();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "traits<-typedef", // name
         0, // idx
@@ -30443,16 +31232,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_traits_from_typedef;
+      Core.Type_any output = Core.e_traits_from_typedef;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_traits_from_typedef;
+      Core.Type_any output = Core.t_traits_from_typedef;
+      return output;
     }
 
     @Override
@@ -30483,8 +31275,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_traits_from_typedef e_traits_from_typedef = new Core.Class_traits_from_typedef();
-  public static final Func_traits_from_typedef t_traits_from_typedef = new Core.Class_traits_from_typedef();
+  public static final Core.Func_traits_from_typedef e_traits_from_typedef = new Core.Class_traits_from_typedef();
+  public static final Core.Func_traits_from_typedef t_traits_from_typedef = new Core.Class_traits_from_typedef();
 
   public static Core.Type_typelist f_traits_from_typedef(final Core.Type_typedef vtypedef) {
     Core.Type_typelist output = Core.e_typelist;
@@ -30507,24 +31299,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_type_from_any vx_new(final Object... vals) {
-      Class_type_from_any output = new Class_type_from_any();
+      Core.Class_type_from_any output = new Core.Class_type_from_any();
       return output;
     }
 
     @Override
-    public Core.Func_type_from_any vx_copy(final Object... vals) {
-      Class_type_from_any output = new Class_type_from_any();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_type_from_any output = new Core.Class_type_from_any();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "type<-any", // name
         0, // idx
@@ -30543,16 +31336,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_type_from_any;
+      Core.Type_any output = Core.e_type_from_any;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_type_from_any;
+      Core.Type_any output = Core.t_type_from_any;
+      return output;
     }
 
     @Override
@@ -30583,8 +31379,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_type_from_any e_type_from_any = new Core.Class_type_from_any();
-  public static final Func_type_from_any t_type_from_any = new Core.Class_type_from_any();
+  public static final Core.Func_type_from_any e_type_from_any = new Core.Class_type_from_any();
+  public static final Core.Func_type_from_any t_type_from_any = new Core.Class_type_from_any();
 
   public static Core.Type_any f_type_from_any(final Core.Type_any value) {
     Core.Type_any output = Core.e_any;
@@ -30607,24 +31403,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_typedef_from_any vx_new(final Object... vals) {
-      Class_typedef_from_any output = new Class_typedef_from_any();
+      Core.Class_typedef_from_any output = new Core.Class_typedef_from_any();
       return output;
     }
 
     @Override
-    public Core.Func_typedef_from_any vx_copy(final Object... vals) {
-      Class_typedef_from_any output = new Class_typedef_from_any();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_typedef_from_any output = new Core.Class_typedef_from_any();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "typedef<-any", // name
         0, // idx
@@ -30643,16 +31440,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_typedef_from_any;
+      Core.Type_any output = Core.e_typedef_from_any;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_typedef_from_any;
+      Core.Type_any output = Core.t_typedef_from_any;
+      return output;
     }
 
     @Override
@@ -30683,8 +31483,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_typedef_from_any e_typedef_from_any = new Core.Class_typedef_from_any();
-  public static final Func_typedef_from_any t_typedef_from_any = new Core.Class_typedef_from_any();
+  public static final Core.Func_typedef_from_any e_typedef_from_any = new Core.Class_typedef_from_any();
+  public static final Core.Func_typedef_from_any t_typedef_from_any = new Core.Class_typedef_from_any();
 
   public static Core.Type_typedef f_typedef_from_any(final Core.Type_any val) {
     Core.Type_typedef output = Core.e_typedef;
@@ -30709,24 +31509,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_typedef_from_type vx_new(final Object... vals) {
-      Class_typedef_from_type output = new Class_typedef_from_type();
+      Core.Class_typedef_from_type output = new Core.Class_typedef_from_type();
       return output;
     }
 
     @Override
-    public Core.Func_typedef_from_type vx_copy(final Object... vals) {
-      Class_typedef_from_type output = new Class_typedef_from_type();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_typedef_from_type output = new Core.Class_typedef_from_type();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "typedef<-type", // name
         0, // idx
@@ -30745,16 +31546,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_typedef_from_type;
+      Core.Type_any output = Core.e_typedef_from_type;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_typedef_from_type;
+      Core.Type_any output = Core.t_typedef_from_type;
+      return output;
     }
 
     @Override
@@ -30785,8 +31589,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_typedef_from_type e_typedef_from_type = new Core.Class_typedef_from_type();
-  public static final Func_typedef_from_type t_typedef_from_type = new Core.Class_typedef_from_type();
+  public static final Core.Func_typedef_from_type e_typedef_from_type = new Core.Class_typedef_from_type();
+  public static final Core.Func_typedef_from_type t_typedef_from_type = new Core.Class_typedef_from_type();
 
   public static Core.Type_typedef f_typedef_from_type(final Core.Type_any val) {
     Core.Type_typedef output = Core.e_typedef;
@@ -30809,24 +31613,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_typename_from_any vx_new(final Object... vals) {
-      Class_typename_from_any output = new Class_typename_from_any();
+      Core.Class_typename_from_any output = new Core.Class_typename_from_any();
       return output;
     }
 
     @Override
-    public Core.Func_typename_from_any vx_copy(final Object... vals) {
-      Class_typename_from_any output = new Class_typename_from_any();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_typename_from_any output = new Core.Class_typename_from_any();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "typename<-any", // name
         0, // idx
@@ -30845,16 +31650,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_typename_from_any;
+      Core.Type_any output = Core.e_typename_from_any;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_typename_from_any;
+      Core.Type_any output = Core.t_typename_from_any;
+      return output;
     }
 
     @Override
@@ -30885,8 +31693,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_typename_from_any e_typename_from_any = new Core.Class_typename_from_any();
-  public static final Func_typename_from_any t_typename_from_any = new Core.Class_typename_from_any();
+  public static final Core.Func_typename_from_any e_typename_from_any = new Core.Class_typename_from_any();
+  public static final Core.Func_typename_from_any t_typename_from_any = new Core.Class_typename_from_any();
 
   public static Core.Type_string f_typename_from_any(final Core.Type_any value) {
     Core.Type_string output = Core.e_string;
@@ -30911,24 +31719,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_typename_from_type vx_new(final Object... vals) {
-      Class_typename_from_type output = new Class_typename_from_type();
+      Core.Class_typename_from_type output = new Core.Class_typename_from_type();
       return output;
     }
 
     @Override
-    public Core.Func_typename_from_type vx_copy(final Object... vals) {
-      Class_typename_from_type output = new Class_typename_from_type();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_typename_from_type output = new Core.Class_typename_from_type();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "typename<-type", // name
         0, // idx
@@ -30947,16 +31756,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_typename_from_type;
+      Core.Type_any output = Core.e_typename_from_type;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_typename_from_type;
+      Core.Type_any output = Core.t_typename_from_type;
+      return output;
     }
 
     @Override
@@ -30987,8 +31799,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_typename_from_type e_typename_from_type = new Core.Class_typename_from_type();
-  public static final Func_typename_from_type t_typename_from_type = new Core.Class_typename_from_type();
+  public static final Core.Func_typename_from_type e_typename_from_type = new Core.Class_typename_from_type();
+  public static final Core.Func_typename_from_type t_typename_from_type = new Core.Class_typename_from_type();
 
   public static Core.Type_string f_typename_from_type(final Core.Type_any type) {
     Core.Type_string output = Core.e_string;
@@ -31013,24 +31825,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_typename_from_typedef vx_new(final Object... vals) {
-      Class_typename_from_typedef output = new Class_typename_from_typedef();
+      Core.Class_typename_from_typedef output = new Core.Class_typename_from_typedef();
       return output;
     }
 
     @Override
-    public Core.Func_typename_from_typedef vx_copy(final Object... vals) {
-      Class_typename_from_typedef output = new Class_typename_from_typedef();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_typename_from_typedef output = new Core.Class_typename_from_typedef();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "typename<-typedef", // name
         0, // idx
@@ -31049,16 +31862,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_typename_from_typedef;
+      Core.Type_any output = Core.e_typename_from_typedef;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_typename_from_typedef;
+      Core.Type_any output = Core.t_typename_from_typedef;
+      return output;
     }
 
     @Override
@@ -31089,14 +31905,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_typename_from_typedef e_typename_from_typedef = new Core.Class_typename_from_typedef();
-  public static final Func_typename_from_typedef t_typename_from_typedef = new Core.Class_typename_from_typedef();
+  public static final Core.Func_typename_from_typedef e_typename_from_typedef = new Core.Class_typename_from_typedef();
+  public static final Core.Func_typename_from_typedef t_typename_from_typedef = new Core.Class_typename_from_typedef();
 
   public static Core.Type_string f_typename_from_typedef(final Core.Type_typedef vtypedef) {
     Core.Type_string output = Core.e_string;
     output = Core.f_new(
       Core.t_string,
-      Core.vx_new(Core.t_anylist,
+      Core.vx_new(
+        Core.t_anylist,
         vtypedef.pkgname(),
         Core.vx_new_string("/"),
         vtypedef.name()
@@ -31120,24 +31937,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_typenames_from_typelist vx_new(final Object... vals) {
-      Class_typenames_from_typelist output = new Class_typenames_from_typelist();
+      Core.Class_typenames_from_typelist output = new Core.Class_typenames_from_typelist();
       return output;
     }
 
     @Override
-    public Core.Func_typenames_from_typelist vx_copy(final Object... vals) {
-      Class_typenames_from_typelist output = new Class_typenames_from_typelist();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_typenames_from_typelist output = new Core.Class_typenames_from_typelist();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "typenames<-typelist", // name
         0, // idx
@@ -31156,16 +31974,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_typenames_from_typelist;
+      Core.Type_any output = Core.e_typenames_from_typelist;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_typenames_from_typelist;
+      Core.Type_any output = Core.t_typenames_from_typelist;
+      return output;
     }
 
     @Override
@@ -31196,8 +32017,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_typenames_from_typelist e_typenames_from_typelist = new Core.Class_typenames_from_typelist();
-  public static final Func_typenames_from_typelist t_typenames_from_typelist = new Core.Class_typenames_from_typelist();
+  public static final Core.Func_typenames_from_typelist e_typenames_from_typelist = new Core.Class_typenames_from_typelist();
+  public static final Core.Func_typenames_from_typelist t_typenames_from_typelist = new Core.Class_typenames_from_typelist();
 
   public static Core.Type_stringlist f_typenames_from_typelist(final Core.Type_typelist typelist) {
     Core.Type_stringlist output = Core.e_stringlist;
@@ -31228,24 +32049,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Func_user_from_context vx_new(final Object... vals) {
-      Class_user_from_context output = new Class_user_from_context();
+      Core.Class_user_from_context output = new Core.Class_user_from_context();
       return output;
     }
 
     @Override
-    public Core.Func_user_from_context vx_copy(final Object... vals) {
-      Class_user_from_context output = new Class_user_from_context();
+    public Core.Type_any vx_copy(final Object... vals) {
+      Core.Class_user_from_context output = new Core.Class_user_from_context();
       return output;
     }
 
     @Override
     public Core.Type_typedef vx_typedef() {
-      return Core.t_func.vx_typedef();
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
     }
 
     @Override
     public Core.Type_funcdef vx_funcdef() {
-      return Core.funcdef_new(
+      Core.Type_funcdef output = Core.funcdef_new(
         "vx/core", // pkgname
         "user<-context", // name
         0, // idx
@@ -31264,16 +32086,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           Core.e_argmap // properties
         ) // typedef
       );
+      return output;
     }
 
     @Override
     public Core.Type_any vx_empty() {
-      return e_user_from_context;
+      Core.Type_any output = Core.e_user_from_context;
+      return output;
     }
 
     @Override
     public Core.Type_any vx_type() {
-      return t_user_from_context;
+      Core.Type_any output = Core.t_user_from_context;
+      return output;
     }
 
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
@@ -31290,8 +32115,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   }
 
-  public static final Func_user_from_context e_user_from_context = new Core.Class_user_from_context();
-  public static final Func_user_from_context t_user_from_context = new Core.Class_user_from_context();
+  public static final Core.Func_user_from_context e_user_from_context = new Core.Class_user_from_context();
+  public static final Core.Func_user_from_context t_user_from_context = new Core.Class_user_from_context();
 
   public static Core.Type_user f_user_from_context(final Core.Type_context context) {
     Core.Type_user output = Core.e_user;

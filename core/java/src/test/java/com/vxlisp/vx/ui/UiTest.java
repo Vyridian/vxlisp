@@ -24,7 +24,8 @@ public final class UiTest {
               context,
               Core.f_new(
                 Ui.t_ui,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":uid"),
                   Core.vx_new_string("app")
                 )
@@ -36,7 +37,8 @@ public final class UiTest {
                     context,
                     Core.f_new(
                       Ui.t_ui,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":uid"),
                         Core.vx_new_string("app")
                       )
@@ -106,7 +108,8 @@ public final class UiTest {
               context,
               Core.f_new(
                 Ui.t_ui,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":uid"),
                   Core.vx_new_string("myapp")
                 )
@@ -118,7 +121,8 @@ public final class UiTest {
                     context,
                     Core.f_new(
                       Ui.t_ui,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":uid"),
                         Core.vx_new_string("myapp")
                       )
@@ -152,7 +156,8 @@ public final class UiTest {
               context,
               Core.f_new(
                 Ui.t_ui,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":uid"),
                   Core.vx_new_string("a/b/c")
                 )
@@ -162,26 +167,30 @@ public final class UiTest {
                 Core.t_any_from_func.vx_fn_new(() -> {
                   Ui.Type_ui uiapp = Core.f_new(
                     Ui.t_ui,
-                    Core.vx_new(Core.t_anylist,
-                        Core.vx_new_string(":uid"),
-                        Core.vx_new_string("a"),
-                        Core.vx_new_string(":uimap"),
-                        Ui.f_uimap_from_uilist(
-                          Core.vx_new(Ui.t_uilist,
-                            Core.f_new(
-                              Ui.t_ui,
-                              Core.vx_new(Core.t_anylist,
-                                Core.vx_new_string(":uid"),
-                                Core.vx_new_string("a/b"),
-                                Core.vx_new_string(":uimap"),
-                                Ui.f_uimap_from_uilist(
-                                  Core.vx_new(Ui.t_uilist,
-                                    Core.f_new(
-                                      Ui.t_ui,
-                                      Core.vx_new(Core.t_anylist,
-                                        Core.vx_new_string(":uid"),
-                                        Core.vx_new_string("a/b/c")
-                                      )
+                    Core.vx_new(
+                      Core.t_anylist,
+                      Core.vx_new_string(":uid"),
+                      Core.vx_new_string("a"),
+                      Core.vx_new_string(":uimap"),
+                      Ui.f_uimap_from_uilist(
+                        Core.vx_new(
+                          Ui.t_uilist,
+                          Core.f_new(
+                            Ui.t_ui,
+                            Core.vx_new(
+                              Core.t_anylist,
+                              Core.vx_new_string(":uid"),
+                              Core.vx_new_string("a/b"),
+                              Core.vx_new_string(":uimap"),
+                              Ui.f_uimap_from_uilist(
+                                Core.vx_new(
+                                  Ui.t_uilist,
+                                  Core.f_new(
+                                    Ui.t_ui,
+                                    Core.vx_new(
+                                      Core.t_anylist,
+                                      Core.vx_new_string(":uid"),
+                                      Core.vx_new_string("a/b/c")
                                     )
                                   )
                                 )
@@ -189,6 +198,7 @@ public final class UiTest {
                             )
                           )
                         )
+                      )
                     )
                   );
                   Core.Type_boolean iswrite = Ui.f_boolean_writestate_from_uiapp(context, uiapp);
@@ -222,15 +232,18 @@ public final class UiTest {
               context,
               Core.f_new(
                 Ui.t_ui,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":uimap"),
                   Core.f_new(
                     Ui.t_uimap,
-                    Core.vx_new(Core.t_anylist,
+                    Core.vx_new(
+                      Core.t_anylist,
                       Core.vx_new_string(":a"),
                       Core.f_new(
                         Ui.t_ui,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":uid"),
                           Core.vx_new_string("a"),
                           Core.vx_new_string(":hidden"),
@@ -240,7 +253,8 @@ public final class UiTest {
                       Core.vx_new_string(":b"),
                       Core.f_new(
                         Ui.t_ui,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":uid"),
                           Core.vx_new_string("b")
                         )
@@ -252,15 +266,18 @@ public final class UiTest {
               Ui.f_ui_write_from_ui_visible(
                 Core.f_new(
                   Ui.t_ui,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":uimap"),
                     Core.f_new(
                       Ui.t_uimap,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":a"),
                         Core.f_new(
                           Ui.t_ui,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":uid"),
                             Core.vx_new_string("a")
                           )
@@ -268,7 +285,8 @@ public final class UiTest {
                         Core.vx_new_string(":b"),
                         Core.f_new(
                           Ui.t_ui,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":uid"),
                             Core.vx_new_string("b"),
                             Core.vx_new_string(":hidden"),
@@ -305,7 +323,8 @@ public final class UiTest {
               context,
               Core.f_new(
                 Ui.t_ui,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":uid"),
                   Core.vx_new_string("a/b/c")
                 )
@@ -313,27 +332,32 @@ public final class UiTest {
               Ui.f_ui_from_ui_find(
                 Core.f_new(
                   Ui.t_ui,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":uid"),
                     Core.vx_new_string("a"),
                     Core.vx_new_string(":uimap"),
                     Core.f_new(
                       Ui.t_uimap,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":a/b"),
                         Core.f_new(
                           Ui.t_ui,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":uid"),
                             Core.vx_new_string("a/b"),
                             Core.vx_new_string(":uimap"),
                             Core.f_new(
                               Ui.t_uimap,
-                              Core.vx_new(Core.t_anylist,
+                              Core.vx_new(
+                                Core.t_anylist,
                                 Core.vx_new_string(":a/b/c"),
                                 Core.f_new(
                                   Ui.t_ui,
-                                  Core.vx_new(Core.t_anylist,
+                                  Core.vx_new(
+                                    Core.t_anylist,
                                     Core.vx_new_string(":uid"),
                                     Core.vx_new_string("a/b/c")
                                   )
@@ -372,15 +396,18 @@ public final class UiTest {
               context,
               Core.f_new(
                 Ui.t_ui,
-                Core.vx_new(Core.t_anylist,
+                Core.vx_new(
+                  Core.t_anylist,
                   Core.vx_new_string(":uimap"),
                   Core.f_new(
                     Ui.t_uimap,
-                    Core.vx_new(Core.t_anylist,
+                    Core.vx_new(
+                      Core.t_anylist,
                       Core.vx_new_string(":a"),
                       Core.f_new(
                         Ui.t_ui,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":uid"),
                           Core.vx_new_string("a")
                         )
@@ -388,7 +415,8 @@ public final class UiTest {
                       Core.vx_new_string(":b"),
                       Core.f_new(
                         Ui.t_ui,
-                        Core.vx_new(Core.t_anylist,
+                        Core.vx_new(
+                          Core.t_anylist,
                           Core.vx_new_string(":uid"),
                           Core.vx_new_string("b"),
                           Core.vx_new_string(":selected"),
@@ -402,15 +430,18 @@ public final class UiTest {
               Ui.f_ui_from_ui_selected(
                 Core.f_new(
                   Ui.t_ui,
-                  Core.vx_new(Core.t_anylist,
+                  Core.vx_new(
+                    Core.t_anylist,
                     Core.vx_new_string(":uimap"),
                     Core.f_new(
                       Ui.t_uimap,
-                      Core.vx_new(Core.t_anylist,
+                      Core.vx_new(
+                        Core.t_anylist,
                         Core.vx_new_string(":a"),
                         Core.f_new(
                           Ui.t_ui,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":uid"),
                             Core.vx_new_string("a"),
                             Core.vx_new_string(":selected"),
@@ -420,7 +451,8 @@ public final class UiTest {
                         Core.vx_new_string(":b"),
                         Core.f_new(
                           Ui.t_ui,
-                          Core.vx_new(Core.t_anylist,
+                          Core.vx_new(
+                            Core.t_anylist,
                             Core.vx_new_string(":uid"),
                             Core.vx_new_string("b")
                           )
