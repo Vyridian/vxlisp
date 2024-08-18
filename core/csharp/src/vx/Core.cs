@@ -13966,12 +13966,12 @@ public static class Core {
   /**
    * @function not
    * Boolean not
-   * @param  {boolean} val Thing to not
+   * @param  {boolean} value Thing to not
    * @return {boolean}
    * (func !)
    */
   public interface Func_not : Vx.Core.Func_any_from_any {
-    public Vx.Core.Type_boolean vx_not(Vx.Core.Type_boolean val);
+    public Vx.Core.Type_boolean vx_not(Vx.Core.Type_boolean value);
   }
 
   public class Class_not : Vx.Core.Class_base, Func_not {
@@ -14038,13 +14038,14 @@ public static class Core {
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
       Vx.Core.Type_any output = Vx.Core.e_any;
-      Vx.Core.Type_boolean val = Vx.Core.f_any_from_any(Vx.Core.t_boolean, arglist.vx_any(Vx.Core.vx_new_int(0)));
-      output = Vx.Core.f_not(val);
+      Vx.Core.Type_boolean value = Vx.Core.f_any_from_any(Vx.Core.t_boolean, arglist.vx_any(Vx.Core.vx_new_int(0)));
+      output = Vx.Core.f_not(value);
       return output;
     }
 
-    public Vx.Core.Type_boolean vx_not(Vx.Core.Type_boolean val) {
-      return Vx.Core.f_not(val);
+    public Vx.Core.Type_boolean vx_not(Vx.Core.Type_boolean value) {
+      Vx.Core.Type_boolean output = Vx.Core.f_not(value);
+      return output;
     }
 
   }
@@ -14052,9 +14053,9 @@ public static class Core {
   public static Vx.Core.Func_not e_not = new Vx.Core.Class_not();
   public static Vx.Core.Func_not t_not = new Vx.Core.Class_not();
 
-  public static Vx.Core.Type_boolean f_not(Vx.Core.Type_boolean val) {
+  public static Vx.Core.Type_boolean f_not(Vx.Core.Type_boolean value) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
-    output = Vx.Core.vx_new_boolean(!val.vx_boolean());
+    output = Vx.Core.vx_new_boolean(!value.vx_boolean());
     return output;
   }
 
@@ -14139,7 +14140,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_boolean vx_notempty(Vx.Core.Type_string text) {
-      return Vx.Core.f_notempty(text);
+      Vx.Core.Type_boolean output = Vx.Core.f_notempty(text);
+      return output;
     }
 
   }
@@ -14150,20 +14152,22 @@ public static class Core {
   public static Vx.Core.Type_boolean f_notempty(Vx.Core.Type_string text) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
     output = Vx.Core.f_not(
-      Vx.Core.f_is_empty(text)
+      Vx.Core.f_is_empty(
+        text
+      )
     );
     return output;
   }
 
   /**
    * @function notempty 1
-   * Returns true if val is not empty.
-   * @param  {any} val
+   * Returns true if value is not empty.
+   * @param  {any} value
    * @return {boolean}
    * (func !-empty)
    */
   public interface Func_notempty_1 : Vx.Core.Func_any_from_any {
-    public Vx.Core.Type_boolean vx_notempty_1(Vx.Core.Type_any val);
+    public Vx.Core.Type_boolean vx_notempty_1(Vx.Core.Type_any value);
   }
 
   public class Class_notempty_1 : Vx.Core.Class_base, Func_notempty_1 {
@@ -14230,13 +14234,14 @@ public static class Core {
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
       Vx.Core.Type_any output = Vx.Core.e_any;
-      Vx.Core.Type_any val = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
-      output = Vx.Core.f_notempty_1(val);
+      Vx.Core.Type_any value = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
+      output = Vx.Core.f_notempty_1(value);
       return output;
     }
 
-    public Vx.Core.Type_boolean vx_notempty_1(Vx.Core.Type_any val) {
-      return Vx.Core.f_notempty_1(val);
+    public Vx.Core.Type_boolean vx_notempty_1(Vx.Core.Type_any value) {
+      Vx.Core.Type_boolean output = Vx.Core.f_notempty_1(value);
+      return output;
     }
 
   }
@@ -14244,10 +14249,12 @@ public static class Core {
   public static Vx.Core.Func_notempty_1 e_notempty_1 = new Vx.Core.Class_notempty_1();
   public static Vx.Core.Func_notempty_1 t_notempty_1 = new Vx.Core.Class_notempty_1();
 
-  public static Vx.Core.Type_boolean f_notempty_1(Vx.Core.Type_any val) {
+  public static Vx.Core.Type_boolean f_notempty_1(Vx.Core.Type_any value) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
     output = Vx.Core.f_not(
-      Vx.Core.f_is_empty_1(val)
+      Vx.Core.f_is_empty_1(
+        value
+      )
     );
     return output;
   }
@@ -14323,7 +14330,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_boolean vx_ne(Vx.Core.Type_any val1, Vx.Core.Type_any val2) {
-      return Vx.Core.f_ne(val1, val2);
+      Vx.Core.Type_boolean output = Vx.Core.f_ne(val1, val2);
+      return output;
     }
 
   }
@@ -14334,7 +14342,10 @@ public static class Core {
   public static Vx.Core.Type_boolean f_ne(Vx.Core.Type_any val1, Vx.Core.Type_any val2) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
     output = Vx.Core.f_not(
-      Vx.Core.f_eq(val1, val2)
+      Vx.Core.f_eq(
+        val1,
+        val2
+      )
     );
     return output;
   }
@@ -14410,7 +14421,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_boolean vx_neqeq(Vx.Core.Type_any val1, Vx.Core.Type_any val2) {
-      return Vx.Core.f_neqeq(val1, val2);
+      Vx.Core.Type_boolean output = Vx.Core.f_neqeq(val1, val2);
+      return output;
     }
 
   }
@@ -14421,7 +14433,10 @@ public static class Core {
   public static Vx.Core.Type_boolean f_neqeq(Vx.Core.Type_any val1, Vx.Core.Type_any val2) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
     output = Vx.Core.f_not(
-      Vx.Core.f_eqeq(val1, val2)
+      Vx.Core.f_eqeq(
+        val1,
+        val2
+      )
     );
     return output;
   }
@@ -14497,7 +14512,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_int vx_multiply(Vx.Core.Type_int num1, Vx.Core.Type_int num2) {
-      return Vx.Core.f_multiply(num1, num2);
+      Vx.Core.Type_int output = Vx.Core.f_multiply(num1, num2);
+      return output;
     }
 
   }
@@ -14583,7 +14599,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_number vx_multiply_1(Vx.Core.Type_number num1, Vx.Core.Type_number num2) {
-      return Vx.Core.f_multiply_1(num1, num2);
+      Vx.Core.Type_number output = Vx.Core.f_multiply_1(num1, num2);
+      return output;
     }
 
   }
@@ -14679,7 +14696,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_int vx_multiply_2(Vx.Core.Type_intlist nums) {
-      return Vx.Core.f_multiply_2(nums);
+      Vx.Core.Type_int output = Vx.Core.f_multiply_2(nums);
+      return output;
     }
 
   }
@@ -14696,8 +14714,10 @@ public static class Core {
       Vx.Core.t_any_from_reduce.vx_fn_new((total_any, num_any) => {
         Vx.Core.Type_int total = Vx.Core.f_any_from_any(Vx.Core.t_int, total_any);
         Vx.Core.Type_int num = Vx.Core.f_any_from_any(Vx.Core.t_int, num_any);
-        Vx.Core.Type_any output_1 = 
-          Vx.Core.f_multiply(total, num);
+        Vx.Core.Type_any output_1 = Vx.Core.f_multiply(
+          total,
+          num
+        );
         return output_1;
       })
     );
@@ -14785,7 +14805,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_number vx_multiply_3(Vx.Core.Type_numberlist nums) {
-      return Vx.Core.f_multiply_3(nums);
+      Vx.Core.Type_number output = Vx.Core.f_multiply_3(nums);
+      return output;
     }
 
   }
@@ -14802,8 +14823,10 @@ public static class Core {
       Vx.Core.t_any_from_reduce.vx_fn_new((total_any, num_any) => {
         Vx.Core.Type_number total = Vx.Core.f_any_from_any(Vx.Core.t_number, total_any);
         Vx.Core.Type_number num = Vx.Core.f_any_from_any(Vx.Core.t_number, num_any);
-        Vx.Core.Type_any output_1 = 
-          Vx.Core.f_multiply_1(total, num);
+        Vx.Core.Type_any output_1 = Vx.Core.f_multiply_1(
+          total,
+          num
+        );
         return output_1;
       })
     );
@@ -14881,7 +14904,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_int vx_plus(Vx.Core.Type_int num1, Vx.Core.Type_int num2) {
-      return Vx.Core.f_plus(num1, num2);
+      Vx.Core.Type_int output = Vx.Core.f_plus(num1, num2);
+      return output;
     }
 
   }
@@ -14967,7 +14991,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_number vx_plus_1(Vx.Core.Type_number num1, Vx.Core.Type_number num2) {
-      return Vx.Core.f_plus_1(num1, num2);
+      Vx.Core.Type_number output = Vx.Core.f_plus_1(num1, num2);
+      return output;
     }
 
   }
@@ -15063,7 +15088,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_int vx_plus_2(Vx.Core.Type_intlist nums) {
-      return Vx.Core.f_plus_2(nums);
+      Vx.Core.Type_int output = Vx.Core.f_plus_2(nums);
+      return output;
     }
 
   }
@@ -15080,8 +15106,10 @@ public static class Core {
       Vx.Core.t_any_from_reduce.vx_fn_new((total_any, num_any) => {
         Vx.Core.Type_int total = Vx.Core.f_any_from_any(Vx.Core.t_int, total_any);
         Vx.Core.Type_int num = Vx.Core.f_any_from_any(Vx.Core.t_int, num_any);
-        Vx.Core.Type_any output_1 = 
-          Vx.Core.f_plus(total, num);
+        Vx.Core.Type_any output_1 = Vx.Core.f_plus(
+          total,
+          num
+        );
         return output_1;
       })
     );
@@ -15169,7 +15197,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_number vx_plus_3(Vx.Core.Type_numberlist nums) {
-      return Vx.Core.f_plus_3(nums);
+      Vx.Core.Type_number output = Vx.Core.f_plus_3(nums);
+      return output;
     }
 
   }
@@ -15186,8 +15215,10 @@ public static class Core {
       Vx.Core.t_any_from_reduce.vx_fn_new((total_any, num_any) => {
         Vx.Core.Type_number total = Vx.Core.f_any_from_any(Vx.Core.t_number, total_any);
         Vx.Core.Type_number num = Vx.Core.f_any_from_any(Vx.Core.t_number, num_any);
-        Vx.Core.Type_any output_1 = 
-          Vx.Core.f_plus_1(total, num);
+        Vx.Core.Type_any output_1 = Vx.Core.f_plus_1(
+          total,
+          num
+        );
         return output_1;
       })
     );
@@ -15275,7 +15306,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_int vx_plus1(Vx.Core.Type_int num) {
-      return Vx.Core.f_plus1(num);
+      Vx.Core.Type_int output = Vx.Core.f_plus1(num);
+      return output;
     }
 
   }
@@ -15285,7 +15317,10 @@ public static class Core {
 
   public static Vx.Core.Type_int f_plus1(Vx.Core.Type_int num) {
     Vx.Core.Type_int output = Vx.Core.e_int;
-    output = Vx.Core.f_plus(num, Vx.Core.vx_new_int(1));
+    output = Vx.Core.f_plus(
+      num,
+      Vx.Core.vx_new_int(1)
+    );
     return output;
   }
 
@@ -15360,7 +15395,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_int vx_minus(Vx.Core.Type_int num1, Vx.Core.Type_int num2) {
-      return Vx.Core.f_minus(num1, num2);
+      Vx.Core.Type_int output = Vx.Core.f_minus(num1, num2);
+      return output;
     }
 
   }
@@ -15446,7 +15482,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_number vx_minus_1(Vx.Core.Type_number num1, Vx.Core.Type_number num2) {
-      return Vx.Core.f_minus_1(num1, num2);
+      Vx.Core.Type_number output = Vx.Core.f_minus_1(num1, num2);
+      return output;
     }
 
   }
@@ -15542,7 +15579,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_int vx_minus_2(Vx.Core.Type_intlist nums) {
-      return Vx.Core.f_minus_2(nums);
+      Vx.Core.Type_int output = Vx.Core.f_minus_2(nums);
+      return output;
     }
 
   }
@@ -15559,8 +15597,10 @@ public static class Core {
       Vx.Core.t_any_from_reduce.vx_fn_new((total_any, num_any) => {
         Vx.Core.Type_int total = Vx.Core.f_any_from_any(Vx.Core.t_int, total_any);
         Vx.Core.Type_int num = Vx.Core.f_any_from_any(Vx.Core.t_int, num_any);
-        Vx.Core.Type_any output_1 = 
-          Vx.Core.f_minus(total, num);
+        Vx.Core.Type_any output_1 = Vx.Core.f_minus(
+          total,
+          num
+        );
         return output_1;
       })
     );
@@ -15648,7 +15688,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_number vx_minus_3(Vx.Core.Type_numberlist nums) {
-      return Vx.Core.f_minus_3(nums);
+      Vx.Core.Type_number output = Vx.Core.f_minus_3(nums);
+      return output;
     }
 
   }
@@ -15665,8 +15706,10 @@ public static class Core {
       Vx.Core.t_any_from_reduce.vx_fn_new((total_any, num_any) => {
         Vx.Core.Type_number total = Vx.Core.f_any_from_any(Vx.Core.t_number, total_any);
         Vx.Core.Type_number num = Vx.Core.f_any_from_any(Vx.Core.t_number, num_any);
-        Vx.Core.Type_any output_1 = 
-          Vx.Core.f_minus_1(total, num);
+        Vx.Core.Type_any output_1 = Vx.Core.f_minus_1(
+          total,
+          num
+        );
         return output_1;
       })
     );
@@ -15754,7 +15797,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_int vx_minus1(Vx.Core.Type_int num) {
-      return Vx.Core.f_minus1(num);
+      Vx.Core.Type_int output = Vx.Core.f_minus1(num);
+      return output;
     }
 
   }
@@ -15764,7 +15808,10 @@ public static class Core {
 
   public static Vx.Core.Type_int f_minus1(Vx.Core.Type_int num) {
     Vx.Core.Type_int output = Vx.Core.e_int;
-    output = Vx.Core.f_minus(num, Vx.Core.vx_new_int(1));
+    output = Vx.Core.f_minus(
+      num,
+      Vx.Core.vx_new_int(1)
+    );
     return output;
   }
 
@@ -15841,7 +15888,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_any vx_dotmethod(Vx.Core.Type_any target, Vx.Core.Type_string method, Vx.Core.Type_anylist parameters) {
-      return Vx.Core.f_dotmethod(target, method, parameters);
+      Vx.Core.Type_any output = Vx.Core.f_dotmethod(target, method, parameters);
+      return output;
     }
 
   }
@@ -15925,7 +15973,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_number vx_divide(Vx.Core.Type_number num1, Vx.Core.Type_number num2) {
-      return Vx.Core.f_divide(num1, num2);
+      Vx.Core.Type_number output = Vx.Core.f_divide(num1, num2);
+      return output;
     }
 
   }
@@ -16018,7 +16067,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_boolean vx_lt(Vx.Core.Type_any val1, Vx.Core.Type_any val2) {
-      return Vx.Core.f_lt(val1, val2);
+      Vx.Core.Type_boolean output = Vx.Core.f_lt(val1, val2);
+      return output;
     }
 
   }
@@ -16030,18 +16080,23 @@ public static class Core {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
     output = Vx.Core.f_switch(
       Vx.Core.t_boolean,
-      Vx.Core.f_compare(val1, val2),
+      Vx.Core.f_compare(
+        val1,
+        val2
+      ),
       Vx.Core.vx_new(
         Vx.Core.t_thenelselist,
         Vx.Core.f_case_1(
           Vx.Core.vx_new_int(-1),
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.vx_new_boolean(true);
+            Vx.Core.Type_any output_1 = Vx.Core.vx_new_boolean(true);
+            return output_1;
           })
         ),
         Vx.Core.f_else(
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.vx_new_boolean(false);
+            Vx.Core.Type_any output_2 = Vx.Core.vx_new_boolean(false);
+            return output_2;
           })
         )
       )
@@ -16130,7 +16185,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_boolean vx_lt_1(Vx.Core.Type_anylist values) {
-      return Vx.Core.f_lt_1(values);
+      Vx.Core.Type_boolean output = Vx.Core.f_lt_1(values);
+      return output;
     }
 
   }
@@ -16148,11 +16204,13 @@ public static class Core {
         Vx.Core.Type_boolean reduce = Vx.Core.f_any_from_any(Vx.Core.t_boolean, reduce_any);
         Vx.Core.Type_any current = Vx.Core.f_any_from_any(Vx.Core.t_any, current_any);
         Vx.Core.Type_any next = Vx.Core.f_any_from_any(Vx.Core.t_any, next_any);
-        Vx.Core.Type_any output_1 = 
-          Vx.Core.f_and(
-            reduce,
-            Vx.Core.f_lt(current, next)
-          );
+        Vx.Core.Type_any output_1 = Vx.Core.f_and(
+          reduce,
+          Vx.Core.f_lt(
+            current,
+            next
+          )
+        );
         return output_1;
       })
     );
@@ -16233,7 +16291,8 @@ public static class Core {
     }
 
     public T vx_chainfirst<T>(T generic_any_1, T value, Vx.Core.Type_any_from_anylist fnlist) where T : Vx.Core.Type_any {
-      return Vx.Core.f_chainfirst(generic_any_1, value, fnlist);
+      T output = Vx.Core.f_chainfirst(generic_any_1, value, fnlist);
+      return output;
     }
 
   }
@@ -16320,7 +16379,8 @@ public static class Core {
     }
 
     public T vx_chainlast<T>(T generic_any_1, T value, Vx.Core.Type_any_from_anylist fnlist) where T : Vx.Core.Type_any {
-      return Vx.Core.f_chainlast(generic_any_1, value, fnlist);
+      T output = Vx.Core.f_chainlast(generic_any_1, value, fnlist);
+      return output;
     }
 
   }
@@ -16404,7 +16464,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_boolean vx_le(Vx.Core.Type_any val1, Vx.Core.Type_any val2) {
-      return Vx.Core.f_le(val1, val2);
+      Vx.Core.Type_boolean output = Vx.Core.f_le(val1, val2);
+      return output;
     }
 
   }
@@ -16415,7 +16476,10 @@ public static class Core {
   public static Vx.Core.Type_boolean f_le(Vx.Core.Type_any val1, Vx.Core.Type_any val2) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
     output = Vx.Core.f_not(
-      Vx.Core.f_gt(val1, val2)
+      Vx.Core.f_gt(
+        val1,
+        val2
+      )
     );
     return output;
   }
@@ -16501,7 +16565,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_boolean vx_le_1(Vx.Core.Type_anylist args) {
-      return Vx.Core.f_le_1(args);
+      Vx.Core.Type_boolean output = Vx.Core.f_le_1(args);
+      return output;
     }
 
   }
@@ -16512,7 +16577,9 @@ public static class Core {
   public static Vx.Core.Type_boolean f_le_1(Vx.Core.Type_anylist args) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
     output = Vx.Core.f_not(
-      Vx.Core.f_gt_1(args)
+      Vx.Core.f_gt_1(
+        args
+      )
     );
     return output;
   }
@@ -16588,7 +16655,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_boolean vx_eq(Vx.Core.Type_any val1, Vx.Core.Type_any val2) {
-      return Vx.Core.f_eq(val1, val2);
+      Vx.Core.Type_boolean output = Vx.Core.f_eq(val1, val2);
+      return output;
     }
 
   }
@@ -16693,7 +16761,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_boolean vx_eq_1(Vx.Core.Type_anylist values) {
-      return Vx.Core.f_eq_1(values);
+      Vx.Core.Type_boolean output = Vx.Core.f_eq_1(values);
+      return output;
     }
 
   }
@@ -16711,11 +16780,13 @@ public static class Core {
         Vx.Core.Type_boolean reduce = Vx.Core.f_any_from_any(Vx.Core.t_boolean, reduce_any);
         Vx.Core.Type_any current = Vx.Core.f_any_from_any(Vx.Core.t_any, current_any);
         Vx.Core.Type_any next = Vx.Core.f_any_from_any(Vx.Core.t_any, next_any);
-        Vx.Core.Type_any output_1 = 
-          Vx.Core.f_and(
-            reduce,
-            Vx.Core.f_eq(current, next)
-          );
+        Vx.Core.Type_any output_1 = Vx.Core.f_and(
+          reduce,
+          Vx.Core.f_eq(
+            current,
+            next
+          )
+        );
         return output_1;
       })
     );
@@ -16793,7 +16864,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_boolean vx_eqeq(Vx.Core.Type_any val1, Vx.Core.Type_any val2) {
-      return Vx.Core.f_eqeq(val1, val2);
+      Vx.Core.Type_boolean output = Vx.Core.f_eqeq(val1, val2);
+      return output;
     }
 
   }
@@ -16879,7 +16951,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_boolean vx_gt(Vx.Core.Type_any val1, Vx.Core.Type_any val2) {
-      return Vx.Core.f_gt(val1, val2);
+      Vx.Core.Type_boolean output = Vx.Core.f_gt(val1, val2);
+      return output;
     }
 
   }
@@ -16891,18 +16964,23 @@ public static class Core {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
     output = Vx.Core.f_switch(
       Vx.Core.t_boolean,
-      Vx.Core.f_compare(val1, val2),
+      Vx.Core.f_compare(
+        val1,
+        val2
+      ),
       Vx.Core.vx_new(
         Vx.Core.t_thenelselist,
         Vx.Core.f_case_1(
           Vx.Core.vx_new_int(1),
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.vx_new_boolean(true);
+            Vx.Core.Type_any output_1 = Vx.Core.vx_new_boolean(true);
+            return output_1;
           })
         ),
         Vx.Core.f_else(
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.vx_new_boolean(false);
+            Vx.Core.Type_any output_2 = Vx.Core.vx_new_boolean(false);
+            return output_2;
           })
         )
       )
@@ -16991,7 +17069,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_boolean vx_gt_1(Vx.Core.Type_anylist values) {
-      return Vx.Core.f_gt_1(values);
+      Vx.Core.Type_boolean output = Vx.Core.f_gt_1(values);
+      return output;
     }
 
   }
@@ -17009,11 +17088,13 @@ public static class Core {
         Vx.Core.Type_boolean reduce = Vx.Core.f_any_from_any(Vx.Core.t_boolean, reduce_any);
         Vx.Core.Type_any current = Vx.Core.f_any_from_any(Vx.Core.t_any, current_any);
         Vx.Core.Type_any next = Vx.Core.f_any_from_any(Vx.Core.t_any, next_any);
-        Vx.Core.Type_any output_1 = 
-          Vx.Core.f_and(
-            reduce,
-            Vx.Core.f_gt(current, next)
-          );
+        Vx.Core.Type_any output_1 = Vx.Core.f_and(
+          reduce,
+          Vx.Core.f_gt(
+            current,
+            next
+          )
+        );
         return output_1;
       })
     );
@@ -17091,7 +17172,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_boolean vx_ge(Vx.Core.Type_any val1, Vx.Core.Type_any val2) {
-      return Vx.Core.f_ge(val1, val2);
+      Vx.Core.Type_boolean output = Vx.Core.f_ge(val1, val2);
+      return output;
     }
 
   }
@@ -17102,7 +17184,10 @@ public static class Core {
   public static Vx.Core.Type_boolean f_ge(Vx.Core.Type_any val1, Vx.Core.Type_any val2) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
     output = Vx.Core.f_not(
-      Vx.Core.f_lt(val1, val2)
+      Vx.Core.f_lt(
+        val1,
+        val2
+      )
     );
     return output;
   }
@@ -17188,7 +17273,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_boolean vx_ge_1(Vx.Core.Type_anylist args) {
-      return Vx.Core.f_ge_1(args);
+      Vx.Core.Type_boolean output = Vx.Core.f_ge_1(args);
+      return output;
     }
 
   }
@@ -17199,7 +17285,9 @@ public static class Core {
   public static Vx.Core.Type_boolean f_ge_1(Vx.Core.Type_anylist args) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
     output = Vx.Core.f_not(
-      Vx.Core.f_lt_1(args)
+      Vx.Core.f_lt_1(
+        args
+      )
     );
     return output;
   }
@@ -17285,7 +17373,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_funclist vx_allowfuncs_from_security(Vx.Core.Type_security security) {
-      return Vx.Core.f_allowfuncs_from_security(security);
+      Vx.Core.Type_funclist output = Vx.Core.f_allowfuncs_from_security(security);
+      return output;
     }
 
   }
@@ -17380,7 +17469,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_stringlist vx_allowtypenames_from_typedef(Vx.Core.Type_typedef vtypedef) {
-      return Vx.Core.f_allowtypenames_from_typedef(vtypedef);
+      Vx.Core.Type_stringlist output = Vx.Core.f_allowtypenames_from_typedef(vtypedef);
+      return output;
     }
 
   }
@@ -17391,7 +17481,9 @@ public static class Core {
   public static Vx.Core.Type_stringlist f_allowtypenames_from_typedef(Vx.Core.Type_typedef vtypedef) {
     Vx.Core.Type_stringlist output = Vx.Core.e_stringlist;
     output = Vx.Core.f_typenames_from_typelist(
-      Vx.Core.f_allowtypes_from_typedef(vtypedef)
+      Vx.Core.f_allowtypes_from_typedef(
+        vtypedef
+      )
     );
     return output;
   }
@@ -17477,7 +17569,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_typelist vx_allowtypes_from_typedef(Vx.Core.Type_typedef vtypedef) {
-      return Vx.Core.f_allowtypes_from_typedef(vtypedef);
+      Vx.Core.Type_typelist output = Vx.Core.f_allowtypes_from_typedef(vtypedef);
+      return output;
     }
 
   }
@@ -17562,7 +17655,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_boolean vx_and(Vx.Core.Type_boolean val1, Vx.Core.Type_boolean val2) {
-      return Vx.Core.f_and(val1, val2);
+      Vx.Core.Type_boolean output = Vx.Core.f_and(val1, val2);
+      return output;
     }
 
   }
@@ -17661,7 +17755,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_boolean vx_and_1(Vx.Core.Type_booleanlist values) {
-      return Vx.Core.f_and_1(values);
+      Vx.Core.Type_boolean output = Vx.Core.f_and_1(values);
+      return output;
     }
 
   }
@@ -17673,24 +17768,32 @@ public static class Core {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
     output = Vx.Core.f_switch(
       Vx.Core.t_boolean,
-      Vx.Core.f_length_1(values),
+      Vx.Core.f_length_1(
+        values
+      ),
       Vx.Core.vx_new(
         Vx.Core.t_thenelselist,
         Vx.Core.f_case_1(
           Vx.Core.vx_new_int(0),
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.vx_new_boolean(true);
+            Vx.Core.Type_any output_1 = Vx.Core.vx_new_boolean(true);
+            return output_1;
           })
         ),
         Vx.Core.f_case_1(
           Vx.Core.vx_new_int(1),
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.f_any_from_list(Vx.Core.t_boolean, values, Vx.Core.vx_new_int(1));
+            Vx.Core.Type_any output_2 = Vx.Core.f_any_from_list(
+              Vx.Core.t_boolean,
+              values,
+              Vx.Core.vx_new_int(1)
+            );
+            return output_2;
           })
         ),
         Vx.Core.f_else(
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.f_any_from_list_start_reduce_next(
+            Vx.Core.Type_any output_3 = Vx.Core.f_any_from_list_start_reduce_next(
               Vx.Core.t_boolean,
               values,
               Vx.Core.vx_new_boolean(true),
@@ -17698,14 +17801,17 @@ public static class Core {
                 Vx.Core.Type_boolean reduce = Vx.Core.f_any_from_any(Vx.Core.t_boolean, reduce_any);
                 Vx.Core.Type_boolean current = Vx.Core.f_any_from_any(Vx.Core.t_boolean, current_any);
                 Vx.Core.Type_boolean next = Vx.Core.f_any_from_any(Vx.Core.t_boolean, next_any);
-                Vx.Core.Type_any output_1 = 
-                    Vx.Core.f_and(
-                      reduce,
-                      Vx.Core.f_and(current, next)
-                    );
-                return output_1;
+                Vx.Core.Type_any output_4 = Vx.Core.f_and(
+                  reduce,
+                  Vx.Core.f_and(
+                    current,
+                    next
+                  )
+                );
+                return output_4;
               })
             );
+            return output_3;
           })
         )
       )
@@ -18532,12 +18638,12 @@ public static class Core {
    * @function any_from_int_any
    * Generic Function returning Generic any-1 from an int and a value
    * @param  {int} num
-   * @param  {any-2} val
+   * @param  {any-2} value
    * @return {any-1}
    * (func any<-int-any)
    */
   public interface Func_any_from_int_any : Vx.Core.Type_func, Vx.Core.Type_replfunc {
-    public T vx_any_from_int_any<T, U>(T generic_any_1, Vx.Core.Type_int num, U val) where T : Vx.Core.Type_any where U : Vx.Core.Type_any;
+    public T vx_any_from_int_any<T, U>(T generic_any_1, Vx.Core.Type_int num, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any;
     public Vx.Core.Func_any_from_int_any vx_fn_new(Vx.Core.Class_any_from_int_any.IFn fn);
   }
 
@@ -18591,7 +18697,7 @@ public static class Core {
       return output;
     }
 
-    public delegate Vx.Core.Type_any IFn(Vx.Core.Type_int num, Vx.Core.Type_any val);
+    public delegate Vx.Core.Type_any IFn(Vx.Core.Type_int num, Vx.Core.Type_any value);
 
     public Vx.Core.Class_any_from_int_any.IFn? fn = null;
 
@@ -18605,15 +18711,15 @@ public static class Core {
       Vx.Core.Type_any output = Vx.Core.e_any;
       Vx.Core.Type_any generic_any_1 = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
       Vx.Core.Type_int num = Vx.Core.f_any_from_any(Vx.Core.t_int, arglist.vx_any(Vx.Core.vx_new_int(0)));
-      Vx.Core.Type_any val = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(1)));
-      output = Vx.Core.f_any_from_int_any(generic_any_1, num, val);
+      Vx.Core.Type_any value = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(1)));
+      output = Vx.Core.f_any_from_int_any(generic_any_1, num, value);
       return output;
     }
 
-    public T vx_any_from_int_any<T, U>(T generic_any_1, Vx.Core.Type_int num, U val) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
+    public T vx_any_from_int_any<T, U>(T generic_any_1, Vx.Core.Type_int num, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
       T output = Vx.Core.f_empty(generic_any_1);
       if (fn != null) {
-        Vx.Core.Type_any anyoutput = fn(num, val);
+        Vx.Core.Type_any anyoutput = fn(num, value);
         output = Vx.Core.f_any_from_any(generic_any_1, anyoutput);
       }
       return output;
@@ -18624,7 +18730,7 @@ public static class Core {
   public static Vx.Core.Func_any_from_int_any e_any_from_int_any = new Vx.Core.Class_any_from_int_any();
   public static Vx.Core.Func_any_from_int_any t_any_from_int_any = new Vx.Core.Class_any_from_int_any();
 
-  public static T f_any_from_int_any<T, U>(T generic_any_1, Vx.Core.Type_int num, U val) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
+  public static T f_any_from_int_any<T, U>(T generic_any_1, Vx.Core.Type_int num, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
     T output = Vx.Core.f_empty(generic_any_1);
     return output;
   }
@@ -18633,12 +18739,12 @@ public static class Core {
    * @function any_from_key_value
    * Generic Function returning Generic any-1 from a key and a value
    * @param  {string} key
-   * @param  {any-2} val
+   * @param  {any-2} value
    * @return {any-1}
    * (func any<-key-value)
    */
   public interface Func_any_from_key_value : Vx.Core.Type_func, Vx.Core.Type_replfunc {
-    public T vx_any_from_key_value<T, U>(T generic_any_1, Vx.Core.Type_string key, U val) where T : Vx.Core.Type_any where U : Vx.Core.Type_any;
+    public T vx_any_from_key_value<T, U>(T generic_any_1, Vx.Core.Type_string key, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any;
     public Vx.Core.Func_any_from_key_value vx_fn_new(Vx.Core.Class_any_from_key_value.IFn fn);
   }
 
@@ -18692,7 +18798,7 @@ public static class Core {
       return output;
     }
 
-    public delegate Vx.Core.Type_any IFn(Vx.Core.Type_string key, Vx.Core.Type_any val);
+    public delegate Vx.Core.Type_any IFn(Vx.Core.Type_string key, Vx.Core.Type_any value);
 
     public Vx.Core.Class_any_from_key_value.IFn? fn = null;
 
@@ -18706,15 +18812,15 @@ public static class Core {
       Vx.Core.Type_any output = Vx.Core.e_any;
       Vx.Core.Type_any generic_any_1 = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
       Vx.Core.Type_string key = Vx.Core.f_any_from_any(Vx.Core.t_string, arglist.vx_any(Vx.Core.vx_new_int(0)));
-      Vx.Core.Type_any val = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(1)));
-      output = Vx.Core.f_any_from_key_value(generic_any_1, key, val);
+      Vx.Core.Type_any value = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(1)));
+      output = Vx.Core.f_any_from_key_value(generic_any_1, key, value);
       return output;
     }
 
-    public T vx_any_from_key_value<T, U>(T generic_any_1, Vx.Core.Type_string key, U val) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
+    public T vx_any_from_key_value<T, U>(T generic_any_1, Vx.Core.Type_string key, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
       T output = Vx.Core.f_empty(generic_any_1);
       if (fn != null) {
-        Vx.Core.Type_any anyoutput = fn(key, val);
+        Vx.Core.Type_any anyoutput = fn(key, value);
         output = Vx.Core.f_any_from_any(generic_any_1, anyoutput);
       }
       return output;
@@ -18725,7 +18831,7 @@ public static class Core {
   public static Vx.Core.Func_any_from_key_value e_any_from_key_value = new Vx.Core.Class_any_from_key_value();
   public static Vx.Core.Func_any_from_key_value t_any_from_key_value = new Vx.Core.Class_any_from_key_value();
 
-  public static T f_any_from_key_value<T, U>(T generic_any_1, Vx.Core.Type_string key, U val) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
+  public static T f_any_from_key_value<T, U>(T generic_any_1, Vx.Core.Type_string key, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
     T output = Vx.Core.f_empty(generic_any_1);
     return output;
   }
@@ -18736,12 +18842,12 @@ public static class Core {
    * @function any_from_key_value_async
    * Generic Function returning Asynchronous Generic any-1 from a key and a value
    * @param  {string} key
-   * @param  {any-2} val
+   * @param  {any-2} value
    * @return {any-1}
    * (func any<-key-value-async)
    */
   public interface Func_any_from_key_value_async : Vx.Core.Type_func, Vx.Core.Type_replfunc_async {
-    public Task<T> vx_any_from_key_value_async<T, U>(T generic_any_1, Vx.Core.Type_string key, U val) where T : Vx.Core.Type_any where U : Vx.Core.Type_any;
+    public Task<T> vx_any_from_key_value_async<T, U>(T generic_any_1, Vx.Core.Type_string key, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any;
     public Vx.Core.Func_any_from_key_value_async vx_fn_new(Vx.Core.Class_any_from_key_value_async.IFn fn);
   }
 
@@ -18795,7 +18901,7 @@ public static class Core {
       return output;
     }
 
-    public delegate Task<Vx.Core.Type_any> IFn(Vx.Core.Type_string key, Vx.Core.Type_any val);
+    public delegate Task<Vx.Core.Type_any> IFn(Vx.Core.Type_string key, Vx.Core.Type_any value);
 
     public Vx.Core.Class_any_from_key_value_async.IFn? fn = null;
 
@@ -18809,18 +18915,18 @@ public static class Core {
       Task<Vx.Core.Type_any> output = Vx.Core.vx_async_new_from_value(Vx.Core.e_any);
       Vx.Core.Type_any generic_any_1 = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
       Vx.Core.Type_string key = Vx.Core.f_any_from_any(Vx.Core.t_string, arglist.vx_any(Vx.Core.vx_new_int(0)));
-      Vx.Core.Type_any val = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(1)));
-      Task<Vx.Core.Type_any> future = Vx.Core.f_any_from_key_value_async(generic_any_1, key, val);
+      Vx.Core.Type_any value = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(1)));
+      Task<Vx.Core.Type_any> future = Vx.Core.f_any_from_key_value_async(generic_any_1, key, value);
       output = Vx.Core.vx_async_from_async(Vx.Core.t_any, future);
       return output;
     }
 
-    public Task<T> vx_any_from_key_value_async<T, U>(T generic_any_1, Vx.Core.Type_string key, U val) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
+    public Task<T> vx_any_from_key_value_async<T, U>(T generic_any_1, Vx.Core.Type_string key, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
       Task<T> output;
       if (fn == null) {
         output = Vx.Core.vx_async_new_from_value(Vx.Core.f_empty(generic_any_1));
       } else {
-        Task<Vx.Core.Type_any> future = fn(key, val);
+        Task<Vx.Core.Type_any> future = fn(key, value);
         output = Vx.Core.vx_async_from_async(generic_any_1, future);
       }
       return output;
@@ -18831,7 +18937,7 @@ public static class Core {
   public static Vx.Core.Func_any_from_key_value_async e_any_from_key_value_async = new Vx.Core.Class_any_from_key_value_async();
   public static Vx.Core.Func_any_from_key_value_async t_any_from_key_value_async = new Vx.Core.Class_any_from_key_value_async();
 
-  public static Task<T> f_any_from_key_value_async<T, U>(T generic_any_1, Vx.Core.Type_string key, U val) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
+  public static Task<T> f_any_from_key_value_async<T, U>(T generic_any_1, Vx.Core.Type_string key, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
     Task<T> output = Vx.Core.vx_async_new_from_value(Vx.Core.f_empty(generic_any_1));
     return output;
   }
@@ -18908,7 +19014,8 @@ public static class Core {
     }
 
     public T vx_any_from_list<T, X>(T generic_any_1, X values, Vx.Core.Type_int index) where T : Vx.Core.Type_any where X : Vx.Core.Type_list {
-      return Vx.Core.f_any_from_list(generic_any_1, values, index);
+      T output = Vx.Core.f_any_from_list(generic_any_1, values, index);
+      return output;
     }
 
   }
@@ -19002,7 +19109,8 @@ public static class Core {
     }
 
     public T vx_any_from_list_start_reduce<T, Y>(T generic_any_1, Y list, T valstart, Vx.Core.Func_any_from_reduce fn_reduce) where T : Vx.Core.Type_any where Y : Vx.Core.Type_list {
-      return Vx.Core.f_any_from_list_start_reduce(generic_any_1, list, valstart, fn_reduce);
+      T output = Vx.Core.f_any_from_list_start_reduce(generic_any_1, list, valstart, fn_reduce);
+      return output;
     }
 
   }
@@ -19090,7 +19198,8 @@ public static class Core {
     }
 
     public T vx_any_from_list_start_reduce_next<T, Y>(T generic_any_1, Y list, T valstart, Vx.Core.Func_any_from_reduce_next fn_reduce_next) where T : Vx.Core.Type_any where Y : Vx.Core.Type_list {
-      return Vx.Core.f_any_from_list_start_reduce_next(generic_any_1, list, valstart, fn_reduce_next);
+      T output = Vx.Core.f_any_from_list_start_reduce_next(generic_any_1, list, valstart, fn_reduce_next);
+      return output;
     }
 
   }
@@ -19176,7 +19285,8 @@ public static class Core {
     }
 
     public T vx_any_from_map<N, T>(T generic_any_1, N valuemap, Vx.Core.Type_string key) where N : Vx.Core.Type_map where T : Vx.Core.Type_any {
-      return Vx.Core.f_any_from_map(generic_any_1, valuemap, key);
+      T output = Vx.Core.f_any_from_map(generic_any_1, valuemap, key);
+      return output;
     }
 
   }
@@ -19264,7 +19374,8 @@ public static class Core {
     }
 
     public T vx_any_from_map_start_reduce<N, T>(T generic_any_1, N map, T start, Vx.Core.Func_any_from_any_key_value fn_reduce) where N : Vx.Core.Type_map where T : Vx.Core.Type_any {
-      return Vx.Core.f_any_from_map_start_reduce(generic_any_1, map, start, fn_reduce);
+      T output = Vx.Core.f_any_from_map_start_reduce(generic_any_1, map, start, fn_reduce);
+      return output;
     }
 
   }
@@ -19963,7 +20074,8 @@ public static class Core {
     }
 
     public T vx_any_from_struct<R, T>(T generic_any_1, R vstruct, Vx.Core.Type_string key) where R : Vx.Core.Type_struct where T : Vx.Core.Type_any {
-      return Vx.Core.f_any_from_struct(generic_any_1, vstruct, key);
+      T output = Vx.Core.f_any_from_struct(generic_any_1, vstruct, key);
+      return output;
     }
 
   }
@@ -20061,7 +20173,8 @@ public static class Core {
     }
 
     public Task<T> vx_async<T>(T generic_any_1, T value) where T : Vx.Core.Type_any {
-      return Vx.Core.f_async(generic_any_1, value);
+      Task<T> output = Vx.Core.f_async(generic_any_1, value);
+      return output;
     }
 
   }
@@ -20157,7 +20270,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_boolean vx_boolean_permission_from_func(Vx.Core.Type_context context, Vx.Core.Type_func func) {
-      return Vx.Core.f_boolean_permission_from_func(context, func);
+      Vx.Core.Type_boolean output = Vx.Core.f_boolean_permission_from_func(context, func);
+      return output;
     }
 
   }
@@ -20169,7 +20283,9 @@ public static class Core {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
     output = Vx.Core.f_contains_1(
       Vx.Core.f_allowfuncs_from_security(
-        Vx.Core.f_security_from_context(context)
+        Vx.Core.f_security_from_context(
+          context
+        )
       ),
       func
     );
@@ -20249,7 +20365,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_boolean vx_boolean_write_from_map_name_value(Vx.Core.Type_map valuemap, Vx.Core.Type_string name, Vx.Core.Type_any value) {
-      return Vx.Core.f_boolean_write_from_map_name_value(valuemap, name, value);
+      Vx.Core.Type_boolean output = Vx.Core.f_boolean_write_from_map_name_value(valuemap, name, value);
+      return output;
     }
 
   }
@@ -20623,7 +20740,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_thenelse vx_case(Vx.Core.Type_list values, Vx.Core.Func_any_from_func fn_any) {
-      return Vx.Core.f_case(values, fn_any);
+      Vx.Core.Type_thenelse output = Vx.Core.f_case(values, fn_any);
+      return output;
     }
 
   }
@@ -20718,7 +20836,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_thenelse vx_case_1(Vx.Core.Type_any value, Vx.Core.Func_any_from_func fn_any) {
-      return Vx.Core.f_case_1(value, fn_any);
+      Vx.Core.Type_thenelse output = Vx.Core.f_case_1(value, fn_any);
+      return output;
     }
 
   }
@@ -20814,7 +20933,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_int vx_compare(Vx.Core.Type_any val1, Vx.Core.Type_any val2) {
-      return Vx.Core.f_compare(val1, val2);
+      Vx.Core.Type_int output = Vx.Core.f_compare(val1, val2);
+      return output;
     }
 
   }
@@ -20899,7 +21019,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_boolean vx_contains(Vx.Core.Type_string text, Vx.Core.Type_string find) {
-      return Vx.Core.f_contains(text, find);
+      Vx.Core.Type_boolean output = Vx.Core.f_contains(text, find);
+      return output;
     }
 
   }
@@ -20985,7 +21106,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_boolean vx_contains_1(Vx.Core.Type_list values, Vx.Core.Type_any find) {
-      return Vx.Core.f_contains_1(values, find);
+      Vx.Core.Type_boolean output = Vx.Core.f_contains_1(values, find);
+      return output;
     }
 
   }
@@ -21080,7 +21202,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_context vx_context_main(Vx.Core.Type_anylist args) {
-      return Vx.Core.f_context_main(args);
+      Vx.Core.Type_context output = Vx.Core.f_context_main(args);
+      return output;
     }
 
   }
@@ -21167,7 +21290,8 @@ public static class Core {
     }
 
     public T vx_copy<T>(T value, Vx.Core.Type_anylist values) where T : Vx.Core.Type_any {
-      return Vx.Core.f_copy(value, values);
+      T output = Vx.Core.f_copy(value, values);
+      return output;
     }
 
   }
@@ -21264,7 +21388,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_thenelse vx_else(Vx.Core.Func_any_from_func fn_any) {
-      return Vx.Core.f_else(fn_any);
+      Vx.Core.Type_thenelse output = Vx.Core.f_else(fn_any);
+      return output;
     }
 
   }
@@ -21368,7 +21493,8 @@ public static class Core {
     }
 
     public T vx_empty<T>(T type) where T : Vx.Core.Type_any {
-      return Vx.Core.f_empty(type);
+      T output = Vx.Core.f_empty(type);
+      return output;
     }
 
   }
@@ -21383,12 +21509,12 @@ public static class Core {
 
   /**
    * @function extends_from_any
-   * @param  {any-1} val
+   * @param  {any-1} value
    * @return {string}
    * (func extends<-any)
    */
   public interface Func_extends_from_any : Vx.Core.Func_any_from_any {
-    public Vx.Core.Type_string vx_extends_from_any(Vx.Core.Type_any val);
+    public Vx.Core.Type_string vx_extends_from_any(Vx.Core.Type_any value);
   }
 
   public class Class_extends_from_any : Vx.Core.Class_base, Func_extends_from_any {
@@ -21455,13 +21581,14 @@ public static class Core {
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
       Vx.Core.Type_any output = Vx.Core.e_any;
-      Vx.Core.Type_any val = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
-      output = Vx.Core.f_extends_from_any(val);
+      Vx.Core.Type_any value = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
+      output = Vx.Core.f_extends_from_any(value);
       return output;
     }
 
-    public Vx.Core.Type_string vx_extends_from_any(Vx.Core.Type_any val) {
-      return Vx.Core.f_extends_from_any(val);
+    public Vx.Core.Type_string vx_extends_from_any(Vx.Core.Type_any value) {
+      Vx.Core.Type_string output = Vx.Core.f_extends_from_any(value);
+      return output;
     }
 
   }
@@ -21469,10 +21596,12 @@ public static class Core {
   public static Vx.Core.Func_extends_from_any e_extends_from_any = new Vx.Core.Class_extends_from_any();
   public static Vx.Core.Func_extends_from_any t_extends_from_any = new Vx.Core.Class_extends_from_any();
 
-  public static Vx.Core.Type_string f_extends_from_any(Vx.Core.Type_any val) {
+  public static Vx.Core.Type_string f_extends_from_any(Vx.Core.Type_any value) {
     Vx.Core.Type_string output = Vx.Core.e_string;
     output = Vx.Core.f_extends_from_typedef(
-      Vx.Core.f_typedef_from_any(val)
+      Vx.Core.f_typedef_from_any(
+        value
+      )
     );
     return output;
   }
@@ -21558,7 +21687,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_string vx_extends_from_typedef(Vx.Core.Type_typedef vtypedef) {
-      return Vx.Core.f_extends_from_typedef(vtypedef);
+      Vx.Core.Type_string output = Vx.Core.f_extends_from_typedef(vtypedef);
+      return output;
     }
 
   }
@@ -21654,7 +21784,8 @@ public static class Core {
     }
 
     public T vx_first_from_list<T, X>(T generic_any_1, X values) where T : Vx.Core.Type_any where X : Vx.Core.Type_list {
-      return Vx.Core.f_first_from_list(generic_any_1, values);
+      T output = Vx.Core.f_first_from_list(generic_any_1, values);
+      return output;
     }
 
   }
@@ -21664,7 +21795,11 @@ public static class Core {
 
   public static T f_first_from_list<T, X>(T generic_any_1, X values) where T : Vx.Core.Type_any where X : Vx.Core.Type_list {
     T output = Vx.Core.f_empty(generic_any_1);
-    output = Vx.Core.f_any_from_list(generic_any_1, values, Vx.Core.vx_new_int(1));
+    output = Vx.Core.f_any_from_list(
+      generic_any_1,
+      values,
+      Vx.Core.vx_new_int(1)
+    );
     return output;
   }
 
@@ -21740,7 +21875,8 @@ public static class Core {
     }
 
     public T vx_first_from_list_any_from_any<T, X>(T generic_any_1, X values, Vx.Core.Func_any_from_any fn_any_from_any) where T : Vx.Core.Type_any where X : Vx.Core.Type_list {
-      return Vx.Core.f_first_from_list_any_from_any(generic_any_1, values, fn_any_from_any);
+      T output = Vx.Core.f_first_from_list_any_from_any(generic_any_1, values, fn_any_from_any);
+      return output;
     }
 
   }
@@ -21841,7 +21977,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_float vx_float_from_string(Vx.Core.Type_string text) {
-      return Vx.Core.f_float_from_string(text);
+      Vx.Core.Type_float output = Vx.Core.f_float_from_string(text);
+      return output;
     }
 
   }
@@ -21928,7 +22065,8 @@ public static class Core {
     }
 
     public T vx_fn<T>(T generic_any_1, Vx.Core.Type_arglist parameters, Vx.Core.Func_any_from_func fn_any) where T : Vx.Core.Type_any {
-      return Vx.Core.f_fn(generic_any_1, parameters, fn_any);
+      T output = Vx.Core.f_fn(generic_any_1, parameters, fn_any);
+      return output;
     }
 
   }
@@ -21944,12 +22082,12 @@ public static class Core {
   /**
    * @function funcdef_from_func
    * Returns the definition of a function
-   * @param  {func} val
+   * @param  {func} value
    * @return {funcdef}
    * (func funcdef<-func)
    */
   public interface Func_funcdef_from_func : Vx.Core.Func_any_from_any {
-    public Vx.Core.Type_funcdef vx_funcdef_from_func(Vx.Core.Type_func val);
+    public Vx.Core.Type_funcdef vx_funcdef_from_func(Vx.Core.Type_func value);
   }
 
   public class Class_funcdef_from_func : Vx.Core.Class_base, Func_funcdef_from_func {
@@ -22016,13 +22154,14 @@ public static class Core {
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
       Vx.Core.Type_any output = Vx.Core.e_any;
-      Vx.Core.Type_func val = Vx.Core.f_any_from_any(Vx.Core.t_func, arglist.vx_any(Vx.Core.vx_new_int(0)));
-      output = Vx.Core.f_funcdef_from_func(val);
+      Vx.Core.Type_func value = Vx.Core.f_any_from_any(Vx.Core.t_func, arglist.vx_any(Vx.Core.vx_new_int(0)));
+      output = Vx.Core.f_funcdef_from_func(value);
       return output;
     }
 
-    public Vx.Core.Type_funcdef vx_funcdef_from_func(Vx.Core.Type_func val) {
-      return Vx.Core.f_funcdef_from_func(val);
+    public Vx.Core.Type_funcdef vx_funcdef_from_func(Vx.Core.Type_func value) {
+      Vx.Core.Type_funcdef output = Vx.Core.f_funcdef_from_func(value);
+      return output;
     }
 
   }
@@ -22030,9 +22169,9 @@ public static class Core {
   public static Vx.Core.Func_funcdef_from_func e_funcdef_from_func = new Vx.Core.Class_funcdef_from_func();
   public static Vx.Core.Func_funcdef_from_func t_funcdef_from_func = new Vx.Core.Class_funcdef_from_func();
 
-  public static Vx.Core.Type_funcdef f_funcdef_from_func(Vx.Core.Type_func val) {
+  public static Vx.Core.Type_funcdef f_funcdef_from_func(Vx.Core.Type_func value) {
     Vx.Core.Type_funcdef output = Vx.Core.e_funcdef;
-    output = val.vx_funcdef();
+    output = value.vx_funcdef();
     return output;
   }
 
@@ -22117,7 +22256,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_string vx_funcname_from_funcdef(Vx.Core.Type_funcdef funcdef) {
-      return Vx.Core.f_funcname_from_funcdef(funcdef);
+      Vx.Core.Type_string output = Vx.Core.f_funcname_from_funcdef(funcdef);
+      return output;
     }
 
   }
@@ -22211,7 +22351,8 @@ public static class Core {
     }
 
     public T vx_if<T>(T generic_any_1, Vx.Core.Type_boolean clause, T then) where T : Vx.Core.Type_any {
-      return Vx.Core.f_if(generic_any_1, clause, then);
+      T output = Vx.Core.f_if(generic_any_1, clause, then);
+      return output;
     }
 
   }
@@ -22301,7 +22442,8 @@ public static class Core {
     }
 
     public T vx_if_1<T>(T generic_any_1, Vx.Core.Type_boolean clause, T thenval, T elseval) where T : Vx.Core.Type_any {
-      return Vx.Core.f_if_1(generic_any_1, clause, thenval, elseval);
+      T output = Vx.Core.f_if_1(generic_any_1, clause, thenval, elseval);
+      return output;
     }
 
   }
@@ -22401,7 +22543,8 @@ public static class Core {
     }
 
     public T vx_if_2<T>(T generic_any_1, Vx.Core.Type_thenelselist thenelselist) where T : Vx.Core.Type_any {
-      return Vx.Core.f_if_2(generic_any_1, thenelselist);
+      T output = Vx.Core.f_if_2(generic_any_1, thenelselist);
+      return output;
     }
 
   }
@@ -22491,7 +22634,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_int vx_int_from_func() {
-      return Vx.Core.f_int_from_func();
+      Vx.Core.Type_int output = Vx.Core.f_int_from_func();
+      return output;
     }
 
   }
@@ -22507,12 +22651,12 @@ public static class Core {
   /**
    * @function int_from_string
    * Function Type converting string to int
-   * @param  {string} val
+   * @param  {string} value
    * @return {int}
    * (func int<-string)
    */
   public interface Func_int_from_string : Vx.Core.Func_any_from_any {
-    public Vx.Core.Type_int vx_int_from_string(Vx.Core.Type_string val);
+    public Vx.Core.Type_int vx_int_from_string(Vx.Core.Type_string value);
   }
 
   public class Class_int_from_string : Vx.Core.Class_base, Func_int_from_string {
@@ -22579,13 +22723,14 @@ public static class Core {
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
       Vx.Core.Type_any output = Vx.Core.e_any;
-      Vx.Core.Type_string val = Vx.Core.f_any_from_any(Vx.Core.t_string, arglist.vx_any(Vx.Core.vx_new_int(0)));
-      output = Vx.Core.f_int_from_string(val);
+      Vx.Core.Type_string value = Vx.Core.f_any_from_any(Vx.Core.t_string, arglist.vx_any(Vx.Core.vx_new_int(0)));
+      output = Vx.Core.f_int_from_string(value);
       return output;
     }
 
-    public Vx.Core.Type_int vx_int_from_string(Vx.Core.Type_string val) {
-      return Vx.Core.f_int_from_string(val);
+    public Vx.Core.Type_int vx_int_from_string(Vx.Core.Type_string value) {
+      Vx.Core.Type_int output = Vx.Core.f_int_from_string(value);
+      return output;
     }
 
   }
@@ -22593,41 +22738,46 @@ public static class Core {
   public static Vx.Core.Func_int_from_string e_int_from_string = new Vx.Core.Class_int_from_string();
   public static Vx.Core.Func_int_from_string t_int_from_string = new Vx.Core.Class_int_from_string();
 
-  public static Vx.Core.Type_int f_int_from_string(Vx.Core.Type_string val) {
+  public static Vx.Core.Type_int f_int_from_string(Vx.Core.Type_string value) {
     Vx.Core.Type_int output = Vx.Core.e_int;
     output = Vx.Core.f_switch(
       Vx.Core.t_int,
-      val,
+      value,
       Vx.Core.vx_new(
         Vx.Core.t_thenelselist,
         Vx.Core.f_case_1(
           Vx.Core.vx_new_string("notanumber"),
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.c_notanumber;
+            Vx.Core.Type_any output_1 = Vx.Core.c_notanumber;
+            return output_1;
           })
         ),
         Vx.Core.f_case_1(
           Vx.Core.vx_new_string("infinity"),
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.c_infinity;
+            Vx.Core.Type_any output_2 = Vx.Core.c_infinity;
+            return output_2;
           })
         ),
         Vx.Core.f_case_1(
           Vx.Core.vx_new_string("neginfinity"),
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.c_neginfinity;
+            Vx.Core.Type_any output_3 = Vx.Core.c_neginfinity;
+            return output_3;
           })
         ),
         Vx.Core.f_else(
-          Vx.Core.t_any_from_func.vx_fn_new(() => {int intresult = 0;
-            string strval = val.vx_string();
+          Vx.Core.t_any_from_func.vx_fn_new(() => {
+            Vx.Core.Type_int intresult = Vx.Core.e_int;
+            string strval = value.vx_string();
             try {
               float floatresult = float.Parse(strval);
-              intresult = (int)floatresult;
-              return Vx.Core.vx_new_int(intresult);
+              int iresult = (int)floatresult;
+              intresult = Vx.Core.vx_new_int(iresult);
             } catch (Exception) {
-              return Vx.Core.c_notanumber;
+              intresult = Vx.Core.c_notanumber;
             }
+            return intresult;
           })
         )
       )
@@ -22716,7 +22866,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_boolean vx_is_empty(Vx.Core.Type_string text) {
-      return Vx.Core.f_is_empty(text);
+      Vx.Core.Type_boolean output = Vx.Core.f_is_empty(text);
+      return output;
     }
 
   }
@@ -22813,7 +22964,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_boolean vx_is_empty_1(Vx.Core.Type_any value) {
-      return Vx.Core.f_is_empty_1(value);
+      Vx.Core.Type_boolean output = Vx.Core.f_is_empty_1(value);
+      return output;
     }
 
   }
@@ -22902,7 +23054,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_boolean vx_is_endswith(Vx.Core.Type_string text, Vx.Core.Type_string find) {
-      return Vx.Core.f_is_endswith(text, find);
+      Vx.Core.Type_boolean output = Vx.Core.f_is_endswith(text, find);
+      return output;
     }
 
   }
@@ -23001,7 +23154,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_boolean vx_is_float(Vx.Core.Type_any value) {
-      return Vx.Core.f_is_float(value);
+      Vx.Core.Type_boolean output = Vx.Core.f_is_float(value);
+      return output;
     }
 
   }
@@ -23018,13 +23172,13 @@ public static class Core {
 
   /**
    * @function is_func
-   * Returns true if val is a function.
-   * @param  {any} val
+   * Returns true if value is a function.
+   * @param  {any} value
    * @return {boolean}
    * (func is-func)
    */
   public interface Func_is_func : Vx.Core.Func_any_from_any {
-    public Vx.Core.Type_boolean vx_is_func(Vx.Core.Type_any val);
+    public Vx.Core.Type_boolean vx_is_func(Vx.Core.Type_any value);
   }
 
   public class Class_is_func : Vx.Core.Class_base, Func_is_func {
@@ -23091,13 +23245,14 @@ public static class Core {
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
       Vx.Core.Type_any output = Vx.Core.e_any;
-      Vx.Core.Type_any val = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
-      output = Vx.Core.f_is_func(val);
+      Vx.Core.Type_any value = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
+      output = Vx.Core.f_is_func(value);
       return output;
     }
 
-    public Vx.Core.Type_boolean vx_is_func(Vx.Core.Type_any val) {
-      return Vx.Core.f_is_func(val);
+    public Vx.Core.Type_boolean vx_is_func(Vx.Core.Type_any value) {
+      Vx.Core.Type_boolean output = Vx.Core.f_is_func(value);
+      return output;
     }
 
   }
@@ -23105,9 +23260,9 @@ public static class Core {
   public static Vx.Core.Func_is_func e_is_func = new Vx.Core.Class_is_func();
   public static Vx.Core.Func_is_func t_is_func = new Vx.Core.Class_is_func();
 
-  public static Vx.Core.Type_boolean f_is_func(Vx.Core.Type_any val) {
+  public static Vx.Core.Type_boolean f_is_func(Vx.Core.Type_any value) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
-    if (val is Vx.Core.Type_func) {
+    if (value is Vx.Core.Type_func) {
       output = Vx.Core.c_true;
     };
     return output;
@@ -23194,7 +23349,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_boolean vx_is_int(Vx.Core.Type_any value) {
-      return Vx.Core.f_is_int(value);
+      Vx.Core.Type_boolean output = Vx.Core.f_is_int(value);
+      return output;
     }
 
   }
@@ -23211,7 +23367,7 @@ public static class Core {
 
   /**
    * @function is_number
-   * Return true if val is a number
+   * Return true if value is a number
    * @param  {any} value
    * @return {boolean}
    * (func is-number)
@@ -23290,7 +23446,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_boolean vx_is_number(Vx.Core.Type_any value) {
-      return Vx.Core.f_is_number(value);
+      Vx.Core.Type_boolean output = Vx.Core.f_is_number(value);
+      return output;
     }
 
   }
@@ -23302,7 +23459,9 @@ public static class Core {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
     output = Vx.Core.f_switch(
       Vx.Core.t_boolean,
-      Vx.Core.f_typename_from_any(value),
+      Vx.Core.f_typename_from_any(
+        value
+      ),
       Vx.Core.vx_new(
         Vx.Core.t_thenelselist,
         Vx.Core.f_case(
@@ -23317,12 +23476,14 @@ public static class Core {
             )
           ),
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.vx_new_boolean(true);
+            Vx.Core.Type_any output_1 = Vx.Core.vx_new_boolean(true);
+            return output_1;
           })
         ),
         Vx.Core.f_else(
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.vx_new_boolean(false);
+            Vx.Core.Type_any output_2 = Vx.Core.vx_new_boolean(false);
+            return output_2;
           })
         )
       )
@@ -23412,7 +23573,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_boolean vx_is_pass_from_permission(Vx.Core.Type_context context, Vx.Core.Type_permission permission) {
-      return Vx.Core.f_is_pass_from_permission(context, permission);
+      Vx.Core.Type_boolean output = Vx.Core.f_is_pass_from_permission(context, permission);
+      return output;
     }
 
   }
@@ -23426,8 +23588,14 @@ public static class Core {
       Vx.Core.t_boolean,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_string id = permission.id();
-        Vx.Core.Type_permission lookup = Vx.Core.f_permission_from_id_context(context, id);
-        Vx.Core.Type_any output_1 = Vx.Core.f_eq(lookup, permission);
+        Vx.Core.Type_permission lookup = Vx.Core.f_permission_from_id_context(
+          context,
+          id
+        );
+        Vx.Core.Type_any output_1 = Vx.Core.f_eq(
+          lookup,
+          permission
+        );
         return output_1;
       })
     );
@@ -23516,7 +23684,8 @@ public static class Core {
     }
 
     public T vx_last_from_list<T, X>(T generic_any_1, X values) where T : Vx.Core.Type_any where X : Vx.Core.Type_list {
-      return Vx.Core.f_last_from_list(generic_any_1, values);
+      T output = Vx.Core.f_last_from_list(generic_any_1, values);
+      return output;
     }
 
   }
@@ -23529,8 +23698,14 @@ public static class Core {
     output = Vx.Core.f_let(
       generic_any_1,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Core.Type_int len = Vx.Core.f_length_1(values);
-        Vx.Core.Type_any output_1 = Vx.Core.f_any_from_list(generic_any_1, values, len);
+        Vx.Core.Type_int len = Vx.Core.f_length_1(
+          values
+        );
+        Vx.Core.Type_any output_1 = Vx.Core.f_any_from_list(
+          generic_any_1,
+          values,
+          len
+        );
         return output_1;
       })
     );
@@ -23618,7 +23793,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_int vx_length(Vx.Core.Type_string text) {
-      return Vx.Core.f_length(text);
+      Vx.Core.Type_int output = Vx.Core.f_length(text);
+      return output;
     }
 
   }
@@ -23714,7 +23890,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_int vx_length_1(Vx.Core.Type_list values) {
-      return Vx.Core.f_length_1(values);
+      Vx.Core.Type_int output = Vx.Core.f_length_1(values);
+      return output;
     }
 
   }
@@ -23810,7 +23987,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_int vx_length_2(Vx.Core.Type_map valuemap) {
-      return Vx.Core.f_length_2(valuemap);
+      Vx.Core.Type_int output = Vx.Core.f_length_2(valuemap);
+      return output;
     }
 
   }
@@ -23821,7 +23999,9 @@ public static class Core {
   public static Vx.Core.Type_int f_length_2(Vx.Core.Type_map valuemap) {
     Vx.Core.Type_int output = Vx.Core.e_int;
     output = Vx.Core.f_length_1(
-      Vx.Core.f_stringlist_from_map(valuemap)
+      Vx.Core.f_stringlist_from_map(
+        valuemap
+      )
     );
     return output;
   }
@@ -23896,7 +24076,8 @@ public static class Core {
     }
 
     public T vx_let<T>(T generic_any_1, Vx.Core.Func_any_from_func fn_any) where T : Vx.Core.Type_any {
-      return Vx.Core.f_let(generic_any_1, fn_any);
+      T output = Vx.Core.f_let(generic_any_1, fn_any);
+      return output;
     }
 
   }
@@ -23984,7 +24165,8 @@ public static class Core {
     }
 
     public Task<T> vx_let_async<T>(T generic_any_1, Vx.Core.Func_any_from_func_async fn_any_async) where T : Vx.Core.Type_any {
-      return Vx.Core.f_let_async(generic_any_1, fn_any_async);
+      Task<T> output = Vx.Core.f_let_async(generic_any_1, fn_any_async);
+      return output;
     }
 
   }
@@ -24080,7 +24262,8 @@ public static class Core {
     }
 
     public X vx_list_join_from_list<X, Y>(X generic_list_1, Y values) where X : Vx.Core.Type_list where Y : Vx.Core.Type_list {
-      return Vx.Core.f_list_join_from_list(generic_list_1, values);
+      X output = Vx.Core.f_list_join_from_list(generic_list_1, values);
+      return output;
     }
 
   }
@@ -24174,7 +24357,8 @@ public static class Core {
     }
 
     public X vx_list_join_from_list_1<X, Y>(X generic_list_1, Y values, Vx.Core.Func_any_from_any fn_any_from_any) where X : Vx.Core.Type_list where Y : Vx.Core.Type_list {
-      return Vx.Core.f_list_join_from_list_1(generic_list_1, values, fn_any_from_any);
+      X output = Vx.Core.f_list_join_from_list_1(generic_list_1, values, fn_any_from_any);
+      return output;
     }
 
   }
@@ -24270,7 +24454,8 @@ public static class Core {
     }
 
     public X vx_list_from_list<X, Y>(X generic_list_1, Y values) where X : Vx.Core.Type_list where Y : Vx.Core.Type_list {
-      return Vx.Core.f_list_from_list(generic_list_1, values);
+      X output = Vx.Core.f_list_from_list(generic_list_1, values);
+      return output;
     }
 
   }
@@ -24364,7 +24549,8 @@ public static class Core {
     }
 
     public X vx_list_from_list_1<X, Y>(X generic_list_1, Y values, Vx.Core.Func_any_from_any fn_any_from_any) where X : Vx.Core.Type_list where Y : Vx.Core.Type_list {
-      return Vx.Core.f_list_from_list_1(generic_list_1, values, fn_any_from_any);
+      X output = Vx.Core.f_list_from_list_1(generic_list_1, values, fn_any_from_any);
+      return output;
     }
 
   }
@@ -24453,7 +24639,8 @@ public static class Core {
     }
 
     public Task<X> vx_list_from_list_async<X, Y>(X generic_list_1, Y values, Vx.Core.Func_any_from_any_async fn_any_from_any_async) where X : Vx.Core.Type_list where Y : Vx.Core.Type_list {
-      return Vx.Core.f_list_from_list_async(generic_list_1, values, fn_any_from_any_async);
+      Task<X> output = Vx.Core.f_list_from_list_async(generic_list_1, values, fn_any_from_any_async);
+      return output;
     }
 
   }
@@ -24539,7 +24726,8 @@ public static class Core {
     }
 
     public X vx_list_from_list_intany<X, Y>(X generic_list_1, Y values, Vx.Core.Func_any_from_int_any fn_any_from_int_any) where X : Vx.Core.Type_list where Y : Vx.Core.Type_list {
-      return Vx.Core.f_list_from_list_intany(generic_list_1, values, fn_any_from_int_any);
+      X output = Vx.Core.f_list_from_list_intany(generic_list_1, values, fn_any_from_int_any);
+      return output;
     }
 
   }
@@ -24635,7 +24823,8 @@ public static class Core {
     }
 
     public X vx_list_from_map<O, X>(X generic_list_1, O valuemap) where O : Vx.Core.Type_map where X : Vx.Core.Type_list {
-      return Vx.Core.f_list_from_map(generic_list_1, valuemap);
+      X output = Vx.Core.f_list_from_map(generic_list_1, valuemap);
+      return output;
     }
 
   }
@@ -24730,7 +24919,8 @@ public static class Core {
     }
 
     public X vx_list_from_map_1<O, X>(X generic_list_1, O valuemap, Vx.Core.Func_any_from_key_value fn_any_from_key_value) where O : Vx.Core.Type_map where X : Vx.Core.Type_list {
-      return Vx.Core.f_list_from_map_1(generic_list_1, valuemap, fn_any_from_key_value);
+      X output = Vx.Core.f_list_from_map_1(generic_list_1, valuemap, fn_any_from_key_value);
+      return output;
     }
 
   }
@@ -24818,7 +25008,8 @@ public static class Core {
     }
 
     public Task<X> vx_list_from_map_async<O, X>(X generic_list_1, O valuemap, Vx.Core.Func_any_from_key_value_async fn_any_from_key_value_async) where O : Vx.Core.Type_map where X : Vx.Core.Type_list {
-      return Vx.Core.f_list_from_map_async(generic_list_1, valuemap, fn_any_from_key_value_async);
+      Task<X> output = Vx.Core.f_list_from_map_async(generic_list_1, valuemap, fn_any_from_key_value_async);
+      return output;
     }
 
   }
@@ -24912,7 +25103,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_any vx_list_from_type(Vx.Core.Type_any type) {
-      return Vx.Core.f_list_from_type(type);
+      Vx.Core.Type_any output = Vx.Core.f_list_from_type(type);
+      return output;
     }
 
   }
@@ -25006,7 +25198,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_any vx_log(Vx.Core.Type_any value) {
-      return Vx.Core.f_log(value);
+      Vx.Core.Type_any output = Vx.Core.f_log(value);
+      return output;
     }
 
   }
@@ -25093,7 +25286,8 @@ public static class Core {
     }
 
     public T vx_log_1<T>(T generic_any_1, Vx.Core.Type_string text, T value) where T : Vx.Core.Type_any {
-      return Vx.Core.f_log_1(generic_any_1, text, value);
+      T output = Vx.Core.f_log_1(generic_any_1, text, value);
+      return output;
     }
 
   }
@@ -25190,7 +25384,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_string vx_main(Vx.Core.Type_anylist args) {
-      return Vx.Core.f_main(args);
+      Vx.Core.Type_string output = Vx.Core.f_main(args);
+      return output;
     }
 
   }
@@ -25279,7 +25474,8 @@ public static class Core {
     }
 
     public N vx_map_from_list<N, Y>(N generic_map_1, Y vallist, Vx.Core.Func_any_from_any fn_any_from_any) where N : Vx.Core.Type_map where Y : Vx.Core.Type_list {
-      return Vx.Core.f_map_from_list(generic_map_1, vallist, fn_any_from_any);
+      N output = Vx.Core.f_map_from_list(generic_map_1, vallist, fn_any_from_any);
+      return output;
     }
 
   }
@@ -25375,7 +25571,8 @@ public static class Core {
     }
 
     public N vx_map_from_map<N, O>(N generic_map_1, O valuemap) where N : Vx.Core.Type_map where O : Vx.Core.Type_map {
-      return Vx.Core.f_map_from_map(generic_map_1, valuemap);
+      N output = Vx.Core.f_map_from_map(generic_map_1, valuemap);
+      return output;
     }
 
   }
@@ -25470,7 +25667,8 @@ public static class Core {
     }
 
     public N vx_map_from_map_1<N, O>(N generic_map_1, O valuemap, Vx.Core.Func_any_from_key_value fn_any_from_key_value) where N : Vx.Core.Type_map where O : Vx.Core.Type_map {
-      return Vx.Core.f_map_from_map_1(generic_map_1, valuemap, fn_any_from_key_value);
+      N output = Vx.Core.f_map_from_map_1(generic_map_1, valuemap, fn_any_from_key_value);
+      return output;
     }
 
   }
@@ -25565,7 +25763,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_msg vx_msg_from_error(Vx.Core.Type_string error) {
-      return Vx.Core.f_msg_from_error(error);
+      Vx.Core.Type_msg output = Vx.Core.f_msg_from_error(error);
+      return output;
     }
 
   }
@@ -25659,7 +25858,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_msg vx_msg_from_error_1(Vx.Core.Type_string code, Vx.Core.Type_any detail) {
-      return Vx.Core.f_msg_from_error_1(code, detail);
+      Vx.Core.Type_msg output = Vx.Core.f_msg_from_error_1(code, detail);
+      return output;
     }
 
   }
@@ -25757,7 +25957,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_msg vx_msg_from_error_2(Vx.Core.Type_string path, Vx.Core.Type_string code, Vx.Core.Type_any detail) {
-      return Vx.Core.f_msg_from_error_2(path, code, detail);
+      Vx.Core.Type_msg output = Vx.Core.f_msg_from_error_2(path, code, detail);
+      return output;
     }
 
   }
@@ -25865,7 +26066,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_msg vx_msg_from_warning(Vx.Core.Type_string warning) {
-      return Vx.Core.f_msg_from_warning(warning);
+      Vx.Core.Type_msg output = Vx.Core.f_msg_from_warning(warning);
+      return output;
     }
 
   }
@@ -25959,7 +26161,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_msgblock vx_msgblock_from_msgblock_msg(Vx.Core.Type_msgblock origblock, Vx.Core.Type_msg addmsg) {
-      return Vx.Core.f_msgblock_from_msgblock_msg(origblock, addmsg);
+      Vx.Core.Type_msgblock output = Vx.Core.f_msgblock_from_msgblock_msg(origblock, addmsg);
+      return output;
     }
 
   }
@@ -25969,9 +26172,13 @@ public static class Core {
 
   public static Vx.Core.Type_msgblock f_msgblock_from_msgblock_msg(Vx.Core.Type_msgblock origblock, Vx.Core.Type_msg addmsg) {
     Vx.Core.Type_msgblock output = Vx.Core.e_msgblock;
-    output = Vx.Core.f_copy(origblock, Vx.Core.vx_new(
-      Vx.Core.t_anylist,
-      addmsg));
+    output = Vx.Core.f_copy(
+      origblock,
+      Vx.Core.vx_new(
+        Vx.Core.t_anylist,
+        addmsg
+      )
+    );
     return output;
   }
 
@@ -26046,7 +26253,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_msgblock vx_msgblock_from_msgblock_msgblock(Vx.Core.Type_msgblock origblock, Vx.Core.Type_msgblock addblock) {
-      return Vx.Core.f_msgblock_from_msgblock_msgblock(origblock, addblock);
+      Vx.Core.Type_msgblock output = Vx.Core.f_msgblock_from_msgblock_msgblock(origblock, addblock);
+      return output;
     }
 
   }
@@ -26148,7 +26356,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_string vx_name_from_typedef(Vx.Core.Type_typedef vtypedef) {
-      return Vx.Core.f_name_from_typedef(vtypedef);
+      Vx.Core.Type_string output = Vx.Core.f_name_from_typedef(vtypedef);
+      return output;
     }
 
   }
@@ -26244,7 +26453,8 @@ public static class Core {
     }
 
     public T vx_native<T>(T generic_any_1, Vx.Core.Type_anylist clauses) where T : Vx.Core.Type_any {
-      return Vx.Core.f_native(generic_any_1, clauses);
+      T output = Vx.Core.f_native(generic_any_1, clauses);
+      return output;
     }
 
   }
@@ -26338,7 +26548,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_any vx_native_from_any(Vx.Core.Type_any value) {
-      return Vx.Core.f_native_from_any(value);
+      Vx.Core.Type_any output = Vx.Core.f_native_from_any(value);
+      return output;
     }
 
   }
@@ -26422,7 +26633,8 @@ public static class Core {
     }
 
     public T vx_new<T>(T type, Vx.Core.Type_anylist values) where T : Vx.Core.Type_any {
-      return Vx.Core.f_new(type, values);
+      T output = Vx.Core.f_new(type, values);
+      return output;
     }
 
   }
@@ -26504,7 +26716,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_number vx_number_from_func() {
-      return Vx.Core.f_number_from_func();
+      Vx.Core.Type_number output = Vx.Core.f_number_from_func();
+      return output;
     }
 
   }
@@ -26588,7 +26801,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_boolean vx_or(Vx.Core.Type_boolean val1, Vx.Core.Type_boolean val2) {
-      return Vx.Core.f_or(val1, val2);
+      Vx.Core.Type_boolean output = Vx.Core.f_or(val1, val2);
+      return output;
     }
 
   }
@@ -26687,7 +26901,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_boolean vx_or_1(Vx.Core.Type_booleanlist values) {
-      return Vx.Core.f_or_1(values);
+      Vx.Core.Type_boolean output = Vx.Core.f_or_1(values);
+      return output;
     }
 
   }
@@ -26705,11 +26920,13 @@ public static class Core {
         Vx.Core.Type_boolean reduce = Vx.Core.f_any_from_any(Vx.Core.t_boolean, reduce_any);
         Vx.Core.Type_boolean current = Vx.Core.f_any_from_any(Vx.Core.t_boolean, current_any);
         Vx.Core.Type_boolean next = Vx.Core.f_any_from_any(Vx.Core.t_boolean, next_any);
-        Vx.Core.Type_any output_1 = 
+        Vx.Core.Type_any output_1 = Vx.Core.f_or(
+          reduce,
           Vx.Core.f_or(
-            reduce,
-            Vx.Core.f_or(current, next)
-          );
+            current,
+            next
+          )
+        );
         return output_1;
       })
     );
@@ -26797,7 +27014,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_package vx_package_global_from_name(Vx.Core.Type_string name) {
-      return Vx.Core.f_package_global_from_name(name);
+      Vx.Core.Type_package output = Vx.Core.f_package_global_from_name(name);
+      return output;
     }
 
   }
@@ -26896,7 +27114,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_string vx_packagename_from_typedef(Vx.Core.Type_typedef vtypedef) {
-      return Vx.Core.f_packagename_from_typedef(vtypedef);
+      Vx.Core.Type_string output = Vx.Core.f_packagename_from_typedef(vtypedef);
+      return output;
     }
 
   }
@@ -26992,7 +27211,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_string vx_path_from_context_path(Vx.Core.Type_context context, Vx.Core.Type_string path) {
-      return Vx.Core.f_path_from_context_path(context, path);
+      Vx.Core.Type_string output = Vx.Core.f_path_from_context_path(context, path);
+      return output;
     }
 
   }
@@ -27003,7 +27223,9 @@ public static class Core {
   public static Vx.Core.Type_string f_path_from_context_path(Vx.Core.Type_context context, Vx.Core.Type_string path) {
     Vx.Core.Type_string output = Vx.Core.e_string;
     output = Vx.Core.f_path_from_setting_path(
-      Vx.Core.f_setting_from_context(context),
+      Vx.Core.f_setting_from_context(
+        context
+      ),
       path
     );
     return output;
@@ -27080,7 +27302,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_string vx_path_from_setting_path(Vx.Core.Type_setting session, Vx.Core.Type_string path) {
-      return Vx.Core.f_path_from_setting_path(session, path);
+      Vx.Core.Type_string output = Vx.Core.f_path_from_setting_path(session, path);
+      return output;
     }
 
   }
@@ -27175,7 +27398,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_permission vx_permission_from_id_context(Vx.Core.Type_context context, Vx.Core.Type_string id) {
-      return Vx.Core.f_permission_from_id_context(context, id);
+      Vx.Core.Type_permission output = Vx.Core.f_permission_from_id_context(context, id);
+      return output;
     }
 
   }
@@ -27188,10 +27412,16 @@ public static class Core {
     output = Vx.Core.f_let(
       Vx.Core.t_permission,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Core.Type_user user = Vx.Core.f_user_from_context(context);
+        Vx.Core.Type_user user = Vx.Core.f_user_from_context(
+          context
+        );
         Vx.Core.Type_security security = user.security();
         Vx.Core.Type_permissionmap permissionmap = security.permissionmap();
-        Vx.Core.Type_any output_1 = Vx.Core.f_any_from_map(Vx.Core.t_permission, permissionmap, Vx.Core.vx_new_string(":id"));
+        Vx.Core.Type_any output_1 = Vx.Core.f_any_from_map(
+          Vx.Core.t_permission,
+          permissionmap,
+          Vx.Core.vx_new_string(":id")
+        );
         return output_1;
       })
     );
@@ -27279,7 +27509,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_argmap vx_properties_from_typedef(Vx.Core.Type_typedef vtypedef) {
-      return Vx.Core.f_properties_from_typedef(vtypedef);
+      Vx.Core.Type_argmap output = Vx.Core.f_properties_from_typedef(vtypedef);
+      return output;
     }
 
   }
@@ -27374,7 +27605,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_arg vx_proplast_from_typedef(Vx.Core.Type_typedef vtypedef) {
-      return Vx.Core.f_proplast_from_typedef(vtypedef);
+      Vx.Core.Type_arg output = Vx.Core.f_proplast_from_typedef(vtypedef);
+      return output;
     }
 
   }
@@ -27469,7 +27701,8 @@ public static class Core {
     }
 
     public T vx_resolve<T>(T generic_any_1, T value) where T : Vx.Core.Type_any {
-      return Vx.Core.f_resolve(generic_any_1, value);
+      T output = Vx.Core.f_resolve(generic_any_1, value);
+      return output;
     }
 
   }
@@ -27564,7 +27797,8 @@ public static class Core {
     }
 
     public T vx_resolve_1<T>(T generic_any_1, Vx.Core.Func_any_from_func fn_any) where T : Vx.Core.Type_any {
-      return Vx.Core.f_resolve_1(generic_any_1, fn_any);
+      T output = Vx.Core.f_resolve_1(generic_any_1, fn_any);
+      return output;
     }
 
   }
@@ -27664,7 +27898,8 @@ public static class Core {
     }
 
     public Task<T> vx_resolve_async<T>(T generic_any_1, Vx.Core.Func_any_from_func_async fn_any) where T : Vx.Core.Type_any {
-      return Vx.Core.f_resolve_async(generic_any_1, fn_any);
+      Task<T> output = Vx.Core.f_resolve_async(generic_any_1, fn_any);
+      return output;
     }
 
   }
@@ -27764,7 +27999,8 @@ public static class Core {
     }
 
     public T vx_resolve_first<T, X>(T generic_any_1, X clauses) where T : Vx.Core.Type_any where X : Vx.Core.Type_list {
-      return Vx.Core.f_resolve_first(generic_any_1, clauses);
+      T output = Vx.Core.f_resolve_first(generic_any_1, clauses);
+      return output;
     }
 
   }
@@ -27863,7 +28099,8 @@ public static class Core {
     }
 
     public X vx_resolve_list<X>(X generic_list_1, X clauses) where X : Vx.Core.Type_list {
-      return Vx.Core.f_resolve_list(generic_list_1, clauses);
+      X output = Vx.Core.f_resolve_list(generic_list_1, clauses);
+      return output;
     }
 
   }
@@ -27949,7 +28186,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_security vx_security_from_context(Vx.Core.Type_context context) {
-      return Vx.Core.f_security_from_context(context);
+      Vx.Core.Type_security output = Vx.Core.f_security_from_context(context);
+      return output;
     }
 
   }
@@ -27960,7 +28198,9 @@ public static class Core {
   public static Vx.Core.Type_security f_security_from_context(Vx.Core.Type_context context) {
     Vx.Core.Type_security output = Vx.Core.e_security;
     output = Vx.Core.f_security_from_user(
-      Vx.Core.f_user_from_context(context)
+      Vx.Core.f_user_from_context(
+        context
+      )
     );
     return output;
   }
@@ -28046,7 +28286,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_security vx_security_from_user(Vx.Core.Type_user user) {
-      return Vx.Core.f_security_from_user(user);
+      Vx.Core.Type_security output = Vx.Core.f_security_from_user(user);
+      return output;
     }
 
   }
@@ -28128,7 +28369,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_session vx_session_from_context(Vx.Core.Type_context context) {
-      return Vx.Core.f_session_from_context(context);
+      Vx.Core.Type_session output = Vx.Core.f_session_from_context(context);
+      return output;
     }
 
   }
@@ -28210,7 +28452,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_setting vx_setting_from_context(Vx.Core.Type_context context) {
-      return Vx.Core.f_setting_from_context(context);
+      Vx.Core.Type_setting output = Vx.Core.f_setting_from_context(context);
+      return output;
     }
 
   }
@@ -28294,7 +28537,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_string vx_string_repeat(Vx.Core.Type_string text, Vx.Core.Type_int repeat) {
-      return Vx.Core.f_string_repeat(text, repeat);
+      Vx.Core.Type_string output = Vx.Core.f_string_repeat(text, repeat);
+      return output;
     }
 
   }
@@ -28389,7 +28633,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_string vx_string_from_any(Vx.Core.Type_any value) {
-      return Vx.Core.f_string_from_any(value);
+      Vx.Core.Type_string output = Vx.Core.f_string_from_any(value);
+      return output;
     }
 
   }
@@ -28480,7 +28725,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_string vx_string_from_any_indent(Vx.Core.Type_any value, Vx.Core.Type_int indent, Vx.Core.Type_boolean linefeed) {
-      return Vx.Core.f_string_from_any_indent(value, indent, linefeed);
+      Vx.Core.Type_string output = Vx.Core.f_string_from_any_indent(value, indent, linefeed);
+      return output;
     }
 
   }
@@ -28570,7 +28816,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_string vx_string_from_func() {
-      return Vx.Core.f_string_from_func();
+      Vx.Core.Type_string output = Vx.Core.f_string_from_func();
+      return output;
     }
 
   }
@@ -28656,7 +28903,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_string vx_string_from_string_find_replace(Vx.Core.Type_string text, Vx.Core.Type_string find, Vx.Core.Type_string replace) {
-      return Vx.Core.f_string_from_string_find_replace(text, find, replace);
+      Vx.Core.Type_string output = Vx.Core.f_string_from_string_find_replace(text, find, replace);
+      return output;
     }
 
   }
@@ -28751,7 +28999,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_stringlist vx_stringlist_from_map(Vx.Core.Type_map map) {
-      return Vx.Core.f_stringlist_from_map(map);
+      Vx.Core.Type_stringlist output = Vx.Core.f_stringlist_from_map(map);
+      return output;
     }
 
   }
@@ -28777,13 +29026,13 @@ public static class Core {
   /**
    * @function switch
    * Returns a value based on a logical switch
-   * @param  {any-2} val
+   * @param  {any-2} value
    * @param  {thenelselist} thenelselist
    * @return {any-1}
    * (func switch)
    */
   public interface Func_switch : Vx.Core.Type_func, Vx.Core.Type_replfunc {
-    public T vx_switch<T, U>(T generic_any_1, U val, Vx.Core.Type_thenelselist thenelselist) where T : Vx.Core.Type_any where U : Vx.Core.Type_any;
+    public T vx_switch<T, U>(T generic_any_1, U value, Vx.Core.Type_thenelselist thenelselist) where T : Vx.Core.Type_any where U : Vx.Core.Type_any;
   }
 
   public class Class_switch : Vx.Core.Class_base, Func_switch {
@@ -28839,14 +29088,15 @@ public static class Core {
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       Vx.Core.Type_any generic_any_1 = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
-      Vx.Core.Type_any val = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
+      Vx.Core.Type_any value = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
       Vx.Core.Type_thenelselist thenelselist = Vx.Core.f_any_from_any(Vx.Core.t_thenelselist, arglist.vx_any(Vx.Core.vx_new_int(1)));
-      output = Vx.Core.f_switch(generic_any_1, val, thenelselist);
+      output = Vx.Core.f_switch(generic_any_1, value, thenelselist);
       return output;
     }
 
-    public T vx_switch<T, U>(T generic_any_1, U val, Vx.Core.Type_thenelselist thenelselist) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
-      return Vx.Core.f_switch(generic_any_1, val, thenelselist);
+    public T vx_switch<T, U>(T generic_any_1, U value, Vx.Core.Type_thenelselist thenelselist) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
+      T output = Vx.Core.f_switch(generic_any_1, value, thenelselist);
+      return output;
     }
 
   }
@@ -28854,9 +29104,9 @@ public static class Core {
   public static Vx.Core.Func_switch e_switch = new Vx.Core.Class_switch();
   public static Vx.Core.Func_switch t_switch = new Vx.Core.Class_switch();
 
-  public static T f_switch<T, U>(T generic_any_1, U val, Vx.Core.Type_thenelselist thenelselist) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
+  public static T f_switch<T, U>(T generic_any_1, U value, Vx.Core.Type_thenelselist thenelselist) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
     T output = Vx.Core.f_empty(generic_any_1);
-    output = Vx.Core.vx_switch(generic_any_1, val, thenelselist);
+    output = Vx.Core.vx_switch(generic_any_1, value, thenelselist);
     return output;
   }
 
@@ -28931,7 +29181,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_thenelse vx_then(Vx.Core.Func_boolean_from_func fn_cond, Vx.Core.Func_any_from_func fn_any) {
-      return Vx.Core.f_then(fn_cond, fn_any);
+      Vx.Core.Type_thenelse output = Vx.Core.f_then(fn_cond, fn_any);
+      return output;
     }
 
   }
@@ -29037,7 +29288,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_typelist vx_traits_from_typedef(Vx.Core.Type_typedef vtypedef) {
-      return Vx.Core.f_traits_from_typedef(vtypedef);
+      Vx.Core.Type_typelist output = Vx.Core.f_traits_from_typedef(vtypedef);
+      return output;
     }
 
   }
@@ -29132,7 +29384,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_any vx_type_from_any(Vx.Core.Type_any value) {
-      return Vx.Core.f_type_from_any(value);
+      Vx.Core.Type_any output = Vx.Core.f_type_from_any(value);
+      return output;
     }
 
   }
@@ -29149,12 +29402,12 @@ public static class Core {
   /**
    * @function typedef_from_any
    * Gets the typedef of a given value
-   * @param  {any} val
+   * @param  {any} value
    * @return {typedef}
    * (func typedef<-any)
    */
   public interface Func_typedef_from_any : Vx.Core.Func_any_from_any {
-    public Vx.Core.Type_typedef vx_typedef_from_any(Vx.Core.Type_any val);
+    public Vx.Core.Type_typedef vx_typedef_from_any(Vx.Core.Type_any value);
   }
 
   public class Class_typedef_from_any : Vx.Core.Class_base, Func_typedef_from_any {
@@ -29221,13 +29474,14 @@ public static class Core {
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
       Vx.Core.Type_any output = Vx.Core.e_any;
-      Vx.Core.Type_any val = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
-      output = Vx.Core.f_typedef_from_any(val);
+      Vx.Core.Type_any value = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
+      output = Vx.Core.f_typedef_from_any(value);
       return output;
     }
 
-    public Vx.Core.Type_typedef vx_typedef_from_any(Vx.Core.Type_any val) {
-      return Vx.Core.f_typedef_from_any(val);
+    public Vx.Core.Type_typedef vx_typedef_from_any(Vx.Core.Type_any value) {
+      Vx.Core.Type_typedef output = Vx.Core.f_typedef_from_any(value);
+      return output;
     }
 
   }
@@ -29235,10 +29489,12 @@ public static class Core {
   public static Vx.Core.Func_typedef_from_any e_typedef_from_any = new Vx.Core.Class_typedef_from_any();
   public static Vx.Core.Func_typedef_from_any t_typedef_from_any = new Vx.Core.Class_typedef_from_any();
 
-  public static Vx.Core.Type_typedef f_typedef_from_any(Vx.Core.Type_any val) {
+  public static Vx.Core.Type_typedef f_typedef_from_any(Vx.Core.Type_any value) {
     Vx.Core.Type_typedef output = Vx.Core.e_typedef;
     output = Vx.Core.f_typedef_from_type(
-      Vx.Core.f_type_from_any(val)
+      Vx.Core.f_type_from_any(
+        value
+      )
     );
     return output;
   }
@@ -29246,12 +29502,12 @@ public static class Core {
   /**
    * @function typedef_from_type
    * Gets the typedef of a given type
-   * @param  {any} val
+   * @param  {any} value
    * @return {typedef}
    * (func typedef<-type)
    */
   public interface Func_typedef_from_type : Vx.Core.Func_any_from_any {
-    public Vx.Core.Type_typedef vx_typedef_from_type(Vx.Core.Type_any val);
+    public Vx.Core.Type_typedef vx_typedef_from_type(Vx.Core.Type_any value);
   }
 
   public class Class_typedef_from_type : Vx.Core.Class_base, Func_typedef_from_type {
@@ -29318,13 +29574,14 @@ public static class Core {
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
       Vx.Core.Type_any output = Vx.Core.e_any;
-      Vx.Core.Type_any val = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
-      output = Vx.Core.f_typedef_from_type(val);
+      Vx.Core.Type_any value = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
+      output = Vx.Core.f_typedef_from_type(value);
       return output;
     }
 
-    public Vx.Core.Type_typedef vx_typedef_from_type(Vx.Core.Type_any val) {
-      return Vx.Core.f_typedef_from_type(val);
+    public Vx.Core.Type_typedef vx_typedef_from_type(Vx.Core.Type_any value) {
+      Vx.Core.Type_typedef output = Vx.Core.f_typedef_from_type(value);
+      return output;
     }
 
   }
@@ -29332,9 +29589,9 @@ public static class Core {
   public static Vx.Core.Func_typedef_from_type e_typedef_from_type = new Vx.Core.Class_typedef_from_type();
   public static Vx.Core.Func_typedef_from_type t_typedef_from_type = new Vx.Core.Class_typedef_from_type();
 
-  public static Vx.Core.Type_typedef f_typedef_from_type(Vx.Core.Type_any val) {
+  public static Vx.Core.Type_typedef f_typedef_from_type(Vx.Core.Type_any value) {
     Vx.Core.Type_typedef output = Vx.Core.e_typedef;
-    output = val.vx_typedef();
+    output = value.vx_typedef();
     return output;
   }
 
@@ -29419,7 +29676,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_string vx_typename_from_any(Vx.Core.Type_any value) {
-      return Vx.Core.f_typename_from_any(value);
+      Vx.Core.Type_string output = Vx.Core.f_typename_from_any(value);
+      return output;
     }
 
   }
@@ -29430,7 +29688,9 @@ public static class Core {
   public static Vx.Core.Type_string f_typename_from_any(Vx.Core.Type_any value) {
     Vx.Core.Type_string output = Vx.Core.e_string;
     output = Vx.Core.f_typename_from_type(
-      Vx.Core.f_type_from_any(value)
+      Vx.Core.f_type_from_any(
+        value
+      )
     );
     return output;
   }
@@ -29516,7 +29776,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_string vx_typename_from_type(Vx.Core.Type_any type) {
-      return Vx.Core.f_typename_from_type(type);
+      Vx.Core.Type_string output = Vx.Core.f_typename_from_type(type);
+      return output;
     }
 
   }
@@ -29527,7 +29788,9 @@ public static class Core {
   public static Vx.Core.Type_string f_typename_from_type(Vx.Core.Type_any type) {
     Vx.Core.Type_string output = Vx.Core.e_string;
     output = Vx.Core.f_typename_from_typedef(
-      Vx.Core.f_typedef_from_type(type)
+      Vx.Core.f_typedef_from_type(
+        type
+      )
     );
     return output;
   }
@@ -29613,7 +29876,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_string vx_typename_from_typedef(Vx.Core.Type_typedef vtypedef) {
-      return Vx.Core.f_typename_from_typedef(vtypedef);
+      Vx.Core.Type_string output = Vx.Core.f_typename_from_typedef(vtypedef);
+      return output;
     }
 
   }
@@ -29716,7 +29980,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_stringlist vx_typenames_from_typelist(Vx.Core.Type_typelist typelist) {
-      return Vx.Core.f_typenames_from_typelist(typelist);
+      Vx.Core.Type_stringlist output = Vx.Core.f_typenames_from_typelist(typelist);
+      return output;
     }
 
   }
@@ -29731,8 +29996,9 @@ public static class Core {
       typelist,
       Vx.Core.t_any_from_any.vx_fn_new((type_any) => {
         Vx.Core.Type_any type = Vx.Core.f_any_from_any(Vx.Core.t_any, type_any);
-        Vx.Core.Type_any output_1 = 
-          Vx.Core.f_typename_from_type(type);
+        Vx.Core.Type_any output_1 = Vx.Core.f_typename_from_type(
+          type
+        );
         return output_1;
       })
     );
@@ -29807,7 +30073,8 @@ public static class Core {
     }
 
     public Vx.Core.Type_user vx_user_from_context(Vx.Core.Type_context context) {
-      return Vx.Core.f_user_from_context(context);
+      Vx.Core.Type_user output = Vx.Core.f_user_from_context(context);
+      return output;
     }
 
   }
@@ -29817,7 +30084,9 @@ public static class Core {
 
   public static Vx.Core.Type_user f_user_from_context(Vx.Core.Type_context context) {
     Vx.Core.Type_user output = Vx.Core.e_user;
-    output = Vx.Core.f_session_from_context(context).user();
+    output = Vx.Core.f_session_from_context(
+      context
+    ).user();
     return output;
   }
 

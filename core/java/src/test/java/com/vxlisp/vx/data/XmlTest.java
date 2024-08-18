@@ -555,7 +555,9 @@ public final class XmlTest {
                   )
                 )
               ),
-              Xml.f_textblock_xml_from_string(Core.vx_new_string("<doc>\n  <tag1>\n    <tag2 prop1=\"val1\" prop2=\"val2\" />\n  </tag1>\n</doc>"))
+              Xml.f_textblock_xml_from_string(
+                Core.vx_new_string("<doc>\n  <tag1>\n    <tag2 prop1=\"val1\" prop2=\"val2\" />\n  </tag1>\n</doc>")
+              )
             )
         )
       )

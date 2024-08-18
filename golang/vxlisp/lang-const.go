@@ -127,7 +127,9 @@ func LangConst(
 		doc +
 		LangConstClassHeader(lang, cnst, 1) +
 		LangConstVxConstdef(lang, cnst) +
+		LangStaticOpen(lang) +
 		LangFuncHeaderStatic(lang, cnstname, funcconstnew, 2, 0, const_new) +
+		LangStaticClose(lang) +
 		"\n  }" +
 		"\n" +
 		LangValStatic(lang, "c_"+cnstname, cnst.vxtype, 1, ":new") +
@@ -137,6 +139,14 @@ func LangConst(
 	constlate := "" +
 		"\n    " + cnstclassname + ".const_new(c_" + cnstname + ")" + lang.lineend
 	return output, constlate, msgblock
+}
+
+func LangConstC(lang *vxlang, cnst *vxconst) string {
+	name := "c_" + LangFromName(cnst.alias)
+	if cnst.pkgname != "" {
+		name = LangPkgName(lang, cnst.pkgname) + lang.pkgref + name
+	}
+	return name
 }
 
 func LangConstClassHeader(lang *vxlang, cnst *vxconst, indent int) string {

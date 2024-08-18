@@ -395,7 +395,7 @@ func ListKeyFromMapFunc(mapfunc map[string][]*vxfunc) []string {
 	return ListStringSort(keys)
 }
 
-func ListLocalArgFromFunc(fnc *vxfunc) []vxarg {
+func ListArgLocalFromFunc(fnc *vxfunc) []vxarg {
 	var output []vxarg
 	for _, arg := range fnc.listarg {
 		if arg.value.code == ":arglist" {

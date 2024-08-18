@@ -69,7 +69,8 @@ public static class Es {
     }
 
     public Vx.Core.Type_translation vx_translation_es() {
-      return Vx.Translation.Es.f_translation_es();
+      Vx.Core.Type_translation output = Vx.Translation.Es.f_translation_es();
+      return output;
     }
 
   }
@@ -159,7 +160,8 @@ public static class Es {
     }
 
     public Vx.Core.Type_stringmap vx_words() {
-      return Vx.Translation.Es.f_words();
+      Vx.Core.Type_stringmap output = Vx.Translation.Es.f_words();
+      return output;
     }
 
   }

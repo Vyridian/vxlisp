@@ -675,7 +675,8 @@ public static class Csv {
     }
 
     public Vx.Data.Csv.Type_csv vx_csv_read_from_file(Vx.Core.Type_context context, Vx.Data.File.Type_file file) {
-      return Vx.Data.Csv.f_csv_read_from_file(context, file);
+      Vx.Data.Csv.Type_csv output = Vx.Data.Csv.f_csv_read_from_file(context, file);
+      return output;
     }
 
   }
@@ -688,8 +689,13 @@ public static class Csv {
     output = Vx.Core.f_let(
       Vx.Data.Csv.t_csv,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Data.File.Type_file loaded = Vx.Data.File.f_file_read_from_file(context, file);
-        Vx.Core.Type_any output_1 = Vx.Data.Csv.f_csv_from_file(loaded);
+        Vx.Data.File.Type_file loaded = Vx.Data.File.f_file_read_from_file(
+          context,
+          file
+        );
+        Vx.Core.Type_any output_1 = Vx.Data.Csv.f_csv_from_file(
+          loaded
+        );
         return output_1;
       })
     );
@@ -777,7 +783,8 @@ public static class Csv {
     }
 
     public Vx.Data.Csv.Type_csv vx_csv_from_file(Vx.Data.File.Type_file file) {
-      return Vx.Data.Csv.f_csv_from_file(file);
+      Vx.Data.Csv.Type_csv output = Vx.Data.Csv.f_csv_from_file(file);
+      return output;
     }
 
   }
@@ -791,7 +798,9 @@ public static class Csv {
       Vx.Data.Csv.t_csv,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_string text = file.text();
-        Vx.Core.Type_any output_1 = Vx.Data.Csv.f_csv_from_string(text);
+        Vx.Core.Type_any output_1 = Vx.Data.Csv.f_csv_from_string(
+          text
+        );
         return output_1;
       })
     );
@@ -879,7 +888,8 @@ public static class Csv {
     }
 
     public Vx.Data.Csv.Type_csv vx_csv_from_string(Vx.Core.Type_string text) {
-      return Vx.Data.Csv.f_csv_from_string(text);
+      Vx.Data.Csv.Type_csv output = Vx.Data.Csv.f_csv_from_string(text);
+      return output;
     }
 
   }
@@ -979,7 +989,8 @@ public static class Csv {
     }
 
     public Vx.Data.Csv.Type_csv vx_csv_from_textblock(Vx.Data.Textblock.Type_textblock textblock) {
-      return Vx.Data.Csv.f_csv_from_textblock(textblock);
+      Vx.Data.Csv.Type_csv output = Vx.Data.Csv.f_csv_from_textblock(textblock);
+      return output;
     }
 
   }
@@ -992,9 +1003,19 @@ public static class Csv {
     output = Vx.Core.f_let(
       Vx.Data.Csv.t_csv,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Data.Csv.Type_csvrows allrows = Vx.Data.Csv.f_csvrows_from_textblock(textblock);
-        Vx.Core.Type_stringlist headers = Vx.Core.f_any_from_list(Vx.Core.t_stringlist, allrows, Vx.Core.vx_new_int(1));
-        Vx.Data.Csv.Type_csvrows rows = Vx.Collection.f_list_from_list_end(Vx.Data.Csv.t_csvrows, allrows, Vx.Core.vx_new_int(2));
+        Vx.Data.Csv.Type_csvrows allrows = Vx.Data.Csv.f_csvrows_from_textblock(
+          textblock
+        );
+        Vx.Core.Type_stringlist headers = Vx.Core.f_any_from_list(
+          Vx.Core.t_stringlist,
+          allrows,
+          Vx.Core.vx_new_int(1)
+        );
+        Vx.Data.Csv.Type_csvrows rows = Vx.Collection.f_list_from_list_end(
+          Vx.Data.Csv.t_csvrows,
+          allrows,
+          Vx.Core.vx_new_int(2)
+        );
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Data.Csv.t_csv,
           Vx.Core.vx_new(
@@ -1091,7 +1112,8 @@ public static class Csv {
     }
 
     public Vx.Data.Csv.Type_csvrows vx_csvrows_from_textblock(Vx.Data.Textblock.Type_textblock textblock) {
-      return Vx.Data.Csv.f_csvrows_from_textblock(textblock);
+      Vx.Data.Csv.Type_csvrows output = Vx.Data.Csv.f_csvrows_from_textblock(textblock);
+      return output;
     }
 
   }
@@ -1108,8 +1130,12 @@ public static class Csv {
           textblock,
           Vx.Data.Csv.c_delimcsv
         );
-        Vx.Data.Textblock.Type_textblocklist children = Vx.Data.Textblock.f_children_from_textblock(parsedtb);
-        Vx.Core.Type_stringlist strings = Vx.Data.Textblock.f_stringlist_from_textblocklist(children);
+        Vx.Data.Textblock.Type_textblocklist children = Vx.Data.Textblock.f_children_from_textblock(
+          parsedtb
+        );
+        Vx.Core.Type_stringlist strings = Vx.Data.Textblock.f_stringlist_from_textblocklist(
+          children
+        );
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Data.Csv.t_csvrows,
           Vx.Core.vx_new(
@@ -1204,7 +1230,8 @@ public static class Csv {
     }
 
     public Vx.Core.Type_stringmap vx_stringmap_from_csv(Vx.Data.Csv.Type_csv csv) {
-      return Vx.Data.Csv.f_stringmap_from_csv(csv);
+      Vx.Core.Type_stringmap output = Vx.Data.Csv.f_stringmap_from_csv(csv);
+      return output;
     }
 
   }
@@ -1223,23 +1250,29 @@ public static class Csv {
           rows,
           Vx.Core.t_any_from_any.vx_fn_new((textlist_any) => {
             Vx.Core.Type_stringlist textlist = Vx.Core.f_any_from_any(Vx.Core.t_stringlist, textlist_any);
-            Vx.Core.Type_any output_1 = 
-                Vx.Core.f_any_from_list(Vx.Core.t_string, textlist, Vx.Core.vx_new_int(1));
-            return output_1;
+            Vx.Core.Type_any output_3 = Vx.Core.f_any_from_list(
+              Vx.Core.t_string,
+              textlist,
+              Vx.Core.vx_new_int(1)
+            );
+            return output_3;
           })
         );
-        Vx.Core.Type_any output_3 = Vx.Core.f_map_from_map_1(
+        Vx.Core.Type_any output_1 = Vx.Core.f_map_from_map_1(
           Vx.Core.t_stringmap,
           rowmap,
           Vx.Core.t_any_from_key_value.vx_fn_new((key_any, val_any) => {
             Vx.Core.Type_string key = Vx.Core.f_any_from_any(Vx.Core.t_string, key_any);
             Vx.Core.Type_stringlist val = Vx.Core.f_any_from_any(Vx.Core.t_stringlist, val_any);
-            Vx.Core.Type_any output_2 = 
-              Vx.Core.f_any_from_list(Vx.Core.t_string, val, Vx.Core.vx_new_int(2));
+            Vx.Core.Type_any output_2 = Vx.Core.f_any_from_list(
+              Vx.Core.t_string,
+              val,
+              Vx.Core.vx_new_int(2)
+            );
             return output_2;
           })
         );
-        return output_3;
+        return output_1;
       })
     );
     return output;
@@ -1326,7 +1359,8 @@ public static class Csv {
     }
 
     public Vx.Data.Textblock.Type_textblock vx_textblock_csv_from_string(Vx.Core.Type_string text) {
-      return Vx.Data.Csv.f_textblock_csv_from_string(text);
+      Vx.Data.Textblock.Type_textblock output = Vx.Data.Csv.f_textblock_csv_from_string(text);
+      return output;
     }
 
   }

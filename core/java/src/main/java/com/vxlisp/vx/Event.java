@@ -1047,6 +1047,7 @@ public final class Event {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -1057,7 +1058,8 @@ public final class Event {
 
     @Override
     public <T extends Core.Type_any> T vx_any_from_from_event(final T generic_any_1, final Event.Type_event evt) {
-      return Event.f_any_from_from_event(generic_any_1, evt);
+      T output = Event.f_any_from_from_event(generic_any_1, evt);
+      return output;
     }
 
   }
@@ -1071,7 +1073,10 @@ public final class Event {
       generic_any_1,
       Core.t_any_from_func.vx_fn_new(() -> {
         Core.Type_any value = evt.from();
-        Core.Type_any output_1 = Core.f_any_from_any(generic_any_1, value);
+        Core.Type_any output_1 = Core.f_any_from_any(
+          generic_any_1,
+          value
+        );
         return output_1;
       })
     );
@@ -1159,6 +1164,7 @@ public final class Event {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
@@ -1169,7 +1175,8 @@ public final class Event {
 
     @Override
     public Event.Type_event vx_event_from_event(final Core.Type_context context, final Event.Type_event evt) {
-      return Event.f_event_from_event(context, evt);
+      Event.Type_event output = Event.f_event_from_event(context, evt);
+      return output;
     }
 
   }
@@ -1266,6 +1273,7 @@ public final class Event {
       return output;
     }
 
+    @Override
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
@@ -1277,7 +1285,8 @@ public final class Event {
 
     @Override
     public CompletableFuture<Event.Type_event> vx_event_from_event_async(final Core.Type_context context, final Event.Type_event evt) {
-      return Event.f_event_from_event_async(context, evt);
+      CompletableFuture<Event.Type_event> output = Event.f_event_from_event_async(context, evt);
+      return output;
     }
 
   }
@@ -1371,6 +1380,7 @@ public final class Event {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Event.Type_eventlist eventlist = Core.f_any_from_any(Event.t_eventlist, arglist.vx_any(Core.vx_new_int(0)));
@@ -1380,7 +1390,8 @@ public final class Event {
 
     @Override
     public Event.Type_eventmap vx_eventmap_from_eventlist(final Event.Type_eventlist eventlist) {
-      return Event.f_eventmap_from_eventlist(eventlist);
+      Event.Type_eventmap output = Event.f_eventmap_from_eventlist(eventlist);
+      return output;
     }
 
   }
@@ -1395,8 +1406,7 @@ public final class Event {
       eventlist,
       Core.t_any_from_any.vx_fn_new((evt_any) -> {
         Event.Type_event evt = Core.f_any_from_any(Event.t_event, evt_any);
-        Core.Type_any output_1 = 
-          evt.name();
+        Core.Type_any output_1 = evt.name();
         return output_1;
       })
     );

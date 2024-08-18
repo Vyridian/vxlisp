@@ -448,6 +448,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
@@ -457,7 +458,8 @@ public final class Uihtml {
 
     @Override
     public Core.Type_boolean vx_boolean_layoutremove_html(final Ui.Type_ui ui) {
-      return Uihtml.f_boolean_layoutremove_html(ui);
+      Core.Type_boolean output = Uihtml.f_boolean_layoutremove_html(ui);
+      return output;
     }
 
   }
@@ -471,7 +473,9 @@ public final class Uihtml {
       Core.t_boolean,
       Core.t_any_from_func.vx_fn_new(() -> {
         Core.Type_string id = ui.uid();
-        Core.Type_any output_1 = Htmldoc.f_boolean_remove_from_id(id);
+        Core.Type_any output_1 = Htmldoc.f_boolean_remove_from_id(
+          id
+        );
         return output_1;
       })
     );
@@ -559,6 +563,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
@@ -568,7 +573,8 @@ public final class Uihtml {
 
     @Override
     public Core.Type_boolean vx_boolean_layoutselected_html(final Ui.Type_ui ui) {
-      return Uihtml.f_boolean_layoutselected_html(ui);
+      Core.Type_boolean output = Uihtml.f_boolean_layoutselected_html(ui);
+      return output;
     }
 
   }
@@ -578,7 +584,9 @@ public final class Uihtml {
 
   public static Core.Type_boolean f_boolean_layoutselected_html(final Ui.Type_ui ui) {
     Core.Type_boolean output = Core.e_boolean;
-    output = Uihtml.f_boolean_writeclass_from_ui(ui);
+    output = Uihtml.f_boolean_writeclass_from_ui(
+      ui
+    );
     return output;
   }
 
@@ -663,6 +671,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
@@ -672,7 +681,8 @@ public final class Uihtml {
 
     @Override
     public Core.Type_boolean vx_boolean_layoutvisible_html(final Ui.Type_ui ui) {
-      return Uihtml.f_boolean_layoutvisible_html(ui);
+      Core.Type_boolean output = Uihtml.f_boolean_layoutvisible_html(ui);
+      return output;
     }
 
   }
@@ -682,7 +692,9 @@ public final class Uihtml {
 
   public static Core.Type_boolean f_boolean_layoutvisible_html(final Ui.Type_ui ui) {
     Core.Type_boolean output = Core.e_boolean;
-    output = Uihtml.f_boolean_writeclass_from_ui(ui);
+    output = Uihtml.f_boolean_writeclass_from_ui(
+      ui
+    );
     return output;
   }
 
@@ -767,6 +779,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
@@ -777,7 +790,8 @@ public final class Uihtml {
 
     @Override
     public Core.Type_boolean vx_boolean_print_html(final Core.Type_context context, final Ui.Type_ui ui) {
-      return Uihtml.f_boolean_print_html(context, ui);
+      Core.Type_boolean output = Uihtml.f_boolean_print_html(context, ui);
+      return output;
     }
 
   }
@@ -791,10 +805,20 @@ public final class Uihtml {
       Core.t_boolean,
       Core.t_any_from_func.vx_fn_new(() -> {
         Core.Type_string uid = ui.uid();
-        Ui.Type_stylesheet stylesheetui = Ui.f_stylesheet_readstate(context);
-        Html.Type_stylesheet stylesheethtml = Uihtml.f_stylesheet_from_stylesheet(stylesheetui);
-        Core.Type_string styletext = Html.f_string_from_stylesheet_indent(stylesheethtml, Core.vx_new_int(0));
-        Core.Type_any output_1 = Htmldoc.f_boolean_print_from_id_stylesheettext(uid, styletext);
+        Ui.Type_stylesheet stylesheetui = Ui.f_stylesheet_readstate(
+          context
+        );
+        Html.Type_stylesheet stylesheethtml = Uihtml.f_stylesheet_from_stylesheet(
+          stylesheetui
+        );
+        Core.Type_string styletext = Html.f_string_from_stylesheet_indent(
+          stylesheethtml,
+          Core.vx_new_int(0)
+        );
+        Core.Type_any output_1 = Htmldoc.f_boolean_print_from_id_stylesheettext(
+          uid,
+          styletext
+        );
         return output_1;
       })
     );
@@ -882,6 +906,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
@@ -891,7 +916,8 @@ public final class Uihtml {
 
     @Override
     public Core.Type_boolean vx_boolean_writeclass_from_ui(final Ui.Type_ui ui) {
-      return Uihtml.f_boolean_writeclass_from_ui(ui);
+      Core.Type_boolean output = Uihtml.f_boolean_writeclass_from_ui(ui);
+      return output;
     }
 
   }
@@ -905,8 +931,14 @@ public final class Uihtml {
       Core.t_boolean,
       Core.t_any_from_func.vx_fn_new(() -> {
         Core.Type_string id = ui.uid();
-        Core.Type_string sclass = Uihtml.f_string_class_from_ui(ui);
-        Core.Type_any output_1 = Htmldoc.f_boolean_write_from_id_attribute_value(id, Core.vx_new_string("class"), sclass);
+        Core.Type_string sclass = Uihtml.f_string_class_from_ui(
+          ui
+        );
+        Core.Type_any output_1 = Htmldoc.f_boolean_write_from_id_attribute_value(
+          id,
+          Core.vx_new_string("class"),
+          sclass
+        );
         return output_1;
       })
     );
@@ -994,6 +1026,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
@@ -1003,7 +1036,8 @@ public final class Uihtml {
 
     @Override
     public Core.Type_boolean vx_boolean_writeeventsall_from_ui(final Ui.Type_ui ui) {
-      return Uihtml.f_boolean_writeeventsall_from_ui(ui);
+      Core.Type_boolean output = Uihtml.f_boolean_writeeventsall_from_ui(ui);
+      return output;
     }
 
   }
@@ -1017,9 +1051,16 @@ public final class Uihtml {
       Core.t_boolean,
       Core.t_any_from_func.vx_fn_new(() -> {
         Ui.Type_uimap uimap = ui.uimap();
-        Core.Type_boolean iswrite1 = Htmldoc.f_boolean_writeevents_from_ui(ui);
-        Core.Type_boolean iswrite2 = Uihtml.f_boolean_writeeventsall_from_uimap(uimap);
-        Core.Type_any output_1 = Core.f_and(iswrite1, iswrite2);
+        Core.Type_boolean iswrite1 = Htmldoc.f_boolean_writeevents_from_ui(
+          ui
+        );
+        Core.Type_boolean iswrite2 = Uihtml.f_boolean_writeeventsall_from_uimap(
+          uimap
+        );
+        Core.Type_any output_1 = Core.f_and(
+          iswrite1,
+          iswrite2
+        );
         return output_1;
       })
     );
@@ -1107,6 +1148,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_uimap uimap = Core.f_any_from_any(Ui.t_uimap, arglist.vx_any(Core.vx_new_int(0)));
@@ -1116,7 +1158,8 @@ public final class Uihtml {
 
     @Override
     public Core.Type_boolean vx_boolean_writeeventsall_from_uimap(final Ui.Type_uimap uimap) {
-      return Uihtml.f_boolean_writeeventsall_from_uimap(uimap);
+      Core.Type_boolean output = Uihtml.f_boolean_writeeventsall_from_uimap(uimap);
+      return output;
     }
 
   }
@@ -1135,13 +1178,16 @@ public final class Uihtml {
           Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
             Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
             Ui.Type_ui value = Core.f_any_from_any(Ui.t_ui, value_any);
-            Core.Type_any output_1 = 
-                Uihtml.f_boolean_writeeventsall_from_ui(value);
-            return output_1;
+            Core.Type_any output_2 = Uihtml.f_boolean_writeeventsall_from_ui(
+              value
+            );
+            return output_2;
           })
         );
-        Core.Type_any output_2 = Core.f_and_1(boollist);
-        return output_2;
+        Core.Type_any output_1 = Core.f_and_1(
+          boollist
+        );
+        return output_1;
       })
     );
     return output;
@@ -1228,6 +1274,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
@@ -1237,7 +1284,8 @@ public final class Uihtml {
 
     @Override
     public Core.Type_boolean vx_boolean_writeselected_from_ui(final Ui.Type_ui ui) {
-      return Uihtml.f_boolean_writeselected_from_ui(ui);
+      Core.Type_boolean output = Uihtml.f_boolean_writeselected_from_ui(ui);
+      return output;
     }
 
   }
@@ -1247,7 +1295,9 @@ public final class Uihtml {
 
   public static Core.Type_boolean f_boolean_writeselected_from_ui(final Ui.Type_ui ui) {
     Core.Type_boolean output = Core.e_boolean;
-    output = Uihtml.f_boolean_writeclass_from_ui(ui);
+    output = Uihtml.f_boolean_writeclass_from_ui(
+      ui
+    );
     return output;
   }
 
@@ -1332,6 +1382,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
@@ -1341,7 +1392,8 @@ public final class Uihtml {
 
     @Override
     public Core.Type_boolean vx_boolean_writevisible_from_ui(final Ui.Type_ui ui) {
-      return Uihtml.f_boolean_writevisible_from_ui(ui);
+      Core.Type_boolean output = Uihtml.f_boolean_writevisible_from_ui(ui);
+      return output;
     }
 
   }
@@ -1351,7 +1403,9 @@ public final class Uihtml {
 
   public static Core.Type_boolean f_boolean_writevisible_from_ui(final Ui.Type_ui ui) {
     Core.Type_boolean output = Core.e_boolean;
-    output = Uihtml.f_boolean_writeclass_from_ui(ui);
+    output = Uihtml.f_boolean_writeclass_from_ui(
+      ui
+    );
     return output;
   }
 
@@ -1420,6 +1474,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
@@ -1429,7 +1484,8 @@ public final class Uihtml {
 
     @Override
     public Core.Type_context vx_context_write(final Core.Type_context context) {
-      return Uihtml.f_context_write(context);
+      Core.Type_context output = Uihtml.f_context_write(context);
+      return output;
     }
 
   }
@@ -1439,7 +1495,9 @@ public final class Uihtml {
 
   public static Core.Type_context f_context_write(final Core.Type_context context) {
     Core.Type_context output = Core.e_context;
-    output = Htmldoc.f_context_write(context);
+    output = Htmldoc.f_context_write(
+      context
+    );
     return output;
   }
 
@@ -1524,6 +1582,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
@@ -1533,7 +1592,8 @@ public final class Uihtml {
 
     @Override
     public Html.Type_divchild vx_divchild_from_ui(final Ui.Type_ui ui) {
-      return Uihtml.f_divchild_from_ui(ui);
+      Html.Type_divchild output = Uihtml.f_divchild_from_ui(ui);
+      return output;
     }
 
   }
@@ -1550,8 +1610,12 @@ public final class Uihtml {
         Ui.Type_uimap uimapchild = ui.uimap();
         Ui.Type_style uistyle = ui.style();
         Ui.Type_stylelist uistyles = ui.stylelist();
-        Html.Type_style styleunique = Uihtml.f_style_from_style(uistyle);
-        Html.Type_stylelist htmlstyles = Uihtml.f_stylelist_from_stylelist(uistyles);
+        Html.Type_style styleunique = Uihtml.f_style_from_style(
+          uistyle
+        );
+        Html.Type_stylelist htmlstyles = Uihtml.f_stylelist_from_stylelist(
+          uistyles
+        );
         Core.Type_any output_1 = Core.f_new(
           Html.t_div,
           Core.vx_new(
@@ -1651,6 +1715,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_uimap uimap = Core.f_any_from_any(Ui.t_uimap, arglist.vx_any(Core.vx_new_int(0)));
@@ -1660,7 +1725,8 @@ public final class Uihtml {
 
     @Override
     public Html.Type_divchildlist vx_divchildlist_from_uimap(final Ui.Type_uimap uimap) {
-      return Uihtml.f_divchildlist_from_uimap(uimap);
+      Html.Type_divchildlist output = Uihtml.f_divchildlist_from_uimap(uimap);
+      return output;
     }
 
   }
@@ -1676,22 +1742,21 @@ public final class Uihtml {
       Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
         Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
         Ui.Type_ui value = Core.f_any_from_any(Ui.t_ui, value_any);
-        Core.Type_any output_1 = 
-          Core.f_let(
-            Html.t_div,
-            Core.t_any_from_func.vx_fn_new(() -> {
-              Core.Type_string uid = value.uid();
-              Core.Type_any output_2 = Core.f_new(
-                Html.t_div,
-                Core.vx_new(
-                  Core.t_anylist,
-                  Core.vx_new_string(":id"),
-                  uid
-                )
-              );
-              return output_2;
-            })
-          );
+        Core.Type_any output_1 = Core.f_let(
+          Html.t_div,
+          Core.t_any_from_func.vx_fn_new(() -> {
+            Core.Type_string uid = value.uid();
+            Core.Type_any output_2 = Core.f_new(
+              Html.t_div,
+              Core.vx_new(
+                Core.t_anylist,
+                Core.vx_new_string(":id"),
+                uid
+              )
+            );
+            return output_2;
+          })
+        );
         return output_1;
       })
     );
@@ -1779,6 +1844,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_uimap uimap = Core.f_any_from_any(Ui.t_uimap, arglist.vx_any(Core.vx_new_int(0)));
@@ -1788,7 +1854,8 @@ public final class Uihtml {
 
     @Override
     public Html.Type_divchildlist vx_divchildlist_from_uimap_1(final Ui.Type_uimap uimap) {
-      return Uihtml.f_divchildlist_from_uimap_1(uimap);
+      Html.Type_divchildlist output = Uihtml.f_divchildlist_from_uimap_1(uimap);
+      return output;
     }
 
   }
@@ -1804,22 +1871,21 @@ public final class Uihtml {
       Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
         Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
         Ui.Type_ui value = Core.f_any_from_any(Ui.t_ui, value_any);
-        Core.Type_any output_1 = 
-          Core.f_let(
-            Html.t_div,
-            Core.t_any_from_func.vx_fn_new(() -> {
-              Core.Type_string uid = value.uid();
-              Core.Type_any output_2 = Core.f_new(
-                Html.t_div,
-                Core.vx_new(
-                  Core.t_anylist,
-                  Core.vx_new_string(":id"),
-                  uid
-                )
-              );
-              return output_2;
-            })
-          );
+        Core.Type_any output_1 = Core.f_let(
+          Html.t_div,
+          Core.t_any_from_func.vx_fn_new(() -> {
+            Core.Type_string uid = value.uid();
+            Core.Type_any output_2 = Core.f_new(
+              Html.t_div,
+              Core.vx_new(
+                Core.t_anylist,
+                Core.vx_new_string(":id"),
+                uid
+              )
+            );
+            return output_2;
+          })
+        );
         return output_1;
       })
     );
@@ -1895,6 +1961,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_uimap uimap = Core.f_any_from_any(Ui.t_uimap, arglist.vx_any(Core.vx_new_int(0)));
@@ -1906,7 +1973,8 @@ public final class Uihtml {
 
     @Override
     public Html.Type_divchildlist vx_divchildlist_from_uimap_origmap_parent(final Ui.Type_uimap uimap, final Ui.Type_uimap origmap, final Ui.Type_ui parent) {
-      return Uihtml.f_divchildlist_from_uimap_origmap_parent(uimap, origmap, parent);
+      Html.Type_divchildlist output = Uihtml.f_divchildlist_from_uimap_origmap_parent(uimap, origmap, parent);
+      return output;
     }
 
   }
@@ -1922,15 +1990,22 @@ public final class Uihtml {
       Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
         Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
         Ui.Type_ui value = Core.f_any_from_any(Ui.t_ui, value_any);
-        Core.Type_any output_1 = 
-          Core.f_let(
-            Html.t_node,
-            Core.t_any_from_func.vx_fn_new(() -> {
-              Ui.Type_ui origvalue = Core.f_any_from_map(Ui.t_ui, origmap, key);
-              Core.Type_any output_2 = Uihtml.f_node_from_ui_orig_parent(value, origvalue, parent);
-              return output_2;
-            })
-          );
+        Core.Type_any output_1 = Core.f_let(
+          Html.t_node,
+          Core.t_any_from_func.vx_fn_new(() -> {
+            Ui.Type_ui origvalue = Core.f_any_from_map(
+              Ui.t_ui,
+              origmap,
+              key
+            );
+            Core.Type_any output_2 = Uihtml.f_node_from_ui_orig_parent(
+              value,
+              origvalue,
+              parent
+            );
+            return output_2;
+          })
+        );
         return output_1;
       })
     );
@@ -2005,6 +2080,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
@@ -2016,7 +2092,8 @@ public final class Uihtml {
 
     @Override
     public Html.Type_node vx_node_app_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
-      return Uihtml.f_node_app_from_ui_orig_parent(ui, orig, parent);
+      Html.Type_node output = Uihtml.f_node_app_from_ui_orig_parent(ui, orig, parent);
+      return output;
     }
 
   }
@@ -2032,7 +2109,11 @@ public final class Uihtml {
         Core.Type_string uid = ui.uid();
         Ui.Type_uimap uimap = ui.uimap();
         Ui.Type_uimap origmap = orig.uimap();
-        Html.Type_divchildlist children = Uihtml.f_divchildlist_from_uimap_origmap_parent(uimap, origmap, ui);
+        Html.Type_divchildlist children = Uihtml.f_divchildlist_from_uimap_origmap_parent(
+          uimap,
+          origmap,
+          ui
+        );
         Core.Type_any output_1 = Core.f_new(
           Html.t_div,
           Core.vx_new(
@@ -2117,6 +2198,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
@@ -2128,7 +2210,8 @@ public final class Uihtml {
 
     @Override
     public Html.Type_node vx_node_default_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
-      return Uihtml.f_node_default_from_ui_orig_parent(ui, orig, parent);
+      Html.Type_node output = Uihtml.f_node_default_from_ui_orig_parent(ui, orig, parent);
+      return output;
     }
 
   }
@@ -2145,9 +2228,17 @@ public final class Uihtml {
         Ui.Type_uimap uimap = ui.uimap();
         Ui.Type_style uistyle = ui.style();
         Ui.Type_uimap origmap = orig.uimap();
-        Html.Type_style style = Uihtml.f_style_from_style(uistyle);
-        Html.Type_stylelist styles = Uihtml.f_stylelist_extra_from_ui(ui);
-        Html.Type_divchildlist children = Uihtml.f_divchildlist_from_uimap_origmap_parent(uimap, origmap, ui);
+        Html.Type_style style = Uihtml.f_style_from_style(
+          uistyle
+        );
+        Html.Type_stylelist styles = Uihtml.f_stylelist_extra_from_ui(
+          ui
+        );
+        Html.Type_divchildlist children = Uihtml.f_divchildlist_from_uimap_origmap_parent(
+          uimap,
+          origmap,
+          ui
+        );
         Core.Type_any output_1 = Core.f_new(
           Html.t_div,
           Core.vx_new(
@@ -2236,6 +2327,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
@@ -2247,7 +2339,8 @@ public final class Uihtml {
 
     @Override
     public Html.Type_node vx_node_image_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
-      return Uihtml.f_node_image_from_ui_orig_parent(ui, orig, parent);
+      Html.Type_node output = Uihtml.f_node_image_from_ui_orig_parent(ui, orig, parent);
+      return output;
     }
 
   }
@@ -2263,10 +2356,19 @@ public final class Uihtml {
         Core.Type_string uid = ui.uid();
         Ui.Type_style uistyle = ui.style();
         Core.Type_any data = ui.data();
-        File.Type_file file = Core.f_any_from_any(File.t_file, data);
-        Core.Type_string path = File.f_pathfull_from_file(file);
-        Html.Type_style style = Uihtml.f_style_from_style(uistyle);
-        Html.Type_stylelist styles = Uihtml.f_stylelist_extra_from_ui(ui);
+        File.Type_file file = Core.f_any_from_any(
+          File.t_file,
+          data
+        );
+        Core.Type_string path = File.f_pathfull_from_file(
+          file
+        );
+        Html.Type_style style = Uihtml.f_style_from_style(
+          uistyle
+        );
+        Html.Type_stylelist styles = Uihtml.f_stylelist_extra_from_ui(
+          ui
+        );
         Core.Type_any output_1 = Core.f_new(
           Html.t_img,
           Core.vx_new(
@@ -2355,6 +2457,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
@@ -2366,7 +2469,8 @@ public final class Uihtml {
 
     @Override
     public Html.Type_node vx_node_label_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
-      return Uihtml.f_node_label_from_ui_orig_parent(ui, orig, parent);
+      Html.Type_node output = Uihtml.f_node_label_from_ui_orig_parent(ui, orig, parent);
+      return output;
     }
 
   }
@@ -2384,27 +2488,41 @@ public final class Uihtml {
         Ui.Type_uimap uimap = ui.uimap();
         Ui.Type_style uistyle = ui.style();
         Ui.Type_stylelist uistyles = ui.stylelist();
-        Core.Type_any datatype = Core.f_type_from_any(data);
-        Html.Type_style style = Uihtml.f_style_from_style(uistyle);
-        Html.Type_stylelist styles = Uihtml.f_stylelist_from_stylelist(uistyles);
+        Core.Type_any datatype = Core.f_type_from_any(
+          data
+        );
+        Html.Type_style style = Uihtml.f_style_from_style(
+          uistyle
+        );
+        Html.Type_stylelist styles = Uihtml.f_stylelist_from_stylelist(
+          uistyles
+        );
         Core.Type_string text = Core.f_if_2(
           Core.t_string,
           Core.vx_new(
             Core.t_thenelselist,
             Core.f_then(
               Core.t_boolean_from_func.vx_fn_new(() -> {
-                return Core.f_eqeq(
+                Core.Type_any output_2 = Core.f_eqeq(
                   datatype,
                   Core.t_string
                 );
+                return output_2;
               }),
               Core.t_any_from_func.vx_fn_new(() -> {
-                return Core.f_any_from_any(Core.t_string, data);
+                Core.Type_any output_3 = Core.f_any_from_any(
+                  Core.t_string,
+                  data
+                );
+                return output_3;
               })
             ),
             Core.f_else(
               Core.t_any_from_func.vx_fn_new(() -> {
-                return Core.f_string_from_any(data);
+                Core.Type_any output_4 = Core.f_string_from_any(
+                  data
+                );
+                return output_4;
               })
             )
           )
@@ -2497,6 +2615,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_node node = Core.f_any_from_any(Html.t_node, arglist.vx_any(Core.vx_new_int(0)));
@@ -2508,7 +2627,8 @@ public final class Uihtml {
 
     @Override
     public Html.Type_node vx_node_layout_from_node_ui_parent(final Html.Type_node node, final Ui.Type_ui ui, final Ui.Type_ui parent) {
-      return Uihtml.f_node_layout_from_node_ui_parent(node, ui, parent);
+      Html.Type_node output = Uihtml.f_node_layout_from_node_ui_parent(node, ui, parent);
+      return output;
     }
 
   }
@@ -2523,8 +2643,15 @@ public final class Uihtml {
       Core.t_any_from_func.vx_fn_new(() -> {
         Core.Type_string id = ui.uid();
         Core.Type_string parentid = parent.uid();
-        Core.Type_string htmltext = Html.f_string_from_node_indent(node, Core.vx_new_int(2));
-        Core.Type_boolean htmldone = Htmldoc.f_boolean_replace_from_id_parent_htmltext(id, parentid, htmltext);
+        Core.Type_string htmltext = Html.f_string_from_node_indent(
+          node,
+          Core.vx_new_int(2)
+        );
+        Core.Type_boolean htmldone = Htmldoc.f_boolean_replace_from_id_parent_htmltext(
+          id,
+          parentid,
+          htmltext
+        );
         Core.Type_any output_1 = node;
         return output_1;
       })
@@ -2600,6 +2727,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
@@ -2611,7 +2739,8 @@ public final class Uihtml {
 
     @Override
     public Html.Type_node vx_node_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
-      return Uihtml.f_node_from_ui_orig_parent(ui, orig, parent);
+      Html.Type_node output = Uihtml.f_node_from_ui_orig_parent(ui, orig, parent);
+      return output;
     }
 
   }
@@ -2634,18 +2763,33 @@ public final class Uihtml {
             Core.f_case_1(
               Ui.c_layout_image,
               Core.t_any_from_func.vx_fn_new(() -> {
-                return Uihtml.f_node_image_from_ui_orig_parent(ui, orig, parent);
+                Core.Type_any output_2 = Uihtml.f_node_image_from_ui_orig_parent(
+                  ui,
+                  orig,
+                  parent
+                );
+                return output_2;
               })
             ),
             Core.f_case_1(
               Ui.c_layout_label,
               Core.t_any_from_func.vx_fn_new(() -> {
-                return Uihtml.f_node_label_from_ui_orig_parent(ui, orig, parent);
+                Core.Type_any output_3 = Uihtml.f_node_label_from_ui_orig_parent(
+                  ui,
+                  orig,
+                  parent
+                );
+                return output_3;
               })
             ),
             Core.f_else(
               Core.t_any_from_func.vx_fn_new(() -> {
-                return Uihtml.f_node_default_from_ui_orig_parent(ui, orig, parent);
+                Core.Type_any output_4 = Uihtml.f_node_default_from_ui_orig_parent(
+                  ui,
+                  orig,
+                  parent
+                );
+                return output_4;
               })
             )
           )
@@ -2737,6 +2881,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
@@ -2746,7 +2891,8 @@ public final class Uihtml {
 
     @Override
     public Core.Type_string vx_string_class_from_ui(final Ui.Type_ui ui) {
-      return Uihtml.f_string_class_from_ui(ui);
+      Core.Type_string output = Uihtml.f_string_class_from_ui(ui);
+      return output;
     }
 
   }
@@ -2759,8 +2905,12 @@ public final class Uihtml {
     output = Core.f_let(
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
-        Html.Type_stylelist htmlstyles = Uihtml.f_stylelist_extra_from_ui(ui);
-        Core.Type_any output_1 = Html.f_string_from_stylelist(htmlstyles);
+        Html.Type_stylelist htmlstyles = Uihtml.f_stylelist_extra_from_ui(
+          ui
+        );
+        Core.Type_any output_1 = Html.f_string_from_stylelist(
+          htmlstyles
+        );
         return output_1;
       })
     );
@@ -2848,6 +2998,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_font font = Core.f_any_from_any(Ui.t_font, arglist.vx_any(Core.vx_new_int(0)));
@@ -2857,7 +3008,8 @@ public final class Uihtml {
 
     @Override
     public Core.Type_string vx_string_style_from_font(final Ui.Type_font font) {
-      return Uihtml.f_string_style_from_font(font);
+      Core.Type_string output = Uihtml.f_string_style_from_font(font);
+      return output;
     }
 
   }
@@ -2879,18 +3031,26 @@ public final class Uihtml {
             Core.t_thenelselist,
             Core.f_then(
               Core.t_boolean_from_func.vx_fn_new(() -> {
-                return Core.f_gt(size, Core.vx_new_int(0));
+                Core.Type_any output_4 = Core.f_gt(
+                  size,
+                  Core.vx_new_int(0)
+                );
+                return output_4;
               }),
               Core.t_any_from_func.vx_fn_new(() -> {
-                return Core.f_new(
+                Core.Type_any output_5 = Core.f_new(
                   Core.t_string,
                   Core.vx_new(
                     Core.t_anylist,
-                    Core.f_divide(size, Core.vx_new_int(100)),
+                    Core.f_divide(
+                      size,
+                      Core.vx_new_int(100)
+                    ),
                     Core.vx_new_string("em"),
                     Core.vx_new_string(" ")
                   )
                 );
+                return output_5;
               })
             )
           )
@@ -2901,10 +3061,13 @@ public final class Uihtml {
             Core.t_thenelselist,
             Core.f_then(
               Core.t_boolean_from_func.vx_fn_new(() -> {
-                return Core.f_notempty(name);
+                Core.Type_any output_2 = Core.f_notempty(
+                  name
+                );
+                return output_2;
               }),
               Core.t_any_from_func.vx_fn_new(() -> {
-                return Core.f_new(
+                Core.Type_any output_3 = Core.f_new(
                   Core.t_string,
                   Core.vx_new(
                     Core.t_anylist,
@@ -2914,6 +3077,7 @@ public final class Uihtml {
                     Core.c_quote
                   )
                 );
+                return output_3;
               })
             )
           )
@@ -3005,6 +3169,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_image image = Core.f_any_from_any(Ui.t_image, arglist.vx_any(Core.vx_new_int(0)));
@@ -3014,7 +3179,8 @@ public final class Uihtml {
 
     @Override
     public Core.Type_string vx_string_style_from_image(final Ui.Type_image image) {
-      return Uihtml.f_string_style_from_image(image);
+      Core.Type_string output = Uihtml.f_string_style_from_image(image);
+      return output;
     }
 
   }
@@ -3030,24 +3196,32 @@ public final class Uihtml {
         Core.t_thenelselist,
         Core.f_then(
           Core.t_boolean_from_func.vx_fn_new(() -> {
-            return Core.f_notempty_1(image);
+            Core.Type_any output_1 = Core.f_notempty_1(
+              image
+            );
+            return output_1;
           }),
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Core.f_let(
+            Core.Type_any output_2 = Core.f_let(
               Core.t_string,
               Core.t_any_from_func.vx_fn_new(() -> {
                 File.Type_file file = image.file();
-                Core.Type_string url = File.f_pathfull_from_file(file);
-                Core.Type_any output_1 = Core.f_if_2(
+                Core.Type_string url = File.f_pathfull_from_file(
+                  file
+                );
+                Core.Type_any output_3 = Core.f_if_2(
                   Core.t_string,
                   Core.vx_new(
                     Core.t_thenelselist,
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_notempty(url);
+                        Core.Type_any output_4 = Core.f_notempty(
+                          url
+                        );
+                        return output_4;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.f_new(
+                        Core.Type_any output_5 = Core.f_new(
                           Core.t_string,
                           Core.vx_new(
                             Core.t_anylist,
@@ -3056,13 +3230,15 @@ public final class Uihtml {
                             Core.vx_new_string(")")
                           )
                         );
+                        return output_5;
                       })
                     )
                   )
                 );
-                return output_1;
+                return output_3;
               })
             );
+            return output_2;
           })
         )
       )
@@ -3137,6 +3313,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_string name = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
@@ -3147,7 +3324,8 @@ public final class Uihtml {
 
     @Override
     public Core.Type_string vx_string_stylename_from_name_styletype(final Core.Type_string name, final Ui.Type_styletype styletype) {
-      return Uihtml.f_string_stylename_from_name_styletype(name, styletype);
+      Core.Type_string output = Uihtml.f_string_stylename_from_name_styletype(name, styletype);
+      return output;
     }
 
   }
@@ -3163,21 +3341,27 @@ public final class Uihtml {
         Core.t_thenelselist,
         Core.f_then(
           Core.t_boolean_from_func.vx_fn_new(() -> {
-            return Core.f_eq(Core.vx_new_string(""), name);
+            Core.Type_any output_1 = Core.f_eq(
+              Core.vx_new_string(""),
+              name
+            );
+            return output_1;
           }),
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Core.vx_new_string("");
+            Core.Type_any output_2 = Core.vx_new_string("");
+            return output_2;
           })
         ),
         Core.f_then(
           Core.t_boolean_from_func.vx_fn_new(() -> {
-            return Core.f_eqeq(
+            Core.Type_any output_3 = Core.f_eqeq(
               styletype,
               Ui.c_styletype_shared
             );
+            return output_3;
           }),
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Core.f_new(
+            Core.Type_any output_4 = Core.f_new(
               Core.t_string,
               Core.vx_new(
                 Core.t_anylist,
@@ -3185,17 +3369,19 @@ public final class Uihtml {
                 name
               )
             );
+            return output_4;
           })
         ),
         Core.f_then(
           Core.t_boolean_from_func.vx_fn_new(() -> {
-            return Core.f_eqeq(
+            Core.Type_any output_5 = Core.f_eqeq(
               styletype,
               Ui.c_styletype_system
             );
+            return output_5;
           }),
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Core.f_new(
+            Core.Type_any output_6 = Core.f_new(
               Core.t_string,
               Core.vx_new(
                 Core.t_anylist,
@@ -3203,11 +3389,13 @@ public final class Uihtml {
                 name
               )
             );
+            return output_6;
           })
         ),
         Core.f_else(
           Core.t_any_from_func.vx_fn_new(() -> {
-            return name;
+            Core.Type_any output_7 = name;
+            return output_7;
           })
         )
       )
@@ -3296,6 +3484,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_fontface fontface = Core.f_any_from_any(Ui.t_fontface, arglist.vx_any(Core.vx_new_int(0)));
@@ -3305,7 +3494,8 @@ public final class Uihtml {
 
     @Override
     public Html.Type_style vx_style_from_fontface(final Ui.Type_fontface fontface) {
-      return Uihtml.f_style_from_fontface(fontface);
+      Html.Type_style output = Uihtml.f_style_from_fontface(fontface);
+      return output;
     }
 
   }
@@ -3327,17 +3517,18 @@ public final class Uihtml {
           files,
           Core.t_any_from_any.vx_fn_new((file_any) -> {
             File.Type_file file = Core.f_any_from_any(File.t_file, file_any);
-            Core.Type_any output_1 = 
-                Core.f_new(
-                  Core.t_string,
-                  Core.vx_new(
-                    Core.t_anylist,
-                    Core.vx_new_string("url("),
-                    File.f_pathfull_from_file(file),
-                    Core.vx_new_string(")")
-                  )
-                );
-            return output_1;
+            Core.Type_any output_2 = Core.f_new(
+              Core.t_string,
+              Core.vx_new(
+                Core.t_anylist,
+                Core.vx_new_string("url("),
+                File.f_pathfull_from_file(
+                  file
+                ),
+                Core.vx_new_string(")")
+              )
+            );
+            return output_2;
           })
         );
         Core.Type_string fontfamily = Core.f_new(
@@ -3349,7 +3540,10 @@ public final class Uihtml {
             Core.c_quote
           )
         );
-        Core.Type_string srcurls = Type.f_string_from_stringlist_join(urls, Core.vx_new_string(","));
+        Core.Type_string srcurls = Type.f_string_from_stringlist_join(
+          urls,
+          Core.vx_new_string(",")
+        );
         Core.Type_string src = Core.f_new(
           Core.t_string,
           Core.vx_new(
@@ -3376,7 +3570,7 @@ public final class Uihtml {
             unicode
           )
         );
-        Core.Type_any output_2 = Core.f_new(
+        Core.Type_any output_1 = Core.f_new(
           Html.t_style,
           Core.vx_new(
             Core.t_anylist,
@@ -3386,7 +3580,7 @@ public final class Uihtml {
             propmap
           )
         );
-        return output_2;
+        return output_1;
       })
     );
     return output;
@@ -3473,6 +3667,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_style uistyle = Core.f_any_from_any(Ui.t_style, arglist.vx_any(Core.vx_new_int(0)));
@@ -3482,7 +3677,8 @@ public final class Uihtml {
 
     @Override
     public Html.Type_style vx_style_from_style(final Ui.Type_style uistyle) {
-      return Uihtml.f_style_from_style(uistyle);
+      Html.Type_style output = Uihtml.f_style_from_style(uistyle);
+      return output;
     }
 
   }
@@ -3498,17 +3694,21 @@ public final class Uihtml {
         Core.t_thenelselist,
         Core.f_then(
           Core.t_boolean_from_func.vx_fn_new(() -> {
-            return Core.f_is_empty_1(uistyle);
+            Core.Type_any output_1 = Core.f_is_empty_1(
+              uistyle
+            );
+            return output_1;
           }),
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Core.f_empty(
+            Core.Type_any output_2 = Core.f_empty(
               Html.t_style
             );
+            return output_2;
           })
         ),
         Core.f_else(
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Core.f_let(
+            Core.Type_any output_3 = Core.f_let(
               Html.t_style,
               Core.t_any_from_func.vx_fn_new(() -> {
                 Ui.Type_layout layout = uistyle.layout();
@@ -3536,17 +3736,23 @@ public final class Uihtml {
                 Core.Type_int sizex = pointsize.x();
                 Core.Type_int sizey = pointsize.y();
                 Ui.Type_pointtype sizetype = pointsize.pointtype();
-                Core.Type_string stylename = Uihtml.f_string_stylename_from_name_styletype(name, styletype);
+                Core.Type_string stylename = Uihtml.f_string_stylename_from_name_styletype(
+                  name,
+                  styletype
+                );
                 Core.Type_string bkgcolor = Core.f_if_2(
                   Core.t_string,
                   Core.vx_new(
                     Core.t_thenelselist,
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_notempty(color_bkg);
+                        Core.Type_any output_5 = Core.f_notempty(
+                          color_bkg
+                        );
+                        return output_5;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.f_new(
+                        Core.Type_any output_6 = Core.f_new(
                           Core.t_string,
                           Core.vx_new(
                             Core.t_anylist,
@@ -3554,6 +3760,7 @@ public final class Uihtml {
                             color_bkg
                           )
                         );
+                        return output_6;
                       })
                     )
                   )
@@ -3564,10 +3771,14 @@ public final class Uihtml {
                     Core.t_thenelselist,
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_notempty(color_border);
+                        Core.Type_any output_7 = Core.f_notempty(
+                          color_border
+                        );
+                        return output_7;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("thin");
+                        Core.Type_any output_8 = Core.vx_new_string("thin");
+                        return output_8;
                       })
                     )
                   )
@@ -3578,10 +3789,13 @@ public final class Uihtml {
                     Core.t_thenelselist,
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_notempty(color_border);
+                        Core.Type_any output_9 = Core.f_notempty(
+                          color_border
+                        );
+                        return output_9;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.f_new(
+                        Core.Type_any output_10 = Core.f_new(
                           Core.t_string,
                           Core.vx_new(
                             Core.t_anylist,
@@ -3589,6 +3803,7 @@ public final class Uihtml {
                             color_border
                           )
                         );
+                        return output_10;
                       })
                     )
                   )
@@ -3599,16 +3814,20 @@ public final class Uihtml {
                     Core.t_thenelselist,
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_notempty(color_border);
+                        Core.Type_any output_11 = Core.f_notempty(
+                          color_border
+                        );
+                        return output_11;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.f_new(
+                        Core.Type_any output_12 = Core.f_new(
                           Core.t_string,
                           Core.vx_new(
                             Core.t_anylist,
                             Core.vx_new_string("solid")
                           )
                         );
+                        return output_12;
                       })
                     )
                   )
@@ -3619,10 +3838,13 @@ public final class Uihtml {
                     Core.t_thenelselist,
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_notempty(color_font);
+                        Core.Type_any output_13 = Core.f_notempty(
+                          color_font
+                        );
+                        return output_13;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.f_new(
+                        Core.Type_any output_14 = Core.f_new(
                           Core.t_string,
                           Core.vx_new(
                             Core.t_anylist,
@@ -3630,6 +3852,7 @@ public final class Uihtml {
                             color_font
                           )
                         );
+                        return output_14;
                       })
                     )
                   )
@@ -3640,7 +3863,7 @@ public final class Uihtml {
                     Core.t_thenelselist,
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_or_1(
+                        Core.Type_any output_15 = Core.f_or_1(
                           Core.vx_new(
                             Core.t_booleanlist,
                             Core.f_eqeq(
@@ -3673,44 +3896,55 @@ public final class Uihtml {
                             )
                           )
                         );
+                        return output_15;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("fixed");
+                        Core.Type_any output_16 = Core.vx_new_string("fixed");
+                        return output_16;
                       })
                     ),
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_eqeq(
+                        Core.Type_any output_17 = Core.f_eqeq(
                           postype,
                           Ui.c_pointtype_relative
                         );
+                        return output_17;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("relative");
+                        Core.Type_any output_18 = Core.vx_new_string("relative");
+                        return output_18;
                       })
                     ),
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_eqeq(
+                        Core.Type_any output_19 = Core.f_eqeq(
                           postype,
                           Ui.c_pointtype_absolute
                         );
+                        return output_19;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("absolute");
+                        Core.Type_any output_20 = Core.vx_new_string("absolute");
+                        return output_20;
                       })
                     ),
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_notempty_1(pointpos);
+                        Core.Type_any output_21 = Core.f_notempty_1(
+                          pointpos
+                        );
+                        return output_21;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("absolute");
+                        Core.Type_any output_22 = Core.vx_new_string("absolute");
+                        return output_22;
                       })
                     ),
                     Core.f_else(
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("");
+                        Core.Type_any output_23 = Core.vx_new_string("");
+                        return output_23;
                       })
                     )
                   )
@@ -3721,13 +3955,14 @@ public final class Uihtml {
                     Core.t_thenelselist,
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_eqeq(
+                        Core.Type_any output_24 = Core.f_eqeq(
                           pin,
                           Ui.c_pin_expand
                         );
+                        return output_24;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.f_new(
+                        Core.Type_any output_25 = Core.f_new(
                           Core.t_string,
                           Core.vx_new(
                             Core.t_anylist,
@@ -3735,19 +3970,25 @@ public final class Uihtml {
                             Core.vx_new_string("mm")
                           )
                         );
+                        return output_25;
                       })
                     ),
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_eqeq(Core.vx_new_int(0), posy);
+                        Core.Type_any output_26 = Core.f_eqeq(
+                          Core.vx_new_int(0),
+                          posy
+                        );
+                        return output_26;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("");
+                        Core.Type_any output_27 = Core.vx_new_string("");
+                        return output_27;
                       })
                     ),
                     Core.f_else(
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.f_new(
+                        Core.Type_any output_28 = Core.f_new(
                           Core.t_string,
                           Core.vx_new(
                             Core.t_anylist,
@@ -3755,6 +3996,7 @@ public final class Uihtml {
                             Core.vx_new_string("mm")
                           )
                         );
+                        return output_28;
                       })
                     )
                   )
@@ -3765,29 +4007,33 @@ public final class Uihtml {
                     Core.t_thenelselist,
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_eqeq(
+                        Core.Type_any output_29 = Core.f_eqeq(
                           pin,
                           Ui.c_pin_expand
                         );
+                        return output_29;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("");
+                        Core.Type_any output_30 = Core.vx_new_string("");
+                        return output_30;
                       })
                     ),
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_eqeq(
+                        Core.Type_any output_31 = Core.f_eqeq(
                           pin,
                           Ui.c_pin_bottom
                         );
+                        return output_31;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("0mm");
+                        Core.Type_any output_32 = Core.vx_new_string("0mm");
+                        return output_32;
                       })
                     ),
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_or(
+                        Core.Type_any output_33 = Core.f_or(
                           Core.f_eqeq(
                             pin,
                             Ui.c_pin_left
@@ -3797,9 +4043,10 @@ public final class Uihtml {
                             Ui.c_pin_center_v
                           )
                         );
+                        return output_33;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.f_new(
+                        Core.Type_any output_34 = Core.f_new(
                           Core.t_string,
                           Core.vx_new(
                             Core.t_anylist,
@@ -3807,6 +4054,7 @@ public final class Uihtml {
                             Core.vx_new_string("mm")
                           )
                         );
+                        return output_34;
                       })
                     )
                   )
@@ -3817,24 +4065,27 @@ public final class Uihtml {
                     Core.t_thenelselist,
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_eqeq(
+                        Core.Type_any output_35 = Core.f_eqeq(
                           pin,
                           Ui.c_pin_expand
                         );
+                        return output_35;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("");
+                        Core.Type_any output_36 = Core.vx_new_string("");
+                        return output_36;
                       })
                     ),
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_eqeq(
+                        Core.Type_any output_37 = Core.f_eqeq(
                           pin,
                           Ui.c_pin_bottom
                         );
+                        return output_37;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.f_new(
+                        Core.Type_any output_38 = Core.f_new(
                           Core.t_string,
                           Core.vx_new(
                             Core.t_anylist,
@@ -3842,19 +4093,25 @@ public final class Uihtml {
                             Core.vx_new_string("mm")
                           )
                         );
+                        return output_38;
                       })
                     ),
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_eqeq(Core.vx_new_int(0), posx);
+                        Core.Type_any output_39 = Core.f_eqeq(
+                          Core.vx_new_int(0),
+                          posx
+                        );
+                        return output_39;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("");
+                        Core.Type_any output_40 = Core.vx_new_string("");
+                        return output_40;
                       })
                     ),
                     Core.f_else(
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.f_new(
+                        Core.Type_any output_41 = Core.f_new(
                           Core.t_string,
                           Core.vx_new(
                             Core.t_anylist,
@@ -3862,6 +4119,7 @@ public final class Uihtml {
                             Core.vx_new_string("mm")
                           )
                         );
+                        return output_41;
                       })
                     )
                   )
@@ -3872,18 +4130,20 @@ public final class Uihtml {
                     Core.t_thenelselist,
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_eqeq(
+                        Core.Type_any output_42 = Core.f_eqeq(
                           pin,
                           Ui.c_pin_expand
                         );
+                        return output_42;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("");
+                        Core.Type_any output_43 = Core.vx_new_string("");
+                        return output_43;
                       })
                     ),
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_or_1(
+                        Core.Type_any output_44 = Core.f_or_1(
                           Core.vx_new(
                             Core.t_booleanlist,
                             Core.f_eqeq(
@@ -3900,9 +4160,10 @@ public final class Uihtml {
                             )
                           )
                         );
+                        return output_44;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.f_new(
+                        Core.Type_any output_45 = Core.f_new(
                           Core.t_string,
                           Core.vx_new(
                             Core.t_anylist,
@@ -3910,6 +4171,7 @@ public final class Uihtml {
                             Core.vx_new_string("mm")
                           )
                         );
+                        return output_45;
                       })
                     )
                   )
@@ -3920,18 +4182,20 @@ public final class Uihtml {
                     Core.t_thenelselist,
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_eqeq(
+                        Core.Type_any output_46 = Core.f_eqeq(
                           pin,
                           Ui.c_pin_expand
                         );
+                        return output_46;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("100%");
+                        Core.Type_any output_47 = Core.vx_new_string("100%");
+                        return output_47;
                       })
                     ),
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_or_1(
+                        Core.Type_any output_48 = Core.f_or_1(
                           Core.vx_new(
                             Core.t_booleanlist,
                             Core.f_eqeq(
@@ -3948,20 +4212,23 @@ public final class Uihtml {
                             )
                           )
                         );
+                        return output_48;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("");
+                        Core.Type_any output_49 = Core.vx_new_string("");
+                        return output_49;
                       })
                     ),
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_eqeq(
+                        Core.Type_any output_50 = Core.f_eqeq(
                           sizetype,
                           Ui.c_pointtype_percent
                         );
+                        return output_50;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.f_new(
+                        Core.Type_any output_51 = Core.f_new(
                           Core.t_string,
                           Core.vx_new(
                             Core.t_anylist,
@@ -3969,19 +4236,25 @@ public final class Uihtml {
                             Core.vx_new_string("%")
                           )
                         );
+                        return output_51;
                       })
                     ),
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_eqeq(Core.vx_new_int(0), sizey);
+                        Core.Type_any output_52 = Core.f_eqeq(
+                          Core.vx_new_int(0),
+                          sizey
+                        );
+                        return output_52;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("");
+                        Core.Type_any output_53 = Core.vx_new_string("");
+                        return output_53;
                       })
                     ),
                     Core.f_else(
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.f_new(
+                        Core.Type_any output_54 = Core.f_new(
                           Core.t_string,
                           Core.vx_new(
                             Core.t_anylist,
@@ -3989,6 +4262,7 @@ public final class Uihtml {
                             Core.vx_new_string("mm")
                           )
                         );
+                        return output_54;
                       })
                     )
                   )
@@ -3999,18 +4273,20 @@ public final class Uihtml {
                     Core.t_thenelselist,
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_eqeq(
+                        Core.Type_any output_55 = Core.f_eqeq(
                           pin,
                           Ui.c_pin_expand
                         );
+                        return output_55;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("100%");
+                        Core.Type_any output_56 = Core.vx_new_string("100%");
+                        return output_56;
                       })
                     ),
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_or_1(
+                        Core.Type_any output_57 = Core.f_or_1(
                           Core.vx_new(
                             Core.t_booleanlist,
                             Core.f_eqeq(
@@ -4027,20 +4303,23 @@ public final class Uihtml {
                             )
                           )
                         );
+                        return output_57;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("");
+                        Core.Type_any output_58 = Core.vx_new_string("");
+                        return output_58;
                       })
                     ),
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_eqeq(
+                        Core.Type_any output_59 = Core.f_eqeq(
                           sizetype,
                           Ui.c_pointtype_percent
                         );
+                        return output_59;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.f_new(
+                        Core.Type_any output_60 = Core.f_new(
                           Core.t_string,
                           Core.vx_new(
                             Core.t_anylist,
@@ -4048,19 +4327,25 @@ public final class Uihtml {
                             Core.vx_new_string("%")
                           )
                         );
+                        return output_60;
                       })
                     ),
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_eqeq(Core.vx_new_int(0), sizex);
+                        Core.Type_any output_61 = Core.f_eqeq(
+                          Core.vx_new_int(0),
+                          sizex
+                        );
+                        return output_61;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("");
+                        Core.Type_any output_62 = Core.vx_new_string("");
+                        return output_62;
                       })
                     ),
                     Core.f_else(
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.f_new(
+                        Core.Type_any output_63 = Core.f_new(
                           Core.t_string,
                           Core.vx_new(
                             Core.t_anylist,
@@ -4068,6 +4353,7 @@ public final class Uihtml {
                             Core.vx_new_string("mm")
                           )
                         );
+                        return output_63;
                       })
                     )
                   )
@@ -4078,33 +4364,39 @@ public final class Uihtml {
                     Core.t_thenelselist,
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return hidden;
+                        Core.Type_any output_64 = hidden;
+                        return output_64;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("none");
+                        Core.Type_any output_65 = Core.vx_new_string("none");
+                        return output_65;
                       })
                     ),
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_eqeq(
+                        Core.Type_any output_66 = Core.f_eqeq(
                           layout,
                           Ui.c_layout_flow_item
                         );
+                        return output_66;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("inline-block");
+                        Core.Type_any output_67 = Core.vx_new_string("inline-block");
+                        return output_67;
                       })
                     )
                   )
                 );
-                Core.Type_string sfont = Uihtml.f_string_style_from_font(font);
+                Core.Type_string sfont = Uihtml.f_string_style_from_font(
+                  font
+                );
                 Core.Type_string gap = Core.f_if_2(
                   Core.t_string,
                   Core.vx_new(
                     Core.t_thenelselist,
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_or(
+                        Core.Type_any output_68 = Core.f_or(
                           Core.f_eqeq(
                             layout,
                             Ui.c_layout_flow_columns
@@ -4114,9 +4406,11 @@ public final class Uihtml {
                             Ui.c_layout_flow_rows
                           )
                         );
+                        return output_68;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("1mm");
+                        Core.Type_any output_69 = Core.vx_new_string("1mm");
+                        return output_69;
                       })
                     )
                   )
@@ -4127,10 +4421,12 @@ public final class Uihtml {
                     Core.t_thenelselist,
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return scroll_x;
+                        Core.Type_any output_70 = scroll_x;
+                        return output_70;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("auto");
+                        Core.Type_any output_71 = Core.vx_new_string("auto");
+                        return output_71;
                       })
                     )
                   )
@@ -4141,10 +4437,12 @@ public final class Uihtml {
                     Core.t_thenelselist,
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return scroll_y;
+                        Core.Type_any output_72 = scroll_y;
+                        return output_72;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("auto");
+                        Core.Type_any output_73 = Core.vx_new_string("auto");
+                        return output_73;
                       })
                     )
                   )
@@ -4155,10 +4453,14 @@ public final class Uihtml {
                     Core.t_thenelselist,
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_ne(Core.vx_new_string(""), color_bkghover);
+                        Core.Type_any output_74 = Core.f_ne(
+                          Core.vx_new_string(""),
+                          color_bkghover
+                        );
+                        return output_74;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.f_new(
+                        Core.Type_any output_75 = Core.f_new(
                           Core.t_string,
                           Core.vx_new(
                             Core.t_anylist,
@@ -4166,6 +4468,7 @@ public final class Uihtml {
                             color_bkghover
                           )
                         );
+                        return output_75;
                       })
                     )
                   )
@@ -4176,13 +4479,15 @@ public final class Uihtml {
                     Core.t_thenelselist,
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_eqeq(
+                        Core.Type_any output_76 = Core.f_eqeq(
                           cursor,
                           Ui.t_cursor_pointer
                         );
+                        return output_76;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("pointer");
+                        Core.Type_any output_77 = Core.vx_new_string("pointer");
+                        return output_77;
                       })
                     )
                   )
@@ -4193,35 +4498,41 @@ public final class Uihtml {
                     Core.t_thenelselist,
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_eqeq(
+                        Core.Type_any output_78 = Core.f_eqeq(
                           align,
                           Ui.c_align_left
                         );
+                        return output_78;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("left");
+                        Core.Type_any output_79 = Core.vx_new_string("left");
+                        return output_79;
                       })
                     ),
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_eqeq(
+                        Core.Type_any output_80 = Core.f_eqeq(
                           align,
                           Ui.c_align_center
                         );
+                        return output_80;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("center");
+                        Core.Type_any output_81 = Core.vx_new_string("center");
+                        return output_81;
                       })
                     ),
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_eqeq(
+                        Core.Type_any output_82 = Core.f_eqeq(
                           align,
                           Ui.c_align_right
                         );
+                        return output_82;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("right");
+                        Core.Type_any output_83 = Core.vx_new_string("right");
+                        return output_83;
                       })
                     )
                   )
@@ -4232,15 +4543,19 @@ public final class Uihtml {
                     Core.t_thenelselist,
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_is_empty_1(pointrotate);
+                        Core.Type_any output_84 = Core.f_is_empty_1(
+                          pointrotate
+                        );
+                        return output_84;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("");
+                        Core.Type_any output_85 = Core.vx_new_string("");
+                        return output_85;
                       })
                     ),
                     Core.f_else(
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.f_new(
+                        Core.Type_any output_86 = Core.f_new(
                           Core.t_string,
                           Core.vx_new(
                             Core.t_anylist,
@@ -4249,6 +4564,7 @@ public final class Uihtml {
                             Core.vx_new_string("deg)")
                           )
                         );
+                        return output_86;
                       })
                     )
                   )
@@ -4261,19 +4577,22 @@ public final class Uihtml {
                     Core.f_case_1(
                       Ui.c_flip_x,
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("scale(-1, 1)");
+                        Core.Type_any output_87 = Core.vx_new_string("scale(-1, 1)");
+                        return output_87;
                       })
                     ),
                     Core.f_case_1(
                       Ui.c_flip_y,
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("scale( 1,-1)");
+                        Core.Type_any output_88 = Core.vx_new_string("scale( 1,-1)");
+                        return output_88;
                       })
                     ),
                     Core.f_case_1(
                       Ui.c_flip_xy,
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("scale(-1,-1)");
+                        Core.Type_any output_89 = Core.vx_new_string("scale(-1,-1)");
+                        return output_89;
                       })
                     )
                   )
@@ -4286,7 +4605,10 @@ public final class Uihtml {
                     transform_scale
                   )
                 );
-                Core.Type_string transform = Type.f_string_from_stringlist_join(transforms, Core.vx_new_string(" "));
+                Core.Type_string transform = Type.f_string_from_stringlist_join(
+                  transforms,
+                  Core.vx_new_string(" ")
+                );
                 Core.Type_string transformorigin = Core.f_switch(
                   Core.t_string,
                   pointorigin,
@@ -4295,48 +4617,58 @@ public final class Uihtml {
                     Core.f_case_1(
                       Ui.c_point_center,
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("center");
+                        Core.Type_any output_90 = Core.vx_new_string("center");
+                        return output_90;
                       })
                     ),
                     Core.f_case_1(
                       Ui.c_point_lefttop,
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("left top");
+                        Core.Type_any output_91 = Core.vx_new_string("left top");
+                        return output_91;
                       })
                     ),
                     Core.f_case_1(
                       Ui.c_point_rightbottom,
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.vx_new_string("right bottom");
+                        Core.Type_any output_92 = Core.vx_new_string("right bottom");
+                        return output_92;
                       })
                     ),
                     Core.f_else(
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.f_if_2(
+                        Core.Type_any output_93 = Core.f_if_2(
                           Core.t_string,
                           Core.vx_new(
                             Core.t_thenelselist,
                             Core.f_then(
                               Core.t_boolean_from_func.vx_fn_new(() -> {
-                                return Core.f_is_empty_1(pointrotate);
+                                Core.Type_any output_94 = Core.f_is_empty_1(
+                                  pointrotate
+                                );
+                                return output_94;
                               }),
                               Core.t_any_from_func.vx_fn_new(() -> {
-                                return Core.vx_new_string("");
+                                Core.Type_any output_95 = Core.vx_new_string("");
+                                return output_95;
                               })
                             ),
                             Core.f_then(
                               Core.t_boolean_from_func.vx_fn_new(() -> {
-                                return Core.f_eqeq(
+                                Core.Type_any output_96 = Core.f_eqeq(
                                   layout,
                                   Ui.c_layout_label
                                 );
+                                return output_96;
                               }),
                               Core.t_any_from_func.vx_fn_new(() -> {
-                                return Core.vx_new_string("left top");
+                                Core.Type_any output_97 = Core.vx_new_string("left top");
+                                return output_97;
                               })
                             )
                           )
                         );
+                        return output_93;
                       })
                     )
                   )
@@ -4403,10 +4735,13 @@ public final class Uihtml {
                     Core.t_thenelselist,
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_notempty_1(hoverprops);
+                        Core.Type_any output_98 = Core.f_notempty_1(
+                          hoverprops
+                        );
+                        return output_98;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.f_new(
+                        Core.Type_any output_99 = Core.f_new(
                           Html.t_stylelist,
                           Core.vx_new(
                             Core.t_anylist,
@@ -4422,11 +4757,12 @@ public final class Uihtml {
                             )
                           )
                         );
+                        return output_99;
                       })
                     )
                   )
                 );
-                Core.Type_any output_1 = Core.f_new(
+                Core.Type_any output_4 = Core.f_new(
                   Html.t_style,
                   Core.vx_new(
                     Core.t_anylist,
@@ -4438,9 +4774,10 @@ public final class Uihtml {
                     substylelist
                   )
                 );
-                return output_1;
+                return output_4;
               })
             );
+            return output_3;
           })
         )
       )
@@ -4529,6 +4866,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
@@ -4538,7 +4876,8 @@ public final class Uihtml {
 
     @Override
     public Html.Type_stylelist vx_stylelist_extra_from_ui(final Ui.Type_ui ui) {
-      return Uihtml.f_stylelist_extra_from_ui(ui);
+      Html.Type_stylelist output = Uihtml.f_stylelist_extra_from_ui(ui);
+      return output;
     }
 
   }
@@ -4554,42 +4893,49 @@ public final class Uihtml {
         Ui.Type_stylelist uistyles = ui.stylelist();
         Core.Type_boolean selected = ui.selected();
         Core.Type_boolean hidden = ui.hidden();
-        Html.Type_stylelist styles1 = Uihtml.f_stylelist_from_stylelist(uistyles);
+        Html.Type_stylelist styles1 = Uihtml.f_stylelist_from_stylelist(
+          uistyles
+        );
         Html.Type_stylelist styles2 = Core.f_if_2(
           Html.t_stylelist,
           Core.vx_new(
             Core.t_thenelselist,
             Core.f_then(
               Core.t_boolean_from_func.vx_fn_new(() -> {
-                return hidden;
+                Core.Type_any output_2 = hidden;
+                return output_2;
               }),
               Core.t_any_from_func.vx_fn_new(() -> {
-                return Core.f_copy(
+                Core.Type_any output_3 = Core.f_copy(
                   styles1,
                   Core.vx_new(
                     Core.t_anylist,
                     Uihtml.c_style_hidden
                   )
                 );
+                return output_3;
               })
             ),
             Core.f_then(
               Core.t_boolean_from_func.vx_fn_new(() -> {
-                return selected;
+                Core.Type_any output_4 = selected;
+                return output_4;
               }),
               Core.t_any_from_func.vx_fn_new(() -> {
-                return Core.f_copy(
+                Core.Type_any output_5 = Core.f_copy(
                   styles1,
                   Core.vx_new(
                     Core.t_anylist,
                     Uihtml.c_style_selected
                   )
                 );
+                return output_5;
               })
             ),
             Core.f_else(
               Core.t_any_from_func.vx_fn_new(() -> {
-                return styles1;
+                Core.Type_any output_6 = styles1;
+                return output_6;
               })
             )
           )
@@ -4667,6 +5013,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       output = Uihtml.f_stylelist_reset();
@@ -4675,7 +5022,8 @@ public final class Uihtml {
 
     @Override
     public Html.Type_stylelist vx_stylelist_reset() {
-      return Uihtml.f_stylelist_reset();
+      Html.Type_stylelist output = Uihtml.f_stylelist_reset();
+      return output;
     }
 
   }
@@ -4907,6 +5255,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_fontfacemap fontfacemap = Core.f_any_from_any(Ui.t_fontfacemap, arglist.vx_any(Core.vx_new_int(0)));
@@ -4916,7 +5265,8 @@ public final class Uihtml {
 
     @Override
     public Html.Type_stylelist vx_stylelist_from_fontfacemap(final Ui.Type_fontfacemap fontfacemap) {
-      return Uihtml.f_stylelist_from_fontfacemap(fontfacemap);
+      Html.Type_stylelist output = Uihtml.f_stylelist_from_fontfacemap(fontfacemap);
+      return output;
     }
 
   }
@@ -4932,8 +5282,9 @@ public final class Uihtml {
       Core.t_any_from_key_value.vx_fn_new((key_any, fontface_any) -> {
         Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
         Ui.Type_fontface fontface = Core.f_any_from_any(Ui.t_fontface, fontface_any);
-        Core.Type_any output_1 = 
-          Uihtml.f_style_from_fontface(fontface);
+        Core.Type_any output_1 = Uihtml.f_style_from_fontface(
+          fontface
+        );
         return output_1;
       })
     );
@@ -5021,6 +5372,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_stylelist uistylelist = Core.f_any_from_any(Ui.t_stylelist, arglist.vx_any(Core.vx_new_int(0)));
@@ -5030,7 +5382,8 @@ public final class Uihtml {
 
     @Override
     public Html.Type_stylelist vx_stylelist_from_stylelist(final Ui.Type_stylelist uistylelist) {
-      return Uihtml.f_stylelist_from_stylelist(uistylelist);
+      Html.Type_stylelist output = Uihtml.f_stylelist_from_stylelist(uistylelist);
+      return output;
     }
 
   }
@@ -5129,6 +5482,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_stylemap uistylemap = Core.f_any_from_any(Ui.t_stylemap, arglist.vx_any(Core.vx_new_int(0)));
@@ -5138,7 +5492,8 @@ public final class Uihtml {
 
     @Override
     public Html.Type_stylelist vx_stylelist_from_stylemap(final Ui.Type_stylemap uistylemap) {
-      return Uihtml.f_stylelist_from_stylemap(uistylemap);
+      Html.Type_stylelist output = Uihtml.f_stylelist_from_stylemap(uistylemap);
+      return output;
     }
 
   }
@@ -5154,8 +5509,9 @@ public final class Uihtml {
       Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
         Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
         Ui.Type_style value = Core.f_any_from_any(Ui.t_style, value_any);
-        Core.Type_any output_1 = 
-          Uihtml.f_style_from_style(value);
+        Core.Type_any output_1 = Uihtml.f_style_from_style(
+          value
+        );
         return output_1;
       })
     );
@@ -5243,6 +5599,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_stylemap uistylemap = Core.f_any_from_any(Ui.t_stylemap, arglist.vx_any(Core.vx_new_int(0)));
@@ -5252,7 +5609,8 @@ public final class Uihtml {
 
     @Override
     public Html.Type_stylemap vx_stylemap_from_stylemap(final Ui.Type_stylemap uistylemap) {
-      return Uihtml.f_stylemap_from_stylemap(uistylemap);
+      Html.Type_stylemap output = Uihtml.f_stylemap_from_stylemap(uistylemap);
+      return output;
     }
 
   }
@@ -5268,8 +5626,9 @@ public final class Uihtml {
       Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
         Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
         Ui.Type_style value = Core.f_any_from_any(Ui.t_style, value_any);
-        Core.Type_any output_1 = 
-          Uihtml.f_style_from_style(value);
+        Core.Type_any output_1 = Uihtml.f_style_from_style(
+          value
+        );
         return output_1;
       })
     );
@@ -5358,6 +5717,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Ui.Type_stylesheet stylesheetui = Core.f_any_from_any(Ui.t_stylesheet, arglist.vx_any(Core.vx_new_int(0)));
@@ -5368,7 +5728,8 @@ public final class Uihtml {
 
     @Override
     public CompletableFuture<Ui.Type_stylesheet> vx_stylesheet_layout_html(final Ui.Type_stylesheet stylesheetui) {
-      return Uihtml.f_stylesheet_layout_html(stylesheetui);
+      CompletableFuture<Ui.Type_stylesheet> output = Uihtml.f_stylesheet_layout_html(stylesheetui);
+      return output;
     }
 
   }
@@ -5381,8 +5742,12 @@ public final class Uihtml {
     output = Core.f_let_async(
       Ui.t_stylesheet,
       Core.t_any_from_func_async.vx_fn_new(() -> {
-        final Html.Type_stylesheet stylesheethtml = Uihtml.f_stylesheet_from_stylesheet(stylesheetui);
-        final CompletableFuture<Core.Type_boolean> future_write = Htmldoc.f_boolean_write_from_stylesheet(stylesheethtml);
+        Html.Type_stylesheet stylesheethtml = Uihtml.f_stylesheet_from_stylesheet(
+          stylesheetui
+        );
+        CompletableFuture<Core.Type_boolean> future_write = Htmldoc.f_boolean_write_from_stylesheet(
+          stylesheethtml
+        );
         CompletableFuture<Core.Type_any> output_1 = Core.vx_async_from_async_fn(future_write, (write) -> {
           Core.Type_any output_2 = stylesheetui;
           return output_2;
@@ -5474,6 +5839,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_stylesheet uistylesheet = Core.f_any_from_any(Ui.t_stylesheet, arglist.vx_any(Core.vx_new_int(0)));
@@ -5483,7 +5849,8 @@ public final class Uihtml {
 
     @Override
     public Html.Type_stylesheet vx_stylesheet_from_stylesheet(final Ui.Type_stylesheet uistylesheet) {
-      return Uihtml.f_stylesheet_from_stylesheet(uistylesheet);
+      Html.Type_stylesheet output = Uihtml.f_stylesheet_from_stylesheet(uistylesheet);
+      return output;
     }
 
   }
@@ -5499,8 +5866,12 @@ public final class Uihtml {
         Ui.Type_stylemap uistylemap = uistylesheet.stylemap();
         Ui.Type_fontfacemap fontfacemap = uistylesheet.fontfacemap();
         Html.Type_stylelist resetlist = Uihtml.f_stylelist_reset();
-        Html.Type_stylelist fontstyles = Uihtml.f_stylelist_from_fontfacemap(fontfacemap);
-        Html.Type_stylelist stylelist = Uihtml.f_stylelist_from_stylemap(uistylemap);
+        Html.Type_stylelist fontstyles = Uihtml.f_stylelist_from_fontfacemap(
+          fontfacemap
+        );
+        Html.Type_stylelist stylelist = Uihtml.f_stylelist_from_stylemap(
+          uistylemap
+        );
         Html.Type_stylelist allstyles = Core.f_new(
           Html.t_stylelist,
           Core.vx_new(
@@ -5592,6 +5963,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
@@ -5603,7 +5975,8 @@ public final class Uihtml {
 
     @Override
     public Ui.Type_ui vx_ui_layout_app_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
-      return Uihtml.f_ui_layout_app_from_ui_orig_parent(ui, orig, parent);
+      Ui.Type_ui output = Uihtml.f_ui_layout_app_from_ui_orig_parent(ui, orig, parent);
+      return output;
     }
 
   }
@@ -5616,9 +5989,19 @@ public final class Uihtml {
     output = Core.f_let(
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
-        Html.Type_node node = Uihtml.f_node_app_from_ui_orig_parent(ui, orig, parent);
-        Html.Type_node nodechg = Uihtml.f_node_layout_from_node_ui_parent(node, ui, parent);
-        Core.Type_boolean iswrite = Uihtml.f_boolean_writeeventsall_from_ui(ui);
+        Html.Type_node node = Uihtml.f_node_app_from_ui_orig_parent(
+          ui,
+          orig,
+          parent
+        );
+        Html.Type_node nodechg = Uihtml.f_node_layout_from_node_ui_parent(
+          node,
+          ui,
+          parent
+        );
+        Core.Type_boolean iswrite = Uihtml.f_boolean_writeeventsall_from_ui(
+          ui
+        );
         Core.Type_any output_1 = ui;
         return output_1;
       })
@@ -5694,6 +6077,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
@@ -5705,7 +6089,8 @@ public final class Uihtml {
 
     @Override
     public Ui.Type_ui vx_ui_layout_default_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
-      return Uihtml.f_ui_layout_default_from_ui_orig_parent(ui, orig, parent);
+      Ui.Type_ui output = Uihtml.f_ui_layout_default_from_ui_orig_parent(ui, orig, parent);
+      return output;
     }
 
   }
@@ -5719,9 +6104,19 @@ public final class Uihtml {
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
         Ui.Type_uimap uimap = ui.uimap();
-        Html.Type_node node = Uihtml.f_node_default_from_ui_orig_parent(ui, orig, parent);
-        Html.Type_node nodechg = Uihtml.f_node_layout_from_node_ui_parent(node, ui, parent);
-        Core.Type_boolean iswrite = Uihtml.f_boolean_writeeventsall_from_ui(ui);
+        Html.Type_node node = Uihtml.f_node_default_from_ui_orig_parent(
+          ui,
+          orig,
+          parent
+        );
+        Html.Type_node nodechg = Uihtml.f_node_layout_from_node_ui_parent(
+          node,
+          ui,
+          parent
+        );
+        Core.Type_boolean iswrite = Uihtml.f_boolean_writeeventsall_from_ui(
+          ui
+        );
         Core.Type_any output_1 = ui;
         return output_1;
       })
@@ -5797,6 +6192,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
@@ -5808,7 +6204,8 @@ public final class Uihtml {
 
     @Override
     public Ui.Type_ui vx_ui_layout_image_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
-      return Uihtml.f_ui_layout_image_from_ui_orig_parent(ui, orig, parent);
+      Ui.Type_ui output = Uihtml.f_ui_layout_image_from_ui_orig_parent(ui, orig, parent);
+      return output;
     }
 
   }
@@ -5821,9 +6218,19 @@ public final class Uihtml {
     output = Core.f_let(
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
-        Html.Type_node node = Uihtml.f_node_image_from_ui_orig_parent(ui, orig, parent);
-        Html.Type_node nodechg = Uihtml.f_node_layout_from_node_ui_parent(node, ui, parent);
-        Core.Type_boolean iswrite = Uihtml.f_boolean_writeeventsall_from_ui(ui);
+        Html.Type_node node = Uihtml.f_node_image_from_ui_orig_parent(
+          ui,
+          orig,
+          parent
+        );
+        Html.Type_node nodechg = Uihtml.f_node_layout_from_node_ui_parent(
+          node,
+          ui,
+          parent
+        );
+        Core.Type_boolean iswrite = Uihtml.f_boolean_writeeventsall_from_ui(
+          ui
+        );
         Core.Type_any output_1 = ui;
         return output_1;
       })
@@ -5899,6 +6306,7 @@ public final class Uihtml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
@@ -5910,7 +6318,8 @@ public final class Uihtml {
 
     @Override
     public Ui.Type_ui vx_ui_layout_label_from_ui_orig_parent(final Ui.Type_ui ui, final Ui.Type_ui orig, final Ui.Type_ui parent) {
-      return Uihtml.f_ui_layout_label_from_ui_orig_parent(ui, orig, parent);
+      Ui.Type_ui output = Uihtml.f_ui_layout_label_from_ui_orig_parent(ui, orig, parent);
+      return output;
     }
 
   }
@@ -5924,9 +6333,19 @@ public final class Uihtml {
       Ui.t_ui,
       Core.t_any_from_func.vx_fn_new(() -> {
         Ui.Type_uimap uimap = ui.uimap();
-        Html.Type_node node = Uihtml.f_node_label_from_ui_orig_parent(ui, orig, parent);
-        Html.Type_node nodechg = Uihtml.f_node_layout_from_node_ui_parent(node, ui, parent);
-        Core.Type_boolean iswrite = Uihtml.f_boolean_writeeventsall_from_ui(ui);
+        Html.Type_node node = Uihtml.f_node_label_from_ui_orig_parent(
+          ui,
+          orig,
+          parent
+        );
+        Html.Type_node nodechg = Uihtml.f_node_layout_from_node_ui_parent(
+          node,
+          ui,
+          parent
+        );
+        Core.Type_boolean iswrite = Uihtml.f_boolean_writeeventsall_from_ui(
+          ui
+        );
         Core.Type_any output_1 = ui;
         return output_1;
       })

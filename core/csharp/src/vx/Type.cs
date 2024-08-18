@@ -258,7 +258,8 @@ public static class Type {
     }
 
     public Vx.Core.Type_stringlist vx_allowtypenames_from_type(Vx.Core.Type_any type) {
-      return Vx.Type.f_allowtypenames_from_type(type);
+      Vx.Core.Type_stringlist output = Vx.Type.f_allowtypenames_from_type(type);
+      return output;
     }
 
   }
@@ -269,7 +270,9 @@ public static class Type {
   public static Vx.Core.Type_stringlist f_allowtypenames_from_type(Vx.Core.Type_any type) {
     Vx.Core.Type_stringlist output = Vx.Core.e_stringlist;
     output = Vx.Core.f_typenames_from_typelist(
-      Vx.Type.f_allowtypes_from_type(type)
+      Vx.Type.f_allowtypes_from_type(
+        type
+      )
     );
     return output;
   }
@@ -355,7 +358,8 @@ public static class Type {
     }
 
     public Vx.Core.Type_typelist vx_allowtypes_from_type(Vx.Core.Type_any type) {
-      return Vx.Type.f_allowtypes_from_type(type);
+      Vx.Core.Type_typelist output = Vx.Type.f_allowtypes_from_type(type);
+      return output;
     }
 
   }
@@ -365,7 +369,9 @@ public static class Type {
 
   public static Vx.Core.Type_typelist f_allowtypes_from_type(Vx.Core.Type_any type) {
     Vx.Core.Type_typelist output = Vx.Core.e_typelist;
-    output = Vx.Core.f_typedef_from_type(type).allowtypes();
+    output = Vx.Core.f_typedef_from_type(
+      type
+    ).allowtypes();
     return output;
   }
 
@@ -451,7 +457,8 @@ public static class Type {
     }
 
     public T vx_any_from_int<T>(T generic_any_1, Vx.Core.Type_int val) where T : Vx.Core.Type_any {
-      return Vx.Type.f_any_from_int(generic_any_1, val);
+      T output = Vx.Type.f_any_from_int(generic_any_1, val);
+      return output;
     }
 
   }
@@ -535,7 +542,8 @@ public static class Type {
     }
 
     public Vx.Core.Type_boolean vx_boolean_from_string_ends(Vx.Core.Type_string text, Vx.Core.Type_string ends) {
-      return Vx.Type.f_boolean_from_string_ends(text, ends);
+      Vx.Core.Type_boolean output = Vx.Type.f_boolean_from_string_ends(text, ends);
+      return output;
     }
 
   }
@@ -620,7 +628,8 @@ public static class Type {
     }
 
     public Vx.Core.Type_boolean vx_boolean_from_string_starts(Vx.Core.Type_string text, Vx.Core.Type_string starts) {
-      return Vx.Type.f_boolean_from_string_starts(text, starts);
+      Vx.Core.Type_boolean output = Vx.Type.f_boolean_from_string_starts(text, starts);
+      return output;
     }
 
   }
@@ -705,7 +714,8 @@ public static class Type {
     }
 
     public Vx.Core.Type_int vx_int_from_string_find(Vx.Core.Type_string text, Vx.Core.Type_string find) {
-      return Vx.Type.f_int_from_string_find(text, find);
+      Vx.Core.Type_int output = Vx.Type.f_int_from_string_find(text, find);
+      return output;
     }
 
   }
@@ -790,7 +800,8 @@ public static class Type {
     }
 
     public Vx.Core.Type_int vx_int_from_string_findkeyword(Vx.Core.Type_string text, Vx.Core.Type_string find) {
-      return Vx.Type.f_int_from_string_findkeyword(text, find);
+      Vx.Core.Type_int output = Vx.Type.f_int_from_string_findkeyword(text, find);
+      return output;
     }
 
   }
@@ -875,7 +886,8 @@ public static class Type {
     }
 
     public Vx.Core.Type_int vx_int_from_string_findlast(Vx.Core.Type_string text, Vx.Core.Type_string findlast) {
-      return Vx.Type.f_int_from_string_findlast(text, findlast);
+      Vx.Core.Type_int output = Vx.Type.f_int_from_string_findlast(text, findlast);
+      return output;
     }
 
   }
@@ -969,7 +981,8 @@ public static class Type {
     }
 
     public Vx.Core.Type_boolean vx_is_boolean(Vx.Core.Type_any value) {
-      return Vx.Type.f_is_boolean(value);
+      Vx.Core.Type_boolean output = Vx.Type.f_is_boolean(value);
+      return output;
     }
 
   }
@@ -981,7 +994,9 @@ public static class Type {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
     output = Vx.Core.f_eq(
       Vx.Core.vx_new_string("boolean"),
-      Vx.Core.f_typename_from_any(value)
+      Vx.Core.f_typename_from_any(
+        value
+      )
     );
     return output;
   }
@@ -1066,7 +1081,8 @@ public static class Type {
     }
 
     public Vx.Core.Type_boolean vx_is_decimal(Vx.Core.Type_any value) {
-      return Vx.Type.f_is_decimal(value);
+      Vx.Core.Type_boolean output = Vx.Type.f_is_decimal(value);
+      return output;
     }
 
   }
@@ -1078,7 +1094,9 @@ public static class Type {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
     output = Vx.Core.f_eq(
       Vx.Core.vx_new_string("decimal"),
-      Vx.Core.f_typename_from_any(value)
+      Vx.Core.f_typename_from_any(
+        value
+      )
     );
     return output;
   }
@@ -1163,7 +1181,8 @@ public static class Type {
     }
 
     public Vx.Core.Type_boolean vx_is_none(Vx.Core.Type_any value) {
-      return Vx.Type.f_is_none(value);
+      Vx.Core.Type_boolean output = Vx.Type.f_is_none(value);
+      return output;
     }
 
   }
@@ -1260,7 +1279,8 @@ public static class Type {
     }
 
     public Vx.Core.Type_boolean vx_is_string(Vx.Core.Type_any value) {
-      return Vx.Type.f_is_string(value);
+      Vx.Core.Type_boolean output = Vx.Type.f_is_string(value);
+      return output;
     }
 
   }
@@ -1272,7 +1292,9 @@ public static class Type {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
     output = Vx.Core.f_eq(
       Vx.Core.vx_new_string("vx/core/string"),
-      Vx.Core.f_typename_from_any(value)
+      Vx.Core.f_typename_from_any(
+        value
+      )
     );
     return output;
   }
@@ -1347,7 +1369,8 @@ public static class Type {
     }
 
     public Vx.Core.Type_boolean vx_is_type(Vx.Core.Type_any val, Vx.Core.Type_any type) {
-      return Vx.Type.f_is_type(val, type);
+      Vx.Core.Type_boolean output = Vx.Type.f_is_type(val, type);
+      return output;
     }
 
   }
@@ -1361,16 +1384,28 @@ public static class Type {
       Vx.Core.vx_new(
         Vx.Core.t_booleanlist,
         Vx.Core.f_eq(
-          Vx.Core.f_typename_from_type(type),
-          Vx.Core.f_typename_from_any(val)
+          Vx.Core.f_typename_from_type(
+            type
+          ),
+          Vx.Core.f_typename_from_any(
+            val
+          )
         ),
         Vx.Core.f_contains_1(
-          Vx.Type.f_allowtypenames_from_type(type),
-          Vx.Core.f_typename_from_any(val)
+          Vx.Type.f_allowtypenames_from_type(
+            type
+          ),
+          Vx.Core.f_typename_from_any(
+            val
+          )
         ),
         Vx.Core.f_contains_1(
-          Vx.Type.f_traitnames_from_any(val),
-          Vx.Core.f_typename_from_type(type)
+          Vx.Type.f_traitnames_from_any(
+            val
+          ),
+          Vx.Core.f_typename_from_type(
+            type
+          )
         )
       )
     );
@@ -1448,7 +1483,8 @@ public static class Type {
     }
 
     public Vx.Core.Type_boolean vx_is_type_from_any_typelist(Vx.Core.Type_any val, Vx.Core.Type_typelist typelist) {
-      return Vx.Type.f_is_type_from_any_typelist(val, typelist);
+      Vx.Core.Type_boolean output = Vx.Type.f_is_type_from_any_typelist(val, typelist);
+      return output;
     }
 
   }
@@ -1465,11 +1501,13 @@ public static class Type {
       Vx.Core.t_any_from_reduce.vx_fn_new((result_any, type_any) => {
         Vx.Core.Type_boolean result = Vx.Core.f_any_from_any(Vx.Core.t_boolean, result_any);
         Vx.Core.Type_any type = Vx.Core.f_any_from_any(Vx.Core.t_any, type_any);
-        Vx.Core.Type_any output_1 = 
-          Vx.Core.f_or(
-            result,
-            Vx.Type.f_is_type(val, type)
-          );
+        Vx.Core.Type_any output_1 = Vx.Core.f_or(
+          result,
+          Vx.Type.f_is_type(
+            val,
+            type
+          )
+        );
         return output_1;
       })
     );
@@ -1557,7 +1595,8 @@ public static class Type {
     }
 
     public Vx.Core.Type_string vx_string_lowercase(Vx.Core.Type_string text) {
-      return Vx.Type.f_string_lowercase(text);
+      Vx.Core.Type_string output = Vx.Type.f_string_lowercase(text);
+      return output;
     }
 
   }
@@ -1652,7 +1691,8 @@ public static class Type {
     }
 
     public Vx.Core.Type_string vx_string_outdent(Vx.Core.Type_string text) {
-      return Vx.Type.f_string_outdent(text);
+      Vx.Core.Type_string output = Vx.Type.f_string_outdent(text);
+      return output;
     }
 
   }
@@ -1665,45 +1705,69 @@ public static class Type {
     output = Vx.Core.f_let(
       Vx.Core.t_string,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Core.Type_int pos = Vx.Type.f_int_from_string_findkeyword(text, Vx.Core.vx_new_string(":nonwhitespace"));
-        Vx.Core.Type_any output_2 = Vx.Core.f_if_2(
+        Vx.Core.Type_int pos = Vx.Type.f_int_from_string_findkeyword(
+          text,
+          Vx.Core.vx_new_string(":nonwhitespace")
+        );
+        Vx.Core.Type_any output_1 = Vx.Core.f_if_2(
           Vx.Core.t_string,
           Vx.Core.vx_new(
             Vx.Core.t_thenelselist,
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_eq(Vx.Core.vx_new_int(0), pos);
+                Vx.Core.Type_any output_2 = Vx.Core.f_eq(
+                  Vx.Core.vx_new_int(0),
+                  pos
+                );
+                return output_2;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return text;
+                Vx.Core.Type_any output_3 = text;
+                return output_3;
               })
             ),
             Vx.Core.f_else(
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_let(
+                Vx.Core.Type_any output_4 = Vx.Core.f_let(
                   Vx.Core.t_string,
                   Vx.Core.t_any_from_func.vx_fn_new(() => {
                     Vx.Core.Type_string indent = Vx.Type.f_string_from_string_end(
                       text,
-                      Vx.Core.f_minus1(pos)
+                      Vx.Core.f_minus1(
+                        pos
+                      )
                     );
-                    Vx.Core.Type_string rest = Vx.Type.f_string_from_string_start(text, pos);
-                    Vx.Core.Type_int linepos = Vx.Type.f_int_from_string_find(indent, Vx.Core.vx_new_string("\n"));
+                    Vx.Core.Type_string rest = Vx.Type.f_string_from_string_start(
+                      text,
+                      pos
+                    );
+                    Vx.Core.Type_int linepos = Vx.Type.f_int_from_string_find(
+                      indent,
+                      Vx.Core.vx_new_string("\n")
+                    );
                     Vx.Core.Type_string outdent = Vx.Core.f_if_1(
                       Vx.Core.t_string,
-                      Vx.Core.f_eq(Vx.Core.vx_new_int(0), linepos),
+                      Vx.Core.f_eq(
+                        Vx.Core.vx_new_int(0),
+                        linepos
+                      ),
                       Vx.Core.vx_new_string(""),
                       Vx.Core.vx_new_string("\n")
                     );
-                    Vx.Core.Type_any output_1 = Vx.Core.f_string_from_string_find_replace(rest, indent, outdent);
-                    return output_1;
+                    Vx.Core.Type_any output_5 = Vx.Core.f_string_from_string_find_replace(
+                      rest,
+                      indent,
+                      outdent
+                    );
+                    return output_5;
                   })
                 );
+                return output_4;
               })
             )
           )
         );
-        return output_2;
+        return output_1;
       })
     );
     return output;
@@ -1790,7 +1854,8 @@ public static class Type {
     }
 
     public Vx.Core.Type_string vx_string_trim(Vx.Core.Type_string text) {
-      return Vx.Type.f_string_trim(text);
+      Vx.Core.Type_string output = Vx.Type.f_string_trim(text);
+      return output;
     }
 
   }
@@ -1885,7 +1950,8 @@ public static class Type {
     }
 
     public Vx.Core.Type_string vx_string_uppercase(Vx.Core.Type_string text) {
-      return Vx.Type.f_string_uppercase(text);
+      Vx.Core.Type_string output = Vx.Type.f_string_uppercase(text);
+      return output;
     }
 
   }
@@ -1980,7 +2046,8 @@ public static class Type {
     }
 
     public Vx.Core.Type_string vx_string_from_int(Vx.Core.Type_int val) {
-      return Vx.Type.f_string_from_int(val);
+      Vx.Core.Type_string output = Vx.Type.f_string_from_int(val);
+      return output;
     }
 
   }
@@ -1998,30 +2065,34 @@ public static class Type {
         Vx.Core.f_case_1(
           Vx.Core.c_infinity,
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.vx_new_string("infinity");
+            Vx.Core.Type_any output_1 = Vx.Core.vx_new_string("infinity");
+            return output_1;
           })
         ),
         Vx.Core.f_case_1(
           Vx.Core.c_neginfinity,
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.vx_new_string("neginfinity");
+            Vx.Core.Type_any output_2 = Vx.Core.vx_new_string("neginfinity");
+            return output_2;
           })
         ),
         Vx.Core.f_case_1(
           Vx.Core.c_notanumber,
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.vx_new_string("notanumber");
+            Vx.Core.Type_any output_3 = Vx.Core.vx_new_string("notanumber");
+            return output_3;
           })
         ),
         Vx.Core.f_else(
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.f_new(
+            Vx.Core.Type_any output_4 = Vx.Core.f_new(
               Vx.Core.t_string,
               Vx.Core.vx_new(
                 Vx.Core.t_anylist,
                 val
               )
             );
+            return output_4;
           })
         )
       )
@@ -2100,7 +2171,8 @@ public static class Type {
     }
 
     public Vx.Core.Type_string vx_string_from_string_end(Vx.Core.Type_string text, Vx.Core.Type_int endpos) {
-      return Vx.Type.f_string_from_string_end(text, endpos);
+      Vx.Core.Type_string output = Vx.Type.f_string_from_string_end(text, endpos);
+      return output;
     }
 
   }
@@ -2110,7 +2182,11 @@ public static class Type {
 
   public static Vx.Core.Type_string f_string_from_string_end(Vx.Core.Type_string text, Vx.Core.Type_int endpos) {
     Vx.Core.Type_string output = Vx.Core.e_string;
-    output = Vx.Type.f_string_from_string_start_end(text, Vx.Core.vx_new_int(1), endpos);
+    output = Vx.Type.f_string_from_string_start_end(
+      text,
+      Vx.Core.vx_new_int(1),
+      endpos
+    );
     return output;
   }
 
@@ -2185,7 +2261,8 @@ public static class Type {
     }
 
     public Vx.Core.Type_string vx_string_from_string_start(Vx.Core.Type_string text, Vx.Core.Type_int startpos) {
-      return Vx.Type.f_string_from_string_start(text, startpos);
+      Vx.Core.Type_string output = Vx.Type.f_string_from_string_start(text, startpos);
+      return output;
     }
 
   }
@@ -2198,7 +2275,9 @@ public static class Type {
     output = Vx.Type.f_string_from_string_start_end(
       text,
       startpos,
-      Vx.Core.f_length(text)
+      Vx.Core.f_length(
+        text
+      )
     );
     return output;
   }
@@ -2276,7 +2355,8 @@ public static class Type {
     }
 
     public Vx.Core.Type_string vx_string_from_string_start_end(Vx.Core.Type_string text, Vx.Core.Type_int start, Vx.Core.Type_int end) {
-      return Vx.Type.f_string_from_string_start_end(text, start, end);
+      Vx.Core.Type_string output = Vx.Type.f_string_from_string_start_end(text, start, end);
+      return output;
     }
 
   }
@@ -2361,7 +2441,8 @@ public static class Type {
     }
 
     public Vx.Core.Type_string vx_string_from_stringlist_join(Vx.Core.Type_stringlist vals, Vx.Core.Type_string delim) {
-      return Vx.Type.f_string_from_stringlist_join(vals, delim);
+      Vx.Core.Type_string output = Vx.Type.f_string_from_stringlist_join(vals, delim);
+      return output;
     }
 
   }
@@ -2446,7 +2527,8 @@ public static class Type {
     }
 
     public Vx.Core.Type_stringlist vx_stringlist_from_string_split(Vx.Core.Type_string text, Vx.Core.Type_string delim) {
-      return Vx.Type.f_stringlist_from_string_split(text, delim);
+      Vx.Core.Type_stringlist output = Vx.Type.f_stringlist_from_string_split(text, delim);
+      return output;
     }
 
   }
@@ -2541,7 +2623,8 @@ public static class Type {
     }
 
     public Vx.Core.Type_stringlist vx_traitnames_from_any(Vx.Core.Type_any val) {
-      return Vx.Type.f_traitnames_from_any(val);
+      Vx.Core.Type_stringlist output = Vx.Type.f_traitnames_from_any(val);
+      return output;
     }
 
   }
@@ -2552,7 +2635,9 @@ public static class Type {
   public static Vx.Core.Type_stringlist f_traitnames_from_any(Vx.Core.Type_any val) {
     Vx.Core.Type_stringlist output = Vx.Core.e_stringlist;
     output = Vx.Core.f_typenames_from_typelist(
-      Vx.Type.f_traits_from_any(val)
+      Vx.Type.f_traits_from_any(
+        val
+      )
     );
     return output;
   }
@@ -2638,7 +2723,8 @@ public static class Type {
     }
 
     public Vx.Core.Type_typelist vx_traits_from_any(Vx.Core.Type_any val) {
-      return Vx.Type.f_traits_from_any(val);
+      Vx.Core.Type_typelist output = Vx.Type.f_traits_from_any(val);
+      return output;
     }
 
   }
@@ -2649,7 +2735,9 @@ public static class Type {
   public static Vx.Core.Type_typelist f_traits_from_any(Vx.Core.Type_any val) {
     Vx.Core.Type_typelist output = Vx.Core.e_typelist;
     output = Vx.Core.f_traits_from_typedef(
-      Vx.Core.f_typedef_from_any(val)
+      Vx.Core.f_typedef_from_any(
+        val
+      )
     );
     return output;
   }
@@ -2735,7 +2823,8 @@ public static class Type {
     }
 
     public Vx.Core.Type_typelist vx_traits_from_typedef(Vx.Core.Type_typedef vtypedef) {
-      return Vx.Type.f_traits_from_typedef(vtypedef);
+      Vx.Core.Type_typelist output = Vx.Type.f_traits_from_typedef(vtypedef);
+      return output;
     }
 
   }

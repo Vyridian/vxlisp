@@ -14767,12 +14767,12 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   /**
    * @function not
    * Boolean not
-   * @param  {boolean} val Thing to not
+   * @param  {boolean} value Thing to not
    * @return {boolean}
    * (func !)
    */
   public interface Func_not extends Core.Func_any_from_any {
-    public Core.Type_boolean vx_not(final Core.Type_boolean val);
+    public Core.Type_boolean vx_not(final Core.Type_boolean value);
   }
 
   public static class Class_not extends Core.Class_base implements Func_not {
@@ -14845,16 +14845,18 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_boolean val = Core.f_any_from_any(Core.t_boolean, arglist.vx_any(Core.vx_new_int(0)));
-      output = Core.f_not(val);
+      Core.Type_boolean value = Core.f_any_from_any(Core.t_boolean, arglist.vx_any(Core.vx_new_int(0)));
+      output = Core.f_not(value);
       return output;
     }
 
     @Override
-    public Core.Type_boolean vx_not(final Core.Type_boolean val) {
-      return Core.f_not(val);
+    public Core.Type_boolean vx_not(final Core.Type_boolean value) {
+      Core.Type_boolean output = Core.f_not(value);
+      return output;
     }
 
   }
@@ -14862,9 +14864,9 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static final Core.Func_not e_not = new Core.Class_not();
   public static final Core.Func_not t_not = new Core.Class_not();
 
-  public static Core.Type_boolean f_not(final Core.Type_boolean val) {
+  public static Core.Type_boolean f_not(final Core.Type_boolean value) {
     Core.Type_boolean output = Core.e_boolean;
-    output = Core.vx_new_boolean(!val.vx_boolean());
+    output = Core.vx_new_boolean(!value.vx_boolean());
     return output;
   }
 
@@ -14949,6 +14951,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
@@ -14958,7 +14961,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_boolean vx_notempty(final Core.Type_string text) {
-      return Core.f_notempty(text);
+      Core.Type_boolean output = Core.f_notempty(text);
+      return output;
     }
 
   }
@@ -14969,20 +14973,22 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static Core.Type_boolean f_notempty(final Core.Type_string text) {
     Core.Type_boolean output = Core.e_boolean;
     output = Core.f_not(
-      Core.f_is_empty(text)
+      Core.f_is_empty(
+        text
+      )
     );
     return output;
   }
 
   /**
    * @function notempty 1
-   * Returns true if val is not empty.
-   * @param  {any} val
+   * Returns true if value is not empty.
+   * @param  {any} value
    * @return {boolean}
    * (func !-empty)
    */
   public interface Func_notempty_1 extends Core.Func_any_from_any {
-    public Core.Type_boolean vx_notempty_1(final Core.Type_any val);
+    public Core.Type_boolean vx_notempty_1(final Core.Type_any value);
   }
 
   public static class Class_notempty_1 extends Core.Class_base implements Func_notempty_1 {
@@ -15055,16 +15061,18 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
-      output = Core.f_notempty_1(val);
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      output = Core.f_notempty_1(value);
       return output;
     }
 
     @Override
-    public Core.Type_boolean vx_notempty_1(final Core.Type_any val) {
-      return Core.f_notempty_1(val);
+    public Core.Type_boolean vx_notempty_1(final Core.Type_any value) {
+      Core.Type_boolean output = Core.f_notempty_1(value);
+      return output;
     }
 
   }
@@ -15072,10 +15080,12 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static final Core.Func_notempty_1 e_notempty_1 = new Core.Class_notempty_1();
   public static final Core.Func_notempty_1 t_notempty_1 = new Core.Class_notempty_1();
 
-  public static Core.Type_boolean f_notempty_1(final Core.Type_any val) {
+  public static Core.Type_boolean f_notempty_1(final Core.Type_any value) {
     Core.Type_boolean output = Core.e_boolean;
     output = Core.f_not(
-      Core.f_is_empty_1(val)
+      Core.f_is_empty_1(
+        value
+      )
     );
     return output;
   }
@@ -15148,6 +15158,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any val1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -15158,7 +15169,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_boolean vx_ne(final Core.Type_any val1, final Core.Type_any val2) {
-      return Core.f_ne(val1, val2);
+      Core.Type_boolean output = Core.f_ne(val1, val2);
+      return output;
     }
 
   }
@@ -15169,7 +15181,10 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static Core.Type_boolean f_ne(final Core.Type_any val1, final Core.Type_any val2) {
     Core.Type_boolean output = Core.e_boolean;
     output = Core.f_not(
-      Core.f_eq(val1, val2)
+      Core.f_eq(
+        val1,
+        val2
+      )
     );
     return output;
   }
@@ -15242,6 +15257,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any val1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -15252,7 +15268,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_boolean vx_neqeq(final Core.Type_any val1, final Core.Type_any val2) {
-      return Core.f_neqeq(val1, val2);
+      Core.Type_boolean output = Core.f_neqeq(val1, val2);
+      return output;
     }
 
   }
@@ -15263,7 +15280,10 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static Core.Type_boolean f_neqeq(final Core.Type_any val1, final Core.Type_any val2) {
     Core.Type_boolean output = Core.e_boolean;
     output = Core.f_not(
-      Core.f_eqeq(val1, val2)
+      Core.f_eqeq(
+        val1,
+        val2
+      )
     );
     return output;
   }
@@ -15336,6 +15356,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_int num1 = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(0)));
@@ -15346,7 +15367,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_int vx_multiply(final Core.Type_int num1, final Core.Type_int num2) {
-      return Core.f_multiply(num1, num2);
+      Core.Type_int output = Core.f_multiply(num1, num2);
+      return output;
     }
 
   }
@@ -15429,6 +15451,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_number num1 = Core.f_any_from_any(Core.t_number, arglist.vx_any(Core.vx_new_int(0)));
@@ -15439,7 +15462,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_number vx_multiply_1(final Core.Type_number num1, final Core.Type_number num2) {
-      return Core.f_multiply_1(num1, num2);
+      Core.Type_number output = Core.f_multiply_1(num1, num2);
+      return output;
     }
 
   }
@@ -15535,6 +15559,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_intlist nums = Core.f_any_from_any(Core.t_intlist, arglist.vx_any(Core.vx_new_int(0)));
@@ -15544,7 +15569,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_int vx_multiply_2(final Core.Type_intlist nums) {
-      return Core.f_multiply_2(nums);
+      Core.Type_int output = Core.f_multiply_2(nums);
+      return output;
     }
 
   }
@@ -15561,8 +15587,10 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Core.t_any_from_reduce.vx_fn_new((total_any, num_any) -> {
         Core.Type_int total = Core.f_any_from_any(Core.t_int, total_any);
         Core.Type_int num = Core.f_any_from_any(Core.t_int, num_any);
-        Core.Type_any output_1 = 
-          Core.f_multiply(total, num);
+        Core.Type_any output_1 = Core.f_multiply(
+          total,
+          num
+        );
         return output_1;
       })
     );
@@ -15650,6 +15678,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_numberlist nums = Core.f_any_from_any(Core.t_numberlist, arglist.vx_any(Core.vx_new_int(0)));
@@ -15659,7 +15688,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_number vx_multiply_3(final Core.Type_numberlist nums) {
-      return Core.f_multiply_3(nums);
+      Core.Type_number output = Core.f_multiply_3(nums);
+      return output;
     }
 
   }
@@ -15676,8 +15706,10 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Core.t_any_from_reduce.vx_fn_new((total_any, num_any) -> {
         Core.Type_number total = Core.f_any_from_any(Core.t_number, total_any);
         Core.Type_number num = Core.f_any_from_any(Core.t_number, num_any);
-        Core.Type_any output_1 = 
-          Core.f_multiply_1(total, num);
+        Core.Type_any output_1 = Core.f_multiply_1(
+          total,
+          num
+        );
         return output_1;
       })
     );
@@ -15752,6 +15784,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_int num1 = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(0)));
@@ -15762,7 +15795,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_int vx_plus(final Core.Type_int num1, final Core.Type_int num2) {
-      return Core.f_plus(num1, num2);
+      Core.Type_int output = Core.f_plus(num1, num2);
+      return output;
     }
 
   }
@@ -15845,6 +15879,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_number num1 = Core.f_any_from_any(Core.t_number, arglist.vx_any(Core.vx_new_int(0)));
@@ -15855,7 +15890,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_number vx_plus_1(final Core.Type_number num1, final Core.Type_number num2) {
-      return Core.f_plus_1(num1, num2);
+      Core.Type_number output = Core.f_plus_1(num1, num2);
+      return output;
     }
 
   }
@@ -15951,6 +15987,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_intlist nums = Core.f_any_from_any(Core.t_intlist, arglist.vx_any(Core.vx_new_int(0)));
@@ -15960,7 +15997,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_int vx_plus_2(final Core.Type_intlist nums) {
-      return Core.f_plus_2(nums);
+      Core.Type_int output = Core.f_plus_2(nums);
+      return output;
     }
 
   }
@@ -15977,8 +16015,10 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Core.t_any_from_reduce.vx_fn_new((total_any, num_any) -> {
         Core.Type_int total = Core.f_any_from_any(Core.t_int, total_any);
         Core.Type_int num = Core.f_any_from_any(Core.t_int, num_any);
-        Core.Type_any output_1 = 
-          Core.f_plus(total, num);
+        Core.Type_any output_1 = Core.f_plus(
+          total,
+          num
+        );
         return output_1;
       })
     );
@@ -16066,6 +16106,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_numberlist nums = Core.f_any_from_any(Core.t_numberlist, arglist.vx_any(Core.vx_new_int(0)));
@@ -16075,7 +16116,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_number vx_plus_3(final Core.Type_numberlist nums) {
-      return Core.f_plus_3(nums);
+      Core.Type_number output = Core.f_plus_3(nums);
+      return output;
     }
 
   }
@@ -16092,8 +16134,10 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Core.t_any_from_reduce.vx_fn_new((total_any, num_any) -> {
         Core.Type_number total = Core.f_any_from_any(Core.t_number, total_any);
         Core.Type_number num = Core.f_any_from_any(Core.t_number, num_any);
-        Core.Type_any output_1 = 
-          Core.f_plus_1(total, num);
+        Core.Type_any output_1 = Core.f_plus_1(
+          total,
+          num
+        );
         return output_1;
       })
     );
@@ -16181,6 +16225,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_int num = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(0)));
@@ -16190,7 +16235,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_int vx_plus1(final Core.Type_int num) {
-      return Core.f_plus1(num);
+      Core.Type_int output = Core.f_plus1(num);
+      return output;
     }
 
   }
@@ -16200,7 +16246,10 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   public static Core.Type_int f_plus1(final Core.Type_int num) {
     Core.Type_int output = Core.e_int;
-    output = Core.f_plus(num, Core.vx_new_int(1));
+    output = Core.f_plus(
+      num,
+      Core.vx_new_int(1)
+    );
     return output;
   }
 
@@ -16272,6 +16321,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_int num1 = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(0)));
@@ -16282,7 +16332,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_int vx_minus(final Core.Type_int num1, final Core.Type_int num2) {
-      return Core.f_minus(num1, num2);
+      Core.Type_int output = Core.f_minus(num1, num2);
+      return output;
     }
 
   }
@@ -16365,6 +16416,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_number num1 = Core.f_any_from_any(Core.t_number, arglist.vx_any(Core.vx_new_int(0)));
@@ -16375,7 +16427,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_number vx_minus_1(final Core.Type_number num1, final Core.Type_number num2) {
-      return Core.f_minus_1(num1, num2);
+      Core.Type_number output = Core.f_minus_1(num1, num2);
+      return output;
     }
 
   }
@@ -16471,6 +16524,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_intlist nums = Core.f_any_from_any(Core.t_intlist, arglist.vx_any(Core.vx_new_int(0)));
@@ -16480,7 +16534,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_int vx_minus_2(final Core.Type_intlist nums) {
-      return Core.f_minus_2(nums);
+      Core.Type_int output = Core.f_minus_2(nums);
+      return output;
     }
 
   }
@@ -16497,8 +16552,10 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Core.t_any_from_reduce.vx_fn_new((total_any, num_any) -> {
         Core.Type_int total = Core.f_any_from_any(Core.t_int, total_any);
         Core.Type_int num = Core.f_any_from_any(Core.t_int, num_any);
-        Core.Type_any output_1 = 
-          Core.f_minus(total, num);
+        Core.Type_any output_1 = Core.f_minus(
+          total,
+          num
+        );
         return output_1;
       })
     );
@@ -16586,6 +16643,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_numberlist nums = Core.f_any_from_any(Core.t_numberlist, arglist.vx_any(Core.vx_new_int(0)));
@@ -16595,7 +16653,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_number vx_minus_3(final Core.Type_numberlist nums) {
-      return Core.f_minus_3(nums);
+      Core.Type_number output = Core.f_minus_3(nums);
+      return output;
     }
 
   }
@@ -16612,8 +16671,10 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Core.t_any_from_reduce.vx_fn_new((total_any, num_any) -> {
         Core.Type_number total = Core.f_any_from_any(Core.t_number, total_any);
         Core.Type_number num = Core.f_any_from_any(Core.t_number, num_any);
-        Core.Type_any output_1 = 
-          Core.f_minus_1(total, num);
+        Core.Type_any output_1 = Core.f_minus_1(
+          total,
+          num
+        );
         return output_1;
       })
     );
@@ -16701,6 +16762,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_int num = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(0)));
@@ -16710,7 +16772,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_int vx_minus1(final Core.Type_int num) {
-      return Core.f_minus1(num);
+      Core.Type_int output = Core.f_minus1(num);
+      return output;
     }
 
   }
@@ -16720,7 +16783,10 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   public static Core.Type_int f_minus1(final Core.Type_int num) {
     Core.Type_int output = Core.e_int;
-    output = Core.f_minus(num, Core.vx_new_int(1));
+    output = Core.f_minus(
+      num,
+      Core.vx_new_int(1)
+    );
     return output;
   }
 
@@ -16793,6 +16859,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any target = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -16804,7 +16871,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_dotmethod(final Core.Type_any target, final Core.Type_string method, final Core.Type_anylist parameters) {
-      return Core.f_dotmethod(target, method, parameters);
+      Core.Type_any output = Core.f_dotmethod(target, method, parameters);
+      return output;
     }
 
   }
@@ -16885,6 +16953,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_number num1 = Core.f_any_from_any(Core.t_number, arglist.vx_any(Core.vx_new_int(0)));
@@ -16895,7 +16964,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_number vx_divide(final Core.Type_number num1, final Core.Type_number num2) {
-      return Core.f_divide(num1, num2);
+      Core.Type_number output = Core.f_divide(num1, num2);
+      return output;
     }
 
   }
@@ -16985,6 +17055,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any val1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -16995,7 +17066,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_boolean vx_lt(final Core.Type_any val1, final Core.Type_any val2) {
-      return Core.f_lt(val1, val2);
+      Core.Type_boolean output = Core.f_lt(val1, val2);
+      return output;
     }
 
   }
@@ -17007,18 +17079,23 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     Core.Type_boolean output = Core.e_boolean;
     output = Core.f_switch(
       Core.t_boolean,
-      Core.f_compare(val1, val2),
+      Core.f_compare(
+        val1,
+        val2
+      ),
       Core.vx_new(
         Core.t_thenelselist,
         Core.f_case_1(
           Core.vx_new_int(-1),
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Core.vx_new_boolean(true);
+            Core.Type_any output_1 = Core.vx_new_boolean(true);
+            return output_1;
           })
         ),
         Core.f_else(
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Core.vx_new_boolean(false);
+            Core.Type_any output_2 = Core.vx_new_boolean(false);
+            return output_2;
           })
         )
       )
@@ -17107,6 +17184,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_anylist values = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(0)));
@@ -17116,7 +17194,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_boolean vx_lt_1(final Core.Type_anylist values) {
-      return Core.f_lt_1(values);
+      Core.Type_boolean output = Core.f_lt_1(values);
+      return output;
     }
 
   }
@@ -17134,11 +17213,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.Type_boolean reduce = Core.f_any_from_any(Core.t_boolean, reduce_any);
         Core.Type_any current = Core.f_any_from_any(Core.t_any, current_any);
         Core.Type_any next = Core.f_any_from_any(Core.t_any, next_any);
-        Core.Type_any output_1 = 
-          Core.f_and(
-            reduce,
-            Core.f_lt(current, next)
-          );
+        Core.Type_any output_1 = Core.f_and(
+          reduce,
+          Core.f_lt(
+            current,
+            next
+          )
+        );
         return output_1;
       })
     );
@@ -17215,6 +17296,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -17226,7 +17308,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <T extends Core.Type_any> T vx_chainfirst(final T generic_any_1, final T value, final Core.Type_any_from_anylist fnlist) {
-      return Core.f_chainfirst(generic_any_1, value, fnlist);
+      T output = Core.f_chainfirst(generic_any_1, value, fnlist);
+      return output;
     }
 
   }
@@ -17309,6 +17392,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -17320,7 +17404,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <T extends Core.Type_any> T vx_chainlast(final T generic_any_1, final T value, final Core.Type_any_from_anylist fnlist) {
-      return Core.f_chainlast(generic_any_1, value, fnlist);
+      T output = Core.f_chainlast(generic_any_1, value, fnlist);
+      return output;
     }
 
   }
@@ -17401,6 +17486,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any val1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -17411,7 +17497,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_boolean vx_le(final Core.Type_any val1, final Core.Type_any val2) {
-      return Core.f_le(val1, val2);
+      Core.Type_boolean output = Core.f_le(val1, val2);
+      return output;
     }
 
   }
@@ -17422,7 +17509,10 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static Core.Type_boolean f_le(final Core.Type_any val1, final Core.Type_any val2) {
     Core.Type_boolean output = Core.e_boolean;
     output = Core.f_not(
-      Core.f_gt(val1, val2)
+      Core.f_gt(
+        val1,
+        val2
+      )
     );
     return output;
   }
@@ -17508,6 +17598,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_anylist args = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(0)));
@@ -17517,7 +17608,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_boolean vx_le_1(final Core.Type_anylist args) {
-      return Core.f_le_1(args);
+      Core.Type_boolean output = Core.f_le_1(args);
+      return output;
     }
 
   }
@@ -17528,7 +17620,9 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static Core.Type_boolean f_le_1(final Core.Type_anylist args) {
     Core.Type_boolean output = Core.e_boolean;
     output = Core.f_not(
-      Core.f_gt_1(args)
+      Core.f_gt_1(
+        args
+      )
     );
     return output;
   }
@@ -17601,6 +17695,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any val1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -17611,7 +17706,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_boolean vx_eq(final Core.Type_any val1, final Core.Type_any val2) {
-      return Core.f_eq(val1, val2);
+      Core.Type_boolean output = Core.f_eq(val1, val2);
+      return output;
     }
 
   }
@@ -17716,6 +17812,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_anylist values = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(0)));
@@ -17725,7 +17822,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_boolean vx_eq_1(final Core.Type_anylist values) {
-      return Core.f_eq_1(values);
+      Core.Type_boolean output = Core.f_eq_1(values);
+      return output;
     }
 
   }
@@ -17743,11 +17841,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.Type_boolean reduce = Core.f_any_from_any(Core.t_boolean, reduce_any);
         Core.Type_any current = Core.f_any_from_any(Core.t_any, current_any);
         Core.Type_any next = Core.f_any_from_any(Core.t_any, next_any);
-        Core.Type_any output_1 = 
-          Core.f_and(
-            reduce,
-            Core.f_eq(current, next)
-          );
+        Core.Type_any output_1 = Core.f_and(
+          reduce,
+          Core.f_eq(
+            current,
+            next
+          )
+        );
         return output_1;
       })
     );
@@ -17822,6 +17922,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any val1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -17832,7 +17933,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_boolean vx_eqeq(final Core.Type_any val1, final Core.Type_any val2) {
-      return Core.f_eqeq(val1, val2);
+      Core.Type_boolean output = Core.f_eqeq(val1, val2);
+      return output;
     }
 
   }
@@ -17915,6 +18017,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any val1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -17925,7 +18028,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_boolean vx_gt(final Core.Type_any val1, final Core.Type_any val2) {
-      return Core.f_gt(val1, val2);
+      Core.Type_boolean output = Core.f_gt(val1, val2);
+      return output;
     }
 
   }
@@ -17937,18 +18041,23 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     Core.Type_boolean output = Core.e_boolean;
     output = Core.f_switch(
       Core.t_boolean,
-      Core.f_compare(val1, val2),
+      Core.f_compare(
+        val1,
+        val2
+      ),
       Core.vx_new(
         Core.t_thenelselist,
         Core.f_case_1(
           Core.vx_new_int(1),
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Core.vx_new_boolean(true);
+            Core.Type_any output_1 = Core.vx_new_boolean(true);
+            return output_1;
           })
         ),
         Core.f_else(
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Core.vx_new_boolean(false);
+            Core.Type_any output_2 = Core.vx_new_boolean(false);
+            return output_2;
           })
         )
       )
@@ -18037,6 +18146,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_anylist values = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(0)));
@@ -18046,7 +18156,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_boolean vx_gt_1(final Core.Type_anylist values) {
-      return Core.f_gt_1(values);
+      Core.Type_boolean output = Core.f_gt_1(values);
+      return output;
     }
 
   }
@@ -18064,11 +18175,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.Type_boolean reduce = Core.f_any_from_any(Core.t_boolean, reduce_any);
         Core.Type_any current = Core.f_any_from_any(Core.t_any, current_any);
         Core.Type_any next = Core.f_any_from_any(Core.t_any, next_any);
-        Core.Type_any output_1 = 
-          Core.f_and(
-            reduce,
-            Core.f_gt(current, next)
-          );
+        Core.Type_any output_1 = Core.f_and(
+          reduce,
+          Core.f_gt(
+            current,
+            next
+          )
+        );
         return output_1;
       })
     );
@@ -18143,6 +18256,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any val1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -18153,7 +18267,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_boolean vx_ge(final Core.Type_any val1, final Core.Type_any val2) {
-      return Core.f_ge(val1, val2);
+      Core.Type_boolean output = Core.f_ge(val1, val2);
+      return output;
     }
 
   }
@@ -18164,7 +18279,10 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static Core.Type_boolean f_ge(final Core.Type_any val1, final Core.Type_any val2) {
     Core.Type_boolean output = Core.e_boolean;
     output = Core.f_not(
-      Core.f_lt(val1, val2)
+      Core.f_lt(
+        val1,
+        val2
+      )
     );
     return output;
   }
@@ -18250,6 +18368,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_anylist args = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(0)));
@@ -18259,7 +18378,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_boolean vx_ge_1(final Core.Type_anylist args) {
-      return Core.f_ge_1(args);
+      Core.Type_boolean output = Core.f_ge_1(args);
+      return output;
     }
 
   }
@@ -18270,7 +18390,9 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static Core.Type_boolean f_ge_1(final Core.Type_anylist args) {
     Core.Type_boolean output = Core.e_boolean;
     output = Core.f_not(
-      Core.f_lt_1(args)
+      Core.f_lt_1(
+        args
+      )
     );
     return output;
   }
@@ -18356,6 +18478,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_security security = Core.f_any_from_any(Core.t_security, arglist.vx_any(Core.vx_new_int(0)));
@@ -18365,7 +18488,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_funclist vx_allowfuncs_from_security(final Core.Type_security security) {
-      return Core.f_allowfuncs_from_security(security);
+      Core.Type_funclist output = Core.f_allowfuncs_from_security(security);
+      return output;
     }
 
   }
@@ -18460,6 +18584,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.vx_new_int(0)));
@@ -18469,7 +18594,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_stringlist vx_allowtypenames_from_typedef(final Core.Type_typedef vtypedef) {
-      return Core.f_allowtypenames_from_typedef(vtypedef);
+      Core.Type_stringlist output = Core.f_allowtypenames_from_typedef(vtypedef);
+      return output;
     }
 
   }
@@ -18480,7 +18606,9 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static Core.Type_stringlist f_allowtypenames_from_typedef(final Core.Type_typedef vtypedef) {
     Core.Type_stringlist output = Core.e_stringlist;
     output = Core.f_typenames_from_typelist(
-      Core.f_allowtypes_from_typedef(vtypedef)
+      Core.f_allowtypes_from_typedef(
+        vtypedef
+      )
     );
     return output;
   }
@@ -18566,6 +18694,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.vx_new_int(0)));
@@ -18575,7 +18704,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_typelist vx_allowtypes_from_typedef(final Core.Type_typedef vtypedef) {
-      return Core.f_allowtypes_from_typedef(vtypedef);
+      Core.Type_typelist output = Core.f_allowtypes_from_typedef(vtypedef);
+      return output;
     }
 
   }
@@ -18657,6 +18787,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_boolean val1 = Core.f_any_from_any(Core.t_boolean, arglist.vx_any(Core.vx_new_int(0)));
@@ -18667,7 +18798,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_boolean vx_and(final Core.Type_boolean val1, final Core.Type_boolean val2) {
-      return Core.f_and(val1, val2);
+      Core.Type_boolean output = Core.f_and(val1, val2);
+      return output;
     }
 
   }
@@ -18766,6 +18898,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_booleanlist values = Core.f_any_from_any(Core.t_booleanlist, arglist.vx_any(Core.vx_new_int(0)));
@@ -18775,7 +18908,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_boolean vx_and_1(final Core.Type_booleanlist values) {
-      return Core.f_and_1(values);
+      Core.Type_boolean output = Core.f_and_1(values);
+      return output;
     }
 
   }
@@ -18787,24 +18921,32 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     Core.Type_boolean output = Core.e_boolean;
     output = Core.f_switch(
       Core.t_boolean,
-      Core.f_length_1(values),
+      Core.f_length_1(
+        values
+      ),
       Core.vx_new(
         Core.t_thenelselist,
         Core.f_case_1(
           Core.vx_new_int(0),
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Core.vx_new_boolean(true);
+            Core.Type_any output_1 = Core.vx_new_boolean(true);
+            return output_1;
           })
         ),
         Core.f_case_1(
           Core.vx_new_int(1),
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Core.f_any_from_list(Core.t_boolean, values, Core.vx_new_int(1));
+            Core.Type_any output_2 = Core.f_any_from_list(
+              Core.t_boolean,
+              values,
+              Core.vx_new_int(1)
+            );
+            return output_2;
           })
         ),
         Core.f_else(
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Core.f_any_from_list_start_reduce_next(
+            Core.Type_any output_3 = Core.f_any_from_list_start_reduce_next(
               Core.t_boolean,
               values,
               Core.vx_new_boolean(true),
@@ -18812,14 +18954,17 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
                 Core.Type_boolean reduce = Core.f_any_from_any(Core.t_boolean, reduce_any);
                 Core.Type_boolean current = Core.f_any_from_any(Core.t_boolean, current_any);
                 Core.Type_boolean next = Core.f_any_from_any(Core.t_boolean, next_any);
-                Core.Type_any output_1 = 
-                    Core.f_and(
-                      reduce,
-                      Core.f_and(current, next)
-                    );
-                return output_1;
+                Core.Type_any output_4 = Core.f_and(
+                  reduce,
+                  Core.f_and(
+                    current,
+                    next
+                  )
+                );
+                return output_4;
               })
             );
+            return output_3;
           })
         )
       )
@@ -18909,6 +19054,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -19023,6 +19169,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -19136,6 +19283,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -19251,6 +19399,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -19367,6 +19516,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -19478,6 +19628,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -19588,6 +19739,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -19700,6 +19852,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -19732,12 +19885,12 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * @function any_from_int_any
    * Generic Function returning Generic any-1 from an int and a value
    * @param  {int} num
-   * @param  {any-2} val
+   * @param  {any-2} value
    * @return {any-1}
    * (func any<-int-any)
    */
   public interface Func_any_from_int_any extends Core.Type_func, Core.Type_replfunc {
-    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_int_any(final T generic_any_1, final Core.Type_int num, final U val);
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_int_any(final T generic_any_1, final Core.Type_int num, final U value);
     public Core.Func_any_from_int_any vx_fn_new(Core.Class_any_from_int_any.IFn fn);
   }
 
@@ -19799,7 +19952,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @FunctionalInterface
     public interface IFn {
-      public Core.Type_any resolve(Core.Type_int num, Core.Type_any val);
+      public Core.Type_any resolve(Core.Type_int num, Core.Type_any value);
     }
 
     public Core.Class_any_from_int_any.IFn fn = null;
@@ -19811,20 +19964,21 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_int num = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(0)));
-      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
-      output = Core.f_any_from_int_any(generic_any_1, num, val);
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
+      output = Core.f_any_from_int_any(generic_any_1, num, value);
       return output;
     }
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_int_any(final T generic_any_1, final Core.Type_int num, final U val) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_int_any(final T generic_any_1, final Core.Type_int num, final U value) {
       T output = Core.f_empty(generic_any_1);
       if (fn != null) {
-        Core.Type_any anyoutput = fn.resolve(num, val);
+        Core.Type_any anyoutput = fn.resolve(num, value);
         output = Core.f_any_from_any(generic_any_1, anyoutput);
       }
       return output;
@@ -19835,7 +19989,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static final Core.Func_any_from_int_any e_any_from_int_any = new Core.Class_any_from_int_any();
   public static final Core.Func_any_from_int_any t_any_from_int_any = new Core.Class_any_from_int_any();
 
-  public static <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_int_any(final T generic_any_1, final Core.Type_int num, final U val) {
+  public static <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_int_any(final T generic_any_1, final Core.Type_int num, final U value) {
     T output = Core.f_empty(generic_any_1);
     return output;
   }
@@ -19844,12 +19998,12 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * @function any_from_key_value
    * Generic Function returning Generic any-1 from a key and a value
    * @param  {string} key
-   * @param  {any-2} val
+   * @param  {any-2} value
    * @return {any-1}
    * (func any<-key-value)
    */
   public interface Func_any_from_key_value extends Core.Type_func, Core.Type_replfunc {
-    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_key_value(final T generic_any_1, final Core.Type_string key, final U val);
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_key_value(final T generic_any_1, final Core.Type_string key, final U value);
     public Core.Func_any_from_key_value vx_fn_new(Core.Class_any_from_key_value.IFn fn);
   }
 
@@ -19911,7 +20065,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @FunctionalInterface
     public interface IFn {
-      public Core.Type_any resolve(Core.Type_string key, Core.Type_any val);
+      public Core.Type_any resolve(Core.Type_string key, Core.Type_any value);
     }
 
     public Core.Class_any_from_key_value.IFn fn = null;
@@ -19923,20 +20077,21 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_string key = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
-      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
-      output = Core.f_any_from_key_value(generic_any_1, key, val);
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
+      output = Core.f_any_from_key_value(generic_any_1, key, value);
       return output;
     }
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_key_value(final T generic_any_1, final Core.Type_string key, final U val) {
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_key_value(final T generic_any_1, final Core.Type_string key, final U value) {
       T output = Core.f_empty(generic_any_1);
       if (fn != null) {
-        Core.Type_any anyoutput = fn.resolve(key, val);
+        Core.Type_any anyoutput = fn.resolve(key, value);
         output = Core.f_any_from_any(generic_any_1, anyoutput);
       }
       return output;
@@ -19947,7 +20102,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static final Core.Func_any_from_key_value e_any_from_key_value = new Core.Class_any_from_key_value();
   public static final Core.Func_any_from_key_value t_any_from_key_value = new Core.Class_any_from_key_value();
 
-  public static <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_key_value(final T generic_any_1, final Core.Type_string key, final U val) {
+  public static <T extends Core.Type_any, U extends Core.Type_any> T f_any_from_key_value(final T generic_any_1, final Core.Type_string key, final U value) {
     T output = Core.f_empty(generic_any_1);
     return output;
   }
@@ -19958,12 +20113,12 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
    * @function any_from_key_value_async
    * Generic Function returning Asynchronous Generic any-1 from a key and a value
    * @param  {string} key
-   * @param  {any-2} val
+   * @param  {any-2} value
    * @return {any-1}
    * (func any<-key-value-async)
    */
   public interface Func_any_from_key_value_async extends Core.Type_func, Core.Type_replfunc_async {
-    public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_key_value_async(final T generic_any_1, final Core.Type_string key, final U val);
+    public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_key_value_async(final T generic_any_1, final Core.Type_string key, final U value);
     public Core.Func_any_from_key_value_async vx_fn_new(Core.Class_any_from_key_value_async.IFn fn);
   }
 
@@ -20025,7 +20180,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @FunctionalInterface
     public interface IFn {
-      public CompletableFuture<Core.Type_any> resolve(Core.Type_string key, Core.Type_any val);
+      public CompletableFuture<Core.Type_any> resolve(Core.Type_string key, Core.Type_any value);
     }
 
     public Core.Class_any_from_key_value_async.IFn fn = null;
@@ -20037,23 +20192,24 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_string key = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
-      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
-      CompletableFuture<Core.Type_any> future = Core.f_any_from_key_value_async(generic_any_1, key, val);
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
+      CompletableFuture<Core.Type_any> future = Core.f_any_from_key_value_async(generic_any_1, key, value);
       output = Core.vx_async_from_async(Core.t_any, future);
       return output;
     }
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_key_value_async(final T generic_any_1, final Core.Type_string key, final U val) {
+    public <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> vx_any_from_key_value_async(final T generic_any_1, final Core.Type_string key, final U value) {
       CompletableFuture<T> output;
       if (fn == null) {
         output = Core.vx_async_new_from_value(Core.f_empty(generic_any_1));
       } else {
-        CompletableFuture<Core.Type_any> future = fn.resolve(key, val);
+        CompletableFuture<Core.Type_any> future = fn.resolve(key, value);
         output = Core.vx_async_from_async(generic_any_1, future);
       }
       return output;
@@ -20064,7 +20220,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static final Core.Func_any_from_key_value_async e_any_from_key_value_async = new Core.Class_any_from_key_value_async();
   public static final Core.Func_any_from_key_value_async t_any_from_key_value_async = new Core.Class_any_from_key_value_async();
 
-  public static <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_key_value_async(final T generic_any_1, final Core.Type_string key, final U val) {
+  public static <T extends Core.Type_any, U extends Core.Type_any> CompletableFuture<T> f_any_from_key_value_async(final T generic_any_1, final Core.Type_string key, final U value) {
     CompletableFuture<T> output = Core.vx_async_new_from_value(Core.f_empty(generic_any_1));
     return output;
   }
@@ -20137,6 +20293,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -20148,7 +20305,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <T extends Core.Type_any, X extends Core.Type_list> T vx_any_from_list(final T generic_any_1, final X values, final Core.Type_int index) {
-      return Core.f_any_from_list(generic_any_1, values, index);
+      T output = Core.f_any_from_list(generic_any_1, values, index);
+      return output;
     }
 
   }
@@ -20237,6 +20395,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -20249,7 +20408,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <T extends Core.Type_any, Y extends Core.Type_list> T vx_any_from_list_start_reduce(final T generic_any_1, final Y list, final T valstart, final Core.Func_any_from_reduce fn_reduce) {
-      return Core.f_any_from_list_start_reduce(generic_any_1, list, valstart, fn_reduce);
+      T output = Core.f_any_from_list_start_reduce(generic_any_1, list, valstart, fn_reduce);
+      return output;
     }
 
   }
@@ -20332,6 +20492,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -20344,7 +20505,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <T extends Core.Type_any, Y extends Core.Type_list> T vx_any_from_list_start_reduce_next(final T generic_any_1, final Y list, final T valstart, final Core.Func_any_from_reduce_next fn_reduce_next) {
-      return Core.f_any_from_list_start_reduce_next(generic_any_1, list, valstart, fn_reduce_next);
+      T output = Core.f_any_from_list_start_reduce_next(generic_any_1, list, valstart, fn_reduce_next);
+      return output;
     }
 
   }
@@ -20437,6 +20599,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -20448,7 +20611,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <N extends Core.Type_map, T extends Core.Type_any> T vx_any_from_map(final T generic_any_1, final N valuemap, final Core.Type_string key) {
-      return Core.f_any_from_map(generic_any_1, valuemap, key);
+      T output = Core.f_any_from_map(generic_any_1, valuemap, key);
+      return output;
     }
 
   }
@@ -20531,6 +20695,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -20543,7 +20708,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <N extends Core.Type_map, T extends Core.Type_any> T vx_any_from_map_start_reduce(final T generic_any_1, final N map, final T start, final Core.Func_any_from_any_key_value fn_reduce) {
-      return Core.f_any_from_map_start_reduce(generic_any_1, map, start, fn_reduce);
+      T output = Core.f_any_from_map_start_reduce(generic_any_1, map, start, fn_reduce);
+      return output;
     }
 
   }
@@ -20638,6 +20804,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -20748,6 +20915,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -20860,6 +21028,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -20973,6 +21142,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -21088,6 +21258,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -21203,6 +21374,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -21304,6 +21476,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -21315,7 +21488,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <R extends Core.Type_struct, T extends Core.Type_any> T vx_any_from_struct(final T generic_any_1, final R vstruct, final Core.Type_string key) {
-      return Core.f_any_from_struct(generic_any_1, vstruct, key);
+      T output = Core.f_any_from_struct(generic_any_1, vstruct, key);
+      return output;
     }
 
   }
@@ -21411,6 +21585,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -21422,7 +21597,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <T extends Core.Type_any> CompletableFuture<T> vx_async(final T generic_any_1, final T value) {
-      return Core.f_async(generic_any_1, value);
+      CompletableFuture<T> output = Core.f_async(generic_any_1, value);
+      return output;
     }
 
   }
@@ -21517,6 +21693,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
@@ -21527,7 +21704,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_boolean vx_boolean_permission_from_func(final Core.Type_context context, final Core.Type_func func) {
-      return Core.f_boolean_permission_from_func(context, func);
+      Core.Type_boolean output = Core.f_boolean_permission_from_func(context, func);
+      return output;
     }
 
   }
@@ -21539,7 +21717,9 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     Core.Type_boolean output = Core.e_boolean;
     output = Core.f_contains_1(
       Core.f_allowfuncs_from_security(
-        Core.f_security_from_context(context)
+        Core.f_security_from_context(
+          context
+        )
       ),
       func
     );
@@ -21615,6 +21795,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_map valuemap = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
@@ -21626,7 +21807,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_boolean vx_boolean_write_from_map_name_value(final Core.Type_map valuemap, final Core.Type_string name, final Core.Type_any value) {
-      return Core.f_boolean_write_from_map_name_value(valuemap, name, value);
+      Core.Type_boolean output = Core.f_boolean_write_from_map_name_value(valuemap, name, value);
+      return output;
     }
 
   }
@@ -21722,6 +21904,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -21830,6 +22013,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       output = Core.f_boolean_from_func();
@@ -21937,6 +22121,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       output = Core.f_boolean_from_none();
@@ -22030,6 +22215,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
@@ -22040,7 +22226,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_thenelse vx_case(final Core.Type_list values, final Core.Func_any_from_func fn_any) {
-      return Core.f_case(values, fn_any);
+      Core.Type_thenelse output = Core.f_case(values, fn_any);
+      return output;
     }
 
   }
@@ -22132,6 +22319,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -22142,7 +22330,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_thenelse vx_case_1(final Core.Type_any value, final Core.Func_any_from_func fn_any) {
-      return Core.f_case_1(value, fn_any);
+      Core.Type_thenelse output = Core.f_case_1(value, fn_any);
+      return output;
     }
 
   }
@@ -22235,6 +22424,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any val1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -22245,7 +22435,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_int vx_compare(final Core.Type_any val1, final Core.Type_any val2) {
-      return Core.f_compare(val1, val2);
+      Core.Type_int output = Core.f_compare(val1, val2);
+      return output;
     }
 
   }
@@ -22348,6 +22539,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
@@ -22358,7 +22550,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_boolean vx_contains(final Core.Type_string text, final Core.Type_string find) {
-      return Core.f_contains(text, find);
+      Core.Type_boolean output = Core.f_contains(text, find);
+      return output;
     }
 
   }
@@ -22443,6 +22636,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
@@ -22453,7 +22647,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_boolean vx_contains_1(final Core.Type_list values, final Core.Type_any find) {
-      return Core.f_contains_1(values, find);
+      Core.Type_boolean output = Core.f_contains_1(values, find);
+      return output;
     }
 
   }
@@ -22557,6 +22752,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_anylist args = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(0)));
@@ -22566,7 +22762,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_context vx_context_main(final Core.Type_anylist args) {
-      return Core.f_context_main(args);
+      Core.Type_context output = Core.f_context_main(args);
+      return output;
     }
 
   }
@@ -22650,6 +22847,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -22660,7 +22858,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <T extends Core.Type_any> T vx_copy(final T value, final Core.Type_anylist values) {
-      return Core.f_copy(value, values);
+      T output = Core.f_copy(value, values);
+      return output;
     }
 
   }
@@ -22757,6 +22956,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Func_any_from_func fn_any = Core.f_any_from_any(Core.t_any_from_func, arglist.vx_any(Core.vx_new_int(0)));
@@ -22766,7 +22966,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_thenelse vx_else(final Core.Func_any_from_func fn_any) {
-      return Core.f_else(fn_any);
+      Core.Type_thenelse output = Core.f_else(fn_any);
+      return output;
     }
 
   }
@@ -22870,6 +23071,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any type = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -22879,7 +23081,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <T extends Core.Type_any> T vx_empty(final T type) {
-      return Core.f_empty(type);
+      T output = Core.f_empty(type);
+      return output;
     }
 
   }
@@ -22894,12 +23097,12 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   /**
    * @function extends_from_any
-   * @param  {any-1} val
+   * @param  {any-1} value
    * @return {string}
    * (func extends<-any)
    */
   public interface Func_extends_from_any extends Core.Func_any_from_any {
-    public Core.Type_string vx_extends_from_any(final Core.Type_any val);
+    public Core.Type_string vx_extends_from_any(final Core.Type_any value);
   }
 
   public static class Class_extends_from_any extends Core.Class_base implements Func_extends_from_any {
@@ -22972,16 +23175,18 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
-      output = Core.f_extends_from_any(val);
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      output = Core.f_extends_from_any(value);
       return output;
     }
 
     @Override
-    public Core.Type_string vx_extends_from_any(final Core.Type_any val) {
-      return Core.f_extends_from_any(val);
+    public Core.Type_string vx_extends_from_any(final Core.Type_any value) {
+      Core.Type_string output = Core.f_extends_from_any(value);
+      return output;
     }
 
   }
@@ -22989,10 +23194,12 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static final Core.Func_extends_from_any e_extends_from_any = new Core.Class_extends_from_any();
   public static final Core.Func_extends_from_any t_extends_from_any = new Core.Class_extends_from_any();
 
-  public static Core.Type_string f_extends_from_any(final Core.Type_any val) {
+  public static Core.Type_string f_extends_from_any(final Core.Type_any value) {
     Core.Type_string output = Core.e_string;
     output = Core.f_extends_from_typedef(
-      Core.f_typedef_from_any(val)
+      Core.f_typedef_from_any(
+        value
+      )
     );
     return output;
   }
@@ -23078,6 +23285,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.vx_new_int(0)));
@@ -23087,7 +23295,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_string vx_extends_from_typedef(final Core.Type_typedef vtypedef) {
-      return Core.f_extends_from_typedef(vtypedef);
+      Core.Type_string output = Core.f_extends_from_typedef(vtypedef);
+      return output;
     }
 
   }
@@ -23182,6 +23391,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -23192,7 +23402,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <T extends Core.Type_any, X extends Core.Type_list> T vx_first_from_list(final T generic_any_1, final X values) {
-      return Core.f_first_from_list(generic_any_1, values);
+      T output = Core.f_first_from_list(generic_any_1, values);
+      return output;
     }
 
   }
@@ -23202,7 +23413,11 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   public static <T extends Core.Type_any, X extends Core.Type_list> T f_first_from_list(final T generic_any_1, final X values) {
     T output = Core.f_empty(generic_any_1);
-    output = Core.f_any_from_list(generic_any_1, values, Core.vx_new_int(1));
+    output = Core.f_any_from_list(
+      generic_any_1,
+      values,
+      Core.vx_new_int(1)
+    );
     return output;
   }
 
@@ -23274,6 +23489,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -23285,7 +23501,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <T extends Core.Type_any, X extends Core.Type_list> T vx_first_from_list_any_from_any(final T generic_any_1, final X values, final Core.Func_any_from_any fn_any_from_any) {
-      return Core.f_first_from_list_any_from_any(generic_any_1, values, fn_any_from_any);
+      T output = Core.f_first_from_list_any_from_any(generic_any_1, values, fn_any_from_any);
+      return output;
     }
 
   }
@@ -23386,6 +23603,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
@@ -23395,7 +23613,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_float vx_float_from_string(final Core.Type_string text) {
-      return Core.f_float_from_string(text);
+      Core.Type_float output = Core.f_float_from_string(text);
+      return output;
     }
 
   }
@@ -23478,6 +23697,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -23489,7 +23709,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <T extends Core.Type_any> T vx_fn(final T generic_any_1, final Core.Type_arglist parameters, final Core.Func_any_from_func fn_any) {
-      return Core.f_fn(generic_any_1, parameters, fn_any);
+      T output = Core.f_fn(generic_any_1, parameters, fn_any);
+      return output;
     }
 
   }
@@ -23505,12 +23726,12 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   /**
    * @function funcdef_from_func
    * Returns the definition of a function
-   * @param  {func} val
+   * @param  {func} value
    * @return {funcdef}
    * (func funcdef<-func)
    */
   public interface Func_funcdef_from_func extends Core.Func_any_from_any {
-    public Core.Type_funcdef vx_funcdef_from_func(final Core.Type_func val);
+    public Core.Type_funcdef vx_funcdef_from_func(final Core.Type_func value);
   }
 
   public static class Class_funcdef_from_func extends Core.Class_base implements Func_funcdef_from_func {
@@ -23583,16 +23804,18 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_func val = Core.f_any_from_any(Core.t_func, arglist.vx_any(Core.vx_new_int(0)));
-      output = Core.f_funcdef_from_func(val);
+      Core.Type_func value = Core.f_any_from_any(Core.t_func, arglist.vx_any(Core.vx_new_int(0)));
+      output = Core.f_funcdef_from_func(value);
       return output;
     }
 
     @Override
-    public Core.Type_funcdef vx_funcdef_from_func(final Core.Type_func val) {
-      return Core.f_funcdef_from_func(val);
+    public Core.Type_funcdef vx_funcdef_from_func(final Core.Type_func value) {
+      Core.Type_funcdef output = Core.f_funcdef_from_func(value);
+      return output;
     }
 
   }
@@ -23600,9 +23823,9 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static final Core.Func_funcdef_from_func e_funcdef_from_func = new Core.Class_funcdef_from_func();
   public static final Core.Func_funcdef_from_func t_funcdef_from_func = new Core.Class_funcdef_from_func();
 
-  public static Core.Type_funcdef f_funcdef_from_func(final Core.Type_func val) {
+  public static Core.Type_funcdef f_funcdef_from_func(final Core.Type_func value) {
     Core.Type_funcdef output = Core.e_funcdef;
-    output = val.vx_funcdef();
+    output = value.vx_funcdef();
     return output;
   }
 
@@ -23687,6 +23910,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_funcdef funcdef = Core.f_any_from_any(Core.t_funcdef, arglist.vx_any(Core.vx_new_int(0)));
@@ -23696,7 +23920,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_string vx_funcname_from_funcdef(final Core.Type_funcdef funcdef) {
-      return Core.f_funcname_from_funcdef(funcdef);
+      Core.Type_string output = Core.f_funcname_from_funcdef(funcdef);
+      return output;
     }
 
   }
@@ -23786,6 +24011,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -23797,7 +24023,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <T extends Core.Type_any> T vx_if(final T generic_any_1, final Core.Type_boolean clause, final T then) {
-      return Core.f_if(generic_any_1, clause, then);
+      T output = Core.f_if(generic_any_1, clause, then);
+      return output;
     }
 
   }
@@ -23882,6 +24109,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -23894,7 +24122,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <T extends Core.Type_any> T vx_if_1(final T generic_any_1, final Core.Type_boolean clause, final T thenval, final T elseval) {
-      return Core.f_if_1(generic_any_1, clause, thenval, elseval);
+      T output = Core.f_if_1(generic_any_1, clause, thenval, elseval);
+      return output;
     }
 
   }
@@ -23993,6 +24222,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -24003,7 +24233,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <T extends Core.Type_any> T vx_if_2(final T generic_any_1, final Core.Type_thenelselist thenelselist) {
-      return Core.f_if_2(generic_any_1, thenelselist);
+      T output = Core.f_if_2(generic_any_1, thenelselist);
+      return output;
     }
 
   }
@@ -24093,6 +24324,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       output = Core.f_int_from_func();
@@ -24101,7 +24333,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_int vx_int_from_func() {
-      return Core.f_int_from_func();
+      Core.Type_int output = Core.f_int_from_func();
+      return output;
     }
 
   }
@@ -24117,12 +24350,12 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   /**
    * @function int_from_string
    * Function Type converting string to int
-   * @param  {string} val
+   * @param  {string} value
    * @return {int}
    * (func int<-string)
    */
   public interface Func_int_from_string extends Core.Func_any_from_any {
-    public Core.Type_int vx_int_from_string(final Core.Type_string val);
+    public Core.Type_int vx_int_from_string(final Core.Type_string value);
   }
 
   public static class Class_int_from_string extends Core.Class_base implements Func_int_from_string {
@@ -24195,16 +24428,18 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_string val = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
-      output = Core.f_int_from_string(val);
+      Core.Type_string value = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
+      output = Core.f_int_from_string(value);
       return output;
     }
 
     @Override
-    public Core.Type_int vx_int_from_string(final Core.Type_string val) {
-      return Core.f_int_from_string(val);
+    public Core.Type_int vx_int_from_string(final Core.Type_string value) {
+      Core.Type_int output = Core.f_int_from_string(value);
+      return output;
     }
 
   }
@@ -24212,41 +24447,46 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static final Core.Func_int_from_string e_int_from_string = new Core.Class_int_from_string();
   public static final Core.Func_int_from_string t_int_from_string = new Core.Class_int_from_string();
 
-  public static Core.Type_int f_int_from_string(final Core.Type_string val) {
+  public static Core.Type_int f_int_from_string(final Core.Type_string value) {
     Core.Type_int output = Core.e_int;
     output = Core.f_switch(
       Core.t_int,
-      val,
+      value,
       Core.vx_new(
         Core.t_thenelselist,
         Core.f_case_1(
           Core.vx_new_string("notanumber"),
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Core.c_notanumber;
+            Core.Type_any output_1 = Core.c_notanumber;
+            return output_1;
           })
         ),
         Core.f_case_1(
           Core.vx_new_string("infinity"),
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Core.c_infinity;
+            Core.Type_any output_2 = Core.c_infinity;
+            return output_2;
           })
         ),
         Core.f_case_1(
           Core.vx_new_string("neginfinity"),
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Core.c_neginfinity;
+            Core.Type_any output_3 = Core.c_neginfinity;
+            return output_3;
           })
         ),
         Core.f_else(
-          Core.t_any_from_func.vx_fn_new(() -> {int intresult = 0;
-            String strval = val.vx_string();
+          Core.t_any_from_func.vx_fn_new(() -> {
+            Core.Type_int intresult = Core.e_int;
+            String strval = value.vx_string();
             try {
               float floatresult = Float.parseFloat(strval);
-              intresult = (int)floatresult;
-              return Core.vx_new_int(intresult);
+              int iresult = (int)floatresult;
+              intresult = Core.vx_new_int(iresult);
             } catch (Exception ex) {
-              return Core.c_notanumber;
+              intresult = Core.c_notanumber;
             }
+            return intresult;
           })
         )
       )
@@ -24335,6 +24575,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
@@ -24344,7 +24585,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_boolean vx_is_empty(final Core.Type_string text) {
-      return Core.f_is_empty(text);
+      Core.Type_boolean output = Core.f_is_empty(text);
+      return output;
     }
 
   }
@@ -24441,6 +24683,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -24450,7 +24693,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_boolean vx_is_empty_1(final Core.Type_any value) {
-      return Core.f_is_empty_1(value);
+      Core.Type_boolean output = Core.f_is_empty_1(value);
+      return output;
     }
 
   }
@@ -24536,6 +24780,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
@@ -24546,7 +24791,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_boolean vx_is_endswith(final Core.Type_string text, final Core.Type_string find) {
-      return Core.f_is_endswith(text, find);
+      Core.Type_boolean output = Core.f_is_endswith(text, find);
+      return output;
     }
 
   }
@@ -24645,6 +24891,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -24654,7 +24901,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_boolean vx_is_float(final Core.Type_any value) {
-      return Core.f_is_float(value);
+      Core.Type_boolean output = Core.f_is_float(value);
+      return output;
     }
 
   }
@@ -24671,13 +24919,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   /**
    * @function is_func
-   * Returns true if val is a function.
-   * @param  {any} val
+   * Returns true if value is a function.
+   * @param  {any} value
    * @return {boolean}
    * (func is-func)
    */
   public interface Func_is_func extends Core.Func_any_from_any {
-    public Core.Type_boolean vx_is_func(final Core.Type_any val);
+    public Core.Type_boolean vx_is_func(final Core.Type_any value);
   }
 
   public static class Class_is_func extends Core.Class_base implements Func_is_func {
@@ -24750,16 +24998,18 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
-      output = Core.f_is_func(val);
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      output = Core.f_is_func(value);
       return output;
     }
 
     @Override
-    public Core.Type_boolean vx_is_func(final Core.Type_any val) {
-      return Core.f_is_func(val);
+    public Core.Type_boolean vx_is_func(final Core.Type_any value) {
+      Core.Type_boolean output = Core.f_is_func(value);
+      return output;
     }
 
   }
@@ -24767,9 +25017,9 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static final Core.Func_is_func e_is_func = new Core.Class_is_func();
   public static final Core.Func_is_func t_is_func = new Core.Class_is_func();
 
-  public static Core.Type_boolean f_is_func(final Core.Type_any val) {
+  public static Core.Type_boolean f_is_func(final Core.Type_any value) {
     Core.Type_boolean output = Core.e_boolean;
-    if (val instanceof Core.Type_func) {
+    if (value instanceof Core.Type_func) {
       output = Core.c_true;
     };
     return output;
@@ -24856,6 +25106,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -24865,7 +25116,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_boolean vx_is_int(final Core.Type_any value) {
-      return Core.f_is_int(value);
+      Core.Type_boolean output = Core.f_is_int(value);
+      return output;
     }
 
   }
@@ -24882,7 +25134,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   /**
    * @function is_number
-   * Return true if val is a number
+   * Return true if value is a number
    * @param  {any} value
    * @return {boolean}
    * (func is-number)
@@ -24961,6 +25213,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -24970,7 +25223,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_boolean vx_is_number(final Core.Type_any value) {
-      return Core.f_is_number(value);
+      Core.Type_boolean output = Core.f_is_number(value);
+      return output;
     }
 
   }
@@ -24982,7 +25236,9 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     Core.Type_boolean output = Core.e_boolean;
     output = Core.f_switch(
       Core.t_boolean,
-      Core.f_typename_from_any(value),
+      Core.f_typename_from_any(
+        value
+      ),
       Core.vx_new(
         Core.t_thenelselist,
         Core.f_case(
@@ -24997,12 +25253,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
             )
           ),
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Core.vx_new_boolean(true);
+            Core.Type_any output_1 = Core.vx_new_boolean(true);
+            return output_1;
           })
         ),
         Core.f_else(
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Core.vx_new_boolean(false);
+            Core.Type_any output_2 = Core.vx_new_boolean(false);
+            return output_2;
           })
         )
       )
@@ -25091,6 +25349,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
@@ -25101,7 +25360,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_boolean vx_is_pass_from_permission(final Core.Type_context context, final Core.Type_permission permission) {
-      return Core.f_is_pass_from_permission(context, permission);
+      Core.Type_boolean output = Core.f_is_pass_from_permission(context, permission);
+      return output;
     }
 
   }
@@ -25115,8 +25375,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Core.t_boolean,
       Core.t_any_from_func.vx_fn_new(() -> {
         Core.Type_string id = permission.id();
-        Core.Type_permission lookup = Core.f_permission_from_id_context(context, id);
-        Core.Type_any output_1 = Core.f_eq(lookup, permission);
+        Core.Type_permission lookup = Core.f_permission_from_id_context(
+          context,
+          id
+        );
+        Core.Type_any output_1 = Core.f_eq(
+          lookup,
+          permission
+        );
         return output_1;
       })
     );
@@ -25204,6 +25470,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -25214,7 +25481,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <T extends Core.Type_any, X extends Core.Type_list> T vx_last_from_list(final T generic_any_1, final X values) {
-      return Core.f_last_from_list(generic_any_1, values);
+      T output = Core.f_last_from_list(generic_any_1, values);
+      return output;
     }
 
   }
@@ -25227,8 +25495,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     output = Core.f_let(
       generic_any_1,
       Core.t_any_from_func.vx_fn_new(() -> {
-        Core.Type_int len = Core.f_length_1(values);
-        Core.Type_any output_1 = Core.f_any_from_list(generic_any_1, values, len);
+        Core.Type_int len = Core.f_length_1(
+          values
+        );
+        Core.Type_any output_1 = Core.f_any_from_list(
+          generic_any_1,
+          values,
+          len
+        );
         return output_1;
       })
     );
@@ -25316,6 +25590,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
@@ -25325,7 +25600,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_int vx_length(final Core.Type_string text) {
-      return Core.f_length(text);
+      Core.Type_int output = Core.f_length(text);
+      return output;
     }
 
   }
@@ -25421,6 +25697,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_list values = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
@@ -25430,7 +25707,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_int vx_length_1(final Core.Type_list values) {
-      return Core.f_length_1(values);
+      Core.Type_int output = Core.f_length_1(values);
+      return output;
     }
 
   }
@@ -25526,6 +25804,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_map valuemap = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
@@ -25535,7 +25814,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_int vx_length_2(final Core.Type_map valuemap) {
-      return Core.f_length_2(valuemap);
+      Core.Type_int output = Core.f_length_2(valuemap);
+      return output;
     }
 
   }
@@ -25546,7 +25826,9 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static Core.Type_int f_length_2(final Core.Type_map valuemap) {
     Core.Type_int output = Core.e_int;
     output = Core.f_length_1(
-      Core.f_stringlist_from_map(valuemap)
+      Core.f_stringlist_from_map(
+        valuemap
+      )
     );
     return output;
   }
@@ -25618,6 +25900,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -25627,8 +25910,9 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public <T extends Core.Type_any> T vx_let(final T generic_any_1, Core.Func_any_from_func fn_any) {
-      return Core.f_let(generic_any_1, fn_any);
+    public <T extends Core.Type_any> T vx_let(final T generic_any_1, final Core.Func_any_from_func fn_any) {
+      T output = Core.f_let(generic_any_1, fn_any);
+      return output;
     }
 
   }
@@ -25712,6 +25996,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -25722,8 +26007,9 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public <T extends Core.Type_any> CompletableFuture<T> vx_let_async(final T generic_any_1, Core.Func_any_from_func_async fn_any_async) {
-      return Core.f_let_async(generic_any_1, fn_any_async);
+    public <T extends Core.Type_any> CompletableFuture<T> vx_let_async(final T generic_any_1, final Core.Func_any_from_func_async fn_any_async) {
+      CompletableFuture<T> output = Core.f_let_async(generic_any_1, fn_any_async);
+      return output;
     }
 
   }
@@ -25818,6 +26104,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
@@ -25828,7 +26115,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_join_from_list(final X generic_list_1, final Y values) {
-      return Core.f_list_join_from_list(generic_list_1, values);
+      X output = Core.f_list_join_from_list(generic_list_1, values);
+      return output;
     }
 
   }
@@ -25918,6 +26206,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
@@ -25929,7 +26218,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_join_from_list_1(final X generic_list_1, final Y values, final Core.Func_any_from_any fn_any_from_any) {
-      return Core.f_list_join_from_list_1(generic_list_1, values, fn_any_from_any);
+      X output = Core.f_list_join_from_list_1(generic_list_1, values, fn_any_from_any);
+      return output;
     }
 
   }
@@ -26034,6 +26324,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
@@ -26044,7 +26335,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_from_list(final X generic_list_1, final Y values) {
-      return Core.f_list_from_list(generic_list_1, values);
+      X output = Core.f_list_from_list(generic_list_1, values);
+      return output;
     }
 
   }
@@ -26134,6 +26426,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
@@ -26145,7 +26438,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_from_list_1(final X generic_list_1, final Y values, final Core.Func_any_from_any fn_any_from_any) {
-      return Core.f_list_from_list_1(generic_list_1, values, fn_any_from_any);
+      X output = Core.f_list_from_list_1(generic_list_1, values, fn_any_from_any);
+      return output;
     }
 
   }
@@ -26233,6 +26527,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
@@ -26245,7 +26540,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <X extends Core.Type_list, Y extends Core.Type_list> CompletableFuture<X> vx_list_from_list_async(final X generic_list_1, final Y values, final Core.Func_any_from_any_async fn_any_from_any_async) {
-      return Core.f_list_from_list_async(generic_list_1, values, fn_any_from_any_async);
+      CompletableFuture<X> output = Core.f_list_from_list_async(generic_list_1, values, fn_any_from_any_async);
+      return output;
     }
 
   }
@@ -26327,6 +26623,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
@@ -26338,7 +26635,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <X extends Core.Type_list, Y extends Core.Type_list> X vx_list_from_list_intany(final X generic_list_1, final Y values, final Core.Func_any_from_int_any fn_any_from_int_any) {
-      return Core.f_list_from_list_intany(generic_list_1, values, fn_any_from_int_any);
+      X output = Core.f_list_from_list_intany(generic_list_1, values, fn_any_from_int_any);
+      return output;
     }
 
   }
@@ -26433,6 +26731,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
@@ -26443,7 +26742,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <O extends Core.Type_map, X extends Core.Type_list> X vx_list_from_map(final X generic_list_1, final O valuemap) {
-      return Core.f_list_from_map(generic_list_1, valuemap);
+      X output = Core.f_list_from_map(generic_list_1, valuemap);
+      return output;
     }
 
   }
@@ -26534,6 +26834,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
@@ -26545,7 +26846,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <O extends Core.Type_map, X extends Core.Type_list> X vx_list_from_map_1(final X generic_list_1, final O valuemap, final Core.Func_any_from_key_value fn_any_from_key_value) {
-      return Core.f_list_from_map_1(generic_list_1, valuemap, fn_any_from_key_value);
+      X output = Core.f_list_from_map_1(generic_list_1, valuemap, fn_any_from_key_value);
+      return output;
     }
 
   }
@@ -26633,6 +26935,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
@@ -26645,7 +26948,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <O extends Core.Type_map, X extends Core.Type_list> CompletableFuture<X> vx_list_from_map_async(final X generic_list_1, final O valuemap, final Core.Func_any_from_key_value_async fn_any_from_key_value_async) {
-      return Core.f_list_from_map_async(generic_list_1, valuemap, fn_any_from_key_value_async);
+      CompletableFuture<X> output = Core.f_list_from_map_async(generic_list_1, valuemap, fn_any_from_key_value_async);
+      return output;
     }
 
   }
@@ -26739,6 +27043,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any type = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -26748,7 +27053,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_list_from_type(final Core.Type_any type) {
-      return Core.f_list_from_type(type);
+      Core.Type_any output = Core.f_list_from_type(type);
+      return output;
     }
 
   }
@@ -26842,6 +27148,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -26851,7 +27158,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_log(final Core.Type_any value) {
-      return Core.f_log(value);
+      Core.Type_any output = Core.f_log(value);
+      return output;
     }
 
   }
@@ -26934,6 +27242,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -26945,7 +27254,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <T extends Core.Type_any> T vx_log_1(final T generic_any_1, final Core.Type_string text, final T value) {
-      return Core.f_log_1(generic_any_1, text, value);
+      T output = Core.f_log_1(generic_any_1, text, value);
+      return output;
     }
 
   }
@@ -27042,6 +27352,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_anylist args = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(0)));
@@ -27051,7 +27362,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_string vx_main(final Core.Type_anylist args) {
-      return Core.f_main(args);
+      Core.Type_string output = Core.f_main(args);
+      return output;
     }
 
   }
@@ -27136,6 +27448,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_map generic_map_1 = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
@@ -27147,7 +27460,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <N extends Core.Type_map, Y extends Core.Type_list> N vx_map_from_list(final N generic_map_1, final Y vallist, final Core.Func_any_from_any fn_any_from_any) {
-      return Core.f_map_from_list(generic_map_1, vallist, fn_any_from_any);
+      N output = Core.f_map_from_list(generic_map_1, vallist, fn_any_from_any);
+      return output;
     }
 
   }
@@ -27246,6 +27560,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_map generic_map_1 = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
@@ -27256,7 +27571,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <N extends Core.Type_map, O extends Core.Type_map> N vx_map_from_map(final N generic_map_1, final O valuemap) {
-      return Core.f_map_from_map(generic_map_1, valuemap);
+      N output = Core.f_map_from_map(generic_map_1, valuemap);
+      return output;
     }
 
   }
@@ -27347,6 +27663,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_map generic_map_1 = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
@@ -27358,7 +27675,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <N extends Core.Type_map, O extends Core.Type_map> N vx_map_from_map_1(final N generic_map_1, final O valuemap, final Core.Func_any_from_key_value fn_any_from_key_value) {
-      return Core.f_map_from_map_1(generic_map_1, valuemap, fn_any_from_key_value);
+      N output = Core.f_map_from_map_1(generic_map_1, valuemap, fn_any_from_key_value);
+      return output;
     }
 
   }
@@ -27456,6 +27774,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_string error = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
@@ -27465,7 +27784,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_msg vx_msg_from_error(final Core.Type_string error) {
-      return Core.f_msg_from_error(error);
+      Core.Type_msg output = Core.f_msg_from_error(error);
+      return output;
     }
 
   }
@@ -27556,6 +27876,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_string code = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
@@ -27566,7 +27887,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_msg vx_msg_from_error_1(final Core.Type_string code, final Core.Type_any detail) {
-      return Core.f_msg_from_error_1(code, detail);
+      Core.Type_msg output = Core.f_msg_from_error_1(code, detail);
+      return output;
     }
 
   }
@@ -27660,6 +27982,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_string path = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
@@ -27671,7 +27994,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_msg vx_msg_from_error_2(final Core.Type_string path, final Core.Type_string code, final Core.Type_any detail) {
-      return Core.f_msg_from_error_2(path, code, detail);
+      Core.Type_msg output = Core.f_msg_from_error_2(path, code, detail);
+      return output;
     }
 
   }
@@ -27779,6 +28103,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_string warning = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
@@ -27788,7 +28113,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_msg vx_msg_from_warning(final Core.Type_string warning) {
-      return Core.f_msg_from_warning(warning);
+      Core.Type_msg output = Core.f_msg_from_warning(warning);
+      return output;
     }
 
   }
@@ -27879,6 +28205,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_msgblock origblock = Core.f_any_from_any(Core.t_msgblock, arglist.vx_any(Core.vx_new_int(0)));
@@ -27889,7 +28216,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_msgblock vx_msgblock_from_msgblock_msg(final Core.Type_msgblock origblock, final Core.Type_msg addmsg) {
-      return Core.f_msgblock_from_msgblock_msg(origblock, addmsg);
+      Core.Type_msgblock output = Core.f_msgblock_from_msgblock_msg(origblock, addmsg);
+      return output;
     }
 
   }
@@ -27899,9 +28227,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   public static Core.Type_msgblock f_msgblock_from_msgblock_msg(final Core.Type_msgblock origblock, final Core.Type_msg addmsg) {
     Core.Type_msgblock output = Core.e_msgblock;
-    output = Core.f_copy(origblock, Core.vx_new(
-      Core.t_anylist,
-      addmsg));
+    output = Core.f_copy(
+      origblock,
+      Core.vx_new(
+        Core.t_anylist,
+        addmsg
+      )
+    );
     return output;
   }
 
@@ -27973,6 +28305,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_msgblock origblock = Core.f_any_from_any(Core.t_msgblock, arglist.vx_any(Core.vx_new_int(0)));
@@ -27983,7 +28316,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_msgblock vx_msgblock_from_msgblock_msgblock(final Core.Type_msgblock origblock, final Core.Type_msgblock addblock) {
-      return Core.f_msgblock_from_msgblock_msgblock(origblock, addblock);
+      Core.Type_msgblock output = Core.f_msgblock_from_msgblock_msgblock(origblock, addblock);
+      return output;
     }
 
   }
@@ -28085,6 +28419,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.vx_new_int(0)));
@@ -28094,7 +28429,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_string vx_name_from_typedef(final Core.Type_typedef vtypedef) {
-      return Core.f_name_from_typedef(vtypedef);
+      Core.Type_string output = Core.f_name_from_typedef(vtypedef);
+      return output;
     }
 
   }
@@ -28189,6 +28525,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -28199,7 +28536,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <T extends Core.Type_any> T vx_native(final T generic_any_1, final Core.Type_anylist clauses) {
-      return Core.f_native(generic_any_1, clauses);
+      T output = Core.f_native(generic_any_1, clauses);
+      return output;
     }
 
   }
@@ -28293,6 +28631,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -28302,7 +28641,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_native_from_any(final Core.Type_any value) {
-      return Core.f_native_from_any(value);
+      Core.Type_any output = Core.f_native_from_any(value);
+      return output;
     }
 
   }
@@ -28383,6 +28723,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any type = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -28393,7 +28734,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <T extends Core.Type_any> T vx_new(final T type, final Core.Type_anylist values) {
-      return Core.f_new(type, values);
+      T output = Core.f_new(type, values);
+      return output;
     }
 
   }
@@ -28475,6 +28817,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       output = Core.f_number_from_func();
@@ -28483,7 +28826,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_number vx_number_from_func() {
-      return Core.f_number_from_func();
+      Core.Type_number output = Core.f_number_from_func();
+      return output;
     }
 
   }
@@ -28564,6 +28908,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_boolean val1 = Core.f_any_from_any(Core.t_boolean, arglist.vx_any(Core.vx_new_int(0)));
@@ -28574,7 +28919,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_boolean vx_or(final Core.Type_boolean val1, final Core.Type_boolean val2) {
-      return Core.f_or(val1, val2);
+      Core.Type_boolean output = Core.f_or(val1, val2);
+      return output;
     }
 
   }
@@ -28673,6 +29019,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_booleanlist values = Core.f_any_from_any(Core.t_booleanlist, arglist.vx_any(Core.vx_new_int(0)));
@@ -28682,7 +29029,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_boolean vx_or_1(final Core.Type_booleanlist values) {
-      return Core.f_or_1(values);
+      Core.Type_boolean output = Core.f_or_1(values);
+      return output;
     }
 
   }
@@ -28700,11 +29048,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         Core.Type_boolean reduce = Core.f_any_from_any(Core.t_boolean, reduce_any);
         Core.Type_boolean current = Core.f_any_from_any(Core.t_boolean, current_any);
         Core.Type_boolean next = Core.f_any_from_any(Core.t_boolean, next_any);
-        Core.Type_any output_1 = 
+        Core.Type_any output_1 = Core.f_or(
+          reduce,
           Core.f_or(
-            reduce,
-            Core.f_or(current, next)
-          );
+            current,
+            next
+          )
+        );
         return output_1;
       })
     );
@@ -28792,6 +29142,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_string name = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
@@ -28801,7 +29152,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_package vx_package_global_from_name(final Core.Type_string name) {
-      return Core.f_package_global_from_name(name);
+      Core.Type_package output = Core.f_package_global_from_name(name);
+      return output;
     }
 
   }
@@ -28900,6 +29252,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.vx_new_int(0)));
@@ -28909,7 +29262,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_string vx_packagename_from_typedef(final Core.Type_typedef vtypedef) {
-      return Core.f_packagename_from_typedef(vtypedef);
+      Core.Type_string output = Core.f_packagename_from_typedef(vtypedef);
+      return output;
     }
 
   }
@@ -29004,6 +29358,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
@@ -29014,7 +29369,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_string vx_path_from_context_path(final Core.Type_context context, final Core.Type_string path) {
-      return Core.f_path_from_context_path(context, path);
+      Core.Type_string output = Core.f_path_from_context_path(context, path);
+      return output;
     }
 
   }
@@ -29025,7 +29381,9 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static Core.Type_string f_path_from_context_path(final Core.Type_context context, final Core.Type_string path) {
     Core.Type_string output = Core.e_string;
     output = Core.f_path_from_setting_path(
-      Core.f_setting_from_context(context),
+      Core.f_setting_from_context(
+        context
+      ),
       path
     );
     return output;
@@ -29099,6 +29457,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_setting session = Core.f_any_from_any(Core.t_setting, arglist.vx_any(Core.vx_new_int(0)));
@@ -29109,7 +29468,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_string vx_path_from_setting_path(final Core.Type_setting session, final Core.Type_string path) {
-      return Core.f_path_from_setting_path(session, path);
+      Core.Type_string output = Core.f_path_from_setting_path(session, path);
+      return output;
     }
 
   }
@@ -29203,6 +29563,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
@@ -29213,7 +29574,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_permission vx_permission_from_id_context(final Core.Type_context context, final Core.Type_string id) {
-      return Core.f_permission_from_id_context(context, id);
+      Core.Type_permission output = Core.f_permission_from_id_context(context, id);
+      return output;
     }
 
   }
@@ -29226,10 +29588,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     output = Core.f_let(
       Core.t_permission,
       Core.t_any_from_func.vx_fn_new(() -> {
-        Core.Type_user user = Core.f_user_from_context(context);
+        Core.Type_user user = Core.f_user_from_context(
+          context
+        );
         Core.Type_security security = user.security();
         Core.Type_permissionmap permissionmap = security.permissionmap();
-        Core.Type_any output_1 = Core.f_any_from_map(Core.t_permission, permissionmap, Core.vx_new_string(":id"));
+        Core.Type_any output_1 = Core.f_any_from_map(
+          Core.t_permission,
+          permissionmap,
+          Core.vx_new_string(":id")
+        );
         return output_1;
       })
     );
@@ -29317,6 +29685,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.vx_new_int(0)));
@@ -29326,7 +29695,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_argmap vx_properties_from_typedef(final Core.Type_typedef vtypedef) {
-      return Core.f_properties_from_typedef(vtypedef);
+      Core.Type_argmap output = Core.f_properties_from_typedef(vtypedef);
+      return output;
     }
 
   }
@@ -29421,6 +29791,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.vx_new_int(0)));
@@ -29430,7 +29801,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_arg vx_proplast_from_typedef(final Core.Type_typedef vtypedef) {
-      return Core.f_proplast_from_typedef(vtypedef);
+      Core.Type_arg output = Core.f_proplast_from_typedef(vtypedef);
+      return output;
     }
 
   }
@@ -29524,6 +29896,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -29534,7 +29907,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <T extends Core.Type_any> T vx_resolve(final T generic_any_1, final T value) {
-      return Core.f_resolve(generic_any_1, value);
+      T output = Core.f_resolve(generic_any_1, value);
+      return output;
     }
 
   }
@@ -29628,6 +30002,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -29638,7 +30013,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <T extends Core.Type_any> T vx_resolve_1(final T generic_any_1, final Core.Func_any_from_func fn_any) {
-      return Core.f_resolve_1(generic_any_1, fn_any);
+      T output = Core.f_resolve_1(generic_any_1, fn_any);
+      return output;
     }
 
   }
@@ -29736,6 +30112,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -29747,7 +30124,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <T extends Core.Type_any> CompletableFuture<T> vx_resolve_async(final T generic_any_1, final Core.Func_any_from_func_async fn_any) {
-      return Core.f_resolve_async(generic_any_1, fn_any);
+      CompletableFuture<T> output = Core.f_resolve_async(generic_any_1, fn_any);
+      return output;
     }
 
   }
@@ -29846,6 +30224,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -29856,7 +30235,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <T extends Core.Type_any, X extends Core.Type_list> T vx_resolve_first(final T generic_any_1, final X clauses) {
-      return Core.f_resolve_first(generic_any_1, clauses);
+      T output = Core.f_resolve_first(generic_any_1, clauses);
+      return output;
     }
 
   }
@@ -29954,6 +30334,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_list generic_list_1 = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
@@ -29964,7 +30345,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public <X extends Core.Type_list> X vx_resolve_list(final X generic_list_1, final X clauses) {
-      return Core.f_resolve_list(generic_list_1, clauses);
+      X output = Core.f_resolve_list(generic_list_1, clauses);
+      return output;
     }
 
   }
@@ -30048,6 +30430,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
@@ -30057,7 +30440,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_security vx_security_from_context(final Core.Type_context context) {
-      return Core.f_security_from_context(context);
+      Core.Type_security output = Core.f_security_from_context(context);
+      return output;
     }
 
   }
@@ -30068,7 +30452,9 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static Core.Type_security f_security_from_context(final Core.Type_context context) {
     Core.Type_security output = Core.e_security;
     output = Core.f_security_from_user(
-      Core.f_user_from_context(context)
+      Core.f_user_from_context(
+        context
+      )
     );
     return output;
   }
@@ -30154,6 +30540,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_user user = Core.f_any_from_any(Core.t_user, arglist.vx_any(Core.vx_new_int(0)));
@@ -30163,7 +30550,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_security vx_security_from_user(final Core.Type_user user) {
-      return Core.f_security_from_user(user);
+      Core.Type_security output = Core.f_security_from_user(user);
+      return output;
     }
 
   }
@@ -30243,6 +30631,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
@@ -30252,7 +30641,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_session vx_session_from_context(final Core.Type_context context) {
-      return Core.f_session_from_context(context);
+      Core.Type_session output = Core.f_session_from_context(context);
+      return output;
     }
 
   }
@@ -30332,6 +30722,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
@@ -30341,7 +30732,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_setting vx_setting_from_context(final Core.Type_context context) {
-      return Core.f_setting_from_context(context);
+      Core.Type_setting output = Core.f_setting_from_context(context);
+      return output;
     }
 
   }
@@ -30422,6 +30814,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
@@ -30432,7 +30825,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_string vx_string_repeat(final Core.Type_string text, final Core.Type_int repeat) {
-      return Core.f_string_repeat(text, repeat);
+      Core.Type_string output = Core.f_string_repeat(text, repeat);
+      return output;
     }
 
   }
@@ -30530,6 +30924,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -30539,7 +30934,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_string vx_string_from_any(final Core.Type_any value) {
-      return Core.f_string_from_any(value);
+      Core.Type_string output = Core.f_string_from_any(value);
+      return output;
     }
 
   }
@@ -30626,6 +31022,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -30637,7 +31034,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_string vx_string_from_any_indent(final Core.Type_any value, final Core.Type_int indent, final Core.Type_boolean linefeed) {
-      return Core.f_string_from_any_indent(value, indent, linefeed);
+      Core.Type_string output = Core.f_string_from_any_indent(value, indent, linefeed);
+      return output;
     }
 
   }
@@ -30727,6 +31125,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       output = Core.f_string_from_func();
@@ -30735,7 +31134,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_string vx_string_from_func() {
-      return Core.f_string_from_func();
+      Core.Type_string output = Core.f_string_from_func();
+      return output;
     }
 
   }
@@ -30817,6 +31217,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
@@ -30828,7 +31229,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_string vx_string_from_string_find_replace(final Core.Type_string text, final Core.Type_string find, final Core.Type_string replace) {
-      return Core.f_string_from_string_find_replace(text, find, replace);
+      Core.Type_string output = Core.f_string_from_string_find_replace(text, find, replace);
+      return output;
     }
 
   }
@@ -30923,6 +31325,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_map map = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
@@ -30932,7 +31335,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_stringlist vx_stringlist_from_map(final Core.Type_map map) {
-      return Core.f_stringlist_from_map(map);
+      Core.Type_stringlist output = Core.f_stringlist_from_map(map);
+      return output;
     }
 
   }
@@ -30958,13 +31362,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   /**
    * @function switch
    * Returns a value based on a logical switch
-   * @param  {any-2} val
+   * @param  {any-2} value
    * @param  {thenelselist} thenelselist
    * @return {any-1}
    * (func switch)
    */
   public interface Func_switch extends Core.Type_func, Core.Type_replfunc {
-    public <T extends Core.Type_any, U extends Core.Type_any> T vx_switch(final T generic_any_1, final U val, final Core.Type_thenelselist thenelselist);
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_switch(final T generic_any_1, final U value, final Core.Type_thenelselist thenelselist);
   }
 
   public static class Class_switch extends Core.Class_base implements Func_switch {
@@ -31023,18 +31427,20 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any generic_any_1 = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
-      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
       Core.Type_thenelselist thenelselist = Core.f_any_from_any(Core.t_thenelselist, arglist.vx_any(Core.vx_new_int(1)));
-      output = Core.f_switch(generic_any_1, val, thenelselist);
+      output = Core.f_switch(generic_any_1, value, thenelselist);
       return output;
     }
 
     @Override
-    public <T extends Core.Type_any, U extends Core.Type_any> T vx_switch(final T generic_any_1, final U val, final Core.Type_thenelselist thenelselist) {
-      return Core.f_switch(generic_any_1, val, thenelselist);
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_switch(final T generic_any_1, final U value, final Core.Type_thenelselist thenelselist) {
+      T output = Core.f_switch(generic_any_1, value, thenelselist);
+      return output;
     }
 
   }
@@ -31042,7 +31448,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static final Core.Func_switch e_switch = new Core.Class_switch();
   public static final Core.Func_switch t_switch = new Core.Class_switch();
 
-  public static <T extends Core.Type_any, U extends Core.Type_any> T f_switch(final T generic_any_1, final U val, final Core.Type_thenelselist thenelselist) {
+  public static <T extends Core.Type_any, U extends Core.Type_any> T f_switch(final T generic_any_1, final U value, final Core.Type_thenelselist thenelselist) {
     T output = Core.f_empty(generic_any_1);
     Core.Func_any_from_func fn_any = null;
     List<Core.Type_thenelse> listthenelse = thenelselist.vx_listthenelse();
@@ -31050,15 +31456,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Core.Type_string code = thenelse.code();
       switch (code.vx_string()) {
       case ":case":
-        Core.Type_any value = thenelse.value();
-        Core.Type_boolean iseq = Core.f_eq(val, value);
+        Core.Type_any value2 = thenelse.value();
+        Core.Type_boolean iseq = Core.f_eq(value, value2);
         if (iseq.vx_boolean()) {
           fn_any = thenelse.fn_any();
         }
         break;
       case ":casemany":
         Core.Type_list values = thenelse.values();
-        Core.Type_boolean iscontain = Core.f_contains_1(values, val);
+        Core.Type_boolean iscontain = Core.f_contains_1(values, value);
         if (iscontain.vx_boolean()) {
           fn_any = thenelse.fn_any();
         }
@@ -31145,6 +31551,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Func_boolean_from_func fn_cond = Core.f_any_from_any(Core.t_boolean_from_func, arglist.vx_any(Core.vx_new_int(0)));
@@ -31155,7 +31562,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_thenelse vx_then(final Core.Func_boolean_from_func fn_cond, final Core.Func_any_from_func fn_any) {
-      return Core.f_then(fn_cond, fn_any);
+      Core.Type_thenelse output = Core.f_then(fn_cond, fn_any);
+      return output;
     }
 
   }
@@ -31261,6 +31669,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.vx_new_int(0)));
@@ -31270,7 +31679,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_typelist vx_traits_from_typedef(final Core.Type_typedef vtypedef) {
-      return Core.f_traits_from_typedef(vtypedef);
+      Core.Type_typelist output = Core.f_traits_from_typedef(vtypedef);
+      return output;
     }
 
   }
@@ -31365,6 +31775,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -31374,7 +31785,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_any vx_type_from_any(final Core.Type_any value) {
-      return Core.f_type_from_any(value);
+      Core.Type_any output = Core.f_type_from_any(value);
+      return output;
     }
 
   }
@@ -31391,12 +31803,12 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   /**
    * @function typedef_from_any
    * Gets the typedef of a given value
-   * @param  {any} val
+   * @param  {any} value
    * @return {typedef}
    * (func typedef<-any)
    */
   public interface Func_typedef_from_any extends Core.Func_any_from_any {
-    public Core.Type_typedef vx_typedef_from_any(final Core.Type_any val);
+    public Core.Type_typedef vx_typedef_from_any(final Core.Type_any value);
   }
 
   public static class Class_typedef_from_any extends Core.Class_base implements Func_typedef_from_any {
@@ -31469,16 +31881,18 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
-      output = Core.f_typedef_from_any(val);
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      output = Core.f_typedef_from_any(value);
       return output;
     }
 
     @Override
-    public Core.Type_typedef vx_typedef_from_any(final Core.Type_any val) {
-      return Core.f_typedef_from_any(val);
+    public Core.Type_typedef vx_typedef_from_any(final Core.Type_any value) {
+      Core.Type_typedef output = Core.f_typedef_from_any(value);
+      return output;
     }
 
   }
@@ -31486,10 +31900,12 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static final Core.Func_typedef_from_any e_typedef_from_any = new Core.Class_typedef_from_any();
   public static final Core.Func_typedef_from_any t_typedef_from_any = new Core.Class_typedef_from_any();
 
-  public static Core.Type_typedef f_typedef_from_any(final Core.Type_any val) {
+  public static Core.Type_typedef f_typedef_from_any(final Core.Type_any value) {
     Core.Type_typedef output = Core.e_typedef;
     output = Core.f_typedef_from_type(
-      Core.f_type_from_any(val)
+      Core.f_type_from_any(
+        value
+      )
     );
     return output;
   }
@@ -31497,12 +31913,12 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   /**
    * @function typedef_from_type
    * Gets the typedef of a given type
-   * @param  {any} val
+   * @param  {any} value
    * @return {typedef}
    * (func typedef<-type)
    */
   public interface Func_typedef_from_type extends Core.Func_any_from_any {
-    public Core.Type_typedef vx_typedef_from_type(final Core.Type_any val);
+    public Core.Type_typedef vx_typedef_from_type(final Core.Type_any value);
   }
 
   public static class Class_typedef_from_type extends Core.Class_base implements Func_typedef_from_type {
@@ -31575,16 +31991,18 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
-      output = Core.f_typedef_from_type(val);
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      output = Core.f_typedef_from_type(value);
       return output;
     }
 
     @Override
-    public Core.Type_typedef vx_typedef_from_type(final Core.Type_any val) {
-      return Core.f_typedef_from_type(val);
+    public Core.Type_typedef vx_typedef_from_type(final Core.Type_any value) {
+      Core.Type_typedef output = Core.f_typedef_from_type(value);
+      return output;
     }
 
   }
@@ -31592,9 +32010,9 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static final Core.Func_typedef_from_type e_typedef_from_type = new Core.Class_typedef_from_type();
   public static final Core.Func_typedef_from_type t_typedef_from_type = new Core.Class_typedef_from_type();
 
-  public static Core.Type_typedef f_typedef_from_type(final Core.Type_any val) {
+  public static Core.Type_typedef f_typedef_from_type(final Core.Type_any value) {
     Core.Type_typedef output = Core.e_typedef;
-    output = val.vx_typedef();
+    output = value.vx_typedef();
     return output;
   }
 
@@ -31679,6 +32097,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -31688,7 +32107,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_string vx_typename_from_any(final Core.Type_any value) {
-      return Core.f_typename_from_any(value);
+      Core.Type_string output = Core.f_typename_from_any(value);
+      return output;
     }
 
   }
@@ -31699,7 +32119,9 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static Core.Type_string f_typename_from_any(final Core.Type_any value) {
     Core.Type_string output = Core.e_string;
     output = Core.f_typename_from_type(
-      Core.f_type_from_any(value)
+      Core.f_type_from_any(
+        value
+      )
     );
     return output;
   }
@@ -31785,6 +32207,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any type = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -31794,7 +32217,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_string vx_typename_from_type(final Core.Type_any type) {
-      return Core.f_typename_from_type(type);
+      Core.Type_string output = Core.f_typename_from_type(type);
+      return output;
     }
 
   }
@@ -31805,7 +32229,9 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static Core.Type_string f_typename_from_type(final Core.Type_any type) {
     Core.Type_string output = Core.e_string;
     output = Core.f_typename_from_typedef(
-      Core.f_typedef_from_type(type)
+      Core.f_typedef_from_type(
+        type
+      )
     );
     return output;
   }
@@ -31891,6 +32317,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_typedef vtypedef = Core.f_any_from_any(Core.t_typedef, arglist.vx_any(Core.vx_new_int(0)));
@@ -31900,7 +32327,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_string vx_typename_from_typedef(final Core.Type_typedef vtypedef) {
-      return Core.f_typename_from_typedef(vtypedef);
+      Core.Type_string output = Core.f_typename_from_typedef(vtypedef);
+      return output;
     }
 
   }
@@ -32003,6 +32431,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_typelist typelist = Core.f_any_from_any(Core.t_typelist, arglist.vx_any(Core.vx_new_int(0)));
@@ -32012,7 +32441,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_stringlist vx_typenames_from_typelist(final Core.Type_typelist typelist) {
-      return Core.f_typenames_from_typelist(typelist);
+      Core.Type_stringlist output = Core.f_typenames_from_typelist(typelist);
+      return output;
     }
 
   }
@@ -32027,8 +32457,9 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       typelist,
       Core.t_any_from_any.vx_fn_new((type_any) -> {
         Core.Type_any type = Core.f_any_from_any(Core.t_any, type_any);
-        Core.Type_any output_1 = 
-          Core.f_typename_from_type(type);
+        Core.Type_any output_1 = Core.f_typename_from_type(
+          type
+        );
         return output_1;
       })
     );
@@ -32101,6 +32532,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
@@ -32110,7 +32542,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
     @Override
     public Core.Type_user vx_user_from_context(final Core.Type_context context) {
-      return Core.f_user_from_context(context);
+      Core.Type_user output = Core.f_user_from_context(context);
+      return output;
     }
 
   }
@@ -32120,7 +32553,9 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   public static Core.Type_user f_user_from_context(final Core.Type_context context) {
     Core.Type_user output = Core.e_user;
-    output = Core.f_session_from_context(context).user();
+    output = Core.f_session_from_context(
+      context
+    ).user();
     return output;
   }
 

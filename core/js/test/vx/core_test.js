@@ -2752,7 +2752,7 @@ export default class vx_core_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (stringlist \"a1\" \"b2\")\n (list<-map : stringlist\n  (stringmap \"a\" \"1\" \"b\" \"2\")\n  (fn : string\n   [key : string\n    val : string]\n   (string key val))))",
+            ":describename", "(test\n (stringlist \"a1\" \"b2\")\n (list<-map : stringlist\n  (stringmap \"a\" \"1\" \"b\" \"2\")\n  (fn : string\n   [key   : string\n    value : string]\n   (string key value))))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -2770,11 +2770,11 @@ export default class vx_core_test {
                   "b",
                   "2"
                 ),
-                vx_core.f_new(vx_core.t_any_from_key_value, ([key, val]) => 
+                vx_core.f_new(vx_core.t_any_from_key_value, ([key, value]) => 
                   vx_core.f_new(
                     vx_core.t_string,
                     key,
-                    val
+                    value
                   ))
               )
             )
@@ -2795,7 +2795,7 @@ export default class vx_core_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (stringmap\n  \"keya\" \"a\"\n  \"keyb\" \"b\")\n (map<-list : stringmap\n  (stringlist \"a\" \"b\")\n  (fn : string\n   [val : string]\n   (string \"key\" val))))",
+            ":describename", "(test\n (stringmap\n  \"keya\" \"a\"\n  \"keyb\" \"b\")\n (map<-list : stringmap\n  (stringlist \"a\" \"b\")\n  (fn : string\n   [value : string]\n   (string \"key\" value))))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -2813,11 +2813,11 @@ export default class vx_core_test {
                   "a",
                   "b"
                 ),
-                vx_core.f_new(vx_core.t_any_from_any, (val) => 
+                vx_core.f_new(vx_core.t_any_from_any, (value) => 
                   vx_core.f_new(
                     vx_core.t_string,
                     "key",
-                    val
+                    value
                   ))
               )
             )
@@ -2873,7 +2873,7 @@ export default class vx_core_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (stringmap\n  :a \"a1\"\n  :b \"b2\")\n (map<-map : stringmap\n  (stringmap\n   :a \"1\"\n   :b \"2\")\n  (fn : string\n   [key : string\n    val : string]\n   (string key val))))",
+            ":describename", "(test\n (stringmap\n  :a \"a1\"\n  :b \"b2\")\n (map<-map : stringmap\n  (stringmap\n   :a \"1\"\n   :b \"2\")\n  (fn : string\n   [key : string\n    value : string]\n   (string key value))))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -2893,11 +2893,11 @@ export default class vx_core_test {
                   ":b",
                   "2"
                 ),
-                vx_core.f_new(vx_core.t_any_from_key_value, ([key, val]) => 
+                vx_core.f_new(vx_core.t_any_from_key_value, ([key, value]) => 
                   vx_core.f_new(
                     vx_core.t_string,
                     key,
-                    val
+                    value
                   ))
               )
             )

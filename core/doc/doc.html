@@ -4429,13 +4429,13 @@
  :doc &quot;Strict equality check. Note that all non-empty, non-constants will not be equal.&quot;)
 
 (func ! : boolean
- [val : boolean :doc &quot;Thing to not&quot;]
+ [value : boolean :doc &quot;Thing to not&quot;]
  (native
-  :cpp    &quot;vx_core::vx_new_boolean(!val-&gt;vx_boolean());&quot;
-  :csharp &quot;Vx.Core.vx_new_boolean(!val.vx_boolean());&quot;
-  :java   &quot;Core.vx_new_boolean(!val.vx_boolean());&quot;
-  :js     &quot;!val&quot;
-  :kotlin &quot;vx_core.vx_new_boolean(!val.vx_boolean())&quot;)
+  :cpp    &quot;vx_core::vx_new_boolean(!value-&gt;vx_boolean());&quot;
+  :csharp &quot;Vx.Core.vx_new_boolean(!value.vx_boolean());&quot;
+  :java   &quot;Core.vx_new_boolean(!value.vx_boolean());&quot;
+  :js     &quot;!value&quot;
+  :kotlin &quot;vx_core.vx_new_boolean(!value.vx_boolean())&quot;)
  :alias &quot;not&quot;
  :test (test-false false)
        (test-false (! true))
@@ -4464,10 +4464,10 @@
  :doc   &quot;Returns true if text is not empty.&quot;)
 
 (func !-empty : boolean
- [val : any]
- (! (is-empty val))
+ [value : any]
+ (! (is-empty value))
  :alias &quot;notempty&quot;
- :doc &quot;Returns true if val is not empty.&quot;)
+ :doc &quot;Returns true if value is not empty.&quot;)
 
 (func &lt; : boolean
  [val1 : any
@@ -4742,18 +4742,18 @@
  :doc &quot;Generic Function returning Generic any-1 with any parameters&quot;)
 
 (func any&lt;-int-any : any-1
- [num : int
-  val : any-2]
+ [num   : int
+  value : any-2]
  :doc &quot;Generic Function returning Generic any-1 from an int and a value&quot;)
 
 (func any&lt;-key-value : any-1
- [key : string
-  val : any-2]
+ [key   : string
+  value : any-2]
  :doc &quot;Generic Function returning Generic any-1 from a key and a value&quot;)
 
 (func any&lt;-key-value-async : any-1
- [key : string
-  val : any-2]
+ [key   : string
+  value : any-2]
  :async
  :doc &quot;Generic Function returning Asynchronous Generic any-1 from a key and a value&quot;)
 
@@ -5282,8 +5282,8 @@
  :doc &quot;Returns the empty value for a given type. Can be called using (empty type) or simply (type)&quot;)
 
 (func extends&lt;-any : string
- [val : any-1]
- (extends&lt;-typedef (typedef&lt;-any val)))
+ [value : any-1]
+ (extends&lt;-typedef (typedef&lt;-any value)))
 
 (func extends&lt;-typedef : string
  [vtypedef : typedef]
@@ -5385,16 +5385,16 @@
  :doc &quot;Shell for lambda function calls&quot;)
 
 (func funcdef&lt;-func : funcdef
- [val : func]
+ [value : func]
  (native
   :cpp
-   &quot;val-&gt;vx_funcdef();&quot;
+   &quot;value-&gt;vx_funcdef();&quot;
   :csharp
-   &quot;val.vx_funcdef();&quot;
+   &quot;value.vx_funcdef();&quot;
   :java
-   &quot;val.vx_funcdef();&quot;
+   &quot;value.vx_funcdef();&quot;
   :kotlin
-   &quot;val.vx_funcdef()&quot;)
+   &quot;value.vx_funcdef()&quot;)
  :doc &quot;Returns the definition of a function&quot;)
 
 (func funcname&lt;-funcdef : string
@@ -5530,19 +5530,19 @@
  :doc &quot;Function Type returning int with any parameters&quot;)
 
 (func int&lt;-string : int
- [val : string]
+ [value : string]
  (switch : int
-  val
+  value
   (case &quot;notanumber&quot;  notanumber)
   (case &quot;infinity&quot;    infinity)
   (case &quot;neginfinity&quot; neginfinity)
   (else
    (native
     :cpp
-     &quot;// :capture val
+     &quot;// :capture value
       vx_core::Type_int intresult = vx_core::e_int;
       try {
-        std::string sval = val-&gt;vx_string();
+        std::string sval = value-&gt;vx_string();
         long ival = std::stoll(sval);
         intresult = vx_core::vx_new_int(ival);
       } catch (std::exception ex) {
@@ -5550,27 +5550,40 @@
       }
       return intresult;&quot;
     :csharp
-     &quot;int intresult = 0;
-      string strval = val.vx_string();
+     &quot;Vx.Core.Type_int intresult = Vx.Core.e_int;
+      string strval = value.vx_string();
       try {
         float floatresult = float.Parse(strval);
-        intresult = (int)floatresult;
-        return Vx.Core.vx_new_int(intresult);
+        int iresult = (int)floatresult;
+        intresult = Vx.Core.vx_new_int(iresult);
       } catch (Exception) {
-        return Vx.Core.c_notanumber;
-      }&quot;
+        intresult = Vx.Core.c_notanumber;
+      }
+      return intresult;&quot;
     :java
-     &quot;int intresult = 0;
-      String strval = val.vx_string();
+     &quot;Core.Type_int intresult = Core.e_int;
+      String strval = value.vx_string();
       try {
         float floatresult = Float.parseFloat(strval);
-        intresult = (int)floatresult;
-        return Core.vx_new_int(intresult);
+        int iresult = (int)floatresult;
+        intresult = Core.vx_new_int(iresult);
       } catch (Exception ex) {
-        return Core.c_notanumber;
-      }&quot;
+        intresult = Core.c_notanumber;
+      }
+      return intresult;&quot;
     :js
-     &quot;parseInt(val)&quot;
+     &quot;parseInt(value)&quot;
+    :kotlin
+     &quot;var intresult : vx_core.Type_int = vx_core.e_int
+      val strval : String = value.vx_string()
+      try {
+        val floatresult : float = float.Parse(strval)
+        val iresult : int = floatresult as int
+        intresult = vx_core.vx_new_int(iresult)
+      } catch (ex : Exception) {
+        intresult = vx_core.c_notanumber
+      }
+      return intresult&quot;
     )
   )
  )
@@ -5680,33 +5693,33 @@
  :doc &quot;Returns true if text ends with find.&quot;)
 
 (func is-func : boolean
- [val : any]
+ [value : any]
  (native
   :cpp
-   &quot;vx_core::Type_string extend = &quot; (extends&lt;-any val) &quot;;
+   &quot;vx_core::Type_string extend = &quot; (extends&lt;-any value) &quot;;
     std::string sextend = extend-&gt;vx_string();
     vx_core::vx_release(extend);
     if (sextend == “:func”) {
       output = vx_core::c_true;
     }&quot;
   :csharp
-   &quot;if (val is Vx.Core.Type_func) {
+   &quot;if (value is Vx.Core.Type_func) {
       output = Vx.Core.c_true;
     }&quot;
   :java
-   &quot;if (val instanceof Core.Type_func) {
+   &quot;if (value instanceof Core.Type_func) {
       output = Core.c_true;
     }&quot;
   :js
-   &quot;const extend = &quot; (extends&lt;-any val) &quot;
+   &quot;const extend = &quot; (extends&lt;-any value) &quot;
     if (extend == ':func') {
       output = vx_core.c_true
     }&quot;
   :kotlin
-   &quot;if (val is vx_core.Type_func) {
+   &quot;if (value is vx_core.Type_func) {
       output = vx_core.c_true
     }&quot;)
- :doc &quot;Returns true if val is a function.&quot;)
+ :doc &quot;Returns true if value is a function.&quot;)
 
 (func is-int : boolean
  [value : any]
@@ -5765,7 +5778,7 @@
  :test (test-true  (is-number 5))
        (test-true  (is-number 5.5))
        (test-false (is-number &quot;a&quot;))
- :doc &quot;Return true if val is a number&quot;)
+ :doc &quot;Return true if value is a number&quot;)
 
 (func is-pass&lt;-permission : boolean
  [permission : permission]
@@ -6007,9 +6020,9 @@
         (list&lt;-map : stringlist
          (stringmap &quot;a&quot; &quot;1&quot; &quot;b&quot; &quot;2&quot;)
          (fn : string
-          [key : string
-           val : string]
-          (string key val))))
+          [key   : string
+           value : string]
+          (string key value))))
  :doc &quot;Returns a list from a map by applying a function to each key value.&quot;)
 
 (func list&lt;-map-async : list-1 :async
@@ -6167,8 +6180,8 @@
         (map&lt;-list : stringmap
          (stringlist &quot;a&quot; &quot;b&quot;)
          (fn : string
-          [val : string]
-          (string &quot;key&quot; val))))
+          [value : string]
+          (string &quot;key&quot; value))))
  :doc &quot;Returns a map from a list by applying a function to generate a key for each value.&quot;)
 
 (func map&lt;-map : map-1
@@ -6216,8 +6229,8 @@
           :b &quot;2&quot;)
          (fn : string
           [key : string
-           val : string]
-          (string key val))))
+           value : string]
+          (string key value))))
  :doc &quot;Returns a map from a map by applying a function to each key value.&quot;)
 
 (func msg&lt;-error : msg
@@ -6625,11 +6638,11 @@
  :doc &quot;Returns a stringlist of keys from any map in entry order.&quot;)
 
 (func switch : any-1
- [val          : any-2
+ [value        : any-2
   thenelselist : thenelselist :...]
  (native
   :cpp
-   &quot;vx_core::Type_any any = vx_core::vx_switch(generic_any_1, val, thenelselist);
+   &quot;vx_core::Type_any any = vx_core::vx_switch(generic_any_1, value, thenelselist);
     output = vx_core::vx_any_from_any(generic_any_1, any);&quot;
   :csharp :auto
   :java
@@ -6639,15 +6652,15 @@
       Core.Type_string code = thenelse.code();
       switch (code.vx_string()) {
       case “:case”:
-        Core.Type_any value = thenelse.value();
-        Core.Type_boolean iseq = Core.f_eq(val, value);
+        Core.Type_any value2 = thenelse.value();
+        Core.Type_boolean iseq = Core.f_eq(value, value2);
         if (iseq.vx_boolean()) {
           fn_any = thenelse.fn_any();
         }
         break;
       case “:casemany”:
         Core.Type_list values = thenelse.values();
-        Core.Type_boolean iscontain = Core.f_contains_1(values, val);
+        Core.Type_boolean iscontain = Core.f_contains_1(values, value);
         if (iscontain.vx_boolean()) {
           fn_any = thenelse.fn_any();
         }
@@ -6671,19 +6684,19 @@
         const code = thenelse['code']
         switch (code) {
         case ':case':
-          const value = thenelse['value']
-          if (value == val) {
+          const value2 = thenelse['value']
+          if (value2 == value) {
             fn_any = thenelse['fn-any']
-          } else if (typeof value == 'number') {
+          } else if (typeof value2 == 'number') {
             // special handling of notanumber
-            if (isNaN(val) &amp;&amp; isNaN(value)) {
+            if (isNaN(value) &amp;&amp; isNaN(value2)) {
               fn_any = thenelse['fn-any']
             }
           }
           break
         case ':casemany':
           const values = thenelse['values']
-          if (values.includes(val)) {
+          if (values.includes(value)) {
             fn_any = thenelse['fn-any']
           }
           break
@@ -6787,21 +6800,23 @@
  :doc  &quot;Gets the Type of a given Value&quot;)
 
 (func typedef&lt;-any : typedef
- [val : any]
- (typedef&lt;-type (type&lt;-any val))
+ [value : any]
+ (typedef&lt;-type (type&lt;-any value))
  :doc  &quot;Gets the typedef of a given value&quot;)
 
 (func typedef&lt;-type : typedef
- [val : any]
+ [value : any]
  (native
   :cpp
-   &quot;val-&gt;vx_typedef();&quot;
+   &quot;value-&gt;vx_typedef();&quot;
   :csharp
-   &quot;val.vx_typedef();&quot;
+   &quot;value.vx_typedef();&quot;
   :java
-   &quot;val.vx_typedef();&quot;
+   &quot;value.vx_typedef();&quot;
   :js
-   &quot;output = val&quot;)
+   &quot;output = value&quot;
+  :kotlin
+   &quot;value.vx_typedef()&quot;)
  :doc  &quot;Gets the typedef of a given type&quot;)
 
 (func typename&lt;-any : string
@@ -13953,7 +13968,7 @@
                     <div class="td">Description</div>
                   </div>
                   <div class="tr">
-                    <div class="td">val</div>
+                    <div class="td">value</div>
                     <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/boolean')">vx/core/boolean</span></div>
                     <div class="td">Thing to not</div>
                   </div>
@@ -13977,13 +13992,13 @@
               <ul>
                 <li>
                   <div class="source">(func ! : boolean
- [val : boolean :doc &quot;Thing to not&quot;]
+ [value : boolean :doc &quot;Thing to not&quot;]
  (native
-  :cpp    &quot;vx_core::vx_new_boolean(!val-&gt;vx_boolean());&quot;
-  :csharp &quot;Vx.Core.vx_new_boolean(!val.vx_boolean());&quot;
-  :java   &quot;Core.vx_new_boolean(!val.vx_boolean());&quot;
-  :js     &quot;!val&quot;
-  :kotlin &quot;vx_core.vx_new_boolean(!val.vx_boolean())&quot;)
+  :cpp    &quot;vx_core::vx_new_boolean(!value-&gt;vx_boolean());&quot;
+  :csharp &quot;Vx.Core.vx_new_boolean(!value.vx_boolean());&quot;
+  :java   &quot;Core.vx_new_boolean(!value.vx_boolean());&quot;
+  :js     &quot;!value&quot;
+  :kotlin &quot;vx_core.vx_new_boolean(!value.vx_boolean())&quot;)
  :alias &quot;not&quot;
  :test (test-false false)
        (test-false (! true))
@@ -14205,7 +14220,7 @@
             <div class="lbl">Description:</div>
             <ul>
               <li>
-                <div class="txt">Returns true if val is not empty.</div>
+                <div class="txt">Returns true if value is not empty.</div>
               </li>
             </ul>
             <div class="lbl">Function Name:</div>
@@ -14234,7 +14249,7 @@
                     <div class="td">Description</div>
                   </div>
                   <div class="tr">
-                    <div class="td">val</div>
+                    <div class="td">value</div>
                     <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any')">vx/core/any</span></div>
                     <div class="td"></div>
                   </div>
@@ -14256,10 +14271,10 @@
               <ul>
                 <li>
                   <div class="source">(func !-empty : boolean
- [val : any]
- (! (is-empty val))
+ [value : any]
+ (! (is-empty value))
  :alias &quot;notempty&quot;
- :doc &quot;Returns true if val is not empty.&quot;)</div>
+ :doc &quot;Returns true if value is not empty.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -15985,7 +16000,7 @@ improves readability.</div>
                     <div class="td"></div>
                   </div>
                   <div class="tr">
-                    <div class="td">val</div>
+                    <div class="td">value</div>
                     <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any-2')">vx/core/any-2</span></div>
                     <div class="td"></div>
                   </div>
@@ -16007,8 +16022,8 @@ improves readability.</div>
               <ul>
                 <li>
                   <div class="source">(func any&lt;-int-any : any-1
- [num : int
-  val : any-2]
+ [num   : int
+  value : any-2]
  :doc &quot;Generic Function returning Generic any-1 from an int and a value&quot;)</div>
                 </li>
               </ul>
@@ -16053,7 +16068,7 @@ improves readability.</div>
                     <div class="td"></div>
                   </div>
                   <div class="tr">
-                    <div class="td">val</div>
+                    <div class="td">value</div>
                     <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any-2')">vx/core/any-2</span></div>
                     <div class="td"></div>
                   </div>
@@ -16075,8 +16090,8 @@ improves readability.</div>
               <ul>
                 <li>
                   <div class="source">(func any&lt;-key-value : any-1
- [key : string
-  val : any-2]
+ [key   : string
+  value : any-2]
  :doc &quot;Generic Function returning Generic any-1 from a key and a value&quot;)</div>
                 </li>
               </ul>
@@ -16121,7 +16136,7 @@ improves readability.</div>
                     <div class="td"></div>
                   </div>
                   <div class="tr">
-                    <div class="td">val</div>
+                    <div class="td">value</div>
                     <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any-2')">vx/core/any-2</span></div>
                     <div class="td"></div>
                   </div>
@@ -16143,8 +16158,8 @@ improves readability.</div>
               <ul>
                 <li>
                   <div class="source">(func any&lt;-key-value-async : any-1
- [key : string
-  val : any-2]
+ [key   : string
+  value : any-2]
  :async
  :doc &quot;Generic Function returning Asynchronous Generic any-1 from a key and a value&quot;)</div>
                 </li>
@@ -18428,7 +18443,7 @@ improves readability.</div>
                     <div class="td">Description</div>
                   </div>
                   <div class="tr">
-                    <div class="td">val</div>
+                    <div class="td">value</div>
                     <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any-1')">vx/core/any-1</span></div>
                     <div class="td"></div>
                   </div>
@@ -18450,8 +18465,8 @@ improves readability.</div>
               <ul>
                 <li>
                   <div class="source">(func extends&lt;-any : string
- [val : any-1]
- (extends&lt;-typedef (typedef&lt;-any val)))</div>
+ [value : any-1]
+ (extends&lt;-typedef (typedef&lt;-any value)))</div>
                 </li>
               </ul>
             </details>
@@ -18904,7 +18919,7 @@ improves readability.</div>
                     <div class="td">Description</div>
                   </div>
                   <div class="tr">
-                    <div class="td">val</div>
+                    <div class="td">value</div>
                     <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/func')">vx/core/func</span></div>
                     <div class="td"></div>
                   </div>
@@ -18926,16 +18941,16 @@ improves readability.</div>
               <ul>
                 <li>
                   <div class="source">(func funcdef&lt;-func : funcdef
- [val : func]
+ [value : func]
  (native
   :cpp
-   &quot;val-&gt;vx_funcdef();&quot;
+   &quot;value-&gt;vx_funcdef();&quot;
   :csharp
-   &quot;val.vx_funcdef();&quot;
+   &quot;value.vx_funcdef();&quot;
   :java
-   &quot;val.vx_funcdef();&quot;
+   &quot;value.vx_funcdef();&quot;
   :kotlin
-   &quot;val.vx_funcdef()&quot;)
+   &quot;value.vx_funcdef()&quot;)
  :doc &quot;Returns the definition of a function&quot;)</div>
                 </li>
               </ul>
@@ -19432,7 +19447,7 @@ improves readability.</div>
                     <div class="td">Description</div>
                   </div>
                   <div class="tr">
-                    <div class="td">val</div>
+                    <div class="td">value</div>
                     <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
                     <div class="td"></div>
                   </div>
@@ -19460,19 +19475,19 @@ improves readability.</div>
               <ul>
                 <li>
                   <div class="source">(func int&lt;-string : int
- [val : string]
+ [value : string]
  (switch : int
-  val
+  value
   (case &quot;notanumber&quot;  notanumber)
   (case &quot;infinity&quot;    infinity)
   (case &quot;neginfinity&quot; neginfinity)
   (else
    (native
     :cpp
-     &quot;// :capture val
+     &quot;// :capture value
       vx_core::Type_int intresult = vx_core::e_int;
       try {
-        std::string sval = val-&gt;vx_string();
+        std::string sval = value-&gt;vx_string();
         long ival = std::stoll(sval);
         intresult = vx_core::vx_new_int(ival);
       } catch (std::exception ex) {
@@ -19480,27 +19495,40 @@ improves readability.</div>
       }
       return intresult;&quot;
     :csharp
-     &quot;int intresult = 0;
-      string strval = val.vx_string();
+     &quot;Vx.Core.Type_int intresult = Vx.Core.e_int;
+      string strval = value.vx_string();
       try {
         float floatresult = float.Parse(strval);
-        intresult = (int)floatresult;
-        return Vx.Core.vx_new_int(intresult);
+        int iresult = (int)floatresult;
+        intresult = Vx.Core.vx_new_int(iresult);
       } catch (Exception) {
-        return Vx.Core.c_notanumber;
-      }&quot;
+        intresult = Vx.Core.c_notanumber;
+      }
+      return intresult;&quot;
     :java
-     &quot;int intresult = 0;
-      String strval = val.vx_string();
+     &quot;Core.Type_int intresult = Core.e_int;
+      String strval = value.vx_string();
       try {
         float floatresult = Float.parseFloat(strval);
-        intresult = (int)floatresult;
-        return Core.vx_new_int(intresult);
+        int iresult = (int)floatresult;
+        intresult = Core.vx_new_int(iresult);
       } catch (Exception ex) {
-        return Core.c_notanumber;
-      }&quot;
+        intresult = Core.c_notanumber;
+      }
+      return intresult;&quot;
     :js
-     &quot;parseInt(val)&quot;
+     &quot;parseInt(value)&quot;
+    :kotlin
+     &quot;var intresult : vx_core.Type_int = vx_core.e_int
+      val strval : String = value.vx_string()
+      try {
+        val floatresult : float = float.Parse(strval)
+        val iresult : int = floatresult as int
+        intresult = vx_core.vx_new_int(iresult)
+      } catch (ex : Exception) {
+        intresult = vx_core.c_notanumber
+      }
+      return intresult&quot;
     )
   )
  )
@@ -19800,7 +19828,7 @@ improves readability.</div>
             <div class="lbl">Description:</div>
             <ul>
               <li>
-                <div class="txt">Returns true if val is a function.</div>
+                <div class="txt">Returns true if value is a function.</div>
               </li>
             </ul>
             <div class="lbl">Function Name:</div>
@@ -19829,7 +19857,7 @@ improves readability.</div>
                     <div class="td">Description</div>
                   </div>
                   <div class="tr">
-                    <div class="td">val</div>
+                    <div class="td">value</div>
                     <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any')">vx/core/any</span></div>
                     <div class="td"></div>
                   </div>
@@ -19851,33 +19879,33 @@ improves readability.</div>
               <ul>
                 <li>
                   <div class="source">(func is-func : boolean
- [val : any]
+ [value : any]
  (native
   :cpp
-   &quot;vx_core::Type_string extend = &quot; (extends&lt;-any val) &quot;;
+   &quot;vx_core::Type_string extend = &quot; (extends&lt;-any value) &quot;;
     std::string sextend = extend-&gt;vx_string();
     vx_core::vx_release(extend);
     if (sextend == “:func”) {
       output = vx_core::c_true;
     }&quot;
   :csharp
-   &quot;if (val is Vx.Core.Type_func) {
+   &quot;if (value is Vx.Core.Type_func) {
       output = Vx.Core.c_true;
     }&quot;
   :java
-   &quot;if (val instanceof Core.Type_func) {
+   &quot;if (value instanceof Core.Type_func) {
       output = Core.c_true;
     }&quot;
   :js
-   &quot;const extend = &quot; (extends&lt;-any val) &quot;
+   &quot;const extend = &quot; (extends&lt;-any value) &quot;
     if (extend == ':func') {
       output = vx_core.c_true
     }&quot;
   :kotlin
-   &quot;if (val is vx_core.Type_func) {
+   &quot;if (value is vx_core.Type_func) {
       output = vx_core.c_true
     }&quot;)
- :doc &quot;Returns true if val is a function.&quot;)</div>
+ :doc &quot;Returns true if value is a function.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -20055,7 +20083,7 @@ improves readability.</div>
             <div class="lbl">Description:</div>
             <ul>
               <li>
-                <div class="txt">Return true if val is a number</div>
+                <div class="txt">Return true if value is a number</div>
               </li>
             </ul>
             <div class="lbl">Function Name:</div>
@@ -20121,7 +20149,7 @@ improves readability.</div>
  :test (test-true  (is-number 5))
        (test-true  (is-number 5.5))
        (test-false (is-number &quot;a&quot;))
- :doc &quot;Return true if val is a number&quot;)</div>
+ :doc &quot;Return true if value is a number&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -21163,9 +21191,9 @@ improves readability.</div>
  (list&lt;-map : stringlist
   (stringmap &quot;a&quot; &quot;1&quot; &quot;b&quot; &quot;2&quot;)
   (fn : string
-   [key : string
-    val : string]
-   (string key val))))</div></li>
+   [key   : string
+    value : string]
+   (string key value))))</div></li>
               </ul>
             </details>
             <details open="true">
@@ -21195,9 +21223,9 @@ improves readability.</div>
         (list&lt;-map : stringlist
          (stringmap &quot;a&quot; &quot;1&quot; &quot;b&quot; &quot;2&quot;)
          (fn : string
-          [key : string
-           val : string]
-          (string key val))))
+          [key   : string
+           value : string]
+          (string key value))))
  :doc &quot;Returns a list from a map by applying a function to each key value.&quot;)</div>
                 </li>
               </ul>
@@ -21817,8 +21845,8 @@ improves readability.</div>
  (map&lt;-list : stringmap
   (stringlist &quot;a&quot; &quot;b&quot;)
   (fn : string
-   [val : string]
-   (string &quot;key&quot; val))))</div></li>
+   [value : string]
+   (string &quot;key&quot; value))))</div></li>
               </ul>
             </details>
             <details open="true">
@@ -21863,8 +21891,8 @@ improves readability.</div>
         (map&lt;-list : stringmap
          (stringlist &quot;a&quot; &quot;b&quot;)
          (fn : string
-          [val : string]
-          (string &quot;key&quot; val))))
+          [value : string]
+          (string &quot;key&quot; value))))
  :doc &quot;Returns a map from a list by applying a function to generate a key for each value.&quot;)</div>
                 </li>
               </ul>
@@ -22008,8 +22036,8 @@ improves readability.</div>
    :b &quot;2&quot;)
   (fn : string
    [key : string
-    val : string]
-   (string key val))))</div></li>
+    value : string]
+   (string key value))))</div></li>
               </ul>
             </details>
             <details open="true">
@@ -22049,8 +22077,8 @@ improves readability.</div>
           :b &quot;2&quot;)
          (fn : string
           [key : string
-           val : string]
-          (string key val))))
+           value : string]
+          (string key value))))
  :doc &quot;Returns a map from a map by applying a function to each key value.&quot;)</div>
                 </li>
               </ul>
@@ -24610,7 +24638,7 @@ improves readability.</div>
                     <div class="td">Description</div>
                   </div>
                   <div class="tr">
-                    <div class="td">val</div>
+                    <div class="td">value</div>
                     <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any-2')">vx/core/any-2</span></div>
                     <div class="td"></div>
                   </div>
@@ -24642,11 +24670,11 @@ improves readability.</div>
               <ul>
                 <li>
                   <div class="source">(func switch : any-1
- [val          : any-2
+ [value        : any-2
   thenelselist : thenelselist :...]
  (native
   :cpp
-   &quot;vx_core::Type_any any = vx_core::vx_switch(generic_any_1, val, thenelselist);
+   &quot;vx_core::Type_any any = vx_core::vx_switch(generic_any_1, value, thenelselist);
     output = vx_core::vx_any_from_any(generic_any_1, any);&quot;
   :csharp :auto
   :java
@@ -24656,15 +24684,15 @@ improves readability.</div>
       Core.Type_string code = thenelse.code();
       switch (code.vx_string()) {
       case “:case”:
-        Core.Type_any value = thenelse.value();
-        Core.Type_boolean iseq = Core.f_eq(val, value);
+        Core.Type_any value2 = thenelse.value();
+        Core.Type_boolean iseq = Core.f_eq(value, value2);
         if (iseq.vx_boolean()) {
           fn_any = thenelse.fn_any();
         }
         break;
       case “:casemany”:
         Core.Type_list values = thenelse.values();
-        Core.Type_boolean iscontain = Core.f_contains_1(values, val);
+        Core.Type_boolean iscontain = Core.f_contains_1(values, value);
         if (iscontain.vx_boolean()) {
           fn_any = thenelse.fn_any();
         }
@@ -24688,19 +24716,19 @@ improves readability.</div>
         const code = thenelse['code']
         switch (code) {
         case ':case':
-          const value = thenelse['value']
-          if (value == val) {
+          const value2 = thenelse['value']
+          if (value2 == value) {
             fn_any = thenelse['fn-any']
-          } else if (typeof value == 'number') {
+          } else if (typeof value2 == 'number') {
             // special handling of notanumber
-            if (isNaN(val) &amp;&amp; isNaN(value)) {
+            if (isNaN(value) &amp;&amp; isNaN(value2)) {
               fn_any = thenelse['fn-any']
             }
           }
           break
         case ':casemany':
           const values = thenelse['values']
-          if (values.includes(val)) {
+          if (values.includes(value)) {
             fn_any = thenelse['fn-any']
           }
           break
@@ -25028,7 +25056,7 @@ improves readability.</div>
                     <div class="td">Description</div>
                   </div>
                   <div class="tr">
-                    <div class="td">val</div>
+                    <div class="td">value</div>
                     <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any')">vx/core/any</span></div>
                     <div class="td"></div>
                   </div>
@@ -25050,8 +25078,8 @@ improves readability.</div>
               <ul>
                 <li>
                   <div class="source">(func typedef&lt;-any : typedef
- [val : any]
- (typedef&lt;-type (type&lt;-any val))
+ [value : any]
+ (typedef&lt;-type (type&lt;-any value))
  :doc  &quot;Gets the typedef of a given value&quot;)</div>
                 </li>
               </ul>
@@ -25091,7 +25119,7 @@ improves readability.</div>
                     <div class="td">Description</div>
                   </div>
                   <div class="tr">
-                    <div class="td">val</div>
+                    <div class="td">value</div>
                     <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any')">vx/core/any</span></div>
                     <div class="td"></div>
                   </div>
@@ -25113,16 +25141,18 @@ improves readability.</div>
               <ul>
                 <li>
                   <div class="source">(func typedef&lt;-type : typedef
- [val : any]
+ [value : any]
  (native
   :cpp
-   &quot;val-&gt;vx_typedef();&quot;
+   &quot;value-&gt;vx_typedef();&quot;
   :csharp
-   &quot;val.vx_typedef();&quot;
+   &quot;value.vx_typedef();&quot;
   :java
-   &quot;val.vx_typedef();&quot;
+   &quot;value.vx_typedef();&quot;
   :js
-   &quot;output = val&quot;)
+   &quot;output = value&quot;
+  :kotlin
+   &quot;value.vx_typedef()&quot;)
  :doc  &quot;Gets the typedef of a given type&quot;)</div>
                 </li>
               </ul>
@@ -58887,7 +58917,7 @@ output : list-1 := (empty list-1)
               type     : any
               repllist : repllist
               async    : boolean
-              val      : any
+              value    : any
               doc      : string]
  :doc &quot;Repl structure&quot;)
 
@@ -58952,12 +58982,14 @@ output : list-1 := (empty list-1)
 (func any&lt;-macro : any-1
  [anylist : anylist :...]
  (let : any-1
-  [repl : repl := (repl&lt;-macro
-                   anylist)
-   val  : any  := (any&lt;-repl
-                   repl)]
+  [repl  : repl :=
+   (repl&lt;-macro
+    anylist)
+   value : any :=
+    (any&lt;-repl
+     repl)]
   (any&lt;-any : any-1
-   val))
+   value))
  :context
  :test (test
         5
@@ -58970,12 +59002,12 @@ output : list-1 := (empty list-1)
 (func any&lt;-repl : any
  [repl : repl]
  (let : any
-  [val      : any      := (:val repl)
+  [value    : any      := (:value repl)
    repltype : any      := (:type repl)
    repllist : repllist := (:repllist repl)
    args     : anylist  := (anylist&lt;-repllist repllist)]
   (if
-   (then (!-empty val) val)
+   (then (!-empty value) value)
    (then (is-func repltype)
     (any-repl&lt;-functype-args
      repltype
@@ -58990,8 +59022,8 @@ output : list-1 := (empty list-1)
           :type string
           :repllist
            (repllist
-            (repl :val &quot;Hello&quot;)
-            (repl :val &quot;World&quot;)
+            (repl :value &quot;Hello&quot;)
+            (repl :value &quot;World&quot;)
            ))))
        (test
         5
@@ -59000,8 +59032,8 @@ output : list-1 := (empty list-1)
           :type +
           :repllist
            (repllist
-            (repl :val 2)
-            (repl :val 3)))))
+            (repl :value 2)
+            (repl :value 3)))))
  :doc &quot;Run an arbitrary program in the REPL.&quot;)
 
 (func any&lt;-script : any
@@ -59209,9 +59241,9 @@ output : list-1 := (empty list-1)
          :repllist
           (repllist
            (repl
-            :val 2)
+            :value 2)
            (repl
-            :val 3)))
+            :value 3)))
         (repl&lt;-macro
          &quot;(+ &quot;
          (- 7 5)
@@ -59227,12 +59259,12 @@ output : list-1 := (empty list-1)
    textblock))
  :test (test
         (repl
-         :val 2)
+         :value 2)
         (repl&lt;-script
          &quot;2&quot;))
        (test
         (repl
-         :val infinity)
+         :value infinity)
         (repl&lt;-script
          &quot;infinity&quot;))
        (test
@@ -59246,9 +59278,9 @@ output : list-1 := (empty list-1)
          :repllist
           (repllist
            (repl
-            :val 2)
+            :value 2)
            (repl
-            :val 3)))
+            :value 3)))
         (repl&lt;-script
          &quot;(+ 2 3)&quot;))
  :doc &quot;Returns a parsed repl from a string&quot;)
@@ -59260,45 +59292,45 @@ output : list-1 := (empty list-1)
   (then // if starts and ends quote
    (and
     (type/boolean&lt;-string-starts
-     text
-     quote)
+     text quote)
     (type/boolean&lt;-string-ends
-     text
-     quote))
+     text quote))
    (repl
-    :val (type/string&lt;-string-start-end
-          text
-          2
-          -1)))
+    :value
+     (type/string&lt;-string-start-end
+      text 2 -1)))
   (then // then if is int
    (is-int text)
    (repl
-    :val (int&lt;-string
-          text)))
+    :value
+     (int&lt;-string
+      text)))
   (then // then if is float
    (is-float text)
    (repl
-    :val (float&lt;-string
-          text)))
+    :value
+     (float&lt;-string
+      text)))
   (else
    (let : repl
-    [arg : any := (any&lt;-map
-                   argmap
-                   text)]
+    [arg : any :=
+     (any&lt;-map
+      argmap text)]
     (if : repl
      (then // if in argmap
       (!-empty arg)
       (repl
-       :val arg))
+       :value arg))
      (else
       (let : repl
-       [cnst : any := (const&lt;-string
-                       text)]
+       [cnst : any :=
+        (const&lt;-string
+         text)]
        (if : repl
         (then
          (!-empty cnst)
          (repl
-          :val cnst))
+          :value cnst))
         (else
          (let : repl
           [typefunc : any := (typefunc&lt;-string
@@ -59314,30 +59346,30 @@ output : list-1 := (empty list-1)
               :repltypenotfound
               text)))))))))))))
  :test (test
-        (repl :val &quot;Hello&quot;)
+        (repl :value &quot;Hello&quot;)
         (repl&lt;-string-argmap
          `&quot;Hello&quot;`
          (empty argmap)))
        (test
         (repl
-         :val 2)
+         :value 2)
         (repl&lt;-string-argmap
          &quot;2&quot;
          (empty argmap)))
        (test
-        (repl :val 2.3)
+        (repl :value 2.3)
         (repl&lt;-string-argmap
          &quot;2.3&quot;
          (empty argmap)))
        (test
         (repl
-         :val infinity)
+         :value infinity)
         (repl&lt;-string-argmap
          &quot;infinity&quot;
          (empty argmap)))
        (test
         (repl
-         :val tb/delimcomma)
+         :value tb/delimcomma)
         (repl&lt;-string-argmap
          &quot;vx/data/textblock/delimcomma&quot;
          (empty argmap)))
@@ -59358,7 +59390,7 @@ output : list-1 := (empty list-1)
  (repl&lt;-textblock-argmap
   textblock (empty argmap))
  :test (test
-        (repl :val 2)
+        (repl :value 2)
         (repl&lt;-textblock
          (tb/textblock
           :text &quot;2&quot;)))
@@ -59377,8 +59409,8 @@ output : list-1 := (empty list-1)
          :type +
          :repllist
           (repllist
-           (repl :val 2)
-           (repl :val 3)))
+           (repl :value 2)
+           (repl :value 3)))
         (repl&lt;-textblock
          (tb/textblock
           :text &quot;(+ 2 3)&quot;
@@ -59409,8 +59441,8 @@ output : list-1 := (empty list-1)
          :type +
          :repllist
           (repllist
-           (repl :val 2)
-           (repl :val 3)))
+           (repl :value 2)
+           (repl :value 3)))
         (repl&lt;-textblock
          (tb/textblock
           :text &quot;(+ 2 3)&quot;
@@ -59463,7 +59495,7 @@ output : list-1 := (empty list-1)
      textblock
      argmap))))
  :test (test
-        (repl :val 2)
+        (repl :value 2)
         (repl&lt;-textblock-argmap
          (tb/textblock
           :text &quot;2&quot;)
@@ -59479,8 +59511,8 @@ output : list-1 := (empty list-1)
          :type +
          :repllist
           (repllist
-           (repl :val 2)
-           (repl :val 3)))
+           (repl :value 2)
+           (repl :value 3)))
         (repl&lt;-textblock-argmap
          (tb/textblock
           :text &quot;(+ 2 3)&quot;
@@ -59512,8 +59544,8 @@ output : list-1 := (empty list-1)
          :type +
          :repllist
           (repllist
-           (repl :val 2)
-           (repl :val 3)))
+           (repl :value 2)
+           (repl :value 3)))
         (repl&lt;-textblock-argmap
          (tb/textblock
           :text &quot;(+ 2 3)&quot;
@@ -59581,12 +59613,12 @@ output : list-1 := (empty list-1)
          :repllist
           (repllist
            (repl
-            :val 2)
+            :value 2)
            (repl
-            :val 3)))
+            :value 3)))
         (repl-bracket&lt;-textblock-argmap
          (tb/textblock
-          :text &quot;[val : int := (+ 2 3)]&quot;
+          :text &quot;[value : int := (+ 2 3)]&quot;
           :delim
            (copy delimvxlispbracket
             :delimlist
@@ -59594,7 +59626,7 @@ output : list-1 := (empty list-1)
           :children
            (tb/textblocklist
             (tb/textblock
-             :text &quot;val&quot;)
+             :text &quot;value&quot;)
             (tb/textblock
              :text &quot;:&quot;)
             (tb/textblock
@@ -59648,7 +59680,7 @@ output : list-1 := (empty list-1)
      (msg&lt;-error
       &quot;Empty delim cannot have more than one child.&quot;)))))
  :test (test
-        (repl :val 2)
+        (repl :value 2)
         (repl-empty&lt;-textblock-argmap
          (tb/textblock
           :text &quot;2&quot;)
@@ -59660,7 +59692,7 @@ output : list-1 := (empty list-1)
           :text &quot;+&quot;)
          (empty argmap)))
        (test
-        (repl :val 2)
+        (repl :value 2)
         (repl-empty&lt;-textblock-argmap
          (tb/textblock
           :text &quot;1&quot;
@@ -59726,9 +59758,9 @@ output : list-1 := (empty list-1)
          :repllist
           (repllist
            (repl
-            :val 2)
+            :value 2)
            (repl
-            :val 3)))
+            :value 3)))
         (repl-paren&lt;-textblock-argmap
          (tb/textblock
           :text &quot;(+ 2 3)&quot;
@@ -59884,12 +59916,12 @@ output : list-1 := (empty list-1)
 (func any&lt;-repl-async : any
  [repl : repl]
  (let-async : any
-  [val      : any      := (:val repl)
+  [value    : any      := (:value repl)
    repltype : any      := (:type repl)
    repllist : repllist := (:repllist repl)
    args     : anylist  := (anylist&lt;-repllist repllist)]
   (if
-   (then (!-empty val) val)
+   (then (!-empty value) value)
    (then (is-func repltype)
     (any-repl&lt;-functype-args
      repltype
@@ -60037,7 +60069,7 @@ output : list-1 := (empty list-1)
                       <div class="td">false</div>
                     </div>
                     <div class="tr">
-                      <div class="td">val</div>
+                      <div class="td">value</div>
                       <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any')">vx/core/any</span></div>
                       <div class="td"></div>
                       <div class="td">false</div>
@@ -60072,7 +60104,7 @@ output : list-1 := (empty list-1)
               type     : any
               repllist : repllist
               async    : boolean
-              val      : any
+              value    : any
               doc      : string]
  :doc &quot;Repl structure&quot;)</div>
                 </li>
@@ -60501,12 +60533,14 @@ output : list-1 := (empty list-1)
                   <div class="source">(func any&lt;-macro : any-1
  [anylist : anylist :...]
  (let : any-1
-  [repl : repl := (repl&lt;-macro
-                   anylist)
-   val  : any  := (any&lt;-repl
-                   repl)]
+  [repl  : repl :=
+   (repl&lt;-macro
+    anylist)
+   value : any :=
+    (any&lt;-repl
+     repl)]
   (any&lt;-any : any-1
-   val))
+   value))
  :context
  :test (test
         5
@@ -60573,8 +60607,8 @@ output : list-1 := (empty list-1)
    :type string
    :repllist
     (repllist
-     (repl :val &quot;Hello&quot;)
-     (repl :val &quot;World&quot;)
+     (repl :value &quot;Hello&quot;)
+     (repl :value &quot;World&quot;)
     ))))</div></li>
                 <li><div class="test">(test
  5
@@ -60583,8 +60617,8 @@ output : list-1 := (empty list-1)
    :type +
    :repllist
     (repllist
-     (repl :val 2)
-     (repl :val 3)))))</div></li>
+     (repl :value 2)
+     (repl :value 3)))))</div></li>
               </ul>
             </details>
             <details open="true">
@@ -60596,12 +60630,12 @@ output : list-1 := (empty list-1)
                   <div class="source">(func any&lt;-repl : any
  [repl : repl]
  (let : any
-  [val      : any      := (:val repl)
+  [value    : any      := (:value repl)
    repltype : any      := (:type repl)
    repllist : repllist := (:repllist repl)
    args     : anylist  := (anylist&lt;-repllist repllist)]
   (if
-   (then (!-empty val) val)
+   (then (!-empty value) value)
    (then (is-func repltype)
     (any-repl&lt;-functype-args
      repltype
@@ -60616,8 +60650,8 @@ output : list-1 := (empty list-1)
           :type string
           :repllist
            (repllist
-            (repl :val &quot;Hello&quot;)
-            (repl :val &quot;World&quot;)
+            (repl :value &quot;Hello&quot;)
+            (repl :value &quot;World&quot;)
            ))))
        (test
         5
@@ -60626,8 +60660,8 @@ output : list-1 := (empty list-1)
           :type +
           :repllist
            (repllist
-            (repl :val 2)
-            (repl :val 3)))))
+            (repl :value 2)
+            (repl :value 3)))))
  :doc &quot;Run an arbitrary program in the REPL.&quot;)</div>
                 </li>
               </ul>
@@ -61306,9 +61340,9 @@ output : list-1 := (empty list-1)
   :repllist
    (repllist
     (repl
-     :val 2)
+     :value 2)
     (repl
-     :val 3)))
+     :value 3)))
  (repl&lt;-macro
   &quot;(+ &quot;
   (- 7 5)
@@ -61349,9 +61383,9 @@ output : list-1 := (empty list-1)
          :repllist
           (repllist
            (repl
-            :val 2)
+            :value 2)
            (repl
-            :val 3)))
+            :value 3)))
         (repl&lt;-macro
          &quot;(+ &quot;
          (- 7 5)
@@ -61410,12 +61444,12 @@ output : list-1 := (empty list-1)
               <ul>
                 <li><div class="test">(test
  (repl
-  :val 2)
+  :value 2)
  (repl&lt;-script
   &quot;2&quot;))</div></li>
                 <li><div class="test">(test
  (repl
-  :val infinity)
+  :value infinity)
  (repl&lt;-script
   &quot;infinity&quot;))</div></li>
                 <li><div class="test">(test
@@ -61429,9 +61463,9 @@ output : list-1 := (empty list-1)
   :repllist
    (repllist
     (repl
-     :val 2)
+     :value 2)
     (repl
-     :val 3)))
+     :value 3)))
  (repl&lt;-script
   &quot;(+ 2 3)&quot;))</div></li>
               </ul>
@@ -61451,12 +61485,12 @@ output : list-1 := (empty list-1)
    textblock))
  :test (test
         (repl
-         :val 2)
+         :value 2)
         (repl&lt;-script
          &quot;2&quot;))
        (test
         (repl
-         :val infinity)
+         :value infinity)
         (repl&lt;-script
          &quot;infinity&quot;))
        (test
@@ -61470,9 +61504,9 @@ output : list-1 := (empty list-1)
          :repllist
           (repllist
            (repl
-            :val 2)
+            :value 2)
            (repl
-            :val 3)))
+            :value 3)))
         (repl&lt;-script
          &quot;(+ 2 3)&quot;))
  :doc &quot;Returns a parsed repl from a string&quot;)</div>
@@ -61533,30 +61567,30 @@ output : list-1 := (empty list-1)
               </summary>
               <ul>
                 <li><div class="test">(test
- (repl :val &quot;Hello&quot;)
+ (repl :value &quot;Hello&quot;)
  (repl&lt;-string-argmap
   `&quot;Hello&quot;`
   (empty argmap)))</div></li>
                 <li><div class="test">(test
  (repl
-  :val 2)
+  :value 2)
  (repl&lt;-string-argmap
   &quot;2&quot;
   (empty argmap)))</div></li>
                 <li><div class="test">(test
- (repl :val 2.3)
+ (repl :value 2.3)
  (repl&lt;-string-argmap
   &quot;2.3&quot;
   (empty argmap)))</div></li>
                 <li><div class="test">(test
  (repl
-  :val infinity)
+  :value infinity)
  (repl&lt;-string-argmap
   &quot;infinity&quot;
   (empty argmap)))</div></li>
                 <li><div class="test">(test
  (repl
-  :val tb/delimcomma)
+  :value tb/delimcomma)
  (repl&lt;-string-argmap
   &quot;vx/data/textblock/delimcomma&quot;
   (empty argmap)))</div></li>
@@ -61585,45 +61619,45 @@ output : list-1 := (empty list-1)
   (then // if starts and ends quote
    (and
     (type/boolean&lt;-string-starts
-     text
-     quote)
+     text quote)
     (type/boolean&lt;-string-ends
-     text
-     quote))
+     text quote))
    (repl
-    :val (type/string&lt;-string-start-end
-          text
-          2
-          -1)))
+    :value
+     (type/string&lt;-string-start-end
+      text 2 -1)))
   (then // then if is int
    (is-int text)
    (repl
-    :val (int&lt;-string
-          text)))
+    :value
+     (int&lt;-string
+      text)))
   (then // then if is float
    (is-float text)
    (repl
-    :val (float&lt;-string
-          text)))
+    :value
+     (float&lt;-string
+      text)))
   (else
    (let : repl
-    [arg : any := (any&lt;-map
-                   argmap
-                   text)]
+    [arg : any :=
+     (any&lt;-map
+      argmap text)]
     (if : repl
      (then // if in argmap
       (!-empty arg)
       (repl
-       :val arg))
+       :value arg))
      (else
       (let : repl
-       [cnst : any := (const&lt;-string
-                       text)]
+       [cnst : any :=
+        (const&lt;-string
+         text)]
        (if : repl
         (then
          (!-empty cnst)
          (repl
-          :val cnst))
+          :value cnst))
         (else
          (let : repl
           [typefunc : any := (typefunc&lt;-string
@@ -61639,30 +61673,30 @@ output : list-1 := (empty list-1)
               :repltypenotfound
               text)))))))))))))
  :test (test
-        (repl :val &quot;Hello&quot;)
+        (repl :value &quot;Hello&quot;)
         (repl&lt;-string-argmap
          `&quot;Hello&quot;`
          (empty argmap)))
        (test
         (repl
-         :val 2)
+         :value 2)
         (repl&lt;-string-argmap
          &quot;2&quot;
          (empty argmap)))
        (test
-        (repl :val 2.3)
+        (repl :value 2.3)
         (repl&lt;-string-argmap
          &quot;2.3&quot;
          (empty argmap)))
        (test
         (repl
-         :val infinity)
+         :value infinity)
         (repl&lt;-string-argmap
          &quot;infinity&quot;
          (empty argmap)))
        (test
         (repl
-         :val tb/delimcomma)
+         :value tb/delimcomma)
         (repl&lt;-string-argmap
          &quot;vx/data/textblock/delimcomma&quot;
          (empty argmap)))
@@ -61729,7 +61763,7 @@ output : list-1 := (empty list-1)
               </summary>
               <ul>
                 <li><div class="test">(test
- (repl :val 2)
+ (repl :value 2)
  (repl&lt;-textblock
   (tb/textblock
    :text &quot;2&quot;)))</div></li>
@@ -61748,8 +61782,8 @@ output : list-1 := (empty list-1)
   :type +
   :repllist
    (repllist
-    (repl :val 2)
-    (repl :val 3)))
+    (repl :value 2)
+    (repl :value 3)))
  (repl&lt;-textblock
   (tb/textblock
    :text &quot;(+ 2 3)&quot;
@@ -61780,8 +61814,8 @@ output : list-1 := (empty list-1)
   :type +
   :repllist
    (repllist
-    (repl :val 2)
-    (repl :val 3)))
+    (repl :value 2)
+    (repl :value 3)))
  (repl&lt;-textblock
   (tb/textblock
    :text &quot;(+ 2 3)&quot;
@@ -61824,7 +61858,7 @@ output : list-1 := (empty list-1)
  (repl&lt;-textblock-argmap
   textblock (empty argmap))
  :test (test
-        (repl :val 2)
+        (repl :value 2)
         (repl&lt;-textblock
          (tb/textblock
           :text &quot;2&quot;)))
@@ -61843,8 +61877,8 @@ output : list-1 := (empty list-1)
          :type +
          :repllist
           (repllist
-           (repl :val 2)
-           (repl :val 3)))
+           (repl :value 2)
+           (repl :value 3)))
         (repl&lt;-textblock
          (tb/textblock
           :text &quot;(+ 2 3)&quot;
@@ -61875,8 +61909,8 @@ output : list-1 := (empty list-1)
          :type +
          :repllist
           (repllist
-           (repl :val 2)
-           (repl :val 3)))
+           (repl :value 2)
+           (repl :value 3)))
         (repl&lt;-textblock
          (tb/textblock
           :text &quot;(+ 2 3)&quot;
@@ -61964,7 +61998,7 @@ output : list-1 := (empty list-1)
               </summary>
               <ul>
                 <li><div class="test">(test
- (repl :val 2)
+ (repl :value 2)
  (repl&lt;-textblock-argmap
   (tb/textblock
    :text &quot;2&quot;)
@@ -61980,8 +62014,8 @@ output : list-1 := (empty list-1)
   :type +
   :repllist
    (repllist
-    (repl :val 2)
-    (repl :val 3)))
+    (repl :value 2)
+    (repl :value 3)))
  (repl&lt;-textblock-argmap
   (tb/textblock
    :text &quot;(+ 2 3)&quot;
@@ -62013,8 +62047,8 @@ output : list-1 := (empty list-1)
   :type +
   :repllist
    (repllist
-    (repl :val 2)
-    (repl :val 3)))
+    (repl :value 2)
+    (repl :value 3)))
  (repl&lt;-textblock-argmap
   (tb/textblock
    :text &quot;(+ 2 3)&quot;
@@ -62074,7 +62108,7 @@ output : list-1 := (empty list-1)
      textblock
      argmap))))
  :test (test
-        (repl :val 2)
+        (repl :value 2)
         (repl&lt;-textblock-argmap
          (tb/textblock
           :text &quot;2&quot;)
@@ -62090,8 +62124,8 @@ output : list-1 := (empty list-1)
          :type +
          :repllist
           (repllist
-           (repl :val 2)
-           (repl :val 3)))
+           (repl :value 2)
+           (repl :value 3)))
         (repl&lt;-textblock-argmap
          (tb/textblock
           :text &quot;(+ 2 3)&quot;
@@ -62123,8 +62157,8 @@ output : list-1 := (empty list-1)
          :type +
          :repllist
           (repllist
-           (repl :val 2)
-           (repl :val 3)))
+           (repl :value 2)
+           (repl :value 3)))
         (repl&lt;-textblock-argmap
          (tb/textblock
           :text &quot;(+ 2 3)&quot;
@@ -62255,12 +62289,12 @@ output : list-1 := (empty list-1)
          :repllist
           (repllist
            (repl
-            :val 2)
+            :value 2)
            (repl
-            :val 3)))
+            :value 3)))
         (repl-bracket&lt;-textblock-argmap
          (tb/textblock
-          :text &quot;[val : int := (+ 2 3)]&quot;
+          :text &quot;[value : int := (+ 2 3)]&quot;
           :delim
            (copy delimvxlispbracket
             :delimlist
@@ -62268,7 +62302,7 @@ output : list-1 := (empty list-1)
           :children
            (tb/textblocklist
             (tb/textblock
-             :text &quot;val&quot;)
+             :text &quot;value&quot;)
             (tb/textblock
              :text &quot;:&quot;)
             (tb/textblock
@@ -62357,7 +62391,7 @@ output : list-1 := (empty list-1)
               </summary>
               <ul>
                 <li><div class="test">(test
- (repl :val 2)
+ (repl :value 2)
  (repl-empty&lt;-textblock-argmap
   (tb/textblock
    :text &quot;2&quot;)
@@ -62369,7 +62403,7 @@ output : list-1 := (empty list-1)
    :text &quot;+&quot;)
   (empty argmap)))</div></li>
                 <li><div class="test">(test
- (repl :val 2)
+ (repl :value 2)
  (repl-empty&lt;-textblock-argmap
   (tb/textblock
    :text &quot;1&quot;
@@ -62420,7 +62454,7 @@ output : list-1 := (empty list-1)
      (msg&lt;-error
       &quot;Empty delim cannot have more than one child.&quot;)))))
  :test (test
-        (repl :val 2)
+        (repl :value 2)
         (repl-empty&lt;-textblock-argmap
          (tb/textblock
           :text &quot;2&quot;)
@@ -62432,7 +62466,7 @@ output : list-1 := (empty list-1)
           :text &quot;+&quot;)
          (empty argmap)))
        (test
-        (repl :val 2)
+        (repl :value 2)
         (repl-empty&lt;-textblock-argmap
          (tb/textblock
           :text &quot;1&quot;
@@ -62517,9 +62551,9 @@ output : list-1 := (empty list-1)
   :repllist
    (repllist
     (repl
-     :val 2)
+     :value 2)
     (repl
-     :val 3)))
+     :value 3)))
  (repl-paren&lt;-textblock-argmap
   (tb/textblock
    :text &quot;(+ 2 3)&quot;
@@ -62596,9 +62630,9 @@ output : list-1 := (empty list-1)
          :repllist
           (repllist
            (repl
-            :val 2)
+            :value 2)
            (repl
-            :val 3)))
+            :value 3)))
         (repl-paren&lt;-textblock-argmap
          (tb/textblock
           :text &quot;(+ 2 3)&quot;

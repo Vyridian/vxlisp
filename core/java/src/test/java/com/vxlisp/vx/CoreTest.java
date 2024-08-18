@@ -117,7 +117,12 @@ public final class CoreTest {
                 Core.t_int,
                 Core.t_any_from_func.vx_fn_new(() -> {
                   Core.Func_plus funcvar =   Core.t_plus;
-                  Core.Type_any output_1 = Core.vx_any_from_func(Core.t_int, funcvar, Core.vx_new_int(2), Core.vx_new_int(3));
+                  Core.Type_any output_1 = Core.vx_any_from_func(
+                    Core.t_int,
+                    funcvar,
+                    Core.vx_new_int(2),
+                    Core.vx_new_int(3)
+                  );
                   return output_1;
                 })
               )
@@ -143,7 +148,9 @@ public final class CoreTest {
           ":testresult",
             Test.f_test_true(
               context,
-              Core.f_is_int(Core.vx_new_int(4))
+              Core.f_is_int(
+                Core.vx_new_int(4)
+              )
             )
         ),
         Core.vx_new(
@@ -152,7 +159,9 @@ public final class CoreTest {
           ":testresult",
             Test.f_test_true(
               context,
-              Core.f_is_int(Core.vx_new_string("4"))
+              Core.f_is_int(
+                Core.vx_new_string("4")
+              )
             )
         ),
         Core.vx_new(
@@ -194,7 +203,9 @@ public final class CoreTest {
           ":testresult",
             Test.f_test_false(
               context,
-              Core.f_is_int(Core.vx_new_string("a"))
+              Core.f_is_int(
+                Core.vx_new_string("a")
+              )
             )
         ),
         Core.vx_new(
@@ -203,7 +214,9 @@ public final class CoreTest {
           ":testresult",
             Test.f_test_false(
               context,
-              Core.f_is_int(Core.t_decimal.vx_new_from_string("5.5"))
+              Core.f_is_int(
+                Core.t_decimal.vx_new_from_string("5.5")
+              )
             )
         )
       )
@@ -361,7 +374,11 @@ public final class CoreTest {
           Test.t_testdescribe,
           ":describename", "(test-ne \"a\" \"b\")",
           ":testresult",
-            Test.f_test_ne(context, Core.vx_new_string("a"), Core.vx_new_string("b"))
+            Test.f_test_ne(
+              context,
+              Core.vx_new_string("a"),
+              Core.vx_new_string("b")
+            )
         )
       )
     );
@@ -384,7 +401,10 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.vx_new_int(6),
-              Core.f_multiply(Core.vx_new_int(3), Core.vx_new_int(2))
+              Core.f_multiply(
+                Core.vx_new_int(3),
+                Core.vx_new_int(2)
+              )
             )
         ),
         Core.vx_new(
@@ -394,7 +414,10 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.vx_new_int(-10),
-              Core.f_multiply(Core.vx_new_int(5), Core.vx_new_int(-2))
+              Core.f_multiply(
+                Core.vx_new_int(5),
+                Core.vx_new_int(-2)
+              )
             )
         )
       )
@@ -418,7 +441,10 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.t_decimal.vx_new_from_string("6.4"),
-              Core.f_multiply_1(Core.t_decimal.vx_new_from_string("3.2"), Core.vx_new_int(2))
+              Core.f_multiply_1(
+                Core.t_decimal.vx_new_from_string("3.2"),
+                Core.vx_new_int(2)
+              )
             )
         ),
         Core.vx_new(
@@ -428,7 +454,10 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.t_decimal.vx_new_from_string("-10.2"),
-              Core.f_multiply_1(Core.t_decimal.vx_new_from_string("5.1"), Core.vx_new_int(-2))
+              Core.f_multiply_1(
+                Core.t_decimal.vx_new_from_string("5.1"),
+                Core.vx_new_int(-2)
+              )
             )
         )
       )
@@ -548,7 +577,10 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.vx_new_int(5),
-              Core.f_plus(Core.vx_new_int(2), Core.vx_new_int(3))
+              Core.f_plus(
+                Core.vx_new_int(2),
+                Core.vx_new_int(3)
+              )
             )
         ),
         Core.vx_new(
@@ -558,7 +590,10 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.vx_new_int(3),
-              Core.f_plus(Core.vx_new_int(5), Core.vx_new_int(-2))
+              Core.f_plus(
+                Core.vx_new_int(5),
+                Core.vx_new_int(-2)
+              )
             )
         )
       )
@@ -582,7 +617,10 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.vx_new_int(5),
-              Core.f_plus(Core.vx_new_int(2), Core.vx_new_int(3))
+              Core.f_plus(
+                Core.vx_new_int(2),
+                Core.vx_new_int(3)
+              )
             )
         ),
         Core.vx_new(
@@ -592,7 +630,10 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.vx_new_int(3),
-              Core.f_plus(Core.vx_new_int(5), Core.vx_new_int(-2))
+              Core.f_plus(
+                Core.vx_new_int(5),
+                Core.vx_new_int(-2)
+              )
             )
         )
       )
@@ -616,7 +657,9 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.vx_new_int(3),
-              Core.f_plus1(Core.vx_new_int(2))
+              Core.f_plus1(
+                Core.vx_new_int(2)
+              )
             )
         ),
         Core.vx_new(
@@ -626,7 +669,9 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.vx_new_int(-1),
-              Core.f_plus1(Core.vx_new_int(-2))
+              Core.f_plus1(
+                Core.vx_new_int(-2)
+              )
             )
         )
       )
@@ -650,7 +695,10 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.vx_new_int(1),
-              Core.f_minus(Core.vx_new_int(3), Core.vx_new_int(2))
+              Core.f_minus(
+                Core.vx_new_int(3),
+                Core.vx_new_int(2)
+              )
             )
         ),
         Core.vx_new(
@@ -660,7 +708,10 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.vx_new_int(7),
-              Core.f_minus(Core.vx_new_int(5), Core.vx_new_int(-2))
+              Core.f_minus(
+                Core.vx_new_int(5),
+                Core.vx_new_int(-2)
+              )
             )
         )
       )
@@ -684,7 +735,10 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.vx_new_int(5),
-              Core.f_plus(Core.vx_new_int(2), Core.vx_new_int(3))
+              Core.f_plus(
+                Core.vx_new_int(2),
+                Core.vx_new_int(3)
+              )
             )
         ),
         Core.vx_new(
@@ -694,7 +748,10 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.vx_new_int(3),
-              Core.f_plus(Core.vx_new_int(5), Core.vx_new_int(-2))
+              Core.f_plus(
+                Core.vx_new_int(5),
+                Core.vx_new_int(-2)
+              )
             )
         )
       )
@@ -718,7 +775,9 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.vx_new_int(1),
-              Core.f_minus1(Core.vx_new_int(2))
+              Core.f_minus1(
+                Core.vx_new_int(2)
+              )
             )
         ),
         Core.vx_new(
@@ -728,7 +787,9 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.vx_new_int(-3),
-              Core.f_minus1(Core.vx_new_int(-2))
+              Core.f_minus1(
+                Core.vx_new_int(-2)
+              )
             )
         )
       )
@@ -752,7 +813,10 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.vx_new_int(3),
-              Core.f_divide(Core.vx_new_int(6), Core.vx_new_int(2))
+              Core.f_divide(
+                Core.vx_new_int(6),
+                Core.vx_new_int(2)
+              )
             )
         ),
         Core.vx_new(
@@ -762,7 +826,10 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.vx_new_int(-5),
-              Core.f_divide(Core.vx_new_int(10), Core.vx_new_int(-2))
+              Core.f_divide(
+                Core.vx_new_int(10),
+                Core.vx_new_int(-2)
+              )
             )
         )
       )
@@ -785,7 +852,10 @@ public final class CoreTest {
           ":testresult",
             Test.f_test_true(
               context,
-              Core.f_lt(Core.vx_new_int(2), Core.vx_new_int(3))
+              Core.f_lt(
+                Core.vx_new_int(2),
+                Core.vx_new_int(3)
+              )
             )
         )
       )
@@ -808,7 +878,10 @@ public final class CoreTest {
           ":testresult",
             Test.f_test_true(
               context,
-              Core.f_lt(Core.vx_new_int(2), Core.vx_new_int(3))
+              Core.f_lt(
+                Core.vx_new_int(2),
+                Core.vx_new_int(3)
+              )
             )
         ),
         Core.vx_new(
@@ -849,14 +922,20 @@ public final class CoreTest {
               context,
               Core.f_multiply(
                 Core.f_plus(
-                  Core.f_minus(Core.vx_new_int(5), Core.vx_new_int(3)),
+                  Core.f_minus(
+                    Core.vx_new_int(5),
+                    Core.vx_new_int(3)
+                  ),
                   Core.vx_new_int(3)
                 ),
                 Core.vx_new_int(2)
               ),
               Core.f_multiply(
                 Core.f_plus(
-                  Core.f_minus(Core.vx_new_int(5), Core.vx_new_int(3)),
+                  Core.f_minus(
+                    Core.vx_new_int(5),
+                    Core.vx_new_int(3)
+                  ),
                   Core.vx_new_int(3)
                 ),
                 Core.vx_new_int(2)
@@ -885,7 +964,10 @@ public final class CoreTest {
               context,
               Core.f_multiply(
                 Core.f_plus(
-                  Core.f_minus(Core.vx_new_int(3), Core.vx_new_int(5)),
+                  Core.f_minus(
+                    Core.vx_new_int(3),
+                    Core.vx_new_int(5)
+                  ),
                   Core.vx_new_int(3)
                 ),
                 Core.vx_new_int(2)
@@ -894,7 +976,10 @@ public final class CoreTest {
                 Core.vx_new_int(2),
                 Core.f_plus(
                   Core.vx_new_int(3),
-                  Core.f_minus(Core.vx_new_int(3), Core.vx_new_int(5))
+                  Core.f_minus(
+                    Core.vx_new_int(3),
+                    Core.vx_new_int(5)
+                  )
                 )
               )
             )
@@ -919,7 +1004,10 @@ public final class CoreTest {
           ":testresult",
             Test.f_test_true(
               context,
-              Core.f_le(Core.vx_new_int(2), Core.vx_new_int(3))
+              Core.f_le(
+                Core.vx_new_int(2),
+                Core.vx_new_int(3)
+              )
             )
         )
       )
@@ -984,7 +1072,10 @@ public final class CoreTest {
           ":testresult",
             Test.f_test_true(
               context,
-              Core.f_eq(Core.vx_new_int(2), Core.vx_new_int(2))
+              Core.f_eq(
+                Core.vx_new_int(2),
+                Core.vx_new_int(2)
+              )
             )
         ),
         Core.vx_new(
@@ -993,7 +1084,10 @@ public final class CoreTest {
           ":testresult",
             Test.f_test_true(
               context,
-              Core.f_eq(Core.vx_new_string("a"), Core.vx_new_string("a"))
+              Core.f_eq(
+                Core.vx_new_string("a"),
+                Core.vx_new_string("a")
+              )
             )
         ),
         Core.vx_new(
@@ -1104,7 +1198,10 @@ public final class CoreTest {
           ":testresult",
             Test.f_test_true(
               context,
-              Core.f_eqeq(Core.vx_new_int(0), Core.vx_new_int(0))
+              Core.f_eqeq(
+                Core.vx_new_int(0),
+                Core.vx_new_int(0)
+              )
             )
         ),
         Core.vx_new(
@@ -1113,7 +1210,10 @@ public final class CoreTest {
           ":testresult",
             Test.f_test_true(
               context,
-              Core.f_eqeq(Core.vx_new_string(""), Core.vx_new_string(""))
+              Core.f_eqeq(
+                Core.vx_new_string(""),
+                Core.vx_new_string("")
+              )
             )
         )
       )
@@ -1136,7 +1236,10 @@ public final class CoreTest {
           ":testresult",
             Test.f_test_true(
               context,
-              Core.f_gt(Core.vx_new_int(3), Core.vx_new_int(2))
+              Core.f_gt(
+                Core.vx_new_int(3),
+                Core.vx_new_int(2)
+              )
             )
         )
       )
@@ -1189,7 +1292,10 @@ public final class CoreTest {
           ":testresult",
             Test.f_test_true(
               context,
-              Core.f_ge(Core.vx_new_int(3), Core.vx_new_int(2))
+              Core.f_ge(
+                Core.vx_new_int(3),
+                Core.vx_new_int(2)
+              )
             )
         )
       )
@@ -1400,8 +1506,10 @@ public final class CoreTest {
                 Core.t_any_from_reduce.vx_fn_new((total_any, num_any) -> {
                   Core.Type_int total = Core.f_any_from_any(Core.t_int, total_any);
                   Core.Type_int num = Core.f_any_from_any(Core.t_int, num_any);
-                  Core.Type_any output_1 = 
-                    Core.f_multiply(total, num);
+                  Core.Type_any output_1 = Core.f_multiply(
+                    total,
+                    num
+                  );
                   return output_1;
                 })
               )
@@ -1484,15 +1592,14 @@ public final class CoreTest {
                   Core.Type_string current = Core.f_any_from_any(Core.t_string, current_any);
                   Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
                   Core.Type_any value = Core.f_any_from_any(Core.t_any, value_any);
-                  Core.Type_any output_1 = 
-                    Core.f_copy(
-                      current,
-                      Core.vx_new(
-                        Core.t_anylist,
-                        value,
-                        key
-                      )
-                    );
+                  Core.Type_any output_1 = Core.f_copy(
+                    current,
+                    Core.vx_new(
+                      Core.t_anylist,
+                      value,
+                      key
+                    )
+                  );
                   return output_1;
                 })
               )
@@ -1539,7 +1646,11 @@ public final class CoreTest {
                       Core.vx_new_string("y")
                     )
                   );
-                  Core.Type_boolean iswrite = Core.f_boolean_write_from_map_name_value(smap, Core.vx_new_string(":a"), Core.vx_new_string("x"));
+                  Core.Type_boolean iswrite = Core.f_boolean_write_from_map_name_value(
+                    smap,
+                    Core.vx_new_string(":a"),
+                    Core.vx_new_string("x")
+                  );
                   Core.Type_any output_1 = smap;
                   return output_1;
                 })
@@ -1573,7 +1684,11 @@ public final class CoreTest {
                       Core.vx_new_string("x")
                     )
                   );
-                  Core.Type_boolean iswrite = Core.f_boolean_write_from_map_name_value(smap, Core.vx_new_string(":b"), Core.vx_new_string(""));
+                  Core.Type_boolean iswrite = Core.f_boolean_write_from_map_name_value(
+                    smap,
+                    Core.vx_new_string(":b"),
+                    Core.vx_new_string("")
+                  );
                   Core.Type_any output_2 = smap;
                   return output_2;
                 })
@@ -1601,7 +1716,10 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.vx_new_int(1),
-              Core.f_compare(Core.vx_new_int(3), Core.vx_new_int(2))
+              Core.f_compare(
+                Core.vx_new_int(3),
+                Core.vx_new_int(2)
+              )
             )
         ),
         Core.vx_new(
@@ -1611,7 +1729,10 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.vx_new_int(1),
-              Core.f_compare(Core.vx_new_string("z"), Core.vx_new_string("a"))
+              Core.f_compare(
+                Core.vx_new_string("z"),
+                Core.vx_new_string("a")
+              )
             )
         )
       )
@@ -1634,7 +1755,10 @@ public final class CoreTest {
           ":testresult",
             Test.f_test_true(
               context,
-              Core.f_contains(Core.vx_new_string("abcde"), Core.vx_new_string("cd"))
+              Core.f_contains(
+                Core.vx_new_string("abcde"),
+                Core.vx_new_string("cd")
+              )
             )
         ),
         Core.vx_new(
@@ -1643,7 +1767,10 @@ public final class CoreTest {
           ":testresult",
             Test.f_test_false(
               context,
-              Core.f_contains(Core.vx_new_string("abcde"), Core.vx_new_string("dc"))
+              Core.f_contains(
+                Core.vx_new_string("abcde"),
+                Core.vx_new_string("dc")
+              )
             )
         )
       )
@@ -1930,7 +2057,9 @@ public final class CoreTest {
                   Core.t_decimal.vx_new_from_string("2.3")
                 )
               ),
-              Core.f_float_from_string(Core.vx_new_string("2.3"))
+              Core.f_float_from_string(
+                Core.vx_new_string("2.3")
+              )
             )
         )
       )
@@ -1956,7 +2085,10 @@ public final class CoreTest {
               Core.vx_new_string("a"),
               Core.f_if(
                 Core.t_string,
-                Core.f_eq(Core.vx_new_int(2), Core.vx_new_int(2)),
+                Core.f_eq(
+                  Core.vx_new_int(2),
+                  Core.vx_new_int(2)
+                ),
                 Core.vx_new_string("a")
               )
             )
@@ -1970,7 +2102,10 @@ public final class CoreTest {
               Core.vx_new_string(""),
               Core.f_if(
                 Core.t_string,
-                Core.f_eq(Core.vx_new_int(1), Core.vx_new_int(2)),
+                Core.f_eq(
+                  Core.vx_new_int(1),
+                  Core.vx_new_int(2)
+                ),
                 Core.vx_new_string("a")
               )
             )
@@ -1998,7 +2133,10 @@ public final class CoreTest {
               Core.vx_new_string("a"),
               Core.f_if_1(
                 Core.t_string,
-                Core.f_eq(Core.vx_new_int(2), Core.vx_new_int(2)),
+                Core.f_eq(
+                  Core.vx_new_int(2),
+                  Core.vx_new_int(2)
+                ),
                 Core.vx_new_string("a"),
                 Core.vx_new_string("b")
               )
@@ -2013,7 +2151,10 @@ public final class CoreTest {
               Core.vx_new_string("b"),
               Core.f_if_1(
                 Core.t_string,
-                Core.f_eq(Core.vx_new_int(1), Core.vx_new_int(2)),
+                Core.f_eq(
+                  Core.vx_new_int(1),
+                  Core.vx_new_int(2)
+                ),
                 Core.vx_new_string("a"),
                 Core.vx_new_string("b")
               )
@@ -2045,25 +2186,36 @@ public final class CoreTest {
                   Core.t_thenelselist,
                   Core.f_then(
                     Core.t_boolean_from_func.vx_fn_new(() -> {
-                      return Core.f_eq(Core.vx_new_int(2), Core.vx_new_int(3));
+                      Core.Type_any output_1 = Core.f_eq(
+                        Core.vx_new_int(2),
+                        Core.vx_new_int(3)
+                      );
+                      return output_1;
                     }),
                     Core.t_any_from_func.vx_fn_new(() -> {
-                      return Core.vx_new_boolean(false);
+                      Core.Type_any output_2 = Core.vx_new_boolean(false);
+                      return output_2;
                     })
                   ),
                   Core.f_then(
                     Core.t_boolean_from_func.vx_fn_new(() -> {
-                      return Core.f_ne(Core.vx_new_int(3), Core.vx_new_int(3));
+                      Core.Type_any output_3 = Core.f_ne(
+                        Core.vx_new_int(3),
+                        Core.vx_new_int(3)
+                      );
+                      return output_3;
                     }),
                     Core.t_any_from_func.vx_fn_new(() -> {
-                      return Core.vx_new_boolean(false);
+                      Core.Type_any output_4 = Core.vx_new_boolean(false);
+                      return output_4;
                     })
                   ),
                   Core.f_else(
                     Core.t_any_from_func.vx_fn_new(() -> {
-                      return Core.f_not(
+                      Core.Type_any output_5 = Core.f_not(
                         Core.vx_new_boolean(false)
                       );
+                      return output_5;
                     })
                   )
                 )
@@ -2091,7 +2243,9 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.vx_new_int(4),
-              Core.f_int_from_string(Core.vx_new_string("4"))
+              Core.f_int_from_string(
+                Core.vx_new_string("4")
+              )
             )
         ),
         Core.vx_new(
@@ -2101,7 +2255,9 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.vx_new_int(5),
-              Core.f_int_from_string(Core.vx_new_string("5.4"))
+              Core.f_int_from_string(
+                Core.vx_new_string("5.4")
+              )
             )
         ),
         Core.vx_new(
@@ -2111,7 +2267,9 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.vx_new_int(5),
-              Core.f_int_from_string(Core.vx_new_string("5.9"))
+              Core.f_int_from_string(
+                Core.vx_new_string("5.9")
+              )
             )
         ),
         Core.vx_new(
@@ -2121,7 +2279,9 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.c_notanumber,
-              Core.f_int_from_string(Core.vx_new_string("notanumber"))
+              Core.f_int_from_string(
+                Core.vx_new_string("notanumber")
+              )
             )
         ),
         Core.vx_new(
@@ -2131,7 +2291,9 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.c_infinity,
-              Core.f_int_from_string(Core.vx_new_string("infinity"))
+              Core.f_int_from_string(
+                Core.vx_new_string("infinity")
+              )
             )
         ),
         Core.vx_new(
@@ -2141,7 +2303,9 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.c_neginfinity,
-              Core.f_int_from_string(Core.vx_new_string("neginfinity"))
+              Core.f_int_from_string(
+                Core.vx_new_string("neginfinity")
+              )
             )
         )
       )
@@ -2175,7 +2339,9 @@ public final class CoreTest {
           ":testresult",
             Test.f_test_true(
               context,
-              Core.f_is_empty(Core.vx_new_string(""))
+              Core.f_is_empty(
+                Core.vx_new_string("")
+              )
             )
         ),
         Core.vx_new(
@@ -2224,7 +2390,9 @@ public final class CoreTest {
           ":testresult",
             Test.f_test_true(
               context,
-              Core.f_is_int(Core.vx_new_int(2))
+              Core.f_is_int(
+                Core.vx_new_int(2)
+              )
             )
         ),
         Core.vx_new(
@@ -2233,7 +2401,9 @@ public final class CoreTest {
           ":testresult",
             Test.f_test_true(
               context,
-              Core.f_is_int(Core.vx_new_string("2"))
+              Core.f_is_int(
+                Core.vx_new_string("2")
+              )
             )
         ),
         Core.vx_new(
@@ -2253,7 +2423,9 @@ public final class CoreTest {
           ":testresult",
             Test.f_test_true(
               context,
-              Core.f_is_int(Core.vx_new_string("infinity"))
+              Core.f_is_int(
+                Core.vx_new_string("infinity")
+              )
             )
         )
       )
@@ -2276,7 +2448,9 @@ public final class CoreTest {
           ":testresult",
             Test.f_test_true(
               context,
-              Core.f_is_number(Core.vx_new_int(5))
+              Core.f_is_number(
+                Core.vx_new_int(5)
+              )
             )
         ),
         Core.vx_new(
@@ -2285,7 +2459,9 @@ public final class CoreTest {
           ":testresult",
             Test.f_test_true(
               context,
-              Core.f_is_number(Core.t_decimal.vx_new_from_string("5.5"))
+              Core.f_is_number(
+                Core.t_decimal.vx_new_from_string("5.5")
+              )
             )
         ),
         Core.vx_new(
@@ -2294,7 +2470,9 @@ public final class CoreTest {
           ":testresult",
             Test.f_test_false(
               context,
-              Core.f_is_number(Core.vx_new_string("a"))
+              Core.f_is_number(
+                Core.vx_new_string("a")
+              )
             )
         )
       )
@@ -2352,7 +2530,9 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.vx_new_int(4),
-              Core.f_length(Core.vx_new_string("abcd"))
+              Core.f_length(
+                Core.vx_new_string("abcd")
+              )
             )
         ),
         Core.vx_new(
@@ -2362,7 +2542,9 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.vx_new_int(0),
-              Core.f_length(Core.vx_new_string(""))
+              Core.f_length(
+                Core.vx_new_string("")
+              )
             )
         )
       )
@@ -2424,8 +2606,14 @@ public final class CoreTest {
                 Core.t_int,
                 Core.t_any_from_func.vx_fn_new(() -> {
                   Core.Type_int v1 = Core.vx_new_int(2);
-                  Core.Type_int v2 = Core.f_plus(v1, Core.vx_new_int(3));
-                  Core.Type_any output_1 = Core.f_plus(v1, v2);
+                  Core.Type_int v2 = Core.f_plus(
+                    v1,
+                    Core.vx_new_int(3)
+                  );
+                  Core.Type_any output_1 = Core.f_plus(
+                    v1,
+                    v2
+                  );
                   return output_1;
                 })
               )
@@ -2632,15 +2820,14 @@ public final class CoreTest {
                 Core.t_any_from_int_any.vx_fn_new((index_any, value_any) -> {
                   Core.Type_int index = Core.f_any_from_any(Core.t_int, index_any);
                   Core.Type_string value = Core.f_any_from_any(Core.t_string, value_any);
-                  Core.Type_any output_1 = 
-                    Core.f_new(
-                      Core.t_string,
-                      Core.vx_new(
-                        Core.t_anylist,
-                        value,
-                        index
-                      )
-                    );
+                  Core.Type_any output_1 = Core.f_new(
+                    Core.t_string,
+                    Core.vx_new(
+                      Core.t_anylist,
+                      value,
+                      index
+                    )
+                  );
                   return output_1;
                 })
               )
@@ -2705,7 +2892,7 @@ public final class CoreTest {
         Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
-          ":describename", "(test\n (stringlist \"a1\" \"b2\")\n (list<-map : stringlist\n  (stringmap \"a\" \"1\" \"b\" \"2\")\n  (fn : string\n   [key : string\n    val : string]\n   (string key val))))",
+          ":describename", "(test\n (stringlist \"a1\" \"b2\")\n (list<-map : stringlist\n  (stringmap \"a\" \"1\" \"b\" \"2\")\n  (fn : string\n   [key   : string\n    value : string]\n   (string key value))))",
           ":testresult",
             Test.f_test(
               context,
@@ -2729,18 +2916,17 @@ public final class CoreTest {
                     Core.vx_new_string("2")
                   )
                 ),
-                Core.t_any_from_key_value.vx_fn_new((key_any, val_any) -> {
+                Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
                   Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
-                  Core.Type_string val = Core.f_any_from_any(Core.t_string, val_any);
-                  Core.Type_any output_1 = 
-                    Core.f_new(
-                      Core.t_string,
-                      Core.vx_new(
-                        Core.t_anylist,
-                        key,
-                        val
-                      )
-                    );
+                  Core.Type_string value = Core.f_any_from_any(Core.t_string, value_any);
+                  Core.Type_any output_1 = Core.f_new(
+                    Core.t_string,
+                    Core.vx_new(
+                      Core.t_anylist,
+                      key,
+                      value
+                    )
+                  );
                   return output_1;
                 })
               )
@@ -2762,7 +2948,7 @@ public final class CoreTest {
         Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
-          ":describename", "(test\n (stringmap\n  \"keya\" \"a\"\n  \"keyb\" \"b\")\n (map<-list : stringmap\n  (stringlist \"a\" \"b\")\n  (fn : string\n   [val : string]\n   (string \"key\" val))))",
+          ":describename", "(test\n (stringmap\n  \"keya\" \"a\"\n  \"keyb\" \"b\")\n (map<-list : stringmap\n  (stringlist \"a\" \"b\")\n  (fn : string\n   [value : string]\n   (string \"key\" value))))",
           ":testresult",
             Test.f_test(
               context,
@@ -2786,17 +2972,16 @@ public final class CoreTest {
                     Core.vx_new_string("b")
                   )
                 ),
-                Core.t_any_from_any.vx_fn_new((val_any) -> {
-                  Core.Type_string val = Core.f_any_from_any(Core.t_string, val_any);
-                  Core.Type_any output_1 = 
-                    Core.f_new(
-                      Core.t_string,
-                      Core.vx_new(
-                        Core.t_anylist,
-                        Core.vx_new_string("key"),
-                        val
-                      )
-                    );
+                Core.t_any_from_any.vx_fn_new((value_any) -> {
+                  Core.Type_string value = Core.f_any_from_any(Core.t_string, value_any);
+                  Core.Type_any output_1 = Core.f_new(
+                    Core.t_string,
+                    Core.vx_new(
+                      Core.t_anylist,
+                      Core.vx_new_string("key"),
+                      value
+                    )
+                  );
                   return output_1;
                 })
               )
@@ -2859,7 +3044,7 @@ public final class CoreTest {
         Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
-          ":describename", "(test\n (stringmap\n  :a \"a1\"\n  :b \"b2\")\n (map<-map : stringmap\n  (stringmap\n   :a \"1\"\n   :b \"2\")\n  (fn : string\n   [key : string\n    val : string]\n   (string key val))))",
+          ":describename", "(test\n (stringmap\n  :a \"a1\"\n  :b \"b2\")\n (map<-map : stringmap\n  (stringmap\n   :a \"1\"\n   :b \"2\")\n  (fn : string\n   [key : string\n    value : string]\n   (string key value))))",
           ":testresult",
             Test.f_test(
               context,
@@ -2885,18 +3070,17 @@ public final class CoreTest {
                     Core.vx_new_string("2")
                   )
                 ),
-                Core.t_any_from_key_value.vx_fn_new((key_any, val_any) -> {
+                Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
                   Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
-                  Core.Type_string val = Core.f_any_from_any(Core.t_string, val_any);
-                  Core.Type_any output_1 = 
-                    Core.f_new(
-                      Core.t_string,
-                      Core.vx_new(
-                        Core.t_anylist,
-                        key,
-                        val
-                      )
-                    );
+                  Core.Type_string value = Core.f_any_from_any(Core.t_string, value_any);
+                  Core.Type_any output_1 = Core.f_new(
+                    Core.t_string,
+                    Core.vx_new(
+                      Core.t_anylist,
+                      key,
+                      value
+                    )
+                  );
                   return output_1;
                 })
               )
@@ -3151,7 +3335,10 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.vx_new_string("a"),
-              Core.f_resolve(Core.t_string, Core.vx_new_string("a"))
+              Core.f_resolve(
+                Core.t_string,
+                Core.vx_new_string("a")
+              )
             )
         )
       )
@@ -3178,9 +3365,10 @@ public final class CoreTest {
               Core.f_resolve_1(
                 Core.t_int,
                 Core.t_any_from_func.vx_fn_new(() -> {
-                  
-                  Core.Type_any output_1 = 
-                    Core.f_plus(Core.vx_new_int(1), Core.vx_new_int(3));
+                  Core.Type_any output_1 = Core.f_plus(
+                    Core.vx_new_int(1),
+                    Core.vx_new_int(3)
+                  );
                   return output_1;
                 })
               )
@@ -3210,9 +3398,10 @@ public final class CoreTest {
               Core.f_resolve_1(
                 Core.t_int,
                 Core.t_any_from_func.vx_fn_new(() -> {
-                  
-                  Core.Type_any output_1 = 
-                    Core.f_plus(Core.vx_new_int(1), Core.vx_new_int(3));
+                  Core.Type_any output_1 = Core.f_plus(
+                    Core.vx_new_int(1),
+                    Core.vx_new_int(3)
+                  );
                   return output_1;
                 })
               )
@@ -3239,7 +3428,10 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.vx_new_string("abab"),
-              Core.f_string_repeat(Core.vx_new_string("ab"), Core.vx_new_int(2))
+              Core.f_string_repeat(
+                Core.vx_new_string("ab"),
+                Core.vx_new_int(2)
+              )
             )
         )
       )
@@ -3275,7 +3467,9 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.vx_new_string("4"),
-              Core.f_string_from_any(Core.vx_new_int(4))
+              Core.f_string_from_any(
+                Core.vx_new_int(4)
+              )
             )
         ),
         Core.vx_new(
@@ -3285,7 +3479,9 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.vx_new_string("5.4"),
-              Core.f_string_from_any(Core.t_decimal.vx_new_from_string("5.4"))
+              Core.f_string_from_any(
+                Core.t_decimal.vx_new_from_string("5.4")
+              )
             )
         ),
         Core.vx_new(
@@ -3295,7 +3491,9 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.vx_new_string("\"a\""),
-              Core.f_string_from_any(Core.vx_new_string("a"))
+              Core.f_string_from_any(
+                Core.vx_new_string("a")
+              )
             )
         ),
         Core.vx_new(
@@ -3360,7 +3558,11 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.vx_new_string("a!b!c"),
-              Core.f_string_from_string_find_replace(Core.vx_new_string("axybxyc"), Core.vx_new_string("xy"), Core.vx_new_string("!"))
+              Core.f_string_from_string_find_replace(
+                Core.vx_new_string("axybxyc"),
+                Core.vx_new_string("xy"),
+                Core.vx_new_string("!")
+              )
             )
         )
       )
@@ -3442,12 +3644,14 @@ public final class CoreTest {
                       )
                     ),
                     Core.t_any_from_func.vx_fn_new(() -> {
-                      return Core.vx_new_int(1);
+                      Core.Type_any output_1 = Core.vx_new_int(1);
+                      return output_1;
                     })
                   ),
                   Core.f_else(
                     Core.t_any_from_func.vx_fn_new(() -> {
-                      return Core.vx_new_int(2);
+                      Core.Type_any output_2 = Core.vx_new_int(2);
+                      return output_2;
                     })
                   )
                 )
@@ -3487,7 +3691,9 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.t_int,
-              Core.f_type_from_any(Core.vx_new_int(5))
+              Core.f_type_from_any(
+                Core.vx_new_int(5)
+              )
             )
         ),
         Core.vx_new(
@@ -3497,7 +3703,9 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.t_string,
-              Core.f_type_from_any(Core.vx_new_string("a"))
+              Core.f_type_from_any(
+                Core.vx_new_string("a")
+              )
             )
         )
       )
@@ -3533,7 +3741,9 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.vx_new_string("vx/core/int"),
-              Core.f_typename_from_any(Core.vx_new_int(5))
+              Core.f_typename_from_any(
+                Core.vx_new_int(5)
+              )
             )
         ),
         Core.vx_new(
@@ -3543,7 +3753,9 @@ public final class CoreTest {
             Test.f_test(
               context,
               Core.vx_new_string("vx/core/string"),
-              Core.f_typename_from_any(Core.vx_new_string("a"))
+              Core.f_typename_from_any(
+                Core.vx_new_string("a")
+              )
             )
         )
       )

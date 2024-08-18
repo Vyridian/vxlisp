@@ -1795,7 +1795,7 @@ export default class vx_core {
   /**
    * @function not
    * Boolean not
-   * @param  {boolean} val Thing to not
+   * @param  {boolean} value Thing to not
    * @return {boolean}
    */
   static t_not = {
@@ -1806,9 +1806,9 @@ export default class vx_core {
   }
 
   // (func !)
-  static f_not(val) {
+  static f_not(value) {
     let output = vx_core.e_boolean
-    output = !val
+    output = !value
     return output
   }
 
@@ -1836,8 +1836,8 @@ export default class vx_core {
 
   /**
    * @function notempty
-   * Returns true if val is not empty.
-   * @param  {any} val
+   * Returns true if value is not empty.
+   * @param  {any} value
    * @return {boolean}
    */
   static t_notempty_1 = {
@@ -1848,10 +1848,10 @@ export default class vx_core {
   }
 
   // (func !-empty)
-  static f_notempty_1(val) {
+  static f_notempty_1(value) {
     let output = vx_core.e_boolean
     output = vx_core.f_not(
-      vx_core.f_is_empty_1(val)
+      vx_core.f_is_empty_1(value)
     )
     return output
   }
@@ -2918,7 +2918,7 @@ export default class vx_core {
    * Generic Function returning Generic any-1 from an int and a value
    * @param  {typemap} generic
    * @param  {int} num
-   * @param  {generic_any_2} val
+   * @param  {generic_any_2} value
    * @return {any-1}
    */
   static t_any_from_int_any = {
@@ -2929,7 +2929,7 @@ export default class vx_core {
   }
 
   // (func any<-int-any)
-  static f_any_from_int_any(generic, num, val) {
+  static f_any_from_int_any(generic, num, value) {
     const generic_any_1 = generic["any-1"]
     let output = vx_core.f_empty(generic_any_1)
     return output
@@ -2940,7 +2940,7 @@ export default class vx_core {
    * Generic Function returning Generic any-1 from a key and a value
    * @param  {typemap} generic
    * @param  {string} key
-   * @param  {generic_any_2} val
+   * @param  {generic_any_2} value
    * @return {any-1}
    */
   static t_any_from_key_value = {
@@ -2951,7 +2951,7 @@ export default class vx_core {
   }
 
   // (func any<-key-value)
-  static f_any_from_key_value(generic, key, val) {
+  static f_any_from_key_value(generic, key, value) {
     const generic_any_1 = generic["any-1"]
     let output = vx_core.f_empty(generic_any_1)
     return output
@@ -2963,7 +2963,7 @@ export default class vx_core {
    * Generic Function returning Asynchronous Generic any-1 from a key and a value
    * @param  {typemap} generic
    * @param  {string} key
-   * @param  {generic_any_2} val
+   * @param  {generic_any_2} value
    * @return {any-1}
    */
   static t_any_from_key_value_async = {
@@ -2974,7 +2974,7 @@ export default class vx_core {
   }
 
   // (func any<-key-value-async)
-  static async f_any_from_key_value_async(generic, key, val) {
+  static async f_any_from_key_value_async(generic, key, value) {
     const generic_any_1 = generic["any-1"]
     let output = Promise.resolve(vx_core.f_empty(generic_any_1))
     return output
@@ -3628,7 +3628,7 @@ export default class vx_core {
 
   /**
    * @function extends_from_any
-   * @param  {generic_any_1} val
+   * @param  {generic_any_1} value
    * @return {string}
    */
   static t_extends_from_any = {
@@ -3639,10 +3639,10 @@ export default class vx_core {
   }
 
   // (func extends<-any)
-  static f_extends_from_any(val) {
+  static f_extends_from_any(value) {
     let output = vx_core.e_string
     output = vx_core.f_extends_from_typedef(
-      vx_core.f_typedef_from_any(val)
+      vx_core.f_typedef_from_any(value)
     )
     return output
   }
@@ -3766,7 +3766,7 @@ export default class vx_core {
   /**
    * @function funcdef_from_func
    * Returns the definition of a function
-   * @param  {func} val
+   * @param  {func} value
    * @return {funcdef}
    */
   static t_funcdef_from_func = {
@@ -3777,7 +3777,7 @@ export default class vx_core {
   }
 
   // (func funcdef<-func)
-  static f_funcdef_from_func(val) {
+  static f_funcdef_from_func(value) {
     let output = vx_core.e_funcdef
     return output
   }
@@ -3926,7 +3926,7 @@ export default class vx_core {
   /**
    * @function int_from_string
    * Function Type converting string to int
-   * @param  {string} val
+   * @param  {string} value
    * @return {int}
    */
   static t_int_from_string = {
@@ -3937,11 +3937,11 @@ export default class vx_core {
   }
 
   // (func int<-string)
-  static f_int_from_string(val) {
+  static f_int_from_string(value) {
     let output = vx_core.e_int
     output = vx_core.f_switch(
       {"any-1": vx_core.t_int, "any-2": vx_core.t_string},
-      val,
+      value,
       vx_core.f_case_1(
         "notanumber",
         vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.c_notanumber})
@@ -3955,7 +3955,7 @@ export default class vx_core {
         vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.c_neginfinity})
       ),
       vx_core.f_else(
-        vx_core.f_new(vx_core.t_any_from_func, () => {return parseInt(val)})
+        vx_core.f_new(vx_core.t_any_from_func, () => {return parseInt(value)})
       )
     )
     return output
@@ -4053,8 +4053,8 @@ export default class vx_core {
 
   /**
    * @function is_func
-   * Returns true if val is a function.
-   * @param  {any} val
+   * Returns true if value is a function.
+   * @param  {any} value
    * @return {boolean}
    */
   static t_is_func = {
@@ -4065,9 +4065,9 @@ export default class vx_core {
   }
 
   // (func is-func)
-  static f_is_func(val) {
+  static f_is_func(value) {
     let output = vx_core.e_boolean
-    const extend = vx_core.f_extends_from_any(val)
+    const extend = vx_core.f_extends_from_any(value)
     if (extend == ':func') {
       output = vx_core.c_true
     }
@@ -4096,7 +4096,7 @@ export default class vx_core {
 
   /**
    * @function is_number
-   * Return true if val is a number
+   * Return true if value is a number
    * @param  {any} value
    * @return {boolean}
    */
@@ -5555,7 +5555,7 @@ export default class vx_core {
    * @function switch
    * Returns a value based on a logical switch
    * @param  {typemap} generic
-   * @param  {generic_any_2} val
+   * @param  {generic_any_2} value
    * @param  {thenelselist} ... thenelselist
    * @return {any-1}
    */
@@ -5567,7 +5567,7 @@ export default class vx_core {
   }
 
   // (func switch)
-  static f_switch(generic, val, ...thenelselist) {
+  static f_switch(generic, value, ...thenelselist) {
     const generic_any_1 = generic["any-1"]
     let output = vx_core.f_empty(generic_any_1)
     thenelselist = vx_core.f_new(vx_core.t_thenelselist, ...thenelselist)
@@ -5578,19 +5578,19 @@ export default class vx_core {
         const code = thenelse['code']
         switch (code) {
         case ':case':
-          const value = thenelse['value']
-          if (value == val) {
+          const value2 = thenelse['value']
+          if (value2 == value) {
             fn_any = thenelse['fn-any']
-          } else if (typeof value == 'number') {
+          } else if (typeof value2 == 'number') {
             // special handling of notanumber
-            if (isNaN(val) && isNaN(value)) {
+            if (isNaN(value) && isNaN(value2)) {
               fn_any = thenelse['fn-any']
             }
           }
           break
         case ':casemany':
           const values = thenelse['values']
-          if (values.includes(val)) {
+          if (values.includes(value)) {
             fn_any = thenelse['fn-any']
           }
           break
@@ -5717,7 +5717,7 @@ export default class vx_core {
   /**
    * @function typedef_from_any
    * Gets the typedef of a given value
-   * @param  {any} val
+   * @param  {any} value
    * @return {typedef}
    */
   static t_typedef_from_any = {
@@ -5728,10 +5728,10 @@ export default class vx_core {
   }
 
   // (func typedef<-any)
-  static f_typedef_from_any(val) {
+  static f_typedef_from_any(value) {
     let output = vx_core.e_typedef
     output = vx_core.f_typedef_from_type(
-      vx_core.f_type_from_any(val)
+      vx_core.f_type_from_any(value)
     )
     return output
   }
@@ -5739,7 +5739,7 @@ export default class vx_core {
   /**
    * @function typedef_from_type
    * Gets the typedef of a given type
-   * @param  {any} val
+   * @param  {any} value
    * @return {typedef}
    */
   static t_typedef_from_type = {
@@ -5750,9 +5750,9 @@ export default class vx_core {
   }
 
   // (func typedef<-type)
-  static f_typedef_from_type(val) {
+  static f_typedef_from_type(value) {
     let output = vx_core.e_typedef
-    output = output = val
+    output = output = value
     return output
   }
 

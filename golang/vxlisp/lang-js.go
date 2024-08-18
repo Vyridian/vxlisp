@@ -744,17 +744,17 @@ func JsFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc, 
 			case "vx/core/fn":
 			case "vx/core/let":
 				if fnc.async {
-					output += LangNameFromPkgName(lang, fnc.pkgname) + lang.pkgref + "f_let_async("
+					output += LangPkgName(lang, fnc.pkgname) + lang.pkgref + "f_let_async("
 				} else {
-					output += LangNameFromPkgName(lang, fnc.pkgname) + lang.pkgref + "f_let("
+					output += LangPkgName(lang, fnc.pkgname) + lang.pkgref + "f_let("
 				}
 			default:
 				if fnc.argname != "" {
-					output += LangNameFromPkgName(lang, "vx/core") + lang.pkgref + "vx_any_from_func("
+					output += LangPkgName(lang, "vx/core") + lang.pkgref + "vx_any_from_func("
 					argtexts = append(argtexts, LangTypeT(lang, fnc.vxtype))
 					argtexts = append(argtexts, LangFromName(fnc.argname))
 				} else {
-					output += LangNameFromPkgName(lang, fnc.pkgname) + lang.pkgref + "f_" + LangFuncName(fnc) + "("
+					output += LangPkgName(lang, fnc.pkgname) + lang.pkgref + "f_" + LangFuncName(fnc) + "("
 				}
 			}
 			switch funcname {
@@ -778,7 +778,7 @@ func JsFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc, 
 					if argvalue.code == ":func" && argvalue.name == "fn" {
 						argfunc := FuncFromValue(argvalue)
 						var lambdaargs []string
-						arglist := ListLocalArgFromFunc(argfunc)
+						arglist := ListArgLocalFromFunc(argfunc)
 						for _, lambdaarg := range arglist {
 							lambdaargs = append(lambdaargs, lambdaarg.name)
 						}
@@ -793,7 +793,7 @@ func JsFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc, 
 						argtext = "vx_core.f_new(" + LangTypeT(lang, funcarg.vxtype) + ", " + argtext + ")"
 					} else if funcname == "vx/core/let" {
 						var lambdaargs []string
-						arglist := ListLocalArgFromFunc(fnc)
+						arglist := ListArgLocalFromFunc(fnc)
 						switch fncidx {
 						case 0:
 							argtext = "[]"

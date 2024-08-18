@@ -60,7 +60,7 @@ func TestValueValidate(t *testing.T) {
 	arg = NewArg("key")
 	arg.vxtype = stringtype
 	anyfromkeyvaluefunc.listarg = append(anyfromkeyvaluefunc.listarg, arg)
-	arg = NewArg("val")
+	arg = NewArg("value")
 	arg.vxtype = anytype2
 	arg.isgeneric = true
 	arg.generictype = arg.vxtype
@@ -444,7 +444,7 @@ func TestValueValidate(t *testing.T) {
 
 	valuefnfunc := NewFuncCopy(fnfunc)
 	arglist = valuefnfunc.listarg
-	subarg := NewArg("val")
+	subarg := NewArg("value")
 	subarg.vxtype = inttype
 	subarglist := []vxarg{subarg}
 	arg = arglist[0]
@@ -509,7 +509,7 @@ func TestValueValidate(t *testing.T) {
 	keyarg := NewArg("key")
 	keyarg.vxtype = stringtype
 	subarglist = append(subarglist, keyarg)
-	valarg := NewArg("val")
+	valarg := NewArg("value")
 	valarg.vxtype = inttype
 	subarglist = append(subarglist, valarg)
 	arg = arglist[0]

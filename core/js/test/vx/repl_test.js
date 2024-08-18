@@ -124,7 +124,7 @@ export default class vx_repl_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n \"HelloWorld\"\n (any<-repl\n  (repl\n   :type string\n   :repllist\n    (repllist\n     (repl :val \"Hello\")\n     (repl :val \"World\")\n    ))))",
+            ":describename", "(test\n \"HelloWorld\"\n (any<-repl\n  (repl\n   :type string\n   :repllist\n    (repllist\n     (repl :value \"Hello\")\n     (repl :value \"World\")\n    ))))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -140,12 +140,12 @@ export default class vx_repl_test {
                     vx_repl.t_repllist,
                     vx_core.f_new(
                       vx_repl.t_repl,
-                      ":val",
+                      ":value",
                       "Hello"
                     ),
                     vx_core.f_new(
                       vx_repl.t_repl,
-                      ":val",
+                      ":value",
                       "World"
                     )
                   )
@@ -155,7 +155,7 @@ export default class vx_repl_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n 5\n (any<-repl\n  (repl\n   :type +\n   :repllist\n    (repllist\n     (repl :val 2)\n     (repl :val 3)))))",
+            ":describename", "(test\n 5\n (any<-repl\n  (repl\n   :type +\n   :repllist\n    (repllist\n     (repl :value 2)\n     (repl :value 3)))))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -171,12 +171,12 @@ export default class vx_repl_test {
                     vx_repl.t_repllist,
                     vx_core.f_new(
                       vx_repl.t_repl,
-                      ":val",
+                      ":value",
                       2
                     ),
                     vx_core.f_new(
                       vx_repl.t_repl,
-                      ":val",
+                      ":value",
                       3
                     )
                   )
@@ -258,13 +258,13 @@ export default class vx_repl_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (repl :val 2)\n (repl-empty<-textblock-argmap\n  (tb/textblock\n   :text \"2\")\n  (empty argmap)))",
+            ":describename", "(test\n (repl :value 2)\n (repl-empty<-textblock-argmap\n  (tb/textblock\n   :text \"2\")\n  (empty argmap)))",
             ":testresult",
             vx_test.f_test(
               context,
               vx_core.f_new(
                 vx_repl.t_repl,
-                ":val",
+                ":value",
                 2
               ),
               vx_repl.f_repl_empty_from_textblock_argmap(
@@ -304,13 +304,13 @@ export default class vx_repl_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (repl :val 2)\n (repl-empty<-textblock-argmap\n  (tb/textblock\n   :text \"1\"\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"2\")))\n  (empty argmap)))",
+            ":describename", "(test\n (repl :value 2)\n (repl-empty<-textblock-argmap\n  (tb/textblock\n   :text \"1\"\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"2\")))\n  (empty argmap)))",
             ":testresult",
             vx_test.f_test(
               context,
               vx_core.f_new(
                 vx_repl.t_repl,
-                ":val",
+                ":value",
                 2
               ),
               vx_repl.f_repl_empty_from_textblock_argmap(
@@ -386,7 +386,7 @@ export default class vx_repl_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (repl\n  :type vx/core/+\n  :repllist\n   (repllist\n    (repl\n     :val 2)\n    (repl\n     :val 3)))\n (repl-paren<-textblock-argmap\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :delim\n    (copy delimvxlispparen\n     :delimlist\n      (empty delimlist))\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"+\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"2\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"3\")))\n  (empty argmap)))",
+            ":describename", "(test\n (repl\n  :type vx/core/+\n  :repllist\n   (repllist\n    (repl\n     :value 2)\n    (repl\n     :value 3)))\n (repl-paren<-textblock-argmap\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :delim\n    (copy delimvxlispparen\n     :delimlist\n      (empty delimlist))\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"+\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"2\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"3\")))\n  (empty argmap)))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -399,12 +399,12 @@ export default class vx_repl_test {
                   vx_repl.t_repllist,
                   vx_core.f_new(
                     vx_repl.t_repl,
-                    ":val",
+                    ":value",
                     2
                   ),
                   vx_core.f_new(
                     vx_repl.t_repl,
-                    ":val",
+                    ":value",
                     3
                   )
                 )
@@ -486,7 +486,7 @@ export default class vx_repl_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (repl\n  :type vx/core/+\n  :repllist\n   (repllist\n    (repl\n     :val 2)\n    (repl\n     :val 3)))\n (repl<-macro\n  \"(+ \"\n  (- 7 5)\n  \" 3)\"))",
+            ":describename", "(test\n (repl\n  :type vx/core/+\n  :repllist\n   (repllist\n    (repl\n     :value 2)\n    (repl\n     :value 3)))\n (repl<-macro\n  \"(+ \"\n  (- 7 5)\n  \" 3)\"))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -499,12 +499,12 @@ export default class vx_repl_test {
                   vx_repl.t_repllist,
                   vx_core.f_new(
                     vx_repl.t_repl,
-                    ":val",
+                    ":value",
                     2
                   ),
                   vx_core.f_new(
                     vx_repl.t_repl,
-                    ":val",
+                    ":value",
                     3
                   )
                 )
@@ -533,13 +533,13 @@ export default class vx_repl_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (repl\n  :val 2)\n (repl<-script\n  \"2\"))",
+            ":describename", "(test\n (repl\n  :value 2)\n (repl<-script\n  \"2\"))",
             ":testresult",
             vx_test.f_test(
               context,
               vx_core.f_new(
                 vx_repl.t_repl,
-                ":val",
+                ":value",
                 2
               ),
               vx_repl.f_repl_from_script("2")
@@ -547,13 +547,13 @@ export default class vx_repl_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (repl\n  :val infinity)\n (repl<-script\n  \"infinity\"))",
+            ":describename", "(test\n (repl\n  :value infinity)\n (repl<-script\n  \"infinity\"))",
             ":testresult",
             vx_test.f_test(
               context,
               vx_core.f_new(
                 vx_repl.t_repl,
-                ":val",
+                ":value",
                 vx_core.c_infinity
               ),
               vx_repl.f_repl_from_script("infinity")
@@ -575,7 +575,7 @@ export default class vx_repl_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl\n     :val 2)\n    (repl\n     :val 3)))\n (repl<-script\n  \"(+ 2 3)\"))",
+            ":describename", "(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl\n     :value 2)\n    (repl\n     :value 3)))\n (repl<-script\n  \"(+ 2 3)\"))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -588,12 +588,12 @@ export default class vx_repl_test {
                   vx_repl.t_repllist,
                   vx_core.f_new(
                     vx_repl.t_repl,
-                    ":val",
+                    ":value",
                     2
                   ),
                   vx_core.f_new(
                     vx_repl.t_repl,
-                    ":val",
+                    ":value",
                     3
                   )
                 )
@@ -617,13 +617,13 @@ export default class vx_repl_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (repl :val \"Hello\")\n (repl<-string-argmap\n  `\"Hello\"`\n  (empty argmap)))",
+            ":describename", "(test\n (repl :value \"Hello\")\n (repl<-string-argmap\n  `\"Hello\"`\n  (empty argmap)))",
             ":testresult",
             vx_test.f_test(
               context,
               vx_core.f_new(
                 vx_repl.t_repl,
-                ":val",
+                ":value",
                 "Hello"
               ),
               vx_repl.f_repl_from_string_argmap(
@@ -636,13 +636,13 @@ export default class vx_repl_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (repl\n  :val 2)\n (repl<-string-argmap\n  \"2\"\n  (empty argmap)))",
+            ":describename", "(test\n (repl\n  :value 2)\n (repl<-string-argmap\n  \"2\"\n  (empty argmap)))",
             ":testresult",
             vx_test.f_test(
               context,
               vx_core.f_new(
                 vx_repl.t_repl,
-                ":val",
+                ":value",
                 2
               ),
               vx_repl.f_repl_from_string_argmap(
@@ -655,13 +655,13 @@ export default class vx_repl_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (repl :val 2.3)\n (repl<-string-argmap\n  \"2.3\"\n  (empty argmap)))",
+            ":describename", "(test\n (repl :value 2.3)\n (repl<-string-argmap\n  \"2.3\"\n  (empty argmap)))",
             ":testresult",
             vx_test.f_test(
               context,
               vx_core.f_new(
                 vx_repl.t_repl,
-                ":val",
+                ":value",
                 2.3
               ),
               vx_repl.f_repl_from_string_argmap(
@@ -674,13 +674,13 @@ export default class vx_repl_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (repl\n  :val infinity)\n (repl<-string-argmap\n  \"infinity\"\n  (empty argmap)))",
+            ":describename", "(test\n (repl\n  :value infinity)\n (repl<-string-argmap\n  \"infinity\"\n  (empty argmap)))",
             ":testresult",
             vx_test.f_test(
               context,
               vx_core.f_new(
                 vx_repl.t_repl,
-                ":val",
+                ":value",
                 vx_core.c_infinity
               ),
               vx_repl.f_repl_from_string_argmap(
@@ -693,13 +693,13 @@ export default class vx_repl_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (repl\n  :val tb/delimcomma)\n (repl<-string-argmap\n  \"vx/data/textblock/delimcomma\"\n  (empty argmap)))",
+            ":describename", "(test\n (repl\n  :value tb/delimcomma)\n (repl<-string-argmap\n  \"vx/data/textblock/delimcomma\"\n  (empty argmap)))",
             ":testresult",
             vx_test.f_test(
               context,
               vx_core.f_new(
                 vx_repl.t_repl,
-                ":val",
+                ":value",
                 vx_data_textblock.c_delimcomma
               ),
               vx_repl.f_repl_from_string_argmap(
@@ -764,13 +764,13 @@ export default class vx_repl_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (repl :val 2)\n (repl<-textblock\n  (tb/textblock\n   :text \"2\")))",
+            ":describename", "(test\n (repl :value 2)\n (repl<-textblock\n  (tb/textblock\n   :text \"2\")))",
             ":testresult",
             vx_test.f_test(
               context,
               vx_core.f_new(
                 vx_repl.t_repl,
-                ":val",
+                ":value",
                 2
               ),
               vx_repl.f_repl_from_textblock(
@@ -824,7 +824,7 @@ export default class vx_repl_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl :val 2)\n    (repl :val 3)))\n (repl<-textblock\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :delim\n    (copy delimvxlispparen\n     :delimlist\n      (empty delimlist))\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"+\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"2\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"3\")))))",
+            ":describename", "(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl :value 2)\n    (repl :value 3)))\n (repl<-textblock\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :delim\n    (copy delimvxlispparen\n     :delimlist\n      (empty delimlist))\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"+\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"2\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"3\")))))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -837,12 +837,12 @@ export default class vx_repl_test {
                   vx_repl.t_repllist,
                   vx_core.f_new(
                     vx_repl.t_repl,
-                    ":val",
+                    ":value",
                     2
                   ),
                   vx_core.f_new(
                     vx_repl.t_repl,
-                    ":val",
+                    ":value",
                     3
                   )
                 )
@@ -907,7 +907,7 @@ export default class vx_repl_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl :val 2)\n    (repl :val 3)))\n (repl<-textblock\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"(+ 2 3)\"\n      :delim\n       (copy delimvxlispparen\n        :delimlist\n         (empty delimlist))\n      :children\n       (tb/textblocklist\n        (tb/textblock\n         :text \"+\")\n        (tb/textblock\n         :text \" \"\n         :delim\n          (copy tb/delimwhitespace\n           :pos 0))\n        (tb/textblock\n         :text \"2\")\n        (tb/textblock\n         :text \" \"\n         :delim\n          (copy tb/delimwhitespace\n           :pos 0))\n        (tb/textblock\n         :text \"3\")))))))",
+            ":describename", "(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl :value 2)\n    (repl :value 3)))\n (repl<-textblock\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"(+ 2 3)\"\n      :delim\n       (copy delimvxlispparen\n        :delimlist\n         (empty delimlist))\n      :children\n       (tb/textblocklist\n        (tb/textblock\n         :text \"+\")\n        (tb/textblock\n         :text \" \"\n         :delim\n          (copy tb/delimwhitespace\n           :pos 0))\n        (tb/textblock\n         :text \"2\")\n        (tb/textblock\n         :text \" \"\n         :delim\n          (copy tb/delimwhitespace\n           :pos 0))\n        (tb/textblock\n         :text \"3\")))))))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -920,12 +920,12 @@ export default class vx_repl_test {
                   vx_repl.t_repllist,
                   vx_core.f_new(
                     vx_repl.t_repl,
-                    ":val",
+                    ":value",
                     2
                   ),
                   vx_core.f_new(
                     vx_repl.t_repl,
-                    ":val",
+                    ":value",
                     3
                   )
                 )
@@ -1013,13 +1013,13 @@ export default class vx_repl_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (repl :val 2)\n (repl<-textblock-argmap\n  (tb/textblock\n   :text \"2\")\n  (empty argmap)))",
+            ":describename", "(test\n (repl :value 2)\n (repl<-textblock-argmap\n  (tb/textblock\n   :text \"2\")\n  (empty argmap)))",
             ":testresult",
             vx_test.f_test(
               context,
               vx_core.f_new(
                 vx_repl.t_repl,
-                ":val",
+                ":value",
                 2
               ),
               vx_repl.f_repl_from_textblock_argmap(
@@ -1059,7 +1059,7 @@ export default class vx_repl_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl :val 2)\n    (repl :val 3)))\n (repl<-textblock-argmap\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :delim\n    (copy delimvxlispparen\n     :delimlist\n      (empty delimlist))\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"+\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"2\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"3\")))\n  (empty argmap)))",
+            ":describename", "(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl :value 2)\n    (repl :value 3)))\n (repl<-textblock-argmap\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :delim\n    (copy delimvxlispparen\n     :delimlist\n      (empty delimlist))\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"+\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"2\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"3\")))\n  (empty argmap)))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -1072,12 +1072,12 @@ export default class vx_repl_test {
                   vx_repl.t_repllist,
                   vx_core.f_new(
                     vx_repl.t_repl,
-                    ":val",
+                    ":value",
                     2
                   ),
                   vx_core.f_new(
                     vx_repl.t_repl,
-                    ":val",
+                    ":value",
                     3
                   )
                 )
@@ -1145,7 +1145,7 @@ export default class vx_repl_test {
           ),
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl :val 2)\n    (repl :val 3)))\n (repl<-textblock-argmap\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"(+ 2 3)\"\n      :delim\n       (copy delimvxlispparen\n        :delimlist\n         (empty delimlist))\n      :children\n       (tb/textblocklist\n        (tb/textblock\n         :text \"+\")\n        (tb/textblock\n         :text \" \"\n         :delim\n          (copy tb/delimwhitespace\n           :pos 0))\n        (tb/textblock\n         :text \"2\")\n        (tb/textblock\n         :text \" \"\n         :delim\n          (copy tb/delimwhitespace\n           :pos 0))\n        (tb/textblock\n         :text \"3\")))))\n  (empty argmap)))",
+            ":describename", "(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl :value 2)\n    (repl :value 3)))\n (repl<-textblock-argmap\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"(+ 2 3)\"\n      :delim\n       (copy delimvxlispparen\n        :delimlist\n         (empty delimlist))\n      :children\n       (tb/textblocklist\n        (tb/textblock\n         :text \"+\")\n        (tb/textblock\n         :text \" \"\n         :delim\n          (copy tb/delimwhitespace\n           :pos 0))\n        (tb/textblock\n         :text \"2\")\n        (tb/textblock\n         :text \" \"\n         :delim\n          (copy tb/delimwhitespace\n           :pos 0))\n        (tb/textblock\n         :text \"3\")))))\n  (empty argmap)))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -1158,12 +1158,12 @@ export default class vx_repl_test {
                   vx_repl.t_repllist,
                   vx_core.f_new(
                     vx_repl.t_repl,
-                    ":val",
+                    ":value",
                     2
                   ),
                   vx_core.f_new(
                     vx_repl.t_repl,
-                    ":val",
+                    ":value",
                     3
                   )
                 )

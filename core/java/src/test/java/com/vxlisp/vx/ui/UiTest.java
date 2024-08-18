@@ -44,8 +44,12 @@ public final class UiTest {
                       )
                     )
                   );
-                  Ui.Type_ui appui = Ui.f_ui_readstate_uiapp(context);
-                  Core.Type_boolean isremoved = Ui.f_boolean_removestate_uiapp(context);
+                  Ui.Type_ui appui = Ui.f_ui_readstate_uiapp(
+                    context
+                  );
+                  Core.Type_boolean isremoved = Ui.f_boolean_removestate_uiapp(
+                    context
+                  );
                   Core.Type_any output_1 = appui;
                   return output_1;
                 })
@@ -73,7 +77,9 @@ public final class UiTest {
             Test.f_test(
               context,
               Core.vx_new_string(""),
-              Ui.f_string_parentuid_from_uid(Core.vx_new_string("a"))
+              Ui.f_string_parentuid_from_uid(
+                Core.vx_new_string("a")
+              )
             )
         ),
         Core.vx_new(
@@ -83,7 +89,9 @@ public final class UiTest {
             Test.f_test(
               context,
               Core.vx_new_string("a/b"),
-              Ui.f_string_parentuid_from_uid(Core.vx_new_string("a/b/c"))
+              Ui.f_string_parentuid_from_uid(
+                Core.vx_new_string("a/b/c")
+              )
             )
         )
       )
@@ -128,7 +136,9 @@ public final class UiTest {
                       )
                     )
                   );
-                  Core.Type_any output_1 = Ui.f_ui_readstate_uiapp(context);
+                  Core.Type_any output_1 = Ui.f_ui_readstate_uiapp(
+                    context
+                  );
                   return output_1;
                 })
               )
@@ -201,9 +211,17 @@ public final class UiTest {
                       )
                     )
                   );
-                  Core.Type_boolean iswrite = Ui.f_boolean_writestate_from_uiapp(context, uiapp);
-                  Ui.Type_ui readval = Ui.f_ui_readstate_from_uid(context, Core.vx_new_string("a/b/c"));
-                  Core.Type_boolean isremoved = Ui.f_boolean_removestate_uiapp(context);
+                  Core.Type_boolean iswrite = Ui.f_boolean_writestate_from_uiapp(
+                    context,
+                    uiapp
+                  );
+                  Ui.Type_ui readval = Ui.f_ui_readstate_from_uid(
+                    context,
+                    Core.vx_new_string("a/b/c")
+                  );
+                  Core.Type_boolean isremoved = Ui.f_boolean_removestate_uiapp(
+                    context
+                  );
                   Core.Type_any output_1 = readval;
                   return output_1;
                 })

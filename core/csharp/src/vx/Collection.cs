@@ -271,7 +271,8 @@ public static class Collection {
     }
 
     public T vx_any_from_for_until_loop<T>(T generic_any_1, T start, Vx.Core.Func_boolean_from_any fn_until, Vx.Core.Func_any_from_any fn_loop) where T : Vx.Core.Type_any {
-      return Vx.Collection.f_any_from_for_until_loop(generic_any_1, start, fn_until, fn_loop);
+      T output = Vx.Collection.f_any_from_for_until_loop(generic_any_1, start, fn_until, fn_loop);
+      return output;
     }
 
   }
@@ -281,7 +282,13 @@ public static class Collection {
 
   public static T f_any_from_for_until_loop<T>(T generic_any_1, T start, Vx.Core.Func_boolean_from_any fn_until, Vx.Core.Func_any_from_any fn_loop) where T : Vx.Core.Type_any {
     T output = Vx.Core.f_empty(generic_any_1);
-    output = Vx.Collection.f_any_from_for_until_loop_max(generic_any_1, start, fn_until, fn_loop, Vx.Core.vx_new_int(10000));
+    output = Vx.Collection.f_any_from_for_until_loop_max(
+      generic_any_1,
+      start,
+      fn_until,
+      fn_loop,
+      Vx.Core.vx_new_int(10000)
+    );
     return output;
   }
 
@@ -369,7 +376,8 @@ public static class Collection {
     }
 
     public T vx_any_from_for_until_loop_max<T>(T generic_any_1, T start, Vx.Core.Func_boolean_from_any fn_until, Vx.Core.Func_any_from_any fn_loop, Vx.Core.Type_int max) where T : Vx.Core.Type_any {
-      return Vx.Collection.f_any_from_for_until_loop_max(generic_any_1, start, fn_until, fn_loop, max);
+      T output = Vx.Collection.f_any_from_for_until_loop_max(generic_any_1, start, fn_until, fn_loop, max);
+      return output;
     }
 
   }
@@ -457,7 +465,8 @@ public static class Collection {
     }
 
     public T vx_any_from_for_while_loop<T>(T generic_any_1, T start, Vx.Core.Func_boolean_from_any fn_while, Vx.Core.Func_any_from_any fn_loop) where T : Vx.Core.Type_any {
-      return Vx.Collection.f_any_from_for_while_loop(generic_any_1, start, fn_while, fn_loop);
+      T output = Vx.Collection.f_any_from_for_while_loop(generic_any_1, start, fn_while, fn_loop);
+      return output;
     }
 
   }
@@ -467,7 +476,13 @@ public static class Collection {
 
   public static T f_any_from_for_while_loop<T>(T generic_any_1, T start, Vx.Core.Func_boolean_from_any fn_while, Vx.Core.Func_any_from_any fn_loop) where T : Vx.Core.Type_any {
     T output = Vx.Core.f_empty(generic_any_1);
-    output = Vx.Collection.f_any_from_for_while_loop_max(generic_any_1, start, fn_while, fn_loop, Vx.Core.vx_new_int(1000));
+    output = Vx.Collection.f_any_from_for_while_loop_max(
+      generic_any_1,
+      start,
+      fn_while,
+      fn_loop,
+      Vx.Core.vx_new_int(1000)
+    );
     return output;
   }
 
@@ -556,7 +571,8 @@ public static class Collection {
     }
 
     public T vx_any_from_for_while_loop_max<T>(T generic_any_1, T start, Vx.Core.Func_boolean_from_any fn_while, Vx.Core.Func_any_from_any fn_loop, Vx.Core.Type_int max) where T : Vx.Core.Type_any {
-      return Vx.Collection.f_any_from_for_while_loop_max(generic_any_1, start, fn_while, fn_loop, max);
+      T output = Vx.Collection.f_any_from_for_while_loop_max(generic_any_1, start, fn_while, fn_loop, max);
+      return output;
     }
 
   }
@@ -642,7 +658,8 @@ public static class Collection {
     }
 
     public T vx_any_from_map_pos<N, T>(T generic_any_1, N map, Vx.Core.Type_int pos) where N : Vx.Core.Type_map where T : Vx.Core.Type_any {
-      return Vx.Collection.f_any_from_map_pos(generic_any_1, map, pos);
+      T output = Vx.Collection.f_any_from_map_pos(generic_any_1, map, pos);
+      return output;
     }
 
   }
@@ -655,9 +672,19 @@ public static class Collection {
     output = Vx.Core.f_let(
       generic_any_1,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Core.Type_stringlist keys = Vx.Core.f_stringlist_from_map(map);
-        Vx.Core.Type_string key = Vx.Core.f_any_from_list(Vx.Core.t_string, keys, pos);
-        Vx.Core.Type_any output_1 = Vx.Core.f_any_from_map(generic_any_1, map, key);
+        Vx.Core.Type_stringlist keys = Vx.Core.f_stringlist_from_map(
+          map
+        );
+        Vx.Core.Type_string key = Vx.Core.f_any_from_list(
+          Vx.Core.t_string,
+          keys,
+          pos
+        );
+        Vx.Core.Type_any output_1 = Vx.Core.f_any_from_map(
+          generic_any_1,
+          map,
+          key
+        );
         return output_1;
       })
     );
@@ -735,7 +762,8 @@ public static class Collection {
     }
 
     public Vx.Core.Type_boolean vx_boolean_write_from_map_removekey(Vx.Core.Type_map valuemap, Vx.Core.Type_string key) {
-      return Vx.Collection.f_boolean_write_from_map_removekey(valuemap, key);
+      Vx.Core.Type_boolean output = Vx.Collection.f_boolean_write_from_map_removekey(valuemap, key);
+      return output;
     }
 
   }
@@ -826,7 +854,8 @@ public static class Collection {
     }
 
     public Vx.Core.Type_boolean vx_boolean_write_from_map_removekeys(Vx.Core.Type_map valuemap, Vx.Core.Type_stringlist keys) {
-      return Vx.Collection.f_boolean_write_from_map_removekeys(valuemap, keys);
+      Vx.Core.Type_boolean output = Vx.Collection.f_boolean_write_from_map_removekeys(valuemap, keys);
+      return output;
     }
 
   }
@@ -844,13 +873,17 @@ public static class Collection {
           keys,
           Vx.Core.t_any_from_any.vx_fn_new((key_any) => {
             Vx.Core.Type_string key = Vx.Core.f_any_from_any(Vx.Core.t_string, key_any);
-            Vx.Core.Type_any output_1 = 
-                Vx.Collection.f_boolean_write_from_map_removekey(valuemap, key);
-            return output_1;
+            Vx.Core.Type_any output_2 = Vx.Collection.f_boolean_write_from_map_removekey(
+              valuemap,
+              key
+            );
+            return output_2;
           })
         );
-        Vx.Core.Type_any output_2 = Vx.Core.f_and_1(writelist);
-        return output_2;
+        Vx.Core.Type_any output_1 = Vx.Core.f_and_1(
+          writelist
+        );
+        return output_1;
       })
     );
     return output;
@@ -927,7 +960,8 @@ public static class Collection {
     }
 
     public Vx.Core.Type_int vx_int_from_map_key(Vx.Core.Type_map map, Vx.Core.Type_string key) {
-      return Vx.Collection.f_int_from_map_key(map, key);
+      Vx.Core.Type_int output = Vx.Collection.f_int_from_map_key(map, key);
+      return output;
     }
 
   }
@@ -940,8 +974,13 @@ public static class Collection {
     output = Vx.Core.f_let(
       Vx.Core.t_int,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Core.Type_stringlist keys = Vx.Core.f_stringlist_from_map(map);
-        Vx.Core.Type_any output_1 = Vx.Collection.f_int_from_stringlist_find(keys, key);
+        Vx.Core.Type_stringlist keys = Vx.Core.f_stringlist_from_map(
+          map
+        );
+        Vx.Core.Type_any output_1 = Vx.Collection.f_int_from_stringlist_find(
+          keys,
+          key
+        );
         return output_1;
       })
     );
@@ -1019,7 +1058,8 @@ public static class Collection {
     }
 
     public Vx.Core.Type_int vx_int_from_stringlist_find(Vx.Core.Type_stringlist stringlist, Vx.Core.Type_string find) {
-      return Vx.Collection.f_int_from_stringlist_find(stringlist, find);
+      Vx.Core.Type_int output = Vx.Collection.f_int_from_stringlist_find(stringlist, find);
+      return output;
     }
 
   }
@@ -1038,14 +1078,16 @@ public static class Collection {
           Vx.Core.t_any_from_int_any.vx_fn_new((pos_any, value_any) => {
             Vx.Core.Type_int pos = Vx.Core.f_any_from_any(Vx.Core.t_int, pos_any);
             Vx.Core.Type_string value = Vx.Core.f_any_from_any(Vx.Core.t_string, value_any);
-            Vx.Core.Type_any output_1 = 
-                Vx.Core.f_if_1(
-                  Vx.Core.t_int,
-                  Vx.Core.f_eq(find, value),
-                  pos,
-                  Vx.Core.vx_new_int(0)
-                );
-            return output_1;
+            Vx.Core.Type_any output_2 = Vx.Core.f_if_1(
+              Vx.Core.t_int,
+              Vx.Core.f_eq(
+                find,
+                value
+              ),
+              pos,
+              Vx.Core.vx_new_int(0)
+            );
+            return output_2;
           })
         );
         Vx.Core.Type_intlist gt0list = Vx.Collection.f_list_from_list_filter(
@@ -1053,12 +1095,15 @@ public static class Collection {
           poslist,
           Vx.Core.t_any_from_any.vx_fn_new((item_any) => {
             Vx.Core.Type_int item = Vx.Core.f_any_from_any(Vx.Core.t_int, item_any);
-            Vx.Core.Type_any output_2 = item;
-            return output_2;
+            Vx.Core.Type_any output_3 = item;
+            return output_3;
           })
         );
-        Vx.Core.Type_any output_3 = Vx.Core.f_first_from_list(Vx.Core.t_int, gt0list);
-        return output_3;
+        Vx.Core.Type_any output_1 = Vx.Core.f_first_from_list(
+          Vx.Core.t_int,
+          gt0list
+        );
+        return output_1;
       })
     );
     return output;
@@ -1145,7 +1190,8 @@ public static class Collection {
     }
 
     public Vx.Core.Type_boolean vx_is_list(Vx.Core.Type_any val) {
-      return Vx.Collection.f_is_list(val);
+      Vx.Core.Type_boolean output = Vx.Collection.f_is_list(val);
+      return output;
     }
 
   }
@@ -1157,7 +1203,9 @@ public static class Collection {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
     output = Vx.Core.f_eq(
       Vx.Core.vx_new_string(":list"),
-      Vx.Core.f_extends_from_any(val)
+      Vx.Core.f_extends_from_any(
+        val
+      )
     );
     return output;
   }
@@ -1243,7 +1291,8 @@ public static class Collection {
     }
 
     public Vx.Core.Type_boolean vx_is_map(Vx.Core.Type_any val) {
-      return Vx.Collection.f_is_map(val);
+      Vx.Core.Type_boolean output = Vx.Collection.f_is_map(val);
+      return output;
     }
 
   }
@@ -1255,7 +1304,9 @@ public static class Collection {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
     output = Vx.Core.f_eq(
       Vx.Core.vx_new_string(":map"),
-      Vx.Core.f_extends_from_any(val)
+      Vx.Core.f_extends_from_any(
+        val
+      )
     );
     return output;
   }
@@ -1345,7 +1396,8 @@ public static class Collection {
     }
 
     public X vx_list_from_for_end_loop<X>(X generic_list_1, Vx.Core.Type_int start, Vx.Core.Type_int end, Vx.Core.Func_any_from_int fn_loop) where X : Vx.Core.Type_list {
-      return Vx.Collection.f_list_from_for_end_loop(generic_list_1, start, end, fn_loop);
+      X output = Vx.Collection.f_list_from_for_end_loop(generic_list_1, start, end, fn_loop);
+      return output;
     }
 
   }
@@ -1433,7 +1485,8 @@ public static class Collection {
     }
 
     public X vx_list_from_for_while_loop<T, X>(X generic_list_1, T start, Vx.Core.Func_boolean_from_any fn_while, Vx.Core.Func_any_from_any fn_loop) where T : Vx.Core.Type_any where X : Vx.Core.Type_list {
-      return Vx.Collection.f_list_from_for_while_loop(generic_list_1, start, fn_while, fn_loop);
+      X output = Vx.Collection.f_list_from_for_while_loop(generic_list_1, start, fn_while, fn_loop);
+      return output;
     }
 
   }
@@ -1443,7 +1496,13 @@ public static class Collection {
 
   public static X f_list_from_for_while_loop<T, X>(X generic_list_1, T start, Vx.Core.Func_boolean_from_any fn_while, Vx.Core.Func_any_from_any fn_loop) where T : Vx.Core.Type_any where X : Vx.Core.Type_list {
     X output = Vx.Core.f_empty(generic_list_1);
-    output = Vx.Collection.f_list_from_for_while_loop_max(generic_list_1, start, fn_while, fn_loop, Vx.Core.vx_new_int(1000));
+    output = Vx.Collection.f_list_from_for_while_loop_max(
+      generic_list_1,
+      start,
+      fn_while,
+      fn_loop,
+      Vx.Core.vx_new_int(1000)
+    );
     return output;
   }
 
@@ -1529,7 +1588,8 @@ public static class Collection {
     }
 
     public X vx_list_from_for_while_loop_max<T, X>(X generic_list_1, T start, Vx.Core.Func_boolean_from_any fn_while, Vx.Core.Func_any_from_any fn_loop, Vx.Core.Type_int max) where T : Vx.Core.Type_any where X : Vx.Core.Type_list {
-      return Vx.Collection.f_list_from_for_while_loop_max(generic_list_1, start, fn_while, fn_loop, max);
+      X output = Vx.Collection.f_list_from_for_while_loop_max(generic_list_1, start, fn_while, fn_loop, max);
+      return output;
     }
 
   }
@@ -1615,7 +1675,8 @@ public static class Collection {
     }
 
     public X vx_list_from_list_end<X>(X generic_list_1, X values, Vx.Core.Type_int end) where X : Vx.Core.Type_list {
-      return Vx.Collection.f_list_from_list_end(generic_list_1, values, end);
+      X output = Vx.Collection.f_list_from_list_end(generic_list_1, values, end);
+      return output;
     }
 
   }
@@ -1625,7 +1686,12 @@ public static class Collection {
 
   public static X f_list_from_list_end<X>(X generic_list_1, X values, Vx.Core.Type_int end) where X : Vx.Core.Type_list {
     X output = Vx.Core.f_empty(generic_list_1);
-    output = Vx.Collection.f_list_from_list_start_end(generic_list_1, values, Vx.Core.vx_new_int(1), end);
+    output = Vx.Collection.f_list_from_list_start_end(
+      generic_list_1,
+      values,
+      Vx.Core.vx_new_int(1),
+      end
+    );
     return output;
   }
 
@@ -1701,7 +1767,8 @@ public static class Collection {
     }
 
     public X vx_list_from_list_filter<X, Y>(X generic_list_1, Y vallist, Vx.Core.Func_any_from_any fn_filter) where X : Vx.Core.Type_list where Y : Vx.Core.Type_list {
-      return Vx.Collection.f_list_from_list_filter(generic_list_1, vallist, fn_filter);
+      X output = Vx.Collection.f_list_from_list_filter(generic_list_1, vallist, fn_filter);
+      return output;
     }
 
   }
@@ -1787,7 +1854,8 @@ public static class Collection {
     }
 
     public X vx_list_from_list_filtertypes<X, Y>(X generic_list_1, Y vallist, Vx.Core.Type_typelist filtertypes) where X : Vx.Core.Type_list where Y : Vx.Core.Type_list {
-      return Vx.Collection.f_list_from_list_filtertypes(generic_list_1, vallist, filtertypes);
+      X output = Vx.Collection.f_list_from_list_filtertypes(generic_list_1, vallist, filtertypes);
+      return output;
     }
 
   }
@@ -1802,12 +1870,14 @@ public static class Collection {
       vallist,
       Vx.Core.t_any_from_any.vx_fn_new((val_any) => {
         Vx.Core.Type_any val = Vx.Core.f_any_from_any(Vx.Core.t_any, val_any);
-        Vx.Core.Type_any output_1 = 
-          Vx.Core.f_if(
-            Vx.Core.t_any,
-            Vx.Type.f_is_type_from_any_typelist(val, filtertypes),
-            val
-          );
+        Vx.Core.Type_any output_1 = Vx.Core.f_if(
+          Vx.Core.t_any,
+          Vx.Type.f_is_type_from_any_typelist(
+            val,
+            filtertypes
+          ),
+          val
+        );
         return output_1;
       })
     );
@@ -1886,7 +1956,8 @@ public static class Collection {
     }
 
     public X vx_list_from_list_start<X>(X generic_list_1, X values, Vx.Core.Type_int start) where X : Vx.Core.Type_list {
-      return Vx.Collection.f_list_from_list_start(generic_list_1, values, start);
+      X output = Vx.Collection.f_list_from_list_start(generic_list_1, values, start);
+      return output;
     }
 
   }
@@ -1900,7 +1971,9 @@ public static class Collection {
       generic_list_1,
       values,
       start,
-      Vx.Core.f_length_1(values)
+      Vx.Core.f_length_1(
+        values
+      )
     );
     return output;
   }
@@ -1979,7 +2052,8 @@ public static class Collection {
     }
 
     public X vx_list_from_list_start_end<X>(X generic_list_1, X values, Vx.Core.Type_int start, Vx.Core.Type_int end) where X : Vx.Core.Type_list {
-      return Vx.Collection.f_list_from_list_start_end(generic_list_1, values, start, end);
+      X output = Vx.Collection.f_list_from_list_start_end(generic_list_1, values, start, end);
+      return output;
     }
 
   }
@@ -2065,7 +2139,8 @@ public static class Collection {
     }
 
     public N vx_map_from_map_end<N>(N generic_map_1, N valuemap, Vx.Core.Type_int end) where N : Vx.Core.Type_map {
-      return Vx.Collection.f_map_from_map_end(generic_map_1, valuemap, end);
+      N output = Vx.Collection.f_map_from_map_end(generic_map_1, valuemap, end);
+      return output;
     }
 
   }
@@ -2075,7 +2150,12 @@ public static class Collection {
 
   public static N f_map_from_map_end<N>(N generic_map_1, N valuemap, Vx.Core.Type_int end) where N : Vx.Core.Type_map {
     N output = Vx.Core.f_empty(generic_map_1);
-    output = Vx.Collection.f_map_from_map_start_end(generic_map_1, valuemap, Vx.Core.vx_new_int(1), end);
+    output = Vx.Collection.f_map_from_map_start_end(
+      generic_map_1,
+      valuemap,
+      Vx.Core.vx_new_int(1),
+      end
+    );
     return output;
   }
 
@@ -2151,7 +2231,8 @@ public static class Collection {
     }
 
     public N vx_map_from_map_keys<N>(N generic_map_1, N valuemap, Vx.Core.Type_stringlist keys) where N : Vx.Core.Type_map {
-      return Vx.Collection.f_map_from_map_keys(generic_map_1, valuemap, keys);
+      N output = Vx.Collection.f_map_from_map_keys(generic_map_1, valuemap, keys);
+      return output;
     }
 
   }
@@ -2237,7 +2318,8 @@ public static class Collection {
     }
 
     public N vx_map_from_map_start<N>(N generic_map_1, N valuemap, Vx.Core.Type_int start) where N : Vx.Core.Type_map {
-      return Vx.Collection.f_map_from_map_start(generic_map_1, valuemap, start);
+      N output = Vx.Collection.f_map_from_map_start(generic_map_1, valuemap, start);
+      return output;
     }
 
   }
@@ -2251,7 +2333,9 @@ public static class Collection {
       generic_map_1,
       valuemap,
       start,
-      Vx.Core.f_length_2(valuemap)
+      Vx.Core.f_length_2(
+        valuemap
+      )
     );
     return output;
   }
@@ -2330,7 +2414,8 @@ public static class Collection {
     }
 
     public N vx_map_from_map_start_end<N>(N generic_map_1, N valuemap, Vx.Core.Type_int start, Vx.Core.Type_int end) where N : Vx.Core.Type_map {
-      return Vx.Collection.f_map_from_map_start_end(generic_map_1, valuemap, start, end);
+      N output = Vx.Collection.f_map_from_map_start_end(generic_map_1, valuemap, start, end);
+      return output;
     }
 
   }
@@ -2343,9 +2428,20 @@ public static class Collection {
     output = Vx.Core.f_let(
       generic_map_1,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Core.Type_stringlist keys1 = Vx.Core.f_stringlist_from_map(valuemap);
-        Vx.Core.Type_stringlist keys2 = Vx.Collection.f_list_from_list_start_end(Vx.Core.t_stringlist, keys1, start, end);
-        Vx.Core.Type_any output_1 = Vx.Collection.f_map_from_map_keys(generic_map_1, valuemap, keys2);
+        Vx.Core.Type_stringlist keys1 = Vx.Core.f_stringlist_from_map(
+          valuemap
+        );
+        Vx.Core.Type_stringlist keys2 = Vx.Collection.f_list_from_list_start_end(
+          Vx.Core.t_stringlist,
+          keys1,
+          start,
+          end
+        );
+        Vx.Core.Type_any output_1 = Vx.Collection.f_map_from_map_keys(
+          generic_map_1,
+          valuemap,
+          keys2
+        );
         return output_1;
       })
     );

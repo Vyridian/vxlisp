@@ -232,7 +232,9 @@ public class CsvTest {
                   )
                 )
               ),
-              Vx.Data.Csv.f_textblock_csv_from_string(Vx.Core.vx_new_string("\"a\",\"b\"\n1,\"2\""))
+              Vx.Data.Csv.f_textblock_csv_from_string(
+                Vx.Core.vx_new_string("\"a\",\"b\"\n1,\"2\"")
+              )
             )
         )
       )

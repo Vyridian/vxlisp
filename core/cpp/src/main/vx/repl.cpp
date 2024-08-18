@@ -219,7 +219,7 @@ namespace vx_repl {
         this->vx_p_type,
         this->vx_p_repllist,
         this->vx_p_async,
-        this->vx_p_val,
+        this->vx_p_value,
         this->vx_p_doc
       });
     }
@@ -260,9 +260,9 @@ namespace vx_repl {
       return output;
     }
 
-    // val()
-    vx_core::Type_any Class_repl::val() const {
-      vx_core::Type_any output = this->vx_p_val;
+    // value()
+    vx_core::Type_any Class_repl::value() const {
+      vx_core::Type_any output = this->vx_p_value;
       if (!output) {
         output = vx_core::e_any;
       }
@@ -291,8 +291,8 @@ namespace vx_repl {
         output = this->repllist();
       } else if (skey == ":async") {
         output = this->async();
-      } else if (skey == ":val") {
-        output = this->val();
+      } else if (skey == ":value") {
+        output = this->value();
       } else if (skey == ":doc") {
         output = this->doc();
       }
@@ -307,7 +307,7 @@ namespace vx_repl {
       output[":type"] = this->type();
       output[":repllist"] = this->repllist();
       output[":async"] = this->async();
-      output[":val"] = this->val();
+      output[":value"] = this->value();
       output[":doc"] = this->doc();
       return output;
     }
@@ -329,7 +329,7 @@ namespace vx_repl {
       vx_core::Type_any vx_p_type = val->type();
       vx_repl::Type_repllist vx_p_repllist = val->repllist();
       vx_core::Type_boolean vx_p_async = val->async();
-      vx_core::Type_any vx_p_val = val->val();
+      vx_core::Type_any vx_p_value = val->value();
       vx_core::Type_string vx_p_doc = val->doc();
       std::string key = "";
       for (vx_core::Type_any valsub : vals) {
@@ -353,7 +353,7 @@ namespace vx_repl {
             key = testkey;
           } else if (testkey == ":async") {
             key = testkey;
-          } else if (testkey == ":val") {
+          } else if (testkey == ":value") {
             key = testkey;
           } else if (testkey == ":doc") {
             key = testkey;
@@ -395,10 +395,10 @@ namespace vx_repl {
               vx_core::Type_msg msg = vx_core::vx_msg_from_errortext("(new repl :async " + vx_core::vx_string_from_any(valsub) + ") - Invalid Value");
               msgblock = vx_core::vx_copy(msgblock, {msg});
             }
-          } else if (key == ":val") {
-            if (vx_p_val != valsub) {
+          } else if (key == ":value") {
+            if (vx_p_value != valsub) {
               ischanged = true;
-              vx_p_val = valsub;
+              vx_p_value = valsub;
             }
           } else if (key == ":doc") {
             if (vx_p_doc == valsub) {
@@ -446,12 +446,12 @@ namespace vx_repl {
           output->vx_p_async = vx_p_async;
           vx_core::vx_reserve(vx_p_async);
         }
-        if (output->vx_p_val != vx_p_val) {
-          if (output->vx_p_val) {
-            vx_core::vx_release_one(output->vx_p_val);
+        if (output->vx_p_value != vx_p_value) {
+          if (output->vx_p_value) {
+            vx_core::vx_release_one(output->vx_p_value);
           }
-          output->vx_p_val = vx_p_val;
-          vx_core::vx_reserve(vx_p_val);
+          output->vx_p_value = vx_p_value;
+          vx_core::vx_reserve(vx_p_value);
         }
         if (output->vx_p_doc != vx_p_doc) {
           if (output->vx_p_doc) {
@@ -505,7 +505,7 @@ namespace vx_repl {
             vx_core::t_boolean // type
           ),
           vx_core::vx_new_arg(
-            "val", // name
+            "value", // name
             vx_core::t_any // type
           ),
           vx_core::vx_new_arg(
@@ -1314,8 +1314,8 @@ namespace vx_repl {
     output = vx_core::f_let(
       vx_core::t_any,
       vx_core::t_any_from_func->vx_fn_new({repl, context}, [repl, context]() {
-        vx_core::Type_any val = repl->val();
-        vx_core::vx_ref_plus(val);
+        vx_core::Type_any value = repl->value();
+        vx_core::vx_ref_plus(value);
         vx_core::Type_any repltype = repl->type();
         vx_core::vx_ref_plus(repltype);
         vx_repl::Type_repllist repllist = repl->repllist();
@@ -1326,12 +1326,12 @@ namespace vx_repl {
           vx_core::t_any,
           vx_core::vx_new(vx_core::t_thenelselist, {
             vx_core::f_then(
-              vx_core::t_boolean_from_func->vx_fn_new({val}, [val]() {
-                vx_core::Type_boolean output_1 = vx_core::f_notempty_1(val);
+              vx_core::t_boolean_from_func->vx_fn_new({value}, [value]() {
+                vx_core::Type_boolean output_1 = vx_core::f_notempty_1(value);
                 return output_1;
               }),
-              vx_core::t_any_from_func->vx_fn_new({val}, [val]() {
-                vx_core::Type_any output_1 = val;
+              vx_core::t_any_from_func->vx_fn_new({value}, [value]() {
+                vx_core::Type_any output_1 = value;
                 return output_1;
               })
             ),
@@ -1353,7 +1353,7 @@ namespace vx_repl {
             )
           })
         );
-        vx_core::vx_release_one_except({val, repltype, repllist, args}, output_1);
+        vx_core::vx_release_one_except({value, repltype, repllist, args}, output_1);
         return output_1;
       })
     );
@@ -2703,7 +2703,7 @@ namespace vx_repl {
             vx_repl::Type_repl output_1 = vx_core::f_new(
               vx_repl::t_repl,
               vx_core::vx_new(vx_core::t_anylist, {
-                vx_core::vx_new_string(":val"),
+                vx_core::vx_new_string(":value"),
                 vx_type::f_string_from_string_start_end(text, vx_core::vx_new_int(2), vx_core::vx_new_int(-1))
               })
             );
@@ -2719,7 +2719,7 @@ namespace vx_repl {
             vx_repl::Type_repl output_1 = vx_core::f_new(
               vx_repl::t_repl,
               vx_core::vx_new(vx_core::t_anylist, {
-                vx_core::vx_new_string(":val"),
+                vx_core::vx_new_string(":value"),
                 vx_core::f_int_from_string(text)
               })
             );
@@ -2735,7 +2735,7 @@ namespace vx_repl {
             vx_repl::Type_repl output_1 = vx_core::f_new(
               vx_repl::t_repl,
               vx_core::vx_new(vx_core::t_anylist, {
-                vx_core::vx_new_string(":val"),
+                vx_core::vx_new_string(":value"),
                 vx_core::f_float_from_string(text)
               })
             );
@@ -2761,7 +2761,7 @@ namespace vx_repl {
                         vx_repl::Type_repl output_1 = vx_core::f_new(
                           vx_repl::t_repl,
                           vx_core::vx_new(vx_core::t_anylist, {
-                            vx_core::vx_new_string(":val"),
+                            vx_core::vx_new_string(":value"),
                             arg
                           })
                         );
@@ -2787,7 +2787,7 @@ namespace vx_repl {
                                     vx_repl::Type_repl output_1 = vx_core::f_new(
                                       vx_repl::t_repl,
                                       vx_core::vx_new(vx_core::t_anylist, {
-                                        vx_core::vx_new_string(":val"),
+                                        vx_core::vx_new_string(":value"),
                                         cnst
                                       })
                                     );

@@ -9471,6 +9471,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
@@ -9480,7 +9481,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_htmlstring_from_string(final Core.Type_string text) {
-      return Html.f_htmlstring_from_string(text);
+      Core.Type_string output = Html.f_htmlstring_from_string(text);
+      return output;
     }
 
   }
@@ -9580,6 +9582,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_int indent = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(0)));
@@ -9589,7 +9592,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_indent(final Core.Type_int indent) {
-      return Html.f_string_indent(indent);
+      Core.Type_string output = Html.f_string_indent(indent);
+      return output;
     }
 
   }
@@ -9599,7 +9603,10 @@ public final class Html {
 
   public static Core.Type_string f_string_indent(final Core.Type_int indent) {
     Core.Type_string output = Core.e_string;
-    output = Core.f_string_repeat(Core.vx_new_string("  "), indent);
+    output = Core.f_string_repeat(
+      Core.vx_new_string("  "),
+      indent
+    );
     return output;
   }
 
@@ -9671,6 +9678,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_body body = Core.f_any_from_any(Html.t_body, arglist.vx_any(Core.vx_new_int(0)));
@@ -9681,7 +9689,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_body_indent(final Html.Type_body body, final Core.Type_int indent) {
-      return Html.f_string_from_body_indent(body, indent);
+      Core.Type_string output = Html.f_string_from_body_indent(body, indent);
+      return output;
     }
 
   }
@@ -9695,7 +9704,12 @@ public final class Html {
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
         Html.Type_divchildlist nodes = body.nodes();
-        Core.Type_any output_1 = Html.f_string_from_nodelist_tag_prop_indent(nodes, Core.vx_new_string("body"), Core.vx_new_string(""), indent);
+        Core.Type_any output_1 = Html.f_string_from_nodelist_tag_prop_indent(
+          nodes,
+          Core.vx_new_string("body"),
+          Core.vx_new_string(""),
+          indent
+        );
         return output_1;
       })
     );
@@ -9770,6 +9784,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_details details = Core.f_any_from_any(Html.t_details, arglist.vx_any(Core.vx_new_int(0)));
@@ -9780,7 +9795,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_details_indent(final Html.Type_details details, final Core.Type_int indent) {
-      return Html.f_string_from_details_indent(details, indent);
+      Core.Type_string output = Html.f_string_from_details_indent(details, indent);
+      return output;
     }
 
   }
@@ -9793,16 +9809,24 @@ public final class Html {
     output = Core.f_let(
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
-        Core.Type_string sindent = Html.f_string_from_indent(indent);
+        Core.Type_string sindent = Html.f_string_from_indent(
+          indent
+        );
         Html.Type_divchildlist summary = details.summary();
         Html.Type_divchildlist nodes = details.nodes();
         Core.Type_string ssummary = Html.f_string_from_nodelist_indent(
           summary,
-          Core.f_plus(indent, Core.vx_new_int(2))
+          Core.f_plus(
+            indent,
+            Core.vx_new_int(2)
+          )
         );
         Core.Type_string snodes = Html.f_string_from_nodelist_indent(
           nodes,
-          Core.f_plus(indent, Core.vx_new_int(1))
+          Core.f_plus(
+            indent,
+            Core.vx_new_int(1)
+          )
         );
         Core.Type_any output_1 = Core.f_new(
           Core.t_string,
@@ -9894,6 +9918,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_div div = Core.f_any_from_any(Html.t_div, arglist.vx_any(Core.vx_new_int(0)));
@@ -9904,7 +9929,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_div_indent(final Html.Type_div div, final Core.Type_int indent) {
-      return Html.f_string_from_div_indent(div, indent);
+      Core.Type_string output = Html.f_string_from_div_indent(div, indent);
+      return output;
     }
 
   }
@@ -10017,6 +10043,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_footer footer = Core.f_any_from_any(Html.t_footer, arglist.vx_any(Core.vx_new_int(0)));
@@ -10027,7 +10054,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_footer_indent(final Html.Type_footer footer, final Core.Type_int indent) {
-      return Html.f_string_from_footer_indent(footer, indent);
+      Core.Type_string output = Html.f_string_from_footer_indent(footer, indent);
+      return output;
     }
 
   }
@@ -10041,7 +10069,12 @@ public final class Html {
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
         Html.Type_divchildlist nodes = footer.nodes();
-        Core.Type_any output_1 = Html.f_string_from_nodelist_tag_prop_indent(nodes, Core.vx_new_string("footer"), Core.vx_new_string(""), indent);
+        Core.Type_any output_1 = Html.f_string_from_nodelist_tag_prop_indent(
+          nodes,
+          Core.vx_new_string("footer"),
+          Core.vx_new_string(""),
+          indent
+        );
         return output_1;
       })
     );
@@ -10116,6 +10149,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_h1 h1 = Core.f_any_from_any(Html.t_h1, arglist.vx_any(Core.vx_new_int(0)));
@@ -10126,7 +10160,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_h1_indent(final Html.Type_h1 h1, final Core.Type_int indent) {
-      return Html.f_string_from_h1_indent(h1, indent);
+      Core.Type_string output = Html.f_string_from_h1_indent(h1, indent);
+      return output;
     }
 
   }
@@ -10139,7 +10174,9 @@ public final class Html {
     output = Core.f_let(
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
-        Core.Type_string sindent = Html.f_string_from_indent(indent);
+        Core.Type_string sindent = Html.f_string_from_indent(
+          indent
+        );
         Core.Type_string text = h1.text();
         Core.Type_string sid = Html.f_string_from_propname_val(
           Core.vx_new_string("id"),
@@ -10231,6 +10268,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_h2 h2 = Core.f_any_from_any(Html.t_h2, arglist.vx_any(Core.vx_new_int(0)));
@@ -10241,7 +10279,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_h2_indent(final Html.Type_h2 h2, final Core.Type_int indent) {
-      return Html.f_string_from_h2_indent(h2, indent);
+      Core.Type_string output = Html.f_string_from_h2_indent(h2, indent);
+      return output;
     }
 
   }
@@ -10255,7 +10294,9 @@ public final class Html {
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
         Core.Type_string text = h2.text();
-        Core.Type_string sindent = Html.f_string_from_indent(indent);
+        Core.Type_string sindent = Html.f_string_from_indent(
+          indent
+        );
         Core.Type_string sid = Html.f_string_from_propname_val(
           Core.vx_new_string("id"),
           h2.id()
@@ -10346,6 +10387,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_h3 h3 = Core.f_any_from_any(Html.t_h3, arglist.vx_any(Core.vx_new_int(0)));
@@ -10356,7 +10398,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_h3_indent(final Html.Type_h3 h3, final Core.Type_int indent) {
-      return Html.f_string_from_h3_indent(h3, indent);
+      Core.Type_string output = Html.f_string_from_h3_indent(h3, indent);
+      return output;
     }
 
   }
@@ -10370,7 +10413,9 @@ public final class Html {
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
         Core.Type_string text = h3.text();
-        Core.Type_string sindent = Html.f_string_from_indent(indent);
+        Core.Type_string sindent = Html.f_string_from_indent(
+          indent
+        );
         Core.Type_string sid = Html.f_string_from_propname_val(
           Core.vx_new_string("id"),
           h3.id()
@@ -10461,6 +10506,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_head head = Core.f_any_from_any(Html.t_head, arglist.vx_any(Core.vx_new_int(0)));
@@ -10471,7 +10517,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_head_indent(final Html.Type_head head, final Core.Type_int indent) {
-      return Html.f_string_from_head_indent(head, indent);
+      Core.Type_string output = Html.f_string_from_head_indent(head, indent);
+      return output;
     }
 
   }
@@ -10485,7 +10532,12 @@ public final class Html {
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
         Html.Type_headchildlist nodes = head.nodes();
-        Core.Type_any output_1 = Html.f_string_from_nodelist_tag_prop_indent(nodes, Core.vx_new_string("head"), Core.vx_new_string(""), indent);
+        Core.Type_any output_1 = Html.f_string_from_nodelist_tag_prop_indent(
+          nodes,
+          Core.vx_new_string("head"),
+          Core.vx_new_string(""),
+          indent
+        );
         return output_1;
       })
     );
@@ -10573,6 +10625,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_html html = Core.f_any_from_any(Html.t_html, arglist.vx_any(Core.vx_new_int(0)));
@@ -10582,7 +10635,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_html(final Html.Type_html html) {
-      return Html.f_string_from_html(html);
+      Core.Type_string output = Html.f_string_from_html(html);
+      return output;
     }
 
   }
@@ -10602,9 +10656,18 @@ public final class Html {
         Html.Type_head head = html.head();
         Html.Type_body body = html.body();
         Html.Type_footer footer = html.footer();
-        Core.Type_string shead = Html.f_string_from_head_indent(head, Core.vx_new_int(1));
-        Core.Type_string sbody = Html.f_string_from_body_indent(body, Core.vx_new_int(1));
-        Core.Type_string sfooter = Html.f_string_from_footer_indent(footer, Core.vx_new_int(1));
+        Core.Type_string shead = Html.f_string_from_head_indent(
+          head,
+          Core.vx_new_int(1)
+        );
+        Core.Type_string sbody = Html.f_string_from_body_indent(
+          body,
+          Core.vx_new_int(1)
+        );
+        Core.Type_string sfooter = Html.f_string_from_footer_indent(
+          footer,
+          Core.vx_new_int(1)
+        );
         Core.Type_any output_1 = Core.f_new(
           Core.t_string,
           Core.vx_new(
@@ -10695,6 +10758,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_img img = Core.f_any_from_any(Html.t_img, arglist.vx_any(Core.vx_new_int(0)));
@@ -10705,7 +10769,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_img_indent(final Html.Type_img img, final Core.Type_int indent) {
-      return Html.f_string_from_img_indent(img, indent);
+      Core.Type_string output = Html.f_string_from_img_indent(img, indent);
+      return output;
     }
 
   }
@@ -10718,7 +10783,9 @@ public final class Html {
     output = Core.f_let(
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
-        Core.Type_string sindent = Html.f_string_from_indent(indent);
+        Core.Type_string sindent = Html.f_string_from_indent(
+          indent
+        );
         Core.Type_string ssrc = Html.f_string_from_propname_val(
           Core.vx_new_string("src"),
           img.src()
@@ -10834,6 +10901,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_int indent = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(0)));
@@ -10843,7 +10911,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_indent(final Core.Type_int indent) {
-      return Html.f_string_from_indent(indent);
+      Core.Type_string output = Html.f_string_from_indent(indent);
+      return output;
     }
 
   }
@@ -10855,14 +10924,19 @@ public final class Html {
     Core.Type_string output = Core.e_string;
     output = Core.f_if_1(
       Core.t_string,
-      Core.f_eq(indent, Core.vx_new_int(0)),
+      Core.f_eq(
+        indent,
+        Core.vx_new_int(0)
+      ),
       Core.vx_new_string(""),
       Core.f_new(
         Core.t_string,
         Core.vx_new(
           Core.t_anylist,
           Core.c_newline,
-          Html.f_string_indent(indent)
+          Html.f_string_indent(
+            indent
+          )
         )
       )
     );
@@ -10937,6 +11011,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_meta meta = Core.f_any_from_any(Html.t_meta, arglist.vx_any(Core.vx_new_int(0)));
@@ -10947,7 +11022,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_meta_indent(final Html.Type_meta meta, final Core.Type_int indent) {
-      return Html.f_string_from_meta_indent(meta, indent);
+      Core.Type_string output = Html.f_string_from_meta_indent(meta, indent);
+      return output;
     }
 
   }
@@ -10960,7 +11036,9 @@ public final class Html {
     output = Core.f_let(
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
-        Core.Type_string sindent = Html.f_string_from_indent(indent);
+        Core.Type_string sindent = Html.f_string_from_indent(
+          indent
+        );
         Core.Type_string charset = meta.charset();
         Core.Type_string name = meta.name();
         Core.Type_string content = meta.content();
@@ -10970,10 +11048,18 @@ public final class Html {
             Core.t_thenelselist,
             Core.f_then(
               Core.t_boolean_from_func.vx_fn_new(() -> {
-                return Core.f_ne(Core.vx_new_string(""), charset);
+                Core.Type_any output_2 = Core.f_ne(
+                  Core.vx_new_string(""),
+                  charset
+                );
+                return output_2;
               }),
               Core.t_any_from_func.vx_fn_new(() -> {
-                return Html.f_string_from_propname_val(Core.vx_new_string("charset"), charset);
+                Core.Type_any output_3 = Html.f_string_from_propname_val(
+                  Core.vx_new_string("charset"),
+                  charset
+                );
+                return output_3;
               })
             )
           )
@@ -10984,10 +11070,18 @@ public final class Html {
             Core.t_thenelselist,
             Core.f_then(
               Core.t_boolean_from_func.vx_fn_new(() -> {
-                return Core.f_ne(Core.vx_new_string(""), name);
+                Core.Type_any output_4 = Core.f_ne(
+                  Core.vx_new_string(""),
+                  name
+                );
+                return output_4;
               }),
               Core.t_any_from_func.vx_fn_new(() -> {
-                return Html.f_string_from_propname_val(Core.vx_new_string("name"), name);
+                Core.Type_any output_5 = Html.f_string_from_propname_val(
+                  Core.vx_new_string("name"),
+                  name
+                );
+                return output_5;
               })
             )
           )
@@ -10998,10 +11092,18 @@ public final class Html {
             Core.t_thenelselist,
             Core.f_then(
               Core.t_boolean_from_func.vx_fn_new(() -> {
-                return Core.f_ne(Core.vx_new_string(""), content);
+                Core.Type_any output_6 = Core.f_ne(
+                  Core.vx_new_string(""),
+                  content
+                );
+                return output_6;
               }),
               Core.t_any_from_func.vx_fn_new(() -> {
-                return Html.f_string_from_propname_val(Core.vx_new_string("content"), content);
+                Core.Type_any output_7 = Html.f_string_from_propname_val(
+                  Core.vx_new_string("content"),
+                  content
+                );
+                return output_7;
               })
             )
           )
@@ -11092,6 +11194,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_any node = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
@@ -11102,7 +11205,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_node_indent(final Core.Type_any node, final Core.Type_int indent) {
-      return Html.f_string_from_node_indent(node, indent);
+      Core.Type_string output = Html.f_string_from_node_indent(node, indent);
+      return output;
     }
 
   }
@@ -11114,169 +11218,243 @@ public final class Html {
     Core.Type_string output = Core.e_string;
     output = Core.f_switch(
       Core.t_string,
-      Core.f_type_from_any(node),
+      Core.f_type_from_any(
+        node
+      ),
       Core.vx_new(
         Core.t_thenelselist,
         Core.f_case_1(
           Html.t_body,
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Html.f_string_from_body_indent(
-              Core.f_any_from_any(Html.t_body, node),
+            Core.Type_any output_1 = Html.f_string_from_body_indent(
+              Core.f_any_from_any(
+                Html.t_body,
+                node
+              ),
               indent
             );
+            return output_1;
           })
         ),
         Core.f_case_1(
           Html.t_details,
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Html.f_string_from_details_indent(
-              Core.f_any_from_any(Html.t_details, node),
+            Core.Type_any output_2 = Html.f_string_from_details_indent(
+              Core.f_any_from_any(
+                Html.t_details,
+                node
+              ),
               indent
             );
+            return output_2;
           })
         ),
         Core.f_case_1(
           Html.t_div,
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Html.f_string_from_div_indent(
-              Core.f_any_from_any(Html.t_div, node),
+            Core.Type_any output_3 = Html.f_string_from_div_indent(
+              Core.f_any_from_any(
+                Html.t_div,
+                node
+              ),
               indent
             );
+            return output_3;
           })
         ),
         Core.f_case_1(
           Html.t_h1,
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Html.f_string_from_h1_indent(
-              Core.f_any_from_any(Html.t_h1, node),
+            Core.Type_any output_4 = Html.f_string_from_h1_indent(
+              Core.f_any_from_any(
+                Html.t_h1,
+                node
+              ),
               indent
             );
+            return output_4;
           })
         ),
         Core.f_case_1(
           Html.t_h2,
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Html.f_string_from_h2_indent(
-              Core.f_any_from_any(Html.t_h2, node),
+            Core.Type_any output_5 = Html.f_string_from_h2_indent(
+              Core.f_any_from_any(
+                Html.t_h2,
+                node
+              ),
               indent
             );
+            return output_5;
           })
         ),
         Core.f_case_1(
           Html.t_h3,
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Html.f_string_from_h3_indent(
-              Core.f_any_from_any(Html.t_h3, node),
+            Core.Type_any output_6 = Html.f_string_from_h3_indent(
+              Core.f_any_from_any(
+                Html.t_h3,
+                node
+              ),
               indent
             );
+            return output_6;
           })
         ),
         Core.f_case_1(
           Html.t_head,
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Html.f_string_from_head_indent(
-              Core.f_any_from_any(Html.t_head, node),
+            Core.Type_any output_7 = Html.f_string_from_head_indent(
+              Core.f_any_from_any(
+                Html.t_head,
+                node
+              ),
               indent
             );
+            return output_7;
           })
         ),
         Core.f_case_1(
           Html.t_footer,
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Html.f_string_from_footer_indent(
-              Core.f_any_from_any(Html.t_footer, node),
+            Core.Type_any output_8 = Html.f_string_from_footer_indent(
+              Core.f_any_from_any(
+                Html.t_footer,
+                node
+              ),
               indent
             );
+            return output_8;
           })
         ),
         Core.f_case_1(
           Html.t_img,
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Html.f_string_from_img_indent(
-              Core.f_any_from_any(Html.t_img, node),
+            Core.Type_any output_9 = Html.f_string_from_img_indent(
+              Core.f_any_from_any(
+                Html.t_img,
+                node
+              ),
               indent
             );
+            return output_9;
           })
         ),
         Core.f_case_1(
           Html.t_meta,
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Html.f_string_from_meta_indent(
-              Core.f_any_from_any(Html.t_meta, node),
+            Core.Type_any output_10 = Html.f_string_from_meta_indent(
+              Core.f_any_from_any(
+                Html.t_meta,
+                node
+              ),
               indent
             );
+            return output_10;
           })
         ),
         Core.f_case_1(
           Html.t_p,
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Html.f_string_from_p_indent(
-              Core.f_any_from_any(Html.t_p, node),
+            Core.Type_any output_11 = Html.f_string_from_p_indent(
+              Core.f_any_from_any(
+                Html.t_p,
+                node
+              ),
               indent
             );
+            return output_11;
           })
         ),
         Core.f_case_1(
           Html.t_stylesheet,
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Html.f_string_from_stylesheet_indent(
-              Core.f_any_from_any(Html.t_stylesheet, node),
+            Core.Type_any output_12 = Html.f_string_from_stylesheet_indent(
+              Core.f_any_from_any(
+                Html.t_stylesheet,
+                node
+              ),
               indent
             );
+            return output_12;
           })
         ),
         Core.f_case_1(
           Html.t_table,
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Html.f_string_from_table_indent(
-              Core.f_any_from_any(Html.t_table, node),
+            Core.Type_any output_13 = Html.f_string_from_table_indent(
+              Core.f_any_from_any(
+                Html.t_table,
+                node
+              ),
               indent
             );
+            return output_13;
           })
         ),
         Core.f_case_1(
           Html.t_title,
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Html.f_string_from_title_indent(
-              Core.f_any_from_any(Html.t_title, node),
+            Core.Type_any output_14 = Html.f_string_from_title_indent(
+              Core.f_any_from_any(
+                Html.t_title,
+                node
+              ),
               indent
             );
+            return output_14;
           })
         ),
         Core.f_case_1(
           Html.t_tbody,
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Html.f_string_from_tbody_indent(
-              Core.f_any_from_any(Html.t_tbody, node),
+            Core.Type_any output_15 = Html.f_string_from_tbody_indent(
+              Core.f_any_from_any(
+                Html.t_tbody,
+                node
+              ),
               indent
             );
+            return output_15;
           })
         ),
         Core.f_case_1(
           Html.t_thead,
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Html.f_string_from_thead_indent(
-              Core.f_any_from_any(Html.t_thead, node),
+            Core.Type_any output_16 = Html.f_string_from_thead_indent(
+              Core.f_any_from_any(
+                Html.t_thead,
+                node
+              ),
               indent
             );
+            return output_16;
           })
         ),
         Core.f_case_1(
           Html.t_td,
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Html.f_string_from_td_indent(
-              Core.f_any_from_any(Html.t_td, node),
+            Core.Type_any output_17 = Html.f_string_from_td_indent(
+              Core.f_any_from_any(
+                Html.t_td,
+                node
+              ),
               indent
             );
+            return output_17;
           })
         ),
         Core.f_case_1(
           Html.t_tr,
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Html.f_string_from_tr_indent(
-              Core.f_any_from_any(Html.t_tr, node),
+            Core.Type_any output_18 = Html.f_string_from_tr_indent(
+              Core.f_any_from_any(
+                Html.t_tr,
+                node
+              ),
               indent
             );
+            return output_18;
           })
         )
       )
@@ -11352,6 +11530,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_list nodelist = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
@@ -11362,7 +11541,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_nodelist_indent(final Core.Type_list nodelist, final Core.Type_int indent) {
-      return Html.f_string_from_nodelist_indent(nodelist, indent);
+      Core.Type_string output = Html.f_string_from_nodelist_indent(nodelist, indent);
+      return output;
     }
 
   }
@@ -11380,13 +11560,18 @@ public final class Html {
           nodelist,
           Core.t_any_from_any.vx_fn_new((node_any) -> {
             Html.Type_node node = Core.f_any_from_any(Html.t_node, node_any);
-            Core.Type_any output_1 = 
-                Html.f_string_from_node_indent(node, indent);
-            return output_1;
+            Core.Type_any output_2 = Html.f_string_from_node_indent(
+              node,
+              indent
+            );
+            return output_2;
           })
         );
-        Core.Type_any output_2 = Type.f_string_from_stringlist_join(textlist, Core.vx_new_string(""));
-        return output_2;
+        Core.Type_any output_1 = Type.f_string_from_stringlist_join(
+          textlist,
+          Core.vx_new_string("")
+        );
+        return output_1;
       })
     );
     return output;
@@ -11462,6 +11647,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_list nodes = Core.f_any_from_any(Core.t_list, arglist.vx_any(Core.vx_new_int(0)));
@@ -11474,7 +11660,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_nodelist_tag_prop_indent(final Core.Type_list nodes, final Core.Type_string tag, final Core.Type_string prop, final Core.Type_int indent) {
-      return Html.f_string_from_nodelist_tag_prop_indent(nodes, tag, prop, indent);
+      Core.Type_string output = Html.f_string_from_nodelist_tag_prop_indent(nodes, tag, prop, indent);
+      return output;
     }
 
   }
@@ -11489,32 +11676,45 @@ public final class Html {
       Core.t_any_from_func.vx_fn_new(() -> {
         Core.Type_string text = Html.f_string_from_nodelist_indent(
           nodes,
-          Core.f_plus1(indent)
+          Core.f_plus1(
+            indent
+          )
         );
-        Core.Type_string sindent = Html.f_string_from_indent(indent);
+        Core.Type_string sindent = Html.f_string_from_indent(
+          indent
+        );
         Core.Type_string eindent = Core.f_if_2(
           Core.t_string,
           Core.vx_new(
             Core.t_thenelselist,
             Core.f_then(
               Core.t_boolean_from_func.vx_fn_new(() -> {
-                return Core.f_is_empty(text);
+                Core.Type_any output_2 = Core.f_is_empty(
+                  text
+                );
+                return output_2;
               }),
               Core.t_any_from_func.vx_fn_new(() -> {
-                return Core.vx_new_string("");
+                Core.Type_any output_3 = Core.vx_new_string("");
+                return output_3;
               })
             ),
             Core.f_then(
               Core.t_boolean_from_func.vx_fn_new(() -> {
-                return Core.f_is_empty(sindent);
+                Core.Type_any output_4 = Core.f_is_empty(
+                  sindent
+                );
+                return output_4;
               }),
               Core.t_any_from_func.vx_fn_new(() -> {
-                return Core.c_newline;
+                Core.Type_any output_5 = Core.c_newline;
+                return output_5;
               })
             ),
             Core.f_else(
               Core.t_any_from_func.vx_fn_new(() -> {
-                return sindent;
+                Core.Type_any output_6 = sindent;
+                return output_6;
               })
             )
           )
@@ -11609,6 +11809,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_p p = Core.f_any_from_any(Html.t_p, arglist.vx_any(Core.vx_new_int(0)));
@@ -11619,7 +11820,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_p_indent(final Html.Type_p p, final Core.Type_int indent) {
-      return Html.f_string_from_p_indent(p, indent);
+      Core.Type_string output = Html.f_string_from_p_indent(p, indent);
+      return output;
     }
 
   }
@@ -11632,7 +11834,9 @@ public final class Html {
     output = Core.f_let(
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
-        Core.Type_string sindent = Html.f_string_from_indent(indent);
+        Core.Type_string sindent = Html.f_string_from_indent(
+          indent
+        );
         Core.Type_string text = Html.f_htmlstring_from_string(
           p.text()
         );
@@ -11735,6 +11939,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_string key = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
@@ -11745,7 +11950,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_propname_val(final Core.Type_string key, final Core.Type_string val) {
-      return Html.f_string_from_propname_val(key, val);
+      Core.Type_string output = Html.f_string_from_propname_val(key, val);
+      return output;
     }
 
   }
@@ -11757,7 +11963,9 @@ public final class Html {
     Core.Type_string output = Core.e_string;
     output = Core.f_if(
       Core.t_string,
-      Core.f_notempty(val),
+      Core.f_notempty(
+        val
+      ),
       Core.f_new(
         Core.t_string,
         Core.vx_new(
@@ -11855,6 +12063,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_style style = Core.f_any_from_any(Html.t_style, arglist.vx_any(Core.vx_new_int(0)));
@@ -11864,7 +12073,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_propstyle(final Html.Type_style style) {
-      return Html.f_string_from_propstyle(style);
+      Core.Type_string output = Html.f_string_from_propstyle(style);
+      return output;
     }
 
   }
@@ -11880,10 +12090,13 @@ public final class Html {
         Core.t_thenelselist,
         Core.f_then(
           Core.t_boolean_from_func.vx_fn_new(() -> {
-            return Core.f_notempty_1(style);
+            Core.Type_any output_1 = Core.f_notempty_1(
+              style
+            );
+            return output_1;
           }),
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Core.f_new(
+            Core.Type_any output_2 = Core.f_new(
               Core.t_string,
               Core.vx_new(
                 Core.t_anylist,
@@ -11896,6 +12109,7 @@ public final class Html {
                 Core.c_quote
               )
             );
+            return output_2;
           })
         )
       )
@@ -11971,6 +12185,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_style style = Core.f_any_from_any(Html.t_style, arglist.vx_any(Core.vx_new_int(0)));
@@ -11981,7 +12196,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_propstyle_stylelist(final Html.Type_style style, final Html.Type_stylelist stylelist) {
-      return Html.f_string_from_propstyle_stylelist(style, stylelist);
+      Core.Type_string output = Html.f_string_from_propstyle_stylelist(style, stylelist);
+      return output;
     }
 
   }
@@ -11997,18 +12213,30 @@ public final class Html {
         Core.t_thenelselist,
         Core.f_then(
           Core.t_boolean_from_func.vx_fn_new(() -> {
-            return Core.f_notempty_1(style);
+            Core.Type_any output_1 = Core.f_notempty_1(
+              style
+            );
+            return output_1;
           }),
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Html.f_string_from_propstyle(style);
+            Core.Type_any output_2 = Html.f_string_from_propstyle(
+              style
+            );
+            return output_2;
           })
         ),
         Core.f_then(
           Core.t_boolean_from_func.vx_fn_new(() -> {
-            return Core.f_notempty_1(stylelist);
+            Core.Type_any output_3 = Core.f_notempty_1(
+              stylelist
+            );
+            return output_3;
           }),
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Html.f_string_from_propstylelist(stylelist);
+            Core.Type_any output_4 = Html.f_string_from_propstylelist(
+              stylelist
+            );
+            return output_4;
           })
         )
       )
@@ -12097,6 +12325,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_stylelist stylelist = Core.f_any_from_any(Html.t_stylelist, arglist.vx_any(Core.vx_new_int(0)));
@@ -12106,7 +12335,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_propstylelist(final Html.Type_stylelist stylelist) {
-      return Html.f_string_from_propstylelist(stylelist);
+      Core.Type_string output = Html.f_string_from_propstylelist(stylelist);
+      return output;
     }
 
   }
@@ -12122,16 +12352,24 @@ public final class Html {
         Core.t_thenelselist,
         Core.f_then(
           Core.t_boolean_from_func.vx_fn_new(() -> {
-            return Core.f_notempty_1(stylelist);
+            Core.Type_any output_1 = Core.f_notempty_1(
+              stylelist
+            );
+            return output_1;
           }),
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Core.f_let(
+            Core.Type_any output_2 = Core.f_let(
               Core.t_string,
               Core.t_any_from_func.vx_fn_new(() -> {
-                Core.Type_string joined = Html.f_string_from_stylelist(stylelist);
-                Core.Type_any output_1 = Core.f_if(
+                Core.Type_string joined = Html.f_string_from_stylelist(
+                  stylelist
+                );
+                Core.Type_any output_3 = Core.f_if(
                   Core.t_string,
-                  Core.f_ne(Core.vx_new_string(""), joined),
+                  Core.f_ne(
+                    Core.vx_new_string(""),
+                    joined
+                  ),
                   Core.f_new(
                     Core.t_string,
                     Core.vx_new(
@@ -12143,9 +12381,10 @@ public final class Html {
                     )
                   )
                 );
-                return output_1;
+                return output_3;
               })
             );
+            return output_2;
           })
         )
       )
@@ -12234,6 +12473,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_style style = Core.f_any_from_any(Html.t_style, arglist.vx_any(Core.vx_new_int(0)));
@@ -12243,7 +12483,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_propstyleunique(final Html.Type_style style) {
-      return Html.f_string_from_propstyleunique(style);
+      Core.Type_string output = Html.f_string_from_propstyleunique(style);
+      return output;
     }
 
   }
@@ -12259,24 +12500,33 @@ public final class Html {
         Core.t_thenelselist,
         Core.f_then(
           Core.t_boolean_from_func.vx_fn_new(() -> {
-            return Core.f_notempty_1(style);
+            Core.Type_any output_1 = Core.f_notempty_1(
+              style
+            );
+            return output_1;
           }),
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Core.f_let(
+            Core.Type_any output_2 = Core.f_let(
               Core.t_string,
               Core.t_any_from_func.vx_fn_new(() -> {
                 Html.Type_propmap props = style.props();
-                Core.Type_string text = Html.f_string_from_stylepropmap_indent(props, Core.vx_new_int(0));
-                Core.Type_any output_1 = Core.f_if_2(
+                Core.Type_string text = Html.f_string_from_stylepropmap_indent(
+                  props,
+                  Core.vx_new_int(0)
+                );
+                Core.Type_any output_3 = Core.f_if_2(
                   Core.t_string,
                   Core.vx_new(
                     Core.t_thenelselist,
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_notempty(text);
+                        Core.Type_any output_4 = Core.f_notempty(
+                          text
+                        );
+                        return output_4;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.f_new(
+                        Core.Type_any output_5 = Core.f_new(
                           Core.t_string,
                           Core.vx_new(
                             Core.t_anylist,
@@ -12286,13 +12536,15 @@ public final class Html {
                             Core.c_quote
                           )
                         );
+                        return output_5;
                       })
                     )
                   )
                 );
-                return output_1;
+                return output_3;
               })
             );
+            return output_2;
           })
         )
       )
@@ -12368,6 +12620,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_style style = Core.f_any_from_any(Html.t_style, arglist.vx_any(Core.vx_new_int(0)));
@@ -12378,7 +12631,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_style_indent(final Html.Type_style style, final Core.Type_int indent) {
-      return Html.f_string_from_style_indent(style, indent);
+      Core.Type_string output = Html.f_string_from_style_indent(style, indent);
+      return output;
     }
 
   }
@@ -12391,17 +12645,23 @@ public final class Html {
     output = Core.f_let(
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
-        Core.Type_string sindent = Html.f_string_from_indent(indent);
+        Core.Type_string sindent = Html.f_string_from_indent(
+          indent
+        );
         Core.Type_string name = style.name();
         Html.Type_propmap propmap = style.props();
         Html.Type_stylelist sublist = style.stylelist();
         Core.Type_string stext = Html.f_string_from_stylepropmap_indent(
           propmap,
-          Core.f_plus1(indent)
+          Core.f_plus1(
+            indent
+          )
         );
         Core.Type_string subtext = Html.f_string_from_stylelist_indent(
           sublist,
-          Core.f_plus1(indent)
+          Core.f_plus1(
+            indent
+          )
         );
         Core.Type_any output_1 = Core.f_new(
           Core.t_string,
@@ -12503,6 +12763,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_stylelist stylelist = Core.f_any_from_any(Html.t_stylelist, arglist.vx_any(Core.vx_new_int(0)));
@@ -12512,7 +12773,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_stylelist(final Html.Type_stylelist stylelist) {
-      return Html.f_string_from_stylelist(stylelist);
+      Core.Type_string output = Html.f_string_from_stylelist(stylelist);
+      return output;
     }
 
   }
@@ -12530,16 +12792,18 @@ public final class Html {
           stylelist,
           Core.t_any_from_any.vx_fn_new((item_any) -> {
             Html.Type_style item = Core.f_any_from_any(Html.t_style, item_any);
-            Core.Type_any output_1 = 
-                Type.f_string_from_string_start(
-                  item.name(),
-                  Core.vx_new_int(2)
-                );
-            return output_1;
+            Core.Type_any output_2 = Type.f_string_from_string_start(
+              item.name(),
+              Core.vx_new_int(2)
+            );
+            return output_2;
           })
         );
-        Core.Type_any output_2 = Type.f_string_from_stringlist_join(namelist, Core.vx_new_string(" "));
-        return output_2;
+        Core.Type_any output_1 = Type.f_string_from_stringlist_join(
+          namelist,
+          Core.vx_new_string(" ")
+        );
+        return output_1;
       })
     );
     return output;
@@ -12613,6 +12877,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_stylelist stylelist = Core.f_any_from_any(Html.t_stylelist, arglist.vx_any(Core.vx_new_int(0)));
@@ -12623,7 +12888,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_stylelist_indent(final Html.Type_stylelist stylelist, final Core.Type_int indent) {
-      return Html.f_string_from_stylelist_indent(stylelist, indent);
+      Core.Type_string output = Html.f_string_from_stylelist_indent(stylelist, indent);
+      return output;
     }
 
   }
@@ -12641,16 +12907,18 @@ public final class Html {
           stylelist,
           Core.t_any_from_any.vx_fn_new((substyle_any) -> {
             Html.Type_style substyle = Core.f_any_from_any(Html.t_style, substyle_any);
-            Core.Type_any output_1 = 
-                Html.f_string_from_style_indent(substyle, indent);
-            return output_1;
+            Core.Type_any output_2 = Html.f_string_from_style_indent(
+              substyle,
+              indent
+            );
+            return output_2;
           })
         );
-        Core.Type_any output_2 = Type.f_string_from_stringlist_join(
+        Core.Type_any output_1 = Type.f_string_from_stringlist_join(
           sstyles,
           Core.c_newline
         );
-        return output_2;
+        return output_1;
       })
     );
     return output;
@@ -12724,6 +12992,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_propmap propmap = Core.f_any_from_any(Html.t_propmap, arglist.vx_any(Core.vx_new_int(0)));
@@ -12734,7 +13003,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_stylepropmap_indent(final Html.Type_propmap propmap, final Core.Type_int indent) {
-      return Html.f_string_from_stylepropmap_indent(propmap, indent);
+      Core.Type_string output = Html.f_string_from_stylepropmap_indent(propmap, indent);
+      return output;
     }
 
   }
@@ -12747,30 +13017,34 @@ public final class Html {
     output = Core.f_let(
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
-        Core.Type_string sindent = Html.f_string_from_indent(indent);
+        Core.Type_string sindent = Html.f_string_from_indent(
+          indent
+        );
         Core.Type_stringlist sprops = Core.f_list_from_map_1(
           Core.t_stringlist,
           propmap,
           Core.t_any_from_key_value.vx_fn_new((key_any, val_any) -> {
             Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
             Core.Type_string val = Core.f_any_from_any(Core.t_string, val_any);
-            Core.Type_any output_1 = 
-                Core.f_new(
-                  Core.t_string,
-                  Core.vx_new(
-                    Core.t_anylist,
-                    sindent,
-                    key,
-                    Core.vx_new_string(": "),
-                    val,
-                    Core.vx_new_string(";")
-                  )
-                );
-            return output_1;
+            Core.Type_any output_2 = Core.f_new(
+              Core.t_string,
+              Core.vx_new(
+                Core.t_anylist,
+                sindent,
+                key,
+                Core.vx_new_string(": "),
+                val,
+                Core.vx_new_string(";")
+              )
+            );
+            return output_2;
           })
         );
-        Core.Type_any output_2 = Type.f_string_from_stringlist_join(sprops, Core.vx_new_string(""));
-        return output_2;
+        Core.Type_any output_1 = Type.f_string_from_stringlist_join(
+          sprops,
+          Core.vx_new_string("")
+        );
+        return output_1;
       })
     );
     return output;
@@ -12844,6 +13118,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_stylesheet stylesheet = Core.f_any_from_any(Html.t_stylesheet, arglist.vx_any(Core.vx_new_int(0)));
@@ -12854,7 +13129,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_stylesheet_indent(final Html.Type_stylesheet stylesheet, final Core.Type_int indent) {
-      return Html.f_string_from_stylesheet_indent(stylesheet, indent);
+      Core.Type_string output = Html.f_string_from_stylesheet_indent(stylesheet, indent);
+      return output;
     }
 
   }
@@ -12870,12 +13146,18 @@ public final class Html {
         Html.Type_stylelist styles = stylesheet.styles();
         Core.Type_string sstyles = Html.f_string_from_stylelist_indent(
           styles,
-          Core.f_plus1(indent)
+          Core.f_plus1(
+            indent
+          )
         );
-        Core.Type_string sindent = Html.f_string_from_indent(indent);
+        Core.Type_string sindent = Html.f_string_from_indent(
+          indent
+        );
         Core.Type_string eindent = Core.f_if(
           Core.t_string,
-          Core.f_notempty(sstyles),
+          Core.f_notempty(
+            sstyles
+          ),
           sindent
         );
         Core.Type_any output_1 = Core.f_new(
@@ -12963,6 +13245,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_table table = Core.f_any_from_any(Html.t_table, arglist.vx_any(Core.vx_new_int(0)));
@@ -12973,7 +13256,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_table_indent(final Html.Type_table table, final Core.Type_int indent) {
-      return Html.f_string_from_table_indent(table, indent);
+      Core.Type_string output = Html.f_string_from_table_indent(table, indent);
+      return output;
     }
 
   }
@@ -12986,7 +13270,9 @@ public final class Html {
     output = Core.f_let(
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
-        Core.Type_string sindent = Html.f_string_from_indent(indent);
+        Core.Type_string sindent = Html.f_string_from_indent(
+          indent
+        );
         Core.Type_string sid = Html.f_string_from_propname_val(
           Core.vx_new_string("id"),
           table.id()
@@ -12995,11 +13281,15 @@ public final class Html {
         Html.Type_tbody tbody = table.tbody();
         Core.Type_string shead = Html.f_string_from_thead_indent(
           thead,
-          Core.f_plus1(indent)
+          Core.f_plus1(
+            indent
+          )
         );
         Core.Type_string sbody = Html.f_string_from_tbody_indent(
           tbody,
-          Core.f_plus1(indent)
+          Core.f_plus1(
+            indent
+          )
         );
         Core.Type_any output_1 = Core.f_new(
           Core.t_string,
@@ -13089,6 +13379,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_tbody tbody = Core.f_any_from_any(Html.t_tbody, arglist.vx_any(Core.vx_new_int(0)));
@@ -13099,7 +13390,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_tbody_indent(final Html.Type_tbody tbody, final Core.Type_int indent) {
-      return Html.f_string_from_tbody_indent(tbody, indent);
+      Core.Type_string output = Html.f_string_from_tbody_indent(tbody, indent);
+      return output;
     }
 
   }
@@ -13113,7 +13405,12 @@ public final class Html {
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
         Html.Type_trlist nodes = tbody.nodes();
-        Core.Type_any output_1 = Html.f_string_from_nodelist_tag_prop_indent(nodes, Core.vx_new_string("tbody"), Core.vx_new_string(""), indent);
+        Core.Type_any output_1 = Html.f_string_from_nodelist_tag_prop_indent(
+          nodes,
+          Core.vx_new_string("tbody"),
+          Core.vx_new_string(""),
+          indent
+        );
         return output_1;
       })
     );
@@ -13188,6 +13485,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_td td = Core.f_any_from_any(Html.t_td, arglist.vx_any(Core.vx_new_int(0)));
@@ -13198,7 +13496,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_td_indent(final Html.Type_td td, final Core.Type_int indent) {
-      return Html.f_string_from_td_indent(td, indent);
+      Core.Type_string output = Html.f_string_from_td_indent(td, indent);
+      return output;
     }
 
   }
@@ -13212,7 +13511,12 @@ public final class Html {
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
         Html.Type_divchildlist nodes = td.nodes();
-        Core.Type_any output_1 = Html.f_string_from_nodelist_tag_prop_indent(nodes, Core.vx_new_string("td"), Core.vx_new_string(""), indent);
+        Core.Type_any output_1 = Html.f_string_from_nodelist_tag_prop_indent(
+          nodes,
+          Core.vx_new_string("td"),
+          Core.vx_new_string(""),
+          indent
+        );
         return output_1;
       })
     );
@@ -13287,6 +13591,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_thead thead = Core.f_any_from_any(Html.t_thead, arglist.vx_any(Core.vx_new_int(0)));
@@ -13297,7 +13602,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_thead_indent(final Html.Type_thead thead, final Core.Type_int indent) {
-      return Html.f_string_from_thead_indent(thead, indent);
+      Core.Type_string output = Html.f_string_from_thead_indent(thead, indent);
+      return output;
     }
 
   }
@@ -13311,7 +13617,12 @@ public final class Html {
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
         Html.Type_trlist nodes = thead.nodes();
-        Core.Type_any output_1 = Html.f_string_from_nodelist_tag_prop_indent(nodes, Core.vx_new_string("thead"), Core.vx_new_string(""), indent);
+        Core.Type_any output_1 = Html.f_string_from_nodelist_tag_prop_indent(
+          nodes,
+          Core.vx_new_string("thead"),
+          Core.vx_new_string(""),
+          indent
+        );
         return output_1;
       })
     );
@@ -13386,6 +13697,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_title title = Core.f_any_from_any(Html.t_title, arglist.vx_any(Core.vx_new_int(0)));
@@ -13396,7 +13708,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_title_indent(final Html.Type_title title, final Core.Type_int indent) {
-      return Html.f_string_from_title_indent(title, indent);
+      Core.Type_string output = Html.f_string_from_title_indent(title, indent);
+      return output;
     }
 
   }
@@ -13409,7 +13722,9 @@ public final class Html {
     output = Core.f_let(
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
-        Core.Type_string sindent = Html.f_string_from_indent(indent);
+        Core.Type_string sindent = Html.f_string_from_indent(
+          indent
+        );
         Core.Type_string text = title.text();
         Core.Type_any output_1 = Core.f_new(
           Core.t_string,
@@ -13495,6 +13810,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_tr tr = Core.f_any_from_any(Html.t_tr, arglist.vx_any(Core.vx_new_int(0)));
@@ -13505,7 +13821,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_tr_indent(final Html.Type_tr tr, final Core.Type_int indent) {
-      return Html.f_string_from_tr_indent(tr, indent);
+      Core.Type_string output = Html.f_string_from_tr_indent(tr, indent);
+      return output;
     }
 
   }
@@ -13519,7 +13836,12 @@ public final class Html {
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
         Html.Type_tdlist nodes = tr.nodes();
-        Core.Type_any output_1 = Html.f_string_from_nodelist_tag_prop_indent(nodes, Core.vx_new_string("tr"), Core.vx_new_string(""), indent);
+        Core.Type_any output_1 = Html.f_string_from_nodelist_tag_prop_indent(
+          nodes,
+          Core.vx_new_string("tr"),
+          Core.vx_new_string(""),
+          indent
+        );
         return output_1;
       })
     );
@@ -13607,6 +13929,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_string uri = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
@@ -13616,7 +13939,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_string_from_uri(final Core.Type_string uri) {
-      return Html.f_string_from_uri(uri);
+      Core.Type_string output = Html.f_string_from_uri(uri);
+      return output;
     }
 
   }
@@ -13697,6 +14021,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_stylesheet stylesheet = Core.f_any_from_any(Html.t_stylesheet, arglist.vx_any(Core.vx_new_int(0)));
@@ -13707,7 +14032,8 @@ public final class Html {
 
     @Override
     public Html.Type_style vx_style_from_stylesheet_name(final Html.Type_stylesheet stylesheet, final Core.Type_string name) {
-      return Html.f_style_from_stylesheet_name(stylesheet, name);
+      Html.Type_style output = Html.f_style_from_stylesheet_name(stylesheet, name);
+      return output;
     }
 
   }
@@ -13719,7 +14045,9 @@ public final class Html {
     Html.Type_style output = Html.e_style;
     output = Core.f_any_from_map(
       Html.t_style,
-      Html.f_stylemap_from_stylesheet(stylesheet),
+      Html.f_stylemap_from_stylesheet(
+        stylesheet
+      ),
       name
     );
     return output;
@@ -13806,6 +14134,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_stylelist stylelist = Core.f_any_from_any(Html.t_stylelist, arglist.vx_any(Core.vx_new_int(0)));
@@ -13815,7 +14144,8 @@ public final class Html {
 
     @Override
     public Html.Type_stylemap vx_stylemap_from_stylelist(final Html.Type_stylelist stylelist) {
-      return Html.f_stylemap_from_stylelist(stylelist);
+      Html.Type_stylemap output = Html.f_stylemap_from_stylelist(stylelist);
+      return output;
     }
 
   }
@@ -13830,8 +14160,7 @@ public final class Html {
       stylelist,
       Core.t_any_from_any.vx_fn_new((style_any) -> {
         Html.Type_style style = Core.f_any_from_any(Html.t_style, style_any);
-        Core.Type_any output_1 = 
-          style.name();
+        Core.Type_any output_1 = style.name();
         return output_1;
       })
     );
@@ -13919,6 +14248,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_stylesheet stylesheet = Core.f_any_from_any(Html.t_stylesheet, arglist.vx_any(Core.vx_new_int(0)));
@@ -13928,7 +14258,8 @@ public final class Html {
 
     @Override
     public Html.Type_stylemap vx_stylemap_from_stylesheet(final Html.Type_stylesheet stylesheet) {
-      return Html.f_stylemap_from_stylesheet(stylesheet);
+      Html.Type_stylemap output = Html.f_stylemap_from_stylesheet(stylesheet);
+      return output;
     }
 
   }
@@ -14023,6 +14354,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_stylesheet stylesheet = Core.f_any_from_any(Html.t_stylesheet, arglist.vx_any(Core.vx_new_int(0)));
@@ -14032,7 +14364,8 @@ public final class Html {
 
     @Override
     public Html.Type_stylelist vx_styles_from_stylesheet(final Html.Type_stylesheet stylesheet) {
-      return Html.f_styles_from_stylesheet(stylesheet);
+      Html.Type_stylelist output = Html.f_styles_from_stylesheet(stylesheet);
+      return output;
     }
 
   }
@@ -14127,6 +14460,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_stylesheet stylesheet = Core.f_any_from_any(Html.t_stylesheet, arglist.vx_any(Core.vx_new_int(0)));
@@ -14136,7 +14470,8 @@ public final class Html {
 
     @Override
     public Html.Type_stylesheet vx_stylesheet_loadmap(final Html.Type_stylesheet stylesheet) {
-      return Html.f_stylesheet_loadmap(stylesheet);
+      Html.Type_stylesheet output = Html.f_stylesheet_loadmap(stylesheet);
+      return output;
     }
 
   }
@@ -14240,6 +14575,7 @@ public final class Html {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
@@ -14249,7 +14585,8 @@ public final class Html {
 
     @Override
     public Core.Type_string vx_uri_from_string(final Core.Type_string text) {
-      return Html.f_uri_from_string(text);
+      Core.Type_string output = Html.f_uri_from_string(text);
+      return output;
     }
 
   }

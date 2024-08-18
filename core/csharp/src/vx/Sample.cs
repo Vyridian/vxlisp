@@ -319,7 +319,8 @@ public static class Sample {
     }
 
     public Vx.Core.Type_none vx_main() {
-      return Vx.Sample.f_main();
+      Vx.Core.Type_none output = Vx.Sample.f_main();
+      return output;
     }
 
   }
@@ -329,7 +330,9 @@ public static class Sample {
 
   public static Vx.Core.Type_none f_main() {
     Vx.Core.Type_none output = Vx.Core.e_none;
-    Vx.Sample.f_myfunc(Vx.Core.vx_new_int(2));
+    Vx.Sample.f_myfunc(
+      Vx.Core.vx_new_int(2)
+    );
     return output;
   }
 
@@ -414,7 +417,8 @@ public static class Sample {
     }
 
     public Vx.Core.Type_int vx_myfunc(Vx.Core.Type_int myarg) {
-      return Vx.Sample.f_myfunc(myarg);
+      Vx.Core.Type_int output = Vx.Sample.f_myfunc(myarg);
+      return output;
     }
 
   }

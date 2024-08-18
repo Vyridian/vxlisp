@@ -552,7 +552,9 @@ public class XmlTest {
                   )
                 )
               ),
-              Vx.Data.Xml.f_textblock_xml_from_string(Vx.Core.vx_new_string("<doc>\n  <tag1>\n    <tag2 prop1=\"val1\" prop2=\"val2\" />\n  </tag1>\n</doc>"))
+              Vx.Data.Xml.f_textblock_xml_from_string(
+                Vx.Core.vx_new_string("<doc>\n  <tag1>\n    <tag2 prop1=\"val1\" prop2=\"val2\" />\n  </tag1>\n</doc>")
+              )
             )
         )
       )

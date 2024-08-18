@@ -18,7 +18,10 @@ public class TypeTest {
           ":testresult",
             Vx.Test.f_test_true(
               context,
-              Vx.Type.f_boolean_from_string_ends(Vx.Core.vx_new_string("abcd"), Vx.Core.vx_new_string("cd"))
+              Vx.Type.f_boolean_from_string_ends(
+                Vx.Core.vx_new_string("abcd"),
+                Vx.Core.vx_new_string("cd")
+              )
             )
         )
       )
@@ -41,7 +44,10 @@ public class TypeTest {
           ":testresult",
             Vx.Test.f_test_true(
               context,
-              Vx.Type.f_boolean_from_string_starts(Vx.Core.vx_new_string("abcd"), Vx.Core.vx_new_string("ab"))
+              Vx.Type.f_boolean_from_string_starts(
+                Vx.Core.vx_new_string("abcd"),
+                Vx.Core.vx_new_string("ab")
+              )
             )
         )
       )
@@ -65,7 +71,10 @@ public class TypeTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_int(3),
-              Vx.Type.f_int_from_string_find(Vx.Core.vx_new_string("abcdcdg"), Vx.Core.vx_new_string("cd"))
+              Vx.Type.f_int_from_string_find(
+                Vx.Core.vx_new_string("abcdcdg"),
+                Vx.Core.vx_new_string("cd")
+              )
             )
         )
       )
@@ -89,7 +98,10 @@ public class TypeTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_int(3),
-              Vx.Type.f_int_from_string_findkeyword(Vx.Core.vx_new_string("ab\tcdefg"), Vx.Core.vx_new_string(":whitespace"))
+              Vx.Type.f_int_from_string_findkeyword(
+                Vx.Core.vx_new_string("ab\tcdefg"),
+                Vx.Core.vx_new_string(":whitespace")
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -99,7 +111,10 @@ public class TypeTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_int(5),
-              Vx.Type.f_int_from_string_findkeyword(Vx.Core.vx_new_string(" \t\n\rab"), Vx.Core.vx_new_string(":nonwhitespace"))
+              Vx.Type.f_int_from_string_findkeyword(
+                Vx.Core.vx_new_string(" \t\n\rab"),
+                Vx.Core.vx_new_string(":nonwhitespace")
+              )
             )
         )
       )
@@ -123,7 +138,10 @@ public class TypeTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_int(5),
-              Vx.Type.f_int_from_string_findlast(Vx.Core.vx_new_string("abcdcdg"), Vx.Core.vx_new_string("cd"))
+              Vx.Type.f_int_from_string_findlast(
+                Vx.Core.vx_new_string("abcdcdg"),
+                Vx.Core.vx_new_string("cd")
+              )
             )
         )
       )
@@ -146,7 +164,9 @@ public class TypeTest {
           ":testresult",
             Vx.Test.f_test_true(
               context,
-              Vx.Type.f_is_string(Vx.Core.vx_new_string(""))
+              Vx.Type.f_is_string(
+                Vx.Core.vx_new_string("")
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -155,7 +175,9 @@ public class TypeTest {
           ":testresult",
             Vx.Test.f_test_true(
               context,
-              Vx.Type.f_is_string(Vx.Core.vx_new_string("a"))
+              Vx.Type.f_is_string(
+                Vx.Core.vx_new_string("a")
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -164,7 +186,9 @@ public class TypeTest {
           ":testresult",
             Vx.Test.f_test_false(
               context,
-              Vx.Type.f_is_string(Vx.Core.vx_new_int(5))
+              Vx.Type.f_is_string(
+                Vx.Core.vx_new_int(5)
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -353,7 +377,9 @@ public class TypeTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_string("abc"),
-              Vx.Type.f_string_lowercase(Vx.Core.vx_new_string("AbC"))
+              Vx.Type.f_string_lowercase(
+                Vx.Core.vx_new_string("AbC")
+              )
             )
         )
       )
@@ -377,7 +403,9 @@ public class TypeTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_string("ab"),
-              Vx.Type.f_string_outdent(Vx.Core.vx_new_string("ab"))
+              Vx.Type.f_string_outdent(
+                Vx.Core.vx_new_string("ab")
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -387,7 +415,9 @@ public class TypeTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_string("a\nb"),
-              Vx.Type.f_string_outdent(Vx.Core.vx_new_string("\n a\n b"))
+              Vx.Type.f_string_outdent(
+                Vx.Core.vx_new_string("\n a\n b")
+              )
             )
         )
       )
@@ -411,7 +441,9 @@ public class TypeTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_string("ab"),
-              Vx.Type.f_string_trim(Vx.Core.vx_new_string(" \t\nab\n\t "))
+              Vx.Type.f_string_trim(
+                Vx.Core.vx_new_string(" \t\nab\n\t ")
+              )
             )
         )
       )
@@ -435,7 +467,9 @@ public class TypeTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_string("ABC"),
-              Vx.Type.f_string_uppercase(Vx.Core.vx_new_string("aBc"))
+              Vx.Type.f_string_uppercase(
+                Vx.Core.vx_new_string("aBc")
+              )
             )
         )
       )
@@ -459,7 +493,9 @@ public class TypeTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_string("4"),
-              Vx.Type.f_string_from_int(Vx.Core.vx_new_int(4))
+              Vx.Type.f_string_from_int(
+                Vx.Core.vx_new_int(4)
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -469,7 +505,9 @@ public class TypeTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_string("51"),
-              Vx.Type.f_string_from_int(Vx.Core.vx_new_int(51))
+              Vx.Type.f_string_from_int(
+                Vx.Core.vx_new_int(51)
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -529,7 +567,10 @@ public class TypeTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_string("abc"),
-              Vx.Type.f_string_from_string_end(Vx.Core.vx_new_string("abcd"), Vx.Core.vx_new_int(3))
+              Vx.Type.f_string_from_string_end(
+                Vx.Core.vx_new_string("abcd"),
+                Vx.Core.vx_new_int(3)
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -539,7 +580,10 @@ public class TypeTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_string("ab"),
-              Vx.Type.f_string_from_string_end(Vx.Core.vx_new_string("abcd"), Vx.Core.vx_new_int(2))
+              Vx.Type.f_string_from_string_end(
+                Vx.Core.vx_new_string("abcd"),
+                Vx.Core.vx_new_int(2)
+              )
             )
         )
       )
@@ -563,7 +607,10 @@ public class TypeTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_string("abcd"),
-              Vx.Type.f_string_from_string_start(Vx.Core.vx_new_string("abcd"), Vx.Core.vx_new_int(1))
+              Vx.Type.f_string_from_string_start(
+                Vx.Core.vx_new_string("abcd"),
+                Vx.Core.vx_new_int(1)
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -573,7 +620,10 @@ public class TypeTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_string("bcd"),
-              Vx.Type.f_string_from_string_start(Vx.Core.vx_new_string("abcd"), Vx.Core.vx_new_int(2))
+              Vx.Type.f_string_from_string_start(
+                Vx.Core.vx_new_string("abcd"),
+                Vx.Core.vx_new_int(2)
+              )
             )
         )
       )
@@ -597,7 +647,11 @@ public class TypeTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_string("abc"),
-              Vx.Type.f_string_from_string_start_end(Vx.Core.vx_new_string("abcd"), Vx.Core.vx_new_int(1), Vx.Core.vx_new_int(3))
+              Vx.Type.f_string_from_string_start_end(
+                Vx.Core.vx_new_string("abcd"),
+                Vx.Core.vx_new_int(1),
+                Vx.Core.vx_new_int(3)
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -607,7 +661,11 @@ public class TypeTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_string("bc"),
-              Vx.Type.f_string_from_string_start_end(Vx.Core.vx_new_string("abcd"), Vx.Core.vx_new_int(2), Vx.Core.vx_new_int(3))
+              Vx.Type.f_string_from_string_start_end(
+                Vx.Core.vx_new_string("abcd"),
+                Vx.Core.vx_new_int(2),
+                Vx.Core.vx_new_int(3)
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -617,7 +675,11 @@ public class TypeTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_string(""),
-              Vx.Type.f_string_from_string_start_end(Vx.Core.vx_new_string("abcd"), Vx.Core.vx_new_int(5), Vx.Core.vx_new_int(6))
+              Vx.Type.f_string_from_string_start_end(
+                Vx.Core.vx_new_string("abcd"),
+                Vx.Core.vx_new_int(5),
+                Vx.Core.vx_new_int(6)
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -627,7 +689,11 @@ public class TypeTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_string("bcd"),
-              Vx.Type.f_string_from_string_start_end(Vx.Core.vx_new_string("abcd"), Vx.Core.vx_new_int(2), Vx.Core.vx_new_int(5))
+              Vx.Type.f_string_from_string_start_end(
+                Vx.Core.vx_new_string("abcd"),
+                Vx.Core.vx_new_int(2),
+                Vx.Core.vx_new_int(5)
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -637,7 +703,11 @@ public class TypeTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_string("bc"),
-              Vx.Type.f_string_from_string_start_end(Vx.Core.vx_new_string("abcd"), Vx.Core.vx_new_int(2), Vx.Core.vx_new_int(-1))
+              Vx.Type.f_string_from_string_start_end(
+                Vx.Core.vx_new_string("abcd"),
+                Vx.Core.vx_new_int(2),
+                Vx.Core.vx_new_int(-1)
+              )
             )
         )
       )
@@ -704,7 +774,10 @@ public class TypeTest {
                   Vx.Core.vx_new_string("c")
                 )
               ),
-              Vx.Type.f_stringlist_from_string_split(Vx.Core.vx_new_string("a$b$c"), Vx.Core.vx_new_string("$"))
+              Vx.Type.f_stringlist_from_string_split(
+                Vx.Core.vx_new_string("a$b$c"),
+                Vx.Core.vx_new_string("$")
+              )
             )
         )
       )

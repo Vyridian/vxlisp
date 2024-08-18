@@ -243,9 +243,9 @@ namespace vx_repl {
     // async()
     vx_core::Type_boolean vx_p_async = NULL;
     virtual vx_core::Type_boolean async() const = 0;
-    // val()
-    vx_core::Type_any vx_p_val = NULL;
-    virtual vx_core::Type_any val() const = 0;
+    // value()
+    vx_core::Type_any vx_p_value = NULL;
+    virtual vx_core::Type_any value() const = 0;
     // doc()
     vx_core::Type_string vx_p_doc = NULL;
     virtual vx_core::Type_string doc() const = 0;
@@ -268,7 +268,7 @@ namespace vx_repl {
     virtual vx_core::Type_any type() const override;
     virtual vx_repl::Type_repllist repllist() const override;
     virtual vx_core::Type_boolean async() const override;
-    virtual vx_core::Type_any val() const override;
+    virtual vx_core::Type_any value() const override;
     virtual vx_core::Type_string doc() const override;
   };
 
@@ -896,10 +896,10 @@ namespace vx_repl {
       vx_core::t_any_from_func->vx_fn_new({context, anylist, generic_any_1}, [context, anylist, generic_any_1]() {
         vx_repl::Type_repl repl = vx_repl::f_repl_from_macro(context, anylist);
         vx_core::vx_ref_plus(repl);
-        vx_core::Type_any val = vx_repl::f_any_from_repl(context, repl);
-        vx_core::vx_ref_plus(val);
-        vx_core::Type_any output_1 = vx_core::f_any_from_any(generic_any_1, val);
-        vx_core::vx_release_one_except({repl, val}, output_1);
+        vx_core::Type_any value = vx_repl::f_any_from_repl(context, repl);
+        vx_core::vx_ref_plus(value);
+        vx_core::Type_any output_1 = vx_core::f_any_from_any(generic_any_1, value);
+        vx_core::vx_release_one_except({repl, value}, output_1);
         return output_1;
       })
     );

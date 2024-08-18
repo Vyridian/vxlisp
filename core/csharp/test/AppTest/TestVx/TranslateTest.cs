@@ -19,7 +19,10 @@ public class TranslateTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_string("!NotFound!"),
-              Vx.Translate.f_translate(context, Vx.Core.vx_new_string("!NotFound!"))
+              Vx.Translate.f_translate(
+                context,
+                Vx.Core.vx_new_string("!NotFound!")
+              )
             )
         )
       )

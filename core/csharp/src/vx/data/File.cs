@@ -691,7 +691,8 @@ public static class File {
     }
 
     public Vx.Core.Type_boolean vx_boolean_exists_from_file(Vx.Data.File.Type_file file) {
-      return Vx.Data.File.f_boolean_exists_from_file(file);
+      Vx.Core.Type_boolean output = Vx.Data.File.f_boolean_exists_from_file(file);
+      return output;
     }
 
   }
@@ -787,7 +788,8 @@ public static class File {
     }
 
     public Vx.Core.Type_boolean vx_boolean_write_from_file(Vx.Core.Type_context context, Vx.Data.File.Type_file file) {
-      return Vx.Data.File.f_boolean_write_from_file(context, file);
+      Vx.Core.Type_boolean output = Vx.Data.File.f_boolean_write_from_file(context, file);
+      return output;
     }
 
   }
@@ -877,7 +879,8 @@ public static class File {
     }
 
     public Vx.Core.Type_boolean vx_boolean_write_from_file_any(Vx.Core.Type_context context, Vx.Data.File.Type_file file, Vx.Core.Type_any val) {
-      return Vx.Data.File.f_boolean_write_from_file_any(context, file, val);
+      Vx.Core.Type_boolean output = Vx.Data.File.f_boolean_write_from_file_any(context, file, val);
+      return output;
     }
 
   }
@@ -890,7 +893,9 @@ public static class File {
     output = Vx.Data.File.f_boolean_write_from_file_string(
       context,
       file,
-      Vx.Core.f_string_from_any(val)
+      Vx.Core.f_string_from_any(
+        val
+      )
     );
     return output;
   }
@@ -967,7 +972,8 @@ public static class File {
     }
 
     public Vx.Core.Type_boolean vx_boolean_write_from_file_string(Vx.Core.Type_context context, Vx.Data.File.Type_file file, Vx.Core.Type_string text) {
-      return Vx.Data.File.f_boolean_write_from_file_string(context, file, text);
+      Vx.Core.Type_boolean output = Vx.Data.File.f_boolean_write_from_file_string(context, file, text);
+      return output;
     }
 
   }
@@ -1073,7 +1079,8 @@ public static class File {
     }
 
     public Vx.Data.File.Type_file vx_file_read_from_file(Vx.Core.Type_context context, Vx.Data.File.Type_file file) {
-      return Vx.Data.File.f_file_read_from_file(context, file);
+      Vx.Data.File.Type_file output = Vx.Data.File.f_file_read_from_file(context, file);
+      return output;
     }
 
   }
@@ -1089,7 +1096,10 @@ public static class File {
         Vx.Core.vx_new(
           Vx.Core.t_anylist,
           Vx.Core.vx_new_string(":text"),
-          Vx.Data.File.f_string_read_from_file(context, file)
+          Vx.Data.File.f_string_read_from_file(
+            context,
+            file
+          )
         )
       );
     } else {
@@ -1180,7 +1190,8 @@ public static class File {
     }
 
     public Vx.Data.File.Type_file vx_file_from_path(Vx.Core.Type_string path) {
-      return Vx.Data.File.f_file_from_path(path);
+      Vx.Data.File.Type_file output = Vx.Data.File.f_file_from_path(path);
+      return output;
     }
 
   }
@@ -1193,14 +1204,21 @@ public static class File {
     output = Vx.Core.f_let(
       Vx.Data.File.t_file,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Core.Type_int pos = Vx.Type.f_int_from_string_findlast(path, Vx.Core.vx_new_string("/"));
+        Vx.Core.Type_int pos = Vx.Type.f_int_from_string_findlast(
+          path,
+          Vx.Core.vx_new_string("/")
+        );
         Vx.Core.Type_string name = Vx.Type.f_string_from_string_start(
           path,
-          Vx.Core.f_plus1(pos)
+          Vx.Core.f_plus1(
+            pos
+          )
         );
         Vx.Core.Type_string pth = Vx.Type.f_string_from_string_end(
           path,
-          Vx.Core.f_minus1(pos)
+          Vx.Core.f_minus1(
+            pos
+          )
         );
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Data.File.t_file,
@@ -1299,7 +1317,8 @@ public static class File {
     }
 
     public Vx.Core.Type_string vx_name_from_file(Vx.Data.File.Type_file file) {
-      return Vx.Data.File.f_name_from_file(file);
+      Vx.Core.Type_string output = Vx.Data.File.f_name_from_file(file);
+      return output;
     }
 
   }
@@ -1394,7 +1413,8 @@ public static class File {
     }
 
     public Vx.Core.Type_string vx_path_from_file(Vx.Data.File.Type_file file) {
-      return Vx.Data.File.f_path_from_file(file);
+      Vx.Core.Type_string output = Vx.Data.File.f_path_from_file(file);
+      return output;
     }
 
   }
@@ -1475,7 +1495,8 @@ public static class File {
     }
 
     public Vx.Core.Type_string vx_pathcurrent_from_os() {
-      return Vx.Data.File.f_pathcurrent_from_os();
+      Vx.Core.Type_string output = Vx.Data.File.f_pathcurrent_from_os();
+      return output;
     }
 
   }
@@ -1570,7 +1591,8 @@ public static class File {
     }
 
     public Vx.Core.Type_string vx_pathfull_from_file(Vx.Data.File.Type_file file) {
-      return Vx.Data.File.f_pathfull_from_file(file);
+      Vx.Core.Type_string output = Vx.Data.File.f_pathfull_from_file(file);
+      return output;
     }
 
   }
@@ -1583,23 +1605,31 @@ public static class File {
     output = Vx.Core.f_let(
       Vx.Core.t_string,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Core.Type_string path = Vx.Data.File.f_path_from_file(file);
-        Vx.Core.Type_string name = Vx.Data.File.f_name_from_file(file);
+        Vx.Core.Type_string path = Vx.Data.File.f_path_from_file(
+          file
+        );
+        Vx.Core.Type_string name = Vx.Data.File.f_name_from_file(
+          file
+        );
         Vx.Core.Type_any output_1 = Vx.Core.f_if_2(
           Vx.Core.t_string,
           Vx.Core.vx_new(
             Vx.Core.t_thenelselist,
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_is_empty(path);
+                Vx.Core.Type_any output_2 = Vx.Core.f_is_empty(
+                  path
+                );
+                return output_2;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return name;
+                Vx.Core.Type_any output_3 = name;
+                return output_3;
               })
             ),
             Vx.Core.f_else(
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_new(
+                Vx.Core.Type_any output_4 = Vx.Core.f_new(
                   Vx.Core.t_string,
                   Vx.Core.vx_new(
                     Vx.Core.t_anylist,
@@ -1608,6 +1638,7 @@ public static class File {
                     name
                   )
                 );
+                return output_4;
               })
             )
           )
@@ -1700,7 +1731,8 @@ public static class File {
     }
 
     public Vx.Core.Type_string vx_string_read_from_file(Vx.Core.Type_context context, Vx.Data.File.Type_file file) {
-      return Vx.Data.File.f_string_read_from_file(context, file);
+      Vx.Core.Type_string output = Vx.Data.File.f_string_read_from_file(context, file);
+      return output;
     }
 
   }

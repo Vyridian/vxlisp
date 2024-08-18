@@ -508,6 +508,11 @@ func LangTestLib_test_async_from_async_fn(lang *vxlang) string {
 			"(any) -> {" +
 			"\n     	return any;" +
 			"\n    }"
+	case "kotlin":
+		slambda = "" +
+			"{any -> " +
+			"\n     	any" +
+			"\n    }"
 	}
 	sasync1 := "" +
 		LangPkgNameDot(lang, "vx/core") + "vx_async_from_async_fn(async, " + slambda +
@@ -604,6 +609,15 @@ func LangTestLib_test_list_from_list_async(lang *vxlang) string {
 			"\n      Core.Type_any outval = Core.vx_new_string(sout);" +
 			"\n      CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(outval);" +
 			"\n      return output;" +
+			"\n    });"
+	case "kotlin":
+		fn_async = "" +
+			"\n    vx_core.Func_any_from_any_async fn_async = vx_core.t_any_from_any_async.vx_fn_new({anyval -> {" +
+			"\n      val stringval : vx_core.Type_string = anyval as vx_core.Type_string" +
+			"\n      val sout : String = stringval.vx_string() + \"!\"" +
+			"\n      val outval : vx_core.Type_any = vx_core.vx_new_string(sout)" +
+			"\n      val output : CompletableFuture<vx_core.Type_any> = vx_core.vx_async_new_from_value(outval)" +
+			"\n      output" +
 			"\n    });"
 	}
 	asynclist := LangPkgNameDot(lang, "vx/core") + "vx_list_from_list_async(" + LangTypeT(lang, stringlisttype) + ", slist, fn_async)"

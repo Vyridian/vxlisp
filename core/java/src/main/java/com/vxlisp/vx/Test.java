@@ -3495,6 +3495,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_anylist args = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(0)));
@@ -3504,7 +3505,8 @@ public final class Test {
 
     @Override
     public Core.Type_context vx_context_test(final Core.Type_anylist args) {
-      return Test.f_context_test(args);
+      Core.Type_context output = Test.f_context_test(args);
+      return output;
     }
 
   }
@@ -3619,6 +3621,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Test.Type_testcaselist testcaselist = Core.f_any_from_any(Test.t_testcaselist, arglist.vx_any(Core.vx_new_int(0)));
@@ -3628,7 +3631,8 @@ public final class Test {
 
     @Override
     public Html.Type_div vx_div_from_testcaselist(final Test.Type_testcaselist testcaselist) {
-      return Test.f_div_from_testcaselist(testcaselist);
+      Html.Type_div output = Test.f_div_from_testcaselist(testcaselist);
+      return output;
     }
 
   }
@@ -3734,7 +3738,9 @@ public final class Test {
               Html.t_tbody,
               Core.vx_new(
                 Core.t_anylist,
-                Test.f_trlist_from_testcaselist(testcaselist)
+                Test.f_trlist_from_testcaselist(
+                  testcaselist
+                )
               )
             )
           )
@@ -3825,6 +3831,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Test.Type_testpackage testpackage = Core.f_any_from_any(Test.t_testpackage, arglist.vx_any(Core.vx_new_int(0)));
@@ -3834,7 +3841,8 @@ public final class Test {
 
     @Override
     public Html.Type_div vx_div_from_testpackage(final Test.Type_testpackage testpackage) {
-      return Test.f_div_from_testpackage(testpackage);
+      Html.Type_div output = Test.f_div_from_testpackage(testpackage);
+      return output;
     }
 
   }
@@ -3855,7 +3863,9 @@ public final class Test {
           Test.c_stylesheet_test,
           Core.vx_new_string(".pkgname")
         );
-        Html.Type_div node = Test.f_div_from_testcaselist(caselist);
+        Html.Type_div node = Test.f_div_from_testcaselist(
+          caselist
+        );
         Html.Type_divchildlist nodes = Core.f_new(
           Html.t_divchildlist,
           Core.vx_new(
@@ -3863,7 +3873,9 @@ public final class Test {
             node
           )
         );
-        Html.Type_p p_passfail = Test.f_p_from_passfail(passfail);
+        Html.Type_p p_passfail = Test.f_p_from_passfail(
+          passfail
+        );
         Html.Type_p p_pkgname = Core.f_new(
           Html.t_p,
           Core.vx_new(
@@ -4013,6 +4025,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Test.Type_testpackagelist testpackagelist = Core.f_any_from_any(Test.t_testpackagelist, arglist.vx_any(Core.vx_new_int(0)));
@@ -4022,7 +4035,8 @@ public final class Test {
 
     @Override
     public Html.Type_div vx_div_from_testpackagelist(final Test.Type_testpackagelist testpackagelist) {
-      return Test.f_div_from_testpackagelist(testpackagelist);
+      Html.Type_div output = Test.f_div_from_testpackagelist(testpackagelist);
+      return output;
     }
 
   }
@@ -4157,7 +4171,9 @@ public final class Test {
               Html.t_div,
               Core.vx_new(
                 Core.t_anylist,
-                Test.f_divchildlist_from_testpackagelist(testpackagelist)
+                Test.f_divchildlist_from_testpackagelist(
+                  testpackagelist
+                )
               )
             )
           )
@@ -4249,6 +4265,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Test.Type_testpackagelist testpackagelist = Core.f_any_from_any(Test.t_testpackagelist, arglist.vx_any(Core.vx_new_int(0)));
@@ -4258,7 +4275,8 @@ public final class Test {
 
     @Override
     public Html.Type_divchildlist vx_divchildlist_from_testpackagelist(final Test.Type_testpackagelist testpackagelist) {
-      return Test.f_divchildlist_from_testpackagelist(testpackagelist);
+      Html.Type_divchildlist output = Test.f_divchildlist_from_testpackagelist(testpackagelist);
+      return output;
     }
 
   }
@@ -4342,6 +4360,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       output = Test.f_file_test();
@@ -4350,7 +4369,8 @@ public final class Test {
 
     @Override
     public File.Type_file vx_file_test() {
-      return Test.f_file_test();
+      File.Type_file output = Test.f_file_test();
+      return output;
     }
 
   }
@@ -4439,6 +4459,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       output = Test.f_file_testhtml();
@@ -4447,7 +4468,8 @@ public final class Test {
 
     @Override
     public File.Type_file vx_file_testhtml() {
-      return Test.f_file_testhtml();
+      File.Type_file output = Test.f_file_testhtml();
+      return output;
     }
 
   }
@@ -4536,6 +4558,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       output = Test.f_file_testnode();
@@ -4544,7 +4567,8 @@ public final class Test {
 
     @Override
     public File.Type_file vx_file_testnode() {
-      return Test.f_file_testnode();
+      File.Type_file output = Test.f_file_testnode();
+      return output;
     }
 
   }
@@ -4648,6 +4672,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_div divtest = Core.f_any_from_any(Html.t_div, arglist.vx_any(Core.vx_new_int(0)));
@@ -4657,7 +4682,8 @@ public final class Test {
 
     @Override
     public Html.Type_html vx_html_from_divtest(final Html.Type_div divtest) {
-      return Test.f_html_from_divtest(divtest);
+      Html.Type_html output = Test.f_html_from_divtest(divtest);
+      return output;
     }
 
   }
@@ -4814,6 +4840,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_boolean passfail = Core.f_any_from_any(Core.t_boolean, arglist.vx_any(Core.vx_new_int(0)));
@@ -4823,7 +4850,8 @@ public final class Test {
 
     @Override
     public Html.Type_p vx_p_from_passfail(final Core.Type_boolean passfail) {
-      return Test.f_p_from_passfail(passfail);
+      Html.Type_p output = Test.f_p_from_passfail(passfail);
+      return output;
     }
 
   }
@@ -4836,8 +4864,18 @@ public final class Test {
     output = Core.f_let(
       Html.t_p,
       Core.t_any_from_func.vx_fn_new(() -> {
-        Core.Type_string text = Core.f_if_1(Core.t_string, passfail, Core.vx_new_string("Pass"), Core.vx_new_string("Fail"));
-        Core.Type_string stylename = Core.f_if_1(Core.t_string, passfail, Core.vx_new_string(".passflag"), Core.vx_new_string(".failflag"));
+        Core.Type_string text = Core.f_if_1(
+          Core.t_string,
+          passfail,
+          Core.vx_new_string("Pass"),
+          Core.vx_new_string("Fail")
+        );
+        Core.Type_string stylename = Core.f_if_1(
+          Core.t_string,
+          passfail,
+          Core.vx_new_string(".passflag"),
+          Core.vx_new_string(".failflag")
+        );
         Html.Type_style style = Html.f_style_from_stylesheet_name(
           Test.c_stylesheet_test,
           stylename
@@ -4939,6 +4977,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Test.Type_testcoveragenums nums = Core.f_any_from_any(Test.t_testcoveragenums, arglist.vx_any(Core.vx_new_int(0)));
@@ -4948,7 +4987,8 @@ public final class Test {
 
     @Override
     public Html.Type_p vx_p_from_testcoveragenums(final Test.Type_testcoveragenums nums) {
-      return Test.f_p_from_testcoveragenums(nums);
+      Html.Type_p output = Test.f_p_from_testcoveragenums(nums);
+      return output;
     }
 
   }
@@ -5067,6 +5107,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Test.Type_testcase testcase = Core.f_any_from_any(Test.t_testcase, arglist.vx_any(Core.vx_new_int(0)));
@@ -5077,7 +5118,8 @@ public final class Test {
 
     @Override
     public CompletableFuture<Test.Type_testcase> vx_resolve_testcase(final Test.Type_testcase testcase) {
-      return Test.f_resolve_testcase(testcase);
+      CompletableFuture<Test.Type_testcase> output = Test.f_resolve_testcase(testcase);
+      return output;
     }
 
   }
@@ -5090,28 +5132,31 @@ public final class Test {
     output = Core.f_let_async(
       Test.t_testcase,
       Core.t_any_from_func_async.vx_fn_new(() -> {
-        final Test.Type_testdescribelist describelist = testcase.describelist();
-        final CompletableFuture<Test.Type_testdescribelist> future_resolvedlist = Test.f_resolve_testdescribelist(describelist);
+        Test.Type_testdescribelist describelist = testcase.describelist();
+        CompletableFuture<Test.Type_testdescribelist> future_resolvedlist = Test.f_resolve_testdescribelist(
+          describelist
+        );
         CompletableFuture<Core.Type_any> output_1 = Core.vx_async_from_async_fn(future_resolvedlist, (resolvedlist) -> {
-          final Core.Type_booleanlist passfaillist = Core.f_list_from_list_1(
+          Core.Type_booleanlist passfaillist = Core.f_list_from_list_1(
             Core.t_booleanlist,
             resolvedlist,
             Core.t_any_from_any.vx_fn_new((testdescribe_any) -> {
               Test.Type_testdescribe testdescribe = Core.f_any_from_any(Test.t_testdescribe, testdescribe_any);
-              Core.Type_any output_2 = 
-                    Core.f_let(
-                      Core.t_boolean,
-                      Core.t_any_from_func.vx_fn_new(() -> {
-                        Test.Type_testresult testresult = testdescribe.testresult();
-                        Core.Type_any output_3 = testresult.passfail();
-                        return output_3;
-                      })
-                    );
-              return output_2;
+              Core.Type_any output_3 = Core.f_let(
+                Core.t_boolean,
+                Core.t_any_from_func.vx_fn_new(() -> {
+                  Test.Type_testresult testresult = testdescribe.testresult();
+                  Core.Type_any output_4 = testresult.passfail();
+                  return output_4;
+                })
+              );
+              return output_3;
             })
           );
-          final Core.Type_boolean passfail = Core.f_and_1(passfaillist);
-          Core.Type_any output_4 = Core.f_copy(
+          Core.Type_boolean passfail = Core.f_and_1(
+            passfaillist
+          );
+          Core.Type_any output_2 = Core.f_copy(
             testcase,
             Core.vx_new(
               Core.t_anylist,
@@ -5121,7 +5166,7 @@ public final class Test {
               resolvedlist
             )
           );
-          return output_4;
+          return output_2;
         });
         return output_1;
       })
@@ -5212,6 +5257,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Test.Type_testcaselist testcaselist = Core.f_any_from_any(Test.t_testcaselist, arglist.vx_any(Core.vx_new_int(0)));
@@ -5222,7 +5268,8 @@ public final class Test {
 
     @Override
     public CompletableFuture<Test.Type_testcaselist> vx_resolve_testcaselist(final Test.Type_testcaselist testcaselist) {
-      return Test.f_resolve_testcaselist(testcaselist);
+      CompletableFuture<Test.Type_testcaselist> output = Test.f_resolve_testcaselist(testcaselist);
+      return output;
     }
 
   }
@@ -5323,6 +5370,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Test.Type_testdescribe testdescribe = Core.f_any_from_any(Test.t_testdescribe, arglist.vx_any(Core.vx_new_int(0)));
@@ -5333,7 +5381,8 @@ public final class Test {
 
     @Override
     public CompletableFuture<Test.Type_testdescribe> vx_resolve_testdescribe(final Test.Type_testdescribe testdescribe) {
-      return Test.f_resolve_testdescribe(testdescribe);
+      CompletableFuture<Test.Type_testdescribe> output = Test.f_resolve_testdescribe(testdescribe);
+      return output;
     }
 
   }
@@ -5346,8 +5395,10 @@ public final class Test {
     output = Core.f_let_async(
       Test.t_testdescribe,
       Core.t_any_from_func_async.vx_fn_new(() -> {
-        final Test.Type_testresult testresult = testdescribe.testresult();
-        final CompletableFuture<Test.Type_testresult> future_resolved = Test.f_resolve_testresult(testresult);
+        Test.Type_testresult testresult = testdescribe.testresult();
+        CompletableFuture<Test.Type_testresult> future_resolved = Test.f_resolve_testresult(
+          testresult
+        );
         CompletableFuture<Core.Type_any> output_1 = Core.vx_async_from_async_fn(future_resolved, (resolved) -> {
           Core.Type_any output_2 = Core.f_copy(
             testdescribe,
@@ -5448,6 +5499,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Test.Type_testdescribelist testdescribelist = Core.f_any_from_any(Test.t_testdescribelist, arglist.vx_any(Core.vx_new_int(0)));
@@ -5458,7 +5510,8 @@ public final class Test {
 
     @Override
     public CompletableFuture<Test.Type_testdescribelist> vx_resolve_testdescribelist(final Test.Type_testdescribelist testdescribelist) {
-      return Test.f_resolve_testdescribelist(testdescribelist);
+      CompletableFuture<Test.Type_testdescribelist> output = Test.f_resolve_testdescribelist(testdescribelist);
+      return output;
     }
 
   }
@@ -5559,6 +5612,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Test.Type_testpackage testpackage = Core.f_any_from_any(Test.t_testpackage, arglist.vx_any(Core.vx_new_int(0)));
@@ -5569,7 +5623,8 @@ public final class Test {
 
     @Override
     public CompletableFuture<Test.Type_testpackage> vx_resolve_testpackage(final Test.Type_testpackage testpackage) {
-      return Test.f_resolve_testpackage(testpackage);
+      CompletableFuture<Test.Type_testpackage> output = Test.f_resolve_testpackage(testpackage);
+      return output;
     }
 
   }
@@ -5582,21 +5637,24 @@ public final class Test {
     output = Core.f_let_async(
       Test.t_testpackage,
       Core.t_any_from_func_async.vx_fn_new(() -> {
-        final Test.Type_testcaselist testcaselist = testpackage.caselist();
-        final CompletableFuture<Test.Type_testcaselist> future_resolvedlist = Test.f_resolve_testcaselist(testcaselist);
+        Test.Type_testcaselist testcaselist = testpackage.caselist();
+        CompletableFuture<Test.Type_testcaselist> future_resolvedlist = Test.f_resolve_testcaselist(
+          testcaselist
+        );
         CompletableFuture<Core.Type_any> output_1 = Core.vx_async_from_async_fn(future_resolvedlist, (resolvedlist) -> {
-          final Core.Type_booleanlist passfaillist = Core.f_list_from_list_1(
+          Core.Type_booleanlist passfaillist = Core.f_list_from_list_1(
             Core.t_booleanlist,
             resolvedlist,
             Core.t_any_from_any.vx_fn_new((testcase_any) -> {
               Test.Type_testcase testcase = Core.f_any_from_any(Test.t_testcase, testcase_any);
-              Core.Type_any output_2 = 
-                    testcase.passfail();
-              return output_2;
+              Core.Type_any output_3 = testcase.passfail();
+              return output_3;
             })
           );
-          final Core.Type_boolean passfail = Core.f_and_1(passfaillist);
-          Core.Type_any output_3 = Core.f_copy(
+          Core.Type_boolean passfail = Core.f_and_1(
+            passfaillist
+          );
+          Core.Type_any output_2 = Core.f_copy(
             testpackage,
             Core.vx_new(
               Core.t_anylist,
@@ -5606,7 +5664,7 @@ public final class Test {
               resolvedlist
             )
           );
-          return output_3;
+          return output_2;
         });
         return output_1;
       })
@@ -5697,6 +5755,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Test.Type_testpackagelist testpackagelist = Core.f_any_from_any(Test.t_testpackagelist, arglist.vx_any(Core.vx_new_int(0)));
@@ -5707,7 +5766,8 @@ public final class Test {
 
     @Override
     public CompletableFuture<Test.Type_testpackagelist> vx_resolve_testpackagelist(final Test.Type_testpackagelist testpackagelist) {
-      return Test.f_resolve_testpackagelist(testpackagelist);
+      CompletableFuture<Test.Type_testpackagelist> output = Test.f_resolve_testpackagelist(testpackagelist);
+      return output;
     }
 
   }
@@ -5808,6 +5868,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Test.Type_testresult testresult = Core.f_any_from_any(Test.t_testresult, arglist.vx_any(Core.vx_new_int(0)));
@@ -5818,7 +5879,8 @@ public final class Test {
 
     @Override
     public CompletableFuture<Test.Type_testresult> vx_resolve_testresult(final Test.Type_testresult testresult) {
-      return Test.f_resolve_testresult(testresult);
+      CompletableFuture<Test.Type_testresult> output = Test.f_resolve_testresult(testresult);
+      return output;
     }
 
   }
@@ -5831,29 +5893,39 @@ public final class Test {
     output = Core.f_let_async(
       Test.t_testresult,
       Core.t_any_from_func_async.vx_fn_new(() -> {
-        final Core.Func_any_from_func_async fn_actual = testresult.fn_actual();
-        final Core.Type_any expected = testresult.expected();
-        final CompletableFuture<Core.Type_any> future_actual = Core.f_resolve_async(Core.t_any, fn_actual);
+        Core.Func_any_from_func_async fn_actual = testresult.fn_actual();
+        Core.Type_any expected = testresult.expected();
+        CompletableFuture<Core.Type_any> future_actual = Core.f_resolve_async(
+          Core.t_any,
+          fn_actual
+        );
         CompletableFuture<Core.Type_any> output_1 = Core.vx_async_from_async_fn(future_actual, (actual) -> {
-          Core.Type_any output_3 = Core.f_if_2(
+          Core.Type_any output_6 = Core.f_if_2(
             Test.t_testresult,
             Core.vx_new(
               Core.t_thenelselist,
               Core.f_then(
                 Core.t_boolean_from_func.vx_fn_new(() -> {
-                  return Core.f_is_empty_1(fn_actual);
+                  Core.Type_any output_2 = Core.f_is_empty_1(
+                    fn_actual
+                  );
+                  return output_2;
                 }),
                 Core.t_any_from_func.vx_fn_new(() -> {
-                  return testresult;
+                  Core.Type_any output_3 = testresult;
+                  return output_3;
                 })
               ),
               Core.f_else(
                 Core.t_any_from_func.vx_fn_new(() -> {
-                  return Core.f_let(
+                  Core.Type_any output_4 = Core.f_let(
                     Test.t_testresult,
                     Core.t_any_from_func.vx_fn_new(() -> {
-                      Core.Type_boolean passfail = Core.f_eq(expected, actual);
-                      Core.Type_any output_2 = Core.f_copy(
+                      Core.Type_boolean passfail = Core.f_eq(
+                        expected,
+                        actual
+                      );
+                      Core.Type_any output_5 = Core.f_copy(
                         testresult,
                         Core.vx_new(
                           Core.t_anylist,
@@ -5863,14 +5935,15 @@ public final class Test {
                           actual
                         )
                       );
-                      return output_2;
+                      return output_5;
                     })
                   );
+                  return output_4;
                 })
               )
             )
           );
-          return output_3;
+          return output_6;
         });
         return output_1;
       })
@@ -5944,6 +6017,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       output = Test.f_security_test();
@@ -5952,7 +6026,8 @@ public final class Test {
 
     @Override
     public Core.Type_security vx_security_test() {
-      return Test.f_security_test();
+      Core.Type_security output = Test.f_security_test();
+      return output;
     }
 
   }
@@ -6050,6 +6125,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
@@ -6061,7 +6137,8 @@ public final class Test {
 
     @Override
     public Test.Type_testresult vx_test(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual) {
-      return Test.f_test(context, expected, actual);
+      Test.Type_testresult output = Test.f_test(context, expected, actual);
+      return output;
     }
 
   }
@@ -6079,7 +6156,10 @@ public final class Test {
           Core.vx_new_string(":code"),
           Core.vx_new_string(":eq"),
           Core.vx_new_string(":passfail"),
-          Core.f_eq(expected, actual),
+          Core.f_eq(
+            expected,
+            actual
+          ),
           Core.vx_new_string(":expected"),
           expected,
           Core.vx_new_string(":actual"),
@@ -6161,6 +6241,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
@@ -6172,7 +6253,8 @@ public final class Test {
 
     @Override
     public Test.Type_testresult vx_test_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual) {
-      return Test.f_test_1(context, expected, fn_actual);
+      Test.Type_testresult output = Test.f_test_1(context, expected, fn_actual);
+      return output;
     }
 
   }
@@ -6283,6 +6365,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
@@ -6293,7 +6376,8 @@ public final class Test {
 
     @Override
     public Test.Type_testresult vx_test_false(final Core.Type_context context, final Core.Type_any actual) {
-      return Test.f_test_false(context, actual);
+      Test.Type_testresult output = Test.f_test_false(context, actual);
+      return output;
     }
 
   }
@@ -6409,6 +6493,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
@@ -6419,7 +6504,8 @@ public final class Test {
 
     @Override
     public Test.Type_testresult vx_test_false_1(final Core.Type_context context, final Core.Func_any_from_func_async fn_actual) {
-      return Test.f_test_false_1(context, fn_actual);
+      Test.Type_testresult output = Test.f_test_false_1(context, fn_actual);
+      return output;
     }
 
   }
@@ -6517,6 +6603,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
@@ -6528,7 +6615,8 @@ public final class Test {
 
     @Override
     public Test.Type_testresult vx_test_gt(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual) {
-      return Test.f_test_gt(context, expected, actual);
+      Test.Type_testresult output = Test.f_test_gt(context, expected, actual);
+      return output;
     }
 
   }
@@ -6546,7 +6634,10 @@ public final class Test {
           Core.vx_new_string(":code"),
           Core.vx_new_string(":gt"),
           Core.vx_new_string(":passfail"),
-          Core.f_gt(expected, actual),
+          Core.f_gt(
+            expected,
+            actual
+          ),
           Core.vx_new_string(":expected"),
           expected,
           Core.vx_new_string(":actual"),
@@ -6628,6 +6719,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
@@ -6639,7 +6731,8 @@ public final class Test {
 
     @Override
     public Test.Type_testresult vx_test_gt_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual) {
-      return Test.f_test_gt_1(context, expected, fn_actual);
+      Test.Type_testresult output = Test.f_test_gt_1(context, expected, fn_actual);
+      return output;
     }
 
   }
@@ -6737,6 +6830,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
@@ -6748,7 +6842,8 @@ public final class Test {
 
     @Override
     public Test.Type_testresult vx_test_ne(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual) {
-      return Test.f_test_ne(context, expected, actual);
+      Test.Type_testresult output = Test.f_test_ne(context, expected, actual);
+      return output;
     }
 
   }
@@ -6766,7 +6861,10 @@ public final class Test {
           Core.vx_new_string(":code"),
           Core.vx_new_string(":ne"),
           Core.vx_new_string(":passfail"),
-          Core.f_ne(expected, actual),
+          Core.f_ne(
+            expected,
+            actual
+          ),
           Core.vx_new_string(":expected"),
           expected,
           Core.vx_new_string(":actual"),
@@ -6848,6 +6946,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
@@ -6859,7 +6958,8 @@ public final class Test {
 
     @Override
     public Test.Type_testresult vx_test_ne_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual) {
-      return Test.f_test_ne_1(context, expected, fn_actual);
+      Test.Type_testresult output = Test.f_test_ne_1(context, expected, fn_actual);
+      return output;
     }
 
   }
@@ -6957,6 +7057,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
@@ -6968,7 +7069,8 @@ public final class Test {
 
     @Override
     public Test.Type_testresult vx_test_string(final Core.Type_context context, final Core.Type_any expected, final Core.Type_any actual) {
-      return Test.f_test_string(context, expected, actual);
+      Test.Type_testresult output = Test.f_test_string(context, expected, actual);
+      return output;
     }
 
   }
@@ -6985,8 +7087,12 @@ public final class Test {
           Core.t_anylist,
           Core.vx_new_string(":passfail"),
           Core.f_eq(
-            Core.f_string_from_any(expected),
-            Core.f_string_from_any(actual)
+            Core.f_string_from_any(
+              expected
+            ),
+            Core.f_string_from_any(
+              actual
+            )
           ),
           Core.vx_new_string(":expected"),
           expected,
@@ -7069,6 +7175,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
@@ -7080,7 +7187,8 @@ public final class Test {
 
     @Override
     public Test.Type_testresult vx_test_string_1(final Core.Type_context context, final Core.Type_any expected, final Core.Func_any_from_func_async fn_actual) {
-      return Test.f_test_string_1(context, expected, fn_actual);
+      Test.Type_testresult output = Test.f_test_string_1(context, expected, fn_actual);
+      return output;
     }
 
   }
@@ -7191,6 +7299,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
@@ -7201,7 +7310,8 @@ public final class Test {
 
     @Override
     public Test.Type_testresult vx_test_true(final Core.Type_context context, final Core.Type_any actual) {
-      return Test.f_test_true(context, actual);
+      Test.Type_testresult output = Test.f_test_true(context, actual);
+      return output;
     }
 
   }
@@ -7317,6 +7427,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
@@ -7327,7 +7438,8 @@ public final class Test {
 
     @Override
     public Test.Type_testresult vx_test_true_1(final Core.Type_context context, final Core.Func_any_from_func_async fn_actual) {
-      return Test.f_test_true_1(context, fn_actual);
+      Test.Type_testresult output = Test.f_test_true_1(context, fn_actual);
+      return output;
     }
 
   }
@@ -7425,6 +7537,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Test.Type_testdescribe testdescribe = Core.f_any_from_any(Test.t_testdescribe, arglist.vx_any(Core.vx_new_int(0)));
@@ -7435,7 +7548,8 @@ public final class Test {
 
     @Override
     public Html.Type_tr vx_tr_from_testdescribe_casename(final Test.Type_testdescribe testdescribe, final Core.Type_string casename) {
-      return Test.f_tr_from_testdescribe_casename(testdescribe, casename);
+      Html.Type_tr output = Test.f_tr_from_testdescribe_casename(testdescribe, casename);
+      return output;
     }
 
   }
@@ -7469,7 +7583,9 @@ public final class Test {
               Html.t_td,
               Core.vx_new(
                 Core.t_anylist,
-                Test.f_p_from_passfail(passfail)
+                Test.f_p_from_passfail(
+                  passfail
+                )
               )
             ),
             Core.f_new(
@@ -7624,6 +7740,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Test.Type_testcase testcase = Core.f_any_from_any(Test.t_testcase, arglist.vx_any(Core.vx_new_int(0)));
@@ -7633,7 +7750,8 @@ public final class Test {
 
     @Override
     public Html.Type_trlist vx_trlist_from_testcase(final Test.Type_testcase testcase) {
-      return Test.f_trlist_from_testcase(testcase);
+      Html.Type_trlist output = Test.f_trlist_from_testcase(testcase);
+      return output;
     }
 
   }
@@ -7648,17 +7766,19 @@ public final class Test {
       Core.t_any_from_func.vx_fn_new(() -> {
         Test.Type_testdescribelist describelist = testcase.describelist();
         Core.Type_string casename = testcase.casename();
-        Core.Type_any output_2 = Core.f_list_from_list_1(
+        Core.Type_any output_1 = Core.f_list_from_list_1(
           Html.t_trlist,
           describelist,
           Core.t_any_from_any.vx_fn_new((testdescribe_any) -> {
             Test.Type_testdescribe testdescribe = Core.f_any_from_any(Test.t_testdescribe, testdescribe_any);
-            Core.Type_any output_1 = 
-              Test.f_tr_from_testdescribe_casename(testdescribe, casename);
-            return output_1;
+            Core.Type_any output_2 = Test.f_tr_from_testdescribe_casename(
+              testdescribe,
+              casename
+            );
+            return output_2;
           })
         );
-        return output_2;
+        return output_1;
       })
     );
     return output;
@@ -7745,6 +7865,7 @@ public final class Test {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Test.Type_testcaselist testcaselist = Core.f_any_from_any(Test.t_testcaselist, arglist.vx_any(Core.vx_new_int(0)));
@@ -7754,7 +7875,8 @@ public final class Test {
 
     @Override
     public Html.Type_trlist vx_trlist_from_testcaselist(final Test.Type_testcaselist testcaselist) {
-      return Test.f_trlist_from_testcaselist(testcaselist);
+      Html.Type_trlist output = Test.f_trlist_from_testcaselist(testcaselist);
+      return output;
     }
 
   }

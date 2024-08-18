@@ -45,7 +45,9 @@ public final class SampleTest {
             Test.f_test(
               context,
               Core.vx_new_int(5),
-              Sample.f_myfunc(Core.vx_new_int(1))
+              Sample.f_myfunc(
+                Core.vx_new_int(1)
+              )
             )
         )
       )

@@ -982,7 +982,8 @@ public static class Event {
     }
 
     public T vx_any_from_from_event<T>(T generic_any_1, Vx.Event.Type_event evt) where T : Vx.Core.Type_any {
-      return Vx.Event.f_any_from_from_event(generic_any_1, evt);
+      T output = Vx.Event.f_any_from_from_event(generic_any_1, evt);
+      return output;
     }
 
   }
@@ -996,7 +997,10 @@ public static class Event {
       generic_any_1,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_any value = evt.from();
-        Vx.Core.Type_any output_1 = Vx.Core.f_any_from_any(generic_any_1, value);
+        Vx.Core.Type_any output_1 = Vx.Core.f_any_from_any(
+          generic_any_1,
+          value
+        );
         return output_1;
       })
     );
@@ -1085,7 +1089,8 @@ public static class Event {
     }
 
     public Vx.Event.Type_event vx_event_from_event(Vx.Core.Type_context context, Vx.Event.Type_event evt) {
-      return Vx.Event.f_event_from_event(context, evt);
+      Vx.Event.Type_event output = Vx.Event.f_event_from_event(context, evt);
+      return output;
     }
 
   }
@@ -1183,7 +1188,8 @@ public static class Event {
     }
 
     public Task<Vx.Event.Type_event> vx_event_from_event_async(Vx.Core.Type_context context, Vx.Event.Type_event evt) {
-      return Vx.Event.f_event_from_event_async(context, evt);
+      Task<Vx.Event.Type_event> output = Vx.Event.f_event_from_event_async(context, evt);
+      return output;
     }
 
   }
@@ -1277,7 +1283,8 @@ public static class Event {
     }
 
     public Vx.Event.Type_eventmap vx_eventmap_from_eventlist(Vx.Event.Type_eventlist eventlist) {
-      return Vx.Event.f_eventmap_from_eventlist(eventlist);
+      Vx.Event.Type_eventmap output = Vx.Event.f_eventmap_from_eventlist(eventlist);
+      return output;
     }
 
   }
@@ -1292,8 +1299,7 @@ public static class Event {
       eventlist,
       Vx.Core.t_any_from_any.vx_fn_new((evt_any) => {
         Vx.Event.Type_event evt = Vx.Core.f_any_from_any(Vx.Event.t_event, evt_any);
-        Vx.Core.Type_any output_1 = 
-          evt.name();
+        Vx.Core.Type_any output_1 = evt.name();
         return output_1;
       })
     );

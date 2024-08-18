@@ -2269,7 +2269,7 @@ namespace vx_core {
     IFn fn;
     vx_core::vx_Type_listany lambdavars;
     virtual vx_core::Func_any_from_key_value vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_key_value::IFn fn) const = 0;
-    virtual vx_core::Type_any vx_any_from_key_value(vx_core::Type_string key, vx_core::Type_any val) const = 0;
+    virtual vx_core::Type_any vx_any_from_key_value(vx_core::Type_string key, vx_core::Type_any value) const = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
   class Class_any_from_key_value : public virtual Abstract_any_from_key_value {
@@ -2286,7 +2286,7 @@ namespace vx_core {
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Func_any_from_key_value vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_key_value::IFn fn) const;
-    virtual vx_core::Type_any vx_any_from_key_value(vx_core::Type_string key, vx_core::Type_any val) const;
+    virtual vx_core::Type_any vx_any_from_key_value(vx_core::Type_string key, vx_core::Type_any value) const;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
@@ -2299,7 +2299,7 @@ namespace vx_core {
     IFn fn;
     vx_core::vx_Type_listany lambdavars;
     virtual vx_core::Func_any_from_key_value_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_key_value_async::IFn fn) const = 0;
-    virtual vx_core::vx_Type_async vx_any_from_key_value_async(vx_core::Type_any generic_any_1, vx_core::Type_string key, vx_core::Type_any val) const = 0;
+    virtual vx_core::vx_Type_async vx_any_from_key_value_async(vx_core::Type_any generic_any_1, vx_core::Type_string key, vx_core::Type_any value) const = 0;
     virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
   class Class_any_from_key_value_async : public virtual Abstract_any_from_key_value_async {
@@ -2316,7 +2316,7 @@ namespace vx_core {
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Func_any_from_key_value_async vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_key_value_async::IFn fn) const;
-    virtual vx_core::vx_Type_async vx_any_from_key_value_async(vx_core::Type_any generic_any_1, vx_core::Type_string key, vx_core::Type_any val) const;
+    virtual vx_core::vx_Type_async vx_any_from_key_value_async(vx_core::Type_any generic_any_1, vx_core::Type_string key, vx_core::Type_any value) const;
     virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist) override;
   };
 
@@ -3454,13 +3454,13 @@ namespace vx_core {
   vx_core::Type_boolean f_is_empty_1(vx_core::Type_any value);
 
   // (func !)
-  vx_core::Type_boolean f_not(vx_core::Type_boolean val);
+  vx_core::Type_boolean f_not(vx_core::Type_boolean value);
 
   // (func !-empty)
   vx_core::Type_boolean f_notempty(vx_core::Type_string text);
 
   // (func !-empty)
-  vx_core::Type_boolean f_notempty_1(vx_core::Type_any val);
+  vx_core::Type_boolean f_notempty_1(vx_core::Type_any value);
 
   // (func =)
   vx_core::Type_boolean f_eq(vx_core::Type_any val1, vx_core::Type_any val2);
@@ -3610,7 +3610,7 @@ namespace vx_core {
   vx_core::Type_context f_context_main(vx_core::Type_anylist args);
 
   // (func extends<-any)
-  vx_core::Type_string f_extends_from_any(vx_core::Type_any val);
+  vx_core::Type_string f_extends_from_any(vx_core::Type_any value);
 
   // (func extends<-typedef)
   vx_core::Type_string f_extends_from_typedef(vx_core::Type_typedef vtypedef);
@@ -3619,7 +3619,7 @@ namespace vx_core {
   vx_core::Type_float f_float_from_string(vx_core::Type_string text);
 
   // (func funcdef<-func)
-  vx_core::Type_funcdef f_funcdef_from_func(vx_core::Type_func val);
+  vx_core::Type_funcdef f_funcdef_from_func(vx_core::Type_func value);
 
   // (func funcname<-funcdef)
   vx_core::Type_string f_funcname_from_funcdef(vx_core::Type_funcdef funcdef);
@@ -3628,7 +3628,7 @@ namespace vx_core {
   vx_core::Type_int f_int_from_func();
 
   // (func int<-string)
-  vx_core::Type_int f_int_from_string(vx_core::Type_string val);
+  vx_core::Type_int f_int_from_string(vx_core::Type_string value);
 
   // (func is-endswith)
   vx_core::Type_boolean f_is_endswith(vx_core::Type_string text, vx_core::Type_string find);
@@ -3637,7 +3637,7 @@ namespace vx_core {
   vx_core::Type_boolean f_is_float(vx_core::Type_any value);
 
   // (func is-func)
-  vx_core::Type_boolean f_is_func(vx_core::Type_any val);
+  vx_core::Type_boolean f_is_func(vx_core::Type_any value);
 
   // (func is-int)
   vx_core::Type_boolean f_is_int(vx_core::Type_any value);
@@ -3742,10 +3742,10 @@ namespace vx_core {
   vx_core::Type_any f_type_from_any(vx_core::Type_any value);
 
   // (func typedef<-any)
-  vx_core::Type_typedef f_typedef_from_any(vx_core::Type_any val);
+  vx_core::Type_typedef f_typedef_from_any(vx_core::Type_any value);
 
   // (func typedef<-type)
-  vx_core::Type_typedef f_typedef_from_type(vx_core::Type_any val);
+  vx_core::Type_typedef f_typedef_from_type(vx_core::Type_any value);
 
   // (func typename<-any)
   vx_core::Type_string f_typename_from_any(vx_core::Type_any value);
@@ -6636,7 +6636,7 @@ namespace vx_core {
     IFn fn;
     vx_core::vx_Type_listany lambdavars;
     virtual vx_core::Func_any_from_int_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_int_any::IFn fn) const = 0;
-    virtual vx_core::Type_any vx_any_from_int_any(vx_core::Type_int num, vx_core::Type_any val) const = 0;
+    virtual vx_core::Type_any vx_any_from_int_any(vx_core::Type_int num, vx_core::Type_any value) const = 0;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
   };
   class Class_any_from_int_any : public virtual Abstract_any_from_int_any {
@@ -6653,7 +6653,7 @@ namespace vx_core {
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
     virtual vx_core::Func_any_from_int_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_int_any::IFn fn) const;
-    virtual vx_core::Type_any vx_any_from_int_any(vx_core::Type_int num, vx_core::Type_any val) const;
+    virtual vx_core::Type_any vx_any_from_int_any(vx_core::Type_int num, vx_core::Type_any value) const;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
@@ -8785,18 +8785,18 @@ namespace vx_core {
   }
 
   // (func any<-key-value)
-  template <class T, class U> T* f_any_from_key_value(T* generic_any_1, vx_core::Type_string key, U* val) {
+  template <class T, class U> T* f_any_from_key_value(T* generic_any_1, vx_core::Type_string key, U* value) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_reserve({key, val});
-    vx_core::vx_release_one_except({key, val}, output);
+    vx_core::vx_reserve({key, value});
+    vx_core::vx_release_one_except({key, value}, output);
     return output;
   }
 
   // (func any<-key-value-async)
-  template <class T, class U> vx_core::vx_Type_async f_any_from_key_value_async(T* generic_any_1, vx_core::Type_string key, U* val) {
+  template <class T, class U> vx_core::vx_Type_async f_any_from_key_value_async(T* generic_any_1, vx_core::Type_string key, U* value) {
     vx_core::vx_Type_async output = NULL;
-    vx_core::vx_reserve({key, val});
-    vx_core::vx_release_one({key, val});
+    vx_core::vx_reserve({key, value});
+    vx_core::vx_release_one({key, value});
     if (!output) {
       output = vx_core::vx_async_new_from_value(vx_core::vx_empty(generic_any_1));
     }
@@ -8985,12 +8985,12 @@ namespace vx_core {
   }
 
   // (func switch)
-  template <class T, class U> T* f_switch(T* generic_any_1, U* val, vx_core::Type_thenelselist thenelselist) {
+  template <class T, class U> T* f_switch(T* generic_any_1, U* value, vx_core::Type_thenelselist thenelselist) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_reserve({val, thenelselist});
-    vx_core::Type_any any = vx_core::vx_switch(generic_any_1, val, thenelselist);
+    vx_core::vx_reserve({value, thenelselist});
+    vx_core::Type_any any = vx_core::vx_switch(generic_any_1, value, thenelselist);
     output = vx_core::vx_any_from_any(generic_any_1, any);
-    vx_core::vx_release_one_except({val, thenelselist}, output);
+    vx_core::vx_release_one_except({value, thenelselist}, output);
     return output;
   }
 
@@ -9049,10 +9049,10 @@ namespace vx_core {
   }
 
   // (func any<-int-any)
-  template <class T, class U> T* f_any_from_int_any(T* generic_any_1, vx_core::Type_int num, U* val) {
+  template <class T, class U> T* f_any_from_int_any(T* generic_any_1, vx_core::Type_int num, U* value) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_reserve({num, val});
-    vx_core::vx_release_one_except({num, val}, output);
+    vx_core::vx_reserve({num, value});
+    vx_core::vx_release_one_except({num, value}, output);
     return output;
   }
 

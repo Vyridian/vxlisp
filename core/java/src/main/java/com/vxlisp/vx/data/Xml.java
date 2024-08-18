@@ -1070,6 +1070,7 @@ public final class Xml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
@@ -1079,7 +1080,8 @@ public final class Xml {
 
     @Override
     public Core.Type_string vx_string_decodexml_from_string(final Core.Type_string text) {
-      return Xml.f_string_decodexml_from_string(text);
+      Core.Type_string output = Xml.f_string_decodexml_from_string(text);
+      return output;
     }
 
   }
@@ -1092,9 +1094,21 @@ public final class Xml {
     output = Core.f_let(
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
-        Core.Type_string lt = Core.f_string_from_string_find_replace(text, Core.vx_new_string("&lt;"), Core.vx_new_string("<"));
-        Core.Type_string gt = Core.f_string_from_string_find_replace(text, Core.vx_new_string("&gt;"), Core.vx_new_string(">"));
-        Core.Type_string amp = Core.f_string_from_string_find_replace(gt, Core.vx_new_string("&amp;"), Core.vx_new_string("&"));
+        Core.Type_string lt = Core.f_string_from_string_find_replace(
+          text,
+          Core.vx_new_string("&lt;"),
+          Core.vx_new_string("<")
+        );
+        Core.Type_string gt = Core.f_string_from_string_find_replace(
+          text,
+          Core.vx_new_string("&gt;"),
+          Core.vx_new_string(">")
+        );
+        Core.Type_string amp = Core.f_string_from_string_find_replace(
+          gt,
+          Core.vx_new_string("&amp;"),
+          Core.vx_new_string("&")
+        );
         Core.Type_string result = Core.f_string_from_string_find_replace(
           text,
           Core.c_quote,
@@ -1188,6 +1202,7 @@ public final class Xml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Xml.Type_xml xml = Core.f_any_from_any(Xml.t_xml, arglist.vx_any(Core.vx_new_int(0)));
@@ -1197,7 +1212,8 @@ public final class Xml {
 
     @Override
     public Core.Type_string vx_string_first_from_xml(final Xml.Type_xml xml) {
-      return Xml.f_string_first_from_xml(xml);
+      Core.Type_string output = Xml.f_string_first_from_xml(xml);
+      return output;
     }
 
   }
@@ -1211,11 +1227,21 @@ public final class Xml {
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
         Xml.Type_xmllist children = xml.children();
-        Xml.Type_xml first = Core.f_any_from_list(Xml.t_xml, children, Core.vx_new_int(1));
+        Xml.Type_xml first = Core.f_any_from_list(
+          Xml.t_xml,
+          children,
+          Core.vx_new_int(1)
+        );
         Core.Type_string text = first.text();
-        Core.Type_string decode = Xml.f_string_decodexml_from_string(text);
-        Core.Type_string outdent = Type.f_string_outdent(decode);
-        Core.Type_string trim = Type.f_string_trim(outdent);
+        Core.Type_string decode = Xml.f_string_decodexml_from_string(
+          text
+        );
+        Core.Type_string outdent = Type.f_string_outdent(
+          decode
+        );
+        Core.Type_string trim = Type.f_string_trim(
+          outdent
+        );
         Core.Type_any output_1 = trim;
         return output_1;
       })
@@ -1304,6 +1330,7 @@ public final class Xml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
@@ -1313,7 +1340,8 @@ public final class Xml {
 
     @Override
     public Textblock.Type_textblock vx_textblock_xml_from_string(final Core.Type_string text) {
-      return Xml.f_textblock_xml_from_string(text);
+      Textblock.Type_textblock output = Xml.f_textblock_xml_from_string(text);
+      return output;
     }
 
   }
@@ -1398,6 +1426,7 @@ public final class Xml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Xml.Type_xml xmlarg = Core.f_any_from_any(Xml.t_xml, arglist.vx_any(Core.vx_new_int(0)));
@@ -1408,7 +1437,8 @@ public final class Xml {
 
     @Override
     public Xml.Type_xml vx_xml_angle_from_xml_textblock(final Xml.Type_xml xmlarg, final Textblock.Type_textblock tb) {
-      return Xml.f_xml_angle_from_xml_textblock(xmlarg, tb);
+      Xml.Type_xml output = Xml.f_xml_angle_from_xml_textblock(xmlarg, tb);
+      return output;
     }
 
   }
@@ -1424,7 +1454,7 @@ public final class Xml {
         Core.t_thenelselist,
         Core.f_then(
           Core.t_boolean_from_func.vx_fn_new(() -> {
-            return Core.f_eq(
+            Core.Type_any output_1 = Core.f_eq(
               tb.text(),
               Core.f_new(
                 Core.t_string,
@@ -1436,14 +1466,19 @@ public final class Xml {
                 )
               )
             );
+            return output_1;
           }),
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Xml.f_xml_close_from_xml_textblock(xmlarg, tb);
+            Core.Type_any output_2 = Xml.f_xml_close_from_xml_textblock(
+              xmlarg,
+              tb
+            );
+            return output_2;
           })
         ),
         Core.f_else(
           Core.t_any_from_func.vx_fn_new(() -> {
-            return Core.f_let(
+            Core.Type_any output_3 = Core.f_let(
               Xml.t_xml,
               Core.t_any_from_func.vx_fn_new(() -> {
                 Textblock.Type_textblocklist children = tb.children();
@@ -1457,10 +1492,14 @@ public final class Xml {
                     xmlarg
                   )
                 );
-                Core.Type_any output_1 = Xml.f_xml_properties_from_xml_textblocklist(xmlchg, children);
-                return output_1;
+                Core.Type_any output_4 = Xml.f_xml_properties_from_xml_textblocklist(
+                  xmlchg,
+                  children
+                );
+                return output_4;
               })
             );
+            return output_3;
           })
         )
       )
@@ -1536,6 +1575,7 @@ public final class Xml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Xml.Type_xml xmlarg = Core.f_any_from_any(Xml.t_xml, arglist.vx_any(Core.vx_new_int(0)));
@@ -1546,7 +1586,8 @@ public final class Xml {
 
     @Override
     public Xml.Type_xml vx_xml_close_from_xml_textblock(final Xml.Type_xml xmlarg, final Textblock.Type_textblock tb) {
-      return Xml.f_xml_close_from_xml_textblock(xmlarg, tb);
+      Xml.Type_xml output = Xml.f_xml_close_from_xml_textblock(xmlarg, tb);
+      return output;
     }
 
   }
@@ -1562,15 +1603,20 @@ public final class Xml {
         Core.Type_string tag = xmlarg.tag();
         Core.Type_string text = tb.text();
         Xml.Type_xml parent = xmlarg.parent();
-        Core.Type_boolean isnoparent = Core.f_is_empty_1(parent);
+        Core.Type_boolean isnoparent = Core.f_is_empty_1(
+          parent
+        );
         Core.Type_any output_1 = Core.f_if_2(
           Xml.t_xml,
           Core.vx_new(
             Core.t_thenelselist,
             Core.f_then(
               Core.t_boolean_from_func.vx_fn_new(() -> {
-                return Core.f_or(
-                  Core.f_eq(Core.vx_new_string("/"), text),
+                Core.Type_any output_2 = Core.f_or(
+                  Core.f_eq(
+                    Core.vx_new_string("/"),
+                    text
+                  ),
                   Core.f_eq(
                     text,
                     Core.f_new(
@@ -1584,23 +1630,26 @@ public final class Xml {
                     )
                   )
                 );
+                return output_2;
               }),
               Core.t_any_from_func.vx_fn_new(() -> {
-                return Core.f_if_2(
+                Core.Type_any output_3 = Core.f_if_2(
                   Xml.t_xml,
                   Core.vx_new(
                     Core.t_thenelselist,
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return isnoparent;
+                        Core.Type_any output_4 = isnoparent;
+                        return output_4;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return xmlarg;
+                        Core.Type_any output_5 = xmlarg;
+                        return output_5;
                       })
                     ),
                     Core.f_else(
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.f_copy(
+                        Core.Type_any output_6 = Core.f_copy(
                           parent,
                           Core.vx_new(
                             Core.t_anylist,
@@ -1624,15 +1673,17 @@ public final class Xml {
                             )
                           )
                         );
+                        return output_6;
                       })
                     )
                   )
                 );
+                return output_3;
               })
             ),
             Core.f_else(
               Core.t_any_from_func.vx_fn_new(() -> {
-                return Core.f_copy(
+                Core.Type_any output_7 = Core.f_copy(
                   xmlarg,
                   Core.vx_new(
                     Core.t_anylist,
@@ -1657,6 +1708,7 @@ public final class Xml {
                     )
                   )
                 );
+                return output_7;
               })
             )
           )
@@ -1735,6 +1787,7 @@ public final class Xml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Xml.Type_xml xmlarg = Core.f_any_from_any(Xml.t_xml, arglist.vx_any(Core.vx_new_int(0)));
@@ -1745,7 +1798,8 @@ public final class Xml {
 
     @Override
     public Xml.Type_xml vx_xml_parse_from_xml_textblock(final Xml.Type_xml xmlarg, final Textblock.Type_textblock tb) {
-      return Xml.f_xml_parse_from_xml_textblock(xmlarg, tb);
+      Xml.Type_xml output = Xml.f_xml_parse_from_xml_textblock(xmlarg, tb);
+      return output;
     }
 
   }
@@ -1769,31 +1823,42 @@ public final class Xml {
             Core.f_case_1(
               Core.vx_new_string(""),
               Core.t_any_from_func.vx_fn_new(() -> {
-                return Xml.f_xml_text_from_xml_textblock(xmlarg, tb);
+                Core.Type_any output_2 = Xml.f_xml_text_from_xml_textblock(
+                  xmlarg,
+                  tb
+                );
+                return output_2;
               })
             ),
             Core.f_case_1(
               Textblock.c_delimbracketangle.starttext(),
               Core.t_any_from_func.vx_fn_new(() -> {
-                return Xml.f_xml_angle_from_xml_textblock(xmlarg, tb);
+                Core.Type_any output_3 = Xml.f_xml_angle_from_xml_textblock(
+                  xmlarg,
+                  tb
+                );
+                return output_3;
               })
             ),
             Core.f_case_1(
               Textblock.c_delimwhitespace.starttext(),
               Core.t_any_from_func.vx_fn_new(() -> {
-                return xmlarg;
+                Core.Type_any output_4 = xmlarg;
+                return output_4;
               })
             ),
             Core.f_case_1(
               Xml.c_delimxmlcomment.starttext(),
               Core.t_any_from_func.vx_fn_new(() -> {
-                return xmlarg;
+                Core.Type_any output_5 = xmlarg;
+                return output_5;
               })
             ),
             Core.f_case_1(
               Xml.c_delimxmlcdata.starttext(),
               Core.t_any_from_func.vx_fn_new(() -> {
-                return xmlarg;
+                Core.Type_any output_6 = xmlarg;
+                return output_6;
               })
             )
           )
@@ -1872,6 +1937,7 @@ public final class Xml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Xml.Type_xml xmlarg = Core.f_any_from_any(Xml.t_xml, arglist.vx_any(Core.vx_new_int(0)));
@@ -1882,7 +1948,8 @@ public final class Xml {
 
     @Override
     public Xml.Type_xml vx_xml_parse_from_xml_textblocklist(final Xml.Type_xml xmlarg, final Textblock.Type_textblocklist textblocklist) {
-      return Xml.f_xml_parse_from_xml_textblocklist(xmlarg, textblocklist);
+      Xml.Type_xml output = Xml.f_xml_parse_from_xml_textblocklist(xmlarg, textblocklist);
+      return output;
     }
 
   }
@@ -1974,6 +2041,7 @@ public final class Xml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Xml.Type_xml xmlarg = Core.f_any_from_any(Xml.t_xml, arglist.vx_any(Core.vx_new_int(0)));
@@ -1984,7 +2052,8 @@ public final class Xml {
 
     @Override
     public Xml.Type_xml vx_xml_properties_from_xml_textblocklist(final Xml.Type_xml xmlarg, final Textblock.Type_textblocklist textblocklist) {
-      return Xml.f_xml_properties_from_xml_textblocklist(xmlarg, textblocklist);
+      Xml.Type_xml output = Xml.f_xml_properties_from_xml_textblocklist(xmlarg, textblocklist);
+      return output;
     }
 
   }
@@ -2004,13 +2073,15 @@ public final class Xml {
           Core.t_any_from_reduce.vx_fn_new((reduce_any, current_any) -> {
             Xml.Type_xml reduce = Core.f_any_from_any(Xml.t_xml, reduce_any);
             Textblock.Type_textblock current = Core.f_any_from_any(Textblock.t_textblock, current_any);
-            Core.Type_any output_1 = 
-                Xml.f_xml_property_from_xml_textblock(reduce, current);
-            return output_1;
+            Core.Type_any output_2 = Xml.f_xml_property_from_xml_textblock(
+              reduce,
+              current
+            );
+            return output_2;
           })
         );
-        Core.Type_any output_2 = xmlchg;
-        return output_2;
+        Core.Type_any output_1 = xmlchg;
+        return output_1;
       })
     );
     return output;
@@ -2084,6 +2155,7 @@ public final class Xml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Xml.Type_xml xmlarg = Core.f_any_from_any(Xml.t_xml, arglist.vx_any(Core.vx_new_int(0)));
@@ -2094,7 +2166,8 @@ public final class Xml {
 
     @Override
     public Xml.Type_xml vx_xml_property_from_xml_textblock(final Xml.Type_xml xmlarg, final Textblock.Type_textblock tbarg) {
-      return Xml.f_xml_property_from_xml_textblock(xmlarg, tbarg);
+      Xml.Type_xml output = Xml.f_xml_property_from_xml_textblock(xmlarg, tbarg);
+      return output;
     }
 
   }
@@ -2121,24 +2194,36 @@ public final class Xml {
             Core.f_case_1(
               Core.vx_new_string(""),
               Core.t_any_from_func.vx_fn_new(() -> {
-                return Core.f_if_2(
+                Core.Type_any output_2 = Core.f_if_2(
                   Xml.t_xml,
                   Core.vx_new(
                     Core.t_thenelselist,
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Type.f_boolean_from_string_starts(text, Core.vx_new_string("/"));
+                        Core.Type_any output_3 = Type.f_boolean_from_string_starts(
+                          text,
+                          Core.vx_new_string("/")
+                        );
+                        return output_3;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Xml.f_xml_close_from_xml_textblock(xmlarg, tbarg);
+                        Core.Type_any output_4 = Xml.f_xml_close_from_xml_textblock(
+                          xmlarg,
+                          tbarg
+                        );
+                        return output_4;
                       })
                     ),
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_eq(Core.vx_new_string(":notag"), tag);
+                        Core.Type_any output_5 = Core.f_eq(
+                          Core.vx_new_string(":notag"),
+                          tag
+                        );
+                        return output_5;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.f_copy(
+                        Core.Type_any output_6 = Core.f_copy(
                           xmlarg,
                           Core.vx_new(
                             Core.t_anylist,
@@ -2146,14 +2231,19 @@ public final class Xml {
                             text
                           )
                         );
+                        return output_6;
                       })
                     ),
                     Core.f_then(
                       Core.t_boolean_from_func.vx_fn_new(() -> {
-                        return Core.f_eq(Core.vx_new_string(""), prop);
+                        Core.Type_any output_7 = Core.f_eq(
+                          Core.vx_new_string(""),
+                          prop
+                        );
+                        return output_7;
                       }),
                       Core.t_any_from_func.vx_fn_new(() -> {
-                        return Core.f_copy(
+                        Core.Type_any output_8 = Core.f_copy(
                           xmlarg,
                           Core.vx_new(
                             Core.t_anylist,
@@ -2161,23 +2251,30 @@ public final class Xml {
                             text
                           )
                         );
+                        return output_8;
                       })
                     )
                   )
                 );
+                return output_2;
               })
             ),
             Core.f_case_1(
               Core.vx_new_string("delimquote"),
               Core.t_any_from_func.vx_fn_new(() -> {
-                return Core.f_if_1(
+                Core.Type_any output_9 = Core.f_if_1(
                   Xml.t_xml,
-                  Core.f_eq(Core.vx_new_string(""), prop),
+                  Core.f_eq(
+                    Core.vx_new_string(""),
+                    prop
+                  ),
                   Core.f_copy(
                     xmlarg,
                     Core.vx_new(
                       Core.t_anylist,
-                      Core.f_msg_from_error(Core.vx_new_string("Found quoted text with no matching attribute."))
+                      Core.f_msg_from_error(
+                        Core.vx_new_string("Found quoted text with no matching attribute.")
+                      )
                     )
                   ),
                   Core.f_copy(
@@ -2202,11 +2299,13 @@ public final class Xml {
                     )
                   )
                 );
+                return output_9;
               })
             ),
             Core.f_else(
               Core.t_any_from_func.vx_fn_new(() -> {
-                return xmlarg;
+                Core.Type_any output_10 = xmlarg;
+                return output_10;
               })
             )
           )
@@ -2298,6 +2397,7 @@ public final class Xml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
@@ -2308,7 +2408,8 @@ public final class Xml {
 
     @Override
     public Xml.Type_xml vx_xml_read_from_file(final Core.Type_context context, final File.Type_file file) {
-      return Xml.f_xml_read_from_file(context, file);
+      Xml.Type_xml output = Xml.f_xml_read_from_file(context, file);
+      return output;
     }
 
   }
@@ -2321,8 +2422,13 @@ public final class Xml {
     output = Core.f_let(
       Xml.t_xml,
       Core.t_any_from_func.vx_fn_new(() -> {
-        File.Type_file loaded = File.f_file_read_from_file(context, file);
-        Core.Type_any output_1 = Xml.f_xml_from_file(loaded);
+        File.Type_file loaded = File.f_file_read_from_file(
+          context,
+          file
+        );
+        Core.Type_any output_1 = Xml.f_xml_from_file(
+          loaded
+        );
         return output_1;
       })
     );
@@ -2397,6 +2503,7 @@ public final class Xml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Xml.Type_xml xmlarg = Core.f_any_from_any(Xml.t_xml, arglist.vx_any(Core.vx_new_int(0)));
@@ -2407,7 +2514,8 @@ public final class Xml {
 
     @Override
     public Xml.Type_xml vx_xml_text_from_xml_textblock(final Xml.Type_xml xmlarg, final Textblock.Type_textblock tb) {
-      return Xml.f_xml_text_from_xml_textblock(xmlarg, tb);
+      Xml.Type_xml output = Xml.f_xml_text_from_xml_textblock(xmlarg, tb);
+      return output;
     }
 
   }
@@ -2435,15 +2543,19 @@ public final class Xml {
             Core.t_thenelselist,
             Core.f_then(
               Core.t_boolean_from_func.vx_fn_new(() -> {
-                return Core.f_is_empty_1(xmlarg);
+                Core.Type_any output_2 = Core.f_is_empty_1(
+                  xmlarg
+                );
+                return output_2;
               }),
               Core.t_any_from_func.vx_fn_new(() -> {
-                return xmlchg;
+                Core.Type_any output_3 = xmlchg;
+                return output_3;
               })
             ),
             Core.f_else(
               Core.t_any_from_func.vx_fn_new(() -> {
-                return Core.f_copy(
+                Core.Type_any output_4 = Core.f_copy(
                   xmlarg,
                   Core.vx_new(
                     Core.t_anylist,
@@ -2458,6 +2570,7 @@ public final class Xml {
                     )
                   )
                 );
+                return output_4;
               })
             )
           )
@@ -2549,6 +2662,7 @@ public final class Xml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       File.Type_file file = Core.f_any_from_any(File.t_file, arglist.vx_any(Core.vx_new_int(0)));
@@ -2558,7 +2672,8 @@ public final class Xml {
 
     @Override
     public Xml.Type_xml vx_xml_from_file(final File.Type_file file) {
-      return Xml.f_xml_from_file(file);
+      Xml.Type_xml output = Xml.f_xml_from_file(file);
+      return output;
     }
 
   }
@@ -2572,7 +2687,9 @@ public final class Xml {
       Xml.t_xml,
       Core.t_any_from_func.vx_fn_new(() -> {
         Core.Type_string text = file.text();
-        Core.Type_any output_1 = Xml.f_xml_from_string(text);
+        Core.Type_any output_1 = Xml.f_xml_from_string(
+          text
+        );
         return output_1;
       })
     );
@@ -2660,6 +2777,7 @@ public final class Xml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
@@ -2669,7 +2787,8 @@ public final class Xml {
 
     @Override
     public Xml.Type_xml vx_xml_from_string(final Core.Type_string text) {
-      return Xml.f_xml_from_string(text);
+      Xml.Type_xml output = Xml.f_xml_from_string(text);
+      return output;
     }
 
   }
@@ -2682,8 +2801,12 @@ public final class Xml {
     output = Core.f_let(
       Xml.t_xml,
       Core.t_any_from_func.vx_fn_new(() -> {
-        Textblock.Type_textblock tb = Xml.f_textblock_xml_from_string(text);
-        Core.Type_any output_1 = Xml.f_xml_from_textblock(tb);
+        Textblock.Type_textblock tb = Xml.f_textblock_xml_from_string(
+          text
+        );
+        Core.Type_any output_1 = Xml.f_xml_from_textblock(
+          tb
+        );
         return output_1;
       })
     );
@@ -2771,6 +2894,7 @@ public final class Xml {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Textblock.Type_textblock textblock = Core.f_any_from_any(Textblock.t_textblock, arglist.vx_any(Core.vx_new_int(0)));
@@ -2780,7 +2904,8 @@ public final class Xml {
 
     @Override
     public Xml.Type_xml vx_xml_from_textblock(final Textblock.Type_textblock textblock) {
-      return Xml.f_xml_from_textblock(textblock);
+      Xml.Type_xml output = Xml.f_xml_from_textblock(textblock);
+      return output;
     }
 
   }

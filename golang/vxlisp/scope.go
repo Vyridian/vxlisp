@@ -102,7 +102,7 @@ func ListScopeAddFuncArg(listscope []vxscope, fnc *vxfunc) []vxscope {
 
 func ListScopeAddFuncLocalArg(listscope []vxscope, fnc *vxfunc) []vxscope {
 	output := listscope
-	localargs := ListLocalArgFromFunc(fnc)
+	localargs := ListArgLocalFromFunc(fnc)
 	if len(localargs) > 0 {
 		funcscope := ScopeFromListFuncArg(localargs)
 		funcscope.pkgname = ":localargs"

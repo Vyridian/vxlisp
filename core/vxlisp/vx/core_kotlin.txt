@@ -374,8 +374,8 @@
   // vx_int_from_string(string)
   fun vx_int_from_string(
     text : String
-  ) int {
-    var output : int = 0
+  ) Int {
+    var output : Int = 0
     try {
       output = Integer.parseInt(text)
     } catch (Exception e) {
@@ -387,7 +387,7 @@
   fun vx_int_from_string_find(
     text : String,
     find : String
-  ) : int {
+  ) : Int {
     return text.indexOf(find)
   }
 
@@ -395,7 +395,7 @@
   fun vx_int_from_string_findlast(
     text : String,
     findlast : String
-  ) : int {
+  ) : Int {
     return text.lastIndexOf(findlast)
   }
 
@@ -682,7 +682,7 @@
       val vallist : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, value)
       val typedef : vx_core.Type_typedef = vallist.vx_typedef()
       val typedefname : vx_core.Type_string = typedef.name()
-      var indentint : int = indent
+      var indentint : Int = indent
       indentint += 1
       val listval : List<vx_core.Type_any> = vallist.vx_list()
       for (valsub : vx_core.Type_any in listval) {
@@ -698,7 +698,7 @@
       val valmap : vx_core.Type_map = vx_core.f_any_from_any(vx_core.t_map, value)
       val typedef : vx_core.Type_typedef = valmap.vx_typedef()
       val typedefname : vx_core.Type_string = typedef.name()
-      var indentint : int = indent
+      var indentint : Int = indent
       indentint += 2
       val mapval : Map<String, vx_core.Type_any> = valmap.vx_map()
       val keys : Set<String> = mapval.keySet()
@@ -724,7 +724,7 @@
       val valstruct : vx_core.Type_struct = vx_core.f_any_from_any(vx_core.t_struct, value)
       val typedef : vx_core.Type_typedef = valstruct.vx_typedef()
       val typedefname : vx_core.Type_string = typedef.name()
-      var indentint2 : int = indent
+      var indentint2 : Int = indent
       indentint2 += 2
       val mapval2 : Map<String, vx_core.Type_any> = valstruct.vx_map()
       val keys2 : Set<String> = mapval2.keySet()
@@ -768,7 +768,7 @@
     end : int
   ) : String {
     var output : String = ""
-    maxlen : int = text.length()
+    maxlen : Int = text.length()
     if (end < 0) {
      end += maxlen
     }

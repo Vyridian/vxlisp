@@ -43,7 +43,9 @@ public class SampleTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_int(5),
-              Vx.Sample.f_myfunc(Vx.Core.vx_new_int(1))
+              Vx.Sample.f_myfunc(
+                Vx.Core.vx_new_int(1)
+              )
             )
         )
       )

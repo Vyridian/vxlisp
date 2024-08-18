@@ -440,7 +440,8 @@ public static class Uihtml {
     }
 
     public Vx.Core.Type_boolean vx_boolean_layoutremove_html(Vx.Ui.Ui.Type_ui ui) {
-      return Vx.Ui.Html.Uihtml.f_boolean_layoutremove_html(ui);
+      Vx.Core.Type_boolean output = Vx.Ui.Html.Uihtml.f_boolean_layoutremove_html(ui);
+      return output;
     }
 
   }
@@ -454,7 +455,9 @@ public static class Uihtml {
       Vx.Core.t_boolean,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_string id = ui.uid();
-        Vx.Core.Type_any output_1 = Vx.Web.Htmldoc.f_boolean_remove_from_id(id);
+        Vx.Core.Type_any output_1 = Vx.Web.Htmldoc.f_boolean_remove_from_id(
+          id
+        );
         return output_1;
       })
     );
@@ -542,7 +545,8 @@ public static class Uihtml {
     }
 
     public Vx.Core.Type_boolean vx_boolean_layoutselected_html(Vx.Ui.Ui.Type_ui ui) {
-      return Vx.Ui.Html.Uihtml.f_boolean_layoutselected_html(ui);
+      Vx.Core.Type_boolean output = Vx.Ui.Html.Uihtml.f_boolean_layoutselected_html(ui);
+      return output;
     }
 
   }
@@ -552,7 +556,9 @@ public static class Uihtml {
 
   public static Vx.Core.Type_boolean f_boolean_layoutselected_html(Vx.Ui.Ui.Type_ui ui) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
-    output = Vx.Ui.Html.Uihtml.f_boolean_writeclass_from_ui(ui);
+    output = Vx.Ui.Html.Uihtml.f_boolean_writeclass_from_ui(
+      ui
+    );
     return output;
   }
 
@@ -637,7 +643,8 @@ public static class Uihtml {
     }
 
     public Vx.Core.Type_boolean vx_boolean_layoutvisible_html(Vx.Ui.Ui.Type_ui ui) {
-      return Vx.Ui.Html.Uihtml.f_boolean_layoutvisible_html(ui);
+      Vx.Core.Type_boolean output = Vx.Ui.Html.Uihtml.f_boolean_layoutvisible_html(ui);
+      return output;
     }
 
   }
@@ -647,7 +654,9 @@ public static class Uihtml {
 
   public static Vx.Core.Type_boolean f_boolean_layoutvisible_html(Vx.Ui.Ui.Type_ui ui) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
-    output = Vx.Ui.Html.Uihtml.f_boolean_writeclass_from_ui(ui);
+    output = Vx.Ui.Html.Uihtml.f_boolean_writeclass_from_ui(
+      ui
+    );
     return output;
   }
 
@@ -733,7 +742,8 @@ public static class Uihtml {
     }
 
     public Vx.Core.Type_boolean vx_boolean_print_html(Vx.Core.Type_context context, Vx.Ui.Ui.Type_ui ui) {
-      return Vx.Ui.Html.Uihtml.f_boolean_print_html(context, ui);
+      Vx.Core.Type_boolean output = Vx.Ui.Html.Uihtml.f_boolean_print_html(context, ui);
+      return output;
     }
 
   }
@@ -747,10 +757,20 @@ public static class Uihtml {
       Vx.Core.t_boolean,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_string uid = ui.uid();
-        Vx.Ui.Ui.Type_stylesheet stylesheetui = Vx.Ui.Ui.f_stylesheet_readstate(context);
-        Vx.Web.Html.Type_stylesheet stylesheethtml = Vx.Ui.Html.Uihtml.f_stylesheet_from_stylesheet(stylesheetui);
-        Vx.Core.Type_string styletext = Vx.Web.Html.f_string_from_stylesheet_indent(stylesheethtml, Vx.Core.vx_new_int(0));
-        Vx.Core.Type_any output_1 = Vx.Web.Htmldoc.f_boolean_print_from_id_stylesheettext(uid, styletext);
+        Vx.Ui.Ui.Type_stylesheet stylesheetui = Vx.Ui.Ui.f_stylesheet_readstate(
+          context
+        );
+        Vx.Web.Html.Type_stylesheet stylesheethtml = Vx.Ui.Html.Uihtml.f_stylesheet_from_stylesheet(
+          stylesheetui
+        );
+        Vx.Core.Type_string styletext = Vx.Web.Html.f_string_from_stylesheet_indent(
+          stylesheethtml,
+          Vx.Core.vx_new_int(0)
+        );
+        Vx.Core.Type_any output_1 = Vx.Web.Htmldoc.f_boolean_print_from_id_stylesheettext(
+          uid,
+          styletext
+        );
         return output_1;
       })
     );
@@ -838,7 +858,8 @@ public static class Uihtml {
     }
 
     public Vx.Core.Type_boolean vx_boolean_writeclass_from_ui(Vx.Ui.Ui.Type_ui ui) {
-      return Vx.Ui.Html.Uihtml.f_boolean_writeclass_from_ui(ui);
+      Vx.Core.Type_boolean output = Vx.Ui.Html.Uihtml.f_boolean_writeclass_from_ui(ui);
+      return output;
     }
 
   }
@@ -852,8 +873,14 @@ public static class Uihtml {
       Vx.Core.t_boolean,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_string id = ui.uid();
-        Vx.Core.Type_string sclass = Vx.Ui.Html.Uihtml.f_string_class_from_ui(ui);
-        Vx.Core.Type_any output_1 = Vx.Web.Htmldoc.f_boolean_write_from_id_attribute_value(id, Vx.Core.vx_new_string("class"), sclass);
+        Vx.Core.Type_string sclass = Vx.Ui.Html.Uihtml.f_string_class_from_ui(
+          ui
+        );
+        Vx.Core.Type_any output_1 = Vx.Web.Htmldoc.f_boolean_write_from_id_attribute_value(
+          id,
+          Vx.Core.vx_new_string("class"),
+          sclass
+        );
         return output_1;
       })
     );
@@ -941,7 +968,8 @@ public static class Uihtml {
     }
 
     public Vx.Core.Type_boolean vx_boolean_writeeventsall_from_ui(Vx.Ui.Ui.Type_ui ui) {
-      return Vx.Ui.Html.Uihtml.f_boolean_writeeventsall_from_ui(ui);
+      Vx.Core.Type_boolean output = Vx.Ui.Html.Uihtml.f_boolean_writeeventsall_from_ui(ui);
+      return output;
     }
 
   }
@@ -955,9 +983,16 @@ public static class Uihtml {
       Vx.Core.t_boolean,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Ui.Ui.Type_uimap uimap = ui.uimap();
-        Vx.Core.Type_boolean iswrite1 = Vx.Web.Htmldoc.f_boolean_writeevents_from_ui(ui);
-        Vx.Core.Type_boolean iswrite2 = Vx.Ui.Html.Uihtml.f_boolean_writeeventsall_from_uimap(uimap);
-        Vx.Core.Type_any output_1 = Vx.Core.f_and(iswrite1, iswrite2);
+        Vx.Core.Type_boolean iswrite1 = Vx.Web.Htmldoc.f_boolean_writeevents_from_ui(
+          ui
+        );
+        Vx.Core.Type_boolean iswrite2 = Vx.Ui.Html.Uihtml.f_boolean_writeeventsall_from_uimap(
+          uimap
+        );
+        Vx.Core.Type_any output_1 = Vx.Core.f_and(
+          iswrite1,
+          iswrite2
+        );
         return output_1;
       })
     );
@@ -1045,7 +1080,8 @@ public static class Uihtml {
     }
 
     public Vx.Core.Type_boolean vx_boolean_writeeventsall_from_uimap(Vx.Ui.Ui.Type_uimap uimap) {
-      return Vx.Ui.Html.Uihtml.f_boolean_writeeventsall_from_uimap(uimap);
+      Vx.Core.Type_boolean output = Vx.Ui.Html.Uihtml.f_boolean_writeeventsall_from_uimap(uimap);
+      return output;
     }
 
   }
@@ -1064,13 +1100,16 @@ public static class Uihtml {
           Vx.Core.t_any_from_key_value.vx_fn_new((key_any, value_any) => {
             Vx.Core.Type_string key = Vx.Core.f_any_from_any(Vx.Core.t_string, key_any);
             Vx.Ui.Ui.Type_ui value = Vx.Core.f_any_from_any(Vx.Ui.Ui.t_ui, value_any);
-            Vx.Core.Type_any output_1 = 
-                Vx.Ui.Html.Uihtml.f_boolean_writeeventsall_from_ui(value);
-            return output_1;
+            Vx.Core.Type_any output_2 = Vx.Ui.Html.Uihtml.f_boolean_writeeventsall_from_ui(
+              value
+            );
+            return output_2;
           })
         );
-        Vx.Core.Type_any output_2 = Vx.Core.f_and_1(boollist);
-        return output_2;
+        Vx.Core.Type_any output_1 = Vx.Core.f_and_1(
+          boollist
+        );
+        return output_1;
       })
     );
     return output;
@@ -1157,7 +1196,8 @@ public static class Uihtml {
     }
 
     public Vx.Core.Type_boolean vx_boolean_writeselected_from_ui(Vx.Ui.Ui.Type_ui ui) {
-      return Vx.Ui.Html.Uihtml.f_boolean_writeselected_from_ui(ui);
+      Vx.Core.Type_boolean output = Vx.Ui.Html.Uihtml.f_boolean_writeselected_from_ui(ui);
+      return output;
     }
 
   }
@@ -1167,7 +1207,9 @@ public static class Uihtml {
 
   public static Vx.Core.Type_boolean f_boolean_writeselected_from_ui(Vx.Ui.Ui.Type_ui ui) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
-    output = Vx.Ui.Html.Uihtml.f_boolean_writeclass_from_ui(ui);
+    output = Vx.Ui.Html.Uihtml.f_boolean_writeclass_from_ui(
+      ui
+    );
     return output;
   }
 
@@ -1252,7 +1294,8 @@ public static class Uihtml {
     }
 
     public Vx.Core.Type_boolean vx_boolean_writevisible_from_ui(Vx.Ui.Ui.Type_ui ui) {
-      return Vx.Ui.Html.Uihtml.f_boolean_writevisible_from_ui(ui);
+      Vx.Core.Type_boolean output = Vx.Ui.Html.Uihtml.f_boolean_writevisible_from_ui(ui);
+      return output;
     }
 
   }
@@ -1262,7 +1305,9 @@ public static class Uihtml {
 
   public static Vx.Core.Type_boolean f_boolean_writevisible_from_ui(Vx.Ui.Ui.Type_ui ui) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
-    output = Vx.Ui.Html.Uihtml.f_boolean_writeclass_from_ui(ui);
+    output = Vx.Ui.Html.Uihtml.f_boolean_writeclass_from_ui(
+      ui
+    );
     return output;
   }
 
@@ -1333,7 +1378,8 @@ public static class Uihtml {
     }
 
     public Vx.Core.Type_context vx_context_write(Vx.Core.Type_context context) {
-      return Vx.Ui.Html.Uihtml.f_context_write(context);
+      Vx.Core.Type_context output = Vx.Ui.Html.Uihtml.f_context_write(context);
+      return output;
     }
 
   }
@@ -1343,7 +1389,9 @@ public static class Uihtml {
 
   public static Vx.Core.Type_context f_context_write(Vx.Core.Type_context context) {
     Vx.Core.Type_context output = Vx.Core.e_context;
-    output = Vx.Web.Htmldoc.f_context_write(context);
+    output = Vx.Web.Htmldoc.f_context_write(
+      context
+    );
     return output;
   }
 
@@ -1428,7 +1476,8 @@ public static class Uihtml {
     }
 
     public Vx.Web.Html.Type_divchild vx_divchild_from_ui(Vx.Ui.Ui.Type_ui ui) {
-      return Vx.Ui.Html.Uihtml.f_divchild_from_ui(ui);
+      Vx.Web.Html.Type_divchild output = Vx.Ui.Html.Uihtml.f_divchild_from_ui(ui);
+      return output;
     }
 
   }
@@ -1445,8 +1494,12 @@ public static class Uihtml {
         Vx.Ui.Ui.Type_uimap uimapchild = ui.uimap();
         Vx.Ui.Ui.Type_style uistyle = ui.style();
         Vx.Ui.Ui.Type_stylelist uistyles = ui.stylelist();
-        Vx.Web.Html.Type_style styleunique = Vx.Ui.Html.Uihtml.f_style_from_style(uistyle);
-        Vx.Web.Html.Type_stylelist htmlstyles = Vx.Ui.Html.Uihtml.f_stylelist_from_stylelist(uistyles);
+        Vx.Web.Html.Type_style styleunique = Vx.Ui.Html.Uihtml.f_style_from_style(
+          uistyle
+        );
+        Vx.Web.Html.Type_stylelist htmlstyles = Vx.Ui.Html.Uihtml.f_stylelist_from_stylelist(
+          uistyles
+        );
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Web.Html.t_div,
           Vx.Core.vx_new(
@@ -1546,7 +1599,8 @@ public static class Uihtml {
     }
 
     public Vx.Web.Html.Type_divchildlist vx_divchildlist_from_uimap(Vx.Ui.Ui.Type_uimap uimap) {
-      return Vx.Ui.Html.Uihtml.f_divchildlist_from_uimap(uimap);
+      Vx.Web.Html.Type_divchildlist output = Vx.Ui.Html.Uihtml.f_divchildlist_from_uimap(uimap);
+      return output;
     }
 
   }
@@ -1562,22 +1616,21 @@ public static class Uihtml {
       Vx.Core.t_any_from_key_value.vx_fn_new((key_any, value_any) => {
         Vx.Core.Type_string key = Vx.Core.f_any_from_any(Vx.Core.t_string, key_any);
         Vx.Ui.Ui.Type_ui value = Vx.Core.f_any_from_any(Vx.Ui.Ui.t_ui, value_any);
-        Vx.Core.Type_any output_1 = 
-          Vx.Core.f_let(
-            Vx.Web.Html.t_div,
-            Vx.Core.t_any_from_func.vx_fn_new(() => {
-              Vx.Core.Type_string uid = value.uid();
-              Vx.Core.Type_any output_2 = Vx.Core.f_new(
-                Vx.Web.Html.t_div,
-                Vx.Core.vx_new(
-                  Vx.Core.t_anylist,
-                  Vx.Core.vx_new_string(":id"),
-                  uid
-                )
-              );
-              return output_2;
-            })
-          );
+        Vx.Core.Type_any output_1 = Vx.Core.f_let(
+          Vx.Web.Html.t_div,
+          Vx.Core.t_any_from_func.vx_fn_new(() => {
+            Vx.Core.Type_string uid = value.uid();
+            Vx.Core.Type_any output_2 = Vx.Core.f_new(
+              Vx.Web.Html.t_div,
+              Vx.Core.vx_new(
+                Vx.Core.t_anylist,
+                Vx.Core.vx_new_string(":id"),
+                uid
+              )
+            );
+            return output_2;
+          })
+        );
         return output_1;
       })
     );
@@ -1665,7 +1718,8 @@ public static class Uihtml {
     }
 
     public Vx.Web.Html.Type_divchildlist vx_divchildlist_from_uimap_1(Vx.Ui.Ui.Type_uimap uimap) {
-      return Vx.Ui.Html.Uihtml.f_divchildlist_from_uimap_1(uimap);
+      Vx.Web.Html.Type_divchildlist output = Vx.Ui.Html.Uihtml.f_divchildlist_from_uimap_1(uimap);
+      return output;
     }
 
   }
@@ -1681,22 +1735,21 @@ public static class Uihtml {
       Vx.Core.t_any_from_key_value.vx_fn_new((key_any, value_any) => {
         Vx.Core.Type_string key = Vx.Core.f_any_from_any(Vx.Core.t_string, key_any);
         Vx.Ui.Ui.Type_ui value = Vx.Core.f_any_from_any(Vx.Ui.Ui.t_ui, value_any);
-        Vx.Core.Type_any output_1 = 
-          Vx.Core.f_let(
-            Vx.Web.Html.t_div,
-            Vx.Core.t_any_from_func.vx_fn_new(() => {
-              Vx.Core.Type_string uid = value.uid();
-              Vx.Core.Type_any output_2 = Vx.Core.f_new(
-                Vx.Web.Html.t_div,
-                Vx.Core.vx_new(
-                  Vx.Core.t_anylist,
-                  Vx.Core.vx_new_string(":id"),
-                  uid
-                )
-              );
-              return output_2;
-            })
-          );
+        Vx.Core.Type_any output_1 = Vx.Core.f_let(
+          Vx.Web.Html.t_div,
+          Vx.Core.t_any_from_func.vx_fn_new(() => {
+            Vx.Core.Type_string uid = value.uid();
+            Vx.Core.Type_any output_2 = Vx.Core.f_new(
+              Vx.Web.Html.t_div,
+              Vx.Core.vx_new(
+                Vx.Core.t_anylist,
+                Vx.Core.vx_new_string(":id"),
+                uid
+              )
+            );
+            return output_2;
+          })
+        );
         return output_1;
       })
     );
@@ -1776,7 +1829,8 @@ public static class Uihtml {
     }
 
     public Vx.Web.Html.Type_divchildlist vx_divchildlist_from_uimap_origmap_parent(Vx.Ui.Ui.Type_uimap uimap, Vx.Ui.Ui.Type_uimap origmap, Vx.Ui.Ui.Type_ui parent) {
-      return Vx.Ui.Html.Uihtml.f_divchildlist_from_uimap_origmap_parent(uimap, origmap, parent);
+      Vx.Web.Html.Type_divchildlist output = Vx.Ui.Html.Uihtml.f_divchildlist_from_uimap_origmap_parent(uimap, origmap, parent);
+      return output;
     }
 
   }
@@ -1792,15 +1846,22 @@ public static class Uihtml {
       Vx.Core.t_any_from_key_value.vx_fn_new((key_any, value_any) => {
         Vx.Core.Type_string key = Vx.Core.f_any_from_any(Vx.Core.t_string, key_any);
         Vx.Ui.Ui.Type_ui value = Vx.Core.f_any_from_any(Vx.Ui.Ui.t_ui, value_any);
-        Vx.Core.Type_any output_1 = 
-          Vx.Core.f_let(
-            Vx.Web.Html.t_node,
-            Vx.Core.t_any_from_func.vx_fn_new(() => {
-              Vx.Ui.Ui.Type_ui origvalue = Vx.Core.f_any_from_map(Vx.Ui.Ui.t_ui, origmap, key);
-              Vx.Core.Type_any output_2 = Vx.Ui.Html.Uihtml.f_node_from_ui_orig_parent(value, origvalue, parent);
-              return output_2;
-            })
-          );
+        Vx.Core.Type_any output_1 = Vx.Core.f_let(
+          Vx.Web.Html.t_node,
+          Vx.Core.t_any_from_func.vx_fn_new(() => {
+            Vx.Ui.Ui.Type_ui origvalue = Vx.Core.f_any_from_map(
+              Vx.Ui.Ui.t_ui,
+              origmap,
+              key
+            );
+            Vx.Core.Type_any output_2 = Vx.Ui.Html.Uihtml.f_node_from_ui_orig_parent(
+              value,
+              origvalue,
+              parent
+            );
+            return output_2;
+          })
+        );
         return output_1;
       })
     );
@@ -1879,7 +1940,8 @@ public static class Uihtml {
     }
 
     public Vx.Web.Html.Type_node vx_node_app_from_ui_orig_parent(Vx.Ui.Ui.Type_ui ui, Vx.Ui.Ui.Type_ui orig, Vx.Ui.Ui.Type_ui parent) {
-      return Vx.Ui.Html.Uihtml.f_node_app_from_ui_orig_parent(ui, orig, parent);
+      Vx.Web.Html.Type_node output = Vx.Ui.Html.Uihtml.f_node_app_from_ui_orig_parent(ui, orig, parent);
+      return output;
     }
 
   }
@@ -1895,7 +1957,11 @@ public static class Uihtml {
         Vx.Core.Type_string uid = ui.uid();
         Vx.Ui.Ui.Type_uimap uimap = ui.uimap();
         Vx.Ui.Ui.Type_uimap origmap = orig.uimap();
-        Vx.Web.Html.Type_divchildlist children = Vx.Ui.Html.Uihtml.f_divchildlist_from_uimap_origmap_parent(uimap, origmap, ui);
+        Vx.Web.Html.Type_divchildlist children = Vx.Ui.Html.Uihtml.f_divchildlist_from_uimap_origmap_parent(
+          uimap,
+          origmap,
+          ui
+        );
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Web.Html.t_div,
           Vx.Core.vx_new(
@@ -1984,7 +2050,8 @@ public static class Uihtml {
     }
 
     public Vx.Web.Html.Type_node vx_node_default_from_ui_orig_parent(Vx.Ui.Ui.Type_ui ui, Vx.Ui.Ui.Type_ui orig, Vx.Ui.Ui.Type_ui parent) {
-      return Vx.Ui.Html.Uihtml.f_node_default_from_ui_orig_parent(ui, orig, parent);
+      Vx.Web.Html.Type_node output = Vx.Ui.Html.Uihtml.f_node_default_from_ui_orig_parent(ui, orig, parent);
+      return output;
     }
 
   }
@@ -2001,9 +2068,17 @@ public static class Uihtml {
         Vx.Ui.Ui.Type_uimap uimap = ui.uimap();
         Vx.Ui.Ui.Type_style uistyle = ui.style();
         Vx.Ui.Ui.Type_uimap origmap = orig.uimap();
-        Vx.Web.Html.Type_style style = Vx.Ui.Html.Uihtml.f_style_from_style(uistyle);
-        Vx.Web.Html.Type_stylelist styles = Vx.Ui.Html.Uihtml.f_stylelist_extra_from_ui(ui);
-        Vx.Web.Html.Type_divchildlist children = Vx.Ui.Html.Uihtml.f_divchildlist_from_uimap_origmap_parent(uimap, origmap, ui);
+        Vx.Web.Html.Type_style style = Vx.Ui.Html.Uihtml.f_style_from_style(
+          uistyle
+        );
+        Vx.Web.Html.Type_stylelist styles = Vx.Ui.Html.Uihtml.f_stylelist_extra_from_ui(
+          ui
+        );
+        Vx.Web.Html.Type_divchildlist children = Vx.Ui.Html.Uihtml.f_divchildlist_from_uimap_origmap_parent(
+          uimap,
+          origmap,
+          ui
+        );
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Web.Html.t_div,
           Vx.Core.vx_new(
@@ -2096,7 +2171,8 @@ public static class Uihtml {
     }
 
     public Vx.Web.Html.Type_node vx_node_image_from_ui_orig_parent(Vx.Ui.Ui.Type_ui ui, Vx.Ui.Ui.Type_ui orig, Vx.Ui.Ui.Type_ui parent) {
-      return Vx.Ui.Html.Uihtml.f_node_image_from_ui_orig_parent(ui, orig, parent);
+      Vx.Web.Html.Type_node output = Vx.Ui.Html.Uihtml.f_node_image_from_ui_orig_parent(ui, orig, parent);
+      return output;
     }
 
   }
@@ -2112,10 +2188,19 @@ public static class Uihtml {
         Vx.Core.Type_string uid = ui.uid();
         Vx.Ui.Ui.Type_style uistyle = ui.style();
         Vx.Core.Type_any data = ui.data();
-        Vx.Data.File.Type_file file = Vx.Core.f_any_from_any(Vx.Data.File.t_file, data);
-        Vx.Core.Type_string path = Vx.Data.File.f_pathfull_from_file(file);
-        Vx.Web.Html.Type_style style = Vx.Ui.Html.Uihtml.f_style_from_style(uistyle);
-        Vx.Web.Html.Type_stylelist styles = Vx.Ui.Html.Uihtml.f_stylelist_extra_from_ui(ui);
+        Vx.Data.File.Type_file file = Vx.Core.f_any_from_any(
+          Vx.Data.File.t_file,
+          data
+        );
+        Vx.Core.Type_string path = Vx.Data.File.f_pathfull_from_file(
+          file
+        );
+        Vx.Web.Html.Type_style style = Vx.Ui.Html.Uihtml.f_style_from_style(
+          uistyle
+        );
+        Vx.Web.Html.Type_stylelist styles = Vx.Ui.Html.Uihtml.f_stylelist_extra_from_ui(
+          ui
+        );
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Web.Html.t_img,
           Vx.Core.vx_new(
@@ -2208,7 +2293,8 @@ public static class Uihtml {
     }
 
     public Vx.Web.Html.Type_node vx_node_label_from_ui_orig_parent(Vx.Ui.Ui.Type_ui ui, Vx.Ui.Ui.Type_ui orig, Vx.Ui.Ui.Type_ui parent) {
-      return Vx.Ui.Html.Uihtml.f_node_label_from_ui_orig_parent(ui, orig, parent);
+      Vx.Web.Html.Type_node output = Vx.Ui.Html.Uihtml.f_node_label_from_ui_orig_parent(ui, orig, parent);
+      return output;
     }
 
   }
@@ -2226,27 +2312,41 @@ public static class Uihtml {
         Vx.Ui.Ui.Type_uimap uimap = ui.uimap();
         Vx.Ui.Ui.Type_style uistyle = ui.style();
         Vx.Ui.Ui.Type_stylelist uistyles = ui.stylelist();
-        Vx.Core.Type_any datatype = Vx.Core.f_type_from_any(data);
-        Vx.Web.Html.Type_style style = Vx.Ui.Html.Uihtml.f_style_from_style(uistyle);
-        Vx.Web.Html.Type_stylelist styles = Vx.Ui.Html.Uihtml.f_stylelist_from_stylelist(uistyles);
+        Vx.Core.Type_any datatype = Vx.Core.f_type_from_any(
+          data
+        );
+        Vx.Web.Html.Type_style style = Vx.Ui.Html.Uihtml.f_style_from_style(
+          uistyle
+        );
+        Vx.Web.Html.Type_stylelist styles = Vx.Ui.Html.Uihtml.f_stylelist_from_stylelist(
+          uistyles
+        );
         Vx.Core.Type_string text = Vx.Core.f_if_2(
           Vx.Core.t_string,
           Vx.Core.vx_new(
             Vx.Core.t_thenelselist,
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_eqeq(
+                Vx.Core.Type_any output_2 = Vx.Core.f_eqeq(
                   datatype,
                   Vx.Core.t_string
                 );
+                return output_2;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_any_from_any(Vx.Core.t_string, data);
+                Vx.Core.Type_any output_3 = Vx.Core.f_any_from_any(
+                  Vx.Core.t_string,
+                  data
+                );
+                return output_3;
               })
             ),
             Vx.Core.f_else(
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_string_from_any(data);
+                Vx.Core.Type_any output_4 = Vx.Core.f_string_from_any(
+                  data
+                );
+                return output_4;
               })
             )
           )
@@ -2343,7 +2443,8 @@ public static class Uihtml {
     }
 
     public Vx.Web.Html.Type_node vx_node_layout_from_node_ui_parent(Vx.Web.Html.Type_node node, Vx.Ui.Ui.Type_ui ui, Vx.Ui.Ui.Type_ui parent) {
-      return Vx.Ui.Html.Uihtml.f_node_layout_from_node_ui_parent(node, ui, parent);
+      Vx.Web.Html.Type_node output = Vx.Ui.Html.Uihtml.f_node_layout_from_node_ui_parent(node, ui, parent);
+      return output;
     }
 
   }
@@ -2358,8 +2459,15 @@ public static class Uihtml {
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_string id = ui.uid();
         Vx.Core.Type_string parentid = parent.uid();
-        Vx.Core.Type_string htmltext = Vx.Web.Html.f_string_from_node_indent(node, Vx.Core.vx_new_int(2));
-        Vx.Core.Type_boolean htmldone = Vx.Web.Htmldoc.f_boolean_replace_from_id_parent_htmltext(id, parentid, htmltext);
+        Vx.Core.Type_string htmltext = Vx.Web.Html.f_string_from_node_indent(
+          node,
+          Vx.Core.vx_new_int(2)
+        );
+        Vx.Core.Type_boolean htmldone = Vx.Web.Htmldoc.f_boolean_replace_from_id_parent_htmltext(
+          id,
+          parentid,
+          htmltext
+        );
         Vx.Core.Type_any output_1 = node;
         return output_1;
       })
@@ -2439,7 +2547,8 @@ public static class Uihtml {
     }
 
     public Vx.Web.Html.Type_node vx_node_from_ui_orig_parent(Vx.Ui.Ui.Type_ui ui, Vx.Ui.Ui.Type_ui orig, Vx.Ui.Ui.Type_ui parent) {
-      return Vx.Ui.Html.Uihtml.f_node_from_ui_orig_parent(ui, orig, parent);
+      Vx.Web.Html.Type_node output = Vx.Ui.Html.Uihtml.f_node_from_ui_orig_parent(ui, orig, parent);
+      return output;
     }
 
   }
@@ -2462,18 +2571,33 @@ public static class Uihtml {
             Vx.Core.f_case_1(
               Vx.Ui.Ui.c_layout_image,
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Ui.Html.Uihtml.f_node_image_from_ui_orig_parent(ui, orig, parent);
+                Vx.Core.Type_any output_2 = Vx.Ui.Html.Uihtml.f_node_image_from_ui_orig_parent(
+                  ui,
+                  orig,
+                  parent
+                );
+                return output_2;
               })
             ),
             Vx.Core.f_case_1(
               Vx.Ui.Ui.c_layout_label,
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Ui.Html.Uihtml.f_node_label_from_ui_orig_parent(ui, orig, parent);
+                Vx.Core.Type_any output_3 = Vx.Ui.Html.Uihtml.f_node_label_from_ui_orig_parent(
+                  ui,
+                  orig,
+                  parent
+                );
+                return output_3;
               })
             ),
             Vx.Core.f_else(
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Ui.Html.Uihtml.f_node_default_from_ui_orig_parent(ui, orig, parent);
+                Vx.Core.Type_any output_4 = Vx.Ui.Html.Uihtml.f_node_default_from_ui_orig_parent(
+                  ui,
+                  orig,
+                  parent
+                );
+                return output_4;
               })
             )
           )
@@ -2565,7 +2689,8 @@ public static class Uihtml {
     }
 
     public Vx.Core.Type_string vx_string_class_from_ui(Vx.Ui.Ui.Type_ui ui) {
-      return Vx.Ui.Html.Uihtml.f_string_class_from_ui(ui);
+      Vx.Core.Type_string output = Vx.Ui.Html.Uihtml.f_string_class_from_ui(ui);
+      return output;
     }
 
   }
@@ -2578,8 +2703,12 @@ public static class Uihtml {
     output = Vx.Core.f_let(
       Vx.Core.t_string,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Web.Html.Type_stylelist htmlstyles = Vx.Ui.Html.Uihtml.f_stylelist_extra_from_ui(ui);
-        Vx.Core.Type_any output_1 = Vx.Web.Html.f_string_from_stylelist(htmlstyles);
+        Vx.Web.Html.Type_stylelist htmlstyles = Vx.Ui.Html.Uihtml.f_stylelist_extra_from_ui(
+          ui
+        );
+        Vx.Core.Type_any output_1 = Vx.Web.Html.f_string_from_stylelist(
+          htmlstyles
+        );
         return output_1;
       })
     );
@@ -2667,7 +2796,8 @@ public static class Uihtml {
     }
 
     public Vx.Core.Type_string vx_string_style_from_font(Vx.Ui.Ui.Type_font font) {
-      return Vx.Ui.Html.Uihtml.f_string_style_from_font(font);
+      Vx.Core.Type_string output = Vx.Ui.Html.Uihtml.f_string_style_from_font(font);
+      return output;
     }
 
   }
@@ -2689,18 +2819,26 @@ public static class Uihtml {
             Vx.Core.t_thenelselist,
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_gt(size, Vx.Core.vx_new_int(0));
+                Vx.Core.Type_any output_4 = Vx.Core.f_gt(
+                  size,
+                  Vx.Core.vx_new_int(0)
+                );
+                return output_4;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_new(
+                Vx.Core.Type_any output_5 = Vx.Core.f_new(
                   Vx.Core.t_string,
                   Vx.Core.vx_new(
                     Vx.Core.t_anylist,
-                    Vx.Core.f_divide(size, Vx.Core.vx_new_int(100)),
+                    Vx.Core.f_divide(
+                      size,
+                      Vx.Core.vx_new_int(100)
+                    ),
                     Vx.Core.vx_new_string("em"),
                     Vx.Core.vx_new_string(" ")
                   )
                 );
+                return output_5;
               })
             )
           )
@@ -2711,10 +2849,13 @@ public static class Uihtml {
             Vx.Core.t_thenelselist,
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_notempty(name);
+                Vx.Core.Type_any output_2 = Vx.Core.f_notempty(
+                  name
+                );
+                return output_2;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_new(
+                Vx.Core.Type_any output_3 = Vx.Core.f_new(
                   Vx.Core.t_string,
                   Vx.Core.vx_new(
                     Vx.Core.t_anylist,
@@ -2724,6 +2865,7 @@ public static class Uihtml {
                     Vx.Core.c_quote
                   )
                 );
+                return output_3;
               })
             )
           )
@@ -2815,7 +2957,8 @@ public static class Uihtml {
     }
 
     public Vx.Core.Type_string vx_string_style_from_image(Vx.Ui.Ui.Type_image image) {
-      return Vx.Ui.Html.Uihtml.f_string_style_from_image(image);
+      Vx.Core.Type_string output = Vx.Ui.Html.Uihtml.f_string_style_from_image(image);
+      return output;
     }
 
   }
@@ -2831,24 +2974,32 @@ public static class Uihtml {
         Vx.Core.t_thenelselist,
         Vx.Core.f_then(
           Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-            return Vx.Core.f_notempty_1(image);
+            Vx.Core.Type_any output_1 = Vx.Core.f_notempty_1(
+              image
+            );
+            return output_1;
           }),
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.f_let(
+            Vx.Core.Type_any output_2 = Vx.Core.f_let(
               Vx.Core.t_string,
               Vx.Core.t_any_from_func.vx_fn_new(() => {
                 Vx.Data.File.Type_file file = image.file();
-                Vx.Core.Type_string url = Vx.Data.File.f_pathfull_from_file(file);
-                Vx.Core.Type_any output_1 = Vx.Core.f_if_2(
+                Vx.Core.Type_string url = Vx.Data.File.f_pathfull_from_file(
+                  file
+                );
+                Vx.Core.Type_any output_3 = Vx.Core.f_if_2(
                   Vx.Core.t_string,
                   Vx.Core.vx_new(
                     Vx.Core.t_thenelselist,
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_notempty(url);
+                        Vx.Core.Type_any output_4 = Vx.Core.f_notempty(
+                          url
+                        );
+                        return output_4;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_new(
+                        Vx.Core.Type_any output_5 = Vx.Core.f_new(
                           Vx.Core.t_string,
                           Vx.Core.vx_new(
                             Vx.Core.t_anylist,
@@ -2857,13 +3008,15 @@ public static class Uihtml {
                             Vx.Core.vx_new_string(")")
                           )
                         );
+                        return output_5;
                       })
                     )
                   )
                 );
-                return output_1;
+                return output_3;
               })
             );
+            return output_2;
           })
         )
       )
@@ -2941,7 +3094,8 @@ public static class Uihtml {
     }
 
     public Vx.Core.Type_string vx_string_stylename_from_name_styletype(Vx.Core.Type_string name, Vx.Ui.Ui.Type_styletype styletype) {
-      return Vx.Ui.Html.Uihtml.f_string_stylename_from_name_styletype(name, styletype);
+      Vx.Core.Type_string output = Vx.Ui.Html.Uihtml.f_string_stylename_from_name_styletype(name, styletype);
+      return output;
     }
 
   }
@@ -2957,21 +3111,27 @@ public static class Uihtml {
         Vx.Core.t_thenelselist,
         Vx.Core.f_then(
           Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-            return Vx.Core.f_eq(Vx.Core.vx_new_string(""), name);
+            Vx.Core.Type_any output_1 = Vx.Core.f_eq(
+              Vx.Core.vx_new_string(""),
+              name
+            );
+            return output_1;
           }),
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.vx_new_string("");
+            Vx.Core.Type_any output_2 = Vx.Core.vx_new_string("");
+            return output_2;
           })
         ),
         Vx.Core.f_then(
           Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-            return Vx.Core.f_eqeq(
+            Vx.Core.Type_any output_3 = Vx.Core.f_eqeq(
               styletype,
               Vx.Ui.Ui.c_styletype_shared
             );
+            return output_3;
           }),
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.f_new(
+            Vx.Core.Type_any output_4 = Vx.Core.f_new(
               Vx.Core.t_string,
               Vx.Core.vx_new(
                 Vx.Core.t_anylist,
@@ -2979,17 +3139,19 @@ public static class Uihtml {
                 name
               )
             );
+            return output_4;
           })
         ),
         Vx.Core.f_then(
           Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-            return Vx.Core.f_eqeq(
+            Vx.Core.Type_any output_5 = Vx.Core.f_eqeq(
               styletype,
               Vx.Ui.Ui.c_styletype_system
             );
+            return output_5;
           }),
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.f_new(
+            Vx.Core.Type_any output_6 = Vx.Core.f_new(
               Vx.Core.t_string,
               Vx.Core.vx_new(
                 Vx.Core.t_anylist,
@@ -2997,11 +3159,13 @@ public static class Uihtml {
                 name
               )
             );
+            return output_6;
           })
         ),
         Vx.Core.f_else(
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return name;
+            Vx.Core.Type_any output_7 = name;
+            return output_7;
           })
         )
       )
@@ -3090,7 +3254,8 @@ public static class Uihtml {
     }
 
     public Vx.Web.Html.Type_style vx_style_from_fontface(Vx.Ui.Ui.Type_fontface fontface) {
-      return Vx.Ui.Html.Uihtml.f_style_from_fontface(fontface);
+      Vx.Web.Html.Type_style output = Vx.Ui.Html.Uihtml.f_style_from_fontface(fontface);
+      return output;
     }
 
   }
@@ -3112,17 +3277,18 @@ public static class Uihtml {
           files,
           Vx.Core.t_any_from_any.vx_fn_new((file_any) => {
             Vx.Data.File.Type_file file = Vx.Core.f_any_from_any(Vx.Data.File.t_file, file_any);
-            Vx.Core.Type_any output_1 = 
-                Vx.Core.f_new(
-                  Vx.Core.t_string,
-                  Vx.Core.vx_new(
-                    Vx.Core.t_anylist,
-                    Vx.Core.vx_new_string("url("),
-                    Vx.Data.File.f_pathfull_from_file(file),
-                    Vx.Core.vx_new_string(")")
-                  )
-                );
-            return output_1;
+            Vx.Core.Type_any output_2 = Vx.Core.f_new(
+              Vx.Core.t_string,
+              Vx.Core.vx_new(
+                Vx.Core.t_anylist,
+                Vx.Core.vx_new_string("url("),
+                Vx.Data.File.f_pathfull_from_file(
+                  file
+                ),
+                Vx.Core.vx_new_string(")")
+              )
+            );
+            return output_2;
           })
         );
         Vx.Core.Type_string fontfamily = Vx.Core.f_new(
@@ -3134,7 +3300,10 @@ public static class Uihtml {
             Vx.Core.c_quote
           )
         );
-        Vx.Core.Type_string srcurls = Vx.Type.f_string_from_stringlist_join(urls, Vx.Core.vx_new_string(","));
+        Vx.Core.Type_string srcurls = Vx.Type.f_string_from_stringlist_join(
+          urls,
+          Vx.Core.vx_new_string(",")
+        );
         Vx.Core.Type_string src = Vx.Core.f_new(
           Vx.Core.t_string,
           Vx.Core.vx_new(
@@ -3161,7 +3330,7 @@ public static class Uihtml {
             unicode
           )
         );
-        Vx.Core.Type_any output_2 = Vx.Core.f_new(
+        Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Web.Html.t_style,
           Vx.Core.vx_new(
             Vx.Core.t_anylist,
@@ -3171,7 +3340,7 @@ public static class Uihtml {
             propmap
           )
         );
-        return output_2;
+        return output_1;
       })
     );
     return output;
@@ -3258,7 +3427,8 @@ public static class Uihtml {
     }
 
     public Vx.Web.Html.Type_style vx_style_from_style(Vx.Ui.Ui.Type_style uistyle) {
-      return Vx.Ui.Html.Uihtml.f_style_from_style(uistyle);
+      Vx.Web.Html.Type_style output = Vx.Ui.Html.Uihtml.f_style_from_style(uistyle);
+      return output;
     }
 
   }
@@ -3274,17 +3444,21 @@ public static class Uihtml {
         Vx.Core.t_thenelselist,
         Vx.Core.f_then(
           Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-            return Vx.Core.f_is_empty_1(uistyle);
+            Vx.Core.Type_any output_1 = Vx.Core.f_is_empty_1(
+              uistyle
+            );
+            return output_1;
           }),
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.f_empty(
+            Vx.Core.Type_any output_2 = Vx.Core.f_empty(
               Vx.Web.Html.t_style
             );
+            return output_2;
           })
         ),
         Vx.Core.f_else(
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.f_let(
+            Vx.Core.Type_any output_3 = Vx.Core.f_let(
               Vx.Web.Html.t_style,
               Vx.Core.t_any_from_func.vx_fn_new(() => {
                 Vx.Ui.Ui.Type_layout layout = uistyle.layout();
@@ -3312,17 +3486,23 @@ public static class Uihtml {
                 Vx.Core.Type_int sizex = pointsize.x();
                 Vx.Core.Type_int sizey = pointsize.y();
                 Vx.Ui.Ui.Type_pointtype sizetype = pointsize.pointtype();
-                Vx.Core.Type_string stylename = Vx.Ui.Html.Uihtml.f_string_stylename_from_name_styletype(name, styletype);
+                Vx.Core.Type_string stylename = Vx.Ui.Html.Uihtml.f_string_stylename_from_name_styletype(
+                  name,
+                  styletype
+                );
                 Vx.Core.Type_string bkgcolor = Vx.Core.f_if_2(
                   Vx.Core.t_string,
                   Vx.Core.vx_new(
                     Vx.Core.t_thenelselist,
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_notempty(color_bkg);
+                        Vx.Core.Type_any output_5 = Vx.Core.f_notempty(
+                          color_bkg
+                        );
+                        return output_5;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_new(
+                        Vx.Core.Type_any output_6 = Vx.Core.f_new(
                           Vx.Core.t_string,
                           Vx.Core.vx_new(
                             Vx.Core.t_anylist,
@@ -3330,6 +3510,7 @@ public static class Uihtml {
                             color_bkg
                           )
                         );
+                        return output_6;
                       })
                     )
                   )
@@ -3340,10 +3521,14 @@ public static class Uihtml {
                     Vx.Core.t_thenelselist,
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_notempty(color_border);
+                        Vx.Core.Type_any output_7 = Vx.Core.f_notempty(
+                          color_border
+                        );
+                        return output_7;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("thin");
+                        Vx.Core.Type_any output_8 = Vx.Core.vx_new_string("thin");
+                        return output_8;
                       })
                     )
                   )
@@ -3354,10 +3539,13 @@ public static class Uihtml {
                     Vx.Core.t_thenelselist,
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_notempty(color_border);
+                        Vx.Core.Type_any output_9 = Vx.Core.f_notempty(
+                          color_border
+                        );
+                        return output_9;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_new(
+                        Vx.Core.Type_any output_10 = Vx.Core.f_new(
                           Vx.Core.t_string,
                           Vx.Core.vx_new(
                             Vx.Core.t_anylist,
@@ -3365,6 +3553,7 @@ public static class Uihtml {
                             color_border
                           )
                         );
+                        return output_10;
                       })
                     )
                   )
@@ -3375,16 +3564,20 @@ public static class Uihtml {
                     Vx.Core.t_thenelselist,
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_notempty(color_border);
+                        Vx.Core.Type_any output_11 = Vx.Core.f_notempty(
+                          color_border
+                        );
+                        return output_11;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_new(
+                        Vx.Core.Type_any output_12 = Vx.Core.f_new(
                           Vx.Core.t_string,
                           Vx.Core.vx_new(
                             Vx.Core.t_anylist,
                             Vx.Core.vx_new_string("solid")
                           )
                         );
+                        return output_12;
                       })
                     )
                   )
@@ -3395,10 +3588,13 @@ public static class Uihtml {
                     Vx.Core.t_thenelselist,
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_notempty(color_font);
+                        Vx.Core.Type_any output_13 = Vx.Core.f_notempty(
+                          color_font
+                        );
+                        return output_13;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_new(
+                        Vx.Core.Type_any output_14 = Vx.Core.f_new(
                           Vx.Core.t_string,
                           Vx.Core.vx_new(
                             Vx.Core.t_anylist,
@@ -3406,6 +3602,7 @@ public static class Uihtml {
                             color_font
                           )
                         );
+                        return output_14;
                       })
                     )
                   )
@@ -3416,7 +3613,7 @@ public static class Uihtml {
                     Vx.Core.t_thenelselist,
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_or_1(
+                        Vx.Core.Type_any output_15 = Vx.Core.f_or_1(
                           Vx.Core.vx_new(
                             Vx.Core.t_booleanlist,
                             Vx.Core.f_eqeq(
@@ -3449,44 +3646,55 @@ public static class Uihtml {
                             )
                           )
                         );
+                        return output_15;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("fixed");
+                        Vx.Core.Type_any output_16 = Vx.Core.vx_new_string("fixed");
+                        return output_16;
                       })
                     ),
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_eqeq(
+                        Vx.Core.Type_any output_17 = Vx.Core.f_eqeq(
                           postype,
                           Vx.Ui.Ui.c_pointtype_relative
                         );
+                        return output_17;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("relative");
+                        Vx.Core.Type_any output_18 = Vx.Core.vx_new_string("relative");
+                        return output_18;
                       })
                     ),
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_eqeq(
+                        Vx.Core.Type_any output_19 = Vx.Core.f_eqeq(
                           postype,
                           Vx.Ui.Ui.c_pointtype_absolute
                         );
+                        return output_19;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("absolute");
+                        Vx.Core.Type_any output_20 = Vx.Core.vx_new_string("absolute");
+                        return output_20;
                       })
                     ),
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_notempty_1(pointpos);
+                        Vx.Core.Type_any output_21 = Vx.Core.f_notempty_1(
+                          pointpos
+                        );
+                        return output_21;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("absolute");
+                        Vx.Core.Type_any output_22 = Vx.Core.vx_new_string("absolute");
+                        return output_22;
                       })
                     ),
                     Vx.Core.f_else(
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("");
+                        Vx.Core.Type_any output_23 = Vx.Core.vx_new_string("");
+                        return output_23;
                       })
                     )
                   )
@@ -3497,13 +3705,14 @@ public static class Uihtml {
                     Vx.Core.t_thenelselist,
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_eqeq(
+                        Vx.Core.Type_any output_24 = Vx.Core.f_eqeq(
                           pin,
                           Vx.Ui.Ui.c_pin_expand
                         );
+                        return output_24;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_new(
+                        Vx.Core.Type_any output_25 = Vx.Core.f_new(
                           Vx.Core.t_string,
                           Vx.Core.vx_new(
                             Vx.Core.t_anylist,
@@ -3511,19 +3720,25 @@ public static class Uihtml {
                             Vx.Core.vx_new_string("mm")
                           )
                         );
+                        return output_25;
                       })
                     ),
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_eqeq(Vx.Core.vx_new_int(0), posy);
+                        Vx.Core.Type_any output_26 = Vx.Core.f_eqeq(
+                          Vx.Core.vx_new_int(0),
+                          posy
+                        );
+                        return output_26;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("");
+                        Vx.Core.Type_any output_27 = Vx.Core.vx_new_string("");
+                        return output_27;
                       })
                     ),
                     Vx.Core.f_else(
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_new(
+                        Vx.Core.Type_any output_28 = Vx.Core.f_new(
                           Vx.Core.t_string,
                           Vx.Core.vx_new(
                             Vx.Core.t_anylist,
@@ -3531,6 +3746,7 @@ public static class Uihtml {
                             Vx.Core.vx_new_string("mm")
                           )
                         );
+                        return output_28;
                       })
                     )
                   )
@@ -3541,29 +3757,33 @@ public static class Uihtml {
                     Vx.Core.t_thenelselist,
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_eqeq(
+                        Vx.Core.Type_any output_29 = Vx.Core.f_eqeq(
                           pin,
                           Vx.Ui.Ui.c_pin_expand
                         );
+                        return output_29;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("");
+                        Vx.Core.Type_any output_30 = Vx.Core.vx_new_string("");
+                        return output_30;
                       })
                     ),
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_eqeq(
+                        Vx.Core.Type_any output_31 = Vx.Core.f_eqeq(
                           pin,
                           Vx.Ui.Ui.c_pin_bottom
                         );
+                        return output_31;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("0mm");
+                        Vx.Core.Type_any output_32 = Vx.Core.vx_new_string("0mm");
+                        return output_32;
                       })
                     ),
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_or(
+                        Vx.Core.Type_any output_33 = Vx.Core.f_or(
                           Vx.Core.f_eqeq(
                             pin,
                             Vx.Ui.Ui.c_pin_left
@@ -3573,9 +3793,10 @@ public static class Uihtml {
                             Vx.Ui.Ui.c_pin_center_v
                           )
                         );
+                        return output_33;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_new(
+                        Vx.Core.Type_any output_34 = Vx.Core.f_new(
                           Vx.Core.t_string,
                           Vx.Core.vx_new(
                             Vx.Core.t_anylist,
@@ -3583,6 +3804,7 @@ public static class Uihtml {
                             Vx.Core.vx_new_string("mm")
                           )
                         );
+                        return output_34;
                       })
                     )
                   )
@@ -3593,24 +3815,27 @@ public static class Uihtml {
                     Vx.Core.t_thenelselist,
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_eqeq(
+                        Vx.Core.Type_any output_35 = Vx.Core.f_eqeq(
                           pin,
                           Vx.Ui.Ui.c_pin_expand
                         );
+                        return output_35;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("");
+                        Vx.Core.Type_any output_36 = Vx.Core.vx_new_string("");
+                        return output_36;
                       })
                     ),
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_eqeq(
+                        Vx.Core.Type_any output_37 = Vx.Core.f_eqeq(
                           pin,
                           Vx.Ui.Ui.c_pin_bottom
                         );
+                        return output_37;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_new(
+                        Vx.Core.Type_any output_38 = Vx.Core.f_new(
                           Vx.Core.t_string,
                           Vx.Core.vx_new(
                             Vx.Core.t_anylist,
@@ -3618,19 +3843,25 @@ public static class Uihtml {
                             Vx.Core.vx_new_string("mm")
                           )
                         );
+                        return output_38;
                       })
                     ),
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_eqeq(Vx.Core.vx_new_int(0), posx);
+                        Vx.Core.Type_any output_39 = Vx.Core.f_eqeq(
+                          Vx.Core.vx_new_int(0),
+                          posx
+                        );
+                        return output_39;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("");
+                        Vx.Core.Type_any output_40 = Vx.Core.vx_new_string("");
+                        return output_40;
                       })
                     ),
                     Vx.Core.f_else(
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_new(
+                        Vx.Core.Type_any output_41 = Vx.Core.f_new(
                           Vx.Core.t_string,
                           Vx.Core.vx_new(
                             Vx.Core.t_anylist,
@@ -3638,6 +3869,7 @@ public static class Uihtml {
                             Vx.Core.vx_new_string("mm")
                           )
                         );
+                        return output_41;
                       })
                     )
                   )
@@ -3648,18 +3880,20 @@ public static class Uihtml {
                     Vx.Core.t_thenelselist,
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_eqeq(
+                        Vx.Core.Type_any output_42 = Vx.Core.f_eqeq(
                           pin,
                           Vx.Ui.Ui.c_pin_expand
                         );
+                        return output_42;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("");
+                        Vx.Core.Type_any output_43 = Vx.Core.vx_new_string("");
+                        return output_43;
                       })
                     ),
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_or_1(
+                        Vx.Core.Type_any output_44 = Vx.Core.f_or_1(
                           Vx.Core.vx_new(
                             Vx.Core.t_booleanlist,
                             Vx.Core.f_eqeq(
@@ -3676,9 +3910,10 @@ public static class Uihtml {
                             )
                           )
                         );
+                        return output_44;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_new(
+                        Vx.Core.Type_any output_45 = Vx.Core.f_new(
                           Vx.Core.t_string,
                           Vx.Core.vx_new(
                             Vx.Core.t_anylist,
@@ -3686,6 +3921,7 @@ public static class Uihtml {
                             Vx.Core.vx_new_string("mm")
                           )
                         );
+                        return output_45;
                       })
                     )
                   )
@@ -3696,18 +3932,20 @@ public static class Uihtml {
                     Vx.Core.t_thenelselist,
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_eqeq(
+                        Vx.Core.Type_any output_46 = Vx.Core.f_eqeq(
                           pin,
                           Vx.Ui.Ui.c_pin_expand
                         );
+                        return output_46;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("100%");
+                        Vx.Core.Type_any output_47 = Vx.Core.vx_new_string("100%");
+                        return output_47;
                       })
                     ),
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_or_1(
+                        Vx.Core.Type_any output_48 = Vx.Core.f_or_1(
                           Vx.Core.vx_new(
                             Vx.Core.t_booleanlist,
                             Vx.Core.f_eqeq(
@@ -3724,20 +3962,23 @@ public static class Uihtml {
                             )
                           )
                         );
+                        return output_48;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("");
+                        Vx.Core.Type_any output_49 = Vx.Core.vx_new_string("");
+                        return output_49;
                       })
                     ),
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_eqeq(
+                        Vx.Core.Type_any output_50 = Vx.Core.f_eqeq(
                           sizetype,
                           Vx.Ui.Ui.c_pointtype_percent
                         );
+                        return output_50;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_new(
+                        Vx.Core.Type_any output_51 = Vx.Core.f_new(
                           Vx.Core.t_string,
                           Vx.Core.vx_new(
                             Vx.Core.t_anylist,
@@ -3745,19 +3986,25 @@ public static class Uihtml {
                             Vx.Core.vx_new_string("%")
                           )
                         );
+                        return output_51;
                       })
                     ),
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_eqeq(Vx.Core.vx_new_int(0), sizey);
+                        Vx.Core.Type_any output_52 = Vx.Core.f_eqeq(
+                          Vx.Core.vx_new_int(0),
+                          sizey
+                        );
+                        return output_52;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("");
+                        Vx.Core.Type_any output_53 = Vx.Core.vx_new_string("");
+                        return output_53;
                       })
                     ),
                     Vx.Core.f_else(
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_new(
+                        Vx.Core.Type_any output_54 = Vx.Core.f_new(
                           Vx.Core.t_string,
                           Vx.Core.vx_new(
                             Vx.Core.t_anylist,
@@ -3765,6 +4012,7 @@ public static class Uihtml {
                             Vx.Core.vx_new_string("mm")
                           )
                         );
+                        return output_54;
                       })
                     )
                   )
@@ -3775,18 +4023,20 @@ public static class Uihtml {
                     Vx.Core.t_thenelselist,
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_eqeq(
+                        Vx.Core.Type_any output_55 = Vx.Core.f_eqeq(
                           pin,
                           Vx.Ui.Ui.c_pin_expand
                         );
+                        return output_55;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("100%");
+                        Vx.Core.Type_any output_56 = Vx.Core.vx_new_string("100%");
+                        return output_56;
                       })
                     ),
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_or_1(
+                        Vx.Core.Type_any output_57 = Vx.Core.f_or_1(
                           Vx.Core.vx_new(
                             Vx.Core.t_booleanlist,
                             Vx.Core.f_eqeq(
@@ -3803,20 +4053,23 @@ public static class Uihtml {
                             )
                           )
                         );
+                        return output_57;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("");
+                        Vx.Core.Type_any output_58 = Vx.Core.vx_new_string("");
+                        return output_58;
                       })
                     ),
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_eqeq(
+                        Vx.Core.Type_any output_59 = Vx.Core.f_eqeq(
                           sizetype,
                           Vx.Ui.Ui.c_pointtype_percent
                         );
+                        return output_59;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_new(
+                        Vx.Core.Type_any output_60 = Vx.Core.f_new(
                           Vx.Core.t_string,
                           Vx.Core.vx_new(
                             Vx.Core.t_anylist,
@@ -3824,19 +4077,25 @@ public static class Uihtml {
                             Vx.Core.vx_new_string("%")
                           )
                         );
+                        return output_60;
                       })
                     ),
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_eqeq(Vx.Core.vx_new_int(0), sizex);
+                        Vx.Core.Type_any output_61 = Vx.Core.f_eqeq(
+                          Vx.Core.vx_new_int(0),
+                          sizex
+                        );
+                        return output_61;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("");
+                        Vx.Core.Type_any output_62 = Vx.Core.vx_new_string("");
+                        return output_62;
                       })
                     ),
                     Vx.Core.f_else(
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_new(
+                        Vx.Core.Type_any output_63 = Vx.Core.f_new(
                           Vx.Core.t_string,
                           Vx.Core.vx_new(
                             Vx.Core.t_anylist,
@@ -3844,6 +4103,7 @@ public static class Uihtml {
                             Vx.Core.vx_new_string("mm")
                           )
                         );
+                        return output_63;
                       })
                     )
                   )
@@ -3854,33 +4114,39 @@ public static class Uihtml {
                     Vx.Core.t_thenelselist,
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return hidden;
+                        Vx.Core.Type_any output_64 = hidden;
+                        return output_64;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("none");
+                        Vx.Core.Type_any output_65 = Vx.Core.vx_new_string("none");
+                        return output_65;
                       })
                     ),
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_eqeq(
+                        Vx.Core.Type_any output_66 = Vx.Core.f_eqeq(
                           layout,
                           Vx.Ui.Ui.c_layout_flow_item
                         );
+                        return output_66;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("inline-block");
+                        Vx.Core.Type_any output_67 = Vx.Core.vx_new_string("inline-block");
+                        return output_67;
                       })
                     )
                   )
                 );
-                Vx.Core.Type_string sfont = Vx.Ui.Html.Uihtml.f_string_style_from_font(font);
+                Vx.Core.Type_string sfont = Vx.Ui.Html.Uihtml.f_string_style_from_font(
+                  font
+                );
                 Vx.Core.Type_string gap = Vx.Core.f_if_2(
                   Vx.Core.t_string,
                   Vx.Core.vx_new(
                     Vx.Core.t_thenelselist,
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_or(
+                        Vx.Core.Type_any output_68 = Vx.Core.f_or(
                           Vx.Core.f_eqeq(
                             layout,
                             Vx.Ui.Ui.c_layout_flow_columns
@@ -3890,9 +4156,11 @@ public static class Uihtml {
                             Vx.Ui.Ui.c_layout_flow_rows
                           )
                         );
+                        return output_68;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("1mm");
+                        Vx.Core.Type_any output_69 = Vx.Core.vx_new_string("1mm");
+                        return output_69;
                       })
                     )
                   )
@@ -3903,10 +4171,12 @@ public static class Uihtml {
                     Vx.Core.t_thenelselist,
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return scroll_x;
+                        Vx.Core.Type_any output_70 = scroll_x;
+                        return output_70;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("auto");
+                        Vx.Core.Type_any output_71 = Vx.Core.vx_new_string("auto");
+                        return output_71;
                       })
                     )
                   )
@@ -3917,10 +4187,12 @@ public static class Uihtml {
                     Vx.Core.t_thenelselist,
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return scroll_y;
+                        Vx.Core.Type_any output_72 = scroll_y;
+                        return output_72;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("auto");
+                        Vx.Core.Type_any output_73 = Vx.Core.vx_new_string("auto");
+                        return output_73;
                       })
                     )
                   )
@@ -3931,10 +4203,14 @@ public static class Uihtml {
                     Vx.Core.t_thenelselist,
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_ne(Vx.Core.vx_new_string(""), color_bkghover);
+                        Vx.Core.Type_any output_74 = Vx.Core.f_ne(
+                          Vx.Core.vx_new_string(""),
+                          color_bkghover
+                        );
+                        return output_74;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_new(
+                        Vx.Core.Type_any output_75 = Vx.Core.f_new(
                           Vx.Core.t_string,
                           Vx.Core.vx_new(
                             Vx.Core.t_anylist,
@@ -3942,6 +4218,7 @@ public static class Uihtml {
                             color_bkghover
                           )
                         );
+                        return output_75;
                       })
                     )
                   )
@@ -3952,13 +4229,15 @@ public static class Uihtml {
                     Vx.Core.t_thenelselist,
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_eqeq(
+                        Vx.Core.Type_any output_76 = Vx.Core.f_eqeq(
                           cursor,
                           Vx.Ui.Ui.t_cursor_pointer
                         );
+                        return output_76;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("pointer");
+                        Vx.Core.Type_any output_77 = Vx.Core.vx_new_string("pointer");
+                        return output_77;
                       })
                     )
                   )
@@ -3969,35 +4248,41 @@ public static class Uihtml {
                     Vx.Core.t_thenelselist,
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_eqeq(
+                        Vx.Core.Type_any output_78 = Vx.Core.f_eqeq(
                           align,
                           Vx.Ui.Ui.c_align_left
                         );
+                        return output_78;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("left");
+                        Vx.Core.Type_any output_79 = Vx.Core.vx_new_string("left");
+                        return output_79;
                       })
                     ),
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_eqeq(
+                        Vx.Core.Type_any output_80 = Vx.Core.f_eqeq(
                           align,
                           Vx.Ui.Ui.c_align_center
                         );
+                        return output_80;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("center");
+                        Vx.Core.Type_any output_81 = Vx.Core.vx_new_string("center");
+                        return output_81;
                       })
                     ),
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_eqeq(
+                        Vx.Core.Type_any output_82 = Vx.Core.f_eqeq(
                           align,
                           Vx.Ui.Ui.c_align_right
                         );
+                        return output_82;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("right");
+                        Vx.Core.Type_any output_83 = Vx.Core.vx_new_string("right");
+                        return output_83;
                       })
                     )
                   )
@@ -4008,15 +4293,19 @@ public static class Uihtml {
                     Vx.Core.t_thenelselist,
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_is_empty_1(pointrotate);
+                        Vx.Core.Type_any output_84 = Vx.Core.f_is_empty_1(
+                          pointrotate
+                        );
+                        return output_84;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("");
+                        Vx.Core.Type_any output_85 = Vx.Core.vx_new_string("");
+                        return output_85;
                       })
                     ),
                     Vx.Core.f_else(
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_new(
+                        Vx.Core.Type_any output_86 = Vx.Core.f_new(
                           Vx.Core.t_string,
                           Vx.Core.vx_new(
                             Vx.Core.t_anylist,
@@ -4025,6 +4314,7 @@ public static class Uihtml {
                             Vx.Core.vx_new_string("deg)")
                           )
                         );
+                        return output_86;
                       })
                     )
                   )
@@ -4037,19 +4327,22 @@ public static class Uihtml {
                     Vx.Core.f_case_1(
                       Vx.Ui.Ui.c_flip_x,
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("scale(-1, 1)");
+                        Vx.Core.Type_any output_87 = Vx.Core.vx_new_string("scale(-1, 1)");
+                        return output_87;
                       })
                     ),
                     Vx.Core.f_case_1(
                       Vx.Ui.Ui.c_flip_y,
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("scale( 1,-1)");
+                        Vx.Core.Type_any output_88 = Vx.Core.vx_new_string("scale( 1,-1)");
+                        return output_88;
                       })
                     ),
                     Vx.Core.f_case_1(
                       Vx.Ui.Ui.c_flip_xy,
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("scale(-1,-1)");
+                        Vx.Core.Type_any output_89 = Vx.Core.vx_new_string("scale(-1,-1)");
+                        return output_89;
                       })
                     )
                   )
@@ -4062,7 +4355,10 @@ public static class Uihtml {
                     transform_scale
                   )
                 );
-                Vx.Core.Type_string transform = Vx.Type.f_string_from_stringlist_join(transforms, Vx.Core.vx_new_string(" "));
+                Vx.Core.Type_string transform = Vx.Type.f_string_from_stringlist_join(
+                  transforms,
+                  Vx.Core.vx_new_string(" ")
+                );
                 Vx.Core.Type_string transformorigin = Vx.Core.f_switch(
                   Vx.Core.t_string,
                   pointorigin,
@@ -4071,48 +4367,58 @@ public static class Uihtml {
                     Vx.Core.f_case_1(
                       Vx.Ui.Ui.c_point_center,
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("center");
+                        Vx.Core.Type_any output_90 = Vx.Core.vx_new_string("center");
+                        return output_90;
                       })
                     ),
                     Vx.Core.f_case_1(
                       Vx.Ui.Ui.c_point_lefttop,
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("left top");
+                        Vx.Core.Type_any output_91 = Vx.Core.vx_new_string("left top");
+                        return output_91;
                       })
                     ),
                     Vx.Core.f_case_1(
                       Vx.Ui.Ui.c_point_rightbottom,
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.vx_new_string("right bottom");
+                        Vx.Core.Type_any output_92 = Vx.Core.vx_new_string("right bottom");
+                        return output_92;
                       })
                     ),
                     Vx.Core.f_else(
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_if_2(
+                        Vx.Core.Type_any output_93 = Vx.Core.f_if_2(
                           Vx.Core.t_string,
                           Vx.Core.vx_new(
                             Vx.Core.t_thenelselist,
                             Vx.Core.f_then(
                               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                                return Vx.Core.f_is_empty_1(pointrotate);
+                                Vx.Core.Type_any output_94 = Vx.Core.f_is_empty_1(
+                                  pointrotate
+                                );
+                                return output_94;
                               }),
                               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                                return Vx.Core.vx_new_string("");
+                                Vx.Core.Type_any output_95 = Vx.Core.vx_new_string("");
+                                return output_95;
                               })
                             ),
                             Vx.Core.f_then(
                               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                                return Vx.Core.f_eqeq(
+                                Vx.Core.Type_any output_96 = Vx.Core.f_eqeq(
                                   layout,
                                   Vx.Ui.Ui.c_layout_label
                                 );
+                                return output_96;
                               }),
                               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                                return Vx.Core.vx_new_string("left top");
+                                Vx.Core.Type_any output_97 = Vx.Core.vx_new_string("left top");
+                                return output_97;
                               })
                             )
                           )
                         );
+                        return output_93;
                       })
                     )
                   )
@@ -4179,10 +4485,13 @@ public static class Uihtml {
                     Vx.Core.t_thenelselist,
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_notempty_1(hoverprops);
+                        Vx.Core.Type_any output_98 = Vx.Core.f_notempty_1(
+                          hoverprops
+                        );
+                        return output_98;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_new(
+                        Vx.Core.Type_any output_99 = Vx.Core.f_new(
                           Vx.Web.Html.t_stylelist,
                           Vx.Core.vx_new(
                             Vx.Core.t_anylist,
@@ -4198,11 +4507,12 @@ public static class Uihtml {
                             )
                           )
                         );
+                        return output_99;
                       })
                     )
                   )
                 );
-                Vx.Core.Type_any output_1 = Vx.Core.f_new(
+                Vx.Core.Type_any output_4 = Vx.Core.f_new(
                   Vx.Web.Html.t_style,
                   Vx.Core.vx_new(
                     Vx.Core.t_anylist,
@@ -4214,9 +4524,10 @@ public static class Uihtml {
                     substylelist
                   )
                 );
-                return output_1;
+                return output_4;
               })
             );
+            return output_3;
           })
         )
       )
@@ -4305,7 +4616,8 @@ public static class Uihtml {
     }
 
     public Vx.Web.Html.Type_stylelist vx_stylelist_extra_from_ui(Vx.Ui.Ui.Type_ui ui) {
-      return Vx.Ui.Html.Uihtml.f_stylelist_extra_from_ui(ui);
+      Vx.Web.Html.Type_stylelist output = Vx.Ui.Html.Uihtml.f_stylelist_extra_from_ui(ui);
+      return output;
     }
 
   }
@@ -4321,42 +4633,49 @@ public static class Uihtml {
         Vx.Ui.Ui.Type_stylelist uistyles = ui.stylelist();
         Vx.Core.Type_boolean selected = ui.selected();
         Vx.Core.Type_boolean hidden = ui.hidden();
-        Vx.Web.Html.Type_stylelist styles1 = Vx.Ui.Html.Uihtml.f_stylelist_from_stylelist(uistyles);
+        Vx.Web.Html.Type_stylelist styles1 = Vx.Ui.Html.Uihtml.f_stylelist_from_stylelist(
+          uistyles
+        );
         Vx.Web.Html.Type_stylelist styles2 = Vx.Core.f_if_2(
           Vx.Web.Html.t_stylelist,
           Vx.Core.vx_new(
             Vx.Core.t_thenelselist,
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return hidden;
+                Vx.Core.Type_any output_2 = hidden;
+                return output_2;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_copy(
+                Vx.Core.Type_any output_3 = Vx.Core.f_copy(
                   styles1,
                   Vx.Core.vx_new(
                     Vx.Core.t_anylist,
                     Vx.Ui.Html.Uihtml.c_style_hidden
                   )
                 );
+                return output_3;
               })
             ),
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return selected;
+                Vx.Core.Type_any output_4 = selected;
+                return output_4;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_copy(
+                Vx.Core.Type_any output_5 = Vx.Core.f_copy(
                   styles1,
                   Vx.Core.vx_new(
                     Vx.Core.t_anylist,
                     Vx.Ui.Html.Uihtml.c_style_selected
                   )
                 );
+                return output_5;
               })
             ),
             Vx.Core.f_else(
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return styles1;
+                Vx.Core.Type_any output_6 = styles1;
+                return output_6;
               })
             )
           )
@@ -4435,7 +4754,8 @@ public static class Uihtml {
     }
 
     public Vx.Web.Html.Type_stylelist vx_stylelist_reset() {
-      return Vx.Ui.Html.Uihtml.f_stylelist_reset();
+      Vx.Web.Html.Type_stylelist output = Vx.Ui.Html.Uihtml.f_stylelist_reset();
+      return output;
     }
 
   }
@@ -4667,7 +4987,8 @@ public static class Uihtml {
     }
 
     public Vx.Web.Html.Type_stylelist vx_stylelist_from_fontfacemap(Vx.Ui.Ui.Type_fontfacemap fontfacemap) {
-      return Vx.Ui.Html.Uihtml.f_stylelist_from_fontfacemap(fontfacemap);
+      Vx.Web.Html.Type_stylelist output = Vx.Ui.Html.Uihtml.f_stylelist_from_fontfacemap(fontfacemap);
+      return output;
     }
 
   }
@@ -4683,8 +5004,9 @@ public static class Uihtml {
       Vx.Core.t_any_from_key_value.vx_fn_new((key_any, fontface_any) => {
         Vx.Core.Type_string key = Vx.Core.f_any_from_any(Vx.Core.t_string, key_any);
         Vx.Ui.Ui.Type_fontface fontface = Vx.Core.f_any_from_any(Vx.Ui.Ui.t_fontface, fontface_any);
-        Vx.Core.Type_any output_1 = 
-          Vx.Ui.Html.Uihtml.f_style_from_fontface(fontface);
+        Vx.Core.Type_any output_1 = Vx.Ui.Html.Uihtml.f_style_from_fontface(
+          fontface
+        );
         return output_1;
       })
     );
@@ -4772,7 +5094,8 @@ public static class Uihtml {
     }
 
     public Vx.Web.Html.Type_stylelist vx_stylelist_from_stylelist(Vx.Ui.Ui.Type_stylelist uistylelist) {
-      return Vx.Ui.Html.Uihtml.f_stylelist_from_stylelist(uistylelist);
+      Vx.Web.Html.Type_stylelist output = Vx.Ui.Html.Uihtml.f_stylelist_from_stylelist(uistylelist);
+      return output;
     }
 
   }
@@ -4871,7 +5194,8 @@ public static class Uihtml {
     }
 
     public Vx.Web.Html.Type_stylelist vx_stylelist_from_stylemap(Vx.Ui.Ui.Type_stylemap uistylemap) {
-      return Vx.Ui.Html.Uihtml.f_stylelist_from_stylemap(uistylemap);
+      Vx.Web.Html.Type_stylelist output = Vx.Ui.Html.Uihtml.f_stylelist_from_stylemap(uistylemap);
+      return output;
     }
 
   }
@@ -4887,8 +5211,9 @@ public static class Uihtml {
       Vx.Core.t_any_from_key_value.vx_fn_new((key_any, value_any) => {
         Vx.Core.Type_string key = Vx.Core.f_any_from_any(Vx.Core.t_string, key_any);
         Vx.Ui.Ui.Type_style value = Vx.Core.f_any_from_any(Vx.Ui.Ui.t_style, value_any);
-        Vx.Core.Type_any output_1 = 
-          Vx.Ui.Html.Uihtml.f_style_from_style(value);
+        Vx.Core.Type_any output_1 = Vx.Ui.Html.Uihtml.f_style_from_style(
+          value
+        );
         return output_1;
       })
     );
@@ -4976,7 +5301,8 @@ public static class Uihtml {
     }
 
     public Vx.Web.Html.Type_stylemap vx_stylemap_from_stylemap(Vx.Ui.Ui.Type_stylemap uistylemap) {
-      return Vx.Ui.Html.Uihtml.f_stylemap_from_stylemap(uistylemap);
+      Vx.Web.Html.Type_stylemap output = Vx.Ui.Html.Uihtml.f_stylemap_from_stylemap(uistylemap);
+      return output;
     }
 
   }
@@ -4992,8 +5318,9 @@ public static class Uihtml {
       Vx.Core.t_any_from_key_value.vx_fn_new((key_any, value_any) => {
         Vx.Core.Type_string key = Vx.Core.f_any_from_any(Vx.Core.t_string, key_any);
         Vx.Ui.Ui.Type_style value = Vx.Core.f_any_from_any(Vx.Ui.Ui.t_style, value_any);
-        Vx.Core.Type_any output_1 = 
-          Vx.Ui.Html.Uihtml.f_style_from_style(value);
+        Vx.Core.Type_any output_1 = Vx.Ui.Html.Uihtml.f_style_from_style(
+          value
+        );
         return output_1;
       })
     );
@@ -5082,7 +5409,8 @@ public static class Uihtml {
     }
 
     public Task<Vx.Ui.Ui.Type_stylesheet> vx_stylesheet_layout_html(Vx.Ui.Ui.Type_stylesheet stylesheetui) {
-      return Vx.Ui.Html.Uihtml.f_stylesheet_layout_html(stylesheetui);
+      Task<Vx.Ui.Ui.Type_stylesheet> output = Vx.Ui.Html.Uihtml.f_stylesheet_layout_html(stylesheetui);
+      return output;
     }
 
   }
@@ -5095,8 +5423,12 @@ public static class Uihtml {
     output = Vx.Core.f_let_async(
       Vx.Ui.Ui.t_stylesheet,
       Vx.Core.t_any_from_func_async.vx_fn_new(() => {
-        Vx.Web.Html.Type_stylesheet stylesheethtml = Vx.Ui.Html.Uihtml.f_stylesheet_from_stylesheet(stylesheetui);
-        Task<Vx.Core.Type_boolean> future_write = Vx.Web.Htmldoc.f_boolean_write_from_stylesheet(stylesheethtml);
+        Vx.Web.Html.Type_stylesheet stylesheethtml = Vx.Ui.Html.Uihtml.f_stylesheet_from_stylesheet(
+          stylesheetui
+        );
+        Task<Vx.Core.Type_boolean> future_write = Vx.Web.Htmldoc.f_boolean_write_from_stylesheet(
+          stylesheethtml
+        );
         Task<Vx.Core.Type_any> output_1 = Vx.Core.vx_async_from_async_fn(future_write, (write) => {
           Vx.Core.Type_any output_2 = stylesheetui;
           return output_2;
@@ -5188,7 +5520,8 @@ public static class Uihtml {
     }
 
     public Vx.Web.Html.Type_stylesheet vx_stylesheet_from_stylesheet(Vx.Ui.Ui.Type_stylesheet uistylesheet) {
-      return Vx.Ui.Html.Uihtml.f_stylesheet_from_stylesheet(uistylesheet);
+      Vx.Web.Html.Type_stylesheet output = Vx.Ui.Html.Uihtml.f_stylesheet_from_stylesheet(uistylesheet);
+      return output;
     }
 
   }
@@ -5204,8 +5537,12 @@ public static class Uihtml {
         Vx.Ui.Ui.Type_stylemap uistylemap = uistylesheet.stylemap();
         Vx.Ui.Ui.Type_fontfacemap fontfacemap = uistylesheet.fontfacemap();
         Vx.Web.Html.Type_stylelist resetlist = Vx.Ui.Html.Uihtml.f_stylelist_reset();
-        Vx.Web.Html.Type_stylelist fontstyles = Vx.Ui.Html.Uihtml.f_stylelist_from_fontfacemap(fontfacemap);
-        Vx.Web.Html.Type_stylelist stylelist = Vx.Ui.Html.Uihtml.f_stylelist_from_stylemap(uistylemap);
+        Vx.Web.Html.Type_stylelist fontstyles = Vx.Ui.Html.Uihtml.f_stylelist_from_fontfacemap(
+          fontfacemap
+        );
+        Vx.Web.Html.Type_stylelist stylelist = Vx.Ui.Html.Uihtml.f_stylelist_from_stylemap(
+          uistylemap
+        );
         Vx.Web.Html.Type_stylelist allstyles = Vx.Core.f_new(
           Vx.Web.Html.t_stylelist,
           Vx.Core.vx_new(
@@ -5301,7 +5638,8 @@ public static class Uihtml {
     }
 
     public Vx.Ui.Ui.Type_ui vx_ui_layout_app_from_ui_orig_parent(Vx.Ui.Ui.Type_ui ui, Vx.Ui.Ui.Type_ui orig, Vx.Ui.Ui.Type_ui parent) {
-      return Vx.Ui.Html.Uihtml.f_ui_layout_app_from_ui_orig_parent(ui, orig, parent);
+      Vx.Ui.Ui.Type_ui output = Vx.Ui.Html.Uihtml.f_ui_layout_app_from_ui_orig_parent(ui, orig, parent);
+      return output;
     }
 
   }
@@ -5314,9 +5652,19 @@ public static class Uihtml {
     output = Vx.Core.f_let(
       Vx.Ui.Ui.t_ui,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Web.Html.Type_node node = Vx.Ui.Html.Uihtml.f_node_app_from_ui_orig_parent(ui, orig, parent);
-        Vx.Web.Html.Type_node nodechg = Vx.Ui.Html.Uihtml.f_node_layout_from_node_ui_parent(node, ui, parent);
-        Vx.Core.Type_boolean iswrite = Vx.Ui.Html.Uihtml.f_boolean_writeeventsall_from_ui(ui);
+        Vx.Web.Html.Type_node node = Vx.Ui.Html.Uihtml.f_node_app_from_ui_orig_parent(
+          ui,
+          orig,
+          parent
+        );
+        Vx.Web.Html.Type_node nodechg = Vx.Ui.Html.Uihtml.f_node_layout_from_node_ui_parent(
+          node,
+          ui,
+          parent
+        );
+        Vx.Core.Type_boolean iswrite = Vx.Ui.Html.Uihtml.f_boolean_writeeventsall_from_ui(
+          ui
+        );
         Vx.Core.Type_any output_1 = ui;
         return output_1;
       })
@@ -5396,7 +5744,8 @@ public static class Uihtml {
     }
 
     public Vx.Ui.Ui.Type_ui vx_ui_layout_default_from_ui_orig_parent(Vx.Ui.Ui.Type_ui ui, Vx.Ui.Ui.Type_ui orig, Vx.Ui.Ui.Type_ui parent) {
-      return Vx.Ui.Html.Uihtml.f_ui_layout_default_from_ui_orig_parent(ui, orig, parent);
+      Vx.Ui.Ui.Type_ui output = Vx.Ui.Html.Uihtml.f_ui_layout_default_from_ui_orig_parent(ui, orig, parent);
+      return output;
     }
 
   }
@@ -5410,9 +5759,19 @@ public static class Uihtml {
       Vx.Ui.Ui.t_ui,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Ui.Ui.Type_uimap uimap = ui.uimap();
-        Vx.Web.Html.Type_node node = Vx.Ui.Html.Uihtml.f_node_default_from_ui_orig_parent(ui, orig, parent);
-        Vx.Web.Html.Type_node nodechg = Vx.Ui.Html.Uihtml.f_node_layout_from_node_ui_parent(node, ui, parent);
-        Vx.Core.Type_boolean iswrite = Vx.Ui.Html.Uihtml.f_boolean_writeeventsall_from_ui(ui);
+        Vx.Web.Html.Type_node node = Vx.Ui.Html.Uihtml.f_node_default_from_ui_orig_parent(
+          ui,
+          orig,
+          parent
+        );
+        Vx.Web.Html.Type_node nodechg = Vx.Ui.Html.Uihtml.f_node_layout_from_node_ui_parent(
+          node,
+          ui,
+          parent
+        );
+        Vx.Core.Type_boolean iswrite = Vx.Ui.Html.Uihtml.f_boolean_writeeventsall_from_ui(
+          ui
+        );
         Vx.Core.Type_any output_1 = ui;
         return output_1;
       })
@@ -5492,7 +5851,8 @@ public static class Uihtml {
     }
 
     public Vx.Ui.Ui.Type_ui vx_ui_layout_image_from_ui_orig_parent(Vx.Ui.Ui.Type_ui ui, Vx.Ui.Ui.Type_ui orig, Vx.Ui.Ui.Type_ui parent) {
-      return Vx.Ui.Html.Uihtml.f_ui_layout_image_from_ui_orig_parent(ui, orig, parent);
+      Vx.Ui.Ui.Type_ui output = Vx.Ui.Html.Uihtml.f_ui_layout_image_from_ui_orig_parent(ui, orig, parent);
+      return output;
     }
 
   }
@@ -5505,9 +5865,19 @@ public static class Uihtml {
     output = Vx.Core.f_let(
       Vx.Ui.Ui.t_ui,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Web.Html.Type_node node = Vx.Ui.Html.Uihtml.f_node_image_from_ui_orig_parent(ui, orig, parent);
-        Vx.Web.Html.Type_node nodechg = Vx.Ui.Html.Uihtml.f_node_layout_from_node_ui_parent(node, ui, parent);
-        Vx.Core.Type_boolean iswrite = Vx.Ui.Html.Uihtml.f_boolean_writeeventsall_from_ui(ui);
+        Vx.Web.Html.Type_node node = Vx.Ui.Html.Uihtml.f_node_image_from_ui_orig_parent(
+          ui,
+          orig,
+          parent
+        );
+        Vx.Web.Html.Type_node nodechg = Vx.Ui.Html.Uihtml.f_node_layout_from_node_ui_parent(
+          node,
+          ui,
+          parent
+        );
+        Vx.Core.Type_boolean iswrite = Vx.Ui.Html.Uihtml.f_boolean_writeeventsall_from_ui(
+          ui
+        );
         Vx.Core.Type_any output_1 = ui;
         return output_1;
       })
@@ -5587,7 +5957,8 @@ public static class Uihtml {
     }
 
     public Vx.Ui.Ui.Type_ui vx_ui_layout_label_from_ui_orig_parent(Vx.Ui.Ui.Type_ui ui, Vx.Ui.Ui.Type_ui orig, Vx.Ui.Ui.Type_ui parent) {
-      return Vx.Ui.Html.Uihtml.f_ui_layout_label_from_ui_orig_parent(ui, orig, parent);
+      Vx.Ui.Ui.Type_ui output = Vx.Ui.Html.Uihtml.f_ui_layout_label_from_ui_orig_parent(ui, orig, parent);
+      return output;
     }
 
   }
@@ -5601,9 +5972,19 @@ public static class Uihtml {
       Vx.Ui.Ui.t_ui,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Ui.Ui.Type_uimap uimap = ui.uimap();
-        Vx.Web.Html.Type_node node = Vx.Ui.Html.Uihtml.f_node_label_from_ui_orig_parent(ui, orig, parent);
-        Vx.Web.Html.Type_node nodechg = Vx.Ui.Html.Uihtml.f_node_layout_from_node_ui_parent(node, ui, parent);
-        Vx.Core.Type_boolean iswrite = Vx.Ui.Html.Uihtml.f_boolean_writeeventsall_from_ui(ui);
+        Vx.Web.Html.Type_node node = Vx.Ui.Html.Uihtml.f_node_label_from_ui_orig_parent(
+          ui,
+          orig,
+          parent
+        );
+        Vx.Web.Html.Type_node nodechg = Vx.Ui.Html.Uihtml.f_node_layout_from_node_ui_parent(
+          node,
+          ui,
+          parent
+        );
+        Vx.Core.Type_boolean iswrite = Vx.Ui.Html.Uihtml.f_boolean_writeeventsall_from_ui(
+          ui
+        );
         Vx.Core.Type_any output_1 = ui;
         return output_1;
       })

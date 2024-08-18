@@ -2385,7 +2385,8 @@ public static class Textblock {
     }
 
     public Vx.Data.Textblock.Type_textblocklist vx_children_from_textblock(Vx.Data.Textblock.Type_textblock textblock) {
-      return Vx.Data.Textblock.f_children_from_textblock(textblock);
+      Vx.Data.Textblock.Type_textblocklist output = Vx.Data.Textblock.f_children_from_textblock(textblock);
+      return output;
     }
 
   }
@@ -2470,7 +2471,8 @@ public static class Textblock {
     }
 
     public Vx.Data.Textblock.Type_delim vx_delim_first_from_delim_delim(Vx.Data.Textblock.Type_delim delim1, Vx.Data.Textblock.Type_delim delim2) {
-      return Vx.Data.Textblock.f_delim_first_from_delim_delim(delim1, delim2);
+      Vx.Data.Textblock.Type_delim output = Vx.Data.Textblock.f_delim_first_from_delim_delim(delim1, delim2);
+      return output;
     }
 
   }
@@ -2491,47 +2493,71 @@ public static class Textblock {
             Vx.Core.t_thenelselist,
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_eq(Vx.Core.vx_new_int(0), pos2);
+                Vx.Core.Type_any output_2 = Vx.Core.f_eq(
+                  Vx.Core.vx_new_int(0),
+                  pos2
+                );
+                return output_2;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return delim1;
+                Vx.Core.Type_any output_3 = delim1;
+                return output_3;
               })
             ),
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_eq(Vx.Core.vx_new_int(0), pos1);
+                Vx.Core.Type_any output_4 = Vx.Core.f_eq(
+                  Vx.Core.vx_new_int(0),
+                  pos1
+                );
+                return output_4;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return delim2;
+                Vx.Core.Type_any output_5 = delim2;
+                return output_5;
               })
             ),
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_is_empty_1(delim2);
+                Vx.Core.Type_any output_6 = Vx.Core.f_is_empty_1(
+                  delim2
+                );
+                return output_6;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return delim1;
+                Vx.Core.Type_any output_7 = delim1;
+                return output_7;
               })
             ),
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_is_empty_1(delim1);
+                Vx.Core.Type_any output_8 = Vx.Core.f_is_empty_1(
+                  delim1
+                );
+                return output_8;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return delim2;
+                Vx.Core.Type_any output_9 = delim2;
+                return output_9;
               })
             ),
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_lt(pos2, pos1);
+                Vx.Core.Type_any output_10 = Vx.Core.f_lt(
+                  pos2,
+                  pos1
+                );
+                return output_10;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return delim2;
+                Vx.Core.Type_any output_11 = delim2;
+                return output_11;
               })
             ),
             Vx.Core.f_else(
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return delim1;
+                Vx.Core.Type_any output_12 = delim1;
+                return output_12;
               })
             )
           )
@@ -2613,7 +2639,8 @@ public static class Textblock {
     }
 
     public Vx.Data.Textblock.Type_delim vx_delim_first_from_string_delimlist(Vx.Core.Type_string text, Vx.Data.Textblock.Type_delimlist delimlist) {
-      return Vx.Data.Textblock.f_delim_first_from_string_delimlist(text, delimlist);
+      Vx.Data.Textblock.Type_delim output = Vx.Data.Textblock.f_delim_first_from_string_delimlist(text, delimlist);
+      return output;
     }
 
   }
@@ -2629,21 +2656,28 @@ public static class Textblock {
         Vx.Core.t_thenelselist,
         Vx.Core.f_then(
           Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-            return Vx.Core.f_is_empty_1(delimlist);
+            Vx.Core.Type_any output_1 = Vx.Core.f_is_empty_1(
+              delimlist
+            );
+            return output_1;
           }),
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.f_empty(
+            Vx.Core.Type_any output_2 = Vx.Core.f_empty(
               Vx.Data.Textblock.t_delim
             );
+            return output_2;
           })
         ),
         Vx.Core.f_else(
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.f_let(
+            Vx.Core.Type_any output_3 = Vx.Core.f_let(
               Vx.Data.Textblock.t_delim,
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                Vx.Data.Textblock.Type_delimlist resolvedlist = Vx.Data.Textblock.f_delimlist_pos_from_string_delimlist(text, delimlist);
-                Vx.Core.Type_any output_2 = Vx.Core.f_any_from_list_start_reduce(
+                Vx.Data.Textblock.Type_delimlist resolvedlist = Vx.Data.Textblock.f_delimlist_pos_from_string_delimlist(
+                  text,
+                  delimlist
+                );
+                Vx.Core.Type_any output_4 = Vx.Core.f_any_from_list_start_reduce(
                   Vx.Data.Textblock.t_delim,
                   resolvedlist,
                   Vx.Core.f_empty(
@@ -2652,13 +2686,14 @@ public static class Textblock {
                   Vx.Core.t_any_from_reduce.vx_fn_new((Vx.Core.Type_any delim1_lmb_any, Vx.Core.Type_any delim2_lmb_any) => {
                     Vx.Data.Textblock.Type_delim delim1_lmb = Vx.Core.f_any_from_any(Vx.Data.Textblock.t_delim, delim1_lmb_any);
                     Vx.Data.Textblock.Type_delim delim2_lmb = Vx.Core.f_any_from_any(Vx.Data.Textblock.t_delim, delim2_lmb_any);
-                    Vx.Core.Type_any output_1 = Vx.Data.Textblock.f_delim_first_from_delim_delim(delim1_lmb, delim2_lmb);
-                    return output_1;
+                    Vx.Core.Type_any output_5 = Vx.Data.Textblock.f_delim_first_from_delim_delim(delim1_lmb, delim2_lmb);
+                    return output_5;
                   })
                 );
-                return output_2;
+                return output_4;
               })
             );
+            return output_3;
           })
         )
       )
@@ -2737,7 +2772,8 @@ public static class Textblock {
     }
 
     public Vx.Data.Textblock.Type_delim vx_delim_pos_from_string_delim(Vx.Core.Type_string text, Vx.Data.Textblock.Type_delim delim) {
-      return Vx.Data.Textblock.f_delim_pos_from_string_delim(text, delim);
+      Vx.Data.Textblock.Type_delim output = Vx.Data.Textblock.f_delim_pos_from_string_delim(text, delim);
+      return output;
     }
 
   }
@@ -2751,22 +2787,30 @@ public static class Textblock {
       Vx.Data.Textblock.t_delim,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_string find = delim.starttext();
-        Vx.Core.Type_int pos = Vx.Type.f_int_from_string_findkeyword(text, find);
+        Vx.Core.Type_int pos = Vx.Type.f_int_from_string_findkeyword(
+          text,
+          find
+        );
         Vx.Core.Type_any output_1 = Vx.Core.f_if_2(
           Vx.Data.Textblock.t_delim,
           Vx.Core.vx_new(
             Vx.Core.t_thenelselist,
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_eq(pos, Vx.Core.vx_new_int(0));
+                Vx.Core.Type_any output_2 = Vx.Core.f_eq(
+                  pos,
+                  Vx.Core.vx_new_int(0)
+                );
+                return output_2;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return delim;
+                Vx.Core.Type_any output_3 = delim;
+                return output_3;
               })
             ),
             Vx.Core.f_else(
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_copy(
+                Vx.Core.Type_any output_4 = Vx.Core.f_copy(
                   delim,
                   Vx.Core.vx_new(
                     Vx.Core.t_anylist,
@@ -2774,6 +2818,7 @@ public static class Textblock {
                     pos
                   )
                 );
+                return output_4;
               })
             )
           )
@@ -2855,7 +2900,8 @@ public static class Textblock {
     }
 
     public Vx.Data.Textblock.Type_delimlist vx_delimlist_pos_from_string_delimlist(Vx.Core.Type_string text, Vx.Data.Textblock.Type_delimlist delimlist) {
-      return Vx.Data.Textblock.f_delimlist_pos_from_string_delimlist(text, delimlist);
+      Vx.Data.Textblock.Type_delimlist output = Vx.Data.Textblock.f_delimlist_pos_from_string_delimlist(text, delimlist);
+      return output;
     }
 
   }
@@ -2870,8 +2916,10 @@ public static class Textblock {
       delimlist,
       Vx.Core.t_any_from_any.vx_fn_new((delim_any) => {
         Vx.Data.Textblock.Type_delim delim = Vx.Core.f_any_from_any(Vx.Data.Textblock.t_delim, delim_any);
-        Vx.Core.Type_any output_1 = 
-          Vx.Data.Textblock.f_delim_pos_from_string_delim(text, delim);
+        Vx.Core.Type_any output_1 = Vx.Data.Textblock.f_delim_pos_from_string_delim(
+          text,
+          delim
+        );
         return output_1;
       })
     );
@@ -2959,7 +3007,8 @@ public static class Textblock {
     }
 
     public Vx.Core.Type_boolean vx_is_close(Vx.Data.Textblock.Type_delim delimarg) {
-      return Vx.Data.Textblock.f_is_close(delimarg);
+      Vx.Core.Type_boolean output = Vx.Data.Textblock.f_is_close(delimarg);
+      return output;
     }
 
   }
@@ -3057,7 +3106,8 @@ public static class Textblock {
     }
 
     public Vx.Core.Type_boolean vx_is_single(Vx.Data.Textblock.Type_delim delimarg) {
-      return Vx.Data.Textblock.f_is_single(delimarg);
+      Vx.Core.Type_boolean output = Vx.Data.Textblock.f_is_single(delimarg);
+      return output;
     }
 
   }
@@ -3161,7 +3211,8 @@ public static class Textblock {
     }
 
     public Vx.Core.Type_stringlist vx_stringlist_from_textblocklist(Vx.Data.Textblock.Type_textblocklist textblocklist) {
-      return Vx.Data.Textblock.f_stringlist_from_textblocklist(textblocklist);
+      Vx.Core.Type_stringlist output = Vx.Data.Textblock.f_stringlist_from_textblocklist(textblocklist);
+      return output;
     }
 
   }
@@ -3260,7 +3311,8 @@ public static class Textblock {
     }
 
     public Vx.Core.Type_string vx_text_from_textblock(Vx.Data.Textblock.Type_textblock block) {
-      return Vx.Data.Textblock.f_text_from_textblock(block);
+      Vx.Core.Type_string output = Vx.Data.Textblock.f_text_from_textblock(block);
+      return output;
     }
 
   }
@@ -3347,7 +3399,8 @@ public static class Textblock {
     }
 
     public Vx.Data.Textblock.Type_textblock vx_textblock_addchild_from_textblock_find_child(Vx.Data.Textblock.Type_textblock textblockarg, Vx.Data.Textblock.Type_textblock find, Vx.Data.Textblock.Type_textblock child) {
-      return Vx.Data.Textblock.f_textblock_addchild_from_textblock_find_child(textblockarg, find, child);
+      Vx.Data.Textblock.Type_textblock output = Vx.Data.Textblock.f_textblock_addchild_from_textblock_find_child(textblockarg, find, child);
+      return output;
     }
 
   }
@@ -3363,25 +3416,33 @@ public static class Textblock {
         Vx.Core.t_thenelselist,
         Vx.Core.f_then(
           Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-            return Vx.Core.f_is_empty_1(textblockarg);
+            Vx.Core.Type_any output_1 = Vx.Core.f_is_empty_1(
+              textblockarg
+            );
+            return output_1;
           }),
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.f_empty(
+            Vx.Core.Type_any output_2 = Vx.Core.f_empty(
               Vx.Data.Textblock.t_textblock
             );
+            return output_2;
           })
         ),
         Vx.Core.f_then(
           Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-            return Vx.Core.f_and_1(
+            Vx.Core.Type_any output_3 = Vx.Core.f_and_1(
               Vx.Core.vx_new(
                 Vx.Core.t_booleanlist,
-                Vx.Core.f_eqeq(find, textblockarg)
+                Vx.Core.f_eqeq(
+                  find,
+                  textblockarg
+                )
               )
             );
+            return output_3;
           }),
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.f_copy(
+            Vx.Core.Type_any output_4 = Vx.Core.f_copy(
               textblockarg,
               Vx.Core.vx_new(
                 Vx.Core.t_anylist,
@@ -3395,11 +3456,12 @@ public static class Textblock {
                 )
               )
             );
+            return output_4;
           })
         ),
         Vx.Core.f_else(
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.f_copy(
+            Vx.Core.Type_any output_5 = Vx.Core.f_copy(
               textblockarg,
               Vx.Core.vx_new(
                 Vx.Core.t_anylist,
@@ -3411,6 +3473,7 @@ public static class Textblock {
                 )
               )
             );
+            return output_5;
           })
         )
       )
@@ -3499,7 +3562,8 @@ public static class Textblock {
     }
 
     public Vx.Data.Textblock.Type_textblock vx_textblock_delimnotfound(Vx.Data.Textblock.Type_textblock textblockarg) {
-      return Vx.Data.Textblock.f_textblock_delimnotfound(textblockarg);
+      Vx.Data.Textblock.Type_textblock output = Vx.Data.Textblock.f_textblock_delimnotfound(textblockarg);
+      return output;
     }
 
   }
@@ -3519,21 +3583,27 @@ public static class Textblock {
         Vx.Data.Textblock.Type_textblocklist childp = parent.children();
         Vx.Data.Textblock.Type_delim delimp = parent.delim();
         Vx.Data.Textblock.Type_delimlist delims = delimp.delimlist();
-        Vx.Core.Type_any output_5 = Vx.Core.f_if_2(
+        Vx.Core.Type_any output_1 = Vx.Core.f_if_2(
           Vx.Data.Textblock.t_textblock,
           Vx.Core.vx_new(
             Vx.Core.t_thenelselist,
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_not(
-                  Vx.Core.f_is_empty_1(close)
+                Vx.Core.Type_any output_2 = Vx.Core.f_not(
+                  Vx.Core.f_is_empty_1(
+                    close
+                  )
                 );
+                return output_2;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_let(
+                Vx.Core.Type_any output_3 = Vx.Core.f_let(
                   Vx.Data.Textblock.t_textblock,
                   Vx.Core.t_any_from_func.vx_fn_new(() => {
-                    Vx.Core.Type_msg msgerr = Vx.Core.f_msg_from_error_1(Vx.Core.vx_new_string("closedelimmissing"), close);
+                    Vx.Core.Type_msg msgerr = Vx.Core.f_msg_from_error_1(
+                      Vx.Core.vx_new_string("closedelimmissing"),
+                      close
+                    );
                     Vx.Data.Textblock.Type_textblock child = Vx.Core.f_copy(
                       textblockarg,
                       Vx.Core.vx_new(
@@ -3552,11 +3622,17 @@ public static class Textblock {
                         )
                       )
                     );
-                    Vx.Data.Textblock.Type_textblock find = Vx.Data.Textblock.f_textblock_findparent_from_textblock(parent);
+                    Vx.Data.Textblock.Type_textblock find = Vx.Data.Textblock.f_textblock_findparent_from_textblock(
+                      parent
+                    );
                     Vx.Data.Textblock.Type_textblocklist childrenf = find.children();
-                    Vx.Data.Textblock.Type_textblocklist childrenr = Vx.Core.f_copy(childrenf, Vx.Core.vx_new(
-                    Vx.Core.t_anylist,
-                    child));
+                    Vx.Data.Textblock.Type_textblocklist childrenr = Vx.Core.f_copy(
+                      childrenf,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
+                        child
+                      )
+                    );
                     Vx.Data.Textblock.Type_textblock replace = Vx.Core.f_copy(
                       find,
                       Vx.Core.vx_new(
@@ -3566,7 +3642,11 @@ public static class Textblock {
                         childrenr
                       )
                     );
-                    Vx.Data.Textblock.Type_textblock parent2 = Vx.Data.Textblock.f_textblock_replace_from_textblock_find_replace(parent, find, replace);
+                    Vx.Data.Textblock.Type_textblock parent2 = Vx.Data.Textblock.f_textblock_replace_from_textblock_find_replace(
+                      parent,
+                      find,
+                      replace
+                    );
                     Vx.Data.Textblock.Type_textblock gparent = parent2.parent();
                     Vx.Data.Textblock.Type_textblock parent3 = Vx.Core.f_copy(
                       parent2,
@@ -3579,10 +3659,14 @@ public static class Textblock {
                       )
                     );
                     Vx.Data.Textblock.Type_textblocklist childreng = gparent.children();
-                    Vx.Data.Textblock.Type_textblocklist childrenc = Vx.Core.f_copy(childreng, Vx.Core.vx_new(
-                    Vx.Core.t_anylist,
-                    parent3));
-                    Vx.Core.Type_any output_1 = Vx.Core.f_copy(
+                    Vx.Data.Textblock.Type_textblocklist childrenc = Vx.Core.f_copy(
+                      childreng,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_anylist,
+                        parent3
+                      )
+                    );
+                    Vx.Core.Type_any output_4 = Vx.Core.f_copy(
                       gparent,
                       Vx.Core.vx_new(
                         Vx.Core.t_anylist,
@@ -3591,22 +3675,27 @@ public static class Textblock {
                         msgerr
                       )
                     );
-                    return output_1;
+                    return output_4;
                   })
                 );
+                return output_3;
               })
             ),
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_is_empty_1(parent);
+                Vx.Core.Type_any output_5 = Vx.Core.f_is_empty_1(
+                  parent
+                );
+                return output_5;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return textblockarg;
+                Vx.Core.Type_any output_6 = textblockarg;
+                return output_6;
               })
             ),
             Vx.Core.f_else(
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_let(
+                Vx.Core.Type_any output_7 = Vx.Core.f_let(
                   Vx.Data.Textblock.t_textblock,
                   Vx.Core.t_any_from_func.vx_fn_new(() => {
                     Vx.Data.Textblock.Type_delim delimchg = Vx.Core.f_if_1(
@@ -3628,7 +3717,10 @@ public static class Textblock {
                     );
                     Vx.Data.Textblock.Type_textblock child = Vx.Core.f_if_1(
                       Vx.Data.Textblock.t_textblock,
-                      Vx.Core.f_eq(Vx.Core.vx_new_string(""), text),
+                      Vx.Core.f_eq(
+                        Vx.Core.vx_new_string(""),
+                        text
+                      ),
                       Vx.Core.f_empty(
                         Vx.Data.Textblock.t_textblock
                       ),
@@ -3645,7 +3737,9 @@ public static class Textblock {
                         )
                       )
                     );
-                    Vx.Data.Textblock.Type_textblock find = Vx.Data.Textblock.f_textblock_findparent_from_textblock(parent);
+                    Vx.Data.Textblock.Type_textblock find = Vx.Data.Textblock.f_textblock_findparent_from_textblock(
+                      parent
+                    );
                     Vx.Data.Textblock.Type_delim closef = find.close();
                     Vx.Core.Type_boolean closing = Vx.Core.f_if(
                       Vx.Core.t_boolean,
@@ -3655,23 +3749,28 @@ public static class Textblock {
                       ),
                       Vx.Core.vx_new_boolean(true)
                     );
-                    Vx.Core.Type_any output_4 = Vx.Core.f_if_2(
+                    Vx.Core.Type_any output_8 = Vx.Core.f_if_2(
                       Vx.Data.Textblock.t_textblock,
                       Vx.Core.vx_new(
                         Vx.Core.t_thenelselist,
                         Vx.Core.f_then(
                           Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                            return closing;
+                            Vx.Core.Type_any output_9 = closing;
+                            return output_9;
                           }),
                           Vx.Core.t_any_from_func.vx_fn_new(() => {
-                            return Vx.Core.f_let(
+                            Vx.Core.Type_any output_10 = Vx.Core.f_let(
                               Vx.Data.Textblock.t_textblock,
                               Vx.Core.t_any_from_func.vx_fn_new(() => {
                                 Vx.Data.Textblock.Type_textblock parent2 = find.parent();
-                                Vx.Data.Textblock.Type_textblock find2 = Vx.Data.Textblock.f_textblock_findparent_from_textblock(parent2);
+                                Vx.Data.Textblock.Type_textblock find2 = Vx.Data.Textblock.f_textblock_findparent_from_textblock(
+                                  parent2
+                                );
                                 Vx.Data.Textblock.Type_textblocklist children1 = Vx.Core.f_if_1(
                                   Vx.Data.Textblock.t_textblocklist,
-                                  Vx.Core.f_is_empty_1(child),
+                                  Vx.Core.f_is_empty_1(
+                                    child
+                                  ),
                                   find.children(),
                                   Vx.Core.f_copy(
                                     find.children(),
@@ -3697,16 +3796,19 @@ public static class Textblock {
                                     children1
                                   )
                                 );
-                                Vx.Core.Type_any output_3 = Vx.Core.f_if_2(
+                                Vx.Core.Type_any output_11 = Vx.Core.f_if_2(
                                   Vx.Data.Textblock.t_textblock,
                                   Vx.Core.vx_new(
                                     Vx.Core.t_thenelselist,
                                     Vx.Core.f_then(
                                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                                        return Vx.Core.f_is_empty_1(find2);
+                                        Vx.Core.Type_any output_12 = Vx.Core.f_is_empty_1(
+                                          find2
+                                        );
+                                        return output_12;
                                       }),
                                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                                        return Vx.Core.f_copy(
+                                        Vx.Core.Type_any output_13 = Vx.Core.f_copy(
                                           parent,
                                           Vx.Core.vx_new(
                                             Vx.Core.t_anylist,
@@ -3727,11 +3829,12 @@ public static class Textblock {
                                             )
                                           )
                                         );
+                                        return output_13;
                                       })
                                     ),
                                     Vx.Core.f_else(
                                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                                        return Vx.Core.f_let(
+                                        Vx.Core.Type_any output_14 = Vx.Core.f_let(
                                           Vx.Data.Textblock.t_textblock,
                                           Vx.Core.t_any_from_func.vx_fn_new(() => {
                                             Vx.Data.Textblock.Type_textblocklist children2 = Vx.Core.f_copy(
@@ -3753,43 +3856,63 @@ public static class Textblock {
                                                 children2
                                               )
                                             );
-                                            Vx.Data.Textblock.Type_textblock replace = Vx.Data.Textblock.f_textblock_replace_from_textblock_find_replace(parent2, find2, replace2);
-                                            Vx.Core.Type_any output_2 = Vx.Data.Textblock.f_textblock_replace_from_textblock_find_replace(parent, find, replace);
-                                            return output_2;
+                                            Vx.Data.Textblock.Type_textblock replace = Vx.Data.Textblock.f_textblock_replace_from_textblock_find_replace(
+                                              parent2,
+                                              find2,
+                                              replace2
+                                            );
+                                            Vx.Core.Type_any output_15 = Vx.Data.Textblock.f_textblock_replace_from_textblock_find_replace(
+                                              parent,
+                                              find,
+                                              replace
+                                            );
+                                            return output_15;
                                           })
                                         );
+                                        return output_14;
                                       })
                                     )
                                   )
                                 );
-                                return output_3;
+                                return output_11;
                               })
                             );
+                            return output_10;
                           })
                         ),
                         Vx.Core.f_then(
                           Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                            return Vx.Core.f_is_empty_1(child);
+                            Vx.Core.Type_any output_16 = Vx.Core.f_is_empty_1(
+                              child
+                            );
+                            return output_16;
                           }),
                           Vx.Core.t_any_from_func.vx_fn_new(() => {
-                            return parent;
+                            Vx.Core.Type_any output_17 = parent;
+                            return output_17;
                           })
                         ),
                         Vx.Core.f_else(
                           Vx.Core.t_any_from_func.vx_fn_new(() => {
-                            return Vx.Data.Textblock.f_textblock_addchild_from_textblock_find_child(parent, find, child);
+                            Vx.Core.Type_any output_18 = Vx.Data.Textblock.f_textblock_addchild_from_textblock_find_child(
+                              parent,
+                              find,
+                              child
+                            );
+                            return output_18;
                           })
                         )
                       )
                     );
-                    return output_4;
+                    return output_8;
                   })
                 );
+                return output_7;
               })
             )
           )
         );
-        return output_5;
+        return output_1;
       })
     );
     return output;
@@ -3876,7 +3999,8 @@ public static class Textblock {
     }
 
     public Vx.Data.Textblock.Type_textblock vx_textblock_findparent_from_textblock(Vx.Data.Textblock.Type_textblock textblockarg) {
-      return Vx.Data.Textblock.f_textblock_findparent_from_textblock(textblockarg);
+      Vx.Data.Textblock.Type_textblock output = Vx.Data.Textblock.f_textblock_findparent_from_textblock(textblockarg);
+      return output;
     }
 
   }
@@ -3900,31 +4024,48 @@ public static class Textblock {
             Vx.Core.t_thenelselist,
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_is_empty_1(textblockarg);
+                Vx.Core.Type_any output_2 = Vx.Core.f_is_empty_1(
+                  textblockarg
+                );
+                return output_2;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_empty(
+                Vx.Core.Type_any output_3 = Vx.Core.f_empty(
                   Vx.Data.Textblock.t_textblock
                 );
+                return output_3;
               })
             ),
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_or(
-                  Vx.Core.f_is_empty_1(parent),
+                Vx.Core.Type_any output_4 = Vx.Core.f_or(
+                  Vx.Core.f_is_empty_1(
+                    parent
+                  ),
                   Vx.Core.f_and(
-                    Vx.Core.f_ne(Vx.Core.vx_new_string(""), starttext),
-                    Vx.Core.f_ne(Vx.Core.vx_new_string(""), endtext)
+                    Vx.Core.f_ne(
+                      Vx.Core.vx_new_string(""),
+                      starttext
+                    ),
+                    Vx.Core.f_ne(
+                      Vx.Core.vx_new_string(""),
+                      endtext
+                    )
                   )
                 );
+                return output_4;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return textblockarg;
+                Vx.Core.Type_any output_5 = textblockarg;
+                return output_5;
               })
             ),
             Vx.Core.f_else(
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Data.Textblock.f_textblock_findparent_from_textblock(parent);
+                Vx.Core.Type_any output_6 = Vx.Data.Textblock.f_textblock_findparent_from_textblock(
+                  parent
+                );
+                return output_6;
               })
             )
           )
@@ -4016,7 +4157,8 @@ public static class Textblock {
     }
 
     public Vx.Data.Textblock.Type_textblock vx_textblock_init(Vx.Data.Textblock.Type_textblock textblockarg) {
-      return Vx.Data.Textblock.f_textblock_init(textblockarg);
+      Vx.Data.Textblock.Type_textblock output = Vx.Data.Textblock.f_textblock_init(textblockarg);
+      return output;
     }
 
   }
@@ -4032,15 +4174,23 @@ public static class Textblock {
         Vx.Core.Type_string text = textblockarg.text();
         Vx.Core.Type_int startpos = Vx.Core.f_if_1(
           Vx.Core.t_int,
-          Vx.Core.f_eq(Vx.Core.vx_new_string(""), text),
+          Vx.Core.f_eq(
+            Vx.Core.vx_new_string(""),
+            text
+          ),
           Vx.Core.vx_new_int(0),
           Vx.Core.vx_new_int(1)
         );
         Vx.Core.Type_int endpos = Vx.Core.f_if_1(
           Vx.Core.t_int,
-          Vx.Core.f_eq(Vx.Core.vx_new_string(""), text),
+          Vx.Core.f_eq(
+            Vx.Core.vx_new_string(""),
+            text
+          ),
           Vx.Core.vx_new_int(0),
-          Vx.Core.f_length(text)
+          Vx.Core.f_length(
+            text
+          )
         );
         Vx.Core.Type_any output_1 = Vx.Core.f_copy(
           textblockarg,
@@ -4154,7 +4304,8 @@ public static class Textblock {
     }
 
     public Vx.Data.Textblock.Type_textblock vx_textblock_parse(Vx.Data.Textblock.Type_textblock textblock) {
-      return Vx.Data.Textblock.f_textblock_parse(textblock);
+      Vx.Data.Textblock.Type_textblock output = Vx.Data.Textblock.f_textblock_parse(textblock);
+      return output;
     }
 
   }
@@ -4169,16 +4320,16 @@ public static class Textblock {
       textblock,
       Vx.Core.t_boolean_from_any.vx_fn_new((current_any) => {
         Vx.Data.Textblock.Type_textblock current = Vx.Core.f_any_from_any(Vx.Data.Textblock.t_textblock, current_any);
-        Vx.Core.Type_any output_1 = 
-          Vx.Core.f_is_empty_1(
-            current.parent()
-          );
+        Vx.Core.Type_any output_1 = Vx.Core.f_is_empty_1(
+          current.parent()
+        );
         return output_1;
       }),
       Vx.Core.t_any_from_any.vx_fn_new((current_any) => {
         Vx.Data.Textblock.Type_textblock current = Vx.Core.f_any_from_any(Vx.Data.Textblock.t_textblock, current_any);
-        Vx.Core.Type_any output_2 = 
-          Vx.Data.Textblock.f_textblock_parse_one(current);
+        Vx.Core.Type_any output_2 = Vx.Data.Textblock.f_textblock_parse_one(
+          current
+        );
         return output_2;
       }),
       Vx.Core.vx_new_int(100000)
@@ -4267,7 +4418,8 @@ public static class Textblock {
     }
 
     public Vx.Data.Textblock.Type_textblock vx_textblock_parse_one(Vx.Data.Textblock.Type_textblock textblockarg) {
-      return Vx.Data.Textblock.f_textblock_parse_one(textblockarg);
+      Vx.Data.Textblock.Type_textblock output = Vx.Data.Textblock.f_textblock_parse_one(textblockarg);
+      return output;
     }
 
   }
@@ -4286,8 +4438,13 @@ public static class Textblock {
         Vx.Core.Type_string textarg = textblockarg.text();
         Vx.Data.Textblock.Type_textblock parent = textblockarg.parent();
         Vx.Core.Type_boolean is_init = Vx.Core.f_and(
-          Vx.Core.f_is_empty_1(parent),
-          Vx.Core.f_eq(startpos, Vx.Core.vx_new_int(0))
+          Vx.Core.f_is_empty_1(
+            parent
+          ),
+          Vx.Core.f_eq(
+            startpos,
+            Vx.Core.vx_new_int(0)
+          )
         );
         Vx.Core.Type_string starttext = delimarg.starttext();
         Vx.Core.Type_string endtext = delimarg.endtext();
@@ -4298,83 +4455,135 @@ public static class Textblock {
             Vx.Core.t_thenelselist,
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_eq(Vx.Core.vx_new_string(""), textarg);
+                Vx.Core.Type_any output_13 = Vx.Core.f_eq(
+                  Vx.Core.vx_new_string(""),
+                  textarg
+                );
+                return output_13;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return startpos;
+                Vx.Core.Type_any output_14 = startpos;
+                return output_14;
               })
             ),
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_eq(Vx.Core.vx_new_int(0), startpos);
+                Vx.Core.Type_any output_15 = Vx.Core.f_eq(
+                  Vx.Core.vx_new_int(0),
+                  startpos
+                );
+                return output_15;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.vx_new_int(1);
+                Vx.Core.Type_any output_16 = Vx.Core.vx_new_int(1);
+                return output_16;
               })
             ),
             Vx.Core.f_else(
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return startpos;
+                Vx.Core.Type_any output_17 = startpos;
+                return output_17;
               })
             )
           )
         );
         Vx.Data.Textblock.Type_delimlist delimlistcl = Vx.Core.f_if_1(
           Vx.Data.Textblock.t_delimlist,
-          Vx.Core.f_is_empty_1(close),
+          Vx.Core.f_is_empty_1(
+            close
+          ),
           delimlistarg,
-          Vx.Core.f_copy(delimlistarg, Vx.Core.vx_new(
-            Vx.Core.t_anylist,
-            close))
+          Vx.Core.f_copy(
+            delimlistarg,
+            Vx.Core.vx_new(
+              Vx.Core.t_anylist,
+              close
+            )
+          )
         );
-        Vx.Data.Textblock.Type_delim delimfirst = Vx.Data.Textblock.f_delim_first_from_string_delimlist(textarg, delimlistcl);
+        Vx.Data.Textblock.Type_delim delimfirst = Vx.Data.Textblock.f_delim_first_from_string_delimlist(
+          textarg,
+          delimlistcl
+        );
         Vx.Core.Type_any output_1 = Vx.Core.f_if_2(
           Vx.Data.Textblock.t_textblock,
           Vx.Core.vx_new(
             Vx.Core.t_thenelselist,
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return is_init;
+                Vx.Core.Type_any output_2 = is_init;
+                return output_2;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Data.Textblock.f_textblock_init(textblockarg);
+                Vx.Core.Type_any output_3 = Vx.Data.Textblock.f_textblock_init(
+                  textblockarg
+                );
+                return output_3;
               })
             ),
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_is_empty_1(parent);
+                Vx.Core.Type_any output_4 = Vx.Core.f_is_empty_1(
+                  parent
+                );
+                return output_4;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return textblockarg;
+                Vx.Core.Type_any output_5 = textblockarg;
+                return output_5;
               })
             ),
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_is_empty_1(delimfirst);
+                Vx.Core.Type_any output_6 = Vx.Core.f_is_empty_1(
+                  delimfirst
+                );
+                return output_6;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Data.Textblock.f_textblock_delimnotfound(textblockarg);
+                Vx.Core.Type_any output_7 = Vx.Data.Textblock.f_textblock_delimnotfound(
+                  textblockarg
+                );
+                return output_7;
               })
             ),
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Data.Textblock.f_is_close(delimfirst);
+                Vx.Core.Type_any output_8 = Vx.Data.Textblock.f_is_close(
+                  delimfirst
+                );
+                return output_8;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Data.Textblock.f_textblock_from_close_textblock(delimfirst, textblockarg);
+                Vx.Core.Type_any output_9 = Vx.Data.Textblock.f_textblock_from_close_textblock(
+                  delimfirst,
+                  textblockarg
+                );
+                return output_9;
               })
             ),
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Data.Textblock.f_is_single(delimfirst);
+                Vx.Core.Type_any output_10 = Vx.Data.Textblock.f_is_single(
+                  delimfirst
+                );
+                return output_10;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Data.Textblock.f_textblock_from_single_textblock(delimfirst, textblockarg);
+                Vx.Core.Type_any output_11 = Vx.Data.Textblock.f_textblock_from_single_textblock(
+                  delimfirst,
+                  textblockarg
+                );
+                return output_11;
               })
             ),
             Vx.Core.f_else(
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Data.Textblock.f_textblock_from_open_textblock(delimfirst, textblockarg);
+                Vx.Core.Type_any output_12 = Vx.Data.Textblock.f_textblock_from_open_textblock(
+                  delimfirst,
+                  textblockarg
+                );
+                return output_12;
               })
             )
           )
@@ -4456,7 +4665,8 @@ public static class Textblock {
     }
 
     public Vx.Data.Textblock.Type_textblock vx_textblock_parse_from_string_delim(Vx.Core.Type_string text, Vx.Data.Textblock.Type_delim delim) {
-      return Vx.Data.Textblock.f_textblock_parse_from_string_delim(text, delim);
+      Vx.Data.Textblock.Type_textblock output = Vx.Data.Textblock.f_textblock_parse_from_string_delim(text, delim);
+      return output;
     }
 
   }
@@ -4469,8 +4679,13 @@ public static class Textblock {
     output = Vx.Core.f_let(
       Vx.Data.Textblock.t_textblock,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Data.Textblock.Type_textblock textblockinit = Vx.Data.Textblock.f_textblock_from_string_delim(text, delim);
-        Vx.Core.Type_any output_1 = Vx.Data.Textblock.f_textblock_parse(textblockinit);
+        Vx.Data.Textblock.Type_textblock textblockinit = Vx.Data.Textblock.f_textblock_from_string_delim(
+          text,
+          delim
+        );
+        Vx.Core.Type_any output_1 = Vx.Data.Textblock.f_textblock_parse(
+          textblockinit
+        );
         return output_1;
       })
     );
@@ -4550,7 +4765,8 @@ public static class Textblock {
     }
 
     public Vx.Data.Textblock.Type_textblock vx_textblock_replace_from_textblock_find_replace(Vx.Data.Textblock.Type_textblock textblockarg, Vx.Data.Textblock.Type_textblock find, Vx.Data.Textblock.Type_textblock replace) {
-      return Vx.Data.Textblock.f_textblock_replace_from_textblock_find_replace(textblockarg, find, replace);
+      Vx.Data.Textblock.Type_textblock output = Vx.Data.Textblock.f_textblock_replace_from_textblock_find_replace(textblockarg, find, replace);
+      return output;
     }
 
   }
@@ -4566,30 +4782,39 @@ public static class Textblock {
         Vx.Core.t_thenelselist,
         Vx.Core.f_then(
           Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-            return Vx.Core.f_is_empty_1(textblockarg);
+            Vx.Core.Type_any output_1 = Vx.Core.f_is_empty_1(
+              textblockarg
+            );
+            return output_1;
           }),
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.f_empty(
+            Vx.Core.Type_any output_2 = Vx.Core.f_empty(
               Vx.Data.Textblock.t_textblock
             );
+            return output_2;
           })
         ),
         Vx.Core.f_then(
           Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-            return Vx.Core.f_and_1(
+            Vx.Core.Type_any output_3 = Vx.Core.f_and_1(
               Vx.Core.vx_new(
                 Vx.Core.t_booleanlist,
-                Vx.Core.f_eqeq(find, textblockarg)
+                Vx.Core.f_eqeq(
+                  find,
+                  textblockarg
+                )
               )
             );
+            return output_3;
           }),
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return replace;
+            Vx.Core.Type_any output_4 = replace;
+            return output_4;
           })
         ),
         Vx.Core.f_else(
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.f_copy(
+            Vx.Core.Type_any output_5 = Vx.Core.f_copy(
               textblockarg,
               Vx.Core.vx_new(
                 Vx.Core.t_anylist,
@@ -4601,6 +4826,7 @@ public static class Textblock {
                 )
               )
             );
+            return output_5;
           })
         )
       )
@@ -4681,7 +4907,8 @@ public static class Textblock {
     }
 
     public Vx.Data.Textblock.Type_textblock vx_textblock_startleft_from_string_delim_offset(Vx.Core.Type_string text, Vx.Data.Textblock.Type_delim delim, Vx.Core.Type_int offset) {
-      return Vx.Data.Textblock.f_textblock_startleft_from_string_delim_offset(text, delim, offset);
+      Vx.Data.Textblock.Type_textblock output = Vx.Data.Textblock.f_textblock_startleft_from_string_delim_offset(text, delim, offset);
+      return output;
     }
 
   }
@@ -4696,47 +4923,71 @@ public static class Textblock {
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_int pos = delim.pos();
         Vx.Core.Type_int start = Vx.Core.vx_new_int(1);
-        Vx.Core.Type_int end = Vx.Core.f_minus(pos, Vx.Core.vx_new_int(1));
+        Vx.Core.Type_int end = Vx.Core.f_minus(
+          pos,
+          Vx.Core.vx_new_int(1)
+        );
         Vx.Core.Type_any output_1 = Vx.Core.f_if_2(
           Vx.Data.Textblock.t_textblock,
           Vx.Core.vx_new(
             Vx.Core.t_thenelselist,
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_eq(Vx.Core.vx_new_string(""), text);
+                Vx.Core.Type_any output_2 = Vx.Core.f_eq(
+                  Vx.Core.vx_new_string(""),
+                  text
+                );
+                return output_2;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_empty(
+                Vx.Core.Type_any output_3 = Vx.Core.f_empty(
                   Vx.Data.Textblock.t_textblock
                 );
+                return output_3;
               })
             ),
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_eq(Vx.Core.vx_new_int(0), pos);
+                Vx.Core.Type_any output_4 = Vx.Core.f_eq(
+                  Vx.Core.vx_new_int(0),
+                  pos
+                );
+                return output_4;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_empty(
+                Vx.Core.Type_any output_5 = Vx.Core.f_empty(
                   Vx.Data.Textblock.t_textblock
                 );
+                return output_5;
               })
             ),
             Vx.Core.f_else(
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_new(
+                Vx.Core.Type_any output_6 = Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
                   Vx.Core.vx_new(
                     Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
-                    Vx.Type.f_string_from_string_start_end(text, start, end),
+                    Vx.Type.f_string_from_string_start_end(
+                      text,
+                      start,
+                      end
+                    ),
                     Vx.Core.vx_new_string(":startpos"),
-                    Vx.Core.f_plus(offset, start),
+                    Vx.Core.f_plus(
+                      offset,
+                      start
+                    ),
                     Vx.Core.vx_new_string(":endpos"),
-                    Vx.Core.f_plus(offset, end),
+                    Vx.Core.f_plus(
+                      offset,
+                      end
+                    ),
                     Vx.Core.vx_new_string(":curpos"),
                     Vx.Core.vx_new_int(0)
                   )
                 );
+                return output_6;
               })
             )
           )
@@ -4820,7 +5071,8 @@ public static class Textblock {
     }
 
     public Vx.Data.Textblock.Type_textblock vx_textblock_startright_from_string_delim_offset(Vx.Core.Type_string text, Vx.Data.Textblock.Type_delim delimin, Vx.Core.Type_int offset) {
-      return Vx.Data.Textblock.f_textblock_startright_from_string_delim_offset(text, delimin, offset);
+      Vx.Data.Textblock.Type_textblock output = Vx.Data.Textblock.f_textblock_startright_from_string_delim_offset(text, delimin, offset);
+      return output;
     }
 
   }
@@ -4843,17 +5095,22 @@ public static class Textblock {
             Vx.Core.t_thenelselist,
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_eq(endtext, Vx.Core.vx_new_string(""));
+                Vx.Core.Type_any output_7 = Vx.Core.f_eq(
+                  endtext,
+                  Vx.Core.vx_new_string("")
+                );
+                return output_7;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_empty(
+                Vx.Core.Type_any output_8 = Vx.Core.f_empty(
                   Vx.Data.Textblock.t_delim
                 );
+                return output_8;
               })
             ),
             Vx.Core.f_else(
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_copy(
+                Vx.Core.Type_any output_9 = Vx.Core.f_copy(
                   Vx.Data.Textblock.c_delimclose,
                   Vx.Core.vx_new(
                     Vx.Core.t_anylist,
@@ -4861,6 +5118,7 @@ public static class Textblock {
                     endtext
                   )
                 );
+                return output_9;
               })
             )
           )
@@ -4873,18 +5131,23 @@ public static class Textblock {
             Vx.Core.f_case_1(
               Vx.Core.vx_new_string(":nonwhitespace"),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.vx_new_int(0);
+                Vx.Core.Type_any output_10 = Vx.Core.vx_new_int(0);
+                return output_10;
               })
             ),
             Vx.Core.f_case_1(
               Vx.Core.vx_new_string(":whitespace"),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.vx_new_int(0);
+                Vx.Core.Type_any output_11 = Vx.Core.vx_new_int(0);
+                return output_11;
               })
             ),
             Vx.Core.f_else(
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_length(starttext);
+                Vx.Core.Type_any output_12 = Vx.Core.f_length(
+                  starttext
+                );
+                return output_12;
               })
             )
           )
@@ -4896,34 +5159,50 @@ public static class Textblock {
             Vx.Core.t_thenelselist,
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_eq(text, Vx.Core.vx_new_string(""));
+                Vx.Core.Type_any output_2 = Vx.Core.f_eq(
+                  text,
+                  Vx.Core.vx_new_string("")
+                );
+                return output_2;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_empty(
+                Vx.Core.Type_any output_3 = Vx.Core.f_empty(
                   Vx.Data.Textblock.t_textblock
                 );
+                return output_3;
               })
             ),
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_lt(startpos, Vx.Core.vx_new_int(0));
+                Vx.Core.Type_any output_4 = Vx.Core.f_lt(
+                  startpos,
+                  Vx.Core.vx_new_int(0)
+                );
+                return output_4;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_empty(
+                Vx.Core.Type_any output_5 = Vx.Core.f_empty(
                   Vx.Data.Textblock.t_textblock
                 );
+                return output_5;
               })
             ),
             Vx.Core.f_else(
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_new(
+                Vx.Core.Type_any output_6 = Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
                   Vx.Core.vx_new(
                     Vx.Core.t_anylist,
                     Vx.Core.vx_new_string(":text"),
-                    Vx.Type.f_string_from_string_start(text, startpos),
+                    Vx.Type.f_string_from_string_start(
+                      text,
+                      startpos
+                    ),
                     Vx.Core.vx_new_string(":startpos"),
-                    Vx.Core.f_plus(offset, startpos),
+                    Vx.Core.f_plus(
+                      offset,
+                      startpos
+                    ),
                     Vx.Core.vx_new_string(":curpos"),
                     curpos,
                     Vx.Core.vx_new_string(":delim"),
@@ -4932,6 +5211,7 @@ public static class Textblock {
                     close
                   )
                 );
+                return output_6;
               })
             )
           )
@@ -5013,7 +5293,8 @@ public static class Textblock {
     }
 
     public Vx.Data.Textblock.Type_textblock vx_textblock_from_close_textblock(Vx.Data.Textblock.Type_delim close, Vx.Data.Textblock.Type_textblock textblockarg) {
-      return Vx.Data.Textblock.f_textblock_from_close_textblock(close, textblockarg);
+      Vx.Data.Textblock.Type_textblock output = Vx.Data.Textblock.f_textblock_from_close_textblock(close, textblockarg);
+      return output;
     }
 
   }
@@ -5032,10 +5313,17 @@ public static class Textblock {
         Vx.Core.Type_int endpos = textblockarg.endpos();
         Vx.Core.Type_int pos = close.pos();
         Vx.Core.Type_string textclose = close.starttext();
-        Vx.Core.Type_int lenclose = Vx.Core.f_length(textclose);
-        Vx.Core.Type_int posminus = Vx.Core.f_minus1(pos);
+        Vx.Core.Type_int lenclose = Vx.Core.f_length(
+          textclose
+        );
+        Vx.Core.Type_int posminus = Vx.Core.f_minus1(
+          pos
+        );
         Vx.Core.Type_int startleft = startpos;
-        Vx.Core.Type_int startclose = Vx.Core.f_plus(startpos, posminus);
+        Vx.Core.Type_int startclose = Vx.Core.f_plus(
+          startpos,
+          posminus
+        );
         Vx.Core.Type_int endclose = Vx.Core.f_switch(
           Vx.Core.t_int,
           textclose,
@@ -5044,38 +5332,63 @@ public static class Textblock {
             Vx.Core.f_case_1(
               Vx.Core.vx_new_string(":whitespace"),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Type.f_int_from_string_findkeyword(text, Vx.Core.vx_new_string(":nonwhitespace"));
+                Vx.Core.Type_any output_2 = Vx.Type.f_int_from_string_findkeyword(
+                  text,
+                  Vx.Core.vx_new_string(":nonwhitespace")
+                );
+                return output_2;
               })
             ),
             Vx.Core.f_else(
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_plus(
-                  Vx.Core.f_minus1(startclose),
+                Vx.Core.Type_any output_3 = Vx.Core.f_plus(
+                  Vx.Core.f_minus1(
+                    startclose
+                  ),
                   lenclose
                 );
+                return output_3;
               })
             )
           )
         );
         Vx.Core.Type_int endleft = Vx.Core.f_if_1(
           Vx.Core.t_int,
-          Vx.Core.f_eq(Vx.Core.vx_new_int(1), pos),
+          Vx.Core.f_eq(
+            Vx.Core.vx_new_int(1),
+            pos
+          ),
           startclose,
-          Vx.Core.f_minus1(startclose)
+          Vx.Core.f_minus1(
+            startclose
+          )
         );
-        Vx.Core.Type_int startright = Vx.Core.f_plus1(endclose);
+        Vx.Core.Type_int startright = Vx.Core.f_plus1(
+          endclose
+        );
         Vx.Core.Type_int endright = Vx.Core.f_if_1(
           Vx.Core.t_int,
-          Vx.Core.f_lt(endpos, startright),
+          Vx.Core.f_lt(
+            endpos,
+            startright
+          ),
           startright,
           endpos
         );
-        Vx.Core.Type_string textleft = Vx.Type.f_string_from_string_end(text, posminus);
+        Vx.Core.Type_string textleft = Vx.Type.f_string_from_string_end(
+          text,
+          posminus
+        );
         Vx.Core.Type_string textright = Vx.Type.f_string_from_string_start(
           text,
-          Vx.Core.f_plus(pos, lenclose)
+          Vx.Core.f_plus(
+            pos,
+            lenclose
+          )
         );
-        Vx.Data.Textblock.Type_textblock find = Vx.Data.Textblock.f_textblock_findparent_from_textblock(parent);
+        Vx.Data.Textblock.Type_textblock find = Vx.Data.Textblock.f_textblock_findparent_from_textblock(
+          parent
+        );
         Vx.Data.Textblock.Type_delim closefind = find.close();
         Vx.Core.Type_string textfind = find.text();
         Vx.Core.Type_int startfind = find.startpos();
@@ -5089,10 +5402,15 @@ public static class Textblock {
           )
         );
         Vx.Core.Type_int lenfind = Vx.Core.f_minus(
-          Vx.Core.f_plus1(endclose),
+          Vx.Core.f_plus1(
+            endclose
+          ),
           startfind
         );
-        Vx.Core.Type_string textreplace = Vx.Type.f_string_from_string_end(textfind, lenfind);
+        Vx.Core.Type_string textreplace = Vx.Type.f_string_from_string_end(
+          textfind,
+          lenfind
+        );
         Vx.Data.Textblock.Type_textblock replace = Vx.Core.f_copy(
           find,
           Vx.Core.vx_new(
@@ -5116,7 +5434,11 @@ public static class Textblock {
             Vx.Data.Textblock.c_delimclosing
           )
         );
-        Vx.Data.Textblock.Type_textblock parentchg = Vx.Data.Textblock.f_textblock_replace_from_textblock_find_replace(parent, find, replace);
+        Vx.Data.Textblock.Type_textblock parentchg = Vx.Data.Textblock.f_textblock_replace_from_textblock_find_replace(
+          parent,
+          find,
+          replace
+        );
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Data.Textblock.t_textblock,
           Vx.Core.vx_new(
@@ -5225,7 +5547,8 @@ public static class Textblock {
     }
 
     public Vx.Data.Textblock.Type_textblock vx_textblock_from_empty_textblock(Vx.Data.Textblock.Type_delim empty, Vx.Data.Textblock.Type_textblock textblockarg) {
-      return Vx.Data.Textblock.f_textblock_from_empty_textblock(empty, textblockarg);
+      Vx.Data.Textblock.Type_textblock output = Vx.Data.Textblock.f_textblock_from_empty_textblock(empty, textblockarg);
+      return output;
     }
 
   }
@@ -5309,7 +5632,8 @@ public static class Textblock {
     }
 
     public Vx.Data.Textblock.Type_textblock vx_textblock_from_open_textblock(Vx.Data.Textblock.Type_delim open, Vx.Data.Textblock.Type_textblock textblockarg) {
-      return Vx.Data.Textblock.f_textblock_from_open_textblock(open, textblockarg);
+      Vx.Data.Textblock.Type_textblock output = Vx.Data.Textblock.f_textblock_from_open_textblock(open, textblockarg);
+      return output;
     }
 
   }
@@ -5331,20 +5655,36 @@ public static class Textblock {
         Vx.Core.Type_string textopen = open.starttext();
         Vx.Core.Type_string textclose = open.endtext();
         Vx.Data.Textblock.Type_delimlist delimlistl = open.delimlist();
-        Vx.Core.Type_int lenopen = Vx.Core.f_length(textopen);
-        Vx.Core.Type_int posminus = Vx.Core.f_minus1(pos);
+        Vx.Core.Type_int lenopen = Vx.Core.f_length(
+          textopen
+        );
+        Vx.Core.Type_int posminus = Vx.Core.f_minus1(
+          pos
+        );
         Vx.Core.Type_int startleft = Vx.Core.f_if_1(
           Vx.Core.t_int,
-          Vx.Core.f_eq(pos, Vx.Core.vx_new_int(1)),
-          Vx.Core.f_minus1(startpos),
+          Vx.Core.f_eq(
+            pos,
+            Vx.Core.vx_new_int(1)
+          ),
+          Vx.Core.f_minus1(
+            startpos
+          ),
           startpos
         );
         Vx.Core.Type_int endleft = Vx.Core.f_if_1(
           Vx.Core.t_int,
-          Vx.Core.f_eq(pos, Vx.Core.vx_new_int(1)),
-          Vx.Core.f_minus1(startpos),
+          Vx.Core.f_eq(
+            pos,
+            Vx.Core.vx_new_int(1)
+          ),
+          Vx.Core.f_minus1(
+            startpos
+          ),
           Vx.Core.f_plus(
-            Vx.Core.f_minus1(startleft),
+            Vx.Core.f_minus1(
+              startleft
+            ),
             posminus
           )
         );
@@ -5356,12 +5696,24 @@ public static class Textblock {
             lenopen
           )
         );
-        Vx.Core.Type_int startopen = Vx.Core.f_plus(startpos, posminus);
-        Vx.Core.Type_string textleft = Vx.Type.f_string_from_string_end(text, posminus);
-        Vx.Core.Type_string textpar = Vx.Type.f_string_from_string_start(text, pos);
+        Vx.Core.Type_int startopen = Vx.Core.f_plus(
+          startpos,
+          posminus
+        );
+        Vx.Core.Type_string textleft = Vx.Type.f_string_from_string_end(
+          text,
+          posminus
+        );
+        Vx.Core.Type_string textpar = Vx.Type.f_string_from_string_start(
+          text,
+          pos
+        );
         Vx.Core.Type_string textright = Vx.Type.f_string_from_string_start(
           text,
-          Vx.Core.f_plus(pos, lenopen)
+          Vx.Core.f_plus(
+            pos,
+            lenopen
+          )
         );
         Vx.Data.Textblock.Type_delim close = Vx.Core.f_copy(
           Vx.Data.Textblock.c_delimclose,
@@ -5377,17 +5729,22 @@ public static class Textblock {
             Vx.Core.t_thenelselist,
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_eq(Vx.Core.vx_new_string(""), textleft);
+                Vx.Core.Type_any output_2 = Vx.Core.f_eq(
+                  Vx.Core.vx_new_string(""),
+                  textleft
+                );
+                return output_2;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_empty(
+                Vx.Core.Type_any output_3 = Vx.Core.f_empty(
                   Vx.Data.Textblock.t_textblock
                 );
+                return output_3;
               })
             ),
             Vx.Core.f_else(
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_new(
+                Vx.Core.Type_any output_4 = Vx.Core.f_new(
                   Vx.Data.Textblock.t_textblock,
                   Vx.Core.vx_new(
                     Vx.Core.t_anylist,
@@ -5399,6 +5756,7 @@ public static class Textblock {
                     endleft
                   )
                 );
+                return output_4;
               })
             )
           )
@@ -5432,17 +5790,25 @@ public static class Textblock {
             Vx.Core.t_thenelselist,
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_eq(Vx.Core.vx_new_string(""), textleft);
+                Vx.Core.Type_any output_5 = Vx.Core.f_eq(
+                  Vx.Core.vx_new_string(""),
+                  textleft
+                );
+                return output_5;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_empty(
+                Vx.Core.Type_any output_6 = Vx.Core.f_empty(
                   Vx.Data.Textblock.t_textblock
                 );
+                return output_6;
               })
             ),
             Vx.Core.f_else(
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Data.Textblock.f_textblock_findparent_from_textblock(parent);
+                Vx.Core.Type_any output_7 = Vx.Data.Textblock.f_textblock_findparent_from_textblock(
+                  parent
+                );
+                return output_7;
               })
             )
           )
@@ -5453,15 +5819,24 @@ public static class Textblock {
             Vx.Core.t_thenelselist,
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_is_empty_1(tbfind);
+                Vx.Core.Type_any output_8 = Vx.Core.f_is_empty_1(
+                  tbfind
+                );
+                return output_8;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return tbpar1;
+                Vx.Core.Type_any output_9 = tbpar1;
+                return output_9;
               })
             ),
             Vx.Core.f_else(
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Data.Textblock.f_textblock_addchild_from_textblock_find_child(tbpar1, tbfind, tbleft);
+                Vx.Core.Type_any output_10 = Vx.Data.Textblock.f_textblock_addchild_from_textblock_find_child(
+                  tbpar1,
+                  tbfind,
+                  tbleft
+                );
+                return output_10;
               })
             )
           )
@@ -5568,7 +5943,8 @@ public static class Textblock {
     }
 
     public Vx.Data.Textblock.Type_textblock vx_textblock_from_single_textblock(Vx.Data.Textblock.Type_delim single, Vx.Data.Textblock.Type_textblock textblockarg) {
-      return Vx.Data.Textblock.f_textblock_from_single_textblock(single, textblockarg);
+      Vx.Data.Textblock.Type_textblock output = Vx.Data.Textblock.f_textblock_from_single_textblock(single, textblockarg);
+      return output;
     }
 
   }
@@ -5595,56 +5971,90 @@ public static class Textblock {
             Vx.Core.f_case_1(
               Vx.Core.vx_new_string(":whitespace"),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_let(
+                Vx.Core.Type_any output_2 = Vx.Core.f_let(
                   Vx.Core.t_string,
                   Vx.Core.t_any_from_func.vx_fn_new(() => {
-                    Vx.Core.Type_string text2 = Vx.Type.f_string_from_string_start(text, pos);
-                    Vx.Core.Type_int pos2 = Vx.Type.f_int_from_string_findkeyword(text2, Vx.Core.vx_new_string(":nonwhitespace"));
+                    Vx.Core.Type_string text2 = Vx.Type.f_string_from_string_start(
+                      text,
+                      pos
+                    );
+                    Vx.Core.Type_int pos2 = Vx.Type.f_int_from_string_findkeyword(
+                      text2,
+                      Vx.Core.vx_new_string(":nonwhitespace")
+                    );
                     Vx.Core.Type_int pos3 = Vx.Core.f_if_2(
                       Vx.Core.t_int,
                       Vx.Core.vx_new(
                         Vx.Core.t_thenelselist,
                         Vx.Core.f_then(
                           Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                            return Vx.Core.f_eq(Vx.Core.vx_new_int(0), pos2);
+                            Vx.Core.Type_any output_4 = Vx.Core.f_eq(
+                              Vx.Core.vx_new_int(0),
+                              pos2
+                            );
+                            return output_4;
                           }),
                           Vx.Core.t_any_from_func.vx_fn_new(() => {
-                            return Vx.Core.f_length(text2);
+                            Vx.Core.Type_any output_5 = Vx.Core.f_length(
+                              text2
+                            );
+                            return output_5;
                           })
                         ),
                         Vx.Core.f_then(
                           Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                            return Vx.Core.f_eq(pos2, pos);
+                            Vx.Core.Type_any output_6 = Vx.Core.f_eq(
+                              pos2,
+                              pos
+                            );
+                            return output_6;
                           }),
                           Vx.Core.t_any_from_func.vx_fn_new(() => {
-                            return pos2;
+                            Vx.Core.Type_any output_7 = pos2;
+                            return output_7;
                           })
                         ),
                         Vx.Core.f_else(
                           Vx.Core.t_any_from_func.vx_fn_new(() => {
-                            return Vx.Core.f_minus1(pos2);
+                            Vx.Core.Type_any output_8 = Vx.Core.f_minus1(
+                              pos2
+                            );
+                            return output_8;
                           })
                         )
                       )
                     );
-                    Vx.Core.Type_any output_1 = Vx.Type.f_string_from_string_start_end(text, pos, pos3);
-                    return output_1;
+                    Vx.Core.Type_any output_3 = Vx.Type.f_string_from_string_start_end(
+                      text,
+                      pos,
+                      pos3
+                    );
+                    return output_3;
                   })
                 );
+                return output_2;
               })
             ),
             Vx.Core.f_else(
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return origsingle;
+                Vx.Core.Type_any output_9 = origsingle;
+                return output_9;
               })
             )
           )
         );
         Vx.Data.Textblock.Type_delimlist delimlistl = single.delimlist();
-        Vx.Core.Type_int lensingle = Vx.Core.f_length(textsingle);
-        Vx.Core.Type_int posminus = Vx.Core.f_minus1(pos);
+        Vx.Core.Type_int lensingle = Vx.Core.f_length(
+          textsingle
+        );
+        Vx.Core.Type_int posminus = Vx.Core.f_minus1(
+          pos
+        );
         Vx.Core.Type_int startleft = startpos;
-        Vx.Core.Type_int startsingle = Vx.Core.f_plus(startpos, posminus);
+        Vx.Core.Type_int startsingle = Vx.Core.f_plus(
+          startpos,
+          posminus
+        );
         Vx.Core.Type_int endsingle = Vx.Core.f_switch(
           Vx.Core.t_int,
           textsingle,
@@ -5653,33 +6063,56 @@ public static class Textblock {
             Vx.Core.f_case_1(
               Vx.Core.vx_new_string(":whitespace"),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Type.f_int_from_string_findkeyword(text, Vx.Core.vx_new_string(":nonwhitespace"));
+                Vx.Core.Type_any output_10 = Vx.Type.f_int_from_string_findkeyword(
+                  text,
+                  Vx.Core.vx_new_string(":nonwhitespace")
+                );
+                return output_10;
               })
             ),
             Vx.Core.f_else(
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_plus(
-                  Vx.Core.f_minus1(startsingle),
+                Vx.Core.Type_any output_11 = Vx.Core.f_plus(
+                  Vx.Core.f_minus1(
+                    startsingle
+                  ),
                   lensingle
                 );
+                return output_11;
               })
             )
           )
         );
         Vx.Core.Type_int endleft = Vx.Core.f_if_1(
           Vx.Core.t_int,
-          Vx.Core.f_eq(startsingle, startpos),
+          Vx.Core.f_eq(
+            startsingle,
+            startpos
+          ),
           startsingle,
-          Vx.Core.f_minus1(startsingle)
+          Vx.Core.f_minus1(
+            startsingle
+          )
         );
-        Vx.Core.Type_int startright = Vx.Core.f_plus1(endsingle);
-        Vx.Core.Type_string textleft = Vx.Type.f_string_from_string_end(text, posminus);
-        Vx.Core.Type_string textpar = Vx.Type.f_string_from_string_start(text, pos);
+        Vx.Core.Type_int startright = Vx.Core.f_plus1(
+          endsingle
+        );
+        Vx.Core.Type_string textleft = Vx.Type.f_string_from_string_end(
+          text,
+          posminus
+        );
+        Vx.Core.Type_string textpar = Vx.Type.f_string_from_string_start(
+          text,
+          pos
+        );
         Vx.Core.Type_string textright = Vx.Type.f_string_from_string_start(
           text,
-          Vx.Core.f_plus(pos, lensingle)
+          Vx.Core.f_plus(
+            pos,
+            lensingle
+          )
         );
-        Vx.Core.Type_any output_2 = Vx.Core.f_new(
+        Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Data.Textblock.t_textblock,
           Vx.Core.vx_new(
             Vx.Core.t_anylist,
@@ -5739,7 +6172,7 @@ public static class Textblock {
             )
           )
         );
-        return output_2;
+        return output_1;
       })
     );
     return output;
@@ -5816,7 +6249,8 @@ public static class Textblock {
     }
 
     public Vx.Data.Textblock.Type_textblock vx_textblock_from_string_delim(Vx.Core.Type_string text, Vx.Data.Textblock.Type_delim delim) {
-      return Vx.Data.Textblock.f_textblock_from_string_delim(text, delim);
+      Vx.Data.Textblock.Type_textblock output = Vx.Data.Textblock.f_textblock_from_string_delim(text, delim);
+      return output;
     }
 
   }
@@ -5837,7 +6271,9 @@ public static class Textblock {
         Vx.Core.vx_new_string(":startpos"),
         Vx.Core.vx_new_int(0),
         Vx.Core.vx_new_string(":endpos"),
-        Vx.Core.f_length(text)
+        Vx.Core.f_length(
+          text
+        )
       )
     );
     return output;
@@ -5914,7 +6350,8 @@ public static class Textblock {
     }
 
     public Vx.Data.Textblock.Type_textblock vx_textblock_from_textblock_delim(Vx.Data.Textblock.Type_textblock textblock, Vx.Data.Textblock.Type_delim delim) {
-      return Vx.Data.Textblock.f_textblock_from_textblock_delim(textblock, delim);
+      Vx.Data.Textblock.Type_textblock output = Vx.Data.Textblock.f_textblock_from_textblock_delim(textblock, delim);
+      return output;
     }
 
   }
@@ -5998,7 +6435,8 @@ public static class Textblock {
     }
 
     public Vx.Data.Textblock.Type_textblocklist vx_textblocklist_from_textblocklist_remove(Vx.Data.Textblock.Type_textblocklist tblist, Vx.Data.Textblock.Type_delim remove) {
-      return Vx.Data.Textblock.f_textblocklist_from_textblocklist_remove(tblist, remove);
+      Vx.Data.Textblock.Type_textblocklist output = Vx.Data.Textblock.f_textblocklist_from_textblocklist_remove(tblist, remove);
+      return output;
     }
 
   }
@@ -6013,21 +6451,23 @@ public static class Textblock {
       tblist,
       Vx.Core.t_any_from_any.vx_fn_new((textblock_any) => {
         Vx.Data.Textblock.Type_textblock textblock = Vx.Core.f_any_from_any(Vx.Data.Textblock.t_textblock, textblock_any);
-        Vx.Core.Type_any output_1 = 
-          Vx.Core.f_let(
-            Vx.Data.Textblock.t_textblock,
-            Vx.Core.t_any_from_func.vx_fn_new(() => {
-              Vx.Data.Textblock.Type_delim delimcurr = textblock.delim();
-              Vx.Core.Type_string namecurr = delimcurr.name();
-              Vx.Core.Type_string nameremove = remove.name();
-              Vx.Core.Type_any output_2 = Vx.Core.f_if(
-                Vx.Data.Textblock.t_textblock,
-                Vx.Core.f_ne(namecurr, nameremove),
-                textblock
-              );
-              return output_2;
-            })
-          );
+        Vx.Core.Type_any output_1 = Vx.Core.f_let(
+          Vx.Data.Textblock.t_textblock,
+          Vx.Core.t_any_from_func.vx_fn_new(() => {
+            Vx.Data.Textblock.Type_delim delimcurr = textblock.delim();
+            Vx.Core.Type_string namecurr = delimcurr.name();
+            Vx.Core.Type_string nameremove = remove.name();
+            Vx.Core.Type_any output_2 = Vx.Core.f_if(
+              Vx.Data.Textblock.t_textblock,
+              Vx.Core.f_ne(
+                namecurr,
+                nameremove
+              ),
+              textblock
+            );
+            return output_2;
+          })
+        );
         return output_1;
       })
     );

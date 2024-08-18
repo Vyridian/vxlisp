@@ -8706,7 +8706,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_htmlstring_from_string(Vx.Core.Type_string text) {
-      return Vx.Web.Html.f_htmlstring_from_string(text);
+      Vx.Core.Type_string output = Vx.Web.Html.f_htmlstring_from_string(text);
+      return output;
     }
 
   }
@@ -8800,7 +8801,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_indent(Vx.Core.Type_int indent) {
-      return Vx.Web.Html.f_string_indent(indent);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_indent(indent);
+      return output;
     }
 
   }
@@ -8810,7 +8812,10 @@ public static class Html {
 
   public static Vx.Core.Type_string f_string_indent(Vx.Core.Type_int indent) {
     Vx.Core.Type_string output = Vx.Core.e_string;
-    output = Vx.Core.f_string_repeat(Vx.Core.vx_new_string("  "), indent);
+    output = Vx.Core.f_string_repeat(
+      Vx.Core.vx_new_string("  "),
+      indent
+    );
     return output;
   }
 
@@ -8885,7 +8890,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_body_indent(Vx.Web.Html.Type_body body, Vx.Core.Type_int indent) {
-      return Vx.Web.Html.f_string_from_body_indent(body, indent);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_body_indent(body, indent);
+      return output;
     }
 
   }
@@ -8899,7 +8905,12 @@ public static class Html {
       Vx.Core.t_string,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Web.Html.Type_divchildlist nodes = body.nodes();
-        Vx.Core.Type_any output_1 = Vx.Web.Html.f_string_from_nodelist_tag_prop_indent(nodes, Vx.Core.vx_new_string("body"), Vx.Core.vx_new_string(""), indent);
+        Vx.Core.Type_any output_1 = Vx.Web.Html.f_string_from_nodelist_tag_prop_indent(
+          nodes,
+          Vx.Core.vx_new_string("body"),
+          Vx.Core.vx_new_string(""),
+          indent
+        );
         return output_1;
       })
     );
@@ -8977,7 +8988,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_details_indent(Vx.Web.Html.Type_details details, Vx.Core.Type_int indent) {
-      return Vx.Web.Html.f_string_from_details_indent(details, indent);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_details_indent(details, indent);
+      return output;
     }
 
   }
@@ -8990,16 +9002,24 @@ public static class Html {
     output = Vx.Core.f_let(
       Vx.Core.t_string,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Core.Type_string sindent = Vx.Web.Html.f_string_from_indent(indent);
+        Vx.Core.Type_string sindent = Vx.Web.Html.f_string_from_indent(
+          indent
+        );
         Vx.Web.Html.Type_divchildlist summary = details.summary();
         Vx.Web.Html.Type_divchildlist nodes = details.nodes();
         Vx.Core.Type_string ssummary = Vx.Web.Html.f_string_from_nodelist_indent(
           summary,
-          Vx.Core.f_plus(indent, Vx.Core.vx_new_int(2))
+          Vx.Core.f_plus(
+            indent,
+            Vx.Core.vx_new_int(2)
+          )
         );
         Vx.Core.Type_string snodes = Vx.Web.Html.f_string_from_nodelist_indent(
           nodes,
-          Vx.Core.f_plus(indent, Vx.Core.vx_new_int(1))
+          Vx.Core.f_plus(
+            indent,
+            Vx.Core.vx_new_int(1)
+          )
         );
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Core.t_string,
@@ -9094,7 +9114,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_div_indent(Vx.Web.Html.Type_div div, Vx.Core.Type_int indent) {
-      return Vx.Web.Html.f_string_from_div_indent(div, indent);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_div_indent(div, indent);
+      return output;
     }
 
   }
@@ -9210,7 +9231,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_footer_indent(Vx.Web.Html.Type_footer footer, Vx.Core.Type_int indent) {
-      return Vx.Web.Html.f_string_from_footer_indent(footer, indent);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_footer_indent(footer, indent);
+      return output;
     }
 
   }
@@ -9224,7 +9246,12 @@ public static class Html {
       Vx.Core.t_string,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Web.Html.Type_divchildlist nodes = footer.nodes();
-        Vx.Core.Type_any output_1 = Vx.Web.Html.f_string_from_nodelist_tag_prop_indent(nodes, Vx.Core.vx_new_string("footer"), Vx.Core.vx_new_string(""), indent);
+        Vx.Core.Type_any output_1 = Vx.Web.Html.f_string_from_nodelist_tag_prop_indent(
+          nodes,
+          Vx.Core.vx_new_string("footer"),
+          Vx.Core.vx_new_string(""),
+          indent
+        );
         return output_1;
       })
     );
@@ -9302,7 +9329,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_h1_indent(Vx.Web.Html.Type_h1 h1, Vx.Core.Type_int indent) {
-      return Vx.Web.Html.f_string_from_h1_indent(h1, indent);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_h1_indent(h1, indent);
+      return output;
     }
 
   }
@@ -9315,7 +9343,9 @@ public static class Html {
     output = Vx.Core.f_let(
       Vx.Core.t_string,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Core.Type_string sindent = Vx.Web.Html.f_string_from_indent(indent);
+        Vx.Core.Type_string sindent = Vx.Web.Html.f_string_from_indent(
+          indent
+        );
         Vx.Core.Type_string text = h1.text();
         Vx.Core.Type_string sid = Vx.Web.Html.f_string_from_propname_val(
           Vx.Core.vx_new_string("id"),
@@ -9410,7 +9440,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_h2_indent(Vx.Web.Html.Type_h2 h2, Vx.Core.Type_int indent) {
-      return Vx.Web.Html.f_string_from_h2_indent(h2, indent);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_h2_indent(h2, indent);
+      return output;
     }
 
   }
@@ -9424,7 +9455,9 @@ public static class Html {
       Vx.Core.t_string,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_string text = h2.text();
-        Vx.Core.Type_string sindent = Vx.Web.Html.f_string_from_indent(indent);
+        Vx.Core.Type_string sindent = Vx.Web.Html.f_string_from_indent(
+          indent
+        );
         Vx.Core.Type_string sid = Vx.Web.Html.f_string_from_propname_val(
           Vx.Core.vx_new_string("id"),
           h2.id()
@@ -9518,7 +9551,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_h3_indent(Vx.Web.Html.Type_h3 h3, Vx.Core.Type_int indent) {
-      return Vx.Web.Html.f_string_from_h3_indent(h3, indent);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_h3_indent(h3, indent);
+      return output;
     }
 
   }
@@ -9532,7 +9566,9 @@ public static class Html {
       Vx.Core.t_string,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_string text = h3.text();
-        Vx.Core.Type_string sindent = Vx.Web.Html.f_string_from_indent(indent);
+        Vx.Core.Type_string sindent = Vx.Web.Html.f_string_from_indent(
+          indent
+        );
         Vx.Core.Type_string sid = Vx.Web.Html.f_string_from_propname_val(
           Vx.Core.vx_new_string("id"),
           h3.id()
@@ -9626,7 +9662,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_head_indent(Vx.Web.Html.Type_head head, Vx.Core.Type_int indent) {
-      return Vx.Web.Html.f_string_from_head_indent(head, indent);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_head_indent(head, indent);
+      return output;
     }
 
   }
@@ -9640,7 +9677,12 @@ public static class Html {
       Vx.Core.t_string,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Web.Html.Type_headchildlist nodes = head.nodes();
-        Vx.Core.Type_any output_1 = Vx.Web.Html.f_string_from_nodelist_tag_prop_indent(nodes, Vx.Core.vx_new_string("head"), Vx.Core.vx_new_string(""), indent);
+        Vx.Core.Type_any output_1 = Vx.Web.Html.f_string_from_nodelist_tag_prop_indent(
+          nodes,
+          Vx.Core.vx_new_string("head"),
+          Vx.Core.vx_new_string(""),
+          indent
+        );
         return output_1;
       })
     );
@@ -9728,7 +9770,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_html(Vx.Web.Html.Type_html html) {
-      return Vx.Web.Html.f_string_from_html(html);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_html(html);
+      return output;
     }
 
   }
@@ -9748,9 +9791,18 @@ public static class Html {
         Vx.Web.Html.Type_head head = html.head();
         Vx.Web.Html.Type_body body = html.body();
         Vx.Web.Html.Type_footer footer = html.footer();
-        Vx.Core.Type_string shead = Vx.Web.Html.f_string_from_head_indent(head, Vx.Core.vx_new_int(1));
-        Vx.Core.Type_string sbody = Vx.Web.Html.f_string_from_body_indent(body, Vx.Core.vx_new_int(1));
-        Vx.Core.Type_string sfooter = Vx.Web.Html.f_string_from_footer_indent(footer, Vx.Core.vx_new_int(1));
+        Vx.Core.Type_string shead = Vx.Web.Html.f_string_from_head_indent(
+          head,
+          Vx.Core.vx_new_int(1)
+        );
+        Vx.Core.Type_string sbody = Vx.Web.Html.f_string_from_body_indent(
+          body,
+          Vx.Core.vx_new_int(1)
+        );
+        Vx.Core.Type_string sfooter = Vx.Web.Html.f_string_from_footer_indent(
+          footer,
+          Vx.Core.vx_new_int(1)
+        );
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Core.t_string,
           Vx.Core.vx_new(
@@ -9844,7 +9896,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_img_indent(Vx.Web.Html.Type_img img, Vx.Core.Type_int indent) {
-      return Vx.Web.Html.f_string_from_img_indent(img, indent);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_img_indent(img, indent);
+      return output;
     }
 
   }
@@ -9857,7 +9910,9 @@ public static class Html {
     output = Vx.Core.f_let(
       Vx.Core.t_string,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Core.Type_string sindent = Vx.Web.Html.f_string_from_indent(indent);
+        Vx.Core.Type_string sindent = Vx.Web.Html.f_string_from_indent(
+          indent
+        );
         Vx.Core.Type_string ssrc = Vx.Web.Html.f_string_from_propname_val(
           Vx.Core.vx_new_string("src"),
           img.src()
@@ -9973,7 +10028,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_indent(Vx.Core.Type_int indent) {
-      return Vx.Web.Html.f_string_from_indent(indent);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_indent(indent);
+      return output;
     }
 
   }
@@ -9985,14 +10041,19 @@ public static class Html {
     Vx.Core.Type_string output = Vx.Core.e_string;
     output = Vx.Core.f_if_1(
       Vx.Core.t_string,
-      Vx.Core.f_eq(indent, Vx.Core.vx_new_int(0)),
+      Vx.Core.f_eq(
+        indent,
+        Vx.Core.vx_new_int(0)
+      ),
       Vx.Core.vx_new_string(""),
       Vx.Core.f_new(
         Vx.Core.t_string,
         Vx.Core.vx_new(
           Vx.Core.t_anylist,
           Vx.Core.c_newline,
-          Vx.Web.Html.f_string_indent(indent)
+          Vx.Web.Html.f_string_indent(
+            indent
+          )
         )
       )
     );
@@ -10070,7 +10131,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_meta_indent(Vx.Web.Html.Type_meta meta, Vx.Core.Type_int indent) {
-      return Vx.Web.Html.f_string_from_meta_indent(meta, indent);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_meta_indent(meta, indent);
+      return output;
     }
 
   }
@@ -10083,7 +10145,9 @@ public static class Html {
     output = Vx.Core.f_let(
       Vx.Core.t_string,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Core.Type_string sindent = Vx.Web.Html.f_string_from_indent(indent);
+        Vx.Core.Type_string sindent = Vx.Web.Html.f_string_from_indent(
+          indent
+        );
         Vx.Core.Type_string charset = meta.charset();
         Vx.Core.Type_string name = meta.name();
         Vx.Core.Type_string content = meta.content();
@@ -10093,10 +10157,18 @@ public static class Html {
             Vx.Core.t_thenelselist,
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_ne(Vx.Core.vx_new_string(""), charset);
+                Vx.Core.Type_any output_2 = Vx.Core.f_ne(
+                  Vx.Core.vx_new_string(""),
+                  charset
+                );
+                return output_2;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Web.Html.f_string_from_propname_val(Vx.Core.vx_new_string("charset"), charset);
+                Vx.Core.Type_any output_3 = Vx.Web.Html.f_string_from_propname_val(
+                  Vx.Core.vx_new_string("charset"),
+                  charset
+                );
+                return output_3;
               })
             )
           )
@@ -10107,10 +10179,18 @@ public static class Html {
             Vx.Core.t_thenelselist,
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_ne(Vx.Core.vx_new_string(""), name);
+                Vx.Core.Type_any output_4 = Vx.Core.f_ne(
+                  Vx.Core.vx_new_string(""),
+                  name
+                );
+                return output_4;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Web.Html.f_string_from_propname_val(Vx.Core.vx_new_string("name"), name);
+                Vx.Core.Type_any output_5 = Vx.Web.Html.f_string_from_propname_val(
+                  Vx.Core.vx_new_string("name"),
+                  name
+                );
+                return output_5;
               })
             )
           )
@@ -10121,10 +10201,18 @@ public static class Html {
             Vx.Core.t_thenelselist,
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_ne(Vx.Core.vx_new_string(""), content);
+                Vx.Core.Type_any output_6 = Vx.Core.f_ne(
+                  Vx.Core.vx_new_string(""),
+                  content
+                );
+                return output_6;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Web.Html.f_string_from_propname_val(Vx.Core.vx_new_string("content"), content);
+                Vx.Core.Type_any output_7 = Vx.Web.Html.f_string_from_propname_val(
+                  Vx.Core.vx_new_string("content"),
+                  content
+                );
+                return output_7;
               })
             )
           )
@@ -10218,7 +10306,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_node_indent(Vx.Core.Type_any node, Vx.Core.Type_int indent) {
-      return Vx.Web.Html.f_string_from_node_indent(node, indent);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_node_indent(node, indent);
+      return output;
     }
 
   }
@@ -10230,169 +10319,243 @@ public static class Html {
     Vx.Core.Type_string output = Vx.Core.e_string;
     output = Vx.Core.f_switch(
       Vx.Core.t_string,
-      Vx.Core.f_type_from_any(node),
+      Vx.Core.f_type_from_any(
+        node
+      ),
       Vx.Core.vx_new(
         Vx.Core.t_thenelselist,
         Vx.Core.f_case_1(
           Vx.Web.Html.t_body,
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Web.Html.f_string_from_body_indent(
-              Vx.Core.f_any_from_any(Vx.Web.Html.t_body, node),
+            Vx.Core.Type_any output_1 = Vx.Web.Html.f_string_from_body_indent(
+              Vx.Core.f_any_from_any(
+                Vx.Web.Html.t_body,
+                node
+              ),
               indent
             );
+            return output_1;
           })
         ),
         Vx.Core.f_case_1(
           Vx.Web.Html.t_details,
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Web.Html.f_string_from_details_indent(
-              Vx.Core.f_any_from_any(Vx.Web.Html.t_details, node),
+            Vx.Core.Type_any output_2 = Vx.Web.Html.f_string_from_details_indent(
+              Vx.Core.f_any_from_any(
+                Vx.Web.Html.t_details,
+                node
+              ),
               indent
             );
+            return output_2;
           })
         ),
         Vx.Core.f_case_1(
           Vx.Web.Html.t_div,
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Web.Html.f_string_from_div_indent(
-              Vx.Core.f_any_from_any(Vx.Web.Html.t_div, node),
+            Vx.Core.Type_any output_3 = Vx.Web.Html.f_string_from_div_indent(
+              Vx.Core.f_any_from_any(
+                Vx.Web.Html.t_div,
+                node
+              ),
               indent
             );
+            return output_3;
           })
         ),
         Vx.Core.f_case_1(
           Vx.Web.Html.t_h1,
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Web.Html.f_string_from_h1_indent(
-              Vx.Core.f_any_from_any(Vx.Web.Html.t_h1, node),
+            Vx.Core.Type_any output_4 = Vx.Web.Html.f_string_from_h1_indent(
+              Vx.Core.f_any_from_any(
+                Vx.Web.Html.t_h1,
+                node
+              ),
               indent
             );
+            return output_4;
           })
         ),
         Vx.Core.f_case_1(
           Vx.Web.Html.t_h2,
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Web.Html.f_string_from_h2_indent(
-              Vx.Core.f_any_from_any(Vx.Web.Html.t_h2, node),
+            Vx.Core.Type_any output_5 = Vx.Web.Html.f_string_from_h2_indent(
+              Vx.Core.f_any_from_any(
+                Vx.Web.Html.t_h2,
+                node
+              ),
               indent
             );
+            return output_5;
           })
         ),
         Vx.Core.f_case_1(
           Vx.Web.Html.t_h3,
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Web.Html.f_string_from_h3_indent(
-              Vx.Core.f_any_from_any(Vx.Web.Html.t_h3, node),
+            Vx.Core.Type_any output_6 = Vx.Web.Html.f_string_from_h3_indent(
+              Vx.Core.f_any_from_any(
+                Vx.Web.Html.t_h3,
+                node
+              ),
               indent
             );
+            return output_6;
           })
         ),
         Vx.Core.f_case_1(
           Vx.Web.Html.t_head,
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Web.Html.f_string_from_head_indent(
-              Vx.Core.f_any_from_any(Vx.Web.Html.t_head, node),
+            Vx.Core.Type_any output_7 = Vx.Web.Html.f_string_from_head_indent(
+              Vx.Core.f_any_from_any(
+                Vx.Web.Html.t_head,
+                node
+              ),
               indent
             );
+            return output_7;
           })
         ),
         Vx.Core.f_case_1(
           Vx.Web.Html.t_footer,
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Web.Html.f_string_from_footer_indent(
-              Vx.Core.f_any_from_any(Vx.Web.Html.t_footer, node),
+            Vx.Core.Type_any output_8 = Vx.Web.Html.f_string_from_footer_indent(
+              Vx.Core.f_any_from_any(
+                Vx.Web.Html.t_footer,
+                node
+              ),
               indent
             );
+            return output_8;
           })
         ),
         Vx.Core.f_case_1(
           Vx.Web.Html.t_img,
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Web.Html.f_string_from_img_indent(
-              Vx.Core.f_any_from_any(Vx.Web.Html.t_img, node),
+            Vx.Core.Type_any output_9 = Vx.Web.Html.f_string_from_img_indent(
+              Vx.Core.f_any_from_any(
+                Vx.Web.Html.t_img,
+                node
+              ),
               indent
             );
+            return output_9;
           })
         ),
         Vx.Core.f_case_1(
           Vx.Web.Html.t_meta,
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Web.Html.f_string_from_meta_indent(
-              Vx.Core.f_any_from_any(Vx.Web.Html.t_meta, node),
+            Vx.Core.Type_any output_10 = Vx.Web.Html.f_string_from_meta_indent(
+              Vx.Core.f_any_from_any(
+                Vx.Web.Html.t_meta,
+                node
+              ),
               indent
             );
+            return output_10;
           })
         ),
         Vx.Core.f_case_1(
           Vx.Web.Html.t_p,
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Web.Html.f_string_from_p_indent(
-              Vx.Core.f_any_from_any(Vx.Web.Html.t_p, node),
+            Vx.Core.Type_any output_11 = Vx.Web.Html.f_string_from_p_indent(
+              Vx.Core.f_any_from_any(
+                Vx.Web.Html.t_p,
+                node
+              ),
               indent
             );
+            return output_11;
           })
         ),
         Vx.Core.f_case_1(
           Vx.Web.Html.t_stylesheet,
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Web.Html.f_string_from_stylesheet_indent(
-              Vx.Core.f_any_from_any(Vx.Web.Html.t_stylesheet, node),
+            Vx.Core.Type_any output_12 = Vx.Web.Html.f_string_from_stylesheet_indent(
+              Vx.Core.f_any_from_any(
+                Vx.Web.Html.t_stylesheet,
+                node
+              ),
               indent
             );
+            return output_12;
           })
         ),
         Vx.Core.f_case_1(
           Vx.Web.Html.t_table,
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Web.Html.f_string_from_table_indent(
-              Vx.Core.f_any_from_any(Vx.Web.Html.t_table, node),
+            Vx.Core.Type_any output_13 = Vx.Web.Html.f_string_from_table_indent(
+              Vx.Core.f_any_from_any(
+                Vx.Web.Html.t_table,
+                node
+              ),
               indent
             );
+            return output_13;
           })
         ),
         Vx.Core.f_case_1(
           Vx.Web.Html.t_title,
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Web.Html.f_string_from_title_indent(
-              Vx.Core.f_any_from_any(Vx.Web.Html.t_title, node),
+            Vx.Core.Type_any output_14 = Vx.Web.Html.f_string_from_title_indent(
+              Vx.Core.f_any_from_any(
+                Vx.Web.Html.t_title,
+                node
+              ),
               indent
             );
+            return output_14;
           })
         ),
         Vx.Core.f_case_1(
           Vx.Web.Html.t_tbody,
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Web.Html.f_string_from_tbody_indent(
-              Vx.Core.f_any_from_any(Vx.Web.Html.t_tbody, node),
+            Vx.Core.Type_any output_15 = Vx.Web.Html.f_string_from_tbody_indent(
+              Vx.Core.f_any_from_any(
+                Vx.Web.Html.t_tbody,
+                node
+              ),
               indent
             );
+            return output_15;
           })
         ),
         Vx.Core.f_case_1(
           Vx.Web.Html.t_thead,
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Web.Html.f_string_from_thead_indent(
-              Vx.Core.f_any_from_any(Vx.Web.Html.t_thead, node),
+            Vx.Core.Type_any output_16 = Vx.Web.Html.f_string_from_thead_indent(
+              Vx.Core.f_any_from_any(
+                Vx.Web.Html.t_thead,
+                node
+              ),
               indent
             );
+            return output_16;
           })
         ),
         Vx.Core.f_case_1(
           Vx.Web.Html.t_td,
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Web.Html.f_string_from_td_indent(
-              Vx.Core.f_any_from_any(Vx.Web.Html.t_td, node),
+            Vx.Core.Type_any output_17 = Vx.Web.Html.f_string_from_td_indent(
+              Vx.Core.f_any_from_any(
+                Vx.Web.Html.t_td,
+                node
+              ),
               indent
             );
+            return output_17;
           })
         ),
         Vx.Core.f_case_1(
           Vx.Web.Html.t_tr,
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Web.Html.f_string_from_tr_indent(
-              Vx.Core.f_any_from_any(Vx.Web.Html.t_tr, node),
+            Vx.Core.Type_any output_18 = Vx.Web.Html.f_string_from_tr_indent(
+              Vx.Core.f_any_from_any(
+                Vx.Web.Html.t_tr,
+                node
+              ),
               indent
             );
+            return output_18;
           })
         )
       )
@@ -10471,7 +10634,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_nodelist_indent(Vx.Core.Type_list nodelist, Vx.Core.Type_int indent) {
-      return Vx.Web.Html.f_string_from_nodelist_indent(nodelist, indent);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_nodelist_indent(nodelist, indent);
+      return output;
     }
 
   }
@@ -10489,13 +10653,18 @@ public static class Html {
           nodelist,
           Vx.Core.t_any_from_any.vx_fn_new((node_any) => {
             Vx.Web.Html.Type_node node = Vx.Core.f_any_from_any(Vx.Web.Html.t_node, node_any);
-            Vx.Core.Type_any output_1 = 
-                Vx.Web.Html.f_string_from_node_indent(node, indent);
-            return output_1;
+            Vx.Core.Type_any output_2 = Vx.Web.Html.f_string_from_node_indent(
+              node,
+              indent
+            );
+            return output_2;
           })
         );
-        Vx.Core.Type_any output_2 = Vx.Type.f_string_from_stringlist_join(textlist, Vx.Core.vx_new_string(""));
-        return output_2;
+        Vx.Core.Type_any output_1 = Vx.Type.f_string_from_stringlist_join(
+          textlist,
+          Vx.Core.vx_new_string("")
+        );
+        return output_1;
       })
     );
     return output;
@@ -10576,7 +10745,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_nodelist_tag_prop_indent(Vx.Core.Type_list nodes, Vx.Core.Type_string tag, Vx.Core.Type_string prop, Vx.Core.Type_int indent) {
-      return Vx.Web.Html.f_string_from_nodelist_tag_prop_indent(nodes, tag, prop, indent);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_nodelist_tag_prop_indent(nodes, tag, prop, indent);
+      return output;
     }
 
   }
@@ -10591,32 +10761,45 @@ public static class Html {
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_string text = Vx.Web.Html.f_string_from_nodelist_indent(
           nodes,
-          Vx.Core.f_plus1(indent)
+          Vx.Core.f_plus1(
+            indent
+          )
         );
-        Vx.Core.Type_string sindent = Vx.Web.Html.f_string_from_indent(indent);
+        Vx.Core.Type_string sindent = Vx.Web.Html.f_string_from_indent(
+          indent
+        );
         Vx.Core.Type_string eindent = Vx.Core.f_if_2(
           Vx.Core.t_string,
           Vx.Core.vx_new(
             Vx.Core.t_thenelselist,
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_is_empty(text);
+                Vx.Core.Type_any output_2 = Vx.Core.f_is_empty(
+                  text
+                );
+                return output_2;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.vx_new_string("");
+                Vx.Core.Type_any output_3 = Vx.Core.vx_new_string("");
+                return output_3;
               })
             ),
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_is_empty(sindent);
+                Vx.Core.Type_any output_4 = Vx.Core.f_is_empty(
+                  sindent
+                );
+                return output_4;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.c_newline;
+                Vx.Core.Type_any output_5 = Vx.Core.c_newline;
+                return output_5;
               })
             ),
             Vx.Core.f_else(
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return sindent;
+                Vx.Core.Type_any output_6 = sindent;
+                return output_6;
               })
             )
           )
@@ -10714,7 +10897,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_p_indent(Vx.Web.Html.Type_p p, Vx.Core.Type_int indent) {
-      return Vx.Web.Html.f_string_from_p_indent(p, indent);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_p_indent(p, indent);
+      return output;
     }
 
   }
@@ -10727,7 +10911,9 @@ public static class Html {
     output = Vx.Core.f_let(
       Vx.Core.t_string,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Core.Type_string sindent = Vx.Web.Html.f_string_from_indent(indent);
+        Vx.Core.Type_string sindent = Vx.Web.Html.f_string_from_indent(
+          indent
+        );
         Vx.Core.Type_string text = Vx.Web.Html.f_htmlstring_from_string(
           p.text()
         );
@@ -10833,7 +11019,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_propname_val(Vx.Core.Type_string key, Vx.Core.Type_string val) {
-      return Vx.Web.Html.f_string_from_propname_val(key, val);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_propname_val(key, val);
+      return output;
     }
 
   }
@@ -10845,7 +11032,9 @@ public static class Html {
     Vx.Core.Type_string output = Vx.Core.e_string;
     output = Vx.Core.f_if(
       Vx.Core.t_string,
-      Vx.Core.f_notempty(val),
+      Vx.Core.f_notempty(
+        val
+      ),
       Vx.Core.f_new(
         Vx.Core.t_string,
         Vx.Core.vx_new(
@@ -10943,7 +11132,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_propstyle(Vx.Web.Html.Type_style style) {
-      return Vx.Web.Html.f_string_from_propstyle(style);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_propstyle(style);
+      return output;
     }
 
   }
@@ -10959,10 +11149,13 @@ public static class Html {
         Vx.Core.t_thenelselist,
         Vx.Core.f_then(
           Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-            return Vx.Core.f_notempty_1(style);
+            Vx.Core.Type_any output_1 = Vx.Core.f_notempty_1(
+              style
+            );
+            return output_1;
           }),
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.f_new(
+            Vx.Core.Type_any output_2 = Vx.Core.f_new(
               Vx.Core.t_string,
               Vx.Core.vx_new(
                 Vx.Core.t_anylist,
@@ -10975,6 +11168,7 @@ public static class Html {
                 Vx.Core.c_quote
               )
             );
+            return output_2;
           })
         )
       )
@@ -11053,7 +11247,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_propstyle_stylelist(Vx.Web.Html.Type_style style, Vx.Web.Html.Type_stylelist stylelist) {
-      return Vx.Web.Html.f_string_from_propstyle_stylelist(style, stylelist);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_propstyle_stylelist(style, stylelist);
+      return output;
     }
 
   }
@@ -11069,18 +11264,30 @@ public static class Html {
         Vx.Core.t_thenelselist,
         Vx.Core.f_then(
           Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-            return Vx.Core.f_notempty_1(style);
+            Vx.Core.Type_any output_1 = Vx.Core.f_notempty_1(
+              style
+            );
+            return output_1;
           }),
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Web.Html.f_string_from_propstyle(style);
+            Vx.Core.Type_any output_2 = Vx.Web.Html.f_string_from_propstyle(
+              style
+            );
+            return output_2;
           })
         ),
         Vx.Core.f_then(
           Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-            return Vx.Core.f_notempty_1(stylelist);
+            Vx.Core.Type_any output_3 = Vx.Core.f_notempty_1(
+              stylelist
+            );
+            return output_3;
           }),
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Web.Html.f_string_from_propstylelist(stylelist);
+            Vx.Core.Type_any output_4 = Vx.Web.Html.f_string_from_propstylelist(
+              stylelist
+            );
+            return output_4;
           })
         )
       )
@@ -11169,7 +11376,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_propstylelist(Vx.Web.Html.Type_stylelist stylelist) {
-      return Vx.Web.Html.f_string_from_propstylelist(stylelist);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_propstylelist(stylelist);
+      return output;
     }
 
   }
@@ -11185,16 +11393,24 @@ public static class Html {
         Vx.Core.t_thenelselist,
         Vx.Core.f_then(
           Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-            return Vx.Core.f_notempty_1(stylelist);
+            Vx.Core.Type_any output_1 = Vx.Core.f_notempty_1(
+              stylelist
+            );
+            return output_1;
           }),
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.f_let(
+            Vx.Core.Type_any output_2 = Vx.Core.f_let(
               Vx.Core.t_string,
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                Vx.Core.Type_string joined = Vx.Web.Html.f_string_from_stylelist(stylelist);
-                Vx.Core.Type_any output_1 = Vx.Core.f_if(
+                Vx.Core.Type_string joined = Vx.Web.Html.f_string_from_stylelist(
+                  stylelist
+                );
+                Vx.Core.Type_any output_3 = Vx.Core.f_if(
                   Vx.Core.t_string,
-                  Vx.Core.f_ne(Vx.Core.vx_new_string(""), joined),
+                  Vx.Core.f_ne(
+                    Vx.Core.vx_new_string(""),
+                    joined
+                  ),
                   Vx.Core.f_new(
                     Vx.Core.t_string,
                     Vx.Core.vx_new(
@@ -11206,9 +11422,10 @@ public static class Html {
                     )
                   )
                 );
-                return output_1;
+                return output_3;
               })
             );
+            return output_2;
           })
         )
       )
@@ -11297,7 +11514,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_propstyleunique(Vx.Web.Html.Type_style style) {
-      return Vx.Web.Html.f_string_from_propstyleunique(style);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_propstyleunique(style);
+      return output;
     }
 
   }
@@ -11313,24 +11531,33 @@ public static class Html {
         Vx.Core.t_thenelselist,
         Vx.Core.f_then(
           Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-            return Vx.Core.f_notempty_1(style);
+            Vx.Core.Type_any output_1 = Vx.Core.f_notempty_1(
+              style
+            );
+            return output_1;
           }),
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.f_let(
+            Vx.Core.Type_any output_2 = Vx.Core.f_let(
               Vx.Core.t_string,
               Vx.Core.t_any_from_func.vx_fn_new(() => {
                 Vx.Web.Html.Type_propmap props = style.props();
-                Vx.Core.Type_string text = Vx.Web.Html.f_string_from_stylepropmap_indent(props, Vx.Core.vx_new_int(0));
-                Vx.Core.Type_any output_1 = Vx.Core.f_if_2(
+                Vx.Core.Type_string text = Vx.Web.Html.f_string_from_stylepropmap_indent(
+                  props,
+                  Vx.Core.vx_new_int(0)
+                );
+                Vx.Core.Type_any output_3 = Vx.Core.f_if_2(
                   Vx.Core.t_string,
                   Vx.Core.vx_new(
                     Vx.Core.t_thenelselist,
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_notempty(text);
+                        Vx.Core.Type_any output_4 = Vx.Core.f_notempty(
+                          text
+                        );
+                        return output_4;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_new(
+                        Vx.Core.Type_any output_5 = Vx.Core.f_new(
                           Vx.Core.t_string,
                           Vx.Core.vx_new(
                             Vx.Core.t_anylist,
@@ -11340,13 +11567,15 @@ public static class Html {
                             Vx.Core.c_quote
                           )
                         );
+                        return output_5;
                       })
                     )
                   )
                 );
-                return output_1;
+                return output_3;
               })
             );
+            return output_2;
           })
         )
       )
@@ -11425,7 +11654,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_style_indent(Vx.Web.Html.Type_style style, Vx.Core.Type_int indent) {
-      return Vx.Web.Html.f_string_from_style_indent(style, indent);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_style_indent(style, indent);
+      return output;
     }
 
   }
@@ -11438,17 +11668,23 @@ public static class Html {
     output = Vx.Core.f_let(
       Vx.Core.t_string,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Core.Type_string sindent = Vx.Web.Html.f_string_from_indent(indent);
+        Vx.Core.Type_string sindent = Vx.Web.Html.f_string_from_indent(
+          indent
+        );
         Vx.Core.Type_string name = style.name();
         Vx.Web.Html.Type_propmap propmap = style.props();
         Vx.Web.Html.Type_stylelist sublist = style.stylelist();
         Vx.Core.Type_string stext = Vx.Web.Html.f_string_from_stylepropmap_indent(
           propmap,
-          Vx.Core.f_plus1(indent)
+          Vx.Core.f_plus1(
+            indent
+          )
         );
         Vx.Core.Type_string subtext = Vx.Web.Html.f_string_from_stylelist_indent(
           sublist,
-          Vx.Core.f_plus1(indent)
+          Vx.Core.f_plus1(
+            indent
+          )
         );
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Core.t_string,
@@ -11550,7 +11786,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_stylelist(Vx.Web.Html.Type_stylelist stylelist) {
-      return Vx.Web.Html.f_string_from_stylelist(stylelist);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_stylelist(stylelist);
+      return output;
     }
 
   }
@@ -11568,16 +11805,18 @@ public static class Html {
           stylelist,
           Vx.Core.t_any_from_any.vx_fn_new((item_any) => {
             Vx.Web.Html.Type_style item = Vx.Core.f_any_from_any(Vx.Web.Html.t_style, item_any);
-            Vx.Core.Type_any output_1 = 
-                Vx.Type.f_string_from_string_start(
-                  item.name(),
-                  Vx.Core.vx_new_int(2)
-                );
-            return output_1;
+            Vx.Core.Type_any output_2 = Vx.Type.f_string_from_string_start(
+              item.name(),
+              Vx.Core.vx_new_int(2)
+            );
+            return output_2;
           })
         );
-        Vx.Core.Type_any output_2 = Vx.Type.f_string_from_stringlist_join(namelist, Vx.Core.vx_new_string(" "));
-        return output_2;
+        Vx.Core.Type_any output_1 = Vx.Type.f_string_from_stringlist_join(
+          namelist,
+          Vx.Core.vx_new_string(" ")
+        );
+        return output_1;
       })
     );
     return output;
@@ -11654,7 +11893,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_stylelist_indent(Vx.Web.Html.Type_stylelist stylelist, Vx.Core.Type_int indent) {
-      return Vx.Web.Html.f_string_from_stylelist_indent(stylelist, indent);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_stylelist_indent(stylelist, indent);
+      return output;
     }
 
   }
@@ -11672,16 +11912,18 @@ public static class Html {
           stylelist,
           Vx.Core.t_any_from_any.vx_fn_new((substyle_any) => {
             Vx.Web.Html.Type_style substyle = Vx.Core.f_any_from_any(Vx.Web.Html.t_style, substyle_any);
-            Vx.Core.Type_any output_1 = 
-                Vx.Web.Html.f_string_from_style_indent(substyle, indent);
-            return output_1;
+            Vx.Core.Type_any output_2 = Vx.Web.Html.f_string_from_style_indent(
+              substyle,
+              indent
+            );
+            return output_2;
           })
         );
-        Vx.Core.Type_any output_2 = Vx.Type.f_string_from_stringlist_join(
+        Vx.Core.Type_any output_1 = Vx.Type.f_string_from_stringlist_join(
           sstyles,
           Vx.Core.c_newline
         );
-        return output_2;
+        return output_1;
       })
     );
     return output;
@@ -11758,7 +12000,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_stylepropmap_indent(Vx.Web.Html.Type_propmap propmap, Vx.Core.Type_int indent) {
-      return Vx.Web.Html.f_string_from_stylepropmap_indent(propmap, indent);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_stylepropmap_indent(propmap, indent);
+      return output;
     }
 
   }
@@ -11771,30 +12014,34 @@ public static class Html {
     output = Vx.Core.f_let(
       Vx.Core.t_string,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Core.Type_string sindent = Vx.Web.Html.f_string_from_indent(indent);
+        Vx.Core.Type_string sindent = Vx.Web.Html.f_string_from_indent(
+          indent
+        );
         Vx.Core.Type_stringlist sprops = Vx.Core.f_list_from_map_1(
           Vx.Core.t_stringlist,
           propmap,
           Vx.Core.t_any_from_key_value.vx_fn_new((key_any, val_any) => {
             Vx.Core.Type_string key = Vx.Core.f_any_from_any(Vx.Core.t_string, key_any);
             Vx.Core.Type_string val = Vx.Core.f_any_from_any(Vx.Core.t_string, val_any);
-            Vx.Core.Type_any output_1 = 
-                Vx.Core.f_new(
-                  Vx.Core.t_string,
-                  Vx.Core.vx_new(
-                    Vx.Core.t_anylist,
-                    sindent,
-                    key,
-                    Vx.Core.vx_new_string(": "),
-                    val,
-                    Vx.Core.vx_new_string(";")
-                  )
-                );
-            return output_1;
+            Vx.Core.Type_any output_2 = Vx.Core.f_new(
+              Vx.Core.t_string,
+              Vx.Core.vx_new(
+                Vx.Core.t_anylist,
+                sindent,
+                key,
+                Vx.Core.vx_new_string(": "),
+                val,
+                Vx.Core.vx_new_string(";")
+              )
+            );
+            return output_2;
           })
         );
-        Vx.Core.Type_any output_2 = Vx.Type.f_string_from_stringlist_join(sprops, Vx.Core.vx_new_string(""));
-        return output_2;
+        Vx.Core.Type_any output_1 = Vx.Type.f_string_from_stringlist_join(
+          sprops,
+          Vx.Core.vx_new_string("")
+        );
+        return output_1;
       })
     );
     return output;
@@ -11871,7 +12118,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_stylesheet_indent(Vx.Web.Html.Type_stylesheet stylesheet, Vx.Core.Type_int indent) {
-      return Vx.Web.Html.f_string_from_stylesheet_indent(stylesheet, indent);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_stylesheet_indent(stylesheet, indent);
+      return output;
     }
 
   }
@@ -11887,12 +12135,18 @@ public static class Html {
         Vx.Web.Html.Type_stylelist styles = stylesheet.styles();
         Vx.Core.Type_string sstyles = Vx.Web.Html.f_string_from_stylelist_indent(
           styles,
-          Vx.Core.f_plus1(indent)
+          Vx.Core.f_plus1(
+            indent
+          )
         );
-        Vx.Core.Type_string sindent = Vx.Web.Html.f_string_from_indent(indent);
+        Vx.Core.Type_string sindent = Vx.Web.Html.f_string_from_indent(
+          indent
+        );
         Vx.Core.Type_string eindent = Vx.Core.f_if(
           Vx.Core.t_string,
-          Vx.Core.f_notempty(sstyles),
+          Vx.Core.f_notempty(
+            sstyles
+          ),
           sindent
         );
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
@@ -11983,7 +12237,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_table_indent(Vx.Web.Html.Type_table table, Vx.Core.Type_int indent) {
-      return Vx.Web.Html.f_string_from_table_indent(table, indent);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_table_indent(table, indent);
+      return output;
     }
 
   }
@@ -11996,7 +12251,9 @@ public static class Html {
     output = Vx.Core.f_let(
       Vx.Core.t_string,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Core.Type_string sindent = Vx.Web.Html.f_string_from_indent(indent);
+        Vx.Core.Type_string sindent = Vx.Web.Html.f_string_from_indent(
+          indent
+        );
         Vx.Core.Type_string sid = Vx.Web.Html.f_string_from_propname_val(
           Vx.Core.vx_new_string("id"),
           table.id()
@@ -12005,11 +12262,15 @@ public static class Html {
         Vx.Web.Html.Type_tbody tbody = table.tbody();
         Vx.Core.Type_string shead = Vx.Web.Html.f_string_from_thead_indent(
           thead,
-          Vx.Core.f_plus1(indent)
+          Vx.Core.f_plus1(
+            indent
+          )
         );
         Vx.Core.Type_string sbody = Vx.Web.Html.f_string_from_tbody_indent(
           tbody,
-          Vx.Core.f_plus1(indent)
+          Vx.Core.f_plus1(
+            indent
+          )
         );
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Core.t_string,
@@ -12102,7 +12363,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_tbody_indent(Vx.Web.Html.Type_tbody tbody, Vx.Core.Type_int indent) {
-      return Vx.Web.Html.f_string_from_tbody_indent(tbody, indent);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_tbody_indent(tbody, indent);
+      return output;
     }
 
   }
@@ -12116,7 +12378,12 @@ public static class Html {
       Vx.Core.t_string,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Web.Html.Type_trlist nodes = tbody.nodes();
-        Vx.Core.Type_any output_1 = Vx.Web.Html.f_string_from_nodelist_tag_prop_indent(nodes, Vx.Core.vx_new_string("tbody"), Vx.Core.vx_new_string(""), indent);
+        Vx.Core.Type_any output_1 = Vx.Web.Html.f_string_from_nodelist_tag_prop_indent(
+          nodes,
+          Vx.Core.vx_new_string("tbody"),
+          Vx.Core.vx_new_string(""),
+          indent
+        );
         return output_1;
       })
     );
@@ -12194,7 +12461,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_td_indent(Vx.Web.Html.Type_td td, Vx.Core.Type_int indent) {
-      return Vx.Web.Html.f_string_from_td_indent(td, indent);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_td_indent(td, indent);
+      return output;
     }
 
   }
@@ -12208,7 +12476,12 @@ public static class Html {
       Vx.Core.t_string,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Web.Html.Type_divchildlist nodes = td.nodes();
-        Vx.Core.Type_any output_1 = Vx.Web.Html.f_string_from_nodelist_tag_prop_indent(nodes, Vx.Core.vx_new_string("td"), Vx.Core.vx_new_string(""), indent);
+        Vx.Core.Type_any output_1 = Vx.Web.Html.f_string_from_nodelist_tag_prop_indent(
+          nodes,
+          Vx.Core.vx_new_string("td"),
+          Vx.Core.vx_new_string(""),
+          indent
+        );
         return output_1;
       })
     );
@@ -12286,7 +12559,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_thead_indent(Vx.Web.Html.Type_thead thead, Vx.Core.Type_int indent) {
-      return Vx.Web.Html.f_string_from_thead_indent(thead, indent);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_thead_indent(thead, indent);
+      return output;
     }
 
   }
@@ -12300,7 +12574,12 @@ public static class Html {
       Vx.Core.t_string,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Web.Html.Type_trlist nodes = thead.nodes();
-        Vx.Core.Type_any output_1 = Vx.Web.Html.f_string_from_nodelist_tag_prop_indent(nodes, Vx.Core.vx_new_string("thead"), Vx.Core.vx_new_string(""), indent);
+        Vx.Core.Type_any output_1 = Vx.Web.Html.f_string_from_nodelist_tag_prop_indent(
+          nodes,
+          Vx.Core.vx_new_string("thead"),
+          Vx.Core.vx_new_string(""),
+          indent
+        );
         return output_1;
       })
     );
@@ -12378,7 +12657,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_title_indent(Vx.Web.Html.Type_title title, Vx.Core.Type_int indent) {
-      return Vx.Web.Html.f_string_from_title_indent(title, indent);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_title_indent(title, indent);
+      return output;
     }
 
   }
@@ -12391,7 +12671,9 @@ public static class Html {
     output = Vx.Core.f_let(
       Vx.Core.t_string,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Core.Type_string sindent = Vx.Web.Html.f_string_from_indent(indent);
+        Vx.Core.Type_string sindent = Vx.Web.Html.f_string_from_indent(
+          indent
+        );
         Vx.Core.Type_string text = title.text();
         Vx.Core.Type_any output_1 = Vx.Core.f_new(
           Vx.Core.t_string,
@@ -12480,7 +12762,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_tr_indent(Vx.Web.Html.Type_tr tr, Vx.Core.Type_int indent) {
-      return Vx.Web.Html.f_string_from_tr_indent(tr, indent);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_tr_indent(tr, indent);
+      return output;
     }
 
   }
@@ -12494,7 +12777,12 @@ public static class Html {
       Vx.Core.t_string,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Web.Html.Type_tdlist nodes = tr.nodes();
-        Vx.Core.Type_any output_1 = Vx.Web.Html.f_string_from_nodelist_tag_prop_indent(nodes, Vx.Core.vx_new_string("tr"), Vx.Core.vx_new_string(""), indent);
+        Vx.Core.Type_any output_1 = Vx.Web.Html.f_string_from_nodelist_tag_prop_indent(
+          nodes,
+          Vx.Core.vx_new_string("tr"),
+          Vx.Core.vx_new_string(""),
+          indent
+        );
         return output_1;
       })
     );
@@ -12582,7 +12870,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_string_from_uri(Vx.Core.Type_string uri) {
-      return Vx.Web.Html.f_string_from_uri(uri);
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_uri(uri);
+      return output;
     }
 
   }
@@ -12666,7 +12955,8 @@ public static class Html {
     }
 
     public Vx.Web.Html.Type_style vx_style_from_stylesheet_name(Vx.Web.Html.Type_stylesheet stylesheet, Vx.Core.Type_string name) {
-      return Vx.Web.Html.f_style_from_stylesheet_name(stylesheet, name);
+      Vx.Web.Html.Type_style output = Vx.Web.Html.f_style_from_stylesheet_name(stylesheet, name);
+      return output;
     }
 
   }
@@ -12678,7 +12968,9 @@ public static class Html {
     Vx.Web.Html.Type_style output = Vx.Web.Html.e_style;
     output = Vx.Core.f_any_from_map(
       Vx.Web.Html.t_style,
-      Vx.Web.Html.f_stylemap_from_stylesheet(stylesheet),
+      Vx.Web.Html.f_stylemap_from_stylesheet(
+        stylesheet
+      ),
       name
     );
     return output;
@@ -12765,7 +13057,8 @@ public static class Html {
     }
 
     public Vx.Web.Html.Type_stylemap vx_stylemap_from_stylelist(Vx.Web.Html.Type_stylelist stylelist) {
-      return Vx.Web.Html.f_stylemap_from_stylelist(stylelist);
+      Vx.Web.Html.Type_stylemap output = Vx.Web.Html.f_stylemap_from_stylelist(stylelist);
+      return output;
     }
 
   }
@@ -12780,8 +13073,7 @@ public static class Html {
       stylelist,
       Vx.Core.t_any_from_any.vx_fn_new((style_any) => {
         Vx.Web.Html.Type_style style = Vx.Core.f_any_from_any(Vx.Web.Html.t_style, style_any);
-        Vx.Core.Type_any output_1 = 
-          style.name();
+        Vx.Core.Type_any output_1 = style.name();
         return output_1;
       })
     );
@@ -12869,7 +13161,8 @@ public static class Html {
     }
 
     public Vx.Web.Html.Type_stylemap vx_stylemap_from_stylesheet(Vx.Web.Html.Type_stylesheet stylesheet) {
-      return Vx.Web.Html.f_stylemap_from_stylesheet(stylesheet);
+      Vx.Web.Html.Type_stylemap output = Vx.Web.Html.f_stylemap_from_stylesheet(stylesheet);
+      return output;
     }
 
   }
@@ -12964,7 +13257,8 @@ public static class Html {
     }
 
     public Vx.Web.Html.Type_stylelist vx_styles_from_stylesheet(Vx.Web.Html.Type_stylesheet stylesheet) {
-      return Vx.Web.Html.f_styles_from_stylesheet(stylesheet);
+      Vx.Web.Html.Type_stylelist output = Vx.Web.Html.f_styles_from_stylesheet(stylesheet);
+      return output;
     }
 
   }
@@ -13059,7 +13353,8 @@ public static class Html {
     }
 
     public Vx.Web.Html.Type_stylesheet vx_stylesheet_loadmap(Vx.Web.Html.Type_stylesheet stylesheet) {
-      return Vx.Web.Html.f_stylesheet_loadmap(stylesheet);
+      Vx.Web.Html.Type_stylesheet output = Vx.Web.Html.f_stylesheet_loadmap(stylesheet);
+      return output;
     }
 
   }
@@ -13163,7 +13458,8 @@ public static class Html {
     }
 
     public Vx.Core.Type_string vx_uri_from_string(Vx.Core.Type_string text) {
-      return Vx.Web.Html.f_uri_from_string(text);
+      Vx.Core.Type_string output = Vx.Web.Html.f_uri_from_string(text);
+      return output;
     }
 
   }

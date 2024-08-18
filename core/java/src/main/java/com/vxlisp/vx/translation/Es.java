@@ -72,6 +72,7 @@ public final class Es {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       output = Es.f_translation_es();
@@ -80,7 +81,8 @@ public final class Es {
 
     @Override
     public Core.Type_translation vx_translation_es() {
-      return Es.f_translation_es();
+      Core.Type_translation output = Es.f_translation_es();
+      return output;
     }
 
   }
@@ -169,6 +171,7 @@ public final class Es {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       output = Es.f_words();
@@ -177,7 +180,8 @@ public final class Es {
 
     @Override
     public Core.Type_stringmap vx_words() {
-      return Es.f_words();
+      Core.Type_stringmap output = Es.f_words();
+      return output;
     }
 
   }

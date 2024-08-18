@@ -83,7 +83,8 @@ public static class All {
     }
 
     public Vx.Core.Type_context vx_context_all(Vx.Core.Type_anylist args) {
-      return Vx.Translation.All.f_context_all(args);
+      Vx.Core.Type_context output = Vx.Translation.All.f_context_all(args);
+      return output;
     }
 
   }
@@ -180,7 +181,8 @@ public static class All {
     }
 
     public Vx.Core.Type_translationmap vx_translationmap_all() {
-      return Vx.Translation.All.f_translationmap_all();
+      Vx.Core.Type_translationmap output = Vx.Translation.All.f_translationmap_all();
+      return output;
     }
 
   }

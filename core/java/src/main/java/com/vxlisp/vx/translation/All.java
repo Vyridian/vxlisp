@@ -87,6 +87,7 @@ public final class All {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_anylist args = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(0)));
@@ -96,7 +97,8 @@ public final class All {
 
     @Override
     public Core.Type_context vx_context_all(final Core.Type_anylist args) {
-      return All.f_context_all(args);
+      Core.Type_context output = All.f_context_all(args);
+      return output;
     }
 
   }
@@ -192,6 +194,7 @@ public final class All {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       output = All.f_translationmap_all();
@@ -200,7 +203,8 @@ public final class All {
 
     @Override
     public Core.Type_translationmap vx_translationmap_all() {
-      return All.f_translationmap_all();
+      Core.Type_translationmap output = All.f_translationmap_all();
+      return output;
     }
 
   }

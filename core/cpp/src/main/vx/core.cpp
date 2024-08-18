@@ -14156,7 +14156,7 @@ namespace vx_core {
    * @function any_from_key_value
    * Generic Function returning Generic any-1 from a key and a value
    * @param  {string} key
-   * @param  {any-2} val
+   * @param  {any-2} value
    * @return {any-1}
    * (func any<-key-value)
    */
@@ -14184,10 +14184,10 @@ namespace vx_core {
       return output;
     }
 
-    vx_core::Type_any Class_any_from_key_value::vx_any_from_key_value(vx_core::Type_string key, vx_core::Type_any val) const {
+    vx_core::Type_any Class_any_from_key_value::vx_any_from_key_value(vx_core::Type_string key, vx_core::Type_any value) const {
       vx_core::Type_any output = vx_core::e_any;
       if (fn) {
-        output = fn(key, val);
+        output = fn(key, value);
       }
       return output;
     }
@@ -14244,8 +14244,8 @@ namespace vx_core {
       vx_core::Type_any output = vx_core::e_any;
       vx_core::Type_any generic_any_1 = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_string key = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      vx_core::Type_any val = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(1)));
-      output = vx_core::f_any_from_key_value(generic_any_1, key, val);
+      vx_core::Type_any value = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_core::f_any_from_key_value(generic_any_1, key, value);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -14257,7 +14257,7 @@ namespace vx_core {
    * @function any_from_key_value_async
    * Generic Function returning Asynchronous Generic any-1 from a key and a value
    * @param  {string} key
-   * @param  {any-2} val
+   * @param  {any-2} value
    * @return {any-1}
    * (func any<-key-value-async)
    */
@@ -14285,10 +14285,10 @@ namespace vx_core {
       return output;
     }
 
-    vx_core::vx_Type_async Class_any_from_key_value_async::vx_any_from_key_value_async(vx_core::Type_any generic_any_1, vx_core::Type_string key, vx_core::Type_any val) const {
+    vx_core::vx_Type_async Class_any_from_key_value_async::vx_any_from_key_value_async(vx_core::Type_any generic_any_1, vx_core::Type_string key, vx_core::Type_any value) const {
       vx_core::vx_Type_async output = NULL;
       if (fn) {
-        output = fn(key, val);
+        output = fn(key, value);
         output->type = generic_any_1;
       } else {
         output = vx_core::vx_async_new_from_value(vx_core::vx_empty(generic_any_1));
@@ -14348,8 +14348,8 @@ namespace vx_core {
       vx_core::vx_Type_async output = vx_core::vx_async_new_from_value(vx_core::e_any);
       vx_core::Type_any generic_any_1 = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_string key = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      vx_core::Type_any val = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(1)));
-      output = vx_core::f_any_from_key_value_async(generic_any_1, key, val);
+      vx_core::Type_any value = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_core::f_any_from_key_value_async(generic_any_1, key, value);
       vx_core::vx_release(arglist);
       return output;
     }
@@ -16226,17 +16226,17 @@ namespace vx_core {
   //}
 
   // (func !)
-  vx_core::Type_boolean f_not(vx_core::Type_boolean val) {
+  vx_core::Type_boolean f_not(vx_core::Type_boolean value) {
     vx_core::Type_boolean output = vx_core::e_boolean;
-    vx_core::vx_reserve(val);
-    output = vx_core::vx_new_boolean(!val->vx_boolean());
-    vx_core::vx_release_one_except(val, output);
+    vx_core::vx_reserve(value);
+    output = vx_core::vx_new_boolean(!value->vx_boolean());
+    vx_core::vx_release_one_except(value, output);
     return output;
   }
   /**
    * @function not
    * Boolean not
-   * @param  {boolean} val Thing to not
+   * @param  {boolean} value Thing to not
    * @return {boolean}
    * (func !)
    */
@@ -16317,8 +16317,8 @@ namespace vx_core {
 
     vx_core::Type_any Class_not::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_boolean val = vx_core::vx_any_from_any(vx_core::t_boolean, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      output = vx_core::f_not(val);
+      vx_core::Type_boolean value = vx_core::vx_any_from_any(vx_core::t_boolean, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_core::f_not(value);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -16428,19 +16428,19 @@ namespace vx_core {
   //}
 
   // (func !-empty)
-  vx_core::Type_boolean f_notempty_1(vx_core::Type_any val) {
+  vx_core::Type_boolean f_notempty_1(vx_core::Type_any value) {
     vx_core::Type_boolean output = vx_core::e_boolean;
-    vx_core::vx_reserve(val);
+    vx_core::vx_reserve(value);
     output = vx_core::f_not(
-      vx_core::f_is_empty_1(val)
+      vx_core::f_is_empty_1(value)
     );
-    vx_core::vx_release_one_except(val, output);
+    vx_core::vx_release_one_except(value, output);
     return output;
   }
   /**
    * @function notempty 1
-   * Returns true if val is not empty.
-   * @param  {any} val
+   * Returns true if value is not empty.
+   * @param  {any} value
    * @return {boolean}
    * (func !-empty)
    */
@@ -16521,8 +16521,8 @@ namespace vx_core {
 
     vx_core::Type_any Class_notempty_1::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any val = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      output = vx_core::f_notempty_1(val);
+      vx_core::Type_any value = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_core::f_notempty_1(value);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -17499,7 +17499,7 @@ namespace vx_core {
   /**
    * @function switch
    * Returns a value based on a logical switch
-   * @param  {any-2} val
+   * @param  {any-2} value
    * @param  {thenelselist} thenelselist
    * @return {any-1}
    * (func switch)
@@ -17570,9 +17570,9 @@ namespace vx_core {
     vx_core::Type_any Class_switch::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
       vx_core::Type_any generic_any_1 = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      vx_core::Type_any val = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      vx_core::Type_any value = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_thenelselist thenelselist = vx_core::vx_any_from_any(vx_core::t_thenelselist, arglist->vx_get_any(vx_core::vx_new_int(1)));
-      output = vx_core::f_switch(generic_any_1, val, thenelselist);
+      output = vx_core::f_switch(generic_any_1, value, thenelselist);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -21776,7 +21776,7 @@ namespace vx_core {
    * @function any_from_int_any
    * Generic Function returning Generic any-1 from an int and a value
    * @param  {int} num
-   * @param  {any-2} val
+   * @param  {any-2} value
    * @return {any-1}
    * (func any<-int-any)
    */
@@ -21804,10 +21804,10 @@ namespace vx_core {
       return output;
     }
 
-    vx_core::Type_any Class_any_from_int_any::vx_any_from_int_any(vx_core::Type_int num, vx_core::Type_any val) const {
+    vx_core::Type_any Class_any_from_int_any::vx_any_from_int_any(vx_core::Type_int num, vx_core::Type_any value) const {
       vx_core::Type_any output = vx_core::e_any;
       if (fn) {
-        output = fn(num, val);
+        output = fn(num, value);
       }
       return output;
     }
@@ -21864,8 +21864,8 @@ namespace vx_core {
       vx_core::Type_any output = vx_core::e_any;
       vx_core::Type_any generic_any_1 = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_core::Type_int num = vx_core::vx_any_from_any(vx_core::t_int, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      vx_core::Type_any val = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(1)));
-      output = vx_core::f_any_from_int_any(generic_any_1, num, val);
+      vx_core::Type_any value = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_core::f_any_from_int_any(generic_any_1, num, value);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -22538,18 +22538,18 @@ namespace vx_core {
   //}
 
   // (func extends<-any)
-  vx_core::Type_string f_extends_from_any(vx_core::Type_any val) {
+  vx_core::Type_string f_extends_from_any(vx_core::Type_any value) {
     vx_core::Type_string output = vx_core::e_string;
-    vx_core::vx_reserve(val);
+    vx_core::vx_reserve(value);
     output = vx_core::f_extends_from_typedef(
-      vx_core::f_typedef_from_any(val)
+      vx_core::f_typedef_from_any(value)
     );
-    vx_core::vx_release_one_except(val, output);
+    vx_core::vx_release_one_except(value, output);
     return output;
   }
   /**
    * @function extends_from_any
-   * @param  {any-1} val
+   * @param  {any-1} value
    * @return {string}
    * (func extends<-any)
    */
@@ -22630,8 +22630,8 @@ namespace vx_core {
 
     vx_core::Type_any Class_extends_from_any::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any val = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      output = vx_core::f_extends_from_any(val);
+      vx_core::Type_any value = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_core::f_extends_from_any(value);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -23096,17 +23096,17 @@ namespace vx_core {
   //}
 
   // (func funcdef<-func)
-  vx_core::Type_funcdef f_funcdef_from_func(vx_core::Type_func val) {
+  vx_core::Type_funcdef f_funcdef_from_func(vx_core::Type_func value) {
     vx_core::Type_funcdef output = vx_core::e_funcdef;
-    vx_core::vx_reserve(val);
-    output = val->vx_funcdef();
-    vx_core::vx_release_one_except(val, output);
+    vx_core::vx_reserve(value);
+    output = value->vx_funcdef();
+    vx_core::vx_release_one_except(value, output);
     return output;
   }
   /**
    * @function funcdef_from_func
    * Returns the definition of a function
-   * @param  {func} val
+   * @param  {func} value
    * @return {funcdef}
    * (func funcdef<-func)
    */
@@ -23187,8 +23187,8 @@ namespace vx_core {
 
     vx_core::Type_any Class_funcdef_from_func::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_func val = vx_core::vx_any_from_any(vx_core::t_func, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      output = vx_core::f_funcdef_from_func(val);
+      vx_core::Type_func value = vx_core::vx_any_from_any(vx_core::t_func, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_core::f_funcdef_from_func(value);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -23403,12 +23403,12 @@ namespace vx_core {
   //}
 
   // (func int<-string)
-  vx_core::Type_int f_int_from_string(vx_core::Type_string val) {
+  vx_core::Type_int f_int_from_string(vx_core::Type_string value) {
     vx_core::Type_int output = vx_core::e_int;
-    vx_core::vx_reserve(val);
+    vx_core::vx_reserve(value);
     output = vx_core::f_switch(
       vx_core::t_int,
-      val,
+      value,
       vx_core::vx_new(vx_core::t_thenelselist, {
         vx_core::f_case_1(
           vx_core::vx_new_string("notanumber"),
@@ -23432,10 +23432,10 @@ namespace vx_core {
           })
         ),
         vx_core::f_else(
-          vx_core::t_any_from_func->vx_fn_new({val}, [val]() {// :capture val
+          vx_core::t_any_from_func->vx_fn_new({value}, [value]() {// :capture value
             vx_core::Type_int intresult = vx_core::e_int;
             try {
-              std::string sval = val->vx_string();
+              std::string sval = value->vx_string();
               long ival = std::stoll(sval);
               intresult = vx_core::vx_new_int(ival);
             } catch (std::exception ex) {
@@ -23446,13 +23446,13 @@ namespace vx_core {
         )
       })
     );
-    vx_core::vx_release_one_except(val, output);
+    vx_core::vx_release_one_except(value, output);
     return output;
   }
   /**
    * @function int_from_string
    * Function Type converting string to int
-   * @param  {string} val
+   * @param  {string} value
    * @return {int}
    * (func int<-string)
    */
@@ -23533,8 +23533,8 @@ namespace vx_core {
 
     vx_core::Type_any Class_int_from_string::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_string val = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      output = vx_core::f_int_from_string(val);
+      vx_core::Type_string value = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_core::f_int_from_string(value);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -23737,22 +23737,22 @@ namespace vx_core {
   //}
 
   // (func is-func)
-  vx_core::Type_boolean f_is_func(vx_core::Type_any val) {
+  vx_core::Type_boolean f_is_func(vx_core::Type_any value) {
     vx_core::Type_boolean output = vx_core::e_boolean;
-    vx_core::vx_reserve(val);
-    vx_core::Type_string extend = vx_core::f_extends_from_any(val);
+    vx_core::vx_reserve(value);
+    vx_core::Type_string extend = vx_core::f_extends_from_any(value);
     std::string sextend = extend->vx_string();
     vx_core::vx_release(extend);
     if (sextend == ":func") {
       output = vx_core::c_true;
     };
-    vx_core::vx_release_one_except(val, output);
+    vx_core::vx_release_one_except(value, output);
     return output;
   }
   /**
    * @function is_func
-   * Returns true if val is a function.
-   * @param  {any} val
+   * Returns true if value is a function.
+   * @param  {any} value
    * @return {boolean}
    * (func is-func)
    */
@@ -23833,8 +23833,8 @@ namespace vx_core {
 
     vx_core::Type_any Class_is_func::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any val = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      output = vx_core::f_is_func(val);
+      vx_core::Type_any value = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_core::f_is_func(value);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -23978,7 +23978,7 @@ namespace vx_core {
   }
   /**
    * @function is_number
-   * Return true if val is a number
+   * Return true if value is a number
    * @param  {any} value
    * @return {boolean}
    * (func is-number)
@@ -28981,19 +28981,19 @@ namespace vx_core {
   //}
 
   // (func typedef<-any)
-  vx_core::Type_typedef f_typedef_from_any(vx_core::Type_any val) {
+  vx_core::Type_typedef f_typedef_from_any(vx_core::Type_any value) {
     vx_core::Type_typedef output = vx_core::e_typedef;
-    vx_core::vx_reserve(val);
+    vx_core::vx_reserve(value);
     output = vx_core::f_typedef_from_type(
-      vx_core::f_type_from_any(val)
+      vx_core::f_type_from_any(value)
     );
-    vx_core::vx_release_one_except(val, output);
+    vx_core::vx_release_one_except(value, output);
     return output;
   }
   /**
    * @function typedef_from_any
    * Gets the typedef of a given value
-   * @param  {any} val
+   * @param  {any} value
    * @return {typedef}
    * (func typedef<-any)
    */
@@ -29074,8 +29074,8 @@ namespace vx_core {
 
     vx_core::Type_any Class_typedef_from_any::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any val = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      output = vx_core::f_typedef_from_any(val);
+      vx_core::Type_any value = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_core::f_typedef_from_any(value);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -29083,17 +29083,17 @@ namespace vx_core {
   //}
 
   // (func typedef<-type)
-  vx_core::Type_typedef f_typedef_from_type(vx_core::Type_any val) {
+  vx_core::Type_typedef f_typedef_from_type(vx_core::Type_any value) {
     vx_core::Type_typedef output = vx_core::e_typedef;
-    vx_core::vx_reserve(val);
-    output = val->vx_typedef();
-    vx_core::vx_release_one_except(val, output);
+    vx_core::vx_reserve(value);
+    output = value->vx_typedef();
+    vx_core::vx_release_one_except(value, output);
     return output;
   }
   /**
    * @function typedef_from_type
    * Gets the typedef of a given type
-   * @param  {any} val
+   * @param  {any} value
    * @return {typedef}
    * (func typedef<-type)
    */
@@ -29174,8 +29174,8 @@ namespace vx_core {
 
     vx_core::Type_any Class_typedef_from_type::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any val = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      output = vx_core::f_typedef_from_type(val);
+      vx_core::Type_any value = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_core::f_typedef_from_type(value);
       vx_core::vx_release_except(arglist, output);
       return output;
     }

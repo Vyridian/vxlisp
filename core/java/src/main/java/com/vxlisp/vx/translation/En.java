@@ -88,6 +88,7 @@ public final class En {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_anylist args = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(0)));
@@ -97,7 +98,8 @@ public final class En {
 
     @Override
     public Core.Type_context vx_context_en(final Core.Type_anylist args) {
-      return En.f_context_en(args);
+      Core.Type_context output = En.f_context_en(args);
+      return output;
     }
 
   }
@@ -206,6 +208,7 @@ public final class En {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_anylist args = Core.f_any_from_any(Core.t_anylist, arglist.vx_any(Core.vx_new_int(0)));
@@ -215,7 +218,8 @@ public final class En {
 
     @Override
     public Core.Type_context vx_context_test(final Core.Type_anylist args) {
-      return En.f_context_test(args);
+      Core.Type_context output = En.f_context_test(args);
+      return output;
     }
 
   }
@@ -318,6 +322,7 @@ public final class En {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       output = En.f_securitydata_test();
@@ -326,7 +331,8 @@ public final class En {
 
     @Override
     public Core.Type_security vx_securitydata_test() {
-      return En.f_securitydata_test();
+      Core.Type_security output = En.f_securitydata_test();
+      return output;
     }
 
   }
@@ -422,6 +428,7 @@ public final class En {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       output = En.f_translation_en();
@@ -430,7 +437,8 @@ public final class En {
 
     @Override
     public Core.Type_translation vx_translation_en() {
-      return En.f_translation_en();
+      Core.Type_translation output = En.f_translation_en();
+      return output;
     }
 
   }
@@ -519,6 +527,7 @@ public final class En {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       output = En.f_words();
@@ -527,7 +536,8 @@ public final class En {
 
     @Override
     public Core.Type_stringmap vx_words() {
-      return En.f_words();
+      Core.Type_stringmap output = En.f_words();
+      return output;
     }
 
   }

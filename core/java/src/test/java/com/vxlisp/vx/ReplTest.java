@@ -28,7 +28,10 @@ public final class ReplTest {
                 Core.vx_new(
                   Core.t_anylist,
                   Core.vx_new_string("(+ "),
-                  Core.f_minus(Core.vx_new_int(7), Core.vx_new_int(5)),
+                  Core.f_minus(
+                    Core.vx_new_int(7),
+                    Core.vx_new_int(5)
+                  ),
                   Core.vx_new_string(" 3)")
                 )
               )
@@ -50,7 +53,7 @@ public final class ReplTest {
         Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
-          ":describename", "(test\n \"HelloWorld\"\n (any<-repl\n  (repl\n   :type string\n   :repllist\n    (repllist\n     (repl :val \"Hello\")\n     (repl :val \"World\")\n    ))))",
+          ":describename", "(test\n \"HelloWorld\"\n (any<-repl\n  (repl\n   :type string\n   :repllist\n    (repllist\n     (repl :value \"Hello\")\n     (repl :value \"World\")\n    ))))",
           ":testresult",
             Test.f_test(
               context,
@@ -72,7 +75,7 @@ public final class ReplTest {
                           Repl.t_repl,
                           Core.vx_new(
                             Core.t_anylist,
-                            Core.vx_new_string(":val"),
+                            Core.vx_new_string(":value"),
                             Core.vx_new_string("Hello")
                           )
                         ),
@@ -80,7 +83,7 @@ public final class ReplTest {
                           Repl.t_repl,
                           Core.vx_new(
                             Core.t_anylist,
-                            Core.vx_new_string(":val"),
+                            Core.vx_new_string(":value"),
                             Core.vx_new_string("World")
                           )
                         )
@@ -93,7 +96,7 @@ public final class ReplTest {
         ),
         Core.vx_new(
           Test.t_testdescribe,
-          ":describename", "(test\n 5\n (any<-repl\n  (repl\n   :type +\n   :repllist\n    (repllist\n     (repl :val 2)\n     (repl :val 3)))))",
+          ":describename", "(test\n 5\n (any<-repl\n  (repl\n   :type +\n   :repllist\n    (repllist\n     (repl :value 2)\n     (repl :value 3)))))",
           ":testresult",
             Test.f_test(
               context,
@@ -115,7 +118,7 @@ public final class ReplTest {
                           Repl.t_repl,
                           Core.vx_new(
                             Core.t_anylist,
-                            Core.vx_new_string(":val"),
+                            Core.vx_new_string(":value"),
                             Core.vx_new_int(2)
                           )
                         ),
@@ -123,7 +126,7 @@ public final class ReplTest {
                           Repl.t_repl,
                           Core.vx_new(
                             Core.t_anylist,
-                            Core.vx_new_string(":val"),
+                            Core.vx_new_string(":value"),
                             Core.vx_new_int(3)
                           )
                         )
@@ -155,7 +158,10 @@ public final class ReplTest {
             Test.f_test(
               context,
               Core.vx_new_int(5),
-              Repl.f_any_from_script(context, Core.vx_new_string("(+ 2 3)"))
+              Repl.f_any_from_script(
+                context,
+                Core.vx_new_string("(+ 2 3)")
+              )
             )
         )
       )
@@ -179,7 +185,9 @@ public final class ReplTest {
             Test.f_test(
               context,
               Core.c_infinity,
-              Repl.f_const_from_string(Core.vx_new_string("infinity"))
+              Repl.f_const_from_string(
+                Core.vx_new_string("infinity")
+              )
             )
         ),
         Core.vx_new(
@@ -189,7 +197,9 @@ public final class ReplTest {
             Test.f_test(
               context,
               Textblock.c_delimcomma,
-              Repl.f_const_from_string(Core.vx_new_string("vx/data/textblock/delimcomma"))
+              Repl.f_const_from_string(
+                Core.vx_new_string("vx/data/textblock/delimcomma")
+              )
             )
         )
       )
@@ -208,7 +218,7 @@ public final class ReplTest {
         Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
-          ":describename", "(test\n (repl :val 2)\n (repl-empty<-textblock-argmap\n  (tb/textblock\n   :text \"2\")\n  (empty argmap)))",
+          ":describename", "(test\n (repl :value 2)\n (repl-empty<-textblock-argmap\n  (tb/textblock\n   :text \"2\")\n  (empty argmap)))",
           ":testresult",
             Test.f_test(
               context,
@@ -216,7 +226,7 @@ public final class ReplTest {
                 Repl.t_repl,
                 Core.vx_new(
                   Core.t_anylist,
-                  Core.vx_new_string(":val"),
+                  Core.vx_new_string(":value"),
                   Core.vx_new_int(2)
                 )
               ),
@@ -266,7 +276,7 @@ public final class ReplTest {
         ),
         Core.vx_new(
           Test.t_testdescribe,
-          ":describename", "(test\n (repl :val 2)\n (repl-empty<-textblock-argmap\n  (tb/textblock\n   :text \"1\"\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"2\")))\n  (empty argmap)))",
+          ":describename", "(test\n (repl :value 2)\n (repl-empty<-textblock-argmap\n  (tb/textblock\n   :text \"1\"\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"2\")))\n  (empty argmap)))",
           ":testresult",
             Test.f_test(
               context,
@@ -274,7 +284,7 @@ public final class ReplTest {
                 Repl.t_repl,
                 Core.vx_new(
                   Core.t_anylist,
-                  Core.vx_new_string(":val"),
+                  Core.vx_new_string(":value"),
                   Core.vx_new_int(2)
                 )
               ),
@@ -318,7 +328,9 @@ public final class ReplTest {
                 Repl.t_repl,
                 Core.vx_new(
                   Core.t_anylist,
-                  Core.f_msg_from_error(Core.vx_new_string("Empty delim cannot have more than one child."))
+                  Core.f_msg_from_error(
+                    Core.vx_new_string("Empty delim cannot have more than one child.")
+                  )
                 )
               ),
               Repl.f_repl_empty_from_textblock_argmap(
@@ -375,7 +387,7 @@ public final class ReplTest {
         Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
-          ":describename", "(test\n (repl\n  :type vx/core/+\n  :repllist\n   (repllist\n    (repl\n     :val 2)\n    (repl\n     :val 3)))\n (repl-paren<-textblock-argmap\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :delim\n    (copy delimvxlispparen\n     :delimlist\n      (empty delimlist))\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"+\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"2\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"3\")))\n  (empty argmap)))",
+          ":describename", "(test\n (repl\n  :type vx/core/+\n  :repllist\n   (repllist\n    (repl\n     :value 2)\n    (repl\n     :value 3)))\n (repl-paren<-textblock-argmap\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :delim\n    (copy delimvxlispparen\n     :delimlist\n      (empty delimlist))\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"+\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"2\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"3\")))\n  (empty argmap)))",
           ":testresult",
             Test.f_test(
               context,
@@ -394,7 +406,7 @@ public final class ReplTest {
                         Repl.t_repl,
                         Core.vx_new(
                           Core.t_anylist,
-                          Core.vx_new_string(":val"),
+                          Core.vx_new_string(":value"),
                           Core.vx_new_int(2)
                         )
                       ),
@@ -402,7 +414,7 @@ public final class ReplTest {
                         Repl.t_repl,
                         Core.vx_new(
                           Core.t_anylist,
-                          Core.vx_new_string(":val"),
+                          Core.vx_new_string(":value"),
                           Core.vx_new_int(3)
                         )
                       )
@@ -517,7 +529,7 @@ public final class ReplTest {
         Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
-          ":describename", "(test\n (repl\n  :type vx/core/+\n  :repllist\n   (repllist\n    (repl\n     :val 2)\n    (repl\n     :val 3)))\n (repl<-macro\n  \"(+ \"\n  (- 7 5)\n  \" 3)\"))",
+          ":describename", "(test\n (repl\n  :type vx/core/+\n  :repllist\n   (repllist\n    (repl\n     :value 2)\n    (repl\n     :value 3)))\n (repl<-macro\n  \"(+ \"\n  (- 7 5)\n  \" 3)\"))",
           ":testresult",
             Test.f_test(
               context,
@@ -536,7 +548,7 @@ public final class ReplTest {
                         Repl.t_repl,
                         Core.vx_new(
                           Core.t_anylist,
-                          Core.vx_new_string(":val"),
+                          Core.vx_new_string(":value"),
                           Core.vx_new_int(2)
                         )
                       ),
@@ -544,7 +556,7 @@ public final class ReplTest {
                         Repl.t_repl,
                         Core.vx_new(
                           Core.t_anylist,
-                          Core.vx_new_string(":val"),
+                          Core.vx_new_string(":value"),
                           Core.vx_new_int(3)
                         )
                       )
@@ -557,7 +569,10 @@ public final class ReplTest {
                 Core.vx_new(
                   Core.t_anylist,
                   Core.vx_new_string("(+ "),
-                  Core.f_minus(Core.vx_new_int(7), Core.vx_new_int(5)),
+                  Core.f_minus(
+                    Core.vx_new_int(7),
+                    Core.vx_new_int(5)
+                  ),
                   Core.vx_new_string(" 3)")
                 )
               )
@@ -579,7 +594,7 @@ public final class ReplTest {
         Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
-          ":describename", "(test\n (repl\n  :val 2)\n (repl<-script\n  \"2\"))",
+          ":describename", "(test\n (repl\n  :value 2)\n (repl<-script\n  \"2\"))",
           ":testresult",
             Test.f_test(
               context,
@@ -587,16 +602,18 @@ public final class ReplTest {
                 Repl.t_repl,
                 Core.vx_new(
                   Core.t_anylist,
-                  Core.vx_new_string(":val"),
+                  Core.vx_new_string(":value"),
                   Core.vx_new_int(2)
                 )
               ),
-              Repl.f_repl_from_script(Core.vx_new_string("2"))
+              Repl.f_repl_from_script(
+                Core.vx_new_string("2")
+              )
             )
         ),
         Core.vx_new(
           Test.t_testdescribe,
-          ":describename", "(test\n (repl\n  :val infinity)\n (repl<-script\n  \"infinity\"))",
+          ":describename", "(test\n (repl\n  :value infinity)\n (repl<-script\n  \"infinity\"))",
           ":testresult",
             Test.f_test(
               context,
@@ -604,11 +621,13 @@ public final class ReplTest {
                 Repl.t_repl,
                 Core.vx_new(
                   Core.t_anylist,
-                  Core.vx_new_string(":val"),
+                  Core.vx_new_string(":value"),
                   Core.c_infinity
                 )
               ),
-              Repl.f_repl_from_script(Core.vx_new_string("infinity"))
+              Repl.f_repl_from_script(
+                Core.vx_new_string("infinity")
+              )
             )
         ),
         Core.vx_new(
@@ -625,12 +644,14 @@ public final class ReplTest {
                   Core.t_plus
                 )
               ),
-              Repl.f_repl_from_script(Core.vx_new_string("+"))
+              Repl.f_repl_from_script(
+                Core.vx_new_string("+")
+              )
             )
         ),
         Core.vx_new(
           Test.t_testdescribe,
-          ":describename", "(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl\n     :val 2)\n    (repl\n     :val 3)))\n (repl<-script\n  \"(+ 2 3)\"))",
+          ":describename", "(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl\n     :value 2)\n    (repl\n     :value 3)))\n (repl<-script\n  \"(+ 2 3)\"))",
           ":testresult",
             Test.f_test(
               context,
@@ -649,7 +670,7 @@ public final class ReplTest {
                         Repl.t_repl,
                         Core.vx_new(
                           Core.t_anylist,
-                          Core.vx_new_string(":val"),
+                          Core.vx_new_string(":value"),
                           Core.vx_new_int(2)
                         )
                       ),
@@ -657,7 +678,7 @@ public final class ReplTest {
                         Repl.t_repl,
                         Core.vx_new(
                           Core.t_anylist,
-                          Core.vx_new_string(":val"),
+                          Core.vx_new_string(":value"),
                           Core.vx_new_int(3)
                         )
                       )
@@ -665,7 +686,9 @@ public final class ReplTest {
                   )
                 )
               ),
-              Repl.f_repl_from_script(Core.vx_new_string("(+ 2 3)"))
+              Repl.f_repl_from_script(
+                Core.vx_new_string("(+ 2 3)")
+              )
             )
         )
       )
@@ -684,7 +707,7 @@ public final class ReplTest {
         Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
-          ":describename", "(test\n (repl :val \"Hello\")\n (repl<-string-argmap\n  `\"Hello\"`\n  (empty argmap)))",
+          ":describename", "(test\n (repl :value \"Hello\")\n (repl<-string-argmap\n  `\"Hello\"`\n  (empty argmap)))",
           ":testresult",
             Test.f_test(
               context,
@@ -692,7 +715,7 @@ public final class ReplTest {
                 Repl.t_repl,
                 Core.vx_new(
                   Core.t_anylist,
-                  Core.vx_new_string(":val"),
+                  Core.vx_new_string(":value"),
                   Core.vx_new_string("Hello")
                 )
               ),
@@ -706,7 +729,7 @@ public final class ReplTest {
         ),
         Core.vx_new(
           Test.t_testdescribe,
-          ":describename", "(test\n (repl\n  :val 2)\n (repl<-string-argmap\n  \"2\"\n  (empty argmap)))",
+          ":describename", "(test\n (repl\n  :value 2)\n (repl<-string-argmap\n  \"2\"\n  (empty argmap)))",
           ":testresult",
             Test.f_test(
               context,
@@ -714,7 +737,7 @@ public final class ReplTest {
                 Repl.t_repl,
                 Core.vx_new(
                   Core.t_anylist,
-                  Core.vx_new_string(":val"),
+                  Core.vx_new_string(":value"),
                   Core.vx_new_int(2)
                 )
               ),
@@ -728,7 +751,7 @@ public final class ReplTest {
         ),
         Core.vx_new(
           Test.t_testdescribe,
-          ":describename", "(test\n (repl :val 2.3)\n (repl<-string-argmap\n  \"2.3\"\n  (empty argmap)))",
+          ":describename", "(test\n (repl :value 2.3)\n (repl<-string-argmap\n  \"2.3\"\n  (empty argmap)))",
           ":testresult",
             Test.f_test(
               context,
@@ -736,7 +759,7 @@ public final class ReplTest {
                 Repl.t_repl,
                 Core.vx_new(
                   Core.t_anylist,
-                  Core.vx_new_string(":val"),
+                  Core.vx_new_string(":value"),
                   Core.t_decimal.vx_new_from_string("2.3")
                 )
               ),
@@ -750,7 +773,7 @@ public final class ReplTest {
         ),
         Core.vx_new(
           Test.t_testdescribe,
-          ":describename", "(test\n (repl\n  :val infinity)\n (repl<-string-argmap\n  \"infinity\"\n  (empty argmap)))",
+          ":describename", "(test\n (repl\n  :value infinity)\n (repl<-string-argmap\n  \"infinity\"\n  (empty argmap)))",
           ":testresult",
             Test.f_test(
               context,
@@ -758,7 +781,7 @@ public final class ReplTest {
                 Repl.t_repl,
                 Core.vx_new(
                   Core.t_anylist,
-                  Core.vx_new_string(":val"),
+                  Core.vx_new_string(":value"),
                   Core.c_infinity
                 )
               ),
@@ -772,7 +795,7 @@ public final class ReplTest {
         ),
         Core.vx_new(
           Test.t_testdescribe,
-          ":describename", "(test\n (repl\n  :val tb/delimcomma)\n (repl<-string-argmap\n  \"vx/data/textblock/delimcomma\"\n  (empty argmap)))",
+          ":describename", "(test\n (repl\n  :value tb/delimcomma)\n (repl<-string-argmap\n  \"vx/data/textblock/delimcomma\"\n  (empty argmap)))",
           ":testresult",
             Test.f_test(
               context,
@@ -780,7 +803,7 @@ public final class ReplTest {
                 Repl.t_repl,
                 Core.vx_new(
                   Core.t_anylist,
-                  Core.vx_new_string(":val"),
+                  Core.vx_new_string(":value"),
                   Textblock.c_delimcomma
                 )
               ),
@@ -852,7 +875,7 @@ public final class ReplTest {
         Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
-          ":describename", "(test\n (repl :val 2)\n (repl<-textblock\n  (tb/textblock\n   :text \"2\")))",
+          ":describename", "(test\n (repl :value 2)\n (repl<-textblock\n  (tb/textblock\n   :text \"2\")))",
           ":testresult",
             Test.f_test(
               context,
@@ -860,7 +883,7 @@ public final class ReplTest {
                 Repl.t_repl,
                 Core.vx_new(
                   Core.t_anylist,
-                  Core.vx_new_string(":val"),
+                  Core.vx_new_string(":value"),
                   Core.vx_new_int(2)
                 )
               ),
@@ -930,7 +953,7 @@ public final class ReplTest {
         ),
         Core.vx_new(
           Test.t_testdescribe,
-          ":describename", "(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl :val 2)\n    (repl :val 3)))\n (repl<-textblock\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :delim\n    (copy delimvxlispparen\n     :delimlist\n      (empty delimlist))\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"+\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"2\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"3\")))))",
+          ":describename", "(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl :value 2)\n    (repl :value 3)))\n (repl<-textblock\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :delim\n    (copy delimvxlispparen\n     :delimlist\n      (empty delimlist))\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"+\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"2\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"3\")))))",
           ":testresult",
             Test.f_test(
               context,
@@ -949,7 +972,7 @@ public final class ReplTest {
                         Repl.t_repl,
                         Core.vx_new(
                           Core.t_anylist,
-                          Core.vx_new_string(":val"),
+                          Core.vx_new_string(":value"),
                           Core.vx_new_int(2)
                         )
                       ),
@@ -957,7 +980,7 @@ public final class ReplTest {
                         Repl.t_repl,
                         Core.vx_new(
                           Core.t_anylist,
-                          Core.vx_new_string(":val"),
+                          Core.vx_new_string(":value"),
                           Core.vx_new_int(3)
                         )
                       )
@@ -1055,7 +1078,7 @@ public final class ReplTest {
         ),
         Core.vx_new(
           Test.t_testdescribe,
-          ":describename", "(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl :val 2)\n    (repl :val 3)))\n (repl<-textblock\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"(+ 2 3)\"\n      :delim\n       (copy delimvxlispparen\n        :delimlist\n         (empty delimlist))\n      :children\n       (tb/textblocklist\n        (tb/textblock\n         :text \"+\")\n        (tb/textblock\n         :text \" \"\n         :delim\n          (copy tb/delimwhitespace\n           :pos 0))\n        (tb/textblock\n         :text \"2\")\n        (tb/textblock\n         :text \" \"\n         :delim\n          (copy tb/delimwhitespace\n           :pos 0))\n        (tb/textblock\n         :text \"3\")))))))",
+          ":describename", "(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl :value 2)\n    (repl :value 3)))\n (repl<-textblock\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"(+ 2 3)\"\n      :delim\n       (copy delimvxlispparen\n        :delimlist\n         (empty delimlist))\n      :children\n       (tb/textblocklist\n        (tb/textblock\n         :text \"+\")\n        (tb/textblock\n         :text \" \"\n         :delim\n          (copy tb/delimwhitespace\n           :pos 0))\n        (tb/textblock\n         :text \"2\")\n        (tb/textblock\n         :text \" \"\n         :delim\n          (copy tb/delimwhitespace\n           :pos 0))\n        (tb/textblock\n         :text \"3\")))))))",
           ":testresult",
             Test.f_test(
               context,
@@ -1074,7 +1097,7 @@ public final class ReplTest {
                         Repl.t_repl,
                         Core.vx_new(
                           Core.t_anylist,
-                          Core.vx_new_string(":val"),
+                          Core.vx_new_string(":value"),
                           Core.vx_new_int(2)
                         )
                       ),
@@ -1082,7 +1105,7 @@ public final class ReplTest {
                         Repl.t_repl,
                         Core.vx_new(
                           Core.t_anylist,
-                          Core.vx_new_string(":val"),
+                          Core.vx_new_string(":value"),
                           Core.vx_new_int(3)
                         )
                       )
@@ -1209,7 +1232,7 @@ public final class ReplTest {
         Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
-          ":describename", "(test\n (repl :val 2)\n (repl<-textblock-argmap\n  (tb/textblock\n   :text \"2\")\n  (empty argmap)))",
+          ":describename", "(test\n (repl :value 2)\n (repl<-textblock-argmap\n  (tb/textblock\n   :text \"2\")\n  (empty argmap)))",
           ":testresult",
             Test.f_test(
               context,
@@ -1217,7 +1240,7 @@ public final class ReplTest {
                 Repl.t_repl,
                 Core.vx_new(
                   Core.t_anylist,
-                  Core.vx_new_string(":val"),
+                  Core.vx_new_string(":value"),
                   Core.vx_new_int(2)
                 )
               ),
@@ -1267,7 +1290,7 @@ public final class ReplTest {
         ),
         Core.vx_new(
           Test.t_testdescribe,
-          ":describename", "(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl :val 2)\n    (repl :val 3)))\n (repl<-textblock-argmap\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :delim\n    (copy delimvxlispparen\n     :delimlist\n      (empty delimlist))\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"+\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"2\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"3\")))\n  (empty argmap)))",
+          ":describename", "(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl :value 2)\n    (repl :value 3)))\n (repl<-textblock-argmap\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :delim\n    (copy delimvxlispparen\n     :delimlist\n      (empty delimlist))\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"+\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"2\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"3\")))\n  (empty argmap)))",
           ":testresult",
             Test.f_test(
               context,
@@ -1286,7 +1309,7 @@ public final class ReplTest {
                         Repl.t_repl,
                         Core.vx_new(
                           Core.t_anylist,
-                          Core.vx_new_string(":val"),
+                          Core.vx_new_string(":value"),
                           Core.vx_new_int(2)
                         )
                       ),
@@ -1294,7 +1317,7 @@ public final class ReplTest {
                         Repl.t_repl,
                         Core.vx_new(
                           Core.t_anylist,
-                          Core.vx_new_string(":val"),
+                          Core.vx_new_string(":value"),
                           Core.vx_new_int(3)
                         )
                       )
@@ -1395,7 +1418,7 @@ public final class ReplTest {
         ),
         Core.vx_new(
           Test.t_testdescribe,
-          ":describename", "(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl :val 2)\n    (repl :val 3)))\n (repl<-textblock-argmap\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"(+ 2 3)\"\n      :delim\n       (copy delimvxlispparen\n        :delimlist\n         (empty delimlist))\n      :children\n       (tb/textblocklist\n        (tb/textblock\n         :text \"+\")\n        (tb/textblock\n         :text \" \"\n         :delim\n          (copy tb/delimwhitespace\n           :pos 0))\n        (tb/textblock\n         :text \"2\")\n        (tb/textblock\n         :text \" \"\n         :delim\n          (copy tb/delimwhitespace\n           :pos 0))\n        (tb/textblock\n         :text \"3\")))))\n  (empty argmap)))",
+          ":describename", "(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl :value 2)\n    (repl :value 3)))\n (repl<-textblock-argmap\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"(+ 2 3)\"\n      :delim\n       (copy delimvxlispparen\n        :delimlist\n         (empty delimlist))\n      :children\n       (tb/textblocklist\n        (tb/textblock\n         :text \"+\")\n        (tb/textblock\n         :text \" \"\n         :delim\n          (copy tb/delimwhitespace\n           :pos 0))\n        (tb/textblock\n         :text \"2\")\n        (tb/textblock\n         :text \" \"\n         :delim\n          (copy tb/delimwhitespace\n           :pos 0))\n        (tb/textblock\n         :text \"3\")))))\n  (empty argmap)))",
           ":testresult",
             Test.f_test(
               context,
@@ -1414,7 +1437,7 @@ public final class ReplTest {
                         Repl.t_repl,
                         Core.vx_new(
                           Core.t_anylist,
-                          Core.vx_new_string(":val"),
+                          Core.vx_new_string(":value"),
                           Core.vx_new_int(2)
                         )
                       ),
@@ -1422,7 +1445,7 @@ public final class ReplTest {
                         Repl.t_repl,
                         Core.vx_new(
                           Core.t_anylist,
-                          Core.vx_new_string(":val"),
+                          Core.vx_new_string(":value"),
                           Core.vx_new_int(3)
                         )
                       )
@@ -1596,7 +1619,9 @@ public final class ReplTest {
                   )
                 )
               ),
-              Repl.f_textblock_from_script(Core.vx_new_string("infinity"))
+              Repl.f_textblock_from_script(
+                Core.vx_new_string("infinity")
+              )
             )
         ),
         Core.vx_new(
@@ -1732,7 +1757,9 @@ public final class ReplTest {
                   )
                 )
               ),
-              Repl.f_textblock_from_script(Core.vx_new_string("(+ 2 3)"))
+              Repl.f_textblock_from_script(
+                Core.vx_new_string("(+ 2 3)")
+              )
             )
         )
       )
@@ -1756,7 +1783,9 @@ public final class ReplTest {
             Test.f_test(
               context,
               Core.t_string,
-              Repl.f_typefunc_from_string(Core.vx_new_string("string"))
+              Repl.f_typefunc_from_string(
+                Core.vx_new_string("string")
+              )
             )
         ),
         Core.vx_new(
@@ -1766,7 +1795,9 @@ public final class ReplTest {
             Test.f_test(
               context,
               Core.t_plus,
-              Repl.f_typefunc_from_string(Core.vx_new_string("+"))
+              Repl.f_typefunc_from_string(
+                Core.vx_new_string("+")
+              )
             )
         )
       )

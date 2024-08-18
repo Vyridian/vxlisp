@@ -83,7 +83,8 @@ public static class En {
     }
 
     public Vx.Core.Type_context vx_context_en(Vx.Core.Type_anylist args) {
-      return Vx.Translation.En.f_context_en(args);
+      Vx.Core.Type_context output = Vx.Translation.En.f_context_en(args);
+      return output;
     }
 
   }
@@ -192,7 +193,8 @@ public static class En {
     }
 
     public Vx.Core.Type_context vx_context_test(Vx.Core.Type_anylist args) {
-      return Vx.Translation.En.f_context_test(args);
+      Vx.Core.Type_context output = Vx.Translation.En.f_context_test(args);
+      return output;
     }
 
   }
@@ -296,7 +298,8 @@ public static class En {
     }
 
     public Vx.Core.Type_security vx_securitydata_test() {
-      return Vx.Translation.En.f_securitydata_test();
+      Vx.Core.Type_security output = Vx.Translation.En.f_securitydata_test();
+      return output;
     }
 
   }
@@ -393,7 +396,8 @@ public static class En {
     }
 
     public Vx.Core.Type_translation vx_translation_en() {
-      return Vx.Translation.En.f_translation_en();
+      Vx.Core.Type_translation output = Vx.Translation.En.f_translation_en();
+      return output;
     }
 
   }
@@ -483,7 +487,8 @@ public static class En {
     }
 
     public Vx.Core.Type_stringmap vx_words() {
-      return Vx.Translation.En.f_words();
+      Vx.Core.Type_stringmap output = Vx.Translation.En.f_words();
+      return output;
     }
 
   }

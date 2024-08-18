@@ -280,7 +280,7 @@ namespace vx_sample {
 
     vx_core::Type_any Class_main::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_sample::f_main();
+      output = vx_sample::f_main();
       vx_core::vx_release_except(arglist, output);
       return output;
     }

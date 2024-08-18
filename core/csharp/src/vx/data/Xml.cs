@@ -1004,7 +1004,8 @@ public static class Xml {
     }
 
     public Vx.Core.Type_string vx_string_decodexml_from_string(Vx.Core.Type_string text) {
-      return Vx.Data.Xml.f_string_decodexml_from_string(text);
+      Vx.Core.Type_string output = Vx.Data.Xml.f_string_decodexml_from_string(text);
+      return output;
     }
 
   }
@@ -1017,9 +1018,21 @@ public static class Xml {
     output = Vx.Core.f_let(
       Vx.Core.t_string,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Core.Type_string lt = Vx.Core.f_string_from_string_find_replace(text, Vx.Core.vx_new_string("&lt;"), Vx.Core.vx_new_string("<"));
-        Vx.Core.Type_string gt = Vx.Core.f_string_from_string_find_replace(text, Vx.Core.vx_new_string("&gt;"), Vx.Core.vx_new_string(">"));
-        Vx.Core.Type_string amp = Vx.Core.f_string_from_string_find_replace(gt, Vx.Core.vx_new_string("&amp;"), Vx.Core.vx_new_string("&"));
+        Vx.Core.Type_string lt = Vx.Core.f_string_from_string_find_replace(
+          text,
+          Vx.Core.vx_new_string("&lt;"),
+          Vx.Core.vx_new_string("<")
+        );
+        Vx.Core.Type_string gt = Vx.Core.f_string_from_string_find_replace(
+          text,
+          Vx.Core.vx_new_string("&gt;"),
+          Vx.Core.vx_new_string(">")
+        );
+        Vx.Core.Type_string amp = Vx.Core.f_string_from_string_find_replace(
+          gt,
+          Vx.Core.vx_new_string("&amp;"),
+          Vx.Core.vx_new_string("&")
+        );
         Vx.Core.Type_string result = Vx.Core.f_string_from_string_find_replace(
           text,
           Vx.Core.c_quote,
@@ -1113,7 +1126,8 @@ public static class Xml {
     }
 
     public Vx.Core.Type_string vx_string_first_from_xml(Vx.Data.Xml.Type_xml xml) {
-      return Vx.Data.Xml.f_string_first_from_xml(xml);
+      Vx.Core.Type_string output = Vx.Data.Xml.f_string_first_from_xml(xml);
+      return output;
     }
 
   }
@@ -1127,11 +1141,21 @@ public static class Xml {
       Vx.Core.t_string,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Data.Xml.Type_xmllist children = xml.children();
-        Vx.Data.Xml.Type_xml first = Vx.Core.f_any_from_list(Vx.Data.Xml.t_xml, children, Vx.Core.vx_new_int(1));
+        Vx.Data.Xml.Type_xml first = Vx.Core.f_any_from_list(
+          Vx.Data.Xml.t_xml,
+          children,
+          Vx.Core.vx_new_int(1)
+        );
         Vx.Core.Type_string text = first.text();
-        Vx.Core.Type_string decode = Vx.Data.Xml.f_string_decodexml_from_string(text);
-        Vx.Core.Type_string outdent = Vx.Type.f_string_outdent(decode);
-        Vx.Core.Type_string trim = Vx.Type.f_string_trim(outdent);
+        Vx.Core.Type_string decode = Vx.Data.Xml.f_string_decodexml_from_string(
+          text
+        );
+        Vx.Core.Type_string outdent = Vx.Type.f_string_outdent(
+          decode
+        );
+        Vx.Core.Type_string trim = Vx.Type.f_string_trim(
+          outdent
+        );
         Vx.Core.Type_any output_1 = trim;
         return output_1;
       })
@@ -1220,7 +1244,8 @@ public static class Xml {
     }
 
     public Vx.Data.Textblock.Type_textblock vx_textblock_xml_from_string(Vx.Core.Type_string text) {
-      return Vx.Data.Xml.f_textblock_xml_from_string(text);
+      Vx.Data.Textblock.Type_textblock output = Vx.Data.Xml.f_textblock_xml_from_string(text);
+      return output;
     }
 
   }
@@ -1308,7 +1333,8 @@ public static class Xml {
     }
 
     public Vx.Data.Xml.Type_xml vx_xml_angle_from_xml_textblock(Vx.Data.Xml.Type_xml xmlarg, Vx.Data.Textblock.Type_textblock tb) {
-      return Vx.Data.Xml.f_xml_angle_from_xml_textblock(xmlarg, tb);
+      Vx.Data.Xml.Type_xml output = Vx.Data.Xml.f_xml_angle_from_xml_textblock(xmlarg, tb);
+      return output;
     }
 
   }
@@ -1324,7 +1350,7 @@ public static class Xml {
         Vx.Core.t_thenelselist,
         Vx.Core.f_then(
           Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-            return Vx.Core.f_eq(
+            Vx.Core.Type_any output_1 = Vx.Core.f_eq(
               tb.text(),
               Vx.Core.f_new(
                 Vx.Core.t_string,
@@ -1336,14 +1362,19 @@ public static class Xml {
                 )
               )
             );
+            return output_1;
           }),
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Data.Xml.f_xml_close_from_xml_textblock(xmlarg, tb);
+            Vx.Core.Type_any output_2 = Vx.Data.Xml.f_xml_close_from_xml_textblock(
+              xmlarg,
+              tb
+            );
+            return output_2;
           })
         ),
         Vx.Core.f_else(
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.f_let(
+            Vx.Core.Type_any output_3 = Vx.Core.f_let(
               Vx.Data.Xml.t_xml,
               Vx.Core.t_any_from_func.vx_fn_new(() => {
                 Vx.Data.Textblock.Type_textblocklist children = tb.children();
@@ -1357,10 +1388,14 @@ public static class Xml {
                     xmlarg
                   )
                 );
-                Vx.Core.Type_any output_1 = Vx.Data.Xml.f_xml_properties_from_xml_textblocklist(xmlchg, children);
-                return output_1;
+                Vx.Core.Type_any output_4 = Vx.Data.Xml.f_xml_properties_from_xml_textblocklist(
+                  xmlchg,
+                  children
+                );
+                return output_4;
               })
             );
+            return output_3;
           })
         )
       )
@@ -1439,7 +1474,8 @@ public static class Xml {
     }
 
     public Vx.Data.Xml.Type_xml vx_xml_close_from_xml_textblock(Vx.Data.Xml.Type_xml xmlarg, Vx.Data.Textblock.Type_textblock tb) {
-      return Vx.Data.Xml.f_xml_close_from_xml_textblock(xmlarg, tb);
+      Vx.Data.Xml.Type_xml output = Vx.Data.Xml.f_xml_close_from_xml_textblock(xmlarg, tb);
+      return output;
     }
 
   }
@@ -1455,15 +1491,20 @@ public static class Xml {
         Vx.Core.Type_string tag = xmlarg.tag();
         Vx.Core.Type_string text = tb.text();
         Vx.Data.Xml.Type_xml parent = xmlarg.parent();
-        Vx.Core.Type_boolean isnoparent = Vx.Core.f_is_empty_1(parent);
+        Vx.Core.Type_boolean isnoparent = Vx.Core.f_is_empty_1(
+          parent
+        );
         Vx.Core.Type_any output_1 = Vx.Core.f_if_2(
           Vx.Data.Xml.t_xml,
           Vx.Core.vx_new(
             Vx.Core.t_thenelselist,
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_or(
-                  Vx.Core.f_eq(Vx.Core.vx_new_string("/"), text),
+                Vx.Core.Type_any output_2 = Vx.Core.f_or(
+                  Vx.Core.f_eq(
+                    Vx.Core.vx_new_string("/"),
+                    text
+                  ),
                   Vx.Core.f_eq(
                     text,
                     Vx.Core.f_new(
@@ -1477,23 +1518,26 @@ public static class Xml {
                     )
                   )
                 );
+                return output_2;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_if_2(
+                Vx.Core.Type_any output_3 = Vx.Core.f_if_2(
                   Vx.Data.Xml.t_xml,
                   Vx.Core.vx_new(
                     Vx.Core.t_thenelselist,
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return isnoparent;
+                        Vx.Core.Type_any output_4 = isnoparent;
+                        return output_4;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return xmlarg;
+                        Vx.Core.Type_any output_5 = xmlarg;
+                        return output_5;
                       })
                     ),
                     Vx.Core.f_else(
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_copy(
+                        Vx.Core.Type_any output_6 = Vx.Core.f_copy(
                           parent,
                           Vx.Core.vx_new(
                             Vx.Core.t_anylist,
@@ -1517,15 +1561,17 @@ public static class Xml {
                             )
                           )
                         );
+                        return output_6;
                       })
                     )
                   )
                 );
+                return output_3;
               })
             ),
             Vx.Core.f_else(
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_copy(
+                Vx.Core.Type_any output_7 = Vx.Core.f_copy(
                   xmlarg,
                   Vx.Core.vx_new(
                     Vx.Core.t_anylist,
@@ -1550,6 +1596,7 @@ public static class Xml {
                     )
                   )
                 );
+                return output_7;
               })
             )
           )
@@ -1631,7 +1678,8 @@ public static class Xml {
     }
 
     public Vx.Data.Xml.Type_xml vx_xml_parse_from_xml_textblock(Vx.Data.Xml.Type_xml xmlarg, Vx.Data.Textblock.Type_textblock tb) {
-      return Vx.Data.Xml.f_xml_parse_from_xml_textblock(xmlarg, tb);
+      Vx.Data.Xml.Type_xml output = Vx.Data.Xml.f_xml_parse_from_xml_textblock(xmlarg, tb);
+      return output;
     }
 
   }
@@ -1655,31 +1703,42 @@ public static class Xml {
             Vx.Core.f_case_1(
               Vx.Core.vx_new_string(""),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Data.Xml.f_xml_text_from_xml_textblock(xmlarg, tb);
+                Vx.Core.Type_any output_2 = Vx.Data.Xml.f_xml_text_from_xml_textblock(
+                  xmlarg,
+                  tb
+                );
+                return output_2;
               })
             ),
             Vx.Core.f_case_1(
               Vx.Data.Textblock.c_delimbracketangle.starttext(),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Data.Xml.f_xml_angle_from_xml_textblock(xmlarg, tb);
+                Vx.Core.Type_any output_3 = Vx.Data.Xml.f_xml_angle_from_xml_textblock(
+                  xmlarg,
+                  tb
+                );
+                return output_3;
               })
             ),
             Vx.Core.f_case_1(
               Vx.Data.Textblock.c_delimwhitespace.starttext(),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return xmlarg;
+                Vx.Core.Type_any output_4 = xmlarg;
+                return output_4;
               })
             ),
             Vx.Core.f_case_1(
               Vx.Data.Xml.c_delimxmlcomment.starttext(),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return xmlarg;
+                Vx.Core.Type_any output_5 = xmlarg;
+                return output_5;
               })
             ),
             Vx.Core.f_case_1(
               Vx.Data.Xml.c_delimxmlcdata.starttext(),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return xmlarg;
+                Vx.Core.Type_any output_6 = xmlarg;
+                return output_6;
               })
             )
           )
@@ -1761,7 +1820,8 @@ public static class Xml {
     }
 
     public Vx.Data.Xml.Type_xml vx_xml_parse_from_xml_textblocklist(Vx.Data.Xml.Type_xml xmlarg, Vx.Data.Textblock.Type_textblocklist textblocklist) {
-      return Vx.Data.Xml.f_xml_parse_from_xml_textblocklist(xmlarg, textblocklist);
+      Vx.Data.Xml.Type_xml output = Vx.Data.Xml.f_xml_parse_from_xml_textblocklist(xmlarg, textblocklist);
+      return output;
     }
 
   }
@@ -1856,7 +1916,8 @@ public static class Xml {
     }
 
     public Vx.Data.Xml.Type_xml vx_xml_properties_from_xml_textblocklist(Vx.Data.Xml.Type_xml xmlarg, Vx.Data.Textblock.Type_textblocklist textblocklist) {
-      return Vx.Data.Xml.f_xml_properties_from_xml_textblocklist(xmlarg, textblocklist);
+      Vx.Data.Xml.Type_xml output = Vx.Data.Xml.f_xml_properties_from_xml_textblocklist(xmlarg, textblocklist);
+      return output;
     }
 
   }
@@ -1876,13 +1937,15 @@ public static class Xml {
           Vx.Core.t_any_from_reduce.vx_fn_new((reduce_any, current_any) => {
             Vx.Data.Xml.Type_xml reduce = Vx.Core.f_any_from_any(Vx.Data.Xml.t_xml, reduce_any);
             Vx.Data.Textblock.Type_textblock current = Vx.Core.f_any_from_any(Vx.Data.Textblock.t_textblock, current_any);
-            Vx.Core.Type_any output_1 = 
-                Vx.Data.Xml.f_xml_property_from_xml_textblock(reduce, current);
-            return output_1;
+            Vx.Core.Type_any output_2 = Vx.Data.Xml.f_xml_property_from_xml_textblock(
+              reduce,
+              current
+            );
+            return output_2;
           })
         );
-        Vx.Core.Type_any output_2 = xmlchg;
-        return output_2;
+        Vx.Core.Type_any output_1 = xmlchg;
+        return output_1;
       })
     );
     return output;
@@ -1959,7 +2022,8 @@ public static class Xml {
     }
 
     public Vx.Data.Xml.Type_xml vx_xml_property_from_xml_textblock(Vx.Data.Xml.Type_xml xmlarg, Vx.Data.Textblock.Type_textblock tbarg) {
-      return Vx.Data.Xml.f_xml_property_from_xml_textblock(xmlarg, tbarg);
+      Vx.Data.Xml.Type_xml output = Vx.Data.Xml.f_xml_property_from_xml_textblock(xmlarg, tbarg);
+      return output;
     }
 
   }
@@ -1986,24 +2050,36 @@ public static class Xml {
             Vx.Core.f_case_1(
               Vx.Core.vx_new_string(""),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_if_2(
+                Vx.Core.Type_any output_2 = Vx.Core.f_if_2(
                   Vx.Data.Xml.t_xml,
                   Vx.Core.vx_new(
                     Vx.Core.t_thenelselist,
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Type.f_boolean_from_string_starts(text, Vx.Core.vx_new_string("/"));
+                        Vx.Core.Type_any output_3 = Vx.Type.f_boolean_from_string_starts(
+                          text,
+                          Vx.Core.vx_new_string("/")
+                        );
+                        return output_3;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Data.Xml.f_xml_close_from_xml_textblock(xmlarg, tbarg);
+                        Vx.Core.Type_any output_4 = Vx.Data.Xml.f_xml_close_from_xml_textblock(
+                          xmlarg,
+                          tbarg
+                        );
+                        return output_4;
                       })
                     ),
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_eq(Vx.Core.vx_new_string(":notag"), tag);
+                        Vx.Core.Type_any output_5 = Vx.Core.f_eq(
+                          Vx.Core.vx_new_string(":notag"),
+                          tag
+                        );
+                        return output_5;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_copy(
+                        Vx.Core.Type_any output_6 = Vx.Core.f_copy(
                           xmlarg,
                           Vx.Core.vx_new(
                             Vx.Core.t_anylist,
@@ -2011,14 +2087,19 @@ public static class Xml {
                             text
                           )
                         );
+                        return output_6;
                       })
                     ),
                     Vx.Core.f_then(
                       Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_eq(Vx.Core.vx_new_string(""), prop);
+                        Vx.Core.Type_any output_7 = Vx.Core.f_eq(
+                          Vx.Core.vx_new_string(""),
+                          prop
+                        );
+                        return output_7;
                       }),
                       Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_copy(
+                        Vx.Core.Type_any output_8 = Vx.Core.f_copy(
                           xmlarg,
                           Vx.Core.vx_new(
                             Vx.Core.t_anylist,
@@ -2026,23 +2107,30 @@ public static class Xml {
                             text
                           )
                         );
+                        return output_8;
                       })
                     )
                   )
                 );
+                return output_2;
               })
             ),
             Vx.Core.f_case_1(
               Vx.Core.vx_new_string("delimquote"),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_if_1(
+                Vx.Core.Type_any output_9 = Vx.Core.f_if_1(
                   Vx.Data.Xml.t_xml,
-                  Vx.Core.f_eq(Vx.Core.vx_new_string(""), prop),
+                  Vx.Core.f_eq(
+                    Vx.Core.vx_new_string(""),
+                    prop
+                  ),
                   Vx.Core.f_copy(
                     xmlarg,
                     Vx.Core.vx_new(
                       Vx.Core.t_anylist,
-                      Vx.Core.f_msg_from_error(Vx.Core.vx_new_string("Found quoted text with no matching attribute."))
+                      Vx.Core.f_msg_from_error(
+                        Vx.Core.vx_new_string("Found quoted text with no matching attribute.")
+                      )
                     )
                   ),
                   Vx.Core.f_copy(
@@ -2067,11 +2155,13 @@ public static class Xml {
                     )
                   )
                 );
+                return output_9;
               })
             ),
             Vx.Core.f_else(
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return xmlarg;
+                Vx.Core.Type_any output_10 = xmlarg;
+                return output_10;
               })
             )
           )
@@ -2164,7 +2254,8 @@ public static class Xml {
     }
 
     public Vx.Data.Xml.Type_xml vx_xml_read_from_file(Vx.Core.Type_context context, Vx.Data.File.Type_file file) {
-      return Vx.Data.Xml.f_xml_read_from_file(context, file);
+      Vx.Data.Xml.Type_xml output = Vx.Data.Xml.f_xml_read_from_file(context, file);
+      return output;
     }
 
   }
@@ -2177,8 +2268,13 @@ public static class Xml {
     output = Vx.Core.f_let(
       Vx.Data.Xml.t_xml,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Data.File.Type_file loaded = Vx.Data.File.f_file_read_from_file(context, file);
-        Vx.Core.Type_any output_1 = Vx.Data.Xml.f_xml_from_file(loaded);
+        Vx.Data.File.Type_file loaded = Vx.Data.File.f_file_read_from_file(
+          context,
+          file
+        );
+        Vx.Core.Type_any output_1 = Vx.Data.Xml.f_xml_from_file(
+          loaded
+        );
         return output_1;
       })
     );
@@ -2256,7 +2352,8 @@ public static class Xml {
     }
 
     public Vx.Data.Xml.Type_xml vx_xml_text_from_xml_textblock(Vx.Data.Xml.Type_xml xmlarg, Vx.Data.Textblock.Type_textblock tb) {
-      return Vx.Data.Xml.f_xml_text_from_xml_textblock(xmlarg, tb);
+      Vx.Data.Xml.Type_xml output = Vx.Data.Xml.f_xml_text_from_xml_textblock(xmlarg, tb);
+      return output;
     }
 
   }
@@ -2284,15 +2381,19 @@ public static class Xml {
             Vx.Core.t_thenelselist,
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_is_empty_1(xmlarg);
+                Vx.Core.Type_any output_2 = Vx.Core.f_is_empty_1(
+                  xmlarg
+                );
+                return output_2;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return xmlchg;
+                Vx.Core.Type_any output_3 = xmlchg;
+                return output_3;
               })
             ),
             Vx.Core.f_else(
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_copy(
+                Vx.Core.Type_any output_4 = Vx.Core.f_copy(
                   xmlarg,
                   Vx.Core.vx_new(
                     Vx.Core.t_anylist,
@@ -2307,6 +2408,7 @@ public static class Xml {
                     )
                   )
                 );
+                return output_4;
               })
             )
           )
@@ -2398,7 +2500,8 @@ public static class Xml {
     }
 
     public Vx.Data.Xml.Type_xml vx_xml_from_file(Vx.Data.File.Type_file file) {
-      return Vx.Data.Xml.f_xml_from_file(file);
+      Vx.Data.Xml.Type_xml output = Vx.Data.Xml.f_xml_from_file(file);
+      return output;
     }
 
   }
@@ -2412,7 +2515,9 @@ public static class Xml {
       Vx.Data.Xml.t_xml,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_string text = file.text();
-        Vx.Core.Type_any output_1 = Vx.Data.Xml.f_xml_from_string(text);
+        Vx.Core.Type_any output_1 = Vx.Data.Xml.f_xml_from_string(
+          text
+        );
         return output_1;
       })
     );
@@ -2500,7 +2605,8 @@ public static class Xml {
     }
 
     public Vx.Data.Xml.Type_xml vx_xml_from_string(Vx.Core.Type_string text) {
-      return Vx.Data.Xml.f_xml_from_string(text);
+      Vx.Data.Xml.Type_xml output = Vx.Data.Xml.f_xml_from_string(text);
+      return output;
     }
 
   }
@@ -2513,8 +2619,12 @@ public static class Xml {
     output = Vx.Core.f_let(
       Vx.Data.Xml.t_xml,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Data.Textblock.Type_textblock tb = Vx.Data.Xml.f_textblock_xml_from_string(text);
-        Vx.Core.Type_any output_1 = Vx.Data.Xml.f_xml_from_textblock(tb);
+        Vx.Data.Textblock.Type_textblock tb = Vx.Data.Xml.f_textblock_xml_from_string(
+          text
+        );
+        Vx.Core.Type_any output_1 = Vx.Data.Xml.f_xml_from_textblock(
+          tb
+        );
         return output_1;
       })
     );
@@ -2602,7 +2712,8 @@ public static class Xml {
     }
 
     public Vx.Data.Xml.Type_xml vx_xml_from_textblock(Vx.Data.Textblock.Type_textblock textblock) {
-      return Vx.Data.Xml.f_xml_from_textblock(textblock);
+      Vx.Data.Xml.Type_xml output = Vx.Data.Xml.f_xml_from_textblock(textblock);
+      return output;
     }
 
   }

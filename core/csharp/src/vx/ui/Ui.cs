@@ -8731,7 +8731,8 @@ public static class Ui {
     }
 
     public Vx.Core.Type_boolean vx_boolean_layout_from_ui_parent_selected(Vx.Core.Type_context context, Vx.Ui.Ui.Type_ui ui, Vx.Ui.Ui.Type_ui parent, Vx.Core.Type_boolean selected) {
-      return Vx.Ui.Ui.f_boolean_layout_from_ui_parent_selected(context, ui, parent, selected);
+      Vx.Core.Type_boolean output = Vx.Ui.Ui.f_boolean_layout_from_ui_parent_selected(context, ui, parent, selected);
+      return output;
     }
 
   }
@@ -8744,7 +8745,9 @@ public static class Ui {
     output = Vx.Core.f_let(
       Vx.Core.t_boolean,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Ui.Ui.Type_layoutengine layoutengine = Vx.Ui.Ui.f_layoutengine_readstate(context);
+        Vx.Ui.Ui.Type_layoutengine layoutengine = Vx.Ui.Ui.f_layoutengine_readstate(
+          context
+        );
         Vx.Ui.Ui.Type_ui uiselected = Vx.Core.f_copy(
           ui,
           Vx.Core.vx_new(
@@ -8753,9 +8756,16 @@ public static class Ui {
             selected
           )
         );
-        Vx.Core.Type_boolean iswrite = Vx.Ui.Ui.f_boolean_write_from_ui_parent(uiselected, parent);
+        Vx.Core.Type_boolean iswrite = Vx.Ui.Ui.f_boolean_write_from_ui_parent(
+          uiselected,
+          parent
+        );
         Vx.Ui.Ui.Func_boolean_layoutselected_from_ui fn_layoutselected = layoutengine.boolean_layoutselected();
-        Vx.Core.Type_any output_1 = Vx.Core.vx_any_from_func(Vx.Core.t_boolean, fn_layoutselected, uiselected);
+        Vx.Core.Type_any output_1 = Vx.Core.vx_any_from_func(
+          Vx.Core.t_boolean,
+          fn_layoutselected,
+          uiselected
+        );
         return output_1;
       })
     );
@@ -8836,7 +8846,8 @@ public static class Ui {
     }
 
     public Vx.Core.Type_boolean vx_boolean_layout_from_ui_parent_visible(Vx.Core.Type_context context, Vx.Ui.Ui.Type_ui ui, Vx.Ui.Ui.Type_ui parent, Vx.Core.Type_boolean visible) {
-      return Vx.Ui.Ui.f_boolean_layout_from_ui_parent_visible(context, ui, parent, visible);
+      Vx.Core.Type_boolean output = Vx.Ui.Ui.f_boolean_layout_from_ui_parent_visible(context, ui, parent, visible);
+      return output;
     }
 
   }
@@ -8849,18 +8860,29 @@ public static class Ui {
     output = Vx.Core.f_let(
       Vx.Core.t_boolean,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Ui.Ui.Type_layoutengine layoutengine = Vx.Ui.Ui.f_layoutengine_readstate(context);
+        Vx.Ui.Ui.Type_layoutengine layoutengine = Vx.Ui.Ui.f_layoutengine_readstate(
+          context
+        );
         Vx.Ui.Ui.Type_ui uivisible = Vx.Core.f_copy(
           ui,
           Vx.Core.vx_new(
             Vx.Core.t_anylist,
             Vx.Core.vx_new_string(":hidden"),
-            Vx.Core.f_not(visible)
+            Vx.Core.f_not(
+              visible
+            )
           )
         );
-        Vx.Core.Type_boolean iswrite = Vx.Ui.Ui.f_boolean_write_from_ui_parent(uivisible, parent);
+        Vx.Core.Type_boolean iswrite = Vx.Ui.Ui.f_boolean_write_from_ui_parent(
+          uivisible,
+          parent
+        );
         Vx.Ui.Ui.Func_boolean_layoutvisible_from_ui fn_layoutvisible = layoutengine.boolean_layoutvisible();
-        Vx.Core.Type_any output_1 = Vx.Core.vx_any_from_func(Vx.Core.t_boolean, fn_layoutvisible, uivisible);
+        Vx.Core.Type_any output_1 = Vx.Core.vx_any_from_func(
+          Vx.Core.t_boolean,
+          fn_layoutvisible,
+          uivisible
+        );
         return output_1;
       })
     );
@@ -8939,7 +8961,8 @@ public static class Ui {
     }
 
     public Vx.Core.Type_boolean vx_boolean_layoutaddchild_from_ui_parent(Vx.Core.Type_context context, Vx.Ui.Ui.Type_ui uiarg, Vx.Ui.Ui.Type_ui parent) {
-      return Vx.Ui.Ui.f_boolean_layoutaddchild_from_ui_parent(context, uiarg, parent);
+      Vx.Core.Type_boolean output = Vx.Ui.Ui.f_boolean_layoutaddchild_from_ui_parent(context, uiarg, parent);
+      return output;
     }
 
   }
@@ -8952,8 +8975,14 @@ public static class Ui {
     output = Vx.Core.f_let(
       Vx.Core.t_boolean,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Ui.Ui.Type_ui ui2 = Vx.Ui.Ui.f_ui_addlayout_from_ui(context, uiarg);
-        Vx.Core.Type_boolean iswrite = Vx.Ui.Ui.f_boolean_write_from_ui_parent(ui2, parent);
+        Vx.Ui.Ui.Type_ui ui2 = Vx.Ui.Ui.f_ui_addlayout_from_ui(
+          context,
+          uiarg
+        );
+        Vx.Core.Type_boolean iswrite = Vx.Ui.Ui.f_boolean_write_from_ui_parent(
+          ui2,
+          parent
+        );
         Vx.Ui.Ui.Type_ui ui3 = Vx.Ui.Ui.f_ui_layout_from_ui_orig_parent(
           ui2,
           Vx.Core.f_empty(
@@ -9049,7 +9078,8 @@ public static class Ui {
     }
 
     public Vx.Core.Type_boolean vx_boolean_layoutremove_from_ui(Vx.Ui.Ui.Type_ui ui) {
-      return Vx.Ui.Ui.f_boolean_layoutremove_from_ui(ui);
+      Vx.Core.Type_boolean output = Vx.Ui.Ui.f_boolean_layoutremove_from_ui(ui);
+      return output;
     }
 
   }
@@ -9134,7 +9164,8 @@ public static class Ui {
     }
 
     public Vx.Core.Type_boolean vx_boolean_layoutremove_from_ui_keys(Vx.Core.Type_context context, Vx.Ui.Ui.Type_ui ui, Vx.Core.Type_stringlist keys) {
-      return Vx.Ui.Ui.f_boolean_layoutremove_from_ui_keys(context, ui, keys);
+      Vx.Core.Type_boolean output = Vx.Ui.Ui.f_boolean_layoutremove_from_ui_keys(context, ui, keys);
+      return output;
     }
 
   }
@@ -9153,20 +9184,29 @@ public static class Ui {
           keys,
           Vx.Core.t_any_from_any.vx_fn_new((key_any) => {
             Vx.Core.Type_string key = Vx.Core.f_any_from_any(Vx.Core.t_string, key_any);
-            Vx.Core.Type_any output_1 = 
-                Vx.Core.f_let(
-                  Vx.Core.t_boolean,
-                  Vx.Core.t_any_from_func.vx_fn_new(() => {
-                    Vx.Ui.Ui.Type_ui childui = Vx.Core.f_any_from_map(Vx.Ui.Ui.t_ui, uimap, key);
-                    Vx.Core.Type_any output_2 = Vx.Ui.Ui.f_boolean_layoutremove_from_ui_parent(context, childui, ui);
-                    return output_2;
-                  })
+            Vx.Core.Type_any output_2 = Vx.Core.f_let(
+              Vx.Core.t_boolean,
+              Vx.Core.t_any_from_func.vx_fn_new(() => {
+                Vx.Ui.Ui.Type_ui childui = Vx.Core.f_any_from_map(
+                  Vx.Ui.Ui.t_ui,
+                  uimap,
+                  key
                 );
-            return output_1;
+                Vx.Core.Type_any output_3 = Vx.Ui.Ui.f_boolean_layoutremove_from_ui_parent(
+                  context,
+                  childui,
+                  ui
+                );
+                return output_3;
+              })
+            );
+            return output_2;
           })
         );
-        Vx.Core.Type_any output_3 = Vx.Core.f_and_1(writelist);
-        return output_3;
+        Vx.Core.Type_any output_1 = Vx.Core.f_and_1(
+          writelist
+        );
+        return output_1;
       })
     );
     return output;
@@ -9244,7 +9284,8 @@ public static class Ui {
     }
 
     public Vx.Core.Type_boolean vx_boolean_layoutremove_from_ui_parent(Vx.Core.Type_context context, Vx.Ui.Ui.Type_ui ui, Vx.Ui.Ui.Type_ui parent) {
-      return Vx.Ui.Ui.f_boolean_layoutremove_from_ui_parent(context, ui, parent);
+      Vx.Core.Type_boolean output = Vx.Ui.Ui.f_boolean_layoutremove_from_ui_parent(context, ui, parent);
+      return output;
     }
 
   }
@@ -9257,11 +9298,20 @@ public static class Ui {
     output = Vx.Core.f_let(
       Vx.Core.t_boolean,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Ui.Ui.Type_layoutengine layoutengine = Vx.Ui.Ui.f_layoutengine_readstate(context);
+        Vx.Ui.Ui.Type_layoutengine layoutengine = Vx.Ui.Ui.f_layoutengine_readstate(
+          context
+        );
         Vx.Core.Type_string uid = ui.uid();
-        Vx.Core.Type_boolean iswrite = Vx.Ui.Ui.f_boolean_writeremove_from_ui_uid(parent, uid);
+        Vx.Core.Type_boolean iswrite = Vx.Ui.Ui.f_boolean_writeremove_from_ui_uid(
+          parent,
+          uid
+        );
         Vx.Ui.Ui.Func_boolean_layoutremove_from_ui fn_layoutremove = layoutengine.boolean_layoutremove();
-        Vx.Core.Type_any output_1 = Vx.Core.vx_any_from_func(Vx.Core.t_boolean, fn_layoutremove, ui);
+        Vx.Core.Type_any output_1 = Vx.Core.vx_any_from_func(
+          Vx.Core.t_boolean,
+          fn_layoutremove,
+          ui
+        );
         return output_1;
       })
     );
@@ -9342,7 +9392,8 @@ public static class Ui {
     }
 
     public Vx.Core.Type_boolean vx_boolean_layoutremove_from_ui_start_end(Vx.Core.Type_context context, Vx.Ui.Ui.Type_ui ui, Vx.Core.Type_int start, Vx.Core.Type_int end) {
-      return Vx.Ui.Ui.f_boolean_layoutremove_from_ui_start_end(context, ui, start, end);
+      Vx.Core.Type_boolean output = Vx.Ui.Ui.f_boolean_layoutremove_from_ui_start_end(context, ui, start, end);
+      return output;
     }
 
   }
@@ -9356,9 +9407,20 @@ public static class Ui {
       Vx.Core.t_boolean,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Ui.Ui.Type_uimap uimap = ui.uimap();
-        Vx.Core.Type_stringlist keys = Vx.Core.f_stringlist_from_map(uimap);
-        Vx.Core.Type_stringlist subkeys = Vx.Collection.f_list_from_list_start_end(Vx.Core.t_stringlist, keys, start, end);
-        Vx.Core.Type_any output_1 = Vx.Ui.Ui.f_boolean_layoutremove_from_ui_keys(context, ui, subkeys);
+        Vx.Core.Type_stringlist keys = Vx.Core.f_stringlist_from_map(
+          uimap
+        );
+        Vx.Core.Type_stringlist subkeys = Vx.Collection.f_list_from_list_start_end(
+          Vx.Core.t_stringlist,
+          keys,
+          start,
+          end
+        );
+        Vx.Core.Type_any output_1 = Vx.Ui.Ui.f_boolean_layoutremove_from_ui_keys(
+          context,
+          ui,
+          subkeys
+        );
         return output_1;
       })
     );
@@ -9446,7 +9508,8 @@ public static class Ui {
     }
 
     public Vx.Core.Type_boolean vx_boolean_layoutselected_from_ui(Vx.Ui.Ui.Type_ui ui) {
-      return Vx.Ui.Ui.f_boolean_layoutselected_from_ui(ui);
+      Vx.Core.Type_boolean output = Vx.Ui.Ui.f_boolean_layoutselected_from_ui(ui);
+      return output;
     }
 
   }
@@ -9531,7 +9594,8 @@ public static class Ui {
     }
 
     public Vx.Core.Type_boolean vx_boolean_layoutselected_from_ui_parent(Vx.Core.Type_context context, Vx.Ui.Ui.Type_ui ui, Vx.Ui.Ui.Type_ui parent) {
-      return Vx.Ui.Ui.f_boolean_layoutselected_from_ui_parent(context, ui, parent);
+      Vx.Core.Type_boolean output = Vx.Ui.Ui.f_boolean_layoutselected_from_ui_parent(context, ui, parent);
+      return output;
     }
 
   }
@@ -9544,10 +9608,19 @@ public static class Ui {
     output = Vx.Core.f_let(
       Vx.Core.t_boolean,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Ui.Ui.Type_layoutengine layoutengine = Vx.Ui.Ui.f_layoutengine_readstate(context);
-        Vx.Core.Type_boolean iswrite = Vx.Ui.Ui.f_boolean_write_from_ui_parent(ui, parent);
+        Vx.Ui.Ui.Type_layoutengine layoutengine = Vx.Ui.Ui.f_layoutengine_readstate(
+          context
+        );
+        Vx.Core.Type_boolean iswrite = Vx.Ui.Ui.f_boolean_write_from_ui_parent(
+          ui,
+          parent
+        );
         Vx.Ui.Ui.Func_boolean_layoutselected_from_ui fn_layoutselected = layoutengine.boolean_layoutselected();
-        Vx.Core.Type_any output_1 = Vx.Core.vx_any_from_func(Vx.Core.t_boolean, fn_layoutselected, ui);
+        Vx.Core.Type_any output_1 = Vx.Core.vx_any_from_func(
+          Vx.Core.t_boolean,
+          fn_layoutselected,
+          ui
+        );
         return output_1;
       })
     );
@@ -9625,7 +9698,8 @@ public static class Ui {
     }
 
     public Vx.Core.Type_boolean vx_boolean_layoutselected_from_ui_selected(Vx.Ui.Ui.Type_ui ui, Vx.Core.Type_int selected) {
-      return Vx.Ui.Ui.f_boolean_layoutselected_from_ui_selected(ui, selected);
+      Vx.Core.Type_boolean output = Vx.Ui.Ui.f_boolean_layoutselected_from_ui_selected(ui, selected);
+      return output;
     }
 
   }
@@ -9719,7 +9793,8 @@ public static class Ui {
     }
 
     public Vx.Core.Type_boolean vx_boolean_layoutvisible_from_ui(Vx.Ui.Ui.Type_ui ui) {
-      return Vx.Ui.Ui.f_boolean_layoutvisible_from_ui(ui);
+      Vx.Core.Type_boolean output = Vx.Ui.Ui.f_boolean_layoutvisible_from_ui(ui);
+      return output;
     }
 
   }
@@ -9814,7 +9889,8 @@ public static class Ui {
     }
 
     public Vx.Core.Type_boolean vx_boolean_print(Vx.Core.Type_context context, Vx.Ui.Ui.Type_ui ui) {
-      return Vx.Ui.Ui.f_boolean_print(context, ui);
+      Vx.Core.Type_boolean output = Vx.Ui.Ui.f_boolean_print(context, ui);
+      return output;
     }
 
   }
@@ -9827,9 +9903,16 @@ public static class Ui {
     output = Vx.Core.f_let(
       Vx.Core.t_boolean,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Ui.Ui.Type_layoutengine layoutengine = Vx.Ui.Ui.f_layoutengine_readstate(context);
+        Vx.Ui.Ui.Type_layoutengine layoutengine = Vx.Ui.Ui.f_layoutengine_readstate(
+          context
+        );
         Vx.Ui.Ui.Func_boolean_print fn_print = layoutengine.boolean_print();
-        Vx.Core.Type_any output_1 = Vx.Core.vx_any_from_func(Vx.Core.t_boolean, fn_print, context, ui);
+        Vx.Core.Type_any output_1 = Vx.Core.vx_any_from_func(
+          Vx.Core.t_boolean,
+          fn_print,
+          context,
+          ui
+        );
         return output_1;
       })
     );
@@ -9904,7 +9987,8 @@ public static class Ui {
     }
 
     public Vx.Core.Type_boolean vx_boolean_removestate_uiapp(Vx.Core.Type_context context) {
-      return Vx.Ui.Ui.f_boolean_removestate_uiapp(context);
+      Vx.Core.Type_boolean output = Vx.Ui.Ui.f_boolean_removestate_uiapp(context);
+      return output;
     }
 
   }
@@ -9914,7 +9998,10 @@ public static class Ui {
 
   public static Vx.Core.Type_boolean f_boolean_removestate_uiapp(Vx.Core.Type_context context) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
-    output = Vx.State.f_boolean_removestate_from_name(context, Vx.Core.vx_new_string(":uiapp"));
+    output = Vx.State.f_boolean_removestate_from_name(
+      context,
+      Vx.Core.vx_new_string(":uiapp")
+    );
     return output;
   }
 
@@ -9989,7 +10076,8 @@ public static class Ui {
     }
 
     public Vx.Core.Type_boolean vx_boolean_write_from_ui_parent(Vx.Ui.Ui.Type_ui ui, Vx.Ui.Ui.Type_ui parent) {
-      return Vx.Ui.Ui.f_boolean_write_from_ui_parent(ui, parent);
+      Vx.Core.Type_boolean output = Vx.Ui.Ui.f_boolean_write_from_ui_parent(ui, parent);
+      return output;
     }
 
   }
@@ -10004,7 +10092,11 @@ public static class Ui {
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_string uid = ui.uid();
         Vx.Ui.Ui.Type_uimap uimap = parent.uimap();
-        Vx.Core.Type_any output_1 = Vx.Core.f_boolean_write_from_map_name_value(uimap, uid, ui);
+        Vx.Core.Type_any output_1 = Vx.Core.f_boolean_write_from_map_name_value(
+          uimap,
+          uid,
+          ui
+        );
         return output_1;
       })
     );
@@ -10082,7 +10174,8 @@ public static class Ui {
     }
 
     public Vx.Core.Type_boolean vx_boolean_writeremove_from_ui_uid(Vx.Ui.Ui.Type_ui uiarg, Vx.Core.Type_string uid) {
-      return Vx.Ui.Ui.f_boolean_writeremove_from_ui_uid(uiarg, uid);
+      Vx.Core.Type_boolean output = Vx.Ui.Ui.f_boolean_writeremove_from_ui_uid(uiarg, uid);
+      return output;
     }
 
   }
@@ -10190,7 +10283,8 @@ public static class Ui {
     }
 
     public Vx.Core.Type_boolean vx_boolean_writestate_from_ui(Vx.Core.Type_context context, Vx.Ui.Ui.Type_ui ui) {
-      return Vx.Ui.Ui.f_boolean_writestate_from_ui(context, ui);
+      Vx.Core.Type_boolean output = Vx.Ui.Ui.f_boolean_writestate_from_ui(context, ui);
+      return output;
     }
 
   }
@@ -10204,38 +10298,58 @@ public static class Ui {
       Vx.Core.t_boolean,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_string uid = ui.uid();
-        Vx.Ui.Ui.Type_ui uiapp = Vx.Ui.Ui.f_ui_readstate_uiapp(context);
-        Vx.Core.Type_string parentuid = Vx.Ui.Ui.f_string_parentuid_from_uid(uid);
+        Vx.Ui.Ui.Type_ui uiapp = Vx.Ui.Ui.f_ui_readstate_uiapp(
+          context
+        );
+        Vx.Core.Type_string parentuid = Vx.Ui.Ui.f_string_parentuid_from_uid(
+          uid
+        );
         Vx.Ui.Ui.Type_ui parentui = Vx.Core.f_if_2(
           Vx.Ui.Ui.t_ui,
           Vx.Core.vx_new(
             Vx.Core.t_thenelselist,
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_eq(Vx.Core.vx_new_string(""), parentuid);
+                Vx.Core.Type_any output_2 = Vx.Core.f_eq(
+                  Vx.Core.vx_new_string(""),
+                  parentuid
+                );
+                return output_2;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return uiapp;
+                Vx.Core.Type_any output_3 = uiapp;
+                return output_3;
               })
             ),
             Vx.Core.f_else(
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Ui.Ui.f_ui_from_ui_find(uiapp, parentuid);
+                Vx.Core.Type_any output_4 = Vx.Ui.Ui.f_ui_from_ui_find(
+                  uiapp,
+                  parentuid
+                );
+                return output_4;
               })
             )
           )
         );
-        Vx.Core.Type_boolean isfound = Vx.Core.f_notempty_1(parentui);
+        Vx.Core.Type_boolean isfound = Vx.Core.f_notempty_1(
+          parentui
+        );
         Vx.Core.Type_boolean iswrite = Vx.Core.f_if_2(
           Vx.Core.t_boolean,
           Vx.Core.vx_new(
             Vx.Core.t_thenelselist,
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return isfound;
+                Vx.Core.Type_any output_5 = isfound;
+                return output_5;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Ui.Ui.f_boolean_write_from_ui_parent(ui, parentui);
+                Vx.Core.Type_any output_6 = Vx.Ui.Ui.f_boolean_write_from_ui_parent(
+                  ui,
+                  parentui
+                );
+                return output_6;
               })
             )
           )
@@ -10329,7 +10443,8 @@ public static class Ui {
     }
 
     public Vx.Core.Type_boolean vx_boolean_writestate_from_uiapp(Vx.Core.Type_context context, Vx.Ui.Ui.Type_ui ui) {
-      return Vx.Ui.Ui.f_boolean_writestate_from_uiapp(context, ui);
+      Vx.Core.Type_boolean output = Vx.Ui.Ui.f_boolean_writestate_from_uiapp(context, ui);
+      return output;
     }
 
   }
@@ -10339,7 +10454,11 @@ public static class Ui {
 
   public static Vx.Core.Type_boolean f_boolean_writestate_from_uiapp(Vx.Core.Type_context context, Vx.Ui.Ui.Type_ui ui) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
-    output = Vx.State.f_boolean_writestate_from_name_value(context, Vx.Core.vx_new_string(":uiapp"), ui);
+    output = Vx.State.f_boolean_writestate_from_name_value(
+      context,
+      Vx.Core.vx_new_string(":uiapp"),
+      ui
+    );
     return output;
   }
 
@@ -10425,7 +10544,8 @@ public static class Ui {
     }
 
     public Vx.Core.Type_boolean vx_boolean_writestate_from_uiengine(Vx.Core.Type_context context, Vx.Ui.Ui.Type_uiengine uiengine) {
-      return Vx.Ui.Ui.f_boolean_writestate_from_uiengine(context, uiengine);
+      Vx.Core.Type_boolean output = Vx.Ui.Ui.f_boolean_writestate_from_uiengine(context, uiengine);
+      return output;
     }
 
   }
@@ -10435,7 +10555,11 @@ public static class Ui {
 
   public static Vx.Core.Type_boolean f_boolean_writestate_from_uiengine(Vx.Core.Type_context context, Vx.Ui.Ui.Type_uiengine uiengine) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
-    output = Vx.State.f_boolean_writestate_from_name_value(context, Vx.Core.vx_new_string(":uiengine"), uiengine);
+    output = Vx.State.f_boolean_writestate_from_name_value(
+      context,
+      Vx.Core.vx_new_string(":uiengine"),
+      uiengine
+    );
     return output;
   }
 
@@ -10520,7 +10644,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_fontfacemap vx_fontfacemap_from_fontfacelist(Vx.Ui.Ui.Type_fontfacelist fontfacelist) {
-      return Vx.Ui.Ui.f_fontfacemap_from_fontfacelist(fontfacelist);
+      Vx.Ui.Ui.Type_fontfacemap output = Vx.Ui.Ui.f_fontfacemap_from_fontfacelist(fontfacelist);
+      return output;
     }
 
   }
@@ -10535,8 +10660,7 @@ public static class Ui {
       fontfacelist,
       Vx.Core.t_any_from_any.vx_fn_new((fontface_any) => {
         Vx.Ui.Ui.Type_fontface fontface = Vx.Core.f_any_from_any(Vx.Ui.Ui.t_fontface, fontface_any);
-        Vx.Core.Type_any output_1 = 
-          fontface.name();
+        Vx.Core.Type_any output_1 = fontface.name();
         return output_1;
       })
     );
@@ -10614,7 +10738,8 @@ public static class Ui {
     }
 
     public Vx.Core.Type_int vx_int_child_from_ui_uid(Vx.Ui.Ui.Type_ui ui, Vx.Core.Type_string uid) {
-      return Vx.Ui.Ui.f_int_child_from_ui_uid(ui, uid);
+      Vx.Core.Type_int output = Vx.Ui.Ui.f_int_child_from_ui_uid(ui, uid);
+      return output;
     }
 
   }
@@ -10628,7 +10753,10 @@ public static class Ui {
       Vx.Core.t_int,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Ui.Ui.Type_uimap uimap = ui.uimap();
-        Vx.Core.Type_any output_1 = Vx.Collection.f_int_from_map_key(uimap, uid);
+        Vx.Core.Type_any output_1 = Vx.Collection.f_int_from_map_key(
+          uimap,
+          uid
+        );
         return output_1;
       })
     );
@@ -10716,7 +10844,8 @@ public static class Ui {
     }
 
     public Vx.Core.Type_int vx_int_selected_from_ui(Vx.Ui.Ui.Type_ui ui) {
-      return Vx.Ui.Ui.f_int_selected_from_ui(ui);
+      Vx.Core.Type_int output = Vx.Ui.Ui.f_int_selected_from_ui(ui);
+      return output;
     }
 
   }
@@ -10729,9 +10858,16 @@ public static class Ui {
     output = Vx.Core.f_let(
       Vx.Core.t_int,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Core.Type_string uid = Vx.Ui.Ui.f_string_selected_from_ui(ui);
-        Vx.Core.Type_stringlist uidlist = Vx.Ui.Ui.f_stringlist_from_ui(ui);
-        Vx.Core.Type_any output_1 = Vx.Collection.f_int_from_stringlist_find(uidlist, uid);
+        Vx.Core.Type_string uid = Vx.Ui.Ui.f_string_selected_from_ui(
+          ui
+        );
+        Vx.Core.Type_stringlist uidlist = Vx.Ui.Ui.f_stringlist_from_ui(
+          ui
+        );
+        Vx.Core.Type_any output_1 = Vx.Collection.f_int_from_stringlist_find(
+          uidlist,
+          uid
+        );
         return output_1;
       })
     );
@@ -10819,7 +10955,8 @@ public static class Ui {
     }
 
     public Vx.Core.Type_int vx_int_visible_from_ui(Vx.Ui.Ui.Type_ui ui) {
-      return Vx.Ui.Ui.f_int_visible_from_ui(ui);
+      Vx.Core.Type_int output = Vx.Ui.Ui.f_int_visible_from_ui(ui);
+      return output;
     }
 
   }
@@ -10832,8 +10969,13 @@ public static class Ui {
     output = Vx.Core.f_let(
       Vx.Core.t_int,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Core.Type_intlist intlist = Vx.Ui.Ui.f_intlist_visible_from_ui(ui);
-        Vx.Core.Type_any output_1 = Vx.Core.f_first_from_list(Vx.Core.t_int, intlist);
+        Vx.Core.Type_intlist intlist = Vx.Ui.Ui.f_intlist_visible_from_ui(
+          ui
+        );
+        Vx.Core.Type_any output_1 = Vx.Core.f_first_from_list(
+          Vx.Core.t_int,
+          intlist
+        );
         return output_1;
       })
     );
@@ -10921,7 +11063,8 @@ public static class Ui {
     }
 
     public Vx.Core.Type_intlist vx_intlist_visible_from_ui(Vx.Ui.Ui.Type_ui uiarg) {
-      return Vx.Ui.Ui.f_intlist_visible_from_ui(uiarg);
+      Vx.Core.Type_intlist output = Vx.Ui.Ui.f_intlist_visible_from_ui(uiarg);
+      return output;
     }
 
   }
@@ -10935,34 +11078,37 @@ public static class Ui {
       Vx.Core.t_intlist,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Ui.Ui.Type_uimap uimap = uiarg.uimap();
-        Vx.Ui.Ui.Type_uilist uilist = Vx.Ui.Ui.f_uilist_from_uimap(uimap);
+        Vx.Ui.Ui.Type_uilist uilist = Vx.Ui.Ui.f_uilist_from_uimap(
+          uimap
+        );
         Vx.Ui.Ui.Type_uilist intlist = Vx.Core.f_list_from_list_intany(
           Vx.Ui.Ui.t_uilist,
           uilist,
           Vx.Core.t_any_from_int_any.vx_fn_new((pos_any, subui_any) => {
             Vx.Core.Type_int pos = Vx.Core.f_any_from_any(Vx.Core.t_int, pos_any);
             Vx.Ui.Ui.Type_ui subui = Vx.Core.f_any_from_any(Vx.Ui.Ui.t_ui, subui_any);
-            Vx.Core.Type_any output_1 = 
-                Vx.Core.f_if_2(
-                  Vx.Core.t_int,
-                  Vx.Core.vx_new(
-                    Vx.Core.t_thenelselist,
-                    Vx.Core.f_then(
-                      Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                        return Vx.Core.f_not(
-                          subui.hidden()
-                        );
-                      }),
-                      Vx.Core.t_any_from_func.vx_fn_new(() => {
-                        return pos;
-                      })
-                    )
-                  )
-                );
-            return output_1;
+            Vx.Core.Type_any output_3 = Vx.Core.f_if_2(
+              Vx.Core.t_int,
+              Vx.Core.vx_new(
+                Vx.Core.t_thenelselist,
+                Vx.Core.f_then(
+                  Vx.Core.t_boolean_from_func.vx_fn_new(() => {
+                    Vx.Core.Type_any output_4 = Vx.Core.f_not(
+                      subui.hidden()
+                    );
+                    return output_4;
+                  }),
+                  Vx.Core.t_any_from_func.vx_fn_new(() => {
+                    Vx.Core.Type_any output_5 = pos;
+                    return output_5;
+                  })
+                )
+              )
+            );
+            return output_3;
           })
         );
-        Vx.Core.Type_any output_3 = Vx.Collection.f_list_from_list_filter(
+        Vx.Core.Type_any output_1 = Vx.Collection.f_list_from_list_filter(
           Vx.Core.t_intlist,
           intlist,
           Vx.Core.t_any_from_any.vx_fn_new((pos_any) => {
@@ -10971,7 +11117,7 @@ public static class Ui {
             return output_2;
           })
         );
-        return output_3;
+        return output_1;
       })
     );
     return output;
@@ -11057,7 +11203,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_layout vx_layout_from_style(Vx.Ui.Ui.Type_style style) {
-      return Vx.Ui.Ui.f_layout_from_style(style);
+      Vx.Ui.Ui.Type_layout output = Vx.Ui.Ui.f_layout_from_style(style);
+      return output;
     }
 
   }
@@ -11153,7 +11300,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_layout vx_layout_from_ui(Vx.Core.Type_context context, Vx.Ui.Ui.Type_ui ui) {
-      return Vx.Ui.Ui.f_layout_from_ui(context, ui);
+      Vx.Ui.Ui.Type_layout output = Vx.Ui.Ui.f_layout_from_ui(context, ui);
+      return output;
     }
 
   }
@@ -11166,8 +11314,13 @@ public static class Ui {
     output = Vx.Core.f_let(
       Vx.Ui.Ui.t_layout,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Ui.Ui.Type_layoutengine layoutengine = Vx.Ui.Ui.f_layoutengine_readstate(context);
-        Vx.Core.Type_any output_1 = Vx.Ui.Ui.f_layout_from_ui_layoutengine(ui, layoutengine);
+        Vx.Ui.Ui.Type_layoutengine layoutengine = Vx.Ui.Ui.f_layoutengine_readstate(
+          context
+        );
+        Vx.Core.Type_any output_1 = Vx.Ui.Ui.f_layout_from_ui_layoutengine(
+          ui,
+          layoutengine
+        );
         return output_1;
       })
     );
@@ -11245,7 +11398,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_layout vx_layout_from_ui_layoutengine(Vx.Ui.Ui.Type_ui ui, Vx.Ui.Ui.Type_layoutengine layoutengine) {
-      return Vx.Ui.Ui.f_layout_from_ui_layoutengine(ui, layoutengine);
+      Vx.Ui.Ui.Type_layout output = Vx.Ui.Ui.f_layout_from_ui_layoutengine(ui, layoutengine);
+      return output;
     }
 
   }
@@ -11260,7 +11414,11 @@ public static class Ui {
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Ui.Ui.Type_layoutmap layoutmap = layoutengine.layoutmap();
         Vx.Ui.Ui.Type_layout layoutelse = layoutengine.layoutelse();
-        Vx.Core.Type_any output_1 = Vx.Ui.Ui.f_layout_from_ui_layoutmap_else(ui, layoutmap, layoutelse);
+        Vx.Core.Type_any output_1 = Vx.Ui.Ui.f_layout_from_ui_layoutmap_else(
+          ui,
+          layoutmap,
+          layoutelse
+        );
         return output_1;
       })
     );
@@ -11340,7 +11498,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_layout vx_layout_from_ui_layoutmap_else(Vx.Ui.Ui.Type_ui ui, Vx.Ui.Ui.Type_layoutmap layoutmap, Vx.Ui.Ui.Type_layout layoutelse) {
-      return Vx.Ui.Ui.f_layout_from_ui_layoutmap_else(ui, layoutmap, layoutelse);
+      Vx.Ui.Ui.Type_layout output = Vx.Ui.Ui.f_layout_from_ui_layoutmap_else(ui, layoutmap, layoutelse);
+      return output;
     }
 
   }
@@ -11354,12 +11513,20 @@ public static class Ui {
       Vx.Ui.Ui.t_layout,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Ui.Ui.Type_style style = ui.style();
-        Vx.Ui.Ui.Type_layout layout = Vx.Ui.Ui.f_layout_from_style(style);
+        Vx.Ui.Ui.Type_layout layout = Vx.Ui.Ui.f_layout_from_style(
+          style
+        );
         Vx.Core.Type_string layname = layout.name();
-        Vx.Ui.Ui.Type_layout layout1 = Vx.Core.f_any_from_map(Vx.Ui.Ui.t_layout, layoutmap, layname);
+        Vx.Ui.Ui.Type_layout layout1 = Vx.Core.f_any_from_map(
+          Vx.Ui.Ui.t_layout,
+          layoutmap,
+          layname
+        );
         Vx.Ui.Ui.Type_layout layout2 = Vx.Core.f_if_1(
           Vx.Ui.Ui.t_layout,
-          Vx.Core.f_notempty_1(layout1),
+          Vx.Core.f_notempty_1(
+            layout1
+          ),
           layout1,
           layoutelse
         );
@@ -11438,7 +11605,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_layoutengine vx_layoutengine_readstate(Vx.Core.Type_context context) {
-      return Vx.Ui.Ui.f_layoutengine_readstate(context);
+      Vx.Ui.Ui.Type_layoutengine output = Vx.Ui.Ui.f_layoutengine_readstate(context);
+      return output;
     }
 
   }
@@ -11451,7 +11619,9 @@ public static class Ui {
     output = Vx.Core.f_let(
       Vx.Ui.Ui.t_layoutengine,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Ui.Ui.Type_uiengine uiengine = Vx.Ui.Ui.f_uiengine_readstate(context);
+        Vx.Ui.Ui.Type_uiengine uiengine = Vx.Ui.Ui.f_uiengine_readstate(
+          context
+        );
         Vx.Core.Type_any output_1 = uiengine.layoutengine();
         return output_1;
       })
@@ -11540,7 +11710,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_layoutmap vx_layoutmap_from_layoutlist(Vx.Ui.Ui.Type_layoutlist layoutlist) {
-      return Vx.Ui.Ui.f_layoutmap_from_layoutlist(layoutlist);
+      Vx.Ui.Ui.Type_layoutmap output = Vx.Ui.Ui.f_layoutmap_from_layoutlist(layoutlist);
+      return output;
     }
 
   }
@@ -11555,8 +11726,7 @@ public static class Ui {
       layoutlist,
       Vx.Core.t_any_from_any.vx_fn_new((layout_any) => {
         Vx.Ui.Ui.Type_layout layout = Vx.Core.f_any_from_any(Vx.Ui.Ui.t_layout, layout_any);
-        Vx.Core.Type_any output_1 = 
-          layout.name();
+        Vx.Core.Type_any output_1 = layout.name();
         return output_1;
       })
     );
@@ -11644,7 +11814,8 @@ public static class Ui {
     }
 
     public Vx.Core.Type_string vx_string_parentuid_from_uid(Vx.Core.Type_string uid) {
-      return Vx.Ui.Ui.f_string_parentuid_from_uid(uid);
+      Vx.Core.Type_string output = Vx.Ui.Ui.f_string_parentuid_from_uid(uid);
+      return output;
     }
 
   }
@@ -11657,20 +11828,31 @@ public static class Ui {
     output = Vx.Core.f_let(
       Vx.Core.t_string,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Core.Type_int lastpos = Vx.Type.f_int_from_string_findlast(uid, Vx.Core.vx_new_string("/"));
+        Vx.Core.Type_int lastpos = Vx.Type.f_int_from_string_findlast(
+          uid,
+          Vx.Core.vx_new_string("/")
+        );
         Vx.Core.Type_any output_1 = Vx.Core.f_if_2(
           Vx.Core.t_string,
           Vx.Core.vx_new(
             Vx.Core.t_thenelselist,
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_gt(lastpos, Vx.Core.vx_new_int(0));
+                Vx.Core.Type_any output_2 = Vx.Core.f_gt(
+                  lastpos,
+                  Vx.Core.vx_new_int(0)
+                );
+                return output_2;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Type.f_string_from_string_end(
+                Vx.Core.Type_any output_3 = Vx.Type.f_string_from_string_end(
                   uid,
-                  Vx.Core.f_minus(lastpos, Vx.Core.vx_new_int(1))
+                  Vx.Core.f_minus(
+                    lastpos,
+                    Vx.Core.vx_new_int(1)
+                  )
                 );
+                return output_3;
               })
             )
           )
@@ -11762,7 +11944,8 @@ public static class Ui {
     }
 
     public Vx.Core.Type_string vx_string_selected_from_ui(Vx.Ui.Ui.Type_ui ui) {
-      return Vx.Ui.Ui.f_string_selected_from_ui(ui);
+      Vx.Core.Type_string output = Vx.Ui.Ui.f_string_selected_from_ui(ui);
+      return output;
     }
 
   }
@@ -11775,7 +11958,9 @@ public static class Ui {
     output = Vx.Core.f_let(
       Vx.Core.t_string,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Ui.Ui.Type_ui selectedui = Vx.Ui.Ui.f_ui_selected_from_ui(ui);
+        Vx.Ui.Ui.Type_ui selectedui = Vx.Ui.Ui.f_ui_selected_from_ui(
+          ui
+        );
         Vx.Core.Type_any output_1 = selectedui.uid();
         return output_1;
       })
@@ -11864,7 +12049,8 @@ public static class Ui {
     }
 
     public Vx.Core.Type_stringlist vx_stringlist_selected_from_ui(Vx.Ui.Ui.Type_ui ui) {
-      return Vx.Ui.Ui.f_stringlist_selected_from_ui(ui);
+      Vx.Core.Type_stringlist output = Vx.Ui.Ui.f_stringlist_selected_from_ui(ui);
+      return output;
     }
 
   }
@@ -11878,23 +12064,24 @@ public static class Ui {
       Vx.Core.t_stringlist,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Ui.Ui.Type_uimap uimap = ui.uimap();
-        Vx.Ui.Ui.Type_uilist uilist = Vx.Ui.Ui.f_uilist_from_uimap(uimap);
-        Vx.Core.Type_any output_2 = Vx.Core.f_list_from_list_1(
+        Vx.Ui.Ui.Type_uilist uilist = Vx.Ui.Ui.f_uilist_from_uimap(
+          uimap
+        );
+        Vx.Core.Type_any output_1 = Vx.Core.f_list_from_list_1(
           Vx.Core.t_stringlist,
           uilist,
           Vx.Core.t_any_from_any.vx_fn_new((item_any) => {
             Vx.Ui.Ui.Type_ui item = Vx.Core.f_any_from_any(Vx.Ui.Ui.t_ui, item_any);
-            Vx.Core.Type_any output_1 = 
-              Vx.Core.f_if_1(
-                Vx.Core.t_string,
-                item.selected(),
-                item.uid(),
-                Vx.Core.vx_new_string("")
-              );
-            return output_1;
+            Vx.Core.Type_any output_2 = Vx.Core.f_if_1(
+              Vx.Core.t_string,
+              item.selected(),
+              item.uid(),
+              Vx.Core.vx_new_string("")
+            );
+            return output_2;
           })
         );
-        return output_2;
+        return output_1;
       })
     );
     return output;
@@ -11981,7 +12168,8 @@ public static class Ui {
     }
 
     public Vx.Core.Type_stringlist vx_stringlist_from_ui(Vx.Ui.Ui.Type_ui ui) {
-      return Vx.Ui.Ui.f_stringlist_from_ui(ui);
+      Vx.Core.Type_stringlist output = Vx.Ui.Ui.f_stringlist_from_ui(ui);
+      return output;
     }
 
   }
@@ -11995,7 +12183,9 @@ public static class Ui {
       Vx.Core.t_stringlist,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Ui.Ui.Type_uimap uimap = ui.uimap();
-        Vx.Core.Type_any output_1 = Vx.Core.f_stringlist_from_map(uimap);
+        Vx.Core.Type_any output_1 = Vx.Core.f_stringlist_from_map(
+          uimap
+        );
         return output_1;
       })
     );
@@ -12082,7 +12272,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_stylemap vx_stylemap_from_stylelist(Vx.Ui.Ui.Type_stylelist stylelist) {
-      return Vx.Ui.Ui.f_stylemap_from_stylelist(stylelist);
+      Vx.Ui.Ui.Type_stylemap output = Vx.Ui.Ui.f_stylemap_from_stylelist(stylelist);
+      return output;
     }
 
   }
@@ -12097,8 +12288,7 @@ public static class Ui {
       stylelist,
       Vx.Core.t_any_from_any.vx_fn_new((style_any) => {
         Vx.Ui.Ui.Type_style style = Vx.Core.f_any_from_any(Vx.Ui.Ui.t_style, style_any);
-        Vx.Core.Type_any output_1 = 
-          style.name();
+        Vx.Core.Type_any output_1 = style.name();
         return output_1;
       })
     );
@@ -12173,7 +12363,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_stylesheet vx_stylesheet_readstate(Vx.Core.Type_context context) {
-      return Vx.Ui.Ui.f_stylesheet_readstate(context);
+      Vx.Ui.Ui.Type_stylesheet output = Vx.Ui.Ui.f_stylesheet_readstate(context);
+      return output;
     }
 
   }
@@ -12186,7 +12377,9 @@ public static class Ui {
     output = Vx.Core.f_let(
       Vx.Ui.Ui.t_stylesheet,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Ui.Ui.Type_uiengine uiengine = Vx.Ui.Ui.f_uiengine_readstate(context);
+        Vx.Ui.Ui.Type_uiengine uiengine = Vx.Ui.Ui.f_uiengine_readstate(
+          context
+        );
         Vx.Core.Type_any output_1 = uiengine.stylesheet();
         return output_1;
       })
@@ -12275,7 +12468,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_stylesheet vx_stylesheet_render(Vx.Ui.Ui.Type_stylesheet stylesheetui) {
-      return Vx.Ui.Ui.f_stylesheet_render(stylesheetui);
+      Vx.Ui.Ui.Type_stylesheet output = Vx.Ui.Ui.f_stylesheet_render(stylesheetui);
+      return output;
     }
 
   }
@@ -12370,7 +12564,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_ui vx_ui_addlayout_from_ui(Vx.Core.Type_context context, Vx.Ui.Ui.Type_ui ui) {
-      return Vx.Ui.Ui.f_ui_addlayout_from_ui(context, ui);
+      Vx.Ui.Ui.Type_ui output = Vx.Ui.Ui.f_ui_addlayout_from_ui(context, ui);
+      return output;
     }
 
   }
@@ -12383,8 +12578,13 @@ public static class Ui {
     output = Vx.Core.f_let(
       Vx.Ui.Ui.t_ui,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Ui.Ui.Type_uiengine uiengine = Vx.Ui.Ui.f_uiengine_readstate(context);
-        Vx.Core.Type_any output_1 = Vx.Ui.Ui.f_ui_addlayout_from_ui_uiengine(ui, uiengine);
+        Vx.Ui.Ui.Type_uiengine uiengine = Vx.Ui.Ui.f_uiengine_readstate(
+          context
+        );
+        Vx.Core.Type_any output_1 = Vx.Ui.Ui.f_ui_addlayout_from_ui_uiengine(
+          ui,
+          uiengine
+        );
         return output_1;
       })
     );
@@ -12462,7 +12662,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_ui vx_ui_addlayout_from_ui_layoutengine(Vx.Ui.Ui.Type_ui ui, Vx.Ui.Ui.Type_layoutengine layoutengine) {
-      return Vx.Ui.Ui.f_ui_addlayout_from_ui_layoutengine(ui, layoutengine);
+      Vx.Ui.Ui.Type_ui output = Vx.Ui.Ui.f_ui_addlayout_from_ui_layoutengine(ui, layoutengine);
+      return output;
     }
 
   }
@@ -12477,7 +12678,11 @@ public static class Ui {
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Ui.Ui.Type_layoutmap layoutmap = layoutengine.layoutmap();
         Vx.Ui.Ui.Type_layout layoutelse = layoutengine.layoutelse();
-        Vx.Core.Type_any output_1 = Vx.Ui.Ui.f_ui_addlayout_from_ui_layoutmap_else(ui, layoutmap, layoutelse);
+        Vx.Core.Type_any output_1 = Vx.Ui.Ui.f_ui_addlayout_from_ui_layoutmap_else(
+          ui,
+          layoutmap,
+          layoutelse
+        );
         return output_1;
       })
     );
@@ -12557,7 +12762,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_ui vx_ui_addlayout_from_ui_layoutmap_else(Vx.Ui.Ui.Type_ui ui, Vx.Ui.Ui.Type_layoutmap layoutmap, Vx.Ui.Ui.Type_layout layoutelse) {
-      return Vx.Ui.Ui.f_ui_addlayout_from_ui_layoutmap_else(ui, layoutmap, layoutelse);
+      Vx.Ui.Ui.Type_ui output = Vx.Ui.Ui.f_ui_addlayout_from_ui_layoutmap_else(ui, layoutmap, layoutelse);
+      return output;
     }
 
   }
@@ -12571,8 +12777,16 @@ public static class Ui {
       Vx.Ui.Ui.t_ui,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Ui.Ui.Type_uimap uimap = ui.uimap();
-        Vx.Ui.Ui.Type_layout layout1 = Vx.Ui.Ui.f_layout_from_ui_layoutmap_else(ui, layoutmap, layoutelse);
-        Vx.Ui.Ui.Type_uimap uimap2 = Vx.Ui.Ui.f_uimap_addlayout_from_uimap_layoutmap_else(uimap, layoutmap, layoutelse);
+        Vx.Ui.Ui.Type_layout layout1 = Vx.Ui.Ui.f_layout_from_ui_layoutmap_else(
+          ui,
+          layoutmap,
+          layoutelse
+        );
+        Vx.Ui.Ui.Type_uimap uimap2 = Vx.Ui.Ui.f_uimap_addlayout_from_uimap_layoutmap_else(
+          uimap,
+          layoutmap,
+          layoutelse
+        );
         Vx.Core.Type_any output_1 = Vx.Core.f_copy(
           ui,
           Vx.Core.vx_new(
@@ -12660,7 +12874,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_ui vx_ui_addlayout_from_ui_uiengine(Vx.Ui.Ui.Type_ui ui, Vx.Ui.Ui.Type_uiengine uiengine) {
-      return Vx.Ui.Ui.f_ui_addlayout_from_ui_uiengine(ui, uiengine);
+      Vx.Ui.Ui.Type_ui output = Vx.Ui.Ui.f_ui_addlayout_from_ui_uiengine(ui, uiengine);
+      return output;
     }
 
   }
@@ -12674,7 +12889,10 @@ public static class Ui {
       Vx.Ui.Ui.t_ui,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Ui.Ui.Type_layoutengine layoutengine = uiengine.layoutengine();
-        Vx.Core.Type_any output_1 = Vx.Ui.Ui.f_ui_addlayout_from_ui_layoutengine(ui, layoutengine);
+        Vx.Core.Type_any output_1 = Vx.Ui.Ui.f_ui_addlayout_from_ui_layoutengine(
+          ui,
+          layoutengine
+        );
         return output_1;
       })
     );
@@ -12752,7 +12970,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_ui vx_ui_child_from_ui_pos(Vx.Ui.Ui.Type_ui ui, Vx.Core.Type_int pos) {
-      return Vx.Ui.Ui.f_ui_child_from_ui_pos(ui, pos);
+      Vx.Ui.Ui.Type_ui output = Vx.Ui.Ui.f_ui_child_from_ui_pos(ui, pos);
+      return output;
     }
 
   }
@@ -12766,7 +12985,11 @@ public static class Ui {
       Vx.Ui.Ui.t_ui,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Ui.Ui.Type_uimap childmap = ui.uimap();
-        Vx.Core.Type_any output_1 = Vx.Collection.f_any_from_map_pos(Vx.Ui.Ui.t_ui, childmap, pos);
+        Vx.Core.Type_any output_1 = Vx.Collection.f_any_from_map_pos(
+          Vx.Ui.Ui.t_ui,
+          childmap,
+          pos
+        );
         return output_1;
       })
     );
@@ -12844,7 +13067,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_ui vx_ui_child_from_ui_uid(Vx.Ui.Ui.Type_ui ui, Vx.Core.Type_string uid) {
-      return Vx.Ui.Ui.f_ui_child_from_ui_uid(ui, uid);
+      Vx.Ui.Ui.Type_ui output = Vx.Ui.Ui.f_ui_child_from_ui_uid(ui, uid);
+      return output;
     }
 
   }
@@ -12858,7 +13082,11 @@ public static class Ui {
       Vx.Ui.Ui.t_ui,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Ui.Ui.Type_uimap childmap = ui.uimap();
-        Vx.Core.Type_any output_1 = Vx.Core.f_any_from_map(Vx.Ui.Ui.t_ui, childmap, uid);
+        Vx.Core.Type_any output_1 = Vx.Core.f_any_from_map(
+          Vx.Ui.Ui.t_ui,
+          childmap,
+          uid
+        );
         return output_1;
       })
     );
@@ -12947,7 +13175,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_ui vx_ui_from_from_event(Vx.Core.Type_context context, Vx.Event.Type_event evt) {
-      return Vx.Ui.Ui.f_ui_from_from_event(context, evt);
+      Vx.Ui.Ui.Type_ui output = Vx.Ui.Ui.f_ui_from_from_event(context, evt);
+      return output;
     }
 
   }
@@ -12961,7 +13190,10 @@ public static class Ui {
       Vx.Ui.Ui.t_ui,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_string uid = evt.from();
-        Vx.Core.Type_any output_1 = Vx.Ui.Ui.f_ui_readstate_from_uid(context, uid);
+        Vx.Core.Type_any output_1 = Vx.Ui.Ui.f_ui_readstate_from_uid(
+          context,
+          uid
+        );
         return output_1;
       })
     );
@@ -13048,7 +13280,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_ui vx_ui_layout(Vx.Ui.Ui.Type_ui uiarg) {
-      return Vx.Ui.Ui.f_ui_layout(uiarg);
+      Vx.Ui.Ui.Type_ui output = Vx.Ui.Ui.f_ui_layout(uiarg);
+      return output;
     }
 
   }
@@ -13145,7 +13378,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_ui vx_ui_layout_from_fn_layout_ui_orig_parent(Vx.Ui.Ui.Func_ui_layout_from_ui_orig_parent fn_layout, Vx.Ui.Ui.Type_ui ui, Vx.Ui.Ui.Type_ui orig, Vx.Ui.Ui.Type_ui parent) {
-      return Vx.Ui.Ui.f_ui_layout_from_fn_layout_ui_orig_parent(fn_layout, ui, orig, parent);
+      Vx.Ui.Ui.Type_ui output = Vx.Ui.Ui.f_ui_layout_from_fn_layout_ui_orig_parent(fn_layout, ui, orig, parent);
+      return output;
     }
 
   }
@@ -13155,7 +13389,13 @@ public static class Ui {
 
   public static Vx.Ui.Ui.Type_ui f_ui_layout_from_fn_layout_ui_orig_parent(Vx.Ui.Ui.Func_ui_layout_from_ui_orig_parent fn_layout, Vx.Ui.Ui.Type_ui ui, Vx.Ui.Ui.Type_ui orig, Vx.Ui.Ui.Type_ui parent) {
     Vx.Ui.Ui.Type_ui output = Vx.Ui.Ui.e_ui;
-    output = Vx.Core.vx_any_from_func(Vx.Ui.Ui.t_ui, fn_layout, ui, orig, parent);
+    output = Vx.Core.vx_any_from_func(
+      Vx.Ui.Ui.t_ui,
+      fn_layout,
+      ui,
+      orig,
+      parent
+    );
     return output;
   }
 
@@ -13232,7 +13472,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_ui vx_ui_layout_from_ui_orig_parent(Vx.Ui.Ui.Type_ui ui, Vx.Ui.Ui.Type_ui orig, Vx.Ui.Ui.Type_ui parent) {
-      return Vx.Ui.Ui.f_ui_layout_from_ui_orig_parent(ui, orig, parent);
+      Vx.Ui.Ui.Type_ui output = Vx.Ui.Ui.f_ui_layout_from_ui_orig_parent(ui, orig, parent);
+      return output;
     }
 
   }
@@ -13248,24 +13489,35 @@ public static class Ui {
         Vx.Core.t_thenelselist,
         Vx.Core.f_then(
           Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-            return Vx.Core.f_eqeq(ui, orig);
+            Vx.Core.Type_any output_1 = Vx.Core.f_eqeq(
+              ui,
+              orig
+            );
+            return output_1;
           }),
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return orig;
+            Vx.Core.Type_any output_2 = orig;
+            return output_2;
           })
         ),
         Vx.Core.f_else(
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.f_let(
+            Vx.Core.Type_any output_3 = Vx.Core.f_let(
               Vx.Ui.Ui.t_ui,
               Vx.Core.t_any_from_func.vx_fn_new(() => {
                 Vx.Ui.Ui.Type_uimap uimap = ui.uimap();
                 Vx.Ui.Ui.Type_layout layout = ui.layout();
-                Vx.Ui.Ui.Type_ui uiout = Vx.Ui.Ui.f_ui_from_layout_ui_orig_parent(layout, ui, orig, parent);
-                Vx.Core.Type_any output_1 = uiout;
-                return output_1;
+                Vx.Ui.Ui.Type_ui uiout = Vx.Ui.Ui.f_ui_from_layout_ui_orig_parent(
+                  layout,
+                  ui,
+                  orig,
+                  parent
+                );
+                Vx.Core.Type_any output_4 = uiout;
+                return output_4;
               })
             );
+            return output_3;
           })
         )
       )
@@ -13346,7 +13598,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_ui vx_ui_layout_from_ui_parent_selected(Vx.Ui.Ui.Type_ui ui, Vx.Ui.Ui.Type_ui parent, Vx.Core.Type_int selected) {
-      return Vx.Ui.Ui.f_ui_layout_from_ui_parent_selected(ui, parent, selected);
+      Vx.Ui.Ui.Type_ui output = Vx.Ui.Ui.f_ui_layout_from_ui_parent_selected(ui, parent, selected);
+      return output;
     }
 
   }
@@ -13359,9 +13612,19 @@ public static class Ui {
     output = Vx.Core.f_let(
       Vx.Ui.Ui.t_ui,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Ui.Ui.Type_ui uichg1 = Vx.Ui.Ui.f_ui_from_ui_selected(ui, selected);
-        Vx.Core.Type_boolean iswrite = Vx.Ui.Ui.f_boolean_write_from_ui_parent(uichg1, parent);
-        Vx.Core.Type_any output_1 = Vx.Ui.Ui.f_ui_layout_from_ui_orig_parent(uichg1, ui, parent);
+        Vx.Ui.Ui.Type_ui uichg1 = Vx.Ui.Ui.f_ui_from_ui_selected(
+          ui,
+          selected
+        );
+        Vx.Core.Type_boolean iswrite = Vx.Ui.Ui.f_boolean_write_from_ui_parent(
+          uichg1,
+          parent
+        );
+        Vx.Core.Type_any output_1 = Vx.Ui.Ui.f_ui_layout_from_ui_orig_parent(
+          uichg1,
+          ui,
+          parent
+        );
         return output_1;
       })
     );
@@ -13441,7 +13704,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_ui vx_ui_layout_from_ui_parent_visible(Vx.Ui.Ui.Type_ui ui, Vx.Ui.Ui.Type_ui parent, Vx.Core.Type_int visible) {
-      return Vx.Ui.Ui.f_ui_layout_from_ui_parent_visible(ui, parent, visible);
+      Vx.Ui.Ui.Type_ui output = Vx.Ui.Ui.f_ui_layout_from_ui_parent_visible(ui, parent, visible);
+      return output;
     }
 
   }
@@ -13454,8 +13718,15 @@ public static class Ui {
     output = Vx.Core.f_let(
       Vx.Ui.Ui.t_ui,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Ui.Ui.Type_ui uichg = Vx.Ui.Ui.f_ui_write_from_ui_visible(ui, visible);
-        Vx.Core.Type_any output_1 = Vx.Ui.Ui.f_ui_layout_from_ui_orig_parent(uichg, ui, parent);
+        Vx.Ui.Ui.Type_ui uichg = Vx.Ui.Ui.f_ui_write_from_ui_visible(
+          ui,
+          visible
+        );
+        Vx.Core.Type_any output_1 = Vx.Ui.Ui.f_ui_layout_from_ui_orig_parent(
+          uichg,
+          ui,
+          parent
+        );
         return output_1;
       })
     );
@@ -13530,7 +13801,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_ui vx_ui_readstate_uiapp(Vx.Core.Type_context context) {
-      return Vx.Ui.Ui.f_ui_readstate_uiapp(context);
+      Vx.Ui.Ui.Type_ui output = Vx.Ui.Ui.f_ui_readstate_uiapp(context);
+      return output;
     }
 
   }
@@ -13540,7 +13812,11 @@ public static class Ui {
 
   public static Vx.Ui.Ui.Type_ui f_ui_readstate_uiapp(Vx.Core.Type_context context) {
     Vx.Ui.Ui.Type_ui output = Vx.Ui.Ui.e_ui;
-    output = Vx.State.f_any_readstate_from_name(Vx.Ui.Ui.t_ui, context, Vx.Core.vx_new_string(":uiapp"));
+    output = Vx.State.f_any_readstate_from_name(
+      Vx.Ui.Ui.t_ui,
+      context,
+      Vx.Core.vx_new_string(":uiapp")
+    );
     return output;
   }
 
@@ -13626,7 +13902,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_ui vx_ui_readstate_from_uid(Vx.Core.Type_context context, Vx.Core.Type_string uid) {
-      return Vx.Ui.Ui.f_ui_readstate_from_uid(context, uid);
+      Vx.Ui.Ui.Type_ui output = Vx.Ui.Ui.f_ui_readstate_from_uid(context, uid);
+      return output;
     }
 
   }
@@ -13639,8 +13916,13 @@ public static class Ui {
     output = Vx.Core.f_let(
       Vx.Ui.Ui.t_ui,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Ui.Ui.Type_ui uiapp = Vx.Ui.Ui.f_ui_readstate_uiapp(context);
-        Vx.Core.Type_any output_1 = Vx.Ui.Ui.f_ui_from_ui_find(uiapp, uid);
+        Vx.Ui.Ui.Type_ui uiapp = Vx.Ui.Ui.f_ui_readstate_uiapp(
+          context
+        );
+        Vx.Core.Type_any output_1 = Vx.Ui.Ui.f_ui_from_ui_find(
+          uiapp,
+          uid
+        );
         return output_1;
       })
     );
@@ -13728,7 +14010,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_ui vx_ui_selected_from_ui(Vx.Ui.Ui.Type_ui ui) {
-      return Vx.Ui.Ui.f_ui_selected_from_ui(ui);
+      Vx.Ui.Ui.Type_ui output = Vx.Ui.Ui.f_ui_selected_from_ui(ui);
+      return output;
     }
 
   }
@@ -13741,8 +14024,13 @@ public static class Ui {
     output = Vx.Core.f_let(
       Vx.Ui.Ui.t_ui,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Ui.Ui.Type_uilist uilist = Vx.Ui.Ui.f_uilist_selected_from_ui(ui);
-        Vx.Core.Type_any output_1 = Vx.Core.f_first_from_list(Vx.Ui.Ui.t_ui, uilist);
+        Vx.Ui.Ui.Type_uilist uilist = Vx.Ui.Ui.f_uilist_selected_from_ui(
+          ui
+        );
+        Vx.Core.Type_any output_1 = Vx.Core.f_first_from_list(
+          Vx.Ui.Ui.t_ui,
+          uilist
+        );
         return output_1;
       })
     );
@@ -13830,7 +14118,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_ui vx_ui_visible_from_ui(Vx.Ui.Ui.Type_ui ui) {
-      return Vx.Ui.Ui.f_ui_visible_from_ui(ui);
+      Vx.Ui.Ui.Type_ui output = Vx.Ui.Ui.f_ui_visible_from_ui(ui);
+      return output;
     }
 
   }
@@ -13843,8 +14132,13 @@ public static class Ui {
     output = Vx.Core.f_let(
       Vx.Ui.Ui.t_ui,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Ui.Ui.Type_uilist uilist = Vx.Ui.Ui.f_uilist_visible_from_ui(ui);
-        Vx.Core.Type_any output_1 = Vx.Core.f_first_from_list(Vx.Ui.Ui.t_ui, uilist);
+        Vx.Ui.Ui.Type_uilist uilist = Vx.Ui.Ui.f_uilist_visible_from_ui(
+          ui
+        );
+        Vx.Core.Type_any output_1 = Vx.Core.f_first_from_list(
+          Vx.Ui.Ui.t_ui,
+          uilist
+        );
         return output_1;
       })
     );
@@ -13922,7 +14216,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_ui vx_ui_write_from_ui_child(Vx.Ui.Ui.Type_ui ui, Vx.Ui.Ui.Type_ui child) {
-      return Vx.Ui.Ui.f_ui_write_from_ui_child(ui, child);
+      Vx.Ui.Ui.Type_ui output = Vx.Ui.Ui.f_ui_write_from_ui_child(ui, child);
+      return output;
     }
 
   }
@@ -13937,7 +14232,11 @@ public static class Ui {
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_string childid = child.uid();
         Vx.Ui.Ui.Type_uimap uimap = ui.uimap();
-        Vx.Core.Type_boolean write = Vx.Core.f_boolean_write_from_map_name_value(uimap, childid, child);
+        Vx.Core.Type_boolean write = Vx.Core.f_boolean_write_from_map_name_value(
+          uimap,
+          childid,
+          child
+        );
         Vx.Core.Type_any output_1 = ui;
         return output_1;
       })
@@ -14016,7 +14315,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_ui vx_ui_write_from_ui_childmap(Vx.Ui.Ui.Type_ui ui, Vx.Ui.Ui.Type_uimap childmap) {
-      return Vx.Ui.Ui.f_ui_write_from_ui_childmap(ui, childmap);
+      Vx.Ui.Ui.Type_ui output = Vx.Ui.Ui.f_ui_write_from_ui_childmap(ui, childmap);
+      return output;
     }
 
   }
@@ -14035,13 +14335,15 @@ public static class Ui {
           Vx.Core.t_any_from_key_value.vx_fn_new((key_any, value_any) => {
             Vx.Core.Type_string key = Vx.Core.f_any_from_any(Vx.Core.t_string, key_any);
             Vx.Ui.Ui.Type_ui value = Vx.Core.f_any_from_any(Vx.Ui.Ui.t_ui, value_any);
-            Vx.Core.Type_any output_1 = 
-                Vx.Ui.Ui.f_ui_write_from_ui_child(ui, value);
-            return output_1;
+            Vx.Core.Type_any output_2 = Vx.Ui.Ui.f_ui_write_from_ui_child(
+              ui,
+              value
+            );
+            return output_2;
           })
         );
-        Vx.Core.Type_any output_2 = ui;
-        return output_2;
+        Vx.Core.Type_any output_1 = ui;
+        return output_1;
       })
     );
     return output;
@@ -14118,7 +14420,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_ui vx_ui_write_from_ui_visible(Vx.Ui.Ui.Type_ui ui, Vx.Core.Type_int visible) {
-      return Vx.Ui.Ui.f_ui_write_from_ui_visible(ui, visible);
+      Vx.Ui.Ui.Type_ui output = Vx.Ui.Ui.f_ui_write_from_ui_visible(ui, visible);
+      return output;
     }
 
   }
@@ -14134,72 +14437,85 @@ public static class Ui {
         Vx.Core.t_thenelselist,
         Vx.Core.f_then(
           Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-            return Vx.Core.f_lt(visible, Vx.Core.vx_new_int(1));
+            Vx.Core.Type_any output_1 = Vx.Core.f_lt(
+              visible,
+              Vx.Core.vx_new_int(1)
+            );
+            return output_1;
           }),
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return ui;
+            Vx.Core.Type_any output_2 = ui;
+            return output_2;
           })
         ),
         Vx.Core.f_else(
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.f_let(
+            Vx.Core.Type_any output_3 = Vx.Core.f_let(
               Vx.Ui.Ui.t_ui,
               Vx.Core.t_any_from_func.vx_fn_new(() => {
                 Vx.Ui.Ui.Type_uimap uimap = ui.uimap();
-                Vx.Ui.Ui.Type_uilist uilist1 = Vx.Ui.Ui.f_uilist_from_uimap(uimap);
+                Vx.Ui.Ui.Type_uilist uilist1 = Vx.Ui.Ui.f_uilist_from_uimap(
+                  uimap
+                );
                 Vx.Ui.Ui.Type_uilist uilist2 = Vx.Core.f_list_from_list_intany(
                   Vx.Ui.Ui.t_uilist,
                   uilist1,
                   Vx.Core.t_any_from_int_any.vx_fn_new((posval_any, uival_any) => {
                     Vx.Core.Type_int posval = Vx.Core.f_any_from_any(Vx.Core.t_int, posval_any);
                     Vx.Ui.Ui.Type_ui uival = Vx.Core.f_any_from_any(Vx.Ui.Ui.t_ui, uival_any);
-                    Vx.Core.Type_any output_1 = 
-                        Vx.Core.f_if_2(
-                          Vx.Ui.Ui.t_ui,
-                          Vx.Core.vx_new(
-                            Vx.Core.t_thenelselist,
-                            Vx.Core.f_then(
-                              Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                                return Vx.Core.f_eq(posval, visible);
-                              }),
-                              Vx.Core.t_any_from_func.vx_fn_new(() => {
-                                return Vx.Ui.Ui.f_ui_write_from_ui_child(
-                                  ui,
-                                  Vx.Core.f_copy(
-                                    uival,
-                                    Vx.Core.vx_new(
-                                      Vx.Core.t_anylist,
-                                      Vx.Core.vx_new_string(":hidden"),
-                                      Vx.Core.vx_new_boolean(false)
-                                    )
-                                  )
-                                );
-                              })
-                            ),
-                            Vx.Core.f_else(
-                              Vx.Core.t_any_from_func.vx_fn_new(() => {
-                                return Vx.Ui.Ui.f_ui_write_from_ui_child(
-                                  ui,
-                                  Vx.Core.f_copy(
-                                    uival,
-                                    Vx.Core.vx_new(
-                                      Vx.Core.t_anylist,
-                                      Vx.Core.vx_new_string(":hidden"),
-                                      Vx.Core.vx_new_boolean(true)
-                                    )
-                                  )
-                                );
-                              })
-                            )
-                          )
-                        );
-                    return output_1;
+                    Vx.Core.Type_any output_5 = Vx.Core.f_if_2(
+                      Vx.Ui.Ui.t_ui,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_thenelselist,
+                        Vx.Core.f_then(
+                          Vx.Core.t_boolean_from_func.vx_fn_new(() => {
+                            Vx.Core.Type_any output_6 = Vx.Core.f_eq(
+                              posval,
+                              visible
+                            );
+                            return output_6;
+                          }),
+                          Vx.Core.t_any_from_func.vx_fn_new(() => {
+                            Vx.Core.Type_any output_7 = Vx.Ui.Ui.f_ui_write_from_ui_child(
+                              ui,
+                              Vx.Core.f_copy(
+                                uival,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
+                                  Vx.Core.vx_new_string(":hidden"),
+                                  Vx.Core.vx_new_boolean(false)
+                                )
+                              )
+                            );
+                            return output_7;
+                          })
+                        ),
+                        Vx.Core.f_else(
+                          Vx.Core.t_any_from_func.vx_fn_new(() => {
+                            Vx.Core.Type_any output_8 = Vx.Ui.Ui.f_ui_write_from_ui_child(
+                              ui,
+                              Vx.Core.f_copy(
+                                uival,
+                                Vx.Core.vx_new(
+                                  Vx.Core.t_anylist,
+                                  Vx.Core.vx_new_string(":hidden"),
+                                  Vx.Core.vx_new_boolean(true)
+                                )
+                              )
+                            );
+                            return output_8;
+                          })
+                        )
+                      )
+                    );
+                    return output_5;
                   })
                 );
-                Vx.Core.Type_any output_2 = ui;
-                return output_2;
+                Vx.Core.Type_any output_4 = ui;
+                return output_4;
               })
             );
+            return output_3;
           })
         )
       )
@@ -14281,7 +14597,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_ui vx_ui_from_layout_ui_orig_parent(Vx.Ui.Ui.Type_layout layout, Vx.Ui.Ui.Type_ui uiarg, Vx.Ui.Ui.Type_ui uiorig, Vx.Ui.Ui.Type_ui parent) {
-      return Vx.Ui.Ui.f_ui_from_layout_ui_orig_parent(layout, uiarg, uiorig, parent);
+      Vx.Ui.Ui.Type_ui output = Vx.Ui.Ui.f_ui_from_layout_ui_orig_parent(layout, uiarg, uiorig, parent);
+      return output;
     }
 
   }
@@ -14296,7 +14613,13 @@ public static class Ui {
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_string name = layout.name();
         Vx.Ui.Ui.Func_ui_layout_from_ui_orig_parent fn_layout = layout.fn_layout();
-        Vx.Ui.Ui.Type_ui uichg = Vx.Core.vx_any_from_func(Vx.Ui.Ui.t_ui, fn_layout, uiarg, uiorig, parent);
+        Vx.Ui.Ui.Type_ui uichg = Vx.Core.vx_any_from_func(
+          Vx.Ui.Ui.t_ui,
+          fn_layout,
+          uiarg,
+          uiorig,
+          parent
+        );
         Vx.Core.Type_any output_1 = uichg;
         return output_1;
       })
@@ -14375,7 +14698,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_ui vx_ui_from_ui_find(Vx.Ui.Ui.Type_ui uiarg, Vx.Core.Type_string find) {
-      return Vx.Ui.Ui.f_ui_from_ui_find(uiarg, find);
+      Vx.Ui.Ui.Type_ui output = Vx.Ui.Ui.f_ui_from_ui_find(uiarg, find);
+      return output;
     }
 
   }
@@ -14389,31 +14713,41 @@ public static class Ui {
       Vx.Ui.Ui.t_ui,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_string uid = uiarg.uid();
-        Vx.Core.Type_any output_3 = Vx.Core.f_if_2(
+        Vx.Core.Type_any output_1 = Vx.Core.f_if_2(
           Vx.Ui.Ui.t_ui,
           Vx.Core.vx_new(
             Vx.Core.t_thenelselist,
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_eq(uid, Vx.Core.vx_new_string(""));
+                Vx.Core.Type_any output_2 = Vx.Core.f_eq(
+                  uid,
+                  Vx.Core.vx_new_string("")
+                );
+                return output_2;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_empty(
+                Vx.Core.Type_any output_3 = Vx.Core.f_empty(
                   Vx.Ui.Ui.t_ui
                 );
+                return output_3;
               })
             ),
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Core.f_eq(uid, find);
+                Vx.Core.Type_any output_4 = Vx.Core.f_eq(
+                  uid,
+                  find
+                );
+                return output_4;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return uiarg;
+                Vx.Core.Type_any output_5 = uiarg;
+                return output_5;
               })
             ),
             Vx.Core.f_then(
               Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                return Vx.Type.f_boolean_from_string_starts(
+                Vx.Core.Type_any output_6 = Vx.Type.f_boolean_from_string_starts(
                   find,
                   Vx.Core.f_new(
                     Vx.Core.t_string,
@@ -14424,35 +14758,53 @@ public static class Ui {
                     )
                   )
                 );
+                return output_6;
               }),
               Vx.Core.t_any_from_func.vx_fn_new(() => {
-                return Vx.Core.f_let(
+                Vx.Core.Type_any output_7 = Vx.Core.f_let(
                   Vx.Ui.Ui.t_ui,
                   Vx.Core.t_any_from_func.vx_fn_new(() => {
                     Vx.Core.Type_int afterpos = Vx.Core.f_plus(
-                      Vx.Core.f_length(uid),
+                      Vx.Core.f_length(
+                        uid
+                      ),
                       Vx.Core.vx_new_int(2)
                     );
-                    Vx.Core.Type_string after = Vx.Type.f_string_from_string_start(find, afterpos);
-                    Vx.Core.Type_int pos = Vx.Type.f_int_from_string_find(after, Vx.Core.vx_new_string("/"));
+                    Vx.Core.Type_string after = Vx.Type.f_string_from_string_start(
+                      find,
+                      afterpos
+                    );
+                    Vx.Core.Type_int pos = Vx.Type.f_int_from_string_find(
+                      after,
+                      Vx.Core.vx_new_string("/")
+                    );
                     Vx.Core.Type_string subpart = Vx.Core.f_if_2(
                       Vx.Core.t_string,
                       Vx.Core.vx_new(
                         Vx.Core.t_thenelselist,
                         Vx.Core.f_then(
                           Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                            return Vx.Core.f_gt(pos, Vx.Core.vx_new_int(0));
+                            Vx.Core.Type_any output_12 = Vx.Core.f_gt(
+                              pos,
+                              Vx.Core.vx_new_int(0)
+                            );
+                            return output_12;
                           }),
                           Vx.Core.t_any_from_func.vx_fn_new(() => {
-                            return Vx.Type.f_string_from_string_end(
+                            Vx.Core.Type_any output_13 = Vx.Type.f_string_from_string_end(
                               after,
-                              Vx.Core.f_minus(pos, Vx.Core.vx_new_int(1))
+                              Vx.Core.f_minus(
+                                pos,
+                                Vx.Core.vx_new_int(1)
+                              )
                             );
+                            return output_13;
                           })
                         ),
                         Vx.Core.f_else(
                           Vx.Core.t_any_from_func.vx_fn_new(() => {
-                            return after;
+                            Vx.Core.Type_any output_14 = after;
+                            return output_14;
                           })
                         )
                       )
@@ -14463,10 +14815,13 @@ public static class Ui {
                         Vx.Core.t_thenelselist,
                         Vx.Core.f_then(
                           Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                            return Vx.Core.f_notempty(subpart);
+                            Vx.Core.Type_any output_15 = Vx.Core.f_notempty(
+                              subpart
+                            );
+                            return output_15;
                           }),
                           Vx.Core.t_any_from_func.vx_fn_new(() => {
-                            return Vx.Core.f_new(
+                            Vx.Core.Type_any output_16 = Vx.Core.f_new(
                               Vx.Core.t_string,
                               Vx.Core.vx_new(
                                 Vx.Core.t_anylist,
@@ -14475,40 +14830,53 @@ public static class Ui {
                                 subpart
                               )
                             );
+                            return output_16;
                           })
                         )
                       )
                     );
-                    Vx.Core.Type_any output_2 = Vx.Core.f_if_2(
+                    Vx.Core.Type_any output_8 = Vx.Core.f_if_2(
                       Vx.Ui.Ui.t_ui,
                       Vx.Core.vx_new(
                         Vx.Core.t_thenelselist,
                         Vx.Core.f_then(
                           Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                            return Vx.Core.f_notempty(subfind);
+                            Vx.Core.Type_any output_9 = Vx.Core.f_notempty(
+                              subfind
+                            );
+                            return output_9;
                           }),
                           Vx.Core.t_any_from_func.vx_fn_new(() => {
-                            return Vx.Core.f_let(
+                            Vx.Core.Type_any output_10 = Vx.Core.f_let(
                               Vx.Ui.Ui.t_ui,
                               Vx.Core.t_any_from_func.vx_fn_new(() => {
                                 Vx.Ui.Ui.Type_uimap uimap = uiarg.uimap();
-                                Vx.Ui.Ui.Type_ui subui = Vx.Core.f_any_from_map(Vx.Ui.Ui.t_ui, uimap, subfind);
-                                Vx.Core.Type_any output_1 = Vx.Ui.Ui.f_ui_from_ui_find(subui, find);
-                                return output_1;
+                                Vx.Ui.Ui.Type_ui subui = Vx.Core.f_any_from_map(
+                                  Vx.Ui.Ui.t_ui,
+                                  uimap,
+                                  subfind
+                                );
+                                Vx.Core.Type_any output_11 = Vx.Ui.Ui.f_ui_from_ui_find(
+                                  subui,
+                                  find
+                                );
+                                return output_11;
                               })
                             );
+                            return output_10;
                           })
                         )
                       )
                     );
-                    return output_2;
+                    return output_8;
                   })
                 );
+                return output_7;
               })
             )
           )
         );
-        return output_3;
+        return output_1;
       })
     );
     return output;
@@ -14585,7 +14953,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_ui vx_ui_from_ui_selected(Vx.Ui.Ui.Type_ui ui, Vx.Core.Type_int selected) {
-      return Vx.Ui.Ui.f_ui_from_ui_selected(ui, selected);
+      Vx.Ui.Ui.Type_ui output = Vx.Ui.Ui.f_ui_from_ui_selected(ui, selected);
+      return output;
     }
 
   }
@@ -14601,64 +14970,78 @@ public static class Ui {
         Vx.Core.t_thenelselist,
         Vx.Core.f_then(
           Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-            return Vx.Core.f_lt(selected, Vx.Core.vx_new_int(1));
+            Vx.Core.Type_any output_1 = Vx.Core.f_lt(
+              selected,
+              Vx.Core.vx_new_int(1)
+            );
+            return output_1;
           }),
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return ui;
+            Vx.Core.Type_any output_2 = ui;
+            return output_2;
           })
         ),
         Vx.Core.f_else(
           Vx.Core.t_any_from_func.vx_fn_new(() => {
-            return Vx.Core.f_let(
+            Vx.Core.Type_any output_3 = Vx.Core.f_let(
               Vx.Ui.Ui.t_ui,
               Vx.Core.t_any_from_func.vx_fn_new(() => {
                 Vx.Ui.Ui.Type_uimap uimap = ui.uimap();
-                Vx.Ui.Ui.Type_uilist uilist1 = Vx.Ui.Ui.f_uilist_from_uimap(uimap);
+                Vx.Ui.Ui.Type_uilist uilist1 = Vx.Ui.Ui.f_uilist_from_uimap(
+                  uimap
+                );
                 Vx.Ui.Ui.Type_uilist uilist2 = Vx.Core.f_list_from_list_intany(
                   Vx.Ui.Ui.t_uilist,
                   uilist1,
                   Vx.Core.t_any_from_int_any.vx_fn_new((posval_any, uival_any) => {
                     Vx.Core.Type_int posval = Vx.Core.f_any_from_any(Vx.Core.t_int, posval_any);
                     Vx.Ui.Ui.Type_ui uival = Vx.Core.f_any_from_any(Vx.Ui.Ui.t_ui, uival_any);
-                    Vx.Core.Type_any output_1 = 
-                        Vx.Core.f_if_2(
-                          Vx.Ui.Ui.t_ui,
-                          Vx.Core.vx_new(
-                            Vx.Core.t_thenelselist,
-                            Vx.Core.f_then(
-                              Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                                return Vx.Core.f_eq(posval, selected);
-                              }),
-                              Vx.Core.t_any_from_func.vx_fn_new(() => {
-                                return Vx.Core.f_copy(
-                                  uival,
-                                  Vx.Core.vx_new(
-                                    Vx.Core.t_anylist,
-                                    Vx.Core.vx_new_string(":selected"),
-                                    Vx.Core.vx_new_boolean(true)
-                                  )
-                                );
-                              })
-                            ),
-                            Vx.Core.f_else(
-                              Vx.Core.t_any_from_func.vx_fn_new(() => {
-                                return Vx.Core.f_copy(
-                                  uival,
-                                  Vx.Core.vx_new(
-                                    Vx.Core.t_anylist,
-                                    Vx.Core.vx_new_string(":selected"),
-                                    Vx.Core.vx_new_boolean(false)
-                                  )
-                                );
-                              })
-                            )
-                          )
-                        );
-                    return output_1;
+                    Vx.Core.Type_any output_5 = Vx.Core.f_if_2(
+                      Vx.Ui.Ui.t_ui,
+                      Vx.Core.vx_new(
+                        Vx.Core.t_thenelselist,
+                        Vx.Core.f_then(
+                          Vx.Core.t_boolean_from_func.vx_fn_new(() => {
+                            Vx.Core.Type_any output_6 = Vx.Core.f_eq(
+                              posval,
+                              selected
+                            );
+                            return output_6;
+                          }),
+                          Vx.Core.t_any_from_func.vx_fn_new(() => {
+                            Vx.Core.Type_any output_7 = Vx.Core.f_copy(
+                              uival,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
+                                Vx.Core.vx_new_string(":selected"),
+                                Vx.Core.vx_new_boolean(true)
+                              )
+                            );
+                            return output_7;
+                          })
+                        ),
+                        Vx.Core.f_else(
+                          Vx.Core.t_any_from_func.vx_fn_new(() => {
+                            Vx.Core.Type_any output_8 = Vx.Core.f_copy(
+                              uival,
+                              Vx.Core.vx_new(
+                                Vx.Core.t_anylist,
+                                Vx.Core.vx_new_string(":selected"),
+                                Vx.Core.vx_new_boolean(false)
+                              )
+                            );
+                            return output_8;
+                          })
+                        )
+                      )
+                    );
+                    return output_5;
                   })
                 );
-                Vx.Ui.Ui.Type_uimap childmap = Vx.Ui.Ui.f_uimap_from_uilist(uilist2);
-                Vx.Core.Type_any output_2 = Vx.Core.f_copy(
+                Vx.Ui.Ui.Type_uimap childmap = Vx.Ui.Ui.f_uimap_from_uilist(
+                  uilist2
+                );
+                Vx.Core.Type_any output_4 = Vx.Core.f_copy(
                   ui,
                   Vx.Core.vx_new(
                     Vx.Core.t_anylist,
@@ -14666,9 +15049,10 @@ public static class Ui {
                     childmap
                   )
                 );
-                return output_2;
+                return output_4;
               })
             );
+            return output_3;
           })
         )
       )
@@ -14757,7 +15141,8 @@ public static class Ui {
     }
 
     public Vx.Core.Type_string vx_uid_selected_from_ui(Vx.Ui.Ui.Type_ui ui) {
-      return Vx.Ui.Ui.f_uid_selected_from_ui(ui);
+      Vx.Core.Type_string output = Vx.Ui.Ui.f_uid_selected_from_ui(ui);
+      return output;
     }
 
   }
@@ -14770,8 +15155,13 @@ public static class Ui {
     output = Vx.Core.f_let(
       Vx.Core.t_string,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Core.Type_stringlist uidlist = Vx.Ui.Ui.f_stringlist_selected_from_ui(ui);
-        Vx.Core.Type_any output_1 = Vx.Core.f_first_from_list(Vx.Core.t_string, uidlist);
+        Vx.Core.Type_stringlist uidlist = Vx.Ui.Ui.f_stringlist_selected_from_ui(
+          ui
+        );
+        Vx.Core.Type_any output_1 = Vx.Core.f_first_from_list(
+          Vx.Core.t_string,
+          uidlist
+        );
         return output_1;
       })
     );
@@ -14846,7 +15236,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_uiengine vx_uiengine_readstate(Vx.Core.Type_context context) {
-      return Vx.Ui.Ui.f_uiengine_readstate(context);
+      Vx.Ui.Ui.Type_uiengine output = Vx.Ui.Ui.f_uiengine_readstate(context);
+      return output;
     }
 
   }
@@ -14856,7 +15247,11 @@ public static class Ui {
 
   public static Vx.Ui.Ui.Type_uiengine f_uiengine_readstate(Vx.Core.Type_context context) {
     Vx.Ui.Ui.Type_uiengine output = Vx.Ui.Ui.e_uiengine;
-    output = Vx.State.f_any_readstate_from_name(Vx.Ui.Ui.t_uiengine, context, Vx.Core.vx_new_string(":uiengine"));
+    output = Vx.State.f_any_readstate_from_name(
+      Vx.Ui.Ui.t_uiengine,
+      context,
+      Vx.Core.vx_new_string(":uiengine")
+    );
     return output;
   }
 
@@ -14942,7 +15337,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_uiengine vx_uiengine_render(Vx.Core.Type_context context, Vx.Ui.Ui.Type_uiengine uiengine) {
-      return Vx.Ui.Ui.f_uiengine_render(context, uiengine);
+      Vx.Ui.Ui.Type_uiengine output = Vx.Ui.Ui.f_uiengine_render(context, uiengine);
+      return output;
     }
 
   }
@@ -14958,12 +15354,27 @@ public static class Ui {
         Vx.Ui.Ui.Type_stylesheet stylesheet = uiengine.stylesheet();
         Vx.Ui.Ui.Type_ui ui = uiengine.ui();
         Vx.Ui.Ui.Type_layoutengine layoutengine = uiengine.layoutengine();
-        Vx.Core.Type_boolean issetstate = Vx.Ui.Ui.f_boolean_writestate_from_uiengine(context, uiengine);
+        Vx.Core.Type_boolean issetstate = Vx.Ui.Ui.f_boolean_writestate_from_uiengine(
+          context,
+          uiengine
+        );
         Vx.Ui.Ui.Func_stylesheet_render stylesheetrender = layoutengine.stylesheetrender();
-        Vx.Ui.Ui.Type_stylesheet stylesheetrend = Vx.Core.vx_any_from_func(Vx.Ui.Ui.t_stylesheet, stylesheetrender, stylesheet);
-        Vx.Ui.Ui.Type_ui uiaddlayout = Vx.Ui.Ui.f_ui_addlayout_from_ui_layoutengine(ui, layoutengine);
-        Vx.Core.Type_boolean isuiwrite = Vx.Ui.Ui.f_boolean_writestate_from_uiapp(context, uiaddlayout);
-        Vx.Ui.Ui.Type_ui uirendered = Vx.Ui.Ui.f_ui_layout(uiaddlayout);
+        Vx.Ui.Ui.Type_stylesheet stylesheetrend = Vx.Core.vx_any_from_func(
+          Vx.Ui.Ui.t_stylesheet,
+          stylesheetrender,
+          stylesheet
+        );
+        Vx.Ui.Ui.Type_ui uiaddlayout = Vx.Ui.Ui.f_ui_addlayout_from_ui_layoutengine(
+          ui,
+          layoutengine
+        );
+        Vx.Core.Type_boolean isuiwrite = Vx.Ui.Ui.f_boolean_writestate_from_uiapp(
+          context,
+          uiaddlayout
+        );
+        Vx.Ui.Ui.Type_ui uirendered = Vx.Ui.Ui.f_ui_layout(
+          uiaddlayout
+        );
         Vx.Core.Type_any output_1 = Vx.Core.f_copy(
           uiengine,
           Vx.Core.vx_new(
@@ -15059,7 +15470,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_uilist vx_uilist_selected_from_ui(Vx.Ui.Ui.Type_ui uiarg) {
-      return Vx.Ui.Ui.f_uilist_selected_from_ui(uiarg);
+      Vx.Ui.Ui.Type_uilist output = Vx.Ui.Ui.f_uilist_selected_from_ui(uiarg);
+      return output;
     }
 
   }
@@ -15073,22 +15485,23 @@ public static class Ui {
       Vx.Ui.Ui.t_uilist,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Ui.Ui.Type_uimap uimap = uiarg.uimap();
-        Vx.Ui.Ui.Type_uilist uilist = Vx.Ui.Ui.f_uilist_from_uimap(uimap);
-        Vx.Core.Type_any output_2 = Vx.Collection.f_list_from_list_filter(
+        Vx.Ui.Ui.Type_uilist uilist = Vx.Ui.Ui.f_uilist_from_uimap(
+          uimap
+        );
+        Vx.Core.Type_any output_1 = Vx.Collection.f_list_from_list_filter(
           Vx.Ui.Ui.t_uilist,
           uilist,
           Vx.Core.t_any_from_any.vx_fn_new((item_any) => {
             Vx.Ui.Ui.Type_ui item = Vx.Core.f_any_from_any(Vx.Ui.Ui.t_ui, item_any);
-            Vx.Core.Type_any output_1 = 
-              Vx.Core.f_if(
-                Vx.Ui.Ui.t_ui,
-                item.selected(),
-                item
-              );
-            return output_1;
+            Vx.Core.Type_any output_2 = Vx.Core.f_if(
+              Vx.Ui.Ui.t_ui,
+              item.selected(),
+              item
+            );
+            return output_2;
           })
         );
-        return output_2;
+        return output_1;
       })
     );
     return output;
@@ -15175,7 +15588,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_uilist vx_uilist_visible_from_ui(Vx.Ui.Ui.Type_ui uiarg) {
-      return Vx.Ui.Ui.f_uilist_visible_from_ui(uiarg);
+      Vx.Ui.Ui.Type_uilist output = Vx.Ui.Ui.f_uilist_visible_from_ui(uiarg);
+      return output;
     }
 
   }
@@ -15189,24 +15603,25 @@ public static class Ui {
       Vx.Ui.Ui.t_uilist,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Ui.Ui.Type_uimap uimap = uiarg.uimap();
-        Vx.Ui.Ui.Type_uilist uilist = Vx.Ui.Ui.f_uilist_from_uimap(uimap);
-        Vx.Core.Type_any output_2 = Vx.Collection.f_list_from_list_filter(
+        Vx.Ui.Ui.Type_uilist uilist = Vx.Ui.Ui.f_uilist_from_uimap(
+          uimap
+        );
+        Vx.Core.Type_any output_1 = Vx.Collection.f_list_from_list_filter(
           Vx.Ui.Ui.t_uilist,
           uilist,
           Vx.Core.t_any_from_any.vx_fn_new((item_any) => {
             Vx.Ui.Ui.Type_ui item = Vx.Core.f_any_from_any(Vx.Ui.Ui.t_ui, item_any);
-            Vx.Core.Type_any output_1 = 
-              Vx.Core.f_if(
-                Vx.Ui.Ui.t_ui,
-                Vx.Core.f_not(
-                  item.hidden()
-                ),
-                item
-              );
-            return output_1;
+            Vx.Core.Type_any output_2 = Vx.Core.f_if(
+              Vx.Ui.Ui.t_ui,
+              Vx.Core.f_not(
+                item.hidden()
+              ),
+              item
+            );
+            return output_2;
           })
         );
-        return output_2;
+        return output_1;
       })
     );
     return output;
@@ -15292,7 +15707,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_uilist vx_uilist_from_uimap(Vx.Ui.Ui.Type_uimap uimap) {
-      return Vx.Ui.Ui.f_uilist_from_uimap(uimap);
+      Vx.Ui.Ui.Type_uilist output = Vx.Ui.Ui.f_uilist_from_uimap(uimap);
+      return output;
     }
 
   }
@@ -15388,7 +15804,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_uimap vx_uimap_addlayout_from_uimap_layoutmap_else(Vx.Ui.Ui.Type_uimap uimap, Vx.Ui.Ui.Type_layoutmap layoutmap, Vx.Ui.Ui.Type_layout layoutelse) {
-      return Vx.Ui.Ui.f_uimap_addlayout_from_uimap_layoutmap_else(uimap, layoutmap, layoutelse);
+      Vx.Ui.Ui.Type_uimap output = Vx.Ui.Ui.f_uimap_addlayout_from_uimap_layoutmap_else(uimap, layoutmap, layoutelse);
+      return output;
     }
 
   }
@@ -15404,8 +15821,11 @@ public static class Ui {
       Vx.Core.t_any_from_key_value.vx_fn_new((key_any, ui_any) => {
         Vx.Core.Type_string key = Vx.Core.f_any_from_any(Vx.Core.t_string, key_any);
         Vx.Ui.Ui.Type_ui ui = Vx.Core.f_any_from_any(Vx.Ui.Ui.t_ui, ui_any);
-        Vx.Core.Type_any output_1 = 
-          Vx.Ui.Ui.f_ui_addlayout_from_ui_layoutmap_else(ui, layoutmap, layoutelse);
+        Vx.Core.Type_any output_1 = Vx.Ui.Ui.f_ui_addlayout_from_ui_layoutmap_else(
+          ui,
+          layoutmap,
+          layoutelse
+        );
         return output_1;
       })
     );
@@ -15483,7 +15903,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_uimap vx_uimap_layout_from_uimap_parent(Vx.Ui.Ui.Type_uimap uimap, Vx.Ui.Ui.Type_ui parent) {
-      return Vx.Ui.Ui.f_uimap_layout_from_uimap_parent(uimap, parent);
+      Vx.Ui.Ui.Type_uimap output = Vx.Ui.Ui.f_uimap_layout_from_uimap_parent(uimap, parent);
+      return output;
     }
 
   }
@@ -15499,14 +15920,13 @@ public static class Ui {
       Vx.Core.t_any_from_key_value.vx_fn_new((key_any, val_any) => {
         Vx.Core.Type_string key = Vx.Core.f_any_from_any(Vx.Core.t_string, key_any);
         Vx.Ui.Ui.Type_ui val = Vx.Core.f_any_from_any(Vx.Ui.Ui.t_ui, val_any);
-        Vx.Core.Type_any output_1 = 
-          Vx.Ui.Ui.f_ui_layout_from_ui_orig_parent(
-            val,
-            Vx.Core.f_empty(
-              Vx.Ui.Ui.t_ui
-            ),
-            parent
-          );
+        Vx.Core.Type_any output_1 = Vx.Ui.Ui.f_ui_layout_from_ui_orig_parent(
+          val,
+          Vx.Core.f_empty(
+            Vx.Ui.Ui.t_ui
+          ),
+          parent
+        );
         return output_1;
       })
     );
@@ -15593,7 +16013,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_uimap vx_uimap_from_uilist(Vx.Ui.Ui.Type_uilist uilist) {
-      return Vx.Ui.Ui.f_uimap_from_uilist(uilist);
+      Vx.Ui.Ui.Type_uimap output = Vx.Ui.Ui.f_uimap_from_uilist(uilist);
+      return output;
     }
 
   }
@@ -15608,8 +16029,7 @@ public static class Ui {
       uilist,
       Vx.Core.t_any_from_any.vx_fn_new((ui_any) => {
         Vx.Ui.Ui.Type_ui ui = Vx.Core.f_any_from_any(Vx.Ui.Ui.t_ui, ui_any);
-        Vx.Core.Type_any output_1 = 
-          ui.uid();
+        Vx.Core.Type_any output_1 = ui.uid();
         return output_1;
       })
     );
@@ -15687,7 +16107,8 @@ public static class Ui {
     }
 
     public Vx.Ui.Ui.Type_uimap vx_uimap_from_uimap_data(Vx.Ui.Ui.Type_uimap uimap, Vx.Core.Type_any data) {
-      return Vx.Ui.Ui.f_uimap_from_uimap_data(uimap, data);
+      Vx.Ui.Ui.Type_uimap output = Vx.Ui.Ui.f_uimap_from_uimap_data(uimap, data);
+      return output;
     }
 
   }

@@ -20,7 +20,10 @@ public final class TypeTest {
           ":testresult",
             Test.f_test_true(
               context,
-              Type.f_boolean_from_string_ends(Core.vx_new_string("abcd"), Core.vx_new_string("cd"))
+              Type.f_boolean_from_string_ends(
+                Core.vx_new_string("abcd"),
+                Core.vx_new_string("cd")
+              )
             )
         )
       )
@@ -43,7 +46,10 @@ public final class TypeTest {
           ":testresult",
             Test.f_test_true(
               context,
-              Type.f_boolean_from_string_starts(Core.vx_new_string("abcd"), Core.vx_new_string("ab"))
+              Type.f_boolean_from_string_starts(
+                Core.vx_new_string("abcd"),
+                Core.vx_new_string("ab")
+              )
             )
         )
       )
@@ -67,7 +73,10 @@ public final class TypeTest {
             Test.f_test(
               context,
               Core.vx_new_int(3),
-              Type.f_int_from_string_find(Core.vx_new_string("abcdcdg"), Core.vx_new_string("cd"))
+              Type.f_int_from_string_find(
+                Core.vx_new_string("abcdcdg"),
+                Core.vx_new_string("cd")
+              )
             )
         )
       )
@@ -91,7 +100,10 @@ public final class TypeTest {
             Test.f_test(
               context,
               Core.vx_new_int(3),
-              Type.f_int_from_string_findkeyword(Core.vx_new_string("ab\tcdefg"), Core.vx_new_string(":whitespace"))
+              Type.f_int_from_string_findkeyword(
+                Core.vx_new_string("ab\tcdefg"),
+                Core.vx_new_string(":whitespace")
+              )
             )
         ),
         Core.vx_new(
@@ -101,7 +113,10 @@ public final class TypeTest {
             Test.f_test(
               context,
               Core.vx_new_int(5),
-              Type.f_int_from_string_findkeyword(Core.vx_new_string(" \t\n\rab"), Core.vx_new_string(":nonwhitespace"))
+              Type.f_int_from_string_findkeyword(
+                Core.vx_new_string(" \t\n\rab"),
+                Core.vx_new_string(":nonwhitespace")
+              )
             )
         )
       )
@@ -125,7 +140,10 @@ public final class TypeTest {
             Test.f_test(
               context,
               Core.vx_new_int(5),
-              Type.f_int_from_string_findlast(Core.vx_new_string("abcdcdg"), Core.vx_new_string("cd"))
+              Type.f_int_from_string_findlast(
+                Core.vx_new_string("abcdcdg"),
+                Core.vx_new_string("cd")
+              )
             )
         )
       )
@@ -148,7 +166,9 @@ public final class TypeTest {
           ":testresult",
             Test.f_test_true(
               context,
-              Type.f_is_string(Core.vx_new_string(""))
+              Type.f_is_string(
+                Core.vx_new_string("")
+              )
             )
         ),
         Core.vx_new(
@@ -157,7 +177,9 @@ public final class TypeTest {
           ":testresult",
             Test.f_test_true(
               context,
-              Type.f_is_string(Core.vx_new_string("a"))
+              Type.f_is_string(
+                Core.vx_new_string("a")
+              )
             )
         ),
         Core.vx_new(
@@ -166,7 +188,9 @@ public final class TypeTest {
           ":testresult",
             Test.f_test_false(
               context,
-              Type.f_is_string(Core.vx_new_int(5))
+              Type.f_is_string(
+                Core.vx_new_int(5)
+              )
             )
         ),
         Core.vx_new(
@@ -355,7 +379,9 @@ public final class TypeTest {
             Test.f_test(
               context,
               Core.vx_new_string("abc"),
-              Type.f_string_lowercase(Core.vx_new_string("AbC"))
+              Type.f_string_lowercase(
+                Core.vx_new_string("AbC")
+              )
             )
         )
       )
@@ -379,7 +405,9 @@ public final class TypeTest {
             Test.f_test(
               context,
               Core.vx_new_string("ab"),
-              Type.f_string_outdent(Core.vx_new_string("ab"))
+              Type.f_string_outdent(
+                Core.vx_new_string("ab")
+              )
             )
         ),
         Core.vx_new(
@@ -389,7 +417,9 @@ public final class TypeTest {
             Test.f_test(
               context,
               Core.vx_new_string("a\nb"),
-              Type.f_string_outdent(Core.vx_new_string("\n a\n b"))
+              Type.f_string_outdent(
+                Core.vx_new_string("\n a\n b")
+              )
             )
         )
       )
@@ -413,7 +443,9 @@ public final class TypeTest {
             Test.f_test(
               context,
               Core.vx_new_string("ab"),
-              Type.f_string_trim(Core.vx_new_string(" \t\nab\n\t "))
+              Type.f_string_trim(
+                Core.vx_new_string(" \t\nab\n\t ")
+              )
             )
         )
       )
@@ -437,7 +469,9 @@ public final class TypeTest {
             Test.f_test(
               context,
               Core.vx_new_string("ABC"),
-              Type.f_string_uppercase(Core.vx_new_string("aBc"))
+              Type.f_string_uppercase(
+                Core.vx_new_string("aBc")
+              )
             )
         )
       )
@@ -461,7 +495,9 @@ public final class TypeTest {
             Test.f_test(
               context,
               Core.vx_new_string("4"),
-              Type.f_string_from_int(Core.vx_new_int(4))
+              Type.f_string_from_int(
+                Core.vx_new_int(4)
+              )
             )
         ),
         Core.vx_new(
@@ -471,7 +507,9 @@ public final class TypeTest {
             Test.f_test(
               context,
               Core.vx_new_string("51"),
-              Type.f_string_from_int(Core.vx_new_int(51))
+              Type.f_string_from_int(
+                Core.vx_new_int(51)
+              )
             )
         ),
         Core.vx_new(
@@ -531,7 +569,10 @@ public final class TypeTest {
             Test.f_test(
               context,
               Core.vx_new_string("abc"),
-              Type.f_string_from_string_end(Core.vx_new_string("abcd"), Core.vx_new_int(3))
+              Type.f_string_from_string_end(
+                Core.vx_new_string("abcd"),
+                Core.vx_new_int(3)
+              )
             )
         ),
         Core.vx_new(
@@ -541,7 +582,10 @@ public final class TypeTest {
             Test.f_test(
               context,
               Core.vx_new_string("ab"),
-              Type.f_string_from_string_end(Core.vx_new_string("abcd"), Core.vx_new_int(2))
+              Type.f_string_from_string_end(
+                Core.vx_new_string("abcd"),
+                Core.vx_new_int(2)
+              )
             )
         )
       )
@@ -565,7 +609,10 @@ public final class TypeTest {
             Test.f_test(
               context,
               Core.vx_new_string("abcd"),
-              Type.f_string_from_string_start(Core.vx_new_string("abcd"), Core.vx_new_int(1))
+              Type.f_string_from_string_start(
+                Core.vx_new_string("abcd"),
+                Core.vx_new_int(1)
+              )
             )
         ),
         Core.vx_new(
@@ -575,7 +622,10 @@ public final class TypeTest {
             Test.f_test(
               context,
               Core.vx_new_string("bcd"),
-              Type.f_string_from_string_start(Core.vx_new_string("abcd"), Core.vx_new_int(2))
+              Type.f_string_from_string_start(
+                Core.vx_new_string("abcd"),
+                Core.vx_new_int(2)
+              )
             )
         )
       )
@@ -599,7 +649,11 @@ public final class TypeTest {
             Test.f_test(
               context,
               Core.vx_new_string("abc"),
-              Type.f_string_from_string_start_end(Core.vx_new_string("abcd"), Core.vx_new_int(1), Core.vx_new_int(3))
+              Type.f_string_from_string_start_end(
+                Core.vx_new_string("abcd"),
+                Core.vx_new_int(1),
+                Core.vx_new_int(3)
+              )
             )
         ),
         Core.vx_new(
@@ -609,7 +663,11 @@ public final class TypeTest {
             Test.f_test(
               context,
               Core.vx_new_string("bc"),
-              Type.f_string_from_string_start_end(Core.vx_new_string("abcd"), Core.vx_new_int(2), Core.vx_new_int(3))
+              Type.f_string_from_string_start_end(
+                Core.vx_new_string("abcd"),
+                Core.vx_new_int(2),
+                Core.vx_new_int(3)
+              )
             )
         ),
         Core.vx_new(
@@ -619,7 +677,11 @@ public final class TypeTest {
             Test.f_test(
               context,
               Core.vx_new_string(""),
-              Type.f_string_from_string_start_end(Core.vx_new_string("abcd"), Core.vx_new_int(5), Core.vx_new_int(6))
+              Type.f_string_from_string_start_end(
+                Core.vx_new_string("abcd"),
+                Core.vx_new_int(5),
+                Core.vx_new_int(6)
+              )
             )
         ),
         Core.vx_new(
@@ -629,7 +691,11 @@ public final class TypeTest {
             Test.f_test(
               context,
               Core.vx_new_string("bcd"),
-              Type.f_string_from_string_start_end(Core.vx_new_string("abcd"), Core.vx_new_int(2), Core.vx_new_int(5))
+              Type.f_string_from_string_start_end(
+                Core.vx_new_string("abcd"),
+                Core.vx_new_int(2),
+                Core.vx_new_int(5)
+              )
             )
         ),
         Core.vx_new(
@@ -639,7 +705,11 @@ public final class TypeTest {
             Test.f_test(
               context,
               Core.vx_new_string("bc"),
-              Type.f_string_from_string_start_end(Core.vx_new_string("abcd"), Core.vx_new_int(2), Core.vx_new_int(-1))
+              Type.f_string_from_string_start_end(
+                Core.vx_new_string("abcd"),
+                Core.vx_new_int(2),
+                Core.vx_new_int(-1)
+              )
             )
         )
       )
@@ -706,7 +776,10 @@ public final class TypeTest {
                   Core.vx_new_string("c")
                 )
               ),
-              Type.f_stringlist_from_string_split(Core.vx_new_string("a$b$c"), Core.vx_new_string("$"))
+              Type.f_stringlist_from_string_split(
+                Core.vx_new_string("a$b$c"),
+                Core.vx_new_string("$")
+              )
             )
         )
       )

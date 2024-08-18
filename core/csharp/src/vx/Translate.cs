@@ -73,7 +73,8 @@ public static class Translate {
     }
 
     public Vx.Core.Type_session vx_session_from_session_name(Vx.Core.Type_session session, Vx.Core.Type_string name) {
-      return Vx.Translate.f_session_from_session_name(session, name);
+      Vx.Core.Type_session output = Vx.Translate.f_session_from_session_name(session, name);
+      return output;
     }
 
   }
@@ -88,7 +89,10 @@ public static class Translate {
       Vx.Core.vx_new(
         Vx.Core.t_anylist,
         Vx.Core.vx_new_string(":translation"),
-        Vx.Translate.f_translation_from_session_name(session, name)
+        Vx.Translate.f_translation_from_session_name(
+          session,
+          name
+        )
       )
     );
     return output;
@@ -165,7 +169,8 @@ public static class Translate {
     }
 
     public Vx.Core.Type_session vx_session_from_session_translation(Vx.Core.Type_session session, Vx.Core.Type_translation translation) {
-      return Vx.Translate.f_session_from_session_translation(session, translation);
+      Vx.Core.Type_session output = Vx.Translate.f_session_from_session_translation(session, translation);
+      return output;
     }
 
   }
@@ -259,7 +264,8 @@ public static class Translate {
     }
 
     public Vx.Core.Type_session vx_session_from_session_translationmap_name(Vx.Core.Type_session session, Vx.Core.Type_translationmap translationmap, Vx.Core.Type_string name) {
-      return Vx.Translate.f_session_from_session_translationmap_name(session, translationmap, name);
+      Vx.Core.Type_session output = Vx.Translate.f_session_from_session_translationmap_name(session, translationmap, name);
+      return output;
     }
 
   }
@@ -274,7 +280,11 @@ public static class Translate {
       Vx.Core.vx_new(
         Vx.Core.t_anylist,
         Vx.Core.vx_new_string(":translation"),
-        Vx.Core.f_any_from_map(Vx.Core.t_anylist, translationmap, name),
+        Vx.Core.f_any_from_map(
+          Vx.Core.t_anylist,
+          translationmap,
+          name
+        ),
         Vx.Core.vx_new_string(":translationmap"),
         translationmap
       )
@@ -364,7 +374,8 @@ public static class Translate {
     }
 
     public Vx.Core.Type_string vx_translate(Vx.Core.Type_context context, Vx.Core.Type_string text) {
-      return Vx.Translate.f_translate(context, text);
+      Vx.Core.Type_string output = Vx.Translate.f_translate(context, text);
+      return output;
     }
 
   }
@@ -375,7 +386,9 @@ public static class Translate {
   public static Vx.Core.Type_string f_translate(Vx.Core.Type_context context, Vx.Core.Type_string text) {
     Vx.Core.Type_string output = Vx.Core.e_string;
     output = Vx.Translate.f_translate_from_translation_string(
-      Vx.Translate.f_translation_from_context(context),
+      Vx.Translate.f_translation_from_context(
+        context
+      ),
       text
     );
     return output;
@@ -463,7 +476,8 @@ public static class Translate {
     }
 
     public Vx.Core.Type_string vx_translate_1(Vx.Core.Type_context context, Vx.Core.Type_msg msg) {
-      return Vx.Translate.f_translate_1(context, msg);
+      Vx.Core.Type_string output = Vx.Translate.f_translate_1(context, msg);
+      return output;
     }
 
   }
@@ -488,7 +502,10 @@ public static class Translate {
             code
           )
         );
-        Vx.Core.Type_any output_1 = Vx.Translate.f_translate(context, text);
+        Vx.Core.Type_any output_1 = Vx.Translate.f_translate(
+          context,
+          text
+        );
         return output_1;
       })
     );
@@ -566,7 +583,8 @@ public static class Translate {
     }
 
     public Vx.Core.Type_string vx_translate_from_translation_string(Vx.Core.Type_translation translation, Vx.Core.Type_string text) {
-      return Vx.Translate.f_translate_from_translation_string(translation, text);
+      Vx.Core.Type_string output = Vx.Translate.f_translate_from_translation_string(translation, text);
+      return output;
     }
 
   }
@@ -578,16 +596,24 @@ public static class Translate {
     Vx.Core.Type_string output = Vx.Core.e_string;
     output = Vx.Core.f_if_1(
       Vx.Core.t_string,
-      Vx.Core.f_is_empty_1(translation),
+      Vx.Core.f_is_empty_1(
+        translation
+      ),
       text,
       Vx.Core.f_let(
         Vx.Core.t_string,
         Vx.Core.t_any_from_func.vx_fn_new(() => {
           Vx.Core.Type_stringmap wordmap = translation.wordmap();
-          Vx.Core.Type_string xlate = Vx.Core.f_any_from_map(Vx.Core.t_string, wordmap, text);
+          Vx.Core.Type_string xlate = Vx.Core.f_any_from_map(
+            Vx.Core.t_string,
+            wordmap,
+            text
+          );
           Vx.Core.Type_any output_1 = Vx.Core.f_if_1(
             Vx.Core.t_string,
-            Vx.Core.f_is_empty(xlate),
+            Vx.Core.f_is_empty(
+              xlate
+            ),
             text,
             xlate
           );
@@ -671,7 +697,8 @@ public static class Translate {
     }
 
     public Vx.Core.Type_string vx_translate_from_translationmap_name_string(Vx.Core.Type_translationmap translationmap, Vx.Core.Type_string name, Vx.Core.Type_string text) {
-      return Vx.Translate.f_translate_from_translationmap_name_string(translationmap, name, text);
+      Vx.Core.Type_string output = Vx.Translate.f_translate_from_translationmap_name_string(translationmap, name, text);
+      return output;
     }
 
   }
@@ -684,8 +711,15 @@ public static class Translate {
     output = Vx.Core.f_let(
       Vx.Core.t_string,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Core.Type_translation translation = Vx.Core.f_any_from_map(Vx.Core.t_translation, translationmap, name);
-        Vx.Core.Type_any output_1 = Vx.Translate.f_translate_from_translation_string(translation, text);
+        Vx.Core.Type_translation translation = Vx.Core.f_any_from_map(
+          Vx.Core.t_translation,
+          translationmap,
+          name
+        );
+        Vx.Core.Type_any output_1 = Vx.Translate.f_translate_from_translation_string(
+          translation,
+          text
+        );
         return output_1;
       })
     );
@@ -774,7 +808,8 @@ public static class Translate {
     }
 
     public Vx.Core.Type_translation vx_translation_load_session(Vx.Core.Type_context context, Vx.Core.Type_translation translation) {
-      return Vx.Translate.f_translation_load_session(context, translation);
+      Vx.Core.Type_translation output = Vx.Translate.f_translation_load_session(context, translation);
+      return output;
     }
 
   }
@@ -855,7 +890,8 @@ public static class Translate {
     }
 
     public Vx.Core.Type_translation vx_translation_from_context(Vx.Core.Type_context context) {
-      return Vx.Translate.f_translation_from_context(context);
+      Vx.Core.Type_translation output = Vx.Translate.f_translation_from_context(context);
+      return output;
     }
 
   }
@@ -865,7 +901,9 @@ public static class Translate {
 
   public static Vx.Core.Type_translation f_translation_from_context(Vx.Core.Type_context context) {
     Vx.Core.Type_translation output = Vx.Core.e_translation;
-    output = Vx.Core.f_session_from_context(context).translation();
+    output = Vx.Core.f_session_from_context(
+      context
+    ).translation();
     return output;
   }
 
@@ -940,7 +978,8 @@ public static class Translate {
     }
 
     public Vx.Core.Type_translation vx_translation_from_session_name(Vx.Core.Type_session session, Vx.Core.Type_string name) {
-      return Vx.Translate.f_translation_from_session_name(session, name);
+      Vx.Core.Type_translation output = Vx.Translate.f_translation_from_session_name(session, name);
+      return output;
     }
 
   }
@@ -954,7 +993,11 @@ public static class Translate {
       Vx.Core.t_translation,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
         Vx.Core.Type_translationmap translationmap = session.translationmap();
-        Vx.Core.Type_any output_1 = Vx.Core.f_any_from_map(Vx.Core.t_translation, translationmap, name);
+        Vx.Core.Type_any output_1 = Vx.Core.f_any_from_map(
+          Vx.Core.t_translation,
+          translationmap,
+          name
+        );
         return output_1;
       })
     );
@@ -1042,7 +1085,8 @@ public static class Translate {
     }
 
     public Vx.Core.Type_translationmap vx_translationmap_from_translations(Vx.Core.Type_translationlist translations) {
-      return Vx.Translate.f_translationmap_from_translations(translations);
+      Vx.Core.Type_translationmap output = Vx.Translate.f_translationmap_from_translations(translations);
+      return output;
     }
 
   }
@@ -1057,8 +1101,7 @@ public static class Translate {
       translations,
       Vx.Core.t_any_from_any.vx_fn_new((translation_any) => {
         Vx.Core.Type_translation translation = Vx.Core.f_any_from_any(Vx.Core.t_translation, translation_any);
-        Vx.Core.Type_any output_1 = 
-          translation.name();
+        Vx.Core.Type_any output_1 = translation.name();
         return output_1;
       })
     );

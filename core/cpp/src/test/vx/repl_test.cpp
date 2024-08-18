@@ -67,14 +67,14 @@ namespace vx_repl_test {
                 vx_core::f_new(
                   vx_repl::t_repl,
                   vx_core::vx_new(vx_core::t_anylist, {
-                    vx_core::vx_new_string(":val"),
+                    vx_core::vx_new_string(":value"),
                     vx_core::vx_new_string("Hello")
                   })
                 ),
                 vx_core::f_new(
                   vx_repl::t_repl,
                   vx_core::vx_new(vx_core::t_anylist, {
-                    vx_core::vx_new_string(":val"),
+                    vx_core::vx_new_string(":value"),
                     vx_core::vx_new_string("World")
                   })
                 )
@@ -85,7 +85,7 @@ namespace vx_repl_test {
       )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"HelloWorld\"\n (any<-repl\n  (repl\n   :type string\n   :repllist\n    (repllist\n     (repl :val \"Hello\")\n     (repl :val \"World\")\n    ))))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n \"HelloWorld\"\n (any<-repl\n  (repl\n   :type string\n   :repllist\n    (repllist\n     (repl :value \"Hello\")\n     (repl :value \"World\")\n    ))))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/repl"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
@@ -107,14 +107,14 @@ namespace vx_repl_test {
                 vx_core::f_new(
                   vx_repl::t_repl,
                   vx_core::vx_new(vx_core::t_anylist, {
-                    vx_core::vx_new_string(":val"),
+                    vx_core::vx_new_string(":value"),
                     vx_core::vx_new_int(2)
                   })
                 ),
                 vx_core::f_new(
                   vx_repl::t_repl,
                   vx_core::vx_new(vx_core::t_anylist, {
-                    vx_core::vx_new_string(":val"),
+                    vx_core::vx_new_string(":value"),
                     vx_core::vx_new_int(3)
                   })
                 )
@@ -125,7 +125,7 @@ namespace vx_repl_test {
       )
     );
     vx_test::Type_testdescribe testdescribe_2 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n 5\n (any<-repl\n  (repl\n   :type +\n   :repllist\n    (repllist\n     (repl :val 2)\n     (repl :val 3)))))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n 5\n (any<-repl\n  (repl\n   :type +\n   :repllist\n    (repllist\n     (repl :value 2)\n     (repl :value 3)))))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/repl"),
       vx_core::vx_new_string(":testresult"), testresult_2
     });
@@ -227,7 +227,7 @@ namespace vx_repl_test {
       vx_core::f_new(
         vx_repl::t_repl,
         vx_core::vx_new(vx_core::t_anylist, {
-          vx_core::vx_new_string(":val"),
+          vx_core::vx_new_string(":value"),
           vx_core::vx_new_int(2)
         })
       ),
@@ -245,7 +245,7 @@ namespace vx_repl_test {
       )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl :val 2)\n (repl-empty<-textblock-argmap\n  (tb/textblock\n   :text \"2\")\n  (empty argmap)))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl :value 2)\n (repl-empty<-textblock-argmap\n  (tb/textblock\n   :text \"2\")\n  (empty argmap)))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/repl"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
@@ -283,7 +283,7 @@ namespace vx_repl_test {
       vx_core::f_new(
         vx_repl::t_repl,
         vx_core::vx_new(vx_core::t_anylist, {
-          vx_core::vx_new_string(":val"),
+          vx_core::vx_new_string(":value"),
           vx_core::vx_new_int(2)
         })
       ),
@@ -314,7 +314,7 @@ namespace vx_repl_test {
       )
     );
     vx_test::Type_testdescribe testdescribe_3 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl :val 2)\n (repl-empty<-textblock-argmap\n  (tb/textblock\n   :text \"1\"\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"2\")))\n  (empty argmap)))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl :value 2)\n (repl-empty<-textblock-argmap\n  (tb/textblock\n   :text \"1\"\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"2\")))\n  (empty argmap)))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/repl"),
       vx_core::vx_new_string(":testresult"), testresult_3
     });
@@ -402,14 +402,14 @@ namespace vx_repl_test {
               vx_core::f_new(
                 vx_repl::t_repl,
                 vx_core::vx_new(vx_core::t_anylist, {
-                  vx_core::vx_new_string(":val"),
+                  vx_core::vx_new_string(":value"),
                   vx_core::vx_new_int(2)
                 })
               ),
               vx_core::f_new(
                 vx_repl::t_repl,
                 vx_core::vx_new(vx_core::t_anylist, {
-                  vx_core::vx_new_string(":val"),
+                  vx_core::vx_new_string(":value"),
                   vx_core::vx_new_int(3)
                 })
               )
@@ -501,7 +501,7 @@ namespace vx_repl_test {
       )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl\n  :type vx/core/+\n  :repllist\n   (repllist\n    (repl\n     :val 2)\n    (repl\n     :val 3)))\n (repl-paren<-textblock-argmap\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :delim\n    (copy delimvxlispparen\n     :delimlist\n      (empty delimlist))\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"+\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"2\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"3\")))\n  (empty argmap)))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl\n  :type vx/core/+\n  :repllist\n   (repllist\n    (repl\n     :value 2)\n    (repl\n     :value 3)))\n (repl-paren<-textblock-argmap\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :delim\n    (copy delimvxlispparen\n     :delimlist\n      (empty delimlist))\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"+\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"2\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"3\")))\n  (empty argmap)))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/repl"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
@@ -539,14 +539,14 @@ namespace vx_repl_test {
               vx_core::f_new(
                 vx_repl::t_repl,
                 vx_core::vx_new(vx_core::t_anylist, {
-                  vx_core::vx_new_string(":val"),
+                  vx_core::vx_new_string(":value"),
                   vx_core::vx_new_int(2)
                 })
               ),
               vx_core::f_new(
                 vx_repl::t_repl,
                 vx_core::vx_new(vx_core::t_anylist, {
-                  vx_core::vx_new_string(":val"),
+                  vx_core::vx_new_string(":value"),
                   vx_core::vx_new_int(3)
                 })
               )
@@ -564,7 +564,7 @@ namespace vx_repl_test {
       )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl\n  :type vx/core/+\n  :repllist\n   (repllist\n    (repl\n     :val 2)\n    (repl\n     :val 3)))\n (repl<-macro\n  \"(+ \"\n  (- 7 5)\n  \" 3)\"))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl\n  :type vx/core/+\n  :repllist\n   (repllist\n    (repl\n     :value 2)\n    (repl\n     :value 3)))\n (repl<-macro\n  \"(+ \"\n  (- 7 5)\n  \" 3)\"))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/repl"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
@@ -593,14 +593,14 @@ namespace vx_repl_test {
       vx_core::f_new(
         vx_repl::t_repl,
         vx_core::vx_new(vx_core::t_anylist, {
-          vx_core::vx_new_string(":val"),
+          vx_core::vx_new_string(":value"),
           vx_core::vx_new_int(2)
         })
       ),
       vx_repl::f_repl_from_script(vx_core::vx_new_string("2"))
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl\n  :val 2)\n (repl<-script\n  \"2\"))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl\n  :value 2)\n (repl<-script\n  \"2\"))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/repl"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
@@ -610,14 +610,14 @@ namespace vx_repl_test {
       vx_core::f_new(
         vx_repl::t_repl,
         vx_core::vx_new(vx_core::t_anylist, {
-          vx_core::vx_new_string(":val"),
+          vx_core::vx_new_string(":value"),
           vx_core::c_infinity
         })
       ),
       vx_repl::f_repl_from_script(vx_core::vx_new_string("infinity"))
     );
     vx_test::Type_testdescribe testdescribe_2 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl\n  :val infinity)\n (repl<-script\n  \"infinity\"))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl\n  :value infinity)\n (repl<-script\n  \"infinity\"))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/repl"),
       vx_core::vx_new_string(":testresult"), testresult_2
     });
@@ -653,14 +653,14 @@ namespace vx_repl_test {
               vx_core::f_new(
                 vx_repl::t_repl,
                 vx_core::vx_new(vx_core::t_anylist, {
-                  vx_core::vx_new_string(":val"),
+                  vx_core::vx_new_string(":value"),
                   vx_core::vx_new_int(2)
                 })
               ),
               vx_core::f_new(
                 vx_repl::t_repl,
                 vx_core::vx_new(vx_core::t_anylist, {
-                  vx_core::vx_new_string(":val"),
+                  vx_core::vx_new_string(":value"),
                   vx_core::vx_new_int(3)
                 })
               )
@@ -671,7 +671,7 @@ namespace vx_repl_test {
       vx_repl::f_repl_from_script(vx_core::vx_new_string("(+ 2 3)"))
     );
     vx_test::Type_testdescribe testdescribe_4 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl\n     :val 2)\n    (repl\n     :val 3)))\n (repl<-script\n  \"(+ 2 3)\"))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl\n     :value 2)\n    (repl\n     :value 3)))\n (repl<-script\n  \"(+ 2 3)\"))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/repl"),
       vx_core::vx_new_string(":testresult"), testresult_4
     });
@@ -703,7 +703,7 @@ namespace vx_repl_test {
       vx_core::f_new(
         vx_repl::t_repl,
         vx_core::vx_new(vx_core::t_anylist, {
-          vx_core::vx_new_string(":val"),
+          vx_core::vx_new_string(":value"),
           vx_core::vx_new_string("Hello")
         })
       ),
@@ -715,7 +715,7 @@ namespace vx_repl_test {
       )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl :val \"Hello\")\n (repl<-string-argmap\n  `\"Hello\"`\n  (empty argmap)))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl :value \"Hello\")\n (repl<-string-argmap\n  `\"Hello\"`\n  (empty argmap)))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/repl"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
@@ -725,7 +725,7 @@ namespace vx_repl_test {
       vx_core::f_new(
         vx_repl::t_repl,
         vx_core::vx_new(vx_core::t_anylist, {
-          vx_core::vx_new_string(":val"),
+          vx_core::vx_new_string(":value"),
           vx_core::vx_new_int(2)
         })
       ),
@@ -737,7 +737,7 @@ namespace vx_repl_test {
       )
     );
     vx_test::Type_testdescribe testdescribe_2 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl\n  :val 2)\n (repl<-string-argmap\n  \"2\"\n  (empty argmap)))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl\n  :value 2)\n (repl<-string-argmap\n  \"2\"\n  (empty argmap)))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/repl"),
       vx_core::vx_new_string(":testresult"), testresult_2
     });
@@ -747,7 +747,7 @@ namespace vx_repl_test {
       vx_core::f_new(
         vx_repl::t_repl,
         vx_core::vx_new(vx_core::t_anylist, {
-          vx_core::vx_new_string(":val"),
+          vx_core::vx_new_string(":value"),
           vx_core::vx_new_decimal_from_string("2.3")
         })
       ),
@@ -759,7 +759,7 @@ namespace vx_repl_test {
       )
     );
     vx_test::Type_testdescribe testdescribe_3 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl :val 2.3)\n (repl<-string-argmap\n  \"2.3\"\n  (empty argmap)))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl :value 2.3)\n (repl<-string-argmap\n  \"2.3\"\n  (empty argmap)))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/repl"),
       vx_core::vx_new_string(":testresult"), testresult_3
     });
@@ -769,7 +769,7 @@ namespace vx_repl_test {
       vx_core::f_new(
         vx_repl::t_repl,
         vx_core::vx_new(vx_core::t_anylist, {
-          vx_core::vx_new_string(":val"),
+          vx_core::vx_new_string(":value"),
           vx_core::c_infinity
         })
       ),
@@ -781,7 +781,7 @@ namespace vx_repl_test {
       )
     );
     vx_test::Type_testdescribe testdescribe_4 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl\n  :val infinity)\n (repl<-string-argmap\n  \"infinity\"\n  (empty argmap)))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl\n  :value infinity)\n (repl<-string-argmap\n  \"infinity\"\n  (empty argmap)))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/repl"),
       vx_core::vx_new_string(":testresult"), testresult_4
     });
@@ -791,7 +791,7 @@ namespace vx_repl_test {
       vx_core::f_new(
         vx_repl::t_repl,
         vx_core::vx_new(vx_core::t_anylist, {
-          vx_core::vx_new_string(":val"),
+          vx_core::vx_new_string(":value"),
           vx_data_textblock::c_delimcomma
         })
       ),
@@ -803,7 +803,7 @@ namespace vx_repl_test {
       )
     );
     vx_test::Type_testdescribe testdescribe_5 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl\n  :val tb/delimcomma)\n (repl<-string-argmap\n  \"vx/data/textblock/delimcomma\"\n  (empty argmap)))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl\n  :value tb/delimcomma)\n (repl<-string-argmap\n  \"vx/data/textblock/delimcomma\"\n  (empty argmap)))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/repl"),
       vx_core::vx_new_string(":testresult"), testresult_5
     });
@@ -882,7 +882,7 @@ namespace vx_repl_test {
       vx_core::f_new(
         vx_repl::t_repl,
         vx_core::vx_new(vx_core::t_anylist, {
-          vx_core::vx_new_string(":val"),
+          vx_core::vx_new_string(":value"),
           vx_core::vx_new_int(2)
         })
       ),
@@ -897,7 +897,7 @@ namespace vx_repl_test {
       )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl :val 2)\n (repl<-textblock\n  (tb/textblock\n   :text \"2\")))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl :value 2)\n (repl<-textblock\n  (tb/textblock\n   :text \"2\")))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/repl"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
@@ -966,14 +966,14 @@ namespace vx_repl_test {
               vx_core::f_new(
                 vx_repl::t_repl,
                 vx_core::vx_new(vx_core::t_anylist, {
-                  vx_core::vx_new_string(":val"),
+                  vx_core::vx_new_string(":value"),
                   vx_core::vx_new_int(2)
                 })
               ),
               vx_core::f_new(
                 vx_repl::t_repl,
                 vx_core::vx_new(vx_core::t_anylist, {
-                  vx_core::vx_new_string(":val"),
+                  vx_core::vx_new_string(":value"),
                   vx_core::vx_new_int(3)
                 })
               )
@@ -1062,7 +1062,7 @@ namespace vx_repl_test {
       )
     );
     vx_test::Type_testdescribe testdescribe_4 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl :val 2)\n    (repl :val 3)))\n (repl<-textblock\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :delim\n    (copy delimvxlispparen\n     :delimlist\n      (empty delimlist))\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"+\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"2\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"3\")))))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl :value 2)\n    (repl :value 3)))\n (repl<-textblock\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :delim\n    (copy delimvxlispparen\n     :delimlist\n      (empty delimlist))\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"+\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"2\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"3\")))))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/repl"),
       vx_core::vx_new_string(":testresult"), testresult_4
     });
@@ -1081,14 +1081,14 @@ namespace vx_repl_test {
               vx_core::f_new(
                 vx_repl::t_repl,
                 vx_core::vx_new(vx_core::t_anylist, {
-                  vx_core::vx_new_string(":val"),
+                  vx_core::vx_new_string(":value"),
                   vx_core::vx_new_int(2)
                 })
               ),
               vx_core::f_new(
                 vx_repl::t_repl,
                 vx_core::vx_new(vx_core::t_anylist, {
-                  vx_core::vx_new_string(":val"),
+                  vx_core::vx_new_string(":value"),
                   vx_core::vx_new_int(3)
                 })
               )
@@ -1190,7 +1190,7 @@ namespace vx_repl_test {
       )
     );
     vx_test::Type_testdescribe testdescribe_5 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl :val 2)\n    (repl :val 3)))\n (repl<-textblock\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"(+ 2 3)\"\n      :delim\n       (copy delimvxlispparen\n        :delimlist\n         (empty delimlist))\n      :children\n       (tb/textblocklist\n        (tb/textblock\n         :text \"+\")\n        (tb/textblock\n         :text \" \"\n         :delim\n          (copy tb/delimwhitespace\n           :pos 0))\n        (tb/textblock\n         :text \"2\")\n        (tb/textblock\n         :text \" \"\n         :delim\n          (copy tb/delimwhitespace\n           :pos 0))\n        (tb/textblock\n         :text \"3\")))))))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl :value 2)\n    (repl :value 3)))\n (repl<-textblock\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"(+ 2 3)\"\n      :delim\n       (copy delimvxlispparen\n        :delimlist\n         (empty delimlist))\n      :children\n       (tb/textblocklist\n        (tb/textblock\n         :text \"+\")\n        (tb/textblock\n         :text \" \"\n         :delim\n          (copy tb/delimwhitespace\n           :pos 0))\n        (tb/textblock\n         :text \"2\")\n        (tb/textblock\n         :text \" \"\n         :delim\n          (copy tb/delimwhitespace\n           :pos 0))\n        (tb/textblock\n         :text \"3\")))))))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/repl"),
       vx_core::vx_new_string(":testresult"), testresult_5
     });
@@ -1223,7 +1223,7 @@ namespace vx_repl_test {
       vx_core::f_new(
         vx_repl::t_repl,
         vx_core::vx_new(vx_core::t_anylist, {
-          vx_core::vx_new_string(":val"),
+          vx_core::vx_new_string(":value"),
           vx_core::vx_new_int(2)
         })
       ),
@@ -1241,7 +1241,7 @@ namespace vx_repl_test {
       )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl :val 2)\n (repl<-textblock-argmap\n  (tb/textblock\n   :text \"2\")\n  (empty argmap)))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl :value 2)\n (repl<-textblock-argmap\n  (tb/textblock\n   :text \"2\")\n  (empty argmap)))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/repl"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
@@ -1288,14 +1288,14 @@ namespace vx_repl_test {
               vx_core::f_new(
                 vx_repl::t_repl,
                 vx_core::vx_new(vx_core::t_anylist, {
-                  vx_core::vx_new_string(":val"),
+                  vx_core::vx_new_string(":value"),
                   vx_core::vx_new_int(2)
                 })
               ),
               vx_core::f_new(
                 vx_repl::t_repl,
                 vx_core::vx_new(vx_core::t_anylist, {
-                  vx_core::vx_new_string(":val"),
+                  vx_core::vx_new_string(":value"),
                   vx_core::vx_new_int(3)
                 })
               )
@@ -1387,7 +1387,7 @@ namespace vx_repl_test {
       )
     );
     vx_test::Type_testdescribe testdescribe_3 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl :val 2)\n    (repl :val 3)))\n (repl<-textblock-argmap\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :delim\n    (copy delimvxlispparen\n     :delimlist\n      (empty delimlist))\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"+\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"2\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"3\")))\n  (empty argmap)))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl :value 2)\n    (repl :value 3)))\n (repl<-textblock-argmap\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :delim\n    (copy delimvxlispparen\n     :delimlist\n      (empty delimlist))\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"+\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"2\")\n     (tb/textblock\n      :text \" \"\n      :delim\n       (copy tb/delimwhitespace\n        :pos 0))\n     (tb/textblock\n      :text \"3\")))\n  (empty argmap)))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/repl"),
       vx_core::vx_new_string(":testresult"), testresult_3
     });
@@ -1406,14 +1406,14 @@ namespace vx_repl_test {
               vx_core::f_new(
                 vx_repl::t_repl,
                 vx_core::vx_new(vx_core::t_anylist, {
-                  vx_core::vx_new_string(":val"),
+                  vx_core::vx_new_string(":value"),
                   vx_core::vx_new_int(2)
                 })
               ),
               vx_core::f_new(
                 vx_repl::t_repl,
                 vx_core::vx_new(vx_core::t_anylist, {
-                  vx_core::vx_new_string(":val"),
+                  vx_core::vx_new_string(":value"),
                   vx_core::vx_new_int(3)
                 })
               )
@@ -1518,7 +1518,7 @@ namespace vx_repl_test {
       )
     );
     vx_test::Type_testdescribe testdescribe_4 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl :val 2)\n    (repl :val 3)))\n (repl<-textblock-argmap\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"(+ 2 3)\"\n      :delim\n       (copy delimvxlispparen\n        :delimlist\n         (empty delimlist))\n      :children\n       (tb/textblocklist\n        (tb/textblock\n         :text \"+\")\n        (tb/textblock\n         :text \" \"\n         :delim\n          (copy tb/delimwhitespace\n           :pos 0))\n        (tb/textblock\n         :text \"2\")\n        (tb/textblock\n         :text \" \"\n         :delim\n          (copy tb/delimwhitespace\n           :pos 0))\n        (tb/textblock\n         :text \"3\")))))\n  (empty argmap)))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (repl\n  :type +\n  :repllist\n   (repllist\n    (repl :value 2)\n    (repl :value 3)))\n (repl<-textblock-argmap\n  (tb/textblock\n   :text \"(+ 2 3)\"\n   :children\n    (tb/textblocklist\n     (tb/textblock\n      :text \"(+ 2 3)\"\n      :delim\n       (copy delimvxlispparen\n        :delimlist\n         (empty delimlist))\n      :children\n       (tb/textblocklist\n        (tb/textblock\n         :text \"+\")\n        (tb/textblock\n         :text \" \"\n         :delim\n          (copy tb/delimwhitespace\n           :pos 0))\n        (tb/textblock\n         :text \"2\")\n        (tb/textblock\n         :text \" \"\n         :delim\n          (copy tb/delimwhitespace\n           :pos 0))\n        (tb/textblock\n         :text \"3\")))))\n  (empty argmap)))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/repl"),
       vx_core::vx_new_string(":testresult"), testresult_4
     });

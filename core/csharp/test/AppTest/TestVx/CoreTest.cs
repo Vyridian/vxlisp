@@ -115,7 +115,12 @@ public class CoreTest {
                 Vx.Core.t_int,
                 Vx.Core.t_any_from_func.vx_fn_new(() => {
                   Vx.Core.Func_plus funcvar =   Vx.Core.t_plus;
-                  Vx.Core.Type_any output_1 = Vx.Core.vx_any_from_func(Vx.Core.t_int, funcvar, Vx.Core.vx_new_int(2), Vx.Core.vx_new_int(3));
+                  Vx.Core.Type_any output_1 = Vx.Core.vx_any_from_func(
+                    Vx.Core.t_int,
+                    funcvar,
+                    Vx.Core.vx_new_int(2),
+                    Vx.Core.vx_new_int(3)
+                  );
                   return output_1;
                 })
               )
@@ -141,7 +146,9 @@ public class CoreTest {
           ":testresult",
             Vx.Test.f_test_true(
               context,
-              Vx.Core.f_is_int(Vx.Core.vx_new_int(4))
+              Vx.Core.f_is_int(
+                Vx.Core.vx_new_int(4)
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -150,7 +157,9 @@ public class CoreTest {
           ":testresult",
             Vx.Test.f_test_true(
               context,
-              Vx.Core.f_is_int(Vx.Core.vx_new_string("4"))
+              Vx.Core.f_is_int(
+                Vx.Core.vx_new_string("4")
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -192,7 +201,9 @@ public class CoreTest {
           ":testresult",
             Vx.Test.f_test_false(
               context,
-              Vx.Core.f_is_int(Vx.Core.vx_new_string("a"))
+              Vx.Core.f_is_int(
+                Vx.Core.vx_new_string("a")
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -201,7 +212,9 @@ public class CoreTest {
           ":testresult",
             Vx.Test.f_test_false(
               context,
-              Vx.Core.f_is_int(Vx.Core.t_decimal.vx_new_from_string("5.5"))
+              Vx.Core.f_is_int(
+                Vx.Core.t_decimal.vx_new_from_string("5.5")
+              )
             )
         )
       )
@@ -359,7 +372,11 @@ public class CoreTest {
           Vx.Test.t_testdescribe,
           ":describename", "(test-ne \"a\" \"b\")",
           ":testresult",
-            Vx.Test.f_test_ne(context, Vx.Core.vx_new_string("a"), Vx.Core.vx_new_string("b"))
+            Vx.Test.f_test_ne(
+              context,
+              Vx.Core.vx_new_string("a"),
+              Vx.Core.vx_new_string("b")
+            )
         )
       )
     );
@@ -382,7 +399,10 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_int(6),
-              Vx.Core.f_multiply(Vx.Core.vx_new_int(3), Vx.Core.vx_new_int(2))
+              Vx.Core.f_multiply(
+                Vx.Core.vx_new_int(3),
+                Vx.Core.vx_new_int(2)
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -392,7 +412,10 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_int(-10),
-              Vx.Core.f_multiply(Vx.Core.vx_new_int(5), Vx.Core.vx_new_int(-2))
+              Vx.Core.f_multiply(
+                Vx.Core.vx_new_int(5),
+                Vx.Core.vx_new_int(-2)
+              )
             )
         )
       )
@@ -416,7 +439,10 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.t_decimal.vx_new_from_string("6.4"),
-              Vx.Core.f_multiply_1(Vx.Core.t_decimal.vx_new_from_string("3.2"), Vx.Core.vx_new_int(2))
+              Vx.Core.f_multiply_1(
+                Vx.Core.t_decimal.vx_new_from_string("3.2"),
+                Vx.Core.vx_new_int(2)
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -426,7 +452,10 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.t_decimal.vx_new_from_string("-10.2"),
-              Vx.Core.f_multiply_1(Vx.Core.t_decimal.vx_new_from_string("5.1"), Vx.Core.vx_new_int(-2))
+              Vx.Core.f_multiply_1(
+                Vx.Core.t_decimal.vx_new_from_string("5.1"),
+                Vx.Core.vx_new_int(-2)
+              )
             )
         )
       )
@@ -546,7 +575,10 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_int(5),
-              Vx.Core.f_plus(Vx.Core.vx_new_int(2), Vx.Core.vx_new_int(3))
+              Vx.Core.f_plus(
+                Vx.Core.vx_new_int(2),
+                Vx.Core.vx_new_int(3)
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -556,7 +588,10 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_int(3),
-              Vx.Core.f_plus(Vx.Core.vx_new_int(5), Vx.Core.vx_new_int(-2))
+              Vx.Core.f_plus(
+                Vx.Core.vx_new_int(5),
+                Vx.Core.vx_new_int(-2)
+              )
             )
         )
       )
@@ -580,7 +615,10 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_int(5),
-              Vx.Core.f_plus(Vx.Core.vx_new_int(2), Vx.Core.vx_new_int(3))
+              Vx.Core.f_plus(
+                Vx.Core.vx_new_int(2),
+                Vx.Core.vx_new_int(3)
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -590,7 +628,10 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_int(3),
-              Vx.Core.f_plus(Vx.Core.vx_new_int(5), Vx.Core.vx_new_int(-2))
+              Vx.Core.f_plus(
+                Vx.Core.vx_new_int(5),
+                Vx.Core.vx_new_int(-2)
+              )
             )
         )
       )
@@ -614,7 +655,9 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_int(3),
-              Vx.Core.f_plus1(Vx.Core.vx_new_int(2))
+              Vx.Core.f_plus1(
+                Vx.Core.vx_new_int(2)
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -624,7 +667,9 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_int(-1),
-              Vx.Core.f_plus1(Vx.Core.vx_new_int(-2))
+              Vx.Core.f_plus1(
+                Vx.Core.vx_new_int(-2)
+              )
             )
         )
       )
@@ -648,7 +693,10 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_int(1),
-              Vx.Core.f_minus(Vx.Core.vx_new_int(3), Vx.Core.vx_new_int(2))
+              Vx.Core.f_minus(
+                Vx.Core.vx_new_int(3),
+                Vx.Core.vx_new_int(2)
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -658,7 +706,10 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_int(7),
-              Vx.Core.f_minus(Vx.Core.vx_new_int(5), Vx.Core.vx_new_int(-2))
+              Vx.Core.f_minus(
+                Vx.Core.vx_new_int(5),
+                Vx.Core.vx_new_int(-2)
+              )
             )
         )
       )
@@ -682,7 +733,10 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_int(5),
-              Vx.Core.f_plus(Vx.Core.vx_new_int(2), Vx.Core.vx_new_int(3))
+              Vx.Core.f_plus(
+                Vx.Core.vx_new_int(2),
+                Vx.Core.vx_new_int(3)
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -692,7 +746,10 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_int(3),
-              Vx.Core.f_plus(Vx.Core.vx_new_int(5), Vx.Core.vx_new_int(-2))
+              Vx.Core.f_plus(
+                Vx.Core.vx_new_int(5),
+                Vx.Core.vx_new_int(-2)
+              )
             )
         )
       )
@@ -716,7 +773,9 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_int(1),
-              Vx.Core.f_minus1(Vx.Core.vx_new_int(2))
+              Vx.Core.f_minus1(
+                Vx.Core.vx_new_int(2)
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -726,7 +785,9 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_int(-3),
-              Vx.Core.f_minus1(Vx.Core.vx_new_int(-2))
+              Vx.Core.f_minus1(
+                Vx.Core.vx_new_int(-2)
+              )
             )
         )
       )
@@ -750,7 +811,10 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_int(3),
-              Vx.Core.f_divide(Vx.Core.vx_new_int(6), Vx.Core.vx_new_int(2))
+              Vx.Core.f_divide(
+                Vx.Core.vx_new_int(6),
+                Vx.Core.vx_new_int(2)
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -760,7 +824,10 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_int(-5),
-              Vx.Core.f_divide(Vx.Core.vx_new_int(10), Vx.Core.vx_new_int(-2))
+              Vx.Core.f_divide(
+                Vx.Core.vx_new_int(10),
+                Vx.Core.vx_new_int(-2)
+              )
             )
         )
       )
@@ -783,7 +850,10 @@ public class CoreTest {
           ":testresult",
             Vx.Test.f_test_true(
               context,
-              Vx.Core.f_lt(Vx.Core.vx_new_int(2), Vx.Core.vx_new_int(3))
+              Vx.Core.f_lt(
+                Vx.Core.vx_new_int(2),
+                Vx.Core.vx_new_int(3)
+              )
             )
         )
       )
@@ -806,7 +876,10 @@ public class CoreTest {
           ":testresult",
             Vx.Test.f_test_true(
               context,
-              Vx.Core.f_lt(Vx.Core.vx_new_int(2), Vx.Core.vx_new_int(3))
+              Vx.Core.f_lt(
+                Vx.Core.vx_new_int(2),
+                Vx.Core.vx_new_int(3)
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -847,14 +920,20 @@ public class CoreTest {
               context,
               Vx.Core.f_multiply(
                 Vx.Core.f_plus(
-                  Vx.Core.f_minus(Vx.Core.vx_new_int(5), Vx.Core.vx_new_int(3)),
+                  Vx.Core.f_minus(
+                    Vx.Core.vx_new_int(5),
+                    Vx.Core.vx_new_int(3)
+                  ),
                   Vx.Core.vx_new_int(3)
                 ),
                 Vx.Core.vx_new_int(2)
               ),
               Vx.Core.f_multiply(
                 Vx.Core.f_plus(
-                  Vx.Core.f_minus(Vx.Core.vx_new_int(5), Vx.Core.vx_new_int(3)),
+                  Vx.Core.f_minus(
+                    Vx.Core.vx_new_int(5),
+                    Vx.Core.vx_new_int(3)
+                  ),
                   Vx.Core.vx_new_int(3)
                 ),
                 Vx.Core.vx_new_int(2)
@@ -883,7 +962,10 @@ public class CoreTest {
               context,
               Vx.Core.f_multiply(
                 Vx.Core.f_plus(
-                  Vx.Core.f_minus(Vx.Core.vx_new_int(3), Vx.Core.vx_new_int(5)),
+                  Vx.Core.f_minus(
+                    Vx.Core.vx_new_int(3),
+                    Vx.Core.vx_new_int(5)
+                  ),
                   Vx.Core.vx_new_int(3)
                 ),
                 Vx.Core.vx_new_int(2)
@@ -892,7 +974,10 @@ public class CoreTest {
                 Vx.Core.vx_new_int(2),
                 Vx.Core.f_plus(
                   Vx.Core.vx_new_int(3),
-                  Vx.Core.f_minus(Vx.Core.vx_new_int(3), Vx.Core.vx_new_int(5))
+                  Vx.Core.f_minus(
+                    Vx.Core.vx_new_int(3),
+                    Vx.Core.vx_new_int(5)
+                  )
                 )
               )
             )
@@ -917,7 +1002,10 @@ public class CoreTest {
           ":testresult",
             Vx.Test.f_test_true(
               context,
-              Vx.Core.f_le(Vx.Core.vx_new_int(2), Vx.Core.vx_new_int(3))
+              Vx.Core.f_le(
+                Vx.Core.vx_new_int(2),
+                Vx.Core.vx_new_int(3)
+              )
             )
         )
       )
@@ -982,7 +1070,10 @@ public class CoreTest {
           ":testresult",
             Vx.Test.f_test_true(
               context,
-              Vx.Core.f_eq(Vx.Core.vx_new_int(2), Vx.Core.vx_new_int(2))
+              Vx.Core.f_eq(
+                Vx.Core.vx_new_int(2),
+                Vx.Core.vx_new_int(2)
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -991,7 +1082,10 @@ public class CoreTest {
           ":testresult",
             Vx.Test.f_test_true(
               context,
-              Vx.Core.f_eq(Vx.Core.vx_new_string("a"), Vx.Core.vx_new_string("a"))
+              Vx.Core.f_eq(
+                Vx.Core.vx_new_string("a"),
+                Vx.Core.vx_new_string("a")
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -1102,7 +1196,10 @@ public class CoreTest {
           ":testresult",
             Vx.Test.f_test_true(
               context,
-              Vx.Core.f_eqeq(Vx.Core.vx_new_int(0), Vx.Core.vx_new_int(0))
+              Vx.Core.f_eqeq(
+                Vx.Core.vx_new_int(0),
+                Vx.Core.vx_new_int(0)
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -1111,7 +1208,10 @@ public class CoreTest {
           ":testresult",
             Vx.Test.f_test_true(
               context,
-              Vx.Core.f_eqeq(Vx.Core.vx_new_string(""), Vx.Core.vx_new_string(""))
+              Vx.Core.f_eqeq(
+                Vx.Core.vx_new_string(""),
+                Vx.Core.vx_new_string("")
+              )
             )
         )
       )
@@ -1134,7 +1234,10 @@ public class CoreTest {
           ":testresult",
             Vx.Test.f_test_true(
               context,
-              Vx.Core.f_gt(Vx.Core.vx_new_int(3), Vx.Core.vx_new_int(2))
+              Vx.Core.f_gt(
+                Vx.Core.vx_new_int(3),
+                Vx.Core.vx_new_int(2)
+              )
             )
         )
       )
@@ -1187,7 +1290,10 @@ public class CoreTest {
           ":testresult",
             Vx.Test.f_test_true(
               context,
-              Vx.Core.f_ge(Vx.Core.vx_new_int(3), Vx.Core.vx_new_int(2))
+              Vx.Core.f_ge(
+                Vx.Core.vx_new_int(3),
+                Vx.Core.vx_new_int(2)
+              )
             )
         )
       )
@@ -1398,8 +1504,10 @@ public class CoreTest {
                 Vx.Core.t_any_from_reduce.vx_fn_new((total_any, num_any) => {
                   Vx.Core.Type_int total = Vx.Core.f_any_from_any(Vx.Core.t_int, total_any);
                   Vx.Core.Type_int num = Vx.Core.f_any_from_any(Vx.Core.t_int, num_any);
-                  Vx.Core.Type_any output_1 = 
-                    Vx.Core.f_multiply(total, num);
+                  Vx.Core.Type_any output_1 = Vx.Core.f_multiply(
+                    total,
+                    num
+                  );
                   return output_1;
                 })
               )
@@ -1482,15 +1590,14 @@ public class CoreTest {
                   Vx.Core.Type_string current = Vx.Core.f_any_from_any(Vx.Core.t_string, current_any);
                   Vx.Core.Type_string key = Vx.Core.f_any_from_any(Vx.Core.t_string, key_any);
                   Vx.Core.Type_any value = Vx.Core.f_any_from_any(Vx.Core.t_any, value_any);
-                  Vx.Core.Type_any output_1 = 
-                    Vx.Core.f_copy(
-                      current,
-                      Vx.Core.vx_new(
-                        Vx.Core.t_anylist,
-                        value,
-                        key
-                      )
-                    );
+                  Vx.Core.Type_any output_1 = Vx.Core.f_copy(
+                    current,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
+                      value,
+                      key
+                    )
+                  );
                   return output_1;
                 })
               )
@@ -1537,7 +1644,11 @@ public class CoreTest {
                       Vx.Core.vx_new_string("y")
                     )
                   );
-                  Vx.Core.Type_boolean iswrite = Vx.Core.f_boolean_write_from_map_name_value(smap, Vx.Core.vx_new_string(":a"), Vx.Core.vx_new_string("x"));
+                  Vx.Core.Type_boolean iswrite = Vx.Core.f_boolean_write_from_map_name_value(
+                    smap,
+                    Vx.Core.vx_new_string(":a"),
+                    Vx.Core.vx_new_string("x")
+                  );
                   Vx.Core.Type_any output_1 = smap;
                   return output_1;
                 })
@@ -1571,7 +1682,11 @@ public class CoreTest {
                       Vx.Core.vx_new_string("x")
                     )
                   );
-                  Vx.Core.Type_boolean iswrite = Vx.Core.f_boolean_write_from_map_name_value(smap, Vx.Core.vx_new_string(":b"), Vx.Core.vx_new_string(""));
+                  Vx.Core.Type_boolean iswrite = Vx.Core.f_boolean_write_from_map_name_value(
+                    smap,
+                    Vx.Core.vx_new_string(":b"),
+                    Vx.Core.vx_new_string("")
+                  );
                   Vx.Core.Type_any output_2 = smap;
                   return output_2;
                 })
@@ -1599,7 +1714,10 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_int(1),
-              Vx.Core.f_compare(Vx.Core.vx_new_int(3), Vx.Core.vx_new_int(2))
+              Vx.Core.f_compare(
+                Vx.Core.vx_new_int(3),
+                Vx.Core.vx_new_int(2)
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -1609,7 +1727,10 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_int(1),
-              Vx.Core.f_compare(Vx.Core.vx_new_string("z"), Vx.Core.vx_new_string("a"))
+              Vx.Core.f_compare(
+                Vx.Core.vx_new_string("z"),
+                Vx.Core.vx_new_string("a")
+              )
             )
         )
       )
@@ -1632,7 +1753,10 @@ public class CoreTest {
           ":testresult",
             Vx.Test.f_test_true(
               context,
-              Vx.Core.f_contains(Vx.Core.vx_new_string("abcde"), Vx.Core.vx_new_string("cd"))
+              Vx.Core.f_contains(
+                Vx.Core.vx_new_string("abcde"),
+                Vx.Core.vx_new_string("cd")
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -1641,7 +1765,10 @@ public class CoreTest {
           ":testresult",
             Vx.Test.f_test_false(
               context,
-              Vx.Core.f_contains(Vx.Core.vx_new_string("abcde"), Vx.Core.vx_new_string("dc"))
+              Vx.Core.f_contains(
+                Vx.Core.vx_new_string("abcde"),
+                Vx.Core.vx_new_string("dc")
+              )
             )
         )
       )
@@ -1928,7 +2055,9 @@ public class CoreTest {
                   Vx.Core.t_decimal.vx_new_from_string("2.3")
                 )
               ),
-              Vx.Core.f_float_from_string(Vx.Core.vx_new_string("2.3"))
+              Vx.Core.f_float_from_string(
+                Vx.Core.vx_new_string("2.3")
+              )
             )
         )
       )
@@ -1954,7 +2083,10 @@ public class CoreTest {
               Vx.Core.vx_new_string("a"),
               Vx.Core.f_if(
                 Vx.Core.t_string,
-                Vx.Core.f_eq(Vx.Core.vx_new_int(2), Vx.Core.vx_new_int(2)),
+                Vx.Core.f_eq(
+                  Vx.Core.vx_new_int(2),
+                  Vx.Core.vx_new_int(2)
+                ),
                 Vx.Core.vx_new_string("a")
               )
             )
@@ -1968,7 +2100,10 @@ public class CoreTest {
               Vx.Core.vx_new_string(""),
               Vx.Core.f_if(
                 Vx.Core.t_string,
-                Vx.Core.f_eq(Vx.Core.vx_new_int(1), Vx.Core.vx_new_int(2)),
+                Vx.Core.f_eq(
+                  Vx.Core.vx_new_int(1),
+                  Vx.Core.vx_new_int(2)
+                ),
                 Vx.Core.vx_new_string("a")
               )
             )
@@ -1996,7 +2131,10 @@ public class CoreTest {
               Vx.Core.vx_new_string("a"),
               Vx.Core.f_if_1(
                 Vx.Core.t_string,
-                Vx.Core.f_eq(Vx.Core.vx_new_int(2), Vx.Core.vx_new_int(2)),
+                Vx.Core.f_eq(
+                  Vx.Core.vx_new_int(2),
+                  Vx.Core.vx_new_int(2)
+                ),
                 Vx.Core.vx_new_string("a"),
                 Vx.Core.vx_new_string("b")
               )
@@ -2011,7 +2149,10 @@ public class CoreTest {
               Vx.Core.vx_new_string("b"),
               Vx.Core.f_if_1(
                 Vx.Core.t_string,
-                Vx.Core.f_eq(Vx.Core.vx_new_int(1), Vx.Core.vx_new_int(2)),
+                Vx.Core.f_eq(
+                  Vx.Core.vx_new_int(1),
+                  Vx.Core.vx_new_int(2)
+                ),
                 Vx.Core.vx_new_string("a"),
                 Vx.Core.vx_new_string("b")
               )
@@ -2043,25 +2184,36 @@ public class CoreTest {
                   Vx.Core.t_thenelselist,
                   Vx.Core.f_then(
                     Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                      return Vx.Core.f_eq(Vx.Core.vx_new_int(2), Vx.Core.vx_new_int(3));
+                      Vx.Core.Type_any output_1 = Vx.Core.f_eq(
+                        Vx.Core.vx_new_int(2),
+                        Vx.Core.vx_new_int(3)
+                      );
+                      return output_1;
                     }),
                     Vx.Core.t_any_from_func.vx_fn_new(() => {
-                      return Vx.Core.vx_new_boolean(false);
+                      Vx.Core.Type_any output_2 = Vx.Core.vx_new_boolean(false);
+                      return output_2;
                     })
                   ),
                   Vx.Core.f_then(
                     Vx.Core.t_boolean_from_func.vx_fn_new(() => {
-                      return Vx.Core.f_ne(Vx.Core.vx_new_int(3), Vx.Core.vx_new_int(3));
+                      Vx.Core.Type_any output_3 = Vx.Core.f_ne(
+                        Vx.Core.vx_new_int(3),
+                        Vx.Core.vx_new_int(3)
+                      );
+                      return output_3;
                     }),
                     Vx.Core.t_any_from_func.vx_fn_new(() => {
-                      return Vx.Core.vx_new_boolean(false);
+                      Vx.Core.Type_any output_4 = Vx.Core.vx_new_boolean(false);
+                      return output_4;
                     })
                   ),
                   Vx.Core.f_else(
                     Vx.Core.t_any_from_func.vx_fn_new(() => {
-                      return Vx.Core.f_not(
+                      Vx.Core.Type_any output_5 = Vx.Core.f_not(
                         Vx.Core.vx_new_boolean(false)
                       );
+                      return output_5;
                     })
                   )
                 )
@@ -2089,7 +2241,9 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_int(4),
-              Vx.Core.f_int_from_string(Vx.Core.vx_new_string("4"))
+              Vx.Core.f_int_from_string(
+                Vx.Core.vx_new_string("4")
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -2099,7 +2253,9 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_int(5),
-              Vx.Core.f_int_from_string(Vx.Core.vx_new_string("5.4"))
+              Vx.Core.f_int_from_string(
+                Vx.Core.vx_new_string("5.4")
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -2109,7 +2265,9 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_int(5),
-              Vx.Core.f_int_from_string(Vx.Core.vx_new_string("5.9"))
+              Vx.Core.f_int_from_string(
+                Vx.Core.vx_new_string("5.9")
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -2119,7 +2277,9 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.c_notanumber,
-              Vx.Core.f_int_from_string(Vx.Core.vx_new_string("notanumber"))
+              Vx.Core.f_int_from_string(
+                Vx.Core.vx_new_string("notanumber")
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -2129,7 +2289,9 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.c_infinity,
-              Vx.Core.f_int_from_string(Vx.Core.vx_new_string("infinity"))
+              Vx.Core.f_int_from_string(
+                Vx.Core.vx_new_string("infinity")
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -2139,7 +2301,9 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.c_neginfinity,
-              Vx.Core.f_int_from_string(Vx.Core.vx_new_string("neginfinity"))
+              Vx.Core.f_int_from_string(
+                Vx.Core.vx_new_string("neginfinity")
+              )
             )
         )
       )
@@ -2173,7 +2337,9 @@ public class CoreTest {
           ":testresult",
             Vx.Test.f_test_true(
               context,
-              Vx.Core.f_is_empty(Vx.Core.vx_new_string(""))
+              Vx.Core.f_is_empty(
+                Vx.Core.vx_new_string("")
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -2222,7 +2388,9 @@ public class CoreTest {
           ":testresult",
             Vx.Test.f_test_true(
               context,
-              Vx.Core.f_is_int(Vx.Core.vx_new_int(2))
+              Vx.Core.f_is_int(
+                Vx.Core.vx_new_int(2)
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -2231,7 +2399,9 @@ public class CoreTest {
           ":testresult",
             Vx.Test.f_test_true(
               context,
-              Vx.Core.f_is_int(Vx.Core.vx_new_string("2"))
+              Vx.Core.f_is_int(
+                Vx.Core.vx_new_string("2")
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -2251,7 +2421,9 @@ public class CoreTest {
           ":testresult",
             Vx.Test.f_test_true(
               context,
-              Vx.Core.f_is_int(Vx.Core.vx_new_string("infinity"))
+              Vx.Core.f_is_int(
+                Vx.Core.vx_new_string("infinity")
+              )
             )
         )
       )
@@ -2274,7 +2446,9 @@ public class CoreTest {
           ":testresult",
             Vx.Test.f_test_true(
               context,
-              Vx.Core.f_is_number(Vx.Core.vx_new_int(5))
+              Vx.Core.f_is_number(
+                Vx.Core.vx_new_int(5)
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -2283,7 +2457,9 @@ public class CoreTest {
           ":testresult",
             Vx.Test.f_test_true(
               context,
-              Vx.Core.f_is_number(Vx.Core.t_decimal.vx_new_from_string("5.5"))
+              Vx.Core.f_is_number(
+                Vx.Core.t_decimal.vx_new_from_string("5.5")
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -2292,7 +2468,9 @@ public class CoreTest {
           ":testresult",
             Vx.Test.f_test_false(
               context,
-              Vx.Core.f_is_number(Vx.Core.vx_new_string("a"))
+              Vx.Core.f_is_number(
+                Vx.Core.vx_new_string("a")
+              )
             )
         )
       )
@@ -2350,7 +2528,9 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_int(4),
-              Vx.Core.f_length(Vx.Core.vx_new_string("abcd"))
+              Vx.Core.f_length(
+                Vx.Core.vx_new_string("abcd")
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -2360,7 +2540,9 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_int(0),
-              Vx.Core.f_length(Vx.Core.vx_new_string(""))
+              Vx.Core.f_length(
+                Vx.Core.vx_new_string("")
+              )
             )
         )
       )
@@ -2422,8 +2604,14 @@ public class CoreTest {
                 Vx.Core.t_int,
                 Vx.Core.t_any_from_func.vx_fn_new(() => {
                   Vx.Core.Type_int v1 = Vx.Core.vx_new_int(2);
-                  Vx.Core.Type_int v2 = Vx.Core.f_plus(v1, Vx.Core.vx_new_int(3));
-                  Vx.Core.Type_any output_1 = Vx.Core.f_plus(v1, v2);
+                  Vx.Core.Type_int v2 = Vx.Core.f_plus(
+                    v1,
+                    Vx.Core.vx_new_int(3)
+                  );
+                  Vx.Core.Type_any output_1 = Vx.Core.f_plus(
+                    v1,
+                    v2
+                  );
                   return output_1;
                 })
               )
@@ -2630,15 +2818,14 @@ public class CoreTest {
                 Vx.Core.t_any_from_int_any.vx_fn_new((index_any, value_any) => {
                   Vx.Core.Type_int index = Vx.Core.f_any_from_any(Vx.Core.t_int, index_any);
                   Vx.Core.Type_string value = Vx.Core.f_any_from_any(Vx.Core.t_string, value_any);
-                  Vx.Core.Type_any output_1 = 
-                    Vx.Core.f_new(
-                      Vx.Core.t_string,
-                      Vx.Core.vx_new(
-                        Vx.Core.t_anylist,
-                        value,
-                        index
-                      )
-                    );
+                  Vx.Core.Type_any output_1 = Vx.Core.f_new(
+                    Vx.Core.t_string,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
+                      value,
+                      index
+                    )
+                  );
                   return output_1;
                 })
               )
@@ -2703,7 +2890,7 @@ public class CoreTest {
         Vx.Test.t_testdescribelist,
         Vx.Core.vx_new(
           Vx.Test.t_testdescribe,
-          ":describename", "(test\n (stringlist \"a1\" \"b2\")\n (list<-map : stringlist\n  (stringmap \"a\" \"1\" \"b\" \"2\")\n  (fn : string\n   [key : string\n    val : string]\n   (string key val))))",
+          ":describename", "(test\n (stringlist \"a1\" \"b2\")\n (list<-map : stringlist\n  (stringmap \"a\" \"1\" \"b\" \"2\")\n  (fn : string\n   [key   : string\n    value : string]\n   (string key value))))",
           ":testresult",
             Vx.Test.f_test(
               context,
@@ -2727,18 +2914,17 @@ public class CoreTest {
                     Vx.Core.vx_new_string("2")
                   )
                 ),
-                Vx.Core.t_any_from_key_value.vx_fn_new((key_any, val_any) => {
+                Vx.Core.t_any_from_key_value.vx_fn_new((key_any, value_any) => {
                   Vx.Core.Type_string key = Vx.Core.f_any_from_any(Vx.Core.t_string, key_any);
-                  Vx.Core.Type_string val = Vx.Core.f_any_from_any(Vx.Core.t_string, val_any);
-                  Vx.Core.Type_any output_1 = 
-                    Vx.Core.f_new(
-                      Vx.Core.t_string,
-                      Vx.Core.vx_new(
-                        Vx.Core.t_anylist,
-                        key,
-                        val
-                      )
-                    );
+                  Vx.Core.Type_string value = Vx.Core.f_any_from_any(Vx.Core.t_string, value_any);
+                  Vx.Core.Type_any output_1 = Vx.Core.f_new(
+                    Vx.Core.t_string,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
+                      key,
+                      value
+                    )
+                  );
                   return output_1;
                 })
               )
@@ -2760,7 +2946,7 @@ public class CoreTest {
         Vx.Test.t_testdescribelist,
         Vx.Core.vx_new(
           Vx.Test.t_testdescribe,
-          ":describename", "(test\n (stringmap\n  \"keya\" \"a\"\n  \"keyb\" \"b\")\n (map<-list : stringmap\n  (stringlist \"a\" \"b\")\n  (fn : string\n   [val : string]\n   (string \"key\" val))))",
+          ":describename", "(test\n (stringmap\n  \"keya\" \"a\"\n  \"keyb\" \"b\")\n (map<-list : stringmap\n  (stringlist \"a\" \"b\")\n  (fn : string\n   [value : string]\n   (string \"key\" value))))",
           ":testresult",
             Vx.Test.f_test(
               context,
@@ -2784,17 +2970,16 @@ public class CoreTest {
                     Vx.Core.vx_new_string("b")
                   )
                 ),
-                Vx.Core.t_any_from_any.vx_fn_new((val_any) => {
-                  Vx.Core.Type_string val = Vx.Core.f_any_from_any(Vx.Core.t_string, val_any);
-                  Vx.Core.Type_any output_1 = 
-                    Vx.Core.f_new(
-                      Vx.Core.t_string,
-                      Vx.Core.vx_new(
-                        Vx.Core.t_anylist,
-                        Vx.Core.vx_new_string("key"),
-                        val
-                      )
-                    );
+                Vx.Core.t_any_from_any.vx_fn_new((value_any) => {
+                  Vx.Core.Type_string value = Vx.Core.f_any_from_any(Vx.Core.t_string, value_any);
+                  Vx.Core.Type_any output_1 = Vx.Core.f_new(
+                    Vx.Core.t_string,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
+                      Vx.Core.vx_new_string("key"),
+                      value
+                    )
+                  );
                   return output_1;
                 })
               )
@@ -2857,7 +3042,7 @@ public class CoreTest {
         Vx.Test.t_testdescribelist,
         Vx.Core.vx_new(
           Vx.Test.t_testdescribe,
-          ":describename", "(test\n (stringmap\n  :a \"a1\"\n  :b \"b2\")\n (map<-map : stringmap\n  (stringmap\n   :a \"1\"\n   :b \"2\")\n  (fn : string\n   [key : string\n    val : string]\n   (string key val))))",
+          ":describename", "(test\n (stringmap\n  :a \"a1\"\n  :b \"b2\")\n (map<-map : stringmap\n  (stringmap\n   :a \"1\"\n   :b \"2\")\n  (fn : string\n   [key : string\n    value : string]\n   (string key value))))",
           ":testresult",
             Vx.Test.f_test(
               context,
@@ -2883,18 +3068,17 @@ public class CoreTest {
                     Vx.Core.vx_new_string("2")
                   )
                 ),
-                Vx.Core.t_any_from_key_value.vx_fn_new((key_any, val_any) => {
+                Vx.Core.t_any_from_key_value.vx_fn_new((key_any, value_any) => {
                   Vx.Core.Type_string key = Vx.Core.f_any_from_any(Vx.Core.t_string, key_any);
-                  Vx.Core.Type_string val = Vx.Core.f_any_from_any(Vx.Core.t_string, val_any);
-                  Vx.Core.Type_any output_1 = 
-                    Vx.Core.f_new(
-                      Vx.Core.t_string,
-                      Vx.Core.vx_new(
-                        Vx.Core.t_anylist,
-                        key,
-                        val
-                      )
-                    );
+                  Vx.Core.Type_string value = Vx.Core.f_any_from_any(Vx.Core.t_string, value_any);
+                  Vx.Core.Type_any output_1 = Vx.Core.f_new(
+                    Vx.Core.t_string,
+                    Vx.Core.vx_new(
+                      Vx.Core.t_anylist,
+                      key,
+                      value
+                    )
+                  );
                   return output_1;
                 })
               )
@@ -3149,7 +3333,10 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_string("a"),
-              Vx.Core.f_resolve(Vx.Core.t_string, Vx.Core.vx_new_string("a"))
+              Vx.Core.f_resolve(
+                Vx.Core.t_string,
+                Vx.Core.vx_new_string("a")
+              )
             )
         )
       )
@@ -3176,9 +3363,10 @@ public class CoreTest {
               Vx.Core.f_resolve_1(
                 Vx.Core.t_int,
                 Vx.Core.t_any_from_func.vx_fn_new(() => {
-                  
-                  Vx.Core.Type_any output_1 = 
-                    Vx.Core.f_plus(Vx.Core.vx_new_int(1), Vx.Core.vx_new_int(3));
+                  Vx.Core.Type_any output_1 = Vx.Core.f_plus(
+                    Vx.Core.vx_new_int(1),
+                    Vx.Core.vx_new_int(3)
+                  );
                   return output_1;
                 })
               )
@@ -3208,9 +3396,10 @@ public class CoreTest {
               Vx.Core.f_resolve_1(
                 Vx.Core.t_int,
                 Vx.Core.t_any_from_func.vx_fn_new(() => {
-                  
-                  Vx.Core.Type_any output_1 = 
-                    Vx.Core.f_plus(Vx.Core.vx_new_int(1), Vx.Core.vx_new_int(3));
+                  Vx.Core.Type_any output_1 = Vx.Core.f_plus(
+                    Vx.Core.vx_new_int(1),
+                    Vx.Core.vx_new_int(3)
+                  );
                   return output_1;
                 })
               )
@@ -3237,7 +3426,10 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_string("abab"),
-              Vx.Core.f_string_repeat(Vx.Core.vx_new_string("ab"), Vx.Core.vx_new_int(2))
+              Vx.Core.f_string_repeat(
+                Vx.Core.vx_new_string("ab"),
+                Vx.Core.vx_new_int(2)
+              )
             )
         )
       )
@@ -3273,7 +3465,9 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_string("4"),
-              Vx.Core.f_string_from_any(Vx.Core.vx_new_int(4))
+              Vx.Core.f_string_from_any(
+                Vx.Core.vx_new_int(4)
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -3283,7 +3477,9 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_string("5.4"),
-              Vx.Core.f_string_from_any(Vx.Core.t_decimal.vx_new_from_string("5.4"))
+              Vx.Core.f_string_from_any(
+                Vx.Core.t_decimal.vx_new_from_string("5.4")
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -3293,7 +3489,9 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_string("\"a\""),
-              Vx.Core.f_string_from_any(Vx.Core.vx_new_string("a"))
+              Vx.Core.f_string_from_any(
+                Vx.Core.vx_new_string("a")
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -3358,7 +3556,11 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_string("a!b!c"),
-              Vx.Core.f_string_from_string_find_replace(Vx.Core.vx_new_string("axybxyc"), Vx.Core.vx_new_string("xy"), Vx.Core.vx_new_string("!"))
+              Vx.Core.f_string_from_string_find_replace(
+                Vx.Core.vx_new_string("axybxyc"),
+                Vx.Core.vx_new_string("xy"),
+                Vx.Core.vx_new_string("!")
+              )
             )
         )
       )
@@ -3440,12 +3642,14 @@ public class CoreTest {
                       )
                     ),
                     Vx.Core.t_any_from_func.vx_fn_new(() => {
-                      return Vx.Core.vx_new_int(1);
+                      Vx.Core.Type_any output_1 = Vx.Core.vx_new_int(1);
+                      return output_1;
                     })
                   ),
                   Vx.Core.f_else(
                     Vx.Core.t_any_from_func.vx_fn_new(() => {
-                      return Vx.Core.vx_new_int(2);
+                      Vx.Core.Type_any output_2 = Vx.Core.vx_new_int(2);
+                      return output_2;
                     })
                   )
                 )
@@ -3485,7 +3689,9 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.t_int,
-              Vx.Core.f_type_from_any(Vx.Core.vx_new_int(5))
+              Vx.Core.f_type_from_any(
+                Vx.Core.vx_new_int(5)
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -3495,7 +3701,9 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.t_string,
-              Vx.Core.f_type_from_any(Vx.Core.vx_new_string("a"))
+              Vx.Core.f_type_from_any(
+                Vx.Core.vx_new_string("a")
+              )
             )
         )
       )
@@ -3531,7 +3739,9 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_string("vx/core/int"),
-              Vx.Core.f_typename_from_any(Vx.Core.vx_new_int(5))
+              Vx.Core.f_typename_from_any(
+                Vx.Core.vx_new_int(5)
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -3541,7 +3751,9 @@ public class CoreTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_string("vx/core/string"),
-              Vx.Core.f_typename_from_any(Vx.Core.vx_new_string("a"))
+              Vx.Core.f_typename_from_any(
+                Vx.Core.vx_new_string("a")
+              )
             )
         )
       )

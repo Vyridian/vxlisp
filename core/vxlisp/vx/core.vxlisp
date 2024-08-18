@@ -1067,13 +1067,13 @@
  :doc "Strict equality check. Note that all non-empty, non-constants will not be equal.")
 
 (func ! : boolean
- [val : boolean :doc "Thing to not"]
+ [value : boolean :doc "Thing to not"]
  (native
-  :cpp    "vx_core::vx_new_boolean(!val->vx_boolean());"
-  :csharp "Vx.Core.vx_new_boolean(!val.vx_boolean());"
-  :java   "Core.vx_new_boolean(!val.vx_boolean());"
-  :js     "!val"
-  :kotlin "vx_core.vx_new_boolean(!val.vx_boolean())")
+  :cpp    "vx_core::vx_new_boolean(!value->vx_boolean());"
+  :csharp "Vx.Core.vx_new_boolean(!value.vx_boolean());"
+  :java   "Core.vx_new_boolean(!value.vx_boolean());"
+  :js     "!value"
+  :kotlin "vx_core.vx_new_boolean(!value.vx_boolean())")
  :alias "not"
  :test (test-false false)
        (test-false (! true))
@@ -1102,10 +1102,10 @@
  :doc   "Returns true if text is not empty.")
 
 (func !-empty : boolean
- [val : any]
- (! (is-empty val))
+ [value : any]
+ (! (is-empty value))
  :alias "notempty"
- :doc "Returns true if val is not empty.")
+ :doc "Returns true if value is not empty.")
 
 (func < : boolean
  [val1 : any
@@ -1380,18 +1380,18 @@
  :doc "Generic Function returning Generic any-1 with any parameters")
 
 (func any<-int-any : any-1
- [num : int
-  val : any-2]
+ [num   : int
+  value : any-2]
  :doc "Generic Function returning Generic any-1 from an int and a value")
 
 (func any<-key-value : any-1
- [key : string
-  val : any-2]
+ [key   : string
+  value : any-2]
  :doc "Generic Function returning Generic any-1 from a key and a value")
 
 (func any<-key-value-async : any-1
- [key : string
-  val : any-2]
+ [key   : string
+  value : any-2]
  :async
  :doc "Generic Function returning Asynchronous Generic any-1 from a key and a value")
 
@@ -1920,8 +1920,8 @@
  :doc "Returns the empty value for a given type. Can be called using (empty type) or simply (type)")
 
 (func extends<-any : string
- [val : any-1]
- (extends<-typedef (typedef<-any val)))
+ [value : any-1]
+ (extends<-typedef (typedef<-any value)))
 
 (func extends<-typedef : string
  [vtypedef : typedef]
@@ -2023,16 +2023,16 @@
  :doc "Shell for lambda function calls")
 
 (func funcdef<-func : funcdef
- [val : func]
+ [value : func]
  (native
   :cpp
-   "val->vx_funcdef();"
+   "value->vx_funcdef();"
   :csharp
-   "val.vx_funcdef();"
+   "value.vx_funcdef();"
   :java
-   "val.vx_funcdef();"
+   "value.vx_funcdef();"
   :kotlin
-   "val.vx_funcdef()")
+   "value.vx_funcdef()")
  :doc "Returns the definition of a function")
 
 (func funcname<-funcdef : string
@@ -2168,19 +2168,19 @@
  :doc "Function Type returning int with any parameters")
 
 (func int<-string : int
- [val : string]
+ [value : string]
  (switch : int
-  val
+  value
   (case "notanumber"  notanumber)
   (case "infinity"    infinity)
   (case "neginfinity" neginfinity)
   (else
    (native
     :cpp
-     "// :capture val
+     "// :capture value
       vx_core::Type_int intresult = vx_core::e_int;
       try {
-        std::string sval = val->vx_string();
+        std::string sval = value->vx_string();
         long ival = std::stoll(sval);
         intresult = vx_core::vx_new_int(ival);
       } catch (std::exception ex) {
@@ -2188,27 +2188,40 @@
       }
       return intresult;"
     :csharp
-     "int intresult = 0;
-      string strval = val.vx_string();
+     "Vx.Core.Type_int intresult = Vx.Core.e_int;
+      string strval = value.vx_string();
       try {
         float floatresult = float.Parse(strval);
-        intresult = (int)floatresult;
-        return Vx.Core.vx_new_int(intresult);
+        int iresult = (int)floatresult;
+        intresult = Vx.Core.vx_new_int(iresult);
       } catch (Exception) {
-        return Vx.Core.c_notanumber;
-      }"
+        intresult = Vx.Core.c_notanumber;
+      }
+      return intresult;"
     :java
-     "int intresult = 0;
-      String strval = val.vx_string();
+     "Core.Type_int intresult = Core.e_int;
+      String strval = value.vx_string();
       try {
         float floatresult = Float.parseFloat(strval);
-        intresult = (int)floatresult;
-        return Core.vx_new_int(intresult);
+        int iresult = (int)floatresult;
+        intresult = Core.vx_new_int(iresult);
       } catch (Exception ex) {
-        return Core.c_notanumber;
-      }"
+        intresult = Core.c_notanumber;
+      }
+      return intresult;"
     :js
-     "parseInt(val)"
+     "parseInt(value)"
+    :kotlin
+     "var intresult : vx_core.Type_int = vx_core.e_int
+      val strval : String = value.vx_string()
+      try {
+        val floatresult : float = float.Parse(strval)
+        val iresult : int = floatresult as int
+        intresult = vx_core.vx_new_int(iresult)
+      } catch (ex : Exception) {
+        intresult = vx_core.c_notanumber
+      }
+      return intresult"
     )
   )
  )
@@ -2318,33 +2331,33 @@
  :doc "Returns true if text ends with find.")
 
 (func is-func : boolean
- [val : any]
+ [value : any]
  (native
   :cpp
-   "vx_core::Type_string extend = " (extends<-any val) ";
+   "vx_core::Type_string extend = " (extends<-any value) ";
     std::string sextend = extend->vx_string();
     vx_core::vx_release(extend);
     if (sextend == “:func”) {
       output = vx_core::c_true;
     }"
   :csharp
-   "if (val is Vx.Core.Type_func) {
+   "if (value is Vx.Core.Type_func) {
       output = Vx.Core.c_true;
     }"
   :java
-   "if (val instanceof Core.Type_func) {
+   "if (value instanceof Core.Type_func) {
       output = Core.c_true;
     }"
   :js
-   "const extend = " (extends<-any val) "
+   "const extend = " (extends<-any value) "
     if (extend == ':func') {
       output = vx_core.c_true
     }"
   :kotlin
-   "if (val is vx_core.Type_func) {
+   "if (value is vx_core.Type_func) {
       output = vx_core.c_true
     }")
- :doc "Returns true if val is a function.")
+ :doc "Returns true if value is a function.")
 
 (func is-int : boolean
  [value : any]
@@ -2403,7 +2416,7 @@
  :test (test-true  (is-number 5))
        (test-true  (is-number 5.5))
        (test-false (is-number "a"))
- :doc "Return true if val is a number")
+ :doc "Return true if value is a number")
 
 (func is-pass<-permission : boolean
  [permission : permission]
@@ -2645,9 +2658,9 @@
         (list<-map : stringlist
          (stringmap "a" "1" "b" "2")
          (fn : string
-          [key : string
-           val : string]
-          (string key val))))
+          [key   : string
+           value : string]
+          (string key value))))
  :doc "Returns a list from a map by applying a function to each key value.")
 
 (func list<-map-async : list-1 :async
@@ -2805,8 +2818,8 @@
         (map<-list : stringmap
          (stringlist "a" "b")
          (fn : string
-          [val : string]
-          (string "key" val))))
+          [value : string]
+          (string "key" value))))
  :doc "Returns a map from a list by applying a function to generate a key for each value.")
 
 (func map<-map : map-1
@@ -2854,8 +2867,8 @@
           :b "2")
          (fn : string
           [key : string
-           val : string]
-          (string key val))))
+           value : string]
+          (string key value))))
  :doc "Returns a map from a map by applying a function to each key value.")
 
 (func msg<-error : msg
@@ -3263,11 +3276,11 @@
  :doc "Returns a stringlist of keys from any map in entry order.")
 
 (func switch : any-1
- [val          : any-2
+ [value        : any-2
   thenelselist : thenelselist :...]
  (native
   :cpp
-   "vx_core::Type_any any = vx_core::vx_switch(generic_any_1, val, thenelselist);
+   "vx_core::Type_any any = vx_core::vx_switch(generic_any_1, value, thenelselist);
     output = vx_core::vx_any_from_any(generic_any_1, any);"
   :csharp :auto
   :java
@@ -3277,15 +3290,15 @@
       Core.Type_string code = thenelse.code();
       switch (code.vx_string()) {
       case “:case”:
-        Core.Type_any value = thenelse.value();
-        Core.Type_boolean iseq = Core.f_eq(val, value);
+        Core.Type_any value2 = thenelse.value();
+        Core.Type_boolean iseq = Core.f_eq(value, value2);
         if (iseq.vx_boolean()) {
           fn_any = thenelse.fn_any();
         }
         break;
       case “:casemany”:
         Core.Type_list values = thenelse.values();
-        Core.Type_boolean iscontain = Core.f_contains_1(values, val);
+        Core.Type_boolean iscontain = Core.f_contains_1(values, value);
         if (iscontain.vx_boolean()) {
           fn_any = thenelse.fn_any();
         }
@@ -3309,19 +3322,19 @@
         const code = thenelse['code']
         switch (code) {
         case ':case':
-          const value = thenelse['value']
-          if (value == val) {
+          const value2 = thenelse['value']
+          if (value2 == value) {
             fn_any = thenelse['fn-any']
-          } else if (typeof value == 'number') {
+          } else if (typeof value2 == 'number') {
             // special handling of notanumber
-            if (isNaN(val) && isNaN(value)) {
+            if (isNaN(value) && isNaN(value2)) {
               fn_any = thenelse['fn-any']
             }
           }
           break
         case ':casemany':
           const values = thenelse['values']
-          if (values.includes(val)) {
+          if (values.includes(value)) {
             fn_any = thenelse['fn-any']
           }
           break
@@ -3425,21 +3438,23 @@
  :doc  "Gets the Type of a given Value")
 
 (func typedef<-any : typedef
- [val : any]
- (typedef<-type (type<-any val))
+ [value : any]
+ (typedef<-type (type<-any value))
  :doc  "Gets the typedef of a given value")
 
 (func typedef<-type : typedef
- [val : any]
+ [value : any]
  (native
   :cpp
-   "val->vx_typedef();"
+   "value->vx_typedef();"
   :csharp
-   "val.vx_typedef();"
+   "value.vx_typedef();"
   :java
-   "val.vx_typedef();"
+   "value.vx_typedef();"
   :js
-   "output = val")
+   "output = value"
+  :kotlin
+   "value.vx_typedef()")
  :doc  "Gets the typedef of a given type")
 
 (func typename<-any : string

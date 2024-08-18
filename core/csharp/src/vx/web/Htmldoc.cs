@@ -73,7 +73,8 @@ public static class Htmldoc {
     }
 
     public Vx.Core.Type_boolean vx_boolean_print_from_id_stylesheettext(Vx.Core.Type_string id, Vx.Core.Type_string stylesheettext) {
-      return Vx.Web.Htmldoc.f_boolean_print_from_id_stylesheettext(id, stylesheettext);
+      Vx.Core.Type_boolean output = Vx.Web.Htmldoc.f_boolean_print_from_id_stylesheettext(id, stylesheettext);
+      return output;
     }
 
   }
@@ -167,7 +168,8 @@ public static class Htmldoc {
     }
 
     public Vx.Core.Type_boolean vx_boolean_remove_from_id(Vx.Core.Type_string id) {
-      return Vx.Web.Htmldoc.f_boolean_remove_from_id(id);
+      Vx.Core.Type_boolean output = Vx.Web.Htmldoc.f_boolean_remove_from_id(id);
+      return output;
     }
 
   }
@@ -251,7 +253,8 @@ public static class Htmldoc {
     }
 
     public Vx.Core.Type_boolean vx_boolean_replace_from_id_htmltext(Vx.Core.Type_string id, Vx.Core.Type_string htmltext) {
-      return Vx.Web.Htmldoc.f_boolean_replace_from_id_htmltext(id, htmltext);
+      Vx.Core.Type_boolean output = Vx.Web.Htmldoc.f_boolean_replace_from_id_htmltext(id, htmltext);
+      return output;
     }
 
   }
@@ -337,7 +340,8 @@ public static class Htmldoc {
     }
 
     public Vx.Core.Type_boolean vx_boolean_replace_from_id_parent_htmltext(Vx.Core.Type_string id, Vx.Core.Type_string parent, Vx.Core.Type_string htmltext) {
-      return Vx.Web.Htmldoc.f_boolean_replace_from_id_parent_htmltext(id, parent, htmltext);
+      Vx.Core.Type_boolean output = Vx.Web.Htmldoc.f_boolean_replace_from_id_parent_htmltext(id, parent, htmltext);
+      return output;
     }
 
   }
@@ -433,7 +437,8 @@ public static class Htmldoc {
     }
 
     public Task<Vx.Core.Type_boolean> vx_boolean_write_stylesheet_from_string(Vx.Core.Type_string text) {
-      return Vx.Web.Htmldoc.f_boolean_write_stylesheet_from_string(text);
+      Task<Vx.Core.Type_boolean> output = Vx.Web.Htmldoc.f_boolean_write_stylesheet_from_string(text);
+      return output;
     }
 
   }
@@ -519,7 +524,8 @@ public static class Htmldoc {
     }
 
     public Vx.Core.Type_boolean vx_boolean_write_from_id_attribute_value(Vx.Core.Type_string id, Vx.Core.Type_string attribute, Vx.Core.Type_string value) {
-      return Vx.Web.Htmldoc.f_boolean_write_from_id_attribute_value(id, attribute, value);
+      Vx.Core.Type_boolean output = Vx.Web.Htmldoc.f_boolean_write_from_id_attribute_value(id, attribute, value);
+      return output;
     }
 
   }
@@ -603,7 +609,8 @@ public static class Htmldoc {
     }
 
     public Vx.Core.Type_boolean vx_boolean_write_from_id_htmltext(Vx.Core.Type_string id, Vx.Core.Type_string htmltext) {
-      return Vx.Web.Htmldoc.f_boolean_write_from_id_htmltext(id, htmltext);
+      Vx.Core.Type_boolean output = Vx.Web.Htmldoc.f_boolean_write_from_id_htmltext(id, htmltext);
+      return output;
     }
 
   }
@@ -687,7 +694,8 @@ public static class Htmldoc {
     }
 
     public Vx.Core.Type_boolean vx_boolean_write_from_id_visible(Vx.Core.Type_string id, Vx.Core.Type_boolean visible) {
-      return Vx.Web.Htmldoc.f_boolean_write_from_id_visible(id, visible);
+      Vx.Core.Type_boolean output = Vx.Web.Htmldoc.f_boolean_write_from_id_visible(id, visible);
+      return output;
     }
 
   }
@@ -783,7 +791,8 @@ public static class Htmldoc {
     }
 
     public Task<Vx.Core.Type_boolean> vx_boolean_write_from_stylesheet(Vx.Web.Html.Type_stylesheet stylesheet) {
-      return Vx.Web.Htmldoc.f_boolean_write_from_stylesheet(stylesheet);
+      Task<Vx.Core.Type_boolean> output = Vx.Web.Htmldoc.f_boolean_write_from_stylesheet(stylesheet);
+      return output;
     }
 
   }
@@ -796,8 +805,12 @@ public static class Htmldoc {
     output = Vx.Core.f_let_async(
       Vx.Core.t_boolean,
       Vx.Core.t_any_from_func_async.vx_fn_new(() => {
-        Vx.Core.Type_string text = Vx.Web.Htmldoc.f_string_from_stylesheet(stylesheet);
-        Task<Vx.Core.Type_boolean> future_iswrite = Vx.Web.Htmldoc.f_boolean_write_stylesheet_from_string(text);
+        Vx.Core.Type_string text = Vx.Web.Htmldoc.f_string_from_stylesheet(
+          stylesheet
+        );
+        Task<Vx.Core.Type_boolean> future_iswrite = Vx.Web.Htmldoc.f_boolean_write_stylesheet_from_string(
+          text
+        );
         Task<Vx.Core.Type_any> output_1 = Vx.Core.vx_async_from_async_fn(future_iswrite, (iswrite) => {
           Vx.Core.Type_any output_2 = iswrite;
           return output_2;
@@ -889,7 +902,8 @@ public static class Htmldoc {
     }
 
     public Vx.Core.Type_boolean vx_boolean_writeevents_from_ui(Vx.Ui.Ui.Type_ui ui) {
-      return Vx.Web.Htmldoc.f_boolean_writeevents_from_ui(ui);
+      Vx.Core.Type_boolean output = Vx.Web.Htmldoc.f_boolean_writeevents_from_ui(ui);
+      return output;
     }
 
   }
@@ -969,7 +983,8 @@ public static class Htmldoc {
     }
 
     public Vx.Core.Type_context vx_context_read() {
-      return Vx.Web.Htmldoc.f_context_read();
+      Vx.Core.Type_context output = Vx.Web.Htmldoc.f_context_read();
+      return output;
     }
 
   }
@@ -1050,7 +1065,8 @@ public static class Htmldoc {
     }
 
     public Vx.Core.Type_context vx_context_write(Vx.Core.Type_context context) {
-      return Vx.Web.Htmldoc.f_context_write(context);
+      Vx.Core.Type_context output = Vx.Web.Htmldoc.f_context_write(context);
+      return output;
     }
 
   }
@@ -1144,7 +1160,8 @@ public static class Htmldoc {
     }
 
     public Vx.Core.Type_string vx_string_from_id(Vx.Core.Type_string id) {
-      return Vx.Web.Htmldoc.f_string_from_id(id);
+      Vx.Core.Type_string output = Vx.Web.Htmldoc.f_string_from_id(id);
+      return output;
     }
 
   }
@@ -1238,7 +1255,8 @@ public static class Htmldoc {
     }
 
     public Vx.Core.Type_string vx_string_from_stylesheet(Vx.Web.Html.Type_stylesheet stylesheet) {
-      return Vx.Web.Htmldoc.f_string_from_stylesheet(stylesheet);
+      Vx.Core.Type_string output = Vx.Web.Htmldoc.f_string_from_stylesheet(stylesheet);
+      return output;
     }
 
   }
@@ -1251,8 +1269,13 @@ public static class Htmldoc {
     output = Vx.Core.f_let(
       Vx.Core.t_string,
       Vx.Core.t_any_from_func.vx_fn_new(() => {
-        Vx.Web.Html.Type_stylelist stylelist = Vx.Web.Html.f_styles_from_stylesheet(stylesheet);
-        Vx.Core.Type_string text = Vx.Web.Html.f_string_from_stylelist_indent(stylelist, Vx.Core.vx_new_int(0));
+        Vx.Web.Html.Type_stylelist stylelist = Vx.Web.Html.f_styles_from_stylesheet(
+          stylesheet
+        );
+        Vx.Core.Type_string text = Vx.Web.Html.f_string_from_stylelist_indent(
+          stylelist,
+          Vx.Core.vx_new_int(0)
+        );
         Vx.Core.Type_any output_1 = text;
         return output_1;
       })
@@ -1341,7 +1364,8 @@ public static class Htmldoc {
     }
 
     public Vx.Core.Type_any vx_ui_readstate_from_uid(Vx.Core.Type_string uid) {
-      return Vx.Web.Htmldoc.f_ui_readstate_from_uid(uid);
+      Vx.Core.Type_any output = Vx.Web.Htmldoc.f_ui_readstate_from_uid(uid);
+      return output;
     }
 
   }

@@ -9526,9 +9526,9 @@
  (list<-map : stringlist
   (stringmap "a" "1" "b" "2")
   (fn : string
-   [key : string
-    val : string]
-   (string key val))))`)))
+   [key   : string
+    value : string]
+   (string key value))))`)))
                             (td
                              :nodes
                               (divchildlist
@@ -9617,8 +9617,8 @@
  (map<-list : stringmap
   (stringlist "a" "b")
   (fn : string
-   [val : string]
-   (string "key" val))))`)))
+   [value : string]
+   (string "key" value))))`)))
                             (td
                              :nodes
                               (divchildlist
@@ -9793,8 +9793,8 @@
    :b "2")
   (fn : string
    [key : string
-    val : string]
-   (string key val))))`)))
+    value : string]
+   (string key value))))`)))
                             (td
                              :nodes
                               (divchildlist
@@ -31747,8 +31747,8 @@ ab
    :type string
    :repllist
     (repllist
-     (repl :val "Hello")
-     (repl :val "World")
+     (repl :value "Hello")
+     (repl :value "World")
     ))))`)))
                             (td
                              :nodes
@@ -31832,8 +31832,8 @@ ab
    :type +
    :repllist
     (repllist
-     (repl :val 2)
-     (repl :val 3)))))")))
+     (repl :value 2)
+     (repl :value 3)))))")))
                             (td
                              :nodes
                               (divchildlist
@@ -32147,7 +32147,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  `(test
- (repl :val 2)
+ (repl :value 2)
  (repl-empty<-textblock-argmap
   (tb/textblock
    :text "2")
@@ -32167,7 +32167,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  "(repl
- :val 2)")))
+ :value 2)")))
                             (td
                              :nodes
                               (divchildlist
@@ -32183,7 +32183,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  "(repl
- :val 2)")))))
+ :value 2)")))))
                          (tr
                           :nodes
                            (tdlist
@@ -32317,7 +32317,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  `(test
- (repl :val 2)
+ (repl :value 2)
  (repl-empty<-textblock-argmap
   (tb/textblock
    :text "1"
@@ -32341,7 +32341,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  "(repl
- :val 2)")))
+ :value 2)")))
                             (td
                              :nodes
                               (divchildlist
@@ -32357,7 +32357,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  "(repl
- :val 2)")))))
+ :value 2)")))))
                          (tr
                           :nodes
                            (tdlist
@@ -32513,9 +32513,9 @@ ab
   :repllist
    (repllist
     (repl
-     :val 2)
+     :value 2)
     (repl
-     :val 3)))
+     :value 3)))
  (repl-paren<-textblock-argmap
   (tb/textblock
    :text "(+ 2 3)"
@@ -32561,9 +32561,9 @@ ab
  :repllist
   (repllist
    (repl
-    :val 2)
+    :value 2)
    (repl
-    :val 3)))")))
+    :value 3)))")))
                             (td
                              :nodes
                               (divchildlist
@@ -32583,9 +32583,9 @@ ab
  :repllist
   (repllist
    (repl
-    :val 2)
+    :value 2)
    (repl
-    :val 3)))")))))
+    :value 3)))")))))
                          (tr
                           :nodes
                            (tdlist
@@ -32639,9 +32639,9 @@ ab
   :repllist
    (repllist
     (repl
-     :val 2)
+     :value 2)
     (repl
-     :val 3)))
+     :value 3)))
  (repl<-macro
   "(+ "
   (- 7 5)
@@ -32665,9 +32665,9 @@ ab
  :repllist
   (repllist
    (repl
-    :val 2)
+    :value 2)
    (repl
-    :val 3)))")))
+    :value 3)))")))
                             (td
                              :nodes
                               (divchildlist
@@ -32687,9 +32687,9 @@ ab
  :repllist
   (repllist
    (repl
-    :val 2)
+    :value 2)
    (repl
-    :val 3)))")))))
+    :value 3)))")))))
                          (tr
                           :nodes
                            (tdlist
@@ -32739,7 +32739,7 @@ ab
                                 :text
                                  `(test
  (repl
-  :val 2)
+  :value 2)
  (repl<-script
   "2"))`)))
                             (td
@@ -32757,7 +32757,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  "(repl
- :val 2)")))
+ :value 2)")))
                             (td
                              :nodes
                               (divchildlist
@@ -32773,7 +32773,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  "(repl
- :val 2)")))))
+ :value 2)")))))
                          (tr
                           :nodes
                            (tdlist
@@ -32823,7 +32823,7 @@ ab
                                 :text
                                  `(test
  (repl
-  :val infinity)
+  :value infinity)
  (repl<-script
   "infinity"))`)))
                             (td
@@ -32841,7 +32841,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  "(repl
- :val infinity)")))
+ :value infinity)")))
                             (td
                              :nodes
                               (divchildlist
@@ -32857,7 +32857,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  "(repl
- :val infinity)")))))
+ :value infinity)")))))
                          (tr
                           :nodes
                            (tdlist
@@ -32995,9 +32995,9 @@ ab
   :repllist
    (repllist
     (repl
-     :val 2)
+     :value 2)
     (repl
-     :val 3)))
+     :value 3)))
  (repl<-script
   "(+ 2 3)"))`)))
                             (td
@@ -33019,9 +33019,9 @@ ab
  :repllist
   (repllist
    (repl
-    :val 2)
+    :value 2)
    (repl
-    :val 3)))")))
+    :value 3)))")))
                             (td
                              :nodes
                               (divchildlist
@@ -33041,9 +33041,9 @@ ab
  :repllist
   (repllist
    (repl
-    :val 2)
+    :value 2)
    (repl
-    :val 3)))")))))
+    :value 3)))")))))
                          (tr
                           :nodes
                            (tdlist
@@ -33092,7 +33092,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  `(test
- (repl :val "Hello")
+ (repl :value "Hello")
  (repl<-string-argmap
   `"Hello"`
   (empty argmap)))`)))
@@ -33111,7 +33111,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  `(repl
- :val "Hello")`)))
+ :value "Hello")`)))
                             (td
                              :nodes
                               (divchildlist
@@ -33127,7 +33127,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  `(repl
- :val "Hello")`)))))
+ :value "Hello")`)))))
                          (tr
                           :nodes
                            (tdlist
@@ -33177,7 +33177,7 @@ ab
                                 :text
                                  `(test
  (repl
-  :val 2)
+  :value 2)
  (repl<-string-argmap
   "2"
   (empty argmap)))`)))
@@ -33196,7 +33196,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  "(repl
- :val 2)")))
+ :value 2)")))
                             (td
                              :nodes
                               (divchildlist
@@ -33212,7 +33212,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  "(repl
- :val 2)")))))
+ :value 2)")))))
                          (tr
                           :nodes
                            (tdlist
@@ -33261,7 +33261,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  `(test
- (repl :val 2.3)
+ (repl :value 2.3)
  (repl<-string-argmap
   "2.3"
   (empty argmap)))`)))
@@ -33280,7 +33280,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  "(repl
- :val 2.3)")))
+ :value 2.3)")))
                             (td
                              :nodes
                               (divchildlist
@@ -33296,7 +33296,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  "(repl
- :val 2.3)")))))
+ :value 2.3)")))))
                          (tr
                           :nodes
                            (tdlist
@@ -33346,7 +33346,7 @@ ab
                                 :text
                                  `(test
  (repl
-  :val infinity)
+  :value infinity)
  (repl<-string-argmap
   "infinity"
   (empty argmap)))`)))
@@ -33365,7 +33365,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  "(repl
- :val infinity)")))
+ :value infinity)")))
                             (td
                              :nodes
                               (divchildlist
@@ -33381,7 +33381,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  "(repl
- :val infinity)")))))
+ :value infinity)")))))
                          (tr
                           :nodes
                            (tdlist
@@ -33431,7 +33431,7 @@ ab
                                 :text
                                  `(test
  (repl
-  :val tb/delimcomma)
+  :value tb/delimcomma)
  (repl<-string-argmap
   "vx/data/textblock/delimcomma"
   (empty argmap)))`)))
@@ -33450,7 +33450,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  "(repl
- :val vx/data/textblock/delimcomma)")))
+ :value vx/data/textblock/delimcomma)")))
                             (td
                              :nodes
                               (divchildlist
@@ -33466,7 +33466,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  "(repl
- :val vx/data/textblock/delimcomma)")))))
+ :value vx/data/textblock/delimcomma)")))))
                          (tr
                           :nodes
                            (tdlist
@@ -33683,7 +33683,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  `(test
- (repl :val 2)
+ (repl :value 2)
  (repl<-textblock
   (tb/textblock
    :text "2")))`)))
@@ -33702,7 +33702,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  "(repl
- :val 2)")))
+ :value 2)")))
                             (td
                              :nodes
                               (divchildlist
@@ -33718,7 +33718,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  "(repl
- :val 2)")))))
+ :value 2)")))))
                          (tr
                           :nodes
                            (tdlist
@@ -33939,8 +33939,8 @@ ab
   :type +
   :repllist
    (repllist
-    (repl :val 2)
-    (repl :val 3)))
+    (repl :value 2)
+    (repl :value 3)))
  (repl<-textblock
   (tb/textblock
    :text "(+ 2 3)"
@@ -33985,9 +33985,9 @@ ab
  :repllist
   (repllist
    (repl
-    :val 2)
+    :value 2)
    (repl
-    :val 3)))")))
+    :value 3)))")))
                             (td
                              :nodes
                               (divchildlist
@@ -34007,9 +34007,9 @@ ab
  :repllist
   (repllist
    (repl
-    :val 2)
+    :value 2)
    (repl
-    :val 3)))")))))
+    :value 3)))")))))
                          (tr
                           :nodes
                            (tdlist
@@ -34062,8 +34062,8 @@ ab
   :type +
   :repllist
    (repllist
-    (repl :val 2)
-    (repl :val 3)))
+    (repl :value 2)
+    (repl :value 3)))
  (repl<-textblock
   (tb/textblock
    :text "(+ 2 3)"
@@ -34112,9 +34112,9 @@ ab
  :repllist
   (repllist
    (repl
-    :val 2)
+    :value 2)
    (repl
-    :val 3)))")))
+    :value 3)))")))
                             (td
                              :nodes
                               (divchildlist
@@ -34134,9 +34134,9 @@ ab
  :repllist
   (repllist
    (repl
-    :val 2)
+    :value 2)
    (repl
-    :val 3)))")))))
+    :value 3)))")))))
                          (tr
                           :nodes
                            (tdlist
@@ -34185,7 +34185,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  `(test
- (repl :val 2)
+ (repl :value 2)
  (repl<-textblock-argmap
   (tb/textblock
    :text "2")
@@ -34205,7 +34205,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  "(repl
- :val 2)")))
+ :value 2)")))
                             (td
                              :nodes
                               (divchildlist
@@ -34221,7 +34221,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  "(repl
- :val 2)")))))
+ :value 2)")))))
                          (tr
                           :nodes
                            (tdlist
@@ -34359,8 +34359,8 @@ ab
   :type +
   :repllist
    (repllist
-    (repl :val 2)
-    (repl :val 3)))
+    (repl :value 2)
+    (repl :value 3)))
  (repl<-textblock-argmap
   (tb/textblock
    :text "(+ 2 3)"
@@ -34406,9 +34406,9 @@ ab
  :repllist
   (repllist
    (repl
-    :val 2)
+    :value 2)
    (repl
-    :val 3)))")))
+    :value 3)))")))
                             (td
                              :nodes
                               (divchildlist
@@ -34428,9 +34428,9 @@ ab
  :repllist
   (repllist
    (repl
-    :val 2)
+    :value 2)
    (repl
-    :val 3)))")))))
+    :value 3)))")))))
                          (tr
                           :nodes
                            (tdlist
@@ -34483,8 +34483,8 @@ ab
   :type +
   :repllist
    (repllist
-    (repl :val 2)
-    (repl :val 3)))
+    (repl :value 2)
+    (repl :value 3)))
  (repl<-textblock-argmap
   (tb/textblock
    :text "(+ 2 3)"
@@ -34534,9 +34534,9 @@ ab
  :repllist
   (repllist
    (repl
-    :val 2)
+    :value 2)
    (repl
-    :val 3)))")))
+    :value 3)))")))
                             (td
                              :nodes
                               (divchildlist
@@ -34556,9 +34556,9 @@ ab
  :repllist
   (repllist
    (repl
-    :val 2)
+    :value 2)
    (repl
-    :val 3)))")))))
+    :value 3)))")))))
                          (tr
                           :nodes
                            (tdlist

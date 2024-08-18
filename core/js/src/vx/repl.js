@@ -136,8 +136,8 @@ export default class vx_repl {
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
         const repl = vx_repl.f_repl_from_macro(context, ...anylist)
-        const val = vx_repl.f_any_from_repl(context, repl)
-        return vx_core.f_any_from_any({"any-1": generic_any_1, "any-2": vx_core.t_any}, val)
+        const value = vx_repl.f_any_from_repl(context, repl)
+        return vx_core.f_any_from_any({"any-1": generic_any_1, "any-2": vx_core.t_any}, value)
       })
     )
     return output
@@ -163,15 +163,15 @@ export default class vx_repl {
       {"any-1": vx_core.t_any},
       [],
       vx_core.f_new(vx_core.t_any_from_func, () => {
-        const val = vx_core.f_any_from_struct({"any-1": vx_core.t_any, "struct-2": vx_repl.t_repl}, repl, ":val")
+        const value = vx_core.f_any_from_struct({"any-1": vx_core.t_any, "struct-2": vx_repl.t_repl}, repl, ":value")
         const repltype = vx_core.f_any_from_struct({"any-1": vx_core.t_any, "struct-2": vx_repl.t_repl}, repl, ":type")
         const repllist = vx_core.f_any_from_struct({"any-1": vx_repl.t_repllist, "struct-2": vx_repl.t_repl}, repl, ":repllist")
         const args = vx_repl.f_anylist_from_repllist(context, repllist)
         return vx_core.f_if_2(
           {"any-1": vx_core.t_any},
           vx_core.f_then(
-            vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_notempty_1(val)}),
-            vx_core.f_new(vx_core.t_any_from_func, () => {return val})
+            vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_notempty_1(value)}),
+            vx_core.f_new(vx_core.t_any_from_func, () => {return value})
           ),
           vx_core.f_then(
             vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_is_func(repltype)}),
@@ -603,7 +603,7 @@ export default class vx_repl {
         )}),
         vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_new(
           vx_repl.t_repl,
-          ":val",
+          ":value",
           vx_type.f_string_from_string_start_end(text, 2, -1)
         )})
       ),
@@ -611,7 +611,7 @@ export default class vx_repl {
         vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_is_int(text)}),
         vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_new(
           vx_repl.t_repl,
-          ":val",
+          ":value",
           vx_core.f_int_from_string(text)
         )})
       ),
@@ -619,7 +619,7 @@ export default class vx_repl {
         vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_is_float(text)}),
         vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_new(
           vx_repl.t_repl,
-          ":val",
+          ":value",
           vx_core.f_float_from_string(text)
         )})
       ),
@@ -635,7 +635,7 @@ export default class vx_repl {
                 vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_notempty_1(arg)}),
                 vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_new(
                   vx_repl.t_repl,
-                  ":val",
+                  ":value",
                   arg
                 )})
               ),
@@ -651,7 +651,7 @@ export default class vx_repl {
                         vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_core.f_notempty_1(cnst)}),
                         vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_new(
                           vx_repl.t_repl,
-                          ":val",
+                          ":value",
                           cnst
                         )})
                       ),
@@ -1120,8 +1120,8 @@ export default class vx_repl {
           "type" : vx_core.t_boolean,
           "multi": false
         },
-        "val": {
-          "name" : "val",
+        "value": {
+          "name" : "value",
           "type" : vx_core.t_any,
           "multi": false
         },

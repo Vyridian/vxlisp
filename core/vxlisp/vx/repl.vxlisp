@@ -14,7 +14,7 @@
               type     : any
               repllist : repllist
               async    : boolean
-              val      : any
+              value    : any
               doc      : string]
  :doc "Repl structure")
 
@@ -79,12 +79,14 @@
 (func any<-macro : any-1
  [anylist : anylist :...]
  (let : any-1
-  [repl : repl := (repl<-macro
-                   anylist)
-   val  : any  := (any<-repl
-                   repl)]
+  [repl  : repl :=
+   (repl<-macro
+    anylist)
+   value : any :=
+    (any<-repl
+     repl)]
   (any<-any : any-1
-   val))
+   value))
  :context
  :test (test
         5
@@ -97,12 +99,12 @@
 (func any<-repl : any
  [repl : repl]
  (let : any
-  [val      : any      := (:val repl)
+  [value    : any      := (:value repl)
    repltype : any      := (:type repl)
    repllist : repllist := (:repllist repl)
    args     : anylist  := (anylist<-repllist repllist)]
   (if
-   (then (!-empty val) val)
+   (then (!-empty value) value)
    (then (is-func repltype)
     (any-repl<-functype-args
      repltype
@@ -117,8 +119,8 @@
           :type string
           :repllist
            (repllist
-            (repl :val "Hello")
-            (repl :val "World")
+            (repl :value "Hello")
+            (repl :value "World")
            ))))
        (test
         5
@@ -127,8 +129,8 @@
           :type +
           :repllist
            (repllist
-            (repl :val 2)
-            (repl :val 3)))))
+            (repl :value 2)
+            (repl :value 3)))))
  :doc "Run an arbitrary program in the REPL.")
 
 (func any<-script : any
@@ -336,9 +338,9 @@
          :repllist
           (repllist
            (repl
-            :val 2)
+            :value 2)
            (repl
-            :val 3)))
+            :value 3)))
         (repl<-macro
          "(+ "
          (- 7 5)
@@ -354,12 +356,12 @@
    textblock))
  :test (test
         (repl
-         :val 2)
+         :value 2)
         (repl<-script
          "2"))
        (test
         (repl
-         :val infinity)
+         :value infinity)
         (repl<-script
          "infinity"))
        (test
@@ -373,9 +375,9 @@
          :repllist
           (repllist
            (repl
-            :val 2)
+            :value 2)
            (repl
-            :val 3)))
+            :value 3)))
         (repl<-script
          "(+ 2 3)"))
  :doc "Returns a parsed repl from a string")
@@ -387,45 +389,45 @@
   (then // if starts and ends quote
    (and
     (type/boolean<-string-starts
-     text
-     quote)
+     text quote)
     (type/boolean<-string-ends
-     text
-     quote))
+     text quote))
    (repl
-    :val (type/string<-string-start-end
-          text
-          2
-          -1)))
+    :value
+     (type/string<-string-start-end
+      text 2 -1)))
   (then // then if is int
    (is-int text)
    (repl
-    :val (int<-string
-          text)))
+    :value
+     (int<-string
+      text)))
   (then // then if is float
    (is-float text)
    (repl
-    :val (float<-string
-          text)))
+    :value
+     (float<-string
+      text)))
   (else
    (let : repl
-    [arg : any := (any<-map
-                   argmap
-                   text)]
+    [arg : any :=
+     (any<-map
+      argmap text)]
     (if : repl
      (then // if in argmap
       (!-empty arg)
       (repl
-       :val arg))
+       :value arg))
      (else
       (let : repl
-       [cnst : any := (const<-string
-                       text)]
+       [cnst : any :=
+        (const<-string
+         text)]
        (if : repl
         (then
          (!-empty cnst)
          (repl
-          :val cnst))
+          :value cnst))
         (else
          (let : repl
           [typefunc : any := (typefunc<-string
@@ -441,30 +443,30 @@
               :repltypenotfound
               text)))))))))))))
  :test (test
-        (repl :val "Hello")
+        (repl :value "Hello")
         (repl<-string-argmap
          `"Hello"`
          (empty argmap)))
        (test
         (repl
-         :val 2)
+         :value 2)
         (repl<-string-argmap
          "2"
          (empty argmap)))
        (test
-        (repl :val 2.3)
+        (repl :value 2.3)
         (repl<-string-argmap
          "2.3"
          (empty argmap)))
        (test
         (repl
-         :val infinity)
+         :value infinity)
         (repl<-string-argmap
          "infinity"
          (empty argmap)))
        (test
         (repl
-         :val tb/delimcomma)
+         :value tb/delimcomma)
         (repl<-string-argmap
          "vx/data/textblock/delimcomma"
          (empty argmap)))
@@ -485,7 +487,7 @@
  (repl<-textblock-argmap
   textblock (empty argmap))
  :test (test
-        (repl :val 2)
+        (repl :value 2)
         (repl<-textblock
          (tb/textblock
           :text "2")))
@@ -504,8 +506,8 @@
          :type +
          :repllist
           (repllist
-           (repl :val 2)
-           (repl :val 3)))
+           (repl :value 2)
+           (repl :value 3)))
         (repl<-textblock
          (tb/textblock
           :text "(+ 2 3)"
@@ -536,8 +538,8 @@
          :type +
          :repllist
           (repllist
-           (repl :val 2)
-           (repl :val 3)))
+           (repl :value 2)
+           (repl :value 3)))
         (repl<-textblock
          (tb/textblock
           :text "(+ 2 3)"
@@ -590,7 +592,7 @@
      textblock
      argmap))))
  :test (test
-        (repl :val 2)
+        (repl :value 2)
         (repl<-textblock-argmap
          (tb/textblock
           :text "2")
@@ -606,8 +608,8 @@
          :type +
          :repllist
           (repllist
-           (repl :val 2)
-           (repl :val 3)))
+           (repl :value 2)
+           (repl :value 3)))
         (repl<-textblock-argmap
          (tb/textblock
           :text "(+ 2 3)"
@@ -639,8 +641,8 @@
          :type +
          :repllist
           (repllist
-           (repl :val 2)
-           (repl :val 3)))
+           (repl :value 2)
+           (repl :value 3)))
         (repl<-textblock-argmap
          (tb/textblock
           :text "(+ 2 3)"
@@ -708,12 +710,12 @@
          :repllist
           (repllist
            (repl
-            :val 2)
+            :value 2)
            (repl
-            :val 3)))
+            :value 3)))
         (repl-bracket<-textblock-argmap
          (tb/textblock
-          :text "[val : int := (+ 2 3)]"
+          :text "[value : int := (+ 2 3)]"
           :delim
            (copy delimvxlispbracket
             :delimlist
@@ -721,7 +723,7 @@
           :children
            (tb/textblocklist
             (tb/textblock
-             :text "val")
+             :text "value")
             (tb/textblock
              :text ":")
             (tb/textblock
@@ -775,7 +777,7 @@
      (msg<-error
       "Empty delim cannot have more than one child.")))))
  :test (test
-        (repl :val 2)
+        (repl :value 2)
         (repl-empty<-textblock-argmap
          (tb/textblock
           :text "2")
@@ -787,7 +789,7 @@
           :text "+")
          (empty argmap)))
        (test
-        (repl :val 2)
+        (repl :value 2)
         (repl-empty<-textblock-argmap
          (tb/textblock
           :text "1"
@@ -853,9 +855,9 @@
          :repllist
           (repllist
            (repl
-            :val 2)
+            :value 2)
            (repl
-            :val 3)))
+            :value 3)))
         (repl-paren<-textblock-argmap
          (tb/textblock
           :text "(+ 2 3)"
@@ -1011,12 +1013,12 @@
 (func any<-repl-async : any
  [repl : repl]
  (let-async : any
-  [val      : any      := (:val repl)
+  [value    : any      := (:value repl)
    repltype : any      := (:type repl)
    repllist : repllist := (:repllist repl)
    args     : anylist  := (anylist<-repllist repllist)]
   (if
-   (then (!-empty val) val)
+   (then (!-empty value) value)
    (then (is-func repltype)
     (any-repl<-functype-args
      repltype

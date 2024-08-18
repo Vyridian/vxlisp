@@ -339,6 +339,7 @@ public final class Sample {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       output = Sample.f_main();
@@ -347,7 +348,8 @@ public final class Sample {
 
     @Override
     public Core.Type_none vx_main() {
-      return Sample.f_main();
+      Core.Type_none output = Sample.f_main();
+      return output;
     }
 
   }
@@ -357,7 +359,9 @@ public final class Sample {
 
   public static Core.Type_none f_main() {
     Core.Type_none output = Core.e_none;
-    Sample.f_myfunc(Core.vx_new_int(2));
+    Sample.f_myfunc(
+      Core.vx_new_int(2)
+    );
     return output;
   }
 
@@ -442,6 +446,7 @@ public final class Sample {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_int myarg = Core.f_any_from_any(Core.t_int, arglist.vx_any(Core.vx_new_int(0)));
@@ -451,7 +456,8 @@ public final class Sample {
 
     @Override
     public Core.Type_int vx_myfunc(final Core.Type_int myarg) {
-      return Sample.f_myfunc(myarg);
+      Core.Type_int output = Sample.f_myfunc(myarg);
+      return output;
     }
 
   }

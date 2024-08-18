@@ -40,7 +40,7 @@ func LangTestApp(
 						"asynccontext",
 						contexttype,
 						1,
-						LangNameFFromFunc(lang, contextfunc)+"(arglist)") +
+						LangFuncF(lang, contextfunc)+"(arglist)") +
 					LangVarStatic(
 						lang,
 						"context",
@@ -54,7 +54,7 @@ func LangTestApp(
 						"context",
 						contexttype,
 						1,
-						LangNameFFromFunc(lang, contextfunc)+"(arglist)")
+						LangFuncF(lang, contextfunc)+"(arglist)")
 			}
 		}
 	}
@@ -75,7 +75,7 @@ func LangTestApp(
 		if iscontinue {
 			if pkg.name != "" {
 				imports += LangImportTest(lang, project, pkg.name, imports)
-				testpackage := "\n      " + testpackageprefix + LangNameFromPkgName(lang, pkg.name) + "Test.test_package(context)"
+				testpackage := "\n      " + testpackageprefix + LangPkgName(lang, pkg.name) + "Test.test_package(context)"
 				listtestpackage = append(listtestpackage, testpackage)
 				switch lang.name {
 				case "csharp":
@@ -84,7 +84,7 @@ func LangTestApp(
 						"\n  public void test_" + StringFromStringFindReplace(pkg.name, "/", "_") + "() {" +
 						LangVar(lang, "testpackage", testpackagetype, 2,
 							"Test"+
-								LangNameFromPkgName(lang, pkg.name)+
+								LangPkgName(lang, pkg.name)+
 								"Test.test_package(context)") +
 						"\n    TestLib.run_testpackage_async(testpackage)" + lang.lineend +
 						"\n  }" +
@@ -94,7 +94,7 @@ func LangTestApp(
 						"\n  @Test" +
 						"\n  @DisplayName(\"" + pkg.name + "\")" +
 						"\n  void test_" + StringFromStringFindReplace(pkg.name, "/", "_") + "() {" +
-						"\n    com.vxlisp.vx.Test.Type_testpackage testpackage = " + LangNameFromPkgName(lang, pkg.name) + "Test.test_package(context)" + lang.lineend +
+						"\n    com.vxlisp.vx.Test.Type_testpackage testpackage = " + LangPkgName(lang, pkg.name) + "Test.test_package(context)" + lang.lineend +
 						"\n    TestLib.run_testpackage_async(testpackage)" + lang.lineend +
 						"\n  }" +
 						"\n"

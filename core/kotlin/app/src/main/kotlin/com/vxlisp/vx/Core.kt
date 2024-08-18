@@ -378,8 +378,8 @@ object vx_core {
   // vx_int_from_string(string)
   fun vx_int_from_string(
     text : String
-  ) int {
-    var output : int = 0
+  ) Int {
+    var output : Int = 0
     try {
       output = Integer.parseInt(text)
     } catch (Exception e) {
@@ -391,7 +391,7 @@ object vx_core {
   fun vx_int_from_string_find(
     text : String,
     find : String
-  ) : int {
+  ) : Int {
     return text.indexOf(find)
   }
 
@@ -399,7 +399,7 @@ object vx_core {
   fun vx_int_from_string_findlast(
     text : String,
     findlast : String
-  ) : int {
+  ) : Int {
     return text.lastIndexOf(findlast)
   }
 
@@ -686,7 +686,7 @@ object vx_core {
       val vallist : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, value)
       val typedef : vx_core.Type_typedef = vallist.vx_typedef()
       val typedefname : vx_core.Type_string = typedef.name()
-      var indentint : int = indent
+      var indentint : Int = indent
       indentint += 1
       val listval : List<vx_core.Type_any> = vallist.vx_list()
       for (valsub : vx_core.Type_any in listval) {
@@ -702,7 +702,7 @@ object vx_core {
       val valmap : vx_core.Type_map = vx_core.f_any_from_any(vx_core.t_map, value)
       val typedef : vx_core.Type_typedef = valmap.vx_typedef()
       val typedefname : vx_core.Type_string = typedef.name()
-      var indentint : int = indent
+      var indentint : Int = indent
       indentint += 2
       val mapval : Map<String, vx_core.Type_any> = valmap.vx_map()
       val keys : Set<String> = mapval.keySet()
@@ -728,7 +728,7 @@ object vx_core {
       val valstruct : vx_core.Type_struct = vx_core.f_any_from_any(vx_core.t_struct, value)
       val typedef : vx_core.Type_typedef = valstruct.vx_typedef()
       val typedefname : vx_core.Type_string = typedef.name()
-      var indentint2 : int = indent
+      var indentint2 : Int = indent
       indentint2 += 2
       val mapval2 : Map<String, vx_core.Type_any> = valstruct.vx_map()
       val keys2 : Set<String> = mapval2.keySet()
@@ -772,7 +772,7 @@ object vx_core {
     end : int
   ) : String {
     var output : String = ""
-    maxlen : int = text.length()
+    maxlen : Int = text.length()
     if (end < 0) {
      end += maxlen
     }
@@ -998,14 +998,14 @@ object vx_core {
       ArrayList<vx_core.Func_any_from_any>()
     )
 
-    fun vx_list() : List<vx_core.Type_any> {
+    override fun vx_list() : List<vx_core.Type_any> {
       var output : List<vx_core.Type_any> = vx_core.immutablelist(
         ArrayList<vx_core.Type_any>(this.vx_p_list)
       )
       return output
     }
 
-    fun vx_any_from_any(index : vx_core.Type_int) : vx_core.Func_any_from_any {
+    override fun vx_any_from_any(index : vx_core.Type_int) : vx_core.Func_any_from_any {
       var output : vx_core.Func_any_from_any = vx_core.e_any_from_any
       var list : vx_core.Class_any_from_anylist = this
       var iindex : Integer = index.vx_int()
@@ -1016,12 +1016,12 @@ object vx_core {
       return output
     }
 
-    fun vx_listany_from_any() : List<vx_core.Func_any_from_any> {
+    override fun vx_listany_from_any() : List<vx_core.Func_any_from_any> {
       var output : List<vx_core.Func_any_from_any> = this.vx_p_list
       return output
     }
 
-    fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
+    override fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
       var output : vx_core.Func_any_from_any = this.vx_any_from_any(index)
       return output
     }
@@ -1039,7 +1039,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var listval : List<vx_core.Func_any_from_any> = ArrayList<vx_core.Func_any_from_any>(value.vx_listany_from_any())
+      var listval : MutableList<vx_core.Func_any_from_any> = ArrayList<vx_core.Func_any_from_any>(value.vx_listany_from_any())
       var msg : vx_core.Type_msg
       for (valsub : Any in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -1116,14 +1116,14 @@ object vx_core {
       ArrayList<vx_core.Type_any>()
     )
 
-    fun vx_list() : List<vx_core.Type_any> {
+    override fun vx_list() : List<vx_core.Type_any> {
       var output : List<vx_core.Type_any> = vx_core.immutablelist(
         ArrayList<vx_core.Type_any>(this.vx_p_list)
       )
       return output
     }
 
-    fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
+    override fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var list : vx_core.Class_anylist = this
       var iindex : Integer = index.vx_int()
@@ -1147,7 +1147,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var listval : List<vx_core.Type_any> = ArrayList<vx_core.Type_any>(value.vx_list())
+      var listval : MutableList<vx_core.Type_any> = ArrayList<vx_core.Type_any>(value.vx_list())
       var msg : vx_core.Type_msg
       for (valsub : Any in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -1222,20 +1222,20 @@ object vx_core {
 
     var vx_p_map : Map<String, vx_core.Type_any> = vx_core.immutablemap(LinkedHashMap<String, vx_core.Type_any>())
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
+    override fun vx_map() : Map<String, vx_core.Type_any> {
       return vx_core.immutablemap(map)
     }
 
-    fun vx_set(name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean {
+    override fun vx_set(name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean {
       var output : vx_core.Type_boolean = vx_core.c_false
       if (false) {
       } else if (value is vx_core.Type_any) {
         var castval : vx_core.Type_any = value as vx_core.Type_any
-        String key = name.vx_string()
+        var key : String = name.vx_string()
         if (key.startsWith(":")) {
           key = key.substring(1)
         }
-        var map : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>(this.vx_p_map)
+        var map : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>(this.vx_p_map)
         if (castval == vx_core.e_any) {
           map.remove(key)
         } else {
@@ -1247,7 +1247,7 @@ object vx_core {
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var map : vx_core.Class_anymap = this
       var skey : String = key.vx_string()
@@ -1256,13 +1256,13 @@ object vx_core {
       return output
     }
 
-    fun vx_new_from_map(mapval : Map<String, vx_core.Type_any>) : vx_core.Type_map {
+    override fun vx_new_from_map(mapval : Map<String, vx_core.Type_any>) : vx_core.Type_map {
       var output : vx_core.Class_anymap = vx_core.Class_anymap()
       var msgblock : vx_core.Type_msgblock = vx_core.e_msgblock
-      var map : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
-      Set<String> keys = mapval.keySet()
+      var map : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+      val keys : Set<String> = mapval.keys
       for (key : String in keys) {
-        var value : vx_core.Type_any = mapval.get(key)
+        var value : vx_core.Type_any = mapval.getOrElse(key){vx_core.e_any}
         if (false) {
         } else if (value is vx_core.Type_any) {
           var castval : vx_core.Type_any = value as vx_core.Type_any
@@ -1292,7 +1292,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var mapval : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>(value.vx_map())
+      var mapval : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>(value.vx_map())
       var msg : vx_core.Type_msg = null
       var key : String
       var msgval : vx_core.Type_any = null
@@ -1336,7 +1336,7 @@ object vx_core {
             } else {
               msgval = vx_core.vx_new_string(valsub.toString())
             }
-            var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+            var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
             mapany.put("key", vx_core.vx_new_string(key))
             mapany.put("value", msgval)
             var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -1469,7 +1469,7 @@ object vx_core {
 
     var vx_p_name : vx_core.Type_string = null
 
-    fun name() : vx_core.Type_string {
+    override fun name() : vx_core.Type_string {
       var output : vx_core.Type_string = vx_core.e_string
       if (this.vx_p_name != null) {
         output = this.vx_p_name
@@ -1479,7 +1479,7 @@ object vx_core {
 
     var vx_p_argtype : vx_core.Type_any = null
 
-    fun argtype() : vx_core.Type_any {
+    override fun argtype() : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       if (this.vx_p_argtype != null) {
         output = this.vx_p_argtype
@@ -1489,7 +1489,7 @@ object vx_core {
 
     var vx_p_fn_any : vx_core.Func_any_from_func = null
 
-    fun fn_any() : vx_core.Func_any_from_func {
+    override fun fn_any() : vx_core.Func_any_from_func {
       var output : vx_core.Func_any_from_func = vx_core.e_any_from_func
       if (this.vx_p_fn_any != null) {
         output = this.vx_p_fn_any
@@ -1499,7 +1499,7 @@ object vx_core {
 
     var vx_p_doc : vx_core.Type_string = null
 
-    fun doc() : vx_core.Type_string {
+    override fun doc() : vx_core.Type_string {
       var output : vx_core.Type_string = vx_core.e_string
       if (this.vx_p_doc != null) {
         output = this.vx_p_doc
@@ -1507,7 +1507,7 @@ object vx_core {
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       switch (skey) {
@@ -1527,8 +1527,8 @@ object vx_core {
       return output
     }
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
-      var output : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+    override fun vx_map() : Map<String, vx_core.Type_any> {
+      var output : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
       output.put(":name", this.name())
       output.put(":argtype", this.argtype())
       output.put(":fn-any", this.fn_any())
@@ -1622,7 +1622,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("name"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -1644,7 +1644,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("argtype"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -1666,7 +1666,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("fn-any"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -1691,7 +1691,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("doc"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -1766,14 +1766,14 @@ object vx_core {
       ArrayList<vx_core.Type_arg>()
     )
 
-    fun vx_list() : List<vx_core.Type_any> {
+    override fun vx_list() : List<vx_core.Type_any> {
       var output : List<vx_core.Type_any> = vx_core.immutablelist(
         ArrayList<vx_core.Type_any>(this.vx_p_list)
       )
       return output
     }
 
-    fun vx_arg(index : vx_core.Type_int) : vx_core.Type_arg {
+    override fun vx_arg(index : vx_core.Type_int) : vx_core.Type_arg {
       var output : vx_core.Type_arg = vx_core.e_arg
       var list : vx_core.Class_arglist = this
       var iindex : Integer = index.vx_int()
@@ -1784,12 +1784,12 @@ object vx_core {
       return output
     }
 
-    fun vx_listarg() : List<vx_core.Type_arg> {
+    override fun vx_listarg() : List<vx_core.Type_arg> {
       var output : List<vx_core.Type_arg> = this.vx_p_list
       return output
     }
 
-    fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
+    override fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
       var output : vx_core.Type_arg = this.vx_arg(index)
       return output
     }
@@ -1807,7 +1807,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var listval : List<vx_core.Type_arg> = ArrayList<vx_core.Type_arg>(value.vx_listarg())
+      var listval : MutableList<vx_core.Type_arg> = ArrayList<vx_core.Type_arg>(value.vx_listarg())
       var msg : vx_core.Type_msg
       for (valsub : Any in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -1887,20 +1887,20 @@ object vx_core {
 
     var vx_p_map : Map<String, vx_core.Type_arg> = vx_core.immutablemap(LinkedHashMap<String, vx_core.Type_arg>())
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
+    override fun vx_map() : Map<String, vx_core.Type_any> {
       return vx_core.immutablemap(map)
     }
 
-    fun vx_set(name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean {
+    override fun vx_set(name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean {
       var output : vx_core.Type_boolean = vx_core.c_false
       if (false) {
       } else if (value is vx_core.Type_arg) {
         var castval : vx_core.Type_arg = value as vx_core.Type_arg
-        String key = name.vx_string()
+        var key : String = name.vx_string()
         if (key.startsWith(":")) {
           key = key.substring(1)
         }
-        var map : Map<String, vx_core.Type_arg> = LinkedHashMap<String, vx_core.Type_arg>(this.vx_p_map)
+        var map : MutableMap<String, vx_core.Type_arg> = LinkedHashMap<String, vx_core.Type_arg>(this.vx_p_map)
         if (castval == vx_core.e_arg) {
           map.remove(key)
         } else {
@@ -1912,7 +1912,7 @@ object vx_core {
       return output
     }
 
-    fun vx_arg(key : vx_core.Type_string) : vx_core.Type_arg {
+    override fun vx_arg(key : vx_core.Type_string) : vx_core.Type_arg {
       var output : vx_core.Type_arg = vx_core.e_arg
       var map : vx_core.Class_argmap = this
       var skey : String = key.vx_string()
@@ -1921,24 +1921,24 @@ object vx_core {
       return output
     }
 
-    fun vx_maparg() : Map<String, vx_core.Type_arg> {
+    override fun vx_maparg() : Map<String, vx_core.Type_arg> {
       var output : Map<String, vx_core.Type_arg> = this.vx_p_map
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = this.vx_arg(key)
       return output
     }
 
 
-    fun vx_new_from_map(mapval : Map<String, vx_core.Type_any>) : vx_core.Type_map {
+    override fun vx_new_from_map(mapval : Map<String, vx_core.Type_any>) : vx_core.Type_map {
       var output : vx_core.Class_argmap = vx_core.Class_argmap()
       var msgblock : vx_core.Type_msgblock = vx_core.e_msgblock
-      var map : Map<String, vx_core.Type_arg> = LinkedHashMap<String, vx_core.Type_arg>()
-      Set<String> keys = mapval.keySet()
+      var map : MutableMap<String, vx_core.Type_arg> = LinkedHashMap<String, vx_core.Type_arg>()
+      val keys : Set<String> = mapval.keys
       for (key : String in keys) {
-        var value : vx_core.Type_any = mapval.get(key)
+        var value : vx_core.Type_any = mapval.getOrElse(key){vx_core.e_any}
         if (false) {
         } else if (value is vx_core.Type_arg) {
           var castval : vx_core.Type_arg = value as vx_core.Type_arg
@@ -1968,7 +1968,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var mapval : Map<String, vx_core.Type_arg> = LinkedHashMap<String, vx_core.Type_arg>(value.vx_maparg())
+      var mapval : MutableMap<String, vx_core.Type_arg> = LinkedHashMap<String, vx_core.Type_arg>(value.vx_maparg())
       var msg : vx_core.Type_msg = null
       var key : String
       var msgval : vx_core.Type_any = null
@@ -2012,7 +2012,7 @@ object vx_core {
             } else {
               msgval = vx_core.vx_new_string(valsub.toString())
             }
-            var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+            var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
             mapany.put("key", vx_core.vx_new_string(key))
             mapany.put("value", msgval)
             var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -2171,14 +2171,14 @@ object vx_core {
       ArrayList<vx_core.Type_boolean>()
     )
 
-    fun vx_list() : List<vx_core.Type_any> {
+    override fun vx_list() : List<vx_core.Type_any> {
       var output : List<vx_core.Type_any> = vx_core.immutablelist(
         ArrayList<vx_core.Type_any>(this.vx_p_list)
       )
       return output
     }
 
-    fun vx_boolean(index : vx_core.Type_int) : vx_core.Type_boolean {
+    override fun vx_boolean(index : vx_core.Type_int) : vx_core.Type_boolean {
       var output : vx_core.Type_boolean = vx_core.e_boolean
       var list : vx_core.Class_booleanlist = this
       var iindex : Integer = index.vx_int()
@@ -2189,12 +2189,12 @@ object vx_core {
       return output
     }
 
-    fun vx_listboolean() : List<vx_core.Type_boolean> {
+    override fun vx_listboolean() : List<vx_core.Type_boolean> {
       var output : List<vx_core.Type_boolean> = this.vx_p_list
       return output
     }
 
-    fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
+    override fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
       var output : vx_core.Type_boolean = this.vx_boolean(index)
       return output
     }
@@ -2212,7 +2212,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var listval : List<vx_core.Type_boolean> = ArrayList<vx_core.Type_boolean>(value.vx_listboolean())
+      var listval : MutableList<vx_core.Type_boolean> = ArrayList<vx_core.Type_boolean>(value.vx_listboolean())
       var msg : vx_core.Type_msg
       for (valsub : Any in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -2477,14 +2477,14 @@ object vx_core {
       ArrayList<vx_core.Type_connect>()
     )
 
-    fun vx_list() : List<vx_core.Type_any> {
+    override fun vx_list() : List<vx_core.Type_any> {
       var output : List<vx_core.Type_any> = vx_core.immutablelist(
         ArrayList<vx_core.Type_any>(this.vx_p_list)
       )
       return output
     }
 
-    fun vx_connect(index : vx_core.Type_int) : vx_core.Type_connect {
+    override fun vx_connect(index : vx_core.Type_int) : vx_core.Type_connect {
       var output : vx_core.Type_connect = vx_core.e_connect
       var list : vx_core.Class_connectlist = this
       var iindex : Integer = index.vx_int()
@@ -2495,12 +2495,12 @@ object vx_core {
       return output
     }
 
-    fun vx_listconnect() : List<vx_core.Type_connect> {
+    override fun vx_listconnect() : List<vx_core.Type_connect> {
       var output : List<vx_core.Type_connect> = this.vx_p_list
       return output
     }
 
-    fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
+    override fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
       var output : vx_core.Type_connect = this.vx_connect(index)
       return output
     }
@@ -2518,7 +2518,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var listval : List<vx_core.Type_connect> = ArrayList<vx_core.Type_connect>(value.vx_listconnect())
+      var listval : MutableList<vx_core.Type_connect> = ArrayList<vx_core.Type_connect>(value.vx_listconnect())
       var msg : vx_core.Type_msg
       for (valsub : Any in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -2598,20 +2598,20 @@ object vx_core {
 
     var vx_p_map : Map<String, vx_core.Type_connect> = vx_core.immutablemap(LinkedHashMap<String, vx_core.Type_connect>())
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
+    override fun vx_map() : Map<String, vx_core.Type_any> {
       return vx_core.immutablemap(map)
     }
 
-    fun vx_set(name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean {
+    override fun vx_set(name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean {
       var output : vx_core.Type_boolean = vx_core.c_false
       if (false) {
       } else if (value is vx_core.Type_connect) {
         var castval : vx_core.Type_connect = value as vx_core.Type_connect
-        String key = name.vx_string()
+        var key : String = name.vx_string()
         if (key.startsWith(":")) {
           key = key.substring(1)
         }
-        var map : Map<String, vx_core.Type_connect> = LinkedHashMap<String, vx_core.Type_connect>(this.vx_p_map)
+        var map : MutableMap<String, vx_core.Type_connect> = LinkedHashMap<String, vx_core.Type_connect>(this.vx_p_map)
         if (castval == vx_core.e_connect) {
           map.remove(key)
         } else {
@@ -2623,7 +2623,7 @@ object vx_core {
       return output
     }
 
-    fun vx_connect(key : vx_core.Type_string) : vx_core.Type_connect {
+    override fun vx_connect(key : vx_core.Type_string) : vx_core.Type_connect {
       var output : vx_core.Type_connect = vx_core.e_connect
       var map : vx_core.Class_connectmap = this
       var skey : String = key.vx_string()
@@ -2632,24 +2632,24 @@ object vx_core {
       return output
     }
 
-    fun vx_mapconnect() : Map<String, vx_core.Type_connect> {
+    override fun vx_mapconnect() : Map<String, vx_core.Type_connect> {
       var output : Map<String, vx_core.Type_connect> = this.vx_p_map
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = this.vx_connect(key)
       return output
     }
 
 
-    fun vx_new_from_map(mapval : Map<String, vx_core.Type_any>) : vx_core.Type_map {
+    override fun vx_new_from_map(mapval : Map<String, vx_core.Type_any>) : vx_core.Type_map {
       var output : vx_core.Class_connectmap = vx_core.Class_connectmap()
       var msgblock : vx_core.Type_msgblock = vx_core.e_msgblock
-      var map : Map<String, vx_core.Type_connect> = LinkedHashMap<String, vx_core.Type_connect>()
-      Set<String> keys = mapval.keySet()
+      var map : MutableMap<String, vx_core.Type_connect> = LinkedHashMap<String, vx_core.Type_connect>()
+      val keys : Set<String> = mapval.keys
       for (key : String in keys) {
-        var value : vx_core.Type_any = mapval.get(key)
+        var value : vx_core.Type_any = mapval.getOrElse(key){vx_core.e_any}
         if (false) {
         } else if (value is vx_core.Type_connect) {
           var castval : vx_core.Type_connect = value as vx_core.Type_connect
@@ -2679,7 +2679,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var mapval : Map<String, vx_core.Type_connect> = LinkedHashMap<String, vx_core.Type_connect>(value.vx_mapconnect())
+      var mapval : MutableMap<String, vx_core.Type_connect> = LinkedHashMap<String, vx_core.Type_connect>(value.vx_mapconnect())
       var msg : vx_core.Type_msg = null
       var key : String
       var msgval : vx_core.Type_any = null
@@ -2723,7 +2723,7 @@ object vx_core {
             } else {
               msgval = vx_core.vx_new_string(valsub.toString())
             }
-            var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+            var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
             mapany.put("key", vx_core.vx_new_string(key))
             mapany.put("value", msgval)
             var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -2855,7 +2855,7 @@ object vx_core {
 
     var vx_p_pkgname : vx_core.Type_string = null
 
-    fun pkgname() : vx_core.Type_string {
+    override fun pkgname() : vx_core.Type_string {
       var output : vx_core.Type_string = vx_core.e_string
       if (this.vx_p_pkgname != null) {
         output = this.vx_p_pkgname
@@ -2865,7 +2865,7 @@ object vx_core {
 
     var vx_p_name : vx_core.Type_string = null
 
-    fun name() : vx_core.Type_string {
+    override fun name() : vx_core.Type_string {
       var output : vx_core.Type_string = vx_core.e_string
       if (this.vx_p_name != null) {
         output = this.vx_p_name
@@ -2875,7 +2875,7 @@ object vx_core {
 
     var vx_p_type : vx_core.Type_any = null
 
-    fun type() : vx_core.Type_any {
+    override fun type() : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       if (this.vx_p_type != null) {
         output = this.vx_p_type
@@ -2883,7 +2883,7 @@ object vx_core {
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       switch (skey) {
@@ -2900,8 +2900,8 @@ object vx_core {
       return output
     }
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
-      var output : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+    override fun vx_map() : Map<String, vx_core.Type_any> {
+      var output : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
       output.put(":pkgname", this.pkgname())
       output.put(":name", this.name())
       output.put(":type", this.type())
@@ -2992,7 +2992,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("pkgname"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -3017,7 +3017,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("name"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -3039,7 +3039,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("type"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -3111,14 +3111,14 @@ object vx_core {
       ArrayList<vx_core.Type_any>()
     )
 
-    fun vx_list() : List<vx_core.Type_any> {
+    override fun vx_list() : List<vx_core.Type_any> {
       var output : List<vx_core.Type_any> = vx_core.immutablelist(
         ArrayList<vx_core.Type_any>(this.vx_p_list)
       )
       return output
     }
 
-    fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
+    override fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var list : vx_core.Class_constlist = this
       var iindex : Integer = index.vx_int()
@@ -3142,7 +3142,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var listval : List<vx_core.Type_any> = ArrayList<vx_core.Type_any>(value.vx_list())
+      var listval : MutableList<vx_core.Type_any> = ArrayList<vx_core.Type_any>(value.vx_list())
       var msg : vx_core.Type_msg
       for (valsub : Any in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -3217,20 +3217,20 @@ object vx_core {
 
     var vx_p_map : Map<String, vx_core.Type_any> = vx_core.immutablemap(LinkedHashMap<String, vx_core.Type_any>())
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
+    override fun vx_map() : Map<String, vx_core.Type_any> {
       return vx_core.immutablemap(map)
     }
 
-    fun vx_set(name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean {
+    override fun vx_set(name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean {
       var output : vx_core.Type_boolean = vx_core.c_false
       if (false) {
       } else if (value is vx_core.Type_any) {
         var castval : vx_core.Type_any = value as vx_core.Type_any
-        String key = name.vx_string()
+        var key : String = name.vx_string()
         if (key.startsWith(":")) {
           key = key.substring(1)
         }
-        var map : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>(this.vx_p_map)
+        var map : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>(this.vx_p_map)
         if (castval == vx_core.e_any) {
           map.remove(key)
         } else {
@@ -3242,7 +3242,7 @@ object vx_core {
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var map : vx_core.Class_constmap = this
       var skey : String = key.vx_string()
@@ -3251,13 +3251,13 @@ object vx_core {
       return output
     }
 
-    fun vx_new_from_map(mapval : Map<String, vx_core.Type_any>) : vx_core.Type_map {
+    override fun vx_new_from_map(mapval : Map<String, vx_core.Type_any>) : vx_core.Type_map {
       var output : vx_core.Class_constmap = vx_core.Class_constmap()
       var msgblock : vx_core.Type_msgblock = vx_core.e_msgblock
-      var map : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
-      Set<String> keys = mapval.keySet()
+      var map : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+      val keys : Set<String> = mapval.keys
       for (key : String in keys) {
-        var value : vx_core.Type_any = mapval.get(key)
+        var value : vx_core.Type_any = mapval.getOrElse(key){vx_core.e_any}
         if (false) {
         } else if (value is vx_core.Type_any) {
           var castval : vx_core.Type_any = value as vx_core.Type_any
@@ -3287,7 +3287,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var mapval : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>(value.vx_map())
+      var mapval : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>(value.vx_map())
       var msg : vx_core.Type_msg = null
       var key : String
       var msgval : vx_core.Type_any = null
@@ -3331,7 +3331,7 @@ object vx_core {
             } else {
               msgval = vx_core.vx_new_string(valsub.toString())
             }
-            var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+            var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
             mapany.put("key", vx_core.vx_new_string(key))
             mapany.put("value", msgval)
             var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -3403,7 +3403,7 @@ object vx_core {
 
     var vx_p_code : vx_core.Type_string = null
 
-    fun code() : vx_core.Type_string {
+    override fun code() : vx_core.Type_string {
       var output : vx_core.Type_string = vx_core.e_string
       if (this.vx_p_code != null) {
         output = this.vx_p_code
@@ -3413,7 +3413,7 @@ object vx_core {
 
     var vx_p_session : vx_core.Type_session = null
 
-    fun session() : vx_core.Type_session {
+    override fun session() : vx_core.Type_session {
       var output : vx_core.Type_session = vx_core.e_session
       if (this.vx_p_session != null) {
         output = this.vx_p_session
@@ -3423,7 +3423,7 @@ object vx_core {
 
     var vx_p_setting : vx_core.Type_setting = null
 
-    fun setting() : vx_core.Type_setting {
+    override fun setting() : vx_core.Type_setting {
       var output : vx_core.Type_setting = vx_core.e_setting
       if (this.vx_p_setting != null) {
         output = this.vx_p_setting
@@ -3433,7 +3433,7 @@ object vx_core {
 
     var vx_p_state : vx_core.Type_state = null
 
-    fun state() : vx_core.Type_state {
+    override fun state() : vx_core.Type_state {
       var output : vx_core.Type_state = vx_core.e_state
       if (this.vx_p_state != null) {
         output = this.vx_p_state
@@ -3441,7 +3441,7 @@ object vx_core {
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       switch (skey) {
@@ -3461,8 +3461,8 @@ object vx_core {
       return output
     }
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
-      var output : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+    override fun vx_map() : Map<String, vx_core.Type_any> {
+      var output : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
       output.put(":code", this.code())
       output.put(":session", this.session())
       output.put(":setting", this.setting())
@@ -3556,7 +3556,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("code"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -3578,7 +3578,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("session"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -3600,7 +3600,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("setting"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -3622,7 +3622,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("state"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -3998,7 +3998,7 @@ object vx_core {
   class Class_func : vx_core.Class_base, Type_func {
     constructor() {}
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.e_funcdef
       return output
     }
@@ -4071,7 +4071,7 @@ object vx_core {
 
     var vx_p_pkgname : vx_core.Type_string = null
 
-    fun pkgname() : vx_core.Type_string {
+    override fun pkgname() : vx_core.Type_string {
       var output : vx_core.Type_string = vx_core.e_string
       if (this.vx_p_pkgname != null) {
         output = this.vx_p_pkgname
@@ -4081,7 +4081,7 @@ object vx_core {
 
     var vx_p_name : vx_core.Type_string = null
 
-    fun name() : vx_core.Type_string {
+    override fun name() : vx_core.Type_string {
       var output : vx_core.Type_string = vx_core.e_string
       if (this.vx_p_name != null) {
         output = this.vx_p_name
@@ -4091,7 +4091,7 @@ object vx_core {
 
     var vx_p_idx : vx_core.Type_int = null
 
-    fun idx() : vx_core.Type_int {
+    override fun idx() : vx_core.Type_int {
       var output : vx_core.Type_int = vx_core.e_int
       if (this.vx_p_idx != null) {
         output = this.vx_p_idx
@@ -4101,7 +4101,7 @@ object vx_core {
 
     var vx_p_type : vx_core.Type_any = null
 
-    fun type() : vx_core.Type_any {
+    override fun type() : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       if (this.vx_p_type != null) {
         output = this.vx_p_type
@@ -4111,7 +4111,7 @@ object vx_core {
 
     var vx_p_async : vx_core.Type_boolean = null
 
-    fun async() : vx_core.Type_boolean {
+    override fun async() : vx_core.Type_boolean {
       var output : vx_core.Type_boolean = vx_core.e_boolean
       if (this.vx_p_async != null) {
         output = this.vx_p_async
@@ -4119,7 +4119,7 @@ object vx_core {
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       switch (skey) {
@@ -4142,8 +4142,8 @@ object vx_core {
       return output
     }
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
-      var output : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+    override fun vx_map() : Map<String, vx_core.Type_any> {
+      var output : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
       output.put(":pkgname", this.pkgname())
       output.put(":name", this.name())
       output.put(":idx", this.idx())
@@ -4240,7 +4240,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("pkgname"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -4265,7 +4265,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("name"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -4290,7 +4290,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("idx"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -4312,7 +4312,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("type"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -4337,7 +4337,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("async"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -4413,14 +4413,14 @@ object vx_core {
       ArrayList<vx_core.Type_func>()
     )
 
-    fun vx_list() : List<vx_core.Type_any> {
+    override fun vx_list() : List<vx_core.Type_any> {
       var output : List<vx_core.Type_any> = vx_core.immutablelist(
         ArrayList<vx_core.Type_any>(this.vx_p_list)
       )
       return output
     }
 
-    fun vx_func(index : vx_core.Type_int) : vx_core.Type_func {
+    override fun vx_func(index : vx_core.Type_int) : vx_core.Type_func {
       var output : vx_core.Type_func = vx_core.e_func
       var list : vx_core.Class_funclist = this
       var iindex : Integer = index.vx_int()
@@ -4431,12 +4431,12 @@ object vx_core {
       return output
     }
 
-    fun vx_listfunc() : List<vx_core.Type_func> {
+    override fun vx_listfunc() : List<vx_core.Type_func> {
       var output : List<vx_core.Type_func> = this.vx_p_list
       return output
     }
 
-    fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
+    override fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
       var output : vx_core.Type_func = this.vx_func(index)
       return output
     }
@@ -4454,7 +4454,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var listval : List<vx_core.Type_func> = ArrayList<vx_core.Type_func>(value.vx_listfunc())
+      var listval : MutableList<vx_core.Type_func> = ArrayList<vx_core.Type_func>(value.vx_listfunc())
       var msg : vx_core.Type_msg
       for (valsub : Any in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -4534,20 +4534,20 @@ object vx_core {
 
     var vx_p_map : Map<String, vx_core.Type_func> = vx_core.immutablemap(LinkedHashMap<String, vx_core.Type_func>())
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
+    override fun vx_map() : Map<String, vx_core.Type_any> {
       return vx_core.immutablemap(map)
     }
 
-    fun vx_set(name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean {
+    override fun vx_set(name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean {
       var output : vx_core.Type_boolean = vx_core.c_false
       if (false) {
       } else if (value is vx_core.Type_func) {
         var castval : vx_core.Type_func = value as vx_core.Type_func
-        String key = name.vx_string()
+        var key : String = name.vx_string()
         if (key.startsWith(":")) {
           key = key.substring(1)
         }
-        var map : Map<String, vx_core.Type_func> = LinkedHashMap<String, vx_core.Type_func>(this.vx_p_map)
+        var map : MutableMap<String, vx_core.Type_func> = LinkedHashMap<String, vx_core.Type_func>(this.vx_p_map)
         if (castval == vx_core.e_func) {
           map.remove(key)
         } else {
@@ -4559,7 +4559,7 @@ object vx_core {
       return output
     }
 
-    fun vx_func(key : vx_core.Type_string) : vx_core.Type_func {
+    override fun vx_func(key : vx_core.Type_string) : vx_core.Type_func {
       var output : vx_core.Type_func = vx_core.e_func
       var map : vx_core.Class_funcmap = this
       var skey : String = key.vx_string()
@@ -4568,24 +4568,24 @@ object vx_core {
       return output
     }
 
-    fun vx_mapfunc() : Map<String, vx_core.Type_func> {
+    override fun vx_mapfunc() : Map<String, vx_core.Type_func> {
       var output : Map<String, vx_core.Type_func> = this.vx_p_map
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = this.vx_func(key)
       return output
     }
 
 
-    fun vx_new_from_map(mapval : Map<String, vx_core.Type_any>) : vx_core.Type_map {
+    override fun vx_new_from_map(mapval : Map<String, vx_core.Type_any>) : vx_core.Type_map {
       var output : vx_core.Class_funcmap = vx_core.Class_funcmap()
       var msgblock : vx_core.Type_msgblock = vx_core.e_msgblock
-      var map : Map<String, vx_core.Type_func> = LinkedHashMap<String, vx_core.Type_func>()
-      Set<String> keys = mapval.keySet()
+      var map : MutableMap<String, vx_core.Type_func> = LinkedHashMap<String, vx_core.Type_func>()
+      val keys : Set<String> = mapval.keys
       for (key : String in keys) {
-        var value : vx_core.Type_any = mapval.get(key)
+        var value : vx_core.Type_any = mapval.getOrElse(key){vx_core.e_any}
         if (false) {
         } else if (value is vx_core.Type_func) {
           var castval : vx_core.Type_func = value as vx_core.Type_func
@@ -4615,7 +4615,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var mapval : Map<String, vx_core.Type_func> = LinkedHashMap<String, vx_core.Type_func>(value.vx_mapfunc())
+      var mapval : MutableMap<String, vx_core.Type_func> = LinkedHashMap<String, vx_core.Type_func>(value.vx_mapfunc())
       var msg : vx_core.Type_msg = null
       var key : String
       var msgval : vx_core.Type_any = null
@@ -4659,7 +4659,7 @@ object vx_core {
             } else {
               msgval = vx_core.vx_new_string(valsub.toString())
             }
-            var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+            var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
             mapany.put("key", vx_core.vx_new_string(key))
             mapany.put("value", msgval)
             var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -4821,14 +4821,14 @@ object vx_core {
       ArrayList<vx_core.Type_int>()
     )
 
-    fun vx_list() : List<vx_core.Type_any> {
+    override fun vx_list() : List<vx_core.Type_any> {
       var output : List<vx_core.Type_any> = vx_core.immutablelist(
         ArrayList<vx_core.Type_any>(this.vx_p_list)
       )
       return output
     }
 
-    fun vx_int(index : vx_core.Type_int) : vx_core.Type_int {
+    override fun vx_int(index : vx_core.Type_int) : vx_core.Type_int {
       var output : vx_core.Type_int = vx_core.e_int
       var list : vx_core.Class_intlist = this
       var iindex : Integer = index.vx_int()
@@ -4839,12 +4839,12 @@ object vx_core {
       return output
     }
 
-    fun vx_listint() : List<vx_core.Type_int> {
+    override fun vx_listint() : List<vx_core.Type_int> {
       var output : List<vx_core.Type_int> = this.vx_p_list
       return output
     }
 
-    fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
+    override fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
       var output : vx_core.Type_int = this.vx_int(index)
       return output
     }
@@ -4862,7 +4862,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var listval : List<vx_core.Type_int> = ArrayList<vx_core.Type_int>(value.vx_listint())
+      var listval : MutableList<vx_core.Type_int> = ArrayList<vx_core.Type_int>(value.vx_listint())
       var msg : vx_core.Type_msg
       for (valsub : Any in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -4942,20 +4942,20 @@ object vx_core {
 
     var vx_p_map : Map<String, vx_core.Type_int> = vx_core.immutablemap(LinkedHashMap<String, vx_core.Type_int>())
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
+    override fun vx_map() : Map<String, vx_core.Type_any> {
       return vx_core.immutablemap(map)
     }
 
-    fun vx_set(name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean {
+    override fun vx_set(name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean {
       var output : vx_core.Type_boolean = vx_core.c_false
       if (false) {
       } else if (value is vx_core.Type_int) {
         var castval : vx_core.Type_int = value as vx_core.Type_int
-        String key = name.vx_string()
+        var key : String = name.vx_string()
         if (key.startsWith(":")) {
           key = key.substring(1)
         }
-        var map : Map<String, vx_core.Type_int> = LinkedHashMap<String, vx_core.Type_int>(this.vx_p_map)
+        var map : MutableMap<String, vx_core.Type_int> = LinkedHashMap<String, vx_core.Type_int>(this.vx_p_map)
         if (castval == vx_core.e_int) {
           map.remove(key)
         } else {
@@ -4967,7 +4967,7 @@ object vx_core {
       return output
     }
 
-    fun vx_int(key : vx_core.Type_string) : vx_core.Type_int {
+    override fun vx_int(key : vx_core.Type_string) : vx_core.Type_int {
       var output : vx_core.Type_int = vx_core.e_int
       var map : vx_core.Class_intmap = this
       var skey : String = key.vx_string()
@@ -4976,24 +4976,24 @@ object vx_core {
       return output
     }
 
-    fun vx_mapint() : Map<String, vx_core.Type_int> {
+    override fun vx_mapint() : Map<String, vx_core.Type_int> {
       var output : Map<String, vx_core.Type_int> = this.vx_p_map
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = this.vx_int(key)
       return output
     }
 
 
-    fun vx_new_from_map(mapval : Map<String, vx_core.Type_any>) : vx_core.Type_map {
+    override fun vx_new_from_map(mapval : Map<String, vx_core.Type_any>) : vx_core.Type_map {
       var output : vx_core.Class_intmap = vx_core.Class_intmap()
       var msgblock : vx_core.Type_msgblock = vx_core.e_msgblock
-      var map : Map<String, vx_core.Type_int> = LinkedHashMap<String, vx_core.Type_int>()
-      Set<String> keys = mapval.keySet()
+      var map : MutableMap<String, vx_core.Type_int> = LinkedHashMap<String, vx_core.Type_int>()
+      val keys : Set<String> = mapval.keys
       for (key : String in keys) {
-        var value : vx_core.Type_any = mapval.get(key)
+        var value : vx_core.Type_any = mapval.getOrElse(key){vx_core.e_any}
         if (false) {
         } else if (value is vx_core.Type_int) {
           var castval : vx_core.Type_int = value as vx_core.Type_int
@@ -5023,7 +5023,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var mapval : Map<String, vx_core.Type_int> = LinkedHashMap<String, vx_core.Type_int>(value.vx_mapint())
+      var mapval : MutableMap<String, vx_core.Type_int> = LinkedHashMap<String, vx_core.Type_int>(value.vx_mapint())
       var msg : vx_core.Type_msg = null
       var key : String
       var msgval : vx_core.Type_any = null
@@ -5067,7 +5067,7 @@ object vx_core {
             } else {
               msgval = vx_core.vx_new_string(valsub.toString())
             }
-            var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+            var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
             mapany.put("key", vx_core.vx_new_string(key))
             mapany.put("value", msgval)
             var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -5139,14 +5139,14 @@ object vx_core {
       ArrayList<vx_core.Type_any>()
     )
 
-    fun vx_list() : List<vx_core.Type_any> {
+    override fun vx_list() : List<vx_core.Type_any> {
       var output : List<vx_core.Type_any> = vx_core.immutablelist(
         ArrayList<vx_core.Type_any>(this.vx_p_list)
       )
       return output
     }
 
-    fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
+    override fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var list : vx_core.Class_list = this
       var iindex : Integer = index.vx_int()
@@ -5170,7 +5170,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var listval : List<vx_core.Type_any> = ArrayList<vx_core.Type_any>(value.vx_list())
+      var listval : MutableList<vx_core.Type_any> = ArrayList<vx_core.Type_any>(value.vx_list())
       var msg : vx_core.Type_msg
       for (valsub : Any in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -5304,13 +5304,13 @@ object vx_core {
   class Class_locale : vx_core.Class_base, Type_locale {
     constructor() {}
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       return output
     }
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
-      var output : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+    override fun vx_map() : Map<String, vx_core.Type_any> {
+      var output : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
       output = vx_core.immutablemap(output)
       return output
     }
@@ -5382,20 +5382,20 @@ object vx_core {
 
     var vx_p_map : Map<String, vx_core.Type_any> = vx_core.immutablemap(LinkedHashMap<String, vx_core.Type_any>())
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
+    override fun vx_map() : Map<String, vx_core.Type_any> {
       return vx_core.immutablemap(map)
     }
 
-    fun vx_set(name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean {
+    override fun vx_set(name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean {
       var output : vx_core.Type_boolean = vx_core.c_false
       if (false) {
       } else if (value is vx_core.Type_any) {
         var castval : vx_core.Type_any = value as vx_core.Type_any
-        String key = name.vx_string()
+        var key : String = name.vx_string()
         if (key.startsWith(":")) {
           key = key.substring(1)
         }
-        var map : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>(this.vx_p_map)
+        var map : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>(this.vx_p_map)
         if (castval == vx_core.e_any) {
           map.remove(key)
         } else {
@@ -5407,7 +5407,7 @@ object vx_core {
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var map : vx_core.Class_map = this
       var skey : String = key.vx_string()
@@ -5416,13 +5416,13 @@ object vx_core {
       return output
     }
 
-    fun vx_new_from_map(mapval : Map<String, vx_core.Type_any>) : vx_core.Type_map {
+    override fun vx_new_from_map(mapval : Map<String, vx_core.Type_any>) : vx_core.Type_map {
       var output : vx_core.Class_map = vx_core.Class_map()
       var msgblock : vx_core.Type_msgblock = vx_core.e_msgblock
-      var map : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
-      Set<String> keys = mapval.keySet()
+      var map : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+      val keys : Set<String> = mapval.keys
       for (key : String in keys) {
-        var value : vx_core.Type_any = mapval.get(key)
+        var value : vx_core.Type_any = mapval.getOrElse(key){vx_core.e_any}
         if (false) {
         } else if (value is vx_core.Type_any) {
           var castval : vx_core.Type_any = value as vx_core.Type_any
@@ -5452,7 +5452,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var mapval : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>(value.vx_map())
+      var mapval : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>(value.vx_map())
       var msg : vx_core.Type_msg = null
       var key : String
       var msgval : vx_core.Type_any = null
@@ -5496,7 +5496,7 @@ object vx_core {
             } else {
               msgval = vx_core.vx_new_string(valsub.toString())
             }
-            var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+            var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
             mapany.put("key", vx_core.vx_new_string(key))
             mapany.put("value", msgval)
             var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -5626,7 +5626,7 @@ object vx_core {
 
     var vx_p_valuepool : vx_core.Type_value = null
 
-    fun valuepool() : vx_core.Type_value {
+    override fun valuepool() : vx_core.Type_value {
       var output : vx_core.Type_value = vx_core.e_value
       if (this.vx_p_valuepool != null) {
         output = this.vx_p_valuepool
@@ -5634,7 +5634,7 @@ object vx_core {
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       switch (skey) {
@@ -5645,8 +5645,8 @@ object vx_core {
       return output
     }
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
-      var output : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+    override fun vx_map() : Map<String, vx_core.Type_any> {
+      var output : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
       output.put(":valuepool", this.valuepool())
       output = vx_core.immutablemap(output)
       return output
@@ -5728,7 +5728,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("valuepool"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -5801,7 +5801,7 @@ object vx_core {
 
     var vx_p_code : vx_core.Type_string = null
 
-    fun code() : vx_core.Type_string {
+    override fun code() : vx_core.Type_string {
       var output : vx_core.Type_string = vx_core.e_string
       if (this.vx_p_code != null) {
         output = this.vx_p_code
@@ -5811,7 +5811,7 @@ object vx_core {
 
     var vx_p_detail : vx_core.Type_any = null
 
-    fun detail() : vx_core.Type_any {
+    override fun detail() : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       if (this.vx_p_detail != null) {
         output = this.vx_p_detail
@@ -5821,7 +5821,7 @@ object vx_core {
 
     var vx_p_path : vx_core.Type_string = null
 
-    fun path() : vx_core.Type_string {
+    override fun path() : vx_core.Type_string {
       var output : vx_core.Type_string = vx_core.e_string
       if (this.vx_p_path != null) {
         output = this.vx_p_path
@@ -5831,7 +5831,7 @@ object vx_core {
 
     var vx_p_severity : vx_core.Type_int = null
 
-    fun severity() : vx_core.Type_int {
+    override fun severity() : vx_core.Type_int {
       var output : vx_core.Type_int = vx_core.e_int
       if (this.vx_p_severity != null) {
         output = this.vx_p_severity
@@ -5841,7 +5841,7 @@ object vx_core {
 
     var vx_p_text : vx_core.Type_string = null
 
-    fun text() : vx_core.Type_string {
+    override fun text() : vx_core.Type_string {
       var output : vx_core.Type_string = vx_core.e_string
       if (this.vx_p_text != null) {
         output = this.vx_p_text
@@ -5849,7 +5849,7 @@ object vx_core {
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       switch (skey) {
@@ -5872,8 +5872,8 @@ object vx_core {
       return output
     }
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
-      var output : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+    override fun vx_map() : Map<String, vx_core.Type_any> {
+      var output : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
       output.put(":code", this.code())
       output.put(":detail", this.detail())
       output.put(":path", this.path())
@@ -6023,7 +6023,7 @@ object vx_core {
 
     var vx_p_msgs : vx_core.Type_msglist = null
 
-    fun msgs() : vx_core.Type_msglist {
+    override fun msgs() : vx_core.Type_msglist {
       var output : vx_core.Type_msglist = vx_core.e_msglist
       if (this.vx_p_msgs != null) {
         output = this.vx_p_msgs
@@ -6033,7 +6033,7 @@ object vx_core {
 
     var vx_p_msgblocks : vx_core.Type_msgblocklist = null
 
-    fun msgblocks() : vx_core.Type_msgblocklist {
+    override fun msgblocks() : vx_core.Type_msgblocklist {
       var output : vx_core.Type_msgblocklist = vx_core.e_msgblocklist
       if (this.vx_p_msgblocks != null) {
         output = this.vx_p_msgblocks
@@ -6041,7 +6041,7 @@ object vx_core {
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       switch (skey) {
@@ -6055,8 +6055,8 @@ object vx_core {
       return output
     }
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
-      var output : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+    override fun vx_map() : Map<String, vx_core.Type_any> {
+      var output : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
       output.put(":msgs", this.msgs())
       output.put(":msgblocks", this.msgblocks())
       output = vx_core.immutablemap(output)
@@ -6127,7 +6127,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("msgs"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -6149,7 +6149,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("msgblocks"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -6218,14 +6218,14 @@ object vx_core {
       ArrayList<vx_core.Type_msgblock>()
     )
 
-    fun vx_list() : List<vx_core.Type_any> {
+    override fun vx_list() : List<vx_core.Type_any> {
       var output : List<vx_core.Type_any> = vx_core.immutablelist(
         ArrayList<vx_core.Type_any>(this.vx_p_list)
       )
       return output
     }
 
-    fun vx_msgblock(index : vx_core.Type_int) : vx_core.Type_msgblock {
+    override fun vx_msgblock(index : vx_core.Type_int) : vx_core.Type_msgblock {
       var output : vx_core.Type_msgblock = vx_core.e_msgblock
       var list : vx_core.Class_msgblocklist = this
       var iindex : Integer = index.vx_int()
@@ -6236,12 +6236,12 @@ object vx_core {
       return output
     }
 
-    fun vx_listmsgblock() : List<vx_core.Type_msgblock> {
+    override fun vx_listmsgblock() : List<vx_core.Type_msgblock> {
       var output : List<vx_core.Type_msgblock> = this.vx_p_list
       return output
     }
 
-    fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
+    override fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
       var output : vx_core.Type_msgblock = this.vx_msgblock(index)
       return output
     }
@@ -6259,7 +6259,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var listval : List<vx_core.Type_msgblock> = ArrayList<vx_core.Type_msgblock>(value.vx_listmsgblock())
+      var listval : MutableList<vx_core.Type_msgblock> = ArrayList<vx_core.Type_msgblock>(value.vx_listmsgblock())
       var msg : vx_core.Type_msg
       for (valsub : Any in vals) {
         if (valsub is vx_core.Type_msg) {
@@ -6335,14 +6335,14 @@ object vx_core {
       ArrayList<vx_core.Type_msg>()
     )
 
-    fun vx_list() : List<vx_core.Type_any> {
+    override fun vx_list() : List<vx_core.Type_any> {
       var output : List<vx_core.Type_any> = vx_core.immutablelist(
         ArrayList<vx_core.Type_any>(this.vx_p_list)
       )
       return output
     }
 
-    fun vx_msg(index : vx_core.Type_int) : vx_core.Type_msg {
+    override fun vx_msg(index : vx_core.Type_int) : vx_core.Type_msg {
       var output : vx_core.Type_msg = vx_core.e_msg
       var list : vx_core.Class_msglist = this
       var iindex : Integer = index.vx_int()
@@ -6353,12 +6353,12 @@ object vx_core {
       return output
     }
 
-    fun vx_listmsg() : List<vx_core.Type_msg> {
+    override fun vx_listmsg() : List<vx_core.Type_msg> {
       var output : List<vx_core.Type_msg> = this.vx_p_list
       return output
     }
 
-    fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
+    override fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
       var output : vx_core.Type_msg = this.vx_msg(index)
       return output
     }
@@ -6376,7 +6376,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var listval : List<vx_core.Type_msg> = ArrayList<vx_core.Type_msg>(value.vx_listmsg())
+      var listval : MutableList<vx_core.Type_msg> = ArrayList<vx_core.Type_msg>(value.vx_listmsg())
       var msg : vx_core.Type_msg
       for (valsub : Any in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -6635,14 +6635,14 @@ object vx_core {
       ArrayList<vx_core.Type_number>()
     )
 
-    fun vx_list() : List<vx_core.Type_any> {
+    override fun vx_list() : List<vx_core.Type_any> {
       var output : List<vx_core.Type_any> = vx_core.immutablelist(
         ArrayList<vx_core.Type_any>(this.vx_p_list)
       )
       return output
     }
 
-    fun vx_number(index : vx_core.Type_int) : vx_core.Type_number {
+    override fun vx_number(index : vx_core.Type_int) : vx_core.Type_number {
       var output : vx_core.Type_number = vx_core.e_number
       var list : vx_core.Class_numberlist = this
       var iindex : Integer = index.vx_int()
@@ -6653,12 +6653,12 @@ object vx_core {
       return output
     }
 
-    fun vx_listnumber() : List<vx_core.Type_number> {
+    override fun vx_listnumber() : List<vx_core.Type_number> {
       var output : List<vx_core.Type_number> = this.vx_p_list
       return output
     }
 
-    fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
+    override fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
       var output : vx_core.Type_number = this.vx_number(index)
       return output
     }
@@ -6676,7 +6676,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var listval : List<vx_core.Type_number> = ArrayList<vx_core.Type_number>(value.vx_listnumber())
+      var listval : MutableList<vx_core.Type_number> = ArrayList<vx_core.Type_number>(value.vx_listnumber())
       var msg : vx_core.Type_msg
       for (valsub : Any in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -6756,20 +6756,20 @@ object vx_core {
 
     var vx_p_map : Map<String, vx_core.Type_number> = vx_core.immutablemap(LinkedHashMap<String, vx_core.Type_number>())
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
+    override fun vx_map() : Map<String, vx_core.Type_any> {
       return vx_core.immutablemap(map)
     }
 
-    fun vx_set(name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean {
+    override fun vx_set(name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean {
       var output : vx_core.Type_boolean = vx_core.c_false
       if (false) {
       } else if (value is vx_core.Type_number) {
         var castval : vx_core.Type_number = value as vx_core.Type_number
-        String key = name.vx_string()
+        var key : String = name.vx_string()
         if (key.startsWith(":")) {
           key = key.substring(1)
         }
-        var map : Map<String, vx_core.Type_number> = LinkedHashMap<String, vx_core.Type_number>(this.vx_p_map)
+        var map : MutableMap<String, vx_core.Type_number> = LinkedHashMap<String, vx_core.Type_number>(this.vx_p_map)
         if (castval == vx_core.e_number) {
           map.remove(key)
         } else {
@@ -6781,7 +6781,7 @@ object vx_core {
       return output
     }
 
-    fun vx_number(key : vx_core.Type_string) : vx_core.Type_number {
+    override fun vx_number(key : vx_core.Type_string) : vx_core.Type_number {
       var output : vx_core.Type_number = vx_core.e_number
       var map : vx_core.Class_numbermap = this
       var skey : String = key.vx_string()
@@ -6790,24 +6790,24 @@ object vx_core {
       return output
     }
 
-    fun vx_mapnumber() : Map<String, vx_core.Type_number> {
+    override fun vx_mapnumber() : Map<String, vx_core.Type_number> {
       var output : Map<String, vx_core.Type_number> = this.vx_p_map
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = this.vx_number(key)
       return output
     }
 
 
-    fun vx_new_from_map(mapval : Map<String, vx_core.Type_any>) : vx_core.Type_map {
+    override fun vx_new_from_map(mapval : Map<String, vx_core.Type_any>) : vx_core.Type_map {
       var output : vx_core.Class_numbermap = vx_core.Class_numbermap()
       var msgblock : vx_core.Type_msgblock = vx_core.e_msgblock
-      var map : Map<String, vx_core.Type_number> = LinkedHashMap<String, vx_core.Type_number>()
-      Set<String> keys = mapval.keySet()
+      var map : MutableMap<String, vx_core.Type_number> = LinkedHashMap<String, vx_core.Type_number>()
+      val keys : Set<String> = mapval.keys
       for (key : String in keys) {
-        var value : vx_core.Type_any = mapval.get(key)
+        var value : vx_core.Type_any = mapval.getOrElse(key){vx_core.e_any}
         if (false) {
         } else if (value is vx_core.Type_number) {
           var castval : vx_core.Type_number = value as vx_core.Type_number
@@ -6837,7 +6837,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var mapval : Map<String, vx_core.Type_number> = LinkedHashMap<String, vx_core.Type_number>(value.vx_mapnumber())
+      var mapval : MutableMap<String, vx_core.Type_number> = LinkedHashMap<String, vx_core.Type_number>(value.vx_mapnumber())
       var msg : vx_core.Type_msg = null
       var key : String
       var msgval : vx_core.Type_any = null
@@ -6881,7 +6881,7 @@ object vx_core {
             } else {
               msgval = vx_core.vx_new_string(valsub.toString())
             }
-            var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+            var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
             mapany.put("key", vx_core.vx_new_string(key))
             mapany.put("value", msgval)
             var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -6954,7 +6954,7 @@ object vx_core {
 
     var vx_p_pkgname : vx_core.Type_string = null
 
-    fun pkgname() : vx_core.Type_string {
+    override fun pkgname() : vx_core.Type_string {
       var output : vx_core.Type_string = vx_core.e_string
       if (this.vx_p_pkgname != null) {
         output = this.vx_p_pkgname
@@ -6964,7 +6964,7 @@ object vx_core {
 
     var vx_p_constmap : vx_core.Type_constmap = null
 
-    fun constmap() : vx_core.Type_constmap {
+    override fun constmap() : vx_core.Type_constmap {
       var output : vx_core.Type_constmap = vx_core.e_constmap
       if (this.vx_p_constmap != null) {
         output = this.vx_p_constmap
@@ -6974,7 +6974,7 @@ object vx_core {
 
     var vx_p_funcmap : vx_core.Type_funcmap = null
 
-    fun funcmap() : vx_core.Type_funcmap {
+    override fun funcmap() : vx_core.Type_funcmap {
       var output : vx_core.Type_funcmap = vx_core.e_funcmap
       if (this.vx_p_funcmap != null) {
         output = this.vx_p_funcmap
@@ -6984,7 +6984,7 @@ object vx_core {
 
     var vx_p_typemap : vx_core.Type_typemap = null
 
-    fun typemap() : vx_core.Type_typemap {
+    override fun typemap() : vx_core.Type_typemap {
       var output : vx_core.Type_typemap = vx_core.e_typemap
       if (this.vx_p_typemap != null) {
         output = this.vx_p_typemap
@@ -6994,7 +6994,7 @@ object vx_core {
 
     var vx_p_emptymap : vx_core.Type_map = null
 
-    fun emptymap() : vx_core.Type_map {
+    override fun emptymap() : vx_core.Type_map {
       var output : vx_core.Type_map = vx_core.e_map
       if (this.vx_p_emptymap != null) {
         output = this.vx_p_emptymap
@@ -7002,7 +7002,7 @@ object vx_core {
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       switch (skey) {
@@ -7025,8 +7025,8 @@ object vx_core {
       return output
     }
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
-      var output : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+    override fun vx_map() : Map<String, vx_core.Type_any> {
+      var output : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
       output.put(":pkgname", this.pkgname())
       output.put(":constmap", this.constmap())
       output.put(":funcmap", this.funcmap())
@@ -7123,7 +7123,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("pkgname"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -7145,7 +7145,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("constmap"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -7167,7 +7167,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("funcmap"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -7189,7 +7189,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("typemap"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -7211,7 +7211,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("emptymap"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -7285,20 +7285,20 @@ object vx_core {
 
     var vx_p_map : Map<String, vx_core.Type_package> = vx_core.immutablemap(LinkedHashMap<String, vx_core.Type_package>())
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
+    override fun vx_map() : Map<String, vx_core.Type_any> {
       return vx_core.immutablemap(map)
     }
 
-    fun vx_set(name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean {
+    override fun vx_set(name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean {
       var output : vx_core.Type_boolean = vx_core.c_false
       if (false) {
       } else if (value is vx_core.Type_package) {
         var castval : vx_core.Type_package = value as vx_core.Type_package
-        String key = name.vx_string()
+        var key : String = name.vx_string()
         if (key.startsWith(":")) {
           key = key.substring(1)
         }
-        var map : Map<String, vx_core.Type_package> = LinkedHashMap<String, vx_core.Type_package>(this.vx_p_map)
+        var map : MutableMap<String, vx_core.Type_package> = LinkedHashMap<String, vx_core.Type_package>(this.vx_p_map)
         if (castval == vx_core.e_package) {
           map.remove(key)
         } else {
@@ -7310,7 +7310,7 @@ object vx_core {
       return output
     }
 
-    fun vx_package(key : vx_core.Type_string) : vx_core.Type_package {
+    override fun vx_package(key : vx_core.Type_string) : vx_core.Type_package {
       var output : vx_core.Type_package = vx_core.e_package
       var map : vx_core.Class_packagemap = this
       var skey : String = key.vx_string()
@@ -7319,24 +7319,24 @@ object vx_core {
       return output
     }
 
-    fun vx_mappackage() : Map<String, vx_core.Type_package> {
+    override fun vx_mappackage() : Map<String, vx_core.Type_package> {
       var output : Map<String, vx_core.Type_package> = this.vx_p_map
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = this.vx_package(key)
       return output
     }
 
 
-    fun vx_new_from_map(mapval : Map<String, vx_core.Type_any>) : vx_core.Type_map {
+    override fun vx_new_from_map(mapval : Map<String, vx_core.Type_any>) : vx_core.Type_map {
       var output : vx_core.Class_packagemap = vx_core.Class_packagemap()
       var msgblock : vx_core.Type_msgblock = vx_core.e_msgblock
-      var map : Map<String, vx_core.Type_package> = LinkedHashMap<String, vx_core.Type_package>()
-      Set<String> keys = mapval.keySet()
+      var map : MutableMap<String, vx_core.Type_package> = LinkedHashMap<String, vx_core.Type_package>()
+      val keys : Set<String> = mapval.keys
       for (key : String in keys) {
-        var value : vx_core.Type_any = mapval.get(key)
+        var value : vx_core.Type_any = mapval.getOrElse(key){vx_core.e_any}
         if (false) {
         } else if (value is vx_core.Type_package) {
           var castval : vx_core.Type_package = value as vx_core.Type_package
@@ -7366,7 +7366,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var mapval : Map<String, vx_core.Type_package> = LinkedHashMap<String, vx_core.Type_package>(value.vx_mappackage())
+      var mapval : MutableMap<String, vx_core.Type_package> = LinkedHashMap<String, vx_core.Type_package>(value.vx_mappackage())
       var msg : vx_core.Type_msg = null
       var key : String
       var msgval : vx_core.Type_any = null
@@ -7410,7 +7410,7 @@ object vx_core {
             } else {
               msgval = vx_core.vx_new_string(valsub.toString())
             }
-            var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+            var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
             mapany.put("key", vx_core.vx_new_string(key))
             mapany.put("value", msgval)
             var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -7479,7 +7479,7 @@ object vx_core {
 
     var vx_p_id : vx_core.Type_string = null
 
-    fun id() : vx_core.Type_string {
+    override fun id() : vx_core.Type_string {
       var output : vx_core.Type_string = vx_core.e_string
       if (this.vx_p_id != null) {
         output = this.vx_p_id
@@ -7487,7 +7487,7 @@ object vx_core {
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       switch (skey) {
@@ -7498,8 +7498,8 @@ object vx_core {
       return output
     }
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
-      var output : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+    override fun vx_map() : Map<String, vx_core.Type_any> {
+      var output : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
       output.put(":id", this.id())
       output = vx_core.immutablemap(output)
       return output
@@ -7584,7 +7584,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("id"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -7656,14 +7656,14 @@ object vx_core {
       ArrayList<vx_core.Type_permission>()
     )
 
-    fun vx_list() : List<vx_core.Type_any> {
+    override fun vx_list() : List<vx_core.Type_any> {
       var output : List<vx_core.Type_any> = vx_core.immutablelist(
         ArrayList<vx_core.Type_any>(this.vx_p_list)
       )
       return output
     }
 
-    fun vx_permission(index : vx_core.Type_int) : vx_core.Type_permission {
+    override fun vx_permission(index : vx_core.Type_int) : vx_core.Type_permission {
       var output : vx_core.Type_permission = vx_core.e_permission
       var list : vx_core.Class_permissionlist = this
       var iindex : Integer = index.vx_int()
@@ -7674,12 +7674,12 @@ object vx_core {
       return output
     }
 
-    fun vx_listpermission() : List<vx_core.Type_permission> {
+    override fun vx_listpermission() : List<vx_core.Type_permission> {
       var output : List<vx_core.Type_permission> = this.vx_p_list
       return output
     }
 
-    fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
+    override fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
       var output : vx_core.Type_permission = this.vx_permission(index)
       return output
     }
@@ -7697,7 +7697,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var listval : List<vx_core.Type_permission> = ArrayList<vx_core.Type_permission>(value.vx_listpermission())
+      var listval : MutableList<vx_core.Type_permission> = ArrayList<vx_core.Type_permission>(value.vx_listpermission())
       var msg : vx_core.Type_msg
       for (valsub : Any in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -7777,20 +7777,20 @@ object vx_core {
 
     var vx_p_map : Map<String, vx_core.Type_permission> = vx_core.immutablemap(LinkedHashMap<String, vx_core.Type_permission>())
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
+    override fun vx_map() : Map<String, vx_core.Type_any> {
       return vx_core.immutablemap(map)
     }
 
-    fun vx_set(name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean {
+    override fun vx_set(name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean {
       var output : vx_core.Type_boolean = vx_core.c_false
       if (false) {
       } else if (value is vx_core.Type_permission) {
         var castval : vx_core.Type_permission = value as vx_core.Type_permission
-        String key = name.vx_string()
+        var key : String = name.vx_string()
         if (key.startsWith(":")) {
           key = key.substring(1)
         }
-        var map : Map<String, vx_core.Type_permission> = LinkedHashMap<String, vx_core.Type_permission>(this.vx_p_map)
+        var map : MutableMap<String, vx_core.Type_permission> = LinkedHashMap<String, vx_core.Type_permission>(this.vx_p_map)
         if (castval == vx_core.e_permission) {
           map.remove(key)
         } else {
@@ -7802,7 +7802,7 @@ object vx_core {
       return output
     }
 
-    fun vx_permission(key : vx_core.Type_string) : vx_core.Type_permission {
+    override fun vx_permission(key : vx_core.Type_string) : vx_core.Type_permission {
       var output : vx_core.Type_permission = vx_core.e_permission
       var map : vx_core.Class_permissionmap = this
       var skey : String = key.vx_string()
@@ -7811,24 +7811,24 @@ object vx_core {
       return output
     }
 
-    fun vx_mappermission() : Map<String, vx_core.Type_permission> {
+    override fun vx_mappermission() : Map<String, vx_core.Type_permission> {
       var output : Map<String, vx_core.Type_permission> = this.vx_p_map
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = this.vx_permission(key)
       return output
     }
 
 
-    fun vx_new_from_map(mapval : Map<String, vx_core.Type_any>) : vx_core.Type_map {
+    override fun vx_new_from_map(mapval : Map<String, vx_core.Type_any>) : vx_core.Type_map {
       var output : vx_core.Class_permissionmap = vx_core.Class_permissionmap()
       var msgblock : vx_core.Type_msgblock = vx_core.e_msgblock
-      var map : Map<String, vx_core.Type_permission> = LinkedHashMap<String, vx_core.Type_permission>()
-      Set<String> keys = mapval.keySet()
+      var map : MutableMap<String, vx_core.Type_permission> = LinkedHashMap<String, vx_core.Type_permission>()
+      val keys : Set<String> = mapval.keys
       for (key : String in keys) {
-        var value : vx_core.Type_any = mapval.get(key)
+        var value : vx_core.Type_any = mapval.getOrElse(key){vx_core.e_any}
         if (false) {
         } else if (value is vx_core.Type_permission) {
           var castval : vx_core.Type_permission = value as vx_core.Type_permission
@@ -7858,7 +7858,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var mapval : Map<String, vx_core.Type_permission> = LinkedHashMap<String, vx_core.Type_permission>(value.vx_mappermission())
+      var mapval : MutableMap<String, vx_core.Type_permission> = LinkedHashMap<String, vx_core.Type_permission>(value.vx_mappermission())
       var msg : vx_core.Type_msg = null
       var key : String
       var msgval : vx_core.Type_any = null
@@ -7902,7 +7902,7 @@ object vx_core {
             } else {
               msgval = vx_core.vx_new_string(valsub.toString())
             }
-            var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+            var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
             mapany.put("key", vx_core.vx_new_string(key))
             mapany.put("value", msgval)
             var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -7971,7 +7971,7 @@ object vx_core {
 
     var vx_p_packagemap : vx_core.Type_packagemap = null
 
-    fun packagemap() : vx_core.Type_packagemap {
+    override fun packagemap() : vx_core.Type_packagemap {
       var output : vx_core.Type_packagemap = vx_core.e_packagemap
       if (this.vx_p_packagemap != null) {
         output = this.vx_p_packagemap
@@ -7979,7 +7979,7 @@ object vx_core {
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       switch (skey) {
@@ -7990,8 +7990,8 @@ object vx_core {
       return output
     }
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
-      var output : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+    override fun vx_map() : Map<String, vx_core.Type_any> {
+      var output : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
       output.put(":packagemap", this.packagemap())
       output = vx_core.immutablemap(output)
       return output
@@ -8073,7 +8073,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("packagemap"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -8144,7 +8144,7 @@ object vx_core {
 
     var vx_p_allowfuncs : vx_core.Type_funclist = null
 
-    fun allowfuncs() : vx_core.Type_funclist {
+    override fun allowfuncs() : vx_core.Type_funclist {
       var output : vx_core.Type_funclist = vx_core.e_funclist
       if (this.vx_p_allowfuncs != null) {
         output = this.vx_p_allowfuncs
@@ -8154,7 +8154,7 @@ object vx_core {
 
     var vx_p_permissions : vx_core.Type_permissionlist = null
 
-    fun permissions() : vx_core.Type_permissionlist {
+    override fun permissions() : vx_core.Type_permissionlist {
       var output : vx_core.Type_permissionlist = vx_core.e_permissionlist
       if (this.vx_p_permissions != null) {
         output = this.vx_p_permissions
@@ -8164,7 +8164,7 @@ object vx_core {
 
     var vx_p_permissionmap : vx_core.Type_permissionmap = null
 
-    fun permissionmap() : vx_core.Type_permissionmap {
+    override fun permissionmap() : vx_core.Type_permissionmap {
       var output : vx_core.Type_permissionmap = vx_core.e_permissionmap
       if (this.vx_p_permissionmap != null) {
         output = this.vx_p_permissionmap
@@ -8172,7 +8172,7 @@ object vx_core {
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       switch (skey) {
@@ -8189,8 +8189,8 @@ object vx_core {
       return output
     }
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
-      var output : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+    override fun vx_map() : Map<String, vx_core.Type_any> {
+      var output : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
       output.put(":allowfuncs", this.allowfuncs())
       output.put(":permissions", this.permissions())
       output.put(":permissionmap", this.permissionmap())
@@ -8278,7 +8278,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("allowfuncs"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -8300,7 +8300,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("permissions"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -8322,7 +8322,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("permissionmap"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -8398,7 +8398,7 @@ object vx_core {
 
     var vx_p_user : vx_core.Type_user = null
 
-    fun user() : vx_core.Type_user {
+    override fun user() : vx_core.Type_user {
       var output : vx_core.Type_user = vx_core.e_user
       if (this.vx_p_user != null) {
         output = this.vx_p_user
@@ -8408,7 +8408,7 @@ object vx_core {
 
     var vx_p_connectlist : vx_core.Type_connectlist = null
 
-    fun connectlist() : vx_core.Type_connectlist {
+    override fun connectlist() : vx_core.Type_connectlist {
       var output : vx_core.Type_connectlist = vx_core.e_connectlist
       if (this.vx_p_connectlist != null) {
         output = this.vx_p_connectlist
@@ -8418,7 +8418,7 @@ object vx_core {
 
     var vx_p_connectmap : vx_core.Type_connectmap = null
 
-    fun connectmap() : vx_core.Type_connectmap {
+    override fun connectmap() : vx_core.Type_connectmap {
       var output : vx_core.Type_connectmap = vx_core.e_connectmap
       if (this.vx_p_connectmap != null) {
         output = this.vx_p_connectmap
@@ -8428,7 +8428,7 @@ object vx_core {
 
     var vx_p_locale : vx_core.Type_locale = null
 
-    fun locale() : vx_core.Type_locale {
+    override fun locale() : vx_core.Type_locale {
       var output : vx_core.Type_locale = vx_core.e_locale
       if (this.vx_p_locale != null) {
         output = this.vx_p_locale
@@ -8438,7 +8438,7 @@ object vx_core {
 
     var vx_p_translation : vx_core.Type_translation = null
 
-    fun translation() : vx_core.Type_translation {
+    override fun translation() : vx_core.Type_translation {
       var output : vx_core.Type_translation = vx_core.e_translation
       if (this.vx_p_translation != null) {
         output = this.vx_p_translation
@@ -8448,7 +8448,7 @@ object vx_core {
 
     var vx_p_translationmap : vx_core.Type_translationmap = null
 
-    fun translationmap() : vx_core.Type_translationmap {
+    override fun translationmap() : vx_core.Type_translationmap {
       var output : vx_core.Type_translationmap = vx_core.e_translationmap
       if (this.vx_p_translationmap != null) {
         output = this.vx_p_translationmap
@@ -8456,7 +8456,7 @@ object vx_core {
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       switch (skey) {
@@ -8482,8 +8482,8 @@ object vx_core {
       return output
     }
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
-      var output : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+    override fun vx_map() : Map<String, vx_core.Type_any> {
+      var output : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
       output.put(":user", this.user())
       output.put(":connectlist", this.connectlist())
       output.put(":connectmap", this.connectmap())
@@ -8580,7 +8580,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("user"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -8602,7 +8602,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("connectlist"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -8624,7 +8624,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("connectmap"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -8646,7 +8646,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("locale"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -8668,7 +8668,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("translation"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -8690,7 +8690,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("translationmap"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -8764,7 +8764,7 @@ object vx_core {
 
     var vx_p_pathmap : vx_core.Type_stringmap = null
 
-    fun pathmap() : vx_core.Type_stringmap {
+    override fun pathmap() : vx_core.Type_stringmap {
       var output : vx_core.Type_stringmap = vx_core.e_stringmap
       if (this.vx_p_pathmap != null) {
         output = this.vx_p_pathmap
@@ -8772,7 +8772,7 @@ object vx_core {
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       switch (skey) {
@@ -8783,8 +8783,8 @@ object vx_core {
       return output
     }
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
-      var output : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+    override fun vx_map() : Map<String, vx_core.Type_any> {
+      var output : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
       output.put(":pathmap", this.pathmap())
       output = vx_core.immutablemap(output)
       return output
@@ -8866,7 +8866,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("pathmap"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -8935,7 +8935,7 @@ object vx_core {
 
     var vx_p_statelistenermap : vx_core.Type_statelistenermap = null
 
-    fun statelistenermap() : vx_core.Type_statelistenermap {
+    override fun statelistenermap() : vx_core.Type_statelistenermap {
       var output : vx_core.Type_statelistenermap = vx_core.e_statelistenermap
       if (this.vx_p_statelistenermap != null) {
         output = this.vx_p_statelistenermap
@@ -8943,7 +8943,7 @@ object vx_core {
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       switch (skey) {
@@ -8954,8 +8954,8 @@ object vx_core {
       return output
     }
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
-      var output : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+    override fun vx_map() : Map<String, vx_core.Type_any> {
+      var output : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
       output.put(":statelistenermap", this.statelistenermap())
       output = vx_core.immutablemap(output)
       return output
@@ -9037,7 +9037,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("statelistenermap"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -9108,7 +9108,7 @@ object vx_core {
 
     var vx_p_name : vx_core.Type_string = null
 
-    fun name() : vx_core.Type_string {
+    override fun name() : vx_core.Type_string {
       var output : vx_core.Type_string = vx_core.e_string
       if (this.vx_p_name != null) {
         output = this.vx_p_name
@@ -9118,7 +9118,7 @@ object vx_core {
 
     var vx_p_value : vx_core.Type_any = null
 
-    fun value() : vx_core.Type_any {
+    override fun value() : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       if (this.vx_p_value != null) {
         output = this.vx_p_value
@@ -9128,7 +9128,7 @@ object vx_core {
 
     var vx_p_fn_boolean : vx_core.Func_boolean_from_none = null
 
-    fun fn_boolean() : vx_core.Func_boolean_from_none {
+    override fun fn_boolean() : vx_core.Func_boolean_from_none {
       var output : vx_core.Func_boolean_from_none = vx_core.e_boolean_from_none
       if (this.vx_p_fn_boolean != null) {
         output = this.vx_p_fn_boolean
@@ -9136,7 +9136,7 @@ object vx_core {
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       switch (skey) {
@@ -9153,8 +9153,8 @@ object vx_core {
       return output
     }
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
-      var output : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+    override fun vx_map() : Map<String, vx_core.Type_any> {
+      var output : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
       output.put(":name", this.name())
       output.put(":value", this.value())
       output.put(":fn-boolean", this.fn_boolean())
@@ -9245,7 +9245,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("name"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -9267,7 +9267,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("value"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -9289,7 +9289,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("fn-boolean"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -9361,20 +9361,20 @@ object vx_core {
 
     var vx_p_map : Map<String, vx_core.Type_statelistener> = vx_core.immutablemap(LinkedHashMap<String, vx_core.Type_statelistener>())
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
+    override fun vx_map() : Map<String, vx_core.Type_any> {
       return vx_core.immutablemap(map)
     }
 
-    fun vx_set(name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean {
+    override fun vx_set(name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean {
       var output : vx_core.Type_boolean = vx_core.c_false
       if (false) {
       } else if (value is vx_core.Type_statelistener) {
         var castval : vx_core.Type_statelistener = value as vx_core.Type_statelistener
-        String key = name.vx_string()
+        var key : String = name.vx_string()
         if (key.startsWith(":")) {
           key = key.substring(1)
         }
-        var map : Map<String, vx_core.Type_statelistener> = LinkedHashMap<String, vx_core.Type_statelistener>(this.vx_p_map)
+        var map : MutableMap<String, vx_core.Type_statelistener> = LinkedHashMap<String, vx_core.Type_statelistener>(this.vx_p_map)
         if (castval == vx_core.e_statelistener) {
           map.remove(key)
         } else {
@@ -9386,7 +9386,7 @@ object vx_core {
       return output
     }
 
-    fun vx_statelistener(key : vx_core.Type_string) : vx_core.Type_statelistener {
+    override fun vx_statelistener(key : vx_core.Type_string) : vx_core.Type_statelistener {
       var output : vx_core.Type_statelistener = vx_core.e_statelistener
       var map : vx_core.Class_statelistenermap = this
       var skey : String = key.vx_string()
@@ -9395,24 +9395,24 @@ object vx_core {
       return output
     }
 
-    fun vx_mapstatelistener() : Map<String, vx_core.Type_statelistener> {
+    override fun vx_mapstatelistener() : Map<String, vx_core.Type_statelistener> {
       var output : Map<String, vx_core.Type_statelistener> = this.vx_p_map
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = this.vx_statelistener(key)
       return output
     }
 
 
-    fun vx_new_from_map(mapval : Map<String, vx_core.Type_any>) : vx_core.Type_map {
+    override fun vx_new_from_map(mapval : Map<String, vx_core.Type_any>) : vx_core.Type_map {
       var output : vx_core.Class_statelistenermap = vx_core.Class_statelistenermap()
       var msgblock : vx_core.Type_msgblock = vx_core.e_msgblock
-      var map : Map<String, vx_core.Type_statelistener> = LinkedHashMap<String, vx_core.Type_statelistener>()
-      Set<String> keys = mapval.keySet()
+      var map : MutableMap<String, vx_core.Type_statelistener> = LinkedHashMap<String, vx_core.Type_statelistener>()
+      val keys : Set<String> = mapval.keys
       for (key : String in keys) {
-        var value : vx_core.Type_any = mapval.get(key)
+        var value : vx_core.Type_any = mapval.getOrElse(key){vx_core.e_any}
         if (false) {
         } else if (value is vx_core.Type_statelistener) {
           var castval : vx_core.Type_statelistener = value as vx_core.Type_statelistener
@@ -9442,7 +9442,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var mapval : Map<String, vx_core.Type_statelistener> = LinkedHashMap<String, vx_core.Type_statelistener>(value.vx_mapstatelistener())
+      var mapval : MutableMap<String, vx_core.Type_statelistener> = LinkedHashMap<String, vx_core.Type_statelistener>(value.vx_mapstatelistener())
       var msg : vx_core.Type_msg = null
       var key : String
       var msgval : vx_core.Type_any = null
@@ -9486,7 +9486,7 @@ object vx_core {
             } else {
               msgval = vx_core.vx_new_string(valsub.toString())
             }
-            var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+            var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
             mapany.put("key", vx_core.vx_new_string(key))
             mapany.put("value", msgval)
             var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -9680,14 +9680,14 @@ object vx_core {
       ArrayList<vx_core.Type_string>()
     )
 
-    fun vx_list() : List<vx_core.Type_any> {
+    override fun vx_list() : List<vx_core.Type_any> {
       var output : List<vx_core.Type_any> = vx_core.immutablelist(
         ArrayList<vx_core.Type_any>(this.vx_p_list)
       )
       return output
     }
 
-    fun vx_string(index : vx_core.Type_int) : vx_core.Type_string {
+    override fun vx_string(index : vx_core.Type_int) : vx_core.Type_string {
       var output : vx_core.Type_string = vx_core.e_string
       var list : vx_core.Class_stringlist = this
       var iindex : Integer = index.vx_int()
@@ -9698,12 +9698,12 @@ object vx_core {
       return output
     }
 
-    fun vx_liststring() : List<vx_core.Type_string> {
+    override fun vx_liststring() : List<vx_core.Type_string> {
       var output : List<vx_core.Type_string> = this.vx_p_list
       return output
     }
 
-    fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
+    override fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
       var output : vx_core.Type_string = this.vx_string(index)
       return output
     }
@@ -9721,7 +9721,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var listval : List<vx_core.Type_string> = ArrayList<vx_core.Type_string>(value.vx_liststring())
+      var listval : MutableList<vx_core.Type_string> = ArrayList<vx_core.Type_string>(value.vx_liststring())
       var msg : vx_core.Type_msg
       for (valsub : Any in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -9803,14 +9803,14 @@ object vx_core {
       ArrayList<vx_core.Type_stringlist>()
     )
 
-    fun vx_list() : List<vx_core.Type_any> {
+    override fun vx_list() : List<vx_core.Type_any> {
       var output : List<vx_core.Type_any> = vx_core.immutablelist(
         ArrayList<vx_core.Type_any>(this.vx_p_list)
       )
       return output
     }
 
-    fun vx_stringlist(index : vx_core.Type_int) : vx_core.Type_stringlist {
+    override fun vx_stringlist(index : vx_core.Type_int) : vx_core.Type_stringlist {
       var output : vx_core.Type_stringlist = vx_core.e_stringlist
       var list : vx_core.Class_stringlistlist = this
       var iindex : Integer = index.vx_int()
@@ -9821,12 +9821,12 @@ object vx_core {
       return output
     }
 
-    fun vx_liststringlist() : List<vx_core.Type_stringlist> {
+    override fun vx_liststringlist() : List<vx_core.Type_stringlist> {
       var output : List<vx_core.Type_stringlist> = this.vx_p_list
       return output
     }
 
-    fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
+    override fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
       var output : vx_core.Type_stringlist = this.vx_stringlist(index)
       return output
     }
@@ -9844,7 +9844,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var listval : List<vx_core.Type_stringlist> = ArrayList<vx_core.Type_stringlist>(value.vx_liststringlist())
+      var listval : MutableList<vx_core.Type_stringlist> = ArrayList<vx_core.Type_stringlist>(value.vx_liststringlist())
       var msg : vx_core.Type_msg
       for (valsub : Any in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -9924,20 +9924,20 @@ object vx_core {
 
     var vx_p_map : Map<String, vx_core.Type_string> = vx_core.immutablemap(LinkedHashMap<String, vx_core.Type_string>())
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
+    override fun vx_map() : Map<String, vx_core.Type_any> {
       return vx_core.immutablemap(map)
     }
 
-    fun vx_set(name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean {
+    override fun vx_set(name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean {
       var output : vx_core.Type_boolean = vx_core.c_false
       if (false) {
       } else if (value is vx_core.Type_string) {
         var castval : vx_core.Type_string = value as vx_core.Type_string
-        String key = name.vx_string()
+        var key : String = name.vx_string()
         if (key.startsWith(":")) {
           key = key.substring(1)
         }
-        var map : Map<String, vx_core.Type_string> = LinkedHashMap<String, vx_core.Type_string>(this.vx_p_map)
+        var map : MutableMap<String, vx_core.Type_string> = LinkedHashMap<String, vx_core.Type_string>(this.vx_p_map)
         if (castval == vx_core.e_string) {
           map.remove(key)
         } else {
@@ -9949,7 +9949,7 @@ object vx_core {
       return output
     }
 
-    fun vx_string(key : vx_core.Type_string) : vx_core.Type_string {
+    override fun vx_string(key : vx_core.Type_string) : vx_core.Type_string {
       var output : vx_core.Type_string = vx_core.e_string
       var map : vx_core.Class_stringmap = this
       var skey : String = key.vx_string()
@@ -9958,24 +9958,24 @@ object vx_core {
       return output
     }
 
-    fun vx_mapstring() : Map<String, vx_core.Type_string> {
+    override fun vx_mapstring() : Map<String, vx_core.Type_string> {
       var output : Map<String, vx_core.Type_string> = this.vx_p_map
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = this.vx_string(key)
       return output
     }
 
 
-    fun vx_new_from_map(mapval : Map<String, vx_core.Type_any>) : vx_core.Type_map {
+    override fun vx_new_from_map(mapval : Map<String, vx_core.Type_any>) : vx_core.Type_map {
       var output : vx_core.Class_stringmap = vx_core.Class_stringmap()
       var msgblock : vx_core.Type_msgblock = vx_core.e_msgblock
-      var map : Map<String, vx_core.Type_string> = LinkedHashMap<String, vx_core.Type_string>()
-      Set<String> keys = mapval.keySet()
+      var map : MutableMap<String, vx_core.Type_string> = LinkedHashMap<String, vx_core.Type_string>()
+      val keys : Set<String> = mapval.keys
       for (key : String in keys) {
-        var value : vx_core.Type_any = mapval.get(key)
+        var value : vx_core.Type_any = mapval.getOrElse(key){vx_core.e_any}
         if (false) {
         } else if (value is vx_core.Type_string) {
           var castval : vx_core.Type_string = value as vx_core.Type_string
@@ -10005,7 +10005,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var mapval : Map<String, vx_core.Type_string> = LinkedHashMap<String, vx_core.Type_string>(value.vx_mapstring())
+      var mapval : MutableMap<String, vx_core.Type_string> = LinkedHashMap<String, vx_core.Type_string>(value.vx_mapstring())
       var msg : vx_core.Type_msg = null
       var key : String
       var msgval : vx_core.Type_any = null
@@ -10049,7 +10049,7 @@ object vx_core {
             } else {
               msgval = vx_core.vx_new_string(valsub.toString())
             }
-            var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+            var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
             mapany.put("key", vx_core.vx_new_string(key))
             mapany.put("value", msgval)
             var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -10119,20 +10119,20 @@ object vx_core {
 
     var vx_p_map : Map<String, vx_core.Type_string> = vx_core.immutablemap(LinkedHashMap<String, vx_core.Type_string>())
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
+    override fun vx_map() : Map<String, vx_core.Type_any> {
       return vx_core.immutablemap(map)
     }
 
-    fun vx_set(name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean {
+    override fun vx_set(name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean {
       var output : vx_core.Type_boolean = vx_core.c_false
       if (false) {
       } else if (value is vx_core.Type_string) {
         var castval : vx_core.Type_string = value as vx_core.Type_string
-        String key = name.vx_string()
+        var key : String = name.vx_string()
         if (key.startsWith(":")) {
           key = key.substring(1)
         }
-        var map : Map<String, vx_core.Type_string> = LinkedHashMap<String, vx_core.Type_string>(this.vx_p_map)
+        var map : MutableMap<String, vx_core.Type_string> = LinkedHashMap<String, vx_core.Type_string>(this.vx_p_map)
         if (castval == vx_core.e_string) {
           map.remove(key)
         } else {
@@ -10144,7 +10144,7 @@ object vx_core {
       return output
     }
 
-    fun vx_string(key : vx_core.Type_string) : vx_core.Type_string {
+    override fun vx_string(key : vx_core.Type_string) : vx_core.Type_string {
       var output : vx_core.Type_string = vx_core.e_string
       var map : vx_core.Class_stringmutablemap = this
       var skey : String = key.vx_string()
@@ -10153,24 +10153,24 @@ object vx_core {
       return output
     }
 
-    fun vx_mapstring() : Map<String, vx_core.Type_string> {
+    override fun vx_mapstring() : Map<String, vx_core.Type_string> {
       var output : Map<String, vx_core.Type_string> = this.vx_p_map
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = this.vx_string(key)
       return output
     }
 
 
-    fun vx_new_from_map(mapval : Map<String, vx_core.Type_any>) : vx_core.Type_map {
+    override fun vx_new_from_map(mapval : Map<String, vx_core.Type_any>) : vx_core.Type_map {
       var output : vx_core.Class_stringmutablemap = vx_core.Class_stringmutablemap()
       var msgblock : vx_core.Type_msgblock = vx_core.e_msgblock
-      var map : Map<String, vx_core.Type_string> = LinkedHashMap<String, vx_core.Type_string>()
-      Set<String> keys = mapval.keySet()
+      var map : MutableMap<String, vx_core.Type_string> = LinkedHashMap<String, vx_core.Type_string>()
+      val keys : Set<String> = mapval.keys
       for (key : String in keys) {
-        var value : vx_core.Type_any = mapval.get(key)
+        var value : vx_core.Type_any = mapval.getOrElse(key){vx_core.e_any}
         if (false) {
         } else if (value is vx_core.Type_string) {
           var castval : vx_core.Type_string = value as vx_core.Type_string
@@ -10200,7 +10200,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var mapval : Map<String, vx_core.Type_string> = LinkedHashMap<String, vx_core.Type_string>(value.vx_mapstring())
+      var mapval : MutableMap<String, vx_core.Type_string> = LinkedHashMap<String, vx_core.Type_string>(value.vx_mapstring())
       var msg : vx_core.Type_msg = null
       var key : String
       var msgval : vx_core.Type_any = null
@@ -10244,7 +10244,7 @@ object vx_core {
             } else {
               msgval = vx_core.vx_new_string(valsub.toString())
             }
-            var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+            var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
             mapany.put("key", vx_core.vx_new_string(key))
             mapany.put("value", msgval)
             var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -10312,13 +10312,13 @@ object vx_core {
   class Class_struct : vx_core.Class_base, Type_struct {
     constructor() {}
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       return output
     }
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
-      var output : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+    override fun vx_map() : Map<String, vx_core.Type_any> {
+      var output : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
       output = vx_core.immutablemap(output)
       return output
     }
@@ -10391,7 +10391,7 @@ object vx_core {
 
     var vx_p_code : vx_core.Type_string = null
 
-    fun code() : vx_core.Type_string {
+    override fun code() : vx_core.Type_string {
       var output : vx_core.Type_string = vx_core.e_string
       if (this.vx_p_code != null) {
         output = this.vx_p_code
@@ -10401,7 +10401,7 @@ object vx_core {
 
     var vx_p_value : vx_core.Type_any = null
 
-    fun value() : vx_core.Type_any {
+    override fun value() : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       if (this.vx_p_value != null) {
         output = this.vx_p_value
@@ -10411,7 +10411,7 @@ object vx_core {
 
     var vx_p_values : vx_core.Type_list = null
 
-    fun values() : vx_core.Type_list {
+    override fun values() : vx_core.Type_list {
       var output : vx_core.Type_list = vx_core.e_list
       if (this.vx_p_values != null) {
         output = this.vx_p_values
@@ -10421,7 +10421,7 @@ object vx_core {
 
     var vx_p_fn_cond : vx_core.Func_boolean_from_func = null
 
-    fun fn_cond() : vx_core.Func_boolean_from_func {
+    override fun fn_cond() : vx_core.Func_boolean_from_func {
       var output : vx_core.Func_boolean_from_func = vx_core.e_boolean_from_func
       if (this.vx_p_fn_cond != null) {
         output = this.vx_p_fn_cond
@@ -10431,7 +10431,7 @@ object vx_core {
 
     var vx_p_fn_any : vx_core.Func_any_from_func = null
 
-    fun fn_any() : vx_core.Func_any_from_func {
+    override fun fn_any() : vx_core.Func_any_from_func {
       var output : vx_core.Func_any_from_func = vx_core.e_any_from_func
       if (this.vx_p_fn_any != null) {
         output = this.vx_p_fn_any
@@ -10439,7 +10439,7 @@ object vx_core {
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       switch (skey) {
@@ -10462,8 +10462,8 @@ object vx_core {
       return output
     }
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
-      var output : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+    override fun vx_map() : Map<String, vx_core.Type_any> {
+      var output : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
       output.put(":code", this.code())
       output.put(":value", this.value())
       output.put(":values", this.values())
@@ -10560,7 +10560,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("code"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -10582,7 +10582,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("value"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -10604,7 +10604,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("values"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -10626,7 +10626,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("fn-cond"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -10648,7 +10648,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("fn-any"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -10724,14 +10724,14 @@ object vx_core {
       ArrayList<vx_core.Type_thenelse>()
     )
 
-    fun vx_list() : List<vx_core.Type_any> {
+    override fun vx_list() : List<vx_core.Type_any> {
       var output : List<vx_core.Type_any> = vx_core.immutablelist(
         ArrayList<vx_core.Type_any>(this.vx_p_list)
       )
       return output
     }
 
-    fun vx_thenelse(index : vx_core.Type_int) : vx_core.Type_thenelse {
+    override fun vx_thenelse(index : vx_core.Type_int) : vx_core.Type_thenelse {
       var output : vx_core.Type_thenelse = vx_core.e_thenelse
       var list : vx_core.Class_thenelselist = this
       var iindex : Integer = index.vx_int()
@@ -10742,12 +10742,12 @@ object vx_core {
       return output
     }
 
-    fun vx_listthenelse() : List<vx_core.Type_thenelse> {
+    override fun vx_listthenelse() : List<vx_core.Type_thenelse> {
       var output : List<vx_core.Type_thenelse> = this.vx_p_list
       return output
     }
 
-    fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
+    override fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
       var output : vx_core.Type_thenelse = this.vx_thenelse(index)
       return output
     }
@@ -10765,7 +10765,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var listval : List<vx_core.Type_thenelse> = ArrayList<vx_core.Type_thenelse>(value.vx_listthenelse())
+      var listval : MutableList<vx_core.Type_thenelse> = ArrayList<vx_core.Type_thenelse>(value.vx_listthenelse())
       var msg : vx_core.Type_msg
       for (valsub : Any in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -10845,7 +10845,7 @@ object vx_core {
 
     var vx_p_name : vx_core.Type_string = null
 
-    fun name() : vx_core.Type_string {
+    override fun name() : vx_core.Type_string {
       var output : vx_core.Type_string = vx_core.e_string
       if (this.vx_p_name != null) {
         output = this.vx_p_name
@@ -10855,7 +10855,7 @@ object vx_core {
 
     var vx_p_wordmap : vx_core.Type_stringmap = null
 
-    fun wordmap() : vx_core.Type_stringmap {
+    override fun wordmap() : vx_core.Type_stringmap {
       var output : vx_core.Type_stringmap = vx_core.e_stringmap
       if (this.vx_p_wordmap != null) {
         output = this.vx_p_wordmap
@@ -10863,7 +10863,7 @@ object vx_core {
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       switch (skey) {
@@ -10877,8 +10877,8 @@ object vx_core {
       return output
     }
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
-      var output : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+    override fun vx_map() : Map<String, vx_core.Type_any> {
+      var output : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
       output.put(":name", this.name())
       output.put(":wordmap", this.wordmap())
       output = vx_core.immutablemap(output)
@@ -10966,7 +10966,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("name"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -10988,7 +10988,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("wordmap"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -11061,14 +11061,14 @@ object vx_core {
       ArrayList<vx_core.Type_translation>()
     )
 
-    fun vx_list() : List<vx_core.Type_any> {
+    override fun vx_list() : List<vx_core.Type_any> {
       var output : List<vx_core.Type_any> = vx_core.immutablelist(
         ArrayList<vx_core.Type_any>(this.vx_p_list)
       )
       return output
     }
 
-    fun vx_translation(index : vx_core.Type_int) : vx_core.Type_translation {
+    override fun vx_translation(index : vx_core.Type_int) : vx_core.Type_translation {
       var output : vx_core.Type_translation = vx_core.e_translation
       var list : vx_core.Class_translationlist = this
       var iindex : Integer = index.vx_int()
@@ -11079,12 +11079,12 @@ object vx_core {
       return output
     }
 
-    fun vx_listtranslation() : List<vx_core.Type_translation> {
+    override fun vx_listtranslation() : List<vx_core.Type_translation> {
       var output : List<vx_core.Type_translation> = this.vx_p_list
       return output
     }
 
-    fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
+    override fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
       var output : vx_core.Type_translation = this.vx_translation(index)
       return output
     }
@@ -11102,7 +11102,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var listval : List<vx_core.Type_translation> = ArrayList<vx_core.Type_translation>(value.vx_listtranslation())
+      var listval : MutableList<vx_core.Type_translation> = ArrayList<vx_core.Type_translation>(value.vx_listtranslation())
       var msg : vx_core.Type_msg
       for (valsub : Any in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -11182,20 +11182,20 @@ object vx_core {
 
     var vx_p_map : Map<String, vx_core.Type_translation> = vx_core.immutablemap(LinkedHashMap<String, vx_core.Type_translation>())
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
+    override fun vx_map() : Map<String, vx_core.Type_any> {
       return vx_core.immutablemap(map)
     }
 
-    fun vx_set(name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean {
+    override fun vx_set(name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean {
       var output : vx_core.Type_boolean = vx_core.c_false
       if (false) {
       } else if (value is vx_core.Type_translation) {
         var castval : vx_core.Type_translation = value as vx_core.Type_translation
-        String key = name.vx_string()
+        var key : String = name.vx_string()
         if (key.startsWith(":")) {
           key = key.substring(1)
         }
-        var map : Map<String, vx_core.Type_translation> = LinkedHashMap<String, vx_core.Type_translation>(this.vx_p_map)
+        var map : MutableMap<String, vx_core.Type_translation> = LinkedHashMap<String, vx_core.Type_translation>(this.vx_p_map)
         if (castval == vx_core.e_translation) {
           map.remove(key)
         } else {
@@ -11207,7 +11207,7 @@ object vx_core {
       return output
     }
 
-    fun vx_translation(key : vx_core.Type_string) : vx_core.Type_translation {
+    override fun vx_translation(key : vx_core.Type_string) : vx_core.Type_translation {
       var output : vx_core.Type_translation = vx_core.e_translation
       var map : vx_core.Class_translationmap = this
       var skey : String = key.vx_string()
@@ -11216,24 +11216,24 @@ object vx_core {
       return output
     }
 
-    fun vx_maptranslation() : Map<String, vx_core.Type_translation> {
+    override fun vx_maptranslation() : Map<String, vx_core.Type_translation> {
       var output : Map<String, vx_core.Type_translation> = this.vx_p_map
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = this.vx_translation(key)
       return output
     }
 
 
-    fun vx_new_from_map(mapval : Map<String, vx_core.Type_any>) : vx_core.Type_map {
+    override fun vx_new_from_map(mapval : Map<String, vx_core.Type_any>) : vx_core.Type_map {
       var output : vx_core.Class_translationmap = vx_core.Class_translationmap()
       var msgblock : vx_core.Type_msgblock = vx_core.e_msgblock
-      var map : Map<String, vx_core.Type_translation> = LinkedHashMap<String, vx_core.Type_translation>()
-      Set<String> keys = mapval.keySet()
+      var map : MutableMap<String, vx_core.Type_translation> = LinkedHashMap<String, vx_core.Type_translation>()
+      val keys : Set<String> = mapval.keys
       for (key : String in keys) {
-        var value : vx_core.Type_any = mapval.get(key)
+        var value : vx_core.Type_any = mapval.getOrElse(key){vx_core.e_any}
         if (false) {
         } else if (value is vx_core.Type_translation) {
           var castval : vx_core.Type_translation = value as vx_core.Type_translation
@@ -11263,7 +11263,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var mapval : Map<String, vx_core.Type_translation> = LinkedHashMap<String, vx_core.Type_translation>(value.vx_maptranslation())
+      var mapval : MutableMap<String, vx_core.Type_translation> = LinkedHashMap<String, vx_core.Type_translation>(value.vx_maptranslation())
       var msg : vx_core.Type_msg = null
       var key : String
       var msgval : vx_core.Type_any = null
@@ -11307,7 +11307,7 @@ object vx_core {
             } else {
               msgval = vx_core.vx_new_string(valsub.toString())
             }
-            var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+            var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
             mapany.put("key", vx_core.vx_new_string(key))
             mapany.put("value", msgval)
             var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -11448,7 +11448,7 @@ object vx_core {
 
     var vx_p_pkgname : vx_core.Type_string = null
 
-    fun pkgname() : vx_core.Type_string {
+    override fun pkgname() : vx_core.Type_string {
       var output : vx_core.Type_string = vx_core.e_string
       if (this.vx_p_pkgname != null) {
         output = this.vx_p_pkgname
@@ -11458,7 +11458,7 @@ object vx_core {
 
     var vx_p_name : vx_core.Type_string = null
 
-    fun name() : vx_core.Type_string {
+    override fun name() : vx_core.Type_string {
       var output : vx_core.Type_string = vx_core.e_string
       if (this.vx_p_name != null) {
         output = this.vx_p_name
@@ -11468,7 +11468,7 @@ object vx_core {
 
     var vx_p_extend : vx_core.Type_string = null
 
-    fun extend() : vx_core.Type_string {
+    override fun extend() : vx_core.Type_string {
       var output : vx_core.Type_string = vx_core.e_string
       if (this.vx_p_extend != null) {
         output = this.vx_p_extend
@@ -11478,7 +11478,7 @@ object vx_core {
 
     var vx_p_allowfuncs : vx_core.Type_funclist = null
 
-    fun allowfuncs() : vx_core.Type_funclist {
+    override fun allowfuncs() : vx_core.Type_funclist {
       var output : vx_core.Type_funclist = vx_core.e_funclist
       if (this.vx_p_allowfuncs != null) {
         output = this.vx_p_allowfuncs
@@ -11488,7 +11488,7 @@ object vx_core {
 
     var vx_p_allowtypes : vx_core.Type_typelist = null
 
-    fun allowtypes() : vx_core.Type_typelist {
+    override fun allowtypes() : vx_core.Type_typelist {
       var output : vx_core.Type_typelist = vx_core.e_typelist
       if (this.vx_p_allowtypes != null) {
         output = this.vx_p_allowtypes
@@ -11498,7 +11498,7 @@ object vx_core {
 
     var vx_p_allowvalues : vx_core.Type_anylist = null
 
-    fun allowvalues() : vx_core.Type_anylist {
+    override fun allowvalues() : vx_core.Type_anylist {
       var output : vx_core.Type_anylist = vx_core.e_anylist
       if (this.vx_p_allowvalues != null) {
         output = this.vx_p_allowvalues
@@ -11508,7 +11508,7 @@ object vx_core {
 
     var vx_p_disallowfuncs : vx_core.Type_funclist = null
 
-    fun disallowfuncs() : vx_core.Type_funclist {
+    override fun disallowfuncs() : vx_core.Type_funclist {
       var output : vx_core.Type_funclist = vx_core.e_funclist
       if (this.vx_p_disallowfuncs != null) {
         output = this.vx_p_disallowfuncs
@@ -11518,7 +11518,7 @@ object vx_core {
 
     var vx_p_disallowtypes : vx_core.Type_typelist = null
 
-    fun disallowtypes() : vx_core.Type_typelist {
+    override fun disallowtypes() : vx_core.Type_typelist {
       var output : vx_core.Type_typelist = vx_core.e_typelist
       if (this.vx_p_disallowtypes != null) {
         output = this.vx_p_disallowtypes
@@ -11528,7 +11528,7 @@ object vx_core {
 
     var vx_p_disallowvalues : vx_core.Type_anylist = null
 
-    fun disallowvalues() : vx_core.Type_anylist {
+    override fun disallowvalues() : vx_core.Type_anylist {
       var output : vx_core.Type_anylist = vx_core.e_anylist
       if (this.vx_p_disallowvalues != null) {
         output = this.vx_p_disallowvalues
@@ -11538,7 +11538,7 @@ object vx_core {
 
     var vx_p_properties : vx_core.Type_argmap = null
 
-    fun properties() : vx_core.Type_argmap {
+    override fun properties() : vx_core.Type_argmap {
       var output : vx_core.Type_argmap = vx_core.e_argmap
       if (this.vx_p_properties != null) {
         output = this.vx_p_properties
@@ -11548,7 +11548,7 @@ object vx_core {
 
     var vx_p_proplast : vx_core.Type_arg = null
 
-    fun proplast() : vx_core.Type_arg {
+    override fun proplast() : vx_core.Type_arg {
       var output : vx_core.Type_arg = vx_core.e_arg
       if (this.vx_p_proplast != null) {
         output = this.vx_p_proplast
@@ -11558,7 +11558,7 @@ object vx_core {
 
     var vx_p_traits : vx_core.Type_typelist = null
 
-    fun traits() : vx_core.Type_typelist {
+    override fun traits() : vx_core.Type_typelist {
       var output : vx_core.Type_typelist = vx_core.e_typelist
       if (this.vx_p_traits != null) {
         output = this.vx_p_traits
@@ -11566,7 +11566,7 @@ object vx_core {
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       switch (skey) {
@@ -11610,8 +11610,8 @@ object vx_core {
       return output
     }
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
-      var output : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+    override fun vx_map() : Map<String, vx_core.Type_any> {
+      var output : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
       output.put(":pkgname", this.pkgname())
       output.put(":name", this.name())
       output.put(":extends", this.extend())
@@ -11729,7 +11729,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("pkgname"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -11754,7 +11754,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("name"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -11779,7 +11779,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("extends"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -11801,7 +11801,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("allowfuncs"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -11823,7 +11823,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("allowtypes"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -11845,7 +11845,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("allowvalues"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -11867,7 +11867,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("disallowfuncs"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -11889,7 +11889,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("disallowtypes"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -11911,7 +11911,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("disallowvalues"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -11933,7 +11933,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("properties"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -11955,7 +11955,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("proplast"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -11977,7 +11977,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("traits"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -12058,14 +12058,14 @@ object vx_core {
       ArrayList<vx_core.Type_any>()
     )
 
-    fun vx_list() : List<vx_core.Type_any> {
+    override fun vx_list() : List<vx_core.Type_any> {
       var output : List<vx_core.Type_any> = vx_core.immutablelist(
         ArrayList<vx_core.Type_any>(this.vx_p_list)
       )
       return output
     }
 
-    fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
+    override fun vx_any(index : vx_core.Type_int) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var list : vx_core.Class_typelist = this
       var iindex : Integer = index.vx_int()
@@ -12089,7 +12089,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var listval : List<vx_core.Type_any> = ArrayList<vx_core.Type_any>(value.vx_list())
+      var listval : MutableList<vx_core.Type_any> = ArrayList<vx_core.Type_any>(value.vx_list())
       var msg : vx_core.Type_msg
       for (valsub : Any in vals) {
         if (valsub is vx_core.Type_msgblock) {
@@ -12164,20 +12164,20 @@ object vx_core {
 
     var vx_p_map : Map<String, vx_core.Type_any> = vx_core.immutablemap(LinkedHashMap<String, vx_core.Type_any>())
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
+    override fun vx_map() : Map<String, vx_core.Type_any> {
       return vx_core.immutablemap(map)
     }
 
-    fun vx_set(name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean {
+    override fun vx_set(name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean {
       var output : vx_core.Type_boolean = vx_core.c_false
       if (false) {
       } else if (value is vx_core.Type_any) {
         var castval : vx_core.Type_any = value as vx_core.Type_any
-        String key = name.vx_string()
+        var key : String = name.vx_string()
         if (key.startsWith(":")) {
           key = key.substring(1)
         }
-        var map : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>(this.vx_p_map)
+        var map : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>(this.vx_p_map)
         if (castval == vx_core.e_any) {
           map.remove(key)
         } else {
@@ -12189,7 +12189,7 @@ object vx_core {
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var map : vx_core.Class_typemap = this
       var skey : String = key.vx_string()
@@ -12198,13 +12198,13 @@ object vx_core {
       return output
     }
 
-    fun vx_new_from_map(mapval : Map<String, vx_core.Type_any>) : vx_core.Type_map {
+    override fun vx_new_from_map(mapval : Map<String, vx_core.Type_any>) : vx_core.Type_map {
       var output : vx_core.Class_typemap = vx_core.Class_typemap()
       var msgblock : vx_core.Type_msgblock = vx_core.e_msgblock
-      var map : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
-      Set<String> keys = mapval.keySet()
+      var map : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+      val keys : Set<String> = mapval.keys
       for (key : String in keys) {
-        var value : vx_core.Type_any = mapval.get(key)
+        var value : vx_core.Type_any = mapval.getOrElse(key){vx_core.e_any}
         if (false) {
         } else if (value is vx_core.Type_any) {
           var castval : vx_core.Type_any = value as vx_core.Type_any
@@ -12234,7 +12234,7 @@ object vx_core {
       if (this.vx_constdef() != vx_core.e_constdef) {
         ischanged = true
       }
-      var mapval : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>(value.vx_map())
+      var mapval : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>(value.vx_map())
       var msg : vx_core.Type_msg = null
       var key : String
       var msgval : vx_core.Type_any = null
@@ -12278,7 +12278,7 @@ object vx_core {
             } else {
               msgval = vx_core.vx_new_string(valsub.toString())
             }
-            var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+            var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
             mapany.put("key", vx_core.vx_new_string(key))
             mapany.put("value", msgval)
             var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -12349,7 +12349,7 @@ object vx_core {
 
     var vx_p_security : vx_core.Type_security = null
 
-    fun security() : vx_core.Type_security {
+    override fun security() : vx_core.Type_security {
       var output : vx_core.Type_security = vx_core.e_security
       if (this.vx_p_security != null) {
         output = this.vx_p_security
@@ -12359,7 +12359,7 @@ object vx_core {
 
     var vx_p_username : vx_core.Type_string = null
 
-    fun username() : vx_core.Type_string {
+    override fun username() : vx_core.Type_string {
       var output : vx_core.Type_string = vx_core.e_string
       if (this.vx_p_username != null) {
         output = this.vx_p_username
@@ -12369,7 +12369,7 @@ object vx_core {
 
     var vx_p_token : vx_core.Type_string = null
 
-    fun token() : vx_core.Type_string {
+    override fun token() : vx_core.Type_string {
       var output : vx_core.Type_string = vx_core.e_string
       if (this.vx_p_token != null) {
         output = this.vx_p_token
@@ -12377,7 +12377,7 @@ object vx_core {
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       switch (skey) {
@@ -12394,8 +12394,8 @@ object vx_core {
       return output
     }
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
-      var output : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+    override fun vx_map() : Map<String, vx_core.Type_any> {
+      var output : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
       output.put(":security", this.security())
       output.put(":username", this.username())
       output.put(":token", this.token())
@@ -12483,7 +12483,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("security"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -12508,7 +12508,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("username"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -12533,7 +12533,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("token"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -12605,7 +12605,7 @@ object vx_core {
 
     var vx_p_next : vx_core.Type_any = null
 
-    fun next() : vx_core.Type_any {
+    override fun next() : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       if (this.vx_p_next != null) {
         output = this.vx_p_next
@@ -12615,7 +12615,7 @@ object vx_core {
 
     var vx_p_refs : vx_core.Type_int = null
 
-    fun refs() : vx_core.Type_int {
+    override fun refs() : vx_core.Type_int {
       var output : vx_core.Type_int = vx_core.e_int
       if (this.vx_p_refs != null) {
         output = this.vx_p_refs
@@ -12623,7 +12623,7 @@ object vx_core {
       return output
     }
 
-    fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
+    override fun vx_any(key : vx_core.Type_string) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var skey : String = key.vx_string()
       switch (skey) {
@@ -12637,8 +12637,8 @@ object vx_core {
       return output
     }
 
-    fun vx_map() : Map<String, vx_core.Type_any> {
-      var output : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+    override fun vx_map() : Map<String, vx_core.Type_any> {
+      var output : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
       output.put(":next", this.next())
       output.put(":refs", this.refs())
       output = vx_core.immutablemap(output)
@@ -12723,7 +12723,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("next"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -12748,7 +12748,7 @@ object vx_core {
               } else {
                 msgval = vx_core.vx_new_string(valsub.toString())
               }
-              var mapany : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+              var mapany : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
               mapany.put("key", vx_core.vx_new_string("refs"))
               mapany.put("value", msgval)
               var msgmap : vx_core.Type_map = vx_core.t_anymap.vx_new_from_map(mapany)
@@ -12832,12 +12832,15 @@ object vx_core {
       return output
     }
 
+    companion object {
+
     fun const_new(output : vx_core.Type_boolean) : Unit {
       var outval : vx_core.Class_boolean = output as vx_core.Class_boolean
       outval.vx_p_constdef = constdef()
       outval.vxboolean = false
     }
 
+    }
   }
 
   val c_false : vx_core.Type_boolean = vx_core.Class_boolean()
@@ -12867,11 +12870,14 @@ object vx_core {
       return output
     }
 
+    companion object {
+
     fun const_new(output : vx_core.Type_project) : Unit {
       var outval : vx_core.Class_project = output as vx_core.Class_project
       outval.vx_p_constdef = constdef()
     }
 
+    }
   }
 
   val c_global : vx_core.Type_project = vx_core.Class_project()
@@ -12900,12 +12906,15 @@ object vx_core {
       return output
     }
 
+    companion object {
+
     fun const_new(output : vx_core.Type_int) : Unit {
       var outval : vx_core.Class_int = output as vx_core.Class_int
       outval.vx_p_constdef = constdef()
       outval.vxint = 0
     }
 
+    }
   }
 
   val c_infinity : vx_core.Type_int = vx_core.Class_int()
@@ -12934,11 +12943,14 @@ object vx_core {
       return output
     }
 
+    companion object {
+
     fun const_new(output : vx_core.Type_mempool) : Unit {
       var outval : vx_core.Class_mempool = output as vx_core.Class_mempool
       outval.vx_p_constdef = constdef()
     }
 
+    }
   }
 
   val c_mempool_active : vx_core.Type_mempool = vx_core.Class_mempool()
@@ -12967,12 +12979,15 @@ object vx_core {
       return output
     }
 
+    companion object {
+
     fun const_new(output : vx_core.Type_int) : Unit {
       var outval : vx_core.Class_int = output as vx_core.Class_int
       outval.vx_p_constdef = constdef()
       outval.vxint = 2
     }
 
+    }
   }
 
   val c_msg_error : vx_core.Type_int = vx_core.Class_int()
@@ -13001,12 +13016,15 @@ object vx_core {
       return output
     }
 
+    companion object {
+
     fun const_new(output : vx_core.Type_int) : Unit {
       var outval : vx_core.Class_int = output as vx_core.Class_int
       outval.vx_p_constdef = constdef()
       outval.vxint = 0
     }
 
+    }
   }
 
   val c_msg_info : vx_core.Type_int = vx_core.Class_int()
@@ -13035,12 +13053,15 @@ object vx_core {
       return output
     }
 
+    companion object {
+
     fun const_new(output : vx_core.Type_int) : Unit {
       var outval : vx_core.Class_int = output as vx_core.Class_int
       outval.vx_p_constdef = constdef()
       outval.vxint = 3
     }
 
+    }
   }
 
   val c_msg_severe : vx_core.Type_int = vx_core.Class_int()
@@ -13069,12 +13090,15 @@ object vx_core {
       return output
     }
 
+    companion object {
+
     fun const_new(output : vx_core.Type_int) : Unit {
       var outval : vx_core.Class_int = output as vx_core.Class_int
       outval.vx_p_constdef = constdef()
       outval.vxint = 1
     }
 
+    }
   }
 
   val c_msg_warning : vx_core.Type_int = vx_core.Class_int()
@@ -13103,12 +13127,15 @@ object vx_core {
       return output
     }
 
+    companion object {
+
     fun const_new(output : vx_core.Type_int) : Unit {
       var outval : vx_core.Class_int = output as vx_core.Class_int
       outval.vx_p_constdef = constdef()
       outval.vxint = 0
     }
 
+    }
   }
 
   val c_neginfinity : vx_core.Type_int = vx_core.Class_int()
@@ -13137,12 +13164,15 @@ object vx_core {
       return output
     }
 
+    companion object {
+
     fun const_new(output : vx_core.Type_string) : Unit {
       var outval : vx_core.Class_string = output as vx_core.Class_string
       outval.vx_p_constdef = constdef()
       outval.vxstring = "\n"
     }
 
+    }
   }
 
   val c_newline : vx_core.Type_string = vx_core.Class_string()
@@ -13171,12 +13201,15 @@ object vx_core {
       return output
     }
 
+    companion object {
+
     fun const_new(output : vx_core.Type_int) : Unit {
       var outval : vx_core.Class_int = output as vx_core.Class_int
       outval.vx_p_constdef = constdef()
       outval.vxint = 0
     }
 
+    }
   }
 
   val c_notanumber : vx_core.Type_int = vx_core.Class_int()
@@ -13205,12 +13238,15 @@ object vx_core {
       return output
     }
 
+    companion object {
+
     fun const_new(output : vx_core.Type_string) : Unit {
       var outval : vx_core.Class_string = output as vx_core.Class_string
       outval.vx_p_constdef = constdef()
       outval.vxstring = "nothing"
     }
 
+    }
   }
 
   val c_nothing : vx_core.Type_string = vx_core.Class_string()
@@ -13239,12 +13275,15 @@ object vx_core {
       return output
     }
 
+    companion object {
+
     fun const_new(output : vx_core.Type_string) : Unit {
       var outval : vx_core.Class_string = output as vx_core.Class_string
       outval.vx_p_constdef = constdef()
       outval.vxstring = "app/src/test/kotlin/resources"
     }
 
+    }
   }
 
   val c_path_test_resources : vx_core.Type_string = vx_core.Class_string()
@@ -13273,12 +13312,15 @@ object vx_core {
       return output
     }
 
+    companion object {
+
     fun const_new(output : vx_core.Type_string) : Unit {
       var outval : vx_core.Class_string = output as vx_core.Class_string
       outval.vx_p_constdef = constdef()
       outval.vxstring = "\""
     }
 
+    }
   }
 
   val c_quote : vx_core.Type_string = vx_core.Class_string()
@@ -13307,19 +13349,22 @@ object vx_core {
       return output
     }
 
+    companion object {
+
     fun const_new(output : vx_core.Type_boolean) : Unit {
       var outval : vx_core.Class_boolean = output as vx_core.Class_boolean
       outval.vx_p_constdef = constdef()
       outval.vxboolean = true
     }
 
+    }
   }
 
   val c_true : vx_core.Type_boolean = vx_core.Class_boolean()
 
 
   interface Func_not : vx_core.Func_any_from_any {
-    fun vx_not(val : vx_core.Type_boolean) : vx_core.Type_boolean
+    fun vx_not(value : vx_core.Type_boolean) : vx_core.Type_boolean
   }
 
   class Class_not : vx_core.Class_base, Func_not {
@@ -13340,7 +13385,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "!", // name
@@ -13377,7 +13422,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_boolean = value as vx_core.Type_boolean
       var outputval : vx_core.Type_any = vx_core.f_not(inputval)
@@ -13385,15 +13430,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
-      var val : vx_core.Type_boolean = vx_core.f_any_from_any(vx_core.t_boolean, arglist.vx_any(vx_core.vx_new_int(0)))
-      output = vx_core.f_not(val)
+      var value : vx_core.Type_boolean = vx_core.f_any_from_any(vx_core.t_boolean, arglist.vx_any(vx_core.vx_new_int(0)))
+      output = vx_core.f_not(value)
       return output
     }
 
-    fun vx_core.Type_boolean vx_not(vx_core.Type_boolean val) {
-      return vx_core.f_not(val)
+    override fun vx_not(value : vx_core.Type_boolean) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_not(value)
+      return output
     }
 
   }
@@ -13401,9 +13447,9 @@ object vx_core {
   val e_not : vx_core.Func_not = vx_core.Class_not()
   val t_not : vx_core.Func_not = vx_core.Class_not()
 
-  fun f_not(val : vx_core.Type_boolean) : vx_core.Type_boolean {
+  fun f_not(value : vx_core.Type_boolean) : vx_core.Type_boolean {
     var output : vx_core.Type_boolean = vx_core.e_boolean
-    output = vx_core.vx_new_boolean(!val.vx_boolean())
+    output = vx_core.vx_new_boolean(!value.vx_boolean())
     return output
   }
 
@@ -13430,7 +13476,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "!-empty", // name
@@ -13467,7 +13513,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_string = value as vx_core.Type_string
       var outputval : vx_core.Type_any = vx_core.f_notempty(inputval)
@@ -13475,15 +13521,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var text : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_notempty(text)
       return output
     }
 
-    fun vx_core.Type_boolean vx_notempty(vx_core.Type_string text) {
-      return vx_core.f_notempty(text)
+    override fun vx_notempty(text : vx_core.Type_string) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_notempty(text)
+      return output
     }
 
   }
@@ -13494,14 +13541,16 @@ object vx_core {
   fun f_notempty(text : vx_core.Type_string) : vx_core.Type_boolean {
     var output : vx_core.Type_boolean = vx_core.e_boolean
     output = vx_core.f_not(
-      vx_core.f_is_empty(text)
+      vx_core.f_is_empty(
+        text
+      )
     )
     return output
   }
 
 
   interface Func_notempty_1 : vx_core.Func_any_from_any {
-    fun vx_notempty_1(val : vx_core.Type_any) : vx_core.Type_boolean
+    fun vx_notempty_1(value : vx_core.Type_any) : vx_core.Type_boolean
   }
 
   class Class_notempty_1 : vx_core.Class_base, Func_notempty_1 {
@@ -13522,7 +13571,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "!-empty", // name
@@ -13559,7 +13608,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_any = value as vx_core.Type_any
       var outputval : vx_core.Type_any = vx_core.f_notempty_1(inputval)
@@ -13567,15 +13616,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
-      var val : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
-      output = vx_core.f_notempty_1(val)
+      var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
+      output = vx_core.f_notempty_1(value)
       return output
     }
 
-    fun vx_core.Type_boolean vx_notempty_1(vx_core.Type_any val) {
-      return vx_core.f_notempty_1(val)
+    override fun vx_notempty_1(value : vx_core.Type_any) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_notempty_1(value)
+      return output
     }
 
   }
@@ -13583,10 +13633,12 @@ object vx_core {
   val e_notempty_1 : vx_core.Func_notempty_1 = vx_core.Class_notempty_1()
   val t_notempty_1 : vx_core.Func_notempty_1 = vx_core.Class_notempty_1()
 
-  fun f_notempty_1(val : vx_core.Type_any) : vx_core.Type_boolean {
+  fun f_notempty_1(value : vx_core.Type_any) : vx_core.Type_boolean {
     var output : vx_core.Type_boolean = vx_core.e_boolean
     output = vx_core.f_not(
-      vx_core.f_is_empty_1(val)
+      vx_core.f_is_empty_1(
+        value
+      )
     )
     return output
   }
@@ -13614,7 +13666,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "!=", // name
@@ -13647,7 +13699,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var val1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var val2 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -13655,8 +13707,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_boolean vx_ne(vx_core.Type_any val1, vx_core.Type_any val2) {
-      return vx_core.f_ne(val1, val2)
+    override fun vx_ne(val1 : vx_core.Type_any, val2 : vx_core.Type_any) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_ne(val1, val2)
+      return output
     }
 
   }
@@ -13667,7 +13720,10 @@ object vx_core {
   fun f_ne(val1 : vx_core.Type_any, val2 : vx_core.Type_any) : vx_core.Type_boolean {
     var output : vx_core.Type_boolean = vx_core.e_boolean
     output = vx_core.f_not(
-      vx_core.f_eq(val1, val2)
+      vx_core.f_eq(
+        val1,
+        val2
+      )
     )
     return output
   }
@@ -13695,7 +13751,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "!==", // name
@@ -13728,7 +13784,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var val1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var val2 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -13736,8 +13792,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_boolean vx_neqeq(vx_core.Type_any val1, vx_core.Type_any val2) {
-      return vx_core.f_neqeq(val1, val2)
+    override fun vx_neqeq(val1 : vx_core.Type_any, val2 : vx_core.Type_any) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_neqeq(val1, val2)
+      return output
     }
 
   }
@@ -13748,7 +13805,10 @@ object vx_core {
   fun f_neqeq(val1 : vx_core.Type_any, val2 : vx_core.Type_any) : vx_core.Type_boolean {
     var output : vx_core.Type_boolean = vx_core.e_boolean
     output = vx_core.f_not(
-      vx_core.f_eqeq(val1, val2)
+      vx_core.f_eqeq(
+        val1,
+        val2
+      )
     )
     return output
   }
@@ -13776,7 +13836,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "*", // name
@@ -13809,7 +13869,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var num1 : vx_core.Type_int = vx_core.f_any_from_any(vx_core.t_int, arglist.vx_any(vx_core.vx_new_int(0)))
       var num2 : vx_core.Type_int = vx_core.f_any_from_any(vx_core.t_int, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -13817,8 +13877,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_int vx_multiply(vx_core.Type_int num1, vx_core.Type_int num2) {
-      return vx_core.f_multiply(num1, num2)
+    override fun vx_multiply(num1 : vx_core.Type_int, num2 : vx_core.Type_int) : vx_core.Type_int {
+      var output : vx_core.Type_int = vx_core.f_multiply(num1, num2)
+      return output
     }
 
   }
@@ -13854,7 +13915,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "*", // name
@@ -13887,7 +13948,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var num1 : vx_core.Type_number = vx_core.f_any_from_any(vx_core.t_number, arglist.vx_any(vx_core.vx_new_int(0)))
       var num2 : vx_core.Type_number = vx_core.f_any_from_any(vx_core.t_number, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -13895,8 +13956,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_number vx_multiply_1(vx_core.Type_number num1, vx_core.Type_number num2) {
-      return vx_core.f_multiply_1(num1, num2)
+    override fun vx_multiply_1(num1 : vx_core.Type_number, num2 : vx_core.Type_number) : vx_core.Type_number {
+      var output : vx_core.Type_number = vx_core.f_multiply_1(num1, num2)
+      return output
     }
 
   }
@@ -13932,7 +13994,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "*", // name
@@ -13969,7 +14031,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_intlist = value as vx_core.Type_intlist
       var outputval : vx_core.Type_any = vx_core.f_multiply_2(inputval)
@@ -13977,15 +14039,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var nums : vx_core.Type_intlist = vx_core.f_any_from_any(vx_core.t_intlist, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_multiply_2(nums)
       return output
     }
 
-    fun vx_core.Type_int vx_multiply_2(vx_core.Type_intlist nums) {
-      return vx_core.f_multiply_2(nums)
+    override fun vx_multiply_2(nums : vx_core.Type_intlist) : vx_core.Type_int {
+      var output : vx_core.Type_int = vx_core.f_multiply_2(nums)
+      return output
     }
 
   }
@@ -13999,12 +14062,14 @@ object vx_core {
       vx_core.t_int,
       nums,
       vx_core.vx_new_int(1),
-      vx_core.t_any_from_reduce.vx_fn_new((total_any, num_any)  {
-        vx_core.Type_int total = vx_core.f_any_from_any(vx_core.t_int, total_any)
-        vx_core.Type_int num = vx_core.f_any_from_any(vx_core.t_int, num_any)
-        var output_1 : vx_core.Type_any = 
-          vx_core.f_multiply(total, num)
-        return output_1
+      vx_core.t_any_from_reduce.vx_fn_new({total_any, num_any ->
+        var total : vx_core.Type_int = vx_core.f_any_from_any(vx_core.t_int, total_any)
+        var num : vx_core.Type_int = vx_core.f_any_from_any(vx_core.t_int, num_any)
+        var output_1 : vx_core.Type_any = vx_core.f_multiply(
+          total,
+          num
+        )
+        output_1
       })
     )
     return output
@@ -14033,7 +14098,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "*", // name
@@ -14070,7 +14135,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_numberlist = value as vx_core.Type_numberlist
       var outputval : vx_core.Type_any = vx_core.f_multiply_3(inputval)
@@ -14078,15 +14143,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var nums : vx_core.Type_numberlist = vx_core.f_any_from_any(vx_core.t_numberlist, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_multiply_3(nums)
       return output
     }
 
-    fun vx_core.Type_number vx_multiply_3(vx_core.Type_numberlist nums) {
-      return vx_core.f_multiply_3(nums)
+    override fun vx_multiply_3(nums : vx_core.Type_numberlist) : vx_core.Type_number {
+      var output : vx_core.Type_number = vx_core.f_multiply_3(nums)
+      return output
     }
 
   }
@@ -14100,12 +14166,14 @@ object vx_core {
       vx_core.t_number,
       nums,
       vx_core.vx_new_int(1),
-      vx_core.t_any_from_reduce.vx_fn_new((total_any, num_any)  {
-        vx_core.Type_number total = vx_core.f_any_from_any(vx_core.t_number, total_any)
-        vx_core.Type_number num = vx_core.f_any_from_any(vx_core.t_number, num_any)
-        var output_1 : vx_core.Type_any = 
-          vx_core.f_multiply_1(total, num)
-        return output_1
+      vx_core.t_any_from_reduce.vx_fn_new({total_any, num_any ->
+        var total : vx_core.Type_number = vx_core.f_any_from_any(vx_core.t_number, total_any)
+        var num : vx_core.Type_number = vx_core.f_any_from_any(vx_core.t_number, num_any)
+        var output_1 : vx_core.Type_any = vx_core.f_multiply_1(
+          total,
+          num
+        )
+        output_1
       })
     )
     return output
@@ -14134,7 +14202,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "+", // name
@@ -14167,7 +14235,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var num1 : vx_core.Type_int = vx_core.f_any_from_any(vx_core.t_int, arglist.vx_any(vx_core.vx_new_int(0)))
       var num2 : vx_core.Type_int = vx_core.f_any_from_any(vx_core.t_int, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -14175,8 +14243,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_int vx_plus(vx_core.Type_int num1, vx_core.Type_int num2) {
-      return vx_core.f_plus(num1, num2)
+    override fun vx_plus(num1 : vx_core.Type_int, num2 : vx_core.Type_int) : vx_core.Type_int {
+      var output : vx_core.Type_int = vx_core.f_plus(num1, num2)
+      return output
     }
 
   }
@@ -14212,7 +14281,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "+", // name
@@ -14245,7 +14314,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var num1 : vx_core.Type_number = vx_core.f_any_from_any(vx_core.t_number, arglist.vx_any(vx_core.vx_new_int(0)))
       var num2 : vx_core.Type_number = vx_core.f_any_from_any(vx_core.t_number, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -14253,8 +14322,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_number vx_plus_1(vx_core.Type_number num1, vx_core.Type_number num2) {
-      return vx_core.f_plus_1(num1, num2)
+    override fun vx_plus_1(num1 : vx_core.Type_number, num2 : vx_core.Type_number) : vx_core.Type_number {
+      var output : vx_core.Type_number = vx_core.f_plus_1(num1, num2)
+      return output
     }
 
   }
@@ -14290,7 +14360,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "+", // name
@@ -14327,7 +14397,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_intlist = value as vx_core.Type_intlist
       var outputval : vx_core.Type_any = vx_core.f_plus_2(inputval)
@@ -14335,15 +14405,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var nums : vx_core.Type_intlist = vx_core.f_any_from_any(vx_core.t_intlist, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_plus_2(nums)
       return output
     }
 
-    fun vx_core.Type_int vx_plus_2(vx_core.Type_intlist nums) {
-      return vx_core.f_plus_2(nums)
+    override fun vx_plus_2(nums : vx_core.Type_intlist) : vx_core.Type_int {
+      var output : vx_core.Type_int = vx_core.f_plus_2(nums)
+      return output
     }
 
   }
@@ -14357,12 +14428,14 @@ object vx_core {
       vx_core.t_int,
       nums,
       vx_core.vx_new_int(0),
-      vx_core.t_any_from_reduce.vx_fn_new((total_any, num_any)  {
-        vx_core.Type_int total = vx_core.f_any_from_any(vx_core.t_int, total_any)
-        vx_core.Type_int num = vx_core.f_any_from_any(vx_core.t_int, num_any)
-        var output_1 : vx_core.Type_any = 
-          vx_core.f_plus(total, num)
-        return output_1
+      vx_core.t_any_from_reduce.vx_fn_new({total_any, num_any ->
+        var total : vx_core.Type_int = vx_core.f_any_from_any(vx_core.t_int, total_any)
+        var num : vx_core.Type_int = vx_core.f_any_from_any(vx_core.t_int, num_any)
+        var output_1 : vx_core.Type_any = vx_core.f_plus(
+          total,
+          num
+        )
+        output_1
       })
     )
     return output
@@ -14391,7 +14464,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "+", // name
@@ -14428,7 +14501,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_numberlist = value as vx_core.Type_numberlist
       var outputval : vx_core.Type_any = vx_core.f_plus_3(inputval)
@@ -14436,15 +14509,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var nums : vx_core.Type_numberlist = vx_core.f_any_from_any(vx_core.t_numberlist, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_plus_3(nums)
       return output
     }
 
-    fun vx_core.Type_number vx_plus_3(vx_core.Type_numberlist nums) {
-      return vx_core.f_plus_3(nums)
+    override fun vx_plus_3(nums : vx_core.Type_numberlist) : vx_core.Type_number {
+      var output : vx_core.Type_number = vx_core.f_plus_3(nums)
+      return output
     }
 
   }
@@ -14458,12 +14532,14 @@ object vx_core {
       vx_core.t_number,
       nums,
       vx_core.vx_new_int(0),
-      vx_core.t_any_from_reduce.vx_fn_new((total_any, num_any)  {
-        vx_core.Type_number total = vx_core.f_any_from_any(vx_core.t_number, total_any)
-        vx_core.Type_number num = vx_core.f_any_from_any(vx_core.t_number, num_any)
-        var output_1 : vx_core.Type_any = 
-          vx_core.f_plus_1(total, num)
-        return output_1
+      vx_core.t_any_from_reduce.vx_fn_new({total_any, num_any ->
+        var total : vx_core.Type_number = vx_core.f_any_from_any(vx_core.t_number, total_any)
+        var num : vx_core.Type_number = vx_core.f_any_from_any(vx_core.t_number, num_any)
+        var output_1 : vx_core.Type_any = vx_core.f_plus_1(
+          total,
+          num
+        )
+        output_1
       })
     )
     return output
@@ -14492,7 +14568,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "+1", // name
@@ -14529,7 +14605,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_int = value as vx_core.Type_int
       var outputval : vx_core.Type_any = vx_core.f_plus1(inputval)
@@ -14537,15 +14613,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var num : vx_core.Type_int = vx_core.f_any_from_any(vx_core.t_int, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_plus1(num)
       return output
     }
 
-    fun vx_core.Type_int vx_plus1(vx_core.Type_int num) {
-      return vx_core.f_plus1(num)
+    override fun vx_plus1(num : vx_core.Type_int) : vx_core.Type_int {
+      var output : vx_core.Type_int = vx_core.f_plus1(num)
+      return output
     }
 
   }
@@ -14555,7 +14632,10 @@ object vx_core {
 
   fun f_plus1(num : vx_core.Type_int) : vx_core.Type_int {
     var output : vx_core.Type_int = vx_core.e_int
-    output = vx_core.f_plus(num, vx_core.vx_new_int(1))
+    output = vx_core.f_plus(
+      num,
+      vx_core.vx_new_int(1)
+    )
     return output
   }
 
@@ -14582,7 +14662,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "-", // name
@@ -14615,7 +14695,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var num1 : vx_core.Type_int = vx_core.f_any_from_any(vx_core.t_int, arglist.vx_any(vx_core.vx_new_int(0)))
       var num2 : vx_core.Type_int = vx_core.f_any_from_any(vx_core.t_int, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -14623,8 +14703,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_int vx_minus(vx_core.Type_int num1, vx_core.Type_int num2) {
-      return vx_core.f_minus(num1, num2)
+    override fun vx_minus(num1 : vx_core.Type_int, num2 : vx_core.Type_int) : vx_core.Type_int {
+      var output : vx_core.Type_int = vx_core.f_minus(num1, num2)
+      return output
     }
 
   }
@@ -14660,7 +14741,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "-", // name
@@ -14693,7 +14774,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var num1 : vx_core.Type_number = vx_core.f_any_from_any(vx_core.t_number, arglist.vx_any(vx_core.vx_new_int(0)))
       var num2 : vx_core.Type_number = vx_core.f_any_from_any(vx_core.t_number, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -14701,8 +14782,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_number vx_minus_1(vx_core.Type_number num1, vx_core.Type_number num2) {
-      return vx_core.f_minus_1(num1, num2)
+    override fun vx_minus_1(num1 : vx_core.Type_number, num2 : vx_core.Type_number) : vx_core.Type_number {
+      var output : vx_core.Type_number = vx_core.f_minus_1(num1, num2)
+      return output
     }
 
   }
@@ -14738,7 +14820,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "-", // name
@@ -14775,7 +14857,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_intlist = value as vx_core.Type_intlist
       var outputval : vx_core.Type_any = vx_core.f_minus_2(inputval)
@@ -14783,15 +14865,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var nums : vx_core.Type_intlist = vx_core.f_any_from_any(vx_core.t_intlist, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_minus_2(nums)
       return output
     }
 
-    fun vx_core.Type_int vx_minus_2(vx_core.Type_intlist nums) {
-      return vx_core.f_minus_2(nums)
+    override fun vx_minus_2(nums : vx_core.Type_intlist) : vx_core.Type_int {
+      var output : vx_core.Type_int = vx_core.f_minus_2(nums)
+      return output
     }
 
   }
@@ -14805,12 +14888,14 @@ object vx_core {
       vx_core.t_int,
       nums,
       vx_core.vx_new_int(0),
-      vx_core.t_any_from_reduce.vx_fn_new((total_any, num_any)  {
-        vx_core.Type_int total = vx_core.f_any_from_any(vx_core.t_int, total_any)
-        vx_core.Type_int num = vx_core.f_any_from_any(vx_core.t_int, num_any)
-        var output_1 : vx_core.Type_any = 
-          vx_core.f_minus(total, num)
-        return output_1
+      vx_core.t_any_from_reduce.vx_fn_new({total_any, num_any ->
+        var total : vx_core.Type_int = vx_core.f_any_from_any(vx_core.t_int, total_any)
+        var num : vx_core.Type_int = vx_core.f_any_from_any(vx_core.t_int, num_any)
+        var output_1 : vx_core.Type_any = vx_core.f_minus(
+          total,
+          num
+        )
+        output_1
       })
     )
     return output
@@ -14839,7 +14924,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "-", // name
@@ -14876,7 +14961,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_numberlist = value as vx_core.Type_numberlist
       var outputval : vx_core.Type_any = vx_core.f_minus_3(inputval)
@@ -14884,15 +14969,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var nums : vx_core.Type_numberlist = vx_core.f_any_from_any(vx_core.t_numberlist, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_minus_3(nums)
       return output
     }
 
-    fun vx_core.Type_number vx_minus_3(vx_core.Type_numberlist nums) {
-      return vx_core.f_minus_3(nums)
+    override fun vx_minus_3(nums : vx_core.Type_numberlist) : vx_core.Type_number {
+      var output : vx_core.Type_number = vx_core.f_minus_3(nums)
+      return output
     }
 
   }
@@ -14906,12 +14992,14 @@ object vx_core {
       vx_core.t_number,
       nums,
       vx_core.vx_new_int(0),
-      vx_core.t_any_from_reduce.vx_fn_new((total_any, num_any)  {
-        vx_core.Type_number total = vx_core.f_any_from_any(vx_core.t_number, total_any)
-        vx_core.Type_number num = vx_core.f_any_from_any(vx_core.t_number, num_any)
-        var output_1 : vx_core.Type_any = 
-          vx_core.f_minus_1(total, num)
-        return output_1
+      vx_core.t_any_from_reduce.vx_fn_new({total_any, num_any ->
+        var total : vx_core.Type_number = vx_core.f_any_from_any(vx_core.t_number, total_any)
+        var num : vx_core.Type_number = vx_core.f_any_from_any(vx_core.t_number, num_any)
+        var output_1 : vx_core.Type_any = vx_core.f_minus_1(
+          total,
+          num
+        )
+        output_1
       })
     )
     return output
@@ -14940,7 +15028,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "-1", // name
@@ -14977,7 +15065,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_int = value as vx_core.Type_int
       var outputval : vx_core.Type_any = vx_core.f_minus1(inputval)
@@ -14985,15 +15073,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var num : vx_core.Type_int = vx_core.f_any_from_any(vx_core.t_int, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_minus1(num)
       return output
     }
 
-    fun vx_core.Type_int vx_minus1(vx_core.Type_int num) {
-      return vx_core.f_minus1(num)
+    override fun vx_minus1(num : vx_core.Type_int) : vx_core.Type_int {
+      var output : vx_core.Type_int = vx_core.f_minus1(num)
+      return output
     }
 
   }
@@ -15003,7 +15092,10 @@ object vx_core {
 
   fun f_minus1(num : vx_core.Type_int) : vx_core.Type_int {
     var output : vx_core.Type_int = vx_core.e_int
-    output = vx_core.f_minus(num, vx_core.vx_new_int(1))
+    output = vx_core.f_minus(
+      num,
+      vx_core.vx_new_int(1)
+    )
     return output
   }
 
@@ -15030,7 +15122,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         ".", // name
@@ -15063,7 +15155,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var target : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var method : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -15072,8 +15164,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_any vx_dotmethod(vx_core.Type_any target, vx_core.Type_string method, vx_core.Type_anylist parameters) {
-      return vx_core.f_dotmethod(target, method, parameters)
+    override fun vx_dotmethod(target : vx_core.Type_any, method : vx_core.Type_string, parameters : vx_core.Type_anylist) : vx_core.Type_any {
+      var output : vx_core.Type_any = vx_core.f_dotmethod(target, method, parameters)
+      return output
     }
 
   }
@@ -15109,7 +15202,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "/", // name
@@ -15142,7 +15235,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var num1 : vx_core.Type_number = vx_core.f_any_from_any(vx_core.t_number, arglist.vx_any(vx_core.vx_new_int(0)))
       var num2 : vx_core.Type_number = vx_core.f_any_from_any(vx_core.t_number, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -15150,8 +15243,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_number vx_divide(vx_core.Type_number num1, vx_core.Type_number num2) {
-      return vx_core.f_divide(num1, num2)
+    override fun vx_divide(num1 : vx_core.Type_number, num2 : vx_core.Type_number) : vx_core.Type_number {
+      var output : vx_core.Type_number = vx_core.f_divide(num1, num2)
+      return output
     }
 
   }
@@ -15187,7 +15281,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "<", // name
@@ -15220,7 +15314,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var val1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var val2 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -15228,8 +15322,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_boolean vx_lt(vx_core.Type_any val1, vx_core.Type_any val2) {
-      return vx_core.f_lt(val1, val2)
+    override fun vx_lt(val1 : vx_core.Type_any, val2 : vx_core.Type_any) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_lt(val1, val2)
+      return output
     }
 
   }
@@ -15241,18 +15336,23 @@ object vx_core {
     var output : vx_core.Type_boolean = vx_core.e_boolean
     output = vx_core.f_switch(
       vx_core.t_boolean,
-      vx_core.f_compare(val1, val2),
+      vx_core.f_compare(
+        val1,
+        val2
+      ),
       vx_core.vx_new(
         vx_core.t_thenelselist,
         vx_core.f_case_1(
           vx_core.vx_new_int(-1),
-          vx_core.t_any_from_func.vx_fn_new(()  {
-            return vx_core.vx_new_boolean(true)
+          vx_core.t_any_from_func.vx_fn_new({ ->
+            var output_1 : vx_core.Type_any = vx_core.vx_new_boolean(true)
+            output_1
           })
         ),
         vx_core.f_else(
-          vx_core.t_any_from_func.vx_fn_new(()  {
-            return vx_core.vx_new_boolean(false)
+          vx_core.t_any_from_func.vx_fn_new({ ->
+            var output_2 : vx_core.Type_any = vx_core.vx_new_boolean(false)
+            output_2
           })
         )
       )
@@ -15283,7 +15383,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "<", // name
@@ -15320,7 +15420,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_anylist = value as vx_core.Type_anylist
       var outputval : vx_core.Type_any = vx_core.f_lt_1(inputval)
@@ -15328,15 +15428,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var values : vx_core.Type_anylist = vx_core.f_any_from_any(vx_core.t_anylist, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_lt_1(values)
       return output
     }
 
-    fun vx_core.Type_boolean vx_lt_1(vx_core.Type_anylist values) {
-      return vx_core.f_lt_1(values)
+    override fun vx_lt_1(values : vx_core.Type_anylist) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_lt_1(values)
+      return output
     }
 
   }
@@ -15350,16 +15451,18 @@ object vx_core {
       vx_core.t_boolean,
       values,
       vx_core.vx_new_boolean(true),
-      vx_core.t_any_from_reduce_next.vx_fn_new((reduce_any, current_any, next_any)  {
-        vx_core.Type_boolean reduce = vx_core.f_any_from_any(vx_core.t_boolean, reduce_any)
-        vx_core.Type_any current = vx_core.f_any_from_any(vx_core.t_any, current_any)
-        vx_core.Type_any next = vx_core.f_any_from_any(vx_core.t_any, next_any)
-        var output_1 : vx_core.Type_any = 
-          vx_core.f_and(
-            reduce,
-            vx_core.f_lt(current, next)
+      vx_core.t_any_from_reduce_next.vx_fn_new({reduce_any, current_any, next_any ->
+        var reduce : vx_core.Type_boolean = vx_core.f_any_from_any(vx_core.t_boolean, reduce_any)
+        var current : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, current_any)
+        var next : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, next_any)
+        var output_1 : vx_core.Type_any = vx_core.f_and(
+          reduce,
+          vx_core.f_lt(
+            current,
+            next
           )
-        return output_1
+        )
+        output_1
       })
     )
     return output
@@ -15388,7 +15491,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "<-", // name
@@ -15421,7 +15524,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -15430,8 +15533,9 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any> T vx_chainfirst(T generic_any_1, T value, vx_core.Type_any_from_anylist fnlist) {
-      return vx_core.f_chainfirst(generic_any_1, value, fnlist)
+    override fun <T : vx_core.Type_any> vx_chainfirst(generic_any_1 : T, value : T, fnlist : vx_core.Type_any_from_anylist) : T {
+      var output : T = vx_core.f_chainfirst(generic_any_1, value, fnlist)
+      return output
     }
 
   }
@@ -15467,7 +15571,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "<<-", // name
@@ -15500,7 +15604,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -15509,8 +15613,9 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any> T vx_chainlast(T generic_any_1, T value, vx_core.Type_any_from_anylist fnlist) {
-      return vx_core.f_chainlast(generic_any_1, value, fnlist)
+    override fun <T : vx_core.Type_any> vx_chainlast(generic_any_1 : T, value : T, fnlist : vx_core.Type_any_from_anylist) : T {
+      var output : T = vx_core.f_chainlast(generic_any_1, value, fnlist)
+      return output
     }
 
   }
@@ -15546,7 +15651,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "<=", // name
@@ -15579,7 +15684,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var val1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var val2 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -15587,8 +15692,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_boolean vx_le(vx_core.Type_any val1, vx_core.Type_any val2) {
-      return vx_core.f_le(val1, val2)
+    override fun vx_le(val1 : vx_core.Type_any, val2 : vx_core.Type_any) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_le(val1, val2)
+      return output
     }
 
   }
@@ -15599,7 +15705,10 @@ object vx_core {
   fun f_le(val1 : vx_core.Type_any, val2 : vx_core.Type_any) : vx_core.Type_boolean {
     var output : vx_core.Type_boolean = vx_core.e_boolean
     output = vx_core.f_not(
-      vx_core.f_gt(val1, val2)
+      vx_core.f_gt(
+        val1,
+        val2
+      )
     )
     return output
   }
@@ -15627,7 +15736,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "<=", // name
@@ -15664,7 +15773,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_anylist = value as vx_core.Type_anylist
       var outputval : vx_core.Type_any = vx_core.f_le_1(inputval)
@@ -15672,15 +15781,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var args : vx_core.Type_anylist = vx_core.f_any_from_any(vx_core.t_anylist, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_le_1(args)
       return output
     }
 
-    fun vx_core.Type_boolean vx_le_1(vx_core.Type_anylist args) {
-      return vx_core.f_le_1(args)
+    override fun vx_le_1(args : vx_core.Type_anylist) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_le_1(args)
+      return output
     }
 
   }
@@ -15691,7 +15801,9 @@ object vx_core {
   fun f_le_1(args : vx_core.Type_anylist) : vx_core.Type_boolean {
     var output : vx_core.Type_boolean = vx_core.e_boolean
     output = vx_core.f_not(
-      vx_core.f_gt_1(args)
+      vx_core.f_gt_1(
+        args
+      )
     )
     return output
   }
@@ -15719,7 +15831,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "=", // name
@@ -15752,7 +15864,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var val1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var val2 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -15760,8 +15872,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_boolean vx_eq(vx_core.Type_any val1, vx_core.Type_any val2) {
-      return vx_core.f_eq(val1, val2)
+    override fun vx_eq(val1 : vx_core.Type_any, val2 : vx_core.Type_any) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_eq(val1, val2)
+      return output
     }
 
   }
@@ -15797,7 +15910,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "=", // name
@@ -15834,7 +15947,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_anylist = value as vx_core.Type_anylist
       var outputval : vx_core.Type_any = vx_core.f_eq_1(inputval)
@@ -15842,15 +15955,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var values : vx_core.Type_anylist = vx_core.f_any_from_any(vx_core.t_anylist, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_eq_1(values)
       return output
     }
 
-    fun vx_core.Type_boolean vx_eq_1(vx_core.Type_anylist values) {
-      return vx_core.f_eq_1(values)
+    override fun vx_eq_1(values : vx_core.Type_anylist) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_eq_1(values)
+      return output
     }
 
   }
@@ -15864,16 +15978,18 @@ object vx_core {
       vx_core.t_boolean,
       values,
       vx_core.vx_new_boolean(false),
-      vx_core.t_any_from_reduce_next.vx_fn_new((reduce_any, current_any, next_any)  {
-        vx_core.Type_boolean reduce = vx_core.f_any_from_any(vx_core.t_boolean, reduce_any)
-        vx_core.Type_any current = vx_core.f_any_from_any(vx_core.t_any, current_any)
-        vx_core.Type_any next = vx_core.f_any_from_any(vx_core.t_any, next_any)
-        var output_1 : vx_core.Type_any = 
-          vx_core.f_and(
-            reduce,
-            vx_core.f_eq(current, next)
+      vx_core.t_any_from_reduce_next.vx_fn_new({reduce_any, current_any, next_any ->
+        var reduce : vx_core.Type_boolean = vx_core.f_any_from_any(vx_core.t_boolean, reduce_any)
+        var current : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, current_any)
+        var next : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, next_any)
+        var output_1 : vx_core.Type_any = vx_core.f_and(
+          reduce,
+          vx_core.f_eq(
+            current,
+            next
           )
-        return output_1
+        )
+        output_1
       })
     )
     return output
@@ -15902,7 +16018,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "==", // name
@@ -15935,7 +16051,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var val1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var val2 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -15943,8 +16059,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_boolean vx_eqeq(vx_core.Type_any val1, vx_core.Type_any val2) {
-      return vx_core.f_eqeq(val1, val2)
+    override fun vx_eqeq(val1 : vx_core.Type_any, val2 : vx_core.Type_any) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_eqeq(val1, val2)
+      return output
     }
 
   }
@@ -15982,7 +16099,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         ">", // name
@@ -16015,7 +16132,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var val1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var val2 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -16023,8 +16140,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_boolean vx_gt(vx_core.Type_any val1, vx_core.Type_any val2) {
-      return vx_core.f_gt(val1, val2)
+    override fun vx_gt(val1 : vx_core.Type_any, val2 : vx_core.Type_any) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_gt(val1, val2)
+      return output
     }
 
   }
@@ -16036,18 +16154,23 @@ object vx_core {
     var output : vx_core.Type_boolean = vx_core.e_boolean
     output = vx_core.f_switch(
       vx_core.t_boolean,
-      vx_core.f_compare(val1, val2),
+      vx_core.f_compare(
+        val1,
+        val2
+      ),
       vx_core.vx_new(
         vx_core.t_thenelselist,
         vx_core.f_case_1(
           vx_core.vx_new_int(1),
-          vx_core.t_any_from_func.vx_fn_new(()  {
-            return vx_core.vx_new_boolean(true)
+          vx_core.t_any_from_func.vx_fn_new({ ->
+            var output_1 : vx_core.Type_any = vx_core.vx_new_boolean(true)
+            output_1
           })
         ),
         vx_core.f_else(
-          vx_core.t_any_from_func.vx_fn_new(()  {
-            return vx_core.vx_new_boolean(false)
+          vx_core.t_any_from_func.vx_fn_new({ ->
+            var output_2 : vx_core.Type_any = vx_core.vx_new_boolean(false)
+            output_2
           })
         )
       )
@@ -16078,7 +16201,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         ">", // name
@@ -16115,7 +16238,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_anylist = value as vx_core.Type_anylist
       var outputval : vx_core.Type_any = vx_core.f_gt_1(inputval)
@@ -16123,15 +16246,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var values : vx_core.Type_anylist = vx_core.f_any_from_any(vx_core.t_anylist, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_gt_1(values)
       return output
     }
 
-    fun vx_core.Type_boolean vx_gt_1(vx_core.Type_anylist values) {
-      return vx_core.f_gt_1(values)
+    override fun vx_gt_1(values : vx_core.Type_anylist) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_gt_1(values)
+      return output
     }
 
   }
@@ -16145,16 +16269,18 @@ object vx_core {
       vx_core.t_boolean,
       values,
       vx_core.vx_new_boolean(true),
-      vx_core.t_any_from_reduce_next.vx_fn_new((reduce_any, current_any, next_any)  {
-        vx_core.Type_boolean reduce = vx_core.f_any_from_any(vx_core.t_boolean, reduce_any)
-        vx_core.Type_any current = vx_core.f_any_from_any(vx_core.t_any, current_any)
-        vx_core.Type_any next = vx_core.f_any_from_any(vx_core.t_any, next_any)
-        var output_1 : vx_core.Type_any = 
-          vx_core.f_and(
-            reduce,
-            vx_core.f_gt(current, next)
+      vx_core.t_any_from_reduce_next.vx_fn_new({reduce_any, current_any, next_any ->
+        var reduce : vx_core.Type_boolean = vx_core.f_any_from_any(vx_core.t_boolean, reduce_any)
+        var current : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, current_any)
+        var next : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, next_any)
+        var output_1 : vx_core.Type_any = vx_core.f_and(
+          reduce,
+          vx_core.f_gt(
+            current,
+            next
           )
-        return output_1
+        )
+        output_1
       })
     )
     return output
@@ -16183,7 +16309,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         ">=", // name
@@ -16216,7 +16342,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var val1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var val2 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -16224,8 +16350,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_boolean vx_ge(vx_core.Type_any val1, vx_core.Type_any val2) {
-      return vx_core.f_ge(val1, val2)
+    override fun vx_ge(val1 : vx_core.Type_any, val2 : vx_core.Type_any) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_ge(val1, val2)
+      return output
     }
 
   }
@@ -16236,7 +16363,10 @@ object vx_core {
   fun f_ge(val1 : vx_core.Type_any, val2 : vx_core.Type_any) : vx_core.Type_boolean {
     var output : vx_core.Type_boolean = vx_core.e_boolean
     output = vx_core.f_not(
-      vx_core.f_lt(val1, val2)
+      vx_core.f_lt(
+        val1,
+        val2
+      )
     )
     return output
   }
@@ -16264,7 +16394,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         ">=", // name
@@ -16301,7 +16431,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_anylist = value as vx_core.Type_anylist
       var outputval : vx_core.Type_any = vx_core.f_ge_1(inputval)
@@ -16309,15 +16439,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var args : vx_core.Type_anylist = vx_core.f_any_from_any(vx_core.t_anylist, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_ge_1(args)
       return output
     }
 
-    fun vx_core.Type_boolean vx_ge_1(vx_core.Type_anylist args) {
-      return vx_core.f_ge_1(args)
+    override fun vx_ge_1(args : vx_core.Type_anylist) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_ge_1(args)
+      return output
     }
 
   }
@@ -16328,7 +16459,9 @@ object vx_core {
   fun f_ge_1(args : vx_core.Type_anylist) : vx_core.Type_boolean {
     var output : vx_core.Type_boolean = vx_core.e_boolean
     output = vx_core.f_not(
-      vx_core.f_lt_1(args)
+      vx_core.f_lt_1(
+        args
+      )
     )
     return output
   }
@@ -16356,7 +16489,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "allowfuncs<-security", // name
@@ -16393,7 +16526,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_security = value as vx_core.Type_security
       var outputval : vx_core.Type_any = vx_core.f_allowfuncs_from_security(inputval)
@@ -16401,15 +16534,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var security : vx_core.Type_security = vx_core.f_any_from_any(vx_core.t_security, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_allowfuncs_from_security(security)
       return output
     }
 
-    fun vx_core.Type_funclist vx_allowfuncs_from_security(vx_core.Type_security security) {
-      return vx_core.f_allowfuncs_from_security(security)
+    override fun vx_allowfuncs_from_security(security : vx_core.Type_security) : vx_core.Type_funclist {
+      var output : vx_core.Type_funclist = vx_core.f_allowfuncs_from_security(security)
+      return output
     }
 
   }
@@ -16446,7 +16580,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "allowtypenames<-typedef", // name
@@ -16483,7 +16617,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_typedef = value as vx_core.Type_typedef
       var outputval : vx_core.Type_any = vx_core.f_allowtypenames_from_typedef(inputval)
@@ -16491,15 +16625,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var vtypedef : vx_core.Type_typedef = vx_core.f_any_from_any(vx_core.t_typedef, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_allowtypenames_from_typedef(vtypedef)
       return output
     }
 
-    fun vx_core.Type_stringlist vx_allowtypenames_from_typedef(vx_core.Type_typedef vtypedef) {
-      return vx_core.f_allowtypenames_from_typedef(vtypedef)
+    override fun vx_allowtypenames_from_typedef(vtypedef : vx_core.Type_typedef) : vx_core.Type_stringlist {
+      var output : vx_core.Type_stringlist = vx_core.f_allowtypenames_from_typedef(vtypedef)
+      return output
     }
 
   }
@@ -16510,7 +16645,9 @@ object vx_core {
   fun f_allowtypenames_from_typedef(vtypedef : vx_core.Type_typedef) : vx_core.Type_stringlist {
     var output : vx_core.Type_stringlist = vx_core.e_stringlist
     output = vx_core.f_typenames_from_typelist(
-      vx_core.f_allowtypes_from_typedef(vtypedef)
+      vx_core.f_allowtypes_from_typedef(
+        vtypedef
+      )
     )
     return output
   }
@@ -16538,7 +16675,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "allowtypes<-typedef", // name
@@ -16575,7 +16712,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_typedef = value as vx_core.Type_typedef
       var outputval : vx_core.Type_any = vx_core.f_allowtypes_from_typedef(inputval)
@@ -16583,15 +16720,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var vtypedef : vx_core.Type_typedef = vx_core.f_any_from_any(vx_core.t_typedef, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_allowtypes_from_typedef(vtypedef)
       return output
     }
 
-    fun vx_core.Type_typelist vx_allowtypes_from_typedef(vx_core.Type_typedef vtypedef) {
-      return vx_core.f_allowtypes_from_typedef(vtypedef)
+    override fun vx_allowtypes_from_typedef(vtypedef : vx_core.Type_typedef) : vx_core.Type_typelist {
+      var output : vx_core.Type_typelist = vx_core.f_allowtypes_from_typedef(vtypedef)
+      return output
     }
 
   }
@@ -16628,7 +16766,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "and", // name
@@ -16661,7 +16799,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var val1 : vx_core.Type_boolean = vx_core.f_any_from_any(vx_core.t_boolean, arglist.vx_any(vx_core.vx_new_int(0)))
       var val2 : vx_core.Type_boolean = vx_core.f_any_from_any(vx_core.t_boolean, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -16669,8 +16807,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_boolean vx_and(vx_core.Type_boolean val1, vx_core.Type_boolean val2) {
-      return vx_core.f_and(val1, val2)
+    override fun vx_and(val1 : vx_core.Type_boolean, val2 : vx_core.Type_boolean) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_and(val1, val2)
+      return output
     }
 
   }
@@ -16711,7 +16850,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "and", // name
@@ -16748,7 +16887,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_booleanlist = value as vx_core.Type_booleanlist
       var outputval : vx_core.Type_any = vx_core.f_and_1(inputval)
@@ -16756,15 +16895,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var values : vx_core.Type_booleanlist = vx_core.f_any_from_any(vx_core.t_booleanlist, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_and_1(values)
       return output
     }
 
-    fun vx_core.Type_boolean vx_and_1(vx_core.Type_booleanlist values) {
-      return vx_core.f_and_1(values)
+    override fun vx_and_1(values : vx_core.Type_booleanlist) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_and_1(values)
+      return output
     }
 
   }
@@ -16776,39 +16916,50 @@ object vx_core {
     var output : vx_core.Type_boolean = vx_core.e_boolean
     output = vx_core.f_switch(
       vx_core.t_boolean,
-      vx_core.f_length_1(values),
+      vx_core.f_length_1(
+        values
+      ),
       vx_core.vx_new(
         vx_core.t_thenelselist,
         vx_core.f_case_1(
           vx_core.vx_new_int(0),
-          vx_core.t_any_from_func.vx_fn_new(()  {
-            return vx_core.vx_new_boolean(true)
+          vx_core.t_any_from_func.vx_fn_new({ ->
+            var output_1 : vx_core.Type_any = vx_core.vx_new_boolean(true)
+            output_1
           })
         ),
         vx_core.f_case_1(
           vx_core.vx_new_int(1),
-          vx_core.t_any_from_func.vx_fn_new(()  {
-            return vx_core.f_any_from_list(vx_core.t_boolean, values, vx_core.vx_new_int(1))
+          vx_core.t_any_from_func.vx_fn_new({ ->
+            var output_2 : vx_core.Type_any = vx_core.f_any_from_list(
+              vx_core.t_boolean,
+              values,
+              vx_core.vx_new_int(1)
+            )
+            output_2
           })
         ),
         vx_core.f_else(
-          vx_core.t_any_from_func.vx_fn_new(()  {
-            return vx_core.f_any_from_list_start_reduce_next(
+          vx_core.t_any_from_func.vx_fn_new({ ->
+            var output_3 : vx_core.Type_any = vx_core.f_any_from_list_start_reduce_next(
               vx_core.t_boolean,
               values,
               vx_core.vx_new_boolean(true),
-              vx_core.t_any_from_reduce_next.vx_fn_new((reduce_any, current_any, next_any)  {
-                vx_core.Type_boolean reduce = vx_core.f_any_from_any(vx_core.t_boolean, reduce_any)
-                vx_core.Type_boolean current = vx_core.f_any_from_any(vx_core.t_boolean, current_any)
-                vx_core.Type_boolean next = vx_core.f_any_from_any(vx_core.t_boolean, next_any)
-                var output_1 : vx_core.Type_any = 
-                    vx_core.f_and(
-                      reduce,
-                      vx_core.f_and(current, next)
-                    )
-                return output_1
+              vx_core.t_any_from_reduce_next.vx_fn_new({reduce_any, current_any, next_any ->
+                var reduce : vx_core.Type_boolean = vx_core.f_any_from_any(vx_core.t_boolean, reduce_any)
+                var current : vx_core.Type_boolean = vx_core.f_any_from_any(vx_core.t_boolean, current_any)
+                var next : vx_core.Type_boolean = vx_core.f_any_from_any(vx_core.t_boolean, next_any)
+                var output_4 : vx_core.Type_any = vx_core.f_and(
+                  reduce,
+                  vx_core.f_and(
+                    current,
+                    next
+                  )
+                )
+                output_4
               })
             )
+            output_3
           })
         )
       )
@@ -16840,7 +16991,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "any<-any", // name
@@ -16883,7 +17034,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -16891,7 +17042,7 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> T vx_any_from_any(T generic_any_1, U value) {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       if (fn != null) {
         var anyoutput : vx_core.Type_any = fn(value)
@@ -16936,7 +17087,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "any<-any-async", // name
@@ -16979,7 +17130,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : <vx_core.Type_any> {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : <vx_core.Type_any> {
       var output : vx_core.Type_any = await vx_core.vx_async_new_from_value(vx_core.e_any)
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -16988,7 +17139,7 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> <T> vx_any_from_any_async(T generic_any_1, U value) {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any_async(generic_any_1 : T, value : U) : <T> {
       var output : T
       if (fn == null) {
         output = vx_core.vx_async_new_from_value(vx_core.f_empty(generic_any_1))
@@ -17005,7 +17156,7 @@ object vx_core {
   val t_any_from_any_async : vx_core.Func_any_from_any_async = vx_core.Class_any_from_any_async()
 
   fun <T : vx_core.Type_any, U : vx_core.Type_any> f_any_from_any_async(generic_any_1 : T, value : U) : <T> {
-    <T> output = vx_core.vx_async_new_from_value(vx_core.f_empty(generic_any_1))
+    var output : T = await vx_core.vx_async_new_from_value(vx_core.f_empty(generic_any_1))
     return output
   }
 
@@ -17033,7 +17184,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "any<-any-context", // name
@@ -17076,7 +17227,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var context : vx_core.Type_context = vx_core.f_any_from_any(vx_core.t_context, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -17085,7 +17236,7 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> T vx_any_from_any_context(T generic_any_1, vx_core.Type_context context, U value) {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any_context(generic_any_1 : T, context : vx_core.Type_context, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       if (fn != null) {
         var anyoutput : vx_core.Type_any = fn(context, value)
@@ -17131,7 +17282,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "any<-any-context-async", // name
@@ -17174,7 +17325,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : <vx_core.Type_any> {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : <vx_core.Type_any> {
       var output : vx_core.Type_any = await vx_core.vx_async_new_from_value(vx_core.e_any)
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var context : vx_core.Type_context = vx_core.f_any_from_any(vx_core.t_context, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -17184,7 +17335,7 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> <T> vx_any_from_any_context_async(T generic_any_1, vx_core.Type_context context, U value) {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any_context_async(generic_any_1 : T, context : vx_core.Type_context, value : U) : <T> {
       var output : T
       if (fn == null) {
         output = vx_core.vx_async_new_from_value(vx_core.f_empty(generic_any_1))
@@ -17201,7 +17352,7 @@ object vx_core {
   val t_any_from_any_context_async : vx_core.Func_any_from_any_context_async = vx_core.Class_any_from_any_context_async()
 
   fun <T : vx_core.Type_any, U : vx_core.Type_any> f_any_from_any_context_async(generic_any_1 : T, context : vx_core.Type_context, value : U) : <T> {
-    <T> output = vx_core.vx_async_new_from_value(vx_core.f_empty(generic_any_1))
+    var output : T = await vx_core.vx_async_new_from_value(vx_core.f_empty(generic_any_1))
     return output
   }
 
@@ -17229,7 +17380,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "any<-any-key-value", // name
@@ -17272,7 +17423,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var current : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -17282,7 +17433,7 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> T vx_any_from_any_key_value(T generic_any_1, T current, vx_core.Type_string key, U value) {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any_key_value(generic_any_1 : T, current : T, key : vx_core.Type_string, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       if (fn != null) {
         var anyoutput : vx_core.Type_any = fn(current, key, value)
@@ -17325,7 +17476,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "any<-func", // name
@@ -17368,14 +17519,14 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_any_from_func(generic_any_1)
       return output
     }
 
-    fun <T : vx_core.Type_any> T vx_any_from_func(T generic_any_1) {
+    override fun <T : vx_core.Type_any> vx_any_from_func(generic_any_1 : T) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       if (fn != null) {
         var anyoutput : vx_core.Type_any = fn()
@@ -17418,7 +17569,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "any<-func-async", // name
@@ -17461,7 +17612,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : <vx_core.Type_any> {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : <vx_core.Type_any> {
       var output : vx_core.Type_any = await vx_core.vx_async_new_from_value(vx_core.e_any)
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var future : vx_core.Type_any = await vx_core.f_any_from_func_async(generic_any_1)
@@ -17469,7 +17620,7 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any> <T> vx_any_from_func_async(T generic_any_1) {
+    override fun <T : vx_core.Type_any> vx_any_from_func_async(generic_any_1 : T) : <T> {
       var output : T
       if (fn == null) {
         output = vx_core.vx_async_new_from_value(vx_core.f_empty(generic_any_1))
@@ -17486,7 +17637,7 @@ object vx_core {
   val t_any_from_func_async : vx_core.Func_any_from_func_async = vx_core.Class_any_from_func_async()
 
   fun <T : vx_core.Type_any> f_any_from_func_async(generic_any_1 : T) : <T> {
-    <T> output = vx_core.vx_async_new_from_value(vx_core.f_empty(generic_any_1))
+    var output : T = await vx_core.vx_async_new_from_value(vx_core.f_empty(generic_any_1))
     return output
   }
 
@@ -17514,7 +17665,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "any<-int", // name
@@ -17557,7 +17708,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var value : vx_core.Type_int = vx_core.f_any_from_any(vx_core.t_int, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -17565,7 +17716,7 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any> T vx_any_from_int(T generic_any_1, vx_core.Type_int value) {
+    override fun <T : vx_core.Type_any> vx_any_from_int(generic_any_1 : T, value : vx_core.Type_int) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       if (fn != null) {
         var anyoutput : vx_core.Type_any = fn(value)
@@ -17586,7 +17737,7 @@ object vx_core {
 
 
   interface Func_any_from_int_any : vx_core.Type_func, vx_core.Type_replfunc {
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_int_any(generic_any_1 : T, num : vx_core.Type_int, val : U) : T
+    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_int_any(generic_any_1 : T, num : vx_core.Type_int, value : U) : T
     fun vx_fn_new(fn : vx_core.Class_any_from_int_any.IFn) : vx_core.Func_any_from_int_any
   }
 
@@ -17608,7 +17759,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "any<-int-any", // name
@@ -17641,7 +17792,7 @@ object vx_core {
       return output
     }
 
-    fun IFn(vx_core.Type_int num, vx_core.Type_any val) : vx_core.Type_any
+    fun IFn(vx_core.Type_int num, vx_core.Type_any value) : vx_core.Type_any
 
     var fn : vx_core.Class_any_from_int_any.IFn = null
 
@@ -17651,19 +17802,19 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var num : vx_core.Type_int = vx_core.f_any_from_any(vx_core.t_int, arglist.vx_any(vx_core.vx_new_int(0)))
-      var val : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(1)))
-      output = vx_core.f_any_from_int_any(generic_any_1, num, val)
+      var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(1)))
+      output = vx_core.f_any_from_int_any(generic_any_1, num, value)
       return output
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> T vx_any_from_int_any(T generic_any_1, vx_core.Type_int num, U val) {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_int_any(generic_any_1 : T, num : vx_core.Type_int, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       if (fn != null) {
-        var anyoutput : vx_core.Type_any = fn(num, val)
+        var anyoutput : vx_core.Type_any = fn(num, value)
         output = vx_core.f_any_from_any(generic_any_1, anyoutput)
       }
       return output
@@ -17674,14 +17825,14 @@ object vx_core {
   val e_any_from_int_any : vx_core.Func_any_from_int_any = vx_core.Class_any_from_int_any()
   val t_any_from_int_any : vx_core.Func_any_from_int_any = vx_core.Class_any_from_int_any()
 
-  fun <T : vx_core.Type_any, U : vx_core.Type_any> f_any_from_int_any(generic_any_1 : T, num : vx_core.Type_int, val : U) : T {
+  fun <T : vx_core.Type_any, U : vx_core.Type_any> f_any_from_int_any(generic_any_1 : T, num : vx_core.Type_int, value : U) : T {
     var output : T = vx_core.f_empty(generic_any_1)
     return output
   }
 
 
   interface Func_any_from_key_value : vx_core.Type_func, vx_core.Type_replfunc {
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_key_value(generic_any_1 : T, key : vx_core.Type_string, val : U) : T
+    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_key_value(generic_any_1 : T, key : vx_core.Type_string, value : U) : T
     fun vx_fn_new(fn : vx_core.Class_any_from_key_value.IFn) : vx_core.Func_any_from_key_value
   }
 
@@ -17703,7 +17854,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "any<-key-value", // name
@@ -17736,7 +17887,7 @@ object vx_core {
       return output
     }
 
-    fun IFn(vx_core.Type_string key, vx_core.Type_any val) : vx_core.Type_any
+    fun IFn(vx_core.Type_string key, vx_core.Type_any value) : vx_core.Type_any
 
     var fn : vx_core.Class_any_from_key_value.IFn = null
 
@@ -17746,19 +17897,19 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var key : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, arglist.vx_any(vx_core.vx_new_int(0)))
-      var val : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(1)))
-      output = vx_core.f_any_from_key_value(generic_any_1, key, val)
+      var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(1)))
+      output = vx_core.f_any_from_key_value(generic_any_1, key, value)
       return output
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> T vx_any_from_key_value(T generic_any_1, vx_core.Type_string key, U val) {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_key_value(generic_any_1 : T, key : vx_core.Type_string, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       if (fn != null) {
-        var anyoutput : vx_core.Type_any = fn(key, val)
+        var anyoutput : vx_core.Type_any = fn(key, value)
         output = vx_core.f_any_from_any(generic_any_1, anyoutput)
       }
       return output
@@ -17769,14 +17920,14 @@ object vx_core {
   val e_any_from_key_value : vx_core.Func_any_from_key_value = vx_core.Class_any_from_key_value()
   val t_any_from_key_value : vx_core.Func_any_from_key_value = vx_core.Class_any_from_key_value()
 
-  fun <T : vx_core.Type_any, U : vx_core.Type_any> f_any_from_key_value(generic_any_1 : T, key : vx_core.Type_string, val : U) : T {
+  fun <T : vx_core.Type_any, U : vx_core.Type_any> f_any_from_key_value(generic_any_1 : T, key : vx_core.Type_string, value : U) : T {
     var output : T = vx_core.f_empty(generic_any_1)
     return output
   }
 
 
   interface Func_any_from_key_value_async : vx_core.Type_func, vx_core.Type_replfunc_async {
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_key_value_async(generic_any_1 : T, key : vx_core.Type_string, val : U) : <T>
+    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_key_value_async(generic_any_1 : T, key : vx_core.Type_string, value : U) : <T>
     fun vx_fn_new(fn : vx_core.Class_any_from_key_value_async.IFn) : vx_core.Func_any_from_key_value_async
   }
 
@@ -17798,7 +17949,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "any<-key-value-async", // name
@@ -17831,7 +17982,7 @@ object vx_core {
       return output
     }
 
-    fun IFn(vx_core.Type_string key, vx_core.Type_any val) : <vx_core.Type_any>
+    fun IFn(vx_core.Type_string key, vx_core.Type_any value) : <vx_core.Type_any>
 
     var fn : vx_core.Class_any_from_key_value_async.IFn = null
 
@@ -17841,22 +17992,22 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : <vx_core.Type_any> {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : <vx_core.Type_any> {
       var output : vx_core.Type_any = await vx_core.vx_async_new_from_value(vx_core.e_any)
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var key : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, arglist.vx_any(vx_core.vx_new_int(0)))
-      var val : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(1)))
-      var future : vx_core.Type_any = await vx_core.f_any_from_key_value_async(generic_any_1, key, val)
+      var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(1)))
+      var future : vx_core.Type_any = await vx_core.f_any_from_key_value_async(generic_any_1, key, value)
       output = vx_core.vx_async_from_async(vx_core.t_any, future)
       return output
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> <T> vx_any_from_key_value_async(T generic_any_1, vx_core.Type_string key, U val) {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_key_value_async(generic_any_1 : T, key : vx_core.Type_string, value : U) : <T> {
       var output : T
       if (fn == null) {
         output = vx_core.vx_async_new_from_value(vx_core.f_empty(generic_any_1))
       } else {
-        var future : vx_core.Type_any = await fn(key, val)
+        var future : vx_core.Type_any = await fn(key, value)
         output = vx_core.vx_async_from_async(generic_any_1, future)
       }
       return output
@@ -17867,8 +18018,8 @@ object vx_core {
   val e_any_from_key_value_async : vx_core.Func_any_from_key_value_async = vx_core.Class_any_from_key_value_async()
   val t_any_from_key_value_async : vx_core.Func_any_from_key_value_async = vx_core.Class_any_from_key_value_async()
 
-  fun <T : vx_core.Type_any, U : vx_core.Type_any> f_any_from_key_value_async(generic_any_1 : T, key : vx_core.Type_string, val : U) : <T> {
-    <T> output = vx_core.vx_async_new_from_value(vx_core.f_empty(generic_any_1))
+  fun <T : vx_core.Type_any, U : vx_core.Type_any> f_any_from_key_value_async(generic_any_1 : T, key : vx_core.Type_string, value : U) : <T> {
+    var output : T = await vx_core.vx_async_new_from_value(vx_core.f_empty(generic_any_1))
     return output
   }
 
@@ -17895,7 +18046,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "any<-list", // name
@@ -17928,7 +18079,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var values : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -17937,8 +18088,9 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any, X : vx_core.Type_list> T vx_any_from_list(T generic_any_1, X values, vx_core.Type_int index) {
-      return vx_core.f_any_from_list(generic_any_1, values, index)
+    override fun <T : vx_core.Type_any, X : vx_core.Type_list> vx_any_from_list(generic_any_1 : T, values : X, index : vx_core.Type_int) : T {
+      var output : T = vx_core.f_any_from_list(generic_any_1, values, index)
+      return output
     }
 
   }
@@ -17981,7 +18133,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "any<-list-start-reduce", // name
@@ -18014,7 +18166,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var list : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -18024,8 +18176,9 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any, Y : vx_core.Type_list> T vx_any_from_list_start_reduce(T generic_any_1, Y list, T valstart, vx_core.Func_any_from_reduce fn_reduce) {
-      return vx_core.f_any_from_list_start_reduce(generic_any_1, list, valstart, fn_reduce)
+    override fun <T : vx_core.Type_any, Y : vx_core.Type_list> vx_any_from_list_start_reduce(generic_any_1 : T, list : Y, valstart : T, fn_reduce : vx_core.Func_any_from_reduce) : T {
+      var output : T = vx_core.f_any_from_list_start_reduce(generic_any_1, list, valstart, fn_reduce)
+      return output
     }
 
   }
@@ -18062,7 +18215,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "any<-list-start-reduce-next", // name
@@ -18095,7 +18248,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var list : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -18105,8 +18258,9 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any, Y : vx_core.Type_list> T vx_any_from_list_start_reduce_next(T generic_any_1, Y list, T valstart, vx_core.Func_any_from_reduce_next fn_reduce_next) {
-      return vx_core.f_any_from_list_start_reduce_next(generic_any_1, list, valstart, fn_reduce_next)
+    override fun <T : vx_core.Type_any, Y : vx_core.Type_list> vx_any_from_list_start_reduce_next(generic_any_1 : T, list : Y, valstart : T, fn_reduce_next : vx_core.Func_any_from_reduce_next) : T {
+      var output : T = vx_core.f_any_from_list_start_reduce_next(generic_any_1, list, valstart, fn_reduce_next)
+      return output
     }
 
   }
@@ -18142,7 +18296,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "any<-map", // name
@@ -18175,7 +18329,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var valuemap : vx_core.Type_map = vx_core.f_any_from_any(vx_core.t_map, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -18184,8 +18338,9 @@ object vx_core {
       return output
     }
 
-    fun <N : vx_core.Type_map, T : vx_core.Type_any> T vx_any_from_map(T generic_any_1, N valuemap, vx_core.Type_string key) {
-      return vx_core.f_any_from_map(generic_any_1, valuemap, key)
+    override fun <N : vx_core.Type_map, T : vx_core.Type_any> vx_any_from_map(generic_any_1 : T, valuemap : N, key : vx_core.Type_string) : T {
+      var output : T = vx_core.f_any_from_map(generic_any_1, valuemap, key)
+      return output
     }
 
   }
@@ -18222,7 +18377,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "any<-map-start-reduce", // name
@@ -18255,7 +18410,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var map : vx_core.Type_map = vx_core.f_any_from_any(vx_core.t_map, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -18265,8 +18420,9 @@ object vx_core {
       return output
     }
 
-    fun <N : vx_core.Type_map, T : vx_core.Type_any> T vx_any_from_map_start_reduce(T generic_any_1, N map, T start, vx_core.Func_any_from_any_key_value fn_reduce) {
-      return vx_core.f_any_from_map_start_reduce(generic_any_1, map, start, fn_reduce)
+    override fun <N : vx_core.Type_map, T : vx_core.Type_any> vx_any_from_map_start_reduce(generic_any_1 : T, map : N, start : T, fn_reduce : vx_core.Func_any_from_any_key_value) : T {
+      var output : T = vx_core.f_any_from_map_start_reduce(generic_any_1, map, start, fn_reduce)
+      return output
     }
 
   }
@@ -18304,7 +18460,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "any<-none", // name
@@ -18347,14 +18503,14 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_any_from_none(generic_any_1)
       return output
     }
 
-    fun <T : vx_core.Type_any> T vx_any_from_none(T generic_any_1) {
+    override fun <T : vx_core.Type_any> vx_any_from_none(generic_any_1 : T) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       if (fn != null) {
         var anyoutput : vx_core.Type_any = fn()
@@ -18397,7 +18553,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "any<-none-async", // name
@@ -18440,7 +18596,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : <vx_core.Type_any> {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : <vx_core.Type_any> {
       var output : vx_core.Type_any = await vx_core.vx_async_new_from_value(vx_core.e_any)
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var future : vx_core.Type_any = await vx_core.f_any_from_none_async(generic_any_1)
@@ -18448,7 +18604,7 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any> <T> vx_any_from_none_async(T generic_any_1) {
+    override fun <T : vx_core.Type_any> vx_any_from_none_async(generic_any_1 : T) : <T> {
       var output : T
       if (fn == null) {
         output = vx_core.vx_async_new_from_value(vx_core.f_empty(generic_any_1))
@@ -18465,7 +18621,7 @@ object vx_core {
   val t_any_from_none_async : vx_core.Func_any_from_none_async = vx_core.Class_any_from_none_async()
 
   fun <T : vx_core.Type_any> f_any_from_none_async(generic_any_1 : T) : <T> {
-    <T> output = vx_core.vx_async_new_from_value(vx_core.f_empty(generic_any_1))
+    var output : T = await vx_core.vx_async_new_from_value(vx_core.f_empty(generic_any_1))
     return output
   }
 
@@ -18493,7 +18649,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "any<-reduce", // name
@@ -18536,7 +18692,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var result : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -18545,7 +18701,7 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> T vx_any_from_reduce(T generic_any_1, T result, U item) {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_reduce(generic_any_1 : T, result : T, item : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       if (fn != null) {
         var anyoutput : vx_core.Type_any = fn(result, item)
@@ -18588,7 +18744,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "any<-reduce-async", // name
@@ -18631,7 +18787,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : <vx_core.Type_any> {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : <vx_core.Type_any> {
       var output : vx_core.Type_any = await vx_core.vx_async_new_from_value(vx_core.e_any)
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var result : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -18641,7 +18797,7 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> <T> vx_any_from_reduce_async(T generic_any_1, T result, U item) {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_reduce_async(generic_any_1 : T, result : T, item : U) : <T> {
       var output : T
       if (fn == null) {
         output = vx_core.vx_async_new_from_value(vx_core.f_empty(generic_any_1))
@@ -18658,7 +18814,7 @@ object vx_core {
   val t_any_from_reduce_async : vx_core.Func_any_from_reduce_async = vx_core.Class_any_from_reduce_async()
 
   fun <T : vx_core.Type_any, U : vx_core.Type_any> f_any_from_reduce_async(generic_any_1 : T, result : T, item : U) : <T> {
-    <T> output = vx_core.vx_async_new_from_value(vx_core.f_empty(generic_any_1))
+    var output : T = await vx_core.vx_async_new_from_value(vx_core.f_empty(generic_any_1))
     return output
   }
 
@@ -18686,7 +18842,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "any<-reduce-next", // name
@@ -18729,7 +18885,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var result : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -18739,7 +18895,7 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> T vx_any_from_reduce_next(T generic_any_1, T result, U current, U next) {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_reduce_next(generic_any_1 : T, result : T, current : U, next : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       if (fn != null) {
         var anyoutput : vx_core.Type_any = fn(result, current, next)
@@ -18782,7 +18938,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "any<-reduce-next-async", // name
@@ -18825,7 +18981,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : <vx_core.Type_any> {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : <vx_core.Type_any> {
       var output : vx_core.Type_any = await vx_core.vx_async_new_from_value(vx_core.e_any)
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var result : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -18836,7 +18992,7 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> <T> vx_any_from_reduce_next_async(T generic_any_1, T result, U current, U next) {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_reduce_next_async(generic_any_1 : T, result : T, current : U, next : U) : <T> {
       var output : T
       if (fn == null) {
         output = vx_core.vx_async_new_from_value(vx_core.f_empty(generic_any_1))
@@ -18853,7 +19009,7 @@ object vx_core {
   val t_any_from_reduce_next_async : vx_core.Func_any_from_reduce_next_async = vx_core.Class_any_from_reduce_next_async()
 
   fun <T : vx_core.Type_any, U : vx_core.Type_any> f_any_from_reduce_next_async(generic_any_1 : T, result : T, current : U, next : U) : <T> {
-    <T> output = vx_core.vx_async_new_from_value(vx_core.f_empty(generic_any_1))
+    var output : T = await vx_core.vx_async_new_from_value(vx_core.f_empty(generic_any_1))
     return output
   }
 
@@ -18880,7 +19036,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "any<-struct", // name
@@ -18913,7 +19069,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var vstruct : vx_core.Type_struct = vx_core.f_any_from_any(vx_core.t_struct, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -18922,8 +19078,9 @@ object vx_core {
       return output
     }
 
-    fun <R : vx_core.Type_struct, T : vx_core.Type_any> T vx_any_from_struct(T generic_any_1, R vstruct, vx_core.Type_string key) {
-      return vx_core.f_any_from_struct(generic_any_1, vstruct, key)
+    override fun <R : vx_core.Type_struct, T : vx_core.Type_any> vx_any_from_struct(generic_any_1 : T, vstruct : R, key : vx_core.Type_string) : T {
+      var output : T = vx_core.f_any_from_struct(generic_any_1, vstruct, key)
+      return output
     }
 
   }
@@ -18961,7 +19118,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "async", // name
@@ -18998,13 +19155,13 @@ object vx_core {
       return vx_core.e_any_from_any_async
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any_async(generic_any_1 : T, value : U) : <T> {
-      T inputval = vx_core.f_any_from_any(generic_any_1, value)
-      <T> output = vx_core.f_async(generic_any_1, inputval)
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any_async(generic_any_1 : T, value : U) : <T> {
+      var inputval : T = vx_core.f_any_from_any(generic_any_1, value)
+      var output : T = await vx_core.f_async(generic_any_1, inputval)
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : <vx_core.Type_any> {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : <vx_core.Type_any> {
       var output : vx_core.Type_any = await vx_core.vx_async_new_from_value(vx_core.e_any)
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -19013,8 +19170,9 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any> <T> vx_async(T generic_any_1, T value) {
-      return vx_core.f_async(generic_any_1, value)
+    override fun <T : vx_core.Type_any> vx_async(generic_any_1 : T, value : T) : <T> {
+      var output : T = await vx_core.f_async(generic_any_1, value)
+      return output
     }
 
   }
@@ -19023,7 +19181,7 @@ object vx_core {
   val t_async : vx_core.Func_async = vx_core.Class_async()
 
   fun <T : vx_core.Type_any> f_async(generic_any_1 : T, value : T) : <T> {
-    <T> output = vx_core.vx_async_new_from_value(vx_core.f_empty(generic_any_1))
+    var output : T = await vx_core.vx_async_new_from_value(vx_core.f_empty(generic_any_1))
     output = vx_core.vx_async_new_from_value(value)
     return output
   }
@@ -19051,7 +19209,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "boolean-permission<-func", // name
@@ -19088,7 +19246,7 @@ object vx_core {
       return vx_core.e_any_from_any_context
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any_context(generic_any_1 : T, context : vx_core.Type_context, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any_context(generic_any_1 : T, context : vx_core.Type_context, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_func = value as vx_core.Type_func
       var outputval : vx_core.Type_any = vx_core.f_boolean_permission_from_func(context, inputval)
@@ -19096,7 +19254,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var context : vx_core.Type_context = vx_core.f_any_from_any(vx_core.t_context, arglist.vx_any(vx_core.vx_new_int(0)))
       var func : vx_core.Type_func = vx_core.f_any_from_any(vx_core.t_func, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -19104,8 +19262,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_boolean vx_boolean_permission_from_func(vx_core.Type_context context, vx_core.Type_func func) {
-      return vx_core.f_boolean_permission_from_func(context, func)
+    override fun vx_boolean_permission_from_func(context : vx_core.Type_context, func : vx_core.Type_func) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_boolean_permission_from_func(context, func)
+      return output
     }
 
   }
@@ -19117,7 +19276,9 @@ object vx_core {
     var output : vx_core.Type_boolean = vx_core.e_boolean
     output = vx_core.f_contains_1(
       vx_core.f_allowfuncs_from_security(
-        vx_core.f_security_from_context(context)
+        vx_core.f_security_from_context(
+          context
+        )
       ),
       func
     )
@@ -19147,7 +19308,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "boolean-write<-map-name-value", // name
@@ -19180,7 +19341,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var valuemap : vx_core.Type_map = vx_core.f_any_from_any(vx_core.t_map, arglist.vx_any(vx_core.vx_new_int(0)))
       var name : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -19189,8 +19350,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_boolean vx_boolean_write_from_map_name_value(vx_core.Type_map valuemap, vx_core.Type_string name, vx_core.Type_any value) {
-      return vx_core.f_boolean_write_from_map_name_value(valuemap, name, value)
+    override fun vx_boolean_write_from_map_name_value(valuemap : vx_core.Type_map, name : vx_core.Type_string, value : vx_core.Type_any) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_boolean_write_from_map_name_value(valuemap, name, value)
+      return output
     }
 
   }
@@ -19228,7 +19390,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "boolean<-any", // name
@@ -19271,14 +19433,14 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_boolean_from_any(value)
       return output
     }
 
-    fun vx_core.Type_boolean vx_boolean_from_any(vx_core.Type_any value) {
+    override fun vx_boolean_from_any(value : vx_core.Type_any) : vx_core.Type_boolean {
       var output : vx_core.Type_boolean = vx_core.c_false
       if (fn != null) {
         var anyoutput : vx_core.Type_any = fn(value)
@@ -19321,7 +19483,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "boolean<-func", // name
@@ -19364,13 +19526,13 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       output = vx_core.f_boolean_from_func()
       return output
     }
 
-    fun vx_core.Type_boolean vx_boolean_from_func() {
+    override fun vx_boolean_from_func() : vx_core.Type_boolean {
       var output : vx_core.Type_boolean = vx_core.c_false
       if (fn != null) {
         var anyoutput : vx_core.Type_any = fn()
@@ -19413,7 +19575,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "boolean<-none", // name
@@ -19456,13 +19618,13 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       output = vx_core.f_boolean_from_none()
       return output
     }
 
-    fun vx_core.Type_boolean vx_boolean_from_none() {
+    override fun vx_boolean_from_none() : vx_core.Type_boolean {
       var output : vx_core.Type_boolean = vx_core.c_false
       if (fn != null) {
         var anyoutput : vx_core.Type_any = fn()
@@ -19504,7 +19666,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "case", // name
@@ -19537,7 +19699,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var values : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, arglist.vx_any(vx_core.vx_new_int(0)))
       var fn_any : vx_core.Func_any_from_func = vx_core.f_any_from_any(vx_core.t_any_from_func, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -19545,8 +19707,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_thenelse vx_case(vx_core.Type_list values, vx_core.Func_any_from_func fn_any) {
-      return vx_core.f_case(values, fn_any)
+    override fun vx_case(values : vx_core.Type_list, fn_any : vx_core.Func_any_from_func) : vx_core.Type_thenelse {
+      var output : vx_core.Type_thenelse = vx_core.f_case(values, fn_any)
+      return output
     }
 
   }
@@ -19594,7 +19757,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "case", // name
@@ -19627,7 +19790,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var fn_any : vx_core.Func_any_from_func = vx_core.f_any_from_any(vx_core.t_any_from_func, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -19635,8 +19798,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_thenelse vx_case_1(vx_core.Type_any value, vx_core.Func_any_from_func fn_any) {
-      return vx_core.f_case_1(value, fn_any)
+    override fun vx_case_1(value : vx_core.Type_any, fn_any : vx_core.Func_any_from_func) : vx_core.Type_thenelse {
+      var output : vx_core.Type_thenelse = vx_core.f_case_1(value, fn_any)
+      return output
     }
 
   }
@@ -19684,7 +19848,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "compare", // name
@@ -19717,7 +19881,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var val1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var val2 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -19725,8 +19889,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_int vx_compare(vx_core.Type_any val1, vx_core.Type_any val2) {
-      return vx_core.f_compare(val1, val2)
+    override fun vx_compare(val1 : vx_core.Type_any, val2 : vx_core.Type_any) : vx_core.Type_int {
+      var output : vx_core.Type_int = vx_core.f_compare(val1, val2)
+      return output
     }
 
   }
@@ -19763,7 +19928,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "contains", // name
@@ -19796,7 +19961,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var text : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, arglist.vx_any(vx_core.vx_new_int(0)))
       var find : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -19804,8 +19969,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_boolean vx_contains(vx_core.Type_string text, vx_core.Type_string find) {
-      return vx_core.f_contains(text, find)
+    override fun vx_contains(text : vx_core.Type_string, find : vx_core.Type_string) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_contains(text, find)
+      return output
     }
 
   }
@@ -19845,7 +20011,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "contains", // name
@@ -19878,7 +20044,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var values : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, arglist.vx_any(vx_core.vx_new_int(0)))
       var find : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -19886,8 +20052,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_boolean vx_contains_1(vx_core.Type_list values, vx_core.Type_any find) {
-      return vx_core.f_contains_1(values, find)
+    override fun vx_contains_1(values : vx_core.Type_list, find : vx_core.Type_any) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_contains_1(values, find)
+      return output
     }
 
   }
@@ -19924,7 +20091,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "context-main", // name
@@ -19961,7 +20128,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_anylist = value as vx_core.Type_anylist
       var outputval : vx_core.Type_any = vx_core.f_context_main(inputval)
@@ -19969,15 +20136,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var args : vx_core.Type_anylist = vx_core.f_any_from_any(vx_core.t_anylist, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_context_main(args)
       return output
     }
 
-    fun vx_core.Type_context vx_context_main(vx_core.Type_anylist args) {
-      return vx_core.f_context_main(args)
+    override fun vx_context_main(args : vx_core.Type_anylist) : vx_core.Type_context {
+      var output : vx_core.Type_context = vx_core.f_context_main(args)
+      return output
     }
 
   }
@@ -20016,7 +20184,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "copy", // name
@@ -20049,7 +20217,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var values : vx_core.Type_anylist = vx_core.f_any_from_any(vx_core.t_anylist, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -20057,8 +20225,9 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any> T vx_copy(T value, vx_core.Type_anylist values) {
-      return vx_core.f_copy(value, values)
+    override fun <T : vx_core.Type_any> vx_copy(value : T, values : vx_core.Type_anylist) : T {
+      var output : T = vx_core.f_copy(value, values)
+      return output
     }
 
   }
@@ -20097,7 +20266,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "else", // name
@@ -20134,7 +20303,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Func_any_from_func = value as vx_core.Func_any_from_func
       var outputval : vx_core.Type_any = vx_core.f_else(inputval)
@@ -20142,15 +20311,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var fn_any : vx_core.Func_any_from_func = vx_core.f_any_from_any(vx_core.t_any_from_func, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_else(fn_any)
       return output
     }
 
-    fun vx_core.Type_thenelse vx_else(vx_core.Func_any_from_func fn_any) {
-      return vx_core.f_else(fn_any)
+    override fun vx_else(fn_any : vx_core.Func_any_from_func) : vx_core.Type_thenelse {
+      var output : vx_core.Type_thenelse = vx_core.f_else(fn_any)
+      return output
     }
 
   }
@@ -20196,7 +20366,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "empty", // name
@@ -20233,7 +20403,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_any = value as vx_core.Type_any
       var outputval : vx_core.Type_any = vx_core.f_empty(inputval)
@@ -20241,15 +20411,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var type : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_empty(type)
       return output
     }
 
-    fun <T : vx_core.Type_any> T vx_empty(T type) {
-      return vx_core.f_empty(type)
+    override fun <T : vx_core.Type_any> vx_empty(type : T) : T {
+      var output : T = vx_core.f_empty(type)
+      return output
     }
 
   }
@@ -20264,7 +20435,7 @@ object vx_core {
 
 
   interface Func_extends_from_any : vx_core.Func_any_from_any {
-    fun vx_extends_from_any(val : vx_core.Type_any) : vx_core.Type_string
+    fun vx_extends_from_any(value : vx_core.Type_any) : vx_core.Type_string
   }
 
   class Class_extends_from_any : vx_core.Class_base, Func_extends_from_any {
@@ -20285,7 +20456,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "extends<-any", // name
@@ -20322,7 +20493,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_any = value as vx_core.Type_any
       var outputval : vx_core.Type_any = vx_core.f_extends_from_any(inputval)
@@ -20330,15 +20501,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
-      var val : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
-      output = vx_core.f_extends_from_any(val)
+      var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
+      output = vx_core.f_extends_from_any(value)
       return output
     }
 
-    fun vx_core.Type_string vx_extends_from_any(vx_core.Type_any val) {
-      return vx_core.f_extends_from_any(val)
+    override fun vx_extends_from_any(value : vx_core.Type_any) : vx_core.Type_string {
+      var output : vx_core.Type_string = vx_core.f_extends_from_any(value)
+      return output
     }
 
   }
@@ -20346,10 +20518,12 @@ object vx_core {
   val e_extends_from_any : vx_core.Func_extends_from_any = vx_core.Class_extends_from_any()
   val t_extends_from_any : vx_core.Func_extends_from_any = vx_core.Class_extends_from_any()
 
-  fun f_extends_from_any(val : vx_core.Type_any) : vx_core.Type_string {
+  fun f_extends_from_any(value : vx_core.Type_any) : vx_core.Type_string {
     var output : vx_core.Type_string = vx_core.e_string
     output = vx_core.f_extends_from_typedef(
-      vx_core.f_typedef_from_any(val)
+      vx_core.f_typedef_from_any(
+        value
+      )
     )
     return output
   }
@@ -20377,7 +20551,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "extends<-typedef", // name
@@ -20414,7 +20588,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_typedef = value as vx_core.Type_typedef
       var outputval : vx_core.Type_any = vx_core.f_extends_from_typedef(inputval)
@@ -20422,15 +20596,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var vtypedef : vx_core.Type_typedef = vx_core.f_any_from_any(vx_core.t_typedef, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_extends_from_typedef(vtypedef)
       return output
     }
 
-    fun vx_core.Type_string vx_extends_from_typedef(vx_core.Type_typedef vtypedef) {
-      return vx_core.f_extends_from_typedef(vtypedef)
+    override fun vx_extends_from_typedef(vtypedef : vx_core.Type_typedef) : vx_core.Type_string {
+      var output : vx_core.Type_string = vx_core.f_extends_from_typedef(vtypedef)
+      return output
     }
 
   }
@@ -20467,7 +20642,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "first<-list", // name
@@ -20504,7 +20679,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_list = value as vx_core.Type_list
       var outputval : vx_core.Type_any = vx_core.f_first_from_list(vx_core.t_any, inputval)
@@ -20512,7 +20687,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var values : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -20520,8 +20695,9 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any, X : vx_core.Type_list> T vx_first_from_list(T generic_any_1, X values) {
-      return vx_core.f_first_from_list(generic_any_1, values)
+    override fun <T : vx_core.Type_any, X : vx_core.Type_list> vx_first_from_list(generic_any_1 : T, values : X) : T {
+      var output : T = vx_core.f_first_from_list(generic_any_1, values)
+      return output
     }
 
   }
@@ -20531,7 +20707,11 @@ object vx_core {
 
   fun <T : vx_core.Type_any, X : vx_core.Type_list> f_first_from_list(generic_any_1 : T, values : X) : T {
     var output : T = vx_core.f_empty(generic_any_1)
-    output = vx_core.f_any_from_list(generic_any_1, values, vx_core.vx_new_int(1))
+    output = vx_core.f_any_from_list(
+      generic_any_1,
+      values,
+      vx_core.vx_new_int(1)
+    )
     return output
   }
 
@@ -20558,7 +20738,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "first<-list-any<-any", // name
@@ -20591,7 +20771,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var values : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -20600,8 +20780,9 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any, X : vx_core.Type_list> T vx_first_from_list_any_from_any(T generic_any_1, X values, vx_core.Func_any_from_any fn_any_from_any) {
-      return vx_core.f_first_from_list_any_from_any(generic_any_1, values, fn_any_from_any)
+    override fun <T : vx_core.Type_any, X : vx_core.Type_list> vx_first_from_list_any_from_any(generic_any_1 : T, values : X, fn_any_from_any : vx_core.Func_any_from_any) : T {
+      var output : T = vx_core.f_first_from_list_any_from_any(generic_any_1, values, fn_any_from_any)
+      return output
     }
 
   }
@@ -20644,7 +20825,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "float<-string", // name
@@ -20681,7 +20862,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_string = value as vx_core.Type_string
       var outputval : vx_core.Type_any = vx_core.f_float_from_string(inputval)
@@ -20689,15 +20870,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var text : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_float_from_string(text)
       return output
     }
 
-    fun vx_core.Type_float vx_float_from_string(vx_core.Type_string text) {
-      return vx_core.f_float_from_string(text)
+    override fun vx_float_from_string(text : vx_core.Type_string) : vx_core.Type_float {
+      var output : vx_core.Type_float = vx_core.f_float_from_string(text)
+      return output
     }
 
   }
@@ -20735,7 +20917,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "fn", // name
@@ -20768,7 +20950,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var parameters : vx_core.Type_arglist = vx_core.f_any_from_any(vx_core.t_arglist, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -20777,8 +20959,9 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any> T vx_fn(T generic_any_1, vx_core.Type_arglist parameters, vx_core.Func_any_from_func fn_any) {
-      return vx_core.f_fn(generic_any_1, parameters, fn_any)
+    override fun <T : vx_core.Type_any> vx_fn(generic_any_1 : T, parameters : vx_core.Type_arglist, fn_any : vx_core.Func_any_from_func) : T {
+      var output : T = vx_core.f_fn(generic_any_1, parameters, fn_any)
+      return output
     }
 
   }
@@ -20793,7 +20976,7 @@ object vx_core {
 
 
   interface Func_funcdef_from_func : vx_core.Func_any_from_any {
-    fun vx_funcdef_from_func(val : vx_core.Type_func) : vx_core.Type_funcdef
+    fun vx_funcdef_from_func(value : vx_core.Type_func) : vx_core.Type_funcdef
   }
 
   class Class_funcdef_from_func : vx_core.Class_base, Func_funcdef_from_func {
@@ -20814,7 +20997,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "funcdef<-func", // name
@@ -20851,7 +21034,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_func = value as vx_core.Type_func
       var outputval : vx_core.Type_any = vx_core.f_funcdef_from_func(inputval)
@@ -20859,15 +21042,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
-      var val : vx_core.Type_func = vx_core.f_any_from_any(vx_core.t_func, arglist.vx_any(vx_core.vx_new_int(0)))
-      output = vx_core.f_funcdef_from_func(val)
+      var value : vx_core.Type_func = vx_core.f_any_from_any(vx_core.t_func, arglist.vx_any(vx_core.vx_new_int(0)))
+      output = vx_core.f_funcdef_from_func(value)
       return output
     }
 
-    fun vx_core.Type_funcdef vx_funcdef_from_func(vx_core.Type_func val) {
-      return vx_core.f_funcdef_from_func(val)
+    override fun vx_funcdef_from_func(value : vx_core.Type_func) : vx_core.Type_funcdef {
+      var output : vx_core.Type_funcdef = vx_core.f_funcdef_from_func(value)
+      return output
     }
 
   }
@@ -20875,9 +21059,9 @@ object vx_core {
   val e_funcdef_from_func : vx_core.Func_funcdef_from_func = vx_core.Class_funcdef_from_func()
   val t_funcdef_from_func : vx_core.Func_funcdef_from_func = vx_core.Class_funcdef_from_func()
 
-  fun f_funcdef_from_func(val : vx_core.Type_func) : vx_core.Type_funcdef {
+  fun f_funcdef_from_func(value : vx_core.Type_func) : vx_core.Type_funcdef {
     var output : vx_core.Type_funcdef = vx_core.e_funcdef
-    output = val.vx_funcdef()
+    output = value.vx_funcdef()
     return output
   }
 
@@ -20904,7 +21088,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "funcname<-funcdef", // name
@@ -20941,7 +21125,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_funcdef = value as vx_core.Type_funcdef
       var outputval : vx_core.Type_any = vx_core.f_funcname_from_funcdef(inputval)
@@ -20949,15 +21133,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var funcdef : vx_core.Type_funcdef = vx_core.f_any_from_any(vx_core.t_funcdef, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_funcname_from_funcdef(funcdef)
       return output
     }
 
-    fun vx_core.Type_string vx_funcname_from_funcdef(vx_core.Type_funcdef funcdef) {
-      return vx_core.f_funcname_from_funcdef(funcdef)
+    override fun vx_funcname_from_funcdef(funcdef : vx_core.Type_funcdef) : vx_core.Type_string {
+      var output : vx_core.Type_string = vx_core.f_funcname_from_funcdef(funcdef)
+      return output
     }
 
   }
@@ -21002,7 +21187,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "if", // name
@@ -21035,7 +21220,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var clause : vx_core.Type_boolean = vx_core.f_any_from_any(vx_core.t_boolean, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -21044,8 +21229,9 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any> T vx_if(T generic_any_1, vx_core.Type_boolean clause, T then) {
-      return vx_core.f_if(generic_any_1, clause, then)
+    override fun <T : vx_core.Type_any> vx_if(generic_any_1 : T, clause : vx_core.Type_boolean, then : T) : T {
+      var output : T = vx_core.f_if(generic_any_1, clause, then)
+      return output
     }
 
   }
@@ -21084,7 +21270,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "if", // name
@@ -21117,7 +21303,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var clause : vx_core.Type_boolean = vx_core.f_any_from_any(vx_core.t_boolean, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -21127,8 +21313,9 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any> T vx_if_1(T generic_any_1, vx_core.Type_boolean clause, T thenval, T elseval) {
-      return vx_core.f_if_1(generic_any_1, clause, thenval, elseval)
+    override fun <T : vx_core.Type_any> vx_if_1(generic_any_1 : T, clause : vx_core.Type_boolean, thenval : T, elseval : T) : T {
+      var output : T = vx_core.f_if_1(generic_any_1, clause, thenval, elseval)
+      return output
     }
 
   }
@@ -21169,7 +21356,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "if", // name
@@ -21206,7 +21393,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_thenelselist = value as vx_core.Type_thenelselist
       var outputval : vx_core.Type_any = vx_core.f_if_2(vx_core.t_any, inputval)
@@ -21214,7 +21401,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var thenelselist : vx_core.Type_thenelselist = vx_core.f_any_from_any(vx_core.t_thenelselist, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -21222,8 +21409,9 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any> T vx_if_2(T generic_any_1, vx_core.Type_thenelselist thenelselist) {
-      return vx_core.f_if_2(generic_any_1, thenelselist)
+    override fun <T : vx_core.Type_any> vx_if_2(generic_any_1 : T, thenelselist : vx_core.Type_thenelselist) : T {
+      var output : T = vx_core.f_if_2(generic_any_1, thenelselist)
+      return output
     }
 
   }
@@ -21261,7 +21449,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "int<-func", // name
@@ -21302,14 +21490,15 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       output = vx_core.f_int_from_func()
       return output
     }
 
-    fun vx_core.Type_int vx_int_from_func() {
-      return vx_core.f_int_from_func()
+    override fun vx_int_from_func() : vx_core.Type_int {
+      var output : vx_core.Type_int = vx_core.f_int_from_func()
+      return output
     }
 
   }
@@ -21324,7 +21513,7 @@ object vx_core {
 
 
   interface Func_int_from_string : vx_core.Func_any_from_any {
-    fun vx_int_from_string(val : vx_core.Type_string) : vx_core.Type_int
+    fun vx_int_from_string(value : vx_core.Type_string) : vx_core.Type_int
   }
 
   class Class_int_from_string : vx_core.Class_base, Func_int_from_string {
@@ -21345,7 +21534,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "int<-string", // name
@@ -21382,7 +21571,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_string = value as vx_core.Type_string
       var outputval : vx_core.Type_any = vx_core.f_int_from_string(inputval)
@@ -21390,15 +21579,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
-      var val : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, arglist.vx_any(vx_core.vx_new_int(0)))
-      output = vx_core.f_int_from_string(val)
+      var value : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, arglist.vx_any(vx_core.vx_new_int(0)))
+      output = vx_core.f_int_from_string(value)
       return output
     }
 
-    fun vx_core.Type_int vx_int_from_string(vx_core.Type_string val) {
-      return vx_core.f_int_from_string(val)
+    override fun vx_int_from_string(value : vx_core.Type_string) : vx_core.Type_int {
+      var output : vx_core.Type_int = vx_core.f_int_from_string(value)
+      return output
     }
 
   }
@@ -21406,33 +21596,46 @@ object vx_core {
   val e_int_from_string : vx_core.Func_int_from_string = vx_core.Class_int_from_string()
   val t_int_from_string : vx_core.Func_int_from_string = vx_core.Class_int_from_string()
 
-  fun f_int_from_string(val : vx_core.Type_string) : vx_core.Type_int {
+  fun f_int_from_string(value : vx_core.Type_string) : vx_core.Type_int {
     var output : vx_core.Type_int = vx_core.e_int
     output = vx_core.f_switch(
       vx_core.t_int,
-      val,
+      value,
       vx_core.vx_new(
         vx_core.t_thenelselist,
         vx_core.f_case_1(
           vx_core.vx_new_string("notanumber"),
-          vx_core.t_any_from_func.vx_fn_new(()  {
-            return vx_core.c_notanumber
+          vx_core.t_any_from_func.vx_fn_new({ ->
+            var output_1 : vx_core.Type_any = vx_core.c_notanumber
+            output_1
           })
         ),
         vx_core.f_case_1(
           vx_core.vx_new_string("infinity"),
-          vx_core.t_any_from_func.vx_fn_new(()  {
-            return vx_core.c_infinity
+          vx_core.t_any_from_func.vx_fn_new({ ->
+            var output_2 : vx_core.Type_any = vx_core.c_infinity
+            output_2
           })
         ),
         vx_core.f_case_1(
           vx_core.vx_new_string("neginfinity"),
-          vx_core.t_any_from_func.vx_fn_new(()  {
-            return vx_core.c_neginfinity
+          vx_core.t_any_from_func.vx_fn_new({ ->
+            var output_3 : vx_core.Type_any = vx_core.c_neginfinity
+            output_3
           })
         ),
         vx_core.f_else(
-          vx_core.t_any_from_func.vx_fn_new(()  {
+          vx_core.t_any_from_func.vx_fn_new({ ->
+            var intresult : vx_core.Type_int = vx_core.e_int
+            val strval : String = value.vx_string()
+            try {
+              val floatresult : float = float.Parse(strval)
+              val iresult : int = floatresult as int
+              intresult = vx_core.vx_new_int(iresult)
+            } catch (ex : Exception) {
+              intresult = vx_core.c_notanumber
+            }
+            return intresult
           })
         )
       )
@@ -21463,7 +21666,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "is-empty", // name
@@ -21500,7 +21703,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_string = value as vx_core.Type_string
       var outputval : vx_core.Type_any = vx_core.f_is_empty(inputval)
@@ -21508,15 +21711,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var text : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_is_empty(text)
       return output
     }
 
-    fun vx_core.Type_boolean vx_is_empty(vx_core.Type_string text) {
-      return vx_core.f_is_empty(text)
+    override fun vx_is_empty(text : vx_core.Type_string) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_is_empty(text)
+      return output
     }
 
   }
@@ -21555,7 +21759,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "is-empty", // name
@@ -21592,7 +21796,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_any = value as vx_core.Type_any
       var outputval : vx_core.Type_any = vx_core.f_is_empty_1(inputval)
@@ -21600,15 +21804,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_is_empty_1(value)
       return output
     }
 
-    fun vx_core.Type_boolean vx_is_empty_1(vx_core.Type_any value) {
-      return vx_core.f_is_empty_1(value)
+    override fun vx_is_empty_1(value : vx_core.Type_any) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_is_empty_1(value)
+      return output
     }
 
   }
@@ -21649,7 +21854,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "is-endswith", // name
@@ -21682,7 +21887,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var text : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, arglist.vx_any(vx_core.vx_new_int(0)))
       var find : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -21690,8 +21895,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_boolean vx_is_endswith(vx_core.Type_string text, vx_core.Type_string find) {
-      return vx_core.f_is_endswith(text, find)
+    override fun vx_is_endswith(text : vx_core.Type_string, find : vx_core.Type_string) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_is_endswith(text, find)
+      return output
     }
 
   }
@@ -21732,7 +21938,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "is-float", // name
@@ -21769,7 +21975,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_any = value as vx_core.Type_any
       var outputval : vx_core.Type_any = vx_core.f_is_float(inputval)
@@ -21777,15 +21983,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_is_float(value)
       return output
     }
 
-    fun vx_core.Type_boolean vx_is_float(vx_core.Type_any value) {
-      return vx_core.f_is_float(value)
+    override fun vx_is_float(value : vx_core.Type_any) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_is_float(value)
+      return output
     }
 
   }
@@ -21802,7 +22009,7 @@ object vx_core {
 
 
   interface Func_is_func : vx_core.Func_any_from_any {
-    fun vx_is_func(val : vx_core.Type_any) : vx_core.Type_boolean
+    fun vx_is_func(value : vx_core.Type_any) : vx_core.Type_boolean
   }
 
   class Class_is_func : vx_core.Class_base, Func_is_func {
@@ -21823,7 +22030,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "is-func", // name
@@ -21860,7 +22067,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_any = value as vx_core.Type_any
       var outputval : vx_core.Type_any = vx_core.f_is_func(inputval)
@@ -21868,15 +22075,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
-      var val : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
-      output = vx_core.f_is_func(val)
+      var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
+      output = vx_core.f_is_func(value)
       return output
     }
 
-    fun vx_core.Type_boolean vx_is_func(vx_core.Type_any val) {
-      return vx_core.f_is_func(val)
+    override fun vx_is_func(value : vx_core.Type_any) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_is_func(value)
+      return output
     }
 
   }
@@ -21884,9 +22092,9 @@ object vx_core {
   val e_is_func : vx_core.Func_is_func = vx_core.Class_is_func()
   val t_is_func : vx_core.Func_is_func = vx_core.Class_is_func()
 
-  fun f_is_func(val : vx_core.Type_any) : vx_core.Type_boolean {
+  fun f_is_func(value : vx_core.Type_any) : vx_core.Type_boolean {
     var output : vx_core.Type_boolean = vx_core.e_boolean
-    if (val is vx_core.Type_func) {
+    if (value is vx_core.Type_func) {
       output = vx_core.c_true
     }
     return output
@@ -21915,7 +22123,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "is-int", // name
@@ -21952,7 +22160,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_any = value as vx_core.Type_any
       var outputval : vx_core.Type_any = vx_core.f_is_int(inputval)
@@ -21960,15 +22168,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_is_int(value)
       return output
     }
 
-    fun vx_core.Type_boolean vx_is_int(vx_core.Type_any value) {
-      return vx_core.f_is_int(value)
+    override fun vx_is_int(value : vx_core.Type_any) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_is_int(value)
+      return output
     }
 
   }
@@ -22006,7 +22215,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "is-number", // name
@@ -22043,7 +22252,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_any = value as vx_core.Type_any
       var outputval : vx_core.Type_any = vx_core.f_is_number(inputval)
@@ -22051,15 +22260,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_is_number(value)
       return output
     }
 
-    fun vx_core.Type_boolean vx_is_number(vx_core.Type_any value) {
-      return vx_core.f_is_number(value)
+    override fun vx_is_number(value : vx_core.Type_any) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_is_number(value)
+      return output
     }
 
   }
@@ -22071,7 +22281,9 @@ object vx_core {
     var output : vx_core.Type_boolean = vx_core.e_boolean
     output = vx_core.f_switch(
       vx_core.t_boolean,
-      vx_core.f_typename_from_any(value),
+      vx_core.f_typename_from_any(
+        value
+      ),
       vx_core.vx_new(
         vx_core.t_thenelselist,
         vx_core.f_case(
@@ -22085,13 +22297,15 @@ object vx_core {
               vx_core.vx_new_string("vx/core/number")
             )
           ),
-          vx_core.t_any_from_func.vx_fn_new(()  {
-            return vx_core.vx_new_boolean(true)
+          vx_core.t_any_from_func.vx_fn_new({ ->
+            var output_1 : vx_core.Type_any = vx_core.vx_new_boolean(true)
+            output_1
           })
         ),
         vx_core.f_else(
-          vx_core.t_any_from_func.vx_fn_new(()  {
-            return vx_core.vx_new_boolean(false)
+          vx_core.t_any_from_func.vx_fn_new({ ->
+            var output_2 : vx_core.Type_any = vx_core.vx_new_boolean(false)
+            output_2
           })
         )
       )
@@ -22122,7 +22336,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "is-pass<-permission", // name
@@ -22159,7 +22373,7 @@ object vx_core {
       return vx_core.e_any_from_any_context
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any_context(generic_any_1 : T, context : vx_core.Type_context, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any_context(generic_any_1 : T, context : vx_core.Type_context, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_permission = value as vx_core.Type_permission
       var outputval : vx_core.Type_any = vx_core.f_is_pass_from_permission(context, inputval)
@@ -22167,7 +22381,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var context : vx_core.Type_context = vx_core.f_any_from_any(vx_core.t_context, arglist.vx_any(vx_core.vx_new_int(0)))
       var permission : vx_core.Type_permission = vx_core.f_any_from_any(vx_core.t_permission, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -22175,8 +22389,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_boolean vx_is_pass_from_permission(vx_core.Type_context context, vx_core.Type_permission permission) {
-      return vx_core.f_is_pass_from_permission(context, permission)
+    override fun vx_is_pass_from_permission(context : vx_core.Type_context, permission : vx_core.Type_permission) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_is_pass_from_permission(context, permission)
+      return output
     }
 
   }
@@ -22188,11 +22403,17 @@ object vx_core {
     var output : vx_core.Type_boolean = vx_core.e_boolean
     output = vx_core.f_let(
       vx_core.t_boolean,
-      vx_core.t_any_from_func.vx_fn_new(()  {
+      vx_core.t_any_from_func.vx_fn_new({ ->
         var id : vx_core.Type_string = permission.id()
-        var lookup : vx_core.Type_permission = vx_core.f_permission_from_id_context(context, id)
-        var output_1 : vx_core.Type_any = vx_core.f_eq(lookup, permission)
-        return output_1
+        var lookup : vx_core.Type_permission = vx_core.f_permission_from_id_context(
+          context,
+          id
+        )
+        var output_1 : vx_core.Type_any = vx_core.f_eq(
+          lookup,
+          permission
+        )
+        output_1
       })
     )
     return output
@@ -22221,7 +22442,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "last<-list", // name
@@ -22258,7 +22479,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_list = value as vx_core.Type_list
       var outputval : vx_core.Type_any = vx_core.f_last_from_list(vx_core.t_any, inputval)
@@ -22266,7 +22487,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var values : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -22274,8 +22495,9 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any, X : vx_core.Type_list> T vx_last_from_list(T generic_any_1, X values) {
-      return vx_core.f_last_from_list(generic_any_1, values)
+    override fun <T : vx_core.Type_any, X : vx_core.Type_list> vx_last_from_list(generic_any_1 : T, values : X) : T {
+      var output : T = vx_core.f_last_from_list(generic_any_1, values)
+      return output
     }
 
   }
@@ -22287,10 +22509,16 @@ object vx_core {
     var output : T = vx_core.f_empty(generic_any_1)
     output = vx_core.f_let(
       generic_any_1,
-      vx_core.t_any_from_func.vx_fn_new(()  {
-        var len : vx_core.Type_int = vx_core.f_length_1(values)
-        var output_1 : vx_core.Type_any = vx_core.f_any_from_list(generic_any_1, values, len)
-        return output_1
+      vx_core.t_any_from_func.vx_fn_new({ ->
+        var len : vx_core.Type_int = vx_core.f_length_1(
+          values
+        )
+        var output_1 : vx_core.Type_any = vx_core.f_any_from_list(
+          generic_any_1,
+          values,
+          len
+        )
+        output_1
       })
     )
     return output
@@ -22319,7 +22547,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "length", // name
@@ -22356,7 +22584,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_string = value as vx_core.Type_string
       var outputval : vx_core.Type_any = vx_core.f_length(inputval)
@@ -22364,15 +22592,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var text : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_length(text)
       return output
     }
 
-    fun vx_core.Type_int vx_length(vx_core.Type_string text) {
-      return vx_core.f_length(text)
+    override fun vx_length(text : vx_core.Type_string) : vx_core.Type_int {
+      var output : vx_core.Type_int = vx_core.f_length(text)
+      return output
     }
 
   }
@@ -22410,7 +22639,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "length", // name
@@ -22447,7 +22676,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_list = value as vx_core.Type_list
       var outputval : vx_core.Type_any = vx_core.f_length_1(inputval)
@@ -22455,15 +22684,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var values : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_length_1(values)
       return output
     }
 
-    fun vx_core.Type_int vx_length_1(vx_core.Type_list values) {
-      return vx_core.f_length_1(values)
+    override fun vx_length_1(values : vx_core.Type_list) : vx_core.Type_int {
+      var output : vx_core.Type_int = vx_core.f_length_1(values)
+      return output
     }
 
   }
@@ -22501,7 +22731,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "length", // name
@@ -22538,7 +22768,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_map = value as vx_core.Type_map
       var outputval : vx_core.Type_any = vx_core.f_length_2(inputval)
@@ -22546,15 +22776,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var valuemap : vx_core.Type_map = vx_core.f_any_from_any(vx_core.t_map, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_length_2(valuemap)
       return output
     }
 
-    fun vx_core.Type_int vx_length_2(vx_core.Type_map valuemap) {
-      return vx_core.f_length_2(valuemap)
+    override fun vx_length_2(valuemap : vx_core.Type_map) : vx_core.Type_int {
+      var output : vx_core.Type_int = vx_core.f_length_2(valuemap)
+      return output
     }
 
   }
@@ -22565,7 +22796,9 @@ object vx_core {
   fun f_length_2(valuemap : vx_core.Type_map) : vx_core.Type_int {
     var output : vx_core.Type_int = vx_core.e_int
     output = vx_core.f_length_1(
-      vx_core.f_stringlist_from_map(valuemap)
+      vx_core.f_stringlist_from_map(
+        valuemap
+      )
     )
     return output
   }
@@ -22593,7 +22826,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "let", // name
@@ -22626,7 +22859,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var fn_any : vx_core.Func_any_from_func = vx_core.f_any_from_any(vx_core.t_any_from_func, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -22634,8 +22867,9 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any> T vx_let(T generic_any_1, vx_core.Func_any_from_func fn_any) {
-      return vx_core.f_let(generic_any_1, fn_any)
+    override fun <T : vx_core.Type_any> vx_let(generic_any_1 : T, fn_any : vx_core.Func_any_from_func) : T {
+      var output : T = vx_core.f_let(generic_any_1, fn_any)
+      return output
     }
 
   }
@@ -22672,7 +22906,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "let-async", // name
@@ -22705,7 +22939,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : <vx_core.Type_any> {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : <vx_core.Type_any> {
       var output : vx_core.Type_any = await vx_core.vx_async_new_from_value(vx_core.e_any)
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var fn_any_async : vx_core.Func_any_from_func_async = vx_core.f_any_from_any(vx_core.t_any_from_func_async, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -22714,8 +22948,9 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any> <T> vx_let_async(T generic_any_1, vx_core.Func_any_from_func_async fn_any_async) {
-      return vx_core.f_let_async(generic_any_1, fn_any_async)
+    override fun <T : vx_core.Type_any> vx_let_async(generic_any_1 : T, fn_any_async : vx_core.Func_any_from_func_async) : <T> {
+      var output : T = await vx_core.f_let_async(generic_any_1, fn_any_async)
+      return output
     }
 
   }
@@ -22724,7 +22959,7 @@ object vx_core {
   val t_let_async : vx_core.Func_let_async = vx_core.Class_let_async()
 
   fun <T : vx_core.Type_any> f_let_async(generic_any_1 : T, fn_any_async : vx_core.Func_any_from_func_async) : <T> {
-    <T> output = vx_core.vx_async_new_from_value(vx_core.f_empty(generic_any_1))
+    var output : T = await vx_core.vx_async_new_from_value(vx_core.f_empty(generic_any_1))
     output = fn_any_async.vx_any_from_func_async(generic_any_1)
     return output
   }
@@ -22752,7 +22987,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "list-join<-list", // name
@@ -22789,7 +23024,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_list = value as vx_core.Type_list
       var outputval : vx_core.Type_any = vx_core.f_list_join_from_list(vx_core.t_list, inputval)
@@ -22797,7 +23032,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_list_1 : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, arglist.vx_any(vx_core.vx_new_int(0)))
       var values : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -22805,8 +23040,9 @@ object vx_core {
       return output
     }
 
-    fun <X : vx_core.Type_list, Y : vx_core.Type_list> X vx_list_join_from_list(X generic_list_1, Y values) {
-      return vx_core.f_list_join_from_list(generic_list_1, values)
+    override fun <X : vx_core.Type_list, Y : vx_core.Type_list> vx_list_join_from_list(generic_list_1 : X, values : Y) : X {
+      var output : X = vx_core.f_list_join_from_list(generic_list_1, values)
+      return output
     }
 
   }
@@ -22819,10 +23055,10 @@ object vx_core {
     output = vx_core.f_list_join_from_list_1(
       generic_list_1,
       values,
-      vx_core.t_any_from_any.vx_fn_new((value_any)  {
-        vx_core.Type_any value = vx_core.f_any_from_any(vx_core.t_any, value_any)
+      vx_core.t_any_from_any.vx_fn_new({value_any ->
+        var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, value_any)
         var output_1 : vx_core.Type_any = value
-        return output_1
+        output_1
       })
     )
     return output
@@ -22851,7 +23087,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "list-join<-list", // name
@@ -22884,7 +23120,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_list_1 : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, arglist.vx_any(vx_core.vx_new_int(0)))
       var values : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -22893,8 +23129,9 @@ object vx_core {
       return output
     }
 
-    fun <X : vx_core.Type_list, Y : vx_core.Type_list> X vx_list_join_from_list_1(X generic_list_1, Y values, vx_core.Func_any_from_any fn_any_from_any) {
-      return vx_core.f_list_join_from_list_1(generic_list_1, values, fn_any_from_any)
+    override fun <X : vx_core.Type_list, Y : vx_core.Type_list> vx_list_join_from_list_1(generic_list_1 : X, values : Y, fn_any_from_any : vx_core.Func_any_from_any) : X {
+      var output : X = vx_core.f_list_join_from_list_1(generic_list_1, values, fn_any_from_any)
+      return output
     }
 
   }
@@ -22931,7 +23168,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "list<-list", // name
@@ -22968,7 +23205,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_list = value as vx_core.Type_list
       var outputval : vx_core.Type_any = vx_core.f_list_from_list(vx_core.t_list, inputval)
@@ -22976,7 +23213,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_list_1 : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, arglist.vx_any(vx_core.vx_new_int(0)))
       var values : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -22984,8 +23221,9 @@ object vx_core {
       return output
     }
 
-    fun <X : vx_core.Type_list, Y : vx_core.Type_list> X vx_list_from_list(X generic_list_1, Y values) {
-      return vx_core.f_list_from_list(generic_list_1, values)
+    override fun <X : vx_core.Type_list, Y : vx_core.Type_list> vx_list_from_list(generic_list_1 : X, values : Y) : X {
+      var output : X = vx_core.f_list_from_list(generic_list_1, values)
+      return output
     }
 
   }
@@ -22998,10 +23236,10 @@ object vx_core {
     output = vx_core.f_list_from_list_1(
       generic_list_1,
       values,
-      vx_core.t_any_from_any.vx_fn_new((value_any)  {
-        vx_core.Type_any value = vx_core.f_any_from_any(vx_core.t_any, value_any)
+      vx_core.t_any_from_any.vx_fn_new({value_any ->
+        var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, value_any)
         var output_1 : vx_core.Type_any = value
-        return output_1
+        output_1
       })
     )
     return output
@@ -23030,7 +23268,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "list<-list", // name
@@ -23063,7 +23301,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_list_1 : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, arglist.vx_any(vx_core.vx_new_int(0)))
       var values : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -23072,8 +23310,9 @@ object vx_core {
       return output
     }
 
-    fun <X : vx_core.Type_list, Y : vx_core.Type_list> X vx_list_from_list_1(X generic_list_1, Y values, vx_core.Func_any_from_any fn_any_from_any) {
-      return vx_core.f_list_from_list_1(generic_list_1, values, fn_any_from_any)
+    override fun <X : vx_core.Type_list, Y : vx_core.Type_list> vx_list_from_list_1(generic_list_1 : X, values : Y, fn_any_from_any : vx_core.Func_any_from_any) : X {
+      var output : X = vx_core.f_list_from_list_1(generic_list_1, values, fn_any_from_any)
+      return output
     }
 
   }
@@ -23110,7 +23349,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "list<-list-async", // name
@@ -23143,7 +23382,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : <vx_core.Type_any> {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : <vx_core.Type_any> {
       var output : vx_core.Type_any = await vx_core.vx_async_new_from_value(vx_core.e_any)
       var generic_list_1 : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, arglist.vx_any(vx_core.vx_new_int(0)))
       var values : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -23153,8 +23392,9 @@ object vx_core {
       return output
     }
 
-    fun <X : vx_core.Type_list, Y : vx_core.Type_list> <X> vx_list_from_list_async(X generic_list_1, Y values, vx_core.Func_any_from_any_async fn_any_from_any_async) {
-      return vx_core.f_list_from_list_async(generic_list_1, values, fn_any_from_any_async)
+    override fun <X : vx_core.Type_list, Y : vx_core.Type_list> vx_list_from_list_async(generic_list_1 : X, values : Y, fn_any_from_any_async : vx_core.Func_any_from_any_async) : <X> {
+      var output : X = await vx_core.f_list_from_list_async(generic_list_1, values, fn_any_from_any_async)
+      return output
     }
 
   }
@@ -23163,7 +23403,7 @@ object vx_core {
   val t_list_from_list_async : vx_core.Func_list_from_list_async = vx_core.Class_list_from_list_async()
 
   fun <X : vx_core.Type_list, Y : vx_core.Type_list> f_list_from_list_async(generic_list_1 : X, values : Y, fn_any_from_any_async : vx_core.Func_any_from_any_async) : <X> {
-    <X> output = vx_core.vx_async_new_from_value(vx_core.f_empty(generic_list_1))
+    var output : X = await vx_core.vx_async_new_from_value(vx_core.f_empty(generic_list_1))
     output = vx_core.vx_list_from_list_async(generic_list_1, values, fn_any_from_any_async)
     return output
   }
@@ -23191,7 +23431,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "list<-list-intany", // name
@@ -23224,7 +23464,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_list_1 : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, arglist.vx_any(vx_core.vx_new_int(0)))
       var values : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -23233,8 +23473,9 @@ object vx_core {
       return output
     }
 
-    fun <X : vx_core.Type_list, Y : vx_core.Type_list> X vx_list_from_list_intany(X generic_list_1, Y values, vx_core.Func_any_from_int_any fn_any_from_int_any) {
-      return vx_core.f_list_from_list_intany(generic_list_1, values, fn_any_from_int_any)
+    override fun <X : vx_core.Type_list, Y : vx_core.Type_list> vx_list_from_list_intany(generic_list_1 : X, values : Y, fn_any_from_int_any : vx_core.Func_any_from_int_any) : X {
+      var output : X = vx_core.f_list_from_list_intany(generic_list_1, values, fn_any_from_int_any)
+      return output
     }
 
   }
@@ -23271,7 +23512,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "list<-map", // name
@@ -23308,7 +23549,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_map = value as vx_core.Type_map
       var outputval : vx_core.Type_any = vx_core.f_list_from_map(vx_core.t_list, inputval)
@@ -23316,7 +23557,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_list_1 : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, arglist.vx_any(vx_core.vx_new_int(0)))
       var valuemap : vx_core.Type_map = vx_core.f_any_from_any(vx_core.t_map, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -23324,8 +23565,9 @@ object vx_core {
       return output
     }
 
-    fun <O : vx_core.Type_map, X : vx_core.Type_list> X vx_list_from_map(X generic_list_1, O valuemap) {
-      return vx_core.f_list_from_map(generic_list_1, valuemap)
+    override fun <O : vx_core.Type_map, X : vx_core.Type_list> vx_list_from_map(generic_list_1 : X, valuemap : O) : X {
+      var output : X = vx_core.f_list_from_map(generic_list_1, valuemap)
+      return output
     }
 
   }
@@ -23338,11 +23580,11 @@ object vx_core {
     output = vx_core.f_list_from_map_1(
       generic_list_1,
       valuemap,
-      vx_core.t_any_from_key_value.vx_fn_new((key_any, value_any)  {
-        vx_core.Type_string key = vx_core.f_any_from_any(vx_core.t_string, key_any)
-        vx_core.Type_any value = vx_core.f_any_from_any(vx_core.t_any, value_any)
+      vx_core.t_any_from_key_value.vx_fn_new({key_any, value_any ->
+        var key : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, key_any)
+        var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, value_any)
         var output_1 : vx_core.Type_any = value
-        return output_1
+        output_1
       })
     )
     return output
@@ -23371,7 +23613,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "list<-map", // name
@@ -23404,7 +23646,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_list_1 : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, arglist.vx_any(vx_core.vx_new_int(0)))
       var valuemap : vx_core.Type_map = vx_core.f_any_from_any(vx_core.t_map, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -23413,8 +23655,9 @@ object vx_core {
       return output
     }
 
-    fun <O : vx_core.Type_map, X : vx_core.Type_list> X vx_list_from_map_1(X generic_list_1, O valuemap, vx_core.Func_any_from_key_value fn_any_from_key_value) {
-      return vx_core.f_list_from_map_1(generic_list_1, valuemap, fn_any_from_key_value)
+    override fun <O : vx_core.Type_map, X : vx_core.Type_list> vx_list_from_map_1(generic_list_1 : X, valuemap : O, fn_any_from_key_value : vx_core.Func_any_from_key_value) : X {
+      var output : X = vx_core.f_list_from_map_1(generic_list_1, valuemap, fn_any_from_key_value)
+      return output
     }
 
   }
@@ -23451,7 +23694,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "list<-map-async", // name
@@ -23484,7 +23727,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : <vx_core.Type_any> {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : <vx_core.Type_any> {
       var output : vx_core.Type_any = await vx_core.vx_async_new_from_value(vx_core.e_any)
       var generic_list_1 : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, arglist.vx_any(vx_core.vx_new_int(0)))
       var valuemap : vx_core.Type_map = vx_core.f_any_from_any(vx_core.t_map, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -23494,8 +23737,9 @@ object vx_core {
       return output
     }
 
-    fun <O : vx_core.Type_map, X : vx_core.Type_list> <X> vx_list_from_map_async(X generic_list_1, O valuemap, vx_core.Func_any_from_key_value_async fn_any_from_key_value_async) {
-      return vx_core.f_list_from_map_async(generic_list_1, valuemap, fn_any_from_key_value_async)
+    override fun <O : vx_core.Type_map, X : vx_core.Type_list> vx_list_from_map_async(generic_list_1 : X, valuemap : O, fn_any_from_key_value_async : vx_core.Func_any_from_key_value_async) : <X> {
+      var output : X = await vx_core.f_list_from_map_async(generic_list_1, valuemap, fn_any_from_key_value_async)
+      return output
     }
 
   }
@@ -23504,7 +23748,7 @@ object vx_core {
   val t_list_from_map_async : vx_core.Func_list_from_map_async = vx_core.Class_list_from_map_async()
 
   fun <O : vx_core.Type_map, X : vx_core.Type_list> f_list_from_map_async(generic_list_1 : X, valuemap : O, fn_any_from_key_value_async : vx_core.Func_any_from_key_value_async) : <X> {
-    <X> output = vx_core.vx_async_new_from_value(vx_core.f_empty(generic_list_1))
+    var output : X = await vx_core.vx_async_new_from_value(vx_core.f_empty(generic_list_1))
     return output
   }
 
@@ -23531,7 +23775,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "list<-type", // name
@@ -23568,7 +23812,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_any = value as vx_core.Type_any
       var outputval : vx_core.Type_any = vx_core.f_list_from_type(inputval)
@@ -23576,15 +23820,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var type : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_list_from_type(type)
       return output
     }
 
-    fun vx_core.Type_any vx_list_from_type(vx_core.Type_any type) {
-      return vx_core.f_list_from_type(type)
+    override fun vx_list_from_type(type : vx_core.Type_any) : vx_core.Type_any {
+      var output : vx_core.Type_any = vx_core.f_list_from_type(type)
+      return output
     }
 
   }
@@ -23620,7 +23865,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "log", // name
@@ -23657,7 +23902,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_any = value as vx_core.Type_any
       var outputval : vx_core.Type_any = vx_core.f_log(inputval)
@@ -23665,15 +23910,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_log(value)
       return output
     }
 
-    fun vx_core.Type_any vx_log(vx_core.Type_any value) {
-      return vx_core.f_log(value)
+    override fun vx_log(value : vx_core.Type_any) : vx_core.Type_any {
+      var output : vx_core.Type_any = vx_core.f_log(value)
+      return output
     }
 
   }
@@ -23711,7 +23957,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "log", // name
@@ -23744,7 +23990,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var text : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -23753,8 +23999,9 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any> T vx_log_1(T generic_any_1, vx_core.Type_string text, T value) {
-      return vx_core.f_log_1(generic_any_1, text, value)
+    override fun <T : vx_core.Type_any> vx_log_1(generic_any_1 : T, text : vx_core.Type_string, value : T) : T {
+      var output : T = vx_core.f_log_1(generic_any_1, text, value)
+      return output
     }
 
   }
@@ -23793,7 +24040,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "main", // name
@@ -23830,7 +24077,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_anylist = value as vx_core.Type_anylist
       var outputval : vx_core.Type_any = vx_core.f_main(inputval)
@@ -23838,15 +24085,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var args : vx_core.Type_anylist = vx_core.f_any_from_any(vx_core.t_anylist, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_main(args)
       return output
     }
 
-    fun vx_core.Type_string vx_main(vx_core.Type_anylist args) {
-      return vx_core.f_main(args)
+    override fun vx_main(args : vx_core.Type_anylist) : vx_core.Type_string {
+      var output : vx_core.Type_string = vx_core.f_main(args)
+      return output
     }
 
   }
@@ -23886,7 +24134,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "map<-list", // name
@@ -23919,7 +24167,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_map_1 : vx_core.Type_map = vx_core.f_any_from_any(vx_core.t_map, arglist.vx_any(vx_core.vx_new_int(0)))
       var vallist : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -23928,8 +24176,9 @@ object vx_core {
       return output
     }
 
-    fun <N : vx_core.Type_map, Y : vx_core.Type_list> N vx_map_from_list(N generic_map_1, Y vallist, vx_core.Func_any_from_any fn_any_from_any) {
-      return vx_core.f_map_from_list(generic_map_1, vallist, fn_any_from_any)
+    override fun <N : vx_core.Type_map, Y : vx_core.Type_list> vx_map_from_list(generic_map_1 : N, vallist : Y, fn_any_from_any : vx_core.Func_any_from_any) : N {
+      var output : N = vx_core.f_map_from_list(generic_map_1, vallist, fn_any_from_any)
+      return output
     }
 
   }
@@ -23966,7 +24215,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "map<-map", // name
@@ -24003,7 +24252,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_map = value as vx_core.Type_map
       var outputval : vx_core.Type_any = vx_core.f_map_from_map(vx_core.t_map, inputval)
@@ -24011,7 +24260,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_map_1 : vx_core.Type_map = vx_core.f_any_from_any(vx_core.t_map, arglist.vx_any(vx_core.vx_new_int(0)))
       var valuemap : vx_core.Type_map = vx_core.f_any_from_any(vx_core.t_map, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -24019,8 +24268,9 @@ object vx_core {
       return output
     }
 
-    fun <N : vx_core.Type_map, O : vx_core.Type_map> N vx_map_from_map(N generic_map_1, O valuemap) {
-      return vx_core.f_map_from_map(generic_map_1, valuemap)
+    override fun <N : vx_core.Type_map, O : vx_core.Type_map> vx_map_from_map(generic_map_1 : N, valuemap : O) : N {
+      var output : N = vx_core.f_map_from_map(generic_map_1, valuemap)
+      return output
     }
 
   }
@@ -24033,11 +24283,11 @@ object vx_core {
     output = vx_core.f_map_from_map_1(
       generic_map_1,
       valuemap,
-      vx_core.t_any_from_key_value.vx_fn_new((key_any, value_any)  {
-        vx_core.Type_string key = vx_core.f_any_from_any(vx_core.t_string, key_any)
-        vx_core.Type_any value = vx_core.f_any_from_any(vx_core.t_any, value_any)
+      vx_core.t_any_from_key_value.vx_fn_new({key_any, value_any ->
+        var key : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, key_any)
+        var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, value_any)
         var output_1 : vx_core.Type_any = value
-        return output_1
+        output_1
       })
     )
     return output
@@ -24066,7 +24316,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "map<-map", // name
@@ -24099,7 +24349,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_map_1 : vx_core.Type_map = vx_core.f_any_from_any(vx_core.t_map, arglist.vx_any(vx_core.vx_new_int(0)))
       var valuemap : vx_core.Type_map = vx_core.f_any_from_any(vx_core.t_map, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -24108,8 +24358,9 @@ object vx_core {
       return output
     }
 
-    fun <N : vx_core.Type_map, O : vx_core.Type_map> N vx_map_from_map_1(N generic_map_1, O valuemap, vx_core.Func_any_from_key_value fn_any_from_key_value) {
-      return vx_core.f_map_from_map_1(generic_map_1, valuemap, fn_any_from_key_value)
+    override fun <N : vx_core.Type_map, O : vx_core.Type_map> vx_map_from_map_1(generic_map_1 : N, valuemap : O, fn_any_from_key_value : vx_core.Func_any_from_key_value) : N {
+      var output : N = vx_core.f_map_from_map_1(generic_map_1, valuemap, fn_any_from_key_value)
+      return output
     }
 
   }
@@ -24149,7 +24400,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "msg<-error", // name
@@ -24186,7 +24437,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_string = value as vx_core.Type_string
       var outputval : vx_core.Type_any = vx_core.f_msg_from_error(inputval)
@@ -24194,15 +24445,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var error : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_msg_from_error(error)
       return output
     }
 
-    fun vx_core.Type_msg vx_msg_from_error(vx_core.Type_string error) {
-      return vx_core.f_msg_from_error(error)
+    override fun vx_msg_from_error(error : vx_core.Type_string) : vx_core.Type_msg {
+      var output : vx_core.Type_msg = vx_core.f_msg_from_error(error)
+      return output
     }
 
   }
@@ -24248,7 +24500,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "msg<-error", // name
@@ -24281,7 +24533,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var code : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, arglist.vx_any(vx_core.vx_new_int(0)))
       var detail : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -24289,8 +24541,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_msg vx_msg_from_error_1(vx_core.Type_string code, vx_core.Type_any detail) {
-      return vx_core.f_msg_from_error_1(code, detail)
+    override fun vx_msg_from_error_1(code : vx_core.Type_string, detail : vx_core.Type_any) : vx_core.Type_msg {
+      var output : vx_core.Type_msg = vx_core.f_msg_from_error_1(code, detail)
+      return output
     }
 
   }
@@ -24338,7 +24591,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "msg<-error", // name
@@ -24371,7 +24624,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var path : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, arglist.vx_any(vx_core.vx_new_int(0)))
       var code : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -24380,8 +24633,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_msg vx_msg_from_error_2(vx_core.Type_string path, vx_core.Type_string code, vx_core.Type_any detail) {
-      return vx_core.f_msg_from_error_2(path, code, detail)
+    override fun vx_msg_from_error_2(path : vx_core.Type_string, code : vx_core.Type_string, detail : vx_core.Type_any) : vx_core.Type_msg {
+      var output : vx_core.Type_msg = vx_core.f_msg_from_error_2(path, code, detail)
+      return output
     }
 
   }
@@ -24431,7 +24685,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "msg<-warning", // name
@@ -24468,7 +24722,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_string = value as vx_core.Type_string
       var outputval : vx_core.Type_any = vx_core.f_msg_from_warning(inputval)
@@ -24476,15 +24730,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var warning : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_msg_from_warning(warning)
       return output
     }
 
-    fun vx_core.Type_msg vx_msg_from_warning(vx_core.Type_string warning) {
-      return vx_core.f_msg_from_warning(warning)
+    override fun vx_msg_from_warning(warning : vx_core.Type_string) : vx_core.Type_msg {
+      var output : vx_core.Type_msg = vx_core.f_msg_from_warning(warning)
+      return output
     }
 
   }
@@ -24530,7 +24785,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "msgblock<-msgblock-msg", // name
@@ -24563,7 +24818,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var origblock : vx_core.Type_msgblock = vx_core.f_any_from_any(vx_core.t_msgblock, arglist.vx_any(vx_core.vx_new_int(0)))
       var addmsg : vx_core.Type_msg = vx_core.f_any_from_any(vx_core.t_msg, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -24571,8 +24826,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_msgblock vx_msgblock_from_msgblock_msg(vx_core.Type_msgblock origblock, vx_core.Type_msg addmsg) {
-      return vx_core.f_msgblock_from_msgblock_msg(origblock, addmsg)
+    override fun vx_msgblock_from_msgblock_msg(origblock : vx_core.Type_msgblock, addmsg : vx_core.Type_msg) : vx_core.Type_msgblock {
+      var output : vx_core.Type_msgblock = vx_core.f_msgblock_from_msgblock_msg(origblock, addmsg)
+      return output
     }
 
   }
@@ -24582,9 +24838,13 @@ object vx_core {
 
   fun f_msgblock_from_msgblock_msg(origblock : vx_core.Type_msgblock, addmsg : vx_core.Type_msg) : vx_core.Type_msgblock {
     var output : vx_core.Type_msgblock = vx_core.e_msgblock
-    output = vx_core.f_copy(origblock, vx_core.vx_new(
-      vx_core.t_anylist,
-      addmsg))
+    output = vx_core.f_copy(
+      origblock,
+      vx_core.vx_new(
+        vx_core.t_anylist,
+        addmsg
+      )
+    )
     return output
   }
 
@@ -24611,7 +24871,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "msgblock<-msgblock-msgblock", // name
@@ -24644,7 +24904,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var origblock : vx_core.Type_msgblock = vx_core.f_any_from_any(vx_core.t_msgblock, arglist.vx_any(vx_core.vx_new_int(0)))
       var addblock : vx_core.Type_msgblock = vx_core.f_any_from_any(vx_core.t_msgblock, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -24652,8 +24912,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_msgblock vx_msgblock_from_msgblock_msgblock(vx_core.Type_msgblock origblock, vx_core.Type_msgblock addblock) {
-      return vx_core.f_msgblock_from_msgblock_msgblock(origblock, addblock)
+    override fun vx_msgblock_from_msgblock_msgblock(origblock : vx_core.Type_msgblock, addblock : vx_core.Type_msgblock) : vx_core.Type_msgblock {
+      var output : vx_core.Type_msgblock = vx_core.f_msgblock_from_msgblock_msgblock(origblock, addblock)
+      return output
     }
 
   }
@@ -24697,7 +24958,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "name<-typedef", // name
@@ -24734,7 +24995,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_typedef = value as vx_core.Type_typedef
       var outputval : vx_core.Type_any = vx_core.f_name_from_typedef(inputval)
@@ -24742,15 +25003,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var vtypedef : vx_core.Type_typedef = vx_core.f_any_from_any(vx_core.t_typedef, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_name_from_typedef(vtypedef)
       return output
     }
 
-    fun vx_core.Type_string vx_name_from_typedef(vx_core.Type_typedef vtypedef) {
-      return vx_core.f_name_from_typedef(vtypedef)
+    override fun vx_name_from_typedef(vtypedef : vx_core.Type_typedef) : vx_core.Type_string {
+      var output : vx_core.Type_string = vx_core.f_name_from_typedef(vtypedef)
+      return output
     }
 
   }
@@ -24787,7 +25049,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "native", // name
@@ -24824,7 +25086,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_anylist = value as vx_core.Type_anylist
       var outputval : vx_core.Type_any = vx_core.f_native(vx_core.t_any, inputval)
@@ -24832,7 +25094,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var clauses : vx_core.Type_anylist = vx_core.f_any_from_any(vx_core.t_anylist, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -24840,8 +25102,9 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any> T vx_native(T generic_any_1, vx_core.Type_anylist clauses) {
-      return vx_core.f_native(generic_any_1, clauses)
+    override fun <T : vx_core.Type_any> vx_native(generic_any_1 : T, clauses : vx_core.Type_anylist) : T {
+      var output : T = vx_core.f_native(generic_any_1, clauses)
+      return output
     }
 
   }
@@ -24877,7 +25140,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "native<-any", // name
@@ -24914,7 +25177,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_any = value as vx_core.Type_any
       var outputval : vx_core.Type_any = vx_core.f_native_from_any(inputval)
@@ -24922,15 +25185,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_native_from_any(value)
       return output
     }
 
-    fun vx_core.Type_any vx_native_from_any(vx_core.Type_any value) {
-      return vx_core.f_native_from_any(value)
+    override fun vx_native_from_any(value : vx_core.Type_any) : vx_core.Type_any {
+      var output : vx_core.Type_any = vx_core.f_native_from_any(value)
+      return output
     }
 
   }
@@ -24966,7 +25230,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "new", // name
@@ -24999,7 +25263,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var type : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var values : vx_core.Type_anylist = vx_core.f_any_from_any(vx_core.t_anylist, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -25007,8 +25271,9 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any> T vx_new(T type, vx_core.Type_anylist values) {
-      return vx_core.f_new(type, values)
+    override fun <T : vx_core.Type_any> vx_new(type : T, values : vx_core.Type_anylist) : T {
+      var output : T = vx_core.f_new(type, values)
+      return output
     }
 
   }
@@ -25047,7 +25312,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "number<-func", // name
@@ -25080,14 +25345,15 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       output = vx_core.f_number_from_func()
       return output
     }
 
-    fun vx_core.Type_number vx_number_from_func() {
-      return vx_core.f_number_from_func()
+    override fun vx_number_from_func() : vx_core.Type_number {
+      var output : vx_core.Type_number = vx_core.f_number_from_func()
+      return output
     }
 
   }
@@ -25123,7 +25389,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "or", // name
@@ -25156,7 +25422,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var val1 : vx_core.Type_boolean = vx_core.f_any_from_any(vx_core.t_boolean, arglist.vx_any(vx_core.vx_new_int(0)))
       var val2 : vx_core.Type_boolean = vx_core.f_any_from_any(vx_core.t_boolean, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -25164,8 +25430,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_boolean vx_or(vx_core.Type_boolean val1, vx_core.Type_boolean val2) {
-      return vx_core.f_or(val1, val2)
+    override fun vx_or(val1 : vx_core.Type_boolean, val2 : vx_core.Type_boolean) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_or(val1, val2)
+      return output
     }
 
   }
@@ -25201,7 +25468,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "or", // name
@@ -25238,7 +25505,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_booleanlist = value as vx_core.Type_booleanlist
       var outputval : vx_core.Type_any = vx_core.f_or_1(inputval)
@@ -25246,15 +25513,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var values : vx_core.Type_booleanlist = vx_core.f_any_from_any(vx_core.t_booleanlist, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_or_1(values)
       return output
     }
 
-    fun vx_core.Type_boolean vx_or_1(vx_core.Type_booleanlist values) {
-      return vx_core.f_or_1(values)
+    override fun vx_or_1(values : vx_core.Type_booleanlist) : vx_core.Type_boolean {
+      var output : vx_core.Type_boolean = vx_core.f_or_1(values)
+      return output
     }
 
   }
@@ -25268,16 +25536,18 @@ object vx_core {
       vx_core.t_boolean,
       values,
       vx_core.vx_new_boolean(false),
-      vx_core.t_any_from_reduce_next.vx_fn_new((reduce_any, current_any, next_any)  {
-        vx_core.Type_boolean reduce = vx_core.f_any_from_any(vx_core.t_boolean, reduce_any)
-        vx_core.Type_boolean current = vx_core.f_any_from_any(vx_core.t_boolean, current_any)
-        vx_core.Type_boolean next = vx_core.f_any_from_any(vx_core.t_boolean, next_any)
-        var output_1 : vx_core.Type_any = 
+      vx_core.t_any_from_reduce_next.vx_fn_new({reduce_any, current_any, next_any ->
+        var reduce : vx_core.Type_boolean = vx_core.f_any_from_any(vx_core.t_boolean, reduce_any)
+        var current : vx_core.Type_boolean = vx_core.f_any_from_any(vx_core.t_boolean, current_any)
+        var next : vx_core.Type_boolean = vx_core.f_any_from_any(vx_core.t_boolean, next_any)
+        var output_1 : vx_core.Type_any = vx_core.f_or(
+          reduce,
           vx_core.f_or(
-            reduce,
-            vx_core.f_or(current, next)
+            current,
+            next
           )
-        return output_1
+        )
+        output_1
       })
     )
     return output
@@ -25306,7 +25576,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "package-global<-name", // name
@@ -25343,7 +25613,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_string = value as vx_core.Type_string
       var outputval : vx_core.Type_any = vx_core.f_package_global_from_name(inputval)
@@ -25351,15 +25621,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var name : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_package_global_from_name(name)
       return output
     }
 
-    fun vx_core.Type_package vx_package_global_from_name(vx_core.Type_string name) {
-      return vx_core.f_package_global_from_name(name)
+    override fun vx_package_global_from_name(name : vx_core.Type_string) : vx_core.Type_package {
+      var output : vx_core.Type_package = vx_core.f_package_global_from_name(name)
+      return output
     }
 
   }
@@ -25400,7 +25671,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "packagename<-typedef", // name
@@ -25437,7 +25708,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_typedef = value as vx_core.Type_typedef
       var outputval : vx_core.Type_any = vx_core.f_packagename_from_typedef(inputval)
@@ -25445,15 +25716,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var vtypedef : vx_core.Type_typedef = vx_core.f_any_from_any(vx_core.t_typedef, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_packagename_from_typedef(vtypedef)
       return output
     }
 
-    fun vx_core.Type_string vx_packagename_from_typedef(vx_core.Type_typedef vtypedef) {
-      return vx_core.f_packagename_from_typedef(vtypedef)
+    override fun vx_packagename_from_typedef(vtypedef : vx_core.Type_typedef) : vx_core.Type_string {
+      var output : vx_core.Type_string = vx_core.f_packagename_from_typedef(vtypedef)
+      return output
     }
 
   }
@@ -25490,7 +25762,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "path<-context-path", // name
@@ -25527,7 +25799,7 @@ object vx_core {
       return vx_core.e_any_from_any_context
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any_context(generic_any_1 : T, context : vx_core.Type_context, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any_context(generic_any_1 : T, context : vx_core.Type_context, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_string = value as vx_core.Type_string
       var outputval : vx_core.Type_any = vx_core.f_path_from_context_path(context, inputval)
@@ -25535,7 +25807,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var context : vx_core.Type_context = vx_core.f_any_from_any(vx_core.t_context, arglist.vx_any(vx_core.vx_new_int(0)))
       var path : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -25543,8 +25815,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_string vx_path_from_context_path(vx_core.Type_context context, vx_core.Type_string path) {
-      return vx_core.f_path_from_context_path(context, path)
+    override fun vx_path_from_context_path(context : vx_core.Type_context, path : vx_core.Type_string) : vx_core.Type_string {
+      var output : vx_core.Type_string = vx_core.f_path_from_context_path(context, path)
+      return output
     }
 
   }
@@ -25555,7 +25828,9 @@ object vx_core {
   fun f_path_from_context_path(context : vx_core.Type_context, path : vx_core.Type_string) : vx_core.Type_string {
     var output : vx_core.Type_string = vx_core.e_string
     output = vx_core.f_path_from_setting_path(
-      vx_core.f_setting_from_context(context),
+      vx_core.f_setting_from_context(
+        context
+      ),
       path
     )
     return output
@@ -25584,7 +25859,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "path<-setting-path", // name
@@ -25617,7 +25892,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var session : vx_core.Type_setting = vx_core.f_any_from_any(vx_core.t_setting, arglist.vx_any(vx_core.vx_new_int(0)))
       var path : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -25625,8 +25900,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_string vx_path_from_setting_path(vx_core.Type_setting session, vx_core.Type_string path) {
-      return vx_core.f_path_from_setting_path(session, path)
+    override fun vx_path_from_setting_path(session : vx_core.Type_setting, path : vx_core.Type_string) : vx_core.Type_string {
+      var output : vx_core.Type_string = vx_core.f_path_from_setting_path(session, path)
+      return output
     }
 
   }
@@ -25662,7 +25938,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "permission<-id-context", // name
@@ -25699,7 +25975,7 @@ object vx_core {
       return vx_core.e_any_from_any_context
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any_context(generic_any_1 : T, context : vx_core.Type_context, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any_context(generic_any_1 : T, context : vx_core.Type_context, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_string = value as vx_core.Type_string
       var outputval : vx_core.Type_any = vx_core.f_permission_from_id_context(context, inputval)
@@ -25707,7 +25983,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var context : vx_core.Type_context = vx_core.f_any_from_any(vx_core.t_context, arglist.vx_any(vx_core.vx_new_int(0)))
       var id : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -25715,8 +25991,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_permission vx_permission_from_id_context(vx_core.Type_context context, vx_core.Type_string id) {
-      return vx_core.f_permission_from_id_context(context, id)
+    override fun vx_permission_from_id_context(context : vx_core.Type_context, id : vx_core.Type_string) : vx_core.Type_permission {
+      var output : vx_core.Type_permission = vx_core.f_permission_from_id_context(context, id)
+      return output
     }
 
   }
@@ -25728,12 +26005,18 @@ object vx_core {
     var output : vx_core.Type_permission = vx_core.e_permission
     output = vx_core.f_let(
       vx_core.t_permission,
-      vx_core.t_any_from_func.vx_fn_new(()  {
-        var user : vx_core.Type_user = vx_core.f_user_from_context(context)
+      vx_core.t_any_from_func.vx_fn_new({ ->
+        var user : vx_core.Type_user = vx_core.f_user_from_context(
+          context
+        )
         var security : vx_core.Type_security = user.security()
         var permissionmap : vx_core.Type_permissionmap = security.permissionmap()
-        var output_1 : vx_core.Type_any = vx_core.f_any_from_map(vx_core.t_permission, permissionmap, vx_core.vx_new_string(":id"))
-        return output_1
+        var output_1 : vx_core.Type_any = vx_core.f_any_from_map(
+          vx_core.t_permission,
+          permissionmap,
+          vx_core.vx_new_string(":id")
+        )
+        output_1
       })
     )
     return output
@@ -25762,7 +26045,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "properties<-typedef", // name
@@ -25799,7 +26082,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_typedef = value as vx_core.Type_typedef
       var outputval : vx_core.Type_any = vx_core.f_properties_from_typedef(inputval)
@@ -25807,15 +26090,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var vtypedef : vx_core.Type_typedef = vx_core.f_any_from_any(vx_core.t_typedef, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_properties_from_typedef(vtypedef)
       return output
     }
 
-    fun vx_core.Type_argmap vx_properties_from_typedef(vx_core.Type_typedef vtypedef) {
-      return vx_core.f_properties_from_typedef(vtypedef)
+    override fun vx_properties_from_typedef(vtypedef : vx_core.Type_typedef) : vx_core.Type_argmap {
+      var output : vx_core.Type_argmap = vx_core.f_properties_from_typedef(vtypedef)
+      return output
     }
 
   }
@@ -25852,7 +26136,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "proplast<-typedef", // name
@@ -25889,7 +26173,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_typedef = value as vx_core.Type_typedef
       var outputval : vx_core.Type_any = vx_core.f_proplast_from_typedef(inputval)
@@ -25897,15 +26181,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var vtypedef : vx_core.Type_typedef = vx_core.f_any_from_any(vx_core.t_typedef, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_proplast_from_typedef(vtypedef)
       return output
     }
 
-    fun vx_core.Type_arg vx_proplast_from_typedef(vx_core.Type_typedef vtypedef) {
-      return vx_core.f_proplast_from_typedef(vtypedef)
+    override fun vx_proplast_from_typedef(vtypedef : vx_core.Type_typedef) : vx_core.Type_arg {
+      var output : vx_core.Type_arg = vx_core.f_proplast_from_typedef(vtypedef)
+      return output
     }
 
   }
@@ -25942,7 +26227,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "resolve", // name
@@ -25979,7 +26264,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_any = value as vx_core.Type_any
       var outputval : vx_core.Type_any = vx_core.f_resolve(vx_core.t_any, inputval)
@@ -25987,7 +26272,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -25995,8 +26280,9 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any> T vx_resolve(T generic_any_1, T value) {
-      return vx_core.f_resolve(generic_any_1, value)
+    override fun <T : vx_core.Type_any> vx_resolve(generic_any_1 : T, value : T) : T {
+      var output : T = vx_core.f_resolve(generic_any_1, value)
+      return output
     }
 
   }
@@ -26033,7 +26319,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "resolve", // name
@@ -26070,7 +26356,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Func_any_from_func = value as vx_core.Func_any_from_func
       var outputval : vx_core.Type_any = vx_core.f_resolve_1(vx_core.t_any, inputval)
@@ -26078,7 +26364,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var fn_any : vx_core.Func_any_from_func = vx_core.f_any_from_any(vx_core.t_any_from_func, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -26086,8 +26372,9 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any> T vx_resolve_1(T generic_any_1, vx_core.Func_any_from_func fn_any) {
-      return vx_core.f_resolve_1(generic_any_1, fn_any)
+    override fun <T : vx_core.Type_any> vx_resolve_1(generic_any_1 : T, fn_any : vx_core.Func_any_from_func) : T {
+      var output : T = vx_core.f_resolve_1(generic_any_1, fn_any)
+      return output
     }
 
   }
@@ -26123,7 +26410,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "resolve-async", // name
@@ -26160,13 +26447,13 @@ object vx_core {
       return vx_core.e_any_from_any_async
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any_async(generic_any_1 : T, value : U) : <T> {
-      T inputval = vx_core.f_any_from_any(generic_any_1, value)
-      <T> output = vx_core.f_async(generic_any_1, inputval)
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any_async(generic_any_1 : T, value : U) : <T> {
+      var inputval : T = vx_core.f_any_from_any(generic_any_1, value)
+      var output : T = await vx_core.f_async(generic_any_1, inputval)
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : <vx_core.Type_any> {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : <vx_core.Type_any> {
       var output : vx_core.Type_any = await vx_core.vx_async_new_from_value(vx_core.e_any)
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var fn_any : vx_core.Func_any_from_func_async = vx_core.f_any_from_any(vx_core.t_any_from_func_async, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -26175,8 +26462,9 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any> <T> vx_resolve_async(T generic_any_1, vx_core.Func_any_from_func_async fn_any) {
-      return vx_core.f_resolve_async(generic_any_1, fn_any)
+    override fun <T : vx_core.Type_any> vx_resolve_async(generic_any_1 : T, fn_any : vx_core.Func_any_from_func_async) : <T> {
+      var output : T = await vx_core.f_resolve_async(generic_any_1, fn_any)
+      return output
     }
 
   }
@@ -26185,7 +26473,7 @@ object vx_core {
   val t_resolve_async : vx_core.Func_resolve_async = vx_core.Class_resolve_async()
 
   fun <T : vx_core.Type_any> f_resolve_async(generic_any_1 : T, fn_any : vx_core.Func_any_from_func_async) : <T> {
-    <T> output = vx_core.vx_async_new_from_value(vx_core.f_empty(generic_any_1))
+    var output : T = await vx_core.vx_async_new_from_value(vx_core.f_empty(generic_any_1))
     return output
   }
 
@@ -26212,7 +26500,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "resolve-first", // name
@@ -26249,7 +26537,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_list = value as vx_core.Type_list
       var outputval : vx_core.Type_any = vx_core.f_resolve_first(vx_core.t_any, inputval)
@@ -26257,7 +26545,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var clauses : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -26265,8 +26553,9 @@ object vx_core {
       return output
     }
 
-    fun <T : vx_core.Type_any, X : vx_core.Type_list> T vx_resolve_first(T generic_any_1, X clauses) {
-      return vx_core.f_resolve_first(generic_any_1, clauses)
+    override fun <T : vx_core.Type_any, X : vx_core.Type_list> vx_resolve_first(generic_any_1 : T, clauses : X) : T {
+      var output : T = vx_core.f_resolve_first(generic_any_1, clauses)
+      return output
     }
 
   }
@@ -26307,7 +26596,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "resolve-list", // name
@@ -26344,7 +26633,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_list = value as vx_core.Type_list
       var outputval : vx_core.Type_any = vx_core.f_resolve_list(vx_core.t_list, inputval)
@@ -26352,7 +26641,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_list_1 : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, arglist.vx_any(vx_core.vx_new_int(0)))
       var clauses : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, arglist.vx_any(vx_core.vx_new_int(0)))
@@ -26360,8 +26649,9 @@ object vx_core {
       return output
     }
 
-    fun <X : vx_core.Type_list> X vx_resolve_list(X generic_list_1, X clauses) {
-      return vx_core.f_resolve_list(generic_list_1, clauses)
+    override fun <X : vx_core.Type_list> vx_resolve_list(generic_list_1 : X, clauses : X) : X {
+      var output : X = vx_core.f_resolve_list(generic_list_1, clauses)
+      return output
     }
 
   }
@@ -26402,7 +26692,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "security<-context", // name
@@ -26435,15 +26725,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var context : vx_core.Type_context = vx_core.f_any_from_any(vx_core.t_context, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_security_from_context(context)
       return output
     }
 
-    fun vx_core.Type_security vx_security_from_context(vx_core.Type_context context) {
-      return vx_core.f_security_from_context(context)
+    override fun vx_security_from_context(context : vx_core.Type_context) : vx_core.Type_security {
+      var output : vx_core.Type_security = vx_core.f_security_from_context(context)
+      return output
     }
 
   }
@@ -26454,7 +26745,9 @@ object vx_core {
   fun f_security_from_context(context : vx_core.Type_context) : vx_core.Type_security {
     var output : vx_core.Type_security = vx_core.e_security
     output = vx_core.f_security_from_user(
-      vx_core.f_user_from_context(context)
+      vx_core.f_user_from_context(
+        context
+      )
     )
     return output
   }
@@ -26482,7 +26775,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "security<-user", // name
@@ -26519,7 +26812,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_user = value as vx_core.Type_user
       var outputval : vx_core.Type_any = vx_core.f_security_from_user(inputval)
@@ -26527,15 +26820,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var user : vx_core.Type_user = vx_core.f_any_from_any(vx_core.t_user, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_security_from_user(user)
       return output
     }
 
-    fun vx_core.Type_security vx_security_from_user(vx_core.Type_user user) {
-      return vx_core.f_security_from_user(user)
+    override fun vx_security_from_user(user : vx_core.Type_user) : vx_core.Type_security {
+      var output : vx_core.Type_security = vx_core.f_security_from_user(user)
+      return output
     }
 
   }
@@ -26572,7 +26866,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "session<-context", // name
@@ -26605,15 +26899,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var context : vx_core.Type_context = vx_core.f_any_from_any(vx_core.t_context, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_session_from_context(context)
       return output
     }
 
-    fun vx_core.Type_session vx_session_from_context(vx_core.Type_context context) {
-      return vx_core.f_session_from_context(context)
+    override fun vx_session_from_context(context : vx_core.Type_context) : vx_core.Type_session {
+      var output : vx_core.Type_session = vx_core.f_session_from_context(context)
+      return output
     }
 
   }
@@ -26650,7 +26945,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "setting<-context", // name
@@ -26683,15 +26978,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var context : vx_core.Type_context = vx_core.f_any_from_any(vx_core.t_context, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_setting_from_context(context)
       return output
     }
 
-    fun vx_core.Type_setting vx_setting_from_context(vx_core.Type_context context) {
-      return vx_core.f_setting_from_context(context)
+    override fun vx_setting_from_context(context : vx_core.Type_context) : vx_core.Type_setting {
+      var output : vx_core.Type_setting = vx_core.f_setting_from_context(context)
+      return output
     }
 
   }
@@ -26728,7 +27024,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "string-repeat", // name
@@ -26761,7 +27057,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var text : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, arglist.vx_any(vx_core.vx_new_int(0)))
       var repeat : vx_core.Type_int = vx_core.f_any_from_any(vx_core.t_int, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -26769,8 +27065,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_string vx_string_repeat(vx_core.Type_string text, vx_core.Type_int repeat) {
-      return vx_core.f_string_repeat(text, repeat)
+    override fun vx_string_repeat(text : vx_core.Type_string, repeat : vx_core.Type_int) : vx_core.Type_string {
+      var output : vx_core.Type_string = vx_core.f_string_repeat(text, repeat)
+      return output
     }
 
   }
@@ -26806,7 +27103,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "string<-any", // name
@@ -26843,7 +27140,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_any = value as vx_core.Type_any
       var outputval : vx_core.Type_any = vx_core.f_string_from_any(inputval)
@@ -26851,15 +27148,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_string_from_any(value)
       return output
     }
 
-    fun vx_core.Type_string vx_string_from_any(vx_core.Type_any value) {
-      return vx_core.f_string_from_any(value)
+    override fun vx_string_from_any(value : vx_core.Type_any) : vx_core.Type_string {
+      var output : vx_core.Type_string = vx_core.f_string_from_any(value)
+      return output
     }
 
   }
@@ -26900,7 +27198,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "string<-any-indent", // name
@@ -26933,7 +27231,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var indent : vx_core.Type_int = vx_core.f_any_from_any(vx_core.t_int, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -26942,8 +27240,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_string vx_string_from_any_indent(vx_core.Type_any value, vx_core.Type_int indent, vx_core.Type_boolean linefeed) {
-      return vx_core.f_string_from_any_indent(value, indent, linefeed)
+    override fun vx_string_from_any_indent(value : vx_core.Type_any, indent : vx_core.Type_int, linefeed : vx_core.Type_boolean) : vx_core.Type_string {
+      var output : vx_core.Type_string = vx_core.f_string_from_any_indent(value, indent, linefeed)
+      return output
     }
 
   }
@@ -26980,7 +27279,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "string<-func", // name
@@ -27021,14 +27320,15 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       output = vx_core.f_string_from_func()
       return output
     }
 
-    fun vx_core.Type_string vx_string_from_func() {
-      return vx_core.f_string_from_func()
+    override fun vx_string_from_func() : vx_core.Type_string {
+      var output : vx_core.Type_string = vx_core.f_string_from_func()
+      return output
     }
 
   }
@@ -27064,7 +27364,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "string<-string-find-replace", // name
@@ -27097,7 +27397,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var text : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, arglist.vx_any(vx_core.vx_new_int(0)))
       var find : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -27106,8 +27406,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_string vx_string_from_string_find_replace(vx_core.Type_string text, vx_core.Type_string find, vx_core.Type_string replace) {
-      return vx_core.f_string_from_string_find_replace(text, find, replace)
+    override fun vx_string_from_string_find_replace(text : vx_core.Type_string, find : vx_core.Type_string, replace : vx_core.Type_string) : vx_core.Type_string {
+      var output : vx_core.Type_string = vx_core.f_string_from_string_find_replace(text, find, replace)
+      return output
     }
 
   }
@@ -27143,7 +27444,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "stringlist<-map", // name
@@ -27180,7 +27481,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_map = value as vx_core.Type_map
       var outputval : vx_core.Type_any = vx_core.f_stringlist_from_map(inputval)
@@ -27188,15 +27489,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var map : vx_core.Type_map = vx_core.f_any_from_any(vx_core.t_map, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_stringlist_from_map(map)
       return output
     }
 
-    fun vx_core.Type_stringlist vx_stringlist_from_map(vx_core.Type_map map) {
-      return vx_core.f_stringlist_from_map(map)
+    override fun vx_stringlist_from_map(map : vx_core.Type_map) : vx_core.Type_stringlist {
+      var output : vx_core.Type_stringlist = vx_core.f_stringlist_from_map(map)
+      return output
     }
 
   }
@@ -27209,11 +27511,11 @@ object vx_core {
     output = vx_core.f_list_from_map_1(
       vx_core.t_stringlist,
       map,
-      vx_core.t_any_from_key_value.vx_fn_new((key_any, value_any)  {
-        vx_core.Type_string key = vx_core.f_any_from_any(vx_core.t_string, key_any)
-        vx_core.Type_any value = vx_core.f_any_from_any(vx_core.t_any, value_any)
+      vx_core.t_any_from_key_value.vx_fn_new({key_any, value_any ->
+        var key : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, key_any)
+        var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, value_any)
         var output_1 : vx_core.Type_any = key
-        return output_1
+        output_1
       })
     )
     return output
@@ -27221,7 +27523,7 @@ object vx_core {
 
 
   interface Func_switch : vx_core.Type_func, vx_core.Type_replfunc {
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_switch(generic_any_1 : T, val : U, thenelselist : vx_core.Type_thenelselist) : T
+    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_switch(generic_any_1 : T, value : U, thenelselist : vx_core.Type_thenelselist) : T
   }
 
   class Class_switch : vx_core.Class_base, Func_switch {
@@ -27242,7 +27544,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "switch", // name
@@ -27275,17 +27577,18 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var generic_any_1 : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
-      var val : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
+      var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       var thenelselist : vx_core.Type_thenelselist = vx_core.f_any_from_any(vx_core.t_thenelselist, arglist.vx_any(vx_core.vx_new_int(1)))
-      output = vx_core.f_switch(generic_any_1, val, thenelselist)
+      output = vx_core.f_switch(generic_any_1, value, thenelselist)
       return output
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> T vx_switch(T generic_any_1, U val, vx_core.Type_thenelselist thenelselist) {
-      return vx_core.f_switch(generic_any_1, val, thenelselist)
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_switch(generic_any_1 : T, value : U, thenelselist : vx_core.Type_thenelselist) : T {
+      var output : T = vx_core.f_switch(generic_any_1, value, thenelselist)
+      return output
     }
 
   }
@@ -27293,7 +27596,7 @@ object vx_core {
   val e_switch : vx_core.Func_switch = vx_core.Class_switch()
   val t_switch : vx_core.Func_switch = vx_core.Class_switch()
 
-  fun <T : vx_core.Type_any, U : vx_core.Type_any> f_switch(generic_any_1 : T, val : U, thenelselist : vx_core.Type_thenelselist) : T {
+  fun <T : vx_core.Type_any, U : vx_core.Type_any> f_switch(generic_any_1 : T, value : U, thenelselist : vx_core.Type_thenelselist) : T {
     var output : T = vx_core.f_empty(generic_any_1)
     return output
   }
@@ -27321,7 +27624,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "then", // name
@@ -27354,7 +27657,7 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var fn_cond : vx_core.Func_boolean_from_func = vx_core.f_any_from_any(vx_core.t_boolean_from_func, arglist.vx_any(vx_core.vx_new_int(0)))
       var fn_any : vx_core.Func_any_from_func = vx_core.f_any_from_any(vx_core.t_any_from_func, arglist.vx_any(vx_core.vx_new_int(1)))
@@ -27362,8 +27665,9 @@ object vx_core {
       return output
     }
 
-    fun vx_core.Type_thenelse vx_then(vx_core.Func_boolean_from_func fn_cond, vx_core.Func_any_from_func fn_any) {
-      return vx_core.f_then(fn_cond, fn_any)
+    override fun vx_then(fn_cond : vx_core.Func_boolean_from_func, fn_any : vx_core.Func_any_from_func) : vx_core.Type_thenelse {
+      var output : vx_core.Type_thenelse = vx_core.f_then(fn_cond, fn_any)
+      return output
     }
 
   }
@@ -27411,7 +27715,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "traits<-typedef", // name
@@ -27448,7 +27752,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_typedef = value as vx_core.Type_typedef
       var outputval : vx_core.Type_any = vx_core.f_traits_from_typedef(inputval)
@@ -27456,15 +27760,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var vtypedef : vx_core.Type_typedef = vx_core.f_any_from_any(vx_core.t_typedef, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_traits_from_typedef(vtypedef)
       return output
     }
 
-    fun vx_core.Type_typelist vx_traits_from_typedef(vx_core.Type_typedef vtypedef) {
-      return vx_core.f_traits_from_typedef(vtypedef)
+    override fun vx_traits_from_typedef(vtypedef : vx_core.Type_typedef) : vx_core.Type_typelist {
+      var output : vx_core.Type_typelist = vx_core.f_traits_from_typedef(vtypedef)
+      return output
     }
 
   }
@@ -27500,7 +27805,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "type<-any", // name
@@ -27537,7 +27842,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_any = value as vx_core.Type_any
       var outputval : vx_core.Type_any = vx_core.f_type_from_any(inputval)
@@ -27545,15 +27850,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_type_from_any(value)
       return output
     }
 
-    fun vx_core.Type_any vx_type_from_any(vx_core.Type_any value) {
-      return vx_core.f_type_from_any(value)
+    override fun vx_type_from_any(value : vx_core.Type_any) : vx_core.Type_any {
+      var output : vx_core.Type_any = vx_core.f_type_from_any(value)
+      return output
     }
 
   }
@@ -27568,7 +27874,7 @@ object vx_core {
 
 
   interface Func_typedef_from_any : vx_core.Func_any_from_any {
-    fun vx_typedef_from_any(val : vx_core.Type_any) : vx_core.Type_typedef
+    fun vx_typedef_from_any(value : vx_core.Type_any) : vx_core.Type_typedef
   }
 
   class Class_typedef_from_any : vx_core.Class_base, Func_typedef_from_any {
@@ -27589,7 +27895,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "typedef<-any", // name
@@ -27626,7 +27932,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_any = value as vx_core.Type_any
       var outputval : vx_core.Type_any = vx_core.f_typedef_from_any(inputval)
@@ -27634,15 +27940,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
-      var val : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
-      output = vx_core.f_typedef_from_any(val)
+      var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
+      output = vx_core.f_typedef_from_any(value)
       return output
     }
 
-    fun vx_core.Type_typedef vx_typedef_from_any(vx_core.Type_any val) {
-      return vx_core.f_typedef_from_any(val)
+    override fun vx_typedef_from_any(value : vx_core.Type_any) : vx_core.Type_typedef {
+      var output : vx_core.Type_typedef = vx_core.f_typedef_from_any(value)
+      return output
     }
 
   }
@@ -27650,17 +27957,19 @@ object vx_core {
   val e_typedef_from_any : vx_core.Func_typedef_from_any = vx_core.Class_typedef_from_any()
   val t_typedef_from_any : vx_core.Func_typedef_from_any = vx_core.Class_typedef_from_any()
 
-  fun f_typedef_from_any(val : vx_core.Type_any) : vx_core.Type_typedef {
+  fun f_typedef_from_any(value : vx_core.Type_any) : vx_core.Type_typedef {
     var output : vx_core.Type_typedef = vx_core.e_typedef
     output = vx_core.f_typedef_from_type(
-      vx_core.f_type_from_any(val)
+      vx_core.f_type_from_any(
+        value
+      )
     )
     return output
   }
 
 
   interface Func_typedef_from_type : vx_core.Func_any_from_any {
-    fun vx_typedef_from_type(val : vx_core.Type_any) : vx_core.Type_typedef
+    fun vx_typedef_from_type(value : vx_core.Type_any) : vx_core.Type_typedef
   }
 
   class Class_typedef_from_type : vx_core.Class_base, Func_typedef_from_type {
@@ -27681,7 +27990,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "typedef<-type", // name
@@ -27718,7 +28027,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_any = value as vx_core.Type_any
       var outputval : vx_core.Type_any = vx_core.f_typedef_from_type(inputval)
@@ -27726,15 +28035,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
-      var val : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
-      output = vx_core.f_typedef_from_type(val)
+      var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
+      output = vx_core.f_typedef_from_type(value)
       return output
     }
 
-    fun vx_core.Type_typedef vx_typedef_from_type(vx_core.Type_any val) {
-      return vx_core.f_typedef_from_type(val)
+    override fun vx_typedef_from_type(value : vx_core.Type_any) : vx_core.Type_typedef {
+      var output : vx_core.Type_typedef = vx_core.f_typedef_from_type(value)
+      return output
     }
 
   }
@@ -27742,8 +28052,9 @@ object vx_core {
   val e_typedef_from_type : vx_core.Func_typedef_from_type = vx_core.Class_typedef_from_type()
   val t_typedef_from_type : vx_core.Func_typedef_from_type = vx_core.Class_typedef_from_type()
 
-  fun f_typedef_from_type(val : vx_core.Type_any) : vx_core.Type_typedef {
+  fun f_typedef_from_type(value : vx_core.Type_any) : vx_core.Type_typedef {
     var output : vx_core.Type_typedef = vx_core.e_typedef
+    output = value.vx_typedef()
     return output
   }
 
@@ -27770,7 +28081,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "typename<-any", // name
@@ -27807,7 +28118,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_any = value as vx_core.Type_any
       var outputval : vx_core.Type_any = vx_core.f_typename_from_any(inputval)
@@ -27815,15 +28126,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_typename_from_any(value)
       return output
     }
 
-    fun vx_core.Type_string vx_typename_from_any(vx_core.Type_any value) {
-      return vx_core.f_typename_from_any(value)
+    override fun vx_typename_from_any(value : vx_core.Type_any) : vx_core.Type_string {
+      var output : vx_core.Type_string = vx_core.f_typename_from_any(value)
+      return output
     }
 
   }
@@ -27834,7 +28146,9 @@ object vx_core {
   fun f_typename_from_any(value : vx_core.Type_any) : vx_core.Type_string {
     var output : vx_core.Type_string = vx_core.e_string
     output = vx_core.f_typename_from_type(
-      vx_core.f_type_from_any(value)
+      vx_core.f_type_from_any(
+        value
+      )
     )
     return output
   }
@@ -27862,7 +28176,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "typename<-type", // name
@@ -27899,7 +28213,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_any = value as vx_core.Type_any
       var outputval : vx_core.Type_any = vx_core.f_typename_from_type(inputval)
@@ -27907,15 +28221,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var type : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_typename_from_type(type)
       return output
     }
 
-    fun vx_core.Type_string vx_typename_from_type(vx_core.Type_any type) {
-      return vx_core.f_typename_from_type(type)
+    override fun vx_typename_from_type(type : vx_core.Type_any) : vx_core.Type_string {
+      var output : vx_core.Type_string = vx_core.f_typename_from_type(type)
+      return output
     }
 
   }
@@ -27926,7 +28241,9 @@ object vx_core {
   fun f_typename_from_type(type : vx_core.Type_any) : vx_core.Type_string {
     var output : vx_core.Type_string = vx_core.e_string
     output = vx_core.f_typename_from_typedef(
-      vx_core.f_typedef_from_type(type)
+      vx_core.f_typedef_from_type(
+        type
+      )
     )
     return output
   }
@@ -27954,7 +28271,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "typename<-typedef", // name
@@ -27991,7 +28308,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_typedef = value as vx_core.Type_typedef
       var outputval : vx_core.Type_any = vx_core.f_typename_from_typedef(inputval)
@@ -27999,15 +28316,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var vtypedef : vx_core.Type_typedef = vx_core.f_any_from_any(vx_core.t_typedef, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_typename_from_typedef(vtypedef)
       return output
     }
 
-    fun vx_core.Type_string vx_typename_from_typedef(vx_core.Type_typedef vtypedef) {
-      return vx_core.f_typename_from_typedef(vtypedef)
+    override fun vx_typename_from_typedef(vtypedef : vx_core.Type_typedef) : vx_core.Type_string {
+      var output : vx_core.Type_string = vx_core.f_typename_from_typedef(vtypedef)
+      return output
     }
 
   }
@@ -28052,7 +28370,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "typenames<-typelist", // name
@@ -28089,7 +28407,7 @@ object vx_core {
       return vx_core.e_any_from_any
     }
 
-    fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
       var output : T = vx_core.f_empty(generic_any_1)
       var inputval : vx_core.Type_typelist = value as vx_core.Type_typelist
       var outputval : vx_core.Type_any = vx_core.f_typenames_from_typelist(inputval)
@@ -28097,15 +28415,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var typelist : vx_core.Type_typelist = vx_core.f_any_from_any(vx_core.t_typelist, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_typenames_from_typelist(typelist)
       return output
     }
 
-    fun vx_core.Type_stringlist vx_typenames_from_typelist(vx_core.Type_typelist typelist) {
-      return vx_core.f_typenames_from_typelist(typelist)
+    override fun vx_typenames_from_typelist(typelist : vx_core.Type_typelist) : vx_core.Type_stringlist {
+      var output : vx_core.Type_stringlist = vx_core.f_typenames_from_typelist(typelist)
+      return output
     }
 
   }
@@ -28118,11 +28437,12 @@ object vx_core {
     output = vx_core.f_list_from_list_1(
       vx_core.t_stringlist,
       typelist,
-      vx_core.t_any_from_any.vx_fn_new((type_any)  {
-        vx_core.Type_any type = vx_core.f_any_from_any(vx_core.t_any, type_any)
-        var output_1 : vx_core.Type_any = 
-          vx_core.f_typename_from_type(type)
-        return output_1
+      vx_core.t_any_from_any.vx_fn_new({type_any ->
+        var type : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, type_any)
+        var output_1 : vx_core.Type_any = vx_core.f_typename_from_type(
+          type
+        )
+        output_1
       })
     )
     return output
@@ -28151,7 +28471,7 @@ object vx_core {
       return output
     }
 
-    fun vx_funcdef() : vx_core.Type_funcdef {
+    override fun vx_funcdef() : vx_core.Type_funcdef {
       var output : vx_core.Type_funcdef = vx_core.funcdef_new(
         "vx/core", // pkgname
         "user<-context", // name
@@ -28184,15 +28504,16 @@ object vx_core {
       return output
     }
 
-    fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
       var output : vx_core.Type_any = vx_core.e_any
       var context : vx_core.Type_context = vx_core.f_any_from_any(vx_core.t_context, arglist.vx_any(vx_core.vx_new_int(0)))
       output = vx_core.f_user_from_context(context)
       return output
     }
 
-    fun vx_core.Type_user vx_user_from_context(vx_core.Type_context context) {
-      return vx_core.f_user_from_context(context)
+    override fun vx_user_from_context(context : vx_core.Type_context) : vx_core.Type_user {
+      var output : vx_core.Type_user = vx_core.f_user_from_context(context)
+      return output
     }
 
   }
@@ -28202,7 +28523,9 @@ object vx_core {
 
   fun f_user_from_context(context : vx_core.Type_context) : vx_core.Type_user {
     var output : vx_core.Type_user = vx_core.e_user
-    output = vx_core.f_session_from_context(context).user()
+    output = vx_core.f_session_from_context(
+      context
+    ).user()
     return output
   }
 
@@ -28223,9 +28546,9 @@ object vx_core {
     Const_path_test_resources.const_new(c_path_test_resources)
     Const_quote.const_new(c_quote)
     Const_true.const_new(c_true)
-    var maptype : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
-    var mapconst : Map<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
-    var mapfunc : Map<String, vx_core.Type_func> = LinkedHashMap<String, vx_core.Type_func>()
+    var maptype : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+    var mapconst : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
+    var mapfunc : MutableMap<String, vx_core.Type_func> = LinkedHashMap<String, vx_core.Type_func>()
     maptype.put("any", vx_core.t_any)
     maptype.put("any-async<-func", vx_core.t_any_async_from_func)
     maptype.put("any<-anylist", vx_core.t_any_from_anylist)

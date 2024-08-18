@@ -235,7 +235,9 @@ public final class CsvTest {
                   )
                 )
               ),
-              Csv.f_textblock_csv_from_string(Core.vx_new_string("\"a\",\"b\"\n1,\"2\""))
+              Csv.f_textblock_csv_from_string(
+                Core.vx_new_string("\"a\",\"b\"\n1,\"2\"")
+              )
             )
         )
       )

@@ -2429,9 +2429,9 @@
  (list&lt;-map : stringlist
   (stringmap "a" "1" "b" "2")
   (fn : string
-   [key : string
-    val : string]
-   (string key val))))</p>
+   [key   : string
+    value : string]
+   (string key value))))</p>
                     </td>
                     <td>
                       <p class="preformatted">(stringlist
@@ -2459,8 +2459,8 @@
  (map&lt;-list : stringmap
   (stringlist "a" "b")
   (fn : string
-   [val : string]
-   (string "key" val))))</p>
+   [value : string]
+   (string "key" value))))</p>
                     </td>
                     <td>
                       <p class="preformatted">(stringmap
@@ -2513,8 +2513,8 @@
    :b "2")
   (fn : string
    [key : string
-    val : string]
-   (string key val))))</p>
+    value : string]
+   (string key value))))</p>
                     </td>
                     <td>
                       <p class="preformatted">(stringmap
@@ -14566,8 +14566,8 @@ ab
    :type string
    :repllist
     (repllist
-     (repl :val "Hello")
-     (repl :val "World")
+     (repl :value "Hello")
+     (repl :value "World")
     ))))</p>
                     </td>
                     <td>
@@ -14592,8 +14592,8 @@ ab
    :type +
    :repllist
     (repllist
-     (repl :val 2)
-     (repl :val 3)))))</p>
+     (repl :value 2)
+     (repl :value 3)))))</p>
                     </td>
                     <td>
                       <p class="preformatted">5</p>
@@ -14671,7 +14671,7 @@ ab
                     </td>
                     <td>
                       <p class="preformatted">(test
- (repl :val 2)
+ (repl :value 2)
  (repl-empty&lt;-textblock-argmap
   (tb/textblock
    :text "2")
@@ -14679,11 +14679,11 @@ ab
                     </td>
                     <td>
                       <p class="preformatted">(repl
- :val 2)</p>
+ :value 2)</p>
                     </td>
                     <td>
                       <p class="preformatted">(repl
- :val 2)</p>
+ :value 2)</p>
                     </td>
                   </tr>
                   <tr>
@@ -14719,7 +14719,7 @@ ab
                     </td>
                     <td>
                       <p class="preformatted">(test
- (repl :val 2)
+ (repl :value 2)
  (repl-empty&lt;-textblock-argmap
   (tb/textblock
    :text "1"
@@ -14731,11 +14731,11 @@ ab
                     </td>
                     <td>
                       <p class="preformatted">(repl
- :val 2)</p>
+ :value 2)</p>
                     </td>
                     <td>
                       <p class="preformatted">(repl
- :val 2)</p>
+ :value 2)</p>
                     </td>
                   </tr>
                   <tr>
@@ -14793,9 +14793,9 @@ ab
   :repllist
    (repllist
     (repl
-     :val 2)
+     :value 2)
     (repl
-     :val 3)))
+     :value 3)))
  (repl-paren&lt;-textblock-argmap
   (tb/textblock
    :text "(+ 2 3)"
@@ -14829,9 +14829,9 @@ ab
  :repllist
   (repllist
    (repl
-    :val 2)
+    :value 2)
    (repl
-    :val 3)))</p>
+    :value 3)))</p>
                     </td>
                     <td>
                       <p class="preformatted">(repl
@@ -14839,9 +14839,9 @@ ab
  :repllist
   (repllist
    (repl
-    :val 2)
+    :value 2)
    (repl
-    :val 3)))</p>
+    :value 3)))</p>
                     </td>
                   </tr>
                   <tr>
@@ -14858,9 +14858,9 @@ ab
   :repllist
    (repllist
     (repl
-     :val 2)
+     :value 2)
     (repl
-     :val 3)))
+     :value 3)))
  (repl&lt;-macro
   "(+ "
   (- 7 5)
@@ -14872,9 +14872,9 @@ ab
  :repllist
   (repllist
    (repl
-    :val 2)
+    :value 2)
    (repl
-    :val 3)))</p>
+    :value 3)))</p>
                     </td>
                     <td>
                       <p class="preformatted">(repl
@@ -14882,9 +14882,9 @@ ab
  :repllist
   (repllist
    (repl
-    :val 2)
+    :value 2)
    (repl
-    :val 3)))</p>
+    :value 3)))</p>
                     </td>
                   </tr>
                   <tr>
@@ -14897,17 +14897,17 @@ ab
                     <td>
                       <p class="preformatted">(test
  (repl
-  :val 2)
+  :value 2)
  (repl&lt;-script
   "2"))</p>
                     </td>
                     <td>
                       <p class="preformatted">(repl
- :val 2)</p>
+ :value 2)</p>
                     </td>
                     <td>
                       <p class="preformatted">(repl
- :val 2)</p>
+ :value 2)</p>
                     </td>
                   </tr>
                   <tr>
@@ -14920,17 +14920,17 @@ ab
                     <td>
                       <p class="preformatted">(test
  (repl
-  :val infinity)
+  :value infinity)
  (repl&lt;-script
   "infinity"))</p>
                     </td>
                     <td>
                       <p class="preformatted">(repl
- :val infinity)</p>
+ :value infinity)</p>
                     </td>
                     <td>
                       <p class="preformatted">(repl
- :val infinity)</p>
+ :value infinity)</p>
                     </td>
                   </tr>
                   <tr>
@@ -14970,9 +14970,9 @@ ab
   :repllist
    (repllist
     (repl
-     :val 2)
+     :value 2)
     (repl
-     :val 3)))
+     :value 3)))
  (repl&lt;-script
   "(+ 2 3)"))</p>
                     </td>
@@ -14982,9 +14982,9 @@ ab
  :repllist
   (repllist
    (repl
-    :val 2)
+    :value 2)
    (repl
-    :val 3)))</p>
+    :value 3)))</p>
                     </td>
                     <td>
                       <p class="preformatted">(repl
@@ -14992,9 +14992,9 @@ ab
  :repllist
   (repllist
    (repl
-    :val 2)
+    :value 2)
    (repl
-    :val 3)))</p>
+    :value 3)))</p>
                     </td>
                   </tr>
                   <tr>
@@ -15006,18 +15006,18 @@ ab
                     </td>
                     <td>
                       <p class="preformatted">(test
- (repl :val "Hello")
+ (repl :value "Hello")
  (repl&lt;-string-argmap
   `"Hello"`
   (empty argmap)))</p>
                     </td>
                     <td>
                       <p class="preformatted">(repl
- :val "Hello")</p>
+ :value "Hello")</p>
                     </td>
                     <td>
                       <p class="preformatted">(repl
- :val "Hello")</p>
+ :value "Hello")</p>
                     </td>
                   </tr>
                   <tr>
@@ -15030,18 +15030,18 @@ ab
                     <td>
                       <p class="preformatted">(test
  (repl
-  :val 2)
+  :value 2)
  (repl&lt;-string-argmap
   "2"
   (empty argmap)))</p>
                     </td>
                     <td>
                       <p class="preformatted">(repl
- :val 2)</p>
+ :value 2)</p>
                     </td>
                     <td>
                       <p class="preformatted">(repl
- :val 2)</p>
+ :value 2)</p>
                     </td>
                   </tr>
                   <tr>
@@ -15053,18 +15053,18 @@ ab
                     </td>
                     <td>
                       <p class="preformatted">(test
- (repl :val 2.3)
+ (repl :value 2.3)
  (repl&lt;-string-argmap
   "2.3"
   (empty argmap)))</p>
                     </td>
                     <td>
                       <p class="preformatted">(repl
- :val 2.3)</p>
+ :value 2.3)</p>
                     </td>
                     <td>
                       <p class="preformatted">(repl
- :val 2.3)</p>
+ :value 2.3)</p>
                     </td>
                   </tr>
                   <tr>
@@ -15077,18 +15077,18 @@ ab
                     <td>
                       <p class="preformatted">(test
  (repl
-  :val infinity)
+  :value infinity)
  (repl&lt;-string-argmap
   "infinity"
   (empty argmap)))</p>
                     </td>
                     <td>
                       <p class="preformatted">(repl
- :val infinity)</p>
+ :value infinity)</p>
                     </td>
                     <td>
                       <p class="preformatted">(repl
- :val infinity)</p>
+ :value infinity)</p>
                     </td>
                   </tr>
                   <tr>
@@ -15101,18 +15101,18 @@ ab
                     <td>
                       <p class="preformatted">(test
  (repl
-  :val tb/delimcomma)
+  :value tb/delimcomma)
  (repl&lt;-string-argmap
   "vx/data/textblock/delimcomma"
   (empty argmap)))</p>
                     </td>
                     <td>
                       <p class="preformatted">(repl
- :val vx/data/textblock/delimcomma)</p>
+ :value vx/data/textblock/delimcomma)</p>
                     </td>
                     <td>
                       <p class="preformatted">(repl
- :val vx/data/textblock/delimcomma)</p>
+ :value vx/data/textblock/delimcomma)</p>
                     </td>
                   </tr>
                   <tr>
@@ -15170,18 +15170,18 @@ ab
                     </td>
                     <td>
                       <p class="preformatted">(test
- (repl :val 2)
+ (repl :value 2)
  (repl&lt;-textblock
   (tb/textblock
    :text "2")))</p>
                     </td>
                     <td>
                       <p class="preformatted">(repl
- :val 2)</p>
+ :value 2)</p>
                     </td>
                     <td>
                       <p class="preformatted">(repl
- :val 2)</p>
+ :value 2)</p>
                     </td>
                   </tr>
                   <tr>
@@ -15243,8 +15243,8 @@ ab
   :type +
   :repllist
    (repllist
-    (repl :val 2)
-    (repl :val 3)))
+    (repl :value 2)
+    (repl :value 3)))
  (repl&lt;-textblock
   (tb/textblock
    :text "(+ 2 3)"
@@ -15277,9 +15277,9 @@ ab
  :repllist
   (repllist
    (repl
-    :val 2)
+    :value 2)
    (repl
-    :val 3)))</p>
+    :value 3)))</p>
                     </td>
                     <td>
                       <p class="preformatted">(repl
@@ -15287,9 +15287,9 @@ ab
  :repllist
   (repllist
    (repl
-    :val 2)
+    :value 2)
    (repl
-    :val 3)))</p>
+    :value 3)))</p>
                     </td>
                   </tr>
                   <tr>
@@ -15305,8 +15305,8 @@ ab
   :type +
   :repllist
    (repllist
-    (repl :val 2)
-    (repl :val 3)))
+    (repl :value 2)
+    (repl :value 3)))
  (repl&lt;-textblock
   (tb/textblock
    :text "(+ 2 3)"
@@ -15343,9 +15343,9 @@ ab
  :repllist
   (repllist
    (repl
-    :val 2)
+    :value 2)
    (repl
-    :val 3)))</p>
+    :value 3)))</p>
                     </td>
                     <td>
                       <p class="preformatted">(repl
@@ -15353,9 +15353,9 @@ ab
  :repllist
   (repllist
    (repl
-    :val 2)
+    :value 2)
    (repl
-    :val 3)))</p>
+    :value 3)))</p>
                     </td>
                   </tr>
                   <tr>
@@ -15367,7 +15367,7 @@ ab
                     </td>
                     <td>
                       <p class="preformatted">(test
- (repl :val 2)
+ (repl :value 2)
  (repl&lt;-textblock-argmap
   (tb/textblock
    :text "2")
@@ -15375,11 +15375,11 @@ ab
                     </td>
                     <td>
                       <p class="preformatted">(repl
- :val 2)</p>
+ :value 2)</p>
                     </td>
                     <td>
                       <p class="preformatted">(repl
- :val 2)</p>
+ :value 2)</p>
                     </td>
                   </tr>
                   <tr>
@@ -15419,8 +15419,8 @@ ab
   :type +
   :repllist
    (repllist
-    (repl :val 2)
-    (repl :val 3)))
+    (repl :value 2)
+    (repl :value 3)))
  (repl&lt;-textblock-argmap
   (tb/textblock
    :text "(+ 2 3)"
@@ -15454,9 +15454,9 @@ ab
  :repllist
   (repllist
    (repl
-    :val 2)
+    :value 2)
    (repl
-    :val 3)))</p>
+    :value 3)))</p>
                     </td>
                     <td>
                       <p class="preformatted">(repl
@@ -15464,9 +15464,9 @@ ab
  :repllist
   (repllist
    (repl
-    :val 2)
+    :value 2)
    (repl
-    :val 3)))</p>
+    :value 3)))</p>
                     </td>
                   </tr>
                   <tr>
@@ -15482,8 +15482,8 @@ ab
   :type +
   :repllist
    (repllist
-    (repl :val 2)
-    (repl :val 3)))
+    (repl :value 2)
+    (repl :value 3)))
  (repl&lt;-textblock-argmap
   (tb/textblock
    :text "(+ 2 3)"
@@ -15521,9 +15521,9 @@ ab
  :repllist
   (repllist
    (repl
-    :val 2)
+    :value 2)
    (repl
-    :val 3)))</p>
+    :value 3)))</p>
                     </td>
                     <td>
                       <p class="preformatted">(repl
@@ -15531,9 +15531,9 @@ ab
  :repllist
   (repllist
    (repl
-    :val 2)
+    :value 2)
    (repl
-    :val 3)))</p>
+    :value 3)))</p>
                     </td>
                   </tr>
                   <tr>

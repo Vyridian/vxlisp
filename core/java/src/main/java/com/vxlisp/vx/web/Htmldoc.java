@@ -76,6 +76,7 @@ public final class Htmldoc {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_string id = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
@@ -86,7 +87,8 @@ public final class Htmldoc {
 
     @Override
     public Core.Type_boolean vx_boolean_print_from_id_stylesheettext(final Core.Type_string id, final Core.Type_string stylesheettext) {
-      return Htmldoc.f_boolean_print_from_id_stylesheettext(id, stylesheettext);
+      Core.Type_boolean output = Htmldoc.f_boolean_print_from_id_stylesheettext(id, stylesheettext);
+      return output;
     }
 
   }
@@ -180,6 +182,7 @@ public final class Htmldoc {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_string id = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
@@ -189,7 +192,8 @@ public final class Htmldoc {
 
     @Override
     public Core.Type_boolean vx_boolean_remove_from_id(final Core.Type_string id) {
-      return Htmldoc.f_boolean_remove_from_id(id);
+      Core.Type_boolean output = Htmldoc.f_boolean_remove_from_id(id);
+      return output;
     }
 
   }
@@ -270,6 +274,7 @@ public final class Htmldoc {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_string id = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
@@ -280,7 +285,8 @@ public final class Htmldoc {
 
     @Override
     public Core.Type_boolean vx_boolean_replace_from_id_htmltext(final Core.Type_string id, final Core.Type_string htmltext) {
-      return Htmldoc.f_boolean_replace_from_id_htmltext(id, htmltext);
+      Core.Type_boolean output = Htmldoc.f_boolean_replace_from_id_htmltext(id, htmltext);
+      return output;
     }
 
   }
@@ -362,6 +368,7 @@ public final class Htmldoc {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_string id = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
@@ -373,7 +380,8 @@ public final class Htmldoc {
 
     @Override
     public Core.Type_boolean vx_boolean_replace_from_id_parent_htmltext(final Core.Type_string id, final Core.Type_string parent, final Core.Type_string htmltext) {
-      return Htmldoc.f_boolean_replace_from_id_parent_htmltext(id, parent, htmltext);
+      Core.Type_boolean output = Htmldoc.f_boolean_replace_from_id_parent_htmltext(id, parent, htmltext);
+      return output;
     }
 
   }
@@ -469,6 +477,7 @@ public final class Htmldoc {
       return output;
     }
 
+    @Override
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Core.Type_string text = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
@@ -479,7 +488,8 @@ public final class Htmldoc {
 
     @Override
     public CompletableFuture<Core.Type_boolean> vx_boolean_write_stylesheet_from_string(final Core.Type_string text) {
-      return Htmldoc.f_boolean_write_stylesheet_from_string(text);
+      CompletableFuture<Core.Type_boolean> output = Htmldoc.f_boolean_write_stylesheet_from_string(text);
+      return output;
     }
 
   }
@@ -561,6 +571,7 @@ public final class Htmldoc {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_string id = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
@@ -572,7 +583,8 @@ public final class Htmldoc {
 
     @Override
     public Core.Type_boolean vx_boolean_write_from_id_attribute_value(final Core.Type_string id, final Core.Type_string attribute, final Core.Type_string value) {
-      return Htmldoc.f_boolean_write_from_id_attribute_value(id, attribute, value);
+      Core.Type_boolean output = Htmldoc.f_boolean_write_from_id_attribute_value(id, attribute, value);
+      return output;
     }
 
   }
@@ -653,6 +665,7 @@ public final class Htmldoc {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_string id = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
@@ -663,7 +676,8 @@ public final class Htmldoc {
 
     @Override
     public Core.Type_boolean vx_boolean_write_from_id_htmltext(final Core.Type_string id, final Core.Type_string htmltext) {
-      return Htmldoc.f_boolean_write_from_id_htmltext(id, htmltext);
+      Core.Type_boolean output = Htmldoc.f_boolean_write_from_id_htmltext(id, htmltext);
+      return output;
     }
 
   }
@@ -744,6 +758,7 @@ public final class Htmldoc {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_string id = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
@@ -754,7 +769,8 @@ public final class Htmldoc {
 
     @Override
     public Core.Type_boolean vx_boolean_write_from_id_visible(final Core.Type_string id, final Core.Type_boolean visible) {
-      return Htmldoc.f_boolean_write_from_id_visible(id, visible);
+      Core.Type_boolean output = Htmldoc.f_boolean_write_from_id_visible(id, visible);
+      return output;
     }
 
   }
@@ -850,6 +866,7 @@ public final class Htmldoc {
       return output;
     }
 
+    @Override
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist) {
       CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(Core.e_any);
       Html.Type_stylesheet stylesheet = Core.f_any_from_any(Html.t_stylesheet, arglist.vx_any(Core.vx_new_int(0)));
@@ -860,7 +877,8 @@ public final class Htmldoc {
 
     @Override
     public CompletableFuture<Core.Type_boolean> vx_boolean_write_from_stylesheet(final Html.Type_stylesheet stylesheet) {
-      return Htmldoc.f_boolean_write_from_stylesheet(stylesheet);
+      CompletableFuture<Core.Type_boolean> output = Htmldoc.f_boolean_write_from_stylesheet(stylesheet);
+      return output;
     }
 
   }
@@ -873,8 +891,12 @@ public final class Htmldoc {
     output = Core.f_let_async(
       Core.t_boolean,
       Core.t_any_from_func_async.vx_fn_new(() -> {
-        final Core.Type_string text = Htmldoc.f_string_from_stylesheet(stylesheet);
-        final CompletableFuture<Core.Type_boolean> future_iswrite = Htmldoc.f_boolean_write_stylesheet_from_string(text);
+        Core.Type_string text = Htmldoc.f_string_from_stylesheet(
+          stylesheet
+        );
+        CompletableFuture<Core.Type_boolean> future_iswrite = Htmldoc.f_boolean_write_stylesheet_from_string(
+          text
+        );
         CompletableFuture<Core.Type_any> output_1 = Core.vx_async_from_async_fn(future_iswrite, (iswrite) -> {
           Core.Type_any output_2 = iswrite;
           return output_2;
@@ -966,6 +988,7 @@ public final class Htmldoc {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Ui.Type_ui ui = Core.f_any_from_any(Ui.t_ui, arglist.vx_any(Core.vx_new_int(0)));
@@ -975,7 +998,8 @@ public final class Htmldoc {
 
     @Override
     public Core.Type_boolean vx_boolean_writeevents_from_ui(final Ui.Type_ui ui) {
-      return Htmldoc.f_boolean_writeevents_from_ui(ui);
+      Core.Type_boolean output = Htmldoc.f_boolean_writeevents_from_ui(ui);
+      return output;
     }
 
   }
@@ -1054,6 +1078,7 @@ public final class Htmldoc {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       output = Htmldoc.f_context_read();
@@ -1062,7 +1087,8 @@ public final class Htmldoc {
 
     @Override
     public Core.Type_context vx_context_read() {
-      return Htmldoc.f_context_read();
+      Core.Type_context output = Htmldoc.f_context_read();
+      return output;
     }
 
   }
@@ -1141,6 +1167,7 @@ public final class Htmldoc {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
@@ -1150,7 +1177,8 @@ public final class Htmldoc {
 
     @Override
     public Core.Type_context vx_context_write(final Core.Type_context context) {
-      return Htmldoc.f_context_write(context);
+      Core.Type_context output = Htmldoc.f_context_write(context);
+      return output;
     }
 
   }
@@ -1244,6 +1272,7 @@ public final class Htmldoc {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_string id = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
@@ -1253,7 +1282,8 @@ public final class Htmldoc {
 
     @Override
     public Core.Type_string vx_string_from_id(final Core.Type_string id) {
-      return Htmldoc.f_string_from_id(id);
+      Core.Type_string output = Htmldoc.f_string_from_id(id);
+      return output;
     }
 
   }
@@ -1347,6 +1377,7 @@ public final class Htmldoc {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Html.Type_stylesheet stylesheet = Core.f_any_from_any(Html.t_stylesheet, arglist.vx_any(Core.vx_new_int(0)));
@@ -1356,7 +1387,8 @@ public final class Htmldoc {
 
     @Override
     public Core.Type_string vx_string_from_stylesheet(final Html.Type_stylesheet stylesheet) {
-      return Htmldoc.f_string_from_stylesheet(stylesheet);
+      Core.Type_string output = Htmldoc.f_string_from_stylesheet(stylesheet);
+      return output;
     }
 
   }
@@ -1369,8 +1401,13 @@ public final class Htmldoc {
     output = Core.f_let(
       Core.t_string,
       Core.t_any_from_func.vx_fn_new(() -> {
-        Html.Type_stylelist stylelist = Html.f_styles_from_stylesheet(stylesheet);
-        Core.Type_string text = Html.f_string_from_stylelist_indent(stylelist, Core.vx_new_int(0));
+        Html.Type_stylelist stylelist = Html.f_styles_from_stylesheet(
+          stylesheet
+        );
+        Core.Type_string text = Html.f_string_from_stylelist_indent(
+          stylelist,
+          Core.vx_new_int(0)
+        );
         Core.Type_any output_1 = text;
         return output_1;
       })
@@ -1459,6 +1496,7 @@ public final class Htmldoc {
       return output;
     }
 
+    @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_string uid = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
@@ -1468,7 +1506,8 @@ public final class Htmldoc {
 
     @Override
     public Core.Type_any vx_ui_readstate_from_uid(final Core.Type_string uid) {
-      return Htmldoc.f_ui_readstate_from_uid(uid);
+      Core.Type_any output = Htmldoc.f_ui_readstate_from_uid(uid);
+      return output;
     }
 
   }

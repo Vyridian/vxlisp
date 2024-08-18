@@ -22,7 +22,10 @@ public final class TranslateTest {
             Test.f_test(
               context,
               Core.vx_new_string("!NotFound!"),
-              Translate.f_translate(context, Core.vx_new_string("!NotFound!"))
+              Translate.f_translate(
+                context,
+                Core.vx_new_string("!NotFound!")
+              )
             )
         )
       )

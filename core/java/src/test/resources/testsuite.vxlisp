@@ -1597,9 +1597,9 @@
  (list<-map : stringlist
   (stringmap "a" "1" "b" "2")
   (fn : string
-   [key : string
-    val : string]
-   (string key val))))`
+   [key   : string
+    value : string]
+   (string key value))))`
         :testresult
          (testresult
           :code ":eq"
@@ -1627,8 +1627,8 @@
  (map<-list : stringmap
   (stringlist "a" "b")
   (fn : string
-   [val : string]
-   (string "key" val))))`
+   [value : string]
+   (string "key" value))))`
         :testresult
          (testresult
           :code ":eq"
@@ -1681,8 +1681,8 @@
    :b "2")
   (fn : string
    [key : string
-    val : string]
-   (string key val))))`
+    value : string]
+   (string key value))))`
         :testresult
          (testresult
           :code ":eq"
@@ -13692,8 +13692,8 @@ ab
    :type string
    :repllist
     (repllist
-     (repl :val "Hello")
-     (repl :val "World")
+     (repl :value "Hello")
+     (repl :value "World")
     ))))`
         :testresult
          (testresult
@@ -13710,8 +13710,8 @@ ab
    :type +
    :repllist
     (repllist
-     (repl :val 2)
-     (repl :val 3)))))"
+     (repl :value 2)
+     (repl :value 3)))))"
         :testresult
          (testresult
           :code ":eq"
@@ -13775,7 +13775,7 @@ ab
        (testdescribe
         :describename
          `(test
- (repl :val 2)
+ (repl :value 2)
  (repl-empty<-textblock-argmap
   (tb/textblock
    :text "2")
@@ -13786,10 +13786,10 @@ ab
           :passfail true
           :expected
            (repl
-            :val 2)
+            :value 2)
           :actual
            (repl
-            :val 2)))
+            :value 2)))
        (testdescribe
         :describename
          `(test
@@ -13811,7 +13811,7 @@ ab
        (testdescribe
         :describename
          `(test
- (repl :val 2)
+ (repl :value 2)
  (repl-empty<-textblock-argmap
   (tb/textblock
    :text "1"
@@ -13826,10 +13826,10 @@ ab
           :passfail true
           :expected
            (repl
-            :val 2)
+            :value 2)
           :actual
            (repl
-            :val 2)))
+            :value 2)))
        (testdescribe
         :describename
          `(test
@@ -13879,9 +13879,9 @@ ab
   :repllist
    (repllist
     (repl
-     :val 2)
+     :value 2)
     (repl
-     :val 3)))
+     :value 3)))
  (repl-paren<-textblock-argmap
   (tb/textblock
    :text "(+ 2 3)"
@@ -13918,18 +13918,18 @@ ab
             :repllist
              (repllist
               (repl
-               :val 2)
+               :value 2)
               (repl
-               :val 3)))
+               :value 3)))
           :actual
            (repl
             :type vx/core/+
             :repllist
              (repllist
               (repl
-               :val 2)
+               :value 2)
               (repl
-               :val 3)))))))
+               :value 3)))))))
     (testcase
      :passfail true
      :testpkg "vx/repl"
@@ -13944,9 +13944,9 @@ ab
   :repllist
    (repllist
     (repl
-     :val 2)
+     :value 2)
     (repl
-     :val 3)))
+     :value 3)))
  (repl<-macro
   "(+ "
   (- 7 5)
@@ -13961,18 +13961,18 @@ ab
             :repllist
              (repllist
               (repl
-               :val 2)
+               :value 2)
               (repl
-               :val 3)))
+               :value 3)))
           :actual
            (repl
             :type vx/core/+
             :repllist
              (repllist
               (repl
-               :val 2)
+               :value 2)
               (repl
-               :val 3)))))))
+               :value 3)))))))
     (testcase
      :passfail true
      :testpkg "vx/repl"
@@ -13983,7 +13983,7 @@ ab
         :describename
          `(test
  (repl
-  :val 2)
+  :value 2)
  (repl<-script
   "2"))`
         :testresult
@@ -13992,15 +13992,15 @@ ab
           :passfail true
           :expected
            (repl
-            :val 2)
+            :value 2)
           :actual
            (repl
-            :val 2)))
+            :value 2)))
        (testdescribe
         :describename
          `(test
  (repl
-  :val infinity)
+  :value infinity)
  (repl<-script
   "infinity"))`
         :testresult
@@ -14009,10 +14009,10 @@ ab
           :passfail true
           :expected
            (repl
-            :val infinity)
+            :value infinity)
           :actual
            (repl
-            :val infinity)))
+            :value infinity)))
        (testdescribe
         :describename
          `(test
@@ -14038,9 +14038,9 @@ ab
   :repllist
    (repllist
     (repl
-     :val 2)
+     :value 2)
     (repl
-     :val 3)))
+     :value 3)))
  (repl<-script
   "(+ 2 3)"))`
         :testresult
@@ -14053,18 +14053,18 @@ ab
             :repllist
              (repllist
               (repl
-               :val 2)
+               :value 2)
               (repl
-               :val 3)))
+               :value 3)))
           :actual
            (repl
             :type vx/core/+
             :repllist
              (repllist
               (repl
-               :val 2)
+               :value 2)
               (repl
-               :val 3)))))))
+               :value 3)))))))
     (testcase
      :passfail true
      :testpkg "vx/repl"
@@ -14074,7 +14074,7 @@ ab
        (testdescribe
         :describename
          `(test
- (repl :val "Hello")
+ (repl :value "Hello")
  (repl<-string-argmap
   `"Hello"`
   (empty argmap)))`
@@ -14084,15 +14084,15 @@ ab
           :passfail true
           :expected
            (repl
-            :val "Hello")
+            :value "Hello")
           :actual
            (repl
-            :val "Hello")))
+            :value "Hello")))
        (testdescribe
         :describename
          `(test
  (repl
-  :val 2)
+  :value 2)
  (repl<-string-argmap
   "2"
   (empty argmap)))`
@@ -14102,14 +14102,14 @@ ab
           :passfail true
           :expected
            (repl
-            :val 2)
+            :value 2)
           :actual
            (repl
-            :val 2)))
+            :value 2)))
        (testdescribe
         :describename
          `(test
- (repl :val 2.3)
+ (repl :value 2.3)
  (repl<-string-argmap
   "2.3"
   (empty argmap)))`
@@ -14119,15 +14119,15 @@ ab
           :passfail true
           :expected
            (repl
-            :val 2.3)
+            :value 2.3)
           :actual
            (repl
-            :val 2.3)))
+            :value 2.3)))
        (testdescribe
         :describename
          `(test
  (repl
-  :val infinity)
+  :value infinity)
  (repl<-string-argmap
   "infinity"
   (empty argmap)))`
@@ -14137,15 +14137,15 @@ ab
           :passfail true
           :expected
            (repl
-            :val infinity)
+            :value infinity)
           :actual
            (repl
-            :val infinity)))
+            :value infinity)))
        (testdescribe
         :describename
          `(test
  (repl
-  :val tb/delimcomma)
+  :value tb/delimcomma)
  (repl<-string-argmap
   "vx/data/textblock/delimcomma"
   (empty argmap)))`
@@ -14155,10 +14155,10 @@ ab
           :passfail true
           :expected
            (repl
-            :val vx/data/textblock/delimcomma)
+            :value vx/data/textblock/delimcomma)
           :actual
            (repl
-            :val vx/data/textblock/delimcomma)))
+            :value vx/data/textblock/delimcomma)))
        (testdescribe
         :describename
          `(test
@@ -14202,7 +14202,7 @@ ab
        (testdescribe
         :describename
          `(test
- (repl :val 2)
+ (repl :value 2)
  (repl<-textblock
   (tb/textblock
    :text "2")))`
@@ -14212,10 +14212,10 @@ ab
           :passfail true
           :expected
            (repl
-            :val 2)
+            :value 2)
           :actual
            (repl
-            :val 2)))
+            :value 2)))
        (testdescribe
         :describename
          `(test
@@ -14257,8 +14257,8 @@ ab
   :type +
   :repllist
    (repllist
-    (repl :val 2)
-    (repl :val 3)))
+    (repl :value 2)
+    (repl :value 3)))
  (repl<-textblock
   (tb/textblock
    :text "(+ 2 3)"
@@ -14294,18 +14294,18 @@ ab
             :repllist
              (repllist
               (repl
-               :val 2)
+               :value 2)
               (repl
-               :val 3)))
+               :value 3)))
           :actual
            (repl
             :type vx/core/+
             :repllist
              (repllist
               (repl
-               :val 2)
+               :value 2)
               (repl
-               :val 3)))))
+               :value 3)))))
        (testdescribe
         :describename
          `(test
@@ -14313,8 +14313,8 @@ ab
   :type +
   :repllist
    (repllist
-    (repl :val 2)
-    (repl :val 3)))
+    (repl :value 2)
+    (repl :value 3)))
  (repl<-textblock
   (tb/textblock
    :text "(+ 2 3)"
@@ -14354,18 +14354,18 @@ ab
             :repllist
              (repllist
               (repl
-               :val 2)
+               :value 2)
               (repl
-               :val 3)))
+               :value 3)))
           :actual
            (repl
             :type vx/core/+
             :repllist
              (repllist
               (repl
-               :val 2)
+               :value 2)
               (repl
-               :val 3)))))))
+               :value 3)))))))
     (testcase
      :passfail true
      :testpkg "vx/repl"
@@ -14375,7 +14375,7 @@ ab
        (testdescribe
         :describename
          `(test
- (repl :val 2)
+ (repl :value 2)
  (repl<-textblock-argmap
   (tb/textblock
    :text "2")
@@ -14386,10 +14386,10 @@ ab
           :passfail true
           :expected
            (repl
-            :val 2)
+            :value 2)
           :actual
            (repl
-            :val 2)))
+            :value 2)))
        (testdescribe
         :describename
          `(test
@@ -14415,8 +14415,8 @@ ab
   :type +
   :repllist
    (repllist
-    (repl :val 2)
-    (repl :val 3)))
+    (repl :value 2)
+    (repl :value 3)))
  (repl<-textblock-argmap
   (tb/textblock
    :text "(+ 2 3)"
@@ -14453,18 +14453,18 @@ ab
             :repllist
              (repllist
               (repl
-               :val 2)
+               :value 2)
               (repl
-               :val 3)))
+               :value 3)))
           :actual
            (repl
             :type vx/core/+
             :repllist
              (repllist
               (repl
-               :val 2)
+               :value 2)
               (repl
-               :val 3)))))
+               :value 3)))))
        (testdescribe
         :describename
          `(test
@@ -14472,8 +14472,8 @@ ab
   :type +
   :repllist
    (repllist
-    (repl :val 2)
-    (repl :val 3)))
+    (repl :value 2)
+    (repl :value 3)))
  (repl<-textblock-argmap
   (tb/textblock
    :text "(+ 2 3)"
@@ -14514,18 +14514,18 @@ ab
             :repllist
              (repllist
               (repl
-               :val 2)
+               :value 2)
               (repl
-               :val 3)))
+               :value 3)))
           :actual
            (repl
             :type vx/core/+
             :repllist
              (repllist
               (repl
-               :val 2)
+               :value 2)
               (repl
-               :val 3)))))))
+               :value 3)))))))
     (testcase
      :passfail true
      :testpkg "vx/repl"

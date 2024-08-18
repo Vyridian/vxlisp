@@ -3176,15 +3176,15 @@ namespace vx_core_test {
             vx_core::vx_new_string("2")
           })
         ),
-        vx_core::t_any_from_key_value->vx_fn_new({}, [](vx_core::Type_any key_any, vx_core::Type_any val_any) {
+        vx_core::t_any_from_key_value->vx_fn_new({}, [](vx_core::Type_any key_any, vx_core::Type_any value_any) {
           vx_core::Type_string key = vx_core::vx_any_from_any(vx_core::t_string, key_any);
-          vx_core::Type_string val = vx_core::vx_any_from_any(vx_core::t_string, val_any);
+          vx_core::Type_string value = vx_core::vx_any_from_any(vx_core::t_string, value_any);
           vx_core::Type_any output_1 = 
             vx_core::f_new(
               vx_core::t_string,
               vx_core::vx_new(vx_core::t_anylist, {
                 key,
-                val
+                value
               })
             );
           return output_1;
@@ -3192,7 +3192,7 @@ namespace vx_core_test {
       )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (stringlist \"a1\" \"b2\")\n (list<-map : stringlist\n  (stringmap \"a\" \"1\" \"b\" \"2\")\n  (fn : string\n   [key : string\n    val : string]\n   (string key val))))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (stringlist \"a1\" \"b2\")\n (list<-map : stringlist\n  (stringmap \"a\" \"1\" \"b\" \"2\")\n  (fn : string\n   [key   : string\n    value : string]\n   (string key value))))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
@@ -3236,14 +3236,14 @@ namespace vx_core_test {
             vx_core::vx_new_string("b")
           })
         ),
-        vx_core::t_any_from_any->vx_fn_new({}, [](vx_core::Type_any val_any) {
-          vx_core::Type_string val = vx_core::vx_any_from_any(vx_core::t_string, val_any);
+        vx_core::t_any_from_any->vx_fn_new({}, [](vx_core::Type_any value_any) {
+          vx_core::Type_string value = vx_core::vx_any_from_any(vx_core::t_string, value_any);
           vx_core::Type_any output_1 = 
             vx_core::f_new(
               vx_core::t_string,
               vx_core::vx_new(vx_core::t_anylist, {
                 vx_core::vx_new_string("key"),
-                val
+                value
               })
             );
           return output_1;
@@ -3251,7 +3251,7 @@ namespace vx_core_test {
       )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (stringmap\n  \"keya\" \"a\"\n  \"keyb\" \"b\")\n (map<-list : stringmap\n  (stringlist \"a\" \"b\")\n  (fn : string\n   [val : string]\n   (string \"key\" val))))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (stringmap\n  \"keya\" \"a\"\n  \"keyb\" \"b\")\n (map<-list : stringmap\n  (stringlist \"a\" \"b\")\n  (fn : string\n   [value : string]\n   (string \"key\" value))))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
@@ -3342,15 +3342,15 @@ namespace vx_core_test {
             vx_core::vx_new_string("2")
           })
         ),
-        vx_core::t_any_from_key_value->vx_fn_new({}, [](vx_core::Type_any key_any, vx_core::Type_any val_any) {
+        vx_core::t_any_from_key_value->vx_fn_new({}, [](vx_core::Type_any key_any, vx_core::Type_any value_any) {
           vx_core::Type_string key = vx_core::vx_any_from_any(vx_core::t_string, key_any);
-          vx_core::Type_string val = vx_core::vx_any_from_any(vx_core::t_string, val_any);
+          vx_core::Type_string value = vx_core::vx_any_from_any(vx_core::t_string, value_any);
           vx_core::Type_any output_1 = 
             vx_core::f_new(
               vx_core::t_string,
               vx_core::vx_new(vx_core::t_anylist, {
                 key,
-                val
+                value
               })
             );
           return output_1;
@@ -3358,7 +3358,7 @@ namespace vx_core_test {
       )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (stringmap\n  :a \"a1\"\n  :b \"b2\")\n (map<-map : stringmap\n  (stringmap\n   :a \"1\"\n   :b \"2\")\n  (fn : string\n   [key : string\n    val : string]\n   (string key val))))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (stringmap\n  :a \"a1\"\n  :b \"b2\")\n (map<-map : stringmap\n  (stringmap\n   :a \"1\"\n   :b \"2\")\n  (fn : string\n   [key : string\n    value : string]\n   (string key value))))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });

@@ -40,8 +40,12 @@ public class UiTest {
                       )
                     )
                   );
-                  Vx.Ui.Ui.Type_ui appui = Vx.Ui.Ui.f_ui_readstate_uiapp(context);
-                  Vx.Core.Type_boolean isremoved = Vx.Ui.Ui.f_boolean_removestate_uiapp(context);
+                  Vx.Ui.Ui.Type_ui appui = Vx.Ui.Ui.f_ui_readstate_uiapp(
+                    context
+                  );
+                  Vx.Core.Type_boolean isremoved = Vx.Ui.Ui.f_boolean_removestate_uiapp(
+                    context
+                  );
                   Vx.Core.Type_any output_1 = appui;
                   return output_1;
                 })
@@ -69,7 +73,9 @@ public class UiTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_string(""),
-              Vx.Ui.Ui.f_string_parentuid_from_uid(Vx.Core.vx_new_string("a"))
+              Vx.Ui.Ui.f_string_parentuid_from_uid(
+                Vx.Core.vx_new_string("a")
+              )
             )
         ),
         Vx.Core.vx_new(
@@ -79,7 +85,9 @@ public class UiTest {
             Vx.Test.f_test(
               context,
               Vx.Core.vx_new_string("a/b"),
-              Vx.Ui.Ui.f_string_parentuid_from_uid(Vx.Core.vx_new_string("a/b/c"))
+              Vx.Ui.Ui.f_string_parentuid_from_uid(
+                Vx.Core.vx_new_string("a/b/c")
+              )
             )
         )
       )
@@ -124,7 +132,9 @@ public class UiTest {
                       )
                     )
                   );
-                  Vx.Core.Type_any output_1 = Vx.Ui.Ui.f_ui_readstate_uiapp(context);
+                  Vx.Core.Type_any output_1 = Vx.Ui.Ui.f_ui_readstate_uiapp(
+                    context
+                  );
                   return output_1;
                 })
               )
@@ -197,9 +207,17 @@ public class UiTest {
                       )
                     )
                   );
-                  Vx.Core.Type_boolean iswrite = Vx.Ui.Ui.f_boolean_writestate_from_uiapp(context, uiapp);
-                  Vx.Ui.Ui.Type_ui readval = Vx.Ui.Ui.f_ui_readstate_from_uid(context, Vx.Core.vx_new_string("a/b/c"));
-                  Vx.Core.Type_boolean isremoved = Vx.Ui.Ui.f_boolean_removestate_uiapp(context);
+                  Vx.Core.Type_boolean iswrite = Vx.Ui.Ui.f_boolean_writestate_from_uiapp(
+                    context,
+                    uiapp
+                  );
+                  Vx.Ui.Ui.Type_ui readval = Vx.Ui.Ui.f_ui_readstate_from_uid(
+                    context,
+                    Vx.Core.vx_new_string("a/b/c")
+                  );
+                  Vx.Core.Type_boolean isremoved = Vx.Ui.Ui.f_boolean_removestate_uiapp(
+                    context
+                  );
                   Vx.Core.Type_any output_1 = readval;
                   return output_1;
                 })

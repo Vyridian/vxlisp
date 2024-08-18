@@ -298,7 +298,8 @@ public static class Http {
     }
 
     public Task<Vx.Data.Csv.Type_csv> vx_csv_from_httpget(Vx.Core.Type_string url) {
-      return Vx.Web.Http.f_csv_from_httpget(url);
+      Task<Vx.Data.Csv.Type_csv> output = Vx.Web.Http.f_csv_from_httpget(url);
+      return output;
     }
 
   }
@@ -311,9 +312,14 @@ public static class Http {
     output = Vx.Core.f_let_async(
       Vx.Data.Csv.t_csv,
       Vx.Core.t_any_from_func_async.vx_fn_new(() => {
-        Task<Vx.Data.Textblock.Type_textblock> future_textblock = Vx.Web.Http.f_textblock_from_httpget(url, Vx.Core.vx_new_string("text/csv"));
+        Task<Vx.Data.Textblock.Type_textblock> future_textblock = Vx.Web.Http.f_textblock_from_httpget(
+          url,
+          Vx.Core.vx_new_string("text/csv")
+        );
         Task<Vx.Core.Type_any> output_1 = Vx.Core.vx_async_from_async_fn(future_textblock, (textblock) => {
-          Vx.Core.Type_any output_2 = Vx.Data.Csv.f_csv_from_textblock(textblock);
+          Vx.Core.Type_any output_2 = Vx.Data.Csv.f_csv_from_textblock(
+            textblock
+          );
           return output_2;
         });
         return output_1;
@@ -405,7 +411,8 @@ public static class Http {
     }
 
     public Task<Vx.Web.Http.Type_response> vx_json_from_httpget(Vx.Core.Type_string url) {
-      return Vx.Web.Http.f_json_from_httpget(url);
+      Task<Vx.Web.Http.Type_response> output = Vx.Web.Http.f_json_from_httpget(url);
+      return output;
     }
 
   }
@@ -418,7 +425,10 @@ public static class Http {
     output = Vx.Core.f_let_async(
       Vx.Web.Http.t_response,
       Vx.Core.t_any_from_func_async.vx_fn_new(() => {
-        Task<Vx.Web.Http.Type_response> future_response = Vx.Web.Http.f_response_from_httpget(url, Vx.Core.vx_new_string("application/json"));
+        Task<Vx.Web.Http.Type_response> future_response = Vx.Web.Http.f_response_from_httpget(
+          url,
+          Vx.Core.vx_new_string("application/json")
+        );
         Task<Vx.Core.Type_any> output_1 = Vx.Core.vx_async_from_async_fn(future_response, (response) => {
           Vx.Core.Type_any output_2 = response;
           return output_2;
@@ -503,7 +513,8 @@ public static class Http {
     }
 
     public Task<Vx.Web.Http.Type_response> vx_response_from_httpget(Vx.Core.Type_string url, Vx.Core.Type_string contenttype) {
-      return Vx.Web.Http.f_response_from_httpget(url, contenttype);
+      Task<Vx.Web.Http.Type_response> output = Vx.Web.Http.f_response_from_httpget(url, contenttype);
+      return output;
     }
 
   }
@@ -599,7 +610,8 @@ public static class Http {
     }
 
     public Task<Vx.Core.Type_string> vx_text_from_httpget(Vx.Core.Type_string url) {
-      return Vx.Web.Http.f_text_from_httpget(url);
+      Task<Vx.Core.Type_string> output = Vx.Web.Http.f_text_from_httpget(url);
+      return output;
     }
 
   }
@@ -612,9 +624,14 @@ public static class Http {
     output = Vx.Core.f_let_async(
       Vx.Core.t_string,
       Vx.Core.t_any_from_func_async.vx_fn_new(() => {
-        Task<Vx.Web.Http.Type_response> future_response = Vx.Web.Http.f_response_from_httpget(url, Vx.Core.vx_new_string("text/plain"));
+        Task<Vx.Web.Http.Type_response> future_response = Vx.Web.Http.f_response_from_httpget(
+          url,
+          Vx.Core.vx_new_string("text/plain")
+        );
         Task<Vx.Core.Type_any> output_1 = Vx.Core.vx_async_from_async_fn(future_response, (response) => {
-          Vx.Core.Type_any output_2 = Vx.Web.Http.f_text_from_response(response);
+          Vx.Core.Type_any output_2 = Vx.Web.Http.f_text_from_response(
+            response
+          );
           return output_2;
         });
         return output_1;
@@ -704,7 +721,8 @@ public static class Http {
     }
 
     public Vx.Core.Type_string vx_text_from_response(Vx.Web.Http.Type_response response) {
-      return Vx.Web.Http.f_text_from_response(response);
+      Vx.Core.Type_string output = Vx.Web.Http.f_text_from_response(response);
+      return output;
     }
 
   }
@@ -791,7 +809,8 @@ public static class Http {
     }
 
     public Task<Vx.Data.Textblock.Type_textblock> vx_textblock_from_httpget(Vx.Core.Type_string url, Vx.Core.Type_string contenttype) {
-      return Vx.Web.Http.f_textblock_from_httpget(url, contenttype);
+      Task<Vx.Data.Textblock.Type_textblock> output = Vx.Web.Http.f_textblock_from_httpget(url, contenttype);
+      return output;
     }
 
   }
@@ -804,9 +823,14 @@ public static class Http {
     output = Vx.Core.f_let_async(
       Vx.Data.Textblock.t_textblock,
       Vx.Core.t_any_from_func_async.vx_fn_new(() => {
-        Task<Vx.Web.Http.Type_response> future_response = Vx.Web.Http.f_response_from_httpget(url, contenttype);
+        Task<Vx.Web.Http.Type_response> future_response = Vx.Web.Http.f_response_from_httpget(
+          url,
+          contenttype
+        );
         Task<Vx.Core.Type_any> output_1 = Vx.Core.vx_async_from_async_fn(future_response, (response) => {
-          Vx.Core.Type_any output_2 = Vx.Web.Http.f_textblock_from_response(response);
+          Vx.Core.Type_any output_2 = Vx.Web.Http.f_textblock_from_response(
+            response
+          );
           return output_2;
         });
         return output_1;
@@ -896,7 +920,8 @@ public static class Http {
     }
 
     public Vx.Data.Textblock.Type_textblock vx_textblock_from_response(Vx.Web.Http.Type_response response) {
-      return Vx.Web.Http.f_textblock_from_response(response);
+      Vx.Data.Textblock.Type_textblock output = Vx.Web.Http.f_textblock_from_response(response);
+      return output;
     }
 
   }
@@ -911,7 +936,9 @@ public static class Http {
       Vx.Core.vx_new(
         Vx.Core.t_anylist,
         Vx.Core.vx_new_string(":text"),
-        Vx.Web.Http.f_text_from_response(response)
+        Vx.Web.Http.f_text_from_response(
+          response
+        )
       )
     );
     return output;
@@ -1000,7 +1027,8 @@ public static class Http {
     }
 
     public Task<Vx.Data.Xml.Type_xml> vx_xml_from_httpget(Vx.Core.Type_string url) {
-      return Vx.Web.Http.f_xml_from_httpget(url);
+      Task<Vx.Data.Xml.Type_xml> output = Vx.Web.Http.f_xml_from_httpget(url);
+      return output;
     }
 
   }
@@ -1013,9 +1041,14 @@ public static class Http {
     output = Vx.Core.f_let_async(
       Vx.Data.Xml.t_xml,
       Vx.Core.t_any_from_func_async.vx_fn_new(() => {
-        Task<Vx.Data.Textblock.Type_textblock> future_textblock = Vx.Web.Http.f_textblock_from_httpget(url, Vx.Core.vx_new_string("text/xml"));
+        Task<Vx.Data.Textblock.Type_textblock> future_textblock = Vx.Web.Http.f_textblock_from_httpget(
+          url,
+          Vx.Core.vx_new_string("text/xml")
+        );
         Task<Vx.Core.Type_any> output_1 = Vx.Core.vx_async_from_async_fn(future_textblock, (textblock) => {
-          Vx.Core.Type_any output_2 = Vx.Data.Xml.f_xml_from_textblock(textblock);
+          Vx.Core.Type_any output_2 = Vx.Data.Xml.f_xml_from_textblock(
+            textblock
+          );
           return output_2;
         });
         return output_1;
