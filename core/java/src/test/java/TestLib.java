@@ -118,10 +118,11 @@ public final class TestLib {
 
   public static boolean test_write_file() {
     String testname = "test_write_file";
-    File.Type_file file = Core.vx_new(File.t_file, 
-    Core.vx_new_string(":path"), Core.vx_new_string(spath + "/vx"),
-    Core.vx_new_string(":name"), Core.vx_new_string("string_read_from_file.txt")
-  );
+    File.Type_file file = Core.vx_new(
+      File.t_file, 
+      Core.vx_new_string(":path"), Core.vx_new_string(spath + "/vx"),
+      Core.vx_new_string(":name"), Core.vx_new_string("string_read_from_file.txt")
+    );
     Core.Type_string string_path = File.f_pathfull_from_file(file);
     String expected = spath + "/vx/string_read_from_file.txt";
     String actual = string_path.vx_string();
@@ -204,14 +205,11 @@ public final class TestLib {
   				System.out.println(actual);
       Core.f_log(testresult);
 		  }
-  		switch (code) {
-		  case ":ne":
+    if ((code.equals(":ne"))) {
 	  			assertNotEquals(expected, actual, msg);
-  				break;
-  		default:
+    } else {
   				assertEquals(expected, actual, msg);
-  				break;
-  		}
+    }
     final boolean output = true;
     return output;
   }

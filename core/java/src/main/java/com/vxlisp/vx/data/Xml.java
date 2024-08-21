@@ -30,8 +30,9 @@ public final class Xml {
     @Override
     public Core.Type_string tag() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_tag != null) {
-        output = this.vx_p_tag;
+      Core.Type_string testnull = vx_p_tag;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -41,8 +42,9 @@ public final class Xml {
     @Override
     public Core.Type_string text() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_text != null) {
-        output = this.vx_p_text;
+      Core.Type_string testnull = vx_p_text;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -52,8 +54,9 @@ public final class Xml {
     @Override
     public Core.Type_string prop() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_prop != null) {
-        output = this.vx_p_prop;
+      Core.Type_string testnull = vx_p_prop;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -63,8 +66,9 @@ public final class Xml {
     @Override
     public Core.Type_stringmap propmap() {
       Core.Type_stringmap output = Core.e_stringmap;
-      if (this.vx_p_propmap != null) {
-        output = this.vx_p_propmap;
+      Core.Type_stringmap testnull = vx_p_propmap;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -74,8 +78,9 @@ public final class Xml {
     @Override
     public Xml.Type_xmllist children() {
       Xml.Type_xmllist output = Xml.e_xmllist;
-      if (this.vx_p_children != null) {
-        output = this.vx_p_children;
+      Xml.Type_xmllist testnull = vx_p_children;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -85,8 +90,9 @@ public final class Xml {
     @Override
     public Xml.Type_xml parent() {
       Xml.Type_xml output = Xml.e_xml;
-      if (this.vx_p_parent != null) {
-        output = this.vx_p_parent;
+      Xml.Type_xml testnull = vx_p_parent;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -95,39 +101,33 @@ public final class Xml {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":tag":
+      if (false) {
+      } else if ((skey.equals(":tag"))) {
         output = this.tag();
-        break;
-      case ":text":
+      } else if ((skey.equals(":text"))) {
         output = this.text();
-        break;
-      case ":prop":
+      } else if ((skey.equals(":prop"))) {
         output = this.prop();
-        break;
-      case ":propmap":
+      } else if ((skey.equals(":propmap"))) {
         output = this.propmap();
-        break;
-      case ":children":
+      } else if ((skey.equals(":children"))) {
         output = this.children();
-        break;
-      case ":parent":
+      } else if ((skey.equals(":parent"))) {
         output = this.parent();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":tag", this.tag());
-      output.put(":text", this.text());
-      output.put(":prop", this.prop());
-      output.put(":propmap", this.propmap());
-      output.put(":children", this.children());
-      output.put(":parent", this.parent());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":tag", this.tag());
+      map.put(":text", this.text());
+      map.put(":prop", this.prop());
+      map.put(":propmap", this.propmap());
+      map.put(":children", this.children());
+      map.put(":parent", this.parent());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -160,8 +160,8 @@ public final class Xml {
       validkeys.add(":children");
       validkeys.add(":parent");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -204,8 +204,8 @@ public final class Xml {
             }
           }
         } else {
-          switch (key) {
-          case ":tag":
+          if (false) {
+          } else if ((key.equals(":tag"))) {
             if (valsub == vx_p_tag) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valtag = (Core.Type_string)valsub;
@@ -229,8 +229,7 @@ public final class Xml {
               msg = Core.vx_msg_from_error("vx/data/xml/xml", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":text":
+          } else if ((key.equals(":text"))) {
             if (valsub == vx_p_text) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valtext = (Core.Type_string)valsub;
@@ -254,8 +253,7 @@ public final class Xml {
               msg = Core.vx_msg_from_error("vx/data/xml/xml", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":prop":
+          } else if ((key.equals(":prop"))) {
             if (valsub == vx_p_prop) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valprop = (Core.Type_string)valsub;
@@ -279,8 +277,7 @@ public final class Xml {
               msg = Core.vx_msg_from_error("vx/data/xml/xml", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":propmap":
+          } else if ((key.equals(":propmap"))) {
             if (valsub == vx_p_propmap) {
             } else if (valsub instanceof Core.Type_stringmap) {
               Core.Type_stringmap valpropmap = (Core.Type_stringmap)valsub;
@@ -301,8 +298,7 @@ public final class Xml {
               msg = Core.vx_msg_from_error("vx/data/xml/xml", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":children":
+          } else if ((key.equals(":children"))) {
             if (valsub == vx_p_children) {
             } else if (valsub instanceof Xml.Type_xmllist) {
               Xml.Type_xmllist valchildren = (Xml.Type_xmllist)valsub;
@@ -323,8 +319,7 @@ public final class Xml {
               msg = Core.vx_msg_from_error("vx/data/xml/xml", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":parent":
+          } else if ((key.equals(":parent"))) {
             if (valsub == vx_p_parent) {
             } else if (valsub instanceof Xml.Type_xml) {
               Xml.Type_xml valparent = (Xml.Type_xml)valsub;
@@ -345,12 +340,10 @@ public final class Xml {
               msg = Core.vx_msg_from_error("vx/data/xml/xml", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/data/xml/xml", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -655,9 +648,9 @@ public final class Xml {
         ischanged = true;
       }
       Map<String, Core.Type_string> mapval = new LinkedHashMap<String, Core.Type_string>(value.vx_mapstring());
-      Core.Type_msg msg = null;
       String key = "";
-      Core.Type_any msgval = null;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -683,7 +676,7 @@ public final class Xml {
             msgblock = Core.vx_copy(msgblock, msg);
           }
         } else {
-          Core.Type_string valany = null;
+          Core.Type_string valany = Core.e_string;
           if (false) {
           } else if (valsub instanceof Core.Type_string) {
             Core.Type_string valallowed = (Core.Type_string)valsub;
@@ -705,7 +698,7 @@ public final class Xml {
             msg = Core.vx_msg_from_error("vx/data/xml/xmlpropmap", ":invalidkeyvalue", msgmap);
             msgblock = Core.vx_copy(msgblock, msg);
           }
-          if (valany != null) {
+          if (valany != Core.e_any) {
             ischanged = true;
             if (key.startsWith(":")) {
               key = key.substring(1);

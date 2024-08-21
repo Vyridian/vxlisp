@@ -85,9 +85,9 @@ public static class State {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_any> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>(value.vx_map());
-      Vx.Core.Type_msg? msg = null;
       string key = "";
-      Vx.Core.Type_any? msgval = null;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -110,7 +110,7 @@ public static class State {
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
         } else {
-          Vx.Core.Type_any? valany = null;
+          Vx.Core.Type_any valany = Vx.Core.e_any;
           if (false) {
           } else if (valsub is Vx.Core.Type_any valallowed) {
             valany = valallowed;
@@ -130,7 +130,7 @@ public static class State {
             msg = Vx.Core.vx_msg_from_error("vx/state/valuemap", ":invalidkeyvalue", msgmap);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
-          if (valany != null) {
+          if (valany != Vx.Core.e_any) {
             ischanged = true;
             if (key.StartsWith(":")) {
               key = key.Substring(1);

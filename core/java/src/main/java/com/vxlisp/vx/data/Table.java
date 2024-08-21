@@ -26,8 +26,9 @@ public final class Table {
     @Override
     public Core.Type_string id() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_id != null) {
-        output = this.vx_p_id;
+      Core.Type_string testnull = vx_p_id;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -37,8 +38,9 @@ public final class Table {
     @Override
     public Core.Type_any value() {
       Core.Type_any output = Core.e_any;
-      if (this.vx_p_value != null) {
-        output = this.vx_p_value;
+      Core.Type_any testnull = vx_p_value;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -47,23 +49,21 @@ public final class Table {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":id":
+      if (false) {
+      } else if ((skey.equals(":id"))) {
         output = this.id();
-        break;
-      case ":value":
+      } else if ((skey.equals(":value"))) {
         output = this.value();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":id", this.id());
-      output.put(":value", this.value());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":id", this.id());
+      map.put(":value", this.value());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -88,8 +88,8 @@ public final class Table {
       validkeys.add(":id");
       validkeys.add(":value");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -132,8 +132,8 @@ public final class Table {
             }
           }
         } else {
-          switch (key) {
-          case ":id":
+          if (false) {
+          } else if ((key.equals(":id"))) {
             if (valsub == vx_p_id) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valid = (Core.Type_string)valsub;
@@ -157,8 +157,7 @@ public final class Table {
               msg = Core.vx_msg_from_error("vx/data/table/cell", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":value":
+          } else if ((key.equals(":value"))) {
             if (valsub == vx_p_value) {
             } else if (valsub instanceof Core.Type_any) {
               Core.Type_any valvalue = (Core.Type_any)valsub;
@@ -179,12 +178,10 @@ public final class Table {
               msg = Core.vx_msg_from_error("vx/data/table/cell", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/data/table/cell", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -485,9 +482,9 @@ public final class Table {
         ischanged = true;
       }
       Map<String, Table.Type_cell> mapval = new LinkedHashMap<String, Table.Type_cell>(value.vx_mapcell());
-      Core.Type_msg msg = null;
       String key = "";
-      Core.Type_any msgval = null;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -513,7 +510,7 @@ public final class Table {
             msgblock = Core.vx_copy(msgblock, msg);
           }
         } else {
-          Table.Type_cell valany = null;
+          Table.Type_cell valany = Table.e_cell;
           if (false) {
           } else if (valsub instanceof Table.Type_cell) {
             Table.Type_cell valallowed = (Table.Type_cell)valsub;
@@ -535,7 +532,7 @@ public final class Table {
             msg = Core.vx_msg_from_error("vx/data/table/cellmap", ":invalidkeyvalue", msgmap);
             msgblock = Core.vx_copy(msgblock, msg);
           }
-          if (valany != null) {
+          if (valany != Core.e_any) {
             ischanged = true;
             if (key.startsWith(":")) {
               key = key.substring(1);
@@ -608,8 +605,9 @@ public final class Table {
     @Override
     public Core.Type_string id() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_id != null) {
-        output = this.vx_p_id;
+      Core.Type_string testnull = vx_p_id;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -619,8 +617,9 @@ public final class Table {
     @Override
     public Core.Type_string name() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_name != null) {
-        output = this.vx_p_name;
+      Core.Type_string testnull = vx_p_name;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -630,8 +629,9 @@ public final class Table {
     @Override
     public Core.Type_any fldtype() {
       Core.Type_any output = Core.e_any;
-      if (this.vx_p_fldtype != null) {
-        output = this.vx_p_fldtype;
+      Core.Type_any testnull = vx_p_fldtype;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -640,27 +640,24 @@ public final class Table {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":id":
+      if (false) {
+      } else if ((skey.equals(":id"))) {
         output = this.id();
-        break;
-      case ":name":
+      } else if ((skey.equals(":name"))) {
         output = this.name();
-        break;
-      case ":fldtype":
+      } else if ((skey.equals(":fldtype"))) {
         output = this.fldtype();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":id", this.id());
-      output.put(":name", this.name());
-      output.put(":fldtype", this.fldtype());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":id", this.id());
+      map.put(":name", this.name());
+      map.put(":fldtype", this.fldtype());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -687,8 +684,8 @@ public final class Table {
       validkeys.add(":name");
       validkeys.add(":fldtype");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -731,8 +728,8 @@ public final class Table {
             }
           }
         } else {
-          switch (key) {
-          case ":id":
+          if (false) {
+          } else if ((key.equals(":id"))) {
             if (valsub == vx_p_id) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valid = (Core.Type_string)valsub;
@@ -756,8 +753,7 @@ public final class Table {
               msg = Core.vx_msg_from_error("vx/data/table/field", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":name":
+          } else if ((key.equals(":name"))) {
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valname = (Core.Type_string)valsub;
@@ -781,8 +777,7 @@ public final class Table {
               msg = Core.vx_msg_from_error("vx/data/table/field", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":fldtype":
+          } else if ((key.equals(":fldtype"))) {
             if (valsub == vx_p_fldtype) {
             } else if (valsub instanceof Core.Type_any) {
               Core.Type_any valfldtype = (Core.Type_any)valsub;
@@ -803,12 +798,10 @@ public final class Table {
               msg = Core.vx_msg_from_error("vx/data/table/field", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/data/table/field", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -1168,8 +1161,9 @@ public final class Table {
     @Override
     public Core.Type_string id() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_id != null) {
-        output = this.vx_p_id;
+      Core.Type_string testnull = vx_p_id;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1179,8 +1173,9 @@ public final class Table {
     @Override
     public Core.Type_string name() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_name != null) {
-        output = this.vx_p_name;
+      Core.Type_string testnull = vx_p_name;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1190,8 +1185,9 @@ public final class Table {
     @Override
     public Core.Type_stringlist idlist() {
       Core.Type_stringlist output = Core.e_stringlist;
-      if (this.vx_p_idlist != null) {
-        output = this.vx_p_idlist;
+      Core.Type_stringlist testnull = vx_p_idlist;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1200,27 +1196,24 @@ public final class Table {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":id":
+      if (false) {
+      } else if ((skey.equals(":id"))) {
         output = this.id();
-        break;
-      case ":name":
+      } else if ((skey.equals(":name"))) {
         output = this.name();
-        break;
-      case ":idlist":
+      } else if ((skey.equals(":idlist"))) {
         output = this.idlist();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":id", this.id());
-      output.put(":name", this.name());
-      output.put(":idlist", this.idlist());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":id", this.id());
+      map.put(":name", this.name());
+      map.put(":idlist", this.idlist());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -1247,8 +1240,8 @@ public final class Table {
       validkeys.add(":name");
       validkeys.add(":idlist");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -1291,8 +1284,8 @@ public final class Table {
             }
           }
         } else {
-          switch (key) {
-          case ":id":
+          if (false) {
+          } else if ((key.equals(":id"))) {
             if (valsub == vx_p_id) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valid = (Core.Type_string)valsub;
@@ -1316,8 +1309,7 @@ public final class Table {
               msg = Core.vx_msg_from_error("vx/data/table/filter", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":name":
+          } else if ((key.equals(":name"))) {
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valname = (Core.Type_string)valsub;
@@ -1341,8 +1333,7 @@ public final class Table {
               msg = Core.vx_msg_from_error("vx/data/table/filter", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":idlist":
+          } else if ((key.equals(":idlist"))) {
             if (valsub == vx_p_idlist) {
             } else if (valsub instanceof Core.Type_stringlist) {
               Core.Type_stringlist validlist = (Core.Type_stringlist)valsub;
@@ -1363,12 +1354,10 @@ public final class Table {
               msg = Core.vx_msg_from_error("vx/data/table/filter", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/data/table/filter", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -1438,8 +1427,9 @@ public final class Table {
     @Override
     public Core.Type_string id() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_id != null) {
-        output = this.vx_p_id;
+      Core.Type_string testnull = vx_p_id;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1449,8 +1439,9 @@ public final class Table {
     @Override
     public Table.Type_cellmap cellmap() {
       Table.Type_cellmap output = Table.e_cellmap;
-      if (this.vx_p_cellmap != null) {
-        output = this.vx_p_cellmap;
+      Table.Type_cellmap testnull = vx_p_cellmap;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1460,8 +1451,9 @@ public final class Table {
     @Override
     public Table.Type_sort cellsort() {
       Table.Type_sort output = Table.e_sort;
-      if (this.vx_p_cellsort != null) {
-        output = this.vx_p_cellsort;
+      Table.Type_sort testnull = vx_p_cellsort;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1470,27 +1462,24 @@ public final class Table {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":id":
+      if (false) {
+      } else if ((skey.equals(":id"))) {
         output = this.id();
-        break;
-      case ":cellmap":
+      } else if ((skey.equals(":cellmap"))) {
         output = this.cellmap();
-        break;
-      case ":cellsort":
+      } else if ((skey.equals(":cellsort"))) {
         output = this.cellsort();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":id", this.id());
-      output.put(":cellmap", this.cellmap());
-      output.put(":cellsort", this.cellsort());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":id", this.id());
+      map.put(":cellmap", this.cellmap());
+      map.put(":cellsort", this.cellsort());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -1517,8 +1506,8 @@ public final class Table {
       validkeys.add(":cellmap");
       validkeys.add(":cellsort");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -1561,8 +1550,8 @@ public final class Table {
             }
           }
         } else {
-          switch (key) {
-          case ":id":
+          if (false) {
+          } else if ((key.equals(":id"))) {
             if (valsub == vx_p_id) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valid = (Core.Type_string)valsub;
@@ -1586,8 +1575,7 @@ public final class Table {
               msg = Core.vx_msg_from_error("vx/data/table/row", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":cellmap":
+          } else if ((key.equals(":cellmap"))) {
             if (valsub == vx_p_cellmap) {
             } else if (valsub instanceof Table.Type_cellmap) {
               Table.Type_cellmap valcellmap = (Table.Type_cellmap)valsub;
@@ -1608,8 +1596,7 @@ public final class Table {
               msg = Core.vx_msg_from_error("vx/data/table/row", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":cellsort":
+          } else if ((key.equals(":cellsort"))) {
             if (valsub == vx_p_cellsort) {
             } else if (valsub instanceof Table.Type_sort) {
               Table.Type_sort valcellsort = (Table.Type_sort)valsub;
@@ -1630,12 +1617,10 @@ public final class Table {
               msg = Core.vx_msg_from_error("vx/data/table/row", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/data/table/row", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -1937,9 +1922,9 @@ public final class Table {
         ischanged = true;
       }
       Map<String, Table.Type_row> mapval = new LinkedHashMap<String, Table.Type_row>(value.vx_maprow());
-      Core.Type_msg msg = null;
       String key = "";
-      Core.Type_any msgval = null;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -1965,7 +1950,7 @@ public final class Table {
             msgblock = Core.vx_copy(msgblock, msg);
           }
         } else {
-          Table.Type_row valany = null;
+          Table.Type_row valany = Table.e_row;
           if (false) {
           } else if (valsub instanceof Table.Type_row) {
             Table.Type_row valallowed = (Table.Type_row)valsub;
@@ -1987,7 +1972,7 @@ public final class Table {
             msg = Core.vx_msg_from_error("vx/data/table/rowmap", ":invalidkeyvalue", msgmap);
             msgblock = Core.vx_copy(msgblock, msg);
           }
-          if (valany != null) {
+          if (valany != Core.e_any) {
             ischanged = true;
             if (key.startsWith(":")) {
               key = key.substring(1);
@@ -2060,8 +2045,9 @@ public final class Table {
     @Override
     public Core.Type_string id() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_id != null) {
-        output = this.vx_p_id;
+      Core.Type_string testnull = vx_p_id;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2071,8 +2057,9 @@ public final class Table {
     @Override
     public Core.Type_string name() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_name != null) {
-        output = this.vx_p_name;
+      Core.Type_string testnull = vx_p_name;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2082,8 +2069,9 @@ public final class Table {
     @Override
     public Core.Type_stringlist idlist() {
       Core.Type_stringlist output = Core.e_stringlist;
-      if (this.vx_p_idlist != null) {
-        output = this.vx_p_idlist;
+      Core.Type_stringlist testnull = vx_p_idlist;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2092,27 +2080,24 @@ public final class Table {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":id":
+      if (false) {
+      } else if ((skey.equals(":id"))) {
         output = this.id();
-        break;
-      case ":name":
+      } else if ((skey.equals(":name"))) {
         output = this.name();
-        break;
-      case ":idlist":
+      } else if ((skey.equals(":idlist"))) {
         output = this.idlist();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":id", this.id());
-      output.put(":name", this.name());
-      output.put(":idlist", this.idlist());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":id", this.id());
+      map.put(":name", this.name());
+      map.put(":idlist", this.idlist());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -2139,8 +2124,8 @@ public final class Table {
       validkeys.add(":name");
       validkeys.add(":idlist");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -2183,8 +2168,8 @@ public final class Table {
             }
           }
         } else {
-          switch (key) {
-          case ":id":
+          if (false) {
+          } else if ((key.equals(":id"))) {
             if (valsub == vx_p_id) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valid = (Core.Type_string)valsub;
@@ -2208,8 +2193,7 @@ public final class Table {
               msg = Core.vx_msg_from_error("vx/data/table/sort", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":name":
+          } else if ((key.equals(":name"))) {
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valname = (Core.Type_string)valsub;
@@ -2233,8 +2217,7 @@ public final class Table {
               msg = Core.vx_msg_from_error("vx/data/table/sort", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":idlist":
+          } else if ((key.equals(":idlist"))) {
             if (valsub == vx_p_idlist) {
             } else if (valsub instanceof Core.Type_stringlist) {
               Core.Type_stringlist validlist = (Core.Type_stringlist)valsub;
@@ -2255,12 +2238,10 @@ public final class Table {
               msg = Core.vx_msg_from_error("vx/data/table/sort", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/data/table/sort", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -2334,8 +2315,9 @@ public final class Table {
     @Override
     public Core.Type_string id() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_id != null) {
-        output = this.vx_p_id;
+      Core.Type_string testnull = vx_p_id;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2345,8 +2327,9 @@ public final class Table {
     @Override
     public Core.Type_string name() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_name != null) {
-        output = this.vx_p_name;
+      Core.Type_string testnull = vx_p_name;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2356,8 +2339,9 @@ public final class Table {
     @Override
     public Table.Type_fieldmap fieldmap() {
       Table.Type_fieldmap output = Table.e_fieldmap;
-      if (this.vx_p_fieldmap != null) {
-        output = this.vx_p_fieldmap;
+      Table.Type_fieldmap testnull = vx_p_fieldmap;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2367,8 +2351,9 @@ public final class Table {
     @Override
     public Table.Type_sort fieldsort() {
       Table.Type_sort output = Table.e_sort;
-      if (this.vx_p_fieldsort != null) {
-        output = this.vx_p_fieldsort;
+      Table.Type_sort testnull = vx_p_fieldsort;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2378,8 +2363,9 @@ public final class Table {
     @Override
     public Table.Type_rowmap rowmap() {
       Table.Type_rowmap output = Table.e_rowmap;
-      if (this.vx_p_rowmap != null) {
-        output = this.vx_p_rowmap;
+      Table.Type_rowmap testnull = vx_p_rowmap;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2389,8 +2375,9 @@ public final class Table {
     @Override
     public Table.Type_filter rowfilter() {
       Table.Type_filter output = Table.e_filter;
-      if (this.vx_p_rowfilter != null) {
-        output = this.vx_p_rowfilter;
+      Table.Type_filter testnull = vx_p_rowfilter;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2400,8 +2387,9 @@ public final class Table {
     @Override
     public Table.Type_sort rowsort() {
       Table.Type_sort output = Table.e_sort;
-      if (this.vx_p_rowsort != null) {
-        output = this.vx_p_rowsort;
+      Table.Type_sort testnull = vx_p_rowsort;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2410,43 +2398,36 @@ public final class Table {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":id":
+      if (false) {
+      } else if ((skey.equals(":id"))) {
         output = this.id();
-        break;
-      case ":name":
+      } else if ((skey.equals(":name"))) {
         output = this.name();
-        break;
-      case ":fieldmap":
+      } else if ((skey.equals(":fieldmap"))) {
         output = this.fieldmap();
-        break;
-      case ":fieldsort":
+      } else if ((skey.equals(":fieldsort"))) {
         output = this.fieldsort();
-        break;
-      case ":rowmap":
+      } else if ((skey.equals(":rowmap"))) {
         output = this.rowmap();
-        break;
-      case ":rowfilter":
+      } else if ((skey.equals(":rowfilter"))) {
         output = this.rowfilter();
-        break;
-      case ":rowsort":
+      } else if ((skey.equals(":rowsort"))) {
         output = this.rowsort();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":id", this.id());
-      output.put(":name", this.name());
-      output.put(":fieldmap", this.fieldmap());
-      output.put(":fieldsort", this.fieldsort());
-      output.put(":rowmap", this.rowmap());
-      output.put(":rowfilter", this.rowfilter());
-      output.put(":rowsort", this.rowsort());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":id", this.id());
+      map.put(":name", this.name());
+      map.put(":fieldmap", this.fieldmap());
+      map.put(":fieldsort", this.fieldsort());
+      map.put(":rowmap", this.rowmap());
+      map.put(":rowfilter", this.rowfilter());
+      map.put(":rowsort", this.rowsort());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -2481,8 +2462,8 @@ public final class Table {
       validkeys.add(":rowfilter");
       validkeys.add(":rowsort");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -2525,8 +2506,8 @@ public final class Table {
             }
           }
         } else {
-          switch (key) {
-          case ":id":
+          if (false) {
+          } else if ((key.equals(":id"))) {
             if (valsub == vx_p_id) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valid = (Core.Type_string)valsub;
@@ -2550,8 +2531,7 @@ public final class Table {
               msg = Core.vx_msg_from_error("vx/data/table/table", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":name":
+          } else if ((key.equals(":name"))) {
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valname = (Core.Type_string)valsub;
@@ -2575,8 +2555,7 @@ public final class Table {
               msg = Core.vx_msg_from_error("vx/data/table/table", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":fieldmap":
+          } else if ((key.equals(":fieldmap"))) {
             if (valsub == vx_p_fieldmap) {
             } else if (valsub instanceof Table.Type_fieldmap) {
               Table.Type_fieldmap valfieldmap = (Table.Type_fieldmap)valsub;
@@ -2597,8 +2576,7 @@ public final class Table {
               msg = Core.vx_msg_from_error("vx/data/table/table", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":fieldsort":
+          } else if ((key.equals(":fieldsort"))) {
             if (valsub == vx_p_fieldsort) {
             } else if (valsub instanceof Table.Type_sort) {
               Table.Type_sort valfieldsort = (Table.Type_sort)valsub;
@@ -2619,8 +2597,7 @@ public final class Table {
               msg = Core.vx_msg_from_error("vx/data/table/table", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":rowmap":
+          } else if ((key.equals(":rowmap"))) {
             if (valsub == vx_p_rowmap) {
             } else if (valsub instanceof Table.Type_rowmap) {
               Table.Type_rowmap valrowmap = (Table.Type_rowmap)valsub;
@@ -2641,8 +2618,7 @@ public final class Table {
               msg = Core.vx_msg_from_error("vx/data/table/table", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":rowfilter":
+          } else if ((key.equals(":rowfilter"))) {
             if (valsub == vx_p_rowfilter) {
             } else if (valsub instanceof Table.Type_filter) {
               Table.Type_filter valrowfilter = (Table.Type_filter)valsub;
@@ -2663,8 +2639,7 @@ public final class Table {
               msg = Core.vx_msg_from_error("vx/data/table/table", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":rowsort":
+          } else if ((key.equals(":rowsort"))) {
             if (valsub == vx_p_rowsort) {
             } else if (valsub instanceof Table.Type_sort) {
               Table.Type_sort valrowsort = (Table.Type_sort)valsub;
@@ -2685,12 +2660,10 @@ public final class Table {
               msg = Core.vx_msg_from_error("vx/data/table/table", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/data/table/table", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }

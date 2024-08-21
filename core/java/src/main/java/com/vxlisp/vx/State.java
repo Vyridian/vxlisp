@@ -96,9 +96,9 @@ public final class State {
         ischanged = true;
       }
       Map<String, Core.Type_any> mapval = new LinkedHashMap<String, Core.Type_any>(value.vx_map());
-      Core.Type_msg msg = null;
       String key = "";
-      Core.Type_any msgval = null;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -124,7 +124,7 @@ public final class State {
             msgblock = Core.vx_copy(msgblock, msg);
           }
         } else {
-          Core.Type_any valany = null;
+          Core.Type_any valany = Core.e_any;
           if (false) {
           } else if (valsub instanceof Core.Type_any) {
             Core.Type_any valallowed = (Core.Type_any)valsub;
@@ -146,7 +146,7 @@ public final class State {
             msg = Core.vx_msg_from_error("vx/state/valuemap", ":invalidkeyvalue", msgmap);
             msgblock = Core.vx_copy(msgblock, msg);
           }
-          if (valany != null) {
+          if (valany != Core.e_any) {
             ischanged = true;
             if (key.startsWith(":")) {
               key = key.substring(1);

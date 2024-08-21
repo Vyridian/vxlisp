@@ -27,8 +27,9 @@ public final class Http {
     @Override
     public Core.Type_boolean ok() {
       Core.Type_boolean output = Core.e_boolean;
-      if (this.vx_p_ok != null) {
-        output = this.vx_p_ok;
+      Core.Type_boolean testnull = vx_p_ok;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -38,8 +39,9 @@ public final class Http {
     @Override
     public Core.Type_int status() {
       Core.Type_int output = Core.e_int;
-      if (this.vx_p_status != null) {
-        output = this.vx_p_status;
+      Core.Type_int testnull = vx_p_status;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -48,23 +50,21 @@ public final class Http {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":ok":
+      if (false) {
+      } else if ((skey.equals(":ok"))) {
         output = this.ok();
-        break;
-      case ":status":
+      } else if ((skey.equals(":status"))) {
         output = this.status();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":ok", this.ok());
-      output.put(":status", this.status());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":ok", this.ok());
+      map.put(":status", this.status());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -89,8 +89,8 @@ public final class Http {
       validkeys.add(":ok");
       validkeys.add(":status");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -133,8 +133,8 @@ public final class Http {
             }
           }
         } else {
-          switch (key) {
-          case ":ok":
+          if (false) {
+          } else if ((key.equals(":ok"))) {
             if (valsub == vx_p_ok) {
             } else if (valsub instanceof Core.Type_boolean) {
               Core.Type_boolean valok = (Core.Type_boolean)valsub;
@@ -158,8 +158,7 @@ public final class Http {
               msg = Core.vx_msg_from_error("vx/web/http/response", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":status":
+          } else if ((key.equals(":status"))) {
             if (valsub == vx_p_status) {
             } else if (valsub instanceof Core.Type_int) {
               Core.Type_int valstatus = (Core.Type_int)valsub;
@@ -183,12 +182,10 @@ public final class Http {
               msg = Core.vx_msg_from_error("vx/web/http/response", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/web/http/response", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }

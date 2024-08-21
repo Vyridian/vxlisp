@@ -22,8 +22,9 @@ public static class Xml {
 
     public Vx.Core.Type_string tag() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_tag != null) {
-        output = this.vx_p_tag;
+      Vx.Core.Type_string? testnull = vx_p_tag;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -32,8 +33,9 @@ public static class Xml {
 
     public Vx.Core.Type_string text() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_text != null) {
-        output = this.vx_p_text;
+      Vx.Core.Type_string? testnull = vx_p_text;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -42,8 +44,9 @@ public static class Xml {
 
     public Vx.Core.Type_string prop() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_prop != null) {
-        output = this.vx_p_prop;
+      Vx.Core.Type_string? testnull = vx_p_prop;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -52,8 +55,9 @@ public static class Xml {
 
     public Vx.Core.Type_stringmap propmap() {
       Vx.Core.Type_stringmap output = Vx.Core.e_stringmap;
-      if (this.vx_p_propmap != null) {
-        output = this.vx_p_propmap;
+      Vx.Core.Type_stringmap? testnull = vx_p_propmap;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -62,8 +66,9 @@ public static class Xml {
 
     public Vx.Data.Xml.Type_xmllist children() {
       Vx.Data.Xml.Type_xmllist output = Vx.Data.Xml.e_xmllist;
-      if (this.vx_p_children != null) {
-        output = this.vx_p_children;
+      Vx.Data.Xml.Type_xmllist? testnull = vx_p_children;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -72,8 +77,9 @@ public static class Xml {
 
     public Vx.Data.Xml.Type_xml parent() {
       Vx.Data.Xml.Type_xml output = Vx.Data.Xml.e_xml;
-      if (this.vx_p_parent != null) {
-        output = this.vx_p_parent;
+      Vx.Data.Xml.Type_xml? testnull = vx_p_parent;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -81,38 +87,32 @@ public static class Xml {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":tag":
+      if (false) {
+      } else if ((skey==":tag")) {
         output = this.tag();
-        break;
-      case ":text":
+      } else if ((skey==":text")) {
         output = this.text();
-        break;
-      case ":prop":
+      } else if ((skey==":prop")) {
         output = this.prop();
-        break;
-      case ":propmap":
+      } else if ((skey==":propmap")) {
         output = this.propmap();
-        break;
-      case ":children":
+      } else if ((skey==":children")) {
         output = this.children();
-        break;
-      case ":parent":
+      } else if ((skey==":parent")) {
         output = this.parent();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":tag", this.tag());
-      output.put(":text", this.text());
-      output.put(":prop", this.prop());
-      output.put(":propmap", this.propmap());
-      output.put(":children", this.children());
-      output.put(":parent", this.parent());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":tag", this.tag());
+      map.put(":text", this.text());
+      map.put(":prop", this.prop());
+      map.put(":propmap", this.propmap());
+      map.put(":children", this.children());
+      map.put(":parent", this.parent());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -143,8 +143,8 @@ public static class Xml {
       validkeys.Add(":children");
       validkeys.Add(":parent");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -184,8 +184,8 @@ public static class Xml {
             }
           }
         } else {
-          switch (key) {
-          case ":tag":
+          if (false) {
+          } else if ((key==":tag")) {
             if (valsub == vx_p_tag) {
             } else if (valsub is Vx.Core.Type_string valtag) {
               ischanged = true;
@@ -207,8 +207,7 @@ public static class Xml {
               msg = Vx.Core.vx_msg_from_error("vx/data/xml/xml", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":text":
+          } else if ((key==":text")) {
             if (valsub == vx_p_text) {
             } else if (valsub is Vx.Core.Type_string valtext) {
               ischanged = true;
@@ -230,8 +229,7 @@ public static class Xml {
               msg = Vx.Core.vx_msg_from_error("vx/data/xml/xml", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":prop":
+          } else if ((key==":prop")) {
             if (valsub == vx_p_prop) {
             } else if (valsub is Vx.Core.Type_string valprop) {
               ischanged = true;
@@ -253,8 +251,7 @@ public static class Xml {
               msg = Vx.Core.vx_msg_from_error("vx/data/xml/xml", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":propmap":
+          } else if ((key==":propmap")) {
             if (valsub == vx_p_propmap) {
             } else if (valsub is Vx.Core.Type_stringmap valpropmap) {
               ischanged = true;
@@ -273,8 +270,7 @@ public static class Xml {
               msg = Vx.Core.vx_msg_from_error("vx/data/xml/xml", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":children":
+          } else if ((key==":children")) {
             if (valsub == vx_p_children) {
             } else if (valsub is Vx.Data.Xml.Type_xmllist valchildren) {
               ischanged = true;
@@ -293,8 +289,7 @@ public static class Xml {
               msg = Vx.Core.vx_msg_from_error("vx/data/xml/xml", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":parent":
+          } else if ((key==":parent")) {
             if (valsub == vx_p_parent) {
             } else if (valsub is Vx.Data.Xml.Type_xml valparent) {
               ischanged = true;
@@ -313,12 +308,10 @@ public static class Xml {
               msg = Vx.Core.vx_msg_from_error("vx/data/xml/xml", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/data/xml/xml", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -597,9 +590,9 @@ public static class Xml {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_string> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_string>(value.vx_mapstring());
-      Vx.Core.Type_msg? msg = null;
       string key = "";
-      Vx.Core.Type_any? msgval = null;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -622,7 +615,7 @@ public static class Xml {
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
         } else {
-          Vx.Core.Type_string? valany = null;
+          Vx.Core.Type_string valany = Vx.Core.e_string;
           if (false) {
           } else if (valsub is Vx.Core.Type_string valallowed) {
             valany = valallowed;
@@ -642,7 +635,7 @@ public static class Xml {
             msg = Vx.Core.vx_msg_from_error("vx/data/xml/xmlpropmap", ":invalidkeyvalue", msgmap);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
-          if (valany != null) {
+          if (valany != Vx.Core.e_any) {
             ischanged = true;
             if (key.StartsWith(":")) {
               key = key.Substring(1);

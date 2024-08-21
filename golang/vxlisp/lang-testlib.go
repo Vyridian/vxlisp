@@ -434,14 +434,11 @@ func LangTestLib_run_testresult(lang *vxlang) string {
 				"\n  				"+println+"(actual)"+lang.lineend+
 				"\n      "+LangPkgNameDot(lang, "vx/core")+"f_log(testresult)"+lang.lineend+
 				"\n		  }"+
-				"\n  		switch (code) {"+
-				"\n		  case \":ne\":"+
-				assertnotequals+
-				"\n  				break"+lang.lineend+
-				"\n  		default:"+
-				assertequals+
-				"\n  				break"+lang.lineend+
-				"\n  		}"+
+				LangIf(lang, 2,
+					LangIfClause(lang, rawstringtype, "==", "code", "\":ne\""),
+					assertnotequals)+
+				LangIfElse(lang, 2, assertequals)+
+				LangIfEnd(lang, 2)+
 				LangVal(lang, "output", rawbooltype, 2, "true"))
 	return output
 }
@@ -709,10 +706,11 @@ func LangTestLib_test_write_file(lang *vxlang) string {
 			LangVar(lang, "testname", rawstringtype, 2, "\""+fnc.name+"\"")+
 				//	long irefcount = vx_core::refcount;
 				LangVar(lang, "file", filetype, 2,
-					LangPkgNameDot(lang, "vx/core")+"vx_new("+LangTypeT(lang, filetype)+", "+
-						"\n    "+LangPkgNameDot(lang, "vx/core")+"vx_new_string(\":path\"), "+LangPkgNameDot(lang, "vx/core")+"vx_new_string(spath + \"/vx\"),"+
-						"\n    "+LangPkgNameDot(lang, "vx/core")+"vx_new_string(\":name\"), "+LangPkgNameDot(lang, "vx/core")+"vx_new_string(\"string_read_from_file.txt\")"+
-						"\n  )")+
+					LangPkgNameDot(lang, "vx/core")+"vx_new("+
+						"\n      "+LangTypeT(lang, filetype)+", "+
+						"\n      "+LangPkgNameDot(lang, "vx/core")+"vx_new_string(\":path\"), "+LangPkgNameDot(lang, "vx/core")+"vx_new_string(spath + \"/vx\"),"+
+						"\n      "+LangPkgNameDot(lang, "vx/core")+"vx_new_string(\":name\"), "+LangPkgNameDot(lang, "vx/core")+"vx_new_string(\"string_read_from_file.txt\")"+
+						"\n    )")+
 				LangVar(lang, "string_path", stringtype, 2,
 					LangPkgNameDot(lang, "vx/data/file")+"f_pathfull_from_file(file)")+
 				LangVar(lang, "expected", rawstringtype, 2, `spath + "/vx/string_read_from_file.txt"`)+

@@ -126,8 +126,8 @@ func LangConst(
 	output += "" +
 		doc +
 		LangConstClassHeader(lang, cnst, 1) +
-		LangConstVxConstdef(lang, cnst) +
 		LangStaticOpen(lang) +
+		LangConstVxConstdef(lang, cnst) +
 		LangFuncHeaderStatic(lang, cnstname, funcconstnew, 2, 0, const_new) +
 		LangStaticClose(lang) +
 		"\n  }" +
@@ -154,12 +154,12 @@ func LangConstClassHeader(lang *vxlang, cnst *vxconst, indent int) string {
 	lineindent := LangIndent(lang, indent, true)
 	constname := "Const_" + LangFromName(cnst.alias)
 	//extends := LangNameClassFullFromType(lang, cnst.vxtype)
-	switch lang.name {
-	case "csharp":
+	switch lang {
+	case langcsharp:
 		output = lineindent + "public class " + constname + " {"
-	case "java":
+	case langjava:
 		output = lineindent + "public static class " + constname + " {"
-	case "kotlin":
+	case langkotlin:
 		output = "" +
 			lineindent + "class " + constname + " {" +
 			lineindent + "  constructor() {}"
@@ -187,8 +187,8 @@ func LangConstValFromConst(lang *vxlang, cnst *vxconst, project *vxproject) stri
 					if ipos >= 0 {
 						path = path[ipos+1:]
 					}
-					switch lang.name {
-					case "java":
+					switch lang {
+					case langjava:
 						if BooleanFromStringEnds(path, "/java") {
 							path = path[0 : len(path)-5]
 						}

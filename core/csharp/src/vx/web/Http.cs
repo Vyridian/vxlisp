@@ -18,8 +18,9 @@ public static class Http {
 
     public Vx.Core.Type_boolean ok() {
       Vx.Core.Type_boolean output = Vx.Core.e_boolean;
-      if (this.vx_p_ok != null) {
-        output = this.vx_p_ok;
+      Vx.Core.Type_boolean? testnull = vx_p_ok;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -28,8 +29,9 @@ public static class Http {
 
     public Vx.Core.Type_int status() {
       Vx.Core.Type_int output = Vx.Core.e_int;
-      if (this.vx_p_status != null) {
-        output = this.vx_p_status;
+      Vx.Core.Type_int? testnull = vx_p_status;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -37,22 +39,20 @@ public static class Http {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":ok":
+      if (false) {
+      } else if ((skey==":ok")) {
         output = this.ok();
-        break;
-      case ":status":
+      } else if ((skey==":status")) {
         output = this.status();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":ok", this.ok());
-      output.put(":status", this.status());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":ok", this.ok());
+      map.put(":status", this.status());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -75,8 +75,8 @@ public static class Http {
       validkeys.Add(":ok");
       validkeys.Add(":status");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -116,8 +116,8 @@ public static class Http {
             }
           }
         } else {
-          switch (key) {
-          case ":ok":
+          if (false) {
+          } else if ((key==":ok")) {
             if (valsub == vx_p_ok) {
             } else if (valsub is Vx.Core.Type_boolean valok) {
               ischanged = true;
@@ -139,8 +139,7 @@ public static class Http {
               msg = Vx.Core.vx_msg_from_error("vx/web/http/response", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":status":
+          } else if ((key==":status")) {
             if (valsub == vx_p_status) {
             } else if (valsub is Vx.Core.Type_int valstatus) {
               ischanged = true;
@@ -162,12 +161,10 @@ public static class Http {
               msg = Vx.Core.vx_msg_from_error("vx/web/http/response", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/web/http/response", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }

@@ -29,8 +29,9 @@ public final class Textblock {
     @Override
     public Core.Type_string name() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_name != null) {
-        output = this.vx_p_name;
+      Core.Type_string testnull = vx_p_name;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -40,8 +41,9 @@ public final class Textblock {
     @Override
     public Core.Type_string starttext() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_starttext != null) {
-        output = this.vx_p_starttext;
+      Core.Type_string testnull = vx_p_starttext;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -51,8 +53,9 @@ public final class Textblock {
     @Override
     public Core.Type_string endtext() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_endtext != null) {
-        output = this.vx_p_endtext;
+      Core.Type_string testnull = vx_p_endtext;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -62,8 +65,9 @@ public final class Textblock {
     @Override
     public Core.Type_int pos() {
       Core.Type_int output = Core.e_int;
-      if (this.vx_p_pos != null) {
-        output = this.vx_p_pos;
+      Core.Type_int testnull = vx_p_pos;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -73,8 +77,9 @@ public final class Textblock {
     @Override
     public Textblock.Type_delimlist delimlist() {
       Textblock.Type_delimlist output = Textblock.e_delimlist;
-      if (this.vx_p_delimlist != null) {
-        output = this.vx_p_delimlist;
+      Textblock.Type_delimlist testnull = vx_p_delimlist;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -83,35 +88,30 @@ public final class Textblock {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":name":
+      if (false) {
+      } else if ((skey.equals(":name"))) {
         output = this.name();
-        break;
-      case ":starttext":
+      } else if ((skey.equals(":starttext"))) {
         output = this.starttext();
-        break;
-      case ":endtext":
+      } else if ((skey.equals(":endtext"))) {
         output = this.endtext();
-        break;
-      case ":pos":
+      } else if ((skey.equals(":pos"))) {
         output = this.pos();
-        break;
-      case ":delimlist":
+      } else if ((skey.equals(":delimlist"))) {
         output = this.delimlist();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":name", this.name());
-      output.put(":starttext", this.starttext());
-      output.put(":endtext", this.endtext());
-      output.put(":pos", this.pos());
-      output.put(":delimlist", this.delimlist());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":name", this.name());
+      map.put(":starttext", this.starttext());
+      map.put(":endtext", this.endtext());
+      map.put(":pos", this.pos());
+      map.put(":delimlist", this.delimlist());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -142,8 +142,8 @@ public final class Textblock {
       validkeys.add(":pos");
       validkeys.add(":delimlist");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -186,8 +186,8 @@ public final class Textblock {
             }
           }
         } else {
-          switch (key) {
-          case ":name":
+          if (false) {
+          } else if ((key.equals(":name"))) {
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valname = (Core.Type_string)valsub;
@@ -211,8 +211,7 @@ public final class Textblock {
               msg = Core.vx_msg_from_error("vx/data/textblock/delim", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":starttext":
+          } else if ((key.equals(":starttext"))) {
             if (valsub == vx_p_starttext) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valstarttext = (Core.Type_string)valsub;
@@ -236,8 +235,7 @@ public final class Textblock {
               msg = Core.vx_msg_from_error("vx/data/textblock/delim", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":endtext":
+          } else if ((key.equals(":endtext"))) {
             if (valsub == vx_p_endtext) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valendtext = (Core.Type_string)valsub;
@@ -261,8 +259,7 @@ public final class Textblock {
               msg = Core.vx_msg_from_error("vx/data/textblock/delim", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":pos":
+          } else if ((key.equals(":pos"))) {
             if (valsub == vx_p_pos) {
             } else if (valsub instanceof Core.Type_int) {
               Core.Type_int valpos = (Core.Type_int)valsub;
@@ -286,8 +283,7 @@ public final class Textblock {
               msg = Core.vx_msg_from_error("vx/data/textblock/delim", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":delimlist":
+          } else if ((key.equals(":delimlist"))) {
             if (valsub == vx_p_delimlist) {
             } else if (valsub instanceof Textblock.Type_delimlist) {
               Textblock.Type_delimlist valdelimlist = (Textblock.Type_delimlist)valsub;
@@ -308,12 +304,10 @@ public final class Textblock {
               msg = Core.vx_msg_from_error("vx/data/textblock/delim", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/data/textblock/delim", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -540,8 +534,9 @@ public final class Textblock {
     @Override
     public Core.Type_string name() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_name != null) {
-        output = this.vx_p_name;
+      Core.Type_string testnull = vx_p_name;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -551,8 +546,9 @@ public final class Textblock {
     @Override
     public Core.Type_string text() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_text != null) {
-        output = this.vx_p_text;
+      Core.Type_string testnull = vx_p_text;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -562,8 +558,9 @@ public final class Textblock {
     @Override
     public Core.Type_int startpos() {
       Core.Type_int output = Core.e_int;
-      if (this.vx_p_startpos != null) {
-        output = this.vx_p_startpos;
+      Core.Type_int testnull = vx_p_startpos;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -573,8 +570,9 @@ public final class Textblock {
     @Override
     public Core.Type_int endpos() {
       Core.Type_int output = Core.e_int;
-      if (this.vx_p_endpos != null) {
-        output = this.vx_p_endpos;
+      Core.Type_int testnull = vx_p_endpos;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -584,8 +582,9 @@ public final class Textblock {
     @Override
     public Core.Type_int curpos() {
       Core.Type_int output = Core.e_int;
-      if (this.vx_p_curpos != null) {
-        output = this.vx_p_curpos;
+      Core.Type_int testnull = vx_p_curpos;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -595,8 +594,9 @@ public final class Textblock {
     @Override
     public Core.Type_int line() {
       Core.Type_int output = Core.e_int;
-      if (this.vx_p_line != null) {
-        output = this.vx_p_line;
+      Core.Type_int testnull = vx_p_line;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -606,8 +606,9 @@ public final class Textblock {
     @Override
     public Core.Type_int column() {
       Core.Type_int output = Core.e_int;
-      if (this.vx_p_column != null) {
-        output = this.vx_p_column;
+      Core.Type_int testnull = vx_p_column;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -617,8 +618,9 @@ public final class Textblock {
     @Override
     public Textblock.Type_delim delim() {
       Textblock.Type_delim output = Textblock.e_delim;
-      if (this.vx_p_delim != null) {
-        output = this.vx_p_delim;
+      Textblock.Type_delim testnull = vx_p_delim;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -628,8 +630,9 @@ public final class Textblock {
     @Override
     public Textblock.Type_delim close() {
       Textblock.Type_delim output = Textblock.e_delim;
-      if (this.vx_p_close != null) {
-        output = this.vx_p_close;
+      Textblock.Type_delim testnull = vx_p_close;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -639,8 +642,9 @@ public final class Textblock {
     @Override
     public Textblock.Type_textblock parent() {
       Textblock.Type_textblock output = Textblock.e_textblock;
-      if (this.vx_p_parent != null) {
-        output = this.vx_p_parent;
+      Textblock.Type_textblock testnull = vx_p_parent;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -650,8 +654,9 @@ public final class Textblock {
     @Override
     public Textblock.Type_textblocklist children() {
       Textblock.Type_textblocklist output = Textblock.e_textblocklist;
-      if (this.vx_p_children != null) {
-        output = this.vx_p_children;
+      Textblock.Type_textblocklist testnull = vx_p_children;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -660,59 +665,48 @@ public final class Textblock {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":name":
+      if (false) {
+      } else if ((skey.equals(":name"))) {
         output = this.name();
-        break;
-      case ":text":
+      } else if ((skey.equals(":text"))) {
         output = this.text();
-        break;
-      case ":startpos":
+      } else if ((skey.equals(":startpos"))) {
         output = this.startpos();
-        break;
-      case ":endpos":
+      } else if ((skey.equals(":endpos"))) {
         output = this.endpos();
-        break;
-      case ":curpos":
+      } else if ((skey.equals(":curpos"))) {
         output = this.curpos();
-        break;
-      case ":line":
+      } else if ((skey.equals(":line"))) {
         output = this.line();
-        break;
-      case ":column":
+      } else if ((skey.equals(":column"))) {
         output = this.column();
-        break;
-      case ":delim":
+      } else if ((skey.equals(":delim"))) {
         output = this.delim();
-        break;
-      case ":close":
+      } else if ((skey.equals(":close"))) {
         output = this.close();
-        break;
-      case ":parent":
+      } else if ((skey.equals(":parent"))) {
         output = this.parent();
-        break;
-      case ":children":
+      } else if ((skey.equals(":children"))) {
         output = this.children();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":name", this.name());
-      output.put(":text", this.text());
-      output.put(":startpos", this.startpos());
-      output.put(":endpos", this.endpos());
-      output.put(":curpos", this.curpos());
-      output.put(":line", this.line());
-      output.put(":column", this.column());
-      output.put(":delim", this.delim());
-      output.put(":close", this.close());
-      output.put(":parent", this.parent());
-      output.put(":children", this.children());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":name", this.name());
+      map.put(":text", this.text());
+      map.put(":startpos", this.startpos());
+      map.put(":endpos", this.endpos());
+      map.put(":curpos", this.curpos());
+      map.put(":line", this.line());
+      map.put(":column", this.column());
+      map.put(":delim", this.delim());
+      map.put(":close", this.close());
+      map.put(":parent", this.parent());
+      map.put(":children", this.children());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -755,8 +749,8 @@ public final class Textblock {
       validkeys.add(":parent");
       validkeys.add(":children");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -799,8 +793,8 @@ public final class Textblock {
             }
           }
         } else {
-          switch (key) {
-          case ":name":
+          if (false) {
+          } else if ((key.equals(":name"))) {
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valname = (Core.Type_string)valsub;
@@ -824,8 +818,7 @@ public final class Textblock {
               msg = Core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":text":
+          } else if ((key.equals(":text"))) {
             if (valsub == vx_p_text) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valtext = (Core.Type_string)valsub;
@@ -849,8 +842,7 @@ public final class Textblock {
               msg = Core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":startpos":
+          } else if ((key.equals(":startpos"))) {
             if (valsub == vx_p_startpos) {
             } else if (valsub instanceof Core.Type_int) {
               Core.Type_int valstartpos = (Core.Type_int)valsub;
@@ -874,8 +866,7 @@ public final class Textblock {
               msg = Core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":endpos":
+          } else if ((key.equals(":endpos"))) {
             if (valsub == vx_p_endpos) {
             } else if (valsub instanceof Core.Type_int) {
               Core.Type_int valendpos = (Core.Type_int)valsub;
@@ -899,8 +890,7 @@ public final class Textblock {
               msg = Core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":curpos":
+          } else if ((key.equals(":curpos"))) {
             if (valsub == vx_p_curpos) {
             } else if (valsub instanceof Core.Type_int) {
               Core.Type_int valcurpos = (Core.Type_int)valsub;
@@ -924,8 +914,7 @@ public final class Textblock {
               msg = Core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":line":
+          } else if ((key.equals(":line"))) {
             if (valsub == vx_p_line) {
             } else if (valsub instanceof Core.Type_int) {
               Core.Type_int valline = (Core.Type_int)valsub;
@@ -949,8 +938,7 @@ public final class Textblock {
               msg = Core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":column":
+          } else if ((key.equals(":column"))) {
             if (valsub == vx_p_column) {
             } else if (valsub instanceof Core.Type_int) {
               Core.Type_int valcolumn = (Core.Type_int)valsub;
@@ -974,8 +962,7 @@ public final class Textblock {
               msg = Core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":delim":
+          } else if ((key.equals(":delim"))) {
             if (valsub == vx_p_delim) {
             } else if (valsub instanceof Textblock.Type_delim) {
               Textblock.Type_delim valdelim = (Textblock.Type_delim)valsub;
@@ -996,8 +983,7 @@ public final class Textblock {
               msg = Core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":close":
+          } else if ((key.equals(":close"))) {
             if (valsub == vx_p_close) {
             } else if (valsub instanceof Textblock.Type_delim) {
               Textblock.Type_delim valclose = (Textblock.Type_delim)valsub;
@@ -1018,8 +1004,7 @@ public final class Textblock {
               msg = Core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":parent":
+          } else if ((key.equals(":parent"))) {
             if (valsub == vx_p_parent) {
             } else if (valsub instanceof Textblock.Type_textblock) {
               Textblock.Type_textblock valparent = (Textblock.Type_textblock)valsub;
@@ -1040,8 +1025,7 @@ public final class Textblock {
               msg = Core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":children":
+          } else if ((key.equals(":children"))) {
             if (valsub == vx_p_children) {
             } else if (valsub instanceof Textblock.Type_textblocklist) {
               Textblock.Type_textblocklist valchildren = (Textblock.Type_textblocklist)valsub;
@@ -1062,12 +1046,10 @@ public final class Textblock {
               msg = Core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }

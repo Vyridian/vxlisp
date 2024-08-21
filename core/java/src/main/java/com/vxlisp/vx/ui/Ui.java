@@ -29,8 +29,8 @@ public final class Ui {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -113,8 +113,9 @@ public final class Ui {
     @Override
     public Core.Type_int left() {
       Core.Type_int output = Core.e_int;
-      if (this.vx_p_left != null) {
-        output = this.vx_p_left;
+      Core.Type_int testnull = vx_p_left;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -124,8 +125,9 @@ public final class Ui {
     @Override
     public Core.Type_int right() {
       Core.Type_int output = Core.e_int;
-      if (this.vx_p_right != null) {
-        output = this.vx_p_right;
+      Core.Type_int testnull = vx_p_right;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -135,8 +137,9 @@ public final class Ui {
     @Override
     public Core.Type_int top() {
       Core.Type_int output = Core.e_int;
-      if (this.vx_p_top != null) {
-        output = this.vx_p_top;
+      Core.Type_int testnull = vx_p_top;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -146,8 +149,9 @@ public final class Ui {
     @Override
     public Core.Type_int bottom() {
       Core.Type_int output = Core.e_int;
-      if (this.vx_p_bottom != null) {
-        output = this.vx_p_bottom;
+      Core.Type_int testnull = vx_p_bottom;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -156,31 +160,27 @@ public final class Ui {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":left":
+      if (false) {
+      } else if ((skey.equals(":left"))) {
         output = this.left();
-        break;
-      case ":right":
+      } else if ((skey.equals(":right"))) {
         output = this.right();
-        break;
-      case ":top":
+      } else if ((skey.equals(":top"))) {
         output = this.top();
-        break;
-      case ":bottom":
+      } else if ((skey.equals(":bottom"))) {
         output = this.bottom();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":left", this.left());
-      output.put(":right", this.right());
-      output.put(":top", this.top());
-      output.put(":bottom", this.bottom());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":left", this.left());
+      map.put(":right", this.right());
+      map.put(":top", this.top());
+      map.put(":bottom", this.bottom());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -209,8 +209,8 @@ public final class Ui {
       validkeys.add(":top");
       validkeys.add(":bottom");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -253,8 +253,8 @@ public final class Ui {
             }
           }
         } else {
-          switch (key) {
-          case ":left":
+          if (false) {
+          } else if ((key.equals(":left"))) {
             if (valsub == vx_p_left) {
             } else if (valsub instanceof Core.Type_int) {
               Core.Type_int valleft = (Core.Type_int)valsub;
@@ -278,8 +278,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/bounds", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":right":
+          } else if ((key.equals(":right"))) {
             if (valsub == vx_p_right) {
             } else if (valsub instanceof Core.Type_int) {
               Core.Type_int valright = (Core.Type_int)valsub;
@@ -303,8 +302,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/bounds", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":top":
+          } else if ((key.equals(":top"))) {
             if (valsub == vx_p_top) {
             } else if (valsub instanceof Core.Type_int) {
               Core.Type_int valtop = (Core.Type_int)valsub;
@@ -328,8 +326,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/bounds", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":bottom":
+          } else if ((key.equals(":bottom"))) {
             if (valsub == vx_p_bottom) {
             } else if (valsub instanceof Core.Type_int) {
               Core.Type_int valbottom = (Core.Type_int)valsub;
@@ -353,12 +350,10 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/bounds", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/ui/ui/bounds", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -430,8 +425,8 @@ public final class Ui {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -582,8 +577,8 @@ public final class Ui {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -666,8 +661,9 @@ public final class Ui {
     @Override
     public Core.Type_string name() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_name != null) {
-        output = this.vx_p_name;
+      Core.Type_string testnull = vx_p_name;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -677,8 +673,9 @@ public final class Ui {
     @Override
     public Ui.Type_fontface fontface() {
       Ui.Type_fontface output = Ui.e_fontface;
-      if (this.vx_p_fontface != null) {
-        output = this.vx_p_fontface;
+      Ui.Type_fontface testnull = vx_p_fontface;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -688,8 +685,9 @@ public final class Ui {
     @Override
     public Core.Type_int fontsize() {
       Core.Type_int output = Core.e_int;
-      if (this.vx_p_fontsize != null) {
-        output = this.vx_p_fontsize;
+      Core.Type_int testnull = vx_p_fontsize;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -699,8 +697,9 @@ public final class Ui {
     @Override
     public Ui.Type_fontstyle fontstyle() {
       Ui.Type_fontstyle output = Ui.e_fontstyle;
-      if (this.vx_p_fontstyle != null) {
-        output = this.vx_p_fontstyle;
+      Ui.Type_fontstyle testnull = vx_p_fontstyle;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -709,31 +708,27 @@ public final class Ui {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":name":
+      if (false) {
+      } else if ((skey.equals(":name"))) {
         output = this.name();
-        break;
-      case ":fontface":
+      } else if ((skey.equals(":fontface"))) {
         output = this.fontface();
-        break;
-      case ":fontsize":
+      } else if ((skey.equals(":fontsize"))) {
         output = this.fontsize();
-        break;
-      case ":fontstyle":
+      } else if ((skey.equals(":fontstyle"))) {
         output = this.fontstyle();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":name", this.name());
-      output.put(":fontface", this.fontface());
-      output.put(":fontsize", this.fontsize());
-      output.put(":fontstyle", this.fontstyle());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":name", this.name());
+      map.put(":fontface", this.fontface());
+      map.put(":fontsize", this.fontsize());
+      map.put(":fontstyle", this.fontstyle());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -762,8 +757,8 @@ public final class Ui {
       validkeys.add(":fontsize");
       validkeys.add(":fontstyle");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -806,8 +801,8 @@ public final class Ui {
             }
           }
         } else {
-          switch (key) {
-          case ":name":
+          if (false) {
+          } else if ((key.equals(":name"))) {
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valname = (Core.Type_string)valsub;
@@ -831,8 +826,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/font", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":fontface":
+          } else if ((key.equals(":fontface"))) {
             if (valsub == vx_p_fontface) {
             } else if (valsub instanceof Ui.Type_fontface) {
               Ui.Type_fontface valfontface = (Ui.Type_fontface)valsub;
@@ -853,8 +847,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/font", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":fontsize":
+          } else if ((key.equals(":fontsize"))) {
             if (valsub == vx_p_fontsize) {
             } else if (valsub instanceof Core.Type_int) {
               Core.Type_int valfontsize = (Core.Type_int)valsub;
@@ -878,8 +871,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/font", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":fontstyle":
+          } else if ((key.equals(":fontstyle"))) {
             if (valsub == vx_p_fontstyle) {
             } else if (valsub instanceof Ui.Type_fontstyle) {
               Ui.Type_fontstyle valfontstyle = (Ui.Type_fontstyle)valsub;
@@ -900,12 +892,10 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/font", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/ui/ui/font", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -978,8 +968,9 @@ public final class Ui {
     @Override
     public Core.Type_string name() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_name != null) {
-        output = this.vx_p_name;
+      Core.Type_string testnull = vx_p_name;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -989,8 +980,9 @@ public final class Ui {
     @Override
     public Core.Type_string weight() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_weight != null) {
-        output = this.vx_p_weight;
+      Core.Type_string testnull = vx_p_weight;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1000,8 +992,9 @@ public final class Ui {
     @Override
     public Core.Type_string unicode() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_unicode != null) {
-        output = this.vx_p_unicode;
+      Core.Type_string testnull = vx_p_unicode;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1011,8 +1004,9 @@ public final class Ui {
     @Override
     public File.Type_filelist filelist() {
       File.Type_filelist output = File.e_filelist;
-      if (this.vx_p_filelist != null) {
-        output = this.vx_p_filelist;
+      File.Type_filelist testnull = vx_p_filelist;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1021,31 +1015,27 @@ public final class Ui {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":name":
+      if (false) {
+      } else if ((skey.equals(":name"))) {
         output = this.name();
-        break;
-      case ":weight":
+      } else if ((skey.equals(":weight"))) {
         output = this.weight();
-        break;
-      case ":unicode":
+      } else if ((skey.equals(":unicode"))) {
         output = this.unicode();
-        break;
-      case ":filelist":
+      } else if ((skey.equals(":filelist"))) {
         output = this.filelist();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":name", this.name());
-      output.put(":weight", this.weight());
-      output.put(":unicode", this.unicode());
-      output.put(":filelist", this.filelist());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":name", this.name());
+      map.put(":weight", this.weight());
+      map.put(":unicode", this.unicode());
+      map.put(":filelist", this.filelist());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -1074,8 +1064,8 @@ public final class Ui {
       validkeys.add(":unicode");
       validkeys.add(":filelist");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -1118,8 +1108,8 @@ public final class Ui {
             }
           }
         } else {
-          switch (key) {
-          case ":name":
+          if (false) {
+          } else if ((key.equals(":name"))) {
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valname = (Core.Type_string)valsub;
@@ -1143,8 +1133,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/fontface", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":weight":
+          } else if ((key.equals(":weight"))) {
             if (valsub == vx_p_weight) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valweight = (Core.Type_string)valsub;
@@ -1168,8 +1157,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/fontface", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":unicode":
+          } else if ((key.equals(":unicode"))) {
             if (valsub == vx_p_unicode) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valunicode = (Core.Type_string)valsub;
@@ -1193,8 +1181,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/fontface", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":filelist":
+          } else if ((key.equals(":filelist"))) {
             if (valsub == vx_p_filelist) {
             } else if (valsub instanceof File.Type_filelist) {
               File.Type_filelist valfilelist = (File.Type_filelist)valsub;
@@ -1215,12 +1202,10 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/fontface", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/ui/ui/fontface", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -1525,9 +1510,9 @@ public final class Ui {
         ischanged = true;
       }
       Map<String, Ui.Type_fontface> mapval = new LinkedHashMap<String, Ui.Type_fontface>(value.vx_mapfontface());
-      Core.Type_msg msg = null;
       String key = "";
-      Core.Type_any msgval = null;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -1553,7 +1538,7 @@ public final class Ui {
             msgblock = Core.vx_copy(msgblock, msg);
           }
         } else {
-          Ui.Type_fontface valany = null;
+          Ui.Type_fontface valany = Ui.e_fontface;
           if (false) {
           } else if (valsub instanceof Ui.Type_fontface) {
             Ui.Type_fontface valallowed = (Ui.Type_fontface)valsub;
@@ -1575,7 +1560,7 @@ public final class Ui {
             msg = Core.vx_msg_from_error("vx/ui/ui/fontfacemap", ":invalidkeyvalue", msgmap);
             msgblock = Core.vx_copy(msgblock, msg);
           }
-          if (valany != null) {
+          if (valany != Core.e_any) {
             ischanged = true;
             if (key.startsWith(":")) {
               key = key.substring(1);
@@ -1736,9 +1721,9 @@ public final class Ui {
         ischanged = true;
       }
       Map<String, Ui.Type_font> mapval = new LinkedHashMap<String, Ui.Type_font>(value.vx_mapfont());
-      Core.Type_msg msg = null;
       String key = "";
-      Core.Type_any msgval = null;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -1764,7 +1749,7 @@ public final class Ui {
             msgblock = Core.vx_copy(msgblock, msg);
           }
         } else {
-          Ui.Type_font valany = null;
+          Ui.Type_font valany = Ui.e_font;
           if (false) {
           } else if (valsub instanceof Ui.Type_font) {
             Ui.Type_font valallowed = (Ui.Type_font)valsub;
@@ -1786,7 +1771,7 @@ public final class Ui {
             msg = Core.vx_msg_from_error("vx/ui/ui/fontmap", ":invalidkeyvalue", msgmap);
             msgblock = Core.vx_copy(msgblock, msg);
           }
-          if (valany != null) {
+          if (valany != Core.e_any) {
             ischanged = true;
             if (key.startsWith(":")) {
               key = key.substring(1);
@@ -1858,8 +1843,9 @@ public final class Ui {
     @Override
     public Core.Type_string name() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_name != null) {
-        output = this.vx_p_name;
+      Core.Type_string testnull = vx_p_name;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1868,19 +1854,18 @@ public final class Ui {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":name":
+      if (false) {
+      } else if ((skey.equals(":name"))) {
         output = this.name();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":name", this.name());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":name", this.name());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -1903,8 +1888,8 @@ public final class Ui {
       List<String> validkeys = new ArrayList<String>();
       validkeys.add(":name");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -1947,8 +1932,8 @@ public final class Ui {
             }
           }
         } else {
-          switch (key) {
-          case ":name":
+          if (false) {
+          } else if ((key.equals(":name"))) {
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valname = (Core.Type_string)valsub;
@@ -1972,12 +1957,10 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/fontstyle", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/ui/ui/fontstyle", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -2133,9 +2116,9 @@ public final class Ui {
         ischanged = true;
       }
       Map<String, Ui.Type_fontstyle> mapval = new LinkedHashMap<String, Ui.Type_fontstyle>(value.vx_mapfontstyle());
-      Core.Type_msg msg = null;
       String key = "";
-      Core.Type_any msgval = null;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -2161,7 +2144,7 @@ public final class Ui {
             msgblock = Core.vx_copy(msgblock, msg);
           }
         } else {
-          Ui.Type_fontstyle valany = null;
+          Ui.Type_fontstyle valany = Ui.e_fontstyle;
           if (false) {
           } else if (valsub instanceof Ui.Type_fontstyle) {
             Ui.Type_fontstyle valallowed = (Ui.Type_fontstyle)valsub;
@@ -2183,7 +2166,7 @@ public final class Ui {
             msg = Core.vx_msg_from_error("vx/ui/ui/fontstylemap", ":invalidkeyvalue", msgmap);
             msgblock = Core.vx_copy(msgblock, msg);
           }
-          if (valany != null) {
+          if (valany != Core.e_any) {
             ischanged = true;
             if (key.startsWith(":")) {
               key = key.substring(1);
@@ -2257,8 +2240,9 @@ public final class Ui {
     @Override
     public Core.Type_string name() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_name != null) {
-        output = this.vx_p_name;
+      Core.Type_string testnull = vx_p_name;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2268,8 +2252,9 @@ public final class Ui {
     @Override
     public Core.Type_string label() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_label != null) {
-        output = this.vx_p_label;
+      Core.Type_string testnull = vx_p_label;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2279,8 +2264,9 @@ public final class Ui {
     @Override
     public File.Type_file file() {
       File.Type_file output = File.e_file;
-      if (this.vx_p_file != null) {
-        output = this.vx_p_file;
+      File.Type_file testnull = vx_p_file;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2289,27 +2275,24 @@ public final class Ui {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":name":
+      if (false) {
+      } else if ((skey.equals(":name"))) {
         output = this.name();
-        break;
-      case ":label":
+      } else if ((skey.equals(":label"))) {
         output = this.label();
-        break;
-      case ":file":
+      } else if ((skey.equals(":file"))) {
         output = this.file();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":name", this.name());
-      output.put(":label", this.label());
-      output.put(":file", this.file());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":name", this.name());
+      map.put(":label", this.label());
+      map.put(":file", this.file());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -2336,8 +2319,8 @@ public final class Ui {
       validkeys.add(":label");
       validkeys.add(":file");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -2380,8 +2363,8 @@ public final class Ui {
             }
           }
         } else {
-          switch (key) {
-          case ":name":
+          if (false) {
+          } else if ((key.equals(":name"))) {
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valname = (Core.Type_string)valsub;
@@ -2405,8 +2388,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/image", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":label":
+          } else if ((key.equals(":label"))) {
             if (valsub == vx_p_label) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string vallabel = (Core.Type_string)valsub;
@@ -2430,8 +2412,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/image", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":file":
+          } else if ((key.equals(":file"))) {
             if (valsub == vx_p_file) {
             } else if (valsub instanceof File.Type_file) {
               File.Type_file valfile = (File.Type_file)valsub;
@@ -2452,12 +2433,10 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/image", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/ui/ui/image", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -2527,8 +2506,9 @@ public final class Ui {
     @Override
     public Core.Type_string name() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_name != null) {
-        output = this.vx_p_name;
+      Core.Type_string testnull = vx_p_name;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2538,8 +2518,9 @@ public final class Ui {
     @Override
     public Ui.Func_ui_layout_from_ui_orig_parent fn_layout() {
       Ui.Func_ui_layout_from_ui_orig_parent output = Ui.e_ui_layout_from_ui_orig_parent;
-      if (this.vx_p_fn_layout != null) {
-        output = this.vx_p_fn_layout;
+      Ui.Func_ui_layout_from_ui_orig_parent testnull = vx_p_fn_layout;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2548,23 +2529,21 @@ public final class Ui {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":name":
+      if (false) {
+      } else if ((skey.equals(":name"))) {
         output = this.name();
-        break;
-      case ":fn-layout":
+      } else if ((skey.equals(":fn-layout"))) {
         output = this.fn_layout();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":name", this.name());
-      output.put(":fn-layout", this.fn_layout());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":name", this.name());
+      map.put(":fn-layout", this.fn_layout());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -2589,8 +2568,8 @@ public final class Ui {
       validkeys.add(":name");
       validkeys.add(":fn-layout");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -2633,8 +2612,8 @@ public final class Ui {
             }
           }
         } else {
-          switch (key) {
-          case ":name":
+          if (false) {
+          } else if ((key.equals(":name"))) {
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valname = (Core.Type_string)valsub;
@@ -2658,8 +2637,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/layout", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":fn-layout":
+          } else if ((key.equals(":fn-layout"))) {
             if (valsub == vx_p_fn_layout) {
             } else if (valsub instanceof Ui.Func_ui_layout_from_ui_orig_parent) {
               Ui.Func_ui_layout_from_ui_orig_parent valfn_layout = (Ui.Func_ui_layout_from_ui_orig_parent)valsub;
@@ -2680,12 +2658,10 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/layout", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/ui/ui/layout", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -2760,8 +2736,9 @@ public final class Ui {
     @Override
     public Core.Type_string name() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_name != null) {
-        output = this.vx_p_name;
+      Core.Type_string testnull = vx_p_name;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2771,8 +2748,9 @@ public final class Ui {
     @Override
     public Ui.Func_boolean_print boolean_print() {
       Ui.Func_boolean_print output = Ui.e_boolean_print;
-      if (this.vx_p_boolean_print != null) {
-        output = this.vx_p_boolean_print;
+      Ui.Func_boolean_print testnull = vx_p_boolean_print;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2782,8 +2760,9 @@ public final class Ui {
     @Override
     public Ui.Func_boolean_layoutremove_from_ui boolean_layoutremove() {
       Ui.Func_boolean_layoutremove_from_ui output = Ui.e_boolean_layoutremove_from_ui;
-      if (this.vx_p_boolean_layoutremove != null) {
-        output = this.vx_p_boolean_layoutremove;
+      Ui.Func_boolean_layoutremove_from_ui testnull = vx_p_boolean_layoutremove;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2793,8 +2772,9 @@ public final class Ui {
     @Override
     public Ui.Func_boolean_layoutselected_from_ui boolean_layoutselected() {
       Ui.Func_boolean_layoutselected_from_ui output = Ui.e_boolean_layoutselected_from_ui;
-      if (this.vx_p_boolean_layoutselected != null) {
-        output = this.vx_p_boolean_layoutselected;
+      Ui.Func_boolean_layoutselected_from_ui testnull = vx_p_boolean_layoutselected;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2804,8 +2784,9 @@ public final class Ui {
     @Override
     public Ui.Func_boolean_layoutvisible_from_ui boolean_layoutvisible() {
       Ui.Func_boolean_layoutvisible_from_ui output = Ui.e_boolean_layoutvisible_from_ui;
-      if (this.vx_p_boolean_layoutvisible != null) {
-        output = this.vx_p_boolean_layoutvisible;
+      Ui.Func_boolean_layoutvisible_from_ui testnull = vx_p_boolean_layoutvisible;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2815,8 +2796,9 @@ public final class Ui {
     @Override
     public Ui.Type_layoutmap layoutmap() {
       Ui.Type_layoutmap output = Ui.e_layoutmap;
-      if (this.vx_p_layoutmap != null) {
-        output = this.vx_p_layoutmap;
+      Ui.Type_layoutmap testnull = vx_p_layoutmap;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2826,8 +2808,9 @@ public final class Ui {
     @Override
     public Ui.Type_layout layoutelse() {
       Ui.Type_layout output = Ui.e_layout;
-      if (this.vx_p_layoutelse != null) {
-        output = this.vx_p_layoutelse;
+      Ui.Type_layout testnull = vx_p_layoutelse;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2837,8 +2820,9 @@ public final class Ui {
     @Override
     public Ui.Func_stylesheet_render stylesheetrender() {
       Ui.Func_stylesheet_render output = Ui.e_stylesheet_render;
-      if (this.vx_p_stylesheetrender != null) {
-        output = this.vx_p_stylesheetrender;
+      Ui.Func_stylesheet_render testnull = vx_p_stylesheetrender;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2847,47 +2831,39 @@ public final class Ui {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":name":
+      if (false) {
+      } else if ((skey.equals(":name"))) {
         output = this.name();
-        break;
-      case ":boolean-print":
+      } else if ((skey.equals(":boolean-print"))) {
         output = this.boolean_print();
-        break;
-      case ":boolean-layoutremove":
+      } else if ((skey.equals(":boolean-layoutremove"))) {
         output = this.boolean_layoutremove();
-        break;
-      case ":boolean-layoutselected":
+      } else if ((skey.equals(":boolean-layoutselected"))) {
         output = this.boolean_layoutselected();
-        break;
-      case ":boolean-layoutvisible":
+      } else if ((skey.equals(":boolean-layoutvisible"))) {
         output = this.boolean_layoutvisible();
-        break;
-      case ":layoutmap":
+      } else if ((skey.equals(":layoutmap"))) {
         output = this.layoutmap();
-        break;
-      case ":layoutelse":
+      } else if ((skey.equals(":layoutelse"))) {
         output = this.layoutelse();
-        break;
-      case ":stylesheetrender":
+      } else if ((skey.equals(":stylesheetrender"))) {
         output = this.stylesheetrender();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":name", this.name());
-      output.put(":boolean-print", this.boolean_print());
-      output.put(":boolean-layoutremove", this.boolean_layoutremove());
-      output.put(":boolean-layoutselected", this.boolean_layoutselected());
-      output.put(":boolean-layoutvisible", this.boolean_layoutvisible());
-      output.put(":layoutmap", this.layoutmap());
-      output.put(":layoutelse", this.layoutelse());
-      output.put(":stylesheetrender", this.stylesheetrender());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":name", this.name());
+      map.put(":boolean-print", this.boolean_print());
+      map.put(":boolean-layoutremove", this.boolean_layoutremove());
+      map.put(":boolean-layoutselected", this.boolean_layoutselected());
+      map.put(":boolean-layoutvisible", this.boolean_layoutvisible());
+      map.put(":layoutmap", this.layoutmap());
+      map.put(":layoutelse", this.layoutelse());
+      map.put(":stylesheetrender", this.stylesheetrender());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -2924,8 +2900,8 @@ public final class Ui {
       validkeys.add(":layoutelse");
       validkeys.add(":stylesheetrender");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -2968,8 +2944,8 @@ public final class Ui {
             }
           }
         } else {
-          switch (key) {
-          case ":name":
+          if (false) {
+          } else if ((key.equals(":name"))) {
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valname = (Core.Type_string)valsub;
@@ -2993,8 +2969,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/layoutengine", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":boolean-print":
+          } else if ((key.equals(":boolean-print"))) {
             if (valsub == vx_p_boolean_print) {
             } else if (valsub instanceof Ui.Func_boolean_print) {
               Ui.Func_boolean_print valboolean_print = (Ui.Func_boolean_print)valsub;
@@ -3015,8 +2990,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/layoutengine", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":boolean-layoutremove":
+          } else if ((key.equals(":boolean-layoutremove"))) {
             if (valsub == vx_p_boolean_layoutremove) {
             } else if (valsub instanceof Ui.Func_boolean_layoutremove_from_ui) {
               Ui.Func_boolean_layoutremove_from_ui valboolean_layoutremove = (Ui.Func_boolean_layoutremove_from_ui)valsub;
@@ -3037,8 +3011,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/layoutengine", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":boolean-layoutselected":
+          } else if ((key.equals(":boolean-layoutselected"))) {
             if (valsub == vx_p_boolean_layoutselected) {
             } else if (valsub instanceof Ui.Func_boolean_layoutselected_from_ui) {
               Ui.Func_boolean_layoutselected_from_ui valboolean_layoutselected = (Ui.Func_boolean_layoutselected_from_ui)valsub;
@@ -3059,8 +3032,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/layoutengine", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":boolean-layoutvisible":
+          } else if ((key.equals(":boolean-layoutvisible"))) {
             if (valsub == vx_p_boolean_layoutvisible) {
             } else if (valsub instanceof Ui.Func_boolean_layoutvisible_from_ui) {
               Ui.Func_boolean_layoutvisible_from_ui valboolean_layoutvisible = (Ui.Func_boolean_layoutvisible_from_ui)valsub;
@@ -3081,8 +3053,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/layoutengine", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":layoutmap":
+          } else if ((key.equals(":layoutmap"))) {
             if (valsub == vx_p_layoutmap) {
             } else if (valsub instanceof Ui.Type_layoutmap) {
               Ui.Type_layoutmap vallayoutmap = (Ui.Type_layoutmap)valsub;
@@ -3103,8 +3074,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/layoutengine", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":layoutelse":
+          } else if ((key.equals(":layoutelse"))) {
             if (valsub == vx_p_layoutelse) {
             } else if (valsub instanceof Ui.Type_layout) {
               Ui.Type_layout vallayoutelse = (Ui.Type_layout)valsub;
@@ -3125,8 +3095,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/layoutengine", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":stylesheetrender":
+          } else if ((key.equals(":stylesheetrender"))) {
             if (valsub == vx_p_stylesheetrender) {
             } else if (valsub instanceof Ui.Func_stylesheet_render) {
               Ui.Func_stylesheet_render valstylesheetrender = (Ui.Func_stylesheet_render)valsub;
@@ -3147,12 +3116,10 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/layoutengine", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/ui/ui/layoutengine", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -3461,9 +3428,9 @@ public final class Ui {
         ischanged = true;
       }
       Map<String, Ui.Type_layout> mapval = new LinkedHashMap<String, Ui.Type_layout>(value.vx_maplayout());
-      Core.Type_msg msg = null;
       String key = "";
-      Core.Type_any msgval = null;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -3489,7 +3456,7 @@ public final class Ui {
             msgblock = Core.vx_copy(msgblock, msg);
           }
         } else {
-          Ui.Type_layout valany = null;
+          Ui.Type_layout valany = Ui.e_layout;
           if (false) {
           } else if (valsub instanceof Ui.Type_layout) {
             Ui.Type_layout valallowed = (Ui.Type_layout)valsub;
@@ -3511,7 +3478,7 @@ public final class Ui {
             msg = Core.vx_msg_from_error("vx/ui/ui/layoutmap", ":invalidkeyvalue", msgmap);
             msgblock = Core.vx_copy(msgblock, msg);
           }
-          if (valany != null) {
+          if (valany != Core.e_any) {
             ischanged = true;
             if (key.startsWith(":")) {
               key = key.substring(1);
@@ -3583,8 +3550,9 @@ public final class Ui {
     @Override
     public Core.Type_string name() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_name != null) {
-        output = this.vx_p_name;
+      Core.Type_string testnull = vx_p_name;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -3593,19 +3561,18 @@ public final class Ui {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":name":
+      if (false) {
+      } else if ((skey.equals(":name"))) {
         output = this.name();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":name", this.name());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":name", this.name());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -3628,8 +3595,8 @@ public final class Ui {
       List<String> validkeys = new ArrayList<String>();
       validkeys.add(":name");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -3672,8 +3639,8 @@ public final class Ui {
             }
           }
         } else {
-          switch (key) {
-          case ":name":
+          if (false) {
+          } else if ((key.equals(":name"))) {
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valname = (Core.Type_string)valsub;
@@ -3697,12 +3664,10 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/pin", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/ui/ui/pin", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -3774,8 +3739,9 @@ public final class Ui {
     @Override
     public Core.Type_int x() {
       Core.Type_int output = Core.e_int;
-      if (this.vx_p_x != null) {
-        output = this.vx_p_x;
+      Core.Type_int testnull = vx_p_x;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -3785,8 +3751,9 @@ public final class Ui {
     @Override
     public Core.Type_int y() {
       Core.Type_int output = Core.e_int;
-      if (this.vx_p_y != null) {
-        output = this.vx_p_y;
+      Core.Type_int testnull = vx_p_y;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -3796,8 +3763,9 @@ public final class Ui {
     @Override
     public Core.Type_int z() {
       Core.Type_int output = Core.e_int;
-      if (this.vx_p_z != null) {
-        output = this.vx_p_z;
+      Core.Type_int testnull = vx_p_z;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -3807,8 +3775,9 @@ public final class Ui {
     @Override
     public Core.Type_int t() {
       Core.Type_int output = Core.e_int;
-      if (this.vx_p_t != null) {
-        output = this.vx_p_t;
+      Core.Type_int testnull = vx_p_t;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -3818,8 +3787,9 @@ public final class Ui {
     @Override
     public Core.Type_int i() {
       Core.Type_int output = Core.e_int;
-      if (this.vx_p_i != null) {
-        output = this.vx_p_i;
+      Core.Type_int testnull = vx_p_i;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -3829,8 +3799,9 @@ public final class Ui {
     @Override
     public Ui.Type_pointtype pointtype() {
       Ui.Type_pointtype output = Ui.e_pointtype;
-      if (this.vx_p_pointtype != null) {
-        output = this.vx_p_pointtype;
+      Ui.Type_pointtype testnull = vx_p_pointtype;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -3839,39 +3810,33 @@ public final class Ui {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":x":
+      if (false) {
+      } else if ((skey.equals(":x"))) {
         output = this.x();
-        break;
-      case ":y":
+      } else if ((skey.equals(":y"))) {
         output = this.y();
-        break;
-      case ":z":
+      } else if ((skey.equals(":z"))) {
         output = this.z();
-        break;
-      case ":t":
+      } else if ((skey.equals(":t"))) {
         output = this.t();
-        break;
-      case ":i":
+      } else if ((skey.equals(":i"))) {
         output = this.i();
-        break;
-      case ":pointtype":
+      } else if ((skey.equals(":pointtype"))) {
         output = this.pointtype();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":x", this.x());
-      output.put(":y", this.y());
-      output.put(":z", this.z());
-      output.put(":t", this.t());
-      output.put(":i", this.i());
-      output.put(":pointtype", this.pointtype());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":x", this.x());
+      map.put(":y", this.y());
+      map.put(":z", this.z());
+      map.put(":t", this.t());
+      map.put(":i", this.i());
+      map.put(":pointtype", this.pointtype());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -3904,8 +3869,8 @@ public final class Ui {
       validkeys.add(":i");
       validkeys.add(":pointtype");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -3948,8 +3913,8 @@ public final class Ui {
             }
           }
         } else {
-          switch (key) {
-          case ":x":
+          if (false) {
+          } else if ((key.equals(":x"))) {
             if (valsub == vx_p_x) {
             } else if (valsub instanceof Core.Type_int) {
               Core.Type_int valx = (Core.Type_int)valsub;
@@ -3973,8 +3938,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/point", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":y":
+          } else if ((key.equals(":y"))) {
             if (valsub == vx_p_y) {
             } else if (valsub instanceof Core.Type_int) {
               Core.Type_int valy = (Core.Type_int)valsub;
@@ -3998,8 +3962,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/point", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":z":
+          } else if ((key.equals(":z"))) {
             if (valsub == vx_p_z) {
             } else if (valsub instanceof Core.Type_int) {
               Core.Type_int valz = (Core.Type_int)valsub;
@@ -4023,8 +3986,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/point", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":t":
+          } else if ((key.equals(":t"))) {
             if (valsub == vx_p_t) {
             } else if (valsub instanceof Core.Type_int) {
               Core.Type_int valt = (Core.Type_int)valsub;
@@ -4048,8 +4010,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/point", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":i":
+          } else if ((key.equals(":i"))) {
             if (valsub == vx_p_i) {
             } else if (valsub instanceof Core.Type_int) {
               Core.Type_int vali = (Core.Type_int)valsub;
@@ -4073,8 +4034,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/point", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":pointtype":
+          } else if ((key.equals(":pointtype"))) {
             if (valsub == vx_p_pointtype) {
             } else if (valsub instanceof Ui.Type_pointtype) {
               Ui.Type_pointtype valpointtype = (Ui.Type_pointtype)valsub;
@@ -4095,12 +4055,10 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/point", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/ui/ui/point", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -4263,8 +4221,9 @@ public final class Ui {
     @Override
     public Core.Type_string name() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_name != null) {
-        output = this.vx_p_name;
+      Core.Type_string testnull = vx_p_name;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -4274,8 +4233,9 @@ public final class Ui {
     @Override
     public Ui.Type_align align() {
       Ui.Type_align output = Ui.e_align;
-      if (this.vx_p_align != null) {
-        output = this.vx_p_align;
+      Ui.Type_align testnull = vx_p_align;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -4285,8 +4245,9 @@ public final class Ui {
     @Override
     public Ui.Type_bounds boundsmargin() {
       Ui.Type_bounds output = Ui.e_bounds;
-      if (this.vx_p_boundsmargin != null) {
-        output = this.vx_p_boundsmargin;
+      Ui.Type_bounds testnull = vx_p_boundsmargin;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -4296,8 +4257,9 @@ public final class Ui {
     @Override
     public Ui.Type_bounds boundspadding() {
       Ui.Type_bounds output = Ui.e_bounds;
-      if (this.vx_p_boundspadding != null) {
-        output = this.vx_p_boundspadding;
+      Ui.Type_bounds testnull = vx_p_boundspadding;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -4307,8 +4269,9 @@ public final class Ui {
     @Override
     public Core.Type_string color_bkg() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_color_bkg != null) {
-        output = this.vx_p_color_bkg;
+      Core.Type_string testnull = vx_p_color_bkg;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -4318,8 +4281,9 @@ public final class Ui {
     @Override
     public Core.Type_string color_bkghover() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_color_bkghover != null) {
-        output = this.vx_p_color_bkghover;
+      Core.Type_string testnull = vx_p_color_bkghover;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -4329,8 +4293,9 @@ public final class Ui {
     @Override
     public Core.Type_string color_border() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_color_border != null) {
-        output = this.vx_p_color_border;
+      Core.Type_string testnull = vx_p_color_border;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -4340,8 +4305,9 @@ public final class Ui {
     @Override
     public Core.Type_string color_font() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_color_font != null) {
-        output = this.vx_p_color_font;
+      Core.Type_string testnull = vx_p_color_font;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -4351,8 +4317,9 @@ public final class Ui {
     @Override
     public Ui.Type_cursor cursor() {
       Ui.Type_cursor output = Ui.e_cursor;
-      if (this.vx_p_cursor != null) {
-        output = this.vx_p_cursor;
+      Ui.Type_cursor testnull = vx_p_cursor;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -4362,8 +4329,9 @@ public final class Ui {
     @Override
     public Ui.Type_flip flip() {
       Ui.Type_flip output = Ui.e_flip;
-      if (this.vx_p_flip != null) {
-        output = this.vx_p_flip;
+      Ui.Type_flip testnull = vx_p_flip;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -4373,8 +4341,9 @@ public final class Ui {
     @Override
     public Ui.Type_font font() {
       Ui.Type_font output = Ui.e_font;
-      if (this.vx_p_font != null) {
-        output = this.vx_p_font;
+      Ui.Type_font testnull = vx_p_font;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -4384,8 +4353,9 @@ public final class Ui {
     @Override
     public Core.Type_boolean hidden() {
       Core.Type_boolean output = Core.e_boolean;
-      if (this.vx_p_hidden != null) {
-        output = this.vx_p_hidden;
+      Core.Type_boolean testnull = vx_p_hidden;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -4395,8 +4365,9 @@ public final class Ui {
     @Override
     public Ui.Type_image image_bkg() {
       Ui.Type_image output = Ui.e_image;
-      if (this.vx_p_image_bkg != null) {
-        output = this.vx_p_image_bkg;
+      Ui.Type_image testnull = vx_p_image_bkg;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -4406,8 +4377,9 @@ public final class Ui {
     @Override
     public Ui.Type_layout layout() {
       Ui.Type_layout output = Ui.e_layout;
-      if (this.vx_p_layout != null) {
-        output = this.vx_p_layout;
+      Ui.Type_layout testnull = vx_p_layout;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -4417,8 +4389,9 @@ public final class Ui {
     @Override
     public Ui.Type_styletype type() {
       Ui.Type_styletype output = Ui.e_styletype;
-      if (this.vx_p_type != null) {
-        output = this.vx_p_type;
+      Ui.Type_styletype testnull = vx_p_type;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -4428,8 +4401,9 @@ public final class Ui {
     @Override
     public Ui.Type_pin pin() {
       Ui.Type_pin output = Ui.e_pin;
-      if (this.vx_p_pin != null) {
-        output = this.vx_p_pin;
+      Ui.Type_pin testnull = vx_p_pin;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -4439,8 +4413,9 @@ public final class Ui {
     @Override
     public Ui.Type_point pointorigin() {
       Ui.Type_point output = Ui.e_point;
-      if (this.vx_p_pointorigin != null) {
-        output = this.vx_p_pointorigin;
+      Ui.Type_point testnull = vx_p_pointorigin;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -4450,8 +4425,9 @@ public final class Ui {
     @Override
     public Ui.Type_point pointpos() {
       Ui.Type_point output = Ui.e_point;
-      if (this.vx_p_pointpos != null) {
-        output = this.vx_p_pointpos;
+      Ui.Type_point testnull = vx_p_pointpos;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -4461,8 +4437,9 @@ public final class Ui {
     @Override
     public Ui.Type_point pointrotate() {
       Ui.Type_point output = Ui.e_point;
-      if (this.vx_p_pointrotate != null) {
-        output = this.vx_p_pointrotate;
+      Ui.Type_point testnull = vx_p_pointrotate;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -4472,8 +4449,9 @@ public final class Ui {
     @Override
     public Ui.Type_point pointsize() {
       Ui.Type_point output = Ui.e_point;
-      if (this.vx_p_pointsize != null) {
-        output = this.vx_p_pointsize;
+      Ui.Type_point testnull = vx_p_pointsize;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -4483,8 +4461,9 @@ public final class Ui {
     @Override
     public Core.Type_boolean scroll_x() {
       Core.Type_boolean output = Core.e_boolean;
-      if (this.vx_p_scroll_x != null) {
-        output = this.vx_p_scroll_x;
+      Core.Type_boolean testnull = vx_p_scroll_x;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -4494,8 +4473,9 @@ public final class Ui {
     @Override
     public Core.Type_boolean scroll_y() {
       Core.Type_boolean output = Core.e_boolean;
-      if (this.vx_p_scroll_y != null) {
-        output = this.vx_p_scroll_y;
+      Core.Type_boolean testnull = vx_p_scroll_y;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -4504,103 +4484,81 @@ public final class Ui {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":name":
+      if (false) {
+      } else if ((skey.equals(":name"))) {
         output = this.name();
-        break;
-      case ":align":
+      } else if ((skey.equals(":align"))) {
         output = this.align();
-        break;
-      case ":boundsmargin":
+      } else if ((skey.equals(":boundsmargin"))) {
         output = this.boundsmargin();
-        break;
-      case ":boundspadding":
+      } else if ((skey.equals(":boundspadding"))) {
         output = this.boundspadding();
-        break;
-      case ":color-bkg":
+      } else if ((skey.equals(":color-bkg"))) {
         output = this.color_bkg();
-        break;
-      case ":color-bkghover":
+      } else if ((skey.equals(":color-bkghover"))) {
         output = this.color_bkghover();
-        break;
-      case ":color-border":
+      } else if ((skey.equals(":color-border"))) {
         output = this.color_border();
-        break;
-      case ":color-font":
+      } else if ((skey.equals(":color-font"))) {
         output = this.color_font();
-        break;
-      case ":cursor":
+      } else if ((skey.equals(":cursor"))) {
         output = this.cursor();
-        break;
-      case ":flip":
+      } else if ((skey.equals(":flip"))) {
         output = this.flip();
-        break;
-      case ":font":
+      } else if ((skey.equals(":font"))) {
         output = this.font();
-        break;
-      case ":hidden":
+      } else if ((skey.equals(":hidden"))) {
         output = this.hidden();
-        break;
-      case ":image-bkg":
+      } else if ((skey.equals(":image-bkg"))) {
         output = this.image_bkg();
-        break;
-      case ":layout":
+      } else if ((skey.equals(":layout"))) {
         output = this.layout();
-        break;
-      case ":type":
+      } else if ((skey.equals(":type"))) {
         output = this.type();
-        break;
-      case ":pin":
+      } else if ((skey.equals(":pin"))) {
         output = this.pin();
-        break;
-      case ":pointorigin":
+      } else if ((skey.equals(":pointorigin"))) {
         output = this.pointorigin();
-        break;
-      case ":pointpos":
+      } else if ((skey.equals(":pointpos"))) {
         output = this.pointpos();
-        break;
-      case ":pointrotate":
+      } else if ((skey.equals(":pointrotate"))) {
         output = this.pointrotate();
-        break;
-      case ":pointsize":
+      } else if ((skey.equals(":pointsize"))) {
         output = this.pointsize();
-        break;
-      case ":scroll-x":
+      } else if ((skey.equals(":scroll-x"))) {
         output = this.scroll_x();
-        break;
-      case ":scroll-y":
+      } else if ((skey.equals(":scroll-y"))) {
         output = this.scroll_y();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":name", this.name());
-      output.put(":align", this.align());
-      output.put(":boundsmargin", this.boundsmargin());
-      output.put(":boundspadding", this.boundspadding());
-      output.put(":color-bkg", this.color_bkg());
-      output.put(":color-bkghover", this.color_bkghover());
-      output.put(":color-border", this.color_border());
-      output.put(":color-font", this.color_font());
-      output.put(":cursor", this.cursor());
-      output.put(":flip", this.flip());
-      output.put(":font", this.font());
-      output.put(":hidden", this.hidden());
-      output.put(":image-bkg", this.image_bkg());
-      output.put(":layout", this.layout());
-      output.put(":type", this.type());
-      output.put(":pin", this.pin());
-      output.put(":pointorigin", this.pointorigin());
-      output.put(":pointpos", this.pointpos());
-      output.put(":pointrotate", this.pointrotate());
-      output.put(":pointsize", this.pointsize());
-      output.put(":scroll-x", this.scroll_x());
-      output.put(":scroll-y", this.scroll_y());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":name", this.name());
+      map.put(":align", this.align());
+      map.put(":boundsmargin", this.boundsmargin());
+      map.put(":boundspadding", this.boundspadding());
+      map.put(":color-bkg", this.color_bkg());
+      map.put(":color-bkghover", this.color_bkghover());
+      map.put(":color-border", this.color_border());
+      map.put(":color-font", this.color_font());
+      map.put(":cursor", this.cursor());
+      map.put(":flip", this.flip());
+      map.put(":font", this.font());
+      map.put(":hidden", this.hidden());
+      map.put(":image-bkg", this.image_bkg());
+      map.put(":layout", this.layout());
+      map.put(":type", this.type());
+      map.put(":pin", this.pin());
+      map.put(":pointorigin", this.pointorigin());
+      map.put(":pointpos", this.pointpos());
+      map.put(":pointrotate", this.pointrotate());
+      map.put(":pointsize", this.pointsize());
+      map.put(":scroll-x", this.scroll_x());
+      map.put(":scroll-y", this.scroll_y());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -4665,8 +4623,8 @@ public final class Ui {
       validkeys.add(":scroll-x");
       validkeys.add(":scroll-y");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -4709,8 +4667,8 @@ public final class Ui {
             }
           }
         } else {
-          switch (key) {
-          case ":name":
+          if (false) {
+          } else if ((key.equals(":name"))) {
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valname = (Core.Type_string)valsub;
@@ -4734,8 +4692,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":align":
+          } else if ((key.equals(":align"))) {
             if (valsub == vx_p_align) {
             } else if (valsub instanceof Ui.Type_align) {
               Ui.Type_align valalign = (Ui.Type_align)valsub;
@@ -4756,8 +4713,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":boundsmargin":
+          } else if ((key.equals(":boundsmargin"))) {
             if (valsub == vx_p_boundsmargin) {
             } else if (valsub instanceof Ui.Type_bounds) {
               Ui.Type_bounds valboundsmargin = (Ui.Type_bounds)valsub;
@@ -4778,8 +4734,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":boundspadding":
+          } else if ((key.equals(":boundspadding"))) {
             if (valsub == vx_p_boundspadding) {
             } else if (valsub instanceof Ui.Type_bounds) {
               Ui.Type_bounds valboundspadding = (Ui.Type_bounds)valsub;
@@ -4800,8 +4755,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":color-bkg":
+          } else if ((key.equals(":color-bkg"))) {
             if (valsub == vx_p_color_bkg) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valcolor_bkg = (Core.Type_string)valsub;
@@ -4825,8 +4779,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":color-bkghover":
+          } else if ((key.equals(":color-bkghover"))) {
             if (valsub == vx_p_color_bkghover) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valcolor_bkghover = (Core.Type_string)valsub;
@@ -4850,8 +4803,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":color-border":
+          } else if ((key.equals(":color-border"))) {
             if (valsub == vx_p_color_border) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valcolor_border = (Core.Type_string)valsub;
@@ -4875,8 +4827,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":color-font":
+          } else if ((key.equals(":color-font"))) {
             if (valsub == vx_p_color_font) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valcolor_font = (Core.Type_string)valsub;
@@ -4900,8 +4851,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":cursor":
+          } else if ((key.equals(":cursor"))) {
             if (valsub == vx_p_cursor) {
             } else if (valsub instanceof Ui.Type_cursor) {
               Ui.Type_cursor valcursor = (Ui.Type_cursor)valsub;
@@ -4922,8 +4872,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":flip":
+          } else if ((key.equals(":flip"))) {
             if (valsub == vx_p_flip) {
             } else if (valsub instanceof Ui.Type_flip) {
               Ui.Type_flip valflip = (Ui.Type_flip)valsub;
@@ -4944,8 +4893,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":font":
+          } else if ((key.equals(":font"))) {
             if (valsub == vx_p_font) {
             } else if (valsub instanceof Ui.Type_font) {
               Ui.Type_font valfont = (Ui.Type_font)valsub;
@@ -4966,8 +4914,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":hidden":
+          } else if ((key.equals(":hidden"))) {
             if (valsub == vx_p_hidden) {
             } else if (valsub instanceof Core.Type_boolean) {
               Core.Type_boolean valhidden = (Core.Type_boolean)valsub;
@@ -4991,8 +4938,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":image-bkg":
+          } else if ((key.equals(":image-bkg"))) {
             if (valsub == vx_p_image_bkg) {
             } else if (valsub instanceof Ui.Type_image) {
               Ui.Type_image valimage_bkg = (Ui.Type_image)valsub;
@@ -5013,8 +4959,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":layout":
+          } else if ((key.equals(":layout"))) {
             if (valsub == vx_p_layout) {
             } else if (valsub instanceof Ui.Type_layout) {
               Ui.Type_layout vallayout = (Ui.Type_layout)valsub;
@@ -5035,8 +4980,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":type":
+          } else if ((key.equals(":type"))) {
             if (valsub == vx_p_type) {
             } else if (valsub instanceof Ui.Type_styletype) {
               Ui.Type_styletype valtype = (Ui.Type_styletype)valsub;
@@ -5057,8 +5001,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":pin":
+          } else if ((key.equals(":pin"))) {
             if (valsub == vx_p_pin) {
             } else if (valsub instanceof Ui.Type_pin) {
               Ui.Type_pin valpin = (Ui.Type_pin)valsub;
@@ -5079,8 +5022,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":pointorigin":
+          } else if ((key.equals(":pointorigin"))) {
             if (valsub == vx_p_pointorigin) {
             } else if (valsub instanceof Ui.Type_point) {
               Ui.Type_point valpointorigin = (Ui.Type_point)valsub;
@@ -5101,8 +5043,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":pointpos":
+          } else if ((key.equals(":pointpos"))) {
             if (valsub == vx_p_pointpos) {
             } else if (valsub instanceof Ui.Type_point) {
               Ui.Type_point valpointpos = (Ui.Type_point)valsub;
@@ -5123,8 +5064,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":pointrotate":
+          } else if ((key.equals(":pointrotate"))) {
             if (valsub == vx_p_pointrotate) {
             } else if (valsub instanceof Ui.Type_point) {
               Ui.Type_point valpointrotate = (Ui.Type_point)valsub;
@@ -5145,8 +5085,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":pointsize":
+          } else if ((key.equals(":pointsize"))) {
             if (valsub == vx_p_pointsize) {
             } else if (valsub instanceof Ui.Type_point) {
               Ui.Type_point valpointsize = (Ui.Type_point)valsub;
@@ -5167,8 +5106,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":scroll-x":
+          } else if ((key.equals(":scroll-x"))) {
             if (valsub == vx_p_scroll_x) {
             } else if (valsub instanceof Core.Type_boolean) {
               Core.Type_boolean valscroll_x = (Core.Type_boolean)valsub;
@@ -5192,8 +5130,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":scroll-y":
+          } else if ((key.equals(":scroll-y"))) {
             if (valsub == vx_p_scroll_y) {
             } else if (valsub instanceof Core.Type_boolean) {
               Core.Type_boolean valscroll_y = (Core.Type_boolean)valsub;
@@ -5217,12 +5154,10 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/ui/ui/style", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -5545,9 +5480,9 @@ public final class Ui {
         ischanged = true;
       }
       Map<String, Ui.Type_style> mapval = new LinkedHashMap<String, Ui.Type_style>(value.vx_mapstyle());
-      Core.Type_msg msg = null;
       String key = "";
-      Core.Type_any msgval = null;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -5573,7 +5508,7 @@ public final class Ui {
             msgblock = Core.vx_copy(msgblock, msg);
           }
         } else {
-          Ui.Type_style valany = null;
+          Ui.Type_style valany = Ui.e_style;
           if (false) {
           } else if (valsub instanceof Ui.Type_style) {
             Ui.Type_style valallowed = (Ui.Type_style)valsub;
@@ -5595,7 +5530,7 @@ public final class Ui {
             msg = Core.vx_msg_from_error("vx/ui/ui/stylemap", ":invalidkeyvalue", msgmap);
             msgblock = Core.vx_copy(msgblock, msg);
           }
-          if (valany != null) {
+          if (valany != Core.e_any) {
             ischanged = true;
             if (key.startsWith(":")) {
               key = key.substring(1);
@@ -5668,8 +5603,9 @@ public final class Ui {
     @Override
     public Ui.Type_fontfacemap fontfacemap() {
       Ui.Type_fontfacemap output = Ui.e_fontfacemap;
-      if (this.vx_p_fontfacemap != null) {
-        output = this.vx_p_fontfacemap;
+      Ui.Type_fontfacemap testnull = vx_p_fontfacemap;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -5679,8 +5615,9 @@ public final class Ui {
     @Override
     public Ui.Type_stylemap stylemap() {
       Ui.Type_stylemap output = Ui.e_stylemap;
-      if (this.vx_p_stylemap != null) {
-        output = this.vx_p_stylemap;
+      Ui.Type_stylemap testnull = vx_p_stylemap;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -5689,23 +5626,21 @@ public final class Ui {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":fontfacemap":
+      if (false) {
+      } else if ((skey.equals(":fontfacemap"))) {
         output = this.fontfacemap();
-        break;
-      case ":stylemap":
+      } else if ((skey.equals(":stylemap"))) {
         output = this.stylemap();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":fontfacemap", this.fontfacemap());
-      output.put(":stylemap", this.stylemap());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":fontfacemap", this.fontfacemap());
+      map.put(":stylemap", this.stylemap());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -5730,8 +5665,8 @@ public final class Ui {
       validkeys.add(":fontfacemap");
       validkeys.add(":stylemap");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -5774,8 +5709,8 @@ public final class Ui {
             }
           }
         } else {
-          switch (key) {
-          case ":fontfacemap":
+          if (false) {
+          } else if ((key.equals(":fontfacemap"))) {
             if (valsub == vx_p_fontfacemap) {
             } else if (valsub instanceof Ui.Type_fontfacemap) {
               Ui.Type_fontfacemap valfontfacemap = (Ui.Type_fontfacemap)valsub;
@@ -5796,8 +5731,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/stylesheet", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":stylemap":
+          } else if ((key.equals(":stylemap"))) {
             if (valsub == vx_p_stylemap) {
             } else if (valsub instanceof Ui.Type_stylemap) {
               Ui.Type_stylemap valstylemap = (Ui.Type_stylemap)valsub;
@@ -5818,12 +5752,10 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/stylesheet", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/ui/ui/stylesheet", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -5893,8 +5825,8 @@ public final class Ui {
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -5985,8 +5917,9 @@ public final class Ui {
     @Override
     public Core.Type_string uid() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_uid != null) {
-        output = this.vx_p_uid;
+      Core.Type_string testnull = vx_p_uid;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -5996,8 +5929,9 @@ public final class Ui {
     @Override
     public Core.Type_string name() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_name != null) {
-        output = this.vx_p_name;
+      Core.Type_string testnull = vx_p_name;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -6007,8 +5941,9 @@ public final class Ui {
     @Override
     public Ui.Type_layout layout() {
       Ui.Type_layout output = Ui.e_layout;
-      if (this.vx_p_layout != null) {
-        output = this.vx_p_layout;
+      Ui.Type_layout testnull = vx_p_layout;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -6018,8 +5953,9 @@ public final class Ui {
     @Override
     public Core.Type_string path() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_path != null) {
-        output = this.vx_p_path;
+      Core.Type_string testnull = vx_p_path;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -6029,8 +5965,9 @@ public final class Ui {
     @Override
     public Core.Type_boolean hidden() {
       Core.Type_boolean output = Core.e_boolean;
-      if (this.vx_p_hidden != null) {
-        output = this.vx_p_hidden;
+      Core.Type_boolean testnull = vx_p_hidden;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -6040,8 +5977,9 @@ public final class Ui {
     @Override
     public Core.Type_boolean selected() {
       Core.Type_boolean output = Core.e_boolean;
-      if (this.vx_p_selected != null) {
-        output = this.vx_p_selected;
+      Core.Type_boolean testnull = vx_p_selected;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -6051,8 +5989,9 @@ public final class Ui {
     @Override
     public Core.Type_boolean selectmulti() {
       Core.Type_boolean output = Core.e_boolean;
-      if (this.vx_p_selectmulti != null) {
-        output = this.vx_p_selectmulti;
+      Core.Type_boolean testnull = vx_p_selectmulti;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -6062,8 +6001,9 @@ public final class Ui {
     @Override
     public Ui.Type_style style() {
       Ui.Type_style output = Ui.e_style;
-      if (this.vx_p_style != null) {
-        output = this.vx_p_style;
+      Ui.Type_style testnull = vx_p_style;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -6073,8 +6013,9 @@ public final class Ui {
     @Override
     public Ui.Type_stylelist stylelist() {
       Ui.Type_stylelist output = Ui.e_stylelist;
-      if (this.vx_p_stylelist != null) {
-        output = this.vx_p_stylelist;
+      Ui.Type_stylelist testnull = vx_p_stylelist;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -6084,8 +6025,9 @@ public final class Ui {
     @Override
     public Event.Type_eventmap eventmap() {
       Event.Type_eventmap output = Event.e_eventmap;
-      if (this.vx_p_eventmap != null) {
-        output = this.vx_p_eventmap;
+      Event.Type_eventmap testnull = vx_p_eventmap;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -6095,8 +6037,9 @@ public final class Ui {
     @Override
     public Core.Type_any data() {
       Core.Type_any output = Core.e_any;
-      if (this.vx_p_data != null) {
-        output = this.vx_p_data;
+      Core.Type_any testnull = vx_p_data;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -6106,8 +6049,9 @@ public final class Ui {
     @Override
     public Ui.Type_uimap uimap() {
       Ui.Type_uimap output = Ui.e_uimap;
-      if (this.vx_p_uimap != null) {
-        output = this.vx_p_uimap;
+      Ui.Type_uimap testnull = vx_p_uimap;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -6116,63 +6060,51 @@ public final class Ui {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":uid":
+      if (false) {
+      } else if ((skey.equals(":uid"))) {
         output = this.uid();
-        break;
-      case ":name":
+      } else if ((skey.equals(":name"))) {
         output = this.name();
-        break;
-      case ":layout":
+      } else if ((skey.equals(":layout"))) {
         output = this.layout();
-        break;
-      case ":path":
+      } else if ((skey.equals(":path"))) {
         output = this.path();
-        break;
-      case ":hidden":
+      } else if ((skey.equals(":hidden"))) {
         output = this.hidden();
-        break;
-      case ":selected":
+      } else if ((skey.equals(":selected"))) {
         output = this.selected();
-        break;
-      case ":selectmulti":
+      } else if ((skey.equals(":selectmulti"))) {
         output = this.selectmulti();
-        break;
-      case ":style":
+      } else if ((skey.equals(":style"))) {
         output = this.style();
-        break;
-      case ":stylelist":
+      } else if ((skey.equals(":stylelist"))) {
         output = this.stylelist();
-        break;
-      case ":eventmap":
+      } else if ((skey.equals(":eventmap"))) {
         output = this.eventmap();
-        break;
-      case ":data":
+      } else if ((skey.equals(":data"))) {
         output = this.data();
-        break;
-      case ":uimap":
+      } else if ((skey.equals(":uimap"))) {
         output = this.uimap();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":uid", this.uid());
-      output.put(":name", this.name());
-      output.put(":layout", this.layout());
-      output.put(":path", this.path());
-      output.put(":hidden", this.hidden());
-      output.put(":selected", this.selected());
-      output.put(":selectmulti", this.selectmulti());
-      output.put(":style", this.style());
-      output.put(":stylelist", this.stylelist());
-      output.put(":eventmap", this.eventmap());
-      output.put(":data", this.data());
-      output.put(":uimap", this.uimap());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":uid", this.uid());
+      map.put(":name", this.name());
+      map.put(":layout", this.layout());
+      map.put(":path", this.path());
+      map.put(":hidden", this.hidden());
+      map.put(":selected", this.selected());
+      map.put(":selectmulti", this.selectmulti());
+      map.put(":style", this.style());
+      map.put(":stylelist", this.stylelist());
+      map.put(":eventmap", this.eventmap());
+      map.put(":data", this.data());
+      map.put(":uimap", this.uimap());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -6217,8 +6149,8 @@ public final class Ui {
       validkeys.add(":data");
       validkeys.add(":uimap");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -6261,8 +6193,8 @@ public final class Ui {
             }
           }
         } else {
-          switch (key) {
-          case ":uid":
+          if (false) {
+          } else if ((key.equals(":uid"))) {
             if (valsub == vx_p_uid) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valuid = (Core.Type_string)valsub;
@@ -6286,8 +6218,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/ui", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":name":
+          } else if ((key.equals(":name"))) {
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valname = (Core.Type_string)valsub;
@@ -6311,8 +6242,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/ui", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":layout":
+          } else if ((key.equals(":layout"))) {
             if (valsub == vx_p_layout) {
             } else if (valsub instanceof Ui.Type_layout) {
               Ui.Type_layout vallayout = (Ui.Type_layout)valsub;
@@ -6333,8 +6263,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/ui", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":path":
+          } else if ((key.equals(":path"))) {
             if (valsub == vx_p_path) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valpath = (Core.Type_string)valsub;
@@ -6358,8 +6287,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/ui", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":hidden":
+          } else if ((key.equals(":hidden"))) {
             if (valsub == vx_p_hidden) {
             } else if (valsub instanceof Core.Type_boolean) {
               Core.Type_boolean valhidden = (Core.Type_boolean)valsub;
@@ -6383,8 +6311,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/ui", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":selected":
+          } else if ((key.equals(":selected"))) {
             if (valsub == vx_p_selected) {
             } else if (valsub instanceof Core.Type_boolean) {
               Core.Type_boolean valselected = (Core.Type_boolean)valsub;
@@ -6408,8 +6335,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/ui", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":selectmulti":
+          } else if ((key.equals(":selectmulti"))) {
             if (valsub == vx_p_selectmulti) {
             } else if (valsub instanceof Core.Type_boolean) {
               Core.Type_boolean valselectmulti = (Core.Type_boolean)valsub;
@@ -6433,8 +6359,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/ui", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":style":
+          } else if ((key.equals(":style"))) {
             if (valsub == vx_p_style) {
             } else if (valsub instanceof Ui.Type_style) {
               Ui.Type_style valstyle = (Ui.Type_style)valsub;
@@ -6455,8 +6380,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/ui", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":stylelist":
+          } else if ((key.equals(":stylelist"))) {
             if (valsub == vx_p_stylelist) {
             } else if (valsub instanceof Ui.Type_stylelist) {
               Ui.Type_stylelist valstylelist = (Ui.Type_stylelist)valsub;
@@ -6477,8 +6401,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/ui", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":eventmap":
+          } else if ((key.equals(":eventmap"))) {
             if (valsub == vx_p_eventmap) {
             } else if (valsub instanceof Event.Type_eventmap) {
               Event.Type_eventmap valeventmap = (Event.Type_eventmap)valsub;
@@ -6499,8 +6422,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/ui", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":data":
+          } else if ((key.equals(":data"))) {
             if (valsub == vx_p_data) {
             } else if (valsub instanceof Core.Type_any) {
               Core.Type_any valdata = (Core.Type_any)valsub;
@@ -6521,8 +6443,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/ui", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":uimap":
+          } else if ((key.equals(":uimap"))) {
             if (valsub == vx_p_uimap) {
             } else if (valsub instanceof Ui.Type_uimap) {
               Ui.Type_uimap valuimap = (Ui.Type_uimap)valsub;
@@ -6543,12 +6464,10 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/ui", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/ui/ui/ui", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -6629,8 +6548,9 @@ public final class Ui {
     @Override
     public Ui.Type_uimap parentmap() {
       Ui.Type_uimap output = Ui.e_uimap;
-      if (this.vx_p_parentmap != null) {
-        output = this.vx_p_parentmap;
+      Ui.Type_uimap testnull = vx_p_parentmap;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -6640,8 +6560,9 @@ public final class Ui {
     @Override
     public Ui.Type_layoutengine layoutengine() {
       Ui.Type_layoutengine output = Ui.e_layoutengine;
-      if (this.vx_p_layoutengine != null) {
-        output = this.vx_p_layoutengine;
+      Ui.Type_layoutengine testnull = vx_p_layoutengine;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -6651,8 +6572,9 @@ public final class Ui {
     @Override
     public Ui.Type_stylesheet stylesheet() {
       Ui.Type_stylesheet output = Ui.e_stylesheet;
-      if (this.vx_p_stylesheet != null) {
-        output = this.vx_p_stylesheet;
+      Ui.Type_stylesheet testnull = vx_p_stylesheet;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -6662,8 +6584,9 @@ public final class Ui {
     @Override
     public Ui.Type_ui ui() {
       Ui.Type_ui output = Ui.e_ui;
-      if (this.vx_p_ui != null) {
-        output = this.vx_p_ui;
+      Ui.Type_ui testnull = vx_p_ui;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -6672,31 +6595,27 @@ public final class Ui {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":parentmap":
+      if (false) {
+      } else if ((skey.equals(":parentmap"))) {
         output = this.parentmap();
-        break;
-      case ":layoutengine":
+      } else if ((skey.equals(":layoutengine"))) {
         output = this.layoutengine();
-        break;
-      case ":stylesheet":
+      } else if ((skey.equals(":stylesheet"))) {
         output = this.stylesheet();
-        break;
-      case ":ui":
+      } else if ((skey.equals(":ui"))) {
         output = this.ui();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":parentmap", this.parentmap());
-      output.put(":layoutengine", this.layoutengine());
-      output.put(":stylesheet", this.stylesheet());
-      output.put(":ui", this.ui());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":parentmap", this.parentmap());
+      map.put(":layoutengine", this.layoutengine());
+      map.put(":stylesheet", this.stylesheet());
+      map.put(":ui", this.ui());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -6725,8 +6644,8 @@ public final class Ui {
       validkeys.add(":stylesheet");
       validkeys.add(":ui");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -6769,8 +6688,8 @@ public final class Ui {
             }
           }
         } else {
-          switch (key) {
-          case ":parentmap":
+          if (false) {
+          } else if ((key.equals(":parentmap"))) {
             if (valsub == vx_p_parentmap) {
             } else if (valsub instanceof Ui.Type_uimap) {
               Ui.Type_uimap valparentmap = (Ui.Type_uimap)valsub;
@@ -6791,8 +6710,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/uiengine", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":layoutengine":
+          } else if ((key.equals(":layoutengine"))) {
             if (valsub == vx_p_layoutengine) {
             } else if (valsub instanceof Ui.Type_layoutengine) {
               Ui.Type_layoutengine vallayoutengine = (Ui.Type_layoutengine)valsub;
@@ -6813,8 +6731,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/uiengine", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":stylesheet":
+          } else if ((key.equals(":stylesheet"))) {
             if (valsub == vx_p_stylesheet) {
             } else if (valsub instanceof Ui.Type_stylesheet) {
               Ui.Type_stylesheet valstylesheet = (Ui.Type_stylesheet)valsub;
@@ -6835,8 +6752,7 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/uiengine", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":ui":
+          } else if ((key.equals(":ui"))) {
             if (valsub == vx_p_ui) {
             } else if (valsub instanceof Ui.Type_ui) {
               Ui.Type_ui valui = (Ui.Type_ui)valsub;
@@ -6857,12 +6773,10 @@ public final class Ui {
               msg = Core.vx_msg_from_error("vx/ui/ui/uiengine", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/ui/ui/uiengine", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -7167,9 +7081,9 @@ public final class Ui {
         ischanged = true;
       }
       Map<String, Ui.Type_ui> mapval = new LinkedHashMap<String, Ui.Type_ui>(value.vx_mapui());
-      Core.Type_msg msg = null;
       String key = "";
-      Core.Type_any msgval = null;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -7195,7 +7109,7 @@ public final class Ui {
             msgblock = Core.vx_copy(msgblock, msg);
           }
         } else {
-          Ui.Type_ui valany = null;
+          Ui.Type_ui valany = Ui.e_ui;
           if (false) {
           } else if (valsub instanceof Ui.Type_ui) {
             Ui.Type_ui valallowed = (Ui.Type_ui)valsub;
@@ -7217,7 +7131,7 @@ public final class Ui {
             msg = Core.vx_msg_from_error("vx/ui/ui/uimap", ":invalidkeyvalue", msgmap);
             msgblock = Core.vx_copy(msgblock, msg);
           }
-          if (valany != null) {
+          if (valany != Core.e_any) {
             ischanged = true;
             if (key.startsWith(":")) {
               key = key.substring(1);

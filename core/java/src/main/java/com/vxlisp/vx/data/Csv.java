@@ -26,8 +26,9 @@ public final class Csv {
     @Override
     public Core.Type_stringlist headers() {
       Core.Type_stringlist output = Core.e_stringlist;
-      if (this.vx_p_headers != null) {
-        output = this.vx_p_headers;
+      Core.Type_stringlist testnull = vx_p_headers;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -37,8 +38,9 @@ public final class Csv {
     @Override
     public Csv.Type_csvrows rows() {
       Csv.Type_csvrows output = Csv.e_csvrows;
-      if (this.vx_p_rows != null) {
-        output = this.vx_p_rows;
+      Csv.Type_csvrows testnull = vx_p_rows;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -47,23 +49,21 @@ public final class Csv {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":headers":
+      if (false) {
+      } else if ((skey.equals(":headers"))) {
         output = this.headers();
-        break;
-      case ":rows":
+      } else if ((skey.equals(":rows"))) {
         output = this.rows();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":headers", this.headers());
-      output.put(":rows", this.rows());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":headers", this.headers());
+      map.put(":rows", this.rows());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -88,8 +88,8 @@ public final class Csv {
       validkeys.add(":headers");
       validkeys.add(":rows");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -132,8 +132,8 @@ public final class Csv {
             }
           }
         } else {
-          switch (key) {
-          case ":headers":
+          if (false) {
+          } else if ((key.equals(":headers"))) {
             if (valsub == vx_p_headers) {
             } else if (valsub instanceof Core.Type_stringlist) {
               Core.Type_stringlist valheaders = (Core.Type_stringlist)valsub;
@@ -154,8 +154,7 @@ public final class Csv {
               msg = Core.vx_msg_from_error("vx/data/csv/csv", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":rows":
+          } else if ((key.equals(":rows"))) {
             if (valsub == vx_p_rows) {
             } else if (valsub instanceof Csv.Type_csvrows) {
               Csv.Type_csvrows valrows = (Csv.Type_csvrows)valsub;
@@ -176,12 +175,10 @@ public final class Csv {
               msg = Core.vx_msg_from_error("vx/data/csv/csv", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/data/csv/csv", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -337,9 +334,9 @@ public final class Csv {
         ischanged = true;
       }
       Map<String, Core.Type_stringlist> mapval = new LinkedHashMap<String, Core.Type_stringlist>(value.vx_mapstringlist());
-      Core.Type_msg msg = null;
       String key = "";
-      Core.Type_any msgval = null;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -365,7 +362,7 @@ public final class Csv {
             msgblock = Core.vx_copy(msgblock, msg);
           }
         } else {
-          Core.Type_stringlist valany = null;
+          Core.Type_stringlist valany = Core.e_stringlist;
           if (false) {
           } else if (valsub instanceof Core.Type_stringlist) {
             Core.Type_stringlist valallowed = (Core.Type_stringlist)valsub;
@@ -387,7 +384,7 @@ public final class Csv {
             msg = Core.vx_msg_from_error("vx/data/csv/csvrowmap", ":invalidkeyvalue", msgmap);
             msgblock = Core.vx_copy(msgblock, msg);
           }
-          if (valany != null) {
+          if (valany != Core.e_any) {
             ischanged = true;
             if (key.startsWith(":")) {
               key = key.substring(1);

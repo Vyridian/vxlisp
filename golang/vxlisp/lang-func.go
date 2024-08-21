@@ -55,12 +55,12 @@ func LangFuncClassHeader(lang *vxlang, fnc *vxfunc, indent int) string {
 	lineindent := LangIndent(lang, indent, true)
 	funcname := LangFuncName(fnc)
 	extends := LangPkgNameDot(lang, "vx/core") + "Class_base"
-	switch lang.name {
-	case "csharp":
+	switch lang {
+	case langcsharp:
 		output = lineindent + "public class Class_" + funcname + " : " + extends + ", Func_" + funcname + " {"
-	case "java":
+	case langjava:
 		output = lineindent + "public static class Class_" + funcname + " extends " + extends + " implements Func_" + funcname + " {"
-	case "kotlin":
+	case langkotlin:
 		output = "" +
 			lineindent + "class Class_" + funcname + " : " + extends + ", Func_" + funcname + " {" +
 			lineindent + "  constructor() {}"
@@ -147,8 +147,8 @@ func LangFuncDoc(
 		"\n   * (func " + fnc.name + ")" +
 		"\n   */"
 	/// FIXME
-	switch lang.name {
-	case "kotlin":
+	switch lang {
+	case langkotlin:
 		output = ""
 	}
 	return output
@@ -276,8 +276,8 @@ func LangFuncFFunc(
 	if fnc.messages {
 		stry := ""
 		scatch := ""
-		switch lang.name {
-		case "kotlin":
+		switch lang {
+		case langkotlin:
 			stry = linesubindent + "try {"
 			scatch = linesubindent + "} catch (err : Exception) {"
 		default:
@@ -317,8 +317,8 @@ func LangFuncFFunc(
 		}
 		switch NameFromFunc(fnc) {
 		case "vx/core/new":
-			switch lang.name {
-			case "java":
+			switch lang {
+			case langjava:
 				f_suppresswarnings = "\n  @SuppressWarnings(\"unchecked\")"
 			}
 		}
@@ -645,6 +645,28 @@ func LangFuncHeaderStatic(
 	return LangFuncHeaderAll(lang, prefix, fnc, indent, false, true, outputnum, value)
 }
 
+func LangFuncIFnType(lang *vxlang, fnc *vxfunc) *vxtype {
+	output := emptytype
+	switch NameFromFunc(fnc) {
+	case "vx/core/any<-any", "vx/core/any<-any-async",
+		"vx/core/any<-any-context", "vx/core/any<-any-context-async",
+		"vx/core/any<-any-key-value", "vx/core/any<-any-key-value-async",
+		"vx/core/any<-int", "vx/core/any<-int-any",
+		"vx/core/any<-func", "vx/core/any<-func-async",
+		"vx/core/any<-none", "vx/core/any<-none-async",
+		"vx/core/any<-key-value", "vx/core/any<-key-value-async",
+		"vx/core/any<-reduce", "vx/core/any<-reduce-async",
+		"vx/core/any<-reduce-next", "vx/core/any<-reduce-next-async",
+		"vx/core/boolean<-any":
+		output = NewType(LangFuncName(fnc) + lang.typeref + "IFn")
+	case "vx/core/boolean<-func", "vx/core/boolean<-none",
+		"vx/core/int<-func", "vx/core/int<-none",
+		"vx/core/string<-func", "vx/core/string<-none":
+		output = NewType("vx/core/any<-func" + lang.typeref + "IFn")
+	}
+	return output
+}
+
 func LangFuncInstanceStatic(lang *vxlang) (string, string) {
 	funcinstance := "function "
 	funcstatic := "function "
@@ -887,8 +909,13 @@ func LangFuncLambdaArgIndex(
 			slambdarest = work
 			sfuturevar := LangVarFuture(lang, "future_"+LangFromName(lambdaarg.name), lambdaarg.vxtype, indent+1,
 				lambdavaluetext)
+			lambdaargname := LangFromName(lambdaarg.name)
+			switch lang {
+			case langkotlin:
+				lambdaargname += " : vx_core.Type_any"
+			}
 			slambdaoutput := "" +
-				LangFuncLambda(lang, indent+1, ioutputargnum, "", LangFromName(lambdaarg.name),
+				LangFuncLambda(lang, indent+1, ioutputargnum, "", lambdaargname,
 					slambdarest+
 						svalueoutput)
 			sfutureoutput := "" +
@@ -1118,7 +1145,12 @@ func LangFuncValueArgIndex(
 				var lambdavars []string
 				arglist := ListArgLocalFromFunc(argfunc)
 				for _, lambdaarg := range arglist {
-					lambdaargs = append(lambdaargs, lambdaarg.name+"_any")
+					lambdaargname := lambdaarg.name + "_any"
+					switch lang {
+					case langkotlin:
+						lambdaargname += " : vx_core.Type_any"
+					}
+					lambdaargs = append(lambdaargs, lambdaargname)
 					argtype := lambdaarg.vxtype
 					lambdavar :=
 						LangVar(lang, lambdaarg.name, argtype, 1,
@@ -1396,7 +1428,6 @@ func LangFuncVxEmpty(
 
 func LangFuncVxFnNew(lang *vxlang, fnc *vxfunc, isinterface bool) string {
 	output := ""
-	ifn := ""
 	vars := ""
 	body := ""
 	funcs := ""
@@ -1410,48 +1441,78 @@ func LangFuncVxFnNew(lang *vxlang, fnc *vxfunc, isinterface bool) string {
 	if fnc.async {
 		asyncname = "-async"
 	}
-	snullable := ""
-	switch lang.name {
-	case "csharp":
-		snullable = "?"
-	}
-	switch NameFromFunc(fnc) {
-	case "vx/core/any<-any", "vx/core/any<-any-async",
-		"vx/core/any<-any-context", "vx/core/any<-any-context-async",
-		"vx/core/any<-any-key-value", "vx/core/any<-any-key-value-async",
-		"vx/core/any<-int", "vx/core/any<-int-any",
-		"vx/core/any<-func", "vx/core/any<-func-async",
-		"vx/core/any<-none", "vx/core/any<-none-async",
-		"vx/core/any<-key-value", "vx/core/any<-key-value-async",
-		"vx/core/any<-reduce", "vx/core/any<-reduce-async",
-		"vx/core/any<-reduce-next", "vx/core/any<-reduce-next-async",
-		"vx/core/boolean<-any":
-		ifn = LangFuncClassFull(lang, fnc) + lang.typeref + "IFn"
-		if !isinterface {
-			switch lang.name {
-			case "kotlin":
-				vars += "" +
-					"\n    var fn : " + ifn + " = null" +
-					"\n"
-			default:
-				vars += "" +
-					"\n    public " + ifn + snullable + " fn = null" + lang.lineend +
-					"\n"
+	/*
+		switch NameFromFunc(fnc) {
+		case "vx/core/any<-any", "vx/core/any<-any-async",
+			"vx/core/any<-any-context", "vx/core/any<-any-context-async",
+			"vx/core/any<-any-key-value", "vx/core/any<-any-key-value-async",
+			"vx/core/any<-int", "vx/core/any<-int-any",
+			"vx/core/any<-func", "vx/core/any<-func-async",
+			"vx/core/any<-none", "vx/core/any<-none-async",
+			"vx/core/any<-key-value", "vx/core/any<-key-value-async",
+			"vx/core/any<-reduce", "vx/core/any<-reduce-async",
+			"vx/core/any<-reduce-next", "vx/core/any<-reduce-next-async",
+			"vx/core/boolean<-any":
+			ifn = LangFuncClassFull(lang, fnc) + lang.typeref + "IFn"
+			if !isinterface {
+				switch lang.name {
+				case "csharp":
+					vars += "" +
+						"\n    public " + ifn + "? fn = null" + lang.lineend +
+						"\n"
+				case "kotlin":
+					vars += "" +
+						"\n    var fn : " + ifn + "? = null" +
+						"\n"
+				default:
+					vars += "" +
+						"\n    public " + ifn + " fn = null" + lang.lineend +
+						"\n"
+				}
+				body = "" +
+					LangValClass(lang, "output", typefunc, 3, ":new") +
+					"\n      output.fn = fn" + lang.lineend +
+					"\n      return output" + lang.lineend
 			}
-			body = "" +
-				LangValClass(lang, "output", typefunc, 3, ":new") +
-				"\n      output.fn = fn" + lang.lineend +
-				"\n      return output" + lang.lineend
-		}
-	case "vx/core/boolean<-func", "vx/core/boolean<-none",
-		"vx/core/int<-func", "vx/core/int<-none",
-		"vx/core/string<-func", "vx/core/string<-none":
-		ifn = LangPkgNameDot(lang, "vx/core") + "Class_any_from_func" + lang.typeref + "IFn" + snullable
+		case "vx/core/boolean<-func", "vx/core/boolean<-none",
+			"vx/core/int<-func", "vx/core/int<-none",
+			"vx/core/string<-func", "vx/core/string<-none":
+			ifn = LangPkgNameDot(lang, "vx/core") + "Class_any_from_func" + lang.typeref + "IFn"
+			if !isinterface {
+				switch lang.name {
+				case "csharp":
+					vars += "" +
+						"\n    public " + ifn + "? fn = null" + lang.lineend +
+						"\n"
+				case "kotlin":
+					vars += "" +
+						"\n    var fn : " + ifn + "? = null" +
+						"\n"
+				default:
+					vars += "" +
+						"\n    public " + ifn + " fn = null" + lang.lineend +
+						"\n"
+				}
+				body = "" +
+					LangValClass(lang, "output", typefunc, 3, ":new") +
+					"\n      output.fn = fn" + lang.lineend +
+					"\n      return output" + lang.lineend
+			}
+		default:
+	*/
+	ifntype := LangFuncIFnType(lang, fnc)
+	ifn := ""
+	if ifntype != emptytype {
+		ifn = LangTypeClass(lang, ifntype)
 		if !isinterface {
 			switch lang.name {
+			case "csharp":
+				vars += "" +
+					"\n    public " + ifn + "? fn = null" + lang.lineend +
+					"\n"
 			case "kotlin":
 				vars += "" +
-					"\n    var fn : " + ifn + " = null" +
+					"\n    var fn : " + ifn + "? = null" +
 					"\n"
 			default:
 				vars += "" +
@@ -1463,7 +1524,7 @@ func LangFuncVxFnNew(lang *vxlang, fnc *vxfunc, isinterface bool) string {
 				"\n      output.fn = fn" + lang.lineend +
 				"\n      return output" + lang.lineend
 		}
-	default:
+	} else {
 		switch NameFromType(fnc.vxtype) {
 		case "vx/core/none":
 		default:
@@ -1722,15 +1783,17 @@ func LangFuncVxFunc(
 		} else {
 			resolve := ""
 			switch lang.name {
-			case "java":
-				resolve = "fn.resolve(" + strings.Join(listargname, ", ") + ")"
+			case "java", "kotlin":
+				resolve = "fnlocal.resolve(" + strings.Join(listargname, ", ") + ")"
 			default:
-				resolve = "fn(" + strings.Join(listargname, ", ") + ")"
+				resolve = "fnlocal(" + strings.Join(listargname, ", ") + ")"
 			}
+			fntype := LangFuncIFnType(lang, fnc)
 			if fnc.async {
 				body = "" +
 					LangVarFutureGeneric(lang, "output", returntype, 3, "") +
-					"\n      if (fn == null) {" +
+					LangVarClassNullable(lang, "fnlocal", fntype, 3, "this.fn") +
+					"\n      if (fnlocal == null) {" +
 					LangVarSet(lang, "output", 4,
 						LangPkgNameDot(lang, "vx/core")+
 							"vx_async_new_from_value("+
@@ -1748,7 +1811,8 @@ func LangFuncVxFunc(
 					body = "" +
 						LangVar(lang, "output", booleantype, 3,
 							LangPkgNameDot(lang, "vx/core")+"c_false") +
-						"\n      if (fn != null) {" +
+						LangVarClassNullable(lang, "fnlocal", fntype, 3, "this.fn") +
+						"\n      if (fnlocal != null) {" +
 						LangVar(lang, "anyoutput", anytype, 4, resolve) +
 						LangVarSet(lang, "output", 4,
 							LangPkgNameDot(lang, "vx/core")+
@@ -1759,7 +1823,8 @@ func LangFuncVxFunc(
 				} else if BooleanFromStringStarts(fnc.name, "int<-") {
 					body = "" +
 						LangVar(lang, "output", inttype, 3, LangTypeE(lang, inttype)) +
-						"\n      if (fn != null) {" +
+						LangVarClassNullable(lang, "fnlocal", fntype, 3, "this.fn") +
+						"\n      if (fnlocal != null) {" +
 						LangVar(lang, "anyoutput", anytype, 4, resolve) +
 						LangVarSet(lang, "output", 4,
 							LangPkgNameDot(lang, "vx/core")+
@@ -1771,7 +1836,8 @@ func LangFuncVxFunc(
 					body = "" +
 						LangVar(lang, "output", stringtype, 3,
 							LangTypeE(lang, stringtype)) +
-						"\n      if (fn != null) {" +
+						LangVarClassNullable(lang, "fnlocal", fntype, 3, "this.fn") +
+						"\n      if (fnlocal != null) {" +
 						LangVar(lang, "anyoutput", anytype, 4, resolve) +
 						LangVarSet(lang, "output", 4,
 							LangPkgNameDot(lang, "vx/core")+
@@ -1783,7 +1849,8 @@ func LangFuncVxFunc(
 					body = "" +
 						LangVarGeneric(lang, "output", anytype1, 3,
 							LangPkgNameDot(lang, "vx/core")+"f_empty(generic_any_1)") +
-						"\n      if (fn != null) {" +
+						LangVarClassNullable(lang, "fnlocal", fntype, 3, "this.fn") +
+						"\n      if (fnlocal != null) {" +
 						LangVar(lang, "anyoutput", anytype, 4, resolve) +
 						LangVarSet(lang, "output", 4,
 							LangPkgNameDot(lang, "vx/core")+"f_any_from_any(generic_any_1, anyoutput)") +

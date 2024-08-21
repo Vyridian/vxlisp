@@ -623,7 +623,8 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   }
 
   // vx_msg_from_error
-  public static Type_msg vx_msg_from_error(final String text) {
+  public static Type_msg vx_msg_from_error(
+    final String text) {
     Class_msg output = new Class_msg();
     output.vx_p_text = Core.vx_new_string(text);
     output.vx_p_severity = Core.c_msg_severe;
@@ -631,7 +632,10 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   }
 
   // vx_msg_from_error
-  public static Type_msg vx_msg_from_error(final String path, final String code, final Core.Type_any detail) {
+  public static Type_msg vx_msg_from_error(
+    final String path,
+    final String code,
+    final Core.Type_any detail) {
     Class_msg output = new Class_msg();
     output.vx_p_path = Core.vx_new_string(path);
     output.vx_p_code = Core.vx_new_string(code);
@@ -641,7 +645,9 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   }
 
   // vx_msg_from_exception
-  public static Type_msg vx_msg_from_exception(final String path, final Exception err) {
+  public static Type_msg vx_msg_from_exception(
+    final String path,
+    final Exception err) {
     Class_msg output = new Class_msg();
     output.vx_p_path = Core.vx_new_string(path);
     output.vx_p_code = Core.vx_new_string("exception");
@@ -652,7 +658,9 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   }
 
   // vx_msgblock_from_copy_arrayval(msgblock, any...)
-  public static Core.Type_msgblock vx_msgblock_from_copy_arrayval(final Core.Type_any copy, final Object... vals) {
+  public static Core.Type_msgblock vx_msgblock_from_copy_arrayval(
+    final Core.Type_any copy,
+    final Object... vals) {
     Core.Type_msgblock output = Core.e_msgblock;
     Core.Type_msgblock copymsgblock = copy.vx_msgblock();
     if (copymsgblock != Core.e_msgblock) {
@@ -695,18 +703,21 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     return output;
   }
 
-  public static Type_anylist vx_new_anylist(Core.Type_any... anys) {
+  public static Type_anylist vx_new_anylist(
+    Core.Type_any... anys) {
     List<Core.Type_any> listany = new ArrayList<>(Arrays.asList(anys));
     return vx_new_anylist(listany);
   }
 
-  public static Type_anylist vx_new_anylist(List<Type_any> listany) {
+  public static Type_anylist vx_new_anylist(
+    List<Type_any> listany) {
     Class_anylist output = new Class_anylist();
     output.vx_p_list = immutablelist(listany);
     return output;
   }
 
-  public static Type_boolean vx_new_boolean(final boolean isval) {
+  public static Type_boolean vx_new_boolean(
+    final boolean isval) {
     Type_boolean output = Core.c_false;
     if (isval) {
       output = Core.c_true;
@@ -714,13 +725,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     return output;
   }
 
-  public static Type_float vx_new_float(final float fval) {
+  public static Type_float vx_new_float(
+    final float fval) {
     Class_float output = new Core.Class_float();
     output.vxfloat = fval;
     return output;
   }
 
-  public static Type_int vx_new_int(final int ival) {
+  public static Type_int vx_new_int(
+    final int ival) {
     Type_int output;
     if ((ival == 0) && Core.e_int != null) {
       output = Core.e_int;
@@ -734,20 +747,25 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   }
 
   // vx_new_list(T, List<any>)
-  public static <T extends Core.Type_list> T vx_new_list(T generic_list_1, List<Core.Type_any> listval) {
+  public static <T extends Core.Type_list> T vx_new_list(
+    T generic_list_1,
+    List<Core.Type_any> listval) {
     Core.Type_any anylist = generic_list_1.vx_new(listval);
     T output = Core.f_any_from_any(generic_list_1, anylist);
     return output;
   }
 
   // vx_new_map(T, Map<string, any>)
-  public static <T extends Core.Type_map> T vx_new_map(T generic_map_1, Map<String, Core.Type_any> mapval) {
+  public static <T extends Core.Type_map> T vx_new_map(
+    T generic_map_1,
+    Map<String, Core.Type_any> mapval) {
     Core.Type_any anymap = generic_map_1.vx_new(mapval);
     T output = Core.f_any_from_any(generic_map_1, anymap);
     return output;
   }
 
-  public static Type_string vx_new_string(final String text) {
+  public static Type_string vx_new_string(
+    final String text) {
     Type_string output;
     if (text.equals("") && Core.e_string != null) {
       output = Core.e_string;
@@ -759,11 +777,15 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     return output;
   }
 
-  public static String vx_string_from_any(Core.Type_any value) {
+  public static String vx_string_from_any(
+    Core.Type_any value) {
     return vx_string_from_any_indent(value, 0, false);
   }
 
-  public static String vx_string_from_any_indent(Core.Type_any value, int indent, boolean linefeed) {
+  public static String vx_string_from_any_indent(
+    Core.Type_any value,
+    int indent,
+    boolean linefeed) {
     String indenttext = " ".repeat(indent);
     String output = "";
     if (indent > 50) {

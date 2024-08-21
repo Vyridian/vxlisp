@@ -141,10 +141,11 @@ public static class TestLib {
 
   public static bool test_write_file() {
     string testname = "test_write_file";
-    Vx.Data.File.Type_file file = Vx.Core.vx_new(Vx.Data.File.t_file, 
-    Vx.Core.vx_new_string(":path"), Vx.Core.vx_new_string(spath + "/vx"),
-    Vx.Core.vx_new_string(":name"), Vx.Core.vx_new_string("string_read_from_file.txt")
-  );
+    Vx.Data.File.Type_file file = Vx.Core.vx_new(
+      Vx.Data.File.t_file, 
+      Vx.Core.vx_new_string(":path"), Vx.Core.vx_new_string(spath + "/vx"),
+      Vx.Core.vx_new_string(":name"), Vx.Core.vx_new_string("string_read_from_file.txt")
+    );
     Vx.Core.Type_string string_path = Vx.Data.File.f_pathfull_from_file(file);
     string expected = spath + "/vx/string_read_from_file.txt";
     string actual = string_path.vx_string();
@@ -227,14 +228,11 @@ public static class TestLib {
   				System.Console.WriteLine(actual);
       Vx.Core.f_log(testresult);
 		  }
-  		switch (code) {
-		  case ":ne":
+    if ((code==":ne")) {
 	  			Assert.NotEqual(expected, actual);
-  				break;
-  		default:
+    } else {
   				Assert.Equal(expected, actual);
-  				break;
-  		}
+    }
     bool output = true;
     return output;
   }

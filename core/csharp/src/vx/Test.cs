@@ -21,8 +21,9 @@ public static class Test {
 
     public Vx.Core.Type_boolean passfail() {
       Vx.Core.Type_boolean output = Vx.Core.e_boolean;
-      if (this.vx_p_passfail != null) {
-        output = this.vx_p_passfail;
+      Vx.Core.Type_boolean? testnull = vx_p_passfail;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -31,8 +32,9 @@ public static class Test {
 
     public Vx.Core.Type_string testpkg() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_testpkg != null) {
-        output = this.vx_p_testpkg;
+      Vx.Core.Type_string? testnull = vx_p_testpkg;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -41,8 +43,9 @@ public static class Test {
 
     public Vx.Core.Type_string casename() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_casename != null) {
-        output = this.vx_p_casename;
+      Vx.Core.Type_string? testnull = vx_p_casename;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -51,8 +54,9 @@ public static class Test {
 
     public Vx.Test.Type_testdescribelist describelist() {
       Vx.Test.Type_testdescribelist output = Vx.Test.e_testdescribelist;
-      if (this.vx_p_describelist != null) {
-        output = this.vx_p_describelist;
+      Vx.Test.Type_testdescribelist? testnull = vx_p_describelist;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -60,30 +64,26 @@ public static class Test {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":passfail":
+      if (false) {
+      } else if ((skey==":passfail")) {
         output = this.passfail();
-        break;
-      case ":testpkg":
+      } else if ((skey==":testpkg")) {
         output = this.testpkg();
-        break;
-      case ":casename":
+      } else if ((skey==":casename")) {
         output = this.casename();
-        break;
-      case ":describelist":
+      } else if ((skey==":describelist")) {
         output = this.describelist();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":passfail", this.passfail());
-      output.put(":testpkg", this.testpkg());
-      output.put(":casename", this.casename());
-      output.put(":describelist", this.describelist());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":passfail", this.passfail());
+      map.put(":testpkg", this.testpkg());
+      map.put(":casename", this.casename());
+      map.put(":describelist", this.describelist());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -110,8 +110,8 @@ public static class Test {
       validkeys.Add(":casename");
       validkeys.Add(":describelist");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -151,8 +151,8 @@ public static class Test {
             }
           }
         } else {
-          switch (key) {
-          case ":passfail":
+          if (false) {
+          } else if ((key==":passfail")) {
             if (valsub == vx_p_passfail) {
             } else if (valsub is Vx.Core.Type_boolean valpassfail) {
               ischanged = true;
@@ -174,8 +174,7 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testcase", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":testpkg":
+          } else if ((key==":testpkg")) {
             if (valsub == vx_p_testpkg) {
             } else if (valsub is Vx.Core.Type_string valtestpkg) {
               ischanged = true;
@@ -197,8 +196,7 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testcase", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":casename":
+          } else if ((key==":casename")) {
             if (valsub == vx_p_casename) {
             } else if (valsub is Vx.Core.Type_string valcasename) {
               ischanged = true;
@@ -220,8 +218,7 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testcase", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":describelist":
+          } else if ((key==":describelist")) {
             if (valsub == vx_p_describelist) {
             } else if (valsub is Vx.Test.Type_testdescribelist valdescribelist) {
               ischanged = true;
@@ -240,12 +237,10 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testcase", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/test/testcase", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -446,8 +441,9 @@ public static class Test {
 
     public Vx.Core.Type_intmap constmap() {
       Vx.Core.Type_intmap output = Vx.Core.e_intmap;
-      if (this.vx_p_constmap != null) {
-        output = this.vx_p_constmap;
+      Vx.Core.Type_intmap? testnull = vx_p_constmap;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -456,8 +452,9 @@ public static class Test {
 
     public Vx.Core.Type_intmap funcmap() {
       Vx.Core.Type_intmap output = Vx.Core.e_intmap;
-      if (this.vx_p_funcmap != null) {
-        output = this.vx_p_funcmap;
+      Vx.Core.Type_intmap? testnull = vx_p_funcmap;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -466,8 +463,9 @@ public static class Test {
 
     public Vx.Core.Type_string testpkg() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_testpkg != null) {
-        output = this.vx_p_testpkg;
+      Vx.Core.Type_string? testnull = vx_p_testpkg;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -476,8 +474,9 @@ public static class Test {
 
     public Vx.Core.Type_intmap typemap() {
       Vx.Core.Type_intmap output = Vx.Core.e_intmap;
-      if (this.vx_p_typemap != null) {
-        output = this.vx_p_typemap;
+      Vx.Core.Type_intmap? testnull = vx_p_typemap;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -485,30 +484,26 @@ public static class Test {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":constmap":
+      if (false) {
+      } else if ((skey==":constmap")) {
         output = this.constmap();
-        break;
-      case ":funcmap":
+      } else if ((skey==":funcmap")) {
         output = this.funcmap();
-        break;
-      case ":testpkg":
+      } else if ((skey==":testpkg")) {
         output = this.testpkg();
-        break;
-      case ":typemap":
+      } else if ((skey==":typemap")) {
         output = this.typemap();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":constmap", this.constmap());
-      output.put(":funcmap", this.funcmap());
-      output.put(":testpkg", this.testpkg());
-      output.put(":typemap", this.typemap());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":constmap", this.constmap());
+      map.put(":funcmap", this.funcmap());
+      map.put(":testpkg", this.testpkg());
+      map.put(":typemap", this.typemap());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -535,8 +530,8 @@ public static class Test {
       validkeys.Add(":testpkg");
       validkeys.Add(":typemap");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -576,8 +571,8 @@ public static class Test {
             }
           }
         } else {
-          switch (key) {
-          case ":constmap":
+          if (false) {
+          } else if ((key==":constmap")) {
             if (valsub == vx_p_constmap) {
             } else if (valsub is Vx.Core.Type_intmap valconstmap) {
               ischanged = true;
@@ -596,8 +591,7 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testcoveragedetail", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":funcmap":
+          } else if ((key==":funcmap")) {
             if (valsub == vx_p_funcmap) {
             } else if (valsub is Vx.Core.Type_intmap valfuncmap) {
               ischanged = true;
@@ -616,8 +610,7 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testcoveragedetail", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":testpkg":
+          } else if ((key==":testpkg")) {
             if (valsub == vx_p_testpkg) {
             } else if (valsub is Vx.Core.Type_string valtestpkg) {
               ischanged = true;
@@ -639,8 +632,7 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testcoveragedetail", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":typemap":
+          } else if ((key==":typemap")) {
             if (valsub == vx_p_typemap) {
             } else if (valsub is Vx.Core.Type_intmap valtypemap) {
               ischanged = true;
@@ -659,12 +651,10 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testcoveragedetail", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/test/testcoveragedetail", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -733,8 +723,9 @@ public static class Test {
 
     public Vx.Core.Type_int pct() {
       Vx.Core.Type_int output = Vx.Core.e_int;
-      if (this.vx_p_pct != null) {
-        output = this.vx_p_pct;
+      Vx.Core.Type_int? testnull = vx_p_pct;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -743,8 +734,9 @@ public static class Test {
 
     public Vx.Core.Type_string testpkg() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_testpkg != null) {
-        output = this.vx_p_testpkg;
+      Vx.Core.Type_string? testnull = vx_p_testpkg;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -753,8 +745,9 @@ public static class Test {
 
     public Vx.Core.Type_int tests() {
       Vx.Core.Type_int output = Vx.Core.e_int;
-      if (this.vx_p_tests != null) {
-        output = this.vx_p_tests;
+      Vx.Core.Type_int? testnull = vx_p_tests;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -763,8 +756,9 @@ public static class Test {
 
     public Vx.Core.Type_int total() {
       Vx.Core.Type_int output = Vx.Core.e_int;
-      if (this.vx_p_total != null) {
-        output = this.vx_p_total;
+      Vx.Core.Type_int? testnull = vx_p_total;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -772,30 +766,26 @@ public static class Test {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":pct":
+      if (false) {
+      } else if ((skey==":pct")) {
         output = this.pct();
-        break;
-      case ":testpkg":
+      } else if ((skey==":testpkg")) {
         output = this.testpkg();
-        break;
-      case ":tests":
+      } else if ((skey==":tests")) {
         output = this.tests();
-        break;
-      case ":total":
+      } else if ((skey==":total")) {
         output = this.total();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":pct", this.pct());
-      output.put(":testpkg", this.testpkg());
-      output.put(":tests", this.tests());
-      output.put(":total", this.total());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":pct", this.pct());
+      map.put(":testpkg", this.testpkg());
+      map.put(":tests", this.tests());
+      map.put(":total", this.total());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -822,8 +812,8 @@ public static class Test {
       validkeys.Add(":tests");
       validkeys.Add(":total");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -863,8 +853,8 @@ public static class Test {
             }
           }
         } else {
-          switch (key) {
-          case ":pct":
+          if (false) {
+          } else if ((key==":pct")) {
             if (valsub == vx_p_pct) {
             } else if (valsub is Vx.Core.Type_int valpct) {
               ischanged = true;
@@ -886,8 +876,7 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testcoveragenums", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":testpkg":
+          } else if ((key==":testpkg")) {
             if (valsub == vx_p_testpkg) {
             } else if (valsub is Vx.Core.Type_string valtestpkg) {
               ischanged = true;
@@ -909,8 +898,7 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testcoveragenums", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":tests":
+          } else if ((key==":tests")) {
             if (valsub == vx_p_tests) {
             } else if (valsub is Vx.Core.Type_int valtests) {
               ischanged = true;
@@ -932,8 +920,7 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testcoveragenums", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":total":
+          } else if ((key==":total")) {
             if (valsub == vx_p_total) {
             } else if (valsub is Vx.Core.Type_int valtotal) {
               ischanged = true;
@@ -955,12 +942,10 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testcoveragenums", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/test/testcoveragenums", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -1033,8 +1018,9 @@ public static class Test {
 
     public Vx.Test.Type_testcoveragenums bigospacenums() {
       Vx.Test.Type_testcoveragenums output = Vx.Test.e_testcoveragenums;
-      if (this.vx_p_bigospacenums != null) {
-        output = this.vx_p_bigospacenums;
+      Vx.Test.Type_testcoveragenums? testnull = vx_p_bigospacenums;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1043,8 +1029,9 @@ public static class Test {
 
     public Vx.Test.Type_testcoveragenums bigotimenums() {
       Vx.Test.Type_testcoveragenums output = Vx.Test.e_testcoveragenums;
-      if (this.vx_p_bigotimenums != null) {
-        output = this.vx_p_bigotimenums;
+      Vx.Test.Type_testcoveragenums? testnull = vx_p_bigotimenums;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1053,8 +1040,9 @@ public static class Test {
 
     public Vx.Test.Type_testcoveragenums constnums() {
       Vx.Test.Type_testcoveragenums output = Vx.Test.e_testcoveragenums;
-      if (this.vx_p_constnums != null) {
-        output = this.vx_p_constnums;
+      Vx.Test.Type_testcoveragenums? testnull = vx_p_constnums;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1063,8 +1051,9 @@ public static class Test {
 
     public Vx.Test.Type_testcoveragenums docnums() {
       Vx.Test.Type_testcoveragenums output = Vx.Test.e_testcoveragenums;
-      if (this.vx_p_docnums != null) {
-        output = this.vx_p_docnums;
+      Vx.Test.Type_testcoveragenums? testnull = vx_p_docnums;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1073,8 +1062,9 @@ public static class Test {
 
     public Vx.Test.Type_testcoveragenums funcnums() {
       Vx.Test.Type_testcoveragenums output = Vx.Test.e_testcoveragenums;
-      if (this.vx_p_funcnums != null) {
-        output = this.vx_p_funcnums;
+      Vx.Test.Type_testcoveragenums? testnull = vx_p_funcnums;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1083,8 +1073,9 @@ public static class Test {
 
     public Vx.Core.Type_string testpkg() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_testpkg != null) {
-        output = this.vx_p_testpkg;
+      Vx.Core.Type_string? testnull = vx_p_testpkg;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1093,8 +1084,9 @@ public static class Test {
 
     public Vx.Test.Type_testcoveragenums totalnums() {
       Vx.Test.Type_testcoveragenums output = Vx.Test.e_testcoveragenums;
-      if (this.vx_p_totalnums != null) {
-        output = this.vx_p_totalnums;
+      Vx.Test.Type_testcoveragenums? testnull = vx_p_totalnums;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1103,8 +1095,9 @@ public static class Test {
 
     public Vx.Test.Type_testcoveragenums typenums() {
       Vx.Test.Type_testcoveragenums output = Vx.Test.e_testcoveragenums;
-      if (this.vx_p_typenums != null) {
-        output = this.vx_p_typenums;
+      Vx.Test.Type_testcoveragenums? testnull = vx_p_typenums;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1112,46 +1105,38 @@ public static class Test {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":bigospacenums":
+      if (false) {
+      } else if ((skey==":bigospacenums")) {
         output = this.bigospacenums();
-        break;
-      case ":bigotimenums":
+      } else if ((skey==":bigotimenums")) {
         output = this.bigotimenums();
-        break;
-      case ":constnums":
+      } else if ((skey==":constnums")) {
         output = this.constnums();
-        break;
-      case ":docnums":
+      } else if ((skey==":docnums")) {
         output = this.docnums();
-        break;
-      case ":funcnums":
+      } else if ((skey==":funcnums")) {
         output = this.funcnums();
-        break;
-      case ":testpkg":
+      } else if ((skey==":testpkg")) {
         output = this.testpkg();
-        break;
-      case ":totalnums":
+      } else if ((skey==":totalnums")) {
         output = this.totalnums();
-        break;
-      case ":typenums":
+      } else if ((skey==":typenums")) {
         output = this.typenums();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":bigospacenums", this.bigospacenums());
-      output.put(":bigotimenums", this.bigotimenums());
-      output.put(":constnums", this.constnums());
-      output.put(":docnums", this.docnums());
-      output.put(":funcnums", this.funcnums());
-      output.put(":testpkg", this.testpkg());
-      output.put(":totalnums", this.totalnums());
-      output.put(":typenums", this.typenums());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":bigospacenums", this.bigospacenums());
+      map.put(":bigotimenums", this.bigotimenums());
+      map.put(":constnums", this.constnums());
+      map.put(":docnums", this.docnums());
+      map.put(":funcnums", this.funcnums());
+      map.put(":testpkg", this.testpkg());
+      map.put(":totalnums", this.totalnums());
+      map.put(":typenums", this.typenums());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -1186,8 +1171,8 @@ public static class Test {
       validkeys.Add(":totalnums");
       validkeys.Add(":typenums");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -1227,8 +1212,8 @@ public static class Test {
             }
           }
         } else {
-          switch (key) {
-          case ":bigospacenums":
+          if (false) {
+          } else if ((key==":bigospacenums")) {
             if (valsub == vx_p_bigospacenums) {
             } else if (valsub is Vx.Test.Type_testcoveragenums valbigospacenums) {
               ischanged = true;
@@ -1247,8 +1232,7 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":bigotimenums":
+          } else if ((key==":bigotimenums")) {
             if (valsub == vx_p_bigotimenums) {
             } else if (valsub is Vx.Test.Type_testcoveragenums valbigotimenums) {
               ischanged = true;
@@ -1267,8 +1251,7 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":constnums":
+          } else if ((key==":constnums")) {
             if (valsub == vx_p_constnums) {
             } else if (valsub is Vx.Test.Type_testcoveragenums valconstnums) {
               ischanged = true;
@@ -1287,8 +1270,7 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":docnums":
+          } else if ((key==":docnums")) {
             if (valsub == vx_p_docnums) {
             } else if (valsub is Vx.Test.Type_testcoveragenums valdocnums) {
               ischanged = true;
@@ -1307,8 +1289,7 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":funcnums":
+          } else if ((key==":funcnums")) {
             if (valsub == vx_p_funcnums) {
             } else if (valsub is Vx.Test.Type_testcoveragenums valfuncnums) {
               ischanged = true;
@@ -1327,8 +1308,7 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":testpkg":
+          } else if ((key==":testpkg")) {
             if (valsub == vx_p_testpkg) {
             } else if (valsub is Vx.Core.Type_string valtestpkg) {
               ischanged = true;
@@ -1350,8 +1330,7 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":totalnums":
+          } else if ((key==":totalnums")) {
             if (valsub == vx_p_totalnums) {
             } else if (valsub is Vx.Test.Type_testcoveragenums valtotalnums) {
               ischanged = true;
@@ -1370,8 +1349,7 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":typenums":
+          } else if ((key==":typenums")) {
             if (valsub == vx_p_typenums) {
             } else if (valsub is Vx.Test.Type_testcoveragenums valtypenums) {
               ischanged = true;
@@ -1390,12 +1368,10 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -1467,8 +1443,9 @@ public static class Test {
 
     public Vx.Core.Type_string describename() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_describename != null) {
-        output = this.vx_p_describename;
+      Vx.Core.Type_string? testnull = vx_p_describename;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1477,8 +1454,9 @@ public static class Test {
 
     public Vx.Core.Type_string testpkg() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_testpkg != null) {
-        output = this.vx_p_testpkg;
+      Vx.Core.Type_string? testnull = vx_p_testpkg;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1487,8 +1465,9 @@ public static class Test {
 
     public Vx.Test.Type_testresult testresult() {
       Vx.Test.Type_testresult output = Vx.Test.e_testresult;
-      if (this.vx_p_testresult != null) {
-        output = this.vx_p_testresult;
+      Vx.Test.Type_testresult? testnull = vx_p_testresult;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1496,26 +1475,23 @@ public static class Test {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":describename":
+      if (false) {
+      } else if ((skey==":describename")) {
         output = this.describename();
-        break;
-      case ":testpkg":
+      } else if ((skey==":testpkg")) {
         output = this.testpkg();
-        break;
-      case ":testresult":
+      } else if ((skey==":testresult")) {
         output = this.testresult();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":describename", this.describename());
-      output.put(":testpkg", this.testpkg());
-      output.put(":testresult", this.testresult());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":describename", this.describename());
+      map.put(":testpkg", this.testpkg());
+      map.put(":testresult", this.testresult());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -1540,8 +1516,8 @@ public static class Test {
       validkeys.Add(":testpkg");
       validkeys.Add(":testresult");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -1581,8 +1557,8 @@ public static class Test {
             }
           }
         } else {
-          switch (key) {
-          case ":describename":
+          if (false) {
+          } else if ((key==":describename")) {
             if (valsub == vx_p_describename) {
             } else if (valsub is Vx.Core.Type_string valdescribename) {
               ischanged = true;
@@ -1604,8 +1580,7 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testdescribe", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":testpkg":
+          } else if ((key==":testpkg")) {
             if (valsub == vx_p_testpkg) {
             } else if (valsub is Vx.Core.Type_string valtestpkg) {
               ischanged = true;
@@ -1627,8 +1602,7 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testdescribe", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":testresult":
+          } else if ((key==":testresult")) {
             if (valsub == vx_p_testresult) {
             } else if (valsub is Vx.Test.Type_testresult valtestresult) {
               ischanged = true;
@@ -1647,12 +1621,10 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testdescribe", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/test/testdescribe", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -1853,8 +1825,9 @@ public static class Test {
 
     public Vx.Test.Type_testcaselist caselist() {
       Vx.Test.Type_testcaselist output = Vx.Test.e_testcaselist;
-      if (this.vx_p_caselist != null) {
-        output = this.vx_p_caselist;
+      Vx.Test.Type_testcaselist? testnull = vx_p_caselist;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1863,8 +1836,9 @@ public static class Test {
 
     public Vx.Test.Type_testcoveragedetail coveragedetail() {
       Vx.Test.Type_testcoveragedetail output = Vx.Test.e_testcoveragedetail;
-      if (this.vx_p_coveragedetail != null) {
-        output = this.vx_p_coveragedetail;
+      Vx.Test.Type_testcoveragedetail? testnull = vx_p_coveragedetail;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1873,8 +1847,9 @@ public static class Test {
 
     public Vx.Test.Type_testcoveragesummary coveragesummary() {
       Vx.Test.Type_testcoveragesummary output = Vx.Test.e_testcoveragesummary;
-      if (this.vx_p_coveragesummary != null) {
-        output = this.vx_p_coveragesummary;
+      Vx.Test.Type_testcoveragesummary? testnull = vx_p_coveragesummary;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1883,8 +1858,9 @@ public static class Test {
 
     public Vx.Core.Type_boolean passfail() {
       Vx.Core.Type_boolean output = Vx.Core.e_boolean;
-      if (this.vx_p_passfail != null) {
-        output = this.vx_p_passfail;
+      Vx.Core.Type_boolean? testnull = vx_p_passfail;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1893,8 +1869,9 @@ public static class Test {
 
     public Vx.Core.Type_string testpkg() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_testpkg != null) {
-        output = this.vx_p_testpkg;
+      Vx.Core.Type_string? testnull = vx_p_testpkg;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1902,34 +1879,29 @@ public static class Test {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":caselist":
+      if (false) {
+      } else if ((skey==":caselist")) {
         output = this.caselist();
-        break;
-      case ":coveragedetail":
+      } else if ((skey==":coveragedetail")) {
         output = this.coveragedetail();
-        break;
-      case ":coveragesummary":
+      } else if ((skey==":coveragesummary")) {
         output = this.coveragesummary();
-        break;
-      case ":passfail":
+      } else if ((skey==":passfail")) {
         output = this.passfail();
-        break;
-      case ":testpkg":
+      } else if ((skey==":testpkg")) {
         output = this.testpkg();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":caselist", this.caselist());
-      output.put(":coveragedetail", this.coveragedetail());
-      output.put(":coveragesummary", this.coveragesummary());
-      output.put(":passfail", this.passfail());
-      output.put(":testpkg", this.testpkg());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":caselist", this.caselist());
+      map.put(":coveragedetail", this.coveragedetail());
+      map.put(":coveragesummary", this.coveragesummary());
+      map.put(":passfail", this.passfail());
+      map.put(":testpkg", this.testpkg());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -1958,8 +1930,8 @@ public static class Test {
       validkeys.Add(":passfail");
       validkeys.Add(":testpkg");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -1999,8 +1971,8 @@ public static class Test {
             }
           }
         } else {
-          switch (key) {
-          case ":caselist":
+          if (false) {
+          } else if ((key==":caselist")) {
             if (valsub == vx_p_caselist) {
             } else if (valsub is Vx.Test.Type_testcaselist valcaselist) {
               ischanged = true;
@@ -2019,8 +1991,7 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testpackage", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":coveragedetail":
+          } else if ((key==":coveragedetail")) {
             if (valsub == vx_p_coveragedetail) {
             } else if (valsub is Vx.Test.Type_testcoveragedetail valcoveragedetail) {
               ischanged = true;
@@ -2039,8 +2010,7 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testpackage", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":coveragesummary":
+          } else if ((key==":coveragesummary")) {
             if (valsub == vx_p_coveragesummary) {
             } else if (valsub is Vx.Test.Type_testcoveragesummary valcoveragesummary) {
               ischanged = true;
@@ -2059,8 +2029,7 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testpackage", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":passfail":
+          } else if ((key==":passfail")) {
             if (valsub == vx_p_passfail) {
             } else if (valsub is Vx.Core.Type_boolean valpassfail) {
               ischanged = true;
@@ -2082,8 +2051,7 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testpackage", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":testpkg":
+          } else if ((key==":testpkg")) {
             if (valsub == vx_p_testpkg) {
             } else if (valsub is Vx.Core.Type_string valtestpkg) {
               ischanged = true;
@@ -2105,12 +2073,10 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testpackage", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/test/testpackage", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -2313,8 +2279,9 @@ public static class Test {
 
     public Vx.Core.Type_string code() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_code != null) {
-        output = this.vx_p_code;
+      Vx.Core.Type_string? testnull = vx_p_code;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2323,8 +2290,9 @@ public static class Test {
 
     public Vx.Core.Type_boolean passfail() {
       Vx.Core.Type_boolean output = Vx.Core.e_boolean;
-      if (this.vx_p_passfail != null) {
-        output = this.vx_p_passfail;
+      Vx.Core.Type_boolean? testnull = vx_p_passfail;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2333,8 +2301,9 @@ public static class Test {
 
     public Vx.Core.Type_any expected() {
       Vx.Core.Type_any output = Vx.Core.e_any;
-      if (this.vx_p_expected != null) {
-        output = this.vx_p_expected;
+      Vx.Core.Type_any? testnull = vx_p_expected;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2343,8 +2312,9 @@ public static class Test {
 
     public Vx.Core.Type_any actual() {
       Vx.Core.Type_any output = Vx.Core.e_any;
-      if (this.vx_p_actual != null) {
-        output = this.vx_p_actual;
+      Vx.Core.Type_any? testnull = vx_p_actual;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2353,8 +2323,9 @@ public static class Test {
 
     public Vx.Core.Func_any_from_func_async fn_actual() {
       Vx.Core.Func_any_from_func_async output = Vx.Core.e_any_from_func_async;
-      if (this.vx_p_fn_actual != null) {
-        output = this.vx_p_fn_actual;
+      Vx.Core.Func_any_from_func_async? testnull = vx_p_fn_actual;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2362,34 +2333,29 @@ public static class Test {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":code":
+      if (false) {
+      } else if ((skey==":code")) {
         output = this.code();
-        break;
-      case ":passfail":
+      } else if ((skey==":passfail")) {
         output = this.passfail();
-        break;
-      case ":expected":
+      } else if ((skey==":expected")) {
         output = this.expected();
-        break;
-      case ":actual":
+      } else if ((skey==":actual")) {
         output = this.actual();
-        break;
-      case ":fn-actual":
+      } else if ((skey==":fn-actual")) {
         output = this.fn_actual();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":code", this.code());
-      output.put(":passfail", this.passfail());
-      output.put(":expected", this.expected());
-      output.put(":actual", this.actual());
-      output.put(":fn-actual", this.fn_actual());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":code", this.code());
+      map.put(":passfail", this.passfail());
+      map.put(":expected", this.expected());
+      map.put(":actual", this.actual());
+      map.put(":fn-actual", this.fn_actual());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -2418,8 +2384,8 @@ public static class Test {
       validkeys.Add(":actual");
       validkeys.Add(":fn-actual");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -2459,8 +2425,8 @@ public static class Test {
             }
           }
         } else {
-          switch (key) {
-          case ":code":
+          if (false) {
+          } else if ((key==":code")) {
             if (valsub == vx_p_code) {
             } else if (valsub is Vx.Core.Type_string valcode) {
               ischanged = true;
@@ -2482,8 +2448,7 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testresult", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":passfail":
+          } else if ((key==":passfail")) {
             if (valsub == vx_p_passfail) {
             } else if (valsub is Vx.Core.Type_boolean valpassfail) {
               ischanged = true;
@@ -2505,8 +2470,7 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testresult", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":expected":
+          } else if ((key==":expected")) {
             if (valsub == vx_p_expected) {
             } else if (valsub is Vx.Core.Type_any valexpected) {
               ischanged = true;
@@ -2525,8 +2489,7 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testresult", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":actual":
+          } else if ((key==":actual")) {
             if (valsub == vx_p_actual) {
             } else if (valsub is Vx.Core.Type_any valactual) {
               ischanged = true;
@@ -2545,8 +2508,7 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testresult", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":fn-actual":
+          } else if ((key==":fn-actual")) {
             if (valsub == vx_p_fn_actual) {
             } else if (valsub is Vx.Core.Func_any_from_func_async valfn_actual) {
               ischanged = true;
@@ -2565,12 +2527,10 @@ public static class Test {
               msg = Vx.Core.vx_msg_from_error("vx/test/testresult", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/test/testresult", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }

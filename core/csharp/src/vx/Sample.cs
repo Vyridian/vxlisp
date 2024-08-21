@@ -18,8 +18,9 @@ public static class Sample {
 
     public Vx.Core.Type_int mynum() {
       Vx.Core.Type_int output = Vx.Core.e_int;
-      if (this.vx_p_mynum != null) {
-        output = this.vx_p_mynum;
+      Vx.Core.Type_int? testnull = vx_p_mynum;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -28,8 +29,9 @@ public static class Sample {
 
     public Vx.Core.Type_string mystr() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_mystr != null) {
-        output = this.vx_p_mystr;
+      Vx.Core.Type_string? testnull = vx_p_mystr;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -37,22 +39,20 @@ public static class Sample {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":mynum":
+      if (false) {
+      } else if ((skey==":mynum")) {
         output = this.mynum();
-        break;
-      case ":mystr":
+      } else if ((skey==":mystr")) {
         output = this.mystr();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":mynum", this.mynum());
-      output.put(":mystr", this.mystr());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":mynum", this.mynum());
+      map.put(":mystr", this.mystr());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -75,8 +75,8 @@ public static class Sample {
       validkeys.Add(":mynum");
       validkeys.Add(":mystr");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -116,8 +116,8 @@ public static class Sample {
             }
           }
         } else {
-          switch (key) {
-          case ":mynum":
+          if (false) {
+          } else if ((key==":mynum")) {
             if (valsub == vx_p_mynum) {
             } else if (valsub is Vx.Core.Type_int valmynum) {
               ischanged = true;
@@ -139,8 +139,7 @@ public static class Sample {
               msg = Vx.Core.vx_msg_from_error("vx/sample/mytype", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":mystr":
+          } else if ((key==":mystr")) {
             if (valsub == vx_p_mystr) {
             } else if (valsub is Vx.Core.Type_string valmystr) {
               ischanged = true;
@@ -162,12 +161,10 @@ public static class Sample {
               msg = Vx.Core.vx_msg_from_error("vx/sample/mytype", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/sample/mytype", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }

@@ -197,8 +197,9 @@ public static class Repl {
 
     public Vx.Core.Type_string name() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_name != null) {
-        output = this.vx_p_name;
+      Vx.Core.Type_string? testnull = vx_p_name;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -207,8 +208,9 @@ public static class Repl {
 
     public Vx.Core.Type_any type() {
       Vx.Core.Type_any output = Vx.Core.e_any;
-      if (this.vx_p_type != null) {
-        output = this.vx_p_type;
+      Vx.Core.Type_any? testnull = vx_p_type;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -217,8 +219,9 @@ public static class Repl {
 
     public Vx.Repl.Type_repllist repllist() {
       Vx.Repl.Type_repllist output = Vx.Repl.e_repllist;
-      if (this.vx_p_repllist != null) {
-        output = this.vx_p_repllist;
+      Vx.Repl.Type_repllist? testnull = vx_p_repllist;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -227,8 +230,9 @@ public static class Repl {
 
     public Vx.Core.Type_boolean async() {
       Vx.Core.Type_boolean output = Vx.Core.e_boolean;
-      if (this.vx_p_async != null) {
-        output = this.vx_p_async;
+      Vx.Core.Type_boolean? testnull = vx_p_async;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -237,8 +241,9 @@ public static class Repl {
 
     public Vx.Core.Type_any value() {
       Vx.Core.Type_any output = Vx.Core.e_any;
-      if (this.vx_p_value != null) {
-        output = this.vx_p_value;
+      Vx.Core.Type_any? testnull = vx_p_value;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -247,8 +252,9 @@ public static class Repl {
 
     public Vx.Core.Type_string doc() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_doc != null) {
-        output = this.vx_p_doc;
+      Vx.Core.Type_string? testnull = vx_p_doc;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -256,38 +262,32 @@ public static class Repl {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":name":
+      if (false) {
+      } else if ((skey==":name")) {
         output = this.name();
-        break;
-      case ":type":
+      } else if ((skey==":type")) {
         output = this.type();
-        break;
-      case ":repllist":
+      } else if ((skey==":repllist")) {
         output = this.repllist();
-        break;
-      case ":async":
+      } else if ((skey==":async")) {
         output = this.async();
-        break;
-      case ":value":
+      } else if ((skey==":value")) {
         output = this.value();
-        break;
-      case ":doc":
+      } else if ((skey==":doc")) {
         output = this.doc();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":name", this.name());
-      output.put(":type", this.type());
-      output.put(":repllist", this.repllist());
-      output.put(":async", this.async());
-      output.put(":value", this.value());
-      output.put(":doc", this.doc());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":name", this.name());
+      map.put(":type", this.type());
+      map.put(":repllist", this.repllist());
+      map.put(":async", this.async());
+      map.put(":value", this.value());
+      map.put(":doc", this.doc());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -318,8 +318,8 @@ public static class Repl {
       validkeys.Add(":value");
       validkeys.Add(":doc");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -359,8 +359,8 @@ public static class Repl {
             }
           }
         } else {
-          switch (key) {
-          case ":name":
+          if (false) {
+          } else if ((key==":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
@@ -382,8 +382,7 @@ public static class Repl {
               msg = Vx.Core.vx_msg_from_error("vx/repl/repl", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":type":
+          } else if ((key==":type")) {
             if (valsub == vx_p_type) {
             } else if (valsub is Vx.Core.Type_any valtype) {
               ischanged = true;
@@ -402,8 +401,7 @@ public static class Repl {
               msg = Vx.Core.vx_msg_from_error("vx/repl/repl", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":repllist":
+          } else if ((key==":repllist")) {
             if (valsub == vx_p_repllist) {
             } else if (valsub is Vx.Repl.Type_repllist valrepllist) {
               ischanged = true;
@@ -422,8 +420,7 @@ public static class Repl {
               msg = Vx.Core.vx_msg_from_error("vx/repl/repl", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":async":
+          } else if ((key==":async")) {
             if (valsub == vx_p_async) {
             } else if (valsub is Vx.Core.Type_boolean valasync) {
               ischanged = true;
@@ -445,8 +442,7 @@ public static class Repl {
               msg = Vx.Core.vx_msg_from_error("vx/repl/repl", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":value":
+          } else if ((key==":value")) {
             if (valsub == vx_p_value) {
             } else if (valsub is Vx.Core.Type_any valvalue) {
               ischanged = true;
@@ -465,8 +461,7 @@ public static class Repl {
               msg = Vx.Core.vx_msg_from_error("vx/repl/repl", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":doc":
+          } else if ((key==":doc")) {
             if (valsub == vx_p_doc) {
             } else if (valsub is Vx.Core.Type_string valdoc) {
               ischanged = true;
@@ -488,12 +483,10 @@ public static class Repl {
               msg = Vx.Core.vx_msg_from_error("vx/repl/repl", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/repl/repl", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -563,8 +556,9 @@ public static class Repl {
 
     public Vx.Core.Type_string key() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_key != null) {
-        output = this.vx_p_key;
+      Vx.Core.Type_string? testnull = vx_p_key;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -573,8 +567,9 @@ public static class Repl {
 
     public Vx.Repl.Type_repl current() {
       Vx.Repl.Type_repl output = Vx.Repl.e_repl;
-      if (this.vx_p_current != null) {
-        output = this.vx_p_current;
+      Vx.Repl.Type_repl? testnull = vx_p_current;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -583,8 +578,9 @@ public static class Repl {
 
     public Vx.Repl.Type_repllist repllist() {
       Vx.Repl.Type_repllist output = Vx.Repl.e_repllist;
-      if (this.vx_p_repllist != null) {
-        output = this.vx_p_repllist;
+      Vx.Repl.Type_repllist? testnull = vx_p_repllist;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -592,26 +588,23 @@ public static class Repl {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":key":
+      if (false) {
+      } else if ((skey==":key")) {
         output = this.key();
-        break;
-      case ":current":
+      } else if ((skey==":current")) {
         output = this.current();
-        break;
-      case ":repllist":
+      } else if ((skey==":repllist")) {
         output = this.repllist();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":key", this.key());
-      output.put(":current", this.current());
-      output.put(":repllist", this.repllist());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":key", this.key());
+      map.put(":current", this.current());
+      map.put(":repllist", this.repllist());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -636,8 +629,8 @@ public static class Repl {
       validkeys.Add(":current");
       validkeys.Add(":repllist");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -677,8 +670,8 @@ public static class Repl {
             }
           }
         } else {
-          switch (key) {
-          case ":key":
+          if (false) {
+          } else if ((key==":key")) {
             if (valsub == vx_p_key) {
             } else if (valsub is Vx.Core.Type_string valkey) {
               ischanged = true;
@@ -700,8 +693,7 @@ public static class Repl {
               msg = Vx.Core.vx_msg_from_error("vx/repl/replarglist", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":current":
+          } else if ((key==":current")) {
             if (valsub == vx_p_current) {
             } else if (valsub is Vx.Repl.Type_repl valcurrent) {
               ischanged = true;
@@ -720,8 +712,7 @@ public static class Repl {
               msg = Vx.Core.vx_msg_from_error("vx/repl/replarglist", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":repllist":
+          } else if ((key==":repllist")) {
             if (valsub == vx_p_repllist) {
             } else if (valsub is Vx.Repl.Type_repllist valrepllist) {
               ischanged = true;
@@ -740,12 +731,10 @@ public static class Repl {
               msg = Vx.Core.vx_msg_from_error("vx/repl/replarglist", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/repl/replarglist", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }

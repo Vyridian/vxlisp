@@ -22,8 +22,9 @@ public static class Textblock {
 
     public Vx.Core.Type_string name() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_name != null) {
-        output = this.vx_p_name;
+      Vx.Core.Type_string? testnull = vx_p_name;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -32,8 +33,9 @@ public static class Textblock {
 
     public Vx.Core.Type_string starttext() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_starttext != null) {
-        output = this.vx_p_starttext;
+      Vx.Core.Type_string? testnull = vx_p_starttext;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -42,8 +44,9 @@ public static class Textblock {
 
     public Vx.Core.Type_string endtext() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_endtext != null) {
-        output = this.vx_p_endtext;
+      Vx.Core.Type_string? testnull = vx_p_endtext;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -52,8 +55,9 @@ public static class Textblock {
 
     public Vx.Core.Type_int pos() {
       Vx.Core.Type_int output = Vx.Core.e_int;
-      if (this.vx_p_pos != null) {
-        output = this.vx_p_pos;
+      Vx.Core.Type_int? testnull = vx_p_pos;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -62,8 +66,9 @@ public static class Textblock {
 
     public Vx.Data.Textblock.Type_delimlist delimlist() {
       Vx.Data.Textblock.Type_delimlist output = Vx.Data.Textblock.e_delimlist;
-      if (this.vx_p_delimlist != null) {
-        output = this.vx_p_delimlist;
+      Vx.Data.Textblock.Type_delimlist? testnull = vx_p_delimlist;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -71,34 +76,29 @@ public static class Textblock {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":name":
+      if (false) {
+      } else if ((skey==":name")) {
         output = this.name();
-        break;
-      case ":starttext":
+      } else if ((skey==":starttext")) {
         output = this.starttext();
-        break;
-      case ":endtext":
+      } else if ((skey==":endtext")) {
         output = this.endtext();
-        break;
-      case ":pos":
+      } else if ((skey==":pos")) {
         output = this.pos();
-        break;
-      case ":delimlist":
+      } else if ((skey==":delimlist")) {
         output = this.delimlist();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":name", this.name());
-      output.put(":starttext", this.starttext());
-      output.put(":endtext", this.endtext());
-      output.put(":pos", this.pos());
-      output.put(":delimlist", this.delimlist());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":name", this.name());
+      map.put(":starttext", this.starttext());
+      map.put(":endtext", this.endtext());
+      map.put(":pos", this.pos());
+      map.put(":delimlist", this.delimlist());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -127,8 +127,8 @@ public static class Textblock {
       validkeys.Add(":pos");
       validkeys.Add(":delimlist");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -168,8 +168,8 @@ public static class Textblock {
             }
           }
         } else {
-          switch (key) {
-          case ":name":
+          if (false) {
+          } else if ((key==":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
@@ -191,8 +191,7 @@ public static class Textblock {
               msg = Vx.Core.vx_msg_from_error("vx/data/textblock/delim", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":starttext":
+          } else if ((key==":starttext")) {
             if (valsub == vx_p_starttext) {
             } else if (valsub is Vx.Core.Type_string valstarttext) {
               ischanged = true;
@@ -214,8 +213,7 @@ public static class Textblock {
               msg = Vx.Core.vx_msg_from_error("vx/data/textblock/delim", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":endtext":
+          } else if ((key==":endtext")) {
             if (valsub == vx_p_endtext) {
             } else if (valsub is Vx.Core.Type_string valendtext) {
               ischanged = true;
@@ -237,8 +235,7 @@ public static class Textblock {
               msg = Vx.Core.vx_msg_from_error("vx/data/textblock/delim", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":pos":
+          } else if ((key==":pos")) {
             if (valsub == vx_p_pos) {
             } else if (valsub is Vx.Core.Type_int valpos) {
               ischanged = true;
@@ -260,8 +257,7 @@ public static class Textblock {
               msg = Vx.Core.vx_msg_from_error("vx/data/textblock/delim", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":delimlist":
+          } else if ((key==":delimlist")) {
             if (valsub == vx_p_delimlist) {
             } else if (valsub is Vx.Data.Textblock.Type_delimlist valdelimlist) {
               ischanged = true;
@@ -280,12 +276,10 @@ public static class Textblock {
               msg = Vx.Core.vx_msg_from_error("vx/data/textblock/delim", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/data/textblock/delim", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -494,8 +488,9 @@ public static class Textblock {
 
     public Vx.Core.Type_string name() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_name != null) {
-        output = this.vx_p_name;
+      Vx.Core.Type_string? testnull = vx_p_name;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -504,8 +499,9 @@ public static class Textblock {
 
     public Vx.Core.Type_string text() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_text != null) {
-        output = this.vx_p_text;
+      Vx.Core.Type_string? testnull = vx_p_text;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -514,8 +510,9 @@ public static class Textblock {
 
     public Vx.Core.Type_int startpos() {
       Vx.Core.Type_int output = Vx.Core.e_int;
-      if (this.vx_p_startpos != null) {
-        output = this.vx_p_startpos;
+      Vx.Core.Type_int? testnull = vx_p_startpos;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -524,8 +521,9 @@ public static class Textblock {
 
     public Vx.Core.Type_int endpos() {
       Vx.Core.Type_int output = Vx.Core.e_int;
-      if (this.vx_p_endpos != null) {
-        output = this.vx_p_endpos;
+      Vx.Core.Type_int? testnull = vx_p_endpos;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -534,8 +532,9 @@ public static class Textblock {
 
     public Vx.Core.Type_int curpos() {
       Vx.Core.Type_int output = Vx.Core.e_int;
-      if (this.vx_p_curpos != null) {
-        output = this.vx_p_curpos;
+      Vx.Core.Type_int? testnull = vx_p_curpos;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -544,8 +543,9 @@ public static class Textblock {
 
     public Vx.Core.Type_int line() {
       Vx.Core.Type_int output = Vx.Core.e_int;
-      if (this.vx_p_line != null) {
-        output = this.vx_p_line;
+      Vx.Core.Type_int? testnull = vx_p_line;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -554,8 +554,9 @@ public static class Textblock {
 
     public Vx.Core.Type_int column() {
       Vx.Core.Type_int output = Vx.Core.e_int;
-      if (this.vx_p_column != null) {
-        output = this.vx_p_column;
+      Vx.Core.Type_int? testnull = vx_p_column;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -564,8 +565,9 @@ public static class Textblock {
 
     public Vx.Data.Textblock.Type_delim delim() {
       Vx.Data.Textblock.Type_delim output = Vx.Data.Textblock.e_delim;
-      if (this.vx_p_delim != null) {
-        output = this.vx_p_delim;
+      Vx.Data.Textblock.Type_delim? testnull = vx_p_delim;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -574,8 +576,9 @@ public static class Textblock {
 
     public Vx.Data.Textblock.Type_delim close() {
       Vx.Data.Textblock.Type_delim output = Vx.Data.Textblock.e_delim;
-      if (this.vx_p_close != null) {
-        output = this.vx_p_close;
+      Vx.Data.Textblock.Type_delim? testnull = vx_p_close;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -584,8 +587,9 @@ public static class Textblock {
 
     public Vx.Data.Textblock.Type_textblock parent() {
       Vx.Data.Textblock.Type_textblock output = Vx.Data.Textblock.e_textblock;
-      if (this.vx_p_parent != null) {
-        output = this.vx_p_parent;
+      Vx.Data.Textblock.Type_textblock? testnull = vx_p_parent;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -594,8 +598,9 @@ public static class Textblock {
 
     public Vx.Data.Textblock.Type_textblocklist children() {
       Vx.Data.Textblock.Type_textblocklist output = Vx.Data.Textblock.e_textblocklist;
-      if (this.vx_p_children != null) {
-        output = this.vx_p_children;
+      Vx.Data.Textblock.Type_textblocklist? testnull = vx_p_children;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -603,58 +608,47 @@ public static class Textblock {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":name":
+      if (false) {
+      } else if ((skey==":name")) {
         output = this.name();
-        break;
-      case ":text":
+      } else if ((skey==":text")) {
         output = this.text();
-        break;
-      case ":startpos":
+      } else if ((skey==":startpos")) {
         output = this.startpos();
-        break;
-      case ":endpos":
+      } else if ((skey==":endpos")) {
         output = this.endpos();
-        break;
-      case ":curpos":
+      } else if ((skey==":curpos")) {
         output = this.curpos();
-        break;
-      case ":line":
+      } else if ((skey==":line")) {
         output = this.line();
-        break;
-      case ":column":
+      } else if ((skey==":column")) {
         output = this.column();
-        break;
-      case ":delim":
+      } else if ((skey==":delim")) {
         output = this.delim();
-        break;
-      case ":close":
+      } else if ((skey==":close")) {
         output = this.close();
-        break;
-      case ":parent":
+      } else if ((skey==":parent")) {
         output = this.parent();
-        break;
-      case ":children":
+      } else if ((skey==":children")) {
         output = this.children();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":name", this.name());
-      output.put(":text", this.text());
-      output.put(":startpos", this.startpos());
-      output.put(":endpos", this.endpos());
-      output.put(":curpos", this.curpos());
-      output.put(":line", this.line());
-      output.put(":column", this.column());
-      output.put(":delim", this.delim());
-      output.put(":close", this.close());
-      output.put(":parent", this.parent());
-      output.put(":children", this.children());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":name", this.name());
+      map.put(":text", this.text());
+      map.put(":startpos", this.startpos());
+      map.put(":endpos", this.endpos());
+      map.put(":curpos", this.curpos());
+      map.put(":line", this.line());
+      map.put(":column", this.column());
+      map.put(":delim", this.delim());
+      map.put(":close", this.close());
+      map.put(":parent", this.parent());
+      map.put(":children", this.children());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -695,8 +689,8 @@ public static class Textblock {
       validkeys.Add(":parent");
       validkeys.Add(":children");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -736,8 +730,8 @@ public static class Textblock {
             }
           }
         } else {
-          switch (key) {
-          case ":name":
+          if (false) {
+          } else if ((key==":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
@@ -759,8 +753,7 @@ public static class Textblock {
               msg = Vx.Core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":text":
+          } else if ((key==":text")) {
             if (valsub == vx_p_text) {
             } else if (valsub is Vx.Core.Type_string valtext) {
               ischanged = true;
@@ -782,8 +775,7 @@ public static class Textblock {
               msg = Vx.Core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":startpos":
+          } else if ((key==":startpos")) {
             if (valsub == vx_p_startpos) {
             } else if (valsub is Vx.Core.Type_int valstartpos) {
               ischanged = true;
@@ -805,8 +797,7 @@ public static class Textblock {
               msg = Vx.Core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":endpos":
+          } else if ((key==":endpos")) {
             if (valsub == vx_p_endpos) {
             } else if (valsub is Vx.Core.Type_int valendpos) {
               ischanged = true;
@@ -828,8 +819,7 @@ public static class Textblock {
               msg = Vx.Core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":curpos":
+          } else if ((key==":curpos")) {
             if (valsub == vx_p_curpos) {
             } else if (valsub is Vx.Core.Type_int valcurpos) {
               ischanged = true;
@@ -851,8 +841,7 @@ public static class Textblock {
               msg = Vx.Core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":line":
+          } else if ((key==":line")) {
             if (valsub == vx_p_line) {
             } else if (valsub is Vx.Core.Type_int valline) {
               ischanged = true;
@@ -874,8 +863,7 @@ public static class Textblock {
               msg = Vx.Core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":column":
+          } else if ((key==":column")) {
             if (valsub == vx_p_column) {
             } else if (valsub is Vx.Core.Type_int valcolumn) {
               ischanged = true;
@@ -897,8 +885,7 @@ public static class Textblock {
               msg = Vx.Core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":delim":
+          } else if ((key==":delim")) {
             if (valsub == vx_p_delim) {
             } else if (valsub is Vx.Data.Textblock.Type_delim valdelim) {
               ischanged = true;
@@ -917,8 +904,7 @@ public static class Textblock {
               msg = Vx.Core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":close":
+          } else if ((key==":close")) {
             if (valsub == vx_p_close) {
             } else if (valsub is Vx.Data.Textblock.Type_delim valclose) {
               ischanged = true;
@@ -937,8 +923,7 @@ public static class Textblock {
               msg = Vx.Core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":parent":
+          } else if ((key==":parent")) {
             if (valsub == vx_p_parent) {
             } else if (valsub is Vx.Data.Textblock.Type_textblock valparent) {
               ischanged = true;
@@ -957,8 +942,7 @@ public static class Textblock {
               msg = Vx.Core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":children":
+          } else if ((key==":children")) {
             if (valsub == vx_p_children) {
             } else if (valsub is Vx.Data.Textblock.Type_textblocklist valchildren) {
               ischanged = true;
@@ -977,12 +961,10 @@ public static class Textblock {
               msg = Vx.Core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/data/textblock/textblock", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }

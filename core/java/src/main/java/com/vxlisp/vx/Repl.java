@@ -214,8 +214,9 @@ public final class Repl {
     @Override
     public Core.Type_string name() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_name != null) {
-        output = this.vx_p_name;
+      Core.Type_string testnull = vx_p_name;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -225,8 +226,9 @@ public final class Repl {
     @Override
     public Core.Type_any type() {
       Core.Type_any output = Core.e_any;
-      if (this.vx_p_type != null) {
-        output = this.vx_p_type;
+      Core.Type_any testnull = vx_p_type;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -236,8 +238,9 @@ public final class Repl {
     @Override
     public Repl.Type_repllist repllist() {
       Repl.Type_repllist output = Repl.e_repllist;
-      if (this.vx_p_repllist != null) {
-        output = this.vx_p_repllist;
+      Repl.Type_repllist testnull = vx_p_repllist;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -247,8 +250,9 @@ public final class Repl {
     @Override
     public Core.Type_boolean async() {
       Core.Type_boolean output = Core.e_boolean;
-      if (this.vx_p_async != null) {
-        output = this.vx_p_async;
+      Core.Type_boolean testnull = vx_p_async;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -258,8 +262,9 @@ public final class Repl {
     @Override
     public Core.Type_any value() {
       Core.Type_any output = Core.e_any;
-      if (this.vx_p_value != null) {
-        output = this.vx_p_value;
+      Core.Type_any testnull = vx_p_value;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -269,8 +274,9 @@ public final class Repl {
     @Override
     public Core.Type_string doc() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_doc != null) {
-        output = this.vx_p_doc;
+      Core.Type_string testnull = vx_p_doc;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -279,39 +285,33 @@ public final class Repl {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":name":
+      if (false) {
+      } else if ((skey.equals(":name"))) {
         output = this.name();
-        break;
-      case ":type":
+      } else if ((skey.equals(":type"))) {
         output = this.type();
-        break;
-      case ":repllist":
+      } else if ((skey.equals(":repllist"))) {
         output = this.repllist();
-        break;
-      case ":async":
+      } else if ((skey.equals(":async"))) {
         output = this.async();
-        break;
-      case ":value":
+      } else if ((skey.equals(":value"))) {
         output = this.value();
-        break;
-      case ":doc":
+      } else if ((skey.equals(":doc"))) {
         output = this.doc();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":name", this.name());
-      output.put(":type", this.type());
-      output.put(":repllist", this.repllist());
-      output.put(":async", this.async());
-      output.put(":value", this.value());
-      output.put(":doc", this.doc());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":name", this.name());
+      map.put(":type", this.type());
+      map.put(":repllist", this.repllist());
+      map.put(":async", this.async());
+      map.put(":value", this.value());
+      map.put(":doc", this.doc());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -344,8 +344,8 @@ public final class Repl {
       validkeys.add(":value");
       validkeys.add(":doc");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -388,8 +388,8 @@ public final class Repl {
             }
           }
         } else {
-          switch (key) {
-          case ":name":
+          if (false) {
+          } else if ((key.equals(":name"))) {
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valname = (Core.Type_string)valsub;
@@ -413,8 +413,7 @@ public final class Repl {
               msg = Core.vx_msg_from_error("vx/repl/repl", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":type":
+          } else if ((key.equals(":type"))) {
             if (valsub == vx_p_type) {
             } else if (valsub instanceof Core.Type_any) {
               Core.Type_any valtype = (Core.Type_any)valsub;
@@ -435,8 +434,7 @@ public final class Repl {
               msg = Core.vx_msg_from_error("vx/repl/repl", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":repllist":
+          } else if ((key.equals(":repllist"))) {
             if (valsub == vx_p_repllist) {
             } else if (valsub instanceof Repl.Type_repllist) {
               Repl.Type_repllist valrepllist = (Repl.Type_repllist)valsub;
@@ -457,8 +455,7 @@ public final class Repl {
               msg = Core.vx_msg_from_error("vx/repl/repl", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":async":
+          } else if ((key.equals(":async"))) {
             if (valsub == vx_p_async) {
             } else if (valsub instanceof Core.Type_boolean) {
               Core.Type_boolean valasync = (Core.Type_boolean)valsub;
@@ -482,8 +479,7 @@ public final class Repl {
               msg = Core.vx_msg_from_error("vx/repl/repl", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":value":
+          } else if ((key.equals(":value"))) {
             if (valsub == vx_p_value) {
             } else if (valsub instanceof Core.Type_any) {
               Core.Type_any valvalue = (Core.Type_any)valsub;
@@ -504,8 +500,7 @@ public final class Repl {
               msg = Core.vx_msg_from_error("vx/repl/repl", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":doc":
+          } else if ((key.equals(":doc"))) {
             if (valsub == vx_p_doc) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valdoc = (Core.Type_string)valsub;
@@ -529,12 +524,10 @@ public final class Repl {
               msg = Core.vx_msg_from_error("vx/repl/repl", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/repl/repl", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -608,8 +601,9 @@ public final class Repl {
     @Override
     public Core.Type_string key() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_key != null) {
-        output = this.vx_p_key;
+      Core.Type_string testnull = vx_p_key;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -619,8 +613,9 @@ public final class Repl {
     @Override
     public Repl.Type_repl current() {
       Repl.Type_repl output = Repl.e_repl;
-      if (this.vx_p_current != null) {
-        output = this.vx_p_current;
+      Repl.Type_repl testnull = vx_p_current;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -630,8 +625,9 @@ public final class Repl {
     @Override
     public Repl.Type_repllist repllist() {
       Repl.Type_repllist output = Repl.e_repllist;
-      if (this.vx_p_repllist != null) {
-        output = this.vx_p_repllist;
+      Repl.Type_repllist testnull = vx_p_repllist;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -640,27 +636,24 @@ public final class Repl {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":key":
+      if (false) {
+      } else if ((skey.equals(":key"))) {
         output = this.key();
-        break;
-      case ":current":
+      } else if ((skey.equals(":current"))) {
         output = this.current();
-        break;
-      case ":repllist":
+      } else if ((skey.equals(":repllist"))) {
         output = this.repllist();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":key", this.key());
-      output.put(":current", this.current());
-      output.put(":repllist", this.repllist());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":key", this.key());
+      map.put(":current", this.current());
+      map.put(":repllist", this.repllist());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -687,8 +680,8 @@ public final class Repl {
       validkeys.add(":current");
       validkeys.add(":repllist");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -731,8 +724,8 @@ public final class Repl {
             }
           }
         } else {
-          switch (key) {
-          case ":key":
+          if (false) {
+          } else if ((key.equals(":key"))) {
             if (valsub == vx_p_key) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valkey = (Core.Type_string)valsub;
@@ -756,8 +749,7 @@ public final class Repl {
               msg = Core.vx_msg_from_error("vx/repl/replarglist", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":current":
+          } else if ((key.equals(":current"))) {
             if (valsub == vx_p_current) {
             } else if (valsub instanceof Repl.Type_repl) {
               Repl.Type_repl valcurrent = (Repl.Type_repl)valsub;
@@ -778,8 +770,7 @@ public final class Repl {
               msg = Core.vx_msg_from_error("vx/repl/replarglist", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":repllist":
+          } else if ((key.equals(":repllist"))) {
             if (valsub == vx_p_repllist) {
             } else if (valsub instanceof Repl.Type_repllist) {
               Repl.Type_repllist valrepllist = (Repl.Type_repllist)valsub;
@@ -800,12 +791,10 @@ public final class Repl {
               msg = Core.vx_msg_from_error("vx/repl/replarglist", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/repl/replarglist", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }

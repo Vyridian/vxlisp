@@ -31,8 +31,9 @@ public final class Event {
     @Override
     public Core.Type_string name() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_name != null) {
-        output = this.vx_p_name;
+      Core.Type_string testnull = vx_p_name;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -42,8 +43,9 @@ public final class Event {
     @Override
     public Core.Type_string from() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_from != null) {
-        output = this.vx_p_from;
+      Core.Type_string testnull = vx_p_from;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -53,8 +55,9 @@ public final class Event {
     @Override
     public Core.Type_string to() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_to != null) {
-        output = this.vx_p_to;
+      Core.Type_string testnull = vx_p_to;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -64,8 +67,9 @@ public final class Event {
     @Override
     public Core.Type_anymap datamap() {
       Core.Type_anymap output = Core.e_anymap;
-      if (this.vx_p_datamap != null) {
-        output = this.vx_p_datamap;
+      Core.Type_anymap testnull = vx_p_datamap;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -75,8 +79,9 @@ public final class Event {
     @Override
     public Event.Func_event_from_event event_from_event() {
       Event.Func_event_from_event output = Event.e_event_from_event;
-      if (this.vx_p_event_from_event != null) {
-        output = this.vx_p_event_from_event;
+      Event.Func_event_from_event testnull = vx_p_event_from_event;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -86,8 +91,9 @@ public final class Event {
     @Override
     public Event.Func_event_from_event_async event_from_event_async() {
       Event.Func_event_from_event_async output = Event.e_event_from_event_async;
-      if (this.vx_p_event_from_event_async != null) {
-        output = this.vx_p_event_from_event_async;
+      Event.Func_event_from_event_async testnull = vx_p_event_from_event_async;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -96,39 +102,33 @@ public final class Event {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":name":
+      if (false) {
+      } else if ((skey.equals(":name"))) {
         output = this.name();
-        break;
-      case ":from":
+      } else if ((skey.equals(":from"))) {
         output = this.from();
-        break;
-      case ":to":
+      } else if ((skey.equals(":to"))) {
         output = this.to();
-        break;
-      case ":datamap":
+      } else if ((skey.equals(":datamap"))) {
         output = this.datamap();
-        break;
-      case ":event<-event":
+      } else if ((skey.equals(":event<-event"))) {
         output = this.event_from_event();
-        break;
-      case ":event<-event-async":
+      } else if ((skey.equals(":event<-event-async"))) {
         output = this.event_from_event_async();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":name", this.name());
-      output.put(":from", this.from());
-      output.put(":to", this.to());
-      output.put(":datamap", this.datamap());
-      output.put(":event<-event", this.event_from_event());
-      output.put(":event<-event-async", this.event_from_event_async());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":name", this.name());
+      map.put(":from", this.from());
+      map.put(":to", this.to());
+      map.put(":datamap", this.datamap());
+      map.put(":event<-event", this.event_from_event());
+      map.put(":event<-event-async", this.event_from_event_async());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -161,8 +161,8 @@ public final class Event {
       validkeys.add(":event<-event");
       validkeys.add(":event<-event-async");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -205,8 +205,8 @@ public final class Event {
             }
           }
         } else {
-          switch (key) {
-          case ":name":
+          if (false) {
+          } else if ((key.equals(":name"))) {
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valname = (Core.Type_string)valsub;
@@ -230,8 +230,7 @@ public final class Event {
               msg = Core.vx_msg_from_error("vx/event/event", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":from":
+          } else if ((key.equals(":from"))) {
             if (valsub == vx_p_from) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valfrom = (Core.Type_string)valsub;
@@ -255,8 +254,7 @@ public final class Event {
               msg = Core.vx_msg_from_error("vx/event/event", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":to":
+          } else if ((key.equals(":to"))) {
             if (valsub == vx_p_to) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valto = (Core.Type_string)valsub;
@@ -280,8 +278,7 @@ public final class Event {
               msg = Core.vx_msg_from_error("vx/event/event", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":datamap":
+          } else if ((key.equals(":datamap"))) {
             if (valsub == vx_p_datamap) {
             } else if (valsub instanceof Core.Type_anymap) {
               Core.Type_anymap valdatamap = (Core.Type_anymap)valsub;
@@ -302,8 +299,7 @@ public final class Event {
               msg = Core.vx_msg_from_error("vx/event/event", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":event<-event":
+          } else if ((key.equals(":event<-event"))) {
             if (valsub == vx_p_event_from_event) {
             } else if (valsub instanceof Event.Func_event_from_event) {
               Event.Func_event_from_event valevent_from_event = (Event.Func_event_from_event)valsub;
@@ -324,8 +320,7 @@ public final class Event {
               msg = Core.vx_msg_from_error("vx/event/event", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":event<-event-async":
+          } else if ((key.equals(":event<-event-async"))) {
             if (valsub == vx_p_event_from_event_async) {
             } else if (valsub instanceof Event.Func_event_from_event_async) {
               Event.Func_event_from_event_async valevent_from_event_async = (Event.Func_event_from_event_async)valsub;
@@ -346,12 +341,10 @@ public final class Event {
               msg = Core.vx_msg_from_error("vx/event/event", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/event/event", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -658,9 +651,9 @@ public final class Event {
         ischanged = true;
       }
       Map<String, Event.Type_event> mapval = new LinkedHashMap<String, Event.Type_event>(value.vx_mapevent());
-      Core.Type_msg msg = null;
       String key = "";
-      Core.Type_any msgval = null;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -686,7 +679,7 @@ public final class Event {
             msgblock = Core.vx_copy(msgblock, msg);
           }
         } else {
-          Event.Type_event valany = null;
+          Event.Type_event valany = Event.e_event;
           if (false) {
           } else if (valsub instanceof Event.Type_event) {
             Event.Type_event valallowed = (Event.Type_event)valsub;
@@ -708,7 +701,7 @@ public final class Event {
             msg = Core.vx_msg_from_error("vx/event/eventmap", ":invalidkeyvalue", msgmap);
             msgblock = Core.vx_copy(msgblock, msg);
           }
-          if (valany != null) {
+          if (valany != Core.e_any) {
             ischanged = true;
             if (key.startsWith(":")) {
               key = key.substring(1);

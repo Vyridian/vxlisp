@@ -1787,9 +1787,9 @@ public static class Core {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_any> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>(value.vx_map());
-      Vx.Core.Type_msg? msg = null;
       string key = "";
-      Vx.Core.Type_any? msgval = null;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -1812,7 +1812,7 @@ public static class Core {
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
         } else {
-          Vx.Core.Type_any? valany = null;
+          Vx.Core.Type_any valany = Vx.Core.e_any;
           if (false) {
           } else if (valsub is Vx.Core.Type_any valallowed) {
             valany = valallowed;
@@ -1832,7 +1832,7 @@ public static class Core {
             msg = Vx.Core.vx_msg_from_error("vx/core/anymap", ":invalidkeyvalue", msgmap);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
-          if (valany != null) {
+          if (valany != Vx.Core.e_any) {
             ischanged = true;
             if (key.StartsWith(":")) {
               key = key.Substring(1);
@@ -1968,8 +1968,9 @@ public static class Core {
 
     public Vx.Core.Type_string name() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_name != null) {
-        output = this.vx_p_name;
+      Vx.Core.Type_string? testnull = vx_p_name;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1978,8 +1979,9 @@ public static class Core {
 
     public Vx.Core.Type_any argtype() {
       Vx.Core.Type_any output = Vx.Core.e_any;
-      if (this.vx_p_argtype != null) {
-        output = this.vx_p_argtype;
+      Vx.Core.Type_any? testnull = vx_p_argtype;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1988,8 +1990,9 @@ public static class Core {
 
     public Vx.Core.Func_any_from_func fn_any() {
       Vx.Core.Func_any_from_func output = Vx.Core.e_any_from_func;
-      if (this.vx_p_fn_any != null) {
-        output = this.vx_p_fn_any;
+      Vx.Core.Func_any_from_func? testnull = vx_p_fn_any;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1998,8 +2001,9 @@ public static class Core {
 
     public Vx.Core.Type_string doc() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_doc != null) {
-        output = this.vx_p_doc;
+      Vx.Core.Type_string? testnull = vx_p_doc;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2007,30 +2011,26 @@ public static class Core {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":name":
+      if (false) {
+      } else if ((skey==":name")) {
         output = this.name();
-        break;
-      case ":argtype":
+      } else if ((skey==":argtype")) {
         output = this.argtype();
-        break;
-      case ":fn-any":
+      } else if ((skey==":fn-any")) {
         output = this.fn_any();
-        break;
-      case ":doc":
+      } else if ((skey==":doc")) {
         output = this.doc();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":name", this.name());
-      output.put(":argtype", this.argtype());
-      output.put(":fn-any", this.fn_any());
-      output.put(":doc", this.doc());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":name", this.name());
+      map.put(":argtype", this.argtype());
+      map.put(":fn-any", this.fn_any());
+      map.put(":doc", this.doc());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -2057,8 +2057,8 @@ public static class Core {
       validkeys.Add(":fn-any");
       validkeys.Add(":doc");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -2098,8 +2098,8 @@ public static class Core {
             }
           }
         } else {
-          switch (key) {
-          case ":name":
+          if (false) {
+          } else if ((key==":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
@@ -2121,8 +2121,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/arg", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":argtype":
+          } else if ((key==":argtype")) {
             if (valsub == vx_p_argtype) {
             } else if (valsub is Vx.Core.Type_any valargtype) {
               ischanged = true;
@@ -2141,8 +2140,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/arg", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":fn-any":
+          } else if ((key==":fn-any")) {
             if (valsub == vx_p_fn_any) {
             } else if (valsub is Vx.Core.Func_any_from_func valfn_any) {
               ischanged = true;
@@ -2161,8 +2159,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/arg", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":doc":
+          } else if ((key==":doc")) {
             if (valsub == vx_p_doc) {
             } else if (valsub is Vx.Core.Type_string valdoc) {
               ischanged = true;
@@ -2184,12 +2181,10 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/arg", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/core/arg", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -2468,9 +2463,9 @@ public static class Core {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_arg> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_arg>(value.vx_maparg());
-      Vx.Core.Type_msg? msg = null;
       string key = "";
-      Vx.Core.Type_any? msgval = null;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -2493,7 +2488,7 @@ public static class Core {
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
         } else {
-          Vx.Core.Type_arg? valany = null;
+          Vx.Core.Type_arg valany = Vx.Core.e_arg;
           if (false) {
           } else if (valsub is Vx.Core.Type_arg valallowed) {
             valany = valallowed;
@@ -2513,7 +2508,7 @@ public static class Core {
             msg = Vx.Core.vx_msg_from_error("vx/core/argmap", ":invalidkeyvalue", msgmap);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
-          if (valany != null) {
+          if (valany != Vx.Core.e_any) {
             ischanged = true;
             if (key.StartsWith(":")) {
               key = key.Substring(1);
@@ -3207,9 +3202,9 @@ public static class Core {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_connect> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_connect>(value.vx_mapconnect());
-      Vx.Core.Type_msg? msg = null;
       string key = "";
-      Vx.Core.Type_any? msgval = null;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -3232,7 +3227,7 @@ public static class Core {
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
         } else {
-          Vx.Core.Type_connect? valany = null;
+          Vx.Core.Type_connect valany = Vx.Core.e_connect;
           if (false) {
           } else if (valsub is Vx.Core.Type_connect valallowed) {
             valany = valallowed;
@@ -3252,7 +3247,7 @@ public static class Core {
             msg = Vx.Core.vx_msg_from_error("vx/core/connectmap", ":invalidkeyvalue", msgmap);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
-          if (valany != null) {
+          if (valany != Vx.Core.e_any) {
             ischanged = true;
             if (key.StartsWith(":")) {
               key = key.Substring(1);
@@ -3387,8 +3382,9 @@ public static class Core {
 
     public Vx.Core.Type_string pkgname() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_pkgname != null) {
-        output = this.vx_p_pkgname;
+      Vx.Core.Type_string? testnull = vx_p_pkgname;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -3397,8 +3393,9 @@ public static class Core {
 
     public Vx.Core.Type_string name() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_name != null) {
-        output = this.vx_p_name;
+      Vx.Core.Type_string? testnull = vx_p_name;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -3407,8 +3404,9 @@ public static class Core {
 
     public Vx.Core.Type_any type() {
       Vx.Core.Type_any output = Vx.Core.e_any;
-      if (this.vx_p_type != null) {
-        output = this.vx_p_type;
+      Vx.Core.Type_any? testnull = vx_p_type;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -3416,26 +3414,23 @@ public static class Core {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":pkgname":
+      if (false) {
+      } else if ((skey==":pkgname")) {
         output = this.pkgname();
-        break;
-      case ":name":
+      } else if ((skey==":name")) {
         output = this.name();
-        break;
-      case ":type":
+      } else if ((skey==":type")) {
         output = this.type();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":pkgname", this.pkgname());
-      output.put(":name", this.name());
-      output.put(":type", this.type());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":pkgname", this.pkgname());
+      map.put(":name", this.name());
+      map.put(":type", this.type());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -3460,8 +3455,8 @@ public static class Core {
       validkeys.Add(":name");
       validkeys.Add(":type");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -3501,8 +3496,8 @@ public static class Core {
             }
           }
         } else {
-          switch (key) {
-          case ":pkgname":
+          if (false) {
+          } else if ((key==":pkgname")) {
             if (valsub == vx_p_pkgname) {
             } else if (valsub is Vx.Core.Type_string valpkgname) {
               ischanged = true;
@@ -3524,8 +3519,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/constdef", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":name":
+          } else if ((key==":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
@@ -3547,8 +3541,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/constdef", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":type":
+          } else if ((key==":type")) {
             if (valsub == vx_p_type) {
             } else if (valsub is Vx.Core.Type_any valtype) {
               ischanged = true;
@@ -3567,12 +3560,10 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/constdef", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/core/constdef", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -3822,9 +3813,9 @@ public static class Core {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_any> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>(value.vx_map());
-      Vx.Core.Type_msg? msg = null;
       string key = "";
-      Vx.Core.Type_any? msgval = null;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -3847,7 +3838,7 @@ public static class Core {
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
         } else {
-          Vx.Core.Type_any? valany = null;
+          Vx.Core.Type_any valany = Vx.Core.e_any;
           if (false) {
           } else if (valsub is Vx.Core.Type_any valallowed) {
             valany = valallowed;
@@ -3867,7 +3858,7 @@ public static class Core {
             msg = Vx.Core.vx_msg_from_error("vx/core/constmap", ":invalidkeyvalue", msgmap);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
-          if (valany != null) {
+          if (valany != Vx.Core.e_any) {
             ischanged = true;
             if (key.StartsWith(":")) {
               key = key.Substring(1);
@@ -3938,8 +3929,9 @@ public static class Core {
 
     public Vx.Core.Type_string code() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_code != null) {
-        output = this.vx_p_code;
+      Vx.Core.Type_string? testnull = vx_p_code;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -3948,8 +3940,9 @@ public static class Core {
 
     public Vx.Core.Type_session session() {
       Vx.Core.Type_session output = Vx.Core.e_session;
-      if (this.vx_p_session != null) {
-        output = this.vx_p_session;
+      Vx.Core.Type_session? testnull = vx_p_session;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -3958,8 +3951,9 @@ public static class Core {
 
     public Vx.Core.Type_setting setting() {
       Vx.Core.Type_setting output = Vx.Core.e_setting;
-      if (this.vx_p_setting != null) {
-        output = this.vx_p_setting;
+      Vx.Core.Type_setting? testnull = vx_p_setting;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -3968,8 +3962,9 @@ public static class Core {
 
     public Vx.Core.Type_state state() {
       Vx.Core.Type_state output = Vx.Core.e_state;
-      if (this.vx_p_state != null) {
-        output = this.vx_p_state;
+      Vx.Core.Type_state? testnull = vx_p_state;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -3977,30 +3972,26 @@ public static class Core {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":code":
+      if (false) {
+      } else if ((skey==":code")) {
         output = this.code();
-        break;
-      case ":session":
+      } else if ((skey==":session")) {
         output = this.session();
-        break;
-      case ":setting":
+      } else if ((skey==":setting")) {
         output = this.setting();
-        break;
-      case ":state":
+      } else if ((skey==":state")) {
         output = this.state();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":code", this.code());
-      output.put(":session", this.session());
-      output.put(":setting", this.setting());
-      output.put(":state", this.state());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":code", this.code());
+      map.put(":session", this.session());
+      map.put(":setting", this.setting());
+      map.put(":state", this.state());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -4027,8 +4018,8 @@ public static class Core {
       validkeys.Add(":setting");
       validkeys.Add(":state");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -4068,8 +4059,8 @@ public static class Core {
             }
           }
         } else {
-          switch (key) {
-          case ":code":
+          if (false) {
+          } else if ((key==":code")) {
             if (valsub == vx_p_code) {
             } else if (valsub is Vx.Core.Type_string valcode) {
               ischanged = true;
@@ -4091,8 +4082,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/context", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":session":
+          } else if ((key==":session")) {
             if (valsub == vx_p_session) {
             } else if (valsub is Vx.Core.Type_session valsession) {
               ischanged = true;
@@ -4111,8 +4101,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/context", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":setting":
+          } else if ((key==":setting")) {
             if (valsub == vx_p_setting) {
             } else if (valsub is Vx.Core.Type_setting valsetting) {
               ischanged = true;
@@ -4131,8 +4120,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/context", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":state":
+          } else if ((key==":state")) {
             if (valsub == vx_p_state) {
             } else if (valsub is Vx.Core.Type_state valstate) {
               ischanged = true;
@@ -4151,12 +4139,10 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/context", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/core/context", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -4632,8 +4618,9 @@ public static class Core {
 
     public Vx.Core.Type_string pkgname() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_pkgname != null) {
-        output = this.vx_p_pkgname;
+      Vx.Core.Type_string? testnull = vx_p_pkgname;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -4642,8 +4629,9 @@ public static class Core {
 
     public Vx.Core.Type_string name() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_name != null) {
-        output = this.vx_p_name;
+      Vx.Core.Type_string? testnull = vx_p_name;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -4652,8 +4640,9 @@ public static class Core {
 
     public Vx.Core.Type_int idx() {
       Vx.Core.Type_int output = Vx.Core.e_int;
-      if (this.vx_p_idx != null) {
-        output = this.vx_p_idx;
+      Vx.Core.Type_int? testnull = vx_p_idx;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -4662,8 +4651,9 @@ public static class Core {
 
     public Vx.Core.Type_any type() {
       Vx.Core.Type_any output = Vx.Core.e_any;
-      if (this.vx_p_type != null) {
-        output = this.vx_p_type;
+      Vx.Core.Type_any? testnull = vx_p_type;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -4672,8 +4662,9 @@ public static class Core {
 
     public Vx.Core.Type_boolean async() {
       Vx.Core.Type_boolean output = Vx.Core.e_boolean;
-      if (this.vx_p_async != null) {
-        output = this.vx_p_async;
+      Vx.Core.Type_boolean? testnull = vx_p_async;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -4681,34 +4672,29 @@ public static class Core {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":pkgname":
+      if (false) {
+      } else if ((skey==":pkgname")) {
         output = this.pkgname();
-        break;
-      case ":name":
+      } else if ((skey==":name")) {
         output = this.name();
-        break;
-      case ":idx":
+      } else if ((skey==":idx")) {
         output = this.idx();
-        break;
-      case ":type":
+      } else if ((skey==":type")) {
         output = this.type();
-        break;
-      case ":async":
+      } else if ((skey==":async")) {
         output = this.async();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":pkgname", this.pkgname());
-      output.put(":name", this.name());
-      output.put(":idx", this.idx());
-      output.put(":type", this.type());
-      output.put(":async", this.async());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":pkgname", this.pkgname());
+      map.put(":name", this.name());
+      map.put(":idx", this.idx());
+      map.put(":type", this.type());
+      map.put(":async", this.async());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -4737,8 +4723,8 @@ public static class Core {
       validkeys.Add(":type");
       validkeys.Add(":async");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -4778,8 +4764,8 @@ public static class Core {
             }
           }
         } else {
-          switch (key) {
-          case ":pkgname":
+          if (false) {
+          } else if ((key==":pkgname")) {
             if (valsub == vx_p_pkgname) {
             } else if (valsub is Vx.Core.Type_string valpkgname) {
               ischanged = true;
@@ -4801,8 +4787,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/funcdef", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":name":
+          } else if ((key==":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
@@ -4824,8 +4809,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/funcdef", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":idx":
+          } else if ((key==":idx")) {
             if (valsub == vx_p_idx) {
             } else if (valsub is Vx.Core.Type_int validx) {
               ischanged = true;
@@ -4847,8 +4831,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/funcdef", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":type":
+          } else if ((key==":type")) {
             if (valsub == vx_p_type) {
             } else if (valsub is Vx.Core.Type_any valtype) {
               ischanged = true;
@@ -4867,8 +4850,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/funcdef", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":async":
+          } else if ((key==":async")) {
             if (valsub == vx_p_async) {
             } else if (valsub is Vx.Core.Type_boolean valasync) {
               ischanged = true;
@@ -4890,12 +4872,10 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/funcdef", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/core/funcdef", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -5175,9 +5155,9 @@ public static class Core {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_func> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_func>(value.vx_mapfunc());
-      Vx.Core.Type_msg? msg = null;
       string key = "";
-      Vx.Core.Type_any? msgval = null;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -5200,7 +5180,7 @@ public static class Core {
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
         } else {
-          Vx.Core.Type_func? valany = null;
+          Vx.Core.Type_func valany = Vx.Core.e_func;
           if (false) {
           } else if (valsub is Vx.Core.Type_func valallowed) {
             valany = valallowed;
@@ -5220,7 +5200,7 @@ public static class Core {
             msg = Vx.Core.vx_msg_from_error("vx/core/funcmap", ":invalidkeyvalue", msgmap);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
-          if (valany != null) {
+          if (valany != Vx.Core.e_any) {
             ischanged = true;
             if (key.StartsWith(":")) {
               key = key.Substring(1);
@@ -5592,9 +5572,9 @@ public static class Core {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_int> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_int>(value.vx_mapint());
-      Vx.Core.Type_msg? msg = null;
       string key = "";
-      Vx.Core.Type_any? msgval = null;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -5617,7 +5597,7 @@ public static class Core {
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
         } else {
-          Vx.Core.Type_int? valany = null;
+          Vx.Core.Type_int valany = Vx.Core.e_int;
           if (false) {
           } else if (valsub is Vx.Core.Type_int valallowed) {
             valany = valallowed;
@@ -5637,7 +5617,7 @@ public static class Core {
             msg = Vx.Core.vx_msg_from_error("vx/core/intmap", ":invalidkeyvalue", msgmap);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
-          if (valany != null) {
+          if (valany != Vx.Core.e_any) {
             ischanged = true;
             if (key.StartsWith(":")) {
               key = key.Substring(1);
@@ -5890,8 +5870,8 @@ public static class Core {
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -6037,9 +6017,9 @@ public static class Core {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_any> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>(value.vx_map());
-      Vx.Core.Type_msg? msg = null;
       string key = "";
-      Vx.Core.Type_any? msgval = null;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -6062,7 +6042,7 @@ public static class Core {
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
         } else {
-          Vx.Core.Type_any? valany = null;
+          Vx.Core.Type_any valany = Vx.Core.e_any;
           if (false) {
           } else if (valsub is Vx.Core.Type_any valallowed) {
             valany = valallowed;
@@ -6082,7 +6062,7 @@ public static class Core {
             msg = Vx.Core.vx_msg_from_error("vx/core/map", ":invalidkeyvalue", msgmap);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
-          if (valany != null) {
+          if (valany != Vx.Core.e_any) {
             ischanged = true;
             if (key.StartsWith(":")) {
               key = key.Substring(1);
@@ -6215,8 +6195,9 @@ public static class Core {
 
     public Vx.Core.Type_value valuepool() {
       Vx.Core.Type_value output = Vx.Core.e_value;
-      if (this.vx_p_valuepool != null) {
-        output = this.vx_p_valuepool;
+      Vx.Core.Type_value? testnull = vx_p_valuepool;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -6224,18 +6205,17 @@ public static class Core {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":valuepool":
+      if (false) {
+      } else if ((skey==":valuepool")) {
         output = this.valuepool();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":valuepool", this.valuepool());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":valuepool", this.valuepool());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -6256,8 +6236,8 @@ public static class Core {
       List<string> validkeys = new List<string>();
       validkeys.Add(":valuepool");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -6297,8 +6277,8 @@ public static class Core {
             }
           }
         } else {
-          switch (key) {
-          case ":valuepool":
+          if (false) {
+          } else if ((key==":valuepool")) {
             if (valsub == vx_p_valuepool) {
             } else if (valsub is Vx.Core.Type_value valvaluepool) {
               ischanged = true;
@@ -6317,12 +6297,10 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/mempool", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/core/mempool", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -6391,8 +6369,9 @@ public static class Core {
 
     public Vx.Core.Type_string code() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_code != null) {
-        output = this.vx_p_code;
+      Vx.Core.Type_string? testnull = vx_p_code;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -6401,8 +6380,9 @@ public static class Core {
 
     public Vx.Core.Type_any detail() {
       Vx.Core.Type_any output = Vx.Core.e_any;
-      if (this.vx_p_detail != null) {
-        output = this.vx_p_detail;
+      Vx.Core.Type_any? testnull = vx_p_detail;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -6411,8 +6391,9 @@ public static class Core {
 
     public Vx.Core.Type_string path() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_path != null) {
-        output = this.vx_p_path;
+      Vx.Core.Type_string? testnull = vx_p_path;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -6421,8 +6402,9 @@ public static class Core {
 
     public Vx.Core.Type_int severity() {
       Vx.Core.Type_int output = Vx.Core.e_int;
-      if (this.vx_p_severity != null) {
-        output = this.vx_p_severity;
+      Vx.Core.Type_int? testnull = vx_p_severity;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -6431,8 +6413,9 @@ public static class Core {
 
     public Vx.Core.Type_string text() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_text != null) {
-        output = this.vx_p_text;
+      Vx.Core.Type_string? testnull = vx_p_text;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -6440,34 +6423,29 @@ public static class Core {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":code":
+      if (false) {
+      } else if ((skey==":code")) {
         output = this.code();
-        break;
-      case ":detail":
+      } else if ((skey==":detail")) {
         output = this.detail();
-        break;
-      case ":path":
+      } else if ((skey==":path")) {
         output = this.path();
-        break;
-      case ":severity":
+      } else if ((skey==":severity")) {
         output = this.severity();
-        break;
-      case ":text":
+      } else if ((skey==":text")) {
         output = this.text();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":code", this.code());
-      output.put(":detail", this.detail());
-      output.put(":path", this.path());
-      output.put(":severity", this.severity());
-      output.put(":text", this.text());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":code", this.code());
+      map.put(":detail", this.detail());
+      map.put(":path", this.path());
+      map.put(":severity", this.severity());
+      map.put(":text", this.text());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -6498,8 +6476,8 @@ public static class Core {
             key = sval;
           }
         } else {
-          switch (key) {
-          case ":code":
+          if (false) {
+          } else if ((key==":code")) {
             if (valsub == vx_p_code) {
             } else if (valsub is Vx.Core.Type_string valcode) {
               ischanged = true;
@@ -6508,15 +6486,13 @@ public static class Core {
               ischanged = true;
               vx_p_code = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             }
-            break;
-          case ":detail":
+          } else if ((key==":detail")) {
             if (valsub == vx_p_detail) {
             } else if (valsub is Vx.Core.Type_any valdetail) {
               ischanged = true;
               vx_p_detail = valdetail;
             }
-            break;
-          case ":path":
+          } else if ((key==":path")) {
             if (valsub == vx_p_path) {
             } else if (valsub is Vx.Core.Type_string valpath) {
               ischanged = true;
@@ -6525,8 +6501,7 @@ public static class Core {
               ischanged = true;
               vx_p_path = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             }
-            break;
-          case ":severity":
+          } else if ((key==":severity")) {
             if (valsub == vx_p_severity) {
             } else if (valsub is Vx.Core.Type_int valseverity) {
               ischanged = true;
@@ -6535,8 +6510,7 @@ public static class Core {
               ischanged = true;
               vx_p_severity = Vx.Core.vx_new(Vx.Core.t_int, valsub);
             }
-            break;
-          case ":text":
+          } else if ((key==":text")) {
             if (valsub == vx_p_text) {
             } else if (valsub is Vx.Core.Type_string valtext) {
               ischanged = true;
@@ -6545,7 +6519,6 @@ public static class Core {
               ischanged = true;
               vx_p_text = Vx.Core.vx_new(Vx.Core.t_string, valsub);
             }
-            break;
           }
           key = "";
         }
@@ -6610,8 +6583,9 @@ public static class Core {
 
     public Vx.Core.Type_msglist msgs() {
       Vx.Core.Type_msglist output = Vx.Core.e_msglist;
-      if (this.vx_p_msgs != null) {
-        output = this.vx_p_msgs;
+      Vx.Core.Type_msglist? testnull = vx_p_msgs;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -6620,8 +6594,9 @@ public static class Core {
 
     public Vx.Core.Type_msgblocklist msgblocks() {
       Vx.Core.Type_msgblocklist output = Vx.Core.e_msgblocklist;
-      if (this.vx_p_msgblocks != null) {
-        output = this.vx_p_msgblocks;
+      Vx.Core.Type_msgblocklist? testnull = vx_p_msgblocks;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -6629,22 +6604,20 @@ public static class Core {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":msgs":
+      if (false) {
+      } else if ((skey==":msgs")) {
         output = this.msgs();
-        break;
-      case ":msgblocks":
+      } else if ((skey==":msgblocks")) {
         output = this.msgblocks();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":msgs", this.msgs());
-      output.put(":msgblocks", this.msgblocks());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":msgs", this.msgs());
+      map.put(":msgblocks", this.msgblocks());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -6664,8 +6637,8 @@ public static class Core {
       Vx.Core.Type_msglist vx_p_msgs = value.msgs();
       Vx.Core.Type_msgblocklist vx_p_msgblocks = value.msgblocks();
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           if (valsub != Vx.Core.e_msgblock) {
@@ -6695,8 +6668,8 @@ public static class Core {
             key = sval;
           }
         } else {
-          switch (key) {
-          case ":msgs":
+          if (false) {
+          } else if ((key==":msgs")) {
             if (valsub == vx_p_msgs) {
             } else if (valsub is Vx.Core.Type_msglist valmsgs) {
               ischanged = true;
@@ -6715,8 +6688,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/msgblock", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":msgblocks":
+          } else if ((key==":msgblocks")) {
             if (valsub == vx_p_msgblocks) {
             } else if (valsub is Vx.Core.Type_msgblocklist valmsgblocks) {
               ischanged = true;
@@ -6735,7 +6707,6 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/msgblock", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
           }
           key = "";
         }
@@ -7462,9 +7433,9 @@ public static class Core {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_number> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_number>(value.vx_mapnumber());
-      Vx.Core.Type_msg? msg = null;
       string key = "";
-      Vx.Core.Type_any? msgval = null;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -7487,7 +7458,7 @@ public static class Core {
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
         } else {
-          Vx.Core.Type_number? valany = null;
+          Vx.Core.Type_number valany = Vx.Core.e_number;
           if (false) {
           } else if (valsub is Vx.Core.Type_number valallowed) {
             valany = valallowed;
@@ -7507,7 +7478,7 @@ public static class Core {
             msg = Vx.Core.vx_msg_from_error("vx/core/numbermap", ":invalidkeyvalue", msgmap);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
-          if (valany != null) {
+          if (valany != Vx.Core.e_any) {
             ischanged = true;
             if (key.StartsWith(":")) {
               key = key.Substring(1);
@@ -7579,8 +7550,9 @@ public static class Core {
 
     public Vx.Core.Type_string pkgname() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_pkgname != null) {
-        output = this.vx_p_pkgname;
+      Vx.Core.Type_string? testnull = vx_p_pkgname;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -7589,8 +7561,9 @@ public static class Core {
 
     public Vx.Core.Type_constmap constmap() {
       Vx.Core.Type_constmap output = Vx.Core.e_constmap;
-      if (this.vx_p_constmap != null) {
-        output = this.vx_p_constmap;
+      Vx.Core.Type_constmap? testnull = vx_p_constmap;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -7599,8 +7572,9 @@ public static class Core {
 
     public Vx.Core.Type_funcmap funcmap() {
       Vx.Core.Type_funcmap output = Vx.Core.e_funcmap;
-      if (this.vx_p_funcmap != null) {
-        output = this.vx_p_funcmap;
+      Vx.Core.Type_funcmap? testnull = vx_p_funcmap;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -7609,8 +7583,9 @@ public static class Core {
 
     public Vx.Core.Type_typemap typemap() {
       Vx.Core.Type_typemap output = Vx.Core.e_typemap;
-      if (this.vx_p_typemap != null) {
-        output = this.vx_p_typemap;
+      Vx.Core.Type_typemap? testnull = vx_p_typemap;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -7619,8 +7594,9 @@ public static class Core {
 
     public Vx.Core.Type_map emptymap() {
       Vx.Core.Type_map output = Vx.Core.e_map;
-      if (this.vx_p_emptymap != null) {
-        output = this.vx_p_emptymap;
+      Vx.Core.Type_map? testnull = vx_p_emptymap;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -7628,34 +7604,29 @@ public static class Core {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":pkgname":
+      if (false) {
+      } else if ((skey==":pkgname")) {
         output = this.pkgname();
-        break;
-      case ":constmap":
+      } else if ((skey==":constmap")) {
         output = this.constmap();
-        break;
-      case ":funcmap":
+      } else if ((skey==":funcmap")) {
         output = this.funcmap();
-        break;
-      case ":typemap":
+      } else if ((skey==":typemap")) {
         output = this.typemap();
-        break;
-      case ":emptymap":
+      } else if ((skey==":emptymap")) {
         output = this.emptymap();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":pkgname", this.pkgname());
-      output.put(":constmap", this.constmap());
-      output.put(":funcmap", this.funcmap());
-      output.put(":typemap", this.typemap());
-      output.put(":emptymap", this.emptymap());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":pkgname", this.pkgname());
+      map.put(":constmap", this.constmap());
+      map.put(":funcmap", this.funcmap());
+      map.put(":typemap", this.typemap());
+      map.put(":emptymap", this.emptymap());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -7684,8 +7655,8 @@ public static class Core {
       validkeys.Add(":typemap");
       validkeys.Add(":emptymap");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -7725,8 +7696,8 @@ public static class Core {
             }
           }
         } else {
-          switch (key) {
-          case ":pkgname":
+          if (false) {
+          } else if ((key==":pkgname")) {
             if (valsub == vx_p_pkgname) {
             } else if (valsub is Vx.Core.Type_string valpkgname) {
               ischanged = true;
@@ -7748,8 +7719,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/package", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":constmap":
+          } else if ((key==":constmap")) {
             if (valsub == vx_p_constmap) {
             } else if (valsub is Vx.Core.Type_constmap valconstmap) {
               ischanged = true;
@@ -7768,8 +7738,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/package", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":funcmap":
+          } else if ((key==":funcmap")) {
             if (valsub == vx_p_funcmap) {
             } else if (valsub is Vx.Core.Type_funcmap valfuncmap) {
               ischanged = true;
@@ -7788,8 +7757,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/package", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":typemap":
+          } else if ((key==":typemap")) {
             if (valsub == vx_p_typemap) {
             } else if (valsub is Vx.Core.Type_typemap valtypemap) {
               ischanged = true;
@@ -7808,8 +7776,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/package", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":emptymap":
+          } else if ((key==":emptymap")) {
             if (valsub == vx_p_emptymap) {
             } else if (valsub is Vx.Core.Type_map valemptymap) {
               ischanged = true;
@@ -7828,12 +7795,10 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/package", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/core/package", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -7980,9 +7945,9 @@ public static class Core {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_package> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_package>(value.vx_mappackage());
-      Vx.Core.Type_msg? msg = null;
       string key = "";
-      Vx.Core.Type_any? msgval = null;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -8005,7 +7970,7 @@ public static class Core {
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
         } else {
-          Vx.Core.Type_package? valany = null;
+          Vx.Core.Type_package valany = Vx.Core.e_package;
           if (false) {
           } else if (valsub is Vx.Core.Type_package valallowed) {
             valany = valallowed;
@@ -8025,7 +7990,7 @@ public static class Core {
             msg = Vx.Core.vx_msg_from_error("vx/core/packagemap", ":invalidkeyvalue", msgmap);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
-          if (valany != null) {
+          if (valany != Vx.Core.e_any) {
             ischanged = true;
             if (key.StartsWith(":")) {
               key = key.Substring(1);
@@ -8093,8 +8058,9 @@ public static class Core {
 
     public Vx.Core.Type_string id() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_id != null) {
-        output = this.vx_p_id;
+      Vx.Core.Type_string? testnull = vx_p_id;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -8102,18 +8068,17 @@ public static class Core {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":id":
+      if (false) {
+      } else if ((skey==":id")) {
         output = this.id();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":id", this.id());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":id", this.id());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -8134,8 +8099,8 @@ public static class Core {
       List<string> validkeys = new List<string>();
       validkeys.Add(":id");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -8175,8 +8140,8 @@ public static class Core {
             }
           }
         } else {
-          switch (key) {
-          case ":id":
+          if (false) {
+          } else if ((key==":id")) {
             if (valsub == vx_p_id) {
             } else if (valsub is Vx.Core.Type_string valid) {
               ischanged = true;
@@ -8198,12 +8163,10 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/permission", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/core/permission", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -8479,9 +8442,9 @@ public static class Core {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_permission> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_permission>(value.vx_mappermission());
-      Vx.Core.Type_msg? msg = null;
       string key = "";
-      Vx.Core.Type_any? msgval = null;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -8504,7 +8467,7 @@ public static class Core {
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
         } else {
-          Vx.Core.Type_permission? valany = null;
+          Vx.Core.Type_permission valany = Vx.Core.e_permission;
           if (false) {
           } else if (valsub is Vx.Core.Type_permission valallowed) {
             valany = valallowed;
@@ -8524,7 +8487,7 @@ public static class Core {
             msg = Vx.Core.vx_msg_from_error("vx/core/permissionmap", ":invalidkeyvalue", msgmap);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
-          if (valany != null) {
+          if (valany != Vx.Core.e_any) {
             ischanged = true;
             if (key.StartsWith(":")) {
               key = key.Substring(1);
@@ -8592,8 +8555,9 @@ public static class Core {
 
     public Vx.Core.Type_packagemap packagemap() {
       Vx.Core.Type_packagemap output = Vx.Core.e_packagemap;
-      if (this.vx_p_packagemap != null) {
-        output = this.vx_p_packagemap;
+      Vx.Core.Type_packagemap? testnull = vx_p_packagemap;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -8601,18 +8565,17 @@ public static class Core {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":packagemap":
+      if (false) {
+      } else if ((skey==":packagemap")) {
         output = this.packagemap();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":packagemap", this.packagemap());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":packagemap", this.packagemap());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -8633,8 +8596,8 @@ public static class Core {
       List<string> validkeys = new List<string>();
       validkeys.Add(":packagemap");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -8674,8 +8637,8 @@ public static class Core {
             }
           }
         } else {
-          switch (key) {
-          case ":packagemap":
+          if (false) {
+          } else if ((key==":packagemap")) {
             if (valsub == vx_p_packagemap) {
             } else if (valsub is Vx.Core.Type_packagemap valpackagemap) {
               ischanged = true;
@@ -8694,12 +8657,10 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/project", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/core/project", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -8764,8 +8725,9 @@ public static class Core {
 
     public Vx.Core.Type_funclist allowfuncs() {
       Vx.Core.Type_funclist output = Vx.Core.e_funclist;
-      if (this.vx_p_allowfuncs != null) {
-        output = this.vx_p_allowfuncs;
+      Vx.Core.Type_funclist? testnull = vx_p_allowfuncs;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -8774,8 +8736,9 @@ public static class Core {
 
     public Vx.Core.Type_permissionlist permissions() {
       Vx.Core.Type_permissionlist output = Vx.Core.e_permissionlist;
-      if (this.vx_p_permissions != null) {
-        output = this.vx_p_permissions;
+      Vx.Core.Type_permissionlist? testnull = vx_p_permissions;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -8784,8 +8747,9 @@ public static class Core {
 
     public Vx.Core.Type_permissionmap permissionmap() {
       Vx.Core.Type_permissionmap output = Vx.Core.e_permissionmap;
-      if (this.vx_p_permissionmap != null) {
-        output = this.vx_p_permissionmap;
+      Vx.Core.Type_permissionmap? testnull = vx_p_permissionmap;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -8793,26 +8757,23 @@ public static class Core {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":allowfuncs":
+      if (false) {
+      } else if ((skey==":allowfuncs")) {
         output = this.allowfuncs();
-        break;
-      case ":permissions":
+      } else if ((skey==":permissions")) {
         output = this.permissions();
-        break;
-      case ":permissionmap":
+      } else if ((skey==":permissionmap")) {
         output = this.permissionmap();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":allowfuncs", this.allowfuncs());
-      output.put(":permissions", this.permissions());
-      output.put(":permissionmap", this.permissionmap());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":allowfuncs", this.allowfuncs());
+      map.put(":permissions", this.permissions());
+      map.put(":permissionmap", this.permissionmap());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -8837,8 +8798,8 @@ public static class Core {
       validkeys.Add(":permissions");
       validkeys.Add(":permissionmap");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -8878,8 +8839,8 @@ public static class Core {
             }
           }
         } else {
-          switch (key) {
-          case ":allowfuncs":
+          if (false) {
+          } else if ((key==":allowfuncs")) {
             if (valsub == vx_p_allowfuncs) {
             } else if (valsub is Vx.Core.Type_funclist valallowfuncs) {
               ischanged = true;
@@ -8898,8 +8859,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/security", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":permissions":
+          } else if ((key==":permissions")) {
             if (valsub == vx_p_permissions) {
             } else if (valsub is Vx.Core.Type_permissionlist valpermissions) {
               ischanged = true;
@@ -8918,8 +8878,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/security", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":permissionmap":
+          } else if ((key==":permissionmap")) {
             if (valsub == vx_p_permissionmap) {
             } else if (valsub is Vx.Core.Type_permissionmap valpermissionmap) {
               ischanged = true;
@@ -8938,12 +8897,10 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/security", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/core/security", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -9013,8 +8970,9 @@ public static class Core {
 
     public Vx.Core.Type_user user() {
       Vx.Core.Type_user output = Vx.Core.e_user;
-      if (this.vx_p_user != null) {
-        output = this.vx_p_user;
+      Vx.Core.Type_user? testnull = vx_p_user;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -9023,8 +8981,9 @@ public static class Core {
 
     public Vx.Core.Type_connectlist connectlist() {
       Vx.Core.Type_connectlist output = Vx.Core.e_connectlist;
-      if (this.vx_p_connectlist != null) {
-        output = this.vx_p_connectlist;
+      Vx.Core.Type_connectlist? testnull = vx_p_connectlist;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -9033,8 +8992,9 @@ public static class Core {
 
     public Vx.Core.Type_connectmap connectmap() {
       Vx.Core.Type_connectmap output = Vx.Core.e_connectmap;
-      if (this.vx_p_connectmap != null) {
-        output = this.vx_p_connectmap;
+      Vx.Core.Type_connectmap? testnull = vx_p_connectmap;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -9043,8 +9003,9 @@ public static class Core {
 
     public Vx.Core.Type_locale locale() {
       Vx.Core.Type_locale output = Vx.Core.e_locale;
-      if (this.vx_p_locale != null) {
-        output = this.vx_p_locale;
+      Vx.Core.Type_locale? testnull = vx_p_locale;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -9053,8 +9014,9 @@ public static class Core {
 
     public Vx.Core.Type_translation translation() {
       Vx.Core.Type_translation output = Vx.Core.e_translation;
-      if (this.vx_p_translation != null) {
-        output = this.vx_p_translation;
+      Vx.Core.Type_translation? testnull = vx_p_translation;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -9063,8 +9025,9 @@ public static class Core {
 
     public Vx.Core.Type_translationmap translationmap() {
       Vx.Core.Type_translationmap output = Vx.Core.e_translationmap;
-      if (this.vx_p_translationmap != null) {
-        output = this.vx_p_translationmap;
+      Vx.Core.Type_translationmap? testnull = vx_p_translationmap;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -9072,38 +9035,32 @@ public static class Core {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":user":
+      if (false) {
+      } else if ((skey==":user")) {
         output = this.user();
-        break;
-      case ":connectlist":
+      } else if ((skey==":connectlist")) {
         output = this.connectlist();
-        break;
-      case ":connectmap":
+      } else if ((skey==":connectmap")) {
         output = this.connectmap();
-        break;
-      case ":locale":
+      } else if ((skey==":locale")) {
         output = this.locale();
-        break;
-      case ":translation":
+      } else if ((skey==":translation")) {
         output = this.translation();
-        break;
-      case ":translationmap":
+      } else if ((skey==":translationmap")) {
         output = this.translationmap();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":user", this.user());
-      output.put(":connectlist", this.connectlist());
-      output.put(":connectmap", this.connectmap());
-      output.put(":locale", this.locale());
-      output.put(":translation", this.translation());
-      output.put(":translationmap", this.translationmap());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":user", this.user());
+      map.put(":connectlist", this.connectlist());
+      map.put(":connectmap", this.connectmap());
+      map.put(":locale", this.locale());
+      map.put(":translation", this.translation());
+      map.put(":translationmap", this.translationmap());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -9134,8 +9091,8 @@ public static class Core {
       validkeys.Add(":translation");
       validkeys.Add(":translationmap");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -9175,8 +9132,8 @@ public static class Core {
             }
           }
         } else {
-          switch (key) {
-          case ":user":
+          if (false) {
+          } else if ((key==":user")) {
             if (valsub == vx_p_user) {
             } else if (valsub is Vx.Core.Type_user valuser) {
               ischanged = true;
@@ -9195,8 +9152,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/session", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":connectlist":
+          } else if ((key==":connectlist")) {
             if (valsub == vx_p_connectlist) {
             } else if (valsub is Vx.Core.Type_connectlist valconnectlist) {
               ischanged = true;
@@ -9215,8 +9171,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/session", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":connectmap":
+          } else if ((key==":connectmap")) {
             if (valsub == vx_p_connectmap) {
             } else if (valsub is Vx.Core.Type_connectmap valconnectmap) {
               ischanged = true;
@@ -9235,8 +9190,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/session", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":locale":
+          } else if ((key==":locale")) {
             if (valsub == vx_p_locale) {
             } else if (valsub is Vx.Core.Type_locale vallocale) {
               ischanged = true;
@@ -9255,8 +9209,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/session", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":translation":
+          } else if ((key==":translation")) {
             if (valsub == vx_p_translation) {
             } else if (valsub is Vx.Core.Type_translation valtranslation) {
               ischanged = true;
@@ -9275,8 +9228,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/session", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":translationmap":
+          } else if ((key==":translationmap")) {
             if (valsub == vx_p_translationmap) {
             } else if (valsub is Vx.Core.Type_translationmap valtranslationmap) {
               ischanged = true;
@@ -9295,12 +9247,10 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/session", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/core/session", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -9368,8 +9318,9 @@ public static class Core {
 
     public Vx.Core.Type_stringmap pathmap() {
       Vx.Core.Type_stringmap output = Vx.Core.e_stringmap;
-      if (this.vx_p_pathmap != null) {
-        output = this.vx_p_pathmap;
+      Vx.Core.Type_stringmap? testnull = vx_p_pathmap;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -9377,18 +9328,17 @@ public static class Core {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":pathmap":
+      if (false) {
+      } else if ((skey==":pathmap")) {
         output = this.pathmap();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":pathmap", this.pathmap());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":pathmap", this.pathmap());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -9409,8 +9359,8 @@ public static class Core {
       List<string> validkeys = new List<string>();
       validkeys.Add(":pathmap");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -9450,8 +9400,8 @@ public static class Core {
             }
           }
         } else {
-          switch (key) {
-          case ":pathmap":
+          if (false) {
+          } else if ((key==":pathmap")) {
             if (valsub == vx_p_pathmap) {
             } else if (valsub is Vx.Core.Type_stringmap valpathmap) {
               ischanged = true;
@@ -9470,12 +9420,10 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/setting", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/core/setting", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -9538,8 +9486,9 @@ public static class Core {
 
     public Vx.Core.Type_statelistenermap statelistenermap() {
       Vx.Core.Type_statelistenermap output = Vx.Core.e_statelistenermap;
-      if (this.vx_p_statelistenermap != null) {
-        output = this.vx_p_statelistenermap;
+      Vx.Core.Type_statelistenermap? testnull = vx_p_statelistenermap;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -9547,18 +9496,17 @@ public static class Core {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":statelistenermap":
+      if (false) {
+      } else if ((skey==":statelistenermap")) {
         output = this.statelistenermap();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":statelistenermap", this.statelistenermap());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":statelistenermap", this.statelistenermap());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -9579,8 +9527,8 @@ public static class Core {
       List<string> validkeys = new List<string>();
       validkeys.Add(":statelistenermap");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -9620,8 +9568,8 @@ public static class Core {
             }
           }
         } else {
-          switch (key) {
-          case ":statelistenermap":
+          if (false) {
+          } else if ((key==":statelistenermap")) {
             if (valsub == vx_p_statelistenermap) {
             } else if (valsub is Vx.Core.Type_statelistenermap valstatelistenermap) {
               ischanged = true;
@@ -9640,12 +9588,10 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/state", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/core/state", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -9709,8 +9655,9 @@ public static class Core {
 
     public Vx.Core.Type_string name() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_name != null) {
-        output = this.vx_p_name;
+      Vx.Core.Type_string? testnull = vx_p_name;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -9719,8 +9666,9 @@ public static class Core {
 
     public Vx.Core.Type_any value() {
       Vx.Core.Type_any output = Vx.Core.e_any;
-      if (this.vx_p_value != null) {
-        output = this.vx_p_value;
+      Vx.Core.Type_any? testnull = vx_p_value;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -9729,8 +9677,9 @@ public static class Core {
 
     public Vx.Core.Func_boolean_from_none fn_boolean() {
       Vx.Core.Func_boolean_from_none output = Vx.Core.e_boolean_from_none;
-      if (this.vx_p_fn_boolean != null) {
-        output = this.vx_p_fn_boolean;
+      Vx.Core.Func_boolean_from_none? testnull = vx_p_fn_boolean;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -9738,26 +9687,23 @@ public static class Core {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":name":
+      if (false) {
+      } else if ((skey==":name")) {
         output = this.name();
-        break;
-      case ":value":
+      } else if ((skey==":value")) {
         output = this.value();
-        break;
-      case ":fn-boolean":
+      } else if ((skey==":fn-boolean")) {
         output = this.fn_boolean();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":name", this.name());
-      output.put(":value", this.value());
-      output.put(":fn-boolean", this.fn_boolean());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":name", this.name());
+      map.put(":value", this.value());
+      map.put(":fn-boolean", this.fn_boolean());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -9782,8 +9728,8 @@ public static class Core {
       validkeys.Add(":value");
       validkeys.Add(":fn-boolean");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -9823,8 +9769,8 @@ public static class Core {
             }
           }
         } else {
-          switch (key) {
-          case ":name":
+          if (false) {
+          } else if ((key==":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
@@ -9846,8 +9792,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/statelistener", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":value":
+          } else if ((key==":value")) {
             if (valsub == vx_p_value) {
             } else if (valsub is Vx.Core.Type_any valvalue) {
               ischanged = true;
@@ -9866,8 +9811,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/statelistener", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":fn-boolean":
+          } else if ((key==":fn-boolean")) {
             if (valsub == vx_p_fn_boolean) {
             } else if (valsub is Vx.Core.Func_boolean_from_none valfn_boolean) {
               ischanged = true;
@@ -9886,12 +9830,10 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/statelistener", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/core/statelistener", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -10037,9 +9979,9 @@ public static class Core {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_statelistener> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_statelistener>(value.vx_mapstatelistener());
-      Vx.Core.Type_msg? msg = null;
       string key = "";
-      Vx.Core.Type_any? msgval = null;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -10062,7 +10004,7 @@ public static class Core {
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
         } else {
-          Vx.Core.Type_statelistener? valany = null;
+          Vx.Core.Type_statelistener valany = Vx.Core.e_statelistener;
           if (false) {
           } else if (valsub is Vx.Core.Type_statelistener valallowed) {
             valany = valallowed;
@@ -10082,7 +10024,7 @@ public static class Core {
             msg = Vx.Core.vx_msg_from_error("vx/core/statelistenermap", ":invalidkeyvalue", msgmap);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
-          if (valany != null) {
+          if (valany != Vx.Core.e_any) {
             ischanged = true;
             if (key.StartsWith(":")) {
               key = key.Substring(1);
@@ -10613,9 +10555,9 @@ public static class Core {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_string> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_string>(value.vx_mapstring());
-      Vx.Core.Type_msg? msg = null;
       string key = "";
-      Vx.Core.Type_any? msgval = null;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -10638,7 +10580,7 @@ public static class Core {
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
         } else {
-          Vx.Core.Type_string? valany = null;
+          Vx.Core.Type_string valany = Vx.Core.e_string;
           if (false) {
           } else if (valsub is Vx.Core.Type_string valallowed) {
             valany = valallowed;
@@ -10658,7 +10600,7 @@ public static class Core {
             msg = Vx.Core.vx_msg_from_error("vx/core/stringmap", ":invalidkeyvalue", msgmap);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
-          if (valany != null) {
+          if (valany != Vx.Core.e_any) {
             ischanged = true;
             if (key.StartsWith(":")) {
               key = key.Substring(1);
@@ -10807,9 +10749,9 @@ public static class Core {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_string> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_string>(value.vx_mapstring());
-      Vx.Core.Type_msg? msg = null;
       string key = "";
-      Vx.Core.Type_any? msgval = null;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -10832,7 +10774,7 @@ public static class Core {
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
         } else {
-          Vx.Core.Type_string? valany = null;
+          Vx.Core.Type_string valany = Vx.Core.e_string;
           if (false) {
           } else if (valsub is Vx.Core.Type_string valallowed) {
             valany = valallowed;
@@ -10852,7 +10794,7 @@ public static class Core {
             msg = Vx.Core.vx_msg_from_error("vx/core/stringmutablemap", ":invalidkeyvalue", msgmap);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
-          if (valany != null) {
+          if (valany != Vx.Core.e_any) {
             ischanged = true;
             if (key.StartsWith(":")) {
               key = key.Substring(1);
@@ -10923,8 +10865,8 @@ public static class Core {
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -11001,8 +10943,9 @@ public static class Core {
 
     public Vx.Core.Type_string code() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_code != null) {
-        output = this.vx_p_code;
+      Vx.Core.Type_string? testnull = vx_p_code;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -11011,8 +10954,9 @@ public static class Core {
 
     public Vx.Core.Type_any value() {
       Vx.Core.Type_any output = Vx.Core.e_any;
-      if (this.vx_p_value != null) {
-        output = this.vx_p_value;
+      Vx.Core.Type_any? testnull = vx_p_value;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -11021,8 +10965,9 @@ public static class Core {
 
     public Vx.Core.Type_list values() {
       Vx.Core.Type_list output = Vx.Core.e_list;
-      if (this.vx_p_values != null) {
-        output = this.vx_p_values;
+      Vx.Core.Type_list? testnull = vx_p_values;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -11031,8 +10976,9 @@ public static class Core {
 
     public Vx.Core.Func_boolean_from_func fn_cond() {
       Vx.Core.Func_boolean_from_func output = Vx.Core.e_boolean_from_func;
-      if (this.vx_p_fn_cond != null) {
-        output = this.vx_p_fn_cond;
+      Vx.Core.Func_boolean_from_func? testnull = vx_p_fn_cond;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -11041,8 +10987,9 @@ public static class Core {
 
     public Vx.Core.Func_any_from_func fn_any() {
       Vx.Core.Func_any_from_func output = Vx.Core.e_any_from_func;
-      if (this.vx_p_fn_any != null) {
-        output = this.vx_p_fn_any;
+      Vx.Core.Func_any_from_func? testnull = vx_p_fn_any;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -11050,34 +10997,29 @@ public static class Core {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":code":
+      if (false) {
+      } else if ((skey==":code")) {
         output = this.code();
-        break;
-      case ":value":
+      } else if ((skey==":value")) {
         output = this.value();
-        break;
-      case ":values":
+      } else if ((skey==":values")) {
         output = this.values();
-        break;
-      case ":fn-cond":
+      } else if ((skey==":fn-cond")) {
         output = this.fn_cond();
-        break;
-      case ":fn-any":
+      } else if ((skey==":fn-any")) {
         output = this.fn_any();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":code", this.code());
-      output.put(":value", this.value());
-      output.put(":values", this.values());
-      output.put(":fn-cond", this.fn_cond());
-      output.put(":fn-any", this.fn_any());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":code", this.code());
+      map.put(":value", this.value());
+      map.put(":values", this.values());
+      map.put(":fn-cond", this.fn_cond());
+      map.put(":fn-any", this.fn_any());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -11106,8 +11048,8 @@ public static class Core {
       validkeys.Add(":fn-cond");
       validkeys.Add(":fn-any");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -11147,8 +11089,8 @@ public static class Core {
             }
           }
         } else {
-          switch (key) {
-          case ":code":
+          if (false) {
+          } else if ((key==":code")) {
             if (valsub == vx_p_code) {
             } else if (valsub is Vx.Core.Type_string valcode) {
               ischanged = true;
@@ -11170,8 +11112,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/thenelse", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":value":
+          } else if ((key==":value")) {
             if (valsub == vx_p_value) {
             } else if (valsub is Vx.Core.Type_any valvalue) {
               ischanged = true;
@@ -11190,8 +11131,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/thenelse", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":values":
+          } else if ((key==":values")) {
             if (valsub == vx_p_values) {
             } else if (valsub is Vx.Core.Type_list valvalues) {
               ischanged = true;
@@ -11210,8 +11150,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/thenelse", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":fn-cond":
+          } else if ((key==":fn-cond")) {
             if (valsub == vx_p_fn_cond) {
             } else if (valsub is Vx.Core.Func_boolean_from_func valfn_cond) {
               ischanged = true;
@@ -11230,8 +11169,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/thenelse", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":fn-any":
+          } else if ((key==":fn-any")) {
             if (valsub == vx_p_fn_any) {
             } else if (valsub is Vx.Core.Func_any_from_func valfn_any) {
               ischanged = true;
@@ -11250,12 +11188,10 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/thenelse", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/core/thenelse", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -11454,8 +11390,9 @@ public static class Core {
 
     public Vx.Core.Type_string name() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_name != null) {
-        output = this.vx_p_name;
+      Vx.Core.Type_string? testnull = vx_p_name;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -11464,8 +11401,9 @@ public static class Core {
 
     public Vx.Core.Type_stringmap wordmap() {
       Vx.Core.Type_stringmap output = Vx.Core.e_stringmap;
-      if (this.vx_p_wordmap != null) {
-        output = this.vx_p_wordmap;
+      Vx.Core.Type_stringmap? testnull = vx_p_wordmap;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -11473,22 +11411,20 @@ public static class Core {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":name":
+      if (false) {
+      } else if ((skey==":name")) {
         output = this.name();
-        break;
-      case ":wordmap":
+      } else if ((skey==":wordmap")) {
         output = this.wordmap();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":name", this.name());
-      output.put(":wordmap", this.wordmap());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":name", this.name());
+      map.put(":wordmap", this.wordmap());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -11511,8 +11447,8 @@ public static class Core {
       validkeys.Add(":name");
       validkeys.Add(":wordmap");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -11552,8 +11488,8 @@ public static class Core {
             }
           }
         } else {
-          switch (key) {
-          case ":name":
+          if (false) {
+          } else if ((key==":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
@@ -11575,8 +11511,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/translation", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":wordmap":
+          } else if ((key==":wordmap")) {
             if (valsub == vx_p_wordmap) {
             } else if (valsub is Vx.Core.Type_stringmap valwordmap) {
               ischanged = true;
@@ -11595,12 +11530,10 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/translation", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/core/translation", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -11877,9 +11810,9 @@ public static class Core {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_translation> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_translation>(value.vx_maptranslation());
-      Vx.Core.Type_msg? msg = null;
       string key = "";
-      Vx.Core.Type_any? msgval = null;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -11902,7 +11835,7 @@ public static class Core {
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
         } else {
-          Vx.Core.Type_translation? valany = null;
+          Vx.Core.Type_translation valany = Vx.Core.e_translation;
           if (false) {
           } else if (valsub is Vx.Core.Type_translation valallowed) {
             valany = valallowed;
@@ -11922,7 +11855,7 @@ public static class Core {
             msg = Vx.Core.vx_msg_from_error("vx/core/translationmap", ":invalidkeyvalue", msgmap);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
-          if (valany != null) {
+          if (valany != Vx.Core.e_any) {
             ischanged = true;
             if (key.StartsWith(":")) {
               key = key.Substring(1);
@@ -12066,8 +11999,9 @@ public static class Core {
 
     public Vx.Core.Type_string pkgname() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_pkgname != null) {
-        output = this.vx_p_pkgname;
+      Vx.Core.Type_string? testnull = vx_p_pkgname;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -12076,8 +12010,9 @@ public static class Core {
 
     public Vx.Core.Type_string name() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_name != null) {
-        output = this.vx_p_name;
+      Vx.Core.Type_string? testnull = vx_p_name;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -12086,8 +12021,9 @@ public static class Core {
 
     public Vx.Core.Type_string extend() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_extend != null) {
-        output = this.vx_p_extend;
+      Vx.Core.Type_string? testnull = vx_p_extend;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -12096,8 +12032,9 @@ public static class Core {
 
     public Vx.Core.Type_funclist allowfuncs() {
       Vx.Core.Type_funclist output = Vx.Core.e_funclist;
-      if (this.vx_p_allowfuncs != null) {
-        output = this.vx_p_allowfuncs;
+      Vx.Core.Type_funclist? testnull = vx_p_allowfuncs;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -12106,8 +12043,9 @@ public static class Core {
 
     public Vx.Core.Type_typelist allowtypes() {
       Vx.Core.Type_typelist output = Vx.Core.e_typelist;
-      if (this.vx_p_allowtypes != null) {
-        output = this.vx_p_allowtypes;
+      Vx.Core.Type_typelist? testnull = vx_p_allowtypes;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -12116,8 +12054,9 @@ public static class Core {
 
     public Vx.Core.Type_anylist allowvalues() {
       Vx.Core.Type_anylist output = Vx.Core.e_anylist;
-      if (this.vx_p_allowvalues != null) {
-        output = this.vx_p_allowvalues;
+      Vx.Core.Type_anylist? testnull = vx_p_allowvalues;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -12126,8 +12065,9 @@ public static class Core {
 
     public Vx.Core.Type_funclist disallowfuncs() {
       Vx.Core.Type_funclist output = Vx.Core.e_funclist;
-      if (this.vx_p_disallowfuncs != null) {
-        output = this.vx_p_disallowfuncs;
+      Vx.Core.Type_funclist? testnull = vx_p_disallowfuncs;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -12136,8 +12076,9 @@ public static class Core {
 
     public Vx.Core.Type_typelist disallowtypes() {
       Vx.Core.Type_typelist output = Vx.Core.e_typelist;
-      if (this.vx_p_disallowtypes != null) {
-        output = this.vx_p_disallowtypes;
+      Vx.Core.Type_typelist? testnull = vx_p_disallowtypes;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -12146,8 +12087,9 @@ public static class Core {
 
     public Vx.Core.Type_anylist disallowvalues() {
       Vx.Core.Type_anylist output = Vx.Core.e_anylist;
-      if (this.vx_p_disallowvalues != null) {
-        output = this.vx_p_disallowvalues;
+      Vx.Core.Type_anylist? testnull = vx_p_disallowvalues;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -12156,8 +12098,9 @@ public static class Core {
 
     public Vx.Core.Type_argmap properties() {
       Vx.Core.Type_argmap output = Vx.Core.e_argmap;
-      if (this.vx_p_properties != null) {
-        output = this.vx_p_properties;
+      Vx.Core.Type_argmap? testnull = vx_p_properties;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -12166,8 +12109,9 @@ public static class Core {
 
     public Vx.Core.Type_arg proplast() {
       Vx.Core.Type_arg output = Vx.Core.e_arg;
-      if (this.vx_p_proplast != null) {
-        output = this.vx_p_proplast;
+      Vx.Core.Type_arg? testnull = vx_p_proplast;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -12176,8 +12120,9 @@ public static class Core {
 
     public Vx.Core.Type_typelist traits() {
       Vx.Core.Type_typelist output = Vx.Core.e_typelist;
-      if (this.vx_p_traits != null) {
-        output = this.vx_p_traits;
+      Vx.Core.Type_typelist? testnull = vx_p_traits;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -12185,62 +12130,50 @@ public static class Core {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":pkgname":
+      if (false) {
+      } else if ((skey==":pkgname")) {
         output = this.pkgname();
-        break;
-      case ":name":
+      } else if ((skey==":name")) {
         output = this.name();
-        break;
-      case ":extends":
+      } else if ((skey==":extends")) {
         output = this.extend();
-        break;
-      case ":allowfuncs":
+      } else if ((skey==":allowfuncs")) {
         output = this.allowfuncs();
-        break;
-      case ":allowtypes":
+      } else if ((skey==":allowtypes")) {
         output = this.allowtypes();
-        break;
-      case ":allowvalues":
+      } else if ((skey==":allowvalues")) {
         output = this.allowvalues();
-        break;
-      case ":disallowfuncs":
+      } else if ((skey==":disallowfuncs")) {
         output = this.disallowfuncs();
-        break;
-      case ":disallowtypes":
+      } else if ((skey==":disallowtypes")) {
         output = this.disallowtypes();
-        break;
-      case ":disallowvalues":
+      } else if ((skey==":disallowvalues")) {
         output = this.disallowvalues();
-        break;
-      case ":properties":
+      } else if ((skey==":properties")) {
         output = this.properties();
-        break;
-      case ":proplast":
+      } else if ((skey==":proplast")) {
         output = this.proplast();
-        break;
-      case ":traits":
+      } else if ((skey==":traits")) {
         output = this.traits();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":pkgname", this.pkgname());
-      output.put(":name", this.name());
-      output.put(":extends", this.extend());
-      output.put(":allowfuncs", this.allowfuncs());
-      output.put(":allowtypes", this.allowtypes());
-      output.put(":allowvalues", this.allowvalues());
-      output.put(":disallowfuncs", this.disallowfuncs());
-      output.put(":disallowtypes", this.disallowtypes());
-      output.put(":disallowvalues", this.disallowvalues());
-      output.put(":properties", this.properties());
-      output.put(":proplast", this.proplast());
-      output.put(":traits", this.traits());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":pkgname", this.pkgname());
+      map.put(":name", this.name());
+      map.put(":extends", this.extend());
+      map.put(":allowfuncs", this.allowfuncs());
+      map.put(":allowtypes", this.allowtypes());
+      map.put(":allowvalues", this.allowvalues());
+      map.put(":disallowfuncs", this.disallowfuncs());
+      map.put(":disallowtypes", this.disallowtypes());
+      map.put(":disallowvalues", this.disallowvalues());
+      map.put(":properties", this.properties());
+      map.put(":proplast", this.proplast());
+      map.put(":traits", this.traits());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -12283,8 +12216,8 @@ public static class Core {
       validkeys.Add(":proplast");
       validkeys.Add(":traits");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -12324,8 +12257,8 @@ public static class Core {
             }
           }
         } else {
-          switch (key) {
-          case ":pkgname":
+          if (false) {
+          } else if ((key==":pkgname")) {
             if (valsub == vx_p_pkgname) {
             } else if (valsub is Vx.Core.Type_string valpkgname) {
               ischanged = true;
@@ -12347,8 +12280,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/typedef", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":name":
+          } else if ((key==":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
@@ -12370,8 +12302,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/typedef", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":extends":
+          } else if ((key==":extends")) {
             if (valsub == vx_p_extend) {
             } else if (valsub is Vx.Core.Type_string valextend) {
               ischanged = true;
@@ -12393,8 +12324,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/typedef", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":allowfuncs":
+          } else if ((key==":allowfuncs")) {
             if (valsub == vx_p_allowfuncs) {
             } else if (valsub is Vx.Core.Type_funclist valallowfuncs) {
               ischanged = true;
@@ -12413,8 +12343,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/typedef", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":allowtypes":
+          } else if ((key==":allowtypes")) {
             if (valsub == vx_p_allowtypes) {
             } else if (valsub is Vx.Core.Type_typelist valallowtypes) {
               ischanged = true;
@@ -12433,8 +12362,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/typedef", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":allowvalues":
+          } else if ((key==":allowvalues")) {
             if (valsub == vx_p_allowvalues) {
             } else if (valsub is Vx.Core.Type_anylist valallowvalues) {
               ischanged = true;
@@ -12453,8 +12381,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/typedef", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":disallowfuncs":
+          } else if ((key==":disallowfuncs")) {
             if (valsub == vx_p_disallowfuncs) {
             } else if (valsub is Vx.Core.Type_funclist valdisallowfuncs) {
               ischanged = true;
@@ -12473,8 +12400,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/typedef", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":disallowtypes":
+          } else if ((key==":disallowtypes")) {
             if (valsub == vx_p_disallowtypes) {
             } else if (valsub is Vx.Core.Type_typelist valdisallowtypes) {
               ischanged = true;
@@ -12493,8 +12419,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/typedef", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":disallowvalues":
+          } else if ((key==":disallowvalues")) {
             if (valsub == vx_p_disallowvalues) {
             } else if (valsub is Vx.Core.Type_anylist valdisallowvalues) {
               ischanged = true;
@@ -12513,8 +12438,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/typedef", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":properties":
+          } else if ((key==":properties")) {
             if (valsub == vx_p_properties) {
             } else if (valsub is Vx.Core.Type_argmap valproperties) {
               ischanged = true;
@@ -12533,8 +12457,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/typedef", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":proplast":
+          } else if ((key==":proplast")) {
             if (valsub == vx_p_proplast) {
             } else if (valsub is Vx.Core.Type_arg valproplast) {
               ischanged = true;
@@ -12553,8 +12476,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/typedef", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":traits":
+          } else if ((key==":traits")) {
             if (valsub == vx_p_traits) {
             } else if (valsub is Vx.Core.Type_typelist valtraits) {
               ischanged = true;
@@ -12573,12 +12495,10 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/typedef", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/core/typedef", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -12837,9 +12757,9 @@ public static class Core {
         ischanged = true;
       }
       Vx.Core.Map<string, Vx.Core.Type_any> mapval = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>(value.vx_map());
-      Vx.Core.Type_msg? msg = null;
       string key = "";
-      Vx.Core.Type_any? msgval = null;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -12862,7 +12782,7 @@ public static class Core {
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
         } else {
-          Vx.Core.Type_any? valany = null;
+          Vx.Core.Type_any valany = Vx.Core.e_any;
           if (false) {
           } else if (valsub is Vx.Core.Type_any valallowed) {
             valany = valallowed;
@@ -12882,7 +12802,7 @@ public static class Core {
             msg = Vx.Core.vx_msg_from_error("vx/core/typemap", ":invalidkeyvalue", msgmap);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
           }
-          if (valany != null) {
+          if (valany != Vx.Core.e_any) {
             ischanged = true;
             if (key.StartsWith(":")) {
               key = key.Substring(1);
@@ -12952,8 +12872,9 @@ public static class Core {
 
     public Vx.Core.Type_security security() {
       Vx.Core.Type_security output = Vx.Core.e_security;
-      if (this.vx_p_security != null) {
-        output = this.vx_p_security;
+      Vx.Core.Type_security? testnull = vx_p_security;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -12962,8 +12883,9 @@ public static class Core {
 
     public Vx.Core.Type_string username() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_username != null) {
-        output = this.vx_p_username;
+      Vx.Core.Type_string? testnull = vx_p_username;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -12972,8 +12894,9 @@ public static class Core {
 
     public Vx.Core.Type_string token() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_token != null) {
-        output = this.vx_p_token;
+      Vx.Core.Type_string? testnull = vx_p_token;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -12981,26 +12904,23 @@ public static class Core {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":security":
+      if (false) {
+      } else if ((skey==":security")) {
         output = this.security();
-        break;
-      case ":username":
+      } else if ((skey==":username")) {
         output = this.username();
-        break;
-      case ":token":
+      } else if ((skey==":token")) {
         output = this.token();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":security", this.security());
-      output.put(":username", this.username());
-      output.put(":token", this.token());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":security", this.security());
+      map.put(":username", this.username());
+      map.put(":token", this.token());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -13025,8 +12945,8 @@ public static class Core {
       validkeys.Add(":username");
       validkeys.Add(":token");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -13066,8 +12986,8 @@ public static class Core {
             }
           }
         } else {
-          switch (key) {
-          case ":security":
+          if (false) {
+          } else if ((key==":security")) {
             if (valsub == vx_p_security) {
             } else if (valsub is Vx.Core.Type_security valsecurity) {
               ischanged = true;
@@ -13086,8 +13006,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/user", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":username":
+          } else if ((key==":username")) {
             if (valsub == vx_p_username) {
             } else if (valsub is Vx.Core.Type_string valusername) {
               ischanged = true;
@@ -13109,8 +13028,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/user", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":token":
+          } else if ((key==":token")) {
             if (valsub == vx_p_token) {
             } else if (valsub is Vx.Core.Type_string valtoken) {
               ischanged = true;
@@ -13132,12 +13050,10 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/user", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/core/user", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -13202,8 +13118,9 @@ public static class Core {
 
     public Vx.Core.Type_any next() {
       Vx.Core.Type_any output = Vx.Core.e_any;
-      if (this.vx_p_next != null) {
-        output = this.vx_p_next;
+      Vx.Core.Type_any? testnull = vx_p_next;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -13212,8 +13129,9 @@ public static class Core {
 
     public Vx.Core.Type_int refs() {
       Vx.Core.Type_int output = Vx.Core.e_int;
-      if (this.vx_p_refs != null) {
-        output = this.vx_p_refs;
+      Vx.Core.Type_int? testnull = vx_p_refs;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -13221,22 +13139,20 @@ public static class Core {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":next":
+      if (false) {
+      } else if ((skey==":next")) {
         output = this.next();
-        break;
-      case ":refs":
+      } else if ((skey==":refs")) {
         output = this.refs();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":next", this.next());
-      output.put(":refs", this.refs());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":next", this.next());
+      map.put(":refs", this.refs());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -13259,8 +13175,8 @@ public static class Core {
       validkeys.Add(":next");
       validkeys.Add(":refs");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -13300,8 +13216,8 @@ public static class Core {
             }
           }
         } else {
-          switch (key) {
-          case ":next":
+          if (false) {
+          } else if ((key==":next")) {
             if (valsub == vx_p_next) {
             } else if (valsub is Vx.Core.Type_any valnext) {
               ischanged = true;
@@ -13320,8 +13236,7 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/value", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":refs":
+          } else if ((key==":refs")) {
             if (valsub == vx_p_refs) {
             } else if (valsub is Vx.Core.Type_int valrefs) {
               ischanged = true;
@@ -13343,12 +13258,10 @@ public static class Core {
               msg = Vx.Core.vx_msg_from_error("vx/core/value", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/core/value", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -17828,7 +17741,7 @@ public static class Core {
    */
   public interface Func_any_from_any : Vx.Core.Type_func, Vx.Core.Type_replfunc {
     public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any;
-    public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn);
+    public Vx.Core.Func_any_from_any vx_fn_new(Class_any_from_any.IFn fn);
   }
 
   public class Class_any_from_any : Vx.Core.Class_base, Func_any_from_any {
@@ -17883,9 +17796,9 @@ public static class Core {
 
     public delegate Vx.Core.Type_any IFn(Vx.Core.Type_any value);
 
-    public Vx.Core.Class_any_from_any.IFn? fn = null;
+    public Class_any_from_any.IFn? fn = null;
 
-    public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
+    public Vx.Core.Func_any_from_any vx_fn_new(Class_any_from_any.IFn fn) {
       Vx.Core.Class_any_from_any output = new Vx.Core.Class_any_from_any();
       output.fn = fn;
       return output;
@@ -17901,8 +17814,9 @@ public static class Core {
 
     public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
       T output = Vx.Core.f_empty(generic_any_1);
-      if (fn != null) {
-        Vx.Core.Type_any anyoutput = fn(value);
+      Class_any_from_any.IFn? fnlocal = this.fn;
+      if (fnlocal != null) {
+        Vx.Core.Type_any anyoutput = fnlocal(value);
         output = Vx.Core.f_any_from_any(generic_any_1, anyoutput);
       }
       return output;
@@ -17932,7 +17846,7 @@ public static class Core {
    */
   public interface Func_any_from_any_async : Vx.Core.Type_func, Vx.Core.Type_replfunc_async {
     public Task<T> vx_any_from_any_async<T, U>(T generic_any_1, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any;
-    public Vx.Core.Func_any_from_any_async vx_fn_new(Vx.Core.Class_any_from_any_async.IFn fn);
+    public Vx.Core.Func_any_from_any_async vx_fn_new(Class_any_from_any_async.IFn fn);
   }
 
   public class Class_any_from_any_async : Vx.Core.Class_base, Func_any_from_any_async {
@@ -17987,9 +17901,9 @@ public static class Core {
 
     public delegate Task<Vx.Core.Type_any> IFn(Vx.Core.Type_any value);
 
-    public Vx.Core.Class_any_from_any_async.IFn? fn = null;
+    public Class_any_from_any_async.IFn? fn = null;
 
-    public Vx.Core.Func_any_from_any_async vx_fn_new(Vx.Core.Class_any_from_any_async.IFn fn) {
+    public Vx.Core.Func_any_from_any_async vx_fn_new(Class_any_from_any_async.IFn fn) {
       Vx.Core.Class_any_from_any_async output = new Vx.Core.Class_any_from_any_async();
       output.fn = fn;
       return output;
@@ -18006,10 +17920,11 @@ public static class Core {
 
     public Task<T> vx_any_from_any_async<T, U>(T generic_any_1, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
       Task<T> output;
-      if (fn == null) {
+      Class_any_from_any_async.IFn? fnlocal = this.fn;
+      if (fnlocal == null) {
         output = Vx.Core.vx_async_new_from_value(Vx.Core.f_empty(generic_any_1));
       } else {
-        Task<Vx.Core.Type_any> future = fn(value);
+        Task<Vx.Core.Type_any> future = fnlocal(value);
         output = Vx.Core.vx_async_from_async(generic_any_1, future);
       }
       return output;
@@ -18034,7 +17949,7 @@ public static class Core {
    */
   public interface Func_any_from_any_context : Vx.Core.Type_func, Vx.Core.Type_replfunc {
     public T vx_any_from_any_context<T, U>(T generic_any_1, Vx.Core.Type_context context, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any;
-    public Vx.Core.Func_any_from_any_context vx_fn_new(Vx.Core.Class_any_from_any_context.IFn fn);
+    public Vx.Core.Func_any_from_any_context vx_fn_new(Class_any_from_any_context.IFn fn);
   }
 
   public class Class_any_from_any_context : Vx.Core.Class_base, Func_any_from_any_context {
@@ -18089,9 +18004,9 @@ public static class Core {
 
     public delegate Vx.Core.Type_any IFn(Vx.Core.Type_context context, Vx.Core.Type_any value);
 
-    public Vx.Core.Class_any_from_any_context.IFn? fn = null;
+    public Class_any_from_any_context.IFn? fn = null;
 
-    public Vx.Core.Func_any_from_any_context vx_fn_new(Vx.Core.Class_any_from_any_context.IFn fn) {
+    public Vx.Core.Func_any_from_any_context vx_fn_new(Class_any_from_any_context.IFn fn) {
       Vx.Core.Class_any_from_any_context output = new Vx.Core.Class_any_from_any_context();
       output.fn = fn;
       return output;
@@ -18108,8 +18023,9 @@ public static class Core {
 
     public T vx_any_from_any_context<T, U>(T generic_any_1, Vx.Core.Type_context context, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
       T output = Vx.Core.f_empty(generic_any_1);
-      if (fn != null) {
-        Vx.Core.Type_any anyoutput = fn(context, value);
+      Class_any_from_any_context.IFn? fnlocal = this.fn;
+      if (fnlocal != null) {
+        Vx.Core.Type_any anyoutput = fnlocal(context, value);
         output = Vx.Core.f_any_from_any(generic_any_1, anyoutput);
       }
       return output;
@@ -18139,7 +18055,7 @@ public static class Core {
    */
   public interface Func_any_from_any_context_async : Vx.Core.Type_func, Vx.Core.Type_replfunc_async {
     public Task<T> vx_any_from_any_context_async<T, U>(T generic_any_1, Vx.Core.Type_context context, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any;
-    public Vx.Core.Func_any_from_any_context_async vx_fn_new(Vx.Core.Class_any_from_any_context_async.IFn fn);
+    public Vx.Core.Func_any_from_any_context_async vx_fn_new(Class_any_from_any_context_async.IFn fn);
   }
 
   public class Class_any_from_any_context_async : Vx.Core.Class_base, Func_any_from_any_context_async {
@@ -18194,9 +18110,9 @@ public static class Core {
 
     public delegate Task<Vx.Core.Type_any> IFn(Vx.Core.Type_context context, Vx.Core.Type_any value);
 
-    public Vx.Core.Class_any_from_any_context_async.IFn? fn = null;
+    public Class_any_from_any_context_async.IFn? fn = null;
 
-    public Vx.Core.Func_any_from_any_context_async vx_fn_new(Vx.Core.Class_any_from_any_context_async.IFn fn) {
+    public Vx.Core.Func_any_from_any_context_async vx_fn_new(Class_any_from_any_context_async.IFn fn) {
       Vx.Core.Class_any_from_any_context_async output = new Vx.Core.Class_any_from_any_context_async();
       output.fn = fn;
       return output;
@@ -18214,10 +18130,11 @@ public static class Core {
 
     public Task<T> vx_any_from_any_context_async<T, U>(T generic_any_1, Vx.Core.Type_context context, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
       Task<T> output;
-      if (fn == null) {
+      Class_any_from_any_context_async.IFn? fnlocal = this.fn;
+      if (fnlocal == null) {
         output = Vx.Core.vx_async_new_from_value(Vx.Core.f_empty(generic_any_1));
       } else {
-        Task<Vx.Core.Type_any> future = fn(context, value);
+        Task<Vx.Core.Type_any> future = fnlocal(context, value);
         output = Vx.Core.vx_async_from_async(generic_any_1, future);
       }
       return output;
@@ -18244,7 +18161,7 @@ public static class Core {
    */
   public interface Func_any_from_any_key_value : Vx.Core.Type_func, Vx.Core.Type_replfunc {
     public T vx_any_from_any_key_value<T, U>(T generic_any_1, T current, Vx.Core.Type_string key, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any;
-    public Vx.Core.Func_any_from_any_key_value vx_fn_new(Vx.Core.Class_any_from_any_key_value.IFn fn);
+    public Vx.Core.Func_any_from_any_key_value vx_fn_new(Class_any_from_any_key_value.IFn fn);
   }
 
   public class Class_any_from_any_key_value : Vx.Core.Class_base, Func_any_from_any_key_value {
@@ -18299,9 +18216,9 @@ public static class Core {
 
     public delegate Vx.Core.Type_any IFn(Vx.Core.Type_any current, Vx.Core.Type_string key, Vx.Core.Type_any value);
 
-    public Vx.Core.Class_any_from_any_key_value.IFn? fn = null;
+    public Class_any_from_any_key_value.IFn? fn = null;
 
-    public Vx.Core.Func_any_from_any_key_value vx_fn_new(Vx.Core.Class_any_from_any_key_value.IFn fn) {
+    public Vx.Core.Func_any_from_any_key_value vx_fn_new(Class_any_from_any_key_value.IFn fn) {
       Vx.Core.Class_any_from_any_key_value output = new Vx.Core.Class_any_from_any_key_value();
       output.fn = fn;
       return output;
@@ -18319,8 +18236,9 @@ public static class Core {
 
     public T vx_any_from_any_key_value<T, U>(T generic_any_1, T current, Vx.Core.Type_string key, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
       T output = Vx.Core.f_empty(generic_any_1);
-      if (fn != null) {
-        Vx.Core.Type_any anyoutput = fn(current, key, value);
+      Class_any_from_any_key_value.IFn? fnlocal = this.fn;
+      if (fnlocal != null) {
+        Vx.Core.Type_any anyoutput = fnlocal(current, key, value);
         output = Vx.Core.f_any_from_any(generic_any_1, anyoutput);
       }
       return output;
@@ -18344,7 +18262,7 @@ public static class Core {
    */
   public interface Func_any_from_func : Vx.Core.Type_func, Vx.Core.Type_replfunc {
     public T vx_any_from_func<T>(T generic_any_1) where T : Vx.Core.Type_any;
-    public Vx.Core.Func_any_from_func vx_fn_new(Vx.Core.Class_any_from_func.IFn fn);
+    public Vx.Core.Func_any_from_func vx_fn_new(Class_any_from_func.IFn fn);
   }
 
   public class Class_any_from_func : Vx.Core.Class_base, Func_any_from_func {
@@ -18399,9 +18317,9 @@ public static class Core {
 
     public delegate Vx.Core.Type_any IFn();
 
-    public Vx.Core.Class_any_from_func.IFn? fn = null;
+    public Class_any_from_func.IFn? fn = null;
 
-    public Vx.Core.Func_any_from_func vx_fn_new(Vx.Core.Class_any_from_func.IFn fn) {
+    public Vx.Core.Func_any_from_func vx_fn_new(Class_any_from_func.IFn fn) {
       Vx.Core.Class_any_from_func output = new Vx.Core.Class_any_from_func();
       output.fn = fn;
       return output;
@@ -18416,8 +18334,9 @@ public static class Core {
 
     public T vx_any_from_func<T>(T generic_any_1) where T : Vx.Core.Type_any {
       T output = Vx.Core.f_empty(generic_any_1);
-      if (fn != null) {
-        Vx.Core.Type_any anyoutput = fn();
+      Class_any_from_func.IFn? fnlocal = this.fn;
+      if (fnlocal != null) {
+        Vx.Core.Type_any anyoutput = fnlocal();
         output = Vx.Core.f_any_from_any(generic_any_1, anyoutput);
       }
       return output;
@@ -18443,7 +18362,7 @@ public static class Core {
    */
   public interface Func_any_from_func_async : Vx.Core.Type_func, Vx.Core.Type_replfunc_async {
     public Task<T> vx_any_from_func_async<T>(T generic_any_1) where T : Vx.Core.Type_any;
-    public Vx.Core.Func_any_from_func_async vx_fn_new(Vx.Core.Class_any_from_func_async.IFn fn);
+    public Vx.Core.Func_any_from_func_async vx_fn_new(Class_any_from_func_async.IFn fn);
   }
 
   public class Class_any_from_func_async : Vx.Core.Class_base, Func_any_from_func_async {
@@ -18498,9 +18417,9 @@ public static class Core {
 
     public delegate Task<Vx.Core.Type_any> IFn();
 
-    public Vx.Core.Class_any_from_func_async.IFn? fn = null;
+    public Class_any_from_func_async.IFn? fn = null;
 
-    public Vx.Core.Func_any_from_func_async vx_fn_new(Vx.Core.Class_any_from_func_async.IFn fn) {
+    public Vx.Core.Func_any_from_func_async vx_fn_new(Class_any_from_func_async.IFn fn) {
       Vx.Core.Class_any_from_func_async output = new Vx.Core.Class_any_from_func_async();
       output.fn = fn;
       return output;
@@ -18516,10 +18435,11 @@ public static class Core {
 
     public Task<T> vx_any_from_func_async<T>(T generic_any_1) where T : Vx.Core.Type_any {
       Task<T> output;
-      if (fn == null) {
+      Class_any_from_func_async.IFn? fnlocal = this.fn;
+      if (fnlocal == null) {
         output = Vx.Core.vx_async_new_from_value(Vx.Core.f_empty(generic_any_1));
       } else {
-        Task<Vx.Core.Type_any> future = fn();
+        Task<Vx.Core.Type_any> future = fnlocal();
         output = Vx.Core.vx_async_from_async(generic_any_1, future);
       }
       return output;
@@ -18544,7 +18464,7 @@ public static class Core {
    */
   public interface Func_any_from_int : Vx.Core.Type_func, Vx.Core.Type_replfunc {
     public T vx_any_from_int<T>(T generic_any_1, Vx.Core.Type_int value) where T : Vx.Core.Type_any;
-    public Vx.Core.Func_any_from_int vx_fn_new(Vx.Core.Class_any_from_int.IFn fn);
+    public Vx.Core.Func_any_from_int vx_fn_new(Class_any_from_int.IFn fn);
   }
 
   public class Class_any_from_int : Vx.Core.Class_base, Func_any_from_int {
@@ -18599,9 +18519,9 @@ public static class Core {
 
     public delegate Vx.Core.Type_any IFn(Vx.Core.Type_int value);
 
-    public Vx.Core.Class_any_from_int.IFn? fn = null;
+    public Class_any_from_int.IFn? fn = null;
 
-    public Vx.Core.Func_any_from_int vx_fn_new(Vx.Core.Class_any_from_int.IFn fn) {
+    public Vx.Core.Func_any_from_int vx_fn_new(Class_any_from_int.IFn fn) {
       Vx.Core.Class_any_from_int output = new Vx.Core.Class_any_from_int();
       output.fn = fn;
       return output;
@@ -18617,8 +18537,9 @@ public static class Core {
 
     public T vx_any_from_int<T>(T generic_any_1, Vx.Core.Type_int value) where T : Vx.Core.Type_any {
       T output = Vx.Core.f_empty(generic_any_1);
-      if (fn != null) {
-        Vx.Core.Type_any anyoutput = fn(value);
+      Class_any_from_int.IFn? fnlocal = this.fn;
+      if (fnlocal != null) {
+        Vx.Core.Type_any anyoutput = fnlocal(value);
         output = Vx.Core.f_any_from_any(generic_any_1, anyoutput);
       }
       return output;
@@ -18644,7 +18565,7 @@ public static class Core {
    */
   public interface Func_any_from_int_any : Vx.Core.Type_func, Vx.Core.Type_replfunc {
     public T vx_any_from_int_any<T, U>(T generic_any_1, Vx.Core.Type_int num, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any;
-    public Vx.Core.Func_any_from_int_any vx_fn_new(Vx.Core.Class_any_from_int_any.IFn fn);
+    public Vx.Core.Func_any_from_int_any vx_fn_new(Class_any_from_int_any.IFn fn);
   }
 
   public class Class_any_from_int_any : Vx.Core.Class_base, Func_any_from_int_any {
@@ -18699,9 +18620,9 @@ public static class Core {
 
     public delegate Vx.Core.Type_any IFn(Vx.Core.Type_int num, Vx.Core.Type_any value);
 
-    public Vx.Core.Class_any_from_int_any.IFn? fn = null;
+    public Class_any_from_int_any.IFn? fn = null;
 
-    public Vx.Core.Func_any_from_int_any vx_fn_new(Vx.Core.Class_any_from_int_any.IFn fn) {
+    public Vx.Core.Func_any_from_int_any vx_fn_new(Class_any_from_int_any.IFn fn) {
       Vx.Core.Class_any_from_int_any output = new Vx.Core.Class_any_from_int_any();
       output.fn = fn;
       return output;
@@ -18718,8 +18639,9 @@ public static class Core {
 
     public T vx_any_from_int_any<T, U>(T generic_any_1, Vx.Core.Type_int num, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
       T output = Vx.Core.f_empty(generic_any_1);
-      if (fn != null) {
-        Vx.Core.Type_any anyoutput = fn(num, value);
+      Class_any_from_int_any.IFn? fnlocal = this.fn;
+      if (fnlocal != null) {
+        Vx.Core.Type_any anyoutput = fnlocal(num, value);
         output = Vx.Core.f_any_from_any(generic_any_1, anyoutput);
       }
       return output;
@@ -18745,7 +18667,7 @@ public static class Core {
    */
   public interface Func_any_from_key_value : Vx.Core.Type_func, Vx.Core.Type_replfunc {
     public T vx_any_from_key_value<T, U>(T generic_any_1, Vx.Core.Type_string key, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any;
-    public Vx.Core.Func_any_from_key_value vx_fn_new(Vx.Core.Class_any_from_key_value.IFn fn);
+    public Vx.Core.Func_any_from_key_value vx_fn_new(Class_any_from_key_value.IFn fn);
   }
 
   public class Class_any_from_key_value : Vx.Core.Class_base, Func_any_from_key_value {
@@ -18800,9 +18722,9 @@ public static class Core {
 
     public delegate Vx.Core.Type_any IFn(Vx.Core.Type_string key, Vx.Core.Type_any value);
 
-    public Vx.Core.Class_any_from_key_value.IFn? fn = null;
+    public Class_any_from_key_value.IFn? fn = null;
 
-    public Vx.Core.Func_any_from_key_value vx_fn_new(Vx.Core.Class_any_from_key_value.IFn fn) {
+    public Vx.Core.Func_any_from_key_value vx_fn_new(Class_any_from_key_value.IFn fn) {
       Vx.Core.Class_any_from_key_value output = new Vx.Core.Class_any_from_key_value();
       output.fn = fn;
       return output;
@@ -18819,8 +18741,9 @@ public static class Core {
 
     public T vx_any_from_key_value<T, U>(T generic_any_1, Vx.Core.Type_string key, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
       T output = Vx.Core.f_empty(generic_any_1);
-      if (fn != null) {
-        Vx.Core.Type_any anyoutput = fn(key, value);
+      Class_any_from_key_value.IFn? fnlocal = this.fn;
+      if (fnlocal != null) {
+        Vx.Core.Type_any anyoutput = fnlocal(key, value);
         output = Vx.Core.f_any_from_any(generic_any_1, anyoutput);
       }
       return output;
@@ -18848,7 +18771,7 @@ public static class Core {
    */
   public interface Func_any_from_key_value_async : Vx.Core.Type_func, Vx.Core.Type_replfunc_async {
     public Task<T> vx_any_from_key_value_async<T, U>(T generic_any_1, Vx.Core.Type_string key, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any;
-    public Vx.Core.Func_any_from_key_value_async vx_fn_new(Vx.Core.Class_any_from_key_value_async.IFn fn);
+    public Vx.Core.Func_any_from_key_value_async vx_fn_new(Class_any_from_key_value_async.IFn fn);
   }
 
   public class Class_any_from_key_value_async : Vx.Core.Class_base, Func_any_from_key_value_async {
@@ -18903,9 +18826,9 @@ public static class Core {
 
     public delegate Task<Vx.Core.Type_any> IFn(Vx.Core.Type_string key, Vx.Core.Type_any value);
 
-    public Vx.Core.Class_any_from_key_value_async.IFn? fn = null;
+    public Class_any_from_key_value_async.IFn? fn = null;
 
-    public Vx.Core.Func_any_from_key_value_async vx_fn_new(Vx.Core.Class_any_from_key_value_async.IFn fn) {
+    public Vx.Core.Func_any_from_key_value_async vx_fn_new(Class_any_from_key_value_async.IFn fn) {
       Vx.Core.Class_any_from_key_value_async output = new Vx.Core.Class_any_from_key_value_async();
       output.fn = fn;
       return output;
@@ -18923,10 +18846,11 @@ public static class Core {
 
     public Task<T> vx_any_from_key_value_async<T, U>(T generic_any_1, Vx.Core.Type_string key, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
       Task<T> output;
-      if (fn == null) {
+      Class_any_from_key_value_async.IFn? fnlocal = this.fn;
+      if (fnlocal == null) {
         output = Vx.Core.vx_async_new_from_value(Vx.Core.f_empty(generic_any_1));
       } else {
-        Task<Vx.Core.Type_any> future = fn(key, value);
+        Task<Vx.Core.Type_any> future = fnlocal(key, value);
         output = Vx.Core.vx_async_from_async(generic_any_1, future);
       }
       return output;
@@ -19397,7 +19321,7 @@ public static class Core {
    */
   public interface Func_any_from_none : Vx.Core.Type_func, Vx.Core.Type_replfunc {
     public T vx_any_from_none<T>(T generic_any_1) where T : Vx.Core.Type_any;
-    public Vx.Core.Func_any_from_none vx_fn_new(Vx.Core.Class_any_from_none.IFn fn);
+    public Vx.Core.Func_any_from_none vx_fn_new(Class_any_from_none.IFn fn);
   }
 
   public class Class_any_from_none : Vx.Core.Class_base, Func_any_from_none {
@@ -19452,9 +19376,9 @@ public static class Core {
 
     public delegate Vx.Core.Type_any IFn();
 
-    public Vx.Core.Class_any_from_none.IFn? fn = null;
+    public Class_any_from_none.IFn? fn = null;
 
-    public Vx.Core.Func_any_from_none vx_fn_new(Vx.Core.Class_any_from_none.IFn fn) {
+    public Vx.Core.Func_any_from_none vx_fn_new(Class_any_from_none.IFn fn) {
       Vx.Core.Class_any_from_none output = new Vx.Core.Class_any_from_none();
       output.fn = fn;
       return output;
@@ -19469,8 +19393,9 @@ public static class Core {
 
     public T vx_any_from_none<T>(T generic_any_1) where T : Vx.Core.Type_any {
       T output = Vx.Core.f_empty(generic_any_1);
-      if (fn != null) {
-        Vx.Core.Type_any anyoutput = fn();
+      Class_any_from_none.IFn? fnlocal = this.fn;
+      if (fnlocal != null) {
+        Vx.Core.Type_any anyoutput = fnlocal();
         output = Vx.Core.f_any_from_any(generic_any_1, anyoutput);
       }
       return output;
@@ -19496,7 +19421,7 @@ public static class Core {
    */
   public interface Func_any_from_none_async : Vx.Core.Type_func, Vx.Core.Type_replfunc_async {
     public Task<T> vx_any_from_none_async<T>(T generic_any_1) where T : Vx.Core.Type_any;
-    public Vx.Core.Func_any_from_none_async vx_fn_new(Vx.Core.Class_any_from_none_async.IFn fn);
+    public Vx.Core.Func_any_from_none_async vx_fn_new(Class_any_from_none_async.IFn fn);
   }
 
   public class Class_any_from_none_async : Vx.Core.Class_base, Func_any_from_none_async {
@@ -19551,9 +19476,9 @@ public static class Core {
 
     public delegate Task<Vx.Core.Type_any> IFn();
 
-    public Vx.Core.Class_any_from_none_async.IFn? fn = null;
+    public Class_any_from_none_async.IFn? fn = null;
 
-    public Vx.Core.Func_any_from_none_async vx_fn_new(Vx.Core.Class_any_from_none_async.IFn fn) {
+    public Vx.Core.Func_any_from_none_async vx_fn_new(Class_any_from_none_async.IFn fn) {
       Vx.Core.Class_any_from_none_async output = new Vx.Core.Class_any_from_none_async();
       output.fn = fn;
       return output;
@@ -19569,10 +19494,11 @@ public static class Core {
 
     public Task<T> vx_any_from_none_async<T>(T generic_any_1) where T : Vx.Core.Type_any {
       Task<T> output;
-      if (fn == null) {
+      Class_any_from_none_async.IFn? fnlocal = this.fn;
+      if (fnlocal == null) {
         output = Vx.Core.vx_async_new_from_value(Vx.Core.f_empty(generic_any_1));
       } else {
-        Task<Vx.Core.Type_any> future = fn();
+        Task<Vx.Core.Type_any> future = fnlocal();
         output = Vx.Core.vx_async_from_async(generic_any_1, future);
       }
       return output;
@@ -19597,7 +19523,7 @@ public static class Core {
    */
   public interface Func_any_from_reduce : Vx.Core.Type_func, Vx.Core.Type_replfunc {
     public T vx_any_from_reduce<T, U>(T generic_any_1, T result, U item) where T : Vx.Core.Type_any where U : Vx.Core.Type_any;
-    public Vx.Core.Func_any_from_reduce vx_fn_new(Vx.Core.Class_any_from_reduce.IFn fn);
+    public Vx.Core.Func_any_from_reduce vx_fn_new(Class_any_from_reduce.IFn fn);
   }
 
   public class Class_any_from_reduce : Vx.Core.Class_base, Func_any_from_reduce {
@@ -19652,9 +19578,9 @@ public static class Core {
 
     public delegate Vx.Core.Type_any IFn(Vx.Core.Type_any result, Vx.Core.Type_any item);
 
-    public Vx.Core.Class_any_from_reduce.IFn? fn = null;
+    public Class_any_from_reduce.IFn? fn = null;
 
-    public Vx.Core.Func_any_from_reduce vx_fn_new(Vx.Core.Class_any_from_reduce.IFn fn) {
+    public Vx.Core.Func_any_from_reduce vx_fn_new(Class_any_from_reduce.IFn fn) {
       Vx.Core.Class_any_from_reduce output = new Vx.Core.Class_any_from_reduce();
       output.fn = fn;
       return output;
@@ -19671,8 +19597,9 @@ public static class Core {
 
     public T vx_any_from_reduce<T, U>(T generic_any_1, T result, U item) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
       T output = Vx.Core.f_empty(generic_any_1);
-      if (fn != null) {
-        Vx.Core.Type_any anyoutput = fn(result, item);
+      Class_any_from_reduce.IFn? fnlocal = this.fn;
+      if (fnlocal != null) {
+        Vx.Core.Type_any anyoutput = fnlocal(result, item);
         output = Vx.Core.f_any_from_any(generic_any_1, anyoutput);
       }
       return output;
@@ -19699,7 +19626,7 @@ public static class Core {
    */
   public interface Func_any_from_reduce_async : Vx.Core.Type_func, Vx.Core.Type_replfunc_async {
     public Task<T> vx_any_from_reduce_async<T, U>(T generic_any_1, T result, U item) where T : Vx.Core.Type_any where U : Vx.Core.Type_any;
-    public Vx.Core.Func_any_from_reduce_async vx_fn_new(Vx.Core.Class_any_from_reduce_async.IFn fn);
+    public Vx.Core.Func_any_from_reduce_async vx_fn_new(Class_any_from_reduce_async.IFn fn);
   }
 
   public class Class_any_from_reduce_async : Vx.Core.Class_base, Func_any_from_reduce_async {
@@ -19754,9 +19681,9 @@ public static class Core {
 
     public delegate Task<Vx.Core.Type_any> IFn(Vx.Core.Type_any result, Vx.Core.Type_any item);
 
-    public Vx.Core.Class_any_from_reduce_async.IFn? fn = null;
+    public Class_any_from_reduce_async.IFn? fn = null;
 
-    public Vx.Core.Func_any_from_reduce_async vx_fn_new(Vx.Core.Class_any_from_reduce_async.IFn fn) {
+    public Vx.Core.Func_any_from_reduce_async vx_fn_new(Class_any_from_reduce_async.IFn fn) {
       Vx.Core.Class_any_from_reduce_async output = new Vx.Core.Class_any_from_reduce_async();
       output.fn = fn;
       return output;
@@ -19774,10 +19701,11 @@ public static class Core {
 
     public Task<T> vx_any_from_reduce_async<T, U>(T generic_any_1, T result, U item) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
       Task<T> output;
-      if (fn == null) {
+      Class_any_from_reduce_async.IFn? fnlocal = this.fn;
+      if (fnlocal == null) {
         output = Vx.Core.vx_async_new_from_value(Vx.Core.f_empty(generic_any_1));
       } else {
-        Task<Vx.Core.Type_any> future = fn(result, item);
+        Task<Vx.Core.Type_any> future = fnlocal(result, item);
         output = Vx.Core.vx_async_from_async(generic_any_1, future);
       }
       return output;
@@ -19803,7 +19731,7 @@ public static class Core {
    */
   public interface Func_any_from_reduce_next : Vx.Core.Type_func, Vx.Core.Type_replfunc {
     public T vx_any_from_reduce_next<T, U>(T generic_any_1, T result, U current, U next) where T : Vx.Core.Type_any where U : Vx.Core.Type_any;
-    public Vx.Core.Func_any_from_reduce_next vx_fn_new(Vx.Core.Class_any_from_reduce_next.IFn fn);
+    public Vx.Core.Func_any_from_reduce_next vx_fn_new(Class_any_from_reduce_next.IFn fn);
   }
 
   public class Class_any_from_reduce_next : Vx.Core.Class_base, Func_any_from_reduce_next {
@@ -19858,9 +19786,9 @@ public static class Core {
 
     public delegate Vx.Core.Type_any IFn(Vx.Core.Type_any result, Vx.Core.Type_any current, Vx.Core.Type_any next);
 
-    public Vx.Core.Class_any_from_reduce_next.IFn? fn = null;
+    public Class_any_from_reduce_next.IFn? fn = null;
 
-    public Vx.Core.Func_any_from_reduce_next vx_fn_new(Vx.Core.Class_any_from_reduce_next.IFn fn) {
+    public Vx.Core.Func_any_from_reduce_next vx_fn_new(Class_any_from_reduce_next.IFn fn) {
       Vx.Core.Class_any_from_reduce_next output = new Vx.Core.Class_any_from_reduce_next();
       output.fn = fn;
       return output;
@@ -19878,8 +19806,9 @@ public static class Core {
 
     public T vx_any_from_reduce_next<T, U>(T generic_any_1, T result, U current, U next) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
       T output = Vx.Core.f_empty(generic_any_1);
-      if (fn != null) {
-        Vx.Core.Type_any anyoutput = fn(result, current, next);
+      Class_any_from_reduce_next.IFn? fnlocal = this.fn;
+      if (fnlocal != null) {
+        Vx.Core.Type_any anyoutput = fnlocal(result, current, next);
         output = Vx.Core.f_any_from_any(generic_any_1, anyoutput);
       }
       return output;
@@ -19907,7 +19836,7 @@ public static class Core {
    */
   public interface Func_any_from_reduce_next_async : Vx.Core.Type_func, Vx.Core.Type_replfunc_async {
     public Task<T> vx_any_from_reduce_next_async<T, U>(T generic_any_1, T result, U current, U next) where T : Vx.Core.Type_any where U : Vx.Core.Type_any;
-    public Vx.Core.Func_any_from_reduce_next_async vx_fn_new(Vx.Core.Class_any_from_reduce_next_async.IFn fn);
+    public Vx.Core.Func_any_from_reduce_next_async vx_fn_new(Class_any_from_reduce_next_async.IFn fn);
   }
 
   public class Class_any_from_reduce_next_async : Vx.Core.Class_base, Func_any_from_reduce_next_async {
@@ -19962,9 +19891,9 @@ public static class Core {
 
     public delegate Task<Vx.Core.Type_any> IFn(Vx.Core.Type_any result, Vx.Core.Type_any current, Vx.Core.Type_any next);
 
-    public Vx.Core.Class_any_from_reduce_next_async.IFn? fn = null;
+    public Class_any_from_reduce_next_async.IFn? fn = null;
 
-    public Vx.Core.Func_any_from_reduce_next_async vx_fn_new(Vx.Core.Class_any_from_reduce_next_async.IFn fn) {
+    public Vx.Core.Func_any_from_reduce_next_async vx_fn_new(Class_any_from_reduce_next_async.IFn fn) {
       Vx.Core.Class_any_from_reduce_next_async output = new Vx.Core.Class_any_from_reduce_next_async();
       output.fn = fn;
       return output;
@@ -19983,10 +19912,11 @@ public static class Core {
 
     public Task<T> vx_any_from_reduce_next_async<T, U>(T generic_any_1, T result, U current, U next) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
       Task<T> output;
-      if (fn == null) {
+      Class_any_from_reduce_next_async.IFn? fnlocal = this.fn;
+      if (fnlocal == null) {
         output = Vx.Core.vx_async_new_from_value(Vx.Core.f_empty(generic_any_1));
       } else {
-        Task<Vx.Core.Type_any> future = fn(result, current, next);
+        Task<Vx.Core.Type_any> future = fnlocal(result, current, next);
         output = Vx.Core.vx_async_from_async(generic_any_1, future);
       }
       return output;
@@ -20389,7 +20319,7 @@ public static class Core {
    */
   public interface Func_boolean_from_any : Vx.Core.Type_func, Vx.Core.Type_replfunc {
     public Vx.Core.Type_boolean vx_boolean_from_any(Vx.Core.Type_any value);
-    public Vx.Core.Func_boolean_from_any vx_fn_new(Vx.Core.Class_boolean_from_any.IFn fn);
+    public Vx.Core.Func_boolean_from_any vx_fn_new(Class_boolean_from_any.IFn fn);
   }
 
   public class Class_boolean_from_any : Vx.Core.Class_base, Func_boolean_from_any {
@@ -20444,9 +20374,9 @@ public static class Core {
 
     public delegate Vx.Core.Type_any IFn(Vx.Core.Type_any value);
 
-    public Vx.Core.Class_boolean_from_any.IFn? fn = null;
+    public Class_boolean_from_any.IFn? fn = null;
 
-    public Vx.Core.Func_boolean_from_any vx_fn_new(Vx.Core.Class_boolean_from_any.IFn fn) {
+    public Vx.Core.Func_boolean_from_any vx_fn_new(Class_boolean_from_any.IFn fn) {
       Vx.Core.Class_boolean_from_any output = new Vx.Core.Class_boolean_from_any();
       output.fn = fn;
       return output;
@@ -20461,8 +20391,9 @@ public static class Core {
 
     public Vx.Core.Type_boolean vx_boolean_from_any(Vx.Core.Type_any value) {
       Vx.Core.Type_boolean output = Vx.Core.c_false;
-      if (fn != null) {
-        Vx.Core.Type_any anyoutput = fn(value);
+      Class_boolean_from_any.IFn? fnlocal = this.fn;
+      if (fnlocal != null) {
+        Vx.Core.Type_any anyoutput = fnlocal(value);
         output = Vx.Core.f_any_from_any(Vx.Core.t_boolean, anyoutput);
       }
       return output;
@@ -20486,7 +20417,7 @@ public static class Core {
    */
   public interface Func_boolean_from_func : Vx.Core.Type_func, Vx.Core.Type_replfunc {
     public Vx.Core.Type_boolean vx_boolean_from_func();
-    public Vx.Core.Func_boolean_from_func vx_fn_new(Vx.Core.Class_any_from_func.IFn? fn);
+    public Vx.Core.Func_boolean_from_func vx_fn_new(Class_any_from_func.IFn fn);
   }
 
   public class Class_boolean_from_func : Vx.Core.Class_base, Func_boolean_from_func {
@@ -20541,9 +20472,9 @@ public static class Core {
 
     public delegate Vx.Core.Type_any IFn();
 
-    public Vx.Core.Class_any_from_func.IFn? fn = null;
+    public Class_any_from_func.IFn? fn = null;
 
-    public Vx.Core.Func_boolean_from_func vx_fn_new(Vx.Core.Class_any_from_func.IFn? fn) {
+    public Vx.Core.Func_boolean_from_func vx_fn_new(Class_any_from_func.IFn fn) {
       Vx.Core.Class_boolean_from_func output = new Vx.Core.Class_boolean_from_func();
       output.fn = fn;
       return output;
@@ -20557,8 +20488,9 @@ public static class Core {
 
     public Vx.Core.Type_boolean vx_boolean_from_func() {
       Vx.Core.Type_boolean output = Vx.Core.c_false;
-      if (fn != null) {
-        Vx.Core.Type_any anyoutput = fn();
+      Vx.Core.Class_any_from_func.IFn? fnlocal = this.fn;
+      if (fnlocal != null) {
+        Vx.Core.Type_any anyoutput = fnlocal();
         output = Vx.Core.f_any_from_any(Vx.Core.t_boolean, anyoutput);
       }
       return output;
@@ -20582,7 +20514,7 @@ public static class Core {
    */
   public interface Func_boolean_from_none : Vx.Core.Type_func, Vx.Core.Type_replfunc {
     public Vx.Core.Type_boolean vx_boolean_from_none();
-    public Vx.Core.Func_boolean_from_none vx_fn_new(Vx.Core.Class_any_from_func.IFn? fn);
+    public Vx.Core.Func_boolean_from_none vx_fn_new(Class_any_from_func.IFn fn);
   }
 
   public class Class_boolean_from_none : Vx.Core.Class_base, Func_boolean_from_none {
@@ -20637,9 +20569,9 @@ public static class Core {
 
     public delegate Vx.Core.Type_any IFn();
 
-    public Vx.Core.Class_any_from_func.IFn? fn = null;
+    public Class_any_from_func.IFn? fn = null;
 
-    public Vx.Core.Func_boolean_from_none vx_fn_new(Vx.Core.Class_any_from_func.IFn? fn) {
+    public Vx.Core.Func_boolean_from_none vx_fn_new(Class_any_from_func.IFn fn) {
       Vx.Core.Class_boolean_from_none output = new Vx.Core.Class_boolean_from_none();
       output.fn = fn;
       return output;
@@ -20653,8 +20585,9 @@ public static class Core {
 
     public Vx.Core.Type_boolean vx_boolean_from_none() {
       Vx.Core.Type_boolean output = Vx.Core.c_false;
-      if (fn != null) {
-        Vx.Core.Type_any anyoutput = fn();
+      Vx.Core.Class_any_from_func.IFn? fnlocal = this.fn;
+      if (fnlocal != null) {
+        Vx.Core.Type_any anyoutput = fnlocal();
         output = Vx.Core.f_any_from_any(Vx.Core.t_boolean, anyoutput);
       }
       return output;
@@ -22566,7 +22499,7 @@ public static class Core {
    */
   public interface Func_int_from_func : Vx.Core.Type_func, Vx.Core.Type_replfunc {
     public Vx.Core.Type_int vx_int_from_func();
-    public Vx.Core.Func_int_from_func vx_fn_new(Vx.Core.Class_any_from_func.IFn? fn);
+    public Vx.Core.Func_int_from_func vx_fn_new(Class_any_from_func.IFn fn);
   }
 
   public class Class_int_from_func : Vx.Core.Class_base, Func_int_from_func {
@@ -22619,9 +22552,9 @@ public static class Core {
       return output;
     }
 
-    public Vx.Core.Class_any_from_func.IFn? fn = null;
+    public Class_any_from_func.IFn? fn = null;
 
-    public Vx.Core.Func_int_from_func vx_fn_new(Vx.Core.Class_any_from_func.IFn? fn) {
+    public Vx.Core.Func_int_from_func vx_fn_new(Class_any_from_func.IFn fn) {
       Vx.Core.Class_int_from_func output = new Vx.Core.Class_int_from_func();
       output.fn = fn;
       return output;
@@ -28748,7 +28681,7 @@ public static class Core {
    */
   public interface Func_string_from_func : Vx.Core.Type_func, Vx.Core.Type_replfunc {
     public Vx.Core.Type_string vx_string_from_func();
-    public Vx.Core.Func_string_from_func vx_fn_new(Vx.Core.Class_any_from_func.IFn? fn);
+    public Vx.Core.Func_string_from_func vx_fn_new(Class_any_from_func.IFn fn);
   }
 
   public class Class_string_from_func : Vx.Core.Class_base, Func_string_from_func {
@@ -28801,9 +28734,9 @@ public static class Core {
       return output;
     }
 
-    public Vx.Core.Class_any_from_func.IFn? fn = null;
+    public Class_any_from_func.IFn? fn = null;
 
-    public Vx.Core.Func_string_from_func vx_fn_new(Vx.Core.Class_any_from_func.IFn? fn) {
+    public Vx.Core.Func_string_from_func vx_fn_new(Class_any_from_func.IFn fn) {
       Vx.Core.Class_string_from_func output = new Vx.Core.Class_string_from_func();
       output.fn = fn;
       return output;

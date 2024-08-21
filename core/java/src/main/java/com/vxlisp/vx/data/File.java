@@ -52,8 +52,9 @@ public final class File {
     @Override
     public Core.Type_string name() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_name != null) {
-        output = this.vx_p_name;
+      Core.Type_string testnull = vx_p_name;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -63,8 +64,9 @@ public final class File {
     @Override
     public File.Type_fileformat format() {
       File.Type_fileformat output = File.e_fileformat;
-      if (this.vx_p_format != null) {
-        output = this.vx_p_format;
+      File.Type_fileformat testnull = vx_p_format;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -74,8 +76,9 @@ public final class File {
     @Override
     public Core.Type_string path() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_path != null) {
-        output = this.vx_p_path;
+      Core.Type_string testnull = vx_p_path;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -85,8 +88,9 @@ public final class File {
     @Override
     public Core.Type_permission permission() {
       Core.Type_permission output = Core.e_permission;
-      if (this.vx_p_permission != null) {
-        output = this.vx_p_permission;
+      Core.Type_permission testnull = vx_p_permission;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -96,8 +100,9 @@ public final class File {
     @Override
     public Core.Type_string text() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_text != null) {
-        output = this.vx_p_text;
+      Core.Type_string testnull = vx_p_text;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -106,35 +111,30 @@ public final class File {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":name":
+      if (false) {
+      } else if ((skey.equals(":name"))) {
         output = this.name();
-        break;
-      case ":format":
+      } else if ((skey.equals(":format"))) {
         output = this.format();
-        break;
-      case ":path":
+      } else if ((skey.equals(":path"))) {
         output = this.path();
-        break;
-      case ":permission":
+      } else if ((skey.equals(":permission"))) {
         output = this.permission();
-        break;
-      case ":text":
+      } else if ((skey.equals(":text"))) {
         output = this.text();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":name", this.name());
-      output.put(":format", this.format());
-      output.put(":path", this.path());
-      output.put(":permission", this.permission());
-      output.put(":text", this.text());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":name", this.name());
+      map.put(":format", this.format());
+      map.put(":path", this.path());
+      map.put(":permission", this.permission());
+      map.put(":text", this.text());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -165,8 +165,8 @@ public final class File {
       validkeys.add(":permission");
       validkeys.add(":text");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -209,8 +209,8 @@ public final class File {
             }
           }
         } else {
-          switch (key) {
-          case ":name":
+          if (false) {
+          } else if ((key.equals(":name"))) {
             if (valsub == vx_p_name) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valname = (Core.Type_string)valsub;
@@ -234,8 +234,7 @@ public final class File {
               msg = Core.vx_msg_from_error("vx/data/file/file", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":format":
+          } else if ((key.equals(":format"))) {
             if (valsub == vx_p_format) {
             } else if (valsub instanceof File.Type_fileformat) {
               File.Type_fileformat valformat = (File.Type_fileformat)valsub;
@@ -256,8 +255,7 @@ public final class File {
               msg = Core.vx_msg_from_error("vx/data/file/file", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":path":
+          } else if ((key.equals(":path"))) {
             if (valsub == vx_p_path) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valpath = (Core.Type_string)valsub;
@@ -281,8 +279,7 @@ public final class File {
               msg = Core.vx_msg_from_error("vx/data/file/file", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":permission":
+          } else if ((key.equals(":permission"))) {
             if (valsub == vx_p_permission) {
             } else if (valsub instanceof Core.Type_permission) {
               Core.Type_permission valpermission = (Core.Type_permission)valsub;
@@ -303,8 +300,7 @@ public final class File {
               msg = Core.vx_msg_from_error("vx/data/file/file", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":text":
+          } else if ((key.equals(":text"))) {
             if (valsub == vx_p_text) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valtext = (Core.Type_string)valsub;
@@ -328,12 +324,10 @@ public final class File {
               msg = Core.vx_msg_from_error("vx/data/file/file", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/data/file/file", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }

@@ -24,8 +24,9 @@ public final class Sample {
     @Override
     public Core.Type_int mynum() {
       Core.Type_int output = Core.e_int;
-      if (this.vx_p_mynum != null) {
-        output = this.vx_p_mynum;
+      Core.Type_int testnull = vx_p_mynum;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -35,8 +36,9 @@ public final class Sample {
     @Override
     public Core.Type_string mystr() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_mystr != null) {
-        output = this.vx_p_mystr;
+      Core.Type_string testnull = vx_p_mystr;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -45,23 +47,21 @@ public final class Sample {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":mynum":
+      if (false) {
+      } else if ((skey.equals(":mynum"))) {
         output = this.mynum();
-        break;
-      case ":mystr":
+      } else if ((skey.equals(":mystr"))) {
         output = this.mystr();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":mynum", this.mynum());
-      output.put(":mystr", this.mystr());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":mynum", this.mynum());
+      map.put(":mystr", this.mystr());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -86,8 +86,8 @@ public final class Sample {
       validkeys.add(":mynum");
       validkeys.add(":mystr");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -130,8 +130,8 @@ public final class Sample {
             }
           }
         } else {
-          switch (key) {
-          case ":mynum":
+          if (false) {
+          } else if ((key.equals(":mynum"))) {
             if (valsub == vx_p_mynum) {
             } else if (valsub instanceof Core.Type_int) {
               Core.Type_int valmynum = (Core.Type_int)valsub;
@@ -155,8 +155,7 @@ public final class Sample {
               msg = Core.vx_msg_from_error("vx/sample/mytype", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":mystr":
+          } else if ((key.equals(":mystr"))) {
             if (valsub == vx_p_mystr) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valmystr = (Core.Type_string)valsub;
@@ -180,12 +179,10 @@ public final class Sample {
               msg = Core.vx_msg_from_error("vx/sample/mytype", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/sample/mytype", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }

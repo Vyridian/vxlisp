@@ -3432,7 +3432,7 @@
        return vxboolean;
      }&quot;
    :kotlin
-    &quot;internal val vxboolean : Boolean = false
+    &quot;internal var vxboolean : Boolean = false
 
      // :implements
      override fun vx_boolean() : Boolean {
@@ -3539,6 +3539,18 @@
        Class_decimal output = new Class_decimal();
        output.vxdecimal = sval;
        return output;
+     }&quot;
+   :kotlin
+    &quot;internal var vxdecimal : String = “0.0”
+
+     // :implements
+     override fun vx_float() : Float {
+       return Float.parseFloat(vxdecimal);
+     }
+
+     // :implements
+     override fun vx_string() : String {
+       return vxdecimal
      }&quot;)
  :doc &quot;A clean version of float like Java BigDecimal.&quot;)
 
@@ -3569,10 +3581,10 @@
        return vxfloat;
      }&quot;
    :kotlin
-    &quot;internal val vxfloat : float = 0
+    &quot;internal var vxfloat : Float = 0f
 
      // :implements
-     override fun float vx_float() {
+     override fun vx_float() : Float {
        return vxfloat
      }&quot;)
  :test (test 4.5 (float 4.5))
@@ -3644,10 +3656,10 @@
        return vxint;
      }&quot;
    :kotlin
-    &quot;internal val vxint : int = 0
+    &quot;internal var vxint : Int = 0
 
      // :implements
-     override fun vx_int() : int {
+     override fun vx_int() : Int {
        return vxint
      }&quot;)
  :test (test-true  (is-int 4))
@@ -4710,9 +4722,8 @@
    &quot;@SuppressWarnings(“unchecked”)
     output = (T)value;&quot;
   :kotlin
-   &quot;if (value is T) {
-      output = (value as T)
-    }&quot;)
+   &quot;@Suppress(“UNCHECKED_CAST”)
+    output = (value as T)&quot;)
  :context
  :doc &quot;Function Type taking any value any-2 and returning generic any-1 using context&quot;)
 
@@ -4790,8 +4801,8 @@
       output = values[index - 1]
     }&quot;
   :kotlin
-   &quot;val intindex : int = index.vx_int()
-    val intsize : int = values.vx_list().size()
+   &quot;val intindex : Int = index.vx_int()
+    val intsize : Int = values.vx_list().size
     if (intindex &lt;= intsize) {
       val listvalue : List&lt;vx_core.Type_any&gt; = values.vx_list()
       val value : vx_core.Type_any = listvalue.get(intindex - 1)
@@ -5241,10 +5252,9 @@
   :js
    &quot;vx_core.f_new(value, ...values)&quot;
   :kotlin
-   &quot;val arrayany : vx_core.Type_any[] = vx_core.arrayany_from_anylist(
-      values)
+   &quot;val arrayany : vx_core.Type_any[] = vx_core.arrayany_from_anylist(values)
     val arrayobj : Any[] = arrayany as vx_core.Type_any[]
-    T output = (T)(value.vx_copy(arrayobj))&quot;)
+    val output : T = (value.vx_copy(arrayobj)) as T&quot;)
  :bigospace :n
  :bigotime :n
  :test (test
@@ -5371,7 +5381,7 @@
   :js
    &quot;vx_core.vx_float_from_string(text);&quot;
   :kotlin
-   &quot;val num : float = vx_core.vx_float_from_string(text.vx_string())
+   &quot;val num : Float = vx_core.vx_float_from_string(text.vx_string())
     output = vx_core.vx_new_float(num)&quot;)
  :test (test
         (float 2.3)
@@ -5577,13 +5587,13 @@
      &quot;var intresult : vx_core.Type_int = vx_core.e_int
       val strval : String = value.vx_string()
       try {
-        val floatresult : float = float.Parse(strval)
-        val iresult : int = floatresult as int
+        val floatresult : Float = Float.Parse(strval)
+        val iresult : Int = floatresult as Int
         intresult = vx_core.vx_new_int(iresult)
       } catch (ex : Exception) {
         intresult = vx_core.c_notanumber
       }
-      return intresult&quot;
+      intresult&quot;
     )
   )
  )
@@ -5615,7 +5625,7 @@
       output = vx_core.c_true
     }&quot;
   :kotlin
-   &quot;if (text.vx_string().Length == 0) {
+   &quot;if (text.vx_string().length == 0) {
       output = vx_core.c_true
     }&quot;)
  :doc &quot;Returns true if text is empty.&quot;)
@@ -5735,7 +5745,7 @@
     output = Core.vx_new_boolean(result);&quot;
   :js &quot;vx_core.vx_is_int(value)&quot;
   :kotlin
-   &quot;val result : boolean = vx_core.vx_is_int(value)
+   &quot;val result : Boolean = vx_core.vx_is_int(value)
     output = vx_core.vx_new_boolean(result)&quot;)
  :test (test-true
         (is-int 2))
@@ -5817,7 +5827,7 @@
   :js
    &quot;text.length&quot;
   :kotlin
-   &quot;val len : int = text.vx_string().length()
+   &quot;val len : Int = text.vx_string().length
     output = vx_core.vx_new_int(len)&quot;)
  :test (test
         4
@@ -5843,7 +5853,7 @@
     output = Core.vx_new_int(intresult);&quot;
   :js &quot;values.length&quot;
   :kotlin
-   &quot;val intresult : int = values.vx_list().size()
+   &quot;val intresult : Int = values.vx_list().size
     output = vx_core.vx_new_int(intresult)&quot;)
  :test (test
         3
@@ -7427,7 +7437,7 @@
        return vxboolean;
      }&quot;
    :kotlin
-    &quot;internal val vxboolean : Boolean = false
+    &quot;internal var vxboolean : Boolean = false
 
      // :implements
      override fun vx_boolean() : Boolean {
@@ -8204,6 +8214,18 @@
        Class_decimal output = new Class_decimal();
        output.vxdecimal = sval;
        return output;
+     }&quot;
+   :kotlin
+    &quot;internal var vxdecimal : String = “0.0”
+
+     // :implements
+     override fun vx_float() : Float {
+       return Float.parseFloat(vxdecimal);
+     }
+
+     // :implements
+     override fun vx_string() : String {
+       return vxdecimal
      }&quot;)
  :doc &quot;A clean version of float like Java BigDecimal.&quot;)</div>
                 </li>
@@ -8319,10 +8341,10 @@
        return vxfloat;
      }&quot;
    :kotlin
-    &quot;internal val vxfloat : float = 0
+    &quot;internal var vxfloat : Float = 0f
 
      // :implements
-     override fun float vx_float() {
+     override fun vx_float() : Float {
        return vxfloat
      }&quot;)
  :test (test 4.5 (float 4.5))
@@ -8681,10 +8703,10 @@
        return vxint;
      }&quot;
    :kotlin
-    &quot;internal val vxint : int = 0
+    &quot;internal var vxint : Int = 0
 
      // :implements
-     override fun vx_int() : int {
+     override fun vx_int() : Int {
        return vxint
      }&quot;)
  :test (test-true  (is-int 4))
@@ -15637,9 +15659,8 @@ improves readability.</div>
    &quot;@SuppressWarnings(“unchecked”)
     output = (T)value;&quot;
   :kotlin
-   &quot;if (value is T) {
-      output = (value as T)
-    }&quot;)
+   &quot;@Suppress(“UNCHECKED_CAST”)
+    output = (value as T)&quot;)
  :context
  :doc &quot;Function Type taking any value any-2 and returning generic any-1 using context&quot;)</div>
                 </li>
@@ -16267,8 +16288,8 @@ improves readability.</div>
       output = values[index - 1]
     }&quot;
   :kotlin
-   &quot;val intindex : int = index.vx_int()
-    val intsize : int = values.vx_list().size()
+   &quot;val intindex : Int = index.vx_int()
+    val intsize : Int = values.vx_list().size
     if (intindex &lt;= intsize) {
       val listvalue : List&lt;vx_core.Type_any&gt; = values.vx_list()
       val value : vx_core.Type_any = listvalue.get(intindex - 1)
@@ -18246,10 +18267,9 @@ improves readability.</div>
   :js
    &quot;vx_core.f_new(value, ...values)&quot;
   :kotlin
-   &quot;val arrayany : vx_core.Type_any[] = vx_core.arrayany_from_anylist(
-      values)
+   &quot;val arrayany : vx_core.Type_any[] = vx_core.arrayany_from_anylist(values)
     val arrayobj : Any[] = arrayany as vx_core.Type_any[]
-    T output = (T)(value.vx_copy(arrayobj))&quot;)
+    val output : T = (value.vx_copy(arrayobj)) as T&quot;)
  :bigospace :n
  :bigotime :n
  :test (test
@@ -18806,7 +18826,7 @@ improves readability.</div>
   :js
    &quot;vx_core.vx_float_from_string(text);&quot;
   :kotlin
-   &quot;val num : float = vx_core.vx_float_from_string(text.vx_string())
+   &quot;val num : Float = vx_core.vx_float_from_string(text.vx_string())
     output = vx_core.vx_new_float(num)&quot;)
  :test (test
         (float 2.3)
@@ -19522,13 +19542,13 @@ improves readability.</div>
      &quot;var intresult : vx_core.Type_int = vx_core.e_int
       val strval : String = value.vx_string()
       try {
-        val floatresult : float = float.Parse(strval)
-        val iresult : int = floatresult as int
+        val floatresult : Float = Float.Parse(strval)
+        val iresult : Int = floatresult as Int
         intresult = vx_core.vx_new_int(iresult)
       } catch (ex : Exception) {
         intresult = vx_core.c_notanumber
       }
-      return intresult&quot;
+      intresult&quot;
     )
   )
  )
@@ -19618,7 +19638,7 @@ improves readability.</div>
       output = vx_core.c_true
     }&quot;
   :kotlin
-   &quot;if (text.vx_string().Length == 0) {
+   &quot;if (text.vx_string().length == 0) {
       output = vx_core.c_true
     }&quot;)
  :doc &quot;Returns true if text is empty.&quot;)</div>
@@ -19987,7 +20007,7 @@ improves readability.</div>
     output = Core.vx_new_boolean(result);&quot;
   :js &quot;vx_core.vx_is_int(value)&quot;
   :kotlin
-   &quot;val result : boolean = vx_core.vx_is_int(value)
+   &quot;val result : Boolean = vx_core.vx_is_int(value)
     output = vx_core.vx_new_boolean(result)&quot;)
  :test (test-true
         (is-int 2))
@@ -20374,7 +20394,7 @@ improves readability.</div>
   :js
    &quot;text.length&quot;
   :kotlin
-   &quot;val len : int = text.vx_string().length()
+   &quot;val len : Int = text.vx_string().length
     output = vx_core.vx_new_int(len)&quot;)
  :test (test
         4
@@ -20462,7 +20482,7 @@ improves readability.</div>
     output = Core.vx_new_int(intresult);&quot;
   :js &quot;values.length&quot;
   :kotlin
-   &quot;val intresult : int = values.vx_list().size()
+   &quot;val intresult : Int = values.vx_list().size
     output = vx_core.vx_new_int(intresult)&quot;)
  :test (test
         3

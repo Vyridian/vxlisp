@@ -103,8 +103,9 @@ public static class File {
 
     public Vx.Core.Type_string name() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_name != null) {
-        output = this.vx_p_name;
+      Vx.Core.Type_string? testnull = vx_p_name;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -113,8 +114,9 @@ public static class File {
 
     public Vx.Data.File.Type_fileformat format() {
       Vx.Data.File.Type_fileformat output = Vx.Data.File.e_fileformat;
-      if (this.vx_p_format != null) {
-        output = this.vx_p_format;
+      Vx.Data.File.Type_fileformat? testnull = vx_p_format;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -123,8 +125,9 @@ public static class File {
 
     public Vx.Core.Type_string path() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_path != null) {
-        output = this.vx_p_path;
+      Vx.Core.Type_string? testnull = vx_p_path;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -133,8 +136,9 @@ public static class File {
 
     public Vx.Core.Type_permission permission() {
       Vx.Core.Type_permission output = Vx.Core.e_permission;
-      if (this.vx_p_permission != null) {
-        output = this.vx_p_permission;
+      Vx.Core.Type_permission? testnull = vx_p_permission;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -143,8 +147,9 @@ public static class File {
 
     public Vx.Core.Type_string text() {
       Vx.Core.Type_string output = Vx.Core.e_string;
-      if (this.vx_p_text != null) {
-        output = this.vx_p_text;
+      Vx.Core.Type_string? testnull = vx_p_text;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -152,34 +157,29 @@ public static class File {
     public Vx.Core.Type_any vx_any(Vx.Core.Type_string key) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       string skey = key.vx_string();
-      switch (skey) {
-      case ":name":
+      if (false) {
+      } else if ((skey==":name")) {
         output = this.name();
-        break;
-      case ":format":
+      } else if ((skey==":format")) {
         output = this.format();
-        break;
-      case ":path":
+      } else if ((skey==":path")) {
         output = this.path();
-        break;
-      case ":permission":
+      } else if ((skey==":permission")) {
         output = this.permission();
-        break;
-      case ":text":
+      } else if ((skey==":text")) {
         output = this.text();
-        break;
       }
       return output;
     }
 
     public Vx.Core.Map<string, Vx.Core.Type_any> vx_map() {
-      Vx.Core.Map<string, Vx.Core.Type_any> output = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
-      output.put(":name", this.name());
-      output.put(":format", this.format());
-      output.put(":path", this.path());
-      output.put(":permission", this.permission());
-      output.put(":text", this.text());
-      output = Vx.Core.immutablemap(output);
+      Vx.Core.Map<string, Vx.Core.Type_any> map = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
+      map.put(":name", this.name());
+      map.put(":format", this.format());
+      map.put(":path", this.path());
+      map.put(":permission", this.permission());
+      map.put(":text", this.text());
+      Vx.Core.Map<string, Vx.Core.Type_any> output = Vx.Core.immutablemap(map);
       return output;
     }
 
@@ -208,8 +208,8 @@ public static class File {
       validkeys.Add(":permission");
       validkeys.Add(":text");
       string key = "";
-      Vx.Core.Type_msg msg;
-      Vx.Core.Type_any msgval;
+      Vx.Core.Type_msg msg = Vx.Core.e_msg;
+      Vx.Core.Type_any msgval = Vx.Core.e_any;
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
@@ -249,8 +249,8 @@ public static class File {
             }
           }
         } else {
-          switch (key) {
-          case ":name":
+          if (false) {
+          } else if ((key==":name")) {
             if (valsub == vx_p_name) {
             } else if (valsub is Vx.Core.Type_string valname) {
               ischanged = true;
@@ -272,8 +272,7 @@ public static class File {
               msg = Vx.Core.vx_msg_from_error("vx/data/file/file", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":format":
+          } else if ((key==":format")) {
             if (valsub == vx_p_format) {
             } else if (valsub is Vx.Data.File.Type_fileformat valformat) {
               ischanged = true;
@@ -292,8 +291,7 @@ public static class File {
               msg = Vx.Core.vx_msg_from_error("vx/data/file/file", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":path":
+          } else if ((key==":path")) {
             if (valsub == vx_p_path) {
             } else if (valsub is Vx.Core.Type_string valpath) {
               ischanged = true;
@@ -315,8 +313,7 @@ public static class File {
               msg = Vx.Core.vx_msg_from_error("vx/data/file/file", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":permission":
+          } else if ((key==":permission")) {
             if (valsub == vx_p_permission) {
             } else if (valsub is Vx.Core.Type_permission valpermission) {
               ischanged = true;
@@ -335,8 +332,7 @@ public static class File {
               msg = Vx.Core.vx_msg_from_error("vx/data/file/file", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":text":
+          } else if ((key==":text")) {
             if (valsub == vx_p_text) {
             } else if (valsub is Vx.Core.Type_string valtext) {
               ischanged = true;
@@ -358,12 +354,10 @@ public static class File {
               msg = Vx.Core.vx_msg_from_error("vx/data/file/file", ":invalidvalue", msgmap);
               msgblock = Vx.Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Vx.Core.vx_new_string(key);
             msg = Vx.Core.vx_msg_from_error("vx/data/file/file", ":invalidkey", msgval);
             msgblock = Vx.Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }

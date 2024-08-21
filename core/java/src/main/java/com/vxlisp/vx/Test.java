@@ -30,8 +30,9 @@ public final class Test {
     @Override
     public Core.Type_boolean passfail() {
       Core.Type_boolean output = Core.e_boolean;
-      if (this.vx_p_passfail != null) {
-        output = this.vx_p_passfail;
+      Core.Type_boolean testnull = vx_p_passfail;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -41,8 +42,9 @@ public final class Test {
     @Override
     public Core.Type_string testpkg() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_testpkg != null) {
-        output = this.vx_p_testpkg;
+      Core.Type_string testnull = vx_p_testpkg;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -52,8 +54,9 @@ public final class Test {
     @Override
     public Core.Type_string casename() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_casename != null) {
-        output = this.vx_p_casename;
+      Core.Type_string testnull = vx_p_casename;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -63,8 +66,9 @@ public final class Test {
     @Override
     public Test.Type_testdescribelist describelist() {
       Test.Type_testdescribelist output = Test.e_testdescribelist;
-      if (this.vx_p_describelist != null) {
-        output = this.vx_p_describelist;
+      Test.Type_testdescribelist testnull = vx_p_describelist;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -73,31 +77,27 @@ public final class Test {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":passfail":
+      if (false) {
+      } else if ((skey.equals(":passfail"))) {
         output = this.passfail();
-        break;
-      case ":testpkg":
+      } else if ((skey.equals(":testpkg"))) {
         output = this.testpkg();
-        break;
-      case ":casename":
+      } else if ((skey.equals(":casename"))) {
         output = this.casename();
-        break;
-      case ":describelist":
+      } else if ((skey.equals(":describelist"))) {
         output = this.describelist();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":passfail", this.passfail());
-      output.put(":testpkg", this.testpkg());
-      output.put(":casename", this.casename());
-      output.put(":describelist", this.describelist());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":passfail", this.passfail());
+      map.put(":testpkg", this.testpkg());
+      map.put(":casename", this.casename());
+      map.put(":describelist", this.describelist());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -126,8 +126,8 @@ public final class Test {
       validkeys.add(":casename");
       validkeys.add(":describelist");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -170,8 +170,8 @@ public final class Test {
             }
           }
         } else {
-          switch (key) {
-          case ":passfail":
+          if (false) {
+          } else if ((key.equals(":passfail"))) {
             if (valsub == vx_p_passfail) {
             } else if (valsub instanceof Core.Type_boolean) {
               Core.Type_boolean valpassfail = (Core.Type_boolean)valsub;
@@ -195,8 +195,7 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testcase", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":testpkg":
+          } else if ((key.equals(":testpkg"))) {
             if (valsub == vx_p_testpkg) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valtestpkg = (Core.Type_string)valsub;
@@ -220,8 +219,7 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testcase", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":casename":
+          } else if ((key.equals(":casename"))) {
             if (valsub == vx_p_casename) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valcasename = (Core.Type_string)valsub;
@@ -245,8 +243,7 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testcase", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":describelist":
+          } else if ((key.equals(":describelist"))) {
             if (valsub == vx_p_describelist) {
             } else if (valsub instanceof Test.Type_testdescribelist) {
               Test.Type_testdescribelist valdescribelist = (Test.Type_testdescribelist)valsub;
@@ -267,12 +264,10 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testcase", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/test/testcase", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -491,8 +486,9 @@ public final class Test {
     @Override
     public Core.Type_intmap constmap() {
       Core.Type_intmap output = Core.e_intmap;
-      if (this.vx_p_constmap != null) {
-        output = this.vx_p_constmap;
+      Core.Type_intmap testnull = vx_p_constmap;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -502,8 +498,9 @@ public final class Test {
     @Override
     public Core.Type_intmap funcmap() {
       Core.Type_intmap output = Core.e_intmap;
-      if (this.vx_p_funcmap != null) {
-        output = this.vx_p_funcmap;
+      Core.Type_intmap testnull = vx_p_funcmap;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -513,8 +510,9 @@ public final class Test {
     @Override
     public Core.Type_string testpkg() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_testpkg != null) {
-        output = this.vx_p_testpkg;
+      Core.Type_string testnull = vx_p_testpkg;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -524,8 +522,9 @@ public final class Test {
     @Override
     public Core.Type_intmap typemap() {
       Core.Type_intmap output = Core.e_intmap;
-      if (this.vx_p_typemap != null) {
-        output = this.vx_p_typemap;
+      Core.Type_intmap testnull = vx_p_typemap;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -534,31 +533,27 @@ public final class Test {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":constmap":
+      if (false) {
+      } else if ((skey.equals(":constmap"))) {
         output = this.constmap();
-        break;
-      case ":funcmap":
+      } else if ((skey.equals(":funcmap"))) {
         output = this.funcmap();
-        break;
-      case ":testpkg":
+      } else if ((skey.equals(":testpkg"))) {
         output = this.testpkg();
-        break;
-      case ":typemap":
+      } else if ((skey.equals(":typemap"))) {
         output = this.typemap();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":constmap", this.constmap());
-      output.put(":funcmap", this.funcmap());
-      output.put(":testpkg", this.testpkg());
-      output.put(":typemap", this.typemap());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":constmap", this.constmap());
+      map.put(":funcmap", this.funcmap());
+      map.put(":testpkg", this.testpkg());
+      map.put(":typemap", this.typemap());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -587,8 +582,8 @@ public final class Test {
       validkeys.add(":testpkg");
       validkeys.add(":typemap");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -631,8 +626,8 @@ public final class Test {
             }
           }
         } else {
-          switch (key) {
-          case ":constmap":
+          if (false) {
+          } else if ((key.equals(":constmap"))) {
             if (valsub == vx_p_constmap) {
             } else if (valsub instanceof Core.Type_intmap) {
               Core.Type_intmap valconstmap = (Core.Type_intmap)valsub;
@@ -653,8 +648,7 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testcoveragedetail", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":funcmap":
+          } else if ((key.equals(":funcmap"))) {
             if (valsub == vx_p_funcmap) {
             } else if (valsub instanceof Core.Type_intmap) {
               Core.Type_intmap valfuncmap = (Core.Type_intmap)valsub;
@@ -675,8 +669,7 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testcoveragedetail", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":testpkg":
+          } else if ((key.equals(":testpkg"))) {
             if (valsub == vx_p_testpkg) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valtestpkg = (Core.Type_string)valsub;
@@ -700,8 +693,7 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testcoveragedetail", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":typemap":
+          } else if ((key.equals(":typemap"))) {
             if (valsub == vx_p_typemap) {
             } else if (valsub instanceof Core.Type_intmap) {
               Core.Type_intmap valtypemap = (Core.Type_intmap)valsub;
@@ -722,12 +714,10 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testcoveragedetail", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/test/testcoveragedetail", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -800,8 +790,9 @@ public final class Test {
     @Override
     public Core.Type_int pct() {
       Core.Type_int output = Core.e_int;
-      if (this.vx_p_pct != null) {
-        output = this.vx_p_pct;
+      Core.Type_int testnull = vx_p_pct;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -811,8 +802,9 @@ public final class Test {
     @Override
     public Core.Type_string testpkg() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_testpkg != null) {
-        output = this.vx_p_testpkg;
+      Core.Type_string testnull = vx_p_testpkg;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -822,8 +814,9 @@ public final class Test {
     @Override
     public Core.Type_int tests() {
       Core.Type_int output = Core.e_int;
-      if (this.vx_p_tests != null) {
-        output = this.vx_p_tests;
+      Core.Type_int testnull = vx_p_tests;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -833,8 +826,9 @@ public final class Test {
     @Override
     public Core.Type_int total() {
       Core.Type_int output = Core.e_int;
-      if (this.vx_p_total != null) {
-        output = this.vx_p_total;
+      Core.Type_int testnull = vx_p_total;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -843,31 +837,27 @@ public final class Test {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":pct":
+      if (false) {
+      } else if ((skey.equals(":pct"))) {
         output = this.pct();
-        break;
-      case ":testpkg":
+      } else if ((skey.equals(":testpkg"))) {
         output = this.testpkg();
-        break;
-      case ":tests":
+      } else if ((skey.equals(":tests"))) {
         output = this.tests();
-        break;
-      case ":total":
+      } else if ((skey.equals(":total"))) {
         output = this.total();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":pct", this.pct());
-      output.put(":testpkg", this.testpkg());
-      output.put(":tests", this.tests());
-      output.put(":total", this.total());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":pct", this.pct());
+      map.put(":testpkg", this.testpkg());
+      map.put(":tests", this.tests());
+      map.put(":total", this.total());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -896,8 +886,8 @@ public final class Test {
       validkeys.add(":tests");
       validkeys.add(":total");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -940,8 +930,8 @@ public final class Test {
             }
           }
         } else {
-          switch (key) {
-          case ":pct":
+          if (false) {
+          } else if ((key.equals(":pct"))) {
             if (valsub == vx_p_pct) {
             } else if (valsub instanceof Core.Type_int) {
               Core.Type_int valpct = (Core.Type_int)valsub;
@@ -965,8 +955,7 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testcoveragenums", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":testpkg":
+          } else if ((key.equals(":testpkg"))) {
             if (valsub == vx_p_testpkg) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valtestpkg = (Core.Type_string)valsub;
@@ -990,8 +979,7 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testcoveragenums", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":tests":
+          } else if ((key.equals(":tests"))) {
             if (valsub == vx_p_tests) {
             } else if (valsub instanceof Core.Type_int) {
               Core.Type_int valtests = (Core.Type_int)valsub;
@@ -1015,8 +1003,7 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testcoveragenums", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":total":
+          } else if ((key.equals(":total"))) {
             if (valsub == vx_p_total) {
             } else if (valsub instanceof Core.Type_int) {
               Core.Type_int valtotal = (Core.Type_int)valsub;
@@ -1040,12 +1027,10 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testcoveragenums", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/test/testcoveragenums", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -1122,8 +1107,9 @@ public final class Test {
     @Override
     public Test.Type_testcoveragenums bigospacenums() {
       Test.Type_testcoveragenums output = Test.e_testcoveragenums;
-      if (this.vx_p_bigospacenums != null) {
-        output = this.vx_p_bigospacenums;
+      Test.Type_testcoveragenums testnull = vx_p_bigospacenums;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1133,8 +1119,9 @@ public final class Test {
     @Override
     public Test.Type_testcoveragenums bigotimenums() {
       Test.Type_testcoveragenums output = Test.e_testcoveragenums;
-      if (this.vx_p_bigotimenums != null) {
-        output = this.vx_p_bigotimenums;
+      Test.Type_testcoveragenums testnull = vx_p_bigotimenums;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1144,8 +1131,9 @@ public final class Test {
     @Override
     public Test.Type_testcoveragenums constnums() {
       Test.Type_testcoveragenums output = Test.e_testcoveragenums;
-      if (this.vx_p_constnums != null) {
-        output = this.vx_p_constnums;
+      Test.Type_testcoveragenums testnull = vx_p_constnums;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1155,8 +1143,9 @@ public final class Test {
     @Override
     public Test.Type_testcoveragenums docnums() {
       Test.Type_testcoveragenums output = Test.e_testcoveragenums;
-      if (this.vx_p_docnums != null) {
-        output = this.vx_p_docnums;
+      Test.Type_testcoveragenums testnull = vx_p_docnums;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1166,8 +1155,9 @@ public final class Test {
     @Override
     public Test.Type_testcoveragenums funcnums() {
       Test.Type_testcoveragenums output = Test.e_testcoveragenums;
-      if (this.vx_p_funcnums != null) {
-        output = this.vx_p_funcnums;
+      Test.Type_testcoveragenums testnull = vx_p_funcnums;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1177,8 +1167,9 @@ public final class Test {
     @Override
     public Core.Type_string testpkg() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_testpkg != null) {
-        output = this.vx_p_testpkg;
+      Core.Type_string testnull = vx_p_testpkg;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1188,8 +1179,9 @@ public final class Test {
     @Override
     public Test.Type_testcoveragenums totalnums() {
       Test.Type_testcoveragenums output = Test.e_testcoveragenums;
-      if (this.vx_p_totalnums != null) {
-        output = this.vx_p_totalnums;
+      Test.Type_testcoveragenums testnull = vx_p_totalnums;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1199,8 +1191,9 @@ public final class Test {
     @Override
     public Test.Type_testcoveragenums typenums() {
       Test.Type_testcoveragenums output = Test.e_testcoveragenums;
-      if (this.vx_p_typenums != null) {
-        output = this.vx_p_typenums;
+      Test.Type_testcoveragenums testnull = vx_p_typenums;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1209,47 +1202,39 @@ public final class Test {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":bigospacenums":
+      if (false) {
+      } else if ((skey.equals(":bigospacenums"))) {
         output = this.bigospacenums();
-        break;
-      case ":bigotimenums":
+      } else if ((skey.equals(":bigotimenums"))) {
         output = this.bigotimenums();
-        break;
-      case ":constnums":
+      } else if ((skey.equals(":constnums"))) {
         output = this.constnums();
-        break;
-      case ":docnums":
+      } else if ((skey.equals(":docnums"))) {
         output = this.docnums();
-        break;
-      case ":funcnums":
+      } else if ((skey.equals(":funcnums"))) {
         output = this.funcnums();
-        break;
-      case ":testpkg":
+      } else if ((skey.equals(":testpkg"))) {
         output = this.testpkg();
-        break;
-      case ":totalnums":
+      } else if ((skey.equals(":totalnums"))) {
         output = this.totalnums();
-        break;
-      case ":typenums":
+      } else if ((skey.equals(":typenums"))) {
         output = this.typenums();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":bigospacenums", this.bigospacenums());
-      output.put(":bigotimenums", this.bigotimenums());
-      output.put(":constnums", this.constnums());
-      output.put(":docnums", this.docnums());
-      output.put(":funcnums", this.funcnums());
-      output.put(":testpkg", this.testpkg());
-      output.put(":totalnums", this.totalnums());
-      output.put(":typenums", this.typenums());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":bigospacenums", this.bigospacenums());
+      map.put(":bigotimenums", this.bigotimenums());
+      map.put(":constnums", this.constnums());
+      map.put(":docnums", this.docnums());
+      map.put(":funcnums", this.funcnums());
+      map.put(":testpkg", this.testpkg());
+      map.put(":totalnums", this.totalnums());
+      map.put(":typenums", this.typenums());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -1286,8 +1271,8 @@ public final class Test {
       validkeys.add(":totalnums");
       validkeys.add(":typenums");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -1330,8 +1315,8 @@ public final class Test {
             }
           }
         } else {
-          switch (key) {
-          case ":bigospacenums":
+          if (false) {
+          } else if ((key.equals(":bigospacenums"))) {
             if (valsub == vx_p_bigospacenums) {
             } else if (valsub instanceof Test.Type_testcoveragenums) {
               Test.Type_testcoveragenums valbigospacenums = (Test.Type_testcoveragenums)valsub;
@@ -1352,8 +1337,7 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":bigotimenums":
+          } else if ((key.equals(":bigotimenums"))) {
             if (valsub == vx_p_bigotimenums) {
             } else if (valsub instanceof Test.Type_testcoveragenums) {
               Test.Type_testcoveragenums valbigotimenums = (Test.Type_testcoveragenums)valsub;
@@ -1374,8 +1358,7 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":constnums":
+          } else if ((key.equals(":constnums"))) {
             if (valsub == vx_p_constnums) {
             } else if (valsub instanceof Test.Type_testcoveragenums) {
               Test.Type_testcoveragenums valconstnums = (Test.Type_testcoveragenums)valsub;
@@ -1396,8 +1379,7 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":docnums":
+          } else if ((key.equals(":docnums"))) {
             if (valsub == vx_p_docnums) {
             } else if (valsub instanceof Test.Type_testcoveragenums) {
               Test.Type_testcoveragenums valdocnums = (Test.Type_testcoveragenums)valsub;
@@ -1418,8 +1400,7 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":funcnums":
+          } else if ((key.equals(":funcnums"))) {
             if (valsub == vx_p_funcnums) {
             } else if (valsub instanceof Test.Type_testcoveragenums) {
               Test.Type_testcoveragenums valfuncnums = (Test.Type_testcoveragenums)valsub;
@@ -1440,8 +1421,7 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":testpkg":
+          } else if ((key.equals(":testpkg"))) {
             if (valsub == vx_p_testpkg) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valtestpkg = (Core.Type_string)valsub;
@@ -1465,8 +1445,7 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":totalnums":
+          } else if ((key.equals(":totalnums"))) {
             if (valsub == vx_p_totalnums) {
             } else if (valsub instanceof Test.Type_testcoveragenums) {
               Test.Type_testcoveragenums valtotalnums = (Test.Type_testcoveragenums)valsub;
@@ -1487,8 +1466,7 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":typenums":
+          } else if ((key.equals(":typenums"))) {
             if (valsub == vx_p_typenums) {
             } else if (valsub instanceof Test.Type_testcoveragenums) {
               Test.Type_testcoveragenums valtypenums = (Test.Type_testcoveragenums)valsub;
@@ -1509,12 +1487,10 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/test/testcoveragesummary", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -1590,8 +1566,9 @@ public final class Test {
     @Override
     public Core.Type_string describename() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_describename != null) {
-        output = this.vx_p_describename;
+      Core.Type_string testnull = vx_p_describename;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1601,8 +1578,9 @@ public final class Test {
     @Override
     public Core.Type_string testpkg() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_testpkg != null) {
-        output = this.vx_p_testpkg;
+      Core.Type_string testnull = vx_p_testpkg;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1612,8 +1590,9 @@ public final class Test {
     @Override
     public Test.Type_testresult testresult() {
       Test.Type_testresult output = Test.e_testresult;
-      if (this.vx_p_testresult != null) {
-        output = this.vx_p_testresult;
+      Test.Type_testresult testnull = vx_p_testresult;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -1622,27 +1601,24 @@ public final class Test {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":describename":
+      if (false) {
+      } else if ((skey.equals(":describename"))) {
         output = this.describename();
-        break;
-      case ":testpkg":
+      } else if ((skey.equals(":testpkg"))) {
         output = this.testpkg();
-        break;
-      case ":testresult":
+      } else if ((skey.equals(":testresult"))) {
         output = this.testresult();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":describename", this.describename());
-      output.put(":testpkg", this.testpkg());
-      output.put(":testresult", this.testresult());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":describename", this.describename());
+      map.put(":testpkg", this.testpkg());
+      map.put(":testresult", this.testresult());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -1669,8 +1645,8 @@ public final class Test {
       validkeys.add(":testpkg");
       validkeys.add(":testresult");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -1713,8 +1689,8 @@ public final class Test {
             }
           }
         } else {
-          switch (key) {
-          case ":describename":
+          if (false) {
+          } else if ((key.equals(":describename"))) {
             if (valsub == vx_p_describename) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valdescribename = (Core.Type_string)valsub;
@@ -1738,8 +1714,7 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testdescribe", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":testpkg":
+          } else if ((key.equals(":testpkg"))) {
             if (valsub == vx_p_testpkg) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valtestpkg = (Core.Type_string)valsub;
@@ -1763,8 +1738,7 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testdescribe", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":testresult":
+          } else if ((key.equals(":testresult"))) {
             if (valsub == vx_p_testresult) {
             } else if (valsub instanceof Test.Type_testresult) {
               Test.Type_testresult valtestresult = (Test.Type_testresult)valsub;
@@ -1785,12 +1759,10 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testdescribe", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/test/testdescribe", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -2009,8 +1981,9 @@ public final class Test {
     @Override
     public Test.Type_testcaselist caselist() {
       Test.Type_testcaselist output = Test.e_testcaselist;
-      if (this.vx_p_caselist != null) {
-        output = this.vx_p_caselist;
+      Test.Type_testcaselist testnull = vx_p_caselist;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2020,8 +1993,9 @@ public final class Test {
     @Override
     public Test.Type_testcoveragedetail coveragedetail() {
       Test.Type_testcoveragedetail output = Test.e_testcoveragedetail;
-      if (this.vx_p_coveragedetail != null) {
-        output = this.vx_p_coveragedetail;
+      Test.Type_testcoveragedetail testnull = vx_p_coveragedetail;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2031,8 +2005,9 @@ public final class Test {
     @Override
     public Test.Type_testcoveragesummary coveragesummary() {
       Test.Type_testcoveragesummary output = Test.e_testcoveragesummary;
-      if (this.vx_p_coveragesummary != null) {
-        output = this.vx_p_coveragesummary;
+      Test.Type_testcoveragesummary testnull = vx_p_coveragesummary;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2042,8 +2017,9 @@ public final class Test {
     @Override
     public Core.Type_boolean passfail() {
       Core.Type_boolean output = Core.e_boolean;
-      if (this.vx_p_passfail != null) {
-        output = this.vx_p_passfail;
+      Core.Type_boolean testnull = vx_p_passfail;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2053,8 +2029,9 @@ public final class Test {
     @Override
     public Core.Type_string testpkg() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_testpkg != null) {
-        output = this.vx_p_testpkg;
+      Core.Type_string testnull = vx_p_testpkg;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2063,35 +2040,30 @@ public final class Test {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":caselist":
+      if (false) {
+      } else if ((skey.equals(":caselist"))) {
         output = this.caselist();
-        break;
-      case ":coveragedetail":
+      } else if ((skey.equals(":coveragedetail"))) {
         output = this.coveragedetail();
-        break;
-      case ":coveragesummary":
+      } else if ((skey.equals(":coveragesummary"))) {
         output = this.coveragesummary();
-        break;
-      case ":passfail":
+      } else if ((skey.equals(":passfail"))) {
         output = this.passfail();
-        break;
-      case ":testpkg":
+      } else if ((skey.equals(":testpkg"))) {
         output = this.testpkg();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":caselist", this.caselist());
-      output.put(":coveragedetail", this.coveragedetail());
-      output.put(":coveragesummary", this.coveragesummary());
-      output.put(":passfail", this.passfail());
-      output.put(":testpkg", this.testpkg());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":caselist", this.caselist());
+      map.put(":coveragedetail", this.coveragedetail());
+      map.put(":coveragesummary", this.coveragesummary());
+      map.put(":passfail", this.passfail());
+      map.put(":testpkg", this.testpkg());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -2122,8 +2094,8 @@ public final class Test {
       validkeys.add(":passfail");
       validkeys.add(":testpkg");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -2166,8 +2138,8 @@ public final class Test {
             }
           }
         } else {
-          switch (key) {
-          case ":caselist":
+          if (false) {
+          } else if ((key.equals(":caselist"))) {
             if (valsub == vx_p_caselist) {
             } else if (valsub instanceof Test.Type_testcaselist) {
               Test.Type_testcaselist valcaselist = (Test.Type_testcaselist)valsub;
@@ -2188,8 +2160,7 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testpackage", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":coveragedetail":
+          } else if ((key.equals(":coveragedetail"))) {
             if (valsub == vx_p_coveragedetail) {
             } else if (valsub instanceof Test.Type_testcoveragedetail) {
               Test.Type_testcoveragedetail valcoveragedetail = (Test.Type_testcoveragedetail)valsub;
@@ -2210,8 +2181,7 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testpackage", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":coveragesummary":
+          } else if ((key.equals(":coveragesummary"))) {
             if (valsub == vx_p_coveragesummary) {
             } else if (valsub instanceof Test.Type_testcoveragesummary) {
               Test.Type_testcoveragesummary valcoveragesummary = (Test.Type_testcoveragesummary)valsub;
@@ -2232,8 +2202,7 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testpackage", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":passfail":
+          } else if ((key.equals(":passfail"))) {
             if (valsub == vx_p_passfail) {
             } else if (valsub instanceof Core.Type_boolean) {
               Core.Type_boolean valpassfail = (Core.Type_boolean)valsub;
@@ -2257,8 +2226,7 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testpackage", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":testpkg":
+          } else if ((key.equals(":testpkg"))) {
             if (valsub == vx_p_testpkg) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valtestpkg = (Core.Type_string)valsub;
@@ -2282,12 +2250,10 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testpackage", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/test/testpackage", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
@@ -2508,8 +2474,9 @@ public final class Test {
     @Override
     public Core.Type_string code() {
       Core.Type_string output = Core.e_string;
-      if (this.vx_p_code != null) {
-        output = this.vx_p_code;
+      Core.Type_string testnull = vx_p_code;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2519,8 +2486,9 @@ public final class Test {
     @Override
     public Core.Type_boolean passfail() {
       Core.Type_boolean output = Core.e_boolean;
-      if (this.vx_p_passfail != null) {
-        output = this.vx_p_passfail;
+      Core.Type_boolean testnull = vx_p_passfail;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2530,8 +2498,9 @@ public final class Test {
     @Override
     public Core.Type_any expected() {
       Core.Type_any output = Core.e_any;
-      if (this.vx_p_expected != null) {
-        output = this.vx_p_expected;
+      Core.Type_any testnull = vx_p_expected;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2541,8 +2510,9 @@ public final class Test {
     @Override
     public Core.Type_any actual() {
       Core.Type_any output = Core.e_any;
-      if (this.vx_p_actual != null) {
-        output = this.vx_p_actual;
+      Core.Type_any testnull = vx_p_actual;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2552,8 +2522,9 @@ public final class Test {
     @Override
     public Core.Func_any_from_func_async fn_actual() {
       Core.Func_any_from_func_async output = Core.e_any_from_func_async;
-      if (this.vx_p_fn_actual != null) {
-        output = this.vx_p_fn_actual;
+      Core.Func_any_from_func_async testnull = vx_p_fn_actual;
+      if (testnull != null) {
+        output = testnull;
       }
       return output;
     }
@@ -2562,35 +2533,30 @@ public final class Test {
     public Core.Type_any vx_any(final Core.Type_string key) {
       Core.Type_any output = Core.e_any;
       String skey = key.vx_string();
-      switch (skey) {
-      case ":code":
+      if (false) {
+      } else if ((skey.equals(":code"))) {
         output = this.code();
-        break;
-      case ":passfail":
+      } else if ((skey.equals(":passfail"))) {
         output = this.passfail();
-        break;
-      case ":expected":
+      } else if ((skey.equals(":expected"))) {
         output = this.expected();
-        break;
-      case ":actual":
+      } else if ((skey.equals(":actual"))) {
         output = this.actual();
-        break;
-      case ":fn-actual":
+      } else if ((skey.equals(":fn-actual"))) {
         output = this.fn_actual();
-        break;
       }
       return output;
     }
 
     @Override
     public Map<String, Core.Type_any> vx_map() {
-      Map<String, Core.Type_any> output = new LinkedHashMap<String, Core.Type_any>();
-      output.put(":code", this.code());
-      output.put(":passfail", this.passfail());
-      output.put(":expected", this.expected());
-      output.put(":actual", this.actual());
-      output.put(":fn-actual", this.fn_actual());
-      output = Core.immutablemap(output);
+      Map<String, Core.Type_any> map = new LinkedHashMap<String, Core.Type_any>();
+      map.put(":code", this.code());
+      map.put(":passfail", this.passfail());
+      map.put(":expected", this.expected());
+      map.put(":actual", this.actual());
+      map.put(":fn-actual", this.fn_actual());
+      Map<String, Core.Type_any> output = Core.immutablemap(map);
       return output;
     }
 
@@ -2621,8 +2587,8 @@ public final class Test {
       validkeys.add(":actual");
       validkeys.add(":fn-actual");
       String key = "";
-      Core.Type_msg msg;
-      Core.Type_any msgval;
+      Core.Type_msg msg = Core.e_msg;
+      Core.Type_any msgval = Core.e_any;
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
@@ -2665,8 +2631,8 @@ public final class Test {
             }
           }
         } else {
-          switch (key) {
-          case ":code":
+          if (false) {
+          } else if ((key.equals(":code"))) {
             if (valsub == vx_p_code) {
             } else if (valsub instanceof Core.Type_string) {
               Core.Type_string valcode = (Core.Type_string)valsub;
@@ -2690,8 +2656,7 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testresult", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":passfail":
+          } else if ((key.equals(":passfail"))) {
             if (valsub == vx_p_passfail) {
             } else if (valsub instanceof Core.Type_boolean) {
               Core.Type_boolean valpassfail = (Core.Type_boolean)valsub;
@@ -2715,8 +2680,7 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testresult", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":expected":
+          } else if ((key.equals(":expected"))) {
             if (valsub == vx_p_expected) {
             } else if (valsub instanceof Core.Type_any) {
               Core.Type_any valexpected = (Core.Type_any)valsub;
@@ -2737,8 +2701,7 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testresult", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":actual":
+          } else if ((key.equals(":actual"))) {
             if (valsub == vx_p_actual) {
             } else if (valsub instanceof Core.Type_any) {
               Core.Type_any valactual = (Core.Type_any)valsub;
@@ -2759,8 +2722,7 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testresult", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          case ":fn-actual":
+          } else if ((key.equals(":fn-actual"))) {
             if (valsub == vx_p_fn_actual) {
             } else if (valsub instanceof Core.Func_any_from_func_async) {
               Core.Func_any_from_func_async valfn_actual = (Core.Func_any_from_func_async)valsub;
@@ -2781,12 +2743,10 @@ public final class Test {
               msg = Core.vx_msg_from_error("vx/test/testresult", ":invalidvalue", msgmap);
               msgblock = Core.vx_copy(msgblock, msg);
             }
-            break;
-          default:
+          } else {
             msgval = Core.vx_new_string(key);
             msg = Core.vx_msg_from_error("vx/test/testresult", ":invalidkey", msgval);
             msgblock = Core.vx_copy(msgblock, msg);
-            break;
           }
           key = "";
         }
