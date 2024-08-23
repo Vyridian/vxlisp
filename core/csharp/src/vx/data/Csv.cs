@@ -56,7 +56,7 @@ public static class Csv {
       return output;
     }
 
-    public override Vx.Data.Csv.Type_csv vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Csv.Type_csv output = Vx.Core.vx_copy(Vx.Data.Csv.e_csv, vals);
       return output;
     }
@@ -288,7 +288,7 @@ public static class Csv {
       return output;
     }
 
-    public override Vx.Data.Csv.Type_csvrowmap vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Csv.Type_csvrowmap output = Vx.Core.vx_copy(Vx.Data.Csv.e_csvrowmap, vals);
       return output;
     }
@@ -443,7 +443,7 @@ public static class Csv {
       return output;
     }
 
-    public override Vx.Data.Csv.Type_csvrows vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Csv.Type_csvrows output = Vx.Core.vx_copy(Vx.Data.Csv.e_csvrows, vals);
       return output;
     }
@@ -603,7 +603,7 @@ public static class Csv {
 
   public class Class_csv_read_from_file : Vx.Core.Class_base, Func_csv_read_from_file {
 
-    public override Vx.Data.Csv.Func_csv_read_from_file vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Csv.Class_csv_read_from_file output = new Vx.Data.Csv.Class_csv_read_from_file();
       return output;
     }
@@ -712,7 +712,7 @@ public static class Csv {
 
   public class Class_csv_from_file : Vx.Core.Class_base, Func_csv_from_file {
 
-    public override Vx.Data.Csv.Func_csv_from_file vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Csv.Class_csv_from_file output = new Vx.Data.Csv.Class_csv_from_file();
       return output;
     }
@@ -817,7 +817,7 @@ public static class Csv {
 
   public class Class_csv_from_string : Vx.Core.Class_base, Func_csv_from_string {
 
-    public override Vx.Data.Csv.Func_csv_from_string vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Csv.Class_csv_from_string output = new Vx.Data.Csv.Class_csv_from_string();
       return output;
     }
@@ -918,7 +918,7 @@ public static class Csv {
 
   public class Class_csv_from_textblock : Vx.Core.Class_base, Func_csv_from_textblock {
 
-    public override Vx.Data.Csv.Func_csv_from_textblock vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Csv.Class_csv_from_textblock output = new Vx.Data.Csv.Class_csv_from_textblock();
       return output;
     }
@@ -1041,7 +1041,7 @@ public static class Csv {
 
   public class Class_csvrows_from_textblock : Vx.Core.Class_base, Func_csvrows_from_textblock {
 
-    public override Vx.Data.Csv.Func_csvrows_from_textblock vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Csv.Class_csvrows_from_textblock output = new Vx.Data.Csv.Class_csvrows_from_textblock();
       return output;
     }
@@ -1159,7 +1159,7 @@ public static class Csv {
 
   public class Class_stringmap_from_csv : Vx.Core.Class_base, Func_stringmap_from_csv {
 
-    public override Vx.Data.Csv.Func_stringmap_from_csv vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Csv.Class_stringmap_from_csv output = new Vx.Data.Csv.Class_stringmap_from_csv();
       return output;
     }
@@ -1288,7 +1288,7 @@ public static class Csv {
 
   public class Class_textblock_csv_from_string : Vx.Core.Class_base, Func_textblock_csv_from_string {
 
-    public override Vx.Data.Csv.Func_textblock_csv_from_string vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Csv.Class_textblock_csv_from_string output = new Vx.Data.Csv.Class_textblock_csv_from_string();
       return output;
     }

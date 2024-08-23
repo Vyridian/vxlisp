@@ -117,7 +117,7 @@ public static class Event {
       return output;
     }
 
-    public override Vx.Event.Type_event vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Event.Type_event output = Vx.Core.vx_copy(Vx.Event.e_event, vals);
       return output;
     }
@@ -409,7 +409,7 @@ public static class Event {
       return output;
     }
 
-    public override Vx.Event.Type_eventlist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Event.Type_eventlist output = Vx.Core.vx_copy(Vx.Event.e_eventlist, vals);
       return output;
     }
@@ -579,7 +579,7 @@ public static class Event {
       return output;
     }
 
-    public override Vx.Event.Type_eventmap vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Event.Type_eventmap output = Vx.Core.vx_copy(Vx.Event.e_eventmap, vals);
       return output;
     }
@@ -906,7 +906,7 @@ public static class Event {
 
   public class Class_any_from_from_event : Vx.Core.Class_base, Func_any_from_from_event {
 
-    public override Vx.Event.Func_any_from_from_event vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Event.Class_any_from_from_event output = new Vx.Event.Class_any_from_from_event();
       return output;
     }
@@ -1013,7 +1013,7 @@ public static class Event {
 
   public class Class_event_from_event : Vx.Core.Class_base, Func_event_from_event {
 
-    public override Vx.Event.Func_event_from_event vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Event.Class_event_from_event output = new Vx.Event.Class_event_from_event();
       return output;
     }
@@ -1112,7 +1112,7 @@ public static class Event {
 
   public class Class_event_from_event_async : Vx.Core.Class_base, Func_event_from_event_async {
 
-    public override Vx.Event.Func_event_from_event_async vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Event.Class_event_from_event_async output = new Vx.Event.Class_event_from_event_async();
       return output;
     }
@@ -1208,7 +1208,7 @@ public static class Event {
 
   public class Class_eventmap_from_eventlist : Vx.Core.Class_base, Func_eventmap_from_eventlist {
 
-    public override Vx.Event.Func_eventmap_from_eventlist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Event.Class_eventmap_from_eventlist output = new Vx.Event.Class_eventmap_from_eventlist();
       return output;
     }

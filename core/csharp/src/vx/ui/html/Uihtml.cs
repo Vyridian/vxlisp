@@ -372,7 +372,7 @@ public static class Uihtml {
 
   public class Class_boolean_layoutremove_html : Vx.Core.Class_base, Func_boolean_layoutremove_html {
 
-    public override Vx.Ui.Html.Uihtml.Func_boolean_layoutremove_html vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_boolean_layoutremove_html output = new Vx.Ui.Html.Uihtml.Class_boolean_layoutremove_html();
       return output;
     }
@@ -477,7 +477,7 @@ public static class Uihtml {
 
   public class Class_boolean_layoutselected_html : Vx.Core.Class_base, Func_boolean_layoutselected_html {
 
-    public override Vx.Ui.Html.Uihtml.Func_boolean_layoutselected_html vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_boolean_layoutselected_html output = new Vx.Ui.Html.Uihtml.Class_boolean_layoutselected_html();
       return output;
     }
@@ -575,7 +575,7 @@ public static class Uihtml {
 
   public class Class_boolean_layoutvisible_html : Vx.Core.Class_base, Func_boolean_layoutvisible_html {
 
-    public override Vx.Ui.Html.Uihtml.Func_boolean_layoutvisible_html vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_boolean_layoutvisible_html output = new Vx.Ui.Html.Uihtml.Class_boolean_layoutvisible_html();
       return output;
     }
@@ -673,7 +673,7 @@ public static class Uihtml {
 
   public class Class_boolean_print_html : Vx.Core.Class_base, Func_boolean_print_html {
 
-    public override Vx.Ui.Html.Uihtml.Func_boolean_print_html vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_boolean_print_html output = new Vx.Ui.Html.Uihtml.Class_boolean_print_html();
       return output;
     }
@@ -790,7 +790,7 @@ public static class Uihtml {
 
   public class Class_boolean_writeclass_from_ui : Vx.Core.Class_base, Func_boolean_writeclass_from_ui {
 
-    public override Vx.Ui.Html.Uihtml.Func_boolean_writeclass_from_ui vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_boolean_writeclass_from_ui output = new Vx.Ui.Html.Uihtml.Class_boolean_writeclass_from_ui();
       return output;
     }
@@ -900,7 +900,7 @@ public static class Uihtml {
 
   public class Class_boolean_writeeventsall_from_ui : Vx.Core.Class_base, Func_boolean_writeeventsall_from_ui {
 
-    public override Vx.Ui.Html.Uihtml.Func_boolean_writeeventsall_from_ui vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_boolean_writeeventsall_from_ui output = new Vx.Ui.Html.Uihtml.Class_boolean_writeeventsall_from_ui();
       return output;
     }
@@ -1012,7 +1012,7 @@ public static class Uihtml {
 
   public class Class_boolean_writeeventsall_from_uimap : Vx.Core.Class_base, Func_boolean_writeeventsall_from_uimap {
 
-    public override Vx.Ui.Html.Uihtml.Func_boolean_writeeventsall_from_uimap vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_boolean_writeeventsall_from_uimap output = new Vx.Ui.Html.Uihtml.Class_boolean_writeeventsall_from_uimap();
       return output;
     }
@@ -1128,7 +1128,7 @@ public static class Uihtml {
 
   public class Class_boolean_writeselected_from_ui : Vx.Core.Class_base, Func_boolean_writeselected_from_ui {
 
-    public override Vx.Ui.Html.Uihtml.Func_boolean_writeselected_from_ui vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_boolean_writeselected_from_ui output = new Vx.Ui.Html.Uihtml.Class_boolean_writeselected_from_ui();
       return output;
     }
@@ -1226,7 +1226,7 @@ public static class Uihtml {
 
   public class Class_boolean_writevisible_from_ui : Vx.Core.Class_base, Func_boolean_writevisible_from_ui {
 
-    public override Vx.Ui.Html.Uihtml.Func_boolean_writevisible_from_ui vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_boolean_writevisible_from_ui output = new Vx.Ui.Html.Uihtml.Class_boolean_writevisible_from_ui();
       return output;
     }
@@ -1322,7 +1322,7 @@ public static class Uihtml {
 
   public class Class_context_write : Vx.Core.Class_base, Func_context_write {
 
-    public override Vx.Ui.Html.Uihtml.Func_context_write vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_context_write output = new Vx.Ui.Html.Uihtml.Class_context_write();
       return output;
     }
@@ -1408,7 +1408,7 @@ public static class Uihtml {
 
   public class Class_divchild_from_ui : Vx.Core.Class_base, Func_divchild_from_ui {
 
-    public override Vx.Ui.Html.Uihtml.Func_divchild_from_ui vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_divchild_from_ui output = new Vx.Ui.Html.Uihtml.Class_divchild_from_ui();
       return output;
     }
@@ -1531,7 +1531,7 @@ public static class Uihtml {
 
   public class Class_divchildlist_from_uimap : Vx.Core.Class_base, Func_divchildlist_from_uimap {
 
-    public override Vx.Ui.Html.Uihtml.Func_divchildlist_from_uimap vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_divchildlist_from_uimap output = new Vx.Ui.Html.Uihtml.Class_divchildlist_from_uimap();
       return output;
     }
@@ -1650,7 +1650,7 @@ public static class Uihtml {
 
   public class Class_divchildlist_from_uimap_1 : Vx.Core.Class_base, Func_divchildlist_from_uimap_1 {
 
-    public override Vx.Ui.Html.Uihtml.Func_divchildlist_from_uimap_1 vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_divchildlist_from_uimap_1 output = new Vx.Ui.Html.Uihtml.Class_divchildlist_from_uimap_1();
       return output;
     }
@@ -1771,7 +1771,7 @@ public static class Uihtml {
 
   public class Class_divchildlist_from_uimap_origmap_parent : Vx.Core.Class_base, Func_divchildlist_from_uimap_origmap_parent {
 
-    public override Vx.Ui.Html.Uihtml.Func_divchildlist_from_uimap_origmap_parent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_divchildlist_from_uimap_origmap_parent output = new Vx.Ui.Html.Uihtml.Class_divchildlist_from_uimap_origmap_parent();
       return output;
     }
@@ -1882,7 +1882,7 @@ public static class Uihtml {
 
   public class Class_node_app_from_ui_orig_parent : Vx.Core.Class_base, Func_node_app_from_ui_orig_parent {
 
-    public override Vx.Ui.Html.Uihtml.Func_node_app_from_ui_orig_parent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_node_app_from_ui_orig_parent output = new Vx.Ui.Html.Uihtml.Class_node_app_from_ui_orig_parent();
       return output;
     }
@@ -1992,7 +1992,7 @@ public static class Uihtml {
 
   public class Class_node_default_from_ui_orig_parent : Vx.Core.Class_base, Func_node_default_from_ui_orig_parent {
 
-    public override Vx.Ui.Html.Uihtml.Func_node_default_from_ui_orig_parent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_node_default_from_ui_orig_parent output = new Vx.Ui.Html.Uihtml.Class_node_default_from_ui_orig_parent();
       return output;
     }
@@ -2113,7 +2113,7 @@ public static class Uihtml {
 
   public class Class_node_image_from_ui_orig_parent : Vx.Core.Class_base, Func_node_image_from_ui_orig_parent {
 
-    public override Vx.Ui.Html.Uihtml.Func_node_image_from_ui_orig_parent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_node_image_from_ui_orig_parent output = new Vx.Ui.Html.Uihtml.Class_node_image_from_ui_orig_parent();
       return output;
     }
@@ -2235,7 +2235,7 @@ public static class Uihtml {
 
   public class Class_node_label_from_ui_orig_parent : Vx.Core.Class_base, Func_node_label_from_ui_orig_parent {
 
-    public override Vx.Ui.Html.Uihtml.Func_node_label_from_ui_orig_parent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_node_label_from_ui_orig_parent output = new Vx.Ui.Html.Uihtml.Class_node_label_from_ui_orig_parent();
       return output;
     }
@@ -2385,7 +2385,7 @@ public static class Uihtml {
 
   public class Class_node_layout_from_node_ui_parent : Vx.Core.Class_base, Func_node_layout_from_node_ui_parent {
 
-    public override Vx.Ui.Html.Uihtml.Func_node_layout_from_node_ui_parent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_node_layout_from_node_ui_parent output = new Vx.Ui.Html.Uihtml.Class_node_layout_from_node_ui_parent();
       return output;
     }
@@ -2489,7 +2489,7 @@ public static class Uihtml {
 
   public class Class_node_from_ui_orig_parent : Vx.Core.Class_base, Func_node_from_ui_orig_parent {
 
-    public override Vx.Ui.Html.Uihtml.Func_node_from_ui_orig_parent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_node_from_ui_orig_parent output = new Vx.Ui.Html.Uihtml.Class_node_from_ui_orig_parent();
       return output;
     }
@@ -2621,7 +2621,7 @@ public static class Uihtml {
 
   public class Class_string_class_from_ui : Vx.Core.Class_base, Func_string_class_from_ui {
 
-    public override Vx.Ui.Html.Uihtml.Func_string_class_from_ui vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_string_class_from_ui output = new Vx.Ui.Html.Uihtml.Class_string_class_from_ui();
       return output;
     }
@@ -2728,7 +2728,7 @@ public static class Uihtml {
 
   public class Class_string_style_from_font : Vx.Core.Class_base, Func_string_style_from_font {
 
-    public override Vx.Ui.Html.Uihtml.Func_string_style_from_font vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_string_style_from_font output = new Vx.Ui.Html.Uihtml.Class_string_style_from_font();
       return output;
     }
@@ -2889,7 +2889,7 @@ public static class Uihtml {
 
   public class Class_string_style_from_image : Vx.Core.Class_base, Func_string_style_from_image {
 
-    public override Vx.Ui.Html.Uihtml.Func_string_style_from_image vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_string_style_from_image output = new Vx.Ui.Html.Uihtml.Class_string_style_from_image();
       return output;
     }
@@ -3037,7 +3037,7 @@ public static class Uihtml {
 
   public class Class_string_stylename_from_name_styletype : Vx.Core.Class_base, Func_string_stylename_from_name_styletype {
 
-    public override Vx.Ui.Html.Uihtml.Func_string_stylename_from_name_styletype vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_string_stylename_from_name_styletype output = new Vx.Ui.Html.Uihtml.Class_string_stylename_from_name_styletype();
       return output;
     }
@@ -3186,7 +3186,7 @@ public static class Uihtml {
 
   public class Class_style_from_fontface : Vx.Core.Class_base, Func_style_from_fontface {
 
-    public override Vx.Ui.Html.Uihtml.Func_style_from_fontface vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_style_from_fontface output = new Vx.Ui.Html.Uihtml.Class_style_from_fontface();
       return output;
     }
@@ -3359,7 +3359,7 @@ public static class Uihtml {
 
   public class Class_style_from_style : Vx.Core.Class_base, Func_style_from_style {
 
-    public override Vx.Ui.Html.Uihtml.Func_style_from_style vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_style_from_style output = new Vx.Ui.Html.Uihtml.Class_style_from_style();
       return output;
     }
@@ -4548,7 +4548,7 @@ public static class Uihtml {
 
   public class Class_stylelist_extra_from_ui : Vx.Core.Class_base, Func_stylelist_extra_from_ui {
 
-    public override Vx.Ui.Html.Uihtml.Func_stylelist_extra_from_ui vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_stylelist_extra_from_ui output = new Vx.Ui.Html.Uihtml.Class_stylelist_extra_from_ui();
       return output;
     }
@@ -4699,7 +4699,7 @@ public static class Uihtml {
 
   public class Class_stylelist_reset : Vx.Core.Class_base, Func_stylelist_reset {
 
-    public override Vx.Ui.Html.Uihtml.Func_stylelist_reset vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_stylelist_reset output = new Vx.Ui.Html.Uihtml.Class_stylelist_reset();
       return output;
     }
@@ -4919,7 +4919,7 @@ public static class Uihtml {
 
   public class Class_stylelist_from_fontfacemap : Vx.Core.Class_base, Func_stylelist_from_fontfacemap {
 
-    public override Vx.Ui.Html.Uihtml.Func_stylelist_from_fontfacemap vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_stylelist_from_fontfacemap output = new Vx.Ui.Html.Uihtml.Class_stylelist_from_fontfacemap();
       return output;
     }
@@ -5026,7 +5026,7 @@ public static class Uihtml {
 
   public class Class_stylelist_from_stylelist : Vx.Core.Class_base, Func_stylelist_from_stylelist {
 
-    public override Vx.Ui.Html.Uihtml.Func_stylelist_from_stylelist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_stylelist_from_stylelist output = new Vx.Ui.Html.Uihtml.Class_stylelist_from_stylelist();
       return output;
     }
@@ -5126,7 +5126,7 @@ public static class Uihtml {
 
   public class Class_stylelist_from_stylemap : Vx.Core.Class_base, Func_stylelist_from_stylemap {
 
-    public override Vx.Ui.Html.Uihtml.Func_stylelist_from_stylemap vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_stylelist_from_stylemap output = new Vx.Ui.Html.Uihtml.Class_stylelist_from_stylemap();
       return output;
     }
@@ -5233,7 +5233,7 @@ public static class Uihtml {
 
   public class Class_stylemap_from_stylemap : Vx.Core.Class_base, Func_stylemap_from_stylemap {
 
-    public override Vx.Ui.Html.Uihtml.Func_stylemap_from_stylemap vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_stylemap_from_stylemap output = new Vx.Ui.Html.Uihtml.Class_stylemap_from_stylemap();
       return output;
     }
@@ -5341,7 +5341,7 @@ public static class Uihtml {
 
   public class Class_stylesheet_layout_html : Vx.Core.Class_base, Func_stylesheet_layout_html {
 
-    public override Vx.Ui.Html.Uihtml.Func_stylesheet_layout_html vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_stylesheet_layout_html output = new Vx.Ui.Html.Uihtml.Class_stylesheet_layout_html();
       return output;
     }
@@ -5452,7 +5452,7 @@ public static class Uihtml {
 
   public class Class_stylesheet_from_stylesheet : Vx.Core.Class_base, Func_stylesheet_from_stylesheet {
 
-    public override Vx.Ui.Html.Uihtml.Func_stylesheet_from_stylesheet vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_stylesheet_from_stylesheet output = new Vx.Ui.Html.Uihtml.Class_stylesheet_from_stylesheet();
       return output;
     }
@@ -5580,7 +5580,7 @@ public static class Uihtml {
 
   public class Class_ui_layout_app_from_ui_orig_parent : Vx.Core.Class_base, Func_ui_layout_app_from_ui_orig_parent {
 
-    public override Vx.Ui.Html.Uihtml.Func_ui_layout_app_from_ui_orig_parent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_ui_layout_app_from_ui_orig_parent output = new Vx.Ui.Html.Uihtml.Class_ui_layout_app_from_ui_orig_parent();
       return output;
     }
@@ -5686,7 +5686,7 @@ public static class Uihtml {
 
   public class Class_ui_layout_default_from_ui_orig_parent : Vx.Core.Class_base, Func_ui_layout_default_from_ui_orig_parent {
 
-    public override Vx.Ui.Html.Uihtml.Func_ui_layout_default_from_ui_orig_parent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_ui_layout_default_from_ui_orig_parent output = new Vx.Ui.Html.Uihtml.Class_ui_layout_default_from_ui_orig_parent();
       return output;
     }
@@ -5793,7 +5793,7 @@ public static class Uihtml {
 
   public class Class_ui_layout_image_from_ui_orig_parent : Vx.Core.Class_base, Func_ui_layout_image_from_ui_orig_parent {
 
-    public override Vx.Ui.Html.Uihtml.Func_ui_layout_image_from_ui_orig_parent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_ui_layout_image_from_ui_orig_parent output = new Vx.Ui.Html.Uihtml.Class_ui_layout_image_from_ui_orig_parent();
       return output;
     }
@@ -5899,7 +5899,7 @@ public static class Uihtml {
 
   public class Class_ui_layout_label_from_ui_orig_parent : Vx.Core.Class_base, Func_ui_layout_label_from_ui_orig_parent {
 
-    public override Vx.Ui.Html.Uihtml.Func_ui_layout_label_from_ui_orig_parent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Html.Uihtml.Class_ui_layout_label_from_ui_orig_parent output = new Vx.Ui.Html.Uihtml.Class_ui_layout_label_from_ui_orig_parent();
       return output;
     }

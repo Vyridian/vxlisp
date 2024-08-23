@@ -3545,7 +3545,7 @@
 
      // :implements
      override fun vx_float() : Float {
-       return Float.parseFloat(vxdecimal);
+       return vxdecimal.toFloat()
      }
 
      // :implements
@@ -3784,7 +3784,9 @@
    :csharp
     &quot;public Exception? err = null;&quot;
    :java
-    &quot;public Exception err = null;&quot;)
+    &quot;public Exception err = null;&quot;
+   :kotlin
+    &quot;var err : Exception? = null&quot;)
  :doc &quot;Message Type for error handling&quot;)
 
 (type msgblock : struct
@@ -5252,9 +5254,11 @@
   :js
    &quot;vx_core.f_new(value, ...values)&quot;
   :kotlin
-   &quot;val arrayany : vx_core.Type_any[] = vx_core.arrayany_from_anylist(values)
-    val arrayobj : Any[] = arrayany as vx_core.Type_any[]
-    val output : T = (value.vx_copy(arrayobj)) as T&quot;)
+   &quot;val arrayany : Array&lt;vx_core.Type_any&gt; = vx_core.arrayany_from_anylist(
+      values
+    )
+    val valuecopy : vx_core.Type_any = value.vx_copy(*arrayany)
+    val output : T = valuecopy as T&quot;)
  :bigospace :n
  :bigotime :n
  :test (test
@@ -5587,7 +5591,7 @@
      &quot;var intresult : vx_core.Type_int = vx_core.e_int
       val strval : String = value.vx_string()
       try {
-        val floatresult : Float = Float.Parse(strval)
+        val floatresult : Float = strval.toFloat()
         val iresult : Int = floatresult as Int
         intresult = vx_core.vx_new_int(iresult)
       } catch (ex : Exception) {
@@ -6607,7 +6611,8 @@
   :csharp :auto
   :java :auto
   :js
-   &quot;output = vx_core.vx_string_from_any_indent(value, indent, linefeed)&quot;)
+   &quot;output = vx_core.vx_string_from_any_indent(value, indent, linefeed)&quot;
+  :kotlin :auto)
  :doc &quot;Return a string representation of a value&quot;)
 
 (func string&lt;-func : string
@@ -8220,7 +8225,7 @@
 
      // :implements
      override fun vx_float() : Float {
-       return Float.parseFloat(vxdecimal);
+       return vxdecimal.toFloat()
      }
 
      // :implements
@@ -9311,7 +9316,9 @@
    :csharp
     &quot;public Exception? err = null;&quot;
    :java
-    &quot;public Exception err = null;&quot;)
+    &quot;public Exception err = null;&quot;
+   :kotlin
+    &quot;var err : Exception? = null&quot;)
  :doc &quot;Message Type for error handling&quot;)</div>
                 </li>
               </ul>
@@ -18267,9 +18274,11 @@ improves readability.</div>
   :js
    &quot;vx_core.f_new(value, ...values)&quot;
   :kotlin
-   &quot;val arrayany : vx_core.Type_any[] = vx_core.arrayany_from_anylist(values)
-    val arrayobj : Any[] = arrayany as vx_core.Type_any[]
-    val output : T = (value.vx_copy(arrayobj)) as T&quot;)
+   &quot;val arrayany : Array&lt;vx_core.Type_any&gt; = vx_core.arrayany_from_anylist(
+      values
+    )
+    val valuecopy : vx_core.Type_any = value.vx_copy(*arrayany)
+    val output : T = valuecopy as T&quot;)
  :bigospace :n
  :bigotime :n
  :test (test
@@ -19542,7 +19551,7 @@ improves readability.</div>
      &quot;var intresult : vx_core.Type_int = vx_core.e_int
       val strval : String = value.vx_string()
       try {
-        val floatresult : Float = Float.Parse(strval)
+        val floatresult : Float = strval.toFloat()
         val iresult : Int = floatresult as Int
         intresult = vx_core.vx_new_int(iresult)
       } catch (ex : Exception) {
@@ -24390,7 +24399,8 @@ improves readability.</div>
   :csharp :auto
   :java :auto
   :js
-   &quot;output = vx_core.vx_string_from_any_indent(value, indent, linefeed)&quot;)
+   &quot;output = vx_core.vx_string_from_any_indent(value, indent, linefeed)&quot;
+  :kotlin :auto)
  :doc &quot;Return a string representation of a value&quot;)</div>
                 </li>
               </ul>

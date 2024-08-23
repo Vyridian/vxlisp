@@ -307,6 +307,18 @@ public final class Core {
     return output;
   }
 
+  // vx_any_from_map(generic_any_1, map, string)
+  public static <T extends Core.Type_any> T vx_any_from_map(T generic_any_1, Core.Type_map valuemap, Core.Type_string key) {
+    T output = Core.f_empty(generic_any_1);
+    String skey = key.vx_string();
+    if (skey.startsWith(":")) {
+      skey = skey.substring(1);
+    }
+    Core.Type_any val = valuemap.vx_map().getOrDefault(skey, output);
+    output = Core.f_any_from_any(generic_any_1, val);
+    return output;
+  }
+
   // vx_any_from_map_start_reduce(any-1, map-2, any-1, any<-any-key-value)
   public static <T extends Core.Type_any, N extends Core.Type_map> T vx_any_from_map_start_reduce(T generic_any_1, N map, T start, Core.Func_any_from_any_key_value fn_reduce) {
     T output = start;
@@ -317,18 +329,6 @@ public final class Core {
       Core.Type_any value = mapval.get(skey);
       output = fn_reduce.vx_any_from_any_key_value(generic_any_1, output, key, value);
     }
-    return output;
-  }
-
-  // vx_any_from_map(generic_any_1, map, string)
-  public static <T extends Core.Type_any> T vx_any_from_map(T generic_any_1, Core.Type_map valuemap, Core.Type_string key) {
-    T output = Core.f_empty(generic_any_1);
-    String skey = key.vx_string();
-    if (skey.startsWith(":")) {
-      skey = skey.substring(1);
-    }
-    Core.Type_any val = valuemap.vx_map().getOrDefault(skey, output);
-    output = Core.f_any_from_any(generic_any_1, val);
     return output;
   }
 
@@ -1149,7 +1149,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_any_async_from_func extends Core.Class_base implements Type_any_async_from_func {
 
     @Override
-    public Core.Type_any_async_from_func vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_any_async_from_func output = Core.vx_copy(Core.e_any_async_from_func, vals);
       return output;
     }
@@ -1257,7 +1257,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_any_from_anylist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_any_from_anylist output = Core.vx_copy(Core.e_any_from_anylist, vals);
       return output;
     }
@@ -1386,7 +1386,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_anylist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_anylist output = Core.vx_copy(Core.e_anylist, vals);
       return output;
     }
@@ -1555,7 +1555,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_anymap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_anymap output = Core.vx_copy(Core.e_anymap, vals);
       return output;
     }
@@ -1687,7 +1687,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_anytype extends Core.Class_base implements Type_anytype {
 
     @Override
-    public Core.Type_anytype vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_anytype output = Core.vx_copy(Core.e_anytype, vals);
       return output;
     }
@@ -1837,7 +1837,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_arg vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_arg output = Core.vx_copy(Core.e_arg, vals);
       return output;
     }
@@ -2102,7 +2102,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_arglist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_arglist output = Core.vx_copy(Core.e_arglist, vals);
       return output;
     }
@@ -2289,7 +2289,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_argmap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_argmap output = Core.vx_copy(Core.e_argmap, vals);
       return output;
     }
@@ -2429,7 +2429,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_boolean vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_boolean output = Core.vx_copy(Core.e_boolean, vals);
       return output;
     }
@@ -2554,7 +2554,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_booleanlist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_booleanlist output = Core.vx_copy(Core.e_booleanlist, vals);
       return output;
     }
@@ -2661,7 +2661,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_collection extends Core.Class_base implements Type_collection {
 
     @Override
-    public Core.Type_collection vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_collection output = Core.vx_copy(Core.e_collection, vals);
       return output;
     }
@@ -2730,7 +2730,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_compilelanguages extends Core.Class_base implements Type_compilelanguages {
 
     @Override
-    public Core.Type_compilelanguages vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_compilelanguages output = Core.vx_copy(Core.e_compilelanguages, vals);
       return output;
     }
@@ -2800,7 +2800,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_connect extends Core.Class_base implements Type_connect {
 
     @Override
-    public Core.Type_connect vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_connect output = Core.vx_copy(Core.e_connect, vals);
       return output;
     }
@@ -2908,7 +2908,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_connectlist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_connectlist output = Core.vx_copy(Core.e_connectlist, vals);
       return output;
     }
@@ -3095,7 +3095,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_connectmap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_connectmap output = Core.vx_copy(Core.e_connectmap, vals);
       return output;
     }
@@ -3227,7 +3227,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_const extends Core.Class_base implements Type_const {
 
     @Override
-    public Core.Type_const vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_const output = Core.vx_copy(Core.e_const, vals);
       return output;
     }
@@ -3361,7 +3361,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_constdef vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_constdef output = Core.vx_copy(Core.e_constdef, vals);
       return output;
     }
@@ -3588,7 +3588,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_constlist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_constlist output = Core.vx_copy(Core.e_constlist, vals);
       return output;
     }
@@ -3757,7 +3757,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_constmap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_constmap output = Core.vx_copy(Core.e_constmap, vals);
       return output;
     }
@@ -3969,7 +3969,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_context vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_context output = Core.vx_copy(Core.e_context, vals);
       return output;
     }
@@ -4193,7 +4193,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_date extends Core.Class_base implements Type_date {
 
     @Override
-    public Core.Type_date vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_date output = Core.vx_copy(Core.e_date, vals);
       return output;
     }
@@ -4285,7 +4285,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_decimal vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_decimal output = Core.vx_copy(Core.e_decimal, vals);
       return output;
     }
@@ -4372,7 +4372,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_error extends Core.Class_base implements Type_error {
 
     @Override
-    public Core.Type_error vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_error output = Core.vx_copy(Core.e_error, vals);
       return output;
     }
@@ -4450,7 +4450,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_float vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_float output = Core.vx_copy(Core.e_float, vals);
       return output;
     }
@@ -4564,7 +4564,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_func vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_func output = Core.vx_copy(Core.e_func, vals);
       return output;
     }
@@ -4730,7 +4730,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_funcdef vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_funcdef output = Core.vx_copy(Core.e_funcdef, vals);
       return output;
     }
@@ -5025,7 +5025,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_funclist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_funclist output = Core.vx_copy(Core.e_funclist, vals);
       return output;
     }
@@ -5212,7 +5212,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_funcmap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_funcmap output = Core.vx_copy(Core.e_funcmap, vals);
       return output;
     }
@@ -5352,7 +5352,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_int vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_int output = Core.vx_copy(Core.e_int, vals);
       return output;
     }
@@ -5481,7 +5481,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_intlist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_intlist output = Core.vx_copy(Core.e_intlist, vals);
       return output;
     }
@@ -5668,7 +5668,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_intmap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_intmap output = Core.vx_copy(Core.e_intmap, vals);
       return output;
     }
@@ -5826,7 +5826,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_list vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_list output = Core.vx_copy(Core.e_list, vals);
       return output;
     }
@@ -5931,7 +5931,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_listtype extends Core.Class_base implements Type_listtype {
 
     @Override
-    public Core.Type_listtype vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_listtype output = Core.vx_copy(Core.e_listtype, vals);
       return output;
     }
@@ -6014,7 +6014,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_locale vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_locale output = Core.vx_copy(Core.e_locale, vals);
       return output;
     }
@@ -6152,7 +6152,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_map vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_map output = Core.vx_copy(Core.e_map, vals);
       return output;
     }
@@ -6284,7 +6284,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_maptype extends Core.Class_base implements Type_maptype {
 
     @Override
-    public Core.Type_maptype vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_maptype output = Core.vx_copy(Core.e_maptype, vals);
       return output;
     }
@@ -6438,7 +6438,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_mempool vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_mempool output = Core.vx_copy(Core.e_mempool, vals);
       return output;
     }
@@ -6685,7 +6685,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_msg vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_msg output = Core.vx_copy(Core.e_msg, vals);
       return output;
     }
@@ -6873,7 +6873,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_msgblock vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_msgblock output = Core.vx_copy(Core.e_msgblock, vals);
       return output;
     }
@@ -7067,7 +7067,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_msgblocklist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_msgblocklist output = Core.vx_copy(Core.e_msgblocklist, vals);
       return output;
     }
@@ -7207,7 +7207,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_msglist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_msglist output = Core.vx_copy(Core.e_msglist, vals);
       return output;
     }
@@ -7309,7 +7309,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_none extends Core.Class_base implements Type_none {
 
     @Override
-    public Core.Type_none vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_none output = Core.vx_copy(Core.e_none, vals);
       return output;
     }
@@ -7379,7 +7379,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_notype extends Core.Class_base implements Type_notype {
 
     @Override
-    public Core.Type_notype vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_notype output = Core.vx_copy(Core.e_notype, vals);
       return output;
     }
@@ -7449,7 +7449,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_number extends Core.Class_base implements Type_number {
 
     @Override
-    public Core.Type_number vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_number output = Core.vx_copy(Core.e_number, vals);
       return output;
     }
@@ -7557,7 +7557,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_numberlist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_numberlist output = Core.vx_copy(Core.e_numberlist, vals);
       return output;
     }
@@ -7744,7 +7744,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_numbermap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_numbermap output = Core.vx_copy(Core.e_numbermap, vals);
       return output;
     }
@@ -7972,7 +7972,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_package vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_package output = Core.vx_copy(Core.e_package, vals);
       return output;
     }
@@ -8298,7 +8298,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_packagemap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_packagemap output = Core.vx_copy(Core.e_packagemap, vals);
       return output;
     }
@@ -8462,7 +8462,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_permission vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_permission output = Core.vx_copy(Core.e_permission, vals);
       return output;
     }
@@ -8652,7 +8652,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_permissionlist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_permissionlist output = Core.vx_copy(Core.e_permissionlist, vals);
       return output;
     }
@@ -8839,7 +8839,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_permissionmap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_permissionmap output = Core.vx_copy(Core.e_permissionmap, vals);
       return output;
     }
@@ -9003,7 +9003,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_project vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_project output = Core.vx_copy(Core.e_project, vals);
       return output;
     }
@@ -9216,7 +9216,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_security vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_security output = Core.vx_copy(Core.e_security, vals);
       return output;
     }
@@ -9525,7 +9525,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_session vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_session output = Core.vx_copy(Core.e_session, vals);
       return output;
     }
@@ -9826,7 +9826,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_setting vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_setting output = Core.vx_copy(Core.e_setting, vals);
       return output;
     }
@@ -10007,7 +10007,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_state vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_state output = Core.vx_copy(Core.e_state, vals);
       return output;
     }
@@ -10219,7 +10219,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_statelistener vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_statelistener output = Core.vx_copy(Core.e_statelistener, vals);
       return output;
     }
@@ -10498,7 +10498,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_statelistenermap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_statelistenermap output = Core.vx_copy(Core.e_statelistenermap, vals);
       return output;
     }
@@ -10638,7 +10638,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_string vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_string output = Core.vx_copy(Core.e_string, vals);
       return output;
     }
@@ -10799,7 +10799,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_stringlist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_stringlist output = Core.vx_copy(Core.e_stringlist, vals);
       return output;
     }
@@ -10945,7 +10945,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_stringlistlist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_stringlistlist output = Core.vx_copy(Core.e_stringlistlist, vals);
       return output;
     }
@@ -11132,7 +11132,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_stringmap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_stringmap output = Core.vx_copy(Core.e_stringmap, vals);
       return output;
     }
@@ -11343,7 +11343,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_stringmutablemap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_stringmutablemap output = Core.vx_copy(Core.e_stringmutablemap, vals);
       return output;
     }
@@ -11490,7 +11490,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_struct vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_struct output = Core.vx_copy(Core.e_struct, vals);
       return output;
     }
@@ -11655,7 +11655,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_thenelse vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_thenelse output = Core.vx_copy(Core.e_thenelse, vals);
       return output;
     }
@@ -11940,7 +11940,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_thenelselist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_thenelselist output = Core.vx_copy(Core.e_thenelselist, vals);
       return output;
     }
@@ -12096,7 +12096,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_translation vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_translation output = Core.vx_copy(Core.e_translation, vals);
       return output;
     }
@@ -12310,7 +12310,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_translationlist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_translationlist output = Core.vx_copy(Core.e_translationlist, vals);
       return output;
     }
@@ -12497,7 +12497,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_translationmap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_translationmap output = Core.vx_copy(Core.e_translationmap, vals);
       return output;
     }
@@ -12629,7 +12629,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_type extends Core.Class_base implements Type_type {
 
     @Override
-    public Core.Type_type vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_type output = Core.vx_copy(Core.e_type, vals);
       return output;
     }
@@ -12907,7 +12907,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_typedef vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_typedef output = Core.vx_copy(Core.e_typedef, vals);
       return output;
     }
@@ -13353,7 +13353,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_typelist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_typelist output = Core.vx_copy(Core.e_typelist, vals);
       return output;
     }
@@ -13522,7 +13522,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_typemap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_typemap output = Core.vx_copy(Core.e_typemap, vals);
       return output;
     }
@@ -13718,7 +13718,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_user vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_user output = Core.vx_copy(Core.e_user, vals);
       return output;
     }
@@ -13968,7 +13968,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     }
 
     @Override
-    public Core.Type_value vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Type_value output = Core.vx_copy(Core.e_value, vals);
       return output;
     }
@@ -14713,7 +14713,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_not extends Core.Class_base implements Func_not {
 
     @Override
-    public Core.Func_not vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_not output = new Core.Class_not();
       return output;
     }
@@ -14819,7 +14819,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_notempty extends Core.Class_base implements Func_notempty {
 
     @Override
-    public Core.Func_notempty vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_notempty output = new Core.Class_notempty();
       return output;
     }
@@ -14929,7 +14929,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_notempty_1 extends Core.Class_base implements Func_notempty_1 {
 
     @Override
-    public Core.Func_notempty_1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_notempty_1 output = new Core.Class_notempty_1();
       return output;
     }
@@ -15040,7 +15040,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_ne extends Core.Class_base implements Func_ne {
 
     @Override
-    public Core.Func_ne vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_ne output = new Core.Class_ne();
       return output;
     }
@@ -15139,7 +15139,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_neqeq extends Core.Class_base implements Func_neqeq {
 
     @Override
-    public Core.Func_neqeq vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_neqeq output = new Core.Class_neqeq();
       return output;
     }
@@ -15238,7 +15238,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_multiply extends Core.Class_base implements Func_multiply {
 
     @Override
-    public Core.Func_multiply vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_multiply output = new Core.Class_multiply();
       return output;
     }
@@ -15333,7 +15333,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_multiply_1 extends Core.Class_base implements Func_multiply_1 {
 
     @Override
-    public Core.Func_multiply_1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_multiply_1 output = new Core.Class_multiply_1();
       return output;
     }
@@ -15427,7 +15427,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_multiply_2 extends Core.Class_base implements Func_multiply_2 {
 
     @Override
-    public Core.Func_multiply_2 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_multiply_2 output = new Core.Class_multiply_2();
       return output;
     }
@@ -15546,7 +15546,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_multiply_3 extends Core.Class_base implements Func_multiply_3 {
 
     @Override
-    public Core.Func_multiply_3 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_multiply_3 output = new Core.Class_multiply_3();
       return output;
     }
@@ -15666,7 +15666,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_plus extends Core.Class_base implements Func_plus {
 
     @Override
-    public Core.Func_plus vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_plus output = new Core.Class_plus();
       return output;
     }
@@ -15761,7 +15761,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_plus_1 extends Core.Class_base implements Func_plus_1 {
 
     @Override
-    public Core.Func_plus_1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_plus_1 output = new Core.Class_plus_1();
       return output;
     }
@@ -15855,7 +15855,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_plus_2 extends Core.Class_base implements Func_plus_2 {
 
     @Override
-    public Core.Func_plus_2 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_plus_2 output = new Core.Class_plus_2();
       return output;
     }
@@ -15974,7 +15974,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_plus_3 extends Core.Class_base implements Func_plus_3 {
 
     @Override
-    public Core.Func_plus_3 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_plus_3 output = new Core.Class_plus_3();
       return output;
     }
@@ -16093,7 +16093,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_plus1 extends Core.Class_base implements Func_plus1 {
 
     @Override
-    public Core.Func_plus1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_plus1 output = new Core.Class_plus1();
       return output;
     }
@@ -16203,7 +16203,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_minus extends Core.Class_base implements Func_minus {
 
     @Override
-    public Core.Func_minus vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_minus output = new Core.Class_minus();
       return output;
     }
@@ -16298,7 +16298,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_minus_1 extends Core.Class_base implements Func_minus_1 {
 
     @Override
-    public Core.Func_minus_1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_minus_1 output = new Core.Class_minus_1();
       return output;
     }
@@ -16392,7 +16392,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_minus_2 extends Core.Class_base implements Func_minus_2 {
 
     @Override
-    public Core.Func_minus_2 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_minus_2 output = new Core.Class_minus_2();
       return output;
     }
@@ -16511,7 +16511,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_minus_3 extends Core.Class_base implements Func_minus_3 {
 
     @Override
-    public Core.Func_minus_3 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_minus_3 output = new Core.Class_minus_3();
       return output;
     }
@@ -16630,7 +16630,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_minus1 extends Core.Class_base implements Func_minus1 {
 
     @Override
-    public Core.Func_minus1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_minus1 output = new Core.Class_minus1();
       return output;
     }
@@ -16741,7 +16741,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_dotmethod extends Core.Class_base implements Func_dotmethod {
 
     @Override
-    public Core.Func_dotmethod vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_dotmethod output = new Core.Class_dotmethod();
       return output;
     }
@@ -16835,7 +16835,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_divide extends Core.Class_base implements Func_divide {
 
     @Override
-    public Core.Func_divide vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_divide output = new Core.Class_divide();
       return output;
     }
@@ -16937,7 +16937,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_lt extends Core.Class_base implements Func_lt {
 
     @Override
-    public Core.Func_lt vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_lt output = new Core.Class_lt();
       return output;
     }
@@ -17052,7 +17052,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_lt_1 extends Core.Class_base implements Func_lt_1 {
 
     @Override
-    public Core.Func_lt_1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_lt_1 output = new Core.Class_lt_1();
       return output;
     }
@@ -17178,7 +17178,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_chainfirst extends Core.Class_base implements Func_chainfirst {
 
     @Override
-    public Core.Func_chainfirst vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_chainfirst output = new Core.Class_chainfirst();
       return output;
     }
@@ -17274,7 +17274,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_chainlast extends Core.Class_base implements Func_chainlast {
 
     @Override
-    public Core.Func_chainlast vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_chainlast output = new Core.Class_chainlast();
       return output;
     }
@@ -17368,7 +17368,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_le extends Core.Class_base implements Func_le {
 
     @Override
-    public Core.Func_le vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_le output = new Core.Class_le();
       return output;
     }
@@ -17466,7 +17466,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_le_1 extends Core.Class_base implements Func_le_1 {
 
     @Override
-    public Core.Func_le_1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_le_1 output = new Core.Class_le_1();
       return output;
     }
@@ -17577,7 +17577,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_eq extends Core.Class_base implements Func_eq {
 
     @Override
-    public Core.Func_eq vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_eq output = new Core.Class_eq();
       return output;
     }
@@ -17680,7 +17680,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_eq_1 extends Core.Class_base implements Func_eq_1 {
 
     @Override
-    public Core.Func_eq_1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_eq_1 output = new Core.Class_eq_1();
       return output;
     }
@@ -17804,7 +17804,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_eqeq extends Core.Class_base implements Func_eqeq {
 
     @Override
-    public Core.Func_eqeq vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_eqeq output = new Core.Class_eqeq();
       return output;
     }
@@ -17899,7 +17899,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_gt extends Core.Class_base implements Func_gt {
 
     @Override
-    public Core.Func_gt vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_gt output = new Core.Class_gt();
       return output;
     }
@@ -18014,7 +18014,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_gt_1 extends Core.Class_base implements Func_gt_1 {
 
     @Override
-    public Core.Func_gt_1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_gt_1 output = new Core.Class_gt_1();
       return output;
     }
@@ -18138,7 +18138,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_ge extends Core.Class_base implements Func_ge {
 
     @Override
-    public Core.Func_ge vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_ge output = new Core.Class_ge();
       return output;
     }
@@ -18236,7 +18236,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_ge_1 extends Core.Class_base implements Func_ge_1 {
 
     @Override
-    public Core.Func_ge_1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_ge_1 output = new Core.Class_ge_1();
       return output;
     }
@@ -18346,7 +18346,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_allowfuncs_from_security extends Core.Class_base implements Func_allowfuncs_from_security {
 
     @Override
-    public Core.Func_allowfuncs_from_security vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_allowfuncs_from_security output = new Core.Class_allowfuncs_from_security();
       return output;
     }
@@ -18452,7 +18452,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_allowtypenames_from_typedef extends Core.Class_base implements Func_allowtypenames_from_typedef {
 
     @Override
-    public Core.Func_allowtypenames_from_typedef vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_allowtypenames_from_typedef output = new Core.Class_allowtypenames_from_typedef();
       return output;
     }
@@ -18562,7 +18562,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_allowtypes_from_typedef extends Core.Class_base implements Func_allowtypes_from_typedef {
 
     @Override
-    public Core.Func_allowtypes_from_typedef vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_allowtypes_from_typedef output = new Core.Class_allowtypes_from_typedef();
       return output;
     }
@@ -18669,7 +18669,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_and extends Core.Class_base implements Func_and {
 
     @Override
-    public Core.Func_and vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_and output = new Core.Class_and();
       return output;
     }
@@ -18766,7 +18766,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_and_1 extends Core.Class_base implements Func_and_1 {
 
     @Override
-    public Core.Func_and_1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_and_1 output = new Core.Class_and_1();
       return output;
     }
@@ -18922,7 +18922,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_any_from_any extends Core.Class_base implements Func_any_from_any {
 
     @Override
-    public Core.Func_any_from_any vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_any_from_any output = new Core.Class_any_from_any();
       return output;
     }
@@ -19038,7 +19038,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_any_from_any_async extends Core.Class_base implements Func_any_from_any_async {
 
     @Override
-    public Core.Func_any_from_any_async vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_any_from_any_async output = new Core.Class_any_from_any_async();
       return output;
     }
@@ -19153,7 +19153,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_any_from_any_context extends Core.Class_base implements Func_any_from_any_context {
 
     @Override
-    public Core.Func_any_from_any_context vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_any_from_any_context output = new Core.Class_any_from_any_context();
       return output;
     }
@@ -19270,7 +19270,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_any_from_any_context_async extends Core.Class_base implements Func_any_from_any_context_async {
 
     @Override
-    public Core.Func_any_from_any_context_async vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_any_from_any_context_async output = new Core.Class_any_from_any_context_async();
       return output;
     }
@@ -19388,7 +19388,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_any_from_any_key_value extends Core.Class_base implements Func_any_from_any_key_value {
 
     @Override
-    public Core.Func_any_from_any_key_value vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_any_from_any_key_value output = new Core.Class_any_from_any_key_value();
       return output;
     }
@@ -19501,7 +19501,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_any_from_func extends Core.Class_base implements Func_any_from_func {
 
     @Override
-    public Core.Func_any_from_func vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_any_from_func output = new Core.Class_any_from_func();
       return output;
     }
@@ -19613,7 +19613,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_any_from_func_async extends Core.Class_base implements Func_any_from_func_async {
 
     @Override
-    public Core.Func_any_from_func_async vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_any_from_func_async output = new Core.Class_any_from_func_async();
       return output;
     }
@@ -19727,7 +19727,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_any_from_int extends Core.Class_base implements Func_any_from_int {
 
     @Override
-    public Core.Func_any_from_int vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_any_from_int output = new Core.Class_any_from_int();
       return output;
     }
@@ -19840,7 +19840,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_any_from_int_any extends Core.Class_base implements Func_any_from_int_any {
 
     @Override
-    public Core.Func_any_from_int_any vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_any_from_int_any output = new Core.Class_any_from_int_any();
       return output;
     }
@@ -19954,7 +19954,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_any_from_key_value extends Core.Class_base implements Func_any_from_key_value {
 
     @Override
-    public Core.Func_any_from_key_value vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_any_from_key_value output = new Core.Class_any_from_key_value();
       return output;
     }
@@ -20070,7 +20070,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_any_from_key_value_async extends Core.Class_base implements Func_any_from_key_value_async {
 
     @Override
-    public Core.Func_any_from_key_value_async vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_any_from_key_value_async output = new Core.Class_any_from_key_value_async();
       return output;
     }
@@ -20186,7 +20186,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_any_from_list extends Core.Class_base implements Func_any_from_list {
 
     @Override
-    public Core.Func_any_from_list vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_any_from_list output = new Core.Class_any_from_list();
       return output;
     }
@@ -20288,7 +20288,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_any_from_list_start_reduce extends Core.Class_base implements Func_any_from_list_start_reduce {
 
     @Override
-    public Core.Func_any_from_list_start_reduce vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_any_from_list_start_reduce output = new Core.Class_any_from_list_start_reduce();
       return output;
     }
@@ -20385,7 +20385,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_any_from_list_start_reduce_next extends Core.Class_base implements Func_any_from_list_start_reduce_next {
 
     @Override
-    public Core.Func_any_from_list_start_reduce_next vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_any_from_list_start_reduce_next output = new Core.Class_any_from_list_start_reduce_next();
       return output;
     }
@@ -20492,7 +20492,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_any_from_map extends Core.Class_base implements Func_any_from_map {
 
     @Override
-    public Core.Func_any_from_map vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_any_from_map output = new Core.Class_any_from_map();
       return output;
     }
@@ -20588,7 +20588,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_any_from_map_start_reduce extends Core.Class_base implements Func_any_from_map_start_reduce {
 
     @Override
-    public Core.Func_any_from_map_start_reduce vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_any_from_map_start_reduce output = new Core.Class_any_from_map_start_reduce();
       return output;
     }
@@ -20683,7 +20683,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_any_from_none extends Core.Class_base implements Func_any_from_none {
 
     @Override
-    public Core.Func_any_from_none vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_any_from_none output = new Core.Class_any_from_none();
       return output;
     }
@@ -20795,7 +20795,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_any_from_none_async extends Core.Class_base implements Func_any_from_none_async {
 
     @Override
-    public Core.Func_any_from_none_async vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_any_from_none_async output = new Core.Class_any_from_none_async();
       return output;
     }
@@ -20909,7 +20909,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_any_from_reduce extends Core.Class_base implements Func_any_from_reduce {
 
     @Override
-    public Core.Func_any_from_reduce vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_any_from_reduce output = new Core.Class_any_from_reduce();
       return output;
     }
@@ -21024,7 +21024,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_any_from_reduce_async extends Core.Class_base implements Func_any_from_reduce_async {
 
     @Override
-    public Core.Func_any_from_reduce_async vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_any_from_reduce_async output = new Core.Class_any_from_reduce_async();
       return output;
     }
@@ -21141,7 +21141,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_any_from_reduce_next extends Core.Class_base implements Func_any_from_reduce_next {
 
     @Override
-    public Core.Func_any_from_reduce_next vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_any_from_reduce_next output = new Core.Class_any_from_reduce_next();
       return output;
     }
@@ -21258,7 +21258,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_any_from_reduce_next_async extends Core.Class_base implements Func_any_from_reduce_next_async {
 
     @Override
-    public Core.Func_any_from_reduce_next_async vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_any_from_reduce_next_async output = new Core.Class_any_from_reduce_next_async();
       return output;
     }
@@ -21375,7 +21375,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_any_from_struct extends Core.Class_base implements Func_any_from_struct {
 
     @Override
-    public Core.Func_any_from_struct vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_any_from_struct output = new Core.Class_any_from_struct();
       return output;
     }
@@ -21472,7 +21472,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_async extends Core.Class_base implements Func_async {
 
     @Override
-    public Core.Func_async vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_async output = new Core.Class_async();
       return output;
     }
@@ -21578,7 +21578,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_boolean_permission_from_func extends Core.Class_base implements Func_boolean_permission_from_func {
 
     @Override
-    public Core.Func_boolean_permission_from_func vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_boolean_permission_from_func output = new Core.Class_boolean_permission_from_func();
       return output;
     }
@@ -21694,7 +21694,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_boolean_write_from_map_name_value extends Core.Class_base implements Func_boolean_write_from_map_name_value {
 
     @Override
-    public Core.Func_boolean_write_from_map_name_value vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_boolean_write_from_map_name_value output = new Core.Class_boolean_write_from_map_name_value();
       return output;
     }
@@ -21789,7 +21789,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_boolean_from_any extends Core.Class_base implements Func_boolean_from_any {
 
     @Override
-    public Core.Func_boolean_from_any vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_boolean_from_any output = new Core.Class_boolean_from_any();
       return output;
     }
@@ -21899,7 +21899,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_boolean_from_func extends Core.Class_base implements Func_boolean_from_func {
 
     @Override
-    public Core.Func_boolean_from_func vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_boolean_from_func output = new Core.Class_boolean_from_func();
       return output;
     }
@@ -22008,7 +22008,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_boolean_from_none extends Core.Class_base implements Func_boolean_from_none {
 
     @Override
-    public Core.Func_boolean_from_none vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_boolean_from_none output = new Core.Class_boolean_from_none();
       return output;
     }
@@ -22117,7 +22117,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_case extends Core.Class_base implements Func_case {
 
     @Override
-    public Core.Func_case vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_case output = new Core.Class_case();
       return output;
     }
@@ -22221,7 +22221,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_case_1 extends Core.Class_base implements Func_case_1 {
 
     @Override
-    public Core.Func_case_1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_case_1 output = new Core.Class_case_1();
       return output;
     }
@@ -22326,7 +22326,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_compare extends Core.Class_base implements Func_compare {
 
     @Override
-    public Core.Func_compare vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_compare output = new Core.Class_compare();
       return output;
     }
@@ -22441,7 +22441,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_contains extends Core.Class_base implements Func_contains {
 
     @Override
-    public Core.Func_contains vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_contains output = new Core.Class_contains();
       return output;
     }
@@ -22538,7 +22538,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_contains_1 extends Core.Class_base implements Func_contains_1 {
 
     @Override
-    public Core.Func_contains_1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_contains_1 output = new Core.Class_contains_1();
       return output;
     }
@@ -22640,7 +22640,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_context_main extends Core.Class_base implements Func_context_main {
 
     @Override
-    public Core.Func_context_main vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_context_main output = new Core.Class_context_main();
       return output;
     }
@@ -22749,7 +22749,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_copy extends Core.Class_base implements Func_copy {
 
     @Override
-    public Core.Func_copy vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_copy output = new Core.Class_copy();
       return output;
     }
@@ -22844,7 +22844,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_else extends Core.Class_base implements Func_else {
 
     @Override
-    public Core.Func_else vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_else output = new Core.Class_else();
       return output;
     }
@@ -22959,7 +22959,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_empty extends Core.Class_base implements Func_empty {
 
     @Override
-    public Core.Func_empty vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_empty output = new Core.Class_empty();
       return output;
     }
@@ -23063,7 +23063,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_extends_from_any extends Core.Class_base implements Func_extends_from_any {
 
     @Override
-    public Core.Func_extends_from_any vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_extends_from_any output = new Core.Class_extends_from_any();
       return output;
     }
@@ -23173,7 +23173,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_extends_from_typedef extends Core.Class_base implements Func_extends_from_typedef {
 
     @Override
-    public Core.Func_extends_from_typedef vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_extends_from_typedef output = new Core.Class_extends_from_typedef();
       return output;
     }
@@ -23279,7 +23279,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_first_from_list extends Core.Class_base implements Func_first_from_list {
 
     @Override
-    public Core.Func_first_from_list vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_first_from_list output = new Core.Class_first_from_list();
       return output;
     }
@@ -23391,7 +23391,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_first_from_list_any_from_any extends Core.Class_base implements Func_first_from_list_any_from_any {
 
     @Override
-    public Core.Func_first_from_list_any_from_any vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_first_from_list_any_from_any output = new Core.Class_first_from_list_any_from_any();
       return output;
     }
@@ -23491,7 +23491,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_float_from_string extends Core.Class_base implements Func_float_from_string {
 
     @Override
-    public Core.Func_float_from_string vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_float_from_string output = new Core.Class_float_from_string();
       return output;
     }
@@ -23599,7 +23599,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_fn extends Core.Class_base implements Func_fn {
 
     @Override
-    public Core.Func_fn vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_fn output = new Core.Class_fn();
       return output;
     }
@@ -23692,7 +23692,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_funcdef_from_func extends Core.Class_base implements Func_funcdef_from_func {
 
     @Override
-    public Core.Func_funcdef_from_func vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_funcdef_from_func output = new Core.Class_funcdef_from_func();
       return output;
     }
@@ -23798,7 +23798,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_funcname_from_funcdef extends Core.Class_base implements Func_funcname_from_funcdef {
 
     @Override
-    public Core.Func_funcname_from_funcdef vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_funcname_from_funcdef output = new Core.Class_funcname_from_funcdef();
       return output;
     }
@@ -23913,7 +23913,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_if extends Core.Class_base implements Func_if {
 
     @Override
-    public Core.Func_if vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_if output = new Core.Class_if();
       return output;
     }
@@ -24011,7 +24011,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_if_1 extends Core.Class_base implements Func_if_1 {
 
     @Override
-    public Core.Func_if_1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_if_1 output = new Core.Class_if_1();
       return output;
     }
@@ -24110,7 +24110,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_if_2 extends Core.Class_base implements Func_if_2 {
 
     @Override
-    public Core.Func_if_2 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_if_2 output = new Core.Class_if_2();
       return output;
     }
@@ -24217,7 +24217,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_int_from_func extends Core.Class_base implements Func_int_from_func {
 
     @Override
-    public Core.Func_int_from_func vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_int_from_func output = new Core.Class_int_from_func();
       return output;
     }
@@ -24316,7 +24316,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_int_from_string extends Core.Class_base implements Func_int_from_string {
 
     @Override
-    public Core.Func_int_from_string vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_int_from_string output = new Core.Class_int_from_string();
       return output;
     }
@@ -24463,7 +24463,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_is_empty extends Core.Class_base implements Func_is_empty {
 
     @Override
-    public Core.Func_is_empty vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_is_empty output = new Core.Class_is_empty();
       return output;
     }
@@ -24571,7 +24571,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_is_empty_1 extends Core.Class_base implements Func_is_empty_1 {
 
     @Override
-    public Core.Func_is_empty_1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_is_empty_1 output = new Core.Class_is_empty_1();
       return output;
     }
@@ -24682,7 +24682,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_is_endswith extends Core.Class_base implements Func_is_endswith {
 
     @Override
-    public Core.Func_is_endswith vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_is_endswith output = new Core.Class_is_endswith();
       return output;
     }
@@ -24779,7 +24779,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_is_float extends Core.Class_base implements Func_is_float {
 
     @Override
-    public Core.Func_is_float vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_is_float output = new Core.Class_is_float();
       return output;
     }
@@ -24886,7 +24886,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_is_func extends Core.Class_base implements Func_is_func {
 
     @Override
-    public Core.Func_is_func vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_is_func output = new Core.Class_is_func();
       return output;
     }
@@ -24994,7 +24994,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_is_int extends Core.Class_base implements Func_is_int {
 
     @Override
-    public Core.Func_is_int vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_is_int output = new Core.Class_is_int();
       return output;
     }
@@ -25101,7 +25101,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_is_number extends Core.Class_base implements Func_is_number {
 
     @Override
-    public Core.Func_is_number vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_is_number output = new Core.Class_is_number();
       return output;
     }
@@ -25237,7 +25237,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_is_pass_from_permission extends Core.Class_base implements Func_is_pass_from_permission {
 
     @Override
-    public Core.Func_is_pass_from_permission vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_is_pass_from_permission output = new Core.Class_is_pass_from_permission();
       return output;
     }
@@ -25358,7 +25358,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_last_from_list extends Core.Class_base implements Func_last_from_list {
 
     @Override
-    public Core.Func_last_from_list vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_last_from_list output = new Core.Class_last_from_list();
       return output;
     }
@@ -25478,7 +25478,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_length extends Core.Class_base implements Func_length {
 
     @Override
-    public Core.Func_length vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_length output = new Core.Class_length();
       return output;
     }
@@ -25585,7 +25585,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_length_1 extends Core.Class_base implements Func_length_1 {
 
     @Override
-    public Core.Func_length_1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_length_1 output = new Core.Class_length_1();
       return output;
     }
@@ -25692,7 +25692,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_length_2 extends Core.Class_base implements Func_length_2 {
 
     @Override
-    public Core.Func_length_2 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_length_2 output = new Core.Class_length_2();
       return output;
     }
@@ -25802,7 +25802,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_let extends Core.Class_base implements Func_let {
 
     @Override
-    public Core.Func_let vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_let output = new Core.Class_let();
       return output;
     }
@@ -25898,7 +25898,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_let_async extends Core.Class_base implements Func_let_async {
 
     @Override
-    public Core.Func_let_async vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_let_async output = new Core.Class_let_async();
       return output;
     }
@@ -25992,7 +25992,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_list_join_from_list extends Core.Class_base implements Func_list_join_from_list {
 
     @Override
-    public Core.Func_list_join_from_list vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_list_join_from_list output = new Core.Class_list_join_from_list();
       return output;
     }
@@ -26108,7 +26108,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_list_join_from_list_1 extends Core.Class_base implements Func_list_join_from_list_1 {
 
     @Override
-    public Core.Func_list_join_from_list_1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_list_join_from_list_1 output = new Core.Class_list_join_from_list_1();
       return output;
     }
@@ -26212,7 +26212,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_list_from_list extends Core.Class_base implements Func_list_from_list {
 
     @Override
-    public Core.Func_list_from_list vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_list_from_list output = new Core.Class_list_from_list();
       return output;
     }
@@ -26328,7 +26328,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_list_from_list_1 extends Core.Class_base implements Func_list_from_list_1 {
 
     @Override
-    public Core.Func_list_from_list_1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_list_from_list_1 output = new Core.Class_list_from_list_1();
       return output;
     }
@@ -26429,7 +26429,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_list_from_list_async extends Core.Class_base implements Func_list_from_list_async {
 
     @Override
-    public Core.Func_list_from_list_async vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_list_from_list_async output = new Core.Class_list_from_list_async();
       return output;
     }
@@ -26525,7 +26525,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_list_from_list_intany extends Core.Class_base implements Func_list_from_list_intany {
 
     @Override
-    public Core.Func_list_from_list_intany vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_list_from_list_intany output = new Core.Class_list_from_list_intany();
       return output;
     }
@@ -26619,7 +26619,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_list_from_map extends Core.Class_base implements Func_list_from_map {
 
     @Override
-    public Core.Func_list_from_map vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_list_from_map output = new Core.Class_list_from_map();
       return output;
     }
@@ -26736,7 +26736,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_list_from_map_1 extends Core.Class_base implements Func_list_from_map_1 {
 
     @Override
-    public Core.Func_list_from_map_1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_list_from_map_1 output = new Core.Class_list_from_map_1();
       return output;
     }
@@ -26837,7 +26837,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_list_from_map_async extends Core.Class_base implements Func_list_from_map_async {
 
     @Override
-    public Core.Func_list_from_map_async vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_list_from_map_async output = new Core.Class_list_from_map_async();
       return output;
     }
@@ -26931,7 +26931,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_list_from_type extends Core.Class_base implements Func_list_from_type {
 
     @Override
-    public Core.Func_list_from_type vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_list_from_type output = new Core.Class_list_from_type();
       return output;
     }
@@ -27036,7 +27036,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_log extends Core.Class_base implements Func_log {
 
     @Override
-    public Core.Func_log vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_log output = new Core.Class_log();
       return output;
     }
@@ -27144,7 +27144,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_log_1 extends Core.Class_base implements Func_log_1 {
 
     @Override
-    public Core.Func_log_1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_log_1 output = new Core.Class_log_1();
       return output;
     }
@@ -27240,7 +27240,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_main extends Core.Class_base implements Func_main {
 
     @Override
-    public Core.Func_main vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_main output = new Core.Class_main();
       return output;
     }
@@ -27350,7 +27350,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_map_from_list extends Core.Class_base implements Func_map_from_list {
 
     @Override
-    public Core.Func_map_from_list vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_map_from_list output = new Core.Class_map_from_list();
       return output;
     }
@@ -27448,7 +27448,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_map_from_map extends Core.Class_base implements Func_map_from_map {
 
     @Override
-    public Core.Func_map_from_map vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_map_from_map output = new Core.Class_map_from_map();
       return output;
     }
@@ -27565,7 +27565,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_map_from_map_1 extends Core.Class_base implements Func_map_from_map_1 {
 
     @Override
-    public Core.Func_map_from_map_1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_map_from_map_1 output = new Core.Class_map_from_map_1();
       return output;
     }
@@ -27662,7 +27662,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_msg_from_error extends Core.Class_base implements Func_msg_from_error {
 
     @Override
-    public Core.Func_msg_from_error vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_msg_from_error output = new Core.Class_msg_from_error();
       return output;
     }
@@ -27778,7 +27778,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_msg_from_error_1 extends Core.Class_base implements Func_msg_from_error_1 {
 
     @Override
-    public Core.Func_msg_from_error_1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_msg_from_error_1 output = new Core.Class_msg_from_error_1();
       return output;
     }
@@ -27884,7 +27884,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_msg_from_error_2 extends Core.Class_base implements Func_msg_from_error_2 {
 
     @Override
-    public Core.Func_msg_from_error_2 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_msg_from_error_2 output = new Core.Class_msg_from_error_2();
       return output;
     }
@@ -27991,7 +27991,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_msg_from_warning extends Core.Class_base implements Func_msg_from_warning {
 
     @Override
-    public Core.Func_msg_from_warning vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_msg_from_warning output = new Core.Class_msg_from_warning();
       return output;
     }
@@ -28107,7 +28107,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_msgblock_from_msgblock_msg extends Core.Class_base implements Func_msgblock_from_msgblock_msg {
 
     @Override
-    public Core.Func_msgblock_from_msgblock_msg vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_msgblock_from_msgblock_msg output = new Core.Class_msgblock_from_msgblock_msg();
       return output;
     }
@@ -28207,7 +28207,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_msgblock_from_msgblock_msgblock extends Core.Class_base implements Func_msgblock_from_msgblock_msgblock {
 
     @Override
-    public Core.Func_msgblock_from_msgblock_msgblock vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_msgblock_from_msgblock_msgblock output = new Core.Class_msgblock_from_msgblock_msgblock();
       return output;
     }
@@ -28307,7 +28307,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_name_from_typedef extends Core.Class_base implements Func_name_from_typedef {
 
     @Override
-    public Core.Func_name_from_typedef vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_name_from_typedef output = new Core.Class_name_from_typedef();
       return output;
     }
@@ -28413,7 +28413,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_native extends Core.Class_base implements Func_native {
 
     @Override
-    public Core.Func_native vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_native output = new Core.Class_native();
       return output;
     }
@@ -28519,7 +28519,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_native_from_any extends Core.Class_base implements Func_native_from_any {
 
     @Override
-    public Core.Func_native_from_any vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_native_from_any output = new Core.Class_native_from_any();
       return output;
     }
@@ -28625,7 +28625,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_new extends Core.Class_base implements Func_new {
 
     @Override
-    public Core.Func_new vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_new output = new Core.Class_new();
       return output;
     }
@@ -28719,7 +28719,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_number_from_func extends Core.Class_base implements Func_number_from_func {
 
     @Override
-    public Core.Func_number_from_func vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_number_from_func output = new Core.Class_number_from_func();
       return output;
     }
@@ -28810,7 +28810,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_or extends Core.Class_base implements Func_or {
 
     @Override
-    public Core.Func_or vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_or output = new Core.Class_or();
       return output;
     }
@@ -28907,7 +28907,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_or_1 extends Core.Class_base implements Func_or_1 {
 
     @Override
-    public Core.Func_or_1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_or_1 output = new Core.Class_or_1();
       return output;
     }
@@ -29030,7 +29030,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_package_global_from_name extends Core.Class_base implements Func_package_global_from_name {
 
     @Override
-    public Core.Func_package_global_from_name vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_package_global_from_name output = new Core.Class_package_global_from_name();
       return output;
     }
@@ -29140,7 +29140,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_packagename_from_typedef extends Core.Class_base implements Func_packagename_from_typedef {
 
     @Override
-    public Core.Func_packagename_from_typedef vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_packagename_from_typedef output = new Core.Class_packagename_from_typedef();
       return output;
     }
@@ -29246,7 +29246,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_path_from_context_path extends Core.Class_base implements Func_path_from_context_path {
 
     @Override
-    public Core.Func_path_from_context_path vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_path_from_context_path output = new Core.Class_path_from_context_path();
       return output;
     }
@@ -29359,7 +29359,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_path_from_setting_path extends Core.Class_base implements Func_path_from_setting_path {
 
     @Override
-    public Core.Func_path_from_setting_path vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_path_from_setting_path output = new Core.Class_path_from_setting_path();
       return output;
     }
@@ -29451,7 +29451,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_permission_from_id_context extends Core.Class_base implements Func_permission_from_id_context {
 
     @Override
-    public Core.Func_permission_from_id_context vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_permission_from_id_context output = new Core.Class_permission_from_id_context();
       return output;
     }
@@ -29573,7 +29573,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_properties_from_typedef extends Core.Class_base implements Func_properties_from_typedef {
 
     @Override
-    public Core.Func_properties_from_typedef vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_properties_from_typedef output = new Core.Class_properties_from_typedef();
       return output;
     }
@@ -29679,7 +29679,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_proplast_from_typedef extends Core.Class_base implements Func_proplast_from_typedef {
 
     @Override
-    public Core.Func_proplast_from_typedef vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_proplast_from_typedef output = new Core.Class_proplast_from_typedef();
       return output;
     }
@@ -29784,7 +29784,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_resolve extends Core.Class_base implements Func_resolve {
 
     @Override
-    public Core.Func_resolve vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_resolve output = new Core.Class_resolve();
       return output;
     }
@@ -29890,7 +29890,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_resolve_1 extends Core.Class_base implements Func_resolve_1 {
 
     @Override
-    public Core.Func_resolve_1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_resolve_1 output = new Core.Class_resolve_1();
       return output;
     }
@@ -30002,7 +30002,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_resolve_async extends Core.Class_base implements Func_resolve_async {
 
     @Override
-    public Core.Func_resolve_async vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_resolve_async output = new Core.Class_resolve_async();
       return output;
     }
@@ -30112,7 +30112,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_resolve_first extends Core.Class_base implements Func_resolve_first {
 
     @Override
-    public Core.Func_resolve_first vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_resolve_first output = new Core.Class_resolve_first();
       return output;
     }
@@ -30222,7 +30222,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_resolve_list extends Core.Class_base implements Func_resolve_list {
 
     @Override
-    public Core.Func_resolve_list vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_resolve_list output = new Core.Class_resolve_list();
       return output;
     }
@@ -30332,7 +30332,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_security_from_context extends Core.Class_base implements Func_security_from_context {
 
     @Override
-    public Core.Func_security_from_context vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_security_from_context output = new Core.Class_security_from_context();
       return output;
     }
@@ -30428,7 +30428,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_security_from_user extends Core.Class_base implements Func_security_from_user {
 
     @Override
-    public Core.Func_security_from_user vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_security_from_user output = new Core.Class_security_from_user();
       return output;
     }
@@ -30533,7 +30533,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_session_from_context extends Core.Class_base implements Func_session_from_context {
 
     @Override
-    public Core.Func_session_from_context vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_session_from_context output = new Core.Class_session_from_context();
       return output;
     }
@@ -30624,7 +30624,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_setting_from_context extends Core.Class_base implements Func_setting_from_context {
 
     @Override
-    public Core.Func_setting_from_context vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_setting_from_context output = new Core.Class_setting_from_context();
       return output;
     }
@@ -30716,7 +30716,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_string_repeat extends Core.Class_base implements Func_string_repeat {
 
     @Override
-    public Core.Func_string_repeat vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_string_repeat output = new Core.Class_string_repeat();
       return output;
     }
@@ -30812,7 +30812,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_string_from_any extends Core.Class_base implements Func_string_from_any {
 
     @Override
-    public Core.Func_string_from_any vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_string_from_any output = new Core.Class_string_from_any();
       return output;
     }
@@ -30924,7 +30924,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_string_from_any_indent extends Core.Class_base implements Func_string_from_any_indent {
 
     @Override
-    public Core.Func_string_from_any_indent vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_string_from_any_indent output = new Core.Class_string_from_any_indent();
       return output;
     }
@@ -31018,7 +31018,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_string_from_func extends Core.Class_base implements Func_string_from_func {
 
     @Override
-    public Core.Func_string_from_func vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_string_from_func output = new Core.Class_string_from_func();
       return output;
     }
@@ -31119,7 +31119,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_string_from_string_find_replace extends Core.Class_base implements Func_string_from_string_find_replace {
 
     @Override
-    public Core.Func_string_from_string_find_replace vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_string_from_string_find_replace output = new Core.Class_string_from_string_find_replace();
       return output;
     }
@@ -31213,7 +31213,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_stringlist_from_map extends Core.Class_base implements Func_stringlist_from_map {
 
     @Override
-    public Core.Func_stringlist_from_map vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_stringlist_from_map output = new Core.Class_stringlist_from_map();
       return output;
     }
@@ -31329,7 +31329,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_switch extends Core.Class_base implements Func_switch {
 
     @Override
-    public Core.Func_switch vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_switch output = new Core.Class_switch();
       return output;
     }
@@ -31453,7 +31453,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_then extends Core.Class_base implements Func_then {
 
     @Override
-    public Core.Func_then vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_then output = new Core.Class_then();
       return output;
     }
@@ -31557,7 +31557,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_traits_from_typedef extends Core.Class_base implements Func_traits_from_typedef {
 
     @Override
-    public Core.Func_traits_from_typedef vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_traits_from_typedef output = new Core.Class_traits_from_typedef();
       return output;
     }
@@ -31663,7 +31663,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_type_from_any extends Core.Class_base implements Func_type_from_any {
 
     @Override
-    public Core.Func_type_from_any vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_type_from_any output = new Core.Class_type_from_any();
       return output;
     }
@@ -31769,7 +31769,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_typedef_from_any extends Core.Class_base implements Func_typedef_from_any {
 
     @Override
-    public Core.Func_typedef_from_any vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_typedef_from_any output = new Core.Class_typedef_from_any();
       return output;
     }
@@ -31879,7 +31879,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_typedef_from_type extends Core.Class_base implements Func_typedef_from_type {
 
     @Override
-    public Core.Func_typedef_from_type vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_typedef_from_type output = new Core.Class_typedef_from_type();
       return output;
     }
@@ -31985,7 +31985,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_typename_from_any extends Core.Class_base implements Func_typename_from_any {
 
     @Override
-    public Core.Func_typename_from_any vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_typename_from_any output = new Core.Class_typename_from_any();
       return output;
     }
@@ -32095,7 +32095,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_typename_from_type extends Core.Class_base implements Func_typename_from_type {
 
     @Override
-    public Core.Func_typename_from_type vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_typename_from_type output = new Core.Class_typename_from_type();
       return output;
     }
@@ -32205,7 +32205,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_typename_from_typedef extends Core.Class_base implements Func_typename_from_typedef {
 
     @Override
-    public Core.Func_typename_from_typedef vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_typename_from_typedef output = new Core.Class_typename_from_typedef();
       return output;
     }
@@ -32319,7 +32319,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_typenames_from_typelist extends Core.Class_base implements Func_typenames_from_typelist {
 
     @Override
-    public Core.Func_typenames_from_typelist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_typenames_from_typelist output = new Core.Class_typenames_from_typelist();
       return output;
     }
@@ -32434,7 +32434,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static class Class_user_from_context extends Core.Class_base implements Func_user_from_context {
 
     @Override
-    public Core.Func_user_from_context vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Core.Class_user_from_context output = new Core.Class_user_from_context();
       return output;
     }

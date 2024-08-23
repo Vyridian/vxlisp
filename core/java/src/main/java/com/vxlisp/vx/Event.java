@@ -133,7 +133,7 @@ public final class Event {
     }
 
     @Override
-    public Event.Type_event vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Event.Type_event output = Core.vx_copy(Event.e_event, vals);
       return output;
     }
@@ -449,7 +449,7 @@ public final class Event {
     }
 
     @Override
-    public Event.Type_eventlist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Event.Type_eventlist output = Core.vx_copy(Event.e_eventlist, vals);
       return output;
     }
@@ -636,7 +636,7 @@ public final class Event {
     }
 
     @Override
-    public Event.Type_eventmap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Event.Type_eventmap output = Core.vx_copy(Event.e_eventmap, vals);
       return output;
     }
@@ -973,7 +973,7 @@ public final class Event {
   public static class Class_any_from_from_event extends Core.Class_base implements Func_any_from_from_event {
 
     @Override
-    public Event.Func_any_from_from_event vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Event.Class_any_from_from_event output = new Event.Class_any_from_from_event();
       return output;
     }
@@ -1090,7 +1090,7 @@ public final class Event {
   public static class Class_event_from_event extends Core.Class_base implements Func_event_from_event {
 
     @Override
-    public Event.Func_event_from_event vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Event.Class_event_from_event output = new Event.Class_event_from_event();
       return output;
     }
@@ -1199,7 +1199,7 @@ public final class Event {
   public static class Class_event_from_event_async extends Core.Class_base implements Func_event_from_event_async {
 
     @Override
-    public Event.Func_event_from_event_async vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Event.Class_event_from_event_async output = new Event.Class_event_from_event_async();
       return output;
     }
@@ -1306,7 +1306,7 @@ public final class Event {
   public static class Class_eventmap_from_eventlist extends Core.Class_base implements Func_eventmap_from_eventlist {
 
     @Override
-    public Event.Func_eventmap_from_eventlist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Event.Class_eventmap_from_eventlist output = new Event.Class_eventmap_from_eventlist();
       return output;
     }

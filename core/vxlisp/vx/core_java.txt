@@ -289,6 +289,18 @@
     return output;
   }
 
+  // vx_any_from_map(generic_any_1, map, string)
+  public static <T extends Core.Type_any> T vx_any_from_map(T generic_any_1, Core.Type_map valuemap, Core.Type_string key) {
+    T output = Core.f_empty(generic_any_1);
+    String skey = key.vx_string();
+    if (skey.startsWith(":")) {
+      skey = skey.substring(1);
+    }
+    Core.Type_any val = valuemap.vx_map().getOrDefault(skey, output);
+    output = Core.f_any_from_any(generic_any_1, val);
+    return output;
+  }
+
   // vx_any_from_map_start_reduce(any-1, map-2, any-1, any<-any-key-value)
   public static <T extends Core.Type_any, N extends Core.Type_map> T vx_any_from_map_start_reduce(T generic_any_1, N map, T start, Core.Func_any_from_any_key_value fn_reduce) {
     T output = start;
@@ -299,18 +311,6 @@
       Core.Type_any value = mapval.get(skey);
       output = fn_reduce.vx_any_from_any_key_value(generic_any_1, output, key, value);
     }
-    return output;
-  }
-
-  // vx_any_from_map(generic_any_1, map, string)
-  public static <T extends Core.Type_any> T vx_any_from_map(T generic_any_1, Core.Type_map valuemap, Core.Type_string key) {
-    T output = Core.f_empty(generic_any_1);
-    String skey = key.vx_string();
-    if (skey.startsWith(":")) {
-      skey = skey.substring(1);
-    }
-    Core.Type_any val = valuemap.vx_map().getOrDefault(skey, output);
-    output = Core.f_any_from_any(generic_any_1, val);
     return output;
   }
 

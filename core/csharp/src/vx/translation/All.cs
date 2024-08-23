@@ -15,7 +15,7 @@ public static class All {
 
   public class Class_context_all : Vx.Core.Class_base, Func_context_all {
 
-    public override Vx.Translation.All.Func_context_all vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Translation.All.Class_context_all output = new Vx.Translation.All.Class_context_all();
       return output;
     }
@@ -126,7 +126,7 @@ public static class All {
 
   public class Class_translationmap_all : Vx.Core.Class_base, Func_translationmap_all {
 
-    public override Vx.Translation.All.Func_translationmap_all vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Translation.All.Class_translationmap_all output = new Vx.Translation.All.Class_translationmap_all();
       return output;
     }

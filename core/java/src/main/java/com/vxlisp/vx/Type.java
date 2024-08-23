@@ -130,7 +130,7 @@ public final class Type {
   public static class Class_allowtypenames_from_type extends Core.Class_base implements Func_allowtypenames_from_type {
 
     @Override
-    public Type.Func_allowtypenames_from_type vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Type.Class_allowtypenames_from_type output = new Type.Class_allowtypenames_from_type();
       return output;
     }
@@ -240,7 +240,7 @@ public final class Type {
   public static class Class_allowtypes_from_type extends Core.Class_base implements Func_allowtypes_from_type {
 
     @Override
-    public Type.Func_allowtypes_from_type vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Type.Class_allowtypes_from_type output = new Type.Class_allowtypes_from_type();
       return output;
     }
@@ -348,7 +348,7 @@ public final class Type {
   public static class Class_any_from_int extends Core.Class_base implements Func_any_from_int {
 
     @Override
-    public Type.Func_any_from_int vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Type.Class_any_from_int output = new Type.Class_any_from_int();
       return output;
     }
@@ -455,7 +455,7 @@ public final class Type {
   public static class Class_boolean_from_string_ends extends Core.Class_base implements Func_boolean_from_string_ends {
 
     @Override
-    public Type.Func_boolean_from_string_ends vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Type.Class_boolean_from_string_ends output = new Type.Class_boolean_from_string_ends();
       return output;
     }
@@ -550,7 +550,7 @@ public final class Type {
   public static class Class_boolean_from_string_starts extends Core.Class_base implements Func_boolean_from_string_starts {
 
     @Override
-    public Type.Func_boolean_from_string_starts vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Type.Class_boolean_from_string_starts output = new Type.Class_boolean_from_string_starts();
       return output;
     }
@@ -645,7 +645,7 @@ public final class Type {
   public static class Class_int_from_string_find extends Core.Class_base implements Func_int_from_string_find {
 
     @Override
-    public Type.Func_int_from_string_find vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Type.Class_int_from_string_find output = new Type.Class_int_from_string_find();
       return output;
     }
@@ -739,7 +739,7 @@ public final class Type {
   public static class Class_int_from_string_findkeyword extends Core.Class_base implements Func_int_from_string_findkeyword {
 
     @Override
-    public Type.Func_int_from_string_findkeyword vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Type.Class_int_from_string_findkeyword output = new Type.Class_int_from_string_findkeyword();
       return output;
     }
@@ -833,7 +833,7 @@ public final class Type {
   public static class Class_int_from_string_findlast extends Core.Class_base implements Func_int_from_string_findlast {
 
     @Override
-    public Type.Func_int_from_string_findlast vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Type.Class_int_from_string_findlast output = new Type.Class_int_from_string_findlast();
       return output;
     }
@@ -925,7 +925,7 @@ public final class Type {
   public static class Class_is_boolean extends Core.Class_base implements Func_is_boolean {
 
     @Override
-    public Type.Func_is_boolean vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Type.Class_is_boolean output = new Type.Class_is_boolean();
       return output;
     }
@@ -1035,7 +1035,7 @@ public final class Type {
   public static class Class_is_decimal extends Core.Class_base implements Func_is_decimal {
 
     @Override
-    public Type.Func_is_decimal vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Type.Class_is_decimal output = new Type.Class_is_decimal();
       return output;
     }
@@ -1145,7 +1145,7 @@ public final class Type {
   public static class Class_is_none extends Core.Class_base implements Func_is_none {
 
     @Override
-    public Type.Func_is_none vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Type.Class_is_none output = new Type.Class_is_none();
       return output;
     }
@@ -1253,7 +1253,7 @@ public final class Type {
   public static class Class_is_string extends Core.Class_base implements Func_is_string {
 
     @Override
-    public Type.Func_is_string vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Type.Class_is_string output = new Type.Class_is_string();
       return output;
     }
@@ -1364,7 +1364,7 @@ public final class Type {
   public static class Class_is_type extends Core.Class_base implements Func_is_type {
 
     @Override
-    public Type.Func_is_type vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Type.Class_is_type output = new Type.Class_is_type();
       return output;
     }
@@ -1486,7 +1486,7 @@ public final class Type {
   public static class Class_is_type_from_any_typelist extends Core.Class_base implements Func_is_type_from_any_typelist {
 
     @Override
-    public Type.Func_is_type_from_any_typelist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Type.Class_is_type_from_any_typelist output = new Type.Class_is_type_from_any_typelist();
       return output;
     }
@@ -1595,7 +1595,7 @@ public final class Type {
   public static class Class_string_lowercase extends Core.Class_base implements Func_string_lowercase {
 
     @Override
-    public Type.Func_string_lowercase vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Type.Class_string_lowercase output = new Type.Class_string_lowercase();
       return output;
     }
@@ -1701,7 +1701,7 @@ public final class Type {
   public static class Class_string_outdent extends Core.Class_base implements Func_string_outdent {
 
     @Override
-    public Type.Func_string_outdent vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Type.Class_string_outdent output = new Type.Class_string_outdent();
       return output;
     }
@@ -1874,7 +1874,7 @@ public final class Type {
   public static class Class_string_trim extends Core.Class_base implements Func_string_trim {
 
     @Override
-    public Type.Func_string_trim vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Type.Class_string_trim output = new Type.Class_string_trim();
       return output;
     }
@@ -1980,7 +1980,7 @@ public final class Type {
   public static class Class_string_uppercase extends Core.Class_base implements Func_string_uppercase {
 
     @Override
-    public Type.Func_string_uppercase vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Type.Class_string_uppercase output = new Type.Class_string_uppercase();
       return output;
     }
@@ -2086,7 +2086,7 @@ public final class Type {
   public static class Class_string_from_int extends Core.Class_base implements Func_string_from_int {
 
     @Override
-    public Type.Func_string_from_int vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Type.Class_string_from_int output = new Type.Class_string_from_int();
       return output;
     }
@@ -2232,7 +2232,7 @@ public final class Type {
   public static class Class_string_from_string_end extends Core.Class_base implements Func_string_from_string_end {
 
     @Override
-    public Type.Func_string_from_string_end vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Type.Class_string_from_string_end output = new Type.Class_string_from_string_end();
       return output;
     }
@@ -2330,7 +2330,7 @@ public final class Type {
   public static class Class_string_from_string_start extends Core.Class_base implements Func_string_from_string_start {
 
     @Override
-    public Type.Func_string_from_string_start vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Type.Class_string_from_string_start output = new Type.Class_string_from_string_start();
       return output;
     }
@@ -2431,7 +2431,7 @@ public final class Type {
   public static class Class_string_from_string_start_end extends Core.Class_base implements Func_string_from_string_start_end {
 
     @Override
-    public Type.Func_string_from_string_start_end vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Type.Class_string_from_string_start_end output = new Type.Class_string_from_string_start_end();
       return output;
     }
@@ -2527,7 +2527,7 @@ public final class Type {
   public static class Class_string_from_stringlist_join extends Core.Class_base implements Func_string_from_stringlist_join {
 
     @Override
-    public Type.Func_string_from_stringlist_join vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Type.Class_string_from_stringlist_join output = new Type.Class_string_from_stringlist_join();
       return output;
     }
@@ -2621,7 +2621,7 @@ public final class Type {
   public static class Class_stringlist_from_string_split extends Core.Class_base implements Func_stringlist_from_string_split {
 
     @Override
-    public Type.Func_stringlist_from_string_split vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Type.Class_stringlist_from_string_split output = new Type.Class_stringlist_from_string_split();
       return output;
     }
@@ -2714,7 +2714,7 @@ public final class Type {
   public static class Class_traitnames_from_any extends Core.Class_base implements Func_traitnames_from_any {
 
     @Override
-    public Type.Func_traitnames_from_any vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Type.Class_traitnames_from_any output = new Type.Class_traitnames_from_any();
       return output;
     }
@@ -2824,7 +2824,7 @@ public final class Type {
   public static class Class_traits_from_any extends Core.Class_base implements Func_traits_from_any {
 
     @Override
-    public Type.Func_traits_from_any vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Type.Class_traits_from_any output = new Type.Class_traits_from_any();
       return output;
     }
@@ -2934,7 +2934,7 @@ public final class Type {
   public static class Class_traits_from_typedef extends Core.Class_base implements Func_traits_from_typedef {
 
     @Override
-    public Type.Func_traits_from_typedef vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Type.Class_traits_from_typedef output = new Type.Class_traits_from_typedef();
       return output;
     }

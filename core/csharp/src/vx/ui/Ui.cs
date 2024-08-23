@@ -24,7 +24,7 @@ public static class Ui {
       return output;
     }
 
-    public override Vx.Ui.Ui.Type_align vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Type_align output = Vx.Core.vx_copy(Vx.Ui.Ui.e_align, vals);
       return output;
     }
@@ -163,7 +163,7 @@ public static class Ui {
       return output;
     }
 
-    public override Vx.Ui.Ui.Type_bounds vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Type_bounds output = Vx.Core.vx_copy(Vx.Ui.Ui.e_bounds, vals);
       return output;
     }
@@ -391,7 +391,7 @@ public static class Ui {
       return output;
     }
 
-    public override Vx.Ui.Ui.Type_cursor vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Type_cursor output = Vx.Core.vx_copy(Vx.Ui.Ui.e_cursor, vals);
       return output;
     }
@@ -455,7 +455,7 @@ public static class Ui {
 
   public class Class_cursor_pointer : Vx.Core.Class_base, Type_cursor_pointer {
 
-    public override Vx.Ui.Ui.Type_cursor_pointer vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Type_cursor_pointer output = Vx.Core.vx_copy(Vx.Ui.Ui.e_cursor_pointer, vals);
       return output;
     }
@@ -531,7 +531,7 @@ public static class Ui {
       return output;
     }
 
-    public override Vx.Ui.Ui.Type_flip vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Type_flip output = Vx.Core.vx_copy(Vx.Ui.Ui.e_flip, vals);
       return output;
     }
@@ -670,7 +670,7 @@ public static class Ui {
       return output;
     }
 
-    public override Vx.Ui.Ui.Type_font vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Type_font output = Vx.Core.vx_copy(Vx.Ui.Ui.e_font, vals);
       return output;
     }
@@ -955,7 +955,7 @@ public static class Ui {
       return output;
     }
 
-    public override Vx.Ui.Ui.Type_fontface vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Type_fontface output = Vx.Core.vx_copy(Vx.Ui.Ui.e_fontface, vals);
       return output;
     }
@@ -1203,7 +1203,7 @@ public static class Ui {
       return output;
     }
 
-    public override Vx.Ui.Ui.Type_fontfacelist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Type_fontfacelist output = Vx.Core.vx_copy(Vx.Ui.Ui.e_fontfacelist, vals);
       return output;
     }
@@ -1373,7 +1373,7 @@ public static class Ui {
       return output;
     }
 
-    public override Vx.Ui.Ui.Type_fontfacemap vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Type_fontfacemap output = Vx.Core.vx_copy(Vx.Ui.Ui.e_fontfacemap, vals);
       return output;
     }
@@ -1567,7 +1567,7 @@ public static class Ui {
       return output;
     }
 
-    public override Vx.Ui.Ui.Type_fontmap vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Type_fontmap output = Vx.Core.vx_copy(Vx.Ui.Ui.e_fontmap, vals);
       return output;
     }
@@ -1718,7 +1718,7 @@ public static class Ui {
       return output;
     }
 
-    public override Vx.Ui.Ui.Type_fontstyle vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Type_fontstyle output = Vx.Core.vx_copy(Vx.Ui.Ui.e_fontstyle, vals);
       return output;
     }
@@ -1932,7 +1932,7 @@ public static class Ui {
       return output;
     }
 
-    public override Vx.Ui.Ui.Type_fontstylemap vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Type_fontstylemap output = Vx.Core.vx_copy(Vx.Ui.Ui.e_fontstylemap, vals);
       return output;
     }
@@ -2113,7 +2113,7 @@ public static class Ui {
       return output;
     }
 
-    public override Vx.Ui.Ui.Type_image vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Type_image output = Vx.Core.vx_copy(Vx.Ui.Ui.e_image, vals);
       return output;
     }
@@ -2346,7 +2346,7 @@ public static class Ui {
       return output;
     }
 
-    public override Vx.Ui.Ui.Type_layout vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Type_layout output = Vx.Core.vx_copy(Vx.Ui.Ui.e_layout, vals);
       return output;
     }
@@ -2644,7 +2644,7 @@ public static class Ui {
       return output;
     }
 
-    public override Vx.Ui.Ui.Type_layoutengine vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Type_layoutengine output = Vx.Core.vx_copy(Vx.Ui.Ui.e_layoutengine, vals);
       return output;
     }
@@ -2974,7 +2974,7 @@ public static class Ui {
       return output;
     }
 
-    public override Vx.Ui.Ui.Type_layoutlist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Type_layoutlist output = Vx.Core.vx_copy(Vx.Ui.Ui.e_layoutlist, vals);
       return output;
     }
@@ -3144,7 +3144,7 @@ public static class Ui {
       return output;
     }
 
-    public override Vx.Ui.Ui.Type_layoutmap vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Type_layoutmap output = Vx.Core.vx_copy(Vx.Ui.Ui.e_layoutmap, vals);
       return output;
     }
@@ -3295,7 +3295,7 @@ public static class Ui {
       return output;
     }
 
-    public override Vx.Ui.Ui.Type_pin vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Type_pin output = Vx.Core.vx_copy(Vx.Ui.Ui.e_pin, vals);
       return output;
     }
@@ -3541,7 +3541,7 @@ public static class Ui {
       return output;
     }
 
-    public override Vx.Ui.Ui.Type_point vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Type_point output = Vx.Core.vx_copy(Vx.Ui.Ui.e_point, vals);
       return output;
     }
@@ -3805,7 +3805,7 @@ public static class Ui {
 
   public class Class_pointtype : Vx.Core.Class_base, Type_pointtype {
 
-    public override Vx.Ui.Ui.Type_pointtype vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Type_pointtype output = Vx.Core.vx_copy(Vx.Ui.Ui.e_pointtype, vals);
       return output;
     }
@@ -4214,7 +4214,7 @@ public static class Ui {
       return output;
     }
 
-    public override Vx.Ui.Ui.Type_style vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Type_style output = Vx.Core.vx_copy(Vx.Ui.Ui.e_style, vals);
       return output;
     }
@@ -4873,7 +4873,7 @@ public static class Ui {
       return output;
     }
 
-    public override Vx.Ui.Ui.Type_stylelist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Type_stylelist output = Vx.Core.vx_copy(Vx.Ui.Ui.e_stylelist, vals);
       return output;
     }
@@ -5043,7 +5043,7 @@ public static class Ui {
       return output;
     }
 
-    public override Vx.Ui.Ui.Type_stylemap vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Type_stylemap output = Vx.Core.vx_copy(Vx.Ui.Ui.e_stylemap, vals);
       return output;
     }
@@ -5209,7 +5209,7 @@ public static class Ui {
       return output;
     }
 
-    public override Vx.Ui.Ui.Type_stylesheet vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Type_stylesheet output = Vx.Core.vx_copy(Vx.Ui.Ui.e_stylesheet, vals);
       return output;
     }
@@ -5381,7 +5381,7 @@ public static class Ui {
       return output;
     }
 
-    public override Vx.Ui.Ui.Type_styletype vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Type_styletype output = Vx.Core.vx_copy(Vx.Ui.Ui.e_styletype, vals);
       return output;
     }
@@ -5640,7 +5640,7 @@ public static class Ui {
       return output;
     }
 
-    public override Vx.Ui.Ui.Type_ui vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Type_ui output = Vx.Core.vx_copy(Vx.Ui.Ui.e_ui, vals);
       return output;
     }
@@ -6113,7 +6113,7 @@ public static class Ui {
       return output;
     }
 
-    public override Vx.Ui.Ui.Type_uiengine vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Type_uiengine output = Vx.Core.vx_copy(Vx.Ui.Ui.e_uiengine, vals);
       return output;
     }
@@ -6352,7 +6352,7 @@ public static class Ui {
       return output;
     }
 
-    public override Vx.Ui.Ui.Type_uilist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Type_uilist output = Vx.Core.vx_copy(Vx.Ui.Ui.e_uilist, vals);
       return output;
     }
@@ -6522,7 +6522,7 @@ public static class Ui {
       return output;
     }
 
-    public override Vx.Ui.Ui.Type_uimap vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Type_uimap output = Vx.Core.vx_copy(Vx.Ui.Ui.e_uimap, vals);
       return output;
     }
@@ -8586,7 +8586,7 @@ public static class Ui {
 
   public class Class_boolean_layout_from_ui_parent_selected : Vx.Core.Class_base, Func_boolean_layout_from_ui_parent_selected {
 
-    public override Vx.Ui.Ui.Func_boolean_layout_from_ui_parent_selected vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_boolean_layout_from_ui_parent_selected output = new Vx.Ui.Ui.Class_boolean_layout_from_ui_parent_selected();
       return output;
     }
@@ -8701,7 +8701,7 @@ public static class Ui {
 
   public class Class_boolean_layout_from_ui_parent_visible : Vx.Core.Class_base, Func_boolean_layout_from_ui_parent_visible {
 
-    public override Vx.Ui.Ui.Func_boolean_layout_from_ui_parent_visible vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_boolean_layout_from_ui_parent_visible output = new Vx.Ui.Ui.Class_boolean_layout_from_ui_parent_visible();
       return output;
     }
@@ -8817,7 +8817,7 @@ public static class Ui {
 
   public class Class_boolean_layoutaddchild_from_ui_parent : Vx.Core.Class_base, Func_boolean_layoutaddchild_from_ui_parent {
 
-    public override Vx.Ui.Ui.Func_boolean_layoutaddchild_from_ui_parent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_boolean_layoutaddchild_from_ui_parent output = new Vx.Ui.Ui.Class_boolean_layoutaddchild_from_ui_parent();
       return output;
     }
@@ -8924,7 +8924,7 @@ public static class Ui {
 
   public class Class_boolean_layoutremove_from_ui : Vx.Core.Class_base, Func_boolean_layoutremove_from_ui {
 
-    public override Vx.Ui.Ui.Func_boolean_layoutremove_from_ui vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_boolean_layoutremove_from_ui output = new Vx.Ui.Ui.Class_boolean_layoutremove_from_ui();
       return output;
     }
@@ -9020,7 +9020,7 @@ public static class Ui {
 
   public class Class_boolean_layoutremove_from_ui_keys : Vx.Core.Class_base, Func_boolean_layoutremove_from_ui_keys {
 
-    public override Vx.Ui.Ui.Func_boolean_layoutremove_from_ui_keys vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_boolean_layoutremove_from_ui_keys output = new Vx.Ui.Ui.Class_boolean_layoutremove_from_ui_keys();
       return output;
     }
@@ -9140,7 +9140,7 @@ public static class Ui {
 
   public class Class_boolean_layoutremove_from_ui_parent : Vx.Core.Class_base, Func_boolean_layoutremove_from_ui_parent {
 
-    public override Vx.Ui.Ui.Func_boolean_layoutremove_from_ui_parent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_boolean_layoutremove_from_ui_parent output = new Vx.Ui.Ui.Class_boolean_layoutremove_from_ui_parent();
       return output;
     }
@@ -9247,7 +9247,7 @@ public static class Ui {
 
   public class Class_boolean_layoutremove_from_ui_start_end : Vx.Core.Class_base, Func_boolean_layoutremove_from_ui_start_end {
 
-    public override Vx.Ui.Ui.Func_boolean_layoutremove_from_ui_start_end vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_boolean_layoutremove_from_ui_start_end output = new Vx.Ui.Ui.Class_boolean_layoutremove_from_ui_start_end();
       return output;
     }
@@ -9354,7 +9354,7 @@ public static class Ui {
 
   public class Class_boolean_layoutselected_from_ui : Vx.Core.Class_base, Func_boolean_layoutselected_from_ui {
 
-    public override Vx.Ui.Ui.Func_boolean_layoutselected_from_ui vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_boolean_layoutselected_from_ui output = new Vx.Ui.Ui.Class_boolean_layoutselected_from_ui();
       return output;
     }
@@ -9450,7 +9450,7 @@ public static class Ui {
 
   public class Class_boolean_layoutselected_from_ui_parent : Vx.Core.Class_base, Func_boolean_layoutselected_from_ui_parent {
 
-    public override Vx.Ui.Ui.Func_boolean_layoutselected_from_ui_parent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_boolean_layoutselected_from_ui_parent output = new Vx.Ui.Ui.Class_boolean_layoutselected_from_ui_parent();
       return output;
     }
@@ -9555,7 +9555,7 @@ public static class Ui {
 
   public class Class_boolean_layoutselected_from_ui_selected : Vx.Core.Class_base, Func_boolean_layoutselected_from_ui_selected {
 
-    public override Vx.Ui.Ui.Func_boolean_layoutselected_from_ui_selected vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_boolean_layoutselected_from_ui_selected output = new Vx.Ui.Ui.Class_boolean_layoutselected_from_ui_selected();
       return output;
     }
@@ -9639,7 +9639,7 @@ public static class Ui {
 
   public class Class_boolean_layoutvisible_from_ui : Vx.Core.Class_base, Func_boolean_layoutvisible_from_ui {
 
-    public override Vx.Ui.Ui.Func_boolean_layoutvisible_from_ui vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_boolean_layoutvisible_from_ui output = new Vx.Ui.Ui.Class_boolean_layoutvisible_from_ui();
       return output;
     }
@@ -9734,7 +9734,7 @@ public static class Ui {
 
   public class Class_boolean_print : Vx.Core.Class_base, Func_boolean_print {
 
-    public override Vx.Ui.Ui.Func_boolean_print vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_boolean_print output = new Vx.Ui.Ui.Class_boolean_print();
       return output;
     }
@@ -9845,7 +9845,7 @@ public static class Ui {
 
   public class Class_boolean_removestate_uiapp : Vx.Core.Class_base, Func_boolean_removestate_uiapp {
 
-    public override Vx.Ui.Ui.Func_boolean_removestate_uiapp vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_boolean_removestate_uiapp output = new Vx.Ui.Ui.Class_boolean_removestate_uiapp();
       return output;
     }
@@ -9933,7 +9933,7 @@ public static class Ui {
 
   public class Class_boolean_write_from_ui_parent : Vx.Core.Class_base, Func_boolean_write_from_ui_parent {
 
-    public override Vx.Ui.Ui.Func_boolean_write_from_ui_parent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_boolean_write_from_ui_parent output = new Vx.Ui.Ui.Class_boolean_write_from_ui_parent();
       return output;
     }
@@ -10031,7 +10031,7 @@ public static class Ui {
 
   public class Class_boolean_writeremove_from_ui_uid : Vx.Core.Class_base, Func_boolean_writeremove_from_ui_uid {
 
-    public override Vx.Ui.Ui.Func_boolean_writeremove_from_ui_uid vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_boolean_writeremove_from_ui_uid output = new Vx.Ui.Ui.Class_boolean_writeremove_from_ui_uid();
       return output;
     }
@@ -10128,7 +10128,7 @@ public static class Ui {
 
   public class Class_boolean_writestate_from_ui : Vx.Core.Class_base, Func_boolean_writestate_from_ui {
 
-    public override Vx.Ui.Ui.Func_boolean_writestate_from_ui vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_boolean_writestate_from_ui output = new Vx.Ui.Ui.Class_boolean_writestate_from_ui();
       return output;
     }
@@ -10288,7 +10288,7 @@ public static class Ui {
 
   public class Class_boolean_writestate_from_uiapp : Vx.Core.Class_base, Func_boolean_writestate_from_uiapp {
 
-    public override Vx.Ui.Ui.Func_boolean_writestate_from_uiapp vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_boolean_writestate_from_uiapp output = new Vx.Ui.Ui.Class_boolean_writestate_from_uiapp();
       return output;
     }
@@ -10389,7 +10389,7 @@ public static class Ui {
 
   public class Class_boolean_writestate_from_uiengine : Vx.Core.Class_base, Func_boolean_writestate_from_uiengine {
 
-    public override Vx.Ui.Ui.Func_boolean_writestate_from_uiengine vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_boolean_writestate_from_uiengine output = new Vx.Ui.Ui.Class_boolean_writestate_from_uiengine();
       return output;
     }
@@ -10490,7 +10490,7 @@ public static class Ui {
 
   public class Class_fontfacemap_from_fontfacelist : Vx.Core.Class_base, Func_fontfacemap_from_fontfacelist {
 
-    public override Vx.Ui.Ui.Func_fontfacemap_from_fontfacelist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_fontfacemap_from_fontfacelist output = new Vx.Ui.Ui.Class_fontfacemap_from_fontfacelist();
       return output;
     }
@@ -10595,7 +10595,7 @@ public static class Ui {
 
   public class Class_int_child_from_ui_uid : Vx.Core.Class_base, Func_int_child_from_ui_uid {
 
-    public override Vx.Ui.Ui.Func_int_child_from_ui_uid vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_int_child_from_ui_uid output = new Vx.Ui.Ui.Class_int_child_from_ui_uid();
       return output;
     }
@@ -10690,7 +10690,7 @@ public static class Ui {
 
   public class Class_int_selected_from_ui : Vx.Core.Class_base, Func_int_selected_from_ui {
 
-    public override Vx.Ui.Ui.Func_int_selected_from_ui vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_int_selected_from_ui output = new Vx.Ui.Ui.Class_int_selected_from_ui();
       return output;
     }
@@ -10801,7 +10801,7 @@ public static class Ui {
 
   public class Class_int_visible_from_ui : Vx.Core.Class_base, Func_int_visible_from_ui {
 
-    public override Vx.Ui.Ui.Func_int_visible_from_ui vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_int_visible_from_ui output = new Vx.Ui.Ui.Class_int_visible_from_ui();
       return output;
     }
@@ -10909,7 +10909,7 @@ public static class Ui {
 
   public class Class_intlist_visible_from_ui : Vx.Core.Class_base, Func_intlist_visible_from_ui {
 
-    public override Vx.Ui.Ui.Func_intlist_visible_from_ui vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_intlist_visible_from_ui output = new Vx.Ui.Ui.Class_intlist_visible_from_ui();
       return output;
     }
@@ -11049,7 +11049,7 @@ public static class Ui {
 
   public class Class_layout_from_style : Vx.Core.Class_base, Func_layout_from_style {
 
-    public override Vx.Ui.Ui.Func_layout_from_style vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_layout_from_style output = new Vx.Ui.Ui.Class_layout_from_style();
       return output;
     }
@@ -11145,7 +11145,7 @@ public static class Ui {
 
   public class Class_layout_from_ui : Vx.Core.Class_base, Func_layout_from_ui {
 
-    public override Vx.Ui.Ui.Func_layout_from_ui vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_layout_from_ui output = new Vx.Ui.Ui.Class_layout_from_ui();
       return output;
     }
@@ -11255,7 +11255,7 @@ public static class Ui {
 
   public class Class_layout_from_ui_layoutengine : Vx.Core.Class_base, Func_layout_from_ui_layoutengine {
 
-    public override Vx.Ui.Ui.Func_layout_from_ui_layoutengine vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_layout_from_ui_layoutengine output = new Vx.Ui.Ui.Class_layout_from_ui_layoutengine();
       return output;
     }
@@ -11354,7 +11354,7 @@ public static class Ui {
 
   public class Class_layout_from_ui_layoutmap_else : Vx.Core.Class_base, Func_layout_from_ui_layoutmap_else {
 
-    public override Vx.Ui.Ui.Func_layout_from_ui_layoutmap_else vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_layout_from_ui_layoutmap_else output = new Vx.Ui.Ui.Class_layout_from_ui_layoutmap_else();
       return output;
     }
@@ -11463,7 +11463,7 @@ public static class Ui {
 
   public class Class_layoutengine_readstate : Vx.Core.Class_base, Func_layoutengine_readstate {
 
-    public override Vx.Ui.Ui.Func_layoutengine_readstate vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_layoutengine_readstate output = new Vx.Ui.Ui.Class_layoutengine_readstate();
       return output;
     }
@@ -11556,7 +11556,7 @@ public static class Ui {
 
   public class Class_layoutmap_from_layoutlist : Vx.Core.Class_base, Func_layoutmap_from_layoutlist {
 
-    public override Vx.Ui.Ui.Func_layoutmap_from_layoutlist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_layoutmap_from_layoutlist output = new Vx.Ui.Ui.Class_layoutmap_from_layoutlist();
       return output;
     }
@@ -11660,7 +11660,7 @@ public static class Ui {
 
   public class Class_string_parentuid_from_uid : Vx.Core.Class_base, Func_string_parentuid_from_uid {
 
-    public override Vx.Ui.Ui.Func_string_parentuid_from_uid vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_string_parentuid_from_uid output = new Vx.Ui.Ui.Class_string_parentuid_from_uid();
       return output;
     }
@@ -11790,7 +11790,7 @@ public static class Ui {
 
   public class Class_string_selected_from_ui : Vx.Core.Class_base, Func_string_selected_from_ui {
 
-    public override Vx.Ui.Ui.Func_string_selected_from_ui vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_string_selected_from_ui output = new Vx.Ui.Ui.Class_string_selected_from_ui();
       return output;
     }
@@ -11895,7 +11895,7 @@ public static class Ui {
 
   public class Class_stringlist_selected_from_ui : Vx.Core.Class_base, Func_stringlist_selected_from_ui {
 
-    public override Vx.Ui.Ui.Func_stringlist_selected_from_ui vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_stringlist_selected_from_ui output = new Vx.Ui.Ui.Class_stringlist_selected_from_ui();
       return output;
     }
@@ -12014,7 +12014,7 @@ public static class Ui {
 
   public class Class_stringlist_from_ui : Vx.Core.Class_base, Func_stringlist_from_ui {
 
-    public override Vx.Ui.Ui.Func_stringlist_from_ui vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_stringlist_from_ui output = new Vx.Ui.Ui.Class_stringlist_from_ui();
       return output;
     }
@@ -12118,7 +12118,7 @@ public static class Ui {
 
   public class Class_stylemap_from_stylelist : Vx.Core.Class_base, Func_stylemap_from_stylelist {
 
-    public override Vx.Ui.Ui.Func_stylemap_from_stylelist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_stylemap_from_stylelist output = new Vx.Ui.Ui.Class_stylemap_from_stylelist();
       return output;
     }
@@ -12221,7 +12221,7 @@ public static class Ui {
 
   public class Class_stylesheet_readstate : Vx.Core.Class_base, Func_stylesheet_readstate {
 
-    public override Vx.Ui.Ui.Func_stylesheet_readstate vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_stylesheet_readstate output = new Vx.Ui.Ui.Class_stylesheet_readstate();
       return output;
     }
@@ -12314,7 +12314,7 @@ public static class Ui {
 
   public class Class_stylesheet_render : Vx.Core.Class_base, Func_stylesheet_render {
 
-    public override Vx.Ui.Ui.Func_stylesheet_render vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_stylesheet_render output = new Vx.Ui.Ui.Class_stylesheet_render();
       return output;
     }
@@ -12409,7 +12409,7 @@ public static class Ui {
 
   public class Class_ui_addlayout_from_ui : Vx.Core.Class_base, Func_ui_addlayout_from_ui {
 
-    public override Vx.Ui.Ui.Func_ui_addlayout_from_ui vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_ui_addlayout_from_ui output = new Vx.Ui.Ui.Class_ui_addlayout_from_ui();
       return output;
     }
@@ -12519,7 +12519,7 @@ public static class Ui {
 
   public class Class_ui_addlayout_from_ui_layoutengine : Vx.Core.Class_base, Func_ui_addlayout_from_ui_layoutengine {
 
-    public override Vx.Ui.Ui.Func_ui_addlayout_from_ui_layoutengine vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_ui_addlayout_from_ui_layoutengine output = new Vx.Ui.Ui.Class_ui_addlayout_from_ui_layoutengine();
       return output;
     }
@@ -12618,7 +12618,7 @@ public static class Ui {
 
   public class Class_ui_addlayout_from_ui_layoutmap_else : Vx.Core.Class_base, Func_ui_addlayout_from_ui_layoutmap_else {
 
-    public override Vx.Ui.Ui.Func_ui_addlayout_from_ui_layoutmap_else vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_ui_addlayout_from_ui_layoutmap_else output = new Vx.Ui.Ui.Class_ui_addlayout_from_ui_layoutmap_else();
       return output;
     }
@@ -12731,7 +12731,7 @@ public static class Ui {
 
   public class Class_ui_addlayout_from_ui_uiengine : Vx.Core.Class_base, Func_ui_addlayout_from_ui_uiengine {
 
-    public override Vx.Ui.Ui.Func_ui_addlayout_from_ui_uiengine vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_ui_addlayout_from_ui_uiengine output = new Vx.Ui.Ui.Class_ui_addlayout_from_ui_uiengine();
       return output;
     }
@@ -12827,7 +12827,7 @@ public static class Ui {
 
   public class Class_ui_child_from_ui_pos : Vx.Core.Class_base, Func_ui_child_from_ui_pos {
 
-    public override Vx.Ui.Ui.Func_ui_child_from_ui_pos vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_ui_child_from_ui_pos output = new Vx.Ui.Ui.Class_ui_child_from_ui_pos();
       return output;
     }
@@ -12924,7 +12924,7 @@ public static class Ui {
 
   public class Class_ui_child_from_ui_uid : Vx.Core.Class_base, Func_ui_child_from_ui_uid {
 
-    public override Vx.Ui.Ui.Func_ui_child_from_ui_uid vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_ui_child_from_ui_uid output = new Vx.Ui.Ui.Class_ui_child_from_ui_uid();
       return output;
     }
@@ -13020,7 +13020,7 @@ public static class Ui {
 
   public class Class_ui_from_from_event : Vx.Core.Class_base, Func_ui_from_from_event {
 
-    public override Vx.Ui.Ui.Func_ui_from_from_event vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_ui_from_from_event output = new Vx.Ui.Ui.Class_ui_from_from_event();
       return output;
     }
@@ -13126,7 +13126,7 @@ public static class Ui {
 
   public class Class_ui_layout : Vx.Core.Class_base, Func_ui_layout {
 
-    public override Vx.Ui.Ui.Func_ui_layout vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_ui_layout output = new Vx.Ui.Ui.Class_ui_layout();
       return output;
     }
@@ -13233,7 +13233,7 @@ public static class Ui {
 
   public class Class_ui_layout_from_fn_layout_ui_orig_parent : Vx.Core.Class_base, Func_ui_layout_from_fn_layout_ui_orig_parent {
 
-    public override Vx.Ui.Ui.Func_ui_layout_from_fn_layout_ui_orig_parent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_ui_layout_from_fn_layout_ui_orig_parent output = new Vx.Ui.Ui.Class_ui_layout_from_fn_layout_ui_orig_parent();
       return output;
     }
@@ -13328,7 +13328,7 @@ public static class Ui {
 
   public class Class_ui_layout_from_ui_orig_parent : Vx.Core.Class_base, Func_ui_layout_from_ui_orig_parent {
 
-    public override Vx.Ui.Ui.Func_ui_layout_from_ui_orig_parent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_ui_layout_from_ui_orig_parent output = new Vx.Ui.Ui.Class_ui_layout_from_ui_orig_parent();
       return output;
     }
@@ -13454,7 +13454,7 @@ public static class Ui {
 
   public class Class_ui_layout_from_ui_parent_selected : Vx.Core.Class_base, Func_ui_layout_from_ui_parent_selected {
 
-    public override Vx.Ui.Ui.Func_ui_layout_from_ui_parent_selected vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_ui_layout_from_ui_parent_selected output = new Vx.Ui.Ui.Class_ui_layout_from_ui_parent_selected();
       return output;
     }
@@ -13560,7 +13560,7 @@ public static class Ui {
 
   public class Class_ui_layout_from_ui_parent_visible : Vx.Core.Class_base, Func_ui_layout_from_ui_parent_visible {
 
-    public override Vx.Ui.Ui.Func_ui_layout_from_ui_parent_visible vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_ui_layout_from_ui_parent_visible output = new Vx.Ui.Ui.Class_ui_layout_from_ui_parent_visible();
       return output;
     }
@@ -13659,7 +13659,7 @@ public static class Ui {
 
   public class Class_ui_readstate_uiapp : Vx.Core.Class_base, Func_ui_readstate_uiapp {
 
-    public override Vx.Ui.Ui.Func_ui_readstate_uiapp vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_ui_readstate_uiapp output = new Vx.Ui.Ui.Class_ui_readstate_uiapp();
       return output;
     }
@@ -13747,7 +13747,7 @@ public static class Ui {
 
   public class Class_ui_readstate_from_uid : Vx.Core.Class_base, Func_ui_readstate_from_uid {
 
-    public override Vx.Ui.Ui.Func_ui_readstate_from_uid vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_ui_readstate_from_uid output = new Vx.Ui.Ui.Class_ui_readstate_from_uid();
       return output;
     }
@@ -13856,7 +13856,7 @@ public static class Ui {
 
   public class Class_ui_selected_from_ui : Vx.Core.Class_base, Func_ui_selected_from_ui {
 
-    public override Vx.Ui.Ui.Func_ui_selected_from_ui vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_ui_selected_from_ui output = new Vx.Ui.Ui.Class_ui_selected_from_ui();
       return output;
     }
@@ -13964,7 +13964,7 @@ public static class Ui {
 
   public class Class_ui_visible_from_ui : Vx.Core.Class_base, Func_ui_visible_from_ui {
 
-    public override Vx.Ui.Ui.Func_ui_visible_from_ui vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_ui_visible_from_ui output = new Vx.Ui.Ui.Class_ui_visible_from_ui();
       return output;
     }
@@ -14073,7 +14073,7 @@ public static class Ui {
 
   public class Class_ui_write_from_ui_child : Vx.Core.Class_base, Func_ui_write_from_ui_child {
 
-    public override Vx.Ui.Ui.Func_ui_write_from_ui_child vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_ui_write_from_ui_child output = new Vx.Ui.Ui.Class_ui_write_from_ui_child();
       return output;
     }
@@ -14172,7 +14172,7 @@ public static class Ui {
 
   public class Class_ui_write_from_ui_childmap : Vx.Core.Class_base, Func_ui_write_from_ui_childmap {
 
-    public override Vx.Ui.Ui.Func_ui_write_from_ui_childmap vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_ui_write_from_ui_childmap output = new Vx.Ui.Ui.Class_ui_write_from_ui_childmap();
       return output;
     }
@@ -14277,7 +14277,7 @@ public static class Ui {
 
   public class Class_ui_write_from_ui_visible : Vx.Core.Class_base, Func_ui_write_from_ui_visible {
 
-    public override Vx.Ui.Ui.Func_ui_write_from_ui_visible vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_ui_write_from_ui_visible output = new Vx.Ui.Ui.Class_ui_write_from_ui_visible();
       return output;
     }
@@ -14452,7 +14452,7 @@ public static class Ui {
 
   public class Class_ui_from_layout_ui_orig_parent : Vx.Core.Class_base, Func_ui_from_layout_ui_orig_parent {
 
-    public override Vx.Ui.Ui.Func_ui_from_layout_ui_orig_parent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_ui_from_layout_ui_orig_parent output = new Vx.Ui.Ui.Class_ui_from_layout_ui_orig_parent();
       return output;
     }
@@ -14555,7 +14555,7 @@ public static class Ui {
 
   public class Class_ui_from_ui_find : Vx.Core.Class_base, Func_ui_from_ui_find {
 
-    public override Vx.Ui.Ui.Func_ui_from_ui_find vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_ui_from_ui_find output = new Vx.Ui.Ui.Class_ui_from_ui_find();
       return output;
     }
@@ -14810,7 +14810,7 @@ public static class Ui {
 
   public class Class_ui_from_ui_selected : Vx.Core.Class_base, Func_ui_from_ui_selected {
 
-    public override Vx.Ui.Ui.Func_ui_from_ui_selected vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_ui_from_ui_selected output = new Vx.Ui.Ui.Class_ui_from_ui_selected();
       return output;
     }
@@ -14987,7 +14987,7 @@ public static class Ui {
 
   public class Class_uid_selected_from_ui : Vx.Core.Class_base, Func_uid_selected_from_ui {
 
-    public override Vx.Ui.Ui.Func_uid_selected_from_ui vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_uid_selected_from_ui output = new Vx.Ui.Ui.Class_uid_selected_from_ui();
       return output;
     }
@@ -15094,7 +15094,7 @@ public static class Ui {
 
   public class Class_uiengine_readstate : Vx.Core.Class_base, Func_uiengine_readstate {
 
-    public override Vx.Ui.Ui.Func_uiengine_readstate vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_uiengine_readstate output = new Vx.Ui.Ui.Class_uiengine_readstate();
       return output;
     }
@@ -15182,7 +15182,7 @@ public static class Ui {
 
   public class Class_uiengine_render : Vx.Core.Class_base, Func_uiengine_render {
 
-    public override Vx.Ui.Ui.Func_uiengine_render vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_uiengine_render output = new Vx.Ui.Ui.Class_uiengine_render();
       return output;
     }
@@ -15316,7 +15316,7 @@ public static class Ui {
 
   public class Class_uilist_selected_from_ui : Vx.Core.Class_base, Func_uilist_selected_from_ui {
 
-    public override Vx.Ui.Ui.Func_uilist_selected_from_ui vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_uilist_selected_from_ui output = new Vx.Ui.Ui.Class_uilist_selected_from_ui();
       return output;
     }
@@ -15434,7 +15434,7 @@ public static class Ui {
 
   public class Class_uilist_visible_from_ui : Vx.Core.Class_base, Func_uilist_visible_from_ui {
 
-    public override Vx.Ui.Ui.Func_uilist_visible_from_ui vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_uilist_visible_from_ui output = new Vx.Ui.Ui.Class_uilist_visible_from_ui();
       return output;
     }
@@ -15553,7 +15553,7 @@ public static class Ui {
 
   public class Class_uilist_from_uimap : Vx.Core.Class_base, Func_uilist_from_uimap {
 
-    public override Vx.Ui.Ui.Func_uilist_from_uimap vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_uilist_from_uimap output = new Vx.Ui.Ui.Class_uilist_from_uimap();
       return output;
     }
@@ -15660,7 +15660,7 @@ public static class Ui {
 
   public class Class_uimap_addlayout_from_uimap_layoutmap_else : Vx.Core.Class_base, Func_uimap_addlayout_from_uimap_layoutmap_else {
 
-    public override Vx.Ui.Ui.Func_uimap_addlayout_from_uimap_layoutmap_else vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_uimap_addlayout_from_uimap_layoutmap_else output = new Vx.Ui.Ui.Class_uimap_addlayout_from_uimap_layoutmap_else();
       return output;
     }
@@ -15760,7 +15760,7 @@ public static class Ui {
 
   public class Class_uimap_layout_from_uimap_parent : Vx.Core.Class_base, Func_uimap_layout_from_uimap_parent {
 
-    public override Vx.Ui.Ui.Func_uimap_layout_from_uimap_parent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_uimap_layout_from_uimap_parent output = new Vx.Ui.Ui.Class_uimap_layout_from_uimap_parent();
       return output;
     }
@@ -15859,7 +15859,7 @@ public static class Ui {
 
   public class Class_uimap_from_uilist : Vx.Core.Class_base, Func_uimap_from_uilist {
 
-    public override Vx.Ui.Ui.Func_uimap_from_uilist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_uimap_from_uilist output = new Vx.Ui.Ui.Class_uimap_from_uilist();
       return output;
     }
@@ -15964,7 +15964,7 @@ public static class Ui {
 
   public class Class_uimap_from_uimap_data : Vx.Core.Class_base, Func_uimap_from_uimap_data {
 
-    public override Vx.Ui.Ui.Func_uimap_from_uimap_data vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Ui.Ui.Class_uimap_from_uimap_data output = new Vx.Ui.Ui.Class_uimap_from_uimap_data();
       return output;
     }

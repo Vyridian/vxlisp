@@ -71,7 +71,7 @@ public static class State {
       return output;
     }
 
-    public override Vx.State.Type_valuemap vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.State.Type_valuemap output = Vx.Core.vx_copy(Vx.State.e_valuemap, vals);
       return output;
     }
@@ -196,7 +196,7 @@ public static class State {
 
   public class Class_any_readstate_from_mapname_name : Vx.Core.Class_base, Func_any_readstate_from_mapname_name {
 
-    public override Vx.State.Func_any_readstate_from_mapname_name vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.State.Class_any_readstate_from_mapname_name output = new Vx.State.Class_any_readstate_from_mapname_name();
       return output;
     }
@@ -297,7 +297,7 @@ public static class State {
 
   public class Class_any_readstate_from_name : Vx.Core.Class_base, Func_any_readstate_from_name {
 
-    public override Vx.State.Func_any_readstate_from_name vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.State.Class_any_readstate_from_name output = new Vx.State.Class_any_readstate_from_name();
       return output;
     }
@@ -401,7 +401,7 @@ public static class State {
 
   public class Class_boolean_removestate_from_name : Vx.Core.Class_base, Func_boolean_removestate_from_name {
 
-    public override Vx.State.Func_boolean_removestate_from_name vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.State.Class_boolean_removestate_from_name output = new Vx.State.Class_boolean_removestate_from_name();
       return output;
     }
@@ -515,7 +515,7 @@ public static class State {
 
   public class Class_boolean_writestate_from_mapname_name_value : Vx.Core.Class_base, Func_boolean_writestate_from_mapname_name_value {
 
-    public override Vx.State.Func_boolean_writestate_from_mapname_name_value vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.State.Class_boolean_writestate_from_mapname_name_value output = new Vx.State.Class_boolean_writestate_from_mapname_name_value();
       return output;
     }
@@ -668,7 +668,7 @@ public static class State {
 
   public class Class_boolean_writestate_from_name_value : Vx.Core.Class_base, Func_boolean_writestate_from_name_value {
 
-    public override Vx.State.Func_boolean_writestate_from_name_value vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.State.Class_boolean_writestate_from_name_value output = new Vx.State.Class_boolean_writestate_from_name_value();
       return output;
     }
@@ -777,7 +777,7 @@ public static class State {
 
   public class Class_boolean_writestate_from_statelistener : Vx.Core.Class_base, Func_boolean_writestate_from_statelistener {
 
-    public override Vx.State.Func_boolean_writestate_from_statelistener vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.State.Class_boolean_writestate_from_statelistener output = new Vx.State.Class_boolean_writestate_from_statelistener();
       return output;
     }
@@ -888,7 +888,7 @@ public static class State {
 
   public class Class_change : Vx.Core.Class_base, Func_change {
 
-    public override Vx.State.Func_change vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.State.Class_change output = new Vx.State.Class_change();
       return output;
     }
@@ -982,7 +982,7 @@ public static class State {
 
   public class Class_register : Vx.Core.Class_base, Func_register {
 
-    public override Vx.State.Func_register vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.State.Class_register output = new Vx.State.Class_register();
       return output;
     }
@@ -1076,7 +1076,7 @@ public static class State {
 
   public class Class_state_from_context : Vx.Core.Class_base, Func_state_from_context {
 
-    public override Vx.State.Func_state_from_context vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.State.Class_state_from_context output = new Vx.State.Class_state_from_context();
       return output;
     }
@@ -1160,7 +1160,7 @@ public static class State {
 
   public class Class_statelistener_readstate_from_name : Vx.Core.Class_base, Func_statelistener_readstate_from_name {
 
-    public override Vx.State.Func_statelistener_readstate_from_name vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.State.Class_statelistener_readstate_from_name output = new Vx.State.Class_statelistener_readstate_from_name();
       return output;
     }
@@ -1269,7 +1269,7 @@ public static class State {
 
   public class Class_statelistenermap_readstate : Vx.Core.Class_base, Func_statelistenermap_readstate {
 
-    public override Vx.State.Func_statelistenermap_readstate vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.State.Class_statelistenermap_readstate output = new Vx.State.Class_statelistenermap_readstate();
       return output;
     }
@@ -1362,7 +1362,7 @@ public static class State {
 
   public class Class_value_readstate_from_name : Vx.Core.Class_base, Func_value_readstate_from_name {
 
-    public override Vx.State.Func_value_readstate_from_name vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.State.Class_value_readstate_from_name output = new Vx.State.Class_value_readstate_from_name();
       return output;
     }
@@ -1469,7 +1469,7 @@ public static class State {
 
   public class Class_valuemap_readstate_from_mapname : Vx.Core.Class_base, Func_valuemap_readstate_from_mapname {
 
-    public override Vx.State.Func_valuemap_readstate_from_mapname vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.State.Class_valuemap_readstate_from_mapname output = new Vx.State.Class_valuemap_readstate_from_mapname();
       return output;
     }

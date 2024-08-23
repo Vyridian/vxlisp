@@ -212,7 +212,7 @@ public static class Collection {
 
   public class Class_any_from_for_until_loop : Vx.Core.Class_base, Func_any_from_for_until_loop {
 
-    public override Vx.Collection.Func_any_from_for_until_loop vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Collection.Class_any_from_for_until_loop output = new Vx.Collection.Class_any_from_for_until_loop();
       return output;
     }
@@ -316,7 +316,7 @@ public static class Collection {
 
   public class Class_any_from_for_until_loop_max : Vx.Core.Class_base, Func_any_from_for_until_loop_max {
 
-    public override Vx.Collection.Func_any_from_for_until_loop_max vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Collection.Class_any_from_for_until_loop_max output = new Vx.Collection.Class_any_from_for_until_loop_max();
       return output;
     }
@@ -406,7 +406,7 @@ public static class Collection {
 
   public class Class_any_from_for_while_loop : Vx.Core.Class_base, Func_any_from_for_while_loop {
 
-    public override Vx.Collection.Func_any_from_for_while_loop vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Collection.Class_any_from_for_while_loop output = new Vx.Collection.Class_any_from_for_while_loop();
       return output;
     }
@@ -511,7 +511,7 @@ public static class Collection {
 
   public class Class_any_from_for_while_loop_max : Vx.Core.Class_base, Func_any_from_for_while_loop_max {
 
-    public override Vx.Collection.Func_any_from_for_while_loop_max vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Collection.Class_any_from_for_while_loop_max output = new Vx.Collection.Class_any_from_for_while_loop_max();
       return output;
     }
@@ -600,7 +600,7 @@ public static class Collection {
 
   public class Class_any_from_map_pos : Vx.Core.Class_base, Func_any_from_map_pos {
 
-    public override Vx.Collection.Func_any_from_map_pos vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Collection.Class_any_from_map_pos output = new Vx.Collection.Class_any_from_map_pos();
       return output;
     }
@@ -705,7 +705,7 @@ public static class Collection {
 
   public class Class_boolean_write_from_map_removekey : Vx.Core.Class_base, Func_boolean_write_from_map_removekey {
 
-    public override Vx.Collection.Func_boolean_write_from_map_removekey vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Collection.Class_boolean_write_from_map_removekey output = new Vx.Collection.Class_boolean_write_from_map_removekey();
       return output;
     }
@@ -797,7 +797,7 @@ public static class Collection {
 
   public class Class_boolean_write_from_map_removekeys : Vx.Core.Class_base, Func_boolean_write_from_map_removekeys {
 
-    public override Vx.Collection.Func_boolean_write_from_map_removekeys vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Collection.Class_boolean_write_from_map_removekeys output = new Vx.Collection.Class_boolean_write_from_map_removekeys();
       return output;
     }
@@ -903,7 +903,7 @@ public static class Collection {
 
   public class Class_int_from_map_key : Vx.Core.Class_base, Func_int_from_map_key {
 
-    public override Vx.Collection.Func_int_from_map_key vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Collection.Class_int_from_map_key output = new Vx.Collection.Class_int_from_map_key();
       return output;
     }
@@ -1001,7 +1001,7 @@ public static class Collection {
 
   public class Class_int_from_stringlist_find : Vx.Core.Class_base, Func_int_from_stringlist_find {
 
-    public override Vx.Collection.Func_int_from_stringlist_find vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Collection.Class_int_from_stringlist_find output = new Vx.Collection.Class_int_from_stringlist_find();
       return output;
     }
@@ -1122,7 +1122,7 @@ public static class Collection {
 
   public class Class_is_list : Vx.Core.Class_base, Func_is_list {
 
-    public override Vx.Collection.Func_is_list vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Collection.Class_is_list output = new Vx.Collection.Class_is_list();
       return output;
     }
@@ -1223,7 +1223,7 @@ public static class Collection {
 
   public class Class_is_map : Vx.Core.Class_base, Func_is_map {
 
-    public override Vx.Collection.Func_is_map vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Collection.Class_is_map output = new Vx.Collection.Class_is_map();
       return output;
     }
@@ -1337,7 +1337,7 @@ public static class Collection {
 
   public class Class_list_from_for_end_loop : Vx.Core.Class_base, Func_list_from_for_end_loop {
 
-    public override Vx.Collection.Func_list_from_for_end_loop vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Collection.Class_list_from_for_end_loop output = new Vx.Collection.Class_list_from_for_end_loop();
       return output;
     }
@@ -1426,7 +1426,7 @@ public static class Collection {
 
   public class Class_list_from_for_while_loop : Vx.Core.Class_base, Func_list_from_for_while_loop {
 
-    public override Vx.Collection.Func_list_from_for_while_loop vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Collection.Class_list_from_for_while_loop output = new Vx.Collection.Class_list_from_for_while_loop();
       return output;
     }
@@ -1528,7 +1528,7 @@ public static class Collection {
 
   public class Class_list_from_for_while_loop_max : Vx.Core.Class_base, Func_list_from_for_while_loop_max {
 
-    public override Vx.Collection.Func_list_from_for_while_loop_max vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Collection.Class_list_from_for_while_loop_max output = new Vx.Collection.Class_list_from_for_while_loop_max();
       return output;
     }
@@ -1617,7 +1617,7 @@ public static class Collection {
 
   public class Class_list_from_list_end : Vx.Core.Class_base, Func_list_from_list_end {
 
-    public override Vx.Collection.Func_list_from_list_end vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Collection.Class_list_from_list_end output = new Vx.Collection.Class_list_from_list_end();
       return output;
     }
@@ -1709,7 +1709,7 @@ public static class Collection {
 
   public class Class_list_from_list_filter : Vx.Core.Class_base, Func_list_from_list_filter {
 
-    public override Vx.Collection.Func_list_from_list_filter vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Collection.Class_list_from_list_filter output = new Vx.Collection.Class_list_from_list_filter();
       return output;
     }
@@ -1796,7 +1796,7 @@ public static class Collection {
 
   public class Class_list_from_list_filtertypes : Vx.Core.Class_base, Func_list_from_list_filtertypes {
 
-    public override Vx.Collection.Func_list_from_list_filtertypes vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Collection.Class_list_from_list_filtertypes output = new Vx.Collection.Class_list_from_list_filtertypes();
       return output;
     }
@@ -1898,7 +1898,7 @@ public static class Collection {
 
   public class Class_list_from_list_start : Vx.Core.Class_base, Func_list_from_list_start {
 
-    public override Vx.Collection.Func_list_from_list_start vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Collection.Class_list_from_list_start output = new Vx.Collection.Class_list_from_list_start();
       return output;
     }
@@ -1993,7 +1993,7 @@ public static class Collection {
 
   public class Class_list_from_list_start_end : Vx.Core.Class_base, Func_list_from_list_start_end {
 
-    public override Vx.Collection.Func_list_from_list_start_end vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Collection.Class_list_from_list_start_end output = new Vx.Collection.Class_list_from_list_start_end();
       return output;
     }
@@ -2081,7 +2081,7 @@ public static class Collection {
 
   public class Class_map_from_map_end : Vx.Core.Class_base, Func_map_from_map_end {
 
-    public override Vx.Collection.Func_map_from_map_end vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Collection.Class_map_from_map_end output = new Vx.Collection.Class_map_from_map_end();
       return output;
     }
@@ -2173,7 +2173,7 @@ public static class Collection {
 
   public class Class_map_from_map_keys : Vx.Core.Class_base, Func_map_from_map_keys {
 
-    public override Vx.Collection.Func_map_from_map_keys vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Collection.Class_map_from_map_keys output = new Vx.Collection.Class_map_from_map_keys();
       return output;
     }
@@ -2260,7 +2260,7 @@ public static class Collection {
 
   public class Class_map_from_map_start : Vx.Core.Class_base, Func_map_from_map_start {
 
-    public override Vx.Collection.Func_map_from_map_start vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Collection.Class_map_from_map_start output = new Vx.Collection.Class_map_from_map_start();
       return output;
     }
@@ -2355,7 +2355,7 @@ public static class Collection {
 
   public class Class_map_from_map_start_end : Vx.Core.Class_base, Func_map_from_map_start_end {
 
-    public override Vx.Collection.Func_map_from_map_start_end vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Collection.Class_map_from_map_start_end output = new Vx.Collection.Class_map_from_map_start_end();
       return output;
     }

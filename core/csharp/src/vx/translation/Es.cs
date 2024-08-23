@@ -14,7 +14,7 @@ public static class Es {
 
   public class Class_translation_es : Vx.Core.Class_base, Func_translation_es {
 
-    public override Vx.Translation.Es.Func_translation_es vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Translation.Es.Class_translation_es output = new Vx.Translation.Es.Class_translation_es();
       return output;
     }
@@ -105,7 +105,7 @@ public static class Es {
 
   public class Class_words : Vx.Core.Class_base, Func_words {
 
-    public override Vx.Translation.Es.Func_words vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Translation.Es.Class_words output = new Vx.Translation.Es.Class_words();
       return output;
     }

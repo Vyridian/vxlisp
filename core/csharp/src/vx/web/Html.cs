@@ -53,7 +53,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_body vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_body output = Vx.Core.vx_copy(Vx.Web.Html.e_body, vals);
       return output;
     }
@@ -320,7 +320,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_details vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_details output = Vx.Core.vx_copy(Vx.Web.Html.e_details, vals);
       return output;
     }
@@ -693,7 +693,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_div vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_div output = Vx.Core.vx_copy(Vx.Web.Html.e_div, vals);
       return output;
     }
@@ -970,7 +970,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_divchild vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_divchild output = Vx.Core.vx_copy(Vx.Web.Html.e_divchild, vals);
       return output;
     }
@@ -1069,7 +1069,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_divchildlist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_divchildlist output = Vx.Core.vx_copy(Vx.Web.Html.e_divchildlist, vals);
       return output;
     }
@@ -1201,7 +1201,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_divlist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_divlist output = Vx.Core.vx_copy(Vx.Web.Html.e_divlist, vals);
       return output;
     }
@@ -1328,7 +1328,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_footer vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_footer output = Vx.Core.vx_copy(Vx.Web.Html.e_footer, vals);
       return output;
     }
@@ -1580,7 +1580,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_h1 vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_h1 output = Vx.Core.vx_copy(Vx.Web.Html.e_h1, vals);
       return output;
     }
@@ -1943,7 +1943,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_h2 vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_h2 output = Vx.Core.vx_copy(Vx.Web.Html.e_h2, vals);
       return output;
     }
@@ -2306,7 +2306,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_h3 vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_h3 output = Vx.Core.vx_copy(Vx.Web.Html.e_h3, vals);
       return output;
     }
@@ -2599,7 +2599,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_head vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_head output = Vx.Core.vx_copy(Vx.Web.Html.e_head, vals);
       return output;
     }
@@ -2763,7 +2763,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_headchild vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_headchild output = Vx.Core.vx_copy(Vx.Web.Html.e_headchild, vals);
       return output;
     }
@@ -2862,7 +2862,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_headchildlist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_headchildlist output = Vx.Core.vx_copy(Vx.Web.Html.e_headchildlist, vals);
       return output;
     }
@@ -3034,7 +3034,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_html vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_html output = Vx.Core.vx_copy(Vx.Web.Html.e_html, vals);
       return output;
     }
@@ -3341,7 +3341,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_img vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_img output = Vx.Core.vx_copy(Vx.Web.Html.e_img, vals);
       return output;
     }
@@ -3734,7 +3734,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_meta vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_meta output = Vx.Core.vx_copy(Vx.Web.Html.e_meta, vals);
       return output;
     }
@@ -4128,7 +4128,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_node vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_node output = Vx.Core.vx_copy(Vx.Web.Html.e_node, vals);
       return output;
     }
@@ -4392,7 +4392,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_nodelist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_nodelist output = Vx.Core.vx_copy(Vx.Web.Html.e_nodelist, vals);
       return output;
     }
@@ -4589,7 +4589,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_p vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_p output = Vx.Core.vx_copy(Vx.Web.Html.e_p, vals);
       return output;
     }
@@ -4925,7 +4925,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_propmap vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_propmap output = Vx.Core.vx_copy(Vx.Web.Html.e_propmap, vals);
       return output;
     }
@@ -5106,7 +5106,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_style vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_style output = Vx.Core.vx_copy(Vx.Web.Html.e_style, vals);
       return output;
     }
@@ -5326,7 +5326,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_stylelist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_stylelist output = Vx.Core.vx_copy(Vx.Web.Html.e_stylelist, vals);
       return output;
     }
@@ -5496,7 +5496,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_stylemap vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_stylemap output = Vx.Core.vx_copy(Vx.Web.Html.e_stylemap, vals);
       return output;
     }
@@ -5747,7 +5747,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_stylesheet vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_stylesheet output = Vx.Core.vx_copy(Vx.Web.Html.e_stylesheet, vals);
       return output;
     }
@@ -6160,7 +6160,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_table vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_table output = Vx.Core.vx_copy(Vx.Web.Html.e_table, vals);
       return output;
     }
@@ -6533,7 +6533,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_tbody vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_tbody output = Vx.Core.vx_copy(Vx.Web.Html.e_tbody, vals);
       return output;
     }
@@ -6898,7 +6898,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_td vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_td output = Vx.Core.vx_copy(Vx.Web.Html.e_td, vals);
       return output;
     }
@@ -7198,7 +7198,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_tdlist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_tdlist output = Vx.Core.vx_copy(Vx.Web.Html.e_tdlist, vals);
       return output;
     }
@@ -7395,7 +7395,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_thead vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_thead output = Vx.Core.vx_copy(Vx.Web.Html.e_thead, vals);
       return output;
     }
@@ -7760,7 +7760,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_title vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_title output = Vx.Core.vx_copy(Vx.Web.Html.e_title, vals);
       return output;
     }
@@ -8114,7 +8114,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_tr vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_tr output = Vx.Core.vx_copy(Vx.Web.Html.e_tr, vals);
       return output;
     }
@@ -8414,7 +8414,7 @@ public static class Html {
       return output;
     }
 
-    public override Vx.Web.Html.Type_trlist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Type_trlist output = Vx.Core.vx_copy(Vx.Web.Html.e_trlist, vals);
       return output;
     }
@@ -8514,7 +8514,7 @@ public static class Html {
 
   public class Class_htmlstring_from_string : Vx.Core.Class_base, Func_htmlstring_from_string {
 
-    public override Vx.Web.Html.Func_htmlstring_from_string vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_htmlstring_from_string output = new Vx.Web.Html.Class_htmlstring_from_string();
       return output;
     }
@@ -8609,7 +8609,7 @@ public static class Html {
 
   public class Class_string_indent : Vx.Core.Class_base, Func_string_indent {
 
-    public override Vx.Web.Html.Func_string_indent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_indent output = new Vx.Web.Html.Class_string_indent();
       return output;
     }
@@ -8709,7 +8709,7 @@ public static class Html {
 
   public class Class_string_from_body_indent : Vx.Core.Class_base, Func_string_from_body_indent {
 
-    public override Vx.Web.Html.Func_string_from_body_indent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_body_indent output = new Vx.Web.Html.Class_string_from_body_indent();
       return output;
     }
@@ -8807,7 +8807,7 @@ public static class Html {
 
   public class Class_string_from_details_indent : Vx.Core.Class_base, Func_string_from_details_indent {
 
-    public override Vx.Web.Html.Func_string_from_details_indent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_details_indent output = new Vx.Web.Html.Class_string_from_details_indent();
       return output;
     }
@@ -8933,7 +8933,7 @@ public static class Html {
 
   public class Class_string_from_div_indent : Vx.Core.Class_base, Func_string_from_div_indent {
 
-    public override Vx.Web.Html.Func_string_from_div_indent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_div_indent output = new Vx.Web.Html.Class_string_from_div_indent();
       return output;
     }
@@ -9050,7 +9050,7 @@ public static class Html {
 
   public class Class_string_from_footer_indent : Vx.Core.Class_base, Func_string_from_footer_indent {
 
-    public override Vx.Web.Html.Func_string_from_footer_indent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_footer_indent output = new Vx.Web.Html.Class_string_from_footer_indent();
       return output;
     }
@@ -9148,7 +9148,7 @@ public static class Html {
 
   public class Class_string_from_h1_indent : Vx.Core.Class_base, Func_string_from_h1_indent {
 
-    public override Vx.Web.Html.Func_string_from_h1_indent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_h1_indent output = new Vx.Web.Html.Class_string_from_h1_indent();
       return output;
     }
@@ -9259,7 +9259,7 @@ public static class Html {
 
   public class Class_string_from_h2_indent : Vx.Core.Class_base, Func_string_from_h2_indent {
 
-    public override Vx.Web.Html.Func_string_from_h2_indent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_h2_indent output = new Vx.Web.Html.Class_string_from_h2_indent();
       return output;
     }
@@ -9370,7 +9370,7 @@ public static class Html {
 
   public class Class_string_from_h3_indent : Vx.Core.Class_base, Func_string_from_h3_indent {
 
-    public override Vx.Web.Html.Func_string_from_h3_indent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_h3_indent output = new Vx.Web.Html.Class_string_from_h3_indent();
       return output;
     }
@@ -9481,7 +9481,7 @@ public static class Html {
 
   public class Class_string_from_head_indent : Vx.Core.Class_base, Func_string_from_head_indent {
 
-    public override Vx.Web.Html.Func_string_from_head_indent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_head_indent output = new Vx.Web.Html.Class_string_from_head_indent();
       return output;
     }
@@ -9578,7 +9578,7 @@ public static class Html {
 
   public class Class_string_from_html : Vx.Core.Class_base, Func_string_from_html {
 
-    public override Vx.Web.Html.Func_string_from_html vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_html output = new Vx.Web.Html.Class_string_from_html();
       return output;
     }
@@ -9715,7 +9715,7 @@ public static class Html {
 
   public class Class_string_from_img_indent : Vx.Core.Class_base, Func_string_from_img_indent {
 
-    public override Vx.Web.Html.Func_string_from_img_indent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_img_indent output = new Vx.Web.Html.Class_string_from_img_indent();
       return output;
     }
@@ -9836,7 +9836,7 @@ public static class Html {
 
   public class Class_string_from_indent : Vx.Core.Class_base, Func_string_from_indent {
 
-    public override Vx.Web.Html.Func_string_from_indent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_indent output = new Vx.Web.Html.Class_string_from_indent();
       return output;
     }
@@ -9950,7 +9950,7 @@ public static class Html {
 
   public class Class_string_from_meta_indent : Vx.Core.Class_base, Func_string_from_meta_indent {
 
-    public override Vx.Web.Html.Func_string_from_meta_indent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_meta_indent output = new Vx.Web.Html.Class_string_from_meta_indent();
       return output;
     }
@@ -10125,7 +10125,7 @@ public static class Html {
 
   public class Class_string_from_node_indent : Vx.Core.Class_base, Func_string_from_node_indent {
 
-    public override Vx.Web.Html.Func_string_from_node_indent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_node_indent output = new Vx.Web.Html.Class_string_from_node_indent();
       return output;
     }
@@ -10453,7 +10453,7 @@ public static class Html {
 
   public class Class_string_from_nodelist_indent : Vx.Core.Class_base, Func_string_from_nodelist_indent {
 
-    public override Vx.Web.Html.Func_string_from_nodelist_indent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_nodelist_indent output = new Vx.Web.Html.Class_string_from_nodelist_indent();
       return output;
     }
@@ -10562,7 +10562,7 @@ public static class Html {
 
   public class Class_string_from_nodelist_tag_prop_indent : Vx.Core.Class_base, Func_string_from_nodelist_tag_prop_indent {
 
-    public override Vx.Web.Html.Func_string_from_nodelist_tag_prop_indent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_nodelist_tag_prop_indent output = new Vx.Web.Html.Class_string_from_nodelist_tag_prop_indent();
       return output;
     }
@@ -10716,7 +10716,7 @@ public static class Html {
 
   public class Class_string_from_p_indent : Vx.Core.Class_base, Func_string_from_p_indent {
 
-    public override Vx.Web.Html.Func_string_from_p_indent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_p_indent output = new Vx.Web.Html.Class_string_from_p_indent();
       return output;
     }
@@ -10838,7 +10838,7 @@ public static class Html {
 
   public class Class_string_from_propname_val : Vx.Core.Class_base, Func_string_from_propname_val {
 
-    public override Vx.Web.Html.Func_string_from_propname_val vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_propname_val output = new Vx.Web.Html.Class_string_from_propname_val();
       return output;
     }
@@ -10940,7 +10940,7 @@ public static class Html {
 
   public class Class_string_from_propstyle : Vx.Core.Class_base, Func_string_from_propstyle {
 
-    public override Vx.Web.Html.Func_string_from_propstyle vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_propstyle output = new Vx.Web.Html.Class_string_from_propstyle();
       return output;
     }
@@ -11066,7 +11066,7 @@ public static class Html {
 
   public class Class_string_from_propstyle_stylelist : Vx.Core.Class_base, Func_string_from_propstyle_stylelist {
 
-    public override Vx.Web.Html.Func_string_from_propstyle_stylelist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_propstyle_stylelist output = new Vx.Web.Html.Class_string_from_propstyle_stylelist();
       return output;
     }
@@ -11184,7 +11184,7 @@ public static class Html {
 
   public class Class_string_from_propstylelist : Vx.Core.Class_base, Func_string_from_propstylelist {
 
-    public override Vx.Web.Html.Func_string_from_propstylelist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_propstylelist output = new Vx.Web.Html.Class_string_from_propstylelist();
       return output;
     }
@@ -11322,7 +11322,7 @@ public static class Html {
 
   public class Class_string_from_propstyleunique : Vx.Core.Class_base, Func_string_from_propstyleunique {
 
-    public override Vx.Web.Html.Func_string_from_propstyleunique vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_propstyleunique output = new Vx.Web.Html.Class_string_from_propstyleunique();
       return output;
     }
@@ -11473,7 +11473,7 @@ public static class Html {
 
   public class Class_string_from_style_indent : Vx.Core.Class_base, Func_string_from_style_indent {
 
-    public override Vx.Web.Html.Func_string_from_style_indent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_style_indent output = new Vx.Web.Html.Class_string_from_style_indent();
       return output;
     }
@@ -11594,7 +11594,7 @@ public static class Html {
 
   public class Class_string_from_stylelist : Vx.Core.Class_base, Func_string_from_stylelist {
 
-    public override Vx.Web.Html.Func_string_from_stylelist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_stylelist output = new Vx.Web.Html.Class_string_from_stylelist();
       return output;
     }
@@ -11712,7 +11712,7 @@ public static class Html {
 
   public class Class_string_from_stylelist_indent : Vx.Core.Class_base, Func_string_from_stylelist_indent {
 
-    public override Vx.Web.Html.Func_string_from_stylelist_indent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_stylelist_indent output = new Vx.Web.Html.Class_string_from_stylelist_indent();
       return output;
     }
@@ -11819,7 +11819,7 @@ public static class Html {
 
   public class Class_string_from_stylepropmap_indent : Vx.Core.Class_base, Func_string_from_stylepropmap_indent {
 
-    public override Vx.Web.Html.Func_string_from_stylepropmap_indent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_stylepropmap_indent output = new Vx.Web.Html.Class_string_from_stylepropmap_indent();
       return output;
     }
@@ -11937,7 +11937,7 @@ public static class Html {
 
   public class Class_string_from_stylesheet_indent : Vx.Core.Class_base, Func_string_from_stylesheet_indent {
 
-    public override Vx.Web.Html.Func_string_from_stylesheet_indent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_stylesheet_indent output = new Vx.Web.Html.Class_string_from_stylesheet_indent();
       return output;
     }
@@ -12056,7 +12056,7 @@ public static class Html {
 
   public class Class_string_from_table_indent : Vx.Core.Class_base, Func_string_from_table_indent {
 
-    public override Vx.Web.Html.Func_string_from_table_indent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_table_indent output = new Vx.Web.Html.Class_string_from_table_indent();
       return output;
     }
@@ -12182,7 +12182,7 @@ public static class Html {
 
   public class Class_string_from_tbody_indent : Vx.Core.Class_base, Func_string_from_tbody_indent {
 
-    public override Vx.Web.Html.Func_string_from_tbody_indent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_tbody_indent output = new Vx.Web.Html.Class_string_from_tbody_indent();
       return output;
     }
@@ -12280,7 +12280,7 @@ public static class Html {
 
   public class Class_string_from_td_indent : Vx.Core.Class_base, Func_string_from_td_indent {
 
-    public override Vx.Web.Html.Func_string_from_td_indent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_td_indent output = new Vx.Web.Html.Class_string_from_td_indent();
       return output;
     }
@@ -12378,7 +12378,7 @@ public static class Html {
 
   public class Class_string_from_thead_indent : Vx.Core.Class_base, Func_string_from_thead_indent {
 
-    public override Vx.Web.Html.Func_string_from_thead_indent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_thead_indent output = new Vx.Web.Html.Class_string_from_thead_indent();
       return output;
     }
@@ -12476,7 +12476,7 @@ public static class Html {
 
   public class Class_string_from_title_indent : Vx.Core.Class_base, Func_string_from_title_indent {
 
-    public override Vx.Web.Html.Func_string_from_title_indent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_title_indent output = new Vx.Web.Html.Class_string_from_title_indent();
       return output;
     }
@@ -12581,7 +12581,7 @@ public static class Html {
 
   public class Class_string_from_tr_indent : Vx.Core.Class_base, Func_string_from_tr_indent {
 
-    public override Vx.Web.Html.Func_string_from_tr_indent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_tr_indent output = new Vx.Web.Html.Class_string_from_tr_indent();
       return output;
     }
@@ -12678,7 +12678,7 @@ public static class Html {
 
   public class Class_string_from_uri : Vx.Core.Class_base, Func_string_from_uri {
 
-    public override Vx.Web.Html.Func_string_from_uri vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_string_from_uri output = new Vx.Web.Html.Class_string_from_uri();
       return output;
     }
@@ -12774,7 +12774,7 @@ public static class Html {
 
   public class Class_style_from_stylesheet_name : Vx.Core.Class_base, Func_style_from_stylesheet_name {
 
-    public override Vx.Web.Html.Func_style_from_stylesheet_name vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_style_from_stylesheet_name output = new Vx.Web.Html.Class_style_from_stylesheet_name();
       return output;
     }
@@ -12865,7 +12865,7 @@ public static class Html {
 
   public class Class_stylemap_from_stylelist : Vx.Core.Class_base, Func_stylemap_from_stylelist {
 
-    public override Vx.Web.Html.Func_stylemap_from_stylelist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_stylemap_from_stylelist output = new Vx.Web.Html.Class_stylemap_from_stylelist();
       return output;
     }
@@ -12969,7 +12969,7 @@ public static class Html {
 
   public class Class_stylemap_from_stylesheet : Vx.Core.Class_base, Func_stylemap_from_stylesheet {
 
-    public override Vx.Web.Html.Func_stylemap_from_stylesheet vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_stylemap_from_stylesheet output = new Vx.Web.Html.Class_stylemap_from_stylesheet();
       return output;
     }
@@ -13065,7 +13065,7 @@ public static class Html {
 
   public class Class_styles_from_stylesheet : Vx.Core.Class_base, Func_styles_from_stylesheet {
 
-    public override Vx.Web.Html.Func_styles_from_stylesheet vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_styles_from_stylesheet output = new Vx.Web.Html.Class_styles_from_stylesheet();
       return output;
     }
@@ -13161,7 +13161,7 @@ public static class Html {
 
   public class Class_stylesheet_loadmap : Vx.Core.Class_base, Func_stylesheet_loadmap {
 
-    public override Vx.Web.Html.Func_stylesheet_loadmap vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_stylesheet_loadmap output = new Vx.Web.Html.Class_stylesheet_loadmap();
       return output;
     }
@@ -13266,7 +13266,7 @@ public static class Html {
 
   public class Class_uri_from_string : Vx.Core.Class_base, Func_uri_from_string {
 
-    public override Vx.Web.Html.Func_uri_from_string vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Html.Class_uri_from_string output = new Vx.Web.Html.Class_uri_from_string();
       return output;
     }

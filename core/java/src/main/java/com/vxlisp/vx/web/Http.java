@@ -69,7 +69,7 @@ public final class Http {
     }
 
     @Override
-    public Http.Type_response vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Http.Type_response output = Core.vx_copy(Http.e_response, vals);
       return output;
     }
@@ -252,7 +252,7 @@ public final class Http {
   public static class Class_csv_from_httpget extends Core.Class_base implements Func_csv_from_httpget {
 
     @Override
-    public Http.Func_csv_from_httpget vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Http.Class_csv_from_httpget output = new Http.Class_csv_from_httpget();
       return output;
     }
@@ -376,7 +376,7 @@ public final class Http {
   public static class Class_json_from_httpget extends Core.Class_base implements Func_json_from_httpget {
 
     @Override
-    public Http.Func_json_from_httpget vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Http.Class_json_from_httpget output = new Http.Class_json_from_httpget();
       return output;
     }
@@ -499,7 +499,7 @@ public final class Http {
   public static class Class_response_from_httpget extends Core.Class_base implements Func_response_from_httpget {
 
     @Override
-    public Http.Func_response_from_httpget vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Http.Class_response_from_httpget output = new Http.Class_response_from_httpget();
       return output;
     }
@@ -594,7 +594,7 @@ public final class Http {
   public static class Class_text_from_httpget extends Core.Class_base implements Func_text_from_httpget {
 
     @Override
-    public Http.Func_text_from_httpget vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Http.Class_text_from_httpget output = new Http.Class_text_from_httpget();
       return output;
     }
@@ -716,7 +716,7 @@ public final class Http {
   public static class Class_text_from_response extends Core.Class_base implements Func_text_from_response {
 
     @Override
-    public Http.Func_text_from_response vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Http.Class_text_from_response output = new Http.Class_text_from_response();
       return output;
     }
@@ -824,7 +824,7 @@ public final class Http {
   public static class Class_textblock_from_httpget extends Core.Class_base implements Func_textblock_from_httpget {
 
     @Override
-    public Http.Func_textblock_from_httpget vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Http.Class_textblock_from_httpget output = new Http.Class_textblock_from_httpget();
       return output;
     }
@@ -933,7 +933,7 @@ public final class Http {
   public static class Class_textblock_from_response extends Core.Class_base implements Func_textblock_from_response {
 
     @Override
-    public Http.Func_textblock_from_response vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Http.Class_textblock_from_response output = new Http.Class_textblock_from_response();
       return output;
     }
@@ -1050,7 +1050,7 @@ public final class Http {
   public static class Class_xml_from_httpget extends Core.Class_base implements Func_xml_from_httpget {
 
     @Override
-    public Http.Func_xml_from_httpget vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Http.Class_xml_from_httpget output = new Http.Class_xml_from_httpget();
       return output;
     }

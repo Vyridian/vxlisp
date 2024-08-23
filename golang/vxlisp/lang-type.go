@@ -910,7 +910,8 @@ func LangTypeVxAllowList(
 						LangVarCollection(lang, "listval", rawlisttype, allowtype, 3,
 							"list.vx_p_list")+
 						"\n      if (iindex < "+LangVxListSize(lang, "listval")+") {"+
-						LangVarSet(lang, "output", 4, LangVxListGet(lang, "listval", "iindex"))+
+						LangVarSet(lang, "output", 4,
+							LangVxListGet(lang, "listval", "iindex"))+
 						"\n      }")
 		}
 		if allowname != "any" {
@@ -939,10 +940,10 @@ func LangTypeVxAllowMap(
 	if len(allowtypes) > 0 {
 		allowtype = allowtypes[0]
 		allowempty := LangTypeE(lang, allowtype)
-		switch lang.name {
-		case "csharp":
+		switch lang {
+		case langcsharp:
 			getorelse = "mapval.getOrElse(skey, " + LangTypeE(lang, allowtype) + ")"
-		case "java":
+		default:
 			getorelse = "mapval.getOrDefault(skey, " + LangTypeE(lang, allowtype) + ")"
 		}
 		allowname = LangNameFromType(lang, allowtype)
@@ -1287,14 +1288,14 @@ func LangTypeVxCopy(
 			}
 			for _, allowedtype := range typ.allowtypes {
 				allowedtypename := LangTypeName(lang, allowedtype)
-				castval := "(" + allowedtypename + ")valsub"
+				castval := LangAsType(lang, "valsub", allowedtype)
 				if allowedtypename == allowclass {
 					switch NameFromType(allowedtype) {
 					case "vx/core/boolean":
 						switch lang.name {
 						case "csharp":
 							allowedtypename = "bool"
-						case "java":
+						default:
 							allowedtypename = "Boolean"
 						}
 						castval = LangPkgNameDot(lang, "vx/core") + "vx_new(" + LangTypeT(lang, booleantype) + ", valsub)"
@@ -2057,7 +2058,7 @@ func LangTypeVxNewModel(returntype *vxtype) *vxfunc {
 	arglist = append(arglist, argvals)
 	funcvxnew := NewFunc()
 	funcvxnew.name = "vx_new"
-	funcvxnew.vxtype = returntype
+	funcvxnew.vxtype = anytype
 	funcvxnew.listarg = arglist
 	return funcvxnew
 }
@@ -2089,7 +2090,7 @@ func LangTypeVxNewMap(
 		mapget = "mapval.get(key)"
 	case "kotlin":
 		keyset = "\n      val keys : Set<String> = mapval.keys"
-		mapget = "mapval.getOrElse(key){vx_core.e_any}"
+		mapget = "mapval.getOrDefault(key, vx_core.e_any)"
 	}
 	argmapval := NewArg("mapval")
 	argmapval.vxtype = rawmapanytype

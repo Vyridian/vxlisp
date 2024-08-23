@@ -42,7 +42,7 @@ public static class Db {
       return output;
     }
 
-    public override Vx.Data.Db.Type_db vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Db.Type_db output = Vx.Core.vx_copy(Vx.Data.Db.e_db, vals);
       return output;
     }
@@ -273,7 +273,7 @@ public static class Db {
       return output;
     }
 
-    public override Vx.Data.Db.Type_dbcell vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Db.Type_dbcell output = Vx.Core.vx_copy(Vx.Data.Db.e_dbcell, vals);
       return output;
     }
@@ -575,7 +575,7 @@ public static class Db {
       return output;
     }
 
-    public override Vx.Data.Db.Type_dbcellmap vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Db.Type_dbcellmap output = Vx.Core.vx_copy(Vx.Data.Db.e_dbcellmap, vals);
       return output;
     }
@@ -756,7 +756,7 @@ public static class Db {
       return output;
     }
 
-    public override Vx.Data.Db.Type_dbfield vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Db.Type_dbfield output = Vx.Core.vx_copy(Vx.Data.Db.e_dbfield, vals);
       return output;
     }
@@ -1014,7 +1014,7 @@ public static class Db {
       return output;
     }
 
-    public override Vx.Data.Db.Type_dbfieldmap vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Db.Type_dbfieldmap output = Vx.Core.vx_copy(Vx.Data.Db.e_dbfieldmap, vals);
       return output;
     }
@@ -1136,7 +1136,7 @@ public static class Db {
 
   public class Class_dbid : Vx.Core.Class_base, Type_dbid {
 
-    public override Vx.Data.Db.Type_dbid vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Db.Type_dbid output = Vx.Core.vx_copy(Vx.Data.Db.e_dbid, vals);
       return output;
     }
@@ -1245,7 +1245,7 @@ public static class Db {
       return output;
     }
 
-    public override Vx.Data.Db.Type_dblink vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Db.Type_dblink output = Vx.Core.vx_copy(Vx.Data.Db.e_dblink, vals);
       return output;
     }
@@ -1440,7 +1440,7 @@ public static class Db {
       return output;
     }
 
-    public override Vx.Data.Db.Type_dblinklist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Db.Type_dblinklist output = Vx.Core.vx_copy(Vx.Data.Db.e_dblinklist, vals);
       return output;
     }
@@ -1582,7 +1582,7 @@ public static class Db {
       return output;
     }
 
-    public override Vx.Data.Db.Type_dbnode vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Db.Type_dbnode output = Vx.Core.vx_copy(Vx.Data.Db.e_dbnode, vals);
       return output;
     }
@@ -1832,7 +1832,7 @@ public static class Db {
       return output;
     }
 
-    public override Vx.Data.Db.Type_dbnote vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Db.Type_dbnote output = Vx.Core.vx_copy(Vx.Data.Db.e_dbnote, vals);
       return output;
     }
@@ -2136,7 +2136,7 @@ public static class Db {
       return output;
     }
 
-    public override Vx.Data.Db.Type_dbtable vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Db.Type_dbtable output = Vx.Core.vx_copy(Vx.Data.Db.e_dbtable, vals);
       return output;
     }
@@ -2448,7 +2448,7 @@ public static class Db {
       return output;
     }
 
-    public override Vx.Data.Db.Type_dbvalue vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Db.Type_dbvalue output = Vx.Core.vx_copy(Vx.Data.Db.e_dbvalue, vals);
       return output;
     }

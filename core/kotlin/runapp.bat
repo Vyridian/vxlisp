@@ -1,1 +1,2 @@
-./gradlew run
+cls
+gradlew run --args "Hello World"

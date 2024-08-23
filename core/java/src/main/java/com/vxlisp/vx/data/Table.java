@@ -68,7 +68,7 @@ public final class Table {
     }
 
     @Override
-    public Table.Type_cell vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Table.Type_cell output = Core.vx_copy(Table.e_cell, vals);
       return output;
     }
@@ -281,7 +281,7 @@ public final class Table {
     }
 
     @Override
-    public Table.Type_celllist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Table.Type_celllist output = Core.vx_copy(Table.e_celllist, vals);
       return output;
     }
@@ -467,7 +467,7 @@ public final class Table {
     }
 
     @Override
-    public Table.Type_cellmap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Table.Type_cellmap output = Core.vx_copy(Table.e_cellmap, vals);
       return output;
     }
@@ -662,7 +662,7 @@ public final class Table {
     }
 
     @Override
-    public Table.Type_field vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Table.Type_field output = Core.vx_copy(Table.e_field, vals);
       return output;
     }
@@ -902,7 +902,7 @@ public final class Table {
     }
 
     @Override
-    public Table.Type_fieldlist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Table.Type_fieldlist output = Core.vx_copy(Table.e_fieldlist, vals);
       return output;
     }
@@ -1047,7 +1047,7 @@ public final class Table {
     }
 
     @Override
-    public Table.Type_fieldmap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Table.Type_fieldmap output = Core.vx_copy(Table.e_fieldmap, vals);
       return output;
     }
@@ -1218,7 +1218,7 @@ public final class Table {
     }
 
     @Override
-    public Table.Type_filter vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Table.Type_filter output = Core.vx_copy(Table.e_filter, vals);
       return output;
     }
@@ -1484,7 +1484,7 @@ public final class Table {
     }
 
     @Override
-    public Table.Type_row vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Table.Type_row output = Core.vx_copy(Table.e_row, vals);
       return output;
     }
@@ -1721,7 +1721,7 @@ public final class Table {
     }
 
     @Override
-    public Table.Type_rowlist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Table.Type_rowlist output = Core.vx_copy(Table.e_rowlist, vals);
       return output;
     }
@@ -1907,7 +1907,7 @@ public final class Table {
     }
 
     @Override
-    public Table.Type_rowmap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Table.Type_rowmap output = Core.vx_copy(Table.e_rowmap, vals);
       return output;
     }
@@ -2102,7 +2102,7 @@ public final class Table {
     }
 
     @Override
-    public Table.Type_sort vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Table.Type_sort output = Core.vx_copy(Table.e_sort, vals);
       return output;
     }
@@ -2432,7 +2432,7 @@ public final class Table {
     }
 
     @Override
-    public Table.Type_table vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Table.Type_table output = Core.vx_copy(Table.e_table, vals);
       return output;
     }

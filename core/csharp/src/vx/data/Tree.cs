@@ -116,7 +116,7 @@ public static class Tree {
       return output;
     }
 
-    public override Vx.Data.Tree.Type_branch vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Tree.Type_branch output = Vx.Core.vx_copy(Vx.Data.Tree.e_branch, vals);
       return output;
     }
@@ -367,7 +367,7 @@ public static class Tree {
 
   public class Class_brancharrow : Vx.Core.Class_base, Type_brancharrow {
 
-    public override Vx.Data.Tree.Type_brancharrow vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Tree.Type_brancharrow output = Vx.Core.vx_copy(Vx.Data.Tree.e_brancharrow, vals);
       return output;
     }
@@ -465,7 +465,7 @@ public static class Tree {
       return output;
     }
 
-    public override Vx.Data.Tree.Type_branchlist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Tree.Type_branchlist output = Vx.Core.vx_copy(Vx.Data.Tree.e_branchlist, vals);
       return output;
     }
@@ -621,7 +621,7 @@ public static class Tree {
       return output;
     }
 
-    public override Vx.Data.Tree.Type_leaf vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Tree.Type_leaf output = Vx.Core.vx_copy(Vx.Data.Tree.e_leaf, vals);
       return output;
     }
@@ -843,7 +843,7 @@ public static class Tree {
       return output;
     }
 
-    public override Vx.Data.Tree.Type_leaflist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Tree.Type_leaflist output = Vx.Core.vx_copy(Vx.Data.Tree.e_leaflist, vals);
       return output;
     }
@@ -999,7 +999,7 @@ public static class Tree {
       return output;
     }
 
-    public override Vx.Data.Tree.Type_tree vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Tree.Type_tree output = Vx.Core.vx_copy(Vx.Data.Tree.e_tree, vals);
       return output;
     }

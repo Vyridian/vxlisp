@@ -56,7 +56,7 @@ public static class Sample {
       return output;
     }
 
-    public override Vx.Sample.Type_mytype vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Sample.Type_mytype output = Vx.Core.vx_copy(Vx.Sample.e_mytype, vals);
       return output;
     }
@@ -261,7 +261,7 @@ public static class Sample {
 
   public class Class_main : Vx.Core.Class_base, Func_main {
 
-    public override Vx.Sample.Func_main vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Sample.Class_main output = new Vx.Sample.Class_main();
       return output;
     }
@@ -346,7 +346,7 @@ public static class Sample {
 
   public class Class_myfunc : Vx.Core.Class_base, Func_myfunc {
 
-    public override Vx.Sample.Func_myfunc vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Sample.Class_myfunc output = new Vx.Sample.Class_myfunc();
       return output;
     }

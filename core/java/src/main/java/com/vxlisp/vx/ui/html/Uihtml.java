@@ -381,7 +381,7 @@ public final class Uihtml {
   public static class Class_boolean_layoutremove_html extends Core.Class_base implements Func_boolean_layoutremove_html {
 
     @Override
-    public Uihtml.Func_boolean_layoutremove_html vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_boolean_layoutremove_html output = new Uihtml.Class_boolean_layoutremove_html();
       return output;
     }
@@ -496,7 +496,7 @@ public final class Uihtml {
   public static class Class_boolean_layoutselected_html extends Core.Class_base implements Func_boolean_layoutselected_html {
 
     @Override
-    public Uihtml.Func_boolean_layoutselected_html vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_boolean_layoutselected_html output = new Uihtml.Class_boolean_layoutselected_html();
       return output;
     }
@@ -604,7 +604,7 @@ public final class Uihtml {
   public static class Class_boolean_layoutvisible_html extends Core.Class_base implements Func_boolean_layoutvisible_html {
 
     @Override
-    public Uihtml.Func_boolean_layoutvisible_html vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_boolean_layoutvisible_html output = new Uihtml.Class_boolean_layoutvisible_html();
       return output;
     }
@@ -712,7 +712,7 @@ public final class Uihtml {
   public static class Class_boolean_print_html extends Core.Class_base implements Func_boolean_print_html {
 
     @Override
-    public Uihtml.Func_boolean_print_html vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_boolean_print_html output = new Uihtml.Class_boolean_print_html();
       return output;
     }
@@ -839,7 +839,7 @@ public final class Uihtml {
   public static class Class_boolean_writeclass_from_ui extends Core.Class_base implements Func_boolean_writeclass_from_ui {
 
     @Override
-    public Uihtml.Func_boolean_writeclass_from_ui vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_boolean_writeclass_from_ui output = new Uihtml.Class_boolean_writeclass_from_ui();
       return output;
     }
@@ -959,7 +959,7 @@ public final class Uihtml {
   public static class Class_boolean_writeeventsall_from_ui extends Core.Class_base implements Func_boolean_writeeventsall_from_ui {
 
     @Override
-    public Uihtml.Func_boolean_writeeventsall_from_ui vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_boolean_writeeventsall_from_ui output = new Uihtml.Class_boolean_writeeventsall_from_ui();
       return output;
     }
@@ -1081,7 +1081,7 @@ public final class Uihtml {
   public static class Class_boolean_writeeventsall_from_uimap extends Core.Class_base implements Func_boolean_writeeventsall_from_uimap {
 
     @Override
-    public Uihtml.Func_boolean_writeeventsall_from_uimap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_boolean_writeeventsall_from_uimap output = new Uihtml.Class_boolean_writeeventsall_from_uimap();
       return output;
     }
@@ -1207,7 +1207,7 @@ public final class Uihtml {
   public static class Class_boolean_writeselected_from_ui extends Core.Class_base implements Func_boolean_writeselected_from_ui {
 
     @Override
-    public Uihtml.Func_boolean_writeselected_from_ui vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_boolean_writeselected_from_ui output = new Uihtml.Class_boolean_writeselected_from_ui();
       return output;
     }
@@ -1315,7 +1315,7 @@ public final class Uihtml {
   public static class Class_boolean_writevisible_from_ui extends Core.Class_base implements Func_boolean_writevisible_from_ui {
 
     @Override
-    public Uihtml.Func_boolean_writevisible_from_ui vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_boolean_writevisible_from_ui output = new Uihtml.Class_boolean_writevisible_from_ui();
       return output;
     }
@@ -1421,7 +1421,7 @@ public final class Uihtml {
   public static class Class_context_write extends Core.Class_base implements Func_context_write {
 
     @Override
-    public Uihtml.Func_context_write vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_context_write output = new Uihtml.Class_context_write();
       return output;
     }
@@ -1515,7 +1515,7 @@ public final class Uihtml {
   public static class Class_divchild_from_ui extends Core.Class_base implements Func_divchild_from_ui {
 
     @Override
-    public Uihtml.Func_divchild_from_ui vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_divchild_from_ui output = new Uihtml.Class_divchild_from_ui();
       return output;
     }
@@ -1648,7 +1648,7 @@ public final class Uihtml {
   public static class Class_divchildlist_from_uimap extends Core.Class_base implements Func_divchildlist_from_uimap {
 
     @Override
-    public Uihtml.Func_divchildlist_from_uimap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_divchildlist_from_uimap output = new Uihtml.Class_divchildlist_from_uimap();
       return output;
     }
@@ -1777,7 +1777,7 @@ public final class Uihtml {
   public static class Class_divchildlist_from_uimap_1 extends Core.Class_base implements Func_divchildlist_from_uimap_1 {
 
     @Override
-    public Uihtml.Func_divchildlist_from_uimap_1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_divchildlist_from_uimap_1 output = new Uihtml.Class_divchildlist_from_uimap_1();
       return output;
     }
@@ -1908,7 +1908,7 @@ public final class Uihtml {
   public static class Class_divchildlist_from_uimap_origmap_parent extends Core.Class_base implements Func_divchildlist_from_uimap_origmap_parent {
 
     @Override
-    public Uihtml.Func_divchildlist_from_uimap_origmap_parent vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_divchildlist_from_uimap_origmap_parent output = new Uihtml.Class_divchildlist_from_uimap_origmap_parent();
       return output;
     }
@@ -2027,7 +2027,7 @@ public final class Uihtml {
   public static class Class_node_app_from_ui_orig_parent extends Core.Class_base implements Func_node_app_from_ui_orig_parent {
 
     @Override
-    public Uihtml.Func_node_app_from_ui_orig_parent vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_node_app_from_ui_orig_parent output = new Uihtml.Class_node_app_from_ui_orig_parent();
       return output;
     }
@@ -2145,7 +2145,7 @@ public final class Uihtml {
   public static class Class_node_default_from_ui_orig_parent extends Core.Class_base implements Func_node_default_from_ui_orig_parent {
 
     @Override
-    public Uihtml.Func_node_default_from_ui_orig_parent vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_node_default_from_ui_orig_parent output = new Uihtml.Class_node_default_from_ui_orig_parent();
       return output;
     }
@@ -2274,7 +2274,7 @@ public final class Uihtml {
   public static class Class_node_image_from_ui_orig_parent extends Core.Class_base implements Func_node_image_from_ui_orig_parent {
 
     @Override
-    public Uihtml.Func_node_image_from_ui_orig_parent vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_node_image_from_ui_orig_parent output = new Uihtml.Class_node_image_from_ui_orig_parent();
       return output;
     }
@@ -2404,7 +2404,7 @@ public final class Uihtml {
   public static class Class_node_label_from_ui_orig_parent extends Core.Class_base implements Func_node_label_from_ui_orig_parent {
 
     @Override
-    public Uihtml.Func_node_label_from_ui_orig_parent vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_node_label_from_ui_orig_parent output = new Uihtml.Class_node_label_from_ui_orig_parent();
       return output;
     }
@@ -2562,7 +2562,7 @@ public final class Uihtml {
   public static class Class_node_layout_from_node_ui_parent extends Core.Class_base implements Func_node_layout_from_node_ui_parent {
 
     @Override
-    public Uihtml.Func_node_layout_from_node_ui_parent vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_node_layout_from_node_ui_parent output = new Uihtml.Class_node_layout_from_node_ui_parent();
       return output;
     }
@@ -2674,7 +2674,7 @@ public final class Uihtml {
   public static class Class_node_from_ui_orig_parent extends Core.Class_base implements Func_node_from_ui_orig_parent {
 
     @Override
-    public Uihtml.Func_node_from_ui_orig_parent vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_node_from_ui_orig_parent output = new Uihtml.Class_node_from_ui_orig_parent();
       return output;
     }
@@ -2814,7 +2814,7 @@ public final class Uihtml {
   public static class Class_string_class_from_ui extends Core.Class_base implements Func_string_class_from_ui {
 
     @Override
-    public Uihtml.Func_string_class_from_ui vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_string_class_from_ui output = new Uihtml.Class_string_class_from_ui();
       return output;
     }
@@ -2931,7 +2931,7 @@ public final class Uihtml {
   public static class Class_string_style_from_font extends Core.Class_base implements Func_string_style_from_font {
 
     @Override
-    public Uihtml.Func_string_style_from_font vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_string_style_from_font output = new Uihtml.Class_string_style_from_font();
       return output;
     }
@@ -3102,7 +3102,7 @@ public final class Uihtml {
   public static class Class_string_style_from_image extends Core.Class_base implements Func_string_style_from_image {
 
     @Override
-    public Uihtml.Func_string_style_from_image vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_string_style_from_image output = new Uihtml.Class_string_style_from_image();
       return output;
     }
@@ -3260,7 +3260,7 @@ public final class Uihtml {
   public static class Class_string_stylename_from_name_styletype extends Core.Class_base implements Func_string_stylename_from_name_styletype {
 
     @Override
-    public Uihtml.Func_string_stylename_from_name_styletype vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_string_stylename_from_name_styletype output = new Uihtml.Class_string_stylename_from_name_styletype();
       return output;
     }
@@ -3417,7 +3417,7 @@ public final class Uihtml {
   public static class Class_style_from_fontface extends Core.Class_base implements Func_style_from_fontface {
 
     @Override
-    public Uihtml.Func_style_from_fontface vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_style_from_fontface output = new Uihtml.Class_style_from_fontface();
       return output;
     }
@@ -3600,7 +3600,7 @@ public final class Uihtml {
   public static class Class_style_from_style extends Core.Class_base implements Func_style_from_style {
 
     @Override
-    public Uihtml.Func_style_from_style vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_style_from_style output = new Uihtml.Class_style_from_style();
       return output;
     }
@@ -4799,7 +4799,7 @@ public final class Uihtml {
   public static class Class_stylelist_extra_from_ui extends Core.Class_base implements Func_stylelist_extra_from_ui {
 
     @Override
-    public Uihtml.Func_stylelist_extra_from_ui vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_stylelist_extra_from_ui output = new Uihtml.Class_stylelist_extra_from_ui();
       return output;
     }
@@ -4960,7 +4960,7 @@ public final class Uihtml {
   public static class Class_stylelist_reset extends Core.Class_base implements Func_stylelist_reset {
 
     @Override
-    public Uihtml.Func_stylelist_reset vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_stylelist_reset output = new Uihtml.Class_stylelist_reset();
       return output;
     }
@@ -5188,7 +5188,7 @@ public final class Uihtml {
   public static class Class_stylelist_from_fontfacemap extends Core.Class_base implements Func_stylelist_from_fontfacemap {
 
     @Override
-    public Uihtml.Func_stylelist_from_fontfacemap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_stylelist_from_fontfacemap output = new Uihtml.Class_stylelist_from_fontfacemap();
       return output;
     }
@@ -5305,7 +5305,7 @@ public final class Uihtml {
   public static class Class_stylelist_from_stylelist extends Core.Class_base implements Func_stylelist_from_stylelist {
 
     @Override
-    public Uihtml.Func_stylelist_from_stylelist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_stylelist_from_stylelist output = new Uihtml.Class_stylelist_from_stylelist();
       return output;
     }
@@ -5415,7 +5415,7 @@ public final class Uihtml {
   public static class Class_stylelist_from_stylemap extends Core.Class_base implements Func_stylelist_from_stylemap {
 
     @Override
-    public Uihtml.Func_stylelist_from_stylemap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_stylelist_from_stylemap output = new Uihtml.Class_stylelist_from_stylemap();
       return output;
     }
@@ -5532,7 +5532,7 @@ public final class Uihtml {
   public static class Class_stylemap_from_stylemap extends Core.Class_base implements Func_stylemap_from_stylemap {
 
     @Override
-    public Uihtml.Func_stylemap_from_stylemap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_stylemap_from_stylemap output = new Uihtml.Class_stylemap_from_stylemap();
       return output;
     }
@@ -5650,7 +5650,7 @@ public final class Uihtml {
   public static class Class_stylesheet_layout_html extends Core.Class_base implements Func_stylesheet_layout_html {
 
     @Override
-    public Uihtml.Func_stylesheet_layout_html vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_stylesheet_layout_html output = new Uihtml.Class_stylesheet_layout_html();
       return output;
     }
@@ -5772,7 +5772,7 @@ public final class Uihtml {
   public static class Class_stylesheet_from_stylesheet extends Core.Class_base implements Func_stylesheet_from_stylesheet {
 
     @Override
-    public Uihtml.Func_stylesheet_from_stylesheet vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_stylesheet_from_stylesheet output = new Uihtml.Class_stylesheet_from_stylesheet();
       return output;
     }
@@ -5910,7 +5910,7 @@ public final class Uihtml {
   public static class Class_ui_layout_app_from_ui_orig_parent extends Core.Class_base implements Func_ui_layout_app_from_ui_orig_parent {
 
     @Override
-    public Uihtml.Func_ui_layout_app_from_ui_orig_parent vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_ui_layout_app_from_ui_orig_parent output = new Uihtml.Class_ui_layout_app_from_ui_orig_parent();
       return output;
     }
@@ -6024,7 +6024,7 @@ public final class Uihtml {
   public static class Class_ui_layout_default_from_ui_orig_parent extends Core.Class_base implements Func_ui_layout_default_from_ui_orig_parent {
 
     @Override
-    public Uihtml.Func_ui_layout_default_from_ui_orig_parent vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_ui_layout_default_from_ui_orig_parent output = new Uihtml.Class_ui_layout_default_from_ui_orig_parent();
       return output;
     }
@@ -6139,7 +6139,7 @@ public final class Uihtml {
   public static class Class_ui_layout_image_from_ui_orig_parent extends Core.Class_base implements Func_ui_layout_image_from_ui_orig_parent {
 
     @Override
-    public Uihtml.Func_ui_layout_image_from_ui_orig_parent vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_ui_layout_image_from_ui_orig_parent output = new Uihtml.Class_ui_layout_image_from_ui_orig_parent();
       return output;
     }
@@ -6253,7 +6253,7 @@ public final class Uihtml {
   public static class Class_ui_layout_label_from_ui_orig_parent extends Core.Class_base implements Func_ui_layout_label_from_ui_orig_parent {
 
     @Override
-    public Uihtml.Func_ui_layout_label_from_ui_orig_parent vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Uihtml.Class_ui_layout_label_from_ui_orig_parent output = new Uihtml.Class_ui_layout_label_from_ui_orig_parent();
       return output;
     }

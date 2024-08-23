@@ -87,7 +87,7 @@ public static class Test {
       return output;
     }
 
-    public override Vx.Test.Type_testcase vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Type_testcase output = Vx.Core.vx_copy(Vx.Test.e_testcase, vals);
       return output;
     }
@@ -335,7 +335,7 @@ public static class Test {
       return output;
     }
 
-    public override Vx.Test.Type_testcaselist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Type_testcaselist output = Vx.Core.vx_copy(Vx.Test.e_testcaselist, vals);
       return output;
     }
@@ -507,7 +507,7 @@ public static class Test {
       return output;
     }
 
-    public override Vx.Test.Type_testcoveragedetail vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Type_testcoveragedetail output = Vx.Core.vx_copy(Vx.Test.e_testcoveragedetail, vals);
       return output;
     }
@@ -789,7 +789,7 @@ public static class Test {
       return output;
     }
 
-    public override Vx.Test.Type_testcoveragenums vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Type_testcoveragenums output = Vx.Core.vx_copy(Vx.Test.e_testcoveragenums, vals);
       return output;
     }
@@ -1140,7 +1140,7 @@ public static class Test {
       return output;
     }
 
-    public override Vx.Test.Type_testcoveragesummary vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Type_testcoveragesummary output = Vx.Core.vx_copy(Vx.Test.e_testcoveragesummary, vals);
       return output;
     }
@@ -1495,7 +1495,7 @@ public static class Test {
       return output;
     }
 
-    public override Vx.Test.Type_testdescribe vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Type_testdescribe output = Vx.Core.vx_copy(Vx.Test.e_testdescribe, vals);
       return output;
     }
@@ -1718,7 +1718,7 @@ public static class Test {
       return output;
     }
 
-    public override Vx.Test.Type_testdescribelist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Type_testdescribelist output = Vx.Core.vx_copy(Vx.Test.e_testdescribelist, vals);
       return output;
     }
@@ -1905,7 +1905,7 @@ public static class Test {
       return output;
     }
 
-    public override Vx.Test.Type_testpackage vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Type_testpackage output = Vx.Core.vx_copy(Vx.Test.e_testpackage, vals);
       return output;
     }
@@ -2172,7 +2172,7 @@ public static class Test {
       return output;
     }
 
-    public override Vx.Test.Type_testpackagelist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Type_testpackagelist output = Vx.Core.vx_copy(Vx.Test.e_testpackagelist, vals);
       return output;
     }
@@ -2359,7 +2359,7 @@ public static class Test {
       return output;
     }
 
-    public override Vx.Test.Type_testresult vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Type_testresult output = Vx.Core.vx_copy(Vx.Test.e_testresult, vals);
       return output;
     }
@@ -2626,7 +2626,7 @@ public static class Test {
       return output;
     }
 
-    public override Vx.Test.Type_testresultlist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Type_testresultlist output = Vx.Core.vx_copy(Vx.Test.e_testresultlist, vals);
       return output;
     }
@@ -3154,7 +3154,7 @@ public static class Test {
 
   public class Class_context_test : Vx.Core.Class_base, Func_context_test {
 
-    public override Vx.Test.Func_context_test vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_context_test output = new Vx.Test.Class_context_test();
       return output;
     }
@@ -3270,7 +3270,7 @@ public static class Test {
 
   public class Class_div_from_testcaselist : Vx.Core.Class_base, Func_div_from_testcaselist {
 
-    public override Vx.Test.Func_div_from_testcaselist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_div_from_testcaselist output = new Vx.Test.Class_div_from_testcaselist();
       return output;
     }
@@ -3470,7 +3470,7 @@ public static class Test {
 
   public class Class_div_from_testpackage : Vx.Core.Class_base, Func_div_from_testpackage {
 
-    public override Vx.Test.Func_div_from_testpackage vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_div_from_testpackage output = new Vx.Test.Class_div_from_testpackage();
       return output;
     }
@@ -3654,7 +3654,7 @@ public static class Test {
 
   public class Class_div_from_testpackagelist : Vx.Core.Class_base, Func_div_from_testpackagelist {
 
-    public override Vx.Test.Func_div_from_testpackagelist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_div_from_testpackagelist output = new Vx.Test.Class_div_from_testpackagelist();
       return output;
     }
@@ -3884,7 +3884,7 @@ public static class Test {
 
   public class Class_divchildlist_from_testpackagelist : Vx.Core.Class_base, Func_divchildlist_from_testpackagelist {
 
-    public override Vx.Test.Func_divchildlist_from_testpackagelist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_divchildlist_from_testpackagelist output = new Vx.Test.Class_divchildlist_from_testpackagelist();
       return output;
     }
@@ -3983,7 +3983,7 @@ public static class Test {
 
   public class Class_file_test : Vx.Core.Class_base, Func_file_test {
 
-    public override Vx.Test.Func_file_test vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_file_test output = new Vx.Test.Class_file_test();
       return output;
     }
@@ -4074,7 +4074,7 @@ public static class Test {
 
   public class Class_file_testhtml : Vx.Core.Class_base, Func_file_testhtml {
 
-    public override Vx.Test.Func_file_testhtml vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_file_testhtml output = new Vx.Test.Class_file_testhtml();
       return output;
     }
@@ -4165,7 +4165,7 @@ public static class Test {
 
   public class Class_file_testnode : Vx.Core.Class_base, Func_file_testnode {
 
-    public override Vx.Test.Func_file_testnode vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_file_testnode output = new Vx.Test.Class_file_testnode();
       return output;
     }
@@ -4257,7 +4257,7 @@ public static class Test {
 
   public class Class_html_from_divtest : Vx.Core.Class_base, Func_html_from_divtest {
 
-    public override Vx.Test.Func_html_from_divtest vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_html_from_divtest output = new Vx.Test.Class_html_from_divtest();
       return output;
     }
@@ -4415,7 +4415,7 @@ public static class Test {
 
   public class Class_p_from_passfail : Vx.Core.Class_base, Func_p_from_passfail {
 
-    public override Vx.Test.Func_p_from_passfail vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_p_from_passfail output = new Vx.Test.Class_p_from_passfail();
       return output;
     }
@@ -4542,7 +4542,7 @@ public static class Test {
 
   public class Class_p_from_testcoveragenums : Vx.Core.Class_base, Func_p_from_testcoveragenums {
 
-    public override Vx.Test.Func_p_from_testcoveragenums vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_p_from_testcoveragenums output = new Vx.Test.Class_p_from_testcoveragenums();
       return output;
     }
@@ -4662,7 +4662,7 @@ public static class Test {
 
   public class Class_resolve_testcase : Vx.Core.Class_base, Func_resolve_testcase {
 
-    public override Vx.Test.Func_resolve_testcase vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_resolve_testcase output = new Vx.Test.Class_resolve_testcase();
       return output;
     }
@@ -4801,7 +4801,7 @@ public static class Test {
 
   public class Class_resolve_testcaselist : Vx.Core.Class_base, Func_resolve_testcaselist {
 
-    public override Vx.Test.Func_resolve_testcaselist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_resolve_testcaselist output = new Vx.Test.Class_resolve_testcaselist();
       return output;
     }
@@ -4903,7 +4903,7 @@ public static class Test {
 
   public class Class_resolve_testdescribe : Vx.Core.Class_base, Func_resolve_testdescribe {
 
-    public override Vx.Test.Func_resolve_testdescribe vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_resolve_testdescribe output = new Vx.Test.Class_resolve_testdescribe();
       return output;
     }
@@ -5021,7 +5021,7 @@ public static class Test {
 
   public class Class_resolve_testdescribelist : Vx.Core.Class_base, Func_resolve_testdescribelist {
 
-    public override Vx.Test.Func_resolve_testdescribelist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_resolve_testdescribelist output = new Vx.Test.Class_resolve_testdescribelist();
       return output;
     }
@@ -5123,7 +5123,7 @@ public static class Test {
 
   public class Class_resolve_testpackage : Vx.Core.Class_base, Func_resolve_testpackage {
 
-    public override Vx.Test.Func_resolve_testpackage vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_resolve_testpackage output = new Vx.Test.Class_resolve_testpackage();
       return output;
     }
@@ -5255,7 +5255,7 @@ public static class Test {
 
   public class Class_resolve_testpackagelist : Vx.Core.Class_base, Func_resolve_testpackagelist {
 
-    public override Vx.Test.Func_resolve_testpackagelist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_resolve_testpackagelist output = new Vx.Test.Class_resolve_testpackagelist();
       return output;
     }
@@ -5357,7 +5357,7 @@ public static class Test {
 
   public class Class_resolve_testresult : Vx.Core.Class_base, Func_resolve_testresult {
 
-    public override Vx.Test.Func_resolve_testresult vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_resolve_testresult output = new Vx.Test.Class_resolve_testresult();
       return output;
     }
@@ -5509,7 +5509,7 @@ public static class Test {
 
   public class Class_security_test : Vx.Core.Class_base, Func_security_test {
 
-    public override Vx.Test.Func_security_test vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_security_test output = new Vx.Test.Class_security_test();
       return output;
     }
@@ -5609,7 +5609,7 @@ public static class Test {
 
   public class Class_test : Vx.Core.Class_base, Func_test {
 
-    public override Vx.Test.Func_test vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_test output = new Vx.Test.Class_test();
       return output;
     }
@@ -5717,7 +5717,7 @@ public static class Test {
 
   public class Class_test_1 : Vx.Core.Class_base, Func_test_1 {
 
-    public override Vx.Test.Func_test_1 vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_test_1 output = new Vx.Test.Class_test_1();
       return output;
     }
@@ -5819,7 +5819,7 @@ public static class Test {
 
   public class Class_test_false : Vx.Core.Class_base, Func_test_false {
 
-    public override Vx.Test.Func_test_false vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_test_false output = new Vx.Test.Class_test_false();
       return output;
     }
@@ -5937,7 +5937,7 @@ public static class Test {
 
   public class Class_test_false_1 : Vx.Core.Class_base, Func_test_false_1 {
 
-    public override Vx.Test.Func_test_false_1 vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_test_false_1 output = new Vx.Test.Class_test_false_1();
       return output;
     }
@@ -6051,7 +6051,7 @@ public static class Test {
 
   public class Class_test_gt : Vx.Core.Class_base, Func_test_gt {
 
-    public override Vx.Test.Func_test_gt vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_test_gt output = new Vx.Test.Class_test_gt();
       return output;
     }
@@ -6159,7 +6159,7 @@ public static class Test {
 
   public class Class_test_gt_1 : Vx.Core.Class_base, Func_test_gt_1 {
 
-    public override Vx.Test.Func_test_gt_1 vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_test_gt_1 output = new Vx.Test.Class_test_gt_1();
       return output;
     }
@@ -6262,7 +6262,7 @@ public static class Test {
 
   public class Class_test_ne : Vx.Core.Class_base, Func_test_ne {
 
-    public override Vx.Test.Func_test_ne vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_test_ne output = new Vx.Test.Class_test_ne();
       return output;
     }
@@ -6370,7 +6370,7 @@ public static class Test {
 
   public class Class_test_ne_1 : Vx.Core.Class_base, Func_test_ne_1 {
 
-    public override Vx.Test.Func_test_ne_1 vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_test_ne_1 output = new Vx.Test.Class_test_ne_1();
       return output;
     }
@@ -6473,7 +6473,7 @@ public static class Test {
 
   public class Class_test_string : Vx.Core.Class_base, Func_test_string {
 
-    public override Vx.Test.Func_test_string vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_test_string output = new Vx.Test.Class_test_string();
       return output;
     }
@@ -6583,7 +6583,7 @@ public static class Test {
 
   public class Class_test_string_1 : Vx.Core.Class_base, Func_test_string_1 {
 
-    public override Vx.Test.Func_test_string_1 vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_test_string_1 output = new Vx.Test.Class_test_string_1();
       return output;
     }
@@ -6685,7 +6685,7 @@ public static class Test {
 
   public class Class_test_true : Vx.Core.Class_base, Func_test_true {
 
-    public override Vx.Test.Func_test_true vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_test_true output = new Vx.Test.Class_test_true();
       return output;
     }
@@ -6803,7 +6803,7 @@ public static class Test {
 
   public class Class_test_true_1 : Vx.Core.Class_base, Func_test_true_1 {
 
-    public override Vx.Test.Func_test_true_1 vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_test_true_1 output = new Vx.Test.Class_test_true_1();
       return output;
     }
@@ -6917,7 +6917,7 @@ public static class Test {
 
   public class Class_tr_from_testdescribe_casename : Vx.Core.Class_base, Func_tr_from_testdescribe_casename {
 
-    public override Vx.Test.Func_tr_from_testdescribe_casename vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_tr_from_testdescribe_casename output = new Vx.Test.Class_tr_from_testdescribe_casename();
       return output;
     }
@@ -7098,7 +7098,7 @@ public static class Test {
 
   public class Class_trlist_from_testcase : Vx.Core.Class_base, Func_trlist_from_testcase {
 
-    public override Vx.Test.Func_trlist_from_testcase vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_trlist_from_testcase output = new Vx.Test.Class_trlist_from_testcase();
       return output;
     }
@@ -7213,7 +7213,7 @@ public static class Test {
 
   public class Class_trlist_from_testcaselist : Vx.Core.Class_base, Func_trlist_from_testcaselist {
 
-    public override Vx.Test.Func_trlist_from_testcaselist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Test.Class_trlist_from_testcaselist output = new Vx.Test.Class_trlist_from_testcaselist();
       return output;
     }

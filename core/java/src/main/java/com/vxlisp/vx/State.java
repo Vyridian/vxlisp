@@ -81,7 +81,7 @@ public final class State {
     }
 
     @Override
-    public State.Type_valuemap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       State.Type_valuemap output = Core.vx_copy(State.e_valuemap, vals);
       return output;
     }
@@ -216,7 +216,7 @@ public final class State {
   public static class Class_any_readstate_from_mapname_name extends Core.Class_base implements Func_any_readstate_from_mapname_name {
 
     @Override
-    public State.Func_any_readstate_from_mapname_name vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       State.Class_any_readstate_from_mapname_name output = new State.Class_any_readstate_from_mapname_name();
       return output;
     }
@@ -325,7 +325,7 @@ public final class State {
   public static class Class_any_readstate_from_name extends Core.Class_base implements Func_any_readstate_from_name {
 
     @Override
-    public State.Func_any_readstate_from_name vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       State.Class_any_readstate_from_name output = new State.Class_any_readstate_from_name();
       return output;
     }
@@ -439,7 +439,7 @@ public final class State {
   public static class Class_boolean_removestate_from_name extends Core.Class_base implements Func_boolean_removestate_from_name {
 
     @Override
-    public State.Func_boolean_removestate_from_name vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       State.Class_boolean_removestate_from_name output = new State.Class_boolean_removestate_from_name();
       return output;
     }
@@ -563,7 +563,7 @@ public final class State {
   public static class Class_boolean_writestate_from_mapname_name_value extends Core.Class_base implements Func_boolean_writestate_from_mapname_name_value {
 
     @Override
-    public State.Func_boolean_writestate_from_mapname_name_value vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       State.Class_boolean_writestate_from_mapname_name_value output = new State.Class_boolean_writestate_from_mapname_name_value();
       return output;
     }
@@ -724,7 +724,7 @@ public final class State {
   public static class Class_boolean_writestate_from_name_value extends Core.Class_base implements Func_boolean_writestate_from_name_value {
 
     @Override
-    public State.Func_boolean_writestate_from_name_value vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       State.Class_boolean_writestate_from_name_value output = new State.Class_boolean_writestate_from_name_value();
       return output;
     }
@@ -841,7 +841,7 @@ public final class State {
   public static class Class_boolean_writestate_from_statelistener extends Core.Class_base implements Func_boolean_writestate_from_statelistener {
 
     @Override
-    public State.Func_boolean_writestate_from_statelistener vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       State.Class_boolean_writestate_from_statelistener output = new State.Class_boolean_writestate_from_statelistener();
       return output;
     }
@@ -962,7 +962,7 @@ public final class State {
   public static class Class_change extends Core.Class_base implements Func_change {
 
     @Override
-    public State.Func_change vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       State.Class_change output = new State.Class_change();
       return output;
     }
@@ -1066,7 +1066,7 @@ public final class State {
   public static class Class_register extends Core.Class_base implements Func_register {
 
     @Override
-    public State.Func_register vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       State.Class_register output = new State.Class_register();
       return output;
     }
@@ -1170,7 +1170,7 @@ public final class State {
   public static class Class_state_from_context extends Core.Class_base implements Func_state_from_context {
 
     @Override
-    public State.Func_state_from_context vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       State.Class_state_from_context output = new State.Class_state_from_context();
       return output;
     }
@@ -1262,7 +1262,7 @@ public final class State {
   public static class Class_statelistener_readstate_from_name extends Core.Class_base implements Func_statelistener_readstate_from_name {
 
     @Override
-    public State.Func_statelistener_readstate_from_name vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       State.Class_statelistener_readstate_from_name output = new State.Class_statelistener_readstate_from_name();
       return output;
     }
@@ -1381,7 +1381,7 @@ public final class State {
   public static class Class_statelistenermap_readstate extends Core.Class_base implements Func_statelistenermap_readstate {
 
     @Override
-    public State.Func_statelistenermap_readstate vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       State.Class_statelistenermap_readstate output = new State.Class_statelistenermap_readstate();
       return output;
     }
@@ -1482,7 +1482,7 @@ public final class State {
   public static class Class_value_readstate_from_name extends Core.Class_base implements Func_value_readstate_from_name {
 
     @Override
-    public State.Func_value_readstate_from_name vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       State.Class_value_readstate_from_name output = new State.Class_value_readstate_from_name();
       return output;
     }
@@ -1599,7 +1599,7 @@ public final class State {
   public static class Class_valuemap_readstate_from_mapname extends Core.Class_base implements Func_valuemap_readstate_from_mapname {
 
     @Override
-    public State.Func_valuemap_readstate_from_mapname vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       State.Class_valuemap_readstate_from_mapname output = new State.Class_valuemap_readstate_from_mapname();
       return output;
     }

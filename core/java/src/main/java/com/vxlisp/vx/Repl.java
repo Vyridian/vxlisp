@@ -96,7 +96,7 @@ public final class Repl {
     }
 
     @Override
-    public Repl.Type_liblist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Repl.Type_liblist output = Core.vx_copy(Repl.e_liblist, vals);
       return output;
     }
@@ -316,7 +316,7 @@ public final class Repl {
     }
 
     @Override
-    public Repl.Type_repl vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Repl.Type_repl output = Core.vx_copy(Repl.e_repl, vals);
       return output;
     }
@@ -658,7 +658,7 @@ public final class Repl {
     }
 
     @Override
-    public Repl.Type_replarglist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Repl.Type_replarglist output = Core.vx_copy(Repl.e_replarglist, vals);
       return output;
     }
@@ -896,7 +896,7 @@ public final class Repl {
     }
 
     @Override
-    public Repl.Type_repllist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Repl.Type_repllist output = Core.vx_copy(Repl.e_repllist, vals);
       return output;
     }
@@ -1194,7 +1194,7 @@ public final class Repl {
   public static class Class_any_repl_from_functype_args extends Core.Class_base implements Func_any_repl_from_functype_args {
 
     @Override
-    public Repl.Func_any_repl_from_functype_args vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Repl.Class_any_repl_from_functype_args output = new Repl.Class_any_repl_from_functype_args();
       return output;
     }
@@ -1291,7 +1291,7 @@ public final class Repl {
   public static class Class_any_from_liblist_string extends Core.Class_base implements Func_any_from_liblist_string {
 
     @Override
-    public Repl.Func_any_from_liblist_string vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Repl.Class_any_from_liblist_string output = new Repl.Class_any_from_liblist_string();
       return output;
     }
@@ -1398,7 +1398,7 @@ public final class Repl {
   public static class Class_any_from_macro extends Core.Class_base implements Func_any_from_macro {
 
     @Override
-    public Repl.Func_any_from_macro vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Repl.Class_any_from_macro output = new Repl.Class_any_from_macro();
       return output;
     }
@@ -1523,7 +1523,7 @@ public final class Repl {
   public static class Class_any_from_repl extends Core.Class_base implements Func_any_from_repl {
 
     @Override
-    public Repl.Func_any_from_repl vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Repl.Class_any_from_repl output = new Repl.Class_any_from_repl();
       return output;
     }
@@ -1684,7 +1684,7 @@ public final class Repl {
   public static class Class_any_from_script extends Core.Class_base implements Func_any_from_script {
 
     @Override
-    public Repl.Func_any_from_script vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Repl.Class_any_from_script output = new Repl.Class_any_from_script();
       return output;
     }
@@ -1806,7 +1806,7 @@ public final class Repl {
   public static class Class_anylist_from_repllist extends Core.Class_base implements Func_anylist_from_repllist {
 
     @Override
-    public Repl.Func_anylist_from_repllist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Repl.Class_anylist_from_repllist output = new Repl.Class_anylist_from_repllist();
       return output;
     }
@@ -1925,7 +1925,7 @@ public final class Repl {
   public static class Class_argmap_from_textblock_argmap extends Core.Class_base implements Func_argmap_from_textblock_argmap {
 
     @Override
-    public Repl.Func_argmap_from_textblock_argmap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Repl.Class_argmap_from_textblock_argmap output = new Repl.Class_argmap_from_textblock_argmap();
       return output;
     }
@@ -2026,7 +2026,7 @@ public final class Repl {
   public static class Class_const_from_string extends Core.Class_base implements Func_const_from_string {
 
     @Override
-    public Repl.Func_const_from_string vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Repl.Class_const_from_string output = new Repl.Class_const_from_string();
       return output;
     }
@@ -2189,7 +2189,7 @@ public final class Repl {
   public static class Class_repl_bracket_from_textblock_argmap extends Core.Class_base implements Func_repl_bracket_from_textblock_argmap {
 
     @Override
-    public Repl.Func_repl_bracket_from_textblock_argmap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Repl.Class_repl_bracket_from_textblock_argmap output = new Repl.Class_repl_bracket_from_textblock_argmap();
       return output;
     }
@@ -2285,7 +2285,7 @@ public final class Repl {
   public static class Class_repl_empty_from_textblock_argmap extends Core.Class_base implements Func_repl_empty_from_textblock_argmap {
 
     @Override
-    public Repl.Func_repl_empty_from_textblock_argmap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Repl.Class_repl_empty_from_textblock_argmap output = new Repl.Class_repl_empty_from_textblock_argmap();
       return output;
     }
@@ -2433,7 +2433,7 @@ public final class Repl {
   public static class Class_repl_paren_from_textblock_argmap extends Core.Class_base implements Func_repl_paren_from_textblock_argmap {
 
     @Override
-    public Repl.Func_repl_paren_from_textblock_argmap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Repl.Class_repl_paren_from_textblock_argmap output = new Repl.Class_repl_paren_from_textblock_argmap();
       return output;
     }
@@ -2633,7 +2633,7 @@ public final class Repl {
   public static class Class_repl_from_liblist_string extends Core.Class_base implements Func_repl_from_liblist_string {
 
     @Override
-    public Repl.Func_repl_from_liblist_string vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Repl.Class_repl_from_liblist_string output = new Repl.Class_repl_from_liblist_string();
       return output;
     }
@@ -2725,7 +2725,7 @@ public final class Repl {
   public static class Class_repl_from_macro extends Core.Class_base implements Func_repl_from_macro {
 
     @Override
-    public Repl.Func_repl_from_macro vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Repl.Class_repl_from_macro output = new Repl.Class_repl_from_macro();
       return output;
     }
@@ -2889,7 +2889,7 @@ public final class Repl {
   public static class Class_repl_from_script extends Core.Class_base implements Func_repl_from_script {
 
     @Override
-    public Repl.Func_repl_from_script vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Repl.Class_repl_from_script output = new Repl.Class_repl_from_script();
       return output;
     }
@@ -3007,7 +3007,7 @@ public final class Repl {
   public static class Class_repl_from_string_argmap extends Core.Class_base implements Func_repl_from_string_argmap {
 
     @Override
-    public Repl.Func_repl_from_string_argmap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Repl.Class_repl_from_string_argmap output = new Repl.Class_repl_from_string_argmap();
       return output;
     }
@@ -3311,7 +3311,7 @@ public final class Repl {
   public static class Class_repl_from_textblock extends Core.Class_base implements Func_repl_from_textblock {
 
     @Override
-    public Repl.Func_repl_from_textblock vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Repl.Class_repl_from_textblock output = new Repl.Class_repl_from_textblock();
       return output;
     }
@@ -3423,7 +3423,7 @@ public final class Repl {
   public static class Class_repl_from_textblock_argmap extends Core.Class_base implements Func_repl_from_textblock_argmap {
 
     @Override
-    public Repl.Func_repl_from_textblock_argmap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Repl.Class_repl_from_textblock_argmap output = new Repl.Class_repl_from_textblock_argmap();
       return output;
     }
@@ -3562,7 +3562,7 @@ public final class Repl {
   public static class Class_replarglist_from_replarglist_textblock_argmap extends Core.Class_base implements Func_replarglist_from_replarglist_textblock_argmap {
 
     @Override
-    public Repl.Func_replarglist_from_replarglist_textblock_argmap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Repl.Class_replarglist_from_replarglist_textblock_argmap output = new Repl.Class_replarglist_from_replarglist_textblock_argmap();
       return output;
     }
@@ -3885,7 +3885,7 @@ public final class Repl {
   public static class Class_repllist_from_textblocklist_argmap extends Core.Class_base implements Func_repllist_from_textblocklist_argmap {
 
     @Override
-    public Repl.Func_repllist_from_textblocklist_argmap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Repl.Class_repllist_from_textblocklist_argmap output = new Repl.Class_repllist_from_textblocklist_argmap();
       return output;
     }
@@ -3988,7 +3988,7 @@ public final class Repl {
   public static class Class_textblock_from_script extends Core.Class_base implements Func_textblock_from_script {
 
     @Override
-    public Repl.Func_textblock_from_script vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Repl.Class_textblock_from_script output = new Repl.Class_textblock_from_script();
       return output;
     }
@@ -4097,7 +4097,7 @@ public final class Repl {
   public static class Class_typefunc_from_string extends Core.Class_base implements Func_typefunc_from_string {
 
     @Override
-    public Repl.Func_typefunc_from_string vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Repl.Class_typefunc_from_string output = new Repl.Class_typefunc_from_string();
       return output;
     }

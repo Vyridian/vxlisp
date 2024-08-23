@@ -21,7 +21,7 @@ public final class En {
   public static class Class_context_en extends Core.Class_base implements Func_context_en {
 
     @Override
-    public En.Func_context_en vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       En.Class_context_en output = new En.Class_context_en();
       return output;
     }
@@ -141,7 +141,7 @@ public final class En {
   public static class Class_context_test extends Core.Class_base implements Func_context_test {
 
     @Override
-    public En.Func_context_test vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       En.Class_context_test output = new En.Class_context_test();
       return output;
     }
@@ -269,7 +269,7 @@ public final class En {
   public static class Class_securitydata_test extends Core.Class_base implements Func_securitydata_test {
 
     @Override
-    public En.Func_securitydata_test vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       En.Class_securitydata_test output = new En.Class_securitydata_test();
       return output;
     }
@@ -375,7 +375,7 @@ public final class En {
   public static class Class_translation_en extends Core.Class_base implements Func_translation_en {
 
     @Override
-    public En.Func_translation_en vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       En.Class_translation_en output = new En.Class_translation_en();
       return output;
     }
@@ -474,7 +474,7 @@ public final class En {
   public static class Class_words extends Core.Class_base implements Func_words {
 
     @Override
-    public En.Func_words vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       En.Class_words output = new En.Class_words();
       return output;
     }

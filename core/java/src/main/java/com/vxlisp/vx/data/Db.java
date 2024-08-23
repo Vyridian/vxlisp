@@ -53,7 +53,7 @@ public final class Db {
     }
 
     @Override
-    public Db.Type_db vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Db.Type_db output = Core.vx_copy(Db.e_db, vals);
       return output;
     }
@@ -301,7 +301,7 @@ public final class Db {
     }
 
     @Override
-    public Db.Type_dbcell vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Db.Type_dbcell output = Core.vx_copy(Db.e_dbcell, vals);
       return output;
     }
@@ -628,7 +628,7 @@ public final class Db {
     }
 
     @Override
-    public Db.Type_dbcellmap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Db.Type_dbcellmap output = Core.vx_copy(Db.e_dbcellmap, vals);
       return output;
     }
@@ -824,7 +824,7 @@ public final class Db {
     }
 
     @Override
-    public Db.Type_dbfield vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Db.Type_dbfield output = Core.vx_copy(Db.e_dbfield, vals);
       return output;
     }
@@ -1103,7 +1103,7 @@ public final class Db {
     }
 
     @Override
-    public Db.Type_dbfieldmap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Db.Type_dbfieldmap output = Core.vx_copy(Db.e_dbfieldmap, vals);
       return output;
     }
@@ -1235,7 +1235,7 @@ public final class Db {
   public static class Class_dbid extends Core.Class_base implements Type_dbid {
 
     @Override
-    public Db.Type_dbid vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Db.Type_dbid output = Core.vx_copy(Db.e_dbid, vals);
       return output;
     }
@@ -1353,7 +1353,7 @@ public final class Db {
     }
 
     @Override
-    public Db.Type_dblink vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Db.Type_dblink output = Core.vx_copy(Db.e_dblink, vals);
       return output;
     }
@@ -1564,7 +1564,7 @@ public final class Db {
     }
 
     @Override
-    public Db.Type_dblinklist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Db.Type_dblinklist output = Core.vx_copy(Db.e_dblinklist, vals);
       return output;
     }
@@ -1720,7 +1720,7 @@ public final class Db {
     }
 
     @Override
-    public Db.Type_dbnode vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Db.Type_dbnode output = Core.vx_copy(Db.e_dbnode, vals);
       return output;
     }
@@ -1989,7 +1989,7 @@ public final class Db {
     }
 
     @Override
-    public Db.Type_dbnote vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Db.Type_dbnote output = Core.vx_copy(Db.e_dbnote, vals);
       return output;
     }
@@ -2317,7 +2317,7 @@ public final class Db {
     }
 
     @Override
-    public Db.Type_dbtable vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Db.Type_dbtable output = Core.vx_copy(Db.e_dbtable, vals);
       return output;
     }
@@ -2653,7 +2653,7 @@ public final class Db {
     }
 
     @Override
-    public Db.Type_dbvalue vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Db.Type_dbvalue output = Core.vx_copy(Db.e_dbvalue, vals);
       return output;
     }

@@ -116,7 +116,7 @@ public static class Xml {
       return output;
     }
 
-    public override Vx.Data.Xml.Type_xml vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Xml.Type_xml output = Vx.Core.vx_copy(Vx.Data.Xml.e_xml, vals);
       return output;
     }
@@ -407,7 +407,7 @@ public static class Xml {
       return output;
     }
 
-    public override Vx.Data.Xml.Type_xmllist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Xml.Type_xmllist output = Vx.Core.vx_copy(Vx.Data.Xml.e_xmllist, vals);
       return output;
     }
@@ -576,7 +576,7 @@ public static class Xml {
       return output;
     }
 
-    public override Vx.Data.Xml.Type_xmlpropmap vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Xml.Type_xmlpropmap output = Vx.Core.vx_copy(Vx.Data.Xml.e_xmlpropmap, vals);
       return output;
     }
@@ -929,7 +929,7 @@ public static class Xml {
 
   public class Class_string_decodexml_from_string : Vx.Core.Class_base, Func_string_decodexml_from_string {
 
-    public override Vx.Data.Xml.Func_string_decodexml_from_string vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Xml.Class_string_decodexml_from_string output = new Vx.Data.Xml.Class_string_decodexml_from_string();
       return output;
     }
@@ -1051,7 +1051,7 @@ public static class Xml {
 
   public class Class_string_first_from_xml : Vx.Core.Class_base, Func_string_first_from_xml {
 
-    public override Vx.Data.Xml.Func_string_first_from_xml vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Xml.Class_string_first_from_xml output = new Vx.Data.Xml.Class_string_first_from_xml();
       return output;
     }
@@ -1169,7 +1169,7 @@ public static class Xml {
 
   public class Class_textblock_xml_from_string : Vx.Core.Class_base, Func_textblock_xml_from_string {
 
-    public override Vx.Data.Xml.Func_textblock_xml_from_string vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Xml.Class_textblock_xml_from_string output = new Vx.Data.Xml.Class_textblock_xml_from_string();
       return output;
     }
@@ -1269,7 +1269,7 @@ public static class Xml {
 
   public class Class_xml_angle_from_xml_textblock : Vx.Core.Class_base, Func_xml_angle_from_xml_textblock {
 
-    public override Vx.Data.Xml.Func_xml_angle_from_xml_textblock vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Xml.Class_xml_angle_from_xml_textblock output = new Vx.Data.Xml.Class_xml_angle_from_xml_textblock();
       return output;
     }
@@ -1410,7 +1410,7 @@ public static class Xml {
 
   public class Class_xml_close_from_xml_textblock : Vx.Core.Class_base, Func_xml_close_from_xml_textblock {
 
-    public override Vx.Data.Xml.Func_xml_close_from_xml_textblock vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Xml.Class_xml_close_from_xml_textblock output = new Vx.Data.Xml.Class_xml_close_from_xml_textblock();
       return output;
     }
@@ -1614,7 +1614,7 @@ public static class Xml {
 
   public class Class_xml_parse_from_xml_textblock : Vx.Core.Class_base, Func_xml_parse_from_xml_textblock {
 
-    public override Vx.Data.Xml.Func_xml_parse_from_xml_textblock vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Xml.Class_xml_parse_from_xml_textblock output = new Vx.Data.Xml.Class_xml_parse_from_xml_textblock();
       return output;
     }
@@ -1756,7 +1756,7 @@ public static class Xml {
 
   public class Class_xml_parse_from_xml_textblocklist : Vx.Core.Class_base, Func_xml_parse_from_xml_textblocklist {
 
-    public override Vx.Data.Xml.Func_xml_parse_from_xml_textblocklist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Xml.Class_xml_parse_from_xml_textblocklist output = new Vx.Data.Xml.Class_xml_parse_from_xml_textblocklist();
       return output;
     }
@@ -1852,7 +1852,7 @@ public static class Xml {
 
   public class Class_xml_properties_from_xml_textblocklist : Vx.Core.Class_base, Func_xml_properties_from_xml_textblocklist {
 
-    public override Vx.Data.Xml.Func_xml_properties_from_xml_textblocklist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Xml.Class_xml_properties_from_xml_textblocklist output = new Vx.Data.Xml.Class_xml_properties_from_xml_textblocklist();
       return output;
     }
@@ -1958,7 +1958,7 @@ public static class Xml {
 
   public class Class_xml_property_from_xml_textblock : Vx.Core.Class_base, Func_xml_property_from_xml_textblock {
 
-    public override Vx.Data.Xml.Func_xml_property_from_xml_textblock vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Xml.Class_xml_property_from_xml_textblock output = new Vx.Data.Xml.Class_xml_property_from_xml_textblock();
       return output;
     }
@@ -2178,7 +2178,7 @@ public static class Xml {
 
   public class Class_xml_read_from_file : Vx.Core.Class_base, Func_xml_read_from_file {
 
-    public override Vx.Data.Xml.Func_xml_read_from_file vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Xml.Class_xml_read_from_file output = new Vx.Data.Xml.Class_xml_read_from_file();
       return output;
     }
@@ -2288,7 +2288,7 @@ public static class Xml {
 
   public class Class_xml_text_from_xml_textblock : Vx.Core.Class_base, Func_xml_text_from_xml_textblock {
 
-    public override Vx.Data.Xml.Func_xml_text_from_xml_textblock vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Xml.Class_xml_text_from_xml_textblock output = new Vx.Data.Xml.Class_xml_text_from_xml_textblock();
       return output;
     }
@@ -2425,7 +2425,7 @@ public static class Xml {
 
   public class Class_xml_from_file : Vx.Core.Class_base, Func_xml_from_file {
 
-    public override Vx.Data.Xml.Func_xml_from_file vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Xml.Class_xml_from_file output = new Vx.Data.Xml.Class_xml_from_file();
       return output;
     }
@@ -2530,7 +2530,7 @@ public static class Xml {
 
   public class Class_xml_from_string : Vx.Core.Class_base, Func_xml_from_string {
 
-    public override Vx.Data.Xml.Func_xml_from_string vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Xml.Class_xml_from_string output = new Vx.Data.Xml.Class_xml_from_string();
       return output;
     }
@@ -2637,7 +2637,7 @@ public static class Xml {
 
   public class Class_xml_from_textblock : Vx.Core.Class_base, Func_xml_from_textblock {
 
-    public override Vx.Data.Xml.Func_xml_from_textblock vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Xml.Class_xml_from_textblock output = new Vx.Data.Xml.Class_xml_from_textblock();
       return output;
     }

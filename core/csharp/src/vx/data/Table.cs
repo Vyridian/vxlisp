@@ -56,7 +56,7 @@ public static class Table {
       return output;
     }
 
-    public override Vx.Data.Table.Type_cell vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Table.Type_cell output = Vx.Core.vx_copy(Vx.Data.Table.e_cell, vals);
       return output;
     }
@@ -253,7 +253,7 @@ public static class Table {
       return output;
     }
 
-    public override Vx.Data.Table.Type_celllist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Table.Type_celllist output = Vx.Core.vx_copy(Vx.Data.Table.e_celllist, vals);
       return output;
     }
@@ -422,7 +422,7 @@ public static class Table {
       return output;
     }
 
-    public override Vx.Data.Table.Type_cellmap vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Table.Type_cellmap output = Vx.Core.vx_copy(Vx.Data.Table.e_cellmap, vals);
       return output;
     }
@@ -602,7 +602,7 @@ public static class Table {
       return output;
     }
 
-    public override Vx.Data.Table.Type_field vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Table.Type_field output = Vx.Core.vx_copy(Vx.Data.Table.e_field, vals);
       return output;
     }
@@ -824,7 +824,7 @@ public static class Table {
       return output;
     }
 
-    public override Vx.Data.Table.Type_fieldlist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Table.Type_fieldlist output = Vx.Core.vx_copy(Vx.Data.Table.e_fieldlist, vals);
       return output;
     }
@@ -955,7 +955,7 @@ public static class Table {
       return output;
     }
 
-    public override Vx.Data.Table.Type_fieldmap vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Table.Type_fieldmap output = Vx.Core.vx_copy(Vx.Data.Table.e_fieldmap, vals);
       return output;
     }
@@ -1111,7 +1111,7 @@ public static class Table {
       return output;
     }
 
-    public override Vx.Data.Table.Type_filter vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Table.Type_filter output = Vx.Core.vx_copy(Vx.Data.Table.e_filter, vals);
       return output;
     }
@@ -1358,7 +1358,7 @@ public static class Table {
       return output;
     }
 
-    public override Vx.Data.Table.Type_row vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Table.Type_row output = Vx.Core.vx_copy(Vx.Data.Table.e_row, vals);
       return output;
     }
@@ -1577,7 +1577,7 @@ public static class Table {
       return output;
     }
 
-    public override Vx.Data.Table.Type_rowlist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Table.Type_rowlist output = Vx.Core.vx_copy(Vx.Data.Table.e_rowlist, vals);
       return output;
     }
@@ -1746,7 +1746,7 @@ public static class Table {
       return output;
     }
 
-    public override Vx.Data.Table.Type_rowmap vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Table.Type_rowmap output = Vx.Core.vx_copy(Vx.Data.Table.e_rowmap, vals);
       return output;
     }
@@ -1926,7 +1926,7 @@ public static class Table {
       return output;
     }
 
-    public override Vx.Data.Table.Type_sort vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Table.Type_sort output = Vx.Core.vx_copy(Vx.Data.Table.e_sort, vals);
       return output;
     }
@@ -2233,7 +2233,7 @@ public static class Table {
       return output;
     }
 
-    public override Vx.Data.Table.Type_table vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Data.Table.Type_table output = Vx.Core.vx_copy(Vx.Data.Table.e_table, vals);
       return output;
     }

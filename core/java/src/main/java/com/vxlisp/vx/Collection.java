@@ -208,7 +208,7 @@ public final class Collection {
   public static class Class_any_from_for_until_loop extends Core.Class_base implements Func_any_from_for_until_loop {
 
     @Override
-    public Collection.Func_any_from_for_until_loop vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Collection.Class_any_from_for_until_loop output = new Collection.Class_any_from_for_until_loop();
       return output;
     }
@@ -320,7 +320,7 @@ public final class Collection {
   public static class Class_any_from_for_until_loop_max extends Core.Class_base implements Func_any_from_for_until_loop_max {
 
     @Override
-    public Collection.Func_any_from_for_until_loop_max vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Collection.Class_any_from_for_until_loop_max output = new Collection.Class_any_from_for_until_loop_max();
       return output;
     }
@@ -418,7 +418,7 @@ public final class Collection {
   public static class Class_any_from_for_while_loop extends Core.Class_base implements Func_any_from_for_while_loop {
 
     @Override
-    public Collection.Func_any_from_for_while_loop vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Collection.Class_any_from_for_while_loop output = new Collection.Class_any_from_for_while_loop();
       return output;
     }
@@ -531,7 +531,7 @@ public final class Collection {
   public static class Class_any_from_for_while_loop_max extends Core.Class_base implements Func_any_from_for_while_loop_max {
 
     @Override
-    public Collection.Func_any_from_for_while_loop_max vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Collection.Class_any_from_for_while_loop_max output = new Collection.Class_any_from_for_while_loop_max();
       return output;
     }
@@ -628,7 +628,7 @@ public final class Collection {
   public static class Class_any_from_map_pos extends Core.Class_base implements Func_any_from_map_pos {
 
     @Override
-    public Collection.Func_any_from_map_pos vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Collection.Class_any_from_map_pos output = new Collection.Class_any_from_map_pos();
       return output;
     }
@@ -741,7 +741,7 @@ public final class Collection {
   public static class Class_boolean_write_from_map_removekey extends Core.Class_base implements Func_boolean_write_from_map_removekey {
 
     @Override
-    public Collection.Func_boolean_write_from_map_removekey vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Collection.Class_boolean_write_from_map_removekey output = new Collection.Class_boolean_write_from_map_removekey();
       return output;
     }
@@ -841,7 +841,7 @@ public final class Collection {
   public static class Class_boolean_write_from_map_removekeys extends Core.Class_base implements Func_boolean_write_from_map_removekeys {
 
     @Override
-    public Collection.Func_boolean_write_from_map_removekeys vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Collection.Class_boolean_write_from_map_removekeys output = new Collection.Class_boolean_write_from_map_removekeys();
       return output;
     }
@@ -955,7 +955,7 @@ public final class Collection {
   public static class Class_int_from_map_key extends Core.Class_base implements Func_int_from_map_key {
 
     @Override
-    public Collection.Func_int_from_map_key vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Collection.Class_int_from_map_key output = new Collection.Class_int_from_map_key();
       return output;
     }
@@ -1061,7 +1061,7 @@ public final class Collection {
   public static class Class_int_from_stringlist_find extends Core.Class_base implements Func_int_from_stringlist_find {
 
     @Override
-    public Collection.Func_int_from_stringlist_find vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Collection.Class_int_from_stringlist_find output = new Collection.Class_int_from_stringlist_find();
       return output;
     }
@@ -1190,7 +1190,7 @@ public final class Collection {
   public static class Class_is_list extends Core.Class_base implements Func_is_list {
 
     @Override
-    public Collection.Func_is_list vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Collection.Class_is_list output = new Collection.Class_is_list();
       return output;
     }
@@ -1301,7 +1301,7 @@ public final class Collection {
   public static class Class_is_map extends Core.Class_base implements Func_is_map {
 
     @Override
-    public Collection.Func_is_map vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Collection.Class_is_map output = new Collection.Class_is_map();
       return output;
     }
@@ -1425,7 +1425,7 @@ public final class Collection {
   public static class Class_list_from_for_end_loop extends Core.Class_base implements Func_list_from_for_end_loop {
 
     @Override
-    public Collection.Func_list_from_for_end_loop vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Collection.Class_list_from_for_end_loop output = new Collection.Class_list_from_for_end_loop();
       return output;
     }
@@ -1522,7 +1522,7 @@ public final class Collection {
   public static class Class_list_from_for_while_loop extends Core.Class_base implements Func_list_from_for_while_loop {
 
     @Override
-    public Collection.Func_list_from_for_while_loop vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Collection.Class_list_from_for_while_loop output = new Collection.Class_list_from_for_while_loop();
       return output;
     }
@@ -1632,7 +1632,7 @@ public final class Collection {
   public static class Class_list_from_for_while_loop_max extends Core.Class_base implements Func_list_from_for_while_loop_max {
 
     @Override
-    public Collection.Func_list_from_for_while_loop_max vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Collection.Class_list_from_for_while_loop_max output = new Collection.Class_list_from_for_while_loop_max();
       return output;
     }
@@ -1729,7 +1729,7 @@ public final class Collection {
   public static class Class_list_from_list_end extends Core.Class_base implements Func_list_from_list_end {
 
     @Override
-    public Collection.Func_list_from_list_end vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Collection.Class_list_from_list_end output = new Collection.Class_list_from_list_end();
       return output;
     }
@@ -1829,7 +1829,7 @@ public final class Collection {
   public static class Class_list_from_list_filter extends Core.Class_base implements Func_list_from_list_filter {
 
     @Override
-    public Collection.Func_list_from_list_filter vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Collection.Class_list_from_list_filter output = new Collection.Class_list_from_list_filter();
       return output;
     }
@@ -1924,7 +1924,7 @@ public final class Collection {
   public static class Class_list_from_list_filtertypes extends Core.Class_base implements Func_list_from_list_filtertypes {
 
     @Override
-    public Collection.Func_list_from_list_filtertypes vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Collection.Class_list_from_list_filtertypes output = new Collection.Class_list_from_list_filtertypes();
       return output;
     }
@@ -2034,7 +2034,7 @@ public final class Collection {
   public static class Class_list_from_list_start extends Core.Class_base implements Func_list_from_list_start {
 
     @Override
-    public Collection.Func_list_from_list_start vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Collection.Class_list_from_list_start output = new Collection.Class_list_from_list_start();
       return output;
     }
@@ -2137,7 +2137,7 @@ public final class Collection {
   public static class Class_list_from_list_start_end extends Core.Class_base implements Func_list_from_list_start_end {
 
     @Override
-    public Collection.Func_list_from_list_start_end vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Collection.Class_list_from_list_start_end output = new Collection.Class_list_from_list_start_end();
       return output;
     }
@@ -2233,7 +2233,7 @@ public final class Collection {
   public static class Class_map_from_map_end extends Core.Class_base implements Func_map_from_map_end {
 
     @Override
-    public Collection.Func_map_from_map_end vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Collection.Class_map_from_map_end output = new Collection.Class_map_from_map_end();
       return output;
     }
@@ -2333,7 +2333,7 @@ public final class Collection {
   public static class Class_map_from_map_keys extends Core.Class_base implements Func_map_from_map_keys {
 
     @Override
-    public Collection.Func_map_from_map_keys vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Collection.Class_map_from_map_keys output = new Collection.Class_map_from_map_keys();
       return output;
     }
@@ -2428,7 +2428,7 @@ public final class Collection {
   public static class Class_map_from_map_start extends Core.Class_base implements Func_map_from_map_start {
 
     @Override
-    public Collection.Func_map_from_map_start vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Collection.Class_map_from_map_start output = new Collection.Class_map_from_map_start();
       return output;
     }
@@ -2531,7 +2531,7 @@ public final class Collection {
   public static class Class_map_from_map_start_end extends Core.Class_base implements Func_map_from_map_start_end {
 
     @Override
-    public Collection.Func_map_from_map_start_end vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Collection.Class_map_from_map_start_end output = new Collection.Class_map_from_map_start_end();
       return output;
     }

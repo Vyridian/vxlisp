@@ -132,7 +132,7 @@ public final class Xml {
     }
 
     @Override
-    public Xml.Type_xml vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Xml.Type_xml output = Core.vx_copy(Xml.e_xml, vals);
       return output;
     }
@@ -447,7 +447,7 @@ public final class Xml {
     }
 
     @Override
-    public Xml.Type_xmllist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Xml.Type_xmllist output = Core.vx_copy(Xml.e_xmllist, vals);
       return output;
     }
@@ -633,7 +633,7 @@ public final class Xml {
     }
 
     @Override
-    public Xml.Type_xmlpropmap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Xml.Type_xmlpropmap output = Core.vx_copy(Xml.e_xmlpropmap, vals);
       return output;
     }
@@ -996,7 +996,7 @@ public final class Xml {
   public static class Class_string_decodexml_from_string extends Core.Class_base implements Func_string_decodexml_from_string {
 
     @Override
-    public Xml.Func_string_decodexml_from_string vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Xml.Class_string_decodexml_from_string output = new Xml.Class_string_decodexml_from_string();
       return output;
     }
@@ -1128,7 +1128,7 @@ public final class Xml {
   public static class Class_string_first_from_xml extends Core.Class_base implements Func_string_first_from_xml {
 
     @Override
-    public Xml.Func_string_first_from_xml vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Xml.Class_string_first_from_xml output = new Xml.Class_string_first_from_xml();
       return output;
     }
@@ -1256,7 +1256,7 @@ public final class Xml {
   public static class Class_textblock_xml_from_string extends Core.Class_base implements Func_textblock_xml_from_string {
 
     @Override
-    public Xml.Func_textblock_xml_from_string vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Xml.Class_textblock_xml_from_string output = new Xml.Class_textblock_xml_from_string();
       return output;
     }
@@ -1366,7 +1366,7 @@ public final class Xml {
   public static class Class_xml_angle_from_xml_textblock extends Core.Class_base implements Func_xml_angle_from_xml_textblock {
 
     @Override
-    public Xml.Func_xml_angle_from_xml_textblock vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Xml.Class_xml_angle_from_xml_textblock output = new Xml.Class_xml_angle_from_xml_textblock();
       return output;
     }
@@ -1515,7 +1515,7 @@ public final class Xml {
   public static class Class_xml_close_from_xml_textblock extends Core.Class_base implements Func_xml_close_from_xml_textblock {
 
     @Override
-    public Xml.Func_xml_close_from_xml_textblock vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Xml.Class_xml_close_from_xml_textblock output = new Xml.Class_xml_close_from_xml_textblock();
       return output;
     }
@@ -1727,7 +1727,7 @@ public final class Xml {
   public static class Class_xml_parse_from_xml_textblock extends Core.Class_base implements Func_xml_parse_from_xml_textblock {
 
     @Override
-    public Xml.Func_xml_parse_from_xml_textblock vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Xml.Class_xml_parse_from_xml_textblock output = new Xml.Class_xml_parse_from_xml_textblock();
       return output;
     }
@@ -1877,7 +1877,7 @@ public final class Xml {
   public static class Class_xml_parse_from_xml_textblocklist extends Core.Class_base implements Func_xml_parse_from_xml_textblocklist {
 
     @Override
-    public Xml.Func_xml_parse_from_xml_textblocklist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Xml.Class_xml_parse_from_xml_textblocklist output = new Xml.Class_xml_parse_from_xml_textblocklist();
       return output;
     }
@@ -1981,7 +1981,7 @@ public final class Xml {
   public static class Class_xml_properties_from_xml_textblocklist extends Core.Class_base implements Func_xml_properties_from_xml_textblocklist {
 
     @Override
-    public Xml.Func_xml_properties_from_xml_textblocklist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Xml.Class_xml_properties_from_xml_textblocklist output = new Xml.Class_xml_properties_from_xml_textblocklist();
       return output;
     }
@@ -2095,7 +2095,7 @@ public final class Xml {
   public static class Class_xml_property_from_xml_textblock extends Core.Class_base implements Func_xml_property_from_xml_textblock {
 
     @Override
-    public Xml.Func_xml_property_from_xml_textblock vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Xml.Class_xml_property_from_xml_textblock output = new Xml.Class_xml_property_from_xml_textblock();
       return output;
     }
@@ -2323,7 +2323,7 @@ public final class Xml {
   public static class Class_xml_read_from_file extends Core.Class_base implements Func_xml_read_from_file {
 
     @Override
-    public Xml.Func_xml_read_from_file vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Xml.Class_xml_read_from_file output = new Xml.Class_xml_read_from_file();
       return output;
     }
@@ -2443,7 +2443,7 @@ public final class Xml {
   public static class Class_xml_text_from_xml_textblock extends Core.Class_base implements Func_xml_text_from_xml_textblock {
 
     @Override
-    public Xml.Func_xml_text_from_xml_textblock vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Xml.Class_xml_text_from_xml_textblock output = new Xml.Class_xml_text_from_xml_textblock();
       return output;
     }
@@ -2588,7 +2588,7 @@ public final class Xml {
   public static class Class_xml_from_file extends Core.Class_base implements Func_xml_from_file {
 
     @Override
-    public Xml.Func_xml_from_file vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Xml.Class_xml_from_file output = new Xml.Class_xml_from_file();
       return output;
     }
@@ -2703,7 +2703,7 @@ public final class Xml {
   public static class Class_xml_from_string extends Core.Class_base implements Func_xml_from_string {
 
     @Override
-    public Xml.Func_xml_from_string vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Xml.Class_xml_from_string output = new Xml.Class_xml_from_string();
       return output;
     }
@@ -2820,7 +2820,7 @@ public final class Xml {
   public static class Class_xml_from_textblock extends Core.Class_base implements Func_xml_from_textblock {
 
     @Override
-    public Xml.Func_xml_from_textblock vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Xml.Class_xml_from_textblock output = new Xml.Class_xml_from_textblock();
       return output;
     }

@@ -1911,7 +1911,7 @@ func LangVxContains(lang *vxlang, text string, contains string) string {
 	switch lang.name {
 	case "csharp":
 		output = text + ".Contains(" + contains + ")"
-	case "java":
+	default:
 		output = text + ".contains(" + contains + ")"
 	}
 	return output
@@ -1935,6 +1935,8 @@ func LangVxFloatFromString(lang *vxlang, text string) string {
 		output = "float.Parse(" + text + ")"
 	case "java":
 		output = "Float.parseFloat(" + text + ")"
+	case "kotlin":
+		output = text + ".toFloat()"
 	}
 	return output
 }
@@ -1946,6 +1948,8 @@ func LangVxIntFromString(lang *vxlang, text string) string {
 		output = "Int32.Parse(" + text + ")"
 	case "java":
 		output = "Integer.parseInt(" + text + ")"
+	case "kotlin":
+		output = text + ".toInt()"
 	}
 	return output
 }
@@ -1955,7 +1959,7 @@ func LangVxListAdd(lang *vxlang, varname string, value string) string {
 	switch lang.name {
 	case "csharp":
 		output = varname + ".Add(" + value + ")"
-	case "java":
+	default:
 		output = varname + ".add(" + value + ")"
 	}
 	return output
@@ -1966,7 +1970,7 @@ func LangVxListAddList(lang *vxlang, varname string, value string) string {
 	switch lang.name {
 	case "csharp":
 		output = varname + ".AddRange(" + value + ")"
-	case "java":
+	default:
 		output = varname + ".addAll(" + value + ")"
 	}
 	return output
@@ -1977,7 +1981,7 @@ func LangVxListGet(lang *vxlang, varname string, value string) string {
 	switch lang.name {
 	case "csharp":
 		output = varname + "[" + value + "]"
-	case "java":
+	default:
 		output = varname + ".get(" + value + ")"
 	}
 	return output

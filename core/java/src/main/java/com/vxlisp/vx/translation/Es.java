@@ -19,7 +19,7 @@ public final class Es {
   public static class Class_translation_es extends Core.Class_base implements Func_translation_es {
 
     @Override
-    public Es.Func_translation_es vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Es.Class_translation_es output = new Es.Class_translation_es();
       return output;
     }
@@ -118,7 +118,7 @@ public final class Es {
   public static class Class_words extends Core.Class_base implements Func_words {
 
     @Override
-    public Es.Func_words vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Es.Class_words output = new Es.Class_words();
       return output;
     }

@@ -114,7 +114,7 @@ object vx_core {
   //@SafeVarargs
   fun <T> arraylist_from_array(
     vararg items : T) : List<T> {
-    var output : List<T> = ArrayList<T>(Arrays.asList(items))
+    var output : List<T> = items.asList()
     output = vx_core.immutablelist(output)
     return output
   }
@@ -133,10 +133,10 @@ object vx_core {
 
   fun <T, U> arraylist_from_arraylist_fn(
     listval : List<U>,
-    fn_any_from_any : Function<U, T>) : List<T> {
+    fn_any_from_any : (U) -> T) : List<T> {
     val list : MutableList<T> = ArrayList<T>()
     for (value_u : U in listval) {
-      val t_val : T = fn_any_from_any.apply(value_u)
+      val t_val : T = fn_any_from_any(value_u)
       list.add(t_val)
     }
     val output = vx_core.immutablelist(list)
@@ -161,13 +161,13 @@ object vx_core {
 
   fun <T, U> arraylist_from_linkedhashmap_fn(
     mapval : Map<String, U>,
-    fn_any_from_key_value : BiFunction<String, U, T>) : List<T> {
+    fn_any_from_key_value : (String, U) -> T) : List<T> {
     val list : MutableList<T> = ArrayList<T>()
     val keys : Set<String> = mapval.keys
     for (key : String in keys) {
-      val u_val : U = mapval.get(key)
+      val u_val : U? = mapval.get(key)
       if (u_val != null) {
-        val t_val : T = fn_any_from_key_value.apply(key, u_val)
+        val t_val : T = fn_any_from_key_value(key, u_val)
         list.add(t_val)
       }
     }
@@ -193,62 +193,25 @@ object vx_core {
 
   fun <T, U> async_from_async_fn(
     future : CompletableFuture<U>,
-    fn : Function<? super U, ? : T>) : CompletableFuture<T> {
+    fn : (U) -> T) : CompletableFuture<T> {
     val output : CompletableFuture<T> = future.thenApply(fn)
     return output
   }
 
-  fun <T> async_arraylist_from_arraylist_async(
-    list_future : List<CompletableFuture<T>>) : CompletableFuture<List<T>> {
-    val allFutures : CompletableFuture<Void> = CompletableFuture.allOf(
-      list_future.toArray(CompletableFuture[list_future.size])
-    )
-    val output : CompletableFuture<List<T>> = allFutures.thenApply({v ->
-      val list : List<T> = list_future.stream()
-        .map({future -> future.join()})
-        .collect(Collectors.toList())
-      val output_1 : List<T> = vx_core.immutablelist(list)
-      output_1
-    })
-    return output
-  }
-
-/*
-  //@SafeVarargs
-  fun <T> hashmap_from_keyvalues(
-    vararg keyvalues : KeyValue<T>) : LinkedHashMap<String, T> {
-    val output : LinkedHashMap<String, T> = LinkedHashMap<String, T>()
-    for (keyvalue : KeyValue<T> in keyvalues) {
-      val key : String = keyvalue.key
-      val value : T = keyvalue.value
-      output.put(key, value)
-    }
-    return output
-  }
-
-  fun <T> keyvalue_from_key_value(
-    String key : String,
-    value : T) : KeyValue<T> {
-    val output : KeyValue<T> = KeyValue<T>()
-    output.key = key
-    output.value = value
-    return output
-  }
-*/
-
   fun <T> map_from_list_fn(
     listval : List<T>,
-    fn_any_from_any : Function<T, vx_core.Type_string>) : Map<String, T> {
+    fn_any_from_any : (T) -> vx_core.Type_string) : Map<String, T> {
     var map : MutableMap<String, T> = LinkedHashMap<String, T>()
     for (value : T in listval) {
-      val valkey : vx_core.Type_string = fn_any_from_any.apply(value)
+      val valkey : vx_core.Type_string = fn_any_from_any(value)
       val key : String = valkey.vx_string()
-      map.put(key, val)
+      map.put(key, value)
     }
     val output = vx_core.immutablemap<T>(map)
     return output
   }
 
+/*
   fun <T : vx_core.Type_any> map_from_map(
     mapval : LinkedHashMap<String, vx_core.Type_any>) : LinkedHashMap<String, T> {
     LinkedHashMap<String, T> output = LinkedHashMap<String, T>()
@@ -263,6 +226,125 @@ object vx_core {
           vx_core.vx_log("map<-map", ex)
         }
       }
+    }
+    return output
+  }
+*/
+
+  // vx_any_from_list_start_reduce(any-1, list-2, any-1, any<-reduce)
+  fun <T : vx_core.Type_any, N : vx_core.Type_list> vx_any_from_list_start_reduce(
+    generic_any_1 : T,
+    list : N,
+    valstart : T,
+    fn_reduce : vx_core.Func_any_from_reduce) : T {
+    var output : T = valstart
+    val listval : List<vx_core.Type_any> = list.vx_list()
+    for (item : vx_core.Type_any in listval) {
+      output = fn_reduce.vx_any_from_reduce(
+        generic_any_1, output, item
+      )
+    }
+    return output
+  }
+
+  // vx_any_from_map(generic_any_1, map, string)
+  fun <T : vx_core.Type_any> vx_any_from_map(
+    generic_any_1 : T,
+    valuemap : vx_core.Type_map,
+    key : vx_core.Type_string) : T {
+    var output : T = vx_core.f_empty(generic_any_1)
+    var skey : String = key.vx_string()
+    if (skey.startsWith(":")) {
+      skey = skey.substring(1);
+    }
+    val value : vx_core.Type_any = valuemap.vx_map().getOrDefault(
+      skey, output
+    )
+    output = vx_core.f_any_from_any(
+      generic_any_1,
+      value
+    )
+    return output
+  }
+
+  // vx_any_from_map_start_reduce(any-1, map-2, any-1, any<-any-key-value)
+  fun <T : vx_core.Type_any, N : vx_core.Type_map> vx_any_from_map_start_reduce(
+    generic_any_1 : T,
+    map : N,
+    start : T,
+    fn_reduce : vx_core.Func_any_from_any_key_value) : T {
+    var output : T = start
+    val mapval : Map<String, vx_core.Type_any> = map.vx_map()
+    val keys : Set<String> = mapval.keys
+    for (skey : String in keys) {
+      val key : vx_core.Type_string = vx_core.vx_new_string(skey)
+      val value : vx_core.Type_any? = mapval.get(skey)
+      if (value != null) {
+        output = fn_reduce.vx_any_from_any_key_value(
+          generic_any_1, output, key, value
+        )
+      }
+    }
+    return output
+  }
+
+  // vx_any_first_from_list_fn(generic_any_1, list, fn_any)
+  fun <T : vx_core.Type_any> vx_any_first_from_list_fn(
+    generic_any_1 : T,
+    list : vx_core.Type_list,
+    fn_any : (vx_core.Type_any) -> T) : T {
+				var output : T = vx_core.f_empty(generic_any_1)
+				val listany : List<vx_core.Type_any> = list.vx_list()
+				for (any : vx_core.Type_any in listany) {
+				  val tany : T = vx_core.f_any_from_any(generic_any_1, any)
+				  val value : T = fn_any(tany)
+				  if (value != vx_core.e_any) {
+				    output = value
+				    break
+				  }
+				}
+    return output
+  }
+
+  fun <T> vx_async_new_from_value(
+    value : T) : CompletableFuture<T>  {
+    val output : CompletableFuture<T> = CompletableFuture.completedFuture(
+      value
+    )
+    return output
+  }
+
+  fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_async_from_async(
+    generic_any_1 : T,
+    future : CompletableFuture<U>) : CompletableFuture<T> {
+    val output : CompletableFuture<T> = future.thenApply({value ->
+      val output_1 : T = vx_core.f_any_from_any(generic_any_1, value)
+      output_1
+    })
+    return output
+  }
+
+  fun <T, U> vx_async_from_async_fn(
+    future : CompletableFuture<U>,
+    fn : (U) -> T) : CompletableFuture<T> {
+    val output : CompletableFuture<T> = future.thenApply(fn)
+    return output
+  }
+
+  fun <T> vx_async_arraylist_from_arraylist_async(
+    list_future_t : List<CompletableFuture<T>>) : CompletableFuture<List<T>> {
+    val future_void : CompletableFuture<Void> = CompletableFuture.allOf(
+      *list_future_t.toTypedArray()
+    )
+    val output : CompletableFuture<List<T>> = future_void.thenApply {
+      _ : Void ->
+      val list : List<T> = list_future_t.map {
+        future_t : CompletableFuture<T> ->
+        val output_2 : T = future_t.get()
+        output_2
+      }
+      val output_1 : List<T> = vx_core.immutablelist<T>(list)
+      output_1
     }
     return output
   }
@@ -287,6 +369,82 @@ object vx_core {
     text : String,
     starts : String) : Boolean {
     return text.startsWith(starts)
+  }
+
+  // vx_boolean_write_from_map_name_value(map, string, any)
+  fun vx_boolean_write_from_map_name_value(
+    valuemap : vx_core.Type_map,
+    name : vx_core.Type_string,
+    value : vx_core.Type_any) : vx_core.Type_boolean {
+    val output : vx_core.Type_boolean = valuemap.vx_set(name, value)
+    return output
+  }
+
+  // vx_compare(any, any)
+  fun vx_compare(
+    val1 : vx_core.Type_any,
+    val2 : vx_core.Type_any) : vx_core.Type_int {
+    var intresult : Int = 0
+    if ((val1 is vx_core.Type_number) && (val2 is vx_core.Type_number)) {
+      val num1 = val1 as vx_core.Type_number
+      val num2 = val2 as vx_core.Type_number
+      val float1 : Float = vx_core.vx_new(vx_core.t_float, num1).vx_float()
+      val float2 : Float = vx_core.vx_new(vx_core.t_float, num2).vx_float()
+      if (float1 < float2) {
+        intresult = -1
+      } else if (float1 > float2) {
+        intresult = 1
+      }
+    } else {
+      val stringval1 : String = vx_core.f_string_from_any(val1).vx_string()
+      val stringval2 : String = vx_core.f_string_from_any(val2).vx_string()
+      val compare : Int = stringval1.compareTo(stringval2)
+      if (compare > 0) {
+        intresult = 1
+      } else if (compare < 0) {
+        intresult = -1
+      }
+    }
+    val output : vx_core.Type_int = vx_core.vx_new_int(intresult)
+    return output
+  }
+
+  // vx_contains(list-1, any)
+  fun <T : vx_core.Type_list> vx_contains_1(
+    values : T,
+    find : vx_core.Type_any) : vx_core.Type_boolean {
+    var booleanresult : Boolean = false
+    val listvalues : List<vx_core.Type_any> = values.vx_list()
+    for (item : vx_core.Type_any in listvalues) {
+      val iseq : vx_core.Type_boolean = vx_core.f_eq(
+        item, find
+      )
+      if (iseq.vx_boolean()) {
+        booleanresult = true
+        break
+      }
+    }
+    val output : vx_core.Type_boolean = vx_core.vx_new_boolean(
+      booleanresult
+    )
+    return output
+  }
+
+  // vx_copy(generic_any_1, args...)
+  fun <T : vx_core.Type_any> vx_copy(
+    copyval : T,
+    vararg vals : Any) : T {
+    val value : vx_core.Type_any = copyval.vx_copy(vals)
+    val output : T = vx_core.f_any_from_any(copyval, value)
+    return output
+  }
+
+  // vx_empty(generic_any_1)
+  fun <T : vx_core.Type_any> vx_empty(
+    type : T) : T {
+    @Suppress("UNCHECKED_CAST")
+    val output : T = type.vx_empty() as T
+    return output
   }
 
   // vx_eqeq(any, any)
@@ -334,7 +492,7 @@ object vx_core {
   // vx_float_from_string(string)
   fun vx_float_from_string(
     text : String) : Float {
-    var output : Float = 0
+    var output : Float = 0f
     try {
       output = text.toFloat()
     } catch (ex : Exception) {
@@ -355,12 +513,16 @@ object vx_core {
 		  val funcmap : vx_core.Class_funcmap = vx_core.Class_funcmap()
 		  funcmap.vx_p_map = vx_core.immutablemap(mapfunc)
     val global : vx_core.Class_project = vx_core.c_global as vx_core.Class_project
-    var packagemap : vx_core.Class_packagemap = global.vx_p_packagemap as vx_core.Class_packagemap
-    if (packagemap == null) {
-      packagemap = vx_core.Class_packagemap()
+    var typepackagemap : vx_core.Type_packagemap? = global.vx_p_packagemap
+    var packagemap : vx_core.Class_packagemap = vx_core.Class_packagemap()
+    if (typepackagemap == null) {
       global.vx_p_packagemap = packagemap
+    } else {
+      packagemap = typepackagemap as vx_core.Class_packagemap
     }
-    val mappackage : Map<String, vx_core.Type_package> = LinkedHashMap<>(packagemap.vx_p_map)
+    val mappackage : MutableMap<String, vx_core.Type_package> = LinkedHashMap<String, vx_core.Type_package>(
+      packagemap.vx_p_map
+    )
 		  val pkg : vx_core.Class_package = vx_core.Class_package()
 		  pkg.vx_p_constmap = constmap
 		  pkg.vx_p_typemap = typemap
@@ -369,12 +531,44 @@ object vx_core {
     packagemap.vx_p_map = vx_core.immutablemap<vx_core.Type_package>(mappackage)
   }
 
+  fun <T : vx_core.Type_any> vx_if_2(
+    generic_any_1 : T,
+    thenelselist : vx_core.Type_thenelselist) : T {
+    var output : T = vx_core.f_empty(generic_any_1)
+    val fn_any : vx_core.Func_any_from_func = vx_core.vx_any_first_from_list_fn(
+      vx_core.t_any_from_func,
+      thenelselist,
+      {any : vx_core.Type_any ->
+        var fnany : vx_core.Func_any_from_func = vx_core.e_any_from_func
+        if (any is vx_core.Type_thenelse) {
+          val thenelse : vx_core.Type_thenelse = any as vx_core.Type_thenelse
+          val code : vx_core.Type_string = thenelse.code()
+          val scode : String = code.vx_string()
+          if (scode.equals(":then")) {
+            val fn_cond : vx_core.Func_boolean_from_func = thenelse.fn_cond()
+            val cond : vx_core.Type_boolean = fn_cond.vx_boolean_from_func()
+            if (cond.vx_boolean() == true) {
+              fnany = thenelse.fn_any()
+            }
+          } else if (scode.equals(":else")) {
+            fnany = thenelse.fn_any()
+          }
+        }
+        fnany
+      }
+    )
+    if (fn_any != vx_core.e_any_from_func) {
+      output = fn_any.vx_any_from_func(generic_any_1)
+    }
+    return output
+  }
+
   // vx_int_from_string(string)
   fun vx_int_from_string(
-    text : String) Int {
+    text : String) : Int {
     var output : Int = 0
     try {
-      output = Integer.parseInt(text)
+      output = text.toInt()
     } catch (ex : Exception) {
     }    
     return output
@@ -455,14 +649,15 @@ object vx_core {
     } else if (value is vx_core.Type_float) {
       val valfloat : vx_core.Type_float = value as vx_core.Type_float
       val floatval : Float = valfloat.vx_float()
-      if ((floatval as Int) == floatval) {
+      if (floatval == floatval.toInt().toFloat()) {
         result = true
       }
     } else if (value is vx_core.Type_decimal) {
       val valdec : vx_core.Type_decimal = value as vx_core.Type_decimal
       val strval : String = valdec.vx_string()
       try {
-        if (strval.toInt() == strval.toFloat()) {
+        val floatval : Float = strval.toFloat()
+        if (floatval == floatval.toInt().toFloat()) {
           result = true
         }
       } catch (ex : Exception) {
@@ -486,7 +681,7 @@ object vx_core {
         val valstring : vx_core.Type_string = value as vx_core.Type_string
         text = valstring.vx_string()
       } else if (value is vx_core.Type_any) {
-        val valany : vx_core.Type_any = value as vx_core.Type_anyvalue
+        val valany : vx_core.Type_any = value as vx_core.Type_any
         val valstring : vx_core.Type_string = vx_core.f_string_from_any(valany)
         text = valstring.vx_string()
       } else {
@@ -560,20 +755,12 @@ object vx_core {
     return output
   }
 
-  // vx_copy(generic_any_1, args...)
-  fun <T : vx_core.Type_any> vx_copy(
-    copyval : T,
-    vararg vals : Any) : T {
-    val value : vx_core.Type_any = copyval.vx_copy(vals)
-    val output : T = vx_core.f_any_from_any(copyval, value)
-    return output
-  }
-
-  // vx_empty(generic_any_1)
-  fun <T : vx_core.Type_any> vx_empty(
-    type : T) : T {
-    @Suppress("UNCHECKED_CAST")
-    val output : T = type.vx_empty() as T
+  // vx_new_list(T, List<any>)
+  fun <T : vx_core.Type_list> vx_new_list(
+    generic_list_1 : T,
+    listval : List<vx_core.Type_any>) : T {
+    val anylist : vx_core.Type_any = generic_list_1.vx_new(listval)
+    val output : T = vx_core.f_any_from_any(generic_list_1, anylist)
     return output
   }
 
@@ -585,32 +772,18 @@ object vx_core {
     return output
   }
 
-  fun <T> vx_async_new_from_value(
-    value : T) : CompletableFuture<T>  {
-    val output : CompletableFuture<T> = CompletableFuture.completedFuture(value)
-    return output
-  }
-
-  fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_async_from_async(
-    generic_any_1 : T,
-    future : CompletableFuture<U>) : CompletableFuture<T> {
-    val output : CompletableFuture<T> = future.thenApply({val ->
-      val output_1 : T = vx_core.f_any_from_any(generic_any_1, val)
-      output_1
-    })
-    return output
-  }
-
   fun <X : vx_core.Type_list, Y : vx_core.Type_list> vx_list_from_list_1(
     generic_list_1 : X,
     values : Y,
-    vx_core.Func_any_from_any fn_any_from_any) : X {
+    fn_any_from_any : vx_core.Func_any_from_any) : X {
     var output : X = vx_core.f_empty(generic_list_1)
     val list_value : List<vx_core.Type_any> = values.vx_list()
-    val fn : Func<vx_core.Type_any, vx_core.Type_any> = {val ->
-      fn_any_from_any.vx_any_from_any(
-        vx_core.t_any, val
+    val fn : (vx_core.Type_any) -> vx_core.Type_any = {
+      value : vx_core.Type_any ->
+      val output_1 : vx_core.Type_any = fn_any_from_any.vx_any_from_any(
+        vx_core.t_any, value
       )
+      output_1
     }
     val list_result : List<vx_core.Type_any> = vx_core.arraylist_from_arraylist_fn<vx_core.Type_any, vx_core.Type_any>(
       list_value, fn
@@ -625,17 +798,20 @@ object vx_core {
   fun <X : vx_core.Type_list, Y : vx_core.Type_list> vx_list_from_list_async(
     generic_list_1 : X,
     values : Y,
-    vx_core.Func_any_from_any_async fn_any_from_any_async) : CompletableFuture<X> {
-     val fn_future_from_any : Func<vx_core.Type_any, CompletableFuture<vx_core.Type_any>> = {val ->
-      CompletableFuture<vx_core.Type_any> future_any = fn_any_from_any_async.vx_any_from_any_async(
-        vx_core.t_any, val
+    fn_any_from_any_async : vx_core.Func_any_from_any_async) : CompletableFuture<X> {
+    val fn_future_from_any : (vx_core.Type_any) -> CompletableFuture<vx_core.Type_any> = {
+      value : vx_core.Type_any ->
+      val future_any : CompletableFuture<vx_core.Type_any> = fn_any_from_any_async.vx_any_from_any_async(
+       vx_core.t_any, value
       )
       future_any
     }
-    val fn_any_from_list : Func<List<vx_core.Type_any>, X> = {list_result ->
-      val array_result : object[] = [.. list_result]
-      vx_core.Type_any anylist = generic_list_1.vx_new(array_result)
-      val work : = vx_core.f_any_from_any(
+    val fn_any_from_list : (List<vx_core.Type_any>) -> X = {
+      list_result : List<vx_core.Type_any> ->
+      val anylist : vx_core.Type_any = generic_list_1.vx_new(
+        *list_result.toTypedArray()
+      )
+      val work : X = vx_core.f_any_from_any(
         generic_list_1,
         anylist
       )
@@ -658,18 +834,24 @@ object vx_core {
   fun <T : vx_core.Type_list, U : vx_core.Type_list> vx_list_from_list_intany(
     generic_list_1 : T,
     valuelist : U,
-    vx_core.Func_any_from_int_any fn_any_from_int_any) : T {
+    fn_any_from_int_any : vx_core.Func_any_from_int_any) : T {
     var output : T = vx_core.f_empty(generic_list_1)
     val listany : List<vx_core.Type_any> = valuelist.vx_list()
     if (listany.size > 0) {
       val listout : MutableList<vx_core.Type_any> = ArrayList<vx_core.Type_any>()
-      for (i : Int = 0; i < listany.size; i++) {
-        val vali : vx_core.Type_int = vx_core.vx_new_int(i+1)
-        val value : vx_core.Type_any = listany[i]
-        val outval : vx_core.Type_any = fn_any_from_int_any.vx_any_from_int_any(vx_core.t_any, vali, value)
+      var i : Int = 0
+      for (value in listany) {
+        i += 1
+        val vali : vx_core.Type_int = vx_core.vx_new_int(i)
+        val outval : vx_core.Type_any = fn_any_from_int_any.vx_any_from_int_any(
+          vx_core.t_any, vali, value
+        )
         listout.add(outval)
       }
-      output = vx_core.vx_new_list(generic_list_1, listout)
+      output = vx_core.vx_new_list(
+        generic_list_1,
+        listout
+      )
     }
     return output
   }
@@ -677,19 +859,27 @@ object vx_core {
   fun <O : vx_core.Type_map, X : vx_core.Type_list> vx_list_from_map_1(
     generic_list_1 : X,
     valuemap : O,
-    vx_core.Func_any_from_key_value fn_any_from_key_value) : X {
-    var output : X = vx_core.f_empty(generic_list_1)
-    val map_value : Map<string, vx_core.Type_any> = valuemap.vx_map()
-    val fn_key_value : Func<string, vx_core.Type_any, vx_core.Type_any> = {key, val ->
-      val valkey : vx_core.Type_string = vx_core.vx_new_string(key)
-      fn_any_from_key_value.vx_any_from_key_value(vx_core.t_any, valkey, val)
+    fn_any_from_key_value : vx_core.Func_any_from_key_value) : X {
+    val map_value : Map<String, vx_core.Type_any> = valuemap.vx_map()
+    val fn_key_value : (String, vx_core.Type_any) -> vx_core.Type_any = {
+      key : String, value : vx_core.Type_any ->
+      val valkey : vx_core.Type_string = vx_core.vx_new_string(
+        key
+      )
+      val output_1 : vx_core.Type_any = fn_any_from_key_value.vx_any_from_key_value(
+        vx_core.t_any, valkey, value
+      )
+      output_1
     }
     val listresult : List<vx_core.Type_any> = vx_core.arraylist_from_linkedhashmap_fn(
       map_value, fn_key_value
     )
-    output = vx_core.f_any_from_any(
+    val anylist : vx_core.Type_any = generic_list_1.vx_new(
+      listresult
+    )
+    val output : X = vx_core.f_any_from_any(
       generic_list_1,
-      generic_list_1.vx_new(listresult)
+      anylist
     )
     return output
   }
@@ -697,20 +887,20 @@ object vx_core {
   fun <X : vx_core.Type_list, Y : vx_core.Type_list> vx_list_join_from_list_1(
     generic_list_1 : X,
     values : Y,
-    vx_core.Func_any_from_any fn_any_from_any) : X {
-    var output : X = vx_core.f_empty(generic_list_1)
+    fn_any_from_any : vx_core.Func_any_from_any) : X {
     val list_value : List<vx_core.Type_any> = values.vx_list()
     val list_result : MutableList<vx_core.Type_any> = ArrayList<vx_core.Type_any>()
     for (value : vx_core.Type_any in list_value) {
       val listoflist : vx_core.Type_any = fn_any_from_any.vx_any_from_any(
         generic_list_1, value
       )
-      if (listoflist is vx_core.Type_list vallist) {
+      if (listoflist is vx_core.Type_list) {
+        val vallist : vx_core.Type_list = listoflist as vx_core.Type_list
         val listval : List<vx_core.Type_any> = vallist.vx_list()
         list_result.addAll(listval)
       }
     }
-    output = vx_core.f_any_from_any(
+    val output : X = vx_core.f_any_from_any(
       generic_list_1,
       generic_list_1.vx_new(list_result)
     )
@@ -721,29 +911,38 @@ object vx_core {
     generic_map_1 : N,
     vallist : Y,
     fn_any_from_any : vx_core.Func_any_from_any) : N {
-    val listval : List<vx_core.Type_any> listval = vallist.vx_list()
-    val fn_string_from_any : Function<vx_core.Type_any, vx_core.Type_string> = {val ->
-      val output_string : vx_core.Type_string = fn_any_from_any.vx_any_from_any(vx_core.t_string, val)
+    val listval : List<vx_core.Type_any> = vallist.vx_list()
+    val fn_string_from_any : (vx_core.Type_any) -> vx_core.Type_string = {
+      value : vx_core.Type_any ->
+      val output_string : vx_core.Type_string = fn_any_from_any.vx_any_from_any(
+        vx_core.t_string, value
+      )
       output_string
     }
-    val mapresult : Map<string, vx_core.Type_any> = vx_core.vx_map_from_list_fn(
+    val mapresult : Map<String, vx_core.Type_any> = vx_core.vx_map_from_list_fn(
       listval, fn_string_from_any
     )
-    val output : N = vx_core.f_any_from_any(
-      generic_map_1, output.vx_new_from_map(mapresult)
+    val mapval : vx_core.Type_map = generic_map_1.vx_new_from_map(
+      mapresult
+    )
+    val output = vx_core.f_any_from_any(
+      generic_map_1,
+      mapval
     )
     return output
   }
 
   // vx_map_from_list_fn(generic_map, list, fn_any_from_key_value)
-  fun <T> Map<String, T> vx_map_from_list_fn(
+  fun <T> vx_map_from_list_fn(
     listval : List<T>,
-    fn_any_from_any : Function<T, vx_core.Type_string>) : T {
+    fn_any_from_any : (T) -> vx_core.Type_string) : Map<String, T> {
     val map : MutableMap<String, T> = LinkedHashMap<String, T>()
-    for (value : T : listval) {
-      val valkey : vx_core.Type_string = fn_any_from_any.apply(value)
+    for (value : T in listval) {
+      val valkey : vx_core.Type_string = fn_any_from_any(
+        value
+      )
       val key : String = valkey.vx_string()
-      map.put(key, val)
+      map.put(key, value)
     }
     val output : Map<String, T> = vx_core.immutablemap<T>(map)
     return output
@@ -755,12 +954,12 @@ object vx_core {
     valuemap : vx_core.Type_map,
     fn_any_from_key_value : vx_core.Func_any_from_key_value) : T {
     var output : T = vx_core.f_empty(generic_map_1)
-    val mapvalue : Map<String, vx_core.Type_any> valuemap.vx_map()
+    val mapvalue : Map<String, vx_core.Type_any> = valuemap.vx_map()
     if (mapvalue.size > 0) {
       val keys : Set<String> = mapvalue.keys
       val mapnew : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
       for (key : String in keys) {
-        val value : vx_core.Type_any? value = mapvalue.get(key)
+        val value : vx_core.Type_any? = mapvalue.get(key)
         if (value != null) {
           val stringkey : vx_core.Type_string = vx_core.vx_new_string(key)
           val chgvalue : vx_core.Type_any = fn_any_from_key_value.vx_any_from_key_value(vx_core.t_any, stringkey, value)
@@ -792,10 +991,10 @@ object vx_core {
   fun vx_new_int(
     ival : Int) : Type_int {
     var output : Type_int
-    if ((ival == 0) && vx_core.e_int != null) {
+    if (ival == 0) {
       output = vx_core.e_int
     } else {
-      val work : Class_int = vx_core.Class_int()
+      val work : vx_core.Class_int = vx_core.Class_int()
       work.vxint = ival
       output = work
     }
@@ -805,27 +1004,13 @@ object vx_core {
   fun vx_new_string(
     text : String) : Type_string {
     var output : Type_string
-    if (text.equals("") && vx_core.e_string != null) {
+    if (text.equals("")) {
       output = vx_core.e_string
     } else {
       val work : Class_string = vx_core.Class_string()
       work.vxstring = text
       output = work
     }
-    return output
-  }
-
-  // vx_map_from_list_fn(generic_map, list, fn_any_from_key_value)
-  fun <T> vx_map_from_list_fn(
-    listval : List<T>,
-    fn_any_from_any : Function<T, vx_core.Type_string>) : Map<String, T> {
-    val map : MutableMap<String, T> = LinkedHashMap<String, T>()
-    for (value : T in listval) {
-      val valkey : vx_core.Type_string = fn_any_from_any.apply(value)
-      val key : String = valkey.vx_string()
-      map.put(key, value)
-    }
-    val output : Map<String, T> = vx_core.immutablemap<T>(map)
     return output
   }
 
@@ -903,7 +1088,7 @@ object vx_core {
         val valtext : String = vx_core.vx_string_from_any_indent(valsub, indentint, linefeed)
         output += "\n " + indenttext + valtext
       }
-      if (vallist.vx_msgblock() != null) {
+      if (vallist.vx_msgblock() != vx_core.e_msgblock) {
         val msgtext : String = vx_core.vx_string_from_any_indent(vallist.vx_msgblock(), indentint, linefeed)
         output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext
       }
@@ -918,11 +1103,15 @@ object vx_core {
       val keys : Set<String> = mapval.keys
       for (skey : String in keys) {
         var key : String = skey
-        val valsub : vx_core.Type_any = mapval.get(key)
+        var valsub : vx_core.Type_any = mapval.getOrDefault(
+          key, vx_core.e_any
+        )
         if (!key.startsWith(":")) {
           key = ":" + key
         }
-        var strval : String = vx_core.vx_string_from_any_indent(valsub, indentint, linefeed)
+        var strval : String = vx_core.vx_string_from_any_indent(
+          valsub, indentint, linefeed
+        )
         if (strval.contains("\n")) {
           strval = "\n  " + indenttext + strval
         } else {
@@ -930,13 +1119,17 @@ object vx_core {
         }
         output += "\n" + indenttext + " " + key + strval
       }
-      if (valmap.vx_msgblock() != null) {
-        val msgtext : String = vx_core.vx_string_from_any_indent(valmap.vx_msgblock(), indentint, linefeed)
+      if (valmap.vx_msgblock() != vx_core.e_msgblock) {
+        val msgtext : String = vx_core.vx_string_from_any_indent(
+          valmap.vx_msgblock(), indentint, linefeed
+        )
         output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext
       }
       output = "(" + typedefname.vx_string() + output + ")"
     } else if (value is vx_core.Type_struct) {
-      val valstruct : vx_core.Type_struct = vx_core.f_any_from_any(vx_core.t_struct, value)
+      val valstruct : vx_core.Type_struct = vx_core.f_any_from_any(
+        vx_core.t_struct, value
+      )
       val typedef : vx_core.Type_typedef = valstruct.vx_typedef()
       val typedefname : vx_core.Type_string = typedef.name()
       var indentint2 : Int = indent
@@ -945,12 +1138,14 @@ object vx_core {
       val keys2 : Set<String> = mapval2.keys
       for (skey : String in keys2) {
         var key : String = skey
-        val valsub2 : vx_core.Type_any = mapval2.get(key)
+        val valsub2 : vx_core.Type_any = mapval2.getOrDefault(
+          key, vx_core.e_any
+        )
         if (!vx_core.f_is_empty_1(valsub2).vx_boolean()) {
           if (!key.startsWith(":")) {
             key = ":" + key
           }
-          val strval2 : String = vx_core.vx_string_from_any_indent(
+          var strval2 : String = vx_core.vx_string_from_any_indent(
             valsub2, indentint2, linefeed
           )
           if (strval2.contains("\n")) {
@@ -961,7 +1156,7 @@ object vx_core {
           output += "\n" + indenttext + " " + key + strval2
         }
       }
-      if (valstruct.vx_msgblock() != null) {
+      if (valstruct.vx_msgblock() != vx_core.e_msgblock) {
         val msgtext2 : String = vx_core.vx_string_from_any_indent(
           valstruct.vx_msgblock(), indentint2, linefeed
         )
@@ -973,9 +1168,11 @@ object vx_core {
         vx_core.t_func, value
       )
       val funcdef : vx_core.Type_funcdef = valfunc.vx_funcdef()
-      val funcdefname : vx_core.Type_string = vx_core.f_funcname_from_funcdef(funcdef)
+      val funcdefname : vx_core.Type_string = vx_core.f_funcname_from_funcdef(
+        funcdef
+      )
       output = funcdefname.vx_string()
-      if (valfunc.vx_msgblock() != null) {
+      if (valfunc.vx_msgblock() != vx_core.e_msgblock) {
         val msgtext : String = vx_core.vx_string_from_any_indent(
           valfunc.vx_msgblock(), indent, linefeed
         )
@@ -986,12 +1183,25 @@ object vx_core {
     return output
   }
 
+  fun vx_string_from_any_indent(
+    value : vx_core.Type_any,
+    indent : vx_core.Type_int,
+    linefeed : vx_core.Type_boolean) : vx_core.Type_string {
+    val soutput : String = vx_core.vx_string_from_any_indent(
+      value,
+      indent.vx_int(),
+      linefeed.vx_boolean())
+    val output : vx_core.Type_string = vx_core.vx_new_string(soutput)
+    return output
+  }
+
   fun vx_string_from_string_start_end(
     text : String,
     start : Int,
-    end : Int) : String {
+    endarg : Int) : String {
     var output : String = ""
     var maxlen : Int = text.length
+    var end : Int = endarg
     if (end < 0) {
      end += maxlen
     }
@@ -1036,7 +1246,7 @@ object vx_core {
 
   fun vx_anylist_from_arraystring(
     arraystring : Array<String>) : vx_core.Type_anylist {
-    val listany : MutableList<Any> = mutableListOf()
+    val listany : MutableList<Any> = ArrayList<Any>()
     for (svalue : String in arraystring) {
       val value : vx_core.Type_string = vx_core.vx_new_string(svalue)
       listany.add(value)
@@ -1056,9 +1266,15 @@ object vx_core {
     try {
       output = future.get()
     } catch (ex : Exception) {
-      val msg : vx_core.Type_msg = vx_core.vx_msg_from_exception("sync<-async", e)
-      val value : vx_core.Type_any = generic_any_1.vx_new(msg)
-      output = vx_core.f_any_from_any(generic_any_1, value)
+      val msg : vx_core.Type_msg = vx_core.vx_msg_from_exception(
+        "sync<-async", ex
+      )
+      val value : vx_core.Type_any = generic_any_1.vx_new(
+        msg
+      )
+      output = vx_core.f_any_from_any(
+        generic_any_1, value
+      )
     }
     return output
   }
@@ -1147,7 +1363,7 @@ object vx_core {
   class Class_any_async_from_func : vx_core.Class_base, Type_any_async_from_func {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_any_async_from_func {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_any_async_from_func = vx_core.vx_copy(vx_core.e_any_async_from_func, vals)
       return output
     }
@@ -1227,7 +1443,7 @@ object vx_core {
       var iindex : Int = index.vx_int()
       var listval : List<vx_core.Func_any_from_any> = list.vx_p_list
       if (iindex < listval.size) {
-        output = 
+        output = listval.get(iindex)
       }
       return output
     }
@@ -1242,7 +1458,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_any_from_anylist {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_any_from_anylist = vx_core.vx_copy(vx_core.e_any_from_anylist, vals)
       return output
     }
@@ -1265,11 +1481,11 @@ object vx_core {
         } else if (valsub is vx_core.Func_any_from_any) {
           var allowsub : vx_core.Func_any_from_any = valsub as vx_core.Func_any_from_any
           ischanged = true
-          
+          listval.add(allowsub)
         } else if (valsub is vx_core.Type_any_from_anylist) {
           var multi : vx_core.Type_any_from_anylist = valsub as vx_core.Type_any_from_anylist
           ischanged = true
-          
+          listval.addAll(multi.vx_listany_from_any())
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/any<-anylist", ":invalidtype", anyinvalid)
@@ -1345,12 +1561,12 @@ object vx_core {
       var iindex : Int = index.vx_int()
       var listval : List<vx_core.Type_any> = list.vx_p_list
       if (iindex < listval.size) {
-        output = 
+        output = listval.get(iindex)
       }
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_anylist {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_anylist = vx_core.vx_copy(vx_core.e_anylist, vals)
       return output
     }
@@ -1373,11 +1589,11 @@ object vx_core {
         } else if (valsub is vx_core.Type_any) {
           var allowsub : vx_core.Type_any = valsub as vx_core.Type_any
           ischanged = true
-          
+          listval.add(allowsub)
         } else if (valsub is vx_core.Type_anylist) {
           var multi : vx_core.Type_anylist = valsub as vx_core.Type_anylist
           ischanged = true
-          
+          listval.addAll(multi.vx_list())
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/anylist", ":invalidtype", anyinvalid)
@@ -1469,7 +1685,7 @@ object vx_core {
       var map : vx_core.Class_anymap = this
       var skey : String = key.vx_string()
       var mapval : Map<String, vx_core.Type_any> = map.vx_p_map
-      output = 
+      output = mapval.getOrDefault(skey, vx_core.e_any)
       return output
     }
 
@@ -1479,7 +1695,7 @@ object vx_core {
       var map : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
       val keys : Set<String> = mapval.keys
       for (key : String in keys) {
-        var value : vx_core.Type_any = mapval.getOrElse(key){vx_core.e_any}
+        var value : vx_core.Type_any = mapval.getOrDefault(key, vx_core.e_any)
         if (false) {
         } else if (value is vx_core.Type_any) {
           var castval : vx_core.Type_any = value as vx_core.Type_any
@@ -1496,7 +1712,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_anymap {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_anymap = vx_core.vx_copy(vx_core.e_anymap, vals)
       return output
     }
@@ -1619,7 +1835,7 @@ object vx_core {
   class Class_anytype : vx_core.Class_base, Type_anytype {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_anytype {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_anytype = vx_core.vx_copy(vx_core.e_anytype, vals)
       return output
     }
@@ -1754,7 +1970,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_arg {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_arg = vx_core.vx_copy(vx_core.e_arg, vals)
       return output
     }
@@ -1772,10 +1988,10 @@ object vx_core {
       var vx_p_fn_any : vx_core.Func_any_from_func = value.fn_any()
       var vx_p_doc : vx_core.Type_string = value.doc()
       var validkeys : MutableList<String> = ArrayList<String>()
-      
-      
-      
-      
+      validkeys.add(":name")
+      validkeys.add(":argtype")
+      validkeys.add(":fn-any")
+      validkeys.add(":doc")
       var key : String = ""
       var msg : vx_core.Type_msg = vx_core.e_msg
       var msgval : vx_core.Type_any = vx_core.e_any
@@ -1811,7 +2027,7 @@ object vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey
             }
-            var isvalidkey : Boolean
+            var isvalidkey : Boolean = validkeys.contains(testkey)
             if (isvalidkey) {
               key = testkey
             } else {
@@ -1991,7 +2207,7 @@ object vx_core {
       var iindex : Int = index.vx_int()
       var listval : List<vx_core.Type_arg> = list.vx_p_list
       if (iindex < listval.size) {
-        output = 
+        output = listval.get(iindex)
       }
       return output
     }
@@ -2006,7 +2222,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_arglist {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_arglist = vx_core.vx_copy(vx_core.e_arglist, vals)
       return output
     }
@@ -2029,14 +2245,14 @@ object vx_core {
         } else if (valsub is vx_core.Type_arg) {
           var allowsub : vx_core.Type_arg = valsub as vx_core.Type_arg
           ischanged = true
-          
+          listval.add(allowsub)
         } else if (valsub is vx_core.Type_arg) {
           ischanged = true
-          
+          listval.add(valsub as vx_core.Type_arg)
         } else if (valsub is vx_core.Type_arglist) {
           var multi : vx_core.Type_arglist = valsub as vx_core.Type_arglist
           ischanged = true
-          
+          listval.addAll(multi.vx_listarg())
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/arglist", ":invalidtype", anyinvalid)
@@ -2130,7 +2346,7 @@ object vx_core {
       var map : vx_core.Class_argmap = this
       var skey : String = key.vx_string()
       var mapval : Map<String, vx_core.Type_arg> = map.vx_p_map
-      output = 
+      output = mapval.getOrDefault(skey, vx_core.e_arg)
       return output
     }
 
@@ -2151,7 +2367,7 @@ object vx_core {
       var map : MutableMap<String, vx_core.Type_arg> = LinkedHashMap<String, vx_core.Type_arg>()
       val keys : Set<String> = mapval.keys
       for (key : String in keys) {
-        var value : vx_core.Type_any = mapval.getOrElse(key){vx_core.e_any}
+        var value : vx_core.Type_any = mapval.getOrDefault(key, vx_core.e_any)
         if (false) {
         } else if (value is vx_core.Type_arg) {
           var castval : vx_core.Type_arg = value as vx_core.Type_arg
@@ -2168,7 +2384,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_argmap {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_argmap = vx_core.vx_copy(vx_core.e_argmap, vals)
       return output
     }
@@ -2299,7 +2515,7 @@ object vx_core {
       return vxboolean;
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_boolean {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_boolean = vx_core.vx_copy(vx_core.e_boolean, vals)
       return output
     }
@@ -2397,7 +2613,7 @@ object vx_core {
       var iindex : Int = index.vx_int()
       var listval : List<vx_core.Type_boolean> = list.vx_p_list
       if (iindex < listval.size) {
-        output = 
+        output = listval.get(iindex)
       }
       return output
     }
@@ -2412,7 +2628,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_booleanlist {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_booleanlist = vx_core.vx_copy(vx_core.e_booleanlist, vals)
       return output
     }
@@ -2435,14 +2651,14 @@ object vx_core {
         } else if (valsub is vx_core.Type_boolean) {
           var allowsub : vx_core.Type_boolean = valsub as vx_core.Type_boolean
           ischanged = true
-          
-        } else if (valsub is vx_core.Type_boolean) {
+          listval.add(allowsub)
+        } else if (valsub is Boolean) {
           ischanged = true
-          
+          listval.add(vx_core.vx_new(vx_core.t_boolean, valsub))
         } else if (valsub is vx_core.Type_booleanlist) {
           var multi : vx_core.Type_booleanlist = valsub as vx_core.Type_booleanlist
           ischanged = true
-          
+          listval.addAll(multi.vx_listboolean())
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/booleanlist", ":invalidtype", anyinvalid)
@@ -2501,7 +2717,7 @@ object vx_core {
   class Class_collection : vx_core.Class_base, Type_collection {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_collection {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_collection = vx_core.vx_copy(vx_core.e_collection, vals)
       return output
     }
@@ -2562,7 +2778,7 @@ object vx_core {
   class Class_compilelanguages : vx_core.Class_base, Type_compilelanguages {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_compilelanguages {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_compilelanguages = vx_core.vx_copy(vx_core.e_compilelanguages, vals)
       return output
     }
@@ -2623,7 +2839,7 @@ object vx_core {
   class Class_connect : vx_core.Class_base, Type_connect {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_connect {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_connect = vx_core.vx_copy(vx_core.e_connect, vals)
       return output
     }
@@ -2703,7 +2919,7 @@ object vx_core {
       var iindex : Int = index.vx_int()
       var listval : List<vx_core.Type_connect> = list.vx_p_list
       if (iindex < listval.size) {
-        output = 
+        output = listval.get(iindex)
       }
       return output
     }
@@ -2718,7 +2934,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_connectlist {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_connectlist = vx_core.vx_copy(vx_core.e_connectlist, vals)
       return output
     }
@@ -2741,14 +2957,14 @@ object vx_core {
         } else if (valsub is vx_core.Type_connect) {
           var allowsub : vx_core.Type_connect = valsub as vx_core.Type_connect
           ischanged = true
-          
+          listval.add(allowsub)
         } else if (valsub is vx_core.Type_connect) {
           ischanged = true
-          
+          listval.add(valsub as vx_core.Type_connect)
         } else if (valsub is vx_core.Type_connectlist) {
           var multi : vx_core.Type_connectlist = valsub as vx_core.Type_connectlist
           ischanged = true
-          
+          listval.addAll(multi.vx_listconnect())
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/connectlist", ":invalidtype", anyinvalid)
@@ -2842,7 +3058,7 @@ object vx_core {
       var map : vx_core.Class_connectmap = this
       var skey : String = key.vx_string()
       var mapval : Map<String, vx_core.Type_connect> = map.vx_p_map
-      output = 
+      output = mapval.getOrDefault(skey, vx_core.e_connect)
       return output
     }
 
@@ -2863,7 +3079,7 @@ object vx_core {
       var map : MutableMap<String, vx_core.Type_connect> = LinkedHashMap<String, vx_core.Type_connect>()
       val keys : Set<String> = mapval.keys
       for (key : String in keys) {
-        var value : vx_core.Type_any = mapval.getOrElse(key){vx_core.e_any}
+        var value : vx_core.Type_any = mapval.getOrDefault(key, vx_core.e_any)
         if (false) {
         } else if (value is vx_core.Type_connect) {
           var castval : vx_core.Type_connect = value as vx_core.Type_connect
@@ -2880,7 +3096,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_connectmap {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_connectmap = vx_core.vx_copy(vx_core.e_connectmap, vals)
       return output
     }
@@ -3003,7 +3219,7 @@ object vx_core {
   class Class_const : vx_core.Class_base, Type_const {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_const {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_const = vx_core.vx_copy(vx_core.e_const, vals)
       return output
     }
@@ -3123,7 +3339,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_constdef {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_constdef = vx_core.vx_copy(vx_core.e_constdef, vals)
       return output
     }
@@ -3140,9 +3356,9 @@ object vx_core {
       var vx_p_name : vx_core.Type_string = value.name()
       var vx_p_type : vx_core.Type_any = value.type()
       var validkeys : MutableList<String> = ArrayList<String>()
-      
-      
-      
+      validkeys.add(":pkgname")
+      validkeys.add(":name")
+      validkeys.add(":type")
       var key : String = ""
       var msg : vx_core.Type_msg = vx_core.e_msg
       var msgval : vx_core.Type_any = vx_core.e_any
@@ -3178,7 +3394,7 @@ object vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey
             }
-            var isvalidkey : Boolean
+            var isvalidkey : Boolean = validkeys.contains(testkey)
             if (isvalidkey) {
               key = testkey
             } else {
@@ -3334,12 +3550,12 @@ object vx_core {
       var iindex : Int = index.vx_int()
       var listval : List<vx_core.Type_any> = list.vx_p_list
       if (iindex < listval.size) {
-        output = 
+        output = listval.get(iindex)
       }
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_constlist {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_constlist = vx_core.vx_copy(vx_core.e_constlist, vals)
       return output
     }
@@ -3362,11 +3578,11 @@ object vx_core {
         } else if (valsub is vx_core.Type_any) {
           var allowsub : vx_core.Type_any = valsub as vx_core.Type_any
           ischanged = true
-          
+          listval.add(allowsub)
         } else if (valsub is vx_core.Type_constlist) {
           var multi : vx_core.Type_constlist = valsub as vx_core.Type_constlist
           ischanged = true
-          
+          listval.addAll(multi.vx_list())
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/constlist", ":invalidtype", anyinvalid)
@@ -3458,7 +3674,7 @@ object vx_core {
       var map : vx_core.Class_constmap = this
       var skey : String = key.vx_string()
       var mapval : Map<String, vx_core.Type_any> = map.vx_p_map
-      output = 
+      output = mapval.getOrDefault(skey, vx_core.e_any)
       return output
     }
 
@@ -3468,7 +3684,7 @@ object vx_core {
       var map : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
       val keys : Set<String> = mapval.keys
       for (key : String in keys) {
-        var value : vx_core.Type_any = mapval.getOrElse(key){vx_core.e_any}
+        var value : vx_core.Type_any = mapval.getOrDefault(key, vx_core.e_any)
         if (false) {
         } else if (value is vx_core.Type_any) {
           var castval : vx_core.Type_any = value as vx_core.Type_any
@@ -3485,7 +3701,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_constmap {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_constmap = vx_core.vx_copy(vx_core.e_constmap, vals)
       return output
     }
@@ -3682,7 +3898,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_context {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_context = vx_core.vx_copy(vx_core.e_context, vals)
       return output
     }
@@ -3700,10 +3916,10 @@ object vx_core {
       var vx_p_setting : vx_core.Type_setting = value.setting()
       var vx_p_state : vx_core.Type_state = value.state()
       var validkeys : MutableList<String> = ArrayList<String>()
-      
-      
-      
-      
+      validkeys.add(":code")
+      validkeys.add(":session")
+      validkeys.add(":setting")
+      validkeys.add(":state")
       var key : String = ""
       var msg : vx_core.Type_msg = vx_core.e_msg
       var msgval : vx_core.Type_any = vx_core.e_any
@@ -3739,7 +3955,7 @@ object vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey
             }
-            var isvalidkey : Boolean
+            var isvalidkey : Boolean = validkeys.contains(testkey)
             if (isvalidkey) {
               key = testkey
             } else {
@@ -3897,7 +4113,7 @@ object vx_core {
   class Class_date : vx_core.Class_base, Type_date {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_date {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_date = vx_core.vx_copy(vx_core.e_date, vals)
       return output
     }
@@ -3964,7 +4180,7 @@ object vx_core {
     
     // :implements
     override fun vx_float() : Float {
-      return Float.parseFloat(vxdecimal);
+      return vxdecimal.toFloat()
     }
     
     // :implements
@@ -3972,7 +4188,7 @@ object vx_core {
       return vxdecimal
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_decimal {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_decimal = vx_core.vx_copy(vx_core.e_decimal, vals)
       return output
     }
@@ -4050,7 +4266,7 @@ object vx_core {
   class Class_error : vx_core.Class_base, Type_error {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_error {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_error = vx_core.vx_copy(vx_core.e_error, vals)
       return output
     }
@@ -4119,7 +4335,7 @@ object vx_core {
       return vxfloat
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_float {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_float = vx_core.vx_copy(vx_core.e_float, vals)
       return output
     }
@@ -4153,7 +4369,7 @@ object vx_core {
         } else if (valsub is vx_core.Type_string) {
           var valstring : vx_core.Type_string = valsub as vx_core.Type_string
           ischanged = true
-          floatval += 
+          floatval += valstring.vx_string().toFloat()
         } else if (valsub is Float) {
           var fval : Float = valsub as Float
           ischanged = true
@@ -4165,7 +4381,7 @@ object vx_core {
         } else if (valsub is String) {
           var sval : String = valsub as String
           ischanged = true
-          floatval += 
+          floatval += sval.toFloat()
         }
       }
       if (ischanged || (msgblock != vx_core.e_msgblock)) {
@@ -4223,7 +4439,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_func {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_func = vx_core.vx_copy(vx_core.e_func, vals)
       return output
     }
@@ -4373,7 +4589,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_funcdef {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_funcdef = vx_core.vx_copy(vx_core.e_funcdef, vals)
       return output
     }
@@ -4392,11 +4608,11 @@ object vx_core {
       var vx_p_type : vx_core.Type_any = value.type()
       var vx_p_async : vx_core.Type_boolean = value.async()
       var validkeys : MutableList<String> = ArrayList<String>()
-      
-      
-      
-      
-      
+      validkeys.add(":pkgname")
+      validkeys.add(":name")
+      validkeys.add(":idx")
+      validkeys.add(":type")
+      validkeys.add(":async")
       var key : String = ""
       var msg : vx_core.Type_msg = vx_core.e_msg
       var msgval : vx_core.Type_any = vx_core.e_any
@@ -4432,7 +4648,7 @@ object vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey
             }
-            var isvalidkey : Boolean
+            var isvalidkey : Boolean = validkeys.contains(testkey)
             if (isvalidkey) {
               key = testkey
             } else {
@@ -4640,7 +4856,7 @@ object vx_core {
       var iindex : Int = index.vx_int()
       var listval : List<vx_core.Type_func> = list.vx_p_list
       if (iindex < listval.size) {
-        output = 
+        output = listval.get(iindex)
       }
       return output
     }
@@ -4655,7 +4871,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_funclist {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_funclist = vx_core.vx_copy(vx_core.e_funclist, vals)
       return output
     }
@@ -4678,14 +4894,14 @@ object vx_core {
         } else if (valsub is vx_core.Type_func) {
           var allowsub : vx_core.Type_func = valsub as vx_core.Type_func
           ischanged = true
-          
+          listval.add(allowsub)
         } else if (valsub is vx_core.Type_func) {
           ischanged = true
-          
+          listval.add(valsub as vx_core.Type_func)
         } else if (valsub is vx_core.Type_funclist) {
           var multi : vx_core.Type_funclist = valsub as vx_core.Type_funclist
           ischanged = true
-          
+          listval.addAll(multi.vx_listfunc())
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/funclist", ":invalidtype", anyinvalid)
@@ -4779,7 +4995,7 @@ object vx_core {
       var map : vx_core.Class_funcmap = this
       var skey : String = key.vx_string()
       var mapval : Map<String, vx_core.Type_func> = map.vx_p_map
-      output = 
+      output = mapval.getOrDefault(skey, vx_core.e_func)
       return output
     }
 
@@ -4800,7 +5016,7 @@ object vx_core {
       var map : MutableMap<String, vx_core.Type_func> = LinkedHashMap<String, vx_core.Type_func>()
       val keys : Set<String> = mapval.keys
       for (key : String in keys) {
-        var value : vx_core.Type_any = mapval.getOrElse(key){vx_core.e_any}
+        var value : vx_core.Type_any = mapval.getOrDefault(key, vx_core.e_any)
         if (false) {
         } else if (value is vx_core.Type_func) {
           var castval : vx_core.Type_func = value as vx_core.Type_func
@@ -4817,7 +5033,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_funcmap {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_funcmap = vx_core.vx_copy(vx_core.e_funcmap, vals)
       return output
     }
@@ -4948,7 +5164,7 @@ object vx_core {
       return vxint
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_int {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_int = vx_core.vx_copy(vx_core.e_int, vals)
       return output
     }
@@ -4978,7 +5194,7 @@ object vx_core {
         } else if (valsub is String) {
           var sval : String = valsub as String
           ischanged = true
-          intval += 
+          intval += sval.toInt()
         }
       }
       if (ischanged || (msgblock != vx_core.e_msgblock)) {
@@ -5049,7 +5265,7 @@ object vx_core {
       var iindex : Int = index.vx_int()
       var listval : List<vx_core.Type_int> = list.vx_p_list
       if (iindex < listval.size) {
-        output = 
+        output = listval.get(iindex)
       }
       return output
     }
@@ -5064,7 +5280,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_intlist {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_intlist = vx_core.vx_copy(vx_core.e_intlist, vals)
       return output
     }
@@ -5087,14 +5303,14 @@ object vx_core {
         } else if (valsub is vx_core.Type_int) {
           var allowsub : vx_core.Type_int = valsub as vx_core.Type_int
           ischanged = true
-          
+          listval.add(allowsub)
         } else if (valsub is Int) {
           ischanged = true
-          
+          listval.add(vx_core.vx_new(vx_core.t_int, valsub))
         } else if (valsub is vx_core.Type_intlist) {
           var multi : vx_core.Type_intlist = valsub as vx_core.Type_intlist
           ischanged = true
-          
+          listval.addAll(multi.vx_listint())
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/intlist", ":invalidtype", anyinvalid)
@@ -5188,7 +5404,7 @@ object vx_core {
       var map : vx_core.Class_intmap = this
       var skey : String = key.vx_string()
       var mapval : Map<String, vx_core.Type_int> = map.vx_p_map
-      output = 
+      output = mapval.getOrDefault(skey, vx_core.e_int)
       return output
     }
 
@@ -5209,7 +5425,7 @@ object vx_core {
       var map : MutableMap<String, vx_core.Type_int> = LinkedHashMap<String, vx_core.Type_int>()
       val keys : Set<String> = mapval.keys
       for (key : String in keys) {
-        var value : vx_core.Type_any = mapval.getOrElse(key){vx_core.e_any}
+        var value : vx_core.Type_any = mapval.getOrDefault(key, vx_core.e_any)
         if (false) {
         } else if (value is vx_core.Type_int) {
           var castval : vx_core.Type_int = value as vx_core.Type_int
@@ -5226,7 +5442,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_intmap {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_intmap = vx_core.vx_copy(vx_core.e_intmap, vals)
       return output
     }
@@ -5368,12 +5584,12 @@ object vx_core {
       var iindex : Int = index.vx_int()
       var listval : List<vx_core.Type_any> = list.vx_p_list
       if (iindex < listval.size) {
-        output = 
+        output = listval.get(iindex)
       }
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_list {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_list = vx_core.vx_copy(vx_core.e_list, vals)
       return output
     }
@@ -5396,11 +5612,11 @@ object vx_core {
         } else if (valsub is vx_core.Type_any) {
           var allowsub : vx_core.Type_any = valsub as vx_core.Type_any
           ischanged = true
-          
+          listval.add(allowsub)
         } else if (valsub is vx_core.Type_list) {
           var multi : vx_core.Type_list = valsub as vx_core.Type_list
           ischanged = true
-          
+          listval.addAll(multi.vx_list())
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/list", ":invalidtype", anyinvalid)
@@ -5459,7 +5675,7 @@ object vx_core {
   class Class_listtype : vx_core.Class_base, Type_listtype {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_listtype {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_listtype = vx_core.vx_copy(vx_core.e_listtype, vals)
       return output
     }
@@ -5531,7 +5747,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_locale {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_locale = vx_core.vx_copy(vx_core.e_locale, vals)
       return output
     }
@@ -5629,7 +5845,7 @@ object vx_core {
       var map : vx_core.Class_map = this
       var skey : String = key.vx_string()
       var mapval : Map<String, vx_core.Type_any> = map.vx_p_map
-      output = 
+      output = mapval.getOrDefault(skey, vx_core.e_any)
       return output
     }
 
@@ -5639,7 +5855,7 @@ object vx_core {
       var map : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
       val keys : Set<String> = mapval.keys
       for (key : String in keys) {
-        var value : vx_core.Type_any = mapval.getOrElse(key){vx_core.e_any}
+        var value : vx_core.Type_any = mapval.getOrDefault(key, vx_core.e_any)
         if (false) {
         } else if (value is vx_core.Type_any) {
           var castval : vx_core.Type_any = value as vx_core.Type_any
@@ -5656,7 +5872,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_map {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_map = vx_core.vx_copy(vx_core.e_map, vals)
       return output
     }
@@ -5779,7 +5995,7 @@ object vx_core {
   class Class_maptype : vx_core.Class_base, Type_maptype {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_maptype {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_maptype = vx_core.vx_copy(vx_core.e_maptype, vals)
       return output
     }
@@ -5869,7 +6085,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_mempool {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_mempool = vx_core.vx_copy(vx_core.e_mempool, vals)
       return output
     }
@@ -5884,7 +6100,7 @@ object vx_core {
       }
       var vx_p_valuepool : vx_core.Type_value = value.valuepool()
       var validkeys : MutableList<String> = ArrayList<String>()
-      
+      validkeys.add(":valuepool")
       var key : String = ""
       var msg : vx_core.Type_msg = vx_core.e_msg
       var msgval : vx_core.Type_any = vx_core.e_any
@@ -5920,7 +6136,7 @@ object vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey
             }
-            var isvalidkey : Boolean
+            var isvalidkey : Boolean = validkeys.contains(testkey)
             if (isvalidkey) {
               key = testkey
             } else {
@@ -6014,6 +6230,8 @@ object vx_core {
   class Class_msg : vx_core.Class_base, Type_msg {
     constructor() {}
 
+    var err : Exception? = null
+
     var vx_p_code : vx_core.Type_string? = null
 
     override fun code() : vx_core.Type_string {
@@ -6098,7 +6316,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_msg {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_msg = vx_core.vx_copy(vx_core.e_msg, vals)
       return output
     }
@@ -6273,7 +6491,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_msgblock {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_msgblock = vx_core.vx_copy(vx_core.e_msgblock, vals)
       return output
     }
@@ -6371,7 +6589,7 @@ object vx_core {
       }
       if (ischanged) {
         if ((vx_p_msgs.vx_list().size == 0) && (vx_p_msgblocks.vx_list().size == 1)) {
-          output = 
+          output = vx_p_msgblocks.vx_listmsgblock().get(0)
         } else {
           var work : vx_core.Class_msgblock = vx_core.Class_msgblock()
           work.vx_p_msgs = vx_p_msgs
@@ -6439,7 +6657,7 @@ object vx_core {
       var iindex : Int = index.vx_int()
       var listval : List<vx_core.Type_msgblock> = list.vx_p_list
       if (iindex < listval.size) {
-        output = 
+        output = listval.get(iindex)
       }
       return output
     }
@@ -6454,7 +6672,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_msgblocklist {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_msgblocklist = vx_core.vx_copy(vx_core.e_msgblocklist, vals)
       return output
     }
@@ -6474,11 +6692,11 @@ object vx_core {
           msgblock = vx_core.vx_copy(msgblock, valsub)
         } else if (valsub is vx_core.Type_msgblock) {
           ischanged = true
-          
+          listval.add(valsub as vx_core.Type_msgblock)
         } else if (valsub is vx_core.Type_msgblocklist) {
           var multi : vx_core.Type_msgblocklist = valsub as vx_core.Type_msgblocklist
           ischanged = true
-          
+          listval.addAll(multi.vx_listmsgblock())
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/msgblocklist", ":invalidtype", anyinvalid)
@@ -6556,7 +6774,7 @@ object vx_core {
       var iindex : Int = index.vx_int()
       var listval : List<vx_core.Type_msg> = list.vx_p_list
       if (iindex < listval.size) {
-        output = 
+        output = listval.get(iindex)
       }
       return output
     }
@@ -6571,7 +6789,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_msglist {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_msglist = vx_core.vx_copy(vx_core.e_msglist, vals)
       return output
     }
@@ -6591,11 +6809,11 @@ object vx_core {
           msgblock = vx_core.vx_copy(msgblock, valsub)
         } else if (valsub is vx_core.Type_msg) {
           ischanged = true
-          
+          listval.add(valsub as vx_core.Type_msg)
         } else if (valsub is vx_core.Type_msglist) {
           var multi : vx_core.Type_msglist = valsub as vx_core.Type_msglist
           ischanged = true
-          
+          listval.addAll(multi.vx_listmsg())
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/msglist", ":invalidtype", anyinvalid)
@@ -6654,7 +6872,7 @@ object vx_core {
   class Class_none : vx_core.Class_base, Type_none {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_none {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_none = vx_core.vx_copy(vx_core.e_none, vals)
       return output
     }
@@ -6715,7 +6933,7 @@ object vx_core {
   class Class_notype : vx_core.Class_base, Type_notype {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_notype {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_notype = vx_core.vx_copy(vx_core.e_notype, vals)
       return output
     }
@@ -6776,7 +6994,7 @@ object vx_core {
   class Class_number : vx_core.Class_base, Type_number {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_number {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_number = vx_core.vx_copy(vx_core.e_number, vals)
       return output
     }
@@ -6856,7 +7074,7 @@ object vx_core {
       var iindex : Int = index.vx_int()
       var listval : List<vx_core.Type_number> = list.vx_p_list
       if (iindex < listval.size) {
-        output = 
+        output = listval.get(iindex)
       }
       return output
     }
@@ -6871,7 +7089,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_numberlist {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_numberlist = vx_core.vx_copy(vx_core.e_numberlist, vals)
       return output
     }
@@ -6894,14 +7112,14 @@ object vx_core {
         } else if (valsub is vx_core.Type_number) {
           var allowsub : vx_core.Type_number = valsub as vx_core.Type_number
           ischanged = true
-          
+          listval.add(allowsub)
         } else if (valsub is vx_core.Type_number) {
           ischanged = true
-          
+          listval.add(valsub as vx_core.Type_number)
         } else if (valsub is vx_core.Type_numberlist) {
           var multi : vx_core.Type_numberlist = valsub as vx_core.Type_numberlist
           ischanged = true
-          
+          listval.addAll(multi.vx_listnumber())
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/numberlist", ":invalidtype", anyinvalid)
@@ -6995,7 +7213,7 @@ object vx_core {
       var map : vx_core.Class_numbermap = this
       var skey : String = key.vx_string()
       var mapval : Map<String, vx_core.Type_number> = map.vx_p_map
-      output = 
+      output = mapval.getOrDefault(skey, vx_core.e_number)
       return output
     }
 
@@ -7016,7 +7234,7 @@ object vx_core {
       var map : MutableMap<String, vx_core.Type_number> = LinkedHashMap<String, vx_core.Type_number>()
       val keys : Set<String> = mapval.keys
       for (key : String in keys) {
-        var value : vx_core.Type_any = mapval.getOrElse(key){vx_core.e_any}
+        var value : vx_core.Type_any = mapval.getOrDefault(key, vx_core.e_any)
         if (false) {
         } else if (value is vx_core.Type_number) {
           var castval : vx_core.Type_number = value as vx_core.Type_number
@@ -7033,7 +7251,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_numbermap {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_numbermap = vx_core.vx_copy(vx_core.e_numbermap, vals)
       return output
     }
@@ -7245,7 +7463,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_package {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_package = vx_core.vx_copy(vx_core.e_package, vals)
       return output
     }
@@ -7264,11 +7482,11 @@ object vx_core {
       var vx_p_typemap : vx_core.Type_typemap = value.typemap()
       var vx_p_emptymap : vx_core.Type_map = value.emptymap()
       var validkeys : MutableList<String> = ArrayList<String>()
-      
-      
-      
-      
-      
+      validkeys.add(":pkgname")
+      validkeys.add(":constmap")
+      validkeys.add(":funcmap")
+      validkeys.add(":typemap")
+      validkeys.add(":emptymap")
       var key : String = ""
       var msg : vx_core.Type_msg = vx_core.e_msg
       var msgval : vx_core.Type_any = vx_core.e_any
@@ -7304,7 +7522,7 @@ object vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey
             }
-            var isvalidkey : Boolean
+            var isvalidkey : Boolean = validkeys.contains(testkey)
             if (isvalidkey) {
               key = testkey
             } else {
@@ -7519,7 +7737,7 @@ object vx_core {
       var map : vx_core.Class_packagemap = this
       var skey : String = key.vx_string()
       var mapval : Map<String, vx_core.Type_package> = map.vx_p_map
-      output = 
+      output = mapval.getOrDefault(skey, vx_core.e_package)
       return output
     }
 
@@ -7540,7 +7758,7 @@ object vx_core {
       var map : MutableMap<String, vx_core.Type_package> = LinkedHashMap<String, vx_core.Type_package>()
       val keys : Set<String> = mapval.keys
       for (key : String in keys) {
-        var value : vx_core.Type_any = mapval.getOrElse(key){vx_core.e_any}
+        var value : vx_core.Type_any = mapval.getOrDefault(key, vx_core.e_any)
         if (false) {
         } else if (value is vx_core.Type_package) {
           var castval : vx_core.Type_package = value as vx_core.Type_package
@@ -7557,7 +7775,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_packagemap {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_packagemap = vx_core.vx_copy(vx_core.e_packagemap, vals)
       return output
     }
@@ -7709,7 +7927,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_permission {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_permission = vx_core.vx_copy(vx_core.e_permission, vals)
       return output
     }
@@ -7724,7 +7942,7 @@ object vx_core {
       }
       var vx_p_id : vx_core.Type_string = value.id()
       var validkeys : MutableList<String> = ArrayList<String>()
-      
+      validkeys.add(":id")
       var key : String = ""
       var msg : vx_core.Type_msg = vx_core.e_msg
       var msgval : vx_core.Type_any = vx_core.e_any
@@ -7760,7 +7978,7 @@ object vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey
             }
-            var isvalidkey : Boolean
+            var isvalidkey : Boolean = validkeys.contains(testkey)
             if (isvalidkey) {
               key = testkey
             } else {
@@ -7871,7 +8089,7 @@ object vx_core {
       var iindex : Int = index.vx_int()
       var listval : List<vx_core.Type_permission> = list.vx_p_list
       if (iindex < listval.size) {
-        output = 
+        output = listval.get(iindex)
       }
       return output
     }
@@ -7886,7 +8104,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_permissionlist {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_permissionlist = vx_core.vx_copy(vx_core.e_permissionlist, vals)
       return output
     }
@@ -7909,14 +8127,14 @@ object vx_core {
         } else if (valsub is vx_core.Type_permission) {
           var allowsub : vx_core.Type_permission = valsub as vx_core.Type_permission
           ischanged = true
-          
+          listval.add(allowsub)
         } else if (valsub is vx_core.Type_permission) {
           ischanged = true
-          
+          listval.add(valsub as vx_core.Type_permission)
         } else if (valsub is vx_core.Type_permissionlist) {
           var multi : vx_core.Type_permissionlist = valsub as vx_core.Type_permissionlist
           ischanged = true
-          
+          listval.addAll(multi.vx_listpermission())
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/permissionlist", ":invalidtype", anyinvalid)
@@ -8010,7 +8228,7 @@ object vx_core {
       var map : vx_core.Class_permissionmap = this
       var skey : String = key.vx_string()
       var mapval : Map<String, vx_core.Type_permission> = map.vx_p_map
-      output = 
+      output = mapval.getOrDefault(skey, vx_core.e_permission)
       return output
     }
 
@@ -8031,7 +8249,7 @@ object vx_core {
       var map : MutableMap<String, vx_core.Type_permission> = LinkedHashMap<String, vx_core.Type_permission>()
       val keys : Set<String> = mapval.keys
       for (key : String in keys) {
-        var value : vx_core.Type_any = mapval.getOrElse(key){vx_core.e_any}
+        var value : vx_core.Type_any = mapval.getOrDefault(key, vx_core.e_any)
         if (false) {
         } else if (value is vx_core.Type_permission) {
           var castval : vx_core.Type_permission = value as vx_core.Type_permission
@@ -8048,7 +8266,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_permissionmap {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_permissionmap = vx_core.vx_copy(vx_core.e_permissionmap, vals)
       return output
     }
@@ -8200,7 +8418,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_project {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_project = vx_core.vx_copy(vx_core.e_project, vals)
       return output
     }
@@ -8215,7 +8433,7 @@ object vx_core {
       }
       var vx_p_packagemap : vx_core.Type_packagemap = value.packagemap()
       var validkeys : MutableList<String> = ArrayList<String>()
-      
+      validkeys.add(":packagemap")
       var key : String = ""
       var msg : vx_core.Type_msg = vx_core.e_msg
       var msgval : vx_core.Type_any = vx_core.e_any
@@ -8251,7 +8469,7 @@ object vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey
             }
-            var isvalidkey : Boolean
+            var isvalidkey : Boolean = validkeys.contains(testkey)
             if (isvalidkey) {
               key = testkey
             } else {
@@ -8399,7 +8617,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_security {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_security = vx_core.vx_copy(vx_core.e_security, vals)
       return output
     }
@@ -8416,9 +8634,9 @@ object vx_core {
       var vx_p_permissions : vx_core.Type_permissionlist = value.permissions()
       var vx_p_permissionmap : vx_core.Type_permissionmap = value.permissionmap()
       var validkeys : MutableList<String> = ArrayList<String>()
-      
-      
-      
+      validkeys.add(":allowfuncs")
+      validkeys.add(":permissions")
+      validkeys.add(":permissionmap")
       var key : String = ""
       var msg : vx_core.Type_msg = vx_core.e_msg
       var msgval : vx_core.Type_any = vx_core.e_any
@@ -8454,7 +8672,7 @@ object vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey
             }
-            var isvalidkey : Boolean
+            var isvalidkey : Boolean = validkeys.contains(testkey)
             if (isvalidkey) {
               key = testkey
             } else {
@@ -8691,7 +8909,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_session {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_session = vx_core.vx_copy(vx_core.e_session, vals)
       return output
     }
@@ -8711,12 +8929,12 @@ object vx_core {
       var vx_p_translation : vx_core.Type_translation = value.translation()
       var vx_p_translationmap : vx_core.Type_translationmap = value.translationmap()
       var validkeys : MutableList<String> = ArrayList<String>()
-      
-      
-      
-      
-      
-      
+      validkeys.add(":user")
+      validkeys.add(":connectlist")
+      validkeys.add(":connectmap")
+      validkeys.add(":locale")
+      validkeys.add(":translation")
+      validkeys.add(":translationmap")
       var key : String = ""
       var msg : vx_core.Type_msg = vx_core.e_msg
       var msgval : vx_core.Type_any = vx_core.e_any
@@ -8752,7 +8970,7 @@ object vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey
             }
-            var isvalidkey : Boolean
+            var isvalidkey : Boolean = validkeys.contains(testkey)
             if (isvalidkey) {
               key = testkey
             } else {
@@ -8980,7 +9198,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_setting {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_setting = vx_core.vx_copy(vx_core.e_setting, vals)
       return output
     }
@@ -8995,7 +9213,7 @@ object vx_core {
       }
       var vx_p_pathmap : vx_core.Type_stringmap = value.pathmap()
       var validkeys : MutableList<String> = ArrayList<String>()
-      
+      validkeys.add(":pathmap")
       var key : String = ""
       var msg : vx_core.Type_msg = vx_core.e_msg
       var msgval : vx_core.Type_any = vx_core.e_any
@@ -9031,7 +9249,7 @@ object vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey
             }
-            var isvalidkey : Boolean
+            var isvalidkey : Boolean = validkeys.contains(testkey)
             if (isvalidkey) {
               key = testkey
             } else {
@@ -9149,7 +9367,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_state {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_state = vx_core.vx_copy(vx_core.e_state, vals)
       return output
     }
@@ -9164,7 +9382,7 @@ object vx_core {
       }
       var vx_p_statelistenermap : vx_core.Type_statelistenermap = value.statelistenermap()
       var validkeys : MutableList<String> = ArrayList<String>()
-      
+      validkeys.add(":statelistenermap")
       var key : String = ""
       var msg : vx_core.Type_msg = vx_core.e_msg
       var msgval : vx_core.Type_any = vx_core.e_any
@@ -9200,7 +9418,7 @@ object vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey
             }
-            var isvalidkey : Boolean
+            var isvalidkey : Boolean = validkeys.contains(testkey)
             if (isvalidkey) {
               key = testkey
             } else {
@@ -9348,7 +9566,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_statelistener {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_statelistener = vx_core.vx_copy(vx_core.e_statelistener, vals)
       return output
     }
@@ -9365,9 +9583,9 @@ object vx_core {
       var vx_p_value : vx_core.Type_any = value.value()
       var vx_p_fn_boolean : vx_core.Func_boolean_from_none = value.fn_boolean()
       var validkeys : MutableList<String> = ArrayList<String>()
-      
-      
-      
+      validkeys.add(":name")
+      validkeys.add(":value")
+      validkeys.add(":fn-boolean")
       var key : String = ""
       var msg : vx_core.Type_msg = vx_core.e_msg
       var msgval : vx_core.Type_any = vx_core.e_any
@@ -9403,7 +9621,7 @@ object vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey
             }
-            var isvalidkey : Boolean
+            var isvalidkey : Boolean = validkeys.contains(testkey)
             if (isvalidkey) {
               key = testkey
             } else {
@@ -9574,7 +9792,7 @@ object vx_core {
       var map : vx_core.Class_statelistenermap = this
       var skey : String = key.vx_string()
       var mapval : Map<String, vx_core.Type_statelistener> = map.vx_p_map
-      output = 
+      output = mapval.getOrDefault(skey, vx_core.e_statelistener)
       return output
     }
 
@@ -9595,7 +9813,7 @@ object vx_core {
       var map : MutableMap<String, vx_core.Type_statelistener> = LinkedHashMap<String, vx_core.Type_statelistener>()
       val keys : Set<String> = mapval.keys
       for (key : String in keys) {
-        var value : vx_core.Type_any = mapval.getOrElse(key){vx_core.e_any}
+        var value : vx_core.Type_any = mapval.getOrDefault(key, vx_core.e_any)
         if (false) {
         } else if (value is vx_core.Type_statelistener) {
           var castval : vx_core.Type_statelistener = value as vx_core.Type_statelistener
@@ -9612,7 +9830,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_statelistenermap {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_statelistenermap = vx_core.vx_copy(vx_core.e_statelistenermap, vals)
       return output
     }
@@ -9743,7 +9961,7 @@ object vx_core {
       return vxstring
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_string {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_string = vx_core.vx_copy(vx_core.e_string, vals)
       return output
     }
@@ -9876,7 +10094,7 @@ object vx_core {
       var iindex : Int = index.vx_int()
       var listval : List<vx_core.Type_string> = list.vx_p_list
       if (iindex < listval.size) {
-        output = 
+        output = listval.get(iindex)
       }
       return output
     }
@@ -9891,7 +10109,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_stringlist {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_stringlist = vx_core.vx_copy(vx_core.e_stringlist, vals)
       return output
     }
@@ -9914,14 +10132,14 @@ object vx_core {
         } else if (valsub is vx_core.Type_string) {
           var allowsub : vx_core.Type_string = valsub as vx_core.Type_string
           ischanged = true
-          
+          listval.add(allowsub)
         } else if (valsub is String) {
           ischanged = true
-          
+          listval.add(vx_core.vx_new(vx_core.t_string, valsub))
         } else if (valsub is vx_core.Type_stringlist) {
           var multi : vx_core.Type_stringlist = valsub as vx_core.Type_stringlist
           ischanged = true
-          
+          listval.addAll(multi.vx_liststring())
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/stringlist", ":invalidtype", anyinvalid)
@@ -9999,7 +10217,7 @@ object vx_core {
       var iindex : Int = index.vx_int()
       var listval : List<vx_core.Type_stringlist> = list.vx_p_list
       if (iindex < listval.size) {
-        output = 
+        output = listval.get(iindex)
       }
       return output
     }
@@ -10014,7 +10232,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_stringlistlist {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_stringlistlist = vx_core.vx_copy(vx_core.e_stringlistlist, vals)
       return output
     }
@@ -10037,14 +10255,14 @@ object vx_core {
         } else if (valsub is vx_core.Type_stringlist) {
           var allowsub : vx_core.Type_stringlist = valsub as vx_core.Type_stringlist
           ischanged = true
-          
+          listval.add(allowsub)
         } else if (valsub is vx_core.Type_stringlist) {
           ischanged = true
-          
+          listval.add(valsub as vx_core.Type_stringlist)
         } else if (valsub is vx_core.Type_stringlistlist) {
           var multi : vx_core.Type_stringlistlist = valsub as vx_core.Type_stringlistlist
           ischanged = true
-          
+          listval.addAll(multi.vx_liststringlist())
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/stringlistlist", ":invalidtype", anyinvalid)
@@ -10138,7 +10356,7 @@ object vx_core {
       var map : vx_core.Class_stringmap = this
       var skey : String = key.vx_string()
       var mapval : Map<String, vx_core.Type_string> = map.vx_p_map
-      output = 
+      output = mapval.getOrDefault(skey, vx_core.e_string)
       return output
     }
 
@@ -10159,7 +10377,7 @@ object vx_core {
       var map : MutableMap<String, vx_core.Type_string> = LinkedHashMap<String, vx_core.Type_string>()
       val keys : Set<String> = mapval.keys
       for (key : String in keys) {
-        var value : vx_core.Type_any = mapval.getOrElse(key){vx_core.e_any}
+        var value : vx_core.Type_any = mapval.getOrDefault(key, vx_core.e_any)
         if (false) {
         } else if (value is vx_core.Type_string) {
           var castval : vx_core.Type_string = value as vx_core.Type_string
@@ -10176,7 +10394,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_stringmap {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_stringmap = vx_core.vx_copy(vx_core.e_stringmap, vals)
       return output
     }
@@ -10334,7 +10552,7 @@ object vx_core {
       var map : vx_core.Class_stringmutablemap = this
       var skey : String = key.vx_string()
       var mapval : Map<String, vx_core.Type_string> = map.vx_p_map
-      output = 
+      output = mapval.getOrDefault(skey, vx_core.e_string)
       return output
     }
 
@@ -10355,7 +10573,7 @@ object vx_core {
       var map : MutableMap<String, vx_core.Type_string> = LinkedHashMap<String, vx_core.Type_string>()
       val keys : Set<String> = mapval.keys
       for (key : String in keys) {
-        var value : vx_core.Type_any = mapval.getOrElse(key){vx_core.e_any}
+        var value : vx_core.Type_any = mapval.getOrDefault(key, vx_core.e_any)
         if (false) {
         } else if (value is vx_core.Type_string) {
           var castval : vx_core.Type_string = value as vx_core.Type_string
@@ -10372,7 +10590,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_stringmutablemap {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_stringmutablemap = vx_core.vx_copy(vx_core.e_stringmutablemap, vals)
       return output
     }
@@ -10508,7 +10726,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_struct {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_struct = vx_core.vx_copy(vx_core.e_struct, vals)
       return output
     }
@@ -10658,7 +10876,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_thenelse {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_thenelse = vx_core.vx_copy(vx_core.e_thenelse, vals)
       return output
     }
@@ -10677,11 +10895,11 @@ object vx_core {
       var vx_p_fn_cond : vx_core.Func_boolean_from_func = value.fn_cond()
       var vx_p_fn_any : vx_core.Func_any_from_func = value.fn_any()
       var validkeys : MutableList<String> = ArrayList<String>()
-      
-      
-      
-      
-      
+      validkeys.add(":code")
+      validkeys.add(":value")
+      validkeys.add(":values")
+      validkeys.add(":fn-cond")
+      validkeys.add(":fn-any")
       var key : String = ""
       var msg : vx_core.Type_msg = vx_core.e_msg
       var msgval : vx_core.Type_any = vx_core.e_any
@@ -10717,7 +10935,7 @@ object vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey
             }
-            var isvalidkey : Boolean
+            var isvalidkey : Boolean = validkeys.contains(testkey)
             if (isvalidkey) {
               key = testkey
             } else {
@@ -10916,7 +11134,7 @@ object vx_core {
       var iindex : Int = index.vx_int()
       var listval : List<vx_core.Type_thenelse> = list.vx_p_list
       if (iindex < listval.size) {
-        output = 
+        output = listval.get(iindex)
       }
       return output
     }
@@ -10931,7 +11149,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_thenelselist {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_thenelselist = vx_core.vx_copy(vx_core.e_thenelselist, vals)
       return output
     }
@@ -10954,14 +11172,14 @@ object vx_core {
         } else if (valsub is vx_core.Type_thenelse) {
           var allowsub : vx_core.Type_thenelse = valsub as vx_core.Type_thenelse
           ischanged = true
-          
+          listval.add(allowsub)
         } else if (valsub is vx_core.Type_thenelse) {
           ischanged = true
-          
+          listval.add(valsub as vx_core.Type_thenelse)
         } else if (valsub is vx_core.Type_thenelselist) {
           var multi : vx_core.Type_thenelselist = valsub as vx_core.Type_thenelselist
           ischanged = true
-          
+          listval.addAll(multi.vx_listthenelse())
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/thenelselist", ":invalidtype", anyinvalid)
@@ -11064,7 +11282,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_translation {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_translation = vx_core.vx_copy(vx_core.e_translation, vals)
       return output
     }
@@ -11080,8 +11298,8 @@ object vx_core {
       var vx_p_name : vx_core.Type_string = value.name()
       var vx_p_wordmap : vx_core.Type_stringmap = value.wordmap()
       var validkeys : MutableList<String> = ArrayList<String>()
-      
-      
+      validkeys.add(":name")
+      validkeys.add(":wordmap")
       var key : String = ""
       var msg : vx_core.Type_msg = vx_core.e_msg
       var msgval : vx_core.Type_any = vx_core.e_any
@@ -11117,7 +11335,7 @@ object vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey
             }
-            var isvalidkey : Boolean
+            var isvalidkey : Boolean = validkeys.contains(testkey)
             if (isvalidkey) {
               key = testkey
             } else {
@@ -11250,7 +11468,7 @@ object vx_core {
       var iindex : Int = index.vx_int()
       var listval : List<vx_core.Type_translation> = list.vx_p_list
       if (iindex < listval.size) {
-        output = 
+        output = listval.get(iindex)
       }
       return output
     }
@@ -11265,7 +11483,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_translationlist {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_translationlist = vx_core.vx_copy(vx_core.e_translationlist, vals)
       return output
     }
@@ -11288,14 +11506,14 @@ object vx_core {
         } else if (valsub is vx_core.Type_translation) {
           var allowsub : vx_core.Type_translation = valsub as vx_core.Type_translation
           ischanged = true
-          
+          listval.add(allowsub)
         } else if (valsub is vx_core.Type_translation) {
           ischanged = true
-          
+          listval.add(valsub as vx_core.Type_translation)
         } else if (valsub is vx_core.Type_translationlist) {
           var multi : vx_core.Type_translationlist = valsub as vx_core.Type_translationlist
           ischanged = true
-          
+          listval.addAll(multi.vx_listtranslation())
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/translationlist", ":invalidtype", anyinvalid)
@@ -11389,7 +11607,7 @@ object vx_core {
       var map : vx_core.Class_translationmap = this
       var skey : String = key.vx_string()
       var mapval : Map<String, vx_core.Type_translation> = map.vx_p_map
-      output = 
+      output = mapval.getOrDefault(skey, vx_core.e_translation)
       return output
     }
 
@@ -11410,7 +11628,7 @@ object vx_core {
       var map : MutableMap<String, vx_core.Type_translation> = LinkedHashMap<String, vx_core.Type_translation>()
       val keys : Set<String> = mapval.keys
       for (key : String in keys) {
-        var value : vx_core.Type_any = mapval.getOrElse(key){vx_core.e_any}
+        var value : vx_core.Type_any = mapval.getOrDefault(key, vx_core.e_any)
         if (false) {
         } else if (value is vx_core.Type_translation) {
           var castval : vx_core.Type_translation = value as vx_core.Type_translation
@@ -11427,7 +11645,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_translationmap {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_translationmap = vx_core.vx_copy(vx_core.e_translationmap, vals)
       return output
     }
@@ -11550,7 +11768,7 @@ object vx_core {
   class Class_type : vx_core.Class_base, Type_type {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_type {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_type = vx_core.vx_copy(vx_core.e_type, vals)
       return output
     }
@@ -11805,7 +12023,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_typedef {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_typedef = vx_core.vx_copy(vx_core.e_typedef, vals)
       return output
     }
@@ -11831,18 +12049,18 @@ object vx_core {
       var vx_p_proplast : vx_core.Type_arg = value.proplast()
       var vx_p_traits : vx_core.Type_typelist = value.traits()
       var validkeys : MutableList<String> = ArrayList<String>()
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
+      validkeys.add(":pkgname")
+      validkeys.add(":name")
+      validkeys.add(":extends")
+      validkeys.add(":allowfuncs")
+      validkeys.add(":allowtypes")
+      validkeys.add(":allowvalues")
+      validkeys.add(":disallowfuncs")
+      validkeys.add(":disallowtypes")
+      validkeys.add(":disallowvalues")
+      validkeys.add(":properties")
+      validkeys.add(":proplast")
+      validkeys.add(":traits")
       var key : String = ""
       var msg : vx_core.Type_msg = vx_core.e_msg
       var msgval : vx_core.Type_any = vx_core.e_any
@@ -11878,7 +12096,7 @@ object vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey
             }
-            var isvalidkey : Boolean
+            var isvalidkey : Boolean = validkeys.contains(testkey)
             if (isvalidkey) {
               key = testkey
             } else {
@@ -12235,12 +12453,12 @@ object vx_core {
       var iindex : Int = index.vx_int()
       var listval : List<vx_core.Type_any> = list.vx_p_list
       if (iindex < listval.size) {
-        output = 
+        output = listval.get(iindex)
       }
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_typelist {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_typelist = vx_core.vx_copy(vx_core.e_typelist, vals)
       return output
     }
@@ -12263,11 +12481,11 @@ object vx_core {
         } else if (valsub is vx_core.Type_any) {
           var allowsub : vx_core.Type_any = valsub as vx_core.Type_any
           ischanged = true
-          
+          listval.add(allowsub)
         } else if (valsub is vx_core.Type_typelist) {
           var multi : vx_core.Type_typelist = valsub as vx_core.Type_typelist
           ischanged = true
-          
+          listval.addAll(multi.vx_list())
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/typelist", ":invalidtype", anyinvalid)
@@ -12359,7 +12577,7 @@ object vx_core {
       var map : vx_core.Class_typemap = this
       var skey : String = key.vx_string()
       var mapval : Map<String, vx_core.Type_any> = map.vx_p_map
-      output = 
+      output = mapval.getOrDefault(skey, vx_core.e_any)
       return output
     }
 
@@ -12369,7 +12587,7 @@ object vx_core {
       var map : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
       val keys : Set<String> = mapval.keys
       for (key : String in keys) {
-        var value : vx_core.Type_any = mapval.getOrElse(key){vx_core.e_any}
+        var value : vx_core.Type_any = mapval.getOrDefault(key, vx_core.e_any)
         if (false) {
         } else if (value is vx_core.Type_any) {
           var castval : vx_core.Type_any = value as vx_core.Type_any
@@ -12386,7 +12604,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_typemap {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_typemap = vx_core.vx_copy(vx_core.e_typemap, vals)
       return output
     }
@@ -12568,7 +12786,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_user {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_user = vx_core.vx_copy(vx_core.e_user, vals)
       return output
     }
@@ -12585,9 +12803,9 @@ object vx_core {
       var vx_p_username : vx_core.Type_string = value.username()
       var vx_p_token : vx_core.Type_string = value.token()
       var validkeys : MutableList<String> = ArrayList<String>()
-      
-      
-      
+      validkeys.add(":security")
+      validkeys.add(":username")
+      validkeys.add(":token")
       var key : String = ""
       var msg : vx_core.Type_msg = vx_core.e_msg
       var msgval : vx_core.Type_any = vx_core.e_any
@@ -12623,7 +12841,7 @@ object vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey
             }
-            var isvalidkey : Boolean
+            var isvalidkey : Boolean = validkeys.contains(testkey)
             if (isvalidkey) {
               key = testkey
             } else {
@@ -12806,7 +13024,7 @@ object vx_core {
       return output
     }
 
-    override fun vx_new(vararg vals : Any) : vx_core.Type_value {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       var output : vx_core.Type_value = vx_core.vx_copy(vx_core.e_value, vals)
       return output
     }
@@ -12822,8 +13040,8 @@ object vx_core {
       var vx_p_next : vx_core.Type_any = value.next()
       var vx_p_refs : vx_core.Type_int = value.refs()
       var validkeys : MutableList<String> = ArrayList<String>()
-      
-      
+      validkeys.add(":next")
+      validkeys.add(":refs")
       var key : String = ""
       var msg : vx_core.Type_msg = vx_core.e_msg
       var msgval : vx_core.Type_any = vx_core.e_any
@@ -12859,7 +13077,7 @@ object vx_core {
             if (!testkey.startsWith(":")) {
               testkey = ":" + testkey
             }
-            var isvalidkey : Boolean
+            var isvalidkey : Boolean = validkeys.contains(testkey)
             if (isvalidkey) {
               key = testkey
             } else {
@@ -13528,7 +13746,7 @@ object vx_core {
   class Class_not : vx_core.Class_base, Func_not {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_not {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_not = vx_core.Class_not()
       return output
     }
@@ -13619,7 +13837,7 @@ object vx_core {
   class Class_notempty : vx_core.Class_base, Func_notempty {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_notempty {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_notempty = vx_core.Class_notempty()
       return output
     }
@@ -13714,7 +13932,7 @@ object vx_core {
   class Class_notempty_1 : vx_core.Class_base, Func_notempty_1 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_notempty_1 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_notempty_1 = vx_core.Class_notempty_1()
       return output
     }
@@ -13809,7 +14027,7 @@ object vx_core {
   class Class_ne : vx_core.Class_base, Func_ne {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_ne {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_ne = vx_core.Class_ne()
       return output
     }
@@ -13894,7 +14112,7 @@ object vx_core {
   class Class_neqeq : vx_core.Class_base, Func_neqeq {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_neqeq {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_neqeq = vx_core.Class_neqeq()
       return output
     }
@@ -13979,7 +14197,7 @@ object vx_core {
   class Class_multiply : vx_core.Class_base, Func_multiply {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_multiply {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_multiply = vx_core.Class_multiply()
       return output
     }
@@ -14058,7 +14276,7 @@ object vx_core {
   class Class_multiply_1 : vx_core.Class_base, Func_multiply_1 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_multiply_1 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_multiply_1 = vx_core.Class_multiply_1()
       return output
     }
@@ -14137,7 +14355,7 @@ object vx_core {
   class Class_multiply_2 : vx_core.Class_base, Func_multiply_2 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_multiply_2 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_multiply_2 = vx_core.Class_multiply_2()
       return output
     }
@@ -14241,7 +14459,7 @@ object vx_core {
   class Class_multiply_3 : vx_core.Class_base, Func_multiply_3 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_multiply_3 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_multiply_3 = vx_core.Class_multiply_3()
       return output
     }
@@ -14345,7 +14563,7 @@ object vx_core {
   class Class_plus : vx_core.Class_base, Func_plus {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_plus {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_plus = vx_core.Class_plus()
       return output
     }
@@ -14424,7 +14642,7 @@ object vx_core {
   class Class_plus_1 : vx_core.Class_base, Func_plus_1 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_plus_1 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_plus_1 = vx_core.Class_plus_1()
       return output
     }
@@ -14503,7 +14721,7 @@ object vx_core {
   class Class_plus_2 : vx_core.Class_base, Func_plus_2 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_plus_2 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_plus_2 = vx_core.Class_plus_2()
       return output
     }
@@ -14607,7 +14825,7 @@ object vx_core {
   class Class_plus_3 : vx_core.Class_base, Func_plus_3 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_plus_3 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_plus_3 = vx_core.Class_plus_3()
       return output
     }
@@ -14711,7 +14929,7 @@ object vx_core {
   class Class_plus1 : vx_core.Class_base, Func_plus1 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_plus1 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_plus1 = vx_core.Class_plus1()
       return output
     }
@@ -14805,7 +15023,7 @@ object vx_core {
   class Class_minus : vx_core.Class_base, Func_minus {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_minus {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_minus = vx_core.Class_minus()
       return output
     }
@@ -14884,7 +15102,7 @@ object vx_core {
   class Class_minus_1 : vx_core.Class_base, Func_minus_1 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_minus_1 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_minus_1 = vx_core.Class_minus_1()
       return output
     }
@@ -14963,7 +15181,7 @@ object vx_core {
   class Class_minus_2 : vx_core.Class_base, Func_minus_2 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_minus_2 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_minus_2 = vx_core.Class_minus_2()
       return output
     }
@@ -15067,7 +15285,7 @@ object vx_core {
   class Class_minus_3 : vx_core.Class_base, Func_minus_3 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_minus_3 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_minus_3 = vx_core.Class_minus_3()
       return output
     }
@@ -15171,7 +15389,7 @@ object vx_core {
   class Class_minus1 : vx_core.Class_base, Func_minus1 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_minus1 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_minus1 = vx_core.Class_minus1()
       return output
     }
@@ -15265,7 +15483,7 @@ object vx_core {
   class Class_dotmethod : vx_core.Class_base, Func_dotmethod {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_dotmethod {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_dotmethod = vx_core.Class_dotmethod()
       return output
     }
@@ -15345,7 +15563,7 @@ object vx_core {
   class Class_divide : vx_core.Class_base, Func_divide {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_divide {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_divide = vx_core.Class_divide()
       return output
     }
@@ -15424,7 +15642,7 @@ object vx_core {
   class Class_lt : vx_core.Class_base, Func_lt {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_lt {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_lt = vx_core.Class_lt()
       return output
     }
@@ -15526,7 +15744,7 @@ object vx_core {
   class Class_lt_1 : vx_core.Class_base, Func_lt_1 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_lt_1 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_lt_1 = vx_core.Class_lt_1()
       return output
     }
@@ -15634,7 +15852,7 @@ object vx_core {
   class Class_chainfirst : vx_core.Class_base, Func_chainfirst {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_chainfirst {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_chainfirst = vx_core.Class_chainfirst()
       return output
     }
@@ -15714,7 +15932,7 @@ object vx_core {
   class Class_chainlast : vx_core.Class_base, Func_chainlast {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_chainlast {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_chainlast = vx_core.Class_chainlast()
       return output
     }
@@ -15794,7 +16012,7 @@ object vx_core {
   class Class_le : vx_core.Class_base, Func_le {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_le {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_le = vx_core.Class_le()
       return output
     }
@@ -15879,7 +16097,7 @@ object vx_core {
   class Class_le_1 : vx_core.Class_base, Func_le_1 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_le_1 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_le_1 = vx_core.Class_le_1()
       return output
     }
@@ -15974,7 +16192,7 @@ object vx_core {
   class Class_eq : vx_core.Class_base, Func_eq {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_eq {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_eq = vx_core.Class_eq()
       return output
     }
@@ -16053,7 +16271,7 @@ object vx_core {
   class Class_eq_1 : vx_core.Class_base, Func_eq_1 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_eq_1 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_eq_1 = vx_core.Class_eq_1()
       return output
     }
@@ -16161,7 +16379,7 @@ object vx_core {
   class Class_eqeq : vx_core.Class_base, Func_eqeq {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_eqeq {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_eqeq = vx_core.Class_eqeq()
       return output
     }
@@ -16242,7 +16460,7 @@ object vx_core {
   class Class_gt : vx_core.Class_base, Func_gt {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_gt {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_gt = vx_core.Class_gt()
       return output
     }
@@ -16344,7 +16562,7 @@ object vx_core {
   class Class_gt_1 : vx_core.Class_base, Func_gt_1 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_gt_1 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_gt_1 = vx_core.Class_gt_1()
       return output
     }
@@ -16452,7 +16670,7 @@ object vx_core {
   class Class_ge : vx_core.Class_base, Func_ge {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_ge {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_ge = vx_core.Class_ge()
       return output
     }
@@ -16537,7 +16755,7 @@ object vx_core {
   class Class_ge_1 : vx_core.Class_base, Func_ge_1 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_ge_1 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_ge_1 = vx_core.Class_ge_1()
       return output
     }
@@ -16632,7 +16850,7 @@ object vx_core {
   class Class_allowfuncs_from_security : vx_core.Class_base, Func_allowfuncs_from_security {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_allowfuncs_from_security {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_allowfuncs_from_security = vx_core.Class_allowfuncs_from_security()
       return output
     }
@@ -16723,7 +16941,7 @@ object vx_core {
   class Class_allowtypenames_from_typedef : vx_core.Class_base, Func_allowtypenames_from_typedef {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_allowtypenames_from_typedef {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_allowtypenames_from_typedef = vx_core.Class_allowtypenames_from_typedef()
       return output
     }
@@ -16818,7 +17036,7 @@ object vx_core {
   class Class_allowtypes_from_typedef : vx_core.Class_base, Func_allowtypes_from_typedef {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_allowtypes_from_typedef {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_allowtypes_from_typedef = vx_core.Class_allowtypes_from_typedef()
       return output
     }
@@ -16909,7 +17127,7 @@ object vx_core {
   class Class_and : vx_core.Class_base, Func_and {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_and {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_and = vx_core.Class_and()
       return output
     }
@@ -16993,7 +17211,7 @@ object vx_core {
   class Class_and_1 : vx_core.Class_base, Func_and_1 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_and_1 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_and_1 = vx_core.Class_and_1()
       return output
     }
@@ -17134,7 +17352,7 @@ object vx_core {
   class Class_any_from_any : vx_core.Class_base, Func_any_from_any {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_any_from_any {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_any_from_any = vx_core.Class_any_from_any()
       return output
     }
@@ -17233,7 +17451,7 @@ object vx_core {
   class Class_any_from_any_async : vx_core.Class_base, Func_any_from_any_async {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_any_from_any_async {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_any_from_any_async = vx_core.Class_any_from_any_async()
       return output
     }
@@ -17333,7 +17551,7 @@ object vx_core {
   class Class_any_from_any_context : vx_core.Class_base, Func_any_from_any_context {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_any_from_any_context {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_any_from_any_context = vx_core.Class_any_from_any_context()
       return output
     }
@@ -17433,7 +17651,7 @@ object vx_core {
   class Class_any_from_any_context_async : vx_core.Class_base, Func_any_from_any_context_async {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_any_from_any_context_async {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_any_from_any_context_async = vx_core.Class_any_from_any_context_async()
       return output
     }
@@ -17534,7 +17752,7 @@ object vx_core {
   class Class_any_from_any_key_value : vx_core.Class_base, Func_any_from_any_key_value {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_any_from_any_key_value {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_any_from_any_key_value = vx_core.Class_any_from_any_key_value()
       return output
     }
@@ -17633,7 +17851,7 @@ object vx_core {
   class Class_any_from_func : vx_core.Class_base, Func_any_from_func {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_any_from_func {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_any_from_func = vx_core.Class_any_from_func()
       return output
     }
@@ -17729,7 +17947,7 @@ object vx_core {
   class Class_any_from_func_async : vx_core.Class_base, Func_any_from_func_async {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_any_from_func_async {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_any_from_func_async = vx_core.Class_any_from_func_async()
       return output
     }
@@ -17828,7 +18046,7 @@ object vx_core {
   class Class_any_from_int : vx_core.Class_base, Func_any_from_int {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_any_from_int {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_any_from_int = vx_core.Class_any_from_int()
       return output
     }
@@ -17925,7 +18143,7 @@ object vx_core {
   class Class_any_from_int_any : vx_core.Class_base, Func_any_from_int_any {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_any_from_int_any {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_any_from_int_any = vx_core.Class_any_from_int_any()
       return output
     }
@@ -18023,7 +18241,7 @@ object vx_core {
   class Class_any_from_key_value : vx_core.Class_base, Func_any_from_key_value {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_any_from_key_value {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_any_from_key_value = vx_core.Class_any_from_key_value()
       return output
     }
@@ -18121,7 +18339,7 @@ object vx_core {
   class Class_any_from_key_value_async : vx_core.Class_base, Func_any_from_key_value_async {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_any_from_key_value_async {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_any_from_key_value_async = vx_core.Class_any_from_key_value_async()
       return output
     }
@@ -18221,7 +18439,7 @@ object vx_core {
   class Class_any_from_list : vx_core.Class_base, Func_any_from_list {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_any_from_list {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_any_from_list = vx_core.Class_any_from_list()
       return output
     }
@@ -18308,7 +18526,7 @@ object vx_core {
   class Class_any_from_list_start_reduce : vx_core.Class_base, Func_any_from_list_start_reduce {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_any_from_list_start_reduce {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_any_from_list_start_reduce = vx_core.Class_any_from_list_start_reduce()
       return output
     }
@@ -18390,7 +18608,7 @@ object vx_core {
   class Class_any_from_list_start_reduce_next : vx_core.Class_base, Func_any_from_list_start_reduce_next {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_any_from_list_start_reduce_next {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_any_from_list_start_reduce_next = vx_core.Class_any_from_list_start_reduce_next()
       return output
     }
@@ -18471,7 +18689,7 @@ object vx_core {
   class Class_any_from_map : vx_core.Class_base, Func_any_from_map {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_any_from_map {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_any_from_map = vx_core.Class_any_from_map()
       return output
     }
@@ -18552,7 +18770,7 @@ object vx_core {
   class Class_any_from_map_start_reduce : vx_core.Class_base, Func_any_from_map_start_reduce {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_any_from_map_start_reduce {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_any_from_map_start_reduce = vx_core.Class_any_from_map_start_reduce()
       return output
     }
@@ -18635,7 +18853,7 @@ object vx_core {
   class Class_any_from_none : vx_core.Class_base, Func_any_from_none {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_any_from_none {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_any_from_none = vx_core.Class_any_from_none()
       return output
     }
@@ -18731,7 +18949,7 @@ object vx_core {
   class Class_any_from_none_async : vx_core.Class_base, Func_any_from_none_async {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_any_from_none_async {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_any_from_none_async = vx_core.Class_any_from_none_async()
       return output
     }
@@ -18830,7 +19048,7 @@ object vx_core {
   class Class_any_from_reduce : vx_core.Class_base, Func_any_from_reduce {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_any_from_reduce {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_any_from_reduce = vx_core.Class_any_from_reduce()
       return output
     }
@@ -18928,7 +19146,7 @@ object vx_core {
   class Class_any_from_reduce_async : vx_core.Class_base, Func_any_from_reduce_async {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_any_from_reduce_async {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_any_from_reduce_async = vx_core.Class_any_from_reduce_async()
       return output
     }
@@ -19029,7 +19247,7 @@ object vx_core {
   class Class_any_from_reduce_next : vx_core.Class_base, Func_any_from_reduce_next {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_any_from_reduce_next {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_any_from_reduce_next = vx_core.Class_any_from_reduce_next()
       return output
     }
@@ -19128,7 +19346,7 @@ object vx_core {
   class Class_any_from_reduce_next_async : vx_core.Class_base, Func_any_from_reduce_next_async {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_any_from_reduce_next_async {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_any_from_reduce_next_async = vx_core.Class_any_from_reduce_next_async()
       return output
     }
@@ -19229,7 +19447,7 @@ object vx_core {
   class Class_any_from_struct : vx_core.Class_base, Func_any_from_struct {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_any_from_struct {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_any_from_struct = vx_core.Class_any_from_struct()
       return output
     }
@@ -19311,7 +19529,7 @@ object vx_core {
   class Class_async : vx_core.Class_base, Func_async {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_async {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_async = vx_core.Class_async()
       return output
     }
@@ -19402,7 +19620,7 @@ object vx_core {
   class Class_boolean_permission_from_func : vx_core.Class_base, Func_boolean_permission_from_func {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_boolean_permission_from_func {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_boolean_permission_from_func = vx_core.Class_boolean_permission_from_func()
       return output
     }
@@ -19501,7 +19719,7 @@ object vx_core {
   class Class_boolean_write_from_map_name_value : vx_core.Class_base, Func_boolean_write_from_map_name_value {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_boolean_write_from_map_name_value {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_boolean_write_from_map_name_value = vx_core.Class_boolean_write_from_map_name_value()
       return output
     }
@@ -19583,7 +19801,7 @@ object vx_core {
   class Class_boolean_from_any : vx_core.Class_base, Func_boolean_from_any {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_boolean_from_any {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_boolean_from_any = vx_core.Class_boolean_from_any()
       return output
     }
@@ -19679,7 +19897,7 @@ object vx_core {
   class Class_boolean_from_func : vx_core.Class_base, Func_boolean_from_func {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_boolean_from_func {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_boolean_from_func = vx_core.Class_boolean_from_func()
       return output
     }
@@ -19774,7 +19992,7 @@ object vx_core {
   class Class_boolean_from_none : vx_core.Class_base, Func_boolean_from_none {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_boolean_from_none {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_boolean_from_none = vx_core.Class_boolean_from_none()
       return output
     }
@@ -19868,7 +20086,7 @@ object vx_core {
   class Class_case : vx_core.Class_base, Func_case {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_case {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_case = vx_core.Class_case()
       return output
     }
@@ -19959,7 +20177,7 @@ object vx_core {
   class Class_case_1 : vx_core.Class_base, Func_case_1 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_case_1 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_case_1 = vx_core.Class_case_1()
       return output
     }
@@ -20050,7 +20268,7 @@ object vx_core {
   class Class_compare : vx_core.Class_base, Func_compare {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_compare {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_compare = vx_core.Class_compare()
       return output
     }
@@ -20130,7 +20348,7 @@ object vx_core {
   class Class_contains : vx_core.Class_base, Func_contains {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_contains {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_contains = vx_core.Class_contains()
       return output
     }
@@ -20213,7 +20431,7 @@ object vx_core {
   class Class_contains_1 : vx_core.Class_base, Func_contains_1 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_contains_1 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_contains_1 = vx_core.Class_contains_1()
       return output
     }
@@ -20293,7 +20511,7 @@ object vx_core {
   class Class_context_main : vx_core.Class_base, Func_context_main {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_context_main {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_context_main = vx_core.Class_context_main()
       return output
     }
@@ -20386,7 +20604,7 @@ object vx_core {
   class Class_copy : vx_core.Class_base, Func_copy {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_copy {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_copy = vx_core.Class_copy()
       return output
     }
@@ -20453,9 +20671,11 @@ object vx_core {
   val t_copy : vx_core.Func_copy = vx_core.Class_copy()
 
   fun <T : vx_core.Type_any> f_copy(value : T, values : vx_core.Type_anylist) : T {
-    val arrayany : vx_core.Type_any[] = vx_core.arrayany_from_anylist(values)
-    val arrayobj : Any[] = arrayany as vx_core.Type_any[]
-    val output : T = (value.vx_copy(arrayobj)) as T
+    val arrayany : Array<vx_core.Type_any> = vx_core.arrayany_from_anylist(
+      values
+    )
+    val valuecopy : vx_core.Type_any = value.vx_copy(*arrayany)
+    val output : T = valuecopy as T
     return output
   }
 
@@ -20467,7 +20687,7 @@ object vx_core {
   class Class_else : vx_core.Class_base, Func_else {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_else {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_else = vx_core.Class_else()
       return output
     }
@@ -20567,7 +20787,7 @@ object vx_core {
   class Class_empty : vx_core.Class_base, Func_empty {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_empty {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_empty = vx_core.Class_empty()
       return output
     }
@@ -20657,7 +20877,7 @@ object vx_core {
   class Class_extends_from_any : vx_core.Class_base, Func_extends_from_any {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_extends_from_any {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_extends_from_any = vx_core.Class_extends_from_any()
       return output
     }
@@ -20752,7 +20972,7 @@ object vx_core {
   class Class_extends_from_typedef : vx_core.Class_base, Func_extends_from_typedef {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_extends_from_typedef {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_extends_from_typedef = vx_core.Class_extends_from_typedef()
       return output
     }
@@ -20843,7 +21063,7 @@ object vx_core {
   class Class_first_from_list : vx_core.Class_base, Func_first_from_list {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_first_from_list {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_first_from_list = vx_core.Class_first_from_list()
       return output
     }
@@ -20939,7 +21159,7 @@ object vx_core {
   class Class_first_from_list_any_from_any : vx_core.Class_base, Func_first_from_list_any_from_any {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_first_from_list_any_from_any {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_first_from_list_any_from_any = vx_core.Class_first_from_list_any_from_any()
       return output
     }
@@ -21026,7 +21246,7 @@ object vx_core {
   class Class_float_from_string : vx_core.Class_base, Func_float_from_string {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_float_from_string {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_float_from_string = vx_core.Class_float_from_string()
       return output
     }
@@ -21118,7 +21338,7 @@ object vx_core {
   class Class_fn : vx_core.Class_base, Func_fn {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_fn {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_fn = vx_core.Class_fn()
       return output
     }
@@ -21198,7 +21418,7 @@ object vx_core {
   class Class_funcdef_from_func : vx_core.Class_base, Func_funcdef_from_func {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_funcdef_from_func {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_funcdef_from_func = vx_core.Class_funcdef_from_func()
       return output
     }
@@ -21289,7 +21509,7 @@ object vx_core {
   class Class_funcname_from_funcdef : vx_core.Class_base, Func_funcname_from_funcdef {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_funcname_from_funcdef {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_funcname_from_funcdef = vx_core.Class_funcname_from_funcdef()
       return output
     }
@@ -21388,7 +21608,7 @@ object vx_core {
   class Class_if : vx_core.Class_base, Func_if {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_if {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_if = vx_core.Class_if()
       return output
     }
@@ -21471,7 +21691,7 @@ object vx_core {
   class Class_if_1 : vx_core.Class_base, Func_if_1 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_if_1 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_if_1 = vx_core.Class_if_1()
       return output
     }
@@ -21557,7 +21777,7 @@ object vx_core {
   class Class_if_2 : vx_core.Class_base, Func_if_2 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_if_2 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_if_2 = vx_core.Class_if_2()
       return output
     }
@@ -21650,7 +21870,7 @@ object vx_core {
   class Class_int_from_func : vx_core.Class_base, Func_int_from_func {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_int_from_func {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_int_from_func = vx_core.Class_int_from_func()
       return output
     }
@@ -21735,7 +21955,7 @@ object vx_core {
   class Class_int_from_string : vx_core.Class_base, Func_int_from_string {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_int_from_string {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_int_from_string = vx_core.Class_int_from_string()
       return output
     }
@@ -21845,7 +22065,7 @@ object vx_core {
             var intresult : vx_core.Type_int = vx_core.e_int
             val strval : String = value.vx_string()
             try {
-              val floatresult : Float = Float.Parse(strval)
+              val floatresult : Float = strval.toFloat()
               val iresult : Int = floatresult as Int
               intresult = vx_core.vx_new_int(iresult)
             } catch (ex : Exception) {
@@ -21867,7 +22087,7 @@ object vx_core {
   class Class_is_empty : vx_core.Class_base, Func_is_empty {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_is_empty {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_is_empty = vx_core.Class_is_empty()
       return output
     }
@@ -21960,7 +22180,7 @@ object vx_core {
   class Class_is_empty_1 : vx_core.Class_base, Func_is_empty_1 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_is_empty_1 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_is_empty_1 = vx_core.Class_is_empty_1()
       return output
     }
@@ -22055,7 +22275,7 @@ object vx_core {
   class Class_is_endswith : vx_core.Class_base, Func_is_endswith {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_is_endswith {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_is_endswith = vx_core.Class_is_endswith()
       return output
     }
@@ -22139,7 +22359,7 @@ object vx_core {
   class Class_is_float : vx_core.Class_base, Func_is_float {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_is_float {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_is_float = vx_core.Class_is_float()
       return output
     }
@@ -22231,7 +22451,7 @@ object vx_core {
   class Class_is_func : vx_core.Class_base, Func_is_func {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_is_func {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_is_func = vx_core.Class_is_func()
       return output
     }
@@ -22324,7 +22544,7 @@ object vx_core {
   class Class_is_int : vx_core.Class_base, Func_is_int {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_is_int {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_is_int = vx_core.Class_is_int()
       return output
     }
@@ -22416,7 +22636,7 @@ object vx_core {
   class Class_is_number : vx_core.Class_base, Func_is_number {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_is_number {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_is_number = vx_core.Class_is_number()
       return output
     }
@@ -22537,7 +22757,7 @@ object vx_core {
   class Class_is_pass_from_permission : vx_core.Class_base, Func_is_pass_from_permission {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_is_pass_from_permission {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_is_pass_from_permission = vx_core.Class_is_pass_from_permission()
       return output
     }
@@ -22643,7 +22863,7 @@ object vx_core {
   class Class_last_from_list : vx_core.Class_base, Func_last_from_list {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_last_from_list {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_last_from_list = vx_core.Class_last_from_list()
       return output
     }
@@ -22748,7 +22968,7 @@ object vx_core {
   class Class_length : vx_core.Class_base, Func_length {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_length {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_length = vx_core.Class_length()
       return output
     }
@@ -22840,7 +23060,7 @@ object vx_core {
   class Class_length_1 : vx_core.Class_base, Func_length_1 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_length_1 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_length_1 = vx_core.Class_length_1()
       return output
     }
@@ -22932,7 +23152,7 @@ object vx_core {
   class Class_length_2 : vx_core.Class_base, Func_length_2 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_length_2 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_length_2 = vx_core.Class_length_2()
       return output
     }
@@ -23027,7 +23247,7 @@ object vx_core {
   class Class_let : vx_core.Class_base, Func_let {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_let {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_let = vx_core.Class_let()
       return output
     }
@@ -23107,7 +23327,7 @@ object vx_core {
   class Class_let_async : vx_core.Class_base, Func_let_async {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_let_async {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_let_async = vx_core.Class_let_async()
       return output
     }
@@ -23188,7 +23408,7 @@ object vx_core {
   class Class_list_join_from_list : vx_core.Class_base, Func_list_join_from_list {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_list_join_from_list {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_list_join_from_list = vx_core.Class_list_join_from_list()
       return output
     }
@@ -23288,7 +23508,7 @@ object vx_core {
   class Class_list_join_from_list_1 : vx_core.Class_base, Func_list_join_from_list_1 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_list_join_from_list_1 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_list_join_from_list_1 = vx_core.Class_list_join_from_list_1()
       return output
     }
@@ -23369,7 +23589,7 @@ object vx_core {
   class Class_list_from_list : vx_core.Class_base, Func_list_from_list {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_list_from_list {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_list_from_list = vx_core.Class_list_from_list()
       return output
     }
@@ -23469,7 +23689,7 @@ object vx_core {
   class Class_list_from_list_1 : vx_core.Class_base, Func_list_from_list_1 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_list_from_list_1 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_list_from_list_1 = vx_core.Class_list_from_list_1()
       return output
     }
@@ -23550,7 +23770,7 @@ object vx_core {
   class Class_list_from_list_async : vx_core.Class_base, Func_list_from_list_async {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_list_from_list_async {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_list_from_list_async = vx_core.Class_list_from_list_async()
       return output
     }
@@ -23632,7 +23852,7 @@ object vx_core {
   class Class_list_from_list_intany : vx_core.Class_base, Func_list_from_list_intany {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_list_from_list_intany {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_list_from_list_intany = vx_core.Class_list_from_list_intany()
       return output
     }
@@ -23713,7 +23933,7 @@ object vx_core {
   class Class_list_from_map : vx_core.Class_base, Func_list_from_map {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_list_from_map {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_list_from_map = vx_core.Class_list_from_map()
       return output
     }
@@ -23814,7 +24034,7 @@ object vx_core {
   class Class_list_from_map_1 : vx_core.Class_base, Func_list_from_map_1 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_list_from_map_1 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_list_from_map_1 = vx_core.Class_list_from_map_1()
       return output
     }
@@ -23895,7 +24115,7 @@ object vx_core {
   class Class_list_from_map_async : vx_core.Class_base, Func_list_from_map_async {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_list_from_map_async {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_list_from_map_async = vx_core.Class_list_from_map_async()
       return output
     }
@@ -23976,7 +24196,7 @@ object vx_core {
   class Class_list_from_type : vx_core.Class_base, Func_list_from_type {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_list_from_type {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_list_from_type = vx_core.Class_list_from_type()
       return output
     }
@@ -24066,7 +24286,7 @@ object vx_core {
   class Class_log : vx_core.Class_base, Func_log {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_log {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_log = vx_core.Class_log()
       return output
     }
@@ -24158,7 +24378,7 @@ object vx_core {
   class Class_log_1 : vx_core.Class_base, Func_log_1 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_log_1 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_log_1 = vx_core.Class_log_1()
       return output
     }
@@ -24241,7 +24461,7 @@ object vx_core {
   class Class_main : vx_core.Class_base, Func_main {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_main {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_main = vx_core.Class_main()
       return output
     }
@@ -24335,7 +24555,7 @@ object vx_core {
   class Class_map_from_list : vx_core.Class_base, Func_map_from_list {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_map_from_list {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_map_from_list = vx_core.Class_map_from_list()
       return output
     }
@@ -24416,7 +24636,7 @@ object vx_core {
   class Class_map_from_map : vx_core.Class_base, Func_map_from_map {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_map_from_map {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_map_from_map = vx_core.Class_map_from_map()
       return output
     }
@@ -24517,7 +24737,7 @@ object vx_core {
   class Class_map_from_map_1 : vx_core.Class_base, Func_map_from_map_1 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_map_from_map_1 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_map_from_map_1 = vx_core.Class_map_from_map_1()
       return output
     }
@@ -24601,7 +24821,7 @@ object vx_core {
   class Class_msg_from_error : vx_core.Class_base, Func_msg_from_error {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_msg_from_error {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_msg_from_error = vx_core.Class_msg_from_error()
       return output
     }
@@ -24701,7 +24921,7 @@ object vx_core {
   class Class_msg_from_error_1 : vx_core.Class_base, Func_msg_from_error_1 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_msg_from_error_1 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_msg_from_error_1 = vx_core.Class_msg_from_error_1()
       return output
     }
@@ -24792,7 +25012,7 @@ object vx_core {
   class Class_msg_from_error_2 : vx_core.Class_base, Func_msg_from_error_2 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_msg_from_error_2 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_msg_from_error_2 = vx_core.Class_msg_from_error_2()
       return output
     }
@@ -24886,7 +25106,7 @@ object vx_core {
   class Class_msg_from_warning : vx_core.Class_base, Func_msg_from_warning {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_msg_from_warning {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_msg_from_warning = vx_core.Class_msg_from_warning()
       return output
     }
@@ -24986,7 +25206,7 @@ object vx_core {
   class Class_msgblock_from_msgblock_msg : vx_core.Class_base, Func_msgblock_from_msgblock_msg {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_msgblock_from_msgblock_msg {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_msgblock_from_msgblock_msg = vx_core.Class_msgblock_from_msgblock_msg()
       return output
     }
@@ -25072,7 +25292,7 @@ object vx_core {
   class Class_msgblock_from_msgblock_msgblock : vx_core.Class_base, Func_msgblock_from_msgblock_msgblock {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_msgblock_from_msgblock_msgblock {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_msgblock_from_msgblock_msgblock = vx_core.Class_msgblock_from_msgblock_msgblock()
       return output
     }
@@ -25159,7 +25379,7 @@ object vx_core {
   class Class_name_from_typedef : vx_core.Class_base, Func_name_from_typedef {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_name_from_typedef {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_name_from_typedef = vx_core.Class_name_from_typedef()
       return output
     }
@@ -25250,7 +25470,7 @@ object vx_core {
   class Class_native : vx_core.Class_base, Func_native {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_native {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_native = vx_core.Class_native()
       return output
     }
@@ -25341,7 +25561,7 @@ object vx_core {
   class Class_native_from_any : vx_core.Class_base, Func_native_from_any {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_native_from_any {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_native_from_any = vx_core.Class_native_from_any()
       return output
     }
@@ -25431,7 +25651,7 @@ object vx_core {
   class Class_new : vx_core.Class_base, Func_new {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_new {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_new = vx_core.Class_new()
       return output
     }
@@ -25513,7 +25733,7 @@ object vx_core {
   class Class_number_from_func : vx_core.Class_base, Func_number_from_func {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_number_from_func {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_number_from_func = vx_core.Class_number_from_func()
       return output
     }
@@ -25590,7 +25810,7 @@ object vx_core {
   class Class_or : vx_core.Class_base, Func_or {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_or {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_or = vx_core.Class_or()
       return output
     }
@@ -25669,7 +25889,7 @@ object vx_core {
   class Class_or_1 : vx_core.Class_base, Func_or_1 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_or_1 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_or_1 = vx_core.Class_or_1()
       return output
     }
@@ -25777,7 +25997,7 @@ object vx_core {
   class Class_package_global_from_name : vx_core.Class_base, Func_package_global_from_name {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_package_global_from_name {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_package_global_from_name = vx_core.Class_package_global_from_name()
       return output
     }
@@ -25872,7 +26092,7 @@ object vx_core {
   class Class_packagename_from_typedef : vx_core.Class_base, Func_packagename_from_typedef {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_packagename_from_typedef {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_packagename_from_typedef = vx_core.Class_packagename_from_typedef()
       return output
     }
@@ -25963,7 +26183,7 @@ object vx_core {
   class Class_path_from_context_path : vx_core.Class_base, Func_path_from_context_path {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_path_from_context_path {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_path_from_context_path = vx_core.Class_path_from_context_path()
       return output
     }
@@ -26060,7 +26280,7 @@ object vx_core {
   class Class_path_from_setting_path : vx_core.Class_base, Func_path_from_setting_path {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_path_from_setting_path {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_path_from_setting_path = vx_core.Class_path_from_setting_path()
       return output
     }
@@ -26139,7 +26359,7 @@ object vx_core {
   class Class_permission_from_id_context : vx_core.Class_base, Func_permission_from_id_context {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_permission_from_id_context {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_permission_from_id_context = vx_core.Class_permission_from_id_context()
       return output
     }
@@ -26246,7 +26466,7 @@ object vx_core {
   class Class_properties_from_typedef : vx_core.Class_base, Func_properties_from_typedef {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_properties_from_typedef {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_properties_from_typedef = vx_core.Class_properties_from_typedef()
       return output
     }
@@ -26337,7 +26557,7 @@ object vx_core {
   class Class_proplast_from_typedef : vx_core.Class_base, Func_proplast_from_typedef {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_proplast_from_typedef {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_proplast_from_typedef = vx_core.Class_proplast_from_typedef()
       return output
     }
@@ -26428,7 +26648,7 @@ object vx_core {
   class Class_resolve : vx_core.Class_base, Func_resolve {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_resolve {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_resolve = vx_core.Class_resolve()
       return output
     }
@@ -26520,7 +26740,7 @@ object vx_core {
   class Class_resolve_1 : vx_core.Class_base, Func_resolve_1 {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_resolve_1 {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_resolve_1 = vx_core.Class_resolve_1()
       return output
     }
@@ -26611,7 +26831,7 @@ object vx_core {
   class Class_resolve_async : vx_core.Class_base, Func_resolve_async {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_resolve_async {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_resolve_async = vx_core.Class_resolve_async()
       return output
     }
@@ -26701,7 +26921,7 @@ object vx_core {
   class Class_resolve_first : vx_core.Class_base, Func_resolve_first {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_resolve_first {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_resolve_first = vx_core.Class_resolve_first()
       return output
     }
@@ -26797,7 +27017,7 @@ object vx_core {
   class Class_resolve_list : vx_core.Class_base, Func_resolve_list {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_resolve_list {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_resolve_list = vx_core.Class_resolve_list()
       return output
     }
@@ -26893,7 +27113,7 @@ object vx_core {
   class Class_security_from_context : vx_core.Class_base, Func_security_from_context {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_security_from_context {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_security_from_context = vx_core.Class_security_from_context()
       return output
     }
@@ -26976,7 +27196,7 @@ object vx_core {
   class Class_security_from_user : vx_core.Class_base, Func_security_from_user {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_security_from_user {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_security_from_user = vx_core.Class_security_from_user()
       return output
     }
@@ -27067,7 +27287,7 @@ object vx_core {
   class Class_session_from_context : vx_core.Class_base, Func_session_from_context {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_session_from_context {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_session_from_context = vx_core.Class_session_from_context()
       return output
     }
@@ -27146,7 +27366,7 @@ object vx_core {
   class Class_setting_from_context : vx_core.Class_base, Func_setting_from_context {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_setting_from_context {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_setting_from_context = vx_core.Class_setting_from_context()
       return output
     }
@@ -27225,7 +27445,7 @@ object vx_core {
   class Class_string_repeat : vx_core.Class_base, Func_string_repeat {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_string_repeat {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_string_repeat = vx_core.Class_string_repeat()
       return output
     }
@@ -27304,7 +27524,7 @@ object vx_core {
   class Class_string_from_any : vx_core.Class_base, Func_string_from_any {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_string_from_any {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_string_from_any = vx_core.Class_string_from_any()
       return output
     }
@@ -27399,7 +27619,7 @@ object vx_core {
   class Class_string_from_any_indent : vx_core.Class_base, Func_string_from_any_indent {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_string_from_any_indent {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_string_from_any_indent = vx_core.Class_string_from_any_indent()
       return output
     }
@@ -27468,6 +27688,7 @@ object vx_core {
 
   fun f_string_from_any_indent(value : vx_core.Type_any, indent : vx_core.Type_int, linefeed : vx_core.Type_boolean) : vx_core.Type_string {
     var output : vx_core.Type_string = vx_core.e_string
+    output = vx_core.vx_string_from_any_indent(value, indent, linefeed)
     return output
   }
 
@@ -27480,7 +27701,7 @@ object vx_core {
   class Class_string_from_func : vx_core.Class_base, Func_string_from_func {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_string_from_func {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_string_from_func = vx_core.Class_string_from_func()
       return output
     }
@@ -27565,7 +27786,7 @@ object vx_core {
   class Class_string_from_string_find_replace : vx_core.Class_base, Func_string_from_string_find_replace {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_string_from_string_find_replace {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_string_from_string_find_replace = vx_core.Class_string_from_string_find_replace()
       return output
     }
@@ -27645,7 +27866,7 @@ object vx_core {
   class Class_stringlist_from_map : vx_core.Class_base, Func_stringlist_from_map {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_stringlist_from_map {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_stringlist_from_map = vx_core.Class_stringlist_from_map()
       return output
     }
@@ -27745,7 +27966,7 @@ object vx_core {
   class Class_switch : vx_core.Class_base, Func_switch {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_switch {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_switch = vx_core.Class_switch()
       return output
     }
@@ -27825,7 +28046,7 @@ object vx_core {
   class Class_then : vx_core.Class_base, Func_then {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_then {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_then = vx_core.Class_then()
       return output
     }
@@ -27916,7 +28137,7 @@ object vx_core {
   class Class_traits_from_typedef : vx_core.Class_base, Func_traits_from_typedef {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_traits_from_typedef {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_traits_from_typedef = vx_core.Class_traits_from_typedef()
       return output
     }
@@ -28006,7 +28227,7 @@ object vx_core {
   class Class_type_from_any : vx_core.Class_base, Func_type_from_any {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_type_from_any {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_type_from_any = vx_core.Class_type_from_any()
       return output
     }
@@ -28096,7 +28317,7 @@ object vx_core {
   class Class_typedef_from_any : vx_core.Class_base, Func_typedef_from_any {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_typedef_from_any {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_typedef_from_any = vx_core.Class_typedef_from_any()
       return output
     }
@@ -28191,7 +28412,7 @@ object vx_core {
   class Class_typedef_from_type : vx_core.Class_base, Func_typedef_from_type {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_typedef_from_type {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_typedef_from_type = vx_core.Class_typedef_from_type()
       return output
     }
@@ -28282,7 +28503,7 @@ object vx_core {
   class Class_typename_from_any : vx_core.Class_base, Func_typename_from_any {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_typename_from_any {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_typename_from_any = vx_core.Class_typename_from_any()
       return output
     }
@@ -28377,7 +28598,7 @@ object vx_core {
   class Class_typename_from_type : vx_core.Class_base, Func_typename_from_type {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_typename_from_type {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_typename_from_type = vx_core.Class_typename_from_type()
       return output
     }
@@ -28472,7 +28693,7 @@ object vx_core {
   class Class_typename_from_typedef : vx_core.Class_base, Func_typename_from_typedef {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_typename_from_typedef {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_typename_from_typedef = vx_core.Class_typename_from_typedef()
       return output
     }
@@ -28571,7 +28792,7 @@ object vx_core {
   class Class_typenames_from_typelist : vx_core.Class_base, Func_typenames_from_typelist {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_typenames_from_typelist {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_typenames_from_typelist = vx_core.Class_typenames_from_typelist()
       return output
     }
@@ -28672,7 +28893,7 @@ object vx_core {
   class Class_user_from_context : vx_core.Class_base, Func_user_from_context {
     constructor() {}
 
-    override fun vx_new(vararg vals : Any) : vx_core.Func_user_from_context {
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
       val output : vx_core.Class_user_from_context = vx_core.Class_user_from_context()
       return output
     }

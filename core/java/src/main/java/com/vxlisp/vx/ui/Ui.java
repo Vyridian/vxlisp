@@ -35,7 +35,7 @@ public final class Ui {
     }
 
     @Override
-    public Ui.Type_align vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Type_align output = Core.vx_copy(Ui.e_align, vals);
       return output;
     }
@@ -185,7 +185,7 @@ public final class Ui {
     }
 
     @Override
-    public Ui.Type_bounds vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Type_bounds output = Core.vx_copy(Ui.e_bounds, vals);
       return output;
     }
@@ -431,7 +431,7 @@ public final class Ui {
     }
 
     @Override
-    public Ui.Type_cursor vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Type_cursor output = Core.vx_copy(Ui.e_cursor, vals);
       return output;
     }
@@ -500,7 +500,7 @@ public final class Ui {
   public static class Class_cursor_pointer extends Core.Class_base implements Type_cursor_pointer {
 
     @Override
-    public Ui.Type_cursor_pointer vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Type_cursor_pointer output = Core.vx_copy(Ui.e_cursor_pointer, vals);
       return output;
     }
@@ -583,7 +583,7 @@ public final class Ui {
     }
 
     @Override
-    public Ui.Type_flip vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Type_flip output = Core.vx_copy(Ui.e_flip, vals);
       return output;
     }
@@ -733,7 +733,7 @@ public final class Ui {
     }
 
     @Override
-    public Ui.Type_font vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Type_font output = Core.vx_copy(Ui.e_font, vals);
       return output;
     }
@@ -1040,7 +1040,7 @@ public final class Ui {
     }
 
     @Override
-    public Ui.Type_fontface vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Type_fontface output = Core.vx_copy(Ui.e_fontface, vals);
       return output;
     }
@@ -1308,7 +1308,7 @@ public final class Ui {
     }
 
     @Override
-    public Ui.Type_fontfacelist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Type_fontfacelist output = Core.vx_copy(Ui.e_fontfacelist, vals);
       return output;
     }
@@ -1495,7 +1495,7 @@ public final class Ui {
     }
 
     @Override
-    public Ui.Type_fontfacemap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Type_fontfacemap output = Core.vx_copy(Ui.e_fontfacemap, vals);
       return output;
     }
@@ -1706,7 +1706,7 @@ public final class Ui {
     }
 
     @Override
-    public Ui.Type_fontmap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Type_fontmap output = Core.vx_copy(Ui.e_fontmap, vals);
       return output;
     }
@@ -1870,7 +1870,7 @@ public final class Ui {
     }
 
     @Override
-    public Ui.Type_fontstyle vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Type_fontstyle output = Core.vx_copy(Ui.e_fontstyle, vals);
       return output;
     }
@@ -2101,7 +2101,7 @@ public final class Ui {
     }
 
     @Override
-    public Ui.Type_fontstylemap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Type_fontstylemap output = Core.vx_copy(Ui.e_fontstylemap, vals);
       return output;
     }
@@ -2297,7 +2297,7 @@ public final class Ui {
     }
 
     @Override
-    public Ui.Type_image vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Type_image output = Core.vx_copy(Ui.e_image, vals);
       return output;
     }
@@ -2548,7 +2548,7 @@ public final class Ui {
     }
 
     @Override
-    public Ui.Type_layout vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Type_layout output = Core.vx_copy(Ui.e_layout, vals);
       return output;
     }
@@ -2868,7 +2868,7 @@ public final class Ui {
     }
 
     @Override
-    public Ui.Type_layoutengine vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Type_layoutengine output = Core.vx_copy(Ui.e_layoutengine, vals);
       return output;
     }
@@ -3226,7 +3226,7 @@ public final class Ui {
     }
 
     @Override
-    public Ui.Type_layoutlist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Type_layoutlist output = Core.vx_copy(Ui.e_layoutlist, vals);
       return output;
     }
@@ -3413,7 +3413,7 @@ public final class Ui {
     }
 
     @Override
-    public Ui.Type_layoutmap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Type_layoutmap output = Core.vx_copy(Ui.e_layoutmap, vals);
       return output;
     }
@@ -3577,7 +3577,7 @@ public final class Ui {
     }
 
     @Override
-    public Ui.Type_pin vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Type_pin output = Core.vx_copy(Ui.e_pin, vals);
       return output;
     }
@@ -3841,7 +3841,7 @@ public final class Ui {
     }
 
     @Override
-    public Ui.Type_point vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Type_point output = Core.vx_copy(Ui.e_point, vals);
       return output;
     }
@@ -4125,7 +4125,7 @@ public final class Ui {
   public static class Class_pointtype extends Core.Class_base implements Type_pointtype {
 
     @Override
-    public Ui.Type_pointtype vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Type_pointtype output = Core.vx_copy(Ui.e_pointtype, vals);
       return output;
     }
@@ -4563,7 +4563,7 @@ public final class Ui {
     }
 
     @Override
-    public Ui.Type_style vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Type_style output = Core.vx_copy(Ui.e_style, vals);
       return output;
     }
@@ -5278,7 +5278,7 @@ public final class Ui {
     }
 
     @Override
-    public Ui.Type_stylelist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Type_stylelist output = Core.vx_copy(Ui.e_stylelist, vals);
       return output;
     }
@@ -5465,7 +5465,7 @@ public final class Ui {
     }
 
     @Override
-    public Ui.Type_stylemap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Type_stylemap output = Core.vx_copy(Ui.e_stylemap, vals);
       return output;
     }
@@ -5645,7 +5645,7 @@ public final class Ui {
     }
 
     @Override
-    public Ui.Type_stylesheet vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Type_stylesheet output = Core.vx_copy(Ui.e_stylesheet, vals);
       return output;
     }
@@ -5831,7 +5831,7 @@ public final class Ui {
     }
 
     @Override
-    public Ui.Type_styletype vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Type_styletype output = Core.vx_copy(Ui.e_styletype, vals);
       return output;
     }
@@ -6109,7 +6109,7 @@ public final class Ui {
     }
 
     @Override
-    public Ui.Type_ui vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Type_ui output = Core.vx_copy(Ui.e_ui, vals);
       return output;
     }
@@ -6620,7 +6620,7 @@ public final class Ui {
     }
 
     @Override
-    public Ui.Type_uiengine vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Type_uiengine output = Core.vx_copy(Ui.e_uiengine, vals);
       return output;
     }
@@ -6879,7 +6879,7 @@ public final class Ui {
     }
 
     @Override
-    public Ui.Type_uilist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Type_uilist output = Core.vx_copy(Ui.e_uilist, vals);
       return output;
     }
@@ -7066,7 +7066,7 @@ public final class Ui {
     }
 
     @Override
-    public Ui.Type_uimap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Type_uimap output = Core.vx_copy(Ui.e_uimap, vals);
       return output;
     }
@@ -9140,7 +9140,7 @@ public final class Ui {
   public static class Class_boolean_layout_from_ui_parent_selected extends Core.Class_base implements Func_boolean_layout_from_ui_parent_selected {
 
     @Override
-    public Ui.Func_boolean_layout_from_ui_parent_selected vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_boolean_layout_from_ui_parent_selected output = new Ui.Class_boolean_layout_from_ui_parent_selected();
       return output;
     }
@@ -9263,7 +9263,7 @@ public final class Ui {
   public static class Class_boolean_layout_from_ui_parent_visible extends Core.Class_base implements Func_boolean_layout_from_ui_parent_visible {
 
     @Override
-    public Ui.Func_boolean_layout_from_ui_parent_visible vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_boolean_layout_from_ui_parent_visible output = new Ui.Class_boolean_layout_from_ui_parent_visible();
       return output;
     }
@@ -9387,7 +9387,7 @@ public final class Ui {
   public static class Class_boolean_layoutaddchild_from_ui_parent extends Core.Class_base implements Func_boolean_layoutaddchild_from_ui_parent {
 
     @Override
-    public Ui.Func_boolean_layoutaddchild_from_ui_parent vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_boolean_layoutaddchild_from_ui_parent output = new Ui.Class_boolean_layoutaddchild_from_ui_parent();
       return output;
     }
@@ -9502,7 +9502,7 @@ public final class Ui {
   public static class Class_boolean_layoutremove_from_ui extends Core.Class_base implements Func_boolean_layoutremove_from_ui {
 
     @Override
-    public Ui.Func_boolean_layoutremove_from_ui vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_boolean_layoutremove_from_ui output = new Ui.Class_boolean_layoutremove_from_ui();
       return output;
     }
@@ -9608,7 +9608,7 @@ public final class Ui {
   public static class Class_boolean_layoutremove_from_ui_keys extends Core.Class_base implements Func_boolean_layoutremove_from_ui_keys {
 
     @Override
-    public Ui.Func_boolean_layoutremove_from_ui_keys vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_boolean_layoutremove_from_ui_keys output = new Ui.Class_boolean_layoutremove_from_ui_keys();
       return output;
     }
@@ -9736,7 +9736,7 @@ public final class Ui {
   public static class Class_boolean_layoutremove_from_ui_parent extends Core.Class_base implements Func_boolean_layoutremove_from_ui_parent {
 
     @Override
-    public Ui.Func_boolean_layoutremove_from_ui_parent vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_boolean_layoutremove_from_ui_parent output = new Ui.Class_boolean_layoutremove_from_ui_parent();
       return output;
     }
@@ -9851,7 +9851,7 @@ public final class Ui {
   public static class Class_boolean_layoutremove_from_ui_start_end extends Core.Class_base implements Func_boolean_layoutremove_from_ui_start_end {
 
     @Override
-    public Ui.Func_boolean_layoutremove_from_ui_start_end vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_boolean_layoutremove_from_ui_start_end output = new Ui.Class_boolean_layoutremove_from_ui_start_end();
       return output;
     }
@@ -9966,7 +9966,7 @@ public final class Ui {
   public static class Class_boolean_layoutselected_from_ui extends Core.Class_base implements Func_boolean_layoutselected_from_ui {
 
     @Override
-    public Ui.Func_boolean_layoutselected_from_ui vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_boolean_layoutselected_from_ui output = new Ui.Class_boolean_layoutselected_from_ui();
       return output;
     }
@@ -10072,7 +10072,7 @@ public final class Ui {
   public static class Class_boolean_layoutselected_from_ui_parent extends Core.Class_base implements Func_boolean_layoutselected_from_ui_parent {
 
     @Override
-    public Ui.Func_boolean_layoutselected_from_ui_parent vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_boolean_layoutselected_from_ui_parent output = new Ui.Class_boolean_layoutselected_from_ui_parent();
       return output;
     }
@@ -10185,7 +10185,7 @@ public final class Ui {
   public static class Class_boolean_layoutselected_from_ui_selected extends Core.Class_base implements Func_boolean_layoutselected_from_ui_selected {
 
     @Override
-    public Ui.Func_boolean_layoutselected_from_ui_selected vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_boolean_layoutselected_from_ui_selected output = new Ui.Class_boolean_layoutselected_from_ui_selected();
       return output;
     }
@@ -10277,7 +10277,7 @@ public final class Ui {
   public static class Class_boolean_layoutvisible_from_ui extends Core.Class_base implements Func_boolean_layoutvisible_from_ui {
 
     @Override
-    public Ui.Func_boolean_layoutvisible_from_ui vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_boolean_layoutvisible_from_ui output = new Ui.Class_boolean_layoutvisible_from_ui();
       return output;
     }
@@ -10382,7 +10382,7 @@ public final class Ui {
   public static class Class_boolean_print extends Core.Class_base implements Func_boolean_print {
 
     @Override
-    public Ui.Func_boolean_print vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_boolean_print output = new Ui.Class_boolean_print();
       return output;
     }
@@ -10503,7 +10503,7 @@ public final class Ui {
   public static class Class_boolean_removestate_uiapp extends Core.Class_base implements Func_boolean_removestate_uiapp {
 
     @Override
-    public Ui.Func_boolean_removestate_uiapp vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_boolean_removestate_uiapp output = new Ui.Class_boolean_removestate_uiapp();
       return output;
     }
@@ -10599,7 +10599,7 @@ public final class Ui {
   public static class Class_boolean_write_from_ui_parent extends Core.Class_base implements Func_boolean_write_from_ui_parent {
 
     @Override
-    public Ui.Func_boolean_write_from_ui_parent vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_boolean_write_from_ui_parent output = new Ui.Class_boolean_write_from_ui_parent();
       return output;
     }
@@ -10705,7 +10705,7 @@ public final class Ui {
   public static class Class_boolean_writeremove_from_ui_uid extends Core.Class_base implements Func_boolean_writeremove_from_ui_uid {
 
     @Override
-    public Ui.Func_boolean_writeremove_from_ui_uid vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_boolean_writeremove_from_ui_uid output = new Ui.Class_boolean_writeremove_from_ui_uid();
       return output;
     }
@@ -10810,7 +10810,7 @@ public final class Ui {
   public static class Class_boolean_writestate_from_ui extends Core.Class_base implements Func_boolean_writestate_from_ui {
 
     @Override
-    public Ui.Func_boolean_writestate_from_ui vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_boolean_writestate_from_ui output = new Ui.Class_boolean_writestate_from_ui();
       return output;
     }
@@ -10980,7 +10980,7 @@ public final class Ui {
   public static class Class_boolean_writestate_from_uiapp extends Core.Class_base implements Func_boolean_writestate_from_uiapp {
 
     @Override
-    public Ui.Func_boolean_writestate_from_uiapp vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_boolean_writestate_from_uiapp output = new Ui.Class_boolean_writestate_from_uiapp();
       return output;
     }
@@ -11091,7 +11091,7 @@ public final class Ui {
   public static class Class_boolean_writestate_from_uiengine extends Core.Class_base implements Func_boolean_writestate_from_uiengine {
 
     @Override
-    public Ui.Func_boolean_writestate_from_uiengine vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_boolean_writestate_from_uiengine output = new Ui.Class_boolean_writestate_from_uiengine();
       return output;
     }
@@ -11202,7 +11202,7 @@ public final class Ui {
   public static class Class_fontfacemap_from_fontfacelist extends Core.Class_base implements Func_fontfacemap_from_fontfacelist {
 
     @Override
-    public Ui.Func_fontfacemap_from_fontfacelist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_fontfacemap_from_fontfacelist output = new Ui.Class_fontfacemap_from_fontfacelist();
       return output;
     }
@@ -11317,7 +11317,7 @@ public final class Ui {
   public static class Class_int_child_from_ui_uid extends Core.Class_base implements Func_int_child_from_ui_uid {
 
     @Override
-    public Ui.Func_int_child_from_ui_uid vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_int_child_from_ui_uid output = new Ui.Class_int_child_from_ui_uid();
       return output;
     }
@@ -11420,7 +11420,7 @@ public final class Ui {
   public static class Class_int_selected_from_ui extends Core.Class_base implements Func_int_selected_from_ui {
 
     @Override
-    public Ui.Func_int_selected_from_ui vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_int_selected_from_ui output = new Ui.Class_int_selected_from_ui();
       return output;
     }
@@ -11541,7 +11541,7 @@ public final class Ui {
   public static class Class_int_visible_from_ui extends Core.Class_base implements Func_int_visible_from_ui {
 
     @Override
-    public Ui.Func_int_visible_from_ui vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_int_visible_from_ui output = new Ui.Class_int_visible_from_ui();
       return output;
     }
@@ -11659,7 +11659,7 @@ public final class Ui {
   public static class Class_intlist_visible_from_ui extends Core.Class_base implements Func_intlist_visible_from_ui {
 
     @Override
-    public Ui.Func_intlist_visible_from_ui vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_intlist_visible_from_ui output = new Ui.Class_intlist_visible_from_ui();
       return output;
     }
@@ -11809,7 +11809,7 @@ public final class Ui {
   public static class Class_layout_from_style extends Core.Class_base implements Func_layout_from_style {
 
     @Override
-    public Ui.Func_layout_from_style vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_layout_from_style output = new Ui.Class_layout_from_style();
       return output;
     }
@@ -11915,7 +11915,7 @@ public final class Ui {
   public static class Class_layout_from_ui extends Core.Class_base implements Func_layout_from_ui {
 
     @Override
-    public Ui.Func_layout_from_ui vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_layout_from_ui output = new Ui.Class_layout_from_ui();
       return output;
     }
@@ -12035,7 +12035,7 @@ public final class Ui {
   public static class Class_layout_from_ui_layoutengine extends Core.Class_base implements Func_layout_from_ui_layoutengine {
 
     @Override
-    public Ui.Func_layout_from_ui_layoutengine vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_layout_from_ui_layoutengine output = new Ui.Class_layout_from_ui_layoutengine();
       return output;
     }
@@ -12142,7 +12142,7 @@ public final class Ui {
   public static class Class_layout_from_ui_layoutmap_else extends Core.Class_base implements Func_layout_from_ui_layoutmap_else {
 
     @Override
-    public Ui.Func_layout_from_ui_layoutmap_else vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_layout_from_ui_layoutmap_else output = new Ui.Class_layout_from_ui_layoutmap_else();
       return output;
     }
@@ -12259,7 +12259,7 @@ public final class Ui {
   public static class Class_layoutengine_readstate extends Core.Class_base implements Func_layoutengine_readstate {
 
     @Override
-    public Ui.Func_layoutengine_readstate vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_layoutengine_readstate output = new Ui.Class_layoutengine_readstate();
       return output;
     }
@@ -12360,7 +12360,7 @@ public final class Ui {
   public static class Class_layoutmap_from_layoutlist extends Core.Class_base implements Func_layoutmap_from_layoutlist {
 
     @Override
-    public Ui.Func_layoutmap_from_layoutlist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_layoutmap_from_layoutlist output = new Ui.Class_layoutmap_from_layoutlist();
       return output;
     }
@@ -12474,7 +12474,7 @@ public final class Ui {
   public static class Class_string_parentuid_from_uid extends Core.Class_base implements Func_string_parentuid_from_uid {
 
     @Override
-    public Ui.Func_string_parentuid_from_uid vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_string_parentuid_from_uid output = new Ui.Class_string_parentuid_from_uid();
       return output;
     }
@@ -12614,7 +12614,7 @@ public final class Ui {
   public static class Class_string_selected_from_ui extends Core.Class_base implements Func_string_selected_from_ui {
 
     @Override
-    public Ui.Func_string_selected_from_ui vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_string_selected_from_ui output = new Ui.Class_string_selected_from_ui();
       return output;
     }
@@ -12729,7 +12729,7 @@ public final class Ui {
   public static class Class_stringlist_selected_from_ui extends Core.Class_base implements Func_stringlist_selected_from_ui {
 
     @Override
-    public Ui.Func_stringlist_selected_from_ui vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_stringlist_selected_from_ui output = new Ui.Class_stringlist_selected_from_ui();
       return output;
     }
@@ -12858,7 +12858,7 @@ public final class Ui {
   public static class Class_stringlist_from_ui extends Core.Class_base implements Func_stringlist_from_ui {
 
     @Override
-    public Ui.Func_stringlist_from_ui vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_stringlist_from_ui output = new Ui.Class_stringlist_from_ui();
       return output;
     }
@@ -12972,7 +12972,7 @@ public final class Ui {
   public static class Class_stylemap_from_stylelist extends Core.Class_base implements Func_stylemap_from_stylelist {
 
     @Override
-    public Ui.Func_stylemap_from_stylelist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_stylemap_from_stylelist output = new Ui.Class_stylemap_from_stylelist();
       return output;
     }
@@ -13085,7 +13085,7 @@ public final class Ui {
   public static class Class_stylesheet_readstate extends Core.Class_base implements Func_stylesheet_readstate {
 
     @Override
-    public Ui.Func_stylesheet_readstate vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_stylesheet_readstate output = new Ui.Class_stylesheet_readstate();
       return output;
     }
@@ -13186,7 +13186,7 @@ public final class Ui {
   public static class Class_stylesheet_render extends Core.Class_base implements Func_stylesheet_render {
 
     @Override
-    public Ui.Func_stylesheet_render vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_stylesheet_render output = new Ui.Class_stylesheet_render();
       return output;
     }
@@ -13291,7 +13291,7 @@ public final class Ui {
   public static class Class_ui_addlayout_from_ui extends Core.Class_base implements Func_ui_addlayout_from_ui {
 
     @Override
-    public Ui.Func_ui_addlayout_from_ui vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_ui_addlayout_from_ui output = new Ui.Class_ui_addlayout_from_ui();
       return output;
     }
@@ -13411,7 +13411,7 @@ public final class Ui {
   public static class Class_ui_addlayout_from_ui_layoutengine extends Core.Class_base implements Func_ui_addlayout_from_ui_layoutengine {
 
     @Override
-    public Ui.Func_ui_addlayout_from_ui_layoutengine vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_ui_addlayout_from_ui_layoutengine output = new Ui.Class_ui_addlayout_from_ui_layoutengine();
       return output;
     }
@@ -13518,7 +13518,7 @@ public final class Ui {
   public static class Class_ui_addlayout_from_ui_layoutmap_else extends Core.Class_base implements Func_ui_addlayout_from_ui_layoutmap_else {
 
     @Override
-    public Ui.Func_ui_addlayout_from_ui_layoutmap_else vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_ui_addlayout_from_ui_layoutmap_else output = new Ui.Class_ui_addlayout_from_ui_layoutmap_else();
       return output;
     }
@@ -13639,7 +13639,7 @@ public final class Ui {
   public static class Class_ui_addlayout_from_ui_uiengine extends Core.Class_base implements Func_ui_addlayout_from_ui_uiengine {
 
     @Override
-    public Ui.Func_ui_addlayout_from_ui_uiengine vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_ui_addlayout_from_ui_uiengine output = new Ui.Class_ui_addlayout_from_ui_uiengine();
       return output;
     }
@@ -13743,7 +13743,7 @@ public final class Ui {
   public static class Class_ui_child_from_ui_pos extends Core.Class_base implements Func_ui_child_from_ui_pos {
 
     @Override
-    public Ui.Func_ui_child_from_ui_pos vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_ui_child_from_ui_pos output = new Ui.Class_ui_child_from_ui_pos();
       return output;
     }
@@ -13848,7 +13848,7 @@ public final class Ui {
   public static class Class_ui_child_from_ui_uid extends Core.Class_base implements Func_ui_child_from_ui_uid {
 
     @Override
-    public Ui.Func_ui_child_from_ui_uid vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_ui_child_from_ui_uid output = new Ui.Class_ui_child_from_ui_uid();
       return output;
     }
@@ -13952,7 +13952,7 @@ public final class Ui {
   public static class Class_ui_from_from_event extends Core.Class_base implements Func_ui_from_from_event {
 
     @Override
-    public Ui.Func_ui_from_from_event vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_ui_from_from_event output = new Ui.Class_ui_from_from_event();
       return output;
     }
@@ -14068,7 +14068,7 @@ public final class Ui {
   public static class Class_ui_layout extends Core.Class_base implements Func_ui_layout {
 
     @Override
-    public Ui.Func_ui_layout vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_ui_layout output = new Ui.Class_ui_layout();
       return output;
     }
@@ -14185,7 +14185,7 @@ public final class Ui {
   public static class Class_ui_layout_from_fn_layout_ui_orig_parent extends Core.Class_base implements Func_ui_layout_from_fn_layout_ui_orig_parent {
 
     @Override
-    public Ui.Func_ui_layout_from_fn_layout_ui_orig_parent vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_ui_layout_from_fn_layout_ui_orig_parent output = new Ui.Class_ui_layout_from_fn_layout_ui_orig_parent();
       return output;
     }
@@ -14288,7 +14288,7 @@ public final class Ui {
   public static class Class_ui_layout_from_ui_orig_parent extends Core.Class_base implements Func_ui_layout_from_ui_orig_parent {
 
     @Override
-    public Ui.Func_ui_layout_from_ui_orig_parent vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_ui_layout_from_ui_orig_parent output = new Ui.Class_ui_layout_from_ui_orig_parent();
       return output;
     }
@@ -14422,7 +14422,7 @@ public final class Ui {
   public static class Class_ui_layout_from_ui_parent_selected extends Core.Class_base implements Func_ui_layout_from_ui_parent_selected {
 
     @Override
-    public Ui.Func_ui_layout_from_ui_parent_selected vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_ui_layout_from_ui_parent_selected output = new Ui.Class_ui_layout_from_ui_parent_selected();
       return output;
     }
@@ -14536,7 +14536,7 @@ public final class Ui {
   public static class Class_ui_layout_from_ui_parent_visible extends Core.Class_base implements Func_ui_layout_from_ui_parent_visible {
 
     @Override
-    public Ui.Func_ui_layout_from_ui_parent_visible vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_ui_layout_from_ui_parent_visible output = new Ui.Class_ui_layout_from_ui_parent_visible();
       return output;
     }
@@ -14643,7 +14643,7 @@ public final class Ui {
   public static class Class_ui_readstate_uiapp extends Core.Class_base implements Func_ui_readstate_uiapp {
 
     @Override
-    public Ui.Func_ui_readstate_uiapp vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_ui_readstate_uiapp output = new Ui.Class_ui_readstate_uiapp();
       return output;
     }
@@ -14739,7 +14739,7 @@ public final class Ui {
   public static class Class_ui_readstate_from_uid extends Core.Class_base implements Func_ui_readstate_from_uid {
 
     @Override
-    public Ui.Func_ui_readstate_from_uid vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_ui_readstate_from_uid output = new Ui.Class_ui_readstate_from_uid();
       return output;
     }
@@ -14858,7 +14858,7 @@ public final class Ui {
   public static class Class_ui_selected_from_ui extends Core.Class_base implements Func_ui_selected_from_ui {
 
     @Override
-    public Ui.Func_ui_selected_from_ui vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_ui_selected_from_ui output = new Ui.Class_ui_selected_from_ui();
       return output;
     }
@@ -14976,7 +14976,7 @@ public final class Ui {
   public static class Class_ui_visible_from_ui extends Core.Class_base implements Func_ui_visible_from_ui {
 
     @Override
-    public Ui.Func_ui_visible_from_ui vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_ui_visible_from_ui output = new Ui.Class_ui_visible_from_ui();
       return output;
     }
@@ -15095,7 +15095,7 @@ public final class Ui {
   public static class Class_ui_write_from_ui_child extends Core.Class_base implements Func_ui_write_from_ui_child {
 
     @Override
-    public Ui.Func_ui_write_from_ui_child vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_ui_write_from_ui_child output = new Ui.Class_ui_write_from_ui_child();
       return output;
     }
@@ -15202,7 +15202,7 @@ public final class Ui {
   public static class Class_ui_write_from_ui_childmap extends Core.Class_base implements Func_ui_write_from_ui_childmap {
 
     @Override
-    public Ui.Func_ui_write_from_ui_childmap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_ui_write_from_ui_childmap output = new Ui.Class_ui_write_from_ui_childmap();
       return output;
     }
@@ -15315,7 +15315,7 @@ public final class Ui {
   public static class Class_ui_write_from_ui_visible extends Core.Class_base implements Func_ui_write_from_ui_visible {
 
     @Override
-    public Ui.Func_ui_write_from_ui_visible vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_ui_write_from_ui_visible output = new Ui.Class_ui_write_from_ui_visible();
       return output;
     }
@@ -15498,7 +15498,7 @@ public final class Ui {
   public static class Class_ui_from_layout_ui_orig_parent extends Core.Class_base implements Func_ui_from_layout_ui_orig_parent {
 
     @Override
-    public Ui.Func_ui_from_layout_ui_orig_parent vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_ui_from_layout_ui_orig_parent output = new Ui.Class_ui_from_layout_ui_orig_parent();
       return output;
     }
@@ -15609,7 +15609,7 @@ public final class Ui {
   public static class Class_ui_from_ui_find extends Core.Class_base implements Func_ui_from_ui_find {
 
     @Override
-    public Ui.Func_ui_from_ui_find vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_ui_from_ui_find output = new Ui.Class_ui_from_ui_find();
       return output;
     }
@@ -15872,7 +15872,7 @@ public final class Ui {
   public static class Class_ui_from_ui_selected extends Core.Class_base implements Func_ui_from_ui_selected {
 
     @Override
-    public Ui.Func_ui_from_ui_selected vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_ui_from_ui_selected output = new Ui.Class_ui_from_ui_selected();
       return output;
     }
@@ -16057,7 +16057,7 @@ public final class Ui {
   public static class Class_uid_selected_from_ui extends Core.Class_base implements Func_uid_selected_from_ui {
 
     @Override
-    public Ui.Func_uid_selected_from_ui vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_uid_selected_from_ui output = new Ui.Class_uid_selected_from_ui();
       return output;
     }
@@ -16174,7 +16174,7 @@ public final class Ui {
   public static class Class_uiengine_readstate extends Core.Class_base implements Func_uiengine_readstate {
 
     @Override
-    public Ui.Func_uiengine_readstate vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_uiengine_readstate output = new Ui.Class_uiengine_readstate();
       return output;
     }
@@ -16270,7 +16270,7 @@ public final class Ui {
   public static class Class_uiengine_render extends Core.Class_base implements Func_uiengine_render {
 
     @Override
-    public Ui.Func_uiengine_render vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_uiengine_render output = new Ui.Class_uiengine_render();
       return output;
     }
@@ -16414,7 +16414,7 @@ public final class Ui {
   public static class Class_uilist_selected_from_ui extends Core.Class_base implements Func_uilist_selected_from_ui {
 
     @Override
-    public Ui.Func_uilist_selected_from_ui vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_uilist_selected_from_ui output = new Ui.Class_uilist_selected_from_ui();
       return output;
     }
@@ -16542,7 +16542,7 @@ public final class Ui {
   public static class Class_uilist_visible_from_ui extends Core.Class_base implements Func_uilist_visible_from_ui {
 
     @Override
-    public Ui.Func_uilist_visible_from_ui vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_uilist_visible_from_ui output = new Ui.Class_uilist_visible_from_ui();
       return output;
     }
@@ -16671,7 +16671,7 @@ public final class Ui {
   public static class Class_uilist_from_uimap extends Core.Class_base implements Func_uilist_from_uimap {
 
     @Override
-    public Ui.Func_uilist_from_uimap vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_uilist_from_uimap output = new Ui.Class_uilist_from_uimap();
       return output;
     }
@@ -16788,7 +16788,7 @@ public final class Ui {
   public static class Class_uimap_addlayout_from_uimap_layoutmap_else extends Core.Class_base implements Func_uimap_addlayout_from_uimap_layoutmap_else {
 
     @Override
-    public Ui.Func_uimap_addlayout_from_uimap_layoutmap_else vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_uimap_addlayout_from_uimap_layoutmap_else output = new Ui.Class_uimap_addlayout_from_uimap_layoutmap_else();
       return output;
     }
@@ -16896,7 +16896,7 @@ public final class Ui {
   public static class Class_uimap_layout_from_uimap_parent extends Core.Class_base implements Func_uimap_layout_from_uimap_parent {
 
     @Override
-    public Ui.Func_uimap_layout_from_uimap_parent vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_uimap_layout_from_uimap_parent output = new Ui.Class_uimap_layout_from_uimap_parent();
       return output;
     }
@@ -17003,7 +17003,7 @@ public final class Ui {
   public static class Class_uimap_from_uilist extends Core.Class_base implements Func_uimap_from_uilist {
 
     @Override
-    public Ui.Func_uimap_from_uilist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_uimap_from_uilist output = new Ui.Class_uimap_from_uilist();
       return output;
     }
@@ -17118,7 +17118,7 @@ public final class Ui {
   public static class Class_uimap_from_uimap_data extends Core.Class_base implements Func_uimap_from_uimap_data {
 
     @Override
-    public Ui.Func_uimap_from_uimap_data vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Ui.Class_uimap_from_uimap_data output = new Ui.Class_uimap_from_uimap_data();
       return output;
     }

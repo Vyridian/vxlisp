@@ -16,7 +16,7 @@ public static class Translate {
 
   public class Class_session_from_session_name : Vx.Core.Class_base, Func_session_from_session_name {
 
-    public override Vx.Translate.Func_session_from_session_name vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Translate.Class_session_from_session_name output = new Vx.Translate.Class_session_from_session_name();
       return output;
     }
@@ -112,7 +112,7 @@ public static class Translate {
 
   public class Class_session_from_session_translation : Vx.Core.Class_base, Func_session_from_session_translation {
 
-    public override Vx.Translate.Func_session_from_session_translation vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Translate.Class_session_from_session_translation output = new Vx.Translate.Class_session_from_session_translation();
       return output;
     }
@@ -206,7 +206,7 @@ public static class Translate {
 
   public class Class_session_from_session_translationmap_name : Vx.Core.Class_base, Func_session_from_session_translationmap_name {
 
-    public override Vx.Translate.Func_session_from_session_translationmap_name vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Translate.Class_session_from_session_translationmap_name output = new Vx.Translate.Class_session_from_session_translationmap_name();
       return output;
     }
@@ -305,7 +305,7 @@ public static class Translate {
 
   public class Class_translate : Vx.Core.Class_base, Func_translate {
 
-    public override Vx.Translate.Func_translate vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Translate.Class_translate output = new Vx.Translate.Class_translate();
       return output;
     }
@@ -407,7 +407,7 @@ public static class Translate {
 
   public class Class_translate_1 : Vx.Core.Class_base, Func_translate_1 {
 
-    public override Vx.Translate.Func_translate_1 vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Translate.Class_translate_1 output = new Vx.Translate.Class_translate_1();
       return output;
     }
@@ -526,7 +526,7 @@ public static class Translate {
 
   public class Class_translate_from_translation_string : Vx.Core.Class_base, Func_translate_from_translation_string {
 
-    public override Vx.Translate.Func_translate_from_translation_string vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Translate.Class_translate_from_translation_string output = new Vx.Translate.Class_translate_from_translation_string();
       return output;
     }
@@ -639,7 +639,7 @@ public static class Translate {
 
   public class Class_translate_from_translationmap_name_string : Vx.Core.Class_base, Func_translate_from_translationmap_name_string {
 
-    public override Vx.Translate.Func_translate_from_translationmap_name_string vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Translate.Class_translate_from_translationmap_name_string output = new Vx.Translate.Class_translate_from_translationmap_name_string();
       return output;
     }
@@ -739,7 +739,7 @@ public static class Translate {
 
   public class Class_translation_load_session : Vx.Core.Class_base, Func_translation_load_session {
 
-    public override Vx.Translate.Func_translation_load_session vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Translate.Class_translation_load_session output = new Vx.Translate.Class_translation_load_session();
       return output;
     }
@@ -834,7 +834,7 @@ public static class Translate {
 
   public class Class_translation_from_context : Vx.Core.Class_base, Func_translation_from_context {
 
-    public override Vx.Translate.Func_translation_from_context vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Translate.Class_translation_from_context output = new Vx.Translate.Class_translation_from_context();
       return output;
     }
@@ -921,7 +921,7 @@ public static class Translate {
 
   public class Class_translation_from_session_name : Vx.Core.Class_base, Func_translation_from_session_name {
 
-    public override Vx.Translate.Func_translation_from_session_name vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Translate.Class_translation_from_session_name output = new Vx.Translate.Class_translation_from_session_name();
       return output;
     }
@@ -1017,7 +1017,7 @@ public static class Translate {
 
   public class Class_translationmap_from_translations : Vx.Core.Class_base, Func_translationmap_from_translations {
 
-    public override Vx.Translate.Func_translationmap_from_translations vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Translate.Class_translationmap_from_translations output = new Vx.Translate.Class_translationmap_from_translations();
       return output;
     }

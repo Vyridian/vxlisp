@@ -190,7 +190,7 @@ public static class Type {
 
   public class Class_allowtypenames_from_type : Vx.Core.Class_base, Func_allowtypenames_from_type {
 
-    public override Vx.Type.Func_allowtypenames_from_type vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Type.Class_allowtypenames_from_type output = new Vx.Type.Class_allowtypenames_from_type();
       return output;
     }
@@ -290,7 +290,7 @@ public static class Type {
 
   public class Class_allowtypes_from_type : Vx.Core.Class_base, Func_allowtypes_from_type {
 
-    public override Vx.Type.Func_allowtypes_from_type vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Type.Class_allowtypes_from_type output = new Vx.Type.Class_allowtypes_from_type();
       return output;
     }
@@ -388,7 +388,7 @@ public static class Type {
 
   public class Class_any_from_int : Vx.Core.Class_base, Func_any_from_int {
 
-    public override Vx.Type.Func_any_from_int vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Type.Class_any_from_int output = new Vx.Type.Class_any_from_int();
       return output;
     }
@@ -485,7 +485,7 @@ public static class Type {
 
   public class Class_boolean_from_string_ends : Vx.Core.Class_base, Func_boolean_from_string_ends {
 
-    public override Vx.Type.Func_boolean_from_string_ends vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Type.Class_boolean_from_string_ends output = new Vx.Type.Class_boolean_from_string_ends();
       return output;
     }
@@ -571,7 +571,7 @@ public static class Type {
 
   public class Class_boolean_from_string_starts : Vx.Core.Class_base, Func_boolean_from_string_starts {
 
-    public override Vx.Type.Func_boolean_from_string_starts vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Type.Class_boolean_from_string_starts output = new Vx.Type.Class_boolean_from_string_starts();
       return output;
     }
@@ -657,7 +657,7 @@ public static class Type {
 
   public class Class_int_from_string_find : Vx.Core.Class_base, Func_int_from_string_find {
 
-    public override Vx.Type.Func_int_from_string_find vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Type.Class_int_from_string_find output = new Vx.Type.Class_int_from_string_find();
       return output;
     }
@@ -743,7 +743,7 @@ public static class Type {
 
   public class Class_int_from_string_findkeyword : Vx.Core.Class_base, Func_int_from_string_findkeyword {
 
-    public override Vx.Type.Func_int_from_string_findkeyword vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Type.Class_int_from_string_findkeyword output = new Vx.Type.Class_int_from_string_findkeyword();
       return output;
     }
@@ -829,7 +829,7 @@ public static class Type {
 
   public class Class_int_from_string_findlast : Vx.Core.Class_base, Func_int_from_string_findlast {
 
-    public override Vx.Type.Func_int_from_string_findlast vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Type.Class_int_from_string_findlast output = new Vx.Type.Class_int_from_string_findlast();
       return output;
     }
@@ -913,7 +913,7 @@ public static class Type {
 
   public class Class_is_boolean : Vx.Core.Class_base, Func_is_boolean {
 
-    public override Vx.Type.Func_is_boolean vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Type.Class_is_boolean output = new Vx.Type.Class_is_boolean();
       return output;
     }
@@ -1013,7 +1013,7 @@ public static class Type {
 
   public class Class_is_decimal : Vx.Core.Class_base, Func_is_decimal {
 
-    public override Vx.Type.Func_is_decimal vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Type.Class_is_decimal output = new Vx.Type.Class_is_decimal();
       return output;
     }
@@ -1113,7 +1113,7 @@ public static class Type {
 
   public class Class_is_none : Vx.Core.Class_base, Func_is_none {
 
-    public override Vx.Type.Func_is_none vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Type.Class_is_none output = new Vx.Type.Class_is_none();
       return output;
     }
@@ -1211,7 +1211,7 @@ public static class Type {
 
   public class Class_is_string : Vx.Core.Class_base, Func_is_string {
 
-    public override Vx.Type.Func_is_string vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Type.Class_is_string output = new Vx.Type.Class_is_string();
       return output;
     }
@@ -1312,7 +1312,7 @@ public static class Type {
 
   public class Class_is_type : Vx.Core.Class_base, Func_is_type {
 
-    public override Vx.Type.Func_is_type vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Type.Class_is_type output = new Vx.Type.Class_is_type();
       return output;
     }
@@ -1426,7 +1426,7 @@ public static class Type {
 
   public class Class_is_type_from_any_typelist : Vx.Core.Class_base, Func_is_type_from_any_typelist {
 
-    public override Vx.Type.Func_is_type_from_any_typelist vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Type.Class_is_type_from_any_typelist output = new Vx.Type.Class_is_type_from_any_typelist();
       return output;
     }
@@ -1527,7 +1527,7 @@ public static class Type {
 
   public class Class_string_lowercase : Vx.Core.Class_base, Func_string_lowercase {
 
-    public override Vx.Type.Func_string_lowercase vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Type.Class_string_lowercase output = new Vx.Type.Class_string_lowercase();
       return output;
     }
@@ -1623,7 +1623,7 @@ public static class Type {
 
   public class Class_string_outdent : Vx.Core.Class_base, Func_string_outdent {
 
-    public override Vx.Type.Func_string_outdent vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Type.Class_string_outdent output = new Vx.Type.Class_string_outdent();
       return output;
     }
@@ -1786,7 +1786,7 @@ public static class Type {
 
   public class Class_string_trim : Vx.Core.Class_base, Func_string_trim {
 
-    public override Vx.Type.Func_string_trim vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Type.Class_string_trim output = new Vx.Type.Class_string_trim();
       return output;
     }
@@ -1882,7 +1882,7 @@ public static class Type {
 
   public class Class_string_uppercase : Vx.Core.Class_base, Func_string_uppercase {
 
-    public override Vx.Type.Func_string_uppercase vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Type.Class_string_uppercase output = new Vx.Type.Class_string_uppercase();
       return output;
     }
@@ -1978,7 +1978,7 @@ public static class Type {
 
   public class Class_string_from_int : Vx.Core.Class_base, Func_string_from_int {
 
-    public override Vx.Type.Func_string_from_int vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Type.Class_string_from_int output = new Vx.Type.Class_string_from_int();
       return output;
     }
@@ -2114,7 +2114,7 @@ public static class Type {
 
   public class Class_string_from_string_end : Vx.Core.Class_base, Func_string_from_string_end {
 
-    public override Vx.Type.Func_string_from_string_end vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Type.Class_string_from_string_end output = new Vx.Type.Class_string_from_string_end();
       return output;
     }
@@ -2204,7 +2204,7 @@ public static class Type {
 
   public class Class_string_from_string_start : Vx.Core.Class_base, Func_string_from_string_start {
 
-    public override Vx.Type.Func_string_from_string_start vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Type.Class_string_from_string_start output = new Vx.Type.Class_string_from_string_start();
       return output;
     }
@@ -2297,7 +2297,7 @@ public static class Type {
 
   public class Class_string_from_string_start_end : Vx.Core.Class_base, Func_string_from_string_start_end {
 
-    public override Vx.Type.Func_string_from_string_start_end vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Type.Class_string_from_string_start_end output = new Vx.Type.Class_string_from_string_start_end();
       return output;
     }
@@ -2384,7 +2384,7 @@ public static class Type {
 
   public class Class_string_from_stringlist_join : Vx.Core.Class_base, Func_string_from_stringlist_join {
 
-    public override Vx.Type.Func_string_from_stringlist_join vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Type.Class_string_from_stringlist_join output = new Vx.Type.Class_string_from_stringlist_join();
       return output;
     }
@@ -2470,7 +2470,7 @@ public static class Type {
 
   public class Class_stringlist_from_string_split : Vx.Core.Class_base, Func_stringlist_from_string_split {
 
-    public override Vx.Type.Func_stringlist_from_string_split vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Type.Class_stringlist_from_string_split output = new Vx.Type.Class_stringlist_from_string_split();
       return output;
     }
@@ -2555,7 +2555,7 @@ public static class Type {
 
   public class Class_traitnames_from_any : Vx.Core.Class_base, Func_traitnames_from_any {
 
-    public override Vx.Type.Func_traitnames_from_any vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Type.Class_traitnames_from_any output = new Vx.Type.Class_traitnames_from_any();
       return output;
     }
@@ -2655,7 +2655,7 @@ public static class Type {
 
   public class Class_traits_from_any : Vx.Core.Class_base, Func_traits_from_any {
 
-    public override Vx.Type.Func_traits_from_any vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Type.Class_traits_from_any output = new Vx.Type.Class_traits_from_any();
       return output;
     }
@@ -2755,7 +2755,7 @@ public static class Type {
 
   public class Class_traits_from_typedef : Vx.Core.Class_base, Func_traits_from_typedef {
 
-    public override Vx.Type.Func_traits_from_typedef vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Type.Class_traits_from_typedef output = new Vx.Type.Class_traits_from_typedef();
       return output;
     }

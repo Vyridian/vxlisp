@@ -428,7 +428,9 @@
   }
 
   // vx_compare(any, any)
-  public static Vx.Core.Type_int vx_compare(Vx.Core.Type_any val1, Vx.Core.Type_any val2) {
+  public static Vx.Core.Type_int vx_compare(
+    Vx.Core.Type_any val1,
+    Vx.Core.Type_any val2) {
     int intresult = 0;
     if ((val1 is Core.Type_number num1) && (val2 is Core.Type_number num2)) {
       float float1 = Vx.Core.vx_new(Core.t_float, num1).vx_float();

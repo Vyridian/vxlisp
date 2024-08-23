@@ -102,7 +102,7 @@ public final class Test {
     }
 
     @Override
-    public Test.Type_testcase vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Type_testcase output = Core.vx_copy(Test.e_testcase, vals);
       return output;
     }
@@ -370,7 +370,7 @@ public final class Test {
     }
 
     @Override
-    public Test.Type_testcaselist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Type_testcaselist output = Core.vx_copy(Test.e_testcaselist, vals);
       return output;
     }
@@ -558,7 +558,7 @@ public final class Test {
     }
 
     @Override
-    public Test.Type_testcoveragedetail vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Type_testcoveragedetail output = Core.vx_copy(Test.e_testcoveragedetail, vals);
       return output;
     }
@@ -862,7 +862,7 @@ public final class Test {
     }
 
     @Override
-    public Test.Type_testcoveragenums vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Type_testcoveragenums output = Core.vx_copy(Test.e_testcoveragenums, vals);
       return output;
     }
@@ -1239,7 +1239,7 @@ public final class Test {
     }
 
     @Override
-    public Test.Type_testcoveragesummary vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Type_testcoveragesummary output = Core.vx_copy(Test.e_testcoveragesummary, vals);
       return output;
     }
@@ -1623,7 +1623,7 @@ public final class Test {
     }
 
     @Override
-    public Test.Type_testdescribe vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Type_testdescribe output = Core.vx_copy(Test.e_testdescribe, vals);
       return output;
     }
@@ -1864,7 +1864,7 @@ public final class Test {
     }
 
     @Override
-    public Test.Type_testdescribelist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Type_testdescribelist output = Core.vx_copy(Test.e_testdescribelist, vals);
       return output;
     }
@@ -2068,7 +2068,7 @@ public final class Test {
     }
 
     @Override
-    public Test.Type_testpackage vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Type_testpackage output = Core.vx_copy(Test.e_testpackage, vals);
       return output;
     }
@@ -2357,7 +2357,7 @@ public final class Test {
     }
 
     @Override
-    public Test.Type_testpackagelist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Type_testpackagelist output = Core.vx_copy(Test.e_testpackagelist, vals);
       return output;
     }
@@ -2561,7 +2561,7 @@ public final class Test {
     }
 
     @Override
-    public Test.Type_testresult vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Type_testresult output = Core.vx_copy(Test.e_testresult, vals);
       return output;
     }
@@ -2850,7 +2850,7 @@ public final class Test {
     }
 
     @Override
-    public Test.Type_testresultlist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Type_testresultlist output = Core.vx_copy(Test.e_testresultlist, vals);
       return output;
     }
@@ -3388,7 +3388,7 @@ public final class Test {
   public static class Class_context_test extends Core.Class_base implements Func_context_test {
 
     @Override
-    public Test.Func_context_test vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_context_test output = new Test.Class_context_test();
       return output;
     }
@@ -3514,7 +3514,7 @@ public final class Test {
   public static class Class_div_from_testcaselist extends Core.Class_base implements Func_div_from_testcaselist {
 
     @Override
-    public Test.Func_div_from_testcaselist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_div_from_testcaselist output = new Test.Class_div_from_testcaselist();
       return output;
     }
@@ -3724,7 +3724,7 @@ public final class Test {
   public static class Class_div_from_testpackage extends Core.Class_base implements Func_div_from_testpackage {
 
     @Override
-    public Test.Func_div_from_testpackage vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_div_from_testpackage output = new Test.Class_div_from_testpackage();
       return output;
     }
@@ -3918,7 +3918,7 @@ public final class Test {
   public static class Class_div_from_testpackagelist extends Core.Class_base implements Func_div_from_testpackagelist {
 
     @Override
-    public Test.Func_div_from_testpackagelist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_div_from_testpackagelist output = new Test.Class_div_from_testpackagelist();
       return output;
     }
@@ -4158,7 +4158,7 @@ public final class Test {
   public static class Class_divchildlist_from_testpackagelist extends Core.Class_base implements Func_divchildlist_from_testpackagelist {
 
     @Override
-    public Test.Func_divchildlist_from_testpackagelist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_divchildlist_from_testpackagelist output = new Test.Class_divchildlist_from_testpackagelist();
       return output;
     }
@@ -4267,7 +4267,7 @@ public final class Test {
   public static class Class_file_test extends Core.Class_base implements Func_file_test {
 
     @Override
-    public Test.Func_file_test vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_file_test output = new Test.Class_file_test();
       return output;
     }
@@ -4366,7 +4366,7 @@ public final class Test {
   public static class Class_file_testhtml extends Core.Class_base implements Func_file_testhtml {
 
     @Override
-    public Test.Func_file_testhtml vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_file_testhtml output = new Test.Class_file_testhtml();
       return output;
     }
@@ -4465,7 +4465,7 @@ public final class Test {
   public static class Class_file_testnode extends Core.Class_base implements Func_file_testnode {
 
     @Override
-    public Test.Func_file_testnode vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_file_testnode output = new Test.Class_file_testnode();
       return output;
     }
@@ -4565,7 +4565,7 @@ public final class Test {
   public static class Class_html_from_divtest extends Core.Class_base implements Func_html_from_divtest {
 
     @Override
-    public Test.Func_html_from_divtest vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_html_from_divtest output = new Test.Class_html_from_divtest();
       return output;
     }
@@ -4733,7 +4733,7 @@ public final class Test {
   public static class Class_p_from_passfail extends Core.Class_base implements Func_p_from_passfail {
 
     @Override
-    public Test.Func_p_from_passfail vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_p_from_passfail output = new Test.Class_p_from_passfail();
       return output;
     }
@@ -4870,7 +4870,7 @@ public final class Test {
   public static class Class_p_from_testcoveragenums extends Core.Class_base implements Func_p_from_testcoveragenums {
 
     @Override
-    public Test.Func_p_from_testcoveragenums vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_p_from_testcoveragenums output = new Test.Class_p_from_testcoveragenums();
       return output;
     }
@@ -5000,7 +5000,7 @@ public final class Test {
   public static class Class_resolve_testcase extends Core.Class_base implements Func_resolve_testcase {
 
     @Override
-    public Test.Func_resolve_testcase vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_resolve_testcase output = new Test.Class_resolve_testcase();
       return output;
     }
@@ -5150,7 +5150,7 @@ public final class Test {
   public static class Class_resolve_testcaselist extends Core.Class_base implements Func_resolve_testcaselist {
 
     @Override
-    public Test.Func_resolve_testcaselist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_resolve_testcaselist output = new Test.Class_resolve_testcaselist();
       return output;
     }
@@ -5263,7 +5263,7 @@ public final class Test {
   public static class Class_resolve_testdescribe extends Core.Class_base implements Func_resolve_testdescribe {
 
     @Override
-    public Test.Func_resolve_testdescribe vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_resolve_testdescribe output = new Test.Class_resolve_testdescribe();
       return output;
     }
@@ -5392,7 +5392,7 @@ public final class Test {
   public static class Class_resolve_testdescribelist extends Core.Class_base implements Func_resolve_testdescribelist {
 
     @Override
-    public Test.Func_resolve_testdescribelist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_resolve_testdescribelist output = new Test.Class_resolve_testdescribelist();
       return output;
     }
@@ -5505,7 +5505,7 @@ public final class Test {
   public static class Class_resolve_testpackage extends Core.Class_base implements Func_resolve_testpackage {
 
     @Override
-    public Test.Func_resolve_testpackage vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_resolve_testpackage output = new Test.Class_resolve_testpackage();
       return output;
     }
@@ -5648,7 +5648,7 @@ public final class Test {
   public static class Class_resolve_testpackagelist extends Core.Class_base implements Func_resolve_testpackagelist {
 
     @Override
-    public Test.Func_resolve_testpackagelist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_resolve_testpackagelist output = new Test.Class_resolve_testpackagelist();
       return output;
     }
@@ -5761,7 +5761,7 @@ public final class Test {
   public static class Class_resolve_testresult extends Core.Class_base implements Func_resolve_testresult {
 
     @Override
-    public Test.Func_resolve_testresult vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_resolve_testresult output = new Test.Class_resolve_testresult();
       return output;
     }
@@ -5924,7 +5924,7 @@ public final class Test {
   public static class Class_security_test extends Core.Class_base implements Func_security_test {
 
     @Override
-    public Test.Func_security_test vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_security_test output = new Test.Class_security_test();
       return output;
     }
@@ -6032,7 +6032,7 @@ public final class Test {
   public static class Class_test extends Core.Class_base implements Func_test {
 
     @Override
-    public Test.Func_test vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_test output = new Test.Class_test();
       return output;
     }
@@ -6148,7 +6148,7 @@ public final class Test {
   public static class Class_test_1 extends Core.Class_base implements Func_test_1 {
 
     @Override
-    public Test.Func_test_1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_test_1 output = new Test.Class_test_1();
       return output;
     }
@@ -6258,7 +6258,7 @@ public final class Test {
   public static class Class_test_false extends Core.Class_base implements Func_test_false {
 
     @Override
-    public Test.Func_test_false vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_test_false output = new Test.Class_test_false();
       return output;
     }
@@ -6386,7 +6386,7 @@ public final class Test {
   public static class Class_test_false_1 extends Core.Class_base implements Func_test_false_1 {
 
     @Override
-    public Test.Func_test_false_1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_test_false_1 output = new Test.Class_test_false_1();
       return output;
     }
@@ -6510,7 +6510,7 @@ public final class Test {
   public static class Class_test_gt extends Core.Class_base implements Func_test_gt {
 
     @Override
-    public Test.Func_test_gt vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_test_gt output = new Test.Class_test_gt();
       return output;
     }
@@ -6626,7 +6626,7 @@ public final class Test {
   public static class Class_test_gt_1 extends Core.Class_base implements Func_test_gt_1 {
 
     @Override
-    public Test.Func_test_gt_1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_test_gt_1 output = new Test.Class_test_gt_1();
       return output;
     }
@@ -6737,7 +6737,7 @@ public final class Test {
   public static class Class_test_ne extends Core.Class_base implements Func_test_ne {
 
     @Override
-    public Test.Func_test_ne vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_test_ne output = new Test.Class_test_ne();
       return output;
     }
@@ -6853,7 +6853,7 @@ public final class Test {
   public static class Class_test_ne_1 extends Core.Class_base implements Func_test_ne_1 {
 
     @Override
-    public Test.Func_test_ne_1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_test_ne_1 output = new Test.Class_test_ne_1();
       return output;
     }
@@ -6964,7 +6964,7 @@ public final class Test {
   public static class Class_test_string extends Core.Class_base implements Func_test_string {
 
     @Override
-    public Test.Func_test_string vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_test_string output = new Test.Class_test_string();
       return output;
     }
@@ -7082,7 +7082,7 @@ public final class Test {
   public static class Class_test_string_1 extends Core.Class_base implements Func_test_string_1 {
 
     @Override
-    public Test.Func_test_string_1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_test_string_1 output = new Test.Class_test_string_1();
       return output;
     }
@@ -7192,7 +7192,7 @@ public final class Test {
   public static class Class_test_true extends Core.Class_base implements Func_test_true {
 
     @Override
-    public Test.Func_test_true vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_test_true output = new Test.Class_test_true();
       return output;
     }
@@ -7320,7 +7320,7 @@ public final class Test {
   public static class Class_test_true_1 extends Core.Class_base implements Func_test_true_1 {
 
     @Override
-    public Test.Func_test_true_1 vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_test_true_1 output = new Test.Class_test_true_1();
       return output;
     }
@@ -7444,7 +7444,7 @@ public final class Test {
   public static class Class_tr_from_testdescribe_casename extends Core.Class_base implements Func_tr_from_testdescribe_casename {
 
     @Override
-    public Test.Func_tr_from_testdescribe_casename vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_tr_from_testdescribe_casename output = new Test.Class_tr_from_testdescribe_casename();
       return output;
     }
@@ -7633,7 +7633,7 @@ public final class Test {
   public static class Class_trlist_from_testcase extends Core.Class_base implements Func_trlist_from_testcase {
 
     @Override
-    public Test.Func_trlist_from_testcase vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_trlist_from_testcase output = new Test.Class_trlist_from_testcase();
       return output;
     }
@@ -7758,7 +7758,7 @@ public final class Test {
   public static class Class_trlist_from_testcaselist extends Core.Class_base implements Func_trlist_from_testcaselist {
 
     @Override
-    public Test.Func_trlist_from_testcaselist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Test.Class_trlist_from_testcaselist output = new Test.Class_trlist_from_testcaselist();
       return output;
     }

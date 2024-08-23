@@ -56,7 +56,7 @@ public static class Http {
       return output;
     }
 
-    public override Vx.Web.Http.Type_response vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Http.Type_response output = Vx.Core.vx_copy(Vx.Web.Http.e_response, vals);
       return output;
     }
@@ -227,7 +227,7 @@ public static class Http {
 
   public class Class_csv_from_httpget : Vx.Core.Class_base, Func_csv_from_httpget {
 
-    public override Vx.Web.Http.Func_csv_from_httpget vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Http.Class_csv_from_httpget output = new Vx.Web.Http.Class_csv_from_httpget();
       return output;
     }
@@ -340,7 +340,7 @@ public static class Http {
 
   public class Class_json_from_httpget : Vx.Core.Class_base, Func_json_from_httpget {
 
-    public override Vx.Web.Http.Func_json_from_httpget vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Http.Class_json_from_httpget output = new Vx.Web.Http.Class_json_from_httpget();
       return output;
     }
@@ -452,7 +452,7 @@ public static class Http {
 
   public class Class_response_from_httpget : Vx.Core.Class_base, Func_response_from_httpget {
 
-    public override Vx.Web.Http.Func_response_from_httpget vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Http.Class_response_from_httpget output = new Vx.Web.Http.Class_response_from_httpget();
       return output;
     }
@@ -539,7 +539,7 @@ public static class Http {
 
   public class Class_text_from_httpget : Vx.Core.Class_base, Func_text_from_httpget {
 
-    public override Vx.Web.Http.Func_text_from_httpget vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Http.Class_text_from_httpget output = new Vx.Web.Http.Class_text_from_httpget();
       return output;
     }
@@ -650,7 +650,7 @@ public static class Http {
 
   public class Class_text_from_response : Vx.Core.Class_base, Func_text_from_response {
 
-    public override Vx.Web.Http.Func_text_from_response vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Http.Class_text_from_response output = new Vx.Web.Http.Class_text_from_response();
       return output;
     }
@@ -748,7 +748,7 @@ public static class Http {
 
   public class Class_textblock_from_httpget : Vx.Core.Class_base, Func_textblock_from_httpget {
 
-    public override Vx.Web.Http.Func_textblock_from_httpget vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Http.Class_textblock_from_httpget output = new Vx.Web.Http.Class_textblock_from_httpget();
       return output;
     }
@@ -849,7 +849,7 @@ public static class Http {
 
   public class Class_textblock_from_response : Vx.Core.Class_base, Func_textblock_from_response {
 
-    public override Vx.Web.Http.Func_textblock_from_response vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Http.Class_textblock_from_response output = new Vx.Web.Http.Class_textblock_from_response();
       return output;
     }
@@ -956,7 +956,7 @@ public static class Http {
 
   public class Class_xml_from_httpget : Vx.Core.Class_base, Func_xml_from_httpget {
 
-    public override Vx.Web.Http.Func_xml_from_httpget vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Http.Class_xml_from_httpget output = new Vx.Web.Http.Class_xml_from_httpget();
       return output;
     }

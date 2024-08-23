@@ -131,7 +131,7 @@ public final class Tree {
     }
 
     @Override
-    public Tree.Type_branch vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Tree.Type_branch output = Core.vx_copy(Tree.e_branch, vals);
       return output;
     }
@@ -402,7 +402,7 @@ public final class Tree {
   public static class Class_brancharrow extends Core.Class_base implements Type_brancharrow {
 
     @Override
-    public Tree.Type_brancharrow vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Tree.Type_brancharrow output = Core.vx_copy(Tree.e_brancharrow, vals);
       return output;
     }
@@ -509,7 +509,7 @@ public final class Tree {
     }
 
     @Override
-    public Tree.Type_branchlist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Tree.Type_branchlist output = Core.vx_copy(Tree.e_branchlist, vals);
       return output;
     }
@@ -680,7 +680,7 @@ public final class Tree {
     }
 
     @Override
-    public Tree.Type_leaf vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Tree.Type_leaf output = Core.vx_copy(Tree.e_leaf, vals);
       return output;
     }
@@ -920,7 +920,7 @@ public final class Tree {
     }
 
     @Override
-    public Tree.Type_leaflist vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Tree.Type_leaflist output = Core.vx_copy(Tree.e_leaflist, vals);
       return output;
     }
@@ -1091,7 +1091,7 @@ public final class Tree {
     }
 
     @Override
-    public Tree.Type_tree vx_new(final Object... vals) {
+    public Core.Type_any vx_new(final Object... vals) {
       Tree.Type_tree output = Core.vx_copy(Tree.e_tree, vals);
       return output;
     }

@@ -16,7 +16,7 @@ public static class Htmldoc {
 
   public class Class_boolean_print_from_id_stylesheettext : Vx.Core.Class_base, Func_boolean_print_from_id_stylesheettext {
 
-    public override Vx.Web.Htmldoc.Func_boolean_print_from_id_stylesheettext vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Htmldoc.Class_boolean_print_from_id_stylesheettext output = new Vx.Web.Htmldoc.Class_boolean_print_from_id_stylesheettext();
       return output;
     }
@@ -100,7 +100,7 @@ public static class Htmldoc {
 
   public class Class_boolean_remove_from_id : Vx.Core.Class_base, Func_boolean_remove_from_id {
 
-    public override Vx.Web.Htmldoc.Func_boolean_remove_from_id vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Htmldoc.Class_boolean_remove_from_id output = new Vx.Web.Htmldoc.Class_boolean_remove_from_id();
       return output;
     }
@@ -196,7 +196,7 @@ public static class Htmldoc {
 
   public class Class_boolean_replace_from_id_htmltext : Vx.Core.Class_base, Func_boolean_replace_from_id_htmltext {
 
-    public override Vx.Web.Htmldoc.Func_boolean_replace_from_id_htmltext vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Htmldoc.Class_boolean_replace_from_id_htmltext output = new Vx.Web.Htmldoc.Class_boolean_replace_from_id_htmltext();
       return output;
     }
@@ -282,7 +282,7 @@ public static class Htmldoc {
 
   public class Class_boolean_replace_from_id_parent_htmltext : Vx.Core.Class_base, Func_boolean_replace_from_id_parent_htmltext {
 
-    public override Vx.Web.Htmldoc.Func_boolean_replace_from_id_parent_htmltext vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Htmldoc.Class_boolean_replace_from_id_parent_htmltext output = new Vx.Web.Htmldoc.Class_boolean_replace_from_id_parent_htmltext();
       return output;
     }
@@ -369,7 +369,7 @@ public static class Htmldoc {
 
   public class Class_boolean_write_stylesheet_from_string : Vx.Core.Class_base, Func_boolean_write_stylesheet_from_string {
 
-    public override Vx.Web.Htmldoc.Func_boolean_write_stylesheet_from_string vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Htmldoc.Class_boolean_write_stylesheet_from_string output = new Vx.Web.Htmldoc.Class_boolean_write_stylesheet_from_string();
       return output;
     }
@@ -466,7 +466,7 @@ public static class Htmldoc {
 
   public class Class_boolean_write_from_id_attribute_value : Vx.Core.Class_base, Func_boolean_write_from_id_attribute_value {
 
-    public override Vx.Web.Htmldoc.Func_boolean_write_from_id_attribute_value vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Htmldoc.Class_boolean_write_from_id_attribute_value output = new Vx.Web.Htmldoc.Class_boolean_write_from_id_attribute_value();
       return output;
     }
@@ -552,7 +552,7 @@ public static class Htmldoc {
 
   public class Class_boolean_write_from_id_htmltext : Vx.Core.Class_base, Func_boolean_write_from_id_htmltext {
 
-    public override Vx.Web.Htmldoc.Func_boolean_write_from_id_htmltext vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Htmldoc.Class_boolean_write_from_id_htmltext output = new Vx.Web.Htmldoc.Class_boolean_write_from_id_htmltext();
       return output;
     }
@@ -637,7 +637,7 @@ public static class Htmldoc {
 
   public class Class_boolean_write_from_id_visible : Vx.Core.Class_base, Func_boolean_write_from_id_visible {
 
-    public override Vx.Web.Htmldoc.Func_boolean_write_from_id_visible vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Htmldoc.Class_boolean_write_from_id_visible output = new Vx.Web.Htmldoc.Class_boolean_write_from_id_visible();
       return output;
     }
@@ -723,7 +723,7 @@ public static class Htmldoc {
 
   public class Class_boolean_write_from_stylesheet : Vx.Core.Class_base, Func_boolean_write_from_stylesheet {
 
-    public override Vx.Web.Htmldoc.Func_boolean_write_from_stylesheet vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Htmldoc.Class_boolean_write_from_stylesheet output = new Vx.Web.Htmldoc.Class_boolean_write_from_stylesheet();
       return output;
     }
@@ -834,7 +834,7 @@ public static class Htmldoc {
 
   public class Class_boolean_writeevents_from_ui : Vx.Core.Class_base, Func_boolean_writeevents_from_ui {
 
-    public override Vx.Web.Htmldoc.Func_boolean_writeevents_from_ui vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Htmldoc.Class_boolean_writeevents_from_ui output = new Vx.Web.Htmldoc.Class_boolean_writeevents_from_ui();
       return output;
     }
@@ -928,7 +928,7 @@ public static class Htmldoc {
 
   public class Class_context_read : Vx.Core.Class_base, Func_context_read {
 
-    public override Vx.Web.Htmldoc.Func_context_read vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Htmldoc.Class_context_read output = new Vx.Web.Htmldoc.Class_context_read();
       return output;
     }
@@ -1009,7 +1009,7 @@ public static class Htmldoc {
 
   public class Class_context_write : Vx.Core.Class_base, Func_context_write {
 
-    public override Vx.Web.Htmldoc.Func_context_write vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Htmldoc.Class_context_write output = new Vx.Web.Htmldoc.Class_context_write();
       return output;
     }
@@ -1092,7 +1092,7 @@ public static class Htmldoc {
 
   public class Class_string_from_id : Vx.Core.Class_base, Func_string_from_id {
 
-    public override Vx.Web.Htmldoc.Func_string_from_id vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Htmldoc.Class_string_from_id output = new Vx.Web.Htmldoc.Class_string_from_id();
       return output;
     }
@@ -1187,7 +1187,7 @@ public static class Htmldoc {
 
   public class Class_string_from_stylesheet : Vx.Core.Class_base, Func_string_from_stylesheet {
 
-    public override Vx.Web.Htmldoc.Func_string_from_stylesheet vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Htmldoc.Class_string_from_stylesheet output = new Vx.Web.Htmldoc.Class_string_from_stylesheet();
       return output;
     }
@@ -1296,7 +1296,7 @@ public static class Htmldoc {
 
   public class Class_ui_readstate_from_uid : Vx.Core.Class_base, Func_ui_readstate_from_uid {
 
-    public override Vx.Web.Htmldoc.Func_ui_readstate_from_uid vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Web.Htmldoc.Class_ui_readstate_from_uid output = new Vx.Web.Htmldoc.Class_ui_readstate_from_uid();
       return output;
     }

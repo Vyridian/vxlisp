@@ -15,7 +15,7 @@ public static class En {
 
   public class Class_context_en : Vx.Core.Class_base, Func_context_en {
 
-    public override Vx.Translation.En.Func_context_en vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Translation.En.Class_context_en output = new Vx.Translation.En.Class_context_en();
       return output;
     }
@@ -125,7 +125,7 @@ public static class En {
 
   public class Class_context_test : Vx.Core.Class_base, Func_context_test {
 
-    public override Vx.Translation.En.Func_context_test vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Translation.En.Class_context_test output = new Vx.Translation.En.Class_context_test();
       return output;
     }
@@ -243,7 +243,7 @@ public static class En {
 
   public class Class_securitydata_test : Vx.Core.Class_base, Func_securitydata_test {
 
-    public override Vx.Translation.En.Func_securitydata_test vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Translation.En.Class_securitydata_test output = new Vx.Translation.En.Class_securitydata_test();
       return output;
     }
@@ -341,7 +341,7 @@ public static class En {
 
   public class Class_translation_en : Vx.Core.Class_base, Func_translation_en {
 
-    public override Vx.Translation.En.Func_translation_en vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Translation.En.Class_translation_en output = new Vx.Translation.En.Class_translation_en();
       return output;
     }
@@ -432,7 +432,7 @@ public static class En {
 
   public class Class_words : Vx.Core.Class_base, Func_words {
 
-    public override Vx.Translation.En.Func_words vx_new(params object[] vals) {
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
       Vx.Translation.En.Class_words output = new Vx.Translation.En.Class_words();
       return output;
     }
