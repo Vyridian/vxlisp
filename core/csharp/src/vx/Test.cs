@@ -355,15 +355,15 @@ public static class Test {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Test.Type_testcaselist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listtestcase());
         } else if (valsub is Vx.Test.Type_testcase allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Test.Type_testcase) {
           ischanged = true;
           listval.Add((Vx.Test.Type_testcase)valsub);
-        } else if (valsub is Vx.Test.Type_testcaselist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listtestcase());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -1738,15 +1738,15 @@ public static class Test {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Test.Type_testdescribelist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listtestdescribe());
         } else if (valsub is Vx.Test.Type_testdescribe allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Test.Type_testdescribe) {
           ischanged = true;
           listval.Add((Vx.Test.Type_testdescribe)valsub);
-        } else if (valsub is Vx.Test.Type_testdescribelist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listtestdescribe());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -2192,15 +2192,15 @@ public static class Test {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Test.Type_testpackagelist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listtestpackage());
         } else if (valsub is Vx.Test.Type_testpackage allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Test.Type_testpackage) {
           ischanged = true;
           listval.Add((Vx.Test.Type_testpackage)valsub);
-        } else if (valsub is Vx.Test.Type_testpackagelist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listtestpackage());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -2646,15 +2646,15 @@ public static class Test {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Test.Type_testresultlist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listtestresult());
         } else if (valsub is Vx.Test.Type_testresult allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Test.Type_testresult) {
           ischanged = true;
           listval.Add((Vx.Test.Type_testresult)valsub);
-        } else if (valsub is Vx.Test.Type_testresultlist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listtestresult());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {

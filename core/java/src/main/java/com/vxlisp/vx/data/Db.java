@@ -1585,6 +1585,10 @@ public final class Db {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Db.Type_dblinklist) {
+          Db.Type_dblinklist multi = (Db.Type_dblinklist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_listdblink());
         } else if (valsub instanceof Db.Type_dblink) {
           Db.Type_dblink allowsub = (Db.Type_dblink)valsub;
           ischanged = true;
@@ -1592,10 +1596,6 @@ public final class Db {
         } else if (valsub instanceof Db.Type_dblink) {
           ischanged = true;
           listval.add((Db.Type_dblink)valsub);
-        } else if (valsub instanceof Db.Type_dblinklist) {
-          Db.Type_dblinklist multi = (Db.Type_dblinklist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_listdblink());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {

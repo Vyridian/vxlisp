@@ -111,7 +111,7 @@ func LangConst(
 		"\n   * " + StringFromStringIndent(doc, "   * ") +
 		"\n   */"
 		/// FIXME
-	if lang.name == "kotlin" {
+	if lang == langkotlin {
 		doc = ""
 	}
 	argoutput := NewArg("output")

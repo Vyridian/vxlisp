@@ -2983,10 +2983,11 @@
   :js
    "vx_core.vx_new(type, values)"
   :kotlin
-   "val arrayany : Array<vx_core.Type_any> = vx_core.arrayany_from_anylist(values)
-    val arrayobj : Array<Any> = arrayany as (Array<Any>)
-    val anyvalue : vx_core.Type_any = type.vx_new(arrayobj)
-    val output : T = (anyvalue) as T")
+   "val arrayany : Array<vx_core.Type_any> = vx_core.arrayany_from_anylist(
+      values
+    )
+    val anyvalue : vx_core.Type_any = type.vx_new(*arrayany)
+    val output : T = anyvalue as T")
  :doc "Create a new Value of Type A"
  :test (test true (new boolean true))
        (test 4 (new int 4))

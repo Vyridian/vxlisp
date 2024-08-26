@@ -109,15 +109,15 @@ public static class Repl {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Repl.Type_liblist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_liststring());
         } else if (valsub is Vx.Core.Type_string allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is string) {
           ischanged = true;
           listval.Add(Vx.Core.vx_new(Vx.Core.t_string, valsub));
-        } else if (valsub is Vx.Repl.Type_liblist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_liststring());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -848,15 +848,15 @@ public static class Repl {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Repl.Type_repllist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listrepl());
         } else if (valsub is Vx.Repl.Type_repl allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Repl.Type_repl) {
           ischanged = true;
           listval.Add((Vx.Repl.Type_repl)valsub);
-        } else if (valsub is Vx.Repl.Type_repllist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listrepl());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {

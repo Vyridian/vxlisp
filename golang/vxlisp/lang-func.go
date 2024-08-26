@@ -450,8 +450,8 @@ func LangFuncGenericDefinition(
 			}
 		}
 		generickeys := ListStringKeysFromStringMap(mapgeneric)
-		switch lang.name {
-		case "csharp":
+		switch lang {
+		case langcsharp:
 			for _, generickey := range generickeys {
 				if output2 != "" {
 					output2 += ", "
@@ -554,26 +554,26 @@ func LangFuncHeaderAll(
 	override3 := ""
 	sindent := "\n" + StringRepeat("  ", indent)
 	if fnc.isoverride {
-		switch lang.name {
-		case "csharp":
+		switch lang {
+		case langcsharp:
 			override3 = "override "
-		case "java":
+		case langjava:
 			override1 = sindent + "@Override"
-		case "kotlin":
+		case langkotlin:
 			override2 = "override "
 		}
 	}
 	if fnc.isimplement {
-		switch lang.name {
-		case "java":
+		switch lang {
+		case langjava:
 			override1 = sindent + "@Override"
-		case "kotlin":
+		case langkotlin:
 			override2 = "override "
 		}
 	}
 	if fnc.isimplement2 {
-		switch lang.name {
-		case "csharp":
+		switch lang {
+		case langcsharp:
 			override3 = sindent + "new "
 		}
 	}
@@ -599,8 +599,8 @@ func LangFuncHeaderAll(
 		}
 	}
 	funcprefix := ""
-	switch lang.name {
-	case "cpp":
+	switch lang {
+	case langcpp:
 		funcprefix = prefix + "::"
 	}
 	if fnc.async {
@@ -608,12 +608,12 @@ func LangFuncHeaderAll(
 	}
 	returntype1 := ""
 	returntype2 := ""
-	switch lang.name {
-	case "cpp", "csharp", "java":
+	switch lang {
+	case langcpp, langcsharp, langjava:
 		returntype1 = returntype + " "
-	case "kotlin":
+	case langkotlin:
 		returntype2 = " : " + returntype
-	case "swift":
+	case langswift:
 		returntype2 = " -> " + returntype
 	}
 	output = "" +
@@ -670,14 +670,14 @@ func LangFuncIFnType(lang *vxlang, fnc *vxfunc) *vxtype {
 func LangFuncInstanceStatic(lang *vxlang) (string, string) {
 	funcinstance := "function "
 	funcstatic := "function "
-	switch lang.name {
-	case "cpp", "csharp", "java":
+	switch lang {
+	case langcpp, langcsharp, langjava:
 		funcinstance = "public "
 		funcstatic = "public static "
-	case "kotlin":
+	case langkotlin:
 		funcinstance = "fun "
 		funcstatic = "fun "
-	case "swift":
+	case langswift:
 		funcinstance = "func "
 		funcstatic = "func static "
 	}
@@ -747,22 +747,22 @@ func LangFuncInterfaceHeader(
 			extends += ", " + LangPkgNameDot(lang, "vx/core") + "Type_replfunc"
 		}
 	}
-	switch lang.name {
-	case "csharp":
+	switch lang {
+	case langcsharp:
 		if extends != "" {
 			extends = " : " + extends
 		}
 		output = lineindent + "public interface Func_" + funcname + extends + " {" +
 			interfaces +
 			lineindent + "}\n"
-	case "java":
+	case langjava:
 		if extends != "" {
 			extends = " extends " + extends
 		}
 		output = lineindent + "public interface Func_" + funcname + extends + " {" +
 			interfaces +
 			lineindent + "}\n"
-	case "kotlin":
+	case langkotlin:
 		if extends != "" {
 			extends = " : " + extends
 		}
@@ -796,8 +796,8 @@ func LangFuncLambdaFooter(
 	sreturn := ""
 	lineend := lineindent + "}"
 	if outputnum >= 0 {
-		switch lang.name {
-		case "kotlin":
+		switch lang {
+		case langkotlin:
 			sreturn = lineindent + "  output"
 			if outputnum > 0 {
 				sreturn += "_" + StringFromInt(outputnum)
@@ -823,14 +823,14 @@ func LangFuncLambdaHeader(
 	bindings string,
 	args string) string {
 	output := ""
-	switch lang.name {
-	case "cpp":
+	switch lang {
+	case langcpp:
 		output = "[" + bindings + "](" + args + ") -> {"
-	case "csharp":
+	case langcsharp:
 		output = "(" + args + ") => {"
-	case "java":
+	case langjava:
 		output = "(" + args + ") -> {"
-	case "kotlin":
+	case langkotlin:
 		output = "{" + args + " ->"
 	}
 	return output
@@ -1441,76 +1441,17 @@ func LangFuncVxFnNew(lang *vxlang, fnc *vxfunc, isinterface bool) string {
 	if fnc.async {
 		asyncname = "-async"
 	}
-	/*
-		switch NameFromFunc(fnc) {
-		case "vx/core/any<-any", "vx/core/any<-any-async",
-			"vx/core/any<-any-context", "vx/core/any<-any-context-async",
-			"vx/core/any<-any-key-value", "vx/core/any<-any-key-value-async",
-			"vx/core/any<-int", "vx/core/any<-int-any",
-			"vx/core/any<-func", "vx/core/any<-func-async",
-			"vx/core/any<-none", "vx/core/any<-none-async",
-			"vx/core/any<-key-value", "vx/core/any<-key-value-async",
-			"vx/core/any<-reduce", "vx/core/any<-reduce-async",
-			"vx/core/any<-reduce-next", "vx/core/any<-reduce-next-async",
-			"vx/core/boolean<-any":
-			ifn = LangFuncClassFull(lang, fnc) + lang.typeref + "IFn"
-			if !isinterface {
-				switch lang.name {
-				case "csharp":
-					vars += "" +
-						"\n    public " + ifn + "? fn = null" + lang.lineend +
-						"\n"
-				case "kotlin":
-					vars += "" +
-						"\n    var fn : " + ifn + "? = null" +
-						"\n"
-				default:
-					vars += "" +
-						"\n    public " + ifn + " fn = null" + lang.lineend +
-						"\n"
-				}
-				body = "" +
-					LangValClass(lang, "output", typefunc, 3, ":new") +
-					"\n      output.fn = fn" + lang.lineend +
-					"\n      return output" + lang.lineend
-			}
-		case "vx/core/boolean<-func", "vx/core/boolean<-none",
-			"vx/core/int<-func", "vx/core/int<-none",
-			"vx/core/string<-func", "vx/core/string<-none":
-			ifn = LangPkgNameDot(lang, "vx/core") + "Class_any_from_func" + lang.typeref + "IFn"
-			if !isinterface {
-				switch lang.name {
-				case "csharp":
-					vars += "" +
-						"\n    public " + ifn + "? fn = null" + lang.lineend +
-						"\n"
-				case "kotlin":
-					vars += "" +
-						"\n    var fn : " + ifn + "? = null" +
-						"\n"
-				default:
-					vars += "" +
-						"\n    public " + ifn + " fn = null" + lang.lineend +
-						"\n"
-				}
-				body = "" +
-					LangValClass(lang, "output", typefunc, 3, ":new") +
-					"\n      output.fn = fn" + lang.lineend +
-					"\n      return output" + lang.lineend
-			}
-		default:
-	*/
 	ifntype := LangFuncIFnType(lang, fnc)
 	ifn := ""
 	if ifntype != emptytype {
 		ifn = LangTypeClass(lang, ifntype)
 		if !isinterface {
-			switch lang.name {
-			case "csharp":
+			switch lang {
+			case langcsharp:
 				vars += "" +
 					"\n    public " + ifn + "? fn = null" + lang.lineend +
 					"\n"
-			case "kotlin":
+			case langkotlin:
 				vars += "" +
 					"\n    var fn : " + ifn + "? = null" +
 					"\n"
@@ -1593,17 +1534,17 @@ func LangFuncVxFnNew(lang *vxlang, fnc *vxfunc, isinterface bool) string {
 								LangPkgNameDot(lang, "vx/core")+"f_async(generic_any_1, inputval)")
 					} else {
 						suppresswarnings := ""
-						switch lang.name {
-						case "java":
+						switch lang {
+						case langjava:
 							suppresswarnings = "\n      @SuppressWarnings(\"unchecked\")"
 						}
 						vxasyncanyfromany := ""
-						switch lang.name {
-						case "csharp":
+						switch lang {
+						case langcsharp:
 							vxasyncanyfromany = LangPkgNameDot(lang, "vx/core") + "vx_async_from_async(generic_any_1, future)"
-						case "java":
+						case langjava:
 							vxasyncanyfromany = "(" + lang.future + "<T>)future"
-						case "kotlin":
+						case langkotlin:
 							vxasyncanyfromany = "future as (" + lang.future + "<T>)"
 						}
 						asyncbody += "" +
@@ -1636,21 +1577,21 @@ func LangFuncVxFnNew(lang *vxlang, fnc *vxfunc, isinterface bool) string {
 		header := ""
 		override := ""
 		if !isinterface {
-			switch lang.name {
-			case "kotlin":
+			switch lang {
+			case langkotlin:
 				override = "override "
-			case "java":
+			case langjava:
 				override = "\n    @Override"
 			}
 		}
-		switch lang.name {
-		case "csharp":
+		switch lang {
+		case langcsharp:
 			header = "\n    " + override + "public " + vxreturntype + " vx_fn_new(" + ifn + " fn)"
-		case "java":
+		case langjava:
 			header = "" +
 				override +
 				"\n    public " + vxreturntype + " vx_fn_new(" + ifn + " fn)"
-		case "kotlin":
+		case langkotlin:
 			header = "\n    " + override + "fun vx_fn_new(fn : " + ifn + ") : " + vxreturntype
 		default:
 			header = "\n    public " + vxreturntype + " vx_fn_new(" + ifn + " fn)"
@@ -1782,8 +1723,8 @@ func LangFuncVxFunc(
 			}
 		} else {
 			resolve := ""
-			switch lang.name {
-			case "java", "kotlin":
+			switch lang {
+			case langjava, langkotlin:
 				resolve = "fnlocal.resolve(" + strings.Join(listargname, ", ") + ")"
 			default:
 				resolve = "fnlocal(" + strings.Join(listargname, ", ") + ")"

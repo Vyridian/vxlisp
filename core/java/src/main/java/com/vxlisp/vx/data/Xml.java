@@ -468,6 +468,10 @@ public final class Xml {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Xml.Type_xmllist) {
+          Xml.Type_xmllist multi = (Xml.Type_xmllist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_listxml());
         } else if (valsub instanceof Xml.Type_xml) {
           Xml.Type_xml allowsub = (Xml.Type_xml)valsub;
           ischanged = true;
@@ -475,10 +479,6 @@ public final class Xml {
         } else if (valsub instanceof Xml.Type_xml) {
           ischanged = true;
           listval.add((Xml.Type_xml)valsub);
-        } else if (valsub instanceof Xml.Type_xmllist) {
-          Xml.Type_xmllist multi = (Xml.Type_xmllist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_listxml());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {

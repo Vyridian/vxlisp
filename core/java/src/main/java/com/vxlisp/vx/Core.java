@@ -1278,14 +1278,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (valsub instanceof Core.Func_any_from_any) {
-          Core.Func_any_from_any allowsub = (Core.Func_any_from_any)valsub;
-          ischanged = true;
-          listval.add(allowsub);
         } else if (valsub instanceof Core.Type_any_from_anylist) {
           Core.Type_any_from_anylist multi = (Core.Type_any_from_anylist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listany_from_any());
+        } else if (valsub instanceof Core.Func_any_from_any) {
+          Core.Func_any_from_any allowsub = (Core.Func_any_from_any)valsub;
+          ischanged = true;
+          listval.add(allowsub);
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
@@ -1407,14 +1407,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any allowsub = (Core.Type_any)valsub;
-          ischanged = true;
-          listval.add(allowsub);
         } else if (valsub instanceof Core.Type_anylist) {
           Core.Type_anylist multi = (Core.Type_anylist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_list());
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any allowsub = (Core.Type_any)valsub;
+          ischanged = true;
+          listval.add(allowsub);
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
@@ -2123,6 +2123,10 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Core.Type_arglist) {
+          Core.Type_arglist multi = (Core.Type_arglist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_listarg());
         } else if (valsub instanceof Core.Type_arg) {
           Core.Type_arg allowsub = (Core.Type_arg)valsub;
           ischanged = true;
@@ -2130,10 +2134,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (valsub instanceof Core.Type_arg) {
           ischanged = true;
           listval.add((Core.Type_arg)valsub);
-        } else if (valsub instanceof Core.Type_arglist) {
-          Core.Type_arglist multi = (Core.Type_arglist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_listarg());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
@@ -2575,6 +2575,10 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Core.Type_booleanlist) {
+          Core.Type_booleanlist multi = (Core.Type_booleanlist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_listboolean());
         } else if (valsub instanceof Core.Type_boolean) {
           Core.Type_boolean allowsub = (Core.Type_boolean)valsub;
           ischanged = true;
@@ -2582,10 +2586,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (valsub instanceof Boolean) {
           ischanged = true;
           listval.add(Core.vx_new(Core.t_boolean, valsub));
-        } else if (valsub instanceof Core.Type_booleanlist) {
-          Core.Type_booleanlist multi = (Core.Type_booleanlist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_listboolean());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
@@ -2929,6 +2929,10 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Core.Type_connectlist) {
+          Core.Type_connectlist multi = (Core.Type_connectlist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_listconnect());
         } else if (valsub instanceof Core.Type_connect) {
           Core.Type_connect allowsub = (Core.Type_connect)valsub;
           ischanged = true;
@@ -2936,10 +2940,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (valsub instanceof Core.Type_connect) {
           ischanged = true;
           listval.add((Core.Type_connect)valsub);
-        } else if (valsub instanceof Core.Type_connectlist) {
-          Core.Type_connectlist multi = (Core.Type_connectlist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_listconnect());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
@@ -3609,14 +3609,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any allowsub = (Core.Type_any)valsub;
-          ischanged = true;
-          listval.add(allowsub);
         } else if (valsub instanceof Core.Type_constlist) {
           Core.Type_constlist multi = (Core.Type_constlist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_list());
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any allowsub = (Core.Type_any)valsub;
+          ischanged = true;
+          listval.add(allowsub);
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
@@ -5046,6 +5046,10 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Core.Type_funclist) {
+          Core.Type_funclist multi = (Core.Type_funclist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_listfunc());
         } else if (valsub instanceof Core.Type_func) {
           Core.Type_func allowsub = (Core.Type_func)valsub;
           ischanged = true;
@@ -5053,10 +5057,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (valsub instanceof Core.Type_func) {
           ischanged = true;
           listval.add((Core.Type_func)valsub);
-        } else if (valsub instanceof Core.Type_funclist) {
-          Core.Type_funclist multi = (Core.Type_funclist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_listfunc());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
@@ -5502,6 +5502,10 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Core.Type_intlist) {
+          Core.Type_intlist multi = (Core.Type_intlist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_listint());
         } else if (valsub instanceof Core.Type_int) {
           Core.Type_int allowsub = (Core.Type_int)valsub;
           ischanged = true;
@@ -5509,10 +5513,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (valsub instanceof Integer) {
           ischanged = true;
           listval.add(Core.vx_new(Core.t_int, valsub));
-        } else if (valsub instanceof Core.Type_intlist) {
-          Core.Type_intlist multi = (Core.Type_intlist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_listint());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
@@ -5847,14 +5847,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any allowsub = (Core.Type_any)valsub;
-          ischanged = true;
-          listval.add(allowsub);
         } else if (valsub instanceof Core.Type_list) {
           Core.Type_list multi = (Core.Type_list)valsub;
           ischanged = true;
           listval.addAll(multi.vx_list());
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any allowsub = (Core.Type_any)valsub;
+          ischanged = true;
+          listval.add(allowsub);
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
@@ -7086,13 +7086,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (valsub instanceof Core.Type_msgblock) {
-          ischanged = true;
-          listval.add((Core.Type_msgblock)valsub);
         } else if (valsub instanceof Core.Type_msgblocklist) {
           Core.Type_msgblocklist multi = (Core.Type_msgblocklist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listmsgblock());
+        } else if (valsub instanceof Core.Type_msgblock) {
+          ischanged = true;
+          listval.add((Core.Type_msgblock)valsub);
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
@@ -7226,13 +7226,13 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       for (Object valsub : vals) {
         if (valsub instanceof Core.Type_msgblock) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (valsub instanceof Core.Type_msg) {
-          ischanged = true;
-          listval.add((Core.Type_msg)valsub);
         } else if (valsub instanceof Core.Type_msglist) {
           Core.Type_msglist multi = (Core.Type_msglist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_listmsg());
+        } else if (valsub instanceof Core.Type_msg) {
+          ischanged = true;
+          listval.add((Core.Type_msg)valsub);
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
@@ -7578,6 +7578,10 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Core.Type_numberlist) {
+          Core.Type_numberlist multi = (Core.Type_numberlist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_listnumber());
         } else if (valsub instanceof Core.Type_number) {
           Core.Type_number allowsub = (Core.Type_number)valsub;
           ischanged = true;
@@ -7585,10 +7589,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (valsub instanceof Core.Type_number) {
           ischanged = true;
           listval.add((Core.Type_number)valsub);
-        } else if (valsub instanceof Core.Type_numberlist) {
-          Core.Type_numberlist multi = (Core.Type_numberlist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_listnumber());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
@@ -8673,6 +8673,10 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Core.Type_permissionlist) {
+          Core.Type_permissionlist multi = (Core.Type_permissionlist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_listpermission());
         } else if (valsub instanceof Core.Type_permission) {
           Core.Type_permission allowsub = (Core.Type_permission)valsub;
           ischanged = true;
@@ -8680,10 +8684,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (valsub instanceof Core.Type_permission) {
           ischanged = true;
           listval.add((Core.Type_permission)valsub);
-        } else if (valsub instanceof Core.Type_permissionlist) {
-          Core.Type_permissionlist multi = (Core.Type_permissionlist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_listpermission());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
@@ -10820,6 +10820,10 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Core.Type_stringlist) {
+          Core.Type_stringlist multi = (Core.Type_stringlist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_liststring());
         } else if (valsub instanceof Core.Type_string) {
           Core.Type_string allowsub = (Core.Type_string)valsub;
           ischanged = true;
@@ -10827,10 +10831,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (valsub instanceof String) {
           ischanged = true;
           listval.add(Core.vx_new(Core.t_string, valsub));
-        } else if (valsub instanceof Core.Type_stringlist) {
-          Core.Type_stringlist multi = (Core.Type_stringlist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_liststring());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
@@ -10966,6 +10966,10 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Core.Type_stringlistlist) {
+          Core.Type_stringlistlist multi = (Core.Type_stringlistlist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_liststringlist());
         } else if (valsub instanceof Core.Type_stringlist) {
           Core.Type_stringlist allowsub = (Core.Type_stringlist)valsub;
           ischanged = true;
@@ -10973,10 +10977,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (valsub instanceof Core.Type_stringlist) {
           ischanged = true;
           listval.add((Core.Type_stringlist)valsub);
-        } else if (valsub instanceof Core.Type_stringlistlist) {
-          Core.Type_stringlistlist multi = (Core.Type_stringlistlist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_liststringlist());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
@@ -11961,6 +11961,10 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Core.Type_thenelselist) {
+          Core.Type_thenelselist multi = (Core.Type_thenelselist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_listthenelse());
         } else if (valsub instanceof Core.Type_thenelse) {
           Core.Type_thenelse allowsub = (Core.Type_thenelse)valsub;
           ischanged = true;
@@ -11968,10 +11972,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (valsub instanceof Core.Type_thenelse) {
           ischanged = true;
           listval.add((Core.Type_thenelse)valsub);
-        } else if (valsub instanceof Core.Type_thenelselist) {
-          Core.Type_thenelselist multi = (Core.Type_thenelselist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_listthenelse());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
@@ -12331,6 +12331,10 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Core.Type_translationlist) {
+          Core.Type_translationlist multi = (Core.Type_translationlist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_listtranslation());
         } else if (valsub instanceof Core.Type_translation) {
           Core.Type_translation allowsub = (Core.Type_translation)valsub;
           ischanged = true;
@@ -12338,10 +12342,6 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (valsub instanceof Core.Type_translation) {
           ischanged = true;
           listval.add((Core.Type_translation)valsub);
-        } else if (valsub instanceof Core.Type_translationlist) {
-          Core.Type_translationlist multi = (Core.Type_translationlist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_listtranslation());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
@@ -13374,14 +13374,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
-        } else if (valsub instanceof Core.Type_any) {
-          Core.Type_any allowsub = (Core.Type_any)valsub;
-          ischanged = true;
-          listval.add(allowsub);
         } else if (valsub instanceof Core.Type_typelist) {
           Core.Type_typelist multi = (Core.Type_typelist)valsub;
           ischanged = true;
           listval.addAll(multi.vx_list());
+        } else if (valsub instanceof Core.Type_any) {
+          Core.Type_any allowsub = (Core.Type_any)valsub;
+          ischanged = true;
+          listval.add(allowsub);
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {

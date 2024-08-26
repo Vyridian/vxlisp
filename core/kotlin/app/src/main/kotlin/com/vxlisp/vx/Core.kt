@@ -434,7 +434,7 @@ object vx_core {
   fun <T : vx_core.Type_any> vx_copy(
     copyval : T,
     vararg vals : Any) : T {
-    val value : vx_core.Type_any = copyval.vx_copy(vals)
+    val value : vx_core.Type_any = copyval.vx_copy(*vals)
     val output : T = vx_core.f_any_from_any(copyval, value)
     return output
   }
@@ -675,15 +675,42 @@ object vx_core {
     vararg values : Any) : Unit {
     for (value : Any in values) {
       var text : String = ""
-      if (value == null) {
-        text = "null"
-      } else if (value is vx_core.Type_string) {
+      if (value is vx_core.Type_string) {
         val valstring : vx_core.Type_string = value as vx_core.Type_string
         text = valstring.vx_string()
       } else if (value is vx_core.Type_any) {
         val valany : vx_core.Type_any = value as vx_core.Type_any
-        val valstring : vx_core.Type_string = vx_core.f_string_from_any(valany)
-        text = valstring.vx_string()
+        text = vx_core.vx_string_from_any(valany)
+      } else if (value is Array<*>) {
+        val items : Array<Any> = value as Array<Any>
+        text = "(array"
+        for (item : Any in items) {
+          if (item is vx_core.Type_string) {
+            val valstring : vx_core.Type_string = item as vx_core.Type_string
+            text += "\n " + valstring.vx_string()
+          } else if (item is vx_core.Type_any) {
+            val valany : vx_core.Type_any = item as vx_core.Type_any
+            text += "\n " + vx_core.vx_string_from_any(valany)
+          } else {
+            text += "\n " + item.toString()
+          }
+        }
+        text += "\n)"
+      } else if (value is List<*>) {
+        val items : List<Any> = value as List<Any>
+        text = "(list"
+        for (item : Any in items) {
+          if (item is vx_core.Type_string) {
+            val valstring : vx_core.Type_string = item as vx_core.Type_string
+            text += "\n " + valstring.vx_string()
+          } else if (item is vx_core.Type_any) {
+            val valany : vx_core.Type_any = item as vx_core.Type_any
+            text += "\n " + vx_core.vx_string_from_any(valany)
+          } else {
+            text += "\n " + item.toString()
+          }
+        }
+        text += "\n)"
       } else {
         text = value.toString()
       }
@@ -750,7 +777,7 @@ object vx_core {
   fun <T : vx_core.Type_any> vx_new(
     generic_any_1 : T,
     vararg vals : Any) : T {
-    val value : vx_core.Type_any = generic_any_1.vx_new(vals)
+    val value : vx_core.Type_any = generic_any_1.vx_new(*vals)
     val output : T = vx_core.f_any_from_any(generic_any_1, value)
     return output
   }
@@ -1296,7 +1323,7 @@ object vx_core {
     constructor() {}
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_any = vx_core.vx_copy(vx_core.e_any, vals)
+      var output : vx_core.Type_any = vx_core.vx_copy(vx_core.e_any, *vals)
       return output
     }
 
@@ -1364,7 +1391,7 @@ object vx_core {
     constructor() {}
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_any_async_from_func = vx_core.vx_copy(vx_core.e_any_async_from_func, vals)
+      var output : vx_core.Type_any_async_from_func = vx_core.vx_copy(vx_core.e_any_async_from_func, *vals)
       return output
     }
 
@@ -1459,7 +1486,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_any_from_anylist = vx_core.vx_copy(vx_core.e_any_from_anylist, vals)
+      var output : vx_core.Type_any_from_anylist = vx_core.vx_copy(vx_core.e_any_from_anylist, *vals)
       return output
     }
 
@@ -1478,14 +1505,24 @@ object vx_core {
           msgblock = vx_core.vx_copy(msgblock, valsub)
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub)
-        } else if (valsub is vx_core.Func_any_from_any) {
-          var allowsub : vx_core.Func_any_from_any = valsub as vx_core.Func_any_from_any
-          ischanged = true
-          listval.add(allowsub)
         } else if (valsub is vx_core.Type_any_from_anylist) {
           var multi : vx_core.Type_any_from_anylist = valsub as vx_core.Type_any_from_anylist
           ischanged = true
           listval.addAll(multi.vx_listany_from_any())
+        } else if (valsub is vx_core.Func_any_from_any) {
+          var allowsub : vx_core.Func_any_from_any = valsub as vx_core.Func_any_from_any
+          ischanged = true
+          listval.add(allowsub)
+        } else if (valsub is List<*>) {
+          var listunknown : List<Any> = valsub as List<Any>
+          for (item : Any in listunknown) {
+            if (false) {
+            } else if (item is vx_core.Func_any_from_any) {
+              var valitem : vx_core.Func_any_from_any = item as vx_core.Func_any_from_any
+              ischanged = true
+              listval.add(valitem)
+            }
+          }
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/any<-anylist", ":invalidtype", anyinvalid)
@@ -1567,7 +1604,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_anylist = vx_core.vx_copy(vx_core.e_anylist, vals)
+      var output : vx_core.Type_anylist = vx_core.vx_copy(vx_core.e_anylist, *vals)
       return output
     }
 
@@ -1586,14 +1623,24 @@ object vx_core {
           msgblock = vx_core.vx_copy(msgblock, valsub)
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub)
-        } else if (valsub is vx_core.Type_any) {
-          var allowsub : vx_core.Type_any = valsub as vx_core.Type_any
-          ischanged = true
-          listval.add(allowsub)
         } else if (valsub is vx_core.Type_anylist) {
           var multi : vx_core.Type_anylist = valsub as vx_core.Type_anylist
           ischanged = true
           listval.addAll(multi.vx_list())
+        } else if (valsub is vx_core.Type_any) {
+          var allowsub : vx_core.Type_any = valsub as vx_core.Type_any
+          ischanged = true
+          listval.add(allowsub)
+        } else if (valsub is List<*>) {
+          var listunknown : List<Any> = valsub as List<Any>
+          for (item : Any in listunknown) {
+            if (false) {
+            } else if (item is vx_core.Type_any) {
+              var valitem : vx_core.Type_any = item as vx_core.Type_any
+              ischanged = true
+              listval.add(valitem)
+            }
+          }
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/anylist", ":invalidtype", anyinvalid)
@@ -1713,7 +1760,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_anymap = vx_core.vx_copy(vx_core.e_anymap, vals)
+      var output : vx_core.Type_anymap = vx_core.vx_copy(vx_core.e_anymap, *vals)
       return output
     }
 
@@ -1836,7 +1883,7 @@ object vx_core {
     constructor() {}
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_anytype = vx_core.vx_copy(vx_core.e_anytype, vals)
+      var output : vx_core.Type_anytype = vx_core.vx_copy(vx_core.e_anytype, *vals)
       return output
     }
 
@@ -1971,7 +2018,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_arg = vx_core.vx_copy(vx_core.e_arg, vals)
+      var output : vx_core.Type_arg = vx_core.vx_copy(vx_core.e_arg, *vals)
       return output
     }
 
@@ -2223,7 +2270,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_arglist = vx_core.vx_copy(vx_core.e_arglist, vals)
+      var output : vx_core.Type_arglist = vx_core.vx_copy(vx_core.e_arglist, *vals)
       return output
     }
 
@@ -2242,6 +2289,10 @@ object vx_core {
           msgblock = vx_core.vx_copy(msgblock, valsub)
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub)
+        } else if (valsub is vx_core.Type_arglist) {
+          var multi : vx_core.Type_arglist = valsub as vx_core.Type_arglist
+          ischanged = true
+          listval.addAll(multi.vx_listarg())
         } else if (valsub is vx_core.Type_arg) {
           var allowsub : vx_core.Type_arg = valsub as vx_core.Type_arg
           ischanged = true
@@ -2249,10 +2300,16 @@ object vx_core {
         } else if (valsub is vx_core.Type_arg) {
           ischanged = true
           listval.add(valsub as vx_core.Type_arg)
-        } else if (valsub is vx_core.Type_arglist) {
-          var multi : vx_core.Type_arglist = valsub as vx_core.Type_arglist
-          ischanged = true
-          listval.addAll(multi.vx_listarg())
+        } else if (valsub is List<*>) {
+          var listunknown : List<Any> = valsub as List<Any>
+          for (item : Any in listunknown) {
+            if (false) {
+            } else if (item is vx_core.Type_arg) {
+              var valitem : vx_core.Type_arg = item as vx_core.Type_arg
+              ischanged = true
+              listval.add(valitem)
+            }
+          }
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/arglist", ":invalidtype", anyinvalid)
@@ -2385,7 +2442,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_argmap = vx_core.vx_copy(vx_core.e_argmap, vals)
+      var output : vx_core.Type_argmap = vx_core.vx_copy(vx_core.e_argmap, *vals)
       return output
     }
 
@@ -2516,7 +2573,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_boolean = vx_core.vx_copy(vx_core.e_boolean, vals)
+      var output : vx_core.Type_boolean = vx_core.vx_copy(vx_core.e_boolean, *vals)
       return output
     }
 
@@ -2629,7 +2686,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_booleanlist = vx_core.vx_copy(vx_core.e_booleanlist, vals)
+      var output : vx_core.Type_booleanlist = vx_core.vx_copy(vx_core.e_booleanlist, *vals)
       return output
     }
 
@@ -2648,6 +2705,10 @@ object vx_core {
           msgblock = vx_core.vx_copy(msgblock, valsub)
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub)
+        } else if (valsub is vx_core.Type_booleanlist) {
+          var multi : vx_core.Type_booleanlist = valsub as vx_core.Type_booleanlist
+          ischanged = true
+          listval.addAll(multi.vx_listboolean())
         } else if (valsub is vx_core.Type_boolean) {
           var allowsub : vx_core.Type_boolean = valsub as vx_core.Type_boolean
           ischanged = true
@@ -2655,10 +2716,16 @@ object vx_core {
         } else if (valsub is Boolean) {
           ischanged = true
           listval.add(vx_core.vx_new(vx_core.t_boolean, valsub))
-        } else if (valsub is vx_core.Type_booleanlist) {
-          var multi : vx_core.Type_booleanlist = valsub as vx_core.Type_booleanlist
-          ischanged = true
-          listval.addAll(multi.vx_listboolean())
+        } else if (valsub is List<*>) {
+          var listunknown : List<Any> = valsub as List<Any>
+          for (item : Any in listunknown) {
+            if (false) {
+            } else if (item is vx_core.Type_boolean) {
+              var valitem : vx_core.Type_boolean = item as vx_core.Type_boolean
+              ischanged = true
+              listval.add(valitem)
+            }
+          }
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/booleanlist", ":invalidtype", anyinvalid)
@@ -2718,7 +2785,7 @@ object vx_core {
     constructor() {}
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_collection = vx_core.vx_copy(vx_core.e_collection, vals)
+      var output : vx_core.Type_collection = vx_core.vx_copy(vx_core.e_collection, *vals)
       return output
     }
 
@@ -2779,7 +2846,7 @@ object vx_core {
     constructor() {}
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_compilelanguages = vx_core.vx_copy(vx_core.e_compilelanguages, vals)
+      var output : vx_core.Type_compilelanguages = vx_core.vx_copy(vx_core.e_compilelanguages, *vals)
       return output
     }
 
@@ -2840,7 +2907,7 @@ object vx_core {
     constructor() {}
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_connect = vx_core.vx_copy(vx_core.e_connect, vals)
+      var output : vx_core.Type_connect = vx_core.vx_copy(vx_core.e_connect, *vals)
       return output
     }
 
@@ -2935,7 +3002,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_connectlist = vx_core.vx_copy(vx_core.e_connectlist, vals)
+      var output : vx_core.Type_connectlist = vx_core.vx_copy(vx_core.e_connectlist, *vals)
       return output
     }
 
@@ -2954,6 +3021,10 @@ object vx_core {
           msgblock = vx_core.vx_copy(msgblock, valsub)
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub)
+        } else if (valsub is vx_core.Type_connectlist) {
+          var multi : vx_core.Type_connectlist = valsub as vx_core.Type_connectlist
+          ischanged = true
+          listval.addAll(multi.vx_listconnect())
         } else if (valsub is vx_core.Type_connect) {
           var allowsub : vx_core.Type_connect = valsub as vx_core.Type_connect
           ischanged = true
@@ -2961,10 +3032,16 @@ object vx_core {
         } else if (valsub is vx_core.Type_connect) {
           ischanged = true
           listval.add(valsub as vx_core.Type_connect)
-        } else if (valsub is vx_core.Type_connectlist) {
-          var multi : vx_core.Type_connectlist = valsub as vx_core.Type_connectlist
-          ischanged = true
-          listval.addAll(multi.vx_listconnect())
+        } else if (valsub is List<*>) {
+          var listunknown : List<Any> = valsub as List<Any>
+          for (item : Any in listunknown) {
+            if (false) {
+            } else if (item is vx_core.Type_connect) {
+              var valitem : vx_core.Type_connect = item as vx_core.Type_connect
+              ischanged = true
+              listval.add(valitem)
+            }
+          }
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/connectlist", ":invalidtype", anyinvalid)
@@ -3097,7 +3174,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_connectmap = vx_core.vx_copy(vx_core.e_connectmap, vals)
+      var output : vx_core.Type_connectmap = vx_core.vx_copy(vx_core.e_connectmap, *vals)
       return output
     }
 
@@ -3220,7 +3297,7 @@ object vx_core {
     constructor() {}
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_const = vx_core.vx_copy(vx_core.e_const, vals)
+      var output : vx_core.Type_const = vx_core.vx_copy(vx_core.e_const, *vals)
       return output
     }
 
@@ -3340,7 +3417,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_constdef = vx_core.vx_copy(vx_core.e_constdef, vals)
+      var output : vx_core.Type_constdef = vx_core.vx_copy(vx_core.e_constdef, *vals)
       return output
     }
 
@@ -3556,7 +3633,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_constlist = vx_core.vx_copy(vx_core.e_constlist, vals)
+      var output : vx_core.Type_constlist = vx_core.vx_copy(vx_core.e_constlist, *vals)
       return output
     }
 
@@ -3575,14 +3652,24 @@ object vx_core {
           msgblock = vx_core.vx_copy(msgblock, valsub)
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub)
-        } else if (valsub is vx_core.Type_any) {
-          var allowsub : vx_core.Type_any = valsub as vx_core.Type_any
-          ischanged = true
-          listval.add(allowsub)
         } else if (valsub is vx_core.Type_constlist) {
           var multi : vx_core.Type_constlist = valsub as vx_core.Type_constlist
           ischanged = true
           listval.addAll(multi.vx_list())
+        } else if (valsub is vx_core.Type_any) {
+          var allowsub : vx_core.Type_any = valsub as vx_core.Type_any
+          ischanged = true
+          listval.add(allowsub)
+        } else if (valsub is List<*>) {
+          var listunknown : List<Any> = valsub as List<Any>
+          for (item : Any in listunknown) {
+            if (false) {
+            } else if (item is vx_core.Type_any) {
+              var valitem : vx_core.Type_any = item as vx_core.Type_any
+              ischanged = true
+              listval.add(valitem)
+            }
+          }
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/constlist", ":invalidtype", anyinvalid)
@@ -3702,7 +3789,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_constmap = vx_core.vx_copy(vx_core.e_constmap, vals)
+      var output : vx_core.Type_constmap = vx_core.vx_copy(vx_core.e_constmap, *vals)
       return output
     }
 
@@ -3899,7 +3986,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_context = vx_core.vx_copy(vx_core.e_context, vals)
+      var output : vx_core.Type_context = vx_core.vx_copy(vx_core.e_context, *vals)
       return output
     }
 
@@ -4114,7 +4201,7 @@ object vx_core {
     constructor() {}
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_date = vx_core.vx_copy(vx_core.e_date, vals)
+      var output : vx_core.Type_date = vx_core.vx_copy(vx_core.e_date, *vals)
       return output
     }
 
@@ -4189,7 +4276,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_decimal = vx_core.vx_copy(vx_core.e_decimal, vals)
+      var output : vx_core.Type_decimal = vx_core.vx_copy(vx_core.e_decimal, *vals)
       return output
     }
 
@@ -4267,7 +4354,7 @@ object vx_core {
     constructor() {}
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_error = vx_core.vx_copy(vx_core.e_error, vals)
+      var output : vx_core.Type_error = vx_core.vx_copy(vx_core.e_error, *vals)
       return output
     }
 
@@ -4336,7 +4423,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_float = vx_core.vx_copy(vx_core.e_float, vals)
+      var output : vx_core.Type_float = vx_core.vx_copy(vx_core.e_float, *vals)
       return output
     }
 
@@ -4440,7 +4527,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_func = vx_core.vx_copy(vx_core.e_func, vals)
+      var output : vx_core.Type_func = vx_core.vx_copy(vx_core.e_func, *vals)
       return output
     }
 
@@ -4590,7 +4677,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_funcdef = vx_core.vx_copy(vx_core.e_funcdef, vals)
+      var output : vx_core.Type_funcdef = vx_core.vx_copy(vx_core.e_funcdef, *vals)
       return output
     }
 
@@ -4872,7 +4959,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_funclist = vx_core.vx_copy(vx_core.e_funclist, vals)
+      var output : vx_core.Type_funclist = vx_core.vx_copy(vx_core.e_funclist, *vals)
       return output
     }
 
@@ -4891,6 +4978,10 @@ object vx_core {
           msgblock = vx_core.vx_copy(msgblock, valsub)
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub)
+        } else if (valsub is vx_core.Type_funclist) {
+          var multi : vx_core.Type_funclist = valsub as vx_core.Type_funclist
+          ischanged = true
+          listval.addAll(multi.vx_listfunc())
         } else if (valsub is vx_core.Type_func) {
           var allowsub : vx_core.Type_func = valsub as vx_core.Type_func
           ischanged = true
@@ -4898,10 +4989,16 @@ object vx_core {
         } else if (valsub is vx_core.Type_func) {
           ischanged = true
           listval.add(valsub as vx_core.Type_func)
-        } else if (valsub is vx_core.Type_funclist) {
-          var multi : vx_core.Type_funclist = valsub as vx_core.Type_funclist
-          ischanged = true
-          listval.addAll(multi.vx_listfunc())
+        } else if (valsub is List<*>) {
+          var listunknown : List<Any> = valsub as List<Any>
+          for (item : Any in listunknown) {
+            if (false) {
+            } else if (item is vx_core.Type_func) {
+              var valitem : vx_core.Type_func = item as vx_core.Type_func
+              ischanged = true
+              listval.add(valitem)
+            }
+          }
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/funclist", ":invalidtype", anyinvalid)
@@ -5034,7 +5131,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_funcmap = vx_core.vx_copy(vx_core.e_funcmap, vals)
+      var output : vx_core.Type_funcmap = vx_core.vx_copy(vx_core.e_funcmap, *vals)
       return output
     }
 
@@ -5165,7 +5262,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_int = vx_core.vx_copy(vx_core.e_int, vals)
+      var output : vx_core.Type_int = vx_core.vx_copy(vx_core.e_int, *vals)
       return output
     }
 
@@ -5281,7 +5378,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_intlist = vx_core.vx_copy(vx_core.e_intlist, vals)
+      var output : vx_core.Type_intlist = vx_core.vx_copy(vx_core.e_intlist, *vals)
       return output
     }
 
@@ -5300,6 +5397,10 @@ object vx_core {
           msgblock = vx_core.vx_copy(msgblock, valsub)
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub)
+        } else if (valsub is vx_core.Type_intlist) {
+          var multi : vx_core.Type_intlist = valsub as vx_core.Type_intlist
+          ischanged = true
+          listval.addAll(multi.vx_listint())
         } else if (valsub is vx_core.Type_int) {
           var allowsub : vx_core.Type_int = valsub as vx_core.Type_int
           ischanged = true
@@ -5307,10 +5408,16 @@ object vx_core {
         } else if (valsub is Int) {
           ischanged = true
           listval.add(vx_core.vx_new(vx_core.t_int, valsub))
-        } else if (valsub is vx_core.Type_intlist) {
-          var multi : vx_core.Type_intlist = valsub as vx_core.Type_intlist
-          ischanged = true
-          listval.addAll(multi.vx_listint())
+        } else if (valsub is List<*>) {
+          var listunknown : List<Any> = valsub as List<Any>
+          for (item : Any in listunknown) {
+            if (false) {
+            } else if (item is vx_core.Type_int) {
+              var valitem : vx_core.Type_int = item as vx_core.Type_int
+              ischanged = true
+              listval.add(valitem)
+            }
+          }
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/intlist", ":invalidtype", anyinvalid)
@@ -5443,7 +5550,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_intmap = vx_core.vx_copy(vx_core.e_intmap, vals)
+      var output : vx_core.Type_intmap = vx_core.vx_copy(vx_core.e_intmap, *vals)
       return output
     }
 
@@ -5590,7 +5697,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_list = vx_core.vx_copy(vx_core.e_list, vals)
+      var output : vx_core.Type_list = vx_core.vx_copy(vx_core.e_list, *vals)
       return output
     }
 
@@ -5609,14 +5716,24 @@ object vx_core {
           msgblock = vx_core.vx_copy(msgblock, valsub)
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub)
-        } else if (valsub is vx_core.Type_any) {
-          var allowsub : vx_core.Type_any = valsub as vx_core.Type_any
-          ischanged = true
-          listval.add(allowsub)
         } else if (valsub is vx_core.Type_list) {
           var multi : vx_core.Type_list = valsub as vx_core.Type_list
           ischanged = true
           listval.addAll(multi.vx_list())
+        } else if (valsub is vx_core.Type_any) {
+          var allowsub : vx_core.Type_any = valsub as vx_core.Type_any
+          ischanged = true
+          listval.add(allowsub)
+        } else if (valsub is List<*>) {
+          var listunknown : List<Any> = valsub as List<Any>
+          for (item : Any in listunknown) {
+            if (false) {
+            } else if (item is vx_core.Type_any) {
+              var valitem : vx_core.Type_any = item as vx_core.Type_any
+              ischanged = true
+              listval.add(valitem)
+            }
+          }
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/list", ":invalidtype", anyinvalid)
@@ -5676,7 +5793,7 @@ object vx_core {
     constructor() {}
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_listtype = vx_core.vx_copy(vx_core.e_listtype, vals)
+      var output : vx_core.Type_listtype = vx_core.vx_copy(vx_core.e_listtype, *vals)
       return output
     }
 
@@ -5748,7 +5865,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_locale = vx_core.vx_copy(vx_core.e_locale, vals)
+      var output : vx_core.Type_locale = vx_core.vx_copy(vx_core.e_locale, *vals)
       return output
     }
 
@@ -5873,7 +5990,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_map = vx_core.vx_copy(vx_core.e_map, vals)
+      var output : vx_core.Type_map = vx_core.vx_copy(vx_core.e_map, *vals)
       return output
     }
 
@@ -5996,7 +6113,7 @@ object vx_core {
     constructor() {}
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_maptype = vx_core.vx_copy(vx_core.e_maptype, vals)
+      var output : vx_core.Type_maptype = vx_core.vx_copy(vx_core.e_maptype, *vals)
       return output
     }
 
@@ -6086,7 +6203,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_mempool = vx_core.vx_copy(vx_core.e_mempool, vals)
+      var output : vx_core.Type_mempool = vx_core.vx_copy(vx_core.e_mempool, *vals)
       return output
     }
 
@@ -6317,7 +6434,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_msg = vx_core.vx_copy(vx_core.e_msg, vals)
+      var output : vx_core.Type_msg = vx_core.vx_copy(vx_core.e_msg, *vals)
       return output
     }
 
@@ -6492,7 +6609,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_msgblock = vx_core.vx_copy(vx_core.e_msgblock, vals)
+      var output : vx_core.Type_msgblock = vx_core.vx_copy(vx_core.e_msgblock, *vals)
       return output
     }
 
@@ -6673,7 +6790,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_msgblocklist = vx_core.vx_copy(vx_core.e_msgblocklist, vals)
+      var output : vx_core.Type_msgblocklist = vx_core.vx_copy(vx_core.e_msgblocklist, *vals)
       return output
     }
 
@@ -6690,13 +6807,23 @@ object vx_core {
       for (valsub : Any in vals) {
         if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub)
-        } else if (valsub is vx_core.Type_msgblock) {
-          ischanged = true
-          listval.add(valsub as vx_core.Type_msgblock)
         } else if (valsub is vx_core.Type_msgblocklist) {
           var multi : vx_core.Type_msgblocklist = valsub as vx_core.Type_msgblocklist
           ischanged = true
           listval.addAll(multi.vx_listmsgblock())
+        } else if (valsub is vx_core.Type_msgblock) {
+          ischanged = true
+          listval.add(valsub as vx_core.Type_msgblock)
+        } else if (valsub is List<*>) {
+          var listunknown : List<Any> = valsub as List<Any>
+          for (item : Any in listunknown) {
+            if (false) {
+            } else if (item is vx_core.Type_msgblock) {
+              var valitem : vx_core.Type_msgblock = item as vx_core.Type_msgblock
+              ischanged = true
+              listval.add(valitem)
+            }
+          }
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/msgblocklist", ":invalidtype", anyinvalid)
@@ -6790,7 +6917,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_msglist = vx_core.vx_copy(vx_core.e_msglist, vals)
+      var output : vx_core.Type_msglist = vx_core.vx_copy(vx_core.e_msglist, *vals)
       return output
     }
 
@@ -6807,13 +6934,23 @@ object vx_core {
       for (valsub : Any in vals) {
         if (valsub is vx_core.Type_msgblock) {
           msgblock = vx_core.vx_copy(msgblock, valsub)
-        } else if (valsub is vx_core.Type_msg) {
-          ischanged = true
-          listval.add(valsub as vx_core.Type_msg)
         } else if (valsub is vx_core.Type_msglist) {
           var multi : vx_core.Type_msglist = valsub as vx_core.Type_msglist
           ischanged = true
           listval.addAll(multi.vx_listmsg())
+        } else if (valsub is vx_core.Type_msg) {
+          ischanged = true
+          listval.add(valsub as vx_core.Type_msg)
+        } else if (valsub is List<*>) {
+          var listunknown : List<Any> = valsub as List<Any>
+          for (item : Any in listunknown) {
+            if (false) {
+            } else if (item is vx_core.Type_msg) {
+              var valitem : vx_core.Type_msg = item as vx_core.Type_msg
+              ischanged = true
+              listval.add(valitem)
+            }
+          }
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/msglist", ":invalidtype", anyinvalid)
@@ -6873,7 +7010,7 @@ object vx_core {
     constructor() {}
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_none = vx_core.vx_copy(vx_core.e_none, vals)
+      var output : vx_core.Type_none = vx_core.vx_copy(vx_core.e_none, *vals)
       return output
     }
 
@@ -6934,7 +7071,7 @@ object vx_core {
     constructor() {}
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_notype = vx_core.vx_copy(vx_core.e_notype, vals)
+      var output : vx_core.Type_notype = vx_core.vx_copy(vx_core.e_notype, *vals)
       return output
     }
 
@@ -6995,7 +7132,7 @@ object vx_core {
     constructor() {}
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_number = vx_core.vx_copy(vx_core.e_number, vals)
+      var output : vx_core.Type_number = vx_core.vx_copy(vx_core.e_number, *vals)
       return output
     }
 
@@ -7090,7 +7227,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_numberlist = vx_core.vx_copy(vx_core.e_numberlist, vals)
+      var output : vx_core.Type_numberlist = vx_core.vx_copy(vx_core.e_numberlist, *vals)
       return output
     }
 
@@ -7109,6 +7246,10 @@ object vx_core {
           msgblock = vx_core.vx_copy(msgblock, valsub)
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub)
+        } else if (valsub is vx_core.Type_numberlist) {
+          var multi : vx_core.Type_numberlist = valsub as vx_core.Type_numberlist
+          ischanged = true
+          listval.addAll(multi.vx_listnumber())
         } else if (valsub is vx_core.Type_number) {
           var allowsub : vx_core.Type_number = valsub as vx_core.Type_number
           ischanged = true
@@ -7116,10 +7257,16 @@ object vx_core {
         } else if (valsub is vx_core.Type_number) {
           ischanged = true
           listval.add(valsub as vx_core.Type_number)
-        } else if (valsub is vx_core.Type_numberlist) {
-          var multi : vx_core.Type_numberlist = valsub as vx_core.Type_numberlist
-          ischanged = true
-          listval.addAll(multi.vx_listnumber())
+        } else if (valsub is List<*>) {
+          var listunknown : List<Any> = valsub as List<Any>
+          for (item : Any in listunknown) {
+            if (false) {
+            } else if (item is vx_core.Type_number) {
+              var valitem : vx_core.Type_number = item as vx_core.Type_number
+              ischanged = true
+              listval.add(valitem)
+            }
+          }
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/numberlist", ":invalidtype", anyinvalid)
@@ -7252,7 +7399,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_numbermap = vx_core.vx_copy(vx_core.e_numbermap, vals)
+      var output : vx_core.Type_numbermap = vx_core.vx_copy(vx_core.e_numbermap, *vals)
       return output
     }
 
@@ -7464,7 +7611,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_package = vx_core.vx_copy(vx_core.e_package, vals)
+      var output : vx_core.Type_package = vx_core.vx_copy(vx_core.e_package, *vals)
       return output
     }
 
@@ -7776,7 +7923,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_packagemap = vx_core.vx_copy(vx_core.e_packagemap, vals)
+      var output : vx_core.Type_packagemap = vx_core.vx_copy(vx_core.e_packagemap, *vals)
       return output
     }
 
@@ -7928,7 +8075,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_permission = vx_core.vx_copy(vx_core.e_permission, vals)
+      var output : vx_core.Type_permission = vx_core.vx_copy(vx_core.e_permission, *vals)
       return output
     }
 
@@ -8105,7 +8252,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_permissionlist = vx_core.vx_copy(vx_core.e_permissionlist, vals)
+      var output : vx_core.Type_permissionlist = vx_core.vx_copy(vx_core.e_permissionlist, *vals)
       return output
     }
 
@@ -8124,6 +8271,10 @@ object vx_core {
           msgblock = vx_core.vx_copy(msgblock, valsub)
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub)
+        } else if (valsub is vx_core.Type_permissionlist) {
+          var multi : vx_core.Type_permissionlist = valsub as vx_core.Type_permissionlist
+          ischanged = true
+          listval.addAll(multi.vx_listpermission())
         } else if (valsub is vx_core.Type_permission) {
           var allowsub : vx_core.Type_permission = valsub as vx_core.Type_permission
           ischanged = true
@@ -8131,10 +8282,16 @@ object vx_core {
         } else if (valsub is vx_core.Type_permission) {
           ischanged = true
           listval.add(valsub as vx_core.Type_permission)
-        } else if (valsub is vx_core.Type_permissionlist) {
-          var multi : vx_core.Type_permissionlist = valsub as vx_core.Type_permissionlist
-          ischanged = true
-          listval.addAll(multi.vx_listpermission())
+        } else if (valsub is List<*>) {
+          var listunknown : List<Any> = valsub as List<Any>
+          for (item : Any in listunknown) {
+            if (false) {
+            } else if (item is vx_core.Type_permission) {
+              var valitem : vx_core.Type_permission = item as vx_core.Type_permission
+              ischanged = true
+              listval.add(valitem)
+            }
+          }
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/permissionlist", ":invalidtype", anyinvalid)
@@ -8267,7 +8424,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_permissionmap = vx_core.vx_copy(vx_core.e_permissionmap, vals)
+      var output : vx_core.Type_permissionmap = vx_core.vx_copy(vx_core.e_permissionmap, *vals)
       return output
     }
 
@@ -8419,7 +8576,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_project = vx_core.vx_copy(vx_core.e_project, vals)
+      var output : vx_core.Type_project = vx_core.vx_copy(vx_core.e_project, *vals)
       return output
     }
 
@@ -8618,7 +8775,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_security = vx_core.vx_copy(vx_core.e_security, vals)
+      var output : vx_core.Type_security = vx_core.vx_copy(vx_core.e_security, *vals)
       return output
     }
 
@@ -8910,7 +9067,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_session = vx_core.vx_copy(vx_core.e_session, vals)
+      var output : vx_core.Type_session = vx_core.vx_copy(vx_core.e_session, *vals)
       return output
     }
 
@@ -9199,7 +9356,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_setting = vx_core.vx_copy(vx_core.e_setting, vals)
+      var output : vx_core.Type_setting = vx_core.vx_copy(vx_core.e_setting, *vals)
       return output
     }
 
@@ -9368,7 +9525,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_state = vx_core.vx_copy(vx_core.e_state, vals)
+      var output : vx_core.Type_state = vx_core.vx_copy(vx_core.e_state, *vals)
       return output
     }
 
@@ -9567,7 +9724,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_statelistener = vx_core.vx_copy(vx_core.e_statelistener, vals)
+      var output : vx_core.Type_statelistener = vx_core.vx_copy(vx_core.e_statelistener, *vals)
       return output
     }
 
@@ -9831,7 +9988,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_statelistenermap = vx_core.vx_copy(vx_core.e_statelistenermap, vals)
+      var output : vx_core.Type_statelistenermap = vx_core.vx_copy(vx_core.e_statelistenermap, *vals)
       return output
     }
 
@@ -9962,7 +10119,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_string = vx_core.vx_copy(vx_core.e_string, vals)
+      var output : vx_core.Type_string = vx_core.vx_copy(vx_core.e_string, *vals)
       return output
     }
 
@@ -10110,7 +10267,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_stringlist = vx_core.vx_copy(vx_core.e_stringlist, vals)
+      var output : vx_core.Type_stringlist = vx_core.vx_copy(vx_core.e_stringlist, *vals)
       return output
     }
 
@@ -10129,6 +10286,10 @@ object vx_core {
           msgblock = vx_core.vx_copy(msgblock, valsub)
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub)
+        } else if (valsub is vx_core.Type_stringlist) {
+          var multi : vx_core.Type_stringlist = valsub as vx_core.Type_stringlist
+          ischanged = true
+          listval.addAll(multi.vx_liststring())
         } else if (valsub is vx_core.Type_string) {
           var allowsub : vx_core.Type_string = valsub as vx_core.Type_string
           ischanged = true
@@ -10136,10 +10297,16 @@ object vx_core {
         } else if (valsub is String) {
           ischanged = true
           listval.add(vx_core.vx_new(vx_core.t_string, valsub))
-        } else if (valsub is vx_core.Type_stringlist) {
-          var multi : vx_core.Type_stringlist = valsub as vx_core.Type_stringlist
-          ischanged = true
-          listval.addAll(multi.vx_liststring())
+        } else if (valsub is List<*>) {
+          var listunknown : List<Any> = valsub as List<Any>
+          for (item : Any in listunknown) {
+            if (false) {
+            } else if (item is vx_core.Type_string) {
+              var valitem : vx_core.Type_string = item as vx_core.Type_string
+              ischanged = true
+              listval.add(valitem)
+            }
+          }
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/stringlist", ":invalidtype", anyinvalid)
@@ -10233,7 +10400,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_stringlistlist = vx_core.vx_copy(vx_core.e_stringlistlist, vals)
+      var output : vx_core.Type_stringlistlist = vx_core.vx_copy(vx_core.e_stringlistlist, *vals)
       return output
     }
 
@@ -10252,6 +10419,10 @@ object vx_core {
           msgblock = vx_core.vx_copy(msgblock, valsub)
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub)
+        } else if (valsub is vx_core.Type_stringlistlist) {
+          var multi : vx_core.Type_stringlistlist = valsub as vx_core.Type_stringlistlist
+          ischanged = true
+          listval.addAll(multi.vx_liststringlist())
         } else if (valsub is vx_core.Type_stringlist) {
           var allowsub : vx_core.Type_stringlist = valsub as vx_core.Type_stringlist
           ischanged = true
@@ -10259,10 +10430,16 @@ object vx_core {
         } else if (valsub is vx_core.Type_stringlist) {
           ischanged = true
           listval.add(valsub as vx_core.Type_stringlist)
-        } else if (valsub is vx_core.Type_stringlistlist) {
-          var multi : vx_core.Type_stringlistlist = valsub as vx_core.Type_stringlistlist
-          ischanged = true
-          listval.addAll(multi.vx_liststringlist())
+        } else if (valsub is List<*>) {
+          var listunknown : List<Any> = valsub as List<Any>
+          for (item : Any in listunknown) {
+            if (false) {
+            } else if (item is vx_core.Type_stringlist) {
+              var valitem : vx_core.Type_stringlist = item as vx_core.Type_stringlist
+              ischanged = true
+              listval.add(valitem)
+            }
+          }
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/stringlistlist", ":invalidtype", anyinvalid)
@@ -10395,7 +10572,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_stringmap = vx_core.vx_copy(vx_core.e_stringmap, vals)
+      var output : vx_core.Type_stringmap = vx_core.vx_copy(vx_core.e_stringmap, *vals)
       return output
     }
 
@@ -10591,7 +10768,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_stringmutablemap = vx_core.vx_copy(vx_core.e_stringmutablemap, vals)
+      var output : vx_core.Type_stringmutablemap = vx_core.vx_copy(vx_core.e_stringmutablemap, *vals)
       return output
     }
 
@@ -10727,7 +10904,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_struct = vx_core.vx_copy(vx_core.e_struct, vals)
+      var output : vx_core.Type_struct = vx_core.vx_copy(vx_core.e_struct, *vals)
       return output
     }
 
@@ -10877,7 +11054,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_thenelse = vx_core.vx_copy(vx_core.e_thenelse, vals)
+      var output : vx_core.Type_thenelse = vx_core.vx_copy(vx_core.e_thenelse, *vals)
       return output
     }
 
@@ -11150,7 +11327,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_thenelselist = vx_core.vx_copy(vx_core.e_thenelselist, vals)
+      var output : vx_core.Type_thenelselist = vx_core.vx_copy(vx_core.e_thenelselist, *vals)
       return output
     }
 
@@ -11169,6 +11346,10 @@ object vx_core {
           msgblock = vx_core.vx_copy(msgblock, valsub)
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub)
+        } else if (valsub is vx_core.Type_thenelselist) {
+          var multi : vx_core.Type_thenelselist = valsub as vx_core.Type_thenelselist
+          ischanged = true
+          listval.addAll(multi.vx_listthenelse())
         } else if (valsub is vx_core.Type_thenelse) {
           var allowsub : vx_core.Type_thenelse = valsub as vx_core.Type_thenelse
           ischanged = true
@@ -11176,10 +11357,16 @@ object vx_core {
         } else if (valsub is vx_core.Type_thenelse) {
           ischanged = true
           listval.add(valsub as vx_core.Type_thenelse)
-        } else if (valsub is vx_core.Type_thenelselist) {
-          var multi : vx_core.Type_thenelselist = valsub as vx_core.Type_thenelselist
-          ischanged = true
-          listval.addAll(multi.vx_listthenelse())
+        } else if (valsub is List<*>) {
+          var listunknown : List<Any> = valsub as List<Any>
+          for (item : Any in listunknown) {
+            if (false) {
+            } else if (item is vx_core.Type_thenelse) {
+              var valitem : vx_core.Type_thenelse = item as vx_core.Type_thenelse
+              ischanged = true
+              listval.add(valitem)
+            }
+          }
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/thenelselist", ":invalidtype", anyinvalid)
@@ -11283,7 +11470,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_translation = vx_core.vx_copy(vx_core.e_translation, vals)
+      var output : vx_core.Type_translation = vx_core.vx_copy(vx_core.e_translation, *vals)
       return output
     }
 
@@ -11484,7 +11671,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_translationlist = vx_core.vx_copy(vx_core.e_translationlist, vals)
+      var output : vx_core.Type_translationlist = vx_core.vx_copy(vx_core.e_translationlist, *vals)
       return output
     }
 
@@ -11503,6 +11690,10 @@ object vx_core {
           msgblock = vx_core.vx_copy(msgblock, valsub)
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub)
+        } else if (valsub is vx_core.Type_translationlist) {
+          var multi : vx_core.Type_translationlist = valsub as vx_core.Type_translationlist
+          ischanged = true
+          listval.addAll(multi.vx_listtranslation())
         } else if (valsub is vx_core.Type_translation) {
           var allowsub : vx_core.Type_translation = valsub as vx_core.Type_translation
           ischanged = true
@@ -11510,10 +11701,16 @@ object vx_core {
         } else if (valsub is vx_core.Type_translation) {
           ischanged = true
           listval.add(valsub as vx_core.Type_translation)
-        } else if (valsub is vx_core.Type_translationlist) {
-          var multi : vx_core.Type_translationlist = valsub as vx_core.Type_translationlist
-          ischanged = true
-          listval.addAll(multi.vx_listtranslation())
+        } else if (valsub is List<*>) {
+          var listunknown : List<Any> = valsub as List<Any>
+          for (item : Any in listunknown) {
+            if (false) {
+            } else if (item is vx_core.Type_translation) {
+              var valitem : vx_core.Type_translation = item as vx_core.Type_translation
+              ischanged = true
+              listval.add(valitem)
+            }
+          }
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/translationlist", ":invalidtype", anyinvalid)
@@ -11646,7 +11843,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_translationmap = vx_core.vx_copy(vx_core.e_translationmap, vals)
+      var output : vx_core.Type_translationmap = vx_core.vx_copy(vx_core.e_translationmap, *vals)
       return output
     }
 
@@ -11769,7 +11966,7 @@ object vx_core {
     constructor() {}
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_type = vx_core.vx_copy(vx_core.e_type, vals)
+      var output : vx_core.Type_type = vx_core.vx_copy(vx_core.e_type, *vals)
       return output
     }
 
@@ -12024,7 +12221,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_typedef = vx_core.vx_copy(vx_core.e_typedef, vals)
+      var output : vx_core.Type_typedef = vx_core.vx_copy(vx_core.e_typedef, *vals)
       return output
     }
 
@@ -12459,7 +12656,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_typelist = vx_core.vx_copy(vx_core.e_typelist, vals)
+      var output : vx_core.Type_typelist = vx_core.vx_copy(vx_core.e_typelist, *vals)
       return output
     }
 
@@ -12478,14 +12675,24 @@ object vx_core {
           msgblock = vx_core.vx_copy(msgblock, valsub)
         } else if (valsub is vx_core.Type_msg) {
           msgblock = vx_core.vx_copy(msgblock, valsub)
-        } else if (valsub is vx_core.Type_any) {
-          var allowsub : vx_core.Type_any = valsub as vx_core.Type_any
-          ischanged = true
-          listval.add(allowsub)
         } else if (valsub is vx_core.Type_typelist) {
           var multi : vx_core.Type_typelist = valsub as vx_core.Type_typelist
           ischanged = true
           listval.addAll(multi.vx_list())
+        } else if (valsub is vx_core.Type_any) {
+          var allowsub : vx_core.Type_any = valsub as vx_core.Type_any
+          ischanged = true
+          listval.add(allowsub)
+        } else if (valsub is List<*>) {
+          var listunknown : List<Any> = valsub as List<Any>
+          for (item : Any in listunknown) {
+            if (false) {
+            } else if (item is vx_core.Type_any) {
+              var valitem : vx_core.Type_any = item as vx_core.Type_any
+              ischanged = true
+              listval.add(valitem)
+            }
+          }
         } else if (valsub is vx_core.Type_any) {
           var anyinvalid : vx_core.Type_any = valsub as vx_core.Type_any
           msg = vx_core.vx_msg_from_error("vx/core/typelist", ":invalidtype", anyinvalid)
@@ -12605,7 +12812,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_typemap = vx_core.vx_copy(vx_core.e_typemap, vals)
+      var output : vx_core.Type_typemap = vx_core.vx_copy(vx_core.e_typemap, *vals)
       return output
     }
 
@@ -12787,7 +12994,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_user = vx_core.vx_copy(vx_core.e_user, vals)
+      var output : vx_core.Type_user = vx_core.vx_copy(vx_core.e_user, *vals)
       return output
     }
 
@@ -13025,7 +13232,7 @@ object vx_core {
     }
 
     override fun vx_new(vararg vals : Any) : vx_core.Type_any {
-      var output : vx_core.Type_value = vx_core.vx_copy(vx_core.e_value, vals)
+      var output : vx_core.Type_value = vx_core.vx_copy(vx_core.e_value, *vals)
       return output
     }
 
@@ -25718,10 +25925,11 @@ object vx_core {
   val t_new : vx_core.Func_new = vx_core.Class_new()
 
   fun <T : vx_core.Type_any> f_new(type : T, values : vx_core.Type_anylist) : T {
-    val arrayany : Array<vx_core.Type_any> = vx_core.arrayany_from_anylist(values)
-    val arrayobj : Array<Any> = arrayany as (Array<Any>)
-    val anyvalue : vx_core.Type_any = type.vx_new(arrayobj)
-    val output : T = (anyvalue) as T
+    val arrayany : Array<vx_core.Type_any> = vx_core.arrayany_from_anylist(
+      values
+    )
+    val anyvalue : vx_core.Type_any = type.vx_new(*arrayany)
+    val output : T = anyvalue as T
     return output
   }
 

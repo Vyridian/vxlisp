@@ -117,6 +117,10 @@ public final class Repl {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Repl.Type_liblist) {
+          Repl.Type_liblist multi = (Repl.Type_liblist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_liststring());
         } else if (valsub instanceof Core.Type_string) {
           Core.Type_string allowsub = (Core.Type_string)valsub;
           ischanged = true;
@@ -124,10 +128,6 @@ public final class Repl {
         } else if (valsub instanceof String) {
           ischanged = true;
           listval.add(Core.vx_new(Core.t_string, valsub));
-        } else if (valsub instanceof Repl.Type_liblist) {
-          Repl.Type_liblist multi = (Repl.Type_liblist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_liststring());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
@@ -917,6 +917,10 @@ public final class Repl {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Repl.Type_repllist) {
+          Repl.Type_repllist multi = (Repl.Type_repllist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_listrepl());
         } else if (valsub instanceof Repl.Type_repl) {
           Repl.Type_repl allowsub = (Repl.Type_repl)valsub;
           ischanged = true;
@@ -924,10 +928,6 @@ public final class Repl {
         } else if (valsub instanceof Repl.Type_repl) {
           ischanged = true;
           listval.add((Repl.Type_repl)valsub);
-        } else if (valsub instanceof Repl.Type_repllist) {
-          Repl.Type_repllist multi = (Repl.Type_repllist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_listrepl());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {

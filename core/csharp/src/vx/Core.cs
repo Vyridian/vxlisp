@@ -1524,12 +1524,12 @@ public static class Core {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
-        } else if (valsub is Vx.Core.Func_any_from_any allowsub) {
-          ischanged = true;
-          listval.Add(allowsub);
         } else if (valsub is Vx.Core.Type_any_from_anylist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listany_from_any());
+        } else if (valsub is Vx.Core.Func_any_from_any allowsub) {
+          ischanged = true;
+          listval.Add(allowsub);
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -1641,12 +1641,12 @@ public static class Core {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
-        } else if (valsub is Vx.Core.Type_any allowsub) {
-          ischanged = true;
-          listval.Add(allowsub);
         } else if (valsub is Vx.Core.Type_anylist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_list());
+        } else if (valsub is Vx.Core.Type_any allowsub) {
+          ischanged = true;
+          listval.Add(allowsub);
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -2301,15 +2301,15 @@ public static class Core {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Core.Type_arglist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listarg());
         } else if (valsub is Vx.Core.Type_arg allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Core.Type_arg) {
           ischanged = true;
           listval.Add((Vx.Core.Type_arg)valsub);
-        } else if (valsub is Vx.Core.Type_arglist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listarg());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -2715,15 +2715,15 @@ public static class Core {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Core.Type_booleanlist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listboolean());
         } else if (valsub is Vx.Core.Type_boolean allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is bool) {
           ischanged = true;
           listval.Add(Vx.Core.vx_new(Vx.Core.t_boolean, valsub));
-        } else if (valsub is Vx.Core.Type_booleanlist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listboolean());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -3040,15 +3040,15 @@ public static class Core {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Core.Type_connectlist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listconnect());
         } else if (valsub is Vx.Core.Type_connect allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Core.Type_connect) {
           ischanged = true;
           listval.Add((Vx.Core.Type_connect)valsub);
-        } else if (valsub is Vx.Core.Type_connectlist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listconnect());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -3667,12 +3667,12 @@ public static class Core {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
-        } else if (valsub is Vx.Core.Type_any allowsub) {
-          ischanged = true;
-          listval.Add(allowsub);
         } else if (valsub is Vx.Core.Type_constlist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_list());
+        } else if (valsub is Vx.Core.Type_any allowsub) {
+          ischanged = true;
+          listval.Add(allowsub);
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -4993,15 +4993,15 @@ public static class Core {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Core.Type_funclist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listfunc());
         } else if (valsub is Vx.Core.Type_func allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Core.Type_func) {
           ischanged = true;
           listval.Add((Vx.Core.Type_func)valsub);
-        } else if (valsub is Vx.Core.Type_funclist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listfunc());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -5410,15 +5410,15 @@ public static class Core {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Core.Type_intlist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listint());
         } else if (valsub is Vx.Core.Type_int allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is int) {
           ischanged = true;
           listval.Add(Vx.Core.vx_new(Vx.Core.t_int, valsub));
-        } else if (valsub is Vx.Core.Type_intlist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listint());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -5726,12 +5726,12 @@ public static class Core {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
-        } else if (valsub is Vx.Core.Type_any allowsub) {
-          ischanged = true;
-          listval.Add(allowsub);
         } else if (valsub is Vx.Core.Type_list multi) {
           ischanged = true;
           listval.AddRange(multi.vx_list());
+        } else if (valsub is Vx.Core.Type_any allowsub) {
+          ischanged = true;
+          listval.Add(allowsub);
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -6820,12 +6820,12 @@ public static class Core {
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
-        } else if (valsub is Vx.Core.Type_msgblock) {
-          ischanged = true;
-          listval.Add((Vx.Core.Type_msgblock)valsub);
         } else if (valsub is Vx.Core.Type_msgblocklist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listmsgblock());
+        } else if (valsub is Vx.Core.Type_msgblock) {
+          ischanged = true;
+          listval.Add((Vx.Core.Type_msgblock)valsub);
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -6947,12 +6947,12 @@ public static class Core {
       foreach (object valsub in vals) {
         if (valsub is Vx.Core.Type_msgblock) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
-        } else if (valsub is Vx.Core.Type_msg) {
-          ischanged = true;
-          listval.Add((Vx.Core.Type_msg)valsub);
         } else if (valsub is Vx.Core.Type_msglist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_listmsg());
+        } else if (valsub is Vx.Core.Type_msg) {
+          ischanged = true;
+          listval.Add((Vx.Core.Type_msg)valsub);
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -7271,15 +7271,15 @@ public static class Core {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Core.Type_numberlist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listnumber());
         } else if (valsub is Vx.Core.Type_number allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Core.Type_number) {
           ischanged = true;
           listval.Add((Vx.Core.Type_number)valsub);
-        } else if (valsub is Vx.Core.Type_numberlist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listnumber());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -8280,15 +8280,15 @@ public static class Core {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Core.Type_permissionlist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listpermission());
         } else if (valsub is Vx.Core.Type_permission allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Core.Type_permission) {
           ischanged = true;
           listval.Add((Vx.Core.Type_permission)valsub);
-        } else if (valsub is Vx.Core.Type_permissionlist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listpermission());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -10261,15 +10261,15 @@ public static class Core {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Core.Type_stringlist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_liststring());
         } else if (valsub is Vx.Core.Type_string allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is string) {
           ischanged = true;
           listval.Add(Vx.Core.vx_new(Vx.Core.t_string, valsub));
-        } else if (valsub is Vx.Core.Type_stringlist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_liststring());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -10393,15 +10393,15 @@ public static class Core {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Core.Type_stringlistlist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_liststringlist());
         } else if (valsub is Vx.Core.Type_stringlist allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Core.Type_stringlist) {
           ischanged = true;
           listval.Add((Vx.Core.Type_stringlist)valsub);
-        } else if (valsub is Vx.Core.Type_stringlistlist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_liststringlist());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -11308,15 +11308,15 @@ public static class Core {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Core.Type_thenelselist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listthenelse());
         } else if (valsub is Vx.Core.Type_thenelse allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Core.Type_thenelse) {
           ischanged = true;
           listval.Add((Vx.Core.Type_thenelse)valsub);
-        } else if (valsub is Vx.Core.Type_thenelselist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listthenelse());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -11648,15 +11648,15 @@ public static class Core {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Core.Type_translationlist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listtranslation());
         } else if (valsub is Vx.Core.Type_translation allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Core.Type_translation) {
           ischanged = true;
           listval.Add((Vx.Core.Type_translation)valsub);
-        } else if (valsub is Vx.Core.Type_translationlist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listtranslation());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -12611,12 +12611,12 @@ public static class Core {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
-        } else if (valsub is Vx.Core.Type_any allowsub) {
-          ischanged = true;
-          listval.Add(allowsub);
         } else if (valsub is Vx.Core.Type_typelist multi) {
           ischanged = true;
           listval.AddRange(multi.vx_list());
+        } else if (valsub is Vx.Core.Type_any allowsub) {
+          ischanged = true;
+          listval.Add(allowsub);
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {

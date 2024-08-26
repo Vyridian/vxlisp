@@ -530,6 +530,10 @@ public final class Tree {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Tree.Type_branchlist) {
+          Tree.Type_branchlist multi = (Tree.Type_branchlist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_listbranch());
         } else if (valsub instanceof Tree.Type_branch) {
           Tree.Type_branch allowsub = (Tree.Type_branch)valsub;
           ischanged = true;
@@ -537,10 +541,6 @@ public final class Tree {
         } else if (valsub instanceof Tree.Type_branch) {
           ischanged = true;
           listval.add((Tree.Type_branch)valsub);
-        } else if (valsub instanceof Tree.Type_branchlist) {
-          Tree.Type_branchlist multi = (Tree.Type_branchlist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_listbranch());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
@@ -941,6 +941,10 @@ public final class Tree {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Tree.Type_leaflist) {
+          Tree.Type_leaflist multi = (Tree.Type_leaflist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_listleaf());
         } else if (valsub instanceof Tree.Type_leaf) {
           Tree.Type_leaf allowsub = (Tree.Type_leaf)valsub;
           ischanged = true;
@@ -948,10 +952,6 @@ public final class Tree {
         } else if (valsub instanceof Tree.Type_leaf) {
           ischanged = true;
           listval.add((Tree.Type_leaf)valsub);
-        } else if (valsub instanceof Tree.Type_leaflist) {
-          Tree.Type_leaflist multi = (Tree.Type_leaflist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_listleaf());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {

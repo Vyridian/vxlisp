@@ -391,6 +391,10 @@ public final class Test {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Test.Type_testcaselist) {
+          Test.Type_testcaselist multi = (Test.Type_testcaselist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_listtestcase());
         } else if (valsub instanceof Test.Type_testcase) {
           Test.Type_testcase allowsub = (Test.Type_testcase)valsub;
           ischanged = true;
@@ -398,10 +402,6 @@ public final class Test {
         } else if (valsub instanceof Test.Type_testcase) {
           ischanged = true;
           listval.add((Test.Type_testcase)valsub);
-        } else if (valsub instanceof Test.Type_testcaselist) {
-          Test.Type_testcaselist multi = (Test.Type_testcaselist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_listtestcase());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
@@ -1885,6 +1885,10 @@ public final class Test {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Test.Type_testdescribelist) {
+          Test.Type_testdescribelist multi = (Test.Type_testdescribelist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_listtestdescribe());
         } else if (valsub instanceof Test.Type_testdescribe) {
           Test.Type_testdescribe allowsub = (Test.Type_testdescribe)valsub;
           ischanged = true;
@@ -1892,10 +1896,6 @@ public final class Test {
         } else if (valsub instanceof Test.Type_testdescribe) {
           ischanged = true;
           listval.add((Test.Type_testdescribe)valsub);
-        } else if (valsub instanceof Test.Type_testdescribelist) {
-          Test.Type_testdescribelist multi = (Test.Type_testdescribelist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_listtestdescribe());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
@@ -2378,6 +2378,10 @@ public final class Test {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Test.Type_testpackagelist) {
+          Test.Type_testpackagelist multi = (Test.Type_testpackagelist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_listtestpackage());
         } else if (valsub instanceof Test.Type_testpackage) {
           Test.Type_testpackage allowsub = (Test.Type_testpackage)valsub;
           ischanged = true;
@@ -2385,10 +2389,6 @@ public final class Test {
         } else if (valsub instanceof Test.Type_testpackage) {
           ischanged = true;
           listval.add((Test.Type_testpackage)valsub);
-        } else if (valsub instanceof Test.Type_testpackagelist) {
-          Test.Type_testpackagelist multi = (Test.Type_testpackagelist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_listtestpackage());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
@@ -2871,6 +2871,10 @@ public final class Test {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Test.Type_testresultlist) {
+          Test.Type_testresultlist multi = (Test.Type_testresultlist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_listtestresult());
         } else if (valsub instanceof Test.Type_testresult) {
           Test.Type_testresult allowsub = (Test.Type_testresult)valsub;
           ischanged = true;
@@ -2878,10 +2882,6 @@ public final class Test {
         } else if (valsub instanceof Test.Type_testresult) {
           ischanged = true;
           listval.add((Test.Type_testresult)valsub);
-        } else if (valsub instanceof Test.Type_testresultlist) {
-          Test.Type_testresultlist multi = (Test.Type_testresultlist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_listtestresult());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {

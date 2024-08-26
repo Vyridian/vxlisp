@@ -1223,15 +1223,15 @@ public static class Ui {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Ui.Ui.Type_fontfacelist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listfontface());
         } else if (valsub is Vx.Ui.Ui.Type_fontface allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Ui.Ui.Type_fontface) {
           ischanged = true;
           listval.Add((Vx.Ui.Ui.Type_fontface)valsub);
-        } else if (valsub is Vx.Ui.Ui.Type_fontfacelist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listfontface());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -2994,15 +2994,15 @@ public static class Ui {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Ui.Ui.Type_layoutlist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listlayout());
         } else if (valsub is Vx.Ui.Ui.Type_layout allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Ui.Ui.Type_layout) {
           ischanged = true;
           listval.Add((Vx.Ui.Ui.Type_layout)valsub);
-        } else if (valsub is Vx.Ui.Ui.Type_layoutlist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listlayout());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -4893,15 +4893,15 @@ public static class Ui {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Ui.Ui.Type_stylelist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_liststyle());
         } else if (valsub is Vx.Ui.Ui.Type_style allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Ui.Ui.Type_style) {
           ischanged = true;
           listval.Add((Vx.Ui.Ui.Type_style)valsub);
-        } else if (valsub is Vx.Ui.Ui.Type_stylelist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_liststyle());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -6372,15 +6372,15 @@ public static class Ui {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Ui.Ui.Type_uilist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listui());
         } else if (valsub is Vx.Ui.Ui.Type_ui allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Ui.Ui.Type_ui) {
           ischanged = true;
           listval.Add((Vx.Ui.Ui.Type_ui)valsub);
-        } else if (valsub is Vx.Ui.Ui.Type_uilist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listui());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {

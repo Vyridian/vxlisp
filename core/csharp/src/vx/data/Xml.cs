@@ -427,15 +427,15 @@ public static class Xml {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Data.Xml.Type_xmllist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listxml());
         } else if (valsub is Vx.Data.Xml.Type_xml allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Data.Xml.Type_xml) {
           ischanged = true;
           listval.Add((Vx.Data.Xml.Type_xml)valsub);
-        } else if (valsub is Vx.Data.Xml.Type_xmllist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listxml());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {

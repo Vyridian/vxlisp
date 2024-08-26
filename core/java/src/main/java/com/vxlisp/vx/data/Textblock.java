@@ -432,6 +432,10 @@ public final class Textblock {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Textblock.Type_delimlist) {
+          Textblock.Type_delimlist multi = (Textblock.Type_delimlist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_listdelim());
         } else if (valsub instanceof Textblock.Type_delim) {
           Textblock.Type_delim allowsub = (Textblock.Type_delim)valsub;
           ischanged = true;
@@ -439,10 +443,6 @@ public final class Textblock {
         } else if (valsub instanceof Textblock.Type_delim) {
           ischanged = true;
           listval.add((Textblock.Type_delim)valsub);
-        } else if (valsub instanceof Textblock.Type_delimlist) {
-          Textblock.Type_delimlist multi = (Textblock.Type_delimlist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_listdelim());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
@@ -1180,6 +1180,10 @@ public final class Textblock {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Textblock.Type_textblocklist) {
+          Textblock.Type_textblocklist multi = (Textblock.Type_textblocklist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_listtextblock());
         } else if (valsub instanceof Textblock.Type_textblock) {
           Textblock.Type_textblock allowsub = (Textblock.Type_textblock)valsub;
           ischanged = true;
@@ -1187,10 +1191,6 @@ public final class Textblock {
         } else if (valsub instanceof Textblock.Type_textblock) {
           ischanged = true;
           listval.add((Textblock.Type_textblock)valsub);
-        } else if (valsub instanceof Textblock.Type_textblocklist) {
-          Textblock.Type_textblocklist multi = (Textblock.Type_textblocklist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_listtextblock());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {

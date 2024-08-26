@@ -1460,15 +1460,15 @@ public static class Db {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Data.Db.Type_dblinklist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listdblink());
         } else if (valsub is Vx.Data.Db.Type_dblink allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Data.Db.Type_dblink) {
           ischanged = true;
           listval.Add((Vx.Data.Db.Type_dblink)valsub);
-        } else if (valsub is Vx.Data.Db.Type_dblinklist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listdblink());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {

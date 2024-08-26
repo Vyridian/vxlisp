@@ -302,6 +302,10 @@ public final class Table {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Table.Type_celllist) {
+          Table.Type_celllist multi = (Table.Type_celllist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_listcell());
         } else if (valsub instanceof Table.Type_cell) {
           Table.Type_cell allowsub = (Table.Type_cell)valsub;
           ischanged = true;
@@ -309,10 +313,6 @@ public final class Table {
         } else if (valsub instanceof Table.Type_cell) {
           ischanged = true;
           listval.add((Table.Type_cell)valsub);
-        } else if (valsub instanceof Table.Type_celllist) {
-          Table.Type_celllist multi = (Table.Type_celllist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_listcell());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
@@ -923,6 +923,10 @@ public final class Table {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Table.Type_fieldlist) {
+          Table.Type_fieldlist multi = (Table.Type_fieldlist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_listfield());
         } else if (valsub instanceof Table.Type_field) {
           Table.Type_field allowsub = (Table.Type_field)valsub;
           ischanged = true;
@@ -930,10 +934,6 @@ public final class Table {
         } else if (valsub instanceof Table.Type_field) {
           ischanged = true;
           listval.add((Table.Type_field)valsub);
-        } else if (valsub instanceof Table.Type_fieldlist) {
-          Table.Type_fieldlist multi = (Table.Type_fieldlist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_listfield());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
@@ -1068,6 +1068,10 @@ public final class Table {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Table.Type_fieldmap) {
+          Table.Type_fieldmap multi = (Table.Type_fieldmap)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_listfield());
         } else if (valsub instanceof Table.Type_field) {
           Table.Type_field allowsub = (Table.Type_field)valsub;
           ischanged = true;
@@ -1075,10 +1079,6 @@ public final class Table {
         } else if (valsub instanceof Table.Type_field) {
           ischanged = true;
           listval.add((Table.Type_field)valsub);
-        } else if (valsub instanceof Table.Type_fieldmap) {
-          Table.Type_fieldmap multi = (Table.Type_fieldmap)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_listfield());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
@@ -1742,6 +1742,10 @@ public final class Table {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Table.Type_rowlist) {
+          Table.Type_rowlist multi = (Table.Type_rowlist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_listrow());
         } else if (valsub instanceof Table.Type_row) {
           Table.Type_row allowsub = (Table.Type_row)valsub;
           ischanged = true;
@@ -1749,10 +1753,6 @@ public final class Table {
         } else if (valsub instanceof Table.Type_row) {
           ischanged = true;
           listval.add((Table.Type_row)valsub);
-        } else if (valsub instanceof Table.Type_rowlist) {
-          Table.Type_rowlist multi = (Table.Type_rowlist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_listrow());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {

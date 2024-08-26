@@ -64,8 +64,8 @@ func LangTestLib(lang *vxlang) string {
 		LangTestLib_run_testresult(lang) +
 		LangTestLib_write_testpackagelist_async(lang)
 	spath := LangPkgNameDot(lang, "vx/core") + "c_path_test_resources.vx_string()"
-	switch lang.name {
-	case "csharp":
+	switch lang {
+	case langcsharp:
 		output = "" +
 			"\nusing Xunit;" +
 			"\n" +
@@ -103,7 +103,7 @@ func LangTestLib(lang *vxlang) string {
 			"\n" +
 			commontests +
 			namespaceclose
-	case "java":
+	case langjava:
 		output = `
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
@@ -168,8 +168,8 @@ func LangTestLib_file_test(lang *vxlang) string {
 	fnc.listarg = append(fnc.listarg, arg)
 	paramsopen := ""
 	paramsclose := ""
-	switch lang.name {
-	case "cpp":
+	switch lang {
+	case langcpp:
 		paramsopen = "{"
 		paramsclose = "}"
 	}
@@ -199,8 +199,8 @@ func LangTestLib_read_test_file(lang *vxlang) string {
 	fnc.listarg = append(fnc.listarg, arg)
 	paramsopen := ""
 	paramsclose := ""
-	switch lang.name {
-	case "cpp":
+	switch lang {
+	case langcpp:
 		paramsopen = "{"
 		paramsclose = "}"
 	}
@@ -402,12 +402,12 @@ func LangTestLib_run_testresult(lang *vxlang) string {
 	assertequals := ""
 	assertnotequals := ""
 	println := ""
-	switch lang.name {
-	case "csharp":
+	switch lang {
+	case langcsharp:
 		assertequals = "\n  				Assert.Equal(expected, actual)" + lang.lineend
 		assertnotequals = "\n	  			Assert.NotEqual(expected, actual)" + lang.lineend
 		println = "System.Console.WriteLine"
-	case "java":
+	case langjava:
 		assertequals = "\n  				assertEquals(expected, actual, msg)" + lang.lineend
 		assertnotequals = "\n	  			assertNotEquals(expected, actual, msg)" + lang.lineend
 		println = "System.out.println"
@@ -461,11 +461,11 @@ func LangTestLib_test(lang *vxlang) string {
 	fnc.listarg = append(fnc.listarg, arg)
 	assertequals := ""
 	println := ""
-	switch lang.name {
-	case "csharp":
+	switch lang {
+	case langcsharp:
 		assertequals = "\n    Assert.Equal(expected, actual)" + lang.lineend
 		println = "System.Console.WriteLine"
-	case "java":
+	case langjava:
 		assertequals = "\n    assertEquals(expected, actual)" + lang.lineend
 		println = "System.out.println"
 	}
@@ -488,24 +488,24 @@ func LangTestLib_test_async_from_async_fn(lang *vxlang) string {
 	fnc.name = "test_async_from_async_fn"
 	fnc.vxtype = rawbooltype
 	slambda := ""
-	switch lang.name {
-	case "cpp":
+	switch lang {
+	case langcpp:
 		slambda = "" +
 			"{}," +
 			"\n[](vx_core::Type_any any) {" +
 			"\n 		return any;" +
 			"\n}"
-	case "csharp":
+	case langcsharp:
 		slambda = "" +
 			"(any) => {" +
 			"\n     	return any;" +
 			"\n    }"
-	case "java":
+	case langjava:
 		slambda = "" +
 			"(any) -> {" +
 			"\n     	return any;" +
 			"\n    }"
-	case "kotlin":
+	case langkotlin:
 		slambda = "" +
 			"{any -> " +
 			"\n     	any" +
@@ -588,8 +588,8 @@ func LangTestLib_test_list_from_list_async(lang *vxlang) string {
 	fnc.name = "test_list_from_list_async"
 	fnc.vxtype = rawbooltype
 	fn_async := ""
-	switch lang.name {
-	case "csharp":
+	switch lang {
+	case langcsharp:
 		fn_async = "" +
 			"\n    Vx.Core.Func_any_from_any_async fn_async = Vx.Core.t_any_from_any_async.vx_fn_new((anyval) => {" +
 			"\n      Vx.Core.Type_string stringval = (Vx.Core.Type_string)anyval;" +
@@ -598,7 +598,7 @@ func LangTestLib_test_list_from_list_async(lang *vxlang) string {
 			"\n      Task<Vx.Core.Type_any> output = Vx.Core.vx_async_new_from_value(outval);" +
 			"\n      return output;" +
 			"\n    });"
-	case "java":
+	case langjava:
 		fn_async = "" +
 			"\n    Core.Func_any_from_any_async fn_async = Core.t_any_from_any_async.vx_fn_new((anyval) -> {" +
 			"\n      Core.Type_string stringval = (Core.Type_string)anyval;" +
@@ -607,7 +607,7 @@ func LangTestLib_test_list_from_list_async(lang *vxlang) string {
 			"\n      CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(outval);" +
 			"\n      return output;" +
 			"\n    });"
-	case "kotlin":
+	case langkotlin:
 		fn_async = "" +
 			"\n    vx_core.Func_any_from_any_async fn_async = vx_core.t_any_from_any_async.vx_fn_new({anyval -> {" +
 			"\n      val stringval : vx_core.Type_string = anyval as vx_core.Type_string" +
@@ -648,8 +648,8 @@ func LangTestLib_test_pathfull_from_file(lang *vxlang) string {
 	fnc.vxtype = rawbooltype
 	paramsopen := ""
 	paramsclose := ""
-	switch lang.name {
-	case "cpp":
+	switch lang {
+	case langcpp:
 		paramsopen = "{"
 		paramsclose = "}"
 	}

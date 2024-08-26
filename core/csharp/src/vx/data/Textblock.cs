@@ -395,15 +395,15 @@ public static class Textblock {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Data.Textblock.Type_delimlist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listdelim());
         } else if (valsub is Vx.Data.Textblock.Type_delim allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Data.Textblock.Type_delim) {
           ischanged = true;
           listval.Add((Vx.Data.Textblock.Type_delim)valsub);
-        } else if (valsub is Vx.Data.Textblock.Type_delimlist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listdelim());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -1086,15 +1086,15 @@ public static class Textblock {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Data.Textblock.Type_textblocklist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listtextblock());
         } else if (valsub is Vx.Data.Textblock.Type_textblock allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Data.Textblock.Type_textblock) {
           ischanged = true;
           listval.Add((Vx.Data.Textblock.Type_textblock)valsub);
-        } else if (valsub is Vx.Data.Textblock.Type_textblocklist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listtextblock());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {

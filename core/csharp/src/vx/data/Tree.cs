@@ -485,15 +485,15 @@ public static class Tree {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Data.Tree.Type_branchlist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listbranch());
         } else if (valsub is Vx.Data.Tree.Type_branch allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Data.Tree.Type_branch) {
           ischanged = true;
           listval.Add((Vx.Data.Tree.Type_branch)valsub);
-        } else if (valsub is Vx.Data.Tree.Type_branchlist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listbranch());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -863,15 +863,15 @@ public static class Tree {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Data.Tree.Type_leaflist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listleaf());
         } else if (valsub is Vx.Data.Tree.Type_leaf allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Data.Tree.Type_leaf) {
           ischanged = true;
           listval.Add((Vx.Data.Tree.Type_leaf)valsub);
-        } else if (valsub is Vx.Data.Tree.Type_leaflist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listleaf());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {

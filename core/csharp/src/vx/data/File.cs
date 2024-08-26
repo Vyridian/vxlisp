@@ -537,15 +537,15 @@ public static class File {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Data.File.Type_filelist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listfile());
         } else if (valsub is Vx.Data.File.Type_file allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Data.File.Type_file) {
           ischanged = true;
           listval.Add((Vx.Data.File.Type_file)valsub);
-        } else if (valsub is Vx.Data.File.Type_filelist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listfile());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {

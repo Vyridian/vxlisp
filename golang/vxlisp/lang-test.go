@@ -61,8 +61,8 @@ func LangTestApp(
 	tests := ""
 	listpackage := project.listpackage
 	testpackageprefix := ""
-	switch lang.name {
-	case "csharp":
+	switch lang {
+	case langcsharp:
 		testpackageprefix = "Test"
 	}
 	var listtestpackage []string
@@ -77,8 +77,8 @@ func LangTestApp(
 				imports += LangImportTest(lang, project, pkg.name, imports)
 				testpackage := "\n      " + testpackageprefix + LangPkgName(lang, pkg.name) + "Test.test_package(context)"
 				listtestpackage = append(listtestpackage, testpackage)
-				switch lang.name {
-				case "csharp":
+				switch lang {
+				case langcsharp:
 					tests += "" +
 						"\n  [Fact]" +
 						"\n  public void test_" + StringFromStringFindReplace(pkg.name, "/", "_") + "() {" +
@@ -89,7 +89,7 @@ func LangTestApp(
 						"\n    TestLib.run_testpackage_async(testpackage)" + lang.lineend +
 						"\n  }" +
 						"\n"
-				case "java", "kotlin":
+				case langjava, langkotlin:
 					tests += "" +
 						"\n  @Test" +
 						"\n  @DisplayName(\"" + pkg.name + "\")" +
@@ -106,8 +106,8 @@ func LangTestApp(
 	namespaceopen, namespaceclose := LangNamespaceFromPackage(lang, "AppTest")
 	writetestsuite := ""
 	testbasics := ""
-	switch lang.name {
-	case "csharp":
+	switch lang {
+	case langcsharp:
 		namespaceopen = "" +
 			"\n" +
 			"\nnamespace AppTest" + lang.lineend +
@@ -143,7 +143,7 @@ func LangTestApp(
 			"\n    TestLib.write_testpackagelist_async(context, testpackagelist)" + lang.lineend +
 			"\n  }" +
 			"\n"
-	case "java", "kotlin":
+	case langjava, langkotlin:
 		imports += "" +
 			"\nimport org.junit.jupiter.api.DisplayName" + lang.lineend +
 			"\nimport org.junit.jupiter.api.Test" + lang.lineend
@@ -438,13 +438,13 @@ func LangTestFromPackage(
 			"\n      " + LangTypeT(lang, testcaselisttype) + "," +
 			"\n      testcases" +
 			"\n    )"
-		switch lang.name {
-		case "csharp":
+		switch lang {
+		case langcsharp:
 			vararraylisttestcase := "[" +
 				"\n      " + strings.Join(testall, ",\n      ") +
 				"\n    ]"
 			vartestcases = "\n    object[] testcases = " + vararraylisttestcase + lang.lineend
-		case "java":
+		default:
 			vararraylisttestcase := LangPkgNameDot(lang, "vx/core") + "arraylist_from_array(" +
 				"\n      " + strings.Join(testall, ",\n      ") +
 				"\n    )"
@@ -501,10 +501,10 @@ func LangTestFromPackage(
 		"\n"
 	imports := LangImportsFromPackage(lang, pkg, pkgprefix, body, true)
 	namespace := ""
-	switch lang.name {
-	case "csharp":
+	switch lang {
+	case langcsharp:
 		namespace = "\nnamespace " + pkgpath + lang.lineend
-	case "java":
+	case langjava:
 		namespace = "\npackage " + pkgpath + lang.lineend
 	}
 	output := "" +

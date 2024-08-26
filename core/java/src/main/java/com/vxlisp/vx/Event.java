@@ -470,6 +470,10 @@ public final class Event {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Event.Type_eventlist) {
+          Event.Type_eventlist multi = (Event.Type_eventlist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_listevent());
         } else if (valsub instanceof Event.Type_event) {
           Event.Type_event allowsub = (Event.Type_event)valsub;
           ischanged = true;
@@ -477,10 +481,6 @@ public final class Event {
         } else if (valsub instanceof Event.Type_event) {
           ischanged = true;
           listval.add((Event.Type_event)valsub);
-        } else if (valsub instanceof Event.Type_eventlist) {
-          Event.Type_eventlist multi = (Event.Type_eventlist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_listevent());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {

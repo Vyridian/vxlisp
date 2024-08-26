@@ -87,10 +87,10 @@ public static class Html {
           } else if (valsub is string sval) {
             testkey = sval;
             istestkey = true;
-          } else if (valsub is Vx.Web.Html.Type_divchildlist) { // default property
+          } else if (valsub is Vx.Web.Html.Type_divchildlist) {
             ischanged = true;
             vx_p_nodes = (Vx.Web.Html.Type_divchildlist)valsub;
-          } else if (valsub is Vx.Web.Html.Type_divchild) { // default property
+          } else if (valsub is Vx.Web.Html.Type_divchild) {
             Vx.Web.Html.Type_divchild valdefault = (Vx.Web.Html.Type_divchild)valsub;
             Vx.Web.Html.Type_divchildlist vallist;
             vallist = vx_p_nodes;
@@ -737,10 +737,10 @@ public static class Html {
           } else if (valsub is string sval) {
             testkey = sval;
             istestkey = true;
-          } else if (valsub is Vx.Web.Html.Type_divchildlist) { // default property
+          } else if (valsub is Vx.Web.Html.Type_divchildlist) {
             ischanged = true;
             vx_p_nodes = (Vx.Web.Html.Type_divchildlist)valsub;
-          } else if (valsub is Vx.Web.Html.Type_divchild) { // default property
+          } else if (valsub is Vx.Web.Html.Type_divchild) {
             Vx.Web.Html.Type_divchild valdefault = (Vx.Web.Html.Type_divchild)valsub;
             Vx.Web.Html.Type_divchildlist vallist;
             vallist = vx_p_nodes;
@@ -1089,15 +1089,15 @@ public static class Html {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Web.Html.Type_divchildlist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listdivchild());
         } else if (valsub is Vx.Web.Html.Type_divchild allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Web.Html.Type_divchild) {
           ischanged = true;
           listval.Add((Vx.Web.Html.Type_divchild)valsub);
-        } else if (valsub is Vx.Web.Html.Type_divchildlist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listdivchild());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -1221,15 +1221,15 @@ public static class Html {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Web.Html.Type_divlist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listdiv());
         } else if (valsub is Vx.Web.Html.Type_div allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Web.Html.Type_div) {
           ischanged = true;
           listval.Add((Vx.Web.Html.Type_div)valsub);
-        } else if (valsub is Vx.Web.Html.Type_divlist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listdiv());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -1362,10 +1362,10 @@ public static class Html {
           } else if (valsub is string sval) {
             testkey = sval;
             istestkey = true;
-          } else if (valsub is Vx.Web.Html.Type_divchildlist) { // default property
+          } else if (valsub is Vx.Web.Html.Type_divchildlist) {
             ischanged = true;
             vx_p_nodes = (Vx.Web.Html.Type_divchildlist)valsub;
-          } else if (valsub is Vx.Web.Html.Type_divchild) { // default property
+          } else if (valsub is Vx.Web.Html.Type_divchild) {
             Vx.Web.Html.Type_divchild valdefault = (Vx.Web.Html.Type_divchild)valsub;
             Vx.Web.Html.Type_divchildlist vallist;
             vallist = vx_p_nodes;
@@ -1624,7 +1624,7 @@ public static class Html {
           } else if (valsub is string sval) {
             testkey = sval;
             istestkey = true;
-          } else if (valsub is Vx.Core.Type_string) { // default property
+          } else if (valsub is Vx.Core.Type_string) {
             ischanged = true;
             vx_p_text = (Vx.Core.Type_string)valsub;
           } else {
@@ -1987,7 +1987,7 @@ public static class Html {
           } else if (valsub is string sval) {
             testkey = sval;
             istestkey = true;
-          } else if (valsub is Vx.Core.Type_string) { // default property
+          } else if (valsub is Vx.Core.Type_string) {
             ischanged = true;
             vx_p_text = (Vx.Core.Type_string)valsub;
           } else {
@@ -2350,7 +2350,7 @@ public static class Html {
           } else if (valsub is string sval) {
             testkey = sval;
             istestkey = true;
-          } else if (valsub is Vx.Core.Type_string) { // default property
+          } else if (valsub is Vx.Core.Type_string) {
             ischanged = true;
             vx_p_text = (Vx.Core.Type_string)valsub;
           } else {
@@ -2633,10 +2633,10 @@ public static class Html {
           } else if (valsub is string sval) {
             testkey = sval;
             istestkey = true;
-          } else if (valsub is Vx.Web.Html.Type_headchildlist) { // default property
+          } else if (valsub is Vx.Web.Html.Type_headchildlist) {
             ischanged = true;
             vx_p_nodes = (Vx.Web.Html.Type_headchildlist)valsub;
-          } else if (valsub is Vx.Web.Html.Type_headchild) { // default property
+          } else if (valsub is Vx.Web.Html.Type_headchild) {
             Vx.Web.Html.Type_headchild valdefault = (Vx.Web.Html.Type_headchild)valsub;
             Vx.Web.Html.Type_headchildlist vallist;
             vallist = vx_p_nodes;
@@ -2882,15 +2882,15 @@ public static class Html {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Web.Html.Type_headchildlist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listheadchild());
         } else if (valsub is Vx.Web.Html.Type_headchild allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Web.Html.Type_headchild) {
           ischanged = true;
           listval.Add((Vx.Web.Html.Type_headchild)valsub);
-        } else if (valsub is Vx.Web.Html.Type_headchildlist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listheadchild());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -3385,7 +3385,7 @@ public static class Html {
           } else if (valsub is string sval) {
             testkey = sval;
             istestkey = true;
-          } else if (valsub is Vx.Core.Type_string) { // default property
+          } else if (valsub is Vx.Core.Type_string) {
             ischanged = true;
             vx_p_src = (Vx.Core.Type_string)valsub;
           } else {
@@ -4412,15 +4412,15 @@ public static class Html {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Web.Html.Type_nodelist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listnode());
         } else if (valsub is Vx.Web.Html.Type_node allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Web.Html.Type_node) {
           ischanged = true;
           listval.Add((Vx.Web.Html.Type_node)valsub);
-        } else if (valsub is Vx.Web.Html.Type_nodelist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listnode());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -4633,7 +4633,7 @@ public static class Html {
           } else if (valsub is string sval) {
             testkey = sval;
             istestkey = true;
-          } else if (valsub is Vx.Core.Type_string) { // default property
+          } else if (valsub is Vx.Core.Type_string) {
             ischanged = true;
             vx_p_text = (Vx.Core.Type_string)valsub;
           } else {
@@ -5346,15 +5346,15 @@ public static class Html {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Web.Html.Type_stylelist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_liststyle());
         } else if (valsub is Vx.Web.Html.Type_style allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Web.Html.Type_style) {
           ischanged = true;
           listval.Add((Vx.Web.Html.Type_style)valsub);
-        } else if (valsub is Vx.Web.Html.Type_stylelist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_liststyle());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -6577,10 +6577,10 @@ public static class Html {
           } else if (valsub is string sval) {
             testkey = sval;
             istestkey = true;
-          } else if (valsub is Vx.Web.Html.Type_trlist) { // default property
+          } else if (valsub is Vx.Web.Html.Type_trlist) {
             ischanged = true;
             vx_p_nodes = (Vx.Web.Html.Type_trlist)valsub;
-          } else if (valsub is Vx.Web.Html.Type_tr) { // default property
+          } else if (valsub is Vx.Web.Html.Type_tr) {
             Vx.Web.Html.Type_tr valdefault = (Vx.Web.Html.Type_tr)valsub;
             Vx.Web.Html.Type_trlist vallist;
             vallist = vx_p_nodes;
@@ -6942,10 +6942,10 @@ public static class Html {
           } else if (valsub is string sval) {
             testkey = sval;
             istestkey = true;
-          } else if (valsub is Vx.Web.Html.Type_divchildlist) { // default property
+          } else if (valsub is Vx.Web.Html.Type_divchildlist) {
             ischanged = true;
             vx_p_nodes = (Vx.Web.Html.Type_divchildlist)valsub;
-          } else if (valsub is Vx.Web.Html.Type_divchild) { // default property
+          } else if (valsub is Vx.Web.Html.Type_divchild) {
             Vx.Web.Html.Type_divchild valdefault = (Vx.Web.Html.Type_divchild)valsub;
             Vx.Web.Html.Type_divchildlist vallist;
             vallist = vx_p_nodes;
@@ -7218,15 +7218,15 @@ public static class Html {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Web.Html.Type_tdlist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listtd());
         } else if (valsub is Vx.Web.Html.Type_td allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Web.Html.Type_td) {
           ischanged = true;
           listval.Add((Vx.Web.Html.Type_td)valsub);
-        } else if (valsub is Vx.Web.Html.Type_tdlist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listtd());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -7439,10 +7439,10 @@ public static class Html {
           } else if (valsub is string sval) {
             testkey = sval;
             istestkey = true;
-          } else if (valsub is Vx.Web.Html.Type_trlist) { // default property
+          } else if (valsub is Vx.Web.Html.Type_trlist) {
             ischanged = true;
             vx_p_nodes = (Vx.Web.Html.Type_trlist)valsub;
-          } else if (valsub is Vx.Web.Html.Type_tr) { // default property
+          } else if (valsub is Vx.Web.Html.Type_tr) {
             Vx.Web.Html.Type_tr valdefault = (Vx.Web.Html.Type_tr)valsub;
             Vx.Web.Html.Type_trlist vallist;
             vallist = vx_p_nodes;
@@ -8158,10 +8158,10 @@ public static class Html {
           } else if (valsub is string sval) {
             testkey = sval;
             istestkey = true;
-          } else if (valsub is Vx.Web.Html.Type_tdlist) { // default property
+          } else if (valsub is Vx.Web.Html.Type_tdlist) {
             ischanged = true;
             vx_p_nodes = (Vx.Web.Html.Type_tdlist)valsub;
-          } else if (valsub is Vx.Web.Html.Type_td) { // default property
+          } else if (valsub is Vx.Web.Html.Type_td) {
             Vx.Web.Html.Type_td valdefault = (Vx.Web.Html.Type_td)valsub;
             Vx.Web.Html.Type_tdlist vallist;
             vallist = vx_p_nodes;
@@ -8434,15 +8434,15 @@ public static class Html {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Web.Html.Type_trlist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listtr());
         } else if (valsub is Vx.Web.Html.Type_tr allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Web.Html.Type_tr) {
           ischanged = true;
           listval.Add((Vx.Web.Html.Type_tr)valsub);
-        } else if (valsub is Vx.Web.Html.Type_trlist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listtr());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {

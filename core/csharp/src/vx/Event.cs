@@ -429,15 +429,15 @@ public static class Event {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Event.Type_eventlist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listevent());
         } else if (valsub is Vx.Event.Type_event allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Event.Type_event) {
           ischanged = true;
           listval.Add((Vx.Event.Type_event)valsub);
-        } else if (valsub is Vx.Event.Type_eventlist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listevent());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {

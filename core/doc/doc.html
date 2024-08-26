@@ -6345,10 +6345,11 @@
   :js
    &quot;vx_core.vx_new(type, values)&quot;
   :kotlin
-   &quot;val arrayany : Array&lt;vx_core.Type_any&gt; = vx_core.arrayany_from_anylist(values)
-    val arrayobj : Array&lt;Any&gt; = arrayany as (Array&lt;Any&gt;)
-    val anyvalue : vx_core.Type_any = type.vx_new(arrayobj)
-    val output : T = (anyvalue) as T&quot;)
+   &quot;val arrayany : Array&lt;vx_core.Type_any&gt; = vx_core.arrayany_from_anylist(
+      values
+    )
+    val anyvalue : vx_core.Type_any = type.vx_new(*arrayany)
+    val output : T = anyvalue as T&quot;)
  :doc &quot;Create a new Value of Type A&quot;
  :test (test true (new boolean true))
        (test 4 (new int 4))
@@ -22828,10 +22829,11 @@ improves readability.</div>
   :js
    &quot;vx_core.vx_new(type, values)&quot;
   :kotlin
-   &quot;val arrayany : Array&lt;vx_core.Type_any&gt; = vx_core.arrayany_from_anylist(values)
-    val arrayobj : Array&lt;Any&gt; = arrayany as (Array&lt;Any&gt;)
-    val anyvalue : vx_core.Type_any = type.vx_new(arrayobj)
-    val output : T = (anyvalue) as T&quot;)
+   &quot;val arrayany : Array&lt;vx_core.Type_any&gt; = vx_core.arrayany_from_anylist(
+      values
+    )
+    val anyvalue : vx_core.Type_any = type.vx_new(*arrayany)
+    val output : T = anyvalue as T&quot;)
  :doc &quot;Create a new Value of Type A&quot;
  :test (test true (new boolean true))
        (test 4 (new int 4))

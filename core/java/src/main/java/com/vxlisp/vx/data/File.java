@@ -521,6 +521,10 @@ public final class File {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof File.Type_filelist) {
+          File.Type_filelist multi = (File.Type_filelist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_listfile());
         } else if (valsub instanceof File.Type_file) {
           File.Type_file allowsub = (File.Type_file)valsub;
           ischanged = true;
@@ -528,10 +532,6 @@ public final class File {
         } else if (valsub instanceof File.Type_file) {
           ischanged = true;
           listval.add((File.Type_file)valsub);
-        } else if (valsub instanceof File.Type_filelist) {
-          File.Type_filelist multi = (File.Type_filelist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_listfile());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {

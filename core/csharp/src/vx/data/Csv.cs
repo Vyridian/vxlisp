@@ -463,15 +463,15 @@ public static class Csv {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Data.Csv.Type_csvrows multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_liststringlist());
         } else if (valsub is Vx.Core.Type_stringlist allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Core.Type_stringlist) {
           ischanged = true;
           listval.Add((Vx.Core.Type_stringlist)valsub);
-        } else if (valsub is Vx.Data.Csv.Type_csvrows multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_liststringlist());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {

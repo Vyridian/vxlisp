@@ -509,6 +509,10 @@ public final class Csv {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Csv.Type_csvrows) {
+          Csv.Type_csvrows multi = (Csv.Type_csvrows)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_liststringlist());
         } else if (valsub instanceof Core.Type_stringlist) {
           Core.Type_stringlist allowsub = (Core.Type_stringlist)valsub;
           ischanged = true;
@@ -516,10 +520,6 @@ public final class Csv {
         } else if (valsub instanceof Core.Type_stringlist) {
           ischanged = true;
           listval.add((Core.Type_stringlist)valsub);
-        } else if (valsub instanceof Csv.Type_csvrows) {
-          Csv.Type_csvrows multi = (Csv.Type_csvrows)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_liststringlist());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {

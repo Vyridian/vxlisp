@@ -273,15 +273,15 @@ public static class Table {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Data.Table.Type_celllist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listcell());
         } else if (valsub is Vx.Data.Table.Type_cell allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Data.Table.Type_cell) {
           ischanged = true;
           listval.Add((Vx.Data.Table.Type_cell)valsub);
-        } else if (valsub is Vx.Data.Table.Type_celllist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listcell());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -844,15 +844,15 @@ public static class Table {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Data.Table.Type_fieldlist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listfield());
         } else if (valsub is Vx.Data.Table.Type_field allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Data.Table.Type_field) {
           ischanged = true;
           listval.Add((Vx.Data.Table.Type_field)valsub);
-        } else if (valsub is Vx.Data.Table.Type_fieldlist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listfield());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -975,15 +975,15 @@ public static class Table {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Data.Table.Type_fieldmap multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listfield());
         } else if (valsub is Vx.Data.Table.Type_field allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Data.Table.Type_field) {
           ischanged = true;
           listval.Add((Vx.Data.Table.Type_field)valsub);
-        } else if (valsub is Vx.Data.Table.Type_fieldmap multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listfield());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {
@@ -1597,15 +1597,15 @@ public static class Table {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
         } else if (valsub is Vx.Core.Type_msg) {
           msgblock = Vx.Core.vx_copy(msgblock, valsub);
+        } else if (valsub is Vx.Data.Table.Type_rowlist multi) {
+          ischanged = true;
+          listval.AddRange(multi.vx_listrow());
         } else if (valsub is Vx.Data.Table.Type_row allowsub) {
           ischanged = true;
           listval.Add(allowsub);
         } else if (valsub is Vx.Data.Table.Type_row) {
           ischanged = true;
           listval.Add((Vx.Data.Table.Type_row)valsub);
-        } else if (valsub is Vx.Data.Table.Type_rowlist multi) {
-          ischanged = true;
-          listval.AddRange(multi.vx_listrow());
         } else if (valsub is List<Vx.Core.Type_any> listany) {
           foreach (Vx.Core.Type_any item in listany) {
             if (false) {

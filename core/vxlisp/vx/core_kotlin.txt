@@ -428,7 +428,7 @@
   fun <T : vx_core.Type_any> vx_copy(
     copyval : T,
     vararg vals : Any) : T {
-    val value : vx_core.Type_any = copyval.vx_copy(vals)
+    val value : vx_core.Type_any = copyval.vx_copy(*vals)
     val output : T = vx_core.f_any_from_any(copyval, value)
     return output
   }
@@ -669,15 +669,42 @@
     vararg values : Any) : Unit {
     for (value : Any in values) {
       var text : String = ""
-      if (value == null) {
-        text = "null"
-      } else if (value is vx_core.Type_string) {
+      if (value is vx_core.Type_string) {
         val valstring : vx_core.Type_string = value as vx_core.Type_string
         text = valstring.vx_string()
       } else if (value is vx_core.Type_any) {
         val valany : vx_core.Type_any = value as vx_core.Type_any
-        val valstring : vx_core.Type_string = vx_core.f_string_from_any(valany)
-        text = valstring.vx_string()
+        text = vx_core.vx_string_from_any(valany)
+      } else if (value is Array<*>) {
+        val items : Array<Any> = value as Array<Any>
+        text = "(array"
+        for (item : Any in items) {
+          if (item is vx_core.Type_string) {
+            val valstring : vx_core.Type_string = item as vx_core.Type_string
+            text += "\n " + valstring.vx_string()
+          } else if (item is vx_core.Type_any) {
+            val valany : vx_core.Type_any = item as vx_core.Type_any
+            text += "\n " + vx_core.vx_string_from_any(valany)
+          } else {
+            text += "\n " + item.toString()
+          }
+        }
+        text += "\n)"
+      } else if (value is List<*>) {
+        val items : List<Any> = value as List<Any>
+        text = "(list"
+        for (item : Any in items) {
+          if (item is vx_core.Type_string) {
+            val valstring : vx_core.Type_string = item as vx_core.Type_string
+            text += "\n " + valstring.vx_string()
+          } else if (item is vx_core.Type_any) {
+            val valany : vx_core.Type_any = item as vx_core.Type_any
+            text += "\n " + vx_core.vx_string_from_any(valany)
+          } else {
+            text += "\n " + item.toString()
+          }
+        }
+        text += "\n)"
       } else {
         text = value.toString()
       }
@@ -744,7 +771,7 @@
   fun <T : vx_core.Type_any> vx_new(
     generic_any_1 : T,
     vararg vals : Any) : T {
-    val value : vx_core.Type_any = generic_any_1.vx_new(vals)
+    val value : vx_core.Type_any = generic_any_1.vx_new(*vals)
     val output : T = vx_core.f_any_from_any(generic_any_1, value)
     return output
   }

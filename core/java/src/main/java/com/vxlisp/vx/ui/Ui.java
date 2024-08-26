@@ -1329,6 +1329,10 @@ public final class Ui {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Ui.Type_fontfacelist) {
+          Ui.Type_fontfacelist multi = (Ui.Type_fontfacelist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_listfontface());
         } else if (valsub instanceof Ui.Type_fontface) {
           Ui.Type_fontface allowsub = (Ui.Type_fontface)valsub;
           ischanged = true;
@@ -1336,10 +1340,6 @@ public final class Ui {
         } else if (valsub instanceof Ui.Type_fontface) {
           ischanged = true;
           listval.add((Ui.Type_fontface)valsub);
-        } else if (valsub instanceof Ui.Type_fontfacelist) {
-          Ui.Type_fontfacelist multi = (Ui.Type_fontfacelist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_listfontface());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
@@ -3247,6 +3247,10 @@ public final class Ui {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Ui.Type_layoutlist) {
+          Ui.Type_layoutlist multi = (Ui.Type_layoutlist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_listlayout());
         } else if (valsub instanceof Ui.Type_layout) {
           Ui.Type_layout allowsub = (Ui.Type_layout)valsub;
           ischanged = true;
@@ -3254,10 +3258,6 @@ public final class Ui {
         } else if (valsub instanceof Ui.Type_layout) {
           ischanged = true;
           listval.add((Ui.Type_layout)valsub);
-        } else if (valsub instanceof Ui.Type_layoutlist) {
-          Ui.Type_layoutlist multi = (Ui.Type_layoutlist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_listlayout());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
@@ -5299,6 +5299,10 @@ public final class Ui {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Ui.Type_stylelist) {
+          Ui.Type_stylelist multi = (Ui.Type_stylelist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_liststyle());
         } else if (valsub instanceof Ui.Type_style) {
           Ui.Type_style allowsub = (Ui.Type_style)valsub;
           ischanged = true;
@@ -5306,10 +5310,6 @@ public final class Ui {
         } else if (valsub instanceof Ui.Type_style) {
           ischanged = true;
           listval.add((Ui.Type_style)valsub);
-        } else if (valsub instanceof Ui.Type_stylelist) {
-          Ui.Type_stylelist multi = (Ui.Type_stylelist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_liststyle());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
@@ -6900,6 +6900,10 @@ public final class Ui {
           msgblock = Core.vx_copy(msgblock, valsub);
         } else if (valsub instanceof Core.Type_msg) {
           msgblock = Core.vx_copy(msgblock, valsub);
+        } else if (valsub instanceof Ui.Type_uilist) {
+          Ui.Type_uilist multi = (Ui.Type_uilist)valsub;
+          ischanged = true;
+          listval.addAll(multi.vx_listui());
         } else if (valsub instanceof Ui.Type_ui) {
           Ui.Type_ui allowsub = (Ui.Type_ui)valsub;
           ischanged = true;
@@ -6907,10 +6911,6 @@ public final class Ui {
         } else if (valsub instanceof Ui.Type_ui) {
           ischanged = true;
           listval.add((Ui.Type_ui)valsub);
-        } else if (valsub instanceof Ui.Type_uilist) {
-          Ui.Type_uilist multi = (Ui.Type_uilist)valsub;
-          ischanged = true;
-          listval.addAll(multi.vx_listui());
         } else if (valsub instanceof List<?>) {
           List<?> listunknown = (List<?>)valsub;
           for (Object item : listunknown) {
