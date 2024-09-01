@@ -22,11 +22,15 @@ public final class File {
         Core.Type_string valcontent = Core.vx_new_string(scontent);
         output = valcontent;
       } catch (Exception ex) {
-        Core.Type_msg msg = Core.vx_msg_from_exception("string-read<-file", ex);
+        Core.Type_msg msg = Core.vx_msg_from_exception(
+          "string-read<-file", ex
+        );
         output = Core.vx_copy(output, msg);
       }
     } else {
-      Core.Type_msg msg = Core.vx_msg_from_error("string-read<-file", ":filenotfound", file);
+      Core.Type_msg msg = Core.vx_msg_from_error(
+        "string-read<-file", ":filenotfound", file
+      );
       output = Core.vx_copy(output, msg);
     }
     return output;
@@ -822,12 +826,12 @@ public final class File {
    * @function boolean_write_from_file_any
    * Write any data structure as a file.
    * @param  {file} file
-   * @param  {any} val
+   * @param  {any} value
    * @return {boolean}
    * (func boolean-write<-file-any)
    */
   public interface Func_boolean_write_from_file_any extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_boolean vx_boolean_write_from_file_any(final Core.Type_context context, final File.Type_file file, final Core.Type_any val);
+    public Core.Type_boolean vx_boolean_write_from_file_any(final Core.Type_context context, final File.Type_file file, final Core.Type_any value);
   }
 
   public static class Class_boolean_write_from_file_any extends Core.Class_base implements Func_boolean_write_from_file_any {
@@ -891,14 +895,14 @@ public final class File {
       Core.Type_any output = Core.e_any;
       Core.Type_context context = Core.f_any_from_any(Core.t_context, arglist.vx_any(Core.vx_new_int(0)));
       File.Type_file file = Core.f_any_from_any(File.t_file, arglist.vx_any(Core.vx_new_int(0)));
-      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
-      output = File.f_boolean_write_from_file_any(context, file, val);
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(1)));
+      output = File.f_boolean_write_from_file_any(context, file, value);
       return output;
     }
 
     @Override
-    public Core.Type_boolean vx_boolean_write_from_file_any(final Core.Type_context context, final File.Type_file file, final Core.Type_any val) {
-      Core.Type_boolean output = File.f_boolean_write_from_file_any(context, file, val);
+    public Core.Type_boolean vx_boolean_write_from_file_any(final Core.Type_context context, final File.Type_file file, final Core.Type_any value) {
+      Core.Type_boolean output = File.f_boolean_write_from_file_any(context, file, value);
       return output;
     }
 
@@ -907,13 +911,13 @@ public final class File {
   public static final File.Func_boolean_write_from_file_any e_boolean_write_from_file_any = new File.Class_boolean_write_from_file_any();
   public static final File.Func_boolean_write_from_file_any t_boolean_write_from_file_any = new File.Class_boolean_write_from_file_any();
 
-  public static Core.Type_boolean f_boolean_write_from_file_any(final Core.Type_context context, final File.Type_file file, final Core.Type_any val) {
+  public static Core.Type_boolean f_boolean_write_from_file_any(final Core.Type_context context, final File.Type_file file, final Core.Type_any value) {
     Core.Type_boolean output = Core.e_boolean;
     output = File.f_boolean_write_from_file_string(
       context,
       file,
       Core.f_string_from_any(
-        val
+        value
       )
     );
     return output;

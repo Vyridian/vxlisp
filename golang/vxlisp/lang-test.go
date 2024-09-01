@@ -28,11 +28,7 @@ func LangTestApp(
 			MsgLog("Error! Context Not Found: (project (cmd :context " + command.context + "))")
 		}
 		if contextfunc != emptyfunc {
-			switch contextfunc.pkgname {
-			case "vx/test":
-			default:
-				imports += LangImport(lang, project, contextfunc.pkgname, imports)
-			}
+			imports += LangImport(lang, project, contextfunc.pkgname, imports)
 			if contextfunc.async {
 				contexttext += "" +
 					LangVarStaticFuture(
@@ -74,7 +70,7 @@ func LangTestApp(
 		}
 		if iscontinue {
 			if pkg.name != "" {
-				imports += LangImportTest(lang, project, pkg.name, imports)
+				imports += LangTestImport(lang, project, pkg.name, imports)
 				testpackage := "\n      " + testpackageprefix + LangPkgName(lang, pkg.name) + "Test.test_package(context)"
 				listtestpackage = append(listtestpackage, testpackage)
 				switch lang {
@@ -89,12 +85,21 @@ func LangTestApp(
 						"\n    TestLib.run_testpackage_async(testpackage)" + lang.lineend +
 						"\n  }" +
 						"\n"
-				case langjava, langkotlin:
+				case langjava:
 					tests += "" +
 						"\n  @Test" +
 						"\n  @DisplayName(\"" + pkg.name + "\")" +
 						"\n  void test_" + StringFromStringFindReplace(pkg.name, "/", "_") + "() {" +
 						"\n    com.vxlisp.vx.Test.Type_testpackage testpackage = " + LangPkgName(lang, pkg.name) + "Test.test_package(context)" + lang.lineend +
+						"\n    TestLib.run_testpackage_async(testpackage)" + lang.lineend +
+						"\n  }" +
+						"\n"
+				case langkotlin:
+					tests += "" +
+						"\n  @Test" +
+						"\n  @DisplayName(\"" + pkg.name + "\")" +
+						"\n  fun test_" + StringFromStringFindReplace(pkg.name, "/", "_") + "() : Unit {" +
+						"\n    val testpackage : vx_test.Type_testpackage = " + LangPkgName(lang, pkg.name) + "Test.test_package(context)" + lang.lineend +
 						"\n    TestLib.run_testpackage_async(testpackage)" + lang.lineend +
 						"\n  }" +
 						"\n"
@@ -143,7 +148,7 @@ func LangTestApp(
 			"\n    TestLib.write_testpackagelist_async(context, testpackagelist)" + lang.lineend +
 			"\n  }" +
 			"\n"
-	case langjava, langkotlin:
+	case langjava:
 		imports += "" +
 			"\nimport org.junit.jupiter.api.DisplayName" + lang.lineend +
 			"\nimport org.junit.jupiter.api.Test" + lang.lineend
@@ -157,7 +162,8 @@ func LangTestApp(
 			"\n    TestLib.test_pathfull_from_file()" + lang.lineend +
 			"\n    TestLib.test_read_file()" + lang.lineend +
 			"\n    TestLib.test_write_file()" + lang.lineend +
-			"\n  }"
+			"\n  }" +
+			"\n"
 		writetestsuite = "" +
 			"\n  @Test" +
 			"\n  @DisplayName(\"writetestsuite\")" +
@@ -167,6 +173,32 @@ func LangTestApp(
 			testpackages +
 			"\n    )" + lang.lineend +
 			"\n    TestLib.write_testpackagelist_async(context, testpackagelist)" + lang.lineend +
+			"\n  }"
+	case langkotlin:
+		imports += "" +
+			"\nimport org.junit.jupiter.api.DisplayName" +
+			"\nimport org.junit.jupiter.api.Test"
+		testbasics = "" +
+			"\n  @Test" +
+			"\n  fun test_basics() {" +
+			"\n    TestLib.test_helloworld()" +
+			"\n    TestLib.test_async_new_from_value()" +
+			"\n    TestLib.test_async_from_async_fn()" +
+			"\n    TestLib.test_list_from_list_async()" +
+			"\n    TestLib.test_pathfull_from_file()" +
+			"\n    TestLib.test_read_file()" +
+			"\n    TestLib.test_write_file()" +
+			"\n  }" +
+			"\n"
+		writetestsuite = "" +
+			"\n  @Test" +
+			"\n  @DisplayName(\"writetestsuite\")" +
+			"\n  fun test_writetestsuite() {" +
+			"\n    val testpackagelist : vx_test.Type_testpackagelist = " + LangPkgNameDot(lang, "vx/core") + "vx_new(" +
+			"\n      vx_test.t_testpackagelist," +
+			testpackages +
+			"\n    )" +
+			"\n    TestLib.write_testpackagelist_async(context, testpackagelist)" +
 			"\n  }"
 	}
 	output := "" +
@@ -206,7 +238,7 @@ func LangTestCase(
 			desctext := "" +
 				"\n        " + LangPkgNameDot(lang, "vx/core") + "vx_new(" +
 				"\n          " + LangTypeT(lang, testdescribetype) + "," +
-				"\n          \":describename\", \"" + LangTestFromValue(testvalue) + "\"," +
+				"\n          \":describename\", \"" + LangTestFromValue(lang, testvalue) + "\"," +
 				"\n          \":testresult\"," +
 				"\n            " + descvaluetext +
 				"\n        )"
@@ -287,7 +319,7 @@ func LangTestFromPackage(
 		typ := pkg.maptype[typid]
 		test, msgs := LangTestFromType(lang, typ)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
-		covertype = append(covertype, "      \":"+typid+"\", "+StringFromInt(len(typ.testvalues)))
+		covertype = append(covertype, "\":"+typid+"\", "+StringFromInt(len(typ.testvalues)))
 		if command.filter == "" {
 		} else if NameFromType(typ) != command.filter {
 			test = ""
@@ -313,7 +345,7 @@ func LangTestFromPackage(
 		cnst := pkg.mapconst[cnstid]
 		test, msgs := LangTestFromConst(lang, cnst)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
-		coverconst = append(coverconst, "      \":"+cnstid+"\", "+StringFromInt(len(cnst.listtestvalue)))
+		coverconst = append(coverconst, "\":"+cnstid+"\", "+StringFromInt(len(cnst.listtestvalue)))
 		if command.filter == "" {
 		} else if NameFromConst(cnst) != command.filter {
 			test = ""
@@ -342,7 +374,7 @@ func LangTestFromPackage(
 		for _, fnc := range fncs {
 			test, msgs := LangTestFromFunc(lang, fnc)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
-			coverfunc = append(coverfunc, "      \":"+fncid+LangIndexFromFunc(fnc)+"\", "+StringFromInt(len(fnc.listtestvalue)))
+			coverfunc = append(coverfunc, "\":"+fncid+LangIndexFromFunc(fnc)+"\", "+StringFromInt(len(fnc.listtestvalue)))
 			if command.filter == "" {
 			} else if NameFromFunc(fnc) != command.filter {
 				test = ""
@@ -402,9 +434,9 @@ func LangTestFromPackage(
 	} else {
 		scovertype = "" +
 			LangPkgNameDot(lang, "vx/core") + "vx_new(" +
-			"\n  " + LangPkgNameDot(lang, "vx/core") + "t_intmap," +
-			"\n  " + strings.Join(covertype, ",\n  ") +
-			"\n)"
+			"\n        " + LangPkgNameDot(lang, "vx/core") + "t_intmap," +
+			"\n        " + strings.Join(covertype, ",\n        ") +
+			"\n      )"
 	}
 	scoverconst := ""
 	if len(coverconst) == 0 {
@@ -412,9 +444,9 @@ func LangTestFromPackage(
 	} else {
 		scoverconst = "" +
 			LangPkgNameDot(lang, "vx/core") + "vx_new(" +
-			"\n  " + LangPkgNameDot(lang, "vx/core") + "t_intmap," +
-			"\n  " + strings.Join(coverconst, ",\n  ") +
-			"\n)"
+			"\n        " + LangPkgNameDot(lang, "vx/core") + "t_intmap," +
+			"\n        " + strings.Join(coverconst, ",\n        ") +
+			"\n      )"
 	}
 	scoverfunc := ""
 	if len(coverfunc) == 0 {
@@ -422,13 +454,10 @@ func LangTestFromPackage(
 	} else {
 		scoverfunc = "" +
 			LangPkgNameDot(lang, "vx/core") + "vx_new(" +
-			"\n  " + LangPkgNameDot(lang, "vx/core") + "t_intmap," +
-			"\n  " + strings.Join(coverfunc, ",\n  ") +
+			"\n        " + LangPkgNameDot(lang, "vx/core") + "t_intmap," +
+			"\n        " + strings.Join(coverfunc, ",\n        ") +
 			"\n      )"
 	}
-	//	vararraylisttestcase1 := "new ArrayList<>(Arrays.asList(" +
-	//		"\n      " + strings.Join(testall, ",\n      ") +
-	//		"\n    ))"
 	vartestcases := ""
 	varoutput := ""
 	if len(testall) == 0 {
@@ -452,73 +481,114 @@ func LangTestFromPackage(
 				LangVarCollection(lang, "testcases", rawlisttype, anytype, 2, vararraylisttestcase)
 		}
 	}
+	argcontext := NewArgContext()
+	listarg := NewListArg()
+	listarg = append(listarg, argcontext)
+	fnctestcases := NewFunc()
+	fnctestcases.name = "test_cases"
+	fnctestcases.vxtype = testcaselisttype
+	fnctestcases.listarg = listarg
+	testcases := "" +
+		LangFuncHeaderStatic(lang, "", fnctestcases, 1, 0,
+			vartestcases+
+				LangVar(lang, "output", testcaselisttype, 2, varoutput))
+	fnctestcoveragesummary := NewFunc()
+	fnctestcoveragesummary.name = "test_coveragesummary"
+	fnctestcoveragesummary.vxtype = testcoveragesummarytype
+	testcoveragesummary := "" +
+		LangFuncHeaderStatic(lang, "", fnctestcoveragesummary, 1, 0,
+			LangVar(lang, "output", testcoveragesummarytype, 2,
+				LangPkgNameDot(lang, "vx/core")+"vx_new("+
+					"\n      "+LangTypeT(lang, testcoveragesummarytype)+","+
+					"\n      \":testpkg\", \""+pkg.name+"\", "+
+					"\n      \":constnums\", "+LangTypeCoverageNumsValNew(lang, coverconstpct, coverconstcnt, coverconsttotal)+", "+
+					"\n      \":docnums\", "+LangTypeCoverageNumsValNew(lang, coverdocpct, coverdoccnt, coverdoctotal)+", "+
+					"\n      \":funcnums\", "+LangTypeCoverageNumsValNew(lang, coverfuncpct, coverfunccnt, coverfunctotal)+", "+
+					"\n      \":bigospacenums\", "+LangTypeCoverageNumsValNew(lang, coverbigospacepct, coverbigospacecnt, coverbigospacetotal)+", "+
+					"\n      \":bigotimenums\", "+LangTypeCoverageNumsValNew(lang, coverbigotimepct, coverbigotimecnt, coverbigotimetotal)+", "+
+					"\n      \":totalnums\", "+LangTypeCoverageNumsValNew(lang, coverpct, covercnt, covertotal)+", "+
+					"\n      \":typenums\", "+LangTypeCoverageNumsValNew(lang, covertypepct, covertypecnt, covertypetotal)+
+					"\n    )"))
+	fnctestcoveragedetail := NewFunc()
+	fnctestcoveragedetail.name = "test_coveragedetail"
+	fnctestcoveragedetail.vxtype = testcoveragedetailtype
+	testcoveragedetail := "" +
+		LangFuncHeaderStatic(lang, "", fnctestcoveragedetail, 1, 0,
+			LangVar(lang, "output", testcoveragedetailtype, 2,
+				LangPkgNameDot(lang, "vx/core")+"vx_new("+
+					"\n      "+LangTypeT(lang, testcoveragedetailtype)+","+
+					"\n      \":testpkg\", \""+pkg.name+"\","+
+					"\n      \":typemap\", "+scovertype+", "+
+					"\n      \":constmap\", "+scoverconst+", "+
+					"\n      \":funcmap\", "+scoverfunc+
+					"\n    )"))
+	fnctestpackage := NewFunc()
+	fnctestpackage.name = "test_package"
+	fnctestpackage.vxtype = testpackagetype
+	fnctestpackage.listarg = listarg
+	testpackage := "" +
+		LangFuncHeaderStatic(lang, "", fnctestpackage, 1, 0,
+			LangVar(lang, "testcaselist", testcaselisttype, 2, "test_cases(context)")+
+				LangVar(lang, "output", testpackagetype, 2,
+					LangPkgNameDot(lang, "vx/core")+"vx_new("+
+						"\n      "+LangTypeT(lang, testpackagetype)+","+
+						"\n      \":testpkg\", \""+pkg.name+"\", "+
+						"\n      \":caselist\", testcaselist,"+
+						"\n      \":coveragesummary\", test_coveragesummary(),"+
+						"\n      \":coveragedetail\", test_coveragedetail()"+
+						"\n    )"))
 	body := "" +
 		typetexts +
 		consttexts +
 		functexts +
-		"\n  public static " + LangTypeName(lang, testcaselisttype) + " test_cases(" + LangFinalArg(lang) + LangTypeName(lang, contexttype) + " context) {" +
-		vartestcases +
-		LangVar(lang, "output", testcaselisttype, 2, varoutput) +
-		"\n    return output" + lang.lineend +
-		"\n  }" +
-		"\n" +
-		"\n  public static " + LangTypeName(lang, testcoveragesummarytype) + " test_coveragesummary() {" +
-		"\n    return " + LangPkgNameDot(lang, "vx/core") + "vx_new(" +
-		"\n      " + LangTypeT(lang, testcoveragesummarytype) + "," +
-		"\n      \":testpkg\", \"" + pkg.name + "\", " +
-		"\n      \":constnums\", " + LangTypeCoverageNumsValNew(lang, coverconstpct, coverconstcnt, coverconsttotal) + ", " +
-		"\n      \":docnums\", " + LangTypeCoverageNumsValNew(lang, coverdocpct, coverdoccnt, coverdoctotal) + ", " +
-		"\n      \":funcnums\", " + LangTypeCoverageNumsValNew(lang, coverfuncpct, coverfunccnt, coverfunctotal) + ", " +
-		"\n      \":bigospacenums\", " + LangTypeCoverageNumsValNew(lang, coverbigospacepct, coverbigospacecnt, coverbigospacetotal) + ", " +
-		"\n      \":bigotimenums\", " + LangTypeCoverageNumsValNew(lang, coverbigotimepct, coverbigotimecnt, coverbigotimetotal) + ", " +
-		"\n      \":totalnums\", " + LangTypeCoverageNumsValNew(lang, coverpct, covercnt, covertotal) + ", " +
-		"\n      \":typenums\", " + LangTypeCoverageNumsValNew(lang, covertypepct, covertypecnt, covertypetotal) +
-		"\n    )" + lang.lineend +
-		"\n  }" +
-		"\n" +
-		"\n  public static " + LangTypeName(lang, testcoveragedetailtype) + " test_coveragedetail() {" +
-		"\n    return " + LangPkgNameDot(lang, "vx/core") + "vx_new(" +
-		LangTypeT(lang, testcoveragedetailtype) + ", " +
-		"\":testpkg\", \"" + pkg.name + "\", " +
-		"\":typemap\", " + scovertype + ", " +
-		"\":constmap\", " + scoverconst + ", " +
-		"\":funcmap\", " + scoverfunc +
-		")" + lang.lineend +
-		"\n  }" +
-		"\n" +
-		"\n  public static " + LangTypeName(lang, testpackagetype) + " test_package(" + LangFinalArg(lang) + LangTypeName(lang, contexttype) + " context) {" +
-		LangVar(lang, "testcaselist", testcaselisttype, 2, "test_cases(context)") +
-		LangVar(lang, "output", testpackagetype, 2,
-			LangPkgNameDot(lang, "vx/core")+"vx_new("+
-				"\n      "+LangTypeT(lang, testpackagetype)+","+
-				"\n      \":testpkg\", \""+pkg.name+"\", "+
-				"\n      \":caselist\", testcaselist,"+
-				"\n      \":coveragesummary\", test_coveragesummary(),"+
-				"\n      \":coveragedetail\", test_coveragedetail()"+
-				"\n    )") +
-		"\n    return output" + lang.lineend +
-		"\n  }" +
-		"\n"
+		testcases +
+		testcoveragesummary +
+		testcoveragedetail +
+		testpackage
 	imports := LangImportsFromPackage(lang, pkg, pkgprefix, body, true)
-	namespace := ""
+	namespaceopen := ""
+	packageopen := ""
+	packageclose := ""
+	namespaceclose := ""
 	switch lang {
 	case langcsharp:
-		namespace = "\nnamespace " + pkgpath + lang.lineend
+		namespaceopen = "" +
+			"\nnamespace " + pkgpath + lang.lineend +
+			"\n"
+		packageopen = "" +
+			"\npublic " + LangFinalClass(lang) + "class " + pkgname + "Test {" +
+			"\n"
+		packageclose = "\n}\n"
 	case langjava:
-		namespace = "\npackage " + pkgpath + lang.lineend
+		namespaceopen = "" +
+			"\npackage " + pkgpath + lang.lineend +
+			"\n"
+		packageopen = "" +
+			"\npublic " + LangFinalClass(lang) + "class " + pkgname + "Test {" +
+			"\n"
+		packageclose = "\n}\n"
+	case langkotlin:
+		namespaceopen =
+			"\npackage " + pkgpath + lang.lineend +
+				"\n"
+		packageopen = "" +
+			"\nobject " + pkgname + "Test {" +
+			"\n"
+		packageclose = "\n}\n"
 	}
 	output := "" +
-		namespace +
-		"\n" +
+		namespaceopen +
 		imports +
-		"\npublic " + LangFinalClass(lang) + "class " + pkgname + "Test {" +
-		"\n" +
+		packageopen +
 		body +
-		"\n}\n"
+		packageclose +
+		namespaceclose
 	return output, msgblock
 }
 
-func LangTestFromType(lang *vxlang, typ *vxtype) (string, *vxmsgblock) {
+func LangTestFromType(
+	lang *vxlang,
+	typ *vxtype) (string, *vxmsgblock) {
 	msgblock := NewMsgBlock("LangTestFromType")
 	testvalues := typ.testvalues
 	testpkg := typ.pkgname
@@ -526,13 +596,45 @@ func LangTestFromType(lang *vxlang, typ *vxtype) (string, *vxmsgblock) {
 	testcasename := "t_" + LangFromName(typ.alias)
 	fnc := emptyfunc
 	path := typ.pkgname + "/" + typ.name
-	output, msgs := LangTestCase(lang, testvalues, testpkg, testname, testcasename, fnc, path)
+	output, msgs := LangTestCase(
+		lang, testvalues, testpkg, testname, testcasename, fnc, path)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	return output, msgblock
 }
 
-func LangTestFromValue(value vxvalue) string {
+func LangTestFromValue(
+	lang *vxlang,
+	value vxvalue) string {
 	var output = ""
-	output = LangFromText(value.textblock.text)
+	output = LangFromText(lang, value.textblock.text)
+	return output
+}
+
+func LangTestImport(lang *vxlang, project *vxproject, pkgname string, imports string) string {
+	output := ""
+	importline := ""
+	switch lang {
+	case langcpp:
+		importline = "#include \"" + pkgname + "test.hpp\""
+	case langcsharp:
+		importline = "using Xunit" + lang.lineend
+	case langjava:
+		ipos := IntFromStringFindLast(pkgname, "/")
+		path := StringSubstring(pkgname, 0, ipos)
+		path = StringFromStringFindReplace(path, "/", ".")
+		name := StringSubstring(pkgname, ipos+1, len(pkgname))
+		name = StringUCaseFirst(name)
+		importname := project.javadomain + "." + path + "." + name + "Test"
+		importline = "import " + importname + lang.lineend
+	case langkotlin:
+		ipos := IntFromStringFindLast(pkgname, "/")
+		path := StringSubstring(pkgname, 0, ipos)
+		path = StringFromStringFindReplace(path, "/", ".")
+		importname := project.javadomain + "." + path + ".*"
+		importline = "import " + importname + lang.lineend
+	}
+	if !BooleanFromStringContains(imports, importline) {
+		output = importline + "\n"
+	}
 	return output
 }

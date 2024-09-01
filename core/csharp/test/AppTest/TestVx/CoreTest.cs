@@ -80,12 +80,12 @@ public class CoreTest {
           ":testresult",
             Vx.Test.f_test(
               context,
-              Vx.Core.t_decimal.vx_new_from_string("4.5"),
+              Vx.Core.vx_new_decimal("4.5"),
               Vx.Core.f_new(
                 Vx.Core.t_float,
                 Vx.Core.vx_new(
                   Vx.Core.t_anylist,
-                  Vx.Core.t_decimal.vx_new_from_string("4.5")
+                  Vx.Core.vx_new_decimal("4.5")
                 )
               )
             )
@@ -213,7 +213,7 @@ public class CoreTest {
             Vx.Test.f_test_false(
               context,
               Vx.Core.f_is_int(
-                Vx.Core.t_decimal.vx_new_from_string("5.5")
+                Vx.Core.vx_new_decimal("5.5")
               )
             )
         )
@@ -438,9 +438,9 @@ public class CoreTest {
           ":testresult",
             Vx.Test.f_test(
               context,
-              Vx.Core.t_decimal.vx_new_from_string("6.4"),
+              Vx.Core.vx_new_decimal("6.4"),
               Vx.Core.f_multiply_1(
-                Vx.Core.t_decimal.vx_new_from_string("3.2"),
+                Vx.Core.vx_new_decimal("3.2"),
                 Vx.Core.vx_new_int(2)
               )
             )
@@ -451,9 +451,9 @@ public class CoreTest {
           ":testresult",
             Vx.Test.f_test(
               context,
-              Vx.Core.t_decimal.vx_new_from_string("-10.2"),
+              Vx.Core.vx_new_decimal("-10.2"),
               Vx.Core.f_multiply_1(
-                Vx.Core.t_decimal.vx_new_from_string("5.1"),
+                Vx.Core.vx_new_decimal("5.1"),
                 Vx.Core.vx_new_int(-2)
               )
             )
@@ -2052,7 +2052,7 @@ public class CoreTest {
                 Vx.Core.t_float,
                 Vx.Core.vx_new(
                   Vx.Core.t_anylist,
-                  Vx.Core.t_decimal.vx_new_from_string("2.3")
+                  Vx.Core.vx_new_decimal("2.3")
                 )
               ),
               Vx.Core.f_float_from_string(
@@ -2458,7 +2458,7 @@ public class CoreTest {
             Vx.Test.f_test_true(
               context,
               Vx.Core.f_is_number(
-                Vx.Core.t_decimal.vx_new_from_string("5.5")
+                Vx.Core.vx_new_decimal("5.5")
               )
             )
         ),
@@ -3136,12 +3136,12 @@ public class CoreTest {
           ":testresult",
             Vx.Test.f_test(
               context,
-              Vx.Core.t_decimal.vx_new_from_string("5.4"),
+              Vx.Core.vx_new_decimal("5.4"),
               Vx.Core.f_new(
                 Vx.Core.t_float,
                 Vx.Core.vx_new(
                   Vx.Core.t_anylist,
-                  Vx.Core.t_decimal.vx_new_from_string("5.4")
+                  Vx.Core.vx_new_decimal("5.4")
                 )
               )
             )
@@ -3478,7 +3478,7 @@ public class CoreTest {
               context,
               Vx.Core.vx_new_string("5.4"),
               Vx.Core.f_string_from_any(
-                Vx.Core.t_decimal.vx_new_from_string("5.4")
+                Vx.Core.vx_new_decimal("5.4")
               )
             )
         ),
@@ -3853,7 +3853,7 @@ public class CoreTest {
   }
 
   public static Vx.Test.Type_testcoveragesummary test_coveragesummary() {
-    return Vx.Core.vx_new(
+    Vx.Test.Type_testcoveragesummary output = Vx.Core.vx_new(
       Vx.Test.t_testcoveragesummary,
       ":testpkg", "vx/core", 
       ":constnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 13, ":tests", 2, ":total", 15), 
@@ -3864,11 +3864,15 @@ public class CoreTest {
       ":totalnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 36, ":tests", 81, ":total", 225), 
       ":typenums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 6, ":tests", 5, ":total", 76)
     );
+    return output;
   }
 
   public static Vx.Test.Type_testcoveragedetail test_coveragedetail() {
-    return Vx.Core.vx_new(Vx.Test.t_testcoveragedetail, ":testpkg", "vx/core", ":typemap", Vx.Core.vx_new(
-  Vx.Core.t_intmap,
+    Vx.Test.Type_testcoveragedetail output = Vx.Core.vx_new(
+      Vx.Test.t_testcoveragedetail,
+      ":testpkg", "vx/core",
+      ":typemap", Vx.Core.vx_new(
+        Vx.Core.t_intmap,
         ":any", 0,
         ":any-async<-func", 0,
         ":any<-anylist", 0,
@@ -3945,8 +3949,9 @@ public class CoreTest {
         ":typemap", 0,
         ":user", 0,
         ":value", 0
-), ":constmap", Vx.Core.vx_new(
-  Vx.Core.t_intmap,
+      ), 
+      ":constmap", Vx.Core.vx_new(
+        Vx.Core.t_intmap,
         ":false", 1,
         ":global", 0,
         ":infinity", 0,
@@ -3962,8 +3967,9 @@ public class CoreTest {
         ":path-test-resources", 0,
         ":quote", 0,
         ":true", 1
-), ":funcmap", Vx.Core.vx_new(
-  Vx.Core.t_intmap,
+      ), 
+      ":funcmap", Vx.Core.vx_new(
+        Vx.Core.t_intmap,
         ":!", 2,
         ":!-empty", 0,
         ":!-empty_1", 0,
@@ -4130,7 +4136,9 @@ public class CoreTest {
         ":typename<-typedef", 0,
         ":typenames<-typelist", 0,
         ":user<-context", 0
-      ));
+      )
+    );
+    return output;
   }
 
   public static Vx.Test.Type_testpackage test_package(Vx.Core.Type_context context) {

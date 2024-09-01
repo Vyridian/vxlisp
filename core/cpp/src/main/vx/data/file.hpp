@@ -88,7 +88,7 @@ namespace vx_data_file {
   vx_core::Type_boolean f_boolean_write_from_file(vx_core::Type_context context, vx_data_file::Type_file file);
 
   // (func boolean-write<-file-any)
-  vx_core::Type_boolean f_boolean_write_from_file_any(vx_core::Type_context context, vx_data_file::Type_file file, vx_core::Type_any val);
+  vx_core::Type_boolean f_boolean_write_from_file_any(vx_core::Type_context context, vx_data_file::Type_file file, vx_core::Type_any value);
 
   // (func boolean-write<-file-string)
   vx_core::Type_boolean f_boolean_write_from_file_string(vx_core::Type_context context, vx_data_file::Type_file file, vx_core::Type_string text);

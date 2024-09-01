@@ -805,12 +805,12 @@ public static class File {
    * @function boolean_write_from_file_any
    * Write any data structure as a file.
    * @param  {file} file
-   * @param  {any} val
+   * @param  {any} value
    * @return {boolean}
    * (func boolean-write<-file-any)
    */
   public interface Func_boolean_write_from_file_any : Vx.Core.Type_func, Vx.Core.Type_replfunc {
-    public Vx.Core.Type_boolean vx_boolean_write_from_file_any(Vx.Core.Type_context context, Vx.Data.File.Type_file file, Vx.Core.Type_any val);
+    public Vx.Core.Type_boolean vx_boolean_write_from_file_any(Vx.Core.Type_context context, Vx.Data.File.Type_file file, Vx.Core.Type_any value);
   }
 
   public class Class_boolean_write_from_file_any : Vx.Core.Class_base, Func_boolean_write_from_file_any {
@@ -867,13 +867,13 @@ public static class File {
       Vx.Core.Type_any output = Vx.Core.e_any;
       Vx.Core.Type_context context = Vx.Core.f_any_from_any(Vx.Core.t_context, arglist.vx_any(Vx.Core.vx_new_int(0)));
       Vx.Data.File.Type_file file = Vx.Core.f_any_from_any(Vx.Data.File.t_file, arglist.vx_any(Vx.Core.vx_new_int(0)));
-      Vx.Core.Type_any val = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(1)));
-      output = Vx.Data.File.f_boolean_write_from_file_any(context, file, val);
+      Vx.Core.Type_any value = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(1)));
+      output = Vx.Data.File.f_boolean_write_from_file_any(context, file, value);
       return output;
     }
 
-    public Vx.Core.Type_boolean vx_boolean_write_from_file_any(Vx.Core.Type_context context, Vx.Data.File.Type_file file, Vx.Core.Type_any val) {
-      Vx.Core.Type_boolean output = Vx.Data.File.f_boolean_write_from_file_any(context, file, val);
+    public Vx.Core.Type_boolean vx_boolean_write_from_file_any(Vx.Core.Type_context context, Vx.Data.File.Type_file file, Vx.Core.Type_any value) {
+      Vx.Core.Type_boolean output = Vx.Data.File.f_boolean_write_from_file_any(context, file, value);
       return output;
     }
 
@@ -882,13 +882,13 @@ public static class File {
   public static Vx.Data.File.Func_boolean_write_from_file_any e_boolean_write_from_file_any = new Vx.Data.File.Class_boolean_write_from_file_any();
   public static Vx.Data.File.Func_boolean_write_from_file_any t_boolean_write_from_file_any = new Vx.Data.File.Class_boolean_write_from_file_any();
 
-  public static Vx.Core.Type_boolean f_boolean_write_from_file_any(Vx.Core.Type_context context, Vx.Data.File.Type_file file, Vx.Core.Type_any val) {
+  public static Vx.Core.Type_boolean f_boolean_write_from_file_any(Vx.Core.Type_context context, Vx.Data.File.Type_file file, Vx.Core.Type_any value) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
     output = Vx.Data.File.f_boolean_write_from_file_string(
       context,
       file,
       Vx.Core.f_string_from_any(
-        val
+        value
       )
     );
     return output;

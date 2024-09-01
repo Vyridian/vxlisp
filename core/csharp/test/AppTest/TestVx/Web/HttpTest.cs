@@ -9,7 +9,7 @@ public class HttpTest {
   }
 
   public static Vx.Test.Type_testcoveragesummary test_coveragesummary() {
-    return Vx.Core.vx_new(
+    Vx.Test.Type_testcoveragesummary output = Vx.Core.vx_new(
       Vx.Test.t_testcoveragesummary,
       ":testpkg", "vx/web/http", 
       ":constnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
@@ -20,14 +20,20 @@ public class HttpTest {
       ":totalnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 9), 
       ":typenums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 1)
     );
+    return output;
   }
 
   public static Vx.Test.Type_testcoveragedetail test_coveragedetail() {
-    return Vx.Core.vx_new(Vx.Test.t_testcoveragedetail, ":testpkg", "vx/web/http", ":typemap", Vx.Core.vx_new(
-  Vx.Core.t_intmap,
+    Vx.Test.Type_testcoveragedetail output = Vx.Core.vx_new(
+      Vx.Test.t_testcoveragedetail,
+      ":testpkg", "vx/web/http",
+      ":typemap", Vx.Core.vx_new(
+        Vx.Core.t_intmap,
         ":response", 0
-), ":constmap", Vx.Core.e_intmap, ":funcmap", Vx.Core.vx_new(
-  Vx.Core.t_intmap,
+      ), 
+      ":constmap", Vx.Core.e_intmap, 
+      ":funcmap", Vx.Core.vx_new(
+        Vx.Core.t_intmap,
         ":csv<-httpget", 0,
         ":json<-httpget", 0,
         ":response<-httpget", 0,
@@ -36,7 +42,9 @@ public class HttpTest {
         ":textblock<-httpget", 0,
         ":textblock<-response", 0,
         ":xml<-httpget", 0
-      ));
+      )
+    );
+    return output;
   }
 
   public static Vx.Test.Type_testpackage test_package(Vx.Core.Type_context context) {

@@ -55,7 +55,7 @@ func LangConst(
 	case "vx/core/string":
 		if BooleanFromStringStartsEnds(cnstval, "\"", "\"") {
 			cnstval = cnstval[1 : len(cnstval)-1]
-			cnstval = LangFromText(cnstval)
+			cnstval = LangFromText(lang, cnstval)
 			cnstval = "\"" + cnstval + "\""
 		}
 		const_new += "\n      outval.vxstring = " + cnstval + lang.lineend
@@ -191,6 +191,10 @@ func LangConstValFromConst(lang *vxlang, cnst *vxconst, project *vxproject) stri
 					case langjava:
 						if BooleanFromStringEnds(path, "/java") {
 							path = path[0 : len(path)-5]
+						}
+					case langkotlin:
+						if BooleanFromStringStarts(path, "app/") {
+							path = path[4:]
 						}
 					}
 					cnstval = "\"" + path + "/resources\""

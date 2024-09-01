@@ -370,21 +370,21 @@ namespace vx_collection_test {
             vx_core::vx_new_string("d")
           })
         ),
-        vx_core::t_any_from_any->vx_fn_new({}, [](vx_core::Type_any val) {
+        vx_core::t_any_from_any->vx_fn_new({}, [](vx_core::Type_any value) {
           vx_core::Type_any output_1 = 
             vx_core::f_if_2(
               vx_core::t_string,
               vx_core::vx_new(vx_core::t_thenelselist, {
                 vx_core::f_then(
-                  vx_core::t_boolean_from_func->vx_fn_new({val}, [val]() {
-                    vx_core::Type_boolean output_1 = vx_type::f_is_string(val);
+                  vx_core::t_boolean_from_func->vx_fn_new({value}, [value]() {
+                    vx_core::Type_boolean output_1 = vx_type::f_is_string(value);
                     return output_1;
                   }),
-                  vx_core::t_any_from_func->vx_fn_new({val}, [val]() {
+                  vx_core::t_any_from_func->vx_fn_new({value}, [value]() {
                     vx_core::Type_string output_1 = vx_core::f_new(
                       vx_core::t_string,
                       vx_core::vx_new(vx_core::t_anylist, {
-                        val,
+                        value,
                         vx_core::vx_new_string("1")
                       })
                     );
@@ -398,7 +398,7 @@ namespace vx_collection_test {
       )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (stringlist\n  \"a1\" \"b1\" \"c1\" \"d1\")\n (list<-list-filter : stringlist\n  (list\n   \"a\" 4 \"b\" (list) \"c\" (map) \"d\")\n  (fn : string\n   [val : any]\n   (if\n    (then\n     (is-string val)\n     (string val \"1\"))))))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (stringlist\n  \"a1\" \"b1\" \"c1\" \"d1\")\n (list<-list-filter : stringlist\n  (list\n   \"a\" 4 \"b\" (list) \"c\" (map) \"d\")\n  (fn : string\n   [value : any]\n   (if\n    (then\n     (is-string value)\n     (string value \"1\"))))))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/collection"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });

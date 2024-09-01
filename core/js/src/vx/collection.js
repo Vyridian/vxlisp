@@ -424,7 +424,7 @@ export default class vx_collection {
   /**
    * @function is_list
    * Returns true if the given value is a list.
-   * @param  {any} val Any value
+   * @param  {any} value Any value
    * @return {boolean}
    */
   static t_is_list = {
@@ -435,11 +435,11 @@ export default class vx_collection {
   }
 
   // (func is-list)
-  static f_is_list(val) {
+  static f_is_list(value) {
     let output = vx_core.e_boolean
     output = vx_core.f_eq(
       ":list",
-      vx_core.f_extends_from_any(val)
+      vx_core.f_extends_from_any(value)
     )
     return output
   }
@@ -447,7 +447,7 @@ export default class vx_collection {
   /**
    * @function is_map
    * Returns true if the given value is a map.
-   * @param  {any} val Any value
+   * @param  {any} value Any value
    * @return {boolean}
    */
   static t_is_map = {
@@ -458,11 +458,11 @@ export default class vx_collection {
   }
 
   // (func is-map)
-  static f_is_map(val) {
+  static f_is_map(value) {
     let output = vx_core.e_boolean
     output = vx_core.f_eq(
       ":map",
-      vx_core.f_extends_from_any(val)
+      vx_core.f_extends_from_any(value)
     )
     return output
   }
@@ -474,12 +474,12 @@ export default class vx_collection {
    * output : list-1 := (empty list-1)
    * (if start <= end
    *  (for i=start to end
-   *   val : any-1 := (fn-loop i)
-   *   output += val)
+   *   value : any-1 := (fn-loop i)
+   *   output += value)
    *  (else
    *   (for i=start to end; i--
-   *    val : any-1 := (fn-loop i)
-   *    output += val)
+   *    value : any-1 := (fn-loop i)
+   *    output += value)
    *  ))
    * @param  {typemap} generic
    * @param  {int} start
@@ -626,11 +626,11 @@ export default class vx_collection {
     output = vx_collection.f_list_from_list_filter(
       {"any-1": vx_core.t_any, "list-1": generic_list_1},
       vallist,
-      vx_core.f_new(vx_core.t_any_from_any, (val) => 
+      vx_core.f_new(vx_core.t_any_from_any, (value) => 
         vx_core.f_if(
           {"any-1": vx_core.t_any},
-          vx_type.f_is_type_from_any_typelist(val, filtertypes),
-          val
+          vx_type.f_is_type_from_any_typelist(value, filtertypes),
+          value
         ))
     )
     return output

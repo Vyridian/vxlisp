@@ -366,10 +366,10 @@ namespace vx_collection {
   vx_core::Type_int f_int_from_stringlist_find(vx_core::Type_stringlist stringlist, vx_core::Type_string find);
 
   // (func is-list)
-  vx_core::Type_boolean f_is_list(vx_core::Type_any val);
+  vx_core::Type_boolean f_is_list(vx_core::Type_any value);
 
   // (func is-map)
-  vx_core::Type_boolean f_is_map(vx_core::Type_any val);
+  vx_core::Type_boolean f_is_map(vx_core::Type_any value);
 
   // (func any<-map-pos)
   class Abstract_any_from_map_pos : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
@@ -831,12 +831,12 @@ namespace vx_collection {
     output = vx_collection::f_list_from_list_filter(
       generic_list_1,
       vallist,
-      vx_core::t_any_from_any->vx_fn_new({filtertypes}, [filtertypes](vx_core::Type_any val) {
+      vx_core::t_any_from_any->vx_fn_new({filtertypes}, [filtertypes](vx_core::Type_any value) {
         vx_core::Type_any output_1 = 
           vx_core::f_if(
             vx_core::t_any,
-            vx_type::f_is_type_from_any_typelist(val, filtertypes),
-            val
+            vx_type::f_is_type_from_any_typelist(value, filtertypes),
+            value
           );
         return output_1;
       })

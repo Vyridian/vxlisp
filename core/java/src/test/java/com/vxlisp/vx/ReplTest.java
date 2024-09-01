@@ -760,7 +760,7 @@ public final class ReplTest {
                 Core.vx_new(
                   Core.t_anylist,
                   Core.vx_new_string(":value"),
-                  Core.t_decimal.vx_new_from_string("2.3")
+                  Core.vx_new_decimal("2.3")
                 )
               ),
               Repl.f_repl_from_string_argmap(
@@ -1829,7 +1829,7 @@ public final class ReplTest {
   }
 
   public static Test.Type_testcoveragesummary test_coveragesummary() {
-    return Core.vx_new(
+    Test.Type_testcoveragesummary output = Core.vx_new(
       Test.t_testcoveragesummary,
       ":testpkg", "vx/repl", 
       ":constnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 3), 
@@ -1840,22 +1840,28 @@ public final class ReplTest {
       ":totalnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 46, ":tests", 13, ":total", 28), 
       ":typenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 4)
     );
+    return output;
   }
 
   public static Test.Type_testcoveragedetail test_coveragedetail() {
-    return Core.vx_new(Test.t_testcoveragedetail, ":testpkg", "vx/repl", ":typemap", Core.vx_new(
-  Core.t_intmap,
+    Test.Type_testcoveragedetail output = Core.vx_new(
+      Test.t_testcoveragedetail,
+      ":testpkg", "vx/repl",
+      ":typemap", Core.vx_new(
+        Core.t_intmap,
         ":liblist", 0,
         ":repl", 0,
         ":replarglist", 0,
         ":repllist", 0
-), ":constmap", Core.vx_new(
-  Core.t_intmap,
+      ), 
+      ":constmap", Core.vx_new(
+        Core.t_intmap,
         ":delimvxlisp", 0,
         ":delimvxlispbracket", 0,
         ":delimvxlispparen", 0
-), ":funcmap", Core.vx_new(
-  Core.t_intmap,
+      ), 
+      ":funcmap", Core.vx_new(
+        Core.t_intmap,
         ":any-repl<-functype-args", 0,
         ":any<-liblist-string", 0,
         ":any<-macro", 1,
@@ -1877,7 +1883,9 @@ public final class ReplTest {
         ":repllist<-textblocklist-argmap", 0,
         ":textblock<-script", 2,
         ":typefunc<-string", 2
-      ));
+      )
+    );
+    return output;
   }
 
   public static Test.Type_testpackage test_package(final Core.Type_context context) {

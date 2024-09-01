@@ -10826,14 +10826,14 @@ public static class Html {
 
   /**
    * @function string_from_propname_val
-   * Returns ' key=\"val\"' if val is not blank.
+   * Returns ' key=\"value\"' if value is not blank.
    * @param  {string} key
-   * @param  {string} val
+   * @param  {string} value
    * @return {string}
    * (func string<-propname-val)
    */
   public interface Func_string_from_propname_val : Vx.Core.Type_func, Vx.Core.Type_replfunc {
-    public Vx.Core.Type_string vx_string_from_propname_val(Vx.Core.Type_string key, Vx.Core.Type_string val);
+    public Vx.Core.Type_string vx_string_from_propname_val(Vx.Core.Type_string key, Vx.Core.Type_string value);
   }
 
   public class Class_string_from_propname_val : Vx.Core.Class_base, Func_string_from_propname_val {
@@ -10889,13 +10889,13 @@ public static class Html {
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       Vx.Core.Type_string key = Vx.Core.f_any_from_any(Vx.Core.t_string, arglist.vx_any(Vx.Core.vx_new_int(0)));
-      Vx.Core.Type_string val = Vx.Core.f_any_from_any(Vx.Core.t_string, arglist.vx_any(Vx.Core.vx_new_int(1)));
-      output = Vx.Web.Html.f_string_from_propname_val(key, val);
+      Vx.Core.Type_string value = Vx.Core.f_any_from_any(Vx.Core.t_string, arglist.vx_any(Vx.Core.vx_new_int(1)));
+      output = Vx.Web.Html.f_string_from_propname_val(key, value);
       return output;
     }
 
-    public Vx.Core.Type_string vx_string_from_propname_val(Vx.Core.Type_string key, Vx.Core.Type_string val) {
-      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_propname_val(key, val);
+    public Vx.Core.Type_string vx_string_from_propname_val(Vx.Core.Type_string key, Vx.Core.Type_string value) {
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_propname_val(key, value);
       return output;
     }
 
@@ -10904,12 +10904,12 @@ public static class Html {
   public static Vx.Web.Html.Func_string_from_propname_val e_string_from_propname_val = new Vx.Web.Html.Class_string_from_propname_val();
   public static Vx.Web.Html.Func_string_from_propname_val t_string_from_propname_val = new Vx.Web.Html.Class_string_from_propname_val();
 
-  public static Vx.Core.Type_string f_string_from_propname_val(Vx.Core.Type_string key, Vx.Core.Type_string val) {
+  public static Vx.Core.Type_string f_string_from_propname_val(Vx.Core.Type_string key, Vx.Core.Type_string value) {
     Vx.Core.Type_string output = Vx.Core.e_string;
     output = Vx.Core.f_if(
       Vx.Core.t_string,
       Vx.Core.f_notempty(
-        val
+        value
       ),
       Vx.Core.f_new(
         Vx.Core.t_string,
@@ -10919,7 +10919,7 @@ public static class Html {
           key,
           Vx.Core.vx_new_string("="),
           Vx.Core.c_quote,
-          val,
+          value,
           Vx.Core.c_quote
         )
       )
@@ -11807,7 +11807,7 @@ public static class Html {
 
   /**
    * @function string_from_stylepropmap_indent
-   * Returns indent'key: val;' for each prop.
+   * Returns indent'key: value;' for each prop.
    * @param  {propmap} propmap
    * @param  {int} indent
    * @return {string}
@@ -11896,9 +11896,9 @@ public static class Html {
         Vx.Core.Type_stringlist sprops = Vx.Core.f_list_from_map_1(
           Vx.Core.t_stringlist,
           propmap,
-          Vx.Core.t_any_from_key_value.vx_fn_new((key_any, val_any) => {
+          Vx.Core.t_any_from_key_value.vx_fn_new((key_any, value_any) => {
             Vx.Core.Type_string key = Vx.Core.f_any_from_any(Vx.Core.t_string, key_any);
-            Vx.Core.Type_string val = Vx.Core.f_any_from_any(Vx.Core.t_string, val_any);
+            Vx.Core.Type_string value = Vx.Core.f_any_from_any(Vx.Core.t_string, value_any);
             Vx.Core.Type_any output_2 = Vx.Core.f_new(
               Vx.Core.t_string,
               Vx.Core.vx_new(
@@ -11906,7 +11906,7 @@ public static class Html {
                 sindent,
                 key,
                 Vx.Core.vx_new_string(": "),
-                val,
+                value,
                 Vx.Core.vx_new_string(";")
               )
             );

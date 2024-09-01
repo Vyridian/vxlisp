@@ -1065,9 +1065,9 @@ export default class vx_web_html {
 
   /**
    * @function string_from_propname_val
-   * Returns ' key=\"val\"' if val is not blank.
+   * Returns ' key=\"value\"' if value is not blank.
    * @param  {string} key
-   * @param  {string} val
+   * @param  {string} value
    * @return {string}
    */
   static t_string_from_propname_val = {
@@ -1078,18 +1078,18 @@ export default class vx_web_html {
   }
 
   // (func string<-propname-val)
-  static f_string_from_propname_val(key, val) {
+  static f_string_from_propname_val(key, value) {
     let output = vx_core.e_string
     output = vx_core.f_if(
       {"any-1": vx_core.t_string},
-      vx_core.f_notempty(val),
+      vx_core.f_notempty(value),
       vx_core.f_new(
         vx_core.t_string,
         " ",
         key,
         "=",
         vx_core.c_quote,
-        val,
+        value,
         vx_core.c_quote
       )
     )
@@ -1372,7 +1372,7 @@ export default class vx_web_html {
 
   /**
    * @function string_from_stylepropmap_indent
-   * Returns indent'key: val;' for each prop.
+   * Returns indent'key: value;' for each prop.
    * @param  {propmap} propmap
    * @param  {int} indent
    * @return {string}
@@ -1395,13 +1395,13 @@ export default class vx_web_html {
         const sprops = vx_core.f_list_from_map_1(
           {"any-1": vx_core.t_string, "any-2": vx_core.t_string, "list-1": vx_core.t_stringlist, "map-2": vx_web_html.t_propmap},
           propmap,
-          vx_core.f_new(vx_core.t_any_from_key_value, ([key, val]) => 
+          vx_core.f_new(vx_core.t_any_from_key_value, ([key, value]) => 
             vx_core.f_new(
               vx_core.t_string,
               sindent,
               key,
               ": ",
-              val,
+              value,
               ";"
             ))
         )

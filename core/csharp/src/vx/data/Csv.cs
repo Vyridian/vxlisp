@@ -1258,12 +1258,12 @@ public static class Csv {
         Vx.Core.Type_any output_1 = Vx.Core.f_map_from_map_1(
           Vx.Core.t_stringmap,
           rowmap,
-          Vx.Core.t_any_from_key_value.vx_fn_new((key_any, val_any) => {
+          Vx.Core.t_any_from_key_value.vx_fn_new((key_any, value_any) => {
             Vx.Core.Type_string key = Vx.Core.f_any_from_any(Vx.Core.t_string, key_any);
-            Vx.Core.Type_stringlist val = Vx.Core.f_any_from_any(Vx.Core.t_stringlist, val_any);
+            Vx.Core.Type_stringlist value = Vx.Core.f_any_from_any(Vx.Core.t_stringlist, value_any);
             Vx.Core.Type_any output_2 = Vx.Core.f_any_from_list(
               Vx.Core.t_string,
-              val,
+              value,
               Vx.Core.vx_new_int(2)
             );
             return output_2;

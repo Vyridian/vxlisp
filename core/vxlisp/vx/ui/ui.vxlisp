@@ -1312,10 +1312,10 @@
  (map<-map : uimap
   uimap
   (fn : ui
-   [key : string
-    val : ui]
+   [key   : string
+    value : ui]
    (ui-layout<-ui-orig-parent
-    val
+    value
     (empty ui)
     parent)))
  :sideeffects "Alters User Interface"

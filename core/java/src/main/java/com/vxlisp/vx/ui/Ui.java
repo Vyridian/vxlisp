@@ -16974,11 +16974,11 @@ public final class Ui {
     output = Core.f_map_from_map_1(
       Ui.t_uimap,
       uimap,
-      Core.t_any_from_key_value.vx_fn_new((key_any, val_any) -> {
+      Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
         Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
-        Ui.Type_ui val = Core.f_any_from_any(Ui.t_ui, val_any);
+        Ui.Type_ui value = Core.f_any_from_any(Ui.t_ui, value_any);
         Core.Type_any output_1 = Ui.f_ui_layout_from_ui_orig_parent(
-          val,
+          value,
           Core.f_empty(
             Ui.t_ui
           ),

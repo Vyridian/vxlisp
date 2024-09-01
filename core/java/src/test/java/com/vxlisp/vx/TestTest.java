@@ -123,7 +123,7 @@ public final class TestTest {
   }
 
   public static Test.Type_testcoveragesummary test_coveragesummary() {
-    return Core.vx_new(
+    Test.Type_testcoveragesummary output = Core.vx_new(
       Test.t_testcoveragesummary,
       ":testpkg", "vx/test", 
       ":constnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 1), 
@@ -134,11 +134,15 @@ public final class TestTest {
       ":totalnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 7, ":tests", 3, ":total", 40), 
       ":typenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 11)
     );
+    return output;
   }
 
   public static Test.Type_testcoveragedetail test_coveragedetail() {
-    return Core.vx_new(Test.t_testcoveragedetail, ":testpkg", "vx/test", ":typemap", Core.vx_new(
-  Core.t_intmap,
+    Test.Type_testcoveragedetail output = Core.vx_new(
+      Test.t_testcoveragedetail,
+      ":testpkg", "vx/test",
+      ":typemap", Core.vx_new(
+        Core.t_intmap,
         ":testcase", 0,
         ":testcaselist", 0,
         ":testcoveragedetail", 0,
@@ -150,11 +154,13 @@ public final class TestTest {
         ":testpackagelist", 0,
         ":testresult", 0,
         ":testresultlist", 0
-), ":constmap", Core.vx_new(
-  Core.t_intmap,
+      ), 
+      ":constmap", Core.vx_new(
+        Core.t_intmap,
         ":stylesheet-test", 0
-), ":funcmap", Core.vx_new(
-  Core.t_intmap,
+      ), 
+      ":funcmap", Core.vx_new(
+        Core.t_intmap,
         ":context-test", 0,
         ":div<-testcaselist", 0,
         ":div<-testpackage", 0,
@@ -189,7 +195,9 @@ public final class TestTest {
         ":tr<-testdescribe-casename", 0,
         ":trlist<-testcase", 0,
         ":trlist<-testcaselist", 0
-      ));
+      )
+    );
+    return output;
   }
 
   public static Test.Type_testpackage test_package(final Core.Type_context context) {

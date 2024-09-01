@@ -312,7 +312,7 @@ public class CollectionTest {
         Vx.Test.t_testdescribelist,
         Vx.Core.vx_new(
           Vx.Test.t_testdescribe,
-          ":describename", "(test\n (stringlist\n  \"a1\" \"b1\" \"c1\" \"d1\")\n (list<-list-filter : stringlist\n  (list\n   \"a\" 4 \"b\" (list) \"c\" (map) \"d\")\n  (fn : string\n   [val : any]\n   (if\n    (then\n     (is-string val)\n     (string val \"1\"))))))",
+          ":describename", "(test\n (stringlist\n  \"a1\" \"b1\" \"c1\" \"d1\")\n (list<-list-filter : stringlist\n  (list\n   \"a\" 4 \"b\" (list) \"c\" (map) \"d\")\n  (fn : string\n   [value : any]\n   (if\n    (then\n     (is-string value)\n     (string value \"1\"))))))",
           ":testresult",
             Vx.Test.f_test(
               context,
@@ -345,8 +345,8 @@ public class CollectionTest {
                     Vx.Core.vx_new_string("d")
                   )
                 ),
-                Vx.Core.t_any_from_any.vx_fn_new((val_any) => {
-                  Vx.Core.Type_any val = Vx.Core.f_any_from_any(Vx.Core.t_any, val_any);
+                Vx.Core.t_any_from_any.vx_fn_new((value_any) => {
+                  Vx.Core.Type_any value = Vx.Core.f_any_from_any(Vx.Core.t_any, value_any);
                   Vx.Core.Type_any output_1 = Vx.Core.f_if_2(
                     Vx.Core.t_string,
                     Vx.Core.vx_new(
@@ -354,7 +354,7 @@ public class CollectionTest {
                       Vx.Core.f_then(
                         Vx.Core.t_boolean_from_func.vx_fn_new(() => {
                           Vx.Core.Type_any output_2 = Vx.Type.f_is_string(
-                            val
+                            value
                           );
                           return output_2;
                         }),
@@ -363,7 +363,7 @@ public class CollectionTest {
                             Vx.Core.t_string,
                             Vx.Core.vx_new(
                               Vx.Core.t_anylist,
-                              val,
+                              value,
                               Vx.Core.vx_new_string("1")
                             )
                           );
@@ -417,7 +417,7 @@ public class CollectionTest {
                     Vx.Core.vx_new_int(1),
                     Vx.Core.vx_new_string("b"),
                     Vx.Core.vx_new_string("c"),
-                    Vx.Core.t_decimal.vx_new_from_string("4.5")
+                    Vx.Core.vx_new_decimal("4.5")
                   )
                 ),
                 Vx.Core.vx_new(
@@ -752,7 +752,7 @@ public class CollectionTest {
   }
 
   public static Vx.Test.Type_testcoveragesummary test_coveragesummary() {
-    return Vx.Core.vx_new(
+    Vx.Test.Type_testcoveragesummary output = Vx.Core.vx_new(
       Vx.Test.t_testcoveragesummary,
       ":testpkg", "vx/collection", 
       ":constnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
@@ -763,11 +763,17 @@ public class CollectionTest {
       ":totalnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 69, ":tests", 16, ":total", 23), 
       ":typenums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0)
     );
+    return output;
   }
 
   public static Vx.Test.Type_testcoveragedetail test_coveragedetail() {
-    return Vx.Core.vx_new(Vx.Test.t_testcoveragedetail, ":testpkg", "vx/collection", ":typemap", Vx.Core.e_intmap, ":constmap", Vx.Core.e_intmap, ":funcmap", Vx.Core.vx_new(
-  Vx.Core.t_intmap,
+    Vx.Test.Type_testcoveragedetail output = Vx.Core.vx_new(
+      Vx.Test.t_testcoveragedetail,
+      ":testpkg", "vx/collection",
+      ":typemap", Vx.Core.e_intmap, 
+      ":constmap", Vx.Core.e_intmap, 
+      ":funcmap", Vx.Core.vx_new(
+        Vx.Core.t_intmap,
         ":any<-for-until-loop", 1,
         ":any<-for-until-loop-max", 0,
         ":any<-for-while-loop", 1,
@@ -791,7 +797,9 @@ public class CollectionTest {
         ":map<-map-keys", 1,
         ":map<-map-start", 1,
         ":map<-map-start-end", 1
-      ));
+      )
+    );
+    return output;
   }
 
   public static Vx.Test.Type_testpackage test_package(Vx.Core.Type_context context) {

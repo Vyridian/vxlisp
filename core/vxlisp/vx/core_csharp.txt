@@ -280,15 +280,16 @@
     Core.Type_list list,
     Func<Vx.Core.Type_any, T> fn_any)
     where T : Vx.Core.Type_any {
-				T output = Vx.Core.f_empty(generic_any_1);
-				List<Vx.Core.Type_any> listany = list.vx_list();
-				foreach (Vx.Core.Type_any any in listany) {
-				  T val = fn_any(any);
-				  if (Vx.Core.f_notempty_1(val).vx_boolean()) {
-				    output = val;
-				    break;
-				  }
-				}
+    T empty = Vx.Core.f_empty(generic_any_1);
+    T output = empty;
+    List<Vx.Core.Type_any> listany = list.vx_list();
+    foreach (Vx.Core.Type_any any in listany) {
+      T value = fn_any(any);
+      if (!value.Equals(empty)) {
+        output = value;
+        break;
+      }
+    }
     return output;
   }
 
@@ -945,6 +946,18 @@
     return output;
   }
 
+  public static Type_decimal vx_new_decimal(string text) {
+    Vx.Core.Type_decimal output;
+    if (((text == "0") || (text == "0.0")) && Vx.Core.e_decimal != null) {
+      output = Vx.Core.e_decimal;
+    } else {
+      Vx.Core.Class_decimal work = new Vx.Core.Class_decimal();
+      work.vxdecimal = text;
+      output = work;
+    }
+    return output;
+  }
+
   public static Type_float vx_new_float(float fval) {
     Class_float output = new Vx.Core.Class_float();
     output.vxfloat = fval;
@@ -1218,7 +1231,7 @@
 
   public static T vx_switch<T, U>(
     T generic_any_1,
-    U val,
+    U value,
     Vx.Core.Type_thenelselist thenelselist)
     where T : Vx.Core.Type_any
     where U : Vx.Core.Type_any {
@@ -1229,15 +1242,15 @@
       Vx.Core.Type_string code = thenelse.code();
       switch (code.vx_string()) {
       case ":case":
-        Vx.Core.Type_any value = thenelse.value();
-        Vx.Core.Type_boolean iseq = Vx.Core.f_eq(val, value);
+        Vx.Core.Type_any casevalue = thenelse.value();
+        Vx.Core.Type_boolean iseq = Vx.Core.f_eq(value, casevalue);
         if (iseq.vx_boolean()) {
           fn_any = thenelse.fn_any();
         }
         break;
       case ":casemany":
         Vx.Core.Type_list values = thenelse.values();
-        Vx.Core.Type_boolean iscontain = Vx.Core.f_contains_1(values, val);
+        Vx.Core.Type_boolean iscontain = Vx.Core.f_contains_1(values, value);
         if (iscontain.vx_boolean()) {
           fn_any = thenelse.fn_any();
         }

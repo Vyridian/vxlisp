@@ -9,7 +9,7 @@ public class UihtmlTest {
   }
 
   public static Vx.Test.Type_testcoveragesummary test_coveragesummary() {
-    return Vx.Core.vx_new(
+    Vx.Test.Type_testcoveragesummary output = Vx.Core.vx_new(
       Vx.Test.t_testcoveragesummary,
       ":testpkg", "vx/ui/html/uihtml", 
       ":constnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 7), 
@@ -20,11 +20,16 @@ public class UihtmlTest {
       ":totalnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 44), 
       ":typenums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0)
     );
+    return output;
   }
 
   public static Vx.Test.Type_testcoveragedetail test_coveragedetail() {
-    return Vx.Core.vx_new(Vx.Test.t_testcoveragedetail, ":testpkg", "vx/ui/html/uihtml", ":typemap", Vx.Core.e_intmap, ":constmap", Vx.Core.vx_new(
-  Vx.Core.t_intmap,
+    Vx.Test.Type_testcoveragedetail output = Vx.Core.vx_new(
+      Vx.Test.t_testcoveragedetail,
+      ":testpkg", "vx/ui/html/uihtml",
+      ":typemap", Vx.Core.e_intmap, 
+      ":constmap", Vx.Core.vx_new(
+        Vx.Core.t_intmap,
         ":layout-app-html", 0,
         ":layout-else-html", 0,
         ":layout-image-html", 0,
@@ -32,8 +37,9 @@ public class UihtmlTest {
         ":layoutenginehtml", 0,
         ":style-hidden", 0,
         ":style-selected", 0
-), ":funcmap", Vx.Core.vx_new(
-  Vx.Core.t_intmap,
+      ), 
+      ":funcmap", Vx.Core.vx_new(
+        Vx.Core.t_intmap,
         ":boolean-layoutremove-html", 0,
         ":boolean-layoutselected-html", 0,
         ":boolean-layoutvisible-html", 0,
@@ -72,7 +78,9 @@ public class UihtmlTest {
         ":ui-layout-default<-ui-orig-parent", 0,
         ":ui-layout-image<-ui-orig-parent", 0,
         ":ui-layout-label<-ui-orig-parent", 0
-      ));
+      )
+    );
+    return output;
   }
 
   public static Vx.Test.Type_testpackage test_package(Vx.Core.Type_context context) {

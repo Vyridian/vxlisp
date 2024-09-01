@@ -757,7 +757,7 @@ public class ReplTest {
                 Vx.Core.vx_new(
                   Vx.Core.t_anylist,
                   Vx.Core.vx_new_string(":value"),
-                  Vx.Core.t_decimal.vx_new_from_string("2.3")
+                  Vx.Core.vx_new_decimal("2.3")
                 )
               ),
               Vx.Repl.f_repl_from_string_argmap(
@@ -1826,7 +1826,7 @@ public class ReplTest {
   }
 
   public static Vx.Test.Type_testcoveragesummary test_coveragesummary() {
-    return Vx.Core.vx_new(
+    Vx.Test.Type_testcoveragesummary output = Vx.Core.vx_new(
       Vx.Test.t_testcoveragesummary,
       ":testpkg", "vx/repl", 
       ":constnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 3), 
@@ -1837,22 +1837,28 @@ public class ReplTest {
       ":totalnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 46, ":tests", 13, ":total", 28), 
       ":typenums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 4)
     );
+    return output;
   }
 
   public static Vx.Test.Type_testcoveragedetail test_coveragedetail() {
-    return Vx.Core.vx_new(Vx.Test.t_testcoveragedetail, ":testpkg", "vx/repl", ":typemap", Vx.Core.vx_new(
-  Vx.Core.t_intmap,
+    Vx.Test.Type_testcoveragedetail output = Vx.Core.vx_new(
+      Vx.Test.t_testcoveragedetail,
+      ":testpkg", "vx/repl",
+      ":typemap", Vx.Core.vx_new(
+        Vx.Core.t_intmap,
         ":liblist", 0,
         ":repl", 0,
         ":replarglist", 0,
         ":repllist", 0
-), ":constmap", Vx.Core.vx_new(
-  Vx.Core.t_intmap,
+      ), 
+      ":constmap", Vx.Core.vx_new(
+        Vx.Core.t_intmap,
         ":delimvxlisp", 0,
         ":delimvxlispbracket", 0,
         ":delimvxlispparen", 0
-), ":funcmap", Vx.Core.vx_new(
-  Vx.Core.t_intmap,
+      ), 
+      ":funcmap", Vx.Core.vx_new(
+        Vx.Core.t_intmap,
         ":any-repl<-functype-args", 0,
         ":any<-liblist-string", 0,
         ":any<-macro", 1,
@@ -1874,7 +1880,9 @@ public class ReplTest {
         ":repllist<-textblocklist-argmap", 0,
         ":textblock<-script", 2,
         ":typefunc<-string", 2
-      ));
+      )
+    );
+    return output;
   }
 
   public static Vx.Test.Type_testpackage test_package(Vx.Core.Type_context context) {

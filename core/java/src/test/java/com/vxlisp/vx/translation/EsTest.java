@@ -45,7 +45,7 @@ public final class EsTest {
   }
 
   public static Test.Type_testcoveragesummary test_coveragesummary() {
-    return Core.vx_new(
+    Test.Type_testcoveragesummary output = Core.vx_new(
       Test.t_testcoveragesummary,
       ":testpkg", "vx/translation/es", 
       ":constnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
@@ -56,14 +56,22 @@ public final class EsTest {
       ":totalnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 50, ":tests", 1, ":total", 2), 
       ":typenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0)
     );
+    return output;
   }
 
   public static Test.Type_testcoveragedetail test_coveragedetail() {
-    return Core.vx_new(Test.t_testcoveragedetail, ":testpkg", "vx/translation/es", ":typemap", Core.e_intmap, ":constmap", Core.e_intmap, ":funcmap", Core.vx_new(
-  Core.t_intmap,
+    Test.Type_testcoveragedetail output = Core.vx_new(
+      Test.t_testcoveragedetail,
+      ":testpkg", "vx/translation/es",
+      ":typemap", Core.e_intmap, 
+      ":constmap", Core.e_intmap, 
+      ":funcmap", Core.vx_new(
+        Core.t_intmap,
         ":translation-es", 1,
         ":words", 0
-      ));
+      )
+    );
+    return output;
   }
 
   public static Test.Type_testpackage test_package(final Core.Type_context context) {

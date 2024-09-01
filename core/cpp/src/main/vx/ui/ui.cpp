@@ -14488,12 +14488,12 @@ namespace vx_ui_ui {
     output = vx_core::f_map_from_map_1(
       vx_ui_ui::t_uimap,
       uimap,
-      vx_core::t_any_from_key_value->vx_fn_new({parent}, [parent](vx_core::Type_any key_any, vx_core::Type_any val_any) {
+      vx_core::t_any_from_key_value->vx_fn_new({parent}, [parent](vx_core::Type_any key_any, vx_core::Type_any value_any) {
         vx_core::Type_string key = vx_core::vx_any_from_any(vx_core::t_string, key_any);
-        vx_ui_ui::Type_ui val = vx_core::vx_any_from_any(vx_ui_ui::t_ui, val_any);
+        vx_ui_ui::Type_ui value = vx_core::vx_any_from_any(vx_ui_ui::t_ui, value_any);
         vx_core::Type_any output_1 = 
           vx_ui_ui::f_ui_layout_from_ui_orig_parent(
-            val,
+            value,
             vx_core::f_empty(
               vx_ui_ui::t_ui
             ),

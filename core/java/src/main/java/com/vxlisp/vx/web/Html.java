@@ -11749,14 +11749,14 @@ public final class Html {
 
   /**
    * @function string_from_propname_val
-   * Returns ' key=\"val\"' if val is not blank.
+   * Returns ' key=\"value\"' if value is not blank.
    * @param  {string} key
-   * @param  {string} val
+   * @param  {string} value
    * @return {string}
    * (func string<-propname-val)
    */
   public interface Func_string_from_propname_val extends Core.Type_func, Core.Type_replfunc {
-    public Core.Type_string vx_string_from_propname_val(final Core.Type_string key, final Core.Type_string val);
+    public Core.Type_string vx_string_from_propname_val(final Core.Type_string key, final Core.Type_string value);
   }
 
   public static class Class_string_from_propname_val extends Core.Class_base implements Func_string_from_propname_val {
@@ -11819,14 +11819,14 @@ public final class Html {
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
       Core.Type_string key = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(0)));
-      Core.Type_string val = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
-      output = Html.f_string_from_propname_val(key, val);
+      Core.Type_string value = Core.f_any_from_any(Core.t_string, arglist.vx_any(Core.vx_new_int(1)));
+      output = Html.f_string_from_propname_val(key, value);
       return output;
     }
 
     @Override
-    public Core.Type_string vx_string_from_propname_val(final Core.Type_string key, final Core.Type_string val) {
-      Core.Type_string output = Html.f_string_from_propname_val(key, val);
+    public Core.Type_string vx_string_from_propname_val(final Core.Type_string key, final Core.Type_string value) {
+      Core.Type_string output = Html.f_string_from_propname_val(key, value);
       return output;
     }
 
@@ -11835,12 +11835,12 @@ public final class Html {
   public static final Html.Func_string_from_propname_val e_string_from_propname_val = new Html.Class_string_from_propname_val();
   public static final Html.Func_string_from_propname_val t_string_from_propname_val = new Html.Class_string_from_propname_val();
 
-  public static Core.Type_string f_string_from_propname_val(final Core.Type_string key, final Core.Type_string val) {
+  public static Core.Type_string f_string_from_propname_val(final Core.Type_string key, final Core.Type_string value) {
     Core.Type_string output = Core.e_string;
     output = Core.f_if(
       Core.t_string,
       Core.f_notempty(
-        val
+        value
       ),
       Core.f_new(
         Core.t_string,
@@ -11850,7 +11850,7 @@ public final class Html {
           key,
           Core.vx_new_string("="),
           Core.c_quote,
-          val,
+          value,
           Core.c_quote
         )
       )
@@ -12802,7 +12802,7 @@ public final class Html {
 
   /**
    * @function string_from_stylepropmap_indent
-   * Returns indent'key: val;' for each prop.
+   * Returns indent'key: value;' for each prop.
    * @param  {propmap} propmap
    * @param  {int} indent
    * @return {string}
@@ -12899,9 +12899,9 @@ public final class Html {
         Core.Type_stringlist sprops = Core.f_list_from_map_1(
           Core.t_stringlist,
           propmap,
-          Core.t_any_from_key_value.vx_fn_new((key_any, val_any) -> {
+          Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
             Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
-            Core.Type_string val = Core.f_any_from_any(Core.t_string, val_any);
+            Core.Type_string value = Core.f_any_from_any(Core.t_string, value_any);
             Core.Type_any output_2 = Core.f_new(
               Core.t_string,
               Core.vx_new(
@@ -12909,7 +12909,7 @@ public final class Html {
                 sindent,
                 key,
                 Core.vx_new_string(": "),
-                val,
+                value,
                 Core.vx_new_string(";")
               )
             );

@@ -9,7 +9,7 @@ public class DbTest {
   }
 
   public static Vx.Test.Type_testcoveragesummary test_coveragesummary() {
-    return Vx.Core.vx_new(
+    Vx.Test.Type_testcoveragesummary output = Vx.Core.vx_new(
       Vx.Test.t_testcoveragesummary,
       ":testpkg", "vx/data/db", 
       ":constnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
@@ -20,11 +20,15 @@ public class DbTest {
       ":totalnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 12), 
       ":typenums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 12)
     );
+    return output;
   }
 
   public static Vx.Test.Type_testcoveragedetail test_coveragedetail() {
-    return Vx.Core.vx_new(Vx.Test.t_testcoveragedetail, ":testpkg", "vx/data/db", ":typemap", Vx.Core.vx_new(
-  Vx.Core.t_intmap,
+    Vx.Test.Type_testcoveragedetail output = Vx.Core.vx_new(
+      Vx.Test.t_testcoveragedetail,
+      ":testpkg", "vx/data/db",
+      ":typemap", Vx.Core.vx_new(
+        Vx.Core.t_intmap,
         ":db", 0,
         ":dbcell", 0,
         ":dbcellmap", 0,
@@ -37,7 +41,11 @@ public class DbTest {
         ":dbnote", 0,
         ":dbtable", 0,
         ":dbvalue", 0
-), ":constmap", Vx.Core.e_intmap, ":funcmap", Vx.Core.e_intmap);
+      ), 
+      ":constmap", Vx.Core.e_intmap, 
+      ":funcmap", Vx.Core.e_intmap
+    );
+    return output;
   }
 
   public static Vx.Test.Type_testpackage test_package(Vx.Core.Type_context context) {

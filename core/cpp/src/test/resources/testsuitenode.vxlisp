@@ -7395,11 +7395,11 @@ ab
   (list
    \"a\" 4 \"b\" (list) \"c\" (map) \"d\")
   (fn : string
-   [val : any]
+   [value : any]
    (if
     (then
-     (is-string val)
-     (string val \"1\"))))))")))
+     (is-string value)
+     (string value \"1\"))))))")))
                             (vx/web/html/td
                              :nodes
                               (vx/web/html/divchildlist

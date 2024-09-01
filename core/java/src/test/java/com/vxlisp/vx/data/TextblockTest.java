@@ -12358,7 +12358,7 @@ public final class TextblockTest {
   }
 
   public static Test.Type_testcoveragesummary test_coveragesummary() {
-    return Core.vx_new(
+    Test.Type_testcoveragesummary output = Core.vx_new(
       Test.t_testcoveragesummary,
       ":testpkg", "vx/data/textblock", 
       ":constnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 22), 
@@ -12369,17 +12369,22 @@ public final class TextblockTest {
       ":totalnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 34, ":tests", 18, ":total", 52), 
       ":typenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 25, ":tests", 1, ":total", 4)
     );
+    return output;
   }
 
   public static Test.Type_testcoveragedetail test_coveragedetail() {
-    return Core.vx_new(Test.t_testcoveragedetail, ":testpkg", "vx/data/textblock", ":typemap", Core.vx_new(
-  Core.t_intmap,
+    Test.Type_testcoveragedetail output = Core.vx_new(
+      Test.t_testcoveragedetail,
+      ":testpkg", "vx/data/textblock",
+      ":typemap", Core.vx_new(
+        Core.t_intmap,
         ":delim", 0,
         ":delimlist", 1,
         ":textblock", 0,
         ":textblocklist", 0
-), ":constmap", Core.vx_new(
-  Core.t_intmap,
+      ), 
+      ":constmap", Core.vx_new(
+        Core.t_intmap,
         ":delimbracketangle", 0,
         ":delimbracketcurly", 0,
         ":delimbracketsquare", 0,
@@ -12402,8 +12407,9 @@ public final class TextblockTest {
         ":delimtest3", 0,
         ":delimtext", 0,
         ":delimwhitespace", 0
-), ":funcmap", Core.vx_new(
-  Core.t_intmap,
+      ), 
+      ":funcmap", Core.vx_new(
+        Core.t_intmap,
         ":children<-textblock", 0,
         ":delim-first<-delim-delim", 2,
         ":delim-first<-string-delimlist", 1,
@@ -12430,7 +12436,9 @@ public final class TextblockTest {
         ":textblock<-string-delim", 1,
         ":textblock<-textblock-delim", 0,
         ":textblocklist<-textblocklist-remove", 1
-      ));
+      )
+    );
+    return output;
   }
 
   public static Test.Type_testpackage test_package(final Core.Type_context context) {

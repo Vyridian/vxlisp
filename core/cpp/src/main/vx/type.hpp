@@ -185,10 +185,10 @@ namespace vx_type {
   vx_core::Type_boolean f_is_string(vx_core::Type_any value);
 
   // (func is-type)
-  vx_core::Type_boolean f_is_type(vx_core::Type_any val, vx_core::Type_any type);
+  vx_core::Type_boolean f_is_type(vx_core::Type_any value, vx_core::Type_any type);
 
   // (func is-type<-any-typelist)
-  vx_core::Type_boolean f_is_type_from_any_typelist(vx_core::Type_any val, vx_core::Type_typelist typelist);
+  vx_core::Type_boolean f_is_type_from_any_typelist(vx_core::Type_any value, vx_core::Type_typelist typelist);
 
   // (func string-lowercase)
   vx_core::Type_string f_string_lowercase(vx_core::Type_string text);
@@ -203,7 +203,7 @@ namespace vx_type {
   vx_core::Type_string f_string_uppercase(vx_core::Type_string text);
 
   // (func string<-int)
-  vx_core::Type_string f_string_from_int(vx_core::Type_int val);
+  vx_core::Type_string f_string_from_int(vx_core::Type_int value);
 
   // (func string<-string-end)
   vx_core::Type_string f_string_from_string_end(vx_core::Type_string text, vx_core::Type_int endpos);
@@ -221,10 +221,10 @@ namespace vx_type {
   vx_core::Type_stringlist f_stringlist_from_string_split(vx_core::Type_string text, vx_core::Type_string delim);
 
   // (func traitnames<-any)
-  vx_core::Type_stringlist f_traitnames_from_any(vx_core::Type_any val);
+  vx_core::Type_stringlist f_traitnames_from_any(vx_core::Type_any value);
 
   // (func traits<-any)
-  vx_core::Type_typelist f_traits_from_any(vx_core::Type_any val);
+  vx_core::Type_typelist f_traits_from_any(vx_core::Type_any value);
 
   // (func traits<-typedef)
   vx_core::Type_typelist f_traits_from_typedef(vx_core::Type_typedef vtypedef);
@@ -911,10 +911,10 @@ namespace vx_type {
   };
 
   // (func any<-int)
-  template <class T> T* f_any_from_int(T* generic_any_1, vx_core::Type_int val) {
+  template <class T> T* f_any_from_int(T* generic_any_1, vx_core::Type_int value) {
     T* output = vx_core::vx_empty(generic_any_1);
-    vx_core::vx_reserve(val);
-    vx_core::vx_release_one_except(val, output);
+    vx_core::vx_reserve(value);
+    vx_core::vx_release_one_except(value, output);
     return output;
   }
 

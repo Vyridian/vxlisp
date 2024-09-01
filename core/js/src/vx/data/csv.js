@@ -212,8 +212,8 @@ export default class vx_data_csv {
         return vx_core.f_map_from_map_1(
           {"any-1": vx_core.t_string, "any-2": vx_core.t_stringlist, "list-1": vx_core.t_stringlist, "map-1": vx_core.t_stringmap, "map-2": vx_data_csv.t_csvrowmap},
           rowmap,
-          vx_core.f_new(vx_core.t_any_from_key_value, ([key, val]) => 
-            vx_core.f_any_from_list({"any-1": vx_core.t_string, "list-1": vx_core.t_stringlist}, val, 2))
+          vx_core.f_new(vx_core.t_any_from_key_value, ([key, value]) => 
+            vx_core.f_any_from_list({"any-1": vx_core.t_string, "list-1": vx_core.t_stringlist}, value, 2))
         )
       })
     )

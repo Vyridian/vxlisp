@@ -804,22 +804,22 @@ namespace vx_data_file {
   //}
 
   // (func boolean-write<-file-any)
-  vx_core::Type_boolean f_boolean_write_from_file_any(vx_core::Type_context context, vx_data_file::Type_file file, vx_core::Type_any val) {
+  vx_core::Type_boolean f_boolean_write_from_file_any(vx_core::Type_context context, vx_data_file::Type_file file, vx_core::Type_any value) {
     vx_core::Type_boolean output = vx_core::e_boolean;
-    vx_core::vx_reserve({file, val});
+    vx_core::vx_reserve({file, value});
     output = vx_data_file::f_boolean_write_from_file_string(
       context,
       file,
-      vx_core::f_string_from_any(val)
+      vx_core::f_string_from_any(value)
     );
-    vx_core::vx_release_one_except({file, val}, output);
+    vx_core::vx_release_one_except({file, value}, output);
     return output;
   }
   /**
    * @function boolean_write_from_file_any
    * Write any data structure as a file.
    * @param  {file} file
-   * @param  {any} val
+   * @param  {any} value
    * @return {boolean}
    * (func boolean-write<-file-any)
    */
@@ -890,8 +890,8 @@ namespace vx_data_file {
       vx_core::Type_any output = vx_core::e_any;
       vx_core::Type_context context = vx_core::vx_any_from_any(vx_core::t_context, arglist->vx_get_any(vx_core::vx_new_int(0)));
       vx_data_file::Type_file file = vx_core::vx_any_from_any(vx_data_file::t_file, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      vx_core::Type_any val = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(1)));
-      output = vx_data_file::f_boolean_write_from_file_any(context, file, val);
+      vx_core::Type_any value = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_data_file::f_boolean_write_from_file_any(context, file, value);
       vx_core::vx_release_except(arglist, output);
       return output;
     }

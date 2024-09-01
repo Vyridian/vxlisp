@@ -48,6 +48,7 @@ public final class AppTest {
     TestLib.test_read_file();
     TestLib.test_write_file();
   }
+
   @Test
   @DisplayName("vx/core")
   void test_vx_core() {

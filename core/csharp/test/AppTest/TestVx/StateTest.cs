@@ -9,7 +9,7 @@ public class StateTest {
   }
 
   public static Vx.Test.Type_testcoveragesummary test_coveragesummary() {
-    return Vx.Core.vx_new(
+    Vx.Test.Type_testcoveragesummary output = Vx.Core.vx_new(
       Vx.Test.t_testcoveragesummary,
       ":testpkg", "vx/state", 
       ":constnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
@@ -20,14 +20,20 @@ public class StateTest {
       ":totalnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 14), 
       ":typenums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 1)
     );
+    return output;
   }
 
   public static Vx.Test.Type_testcoveragedetail test_coveragedetail() {
-    return Vx.Core.vx_new(Vx.Test.t_testcoveragedetail, ":testpkg", "vx/state", ":typemap", Vx.Core.vx_new(
-  Vx.Core.t_intmap,
+    Vx.Test.Type_testcoveragedetail output = Vx.Core.vx_new(
+      Vx.Test.t_testcoveragedetail,
+      ":testpkg", "vx/state",
+      ":typemap", Vx.Core.vx_new(
+        Vx.Core.t_intmap,
         ":valuemap", 0
-), ":constmap", Vx.Core.e_intmap, ":funcmap", Vx.Core.vx_new(
-  Vx.Core.t_intmap,
+      ), 
+      ":constmap", Vx.Core.e_intmap, 
+      ":funcmap", Vx.Core.vx_new(
+        Vx.Core.t_intmap,
         ":any-readstate<-mapname-name", 0,
         ":any-readstate<-name", 0,
         ":boolean-removestate<-name", 0,
@@ -41,7 +47,9 @@ public class StateTest {
         ":statelistenermap-readstate", 0,
         ":value-readstate<-name", 0,
         ":valuemap-readstate<-mapname", 0
-      ));
+      )
+    );
+    return output;
   }
 
   public static Vx.Test.Type_testpackage test_package(Vx.Core.Type_context context) {

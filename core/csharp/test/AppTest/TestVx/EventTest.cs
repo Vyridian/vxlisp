@@ -9,7 +9,7 @@ public class EventTest {
   }
 
   public static Vx.Test.Type_testcoveragesummary test_coveragesummary() {
-    return Vx.Core.vx_new(
+    Vx.Test.Type_testcoveragesummary output = Vx.Core.vx_new(
       Vx.Test.t_testcoveragesummary,
       ":testpkg", "vx/event", 
       ":constnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 4), 
@@ -20,27 +20,35 @@ public class EventTest {
       ":totalnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 11), 
       ":typenums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 3)
     );
+    return output;
   }
 
   public static Vx.Test.Type_testcoveragedetail test_coveragedetail() {
-    return Vx.Core.vx_new(Vx.Test.t_testcoveragedetail, ":testpkg", "vx/event", ":typemap", Vx.Core.vx_new(
-  Vx.Core.t_intmap,
+    Vx.Test.Type_testcoveragedetail output = Vx.Core.vx_new(
+      Vx.Test.t_testcoveragedetail,
+      ":testpkg", "vx/event",
+      ":typemap", Vx.Core.vx_new(
+        Vx.Core.t_intmap,
         ":event", 0,
         ":eventlist", 0,
         ":eventmap", 0
-), ":constmap", Vx.Core.vx_new(
-  Vx.Core.t_intmap,
+      ), 
+      ":constmap", Vx.Core.vx_new(
+        Vx.Core.t_intmap,
         ":event-change", 0,
         ":event-click", 0,
         ":event-move", 0,
         ":event-select", 0
-), ":funcmap", Vx.Core.vx_new(
-  Vx.Core.t_intmap,
+      ), 
+      ":funcmap", Vx.Core.vx_new(
+        Vx.Core.t_intmap,
         ":any-from<-event", 0,
         ":event<-event", 0,
         ":event<-event-async", 0,
         ":eventmap<-eventlist", 0
-      ));
+      )
+    );
+    return output;
   }
 
   public static Vx.Test.Type_testpackage test_package(Vx.Core.Type_context context) {

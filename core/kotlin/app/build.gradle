@@ -22,16 +22,15 @@ repositories {
 dependencies {
     // This dependency is used by the application.
     implementation libs.guava
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
-testing {
-    suites {
-        // Configure the built-in test suite
-        test {
-            // Use Kotlin Test test framework
-            useKotlinTest('1.9.20')
-        }
-    }
+test {
+  useJUnitPlatform()
+	 testLogging {
+  		events "passed", "skipped", "failed"
+ 	}
 }
 
 // Apply a specific Java toolchain to ease working on different environments.

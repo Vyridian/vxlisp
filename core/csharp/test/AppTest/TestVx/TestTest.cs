@@ -119,7 +119,7 @@ public class TestTest {
   }
 
   public static Vx.Test.Type_testcoveragesummary test_coveragesummary() {
-    return Vx.Core.vx_new(
+    Vx.Test.Type_testcoveragesummary output = Vx.Core.vx_new(
       Vx.Test.t_testcoveragesummary,
       ":testpkg", "vx/test", 
       ":constnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 1), 
@@ -130,11 +130,15 @@ public class TestTest {
       ":totalnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 7, ":tests", 3, ":total", 40), 
       ":typenums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 11)
     );
+    return output;
   }
 
   public static Vx.Test.Type_testcoveragedetail test_coveragedetail() {
-    return Vx.Core.vx_new(Vx.Test.t_testcoveragedetail, ":testpkg", "vx/test", ":typemap", Vx.Core.vx_new(
-  Vx.Core.t_intmap,
+    Vx.Test.Type_testcoveragedetail output = Vx.Core.vx_new(
+      Vx.Test.t_testcoveragedetail,
+      ":testpkg", "vx/test",
+      ":typemap", Vx.Core.vx_new(
+        Vx.Core.t_intmap,
         ":testcase", 0,
         ":testcaselist", 0,
         ":testcoveragedetail", 0,
@@ -146,11 +150,13 @@ public class TestTest {
         ":testpackagelist", 0,
         ":testresult", 0,
         ":testresultlist", 0
-), ":constmap", Vx.Core.vx_new(
-  Vx.Core.t_intmap,
+      ), 
+      ":constmap", Vx.Core.vx_new(
+        Vx.Core.t_intmap,
         ":stylesheet-test", 0
-), ":funcmap", Vx.Core.vx_new(
-  Vx.Core.t_intmap,
+      ), 
+      ":funcmap", Vx.Core.vx_new(
+        Vx.Core.t_intmap,
         ":context-test", 0,
         ":div<-testcaselist", 0,
         ":div<-testpackage", 0,
@@ -185,7 +191,9 @@ public class TestTest {
         ":tr<-testdescribe-casename", 0,
         ":trlist<-testcase", 0,
         ":trlist<-testcaselist", 0
-      ));
+      )
+    );
+    return output;
   }
 
   public static Vx.Test.Type_testpackage test_package(Vx.Core.Type_context context) {

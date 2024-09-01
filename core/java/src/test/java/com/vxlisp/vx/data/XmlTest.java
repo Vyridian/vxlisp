@@ -3478,7 +3478,7 @@ public final class XmlTest {
   }
 
   public static Test.Type_testcoveragesummary test_coveragesummary() {
-    return Core.vx_new(
+    Test.Type_testcoveragesummary output = Core.vx_new(
       Test.t_testcoveragesummary,
       ":testpkg", "vx/data/xml", 
       ":constnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 4), 
@@ -3489,22 +3489,28 @@ public final class XmlTest {
       ":totalnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 47, ":tests", 10, ":total", 21), 
       ":typenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 3)
     );
+    return output;
   }
 
   public static Test.Type_testcoveragedetail test_coveragedetail() {
-    return Core.vx_new(Test.t_testcoveragedetail, ":testpkg", "vx/data/xml", ":typemap", Core.vx_new(
-  Core.t_intmap,
+    Test.Type_testcoveragedetail output = Core.vx_new(
+      Test.t_testcoveragedetail,
+      ":testpkg", "vx/data/xml",
+      ":typemap", Core.vx_new(
+        Core.t_intmap,
         ":xml", 0,
         ":xmllist", 0,
         ":xmlpropmap", 0
-), ":constmap", Core.vx_new(
-  Core.t_intmap,
+      ), 
+      ":constmap", Core.vx_new(
+        Core.t_intmap,
         ":delimxml", 0,
         ":delimxmlcdata", 0,
         ":delimxmlcomment", 0,
         ":delimxmlequal", 0
-), ":funcmap", Core.vx_new(
-  Core.t_intmap,
+      ), 
+      ":funcmap", Core.vx_new(
+        Core.t_intmap,
         ":string-decodexml<-string", 0,
         ":string-first<-xml", 1,
         ":textblock-xml<-string", 1,
@@ -3519,7 +3525,9 @@ public final class XmlTest {
         ":xml<-file", 0,
         ":xml<-string", 0,
         ":xml<-textblock", 1
-      ));
+      )
+    );
+    return output;
   }
 
   public static Test.Type_testpackage test_package(final Core.Type_context context) {

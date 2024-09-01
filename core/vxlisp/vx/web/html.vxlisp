@@ -489,18 +489,18 @@
  :doc "Returns string from p")
 
 (func string<-propname-val : string
- [key : string
-  val : string]
+ [key   : string
+  value : string]
  (if
-  (!-empty val)
+  (!-empty value)
   (string
    " "
    key
    "="
    quote
-   val
+   value
    quote))
- :doc "Returns ' key=\"val\"' if val is not blank.")
+ :doc "Returns ' key=\"value\"' if value is not blank.")
 
 (func string<-propstyle : string
  [style : style]
@@ -626,17 +626,17 @@
     (list<-map : stringlist
      propmap
      (fn : string
-      [key : string
-       val : string]
+      [key   : string
+       value : string]
       (string
        sindent
        key
        ": "
-       val ";")))]
+       value ";")))]
   (string<-stringlist-join
    sprops
    ""))
- :doc "Returns indent'key: val;' for each prop.")
+ :doc "Returns indent'key: value;' for each prop.")
 
 (func string<-stylesheet-indent : string
  [stylesheet : stylesheet

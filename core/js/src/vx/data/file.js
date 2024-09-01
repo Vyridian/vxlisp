@@ -74,7 +74,7 @@ export default class vx_data_file {
    * @function boolean_write_from_file_any
    * Write any data structure as a file.
    * @param  {file} file
-   * @param  {any} val
+   * @param  {any} value
    * @return {boolean}
    */
   static t_boolean_write_from_file_any = {
@@ -85,12 +85,12 @@ export default class vx_data_file {
   }
 
   // (func boolean-write<-file-any)
-  static f_boolean_write_from_file_any(context, file, val) {
+  static f_boolean_write_from_file_any(context, file, value) {
     let output = vx_core.e_boolean
     output = vx_data_file.f_boolean_write_from_file_string(
       context,
       file,
-      vx_core.f_string_from_any(val)
+      vx_core.f_string_from_any(value)
     )
     return output
   }

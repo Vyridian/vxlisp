@@ -11,7 +11,7 @@ public final class DbTest {
   }
 
   public static Test.Type_testcoveragesummary test_coveragesummary() {
-    return Core.vx_new(
+    Test.Type_testcoveragesummary output = Core.vx_new(
       Test.t_testcoveragesummary,
       ":testpkg", "vx/data/db", 
       ":constnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
@@ -22,11 +22,15 @@ public final class DbTest {
       ":totalnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 12), 
       ":typenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 12)
     );
+    return output;
   }
 
   public static Test.Type_testcoveragedetail test_coveragedetail() {
-    return Core.vx_new(Test.t_testcoveragedetail, ":testpkg", "vx/data/db", ":typemap", Core.vx_new(
-  Core.t_intmap,
+    Test.Type_testcoveragedetail output = Core.vx_new(
+      Test.t_testcoveragedetail,
+      ":testpkg", "vx/data/db",
+      ":typemap", Core.vx_new(
+        Core.t_intmap,
         ":db", 0,
         ":dbcell", 0,
         ":dbcellmap", 0,
@@ -39,7 +43,11 @@ public final class DbTest {
         ":dbnote", 0,
         ":dbtable", 0,
         ":dbvalue", 0
-), ":constmap", Core.e_intmap, ":funcmap", Core.e_intmap);
+      ), 
+      ":constmap", Core.e_intmap, 
+      ":funcmap", Core.e_intmap
+    );
+    return output;
   }
 
   public static Test.Type_testpackage test_package(final Core.Type_context context) {

@@ -506,7 +506,7 @@ public final class UiTest {
   }
 
   public static Test.Type_testcoveragesummary test_coveragesummary() {
-    return Core.vx_new(
+    Test.Type_testcoveragesummary output = Core.vx_new(
       Test.t_testcoveragesummary,
       ":testpkg", "vx/ui/ui", 
       ":constnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 47), 
@@ -517,11 +517,15 @@ public final class UiTest {
       ":totalnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 4, ":tests", 7, ":total", 144), 
       ":typenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 29)
     );
+    return output;
   }
 
   public static Test.Type_testcoveragedetail test_coveragedetail() {
-    return Core.vx_new(Test.t_testcoveragedetail, ":testpkg", "vx/ui/ui", ":typemap", Core.vx_new(
-  Core.t_intmap,
+    Test.Type_testcoveragedetail output = Core.vx_new(
+      Test.t_testcoveragedetail,
+      ":testpkg", "vx/ui/ui",
+      ":typemap", Core.vx_new(
+        Core.t_intmap,
         ":align", 0,
         ":bounds", 0,
         ":cursor", 0,
@@ -551,8 +555,9 @@ public final class UiTest {
         ":uiengine", 0,
         ":uilist", 0,
         ":uimap", 0
-), ":constmap", Core.vx_new(
-  Core.t_intmap,
+      ), 
+      ":constmap", Core.vx_new(
+        Core.t_intmap,
         ":align-center", 0,
         ":align-left", 0,
         ":align-right", 0,
@@ -600,8 +605,9 @@ public final class UiTest {
         ":styletype-custom", 0,
         ":styletype-shared", 0,
         ":styletype-system", 0
-), ":funcmap", Core.vx_new(
-  Core.t_intmap,
+      ), 
+      ":funcmap", Core.vx_new(
+        Core.t_intmap,
         ":boolean-layout<-ui-parent-selected", 0,
         ":boolean-layout<-ui-parent-visible", 0,
         ":boolean-layoutaddchild<-ui-parent", 0,
@@ -670,7 +676,9 @@ public final class UiTest {
         ":uimap-layout<-uimap-parent", 0,
         ":uimap<-uilist", 0,
         ":uimap<-uimap-data", 0
-      ));
+      )
+    );
+    return output;
   }
 
   public static Test.Type_testpackage test_package(final Core.Type_context context) {

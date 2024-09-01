@@ -12,7 +12,7 @@ public final class HtmldocTest {
   }
 
   public static Test.Type_testcoveragesummary test_coveragesummary() {
-    return Core.vx_new(
+    Test.Type_testcoveragesummary output = Core.vx_new(
       Test.t_testcoveragesummary,
       ":testpkg", "vx/web/htmldoc", 
       ":constnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
@@ -23,11 +23,17 @@ public final class HtmldocTest {
       ":totalnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 15), 
       ":typenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0)
     );
+    return output;
   }
 
   public static Test.Type_testcoveragedetail test_coveragedetail() {
-    return Core.vx_new(Test.t_testcoveragedetail, ":testpkg", "vx/web/htmldoc", ":typemap", Core.e_intmap, ":constmap", Core.e_intmap, ":funcmap", Core.vx_new(
-  Core.t_intmap,
+    Test.Type_testcoveragedetail output = Core.vx_new(
+      Test.t_testcoveragedetail,
+      ":testpkg", "vx/web/htmldoc",
+      ":typemap", Core.e_intmap, 
+      ":constmap", Core.e_intmap, 
+      ":funcmap", Core.vx_new(
+        Core.t_intmap,
         ":boolean-print<-id-stylesheettext", 0,
         ":boolean-remove<-id", 0,
         ":boolean-replace<-id-htmltext", 0,
@@ -43,7 +49,9 @@ public final class HtmldocTest {
         ":string<-id", 0,
         ":string<-stylesheet", 0,
         ":ui-readstate<-uid", 0
-      ));
+      )
+    );
+    return output;
   }
 
   public static Test.Type_testpackage test_package(final Core.Type_context context) {

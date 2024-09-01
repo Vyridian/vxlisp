@@ -314,7 +314,7 @@ public final class CollectionTest {
         Test.t_testdescribelist,
         Core.vx_new(
           Test.t_testdescribe,
-          ":describename", "(test\n (stringlist\n  \"a1\" \"b1\" \"c1\" \"d1\")\n (list<-list-filter : stringlist\n  (list\n   \"a\" 4 \"b\" (list) \"c\" (map) \"d\")\n  (fn : string\n   [val : any]\n   (if\n    (then\n     (is-string val)\n     (string val \"1\"))))))",
+          ":describename", "(test\n (stringlist\n  \"a1\" \"b1\" \"c1\" \"d1\")\n (list<-list-filter : stringlist\n  (list\n   \"a\" 4 \"b\" (list) \"c\" (map) \"d\")\n  (fn : string\n   [value : any]\n   (if\n    (then\n     (is-string value)\n     (string value \"1\"))))))",
           ":testresult",
             Test.f_test(
               context,
@@ -347,8 +347,8 @@ public final class CollectionTest {
                     Core.vx_new_string("d")
                   )
                 ),
-                Core.t_any_from_any.vx_fn_new((val_any) -> {
-                  Core.Type_any val = Core.f_any_from_any(Core.t_any, val_any);
+                Core.t_any_from_any.vx_fn_new((value_any) -> {
+                  Core.Type_any value = Core.f_any_from_any(Core.t_any, value_any);
                   Core.Type_any output_1 = Core.f_if_2(
                     Core.t_string,
                     Core.vx_new(
@@ -356,7 +356,7 @@ public final class CollectionTest {
                       Core.f_then(
                         Core.t_boolean_from_func.vx_fn_new(() -> {
                           Core.Type_any output_2 = Type.f_is_string(
-                            val
+                            value
                           );
                           return output_2;
                         }),
@@ -365,7 +365,7 @@ public final class CollectionTest {
                             Core.t_string,
                             Core.vx_new(
                               Core.t_anylist,
-                              val,
+                              value,
                               Core.vx_new_string("1")
                             )
                           );
@@ -419,7 +419,7 @@ public final class CollectionTest {
                     Core.vx_new_int(1),
                     Core.vx_new_string("b"),
                     Core.vx_new_string("c"),
-                    Core.t_decimal.vx_new_from_string("4.5")
+                    Core.vx_new_decimal("4.5")
                   )
                 ),
                 Core.vx_new(
@@ -754,7 +754,7 @@ public final class CollectionTest {
   }
 
   public static Test.Type_testcoveragesummary test_coveragesummary() {
-    return Core.vx_new(
+    Test.Type_testcoveragesummary output = Core.vx_new(
       Test.t_testcoveragesummary,
       ":testpkg", "vx/collection", 
       ":constnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
@@ -765,11 +765,17 @@ public final class CollectionTest {
       ":totalnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 69, ":tests", 16, ":total", 23), 
       ":typenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0)
     );
+    return output;
   }
 
   public static Test.Type_testcoveragedetail test_coveragedetail() {
-    return Core.vx_new(Test.t_testcoveragedetail, ":testpkg", "vx/collection", ":typemap", Core.e_intmap, ":constmap", Core.e_intmap, ":funcmap", Core.vx_new(
-  Core.t_intmap,
+    Test.Type_testcoveragedetail output = Core.vx_new(
+      Test.t_testcoveragedetail,
+      ":testpkg", "vx/collection",
+      ":typemap", Core.e_intmap, 
+      ":constmap", Core.e_intmap, 
+      ":funcmap", Core.vx_new(
+        Core.t_intmap,
         ":any<-for-until-loop", 1,
         ":any<-for-until-loop-max", 0,
         ":any<-for-while-loop", 1,
@@ -793,7 +799,9 @@ public final class CollectionTest {
         ":map<-map-keys", 1,
         ":map<-map-start", 1,
         ":map<-map-start-end", 1
-      ));
+      )
+    );
+    return output;
   }
 
   public static Test.Type_testpackage test_package(final Core.Type_context context) {

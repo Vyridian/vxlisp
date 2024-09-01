@@ -251,7 +251,7 @@ public final class TypeTest {
             Test.f_test_true(
               context,
               Type.f_is_type(
-                Core.t_decimal.vx_new_from_string("5.5"),
+                Core.vx_new_decimal("5.5"),
                 Core.t_number
               )
             )
@@ -327,7 +327,7 @@ public final class TypeTest {
             Test.f_test_true(
               context,
               Type.f_is_type_from_any_typelist(
-                Core.t_decimal.vx_new_from_string("5.5"),
+                Core.vx_new_decimal("5.5"),
                 Core.f_new(
                   Core.t_typelist,
                   Core.vx_new(
@@ -816,7 +816,7 @@ public final class TypeTest {
   }
 
   public static Test.Type_testcoveragesummary test_coveragesummary() {
-    return Core.vx_new(
+    Test.Type_testcoveragesummary output = Core.vx_new(
       Test.t_testcoveragesummary,
       ":testpkg", "vx/type", 
       ":constnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
@@ -827,11 +827,17 @@ public final class TypeTest {
       ":totalnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 66, ":tests", 18, ":total", 27), 
       ":typenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0)
     );
+    return output;
   }
 
   public static Test.Type_testcoveragedetail test_coveragedetail() {
-    return Core.vx_new(Test.t_testcoveragedetail, ":testpkg", "vx/type", ":typemap", Core.e_intmap, ":constmap", Core.e_intmap, ":funcmap", Core.vx_new(
-  Core.t_intmap,
+    Test.Type_testcoveragedetail output = Core.vx_new(
+      Test.t_testcoveragedetail,
+      ":testpkg", "vx/type",
+      ":typemap", Core.e_intmap, 
+      ":constmap", Core.e_intmap, 
+      ":funcmap", Core.vx_new(
+        Core.t_intmap,
         ":allowtypenames<-type", 0,
         ":allowtypes<-type", 0,
         ":any<-int", 0,
@@ -859,7 +865,9 @@ public final class TypeTest {
         ":traitnames<-any", 0,
         ":traits<-any", 0,
         ":traits<-typedef", 0
-      ));
+      )
+    );
+    return output;
   }
 
   public static Test.Type_testpackage test_package(final Core.Type_context context) {

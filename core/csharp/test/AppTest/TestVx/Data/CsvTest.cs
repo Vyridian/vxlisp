@@ -254,7 +254,7 @@ public class CsvTest {
   }
 
   public static Vx.Test.Type_testcoveragesummary test_coveragesummary() {
-    return Vx.Core.vx_new(
+    Vx.Test.Type_testcoveragesummary output = Vx.Core.vx_new(
       Vx.Test.t_testcoveragesummary,
       ":testpkg", "vx/data/csv", 
       ":constnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 1), 
@@ -265,19 +265,25 @@ public class CsvTest {
       ":totalnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 9, ":tests", 1, ":total", 11), 
       ":typenums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 3)
     );
+    return output;
   }
 
   public static Vx.Test.Type_testcoveragedetail test_coveragedetail() {
-    return Vx.Core.vx_new(Vx.Test.t_testcoveragedetail, ":testpkg", "vx/data/csv", ":typemap", Vx.Core.vx_new(
-  Vx.Core.t_intmap,
+    Vx.Test.Type_testcoveragedetail output = Vx.Core.vx_new(
+      Vx.Test.t_testcoveragedetail,
+      ":testpkg", "vx/data/csv",
+      ":typemap", Vx.Core.vx_new(
+        Vx.Core.t_intmap,
         ":csv", 0,
         ":csvrowmap", 0,
         ":csvrows", 0
-), ":constmap", Vx.Core.vx_new(
-  Vx.Core.t_intmap,
+      ), 
+      ":constmap", Vx.Core.vx_new(
+        Vx.Core.t_intmap,
         ":delimcsv", 0
-), ":funcmap", Vx.Core.vx_new(
-  Vx.Core.t_intmap,
+      ), 
+      ":funcmap", Vx.Core.vx_new(
+        Vx.Core.t_intmap,
         ":csv-read<-file", 0,
         ":csv<-file", 0,
         ":csv<-string", 0,
@@ -285,7 +291,9 @@ public class CsvTest {
         ":csvrows<-textblock", 0,
         ":stringmap<-csv", 0,
         ":textblock-csv<-string", 1
-      ));
+      )
+    );
+    return output;
   }
 
   public static Vx.Test.Type_testpackage test_package(Vx.Core.Type_context context) {

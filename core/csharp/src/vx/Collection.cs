@@ -1112,12 +1112,12 @@ public static class Collection {
   /**
    * @function is_list
    * Returns true if the given value is a list.
-   * @param  {any} val Any value
+   * @param  {any} value Any value
    * @return {boolean}
    * (func is-list)
    */
   public interface Func_is_list : Vx.Core.Func_any_from_any {
-    public Vx.Core.Type_boolean vx_is_list(Vx.Core.Type_any val);
+    public Vx.Core.Type_boolean vx_is_list(Vx.Core.Type_any value);
   }
 
   public class Class_is_list : Vx.Core.Class_base, Func_is_list {
@@ -1184,13 +1184,13 @@ public static class Collection {
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
       Vx.Core.Type_any output = Vx.Core.e_any;
-      Vx.Core.Type_any val = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
-      output = Vx.Collection.f_is_list(val);
+      Vx.Core.Type_any value = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
+      output = Vx.Collection.f_is_list(value);
       return output;
     }
 
-    public Vx.Core.Type_boolean vx_is_list(Vx.Core.Type_any val) {
-      Vx.Core.Type_boolean output = Vx.Collection.f_is_list(val);
+    public Vx.Core.Type_boolean vx_is_list(Vx.Core.Type_any value) {
+      Vx.Core.Type_boolean output = Vx.Collection.f_is_list(value);
       return output;
     }
 
@@ -1199,12 +1199,12 @@ public static class Collection {
   public static Vx.Collection.Func_is_list e_is_list = new Vx.Collection.Class_is_list();
   public static Vx.Collection.Func_is_list t_is_list = new Vx.Collection.Class_is_list();
 
-  public static Vx.Core.Type_boolean f_is_list(Vx.Core.Type_any val) {
+  public static Vx.Core.Type_boolean f_is_list(Vx.Core.Type_any value) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
     output = Vx.Core.f_eq(
       Vx.Core.vx_new_string(":list"),
       Vx.Core.f_extends_from_any(
-        val
+        value
       )
     );
     return output;
@@ -1213,12 +1213,12 @@ public static class Collection {
   /**
    * @function is_map
    * Returns true if the given value is a map.
-   * @param  {any} val Any value
+   * @param  {any} value Any value
    * @return {boolean}
    * (func is-map)
    */
   public interface Func_is_map : Vx.Core.Func_any_from_any {
-    public Vx.Core.Type_boolean vx_is_map(Vx.Core.Type_any val);
+    public Vx.Core.Type_boolean vx_is_map(Vx.Core.Type_any value);
   }
 
   public class Class_is_map : Vx.Core.Class_base, Func_is_map {
@@ -1285,13 +1285,13 @@ public static class Collection {
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
       Vx.Core.Type_any output = Vx.Core.e_any;
-      Vx.Core.Type_any val = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
-      output = Vx.Collection.f_is_map(val);
+      Vx.Core.Type_any value = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
+      output = Vx.Collection.f_is_map(value);
       return output;
     }
 
-    public Vx.Core.Type_boolean vx_is_map(Vx.Core.Type_any val) {
-      Vx.Core.Type_boolean output = Vx.Collection.f_is_map(val);
+    public Vx.Core.Type_boolean vx_is_map(Vx.Core.Type_any value) {
+      Vx.Core.Type_boolean output = Vx.Collection.f_is_map(value);
       return output;
     }
 
@@ -1300,12 +1300,12 @@ public static class Collection {
   public static Vx.Collection.Func_is_map e_is_map = new Vx.Collection.Class_is_map();
   public static Vx.Collection.Func_is_map t_is_map = new Vx.Collection.Class_is_map();
 
-  public static Vx.Core.Type_boolean f_is_map(Vx.Core.Type_any val) {
+  public static Vx.Core.Type_boolean f_is_map(Vx.Core.Type_any value) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
     output = Vx.Core.f_eq(
       Vx.Core.vx_new_string(":map"),
       Vx.Core.f_extends_from_any(
-        val
+        value
       )
     );
     return output;
@@ -1318,12 +1318,12 @@ public static class Collection {
    * output : list-1 := (empty list-1)
    * (if start <= end
    *  (for i=start to end
-   *   val : any-1 := (fn-loop i)
-   *   output += val)
+   *   value : any-1 := (fn-loop i)
+   *   output += value)
    *  (else
    *   (for i=start to end; i--
-   *    val : any-1 := (fn-loop i)
-   *    output += val)
+   *    value : any-1 := (fn-loop i)
+   *    output += value)
    *  ))
    * @param  {int} start
    * @param  {int} end
@@ -1868,15 +1868,15 @@ public static class Collection {
     output = Vx.Collection.f_list_from_list_filter(
       generic_list_1,
       vallist,
-      Vx.Core.t_any_from_any.vx_fn_new((val_any) => {
-        Vx.Core.Type_any val = Vx.Core.f_any_from_any(Vx.Core.t_any, val_any);
+      Vx.Core.t_any_from_any.vx_fn_new((value_any) => {
+        Vx.Core.Type_any value = Vx.Core.f_any_from_any(Vx.Core.t_any, value_any);
         Vx.Core.Type_any output_1 = Vx.Core.f_if(
           Vx.Core.t_any,
           Vx.Type.f_is_type_from_any_typelist(
-            val,
+            value,
             filtertypes
           ),
-          val
+          value
         );
         return output_1;
       })

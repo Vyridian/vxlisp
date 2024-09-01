@@ -10144,12 +10144,12 @@ namespace vx_web_html {
   //}
 
   // (func string<-propname-val)
-  vx_core::Type_string f_string_from_propname_val(vx_core::Type_string key, vx_core::Type_string val) {
+  vx_core::Type_string f_string_from_propname_val(vx_core::Type_string key, vx_core::Type_string value) {
     vx_core::Type_string output = vx_core::e_string;
-    vx_core::vx_reserve({key, val});
+    vx_core::vx_reserve({key, value});
     output = vx_core::f_if(
       vx_core::t_string,
-      vx_core::f_notempty(val),
+      vx_core::f_notempty(value),
       vx_core::f_new(
         vx_core::t_string,
         vx_core::vx_new(vx_core::t_anylist, {
@@ -10157,19 +10157,19 @@ namespace vx_web_html {
           key,
           vx_core::vx_new_string("="),
           vx_core::c_quote,
-          val,
+          value,
           vx_core::c_quote
         })
       )
     );
-    vx_core::vx_release_one_except({key, val}, output);
+    vx_core::vx_release_one_except({key, value}, output);
     return output;
   }
   /**
    * @function string_from_propname_val
-   * Returns ' key=\"val\"' if val is not blank.
+   * Returns ' key=\"value\"' if value is not blank.
    * @param  {string} key
-   * @param  {string} val
+   * @param  {string} value
    * @return {string}
    * (func string<-propname-val)
    */
@@ -10239,8 +10239,8 @@ namespace vx_web_html {
     vx_core::Type_any Class_string_from_propname_val::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
       vx_core::Type_string key = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      vx_core::Type_string val = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(1)));
-      output = vx_web_html::f_string_from_propname_val(key, val);
+      vx_core::Type_string value = vx_core::vx_any_from_any(vx_core::t_string, arglist->vx_get_any(vx_core::vx_new_int(1)));
+      output = vx_web_html::f_string_from_propname_val(key, value);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -11138,9 +11138,9 @@ namespace vx_web_html {
         vx_core::Type_stringlist sprops = vx_core::f_list_from_map_1(
           vx_core::t_stringlist,
           propmap,
-          vx_core::t_any_from_key_value->vx_fn_new({sindent}, [sindent](vx_core::Type_any key_any, vx_core::Type_any val_any) {
+          vx_core::t_any_from_key_value->vx_fn_new({sindent}, [sindent](vx_core::Type_any key_any, vx_core::Type_any value_any) {
             vx_core::Type_string key = vx_core::vx_any_from_any(vx_core::t_string, key_any);
-            vx_core::Type_string val = vx_core::vx_any_from_any(vx_core::t_string, val_any);
+            vx_core::Type_string value = vx_core::vx_any_from_any(vx_core::t_string, value_any);
             vx_core::Type_any output_1 = 
               vx_core::f_new(
                 vx_core::t_string,
@@ -11148,7 +11148,7 @@ namespace vx_web_html {
                   sindent,
                   key,
                   vx_core::vx_new_string(": "),
-                  val,
+                  value,
                   vx_core::vx_new_string(";")
                 })
               );
@@ -11166,7 +11166,7 @@ namespace vx_web_html {
   }
   /**
    * @function string_from_stylepropmap_indent
-   * Returns indent'key: val;' for each prop.
+   * Returns indent'key: value;' for each prop.
    * @param  {propmap} propmap
    * @param  {int} indent
    * @return {string}

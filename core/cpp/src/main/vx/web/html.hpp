@@ -434,7 +434,7 @@ namespace vx_web_html {
   vx_core::Type_string f_string_from_p_indent(vx_web_html::Type_p p, vx_core::Type_int indent);
 
   // (func string<-propname-val)
-  vx_core::Type_string f_string_from_propname_val(vx_core::Type_string key, vx_core::Type_string val);
+  vx_core::Type_string f_string_from_propname_val(vx_core::Type_string key, vx_core::Type_string value);
 
   // (func string<-propstyle)
   vx_core::Type_string f_string_from_propstyle(vx_web_html::Type_style style);

@@ -1558,20 +1558,20 @@ namespace vx_collection {
   //}
 
   // (func is-list)
-  vx_core::Type_boolean f_is_list(vx_core::Type_any val) {
+  vx_core::Type_boolean f_is_list(vx_core::Type_any value) {
     vx_core::Type_boolean output = vx_core::e_boolean;
-    vx_core::vx_reserve(val);
+    vx_core::vx_reserve(value);
     output = vx_core::f_eq(
       vx_core::vx_new_string(":list"),
-      vx_core::f_extends_from_any(val)
+      vx_core::f_extends_from_any(value)
     );
-    vx_core::vx_release_one_except(val, output);
+    vx_core::vx_release_one_except(value, output);
     return output;
   }
   /**
    * @function is_list
    * Returns true if the given value is a list.
-   * @param  {any} val Any value
+   * @param  {any} value Any value
    * @return {boolean}
    * (func is-list)
    */
@@ -1652,8 +1652,8 @@ namespace vx_collection {
 
     vx_core::Type_any Class_is_list::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any val = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      output = vx_collection::f_is_list(val);
+      vx_core::Type_any value = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_collection::f_is_list(value);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -1661,20 +1661,20 @@ namespace vx_collection {
   //}
 
   // (func is-map)
-  vx_core::Type_boolean f_is_map(vx_core::Type_any val) {
+  vx_core::Type_boolean f_is_map(vx_core::Type_any value) {
     vx_core::Type_boolean output = vx_core::e_boolean;
-    vx_core::vx_reserve(val);
+    vx_core::vx_reserve(value);
     output = vx_core::f_eq(
       vx_core::vx_new_string(":map"),
-      vx_core::f_extends_from_any(val)
+      vx_core::f_extends_from_any(value)
     );
-    vx_core::vx_release_one_except(val, output);
+    vx_core::vx_release_one_except(value, output);
     return output;
   }
   /**
    * @function is_map
    * Returns true if the given value is a map.
-   * @param  {any} val Any value
+   * @param  {any} value Any value
    * @return {boolean}
    * (func is-map)
    */
@@ -1755,8 +1755,8 @@ namespace vx_collection {
 
     vx_core::Type_any Class_is_map::vx_repl(vx_core::Type_anylist arglist) {
       vx_core::Type_any output = vx_core::e_any;
-      vx_core::Type_any val = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
-      output = vx_collection::f_is_map(val);
+      vx_core::Type_any value = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_collection::f_is_map(value);
       vx_core::vx_release_except(arglist, output);
       return output;
     }
@@ -1769,12 +1769,12 @@ namespace vx_collection {
    * output : list-1 := (empty list-1)
    * (if start <= end
    *  (for i=start to end
-   *   val : any-1 := (fn-loop i)
-   *   output += val)
+   *   value : any-1 := (fn-loop i)
+   *   output += value)
    *  (else
    *   (for i=start to end; i--
-   *    val : any-1 := (fn-loop i)
-   *    output += val)
+   *    value : any-1 := (fn-loop i)
+   *    output += value)
    *  ))
    * @param  {int} start
    * @param  {int} end

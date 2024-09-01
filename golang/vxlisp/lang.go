@@ -471,11 +471,15 @@ func LangFromPackage(
 	return output, msgblock
 }
 
-func LangFromText(text string) string {
+func LangFromText(lang *vxlang, text string) string {
 	var output = text
 	output = strings.ReplaceAll(output, "\n", "\\n")
 	output = strings.ReplaceAll(output, "\\\"", "\\\\\"")
 	output = strings.ReplaceAll(output, "\"", "\\\"")
+	switch lang {
+	case langkotlin:
+		output = strings.ReplaceAll(output, "$", "\\$")
+	}
 	return output
 }
 
@@ -539,7 +543,7 @@ func LangFromValue(
 		} else if BooleanFromStringStartsEnds(valstr, "\"", "\"") {
 			valstr = valstr[1 : len(valstr)-1]
 			if encode {
-				output = LangFromText(valstr)
+				output = LangFromText(lang, valstr)
 			} else {
 				output = valstr
 			}
@@ -559,7 +563,7 @@ func LangFromValue(
 	case "decimal":
 		if encode {
 			valstr = StringValueFromValue(value)
-			output = LangPkgName(lang, "vx/core") + lang.pkgref + "t_decimal" + lang.typeref + "vx_new_from_string(\"" + valstr + "\")"
+			output = LangPkgName(lang, "vx/core") + lang.pkgref + "vx_new_decimal(\"" + valstr + "\")"
 		}
 	case "float":
 		if encode {
@@ -779,39 +783,11 @@ func LangImport(lang *vxlang,
 		ipos := IntFromStringFindLast(pkgname, "/")
 		path := StringSubstring(pkgname, 0, ipos)
 		path = StringFromStringFindReplace(path, "/", ".")
-		name := pkgname
-		name = StringFromStringFindReplace(name, "/", "_")
-		importname := project.javadomain + "." + path + "." + name
+		importname := project.javadomain + "." + path + ".*"
 		importline = "import " + importname
 	default:
 		path := StringFromStringFindReplace(pkgname, "/", ".")
 		importline = "import " + path + lang.lineend
-	}
-	if !BooleanFromStringContains(imports, importline) {
-		output = importline + "\n"
-	}
-	return output
-}
-
-func LangImportTest(lang *vxlang, project *vxproject, pkgname string, imports string) string {
-	output := ""
-	importline := ""
-	switch lang {
-	case langcpp:
-		importline = "#include \"" + pkgname + "test.hpp\""
-	case langcsharp:
-		importline = "using Xunit" + lang.lineend
-	case langjava:
-		ipos := IntFromStringFindLast(pkgname, "/")
-		path := StringSubstring(pkgname, 0, ipos)
-		path = StringFromStringFindReplace(path, "/", ".")
-		name := StringSubstring(pkgname, ipos+1, len(pkgname))
-		name = StringUCaseFirst(name)
-		importname := project.javadomain + "." + path + "." + name + "Test"
-		importline = "import " + importname + lang.lineend
-	default:
-		path := StringFromStringFindReplace(pkgname, "/", ".")
-		importline = "import " + path + "test" + lang.lineend
 	}
 	if !BooleanFromStringContains(imports, importline) {
 		output = importline + "\n"
@@ -1007,7 +983,6 @@ func LangLambdaFromArgList(
 		lambdaargnames = append(lambdaargnames, lambdaargname)
 	}
 	for _, lambdaarg := range arglist {
-		argvaltype := ""
 		argtype := lambdaarg.vxtype
 		lambdaargname := LangFromName(lambdaarg.alias) + "_lmb"
 		lambdaargnames = append(lambdaargnames, lambdaargname)
@@ -1035,7 +1010,6 @@ func LangLambdaFromArgList(
 				}
 				lambdatypenames = append(lambdatypenames, lambdatypename)
 			default:
-				argvaltype = LangNameTypeFullFromType(lang, argtype)
 				argvaltname := LangTypeT(lang, argtype)
 				argtypename := LangTypeName(lang, anytype)
 				lambdatypename := ""
@@ -1047,7 +1021,8 @@ func LangLambdaFromArgList(
 				}
 				lambdatypenames = append(lambdatypenames, lambdatypename)
 				corepkgname := LangPkgName(lang, "vx/core")
-				lambdavar := argvaltype + " " + lambdaargname + " = " + corepkgname + lang.pkgref + "f_any_from_any(" + argvaltname + ", " + lambdaargname + "_any)" + lang.lineend
+				lambdavar := LangVal(lang, lambdaargname, argtype, 1,
+					corepkgname+lang.pkgref+"f_any_from_any("+argvaltname+", "+lambdaargname+"_any)")
 				lambdavars = append(lambdavars, lambdavar)
 			}
 		}
@@ -1056,7 +1031,7 @@ func LangLambdaFromArgList(
 	lambdatext := StringFromListStringJoin(lambdatypenames, ", ")
 	lambdavartext := ""
 	if len(lambdavars) > 0 {
-		lambdavartext = "\n  " + StringFromListStringJoin(lambdavars, "\n  ")
+		lambdavartext = StringFromListStringJoin(lambdavars, "")
 	}
 	return lambdatext, lambdavartext, lambdanames
 }
@@ -2198,7 +2173,7 @@ func LangApp(lang *vxlang, project *vxproject, cmd *vxcommand) string {
 			indent3 + "println(e.toString())" +
 			indent2 + "}"
 		arglistinit = LangVal(lang, "arglist", anylisttype, 3,
-			LangPkgNameDot(lang, "vx/core")+"vx_anylist_from_arraystring(args)")
+			LangPkgNameDot(lang, "vx/core")+"vx_anylist_from_arraystring(*args)")
 		outputprint = indent3 + "println(output)"
 	}
 	output := `/**

@@ -2794,8 +2794,8 @@ public final class Textblock {
                     Textblock.t_delim
                   ),
                   Core.t_any_from_reduce.vx_fn_new((Core.Type_any delim1_lmb_any, Core.Type_any delim2_lmb_any) -> {
-                    Textblock.Type_delim delim1_lmb = Core.f_any_from_any(Textblock.t_delim, delim1_lmb_any);
-                    Textblock.Type_delim delim2_lmb = Core.f_any_from_any(Textblock.t_delim, delim2_lmb_any);
+                    final Textblock.Type_delim delim1_lmb = Core.f_any_from_any(Textblock.t_delim, delim1_lmb_any);
+                    final Textblock.Type_delim delim2_lmb = Core.f_any_from_any(Textblock.t_delim, delim2_lmb_any);
                     Core.Type_any output_5 = Textblock.f_delim_first_from_delim_delim(delim1_lmb, delim2_lmb);
                     return output_5;
                   })

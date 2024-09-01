@@ -82,12 +82,12 @@ public final class CoreTest {
           ":testresult",
             Test.f_test(
               context,
-              Core.t_decimal.vx_new_from_string("4.5"),
+              Core.vx_new_decimal("4.5"),
               Core.f_new(
                 Core.t_float,
                 Core.vx_new(
                   Core.t_anylist,
-                  Core.t_decimal.vx_new_from_string("4.5")
+                  Core.vx_new_decimal("4.5")
                 )
               )
             )
@@ -215,7 +215,7 @@ public final class CoreTest {
             Test.f_test_false(
               context,
               Core.f_is_int(
-                Core.t_decimal.vx_new_from_string("5.5")
+                Core.vx_new_decimal("5.5")
               )
             )
         )
@@ -440,9 +440,9 @@ public final class CoreTest {
           ":testresult",
             Test.f_test(
               context,
-              Core.t_decimal.vx_new_from_string("6.4"),
+              Core.vx_new_decimal("6.4"),
               Core.f_multiply_1(
-                Core.t_decimal.vx_new_from_string("3.2"),
+                Core.vx_new_decimal("3.2"),
                 Core.vx_new_int(2)
               )
             )
@@ -453,9 +453,9 @@ public final class CoreTest {
           ":testresult",
             Test.f_test(
               context,
-              Core.t_decimal.vx_new_from_string("-10.2"),
+              Core.vx_new_decimal("-10.2"),
               Core.f_multiply_1(
-                Core.t_decimal.vx_new_from_string("5.1"),
+                Core.vx_new_decimal("5.1"),
                 Core.vx_new_int(-2)
               )
             )
@@ -2054,7 +2054,7 @@ public final class CoreTest {
                 Core.t_float,
                 Core.vx_new(
                   Core.t_anylist,
-                  Core.t_decimal.vx_new_from_string("2.3")
+                  Core.vx_new_decimal("2.3")
                 )
               ),
               Core.f_float_from_string(
@@ -2460,7 +2460,7 @@ public final class CoreTest {
             Test.f_test_true(
               context,
               Core.f_is_number(
-                Core.t_decimal.vx_new_from_string("5.5")
+                Core.vx_new_decimal("5.5")
               )
             )
         ),
@@ -3138,12 +3138,12 @@ public final class CoreTest {
           ":testresult",
             Test.f_test(
               context,
-              Core.t_decimal.vx_new_from_string("5.4"),
+              Core.vx_new_decimal("5.4"),
               Core.f_new(
                 Core.t_float,
                 Core.vx_new(
                   Core.t_anylist,
-                  Core.t_decimal.vx_new_from_string("5.4")
+                  Core.vx_new_decimal("5.4")
                 )
               )
             )
@@ -3480,7 +3480,7 @@ public final class CoreTest {
               context,
               Core.vx_new_string("5.4"),
               Core.f_string_from_any(
-                Core.t_decimal.vx_new_from_string("5.4")
+                Core.vx_new_decimal("5.4")
               )
             )
         ),
@@ -3855,7 +3855,7 @@ public final class CoreTest {
   }
 
   public static Test.Type_testcoveragesummary test_coveragesummary() {
-    return Core.vx_new(
+    Test.Type_testcoveragesummary output = Core.vx_new(
       Test.t_testcoveragesummary,
       ":testpkg", "vx/core", 
       ":constnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 13, ":tests", 2, ":total", 15), 
@@ -3866,11 +3866,15 @@ public final class CoreTest {
       ":totalnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 36, ":tests", 81, ":total", 225), 
       ":typenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 6, ":tests", 5, ":total", 76)
     );
+    return output;
   }
 
   public static Test.Type_testcoveragedetail test_coveragedetail() {
-    return Core.vx_new(Test.t_testcoveragedetail, ":testpkg", "vx/core", ":typemap", Core.vx_new(
-  Core.t_intmap,
+    Test.Type_testcoveragedetail output = Core.vx_new(
+      Test.t_testcoveragedetail,
+      ":testpkg", "vx/core",
+      ":typemap", Core.vx_new(
+        Core.t_intmap,
         ":any", 0,
         ":any-async<-func", 0,
         ":any<-anylist", 0,
@@ -3947,8 +3951,9 @@ public final class CoreTest {
         ":typemap", 0,
         ":user", 0,
         ":value", 0
-), ":constmap", Core.vx_new(
-  Core.t_intmap,
+      ), 
+      ":constmap", Core.vx_new(
+        Core.t_intmap,
         ":false", 1,
         ":global", 0,
         ":infinity", 0,
@@ -3964,8 +3969,9 @@ public final class CoreTest {
         ":path-test-resources", 0,
         ":quote", 0,
         ":true", 1
-), ":funcmap", Core.vx_new(
-  Core.t_intmap,
+      ), 
+      ":funcmap", Core.vx_new(
+        Core.t_intmap,
         ":!", 2,
         ":!-empty", 0,
         ":!-empty_1", 0,
@@ -4132,7 +4138,9 @@ public final class CoreTest {
         ":typename<-typedef", 0,
         ":typenames<-typelist", 0,
         ":user<-context", 0
-      ));
+      )
+    );
+    return output;
   }
 
   public static Test.Type_testpackage test_package(final Core.Type_context context) {

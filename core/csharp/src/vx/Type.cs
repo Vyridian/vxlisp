@@ -378,12 +378,12 @@ public static class Type {
   /**
    * @function any_from_int
    * Generic function returns any from an int.
-   * @param  {int} val
+   * @param  {int} value
    * @return {any-1}
    * (func any<-int)
    */
   public interface Func_any_from_int : Vx.Core.Func_any_from_any {
-    public T vx_any_from_int<T>(T generic_any_1, Vx.Core.Type_int val) where T : Vx.Core.Type_any;
+    public T vx_any_from_int<T>(T generic_any_1, Vx.Core.Type_int value) where T : Vx.Core.Type_any;
   }
 
   public class Class_any_from_int : Vx.Core.Class_base, Func_any_from_int {
@@ -451,13 +451,13 @@ public static class Type {
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
       Vx.Core.Type_any output = Vx.Core.e_any;
       Vx.Core.Type_any generic_any_1 = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
-      Vx.Core.Type_int val = Vx.Core.f_any_from_any(Vx.Core.t_int, arglist.vx_any(Vx.Core.vx_new_int(0)));
-      output = Vx.Type.f_any_from_int(generic_any_1, val);
+      Vx.Core.Type_int value = Vx.Core.f_any_from_any(Vx.Core.t_int, arglist.vx_any(Vx.Core.vx_new_int(0)));
+      output = Vx.Type.f_any_from_int(generic_any_1, value);
       return output;
     }
 
-    public T vx_any_from_int<T>(T generic_any_1, Vx.Core.Type_int val) where T : Vx.Core.Type_any {
-      T output = Vx.Type.f_any_from_int(generic_any_1, val);
+    public T vx_any_from_int<T>(T generic_any_1, Vx.Core.Type_int value) where T : Vx.Core.Type_any {
+      T output = Vx.Type.f_any_from_int(generic_any_1, value);
       return output;
     }
 
@@ -466,7 +466,7 @@ public static class Type {
   public static Vx.Type.Func_any_from_int e_any_from_int = new Vx.Type.Class_any_from_int();
   public static Vx.Type.Func_any_from_int t_any_from_int = new Vx.Type.Class_any_from_int();
 
-  public static T f_any_from_int<T>(T generic_any_1, Vx.Core.Type_int val) where T : Vx.Core.Type_any {
+  public static T f_any_from_int<T>(T generic_any_1, Vx.Core.Type_int value) where T : Vx.Core.Type_any {
     T output = Vx.Core.f_empty(generic_any_1);
     return output;
   }
@@ -1301,13 +1301,13 @@ public static class Type {
 
   /**
    * @function is_type
-   * @param  {any} val
+   * @param  {any} value
    * @param  {any} type
    * @return {boolean}
    * (func is-type)
    */
   public interface Func_is_type : Vx.Core.Type_func, Vx.Core.Type_replfunc {
-    public Vx.Core.Type_boolean vx_is_type(Vx.Core.Type_any val, Vx.Core.Type_any type);
+    public Vx.Core.Type_boolean vx_is_type(Vx.Core.Type_any value, Vx.Core.Type_any type);
   }
 
   public class Class_is_type : Vx.Core.Class_base, Func_is_type {
@@ -1362,14 +1362,14 @@ public static class Type {
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
       Vx.Core.Type_any output = Vx.Core.e_any;
-      Vx.Core.Type_any val = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
+      Vx.Core.Type_any value = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
       Vx.Core.Type_any type = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(1)));
-      output = Vx.Type.f_is_type(val, type);
+      output = Vx.Type.f_is_type(value, type);
       return output;
     }
 
-    public Vx.Core.Type_boolean vx_is_type(Vx.Core.Type_any val, Vx.Core.Type_any type) {
-      Vx.Core.Type_boolean output = Vx.Type.f_is_type(val, type);
+    public Vx.Core.Type_boolean vx_is_type(Vx.Core.Type_any value, Vx.Core.Type_any type) {
+      Vx.Core.Type_boolean output = Vx.Type.f_is_type(value, type);
       return output;
     }
 
@@ -1378,7 +1378,7 @@ public static class Type {
   public static Vx.Type.Func_is_type e_is_type = new Vx.Type.Class_is_type();
   public static Vx.Type.Func_is_type t_is_type = new Vx.Type.Class_is_type();
 
-  public static Vx.Core.Type_boolean f_is_type(Vx.Core.Type_any val, Vx.Core.Type_any type) {
+  public static Vx.Core.Type_boolean f_is_type(Vx.Core.Type_any value, Vx.Core.Type_any type) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
     output = Vx.Core.f_or_1(
       Vx.Core.vx_new(
@@ -1388,7 +1388,7 @@ public static class Type {
             type
           ),
           Vx.Core.f_typename_from_any(
-            val
+            value
           )
         ),
         Vx.Core.f_contains_1(
@@ -1396,12 +1396,12 @@ public static class Type {
             type
           ),
           Vx.Core.f_typename_from_any(
-            val
+            value
           )
         ),
         Vx.Core.f_contains_1(
           Vx.Type.f_traitnames_from_any(
-            val
+            value
           ),
           Vx.Core.f_typename_from_type(
             type
@@ -1414,14 +1414,14 @@ public static class Type {
 
   /**
    * @function is_type_from_any_typelist
-   * Returns true if val is any type in typelist.
-   * @param  {any} val
+   * Returns true if value is any type in typelist.
+   * @param  {any} value
    * @param  {typelist} typelist
    * @return {boolean}
    * (func is-type<-any-typelist)
    */
   public interface Func_is_type_from_any_typelist : Vx.Core.Type_func, Vx.Core.Type_replfunc {
-    public Vx.Core.Type_boolean vx_is_type_from_any_typelist(Vx.Core.Type_any val, Vx.Core.Type_typelist typelist);
+    public Vx.Core.Type_boolean vx_is_type_from_any_typelist(Vx.Core.Type_any value, Vx.Core.Type_typelist typelist);
   }
 
   public class Class_is_type_from_any_typelist : Vx.Core.Class_base, Func_is_type_from_any_typelist {
@@ -1476,14 +1476,14 @@ public static class Type {
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
       Vx.Core.Type_any output = Vx.Core.e_any;
-      Vx.Core.Type_any val = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
+      Vx.Core.Type_any value = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
       Vx.Core.Type_typelist typelist = Vx.Core.f_any_from_any(Vx.Core.t_typelist, arglist.vx_any(Vx.Core.vx_new_int(1)));
-      output = Vx.Type.f_is_type_from_any_typelist(val, typelist);
+      output = Vx.Type.f_is_type_from_any_typelist(value, typelist);
       return output;
     }
 
-    public Vx.Core.Type_boolean vx_is_type_from_any_typelist(Vx.Core.Type_any val, Vx.Core.Type_typelist typelist) {
-      Vx.Core.Type_boolean output = Vx.Type.f_is_type_from_any_typelist(val, typelist);
+    public Vx.Core.Type_boolean vx_is_type_from_any_typelist(Vx.Core.Type_any value, Vx.Core.Type_typelist typelist) {
+      Vx.Core.Type_boolean output = Vx.Type.f_is_type_from_any_typelist(value, typelist);
       return output;
     }
 
@@ -1492,7 +1492,7 @@ public static class Type {
   public static Vx.Type.Func_is_type_from_any_typelist e_is_type_from_any_typelist = new Vx.Type.Class_is_type_from_any_typelist();
   public static Vx.Type.Func_is_type_from_any_typelist t_is_type_from_any_typelist = new Vx.Type.Class_is_type_from_any_typelist();
 
-  public static Vx.Core.Type_boolean f_is_type_from_any_typelist(Vx.Core.Type_any val, Vx.Core.Type_typelist typelist) {
+  public static Vx.Core.Type_boolean f_is_type_from_any_typelist(Vx.Core.Type_any value, Vx.Core.Type_typelist typelist) {
     Vx.Core.Type_boolean output = Vx.Core.e_boolean;
     output = Vx.Core.f_any_from_list_start_reduce(
       Vx.Core.t_boolean,
@@ -1504,7 +1504,7 @@ public static class Type {
         Vx.Core.Type_any output_1 = Vx.Core.f_or(
           result,
           Vx.Type.f_is_type(
-            val,
+            value,
             type
           )
         );
@@ -1968,12 +1968,12 @@ public static class Type {
   /**
    * @function string_from_int
    * Function Type converting int to string
-   * @param  {int} val
+   * @param  {int} value
    * @return {string}
    * (func string<-int)
    */
   public interface Func_string_from_int : Vx.Core.Func_any_from_any {
-    public Vx.Core.Type_string vx_string_from_int(Vx.Core.Type_int val);
+    public Vx.Core.Type_string vx_string_from_int(Vx.Core.Type_int value);
   }
 
   public class Class_string_from_int : Vx.Core.Class_base, Func_string_from_int {
@@ -2040,13 +2040,13 @@ public static class Type {
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
       Vx.Core.Type_any output = Vx.Core.e_any;
-      Vx.Core.Type_int val = Vx.Core.f_any_from_any(Vx.Core.t_int, arglist.vx_any(Vx.Core.vx_new_int(0)));
-      output = Vx.Type.f_string_from_int(val);
+      Vx.Core.Type_int value = Vx.Core.f_any_from_any(Vx.Core.t_int, arglist.vx_any(Vx.Core.vx_new_int(0)));
+      output = Vx.Type.f_string_from_int(value);
       return output;
     }
 
-    public Vx.Core.Type_string vx_string_from_int(Vx.Core.Type_int val) {
-      Vx.Core.Type_string output = Vx.Type.f_string_from_int(val);
+    public Vx.Core.Type_string vx_string_from_int(Vx.Core.Type_int value) {
+      Vx.Core.Type_string output = Vx.Type.f_string_from_int(value);
       return output;
     }
 
@@ -2055,11 +2055,11 @@ public static class Type {
   public static Vx.Type.Func_string_from_int e_string_from_int = new Vx.Type.Class_string_from_int();
   public static Vx.Type.Func_string_from_int t_string_from_int = new Vx.Type.Class_string_from_int();
 
-  public static Vx.Core.Type_string f_string_from_int(Vx.Core.Type_int val) {
+  public static Vx.Core.Type_string f_string_from_int(Vx.Core.Type_int value) {
     Vx.Core.Type_string output = Vx.Core.e_string;
     output = Vx.Core.f_switch(
       Vx.Core.t_string,
-      val,
+      value,
       Vx.Core.vx_new(
         Vx.Core.t_thenelselist,
         Vx.Core.f_case_1(
@@ -2089,7 +2089,7 @@ public static class Type {
               Vx.Core.t_string,
               Vx.Core.vx_new(
                 Vx.Core.t_anylist,
-                val
+                value
               )
             );
             return output_4;
@@ -2545,12 +2545,12 @@ public static class Type {
   /**
    * @function traitnames_from_any
    * Get the trait names of a given type
-   * @param  {any} val
+   * @param  {any} value
    * @return {stringlist}
    * (func traitnames<-any)
    */
   public interface Func_traitnames_from_any : Vx.Core.Func_any_from_any {
-    public Vx.Core.Type_stringlist vx_traitnames_from_any(Vx.Core.Type_any val);
+    public Vx.Core.Type_stringlist vx_traitnames_from_any(Vx.Core.Type_any value);
   }
 
   public class Class_traitnames_from_any : Vx.Core.Class_base, Func_traitnames_from_any {
@@ -2617,13 +2617,13 @@ public static class Type {
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
       Vx.Core.Type_any output = Vx.Core.e_any;
-      Vx.Core.Type_any val = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
-      output = Vx.Type.f_traitnames_from_any(val);
+      Vx.Core.Type_any value = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
+      output = Vx.Type.f_traitnames_from_any(value);
       return output;
     }
 
-    public Vx.Core.Type_stringlist vx_traitnames_from_any(Vx.Core.Type_any val) {
-      Vx.Core.Type_stringlist output = Vx.Type.f_traitnames_from_any(val);
+    public Vx.Core.Type_stringlist vx_traitnames_from_any(Vx.Core.Type_any value) {
+      Vx.Core.Type_stringlist output = Vx.Type.f_traitnames_from_any(value);
       return output;
     }
 
@@ -2632,11 +2632,11 @@ public static class Type {
   public static Vx.Type.Func_traitnames_from_any e_traitnames_from_any = new Vx.Type.Class_traitnames_from_any();
   public static Vx.Type.Func_traitnames_from_any t_traitnames_from_any = new Vx.Type.Class_traitnames_from_any();
 
-  public static Vx.Core.Type_stringlist f_traitnames_from_any(Vx.Core.Type_any val) {
+  public static Vx.Core.Type_stringlist f_traitnames_from_any(Vx.Core.Type_any value) {
     Vx.Core.Type_stringlist output = Vx.Core.e_stringlist;
     output = Vx.Core.f_typenames_from_typelist(
       Vx.Type.f_traits_from_any(
-        val
+        value
       )
     );
     return output;
@@ -2645,12 +2645,12 @@ public static class Type {
   /**
    * @function traits_from_any
    * Get the traits of a given value
-   * @param  {any} val
+   * @param  {any} value
    * @return {typelist}
    * (func traits<-any)
    */
   public interface Func_traits_from_any : Vx.Core.Func_any_from_any {
-    public Vx.Core.Type_typelist vx_traits_from_any(Vx.Core.Type_any val);
+    public Vx.Core.Type_typelist vx_traits_from_any(Vx.Core.Type_any value);
   }
 
   public class Class_traits_from_any : Vx.Core.Class_base, Func_traits_from_any {
@@ -2717,13 +2717,13 @@ public static class Type {
 
     public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
       Vx.Core.Type_any output = Vx.Core.e_any;
-      Vx.Core.Type_any val = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
-      output = Vx.Type.f_traits_from_any(val);
+      Vx.Core.Type_any value = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
+      output = Vx.Type.f_traits_from_any(value);
       return output;
     }
 
-    public Vx.Core.Type_typelist vx_traits_from_any(Vx.Core.Type_any val) {
-      Vx.Core.Type_typelist output = Vx.Type.f_traits_from_any(val);
+    public Vx.Core.Type_typelist vx_traits_from_any(Vx.Core.Type_any value) {
+      Vx.Core.Type_typelist output = Vx.Type.f_traits_from_any(value);
       return output;
     }
 
@@ -2732,11 +2732,11 @@ public static class Type {
   public static Vx.Type.Func_traits_from_any e_traits_from_any = new Vx.Type.Class_traits_from_any();
   public static Vx.Type.Func_traits_from_any t_traits_from_any = new Vx.Type.Class_traits_from_any();
 
-  public static Vx.Core.Type_typelist f_traits_from_any(Vx.Core.Type_any val) {
+  public static Vx.Core.Type_typelist f_traits_from_any(Vx.Core.Type_any value) {
     Vx.Core.Type_typelist output = Vx.Core.e_typelist;
     output = Vx.Core.f_traits_from_typedef(
       Vx.Core.f_typedef_from_any(
-        val
+        value
       )
     );
     return output;

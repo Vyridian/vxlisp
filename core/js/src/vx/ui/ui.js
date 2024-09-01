@@ -2522,9 +2522,9 @@ export default class vx_ui_ui {
     output = vx_core.f_map_from_map_1(
       {"any-1": vx_ui_ui.t_ui, "any-2": vx_ui_ui.t_ui, "map-1": vx_ui_ui.t_uimap, "map-2": vx_ui_ui.t_uimap},
       uimap,
-      vx_core.f_new(vx_core.t_any_from_key_value, ([key, val]) => 
+      vx_core.f_new(vx_core.t_any_from_key_value, ([key, value]) => 
         vx_ui_ui.f_ui_layout_from_ui_orig_parent(
-          val,
+          value,
           vx_core.f_empty(
             vx_ui_ui.t_ui
           ),

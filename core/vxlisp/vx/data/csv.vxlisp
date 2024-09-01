@@ -80,8 +80,8 @@
    rowmap
    (fn : stringmap
     [key : string
-     val : stringlist]
-    (:2 val))))
+     value : stringlist]
+    (:2 value))))
  :doc "Returns a stringmap using the first 2 values in each row.")
 
 (func textblock-csv<-string : textblock

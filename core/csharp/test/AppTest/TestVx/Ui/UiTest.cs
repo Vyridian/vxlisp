@@ -502,7 +502,7 @@ public class UiTest {
   }
 
   public static Vx.Test.Type_testcoveragesummary test_coveragesummary() {
-    return Vx.Core.vx_new(
+    Vx.Test.Type_testcoveragesummary output = Vx.Core.vx_new(
       Vx.Test.t_testcoveragesummary,
       ":testpkg", "vx/ui/ui", 
       ":constnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 47), 
@@ -513,11 +513,15 @@ public class UiTest {
       ":totalnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 4, ":tests", 7, ":total", 144), 
       ":typenums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 29)
     );
+    return output;
   }
 
   public static Vx.Test.Type_testcoveragedetail test_coveragedetail() {
-    return Vx.Core.vx_new(Vx.Test.t_testcoveragedetail, ":testpkg", "vx/ui/ui", ":typemap", Vx.Core.vx_new(
-  Vx.Core.t_intmap,
+    Vx.Test.Type_testcoveragedetail output = Vx.Core.vx_new(
+      Vx.Test.t_testcoveragedetail,
+      ":testpkg", "vx/ui/ui",
+      ":typemap", Vx.Core.vx_new(
+        Vx.Core.t_intmap,
         ":align", 0,
         ":bounds", 0,
         ":cursor", 0,
@@ -547,8 +551,9 @@ public class UiTest {
         ":uiengine", 0,
         ":uilist", 0,
         ":uimap", 0
-), ":constmap", Vx.Core.vx_new(
-  Vx.Core.t_intmap,
+      ), 
+      ":constmap", Vx.Core.vx_new(
+        Vx.Core.t_intmap,
         ":align-center", 0,
         ":align-left", 0,
         ":align-right", 0,
@@ -596,8 +601,9 @@ public class UiTest {
         ":styletype-custom", 0,
         ":styletype-shared", 0,
         ":styletype-system", 0
-), ":funcmap", Vx.Core.vx_new(
-  Vx.Core.t_intmap,
+      ), 
+      ":funcmap", Vx.Core.vx_new(
+        Vx.Core.t_intmap,
         ":boolean-layout<-ui-parent-selected", 0,
         ":boolean-layout<-ui-parent-visible", 0,
         ":boolean-layoutaddchild<-ui-parent", 0,
@@ -666,7 +672,9 @@ public class UiTest {
         ":uimap-layout<-uimap-parent", 0,
         ":uimap<-uilist", 0,
         ":uimap<-uimap-data", 0
-      ));
+      )
+    );
+    return output;
   }
 
   public static Vx.Test.Type_testpackage test_package(Vx.Core.Type_context context) {

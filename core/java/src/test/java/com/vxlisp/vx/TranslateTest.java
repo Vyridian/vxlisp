@@ -124,7 +124,7 @@ public final class TranslateTest {
   }
 
   public static Test.Type_testcoveragesummary test_coveragesummary() {
-    return Core.vx_new(
+    Test.Type_testcoveragesummary output = Core.vx_new(
       Test.t_testcoveragesummary,
       ":testpkg", "vx/translate", 
       ":constnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
@@ -135,11 +135,17 @@ public final class TranslateTest {
       ":totalnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 30, ":tests", 3, ":total", 10), 
       ":typenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0)
     );
+    return output;
   }
 
   public static Test.Type_testcoveragedetail test_coveragedetail() {
-    return Core.vx_new(Test.t_testcoveragedetail, ":testpkg", "vx/translate", ":typemap", Core.e_intmap, ":constmap", Core.e_intmap, ":funcmap", Core.vx_new(
-  Core.t_intmap,
+    Test.Type_testcoveragedetail output = Core.vx_new(
+      Test.t_testcoveragedetail,
+      ":testpkg", "vx/translate",
+      ":typemap", Core.e_intmap, 
+      ":constmap", Core.e_intmap, 
+      ":funcmap", Core.vx_new(
+        Core.t_intmap,
         ":session<-session-name", 0,
         ":session<-session-translation", 0,
         ":session<-session-translationmap-name", 0,
@@ -151,7 +157,9 @@ public final class TranslateTest {
         ":translation<-context", 0,
         ":translation<-session-name", 0,
         ":translationmap<-translations", 0
-      ));
+      )
+    );
+    return output;
   }
 
   public static Test.Type_testpackage test_package(final Core.Type_context context) {

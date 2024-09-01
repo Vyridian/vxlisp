@@ -12355,7 +12355,7 @@ public class TextblockTest {
   }
 
   public static Vx.Test.Type_testcoveragesummary test_coveragesummary() {
-    return Vx.Core.vx_new(
+    Vx.Test.Type_testcoveragesummary output = Vx.Core.vx_new(
       Vx.Test.t_testcoveragesummary,
       ":testpkg", "vx/data/textblock", 
       ":constnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 22), 
@@ -12366,17 +12366,22 @@ public class TextblockTest {
       ":totalnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 34, ":tests", 18, ":total", 52), 
       ":typenums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 25, ":tests", 1, ":total", 4)
     );
+    return output;
   }
 
   public static Vx.Test.Type_testcoveragedetail test_coveragedetail() {
-    return Vx.Core.vx_new(Vx.Test.t_testcoveragedetail, ":testpkg", "vx/data/textblock", ":typemap", Vx.Core.vx_new(
-  Vx.Core.t_intmap,
+    Vx.Test.Type_testcoveragedetail output = Vx.Core.vx_new(
+      Vx.Test.t_testcoveragedetail,
+      ":testpkg", "vx/data/textblock",
+      ":typemap", Vx.Core.vx_new(
+        Vx.Core.t_intmap,
         ":delim", 0,
         ":delimlist", 1,
         ":textblock", 0,
         ":textblocklist", 0
-), ":constmap", Vx.Core.vx_new(
-  Vx.Core.t_intmap,
+      ), 
+      ":constmap", Vx.Core.vx_new(
+        Vx.Core.t_intmap,
         ":delimbracketangle", 0,
         ":delimbracketcurly", 0,
         ":delimbracketsquare", 0,
@@ -12399,8 +12404,9 @@ public class TextblockTest {
         ":delimtest3", 0,
         ":delimtext", 0,
         ":delimwhitespace", 0
-), ":funcmap", Vx.Core.vx_new(
-  Vx.Core.t_intmap,
+      ), 
+      ":funcmap", Vx.Core.vx_new(
+        Vx.Core.t_intmap,
         ":children<-textblock", 0,
         ":delim-first<-delim-delim", 2,
         ":delim-first<-string-delimlist", 1,
@@ -12427,7 +12433,9 @@ public class TextblockTest {
         ":textblock<-string-delim", 1,
         ":textblock<-textblock-delim", 0,
         ":textblocklist<-textblocklist-remove", 1
-      ));
+      )
+    );
+    return output;
   }
 
   public static Vx.Test.Type_testpackage test_package(Vx.Core.Type_context context) {

@@ -340,7 +340,7 @@ export default class vx_collection_test {
           vx_test.t_testdescribelist,
           vx_core.f_new(
             vx_test.t_testdescribe,
-            ":describename", "(test\n (stringlist\n  \"a1\" \"b1\" \"c1\" \"d1\")\n (list<-list-filter : stringlist\n  (list\n   \"a\" 4 \"b\" (list) \"c\" (map) \"d\")\n  (fn : string\n   [val : any]\n   (if\n    (then\n     (is-string val)\n     (string val \"1\"))))))",
+            ":describename", "(test\n (stringlist\n  \"a1\" \"b1\" \"c1\" \"d1\")\n (list<-list-filter : stringlist\n  (list\n   \"a\" 4 \"b\" (list) \"c\" (map) \"d\")\n  (fn : string\n   [value : any]\n   (if\n    (then\n     (is-string value)\n     (string value \"1\"))))))",
             ":testresult",
             vx_test.f_test(
               context,
@@ -367,14 +367,14 @@ export default class vx_collection_test {
                   ),
                   "d"
                 ),
-                vx_core.f_new(vx_core.t_any_from_any, (val) => 
+                vx_core.f_new(vx_core.t_any_from_any, (value) => 
                   vx_core.f_if_2(
                     {"any-1": vx_core.t_string},
                     vx_core.f_then(
-                      vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_type.f_is_string(val)}),
+                      vx_core.f_new(vx_core.t_boolean_from_func, () => {return vx_type.f_is_string(value)}),
                       vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_new(
                         vx_core.t_string,
-                        val,
+                        value,
                         "1"
                       )})
                     )

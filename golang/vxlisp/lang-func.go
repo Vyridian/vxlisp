@@ -910,10 +910,12 @@ func LangFuncLambdaArgIndex(
 			sfuturevar := LangVarFuture(lang, "future_"+LangFromName(lambdaarg.name), lambdaarg.vxtype, indent+1,
 				lambdavaluetext)
 			lambdaargname := LangFromName(lambdaarg.name)
-			switch lang {
-			case langkotlin:
-				lambdaargname += " : vx_core.Type_any"
-			}
+			/*
+				switch lang {
+				case langkotlin:
+					lambdaargname += " : vx_core.Type_any"
+				}
+			*/
 			slambdaoutput := "" +
 				LangFuncLambda(lang, indent+1, ioutputargnum, "", lambdaargname,
 					slambdarest+
@@ -1244,7 +1246,8 @@ func LangFuncValueArgIndex(
 						"any<-reduce-next", "any<-reduce-next-async":
 						funcargfunc := FuncFromValue(argvalue)
 						funcarglist := funcargfunc.listarg
-						lambdatext, lambdavartext, lambdaargtext := LangLambdaFromArgList(lang, funcarglist, funcargfunc.isgeneric)
+						lambdatext, lambdavartext, lambdaargtext := LangLambdaFromArgList(
+							lang, funcarglist, funcargfunc.isgeneric)
 						work := LangFuncF(lang, funcargfunc) + "(" + lambdaargtext + ")"
 						soutput := ""
 						g_ifuncdepth += 1

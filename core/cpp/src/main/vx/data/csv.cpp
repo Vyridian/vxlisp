@@ -1179,11 +1179,11 @@ namespace vx_data_csv {
         vx_core::Type_stringmap output_1 = vx_core::f_map_from_map_1(
           vx_core::t_stringmap,
           rowmap,
-          vx_core::t_any_from_key_value->vx_fn_new({}, [](vx_core::Type_any key_any, vx_core::Type_any val_any) {
+          vx_core::t_any_from_key_value->vx_fn_new({}, [](vx_core::Type_any key_any, vx_core::Type_any value_any) {
             vx_core::Type_string key = vx_core::vx_any_from_any(vx_core::t_string, key_any);
-            vx_core::Type_stringlist val = vx_core::vx_any_from_any(vx_core::t_stringlist, val_any);
+            vx_core::Type_stringlist value = vx_core::vx_any_from_any(vx_core::t_stringlist, value_any);
             vx_core::Type_any output_1 = 
-              vx_core::f_any_from_list(vx_core::t_string, val, vx_core::vx_new_int(2));
+              vx_core::f_any_from_list(vx_core::t_string, value, vx_core::vx_new_int(2));
             return output_1;
           })
         );

@@ -1957,8 +1957,8 @@ public final class Xml {
       textblocklist,
       xmlarg,
       Core.t_any_from_reduce.vx_fn_new((Core.Type_any xmlarg_lmb_any, Core.Type_any tb_lmb_any) -> {
-        Xml.Type_xml xmlarg_lmb = Core.f_any_from_any(Xml.t_xml, xmlarg_lmb_any);
-        Textblock.Type_textblock tb_lmb = Core.f_any_from_any(Textblock.t_textblock, tb_lmb_any);
+        final Xml.Type_xml xmlarg_lmb = Core.f_any_from_any(Xml.t_xml, xmlarg_lmb_any);
+        final Textblock.Type_textblock tb_lmb = Core.f_any_from_any(Textblock.t_textblock, tb_lmb_any);
         Core.Type_any output_1 = Xml.f_xml_parse_from_xml_textblock(xmlarg_lmb, tb_lmb);
         return output_1;
       })

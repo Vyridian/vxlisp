@@ -14,7 +14,7 @@ public final class UihtmlTest {
   }
 
   public static Test.Type_testcoveragesummary test_coveragesummary() {
-    return Core.vx_new(
+    Test.Type_testcoveragesummary output = Core.vx_new(
       Test.t_testcoveragesummary,
       ":testpkg", "vx/ui/html/uihtml", 
       ":constnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 7), 
@@ -25,11 +25,16 @@ public final class UihtmlTest {
       ":totalnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 44), 
       ":typenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0)
     );
+    return output;
   }
 
   public static Test.Type_testcoveragedetail test_coveragedetail() {
-    return Core.vx_new(Test.t_testcoveragedetail, ":testpkg", "vx/ui/html/uihtml", ":typemap", Core.e_intmap, ":constmap", Core.vx_new(
-  Core.t_intmap,
+    Test.Type_testcoveragedetail output = Core.vx_new(
+      Test.t_testcoveragedetail,
+      ":testpkg", "vx/ui/html/uihtml",
+      ":typemap", Core.e_intmap, 
+      ":constmap", Core.vx_new(
+        Core.t_intmap,
         ":layout-app-html", 0,
         ":layout-else-html", 0,
         ":layout-image-html", 0,
@@ -37,8 +42,9 @@ public final class UihtmlTest {
         ":layoutenginehtml", 0,
         ":style-hidden", 0,
         ":style-selected", 0
-), ":funcmap", Core.vx_new(
-  Core.t_intmap,
+      ), 
+      ":funcmap", Core.vx_new(
+        Core.t_intmap,
         ":boolean-layoutremove-html", 0,
         ":boolean-layoutselected-html", 0,
         ":boolean-layoutvisible-html", 0,
@@ -77,7 +83,9 @@ public final class UihtmlTest {
         ":ui-layout-default<-ui-orig-parent", 0,
         ":ui-layout-image<-ui-orig-parent", 0,
         ":ui-layout-label<-ui-orig-parent", 0
-      ));
+      )
+    );
+    return output;
   }
 
   public static Test.Type_testpackage test_package(final Core.Type_context context) {

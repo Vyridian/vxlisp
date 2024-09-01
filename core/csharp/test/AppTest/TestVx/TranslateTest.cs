@@ -121,7 +121,7 @@ public class TranslateTest {
   }
 
   public static Vx.Test.Type_testcoveragesummary test_coveragesummary() {
-    return Vx.Core.vx_new(
+    Vx.Test.Type_testcoveragesummary output = Vx.Core.vx_new(
       Vx.Test.t_testcoveragesummary,
       ":testpkg", "vx/translate", 
       ":constnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
@@ -132,11 +132,17 @@ public class TranslateTest {
       ":totalnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 30, ":tests", 3, ":total", 10), 
       ":typenums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0)
     );
+    return output;
   }
 
   public static Vx.Test.Type_testcoveragedetail test_coveragedetail() {
-    return Vx.Core.vx_new(Vx.Test.t_testcoveragedetail, ":testpkg", "vx/translate", ":typemap", Vx.Core.e_intmap, ":constmap", Vx.Core.e_intmap, ":funcmap", Vx.Core.vx_new(
-  Vx.Core.t_intmap,
+    Vx.Test.Type_testcoveragedetail output = Vx.Core.vx_new(
+      Vx.Test.t_testcoveragedetail,
+      ":testpkg", "vx/translate",
+      ":typemap", Vx.Core.e_intmap, 
+      ":constmap", Vx.Core.e_intmap, 
+      ":funcmap", Vx.Core.vx_new(
+        Vx.Core.t_intmap,
         ":session<-session-name", 0,
         ":session<-session-translation", 0,
         ":session<-session-translationmap-name", 0,
@@ -148,7 +154,9 @@ public class TranslateTest {
         ":translation<-context", 0,
         ":translation<-session-name", 0,
         ":translationmap<-translations", 0
-      ));
+      )
+    );
+    return output;
   }
 
   public static Vx.Test.Type_testpackage test_package(Vx.Core.Type_context context) {

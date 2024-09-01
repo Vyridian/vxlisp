@@ -11,11 +11,15 @@
         Core.Type_string valcontent = Core.vx_new_string(scontent);
         output = valcontent;
       } catch (Exception ex) {
-        Core.Type_msg msg = Core.vx_msg_from_exception("string-read<-file", ex);
+        Core.Type_msg msg = Core.vx_msg_from_exception(
+          "string-read<-file", ex
+        );
         output = Core.vx_copy(output, msg);
       }
     } else {
-      Core.Type_msg msg = Core.vx_msg_from_error("string-read<-file", ":filenotfound", file);
+      Core.Type_msg msg = Core.vx_msg_from_error(
+        "string-read<-file", ":filenotfound", file
+      );
       output = Core.vx_copy(output, msg);
     }
     return output;

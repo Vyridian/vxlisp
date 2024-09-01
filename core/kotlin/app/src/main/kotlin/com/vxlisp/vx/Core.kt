@@ -211,25 +211,16 @@ object vx_core {
     return output
   }
 
-/*
-  fun <T : vx_core.Type_any> map_from_map(
-    mapval : LinkedHashMap<String, vx_core.Type_any>) : LinkedHashMap<String, T> {
-    LinkedHashMap<String, T> output = LinkedHashMap<String, T>()
-    val keys : Set<String> = mapval.keys
-    for (var key : String : keys) {
-      vx_core.Type_any? value = mapval.get(key)
-      if (value != null) {
-        try {
-          val castval : T = value as T
-          output.put(key, castval)
-        } catch (ex : Exception) {
-          vx_core.vx_log("map<-map", ex)
-        }
-      }
-    }
+  // vx_any_from_func(generic_any_1, func, args...)
+  fun <T : vx_core.Type_any> vx_any_from_func(
+    generic_any_1 : T,
+    func : vx_core.Type_replfunc,
+    vararg args : vx_core.Type_any) : T {
+    val anylist : vx_core.Type_anylist = vx_core.vx_new_anylist(*args)
+    val value : vx_core.Type_any = func.vx_repl(anylist)
+    val output : T = vx_core.f_any_from_any(generic_any_1, value)
     return output
   }
-*/
 
   // vx_any_from_list_start_reduce(any-1, list-2, any-1, any<-reduce)
   fun <T : vx_core.Type_any, N : vx_core.Type_list> vx_any_from_list_start_reduce(
@@ -243,6 +234,27 @@ object vx_core {
       output = fn_reduce.vx_any_from_reduce(
         generic_any_1, output, item
       )
+    }
+    return output
+  }
+
+  // vx_any_from_list_start_reduce_next(any-1, list-2, any-1, any<-reduce-next)
+  fun <T : vx_core.Type_any, N : vx_core.Type_list> vx_any_from_list_start_reduce_next(
+    generic_any_1 : T,
+    list : N,
+    valstart : T,
+    fn_reduce_next : vx_core.Func_any_from_reduce_next) : T {
+    var output : T = valstart
+    val listval : List<vx_core.Type_any> = list.vx_list()
+    var current : vx_core.Type_any = vx_core.e_any
+    var first : Boolean = true
+    for (next : vx_core.Type_any in listval) {
+      if (first) {
+        first = false
+      } else {
+        output = fn_reduce_next.vx_any_from_reduce_next(generic_any_1, output, current, next)
+      }
+      current = next
     }
     return output
   }
@@ -293,16 +305,17 @@ object vx_core {
     generic_any_1 : T,
     list : vx_core.Type_list,
     fn_any : (vx_core.Type_any) -> T) : T {
-				var output : T = vx_core.f_empty(generic_any_1)
-				val listany : List<vx_core.Type_any> = list.vx_list()
-				for (any : vx_core.Type_any in listany) {
-				  val tany : T = vx_core.f_any_from_any(generic_any_1, any)
-				  val value : T = fn_any(tany)
-				  if (value != vx_core.e_any) {
-				    output = value
-				    break
-				  }
-				}
+    val empty : T = vx_core.f_empty(generic_any_1)
+    var output : T = empty
+    val listany : List<vx_core.Type_any> = list.vx_list()
+    for (any : vx_core.Type_any in listany) {
+      val tany : T = vx_core.f_any_from_any(generic_any_1, any)
+      val value : T = fn_any(tany)
+      if (value != empty) {
+        output = value
+        break
+      }
+    }
     return output
   }
 
@@ -333,11 +346,12 @@ object vx_core {
 
   fun <T> vx_async_arraylist_from_arraylist_async(
     list_future_t : List<CompletableFuture<T>>) : CompletableFuture<List<T>> {
+    val array_future_t : Array<CompletableFuture<*>> = list_future_t.toTypedArray()
     val future_void : CompletableFuture<Void> = CompletableFuture.allOf(
-      *list_future_t.toTypedArray()
+      *array_future_t
     )
     val output : CompletableFuture<List<T>> = future_void.thenApply {
-      _ : Void ->
+      _ ->
       val list : List<T> = list_future_t.map {
         future_t : CompletableFuture<T> ->
         val output_2 : T = future_t.get()
@@ -485,6 +499,24 @@ object vx_core {
           output = true
         }
       }
+    }
+    return output
+  }
+
+  // vx_float_from_number(number)
+  fun vx_float_from_number(
+    num : vx_core.Type_number) : Float {
+    var output : Float = 0f
+    val type : vx_core.Type_any = num.vx_type()
+    if (type == vx_core.t_float) {
+      val floatval : vx_core.Type_float = vx_core.f_any_from_any(vx_core.t_float, num)
+      output = floatval.vx_float()
+    } else if (type == vx_core.t_int) {
+      val intval : vx_core.Type_int = vx_core.f_any_from_any(vx_core.t_int, num)
+      output = intval.vx_int().toFloat()
+    } else if (type == vx_core.t_decimal) {
+      val decval : vx_core.Type_decimal = vx_core.f_any_from_any(vx_core.t_decimal, num)
+      output = decval.vx_float()
     }
     return output
   }
@@ -782,6 +814,20 @@ object vx_core {
     return output
   }
 
+  // vx_new_anylist(Array<any>)
+  fun vx_new_anylist(
+    vararg anys : vx_core.Type_any) : vx_core.Type_anylist {
+    val listany : List<vx_core.Type_any> = anys.asList()
+    return vx_new_anylist(listany)
+  }
+
+  fun vx_new_anylist(
+    listany : List<vx_core.Type_any>) : vx_core.Type_anylist {
+    val output : vx_core.Class_anylist = vx_core.Class_anylist()
+    output.vx_p_list = immutablelist(listany)
+    return output
+  }
+
   // vx_new_list(T, List<any>)
   fun <T : vx_core.Type_list> vx_new_list(
     generic_list_1 : T,
@@ -1008,6 +1054,19 @@ object vx_core {
     return output
   }
 
+  fun vx_new_decimal(
+    text : String) : vx_core.Type_decimal {
+    var output : vx_core.Type_decimal
+    if (text.equals("0") || text.equals("0.0")) {
+      output = vx_core.e_decimal
+    } else {
+      val work : vx_core.Class_decimal = vx_core.Class_decimal()
+      work.vxdecimal = text
+      output = work
+    }
+    return output
+  }
+
   fun vx_new_float(
     fval : Float) : Type_float {
     var output : Class_float = vx_core.Class_float()
@@ -1222,6 +1281,27 @@ object vx_core {
     return output
   }
 
+  // vx_string_from_string_find_replace(string, string, string)
+  fun vx_string_from_string_find_replace(
+    text : String,
+    find : String,
+    replace : String) : String {
+    val output : String = text.replace(find, replace)
+    return output
+  }
+
+  // vx_string_from_string_find_replace(string, string, string)
+  fun vx_string_from_string_find_replace(
+    text : vx_core.Type_string,
+    find : vx_core.Type_string,
+    replace : vx_core.Type_string) : vx_core.Type_string {
+    val stext : String = vx_core.vx_string_from_string_find_replace(
+      text.vx_string(), find.vx_string(), replace.vx_string()
+    )
+    val output : vx_core.Type_string = vx_core.vx_new_string(stext)
+    return output
+  }
+
   fun vx_string_from_string_start_end(
     text : String,
     start : Int,
@@ -1240,6 +1320,59 @@ object vx_core {
         end = maxlen
       }
       output = text.substring(start - 1, end)
+    }
+    return output
+  }
+
+  fun vx_string_repeat(
+    text : String,
+    repeat : Int) : String {
+    val output : String = text.repeat(repeat)
+    return output
+  }
+
+  fun vx_string_repeat(
+    text : vx_core.Type_string,
+    repeat : vx_core.Type_int) : vx_core.Type_string {
+    val stext : String = vx_core.vx_string_repeat(text.vx_string(), repeat.vx_int())
+    val output : vx_core.Type_string = vx_core.vx_new_string(stext)
+    return output
+  }
+
+  fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_switch(
+    generic_any_1 : T,
+    value : U,
+    thenelselist : vx_core.Type_thenelselist) : T {
+    var output : T = vx_core.f_empty(generic_any_1)
+    var fn_any : vx_core.Func_any_from_func = vx_core.e_any_from_func
+    val listthenelse : List<vx_core.Type_thenelse> = thenelselist.vx_listthenelse()
+    for (thenelse : vx_core.Type_thenelse in listthenelse) {
+      val code : vx_core.Type_string = thenelse.code()
+      when (code.vx_string()) {
+        ":case" -> {
+          val casevalue : vx_core.Type_any = thenelse.value()
+          val iseq : vx_core.Type_boolean = vx_core.f_eq(casevalue, value)
+          if (iseq.vx_boolean()) {
+            fn_any = thenelse.fn_any()
+          }
+        }
+        ":casemany" -> {
+          val values : vx_core.Type_list = thenelse.values()
+          val iscontain : vx_core.Type_boolean = vx_core.f_contains_1(values, value)
+          if (iscontain.vx_boolean()) {
+            fn_any = thenelse.fn_any()
+          }
+        }
+        ":else" -> {
+          fn_any = thenelse.fn_any()
+        }
+      }
+      if (fn_any != vx_core.e_any_from_func) {
+        break
+      }
+    }
+    if (fn_any != vx_core.e_any_from_func) {
+      output = fn_any.vx_any_from_func(generic_any_1)
     }
     return output
   }
@@ -1272,7 +1405,7 @@ object vx_core {
   }
 
   fun vx_anylist_from_arraystring(
-    arraystring : Array<String>) : vx_core.Type_anylist {
+    vararg arraystring : String) : vx_core.Type_anylist {
     val listany : MutableList<Any> = ArrayList<Any>()
     for (svalue : String in arraystring) {
       val value : vx_core.Type_string = vx_core.vx_new_string(svalue)
@@ -13863,7 +13996,7 @@ object vx_core {
     fun const_new(output : vx_core.Type_string) : Unit {
       var outval : vx_core.Class_string = output as vx_core.Class_string
       outval.vx_p_constdef = constdef()
-      outval.vxstring = "app/src/test/kotlin/resources"
+      outval.vxstring = "src/test/kotlin/resources"
     }
 
     }
@@ -14472,6 +14605,8 @@ object vx_core {
 
   fun f_multiply(num1 : vx_core.Type_int, num2 : vx_core.Type_int) : vx_core.Type_int {
     var output : vx_core.Type_int = vx_core.e_int
+    val result : Int = num1.vx_int() * num2.vx_int()
+    output = vx_core.vx_new_int(result)
     return output
   }
 
@@ -14551,6 +14686,8 @@ object vx_core {
 
   fun f_multiply_1(num1 : vx_core.Type_number, num2 : vx_core.Type_number) : vx_core.Type_number {
     var output : vx_core.Type_number = vx_core.e_number
+    val result : Float = vx_core.vx_float_from_number(num1) * vx_core.vx_float_from_number(num2)
+    output = vx_core.vx_new_float(result)
     return output
   }
 
@@ -14838,6 +14975,8 @@ object vx_core {
 
   fun f_plus(num1 : vx_core.Type_int, num2 : vx_core.Type_int) : vx_core.Type_int {
     var output : vx_core.Type_int = vx_core.e_int
+    val result : Int = num1.vx_int() + num2.vx_int()
+    output = vx_core.vx_new_int(result)
     return output
   }
 
@@ -14917,6 +15056,8 @@ object vx_core {
 
   fun f_plus_1(num1 : vx_core.Type_number, num2 : vx_core.Type_number) : vx_core.Type_number {
     var output : vx_core.Type_number = vx_core.e_number
+    val result : Float = vx_core.vx_float_from_number(num1) + vx_core.vx_float_from_number(num2)
+    output = vx_core.vx_new_float(result)
     return output
   }
 
@@ -15298,6 +15439,8 @@ object vx_core {
 
   fun f_minus(num1 : vx_core.Type_int, num2 : vx_core.Type_int) : vx_core.Type_int {
     var output : vx_core.Type_int = vx_core.e_int
+    val result : Int = num1.vx_int() - num2.vx_int()
+    output = vx_core.vx_new_int(result)
     return output
   }
 
@@ -15377,6 +15520,8 @@ object vx_core {
 
   fun f_minus_1(num1 : vx_core.Type_number, num2 : vx_core.Type_number) : vx_core.Type_number {
     var output : vx_core.Type_number = vx_core.e_number
+    val result : Float = vx_core.vx_float_from_number(num1) - vx_core.vx_float_from_number(num2)
+    output = vx_core.vx_new_float(result)
     return output
   }
 
@@ -15838,6 +15983,15 @@ object vx_core {
 
   fun f_divide(num1 : vx_core.Type_number, num2 : vx_core.Type_number) : vx_core.Type_number {
     var output : vx_core.Type_number = vx_core.e_number
+    val float1 : Float = vx_core.vx_float_from_number(num1)
+    val float2 : Float = vx_core.vx_float_from_number(num2)
+    if (float1 == 0f) {
+    } else if (float2 == 0f) {
+      output = vx_core.c_notanumber
+    } else {
+      val result : Float = float1 / float2
+      output = vx_core.vx_new_float(result)
+    }
     return output
   }
 
@@ -16467,6 +16621,17 @@ object vx_core {
 
   fun f_eq(val1 : vx_core.Type_any, val2 : vx_core.Type_any) : vx_core.Type_boolean {
     var output : vx_core.Type_boolean = vx_core.e_boolean
+    var isequal : Boolean = false
+    if (val1 == val2) {
+      isequal = true
+    } else {
+      val strval1 : vx_core.Type_string = vx_core.f_string_from_any(val1)
+      val strval2 : vx_core.Type_string = vx_core.f_string_from_any(val2)
+      if (strval1.vx_string().equals(strval2.vx_string())) {
+        isequal = true
+      }
+    }
+    output = vx_core.vx_new_boolean(isequal)
     return output
   }
 
@@ -18885,6 +19050,7 @@ object vx_core {
 
   fun <T : vx_core.Type_any, Y : vx_core.Type_list> f_any_from_list_start_reduce_next(generic_any_1 : T, list : Y, valstart : T, fn_reduce_next : vx_core.Func_any_from_reduce_next) : T {
     var output : T = vx_core.f_empty(generic_any_1)
+    output = vx_core.vx_any_from_list_start_reduce_next(generic_any_1, list, valstart, fn_reduce_next)
     return output
   }
 
@@ -22273,7 +22439,7 @@ object vx_core {
             val strval : String = value.vx_string()
             try {
               val floatresult : Float = strval.toFloat()
-              val iresult : Int = floatresult as Int
+              val iresult : Int = floatresult.toInt()
               intresult = vx_core.vx_new_int(iresult)
             } catch (ex : Exception) {
               intresult = vx_core.c_notanumber
@@ -26086,6 +26252,11 @@ object vx_core {
 
   fun f_or(val1 : vx_core.Type_boolean, val2 : vx_core.Type_boolean) : vx_core.Type_boolean {
     var output : vx_core.Type_boolean = vx_core.e_boolean
+    if (val1.vx_boolean() || val2.vx_boolean()) {
+      output = vx_core.c_true
+    } else {
+      output = vx_core.c_false
+    }
     return output
   }
 
@@ -27028,6 +27199,11 @@ object vx_core {
 
   fun <T : vx_core.Type_any> f_resolve_1(generic_any_1 : T, fn_any : vx_core.Func_any_from_func) : T {
     var output : T = vx_core.f_empty(generic_any_1)
+    if (fn_any == null) {
+    } else if (fn_any == vx_core.e_any_from_func) {
+    } else {
+      output = fn_any.vx_any_from_func(generic_any_1)
+    }
     return output
   }
 
@@ -27118,6 +27294,11 @@ object vx_core {
 
   fun <T : vx_core.Type_any> f_resolve_async(generic_any_1 : T, fn_any : vx_core.Func_any_from_func_async) : CompletableFuture<T> {
     var output : CompletableFuture<T> = vx_core.vx_async_new_from_value(vx_core.f_empty(generic_any_1))
+    if (fn_any == null) {
+    } else if (fn_any == vx_core.e_any_from_func_async) {
+    } else {
+      output = fn_any.vx_any_from_func_async(generic_any_1)
+    }
     return output
   }
 
@@ -27721,6 +27902,7 @@ object vx_core {
 
   fun f_string_repeat(text : vx_core.Type_string, repeat : vx_core.Type_int) : vx_core.Type_string {
     var output : vx_core.Type_string = vx_core.e_string
+    output = vx_core.vx_string_repeat(text, repeat)
     return output
   }
 
@@ -28063,6 +28245,7 @@ object vx_core {
 
   fun f_string_from_string_find_replace(text : vx_core.Type_string, find : vx_core.Type_string, replace : vx_core.Type_string) : vx_core.Type_string {
     var output : vx_core.Type_string = vx_core.e_string
+    output = vx_core.vx_string_from_string_find_replace(text, find, replace)
     return output
   }
 
@@ -28243,6 +28426,7 @@ object vx_core {
 
   fun <T : vx_core.Type_any, U : vx_core.Type_any> f_switch(generic_any_1 : T, value : U, thenelselist : vx_core.Type_thenelselist) : T {
     var output : T = vx_core.f_empty(generic_any_1)
+    output = vx_core.vx_switch(generic_any_1, value, thenelselist)
     return output
   }
 
@@ -28514,6 +28698,7 @@ object vx_core {
 
   fun f_type_from_any(value : vx_core.Type_any) : vx_core.Type_any {
     var output : vx_core.Type_any = vx_core.e_any
+    output = value.vx_type()
     return output
   }
 

@@ -258,16 +258,19 @@
     final Core.Type_list list,
     final Function<Core.Type_any, T> fn_any
   ) {
-				T output = Core.f_empty(generic_any_1);
-				List<Core.Type_any> listany = list.vx_list();
-				for (Core.Type_any any : listany) {
-				  T tany = Core.f_any_from_any(generic_any_1, any);
-				  T val = fn_any.apply(tany);
-				  if (val != null) {
-				    output = val;
-				    break;
-				  }
-				}
+    T empty = Core.f_empty(generic_any_1);
+    T output = empty;
+    List<Core.Type_any> listany = list.vx_list();
+    for (Core.Type_any any : listany) {
+      T tany = Core.f_any_from_any(generic_any_1, any);
+      T value = fn_any.apply(tany);
+      if (value == null) {
+      } else if (value == empty) {
+      } else {
+        output = value;
+        break;
+      }
+    }
     return output;
   }
 
@@ -725,6 +728,19 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     return output;
   }
 
+  public static Core.Type_decimal vx_new_decimal(
+    final String text) {
+    Core.Type_decimal output;
+    if ((text.equals("0") || text.equals("0.0")) && Core.e_decimal != null) {
+      output = Core.e_decimal;
+    } else {
+      Core.Class_decimal work = new Core.Class_decimal();
+      work.vxdecimal = text;
+      output = work;
+    }
+    return output;
+  }
+
   public static Type_float vx_new_float(
     final float fval) {
     Class_float output = new Core.Class_float();
@@ -949,19 +965,31 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   }
 
   // vx_string_from_string_find_replace(string, string, string)
-  public static String vx_string_from_string_find_replace(String text, String find, String replace) {
+  public static String vx_string_from_string_find_replace(
+    String text,
+    String find,
+    String replace
+  ) {
     String output = text.replaceAll(find, replace);
     return output;
   }
 
   // vx_string_from_string_find_replace(string, string, string)
-  public static Core.Type_string vx_string_from_string_find_replace(Core.Type_string text, Core.Type_string find, Core.Type_string replace) {
+  public static Core.Type_string vx_string_from_string_find_replace(
+    Core.Type_string text,
+    Core.Type_string find,
+    Core.Type_string replace
+  ) {
     String stext = Core.vx_string_from_string_find_replace(text.vx_string(), find.vx_string(), replace.vx_string());
     Core.Type_string output = Core.vx_new_string(stext);
     return output;
   }
 
-  public static String vx_string_from_string_start_end(String text, int start, int end) {
+  public static String vx_string_from_string_start_end(
+    String text,
+    int start,
+    int end
+  ) {
     String output = "";
     int maxlen = text.length();
     if (end < 0) {
@@ -1021,7 +1049,10 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   }
 
   // Warning!: Blocking
-  public static <T extends Core.Type_any> T vx_sync_from_async(final T generic_any_1, final CompletableFuture<T> future) {
+  public static <T extends Core.Type_any> T vx_sync_from_async(
+    final T generic_any_1,
+    final CompletableFuture<T> future
+  ) {
     T output = Core.f_empty(generic_any_1);
     try {
       output = future.get();

@@ -155,6 +155,21 @@ import com.vxlisp.vx.web.Html;
   }
 ` +
 			namespaceclose
+	case langkotlin:
+		output = `
+import java.util.*
+import java.util.concurrent.CompletableFuture
+import org.junit.jupiter.api.Assertions.*
+import com.vxlisp.vx.*
+import com.vxlisp.vx.data.*
+import com.vxlisp.vx.web.*
+` +
+			namespaceopen +
+			"\n  val spath : String = " + spath +
+			"\n" +
+			commontests +
+			namespaceclose
+
 	}
 	return output
 }
@@ -411,6 +426,10 @@ func LangTestLib_run_testresult(lang *vxlang) string {
 		assertequals = "\n  				assertEquals(expected, actual, msg)" + lang.lineend
 		assertnotequals = "\n	  			assertNotEquals(expected, actual, msg)" + lang.lineend
 		println = "System.out.println"
+	case langkotlin:
+		assertequals = "\n  				assertEquals(expected, actual, msg)" + lang.lineend
+		assertnotequals = "\n	  			assertNotEquals(expected, actual, msg)" + lang.lineend
+		println = "println"
 	}
 	output := "" +
 		LangFuncHeaderStatic(lang, "", fnc, 1, 0,
@@ -468,6 +487,9 @@ func LangTestLib_test(lang *vxlang) string {
 	case langjava:
 		assertequals = "\n    assertEquals(expected, actual)" + lang.lineend
 		println = "System.out.println"
+	case langkotlin:
+		assertequals = "\n    assertEquals(expected, actual)" + lang.lineend
+		println = "println"
 	}
 	output := "" +
 		LangFuncHeaderAll(lang, "", fnc, 1, false, true, 0,
@@ -507,7 +529,7 @@ func LangTestLib_test_async_from_async_fn(lang *vxlang) string {
 			"\n    }"
 	case langkotlin:
 		slambda = "" +
-			"{any -> " +
+			"{any ->" +
 			"\n     	any" +
 			"\n    }"
 	}
@@ -609,7 +631,8 @@ func LangTestLib_test_list_from_list_async(lang *vxlang) string {
 			"\n    });"
 	case langkotlin:
 		fn_async = "" +
-			"\n    vx_core.Func_any_from_any_async fn_async = vx_core.t_any_from_any_async.vx_fn_new({anyval -> {" +
+			"\n    val fn_async : vx_core.Func_any_from_any_async = vx_core.t_any_from_any_async.vx_fn_new({" +
+			"\n      anyval ->" +
 			"\n      val stringval : vx_core.Type_string = anyval as vx_core.Type_string" +
 			"\n      val sout : String = stringval.vx_string() + \"!\"" +
 			"\n      val outval : vx_core.Type_any = vx_core.vx_new_string(sout)" +

@@ -135,7 +135,7 @@ export default class vx_type {
    * @function any_from_int
    * Generic function returns any from an int.
    * @param  {typemap} generic
-   * @param  {int} val
+   * @param  {int} value
    * @return {any-1}
    */
   static t_any_from_int = {
@@ -146,7 +146,7 @@ export default class vx_type {
   }
 
   // (func any<-int)
-  static f_any_from_int(generic, val) {
+  static f_any_from_int(generic, value) {
     const generic_any_1 = generic["any-1"]
     let output = vx_core.f_empty(generic_any_1)
     return output
@@ -347,7 +347,7 @@ export default class vx_type {
 
   /**
    * @function is_type
-   * @param  {any} val
+   * @param  {any} value
    * @param  {any} type
    * @return {boolean}
    */
@@ -359,19 +359,19 @@ export default class vx_type {
   }
 
   // (func is-type)
-  static f_is_type(val, type) {
+  static f_is_type(value, type) {
     let output = vx_core.e_boolean
     output = vx_core.f_or_1(
       vx_core.f_eq(
         vx_core.f_typename_from_type(type),
-        vx_core.f_typename_from_any(val)
+        vx_core.f_typename_from_any(value)
       ),
       vx_core.f_contains_1(
         vx_type.f_allowtypenames_from_type(type),
-        vx_core.f_typename_from_any(val)
+        vx_core.f_typename_from_any(value)
       ),
       vx_core.f_contains_1(
-        vx_type.f_traitnames_from_any(val),
+        vx_type.f_traitnames_from_any(value),
         vx_core.f_typename_from_type(type)
       )
     )
@@ -380,8 +380,8 @@ export default class vx_type {
 
   /**
    * @function is_type_from_any_typelist
-   * Returns true if val is any type in typelist.
-   * @param  {any} val
+   * Returns true if value is any type in typelist.
+   * @param  {any} value
    * @param  {typelist} typelist
    * @return {boolean}
    */
@@ -393,7 +393,7 @@ export default class vx_type {
   }
 
   // (func is-type<-any-typelist)
-  static f_is_type_from_any_typelist(val, typelist) {
+  static f_is_type_from_any_typelist(value, typelist) {
     let output = vx_core.e_boolean
     output = vx_core.f_any_from_list_start_reduce(
       {"any-1": vx_core.t_boolean, "list-2": vx_core.t_typelist},
@@ -402,7 +402,7 @@ export default class vx_type {
       vx_core.f_new(vx_core.t_any_from_reduce, (result, type) => 
         vx_core.f_or(
           result,
-          vx_type.f_is_type(val, type)
+          vx_type.f_is_type(value, type)
         ))
     )
     return output
@@ -525,7 +525,7 @@ export default class vx_type {
   /**
    * @function string_from_int
    * Function Type converting int to string
-   * @param  {int} val
+   * @param  {int} value
    * @return {string}
    */
   static t_string_from_int = {
@@ -536,11 +536,11 @@ export default class vx_type {
   }
 
   // (func string<-int)
-  static f_string_from_int(val) {
+  static f_string_from_int(value) {
     let output = vx_core.e_string
     output = vx_core.f_switch(
       {"any-1": vx_core.t_string, "any-2": vx_core.t_int},
-      val,
+      value,
       vx_core.f_case_1(
         vx_core.c_infinity,
         vx_core.f_new(vx_core.t_any_from_func, () => {return "infinity"})
@@ -556,7 +556,7 @@ export default class vx_type {
       vx_core.f_else(
         vx_core.f_new(vx_core.t_any_from_func, () => {return vx_core.f_new(
           vx_core.t_string,
-          val
+          value
         )})
       )
     )
@@ -676,7 +676,7 @@ export default class vx_type {
   /**
    * @function traitnames_from_any
    * Get the trait names of a given type
-   * @param  {any} val
+   * @param  {any} value
    * @return {stringlist}
    */
   static t_traitnames_from_any = {
@@ -687,10 +687,10 @@ export default class vx_type {
   }
 
   // (func traitnames<-any)
-  static f_traitnames_from_any(val) {
+  static f_traitnames_from_any(value) {
     let output = vx_core.e_stringlist
     output = vx_core.f_typenames_from_typelist(
-      vx_type.f_traits_from_any(val)
+      vx_type.f_traits_from_any(value)
     )
     return output
   }
@@ -698,7 +698,7 @@ export default class vx_type {
   /**
    * @function traits_from_any
    * Get the traits of a given value
-   * @param  {any} val
+   * @param  {any} value
    * @return {typelist}
    */
   static t_traits_from_any = {
@@ -709,10 +709,10 @@ export default class vx_type {
   }
 
   // (func traits<-any)
-  static f_traits_from_any(val) {
+  static f_traits_from_any(value) {
     let output = vx_core.e_typelist
     output = vx_core.f_traits_from_typedef(
-      vx_core.f_typedef_from_any(val)
+      vx_core.f_typedef_from_any(value)
     )
     return output
   }

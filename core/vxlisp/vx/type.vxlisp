@@ -13,7 +13,7 @@
  :doc "Returns the allowed types from a given type")
 
 (func any<-int : any-1
- [val : int]
+ [value : int]
  :doc "Generic function returns any from an int.")
 
 (func boolean<-string-ends : boolean
@@ -127,12 +127,12 @@
         (is-string (list))))
 
 (func is-type : boolean
- [val  : any
-  type : any]
+ [value : any
+  type  : any]
  (or
-  (= (typename<-type type) (typename<-any val))
-  (contains (allowtypenames<-type type) (typename<-any val))
-  (contains (traitnames<-any val) (typename<-type type)))
+  (= (typename<-type type) (typename<-any value))
+  (contains (allowtypenames<-type type) (typename<-any value))
+  (contains (traitnames<-any value) (typename<-type type)))
  :test (test-true
         (is-type false boolean))
        (test-true
@@ -143,7 +143,7 @@
         (is-type 4 int)))
 
 (func is-type<-any-typelist : boolean
- [val      : any
+ [value    : any
   typelist : typelist]
  (any<-list-start-reduce : boolean
   typelist
@@ -151,7 +151,7 @@
   (fn : boolean
    [result : boolean
     type   : any]
-   (or result (is-type val type))))
+   (or result (is-type value type))))
  :test (test-true
         (is-type<-any-typelist
          false
@@ -168,15 +168,15 @@
         (is-type<-any-typelist
          4
          (typelist string int)))
- :doc "Returns true if val is any type in typelist.")
+ :doc "Returns true if value is any type in typelist.")
 
 (func string<-int : string
- [val : int]
- (switch val : string
+ [value : int]
+ (switch value : string
   (case infinity    "infinity")
   (case neginfinity "neginfinity")
   (case notanumber  "notanumber")
-  (else (string val)))
+  (else (string value)))
  :test (test
         "4"
         (string<-int 4))
@@ -387,15 +387,15 @@
  :doc "Returns a stringlist by splitting a string by the delimiter")
 
 (func traitnames<-any : stringlist
- [val : any]
+ [value : any]
  (typenames<-typelist
-  (traits<-any val))
+  (traits<-any value))
  :doc "Get the trait names of a given type")
 
 (func traits<-any : typelist
- [val : any]
+ [value : any]
  (traits<-typedef
-  (typedef<-any val))
+  (typedef<-any value))
  :doc "Get the traits of a given value")
 
 (func traits<-typedef : typelist

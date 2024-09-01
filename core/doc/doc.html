@@ -3513,13 +3513,6 @@
      // :implements
      public string vx_string() {
        return vxdecimal;
-     }
-
-     // :implements
-     public Type_decimal vx_new_from_string(string sval) {
-       Class_decimal output = new Class_decimal();
-       output.vxdecimal = sval;
-       return output;
      }&quot;
    :java
     &quot;protected String vxdecimal = “0.0”;
@@ -3532,13 +3525,6 @@
      @Override
      public String vx_string() {
        return vxdecimal;
-     }
-
-     @Override
-     public Type_decimal vx_new_from_string(final String sval) {
-       Class_decimal output = new Class_decimal();
-       output.vxdecimal = sval;
-       return output;
      }&quot;
    :kotlin
     &quot;internal var vxdecimal : String = “0.0”
@@ -4106,7 +4092,10 @@
    &quot;int result = num1.vx_int() + num2.vx_int();
     output = Core.vx_new_int(result);&quot;
   :js
-   &quot;num1 + num2&quot;)
+   &quot;num1 + num2&quot;
+  :kotlin
+   &quot;val result : Int = num1.vx_int() + num2.vx_int()
+    output = vx_core.vx_new_int(result)&quot;)
  :alias &quot;plus&quot;
  :test (test 5 (+ 2 3))
        (test 3 (+ 5 -2))
@@ -4126,7 +4115,10 @@
    &quot;float result = Core.vx_float_from_number(num1) + Core.vx_float_from_number(num2);
     output = Core.vx_new_float(result);&quot;
   :js
-   &quot;num1 + num2&quot;)
+   &quot;num1 + num2&quot;
+  :kotlin
+   &quot;val result : Float = vx_core.vx_float_from_number(num1) + vx_core.vx_float_from_number(num2)
+    output = vx_core.vx_new_float(result)&quot;)
  :alias &quot;plus&quot;
  :test (test 5 (+ 2  3))
        (test 3 (+ 5 -2))
@@ -4178,7 +4170,10 @@
    &quot;int result = num1.vx_int() - num2.vx_int();
     output = Core.vx_new_int(result);&quot;
   :js
-   &quot;num1 - num2&quot;)
+   &quot;num1 - num2&quot;
+  :kotlin
+   &quot;val result : Int = num1.vx_int() - num2.vx_int()
+    output = vx_core.vx_new_int(result)&quot;)
  :alias &quot;minus&quot;
  :test (test 1 (- 3 2))
        (test 7 (- 5 -2))
@@ -4198,7 +4193,10 @@
    &quot;float result = Core.vx_float_from_number(num1) - Core.vx_float_from_number(num2);
     output = Core.vx_new_float(result);&quot;
   :js
-   &quot;num1 - num2&quot;)
+   &quot;num1 - num2&quot;
+  :kotlin
+   &quot;val result : Float = vx_core.vx_float_from_number(num1) - vx_core.vx_float_from_number(num2)
+    output = vx_core.vx_new_float(result)&quot;)
  :alias &quot;minus&quot;
  :test (test 5 (+ 2 3))
        (test 3 (+ 5 -2))
@@ -4224,8 +4222,7 @@
   (fn : number
    [total : number
     num   : number]
-   (- total num))
- )
+   (- total num)))
  :alias &quot;minus&quot;
  :doc   &quot;Math number minus&quot;)
 
@@ -4251,7 +4248,10 @@
    &quot;int result = num1.vx_int() * num2.vx_int();
     output = Core.vx_new_int(result);&quot;
   :js
-   &quot;num1 * num2&quot;)
+   &quot;num1 * num2&quot;
+  :kotlin
+   &quot;val result : Int = num1.vx_int() * num2.vx_int()
+    output = vx_core.vx_new_int(result)&quot;)
  :alias &quot;multiply&quot;
  :test (test 6 (* 3 2))
        (test -10 (* 5 -2))
@@ -4271,7 +4271,10 @@
    &quot;float result = Core.vx_float_from_number(num1) * Core.vx_float_from_number(num2);
     output = Core.vx_new_float(result);&quot;
   :js
-   &quot;num1 * num2&quot;)
+   &quot;num1 * num2&quot;
+  :kotlin
+   &quot;val result : Float = vx_core.vx_float_from_number(num1) * vx_core.vx_float_from_number(num2)
+    output = vx_core.vx_new_float(result)&quot;)
  :alias &quot;multiply&quot;
  :test (test 6.4 (* 3.2 2))
        (test -10.2 (* 5.1 -2))
@@ -4285,8 +4288,7 @@
   (fn : int
    [total : int
     num   : int]
-   (* total num))
- )
+   (* total num)))
  :alias &quot;multiply&quot;
  :test (test 24 (* 3 2 4))
        (test -20 (* 5 -2 2))
@@ -4300,8 +4302,7 @@
   (fn : number
    [total : number
     num   : number]
-   (* total num))
- )
+   (* total num)))
  :alias &quot;multiply&quot;
  :test (test 24 (* 3 2 4))
        (test -20 (* 5 -2 2))
@@ -4342,7 +4343,17 @@
       output = Core.vx_new_float(result);
     }&quot;
   :js
-   &quot;num1 / num2&quot;)
+   &quot;num1 / num2&quot;
+  :kotlin
+   &quot;val float1 : Float = vx_core.vx_float_from_number(num1)
+    val float2 : Float = vx_core.vx_float_from_number(num2)
+    if (float1 == 0f) {
+    } else if (float2 == 0f) {
+      output = vx_core.c_notanumber
+    } else {
+      val result : Float = float1 / float2
+      output = vx_core.vx_new_float(result)
+    }&quot;)
  :alias &quot;divide&quot;
  :test (test 3 (/ 6 2))
        (test -5 (/ 10 -2))
@@ -4389,7 +4400,19 @@
     }
     output = Core.vx_new_boolean(isequal);&quot;
   :js
-   &quot;vx_core.vx_eq(val1, val2)&quot;)
+   &quot;vx_core.vx_eq(val1, val2)&quot;
+  :kotlin
+   &quot;var isequal : Boolean = false
+    if (val1 == val2) {
+      isequal = true
+    } else {
+      val strval1 : vx_core.Type_string = vx_core.f_string_from_any(val1)
+      val strval2 : vx_core.Type_string = vx_core.f_string_from_any(val2)
+      if (strval1.vx_string().equals(strval2.vx_string())) {
+        isequal = true
+      }
+    }
+    output = vx_core.vx_new_boolean(isequal)&quot;)
  :alias &quot;eq&quot;
  :test (test-true (= true true))
        (test-true (= 2 2))
@@ -4413,8 +4436,7 @@
    [reduce  : boolean
     current : any
     next    : any]
-   (and reduce (= current next)))
- )
+   (and reduce (= current next))))
  :alias &quot;eq&quot;
  :test (test-false (= 2 2 3))
  :doc &quot;Boolean equal/equivalent&quot;)
@@ -4890,7 +4912,8 @@
         }
         current = next
       }
-    }&quot;)
+    }&quot;
+  :kotlin :auto)
  :doc &quot;Returns a val from a list reduce operation&quot;)
 
 (func any&lt;-map : any-1
@@ -5592,7 +5615,7 @@
       val strval : String = value.vx_string()
       try {
         val floatresult : Float = strval.toFloat()
-        val iresult : Int = floatresult as Int
+        val iresult : Int = floatresult.toInt()
         intresult = vx_core.vx_new_int(iresult)
       } catch (ex : Exception) {
         intresult = vx_core.c_notanumber
@@ -5806,7 +5829,7 @@
 (func last&lt;-list : any-1
  [values : list-1]
  (let
-  [len  : int := (length values)]
+  [len : int := (length values)]
   (any&lt;-list values len))
  :test (test
         &quot;c&quot;
@@ -5814,7 +5837,7 @@
          (stringlist
           &quot;b&quot;
           &quot;c&quot;)))
- :doc  &quot;Returns last value&quot;)
+ :doc &quot;Returns last value&quot;)
 
 (func length : int
  [text : string]
@@ -6393,6 +6416,12 @@
       output = true
     } else {
       output = false
+    }&quot;
+  :kotlin
+   &quot;if (val1.vx_boolean() || val2.vx_boolean()) {
+      output = vx_core.c_true
+    } else {
+      output = vx_core.c_false
     }&quot;)
  :doc  &quot;Returns true if any value is true&quot;
  :test (test-true (or true true))
@@ -6496,6 +6525,12 @@
     default:
       output = fn_any
       break
+    }&quot;
+  :kotlin
+   &quot;if (fn_any == null) {
+    } else if (fn_any == vx_core.e_any_from_func) {
+    } else {
+      output = fn_any.vx_any_from_func(generic_any_1)
     }&quot;)
  :test (test 4 (resolve (fn : int [] (+ 1 3)))))
 
@@ -6531,6 +6566,12 @@
     default:
       output = fn_any
       break
+    }&quot;
+  :kotlin
+   &quot;if (fn_any == null) {
+    } else if (fn_any == vx_core.e_any_from_func_async) {
+    } else {
+      output = fn_any.vx_any_from_func_async(generic_any_1)
     }&quot;)
  :test (test 4 (resolve : int (fn : int [] (+ 1 3)))))
 
@@ -6578,7 +6619,8 @@
     int intrepeat = repeat.vx_int();
     String stringresult = stringtext.repeat(intrepeat);
     output = Core.vx_new_string(stringresult);&quot;
-  :js &quot;text.repeat(repeat)&quot;)
+  :js &quot;text.repeat(repeat)&quot;
+  :kotlin :auto)
  :test (test &quot;abab&quot; (string-repeat &quot;ab&quot; 2)))
 
 (func string&lt;-any : string
@@ -6628,7 +6670,8 @@
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         &quot;a!b!c&quot;
         (string&lt;-string-find-replace
@@ -6730,7 +6773,8 @@
           output = fn()
         }
       }
-    }&quot;)
+    }&quot;
+  :kotlin :auto)
  :test (test 1
         (switch : int
          &quot;d&quot;
@@ -6803,7 +6847,9 @@
         output = value
       }
       break
-    }&quot;)
+    }&quot;
+  :kotlin
+   &quot;output = value.vx_type()&quot;)
  :test (test
         boolean
         (type&lt;-any false))
@@ -8194,13 +8240,6 @@
      // :implements
      public string vx_string() {
        return vxdecimal;
-     }
-
-     // :implements
-     public Type_decimal vx_new_from_string(string sval) {
-       Class_decimal output = new Class_decimal();
-       output.vxdecimal = sval;
-       return output;
      }&quot;
    :java
     &quot;protected String vxdecimal = “0.0”;
@@ -8213,13 +8252,6 @@
      @Override
      public String vx_string() {
        return vxdecimal;
-     }
-
-     @Override
-     public Type_decimal vx_new_from_string(final String sval) {
-       Class_decimal output = new Class_decimal();
-       output.vxdecimal = sval;
-       return output;
      }&quot;
    :kotlin
     &quot;internal var vxdecimal : String = “0.0”
@@ -12565,7 +12597,10 @@
    &quot;int result = num1.vx_int() + num2.vx_int();
     output = Core.vx_new_int(result);&quot;
   :js
-   &quot;num1 + num2&quot;)
+   &quot;num1 + num2&quot;
+  :kotlin
+   &quot;val result : Int = num1.vx_int() + num2.vx_int()
+    output = vx_core.vx_new_int(result)&quot;)
  :alias &quot;plus&quot;
  :test (test 5 (+ 2 3))
        (test 3 (+ 5 -2))
@@ -12650,7 +12685,10 @@
    &quot;float result = Core.vx_float_from_number(num1) + Core.vx_float_from_number(num2);
     output = Core.vx_new_float(result);&quot;
   :js
-   &quot;num1 + num2&quot;)
+   &quot;num1 + num2&quot;
+  :kotlin
+   &quot;val result : Float = vx_core.vx_float_from_number(num1) + vx_core.vx_float_from_number(num2)
+    output = vx_core.vx_new_float(result)&quot;)
  :alias &quot;plus&quot;
  :test (test 5 (+ 2  3))
        (test 3 (+ 5 -2))
@@ -12943,7 +12981,10 @@
    &quot;int result = num1.vx_int() - num2.vx_int();
     output = Core.vx_new_int(result);&quot;
   :js
-   &quot;num1 - num2&quot;)
+   &quot;num1 - num2&quot;
+  :kotlin
+   &quot;val result : Int = num1.vx_int() - num2.vx_int()
+    output = vx_core.vx_new_int(result)&quot;)
  :alias &quot;minus&quot;
  :test (test 1 (- 3 2))
        (test 7 (- 5 -2))
@@ -13028,7 +13069,10 @@
    &quot;float result = Core.vx_float_from_number(num1) - Core.vx_float_from_number(num2);
     output = Core.vx_new_float(result);&quot;
   :js
-   &quot;num1 - num2&quot;)
+   &quot;num1 - num2&quot;
+  :kotlin
+   &quot;val result : Float = vx_core.vx_float_from_number(num1) - vx_core.vx_float_from_number(num2)
+    output = vx_core.vx_new_float(result)&quot;)
  :alias &quot;minus&quot;
  :test (test 5 (+ 2 3))
        (test 3 (+ 5 -2))
@@ -13170,8 +13214,7 @@
   (fn : number
    [total : number
     num   : number]
-   (- total num))
- )
+   (- total num)))
  :alias &quot;minus&quot;
  :doc   &quot;Math number minus&quot;)</div>
                 </li>
@@ -13322,7 +13365,10 @@
    &quot;int result = num1.vx_int() * num2.vx_int();
     output = Core.vx_new_int(result);&quot;
   :js
-   &quot;num1 * num2&quot;)
+   &quot;num1 * num2&quot;
+  :kotlin
+   &quot;val result : Int = num1.vx_int() * num2.vx_int()
+    output = vx_core.vx_new_int(result)&quot;)
  :alias &quot;multiply&quot;
  :test (test 6 (* 3 2))
        (test -10 (* 5 -2))
@@ -13407,7 +13453,10 @@
    &quot;float result = Core.vx_float_from_number(num1) * Core.vx_float_from_number(num2);
     output = Core.vx_new_float(result);&quot;
   :js
-   &quot;num1 * num2&quot;)
+   &quot;num1 * num2&quot;
+  :kotlin
+   &quot;val result : Float = vx_core.vx_float_from_number(num1) * vx_core.vx_float_from_number(num2)
+    output = vx_core.vx_new_float(result)&quot;)
  :alias &quot;multiply&quot;
  :test (test 6.4 (* 3.2 2))
        (test -10.2 (* 5.1 -2))
@@ -13481,8 +13530,7 @@
   (fn : int
    [total : int
     num   : int]
-   (* total num))
- )
+   (* total num)))
  :alias &quot;multiply&quot;
  :test (test 24 (* 3 2 4))
        (test -20 (* 5 -2 2))
@@ -13556,8 +13604,7 @@
   (fn : number
    [total : number
     num   : number]
-   (* total num))
- )
+   (* total num)))
  :alias &quot;multiply&quot;
  :test (test 24 (* 3 2 4))
        (test -20 (* 5 -2 2))
@@ -13663,7 +13710,17 @@
       output = Core.vx_new_float(result);
     }&quot;
   :js
-   &quot;num1 / num2&quot;)
+   &quot;num1 / num2&quot;
+  :kotlin
+   &quot;val float1 : Float = vx_core.vx_float_from_number(num1)
+    val float2 : Float = vx_core.vx_float_from_number(num2)
+    if (float1 == 0f) {
+    } else if (float2 == 0f) {
+      output = vx_core.c_notanumber
+    } else {
+      val result : Float = float1 / float2
+      output = vx_core.vx_new_float(result)
+    }&quot;)
  :alias &quot;divide&quot;
  :test (test 3 (/ 6 2))
        (test -5 (/ 10 -2))
@@ -13784,7 +13841,19 @@
     }
     output = Core.vx_new_boolean(isequal);&quot;
   :js
-   &quot;vx_core.vx_eq(val1, val2)&quot;)
+   &quot;vx_core.vx_eq(val1, val2)&quot;
+  :kotlin
+   &quot;var isequal : Boolean = false
+    if (val1 == val2) {
+      isequal = true
+    } else {
+      val strval1 : vx_core.Type_string = vx_core.f_string_from_any(val1)
+      val strval2 : vx_core.Type_string = vx_core.f_string_from_any(val2)
+      if (strval1.vx_string().equals(strval2.vx_string())) {
+        isequal = true
+      }
+    }
+    output = vx_core.vx_new_boolean(isequal)&quot;)
  :alias &quot;eq&quot;
  :test (test-true (= true true))
        (test-true (= 2 2))
@@ -13867,8 +13936,7 @@
    [reduce  : boolean
     current : any
     next    : any]
-   (and reduce (= current next)))
- )
+   (and reduce (= current next))))
  :alias &quot;eq&quot;
  :test (test-false (= 2 2 3))
  :doc &quot;Boolean equal/equivalent&quot;)</div>
@@ -16528,7 +16596,8 @@ improves readability.</div>
         }
         current = next
       }
-    }&quot;)
+    }&quot;
+  :kotlin :auto)
  :doc &quot;Returns a val from a list reduce operation&quot;)</div>
                 </li>
               </ul>
@@ -19553,7 +19622,7 @@ improves readability.</div>
       val strval : String = value.vx_string()
       try {
         val floatresult : Float = strval.toFloat()
-        val iresult : Int = floatresult as Int
+        val iresult : Int = floatresult.toInt()
         intresult = vx_core.vx_new_int(iresult)
       } catch (ex : Exception) {
         intresult = vx_core.c_notanumber
@@ -20315,7 +20384,7 @@ improves readability.</div>
                   <div class="source">(func last&lt;-list : any-1
  [values : list-1]
  (let
-  [len  : int := (length values)]
+  [len : int := (length values)]
   (any&lt;-list values len))
  :test (test
         &quot;c&quot;
@@ -20323,7 +20392,7 @@ improves readability.</div>
          (stringlist
           &quot;b&quot;
           &quot;c&quot;)))
- :doc  &quot;Returns last value&quot;)</div>
+ :doc &quot;Returns last value&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -22996,6 +23065,12 @@ improves readability.</div>
       output = true
     } else {
       output = false
+    }&quot;
+  :kotlin
+   &quot;if (val1.vx_boolean() || val2.vx_boolean()) {
+      output = vx_core.c_true
+    } else {
+      output = vx_core.c_false
     }&quot;)
  :doc  &quot;Returns true if any value is true&quot;
  :test (test-true (or true true))
@@ -23688,6 +23763,12 @@ improves readability.</div>
     default:
       output = fn_any
       break
+    }&quot;
+  :kotlin
+   &quot;if (fn_any == null) {
+    } else if (fn_any == vx_core.e_any_from_func) {
+    } else {
+      output = fn_any.vx_any_from_func(generic_any_1)
     }&quot;)
  :test (test 4 (resolve (fn : int [] (+ 1 3)))))</div>
                 </li>
@@ -23782,6 +23863,12 @@ improves readability.</div>
     default:
       output = fn_any
       break
+    }&quot;
+  :kotlin
+   &quot;if (fn_any == null) {
+    } else if (fn_any == vx_core.e_any_from_func_async) {
+    } else {
+      output = fn_any.vx_any_from_func_async(generic_any_1)
     }&quot;)
  :test (test 4 (resolve : int (fn : int [] (+ 1 3)))))</div>
                 </li>
@@ -24226,7 +24313,8 @@ improves readability.</div>
     int intrepeat = repeat.vx_int();
     String stringresult = stringtext.repeat(intrepeat);
     output = Core.vx_new_string(stringresult);&quot;
-  :js &quot;text.repeat(repeat)&quot;)
+  :js &quot;text.repeat(repeat)&quot;
+  :kotlin :auto)
  :test (test &quot;abab&quot; (string-repeat &quot;ab&quot; 2)))</div>
                 </li>
               </ul>
@@ -24544,7 +24632,8 @@ improves readability.</div>
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         &quot;a!b!c&quot;
         (string&lt;-string-find-replace
@@ -24778,7 +24867,8 @@ improves readability.</div>
           output = fn()
         }
       }
-    }&quot;)
+    }&quot;
+  :kotlin :auto)
  :test (test 1
         (switch : int
          &quot;d&quot;
@@ -25039,7 +25129,9 @@ improves readability.</div>
         output = value
       }
       break
-    }&quot;)
+    }&quot;
+  :kotlin
+   &quot;output = value.vx_type()&quot;)
  :test (test
         boolean
         (type&lt;-any false))
@@ -30652,7 +30744,7 @@ improves readability.</div>
  :doc &quot;Returns the allowed types from a given type&quot;)
 
 (func any&lt;-int : any-1
- [val : int]
+ [value : int]
  :doc &quot;Generic function returns any from an int.&quot;)
 
 (func boolean&lt;-string-ends : boolean
@@ -30766,12 +30858,12 @@ improves readability.</div>
         (is-string (list))))
 
 (func is-type : boolean
- [val  : any
-  type : any]
+ [value : any
+  type  : any]
  (or
-  (= (typename&lt;-type type) (typename&lt;-any val))
-  (contains (allowtypenames&lt;-type type) (typename&lt;-any val))
-  (contains (traitnames&lt;-any val) (typename&lt;-type type)))
+  (= (typename&lt;-type type) (typename&lt;-any value))
+  (contains (allowtypenames&lt;-type type) (typename&lt;-any value))
+  (contains (traitnames&lt;-any value) (typename&lt;-type type)))
  :test (test-true
         (is-type false boolean))
        (test-true
@@ -30782,7 +30874,7 @@ improves readability.</div>
         (is-type 4 int)))
 
 (func is-type&lt;-any-typelist : boolean
- [val      : any
+ [value    : any
   typelist : typelist]
  (any&lt;-list-start-reduce : boolean
   typelist
@@ -30790,7 +30882,7 @@ improves readability.</div>
   (fn : boolean
    [result : boolean
     type   : any]
-   (or result (is-type val type))))
+   (or result (is-type value type))))
  :test (test-true
         (is-type&lt;-any-typelist
          false
@@ -30807,15 +30899,15 @@ improves readability.</div>
         (is-type&lt;-any-typelist
          4
          (typelist string int)))
- :doc &quot;Returns true if val is any type in typelist.&quot;)
+ :doc &quot;Returns true if value is any type in typelist.&quot;)
 
 (func string&lt;-int : string
- [val : int]
- (switch val : string
+ [value : int]
+ (switch value : string
   (case infinity    &quot;infinity&quot;)
   (case neginfinity &quot;neginfinity&quot;)
   (case notanumber  &quot;notanumber&quot;)
-  (else (string val)))
+  (else (string value)))
  :test (test
         &quot;4&quot;
         (string&lt;-int 4))
@@ -31026,15 +31118,15 @@ improves readability.</div>
  :doc &quot;Returns a stringlist by splitting a string by the delimiter&quot;)
 
 (func traitnames&lt;-any : stringlist
- [val : any]
+ [value : any]
  (typenames&lt;-typelist
-  (traits&lt;-any val))
+  (traits&lt;-any value))
  :doc &quot;Get the trait names of a given type&quot;)
 
 (func traits&lt;-any : typelist
- [val : any]
+ [value : any]
  (traits&lt;-typedef
-  (typedef&lt;-any val))
+  (typedef&lt;-any value))
  :doc &quot;Get the traits of a given value&quot;)
 
 (func traits&lt;-typedef : typelist
@@ -31207,7 +31299,7 @@ improves readability.</div>
                     <div class="td">Description</div>
                   </div>
                   <div class="tr">
-                    <div class="td">val</div>
+                    <div class="td">value</div>
                     <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/int')">vx/core/int</span></div>
                     <div class="td"></div>
                   </div>
@@ -31229,7 +31321,7 @@ improves readability.</div>
               <ul>
                 <li>
                   <div class="source">(func any&lt;-int : any-1
- [val : int]
+ [value : int]
  :doc &quot;Generic function returns any from an int.&quot;)</div>
                 </li>
               </ul>
@@ -31962,7 +32054,7 @@ improves readability.</div>
                     <div class="td">Description</div>
                   </div>
                   <div class="tr">
-                    <div class="td">val</div>
+                    <div class="td">value</div>
                     <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any')">vx/core/any</span></div>
                     <div class="td"></div>
                   </div>
@@ -31997,12 +32089,12 @@ improves readability.</div>
               <ul>
                 <li>
                   <div class="source">(func is-type : boolean
- [val  : any
-  type : any]
+ [value : any
+  type  : any]
  (or
-  (= (typename&lt;-type type) (typename&lt;-any val))
-  (contains (allowtypenames&lt;-type type) (typename&lt;-any val))
-  (contains (traitnames&lt;-any val) (typename&lt;-type type)))
+  (= (typename&lt;-type type) (typename&lt;-any value))
+  (contains (allowtypenames&lt;-type type) (typename&lt;-any value))
+  (contains (traitnames&lt;-any value) (typename&lt;-type type)))
  :test (test-true
         (is-type false boolean))
        (test-true
@@ -32020,7 +32112,7 @@ improves readability.</div>
             <div class="lbl">Description:</div>
             <ul>
               <li>
-                <div class="txt">Returns true if val is any type in typelist.</div>
+                <div class="txt">Returns true if value is any type in typelist.</div>
               </li>
             </ul>
             <div class="lbl">Function Name:</div>
@@ -32049,7 +32141,7 @@ improves readability.</div>
                     <div class="td">Description</div>
                   </div>
                   <div class="tr">
-                    <div class="td">val</div>
+                    <div class="td">value</div>
                     <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any')">vx/core/any</span></div>
                     <div class="td"></div>
                   </div>
@@ -32092,7 +32184,7 @@ improves readability.</div>
               <ul>
                 <li>
                   <div class="source">(func is-type&lt;-any-typelist : boolean
- [val      : any
+ [value    : any
   typelist : typelist]
  (any&lt;-list-start-reduce : boolean
   typelist
@@ -32100,7 +32192,7 @@ improves readability.</div>
   (fn : boolean
    [result : boolean
     type   : any]
-   (or result (is-type val type))))
+   (or result (is-type value type))))
  :test (test-true
         (is-type&lt;-any-typelist
          false
@@ -32117,7 +32209,7 @@ improves readability.</div>
         (is-type&lt;-any-typelist
          4
          (typelist string int)))
- :doc &quot;Returns true if val is any type in typelist.&quot;)</div>
+ :doc &quot;Returns true if value is any type in typelist.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -32156,7 +32248,7 @@ improves readability.</div>
                     <div class="td">Description</div>
                   </div>
                   <div class="tr">
-                    <div class="td">val</div>
+                    <div class="td">value</div>
                     <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/int')">vx/core/int</span></div>
                     <div class="td"></div>
                   </div>
@@ -32193,12 +32285,12 @@ improves readability.</div>
               <ul>
                 <li>
                   <div class="source">(func string&lt;-int : string
- [val : int]
- (switch val : string
+ [value : int]
+ (switch value : string
   (case infinity    &quot;infinity&quot;)
   (case neginfinity &quot;neginfinity&quot;)
   (case notanumber  &quot;notanumber&quot;)
-  (else (string val)))
+  (else (string value)))
  :test (test
         &quot;4&quot;
         (string&lt;-int 4))
@@ -33077,7 +33169,7 @@ improves readability.</div>
                     <div class="td">Description</div>
                   </div>
                   <div class="tr">
-                    <div class="td">val</div>
+                    <div class="td">value</div>
                     <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any')">vx/core/any</span></div>
                     <div class="td"></div>
                   </div>
@@ -33099,9 +33191,9 @@ improves readability.</div>
               <ul>
                 <li>
                   <div class="source">(func traitnames&lt;-any : stringlist
- [val : any]
+ [value : any]
  (typenames&lt;-typelist
-  (traits&lt;-any val))
+  (traits&lt;-any value))
  :doc &quot;Get the trait names of a given type&quot;)</div>
                 </li>
               </ul>
@@ -33141,7 +33233,7 @@ improves readability.</div>
                     <div class="td">Description</div>
                   </div>
                   <div class="tr">
-                    <div class="td">val</div>
+                    <div class="td">value</div>
                     <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any')">vx/core/any</span></div>
                     <div class="td"></div>
                   </div>
@@ -33163,9 +33255,9 @@ improves readability.</div>
               <ul>
                 <li>
                   <div class="source">(func traits&lt;-any : typelist
- [val : any]
+ [value : any]
  (traits&lt;-typedef
-  (typedef&lt;-any val))
+  (typedef&lt;-any value))
  :doc &quot;Get the traits of a given value&quot;)</div>
                 </li>
               </ul>
@@ -33806,18 +33898,18 @@ improves readability.</div>
  :doc &quot;Returns string from p&quot;)
 
 (func string&lt;-propname-val : string
- [key : string
-  val : string]
+ [key   : string
+  value : string]
  (if
-  (!-empty val)
+  (!-empty value)
   (string
    &quot; &quot;
    key
    &quot;=&quot;
    quote
-   val
+   value
    quote))
- :doc &quot;Returns ' key=\&quot;val\&quot;' if val is not blank.&quot;)
+ :doc &quot;Returns ' key=\&quot;value\&quot;' if value is not blank.&quot;)
 
 (func string&lt;-propstyle : string
  [style : style]
@@ -33943,17 +34035,17 @@ improves readability.</div>
     (list&lt;-map : stringlist
      propmap
      (fn : string
-      [key : string
-       val : string]
+      [key   : string
+       value : string]
       (string
        sindent
        key
        &quot;: &quot;
-       val &quot;;&quot;)))]
+       value &quot;;&quot;)))]
   (string&lt;-stringlist-join
    sprops
    &quot;&quot;))
- :doc &quot;Returns indent'key: val;' for each prop.&quot;)
+ :doc &quot;Returns indent'key: value;' for each prop.&quot;)
 
 (func string&lt;-stylesheet-indent : string
  [stylesheet : stylesheet
@@ -37800,7 +37892,7 @@ improves readability.</div>
             <div class="lbl">Description:</div>
             <ul>
               <li>
-                <div class="txt">Returns ' key=\&quot;val\&quot;' if val is not blank.</div>
+                <div class="txt">Returns ' key=\&quot;value\&quot;' if value is not blank.</div>
               </li>
             </ul>
             <div class="lbl">Function Name:</div>
@@ -37834,7 +37926,7 @@ improves readability.</div>
                     <div class="td"></div>
                   </div>
                   <div class="tr">
-                    <div class="td">val</div>
+                    <div class="td">value</div>
                     <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
                     <div class="td"></div>
                   </div>
@@ -37856,18 +37948,18 @@ improves readability.</div>
               <ul>
                 <li>
                   <div class="source">(func string&lt;-propname-val : string
- [key : string
-  val : string]
+ [key   : string
+  value : string]
  (if
-  (!-empty val)
+  (!-empty value)
   (string
    &quot; &quot;
    key
    &quot;=&quot;
    quote
-   val
+   value
    quote))
- :doc &quot;Returns ' key=\&quot;val\&quot;' if val is not blank.&quot;)</div>
+ :doc &quot;Returns ' key=\&quot;value\&quot;' if value is not blank.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -38413,7 +38505,7 @@ improves readability.</div>
             <div class="lbl">Description:</div>
             <ul>
               <li>
-                <div class="txt">Returns indent'key: val;' for each prop.</div>
+                <div class="txt">Returns indent'key: value;' for each prop.</div>
               </li>
             </ul>
             <div class="lbl">Function Name:</div>
@@ -38477,17 +38569,17 @@ improves readability.</div>
     (list&lt;-map : stringlist
      propmap
      (fn : string
-      [key : string
-       val : string]
+      [key   : string
+       value : string]
       (string
        sindent
        key
        &quot;: &quot;
-       val &quot;;&quot;)))]
+       value &quot;;&quot;)))]
   (string&lt;-stringlist-join
    sprops
    &quot;&quot;))
- :doc &quot;Returns indent'key: val;' for each prop.&quot;)</div>
+ :doc &quot;Returns indent'key: value;' for each prop.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -39751,15 +39843,15 @@ count : int := 0
  :doc &quot;Returns the position (first position is 1) of find text in a stringlist.&quot;)
 
 (func is-list : boolean
- [val : any :doc &quot;Any value&quot;]
- (= &quot;:list&quot; (extends&lt;-any val))
+ [value : any :doc &quot;Any value&quot;]
+ (= &quot;:list&quot; (extends&lt;-any value))
  :test (test-true
         (is-list (empty stringlist)))
  :doc &quot;Returns true if the given value is a list.&quot;)
 
 (func is-map : boolean
- [val : any :doc &quot;Any value&quot;]
- (= &quot;:map&quot; (extends&lt;-any val))
+ [value : any :doc &quot;Any value&quot;]
+ (= &quot;:map&quot; (extends&lt;-any value))
  :test (test-true
         (is-map (empty stringmap)))
  :doc &quot;Returns true if the given value is a map.&quot;)
@@ -39788,12 +39880,12 @@ This is similar to a for next loop in other languages.
 output : list-1 := (empty list-1)
 (if start &lt;= end
  (for i=start to end
-  val : any-1 := (fn-loop i)
-  output += val)
+  value : any-1 := (fn-loop i)
+  output += value)
  (else
   (for i=start to end; i--
-   val : any-1 := (fn-loop i)
-   output += val)
+   value : any-1 := (fn-loop i)
+   output += value)
  ))`)
 
 (func list&lt;-for-while-loop : list-1
@@ -39866,11 +39958,11 @@ output : list-1 := (empty list-1)
          (list
           &quot;a&quot; 4 &quot;b&quot; (list) &quot;c&quot; (map) &quot;d&quot;)
          (fn : string
-          [val : any]
+          [value : any]
           (if
            (then
-            (is-string val)
-            (string val &quot;1&quot;))))))
+            (is-string value)
+            (string value &quot;1&quot;))))))
  :doc &quot;Filter List to only include non-empty values&quot;)
 
 (func list&lt;-list-filtertypes : list-1
@@ -39879,10 +39971,11 @@ output : list-1 := (empty list-1)
  (list&lt;-list-filter
   vallist
   (fn : any
-   [val : any]
+   [value : any]
    (if
-    (is-type&lt;-any-typelist val filtertypes)
-    val)))
+    (is-type&lt;-any-typelist
+     value filtertypes)
+    value)))
  :test (test
         (list
          &quot;a&quot; 1 &quot;b&quot; &quot;c&quot;)
@@ -40859,7 +40952,7 @@ count : int := 0
                     <div class="td">Description</div>
                   </div>
                   <div class="tr">
-                    <div class="td">val</div>
+                    <div class="td">value</div>
                     <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any')">vx/core/any</span></div>
                     <div class="td">Any value</div>
                   </div>
@@ -40883,8 +40976,8 @@ count : int := 0
               <ul>
                 <li>
                   <div class="source">(func is-list : boolean
- [val : any :doc &quot;Any value&quot;]
- (= &quot;:list&quot; (extends&lt;-any val))
+ [value : any :doc &quot;Any value&quot;]
+ (= &quot;:list&quot; (extends&lt;-any value))
  :test (test-true
         (is-list (empty stringlist)))
  :doc &quot;Returns true if the given value is a list.&quot;)</div>
@@ -40926,7 +41019,7 @@ count : int := 0
                     <div class="td">Description</div>
                   </div>
                   <div class="tr">
-                    <div class="td">val</div>
+                    <div class="td">value</div>
                     <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any')">vx/core/any</span></div>
                     <div class="td">Any value</div>
                   </div>
@@ -40950,8 +41043,8 @@ count : int := 0
               <ul>
                 <li>
                   <div class="source">(func is-map : boolean
- [val : any :doc &quot;Any value&quot;]
- (= &quot;:map&quot; (extends&lt;-any val))
+ [value : any :doc &quot;Any value&quot;]
+ (= &quot;:map&quot; (extends&lt;-any value))
  :test (test-true
         (is-map (empty stringmap)))
  :doc &quot;Returns true if the given value is a map.&quot;)</div>
@@ -40969,12 +41062,12 @@ This is similar to a for next loop in other languages.
 output : list-1 := (empty list-1)
 (if start &lt;= end
  (for i=start to end
-  val : any-1 := (fn-loop i)
-  output += val)
+  value : any-1 := (fn-loop i)
+  output += value)
  (else
   (for i=start to end; i--
-   val : any-1 := (fn-loop i)
-   output += val)
+   value : any-1 := (fn-loop i)
+   output += value)
  ))</div>
               </li>
             </ul>
@@ -41067,12 +41160,12 @@ This is similar to a for next loop in other languages.
 output : list-1 := (empty list-1)
 (if start &lt;= end
  (for i=start to end
-  val : any-1 := (fn-loop i)
-  output += val)
+  value : any-1 := (fn-loop i)
+  output += value)
  (else
   (for i=start to end; i--
-   val : any-1 := (fn-loop i)
-   output += val)
+   value : any-1 := (fn-loop i)
+   output += value)
  ))`)</div>
                 </li>
               </ul>
@@ -41407,11 +41500,11 @@ output : list-1 := (empty list-1)
   (list
    &quot;a&quot; 4 &quot;b&quot; (list) &quot;c&quot; (map) &quot;d&quot;)
   (fn : string
-   [val : any]
+   [value : any]
    (if
     (then
-     (is-string val)
-     (string val &quot;1&quot;))))))</div></li>
+     (is-string value)
+     (string value &quot;1&quot;))))))</div></li>
               </ul>
             </details>
             <details open="true">
@@ -41437,11 +41530,11 @@ output : list-1 := (empty list-1)
          (list
           &quot;a&quot; 4 &quot;b&quot; (list) &quot;c&quot; (map) &quot;d&quot;)
          (fn : string
-          [val : any]
+          [value : any]
           (if
            (then
-            (is-string val)
-            (string val &quot;1&quot;))))))
+            (is-string value)
+            (string value &quot;1&quot;))))))
  :doc &quot;Filter List to only include non-empty values&quot;)</div>
                 </li>
               </ul>
@@ -41520,10 +41613,11 @@ output : list-1 := (empty list-1)
  (list&lt;-list-filter
   vallist
   (fn : any
-   [val : any]
+   [value : any]
    (if
-    (is-type&lt;-any-typelist val filtertypes)
-    val)))
+    (is-type&lt;-any-typelist
+     value filtertypes)
+    value)))
  :test (test
         (list
          &quot;a&quot; 1 &quot;b&quot; &quot;c&quot;)
@@ -63187,7 +63281,8 @@ output : list-1 := (empty list-1)
     Path path = Paths.get(sfullpath);
     if (Files.exists(path)) {
       output = Core.c_true;
-    }&quot;)
+    }&quot;
+  :kotlin :auto)
  :test (test-true
         (boolean-exists&lt;-file
          (file
@@ -63197,11 +63292,11 @@ output : list-1 := (empty list-1)
  :doc &quot;Returns true if file/path exists.&quot;)
 
 (func boolean-write&lt;-file-any : boolean
- [file : file
-  val  : any]
+ [file  : file
+  value : any]
  (boolean-write&lt;-file-string
   file
-  (string&lt;-any val))
+  (string&lt;-any value))
  :context
  :sideeffects &quot;Writes to file io&quot;
  :clientserver :server
@@ -63231,7 +63326,8 @@ output : list-1 := (empty list-1)
     String stext = text.vx_string();
     byte[] bytes = stext.getBytes();
     java.nio.file.Files.write(path, bytes);
-    output = Core.c_true;&quot;)
+    output = Core.c_true;&quot;
+  :kotlin :auto)
  :context
  :messages
  :permission
@@ -63288,7 +63384,8 @@ output : list-1 := (empty list-1)
    &quot;output = vx_data_file::vx_string_read_from_file(file);&quot;
   :csharp :auto
   :java
-   &quot;output = vx_string_read_from_file(file);&quot;)
+   &quot;output = vx_string_read_from_file(file);&quot;
+  :kotlin :auto)
  :context
  :permission
  :messages
@@ -63320,7 +63417,8 @@ output : list-1 := (empty list-1)
    &quot;Path path = Paths.get(“”);
     path = path.toAbsolutePath();
     String spath = path.toString();
-    output = Core.vx_new_string(spath);&quot;)
+    output = Core.vx_new_string(spath);&quot;
+  :kotlin :auto)
  :clientserver :server
  :doc  &quot;Returns current system path.&quot;)
 
@@ -63626,7 +63724,8 @@ output : list-1 := (empty list-1)
     Path path = Paths.get(sfullpath);
     if (Files.exists(path)) {
       output = Core.c_true;
-    }&quot;)
+    }&quot;
+  :kotlin :auto)
  :test (test-true
         (boolean-exists&lt;-file
          (file
@@ -63677,7 +63776,7 @@ output : list-1 := (empty list-1)
                     <div class="td"></div>
                   </div>
                   <div class="tr">
-                    <div class="td">val</div>
+                    <div class="td">value</div>
                     <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any')">vx/core/any</span></div>
                     <div class="td"></div>
                   </div>
@@ -63699,11 +63798,11 @@ output : list-1 := (empty list-1)
               <ul>
                 <li>
                   <div class="source">(func boolean-write&lt;-file-any : boolean
- [file : file
-  val  : any]
+ [file  : file
+  value : any]
  (boolean-write&lt;-file-string
   file
-  (string&lt;-any val))
+  (string&lt;-any value))
  :context
  :sideeffects &quot;Writes to file io&quot;
  :clientserver :server
@@ -63860,7 +63959,8 @@ output : list-1 := (empty list-1)
     String stext = text.vx_string();
     byte[] bytes = stext.getBytes();
     java.nio.file.Files.write(path, bytes);
-    output = Core.c_true;&quot;)
+    output = Core.c_true;&quot;
+  :kotlin :auto)
  :context
  :messages
  :permission
@@ -64106,7 +64206,8 @@ output : list-1 := (empty list-1)
    &quot;output = vx_data_file::vx_string_read_from_file(file);&quot;
   :csharp :auto
   :java
-   &quot;output = vx_string_read_from_file(file);&quot;)
+   &quot;output = vx_string_read_from_file(file);&quot;
+  :kotlin :auto)
  :context
  :permission
  :messages
@@ -64307,7 +64408,8 @@ output : list-1 := (empty list-1)
    &quot;Path path = Paths.get(“”);
     path = path.toAbsolutePath();
     String spath = path.toString();
-    output = Core.vx_new_string(spath);&quot;)
+    output = Core.vx_new_string(spath);&quot;
+  :kotlin :auto)
  :clientserver :server
  :doc  &quot;Returns current system path.&quot;)</div>
                 </li>
@@ -75105,10 +75207,10 @@ output : list-1 := (empty list-1)
  (map&lt;-map : uimap
   uimap
   (fn : ui
-   [key : string
-    val : ui]
+   [key   : string
+    value : ui]
    (ui-layout&lt;-ui-orig-parent
-    val
+    value
     (empty ui)
     parent)))
  :sideeffects &quot;Alters User Interface&quot;
@@ -84388,10 +84490,10 @@ output : list-1 := (empty list-1)
  (map&lt;-map : uimap
   uimap
   (fn : ui
-   [key : string
-    val : ui]
+   [key   : string
+    value : ui]
    (ui-layout&lt;-ui-orig-parent
-    val
+    value
     (empty ui)
     parent)))
  :sideeffects &quot;Alters User Interface&quot;
@@ -85822,8 +85924,8 @@ output : list-1 := (empty list-1)
    rowmap
    (fn : stringmap
     [key : string
-     val : stringlist]
-    (:2 val))))
+     value : stringlist]
+    (:2 value))))
  :doc &quot;Returns a stringmap using the first 2 values in each row.&quot;)
 
 (func textblock-csv&lt;-string : textblock
@@ -86540,8 +86642,8 @@ output : list-1 := (empty list-1)
    rowmap
    (fn : stringmap
     [key : string
-     val : stringlist]
-    (:2 val))))
+     value : stringlist]
+    (:2 value))))
  :doc &quot;Returns a stringmap using the first 2 values in each row.&quot;)</div>
                 </li>
               </ul>

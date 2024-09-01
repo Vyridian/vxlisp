@@ -1372,12 +1372,12 @@ public final class Csv {
         Core.Type_any output_1 = Core.f_map_from_map_1(
           Core.t_stringmap,
           rowmap,
-          Core.t_any_from_key_value.vx_fn_new((key_any, val_any) -> {
+          Core.t_any_from_key_value.vx_fn_new((key_any, value_any) -> {
             Core.Type_string key = Core.f_any_from_any(Core.t_string, key_any);
-            Core.Type_stringlist val = Core.f_any_from_any(Core.t_stringlist, val_any);
+            Core.Type_stringlist value = Core.f_any_from_any(Core.t_stringlist, value_any);
             Core.Type_any output_2 = Core.f_any_from_list(
               Core.t_string,
-              val,
+              value,
               Core.vx_new_int(2)
             );
             return output_2;

@@ -151,13 +151,6 @@
      // :implements
      public string vx_string() {
        return vxdecimal;
-     }
-
-     // :implements
-     public Type_decimal vx_new_from_string(string sval) {
-       Class_decimal output = new Class_decimal();
-       output.vxdecimal = sval;
-       return output;
      }"
    :java
     "protected String vxdecimal = “0.0”;
@@ -170,13 +163,6 @@
      @Override
      public String vx_string() {
        return vxdecimal;
-     }
-
-     @Override
-     public Type_decimal vx_new_from_string(final String sval) {
-       Class_decimal output = new Class_decimal();
-       output.vxdecimal = sval;
-       return output;
      }"
    :kotlin
     "internal var vxdecimal : String = “0.0”
@@ -744,7 +730,10 @@
    "int result = num1.vx_int() + num2.vx_int();
     output = Core.vx_new_int(result);"
   :js
-   "num1 + num2")
+   "num1 + num2"
+  :kotlin
+   "val result : Int = num1.vx_int() + num2.vx_int()
+    output = vx_core.vx_new_int(result)")
  :alias "plus"
  :test (test 5 (+ 2 3))
        (test 3 (+ 5 -2))
@@ -764,7 +753,10 @@
    "float result = Core.vx_float_from_number(num1) + Core.vx_float_from_number(num2);
     output = Core.vx_new_float(result);"
   :js
-   "num1 + num2")
+   "num1 + num2"
+  :kotlin
+   "val result : Float = vx_core.vx_float_from_number(num1) + vx_core.vx_float_from_number(num2)
+    output = vx_core.vx_new_float(result)")
  :alias "plus"
  :test (test 5 (+ 2  3))
        (test 3 (+ 5 -2))
@@ -816,7 +808,10 @@
    "int result = num1.vx_int() - num2.vx_int();
     output = Core.vx_new_int(result);"
   :js
-   "num1 - num2")
+   "num1 - num2"
+  :kotlin
+   "val result : Int = num1.vx_int() - num2.vx_int()
+    output = vx_core.vx_new_int(result)")
  :alias "minus"
  :test (test 1 (- 3 2))
        (test 7 (- 5 -2))
@@ -836,7 +831,10 @@
    "float result = Core.vx_float_from_number(num1) - Core.vx_float_from_number(num2);
     output = Core.vx_new_float(result);"
   :js
-   "num1 - num2")
+   "num1 - num2"
+  :kotlin
+   "val result : Float = vx_core.vx_float_from_number(num1) - vx_core.vx_float_from_number(num2)
+    output = vx_core.vx_new_float(result)")
  :alias "minus"
  :test (test 5 (+ 2 3))
        (test 3 (+ 5 -2))
@@ -862,8 +860,7 @@
   (fn : number
    [total : number
     num   : number]
-   (- total num))
- )
+   (- total num)))
  :alias "minus"
  :doc   "Math number minus")
 
@@ -889,7 +886,10 @@
    "int result = num1.vx_int() * num2.vx_int();
     output = Core.vx_new_int(result);"
   :js
-   "num1 * num2")
+   "num1 * num2"
+  :kotlin
+   "val result : Int = num1.vx_int() * num2.vx_int()
+    output = vx_core.vx_new_int(result)")
  :alias "multiply"
  :test (test 6 (* 3 2))
        (test -10 (* 5 -2))
@@ -909,7 +909,10 @@
    "float result = Core.vx_float_from_number(num1) * Core.vx_float_from_number(num2);
     output = Core.vx_new_float(result);"
   :js
-   "num1 * num2")
+   "num1 * num2"
+  :kotlin
+   "val result : Float = vx_core.vx_float_from_number(num1) * vx_core.vx_float_from_number(num2)
+    output = vx_core.vx_new_float(result)")
  :alias "multiply"
  :test (test 6.4 (* 3.2 2))
        (test -10.2 (* 5.1 -2))
@@ -923,8 +926,7 @@
   (fn : int
    [total : int
     num   : int]
-   (* total num))
- )
+   (* total num)))
  :alias "multiply"
  :test (test 24 (* 3 2 4))
        (test -20 (* 5 -2 2))
@@ -938,8 +940,7 @@
   (fn : number
    [total : number
     num   : number]
-   (* total num))
- )
+   (* total num)))
  :alias "multiply"
  :test (test 24 (* 3 2 4))
        (test -20 (* 5 -2 2))
@@ -980,7 +981,17 @@
       output = Core.vx_new_float(result);
     }"
   :js
-   "num1 / num2")
+   "num1 / num2"
+  :kotlin
+   "val float1 : Float = vx_core.vx_float_from_number(num1)
+    val float2 : Float = vx_core.vx_float_from_number(num2)
+    if (float1 == 0f) {
+    } else if (float2 == 0f) {
+      output = vx_core.c_notanumber
+    } else {
+      val result : Float = float1 / float2
+      output = vx_core.vx_new_float(result)
+    }")
  :alias "divide"
  :test (test 3 (/ 6 2))
        (test -5 (/ 10 -2))
@@ -1027,7 +1038,19 @@
     }
     output = Core.vx_new_boolean(isequal);"
   :js
-   "vx_core.vx_eq(val1, val2)")
+   "vx_core.vx_eq(val1, val2)"
+  :kotlin
+   "var isequal : Boolean = false
+    if (val1 == val2) {
+      isequal = true
+    } else {
+      val strval1 : vx_core.Type_string = vx_core.f_string_from_any(val1)
+      val strval2 : vx_core.Type_string = vx_core.f_string_from_any(val2)
+      if (strval1.vx_string().equals(strval2.vx_string())) {
+        isequal = true
+      }
+    }
+    output = vx_core.vx_new_boolean(isequal)")
  :alias "eq"
  :test (test-true (= true true))
        (test-true (= 2 2))
@@ -1051,8 +1074,7 @@
    [reduce  : boolean
     current : any
     next    : any]
-   (and reduce (= current next)))
- )
+   (and reduce (= current next))))
  :alias "eq"
  :test (test-false (= 2 2 3))
  :doc "Boolean equal/equivalent")
@@ -1528,7 +1550,8 @@
         }
         current = next
       }
-    }")
+    }"
+  :kotlin :auto)
  :doc "Returns a val from a list reduce operation")
 
 (func any<-map : any-1
@@ -2230,7 +2253,7 @@
       val strval : String = value.vx_string()
       try {
         val floatresult : Float = strval.toFloat()
-        val iresult : Int = floatresult as Int
+        val iresult : Int = floatresult.toInt()
         intresult = vx_core.vx_new_int(iresult)
       } catch (ex : Exception) {
         intresult = vx_core.c_notanumber
@@ -2444,7 +2467,7 @@
 (func last<-list : any-1
  [values : list-1]
  (let
-  [len  : int := (length values)]
+  [len : int := (length values)]
   (any<-list values len))
  :test (test
         "c"
@@ -2452,7 +2475,7 @@
          (stringlist
           "b"
           "c")))
- :doc  "Returns last value")
+ :doc "Returns last value")
 
 (func length : int
  [text : string]
@@ -3031,6 +3054,12 @@
       output = true
     } else {
       output = false
+    }"
+  :kotlin
+   "if (val1.vx_boolean() || val2.vx_boolean()) {
+      output = vx_core.c_true
+    } else {
+      output = vx_core.c_false
     }")
  :doc  "Returns true if any value is true"
  :test (test-true (or true true))
@@ -3134,6 +3163,12 @@
     default:
       output = fn_any
       break
+    }"
+  :kotlin
+   "if (fn_any == null) {
+    } else if (fn_any == vx_core.e_any_from_func) {
+    } else {
+      output = fn_any.vx_any_from_func(generic_any_1)
     }")
  :test (test 4 (resolve (fn : int [] (+ 1 3)))))
 
@@ -3169,6 +3204,12 @@
     default:
       output = fn_any
       break
+    }"
+  :kotlin
+   "if (fn_any == null) {
+    } else if (fn_any == vx_core.e_any_from_func_async) {
+    } else {
+      output = fn_any.vx_any_from_func_async(generic_any_1)
     }")
  :test (test 4 (resolve : int (fn : int [] (+ 1 3)))))
 
@@ -3216,7 +3257,8 @@
     int intrepeat = repeat.vx_int();
     String stringresult = stringtext.repeat(intrepeat);
     output = Core.vx_new_string(stringresult);"
-  :js "text.repeat(repeat)")
+  :js "text.repeat(repeat)"
+  :kotlin :auto)
  :test (test "abab" (string-repeat "ab" 2)))
 
 (func string<-any : string
@@ -3266,7 +3308,8 @@
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         "a!b!c"
         (string<-string-find-replace
@@ -3368,7 +3411,8 @@
           output = fn()
         }
       }
-    }")
+    }"
+  :kotlin :auto)
  :test (test 1
         (switch : int
          "d"
@@ -3441,7 +3485,9 @@
         output = value
       }
       break
-    }")
+    }"
+  :kotlin
+   "output = value.vx_type()")
  :test (test
         boolean
         (type<-any false))

@@ -15831,11 +15831,11 @@ public static class Ui {
     output = Vx.Core.f_map_from_map_1(
       Vx.Ui.Ui.t_uimap,
       uimap,
-      Vx.Core.t_any_from_key_value.vx_fn_new((key_any, val_any) => {
+      Vx.Core.t_any_from_key_value.vx_fn_new((key_any, value_any) => {
         Vx.Core.Type_string key = Vx.Core.f_any_from_any(Vx.Core.t_string, key_any);
-        Vx.Ui.Ui.Type_ui val = Vx.Core.f_any_from_any(Vx.Ui.Ui.t_ui, val_any);
+        Vx.Ui.Ui.Type_ui value = Vx.Core.f_any_from_any(Vx.Ui.Ui.t_ui, value_any);
         Vx.Core.Type_any output_1 = Vx.Ui.Ui.f_ui_layout_from_ui_orig_parent(
-          val,
+          value,
           Vx.Core.f_empty(
             Vx.Ui.Ui.t_ui
           ),

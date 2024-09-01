@@ -12,7 +12,7 @@ public final class HttpTest {
   }
 
   public static Test.Type_testcoveragesummary test_coveragesummary() {
-    return Core.vx_new(
+    Test.Type_testcoveragesummary output = Core.vx_new(
       Test.t_testcoveragesummary,
       ":testpkg", "vx/web/http", 
       ":constnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
@@ -23,14 +23,20 @@ public final class HttpTest {
       ":totalnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 9), 
       ":typenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 1)
     );
+    return output;
   }
 
   public static Test.Type_testcoveragedetail test_coveragedetail() {
-    return Core.vx_new(Test.t_testcoveragedetail, ":testpkg", "vx/web/http", ":typemap", Core.vx_new(
-  Core.t_intmap,
+    Test.Type_testcoveragedetail output = Core.vx_new(
+      Test.t_testcoveragedetail,
+      ":testpkg", "vx/web/http",
+      ":typemap", Core.vx_new(
+        Core.t_intmap,
         ":response", 0
-), ":constmap", Core.e_intmap, ":funcmap", Core.vx_new(
-  Core.t_intmap,
+      ), 
+      ":constmap", Core.e_intmap, 
+      ":funcmap", Core.vx_new(
+        Core.t_intmap,
         ":csv<-httpget", 0,
         ":json<-httpget", 0,
         ":response<-httpget", 0,
@@ -39,7 +45,9 @@ public final class HttpTest {
         ":textblock<-httpget", 0,
         ":textblock<-response", 0,
         ":xml<-httpget", 0
-      ));
+      )
+    );
+    return output;
   }
 
   public static Test.Type_testpackage test_package(final Core.Type_context context) {

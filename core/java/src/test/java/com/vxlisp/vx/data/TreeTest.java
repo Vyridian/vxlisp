@@ -11,7 +11,7 @@ public final class TreeTest {
   }
 
   public static Test.Type_testcoveragesummary test_coveragesummary() {
-    return Core.vx_new(
+    Test.Type_testcoveragesummary output = Core.vx_new(
       Test.t_testcoveragesummary,
       ":testpkg", "vx/data/tree", 
       ":constnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 3), 
@@ -22,23 +22,31 @@ public final class TreeTest {
       ":totalnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 9), 
       ":typenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 6)
     );
+    return output;
   }
 
   public static Test.Type_testcoveragedetail test_coveragedetail() {
-    return Core.vx_new(Test.t_testcoveragedetail, ":testpkg", "vx/data/tree", ":typemap", Core.vx_new(
-  Core.t_intmap,
+    Test.Type_testcoveragedetail output = Core.vx_new(
+      Test.t_testcoveragedetail,
+      ":testpkg", "vx/data/tree",
+      ":typemap", Core.vx_new(
+        Core.t_intmap,
         ":branch", 0,
         ":brancharrow", 0,
         ":branchlist", 0,
         ":leaf", 0,
         ":leaflist", 0,
         ":tree", 0
-), ":constmap", Core.vx_new(
-  Core.t_intmap,
+      ), 
+      ":constmap", Core.vx_new(
+        Core.t_intmap,
         ":brancharrow-down", 0,
         ":brancharrow-up", 0,
         ":brancharrow-updown", 0
-), ":funcmap", Core.e_intmap);
+      ), 
+      ":funcmap", Core.e_intmap
+    );
+    return output;
   }
 
   public static Test.Type_testpackage test_package(final Core.Type_context context) {

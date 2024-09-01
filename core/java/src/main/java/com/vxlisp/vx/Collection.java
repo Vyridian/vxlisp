@@ -1179,12 +1179,12 @@ public final class Collection {
   /**
    * @function is_list
    * Returns true if the given value is a list.
-   * @param  {any} val Any value
+   * @param  {any} value Any value
    * @return {boolean}
    * (func is-list)
    */
   public interface Func_is_list extends Core.Func_any_from_any {
-    public Core.Type_boolean vx_is_list(final Core.Type_any val);
+    public Core.Type_boolean vx_is_list(final Core.Type_any value);
   }
 
   public static class Class_is_list extends Core.Class_base implements Func_is_list {
@@ -1260,14 +1260,14 @@ public final class Collection {
     @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
-      output = Collection.f_is_list(val);
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      output = Collection.f_is_list(value);
       return output;
     }
 
     @Override
-    public Core.Type_boolean vx_is_list(final Core.Type_any val) {
-      Core.Type_boolean output = Collection.f_is_list(val);
+    public Core.Type_boolean vx_is_list(final Core.Type_any value) {
+      Core.Type_boolean output = Collection.f_is_list(value);
       return output;
     }
 
@@ -1276,12 +1276,12 @@ public final class Collection {
   public static final Collection.Func_is_list e_is_list = new Collection.Class_is_list();
   public static final Collection.Func_is_list t_is_list = new Collection.Class_is_list();
 
-  public static Core.Type_boolean f_is_list(final Core.Type_any val) {
+  public static Core.Type_boolean f_is_list(final Core.Type_any value) {
     Core.Type_boolean output = Core.e_boolean;
     output = Core.f_eq(
       Core.vx_new_string(":list"),
       Core.f_extends_from_any(
-        val
+        value
       )
     );
     return output;
@@ -1290,12 +1290,12 @@ public final class Collection {
   /**
    * @function is_map
    * Returns true if the given value is a map.
-   * @param  {any} val Any value
+   * @param  {any} value Any value
    * @return {boolean}
    * (func is-map)
    */
   public interface Func_is_map extends Core.Func_any_from_any {
-    public Core.Type_boolean vx_is_map(final Core.Type_any val);
+    public Core.Type_boolean vx_is_map(final Core.Type_any value);
   }
 
   public static class Class_is_map extends Core.Class_base implements Func_is_map {
@@ -1371,14 +1371,14 @@ public final class Collection {
     @Override
     public Core.Type_any vx_repl(Core.Type_anylist arglist) {
       Core.Type_any output = Core.e_any;
-      Core.Type_any val = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
-      output = Collection.f_is_map(val);
+      Core.Type_any value = Core.f_any_from_any(Core.t_any, arglist.vx_any(Core.vx_new_int(0)));
+      output = Collection.f_is_map(value);
       return output;
     }
 
     @Override
-    public Core.Type_boolean vx_is_map(final Core.Type_any val) {
-      Core.Type_boolean output = Collection.f_is_map(val);
+    public Core.Type_boolean vx_is_map(final Core.Type_any value) {
+      Core.Type_boolean output = Collection.f_is_map(value);
       return output;
     }
 
@@ -1387,12 +1387,12 @@ public final class Collection {
   public static final Collection.Func_is_map e_is_map = new Collection.Class_is_map();
   public static final Collection.Func_is_map t_is_map = new Collection.Class_is_map();
 
-  public static Core.Type_boolean f_is_map(final Core.Type_any val) {
+  public static Core.Type_boolean f_is_map(final Core.Type_any value) {
     Core.Type_boolean output = Core.e_boolean;
     output = Core.f_eq(
       Core.vx_new_string(":map"),
       Core.f_extends_from_any(
-        val
+        value
       )
     );
     return output;
@@ -1405,12 +1405,12 @@ public final class Collection {
    * output : list-1 := (empty list-1)
    * (if start <= end
    *  (for i=start to end
-   *   val : any-1 := (fn-loop i)
-   *   output += val)
+   *   value : any-1 := (fn-loop i)
+   *   output += value)
    *  (else
    *   (for i=start to end; i--
-   *    val : any-1 := (fn-loop i)
-   *    output += val)
+   *    value : any-1 := (fn-loop i)
+   *    output += value)
    *  ))
    * @param  {int} start
    * @param  {int} end
@@ -2003,15 +2003,15 @@ public final class Collection {
     output = Collection.f_list_from_list_filter(
       generic_list_1,
       vallist,
-      Core.t_any_from_any.vx_fn_new((val_any) -> {
-        Core.Type_any val = Core.f_any_from_any(Core.t_any, val_any);
+      Core.t_any_from_any.vx_fn_new((value_any) -> {
+        Core.Type_any value = Core.f_any_from_any(Core.t_any, value_any);
         Core.Type_any output_1 = Core.f_if(
           Core.t_any,
           Type.f_is_type_from_any_typelist(
-            val,
+            value,
             filtertypes
           ),
-          val
+          value
         );
         return output_1;
       })

@@ -337,7 +337,7 @@ public final class HtmlTest {
   }
 
   public static Test.Type_testcoveragesummary test_coveragesummary() {
-    return Core.vx_new(
+    Test.Type_testcoveragesummary output = Core.vx_new(
       Test.t_testcoveragesummary,
       ":testpkg", "vx/web/html", 
       ":constnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
@@ -348,11 +348,15 @@ public final class HtmlTest {
       ":totalnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 9, ":tests", 7, ":total", 73), 
       ":typenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 32)
     );
+    return output;
   }
 
   public static Test.Type_testcoveragedetail test_coveragedetail() {
-    return Core.vx_new(Test.t_testcoveragedetail, ":testpkg", "vx/web/html", ":typemap", Core.vx_new(
-  Core.t_intmap,
+    Test.Type_testcoveragedetail output = Core.vx_new(
+      Test.t_testcoveragedetail,
+      ":testpkg", "vx/web/html",
+      ":typemap", Core.vx_new(
+        Core.t_intmap,
         ":body", 0,
         ":details", 0,
         ":div", 0,
@@ -385,8 +389,10 @@ public final class HtmlTest {
         ":title", 0,
         ":tr", 0,
         ":trlist", 0
-), ":constmap", Core.e_intmap, ":funcmap", Core.vx_new(
-  Core.t_intmap,
+      ), 
+      ":constmap", Core.e_intmap, 
+      ":funcmap", Core.vx_new(
+        Core.t_intmap,
         ":htmlstring<-string", 0,
         ":string-indent", 0,
         ":string<-body-indent", 2,
@@ -428,7 +434,9 @@ public final class HtmlTest {
         ":styles<-stylesheet", 0,
         ":stylesheet-loadmap", 0,
         ":uri<-string", 0
-      ));
+      )
+    );
+    return output;
   }
 
   public static Test.Type_testpackage test_package(final Core.Type_context context) {
