@@ -14,19 +14,23 @@ object vx_translation_allTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"Hola\"\n (trn/translate<-translationmap-name-string\n  (translationmap-all)\n  \"es\"\n  \"Hello\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("Hola"),
-              vx_translate.f_translate_from_translationmap_name_string(
-                vx_translation_all.f_translationmap_all(),
-                vx_core.vx_new_string("es"),
-                vx_core.vx_new_string("Hello")
-              )
-            )
+        f_translationmap_all_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_translationmap_all_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"Hola\"\n (trn/translate<-translationmap-name-string\n  (translationmap-all)\n  \"es\"\n  \"Hello\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("Hola"),
+        vx_translate.f_translate_from_translationmap_name_string(
+          vx_translation_all.f_translationmap_all(),
+          vx_core.vx_new_string("es"),
+          vx_core.vx_new_string("Hello")
         )
       )
     )

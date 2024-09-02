@@ -14,16 +14,20 @@ public final class SampleTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n myconst\n myconst)",
-          ":testresult",
-            Test.f_test(
-              context,
-              Sample.c_myconst,
-              Sample.c_myconst
-            )
-        )
+        c_myconst_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe c_myconst_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n myconst\n myconst)",
+      ":testresult", Test.f_test(
+        context,
+        Sample.c_myconst,
+        Sample.c_myconst
       )
     );
     return output;
@@ -38,17 +42,21 @@ public final class SampleTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test 5 (myfunc 1))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_int(5),
-              Sample.f_myfunc(
-                Core.vx_new_int(1)
-              )
-            )
+        f_myfunc_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_myfunc_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test 5 (myfunc 1))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_int(5),
+        Sample.f_myfunc(
+          Core.vx_new_int(1)
         )
       )
     );

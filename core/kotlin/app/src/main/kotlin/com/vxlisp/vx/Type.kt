@@ -2,6 +2,186 @@ package com.vxlisp.vx
 
 object vx_type {
 
+  fun vx_boolean_from_string_ends(
+    text : vx_core.Type_string,
+    ends : vx_core.Type_string) : vx_core.Type_boolean {
+    val check : Boolean = vx_core.vx_boolean_from_string_ends(
+      text.vx_string(),
+      ends.vx_string())
+    val output : vx_core.Type_boolean = vx_core.vx_new_boolean(check)
+    return output
+  }
+
+  fun vx_boolean_from_string_starts(
+    text : vx_core.Type_string,
+    starts : vx_core.Type_string) : vx_core.Type_boolean {
+    val check : Boolean = vx_core.vx_boolean_from_string_starts(
+      text.vx_string(),
+      starts.vx_string()
+    )
+    val output = vx_core.vx_new_boolean(check)
+    return output
+  }
+
+  // vx_int_from_string_find(string, string)
+  fun vx_int_from_string_find(
+    text : String,
+    find : String) : Int {
+    val output : Int = text.indexOf(find) + 1
+    return output
+  }
+
+  // vx_int_from_string_find(string, string)
+  fun vx_int_from_string_find(
+    text : vx_core.Type_string,
+    find : vx_core.Type_string) : vx_core.Type_int {
+    val ipos : Int = vx_int_from_string_find(
+      text.vx_string(), find.vx_string()
+    )
+    val output : vx_core.Type_int = vx_core.vx_new_int(ipos)
+    return output
+  }
+
+  // vx_int_from_string_findkeyword(string, string)
+  fun vx_int_from_string_findkeyword(
+    text : String,
+    find : String) : Int {
+    var output : Int = -1
+    if (text == "") {
+    } else if (find == ":nonwhitespace") {
+      val wschars1 : String = " \n\r\t"
+      val ilen : Int = text.length
+      for (i : Int in 0..ilen-1) {
+        val cchar : Char = text[i]
+        val pos : Int = wschars1.indexOf(cchar)
+        if (pos < 0) {
+          output = i
+          break
+        }
+      }
+    } else if (find == ":whitespace") {
+      val wschars2 : String = " \n\r\t"
+      for (cchar : Char in wschars2.iterator()) {
+        val pos : Int = text.indexOf(cchar)
+        if (pos < 0) {
+        } else if (output < 0) {
+          output = pos
+        } else if (pos < output) {
+          output = pos
+        }
+      }
+    } else {
+	     output = text.indexOf(find)
+		  }
+    output += 1
+    return output
+ 	}
+
+  // vx_int_from_string_findkeyword(string, string)
+  fun vx_int_from_string_findkeyword(
+    text : vx_core.Type_string,
+    find : vx_core.Type_string) : vx_core.Type_int {
+    val ipos : Int = vx_int_from_string_findkeyword(
+      text.vx_string(),
+      find.vx_string()
+    )
+    val output : vx_core.Type_int = vx_core.vx_new_int(ipos)
+    return output
+  }
+
+  // vx_int_from_string_findlast(string, string)
+  fun vx_int_from_string_findlast(
+    text : String,
+    findlast : String) : Int {
+    val output = text.lastIndexOf(findlast) + 1
+    return output
+  }
+
+  // vx_int_from_string_findlast(string, string)
+  fun vx_int_from_string_findlast(
+    text : vx_core.Type_string,
+    findlast : vx_core.Type_string) : vx_core.Type_int {
+    val ipos : Int = vx_int_from_string_findlast(
+      text.vx_string(),
+      findlast.vx_string()
+    )
+    val output : vx_core.Type_int = vx_core.vx_new_int(ipos)
+    return output
+  }
+
+  // vx_string_from_string_start_end(string, int, int)
+  fun vx_string_from_string_start_end(
+    text : vx_core.Type_string,
+    start : vx_core.Type_int,
+    end : vx_core.Type_int) : vx_core.Type_string {
+    val stext : String = vx_core.vx_string_from_string_start_end(
+      text.vx_string(),
+      start.vx_int(),
+      end.vx_int()
+    )
+    val output = vx_core.vx_new_string(stext)
+    return output
+  }
+
+  // vx_string_from_stringlist_join(stringlist, string)
+  fun vx_string_from_stringlist_join(
+    vals  : vx_core.Type_stringlist,
+    delim : vx_core.Type_string) : vx_core.Type_string {
+    val fn : (vx_core.Type_any) -> String = {item ->
+      val valstring : vx_core.Type_string = vx_core.f_any_from_any(
+        vx_core.t_string,
+        item
+      )
+      val output_1 : String = valstring.vx_string()
+      output_1
+    }
+    val listvalstring : List<String> = vx_core.arraylist_from_arraylist_fn(
+      vals.vx_list(),
+      fn
+    )
+    val sdelim : String = delim.vx_string()
+    val stext : String = listvalstring.joinToString(separator = sdelim)
+    val output : vx_core.Type_string = vx_core.vx_new_string(stext)
+    return output
+  }
+
+  // vx_string_lowercase(string)
+  fun vx_string_lowercase(
+    text : vx_core.Type_string) : vx_core.Type_string {
+    var stext : String = text.vx_string()
+    stext = stext.toLowerCase()
+    val output : vx_core.Type_string = vx_core.vx_new_string(stext)
+    return output
+  }
+
+  // vx_string_trim(string)
+  fun vx_string_trim(
+    text : vx_core.Type_string) : vx_core.Type_string {
+    var stext : String = text.vx_string()
+    stext = stext.trim()
+    val output : vx_core.Type_string = vx_core.vx_new_string(stext)
+    return output
+  }
+
+  // vx_string_uppercase(string)
+  fun vx_string_uppercase(
+    text : vx_core.Type_string) : vx_core.Type_string {
+    var stext : String = text.vx_string()
+    stext = stext.toUpperCase()
+    val output : vx_core.Type_string = vx_core.vx_new_string(stext)
+    return output
+  }
+
+  fun vx_stringlist_from_string_split(
+    text : vx_core.Type_string,
+    delim : vx_core.Type_string) : vx_core.Type_stringlist {
+    val stext : String = text.vx_string()
+    val sdelim : String = delim.vx_string()
+    val liststring : List<String> = stext.split(sdelim)
+    val arraystring : Array<String> = liststring.toTypedArray()
+    val output = vx_core.vx_new(vx_core.t_stringlist, *arraystring)
+    return output
+  }
 
   interface Func_allowtypenames_from_type : vx_core.Func_any_from_any {
     fun vx_allowtypenames_from_type(type : vx_core.Type_any) : vx_core.Type_stringlist
@@ -357,6 +537,7 @@ object vx_type {
 
   fun f_boolean_from_string_ends(text : vx_core.Type_string, ends : vx_core.Type_string) : vx_core.Type_boolean {
     var output : vx_core.Type_boolean = vx_core.e_boolean
+    output = vx_type.vx_boolean_from_string_ends(text, ends)
     return output
   }
 
@@ -436,6 +617,7 @@ object vx_type {
 
   fun f_boolean_from_string_starts(text : vx_core.Type_string, starts : vx_core.Type_string) : vx_core.Type_boolean {
     var output : vx_core.Type_boolean = vx_core.e_boolean
+    output = vx_type.vx_boolean_from_string_starts(text, starts)
     return output
   }
 
@@ -515,6 +697,7 @@ object vx_type {
 
   fun f_int_from_string_find(text : vx_core.Type_string, find : vx_core.Type_string) : vx_core.Type_int {
     var output : vx_core.Type_int = vx_core.e_int
+    output = vx_type.vx_int_from_string_find(text, find)
     return output
   }
 
@@ -594,6 +777,7 @@ object vx_type {
 
   fun f_int_from_string_findkeyword(text : vx_core.Type_string, find : vx_core.Type_string) : vx_core.Type_int {
     var output : vx_core.Type_int = vx_core.e_int
+    output = vx_type.vx_int_from_string_findkeyword(text, find)
     return output
   }
 
@@ -673,6 +857,7 @@ object vx_type {
 
   fun f_int_from_string_findlast(text : vx_core.Type_string, findlast : vx_core.Type_string) : vx_core.Type_int {
     var output : vx_core.Type_int = vx_core.e_int
+    output = vx_type.vx_int_from_string_findlast(text, findlast)
     return output
   }
 
@@ -1349,6 +1534,7 @@ object vx_type {
 
   fun f_string_lowercase(text : vx_core.Type_string) : vx_core.Type_string {
     var output : vx_core.Type_string = vx_core.e_string
+    output = vx_type.vx_string_lowercase(text)
     return output
   }
 
@@ -1597,6 +1783,7 @@ object vx_type {
 
   fun f_string_trim(text : vx_core.Type_string) : vx_core.Type_string {
     var output : vx_core.Type_string = vx_core.e_string
+    output = vx_type.vx_string_trim(text)
     return output
   }
 
@@ -1687,6 +1874,7 @@ object vx_type {
 
   fun f_string_uppercase(text : vx_core.Type_string) : vx_core.Type_string {
     var output : vx_core.Type_string = vx_core.e_string
+    output = vx_type.vx_string_uppercase(text)
     return output
   }
 
@@ -2067,6 +2255,7 @@ object vx_type {
 
   fun f_string_from_string_start_end(text : vx_core.Type_string, start : vx_core.Type_int, end : vx_core.Type_int) : vx_core.Type_string {
     var output : vx_core.Type_string = vx_core.e_string
+    output = vx_type.vx_string_from_string_start_end(text, start, end)
     return output
   }
 
@@ -2146,6 +2335,7 @@ object vx_type {
 
   fun f_string_from_stringlist_join(vals : vx_core.Type_stringlist, delim : vx_core.Type_string) : vx_core.Type_string {
     var output : vx_core.Type_string = vx_core.e_string
+    output = vx_type.vx_string_from_stringlist_join(vals, delim)
     return output
   }
 
@@ -2225,6 +2415,7 @@ object vx_type {
 
   fun f_stringlist_from_string_split(text : vx_core.Type_string, delim : vx_core.Type_string) : vx_core.Type_stringlist {
     var output : vx_core.Type_stringlist = vx_core.e_stringlist
+    output = vx_type.vx_stringlist_from_string_split(text, delim)
     return output
   }
 

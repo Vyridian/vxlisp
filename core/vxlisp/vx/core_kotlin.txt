@@ -1147,7 +1147,22 @@
       }
     } else if (value is vx_core.Type_string) {
       val valstring : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, value)
-      output = "\"" + valstring.vx_string() + "\""
+      var sval : String = valstring.vx_string()
+      if (sval.indexOf("\"") < 0) {
+        sval = "\"" + sval + "\""
+      } else {
+        sval = "`" + sval + "`"
+      }
+      if (valstring.vx_msgblock() != vx_core.e_msgblock) {
+        var msgtext : String = vx_core.vx_string_from_any_indent(
+          valstring.vx_msgblock(), indent, linefeed
+        )
+        output  = "\n" + indenttext + "(string"
+        output += "\n" + indenttext + " " + sval
+        output += "\n" + indenttext + " " + msgtext + ")"
+      } else {
+        output = sval
+      }
     } else if (value.vx_constdef() != vx_core.e_constdef) {
       val constdef : vx_core.Type_constdef = value.vx_constdef()
       val constpkg : String = constdef.pkgname().vx_string()

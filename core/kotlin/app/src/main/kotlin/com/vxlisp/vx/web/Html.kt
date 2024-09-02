@@ -4,6 +4,16 @@ import com.vxlisp.vx.*
 
 object vx_web_html {
 
+  fun vx_htmlstring_from_string(
+    text : vx_core.Type_string) : vx_core.Type_string  {
+    var str : String = text.vx_string()
+    str = vx_core.vx_string_from_string_find_replace(str, "&", "&amp;")
+    str = vx_core.vx_string_from_string_find_replace(str, "'", "\'")
+    str = vx_core.vx_string_from_string_find_replace(str, ">", "&gt;")
+    str = vx_core.vx_string_from_string_find_replace(str, "<", "&lt;")
+    val output : vx_core.Type_string = vx_core.vx_new_string(str)
+    return output
+  }
 
   interface Type_body : vx_core.Type_struct {
     fun nodes() : vx_web_html.Type_divchildlist
@@ -8788,6 +8798,7 @@ object vx_web_html {
 
   fun f_htmlstring_from_string(text : vx_core.Type_string) : vx_core.Type_string {
     var output : vx_core.Type_string = vx_core.e_string
+    output = vx_web_html.vx_htmlstring_from_string(text)
     return output
   }
 

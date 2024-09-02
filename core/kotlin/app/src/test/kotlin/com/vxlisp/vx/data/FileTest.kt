@@ -14,32 +14,36 @@ object vx_data_fileTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"boolean_exists_from_file.txt\"\n   :path (string path-test-resources \"/vx\"))))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_data_file.f_boolean_exists_from_file(
-                vx_core.f_new(
-                  vx_data_file.t_file,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string(":name"),
-                    vx_core.vx_new_string("boolean_exists_from_file.txt"),
-                    vx_core.vx_new_string(":path"),
-                    vx_core.f_new(
-                      vx_core.t_string,
-                      vx_core.vx_new(
-                        vx_core.t_anylist,
-                        vx_core.c_path_test_resources,
-                        vx_core.vx_new_string("/vx")
-                      )
-                    )
-                  )
+        f_boolean_exists_from_file_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_boolean_exists_from_file_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"boolean_exists_from_file.txt\"\n   :path (string path-test-resources \"/vx\"))))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_data_file.f_boolean_exists_from_file(
+          vx_core.f_new(
+            vx_data_file.t_file,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string(":name"),
+              vx_core.vx_new_string("boolean_exists_from_file.txt"),
+              vx_core.vx_new_string(":path"),
+              vx_core.f_new(
+                vx_core.t_string,
+                vx_core.vx_new(
+                  vx_core.t_anylist,
+                  vx_core.c_path_test_resources,
+                  vx_core.vx_new_string("/vx")
                 )
               )
             )
+          )
         )
       )
     )
@@ -55,34 +59,38 @@ object vx_data_fileTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true\n (boolean-write<-file-string\n  (file\n   :name \"boolean_write_from_file_string.txt\"\n   :path (string path-test-resources \"/vx\"))\n  \"writetext\"))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_data_file.f_boolean_write_from_file_string(
-                context,
-                vx_core.f_new(
-                  vx_data_file.t_file,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string(":name"),
-                    vx_core.vx_new_string("boolean_write_from_file_string.txt"),
-                    vx_core.vx_new_string(":path"),
-                    vx_core.f_new(
-                      vx_core.t_string,
-                      vx_core.vx_new(
-                        vx_core.t_anylist,
-                        vx_core.c_path_test_resources,
-                        vx_core.vx_new_string("/vx")
-                      )
-                    )
-                  )
-                ),
-                vx_core.vx_new_string("writetext")
+        f_boolean_write_from_file_string_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_boolean_write_from_file_string_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true\n (boolean-write<-file-string\n  (file\n   :name \"boolean_write_from_file_string.txt\"\n   :path (string path-test-resources \"/vx\"))\n  \"writetext\"))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_data_file.f_boolean_write_from_file_string(
+          context,
+          vx_core.f_new(
+            vx_data_file.t_file,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string(":name"),
+              vx_core.vx_new_string("boolean_write_from_file_string.txt"),
+              vx_core.vx_new_string(":path"),
+              vx_core.f_new(
+                vx_core.t_string,
+                vx_core.vx_new(
+                  vx_core.t_anylist,
+                  vx_core.c_path_test_resources,
+                  vx_core.vx_new_string("/vx")
+                )
               )
             )
+          ),
+          vx_core.vx_new_string("writetext")
         )
       )
     )
@@ -98,52 +106,56 @@ object vx_data_fileTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n (file\n  :name \"string_read_from_file.txt\"\n  :path (string path-test-resources \"/vx\")\n  :text \"testdata\")\n (file-read<-file\n  (file\n   :name \"string_read_from_file.txt\"\n   :path (string path-test-resources \"/vx\"))))",
-          ":testresult",
-            vx_test.f_test(
-              context,
+        f_file_read_from_file_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_file_read_from_file_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n (file\n  :name \"string_read_from_file.txt\"\n  :path (string path-test-resources \"/vx\")\n  :text \"testdata\")\n (file-read<-file\n  (file\n   :name \"string_read_from_file.txt\"\n   :path (string path-test-resources \"/vx\"))))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.f_new(
+          vx_data_file.t_file,
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_string(":name"),
+            vx_core.vx_new_string("string_read_from_file.txt"),
+            vx_core.vx_new_string(":path"),
+            vx_core.f_new(
+              vx_core.t_string,
+              vx_core.vx_new(
+                vx_core.t_anylist,
+                vx_core.c_path_test_resources,
+                vx_core.vx_new_string("/vx")
+              )
+            ),
+            vx_core.vx_new_string(":text"),
+            vx_core.vx_new_string("testdata")
+          )
+        ),
+        vx_data_file.f_file_read_from_file(
+          context,
+          vx_core.f_new(
+            vx_data_file.t_file,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string(":name"),
+              vx_core.vx_new_string("string_read_from_file.txt"),
+              vx_core.vx_new_string(":path"),
               vx_core.f_new(
-                vx_data_file.t_file,
+                vx_core.t_string,
                 vx_core.vx_new(
                   vx_core.t_anylist,
-                  vx_core.vx_new_string(":name"),
-                  vx_core.vx_new_string("string_read_from_file.txt"),
-                  vx_core.vx_new_string(":path"),
-                  vx_core.f_new(
-                    vx_core.t_string,
-                    vx_core.vx_new(
-                      vx_core.t_anylist,
-                      vx_core.c_path_test_resources,
-                      vx_core.vx_new_string("/vx")
-                    )
-                  ),
-                  vx_core.vx_new_string(":text"),
-                  vx_core.vx_new_string("testdata")
-                )
-              ),
-              vx_data_file.f_file_read_from_file(
-                context,
-                vx_core.f_new(
-                  vx_data_file.t_file,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string(":name"),
-                    vx_core.vx_new_string("string_read_from_file.txt"),
-                    vx_core.vx_new_string(":path"),
-                    vx_core.f_new(
-                      vx_core.t_string,
-                      vx_core.vx_new(
-                        vx_core.t_anylist,
-                        vx_core.c_path_test_resources,
-                        vx_core.vx_new_string("/vx")
-                      )
-                    )
-                  )
+                  vx_core.c_path_test_resources,
+                  vx_core.vx_new_string("/vx")
                 )
               )
             )
+          )
         )
       )
     )
@@ -159,45 +171,53 @@ object vx_data_fileTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"fname\"\n (pathfull<-file\n  (file\n   :name \"fname\")))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("fname"),
-              vx_data_file.f_pathfull_from_file(
-                vx_core.f_new(
-                  vx_data_file.t_file,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string(":name"),
-                    vx_core.vx_new_string("fname")
-                  )
-                )
-              )
+        f_pathfull_from_file_testdescribe_1(context),
+        f_pathfull_from_file_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_pathfull_from_file_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"fname\"\n (pathfull<-file\n  (file\n   :name \"fname\")))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("fname"),
+        vx_data_file.f_pathfull_from_file(
+          vx_core.f_new(
+            vx_data_file.t_file,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string(":name"),
+              vx_core.vx_new_string("fname")
             )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"fpath/fname\"\n (pathfull<-file\n  (file\n   :path \"fpath\"\n   :name \"fname\")))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("fpath/fname"),
-              vx_data_file.f_pathfull_from_file(
-                vx_core.f_new(
-                  vx_data_file.t_file,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string(":path"),
-                    vx_core.vx_new_string("fpath"),
-                    vx_core.vx_new_string(":name"),
-                    vx_core.vx_new_string("fname")
-                  )
-                )
-              )
+          )
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_pathfull_from_file_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"fpath/fname\"\n (pathfull<-file\n  (file\n   :path \"fpath\"\n   :name \"fname\")))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("fpath/fname"),
+        vx_data_file.f_pathfull_from_file(
+          vx_core.f_new(
+            vx_data_file.t_file,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string(":path"),
+              vx_core.vx_new_string("fpath"),
+              vx_core.vx_new_string(":name"),
+              vx_core.vx_new_string("fname")
             )
+          )
         )
       )
     )
@@ -213,34 +233,38 @@ object vx_data_fileTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"testdata\"\n (string-read<-file\n  (file\n   :name \"string_read_from_file.txt\"\n   :path (string path-test-resources \"/vx\"))))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("testdata"),
-              vx_data_file.f_string_read_from_file(
-                context,
-                vx_core.f_new(
-                  vx_data_file.t_file,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string(":name"),
-                    vx_core.vx_new_string("string_read_from_file.txt"),
-                    vx_core.vx_new_string(":path"),
-                    vx_core.f_new(
-                      vx_core.t_string,
-                      vx_core.vx_new(
-                        vx_core.t_anylist,
-                        vx_core.c_path_test_resources,
-                        vx_core.vx_new_string("/vx")
-                      )
-                    )
-                  )
+        f_string_read_from_file_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_string_read_from_file_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"testdata\"\n (string-read<-file\n  (file\n   :name \"string_read_from_file.txt\"\n   :path (string path-test-resources \"/vx\"))))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("testdata"),
+        vx_data_file.f_string_read_from_file(
+          context,
+          vx_core.f_new(
+            vx_data_file.t_file,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string(":name"),
+              vx_core.vx_new_string("string_read_from_file.txt"),
+              vx_core.vx_new_string(":path"),
+              vx_core.f_new(
+                vx_core.t_string,
+                vx_core.vx_new(
+                  vx_core.t_anylist,
+                  vx_core.c_path_test_resources,
+                  vx_core.vx_new_string("/vx")
                 )
               )
             )
+          )
         )
       )
     )

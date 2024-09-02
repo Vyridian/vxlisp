@@ -4722,11 +4722,11 @@ ab
   (list
    "a" 4 "b" (list) "c" (map) "d")
   (fn : string
-   [val : any]
+   [value : any]
    (if
     (then
-     (is-string val)
-     (string val "1"))))))</p>
+     (is-string value)
+     (string value "1"))))))</p>
                     </td>
                     <td>
                       <p class="preformatted">(stringlist
@@ -5315,27 +5315,7 @@ ab
       (textblock
        :text "a"
        :startpos 2
-       :endpos 2))
-    (msgblock
-     :msgs
-      (msglist
-       (msg
-        :code "closedelimmissing"
-        :detail
-         (delim
-          :name "delimclose"
-          :starttext "&gt;")
-        :severity 2)))))
- (msgblock
-  :msgs
-   (msglist
-    (msg
-     :code "closedelimmissing"
-     :detail
-      (delim
-       :name "delimclose"
-       :starttext "&gt;")
-     :severity 2))))</p>
+       :endpos 2)))))</p>
                     </td>
                     <td>
                       <p class="preformatted">(textblock
@@ -5359,27 +5339,7 @@ ab
       (textblock
        :text "a"
        :startpos 2
-       :endpos 2))
-    (msgblock
-     :msgs
-      (msglist
-       (msg
-        :code "closedelimmissing"
-        :detail
-         (delim
-          :name "delimclose"
-          :starttext "&gt;")
-        :severity 2)))))
- (msgblock
-  :msgs
-   (msglist
-    (msg
-     :code "closedelimmissing"
-     :detail
-      (delim
-       :name "delimclose"
-       :starttext "&gt;")
-     :severity 2))))</p>
+       :endpos 2)))))</p>
                     </td>
                   </tr>
                   <tr>
@@ -6758,27 +6718,7 @@ ab
       (textblock
        :text "a"
        :startpos 2
-       :endpos 2))
-    (msgblock
-     :msgs
-      (msglist
-       (msg
-        :code "closedelimmissing"
-        :detail
-         (delim
-          :name "delimclose"
-          :starttext "&gt;")
-        :severity 2)))))
- (msgblock
-  :msgs
-   (msglist
-    (msg
-     :code "closedelimmissing"
-     :detail
-      (delim
-       :name "delimclose"
-       :starttext "&gt;")
-     :severity 2))))</p>
+       :endpos 2)))))</p>
                     </td>
                     <td>
                       <p class="preformatted">(textblock
@@ -6802,27 +6742,7 @@ ab
       (textblock
        :text "a"
        :startpos 2
-       :endpos 2))
-    (msgblock
-     :msgs
-      (msglist
-       (msg
-        :code "closedelimmissing"
-        :detail
-         (delim
-          :name "delimclose"
-          :starttext "&gt;")
-        :severity 2)))))
- (msgblock
-  :msgs
-   (msglist
-    (msg
-     :code "closedelimmissing"
-     :detail
-      (delim
-       :name "delimclose"
-       :starttext "&gt;")
-     :severity 2))))</p>
+       :endpos 2)))))</p>
                     </td>
                   </tr>
                   <tr>
@@ -14761,22 +14681,10 @@ ab
   (empty argmap)))</p>
                     </td>
                     <td>
-                      <p class="preformatted">(repl
- (msgblock
-  :msgs
-   (msglist
-    (msg
-     :severity 2
-     :text "Empty delim cannot have more than one child."))))</p>
+                      <p class="preformatted">(repl)</p>
                     </td>
                     <td>
-                      <p class="preformatted">(repl
- (msgblock
-  :msgs
-   (msglist
-    (msg
-     :severity 2
-     :text "Empty delim cannot have more than one child."))))</p>
+                      <p class="preformatted">(repl)</p>
                     </td>
                   </tr>
                   <tr>
@@ -15885,13 +15793,13 @@ ab
                     <td>
                       <p class="preformatted">(file
  :name "string_read_from_file.txt"
- :path "src/test/resources/vx"
+ :path "src/test/kotlin/resources/vx"
  :text "testdata")</p>
                     </td>
                     <td>
                       <p class="preformatted">(file
  :name "string_read_from_file.txt"
- :path "src/test/resources/vx"
+ :path "src/test/kotlin/resources/vx"
  :text "testdata")</p>
                     </td>
                   </tr>
@@ -16873,37 +16781,11 @@ ab
                     </td>
                     <td>
                       <p class="preformatted">(xml
- :tag "doc"
- (msgblock
-  :msgs
-   (msglist
-    (msg
-     :code ":invalidxmlclosetag"
-     :detail
-      (anymap
-       :tag "/wrong"
-       :startpos 0
-       :endpos 0
-       :line 0
-       :column 0)
-     :severity 2))))</p>
+ :tag "doc")</p>
                     </td>
                     <td>
                       <p class="preformatted">(xml
- :tag "doc"
- (msgblock
-  :msgs
-   (msglist
-    (msg
-     :code ":invalidxmlclosetag"
-     :detail
-      (anymap
-       :tag "/wrong"
-       :startpos 0
-       :endpos 0
-       :line 0
-       :column 0)
-     :severity 2))))</p>
+ :tag "doc")</p>
                     </td>
                   </tr>
                   <tr>

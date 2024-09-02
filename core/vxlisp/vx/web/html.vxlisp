@@ -184,7 +184,8 @@
       .replace(/&/g, “&amp;”)
       .replace(/'/g, “\'”)
       .replace(/>/g, “&gt;”)   
-      .replace(/</g, “&lt;”)")
+      .replace(/</g, “&lt;”)"
+  :kotlin :auto)
  :doc "Convert text to HTML string")
 
 (func string-indent : string

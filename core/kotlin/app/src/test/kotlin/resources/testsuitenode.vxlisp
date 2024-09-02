@@ -18138,11 +18138,11 @@ ab
   (list
    "a" 4 "b" (list) "c" (map) "d")
   (fn : string
-   [val : any]
+   [value : any]
    (if
     (then
-     (is-string val)
-     (string val "1"))))))`)))
+     (is-string value)
+     (string value "1"))))))`)))
                             (td
                              :nodes
                               (divchildlist
@@ -19801,27 +19801,7 @@ ab
       (textblock
        :text "a"
        :startpos 2
-       :endpos 2))
-    (msgblock
-     :msgs
-      (msglist
-       (msg
-        :code "closedelimmissing"
-        :detail
-         (delim
-          :name "delimclose"
-          :starttext ">")
-        :severity 2)))))
- (msgblock
-  :msgs
-   (msglist
-    (msg
-     :code "closedelimmissing"
-     :detail
-      (delim
-       :name "delimclose"
-       :starttext ">")
-     :severity 2))))`)))
+       :endpos 2)))))`)))
                             (td
                              :nodes
                               (divchildlist
@@ -19857,27 +19837,7 @@ ab
       (textblock
        :text "a"
        :startpos 2
-       :endpos 2))
-    (msgblock
-     :msgs
-      (msglist
-       (msg
-        :code "closedelimmissing"
-        :detail
-         (delim
-          :name "delimclose"
-          :starttext ">")
-        :severity 2)))))
- (msgblock
-  :msgs
-   (msglist
-    (msg
-     :code "closedelimmissing"
-     :detail
-      (delim
-       :name "delimclose"
-       :starttext ">")
-     :severity 2))))`)))))
+       :endpos 2)))))`)))))
                          (tr
                           :nodes
                            (tdlist
@@ -21671,27 +21631,7 @@ ab
       (textblock
        :text "a"
        :startpos 2
-       :endpos 2))
-    (msgblock
-     :msgs
-      (msglist
-       (msg
-        :code "closedelimmissing"
-        :detail
-         (delim
-          :name "delimclose"
-          :starttext ">")
-        :severity 2)))))
- (msgblock
-  :msgs
-   (msglist
-    (msg
-     :code "closedelimmissing"
-     :detail
-      (delim
-       :name "delimclose"
-       :starttext ">")
-     :severity 2))))`)))
+       :endpos 2)))))`)))
                             (td
                              :nodes
                               (divchildlist
@@ -21727,27 +21667,7 @@ ab
       (textblock
        :text "a"
        :startpos 2
-       :endpos 2))
-    (msgblock
-     :msgs
-      (msglist
-       (msg
-        :code "closedelimmissing"
-        :detail
-         (delim
-          :name "delimclose"
-          :starttext ">")
-        :severity 2)))))
- (msgblock
-  :msgs
-   (msglist
-    (msg
-     :code "closedelimmissing"
-     :detail
-      (delim
-       :name "delimclose"
-       :starttext ">")
-     :severity 2))))`)))))
+       :endpos 2)))))`)))))
                          (tr
                           :nodes
                            (tdlist
@@ -32431,14 +32351,7 @@ ab
                                     :unicode-bidi "embed"
                                     :font-family "monospace"
                                     :white-space "pre"))
-                                :text
-                                 `(repl
- (msgblock
-  :msgs
-   (msglist
-    (msg
-     :severity 2
-     :text "Empty delim cannot have more than one child."))))`)))
+                                :text "(repl)")))
                             (td
                              :nodes
                               (divchildlist
@@ -32452,14 +32365,7 @@ ab
                                     :unicode-bidi "embed"
                                     :font-family "monospace"
                                     :white-space "pre"))
-                                :text
-                                 `(repl
- (msgblock
-  :msgs
-   (msglist
-    (msg
-     :severity 2
-     :text "Empty delim cannot have more than one child."))))`)))))
+                                :text "(repl)")))))
                          (tr
                           :nodes
                            (tdlist
@@ -35403,7 +35309,7 @@ ab
                                 :text
                                  `(file
  :name "string_read_from_file.txt"
- :path "src/test/resources/vx"
+ :path "src/test/kotlin/resources/vx"
  :text "testdata")`)))
                             (td
                              :nodes
@@ -35421,7 +35327,7 @@ ab
                                 :text
                                  `(file
  :name "string_read_from_file.txt"
- :path "src/test/resources/vx"
+ :path "src/test/kotlin/resources/vx"
  :text "testdata")`)))))
                          (tr
                           :nodes
@@ -37140,20 +37046,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  `(xml
- :tag "doc"
- (msgblock
-  :msgs
-   (msglist
-    (msg
-     :code ":invalidxmlclosetag"
-     :detail
-      (anymap
-       :tag "/wrong"
-       :startpos 0
-       :endpos 0
-       :line 0
-       :column 0)
-     :severity 2))))`)))
+ :tag "doc")`)))
                             (td
                              :nodes
                               (divchildlist
@@ -37169,20 +37062,7 @@ ab
                                     :white-space "pre"))
                                 :text
                                  `(xml
- :tag "doc"
- (msgblock
-  :msgs
-   (msglist
-    (msg
-     :code ":invalidxmlclosetag"
-     :detail
-      (anymap
-       :tag "/wrong"
-       :startpos 0
-       :endpos 0
-       :line 0
-       :column 0)
-     :severity 2))))`)))))
+ :tag "doc")`)))))
                          (tr
                           :nodes
                            (tdlist

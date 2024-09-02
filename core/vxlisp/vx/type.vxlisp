@@ -27,7 +27,8 @@
   :java
    "boolean check = Core.vx_boolean_from_string_ends(text.vx_string(), ends.vx_string());
     output = Core.vx_new_boolean(check);"  
-  :js "vx_core.vx_boolean_from_string_ends(text, ends)")
+  :js "vx_core.vx_boolean_from_string_ends(text, ends)"
+  :kotlin :auto)
  :test (test-true
         (boolean<-string-ends
          "abcd"
@@ -45,7 +46,8 @@
   :java
    "boolean check = Core.vx_boolean_from_string_starts(text.vx_string(), starts.vx_string());
     output = Core.vx_new_boolean(check);"
-  :js :auto)
+  :js :auto
+  :kotlin :auto)
  :test (test-true
         (boolean<-string-starts
          "abcd"
@@ -59,7 +61,8 @@
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         3
         (int<-string-find
@@ -74,7 +77,8 @@
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         3
         (int<-string-findkeyword
@@ -94,7 +98,8 @@
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         5
         (int<-string-findlast
@@ -242,7 +247,8 @@
   :java
    "String stext = Core.vx_string_from_string_start_end(text.vx_string(), start.vx_int(), end.vx_int());
     output = Core.vx_new_string(stext);"
-  :js "vx_core.vx_string_from_string_start_end(text, start, end)")
+  :js "vx_core.vx_string_from_string_start_end(text, start, end)"
+  :kotlin :auto)
  :test (test
         "abc"
         (string<-string-start-end
@@ -283,7 +289,8 @@
    "output = vx_type::vx_string_from_stringlist_join(vals, delim);"
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         "a$b$c"
         (string<-stringlist-join
@@ -297,7 +304,8 @@
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         "abc"
         (string-lowercase
@@ -350,7 +358,8 @@
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         "ab"
         (string-trim
@@ -363,7 +372,8 @@
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         "ABC"
         (string-uppercase
@@ -378,7 +388,8 @@
    "vx_type::vx_stringlist_from_string_split(text, delim);"
   :csharp :auto
   :java   :auto
-  :js "vx_type.vx_stringlist_from_string_split(text, delim)")
+  :js "vx_type.vx_stringlist_from_string_split(text, delim)"
+  :kotlin :auto)
  :test (test
         (stringlist "a" "b" "c")
         (stringlist<-string-split

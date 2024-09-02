@@ -1,5 +1,8 @@
   // vx_string_from_listarg(type, context, liststring)
-  public static String vx_string_from_listarg(Core.Type_any type, Core.Type_context context, List<String> listarg) {
+  public static String vx_string_from_listarg(
+    Core.Type_any type,
+    Core.Type_context context,
+    List<String> listarg) {
     String output = "";
     List<Core.Type_any> listrepl = new ArrayList<>();
     boolean isfirst = true;

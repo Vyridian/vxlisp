@@ -12,17 +12,21 @@ object vx_typeTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true\n (boolean<-string-ends\n  \"abcd\"\n  \"cd\"))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_type.f_boolean_from_string_ends(
-                vx_core.vx_new_string("abcd"),
-                vx_core.vx_new_string("cd")
-              )
-            )
+        f_boolean_from_string_ends_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_boolean_from_string_ends_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true\n (boolean<-string-ends\n  \"abcd\"\n  \"cd\"))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_type.f_boolean_from_string_ends(
+          vx_core.vx_new_string("abcd"),
+          vx_core.vx_new_string("cd")
         )
       )
     )
@@ -38,17 +42,21 @@ object vx_typeTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true\n (boolean<-string-starts\n  \"abcd\"\n  \"ab\"))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_type.f_boolean_from_string_starts(
-                vx_core.vx_new_string("abcd"),
-                vx_core.vx_new_string("ab")
-              )
-            )
+        f_boolean_from_string_starts_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_boolean_from_string_starts_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true\n (boolean<-string-starts\n  \"abcd\"\n  \"ab\"))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_type.f_boolean_from_string_starts(
+          vx_core.vx_new_string("abcd"),
+          vx_core.vx_new_string("ab")
         )
       )
     )
@@ -64,18 +72,22 @@ object vx_typeTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n 3\n (int<-string-find\n  \"abcdcdg\"\n  \"cd\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(3),
-              vx_type.f_int_from_string_find(
-                vx_core.vx_new_string("abcdcdg"),
-                vx_core.vx_new_string("cd")
-              )
-            )
+        f_int_from_string_find_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_int_from_string_find_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n 3\n (int<-string-find\n  \"abcdcdg\"\n  \"cd\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(3),
+        vx_type.f_int_from_string_find(
+          vx_core.vx_new_string("abcdcdg"),
+          vx_core.vx_new_string("cd")
         )
       )
     )
@@ -91,31 +103,39 @@ object vx_typeTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n 3\n (int<-string-findkeyword\n  \"ab\tcdefg\"\n  \":whitespace\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(3),
-              vx_type.f_int_from_string_findkeyword(
-                vx_core.vx_new_string("ab\tcdefg"),
-                vx_core.vx_new_string(":whitespace")
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n 5\n (int<-string-findkeyword\n  \" \t\n\rab\"\n  \":nonwhitespace\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(5),
-              vx_type.f_int_from_string_findkeyword(
-                vx_core.vx_new_string(" \t\n\rab"),
-                vx_core.vx_new_string(":nonwhitespace")
-              )
-            )
+        f_int_from_string_findkeyword_testdescribe_1(context),
+        f_int_from_string_findkeyword_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_int_from_string_findkeyword_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n 3\n (int<-string-findkeyword\n  \"ab\tcdefg\"\n  \":whitespace\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(3),
+        vx_type.f_int_from_string_findkeyword(
+          vx_core.vx_new_string("ab\tcdefg"),
+          vx_core.vx_new_string(":whitespace")
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_int_from_string_findkeyword_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n 5\n (int<-string-findkeyword\n  \" \t\n\rab\"\n  \":nonwhitespace\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(5),
+        vx_type.f_int_from_string_findkeyword(
+          vx_core.vx_new_string(" \t\n\rab"),
+          vx_core.vx_new_string(":nonwhitespace")
         )
       )
     )
@@ -131,18 +151,22 @@ object vx_typeTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n 5\n (int<-string-findlast\n  \"abcdcdg\"\n  \"cd\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(5),
-              vx_type.f_int_from_string_findlast(
-                vx_core.vx_new_string("abcdcdg"),
-                vx_core.vx_new_string("cd")
-              )
-            )
+        f_int_from_string_findlast_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_int_from_string_findlast_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n 5\n (int<-string-findlast\n  \"abcdcdg\"\n  \"cd\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(5),
+        vx_type.f_int_from_string_findlast(
+          vx_core.vx_new_string("abcdcdg"),
+          vx_core.vx_new_string("cd")
         )
       )
     )
@@ -158,51 +182,67 @@ object vx_typeTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true\n (is-string \"\"))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_type.f_is_string(
-                vx_core.vx_new_string("")
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true\n (is-string \"a\"))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_type.f_is_string(
-                vx_core.vx_new_string("a")
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-false\n (is-string 5))",
-          ":testresult",
-            vx_test.f_test_false(
-              context,
-              vx_type.f_is_string(
-                vx_core.vx_new_int(5)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-false\n (is-string (list)))",
-          ":testresult",
-            vx_test.f_test_false(
-              context,
-              vx_type.f_is_string(
-                vx_core.f_empty(
-                  vx_core.t_list
-                )
-              )
-            )
+        f_is_string_testdescribe_1(context),
+        f_is_string_testdescribe_2(context),
+        f_is_string_testdescribe_3(context),
+        f_is_string_testdescribe_4(context)
+      )
+    )
+    return output
+  }
+
+  fun f_is_string_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true\n (is-string \"\"))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_type.f_is_string(
+          vx_core.vx_new_string("")
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_is_string_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true\n (is-string \"a\"))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_type.f_is_string(
+          vx_core.vx_new_string("a")
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_is_string_testdescribe_3(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-false\n (is-string 5))",
+      ":testresult", vx_test.f_test_false(
+        context,
+        vx_type.f_is_string(
+          vx_core.vx_new_int(5)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_is_string_testdescribe_4(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-false\n (is-string (list)))",
+      ":testresult", vx_test.f_test_false(
+        context,
+        vx_type.f_is_string(
+          vx_core.f_empty(
+            vx_core.t_list
+          )
         )
       )
     )
@@ -218,53 +258,69 @@ object vx_typeTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true\n (is-type false boolean))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_type.f_is_type(
-                vx_core.vx_new_boolean(false),
-                vx_core.t_boolean
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true\n (is-type \"a\" string))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_type.f_is_type(
-                vx_core.vx_new_string("a"),
-                vx_core.t_string
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true\n (is-type 5.5 number))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_type.f_is_type(
-                vx_core.vx_new_decimal("5.5"),
-                vx_core.t_number
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true\n (is-type 4 int))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_type.f_is_type(
-                vx_core.vx_new_int(4),
-                vx_core.t_int
-              )
-            )
+        f_is_type_testdescribe_1(context),
+        f_is_type_testdescribe_2(context),
+        f_is_type_testdescribe_3(context),
+        f_is_type_testdescribe_4(context)
+      )
+    )
+    return output
+  }
+
+  fun f_is_type_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true\n (is-type false boolean))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_type.f_is_type(
+          vx_core.vx_new_boolean(false),
+          vx_core.t_boolean
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_is_type_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true\n (is-type \"a\" string))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_type.f_is_type(
+          vx_core.vx_new_string("a"),
+          vx_core.t_string
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_is_type_testdescribe_3(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true\n (is-type 5.5 number))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_type.f_is_type(
+          vx_core.vx_new_decimal("5.5"),
+          vx_core.t_number
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_is_type_testdescribe_4(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true\n (is-type 4 int))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_type.f_is_type(
+          vx_core.vx_new_int(4),
+          vx_core.t_int
         )
       )
     )
@@ -280,81 +336,97 @@ object vx_typeTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true\n (is-type<-any-typelist\n  false\n  (typelist int boolean)))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_type.f_is_type_from_any_typelist(
-                vx_core.vx_new_boolean(false),
-                vx_core.f_new(
-                  vx_core.t_typelist,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.t_int,
-                    vx_core.t_boolean
-                  )
-                )
-              )
+        f_is_type_from_any_typelist_testdescribe_1(context),
+        f_is_type_from_any_typelist_testdescribe_2(context),
+        f_is_type_from_any_typelist_testdescribe_3(context),
+        f_is_type_from_any_typelist_testdescribe_4(context)
+      )
+    )
+    return output
+  }
+
+  fun f_is_type_from_any_typelist_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true\n (is-type<-any-typelist\n  false\n  (typelist int boolean)))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_type.f_is_type_from_any_typelist(
+          vx_core.vx_new_boolean(false),
+          vx_core.f_new(
+            vx_core.t_typelist,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.t_int,
+              vx_core.t_boolean
             )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true\n (is-type<-any-typelist\n  \"a\"\n  (typelist number string)))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_type.f_is_type_from_any_typelist(
-                vx_core.vx_new_string("a"),
-                vx_core.f_new(
-                  vx_core.t_typelist,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.t_number,
-                    vx_core.t_string
-                  )
-                )
-              )
+          )
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_is_type_from_any_typelist_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true\n (is-type<-any-typelist\n  \"a\"\n  (typelist number string)))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_type.f_is_type_from_any_typelist(
+          vx_core.vx_new_string("a"),
+          vx_core.f_new(
+            vx_core.t_typelist,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.t_number,
+              vx_core.t_string
             )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true\n (is-type<-any-typelist\n  5.5\n  (typelist string number)))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_type.f_is_type_from_any_typelist(
-                vx_core.vx_new_decimal("5.5"),
-                vx_core.f_new(
-                  vx_core.t_typelist,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.t_string,
-                    vx_core.t_number
-                  )
-                )
-              )
+          )
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_is_type_from_any_typelist_testdescribe_3(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true\n (is-type<-any-typelist\n  5.5\n  (typelist string number)))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_type.f_is_type_from_any_typelist(
+          vx_core.vx_new_decimal("5.5"),
+          vx_core.f_new(
+            vx_core.t_typelist,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.t_string,
+              vx_core.t_number
             )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true\n (is-type<-any-typelist\n  4\n  (typelist string int)))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_type.f_is_type_from_any_typelist(
-                vx_core.vx_new_int(4),
-                vx_core.f_new(
-                  vx_core.t_typelist,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.t_string,
-                    vx_core.t_int
-                  )
-                )
-              )
+          )
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_is_type_from_any_typelist_testdescribe_4(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true\n (is-type<-any-typelist\n  4\n  (typelist string int)))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_type.f_is_type_from_any_typelist(
+          vx_core.vx_new_int(4),
+          vx_core.f_new(
+            vx_core.t_typelist,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.t_string,
+              vx_core.t_int
             )
+          )
         )
       )
     )
@@ -370,17 +442,21 @@ object vx_typeTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"abc\"\n (string-lowercase\n  \"AbC\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("abc"),
-              vx_type.f_string_lowercase(
-                vx_core.vx_new_string("AbC")
-              )
-            )
+        f_string_lowercase_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_string_lowercase_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"abc\"\n (string-lowercase\n  \"AbC\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("abc"),
+        vx_type.f_string_lowercase(
+          vx_core.vx_new_string("AbC")
         )
       )
     )
@@ -396,29 +472,37 @@ object vx_typeTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"ab\"\n (string-outdent\n  \"ab\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("ab"),
-              vx_type.f_string_outdent(
-                vx_core.vx_new_string("ab")
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"a\nb\"\n (string-outdent\n  \"\n a\n b\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("a\nb"),
-              vx_type.f_string_outdent(
-                vx_core.vx_new_string("\n a\n b")
-              )
-            )
+        f_string_outdent_testdescribe_1(context),
+        f_string_outdent_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_string_outdent_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"ab\"\n (string-outdent\n  \"ab\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("ab"),
+        vx_type.f_string_outdent(
+          vx_core.vx_new_string("ab")
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_string_outdent_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"a\nb\"\n (string-outdent\n  \"\n a\n b\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("a\nb"),
+        vx_type.f_string_outdent(
+          vx_core.vx_new_string("\n a\n b")
         )
       )
     )
@@ -434,17 +518,21 @@ object vx_typeTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"ab\"\n (string-trim\n  \" \t\nab\n\t \"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("ab"),
-              vx_type.f_string_trim(
-                vx_core.vx_new_string(" \t\nab\n\t ")
-              )
-            )
+        f_string_trim_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_string_trim_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"ab\"\n (string-trim\n  \" \t\nab\n\t \"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("ab"),
+        vx_type.f_string_trim(
+          vx_core.vx_new_string(" \t\nab\n\t ")
         )
       )
     )
@@ -460,17 +548,21 @@ object vx_typeTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"ABC\"\n (string-uppercase\n  \"aBc\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("ABC"),
-              vx_type.f_string_uppercase(
-                vx_core.vx_new_string("aBc")
-              )
-            )
+        f_string_uppercase_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_string_uppercase_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"ABC\"\n (string-uppercase\n  \"aBc\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("ABC"),
+        vx_type.f_string_uppercase(
+          vx_core.vx_new_string("aBc")
         )
       )
     )
@@ -486,65 +578,85 @@ object vx_typeTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"4\"\n (string<-int 4))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("4"),
-              vx_type.f_string_from_int(
-                vx_core.vx_new_int(4)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"51\"\n (string<-int 51))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("51"),
-              vx_type.f_string_from_int(
-                vx_core.vx_new_int(51)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"notanumber\"\n (string<-int notanumber))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("notanumber"),
-              vx_type.f_string_from_int(
-                vx_core.c_notanumber
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"infinity\"\n (string<-int infinity))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("infinity"),
-              vx_type.f_string_from_int(
-                vx_core.c_infinity
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"neginfinity\"\n (string<-int neginfinity))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("neginfinity"),
-              vx_type.f_string_from_int(
-                vx_core.c_neginfinity
-              )
-            )
+        f_string_from_int_testdescribe_1(context),
+        f_string_from_int_testdescribe_2(context),
+        f_string_from_int_testdescribe_3(context),
+        f_string_from_int_testdescribe_4(context),
+        f_string_from_int_testdescribe_5(context)
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_int_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"4\"\n (string<-int 4))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("4"),
+        vx_type.f_string_from_int(
+          vx_core.vx_new_int(4)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_int_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"51\"\n (string<-int 51))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("51"),
+        vx_type.f_string_from_int(
+          vx_core.vx_new_int(51)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_int_testdescribe_3(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"notanumber\"\n (string<-int notanumber))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("notanumber"),
+        vx_type.f_string_from_int(
+          vx_core.c_notanumber
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_int_testdescribe_4(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"infinity\"\n (string<-int infinity))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("infinity"),
+        vx_type.f_string_from_int(
+          vx_core.c_infinity
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_int_testdescribe_5(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"neginfinity\"\n (string<-int neginfinity))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("neginfinity"),
+        vx_type.f_string_from_int(
+          vx_core.c_neginfinity
         )
       )
     )
@@ -560,31 +672,39 @@ object vx_typeTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"abc\"\n (string<-string-end\n  \"abcd\"\n  3))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("abc"),
-              vx_type.f_string_from_string_end(
-                vx_core.vx_new_string("abcd"),
-                vx_core.vx_new_int(3)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"ab\"\n (string<-string-end\n  \"abcd\"\n  2))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("ab"),
-              vx_type.f_string_from_string_end(
-                vx_core.vx_new_string("abcd"),
-                vx_core.vx_new_int(2)
-              )
-            )
+        f_string_from_string_end_testdescribe_1(context),
+        f_string_from_string_end_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_string_end_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"abc\"\n (string<-string-end\n  \"abcd\"\n  3))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("abc"),
+        vx_type.f_string_from_string_end(
+          vx_core.vx_new_string("abcd"),
+          vx_core.vx_new_int(3)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_string_end_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"ab\"\n (string<-string-end\n  \"abcd\"\n  2))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("ab"),
+        vx_type.f_string_from_string_end(
+          vx_core.vx_new_string("abcd"),
+          vx_core.vx_new_int(2)
         )
       )
     )
@@ -600,31 +720,39 @@ object vx_typeTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"abcd\"\n (string<-string-start\n  \"abcd\"\n  1))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("abcd"),
-              vx_type.f_string_from_string_start(
-                vx_core.vx_new_string("abcd"),
-                vx_core.vx_new_int(1)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"bcd\"\n (string<-string-start\n  \"abcd\"\n  2))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("bcd"),
-              vx_type.f_string_from_string_start(
-                vx_core.vx_new_string("abcd"),
-                vx_core.vx_new_int(2)
-              )
-            )
+        f_string_from_string_start_testdescribe_1(context),
+        f_string_from_string_start_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_string_start_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"abcd\"\n (string<-string-start\n  \"abcd\"\n  1))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("abcd"),
+        vx_type.f_string_from_string_start(
+          vx_core.vx_new_string("abcd"),
+          vx_core.vx_new_int(1)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_string_start_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"bcd\"\n (string<-string-start\n  \"abcd\"\n  2))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("bcd"),
+        vx_type.f_string_from_string_start(
+          vx_core.vx_new_string("abcd"),
+          vx_core.vx_new_int(2)
         )
       )
     )
@@ -640,75 +768,95 @@ object vx_typeTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"abc\"\n (string<-string-start-end\n  \"abcd\"\n  1\n  3))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("abc"),
-              vx_type.f_string_from_string_start_end(
-                vx_core.vx_new_string("abcd"),
-                vx_core.vx_new_int(1),
-                vx_core.vx_new_int(3)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"bc\"\n (string<-string-start-end\n  \"abcd\"\n  2\n  3))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("bc"),
-              vx_type.f_string_from_string_start_end(
-                vx_core.vx_new_string("abcd"),
-                vx_core.vx_new_int(2),
-                vx_core.vx_new_int(3)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"\"\n (string<-string-start-end\n  \"abcd\"\n  5\n  6))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string(""),
-              vx_type.f_string_from_string_start_end(
-                vx_core.vx_new_string("abcd"),
-                vx_core.vx_new_int(5),
-                vx_core.vx_new_int(6)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"bcd\"\n (string<-string-start-end\n  \"abcd\"\n  2\n  5))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("bcd"),
-              vx_type.f_string_from_string_start_end(
-                vx_core.vx_new_string("abcd"),
-                vx_core.vx_new_int(2),
-                vx_core.vx_new_int(5)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"bc\"\n (string<-string-start-end\n  \"abcd\"\n  2\n  -1))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("bc"),
-              vx_type.f_string_from_string_start_end(
-                vx_core.vx_new_string("abcd"),
-                vx_core.vx_new_int(2),
-                vx_core.vx_new_int(-1)
-              )
-            )
+        f_string_from_string_start_end_testdescribe_1(context),
+        f_string_from_string_start_end_testdescribe_2(context),
+        f_string_from_string_start_end_testdescribe_3(context),
+        f_string_from_string_start_end_testdescribe_4(context),
+        f_string_from_string_start_end_testdescribe_5(context)
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_string_start_end_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"abc\"\n (string<-string-start-end\n  \"abcd\"\n  1\n  3))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("abc"),
+        vx_type.f_string_from_string_start_end(
+          vx_core.vx_new_string("abcd"),
+          vx_core.vx_new_int(1),
+          vx_core.vx_new_int(3)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_string_start_end_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"bc\"\n (string<-string-start-end\n  \"abcd\"\n  2\n  3))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("bc"),
+        vx_type.f_string_from_string_start_end(
+          vx_core.vx_new_string("abcd"),
+          vx_core.vx_new_int(2),
+          vx_core.vx_new_int(3)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_string_start_end_testdescribe_3(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"\"\n (string<-string-start-end\n  \"abcd\"\n  5\n  6))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string(""),
+        vx_type.f_string_from_string_start_end(
+          vx_core.vx_new_string("abcd"),
+          vx_core.vx_new_int(5),
+          vx_core.vx_new_int(6)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_string_start_end_testdescribe_4(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"bcd\"\n (string<-string-start-end\n  \"abcd\"\n  2\n  5))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("bcd"),
+        vx_type.f_string_from_string_start_end(
+          vx_core.vx_new_string("abcd"),
+          vx_core.vx_new_int(2),
+          vx_core.vx_new_int(5)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_string_start_end_testdescribe_5(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"bc\"\n (string<-string-start-end\n  \"abcd\"\n  2\n  -1))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("bc"),
+        vx_type.f_string_from_string_start_end(
+          vx_core.vx_new_string("abcd"),
+          vx_core.vx_new_int(2),
+          vx_core.vx_new_int(-1)
         )
       )
     )
@@ -724,26 +872,30 @@ object vx_typeTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"a\$b\$c\"\n (string<-stringlist-join\n  (stringlist \"a\" \"b\" \"c\")\n  \"\$\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("a\$b\$c"),
-              vx_type.f_string_from_stringlist_join(
-                vx_core.f_new(
-                  vx_core.t_stringlist,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string("a"),
-                    vx_core.vx_new_string("b"),
-                    vx_core.vx_new_string("c")
-                  )
-                ),
-                vx_core.vx_new_string("\$")
-              )
+        f_string_from_stringlist_join_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_stringlist_join_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"a\$b\$c\"\n (string<-stringlist-join\n  (stringlist \"a\" \"b\" \"c\")\n  \"\$\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("a\$b\$c"),
+        vx_type.f_string_from_stringlist_join(
+          vx_core.f_new(
+            vx_core.t_stringlist,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string("a"),
+              vx_core.vx_new_string("b"),
+              vx_core.vx_new_string("c")
             )
+          ),
+          vx_core.vx_new_string("\$")
         )
       )
     )
@@ -759,26 +911,30 @@ object vx_typeTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n (stringlist \"a\" \"b\" \"c\")\n (stringlist<-string-split\n  \"a\$b\$c\"\n  \"\$\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.f_new(
-                vx_core.t_stringlist,
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_string("a"),
-                  vx_core.vx_new_string("b"),
-                  vx_core.vx_new_string("c")
-                )
-              ),
-              vx_type.f_stringlist_from_string_split(
-                vx_core.vx_new_string("a\$b\$c"),
-                vx_core.vx_new_string("\$")
-              )
-            )
+        f_stringlist_from_string_split_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_stringlist_from_string_split_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n (stringlist \"a\" \"b\" \"c\")\n (stringlist<-string-split\n  \"a\$b\$c\"\n  \"\$\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.f_new(
+          vx_core.t_stringlist,
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_string("a"),
+            vx_core.vx_new_string("b"),
+            vx_core.vx_new_string("c")
+          )
+        ),
+        vx_type.f_stringlist_from_string_split(
+          vx_core.vx_new_string("a\$b\$c"),
+          vx_core.vx_new_string("\$")
         )
       )
     )

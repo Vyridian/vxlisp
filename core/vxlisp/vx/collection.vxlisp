@@ -34,7 +34,8 @@
     output = vx_core::vx_any_from_any(generic_any_1, any);"
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :doc `Returns a value using a until loop.
 output : any-1 := start
 count : int := 0
@@ -77,7 +78,8 @@ count : int := 0
     output = vx_core::vx_any_from_any(generic_any_1, any);"
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :doc "Returns a value using a while loop.
        output : any-1 := start
        count : int := 0
@@ -195,7 +197,8 @@ count : int := 0
     output = vx_core::vx_any_from_any(generic_list_1, list);"
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         (intlist 4 9)
         (list<-for-end-loop : intlist
@@ -247,7 +250,8 @@ output : list-1 := (empty list-1)
     output = vx_core::vx_any_from_any(generic_list_1, list);"
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :doc `Returns a list of any-1 using a while loop.
 1. output : list-1 := (empty list-1)
 2. value : any-1 := start.
@@ -279,7 +283,8 @@ output : list-1 := (empty list-1)
     output = vx_core::vx_any_from_any(generic_list_1, list);"
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         (stringlist
          "a1" "b1" "c1" "d1")
@@ -338,7 +343,8 @@ output : list-1 := (empty list-1)
     output = vx_core::vx_any_from_any(generic_list_1, any);"
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         (stringlist
          "b" "c")
@@ -372,7 +378,8 @@ output : list-1 := (empty list-1)
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         (stringmap
          :c "3"

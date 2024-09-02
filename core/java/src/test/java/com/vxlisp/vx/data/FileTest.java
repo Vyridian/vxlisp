@@ -15,32 +15,36 @@ public final class FileTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"boolean_exists_from_file.txt\"\n   :path (string path-test-resources \"/vx\"))))",
-          ":testresult",
-            Test.f_test_true(
-              context,
-              File.f_boolean_exists_from_file(
-                Core.f_new(
-                  File.t_file,
-                  Core.vx_new(
-                    Core.t_anylist,
-                    Core.vx_new_string(":name"),
-                    Core.vx_new_string("boolean_exists_from_file.txt"),
-                    Core.vx_new_string(":path"),
-                    Core.f_new(
-                      Core.t_string,
-                      Core.vx_new(
-                        Core.t_anylist,
-                        Core.c_path_test_resources,
-                        Core.vx_new_string("/vx")
-                      )
-                    )
-                  )
+        f_boolean_exists_from_file_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_boolean_exists_from_file_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"boolean_exists_from_file.txt\"\n   :path (string path-test-resources \"/vx\"))))",
+      ":testresult", Test.f_test_true(
+        context,
+        File.f_boolean_exists_from_file(
+          Core.f_new(
+            File.t_file,
+            Core.vx_new(
+              Core.t_anylist,
+              Core.vx_new_string(":name"),
+              Core.vx_new_string("boolean_exists_from_file.txt"),
+              Core.vx_new_string(":path"),
+              Core.f_new(
+                Core.t_string,
+                Core.vx_new(
+                  Core.t_anylist,
+                  Core.c_path_test_resources,
+                  Core.vx_new_string("/vx")
                 )
               )
             )
+          )
         )
       )
     );
@@ -56,34 +60,38 @@ public final class FileTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test-true\n (boolean-write<-file-string\n  (file\n   :name \"boolean_write_from_file_string.txt\"\n   :path (string path-test-resources \"/vx\"))\n  \"writetext\"))",
-          ":testresult",
-            Test.f_test_true(
-              context,
-              File.f_boolean_write_from_file_string(
-                context,
-                Core.f_new(
-                  File.t_file,
-                  Core.vx_new(
-                    Core.t_anylist,
-                    Core.vx_new_string(":name"),
-                    Core.vx_new_string("boolean_write_from_file_string.txt"),
-                    Core.vx_new_string(":path"),
-                    Core.f_new(
-                      Core.t_string,
-                      Core.vx_new(
-                        Core.t_anylist,
-                        Core.c_path_test_resources,
-                        Core.vx_new_string("/vx")
-                      )
-                    )
-                  )
-                ),
-                Core.vx_new_string("writetext")
+        f_boolean_write_from_file_string_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_boolean_write_from_file_string_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test-true\n (boolean-write<-file-string\n  (file\n   :name \"boolean_write_from_file_string.txt\"\n   :path (string path-test-resources \"/vx\"))\n  \"writetext\"))",
+      ":testresult", Test.f_test_true(
+        context,
+        File.f_boolean_write_from_file_string(
+          context,
+          Core.f_new(
+            File.t_file,
+            Core.vx_new(
+              Core.t_anylist,
+              Core.vx_new_string(":name"),
+              Core.vx_new_string("boolean_write_from_file_string.txt"),
+              Core.vx_new_string(":path"),
+              Core.f_new(
+                Core.t_string,
+                Core.vx_new(
+                  Core.t_anylist,
+                  Core.c_path_test_resources,
+                  Core.vx_new_string("/vx")
+                )
               )
             )
+          ),
+          Core.vx_new_string("writetext")
         )
       )
     );
@@ -99,52 +107,56 @@ public final class FileTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n (file\n  :name \"string_read_from_file.txt\"\n  :path (string path-test-resources \"/vx\")\n  :text \"testdata\")\n (file-read<-file\n  (file\n   :name \"string_read_from_file.txt\"\n   :path (string path-test-resources \"/vx\"))))",
-          ":testresult",
-            Test.f_test(
-              context,
+        f_file_read_from_file_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_file_read_from_file_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n (file\n  :name \"string_read_from_file.txt\"\n  :path (string path-test-resources \"/vx\")\n  :text \"testdata\")\n (file-read<-file\n  (file\n   :name \"string_read_from_file.txt\"\n   :path (string path-test-resources \"/vx\"))))",
+      ":testresult", Test.f_test(
+        context,
+        Core.f_new(
+          File.t_file,
+          Core.vx_new(
+            Core.t_anylist,
+            Core.vx_new_string(":name"),
+            Core.vx_new_string("string_read_from_file.txt"),
+            Core.vx_new_string(":path"),
+            Core.f_new(
+              Core.t_string,
+              Core.vx_new(
+                Core.t_anylist,
+                Core.c_path_test_resources,
+                Core.vx_new_string("/vx")
+              )
+            ),
+            Core.vx_new_string(":text"),
+            Core.vx_new_string("testdata")
+          )
+        ),
+        File.f_file_read_from_file(
+          context,
+          Core.f_new(
+            File.t_file,
+            Core.vx_new(
+              Core.t_anylist,
+              Core.vx_new_string(":name"),
+              Core.vx_new_string("string_read_from_file.txt"),
+              Core.vx_new_string(":path"),
               Core.f_new(
-                File.t_file,
+                Core.t_string,
                 Core.vx_new(
                   Core.t_anylist,
-                  Core.vx_new_string(":name"),
-                  Core.vx_new_string("string_read_from_file.txt"),
-                  Core.vx_new_string(":path"),
-                  Core.f_new(
-                    Core.t_string,
-                    Core.vx_new(
-                      Core.t_anylist,
-                      Core.c_path_test_resources,
-                      Core.vx_new_string("/vx")
-                    )
-                  ),
-                  Core.vx_new_string(":text"),
-                  Core.vx_new_string("testdata")
-                )
-              ),
-              File.f_file_read_from_file(
-                context,
-                Core.f_new(
-                  File.t_file,
-                  Core.vx_new(
-                    Core.t_anylist,
-                    Core.vx_new_string(":name"),
-                    Core.vx_new_string("string_read_from_file.txt"),
-                    Core.vx_new_string(":path"),
-                    Core.f_new(
-                      Core.t_string,
-                      Core.vx_new(
-                        Core.t_anylist,
-                        Core.c_path_test_resources,
-                        Core.vx_new_string("/vx")
-                      )
-                    )
-                  )
+                  Core.c_path_test_resources,
+                  Core.vx_new_string("/vx")
                 )
               )
             )
+          )
         )
       )
     );
@@ -160,45 +172,53 @@ public final class FileTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n \"fname\"\n (pathfull<-file\n  (file\n   :name \"fname\")))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_string("fname"),
-              File.f_pathfull_from_file(
-                Core.f_new(
-                  File.t_file,
-                  Core.vx_new(
-                    Core.t_anylist,
-                    Core.vx_new_string(":name"),
-                    Core.vx_new_string("fname")
-                  )
-                )
-              )
+        f_pathfull_from_file_testdescribe_1(context),
+        f_pathfull_from_file_testdescribe_2(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_pathfull_from_file_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n \"fname\"\n (pathfull<-file\n  (file\n   :name \"fname\")))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_string("fname"),
+        File.f_pathfull_from_file(
+          Core.f_new(
+            File.t_file,
+            Core.vx_new(
+              Core.t_anylist,
+              Core.vx_new_string(":name"),
+              Core.vx_new_string("fname")
             )
-        ),
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n \"fpath/fname\"\n (pathfull<-file\n  (file\n   :path \"fpath\"\n   :name \"fname\")))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_string("fpath/fname"),
-              File.f_pathfull_from_file(
-                Core.f_new(
-                  File.t_file,
-                  Core.vx_new(
-                    Core.t_anylist,
-                    Core.vx_new_string(":path"),
-                    Core.vx_new_string("fpath"),
-                    Core.vx_new_string(":name"),
-                    Core.vx_new_string("fname")
-                  )
-                )
-              )
+          )
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_pathfull_from_file_testdescribe_2(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n \"fpath/fname\"\n (pathfull<-file\n  (file\n   :path \"fpath\"\n   :name \"fname\")))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_string("fpath/fname"),
+        File.f_pathfull_from_file(
+          Core.f_new(
+            File.t_file,
+            Core.vx_new(
+              Core.t_anylist,
+              Core.vx_new_string(":path"),
+              Core.vx_new_string("fpath"),
+              Core.vx_new_string(":name"),
+              Core.vx_new_string("fname")
             )
+          )
         )
       )
     );
@@ -214,34 +234,38 @@ public final class FileTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n \"testdata\"\n (string-read<-file\n  (file\n   :name \"string_read_from_file.txt\"\n   :path (string path-test-resources \"/vx\"))))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_string("testdata"),
-              File.f_string_read_from_file(
-                context,
-                Core.f_new(
-                  File.t_file,
-                  Core.vx_new(
-                    Core.t_anylist,
-                    Core.vx_new_string(":name"),
-                    Core.vx_new_string("string_read_from_file.txt"),
-                    Core.vx_new_string(":path"),
-                    Core.f_new(
-                      Core.t_string,
-                      Core.vx_new(
-                        Core.t_anylist,
-                        Core.c_path_test_resources,
-                        Core.vx_new_string("/vx")
-                      )
-                    )
-                  )
+        f_string_read_from_file_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_string_read_from_file_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n \"testdata\"\n (string-read<-file\n  (file\n   :name \"string_read_from_file.txt\"\n   :path (string path-test-resources \"/vx\"))))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_string("testdata"),
+        File.f_string_read_from_file(
+          context,
+          Core.f_new(
+            File.t_file,
+            Core.vx_new(
+              Core.t_anylist,
+              Core.vx_new_string(":name"),
+              Core.vx_new_string("string_read_from_file.txt"),
+              Core.vx_new_string(":path"),
+              Core.f_new(
+                Core.t_string,
+                Core.vx_new(
+                  Core.t_anylist,
+                  Core.c_path_test_resources,
+                  Core.vx_new_string("/vx")
                 )
               )
             )
+          )
         )
       )
     );

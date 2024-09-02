@@ -12,25 +12,29 @@ public class TestTest {
       ":describelist",
       Vx.Core.vx_new(
         Vx.Test.t_testdescribelist,
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.vxlisp\"\n   :path path-test-resources)))",
-          ":testresult",
-            Vx.Test.f_test_true(
-              context,
-              Vx.Data.File.f_boolean_exists_from_file(
-                Vx.Core.f_new(
-                  Vx.Data.File.t_file,
-                  Vx.Core.vx_new(
-                    Vx.Core.t_anylist,
-                    Vx.Core.vx_new_string(":name"),
-                    Vx.Core.vx_new_string("testsuite.vxlisp"),
-                    Vx.Core.vx_new_string(":path"),
-                    Vx.Core.c_path_test_resources
-                  )
-                )
-              )
+        f_file_test_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_file_test_testdescribe_1(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.vxlisp\"\n   :path path-test-resources)))",
+      ":testresult", Vx.Test.f_test_true(
+        context,
+        Vx.Data.File.f_boolean_exists_from_file(
+          Vx.Core.f_new(
+            Vx.Data.File.t_file,
+            Vx.Core.vx_new(
+              Vx.Core.t_anylist,
+              Vx.Core.vx_new_string(":name"),
+              Vx.Core.vx_new_string("testsuite.vxlisp"),
+              Vx.Core.vx_new_string(":path"),
+              Vx.Core.c_path_test_resources
             )
+          )
         )
       )
     );
@@ -46,25 +50,29 @@ public class TestTest {
       ":describelist",
       Vx.Core.vx_new(
         Vx.Test.t_testdescribelist,
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.html\"\n   :path path-test-resources)))",
-          ":testresult",
-            Vx.Test.f_test_true(
-              context,
-              Vx.Data.File.f_boolean_exists_from_file(
-                Vx.Core.f_new(
-                  Vx.Data.File.t_file,
-                  Vx.Core.vx_new(
-                    Vx.Core.t_anylist,
-                    Vx.Core.vx_new_string(":name"),
-                    Vx.Core.vx_new_string("testsuite.html"),
-                    Vx.Core.vx_new_string(":path"),
-                    Vx.Core.c_path_test_resources
-                  )
-                )
-              )
+        f_file_testhtml_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_file_testhtml_testdescribe_1(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.html\"\n   :path path-test-resources)))",
+      ":testresult", Vx.Test.f_test_true(
+        context,
+        Vx.Data.File.f_boolean_exists_from_file(
+          Vx.Core.f_new(
+            Vx.Data.File.t_file,
+            Vx.Core.vx_new(
+              Vx.Core.t_anylist,
+              Vx.Core.vx_new_string(":name"),
+              Vx.Core.vx_new_string("testsuite.html"),
+              Vx.Core.vx_new_string(":path"),
+              Vx.Core.c_path_test_resources
             )
+          )
         )
       )
     );
@@ -80,25 +88,29 @@ public class TestTest {
       ":describelist",
       Vx.Core.vx_new(
         Vx.Test.t_testdescribelist,
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuitenode.vxlisp\"\n   :path path-test-resources)))",
-          ":testresult",
-            Vx.Test.f_test_true(
-              context,
-              Vx.Data.File.f_boolean_exists_from_file(
-                Vx.Core.f_new(
-                  Vx.Data.File.t_file,
-                  Vx.Core.vx_new(
-                    Vx.Core.t_anylist,
-                    Vx.Core.vx_new_string(":name"),
-                    Vx.Core.vx_new_string("testsuitenode.vxlisp"),
-                    Vx.Core.vx_new_string(":path"),
-                    Vx.Core.c_path_test_resources
-                  )
-                )
-              )
+        f_file_testnode_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_file_testnode_testdescribe_1(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuitenode.vxlisp\"\n   :path path-test-resources)))",
+      ":testresult", Vx.Test.f_test_true(
+        context,
+        Vx.Data.File.f_boolean_exists_from_file(
+          Vx.Core.f_new(
+            Vx.Data.File.t_file,
+            Vx.Core.vx_new(
+              Vx.Core.t_anylist,
+              Vx.Core.vx_new_string(":name"),
+              Vx.Core.vx_new_string("testsuitenode.vxlisp"),
+              Vx.Core.vx_new_string(":path"),
+              Vx.Core.c_path_test_resources
             )
+          )
         )
       )
     );

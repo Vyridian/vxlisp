@@ -16,18 +16,22 @@ public final class EnTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n \"Hello\"\n (trn/translate<-translation-string\n  (translation-en)\n  \"Hello\"))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_string("Hello"),
-              Translate.f_translate_from_translation_string(
-                En.f_translation_en(),
-                Core.vx_new_string("Hello")
-              )
-            )
+        f_translation_en_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_translation_en_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n \"Hello\"\n (trn/translate<-translation-string\n  (translation-en)\n  \"Hello\"))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_string("Hello"),
+        Translate.f_translate_from_translation_string(
+          En.f_translation_en(),
+          Core.vx_new_string("Hello")
         )
       )
     );

@@ -14,41 +14,49 @@ object vx_web_htmlTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"<body></body>\"\n (string<-body-indent (body) 0))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("<body></body>"),
-              vx_web_html.f_string_from_body_indent(
-                vx_core.f_empty(
-                  vx_web_html.t_body
-                ),
-                vx_core.vx_new_int(0)
+        f_string_from_body_indent_testdescribe_1(context),
+        f_string_from_body_indent_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_body_indent_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"<body></body>\"\n (string<-body-indent (body) 0))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("<body></body>"),
+        vx_web_html.f_string_from_body_indent(
+          vx_core.f_empty(
+            vx_web_html.t_body
+          ),
+          vx_core.vx_new_int(0)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_body_indent_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"<body>\n  <div></div>\n</body>\"\n (string<-body-indent (body (div)) 0))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("<body>\n  <div></div>\n</body>"),
+        vx_web_html.f_string_from_body_indent(
+          vx_core.f_new(
+            vx_web_html.t_body,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.f_empty(
+                vx_web_html.t_div
               )
             )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"<body>\n  <div></div>\n</body>\"\n (string<-body-indent (body (div)) 0))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("<body>\n  <div></div>\n</body>"),
-              vx_web_html.f_string_from_body_indent(
-                vx_core.f_new(
-                  vx_web_html.t_body,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.f_empty(
-                      vx_web_html.t_div
-                    )
-                  )
-                ),
-                vx_core.vx_new_int(0)
-              )
-            )
+          ),
+          vx_core.vx_new_int(0)
         )
       )
     )
@@ -64,40 +72,48 @@ object vx_web_htmlTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"<div></div>\"\n (string<-div-indent (div) 0))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("<div></div>"),
-              vx_web_html.f_string_from_div_indent(
-                vx_core.f_empty(
-                  vx_web_html.t_div
-                ),
-                vx_core.vx_new_int(0)
-              )
+        f_string_from_div_indent_testdescribe_1(context),
+        f_string_from_div_indent_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_div_indent_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"<div></div>\"\n (string<-div-indent (div) 0))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("<div></div>"),
+        vx_web_html.f_string_from_div_indent(
+          vx_core.f_empty(
+            vx_web_html.t_div
+          ),
+          vx_core.vx_new_int(0)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_div_indent_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"<div id=\\\"myid\\\"></div>\"\n (string<-div-indent\n  (div :id \"myid\") 0))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("<div id=\"myid\"></div>"),
+        vx_web_html.f_string_from_div_indent(
+          vx_core.f_new(
+            vx_web_html.t_div,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string(":id"),
+              vx_core.vx_new_string("myid")
             )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"<div id=\\\"myid\\\"></div>\"\n (string<-div-indent\n  (div :id \"myid\") 0))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("<div id=\"myid\"></div>"),
-              vx_web_html.f_string_from_div_indent(
-                vx_core.f_new(
-                  vx_web_html.t_div,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string(":id"),
-                    vx_core.vx_new_string("myid")
-                  )
-                ),
-                vx_core.vx_new_int(0)
-              )
-            )
+          ),
+          vx_core.vx_new_int(0)
         )
       )
     )
@@ -113,20 +129,24 @@ object vx_web_htmlTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"<head></head>\"\n (string<-head-indent (head) 0))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("<head></head>"),
-              vx_web_html.f_string_from_head_indent(
-                vx_core.f_empty(
-                  vx_web_html.t_head
-                ),
-                vx_core.vx_new_int(0)
-              )
-            )
+        f_string_from_head_indent_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_head_indent_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"<head></head>\"\n (string<-head-indent (head) 0))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("<head></head>"),
+        vx_web_html.f_string_from_head_indent(
+          vx_core.f_empty(
+            vx_web_html.t_head
+          ),
+          vx_core.vx_new_int(0)
         )
       )
     )
@@ -142,30 +162,34 @@ object vx_web_htmlTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"<!DOCTYPE html>\n<html>\n  <head></head>\n  <body></body>\n  <footer></footer>\n</html>\"\n (string<-html\n  (html :head (head) :body (body))))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("<!DOCTYPE html>\n<html>\n  <head></head>\n  <body></body>\n  <footer></footer>\n</html>"),
-              vx_web_html.f_string_from_html(
-                vx_core.f_new(
-                  vx_web_html.t_html,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string(":head"),
-                    vx_core.f_empty(
-                      vx_web_html.t_head
-                    ),
-                    vx_core.vx_new_string(":body"),
-                    vx_core.f_empty(
-                      vx_web_html.t_body
-                    )
-                  )
-                )
+        f_string_from_html_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_html_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"<!DOCTYPE html>\n<html>\n  <head></head>\n  <body></body>\n  <footer></footer>\n</html>\"\n (string<-html\n  (html :head (head) :body (body))))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("<!DOCTYPE html>\n<html>\n  <head></head>\n  <body></body>\n  <footer></footer>\n</html>"),
+        vx_web_html.f_string_from_html(
+          vx_core.f_new(
+            vx_web_html.t_html,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string(":head"),
+              vx_core.f_empty(
+                vx_web_html.t_head
+              ),
+              vx_core.vx_new_string(":body"),
+              vx_core.f_empty(
+                vx_web_html.t_body
               )
             )
+          )
         )
       )
     )
@@ -181,47 +205,55 @@ object vx_web_htmlTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"<img src=\\\"test.svg\\\" />\"\n (string<-img-indent\n  (img :src \"test.svg\")\n  0))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("<img src=\"test.svg\" />"),
-              vx_web_html.f_string_from_img_indent(
-                vx_core.f_new(
-                  vx_web_html.t_img,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string(":src"),
-                    vx_core.vx_new_string("test.svg")
-                  )
-                ),
-                vx_core.vx_new_int(0)
-              )
+        f_string_from_img_indent_testdescribe_1(context),
+        f_string_from_img_indent_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_img_indent_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"<img src=\\\"test.svg\\\" />\"\n (string<-img-indent\n  (img :src \"test.svg\")\n  0))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("<img src=\"test.svg\" />"),
+        vx_web_html.f_string_from_img_indent(
+          vx_core.f_new(
+            vx_web_html.t_img,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string(":src"),
+              vx_core.vx_new_string("test.svg")
             )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"<img id=\\\"myid\\\" src=\\\"test.svg\\\" />\"\n (string<-img-indent\n  (img :id \"myid\" :src \"test.svg\")\n  0))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("<img id=\"myid\" src=\"test.svg\" />"),
-              vx_web_html.f_string_from_img_indent(
-                vx_core.f_new(
-                  vx_web_html.t_img,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string(":id"),
-                    vx_core.vx_new_string("myid"),
-                    vx_core.vx_new_string(":src"),
-                    vx_core.vx_new_string("test.svg")
-                  )
-                ),
-                vx_core.vx_new_int(0)
-              )
+          ),
+          vx_core.vx_new_int(0)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_img_indent_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"<img id=\\\"myid\\\" src=\\\"test.svg\\\" />\"\n (string<-img-indent\n  (img :id \"myid\" :src \"test.svg\")\n  0))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("<img id=\"myid\" src=\"test.svg\" />"),
+        vx_web_html.f_string_from_img_indent(
+          vx_core.f_new(
+            vx_web_html.t_img,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string(":id"),
+              vx_core.vx_new_string("myid"),
+              vx_core.vx_new_string(":src"),
+              vx_core.vx_new_string("test.svg")
             )
+          ),
+          vx_core.vx_new_int(0)
         )
       )
     )
@@ -237,25 +269,29 @@ object vx_web_htmlTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"<meta charset=\\\"utf-8\\\" />\"\n (string<-meta-indent (meta :charset \"utf-8\") 0))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("<meta charset=\"utf-8\" />"),
-              vx_web_html.f_string_from_meta_indent(
-                vx_core.f_new(
-                  vx_web_html.t_meta,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string(":charset"),
-                    vx_core.vx_new_string("utf-8")
-                  )
-                ),
-                vx_core.vx_new_int(0)
-              )
+        f_string_from_meta_indent_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_meta_indent_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"<meta charset=\\\"utf-8\\\" />\"\n (string<-meta-indent (meta :charset \"utf-8\") 0))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("<meta charset=\"utf-8\" />"),
+        vx_web_html.f_string_from_meta_indent(
+          vx_core.f_new(
+            vx_web_html.t_meta,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string(":charset"),
+              vx_core.vx_new_string("utf-8")
             )
+          ),
+          vx_core.vx_new_int(0)
         )
       )
     )
@@ -271,47 +307,55 @@ object vx_web_htmlTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"<p>data</p>\"\n (string<-p-indent\n  (p :text \"data\")\n  0))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("<p>data</p>"),
-              vx_web_html.f_string_from_p_indent(
-                vx_core.f_new(
-                  vx_web_html.t_p,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string(":text"),
-                    vx_core.vx_new_string("data")
-                  )
-                ),
-                vx_core.vx_new_int(0)
-              )
+        f_string_from_p_indent_testdescribe_1(context),
+        f_string_from_p_indent_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_p_indent_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"<p>data</p>\"\n (string<-p-indent\n  (p :text \"data\")\n  0))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("<p>data</p>"),
+        vx_web_html.f_string_from_p_indent(
+          vx_core.f_new(
+            vx_web_html.t_p,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string(":text"),
+              vx_core.vx_new_string("data")
             )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"<p id=\\\"myid\\\">data</p>\"\n (string<-p-indent\n  (p :id \"myid\" :text \"data\")\n  0))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("<p id=\"myid\">data</p>"),
-              vx_web_html.f_string_from_p_indent(
-                vx_core.f_new(
-                  vx_web_html.t_p,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string(":id"),
-                    vx_core.vx_new_string("myid"),
-                    vx_core.vx_new_string(":text"),
-                    vx_core.vx_new_string("data")
-                  )
-                ),
-                vx_core.vx_new_int(0)
-              )
+          ),
+          vx_core.vx_new_int(0)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_p_indent_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"<p id=\\\"myid\\\">data</p>\"\n (string<-p-indent\n  (p :id \"myid\" :text \"data\")\n  0))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("<p id=\"myid\">data</p>"),
+        vx_web_html.f_string_from_p_indent(
+          vx_core.f_new(
+            vx_web_html.t_p,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string(":id"),
+              vx_core.vx_new_string("myid"),
+              vx_core.vx_new_string(":text"),
+              vx_core.vx_new_string("data")
             )
+          ),
+          vx_core.vx_new_int(0)
         )
       )
     )

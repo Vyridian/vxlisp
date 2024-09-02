@@ -12,16 +12,20 @@ object vx_sampleTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n myconst\n myconst)",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_sample.c_myconst,
-              vx_sample.c_myconst
-            )
-        )
+        c_myconst_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun c_myconst_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n myconst\n myconst)",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_sample.c_myconst,
+        vx_sample.c_myconst
       )
     )
     return output
@@ -36,17 +40,21 @@ object vx_sampleTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test 5 (myfunc 1))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(5),
-              vx_sample.f_myfunc(
-                vx_core.vx_new_int(1)
-              )
-            )
+        f_myfunc_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_myfunc_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test 5 (myfunc 1))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(5),
+        vx_sample.f_myfunc(
+          vx_core.vx_new_int(1)
         )
       )
     )

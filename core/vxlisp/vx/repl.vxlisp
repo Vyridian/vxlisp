@@ -181,6 +181,11 @@
       if (fn != undefined) {
         output = fn(...args)
       }
+    }"
+  :kotlin
+   "if (type is vx_core.Type_replfunc) {
+      val replfunc : vx_core.Type_replfunc = type as vx_core.Type_replfunc
+      output = replfunc.vx_repl(args)
     }")
  :doc "Returns any from a repl func and args.")
 

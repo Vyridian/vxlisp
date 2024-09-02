@@ -14,17 +14,21 @@ public final class TypeTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test-true\n (boolean<-string-ends\n  \"abcd\"\n  \"cd\"))",
-          ":testresult",
-            Test.f_test_true(
-              context,
-              Type.f_boolean_from_string_ends(
-                Core.vx_new_string("abcd"),
-                Core.vx_new_string("cd")
-              )
-            )
+        f_boolean_from_string_ends_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_boolean_from_string_ends_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test-true\n (boolean<-string-ends\n  \"abcd\"\n  \"cd\"))",
+      ":testresult", Test.f_test_true(
+        context,
+        Type.f_boolean_from_string_ends(
+          Core.vx_new_string("abcd"),
+          Core.vx_new_string("cd")
         )
       )
     );
@@ -40,17 +44,21 @@ public final class TypeTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test-true\n (boolean<-string-starts\n  \"abcd\"\n  \"ab\"))",
-          ":testresult",
-            Test.f_test_true(
-              context,
-              Type.f_boolean_from_string_starts(
-                Core.vx_new_string("abcd"),
-                Core.vx_new_string("ab")
-              )
-            )
+        f_boolean_from_string_starts_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_boolean_from_string_starts_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test-true\n (boolean<-string-starts\n  \"abcd\"\n  \"ab\"))",
+      ":testresult", Test.f_test_true(
+        context,
+        Type.f_boolean_from_string_starts(
+          Core.vx_new_string("abcd"),
+          Core.vx_new_string("ab")
         )
       )
     );
@@ -66,18 +74,22 @@ public final class TypeTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n 3\n (int<-string-find\n  \"abcdcdg\"\n  \"cd\"))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_int(3),
-              Type.f_int_from_string_find(
-                Core.vx_new_string("abcdcdg"),
-                Core.vx_new_string("cd")
-              )
-            )
+        f_int_from_string_find_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_int_from_string_find_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n 3\n (int<-string-find\n  \"abcdcdg\"\n  \"cd\"))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_int(3),
+        Type.f_int_from_string_find(
+          Core.vx_new_string("abcdcdg"),
+          Core.vx_new_string("cd")
         )
       )
     );
@@ -93,31 +105,39 @@ public final class TypeTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n 3\n (int<-string-findkeyword\n  \"ab\tcdefg\"\n  \":whitespace\"))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_int(3),
-              Type.f_int_from_string_findkeyword(
-                Core.vx_new_string("ab\tcdefg"),
-                Core.vx_new_string(":whitespace")
-              )
-            )
-        ),
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n 5\n (int<-string-findkeyword\n  \" \t\n\rab\"\n  \":nonwhitespace\"))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_int(5),
-              Type.f_int_from_string_findkeyword(
-                Core.vx_new_string(" \t\n\rab"),
-                Core.vx_new_string(":nonwhitespace")
-              )
-            )
+        f_int_from_string_findkeyword_testdescribe_1(context),
+        f_int_from_string_findkeyword_testdescribe_2(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_int_from_string_findkeyword_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n 3\n (int<-string-findkeyword\n  \"ab\tcdefg\"\n  \":whitespace\"))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_int(3),
+        Type.f_int_from_string_findkeyword(
+          Core.vx_new_string("ab\tcdefg"),
+          Core.vx_new_string(":whitespace")
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_int_from_string_findkeyword_testdescribe_2(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n 5\n (int<-string-findkeyword\n  \" \t\n\rab\"\n  \":nonwhitespace\"))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_int(5),
+        Type.f_int_from_string_findkeyword(
+          Core.vx_new_string(" \t\n\rab"),
+          Core.vx_new_string(":nonwhitespace")
         )
       )
     );
@@ -133,18 +153,22 @@ public final class TypeTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n 5\n (int<-string-findlast\n  \"abcdcdg\"\n  \"cd\"))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_int(5),
-              Type.f_int_from_string_findlast(
-                Core.vx_new_string("abcdcdg"),
-                Core.vx_new_string("cd")
-              )
-            )
+        f_int_from_string_findlast_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_int_from_string_findlast_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n 5\n (int<-string-findlast\n  \"abcdcdg\"\n  \"cd\"))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_int(5),
+        Type.f_int_from_string_findlast(
+          Core.vx_new_string("abcdcdg"),
+          Core.vx_new_string("cd")
         )
       )
     );
@@ -160,51 +184,67 @@ public final class TypeTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test-true\n (is-string \"\"))",
-          ":testresult",
-            Test.f_test_true(
-              context,
-              Type.f_is_string(
-                Core.vx_new_string("")
-              )
-            )
-        ),
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test-true\n (is-string \"a\"))",
-          ":testresult",
-            Test.f_test_true(
-              context,
-              Type.f_is_string(
-                Core.vx_new_string("a")
-              )
-            )
-        ),
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test-false\n (is-string 5))",
-          ":testresult",
-            Test.f_test_false(
-              context,
-              Type.f_is_string(
-                Core.vx_new_int(5)
-              )
-            )
-        ),
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test-false\n (is-string (list)))",
-          ":testresult",
-            Test.f_test_false(
-              context,
-              Type.f_is_string(
-                Core.f_empty(
-                  Core.t_list
-                )
-              )
-            )
+        f_is_string_testdescribe_1(context),
+        f_is_string_testdescribe_2(context),
+        f_is_string_testdescribe_3(context),
+        f_is_string_testdescribe_4(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_is_string_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test-true\n (is-string \"\"))",
+      ":testresult", Test.f_test_true(
+        context,
+        Type.f_is_string(
+          Core.vx_new_string("")
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_is_string_testdescribe_2(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test-true\n (is-string \"a\"))",
+      ":testresult", Test.f_test_true(
+        context,
+        Type.f_is_string(
+          Core.vx_new_string("a")
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_is_string_testdescribe_3(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test-false\n (is-string 5))",
+      ":testresult", Test.f_test_false(
+        context,
+        Type.f_is_string(
+          Core.vx_new_int(5)
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_is_string_testdescribe_4(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test-false\n (is-string (list)))",
+      ":testresult", Test.f_test_false(
+        context,
+        Type.f_is_string(
+          Core.f_empty(
+            Core.t_list
+          )
         )
       )
     );
@@ -220,53 +260,69 @@ public final class TypeTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test-true\n (is-type false boolean))",
-          ":testresult",
-            Test.f_test_true(
-              context,
-              Type.f_is_type(
-                Core.vx_new_boolean(false),
-                Core.t_boolean
-              )
-            )
-        ),
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test-true\n (is-type \"a\" string))",
-          ":testresult",
-            Test.f_test_true(
-              context,
-              Type.f_is_type(
-                Core.vx_new_string("a"),
-                Core.t_string
-              )
-            )
-        ),
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test-true\n (is-type 5.5 number))",
-          ":testresult",
-            Test.f_test_true(
-              context,
-              Type.f_is_type(
-                Core.vx_new_decimal("5.5"),
-                Core.t_number
-              )
-            )
-        ),
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test-true\n (is-type 4 int))",
-          ":testresult",
-            Test.f_test_true(
-              context,
-              Type.f_is_type(
-                Core.vx_new_int(4),
-                Core.t_int
-              )
-            )
+        f_is_type_testdescribe_1(context),
+        f_is_type_testdescribe_2(context),
+        f_is_type_testdescribe_3(context),
+        f_is_type_testdescribe_4(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_is_type_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test-true\n (is-type false boolean))",
+      ":testresult", Test.f_test_true(
+        context,
+        Type.f_is_type(
+          Core.vx_new_boolean(false),
+          Core.t_boolean
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_is_type_testdescribe_2(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test-true\n (is-type \"a\" string))",
+      ":testresult", Test.f_test_true(
+        context,
+        Type.f_is_type(
+          Core.vx_new_string("a"),
+          Core.t_string
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_is_type_testdescribe_3(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test-true\n (is-type 5.5 number))",
+      ":testresult", Test.f_test_true(
+        context,
+        Type.f_is_type(
+          Core.vx_new_decimal("5.5"),
+          Core.t_number
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_is_type_testdescribe_4(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test-true\n (is-type 4 int))",
+      ":testresult", Test.f_test_true(
+        context,
+        Type.f_is_type(
+          Core.vx_new_int(4),
+          Core.t_int
         )
       )
     );
@@ -282,81 +338,97 @@ public final class TypeTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test-true\n (is-type<-any-typelist\n  false\n  (typelist int boolean)))",
-          ":testresult",
-            Test.f_test_true(
-              context,
-              Type.f_is_type_from_any_typelist(
-                Core.vx_new_boolean(false),
-                Core.f_new(
-                  Core.t_typelist,
-                  Core.vx_new(
-                    Core.t_anylist,
-                    Core.t_int,
-                    Core.t_boolean
-                  )
-                )
-              )
+        f_is_type_from_any_typelist_testdescribe_1(context),
+        f_is_type_from_any_typelist_testdescribe_2(context),
+        f_is_type_from_any_typelist_testdescribe_3(context),
+        f_is_type_from_any_typelist_testdescribe_4(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_is_type_from_any_typelist_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test-true\n (is-type<-any-typelist\n  false\n  (typelist int boolean)))",
+      ":testresult", Test.f_test_true(
+        context,
+        Type.f_is_type_from_any_typelist(
+          Core.vx_new_boolean(false),
+          Core.f_new(
+            Core.t_typelist,
+            Core.vx_new(
+              Core.t_anylist,
+              Core.t_int,
+              Core.t_boolean
             )
-        ),
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test-true\n (is-type<-any-typelist\n  \"a\"\n  (typelist number string)))",
-          ":testresult",
-            Test.f_test_true(
-              context,
-              Type.f_is_type_from_any_typelist(
-                Core.vx_new_string("a"),
-                Core.f_new(
-                  Core.t_typelist,
-                  Core.vx_new(
-                    Core.t_anylist,
-                    Core.t_number,
-                    Core.t_string
-                  )
-                )
-              )
+          )
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_is_type_from_any_typelist_testdescribe_2(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test-true\n (is-type<-any-typelist\n  \"a\"\n  (typelist number string)))",
+      ":testresult", Test.f_test_true(
+        context,
+        Type.f_is_type_from_any_typelist(
+          Core.vx_new_string("a"),
+          Core.f_new(
+            Core.t_typelist,
+            Core.vx_new(
+              Core.t_anylist,
+              Core.t_number,
+              Core.t_string
             )
-        ),
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test-true\n (is-type<-any-typelist\n  5.5\n  (typelist string number)))",
-          ":testresult",
-            Test.f_test_true(
-              context,
-              Type.f_is_type_from_any_typelist(
-                Core.vx_new_decimal("5.5"),
-                Core.f_new(
-                  Core.t_typelist,
-                  Core.vx_new(
-                    Core.t_anylist,
-                    Core.t_string,
-                    Core.t_number
-                  )
-                )
-              )
+          )
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_is_type_from_any_typelist_testdescribe_3(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test-true\n (is-type<-any-typelist\n  5.5\n  (typelist string number)))",
+      ":testresult", Test.f_test_true(
+        context,
+        Type.f_is_type_from_any_typelist(
+          Core.vx_new_decimal("5.5"),
+          Core.f_new(
+            Core.t_typelist,
+            Core.vx_new(
+              Core.t_anylist,
+              Core.t_string,
+              Core.t_number
             )
-        ),
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test-true\n (is-type<-any-typelist\n  4\n  (typelist string int)))",
-          ":testresult",
-            Test.f_test_true(
-              context,
-              Type.f_is_type_from_any_typelist(
-                Core.vx_new_int(4),
-                Core.f_new(
-                  Core.t_typelist,
-                  Core.vx_new(
-                    Core.t_anylist,
-                    Core.t_string,
-                    Core.t_int
-                  )
-                )
-              )
+          )
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_is_type_from_any_typelist_testdescribe_4(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test-true\n (is-type<-any-typelist\n  4\n  (typelist string int)))",
+      ":testresult", Test.f_test_true(
+        context,
+        Type.f_is_type_from_any_typelist(
+          Core.vx_new_int(4),
+          Core.f_new(
+            Core.t_typelist,
+            Core.vx_new(
+              Core.t_anylist,
+              Core.t_string,
+              Core.t_int
             )
+          )
         )
       )
     );
@@ -372,17 +444,21 @@ public final class TypeTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n \"abc\"\n (string-lowercase\n  \"AbC\"))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_string("abc"),
-              Type.f_string_lowercase(
-                Core.vx_new_string("AbC")
-              )
-            )
+        f_string_lowercase_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_string_lowercase_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n \"abc\"\n (string-lowercase\n  \"AbC\"))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_string("abc"),
+        Type.f_string_lowercase(
+          Core.vx_new_string("AbC")
         )
       )
     );
@@ -398,29 +474,37 @@ public final class TypeTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n \"ab\"\n (string-outdent\n  \"ab\"))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_string("ab"),
-              Type.f_string_outdent(
-                Core.vx_new_string("ab")
-              )
-            )
-        ),
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n \"a\nb\"\n (string-outdent\n  \"\n a\n b\"))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_string("a\nb"),
-              Type.f_string_outdent(
-                Core.vx_new_string("\n a\n b")
-              )
-            )
+        f_string_outdent_testdescribe_1(context),
+        f_string_outdent_testdescribe_2(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_string_outdent_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n \"ab\"\n (string-outdent\n  \"ab\"))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_string("ab"),
+        Type.f_string_outdent(
+          Core.vx_new_string("ab")
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_string_outdent_testdescribe_2(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n \"a\nb\"\n (string-outdent\n  \"\n a\n b\"))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_string("a\nb"),
+        Type.f_string_outdent(
+          Core.vx_new_string("\n a\n b")
         )
       )
     );
@@ -436,17 +520,21 @@ public final class TypeTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n \"ab\"\n (string-trim\n  \" \t\nab\n\t \"))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_string("ab"),
-              Type.f_string_trim(
-                Core.vx_new_string(" \t\nab\n\t ")
-              )
-            )
+        f_string_trim_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_string_trim_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n \"ab\"\n (string-trim\n  \" \t\nab\n\t \"))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_string("ab"),
+        Type.f_string_trim(
+          Core.vx_new_string(" \t\nab\n\t ")
         )
       )
     );
@@ -462,17 +550,21 @@ public final class TypeTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n \"ABC\"\n (string-uppercase\n  \"aBc\"))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_string("ABC"),
-              Type.f_string_uppercase(
-                Core.vx_new_string("aBc")
-              )
-            )
+        f_string_uppercase_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_string_uppercase_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n \"ABC\"\n (string-uppercase\n  \"aBc\"))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_string("ABC"),
+        Type.f_string_uppercase(
+          Core.vx_new_string("aBc")
         )
       )
     );
@@ -488,65 +580,85 @@ public final class TypeTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n \"4\"\n (string<-int 4))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_string("4"),
-              Type.f_string_from_int(
-                Core.vx_new_int(4)
-              )
-            )
-        ),
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n \"51\"\n (string<-int 51))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_string("51"),
-              Type.f_string_from_int(
-                Core.vx_new_int(51)
-              )
-            )
-        ),
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n \"notanumber\"\n (string<-int notanumber))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_string("notanumber"),
-              Type.f_string_from_int(
-                Core.c_notanumber
-              )
-            )
-        ),
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n \"infinity\"\n (string<-int infinity))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_string("infinity"),
-              Type.f_string_from_int(
-                Core.c_infinity
-              )
-            )
-        ),
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n \"neginfinity\"\n (string<-int neginfinity))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_string("neginfinity"),
-              Type.f_string_from_int(
-                Core.c_neginfinity
-              )
-            )
+        f_string_from_int_testdescribe_1(context),
+        f_string_from_int_testdescribe_2(context),
+        f_string_from_int_testdescribe_3(context),
+        f_string_from_int_testdescribe_4(context),
+        f_string_from_int_testdescribe_5(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_string_from_int_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n \"4\"\n (string<-int 4))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_string("4"),
+        Type.f_string_from_int(
+          Core.vx_new_int(4)
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_string_from_int_testdescribe_2(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n \"51\"\n (string<-int 51))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_string("51"),
+        Type.f_string_from_int(
+          Core.vx_new_int(51)
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_string_from_int_testdescribe_3(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n \"notanumber\"\n (string<-int notanumber))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_string("notanumber"),
+        Type.f_string_from_int(
+          Core.c_notanumber
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_string_from_int_testdescribe_4(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n \"infinity\"\n (string<-int infinity))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_string("infinity"),
+        Type.f_string_from_int(
+          Core.c_infinity
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_string_from_int_testdescribe_5(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n \"neginfinity\"\n (string<-int neginfinity))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_string("neginfinity"),
+        Type.f_string_from_int(
+          Core.c_neginfinity
         )
       )
     );
@@ -562,31 +674,39 @@ public final class TypeTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n \"abc\"\n (string<-string-end\n  \"abcd\"\n  3))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_string("abc"),
-              Type.f_string_from_string_end(
-                Core.vx_new_string("abcd"),
-                Core.vx_new_int(3)
-              )
-            )
-        ),
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n \"ab\"\n (string<-string-end\n  \"abcd\"\n  2))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_string("ab"),
-              Type.f_string_from_string_end(
-                Core.vx_new_string("abcd"),
-                Core.vx_new_int(2)
-              )
-            )
+        f_string_from_string_end_testdescribe_1(context),
+        f_string_from_string_end_testdescribe_2(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_string_from_string_end_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n \"abc\"\n (string<-string-end\n  \"abcd\"\n  3))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_string("abc"),
+        Type.f_string_from_string_end(
+          Core.vx_new_string("abcd"),
+          Core.vx_new_int(3)
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_string_from_string_end_testdescribe_2(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n \"ab\"\n (string<-string-end\n  \"abcd\"\n  2))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_string("ab"),
+        Type.f_string_from_string_end(
+          Core.vx_new_string("abcd"),
+          Core.vx_new_int(2)
         )
       )
     );
@@ -602,31 +722,39 @@ public final class TypeTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n \"abcd\"\n (string<-string-start\n  \"abcd\"\n  1))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_string("abcd"),
-              Type.f_string_from_string_start(
-                Core.vx_new_string("abcd"),
-                Core.vx_new_int(1)
-              )
-            )
-        ),
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n \"bcd\"\n (string<-string-start\n  \"abcd\"\n  2))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_string("bcd"),
-              Type.f_string_from_string_start(
-                Core.vx_new_string("abcd"),
-                Core.vx_new_int(2)
-              )
-            )
+        f_string_from_string_start_testdescribe_1(context),
+        f_string_from_string_start_testdescribe_2(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_string_from_string_start_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n \"abcd\"\n (string<-string-start\n  \"abcd\"\n  1))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_string("abcd"),
+        Type.f_string_from_string_start(
+          Core.vx_new_string("abcd"),
+          Core.vx_new_int(1)
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_string_from_string_start_testdescribe_2(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n \"bcd\"\n (string<-string-start\n  \"abcd\"\n  2))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_string("bcd"),
+        Type.f_string_from_string_start(
+          Core.vx_new_string("abcd"),
+          Core.vx_new_int(2)
         )
       )
     );
@@ -642,75 +770,95 @@ public final class TypeTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n \"abc\"\n (string<-string-start-end\n  \"abcd\"\n  1\n  3))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_string("abc"),
-              Type.f_string_from_string_start_end(
-                Core.vx_new_string("abcd"),
-                Core.vx_new_int(1),
-                Core.vx_new_int(3)
-              )
-            )
-        ),
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n \"bc\"\n (string<-string-start-end\n  \"abcd\"\n  2\n  3))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_string("bc"),
-              Type.f_string_from_string_start_end(
-                Core.vx_new_string("abcd"),
-                Core.vx_new_int(2),
-                Core.vx_new_int(3)
-              )
-            )
-        ),
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n \"\"\n (string<-string-start-end\n  \"abcd\"\n  5\n  6))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_string(""),
-              Type.f_string_from_string_start_end(
-                Core.vx_new_string("abcd"),
-                Core.vx_new_int(5),
-                Core.vx_new_int(6)
-              )
-            )
-        ),
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n \"bcd\"\n (string<-string-start-end\n  \"abcd\"\n  2\n  5))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_string("bcd"),
-              Type.f_string_from_string_start_end(
-                Core.vx_new_string("abcd"),
-                Core.vx_new_int(2),
-                Core.vx_new_int(5)
-              )
-            )
-        ),
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n \"bc\"\n (string<-string-start-end\n  \"abcd\"\n  2\n  -1))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_string("bc"),
-              Type.f_string_from_string_start_end(
-                Core.vx_new_string("abcd"),
-                Core.vx_new_int(2),
-                Core.vx_new_int(-1)
-              )
-            )
+        f_string_from_string_start_end_testdescribe_1(context),
+        f_string_from_string_start_end_testdescribe_2(context),
+        f_string_from_string_start_end_testdescribe_3(context),
+        f_string_from_string_start_end_testdescribe_4(context),
+        f_string_from_string_start_end_testdescribe_5(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_string_from_string_start_end_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n \"abc\"\n (string<-string-start-end\n  \"abcd\"\n  1\n  3))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_string("abc"),
+        Type.f_string_from_string_start_end(
+          Core.vx_new_string("abcd"),
+          Core.vx_new_int(1),
+          Core.vx_new_int(3)
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_string_from_string_start_end_testdescribe_2(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n \"bc\"\n (string<-string-start-end\n  \"abcd\"\n  2\n  3))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_string("bc"),
+        Type.f_string_from_string_start_end(
+          Core.vx_new_string("abcd"),
+          Core.vx_new_int(2),
+          Core.vx_new_int(3)
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_string_from_string_start_end_testdescribe_3(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n \"\"\n (string<-string-start-end\n  \"abcd\"\n  5\n  6))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_string(""),
+        Type.f_string_from_string_start_end(
+          Core.vx_new_string("abcd"),
+          Core.vx_new_int(5),
+          Core.vx_new_int(6)
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_string_from_string_start_end_testdescribe_4(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n \"bcd\"\n (string<-string-start-end\n  \"abcd\"\n  2\n  5))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_string("bcd"),
+        Type.f_string_from_string_start_end(
+          Core.vx_new_string("abcd"),
+          Core.vx_new_int(2),
+          Core.vx_new_int(5)
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_string_from_string_start_end_testdescribe_5(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n \"bc\"\n (string<-string-start-end\n  \"abcd\"\n  2\n  -1))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_string("bc"),
+        Type.f_string_from_string_start_end(
+          Core.vx_new_string("abcd"),
+          Core.vx_new_int(2),
+          Core.vx_new_int(-1)
         )
       )
     );
@@ -726,26 +874,30 @@ public final class TypeTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n \"a$b$c\"\n (string<-stringlist-join\n  (stringlist \"a\" \"b\" \"c\")\n  \"$\"))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_string("a$b$c"),
-              Type.f_string_from_stringlist_join(
-                Core.f_new(
-                  Core.t_stringlist,
-                  Core.vx_new(
-                    Core.t_anylist,
-                    Core.vx_new_string("a"),
-                    Core.vx_new_string("b"),
-                    Core.vx_new_string("c")
-                  )
-                ),
-                Core.vx_new_string("$")
-              )
+        f_string_from_stringlist_join_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_string_from_stringlist_join_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n \"a$b$c\"\n (string<-stringlist-join\n  (stringlist \"a\" \"b\" \"c\")\n  \"$\"))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_string("a$b$c"),
+        Type.f_string_from_stringlist_join(
+          Core.f_new(
+            Core.t_stringlist,
+            Core.vx_new(
+              Core.t_anylist,
+              Core.vx_new_string("a"),
+              Core.vx_new_string("b"),
+              Core.vx_new_string("c")
             )
+          ),
+          Core.vx_new_string("$")
         )
       )
     );
@@ -761,26 +913,30 @@ public final class TypeTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n (stringlist \"a\" \"b\" \"c\")\n (stringlist<-string-split\n  \"a$b$c\"\n  \"$\"))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.f_new(
-                Core.t_stringlist,
-                Core.vx_new(
-                  Core.t_anylist,
-                  Core.vx_new_string("a"),
-                  Core.vx_new_string("b"),
-                  Core.vx_new_string("c")
-                )
-              ),
-              Type.f_stringlist_from_string_split(
-                Core.vx_new_string("a$b$c"),
-                Core.vx_new_string("$")
-              )
-            )
+        f_stringlist_from_string_split_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_stringlist_from_string_split_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n (stringlist \"a\" \"b\" \"c\")\n (stringlist<-string-split\n  \"a$b$c\"\n  \"$\"))",
+      ":testresult", Test.f_test(
+        context,
+        Core.f_new(
+          Core.t_stringlist,
+          Core.vx_new(
+            Core.t_anylist,
+            Core.vx_new_string("a"),
+            Core.vx_new_string("b"),
+            Core.vx_new_string("c")
+          )
+        ),
+        Type.f_stringlist_from_string_split(
+          Core.vx_new_string("a$b$c"),
+          Core.vx_new_string("$")
         )
       )
     );

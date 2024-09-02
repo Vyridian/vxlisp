@@ -16,11 +16,30 @@ public final class UiTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n (ui :uid \"app\")\n (let : ui\n  [iswrite : boolean :=\n    (boolean-writestate<-uiapp\n     (ui :uid \"app\"))\n   appui : ui :=\n    (ui-readstate-uiapp)\n   isremoved : boolean :=\n    (boolean-removestate-uiapp)]\n  appui))",
-          ":testresult",
-            Test.f_test(
+        f_boolean_writestate_from_uiapp_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_boolean_writestate_from_uiapp_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n (ui :uid \"app\")\n (let : ui\n  [iswrite : boolean :=\n    (boolean-writestate<-uiapp\n     (ui :uid \"app\"))\n   appui : ui :=\n    (ui-readstate-uiapp)\n   isremoved : boolean :=\n    (boolean-removestate-uiapp)]\n  appui))",
+      ":testresult", Test.f_test(
+        context,
+        Core.f_new(
+          Ui.t_ui,
+          Core.vx_new(
+            Core.t_anylist,
+            Core.vx_new_string(":uid"),
+            Core.vx_new_string("app")
+          )
+        ),
+        Core.f_let(
+          Ui.t_ui,
+          Core.t_any_from_func.vx_fn_new(() -> {
+            Core.Type_boolean iswrite = Ui.f_boolean_writestate_from_uiapp(
               context,
               Core.f_new(
                 Ui.t_ui,
@@ -29,32 +48,17 @@ public final class UiTest {
                   Core.vx_new_string(":uid"),
                   Core.vx_new_string("app")
                 )
-              ),
-              Core.f_let(
-                Ui.t_ui,
-                Core.t_any_from_func.vx_fn_new(() -> {
-                  Core.Type_boolean iswrite = Ui.f_boolean_writestate_from_uiapp(
-                    context,
-                    Core.f_new(
-                      Ui.t_ui,
-                      Core.vx_new(
-                        Core.t_anylist,
-                        Core.vx_new_string(":uid"),
-                        Core.vx_new_string("app")
-                      )
-                    )
-                  );
-                  Ui.Type_ui appui = Ui.f_ui_readstate_uiapp(
-                    context
-                  );
-                  Core.Type_boolean isremoved = Ui.f_boolean_removestate_uiapp(
-                    context
-                  );
-                  Core.Type_any output_1 = appui;
-                  return output_1;
-                })
               )
-            )
+            );
+            Ui.Type_ui appui = Ui.f_ui_readstate_uiapp(
+              context
+            );
+            Core.Type_boolean isremoved = Ui.f_boolean_removestate_uiapp(
+              context
+            );
+            Core.Type_any output_1 = appui;
+            return output_1;
+          })
         )
       )
     );
@@ -70,29 +74,37 @@ public final class UiTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n \"\"\n (string-parentuid<-uid\n  \"a\"))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_string(""),
-              Ui.f_string_parentuid_from_uid(
-                Core.vx_new_string("a")
-              )
-            )
-        ),
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n \"a/b\"\n (string-parentuid<-uid\n  \"a/b/c\"))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_string("a/b"),
-              Ui.f_string_parentuid_from_uid(
-                Core.vx_new_string("a/b/c")
-              )
-            )
+        f_string_parentuid_from_uid_testdescribe_1(context),
+        f_string_parentuid_from_uid_testdescribe_2(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_string_parentuid_from_uid_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n \"\"\n (string-parentuid<-uid\n  \"a\"))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_string(""),
+        Ui.f_string_parentuid_from_uid(
+          Core.vx_new_string("a")
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_string_parentuid_from_uid_testdescribe_2(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n \"a/b\"\n (string-parentuid<-uid\n  \"a/b/c\"))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_string("a/b"),
+        Ui.f_string_parentuid_from_uid(
+          Core.vx_new_string("a/b/c")
         )
       )
     );
@@ -108,11 +120,30 @@ public final class UiTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n (ui\n  :uid \"myapp\")\n (let : ui\n  [iswrite : boolean :=\n    (boolean-writestate<-uiapp\n     (ui\n      :uid \"myapp\"))]\n  (ui-readstate-uiapp)))",
-          ":testresult",
-            Test.f_test(
+        f_ui_readstate_uiapp_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_ui_readstate_uiapp_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n (ui\n  :uid \"myapp\")\n (let : ui\n  [iswrite : boolean :=\n    (boolean-writestate<-uiapp\n     (ui\n      :uid \"myapp\"))]\n  (ui-readstate-uiapp)))",
+      ":testresult", Test.f_test(
+        context,
+        Core.f_new(
+          Ui.t_ui,
+          Core.vx_new(
+            Core.t_anylist,
+            Core.vx_new_string(":uid"),
+            Core.vx_new_string("myapp")
+          )
+        ),
+        Core.f_let(
+          Ui.t_ui,
+          Core.t_any_from_func.vx_fn_new(() -> {
+            Core.Type_boolean iswrite = Ui.f_boolean_writestate_from_uiapp(
               context,
               Core.f_new(
                 Ui.t_ui,
@@ -121,28 +152,13 @@ public final class UiTest {
                   Core.vx_new_string(":uid"),
                   Core.vx_new_string("myapp")
                 )
-              ),
-              Core.f_let(
-                Ui.t_ui,
-                Core.t_any_from_func.vx_fn_new(() -> {
-                  Core.Type_boolean iswrite = Ui.f_boolean_writestate_from_uiapp(
-                    context,
-                    Core.f_new(
-                      Ui.t_ui,
-                      Core.vx_new(
-                        Core.t_anylist,
-                        Core.vx_new_string(":uid"),
-                        Core.vx_new_string("myapp")
-                      )
-                    )
-                  );
-                  Core.Type_any output_1 = Ui.f_ui_readstate_uiapp(
-                    context
-                  );
-                  return output_1;
-                })
               )
-            )
+            );
+            Core.Type_any output_1 = Ui.f_ui_readstate_uiapp(
+              context
+            );
+            return output_1;
+          })
         )
       )
     );
@@ -158,75 +174,79 @@ public final class UiTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n (ui\n  :uid \"a/b/c\")\n (let : ui\n  [uiapp : ui :=\n    (ui\n     :uid \"a\"\n     :uimap\n      (uimap<-uilist\n       (ui\n        :uid \"a/b\"\n        :uimap\n         (uimap<-uilist\n          (ui\n           :uid \"a/b/c\")))))\n   iswrite : boolean :=\n    (boolean-writestate<-uiapp uiapp)\n   readval : ui :=\n    (ui-readstate<-uid\n     \"a/b/c\")\n   isremoved : boolean := (boolean-removestate-uiapp)]\n  readval))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.f_new(
-                Ui.t_ui,
-                Core.vx_new(
-                  Core.t_anylist,
-                  Core.vx_new_string(":uid"),
-                  Core.vx_new_string("a/b/c")
-                )
-              ),
-              Core.f_let(
-                Ui.t_ui,
-                Core.t_any_from_func.vx_fn_new(() -> {
-                  Ui.Type_ui uiapp = Core.f_new(
-                    Ui.t_ui,
-                    Core.vx_new(
-                      Core.t_anylist,
-                      Core.vx_new_string(":uid"),
-                      Core.vx_new_string("a"),
-                      Core.vx_new_string(":uimap"),
-                      Ui.f_uimap_from_uilist(
-                        Core.vx_new(
-                          Ui.t_uilist,
-                          Core.f_new(
-                            Ui.t_ui,
-                            Core.vx_new(
-                              Core.t_anylist,
-                              Core.vx_new_string(":uid"),
-                              Core.vx_new_string("a/b"),
-                              Core.vx_new_string(":uimap"),
-                              Ui.f_uimap_from_uilist(
-                                Core.vx_new(
-                                  Ui.t_uilist,
-                                  Core.f_new(
-                                    Ui.t_ui,
-                                    Core.vx_new(
-                                      Core.t_anylist,
-                                      Core.vx_new_string(":uid"),
-                                      Core.vx_new_string("a/b/c")
-                                    )
-                                  )
-                                )
+        f_ui_readstate_from_uid_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_ui_readstate_from_uid_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n (ui\n  :uid \"a/b/c\")\n (let : ui\n  [uiapp : ui :=\n    (ui\n     :uid \"a\"\n     :uimap\n      (uimap<-uilist\n       (ui\n        :uid \"a/b\"\n        :uimap\n         (uimap<-uilist\n          (ui\n           :uid \"a/b/c\")))))\n   iswrite : boolean :=\n    (boolean-writestate<-uiapp uiapp)\n   readval : ui :=\n    (ui-readstate<-uid\n     \"a/b/c\")\n   isremoved : boolean := (boolean-removestate-uiapp)]\n  readval))",
+      ":testresult", Test.f_test(
+        context,
+        Core.f_new(
+          Ui.t_ui,
+          Core.vx_new(
+            Core.t_anylist,
+            Core.vx_new_string(":uid"),
+            Core.vx_new_string("a/b/c")
+          )
+        ),
+        Core.f_let(
+          Ui.t_ui,
+          Core.t_any_from_func.vx_fn_new(() -> {
+            Ui.Type_ui uiapp = Core.f_new(
+              Ui.t_ui,
+              Core.vx_new(
+                Core.t_anylist,
+                Core.vx_new_string(":uid"),
+                Core.vx_new_string("a"),
+                Core.vx_new_string(":uimap"),
+                Ui.f_uimap_from_uilist(
+                  Core.vx_new(
+                    Ui.t_uilist,
+                    Core.f_new(
+                      Ui.t_ui,
+                      Core.vx_new(
+                        Core.t_anylist,
+                        Core.vx_new_string(":uid"),
+                        Core.vx_new_string("a/b"),
+                        Core.vx_new_string(":uimap"),
+                        Ui.f_uimap_from_uilist(
+                          Core.vx_new(
+                            Ui.t_uilist,
+                            Core.f_new(
+                              Ui.t_ui,
+                              Core.vx_new(
+                                Core.t_anylist,
+                                Core.vx_new_string(":uid"),
+                                Core.vx_new_string("a/b/c")
                               )
                             )
                           )
                         )
                       )
                     )
-                  );
-                  Core.Type_boolean iswrite = Ui.f_boolean_writestate_from_uiapp(
-                    context,
-                    uiapp
-                  );
-                  Ui.Type_ui readval = Ui.f_ui_readstate_from_uid(
-                    context,
-                    Core.vx_new_string("a/b/c")
-                  );
-                  Core.Type_boolean isremoved = Ui.f_boolean_removestate_uiapp(
-                    context
-                  );
-                  Core.Type_any output_1 = readval;
-                  return output_1;
-                })
+                  )
+                )
               )
-            )
+            );
+            Core.Type_boolean iswrite = Ui.f_boolean_writestate_from_uiapp(
+              context,
+              uiapp
+            );
+            Ui.Type_ui readval = Ui.f_ui_readstate_from_uid(
+              context,
+              Core.vx_new_string("a/b/c")
+            );
+            Core.Type_boolean isremoved = Ui.f_boolean_removestate_uiapp(
+              context
+            );
+            Core.Type_any output_1 = readval;
+            return output_1;
+          })
         )
       )
     );
@@ -242,82 +262,86 @@ public final class UiTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n (ui\n  :uimap\n   (uimap\n    :a\n     (ui\n      :uid \"a\"\n      :hidden true)\n    :b\n     (ui\n      :uid \"b\")))\n (ui-write<-ui-visible\n  (ui\n   :uimap\n    (uimap\n     :a\n      (ui\n       :uid \"a\")\n     :b\n      (ui\n       :uid \"b\"\n       :hidden true)))\n  2))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.f_new(
-                Ui.t_ui,
-                Core.vx_new(
-                  Core.t_anylist,
-                  Core.vx_new_string(":uimap"),
-                  Core.f_new(
-                    Ui.t_uimap,
-                    Core.vx_new(
-                      Core.t_anylist,
-                      Core.vx_new_string(":a"),
-                      Core.f_new(
-                        Ui.t_ui,
-                        Core.vx_new(
-                          Core.t_anylist,
-                          Core.vx_new_string(":uid"),
-                          Core.vx_new_string("a"),
-                          Core.vx_new_string(":hidden"),
-                          Core.vx_new_boolean(true)
-                        )
-                      ),
-                      Core.vx_new_string(":b"),
-                      Core.f_new(
-                        Ui.t_ui,
-                        Core.vx_new(
-                          Core.t_anylist,
-                          Core.vx_new_string(":uid"),
-                          Core.vx_new_string("b")
-                        )
-                      )
-                    )
-                  )
-                )
-              ),
-              Ui.f_ui_write_from_ui_visible(
+        f_ui_write_from_ui_visible_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_ui_write_from_ui_visible_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n (ui\n  :uimap\n   (uimap\n    :a\n     (ui\n      :uid \"a\"\n      :hidden true)\n    :b\n     (ui\n      :uid \"b\")))\n (ui-write<-ui-visible\n  (ui\n   :uimap\n    (uimap\n     :a\n      (ui\n       :uid \"a\")\n     :b\n      (ui\n       :uid \"b\"\n       :hidden true)))\n  2))",
+      ":testresult", Test.f_test(
+        context,
+        Core.f_new(
+          Ui.t_ui,
+          Core.vx_new(
+            Core.t_anylist,
+            Core.vx_new_string(":uimap"),
+            Core.f_new(
+              Ui.t_uimap,
+              Core.vx_new(
+                Core.t_anylist,
+                Core.vx_new_string(":a"),
                 Core.f_new(
                   Ui.t_ui,
                   Core.vx_new(
                     Core.t_anylist,
-                    Core.vx_new_string(":uimap"),
-                    Core.f_new(
-                      Ui.t_uimap,
-                      Core.vx_new(
-                        Core.t_anylist,
-                        Core.vx_new_string(":a"),
-                        Core.f_new(
-                          Ui.t_ui,
-                          Core.vx_new(
-                            Core.t_anylist,
-                            Core.vx_new_string(":uid"),
-                            Core.vx_new_string("a")
-                          )
-                        ),
-                        Core.vx_new_string(":b"),
-                        Core.f_new(
-                          Ui.t_ui,
-                          Core.vx_new(
-                            Core.t_anylist,
-                            Core.vx_new_string(":uid"),
-                            Core.vx_new_string("b"),
-                            Core.vx_new_string(":hidden"),
-                            Core.vx_new_boolean(true)
-                          )
-                        )
-                      )
-                    )
+                    Core.vx_new_string(":uid"),
+                    Core.vx_new_string("a"),
+                    Core.vx_new_string(":hidden"),
+                    Core.vx_new_boolean(true)
                   )
                 ),
-                Core.vx_new_int(2)
+                Core.vx_new_string(":b"),
+                Core.f_new(
+                  Ui.t_ui,
+                  Core.vx_new(
+                    Core.t_anylist,
+                    Core.vx_new_string(":uid"),
+                    Core.vx_new_string("b")
+                  )
+                )
               )
             )
+          )
+        ),
+        Ui.f_ui_write_from_ui_visible(
+          Core.f_new(
+            Ui.t_ui,
+            Core.vx_new(
+              Core.t_anylist,
+              Core.vx_new_string(":uimap"),
+              Core.f_new(
+                Ui.t_uimap,
+                Core.vx_new(
+                  Core.t_anylist,
+                  Core.vx_new_string(":a"),
+                  Core.f_new(
+                    Ui.t_ui,
+                    Core.vx_new(
+                      Core.t_anylist,
+                      Core.vx_new_string(":uid"),
+                      Core.vx_new_string("a")
+                    )
+                  ),
+                  Core.vx_new_string(":b"),
+                  Core.f_new(
+                    Ui.t_ui,
+                    Core.vx_new(
+                      Core.t_anylist,
+                      Core.vx_new_string(":uid"),
+                      Core.vx_new_string("b"),
+                      Core.vx_new_string(":hidden"),
+                      Core.vx_new_boolean(true)
+                    )
+                  )
+                )
+              )
+            )
+          ),
+          Core.vx_new_int(2)
         )
       )
     );
@@ -333,64 +357,68 @@ public final class UiTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n (ui\n  :uid \"a/b/c\")\n (ui<-ui-find\n  (ui\n   :uid \"a\"\n   :uimap\n    (uimap\n     :a/b\n      (ui\n       :uid \"a/b\"\n       :uimap\n        (uimap\n         :a/b/c\n          (ui\n           :uid \"a/b/c\")))))\n  \"a/b/c\"))",
-          ":testresult",
-            Test.f_test(
-              context,
+        f_ui_from_ui_find_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_ui_from_ui_find_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n (ui\n  :uid \"a/b/c\")\n (ui<-ui-find\n  (ui\n   :uid \"a\"\n   :uimap\n    (uimap\n     :a/b\n      (ui\n       :uid \"a/b\"\n       :uimap\n        (uimap\n         :a/b/c\n          (ui\n           :uid \"a/b/c\")))))\n  \"a/b/c\"))",
+      ":testresult", Test.f_test(
+        context,
+        Core.f_new(
+          Ui.t_ui,
+          Core.vx_new(
+            Core.t_anylist,
+            Core.vx_new_string(":uid"),
+            Core.vx_new_string("a/b/c")
+          )
+        ),
+        Ui.f_ui_from_ui_find(
+          Core.f_new(
+            Ui.t_ui,
+            Core.vx_new(
+              Core.t_anylist,
+              Core.vx_new_string(":uid"),
+              Core.vx_new_string("a"),
+              Core.vx_new_string(":uimap"),
               Core.f_new(
-                Ui.t_ui,
+                Ui.t_uimap,
                 Core.vx_new(
                   Core.t_anylist,
-                  Core.vx_new_string(":uid"),
-                  Core.vx_new_string("a/b/c")
-                )
-              ),
-              Ui.f_ui_from_ui_find(
-                Core.f_new(
-                  Ui.t_ui,
-                  Core.vx_new(
-                    Core.t_anylist,
-                    Core.vx_new_string(":uid"),
-                    Core.vx_new_string("a"),
-                    Core.vx_new_string(":uimap"),
-                    Core.f_new(
-                      Ui.t_uimap,
-                      Core.vx_new(
-                        Core.t_anylist,
-                        Core.vx_new_string(":a/b"),
-                        Core.f_new(
-                          Ui.t_ui,
-                          Core.vx_new(
-                            Core.t_anylist,
-                            Core.vx_new_string(":uid"),
-                            Core.vx_new_string("a/b"),
-                            Core.vx_new_string(":uimap"),
-                            Core.f_new(
-                              Ui.t_uimap,
-                              Core.vx_new(
-                                Core.t_anylist,
-                                Core.vx_new_string(":a/b/c"),
-                                Core.f_new(
-                                  Ui.t_ui,
-                                  Core.vx_new(
-                                    Core.t_anylist,
-                                    Core.vx_new_string(":uid"),
-                                    Core.vx_new_string("a/b/c")
-                                  )
-                                )
-                              )
+                  Core.vx_new_string(":a/b"),
+                  Core.f_new(
+                    Ui.t_ui,
+                    Core.vx_new(
+                      Core.t_anylist,
+                      Core.vx_new_string(":uid"),
+                      Core.vx_new_string("a/b"),
+                      Core.vx_new_string(":uimap"),
+                      Core.f_new(
+                        Ui.t_uimap,
+                        Core.vx_new(
+                          Core.t_anylist,
+                          Core.vx_new_string(":a/b/c"),
+                          Core.f_new(
+                            Ui.t_ui,
+                            Core.vx_new(
+                              Core.t_anylist,
+                              Core.vx_new_string(":uid"),
+                              Core.vx_new_string("a/b/c")
                             )
                           )
                         )
                       )
                     )
                   )
-                ),
-                Core.vx_new_string("a/b/c")
+                )
               )
             )
+          ),
+          Core.vx_new_string("a/b/c")
         )
       )
     );
@@ -406,82 +434,86 @@ public final class UiTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n (ui\n  :uimap\n   (uimap\n    :a\n     (ui\n      :uid \"a\")\n    :b\n     (ui\n      :uid \"b\"\n      :selected true)))\n (ui<-ui-selected\n  (ui\n   :uimap\n    (uimap\n     :a\n      (ui\n       :uid \"a\"\n       :selected true)\n     :b\n      (ui\n       :uid \"b\")))\n  2))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.f_new(
-                Ui.t_ui,
-                Core.vx_new(
-                  Core.t_anylist,
-                  Core.vx_new_string(":uimap"),
-                  Core.f_new(
-                    Ui.t_uimap,
-                    Core.vx_new(
-                      Core.t_anylist,
-                      Core.vx_new_string(":a"),
-                      Core.f_new(
-                        Ui.t_ui,
-                        Core.vx_new(
-                          Core.t_anylist,
-                          Core.vx_new_string(":uid"),
-                          Core.vx_new_string("a")
-                        )
-                      ),
-                      Core.vx_new_string(":b"),
-                      Core.f_new(
-                        Ui.t_ui,
-                        Core.vx_new(
-                          Core.t_anylist,
-                          Core.vx_new_string(":uid"),
-                          Core.vx_new_string("b"),
-                          Core.vx_new_string(":selected"),
-                          Core.vx_new_boolean(true)
-                        )
-                      )
-                    )
-                  )
-                )
-              ),
-              Ui.f_ui_from_ui_selected(
+        f_ui_from_ui_selected_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_ui_from_ui_selected_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n (ui\n  :uimap\n   (uimap\n    :a\n     (ui\n      :uid \"a\")\n    :b\n     (ui\n      :uid \"b\"\n      :selected true)))\n (ui<-ui-selected\n  (ui\n   :uimap\n    (uimap\n     :a\n      (ui\n       :uid \"a\"\n       :selected true)\n     :b\n      (ui\n       :uid \"b\")))\n  2))",
+      ":testresult", Test.f_test(
+        context,
+        Core.f_new(
+          Ui.t_ui,
+          Core.vx_new(
+            Core.t_anylist,
+            Core.vx_new_string(":uimap"),
+            Core.f_new(
+              Ui.t_uimap,
+              Core.vx_new(
+                Core.t_anylist,
+                Core.vx_new_string(":a"),
                 Core.f_new(
                   Ui.t_ui,
                   Core.vx_new(
                     Core.t_anylist,
-                    Core.vx_new_string(":uimap"),
-                    Core.f_new(
-                      Ui.t_uimap,
-                      Core.vx_new(
-                        Core.t_anylist,
-                        Core.vx_new_string(":a"),
-                        Core.f_new(
-                          Ui.t_ui,
-                          Core.vx_new(
-                            Core.t_anylist,
-                            Core.vx_new_string(":uid"),
-                            Core.vx_new_string("a"),
-                            Core.vx_new_string(":selected"),
-                            Core.vx_new_boolean(true)
-                          )
-                        ),
-                        Core.vx_new_string(":b"),
-                        Core.f_new(
-                          Ui.t_ui,
-                          Core.vx_new(
-                            Core.t_anylist,
-                            Core.vx_new_string(":uid"),
-                            Core.vx_new_string("b")
-                          )
-                        )
-                      )
-                    )
+                    Core.vx_new_string(":uid"),
+                    Core.vx_new_string("a")
                   )
                 ),
-                Core.vx_new_int(2)
+                Core.vx_new_string(":b"),
+                Core.f_new(
+                  Ui.t_ui,
+                  Core.vx_new(
+                    Core.t_anylist,
+                    Core.vx_new_string(":uid"),
+                    Core.vx_new_string("b"),
+                    Core.vx_new_string(":selected"),
+                    Core.vx_new_boolean(true)
+                  )
+                )
               )
             )
+          )
+        ),
+        Ui.f_ui_from_ui_selected(
+          Core.f_new(
+            Ui.t_ui,
+            Core.vx_new(
+              Core.t_anylist,
+              Core.vx_new_string(":uimap"),
+              Core.f_new(
+                Ui.t_uimap,
+                Core.vx_new(
+                  Core.t_anylist,
+                  Core.vx_new_string(":a"),
+                  Core.f_new(
+                    Ui.t_ui,
+                    Core.vx_new(
+                      Core.t_anylist,
+                      Core.vx_new_string(":uid"),
+                      Core.vx_new_string("a"),
+                      Core.vx_new_string(":selected"),
+                      Core.vx_new_boolean(true)
+                    )
+                  ),
+                  Core.vx_new_string(":b"),
+                  Core.f_new(
+                    Ui.t_ui,
+                    Core.vx_new(
+                      Core.t_anylist,
+                      Core.vx_new_string(":uid"),
+                      Core.vx_new_string("b")
+                    )
+                  )
+                )
+              )
+            )
+          ),
+          Core.vx_new_int(2)
         )
       )
     );

@@ -1153,6 +1153,10 @@ object vx_repl {
 
   fun f_any_repl_from_functype_args(type : vx_core.Type_any, args : vx_core.Type_anylist) : vx_core.Type_any {
     var output : vx_core.Type_any = vx_core.e_any
+    if (type is vx_core.Type_replfunc) {
+      val replfunc : vx_core.Type_replfunc = type as vx_core.Type_replfunc
+      output = replfunc.vx_repl(args)
+    }
     return output
   }
 

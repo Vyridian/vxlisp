@@ -12,17 +12,21 @@ public class TypeTest {
       ":describelist",
       Vx.Core.vx_new(
         Vx.Test.t_testdescribelist,
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test-true\n (boolean<-string-ends\n  \"abcd\"\n  \"cd\"))",
-          ":testresult",
-            Vx.Test.f_test_true(
-              context,
-              Vx.Type.f_boolean_from_string_ends(
-                Vx.Core.vx_new_string("abcd"),
-                Vx.Core.vx_new_string("cd")
-              )
-            )
+        f_boolean_from_string_ends_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_boolean_from_string_ends_testdescribe_1(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test-true\n (boolean<-string-ends\n  \"abcd\"\n  \"cd\"))",
+      ":testresult", Vx.Test.f_test_true(
+        context,
+        Vx.Type.f_boolean_from_string_ends(
+          Vx.Core.vx_new_string("abcd"),
+          Vx.Core.vx_new_string("cd")
         )
       )
     );
@@ -38,17 +42,21 @@ public class TypeTest {
       ":describelist",
       Vx.Core.vx_new(
         Vx.Test.t_testdescribelist,
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test-true\n (boolean<-string-starts\n  \"abcd\"\n  \"ab\"))",
-          ":testresult",
-            Vx.Test.f_test_true(
-              context,
-              Vx.Type.f_boolean_from_string_starts(
-                Vx.Core.vx_new_string("abcd"),
-                Vx.Core.vx_new_string("ab")
-              )
-            )
+        f_boolean_from_string_starts_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_boolean_from_string_starts_testdescribe_1(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test-true\n (boolean<-string-starts\n  \"abcd\"\n  \"ab\"))",
+      ":testresult", Vx.Test.f_test_true(
+        context,
+        Vx.Type.f_boolean_from_string_starts(
+          Vx.Core.vx_new_string("abcd"),
+          Vx.Core.vx_new_string("ab")
         )
       )
     );
@@ -64,18 +72,22 @@ public class TypeTest {
       ":describelist",
       Vx.Core.vx_new(
         Vx.Test.t_testdescribelist,
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test\n 3\n (int<-string-find\n  \"abcdcdg\"\n  \"cd\"))",
-          ":testresult",
-            Vx.Test.f_test(
-              context,
-              Vx.Core.vx_new_int(3),
-              Vx.Type.f_int_from_string_find(
-                Vx.Core.vx_new_string("abcdcdg"),
-                Vx.Core.vx_new_string("cd")
-              )
-            )
+        f_int_from_string_find_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_int_from_string_find_testdescribe_1(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test\n 3\n (int<-string-find\n  \"abcdcdg\"\n  \"cd\"))",
+      ":testresult", Vx.Test.f_test(
+        context,
+        Vx.Core.vx_new_int(3),
+        Vx.Type.f_int_from_string_find(
+          Vx.Core.vx_new_string("abcdcdg"),
+          Vx.Core.vx_new_string("cd")
         )
       )
     );
@@ -91,31 +103,39 @@ public class TypeTest {
       ":describelist",
       Vx.Core.vx_new(
         Vx.Test.t_testdescribelist,
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test\n 3\n (int<-string-findkeyword\n  \"ab\tcdefg\"\n  \":whitespace\"))",
-          ":testresult",
-            Vx.Test.f_test(
-              context,
-              Vx.Core.vx_new_int(3),
-              Vx.Type.f_int_from_string_findkeyword(
-                Vx.Core.vx_new_string("ab\tcdefg"),
-                Vx.Core.vx_new_string(":whitespace")
-              )
-            )
-        ),
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test\n 5\n (int<-string-findkeyword\n  \" \t\n\rab\"\n  \":nonwhitespace\"))",
-          ":testresult",
-            Vx.Test.f_test(
-              context,
-              Vx.Core.vx_new_int(5),
-              Vx.Type.f_int_from_string_findkeyword(
-                Vx.Core.vx_new_string(" \t\n\rab"),
-                Vx.Core.vx_new_string(":nonwhitespace")
-              )
-            )
+        f_int_from_string_findkeyword_testdescribe_1(context),
+        f_int_from_string_findkeyword_testdescribe_2(context)
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_int_from_string_findkeyword_testdescribe_1(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test\n 3\n (int<-string-findkeyword\n  \"ab\tcdefg\"\n  \":whitespace\"))",
+      ":testresult", Vx.Test.f_test(
+        context,
+        Vx.Core.vx_new_int(3),
+        Vx.Type.f_int_from_string_findkeyword(
+          Vx.Core.vx_new_string("ab\tcdefg"),
+          Vx.Core.vx_new_string(":whitespace")
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_int_from_string_findkeyword_testdescribe_2(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test\n 5\n (int<-string-findkeyword\n  \" \t\n\rab\"\n  \":nonwhitespace\"))",
+      ":testresult", Vx.Test.f_test(
+        context,
+        Vx.Core.vx_new_int(5),
+        Vx.Type.f_int_from_string_findkeyword(
+          Vx.Core.vx_new_string(" \t\n\rab"),
+          Vx.Core.vx_new_string(":nonwhitespace")
         )
       )
     );
@@ -131,18 +151,22 @@ public class TypeTest {
       ":describelist",
       Vx.Core.vx_new(
         Vx.Test.t_testdescribelist,
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test\n 5\n (int<-string-findlast\n  \"abcdcdg\"\n  \"cd\"))",
-          ":testresult",
-            Vx.Test.f_test(
-              context,
-              Vx.Core.vx_new_int(5),
-              Vx.Type.f_int_from_string_findlast(
-                Vx.Core.vx_new_string("abcdcdg"),
-                Vx.Core.vx_new_string("cd")
-              )
-            )
+        f_int_from_string_findlast_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_int_from_string_findlast_testdescribe_1(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test\n 5\n (int<-string-findlast\n  \"abcdcdg\"\n  \"cd\"))",
+      ":testresult", Vx.Test.f_test(
+        context,
+        Vx.Core.vx_new_int(5),
+        Vx.Type.f_int_from_string_findlast(
+          Vx.Core.vx_new_string("abcdcdg"),
+          Vx.Core.vx_new_string("cd")
         )
       )
     );
@@ -158,51 +182,67 @@ public class TypeTest {
       ":describelist",
       Vx.Core.vx_new(
         Vx.Test.t_testdescribelist,
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test-true\n (is-string \"\"))",
-          ":testresult",
-            Vx.Test.f_test_true(
-              context,
-              Vx.Type.f_is_string(
-                Vx.Core.vx_new_string("")
-              )
-            )
-        ),
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test-true\n (is-string \"a\"))",
-          ":testresult",
-            Vx.Test.f_test_true(
-              context,
-              Vx.Type.f_is_string(
-                Vx.Core.vx_new_string("a")
-              )
-            )
-        ),
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test-false\n (is-string 5))",
-          ":testresult",
-            Vx.Test.f_test_false(
-              context,
-              Vx.Type.f_is_string(
-                Vx.Core.vx_new_int(5)
-              )
-            )
-        ),
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test-false\n (is-string (list)))",
-          ":testresult",
-            Vx.Test.f_test_false(
-              context,
-              Vx.Type.f_is_string(
-                Vx.Core.f_empty(
-                  Vx.Core.t_list
-                )
-              )
-            )
+        f_is_string_testdescribe_1(context),
+        f_is_string_testdescribe_2(context),
+        f_is_string_testdescribe_3(context),
+        f_is_string_testdescribe_4(context)
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_is_string_testdescribe_1(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test-true\n (is-string \"\"))",
+      ":testresult", Vx.Test.f_test_true(
+        context,
+        Vx.Type.f_is_string(
+          Vx.Core.vx_new_string("")
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_is_string_testdescribe_2(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test-true\n (is-string \"a\"))",
+      ":testresult", Vx.Test.f_test_true(
+        context,
+        Vx.Type.f_is_string(
+          Vx.Core.vx_new_string("a")
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_is_string_testdescribe_3(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test-false\n (is-string 5))",
+      ":testresult", Vx.Test.f_test_false(
+        context,
+        Vx.Type.f_is_string(
+          Vx.Core.vx_new_int(5)
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_is_string_testdescribe_4(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test-false\n (is-string (list)))",
+      ":testresult", Vx.Test.f_test_false(
+        context,
+        Vx.Type.f_is_string(
+          Vx.Core.f_empty(
+            Vx.Core.t_list
+          )
         )
       )
     );
@@ -218,53 +258,69 @@ public class TypeTest {
       ":describelist",
       Vx.Core.vx_new(
         Vx.Test.t_testdescribelist,
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test-true\n (is-type false boolean))",
-          ":testresult",
-            Vx.Test.f_test_true(
-              context,
-              Vx.Type.f_is_type(
-                Vx.Core.vx_new_boolean(false),
-                Vx.Core.t_boolean
-              )
-            )
-        ),
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test-true\n (is-type \"a\" string))",
-          ":testresult",
-            Vx.Test.f_test_true(
-              context,
-              Vx.Type.f_is_type(
-                Vx.Core.vx_new_string("a"),
-                Vx.Core.t_string
-              )
-            )
-        ),
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test-true\n (is-type 5.5 number))",
-          ":testresult",
-            Vx.Test.f_test_true(
-              context,
-              Vx.Type.f_is_type(
-                Vx.Core.vx_new_decimal("5.5"),
-                Vx.Core.t_number
-              )
-            )
-        ),
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test-true\n (is-type 4 int))",
-          ":testresult",
-            Vx.Test.f_test_true(
-              context,
-              Vx.Type.f_is_type(
-                Vx.Core.vx_new_int(4),
-                Vx.Core.t_int
-              )
-            )
+        f_is_type_testdescribe_1(context),
+        f_is_type_testdescribe_2(context),
+        f_is_type_testdescribe_3(context),
+        f_is_type_testdescribe_4(context)
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_is_type_testdescribe_1(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test-true\n (is-type false boolean))",
+      ":testresult", Vx.Test.f_test_true(
+        context,
+        Vx.Type.f_is_type(
+          Vx.Core.vx_new_boolean(false),
+          Vx.Core.t_boolean
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_is_type_testdescribe_2(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test-true\n (is-type \"a\" string))",
+      ":testresult", Vx.Test.f_test_true(
+        context,
+        Vx.Type.f_is_type(
+          Vx.Core.vx_new_string("a"),
+          Vx.Core.t_string
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_is_type_testdescribe_3(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test-true\n (is-type 5.5 number))",
+      ":testresult", Vx.Test.f_test_true(
+        context,
+        Vx.Type.f_is_type(
+          Vx.Core.vx_new_decimal("5.5"),
+          Vx.Core.t_number
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_is_type_testdescribe_4(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test-true\n (is-type 4 int))",
+      ":testresult", Vx.Test.f_test_true(
+        context,
+        Vx.Type.f_is_type(
+          Vx.Core.vx_new_int(4),
+          Vx.Core.t_int
         )
       )
     );
@@ -280,81 +336,97 @@ public class TypeTest {
       ":describelist",
       Vx.Core.vx_new(
         Vx.Test.t_testdescribelist,
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test-true\n (is-type<-any-typelist\n  false\n  (typelist int boolean)))",
-          ":testresult",
-            Vx.Test.f_test_true(
-              context,
-              Vx.Type.f_is_type_from_any_typelist(
-                Vx.Core.vx_new_boolean(false),
-                Vx.Core.f_new(
-                  Vx.Core.t_typelist,
-                  Vx.Core.vx_new(
-                    Vx.Core.t_anylist,
-                    Vx.Core.t_int,
-                    Vx.Core.t_boolean
-                  )
-                )
-              )
+        f_is_type_from_any_typelist_testdescribe_1(context),
+        f_is_type_from_any_typelist_testdescribe_2(context),
+        f_is_type_from_any_typelist_testdescribe_3(context),
+        f_is_type_from_any_typelist_testdescribe_4(context)
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_is_type_from_any_typelist_testdescribe_1(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test-true\n (is-type<-any-typelist\n  false\n  (typelist int boolean)))",
+      ":testresult", Vx.Test.f_test_true(
+        context,
+        Vx.Type.f_is_type_from_any_typelist(
+          Vx.Core.vx_new_boolean(false),
+          Vx.Core.f_new(
+            Vx.Core.t_typelist,
+            Vx.Core.vx_new(
+              Vx.Core.t_anylist,
+              Vx.Core.t_int,
+              Vx.Core.t_boolean
             )
-        ),
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test-true\n (is-type<-any-typelist\n  \"a\"\n  (typelist number string)))",
-          ":testresult",
-            Vx.Test.f_test_true(
-              context,
-              Vx.Type.f_is_type_from_any_typelist(
-                Vx.Core.vx_new_string("a"),
-                Vx.Core.f_new(
-                  Vx.Core.t_typelist,
-                  Vx.Core.vx_new(
-                    Vx.Core.t_anylist,
-                    Vx.Core.t_number,
-                    Vx.Core.t_string
-                  )
-                )
-              )
+          )
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_is_type_from_any_typelist_testdescribe_2(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test-true\n (is-type<-any-typelist\n  \"a\"\n  (typelist number string)))",
+      ":testresult", Vx.Test.f_test_true(
+        context,
+        Vx.Type.f_is_type_from_any_typelist(
+          Vx.Core.vx_new_string("a"),
+          Vx.Core.f_new(
+            Vx.Core.t_typelist,
+            Vx.Core.vx_new(
+              Vx.Core.t_anylist,
+              Vx.Core.t_number,
+              Vx.Core.t_string
             )
-        ),
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test-true\n (is-type<-any-typelist\n  5.5\n  (typelist string number)))",
-          ":testresult",
-            Vx.Test.f_test_true(
-              context,
-              Vx.Type.f_is_type_from_any_typelist(
-                Vx.Core.vx_new_decimal("5.5"),
-                Vx.Core.f_new(
-                  Vx.Core.t_typelist,
-                  Vx.Core.vx_new(
-                    Vx.Core.t_anylist,
-                    Vx.Core.t_string,
-                    Vx.Core.t_number
-                  )
-                )
-              )
+          )
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_is_type_from_any_typelist_testdescribe_3(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test-true\n (is-type<-any-typelist\n  5.5\n  (typelist string number)))",
+      ":testresult", Vx.Test.f_test_true(
+        context,
+        Vx.Type.f_is_type_from_any_typelist(
+          Vx.Core.vx_new_decimal("5.5"),
+          Vx.Core.f_new(
+            Vx.Core.t_typelist,
+            Vx.Core.vx_new(
+              Vx.Core.t_anylist,
+              Vx.Core.t_string,
+              Vx.Core.t_number
             )
-        ),
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test-true\n (is-type<-any-typelist\n  4\n  (typelist string int)))",
-          ":testresult",
-            Vx.Test.f_test_true(
-              context,
-              Vx.Type.f_is_type_from_any_typelist(
-                Vx.Core.vx_new_int(4),
-                Vx.Core.f_new(
-                  Vx.Core.t_typelist,
-                  Vx.Core.vx_new(
-                    Vx.Core.t_anylist,
-                    Vx.Core.t_string,
-                    Vx.Core.t_int
-                  )
-                )
-              )
+          )
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_is_type_from_any_typelist_testdescribe_4(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test-true\n (is-type<-any-typelist\n  4\n  (typelist string int)))",
+      ":testresult", Vx.Test.f_test_true(
+        context,
+        Vx.Type.f_is_type_from_any_typelist(
+          Vx.Core.vx_new_int(4),
+          Vx.Core.f_new(
+            Vx.Core.t_typelist,
+            Vx.Core.vx_new(
+              Vx.Core.t_anylist,
+              Vx.Core.t_string,
+              Vx.Core.t_int
             )
+          )
         )
       )
     );
@@ -370,17 +442,21 @@ public class TypeTest {
       ":describelist",
       Vx.Core.vx_new(
         Vx.Test.t_testdescribelist,
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test\n \"abc\"\n (string-lowercase\n  \"AbC\"))",
-          ":testresult",
-            Vx.Test.f_test(
-              context,
-              Vx.Core.vx_new_string("abc"),
-              Vx.Type.f_string_lowercase(
-                Vx.Core.vx_new_string("AbC")
-              )
-            )
+        f_string_lowercase_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_string_lowercase_testdescribe_1(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test\n \"abc\"\n (string-lowercase\n  \"AbC\"))",
+      ":testresult", Vx.Test.f_test(
+        context,
+        Vx.Core.vx_new_string("abc"),
+        Vx.Type.f_string_lowercase(
+          Vx.Core.vx_new_string("AbC")
         )
       )
     );
@@ -396,29 +472,37 @@ public class TypeTest {
       ":describelist",
       Vx.Core.vx_new(
         Vx.Test.t_testdescribelist,
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test\n \"ab\"\n (string-outdent\n  \"ab\"))",
-          ":testresult",
-            Vx.Test.f_test(
-              context,
-              Vx.Core.vx_new_string("ab"),
-              Vx.Type.f_string_outdent(
-                Vx.Core.vx_new_string("ab")
-              )
-            )
-        ),
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test\n \"a\nb\"\n (string-outdent\n  \"\n a\n b\"))",
-          ":testresult",
-            Vx.Test.f_test(
-              context,
-              Vx.Core.vx_new_string("a\nb"),
-              Vx.Type.f_string_outdent(
-                Vx.Core.vx_new_string("\n a\n b")
-              )
-            )
+        f_string_outdent_testdescribe_1(context),
+        f_string_outdent_testdescribe_2(context)
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_string_outdent_testdescribe_1(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test\n \"ab\"\n (string-outdent\n  \"ab\"))",
+      ":testresult", Vx.Test.f_test(
+        context,
+        Vx.Core.vx_new_string("ab"),
+        Vx.Type.f_string_outdent(
+          Vx.Core.vx_new_string("ab")
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_string_outdent_testdescribe_2(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test\n \"a\nb\"\n (string-outdent\n  \"\n a\n b\"))",
+      ":testresult", Vx.Test.f_test(
+        context,
+        Vx.Core.vx_new_string("a\nb"),
+        Vx.Type.f_string_outdent(
+          Vx.Core.vx_new_string("\n a\n b")
         )
       )
     );
@@ -434,17 +518,21 @@ public class TypeTest {
       ":describelist",
       Vx.Core.vx_new(
         Vx.Test.t_testdescribelist,
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test\n \"ab\"\n (string-trim\n  \" \t\nab\n\t \"))",
-          ":testresult",
-            Vx.Test.f_test(
-              context,
-              Vx.Core.vx_new_string("ab"),
-              Vx.Type.f_string_trim(
-                Vx.Core.vx_new_string(" \t\nab\n\t ")
-              )
-            )
+        f_string_trim_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_string_trim_testdescribe_1(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test\n \"ab\"\n (string-trim\n  \" \t\nab\n\t \"))",
+      ":testresult", Vx.Test.f_test(
+        context,
+        Vx.Core.vx_new_string("ab"),
+        Vx.Type.f_string_trim(
+          Vx.Core.vx_new_string(" \t\nab\n\t ")
         )
       )
     );
@@ -460,17 +548,21 @@ public class TypeTest {
       ":describelist",
       Vx.Core.vx_new(
         Vx.Test.t_testdescribelist,
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test\n \"ABC\"\n (string-uppercase\n  \"aBc\"))",
-          ":testresult",
-            Vx.Test.f_test(
-              context,
-              Vx.Core.vx_new_string("ABC"),
-              Vx.Type.f_string_uppercase(
-                Vx.Core.vx_new_string("aBc")
-              )
-            )
+        f_string_uppercase_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_string_uppercase_testdescribe_1(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test\n \"ABC\"\n (string-uppercase\n  \"aBc\"))",
+      ":testresult", Vx.Test.f_test(
+        context,
+        Vx.Core.vx_new_string("ABC"),
+        Vx.Type.f_string_uppercase(
+          Vx.Core.vx_new_string("aBc")
         )
       )
     );
@@ -486,65 +578,85 @@ public class TypeTest {
       ":describelist",
       Vx.Core.vx_new(
         Vx.Test.t_testdescribelist,
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test\n \"4\"\n (string<-int 4))",
-          ":testresult",
-            Vx.Test.f_test(
-              context,
-              Vx.Core.vx_new_string("4"),
-              Vx.Type.f_string_from_int(
-                Vx.Core.vx_new_int(4)
-              )
-            )
-        ),
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test\n \"51\"\n (string<-int 51))",
-          ":testresult",
-            Vx.Test.f_test(
-              context,
-              Vx.Core.vx_new_string("51"),
-              Vx.Type.f_string_from_int(
-                Vx.Core.vx_new_int(51)
-              )
-            )
-        ),
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test\n \"notanumber\"\n (string<-int notanumber))",
-          ":testresult",
-            Vx.Test.f_test(
-              context,
-              Vx.Core.vx_new_string("notanumber"),
-              Vx.Type.f_string_from_int(
-                Vx.Core.c_notanumber
-              )
-            )
-        ),
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test\n \"infinity\"\n (string<-int infinity))",
-          ":testresult",
-            Vx.Test.f_test(
-              context,
-              Vx.Core.vx_new_string("infinity"),
-              Vx.Type.f_string_from_int(
-                Vx.Core.c_infinity
-              )
-            )
-        ),
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test\n \"neginfinity\"\n (string<-int neginfinity))",
-          ":testresult",
-            Vx.Test.f_test(
-              context,
-              Vx.Core.vx_new_string("neginfinity"),
-              Vx.Type.f_string_from_int(
-                Vx.Core.c_neginfinity
-              )
-            )
+        f_string_from_int_testdescribe_1(context),
+        f_string_from_int_testdescribe_2(context),
+        f_string_from_int_testdescribe_3(context),
+        f_string_from_int_testdescribe_4(context),
+        f_string_from_int_testdescribe_5(context)
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_string_from_int_testdescribe_1(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test\n \"4\"\n (string<-int 4))",
+      ":testresult", Vx.Test.f_test(
+        context,
+        Vx.Core.vx_new_string("4"),
+        Vx.Type.f_string_from_int(
+          Vx.Core.vx_new_int(4)
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_string_from_int_testdescribe_2(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test\n \"51\"\n (string<-int 51))",
+      ":testresult", Vx.Test.f_test(
+        context,
+        Vx.Core.vx_new_string("51"),
+        Vx.Type.f_string_from_int(
+          Vx.Core.vx_new_int(51)
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_string_from_int_testdescribe_3(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test\n \"notanumber\"\n (string<-int notanumber))",
+      ":testresult", Vx.Test.f_test(
+        context,
+        Vx.Core.vx_new_string("notanumber"),
+        Vx.Type.f_string_from_int(
+          Vx.Core.c_notanumber
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_string_from_int_testdescribe_4(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test\n \"infinity\"\n (string<-int infinity))",
+      ":testresult", Vx.Test.f_test(
+        context,
+        Vx.Core.vx_new_string("infinity"),
+        Vx.Type.f_string_from_int(
+          Vx.Core.c_infinity
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_string_from_int_testdescribe_5(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test\n \"neginfinity\"\n (string<-int neginfinity))",
+      ":testresult", Vx.Test.f_test(
+        context,
+        Vx.Core.vx_new_string("neginfinity"),
+        Vx.Type.f_string_from_int(
+          Vx.Core.c_neginfinity
         )
       )
     );
@@ -560,31 +672,39 @@ public class TypeTest {
       ":describelist",
       Vx.Core.vx_new(
         Vx.Test.t_testdescribelist,
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test\n \"abc\"\n (string<-string-end\n  \"abcd\"\n  3))",
-          ":testresult",
-            Vx.Test.f_test(
-              context,
-              Vx.Core.vx_new_string("abc"),
-              Vx.Type.f_string_from_string_end(
-                Vx.Core.vx_new_string("abcd"),
-                Vx.Core.vx_new_int(3)
-              )
-            )
-        ),
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test\n \"ab\"\n (string<-string-end\n  \"abcd\"\n  2))",
-          ":testresult",
-            Vx.Test.f_test(
-              context,
-              Vx.Core.vx_new_string("ab"),
-              Vx.Type.f_string_from_string_end(
-                Vx.Core.vx_new_string("abcd"),
-                Vx.Core.vx_new_int(2)
-              )
-            )
+        f_string_from_string_end_testdescribe_1(context),
+        f_string_from_string_end_testdescribe_2(context)
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_string_from_string_end_testdescribe_1(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test\n \"abc\"\n (string<-string-end\n  \"abcd\"\n  3))",
+      ":testresult", Vx.Test.f_test(
+        context,
+        Vx.Core.vx_new_string("abc"),
+        Vx.Type.f_string_from_string_end(
+          Vx.Core.vx_new_string("abcd"),
+          Vx.Core.vx_new_int(3)
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_string_from_string_end_testdescribe_2(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test\n \"ab\"\n (string<-string-end\n  \"abcd\"\n  2))",
+      ":testresult", Vx.Test.f_test(
+        context,
+        Vx.Core.vx_new_string("ab"),
+        Vx.Type.f_string_from_string_end(
+          Vx.Core.vx_new_string("abcd"),
+          Vx.Core.vx_new_int(2)
         )
       )
     );
@@ -600,31 +720,39 @@ public class TypeTest {
       ":describelist",
       Vx.Core.vx_new(
         Vx.Test.t_testdescribelist,
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test\n \"abcd\"\n (string<-string-start\n  \"abcd\"\n  1))",
-          ":testresult",
-            Vx.Test.f_test(
-              context,
-              Vx.Core.vx_new_string("abcd"),
-              Vx.Type.f_string_from_string_start(
-                Vx.Core.vx_new_string("abcd"),
-                Vx.Core.vx_new_int(1)
-              )
-            )
-        ),
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test\n \"bcd\"\n (string<-string-start\n  \"abcd\"\n  2))",
-          ":testresult",
-            Vx.Test.f_test(
-              context,
-              Vx.Core.vx_new_string("bcd"),
-              Vx.Type.f_string_from_string_start(
-                Vx.Core.vx_new_string("abcd"),
-                Vx.Core.vx_new_int(2)
-              )
-            )
+        f_string_from_string_start_testdescribe_1(context),
+        f_string_from_string_start_testdescribe_2(context)
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_string_from_string_start_testdescribe_1(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test\n \"abcd\"\n (string<-string-start\n  \"abcd\"\n  1))",
+      ":testresult", Vx.Test.f_test(
+        context,
+        Vx.Core.vx_new_string("abcd"),
+        Vx.Type.f_string_from_string_start(
+          Vx.Core.vx_new_string("abcd"),
+          Vx.Core.vx_new_int(1)
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_string_from_string_start_testdescribe_2(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test\n \"bcd\"\n (string<-string-start\n  \"abcd\"\n  2))",
+      ":testresult", Vx.Test.f_test(
+        context,
+        Vx.Core.vx_new_string("bcd"),
+        Vx.Type.f_string_from_string_start(
+          Vx.Core.vx_new_string("abcd"),
+          Vx.Core.vx_new_int(2)
         )
       )
     );
@@ -640,75 +768,95 @@ public class TypeTest {
       ":describelist",
       Vx.Core.vx_new(
         Vx.Test.t_testdescribelist,
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test\n \"abc\"\n (string<-string-start-end\n  \"abcd\"\n  1\n  3))",
-          ":testresult",
-            Vx.Test.f_test(
-              context,
-              Vx.Core.vx_new_string("abc"),
-              Vx.Type.f_string_from_string_start_end(
-                Vx.Core.vx_new_string("abcd"),
-                Vx.Core.vx_new_int(1),
-                Vx.Core.vx_new_int(3)
-              )
-            )
-        ),
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test\n \"bc\"\n (string<-string-start-end\n  \"abcd\"\n  2\n  3))",
-          ":testresult",
-            Vx.Test.f_test(
-              context,
-              Vx.Core.vx_new_string("bc"),
-              Vx.Type.f_string_from_string_start_end(
-                Vx.Core.vx_new_string("abcd"),
-                Vx.Core.vx_new_int(2),
-                Vx.Core.vx_new_int(3)
-              )
-            )
-        ),
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test\n \"\"\n (string<-string-start-end\n  \"abcd\"\n  5\n  6))",
-          ":testresult",
-            Vx.Test.f_test(
-              context,
-              Vx.Core.vx_new_string(""),
-              Vx.Type.f_string_from_string_start_end(
-                Vx.Core.vx_new_string("abcd"),
-                Vx.Core.vx_new_int(5),
-                Vx.Core.vx_new_int(6)
-              )
-            )
-        ),
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test\n \"bcd\"\n (string<-string-start-end\n  \"abcd\"\n  2\n  5))",
-          ":testresult",
-            Vx.Test.f_test(
-              context,
-              Vx.Core.vx_new_string("bcd"),
-              Vx.Type.f_string_from_string_start_end(
-                Vx.Core.vx_new_string("abcd"),
-                Vx.Core.vx_new_int(2),
-                Vx.Core.vx_new_int(5)
-              )
-            )
-        ),
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test\n \"bc\"\n (string<-string-start-end\n  \"abcd\"\n  2\n  -1))",
-          ":testresult",
-            Vx.Test.f_test(
-              context,
-              Vx.Core.vx_new_string("bc"),
-              Vx.Type.f_string_from_string_start_end(
-                Vx.Core.vx_new_string("abcd"),
-                Vx.Core.vx_new_int(2),
-                Vx.Core.vx_new_int(-1)
-              )
-            )
+        f_string_from_string_start_end_testdescribe_1(context),
+        f_string_from_string_start_end_testdescribe_2(context),
+        f_string_from_string_start_end_testdescribe_3(context),
+        f_string_from_string_start_end_testdescribe_4(context),
+        f_string_from_string_start_end_testdescribe_5(context)
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_string_from_string_start_end_testdescribe_1(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test\n \"abc\"\n (string<-string-start-end\n  \"abcd\"\n  1\n  3))",
+      ":testresult", Vx.Test.f_test(
+        context,
+        Vx.Core.vx_new_string("abc"),
+        Vx.Type.f_string_from_string_start_end(
+          Vx.Core.vx_new_string("abcd"),
+          Vx.Core.vx_new_int(1),
+          Vx.Core.vx_new_int(3)
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_string_from_string_start_end_testdescribe_2(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test\n \"bc\"\n (string<-string-start-end\n  \"abcd\"\n  2\n  3))",
+      ":testresult", Vx.Test.f_test(
+        context,
+        Vx.Core.vx_new_string("bc"),
+        Vx.Type.f_string_from_string_start_end(
+          Vx.Core.vx_new_string("abcd"),
+          Vx.Core.vx_new_int(2),
+          Vx.Core.vx_new_int(3)
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_string_from_string_start_end_testdescribe_3(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test\n \"\"\n (string<-string-start-end\n  \"abcd\"\n  5\n  6))",
+      ":testresult", Vx.Test.f_test(
+        context,
+        Vx.Core.vx_new_string(""),
+        Vx.Type.f_string_from_string_start_end(
+          Vx.Core.vx_new_string("abcd"),
+          Vx.Core.vx_new_int(5),
+          Vx.Core.vx_new_int(6)
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_string_from_string_start_end_testdescribe_4(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test\n \"bcd\"\n (string<-string-start-end\n  \"abcd\"\n  2\n  5))",
+      ":testresult", Vx.Test.f_test(
+        context,
+        Vx.Core.vx_new_string("bcd"),
+        Vx.Type.f_string_from_string_start_end(
+          Vx.Core.vx_new_string("abcd"),
+          Vx.Core.vx_new_int(2),
+          Vx.Core.vx_new_int(5)
+        )
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_string_from_string_start_end_testdescribe_5(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test\n \"bc\"\n (string<-string-start-end\n  \"abcd\"\n  2\n  -1))",
+      ":testresult", Vx.Test.f_test(
+        context,
+        Vx.Core.vx_new_string("bc"),
+        Vx.Type.f_string_from_string_start_end(
+          Vx.Core.vx_new_string("abcd"),
+          Vx.Core.vx_new_int(2),
+          Vx.Core.vx_new_int(-1)
         )
       )
     );
@@ -724,26 +872,30 @@ public class TypeTest {
       ":describelist",
       Vx.Core.vx_new(
         Vx.Test.t_testdescribelist,
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test\n \"a$b$c\"\n (string<-stringlist-join\n  (stringlist \"a\" \"b\" \"c\")\n  \"$\"))",
-          ":testresult",
-            Vx.Test.f_test(
-              context,
-              Vx.Core.vx_new_string("a$b$c"),
-              Vx.Type.f_string_from_stringlist_join(
-                Vx.Core.f_new(
-                  Vx.Core.t_stringlist,
-                  Vx.Core.vx_new(
-                    Vx.Core.t_anylist,
-                    Vx.Core.vx_new_string("a"),
-                    Vx.Core.vx_new_string("b"),
-                    Vx.Core.vx_new_string("c")
-                  )
-                ),
-                Vx.Core.vx_new_string("$")
-              )
+        f_string_from_stringlist_join_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_string_from_stringlist_join_testdescribe_1(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test\n \"a$b$c\"\n (string<-stringlist-join\n  (stringlist \"a\" \"b\" \"c\")\n  \"$\"))",
+      ":testresult", Vx.Test.f_test(
+        context,
+        Vx.Core.vx_new_string("a$b$c"),
+        Vx.Type.f_string_from_stringlist_join(
+          Vx.Core.f_new(
+            Vx.Core.t_stringlist,
+            Vx.Core.vx_new(
+              Vx.Core.t_anylist,
+              Vx.Core.vx_new_string("a"),
+              Vx.Core.vx_new_string("b"),
+              Vx.Core.vx_new_string("c")
             )
+          ),
+          Vx.Core.vx_new_string("$")
         )
       )
     );
@@ -759,26 +911,30 @@ public class TypeTest {
       ":describelist",
       Vx.Core.vx_new(
         Vx.Test.t_testdescribelist,
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test\n (stringlist \"a\" \"b\" \"c\")\n (stringlist<-string-split\n  \"a$b$c\"\n  \"$\"))",
-          ":testresult",
-            Vx.Test.f_test(
-              context,
-              Vx.Core.f_new(
-                Vx.Core.t_stringlist,
-                Vx.Core.vx_new(
-                  Vx.Core.t_anylist,
-                  Vx.Core.vx_new_string("a"),
-                  Vx.Core.vx_new_string("b"),
-                  Vx.Core.vx_new_string("c")
-                )
-              ),
-              Vx.Type.f_stringlist_from_string_split(
-                Vx.Core.vx_new_string("a$b$c"),
-                Vx.Core.vx_new_string("$")
-              )
-            )
+        f_stringlist_from_string_split_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_stringlist_from_string_split_testdescribe_1(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test\n (stringlist \"a\" \"b\" \"c\")\n (stringlist<-string-split\n  \"a$b$c\"\n  \"$\"))",
+      ":testresult", Vx.Test.f_test(
+        context,
+        Vx.Core.f_new(
+          Vx.Core.t_stringlist,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
+            Vx.Core.vx_new_string("a"),
+            Vx.Core.vx_new_string("b"),
+            Vx.Core.vx_new_string("c")
+          )
+        ),
+        Vx.Type.f_stringlist_from_string_split(
+          Vx.Core.vx_new_string("a$b$c"),
+          Vx.Core.vx_new_string("$")
         )
       )
     );

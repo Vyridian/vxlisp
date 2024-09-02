@@ -3953,11 +3953,11 @@ ab
   (list
    "a" 4 "b" (list) "c" (map) "d")
   (fn : string
-   [val : any]
+   [value : any]
    (if
     (then
-     (is-string val)
-     (string val "1"))))))`
+     (is-string value)
+     (string value "1"))))))`
         :testresult
          (testresult
           :code ":eq"
@@ -4568,27 +4568,7 @@ ab
                  (textblock
                   :text "a"
                   :startpos 2
-                  :endpos 2))
-               (msgblock
-                :msgs
-                 (msglist
-                  (msg
-                   :code "closedelimmissing"
-                   :detail
-                    (delim
-                     :name "delimclose"
-                     :starttext ">")
-                   :severity 2)))))
-            (msgblock
-             :msgs
-              (msglist
-               (msg
-                :code "closedelimmissing"
-                :detail
-                 (delim
-                  :name "delimclose"
-                  :starttext ">")
-                :severity 2))))
+                  :endpos 2)))))
           :actual
            (textblock
             :text "<a"
@@ -4611,27 +4591,7 @@ ab
                  (textblock
                   :text "a"
                   :startpos 2
-                  :endpos 2))
-               (msgblock
-                :msgs
-                 (msglist
-                  (msg
-                   :code "closedelimmissing"
-                   :detail
-                    (delim
-                     :name "delimclose"
-                     :starttext ">")
-                   :severity 2)))))
-            (msgblock
-             :msgs
-              (msglist
-               (msg
-                :code "closedelimmissing"
-                :detail
-                 (delim
-                  :name "delimclose"
-                  :starttext ">")
-                :severity 2))))))
+                  :endpos 2)))))))
        (testdescribe
         :describename
          `(test
@@ -5987,27 +5947,7 @@ ab
                  (textblock
                   :text "a"
                   :startpos 2
-                  :endpos 2))
-               (msgblock
-                :msgs
-                 (msglist
-                  (msg
-                   :code "closedelimmissing"
-                   :detail
-                    (delim
-                     :name "delimclose"
-                     :starttext ">")
-                   :severity 2)))))
-            (msgblock
-             :msgs
-              (msglist
-               (msg
-                :code "closedelimmissing"
-                :detail
-                 (delim
-                  :name "delimclose"
-                  :starttext ">")
-                :severity 2))))
+                  :endpos 2)))))
           :actual
            (textblock
             :text "<a"
@@ -6030,27 +5970,7 @@ ab
                  (textblock
                   :text "a"
                   :startpos 2
-                  :endpos 2))
-               (msgblock
-                :msgs
-                 (msglist
-                  (msg
-                   :code "closedelimmissing"
-                   :detail
-                    (delim
-                     :name "delimclose"
-                     :starttext ">")
-                   :severity 2)))))
-            (msgblock
-             :msgs
-              (msglist
-               (msg
-                :code "closedelimmissing"
-                :detail
-                 (delim
-                  :name "delimclose"
-                  :starttext ">")
-                :severity 2))))))
+                  :endpos 2)))))))
        (testdescribe
         :describename
          `(test
@@ -13848,23 +13768,7 @@ ab
         :testresult
          (testresult
           :code ":eq"
-          :passfail true
-          :expected
-           (repl
-            (msgblock
-             :msgs
-              (msglist
-               (msg
-                :severity 2
-                :text "Empty delim cannot have more than one child."))))
-          :actual
-           (repl
-            (msgblock
-             :msgs
-              (msglist
-               (msg
-                :severity 2
-                :text "Empty delim cannot have more than one child."))))))))
+          :passfail true))))
     (testcase
      :passfail true
      :testpkg "vx/repl"
@@ -14898,12 +14802,12 @@ ab
           :expected
            (file
             :name "string_read_from_file.txt"
-            :path "src/test/resources/vx"
+            :path "src/test/kotlin/resources/vx"
             :text "testdata")
           :actual
            (file
             :name "string_read_from_file.txt"
-            :path "src/test/resources/vx"
+            :path "src/test/kotlin/resources/vx"
             :text "testdata")))))
     (testcase
      :passfail true
@@ -15872,36 +15776,10 @@ ab
           :passfail true
           :expected
            (xml
-            :tag "doc"
-            (msgblock
-             :msgs
-              (msglist
-               (msg
-                :code ":invalidxmlclosetag"
-                :detail
-                 (anymap
-                  :tag "/wrong"
-                  :startpos 0
-                  :endpos 0
-                  :line 0
-                  :column 0)
-                :severity 2))))
+            :tag "doc")
           :actual
            (xml
-            :tag "doc"
-            (msgblock
-             :msgs
-              (msglist
-               (msg
-                :code ":invalidxmlclosetag"
-                :detail
-                 (anymap
-                  :tag "/wrong"
-                  :startpos 0
-                  :endpos 0
-                  :line 0
-                  :column 0)
-                :severity 2))))))
+            :tag "doc")))
        (testdescribe
         :describename
          `(test

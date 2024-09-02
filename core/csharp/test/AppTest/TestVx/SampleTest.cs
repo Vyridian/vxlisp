@@ -12,16 +12,20 @@ public class SampleTest {
       ":describelist",
       Vx.Core.vx_new(
         Vx.Test.t_testdescribelist,
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test\n myconst\n myconst)",
-          ":testresult",
-            Vx.Test.f_test(
-              context,
-              Vx.Sample.c_myconst,
-              Vx.Sample.c_myconst
-            )
-        )
+        c_myconst_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe c_myconst_testdescribe_1(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test\n myconst\n myconst)",
+      ":testresult", Vx.Test.f_test(
+        context,
+        Vx.Sample.c_myconst,
+        Vx.Sample.c_myconst
       )
     );
     return output;
@@ -36,17 +40,21 @@ public class SampleTest {
       ":describelist",
       Vx.Core.vx_new(
         Vx.Test.t_testdescribelist,
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test 5 (myfunc 1))",
-          ":testresult",
-            Vx.Test.f_test(
-              context,
-              Vx.Core.vx_new_int(5),
-              Vx.Sample.f_myfunc(
-                Vx.Core.vx_new_int(1)
-              )
-            )
+        f_myfunc_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_myfunc_testdescribe_1(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test 5 (myfunc 1))",
+      ":testresult", Vx.Test.f_test(
+        context,
+        Vx.Core.vx_new_int(5),
+        Vx.Sample.f_myfunc(
+          Vx.Core.vx_new_int(1)
         )
       )
     );

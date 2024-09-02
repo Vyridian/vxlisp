@@ -30758,7 +30758,8 @@ improves readability.</div>
   :java
    &quot;boolean check = Core.vx_boolean_from_string_ends(text.vx_string(), ends.vx_string());
     output = Core.vx_new_boolean(check);&quot;  
-  :js &quot;vx_core.vx_boolean_from_string_ends(text, ends)&quot;)
+  :js &quot;vx_core.vx_boolean_from_string_ends(text, ends)&quot;
+  :kotlin :auto)
  :test (test-true
         (boolean&lt;-string-ends
          &quot;abcd&quot;
@@ -30776,7 +30777,8 @@ improves readability.</div>
   :java
    &quot;boolean check = Core.vx_boolean_from_string_starts(text.vx_string(), starts.vx_string());
     output = Core.vx_new_boolean(check);&quot;
-  :js :auto)
+  :js :auto
+  :kotlin :auto)
  :test (test-true
         (boolean&lt;-string-starts
          &quot;abcd&quot;
@@ -30790,7 +30792,8 @@ improves readability.</div>
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         3
         (int&lt;-string-find
@@ -30805,7 +30808,8 @@ improves readability.</div>
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         3
         (int&lt;-string-findkeyword
@@ -30825,7 +30829,8 @@ improves readability.</div>
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         5
         (int&lt;-string-findlast
@@ -30973,7 +30978,8 @@ improves readability.</div>
   :java
    &quot;String stext = Core.vx_string_from_string_start_end(text.vx_string(), start.vx_int(), end.vx_int());
     output = Core.vx_new_string(stext);&quot;
-  :js &quot;vx_core.vx_string_from_string_start_end(text, start, end)&quot;)
+  :js &quot;vx_core.vx_string_from_string_start_end(text, start, end)&quot;
+  :kotlin :auto)
  :test (test
         &quot;abc&quot;
         (string&lt;-string-start-end
@@ -31014,7 +31020,8 @@ improves readability.</div>
    &quot;output = vx_type::vx_string_from_stringlist_join(vals, delim);&quot;
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         &quot;a$b$c&quot;
         (string&lt;-stringlist-join
@@ -31028,7 +31035,8 @@ improves readability.</div>
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         &quot;abc&quot;
         (string-lowercase
@@ -31081,7 +31089,8 @@ improves readability.</div>
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         &quot;ab&quot;
         (string-trim
@@ -31094,7 +31103,8 @@ improves readability.</div>
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         &quot;ABC&quot;
         (string-uppercase
@@ -31109,7 +31119,8 @@ improves readability.</div>
    &quot;vx_type::vx_stringlist_from_string_split(text, delim);&quot;
   :csharp :auto
   :java   :auto
-  :js &quot;vx_type.vx_stringlist_from_string_split(text, delim)&quot;)
+  :js &quot;vx_type.vx_stringlist_from_string_split(text, delim)&quot;
+  :kotlin :auto)
  :test (test
         (stringlist &quot;a&quot; &quot;b&quot; &quot;c&quot;)
         (stringlist&lt;-string-split
@@ -31402,7 +31413,8 @@ improves readability.</div>
   :java
    &quot;boolean check = Core.vx_boolean_from_string_ends(text.vx_string(), ends.vx_string());
     output = Core.vx_new_boolean(check);&quot;  
-  :js &quot;vx_core.vx_boolean_from_string_ends(text, ends)&quot;)
+  :js &quot;vx_core.vx_boolean_from_string_ends(text, ends)&quot;
+  :kotlin :auto)
  :test (test-true
         (boolean&lt;-string-ends
          &quot;abcd&quot;
@@ -31487,7 +31499,8 @@ improves readability.</div>
   :java
    &quot;boolean check = Core.vx_boolean_from_string_starts(text.vx_string(), starts.vx_string());
     output = Core.vx_new_boolean(check);&quot;
-  :js :auto)
+  :js :auto
+  :kotlin :auto)
  :test (test-true
         (boolean&lt;-string-starts
          &quot;abcd&quot;
@@ -31569,7 +31582,8 @@ improves readability.</div>
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         3
         (int&lt;-string-find
@@ -31657,7 +31671,8 @@ improves readability.</div>
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         3
         (int&lt;-string-findkeyword
@@ -31745,7 +31760,8 @@ improves readability.</div>
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         5
         (int&lt;-string-findlast
@@ -32600,7 +32616,8 @@ improves readability.</div>
   :java
    &quot;String stext = Core.vx_string_from_string_start_end(text.vx_string(), start.vx_int(), end.vx_int());
     output = Core.vx_new_string(stext);&quot;
-  :js &quot;vx_core.vx_string_from_string_start_end(text, start, end)&quot;)
+  :js &quot;vx_core.vx_string_from_string_start_end(text, start, end)&quot;
+  :kotlin :auto)
  :test (test
         &quot;abc&quot;
         (string&lt;-string-start-end
@@ -32709,7 +32726,8 @@ improves readability.</div>
    &quot;output = vx_type::vx_string_from_stringlist_join(vals, delim);&quot;
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         &quot;a$b$c&quot;
         (string&lt;-stringlist-join
@@ -32785,7 +32803,8 @@ improves readability.</div>
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         &quot;abc&quot;
         (string-lowercase
@@ -32966,7 +32985,8 @@ improves readability.</div>
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         &quot;ab&quot;
         (string-trim
@@ -33041,7 +33061,8 @@ improves readability.</div>
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         &quot;ABC&quot;
         (string-uppercase
@@ -33124,7 +33145,8 @@ improves readability.</div>
    &quot;vx_type::vx_stringlist_from_string_split(text, delim);&quot;
   :csharp :auto
   :java   :auto
-  :js &quot;vx_type.vx_stringlist_from_string_split(text, delim)&quot;)
+  :js &quot;vx_type.vx_stringlist_from_string_split(text, delim)&quot;
+  :kotlin :auto)
  :test (test
         (stringlist &quot;a&quot; &quot;b&quot; &quot;c&quot;)
         (stringlist&lt;-string-split
@@ -33593,7 +33615,8 @@ improves readability.</div>
       .replace(/&amp;/g, “&amp;amp;”)
       .replace(/'/g, “\'”)
       .replace(/&gt;/g, “&amp;gt;”)   
-      .replace(/&lt;/g, “&amp;lt;”)&quot;)
+      .replace(/&lt;/g, “&amp;lt;”)&quot;
+  :kotlin :auto)
  :doc &quot;Convert text to HTML string&quot;)
 
 (func string-indent : string
@@ -36471,7 +36494,8 @@ improves readability.</div>
       .replace(/&amp;/g, “&amp;amp;”)
       .replace(/'/g, “\'”)
       .replace(/&gt;/g, “&amp;gt;”)   
-      .replace(/&lt;/g, “&amp;lt;”)&quot;)
+      .replace(/&lt;/g, “&amp;lt;”)&quot;
+  :kotlin :auto)
  :doc &quot;Convert text to HTML string&quot;)</div>
                 </li>
               </ul>
@@ -39705,7 +39729,8 @@ improves readability.</div>
     output = vx_core::vx_any_from_any(generic_any_1, any);&quot;
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :doc `Returns a value using a until loop.
 output : any-1 := start
 count : int := 0
@@ -39748,7 +39773,8 @@ count : int := 0
     output = vx_core::vx_any_from_any(generic_any_1, any);&quot;
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :doc &quot;Returns a value using a while loop.
        output : any-1 := start
        count : int := 0
@@ -39866,7 +39892,8 @@ count : int := 0
     output = vx_core::vx_any_from_any(generic_list_1, list);&quot;
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         (intlist 4 9)
         (list&lt;-for-end-loop : intlist
@@ -39918,7 +39945,8 @@ output : list-1 := (empty list-1)
     output = vx_core::vx_any_from_any(generic_list_1, list);&quot;
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :doc `Returns a list of any-1 using a while loop.
 1. output : list-1 := (empty list-1)
 2. value : any-1 := start.
@@ -39950,7 +39978,8 @@ output : list-1 := (empty list-1)
     output = vx_core::vx_any_from_any(generic_list_1, list);&quot;
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         (stringlist
          &quot;a1&quot; &quot;b1&quot; &quot;c1&quot; &quot;d1&quot;)
@@ -40009,7 +40038,8 @@ output : list-1 := (empty list-1)
     output = vx_core::vx_any_from_any(generic_list_1, any);&quot;
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         (stringlist
          &quot;b&quot; &quot;c&quot;)
@@ -40043,7 +40073,8 @@ output : list-1 := (empty list-1)
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         (stringmap
          :c &quot;3&quot;
@@ -40291,7 +40322,8 @@ count : int := 0
     output = vx_core::vx_any_from_any(generic_any_1, any);&quot;
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :doc `Returns a value using a until loop.
 output : any-1 := start
 count : int := 0
@@ -40494,7 +40526,8 @@ count : int := 0
     output = vx_core::vx_any_from_any(generic_any_1, any);&quot;
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :doc &quot;Returns a value using a while loop.
        output : any-1 := start
        count : int := 0
@@ -41146,7 +41179,8 @@ output : list-1 := (empty list-1)
     output = vx_core::vx_any_from_any(generic_list_1, list);&quot;
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         (intlist 4 9)
         (list&lt;-for-end-loop : intlist
@@ -41345,7 +41379,8 @@ output : list-1 := (empty list-1)
     output = vx_core::vx_any_from_any(generic_list_1, list);&quot;
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :doc `Returns a list of any-1 using a while loop.
 1. output : list-1 := (empty list-1)
 2. value : any-1 := start.
@@ -41522,7 +41557,8 @@ output : list-1 := (empty list-1)
     output = vx_core::vx_any_from_any(generic_list_1, list);&quot;
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         (stringlist
          &quot;a1&quot; &quot;b1&quot; &quot;c1&quot; &quot;d1&quot;)
@@ -41796,7 +41832,8 @@ output : list-1 := (empty list-1)
     output = vx_core::vx_any_from_any(generic_list_1, any);&quot;
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         (stringlist
          &quot;b&quot; &quot;c&quot;)
@@ -41977,7 +42014,8 @@ output : list-1 := (empty list-1)
   :cpp    :auto
   :csharp :auto
   :java   :auto
-  :js     :auto)
+  :js     :auto
+  :kotlin :auto)
  :test (test
         (stringmap
          :c &quot;3&quot;
@@ -59210,6 +59248,11 @@ output : list-1 := (empty list-1)
       if (fn != undefined) {
         output = fn(...args)
       }
+    }&quot;
+  :kotlin
+   &quot;if (type is vx_core.Type_replfunc) {
+      val replfunc : vx_core.Type_replfunc = type as vx_core.Type_replfunc
+      output = replfunc.vx_repl(args)
     }&quot;)
  :doc &quot;Returns any from a repl func and args.&quot;)
 
@@ -60963,6 +61006,11 @@ output : list-1 := (empty list-1)
       if (fn != undefined) {
         output = fn(...args)
       }
+    }&quot;
+  :kotlin
+   &quot;if (type is vx_core.Type_replfunc) {
+      val replfunc : vx_core.Type_replfunc = type as vx_core.Type_replfunc
+      output = replfunc.vx_repl(args)
     }&quot;)
  :doc &quot;Returns any from a repl func and args.&quot;)</div>
                 </li>

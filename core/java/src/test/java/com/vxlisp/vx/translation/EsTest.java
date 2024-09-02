@@ -15,18 +15,22 @@ public final class EsTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n \"Hola\"\n (trn/translate<-translation-string\n  (translation-es)\n  \"Hello\"))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_string("Hola"),
-              Translate.f_translate_from_translation_string(
-                Es.f_translation_es(),
-                Core.vx_new_string("Hello")
-              )
-            )
+        f_translation_es_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_translation_es_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n \"Hola\"\n (trn/translate<-translation-string\n  (translation-es)\n  \"Hello\"))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_string("Hola"),
+        Translate.f_translate_from_translation_string(
+          Es.f_translation_es(),
+          Core.vx_new_string("Hello")
         )
       )
     );

@@ -16,25 +16,29 @@ public final class TestTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.vxlisp\"\n   :path path-test-resources)))",
-          ":testresult",
-            Test.f_test_true(
-              context,
-              File.f_boolean_exists_from_file(
-                Core.f_new(
-                  File.t_file,
-                  Core.vx_new(
-                    Core.t_anylist,
-                    Core.vx_new_string(":name"),
-                    Core.vx_new_string("testsuite.vxlisp"),
-                    Core.vx_new_string(":path"),
-                    Core.c_path_test_resources
-                  )
-                )
-              )
+        f_file_test_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_file_test_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.vxlisp\"\n   :path path-test-resources)))",
+      ":testresult", Test.f_test_true(
+        context,
+        File.f_boolean_exists_from_file(
+          Core.f_new(
+            File.t_file,
+            Core.vx_new(
+              Core.t_anylist,
+              Core.vx_new_string(":name"),
+              Core.vx_new_string("testsuite.vxlisp"),
+              Core.vx_new_string(":path"),
+              Core.c_path_test_resources
             )
+          )
         )
       )
     );
@@ -50,25 +54,29 @@ public final class TestTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.html\"\n   :path path-test-resources)))",
-          ":testresult",
-            Test.f_test_true(
-              context,
-              File.f_boolean_exists_from_file(
-                Core.f_new(
-                  File.t_file,
-                  Core.vx_new(
-                    Core.t_anylist,
-                    Core.vx_new_string(":name"),
-                    Core.vx_new_string("testsuite.html"),
-                    Core.vx_new_string(":path"),
-                    Core.c_path_test_resources
-                  )
-                )
-              )
+        f_file_testhtml_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_file_testhtml_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.html\"\n   :path path-test-resources)))",
+      ":testresult", Test.f_test_true(
+        context,
+        File.f_boolean_exists_from_file(
+          Core.f_new(
+            File.t_file,
+            Core.vx_new(
+              Core.t_anylist,
+              Core.vx_new_string(":name"),
+              Core.vx_new_string("testsuite.html"),
+              Core.vx_new_string(":path"),
+              Core.c_path_test_resources
             )
+          )
         )
       )
     );
@@ -84,25 +92,29 @@ public final class TestTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuitenode.vxlisp\"\n   :path path-test-resources)))",
-          ":testresult",
-            Test.f_test_true(
-              context,
-              File.f_boolean_exists_from_file(
-                Core.f_new(
-                  File.t_file,
-                  Core.vx_new(
-                    Core.t_anylist,
-                    Core.vx_new_string(":name"),
-                    Core.vx_new_string("testsuitenode.vxlisp"),
-                    Core.vx_new_string(":path"),
-                    Core.c_path_test_resources
-                  )
-                )
-              )
+        f_file_testnode_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_file_testnode_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuitenode.vxlisp\"\n   :path path-test-resources)))",
+      ":testresult", Test.f_test_true(
+        context,
+        File.f_boolean_exists_from_file(
+          Core.f_new(
+            File.t_file,
+            Core.vx_new(
+              Core.t_anylist,
+              Core.vx_new_string(":name"),
+              Core.vx_new_string("testsuitenode.vxlisp"),
+              Core.vx_new_string(":path"),
+              Core.c_path_test_resources
             )
+          )
         )
       )
     );

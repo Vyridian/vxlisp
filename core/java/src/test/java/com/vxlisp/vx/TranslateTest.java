@@ -15,18 +15,22 @@ public final class TranslateTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n \"!NotFound!\"\n (translate \"!NotFound!\"))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_string("!NotFound!"),
-              Translate.f_translate(
-                context,
-                Core.vx_new_string("!NotFound!")
-              )
-            )
+        f_translate_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_translate_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n \"!NotFound!\"\n (translate \"!NotFound!\"))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_string("!NotFound!"),
+        Translate.f_translate(
+          context,
+          Core.vx_new_string("!NotFound!")
         )
       )
     );
@@ -42,27 +46,31 @@ public final class TranslateTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n \"Repl Type Not Found\"\n (translate\n  (msg\n   :path \"vx/repl/repl/repl<-string-argmap\"\n   :code \"repltypenotfound\")))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_string("Repl Type Not Found"),
-              Translate.f_translate_1(
-                context,
-                Core.f_new(
-                  Core.t_msg,
-                  Core.vx_new(
-                    Core.t_anylist,
-                    Core.vx_new_string(":path"),
-                    Core.vx_new_string("vx/repl/repl/repl<-string-argmap"),
-                    Core.vx_new_string(":code"),
-                    Core.vx_new_string("repltypenotfound")
-                  )
-                )
-              )
+        f_translate_1_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_translate_1_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n \"Repl Type Not Found\"\n (translate\n  (msg\n   :path \"vx/repl/repl/repl<-string-argmap\"\n   :code \"repltypenotfound\")))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_string("Repl Type Not Found"),
+        Translate.f_translate_1(
+          context,
+          Core.f_new(
+            Core.t_msg,
+            Core.vx_new(
+              Core.t_anylist,
+              Core.vx_new_string(":path"),
+              Core.vx_new_string("vx/repl/repl/repl<-string-argmap"),
+              Core.vx_new_string(":code"),
+              Core.vx_new_string("repltypenotfound")
             )
+          )
         )
       )
     );
@@ -78,32 +86,36 @@ public final class TranslateTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n \"Hola\"\n (translate<-translation-string\n  (translation\n   :wordmap\n    (stringmap\n     \"Hello\" \"Hola\"))\n  \"Hello\"))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_string("Hola"),
-              Translate.f_translate_from_translation_string(
-                Core.f_new(
-                  Core.t_translation,
-                  Core.vx_new(
-                    Core.t_anylist,
-                    Core.vx_new_string(":wordmap"),
-                    Core.f_new(
-                      Core.t_stringmap,
-                      Core.vx_new(
-                        Core.t_anylist,
-                        Core.vx_new_string("Hello"),
-                        Core.vx_new_string("Hola")
-                      )
-                    )
-                  )
-                ),
-                Core.vx_new_string("Hello")
+        f_translate_from_translation_string_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_translate_from_translation_string_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n \"Hola\"\n (translate<-translation-string\n  (translation\n   :wordmap\n    (stringmap\n     \"Hello\" \"Hola\"))\n  \"Hello\"))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_string("Hola"),
+        Translate.f_translate_from_translation_string(
+          Core.f_new(
+            Core.t_translation,
+            Core.vx_new(
+              Core.t_anylist,
+              Core.vx_new_string(":wordmap"),
+              Core.f_new(
+                Core.t_stringmap,
+                Core.vx_new(
+                  Core.t_anylist,
+                  Core.vx_new_string("Hello"),
+                  Core.vx_new_string("Hola")
+                )
               )
             )
+          ),
+          Core.vx_new_string("Hello")
         )
       )
     );

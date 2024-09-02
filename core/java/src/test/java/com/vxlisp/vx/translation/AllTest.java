@@ -15,19 +15,23 @@ public final class AllTest {
       ":describelist",
       Core.vx_new(
         Test.t_testdescribelist,
-        Core.vx_new(
-          Test.t_testdescribe,
-          ":describename", "(test\n \"Hola\"\n (trn/translate<-translationmap-name-string\n  (translationmap-all)\n  \"es\"\n  \"Hello\"))",
-          ":testresult",
-            Test.f_test(
-              context,
-              Core.vx_new_string("Hola"),
-              Translate.f_translate_from_translationmap_name_string(
-                All.f_translationmap_all(),
-                Core.vx_new_string("es"),
-                Core.vx_new_string("Hello")
-              )
-            )
+        f_translationmap_all_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Test.Type_testdescribe f_translationmap_all_testdescribe_1(final Core.Type_context context) {
+    Test.Type_testdescribe output = Core.vx_new(
+      Test.t_testdescribe,
+      ":describename", "(test\n \"Hola\"\n (trn/translate<-translationmap-name-string\n  (translationmap-all)\n  \"es\"\n  \"Hello\"))",
+      ":testresult", Test.f_test(
+        context,
+        Core.vx_new_string("Hola"),
+        Translate.f_translate_from_translationmap_name_string(
+          All.f_translationmap_all(),
+          Core.vx_new_string("es"),
+          Core.vx_new_string("Hello")
         )
       )
     );

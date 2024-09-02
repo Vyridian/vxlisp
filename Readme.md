@@ -5,6 +5,7 @@
 * [Test Suite Java](core/java/src/test/resources/testsuite.html)
 * [Test Suite C++](core/cpp/src/test/resources/testsuite.html)
 * [Test Suite CSharp](core/csharp/test/resources/testsuite.html)
+* [Test Suite Kotlin](core/kotlin/app/src/test/kotlin/resources/testsuite.html)
 * [API Documentation](core/doc/doc.html)
 * [Source Code](https://github.com/Vyridian/vxlisp)
 
@@ -12,7 +13,7 @@
 
 * What is vxlisp?
 
-1. vxlisp (Variable Platform, Cross Language Lisp) is a proposal for a new programming language and data structure that might fullfill the dream of 'write once, run anywhere' by writing in one language and publishing to any other one. It also tries to address a large number of complaints I have with other languages. It liberally takes concepts from many other languages like Lisp, Clojure, Scala and JavaScript.
+1. vxlisp (Variable Language, Cross Platform Lisp) is a proposal for a new programming language and data structure that might fullfill the dream of 'write once, run anywhere' by writing in one language and publishing to any other one. It also tries to address a large number of complaints I have with other languages. It liberally takes concepts from many other languages like Lisp, Clojure, Scala and JavaScript.
 
 2. vxlisp is easy to learn with simple, concise, consistent, readable syntax. It seeks to make programming more feature-rich, modular, and reliable by standardizing like Lego pieces and plugging holes in other languages. If focuses on making the most common programming cases easier and more robust including documentation and test.
 

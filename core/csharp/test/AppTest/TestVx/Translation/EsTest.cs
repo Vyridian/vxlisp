@@ -12,18 +12,22 @@ public class EsTest {
       ":describelist",
       Vx.Core.vx_new(
         Vx.Test.t_testdescribelist,
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test\n \"Hola\"\n (trn/translate<-translation-string\n  (translation-es)\n  \"Hello\"))",
-          ":testresult",
-            Vx.Test.f_test(
-              context,
-              Vx.Core.vx_new_string("Hola"),
-              Vx.Translate.f_translate_from_translation_string(
-                Vx.Translation.Es.f_translation_es(),
-                Vx.Core.vx_new_string("Hello")
-              )
-            )
+        f_translation_es_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_translation_es_testdescribe_1(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test\n \"Hola\"\n (trn/translate<-translation-string\n  (translation-es)\n  \"Hello\"))",
+      ":testresult", Vx.Test.f_test(
+        context,
+        Vx.Core.vx_new_string("Hola"),
+        Vx.Translate.f_translate_from_translation_string(
+          Vx.Translation.Es.f_translation_es(),
+          Vx.Core.vx_new_string("Hello")
         )
       )
     );

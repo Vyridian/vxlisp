@@ -12,53 +12,69 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true true)",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.vx_new_boolean(true)
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-false false)",
-          ":testresult",
-            vx_test.f_test_false(
-              context,
-              vx_core.vx_new_boolean(false)
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true (boolean true))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_new(
-                vx_core.t_boolean,
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_boolean(true)
-                )
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-false (boolean false))",
-          ":testresult",
-            vx_test.f_test_false(
-              context,
-              vx_core.f_new(
-                vx_core.t_boolean,
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_boolean(false)
-                )
-              )
-            )
+        t_boolean_testdescribe_1(context),
+        t_boolean_testdescribe_2(context),
+        t_boolean_testdescribe_3(context),
+        t_boolean_testdescribe_4(context)
+      )
+    )
+    return output
+  }
+
+  fun t_boolean_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true true)",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.vx_new_boolean(true)
+      )
+    )
+    return output
+  }
+
+  fun t_boolean_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-false false)",
+      ":testresult", vx_test.f_test_false(
+        context,
+        vx_core.vx_new_boolean(false)
+      )
+    )
+    return output
+  }
+
+  fun t_boolean_testdescribe_3(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true (boolean true))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_new(
+          vx_core.t_boolean,
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_boolean(true)
+          )
+        )
+      )
+    )
+    return output
+  }
+
+  fun t_boolean_testdescribe_4(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-false (boolean false))",
+      ":testresult", vx_test.f_test_false(
+        context,
+        vx_core.f_new(
+          vx_core.t_boolean,
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_boolean(false)
+          )
         )
       )
     )
@@ -74,21 +90,25 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test 4.5 (float 4.5))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_decimal("4.5"),
-              vx_core.f_new(
-                vx_core.t_float,
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_decimal("4.5")
-                )
-              )
-            )
+        t_float_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun t_float_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test 4.5 (float 4.5))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_decimal("4.5"),
+        vx_core.f_new(
+          vx_core.t_float,
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_decimal("4.5")
+          )
         )
       )
     )
@@ -104,27 +124,31 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n 5\n (let\n  [funcvar : + := +]\n  (funcvar 2 3)))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(5),
-              vx_core.f_let(
-                vx_core.t_int,
-                vx_core.t_any_from_func.vx_fn_new({ ->
-                  var funcvar : vx_core.Func_plus =   vx_core.t_plus
-                  var output_1 : vx_core.Type_any = vx_core.vx_any_from_func(
-                    vx_core.t_int,
-                    funcvar,
-                    vx_core.vx_new_int(2),
-                    vx_core.vx_new_int(3)
-                  )
-                  output_1
-                })
-              )
+        t_func_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun t_func_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n 5\n (let\n  [funcvar : + := +]\n  (funcvar 2 3)))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(5),
+        vx_core.f_let(
+          vx_core.t_int,
+          vx_core.t_any_from_func.vx_fn_new({ ->
+            var funcvar : vx_core.Func_plus =   vx_core.t_plus
+            var output_1 : vx_core.Type_any = vx_core.vx_any_from_func(
+              vx_core.t_int,
+              funcvar,
+              vx_core.vx_new_int(2),
+              vx_core.vx_new_int(3)
             )
+            output_1
+          })
         )
       )
     )
@@ -140,82 +164,110 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true  (is-int 4))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_is_int(
-                vx_core.vx_new_int(4)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true  (is-int \"4\"))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_is_int(
-                vx_core.vx_new_string("4")
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true  (is-int infinity))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_is_int(
-                vx_core.c_infinity
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true  (is-int neginfinity))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_is_int(
-                vx_core.c_neginfinity
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true  (is-int notanumber))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_is_int(
-                vx_core.c_notanumber
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-false (is-int \"a\"))",
-          ":testresult",
-            vx_test.f_test_false(
-              context,
-              vx_core.f_is_int(
-                vx_core.vx_new_string("a")
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-false (is-int 5.5))",
-          ":testresult",
-            vx_test.f_test_false(
-              context,
-              vx_core.f_is_int(
-                vx_core.vx_new_decimal("5.5")
-              )
-            )
+        t_int_testdescribe_1(context),
+        t_int_testdescribe_2(context),
+        t_int_testdescribe_3(context),
+        t_int_testdescribe_4(context),
+        t_int_testdescribe_5(context),
+        t_int_testdescribe_6(context),
+        t_int_testdescribe_7(context)
+      )
+    )
+    return output
+  }
+
+  fun t_int_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true  (is-int 4))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_is_int(
+          vx_core.vx_new_int(4)
+        )
+      )
+    )
+    return output
+  }
+
+  fun t_int_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true  (is-int \"4\"))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_is_int(
+          vx_core.vx_new_string("4")
+        )
+      )
+    )
+    return output
+  }
+
+  fun t_int_testdescribe_3(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true  (is-int infinity))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_is_int(
+          vx_core.c_infinity
+        )
+      )
+    )
+    return output
+  }
+
+  fun t_int_testdescribe_4(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true  (is-int neginfinity))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_is_int(
+          vx_core.c_neginfinity
+        )
+      )
+    )
+    return output
+  }
+
+  fun t_int_testdescribe_5(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true  (is-int notanumber))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_is_int(
+          vx_core.c_notanumber
+        )
+      )
+    )
+    return output
+  }
+
+  fun t_int_testdescribe_6(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-false (is-int \"a\"))",
+      ":testresult", vx_test.f_test_false(
+        context,
+        vx_core.f_is_int(
+          vx_core.vx_new_string("a")
+        )
+      )
+    )
+    return output
+  }
+
+  fun t_int_testdescribe_7(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-false (is-int 5.5))",
+      ":testresult", vx_test.f_test_false(
+        context,
+        vx_core.f_is_int(
+          vx_core.vx_new_decimal("5.5")
         )
       )
     )
@@ -231,38 +283,46 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test \"a\" (string \"a\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("a"),
-              vx_core.f_new(
-                vx_core.t_string,
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_string("a")
-                )
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test \"ab\" (string \"a\" \"b\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("ab"),
-              vx_core.f_new(
-                vx_core.t_string,
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_string("a"),
-                  vx_core.vx_new_string("b")
-                )
-              )
-            )
+        t_string_testdescribe_1(context),
+        t_string_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun t_string_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test \"a\" (string \"a\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("a"),
+        vx_core.f_new(
+          vx_core.t_string,
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_string("a")
+          )
+        )
+      )
+    )
+    return output
+  }
+
+  fun t_string_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test \"ab\" (string \"a\" \"b\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("ab"),
+        vx_core.f_new(
+          vx_core.t_string,
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_string("a"),
+            vx_core.vx_new_string("b")
+          )
         )
       )
     )
@@ -278,15 +338,19 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-false false)",
-          ":testresult",
-            vx_test.f_test_false(
-              context,
-              vx_core.vx_new_boolean(false)
-            )
-        )
+        c_false_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun c_false_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-false false)",
+      ":testresult", vx_test.f_test_false(
+        context,
+        vx_core.vx_new_boolean(false)
       )
     )
     return output
@@ -301,15 +365,19 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true true)",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.vx_new_boolean(true)
-            )
-        )
+        c_true_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun c_true_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true true)",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.vx_new_boolean(true)
       )
     )
     return output
@@ -324,25 +392,33 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-false false)",
-          ":testresult",
-            vx_test.f_test_false(
-              context,
-              vx_core.vx_new_boolean(false)
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-false (! true))",
-          ":testresult",
-            vx_test.f_test_false(
-              context,
-              vx_core.f_not(
-                vx_core.vx_new_boolean(true)
-              )
-            )
+        f_not_testdescribe_1(context),
+        f_not_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_not_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-false false)",
+      ":testresult", vx_test.f_test_false(
+        context,
+        vx_core.vx_new_boolean(false)
+      )
+    )
+    return output
+  }
+
+  fun f_not_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-false (! true))",
+      ":testresult", vx_test.f_test_false(
+        context,
+        vx_core.f_not(
+          vx_core.vx_new_boolean(true)
         )
       )
     )
@@ -358,26 +434,34 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-ne true false)",
-          ":testresult",
-            vx_test.f_test_ne(
-              context,
-              vx_core.vx_new_boolean(true),
-              vx_core.vx_new_boolean(false)
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-ne \"a\" \"b\")",
-          ":testresult",
-            vx_test.f_test_ne(
-              context,
-              vx_core.vx_new_string("a"),
-              vx_core.vx_new_string("b")
-            )
-        )
+        f_ne_testdescribe_1(context),
+        f_ne_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_ne_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-ne true false)",
+      ":testresult", vx_test.f_test_ne(
+        context,
+        vx_core.vx_new_boolean(true),
+        vx_core.vx_new_boolean(false)
+      )
+    )
+    return output
+  }
+
+  fun f_ne_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-ne \"a\" \"b\")",
+      ":testresult", vx_test.f_test_ne(
+        context,
+        vx_core.vx_new_string("a"),
+        vx_core.vx_new_string("b")
       )
     )
     return output
@@ -392,31 +476,39 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test 6 (* 3 2))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(6),
-              vx_core.f_multiply(
-                vx_core.vx_new_int(3),
-                vx_core.vx_new_int(2)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test -10 (* 5 -2))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(-10),
-              vx_core.f_multiply(
-                vx_core.vx_new_int(5),
-                vx_core.vx_new_int(-2)
-              )
-            )
+        f_multiply_testdescribe_1(context),
+        f_multiply_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_multiply_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test 6 (* 3 2))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(6),
+        vx_core.f_multiply(
+          vx_core.vx_new_int(3),
+          vx_core.vx_new_int(2)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_multiply_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test -10 (* 5 -2))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(-10),
+        vx_core.f_multiply(
+          vx_core.vx_new_int(5),
+          vx_core.vx_new_int(-2)
         )
       )
     )
@@ -432,31 +524,39 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test 6.4 (* 3.2 2))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_decimal("6.4"),
-              vx_core.f_multiply_1(
-                vx_core.vx_new_decimal("3.2"),
-                vx_core.vx_new_int(2)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test -10.2 (* 5.1 -2))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_decimal("-10.2"),
-              vx_core.f_multiply_1(
-                vx_core.vx_new_decimal("5.1"),
-                vx_core.vx_new_int(-2)
-              )
-            )
+        f_multiply_1_testdescribe_1(context),
+        f_multiply_1_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_multiply_1_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test 6.4 (* 3.2 2))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_decimal("6.4"),
+        vx_core.f_multiply_1(
+          vx_core.vx_new_decimal("3.2"),
+          vx_core.vx_new_int(2)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_multiply_1_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test -10.2 (* 5.1 -2))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_decimal("-10.2"),
+        vx_core.f_multiply_1(
+          vx_core.vx_new_decimal("5.1"),
+          vx_core.vx_new_int(-2)
         )
       )
     )
@@ -472,39 +572,47 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test 24 (* 3 2 4))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(24),
-              vx_core.f_multiply_2(
-                vx_core.vx_new(
-                  vx_core.t_intlist,
-                  vx_core.vx_new_int(3),
-                  vx_core.vx_new_int(2),
-                  vx_core.vx_new_int(4)
-                )
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test -20 (* 5 -2 2))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(-20),
-              vx_core.f_multiply_2(
-                vx_core.vx_new(
-                  vx_core.t_intlist,
-                  vx_core.vx_new_int(5),
-                  vx_core.vx_new_int(-2),
-                  vx_core.vx_new_int(2)
-                )
-              )
-            )
+        f_multiply_2_testdescribe_1(context),
+        f_multiply_2_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_multiply_2_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test 24 (* 3 2 4))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(24),
+        vx_core.f_multiply_2(
+          vx_core.vx_new(
+            vx_core.t_intlist,
+            vx_core.vx_new_int(3),
+            vx_core.vx_new_int(2),
+            vx_core.vx_new_int(4)
+          )
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_multiply_2_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test -20 (* 5 -2 2))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(-20),
+        vx_core.f_multiply_2(
+          vx_core.vx_new(
+            vx_core.t_intlist,
+            vx_core.vx_new_int(5),
+            vx_core.vx_new_int(-2),
+            vx_core.vx_new_int(2)
+          )
         )
       )
     )
@@ -520,39 +628,47 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test 24 (* 3 2 4))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(24),
-              vx_core.f_multiply_2(
-                vx_core.vx_new(
-                  vx_core.t_intlist,
-                  vx_core.vx_new_int(3),
-                  vx_core.vx_new_int(2),
-                  vx_core.vx_new_int(4)
-                )
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test -20 (* 5 -2 2))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(-20),
-              vx_core.f_multiply_2(
-                vx_core.vx_new(
-                  vx_core.t_intlist,
-                  vx_core.vx_new_int(5),
-                  vx_core.vx_new_int(-2),
-                  vx_core.vx_new_int(2)
-                )
-              )
-            )
+        f_multiply_3_testdescribe_1(context),
+        f_multiply_3_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_multiply_3_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test 24 (* 3 2 4))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(24),
+        vx_core.f_multiply_2(
+          vx_core.vx_new(
+            vx_core.t_intlist,
+            vx_core.vx_new_int(3),
+            vx_core.vx_new_int(2),
+            vx_core.vx_new_int(4)
+          )
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_multiply_3_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test -20 (* 5 -2 2))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(-20),
+        vx_core.f_multiply_2(
+          vx_core.vx_new(
+            vx_core.t_intlist,
+            vx_core.vx_new_int(5),
+            vx_core.vx_new_int(-2),
+            vx_core.vx_new_int(2)
+          )
         )
       )
     )
@@ -568,31 +684,39 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test 5 (+ 2 3))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(5),
-              vx_core.f_plus(
-                vx_core.vx_new_int(2),
-                vx_core.vx_new_int(3)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test 3 (+ 5 -2))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(3),
-              vx_core.f_plus(
-                vx_core.vx_new_int(5),
-                vx_core.vx_new_int(-2)
-              )
-            )
+        f_plus_testdescribe_1(context),
+        f_plus_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_plus_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test 5 (+ 2 3))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(5),
+        vx_core.f_plus(
+          vx_core.vx_new_int(2),
+          vx_core.vx_new_int(3)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_plus_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test 3 (+ 5 -2))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(3),
+        vx_core.f_plus(
+          vx_core.vx_new_int(5),
+          vx_core.vx_new_int(-2)
         )
       )
     )
@@ -608,31 +732,39 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test 5 (+ 2  3))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(5),
-              vx_core.f_plus(
-                vx_core.vx_new_int(2),
-                vx_core.vx_new_int(3)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test 3 (+ 5 -2))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(3),
-              vx_core.f_plus(
-                vx_core.vx_new_int(5),
-                vx_core.vx_new_int(-2)
-              )
-            )
+        f_plus_1_testdescribe_1(context),
+        f_plus_1_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_plus_1_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test 5 (+ 2  3))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(5),
+        vx_core.f_plus(
+          vx_core.vx_new_int(2),
+          vx_core.vx_new_int(3)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_plus_1_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test 3 (+ 5 -2))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(3),
+        vx_core.f_plus(
+          vx_core.vx_new_int(5),
+          vx_core.vx_new_int(-2)
         )
       )
     )
@@ -648,29 +780,37 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test  3 (+1  2))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(3),
-              vx_core.f_plus1(
-                vx_core.vx_new_int(2)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test -1 (+1 -2))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(-1),
-              vx_core.f_plus1(
-                vx_core.vx_new_int(-2)
-              )
-            )
+        f_plus1_testdescribe_1(context),
+        f_plus1_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_plus1_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test  3 (+1  2))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(3),
+        vx_core.f_plus1(
+          vx_core.vx_new_int(2)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_plus1_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test -1 (+1 -2))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(-1),
+        vx_core.f_plus1(
+          vx_core.vx_new_int(-2)
         )
       )
     )
@@ -686,31 +826,39 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test 1 (- 3 2))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(1),
-              vx_core.f_minus(
-                vx_core.vx_new_int(3),
-                vx_core.vx_new_int(2)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test 7 (- 5 -2))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(7),
-              vx_core.f_minus(
-                vx_core.vx_new_int(5),
-                vx_core.vx_new_int(-2)
-              )
-            )
+        f_minus_testdescribe_1(context),
+        f_minus_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_minus_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test 1 (- 3 2))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(1),
+        vx_core.f_minus(
+          vx_core.vx_new_int(3),
+          vx_core.vx_new_int(2)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_minus_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test 7 (- 5 -2))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(7),
+        vx_core.f_minus(
+          vx_core.vx_new_int(5),
+          vx_core.vx_new_int(-2)
         )
       )
     )
@@ -726,31 +874,39 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test 5 (+ 2 3))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(5),
-              vx_core.f_plus(
-                vx_core.vx_new_int(2),
-                vx_core.vx_new_int(3)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test 3 (+ 5 -2))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(3),
-              vx_core.f_plus(
-                vx_core.vx_new_int(5),
-                vx_core.vx_new_int(-2)
-              )
-            )
+        f_minus_1_testdescribe_1(context),
+        f_minus_1_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_minus_1_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test 5 (+ 2 3))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(5),
+        vx_core.f_plus(
+          vx_core.vx_new_int(2),
+          vx_core.vx_new_int(3)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_minus_1_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test 3 (+ 5 -2))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(3),
+        vx_core.f_plus(
+          vx_core.vx_new_int(5),
+          vx_core.vx_new_int(-2)
         )
       )
     )
@@ -766,29 +922,37 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test  1 (-1  2))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(1),
-              vx_core.f_minus1(
-                vx_core.vx_new_int(2)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test -3 (-1 -2))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(-3),
-              vx_core.f_minus1(
-                vx_core.vx_new_int(-2)
-              )
-            )
+        f_minus1_testdescribe_1(context),
+        f_minus1_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_minus1_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test  1 (-1  2))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(1),
+        vx_core.f_minus1(
+          vx_core.vx_new_int(2)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_minus1_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test -3 (-1 -2))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(-3),
+        vx_core.f_minus1(
+          vx_core.vx_new_int(-2)
         )
       )
     )
@@ -804,31 +968,39 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test 3 (/ 6 2))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(3),
-              vx_core.f_divide(
-                vx_core.vx_new_int(6),
-                vx_core.vx_new_int(2)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test -5 (/ 10 -2))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(-5),
-              vx_core.f_divide(
-                vx_core.vx_new_int(10),
-                vx_core.vx_new_int(-2)
-              )
-            )
+        f_divide_testdescribe_1(context),
+        f_divide_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_divide_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test 3 (/ 6 2))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(3),
+        vx_core.f_divide(
+          vx_core.vx_new_int(6),
+          vx_core.vx_new_int(2)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_divide_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test -5 (/ 10 -2))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(-5),
+        vx_core.f_divide(
+          vx_core.vx_new_int(10),
+          vx_core.vx_new_int(-2)
         )
       )
     )
@@ -844,17 +1016,21 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true (< 2 3))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_lt(
-                vx_core.vx_new_int(2),
-                vx_core.vx_new_int(3)
-              )
-            )
+        f_lt_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_lt_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true (< 2 3))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_lt(
+          vx_core.vx_new_int(2),
+          vx_core.vx_new_int(3)
         )
       )
     )
@@ -870,33 +1046,41 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true\n (< 2 3))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_lt(
-                vx_core.vx_new_int(2),
-                vx_core.vx_new_int(3)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true\n (< \"b\" \"d\" \"z\"))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_lt_1(
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_string("b"),
-                  vx_core.vx_new_string("d"),
-                  vx_core.vx_new_string("z")
-                )
-              )
-            )
+        f_lt_1_testdescribe_1(context),
+        f_lt_1_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_lt_1_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true\n (< 2 3))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_lt(
+          vx_core.vx_new_int(2),
+          vx_core.vx_new_int(3)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_lt_1_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true\n (< \"b\" \"d\" \"z\"))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_lt_1(
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_string("b"),
+            vx_core.vx_new_string("d"),
+            vx_core.vx_new_string("z")
+          )
         )
       )
     )
@@ -912,33 +1096,37 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n (*\n  (+\n   (- 5 3)\n   3)\n  2)\n (<-\n  5\n  (- 3)\n  (+ 3)\n  (* 2)))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.f_multiply(
-                vx_core.f_plus(
-                  vx_core.f_minus(
-                    vx_core.vx_new_int(5),
-                    vx_core.vx_new_int(3)
-                  ),
-                  vx_core.vx_new_int(3)
-                ),
-                vx_core.vx_new_int(2)
-              ),
-              vx_core.f_multiply(
-                vx_core.f_plus(
-                  vx_core.f_minus(
-                    vx_core.vx_new_int(5),
-                    vx_core.vx_new_int(3)
-                  ),
-                  vx_core.vx_new_int(3)
-                ),
-                vx_core.vx_new_int(2)
-              )
-            )
+        f_chainfirst_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_chainfirst_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n (*\n  (+\n   (- 5 3)\n   3)\n  2)\n (<-\n  5\n  (- 3)\n  (+ 3)\n  (* 2)))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.f_multiply(
+          vx_core.f_plus(
+            vx_core.f_minus(
+              vx_core.vx_new_int(5),
+              vx_core.vx_new_int(3)
+            ),
+            vx_core.vx_new_int(3)
+          ),
+          vx_core.vx_new_int(2)
+        ),
+        vx_core.f_multiply(
+          vx_core.f_plus(
+            vx_core.f_minus(
+              vx_core.vx_new_int(5),
+              vx_core.vx_new_int(3)
+            ),
+            vx_core.vx_new_int(3)
+          ),
+          vx_core.vx_new_int(2)
         )
       )
     )
@@ -954,33 +1142,37 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n (* (+ (- 3 5) 3) 2)\n (<<-\n  5\n  (- 3)\n  (+ 3)\n  (* 2)))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.f_multiply(
-                vx_core.f_plus(
-                  vx_core.f_minus(
-                    vx_core.vx_new_int(3),
-                    vx_core.vx_new_int(5)
-                  ),
-                  vx_core.vx_new_int(3)
-                ),
-                vx_core.vx_new_int(2)
-              ),
-              vx_core.f_multiply(
-                vx_core.vx_new_int(2),
-                vx_core.f_plus(
-                  vx_core.vx_new_int(3),
-                  vx_core.f_minus(
-                    vx_core.vx_new_int(3),
-                    vx_core.vx_new_int(5)
-                  )
-                )
-              )
+        f_chainlast_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_chainlast_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n (* (+ (- 3 5) 3) 2)\n (<<-\n  5\n  (- 3)\n  (+ 3)\n  (* 2)))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.f_multiply(
+          vx_core.f_plus(
+            vx_core.f_minus(
+              vx_core.vx_new_int(3),
+              vx_core.vx_new_int(5)
+            ),
+            vx_core.vx_new_int(3)
+          ),
+          vx_core.vx_new_int(2)
+        ),
+        vx_core.f_multiply(
+          vx_core.vx_new_int(2),
+          vx_core.f_plus(
+            vx_core.vx_new_int(3),
+            vx_core.f_minus(
+              vx_core.vx_new_int(3),
+              vx_core.vx_new_int(5)
             )
+          )
         )
       )
     )
@@ -996,17 +1188,21 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true (<= 2 3))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_le(
-                vx_core.vx_new_int(2),
-                vx_core.vx_new_int(3)
-              )
-            )
+        f_le_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_le_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true (<= 2 3))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_le(
+          vx_core.vx_new_int(2),
+          vx_core.vx_new_int(3)
         )
       )
     )
@@ -1022,21 +1218,25 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true (<= \"b\" \"d\" \"z\"))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_le_1(
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_string("b"),
-                  vx_core.vx_new_string("d"),
-                  vx_core.vx_new_string("z")
-                )
-              )
-            )
+        f_le_1_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_le_1_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true (<= \"b\" \"d\" \"z\"))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_le_1(
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_string("b"),
+            vx_core.vx_new_string("d"),
+            vx_core.vx_new_string("z")
+          )
         )
       )
     )
@@ -1052,99 +1252,119 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true (= true true))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_eq(
-                vx_core.vx_new_boolean(true),
-                vx_core.vx_new_boolean(true)
-              )
+        f_eq_testdescribe_1(context),
+        f_eq_testdescribe_2(context),
+        f_eq_testdescribe_3(context),
+        f_eq_testdescribe_4(context),
+        f_eq_testdescribe_5(context)
+      )
+    )
+    return output
+  }
+
+  fun f_eq_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true (= true true))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_eq(
+          vx_core.vx_new_boolean(true),
+          vx_core.vx_new_boolean(true)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_eq_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true (= 2 2))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_eq(
+          vx_core.vx_new_int(2),
+          vx_core.vx_new_int(2)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_eq_testdescribe_3(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true (= \"a\" \"a\"))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_eq(
+          vx_core.vx_new_string("a"),
+          vx_core.vx_new_string("a")
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_eq_testdescribe_4(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true\n (=\n  (stringlist \"a\" \"b\" \"c\")\n  (new stringlist \"a\" \"b\" \"c\")))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_eq(
+          vx_core.f_new(
+            vx_core.t_stringlist,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string("a"),
+              vx_core.vx_new_string("b"),
+              vx_core.vx_new_string("c")
             )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true (= 2 2))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_eq(
-                vx_core.vx_new_int(2),
-                vx_core.vx_new_int(2)
-              )
+          ),
+          vx_core.f_new(
+            vx_core.t_stringlist,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string("a"),
+              vx_core.vx_new_string("b"),
+              vx_core.vx_new_string("c")
             )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true (= \"a\" \"a\"))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_eq(
-                vx_core.vx_new_string("a"),
-                vx_core.vx_new_string("a")
-              )
+          )
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_eq_testdescribe_5(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true\n (=\n  (stringmap :a \"1\" :b \"2\")\n  (new stringmap :a \"1\" :b \"2\")))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_eq(
+          vx_core.f_new(
+            vx_core.t_stringmap,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string(":a"),
+              vx_core.vx_new_string("1"),
+              vx_core.vx_new_string(":b"),
+              vx_core.vx_new_string("2")
             )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true\n (=\n  (stringlist \"a\" \"b\" \"c\")\n  (new stringlist \"a\" \"b\" \"c\")))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_eq(
-                vx_core.f_new(
-                  vx_core.t_stringlist,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string("a"),
-                    vx_core.vx_new_string("b"),
-                    vx_core.vx_new_string("c")
-                  )
-                ),
-                vx_core.f_new(
-                  vx_core.t_stringlist,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string("a"),
-                    vx_core.vx_new_string("b"),
-                    vx_core.vx_new_string("c")
-                  )
-                )
-              )
+          ),
+          vx_core.f_new(
+            vx_core.t_stringmap,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string(":a"),
+              vx_core.vx_new_string("1"),
+              vx_core.vx_new_string(":b"),
+              vx_core.vx_new_string("2")
             )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true\n (=\n  (stringmap :a \"1\" :b \"2\")\n  (new stringmap :a \"1\" :b \"2\")))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_eq(
-                vx_core.f_new(
-                  vx_core.t_stringmap,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string(":a"),
-                    vx_core.vx_new_string("1"),
-                    vx_core.vx_new_string(":b"),
-                    vx_core.vx_new_string("2")
-                  )
-                ),
-                vx_core.f_new(
-                  vx_core.t_stringmap,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string(":a"),
-                    vx_core.vx_new_string("1"),
-                    vx_core.vx_new_string(":b"),
-                    vx_core.vx_new_string("2")
-                  )
-                )
-              )
-            )
+          )
         )
       )
     )
@@ -1160,21 +1380,25 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-false (= 2 2 3))",
-          ":testresult",
-            vx_test.f_test_false(
-              context,
-              vx_core.f_eq_1(
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_int(2),
-                  vx_core.vx_new_int(2),
-                  vx_core.vx_new_int(3)
-                )
-              )
-            )
+        f_eq_1_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_eq_1_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-false (= 2 2 3))",
+      ":testresult", vx_test.f_test_false(
+        context,
+        vx_core.f_eq_1(
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_int(2),
+            vx_core.vx_new_int(2),
+            vx_core.vx_new_int(3)
+          )
         )
       )
     )
@@ -1190,29 +1414,37 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true (== 0 0))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_eqeq(
-                vx_core.vx_new_int(0),
-                vx_core.vx_new_int(0)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true (== \"\" \"\"))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_eqeq(
-                vx_core.vx_new_string(""),
-                vx_core.vx_new_string("")
-              )
-            )
+        f_eqeq_testdescribe_1(context),
+        f_eqeq_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_eqeq_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true (== 0 0))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_eqeq(
+          vx_core.vx_new_int(0),
+          vx_core.vx_new_int(0)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_eqeq_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true (== \"\" \"\"))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_eqeq(
+          vx_core.vx_new_string(""),
+          vx_core.vx_new_string("")
         )
       )
     )
@@ -1228,17 +1460,21 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true (> 3 2))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_gt(
-                vx_core.vx_new_int(3),
-                vx_core.vx_new_int(2)
-              )
-            )
+        f_gt_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_gt_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true (> 3 2))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_gt(
+          vx_core.vx_new_int(3),
+          vx_core.vx_new_int(2)
         )
       )
     )
@@ -1254,21 +1490,25 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true (> \"z\" \"y\" \"b\"))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_gt_1(
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_string("z"),
-                  vx_core.vx_new_string("y"),
-                  vx_core.vx_new_string("b")
-                )
-              )
-            )
+        f_gt_1_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_gt_1_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true (> \"z\" \"y\" \"b\"))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_gt_1(
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_string("z"),
+            vx_core.vx_new_string("y"),
+            vx_core.vx_new_string("b")
+          )
         )
       )
     )
@@ -1284,17 +1524,21 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true (>= 3 2))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_ge(
-                vx_core.vx_new_int(3),
-                vx_core.vx_new_int(2)
-              )
-            )
+        f_ge_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_ge_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true (>= 3 2))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_ge(
+          vx_core.vx_new_int(3),
+          vx_core.vx_new_int(2)
         )
       )
     )
@@ -1310,21 +1554,25 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true (>= \"z\" \"b\" \"b\"))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_ge_1(
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_string("z"),
-                  vx_core.vx_new_string("b"),
-                  vx_core.vx_new_string("b")
-                )
-              )
-            )
+        f_ge_1_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_ge_1_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true (>= \"z\" \"b\" \"b\"))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_ge_1(
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_string("z"),
+            vx_core.vx_new_string("b"),
+            vx_core.vx_new_string("b")
+          )
         )
       )
     )
@@ -1340,29 +1588,37 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true\n (and true true))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_and(
-                vx_core.vx_new_boolean(true),
-                vx_core.vx_new_boolean(true)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-false\n (and true false))",
-          ":testresult",
-            vx_test.f_test_false(
-              context,
-              vx_core.f_and(
-                vx_core.vx_new_boolean(true),
-                vx_core.vx_new_boolean(false)
-              )
-            )
+        f_and_testdescribe_1(context),
+        f_and_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_and_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true\n (and true true))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_and(
+          vx_core.vx_new_boolean(true),
+          vx_core.vx_new_boolean(true)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_and_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-false\n (and true false))",
+      ":testresult", vx_test.f_test_false(
+        context,
+        vx_core.f_and(
+          vx_core.vx_new_boolean(true),
+          vx_core.vx_new_boolean(false)
         )
       )
     )
@@ -1378,37 +1634,45 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true\n (and true true true))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_and_1(
-                vx_core.vx_new(
-                  vx_core.t_booleanlist,
-                  vx_core.vx_new_boolean(true),
-                  vx_core.vx_new_boolean(true),
-                  vx_core.vx_new_boolean(true)
-                )
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-false\n (and true true false))",
-          ":testresult",
-            vx_test.f_test_false(
-              context,
-              vx_core.f_and_1(
-                vx_core.vx_new(
-                  vx_core.t_booleanlist,
-                  vx_core.vx_new_boolean(true),
-                  vx_core.vx_new_boolean(true),
-                  vx_core.vx_new_boolean(false)
-                )
-              )
-            )
+        f_and_1_testdescribe_1(context),
+        f_and_1_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_and_1_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true\n (and true true true))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_and_1(
+          vx_core.vx_new(
+            vx_core.t_booleanlist,
+            vx_core.vx_new_boolean(true),
+            vx_core.vx_new_boolean(true),
+            vx_core.vx_new_boolean(true)
+          )
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_and_1_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-false\n (and true true false))",
+      ":testresult", vx_test.f_test_false(
+        context,
+        vx_core.f_and_1(
+          vx_core.vx_new(
+            vx_core.t_booleanlist,
+            vx_core.vx_new_boolean(true),
+            vx_core.vx_new_boolean(true),
+            vx_core.vx_new_boolean(false)
+          )
         )
       )
     )
@@ -1424,49 +1688,57 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"b\"\n (any<-list\n  (list \"a\" \"b\" \"c\")\n  2))",
-          ":testresult",
-            vx_test.f_test(
-              context,
+        f_any_from_list_testdescribe_1(context),
+        f_any_from_list_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_any_from_list_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"b\"\n (any<-list\n  (list \"a\" \"b\" \"c\")\n  2))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("b"),
+        vx_core.f_any_from_list(
+          vx_core.t_any,
+          vx_core.f_new(
+            vx_core.t_list,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string("a"),
               vx_core.vx_new_string("b"),
-              vx_core.f_any_from_list(
-                vx_core.t_any,
-                vx_core.f_new(
-                  vx_core.t_list,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string("a"),
-                    vx_core.vx_new_string("b"),
-                    vx_core.vx_new_string("c")
-                  )
-                ),
-                vx_core.vx_new_int(2)
-              )
+              vx_core.vx_new_string("c")
             )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"b\"\n (:2 (stringlist \"a\" \"b\" \"c\")))",
-          ":testresult",
-            vx_test.f_test(
-              context,
+          ),
+          vx_core.vx_new_int(2)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_any_from_list_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"b\"\n (:2 (stringlist \"a\" \"b\" \"c\")))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("b"),
+        vx_core.f_any_from_list(
+          vx_core.t_string,
+          vx_core.f_new(
+            vx_core.t_stringlist,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string("a"),
               vx_core.vx_new_string("b"),
-              vx_core.f_any_from_list(
-                vx_core.t_string,
-                vx_core.f_new(
-                  vx_core.t_stringlist,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string("a"),
-                    vx_core.vx_new_string("b"),
-                    vx_core.vx_new_string("c")
-                  )
-                ),
-                vx_core.vx_new_int(2)
-              )
+              vx_core.vx_new_string("c")
             )
+          ),
+          vx_core.vx_new_int(2)
         )
       )
     )
@@ -1482,36 +1754,40 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n 24\n (any<-list-start-reduce : int\n  (intlist 3 2 4)\n  1\n  (fn : int\n   [total : int\n    num   : int]\n   (* total num))))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(24),
-              vx_core.f_any_from_list_start_reduce(
-                vx_core.t_int,
-                vx_core.f_new(
-                  vx_core.t_intlist,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_int(3),
-                    vx_core.vx_new_int(2),
-                    vx_core.vx_new_int(4)
-                  )
-                ),
-                vx_core.vx_new_int(1),
-                vx_core.t_any_from_reduce.vx_fn_new({total_any : vx_core.Type_any, num_any : vx_core.Type_any ->
-                  var total : vx_core.Type_int = vx_core.f_any_from_any(vx_core.t_int, total_any)
-                  var num : vx_core.Type_int = vx_core.f_any_from_any(vx_core.t_int, num_any)
-                  var output_1 : vx_core.Type_any = vx_core.f_multiply(
-                    total,
-                    num
-                  )
-                  output_1
-                })
-              )
+        f_any_from_list_start_reduce_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_any_from_list_start_reduce_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n 24\n (any<-list-start-reduce : int\n  (intlist 3 2 4)\n  1\n  (fn : int\n   [total : int\n    num   : int]\n   (* total num))))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(24),
+        vx_core.f_any_from_list_start_reduce(
+          vx_core.t_int,
+          vx_core.f_new(
+            vx_core.t_intlist,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_int(3),
+              vx_core.vx_new_int(2),
+              vx_core.vx_new_int(4)
             )
+          ),
+          vx_core.vx_new_int(1),
+          vx_core.t_any_from_reduce.vx_fn_new({total_any : vx_core.Type_any, num_any : vx_core.Type_any ->
+            var total : vx_core.Type_int = vx_core.f_any_from_any(vx_core.t_int, total_any)
+            var num : vx_core.Type_int = vx_core.f_any_from_any(vx_core.t_int, num_any)
+            var output_1 : vx_core.Type_any = vx_core.f_multiply(
+              total,
+              num
+            )
+            output_1
+          })
         )
       )
     )
@@ -1527,30 +1803,34 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"v2\"\n (any<-map\n  (stringmap\n   :a \"v1\"\n   :b \"v2\"\n   :c \"v3\")\n  :b))",
-          ":testresult",
-            vx_test.f_test(
-              context,
+        f_any_from_map_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_any_from_map_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"v2\"\n (any<-map\n  (stringmap\n   :a \"v1\"\n   :b \"v2\"\n   :c \"v3\")\n  :b))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("v2"),
+        vx_core.f_any_from_map(
+          vx_core.t_string,
+          vx_core.f_new(
+            vx_core.t_stringmap,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string(":a"),
+              vx_core.vx_new_string("v1"),
+              vx_core.vx_new_string(":b"),
               vx_core.vx_new_string("v2"),
-              vx_core.f_any_from_map(
-                vx_core.t_string,
-                vx_core.f_new(
-                  vx_core.t_stringmap,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string(":a"),
-                    vx_core.vx_new_string("v1"),
-                    vx_core.vx_new_string(":b"),
-                    vx_core.vx_new_string("v2"),
-                    vx_core.vx_new_string(":c"),
-                    vx_core.vx_new_string("v3")
-                  )
-                ),
-                vx_core.vx_new_string(":b")
-              )
+              vx_core.vx_new_string(":c"),
+              vx_core.vx_new_string("v3")
             )
+          ),
+          vx_core.vx_new_string(":b")
         )
       )
     )
@@ -1566,42 +1846,46 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"xayb\"\n (any<-map-start-reduce\n  (stringmap\n   :a \"x\"\n   :b \"y\")\n  \"\"\n  (fn : string\n   [current : string\n    key     : string\n    value   : any]\n   (copy current\n    value\n    key))))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("xayb"),
-              vx_core.f_any_from_map_start_reduce(
-                vx_core.t_string,
-                vx_core.f_new(
-                  vx_core.t_stringmap,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string(":a"),
-                    vx_core.vx_new_string("x"),
-                    vx_core.vx_new_string(":b"),
-                    vx_core.vx_new_string("y")
-                  )
-                ),
-                vx_core.vx_new_string(""),
-                vx_core.t_any_from_any_key_value.vx_fn_new({current_any : vx_core.Type_any, key_any : vx_core.Type_any, value_any : vx_core.Type_any ->
-                  var current : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, current_any)
-                  var key : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, key_any)
-                  var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, value_any)
-                  var output_1 : vx_core.Type_any = vx_core.f_copy(
-                    current,
-                    vx_core.vx_new(
-                      vx_core.t_anylist,
-                      value,
-                      key
-                    )
-                  )
-                  output_1
-                })
+        f_any_from_map_start_reduce_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_any_from_map_start_reduce_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"xayb\"\n (any<-map-start-reduce\n  (stringmap\n   :a \"x\"\n   :b \"y\")\n  \"\"\n  (fn : string\n   [current : string\n    key     : string\n    value   : any]\n   (copy current\n    value\n    key))))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("xayb"),
+        vx_core.f_any_from_map_start_reduce(
+          vx_core.t_string,
+          vx_core.f_new(
+            vx_core.t_stringmap,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string(":a"),
+              vx_core.vx_new_string("x"),
+              vx_core.vx_new_string(":b"),
+              vx_core.vx_new_string("y")
+            )
+          ),
+          vx_core.vx_new_string(""),
+          vx_core.t_any_from_any_key_value.vx_fn_new({current_any : vx_core.Type_any, key_any : vx_core.Type_any, value_any : vx_core.Type_any ->
+            var current : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, current_any)
+            var key : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, key_any)
+            var value : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, value_any)
+            var output_1 : vx_core.Type_any = vx_core.f_copy(
+              current,
+              vx_core.vx_new(
+                vx_core.t_anylist,
+                value,
+                key
               )
             )
+            output_1
+          })
         )
       )
     )
@@ -1617,81 +1901,89 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n (stringmutablemap\n  :b \"y\"\n  :a \"x\")\n (let : stringmutablemap\n  [smap : stringmutablemap :=\n    (stringmutablemap\n     :b \"y\")\n   iswrite : boolean :=\n    (boolean-write<-map-name-value\n     smap :a \"x\")]\n  smap))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.f_new(
-                vx_core.t_stringmutablemap,
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_string(":b"),
-                  vx_core.vx_new_string("y"),
-                  vx_core.vx_new_string(":a"),
-                  vx_core.vx_new_string("x")
-                )
-              ),
-              vx_core.f_let(
-                vx_core.t_stringmutablemap,
-                vx_core.t_any_from_func.vx_fn_new({ ->
-                  var smap : vx_core.Type_stringmutablemap = vx_core.f_new(
-                    vx_core.t_stringmutablemap,
-                    vx_core.vx_new(
-                      vx_core.t_anylist,
-                      vx_core.vx_new_string(":b"),
-                      vx_core.vx_new_string("y")
-                    )
-                  )
-                  var iswrite : vx_core.Type_boolean = vx_core.f_boolean_write_from_map_name_value(
-                    smap,
-                    vx_core.vx_new_string(":a"),
-                    vx_core.vx_new_string("x")
-                  )
-                  var output_1 : vx_core.Type_any = smap
-                  output_1
-                })
-              )
-            )
+        f_boolean_write_from_map_name_value_testdescribe_1(context),
+        f_boolean_write_from_map_name_value_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_boolean_write_from_map_name_value_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n (stringmutablemap\n  :b \"y\"\n  :a \"x\")\n (let : stringmutablemap\n  [smap : stringmutablemap :=\n    (stringmutablemap\n     :b \"y\")\n   iswrite : boolean :=\n    (boolean-write<-map-name-value\n     smap :a \"x\")]\n  smap))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.f_new(
+          vx_core.t_stringmutablemap,
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_string(":b"),
+            vx_core.vx_new_string("y"),
+            vx_core.vx_new_string(":a"),
+            vx_core.vx_new_string("x")
+          )
         ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n (stringmutablemap\n  :a \"x\")\n (let : stringmutablemap\n  [smap : stringmutablemap :=\n    (stringmutablemap\n     :b \"y\"\n     :a \"x\")\n   iswrite : boolean :=\n    (boolean-write<-map-name-value\n     smap :b \"\")]\n  smap))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.f_new(
-                vx_core.t_stringmutablemap,
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_string(":a"),
-                  vx_core.vx_new_string("x")
-                )
-              ),
-              vx_core.f_let(
-                vx_core.t_stringmutablemap,
-                vx_core.t_any_from_func.vx_fn_new({ ->
-                  var smap : vx_core.Type_stringmutablemap = vx_core.f_new(
-                    vx_core.t_stringmutablemap,
-                    vx_core.vx_new(
-                      vx_core.t_anylist,
-                      vx_core.vx_new_string(":b"),
-                      vx_core.vx_new_string("y"),
-                      vx_core.vx_new_string(":a"),
-                      vx_core.vx_new_string("x")
-                    )
-                  )
-                  var iswrite : vx_core.Type_boolean = vx_core.f_boolean_write_from_map_name_value(
-                    smap,
-                    vx_core.vx_new_string(":b"),
-                    vx_core.vx_new_string("")
-                  )
-                  var output_2 : vx_core.Type_any = smap
-                  output_2
-                })
+        vx_core.f_let(
+          vx_core.t_stringmutablemap,
+          vx_core.t_any_from_func.vx_fn_new({ ->
+            var smap : vx_core.Type_stringmutablemap = vx_core.f_new(
+              vx_core.t_stringmutablemap,
+              vx_core.vx_new(
+                vx_core.t_anylist,
+                vx_core.vx_new_string(":b"),
+                vx_core.vx_new_string("y")
               )
             )
+            var iswrite : vx_core.Type_boolean = vx_core.f_boolean_write_from_map_name_value(
+              smap,
+              vx_core.vx_new_string(":a"),
+              vx_core.vx_new_string("x")
+            )
+            var output_1 : vx_core.Type_any = smap
+            output_1
+          })
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_boolean_write_from_map_name_value_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n (stringmutablemap\n  :a \"x\")\n (let : stringmutablemap\n  [smap : stringmutablemap :=\n    (stringmutablemap\n     :b \"y\"\n     :a \"x\")\n   iswrite : boolean :=\n    (boolean-write<-map-name-value\n     smap :b \"\")]\n  smap))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.f_new(
+          vx_core.t_stringmutablemap,
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_string(":a"),
+            vx_core.vx_new_string("x")
+          )
+        ),
+        vx_core.f_let(
+          vx_core.t_stringmutablemap,
+          vx_core.t_any_from_func.vx_fn_new({ ->
+            var smap : vx_core.Type_stringmutablemap = vx_core.f_new(
+              vx_core.t_stringmutablemap,
+              vx_core.vx_new(
+                vx_core.t_anylist,
+                vx_core.vx_new_string(":b"),
+                vx_core.vx_new_string("y"),
+                vx_core.vx_new_string(":a"),
+                vx_core.vx_new_string("x")
+              )
+            )
+            var iswrite : vx_core.Type_boolean = vx_core.f_boolean_write_from_map_name_value(
+              smap,
+              vx_core.vx_new_string(":b"),
+              vx_core.vx_new_string("")
+            )
+            var output_2 : vx_core.Type_any = smap
+            output_2
+          })
         )
       )
     )
@@ -1707,31 +1999,39 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test 1 (compare 3 2))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(1),
-              vx_core.f_compare(
-                vx_core.vx_new_int(3),
-                vx_core.vx_new_int(2)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test 1 (compare \"z\" \"a\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(1),
-              vx_core.f_compare(
-                vx_core.vx_new_string("z"),
-                vx_core.vx_new_string("a")
-              )
-            )
+        f_compare_testdescribe_1(context),
+        f_compare_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_compare_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test 1 (compare 3 2))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(1),
+        vx_core.f_compare(
+          vx_core.vx_new_int(3),
+          vx_core.vx_new_int(2)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_compare_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test 1 (compare \"z\" \"a\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(1),
+        vx_core.f_compare(
+          vx_core.vx_new_string("z"),
+          vx_core.vx_new_string("a")
         )
       )
     )
@@ -1747,29 +2047,37 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true  (contains \"abcde\" \"cd\"))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_contains(
-                vx_core.vx_new_string("abcde"),
-                vx_core.vx_new_string("cd")
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-false (contains \"abcde\" \"dc\"))",
-          ":testresult",
-            vx_test.f_test_false(
-              context,
-              vx_core.f_contains(
-                vx_core.vx_new_string("abcde"),
-                vx_core.vx_new_string("dc")
-              )
-            )
+        f_contains_testdescribe_1(context),
+        f_contains_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_contains_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true  (contains \"abcde\" \"cd\"))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_contains(
+          vx_core.vx_new_string("abcde"),
+          vx_core.vx_new_string("cd")
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_contains_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-false (contains \"abcde\" \"dc\"))",
+      ":testresult", vx_test.f_test_false(
+        context,
+        vx_core.f_contains(
+          vx_core.vx_new_string("abcde"),
+          vx_core.vx_new_string("dc")
         )
       )
     )
@@ -1785,65 +2093,77 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true\n (contains (stringlist \"1\" \"2\" \"3\") \"2\"))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_contains_1(
-                vx_core.f_new(
-                  vx_core.t_stringlist,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string("1"),
-                    vx_core.vx_new_string("2"),
-                    vx_core.vx_new_string("3")
-                  )
-                ),
-                vx_core.vx_new_string("2")
-              )
+        f_contains_1_testdescribe_1(context),
+        f_contains_1_testdescribe_2(context),
+        f_contains_1_testdescribe_3(context)
+      )
+    )
+    return output
+  }
+
+  fun f_contains_1_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true\n (contains (stringlist \"1\" \"2\" \"3\") \"2\"))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_contains_1(
+          vx_core.f_new(
+            vx_core.t_stringlist,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string("1"),
+              vx_core.vx_new_string("2"),
+              vx_core.vx_new_string("3")
             )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true\n (contains (intlist 1 2 3) 2))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_contains_1(
-                vx_core.f_new(
-                  vx_core.t_intlist,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_int(1),
-                    vx_core.vx_new_int(2),
-                    vx_core.vx_new_int(3)
-                  )
-                ),
-                vx_core.vx_new_int(2)
-              )
+          ),
+          vx_core.vx_new_string("2")
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_contains_1_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true\n (contains (intlist 1 2 3) 2))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_contains_1(
+          vx_core.f_new(
+            vx_core.t_intlist,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_int(1),
+              vx_core.vx_new_int(2),
+              vx_core.vx_new_int(3)
             )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-false\n (contains (list 1 \"2\" 3) 2))",
-          ":testresult",
-            vx_test.f_test_false(
-              context,
-              vx_core.f_contains_1(
-                vx_core.f_new(
-                  vx_core.t_list,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_int(1),
-                    vx_core.vx_new_string("2"),
-                    vx_core.vx_new_int(3)
-                  )
-                ),
-                vx_core.vx_new_int(2)
-              )
+          ),
+          vx_core.vx_new_int(2)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_contains_1_testdescribe_3(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-false\n (contains (list 1 \"2\" 3) 2))",
+      ":testresult", vx_test.f_test_false(
+        context,
+        vx_core.f_contains_1(
+          vx_core.f_new(
+            vx_core.t_list,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_int(1),
+              vx_core.vx_new_string("2"),
+              vx_core.vx_new_int(3)
             )
+          ),
+          vx_core.vx_new_int(2)
         )
       )
     )
@@ -1859,38 +2179,42 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n (stringmap\n  :a \"1\"\n  :b \"2\")\n (copy\n  (stringmap :a \"1\")\n  :b \"2\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.f_new(
-                vx_core.t_stringmap,
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_string(":a"),
-                  vx_core.vx_new_string("1"),
-                  vx_core.vx_new_string(":b"),
-                  vx_core.vx_new_string("2")
-                )
-              ),
-              vx_core.f_copy(
-                vx_core.f_new(
-                  vx_core.t_stringmap,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string(":a"),
-                    vx_core.vx_new_string("1")
-                  )
-                ),
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_string(":b"),
-                  vx_core.vx_new_string("2")
-                )
-              )
+        f_copy_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_copy_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n (stringmap\n  :a \"1\"\n  :b \"2\")\n (copy\n  (stringmap :a \"1\")\n  :b \"2\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.f_new(
+          vx_core.t_stringmap,
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_string(":a"),
+            vx_core.vx_new_string("1"),
+            vx_core.vx_new_string(":b"),
+            vx_core.vx_new_string("2")
+          )
+        ),
+        vx_core.f_copy(
+          vx_core.f_new(
+            vx_core.t_stringmap,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string(":a"),
+              vx_core.vx_new_string("1")
             )
+          ),
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_string(":b"),
+            vx_core.vx_new_string("2")
+          )
         )
       )
     )
@@ -1906,57 +2230,73 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test false  (empty boolean))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_boolean(false),
-              vx_core.f_empty(
-                vx_core.t_boolean
-              )
-            )
+        f_empty_testdescribe_1(context),
+        f_empty_testdescribe_2(context),
+        f_empty_testdescribe_3(context),
+        f_empty_testdescribe_4(context)
+      )
+    )
+    return output
+  }
+
+  fun f_empty_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test false  (empty boolean))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_boolean(false),
+        vx_core.f_empty(
+          vx_core.t_boolean
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_empty_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test \"\"     (empty string))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string(""),
+        vx_core.f_empty(
+          vx_core.t_string
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_empty_testdescribe_3(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test (list) (empty list))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.f_empty(
+          vx_core.t_list
         ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test \"\"     (empty string))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string(""),
-              vx_core.f_empty(
-                vx_core.t_string
-              )
-            )
+        vx_core.f_empty(
+          vx_core.t_list
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_empty_testdescribe_4(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test (map)  (empty map))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.f_empty(
+          vx_core.t_map
         ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test (list) (empty list))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.f_empty(
-                vx_core.t_list
-              ),
-              vx_core.f_empty(
-                vx_core.t_list
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test (map)  (empty map))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.f_empty(
-                vx_core.t_map
-              ),
-              vx_core.f_empty(
-                vx_core.t_map
-              )
-            )
+        vx_core.f_empty(
+          vx_core.t_map
         )
       )
     )
@@ -1972,25 +2312,29 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"b\"\n (first<-list\n  (stringlist\n   \"b\"\n   \"c\")))",
-          ":testresult",
-            vx_test.f_test(
-              context,
+        f_first_from_list_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_first_from_list_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"b\"\n (first<-list\n  (stringlist\n   \"b\"\n   \"c\")))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("b"),
+        vx_core.f_first_from_list(
+          vx_core.t_string,
+          vx_core.f_new(
+            vx_core.t_stringlist,
+            vx_core.vx_new(
+              vx_core.t_anylist,
               vx_core.vx_new_string("b"),
-              vx_core.f_first_from_list(
-                vx_core.t_string,
-                vx_core.f_new(
-                  vx_core.t_stringlist,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string("b"),
-                    vx_core.vx_new_string("c")
-                  )
-                )
-              )
+              vx_core.vx_new_string("c")
             )
+          )
         )
       )
     )
@@ -2006,27 +2350,31 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"b\"\n (first<-list-any<-any : string\n  (list nothing \"b\" \"c\")\n  resolve))",
-          ":testresult",
-            vx_test.f_test(
-              context,
+        f_first_from_list_any_from_any_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_first_from_list_any_from_any_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"b\"\n (first<-list-any<-any : string\n  (list nothing \"b\" \"c\")\n  resolve))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("b"),
+        vx_core.f_first_from_list_any_from_any(
+          vx_core.t_string,
+          vx_core.f_new(
+            vx_core.t_list,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.c_nothing,
               vx_core.vx_new_string("b"),
-              vx_core.f_first_from_list_any_from_any(
-                vx_core.t_string,
-                vx_core.f_new(
-                  vx_core.t_list,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.c_nothing,
-                    vx_core.vx_new_string("b"),
-                    vx_core.vx_new_string("c")
-                  )
-                ),
-                vx_core.t_resolve
-              )
+              vx_core.vx_new_string("c")
             )
+          ),
+          vx_core.t_resolve
         )
       )
     )
@@ -2042,23 +2390,27 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n (float 2.3)\n (float<-string\n  \"2.3\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.f_new(
-                vx_core.t_float,
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_decimal("2.3")
-                )
-              ),
-              vx_core.f_float_from_string(
-                vx_core.vx_new_string("2.3")
-              )
-            )
+        f_float_from_string_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_float_from_string_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n (float 2.3)\n (float<-string\n  \"2.3\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.f_new(
+          vx_core.t_float,
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_decimal("2.3")
+          )
+        ),
+        vx_core.f_float_from_string(
+          vx_core.vx_new_string("2.3")
         )
       )
     )
@@ -2074,39 +2426,47 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"a\"\n (if (= 2 2) \"a\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("a"),
-              vx_core.f_if(
-                vx_core.t_string,
-                vx_core.f_eq(
-                  vx_core.vx_new_int(2),
-                  vx_core.vx_new_int(2)
-                ),
-                vx_core.vx_new_string("a")
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"\"\n (if : string\n  (= 1 2)\n  \"a\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string(""),
-              vx_core.f_if(
-                vx_core.t_string,
-                vx_core.f_eq(
-                  vx_core.vx_new_int(1),
-                  vx_core.vx_new_int(2)
-                ),
-                vx_core.vx_new_string("a")
-              )
-            )
+        f_if_testdescribe_1(context),
+        f_if_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_if_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"a\"\n (if (= 2 2) \"a\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("a"),
+        vx_core.f_if(
+          vx_core.t_string,
+          vx_core.f_eq(
+            vx_core.vx_new_int(2),
+            vx_core.vx_new_int(2)
+          ),
+          vx_core.vx_new_string("a")
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_if_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"\"\n (if : string\n  (= 1 2)\n  \"a\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string(""),
+        vx_core.f_if(
+          vx_core.t_string,
+          vx_core.f_eq(
+            vx_core.vx_new_int(1),
+            vx_core.vx_new_int(2)
+          ),
+          vx_core.vx_new_string("a")
         )
       )
     )
@@ -2122,41 +2482,49 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"a\"\n (if\n  (= 2 2)\n  \"a\"\n  \"b\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("a"),
-              vx_core.f_if_1(
-                vx_core.t_string,
-                vx_core.f_eq(
-                  vx_core.vx_new_int(2),
-                  vx_core.vx_new_int(2)
-                ),
-                vx_core.vx_new_string("a"),
-                vx_core.vx_new_string("b")
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"b\"\n (if\n  (= 1 2)\n  \"a\"\n  \"b\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("b"),
-              vx_core.f_if_1(
-                vx_core.t_string,
-                vx_core.f_eq(
-                  vx_core.vx_new_int(1),
-                  vx_core.vx_new_int(2)
-                ),
-                vx_core.vx_new_string("a"),
-                vx_core.vx_new_string("b")
-              )
-            )
+        f_if_1_testdescribe_1(context),
+        f_if_1_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_if_1_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"a\"\n (if\n  (= 2 2)\n  \"a\"\n  \"b\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("a"),
+        vx_core.f_if_1(
+          vx_core.t_string,
+          vx_core.f_eq(
+            vx_core.vx_new_int(2),
+            vx_core.vx_new_int(2)
+          ),
+          vx_core.vx_new_string("a"),
+          vx_core.vx_new_string("b")
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_if_1_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"b\"\n (if\n  (= 1 2)\n  \"a\"\n  \"b\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("b"),
+        vx_core.f_if_1(
+          vx_core.t_string,
+          vx_core.f_eq(
+            vx_core.vx_new_int(1),
+            vx_core.vx_new_int(2)
+          ),
+          vx_core.vx_new_string("a"),
+          vx_core.vx_new_string("b")
         )
       )
     )
@@ -2172,53 +2540,57 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true\n (if\n  (then (= 2 3) false)\n  (then (!= 3 3) false)\n  (else (! false))))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_if_2(
-                vx_core.t_any,
-                vx_core.vx_new(
-                  vx_core.t_thenelselist,
-                  vx_core.f_then(
-                    vx_core.t_boolean_from_func.vx_fn_new({ ->
-                      var output_1 : vx_core.Type_any = vx_core.f_eq(
-                        vx_core.vx_new_int(2),
-                        vx_core.vx_new_int(3)
-                      )
-                      output_1
-                    }),
-                    vx_core.t_any_from_func.vx_fn_new({ ->
-                      var output_2 : vx_core.Type_any = vx_core.vx_new_boolean(false)
-                      output_2
-                    })
-                  ),
-                  vx_core.f_then(
-                    vx_core.t_boolean_from_func.vx_fn_new({ ->
-                      var output_3 : vx_core.Type_any = vx_core.f_ne(
-                        vx_core.vx_new_int(3),
-                        vx_core.vx_new_int(3)
-                      )
-                      output_3
-                    }),
-                    vx_core.t_any_from_func.vx_fn_new({ ->
-                      var output_4 : vx_core.Type_any = vx_core.vx_new_boolean(false)
-                      output_4
-                    })
-                  ),
-                  vx_core.f_else(
-                    vx_core.t_any_from_func.vx_fn_new({ ->
-                      var output_5 : vx_core.Type_any = vx_core.f_not(
-                        vx_core.vx_new_boolean(false)
-                      )
-                      output_5
-                    })
-                  )
+        f_if_2_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_if_2_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true\n (if\n  (then (= 2 3) false)\n  (then (!= 3 3) false)\n  (else (! false))))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_if_2(
+          vx_core.t_any,
+          vx_core.vx_new(
+            vx_core.t_thenelselist,
+            vx_core.f_then(
+              vx_core.t_boolean_from_func.vx_fn_new({ ->
+                var output_1 : vx_core.Type_any = vx_core.f_eq(
+                  vx_core.vx_new_int(2),
+                  vx_core.vx_new_int(3)
                 )
-              )
+                output_1
+              }),
+              vx_core.t_any_from_func.vx_fn_new({ ->
+                var output_2 : vx_core.Type_any = vx_core.vx_new_boolean(false)
+                output_2
+              })
+            ),
+            vx_core.f_then(
+              vx_core.t_boolean_from_func.vx_fn_new({ ->
+                var output_3 : vx_core.Type_any = vx_core.f_ne(
+                  vx_core.vx_new_int(3),
+                  vx_core.vx_new_int(3)
+                )
+                output_3
+              }),
+              vx_core.t_any_from_func.vx_fn_new({ ->
+                var output_4 : vx_core.Type_any = vx_core.vx_new_boolean(false)
+                output_4
+              })
+            ),
+            vx_core.f_else(
+              vx_core.t_any_from_func.vx_fn_new({ ->
+                var output_5 : vx_core.Type_any = vx_core.f_not(
+                  vx_core.vx_new_boolean(false)
+                )
+                output_5
+              })
             )
+          )
         )
       )
     )
@@ -2234,77 +2606,101 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test 4 (int<-string \"4\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(4),
-              vx_core.f_int_from_string(
-                vx_core.vx_new_string("4")
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test 5 (int<-string \"5.4\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(5),
-              vx_core.f_int_from_string(
-                vx_core.vx_new_string("5.4")
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test 5 (int<-string \"5.9\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(5),
-              vx_core.f_int_from_string(
-                vx_core.vx_new_string("5.9")
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test notanumber  (int<-string \"notanumber\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.c_notanumber,
-              vx_core.f_int_from_string(
-                vx_core.vx_new_string("notanumber")
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test infinity    (int<-string \"infinity\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.c_infinity,
-              vx_core.f_int_from_string(
-                vx_core.vx_new_string("infinity")
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test neginfinity (int<-string \"neginfinity\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.c_neginfinity,
-              vx_core.f_int_from_string(
-                vx_core.vx_new_string("neginfinity")
-              )
-            )
+        f_int_from_string_testdescribe_1(context),
+        f_int_from_string_testdescribe_2(context),
+        f_int_from_string_testdescribe_3(context),
+        f_int_from_string_testdescribe_4(context),
+        f_int_from_string_testdescribe_5(context),
+        f_int_from_string_testdescribe_6(context)
+      )
+    )
+    return output
+  }
+
+  fun f_int_from_string_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test 4 (int<-string \"4\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(4),
+        vx_core.f_int_from_string(
+          vx_core.vx_new_string("4")
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_int_from_string_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test 5 (int<-string \"5.4\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(5),
+        vx_core.f_int_from_string(
+          vx_core.vx_new_string("5.4")
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_int_from_string_testdescribe_3(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test 5 (int<-string \"5.9\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(5),
+        vx_core.f_int_from_string(
+          vx_core.vx_new_string("5.9")
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_int_from_string_testdescribe_4(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test notanumber  (int<-string \"notanumber\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.c_notanumber,
+        vx_core.f_int_from_string(
+          vx_core.vx_new_string("notanumber")
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_int_from_string_testdescribe_5(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test infinity    (int<-string \"infinity\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.c_infinity,
+        vx_core.f_int_from_string(
+          vx_core.vx_new_string("infinity")
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_int_from_string_testdescribe_6(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test neginfinity (int<-string \"neginfinity\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.c_neginfinity,
+        vx_core.f_int_from_string(
+          vx_core.vx_new_string("neginfinity")
         )
       )
     )
@@ -2320,53 +2716,69 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true (is-empty false))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_is_empty_1(
-                vx_core.vx_new_boolean(false)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true (is-empty \"\"))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_is_empty(
-                vx_core.vx_new_string("")
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true (is-empty (list)))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_is_empty_1(
-                vx_core.f_empty(
-                  vx_core.t_list
-                )
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true (is-empty (map)))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_is_empty_1(
-                vx_core.f_empty(
-                  vx_core.t_map
-                )
-              )
-            )
+        f_is_empty_1_testdescribe_1(context),
+        f_is_empty_1_testdescribe_2(context),
+        f_is_empty_1_testdescribe_3(context),
+        f_is_empty_1_testdescribe_4(context)
+      )
+    )
+    return output
+  }
+
+  fun f_is_empty_1_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true (is-empty false))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_is_empty_1(
+          vx_core.vx_new_boolean(false)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_is_empty_1_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true (is-empty \"\"))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_is_empty(
+          vx_core.vx_new_string("")
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_is_empty_1_testdescribe_3(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true (is-empty (list)))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_is_empty_1(
+          vx_core.f_empty(
+            vx_core.t_list
+          )
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_is_empty_1_testdescribe_4(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true (is-empty (map)))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_is_empty_1(
+          vx_core.f_empty(
+            vx_core.t_map
+          )
         )
       )
     )
@@ -2382,49 +2794,65 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true\n (is-int 2))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_is_int(
-                vx_core.vx_new_int(2)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true\n (is-int \"2\"))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_is_int(
-                vx_core.vx_new_string("2")
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true\n (is-int infinity))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_is_int(
-                vx_core.c_infinity
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true\n (is-int \"infinity\"))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_is_int(
-                vx_core.vx_new_string("infinity")
-              )
-            )
+        f_is_int_testdescribe_1(context),
+        f_is_int_testdescribe_2(context),
+        f_is_int_testdescribe_3(context),
+        f_is_int_testdescribe_4(context)
+      )
+    )
+    return output
+  }
+
+  fun f_is_int_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true\n (is-int 2))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_is_int(
+          vx_core.vx_new_int(2)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_is_int_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true\n (is-int \"2\"))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_is_int(
+          vx_core.vx_new_string("2")
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_is_int_testdescribe_3(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true\n (is-int infinity))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_is_int(
+          vx_core.c_infinity
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_is_int_testdescribe_4(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true\n (is-int \"infinity\"))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_is_int(
+          vx_core.vx_new_string("infinity")
         )
       )
     )
@@ -2440,38 +2868,50 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true  (is-number 5))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_is_number(
-                vx_core.vx_new_int(5)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true  (is-number 5.5))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_is_number(
-                vx_core.vx_new_decimal("5.5")
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-false (is-number \"a\"))",
-          ":testresult",
-            vx_test.f_test_false(
-              context,
-              vx_core.f_is_number(
-                vx_core.vx_new_string("a")
-              )
-            )
+        f_is_number_testdescribe_1(context),
+        f_is_number_testdescribe_2(context),
+        f_is_number_testdescribe_3(context)
+      )
+    )
+    return output
+  }
+
+  fun f_is_number_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true  (is-number 5))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_is_number(
+          vx_core.vx_new_int(5)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_is_number_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true  (is-number 5.5))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_is_number(
+          vx_core.vx_new_decimal("5.5")
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_is_number_testdescribe_3(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-false (is-number \"a\"))",
+      ":testresult", vx_test.f_test_false(
+        context,
+        vx_core.f_is_number(
+          vx_core.vx_new_string("a")
         )
       )
     )
@@ -2487,25 +2927,29 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"c\"\n (last<-list\n  (stringlist\n   \"b\"\n   \"c\")))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("c"),
-              vx_core.f_last_from_list(
-                vx_core.t_string,
-                vx_core.f_new(
-                  vx_core.t_stringlist,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string("b"),
-                    vx_core.vx_new_string("c")
-                  )
-                )
-              )
+        f_last_from_list_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_last_from_list_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"c\"\n (last<-list\n  (stringlist\n   \"b\"\n   \"c\")))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("c"),
+        vx_core.f_last_from_list(
+          vx_core.t_string,
+          vx_core.f_new(
+            vx_core.t_stringlist,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string("b"),
+              vx_core.vx_new_string("c")
             )
+          )
         )
       )
     )
@@ -2521,29 +2965,37 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n 4\n (length \"abcd\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(4),
-              vx_core.f_length(
-                vx_core.vx_new_string("abcd")
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n 0\n (length \"\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(0),
-              vx_core.f_length(
-                vx_core.vx_new_string("")
-              )
-            )
+        f_length_testdescribe_1(context),
+        f_length_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_length_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n 4\n (length \"abcd\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(4),
+        vx_core.f_length(
+          vx_core.vx_new_string("abcd")
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_length_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n 0\n (length \"\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(0),
+        vx_core.f_length(
+          vx_core.vx_new_string("")
         )
       )
     )
@@ -2559,25 +3011,29 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n 3\n (length\n  (stringlist \"a\" \"b\" \"c\")))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(3),
-              vx_core.f_length_1(
-                vx_core.f_new(
-                  vx_core.t_stringlist,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string("a"),
-                    vx_core.vx_new_string("b"),
-                    vx_core.vx_new_string("c")
-                  )
-                )
-              )
+        f_length_1_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_length_1_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n 3\n (length\n  (stringlist \"a\" \"b\" \"c\")))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(3),
+        vx_core.f_length_1(
+          vx_core.f_new(
+            vx_core.t_stringlist,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string("a"),
+              vx_core.vx_new_string("b"),
+              vx_core.vx_new_string("c")
             )
+          )
         )
       )
     )
@@ -2593,29 +3049,33 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n 7\n (let\n  [v1 : int := 2\n   v2 : int := (+ v1 3)]\n  (+ v1 v2)))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(7),
-              vx_core.f_let(
-                vx_core.t_int,
-                vx_core.t_any_from_func.vx_fn_new({ ->
-                  var v1 : vx_core.Type_int = vx_core.vx_new_int(2)
-                  var v2 : vx_core.Type_int = vx_core.f_plus(
-                    v1,
-                    vx_core.vx_new_int(3)
-                  )
-                  var output_1 : vx_core.Type_any = vx_core.f_plus(
-                    v1,
-                    v2
-                  )
-                  output_1
-                })
-              )
+        f_let_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_let_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n 7\n (let\n  [v1 : int := 2\n   v2 : int := (+ v1 3)]\n  (+ v1 v2)))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(7),
+        vx_core.f_let(
+          vx_core.t_int,
+          vx_core.t_any_from_func.vx_fn_new({ ->
+            var v1 : vx_core.Type_int = vx_core.vx_new_int(2)
+            var v2 : vx_core.Type_int = vx_core.f_plus(
+              v1,
+              vx_core.vx_new_int(3)
             )
+            var output_1 : vx_core.Type_any = vx_core.f_plus(
+              v1,
+              v2
+            )
+            output_1
+          })
         )
       )
     )
@@ -2631,48 +3091,52 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n (stringlist \"a\" \"b\" \"c\" \"d\")\n (list-join<-list : stringlist\n  (stringlistlist\n   (stringlist \"a\" \"b\")\n   (stringlist \"c\" \"d\"))))",
-          ":testresult",
-            vx_test.f_test(
-              context,
+        f_list_join_from_list_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_list_join_from_list_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n (stringlist \"a\" \"b\" \"c\" \"d\")\n (list-join<-list : stringlist\n  (stringlistlist\n   (stringlist \"a\" \"b\")\n   (stringlist \"c\" \"d\"))))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.f_new(
+          vx_core.t_stringlist,
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_string("a"),
+            vx_core.vx_new_string("b"),
+            vx_core.vx_new_string("c"),
+            vx_core.vx_new_string("d")
+          )
+        ),
+        vx_core.f_list_join_from_list(
+          vx_core.t_stringlist,
+          vx_core.f_new(
+            vx_core.t_stringlistlist,
+            vx_core.vx_new(
+              vx_core.t_anylist,
               vx_core.f_new(
                 vx_core.t_stringlist,
                 vx_core.vx_new(
                   vx_core.t_anylist,
                   vx_core.vx_new_string("a"),
-                  vx_core.vx_new_string("b"),
+                  vx_core.vx_new_string("b")
+                )
+              ),
+              vx_core.f_new(
+                vx_core.t_stringlist,
+                vx_core.vx_new(
+                  vx_core.t_anylist,
                   vx_core.vx_new_string("c"),
                   vx_core.vx_new_string("d")
                 )
-              ),
-              vx_core.f_list_join_from_list(
-                vx_core.t_stringlist,
-                vx_core.f_new(
-                  vx_core.t_stringlistlist,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.f_new(
-                      vx_core.t_stringlist,
-                      vx_core.vx_new(
-                        vx_core.t_anylist,
-                        vx_core.vx_new_string("a"),
-                        vx_core.vx_new_string("b")
-                      )
-                    ),
-                    vx_core.f_new(
-                      vx_core.t_stringlist,
-                      vx_core.vx_new(
-                        vx_core.t_anylist,
-                        vx_core.vx_new_string("c"),
-                        vx_core.vx_new_string("d")
-                      )
-                    )
-                  )
-                )
               )
             )
+          )
         )
       )
     )
@@ -2688,53 +3152,57 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n (stringlist \"a\" \"b\" \"c\" \"d\")\n (list-join<-list : stringlist\n  (stringlistlist\n   (stringlist \"a\" \"b\")\n   (stringlist \"c\" \"d\"))\n  (fn : stringlist\n   [values : stringlist]\n   values)))",
-          ":testresult",
-            vx_test.f_test(
-              context,
+        f_list_join_from_list_1_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_list_join_from_list_1_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n (stringlist \"a\" \"b\" \"c\" \"d\")\n (list-join<-list : stringlist\n  (stringlistlist\n   (stringlist \"a\" \"b\")\n   (stringlist \"c\" \"d\"))\n  (fn : stringlist\n   [values : stringlist]\n   values)))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.f_new(
+          vx_core.t_stringlist,
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_string("a"),
+            vx_core.vx_new_string("b"),
+            vx_core.vx_new_string("c"),
+            vx_core.vx_new_string("d")
+          )
+        ),
+        vx_core.f_list_join_from_list_1(
+          vx_core.t_stringlist,
+          vx_core.f_new(
+            vx_core.t_stringlistlist,
+            vx_core.vx_new(
+              vx_core.t_anylist,
               vx_core.f_new(
                 vx_core.t_stringlist,
                 vx_core.vx_new(
                   vx_core.t_anylist,
                   vx_core.vx_new_string("a"),
-                  vx_core.vx_new_string("b"),
+                  vx_core.vx_new_string("b")
+                )
+              ),
+              vx_core.f_new(
+                vx_core.t_stringlist,
+                vx_core.vx_new(
+                  vx_core.t_anylist,
                   vx_core.vx_new_string("c"),
                   vx_core.vx_new_string("d")
                 )
-              ),
-              vx_core.f_list_join_from_list_1(
-                vx_core.t_stringlist,
-                vx_core.f_new(
-                  vx_core.t_stringlistlist,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.f_new(
-                      vx_core.t_stringlist,
-                      vx_core.vx_new(
-                        vx_core.t_anylist,
-                        vx_core.vx_new_string("a"),
-                        vx_core.vx_new_string("b")
-                      )
-                    ),
-                    vx_core.f_new(
-                      vx_core.t_stringlist,
-                      vx_core.vx_new(
-                        vx_core.t_anylist,
-                        vx_core.vx_new_string("c"),
-                        vx_core.vx_new_string("d")
-                      )
-                    )
-                  )
-                ),
-                vx_core.t_any_from_any.vx_fn_new({values_any : vx_core.Type_any ->
-                  var values : vx_core.Type_stringlist = vx_core.f_any_from_any(vx_core.t_stringlist, values_any)
-                  var output_1 : vx_core.Type_any = values
-                  output_1
-                })
               )
             )
+          ),
+          vx_core.t_any_from_any.vx_fn_new({values_any : vx_core.Type_any ->
+            var values : vx_core.Type_stringlist = vx_core.f_any_from_any(vx_core.t_stringlist, values_any)
+            var output_1 : vx_core.Type_any = values
+            output_1
+          })
         )
       )
     )
@@ -2750,32 +3218,36 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n (stringlist \"10\" \"20\")\n (list<-list : stringlist\n  (anylist \"10\" \"20\")))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.f_new(
-                vx_core.t_stringlist,
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_string("10"),
-                  vx_core.vx_new_string("20")
-                )
-              ),
-              vx_core.f_list_from_list(
-                vx_core.t_stringlist,
-                vx_core.f_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string("10"),
-                    vx_core.vx_new_string("20")
-                  )
-                )
-              )
+        f_list_from_list_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_list_from_list_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n (stringlist \"10\" \"20\")\n (list<-list : stringlist\n  (anylist \"10\" \"20\")))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.f_new(
+          vx_core.t_stringlist,
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_string("10"),
+            vx_core.vx_new_string("20")
+          )
+        ),
+        vx_core.f_list_from_list(
+          vx_core.t_stringlist,
+          vx_core.f_new(
+            vx_core.t_anylist,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string("10"),
+              vx_core.vx_new_string("20")
             )
+          )
         )
       )
     )
@@ -2791,45 +3263,49 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n (stringlist \"a1\" \"b2\")\n (list<-list-intany : stringlist\n  (stringlist \"a\" \"b\")\n  (fn : stringlist\n   [index : int\n    value : string]\n   (string value index))))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.f_new(
-                vx_core.t_stringlist,
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_string("a1"),
-                  vx_core.vx_new_string("b2")
-                )
-              ),
-              vx_core.f_list_from_list_intany(
-                vx_core.t_stringlist,
-                vx_core.f_new(
-                  vx_core.t_stringlist,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string("a"),
-                    vx_core.vx_new_string("b")
-                  )
-                ),
-                vx_core.t_any_from_int_any.vx_fn_new({index_any : vx_core.Type_any, value_any : vx_core.Type_any ->
-                  var index : vx_core.Type_int = vx_core.f_any_from_any(vx_core.t_int, index_any)
-                  var value : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, value_any)
-                  var output_1 : vx_core.Type_any = vx_core.f_new(
-                    vx_core.t_string,
-                    vx_core.vx_new(
-                      vx_core.t_anylist,
-                      value,
-                      index
-                    )
-                  )
-                  output_1
-                })
+        f_list_from_list_intany_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_list_from_list_intany_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n (stringlist \"a1\" \"b2\")\n (list<-list-intany : stringlist\n  (stringlist \"a\" \"b\")\n  (fn : stringlist\n   [index : int\n    value : string]\n   (string value index))))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.f_new(
+          vx_core.t_stringlist,
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_string("a1"),
+            vx_core.vx_new_string("b2")
+          )
+        ),
+        vx_core.f_list_from_list_intany(
+          vx_core.t_stringlist,
+          vx_core.f_new(
+            vx_core.t_stringlist,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string("a"),
+              vx_core.vx_new_string("b")
+            )
+          ),
+          vx_core.t_any_from_int_any.vx_fn_new({index_any : vx_core.Type_any, value_any : vx_core.Type_any ->
+            var index : vx_core.Type_int = vx_core.f_any_from_any(vx_core.t_int, index_any)
+            var value : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, value_any)
+            var output_1 : vx_core.Type_any = vx_core.f_new(
+              vx_core.t_string,
+              vx_core.vx_new(
+                vx_core.t_anylist,
+                value,
+                index
               )
             )
+            output_1
+          })
         )
       )
     )
@@ -2845,34 +3321,38 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n (stringlist \"a1\" \"b2\")\n (list<-map : stringlist\n  (stringmap\n   :x \"a1\"\n   :y \"b2\")))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.f_new(
-                vx_core.t_stringlist,
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_string("a1"),
-                  vx_core.vx_new_string("b2")
-                )
-              ),
-              vx_core.f_list_from_map(
-                vx_core.t_stringlist,
-                vx_core.f_new(
-                  vx_core.t_stringmap,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string(":x"),
-                    vx_core.vx_new_string("a1"),
-                    vx_core.vx_new_string(":y"),
-                    vx_core.vx_new_string("b2")
-                  )
-                )
-              )
+        f_list_from_map_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_list_from_map_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n (stringlist \"a1\" \"b2\")\n (list<-map : stringlist\n  (stringmap\n   :x \"a1\"\n   :y \"b2\")))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.f_new(
+          vx_core.t_stringlist,
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_string("a1"),
+            vx_core.vx_new_string("b2")
+          )
+        ),
+        vx_core.f_list_from_map(
+          vx_core.t_stringlist,
+          vx_core.f_new(
+            vx_core.t_stringmap,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string(":x"),
+              vx_core.vx_new_string("a1"),
+              vx_core.vx_new_string(":y"),
+              vx_core.vx_new_string("b2")
             )
+          )
         )
       )
     )
@@ -2888,47 +3368,51 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n (stringlist \"a1\" \"b2\")\n (list<-map : stringlist\n  (stringmap \"a\" \"1\" \"b\" \"2\")\n  (fn : string\n   [key   : string\n    value : string]\n   (string key value))))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.f_new(
-                vx_core.t_stringlist,
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_string("a1"),
-                  vx_core.vx_new_string("b2")
-                )
-              ),
-              vx_core.f_list_from_map_1(
-                vx_core.t_stringlist,
-                vx_core.f_new(
-                  vx_core.t_stringmap,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string("a"),
-                    vx_core.vx_new_string("1"),
-                    vx_core.vx_new_string("b"),
-                    vx_core.vx_new_string("2")
-                  )
-                ),
-                vx_core.t_any_from_key_value.vx_fn_new({key_any : vx_core.Type_any, value_any : vx_core.Type_any ->
-                  var key : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, key_any)
-                  var value : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, value_any)
-                  var output_1 : vx_core.Type_any = vx_core.f_new(
-                    vx_core.t_string,
-                    vx_core.vx_new(
-                      vx_core.t_anylist,
-                      key,
-                      value
-                    )
-                  )
-                  output_1
-                })
+        f_list_from_map_1_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_list_from_map_1_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n (stringlist \"a1\" \"b2\")\n (list<-map : stringlist\n  (stringmap \"a\" \"1\" \"b\" \"2\")\n  (fn : string\n   [key   : string\n    value : string]\n   (string key value))))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.f_new(
+          vx_core.t_stringlist,
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_string("a1"),
+            vx_core.vx_new_string("b2")
+          )
+        ),
+        vx_core.f_list_from_map_1(
+          vx_core.t_stringlist,
+          vx_core.f_new(
+            vx_core.t_stringmap,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string("a"),
+              vx_core.vx_new_string("1"),
+              vx_core.vx_new_string("b"),
+              vx_core.vx_new_string("2")
+            )
+          ),
+          vx_core.t_any_from_key_value.vx_fn_new({key_any : vx_core.Type_any, value_any : vx_core.Type_any ->
+            var key : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, key_any)
+            var value : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, value_any)
+            var output_1 : vx_core.Type_any = vx_core.f_new(
+              vx_core.t_string,
+              vx_core.vx_new(
+                vx_core.t_anylist,
+                key,
+                value
               )
             )
+            output_1
+          })
         )
       )
     )
@@ -2944,46 +3428,50 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n (stringmap\n  \"keya\" \"a\"\n  \"keyb\" \"b\")\n (map<-list : stringmap\n  (stringlist \"a\" \"b\")\n  (fn : string\n   [value : string]\n   (string \"key\" value))))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.f_new(
-                vx_core.t_stringmap,
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_string("keya"),
-                  vx_core.vx_new_string("a"),
-                  vx_core.vx_new_string("keyb"),
-                  vx_core.vx_new_string("b")
-                )
-              ),
-              vx_core.f_map_from_list(
-                vx_core.t_stringmap,
-                vx_core.f_new(
-                  vx_core.t_stringlist,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string("a"),
-                    vx_core.vx_new_string("b")
-                  )
-                ),
-                vx_core.t_any_from_any.vx_fn_new({value_any : vx_core.Type_any ->
-                  var value : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, value_any)
-                  var output_1 : vx_core.Type_any = vx_core.f_new(
-                    vx_core.t_string,
-                    vx_core.vx_new(
-                      vx_core.t_anylist,
-                      vx_core.vx_new_string("key"),
-                      value
-                    )
-                  )
-                  output_1
-                })
+        f_map_from_list_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_map_from_list_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n (stringmap\n  \"keya\" \"a\"\n  \"keyb\" \"b\")\n (map<-list : stringmap\n  (stringlist \"a\" \"b\")\n  (fn : string\n   [value : string]\n   (string \"key\" value))))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.f_new(
+          vx_core.t_stringmap,
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_string("keya"),
+            vx_core.vx_new_string("a"),
+            vx_core.vx_new_string("keyb"),
+            vx_core.vx_new_string("b")
+          )
+        ),
+        vx_core.f_map_from_list(
+          vx_core.t_stringmap,
+          vx_core.f_new(
+            vx_core.t_stringlist,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string("a"),
+              vx_core.vx_new_string("b")
+            )
+          ),
+          vx_core.t_any_from_any.vx_fn_new({value_any : vx_core.Type_any ->
+            var value : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, value_any)
+            var output_1 : vx_core.Type_any = vx_core.f_new(
+              vx_core.t_string,
+              vx_core.vx_new(
+                vx_core.t_anylist,
+                vx_core.vx_new_string("key"),
+                value
               )
             )
+            output_1
+          })
         )
       )
     )
@@ -2999,32 +3487,36 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n (stringmap :a \"1\")\n (map<-map : stringmap\n  (anymap :a \"1\")))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.f_new(
-                vx_core.t_stringmap,
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_string(":a"),
-                  vx_core.vx_new_string("1")
-                )
-              ),
-              vx_core.f_map_from_map(
-                vx_core.t_stringmap,
-                vx_core.f_new(
-                  vx_core.t_anymap,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string(":a"),
-                    vx_core.vx_new_string("1")
-                  )
-                )
-              )
+        f_map_from_map_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_map_from_map_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n (stringmap :a \"1\")\n (map<-map : stringmap\n  (anymap :a \"1\")))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.f_new(
+          vx_core.t_stringmap,
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_string(":a"),
+            vx_core.vx_new_string("1")
+          )
+        ),
+        vx_core.f_map_from_map(
+          vx_core.t_stringmap,
+          vx_core.f_new(
+            vx_core.t_anymap,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string(":a"),
+              vx_core.vx_new_string("1")
             )
+          )
         )
       )
     )
@@ -3040,49 +3532,53 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n (stringmap\n  :a \"a1\"\n  :b \"b2\")\n (map<-map : stringmap\n  (stringmap\n   :a \"1\"\n   :b \"2\")\n  (fn : string\n   [key : string\n    value : string]\n   (string key value))))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.f_new(
-                vx_core.t_stringmap,
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_string(":a"),
-                  vx_core.vx_new_string("a1"),
-                  vx_core.vx_new_string(":b"),
-                  vx_core.vx_new_string("b2")
-                )
-              ),
-              vx_core.f_map_from_map_1(
-                vx_core.t_stringmap,
-                vx_core.f_new(
-                  vx_core.t_stringmap,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string(":a"),
-                    vx_core.vx_new_string("1"),
-                    vx_core.vx_new_string(":b"),
-                    vx_core.vx_new_string("2")
-                  )
-                ),
-                vx_core.t_any_from_key_value.vx_fn_new({key_any : vx_core.Type_any, value_any : vx_core.Type_any ->
-                  var key : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, key_any)
-                  var value : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, value_any)
-                  var output_1 : vx_core.Type_any = vx_core.f_new(
-                    vx_core.t_string,
-                    vx_core.vx_new(
-                      vx_core.t_anylist,
-                      key,
-                      value
-                    )
-                  )
-                  output_1
-                })
+        f_map_from_map_1_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_map_from_map_1_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n (stringmap\n  :a \"a1\"\n  :b \"b2\")\n (map<-map : stringmap\n  (stringmap\n   :a \"1\"\n   :b \"2\")\n  (fn : string\n   [key : string\n    value : string]\n   (string key value))))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.f_new(
+          vx_core.t_stringmap,
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_string(":a"),
+            vx_core.vx_new_string("a1"),
+            vx_core.vx_new_string(":b"),
+            vx_core.vx_new_string("b2")
+          )
+        ),
+        vx_core.f_map_from_map_1(
+          vx_core.t_stringmap,
+          vx_core.f_new(
+            vx_core.t_stringmap,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string(":a"),
+              vx_core.vx_new_string("1"),
+              vx_core.vx_new_string(":b"),
+              vx_core.vx_new_string("2")
+            )
+          ),
+          vx_core.t_any_from_key_value.vx_fn_new({key_any : vx_core.Type_any, value_any : vx_core.Type_any ->
+            var key : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, key_any)
+            var value : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, value_any)
+            var output_1 : vx_core.Type_any = vx_core.f_new(
+              vx_core.t_string,
+              vx_core.vx_new(
+                vx_core.t_anylist,
+                key,
+                value
               )
             )
+            output_1
+          })
         )
       )
     )
@@ -3098,123 +3594,147 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test true (new boolean true))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_boolean(true),
-              vx_core.f_new(
-                vx_core.t_boolean,
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_boolean(true)
-                )
-              )
-            )
+        f_new_testdescribe_1(context),
+        f_new_testdescribe_2(context),
+        f_new_testdescribe_3(context),
+        f_new_testdescribe_4(context),
+        f_new_testdescribe_5(context),
+        f_new_testdescribe_6(context)
+      )
+    )
+    return output
+  }
+
+  fun f_new_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test true (new boolean true))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_boolean(true),
+        vx_core.f_new(
+          vx_core.t_boolean,
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_boolean(true)
+          )
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_new_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test 4 (new int 4))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(4),
+        vx_core.f_new(
+          vx_core.t_int,
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_int(4)
+          )
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_new_testdescribe_3(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test 5.4 (new float 5.4))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_decimal("5.4"),
+        vx_core.f_new(
+          vx_core.t_float,
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_decimal("5.4")
+          )
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_new_testdescribe_4(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test \"a\" (new string \"a\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("a"),
+        vx_core.f_new(
+          vx_core.t_string,
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_string("a")
+          )
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_new_testdescribe_5(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n (stringlist \"a\" \"b\" \"c\")\n (new stringlist \"a\" \"b\" \"c\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.f_new(
+          vx_core.t_stringlist,
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_string("a"),
+            vx_core.vx_new_string("b"),
+            vx_core.vx_new_string("c")
+          )
         ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test 4 (new int 4))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(4),
-              vx_core.f_new(
-                vx_core.t_int,
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_int(4)
-                )
-              )
-            )
+        vx_core.f_new(
+          vx_core.t_stringlist,
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_string("a"),
+            vx_core.vx_new_string("b"),
+            vx_core.vx_new_string("c")
+          )
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_new_testdescribe_6(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n (stringmap :a \"1\" :b \"2\")\n (new stringmap :a \"1\" :b \"2\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.f_new(
+          vx_core.t_stringmap,
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_string(":a"),
+            vx_core.vx_new_string("1"),
+            vx_core.vx_new_string(":b"),
+            vx_core.vx_new_string("2")
+          )
         ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test 5.4 (new float 5.4))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_decimal("5.4"),
-              vx_core.f_new(
-                vx_core.t_float,
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_decimal("5.4")
-                )
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test \"a\" (new string \"a\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("a"),
-              vx_core.f_new(
-                vx_core.t_string,
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_string("a")
-                )
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n (stringlist \"a\" \"b\" \"c\")\n (new stringlist \"a\" \"b\" \"c\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.f_new(
-                vx_core.t_stringlist,
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_string("a"),
-                  vx_core.vx_new_string("b"),
-                  vx_core.vx_new_string("c")
-                )
-              ),
-              vx_core.f_new(
-                vx_core.t_stringlist,
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_string("a"),
-                  vx_core.vx_new_string("b"),
-                  vx_core.vx_new_string("c")
-                )
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n (stringmap :a \"1\" :b \"2\")\n (new stringmap :a \"1\" :b \"2\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.f_new(
-                vx_core.t_stringmap,
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_string(":a"),
-                  vx_core.vx_new_string("1"),
-                  vx_core.vx_new_string(":b"),
-                  vx_core.vx_new_string("2")
-                )
-              ),
-              vx_core.f_new(
-                vx_core.t_stringmap,
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_string(":a"),
-                  vx_core.vx_new_string("1"),
-                  vx_core.vx_new_string(":b"),
-                  vx_core.vx_new_string("2")
-                )
-              )
-            )
+        vx_core.f_new(
+          vx_core.t_stringmap,
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_string(":a"),
+            vx_core.vx_new_string("1"),
+            vx_core.vx_new_string(":b"),
+            vx_core.vx_new_string("2")
+          )
         )
       )
     )
@@ -3230,41 +3750,53 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true (or true true))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_or(
-                vx_core.vx_new_boolean(true),
-                vx_core.vx_new_boolean(true)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true (or true false))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_or(
-                vx_core.vx_new_boolean(true),
-                vx_core.vx_new_boolean(false)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-false (or false false))",
-          ":testresult",
-            vx_test.f_test_false(
-              context,
-              vx_core.f_or(
-                vx_core.vx_new_boolean(false),
-                vx_core.vx_new_boolean(false)
-              )
-            )
+        f_or_testdescribe_1(context),
+        f_or_testdescribe_2(context),
+        f_or_testdescribe_3(context)
+      )
+    )
+    return output
+  }
+
+  fun f_or_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true (or true true))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_or(
+          vx_core.vx_new_boolean(true),
+          vx_core.vx_new_boolean(true)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_or_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true (or true false))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_or(
+          vx_core.vx_new_boolean(true),
+          vx_core.vx_new_boolean(false)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_or_testdescribe_3(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-false (or false false))",
+      ":testresult", vx_test.f_test_false(
+        context,
+        vx_core.f_or(
+          vx_core.vx_new_boolean(false),
+          vx_core.vx_new_boolean(false)
         )
       )
     )
@@ -3280,37 +3812,45 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true (or false true false))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_core.f_or_1(
-                vx_core.vx_new(
-                  vx_core.t_booleanlist,
-                  vx_core.vx_new_boolean(false),
-                  vx_core.vx_new_boolean(true),
-                  vx_core.vx_new_boolean(false)
-                )
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-false (or false false false))",
-          ":testresult",
-            vx_test.f_test_false(
-              context,
-              vx_core.f_or_1(
-                vx_core.vx_new(
-                  vx_core.t_booleanlist,
-                  vx_core.vx_new_boolean(false),
-                  vx_core.vx_new_boolean(false),
-                  vx_core.vx_new_boolean(false)
-                )
-              )
-            )
+        f_or_1_testdescribe_1(context),
+        f_or_1_testdescribe_2(context)
+      )
+    )
+    return output
+  }
+
+  fun f_or_1_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true (or false true false))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_core.f_or_1(
+          vx_core.vx_new(
+            vx_core.t_booleanlist,
+            vx_core.vx_new_boolean(false),
+            vx_core.vx_new_boolean(true),
+            vx_core.vx_new_boolean(false)
+          )
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_or_1_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-false (or false false false))",
+      ":testresult", vx_test.f_test_false(
+        context,
+        vx_core.f_or_1(
+          vx_core.vx_new(
+            vx_core.t_booleanlist,
+            vx_core.vx_new_boolean(false),
+            vx_core.vx_new_boolean(false),
+            vx_core.vx_new_boolean(false)
+          )
         )
       )
     )
@@ -3326,18 +3866,22 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test \"a\" (resolve \"a\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("a"),
-              vx_core.f_resolve(
-                vx_core.t_string,
-                vx_core.vx_new_string("a")
-              )
-            )
+        f_resolve_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_resolve_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test \"a\" (resolve \"a\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("a"),
+        vx_core.f_resolve(
+          vx_core.t_string,
+          vx_core.vx_new_string("a")
         )
       )
     )
@@ -3353,24 +3897,28 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test 4 (resolve (fn : int [] (+ 1 3))))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(4),
-              vx_core.f_resolve_1(
-                vx_core.t_int,
-                vx_core.t_any_from_func.vx_fn_new({ ->
-                  var output_1 : vx_core.Type_any = vx_core.f_plus(
-                    vx_core.vx_new_int(1),
-                    vx_core.vx_new_int(3)
-                  )
-                  output_1
-                })
-              )
+        f_resolve_1_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_resolve_1_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test 4 (resolve (fn : int [] (+ 1 3))))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(4),
+        vx_core.f_resolve_1(
+          vx_core.t_int,
+          vx_core.t_any_from_func.vx_fn_new({ ->
+            var output_1 : vx_core.Type_any = vx_core.f_plus(
+              vx_core.vx_new_int(1),
+              vx_core.vx_new_int(3)
             )
+            output_1
+          })
         )
       )
     )
@@ -3386,24 +3934,28 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test 4 (resolve : int (fn : int [] (+ 1 3))))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(4),
-              vx_core.f_resolve_1(
-                vx_core.t_int,
-                vx_core.t_any_from_func.vx_fn_new({ ->
-                  var output_1 : vx_core.Type_any = vx_core.f_plus(
-                    vx_core.vx_new_int(1),
-                    vx_core.vx_new_int(3)
-                  )
-                  output_1
-                })
-              )
+        f_resolve_async_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_resolve_async_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test 4 (resolve : int (fn : int [] (+ 1 3))))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(4),
+        vx_core.f_resolve_1(
+          vx_core.t_int,
+          vx_core.t_any_from_func.vx_fn_new({ ->
+            var output_1 : vx_core.Type_any = vx_core.f_plus(
+              vx_core.vx_new_int(1),
+              vx_core.vx_new_int(3)
             )
+            output_1
+          })
         )
       )
     )
@@ -3419,18 +3971,22 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test \"abab\" (string-repeat \"ab\" 2))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("abab"),
-              vx_core.f_string_repeat(
-                vx_core.vx_new_string("ab"),
-                vx_core.vx_new_int(2)
-              )
-            )
+        f_string_repeat_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_string_repeat_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test \"abab\" (string-repeat \"ab\" 2))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("abab"),
+        vx_core.f_string_repeat(
+          vx_core.vx_new_string("ab"),
+          vx_core.vx_new_int(2)
         )
       )
     )
@@ -3446,94 +4002,118 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test \"true\"  (string<-any true))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("true"),
-              vx_core.f_string_from_any(
-                vx_core.vx_new_boolean(true)
-              )
+        f_string_from_any_testdescribe_1(context),
+        f_string_from_any_testdescribe_2(context),
+        f_string_from_any_testdescribe_3(context),
+        f_string_from_any_testdescribe_4(context),
+        f_string_from_any_testdescribe_5(context),
+        f_string_from_any_testdescribe_6(context)
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_any_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test \"true\"  (string<-any true))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("true"),
+        vx_core.f_string_from_any(
+          vx_core.vx_new_boolean(true)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_any_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test \"4\"     (string<-any 4))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("4"),
+        vx_core.f_string_from_any(
+          vx_core.vx_new_int(4)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_any_testdescribe_3(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test \"5.4\"   (string<-any 5.4))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("5.4"),
+        vx_core.f_string_from_any(
+          vx_core.vx_new_decimal("5.4")
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_any_testdescribe_4(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test \"\\\"a\\\"\" (string<-any \"a\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("\"a\""),
+        vx_core.f_string_from_any(
+          vx_core.vx_new_string("a")
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_any_testdescribe_5(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"(stringlist\n   \\\"a\\\"\n   \\\"b\\\"\n   \\\"c\\\")\"\n (string<-any (stringlist \"a\" \"b\" \"c\")))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("(stringlist\n \"a\"\n \"b\"\n \"c\")"),
+        vx_core.f_string_from_any(
+          vx_core.f_new(
+            vx_core.t_stringlist,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string("a"),
+              vx_core.vx_new_string("b"),
+              vx_core.vx_new_string("c")
             )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test \"4\"     (string<-any 4))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("4"),
-              vx_core.f_string_from_any(
-                vx_core.vx_new_int(4)
-              )
+          )
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_any_testdescribe_6(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"(stringmap\n   :a \\\"1\\\"\n   :b \\\"2\\\")\"\n (string<-any (stringmap :a \"1\" :b \"2\")))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("(stringmap\n :a \"1\"\n :b \"2\")"),
+        vx_core.f_string_from_any(
+          vx_core.f_new(
+            vx_core.t_stringmap,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string(":a"),
+              vx_core.vx_new_string("1"),
+              vx_core.vx_new_string(":b"),
+              vx_core.vx_new_string("2")
             )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test \"5.4\"   (string<-any 5.4))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("5.4"),
-              vx_core.f_string_from_any(
-                vx_core.vx_new_decimal("5.4")
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test \"\\\"a\\\"\" (string<-any \"a\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("\"a\""),
-              vx_core.f_string_from_any(
-                vx_core.vx_new_string("a")
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"(stringlist\n   \\\"a\\\"\n   \\\"b\\\"\n   \\\"c\\\")\"\n (string<-any (stringlist \"a\" \"b\" \"c\")))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("(stringlist\n \"a\"\n \"b\"\n \"c\")"),
-              vx_core.f_string_from_any(
-                vx_core.f_new(
-                  vx_core.t_stringlist,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string("a"),
-                    vx_core.vx_new_string("b"),
-                    vx_core.vx_new_string("c")
-                  )
-                )
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"(stringmap\n   :a \\\"1\\\"\n   :b \\\"2\\\")\"\n (string<-any (stringmap :a \"1\" :b \"2\")))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("(stringmap\n :a \"1\"\n :b \"2\")"),
-              vx_core.f_string_from_any(
-                vx_core.f_new(
-                  vx_core.t_stringmap,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string(":a"),
-                    vx_core.vx_new_string("1"),
-                    vx_core.vx_new_string(":b"),
-                    vx_core.vx_new_string("2")
-                  )
-                )
-              )
-            )
+          )
         )
       )
     )
@@ -3549,19 +4129,23 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"a!b!c\"\n (string<-string-find-replace\n  \"axybxyc\"\n  \"xy\"\n  \"!\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("a!b!c"),
-              vx_core.f_string_from_string_find_replace(
-                vx_core.vx_new_string("axybxyc"),
-                vx_core.vx_new_string("xy"),
-                vx_core.vx_new_string("!")
-              )
-            )
+        f_string_from_string_find_replace_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_string_from_string_find_replace_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"a!b!c\"\n (string<-string-find-replace\n  \"axybxyc\"\n  \"xy\"\n  \"!\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("a!b!c"),
+        vx_core.f_string_from_string_find_replace(
+          vx_core.vx_new_string("axybxyc"),
+          vx_core.vx_new_string("xy"),
+          vx_core.vx_new_string("!")
         )
       )
     )
@@ -3577,33 +4161,37 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n (stringlist \"b\" \"a\")\n (stringlist<-map\n  (intmap\n   :b 1\n   :a 2)))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.f_new(
-                vx_core.t_stringlist,
-                vx_core.vx_new(
-                  vx_core.t_anylist,
-                  vx_core.vx_new_string("b"),
-                  vx_core.vx_new_string("a")
-                )
-              ),
-              vx_core.f_stringlist_from_map(
-                vx_core.f_new(
-                  vx_core.t_intmap,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string(":b"),
-                    vx_core.vx_new_int(1),
-                    vx_core.vx_new_string(":a"),
-                    vx_core.vx_new_int(2)
-                  )
-                )
-              )
+        f_stringlist_from_map_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_stringlist_from_map_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n (stringlist \"b\" \"a\")\n (stringlist<-map\n  (intmap\n   :b 1\n   :a 2)))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.f_new(
+          vx_core.t_stringlist,
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_string("b"),
+            vx_core.vx_new_string("a")
+          )
+        ),
+        vx_core.f_stringlist_from_map(
+          vx_core.f_new(
+            vx_core.t_intmap,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string(":b"),
+              vx_core.vx_new_int(1),
+              vx_core.vx_new_string(":a"),
+              vx_core.vx_new_int(2)
             )
+          )
         )
       )
     )
@@ -3619,42 +4207,46 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test 1\n (switch : int\n  \"d\"\n  (case (list \"b\" \"c\" \"d\") 1)\n  (else 2)))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_int(1),
-              vx_core.f_switch(
-                vx_core.t_int,
-                vx_core.vx_new_string("d"),
+        f_switch_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_switch_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test 1\n (switch : int\n  \"d\"\n  (case (list \"b\" \"c\" \"d\") 1)\n  (else 2)))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_int(1),
+        vx_core.f_switch(
+          vx_core.t_int,
+          vx_core.vx_new_string("d"),
+          vx_core.vx_new(
+            vx_core.t_thenelselist,
+            vx_core.f_case(
+              vx_core.f_new(
+                vx_core.t_list,
                 vx_core.vx_new(
-                  vx_core.t_thenelselist,
-                  vx_core.f_case(
-                    vx_core.f_new(
-                      vx_core.t_list,
-                      vx_core.vx_new(
-                        vx_core.t_anylist,
-                        vx_core.vx_new_string("b"),
-                        vx_core.vx_new_string("c"),
-                        vx_core.vx_new_string("d")
-                      )
-                    ),
-                    vx_core.t_any_from_func.vx_fn_new({ ->
-                      var output_1 : vx_core.Type_any = vx_core.vx_new_int(1)
-                      output_1
-                    })
-                  ),
-                  vx_core.f_else(
-                    vx_core.t_any_from_func.vx_fn_new({ ->
-                      var output_2 : vx_core.Type_any = vx_core.vx_new_int(2)
-                      output_2
-                    })
-                  )
+                  vx_core.t_anylist,
+                  vx_core.vx_new_string("b"),
+                  vx_core.vx_new_string("c"),
+                  vx_core.vx_new_string("d")
                 )
-              )
+              ),
+              vx_core.t_any_from_func.vx_fn_new({ ->
+                var output_1 : vx_core.Type_any = vx_core.vx_new_int(1)
+                output_1
+              })
+            ),
+            vx_core.f_else(
+              vx_core.t_any_from_func.vx_fn_new({ ->
+                var output_2 : vx_core.Type_any = vx_core.vx_new_int(2)
+                output_2
+              })
             )
+          )
         )
       )
     )
@@ -3670,41 +4262,53 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n boolean\n (type<-any false))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.t_boolean,
-              vx_core.f_type_from_any(
-                vx_core.vx_new_boolean(false)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n int\n (type<-any 5))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.t_int,
-              vx_core.f_type_from_any(
-                vx_core.vx_new_int(5)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n string\n (type<-any \"a\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.t_string,
-              vx_core.f_type_from_any(
-                vx_core.vx_new_string("a")
-              )
-            )
+        f_type_from_any_testdescribe_1(context),
+        f_type_from_any_testdescribe_2(context),
+        f_type_from_any_testdescribe_3(context)
+      )
+    )
+    return output
+  }
+
+  fun f_type_from_any_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n boolean\n (type<-any false))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.t_boolean,
+        vx_core.f_type_from_any(
+          vx_core.vx_new_boolean(false)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_type_from_any_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n int\n (type<-any 5))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.t_int,
+        vx_core.f_type_from_any(
+          vx_core.vx_new_int(5)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_type_from_any_testdescribe_3(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n string\n (type<-any \"a\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.t_string,
+        vx_core.f_type_from_any(
+          vx_core.vx_new_string("a")
         )
       )
     )
@@ -3720,41 +4324,53 @@ object vx_coreTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test \"vx/core/boolean\" (typename<-any false))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("vx/core/boolean"),
-              vx_core.f_typename_from_any(
-                vx_core.vx_new_boolean(false)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test \"vx/core/int\"     (typename<-any 5))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("vx/core/int"),
-              vx_core.f_typename_from_any(
-                vx_core.vx_new_int(5)
-              )
-            )
-        ),
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test \"vx/core/string\"  (typename<-any \"a\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("vx/core/string"),
-              vx_core.f_typename_from_any(
-                vx_core.vx_new_string("a")
-              )
-            )
+        f_typename_from_any_testdescribe_1(context),
+        f_typename_from_any_testdescribe_2(context),
+        f_typename_from_any_testdescribe_3(context)
+      )
+    )
+    return output
+  }
+
+  fun f_typename_from_any_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test \"vx/core/boolean\" (typename<-any false))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("vx/core/boolean"),
+        vx_core.f_typename_from_any(
+          vx_core.vx_new_boolean(false)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_typename_from_any_testdescribe_2(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test \"vx/core/int\"     (typename<-any 5))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("vx/core/int"),
+        vx_core.f_typename_from_any(
+          vx_core.vx_new_int(5)
+        )
+      )
+    )
+    return output
+  }
+
+  fun f_typename_from_any_testdescribe_3(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test \"vx/core/string\"  (typename<-any \"a\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("vx/core/string"),
+        vx_core.f_typename_from_any(
+          vx_core.vx_new_string("a")
         )
       )
     )

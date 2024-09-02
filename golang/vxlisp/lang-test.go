@@ -230,21 +230,34 @@ func LangTestCase(
 	output := ""
 	g_ifuncdepth = 0
 	if len(testvalues) > 0 {
+		var listtestdescribe []string
 		var desctexts []string
 		for idx, testvalue := range testvalues {
 			subpath := path + "/tests" + StringFromInt(idx+1)
-			descvaluetext, msgs := LangFromValue(lang, testvalue, testpkg, fnc, 6, true, true, subpath)
+			descvaluetext, msgs := LangFromValue(lang, testvalue, testpkg, fnc, 3, true, true, subpath)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
+			testdescribename := testcasename + "_testdescribe_" + StringFromInt(idx+1)
 			desctext := "" +
-				"\n        " + LangPkgNameDot(lang, "vx/core") + "vx_new(" +
-				"\n          " + LangTypeT(lang, testdescribetype) + "," +
-				"\n          \":describename\", \"" + LangTestFromValue(lang, testvalue) + "\"," +
-				"\n          \":testresult\"," +
-				"\n            " + descvaluetext +
-				"\n        )"
-			desctexts = append(desctexts, desctext)
+				LangPkgNameDot(lang, "vx/core") + "vx_new(" +
+				"\n      " + LangTypeT(lang, testdescribetype) + "," +
+				"\n      \":describename\", \"" + LangTestFromValue(lang, testvalue) + "\"," +
+				"\n      \":testresult\", " + descvaluetext +
+				"\n    )"
+			argcontext := NewArgContext()
+			listarg := NewListArg()
+			listarg = append(listarg, argcontext)
+			fnc := NewFunc()
+			fnc.name = testdescribename
+			fnc.vxtype = testdescribetype
+			fnc.listarg = listarg
+			testdescribe := "" +
+				LangFuncHeaderStatic(lang, "", fnc, 1, 0,
+					LangVar(lang, "output", testdescribetype, 2, desctext))
+			desctexts = append(desctexts, "\n        "+testdescribename+"(context)")
+			listtestdescribe = append(listtestdescribe, testdescribe)
 		}
 		describelist := StringFromListStringJoin(desctexts, ",")
+		testdescribes := StringFromListStringJoin(listtestdescribe, "")
 		varoutput := LangPkgNameDot(lang, "vx/core") + "vx_new(" +
 			"\n      " + LangTypeT(lang, testcasetype) + "," +
 			"\n      \":passfail\", false," +
@@ -264,7 +277,8 @@ func LangTestCase(
 		fnc.listarg = listarg
 		output = "" +
 			LangFuncHeaderStatic(lang, "", fnc, 1, 0,
-				LangVar(lang, "output", testcasetype, 2, varoutput))
+				LangVar(lang, "output", testcasetype, 2, varoutput)) +
+			testdescribes
 	}
 	return output, msgblock
 }

@@ -15,25 +15,29 @@ object vx_testTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.vxlisp\"\n   :path path-test-resources)))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_data_file.f_boolean_exists_from_file(
-                vx_core.f_new(
-                  vx_data_file.t_file,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string(":name"),
-                    vx_core.vx_new_string("testsuite.vxlisp"),
-                    vx_core.vx_new_string(":path"),
-                    vx_core.c_path_test_resources
-                  )
-                )
-              )
+        f_file_test_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_file_test_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.vxlisp\"\n   :path path-test-resources)))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_data_file.f_boolean_exists_from_file(
+          vx_core.f_new(
+            vx_data_file.t_file,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string(":name"),
+              vx_core.vx_new_string("testsuite.vxlisp"),
+              vx_core.vx_new_string(":path"),
+              vx_core.c_path_test_resources
             )
+          )
         )
       )
     )
@@ -49,25 +53,29 @@ object vx_testTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.html\"\n   :path path-test-resources)))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_data_file.f_boolean_exists_from_file(
-                vx_core.f_new(
-                  vx_data_file.t_file,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string(":name"),
-                    vx_core.vx_new_string("testsuite.html"),
-                    vx_core.vx_new_string(":path"),
-                    vx_core.c_path_test_resources
-                  )
-                )
-              )
+        f_file_testhtml_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_file_testhtml_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuite.html\"\n   :path path-test-resources)))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_data_file.f_boolean_exists_from_file(
+          vx_core.f_new(
+            vx_data_file.t_file,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string(":name"),
+              vx_core.vx_new_string("testsuite.html"),
+              vx_core.vx_new_string(":path"),
+              vx_core.c_path_test_resources
             )
+          )
         )
       )
     )
@@ -83,25 +91,29 @@ object vx_testTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuitenode.vxlisp\"\n   :path path-test-resources)))",
-          ":testresult",
-            vx_test.f_test_true(
-              context,
-              vx_data_file.f_boolean_exists_from_file(
-                vx_core.f_new(
-                  vx_data_file.t_file,
-                  vx_core.vx_new(
-                    vx_core.t_anylist,
-                    vx_core.vx_new_string(":name"),
-                    vx_core.vx_new_string("testsuitenode.vxlisp"),
-                    vx_core.vx_new_string(":path"),
-                    vx_core.c_path_test_resources
-                  )
-                )
-              )
+        f_file_testnode_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_file_testnode_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test-true\n (boolean-exists<-file\n  (file\n   :name \"testsuitenode.vxlisp\"\n   :path path-test-resources)))",
+      ":testresult", vx_test.f_test_true(
+        context,
+        vx_data_file.f_boolean_exists_from_file(
+          vx_core.f_new(
+            vx_data_file.t_file,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string(":name"),
+              vx_core.vx_new_string("testsuitenode.vxlisp"),
+              vx_core.vx_new_string(":path"),
+              vx_core.c_path_test_resources
             )
+          )
         )
       )
     )

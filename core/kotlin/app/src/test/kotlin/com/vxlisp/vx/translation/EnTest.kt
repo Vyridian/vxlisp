@@ -15,18 +15,22 @@ object vx_translation_enTest {
       ":describelist",
       vx_core.vx_new(
         vx_test.t_testdescribelist,
-        vx_core.vx_new(
-          vx_test.t_testdescribe,
-          ":describename", "(test\n \"Hello\"\n (trn/translate<-translation-string\n  (translation-en)\n  \"Hello\"))",
-          ":testresult",
-            vx_test.f_test(
-              context,
-              vx_core.vx_new_string("Hello"),
-              vx_translate.f_translate_from_translation_string(
-                vx_translation_en.f_translation_en(),
-                vx_core.vx_new_string("Hello")
-              )
-            )
+        f_translation_en_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_translation_en_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n \"Hello\"\n (trn/translate<-translation-string\n  (translation-en)\n  \"Hello\"))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.vx_new_string("Hello"),
+        vx_translate.f_translate_from_translation_string(
+          vx_translation_en.f_translation_en(),
+          vx_core.vx_new_string("Hello")
         )
       )
     )

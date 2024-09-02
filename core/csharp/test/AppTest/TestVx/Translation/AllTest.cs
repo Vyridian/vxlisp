@@ -12,19 +12,23 @@ public class AllTest {
       ":describelist",
       Vx.Core.vx_new(
         Vx.Test.t_testdescribelist,
-        Vx.Core.vx_new(
-          Vx.Test.t_testdescribe,
-          ":describename", "(test\n \"Hola\"\n (trn/translate<-translationmap-name-string\n  (translationmap-all)\n  \"es\"\n  \"Hello\"))",
-          ":testresult",
-            Vx.Test.f_test(
-              context,
-              Vx.Core.vx_new_string("Hola"),
-              Vx.Translate.f_translate_from_translationmap_name_string(
-                Vx.Translation.All.f_translationmap_all(),
-                Vx.Core.vx_new_string("es"),
-                Vx.Core.vx_new_string("Hello")
-              )
-            )
+        f_translationmap_all_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_translationmap_all_testdescribe_1(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test\n \"Hola\"\n (trn/translate<-translationmap-name-string\n  (translationmap-all)\n  \"es\"\n  \"Hello\"))",
+      ":testresult", Vx.Test.f_test(
+        context,
+        Vx.Core.vx_new_string("Hola"),
+        Vx.Translate.f_translate_from_translationmap_name_string(
+          Vx.Translation.All.f_translationmap_all(),
+          Vx.Core.vx_new_string("es"),
+          Vx.Core.vx_new_string("Hello")
         )
       )
     );
