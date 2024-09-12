@@ -99,7 +99,7 @@ public class CoreTest {
   public static Vx.Test.Type_testdescribe t_float_testdescribe_1(Vx.Core.Type_context context) {
     Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
       Vx.Test.t_testdescribe,
-      ":describename", "(test 4.5 (float 4.5))",
+      ":describename", "(test\n 4.5\n (float 4.5))",
       ":testresult", Vx.Test.f_test(
         context,
         Vx.Core.vx_new_decimal("4.5"),
@@ -4473,7 +4473,7 @@ public class CoreTest {
       Vx.Test.t_testcoveragesummary,
       ":testpkg", "vx/core", 
       ":constnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 13, ":tests", 2, ":total", 15), 
-      ":docnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 90, ":tests", 232, ":total", 257), 
+      ":docnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 91, ":tests", 235, ":total", 257), 
       ":funcnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 55, ":tests", 74, ":total", 134), 
       ":bigospacenums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 1, ":total", 166), 
       ":bigotimenums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 1, ":total", 166), 

@@ -47,7 +47,10 @@
      :describelist
       (vx/test/testdescribelist
        (vx/test/testdescribe
-        :describename "(test 4.5 (float 4.5))"
+        :describename
+         "(test
+ 4.5
+ (float 4.5))"
         :testpkg "vx/core"
         :testresult
          (vx/test/testresult
@@ -2522,8 +2525,8 @@
       :total 15)
     :docnums
      (vx/test/testcoveragenums
-      :pct 90
-      :tests 232
+      :pct 91
+      :tests 235
       :total 257)
     :funcnums
      (vx/test/testcoveragenums
@@ -3781,6 +3784,7 @@ ab
       :string<-img-indent 2
       :string<-indent 0
       :string<-meta-indent 1
+      :string<-node 0
       :string<-node-indent 0
       :string<-nodelist-indent 0
       :string<-nodelist-tag-prop-indent 0
@@ -3847,29 +3851,29 @@ ab
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 41)
+      :total 42)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 41)
+      :total 42)
     :constnums
      (vx/test/testcoveragenums
       :pct 100)
     :docnums
      (vx/test/testcoveragenums
       :pct 98
-      :tests 72
-      :total 73)
+      :tests 73
+      :total 74)
     :funcnums
      (vx/test/testcoveragenums
-      :pct 17
+      :pct 16
       :tests 7
-      :total 41)
+      :total 42)
     :testpkg "vx/web/html"
     :totalnums
      (vx/test/testcoveragenums
       :pct 9
       :tests 7
-      :total 73)
+      :total 74)
     :typenums
      (vx/test/testcoveragenums
       :total 32))
@@ -3928,6 +3932,43 @@ ab
           :passfail true
           :expected 8
           :actual 8))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/collection"
+     :casename "anymap<-struct"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (anymap
+  :name \"sname\"
+  :wordmap
+   (stringmap
+    :a \"x\"))
+ (anymap<-struct
+  (translation
+   :name \"sname\"
+   :wordmap
+    (stringmap
+     :a \"x\"))))"
+        :testpkg "vx/collection"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (anymap
+            :name "sname"
+            :wordmap
+             (stringmap
+              :a "x"))
+          :actual
+           (anymap
+            :name "sname"
+            :wordmap
+             (stringmap
+              :a "x"))))))
     (vx/test/testcase
      :passfail true
      :testpkg "vx/collection"
@@ -4315,7 +4356,35 @@ ab
           :actual
            (stringmap
             :a "2"
-            :c "3"))))))
+            :c "3")))))
+    (vx/test/testcase
+     :passfail true
+     :testpkg "vx/collection"
+     :casename "map<-struct"
+     :describelist
+      (vx/test/testdescribelist
+       (vx/test/testdescribe
+        :describename
+         "(test
+ (stringmap
+  :name \"sname\")
+ (map<-struct : stringmap
+  (translation
+   :name \"sname\"
+   :wordmap
+    (stringmap
+     :a \"x\"))))"
+        :testpkg "vx/collection"
+        :testresult
+         (vx/test/testresult
+          :code ":eq"
+          :passfail true
+          :expected
+           (stringmap
+            :name "sname")
+          :actual
+           (stringmap
+            :name "sname"))))))
   :coveragedetail
    (vx/test/testcoveragedetail
     :funcmap
@@ -4325,6 +4394,7 @@ ab
       :any<-for-while-loop 1
       :any<-for-while-loop-max 0
       :any<-map-pos 0
+      :anymap<-struct 1
       :boolean-write<-map-removekey 0
       :boolean-write<-map-removekeys 0
       :int<-map-key 1
@@ -4342,35 +4412,36 @@ ab
       :map<-map-end 1
       :map<-map-keys 1
       :map<-map-start 1
-      :map<-map-start-end 1)
+      :map<-map-start-end 1
+      :map<-struct 1)
     :testpkg "vx/collection")
   :coveragesummary
    (vx/test/testcoveragesummary
     :bigospacenums
      (vx/test/testcoveragenums
-      :total 23)
+      :total 25)
     :bigotimenums
      (vx/test/testcoveragenums
-      :total 23)
+      :total 25)
     :constnums
      (vx/test/testcoveragenums
       :pct 100)
     :docnums
      (vx/test/testcoveragenums
       :pct 100
-      :tests 23
-      :total 23)
+      :tests 25
+      :total 25)
     :funcnums
      (vx/test/testcoveragenums
-      :pct 69
-      :tests 16
-      :total 23)
+      :pct 72
+      :tests 18
+      :total 25)
     :testpkg "vx/collection"
     :totalnums
      (vx/test/testcoveragenums
-      :pct 69
-      :tests 16
-      :total 23)
+      :pct 72
+      :tests 18
+      :total 25)
     :typenums
      (vx/test/testcoveragenums
       :pct 100))

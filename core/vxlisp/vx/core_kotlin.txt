@@ -1023,18 +1023,31 @@
     var output : T = vx_core.f_empty(generic_map_1)
     val mapvalue : Map<String, vx_core.Type_any> = valuemap.vx_map()
     if (mapvalue.size > 0) {
+      val typedef : vx_core.Type_typedef = vx_core.f_typedef_from_any(
+        generic_map_1
+      )
+      val allowtypes : vx_core.Type_typelist = vx_core.f_allowtypes_from_typedef(
+        typedef
+      )
+      val lallowtypes : List<vx_core.Type_any> = allowtypes.vx_list()
       val keys : Set<String> = mapvalue.keys
       val mapnew : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
       for (key : String in keys) {
         val value : vx_core.Type_any? = mapvalue.get(key)
         if (value != null) {
           val stringkey : vx_core.Type_string = vx_core.vx_new_string(key)
-          val chgvalue : vx_core.Type_any = fn_any_from_key_value.vx_any_from_key_value(vx_core.t_any, stringkey, value)
-          mapnew.put(key, chgvalue)
+          val chgvalue : vx_core.Type_any = fn_any_from_key_value.vx_any_from_key_value(
+            vx_core.t_any, stringkey, value
+          )
+          val chgtype : vx_core.Type_any = chgvalue.vx_type()
+          if (lallowtypes.contains(chgtype)) {
+            mapnew.put(key, chgvalue)
+          }
         }
       }
-      val anymap : vx_core.Type_map = generic_map_1.vx_new_from_map(mapnew)
-      output = vx_core.f_any_from_any(generic_map_1, anymap)
+      output = vx_core.vx_new_map(
+        generic_map_1, mapnew
+      )
     }
     return output;
   }
@@ -1078,6 +1091,17 @@
       work.vxint = ival
       output = work
     }
+    return output
+  }
+
+  // vx_new_map(T, Map<string, any>)
+  fun <T : vx_core.Type_map> vx_new_map(
+    generic_map_1 : T,
+    mapval : Map<String, vx_core.Type_any>) : T {
+    val anymap : vx_core.Type_any = generic_map_1.vx_new_from_map(mapval)
+    val output : T = vx_core.f_any_from_any(
+      generic_map_1, anymap
+    )
     return output
   }
 

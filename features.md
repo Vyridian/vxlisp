@@ -196,7 +196,7 @@ vxlisp also tries to reduce the number of exceptions generated in the first plac
 
 Typesafe languages have a problem with complex inheritence structures. The Deadly Diamond of Death occurs when 2 classes inherit from a common class and then another class inherits from both of them. e.g. Dog extends Animal, Cat extends Animal, Hybrid extends Dog, Cat. Java avoided this by leaning on interfaces, but this still requires a lot of planning and code.
 
-vxlisp handles the problem of multiple inheritence in a similar way to Scala traits and Java interfaces.Instead of defining a separate interface, you simply use the :traits tag to list the types you inherit. vxlisp does the heavy lifting for you.
+vxlisp handles the problem of multiple inheritence in a similar way to Scala traits and Java interfaces. Instead of defining a separate interface, you simply use the :traits tag to list the types you inherit. vxlisp does the heavy lifting for you.
 
     (type animal : struct)
 

@@ -877,16 +877,29 @@ public static class Core {
     T output = Vx.Core.f_empty(generic_map_1);
     Vx.Core.Map<string, Vx.Core.Type_any> mapvalue = valuemap.vx_map();
     if (mapvalue.size() > 0) {
+      Vx.Core.Type_typedef typedef = Vx.Core.f_typedef_from_any(
+        generic_map_1
+      );
+      Vx.Core.Type_typelist allowtypes = Vx.Core.f_allowtypes_from_typedef(
+        typedef
+      );
+      List<Vx.Core.Type_any> lallowtypes = allowtypes.vx_list();
       List<string> keys = mapvalue.keys();
       Vx.Core.Map<string, Vx.Core.Type_any> mapnew = new Vx.Core.LinkedHashMap<string, Vx.Core.Type_any>();
       foreach (string key in keys) {
         Vx.Core.Type_any value = mapvalue.get(key);
         Vx.Core.Type_string stringkey = Vx.Core.vx_new_string(key);
-        Vx.Core.Type_any chgvalue = fn_any_from_key_value.vx_any_from_key_value(Vx.Core.t_any, stringkey, value);
-        mapnew.put(key, chgvalue);
+        Vx.Core.Type_any chgvalue = fn_any_from_key_value.vx_any_from_key_value(
+          Vx.Core.t_any, stringkey, value
+        );
+        Vx.Core.Type_any chgtype = chgvalue.vx_type();
+        if (lallowtypes.Contains(chgtype)) {
+          mapnew.put(key, chgvalue);
+        }
       }
-      Vx.Core.Type_map anymap = generic_map_1.vx_new_from_map(mapnew);
-      output = Vx.Core.f_any_from_any(generic_map_1, anymap);
+      output = Vx.Core.vx_new_map(
+        generic_map_1, mapnew
+      );
     }
     return output;
   }
@@ -995,7 +1008,7 @@ public static class Core {
     T generic_map_1,
     Map<string, Vx.Core.Type_any> mapval)
     where T : Vx.Core.Type_map {
-    Vx.Core.Type_any anymap = generic_map_1.vx_new(mapval);
+    Vx.Core.Type_any anymap = generic_map_1.vx_new_from_map(mapval);
     T output = Vx.Core.f_any_from_any(generic_map_1, anymap);
     return output;
   }
@@ -9648,6 +9661,7 @@ public static class Core {
 
   /**
    * type: statelistener
+   * A listener to trigger functions on state change.
    * (type statelistener)
    */
   public interface Type_statelistener : Vx.Core.Type_struct {
@@ -10934,6 +10948,7 @@ public static class Core {
 
   /**
    * type: thenelse
+   * An object used in if and switch functions.
    * (type thenelse)
    */
   public interface Type_thenelse : Vx.Core.Type_struct {
@@ -11252,6 +11267,7 @@ public static class Core {
 
   /**
    * type: thenelselist
+   * A list of thenelse.
    * (type thenelselist)
    */
   public interface Type_thenelselist : Vx.Core.Type_list {

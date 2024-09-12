@@ -325,19 +325,20 @@
     text)
    (else
     (let : string
-     [indent  : string := (string<-string-end
-                           text
-                           (-1 pos))
-      rest    : string := (string<-string-start
-                           text
-                           pos)
-      linepos : int    := (int<-string-find
-                           indent
-                           "\n")
-      outdent : string := (if : string
-                           (= 0 linepos)
-                           ""
-                           "\n")]
+     [indent : string :=
+       (string<-string-end
+        text (-1 pos))
+      rest : string :=
+       (string<-string-start
+        text pos)
+      linepos : int :=
+       (int<-string-find
+        indent "\n")
+      outdent : string :=
+       (if : string
+        (= 0 linepos)
+        ""
+        "\n")]
      (string<-string-find-replace
       rest
       indent

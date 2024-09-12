@@ -771,6 +771,26 @@ export default class vx_web_html {
   }
 
   /**
+   * @function string_from_node
+   * Returns a string from any node
+   * @param  {generic_any_1} node
+   * @return {string}
+   */
+  static t_string_from_node = {
+    vx_type: vx_core.t_type
+  }
+  static e_string_from_node = {
+    vx_type: vx_web_html.t_string_from_node
+  }
+
+  // (func string<-node)
+  static f_string_from_node(node) {
+    let output = vx_core.e_string
+    output = vx_web_html.f_string_from_node_indent(node, 0)
+    return output
+  }
+
+  /**
    * @function string_from_node_indent
    * Returns a string from any node
    * @param  {generic_any_1} node
@@ -1864,6 +1884,7 @@ export default class vx_web_html {
       "string<-img-indent": vx_web_html.e_string_from_img_indent,
       "string<-indent": vx_web_html.e_string_from_indent,
       "string<-meta-indent": vx_web_html.e_string_from_meta_indent,
+      "string<-node": vx_web_html.e_string_from_node,
       "string<-node-indent": vx_web_html.e_string_from_node_indent,
       "string<-nodelist-indent": vx_web_html.e_string_from_nodelist_indent,
       "string<-nodelist-tag-prop-indent": vx_web_html.e_string_from_nodelist_tag_prop_indent,
@@ -1907,6 +1928,7 @@ export default class vx_web_html {
       "string<-img-indent": vx_web_html.t_string_from_img_indent,
       "string<-indent": vx_web_html.t_string_from_indent,
       "string<-meta-indent": vx_web_html.t_string_from_meta_indent,
+      "string<-node": vx_web_html.t_string_from_node,
       "string<-node-indent": vx_web_html.t_string_from_node_indent,
       "string<-nodelist-indent": vx_web_html.t_string_from_nodelist_indent,
       "string<-nodelist-tag-prop-indent": vx_web_html.t_string_from_nodelist_tag_prop_indent,
@@ -3489,6 +3511,24 @@ export default class vx_web_html {
       properties    : [],
       proplast      : {},
       fn            : vx_web_html.f_string_from_meta_indent
+    }
+
+    // (func string<-node)
+    vx_web_html.t_string_from_node['vx_value'] = {
+      name          : "string<-node",
+      pkgname       : "vx/web/html",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_web_html.f_string_from_node
     }
 
     // (func string<-node-indent)

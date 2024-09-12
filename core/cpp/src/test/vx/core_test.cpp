@@ -91,7 +91,7 @@ namespace vx_core_test {
       )
     );
     vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
-      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test 4.5 (float 4.5))"),
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n 4.5\n (float 4.5))"),
       vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/core"),
       vx_core::vx_new_string(":testresult"), testresult_1
     });
@@ -4218,8 +4218,8 @@ namespace vx_core_test {
         vx_core::vx_new_string(":total"), vx_core::vx_new_int(15)
       }),
       vx_core::vx_new_string(":docnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(90), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(232), 
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(91), 
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(235), 
         vx_core::vx_new_string(":total"), vx_core::vx_new_int(257)
       }),
       vx_core::vx_new_string(":funcnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {

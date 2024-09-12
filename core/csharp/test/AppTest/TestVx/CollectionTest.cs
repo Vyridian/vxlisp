@@ -97,6 +97,68 @@ public class CollectionTest {
     return output;
   }
 
+  public static Vx.Test.Type_testcase f_anymap_from_struct(Vx.Core.Type_context context) {
+    Vx.Test.Type_testcase output = Vx.Core.vx_new(
+      Vx.Test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/collection",
+      ":casename", "anymap<-struct",
+      ":describelist",
+      Vx.Core.vx_new(
+        Vx.Test.t_testdescribelist,
+        f_anymap_from_struct_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_anymap_from_struct_testdescribe_1(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test\n (anymap\n  :name \"sname\"\n  :wordmap\n   (stringmap\n    :a \"x\"))\n (anymap<-struct\n  (translation\n   :name \"sname\"\n   :wordmap\n    (stringmap\n     :a \"x\"))))",
+      ":testresult", Vx.Test.f_test(
+        context,
+        Vx.Core.f_new(
+          Vx.Core.t_anymap,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
+            Vx.Core.vx_new_string(":name"),
+            Vx.Core.vx_new_string("sname"),
+            Vx.Core.vx_new_string(":wordmap"),
+            Vx.Core.f_new(
+              Vx.Core.t_stringmap,
+              Vx.Core.vx_new(
+                Vx.Core.t_anylist,
+                Vx.Core.vx_new_string(":a"),
+                Vx.Core.vx_new_string("x")
+              )
+            )
+          )
+        ),
+        Vx.Collection.f_anymap_from_struct(
+          Vx.Core.f_new(
+            Vx.Core.t_translation,
+            Vx.Core.vx_new(
+              Vx.Core.t_anylist,
+              Vx.Core.vx_new_string(":name"),
+              Vx.Core.vx_new_string("sname"),
+              Vx.Core.vx_new_string(":wordmap"),
+              Vx.Core.f_new(
+                Vx.Core.t_stringmap,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
+                  Vx.Core.vx_new_string(":a"),
+                  Vx.Core.vx_new_string("x")
+                )
+              )
+            )
+          )
+        )
+      )
+    );
+    return output;
+  }
+
   public static Vx.Test.Type_testcase f_int_from_map_key(Vx.Core.Type_context context) {
     Vx.Test.Type_testcase output = Vx.Core.vx_new(
       Vx.Test.t_testcase,
@@ -789,10 +851,65 @@ public class CollectionTest {
     return output;
   }
 
+  public static Vx.Test.Type_testcase f_map_from_struct(Vx.Core.Type_context context) {
+    Vx.Test.Type_testcase output = Vx.Core.vx_new(
+      Vx.Test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/collection",
+      ":casename", "map<-struct",
+      ":describelist",
+      Vx.Core.vx_new(
+        Vx.Test.t_testdescribelist,
+        f_map_from_struct_testdescribe_1(context)
+      )
+    );
+    return output;
+  }
+
+  public static Vx.Test.Type_testdescribe f_map_from_struct_testdescribe_1(Vx.Core.Type_context context) {
+    Vx.Test.Type_testdescribe output = Vx.Core.vx_new(
+      Vx.Test.t_testdescribe,
+      ":describename", "(test\n (stringmap\n  :name \"sname\")\n (map<-struct : stringmap\n  (translation\n   :name \"sname\"\n   :wordmap\n    (stringmap\n     :a \"x\"))))",
+      ":testresult", Vx.Test.f_test(
+        context,
+        Vx.Core.f_new(
+          Vx.Core.t_stringmap,
+          Vx.Core.vx_new(
+            Vx.Core.t_anylist,
+            Vx.Core.vx_new_string(":name"),
+            Vx.Core.vx_new_string("sname")
+          )
+        ),
+        Vx.Collection.f_map_from_struct(
+          Vx.Core.t_stringmap,
+          Vx.Core.f_new(
+            Vx.Core.t_translation,
+            Vx.Core.vx_new(
+              Vx.Core.t_anylist,
+              Vx.Core.vx_new_string(":name"),
+              Vx.Core.vx_new_string("sname"),
+              Vx.Core.vx_new_string(":wordmap"),
+              Vx.Core.f_new(
+                Vx.Core.t_stringmap,
+                Vx.Core.vx_new(
+                  Vx.Core.t_anylist,
+                  Vx.Core.vx_new_string(":a"),
+                  Vx.Core.vx_new_string("x")
+                )
+              )
+            )
+          )
+        )
+      )
+    );
+    return output;
+  }
+
   public static Vx.Test.Type_testcaselist test_cases(Vx.Core.Type_context context) {
     object[] testcases = [
       CollectionTest.f_any_from_for_until_loop(context),
       CollectionTest.f_any_from_for_while_loop(context),
+      CollectionTest.f_anymap_from_struct(context),
       CollectionTest.f_int_from_map_key(context),
       CollectionTest.f_int_from_stringlist_find(context),
       CollectionTest.f_is_list(context),
@@ -806,7 +923,8 @@ public class CollectionTest {
       CollectionTest.f_map_from_map_end(context),
       CollectionTest.f_map_from_map_keys(context),
       CollectionTest.f_map_from_map_start(context),
-      CollectionTest.f_map_from_map_start_end(context)
+      CollectionTest.f_map_from_map_start_end(context),
+      CollectionTest.f_map_from_struct(context)
     ];
     Vx.Test.Type_testcaselist output = Vx.Core.vx_new(
       Vx.Test.t_testcaselist,
@@ -820,11 +938,11 @@ public class CollectionTest {
       Vx.Test.t_testcoveragesummary,
       ":testpkg", "vx/collection", 
       ":constnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      ":docnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 100, ":tests", 23, ":total", 23), 
-      ":funcnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 69, ":tests", 16, ":total", 23), 
-      ":bigospacenums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 23), 
-      ":bigotimenums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 23), 
-      ":totalnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 69, ":tests", 16, ":total", 23), 
+      ":docnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 100, ":tests", 25, ":total", 25), 
+      ":funcnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 72, ":tests", 18, ":total", 25), 
+      ":bigospacenums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 25), 
+      ":bigotimenums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 25), 
+      ":totalnums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 72, ":tests", 18, ":total", 25), 
       ":typenums", Vx.Core.vx_new(Vx.Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0)
     );
     return output;
@@ -843,6 +961,7 @@ public class CollectionTest {
         ":any<-for-while-loop", 1,
         ":any<-for-while-loop-max", 0,
         ":any<-map-pos", 0,
+        ":anymap<-struct", 1,
         ":boolean-write<-map-removekey", 0,
         ":boolean-write<-map-removekeys", 0,
         ":int<-map-key", 1,
@@ -860,7 +979,8 @@ public class CollectionTest {
         ":map<-map-end", 1,
         ":map<-map-keys", 1,
         ":map<-map-start", 1,
-        ":map<-map-start-end", 1
+        ":map<-map-start-end", 1,
+        ":map<-struct", 1
       )
     );
     return output;

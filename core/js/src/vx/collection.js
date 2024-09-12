@@ -6,7 +6,11 @@ import vx_type from "../vx/type.js"
 
 export default class vx_collection {
 
-  static vx_any_from_for_until_loop_max(generic_any_1, start, fn_until, fn_loop, max) {
+  static vx_any_from_for_until_loop_max(
+    generic_any_1,
+    start,
+    fn_until,
+    fn_loop, max) {
     let output = start
     let iscontinue = true
     let icount = 0
@@ -24,7 +28,12 @@ export default class vx_collection {
     return output
   }
 
-  static vx_any_from_for_while_loop_max(generic_any_1, start, fn_while, fn_loop, max) {
+  static vx_any_from_for_while_loop_max(
+    generic_any_1,
+    start,
+    fn_while,
+    fn_loop,
+    max) {
     let output = start
     let iscontinue = true
     let icount = 0
@@ -44,7 +53,19 @@ export default class vx_collection {
     return output
   }
 
-  static vx_list_from_for_end_loop(generic_list_1, start, end, fn_loop) {
+  // (func anymap<-struct)
+  static vx_anymap_from_struct(
+    structure) {
+    const map = structure['vx_value']
+    const output = vx_core.vx_new_map(vx_core.t_anymap, map)
+    return output
+  }
+
+  static vx_list_from_for_end_loop(
+    generic_list_1,
+    start,
+    end,
+    fn_loop) {
     let output = vx_core.vx_empty(generic_list_1)
     let listvals = []
     const fnloop = fn_loop['vx_value']
@@ -65,7 +86,11 @@ export default class vx_collection {
     return output
   }
 
-  static vx_list_from_for_while_loop_max(generic_list_1, start, fn_while, fn_loop, max) {
+  static vx_list_from_for_while_loop_max(
+    generic_list_1,
+    start,
+    fn_while,
+    fn_loop, max) {
     let output = vx_core.vx_empty(generic_list_1)
     let listvals = []
     let iscontinue = true
@@ -91,7 +116,10 @@ export default class vx_collection {
     return output
   }
 
-  static vx_list_from_list_filter(generic_list_1, vallist, fn_filter) {
+  static vx_list_from_list_filter(
+    generic_list_1,
+    vallist,
+    fn_filter) {
     let output = vx_core.vx_empty(generic_list_1)
     const fn = fn_filter['vx_value']
     if (fn) {
@@ -108,7 +136,11 @@ export default class vx_collection {
     return output
   }
 
-  static vx_list_from_list_start_end(generic_list_1, values, start, end) {
+  static vx_list_from_list_start_end(
+    generic_list_1,
+    values,
+    start,
+    end) {
     let output = vx_core.vx_empty(generic_list_1)
     const maxlen = values.length
     if (end < 0) {
@@ -130,7 +162,10 @@ export default class vx_collection {
     return output
   }
 
-  static vx_map_from_map_keys(generic_map_1, valuemap, keys) {
+  static vx_map_from_map_keys(
+    generic_map_1,
+    valuemap,
+    keys) {
     let output = vx_core.vx_empty(generic_map_1)
     if (keys.length > 0) {
       const map = valuemap['vx_value']
@@ -287,6 +322,26 @@ export default class vx_collection {
         return vx_core.f_any_from_map({"any-1": generic_any_1}, map, key)
       })
     )
+    return output
+  }
+
+  /**
+   * @function anymap_from_struct
+   * Returns anymap from all the properties in a struct.
+   * @param  {generic_struct_1} structure
+   * @return {anymap}
+   */
+  static t_anymap_from_struct = {
+    vx_type: vx_core.t_type
+  }
+  static e_anymap_from_struct = {
+    vx_type: vx_collection.t_anymap_from_struct
+  }
+
+  // (func anymap<-struct)
+  static f_anymap_from_struct(structure) {
+    let output = vx_core.e_anymap
+    output = vx_collection.vx_anymap_from_struct(structure)
     return output
   }
 
@@ -794,6 +849,35 @@ export default class vx_collection {
     return output
   }
 
+  /**
+   * @function map_from_struct
+   * Returns a typed map from all the properties in a struct.
+   * @param  {typemap} generic
+   * @param  {generic_struct_2} structure
+   * @return {map-1}
+   */
+  static t_map_from_struct = {
+    vx_type: vx_core.t_type
+  }
+  static e_map_from_struct = {
+    vx_type: vx_collection.t_map_from_struct
+  }
+
+  // (func map<-struct)
+  static f_map_from_struct(generic, structure) {
+    const generic_map_1 = generic["map-1"]
+    let output = vx_core.f_empty(generic_map_1)
+    output = vx_core.f_let(
+      {"any-1": generic_map_1, "map-1": generic_map_1, "map-2": vx_core.t_anymap},
+      [],
+      vx_core.f_new(vx_core.t_any_from_func, () => {
+        const anymap = vx_collection.f_anymap_from_struct(structure)
+        return vx_core.f_map_from_map({"map-1": generic_map_1, "map-2": vx_core.t_anymap}, anymap)
+      })
+    )
+    return output
+  }
+
 
 
   static {
@@ -806,6 +890,7 @@ export default class vx_collection {
       "any<-for-while-loop": vx_collection.e_any_from_for_while_loop,
       "any<-for-while-loop-max": vx_collection.e_any_from_for_while_loop_max,
       "any<-map-pos": vx_collection.e_any_from_map_pos,
+      "anymap<-struct": vx_collection.e_anymap_from_struct,
       "boolean-write<-map-removekey": vx_collection.e_boolean_write_from_map_removekey,
       "boolean-write<-map-removekeys": vx_collection.e_boolean_write_from_map_removekeys,
       "int<-map-key": vx_collection.e_int_from_map_key,
@@ -823,7 +908,8 @@ export default class vx_collection {
       "map<-map-end": vx_collection.e_map_from_map_end,
       "map<-map-keys": vx_collection.e_map_from_map_keys,
       "map<-map-start": vx_collection.e_map_from_map_start,
-      "map<-map-start-end": vx_collection.e_map_from_map_start_end
+      "map<-map-start-end": vx_collection.e_map_from_map_start_end,
+      "map<-struct": vx_collection.e_map_from_struct
     })
     const funcmap = vx_core.vx_new_map(vx_core.t_funcmap, {
       "any<-for-until-loop": vx_collection.t_any_from_for_until_loop,
@@ -831,6 +917,7 @@ export default class vx_collection {
       "any<-for-while-loop": vx_collection.t_any_from_for_while_loop,
       "any<-for-while-loop-max": vx_collection.t_any_from_for_while_loop_max,
       "any<-map-pos": vx_collection.t_any_from_map_pos,
+      "anymap<-struct": vx_collection.t_anymap_from_struct,
       "boolean-write<-map-removekey": vx_collection.t_boolean_write_from_map_removekey,
       "boolean-write<-map-removekeys": vx_collection.t_boolean_write_from_map_removekeys,
       "int<-map-key": vx_collection.t_int_from_map_key,
@@ -848,7 +935,8 @@ export default class vx_collection {
       "map<-map-end": vx_collection.t_map_from_map_end,
       "map<-map-keys": vx_collection.t_map_from_map_keys,
       "map<-map-start": vx_collection.t_map_from_map_start,
-      "map<-map-start-end": vx_collection.t_map_from_map_start_end
+      "map<-map-start-end": vx_collection.t_map_from_map_start_end,
+      "map<-struct": vx_collection.t_map_from_struct
     })
     const typemap = vx_core.vx_new_map(vx_core.t_typemap, {
       
@@ -950,6 +1038,24 @@ export default class vx_collection {
       properties    : [],
       proplast      : {},
       fn            : vx_collection.f_any_from_map_pos
+    }
+
+    // (func anymap<-struct)
+    vx_collection.t_anymap_from_struct['vx_value'] = {
+      name          : "anymap<-struct",
+      pkgname       : "vx/collection",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_collection.f_anymap_from_struct
     }
 
     // (func boolean-write<-map-removekey)
@@ -1274,6 +1380,24 @@ export default class vx_collection {
       properties    : [],
       proplast      : {},
       fn            : vx_collection.f_map_from_map_start_end
+    }
+
+    // (func map<-struct)
+    vx_collection.t_map_from_struct['vx_value'] = {
+      name          : "map<-struct",
+      pkgname       : "vx/collection",
+      extends       : ":func",
+      idx           : 0,
+      allowfuncs    : [],
+      disallowfuncs : [],
+      allowtypes    : [],
+      disallowtypes : [],
+      allowvalues   : [],
+      disallowvalues: [],
+      traits        : [],
+      properties    : [],
+      proplast      : {},
+      fn            : vx_collection.f_map_from_struct
     }
 
   }

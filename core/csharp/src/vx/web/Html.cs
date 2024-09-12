@@ -10112,6 +10112,105 @@ public static class Html {
   }
 
   /**
+   * @function string_from_node
+   * Returns a string from any node
+   * @param  {any-1} node
+   * @return {string}
+   * (func string<-node)
+   */
+  public interface Func_string_from_node : Vx.Core.Func_any_from_any {
+    public Vx.Core.Type_string vx_string_from_node(Vx.Core.Type_any node);
+  }
+
+  public class Class_string_from_node : Vx.Core.Class_base, Func_string_from_node {
+
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
+      Vx.Web.Html.Class_string_from_node output = new Vx.Web.Html.Class_string_from_node();
+      return output;
+    }
+
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Web.Html.Class_string_from_node output = new Vx.Web.Html.Class_string_from_node();
+      return output;
+    }
+
+    public override Vx.Core.Type_typedef vx_typedef() {
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
+    }
+
+    public Vx.Core.Type_funcdef vx_funcdef() {
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
+        "vx/web/html", // pkgname
+        "string<-node", // name
+        0, // idx
+        false, // async
+        Vx.Core.typedef_new(
+          "vx/core", // pkgname
+          "string", // name
+          ":string", // extends
+          Vx.Core.e_typelist, // traits
+          Vx.Core.e_typelist, // allowtypes
+          Vx.Core.e_typelist, // disallowtypes
+          Vx.Core.e_funclist, // allowfuncs
+          Vx.Core.e_funclist, // disallowfuncs
+          Vx.Core.e_anylist, // allowvalues
+          Vx.Core.e_anylist, // disallowvalues
+          Vx.Core.e_argmap // properties
+        ) // typedef
+      );
+      return output;
+    }
+
+    public override Vx.Core.Type_any vx_empty() {
+      Vx.Core.Type_any output = Vx.Web.Html.e_string_from_node;
+      return output;
+    }
+
+    public override Vx.Core.Type_any vx_type() {
+      Vx.Core.Type_any output = Vx.Web.Html.t_string_from_node;
+      return output;
+    }
+
+    public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
+      return Vx.Core.e_any_from_any;
+    }
+
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
+      T output = Vx.Core.f_empty(generic_any_1);
+      Vx.Core.Type_any inputval = (Vx.Core.Type_any)value;
+      Vx.Core.Type_any outputval = Vx.Web.Html.f_string_from_node(inputval);
+      output = Vx.Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
+      Vx.Core.Type_any output = Vx.Core.e_any;
+      Vx.Core.Type_any node = Vx.Core.f_any_from_any(Vx.Core.t_any, arglist.vx_any(Vx.Core.vx_new_int(0)));
+      output = Vx.Web.Html.f_string_from_node(node);
+      return output;
+    }
+
+    public Vx.Core.Type_string vx_string_from_node(Vx.Core.Type_any node) {
+      Vx.Core.Type_string output = Vx.Web.Html.f_string_from_node(node);
+      return output;
+    }
+
+  }
+
+  public static Vx.Web.Html.Func_string_from_node e_string_from_node = new Vx.Web.Html.Class_string_from_node();
+  public static Vx.Web.Html.Func_string_from_node t_string_from_node = new Vx.Web.Html.Class_string_from_node();
+
+  public static Vx.Core.Type_string f_string_from_node(Vx.Core.Type_any node) {
+    Vx.Core.Type_string output = Vx.Core.e_string;
+    output = Vx.Web.Html.f_string_from_node_indent(
+      node,
+      Vx.Core.vx_new_int(0)
+    );
+    return output;
+  }
+
+  /**
    * @function string_from_node_indent
    * Returns a string from any node
    * @param  {any-1} node
@@ -13400,6 +13499,7 @@ public static class Html {
     mapfunc.put("string<-img-indent", Vx.Web.Html.t_string_from_img_indent);
     mapfunc.put("string<-indent", Vx.Web.Html.t_string_from_indent);
     mapfunc.put("string<-meta-indent", Vx.Web.Html.t_string_from_meta_indent);
+    mapfunc.put("string<-node", Vx.Web.Html.t_string_from_node);
     mapfunc.put("string<-node-indent", Vx.Web.Html.t_string_from_node_indent);
     mapfunc.put("string<-nodelist-indent", Vx.Web.Html.t_string_from_nodelist_indent);
     mapfunc.put("string<-nodelist-tag-prop-indent", Vx.Web.Html.t_string_from_nodelist_tag_prop_indent);

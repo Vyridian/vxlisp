@@ -195,6 +195,10 @@ namespace vx_web_html {
   typedef Abstract_string_from_meta_indent* Func_string_from_meta_indent;
   extern Func_string_from_meta_indent e_string_from_meta_indent;
   extern Func_string_from_meta_indent t_string_from_meta_indent;
+  class Abstract_string_from_node;
+  typedef Abstract_string_from_node* Func_string_from_node;
+  extern Func_string_from_node e_string_from_node;
+  extern Func_string_from_node t_string_from_node;
   class Abstract_string_from_node_indent;
   typedef Abstract_string_from_node_indent* Func_string_from_node_indent;
   extern Func_string_from_node_indent e_string_from_node_indent;
@@ -420,6 +424,9 @@ namespace vx_web_html {
 
   // (func string<-meta-indent)
   vx_core::Type_string f_string_from_meta_indent(vx_web_html::Type_meta meta, vx_core::Type_int indent);
+
+  // (func string<-node)
+  vx_core::Type_string f_string_from_node(vx_core::Type_any node);
 
   // (func string<-node-indent)
   vx_core::Type_string f_string_from_node_indent(vx_core::Type_any node, vx_core::Type_int indent);
@@ -2137,6 +2144,33 @@ namespace vx_web_html {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func string<-node)
+  class Abstract_string_from_node : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_string_from_node() {};
+    virtual ~Abstract_string_from_node() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_string_from_node : public virtual Abstract_string_from_node {
+  public:
+    Class_string_from_node();
+    virtual ~Class_string_from_node() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 

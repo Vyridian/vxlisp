@@ -14,35 +14,73 @@ map<-map-start-end
 // :header
 
   // vx_any_from_for_until_loop_max(generic_any_1, start, fn-until, fn-loop, max)
-  vx_core::Type_any vx_any_from_for_until_loop_max(vx_core::Type_any generic_any_1, vx_core::Type_any start, vx_core::Func_boolean_from_any fn_until, vx_core::Func_any_from_any fn_loop, vx_core::Type_int max);
+  vx_core::Type_any vx_any_from_for_until_loop_max(
+    vx_core::Type_any generic_any_1,
+    vx_core::Type_any start,
+    vx_core::Func_boolean_from_any fn_until,
+    vx_core::Func_any_from_any fn_loop,
+    vx_core::Type_int max);
 
   // vx_any_from_for_while_loop_max(generic_any_1, start, fn-while, fn-loop, max)
-  vx_core::Type_any vx_any_from_for_while_loop_max(vx_core::Type_any generic_any_1, vx_core::Type_any start, vx_core::Func_boolean_from_any fn_while, vx_core::Func_any_from_any fn_loop, vx_core::Type_int max);
+  vx_core::Type_any vx_any_from_for_while_loop_max(
+    vx_core::Type_any generic_any_1,
+    vx_core::Type_any start,
+    vx_core::Func_boolean_from_any fn_while,
+    vx_core::Func_any_from_any fn_loop,
+    vx_core::Type_int max);
+
+  // (func anymap<-struct)
+  vx_core::Type_anymap vx_anymap_from_struct(
+    vx_core::Type_struct structure);
 
   // vx_list_from_for_end_loop(generic_list_1, start, end, fn-loop)
-  vx_core::Type_any vx_list_from_for_end_loop(vx_core::Type_any generic_list_1, vx_core::Type_int start, vx_core::Type_int end, vx_core::Func_any_from_int fn_loop);
+  vx_core::Type_any vx_list_from_for_end_loop(
+    vx_core::Type_any generic_list_1,
+    vx_core::Type_int start,
+    vx_core::Type_int end,
+    vx_core::Func_any_from_int fn_loop);
 
   // vx_list_from_for_while_loop_max(generic_list_1, start, fn-while, fn-loop, max)
-  vx_core::Type_any vx_list_from_for_while_loop_max(vx_core::Type_any generic_list_1, vx_core::Type_any start, vx_core::Func_boolean_from_any fn_while, vx_core::Func_any_from_any fn_loop, vx_core::Type_int max);
+  vx_core::Type_any vx_list_from_for_while_loop_max(
+    vx_core::Type_any generic_list_1,
+    vx_core::Type_any start,
+    vx_core::Func_boolean_from_any fn_while,
+    vx_core::Func_any_from_any fn_loop,
+    vx_core::Type_int max);
 
   // vx_list_from_list_filter(generic_list_1, list, fn-any<-any)
-  vx_core::Type_any vx_list_from_list_filter(vx_core::Type_any generic_list_1, vx_core::Type_list vallist, vx_core::Func_any_from_any fn_filter);
+  vx_core::Type_any vx_list_from_list_filter(
+    vx_core::Type_any generic_list_1,
+    vx_core::Type_list vallist,
+    vx_core::Func_any_from_any fn_filter);
 
   // vx_list_from_list_start_end(generic_list_1, list, int, int)
-  vx_core::Type_any vx_list_from_list_start_end(vx_core::Type_any generic_list_1, vx_core::Type_list values, vx_core::Type_int start, vx_core::Type_int end);
+  vx_core::Type_any vx_list_from_list_start_end(
+    vx_core::Type_any generic_list_1,
+    vx_core::Type_list values,
+    vx_core::Type_int start,
+    vx_core::Type_int end);
 
   // vx_map_from_map_keys(generic_map_1, map, stringlist)
-  vx_core::Type_any vx_map_from_map_keys(vx_core::Type_any generic_map_1, vx_core::Type_map valuemap, vx_core::Type_stringlist keys);
-	 
+  vx_core::Type_any vx_map_from_map_keys(
+    vx_core::Type_any generic_map_1,
+    vx_core::Type_map valuemap,
+    vx_core::Type_stringlist keys);
+
 // :body
 
   // vx_any_from_for_until_loop_max(generic_any_1, start, fn-until, fn-loop, max)
-  vx_core::Type_any vx_any_from_for_until_loop_max(vx_core::Type_any generic_any_1, vx_core::Type_any start, vx_core::Func_boolean_from_any fn_until, vx_core::Func_any_from_any fn_loop, vx_core::Type_int max) {
-		  vx_core::Type_any output = start;
+  vx_core::Type_any vx_any_from_for_until_loop_max(
+    vx_core::Type_any generic_any_1,
+    vx_core::Type_any start,
+    vx_core::Func_boolean_from_any fn_until,
+    vx_core::Func_any_from_any fn_loop,
+    vx_core::Type_int max) {
+    vx_core::Type_any output = start;
     bool iscontinue = true;
     int icount = 0;
     int imax = max->vx_int();
-		  vx_core::Type_any current = start;
+    vx_core::Type_any current = start;
     while (iscontinue) {
       if (icount >= imax) {
         iscontinue = false;
@@ -61,16 +99,21 @@ map<-map-start-end
       }
     }
     vx_core::vx_release_except({start, fn_until, fn_loop, max}, output);
-	  	return output;
-	 }
+    return output;
+  }
 
   // vx_any_from_for_while_loop_max(generic_any_1, start, fn-while, fn-loop, max)
-  vx_core::Type_any vx_any_from_for_while_loop_max(vx_core::Type_any generic_any_1, vx_core::Type_any start, vx_core::Func_boolean_from_any fn_while, vx_core::Func_any_from_any fn_loop, vx_core::Type_int max) {
-		vx_core::Type_any output = start;
+  vx_core::Type_any vx_any_from_for_while_loop_max(
+    vx_core::Type_any generic_any_1,
+    vx_core::Type_any start,
+    vx_core::Func_boolean_from_any fn_while,
+    vx_core::Func_any_from_any fn_loop,
+    vx_core::Type_int max) {
+    vx_core::Type_any output = start;
     bool iscontinue = true;
     long icount = 0;
     long imax = max->vx_int();
-		  vx_core::Type_any current = start;
+    vx_core::Type_any current = start;
     while (iscontinue) {
       if (icount >= imax) {
         iscontinue = false;
@@ -91,12 +134,24 @@ map<-map-start-end
     }
     output = current;
     vx_core::vx_release_except({start, fn_while, fn_loop, max}, output);
-		  return output;
- 	}
+    return output;
+  }
+
+  // (func anymap<-struct)
+  vx_core::Type_anymap vx_anymap_from_struct(
+    vx_core::Type_struct structure) {
+    std::map<std::string, vx_core::Type_any> map = structure->vx_map();
+    vx_core::Type_anymap output = vx_core::vx_new_map(vx_core::t_anymap, map);
+    return output;
+  }
 
   // vx_list_from_for_end_loop(generic_list_1, start, end, fn-loop)
-  vx_core::Type_any vx_list_from_for_end_loop(vx_core::Type_any generic_list_1, vx_core::Type_int start, vx_core::Type_int end, vx_core::Func_any_from_int fn_loop) {
-  		vx_core::Type_any output = vx_core::f_empty(generic_list_1);
+  vx_core::Type_any vx_list_from_for_end_loop(
+    vx_core::Type_any generic_list_1,
+    vx_core::Type_int start,
+    vx_core::Type_int end,
+    vx_core::Func_any_from_int fn_loop) {
+    vx_core::Type_any output = vx_core::f_empty(generic_list_1);
     vx_core::vx_Type_listany listvals;
     long istart = start->vx_int();
     long iend = end->vx_int();
@@ -115,12 +170,17 @@ map<-map-start-end
       output = generic_list_1->vx_new(listvals);
     }
     vx_core::vx_release_except({start, end, fn_loop}, output);
-		  return output;
-	 }
+    return output;
+  }
 
   // vx_list_from_for_while_loop_max(generic_list_1, start, fn-while, fn-loop, max)
-  vx_core::Type_any vx_list_from_for_while_loop_max(vx_core::Type_any generic_list_1, vx_core::Type_any start, vx_core::Func_boolean_from_any fn_while, vx_core::Func_any_from_any fn_loop, vx_core::Type_int max) {
-		  vx_core::Type_any output = vx_core::f_empty(generic_list_1);
+  vx_core::Type_any vx_list_from_for_while_loop_max(
+    vx_core::Type_any generic_list_1,
+    vx_core::Type_any start,
+    vx_core::Func_boolean_from_any fn_while,
+    vx_core::Func_any_from_any fn_loop,
+    vx_core::Type_int max) {
+    vx_core::Type_any output = vx_core::f_empty(generic_list_1);
     vx_core::vx_Type_listany listvals;
     bool iscontinue = true;
     long icount = 0;
@@ -144,13 +204,16 @@ map<-map-start-end
       output = generic_list_1->vx_new(listvals);
     }
     vx_core::vx_release_except({start, fn_while, fn_loop, max}, output);
-		  return output;
- 	}
+    return output;
+  }
 
   // vx_list_from_list_filter(generic_list_1, list, fn-any<-any)
-  vx_core::Type_any vx_list_from_list_filter(vx_core::Type_any generic_list_1, vx_core::Type_list vallist, vx_core::Func_any_from_any fn_filter) {
+  vx_core::Type_any vx_list_from_list_filter(
+    vx_core::Type_any generic_list_1,
+    vx_core::Type_list vallist,
+    vx_core::Func_any_from_any fn_filter) {
     vx_core::vx_reserve({vallist, fn_filter});
-	  	vx_core::Type_any output = vx_core::vx_empty(generic_list_1);
+    vx_core::Type_any output = vx_core::vx_empty(generic_list_1);
     vx_core::vx_Type_listany listval = vallist->vx_list();
     vx_core::vx_Type_listany items;
     for (vx_core::Type_any val : listval) {
@@ -165,12 +228,16 @@ map<-map-start-end
     }
     output = generic_list_1->vx_new(items);
     vx_core::vx_release_one_except({vallist, fn_filter}, output);
-		  return output;
- 	}
+    return output;
+  }
 
   // vx_list_from_list_start_end(generic_list_1, list, int, int)
-  vx_core::Type_any vx_list_from_list_start_end(vx_core::Type_any generic_list_1, vx_core::Type_list values, vx_core::Type_int start, vx_core::Type_int end) {
-	  	vx_core::Type_any output = vx_core::vx_empty(generic_list_1);
+  vx_core::Type_any vx_list_from_list_start_end(
+    vx_core::Type_any generic_list_1,
+    vx_core::Type_list values,
+    vx_core::Type_int start,
+    vx_core::Type_int end) {
+    vx_core::Type_any output = vx_core::vx_empty(generic_list_1);
     long istart = start->vx_int();
     long iend = end->vx_int();
     vx_core::vx_Type_listany listval = values->vx_list();
@@ -185,18 +252,21 @@ map<-map-start-end
       if (iend >= maxlen) {
         iend = maxlen;
       }
-	   		auto first = listval.begin() + istart - 1;
+      auto first = listval.begin() + istart - 1;
       auto last = listval.begin() + iend;
       vx_core::vx_Type_listany listsub = std::vector(first, last);
       output = generic_list_1->vx_new(listsub);
     }
     vx_core::vx_release_except({values, start, end}, output);
-		  return output;
-	 }
+    return output;
+  }
 
   // vx_map_from_map_keys(generic_map_1, map, stringlist)
-  vx_core::Type_any vx_map_from_map_keys(vx_core::Type_any generic_map_1, vx_core::Type_map valuemap, vx_core::Type_stringlist keys) {
-	  	vx_core::Type_any output = vx_core::vx_empty(generic_map_1);
+  vx_core::Type_any vx_map_from_map_keys(
+    vx_core::Type_any generic_map_1,
+    vx_core::Type_map valuemap,
+    vx_core::Type_stringlist keys) {
+    vx_core::Type_any output = vx_core::vx_empty(generic_map_1);
     vx_core::vx_Type_liststring keylist = keys->vx_liststring();
     if (keylist.size() > 0) {
       vx_core::vx_Type_mapany map = valuemap->vx_map();

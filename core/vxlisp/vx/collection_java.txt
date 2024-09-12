@@ -56,6 +56,16 @@
     return output;
   }
 
+  // (func anymap<-struct)
+  public static Core.Type_anymap vx_anymap_from_struct(
+    Core.Type_struct structure) {
+    Map<String, Core.Type_any> map = structure.vx_map();
+    Core.Type_anymap output = Core.vx_new_map(
+      Core.t_anymap, map
+    );
+    return output;
+  }
+
   public static <T extends Core.Type_list> T vx_list_from_for_end_loop(
     T generic_list_1,
     Core.Type_int start,
@@ -67,18 +77,26 @@
     int iend = end.vx_int();
     if (istart <= iend) {
       for (int i = istart; i <= iend; i++) {
-        Core.Type_any val = fn_loop.vx_any_from_int(Core.t_any, Core.vx_new_int(i));
+        Core.Type_any val = fn_loop.vx_any_from_int(
+          Core.t_any, Core.vx_new_int(i)
+        );
         listvals.add(val);
       }
     } else {
       for (int i = istart; i >= iend; i--) {
-        Core.Type_any val = fn_loop.vx_any_from_int(Core.t_any, Core.vx_new_int(i));
+        Core.Type_any val = fn_loop.vx_any_from_int(
+          Core.t_any, Core.vx_new_int(i)
+        );
         listvals.add(val);
       }
     }
     if (listvals.size() > 0) {
-      Core.Type_anylist anylist = Core.vx_new(Core.t_anylist, listvals);
-      output = Core.f_new(generic_list_1, anylist);
+      Core.Type_anylist anylist = Core.vx_new(
+        Core.t_anylist, listvals
+      );
+      output = Core.f_new(
+        generic_list_1, anylist
+      );
     }
     return output;
   }
@@ -100,22 +118,32 @@
         String path = "vx/collection/list<-for-until-loop-max";
         String code = ":loopmaximumexceeded";
         Core.Type_int details = Core.vx_new_int(icount);
-        Core.Type_msg msg = Core.vx_msg_from_error(path, code, details);
-        output = Core.vx_copy(output, msg);
+        Core.Type_msg msg = Core.vx_msg_from_error(
+          path, code, details
+        );
+        output = Core.vx_copy(
+          output, msg
+        );
         iscontinue = false;
       } else {
         Core.Type_boolean valwhile = fn_while.vx_boolean_from_any(work);
         iscontinue = !valwhile.vx_boolean();
         if (iscontinue) {
           icount += 1;
-          work = fn_loop.vx_any_from_any(Core.t_any, work);
+          work = fn_loop.vx_any_from_any(
+            Core.t_any, work
+          );
           listvals.add(work);
         }
       }
     }
     if (listvals.size() > 0) {
-      Core.Type_anylist anylist = Core.vx_new(Core.t_anylist, listvals);
-      output = Core.f_new(generic_list_1, anylist);
+      Core.Type_anylist anylist = Core.vx_new(
+        Core.t_anylist, listvals
+      );
+      output = Core.f_new(
+        generic_list_1, anylist
+      );
     }
     return output;
   }
@@ -128,7 +156,9 @@
     List<Core.Type_any> listval = vallist.vx_list();
     List<Core.Type_any> items = new ArrayList<>();
     for (Core.Type_any val : listval) {
-      Core.Type_any newval = fn_filter.vx_any_from_any(Core.t_any, val);
+      Core.Type_any newval = fn_filter.vx_any_from_any(
+        Core.t_any, val
+      );
       Core.Type_boolean isempty = Core.f_is_empty_1(newval);
       if (!isempty.vx_boolean()) {
         items.add(newval);

@@ -1078,114 +1078,187 @@ namespace vx_core {
   
   class Abstract_replfunc_async {
   public:
-    virtual vx_core::vx_Type_async vx_repl(vx_core::Type_anylist arglist);
+    virtual vx_core::vx_Type_async vx_repl(
+      vx_core::Type_anylist arglist);
   };
   typedef Abstract_replfunc_async* Type_replfunc_async;
 
   // vx_any_from_func_1(generic_any_1, func, args...)
-  vx_core::Type_any vx_any_from_func_1(vx_core::Type_any generic_any_1, vx_core::Type_replfunc func, vx_core::vx_Type_listany args);
+  vx_core::Type_any vx_any_from_func_1(
+    vx_core::Type_any generic_any_1,
+    vx_core::Type_replfunc func,
+    vx_core::vx_Type_listany args);
 
   // vx_any_from_list_result_next(generic_any_1, list, any<-reduce-next)
-  vx_core::Type_any vx_any_from_list_result_next(vx_core::Type_any generic_any_1, vx_core::Type_list list, vx_core::Type_any valstart, vx_core::Func_any_from_reduce_next fn_reduce_next);
+  vx_core::Type_any vx_any_from_list_result_next(
+    vx_core::Type_any generic_any_1,
+    vx_core::Type_list list,
+    vx_core::Type_any valstart,
+    vx_core::Func_any_from_reduce_next fn_reduce_next);
 
   // vx_any_from_map_start_reduce(generic_any_1, map, any<-any-key-value)
-  vx_core::Type_any vx_any_from_map_start_reduce(vx_core::Type_any generic_any_1, vx_core::Type_map map, vx_core::Type_any start, vx_core::Func_any_from_any_key_value fn_reduce);
+  vx_core::Type_any vx_any_from_map_start_reduce(
+    vx_core::Type_any generic_any_1,
+    vx_core::Type_map map,
+    vx_core::Type_any start,
+    vx_core::Func_any_from_any_key_value fn_reduce);
 
   // vx_anylist_from_arraystring(long, array<string>)
-  vx_core::Type_anylist vx_anylist_from_arraystring(long ilen, char* arraystring[], bool isskipfirst);
+  vx_core::Type_anylist vx_anylist_from_arraystring(
+    long ilen,
+    char* arraystring[],
+    bool isskipfirst);
 
   // vx_argmap_from_listarg(List<arg>)
-  vx_core::Type_argmap vx_argmap_from_listarg(std::initializer_list<vx_core::Type_arg> listarg);
+  vx_core::Type_argmap vx_argmap_from_listarg(
+    std::initializer_list<vx_core::Type_arg> listarg);
 
   // vx_async_from_async_fn(async, type, fn<any>(any))
-  vx_core::vx_Type_async vx_async_from_async_fn(vx_core::vx_Type_async async, vx_core::Type_any type, vx_core::vx_Type_listany lambavars, vx_core::vx_Type_fn_any_from_any fn);
+  vx_core::vx_Type_async vx_async_from_async_fn(
+    vx_core::vx_Type_async async,
+    vx_core::Type_any type,
+    vx_core::vx_Type_listany lambavars,
+    vx_core::vx_Type_fn_any_from_any fn);
 
   // vx_async_new_from_future(T, future<T>)
-  vx_core::vx_Type_async vx_async_new_from_future(vx_core::Type_any generic_any_1, vx_core::vx_Type_future future);
+  vx_core::vx_Type_async vx_async_new_from_future(
+    vx_core::Type_any generic_any_1,
+    vx_core::vx_Type_future future);
 
   // vx_async_new_from_listasync(T, List<async>)
-  vx_core::vx_Type_async vx_async_new_from_listasync(vx_core::Type_any generic_list_1, vx_core::vx_Type_listasync listasync);
+  vx_core::vx_Type_async vx_async_new_from_listasync(
+    vx_core::Type_any generic_list_1,
+    vx_core::vx_Type_listasync listasync);
 
   // vx_async_new_from_value(any)
-  vx_core::vx_Type_async vx_async_new_from_value(vx_core::Type_any value);
+  vx_core::vx_Type_async vx_async_new_from_value(
+    vx_core::Type_any value);
 
   // vx_boolean_from_string_ends(string, string)
-  bool vx_boolean_from_string_ends(std::string text, std::string ends);
+  bool vx_boolean_from_string_ends(
+    std::string text,
+    std::string ends);
 
   // vx_boolean_from_string_find(string, string)
-  bool vx_boolean_from_string_find(std::string text, std::string find);
+  bool vx_boolean_from_string_find(
+    std::string text,
+    std::string find);
 
   // vx_boolean_from_string_starts(string, string)
-  bool vx_boolean_from_string_starts(std::string text, std::string starts);
+  bool vx_boolean_from_string_starts(
+    std::string text,
+    std::string starts);
 
   // vx_boolean_from_type_trait(type, type)
-  bool vx_boolean_from_type_trait(vx_core::Type_any type, vx_core::Type_any trait);
+  bool vx_boolean_from_type_trait(
+    vx_core::Type_any type,
+    vx_core::Type_any trait);
 
   // vx_boolean_write_from_map_name_value(map, string, any)
-  vx_core::Type_boolean vx_boolean_write_from_map_name_value(vx_core::Type_map valuemap, vx_core::Type_string name, vx_core::Type_any value);
+  vx_core::Type_boolean vx_boolean_write_from_map_name_value(
+    vx_core::Type_map valuemap,
+    vx_core::Type_string name,
+    vx_core::Type_any value);
 
   // vx_compare(any, any)
-  long vx_compare(vx_core::Type_any val1, vx_core::Type_any val2);
+  long vx_compare(
+    vx_core::Type_any val1,
+    vx_core::Type_any val2);
 
   // vx_constdefnew(string, string)
-  vx_core::Type_constdef vx_constdef_new(std::string pkgname, std::string name);
+  vx_core::Type_constdef vx_constdef_new(
+    std::string pkgname,
+    std::string name);
 
   // vx_eqeq(any, any)
-  bool vx_eqeq(vx_core::Type_any val1, vx_core::Type_any val2);
+  bool vx_eqeq(
+    vx_core::Type_any val1,
+    vx_core::Type_any val2);
 
   // vx_float_from_number(number)
-  float vx_float_from_number(vx_core::Type_number num);
+  float vx_float_from_number(
+    vx_core::Type_number num);
 
   // vx_float_from_string(string)
-  float vx_float_from_string(std::string text);
+  float vx_float_from_string(
+    std::string text);
 
   // vx_funclist_from_listfunc(List<func>)
-  vx_core::Type_funclist vx_funclist_from_listfunc(std::initializer_list<vx_core::Type_func> listfunc);
+  vx_core::Type_funclist vx_funclist_from_listfunc(
+    std::initializer_list<vx_core::Type_func> listfunc);
 
   // vx_global_package_set(string, map<any>, map<any>, map<func>)
-  void vx_global_package_set(std::string pkgname, vx_core::vx_Type_mapany maptype, vx_core::vx_Type_mapany mapconst, vx_core::vx_Type_mapfunc mapfunc);
+  void vx_global_package_set(
+    std::string pkgname,
+    vx_core::vx_Type_mapany maptype,
+    vx_core::vx_Type_mapany mapconst,
+    vx_core::vx_Type_mapfunc mapfunc);
 
   // vx_if_thenelselist(type, thenelselist)
-  vx_core::Type_any vx_if_thenelselist(vx_core::Type_any generic_any_1, vx_core::Type_thenelselist thenelselist);
+  vx_core::Type_any vx_if_thenelselist(
+    vx_core::Type_any generic_any_1,
+    vx_core::Type_thenelselist thenelselist);
 
   // vx_int_from_sizet(size_t)
-  long vx_int_from_sizet(std::size_t size);
+  long vx_int_from_sizet(
+    std::size_t size);
 
   // vx_int_from_string(string)
-  int vx_int_from_string(std::string text);
+  int vx_int_from_string(
+    std::string text);
 
   // vx_is_float(string)
-  bool vx_is_float(std::string value);
+  bool vx_is_float(
+    std::string value);
 
   // vx_is_float(any)
-  bool vx_is_float(vx_core::Type_any value);
+  bool vx_is_float(
+    vx_core::Type_any value);
 
   // vx_is_int(string)
-  bool vx_is_int(std::string value);
+  bool vx_is_int(
+    std::string value);
 
   // vx_is_int(any)
-  bool vx_is_int(vx_core::Type_any value);
+  bool vx_is_int(
+    vx_core::Type_any value);
 
   // vx_list_from_array(arrayval)
-  vx_core::vx_Type_listany vx_list_from_array(vx_core::vx_Type_listarg vals);
+  vx_core::vx_Type_listany vx_list_from_array(
+    vx_core::vx_Type_listarg vals);
 
   // vx_list_from_list_intany_helper(generic_list_1, list-2, any<-int-any)
-  vx_core::Type_list vx_list_from_list_intany_helper(vx_core::Type_list generic_list_1, vx_core::Type_list valuelist, vx_core::Func_any_from_int_any fn_any_from_int_any);
+  vx_core::Type_list vx_list_from_list_intany_helper(
+    vx_core::Type_list generic_list_1,
+    vx_core::Type_list valuelist,
+    vx_core::Func_any_from_int_any fn_any_from_int_any);
 
   // vx_list_from_map_1(generic_list_1, map, fn-any<-key-value)
-  vx_core::Type_any vx_list_from_map_1(vx_core::Type_any generic_list_1, vx_core::Type_map valuemap, vx_core::Func_any_from_key_value fn_any_from_key_value);
+  vx_core::Type_any vx_list_from_map_1(
+    vx_core::Type_any generic_list_1,
+    vx_core::Type_map valuemap,
+    vx_core::Func_any_from_key_value fn_any_from_key_value);
 
   // vx_list_join_from_list_fn(generic_list_1, list, fn-any<-any)
-  vx_core::Type_any vx_list_join_from_list_fn(vx_core::Type_any generic_list_1, vx_core::Type_list values, vx_core::Func_any_from_any fn_any_from_any);
+  vx_core::Type_any vx_list_join_from_list_fn(
+    vx_core::Type_any generic_list_1,
+    vx_core::Type_list values,
+    vx_core::Func_any_from_any fn_any_from_any);
 
   // vx_listany_from_listany_fn(List<any>, (Function (any) : any))
-  vx_core::vx_Type_listany vx_listany_from_listany_fn(vx_core::vx_Type_listany list_any, vx_core::vx_Type_fn_any_from_any fn);
+  vx_core::vx_Type_listany vx_listany_from_listany_fn(
+    vx_core::vx_Type_listany list_any,
+    vx_core::vx_Type_fn_any_from_any fn);
 
   // vx_listasync_from_listany_fn(List<any>, (Function (any) : any))
-  vx_core::vx_Type_listasync vx_listasync_from_listany_fn(vx_core::vx_Type_listany list_any, vx_core::vx_Type_fn_async_from_any fn);
+  vx_core::vx_Type_listasync vx_listasync_from_listany_fn(
+    vx_core::vx_Type_listany list_any,
+    vx_core::vx_Type_fn_async_from_any fn);
 
   // vx_liststring_from_arraystring(long, array<string>)
-  std::vector<std::string> vx_liststring_from_arraystring(long ilen, char* arraystring[]);
+  std::vector<std::string> vx_liststring_from_arraystring(
+    long ilen,
+    char* arraystring[]);
 
   // vx_log()
   void vx_log();
@@ -1200,49 +1273,75 @@ namespace vx_core {
   void vx_log(vx_core::Type_any val);
 
   // vx_log(async)
-  void vx_log(vx_core::vx_Type_async async);
+  void vx_log(
+    vx_core::vx_Type_async async);
 
   // vx_log(list<any>)
-  void vx_log(vx_core::vx_Type_listany listany);
+  void vx_log(
+    vx_core::vx_Type_listany listany);
 
   // vx_log(string, string)
-  void vx_log(std::string code, std::string text);
+  void vx_log(
+    std::string code,
+    std::string text);
 
   // vx_log(string, any)
-  void vx_log(std::string code, vx_core::Type_any val);
+  void vx_log(
+    std::string code,
+    vx_core::Type_any val);
 
   // vx_log(string, async)
-  void vx_log(std::string code, vx_core::vx_Type_async async);
+  void vx_log(
+    std::string code,
+    vx_core::vx_Type_async async);
 
   // vx_map_from_list(listany, any<-any)
-  vx_core::vx_Type_mapany vx_map_from_list(vx_core::vx_Type_listany listany, vx_core::Func_any_from_any fn_any_from_any);
+  vx_core::vx_Type_mapany vx_map_from_list(
+    vx_core::vx_Type_listany listany,
+    vx_core::Func_any_from_any fn_any_from_any);
 
   // vx_map_from_map_fn(generic_map_1, map, fn-any<-key-value)
-  vx_core::Type_any vx_map_from_map_fn(vx_core::Type_map generic_map_1, vx_core::Type_map valuemap, vx_core::Func_any_from_key_value fn_any_from_key_value);
+  vx_core::Type_any vx_map_from_map_fn(
+    vx_core::Type_map generic_map_1,
+    vx_core::Type_map valuemap,
+    vx_core::Func_any_from_key_value fn_any_from_key_value);
 
   // vx_memory_leak_test()
   bool vx_memory_leak_test();
 
   // vx_memory_leak_test(string, int)
-  bool vx_memory_leak_test(std::string id, long initialcount);
+  bool vx_memory_leak_test(
+    std::string id,
+    long initialcount);
 
   // vx_memory_leak_test(string, int, int)
-  bool vx_memory_leak_test(std::string id, long initialcount, long expectedcount);
+  bool vx_memory_leak_test(
+    std::string id,
+    long initialcount,
+    long expectedcount);
 
   // vx_msg_from_errortext(string)
-  vx_core::Type_msg vx_msg_from_errortext(const std::string errortext);
+  vx_core::Type_msg vx_msg_from_errortext(
+    const std::string errortext);
 
   // vx_msg_from_exception(string, exception)
-  vx_core::Type_msg vx_msg_from_exception(const std::string text, std::exception err);
+  vx_core::Type_msg vx_msg_from_exception(
+    const std::string text,
+    std::exception err);
 
   // vx_msgblock_from_copy_listval(msgblock, List<any>)
-  vx_core::Type_msgblock vx_msgblock_from_copy_listval(vx_core::Type_msgblock msgblock, vx_core::vx_Type_listany vals);
+  vx_core::Type_msgblock vx_msgblock_from_copy_listval(
+    vx_core::Type_msgblock msgblock,
+    vx_core::vx_Type_listany vals);
 
   // vx_new_anylist(any...)
-  vx_core::Type_anylist vx_new_anylist(vx_core::vx_Type_listany listany);
+  vx_core::Type_anylist vx_new_anylist(
+    vx_core::vx_Type_listany listany);
 
   // vx_new_arg(string, type)
-  vx_core::Type_arg vx_new_arg(std::string name, vx_core::Type_any type);
+  vx_core::Type_arg vx_new_arg(
+    std::string name,
+    vx_core::Type_any type);
 
   // vx_new_boolean(boolean)
   vx_core::Type_boolean vx_new_boolean(bool isval);
@@ -1281,13 +1380,19 @@ namespace vx_core {
   void vx_release_async(vx_core::vx_Type_async async);
 
   // vx_release_except(any, except)
-  void vx_release_except(vx_core::Type_any any, vx_core::Type_any except);
+  void vx_release_except(
+    vx_core::Type_any any,
+    vx_core::Type_any except);
 
   // vx_release_except(any..., except)
-  void vx_release_except(vx_core::vx_Type_listany listany, vx_core::Type_any except);
+  void vx_release_except(
+    vx_core::vx_Type_listany listany,
+    vx_core::Type_any except);
 
   // vx_release_except_async(async, except)
-  void vx_release_except_async(vx_core::vx_Type_async async, vx_core::Type_any except);
+  void vx_release_except_async(
+    vx_core::vx_Type_async async,
+    vx_core::Type_any except);
 
   // vx_release_one(any)
   void vx_release_one(vx_core::Type_any any);
@@ -1302,97 +1407,151 @@ namespace vx_core {
   void vx_release_one_async(vx_core::vx_Type_listasync listasync);
 
   // vx_release_one_except(any, except)
-  void vx_release_one_except(vx_core::Type_any any, vx_core::Type_any except);
+  void vx_release_one_except(
+    vx_core::Type_any any,
+    vx_core::Type_any except);
 
   // vx_release_one_except(any..., except)
-  void vx_release_one_except(vx_core::vx_Type_listany listany, vx_core::Type_any except);
+  void vx_release_one_except(
+    vx_core::vx_Type_listany listany,
+    vx_core::Type_any except);
 
   // vx_release_one_except_async(async, except)
-  void vx_release_one_except_async(vx_core::vx_Type_async async, vx_core::Type_any except);
+  void vx_release_one_except_async(
+    vx_core::vx_Type_async async,
+    vx_core::Type_any except);
 
   // vx_release_one_except_async(async..., except)
-  void vx_release_one_except_async(vx_core::vx_Type_listasync listasync, vx_core::Type_any except);
+  void vx_release_one_except_async(
+    vx_core::vx_Type_listasync listasync,
+    vx_core::Type_any except);
 
   // vx_reserve(any)
-  void vx_reserve(vx_core::Type_any any);
+  void vx_reserve(
+    vx_core::Type_any any);
 
   // vx_reserve(any...)
-  void vx_reserve(vx_core::vx_Type_listany listany);
+  void vx_reserve(
+    vx_core::vx_Type_listany listany);
 
   // vx_reserve_async(async)
-  void vx_reserve_async(vx_core::vx_Type_async async);
+  void vx_reserve_async(
+    vx_core::vx_Type_async async);
 
   // vx_reserve_async(listasync)
-  void vx_reserve_async(vx_core::vx_Type_listasync listasync);
+  void vx_reserve_async(
+    vx_core::vx_Type_listasync listasync);
 
   // vx_reserve_context(context)
-  void vx_reserve_context(vx_core::Type_context context);
+  void vx_reserve_context(
+    vx_core::Type_context context);
 
   // vx_reserve_empty(any)
-  void vx_reserve_empty(vx_core::Type_any any);
+  void vx_reserve_empty(
+    vx_core::Type_any any);
 
   // vx_reserve_type(any)
-  void vx_reserve_type(vx_core::Type_any any);
+  void vx_reserve_type(
+    vx_core::Type_any any);
 
   // vx_string_from_any(value)
-  std::string vx_string_from_any(vx_core::Type_any value);
+  std::string vx_string_from_any(
+    vx_core::Type_any value);
 
   // vx_string_from_any_indent(any, int, boolean, boolean)
-  std::string vx_string_from_any_indent(vx_core::Type_any value, long indent, bool linefeed, bool refcount);
+  std::string vx_string_from_any_indent(
+    vx_core::Type_any value,
+    long indent,
+    bool linefeed,
+    bool refcount);
 
   // vx_string_from_any_refcount(value)
-  std::string vx_string_from_any_refcount(vx_core::Type_any value);
+  std::string vx_string_from_any_refcount(
+    vx_core::Type_any value);
 
   // vx_string_from_async(async)
-  std::string vx_string_from_async(vx_core::vx_Type_async async);
+  std::string vx_string_from_async(
+    vx_core::vx_Type_async async);
 
   // vx_string_from_async_indent(async, indent, linefeed, refcount)
-  std::string vx_string_from_async_indent(vx_core::vx_Type_async async, long indent, bool linefeed, bool refcount);
+  std::string vx_string_from_async_indent(
+    vx_core::vx_Type_async async,
+    long indent,
+    bool linefeed,
+    bool refcount);
 
   // vx_string_from_async_refcount(async)
-  std::string vx_string_from_async_refcount(vx_core::vx_Type_async async);
+  std::string vx_string_from_async_refcount(
+    vx_core::vx_Type_async async);
 
   // vx_string_from_int(long)
-  std::string vx_string_from_int(long value);
+  std::string vx_string_from_int(
+    long value);
 
   // vx_string_from_float(float)
-  std::string vx_string_from_float(float value);
+  std::string vx_string_from_float(
+    float value);
 
   // vx_string_from_liststring_pos(list<string>, long)
-  std::string vx_string_from_liststring_pos(std::vector<std::string> liststring, long pos);
+  std::string vx_string_from_liststring_pos(
+    std::vector<std::string> liststring,
+    long pos);
 
   // vx_string_from_string_find_replace(string, string, string)
-  std::string vx_string_from_string_find_replace(std::string text, std::string find, std::string replace);
+  std::string vx_string_from_string_find_replace(
+    std::string text,
+    std::string find,
+    std::string replace);
 
   // vx_string_from_string_find_replace(string, string, string)
-  vx_core::Type_string vx_string_from_string_find_replace(vx_core::Type_string text, vx_core::Type_string find, vx_core::Type_string replace);
+  vx_core::Type_string vx_string_from_string_find_replace(
+    vx_core::Type_string text,
+    vx_core::Type_string find,
+    vx_core::Type_string replace);
 
   // vx_string_from_string_find_replacefirst(string, string, string)
-  std::string vx_string_from_string_find_replacefirst(std::string text, std::string find, std::string replacefirst);
+  std::string vx_string_from_string_find_replacefirst(
+    std::string text,
+    std::string find,
+    std::string replacefirst);
 
   // vx_string_from_string_repeat(string, int)
-  std::string vx_string_from_string_repeat(std::string text, long repeat);
+  std::string vx_string_from_string_repeat(
+    std::string text,
+    long repeat);
 
   // vx_string_from_string_start(string, int)
-  std::string vx_string_from_string_start(std::string text, long start);
+  std::string vx_string_from_string_start(
+    std::string text,
+    long start);
 
   // vx_string_from_string_start_end(string, int, int)
-  std::string vx_string_from_string_start_end(std::string text, long start, long end);
+  std::string vx_string_from_string_start_end(
+    std::string text,
+    long start,
+    long end);
 
   // vx_switch(type, val, thenelselist)
-  vx_core::Type_any vx_switch(vx_core::Type_any generic_any_1, vx_core::Type_any val, vx_core::Type_thenelselist thenelselist);
+  vx_core::Type_any vx_switch(
+    vx_core::Type_any generic_any_1,
+    vx_core::Type_any val,
+    vx_core::Type_thenelselist thenelselist);
 
   // vx_typelist_from_listany(list<any>)
-  vx_core::Type_typelist vx_typelist_from_listany(vx_core::vx_Type_listany listany);
+  vx_core::Type_typelist vx_typelist_from_listany(
+    vx_core::vx_Type_listany listany);
 
   // vx_any_from_any(T, val)
-  template <class T> static T* vx_any_from_any(T* generic_any_1, vx_core::Type_any val) {
+  template <class T> static T* vx_any_from_any(
+    T* generic_any_1,
+    vx_core::Type_any val) {
     T* output = dynamic_cast<T*>(val);
     return output;
   }
 
   // vx_empty(T)
-  template <class T> static T* vx_empty(T* generic_any_1) {
+  template <class T> static T* vx_empty(
+    T* generic_any_1) {
     T* output;
     vx_core::Type_any val = generic_any_1->vx_empty();
     output = vx_core::vx_any_from_any(generic_any_1, val);
@@ -1400,14 +1559,20 @@ namespace vx_core {
   }
 
   // vx_any_from_func(generic_any_1, func, args...)
-  template <class T> static T* vx_any_from_func(T* generic_any_1, vx_core::Type_replfunc func, vx_core::vx_Type_listany args) {
+  template <class T> static T* vx_any_from_func(
+    T* generic_any_1,
+    vx_core::Type_replfunc func,
+    vx_core::vx_Type_listany args) {
     vx_core::Type_any val = vx_core::vx_any_from_func_1(generic_any_1, func, args);
     T* output = vx_core::vx_any_from_any(generic_any_1, val);
     return output;
   }
 
   // vx_any_from_map(T, key, defaultval)
-  template <class T> static T* vx_any_from_map(const std::map<std::string, T*> &map, const std::string key, T* defaultval) {
+  template <class T> static T* vx_any_from_map(
+    const std::map<std::string, T*> &map,
+    const std::string key,
+    T* defaultval) {
     T* output = defaultval;
     auto iter = map.find(key);
     if (iter != map.end()) {
@@ -1417,12 +1582,16 @@ namespace vx_core {
   }
 
   // vx_boolean_from_list_find(list<T>, T find)
-  template <class T> static bool vx_boolean_from_list_find(std::vector<T> list, T find) {
+  template <class T> static bool vx_boolean_from_list_find(
+    std::vector<T> list,
+    T find) {
     return std::find(list.begin(), list.end(), find) != list.end();
   }
 
   // vx_copy(T, args)
-  template <class T> static T* vx_copy(T* copyval, vx_core::vx_Type_listany vals) {
+  template <class T> static T* vx_copy(
+    T* copyval,
+    vx_core::vx_Type_listany vals) {
     T* output;
     vx_core::Type_any val = copyval->vx_copy(copyval, vals);
     output = vx_core::vx_any_from_any(copyval, val);
@@ -1430,7 +1599,9 @@ namespace vx_core {
   }
 
   // vx_copy(T, copyval, args)
-  template <class T, class U> static T* vx_copy(T* generic_any_1, U* copyval, vx_core::vx_Type_listany vals) {
+  template <class T, class U> static T* vx_copy(
+    T* generic_any_1, U* copyval,
+    vx_core::vx_Type_listany vals) {
     T* output;
     vx_core::Type_any val = copyval->vx_copy(copyval, vals);
     output = vx_core::vx_any_from_any(generic_any_1, val);
@@ -1438,7 +1609,9 @@ namespace vx_core {
   }
 
   // vx_listaddall(list, listadd)
-  template <class T> static std::vector<T*> vx_listaddall(std::vector<T*> listtarget, std::vector<T*> listadd) {
+  template <class T> static std::vector<T*> vx_listaddall(
+    std::vector<T*> listtarget,
+    std::vector<T*> listadd) {
     std::vector<T*> list;
     list.insert(list.end(), listtarget.begin(), listtarget.end());
     list.insert(list.end(), listadd.begin(), listadd.end());
@@ -1446,7 +1619,9 @@ namespace vx_core {
   }
 
   // vx_list_from_list(T, list<U>)
-  template <class T, class U> static std::vector<T*> vx_list_from_list(T* generic_any_1, std::vector<U*> list) {
+  template <class T, class U> static std::vector<T*> vx_list_from_list(
+    T* generic_any_1,
+    std::vector<U*> list) {
     std::vector<T*> output;
     long len = vx_core::vx_int_from_sizet(list.size());
     for (int i = 0; i < len; ++i) {
@@ -1458,7 +1633,9 @@ namespace vx_core {
   }
 
   // vx_map_from_map(T, map<U>)
-  template <class T, class U> static std::map<std::string, T*> vx_map_from_map(T* generic_any_1, std::map<std::string, U*> map) {
+  template <class T, class U> static std::map<std::string, T*> vx_map_from_map(
+    T* generic_any_1,
+    std::map<std::string, U*> map) {
     std::map<std::string, T*> output;
     for (auto const& [key, itemu] : map) {
       T* itemt = static_cast<T*>(itemu);
@@ -1468,7 +1645,9 @@ namespace vx_core {
   }
 
   // vx_new(T, args)
-  template <class T> static T* vx_new(T* generic_any_1, vx_core::vx_Type_listany vals) {
+  template <class T> static T* vx_new(
+    T* generic_any_1,
+    vx_core::vx_Type_listany vals) {
     T* output;
     vx_core::Type_any val = generic_any_1->vx_new(vals);
     output = vx_core::vx_any_from_any(generic_any_1, val);
@@ -1476,7 +1655,9 @@ namespace vx_core {
   }
 
   // vx_new_list(T, List<any>)
-  template <class T> static T* vx_new_list(T* generic_any_1, vx_core::vx_Type_listany listval) {
+  template <class T> static T* vx_new_list(
+    T* generic_any_1,
+    vx_core::vx_Type_listany listval) {
     T* output;
     vx_core::Type_any val = generic_any_1->vx_new(listval);
     output = vx_core::vx_any_from_any(generic_any_1, val);
@@ -1484,7 +1665,9 @@ namespace vx_core {
   }
 
   // vx_new_map(T, Map<string, any>)
-  template <class T> static T* vx_new_map(T* generic_any_1, vx_core::vx_Type_mapany mapval) {
+  template <class T> static T* vx_new_map(
+    T* generic_any_1,
+    vx_core::vx_Type_mapany mapval) {
     T* output;
     vx_core::Type_any val = generic_any_1->vx_new_from_map(mapval);
     output = vx_core::vx_any_from_any(generic_any_1, val);
@@ -1492,7 +1675,10 @@ namespace vx_core {
   }
 
   // vx_list_from_list_intany(generic_list_1, list-2, any<-int-any)
-  template <class T, class U> static T* vx_list_from_list_intany(T* generic_list_1, U* valuelist, vx_core::Func_any_from_int_any fn_any_from_int_any) {
+  template <class T, class U> static T* vx_list_from_list_intany(
+    T* generic_list_1,
+    U* valuelist,
+    vx_core::Func_any_from_int_any fn_any_from_int_any) {
     T* output = vx_core::vx_empty(generic_list_1);
     vx_core::Type_list outputlist = vx_core::vx_list_from_list_intany_helper(generic_list_1, valuelist, fn_any_from_int_any);
     output = vx_core::vx_any_from_any(generic_list_1, outputlist);
@@ -1500,7 +1686,9 @@ namespace vx_core {
   }
 
   // vx_sync_from_async(async)
-  template <class T> static T* vx_sync_from_async(T* generic_any_1, vx_core::vx_Type_async async) {
+  template <class T> static T* vx_sync_from_async(
+    T* generic_any_1,
+    vx_core::vx_Type_async async) {
     vx_core::Type_any value = async->sync_value();
     vx_core::vx_release_except_async(async, value);
     T* output = vx_core::vx_any_from_any(generic_any_1, value);

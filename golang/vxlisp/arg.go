@@ -152,12 +152,20 @@ func ArgMapFromArgList(listarg []vxarg) map[string]vxarg {
 	return maparg
 }
 
-func ArgValidate(arg vxarg, mapgeneric map[string]*vxtype, textblock *vxtextblock, path string) (vxarg, map[string]*vxtype, *vxmsgblock) {
+func ArgValidate(
+	arg vxarg,
+	mapgeneric map[string]*vxtype,
+	textblock *vxtextblock,
+	path string) (
+	vxarg,
+	map[string]*vxtype,
+	*vxmsgblock) {
 	msgblock := NewMsgBlock("ArgValidate")
 	subpath := path + "/:arg/" + arg.name
 	var msgs *vxmsgblock
 	var value vxvalue
-	value, mapgeneric, msgs = ValueValidate(arg.value, arg.vxtype, arg.multi, mapgeneric, textblock, subpath)
+	value, mapgeneric, msgs = ValueValidate(
+		arg.value, arg.vxtype, arg.multi, mapgeneric, textblock, subpath)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	valuetype := value.vxtype
 	if arg.generictype == nil {
@@ -168,7 +176,8 @@ func ArgValidate(arg vxarg, mapgeneric map[string]*vxtype, textblock *vxtextbloc
 		if ok && !lookuptype.isgeneric {
 			valuetype = lookuptype
 		} else {
-			mapgeneric = MapGenericSetType(mapgeneric, arg.generictype.name, valuetype)
+			mapgeneric = MapGenericSetType(
+				mapgeneric, arg.generictype.name, valuetype)
 		}
 		if !arg.vxtype.isfunc {
 			arg.vxtype = valuetype

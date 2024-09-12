@@ -1,13 +1,15 @@
 # vxlisp
 
 ## Links
-* [Test Suite Js](core/html/testjs.html)
-* [Test Suite Java](core/java/src/test/resources/testsuite.html)
-* [Test Suite C++](core/cpp/src/test/resources/testsuite.html)
-* [Test Suite CSharp](core/csharp/test/resources/testsuite.html)
-* [Test Suite Kotlin](core/kotlin/app/src/test/kotlin/resources/testsuite.html)
 * [API Documentation](core/doc/doc.html)
 * [Source Code](https://github.com/Vyridian/vxlisp)
+* [VSCode Extension](https://github.com/Vyridian/vscode-vxlisp)
+* Test Suites:
+** [Js](core/html/testjs.html)
+** [Java](core/java/src/test/resources/testsuite.html)
+** [C++](core/cpp/src/test/resources/testsuite.html)
+** [CSharp](core/csharp/test/resources/testsuite.html)
+** [Kotlin](core/kotlin/app/src/test/kotlin/resources/testsuite.html)
 
 ## Overview
 
@@ -35,7 +37,7 @@
 
 * What vxlisp is not?
 
-1. vxlisp is not a platform. vxlisp produces plain old (JavaScript/Java/C++/CSharp) for any purpose. vxlisp does not require outside libraries (except Java:JUnit, CSharp:XUnit for test support)
+1. vxlisp is not a platform. vxlisp produces plain old (JavaScript/Java/C++/CSharp/Kotlin) for any purpose. vxlisp does not require outside libraries (except Java/Kotlin:JUnit, CSharp:XUnit for test support)
 
 2. vxlisp does not replace other languages. Instead it is meant to interact with existing platforms and languages. vxlisp generates plain old native objects that are written into your existing native project. Write as much native code as you like inside or outside vxlisp (though native code is not cross-platform).
 
@@ -95,7 +97,7 @@ To improve the art. I find most languages to have ugly, confusing syntax, and po
 
 * Aren't there already too many languages? - I agree completely. The ubiquity of beutiful, niche languages is exactly the inspiration for this one. vxlisp is a model for a new language that can break the hamster-wheel of shifting languages by allowing you to publish in any language while only learning one.
 
-1. Choosing a Language - The first problem with existing languages is you need to choose one for your task. You could choose the most used languages to be safe (e.g. JavaScript, Java, C++, CSharp), or you could choose a more niche language that might fit your coding style or the project requirements (e.g. Typescript, Scala, Clojure, Rust, Dart, Go). My answer: Don't Choose. Write in one language and publish to any other language.
+1. Choosing a Language - The first problem with existing languages is you need to choose one for your task. You could choose the most used languages to be safe (e.g. JavaScript, Java, C++, CSharp, Kotlin), or you could choose a more niche language that might fit your coding style or the project requirements (e.g. Typescript, Scala, Clojure, Rust, Dart, Go). My answer: Don't Choose. Write in one language and publish to any other language.
 
 2. Language Limitiations - Now you are working through your project and realize that a key feature you need is not available in your language or is extremely convoluted (e.g. futures) or has poor performance for your use case (e.g. distributed systems). Too bad. You are committed to the language. Changing now is not realistic, or... you start from scratch, or... just publish to a new language.
 

@@ -144,7 +144,8 @@ namespace vx_core {
   }
 
   // vx_argmap_from_listarg(List<arg>)
-  vx_core::Type_argmap vx_argmap_from_listarg(std::initializer_list<vx_core::Type_arg> listarg) {
+  vx_core::Type_argmap vx_argmap_from_listarg(
+    std::initializer_list<vx_core::Type_arg> listarg) {
     std::vector<std::string> listkey;
     std::map<std::string, vx_core::Type_arg> maparg;
     for (vx_core::Type_arg arg : listarg) {
@@ -180,7 +181,9 @@ namespace vx_core {
   }
 
   // vx_async_new_from_listasync(T, List<async>)
-  vx_core::vx_Type_async vx_async_new_from_listasync(vx_core::Type_any generic_list_1, vx_core::vx_Type_listasync listasync) {
+  vx_core::vx_Type_async vx_async_new_from_listasync(
+    vx_core::Type_any generic_list_1,
+    vx_core::vx_Type_listasync listasync) {
     vx_core::vx_Type_async output;
     if (listasync.size() == 0) {
       output = vx_core::vx_async_new_from_value(generic_list_1->vx_empty());
@@ -351,7 +354,8 @@ namespace vx_core {
   }
 
   // vx_funclist_from_listfunc(List<func>)
-  vx_core::Type_funclist vx_funclist_from_listfunc(std::initializer_list<vx_core::Type_func> listfunc) {
+  vx_core::Type_funclist vx_funclist_from_listfunc(
+    std::initializer_list<vx_core::Type_func> listfunc) {
     for (vx_core::Type_func fnc : listfunc) {
       vx_core::vx_reserve(fnc);
     }
@@ -361,18 +365,22 @@ namespace vx_core {
   }
 
   // vx_global_package_set(string, map<any>, map<any>, map<func>)
-  void vx_global_package_set(std::string pkgname, vx_core::vx_Type_mapany maptype, vx_core::vx_Type_mapany mapconst, vx_core::vx_Type_mapfunc mapfunc) {
+  void vx_global_package_set(
+    std::string pkgname,
+    vx_core::vx_Type_mapany maptype,
+    vx_core::vx_Type_mapany mapconst,
+    vx_core::vx_Type_mapfunc mapfunc) {
     vx_core::Class_typemap* typemap = new vx_core::Class_typemap;
-		  typemap->vx_p_map = maptype;
-	   vx_core::Class_constmap* constmap = new vx_core::Class_constmap;
-		  constmap->vx_p_map = mapconst;
-		  vx_core::Class_funcmap* funcmap = new vx_core::Class_funcmap;
-		  funcmap->vx_p_map = mapfunc;
-		  vx_core::Class_package* pkg = new vx_core::Class_package;
+    typemap->vx_p_map = maptype;
+    vx_core::Class_constmap* constmap = new vx_core::Class_constmap;
+    constmap->vx_p_map = mapconst;
+    vx_core::Class_funcmap* funcmap = new vx_core::Class_funcmap;
+    funcmap->vx_p_map = mapfunc;
+    vx_core::Class_package* pkg = new vx_core::Class_package;
     vx_core::vx_reserve({constmap, typemap, funcmap, pkg});
-		  pkg->vx_p_constmap = constmap;
-		  pkg->vx_p_typemap = typemap;
-		  pkg->vx_p_funcmap = funcmap;
+    pkg->vx_p_constmap = constmap;
+    pkg->vx_p_typemap = typemap;
+    pkg->vx_p_funcmap = funcmap;
     vx_core::Class_project* project = dynamic_cast<vx_core::Class_project*>(vx_core::c_global);
     vx_core::Class_packagemap* packagemap = dynamic_cast<vx_core::Class_packagemap*>(project->vx_p_packagemap);
     if (packagemap == NULL) {
@@ -386,7 +394,9 @@ namespace vx_core {
   }
 
   // vx_if_thenelselist(type, thenelselist)
-  vx_core::Type_any vx_if_thenelselist(vx_core::Type_any generic_any_1, vx_core::Type_thenelselist thenelselist) {
+  vx_core::Type_any vx_if_thenelselist(
+    vx_core::Type_any generic_any_1,
+    vx_core::Type_thenelselist thenelselist) {
     vx_core::Type_any output = vx_core::vx_empty(generic_any_1);
     std::vector<vx_core::Type_thenelse> listthenelse = thenelselist->vx_listthenelse();
     vx_core::Func_any_from_func fn_any = vx_core::e_any_from_func;
@@ -416,7 +426,8 @@ namespace vx_core {
   }
 
   // vx_int_from_sizet(size_t)
-  long vx_int_from_sizet(std::size_t size) {
+  long vx_int_from_sizet(
+    std::size_t size) {
     long output = 0;
     if (size == std::string::npos) {
       output = -1;
@@ -429,7 +440,8 @@ namespace vx_core {
   }
 
   // vx_int_from_string(string)
-  int vx_int_from_string(std::string text) {
+  int vx_int_from_string(
+    std::string text) {
     int output = std::stoi(text);
     return output;
   }
@@ -600,7 +612,9 @@ namespace vx_core {
   }
 
   // vx_listany_from_listany_fn(List<any>, (Function (any) : any))
-  vx_core::vx_Type_listany vx_listany_from_listany_fn(vx_core::vx_Type_listany list_any, vx_core::vx_Type_fn_any_from_any fn) {
+  vx_core::vx_Type_listany vx_listany_from_listany_fn(
+    vx_core::vx_Type_listany list_any,
+    vx_core::vx_Type_fn_any_from_any fn) {
     vx_core::vx_Type_listany output;
     for (vx_core::Type_any any : list_any) {
       vx_core::Type_any value = fn(any);
@@ -610,7 +624,9 @@ namespace vx_core {
   }
 
   // vx_listasync_from_listany_fn(List<any>, (Function (any) : any))
-  vx_core::vx_Type_listasync vx_listasync_from_listany_fn(vx_core::vx_Type_listany list_any, vx_core::vx_Type_fn_async_from_any fn) {
+  vx_core::vx_Type_listasync vx_listasync_from_listany_fn(
+    vx_core::vx_Type_listany list_any,
+    vx_core::vx_Type_fn_async_from_any fn) {
     vx_core::vx_Type_listasync output;
     for (vx_core::Type_any any : list_any) {
       vx_core::vx_Type_async async = fn(any);
@@ -665,19 +681,24 @@ namespace vx_core {
   }
 
   // vx_log(list<any>)
-  void vx_log(vx_core::vx_Type_listany listany) {
+  void vx_log(
+    vx_core::vx_Type_listany listany) {
     for (vx_core::Type_any any : listany) {
       vx_core::vx_log(any);
     }
   }
 
   // vx_log(string, string)
-  void vx_log(std::string code, std::string text) {
+  void vx_log(
+    std::string code,
+    std::string text) {
     vx_core::vx_log(code + ": " + vx_core::vx_string_from_int(vx_core::refcount) + "\n" + text);
   }
 
   // vx_log(string, any)
-  void vx_log(std::string code, vx_core::Type_any val) {
+  void vx_log(
+    std::string code,
+    vx_core::Type_any val) {
     if (!val) {
       vx_core::vx_log(code, "null");
     } else {
@@ -687,7 +708,9 @@ namespace vx_core {
   }
 
   // vx_log(string, async)
-  void vx_log(std::string code, vx_core::vx_Type_async async) {
+  void vx_log(
+    std::string code,
+    vx_core::vx_Type_async async) {
     if (!async) {
       vx_core::vx_log(code, "null");
     } else {
@@ -697,7 +720,9 @@ namespace vx_core {
   }
 
   // vx_map_from_list(listany, any<-any)
-  vx_core::vx_Type_mapany vx_map_from_list(vx_core::vx_Type_listany listany, vx_core::Func_any_from_any fn_any_from_any) {
+  vx_core::vx_Type_mapany vx_map_from_list(
+    vx_core::vx_Type_listany listany,
+    vx_core::Func_any_from_any fn_any_from_any) {
     vx_core::vx_Type_mapany output;
     for (vx_core::Type_any item : listany) {
       vx_core::Type_any keyany = fn_any_from_any->vx_any_from_any(item);
@@ -717,15 +742,40 @@ namespace vx_core {
   }
 
   // vx_map_from_map_fn(generic_map_1, map, fn-any<-key-value)
-  vx_core::Type_any vx_map_from_map_fn(vx_core::Type_map generic_map_1, vx_core::Type_map valuemap, vx_core::Func_any_from_key_value fn_any_from_key_value) {
-    vx_core::vx_Type_mapany map_value = valuemap->vx_map();
+  vx_core::Type_any vx_map_from_map_fn(
+    vx_core::Type_map generic_map_1,
+    vx_core::Type_map valuemap,
+    vx_core::Func_any_from_key_value fn_any_from_key_value) {
+    vx_core::Type_any output = vx_core::f_empty(generic_map_1);
+    vx_core::vx_Type_mapany mapvalue = valuemap->vx_map();
     vx_core::vx_Type_mapany mapnew;
-    for (auto const& [key, val] : map_value) {
-      vx_core::Type_string valkey = vx_core::vx_new_string(key);
-      vx_core::Type_any result = fn_any_from_key_value->vx_any_from_key_value(valkey, val);
-      mapnew[key] = result;
+    if (mapvalue.size() > 0) {
+      vx_core::Type_typedef typdef = vx_core::f_typedef_from_any(
+        generic_map_1
+      );
+      vx_core::Type_typelist allowtypes = vx_core::f_allowtypes_from_typedef(
+        typdef
+      );
+      std::vector<vx_core::Type_any> lallowtypes = allowtypes->vx_list();
+      vx_core::vx_release(allowtypes);
+      for (auto const& [key, value] : mapvalue) {
+        vx_core::Type_string valkey = vx_core::vx_new_string(key);
+        vx_core::vx_reserve(valkey);
+        vx_core::Type_any chgvalue = fn_any_from_key_value->vx_any_from_key_value(
+          valkey, value
+        );
+        vx_core::vx_release_one_except(valkey, value);
+        vx_core::Type_any chgtype = chgvalue->vx_type();
+        if (vx_core::vx_boolean_from_list_find(lallowtypes, chgtype)) {
+          mapnew[key] = chgvalue;
+        } else {
+          vx_core::vx_release({chgvalue});
+        }
+      }
+      output = generic_map_1->vx_new_from_map(
+        mapnew
+      );
     }
-    vx_core::Type_any output = generic_map_1->vx_new_from_map(mapnew);
     return output;
   }
 
@@ -740,7 +790,9 @@ namespace vx_core {
   }
 
   // vx_memory_leak_test(string, int)
-  bool vx_memory_leak_test(std::string id, long initialcount) {
+  bool vx_memory_leak_test(
+    std::string id,
+    long initialcount) {
     bool output = true;
     if (vx_core::refcount - initialcount != 0) {
       vx_core::vx_log("Error: " + id + ", Memory Leak:" + vx_core::vx_string_from_int(vx_core::refcount));
@@ -750,7 +802,10 @@ namespace vx_core {
   }
 
   // vx_memory_leak_test(string, int, int)
-  bool vx_memory_leak_test(std::string id, long initialcount, long expectedcount) {
+  bool vx_memory_leak_test(
+    std::string id,
+    long initialcount,
+    long expectedcount) {
     bool output = true;
     long actualcount = vx_core::refcount - initialcount;
     if (actualcount != expectedcount) {
@@ -761,7 +816,8 @@ namespace vx_core {
   }
 
   // vx_msg_from_errortext(string)
-  vx_core::Type_msg vx_msg_from_errortext(const std::string errortext) {
+  vx_core::Type_msg vx_msg_from_errortext(
+    const std::string errortext) {
     vx_core::Type_msg output = new vx_core::Class_msg();
     vx_core::Type_string string_error = vx_core::vx_new_string(errortext);
     vx_core::vx_reserve(string_error);
@@ -771,7 +827,9 @@ namespace vx_core {
   }
 
   // vx_msg_from_exception(string, exception)
-  vx_core::Type_msg vx_msg_from_exception(const std::string text, std::exception err) {
+  vx_core::Type_msg vx_msg_from_exception(
+    const std::string text,
+    std::exception err) {
     vx_core::Type_msg output = new vx_core::Class_msg();
     output->vx_p_text = vx_core::vx_new_string(text);
     output->vx_p_severity = vx_core::c_msg_severe;
@@ -780,7 +838,9 @@ namespace vx_core {
   }
 
   // vx_msgblock_from_copy_listval(msgblock, List<any>)
-  vx_core::Type_msgblock vx_msgblock_from_copy_listval(vx_core::Type_msgblock msgblock, vx_core::vx_Type_listany vals) {
+  vx_core::Type_msgblock vx_msgblock_from_copy_listval(
+    vx_core::Type_msgblock msgblock,
+    vx_core::vx_Type_listany vals) {
     vx_core::Type_msgblock output = vx_core::e_msgblock;
     std::vector<vx_core::Type_msgblock> listmsgblock;
     if (msgblock) {
@@ -813,12 +873,15 @@ namespace vx_core {
   }
 
   // vx_new_anylist(any...)
-  vx_core::Type_anylist vx_new_anylist(vx_core::vx_Type_listany listany) {
+  vx_core::Type_anylist vx_new_anylist(
+    vx_core::vx_Type_listany listany) {
     return vx_core::vx_new(vx_core::t_anylist, listany);
   }
 
   // vx_new_arg(string, type, bool, bool)
-  vx_core::Type_arg vx_new_arg(std::string name, vx_core::Type_any type) {
+  vx_core::Type_arg vx_new_arg(
+    std::string name,
+    vx_core::Type_any type) {
     vx_core::Type_string namestring = vx_core::vx_new_string(name);
     vx_core::vx_reserve({namestring});
     vx_core::Type_arg output = new vx_core::Class_arg();
@@ -846,7 +909,8 @@ namespace vx_core {
   }
 
   // vx_new_decimal_from_string(string)
-  vx_core::Type_decimal vx_new_decimal_from_string(std::string sval) {
+  vx_core::Type_decimal vx_new_decimal_from_string(
+    std::string sval) {
     vx_core::Type_decimal output = vx_core::e_decimal;
     if (sval != "") {
       output = new vx_core::Class_decimal();
@@ -946,28 +1010,35 @@ namespace vx_core {
   }
 
   // vx_release_except(any, except)
-  void vx_release_except(vx_core::Type_any any, vx_core::Type_any except) {
+  void vx_release_except(
+    vx_core::Type_any any,
+    vx_core::Type_any except) {
     vx_core::vx_ref_plus(except);
     vx_core::vx_release(any);
     vx_core::vx_ref_minus(except);
   }
 
   // vx_release_except(any..., except)
-  void vx_release_except(vx_core::vx_Type_listany listany, vx_core::Type_any except) {
+  void vx_release_except(
+    vx_core::vx_Type_listany listany,
+    vx_core::Type_any except) {
     vx_core::vx_ref_plus(except);
     vx_core::vx_release(listany);
     vx_core::vx_ref_minus(except);
   }
 
   // vx_release_except_async(async, except)
-  void vx_release_except_async(vx_core::vx_Type_async async, vx_core::Type_any except) {
+  void vx_release_except_async(
+    vx_core::vx_Type_async async,
+    vx_core::Type_any except) {
     vx_core::vx_ref_plus(except);
     vx_core::vx_release_async(async);
     vx_core::vx_ref_minus(except);
   }
 
   // vx_release_one(any)
-  void vx_release_one(vx_core::Type_any any) {
+  void vx_release_one(
+    vx_core::Type_any any) {
     if (any) {
       long iref = vx_core::vx_ref_minus(any);
       if (iref == 0) {
@@ -977,14 +1048,16 @@ namespace vx_core {
   }
 
   // vx_release_one(any...)
-  void vx_release_one(vx_core::vx_Type_listany listany) {
+  void vx_release_one(
+    vx_core::vx_Type_listany listany) {
     for (vx_core::Type_any any : listany) {
       vx_core::vx_release_one(any);
     }
   }
 
   // vx_release_one_async(async)
-  void vx_release_one_async(vx_core::vx_Type_async async) {
+  void vx_release_one_async(
+    vx_core::vx_Type_async async) {
     if (async) {
       long iref = async->vx_p_iref;
       if (iref > 0) {
@@ -999,56 +1072,68 @@ namespace vx_core {
   }
 
   // vx_release_one_async(async...)
-  void vx_release_one_async(vx_core::vx_Type_listasync listasync) {
+  void vx_release_one_async(
+    vx_core::vx_Type_listasync listasync) {
     for (vx_core::vx_Type_async async : listasync) {
       vx_core::vx_release_one_async(async);
     }
   }
 
   // vx_release_one_except(any, except)
-  void vx_release_one_except(vx_core::Type_any any, vx_core::Type_any except) {
+  void vx_release_one_except(
+    vx_core::Type_any any,
+    vx_core::Type_any except) {
     vx_core::vx_ref_plus(except);
     vx_core::vx_release_one(any);
     vx_core::vx_ref_minus(except);
   }
 
   // vx_release_one_except(any..., except)
-  void vx_release_one_except(vx_core::vx_Type_listany listany, vx_core::Type_any except) {
+  void vx_release_one_except(
+    vx_core::vx_Type_listany listany,
+    vx_core::Type_any except) {
     vx_core::vx_ref_plus(except);
     vx_core::vx_release_one(listany);
     vx_core::vx_ref_minus(except);
   }
 
   // vx_release_one_except_async(async, except)
-  void vx_release_one_except_async(vx_core::vx_Type_async async, vx_core::Type_any except) {
+  void vx_release_one_except_async(
+    vx_core::vx_Type_async async,
+    vx_core::Type_any except) {
     vx_core::vx_ref_plus(except);
     vx_core::vx_release_one_async(async);
     vx_core::vx_ref_minus(except);
   }
 
   // vx_release_one_except_async(async..., except)
-  void vx_release_one_except_async(vx_core::vx_Type_listasync listasync, vx_core::Type_any except) {
+  void vx_release_one_except_async(
+    vx_core::vx_Type_listasync listasync,
+    vx_core::Type_any except) {
     vx_core::vx_ref_plus(except);
     vx_core::vx_release_one_async(listasync);
     vx_core::vx_ref_minus(except);
   }
 
   // vx_reserve(any)
-  void vx_reserve(vx_core::Type_any any) {
+  void vx_reserve(
+    vx_core::Type_any any) {
     if (any) {
       vx_core::vx_ref_plus(any);
     }
   }
 
   // vx_reserve(any...)
-  void vx_reserve(vx_core::vx_Type_listany listany) {
+  void vx_reserve(
+    vx_core::vx_Type_listany listany) {
     for (vx_core::Type_any any : listany) {
       vx_core::vx_ref_plus(any);
     }
   }
 
   // vx_reserve_async(async)
-  void vx_reserve_async(vx_core::vx_Type_async async) {
+  void vx_reserve_async(
+    vx_core::vx_Type_async async) {
     if (async) {
       long iref = async->vx_p_iref;
       if (iref >= 0) {
@@ -1059,20 +1144,23 @@ namespace vx_core {
   }
 
   // vx_reserve_async(listasync)
-  void vx_reserve_async(vx_core::vx_Type_listasync listasync) {
+  void vx_reserve_async(
+    vx_core::vx_Type_listasync listasync) {
     for (vx_core::vx_Type_async async : listasync) {
       vx_core::vx_reserve_async(async);
     }
   }
 
   // vx_reserve_context(context)
-  void vx_reserve_context(vx_core::Type_context context) {
+  void vx_reserve_context(
+    vx_core::Type_context context) {
     context->vx_p_iref = -2;
     vx_core::refcount = 0;
   }
 
   // vx_reserve_empty(any)
-  void vx_reserve_empty(vx_core::Type_any any) {
+  void vx_reserve_empty(
+    vx_core::Type_any any) {
     if (any->vx_p_iref == 0) {
       any->vx_p_iref = -2;
       vx_core::refcount -= 1;
@@ -1080,7 +1168,8 @@ namespace vx_core {
   }
 
   // vx_reserve_type(any)
-  void vx_reserve_type(vx_core::Type_any any) {
+  void vx_reserve_type(
+    vx_core::Type_any any) {
     if (any->vx_p_iref == 0) {
       any->vx_p_iref = -1;
       vx_core::refcount -= 1;
@@ -1088,12 +1177,17 @@ namespace vx_core {
   }
 
   // vx_string_from_any(val)
-  std::string vx_string_from_any(vx_core::Type_any value) {
+  std::string vx_string_from_any(
+    vx_core::Type_any value) {
     return vx_core::vx_string_from_any_indent(value, 0, true, false);
   }
 
   // vx_string_from_any_indent(val, indent, linefeed, refcount)
-  std::string vx_string_from_any_indent(vx_core::Type_any value, long indent, bool linefeed, bool refcount) {
+  std::string vx_string_from_any_indent(
+    vx_core::Type_any value,
+    long indent,
+    bool linefeed,
+    bool refcount) {
     std::string output = "";
     std::string text = "";
     if (indent > 50) {
@@ -1119,39 +1213,48 @@ namespace vx_core {
       } else if (value == type) {
         text = typedefname;
       } else if (type == vx_core::t_boolean) {
-        vx_core::Type_boolean valbool = vx_core::vx_any_from_any(vx_core::t_boolean, value);
+        vx_core::Type_boolean valbool = vx_core::vx_any_from_any(
+          vx_core::t_boolean, value);
         if (valbool->vx_boolean()) {
           text = "true";
         } else {
           text = "false";
         }
       } else if (type == vx_core::t_decimal) {
-        vx_core::Type_decimal valdec = vx_core::vx_any_from_any(vx_core::t_decimal, value);
+        vx_core::Type_decimal valdec = vx_core::vx_any_from_any(
+          vx_core::t_decimal, value);
         text = valdec->vx_string();
         if (refcount || valdec->vx_p_msgblock) {
           text = "(decimal \"" + text + "\"";
           if (refcount) {
-            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(vx_core::vx_ref(value));
+            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(
+              vx_core::vx_ref(value));
           }
           if (valdec->vx_p_msgblock) {
-            std::string msgtext = vx_core::vx_string_from_any_indent(valdec->vx_msgblock(), indent + 1, linefeed, refcount);
+            std::string msgtext = vx_core::vx_string_from_any_indent(
+              valdec->vx_msgblock(), indent + 1, linefeed, refcount);
             text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
           }
           text += ")";
         }
       } else if (type == vx_core::t_float) {
-        vx_core::Type_float valfloat = vx_core::vx_any_from_any(vx_core::t_float, value);
-        text = vx_core::vx_string_from_float(valfloat->vx_float());
+        vx_core::Type_float valfloat = vx_core::vx_any_from_any(
+          vx_core::t_float, value);
+        text = vx_core::vx_string_from_float(
+          valfloat->vx_float());
         if (vx_core::vx_boolean_from_string_ends(text, ".0")) {
-          text = vx_core::vx_string_from_string_start_end(text, 0, text.length() - 2);
+          text = vx_core::vx_string_from_string_start_end(
+            text, 0, text.length() - 2);
         }
         if (refcount || valfloat->vx_p_msgblock) {
           text = "(float \"" + text + "\"";
           if (refcount) {
-            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(vx_core::vx_ref(value));
+            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(
+              vx_core::vx_ref(value));
           }
           if (valfloat->vx_p_msgblock) {
-            std::string msgtext = vx_core::vx_string_from_any_indent(valfloat->vx_msgblock(), indent + 1, linefeed, refcount);
+            std::string msgtext = vx_core::vx_string_from_any_indent(
+              valfloat->vx_msgblock(), indent + 1, linefeed, refcount);
             text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
           }
           text += ")";
@@ -1164,31 +1267,38 @@ namespace vx_core {
         } else if (value == vx_core::c_neginfinity) {
           text = "neginfinity";
         } else {
-          vx_core::Type_int valint = vx_core::vx_any_from_any(vx_core::t_int, value);
+          vx_core::Type_int valint = vx_core::vx_any_from_any(
+            vx_core::t_int, value);
           text = std::to_string(valint->vx_int());
           if (refcount || valint->vx_p_msgblock) {
             text = "(int \"" + text + "\"";
             if (refcount) {
-              text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(vx_core::vx_ref(value));
+              text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(
+                vx_core::vx_ref(value));
             }
             if (valint->vx_p_msgblock) {
-              std::string msgtext = vx_core::vx_string_from_any_indent(valint->vx_msgblock(), indent + 1, linefeed, refcount);
+              std::string msgtext = vx_core::vx_string_from_any_indent(
+                valint->vx_msgblock(), indent + 1, linefeed, refcount);
               text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
             }
             text += ")";
           }
         }
       } else if (type == vx_core::t_string) {
-        vx_core::Type_string valstring = vx_core::vx_any_from_any(vx_core::t_string, value);
+        vx_core::Type_string valstring = vx_core::vx_any_from_any(
+          vx_core::t_string, value);
         std::string sval = valstring->vx_string();
-        sval = vx_core::vx_string_from_string_find_replace(sval, "\"", "\\\"");
+        sval = vx_core::vx_string_from_string_find_replace(
+          sval, "\"", "\\\"");
         if (refcount || valstring->vx_p_msgblock) {
           text = "(string \"" + sval + "\"";
           if (refcount) {
-            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(vx_core::vx_ref(value));
+            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(
+              vx_core::vx_ref(value));
           }
           if (valstring->vx_p_msgblock) {
-            std::string msgtext = vx_core::vx_string_from_any_indent(valstring->vx_msgblock(), indent + 1, linefeed, refcount);
+            std::string msgtext = vx_core::vx_string_from_any_indent(
+              valstring->vx_msgblock(), indent + 1, linefeed, refcount);
             text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
           }
           text += ")";
@@ -1200,24 +1310,29 @@ namespace vx_core {
       } else {
         std::string extend = typdef->extend()->vx_string();
         if (extend == ":list") {
-          vx_core::Type_list vallist = vx_core::vx_any_from_any(vx_core::t_list, value);
+          vx_core::Type_list vallist = vx_core::vx_any_from_any(
+            vx_core::t_list, value);
           long indentint = indent;
           indentint += 1;
           vx_core::vx_Type_listany listval = vallist->vx_list();
           for (vx_core::Type_any valsub : listval) {
-            std::string ssub = vx_core::vx_string_from_any_indent(valsub, indentint, linefeed, refcount);
+            std::string ssub = vx_core::vx_string_from_any_indent(
+              valsub, indentint, linefeed, refcount);
             text += "\n " + indenttext + ssub;
           }
           if (vallist->vx_p_msgblock) {
-            std::string msgtext = vx_core::vx_string_from_any_indent(vallist->vx_msgblock(), indentint, linefeed, refcount);
+            std::string msgtext = vx_core::vx_string_from_any_indent(
+              vallist->vx_msgblock(), indentint, linefeed, refcount);
             text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
           }
           if (refcount) {
-            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(vallist->vx_p_iref);
+            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(
+              vallist->vx_p_iref);
           }
           text = "(" + typedefname + text + ")";
         } else if (extend == ":map") {
-          vx_core::Type_map valmap = vx_core::vx_any_from_any(vx_core::t_map, value);
+          vx_core::Type_map valmap = vx_core::vx_any_from_any(
+            vx_core::t_map, value);
           long indentint = indent;
           indentint += 2;
           vx_core::vx_Type_mapany mapval = valmap->vx_map();
@@ -1226,7 +1341,8 @@ namespace vx_core {
             if (!vx_boolean_from_string_starts(key, ":")) {
               key = ":" + key;
             }
-            std::string strval = vx_core::vx_string_from_any_indent(valsub, indentint, linefeed, refcount);
+            std::string strval = vx_core::vx_string_from_any_indent(
+              valsub, indentint, linefeed, refcount);
             if (vx_boolean_from_string_find(strval, "\n")) {
               strval = "\n  " + indenttext + strval;
             } else {
@@ -1235,15 +1351,18 @@ namespace vx_core {
             text += "\n" + indenttext + " " + key + strval;
           }
           if (valmap->vx_p_msgblock) {
-            std::string msgtext = vx_core::vx_string_from_any_indent(valmap->vx_msgblock(), indentint, linefeed, refcount);
+            std::string msgtext = vx_core::vx_string_from_any_indent(
+              valmap->vx_msgblock(), indentint, linefeed, refcount);
             text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
           }
           if (refcount) {
-            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(valmap->vx_p_iref);
+            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(
+              valmap->vx_p_iref);
           }
           text = "(" + typedefname + text + ")";
         } else if (extend == ":struct") {
-          vx_core::Type_struct valstruct = vx_core::vx_any_from_any(vx_core::t_struct, value);
+          vx_core::Type_struct valstruct = vx_core::vx_any_from_any(
+            vx_core::t_struct, value);
           vx_core::vx_Type_mapany mapval = valstruct->vx_map();
           vx_core::Type_argmap properties = typdef->properties();
           std::vector<std::string> keys = properties->vx_p_keys;
@@ -1253,7 +1372,8 @@ namespace vx_core {
             vx_core::Type_any valsub = mapval[key];
             if (!valsub) {
             } else if (valsub != valsub->vx_empty()) {
-              std::string strval = vx_core::vx_string_from_any_indent(valsub, indentint, linefeed, refcount);
+              std::string strval = vx_core::vx_string_from_any_indent(
+                valsub, indentint, linefeed, refcount);
               if (vx_boolean_from_string_find(strval, "\n")) {
                 strval = "\n  " + indenttext + strval;
               } else {
@@ -1263,22 +1383,27 @@ namespace vx_core {
             }
           }
           if (valstruct->vx_p_msgblock) {
-            std::string msgtext = vx_core::vx_string_from_any_indent(valstruct->vx_msgblock(), indentint, linefeed, refcount);
+            std::string msgtext = vx_core::vx_string_from_any_indent(
+              valstruct->vx_msgblock(), indentint, linefeed, refcount);
             text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
           }
           if (refcount) {
-            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(valstruct->vx_p_iref);
+            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(
+              valstruct->vx_p_iref);
           }
           text = "(" + typedefname + text + ")";
         } else if (extend == ":func") {
-          vx_core::Type_func valfunc = vx_core::vx_any_from_any(vx_core::t_func, value);
+          vx_core::Type_func valfunc = vx_core::vx_any_from_any(
+            vx_core::t_func, value);
           text = typedefname;
           if (valfunc->vx_p_msgblock) {
-            text = vx_core::vx_string_from_any_indent(valfunc->vx_msgblock(), indent, linefeed, refcount);
+            text = vx_core::vx_string_from_any_indent(
+              valfunc->vx_msgblock(), indent, linefeed, refcount);
             text += "\n" + indenttext + " :msgblock\n  " + indenttext + text;
           }
           if (refcount) {
-            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(valfunc->vx_p_iref);
+            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(
+              valfunc->vx_p_iref);
           }
           text = "(" + text + ")";
         }
@@ -1290,24 +1415,33 @@ namespace vx_core {
   }
 
   // vx_string_from_any_refcount(val)
-  std::string vx_string_from_any_refcount(vx_core::Type_any value) {
-    return vx_core::vx_string_from_any_indent(value, 0, true, true);
+  std::string vx_string_from_any_refcount(
+    vx_core::Type_any value) {
+    return vx_core::vx_string_from_any_indent(
+      value, 0, true, true);
   }
 
   // vx_string_from_async(async)
-  std::string vx_string_from_async(vx_core::vx_Type_async async) {
-    return vx_core::vx_string_from_async_indent(async, 0, true, false);
+  std::string vx_string_from_async(
+    vx_core::vx_Type_async async) {
+    return vx_core::vx_string_from_async_indent(
+      async, 0, true, false);
   }
 
   // vx_string_from_async_indent(async, indent, linefeed, refcount)
-  std::string vx_string_from_async_indent(vx_core::vx_Type_async async, long indent, bool linefeed, bool refcount) {
+  std::string vx_string_from_async_indent(
+    vx_core::vx_Type_async async,
+    long indent,
+    bool linefeed,
+    bool refcount) {
     std::string output = "";
     if (indent > 50) {
       output = "Error: Max Depth Exceeded";
     } else if (!async) {
       output = "null";
     } else {
-      std::string indenttext = vx_core::vx_string_from_string_repeat(" ", indent);
+      std::string indenttext = vx_core::vx_string_from_string_repeat(
+        " ", indent);
       output = indenttext + "(async";
       vx_core::Type_any type = async->type;
       if (type) {
@@ -1323,14 +1457,16 @@ namespace vx_core {
       }
       vx_core::Type_any val = async->value;
       if (val) {
-        std::string text = vx_core::vx_string_from_any_indent(val, indent + 1, linefeed, refcount);
+        std::string text = vx_core::vx_string_from_any_indent(
+          val, indent + 1, linefeed, refcount);
         output += "\n " + indenttext + ":value " + text;
       }
       vx_core::vx_Type_listasync listasync = async->listasync;
       if (listasync.size() > 0) {
         std::string text = "";
         for (vx_core::vx_Type_async async_sub : listasync) {
-          text += "\n" + vx_core::vx_string_from_async_indent(async_sub, indent + 2, linefeed, refcount);
+          text += "\n" + vx_core::vx_string_from_async_indent(
+            async_sub, indent + 2, linefeed, refcount);
         }
         output += "\n " + indenttext + ":listasync (" + text + ")";
       }
@@ -1342,7 +1478,8 @@ namespace vx_core {
       if (lambdavars.size() > 0) {
         std::string text = "";
         for (vx_core::Type_any valsub : lambdavars) {
-          std::string ssub = vx_core::vx_string_from_any_indent(valsub, indent + 2, linefeed, refcount);
+          std::string ssub = vx_core::vx_string_from_any_indent(
+            valsub, indent + 2, linefeed, refcount);
           text += "\n  " + indenttext + ssub;
         }
         output += "\n " + indenttext + ":lambdavars (" + text + ")";
@@ -1353,11 +1490,13 @@ namespace vx_core {
       }
       vx_core::vx_Type_async asyncparent = async->async_parent;
       if (asyncparent) {
-        std::string text = vx_core::vx_string_from_async_indent(asyncparent, indent + 2, linefeed, refcount);
+        std::string text = vx_core::vx_string_from_async_indent(
+          asyncparent, indent + 2, linefeed, refcount);
         output += "\n " + indenttext + ":async_parent\n" + text;
       }
       if (refcount) {
-        output += "\n " + indenttext + ":refcount " + vx_core::vx_string_from_int(async->vx_p_iref);
+        output += "\n " + indenttext + ":refcount " + vx_core::vx_string_from_int(
+          async->vx_p_iref);
       }
       output += ")";
     }
@@ -1365,8 +1504,10 @@ namespace vx_core {
   }
 
   // vx_string_from_async_refcount(async)
-  std::string vx_string_from_async_refcount(vx_core::vx_Type_async async) {
-    return vx_core::vx_string_from_async_indent(async, 0, true, true);
+  std::string vx_string_from_async_refcount(
+    vx_core::vx_Type_async async) {
+    return vx_core::vx_string_from_async_indent(
+      async, 0, true, true);
   }
 
   // vx_string_from_int(long)
@@ -1383,7 +1524,9 @@ namespace vx_core {
   }
 
   // vx_string_from_liststring_pos(list<string>, long)
-  std::string vx_string_from_liststring_pos(std::vector<std::string> liststring, long pos) {
+  std::string vx_string_from_liststring_pos(
+    std::vector<std::string> liststring,
+    long pos) {
     std::string output = "";
     if (pos < vx_core::vx_int_from_sizet(liststring.size())) {
       output = liststring[pos];
@@ -1392,7 +1535,10 @@ namespace vx_core {
   }
 
   // vx_string_from_string_find_replace(string, string, string)
-  std::string vx_string_from_string_find_replace(std::string text, std::string find, std::string replace) {
+  std::string vx_string_from_string_find_replace(
+    std::string text,
+    std::string find,
+    std::string replace) {
     std::string output = text;
     if (!find.empty()) {
       size_t pos = output.find(find);
@@ -1405,14 +1551,21 @@ namespace vx_core {
   }
 
   // vx_string_from_string_find_replace(string, string, string)
-  vx_core::Type_string vx_string_from_string_find_replace(vx_core::Type_string text, vx_core::Type_string find, vx_core::Type_string replace) {
-    std::string stext = vx_core::vx_string_from_string_find_replace(text->vx_string(), find->vx_string(), replace->vx_string());
+  vx_core::Type_string vx_string_from_string_find_replace(
+    vx_core::Type_string text,
+    vx_core::Type_string find,
+    vx_core::Type_string replace) {
+    std::string stext = vx_core::vx_string_from_string_find_replace(
+      text->vx_string(), find->vx_string(), replace->vx_string());
     vx_core::Type_string output = vx_core::vx_new_string(stext);
     return output;
   }
 
   // vx_string_from_string_find_replacefirst(string, string, string)
-  std::string vx_string_from_string_find_replacefirst(std::string text, std::string find, std::string replacefirst) {
+  std::string vx_string_from_string_find_replacefirst(
+    std::string text,
+    std::string find,
+    std::string replacefirst) {
     std::string output = text;
     size_t start_pos = output.find(find);
     if (start_pos != std::string::npos) {
@@ -1422,7 +1575,9 @@ namespace vx_core {
   }
 
   // vx_string_from_string_repeat(string, int)
-  std::string vx_string_from_string_repeat(std::string text, long repeat) {
+  std::string vx_string_from_string_repeat(
+    std::string text,
+    long repeat) {
     std::string output = "";
     for (int i = 0; i < repeat; i++) {
       output += text;
@@ -1431,12 +1586,18 @@ namespace vx_core {
   }
 
   // vx_string_from_string_start(string, int)
-  std::string vx_string_from_string_start(std::string text, long start) {
-   return vx_core::vx_string_from_string_start_end(text, start, text.length());
+  std::string vx_string_from_string_start(
+    std::string text,
+    long start) {
+    return vx_core::vx_string_from_string_start_end(
+      text, start, text.length());
   }
 
   // vx_string_from_string_start_end(string, int, int)
-  std::string vx_string_from_string_start_end(std::string text, long start, long end) {
+  std::string vx_string_from_string_start_end(
+    std::string text,
+    long start,
+    long end) {
     std::string output = "";
     long maxlen = text.length();
     if (end < 0) {
@@ -1456,7 +1617,10 @@ namespace vx_core {
   }
 
   // vx_switch(type, val, thenelselist)
-  vx_core::Type_any vx_switch(vx_core::Type_any generic_any_1, vx_core::Type_any val, vx_core::Type_thenelselist thenelselist) {
+  vx_core::Type_any vx_switch(
+    vx_core::Type_any generic_any_1,
+    vx_core::Type_any val,
+    vx_core::Type_thenelselist thenelselist) {
     vx_core::Type_any output = vx_core::vx_empty(generic_any_1);
     vx_core::Func_any_from_func fn_any = NULL;
     std::vector<vx_core::Type_thenelse> listthenelse = thenelselist->vx_listthenelse();
@@ -1489,7 +1653,8 @@ namespace vx_core {
   }
 
   // vx_typelist_from_listany(list<any>)
-  vx_core::Type_typelist vx_typelist_from_listany(vx_core::vx_Type_listany listany) {
+  vx_core::Type_typelist vx_typelist_from_listany(
+    vx_core::vx_Type_listany listany) {
     vx_core::Type_typelist output = new vx_core::Class_typelist();
     output->vx_p_list = listany;
     vx_core::vx_reserve(listany);
@@ -1497,11 +1662,15 @@ namespace vx_core {
   }
 
   //class Abstract_replfunc {
-    vx_core::Type_any Abstract_replfunc::vx_repl(vx_core::Type_anylist arglist) {return vx_core::e_any;}
+    vx_core::Type_any Abstract_replfunc::vx_repl(
+      vx_core::Type_anylist arglist) {
+      return vx_core::e_any;
+    }
   //}
 
   //class Abstract_replfunc_async {
-    vx_core::vx_Type_async Abstract_replfunc_async::vx_repl(vx_core::Type_anylist arglist) {
+    vx_core::vx_Type_async Abstract_replfunc_async::vx_repl(
+      vx_core::Type_anylist arglist) {
       return vx_core::vx_async_new_from_value(vx_core::e_any);
     }
   //}
@@ -1525,7 +1694,9 @@ namespace vx_core {
   //}
 
   //class Class_float {
-    float Class_float::vx_float() const {return vx_p_float;}
+    float Class_float::vx_float() const {
+      return vx_p_float;
+    }
   //}
 
   //class Class_funcdef {
@@ -1547,7 +1718,9 @@ namespace vx_core {
   //}
 
   //class Class_int {
-    long Class_int::vx_int() const {return this->vx_p_int;}
+    long Class_int::vx_int() const {
+      return this->vx_p_int;
+    }
   //}
 
   //class Class_string {
@@ -1568,8 +1741,7 @@ namespace vx_core {
       vx_core::Type_funclist disallowfuncs,
       vx_core::Type_anylist allowvalues,
       vx_core::Type_anylist disallowvalues,
-      vx_core::Type_argmap properties
-    ) {
+      vx_core::Type_argmap properties) {
       vx_core::Type_typedef output = new vx_core::Class_typedef();
       vx_core::Type_string pkgname = vx_core::vx_new_string(spkgname); 
       vx_core::Type_string name = vx_core::vx_new_string(sname); 

@@ -399,28 +399,52 @@
         (string<-meta-indent (meta :charset "utf-8") 0))
  :doc "Returns string from head")
 
+(func string<-node : string
+ [node : any-1]
+ (string<-node-indent
+  node 0)
+ :doc "Returns a string from any node")
+
 (func string<-node-indent : string
  [node   : any-1
   indent : int]
  (switch (type<-any node)
-  (case body       (string<-body-indent       (any<-any node) indent))
-  (case details    (string<-details-indent    (any<-any node) indent))
-  (case div        (string<-div-indent        (any<-any node) indent))
-  (case h1         (string<-h1-indent         (any<-any node) indent))
-  (case h2         (string<-h2-indent         (any<-any node) indent))
-  (case h3         (string<-h3-indent         (any<-any node) indent))
-  (case head       (string<-head-indent       (any<-any node) indent))
-  (case footer     (string<-footer-indent     (any<-any node) indent))
-  (case img        (string<-img-indent        (any<-any node) indent))
-  (case meta       (string<-meta-indent       (any<-any node) indent))
-  (case p          (string<-p-indent          (any<-any node) indent))
-  (case stylesheet (string<-stylesheet-indent (any<-any node) indent))
-  (case table      (string<-table-indent      (any<-any node) indent))
-  (case title      (string<-title-indent      (any<-any node) indent))
-  (case tbody      (string<-tbody-indent      (any<-any node) indent))
-  (case thead      (string<-thead-indent      (any<-any node) indent))
-  (case td         (string<-td-indent         (any<-any node) indent))
-  (case tr         (string<-tr-indent         (any<-any node) indent)))
+  (case body
+   (string<-body-indent (any<-any node) indent))
+  (case details
+   (string<-details-indent (any<-any node) indent))
+  (case div
+   (string<-div-indent (any<-any node) indent))
+  (case h1
+   (string<-h1-indent (any<-any node) indent))
+  (case h2
+   (string<-h2-indent (any<-any node) indent))
+  (case h3
+   (string<-h3-indent (any<-any node) indent))
+  (case head
+   (string<-head-indent (any<-any node) indent))
+  (case footer
+   (string<-footer-indent (any<-any node) indent))
+  (case img
+   (string<-img-indent (any<-any node) indent))
+  (case meta
+   (string<-meta-indent (any<-any node) indent))
+  (case p
+   (string<-p-indent (any<-any node) indent))
+  (case stylesheet
+   (string<-stylesheet-indent (any<-any node) indent))
+  (case table
+   (string<-table-indent (any<-any node) indent))
+  (case title
+   (string<-title-indent (any<-any node) indent))
+  (case tbody
+   (string<-tbody-indent (any<-any node) indent))
+  (case thead
+   (string<-thead-indent (any<-any node) indent))
+  (case td
+   (string<-td-indent (any<-any node) indent))
+  (case tr
+   (string<-tr-indent (any<-any node) indent)))
  :doc "Returns a string from any node")
 
 (func string<-nodelist-tag-prop-indent : string

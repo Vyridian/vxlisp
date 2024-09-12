@@ -134,7 +134,7 @@
               <p class="coveragenums">6% 5/76</p>
               <p class="coveragenums">13% 2/15</p>
               <p class="coveragenums">55% 74/134</p>
-              <p class="coveragenums">90% 232/257</p>
+              <p class="coveragenums">91% 235/257</p>
               <p class="coveragenums">0% 1/166</p>
               <p class="coveragenums">0% 1/166</p>
             </summary>
@@ -236,7 +236,9 @@
                       <p class="preformatted">float</p>
                     </td>
                     <td>
-                      <p class="preformatted">(test 4.5 (float 4.5))</p>
+                      <p class="preformatted">(test
+ 4.5
+ (float 4.5))</p>
                     </td>
                     <td>
                       <p class="preformatted">4.5</p>
@@ -4208,13 +4210,13 @@ ab
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/web/html</p>
-              <p class="coveragenums">9% 7/73</p>
+              <p class="coveragenums">9% 7/74</p>
               <p class="coveragenums">0% 0/32</p>
               <p class="coveragenums">100% 0/0</p>
-              <p class="coveragenums">17% 7/41</p>
-              <p class="coveragenums">98% 72/73</p>
-              <p class="coveragenums">0% 0/41</p>
-              <p class="coveragenums">0% 0/41</p>
+              <p class="coveragenums">16% 7/42</p>
+              <p class="coveragenums">98% 73/74</p>
+              <p class="coveragenums">0% 0/42</p>
+              <p class="coveragenums">0% 0/42</p>
             </summary>
             <div>
               <table>
@@ -4488,13 +4490,13 @@ ab
             <summary>
               <p class="passflag">Pass</p>
               <p class="pkgname">vx/collection</p>
-              <p class="coveragenums">69% 16/23</p>
+              <p class="coveragenums">72% 18/25</p>
               <p class="coveragenums">100% 0/0</p>
               <p class="coveragenums">100% 0/0</p>
-              <p class="coveragenums">69% 16/23</p>
-              <p class="coveragenums">100% 23/23</p>
-              <p class="coveragenums">0% 0/23</p>
-              <p class="coveragenums">0% 0/23</p>
+              <p class="coveragenums">72% 18/25</p>
+              <p class="coveragenums">100% 25/25</p>
+              <p class="coveragenums">0% 0/25</p>
+              <p class="coveragenums">0% 0/25</p>
             </summary>
             <div>
               <table>
@@ -4568,6 +4570,42 @@ ab
                     </td>
                     <td>
                       <p class="preformatted">8</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">anymap&lt;-struct</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (anymap
+  :name "sname"
+  :wordmap
+   (stringmap
+    :a "x"))
+ (anymap&lt;-struct
+  (translation
+   :name "sname"
+   :wordmap
+    (stringmap
+     :a "x"))))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(anymap
+ :name "sname"
+ :wordmap
+  (stringmap
+   :a "x"))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(anymap
+ :name "sname"
+ :wordmap
+  (stringmap
+   :a "x"))</p>
                     </td>
                   </tr>
                   <tr>
@@ -4950,6 +4988,33 @@ ab
                       <p class="preformatted">(stringmap
  :a "2"
  :c "3")</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p class="passflag">Pass</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">map&lt;-struct</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(test
+ (stringmap
+  :name "sname")
+ (map&lt;-struct : stringmap
+  (translation
+   :name "sname"
+   :wordmap
+    (stringmap
+     :a "x"))))</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(stringmap
+ :name "sname")</p>
+                    </td>
+                    <td>
+                      <p class="preformatted">(stringmap
+ :name "sname")</p>
                     </td>
                   </tr>
                 </tbody>

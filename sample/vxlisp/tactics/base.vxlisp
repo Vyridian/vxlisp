@@ -1,11 +1,11 @@
 (package tactics/base
  :libs (lib html :path vx/web/html)
-	     (lib tb   :path vx/data/textblock)
+       (lib tb   :path vx/data/textblock)
        (lib xml  :path vx/data/xml)
  :doc "Tactics Base Types")
 
 (type ability : struct
- :traits     [card])
+ :traits [card])
 
 (type abilitylist : list
  :allowtypes [ability])
@@ -18,10 +18,11 @@
  :allowtypes [book])
 
 (type card : struct
- :properties [name       : string
-              titles     : string
-						  references : string
-						  summary    : string])
+ :properties
+  [name       : string
+   titles     : string
+   references : string
+   summary    : string])
 
 (type cardlist : list
  :allowtypes [card])
@@ -63,9 +64,10 @@
 
 (type power : struct
  :traits     [card]
- :properties [rating        : rating
-              abilitylist   : abilitylist
-							specialtylist : specialtylist])
+ :properties
+  [rating        : rating
+   abilitylist   : abilitylist
+   specialtylist : specialtylist])
 
 (type powerlist : list
  :allowtypes [power])
@@ -98,10 +100,10 @@
               locationlist : locationlist
               powerlist    : powerlist
               rulelist     : rulelist
-	            scenariolist : scenariolist
-	            sectionlist  : sectionlist
+              scenariolist : scenariolist
+              sectionlist  : sectionlist
               skilllist    : skilllist
-	            suitlist     : suitlist
+              suitlist     : suitlist
               unitlist     : unitlist])
 
 (type sectionlist : list
@@ -111,7 +113,7 @@
  :traits     [card]
  :properties [rating        : rating
               abilitylist   : abilitylist
-							specialtylist : specialtylist])
+              specialtylist : specialtylist])
 
 (type skilllist : list
  :allowtypes [skill])
@@ -132,13 +134,14 @@
 
 (type unit : struct
  :traits     [card]
- :properties [body   : rating
-              mind   : rating
-              will   : rating
-              move   : rating
-              mass   : string
-              skills : skilllist
-							powers : powerlist])
+ :properties
+  [body   : rating
+   mind   : rating
+   will   : rating
+   move   : rating
+   mass   : string
+   skills : skilllist
+   powers : powerlist])
 
 (type unitlist : list
  :allowtypes [unit])

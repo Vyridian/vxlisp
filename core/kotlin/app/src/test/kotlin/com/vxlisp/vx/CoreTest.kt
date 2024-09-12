@@ -99,7 +99,7 @@ object vx_coreTest {
   fun t_float_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
     var output : vx_test.Type_testdescribe = vx_core.vx_new(
       vx_test.t_testdescribe,
-      ":describename", "(test 4.5 (float 4.5))",
+      ":describename", "(test\n 4.5\n (float 4.5))",
       ":testresult", vx_test.f_test(
         context,
         vx_core.vx_new_decimal("4.5"),
@@ -4473,7 +4473,7 @@ object vx_coreTest {
       vx_test.t_testcoveragesummary,
       ":testpkg", "vx/core", 
       ":constnums", vx_core.vx_new(vx_test.t_testcoveragenums, ":pct", 13, ":tests", 2, ":total", 15), 
-      ":docnums", vx_core.vx_new(vx_test.t_testcoveragenums, ":pct", 90, ":tests", 232, ":total", 257), 
+      ":docnums", vx_core.vx_new(vx_test.t_testcoveragenums, ":pct", 91, ":tests", 235, ":total", 257), 
       ":funcnums", vx_core.vx_new(vx_test.t_testcoveragenums, ":pct", 55, ":tests", 74, ":total", 134), 
       ":bigospacenums", vx_core.vx_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 1, ":total", 166), 
       ":bigotimenums", vx_core.vx_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 1, ":total", 166), 

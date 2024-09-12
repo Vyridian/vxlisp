@@ -9477,6 +9477,106 @@ namespace vx_web_html {
 
   //}
 
+  // (func string<-node)
+  vx_core::Type_string f_string_from_node(vx_core::Type_any node) {
+    vx_core::Type_string output = vx_core::e_string;
+    vx_core::vx_reserve(node);
+    output = vx_web_html::f_string_from_node_indent(node, vx_core::vx_new_int(0));
+    vx_core::vx_release_one_except(node, output);
+    return output;
+  }
+  /**
+   * @function string_from_node
+   * Returns a string from any node
+   * @param  {any-1} node
+   * @return {string}
+   * (func string<-node)
+   */
+  // (func string<-node)
+  // class Class_string_from_node {
+    Abstract_string_from_node::~Abstract_string_from_node() {}
+
+    Class_string_from_node::Class_string_from_node() : Abstract_string_from_node::Abstract_string_from_node() {
+      vx_core::refcount += 1;
+    }
+
+    Class_string_from_node::~Class_string_from_node() {
+      vx_core::refcount -= 1;
+      if (this->vx_p_msgblock) {
+        vx_core::vx_release_one(this->vx_p_msgblock);
+      }
+    }
+
+    vx_core::Type_any Class_string_from_node::vx_new(vx_core::vx_Type_listany vals) const {
+      vx_web_html::Func_string_from_node output = vx_web_html::e_string_from_node;
+      vx_core::vx_release(vals);
+      return output;
+    }
+
+    vx_core::Type_any Class_string_from_node::vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const {
+      vx_web_html::Func_string_from_node output = vx_web_html::e_string_from_node;
+      vx_core::vx_release_except(copyval, output);
+      vx_core::vx_release_except(vals, output);
+      return output;
+    }
+
+    vx_core::Type_typedef Class_string_from_node::vx_typedef() const {
+      vx_core::Type_typedef output = vx_core::Class_typedef::vx_typedef_new(
+        "vx/web/html", // pkgname
+        "string<-node", // name
+        ":func", // extends
+        vx_core::vx_new(vx_core::t_typelist, {vx_core::t_func}), // traits
+        vx_core::e_typelist, // allowtypes
+        vx_core::e_typelist, // disallowtypes
+        vx_core::e_funclist, // allowfuncs
+        vx_core::e_funclist, // disallowfuncs
+        vx_core::e_anylist, // allowvalues
+        vx_core::e_anylist, // disallowvalues
+        vx_core::e_argmap // properties
+      );
+      return output;
+    }
+
+    vx_core::Type_constdef Class_string_from_node::vx_constdef() const {return this->vx_p_constdef;}
+
+    vx_core::Type_funcdef Class_string_from_node::vx_funcdef() const {
+      vx_core::Type_funcdef output = vx_core::Class_funcdef::vx_funcdef_new(
+        "vx/web/html", // pkgname
+        "string<-node", // name
+        0, // idx
+        false, // async
+        this->vx_typedef() // typedef
+      );
+      return output;
+    }
+
+    vx_core::Type_any Class_string_from_node::vx_empty() const {return vx_web_html::e_string_from_node;}
+    vx_core::Type_any Class_string_from_node::vx_type() const {return vx_web_html::t_string_from_node;}
+    vx_core::Type_msgblock Class_string_from_node::vx_msgblock() const {return this->vx_p_msgblock;}
+    vx_core::vx_Type_listany Class_string_from_node::vx_dispose() {return vx_core::emptylistany;}
+
+    vx_core::Func_any_from_any Class_string_from_node::vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const {
+      return vx_core::e_any_from_any;
+    }
+
+    vx_core::Type_any Class_string_from_node::vx_any_from_any(vx_core::Type_any val) const {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_any inputval = vx_core::vx_any_from_any(vx_core::t_any, val);
+      output = vx_web_html::f_string_from_node(inputval);
+      vx_core::vx_release_except(val, output);
+      return output;
+    }
+
+    vx_core::Type_any Class_string_from_node::vx_repl(vx_core::Type_anylist arglist) {
+      vx_core::Type_any output = vx_core::e_any;
+      vx_core::Type_any node = vx_core::vx_any_from_any(vx_core::t_any, arglist->vx_get_any(vx_core::vx_new_int(0)));
+      output = vx_web_html::f_string_from_node(node);
+      vx_core::vx_release_except(arglist, output);
+      return output;
+    }
+
+  //}
+
   // (func string<-node-indent)
   vx_core::Type_string f_string_from_node_indent(vx_core::Type_any node, vx_core::Type_int indent) {
     vx_core::Type_string output = vx_core::e_string;
@@ -12804,6 +12904,8 @@ namespace vx_web_html {
   vx_web_html::Func_string_from_indent t_string_from_indent = NULL;
   vx_web_html::Func_string_from_meta_indent e_string_from_meta_indent = NULL;
   vx_web_html::Func_string_from_meta_indent t_string_from_meta_indent = NULL;
+  vx_web_html::Func_string_from_node e_string_from_node = NULL;
+  vx_web_html::Func_string_from_node t_string_from_node = NULL;
   vx_web_html::Func_string_from_node_indent e_string_from_node_indent = NULL;
   vx_web_html::Func_string_from_node_indent t_string_from_node_indent = NULL;
   vx_web_html::Func_string_from_nodelist_indent e_string_from_nodelist_indent = NULL;
@@ -13048,6 +13150,10 @@ namespace vx_web_html {
       vx_core::vx_reserve_empty(vx_web_html::e_string_from_meta_indent);
       vx_web_html::t_string_from_meta_indent = new vx_web_html::Class_string_from_meta_indent();
       vx_core::vx_reserve_type(vx_web_html::t_string_from_meta_indent);
+      vx_web_html::e_string_from_node = new vx_web_html::Class_string_from_node();
+      vx_core::vx_reserve_empty(vx_web_html::e_string_from_node);
+      vx_web_html::t_string_from_node = new vx_web_html::Class_string_from_node();
+      vx_core::vx_reserve_type(vx_web_html::t_string_from_node);
       vx_web_html::e_string_from_node_indent = new vx_web_html::Class_string_from_node_indent();
       vx_core::vx_reserve_empty(vx_web_html::e_string_from_node_indent);
       vx_web_html::t_string_from_node_indent = new vx_web_html::Class_string_from_node_indent();
@@ -13206,6 +13312,7 @@ namespace vx_web_html {
       mapfunc["string<-img-indent"] = vx_web_html::t_string_from_img_indent;
       mapfunc["string<-indent"] = vx_web_html::t_string_from_indent;
       mapfunc["string<-meta-indent"] = vx_web_html::t_string_from_meta_indent;
+      mapfunc["string<-node"] = vx_web_html::t_string_from_node;
       mapfunc["string<-node-indent"] = vx_web_html::t_string_from_node_indent;
       mapfunc["string<-nodelist-indent"] = vx_web_html::t_string_from_nodelist_indent;
       mapfunc["string<-nodelist-tag-prop-indent"] = vx_web_html::t_string_from_nodelist_tag_prop_indent;

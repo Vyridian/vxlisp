@@ -384,11 +384,11 @@ object vx_web_htmlTest {
       vx_test.t_testcoveragesummary,
       ":testpkg", "vx/web/html", 
       ":constnums", vx_core.vx_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      ":docnums", vx_core.vx_new(vx_test.t_testcoveragenums, ":pct", 98, ":tests", 72, ":total", 73), 
-      ":funcnums", vx_core.vx_new(vx_test.t_testcoveragenums, ":pct", 17, ":tests", 7, ":total", 41), 
-      ":bigospacenums", vx_core.vx_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 41), 
-      ":bigotimenums", vx_core.vx_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 41), 
-      ":totalnums", vx_core.vx_new(vx_test.t_testcoveragenums, ":pct", 9, ":tests", 7, ":total", 73), 
+      ":docnums", vx_core.vx_new(vx_test.t_testcoveragenums, ":pct", 98, ":tests", 73, ":total", 74), 
+      ":funcnums", vx_core.vx_new(vx_test.t_testcoveragenums, ":pct", 16, ":tests", 7, ":total", 42), 
+      ":bigospacenums", vx_core.vx_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 42), 
+      ":bigotimenums", vx_core.vx_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 42), 
+      ":totalnums", vx_core.vx_new(vx_test.t_testcoveragenums, ":pct", 9, ":tests", 7, ":total", 74), 
       ":typenums", vx_core.vx_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 32)
     )
     return output
@@ -450,6 +450,7 @@ object vx_web_htmlTest {
         ":string<-img-indent", 2,
         ":string<-indent", 0,
         ":string<-meta-indent", 1,
+        ":string<-node", 0,
         ":string<-node-indent", 0,
         ":string<-nodelist-indent", 0,
         ":string<-nodelist-tag-prop-indent", 0,

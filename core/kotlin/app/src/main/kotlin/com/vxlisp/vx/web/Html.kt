@@ -10243,6 +10243,100 @@ object vx_web_html {
   }
 
 
+  interface Func_string_from_node : vx_core.Func_any_from_any {
+    fun vx_string_from_node(node : vx_core.Type_any) : vx_core.Type_string
+  }
+
+  class Class_string_from_node : vx_core.Class_base, Func_string_from_node {
+    constructor() {}
+
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
+      val output : vx_web_html.Class_string_from_node = vx_web_html.Class_string_from_node()
+      return output
+    }
+
+    override fun vx_copy(vararg vals : Any) : vx_core.Type_any {
+      val output : vx_web_html.Class_string_from_node = vx_web_html.Class_string_from_node()
+      return output
+    }
+
+    override fun vx_typedef() : vx_core.Type_typedef {
+      var output : vx_core.Type_typedef = vx_core.t_func.vx_typedef()
+      return output
+    }
+
+    override fun vx_funcdef() : vx_core.Type_funcdef {
+      var output : vx_core.Type_funcdef = vx_core.funcdef_new(
+        "vx/web/html", // pkgname
+        "string<-node", // name
+        0, // idx
+        false, // async
+        vx_core.typedef_new(
+          "vx/core", // pkgname
+          "string", // name
+          ":string", // extends
+          vx_core.e_typelist, // traits
+          vx_core.e_typelist, // allowtypes
+          vx_core.e_typelist, // disallowtypes
+          vx_core.e_funclist, // allowfuncs
+          vx_core.e_funclist, // disallowfuncs
+          vx_core.e_anylist, // allowvalues
+          vx_core.e_anylist, // disallowvalues
+          vx_core.e_argmap // properties
+        ) // typedef
+      )
+      return output
+    }
+
+    override fun vx_empty() : vx_core.Type_any {
+      var output : vx_core.Type_any = vx_web_html.e_string_from_node
+      return output
+    }
+
+    override fun vx_type() : vx_core.Type_any {
+      var output : vx_core.Type_any = vx_web_html.t_string_from_node
+      return output
+    }
+
+    override fun vx_fn_new(fn : vx_core.Class_any_from_any.IFn) : vx_core.Func_any_from_any {
+      return vx_core.e_any_from_any
+    }
+
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+      var output : T = vx_core.f_empty(generic_any_1)
+      var inputval : vx_core.Type_any = value as vx_core.Type_any
+      var outputval : vx_core.Type_any = vx_web_html.f_string_from_node(inputval)
+      output = vx_core.f_any_from_any(generic_any_1, outputval)
+      return output
+    }
+
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+      var output : vx_core.Type_any = vx_core.e_any
+      var node : vx_core.Type_any = vx_core.f_any_from_any(vx_core.t_any, arglist.vx_any(vx_core.vx_new_int(0)))
+      output = vx_web_html.f_string_from_node(node)
+      return output
+    }
+
+    override fun vx_string_from_node(node : vx_core.Type_any) : vx_core.Type_string {
+      var output : vx_core.Type_string = vx_web_html.f_string_from_node(node)
+      return output
+    }
+
+  }
+
+  val e_string_from_node : vx_web_html.Func_string_from_node = vx_web_html.Class_string_from_node()
+  val t_string_from_node : vx_web_html.Func_string_from_node = vx_web_html.Class_string_from_node()
+
+  fun f_string_from_node(node : vx_core.Type_any) : vx_core.Type_string {
+    var output : vx_core.Type_string = vx_core.e_string
+    output = vx_web_html.f_string_from_node_indent(
+      node,
+      vx_core.vx_new_int(0)
+    )
+    return output
+  }
+
+
   interface Func_string_from_node_indent : vx_core.Type_func, vx_core.Type_replfunc {
     fun vx_string_from_node_indent(node : vx_core.Type_any, indent : vx_core.Type_int) : vx_core.Type_string
   }
@@ -13376,6 +13470,7 @@ object vx_web_html {
     mapfunc.put("string<-img-indent", vx_web_html.t_string_from_img_indent)
     mapfunc.put("string<-indent", vx_web_html.t_string_from_indent)
     mapfunc.put("string<-meta-indent", vx_web_html.t_string_from_meta_indent)
+    mapfunc.put("string<-node", vx_web_html.t_string_from_node)
     mapfunc.put("string<-node-indent", vx_web_html.t_string_from_node_indent)
     mapfunc.put("string<-nodelist-indent", vx_web_html.t_string_from_nodelist_indent)
     mapfunc.put("string<-nodelist-tag-prop-indent", vx_web_html.t_string_from_nodelist_tag_prop_indent)

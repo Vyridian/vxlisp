@@ -58,6 +58,14 @@
     return output;
   }
 
+  // (func anymap<-struct)
+  public static Core.Type_anymap vx_anymap_from_struct(
+    Vx.Core.Type_struct structure) {
+    Vx.Core.Map<String, Vx.Core.Type_any> map = structure.vx_map();
+    Vx.Core.Type_anymap output = Vx.Core.vx_new_map(Vx.Core.t_anymap, map);
+    return output;
+  }
+
   public static T vx_list_from_for_end_loop<T>(
     T generic_list_1,
     Vx.Core.Type_int start,

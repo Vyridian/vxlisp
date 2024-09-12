@@ -389,28 +389,28 @@ namespace vx_web_html_test {
       }),
       vx_core::vx_new_string(":docnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(98), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(72), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(73)
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(73), 
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(74)
       }),
       vx_core::vx_new_string(":funcnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(17), 
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(16), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(7), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(41)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(42)
       }),
       vx_core::vx_new_string(":bigospacenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(41)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(42)
       }),
       vx_core::vx_new_string(":bigotimenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(41)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(42)
       }),
       vx_core::vx_new_string(":totalnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(9), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(7), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(73)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(74)
       }),
       vx_core::vx_new_string(":typenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
@@ -476,6 +476,7 @@ namespace vx_web_html_test {
         vx_core::vx_new_string(":string<-img-indent"), vx_core::vx_new_int(2),
         vx_core::vx_new_string(":string<-indent"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":string<-meta-indent"), vx_core::vx_new_int(1),
+        vx_core::vx_new_string(":string<-node"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":string<-node-indent"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":string<-nodelist-indent"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":string<-nodelist-tag-prop-indent"), vx_core::vx_new_int(0),

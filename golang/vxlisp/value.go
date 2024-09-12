@@ -760,7 +760,16 @@ func ValueLink(value vxvalue, expectedtype *vxtype, listscope []vxscope, textblo
 	return output, msgblock
 }
 
-func ValueValidate(value vxvalue, expectedtype *vxtype, multi bool, mapgeneric map[string]*vxtype, textblock *vxtextblock, path string) (vxvalue, map[string]*vxtype, *vxmsgblock) {
+func ValueValidate(
+	value vxvalue,
+	expectedtype *vxtype,
+	multi bool,
+	mapgeneric map[string]*vxtype,
+	textblock *vxtextblock,
+	path string) (
+	vxvalue,
+	map[string]*vxtype,
+	*vxmsgblock) {
 	msgblock := NewMsgBlock("ValueValidate")
 	pass := false
 	expectedtypename := NameFromType(expectedtype)
@@ -868,7 +877,8 @@ func ValueValidate(value vxvalue, expectedtype *vxtype, multi bool, mapgeneric m
 				actualfuncref := FuncFromValue(value)
 				expectedsignature := SignatureFromFunc(expectedfuncref, subpath)
 				actualsignature := SignatureFromFunc(actualfuncref, subpath)
-				pass = IsSignatureMatch(expectedsignature, actualsignature, 0, subpath)
+				pass = IsSignatureMatch(
+					expectedsignature, actualsignature, 0, subpath)
 			case "":
 				pass = true
 			default:
@@ -880,8 +890,10 @@ func ValueValidate(value vxvalue, expectedtype *vxtype, multi bool, mapgeneric m
 						actualtype = actualfunc.vxtype
 					}
 					subtype := expectedfuncref.vxtype
-					actualtype, pass, msgs = BooleanMatchFromTypeType(subtype, actualtype, multi, 0, path)
-					msgblock = MsgblockAddBlock(msgblock, msgs)
+					actualtype, pass, msgs = BooleanMatchFromTypeType(
+						subtype, actualtype, multi, 0, path)
+					msgblock = MsgblockAddBlock(
+						msgblock, msgs)
 				}
 			}
 			if IsErrorFromMsgblock(msgblock) {
@@ -900,13 +912,15 @@ func ValueValidate(value vxvalue, expectedtype *vxtype, multi bool, mapgeneric m
 			switch value.code {
 			case ":arg":
 				arg := ArgFromValue(value)
-				arg, mapgeneric, msgs = ArgValidate(arg, mapgeneric, textblock, subpath)
+				arg, mapgeneric, msgs = ArgValidate(
+					arg, mapgeneric, textblock, subpath)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
 				value = ValueSetArg(value, arg)
 			case ":arglist":
 				arglist := ListArgFromValue(value)
 				subpath2 := subpath + "/:arglist"
-				arglist, mapgeneric, msgs = ListArgValidate(arglist, mapgeneric, textblock, subpath2)
+				arglist, mapgeneric, msgs = ListArgValidate(
+					arglist, mapgeneric, textblock, subpath2)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
 				value = ValueSetListArg(value, arglist)
 				if expectedtypename == "vx/core/arglist" {
@@ -962,7 +976,8 @@ func ValueValidate(value vxvalue, expectedtype *vxtype, multi bool, mapgeneric m
 				}
 			}
 			if !pass {
-				actualtype, pass, msgs = BooleanMatchFromTypeType(expectedtype, actualtype, multi, -1, path)
+				actualtype, pass, msgs = BooleanMatchFromTypeType(
+					expectedtype, actualtype, multi, -1, path)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
 				if pass {
 					value.vxtype = actualtype
@@ -972,7 +987,15 @@ func ValueValidate(value vxvalue, expectedtype *vxtype, multi bool, mapgeneric m
 		if IsErrorFromMsgblock(msgblock) {
 		} else if value.code == "" {
 		} else if !pass {
-			msg := NewMsgFromTextblock(textblock, path, value.code, "Value Type does not match expected type", NameFromType(expectedtype), NameFromType(actualtype), "\n"+subpath+"\n", StringFromValue(value))
+			msg := NewMsgFromTextblock(
+				textblock,
+				path,
+				value.code,
+				"Value Type does not match expected type",
+				NameFromType(expectedtype),
+				NameFromType(actualtype),
+				"\n"+subpath+"\n",
+				StringFromValue(value))
 			msgblock = MsgblockAddError(msgblock, msg)
 		}
 	}

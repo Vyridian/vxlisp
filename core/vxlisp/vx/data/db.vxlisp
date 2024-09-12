@@ -6,11 +6,12 @@
  :doc "Database trait")
 
 (type dbcell : struct
- :properties [dbcellid   : string
-              dbcellmap  : dbcellmap
-							dbfieldmap : dbfieldmap
-							dbparent   : dbcell
-							dbtable    : dbtable]
+ :properties 
+  [dbcellid   : string
+   dbcellmap  : dbcellmap
+   dbfieldmap : dbfieldmap
+   dbparent   : dbcell
+   dbtable    : dbtable]
  :doc "Database Cell trait")
 
 (type dbcellmap : map
@@ -53,10 +54,11 @@
  :doc "Database Value")
 
 (type dbtable : struct
- :properties [dbtableid  : string
-              db         : db
-              dbcellmap  : dbcellmap
-							dbfieldmap : dbfieldmap]
+ :properties
+  [dbtableid  : string
+   db         : db
+   dbcellmap  : dbcellmap
+   dbfieldmap : dbfieldmap]
  :doc "Database Table trait")
 
 (type dbvalue : struct

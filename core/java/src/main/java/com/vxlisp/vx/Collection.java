@@ -65,6 +65,16 @@ public final class Collection {
     return output;
   }
 
+  // (func anymap<-struct)
+  public static Core.Type_anymap vx_anymap_from_struct(
+    Core.Type_struct structure) {
+    Map<String, Core.Type_any> map = structure.vx_map();
+    Core.Type_anymap output = Core.vx_new_map(
+      Core.t_anymap, map
+    );
+    return output;
+  }
+
   public static <T extends Core.Type_list> T vx_list_from_for_end_loop(
     T generic_list_1,
     Core.Type_int start,
@@ -76,18 +86,26 @@ public final class Collection {
     int iend = end.vx_int();
     if (istart <= iend) {
       for (int i = istart; i <= iend; i++) {
-        Core.Type_any val = fn_loop.vx_any_from_int(Core.t_any, Core.vx_new_int(i));
+        Core.Type_any val = fn_loop.vx_any_from_int(
+          Core.t_any, Core.vx_new_int(i)
+        );
         listvals.add(val);
       }
     } else {
       for (int i = istart; i >= iend; i--) {
-        Core.Type_any val = fn_loop.vx_any_from_int(Core.t_any, Core.vx_new_int(i));
+        Core.Type_any val = fn_loop.vx_any_from_int(
+          Core.t_any, Core.vx_new_int(i)
+        );
         listvals.add(val);
       }
     }
     if (listvals.size() > 0) {
-      Core.Type_anylist anylist = Core.vx_new(Core.t_anylist, listvals);
-      output = Core.f_new(generic_list_1, anylist);
+      Core.Type_anylist anylist = Core.vx_new(
+        Core.t_anylist, listvals
+      );
+      output = Core.f_new(
+        generic_list_1, anylist
+      );
     }
     return output;
   }
@@ -109,22 +127,32 @@ public final class Collection {
         String path = "vx/collection/list<-for-until-loop-max";
         String code = ":loopmaximumexceeded";
         Core.Type_int details = Core.vx_new_int(icount);
-        Core.Type_msg msg = Core.vx_msg_from_error(path, code, details);
-        output = Core.vx_copy(output, msg);
+        Core.Type_msg msg = Core.vx_msg_from_error(
+          path, code, details
+        );
+        output = Core.vx_copy(
+          output, msg
+        );
         iscontinue = false;
       } else {
         Core.Type_boolean valwhile = fn_while.vx_boolean_from_any(work);
         iscontinue = !valwhile.vx_boolean();
         if (iscontinue) {
           icount += 1;
-          work = fn_loop.vx_any_from_any(Core.t_any, work);
+          work = fn_loop.vx_any_from_any(
+            Core.t_any, work
+          );
           listvals.add(work);
         }
       }
     }
     if (listvals.size() > 0) {
-      Core.Type_anylist anylist = Core.vx_new(Core.t_anylist, listvals);
-      output = Core.f_new(generic_list_1, anylist);
+      Core.Type_anylist anylist = Core.vx_new(
+        Core.t_anylist, listvals
+      );
+      output = Core.f_new(
+        generic_list_1, anylist
+      );
     }
     return output;
   }
@@ -137,7 +165,9 @@ public final class Collection {
     List<Core.Type_any> listval = vallist.vx_list();
     List<Core.Type_any> items = new ArrayList<>();
     for (Core.Type_any val : listval) {
-      Core.Type_any newval = fn_filter.vx_any_from_any(Core.t_any, val);
+      Core.Type_any newval = fn_filter.vx_any_from_any(
+        Core.t_any, val
+      );
       Core.Type_boolean isempty = Core.f_is_empty_1(newval);
       if (!isempty.vx_boolean()) {
         items.add(newval);
@@ -723,6 +753,112 @@ public final class Collection {
         return output_1;
       })
     );
+    return output;
+  }
+
+  /**
+   * @function anymap_from_struct
+   * Returns anymap from all the properties in a struct.
+   * @param  {struct-1} structure
+   * @return {anymap}
+   * (func anymap<-struct)
+   */
+  public interface Func_anymap_from_struct extends Core.Func_any_from_any {
+    public Core.Type_anymap vx_anymap_from_struct(final Core.Type_struct structure);
+  }
+
+  public static class Class_anymap_from_struct extends Core.Class_base implements Func_anymap_from_struct {
+
+    @Override
+    public Core.Type_any vx_new(final Object... vals) {
+      Collection.Class_anymap_from_struct output = new Collection.Class_anymap_from_struct();
+      return output;
+    }
+
+    @Override
+    public Core.Type_any vx_copy(final Object... vals) {
+      Collection.Class_anymap_from_struct output = new Collection.Class_anymap_from_struct();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
+    }
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      Core.Type_funcdef output = Core.funcdef_new(
+        "vx/collection", // pkgname
+        "anymap<-struct", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "anymap", // name
+          ":map", // extends
+          Core.e_typelist, // traits
+          Core.vx_new(Core.t_typelist, Core.t_any), // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+      return output;
+    }
+
+    @Override
+    public Core.Type_any vx_empty() {
+      Core.Type_any output = Collection.e_anymap_from_struct;
+      return output;
+    }
+
+    @Override
+    public Core.Type_any vx_type() {
+      Core.Type_any output = Collection.t_anymap_from_struct;
+      return output;
+    }
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_struct inputval = (Core.Type_struct)value;
+      Core.Type_any outputval = Collection.f_anymap_from_struct(inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    @Override
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_struct structure = Core.f_any_from_any(Core.t_struct, arglist.vx_any(Core.vx_new_int(0)));
+      output = Collection.f_anymap_from_struct(structure);
+      return output;
+    }
+
+    @Override
+    public Core.Type_anymap vx_anymap_from_struct(final Core.Type_struct structure) {
+      Core.Type_anymap output = Collection.f_anymap_from_struct(structure);
+      return output;
+    }
+
+  }
+
+  public static final Collection.Func_anymap_from_struct e_anymap_from_struct = new Collection.Class_anymap_from_struct();
+  public static final Collection.Func_anymap_from_struct t_anymap_from_struct = new Collection.Class_anymap_from_struct();
+
+  public static Core.Type_anymap f_anymap_from_struct(final Core.Type_struct structure) {
+    Core.Type_anymap output = Core.e_anymap;
+    output = Collection.vx_anymap_from_struct(structure);
     return output;
   }
 
@@ -2631,6 +2767,125 @@ public final class Collection {
     return output;
   }
 
+  /**
+   * @function map_from_struct
+   * Returns a typed map from all the properties in a struct.
+   * @param  {struct-2} structure
+   * @return {map-1}
+   * (func map<-struct)
+   */
+  public interface Func_map_from_struct extends Core.Func_any_from_any {
+    public <N extends Core.Type_map, R extends Core.Type_struct> N vx_map_from_struct(final N generic_map_1, final R structure);
+  }
+
+  public static class Class_map_from_struct extends Core.Class_base implements Func_map_from_struct {
+
+    @Override
+    public Core.Type_any vx_new(final Object... vals) {
+      Collection.Class_map_from_struct output = new Collection.Class_map_from_struct();
+      return output;
+    }
+
+    @Override
+    public Core.Type_any vx_copy(final Object... vals) {
+      Collection.Class_map_from_struct output = new Collection.Class_map_from_struct();
+      return output;
+    }
+
+    @Override
+    public Core.Type_typedef vx_typedef() {
+      Core.Type_typedef output = Core.t_func.vx_typedef();
+      return output;
+    }
+
+    @Override
+    public Core.Type_funcdef vx_funcdef() {
+      Core.Type_funcdef output = Core.funcdef_new(
+        "vx/collection", // pkgname
+        "map<-struct", // name
+        0, // idx
+        false, // async
+        Core.typedef_new(
+          "vx/core", // pkgname
+          "map-1", // name
+          ":map", // extends
+          Core.e_typelist, // traits
+          Core.vx_new(Core.t_typelist, Core.t_any), // allowtypes
+          Core.e_typelist, // disallowtypes
+          Core.e_funclist, // allowfuncs
+          Core.e_funclist, // disallowfuncs
+          Core.e_anylist, // allowvalues
+          Core.e_anylist, // disallowvalues
+          Core.e_argmap // properties
+        ) // typedef
+      );
+      return output;
+    }
+
+    @Override
+    public Core.Type_any vx_empty() {
+      Core.Type_any output = Collection.e_map_from_struct;
+      return output;
+    }
+
+    @Override
+    public Core.Type_any vx_type() {
+      Core.Type_any output = Collection.t_map_from_struct;
+      return output;
+    }
+
+    @Override
+    public Core.Func_any_from_any vx_fn_new(Core.Class_any_from_any.IFn fn) {
+      return Core.e_any_from_any;
+    }
+
+    @Override
+    public <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(final T generic_any_1, final U value) {
+      T output = Core.f_empty(generic_any_1);
+      Core.Type_struct inputval = (Core.Type_struct)value;
+      Core.Type_any outputval = Collection.f_map_from_struct(Core.t_map, inputval);
+      output = Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    @Override
+    public Core.Type_any vx_repl(Core.Type_anylist arglist) {
+      Core.Type_any output = Core.e_any;
+      Core.Type_map generic_map_1 = Core.f_any_from_any(Core.t_map, arglist.vx_any(Core.vx_new_int(0)));
+      Core.Type_struct structure = Core.f_any_from_any(Core.t_struct, arglist.vx_any(Core.vx_new_int(0)));
+      output = Collection.f_map_from_struct(generic_map_1, structure);
+      return output;
+    }
+
+    @Override
+    public <N extends Core.Type_map, R extends Core.Type_struct> N vx_map_from_struct(final N generic_map_1, final R structure) {
+      N output = Collection.f_map_from_struct(generic_map_1, structure);
+      return output;
+    }
+
+  }
+
+  public static final Collection.Func_map_from_struct e_map_from_struct = new Collection.Class_map_from_struct();
+  public static final Collection.Func_map_from_struct t_map_from_struct = new Collection.Class_map_from_struct();
+
+  public static <N extends Core.Type_map, R extends Core.Type_struct> N f_map_from_struct(final N generic_map_1, final R structure) {
+    N output = Core.f_empty(generic_map_1);
+    output = Core.f_let(
+      generic_map_1,
+      Core.t_any_from_func.vx_fn_new(() -> {
+        Core.Type_anymap anymap = Collection.f_anymap_from_struct(
+          structure
+        );
+        Core.Type_any output_1 = Core.f_map_from_map(
+          generic_map_1,
+          anymap
+        );
+        return output_1;
+      })
+    );
+    return output;
+  }
+
 
   static {
     Map<String, Core.Type_any> maptype = new LinkedHashMap<String, Core.Type_any>();
@@ -2641,6 +2896,7 @@ public final class Collection {
     mapfunc.put("any<-for-while-loop", Collection.t_any_from_for_while_loop);
     mapfunc.put("any<-for-while-loop-max", Collection.t_any_from_for_while_loop_max);
     mapfunc.put("any<-map-pos", Collection.t_any_from_map_pos);
+    mapfunc.put("anymap<-struct", Collection.t_anymap_from_struct);
     mapfunc.put("boolean-write<-map-removekey", Collection.t_boolean_write_from_map_removekey);
     mapfunc.put("boolean-write<-map-removekeys", Collection.t_boolean_write_from_map_removekeys);
     mapfunc.put("int<-map-key", Collection.t_int_from_map_key);
@@ -2659,6 +2915,7 @@ public final class Collection {
     mapfunc.put("map<-map-keys", Collection.t_map_from_map_keys);
     mapfunc.put("map<-map-start", Collection.t_map_from_map_start);
     mapfunc.put("map<-map-start-end", Collection.t_map_from_map_start_end);
+    mapfunc.put("map<-struct", Collection.t_map_from_struct);
     Core.vx_global_package_set("vx/collection", maptype, mapconst, mapfunc);
   }
 

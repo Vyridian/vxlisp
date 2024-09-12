@@ -385,11 +385,11 @@ public final class HtmlTest {
       Test.t_testcoveragesummary,
       ":testpkg", "vx/web/html", 
       ":constnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      ":docnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 98, ":tests", 72, ":total", 73), 
-      ":funcnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 17, ":tests", 7, ":total", 41), 
-      ":bigospacenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 41), 
-      ":bigotimenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 41), 
-      ":totalnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 9, ":tests", 7, ":total", 73), 
+      ":docnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 98, ":tests", 73, ":total", 74), 
+      ":funcnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 16, ":tests", 7, ":total", 42), 
+      ":bigospacenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 42), 
+      ":bigotimenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 42), 
+      ":totalnums", Core.vx_new(Test.t_testcoveragenums, ":pct", 9, ":tests", 7, ":total", 74), 
       ":typenums", Core.vx_new(Test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 32)
     );
     return output;
@@ -451,6 +451,7 @@ public final class HtmlTest {
         ":string<-img-indent", 2,
         ":string<-indent", 0,
         ":string<-meta-indent", 1,
+        ":string<-node", 0,
         ":string<-node-indent", 0,
         ":string<-nodelist-indent", 0,
         ":string<-nodelist-tag-prop-indent", 0,

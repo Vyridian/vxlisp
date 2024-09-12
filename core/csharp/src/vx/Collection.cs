@@ -62,6 +62,14 @@ public static class Collection {
     return output;
   }
 
+  // (func anymap<-struct)
+  public static Core.Type_anymap vx_anymap_from_struct(
+    Vx.Core.Type_struct structure) {
+    Vx.Core.Map<String, Vx.Core.Type_any> map = structure.vx_map();
+    Vx.Core.Type_anymap output = Vx.Core.vx_new_map(Vx.Core.t_anymap, map);
+    return output;
+  }
+
   public static T vx_list_from_for_end_loop<T>(
     T generic_list_1,
     Vx.Core.Type_int start,
@@ -688,6 +696,102 @@ public static class Collection {
         return output_1;
       })
     );
+    return output;
+  }
+
+  /**
+   * @function anymap_from_struct
+   * Returns anymap from all the properties in a struct.
+   * @param  {struct-1} structure
+   * @return {anymap}
+   * (func anymap<-struct)
+   */
+  public interface Func_anymap_from_struct : Vx.Core.Func_any_from_any {
+    public Vx.Core.Type_anymap vx_anymap_from_struct(Vx.Core.Type_struct structure);
+  }
+
+  public class Class_anymap_from_struct : Vx.Core.Class_base, Func_anymap_from_struct {
+
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
+      Vx.Collection.Class_anymap_from_struct output = new Vx.Collection.Class_anymap_from_struct();
+      return output;
+    }
+
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Collection.Class_anymap_from_struct output = new Vx.Collection.Class_anymap_from_struct();
+      return output;
+    }
+
+    public override Vx.Core.Type_typedef vx_typedef() {
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
+    }
+
+    public Vx.Core.Type_funcdef vx_funcdef() {
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
+        "vx/collection", // pkgname
+        "anymap<-struct", // name
+        0, // idx
+        false, // async
+        Vx.Core.typedef_new(
+          "vx/core", // pkgname
+          "anymap", // name
+          ":map", // extends
+          Vx.Core.e_typelist, // traits
+          Vx.Core.vx_new(Vx.Core.t_typelist, Vx.Core.t_any), // allowtypes
+          Vx.Core.e_typelist, // disallowtypes
+          Vx.Core.e_funclist, // allowfuncs
+          Vx.Core.e_funclist, // disallowfuncs
+          Vx.Core.e_anylist, // allowvalues
+          Vx.Core.e_anylist, // disallowvalues
+          Vx.Core.e_argmap // properties
+        ) // typedef
+      );
+      return output;
+    }
+
+    public override Vx.Core.Type_any vx_empty() {
+      Vx.Core.Type_any output = Vx.Collection.e_anymap_from_struct;
+      return output;
+    }
+
+    public override Vx.Core.Type_any vx_type() {
+      Vx.Core.Type_any output = Vx.Collection.t_anymap_from_struct;
+      return output;
+    }
+
+    public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
+      return Vx.Core.e_any_from_any;
+    }
+
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
+      T output = Vx.Core.f_empty(generic_any_1);
+      Vx.Core.Type_struct inputval = (Vx.Core.Type_struct)value;
+      Vx.Core.Type_any outputval = Vx.Collection.f_anymap_from_struct(inputval);
+      output = Vx.Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
+      Vx.Core.Type_any output = Vx.Core.e_any;
+      Vx.Core.Type_struct structure = Vx.Core.f_any_from_any(Vx.Core.t_struct, arglist.vx_any(Vx.Core.vx_new_int(0)));
+      output = Vx.Collection.f_anymap_from_struct(structure);
+      return output;
+    }
+
+    public Vx.Core.Type_anymap vx_anymap_from_struct(Vx.Core.Type_struct structure) {
+      Vx.Core.Type_anymap output = Vx.Collection.f_anymap_from_struct(structure);
+      return output;
+    }
+
+  }
+
+  public static Vx.Collection.Func_anymap_from_struct e_anymap_from_struct = new Vx.Collection.Class_anymap_from_struct();
+  public static Vx.Collection.Func_anymap_from_struct t_anymap_from_struct = new Vx.Collection.Class_anymap_from_struct();
+
+  public static Vx.Core.Type_anymap f_anymap_from_struct(Vx.Core.Type_struct structure) {
+    Vx.Core.Type_anymap output = Vx.Core.e_anymap;
+    output = Vx.Collection.vx_anymap_from_struct(structure);
     return output;
   }
 
@@ -2448,6 +2552,115 @@ public static class Collection {
     return output;
   }
 
+  /**
+   * @function map_from_struct
+   * Returns a typed map from all the properties in a struct.
+   * @param  {struct-2} structure
+   * @return {map-1}
+   * (func map<-struct)
+   */
+  public interface Func_map_from_struct : Vx.Core.Func_any_from_any {
+    public N vx_map_from_struct<N, R>(N generic_map_1, R structure) where N : Vx.Core.Type_map where R : Vx.Core.Type_struct;
+  }
+
+  public class Class_map_from_struct : Vx.Core.Class_base, Func_map_from_struct {
+
+    public override Vx.Core.Type_any vx_new(params object[] vals) {
+      Vx.Collection.Class_map_from_struct output = new Vx.Collection.Class_map_from_struct();
+      return output;
+    }
+
+    public override Vx.Core.Type_any vx_copy(params object[] vals) {
+      Vx.Collection.Class_map_from_struct output = new Vx.Collection.Class_map_from_struct();
+      return output;
+    }
+
+    public override Vx.Core.Type_typedef vx_typedef() {
+      Vx.Core.Type_typedef output = Vx.Core.t_func.vx_typedef();
+      return output;
+    }
+
+    public Vx.Core.Type_funcdef vx_funcdef() {
+      Vx.Core.Type_funcdef output = Vx.Core.funcdef_new(
+        "vx/collection", // pkgname
+        "map<-struct", // name
+        0, // idx
+        false, // async
+        Vx.Core.typedef_new(
+          "vx/core", // pkgname
+          "map-1", // name
+          ":map", // extends
+          Vx.Core.e_typelist, // traits
+          Vx.Core.vx_new(Vx.Core.t_typelist, Vx.Core.t_any), // allowtypes
+          Vx.Core.e_typelist, // disallowtypes
+          Vx.Core.e_funclist, // allowfuncs
+          Vx.Core.e_funclist, // disallowfuncs
+          Vx.Core.e_anylist, // allowvalues
+          Vx.Core.e_anylist, // disallowvalues
+          Vx.Core.e_argmap // properties
+        ) // typedef
+      );
+      return output;
+    }
+
+    public override Vx.Core.Type_any vx_empty() {
+      Vx.Core.Type_any output = Vx.Collection.e_map_from_struct;
+      return output;
+    }
+
+    public override Vx.Core.Type_any vx_type() {
+      Vx.Core.Type_any output = Vx.Collection.t_map_from_struct;
+      return output;
+    }
+
+    public Vx.Core.Func_any_from_any vx_fn_new(Vx.Core.Class_any_from_any.IFn fn) {
+      return Vx.Core.e_any_from_any;
+    }
+
+    public T vx_any_from_any<T, U>(T generic_any_1, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
+      T output = Vx.Core.f_empty(generic_any_1);
+      Vx.Core.Type_struct inputval = (Vx.Core.Type_struct)value;
+      Vx.Core.Type_any outputval = Vx.Collection.f_map_from_struct(Vx.Core.t_map, inputval);
+      output = Vx.Core.f_any_from_any(generic_any_1, outputval);
+      return output;
+    }
+
+    public Vx.Core.Type_any vx_repl(Vx.Core.Type_anylist arglist) {
+      Vx.Core.Type_any output = Vx.Core.e_any;
+      Vx.Core.Type_map generic_map_1 = Vx.Core.f_any_from_any(Vx.Core.t_map, arglist.vx_any(Vx.Core.vx_new_int(0)));
+      Vx.Core.Type_struct structure = Vx.Core.f_any_from_any(Vx.Core.t_struct, arglist.vx_any(Vx.Core.vx_new_int(0)));
+      output = Vx.Collection.f_map_from_struct(generic_map_1, structure);
+      return output;
+    }
+
+    public N vx_map_from_struct<N, R>(N generic_map_1, R structure) where N : Vx.Core.Type_map where R : Vx.Core.Type_struct {
+      N output = Vx.Collection.f_map_from_struct(generic_map_1, structure);
+      return output;
+    }
+
+  }
+
+  public static Vx.Collection.Func_map_from_struct e_map_from_struct = new Vx.Collection.Class_map_from_struct();
+  public static Vx.Collection.Func_map_from_struct t_map_from_struct = new Vx.Collection.Class_map_from_struct();
+
+  public static N f_map_from_struct<N, R>(N generic_map_1, R structure) where N : Vx.Core.Type_map where R : Vx.Core.Type_struct {
+    N output = Vx.Core.f_empty(generic_map_1);
+    output = Vx.Core.f_let(
+      generic_map_1,
+      Vx.Core.t_any_from_func.vx_fn_new(() => {
+        Vx.Core.Type_anymap anymap = Vx.Collection.f_anymap_from_struct(
+          structure
+        );
+        Vx.Core.Type_any output_1 = Vx.Core.f_map_from_map(
+          generic_map_1,
+          anymap
+        );
+        return output_1;
+      })
+    );
+    return output;
+  }
+
 
   public static class PackageRunOnce {
     public static bool RunOnce() {
@@ -2459,6 +2672,7 @@ public static class Collection {
     mapfunc.put("any<-for-while-loop", Vx.Collection.t_any_from_for_while_loop);
     mapfunc.put("any<-for-while-loop-max", Vx.Collection.t_any_from_for_while_loop_max);
     mapfunc.put("any<-map-pos", Vx.Collection.t_any_from_map_pos);
+    mapfunc.put("anymap<-struct", Vx.Collection.t_anymap_from_struct);
     mapfunc.put("boolean-write<-map-removekey", Vx.Collection.t_boolean_write_from_map_removekey);
     mapfunc.put("boolean-write<-map-removekeys", Vx.Collection.t_boolean_write_from_map_removekeys);
     mapfunc.put("int<-map-key", Vx.Collection.t_int_from_map_key);
@@ -2477,6 +2691,7 @@ public static class Collection {
     mapfunc.put("map<-map-keys", Vx.Collection.t_map_from_map_keys);
     mapfunc.put("map<-map-start", Vx.Collection.t_map_from_map_start);
     mapfunc.put("map<-map-start-end", Vx.Collection.t_map_from_map_start_end);
+    mapfunc.put("map<-struct", Vx.Collection.t_map_from_struct);
     Vx.Core.vx_global_package_set("vx/collection", maptype, mapconst, mapfunc);
       return true;
     }

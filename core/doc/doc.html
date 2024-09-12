@@ -1414,6 +1414,9 @@
           <li class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-meta-indent')">
             (f) string&lt;-meta-indent
           </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-node')">
+            (f) string&lt;-node
+          </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-node-indent')">
             (f) string&lt;-node-indent
           </li>
@@ -1517,6 +1520,9 @@
           <li class="nfunc" onclick="docjs.navigate('func_vx/collection/any&lt;-map-pos')">
             (f) any&lt;-map-pos
           </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/collection/anymap&lt;-struct')">
+            (f) anymap&lt;-struct
+          </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/collection/boolean-write&lt;-map-removekey')">
             (f) boolean-write&lt;-map-removekey
           </li>
@@ -1570,6 +1576,9 @@
           </li>
           <li class="nfunc" onclick="docjs.navigate('func_vx/collection/map&lt;-map-start-end')">
             (f) map&lt;-map-start-end
+          </li>
+          <li class="nfunc" onclick="docjs.navigate('func_vx/collection/map&lt;-struct')">
+            (f) map&lt;-struct
           </li>
         </ul>
       </details>
@@ -3459,14 +3468,14 @@
 
 (type connectlist : list
  :allowtypes [connect]
- :doc        &quot;List of connect&quot;)
+ :doc &quot;List of connect&quot;)
 
 (type connectmap : map
  :allowtypes [connect]
- :doc        &quot;Map of connect&quot;)
+ :doc &quot;Map of connect&quot;)
 
 (type const : const
- :doc     &quot;Original Constant Class.&quot;)
+ :doc &quot;Original Constant Class.&quot;)
 
 (type constdef : struct
  :properties [pkgname : string
@@ -3476,11 +3485,11 @@
 
 (type constlist : list
  :allowtypes [any]
- :doc        &quot;List of Const.&quot;)
+ :doc &quot;List of Const.&quot;)
 
 (type constmap : map
  :allowtypes [any]
- :doc        &quot;Map of Const.&quot;)
+ :doc &quot;Map of Const.&quot;)
 
 (type context : struct
  :properties [code    : string
@@ -3573,7 +3582,9 @@
      override fun vx_float() : Float {
        return vxfloat
      }&quot;)
- :test (test 4.5 (float 4.5))
+ :test (test
+        4.5
+        (float 4.5))
  :doc  &quot;Standard Floating Point Number&quot;)
 
 (type func : func
@@ -3611,11 +3622,11 @@
 
 (type funclist : list
  :allowtypes [func]
- :doc        &quot;List of Func.&quot;)
+ :doc &quot;List of Func.&quot;)
 
 (type funcmap : map
  :allowtypes [func]
- :doc        &quot;Map of Func.&quot;)
+ :doc &quot;Map of Func.&quot;)
 
 (type int
  :default     0
@@ -3659,11 +3670,11 @@
 
 (type intlist : list
  :allowtypes [int]
- :doc        &quot;A list of int.&quot;)
+ :doc &quot;A list of int.&quot;)
 
 (type intmap : map
  :allowtypes [int]
- :doc        &quot;A map of int.&quot;)
+ :doc &quot;A map of int.&quot;)
 
 (type list : list
  :allowtypes [any]
@@ -3783,11 +3794,11 @@
 
 (type msgblocklist : list
  :allowtypes [msgblock]
- :doc        &quot;List of Message Blocks&quot;)
+ :doc &quot;List of Message Blocks&quot;)
 
 (type msglist : list
  :allowtypes [msg]
- :doc        &quot;List of Messages&quot;)
+ :doc &quot;List of Messages&quot;)
 
 (type none
  :doc &quot;No Type. No type is returned at all. e.g. Void&quot;)
@@ -3798,7 +3809,7 @@
 (type number
  :default    0
  :allowtypes [int float decimal]
- :doc        &quot;A generic number that could be int, float, or decimal.&quot;)
+ :doc &quot;A generic number that could be int, float, or decimal.&quot;)
 
 (type numberlist : list
  :allowtypes [number]
@@ -3809,11 +3820,12 @@
  :doc &quot;A map of number.&quot;)
 
 (type package : struct
- :properties [pkgname  : string
-              constmap : constmap
-              funcmap  : funcmap
-              typemap  : typemap
-              emptymap : map]
+ :properties
+  [pkgname  : string
+   constmap : constmap
+   funcmap  : funcmap
+   typemap  : typemap
+   emptymap : map]
  :doc &quot;A package that store types, consts and funcs.&quot;)
 
 (type packagemap : map
@@ -3836,9 +3848,10 @@
  :doc &quot;A project.&quot;)
 
 (type security : struct
- :properties [allowfuncs    : funclist
-              permissions   : permissionlist
-              permissionmap : permissionmap]
+ :properties
+  [allowfuncs    : funclist
+   permissions   : permissionlist
+   permissionmap : permissionmap]
  :doc        &quot;Security rules&quot;)
 
 (type session : struct
@@ -3849,21 +3862,24 @@
    locale         : locale
    translation    : translation
    translationmap : translationmap]
- :doc        &quot;Session&quot;)
+ :doc &quot;Session&quot;)
 
 (type setting : struct
- :properties [pathmap : stringmap]
- :doc        &quot;Settings&quot;)
+ :properties
+  [pathmap : stringmap]
+ :doc &quot;Settings&quot;)
 
 (type state : struct
- :properties [statelistenermap : statelistenermap]
+ :properties
+  [statelistenermap : statelistenermap]
  :doc &quot;State. Note that this type is has mutable values.&quot;)
 
 (type statelistener : struct
  :properties
   [name       : string
    value      : any
-   fn-boolean : boolean&lt;-none])
+   fn-boolean : boolean&lt;-none]
+ :doc &quot;A listener to trigger functions on state change.&quot;)
 
 (type statelistenermap : map
  :allowtypes [statelistener]
@@ -3930,18 +3946,22 @@
  :doc &quot;Struct is the type of all structures/objects with properties.&quot;)
 
 (type thenelse : struct
- :properties [code    : string
-              value   : any
-              values  : list
-              fn-cond : boolean&lt;-func
-              fn-any  : any&lt;-func])
+ :properties
+  [code    : string
+   value   : any
+   values  : list
+   fn-cond : boolean&lt;-func
+   fn-any  : any&lt;-func]
+ :doc &quot;An object used in if and switch functions.&quot;)
 
 (type thenelselist : list
- :allowtypes [thenelse])
+ :allowtypes [thenelse]
+ :doc &quot;A list of thenelse.&quot;)
 
 (type translation : struct
- :properties [name    : string
-              wordmap : stringmap]
+ :properties
+  [name    : string
+   wordmap : stringmap]
  :doc &quot;i18 language translation.&quot;)
 
 (type translationlist : list
@@ -3956,18 +3976,19 @@
  :doc     &quot;Original Type Class&quot;)
 
 (type typedef : struct
- :properties [pkgname        : string
-              name           : string
-              extends        : string
-              allowfuncs     : funclist
-              allowtypes     : typelist
-              allowvalues    : anylist
-              disallowfuncs  : funclist
-              disallowtypes  : typelist
-              disallowvalues : anylist
-              properties     : argmap
-              proplast       : arg
-              traits         : typelist]
+ :properties
+  [pkgname        : string
+   name           : string
+   extends        : string
+   allowfuncs     : funclist
+   allowtypes     : typelist
+   allowvalues    : anylist
+   disallowfuncs  : funclist
+   disallowtypes  : typelist
+   disallowvalues : anylist
+   properties     : argmap
+   proplast       : arg
+   traits         : typelist]
  :create
   (native
    :cpp
@@ -3989,21 +4010,23 @@
 
 (type typelist : list
  :allowtypes [any]
- :doc        &quot;List of Types&quot;)
+ :doc &quot;List of Types&quot;)
 
 (type typemap : map
  :allowtypes [any]
- :doc        &quot;Map of Any Type Class&quot;)
+ :doc &quot;Map of Any Type Class&quot;)
 
 (type user : struct
- :properties [security : security
-              username : string
-              token    : string]
- :doc        &quot;User Type&quot;)
+ :properties
+  [security : security
+   username : string
+   token    : string]
+ :doc &quot;User Type&quot;)
 
 (type value : struct
- :properties [next : any
-              refs : int])
+ :properties
+  [next : any
+   refs : int])
 
 (const false : boolean
  :test (test-false false))
@@ -4074,7 +4097,7 @@
   parameters : anylist :...]
  (native
   :js &quot;target[method].apply(parameters)&quot;)
- :alias       &quot;dotmethod&quot;
+ :alias &quot;dotmethod&quot;
  :sideeffects &quot;Depends on object&quot;
  :doc &quot;Not Recommened: Support for Object Oriented dot notation. e.g. (this.foo 'a') = this.foo('a')&quot;)
 
@@ -6250,7 +6273,10 @@
       valuemap,
       fn_any_from_key_value);&quot;
   :js
-   &quot;vx_core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value)&quot;
+   &quot;vx_core.vx_map_from_map_fn(
+      generic_map_1,
+      valuemap,
+      fn_any_from_key_value)&quot;
   :kotlin
    &quot;vx_core.vx_map_from_map_fn(
       generic_map_1,
@@ -7747,7 +7773,7 @@
                 <li>
                   <div class="source">(type connectlist : list
  :allowtypes [connect]
- :doc        &quot;List of connect&quot;)</div>
+ :doc &quot;List of connect&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -7799,7 +7825,7 @@
                 <li>
                   <div class="source">(type connectmap : map
  :allowtypes [connect]
- :doc        &quot;Map of connect&quot;)</div>
+ :doc &quot;Map of connect&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -7844,7 +7870,7 @@
               <ul>
                 <li>
                   <div class="source">(type const : const
- :doc     &quot;Original Constant Class.&quot;)</div>
+ :doc &quot;Original Constant Class.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -7983,7 +8009,7 @@
                 <li>
                   <div class="source">(type constlist : list
  :allowtypes [any]
- :doc        &quot;List of Const.&quot;)</div>
+ :doc &quot;List of Const.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -8035,7 +8061,7 @@
                 <li>
                   <div class="source">(type constmap : map
  :allowtypes [any]
- :doc        &quot;Map of Const.&quot;)</div>
+ :doc &quot;Map of Const.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -8346,7 +8372,9 @@
                 <span class="lbl">Usage/Test Cases:</span>
               </summary>
               <ul>
-                <li><div class="test">(test 4.5 (float 4.5))</div></li>
+                <li><div class="test">(test
+ 4.5
+ (float 4.5))</div></li>
               </ul>
             </details>
             <details open="true">
@@ -8385,7 +8413,9 @@
      override fun vx_float() : Float {
        return vxfloat
      }&quot;)
- :test (test 4.5 (float 4.5))
+ :test (test
+        4.5
+        (float 4.5))
  :doc  &quot;Standard Floating Point Number&quot;)</div>
                 </li>
               </ul>
@@ -8613,7 +8643,7 @@
                 <li>
                   <div class="source">(type funclist : list
  :allowtypes [func]
- :doc        &quot;List of Func.&quot;)</div>
+ :doc &quot;List of Func.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -8665,7 +8695,7 @@
                 <li>
                   <div class="source">(type funcmap : map
  :allowtypes [func]
- :doc        &quot;Map of Func.&quot;)</div>
+ :doc &quot;Map of Func.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -8806,7 +8836,7 @@
                 <li>
                   <div class="source">(type intlist : list
  :allowtypes [int]
- :doc        &quot;A list of int.&quot;)</div>
+ :doc &quot;A list of int.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -8858,7 +8888,7 @@
                 <li>
                   <div class="source">(type intmap : map
  :allowtypes [int]
- :doc        &quot;A map of int.&quot;)</div>
+ :doc &quot;A map of int.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -9484,7 +9514,7 @@
                 <li>
                   <div class="source">(type msgblocklist : list
  :allowtypes [msgblock]
- :doc        &quot;List of Message Blocks&quot;)</div>
+ :doc &quot;List of Message Blocks&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -9536,7 +9566,7 @@
                 <li>
                   <div class="source">(type msglist : list
  :allowtypes [msg]
- :doc        &quot;List of Messages&quot;)</div>
+ :doc &quot;List of Messages&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -9685,7 +9715,7 @@
                   <div class="source">(type number
  :default    0
  :allowtypes [int float decimal]
- :doc        &quot;A generic number that could be int, float, or decimal.&quot;)</div>
+ :doc &quot;A generic number that could be int, float, or decimal.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -9887,11 +9917,12 @@
               <ul>
                 <li>
                   <div class="source">(type package : struct
- :properties [pkgname  : string
-              constmap : constmap
-              funcmap  : funcmap
-              typemap  : typemap
-              emptymap : map]
+ :properties
+  [pkgname  : string
+   constmap : constmap
+   funcmap  : funcmap
+   typemap  : typemap
+   emptymap : map]
  :doc &quot;A package that store types, consts and funcs.&quot;)</div>
                 </li>
               </ul>
@@ -10273,9 +10304,10 @@
               <ul>
                 <li>
                   <div class="source">(type security : struct
- :properties [allowfuncs    : funclist
-              permissions   : permissionlist
-              permissionmap : permissionmap]
+ :properties
+  [allowfuncs    : funclist
+   permissions   : permissionlist
+   permissionmap : permissionmap]
  :doc        &quot;Security rules&quot;)</div>
                 </li>
               </ul>
@@ -10388,7 +10420,7 @@
    locale         : locale
    translation    : translation
    translationmap : translationmap]
- :doc        &quot;Session&quot;)</div>
+ :doc &quot;Session&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -10458,8 +10490,9 @@
               <ul>
                 <li>
                   <div class="source">(type setting : struct
- :properties [pathmap : stringmap]
- :doc        &quot;Settings&quot;)</div>
+ :properties
+  [pathmap : stringmap]
+ :doc &quot;Settings&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -10529,7 +10562,8 @@
               <ul>
                 <li>
                   <div class="source">(type state : struct
- :properties [statelistenermap : statelistenermap]
+ :properties
+  [statelistenermap : statelistenermap]
  :doc &quot;State. Note that this type is has mutable values.&quot;)</div>
                 </li>
               </ul>
@@ -10540,7 +10574,7 @@
             <div class="lbl">Description:</div>
             <ul>
               <li>
-                <div class="txt"></div>
+                <div class="txt">A listener to trigger functions on state change.</div>
               </li>
             </ul>
             <div class="lbl">Type Name:</div>
@@ -10617,7 +10651,8 @@
  :properties
   [name       : string
    value      : any
-   fn-boolean : boolean&lt;-none])</div>
+   fn-boolean : boolean&lt;-none]
+ :doc &quot;A listener to trigger functions on state change.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -11017,7 +11052,7 @@
             <div class="lbl">Description:</div>
             <ul>
               <li>
-                <div class="txt"></div>
+                <div class="txt">An object used in if and switch functions.</div>
               </li>
             </ul>
             <div class="lbl">Type Name:</div>
@@ -11105,11 +11140,13 @@
               <ul>
                 <li>
                   <div class="source">(type thenelse : struct
- :properties [code    : string
-              value   : any
-              values  : list
-              fn-cond : boolean&lt;-func
-              fn-any  : any&lt;-func])</div>
+ :properties
+  [code    : string
+   value   : any
+   values  : list
+   fn-cond : boolean&lt;-func
+   fn-any  : any&lt;-func]
+ :doc &quot;An object used in if and switch functions.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -11119,7 +11156,7 @@
             <div class="lbl">Description:</div>
             <ul>
               <li>
-                <div class="txt"></div>
+                <div class="txt">A list of thenelse.</div>
               </li>
             </ul>
             <div class="lbl">Type Name:</div>
@@ -11160,7 +11197,8 @@
               <ul>
                 <li>
                   <div class="source">(type thenelselist : list
- :allowtypes [thenelse])</div>
+ :allowtypes [thenelse]
+ :doc &quot;A list of thenelse.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -11237,8 +11275,9 @@
               <ul>
                 <li>
                   <div class="source">(type translation : struct
- :properties [name    : string
-              wordmap : stringmap]
+ :properties
+  [name    : string
+   wordmap : stringmap]
  :doc &quot;i18 language translation.&quot;)</div>
                 </li>
               </ul>
@@ -11535,18 +11574,19 @@
               <ul>
                 <li>
                   <div class="source">(type typedef : struct
- :properties [pkgname        : string
-              name           : string
-              extends        : string
-              allowfuncs     : funclist
-              allowtypes     : typelist
-              allowvalues    : anylist
-              disallowfuncs  : funclist
-              disallowtypes  : typelist
-              disallowvalues : anylist
-              properties     : argmap
-              proplast       : arg
-              traits         : typelist]
+ :properties
+  [pkgname        : string
+   name           : string
+   extends        : string
+   allowfuncs     : funclist
+   allowtypes     : typelist
+   allowvalues    : anylist
+   disallowfuncs  : funclist
+   disallowtypes  : typelist
+   disallowvalues : anylist
+   properties     : argmap
+   proplast       : arg
+   traits         : typelist]
  :create
   (native
    :cpp
@@ -11616,7 +11656,7 @@
                 <li>
                   <div class="source">(type typelist : list
  :allowtypes [any]
- :doc        &quot;List of Types&quot;)</div>
+ :doc &quot;List of Types&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -11668,7 +11708,7 @@
                 <li>
                   <div class="source">(type typemap : map
  :allowtypes [any]
- :doc        &quot;Map of Any Type Class&quot;)</div>
+ :doc &quot;Map of Any Type Class&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -11752,10 +11792,11 @@
               <ul>
                 <li>
                   <div class="source">(type user : struct
- :properties [security : security
-              username : string
-              token    : string]
- :doc        &quot;User Type&quot;)</div>
+ :properties
+  [security : security
+   username : string
+   token    : string]
+ :doc &quot;User Type&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -11832,8 +11873,9 @@
               <ul>
                 <li>
                   <div class="source">(type value : struct
- :properties [next : any
-              refs : int])</div>
+ :properties
+  [next : any
+   refs : int])</div>
                 </li>
               </ul>
             </details>
@@ -12514,7 +12556,7 @@
   parameters : anylist :...]
  (native
   :js &quot;target[method].apply(parameters)&quot;)
- :alias       &quot;dotmethod&quot;
+ :alias &quot;dotmethod&quot;
  :sideeffects &quot;Depends on object&quot;
  :doc &quot;Not Recommened: Support for Object Oriented dot notation. e.g. (this.foo 'a') = this.foo('a')&quot;)</div>
                 </li>
@@ -22160,7 +22202,10 @@ improves readability.</div>
       valuemap,
       fn_any_from_key_value);&quot;
   :js
-   &quot;vx_core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value)&quot;
+   &quot;vx_core.vx_map_from_map_fn(
+      generic_map_1,
+      valuemap,
+      fn_any_from_key_value)&quot;
   :kotlin
    &quot;vx_core.vx_map_from_map_fn(
       generic_map_1,
@@ -25683,11 +25728,12 @@ improves readability.</div>
  :doc &quot;Database trait&quot;)
 
 (type dbcell : struct
- :properties [dbcellid   : string
-              dbcellmap  : dbcellmap
-							dbfieldmap : dbfieldmap
-							dbparent   : dbcell
-							dbtable    : dbtable]
+ :properties 
+  [dbcellid   : string
+   dbcellmap  : dbcellmap
+   dbfieldmap : dbfieldmap
+   dbparent   : dbcell
+   dbtable    : dbtable]
  :doc &quot;Database Cell trait&quot;)
 
 (type dbcellmap : map
@@ -25730,10 +25776,11 @@ improves readability.</div>
  :doc &quot;Database Value&quot;)
 
 (type dbtable : struct
- :properties [dbtableid  : string
-              db         : db
-              dbcellmap  : dbcellmap
-							dbfieldmap : dbfieldmap]
+ :properties
+  [dbtableid  : string
+   db         : db
+   dbcellmap  : dbcellmap
+   dbfieldmap : dbfieldmap]
  :doc &quot;Database Table trait&quot;)
 
 (type dbvalue : struct
@@ -25913,11 +25960,12 @@ improves readability.</div>
               <ul>
                 <li>
                   <div class="source">(type dbcell : struct
- :properties [dbcellid   : string
-              dbcellmap  : dbcellmap
-							dbfieldmap : dbfieldmap
-							dbparent   : dbcell
-							dbtable    : dbtable]
+ :properties 
+  [dbcellid   : string
+   dbcellmap  : dbcellmap
+   dbfieldmap : dbfieldmap
+   dbparent   : dbcell
+   dbtable    : dbtable]
  :doc &quot;Database Cell trait&quot;)</div>
                 </li>
               </ul>
@@ -26558,10 +26606,11 @@ improves readability.</div>
               <ul>
                 <li>
                   <div class="source">(type dbtable : struct
- :properties [dbtableid  : string
-              db         : db
-              dbcellmap  : dbcellmap
-							dbfieldmap : dbfieldmap]
+ :properties
+  [dbtableid  : string
+   db         : db
+   dbcellmap  : dbcellmap
+   dbfieldmap : dbfieldmap]
  :doc &quot;Database Table trait&quot;)</div>
                 </li>
               </ul>
@@ -31056,19 +31105,20 @@ improves readability.</div>
     text)
    (else
     (let : string
-     [indent  : string := (string&lt;-string-end
-                           text
-                           (-1 pos))
-      rest    : string := (string&lt;-string-start
-                           text
-                           pos)
-      linepos : int    := (int&lt;-string-find
-                           indent
-                           &quot;\n&quot;)
-      outdent : string := (if : string
-                           (= 0 linepos)
-                           &quot;&quot;
-                           &quot;\n&quot;)]
+     [indent : string :=
+       (string&lt;-string-end
+        text (-1 pos))
+      rest : string :=
+       (string&lt;-string-start
+        text pos)
+      linepos : int :=
+       (int&lt;-string-find
+        indent &quot;\n&quot;)
+      outdent : string :=
+       (if : string
+        (= 0 linepos)
+        &quot;&quot;
+        &quot;\n&quot;)]
      (string&lt;-string-find-replace
       rest
       indent
@@ -32890,19 +32940,20 @@ improves readability.</div>
     text)
    (else
     (let : string
-     [indent  : string := (string&lt;-string-end
-                           text
-                           (-1 pos))
-      rest    : string := (string&lt;-string-start
-                           text
-                           pos)
-      linepos : int    := (int&lt;-string-find
-                           indent
-                           &quot;\n&quot;)
-      outdent : string := (if : string
-                           (= 0 linepos)
-                           &quot;&quot;
-                           &quot;\n&quot;)]
+     [indent : string :=
+       (string&lt;-string-end
+        text (-1 pos))
+      rest : string :=
+       (string&lt;-string-start
+        text pos)
+      linepos : int :=
+       (int&lt;-string-find
+        indent &quot;\n&quot;)
+      outdent : string :=
+       (if : string
+        (= 0 linepos)
+        &quot;&quot;
+        &quot;\n&quot;)]
      (string&lt;-string-find-replace
       rest
       indent
@@ -33419,7 +33470,7 @@ improves readability.</div>
           </summary>
           <ul>
             <li>
-      <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/htmlstring&lt;-string')">htmlstring&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string-indent')">string-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-div-indent')">string&lt;-div-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-body-indent')">string&lt;-body-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-details-indent')">string&lt;-details-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-footer-indent')">string&lt;-footer-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-h1-indent')">string&lt;-h1-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-h2-indent')">string&lt;-h2-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-h3-indent')">string&lt;-h3-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-head-indent')">string&lt;-head-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-html')">string&lt;-html</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-img-indent')">string&lt;-img-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-indent')">string&lt;-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-meta-indent')">string&lt;-meta-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-node-indent')">string&lt;-node-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-nodelist-tag-prop-indent')">string&lt;-nodelist-tag-prop-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-nodelist-indent')">string&lt;-nodelist-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-p-indent')">string&lt;-p-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-propname-val')">string&lt;-propname-val</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-propstyle')">string&lt;-propstyle</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-propstyle-stylelist')">string&lt;-propstyle-stylelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-propstylelist')">string&lt;-propstylelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-propstyleunique')">string&lt;-propstyleunique</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-style-indent')">string&lt;-style-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-stylelist')">string&lt;-stylelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-stylelist-indent')">string&lt;-stylelist-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-stylepropmap-indent')">string&lt;-stylepropmap-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-stylesheet-indent')">string&lt;-stylesheet-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-table-indent')">string&lt;-table-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-tbody-indent')">string&lt;-tbody-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-td-indent')">string&lt;-td-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-thead-indent')">string&lt;-thead-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-title-indent')">string&lt;-title-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-tr-indent')">string&lt;-tr-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-uri')">string&lt;-uri</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/styles&lt;-stylesheet')">styles&lt;-stylesheet</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/style&lt;-stylesheet-name')">style&lt;-stylesheet-name</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/stylemap&lt;-stylelist')">stylemap&lt;-stylelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/stylemap&lt;-stylesheet')">stylemap&lt;-stylesheet</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/stylesheet-loadmap')">stylesheet-loadmap</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/uri&lt;-string')">uri&lt;-string</span>
+      <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/htmlstring&lt;-string')">htmlstring&lt;-string</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string-indent')">string-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-div-indent')">string&lt;-div-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-body-indent')">string&lt;-body-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-details-indent')">string&lt;-details-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-footer-indent')">string&lt;-footer-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-h1-indent')">string&lt;-h1-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-h2-indent')">string&lt;-h2-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-h3-indent')">string&lt;-h3-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-head-indent')">string&lt;-head-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-html')">string&lt;-html</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-img-indent')">string&lt;-img-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-indent')">string&lt;-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-meta-indent')">string&lt;-meta-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-node')">string&lt;-node</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-node-indent')">string&lt;-node-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-nodelist-tag-prop-indent')">string&lt;-nodelist-tag-prop-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-nodelist-indent')">string&lt;-nodelist-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-p-indent')">string&lt;-p-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-propname-val')">string&lt;-propname-val</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-propstyle')">string&lt;-propstyle</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-propstyle-stylelist')">string&lt;-propstyle-stylelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-propstylelist')">string&lt;-propstylelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-propstyleunique')">string&lt;-propstyleunique</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-style-indent')">string&lt;-style-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-stylelist')">string&lt;-stylelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-stylelist-indent')">string&lt;-stylelist-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-stylepropmap-indent')">string&lt;-stylepropmap-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-stylesheet-indent')">string&lt;-stylesheet-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-table-indent')">string&lt;-table-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-tbody-indent')">string&lt;-tbody-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-td-indent')">string&lt;-td-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-thead-indent')">string&lt;-thead-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-title-indent')">string&lt;-title-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-tr-indent')">string&lt;-tr-indent</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-uri')">string&lt;-uri</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/styles&lt;-stylesheet')">styles&lt;-stylesheet</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/style&lt;-stylesheet-name')">style&lt;-stylesheet-name</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/stylemap&lt;-stylelist')">stylemap&lt;-stylelist</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/stylemap&lt;-stylesheet')">stylemap&lt;-stylesheet</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/stylesheet-loadmap')">stylesheet-loadmap</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/uri&lt;-string')">uri&lt;-string</span>
             </li>
           </ul>
         </details>
@@ -33830,28 +33881,52 @@ improves readability.</div>
         (string&lt;-meta-indent (meta :charset &quot;utf-8&quot;) 0))
  :doc &quot;Returns string from head&quot;)
 
+(func string&lt;-node : string
+ [node : any-1]
+ (string&lt;-node-indent
+  node 0)
+ :doc &quot;Returns a string from any node&quot;)
+
 (func string&lt;-node-indent : string
  [node   : any-1
   indent : int]
  (switch (type&lt;-any node)
-  (case body       (string&lt;-body-indent       (any&lt;-any node) indent))
-  (case details    (string&lt;-details-indent    (any&lt;-any node) indent))
-  (case div        (string&lt;-div-indent        (any&lt;-any node) indent))
-  (case h1         (string&lt;-h1-indent         (any&lt;-any node) indent))
-  (case h2         (string&lt;-h2-indent         (any&lt;-any node) indent))
-  (case h3         (string&lt;-h3-indent         (any&lt;-any node) indent))
-  (case head       (string&lt;-head-indent       (any&lt;-any node) indent))
-  (case footer     (string&lt;-footer-indent     (any&lt;-any node) indent))
-  (case img        (string&lt;-img-indent        (any&lt;-any node) indent))
-  (case meta       (string&lt;-meta-indent       (any&lt;-any node) indent))
-  (case p          (string&lt;-p-indent          (any&lt;-any node) indent))
-  (case stylesheet (string&lt;-stylesheet-indent (any&lt;-any node) indent))
-  (case table      (string&lt;-table-indent      (any&lt;-any node) indent))
-  (case title      (string&lt;-title-indent      (any&lt;-any node) indent))
-  (case tbody      (string&lt;-tbody-indent      (any&lt;-any node) indent))
-  (case thead      (string&lt;-thead-indent      (any&lt;-any node) indent))
-  (case td         (string&lt;-td-indent         (any&lt;-any node) indent))
-  (case tr         (string&lt;-tr-indent         (any&lt;-any node) indent)))
+  (case body
+   (string&lt;-body-indent (any&lt;-any node) indent))
+  (case details
+   (string&lt;-details-indent (any&lt;-any node) indent))
+  (case div
+   (string&lt;-div-indent (any&lt;-any node) indent))
+  (case h1
+   (string&lt;-h1-indent (any&lt;-any node) indent))
+  (case h2
+   (string&lt;-h2-indent (any&lt;-any node) indent))
+  (case h3
+   (string&lt;-h3-indent (any&lt;-any node) indent))
+  (case head
+   (string&lt;-head-indent (any&lt;-any node) indent))
+  (case footer
+   (string&lt;-footer-indent (any&lt;-any node) indent))
+  (case img
+   (string&lt;-img-indent (any&lt;-any node) indent))
+  (case meta
+   (string&lt;-meta-indent (any&lt;-any node) indent))
+  (case p
+   (string&lt;-p-indent (any&lt;-any node) indent))
+  (case stylesheet
+   (string&lt;-stylesheet-indent (any&lt;-any node) indent))
+  (case table
+   (string&lt;-table-indent (any&lt;-any node) indent))
+  (case title
+   (string&lt;-title-indent (any&lt;-any node) indent))
+  (case tbody
+   (string&lt;-tbody-indent (any&lt;-any node) indent))
+  (case thead
+   (string&lt;-thead-indent (any&lt;-any node) indent))
+  (case td
+   (string&lt;-td-indent (any&lt;-any node) indent))
+  (case tr
+   (string&lt;-tr-indent (any&lt;-any node) indent)))
  :doc &quot;Returns a string from any node&quot;)
 
 (func string&lt;-nodelist-tag-prop-indent : string
@@ -37549,6 +37624,70 @@ improves readability.</div>
               </ul>
             </details>
           </div>
+          <div class="d" id="d_func_vx/web/html/string&lt;-node">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/web/html')">vx/web/html</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-node')">string&lt;-node</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns a string from any node</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">string&lt;-node</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/string')">vx/core/string</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">node</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/any-1')">vx/core/any-1</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func string&lt;-node : string
+ [node : any-1]
+ (string&lt;-node-indent
+  node 0)
+ :doc &quot;Returns a string from any node&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
           <div class="d" id="d_func_vx/web/html/string&lt;-node-indent">
             <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/web/html')">vx/web/html</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/web/html/string&lt;-node-indent')">string&lt;-node-indent</span></div>
             <div class="lbl">Description:</div>
@@ -37613,24 +37752,42 @@ improves readability.</div>
  [node   : any-1
   indent : int]
  (switch (type&lt;-any node)
-  (case body       (string&lt;-body-indent       (any&lt;-any node) indent))
-  (case details    (string&lt;-details-indent    (any&lt;-any node) indent))
-  (case div        (string&lt;-div-indent        (any&lt;-any node) indent))
-  (case h1         (string&lt;-h1-indent         (any&lt;-any node) indent))
-  (case h2         (string&lt;-h2-indent         (any&lt;-any node) indent))
-  (case h3         (string&lt;-h3-indent         (any&lt;-any node) indent))
-  (case head       (string&lt;-head-indent       (any&lt;-any node) indent))
-  (case footer     (string&lt;-footer-indent     (any&lt;-any node) indent))
-  (case img        (string&lt;-img-indent        (any&lt;-any node) indent))
-  (case meta       (string&lt;-meta-indent       (any&lt;-any node) indent))
-  (case p          (string&lt;-p-indent          (any&lt;-any node) indent))
-  (case stylesheet (string&lt;-stylesheet-indent (any&lt;-any node) indent))
-  (case table      (string&lt;-table-indent      (any&lt;-any node) indent))
-  (case title      (string&lt;-title-indent      (any&lt;-any node) indent))
-  (case tbody      (string&lt;-tbody-indent      (any&lt;-any node) indent))
-  (case thead      (string&lt;-thead-indent      (any&lt;-any node) indent))
-  (case td         (string&lt;-td-indent         (any&lt;-any node) indent))
-  (case tr         (string&lt;-tr-indent         (any&lt;-any node) indent)))
+  (case body
+   (string&lt;-body-indent (any&lt;-any node) indent))
+  (case details
+   (string&lt;-details-indent (any&lt;-any node) indent))
+  (case div
+   (string&lt;-div-indent (any&lt;-any node) indent))
+  (case h1
+   (string&lt;-h1-indent (any&lt;-any node) indent))
+  (case h2
+   (string&lt;-h2-indent (any&lt;-any node) indent))
+  (case h3
+   (string&lt;-h3-indent (any&lt;-any node) indent))
+  (case head
+   (string&lt;-head-indent (any&lt;-any node) indent))
+  (case footer
+   (string&lt;-footer-indent (any&lt;-any node) indent))
+  (case img
+   (string&lt;-img-indent (any&lt;-any node) indent))
+  (case meta
+   (string&lt;-meta-indent (any&lt;-any node) indent))
+  (case p
+   (string&lt;-p-indent (any&lt;-any node) indent))
+  (case stylesheet
+   (string&lt;-stylesheet-indent (any&lt;-any node) indent))
+  (case table
+   (string&lt;-table-indent (any&lt;-any node) indent))
+  (case title
+   (string&lt;-title-indent (any&lt;-any node) indent))
+  (case tbody
+   (string&lt;-tbody-indent (any&lt;-any node) indent))
+  (case thead
+   (string&lt;-thead-indent (any&lt;-any node) indent))
+  (case td
+   (string&lt;-td-indent (any&lt;-any node) indent))
+  (case tr
+   (string&lt;-tr-indent (any&lt;-any node) indent)))
  :doc &quot;Returns a string from any node&quot;)</div>
                 </li>
               </ul>
@@ -39683,7 +39840,7 @@ improves readability.</div>
           </summary>
           <ul>
             <li>
-      <span class="nfunc" onclick="docjs.navigate('func_vx/collection/any&lt;-for-until-loop')">any&lt;-for-until-loop</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/any&lt;-for-until-loop-max')">any&lt;-for-until-loop-max</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/any&lt;-for-while-loop')">any&lt;-for-while-loop</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/any&lt;-for-while-loop-max')">any&lt;-for-while-loop-max</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/any&lt;-map-pos')">any&lt;-map-pos</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/boolean-write&lt;-map-removekey')">boolean-write&lt;-map-removekey</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/boolean-write&lt;-map-removekeys')">boolean-write&lt;-map-removekeys</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/int&lt;-map-key')">int&lt;-map-key</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/int&lt;-stringlist-find')">int&lt;-stringlist-find</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/is-list')">is-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/is-map')">is-map</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/list&lt;-for-end-loop')">list&lt;-for-end-loop</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/list&lt;-for-while-loop')">list&lt;-for-while-loop</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/list&lt;-for-while-loop-max')">list&lt;-for-while-loop-max</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/list&lt;-list-end')">list&lt;-list-end</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/list&lt;-list-filter')">list&lt;-list-filter</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/list&lt;-list-filtertypes')">list&lt;-list-filtertypes</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/list&lt;-list-start')">list&lt;-list-start</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/list&lt;-list-start-end')">list&lt;-list-start-end</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/map&lt;-map-end')">map&lt;-map-end</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/map&lt;-map-keys')">map&lt;-map-keys</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/map&lt;-map-start')">map&lt;-map-start</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/map&lt;-map-start-end')">map&lt;-map-start-end</span>
+      <span class="nfunc" onclick="docjs.navigate('func_vx/collection/any&lt;-for-until-loop')">any&lt;-for-until-loop</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/any&lt;-for-until-loop-max')">any&lt;-for-until-loop-max</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/any&lt;-for-while-loop')">any&lt;-for-while-loop</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/any&lt;-for-while-loop-max')">any&lt;-for-while-loop-max</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/any&lt;-map-pos')">any&lt;-map-pos</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/anymap&lt;-struct')">anymap&lt;-struct</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/boolean-write&lt;-map-removekey')">boolean-write&lt;-map-removekey</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/boolean-write&lt;-map-removekeys')">boolean-write&lt;-map-removekeys</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/int&lt;-map-key')">int&lt;-map-key</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/int&lt;-stringlist-find')">int&lt;-stringlist-find</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/is-list')">is-list</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/is-map')">is-map</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/list&lt;-for-end-loop')">list&lt;-for-end-loop</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/list&lt;-for-while-loop')">list&lt;-for-while-loop</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/list&lt;-for-while-loop-max')">list&lt;-for-while-loop-max</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/list&lt;-list-end')">list&lt;-list-end</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/list&lt;-list-filter')">list&lt;-list-filter</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/list&lt;-list-filtertypes')">list&lt;-list-filtertypes</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/list&lt;-list-start')">list&lt;-list-start</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/list&lt;-list-start-end')">list&lt;-list-start-end</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/map&lt;-map-end')">map&lt;-map-end</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/map&lt;-map-keys')">map&lt;-map-keys</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/map&lt;-map-start')">map&lt;-map-start</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/map&lt;-map-start-end')">map&lt;-map-start-end</span>, <span class="nfunc" onclick="docjs.navigate('func_vx/collection/map&lt;-struct')">map&lt;-struct</span>
             </li>
           </ul>
         </details>
@@ -39797,6 +39954,28 @@ count : int := 0
   (any&lt;-map : any-1
    map key))
  :doc &quot;Returns then numbered child from a map.&quot;)
+
+(func anymap&lt;-struct : anymap
+ [structure : struct-1]
+ (native
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto
+  :kotlin :auto)
+ :test (test
+        (anymap
+         :name &quot;sname&quot;
+         :wordmap
+          (stringmap
+           :a &quot;x&quot;))
+        (anymap&lt;-struct
+         (translation
+          :name &quot;sname&quot;
+          :wordmap
+           (stringmap
+            :a &quot;x&quot;))))
+ :doc &quot;Returns anymap from all the properties in a struct.&quot;)
 
 (func boolean-write&lt;-map-removekey : boolean
  [valuemap : map-1
@@ -40129,6 +40308,24 @@ output : list-1 := (empty list-1)
           :d &quot;4&quot;)
          2 3))
  :doc &quot;Returns a submap from another map using the index of the keylist&quot;)
+
+(func map&lt;-struct : map-1
+ [structure : struct-2]
+ (let : map-1
+  [anymap : anymap :=
+    (anymap&lt;-struct structure)]
+  (map&lt;-map : map-1
+   anymap))
+ :test (test
+        (stringmap
+         :name &quot;sname&quot;)
+        (map&lt;-struct : stringmap
+         (translation
+          :name &quot;sname&quot;
+          :wordmap
+           (stringmap
+            :a &quot;x&quot;))))
+ :doc &quot;Returns a typed map from all the properties in a struct.&quot;)
 </div>
             </li>
           </ul>
@@ -40613,6 +40810,98 @@ count : int := 0
   (any&lt;-map : any-1
    map key))
  :doc &quot;Returns then numbered child from a map.&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/collection/anymap&lt;-struct">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/collection')">vx/collection</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/collection/anymap&lt;-struct')">anymap&lt;-struct</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns anymap from all the properties in a struct.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">anymap&lt;-struct</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/anymap')">vx/core/anymap</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">structure</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/struct-1')">vx/core/struct-1</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+                <li><div class="test">(test
+ (anymap
+  :name &quot;sname&quot;
+  :wordmap
+   (stringmap
+    :a &quot;x&quot;))
+ (anymap&lt;-struct
+  (translation
+   :name &quot;sname&quot;
+   :wordmap
+    (stringmap
+     :a &quot;x&quot;))))</div></li>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func anymap&lt;-struct : anymap
+ [structure : struct-1]
+ (native
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto
+  :kotlin :auto)
+ :test (test
+        (anymap
+         :name &quot;sname&quot;
+         :wordmap
+          (stringmap
+           :a &quot;x&quot;))
+        (anymap&lt;-struct
+         (translation
+          :name &quot;sname&quot;
+          :wordmap
+           (stringmap
+            :a &quot;x&quot;))))
+ :doc &quot;Returns anymap from all the properties in a struct.&quot;)</div>
                 </li>
               </ul>
             </details>
@@ -42222,6 +42511,91 @@ output : list-1 := (empty list-1)
           :d &quot;4&quot;)
          2 3))
  :doc &quot;Returns a submap from another map using the index of the keylist&quot;)</div>
+                </li>
+              </ul>
+            </details>
+          </div>
+          <div class="d" id="d_func_vx/collection/map&lt;-struct">
+            <div class="header"><span class="npackage" onclick="docjs.navigate('pkg_vx/collection')">vx/collection</span> / <span class="nfunc" onclick="docjs.navigate('func_vx/collection/map&lt;-struct')">map&lt;-struct</span></div>
+            <div class="lbl">Description:</div>
+            <ul>
+              <li>
+                <div class="txt">Returns a typed map from all the properties in a struct.</div>
+              </li>
+            </ul>
+            <div class="lbl">Function Name:</div>
+            <ul>
+              <li>
+                <div class="txt">map&lt;-struct</div>
+              </li>
+            </ul>
+            <div class="lbl">Return Type:</div>
+            <ul>
+              <li>
+                <div class="txt"><span class="ntype" onclick="docjs.navigate('type_vx/core/map-1')">vx/core/map-1</span></div>
+              </li>
+            </ul>
+          <details open="true">
+            <summary>
+              <span class="lbl">Arguments:</span>
+            </summary>
+            <ul>
+              <li>
+                <div class="table">
+                  <div class="th">
+                    <div class="td">Name</div>
+                    <div class="td">Type</div>
+                    <div class="td">Generic</div>
+                    <div class="td">Description</div>
+                  </div>
+                  <div class="tr">
+                    <div class="td">structure</div>
+                    <div class="td"><span class="ntype" onclick="docjs.navigate('type_vx/core/struct-2')">vx/core/struct-2</span></div>
+                    <div class="td"></div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Usage/Test Cases:</span>
+              </summary>
+              <ul>
+                <li><div class="test">(test
+ (stringmap
+  :name &quot;sname&quot;)
+ (map&lt;-struct : stringmap
+  (translation
+   :name &quot;sname&quot;
+   :wordmap
+    (stringmap
+     :a &quot;x&quot;))))</div></li>
+              </ul>
+            </details>
+            <details open="true">
+              <summary>
+                <span class="lbl">Source Code:</span>
+              </summary>
+              <ul>
+                <li>
+                  <div class="source">(func map&lt;-struct : map-1
+ [structure : struct-2]
+ (let : map-1
+  [anymap : anymap :=
+    (anymap&lt;-struct structure)]
+  (map&lt;-map : map-1
+   anymap))
+ :test (test
+        (stringmap
+         :name &quot;sname&quot;)
+        (map&lt;-struct : stringmap
+         (translation
+          :name &quot;sname&quot;
+          :wordmap
+           (stringmap
+            :a &quot;x&quot;))))
+ :doc &quot;Returns a typed map from all the properties in a struct.&quot;)</div>
                 </li>
               </ul>
             </details>

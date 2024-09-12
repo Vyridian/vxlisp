@@ -17,10 +17,16 @@
 
 * doc - Creates html documentation
 * webserver - Launches a development webserver to server docs and test html.
-* srcjs - Compiles javascript source
-* testjs - Compiles javascript test
-* srcjava - Compiles java source
-* testjava - Compiles java test suite
+* srcjs - Generates javascript source
+* testjs - Generates javascript test
+* srcjava - Generates java source
+* testjava - Generates java test suite
+* srccpp - Generates C++ source
+* testcpp - Generates C++ test
+* srccsharp - Generates CSharp source
+* testsharp - Generates CSharp test
+* srckotlin - Generates Kotlin source
+* testkotlin - Generates Kotlin test
 
 ## Unit Test - Run one of the following
 

@@ -103,6 +103,28 @@ count : int := 0
    map key))
  :doc "Returns then numbered child from a map.")
 
+(func anymap<-struct : anymap
+ [structure : struct-1]
+ (native
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto
+  :kotlin :auto)
+ :test (test
+        (anymap
+         :name "sname"
+         :wordmap
+          (stringmap
+           :a "x"))
+        (anymap<-struct
+         (translation
+          :name "sname"
+          :wordmap
+           (stringmap
+            :a "x"))))
+ :doc "Returns anymap from all the properties in a struct.")
+
 (func boolean-write<-map-removekey : boolean
  [valuemap : map-1
   key      : string]
@@ -434,3 +456,21 @@ output : list-1 := (empty list-1)
           :d "4")
          2 3))
  :doc "Returns a submap from another map using the index of the keylist")
+
+(func map<-struct : map-1
+ [structure : struct-2]
+ (let : map-1
+  [anymap : anymap :=
+    (anymap<-struct structure)]
+  (map<-map : map-1
+   anymap))
+ :test (test
+        (stringmap
+         :name "sname")
+        (map<-struct : stringmap
+         (translation
+          :name "sname"
+          :wordmap
+           (stringmap
+            :a "x"))))
+ :doc "Returns a typed map from all the properties in a struct.")

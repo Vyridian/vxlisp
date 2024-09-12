@@ -27,6 +27,10 @@ namespace vx_collection {
   typedef Abstract_any_from_map_pos* Func_any_from_map_pos;
   extern Func_any_from_map_pos e_any_from_map_pos;
   extern Func_any_from_map_pos t_any_from_map_pos;
+  class Abstract_anymap_from_struct;
+  typedef Abstract_anymap_from_struct* Func_anymap_from_struct;
+  extern Func_anymap_from_struct e_anymap_from_struct;
+  extern Func_anymap_from_struct t_anymap_from_struct;
   class Abstract_boolean_write_from_map_removekey;
   typedef Abstract_boolean_write_from_map_removekey* Func_boolean_write_from_map_removekey;
   extern Func_boolean_write_from_map_removekey e_boolean_write_from_map_removekey;
@@ -98,30 +102,67 @@ namespace vx_collection {
   class Abstract_map_from_map_start_end;
   typedef Abstract_map_from_map_start_end* Func_map_from_map_start_end;
   extern Func_map_from_map_start_end e_map_from_map_start_end;
-  extern Func_map_from_map_start_end t_map_from_map_start_end;// :headerfirst
+  extern Func_map_from_map_start_end t_map_from_map_start_end;
+  class Abstract_map_from_struct;
+  typedef Abstract_map_from_struct* Func_map_from_struct;
+  extern Func_map_from_struct e_map_from_struct;
+  extern Func_map_from_struct t_map_from_struct;// :headerfirst
 // :header
 
   // vx_any_from_for_until_loop_max(generic_any_1, start, fn-until, fn-loop, max)
-  vx_core::Type_any vx_any_from_for_until_loop_max(vx_core::Type_any generic_any_1, vx_core::Type_any start, vx_core::Func_boolean_from_any fn_until, vx_core::Func_any_from_any fn_loop, vx_core::Type_int max);
+  vx_core::Type_any vx_any_from_for_until_loop_max(
+    vx_core::Type_any generic_any_1,
+    vx_core::Type_any start,
+    vx_core::Func_boolean_from_any fn_until,
+    vx_core::Func_any_from_any fn_loop,
+    vx_core::Type_int max);
 
   // vx_any_from_for_while_loop_max(generic_any_1, start, fn-while, fn-loop, max)
-  vx_core::Type_any vx_any_from_for_while_loop_max(vx_core::Type_any generic_any_1, vx_core::Type_any start, vx_core::Func_boolean_from_any fn_while, vx_core::Func_any_from_any fn_loop, vx_core::Type_int max);
+  vx_core::Type_any vx_any_from_for_while_loop_max(
+    vx_core::Type_any generic_any_1,
+    vx_core::Type_any start,
+    vx_core::Func_boolean_from_any fn_while,
+    vx_core::Func_any_from_any fn_loop,
+    vx_core::Type_int max);
+
+  // (func anymap<-struct)
+  vx_core::Type_anymap vx_anymap_from_struct(
+    vx_core::Type_struct structure);
 
   // vx_list_from_for_end_loop(generic_list_1, start, end, fn-loop)
-  vx_core::Type_any vx_list_from_for_end_loop(vx_core::Type_any generic_list_1, vx_core::Type_int start, vx_core::Type_int end, vx_core::Func_any_from_int fn_loop);
+  vx_core::Type_any vx_list_from_for_end_loop(
+    vx_core::Type_any generic_list_1,
+    vx_core::Type_int start,
+    vx_core::Type_int end,
+    vx_core::Func_any_from_int fn_loop);
 
   // vx_list_from_for_while_loop_max(generic_list_1, start, fn-while, fn-loop, max)
-  vx_core::Type_any vx_list_from_for_while_loop_max(vx_core::Type_any generic_list_1, vx_core::Type_any start, vx_core::Func_boolean_from_any fn_while, vx_core::Func_any_from_any fn_loop, vx_core::Type_int max);
+  vx_core::Type_any vx_list_from_for_while_loop_max(
+    vx_core::Type_any generic_list_1,
+    vx_core::Type_any start,
+    vx_core::Func_boolean_from_any fn_while,
+    vx_core::Func_any_from_any fn_loop,
+    vx_core::Type_int max);
 
   // vx_list_from_list_filter(generic_list_1, list, fn-any<-any)
-  vx_core::Type_any vx_list_from_list_filter(vx_core::Type_any generic_list_1, vx_core::Type_list vallist, vx_core::Func_any_from_any fn_filter);
+  vx_core::Type_any vx_list_from_list_filter(
+    vx_core::Type_any generic_list_1,
+    vx_core::Type_list vallist,
+    vx_core::Func_any_from_any fn_filter);
 
   // vx_list_from_list_start_end(generic_list_1, list, int, int)
-  vx_core::Type_any vx_list_from_list_start_end(vx_core::Type_any generic_list_1, vx_core::Type_list values, vx_core::Type_int start, vx_core::Type_int end);
+  vx_core::Type_any vx_list_from_list_start_end(
+    vx_core::Type_any generic_list_1,
+    vx_core::Type_list values,
+    vx_core::Type_int start,
+    vx_core::Type_int end);
 
   // vx_map_from_map_keys(generic_map_1, map, stringlist)
-  vx_core::Type_any vx_map_from_map_keys(vx_core::Type_any generic_map_1, vx_core::Type_map valuemap, vx_core::Type_stringlist keys);
-	 
+  vx_core::Type_any vx_map_from_map_keys(
+    vx_core::Type_any generic_map_1,
+    vx_core::Type_map valuemap,
+    vx_core::Type_stringlist keys);
+
 
   // (func any<-for-until-loop-max)
   class Abstract_any_from_for_until_loop_max : public vx_core::Abstract_func, public virtual vx_core::Abstract_replfunc {
@@ -353,6 +394,9 @@ namespace vx_collection {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
+  // (func anymap<-struct)
+  vx_core::Type_anymap f_anymap_from_struct(vx_core::Type_struct structure);
+
   // (func boolean-write<-map-removekey)
   vx_core::Type_boolean f_boolean_write_from_map_removekey(vx_core::Type_map valuemap, vx_core::Type_string key);
 
@@ -391,6 +435,33 @@ namespace vx_collection {
     virtual vx_core::vx_Type_listany vx_dispose() override;
     virtual vx_core::Type_any vx_empty() const override;
     virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
+  // (func anymap<-struct)
+  class Abstract_anymap_from_struct : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_anymap_from_struct() {};
+    virtual ~Abstract_anymap_from_struct() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_anymap_from_struct : public virtual Abstract_anymap_from_struct {
+  public:
+    Class_anymap_from_struct();
+    virtual ~Class_anymap_from_struct() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
@@ -678,6 +749,33 @@ namespace vx_collection {
     virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
   };
 
+  // (func map<-struct)
+  class Abstract_map_from_struct : public vx_core::Abstract_any_from_any, public virtual vx_core::Abstract_replfunc {
+  public:
+    Abstract_map_from_struct() {};
+    virtual ~Abstract_map_from_struct() = 0;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override = 0;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override = 0;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override = 0;
+  };
+  class Class_map_from_struct : public virtual Abstract_map_from_struct {
+  public:
+    Class_map_from_struct();
+    virtual ~Class_map_from_struct() override;
+    virtual vx_core::Type_any vx_new(vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_any vx_copy(vx_core::Type_any copyval, vx_core::vx_Type_listany vals) const override;
+    virtual vx_core::Type_funcdef vx_funcdef() const override;
+    virtual vx_core::Type_typedef vx_typedef() const override;
+    virtual vx_core::Type_constdef vx_constdef() const override;
+    virtual vx_core::Type_msgblock vx_msgblock() const override;
+    virtual vx_core::vx_Type_listany vx_dispose() override;
+    virtual vx_core::Type_any vx_empty() const override;
+    virtual vx_core::Type_any vx_type() const override;
+    virtual vx_core::Func_any_from_any vx_fn_new(vx_core::vx_Type_listany lambdavars, vx_core::Abstract_any_from_any::IFn fn) const override;
+    virtual vx_core::Type_any vx_any_from_any(vx_core::Type_any value) const override;
+    virtual vx_core::Type_any vx_repl(vx_core::Type_anylist arglist) override;
+  };
+
   // (func any<-for-until-loop-max)
   template <class T> T* f_any_from_for_until_loop_max(T* generic_any_1, T* start, vx_core::Func_boolean_from_any fn_until, vx_core::Func_any_from_any fn_loop, vx_core::Type_int max) {
     T* output = vx_core::vx_empty(generic_any_1);
@@ -879,6 +977,24 @@ namespace vx_collection {
       vx_core::f_length_2(valuemap)
     );
     vx_core::vx_release_one_except({valuemap, start}, output);
+    return output;
+  }
+
+  // (func map<-struct)
+  template <class N, class R> N* f_map_from_struct(N* generic_map_1, R* structure) {
+    N* output = vx_core::vx_empty(generic_map_1);
+    vx_core::vx_reserve(structure);
+    output = vx_core::f_let(
+      generic_map_1,
+      vx_core::t_any_from_func->vx_fn_new({structure, generic_map_1}, [structure, generic_map_1]() {
+        vx_core::Type_anymap anymap = vx_collection::f_anymap_from_struct(structure);
+        vx_core::vx_ref_plus(anymap);
+        vx_core::Type_map output_1 = vx_core::f_map_from_map(generic_map_1, anymap);
+        vx_core::vx_release_one_except(anymap, output_1);
+        return output_1;
+      })
+    );
+    vx_core::vx_release_one_except(structure, output);
     return output;
   }
 

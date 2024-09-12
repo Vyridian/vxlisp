@@ -60,6 +60,14 @@ object vx_collection {
     return output
   }
 
+  // (func anymap<-struct)
+  fun vx_anymap_from_struct(
+    structure : vx_core.Type_struct) : vx_core.Type_anymap {
+    val map : Map<String, vx_core.Type_any> = structure.vx_map()
+    val output : vx_core.Type_anymap = vx_core.vx_new_map(vx_core.t_anymap, map)
+    return output
+  }
+
   fun <T : vx_core.Type_list> vx_list_from_for_end_loop(
     generic_list_1 : T,
     start : vx_core.Type_int,
@@ -631,6 +639,97 @@ object vx_collection {
         output_1
       })
     )
+    return output
+  }
+
+
+  interface Func_anymap_from_struct : vx_core.Func_any_from_any {
+    fun vx_anymap_from_struct(structure : vx_core.Type_struct) : vx_core.Type_anymap
+  }
+
+  class Class_anymap_from_struct : vx_core.Class_base, Func_anymap_from_struct {
+    constructor() {}
+
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
+      val output : vx_collection.Class_anymap_from_struct = vx_collection.Class_anymap_from_struct()
+      return output
+    }
+
+    override fun vx_copy(vararg vals : Any) : vx_core.Type_any {
+      val output : vx_collection.Class_anymap_from_struct = vx_collection.Class_anymap_from_struct()
+      return output
+    }
+
+    override fun vx_typedef() : vx_core.Type_typedef {
+      var output : vx_core.Type_typedef = vx_core.t_func.vx_typedef()
+      return output
+    }
+
+    override fun vx_funcdef() : vx_core.Type_funcdef {
+      var output : vx_core.Type_funcdef = vx_core.funcdef_new(
+        "vx/collection", // pkgname
+        "anymap<-struct", // name
+        0, // idx
+        false, // async
+        vx_core.typedef_new(
+          "vx/core", // pkgname
+          "anymap", // name
+          ":map", // extends
+          vx_core.e_typelist, // traits
+          vx_core.vx_new(vx_core.t_typelist, vx_core.t_any), // allowtypes
+          vx_core.e_typelist, // disallowtypes
+          vx_core.e_funclist, // allowfuncs
+          vx_core.e_funclist, // disallowfuncs
+          vx_core.e_anylist, // allowvalues
+          vx_core.e_anylist, // disallowvalues
+          vx_core.e_argmap // properties
+        ) // typedef
+      )
+      return output
+    }
+
+    override fun vx_empty() : vx_core.Type_any {
+      var output : vx_core.Type_any = vx_collection.e_anymap_from_struct
+      return output
+    }
+
+    override fun vx_type() : vx_core.Type_any {
+      var output : vx_core.Type_any = vx_collection.t_anymap_from_struct
+      return output
+    }
+
+    override fun vx_fn_new(fn : vx_core.Class_any_from_any.IFn) : vx_core.Func_any_from_any {
+      return vx_core.e_any_from_any
+    }
+
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+      var output : T = vx_core.f_empty(generic_any_1)
+      var inputval : vx_core.Type_struct = value as vx_core.Type_struct
+      var outputval : vx_core.Type_any = vx_collection.f_anymap_from_struct(inputval)
+      output = vx_core.f_any_from_any(generic_any_1, outputval)
+      return output
+    }
+
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+      var output : vx_core.Type_any = vx_core.e_any
+      var structure : vx_core.Type_struct = vx_core.f_any_from_any(vx_core.t_struct, arglist.vx_any(vx_core.vx_new_int(0)))
+      output = vx_collection.f_anymap_from_struct(structure)
+      return output
+    }
+
+    override fun vx_anymap_from_struct(structure : vx_core.Type_struct) : vx_core.Type_anymap {
+      var output : vx_core.Type_anymap = vx_collection.f_anymap_from_struct(structure)
+      return output
+    }
+
+  }
+
+  val e_anymap_from_struct : vx_collection.Func_anymap_from_struct = vx_collection.Class_anymap_from_struct()
+  val t_anymap_from_struct : vx_collection.Func_anymap_from_struct = vx_collection.Class_anymap_from_struct()
+
+  fun f_anymap_from_struct(structure : vx_core.Type_struct) : vx_core.Type_anymap {
+    var output : vx_core.Type_anymap = vx_core.e_anymap
+    output = vx_collection.vx_anymap_from_struct(structure)
     return output
   }
 
@@ -2263,6 +2362,110 @@ object vx_collection {
   }
 
 
+  interface Func_map_from_struct : vx_core.Func_any_from_any {
+    fun <N : vx_core.Type_map, R : vx_core.Type_struct> vx_map_from_struct(generic_map_1 : N, structure : R) : N
+  }
+
+  class Class_map_from_struct : vx_core.Class_base, Func_map_from_struct {
+    constructor() {}
+
+    override fun vx_new(vararg vals : Any) : vx_core.Type_any {
+      val output : vx_collection.Class_map_from_struct = vx_collection.Class_map_from_struct()
+      return output
+    }
+
+    override fun vx_copy(vararg vals : Any) : vx_core.Type_any {
+      val output : vx_collection.Class_map_from_struct = vx_collection.Class_map_from_struct()
+      return output
+    }
+
+    override fun vx_typedef() : vx_core.Type_typedef {
+      var output : vx_core.Type_typedef = vx_core.t_func.vx_typedef()
+      return output
+    }
+
+    override fun vx_funcdef() : vx_core.Type_funcdef {
+      var output : vx_core.Type_funcdef = vx_core.funcdef_new(
+        "vx/collection", // pkgname
+        "map<-struct", // name
+        0, // idx
+        false, // async
+        vx_core.typedef_new(
+          "vx/core", // pkgname
+          "map-1", // name
+          ":map", // extends
+          vx_core.e_typelist, // traits
+          vx_core.vx_new(vx_core.t_typelist, vx_core.t_any), // allowtypes
+          vx_core.e_typelist, // disallowtypes
+          vx_core.e_funclist, // allowfuncs
+          vx_core.e_funclist, // disallowfuncs
+          vx_core.e_anylist, // allowvalues
+          vx_core.e_anylist, // disallowvalues
+          vx_core.e_argmap // properties
+        ) // typedef
+      )
+      return output
+    }
+
+    override fun vx_empty() : vx_core.Type_any {
+      var output : vx_core.Type_any = vx_collection.e_map_from_struct
+      return output
+    }
+
+    override fun vx_type() : vx_core.Type_any {
+      var output : vx_core.Type_any = vx_collection.t_map_from_struct
+      return output
+    }
+
+    override fun vx_fn_new(fn : vx_core.Class_any_from_any.IFn) : vx_core.Func_any_from_any {
+      return vx_core.e_any_from_any
+    }
+
+    override fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+      var output : T = vx_core.f_empty(generic_any_1)
+      var inputval : vx_core.Type_struct = value as vx_core.Type_struct
+      var outputval : vx_core.Type_any = vx_collection.f_map_from_struct(vx_core.t_map, inputval)
+      output = vx_core.f_any_from_any(generic_any_1, outputval)
+      return output
+    }
+
+    override fun vx_repl(arglist : vx_core.Type_anylist) : vx_core.Type_any {
+      var output : vx_core.Type_any = vx_core.e_any
+      var generic_map_1 : vx_core.Type_map = vx_core.f_any_from_any(vx_core.t_map, arglist.vx_any(vx_core.vx_new_int(0)))
+      var structure : vx_core.Type_struct = vx_core.f_any_from_any(vx_core.t_struct, arglist.vx_any(vx_core.vx_new_int(0)))
+      output = vx_collection.f_map_from_struct(generic_map_1, structure)
+      return output
+    }
+
+    override fun <N : vx_core.Type_map, R : vx_core.Type_struct> vx_map_from_struct(generic_map_1 : N, structure : R) : N {
+      var output : N = vx_collection.f_map_from_struct(generic_map_1, structure)
+      return output
+    }
+
+  }
+
+  val e_map_from_struct : vx_collection.Func_map_from_struct = vx_collection.Class_map_from_struct()
+  val t_map_from_struct : vx_collection.Func_map_from_struct = vx_collection.Class_map_from_struct()
+
+  fun <N : vx_core.Type_map, R : vx_core.Type_struct> f_map_from_struct(generic_map_1 : N, structure : R) : N {
+    var output : N = vx_core.f_empty(generic_map_1)
+    output = vx_core.f_let(
+      generic_map_1,
+      vx_core.t_any_from_func.vx_fn_new({ ->
+        var anymap : vx_core.Type_anymap = vx_collection.f_anymap_from_struct(
+          structure
+        )
+        var output_1 : vx_core.Type_any = vx_core.f_map_from_map(
+          generic_map_1,
+          anymap
+        )
+        output_1
+      })
+    )
+    return output
+  }
+
+
   init {
     var maptype : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
     var mapconst : MutableMap<String, vx_core.Type_any> = LinkedHashMap<String, vx_core.Type_any>()
@@ -2272,6 +2475,7 @@ object vx_collection {
     mapfunc.put("any<-for-while-loop", vx_collection.t_any_from_for_while_loop)
     mapfunc.put("any<-for-while-loop-max", vx_collection.t_any_from_for_while_loop_max)
     mapfunc.put("any<-map-pos", vx_collection.t_any_from_map_pos)
+    mapfunc.put("anymap<-struct", vx_collection.t_anymap_from_struct)
     mapfunc.put("boolean-write<-map-removekey", vx_collection.t_boolean_write_from_map_removekey)
     mapfunc.put("boolean-write<-map-removekeys", vx_collection.t_boolean_write_from_map_removekeys)
     mapfunc.put("int<-map-key", vx_collection.t_int_from_map_key)
@@ -2290,6 +2494,7 @@ object vx_collection {
     mapfunc.put("map<-map-keys", vx_collection.t_map_from_map_keys)
     mapfunc.put("map<-map-start", vx_collection.t_map_from_map_start)
     mapfunc.put("map<-map-start-end", vx_collection.t_map_from_map_start_end)
+    mapfunc.put("map<-struct", vx_collection.t_map_from_struct)
     vx_core.vx_global_package_set("vx/collection", maptype, mapconst, mapfunc)
   }
 

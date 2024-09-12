@@ -25,11 +25,11 @@ export default class vx_collection_test {
       vx_test.t_testcoveragesummary,
       "testpkg",   "vx/collection", 
       "constnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 23, ":total", 23), 
-      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 69, ":tests", 16, ":total", 23), 
+      "docnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 25, ":total", 25), 
+      "funcnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 72, ":tests", 18, ":total", 25), 
       "bigospacenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
       "bigotimenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 69, ":tests", 16, ":total", 23), 
+      "totalnums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 72, ":tests", 18, ":total", 25), 
       "typenums", vx_core.f_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0)
     )
   }
@@ -54,6 +54,7 @@ export default class vx_collection_test {
           "any<-for-while-loop", 1,
           "any<-for-while-loop-max", 0,
           "any<-map-pos", 0,
+          "anymap<-struct", 1,
           "boolean-write<-map-removekey", 0,
           "boolean-write<-map-removekeys", 0,
           "int<-map-key", 1,
@@ -71,7 +72,8 @@ export default class vx_collection_test {
           "map<-map-end", 1,
           "map<-map-keys", 1,
           "map<-map-start", 1,
-          "map<-map-start-end", 1
+          "map<-map-start-end", 1,
+          "map<-struct", 1
         )
     )
   }
@@ -130,6 +132,52 @@ export default class vx_collection_test {
                   vx_core.f_lt(current, 5)),
                 vx_core.f_new(vx_core.t_any_from_any, (current) => 
                   vx_core.f_plus(current, current))
+              )
+            )
+          )
+        )
+    )
+    return output
+  }
+
+  static f_anymap_from_struct(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/collection",
+      ":casename", "anymap<-struct",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n (anymap\n  :name \"sname\"\n  :wordmap\n   (stringmap\n    :a \"x\"))\n (anymap<-struct\n  (translation\n   :name \"sname\"\n   :wordmap\n    (stringmap\n     :a \"x\"))))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              vx_core.f_new(
+                vx_core.t_anymap,
+                ":name",
+                "sname",
+                ":wordmap",
+                vx_core.f_new(
+                  vx_core.t_stringmap,
+                  ":a",
+                  "x"
+                )
+              ),
+              vx_collection.f_anymap_from_struct(
+                vx_core.f_new(
+                  vx_core.t_translation,
+                  ":name",
+                  "sname",
+                  ":wordmap",
+                  vx_core.f_new(
+                    vx_core.t_stringmap,
+                    ":a",
+                    "x"
+                  )
+                )
               )
             )
           )
@@ -682,11 +730,53 @@ export default class vx_collection_test {
     return output
   }
 
+  static f_map_from_struct(context) {
+    const output = vx_core.f_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/collection",
+      ":casename", "map<-struct",
+      ":describelist",
+        vx_core.f_new(
+          vx_test.t_testdescribelist,
+          vx_core.f_new(
+            vx_test.t_testdescribe,
+            ":describename", "(test\n (stringmap\n  :name \"sname\")\n (map<-struct : stringmap\n  (translation\n   :name \"sname\"\n   :wordmap\n    (stringmap\n     :a \"x\"))))",
+            ":testresult",
+            vx_test.f_test(
+              context,
+              vx_core.f_new(
+                vx_core.t_stringmap,
+                ":name",
+                "sname"
+              ),
+              vx_collection.f_map_from_struct(
+                {"any-1": vx_core.t_string, "map-1": vx_core.t_stringmap, "struct-2": vx_core.t_translation},
+                vx_core.f_new(
+                  vx_core.t_translation,
+                  ":name",
+                  "sname",
+                  ":wordmap",
+                  vx_core.f_new(
+                    vx_core.t_stringmap,
+                    ":a",
+                    "x"
+                  )
+                )
+              )
+            )
+          )
+        )
+    )
+    return output
+  }
+
   static test_cases(context) {
     const output = vx_core.f_new(
       vx_test.t_testcaselist,
       vx_collection_test.f_any_from_for_until_loop(context),
       vx_collection_test.f_any_from_for_while_loop(context),
+      vx_collection_test.f_anymap_from_struct(context),
       vx_collection_test.f_int_from_map_key(context),
       vx_collection_test.f_int_from_stringlist_find(context),
       vx_collection_test.f_is_list(context),
@@ -700,7 +790,8 @@ export default class vx_collection_test {
       vx_collection_test.f_map_from_map_end(context),
       vx_collection_test.f_map_from_map_keys(context),
       vx_collection_test.f_map_from_map_start(context),
-      vx_collection_test.f_map_from_map_start_end(context)
+      vx_collection_test.f_map_from_map_start_end(context),
+      vx_collection_test.f_map_from_struct(context)
     )
     return output
   }

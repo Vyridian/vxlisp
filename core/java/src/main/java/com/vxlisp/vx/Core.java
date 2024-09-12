@@ -625,20 +625,36 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   }
 
   // vx_map_from_map_fn(generic_map, map, fn_any_from_key_value)
-  public static <T extends Core.Type_map> T vx_map_from_map_fn(T generic_map_1, Core.Type_map valuemap, Core.Func_any_from_key_value fn_any_from_key_value) {
+  public static <T extends Core.Type_map> T vx_map_from_map_fn(
+    T generic_map_1,
+    Core.Type_map valuemap,
+    Core.Func_any_from_key_value fn_any_from_key_value) {
     T output = Core.f_empty(generic_map_1);
     Map<String, Core.Type_any> mapvalue = valuemap.vx_map();
     if (mapvalue.size() > 0) {
+      Core.Type_typedef typedef = Core.f_typedef_from_any(
+        generic_map_1
+      );
+      Core.Type_typelist allowtypes = Core.f_allowtypes_from_typedef(
+        typedef
+      );
+      List<Core.Type_any> lallowtypes = allowtypes.vx_list();
       Set<String> keys = mapvalue.keySet();
       Map<String, Core.Type_any> mapnew = new LinkedHashMap<>();
       for (String key : keys) {
         Core.Type_any value = mapvalue.get(key);
         Core.Type_string stringkey = Core.vx_new_string(key);
-        Core.Type_any chgvalue = fn_any_from_key_value.vx_any_from_key_value(Core.t_any, stringkey, value);
-        mapnew.put(key, chgvalue);
+        Core.Type_any chgvalue = fn_any_from_key_value.vx_any_from_key_value(
+          Core.t_any, stringkey, value
+        );
+        Core.Type_any chgtype = chgvalue.vx_type();
+        if (lallowtypes.contains(chgtype)) {
+          mapnew.put(key, chgvalue);
+        }
       }
-      Core.Type_map anymap = generic_map_1.vx_new_from_map(mapnew);
-      output = Core.f_any_from_any(generic_map_1, anymap);
+      output = Core.vx_new_map(
+        generic_map_1, mapnew
+      );
     }
     return output;
   }
@@ -793,7 +809,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
   public static <T extends Core.Type_map> T vx_new_map(
     T generic_map_1,
     Map<String, Core.Type_any> mapval) {
-    Core.Type_any anymap = generic_map_1.vx_new(mapval);
+    Core.Type_any anymap = generic_map_1.vx_new_from_map(mapval);
     T output = Core.f_any_from_any(generic_map_1, anymap);
     return output;
   }
@@ -918,7 +934,9 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         } else if (!key.startsWith(":")) {
           key = ":" + key;
         }
-        String strval = Core.vx_string_from_any_indent(valsub, indentint, linefeed);
+        String strval = Core.vx_string_from_any_indent(
+          valsub, indentint, linefeed
+        );
         if (strval.contains("\n")) {
           strval = "\n  " + indenttext + strval;
         } else {
@@ -927,12 +945,16 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
         output += "\n" + indenttext + " " + key + strval;
       }
       if (valmap.vx_msgblock() != Core.e_msgblock) {
-        String msgtext = Core.vx_string_from_any_indent(valmap.vx_msgblock(), indent+1, linefeed);
+        String msgtext = Core.vx_string_from_any_indent(
+          valmap.vx_msgblock(), indent+1, linefeed
+        );
         output += "\n " + indenttext + msgtext;
       }
       output = "(" + stypedefname + output + ")";
     } else if (value instanceof Core.Type_struct) {
-      Core.Type_struct valstruct = Core.f_any_from_any(Core.t_struct, value);
+      Core.Type_struct valstruct = Core.f_any_from_any(
+        Core.t_struct, value
+      );
       Core.Type_typedef typedef = valstruct.vx_typedef();
       Core.Type_string typedefname = typedef.name();
       String stypedefname = typedefname.vx_string();
@@ -946,7 +968,9 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
           if (!key.startsWith(":")) {
             key = ":" + key;
           }
-          String strval2 = Core.vx_string_from_any_indent(valsub2, indentint2, linefeed);
+          String strval2 = Core.vx_string_from_any_indent(
+            valsub2, indentint2, linefeed
+          );
           if (strval2.contains("\n")) {
             strval2 = "\n  " + indenttext + strval2;
           } else {
@@ -958,7 +982,9 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       if (stypedefname == "msg") {
       } else if (stypedefname == "msgblock") {
       } else if (valstruct.vx_msgblock() != Core.e_msgblock) {
-        String msgtext2 = Core.vx_string_from_any_indent(valstruct.vx_msgblock(), indent+1, linefeed);
+        String msgtext2 = Core.vx_string_from_any_indent(
+          valstruct.vx_msgblock(), indent+1, linefeed
+        );
         output += "\n " + indenttext + msgtext2;
       }
       output = "(" + stypedefname + output + ")";
@@ -968,7 +994,9 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
       Core.Type_string funcdefname = Core.f_funcname_from_funcdef(funcdef);
       output = funcdefname.vx_string();
       if (valfunc.vx_msgblock() != Core.e_msgblock) {
-        String msgtext = Core.vx_string_from_any_indent(valfunc.vx_msgblock(), indent, linefeed);
+        String msgtext = Core.vx_string_from_any_indent(
+          valfunc.vx_msgblock(), indent, linefeed
+        );
         output += "\n" + indenttext + msgtext;
       }
       output = "(" + output + ")";
@@ -976,8 +1004,14 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     return output;
   }
 
-  public static Core.Type_string vx_string_from_any_indent(Core.Type_any value, Core.Type_int indent, Core.Type_boolean linefeed) {
-    String soutput = Core.vx_string_from_any_indent(value, indent.vx_int(), linefeed.vx_boolean());
+  public static Core.Type_string vx_string_from_any_indent(
+    Core.Type_any value,
+    Core.Type_int indent,
+    Core.Type_boolean linefeed
+  ) {
+    String soutput = Core.vx_string_from_any_indent(
+      value, indent.vx_int(), linefeed.vx_boolean()
+    );
     Core.Type_string output = Core.vx_new_string(soutput);
     return output;
   }
@@ -998,7 +1032,9 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
     Core.Type_string find,
     Core.Type_string replace
   ) {
-    String stext = Core.vx_string_from_string_find_replace(text.vx_string(), find.vx_string(), replace.vx_string());
+    String stext = Core.vx_string_from_string_find_replace(
+      text.vx_string(), find.vx_string(), replace.vx_string()
+    );
     Core.Type_string output = Core.vx_new_string(stext);
     return output;
   }
@@ -10170,6 +10206,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   /**
    * type: statelistener
+   * A listener to trigger functions on state change.
    * (type statelistener)
    */
   public interface Type_statelistener extends Core.Type_struct {
@@ -11574,6 +11611,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   /**
    * type: thenelse
+   * An object used in if and switch functions.
    * (type thenelse)
    */
   public interface Type_thenelse extends Core.Type_struct {
@@ -11917,6 +11955,7 @@ public static <X extends Core.Type_list, Y extends Core.Type_list> CompletableFu
 
   /**
    * type: thenelselist
+   * A list of thenelse.
    * (type thenelselist)
    */
   public interface Type_thenelselist extends Core.Type_list {

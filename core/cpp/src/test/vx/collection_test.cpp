@@ -97,6 +97,66 @@ namespace vx_collection_test {
     return output;
   }
 
+  vx_test::Type_testcase f_anymap_from_struct(vx_core::Type_context context) {
+    vx_core::vx_log("Test Start: f_anymap_from_struct");
+    // testdescribe_1
+    vx_test::Type_testresult testresult_1 = vx_test::f_test(
+      context,
+      vx_core::f_new(
+        vx_core::t_anymap,
+        vx_core::vx_new(vx_core::t_anylist, {
+          vx_core::vx_new_string(":name"),
+          vx_core::vx_new_string("sname"),
+          vx_core::vx_new_string(":wordmap"),
+          vx_core::f_new(
+            vx_core::t_stringmap,
+            vx_core::vx_new(vx_core::t_anylist, {
+              vx_core::vx_new_string(":a"),
+              vx_core::vx_new_string("x")
+            })
+          )
+        })
+      ),
+      vx_collection::f_anymap_from_struct(
+        vx_core::f_new(
+          vx_core::t_translation,
+          vx_core::vx_new(vx_core::t_anylist, {
+            vx_core::vx_new_string(":name"),
+            vx_core::vx_new_string("sname"),
+            vx_core::vx_new_string(":wordmap"),
+            vx_core::f_new(
+              vx_core::t_stringmap,
+              vx_core::vx_new(vx_core::t_anylist, {
+                vx_core::vx_new_string(":a"),
+                vx_core::vx_new_string("x")
+              })
+            )
+          })
+        )
+      )
+    );
+    vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (anymap\n  :name \"sname\"\n  :wordmap\n   (stringmap\n    :a \"x\"))\n (anymap<-struct\n  (translation\n   :name \"sname\"\n   :wordmap\n    (stringmap\n     :a \"x\"))))"),
+      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/collection"),
+      vx_core::vx_new_string(":testresult"), testresult_1
+    });
+    vx_core::vx_Type_listany listdescribe = {
+      testdescribe_1
+    };
+    vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
+      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/collection"),
+      vx_core::vx_new_string(":casename"), vx_core::vx_new_string("anymap<-struct"),
+      vx_core::vx_new_string(":describelist"),
+      vx_core::vx_any_from_any(
+        vx_test::t_testdescribelist,
+        vx_test::t_testdescribelist->vx_new_from_list(listdescribe)
+      )
+    });
+    vx_core::vx_log("Test End  : f_anymap_from_struct");
+    return output;
+  }
+
   vx_test::Type_testcase f_int_from_map_key(vx_core::Type_context context) {
     vx_core::vx_log("Test Start: f_int_from_map_key");
     // testdescribe_1
@@ -788,10 +848,64 @@ namespace vx_collection_test {
     return output;
   }
 
+  vx_test::Type_testcase f_map_from_struct(vx_core::Type_context context) {
+    vx_core::vx_log("Test Start: f_map_from_struct");
+    // testdescribe_1
+    vx_test::Type_testresult testresult_1 = vx_test::f_test(
+      context,
+      vx_core::f_new(
+        vx_core::t_stringmap,
+        vx_core::vx_new(vx_core::t_anylist, {
+          vx_core::vx_new_string(":name"),
+          vx_core::vx_new_string("sname")
+        })
+      ),
+      vx_collection::f_map_from_struct(
+        vx_core::t_stringmap,
+        vx_core::f_new(
+          vx_core::t_translation,
+          vx_core::vx_new(vx_core::t_anylist, {
+            vx_core::vx_new_string(":name"),
+            vx_core::vx_new_string("sname"),
+            vx_core::vx_new_string(":wordmap"),
+            vx_core::f_new(
+              vx_core::t_stringmap,
+              vx_core::vx_new(vx_core::t_anylist, {
+                vx_core::vx_new_string(":a"),
+                vx_core::vx_new_string("x")
+              })
+            )
+          })
+        )
+      )
+    );
+    vx_test::Type_testdescribe testdescribe_1 = vx_core::vx_new(vx_test::t_testdescribe, {
+      vx_core::vx_new_string(":describename"), vx_core::vx_new_string("(test\n (stringmap\n  :name \"sname\")\n (map<-struct : stringmap\n  (translation\n   :name \"sname\"\n   :wordmap\n    (stringmap\n     :a \"x\"))))"),
+      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/collection"),
+      vx_core::vx_new_string(":testresult"), testresult_1
+    });
+    vx_core::vx_Type_listany listdescribe = {
+      testdescribe_1
+    };
+    vx_test::Type_testcase output = vx_core::vx_new(vx_test::t_testcase, {
+      vx_core::vx_new_string(":passfail"), vx_core::c_false,
+      vx_core::vx_new_string(":testpkg"), vx_core::vx_new_string("vx/collection"),
+      vx_core::vx_new_string(":casename"), vx_core::vx_new_string("map<-struct"),
+      vx_core::vx_new_string(":describelist"),
+      vx_core::vx_any_from_any(
+        vx_test::t_testdescribelist,
+        vx_test::t_testdescribelist->vx_new_from_list(listdescribe)
+      )
+    });
+    vx_core::vx_log("Test End  : f_map_from_struct");
+    return output;
+  }
+
   vx_test::Type_testcaselist test_cases(vx_core::Type_context context) {
     vx_core::vx_Type_listany listtestcase;
     listtestcase.push_back(vx_collection_test::f_any_from_for_until_loop(context));
     listtestcase.push_back(vx_collection_test::f_any_from_for_while_loop(context));
+    listtestcase.push_back(vx_collection_test::f_anymap_from_struct(context));
     listtestcase.push_back(vx_collection_test::f_int_from_map_key(context));
     listtestcase.push_back(vx_collection_test::f_int_from_stringlist_find(context));
     listtestcase.push_back(vx_collection_test::f_is_list(context));
@@ -806,6 +920,7 @@ namespace vx_collection_test {
     listtestcase.push_back(vx_collection_test::f_map_from_map_keys(context));
     listtestcase.push_back(vx_collection_test::f_map_from_map_start(context));
     listtestcase.push_back(vx_collection_test::f_map_from_map_start_end(context));
+    listtestcase.push_back(vx_collection_test::f_map_from_struct(context));
     vx_test::Type_testcaselist output = vx_core::vx_any_from_any(
       vx_test::t_testcaselist,
       vx_test::t_testcaselist->vx_new_from_list(listtestcase)
@@ -823,28 +938,28 @@ namespace vx_collection_test {
       }),
       vx_core::vx_new_string(":docnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(100), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(23), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(23)
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(25), 
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(25)
       }),
       vx_core::vx_new_string(":funcnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(69), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(16), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(23)
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(72), 
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(18), 
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(25)
       }),
       vx_core::vx_new_string(":bigospacenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(23)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(25)
       }),
       vx_core::vx_new_string(":bigotimenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(0), 
         vx_core::vx_new_string(":tests"), vx_core::vx_new_int(0), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(23)
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(25)
       }),
       vx_core::vx_new_string(":totalnums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
-        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(69), 
-        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(16), 
-        vx_core::vx_new_string(":total"), vx_core::vx_new_int(23)
+        vx_core::vx_new_string(":pct"), vx_core::vx_new_int(72), 
+        vx_core::vx_new_string(":tests"), vx_core::vx_new_int(18), 
+        vx_core::vx_new_string(":total"), vx_core::vx_new_int(25)
       }),
       vx_core::vx_new_string(":typenums"), vx_core::vx_new(vx_test::t_testcoveragenums, {
         vx_core::vx_new_string(":pct"), vx_core::vx_new_int(100), 
@@ -870,6 +985,7 @@ namespace vx_collection_test {
         vx_core::vx_new_string(":any<-for-while-loop"), vx_core::vx_new_int(1),
         vx_core::vx_new_string(":any<-for-while-loop-max"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":any<-map-pos"), vx_core::vx_new_int(0),
+        vx_core::vx_new_string(":anymap<-struct"), vx_core::vx_new_int(1),
         vx_core::vx_new_string(":boolean-write<-map-removekey"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":boolean-write<-map-removekeys"), vx_core::vx_new_int(0),
         vx_core::vx_new_string(":int<-map-key"), vx_core::vx_new_int(1),
@@ -887,7 +1003,8 @@ namespace vx_collection_test {
         vx_core::vx_new_string(":map<-map-end"), vx_core::vx_new_int(1),
         vx_core::vx_new_string(":map<-map-keys"), vx_core::vx_new_int(1),
         vx_core::vx_new_string(":map<-map-start"), vx_core::vx_new_int(1),
-        vx_core::vx_new_string(":map<-map-start-end"), vx_core::vx_new_int(1)
+        vx_core::vx_new_string(":map<-map-start-end"), vx_core::vx_new_int(1),
+        vx_core::vx_new_string(":map<-struct"), vx_core::vx_new_int(1)
       })
     });
     return output;

@@ -5,7 +5,8 @@
 export default class vx_core {
 
   // vx_any_from_func(generic_any_1, func, args...)
-  static vx_any_from_func(generic_any_1, func, ...args) {
+  static vx_any_from_func(
+    generic_any_1, func, ...args) {
     let output = vx_core.vx_empty(generic_any_1)
     const funcdef = func['vx_value']
     if (funcdef) {
@@ -16,9 +17,9 @@ export default class vx_core {
   }
 
   // vx_any_from_map_start_reduce(any-1, map-2, any-1, any<-any-key-value)
-  static vx_any_from_map_start_reduce(generic_any_1, map, start, fn_reduce) {
-    let output = vx_core.f_empty(generic_any_1)
-    output = start
+  static vx_any_from_map_start_reduce(
+    generic_any_1, map, start, fn_reduce) {
+    let output = start
     const fn = fn_reduce['vx_value']
     if (fn) {
       const mapval = map['vx_value']
@@ -31,28 +32,32 @@ export default class vx_core {
   }
 
   // vx_boolean_from_string_ends(string, string)
-  static vx_boolean_from_string_ends(text, ends) {
+  static vx_boolean_from_string_ends(
+    text, ends) {
     return text.endsWith(ends)
   }
 
   // vx_boolean_from_string_find(string, string)
-  static vx_boolean_from_string_find(text, find) {
+  static vx_boolean_from_string_find(
+    text, find) {
     return text.includes(find)
   }
 
   // vx_boolean_from_string_starts(string, string)
-  static vx_boolean_from_string_starts(text, starts) {
+  static vx_boolean_from_string_starts(
+    text, starts) {
     return text.startsWith(starts);
   }
 
   // vx_boolean_write_from_map_name_value(map-1, string, any-1)
-  static vx_boolean_write_from_map_name_value(valuemap, name, value) {
+  static vx_boolean_write_from_map_name_value(
+    valuemap, name, value) {
     let output = vx_core.c_true
     const mapany = valuemap['vx_value']
-   	let key = name
+    let key = name
     if (key.startsWith(':')) {
       key = key.substring(1)
-   	}
+    }
     if (vx_core.f_is_empty_1(value)) {
       delete mapany[key]
     } else {
@@ -61,7 +66,8 @@ export default class vx_core {
     return output
   }
 
-  static vx_empty(type) {
+  static vx_empty(
+    type) {
     const typedef = vx_core.f_typedef_from_type(type)
     const pkgname = typedef['vx_value'].pkgname
     const typename = typedef['vx_value'].name
@@ -208,7 +214,8 @@ export default class vx_core {
     return output
   }
 
-  static vx_list_from_list_intany(generic_list_1, valuelist, fn_any_from_int_any) {
+  static vx_list_from_list_intany(
+    generic_list_1, valuelist, fn_any_from_int_any) {
     let output = vx_core.f_empty(generic_list_1)
     const fn = fn_any_from_int_any['vx_value']
     if (fn) {
@@ -223,7 +230,8 @@ export default class vx_core {
     return output
   }
 
-  static vx_list_from_map_fn(generic_list_1, valuemap, fn_any_from_key_value) {
+  static vx_list_from_map_fn(
+    generic_list_1, valuemap, fn_any_from_key_value) {
     let output = vx_core.f_empty(generic_list_1)
     const fn = fn_any_from_key_value['vx_value']
     if (fn) {
@@ -234,23 +242,36 @@ export default class vx_core {
     return output
   }
 
-  static vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value) {
+  static vx_map_from_map_fn(
+    generic_map_1,
+    valuemap,
+    fn_any_from_key_value) {
     let output = vx_core.f_empty(generic_map_1)
     const fn = fn_any_from_key_value['vx_value']
     if (fn) {
+      const typedef = vx_core.f_typedef_from_any(
+        generic_map_1
+      )
+      const allowtypes = vx_core.f_allowtypes_from_typedef(
+        typedef
+      )
       const entries = Object.entries(valuemap['vx_value'])
       const values = []
       for (const [key, value] of entries) {
         const chgvalue = fn([key, value])
-        values.push(key)
-        values.push(chgvalue)
+        const chgtype = vx_core.f_typedef_from_any(chgvalue)
+        if (allowtypes.includes(chgtype)) {
+          values.push(key)
+          values.push(chgvalue)
+        }
       }
       output = vx_core.f_new(generic_map_1, ...values)
     }
     return output
   }
 
-  static vx_new(type, values) {
+  static vx_new(
+    type, values) {
     let output
     if (values.length == 1) {
       // check if anylist passed as the only value
@@ -995,13 +1016,15 @@ export default class vx_core {
     return output
   }
 
-  static vx_new_list(type, listvalue) {
+  static vx_new_list(
+    type, listvalue) {
     const output = listvalue.slice()
     output['vx_type'] = type
     return output
   }
 
-  static vx_new_map(type, mapvalue) {
+  static vx_new_map(
+    type, mapvalue) {
     const output = {
       vx_type: type,
       vx_value: mapvalue
@@ -1009,7 +1032,8 @@ export default class vx_core {
     return output
   }
 
-  static vx_new_struct(type, mapvalue) {
+  static vx_new_struct(
+    type, mapvalue) {
     const output = {
       vx_type: type,
       vx_value: mapvalue
@@ -1017,15 +1041,17 @@ export default class vx_core {
     return output
   }
 
-  static vx_string_from_any(value) {
+  static vx_string_from_any(
+    value) {
     const output = vx_core.vx_string_from_any_indent(value, 0, false)
     return output
   }
 
-  static vx_string_from_any_indent(value, indent, linefeed) {
+  static vx_string_from_any_indent(
+    value, indent, linefeed) {
     let output = ''
     const indenttext = ' '.repeat(indent)
-		let text = ''
+    let text = ''
     const typedef = vx_core.f_typedef_from_any(value)
     if (indent > 50) {
       text = 'Error: Max Depth Exceeded'
@@ -1143,7 +1169,8 @@ export default class vx_core {
   }
 
   // vx_string_from_string_find_replace(string, string, string)
-  static vx_string_from_string_find_replace(text, find, replace) {
+  static vx_string_from_string_find_replace(
+    text, find, replace) {
     const output = text.replaceAll(find, replace);
     return output;
   }
@@ -1563,6 +1590,7 @@ export default class vx_core {
 
   /**
    * type: statelistener
+   * A listener to trigger functions on state change.
    */
   static t_statelistener = {}
   static e_statelistener = {vx_type: vx_core.t_statelistener}
@@ -1618,12 +1646,14 @@ export default class vx_core {
 
   /**
    * type: thenelse
+   * An object used in if and switch functions.
    */
   static t_thenelse = {}
   static e_thenelse = {vx_type: vx_core.t_thenelse}
 
   /**
    * type: thenelselist
+   * A list of thenelse.
    */
   static t_thenelselist = {}
   static e_thenelselist = vx_core.vx_new_list(vx_core.t_thenelselist, [])
@@ -4704,7 +4734,10 @@ export default class vx_core {
   static f_map_from_map_1(generic, valuemap, fn_any_from_key_value) {
     const generic_map_1 = generic["map-1"]
     let output = vx_core.f_empty(generic_map_1)
-    output = vx_core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value)
+    output = vx_core.vx_map_from_map_fn(
+      generic_map_1,
+      valuemap,
+      fn_any_from_key_value)
     return output
   }
 

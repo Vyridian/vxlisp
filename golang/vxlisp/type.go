@@ -390,7 +390,9 @@ func BooleanAllowFromTypeFunc(expectedtype *vxtype, fnc *vxfunc, path string) (b
 	return pass, msgblock
 }
 
-func BooleanAllowFromTypeType(typ *vxtype, checktype *vxtype) (bool, *vxmsgblock) {
+func BooleanAllowFromTypeType(
+	typ *vxtype,
+	checktype *vxtype) (bool, *vxmsgblock) {
 	msgblock := NewMsgBlock("BooleanAllowFromTypeType")
 	pass := false
 	checkname := NameFromType(checktype)
@@ -430,7 +432,12 @@ func BooleanGenericFromType(typ *vxtype) bool {
 	return output
 }
 
-func BooleanMatchFromTypeType(expectedtype *vxtype, actualtype *vxtype, multi bool, index int, path string) (*vxtype, bool, *vxmsgblock) {
+func BooleanMatchFromTypeType(
+	expectedtype *vxtype,
+	actualtype *vxtype,
+	multi bool,
+	index int,
+	path string) (*vxtype, bool, *vxmsgblock) {
 	msgblock := NewMsgBlock("BooleanMatchTypeType")
 	resulttype := actualtype
 	pass := false
@@ -450,6 +457,10 @@ func BooleanMatchFromTypeType(expectedtype *vxtype, actualtype *vxtype, multi bo
 			if actualtype.extends == ":map" {
 				pass = true
 			}
+		} else if genericname == "vx/core/struct" {
+			if actualtype.extends == ":struct" {
+				pass = true
+			}
 		} else {
 			ok, msgs := BooleanAllowFromTypeType(expectedtype, actualtype)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
@@ -461,9 +472,6 @@ func BooleanMatchFromTypeType(expectedtype *vxtype, actualtype *vxtype, multi bo
 		genericname := NameWithoutGenericFromType(actualtype)
 		if expectedtypename == "/" {
 			pass = true
-			///} else if expectedtypename == "vx/core/any" {
-			//	pass = true
-			//resulttype = expectedtype
 		} else if genericname == expectedtypename {
 			pass = true
 			resulttype = expectedtype
@@ -477,6 +485,11 @@ func BooleanMatchFromTypeType(expectedtype *vxtype, actualtype *vxtype, multi bo
 			}
 		} else if genericname == "vx/core/map" {
 			if expectedtype.extends == ":map" {
+				pass = true
+				resulttype = expectedtype
+			}
+		} else if genericname == "vx/core/struct" {
+			if expectedtype.extends == ":struct" {
 				pass = true
 				resulttype = expectedtype
 			}
@@ -512,7 +525,8 @@ func BooleanMatchFromTypeType(expectedtype *vxtype, actualtype *vxtype, multi bo
 			// It doesn't matter what type. It will be discarded.
 			pass = true
 		default:
-			ok, msgs := BooleanAllowFromTypeType(expectedtype, actualtype)
+			ok, msgs := BooleanAllowFromTypeType(
+				expectedtype, actualtype)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			if ok {
 				pass = true

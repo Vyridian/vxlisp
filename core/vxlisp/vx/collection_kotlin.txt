@@ -56,6 +56,14 @@
     return output
   }
 
+  // (func anymap<-struct)
+  fun vx_anymap_from_struct(
+    structure : vx_core.Type_struct) : vx_core.Type_anymap {
+    val map : Map<String, vx_core.Type_any> = structure.vx_map()
+    val output : vx_core.Type_anymap = vx_core.vx_new_map(vx_core.t_anymap, map)
+    return output
+  }
+
   fun <T : vx_core.Type_list> vx_list_from_for_end_loop(
     generic_list_1 : T,
     start : vx_core.Type_int,

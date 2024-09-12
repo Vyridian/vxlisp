@@ -97,6 +97,68 @@ object vx_collectionTest {
     return output
   }
 
+  fun f_anymap_from_struct(context : vx_core.Type_context) : vx_test.Type_testcase {
+    var output : vx_test.Type_testcase = vx_core.vx_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/collection",
+      ":casename", "anymap<-struct",
+      ":describelist",
+      vx_core.vx_new(
+        vx_test.t_testdescribelist,
+        f_anymap_from_struct_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_anymap_from_struct_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n (anymap\n  :name \"sname\"\n  :wordmap\n   (stringmap\n    :a \"x\"))\n (anymap<-struct\n  (translation\n   :name \"sname\"\n   :wordmap\n    (stringmap\n     :a \"x\"))))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.f_new(
+          vx_core.t_anymap,
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_string(":name"),
+            vx_core.vx_new_string("sname"),
+            vx_core.vx_new_string(":wordmap"),
+            vx_core.f_new(
+              vx_core.t_stringmap,
+              vx_core.vx_new(
+                vx_core.t_anylist,
+                vx_core.vx_new_string(":a"),
+                vx_core.vx_new_string("x")
+              )
+            )
+          )
+        ),
+        vx_collection.f_anymap_from_struct(
+          vx_core.f_new(
+            vx_core.t_translation,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string(":name"),
+              vx_core.vx_new_string("sname"),
+              vx_core.vx_new_string(":wordmap"),
+              vx_core.f_new(
+                vx_core.t_stringmap,
+                vx_core.vx_new(
+                  vx_core.t_anylist,
+                  vx_core.vx_new_string(":a"),
+                  vx_core.vx_new_string("x")
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+    return output
+  }
+
   fun f_int_from_map_key(context : vx_core.Type_context) : vx_test.Type_testcase {
     var output : vx_test.Type_testcase = vx_core.vx_new(
       vx_test.t_testcase,
@@ -789,10 +851,65 @@ object vx_collectionTest {
     return output
   }
 
+  fun f_map_from_struct(context : vx_core.Type_context) : vx_test.Type_testcase {
+    var output : vx_test.Type_testcase = vx_core.vx_new(
+      vx_test.t_testcase,
+      ":passfail", false,
+      ":testpkg", "vx/collection",
+      ":casename", "map<-struct",
+      ":describelist",
+      vx_core.vx_new(
+        vx_test.t_testdescribelist,
+        f_map_from_struct_testdescribe_1(context)
+      )
+    )
+    return output
+  }
+
+  fun f_map_from_struct_testdescribe_1(context : vx_core.Type_context) : vx_test.Type_testdescribe {
+    var output : vx_test.Type_testdescribe = vx_core.vx_new(
+      vx_test.t_testdescribe,
+      ":describename", "(test\n (stringmap\n  :name \"sname\")\n (map<-struct : stringmap\n  (translation\n   :name \"sname\"\n   :wordmap\n    (stringmap\n     :a \"x\"))))",
+      ":testresult", vx_test.f_test(
+        context,
+        vx_core.f_new(
+          vx_core.t_stringmap,
+          vx_core.vx_new(
+            vx_core.t_anylist,
+            vx_core.vx_new_string(":name"),
+            vx_core.vx_new_string("sname")
+          )
+        ),
+        vx_collection.f_map_from_struct(
+          vx_core.t_stringmap,
+          vx_core.f_new(
+            vx_core.t_translation,
+            vx_core.vx_new(
+              vx_core.t_anylist,
+              vx_core.vx_new_string(":name"),
+              vx_core.vx_new_string("sname"),
+              vx_core.vx_new_string(":wordmap"),
+              vx_core.f_new(
+                vx_core.t_stringmap,
+                vx_core.vx_new(
+                  vx_core.t_anylist,
+                  vx_core.vx_new_string(":a"),
+                  vx_core.vx_new_string("x")
+                )
+              )
+            )
+          )
+        )
+      )
+    )
+    return output
+  }
+
   fun test_cases(context : vx_core.Type_context) : vx_test.Type_testcaselist {
     var testcases : List<vx_core.Type_any> = vx_core.arraylist_from_array(
       vx_collectionTest.f_any_from_for_until_loop(context),
       vx_collectionTest.f_any_from_for_while_loop(context),
+      vx_collectionTest.f_anymap_from_struct(context),
       vx_collectionTest.f_int_from_map_key(context),
       vx_collectionTest.f_int_from_stringlist_find(context),
       vx_collectionTest.f_is_list(context),
@@ -806,7 +923,8 @@ object vx_collectionTest {
       vx_collectionTest.f_map_from_map_end(context),
       vx_collectionTest.f_map_from_map_keys(context),
       vx_collectionTest.f_map_from_map_start(context),
-      vx_collectionTest.f_map_from_map_start_end(context)
+      vx_collectionTest.f_map_from_map_start_end(context),
+      vx_collectionTest.f_map_from_struct(context)
     )
     var output : vx_test.Type_testcaselist = vx_core.vx_new(
       vx_test.t_testcaselist,
@@ -820,11 +938,11 @@ object vx_collectionTest {
       vx_test.t_testcoveragesummary,
       ":testpkg", "vx/collection", 
       ":constnums", vx_core.vx_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0), 
-      ":docnums", vx_core.vx_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 23, ":total", 23), 
-      ":funcnums", vx_core.vx_new(vx_test.t_testcoveragenums, ":pct", 69, ":tests", 16, ":total", 23), 
-      ":bigospacenums", vx_core.vx_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 23), 
-      ":bigotimenums", vx_core.vx_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 23), 
-      ":totalnums", vx_core.vx_new(vx_test.t_testcoveragenums, ":pct", 69, ":tests", 16, ":total", 23), 
+      ":docnums", vx_core.vx_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 25, ":total", 25), 
+      ":funcnums", vx_core.vx_new(vx_test.t_testcoveragenums, ":pct", 72, ":tests", 18, ":total", 25), 
+      ":bigospacenums", vx_core.vx_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 25), 
+      ":bigotimenums", vx_core.vx_new(vx_test.t_testcoveragenums, ":pct", 0, ":tests", 0, ":total", 25), 
+      ":totalnums", vx_core.vx_new(vx_test.t_testcoveragenums, ":pct", 72, ":tests", 18, ":total", 25), 
       ":typenums", vx_core.vx_new(vx_test.t_testcoveragenums, ":pct", 100, ":tests", 0, ":total", 0)
     )
     return output
@@ -843,6 +961,7 @@ object vx_collectionTest {
         ":any<-for-while-loop", 1,
         ":any<-for-while-loop-max", 0,
         ":any<-map-pos", 0,
+        ":anymap<-struct", 1,
         ":boolean-write<-map-removekey", 0,
         ":boolean-write<-map-removekeys", 0,
         ":int<-map-key", 1,
@@ -860,7 +979,8 @@ object vx_collectionTest {
         ":map<-map-end", 1,
         ":map<-map-keys", 1,
         ":map<-map-start", 1,
-        ":map<-map-start-end", 1
+        ":map<-map-start-end", 1,
+        ":map<-struct", 1
       )
     )
     return output

@@ -97,14 +97,14 @@
 
 (type connectlist : list
  :allowtypes [connect]
- :doc        "List of connect")
+ :doc "List of connect")
 
 (type connectmap : map
  :allowtypes [connect]
- :doc        "Map of connect")
+ :doc "Map of connect")
 
 (type const : const
- :doc     "Original Constant Class.")
+ :doc "Original Constant Class.")
 
 (type constdef : struct
  :properties [pkgname : string
@@ -114,11 +114,11 @@
 
 (type constlist : list
  :allowtypes [any]
- :doc        "List of Const.")
+ :doc "List of Const.")
 
 (type constmap : map
  :allowtypes [any]
- :doc        "Map of Const.")
+ :doc "Map of Const.")
 
 (type context : struct
  :properties [code    : string
@@ -211,7 +211,9 @@
      override fun vx_float() : Float {
        return vxfloat
      }")
- :test (test 4.5 (float 4.5))
+ :test (test
+        4.5
+        (float 4.5))
  :doc  "Standard Floating Point Number")
 
 (type func : func
@@ -249,11 +251,11 @@
 
 (type funclist : list
  :allowtypes [func]
- :doc        "List of Func.")
+ :doc "List of Func.")
 
 (type funcmap : map
  :allowtypes [func]
- :doc        "Map of Func.")
+ :doc "Map of Func.")
 
 (type int
  :default     0
@@ -297,11 +299,11 @@
 
 (type intlist : list
  :allowtypes [int]
- :doc        "A list of int.")
+ :doc "A list of int.")
 
 (type intmap : map
  :allowtypes [int]
- :doc        "A map of int.")
+ :doc "A map of int.")
 
 (type list : list
  :allowtypes [any]
@@ -421,11 +423,11 @@
 
 (type msgblocklist : list
  :allowtypes [msgblock]
- :doc        "List of Message Blocks")
+ :doc "List of Message Blocks")
 
 (type msglist : list
  :allowtypes [msg]
- :doc        "List of Messages")
+ :doc "List of Messages")
 
 (type none
  :doc "No Type. No type is returned at all. e.g. Void")
@@ -436,7 +438,7 @@
 (type number
  :default    0
  :allowtypes [int float decimal]
- :doc        "A generic number that could be int, float, or decimal.")
+ :doc "A generic number that could be int, float, or decimal.")
 
 (type numberlist : list
  :allowtypes [number]
@@ -447,11 +449,12 @@
  :doc "A map of number.")
 
 (type package : struct
- :properties [pkgname  : string
-              constmap : constmap
-              funcmap  : funcmap
-              typemap  : typemap
-              emptymap : map]
+ :properties
+  [pkgname  : string
+   constmap : constmap
+   funcmap  : funcmap
+   typemap  : typemap
+   emptymap : map]
  :doc "A package that store types, consts and funcs.")
 
 (type packagemap : map
@@ -474,9 +477,10 @@
  :doc "A project.")
 
 (type security : struct
- :properties [allowfuncs    : funclist
-              permissions   : permissionlist
-              permissionmap : permissionmap]
+ :properties
+  [allowfuncs    : funclist
+   permissions   : permissionlist
+   permissionmap : permissionmap]
  :doc        "Security rules")
 
 (type session : struct
@@ -487,21 +491,24 @@
    locale         : locale
    translation    : translation
    translationmap : translationmap]
- :doc        "Session")
+ :doc "Session")
 
 (type setting : struct
- :properties [pathmap : stringmap]
- :doc        "Settings")
+ :properties
+  [pathmap : stringmap]
+ :doc "Settings")
 
 (type state : struct
- :properties [statelistenermap : statelistenermap]
+ :properties
+  [statelistenermap : statelistenermap]
  :doc "State. Note that this type is has mutable values.")
 
 (type statelistener : struct
  :properties
   [name       : string
    value      : any
-   fn-boolean : boolean<-none])
+   fn-boolean : boolean<-none]
+ :doc "A listener to trigger functions on state change.")
 
 (type statelistenermap : map
  :allowtypes [statelistener]
@@ -568,18 +575,22 @@
  :doc "Struct is the type of all structures/objects with properties.")
 
 (type thenelse : struct
- :properties [code    : string
-              value   : any
-              values  : list
-              fn-cond : boolean<-func
-              fn-any  : any<-func])
+ :properties
+  [code    : string
+   value   : any
+   values  : list
+   fn-cond : boolean<-func
+   fn-any  : any<-func]
+ :doc "An object used in if and switch functions.")
 
 (type thenelselist : list
- :allowtypes [thenelse])
+ :allowtypes [thenelse]
+ :doc "A list of thenelse.")
 
 (type translation : struct
- :properties [name    : string
-              wordmap : stringmap]
+ :properties
+  [name    : string
+   wordmap : stringmap]
  :doc "i18 language translation.")
 
 (type translationlist : list
@@ -594,18 +605,19 @@
  :doc     "Original Type Class")
 
 (type typedef : struct
- :properties [pkgname        : string
-              name           : string
-              extends        : string
-              allowfuncs     : funclist
-              allowtypes     : typelist
-              allowvalues    : anylist
-              disallowfuncs  : funclist
-              disallowtypes  : typelist
-              disallowvalues : anylist
-              properties     : argmap
-              proplast       : arg
-              traits         : typelist]
+ :properties
+  [pkgname        : string
+   name           : string
+   extends        : string
+   allowfuncs     : funclist
+   allowtypes     : typelist
+   allowvalues    : anylist
+   disallowfuncs  : funclist
+   disallowtypes  : typelist
+   disallowvalues : anylist
+   properties     : argmap
+   proplast       : arg
+   traits         : typelist]
  :create
   (native
    :cpp
@@ -627,21 +639,23 @@
 
 (type typelist : list
  :allowtypes [any]
- :doc        "List of Types")
+ :doc "List of Types")
 
 (type typemap : map
  :allowtypes [any]
- :doc        "Map of Any Type Class")
+ :doc "Map of Any Type Class")
 
 (type user : struct
- :properties [security : security
-              username : string
-              token    : string]
- :doc        "User Type")
+ :properties
+  [security : security
+   username : string
+   token    : string]
+ :doc "User Type")
 
 (type value : struct
- :properties [next : any
-              refs : int])
+ :properties
+  [next : any
+   refs : int])
 
 (const false : boolean
  :test (test-false false))
@@ -712,7 +726,7 @@
   parameters : anylist :...]
  (native
   :js "target[method].apply(parameters)")
- :alias       "dotmethod"
+ :alias "dotmethod"
  :sideeffects "Depends on object"
  :doc "Not Recommened: Support for Object Oriented dot notation. e.g. (this.foo 'a') = this.foo('a')")
 
@@ -2888,7 +2902,10 @@
       valuemap,
       fn_any_from_key_value);"
   :js
-   "vx_core.vx_map_from_map_fn(generic_map_1, valuemap, fn_any_from_key_value)"
+   "vx_core.vx_map_from_map_fn(
+      generic_map_1,
+      valuemap,
+      fn_any_from_key_value)"
   :kotlin
    "vx_core.vx_map_from_map_fn(
       generic_map_1,
