@@ -1,15 +1,18 @@
 # vxlisp
 
 ## Links
-* [API Documentation](core/doc/doc.html)
 * [Source Code](https://github.com/Vyridian/vxlisp)
+* [Core Library](https://vyridian.github.io/vxlisp-vxcore/)
+* [Core API](https://vyridian.github.io/vxlisp-vxcore/build/doc/doc.html)
+* [Helloworld Library](https://github.com/Vyridian/vxlisp-helloworld/)
 * [VSCode Extension](https://github.com/Vyridian/vscode-vxlisp)
-* Test Suites:
-** [Js](core/html/testjs.html)
-** [Java](core/java/src/test/resources/testsuite.html)
-** [C++](core/cpp/src/test/resources/testsuite.html)
-** [CSharp](core/csharp/test/resources/testsuite.html)
-** [Kotlin](core/kotlin/app/src/test/kotlin/resources/testsuite.html)
+
+## Test Suites:
+* [Js](https://vyridian.github.io/vxlisp-vxcore/public/testjs.html)
+* [Java](https://vyridian.github.io/vxlisp-vxcore/build/java/src/test/resources/testsuite.html)
+* [C++](https://vyridian.github.io/vxlisp-vxcore/build/cpp/src/test/resources/testsuite.html)
+* [CSharp](https://vyridian.github.io/vxlisp-vxcore/build/csharp/test/resources/testsuite.html)
+* [Kotlin](https://vyridian.github.io/vxlisp-vxcore/build/kotlin/app/src/test/kotlin/resources/testsuite.html)
 
 ## Overview
 
