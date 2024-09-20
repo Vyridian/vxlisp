@@ -1,0 +1,79 @@
+  fun vx_boolean_exists_from_file(
+    file : vx_data_file.Type_file) : vx_core.Type_boolean {
+    var output : vx_core.Type_boolean = vx_core.e_boolean
+    val fullpath : vx_core.Type_string = vx_data_file.f_pathfull_from_file(file)
+    val sfullpath : String = fullpath.vx_string()
+    val file : java.io.File = java.io.File(sfullpath)
+    if (file.exists()) {
+      output = vx_core.c_true
+    }
+    return output
+  }
+
+  fun vx_boolean_write_from_file_string(
+    context : vx_core.Type_context,
+    file : vx_data_file.Type_file,
+    text : vx_core.Type_string) : vx_core.Type_boolean {
+    var output = vx_core.c_false
+    val fullpath : vx_core.Type_string = vx_data_file.f_pathfull_from_file(file)
+    val sfullpath : String = fullpath.vx_string()
+    val stext : String = text.vx_string()
+    val path : java.nio.file.Path = java.nio.file.Paths.get(sfullpath)
+    try {
+      val bytes : ByteArray = stext.toByteArray()
+      java.nio.file.Files.write(path, bytes)
+      output = vx_core.c_true
+    } catch (ex : Exception) {
+      val msg : vx_core.Type_msg = vx_core.vx_msg_from_exception(
+        "boolean-write<-file-string", ex
+      )
+      output = vx_core.vx_copy(output, msg)
+    }
+    return output
+  }
+
+  fun vx_pathcurrent_from_os() : vx_core.Type_string {
+    val stext : String = vx_spathcurrent_from_os()
+    val output : vx_core.Type_string = vx_core.vx_new_string(stext)
+    return output
+  }
+
+  fun vx_spathcurrent_from_os() : String {
+    var path : java.nio.file.Path = java.nio.file.Paths.get("")
+    path = path.toAbsolutePath()
+    val output = path.toString()
+    return output
+  }
+
+  fun vx_string_read_from_file(
+    file : vx_data_file.Type_file) : vx_core.Type_string {
+    var output : vx_core.Type_string = vx_core.e_string
+    var fullpath : vx_core.Type_string = vx_data_file.f_pathfull_from_file(file)
+    var sfullpath : String = fullpath.vx_string()
+    val path : java.nio.file.Path = java.nio.file.Paths.get(sfullpath)
+    if (java.nio.file.Files.exists(path)) {
+      try {
+        val bytes : ByteArray = java.nio.file.Files.readAllBytes(path)
+        val scontent : String = String(bytes)
+        val valcontent : vx_core.Type_string = vx_core.vx_new_string(scontent)
+        output = valcontent
+      } catch (ex : Exception) {
+        val msg : vx_core.Type_msg = vx_core.vx_msg_from_exception(
+          "string-read<-file", ex
+        )
+        output = vx_core.vx_copy(output, msg)
+      }
+    } else {
+      val msg : vx_core.Type_msg = vx_core.vx_msg_from_error(
+        "string-read<-file", ":filenotfound", file
+      )
+      output = vx_core.vx_copy(output, msg)
+    }
+    return output
+  }
+
+  fun vx_string_read_from_file(
+    context : vx_core.Type_context,
+    file : vx_data_file.Type_file) : vx_core.Type_string {
+    return vx_string_read_from_file(file)
+  }

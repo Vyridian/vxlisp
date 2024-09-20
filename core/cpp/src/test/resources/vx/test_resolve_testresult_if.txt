@@ -1,5 +1,0 @@
-(vx/test/testresult
- :code ":true"
- :passfail true
- :expected true
- :actual true)

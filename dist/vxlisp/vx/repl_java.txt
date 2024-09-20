@@ -1,0 +1,40 @@
+  // vx_string_from_listarg(type, context, liststring)
+  public static String vx_string_from_listarg(
+    Core.Type_any type,
+    Core.Type_context context,
+    List<String> listarg) {
+    String output = "";
+    List<Core.Type_any> listrepl = new ArrayList<>();
+    boolean isfirst = true;
+    for (String sarg : listarg) {
+      if (isfirst) {
+        isfirst = false;
+      } else {
+        Core.Type_any replval;
+        if (Core.vx_is_int(sarg)) {
+          replval = Core.vx_new_int(Core.vx_int_from_string(sarg));
+        } else if (Core.vx_is_float(sarg)) {
+          replval = Core.vx_new_float(Core.vx_float_from_string(sarg));
+        } else {
+          replval = Core.vx_new_string(sarg);
+        }
+        Repl.Type_repl argrepl = Core.vx_new(Repl.t_repl,
+          Core.vx_new_string(":val"), replval
+        );
+        listrepl.add(argrepl);
+      }
+    }
+    Repl.Type_repl repl = Core.vx_new(Repl.t_repl,
+      Core.vx_new_string(":type"), type,
+      Core.vx_new_string(":repllist"), Core.vx_new(Repl.t_repllist, listrepl)
+    );
+    Core.Type_any any = Repl.f_any_from_repl(context, repl);
+    Core.Type_any anytype = any.vx_type();
+    if (anytype == Core.t_string) {
+      Core.Type_string text = Core.f_any_from_any(Core.t_string, any);
+      output = text.vx_string();
+    } else {
+      output = Core.vx_string_from_any(any);
+    }
+    return output;
+  }

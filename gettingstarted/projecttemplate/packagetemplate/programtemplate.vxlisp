@@ -1,9 +1,0 @@
-(package packagetemplate/programtemplate
- :doc "This is a program template")
-
-(func functiontemplate : int
- [arg1 : int
-  arg2 : int]
- (* (+ arg1 arg2) 2)
- :test (test 10 (myfunc 2 3))
- :doc "This function adds two integers and multiplies by 2. It includes documentation and a test case.")

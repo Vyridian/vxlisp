@@ -1,0 +1,416 @@
+(package vx/type
+ :doc "Type handling tools.")
+
+(func allowtypenames<-type : stringlist
+ [type : any]
+ (typenames<-typelist
+  (allowtypes<-type type))
+ :doc "Get the name of a given type")
+
+(func allowtypes<-type : typelist
+ [type : any]
+ (:allowtypes (typedef<-type type))
+ :doc "Returns the allowed types from a given type")
+
+(func any<-int : any-1
+ [value : int]
+ :doc "Generic function returns any from an int.")
+
+(func boolean<-string-ends : boolean
+ [text : string
+  ends : string]
+ (native
+  :cpp
+   "bool check = vx_core::vx_boolean_from_string_ends(text->vx_string(), ends->vx_string());
+    output = vx_core::vx_new_boolean(check);"
+  :csharp :auto
+  :java
+   "boolean check = Core.vx_boolean_from_string_ends(text.vx_string(), ends.vx_string());
+    output = Core.vx_new_boolean(check);"  
+  :js "vx_core.vx_boolean_from_string_ends(text, ends)"
+  :kotlin :auto)
+ :test (test-true
+        (boolean<-string-ends
+         "abcd"
+         "cd"))
+ :doc "Returns true if string starts with find.")
+
+(func boolean<-string-starts : boolean
+ [text   : string
+  starts : string]
+ (native
+  :cpp
+   "bool check = vx_core::vx_boolean_from_string_starts(text->vx_string(), starts->vx_string());
+    output = vx_core::vx_new_boolean(check);"
+  :csharp :auto
+  :java
+   "boolean check = Core.vx_boolean_from_string_starts(text.vx_string(), starts.vx_string());
+    output = Core.vx_new_boolean(check);"
+  :js :auto
+  :kotlin :auto)
+ :test (test-true
+        (boolean<-string-starts
+         "abcd"
+         "ab"))
+ :doc "Returns true if string starts with find.")
+
+(func int<-string-find : int
+ [text : string
+  find : string]
+ (native
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto
+  :kotlin :auto)
+ :test (test
+        3
+        (int<-string-find
+         "abcdcdg"
+         "cd"))
+ :doc "Returns integer position of find string in text string.")
+
+(func int<-string-findkeyword : int
+ [text : string
+  find : string]
+ (native
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto
+  :kotlin :auto)
+ :test (test
+        3
+        (int<-string-findkeyword
+         "ab\tcdefg"
+         ":whitespace"))
+       (test
+        5
+        (int<-string-findkeyword
+         " \t\n\rab"
+         ":nonwhitespace"))
+ :doc "Returns integer position of find string in text string. Note: the find terms :whitespace and :nonwhitespace have special meaning.")
+
+(func int<-string-findlast : int
+ [text     : string
+  findlast : string]
+ (native
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto
+  :kotlin :auto)
+ :test (test
+        5
+        (int<-string-findlast
+         "abcdcdg"
+         "cd"))
+ :doc "Returns integer position of find string in text string.")
+
+(func is-boolean : boolean
+ [value : any]
+ (= "boolean" (typename<-any value)))
+
+(func is-decimal : boolean
+ [value : any]
+ (= "decimal" (typename<-any value)))
+
+(func is-none : boolean
+ [value : any]
+ (= value none))
+
+(func is-string : boolean
+ [value : any]
+ (= "vx/core/string" (typename<-any value))
+ :test (test-true
+        (is-string ""))
+       (test-true
+        (is-string "a"))
+       (test-false
+        (is-string 5))
+       (test-false
+        (is-string (list))))
+
+(func is-type : boolean
+ [value : any
+  type  : any]
+ (or
+  (= (typename<-type type) (typename<-any value))
+  (contains (allowtypenames<-type type) (typename<-any value))
+  (contains (traitnames<-any value) (typename<-type type)))
+ :test (test-true
+        (is-type false boolean))
+       (test-true
+        (is-type "a" string))
+       (test-true
+        (is-type 5.5 number))
+       (test-true
+        (is-type 4 int)))
+
+(func is-type<-any-typelist : boolean
+ [value    : any
+  typelist : typelist]
+ (any<-list-start-reduce : boolean
+  typelist
+  false
+  (fn : boolean
+   [result : boolean
+    type   : any]
+   (or result (is-type value type))))
+ :test (test-true
+        (is-type<-any-typelist
+         false
+         (typelist int boolean)))
+       (test-true
+        (is-type<-any-typelist
+         "a"
+         (typelist number string)))
+       (test-true
+        (is-type<-any-typelist
+         5.5
+         (typelist string number)))
+       (test-true
+        (is-type<-any-typelist
+         4
+         (typelist string int)))
+ :doc "Returns true if value is any type in typelist.")
+
+(func string<-int : string
+ [value : int]
+ (switch value : string
+  (case infinity    "infinity")
+  (case neginfinity "neginfinity")
+  (case notanumber  "notanumber")
+  (else (string value)))
+ :test (test
+        "4"
+        (string<-int 4))
+       (test
+        "51"
+        (string<-int 51))
+       (test
+        "notanumber"
+        (string<-int notanumber))
+       (test
+        "infinity"
+        (string<-int infinity))
+       (test
+        "neginfinity"
+        (string<-int neginfinity))
+ :doc "Function Type converting int to string")
+
+(func string<-string-end : string
+ [text   : string
+  endpos : int]
+ (string<-string-start-end
+  text
+  1
+  endpos)
+ :test (test
+        "abc"
+        (string<-string-end
+         "abcd"
+         3))
+       (test
+        "ab"
+        (string<-string-end
+         "abcd"
+         2))
+ :doc "Returns a substring between 0 end position.")
+
+(func string<-string-start : string
+ [text     : string
+  startpos : int]
+ (string<-string-start-end
+  text startpos (length text))
+ :test (test
+        "abcd"
+        (string<-string-start
+         "abcd"
+         1))
+       (test
+        "bcd"
+        (string<-string-start
+         "abcd"
+         2))
+ :doc "Returns a substring between start string end.")
+
+(func string<-string-start-end : string
+ [text  : string
+  start : int
+  end   : int]
+ (native
+  :cpp
+   "std::string str = vx_core::vx_string_from_string_start_end(text->vx_string(), start->vx_int(), end->vx_int());
+    output = vx_core::vx_new_string(str);"
+  :csharp :auto
+  :java
+   "String stext = Core.vx_string_from_string_start_end(text.vx_string(), start.vx_int(), end.vx_int());
+    output = Core.vx_new_string(stext);"
+  :js "vx_core.vx_string_from_string_start_end(text, start, end)"
+  :kotlin :auto)
+ :test (test
+        "abc"
+        (string<-string-start-end
+         "abcd"
+         1
+         3))
+       (test
+        "bc"
+        (string<-string-start-end
+         "abcd"
+         2
+         3))
+       (test
+        ""
+        (string<-string-start-end
+         "abcd"
+         5
+         6))
+       (test
+        "bcd"
+        (string<-string-start-end
+         "abcd"
+         2
+         5))
+       (test
+        "bc"
+        (string<-string-start-end
+         "abcd"
+         2
+         -1))
+ :doc "Returns a substring between start and end positions.")
+
+(func string<-stringlist-join : string
+ [vals  : stringlist
+  delim : string]
+ (native
+  :cpp
+   "output = vx_type::vx_string_from_stringlist_join(vals, delim);"
+  :csharp :auto
+  :java   :auto
+  :js     :auto
+  :kotlin :auto)
+ :test (test
+        "a$b$c"
+        (string<-stringlist-join
+         (stringlist "a" "b" "c")
+         "$"))
+ :doc "Returns a string by joining a stringlist by the delimiter")
+
+(func string-lowercase : string
+ [text : string]
+ (native
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto
+  :kotlin :auto)
+ :test (test
+        "abc"
+        (string-lowercase
+         "AbC"))
+ :doc "Returns lowercase version of string")
+
+(func string-outdent : string
+ [text : string]
+ (let : string
+  [pos : int :=
+    (int<-string-findkeyword
+     text
+     :nonwhitespace)]
+  (if : string
+   (then
+    (= 0 pos)
+    text)
+   (else
+    (let : string
+     [indent : string :=
+       (string<-string-end
+        text (-1 pos))
+      rest : string :=
+       (string<-string-start
+        text pos)
+      linepos : int :=
+       (int<-string-find
+        indent "\n")
+      outdent : string :=
+       (if : string
+        (= 0 linepos)
+        ""
+        "\n")]
+     (string<-string-find-replace
+      rest
+      indent
+      outdent)))))
+ :test (test
+        "ab"
+        (string-outdent
+         "ab"))
+       (test
+        "a\nb"
+        (string-outdent
+         "\n a\n b"))
+ :doc "Returns a string replacing leading whitespace on all lines based on first line.")
+
+(func string-trim : string
+ [text  : string]
+ (native
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto
+  :kotlin :auto)
+ :test (test
+        "ab"
+        (string-trim
+         " \t\nab\n\t "))
+ :doc "Trims whitespace from the front and back of text")
+
+(func string-uppercase : string
+ [text : string]
+ (native
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto
+  :kotlin :auto)
+ :test (test
+        "ABC"
+        (string-uppercase
+         "aBc"))
+ :doc "Returns uppercase version of string")
+
+(func stringlist<-string-split : stringlist
+ [text  : string
+  delim : string]
+ (native
+  :cpp
+   "vx_type::vx_stringlist_from_string_split(text, delim);"
+  :csharp :auto
+  :java   :auto
+  :js "vx_type.vx_stringlist_from_string_split(text, delim)"
+  :kotlin :auto)
+ :test (test
+        (stringlist "a" "b" "c")
+        (stringlist<-string-split
+         "a$b$c"
+         "$"))
+ :doc "Returns a stringlist by splitting a string by the delimiter")
+
+(func traitnames<-any : stringlist
+ [value : any]
+ (typenames<-typelist
+  (traits<-any value))
+ :doc "Get the trait names of a given type")
+
+(func traits<-any : typelist
+ [value : any]
+ (traits<-typedef
+  (typedef<-any value))
+ :doc "Get the traits of a given value")
+
+(func traits<-typedef : typelist
+ [vtypedef : typedef]
+ (:traits vtypedef)
+ :doc "Get the traits of a given typedef")

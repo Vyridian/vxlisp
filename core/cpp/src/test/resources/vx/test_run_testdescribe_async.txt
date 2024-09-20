@@ -1,9 +1,0 @@
-(vx/test/testdescribe
- :describename "(test-true true)"
- :testpkg "vx/core"
- :testresult
-  (vx/test/testresult
-   :code ":true"
-   :passfail true
-   :expected true
-   :actual true))

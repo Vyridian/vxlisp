@@ -1,0 +1,71 @@
+(package vx/event
+ :doc "Event Handling")
+
+(type event : struct
+ :properties
+  [name               : string
+   from               : string
+   to                 : string
+   datamap            : anymap
+   event<-event       : event<-event
+   event<-event-async : event<-event-async]
+ :doc "Generic Event")
+
+(type eventlist : list
+ :allowtypes [event]
+ :doc "Map of event")
+
+(type eventmap : map
+ :allowtypes [event]
+ :doc "Map of event")
+
+(const event-change : event
+ (event
+  :name "change")
+ :doc "Change Event")
+
+(const event-click : event
+ (event
+  :name "click")
+ :doc "Click Event")
+
+(const event-move : event
+ (event
+  :name "move")
+ :doc "Move Event")
+
+(const event-select : event
+ (event
+  :name "move")
+ :doc "Move Event")
+
+(func any-from<-event : any-1
+ [evt : event]
+ (let : any-1
+  [value : any := (:from evt)]
+  (any<-any : any-1
+   value))
+ :doc "")
+
+(func event<-event : event
+ [evt : event]
+ evt
+ :context
+ :sideeffects "Triggering an event will cause some kind of change"
+ :doc "Template for triggering ui events")
+
+(func event<-event-async : event
+ [evt : event]
+ :async
+ :context
+ :sideeffects "Triggering an event will cause some kind of change"
+ :doc "Template for triggering ui asynchronous events")
+
+(func eventmap<-eventlist : eventmap
+ [eventlist : eventlist]
+ (map<-list : eventmap
+  eventlist
+  (fn : string
+   [evt : event]
+   (:name evt)))
+ :doc "Returns an eventmap from an eventlist")

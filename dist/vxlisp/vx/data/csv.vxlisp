@@ -1,0 +1,169 @@
+(package vx/data/csv
+ :libs (lib collection :path vx/collection)
+       (lib fil        :path vx/data/file)
+       (lib tb         :path vx/data/textblock)
+       (lib type       :path vx/type)
+ :doc "Csv handler")
+
+(type csv : struct
+ :properties
+  [headers : stringlist
+   rows    : csvrows])
+
+(type csvrowmap : map
+ :allowtypes [stringlist])
+
+(type csvrows : list
+ :allowtypes [stringlist])
+
+(const delimcsv : tb/delim
+ (tb/delim
+  :name "delimcsv"
+  :delimlist
+   (tb/delimlist
+    tb/delimline
+    tb/delimquote
+    tb/delimcomma))
+ :doc "Csv File Delimiters")
+
+(func csv<-file : csv
+ [file : fil/file]
+ (let : csv
+  [text : string := (:text file)]
+  (csv<-string text))
+ :doc "Returns a parsed csv from a file.")
+
+(func csv<-string : csv
+ [text : string]
+ (csv<-textblock
+  (tb/textblock-parse<-string-delim
+   text
+   delimcsv))
+ :doc "Returns a parsed csv from a string.")
+
+(func csv<-textblock : csv
+ [textblock : tb/textblock]
+ (let
+  [allrows : csvrows    := (csvrows<-textblock textblock)
+   headers : stringlist := (:1 allrows)
+   rows    : csvrows    := (list<-list-end allrows 2)]
+  (csv :headers headers :rows rows))
+ :doc "Returns a parsed csv from a textblock.")
+
+(func csv-read<-file : csv
+ [file : fil/file]
+ (let : csv
+  [loaded : fil/file := (fil/file-read<-file
+                         file)]
+  (csv<-file loaded))
+ :context
+ :doc "Returns a parsed csv from a file.")
+
+(func csvrows<-textblock : csvrows
+ [textblock : tb/textblock]
+ (let
+  [parsedtb : tb/textblock     := (tb/textblock<-textblock-delim textblock delimcsv)
+   children : tb/textblocklist := (tb/children<-textblock parsedtb)
+   strings  : stringlist       := (tb/stringlist<-textblocklist children)]
+  (csvrows strings)))
+
+(func stringmap<-csv : stringmap
+ [csv : csv]
+ (let : stringmap
+  [rows   : csvrows   := (:rows csv)
+   rowmap : csvrowmap := (map<-list : csvrowmap
+                          rows
+                          (fn : string
+                           [textlist : stringlist]
+                           (:1 textlist)))]
+  (map<-map : stringmap
+   rowmap
+   (fn : stringmap
+    [key : string
+     value : stringlist]
+    (:2 value))))
+ :doc "Returns a stringmap using the first 2 values in each row.")
+
+(func textblock-csv<-string : textblock
+ [text : string]
+ (tb/textblock-parse<-string-delim
+  text
+  delimcsv)
+ :test
+  (test
+   (tb/textblock
+    :text
+`"a","b"
+1,"2"`
+    :startpos 1
+    :endpos 13
+    :children
+     (tb/textblocklist
+      (tb/textblock
+       :text `"a"`
+       :startpos 1
+       :endpos 3
+       :delim
+        (copy tb/delimquote
+         :pos 0)
+       :children
+        (tb/textblocklist
+         (tb/textblock
+          :text "a"
+          :startpos 2
+          :endpos 2)))
+      (tb/textblock
+       :text ","
+       :startpos 4
+       :endpos 4
+       :delim
+        (copy tb/delimcomma
+         :pos 0))
+      (tb/textblock
+       :text `"b"`
+       :startpos 5
+       :endpos 7
+       :delim
+        (copy tb/delimquote
+         :pos 0)
+       :children
+        (tb/textblocklist
+         (tb/textblock
+          :text "b"
+          :startpos 6
+          :endpos 6)))
+      (tb/textblock
+       :text "\n"
+       :startpos 8
+       :endpos 8
+       :delim
+        (copy tb/delimline
+         :pos 0))
+      (tb/textblock
+       :text "1"
+       :startpos 9
+       :endpos 9)
+      (tb/textblock
+       :text ","
+       :startpos 10
+       :endpos 10
+       :delim
+        (copy tb/delimcomma
+         :pos 0))
+      (tb/textblock
+       :text `"2"`
+       :startpos 11
+       :endpos 13
+       :delim
+        (copy tb/delimquote
+         :pos 0)
+       :children
+        (tb/textblocklist
+         (tb/textblock
+          :text "2"
+          :startpos 12
+          :endpos 12)))))
+   (textblock-csv<-string
+    `"a","b"
+1,"2"`))
+ :doc "Returns a parsed csv-textblock from a string.")

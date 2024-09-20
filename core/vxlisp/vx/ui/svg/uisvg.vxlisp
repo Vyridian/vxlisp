@@ -1,2 +1,0 @@
-(package vx/ui/svg/uisvg
- :libs (lib ui :path vx/ui/ui))
