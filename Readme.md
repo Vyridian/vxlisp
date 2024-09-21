@@ -1,14 +1,16 @@
 # vxlisp
 
 ## Links
-* [Source Code](https://github.com/Vyridian/vxlisp)
-* [Core Library](https://vyridian.github.io/vxlisp-vxcore/)
+* [Compiler Web Site](https://vyridian.github.io/vxlisp)
+* [Compiler Repository](https://github.com/Vyridian/vxlisp)
+* [Docs](https://github.com/Vyridian/vxlisp/tree/main/docs)
+* [Core Library](https://vyridian.github.io/vxlisp-vxcore)
 * [Core API](https://vyridian.github.io/vxlisp-vxcore/build/doc/doc.html)
-* [Helloworld Library](https://github.com/Vyridian/vxlisp-helloworld/)
+* [Hello World Library](https://github.com/Vyridian/vxlisp-helloworld)
 * [VSCode Extension](https://github.com/Vyridian/vscode-vxlisp)
 
 ## Test Suites:
-* [Js](https://vyridian.github.io/vxlisp-vxcore/public/testjs.html)
+* [JavaScript](https://vyridian.github.io/vxlisp-vxcore/public/testjs.html)
 * [Java](https://vyridian.github.io/vxlisp-vxcore/build/java/src/test/resources/testsuite.html)
 * [C++](https://vyridian.github.io/vxlisp-vxcore/build/cpp/src/test/resources/testsuite.html)
 * [CSharp](https://vyridian.github.io/vxlisp-vxcore/build/csharp/test/resources/testsuite.html)
@@ -22,13 +24,13 @@
 
 2. vxlisp is easy to learn with simple, concise, consistent, readable syntax. It seeks to make programming more feature-rich, modular, and reliable by standardizing like Lego pieces and plugging holes in other languages. If focuses on making the most common programming cases easier and more robust including documentation and test.
 
-3. vxlisp is easy to setup. Unzip the folder, write some code, run the executable file, and you are up and running with JavaScript. The built-in webserver even serves up your code and testscripts. Other languages require their respective compilers an projects to be installed as well.
+3. vxlisp is easy to setup. Copy the folder, write some code, run the executable file, and you are up and running with JavaScript. The built-in webserver even serves up your code and testscripts. Other languages require their respective compilers an projects to be installed as well.
 
-4. vxlisp is a full featured language including documentation, test cases, meta tags, type-safety, data structures, generic types, multiple-inheritance, asynchronous/futures, first class functions, lambda expressions, memory management, state management, debugging tools, and a read-execute-print-loop. All of these should be noticably easier to code in vxlisp than their original languages.
+4. vxlisp is a full featured language including documentation, test cases, meta tags, type-safety, data structures, generic types, multiple-inheritance, asynchronous/futures, first class functions, lambda expressions, memory management, state management, debugging tools, and a scripting/read-execute-print-loop. All of these should be noticably easier to code in vxlisp than their original languages.
 
 5. vxlisp is a simple data structure similar to JSON or XML, but it is simpler and more consistent while also being able to describe complex typesafe objects and functions.
 
-6. vxlisp is a meta language designed to be natively compiled to other languages. It is sort of like Typescript's relationship to Javascript or Kotlin's relationship to Java. However, since it generates plain old native code, it can be interspersed with native code in any amount you might prefer.
+6. vxlisp is a meta language designed to be natively compiled to other languages. It is sort of like Typescript's relationship to Javascript or Kotlin's relationship to Java. However, since it generates plain old native code, it can be mixed with native code in any amount you might prefer.
 
 7. vxlisp is a transparency layer so that code can be more easily read, shared, tested, and ported between applications and platforms. It can evolve directly from a specification requirement to production/test code.
 
@@ -50,13 +52,13 @@ Most new languages try to write a platform along with the language. Instead I wa
 
 * New languages rarely work. Why write one?
 
-To improve the art. I find most languages to have ugly, confusing syntax, and poor manageability. I hope to point out that this need not be true. vxlisp represents my wishlist of things that I have liked and disliked about other languages. Frankly, though its only in its infancy, I'm very pleased with the result.
+To improve the art. I find most languages to have ugly, confusing syntax, and poor manageability. I hope to point out that this need not be true. vxlisp represents my wishlist of things that I have liked and disliked about other languages. Frankly, I'm very pleased with the result.
 
 * What are its best use cases?
 
-1. Collaboration - It should be suited for collaborative work where outsourcers, support, test team, management AND developers need transparency into a cross platform application. In my mind, this is every project worth a damn.
+1. Collaboration - It should be suited for collaborative work where outsourcers, support, test team, management AND developers need transparency into a cross platform application. In my mind, this is every project of any scale.
 
-2. Cross-platform - Obviously, write-once, run-anywhere is good for crossplatform work. Why is anyone writing applications that are not cross-platform?
+2. Cross-platform - Obviously, write-once, run-anywhere is good for cross-platform work. Why is anyone writing applications that are not cross-platform?
 
 3. Learning Language - I learned programming using BASIC on an Apple II. In college I learned PASCAL. These are considered learning languages but they are still fairly complex. vxlisp is consistent and readable. It promotes small code snippets, documentation and test cases. It is well suited to the classroom.
 
@@ -89,12 +91,10 @@ To improve the art. I find most languages to have ugly, confusing syntax, and po
 
 ## Folder Structure
 
-1. core - The core library of vxlisp. This library is intended to be included in all vxlisp projects.
-2. vxlispruntime - The runtime version of vxlisp with core libraries.
-3. golang - The vxcompiler development code written in golang.
-4. notes - Markdown files of various instructions and notes.
-5. gettingstarted - This is a basic project structure to start a project.
-6. sample - An example project with generated docs, java source, java test, js source, and js test.
+1. dist - The runtime version of vxlisp with core libraries.
+2. src - The vxcompiler development code written in golang.
+3. batches - Batch files for compiling the compiler.
+4. docs -Markdown files of various instructions and notes.
 
 ## FAQ
 
