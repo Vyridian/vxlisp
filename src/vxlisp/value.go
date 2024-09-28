@@ -154,18 +154,26 @@ func ListArgFromValue(value vxvalue) []vxarg {
 	return output
 }
 
-func ListValueLink(listvalue []vxvalue, scopes []vxscope, textblock *vxtextblock, path string) ([]vxvalue, *vxmsgblock) {
+func ListValueLink(
+	listvalue []vxvalue,
+	scopes []vxscope,
+	textblock *vxtextblock,
+	path string) ([]vxvalue, *vxmsgblock) {
 	msgblock := NewMsgBlock("ValuesLink")
 	var output []vxvalue
 	for _, value := range listvalue {
-		chgvalue, msgs := ValueLink(value, emptytype, scopes, textblock, path)
+		chgvalue, msgs := ValueLink(
+			value, emptytype, scopes, textblock, path)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		output = append(output, chgvalue)
 	}
 	return output, msgblock
 }
 
-func ListValueValidateTestFuncs(listvalue []vxvalue, textblock *vxtextblock, path string) ([]vxvalue, *vxmsgblock) {
+func ListValueValidateTestFuncs(
+	listvalue []vxvalue,
+	textblock *vxtextblock,
+	path string) ([]vxvalue, *vxmsgblock) {
 	msgblock := NewMsgBlock("ListValueValidateTestFuncs")
 	var listtestvalue []vxvalue
 	for idx, value := range listvalue {
@@ -541,19 +549,26 @@ func ValueFromTextblock(textblock *vxtextblock, parentfunc *vxfunc, pkg *vxpacka
 	return output, msgblock
 }
 
-func ValueLink(value vxvalue, expectedtype *vxtype, listscope []vxscope, textblock *vxtextblock, path string) (vxvalue, *vxmsgblock) {
+func ValueLink(
+	value vxvalue,
+	expectedtype *vxtype,
+	listscope []vxscope,
+	textblock *vxtextblock,
+	path string) (vxvalue, *vxmsgblock) {
 	msgblock := NewMsgBlock("ValueLink")
 	output := value
 	subpath := path + "/:value"
 	switch value.code {
 	case ":arg":
 		arg := ArgFromValue(value)
-		arg, msgs := ArgLink(arg, listscope, textblock, subpath)
+		arg, msgs := ArgLink(
+			arg, listscope, textblock, subpath)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		output = ValueSetArg(value, arg)
 	case ":arglist":
 		args := ListArgFromValue(value)
-		args, msgs := ListArgLink(args, listscope, textblock, subpath)
+		args, msgs := ListArgLink(
+			args, listscope, textblock, subpath)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		output = ValueSetListArg(value, args)
 	case ":unknown":
@@ -651,7 +666,8 @@ func ValueLink(value vxvalue, expectedtype *vxtype, listscope []vxscope, textblo
 			fnc.listarg[0] = arglet
 		}
 		listscope = ListScopeAddFuncLocalArg(listscope, fnc)
-		chgargs, msgs := ListArgLink(fnc.listarg, listscope, textblock, subpath)
+		chgargs, msgs := ListArgLink(
+			fnc.listarg, listscope, textblock, subpath)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		fnc.listarg = chgargs
 		switch fnc.name {
@@ -694,7 +710,10 @@ func ValueLink(value vxvalue, expectedtype *vxtype, listscope []vxscope, textblo
 							if ok {
 								fnc.vxtype = prop.vxtype
 							} else {
-								msg := NewMsgFromTextblock(textblock, subpath, "any<-struct does not contain property. (type "+typearg1.name+" "+keyarg2+")")
+								msg := NewMsgFromTextblock(
+									textblock,
+									subpath,
+									"any<-struct does not contain property. (type "+typearg1.name+" "+keyarg2+")")
 								msgblock = MsgblockAddError(msgblock, msg)
 							}
 						}
@@ -705,7 +724,8 @@ func ValueLink(value vxvalue, expectedtype *vxtype, listscope []vxscope, textblo
 		origfunc := fnc
 		if !fnc.iscopied {
 			signature := SignatureFromFunc(fnc, subpath)
-			lookupfunc, ok := FuncFromListScope(listscope, origfunc.pkgname, origfunc.name, signature, subpath)
+			lookupfunc, ok := FuncFromListScope(
+				listscope, origfunc.pkgname, origfunc.name, signature, subpath)
 			if ok {
 				fnc = NewFuncCopy(lookupfunc)
 				fnc.textblock = origfunc.textblock
@@ -715,11 +735,13 @@ func ValueLink(value vxvalue, expectedtype *vxtype, listscope []vxscope, textblo
 					fnc.vxtype = origfunc.vxtype
 				}
 			} else {
-				lookuptype, ok := TypeFromListScope(listscope, origfunc.pkgname, origfunc.name, subpath)
+				lookuptype, ok := TypeFromListScope(
+					listscope, origfunc.pkgname, origfunc.name, subpath)
 				if ok && !lookuptype.isfunc {
 					if len(origfunc.listarg) == 0 {
 						// (type) -> (empty type)
-						lookupfunc, ok := FuncFromListScope(listscope, "", "empty", emptysignature, subpath)
+						lookupfunc, ok := FuncFromListScope(
+							listscope, "", "empty", emptysignature, subpath)
 						if ok {
 							fnc = NewFuncCopy(lookupfunc)
 							fnc.textblock = origfunc.textblock
@@ -733,7 +755,8 @@ func ValueLink(value vxvalue, expectedtype *vxtype, listscope []vxscope, textblo
 						}
 					} else {
 						// (type arg1 argn) -> (new type arg1 argn)
-						lookupfunc, ok := FuncFromListScope(listscope, "", "new", emptysignature, subpath)
+						lookupfunc, ok := FuncFromListScope(
+							listscope, "", "new", emptysignature, subpath)
 						if ok {
 							fnc = NewFuncCopy(lookupfunc)
 							fnc.textblock = origfunc.textblock

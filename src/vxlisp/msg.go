@@ -68,7 +68,8 @@ func IsWarningFromMsgblock(msgblock *vxmsgblock) bool {
 	return msgblock.iswarning
 }
 
-func MsgLog(output ...interface{}) {
+func MsgLog(
+	output ...interface{}) {
 	fmt.Println(output...)
 	if outputlog {
 		_, err := fmt.Fprintln(outputWriter, output...)
@@ -93,7 +94,8 @@ func MsgStartLog() {
 }
 
 func MsgStopLog() {
-	MsgLog("Build Complete")
+	MsgLog(
+		"Build Complete")
 	if outputlog {
 		outputWriter.Flush()
 		outputFile.Close()

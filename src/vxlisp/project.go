@@ -174,7 +174,8 @@ func PackageFromProjectFunc(
 	if ok {
 		output = pkg
 	} else {
-		MsgLog("Error: Package Not Found from Func: " + fnc.name)
+		MsgLog(
+			"Error: Package Not Found from Func: " + fnc.name)
 	}
 	return output
 }
@@ -198,7 +199,8 @@ func PackageCoreFromProject(
 	project *vxproject) *vxpackage {
 	output, ok := PackageFromProjectName(project, "vx/core")
 	if !ok {
-		MsgLog("Error: vx/core package not found")
+		MsgLog(
+			"Error: vx/core package not found")
 	}
 	return output
 }

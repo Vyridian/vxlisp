@@ -2110,7 +2110,8 @@ func LangApp(
 				"Error! Context Not Found: (project (cmd :context " + cmd.context + "))")
 		}
 		if cmd.main != "" && mainfunc == emptyfunc {
-			MsgLog("Error! Main Not Found: (project (cmd :main " + cmd.main + "))")
+			MsgLog(
+				"Error! Main Not Found: (project (cmd :main " + cmd.main + "))")
 		}
 		if contextfunc != emptyfunc {
 			if contextfunc.pkgname == "" {

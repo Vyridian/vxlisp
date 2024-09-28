@@ -61,6 +61,10 @@
 
 * (copy {any} {args})
 
+* These constructors are very flexible and will automatically concatenate where possible. E.g. (int 2 3), (string "a" "b"), (stringlist "a" (stringlist "c" "d"))
+
+* You may also construct an (anylist) and pass that as varargs. E.g. (string (anylist "a" "b"))
+
 ## Overloading
 
 * Functions may be redefined as often as you like. The compiler will choose the first match it find based on package include order and top-down within a package.

@@ -1819,7 +1819,8 @@ func CppBodyFromType(lang *vxlang, typ *vxtype) (string, string, *vxmsgblock) {
 			"\n        }" +
 			"\n      }"
 		if len(typ.allowtypes) == 0 && len(typ.allowfuncs) == 0 && len(typ.allowvalues) == 0 {
-			MsgLog("Missing allowed types", typ.name)
+			MsgLog(
+				"Missing allowed types", typ.name)
 		}
 	case ":map":
 		destructor += "" +
@@ -2024,7 +2025,8 @@ func CppBodyFromType(lang *vxlang, typ *vxtype) (string, string, *vxmsgblock) {
 			"\n        }" +
 			"\n      }"
 		if len(typ.allowtypes) == 0 && len(typ.allowfuncs) == 0 && len(typ.allowvalues) == 0 {
-			MsgLog("Missing allowed types", typ.name)
+			MsgLog(
+				"Missing allowed types", typ.name)
 		}
 	case ":struct":
 		vx_any := ""
@@ -4354,10 +4356,12 @@ func CppApp(
 		contextfunc := FuncFromProjectFuncname(project, cmd.context)
 		mainfunc := FuncFromProjectFuncname(project, cmd.main)
 		if cmd.context != "" && contextfunc == emptyfunc {
-			MsgLog("Error! Context Not Found: (project (cmd :context " + cmd.context + "))")
+			MsgLog(
+				"Error! Context Not Found: (project (cmd :context " + cmd.context + "))")
 		}
 		if cmd.main != "" && mainfunc == emptyfunc {
-			MsgLog("Error! Main Not Found: (project (cmd :main " + cmd.main + "))")
+			MsgLog(
+				"Error! Main Not Found: (project (cmd :main " + cmd.main + "))")
 		}
 		if contextfunc != emptyfunc {
 			if contextfunc.pkgname != mainfunc.pkgname {
@@ -4438,7 +4442,8 @@ func CppAppTest(lang *vxlang, project *vxproject, command *vxcommand) string {
 	if command.context != "" {
 		contextfunc := FuncFromProjectFuncname(project, command.context)
 		if command.context != "" && contextfunc == emptyfunc {
-			MsgLog("Error! Context Not Found: (project (cmd :context " + command.context + "))")
+			MsgLog(
+				"Error! Context Not Found: (project (cmd :context " + command.context + "))")
 		}
 		if contextfunc != emptyfunc {
 			switch contextfunc.pkgname {

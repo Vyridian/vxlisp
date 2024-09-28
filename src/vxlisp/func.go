@@ -292,20 +292,27 @@ func FuncValidate(fnc *vxfunc, textblock *vxtextblock, path string) (*vxfunc, *v
 	return fnc, msgblock
 }
 
-func FuncSetType(fnc *vxfunc, typ *vxtype) *vxfunc {
+func FuncSetType(
+	fnc *vxfunc,
+	typ *vxtype) *vxfunc {
 	fnc.vxtype = typ
 	if fnc.generictype != nil {
-		fnc.mapgeneric = MapTypeSetType(fnc.mapgeneric, fnc.generictype.name, typ)
+		fnc.mapgeneric = MapTypeSetType(
+			fnc.mapgeneric, fnc.generictype.name, typ)
 	}
 	return fnc
 }
 
-func ListFuncLink(listfunc []*vxfunc, listscope []vxscope, path string) ([]*vxfunc, *vxmsgblock) {
+func ListFuncLink(
+	listfunc []*vxfunc,
+	listscope []vxscope,
+	path string) ([]*vxfunc, *vxmsgblock) {
 	msgblock := NewMsgBlock("ListFuncLink")
 	for _, fnc := range listfunc {
 		subpath := path + "/" + fnc.name + StringIndexFromFunc(fnc)
 		typ := fnc.vxtype
-		lookuptype, ok := TypeOrFuncFromListScope(listscope, typ.pkgname, typ.name, subpath)
+		lookuptype, ok := TypeOrFuncFromListScope(
+			listscope, typ.pkgname, typ.name, subpath)
 		if ok {
 			fnc.vxtype = lookuptype
 			if lookuptype.isgeneric {
@@ -313,11 +320,13 @@ func ListFuncLink(listfunc []*vxfunc, listscope []vxscope, path string) ([]*vxfu
 			}
 		} else if fnc.name == "native" {
 		} else {
-			msg := NewMsgFromTextblock(fnc.textblock, subpath, "Type Not Found:", typ.pkgname, typ.name)
+			msg := NewMsgFromTextblock(
+				fnc.textblock, subpath, "Type Not Found:", typ.pkgname, typ.name)
 			msgblock = MsgblockAddError(msgblock, msg)
 		}
 		if len(fnc.listarg) > 0 || fnc.context {
-			args, msgs := ListArgLink(fnc.listarg, listscope, fnc.textblock, subpath)
+			args, msgs := ListArgLink(
+				fnc.listarg, listscope, fnc.textblock, subpath)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			fnc.listarg = args
 		}
@@ -325,7 +334,10 @@ func ListFuncLink(listfunc []*vxfunc, listscope []vxscope, path string) ([]*vxfu
 	return listfunc, msgblock
 }
 
-func ListFuncLinkValues(listfunc []*vxfunc, listscope []vxscope, path string) ([]*vxfunc, *vxmsgblock) {
+func ListFuncLinkValues(
+	listfunc []*vxfunc,
+	listscope []vxscope,
+	path string) ([]*vxfunc, *vxmsgblock) {
 	msgblock := NewMsgBlock("ListFuncLinkValues")
 	for _, fnc := range listfunc {
 		subpath := path + "/" + fnc.name + StringIndexFromFunc(fnc)

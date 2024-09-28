@@ -1424,10 +1424,12 @@ func JsApp(project *vxproject, cmd *vxcommand) string {
 		contextfunc := FuncFromProjectFuncname(project, cmd.context)
 		mainfunc := FuncFromProjectFuncname(project, cmd.main)
 		if cmd.context != "" && contextfunc == emptyfunc {
-			MsgLog("Error! Context Not Found: (project (cmd :context " + cmd.context + "))")
+			MsgLog(
+				"Error! Context Not Found: (project (cmd :context " + cmd.context + "))")
 		}
 		if cmd.main != "" && mainfunc == emptyfunc {
-			MsgLog("Error! Main Not Found: (project (cmd :main " + cmd.main + "))")
+			MsgLog(
+				"Error! Main Not Found: (project (cmd :main " + cmd.main + "))")
 		}
 		if contextfunc != emptyfunc {
 			if contextfunc.pkgname != mainfunc.pkgname {
@@ -1507,7 +1509,8 @@ func JsAppTest(project *vxproject, command *vxcommand) string {
 	} else {
 		contextfunc := FuncFromProjectFuncname(project, command.context)
 		if command.context != "" && contextfunc == emptyfunc {
-			MsgLog("Error! Context Not Found: (project (cmd :context " + command.context + "))")
+			MsgLog(
+				"Error! Context Not Found: (project (cmd :context " + command.context + "))")
 		}
 		if contextfunc != emptyfunc {
 			switch contextfunc.pkgname {

@@ -1416,7 +1416,8 @@ func LangTypeVxCopy(
 				LangVarSet(lang, "output", 4, "work") +
 				"\n      }"
 			if len(typ.allowtypes) == 0 && len(typ.allowfuncs) == 0 && len(typ.allowvalues) == 0 {
-				MsgLog("Missing allowed types", typ.name)
+				MsgLog(
+					"Missing allowed types", typ.name)
 			}
 		case ":map":
 			allowtype := anytype
@@ -1539,7 +1540,8 @@ func LangTypeVxCopy(
 				LangVarSet(lang, "output", 4, "work") +
 				"\n      }"
 			if len(typ.allowtypes) == 0 && len(typ.allowfuncs) == 0 && len(typ.allowvalues) == 0 {
-				MsgLog("Missing allowed types", typ.name)
+				MsgLog(
+					"Missing allowed types", typ.name)
 			}
 		case ":struct":
 			vx_any := ""

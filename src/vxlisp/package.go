@@ -21,7 +21,8 @@ func NewMapPackage() map[string]*vxpackage {
 	return make(map[string]*vxpackage)
 }
 
-func NewPackage(pkgname string) *vxpackage {
+func NewPackage(
+	pkgname string) *vxpackage {
 	output := new(vxpackage)
 	output.name = pkgname
 	output.listlib = emptylistlibrary
@@ -91,22 +92,27 @@ func ListPackageLink(
 	for _, pkg := range listpackage {
 		pkgname := pkg.name
 		path := pkgname
-		scopes := ListScopeFromPackage(pkg, pkgmap)
-		_, msgs := ListTypeLink(pkg.listtype, scopes, path)
+		scopes := ListScopeFromPackage(
+			pkg, pkgmap)
+		_, msgs := ListTypeLink(
+			pkg.listtype, scopes, path)
+		msgblock = MsgblockAddBlock(msgblock, msgs)
+	}
+	for _, pkg := range listpackage {
+		pkgname := pkg.name
+		path := pkgname
+		scopes := ListScopeFromPackage(
+			pkg, pkgmap)
+		_, msgs := ListConstLink(
+			pkg.listconst, scopes, path)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 	}
 	for _, pkg := range listpackage {
 		pkgname := pkg.name
 		path := pkgname
 		scopes := ListScopeFromPackage(pkg, pkgmap)
-		_, msgs := ListConstLink(pkg.listconst, scopes, path)
-		msgblock = MsgblockAddBlock(msgblock, msgs)
-	}
-	for _, pkg := range listpackage {
-		pkgname := pkg.name
-		path := pkgname
-		scopes := ListScopeFromPackage(pkg, pkgmap)
-		_, msgs := ListFuncLink(pkg.listfunc, scopes, path)
+		_, msgs := ListFuncLink(
+			pkg.listfunc, scopes, path)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 	}
 	for _, pkg := range listpackage {
@@ -278,7 +284,8 @@ func ListScopeFromPackage(
 				scope.maptype = libpkg.maptype
 				scopes = append(scopes, scope)
 			} else {
-				MsgLog("Package Missing:", libname, libpath, len(pkgmap))
+				MsgLog(
+					"Package Missing:", libname, libpath, len(pkgmap))
 			}
 		}
 	}
@@ -288,7 +295,7 @@ func ListScopeFromPackage(
 		scope.mapconst = pkg.mapconst
 		scope.mapfunc = pkg.mapfunc
 		scope.maptype = pkg.maptype
-		scopes = append(scopes, scope)
+		scopes = append([]vxscope{scope}, scopes...)
 	}
 	return scopes
 }

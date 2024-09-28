@@ -28,10 +28,12 @@ func LangTestApp(
 	} else {
 		contextfunc := FuncFromProjectFuncname(project, command.context)
 		if command.context != "" && contextfunc == emptyfunc {
-			MsgLog("Error! Context Not Found: (project (cmd :context " + command.context + "))")
+			MsgLog(
+				"Error! Context Not Found: (project (cmd :context " + command.context + "))")
 		}
 		if contextfunc != emptyfunc {
-			packagecontext, ok := PackageFromProjectName(project, contextfunc.pkgname)
+			packagecontext, ok := PackageFromProjectName(
+				project, contextfunc.pkgname)
 			if ok {
 				imports += LangImport(
 					lang,

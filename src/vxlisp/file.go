@@ -94,7 +94,8 @@ func ListenToPath(path string) {
 	// creates a new file watcher
 	watcher, err := fsnotify.NewWatcher()
 	if err != nil {
-		MsgLog("ListenToPath", "ERROR", err)
+		MsgLog(
+			"ListenToPath", "ERROR", err)
 	}
 	defer watcher.Close()
 
@@ -107,18 +108,21 @@ func ListenToPath(path string) {
 			select {
 			// watch for events
 			case event := <-watcher.Events:
-				MsgLog("EVENT!", event)
+				MsgLog(
+					"EVENT!", event)
 
 				// watch for errors
 			case err := <-watcher.Errors:
-				MsgLog("ERROR", err)
+				MsgLog(
+					"ERROR", err)
 			}
 		}
 	}()
 
 	// out of the box fsnotify can watch a single file, or a single directory
 	if err := watcher.Add(path); err != nil {
-		MsgLog("ERROR", err)
+		MsgLog(
+			"ERROR", err)
 	}
 
 	<-done
@@ -181,7 +185,8 @@ func StringFromExec() string {
 	output := ""
 	path, err := os.Getwd()
 	if err != nil {
-		MsgLog(err)
+		MsgLog(
+			err)
 	}
 	output = StringFromStringFindReplace(path, "\\", "/")
 	return output

@@ -821,15 +821,20 @@ func ListTypeLink(listtype []*vxtype, scopes []vxscope, path string) ([]*vxtype,
 	return listtype, msgblock
 }
 
-func ListTypeLinkValues(listtype []*vxtype, scopes []vxscope, path string) ([]*vxtype, *vxmsgblock) {
+func ListTypeLinkValues(
+	listtype []*vxtype,
+	listscope []vxscope,
+	path string) ([]*vxtype, *vxmsgblock) {
 	msgblock := NewMsgBlock("ListTypeLinkValues")
 	for _, typ := range listtype {
 		subpath := path + "/" + typ.name
 		if !typ.isfunc {
-			emptyvalue, msgs := ValueLink(typ.emptyvalue, typ, scopes, typ.textblock, subpath)
+			emptyvalue, msgs := ValueLink(
+				typ.emptyvalue, typ, listscope, typ.textblock, subpath)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			typ.emptyvalue = emptyvalue
-			testvalues, msgs := ListValueLink(typ.testvalues, scopes, typ.textblock, subpath)
+			testvalues, msgs := ListValueLink(
+				typ.testvalues, listscope, typ.textblock, subpath)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			typ.testvalues = testvalues
 		}

@@ -51,7 +51,12 @@ func ConstFromListScope(listscope []vxscope, pkgname string, cnstname string) (*
 	return cnst, ok
 }
 
-func FuncFromListScope(listscope []vxscope, pkgname string, fncname string, signature *vxsignature, path string) (*vxfunc, bool) {
+func FuncFromListScope(
+	listscope []vxscope,
+	pkgname string,
+	fncname string,
+	signature *vxsignature,
+	path string) (*vxfunc, bool) {
 	var fnc *vxfunc
 	var listfunc []*vxfunc
 	var ok = false

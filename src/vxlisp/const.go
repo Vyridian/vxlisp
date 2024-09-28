@@ -132,7 +132,10 @@ func ListConstLink(listconst []*vxconst, listscope []vxscope, path string) ([]*v
 	return listconst, msgblock
 }
 
-func ListConstLinkValues(listconst []*vxconst, listscope []vxscope, path string) ([]*vxconst, *vxmsgblock) {
+func ListConstLinkValues(
+	listconst []*vxconst,
+	listscope []vxscope,
+	path string) ([]*vxconst, *vxmsgblock) {
 	msgblock := NewMsgBlock("ListConstLinkValues")
 	for _, cnst := range listconst {
 		subpath := path + "/" + cnst.name
