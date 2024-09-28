@@ -5,12 +5,13 @@
  :doc "Xml handler")
 
 (type xml : struct
- :properties [tag      : string
-              text     : string
-              prop     : string
-              propmap  : stringmap
-              children : xmllist
-              parent   : xml])
+ :properties
+  [tag      : string
+   text     : string
+   prop     : string
+   propmap  : stringmap
+   children : xmllist
+   parent   : xml])
 
 (type xmllist : list
  :allowtypes [xml])

@@ -19,7 +19,7 @@
  :cmds
   (cmd doc
    :code :doc
-   :path ../doc
+   :path ../build/doc
    :doc  "Build documentation html")
   (cmd webserver
    :code :webserver

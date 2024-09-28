@@ -409,8 +409,3 @@
  (traits<-typedef
   (typedef<-any value))
  :doc "Get the traits of a given value")
-
-(func traits<-typedef : typelist
- [vtypedef : typedef]
- (:traits vtypedef)
- :doc "Get the traits of a given typedef")

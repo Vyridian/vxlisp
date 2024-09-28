@@ -3448,6 +3448,12 @@
 
 (func traits<-typedef : typelist
  [vtypedef : typedef]
+ (:traits vtypedef)
+ :doc "Get the traits of a given typedef")
+
+/*
+(func traits<-typedef : typelist
+ [vtypedef : typedef]
  (native
   :cpp
    "vtypedef->traits();"
@@ -3458,6 +3464,7 @@
   :js
    "vtypedef['vx_value']['traits']")
  :doc "Return trait list from type")
+*/
 
 (func type<-any : any
  [value : any-1]
