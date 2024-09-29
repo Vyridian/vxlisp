@@ -2,6 +2,54 @@
  :libs (lib type :path vx/type)
  :doc "Collection Package")
 
+(func - : list-1
+ [listmain   : list-1
+  listremove : list-1]
+ (list<-list-filter : list-1
+  listmain
+  (fn : any
+   [item : any]
+   (if : any
+    (then
+     (!
+      (contains listremove item))
+     item))))
+ :test (test
+        (stringlist "a" "d")
+        (- : stringlist
+         (stringlist "a" "b" "c" "d")
+         (stringlist "b" "c")))
+ :alias "minus"
+ :doc "Returns a list from listmain after removing listremove.")
+
+(func - : map-1
+ [mapmain   : map-1
+  mapremove : map-1]
+ (let : map-1
+  [keysmain : stringlist :=
+    (stringlist<-map mapmain)
+   keysremove : stringlist :=
+    (stringlist<-map mapremove)
+   keysremain : stringlist :=
+    (- keysmain keysremove)]
+  (map<-map-keys : map-1
+   mapmain keysremain))
+ :test (test
+        (stringmap
+         :a "1"
+         :d "4")
+        (- : stringmap
+         (stringmap
+          :a "1"
+          :b "2"
+          :c "3"
+          :d "4")
+         (stringmap
+          :b "x"
+          :c "y")))
+ :alias "minus"
+ :doc "Returns a map from mapmain after removing keys from mapremove.")
+
 (func any<-for-until-loop : any-1
  [start    : any-1
   fn-until : boolean<-any :: any-1
