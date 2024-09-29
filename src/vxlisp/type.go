@@ -206,6 +206,7 @@ func NewType(typename string) *vxtype {
 		typ.pkgname = typename[0:pos]
 		typ.name = typename[pos+1:]
 	}
+	typ.alias = typ.name
 	switch typename {
 	case "vx/core/arglist", "vx/core/intlist", "vx/core/list", "vx/core/stringlist":
 		typ.extends = ":list"

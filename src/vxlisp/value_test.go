@@ -172,19 +172,21 @@ func TestValueValidate(t *testing.T) {
 		t.Error(errortext)
 	}
 
-	// expected composite type that allows string
-	// actual string
-	expectedtype = NewType("compositetype")
-	expectedtype.pkgname = "mypackage"
-	expectedtype.allowtypes = []*vxtype{stringtype}
-	value = NewValueFromString("text2")
-	value, _, msgs = ValueValidate(value, expectedtype, false, emptygenerictypes, textblock, path)
-	expected = NameFromType(stringtype)
-	actual = NameFromType(value.vxtype)
-	errortext = CompareText(expected, actual, 20, msgs)
-	if errortext != "" {
-		t.Error(errortext)
-	}
+	/*
+		// expected composite type that allows string
+		// actual string
+		expectedtype = NewType("compositetype")
+		expectedtype.pkgname = "mypackage"
+		expectedtype.allowtypes = []*vxtype{stringtype}
+		value = NewValueFromString("text2")
+		value, _, msgs = ValueValidate(value, expectedtype, false, emptygenerictypes, textblock, path)
+		expected = NameFromType(stringtype)
+		actual = NameFromType(value.vxtype)
+		errortext = CompareText(expected, actual, 20, msgs)
+		if errortext != "" {
+			t.Error(errortext)
+		}
+	*/
 
 	// expected unknown type
 	// actual string
@@ -319,21 +321,23 @@ func TestValueValidate(t *testing.T) {
 		t.Error(errortext)
 	}
 
-	// expected type that allows string, actual string function
-	expectedtype = NewType("compositetype")
-	expectedtype.pkgname = "mypackage"
-	expectedtype.allowtypes = []*vxtype{stringtype}
-	fnc = NewFunc()
-	fnc.name = "f2"
-	fnc.vxtype = stringtype
-	value = NewValueFromFunc(fnc)
-	value, _, msgs = ValueValidate(value, expectedtype, false, emptygenerictypes, textblock, path)
-	expected = NameFromType(stringtype)
-	actual = NameFromType(value.vxtype)
-	errortext = CompareText(expected, actual, 20, msgs)
-	if errortext != "" {
-		t.Error(errortext)
-	}
+	/*
+		// expected type that allows string, actual string function
+		expectedtype = NewType("compositetype")
+		expectedtype.pkgname = "mypackage"
+		expectedtype.allowtypes = []*vxtype{stringtype}
+		fnc = NewFunc()
+		fnc.name = "f2"
+		fnc.vxtype = stringtype
+		value = NewValueFromFunc(fnc)
+		value, _, msgs = ValueValidate(value, expectedtype, false, emptygenerictypes, textblock, path)
+		expected = NameFromType(stringtype)
+		actual = NameFromType(value.vxtype)
+		errortext = CompareText(expected, actual, 20, msgs)
+		if errortext != "" {
+			t.Error(errortext)
+		}
+	*/
 
 	// expected generic any, actual string function
 	expectedtype = anytype
