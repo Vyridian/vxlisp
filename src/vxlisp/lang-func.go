@@ -112,7 +112,7 @@ func LangFuncDoc(
 	doc := ""
 	argsdoc := ""
 	switch NameFromFunc(fnc) {
-	case "vx/core/copy", "vx/core/empty", "vx/core/new":
+	case "vx/core/copy", "vx/core/empty", "vx/core/new<-type":
 	default:
 		//if fnc.isgeneric {
 		//	argsdoc += "\n@param  {generic} generic_any_1"
@@ -189,7 +189,7 @@ func LangFuncFFunc(
 	path := fnc.pkgname + "/" + fnc.name + LangIndexFromFunc(fnc)
 	if fnc.isgeneric {
 		switch NameFromFunc(fnc) {
-		case "vx/core/copy", "vx/core/empty", "vx/core/new":
+		case "vx/core/copy", "vx/core/empty", "vx/core/new<-type":
 		case "vx/core/any<-any", "vx/core/any<-any-async",
 			"vx/core/any<-any-context", "vx/core/any<-any-context-async",
 			"vx/core/any<-any-key-value", "vx/core/any<-any-key-value-async",
@@ -328,7 +328,7 @@ func LangFuncFFunc(
 			}
 		}
 		switch NameFromFunc(fnc) {
-		case "vx/core/new":
+		case "vx/core/new", "vx/core/new<-type":
 			switch lang {
 			case langjava:
 				f_suppresswarnings = "\n  @SuppressWarnings(\"unchecked\")"
@@ -353,7 +353,7 @@ func LangFuncFFunc(
 		}
 		defaultvalue := ""
 		switch NameFromFunc(fnc) {
-		case "vx/core/new", "vx/core/copy", "vx/core/empty":
+		case "vx/core/new<-type", "vx/core/copy", "vx/core/empty":
 		default:
 			if fnc.async {
 				defaultvalue =
@@ -546,8 +546,8 @@ func LangFuncHeaderAll(
 		returntype = LangGenericFromType(
 			lang, fnc.generictype)
 		switch NameFromFunc(fnc) {
-		case "vx/core/new", "vx/core/copy", "vx/core/empty",
-			"f_new", "f_copy", "f_empty":
+		case "vx/core/new<-type", "vx/core/copy", "vx/core/empty",
+			"f_new_from_type", "f_copy", "f_empty":
 		default:
 			arggeneric := NewArg(
 				"generic-" + fnc.generictype.name)
@@ -1087,7 +1087,7 @@ func LangFuncValue(
 			multiline = true
 			if fnc.isgeneric {
 				switch funcname {
-				case "vx/core/new", "vx/core/copy", "vx/core/empty", "vx/core/fn":
+				case "vx/core/new<-type", "vx/core/copy", "vx/core/empty", "vx/core/fn":
 				default:
 					if fnc.generictype != nil {
 						genericarg := LangTypeTGeneric(lang, fnc.vxtype)
@@ -1694,7 +1694,7 @@ func LangFuncVxFunc(
 		var listargname []string
 		if fnc.isgeneric {
 			switch NameFromFunc(fnc) {
-			case "vx/core/copy", "vx/core/empty", "vx/core/new":
+			case "vx/core/copy", "vx/core/empty", "vx/core/new<-type":
 			case "vx/core/any<-any", "vx/core/any<-any-async",
 				"vx/core/any<-any-context", "vx/core/any<-any-context-async",
 				"vx/core/any<-any-key-value", "vx/core/any<-any-key-value-async",
@@ -1938,7 +1938,7 @@ func LangFuncVxRepl(
 		outputttype := LangTypeTSimple(lang, fnc.vxtype, true)
 		if fnc.isgeneric {
 			switch NameFromFunc(fnc) {
-			case "vx/core/copy", "vx/core/empty", "vx/core/new":
+			case "vx/core/copy", "vx/core/empty", "vx/core/new<-type":
 			default:
 				if fnc.generictype != nil {
 					replparam := LangVar(lang, "generic_"+LangFromName(fnc.generictype.name), fnc.vxtype, 3,

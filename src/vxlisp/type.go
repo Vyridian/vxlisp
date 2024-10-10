@@ -706,7 +706,10 @@ func ListTypeFromTextblock(textblock *vxtextblock, pkg *vxpackage) ([]*vxtype, *
 	return output, msgblock
 }
 
-func ListTypeLink(listtype []*vxtype, scopes []vxscope, path string) ([]*vxtype, *vxmsgblock) {
+func ListTypeLink(
+	listtype []*vxtype,
+	scopes []vxscope,
+	path string) ([]*vxtype, *vxmsgblock) {
 	msgblock := NewMsgBlock("ListTypeLink")
 	for _, typ := range listtype {
 		subpath := path + "/" + typ.name
@@ -729,11 +732,13 @@ func ListTypeLink(listtype []*vxtype, scopes []vxscope, path string) ([]*vxtype,
 		if len(typ.allowtypes) > 0 {
 			var values []*vxtype
 			for _, val := range typ.allowtypes {
-				chgval, ok := TypeOrFuncFromListScope(scopes, "", val.name, subpath)
+				chgval, ok := TypeOrFuncFromListScope(
+					scopes, "", val.name, subpath)
 				if ok {
 					values = append(values, chgval)
 				} else {
-					msg := NewMsgFromTextblock(typ.textblock, subpath, "Allowed Type Missing", val.name)
+					msg := NewMsgFromTextblock(
+						typ.textblock, subpath, "Allowed Type Missing", val.name)
 					msgblock = MsgblockAddError(msgblock, msg)
 				}
 			}
@@ -742,11 +747,13 @@ func ListTypeLink(listtype []*vxtype, scopes []vxscope, path string) ([]*vxtype,
 		if len(typ.disallowtypes) > 0 {
 			var values []*vxtype
 			for _, val := range typ.disallowtypes {
-				chgval, ok := TypeOrFuncFromListScope(scopes, "", val.name, subpath)
+				chgval, ok := TypeOrFuncFromListScope(
+					scopes, "", val.name, subpath)
 				if ok {
 					values = append(values, chgval)
 				} else {
-					msg := NewMsgFromTextblock(typ.textblock, subpath, "Disallow Type Missing", val.name)
+					msg := NewMsgFromTextblock(
+						typ.textblock, subpath, "Disallow Type Missing", val.name)
 					msgblock = MsgblockAddError(msgblock, msg)
 				}
 			}
@@ -759,7 +766,8 @@ func ListTypeLink(listtype []*vxtype, scopes []vxscope, path string) ([]*vxtype,
 				if ok {
 					values = append(values, chgval)
 				} else {
-					msg := NewMsgFromTextblock(typ.textblock, subpath, "Allowed Value Missing", val.name)
+					msg := NewMsgFromTextblock(
+						typ.textblock, subpath, "Allowed Value Missing", val.name)
 					msgblock = MsgblockAddError(msgblock, msg)
 				}
 			}
@@ -768,11 +776,13 @@ func ListTypeLink(listtype []*vxtype, scopes []vxscope, path string) ([]*vxtype,
 		if len(typ.disallowvalues) > 0 {
 			var values []*vxconst
 			for _, val := range typ.disallowvalues {
-				chgval, ok := ConstFromListScope(scopes, "", val.name)
+				chgval, ok := ConstFromListScope(
+					scopes, "", val.name)
 				if ok {
 					values = append(values, chgval)
 				} else {
-					msg := NewMsgFromTextblock(typ.textblock, subpath, "Disallow Value Missing", val.name)
+					msg := NewMsgFromTextblock(
+						typ.textblock, subpath, "Disallow Value Missing", val.name)
 					msgblock = MsgblockAddError(msgblock, msg)
 				}
 			}
@@ -781,11 +791,13 @@ func ListTypeLink(listtype []*vxtype, scopes []vxscope, path string) ([]*vxtype,
 		if len(typ.allowfuncs) > 0 {
 			var fncs []*vxfunc
 			for _, fnc := range typ.allowfuncs {
-				updatedfnc, ok := FuncFromListScope(scopes, "", fnc.name, emptysignature, subpath)
+				updatedfnc, ok := FuncFromListScope(
+					scopes, "", fnc.name, emptysignature, subpath)
 				if ok {
 					fncs = append(fncs, updatedfnc)
 				} else {
-					msg := NewMsgFromTextblock(typ.textblock, subpath, "Allowed Function Missing", fnc.name)
+					msg := NewMsgFromTextblock(
+						typ.textblock, subpath, "Allowed Function Missing", fnc.name)
 					msgblock = MsgblockAddError(msgblock, msg)
 				}
 			}
@@ -794,11 +806,14 @@ func ListTypeLink(listtype []*vxtype, scopes []vxscope, path string) ([]*vxtype,
 		if len(typ.disallowfuncs) > 0 {
 			var fncs []*vxfunc
 			for _, fnc := range typ.disallowfuncs {
-				updatedfnc, ok := FuncFromListScope(scopes, "", fnc.name, emptysignature, subpath)
+				updatedfnc, ok := FuncFromListScope(
+					scopes, "", fnc.name, emptysignature, subpath)
 				if ok {
-					fncs = append(fncs, updatedfnc)
+					fncs = append(
+						fncs, updatedfnc)
 				} else {
-					msg := NewMsgFromTextblock(typ.textblock, subpath, "Disallow Function Missing", fnc.name)
+					msg := NewMsgFromTextblock(
+						typ.textblock, subpath, "Disallow Function Missing", fnc.name)
 					msgblock = MsgblockAddError(msgblock, msg)
 				}
 			}

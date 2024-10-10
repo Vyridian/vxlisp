@@ -191,10 +191,16 @@ func TypeFromListScope(listscope []vxscope, pkgname string, typename string, pat
 	return typ, ok
 }
 
-func TypeOrFuncFromListScope(listscope []vxscope, pkgname string, typename string, path string) (*vxtype, bool) {
-	typ, ok := TypeFromListScope(listscope, pkgname, typename, path)
+func TypeOrFuncFromListScope(
+	listscope []vxscope,
+	pkgname string,
+	typename string,
+	path string) (*vxtype, bool) {
+	typ, ok := TypeFromListScope(
+		listscope, pkgname, typename, path)
 	if !ok {
-		lookupfunc, okfunc := FuncFromListScope(listscope, pkgname, typename, emptysignature, path)
+		lookupfunc, okfunc := FuncFromListScope(
+			listscope, pkgname, typename, emptysignature, path)
 		if okfunc {
 			ok = true
 			typ = NewTypeFromFunc(lookupfunc)

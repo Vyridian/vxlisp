@@ -98,7 +98,9 @@ func FuncFnSetListArg(fnc *vxfunc, listarg []vxarg) *vxfunc {
 	return fnc
 }
 
-func FuncFromTextblock(textblock *vxtextblock, pkg *vxpackage) (*vxfunc, *vxmsgblock) {
+func FuncFromTextblock(
+	textblock *vxtextblock,
+	pkg *vxpackage) (*vxfunc, *vxmsgblock) {
 	msgblock := NewMsgBlock("FuncFromTextblock")
 	fnc := NewFunc()
 	fnc.pkgname = pkg.name
@@ -114,8 +116,10 @@ func FuncFromTextblock(textblock *vxtextblock, pkg *vxpackage) (*vxfunc, *vxmsgb
 		switch i {
 		case 0:
 			if word != "func" {
-				msg := NewMsgFromTextblock(textblock, "Invalid Function:", word, "package:", pkg.name)
-				msgblock = MsgblockAddError(msgblock, msg)
+				msg := NewMsgFromTextblock(
+					textblock, "Invalid Function:", word, "package:", pkg.name)
+				msgblock = MsgblockAddError(
+					msgblock, msg)
 			}
 		case 1:
 			fnc.name = word
@@ -124,8 +128,10 @@ func FuncFromTextblock(textblock *vxtextblock, pkg *vxpackage) (*vxfunc, *vxmsgb
 			switch wordtextblock.blocktype {
 			case "/*", "//":
 			case "[":
-				listfuncarg, msgs := ListArgFromTextblock(wordtextblock, fnc, pkg)
-				msgblock = MsgblockAddBlock(msgblock, msgs)
+				listfuncarg, msgs := ListArgFromTextblock(
+					wordtextblock, fnc, pkg)
+				msgblock = MsgblockAddBlock(
+					msgblock, msgs)
 				fnc.listarg = listfuncarg
 				for _, arg := range listfuncarg {
 					if arg.vxtype.isgeneric {
@@ -341,11 +347,14 @@ func ListFuncLinkValues(
 	msgblock := NewMsgBlock("ListFuncLinkValues")
 	for _, fnc := range listfunc {
 		subpath := path + "/" + fnc.name + StringIndexFromFunc(fnc)
-		listfuncscope := ListScopeAddFuncArg(listscope, fnc)
-		value, msgs := ValueLink(fnc.value, fnc.vxtype, listfuncscope, fnc.textblock, subpath)
+		listfuncscope := ListScopeAddFuncArg(
+			listscope, fnc)
+		value, msgs := ValueLink(
+			fnc.value, fnc.vxtype, listfuncscope, fnc.textblock, subpath)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		fnc.value = value
-		listtestvalue, msgs := ListValueLink(fnc.listtestvalue, listscope, fnc.textblock, subpath+"/test")
+		listtestvalue, msgs := ListValueLink(
+			fnc.listtestvalue, listscope, fnc.textblock, subpath+"/test")
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		fnc.listtestvalue = listtestvalue
 	}
@@ -440,6 +449,9 @@ func NameFromFunc(fnc *vxfunc) string {
 	output := fnc.name
 	if fnc.pkgname != "" {
 		output = fnc.pkgname + "/" + fnc.name
+	}
+	if fnc.idx > 0 {
+		output = output + "_" + StringFromInt(fnc.idx)
 	}
 	return output
 }

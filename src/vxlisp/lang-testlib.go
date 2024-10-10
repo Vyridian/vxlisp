@@ -649,7 +649,7 @@ func LangTestLib_test_list_from_list_async(lang *vxlang) string {
 				LangVar(lang, "sparams", anylisttype, 2,
 					LangPkgNameDot(lang, "vx/core")+"vx_anylist_from_arraystring(\"hello\", \"world\")")+
 				LangVar(lang, "slist", stringlisttype, 2,
-					LangPkgNameDot(lang, "vx/core")+"f_new("+LangTypeT(lang, stringlisttype)+", sparams)")+
+					LangPkgNameDot(lang, "vx/core")+"f_new_from_type("+LangTypeT(lang, stringlisttype)+", sparams)")+
 				fn_async+
 				LangVarFuture(lang, "asynclist", stringlisttype, 2, asynclist)+
 				LangVar(lang, "sync", stringlisttype, 2,

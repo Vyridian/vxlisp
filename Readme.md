@@ -195,7 +195,7 @@ Built in Webserver, Documentation builder, Test suite, Test coverage. BigO cover
       :kidlist kidlist
       :kidmap  kidmap))
 
- Alternatively, you can use the longhand (new person) instead of (person)
+ Alternatively, you can use the longhand (new : person) instead of (person)
 
 * How do I access properties from types?
 

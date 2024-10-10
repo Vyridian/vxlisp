@@ -14,7 +14,7 @@ func TestValueValidate(t *testing.T) {
 
 	// new: (func new : any-1 [type : any-1 values : anylist :...])
 	newfunc := NewFunc()
-	newfunc.name = "new"
+	newfunc.name = "new<-type"
 	newfunc.pkgname = "vx/core"
 	newfunc.vxtype = anytype1
 	arg := NewArg("type")

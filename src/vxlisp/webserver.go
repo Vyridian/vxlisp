@@ -12,7 +12,7 @@ func WebServerStart(project *vxproject, command *vxcommand) {
 		port = 8081
 	}
 
-	MsgPrint("Webserver running on http://localhost:" + StringFromInt(port) + "/html")
+	MsgPrint("Webserver running on http://localhost:" + StringFromInt(port) + "/public")
 	http.Handle("/", http.FileServer(http.Dir(path)))
 
 	log.Fatal(http.ListenAndServe(":"+StringFromInt(port), nil))

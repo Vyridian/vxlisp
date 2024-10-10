@@ -383,7 +383,10 @@ func ValueSetType(value vxvalue, typ *vxtype) vxvalue {
 	return value
 }
 
-func ValueFromTextblock(textblock *vxtextblock, parentfunc *vxfunc, pkg *vxpackage) (vxvalue, *vxmsgblock) {
+func ValueFromTextblock(
+	textblock *vxtextblock,
+	parentfunc *vxfunc,
+	pkg *vxpackage) (vxvalue, *vxmsgblock) {
 	msgblock := NewMsgBlock("ValueFromTextblock")
 	output := NewValue()
 	text := textblock.text
@@ -573,15 +576,18 @@ func ValueLink(
 		output = ValueSetListArg(value, args)
 	case ":unknown":
 		subpath += "/" + value.name
-		lookuparg, ok := ArgFromListScope(listscope, value.name)
+		lookuparg, ok := ArgFromListScope(
+			listscope, value.name)
 		if ok {
 			argtype := lookuparg.vxtype
 			if argtype.name != "" {
-				lookuptype, ok := TypeOrFuncFromListScope(listscope, argtype.pkgname, argtype.name, subpath)
+				lookuptype, ok := TypeOrFuncFromListScope(
+					listscope, argtype.pkgname, argtype.name, subpath)
 				if ok {
 					lookuparg.vxtype = lookuptype
 				} else {
-					msg := NewMsgFromTextblock(textblock, subpath, "Arg Type Not Found", value.code, value.name, argtype.name)
+					msg := NewMsgFromTextblock(
+						textblock, subpath, "Arg Type Not Found", value.code, value.name, argtype.name)
 					msgblock = MsgblockAddError(msgblock, msg)
 				}
 			}
@@ -598,19 +604,23 @@ func ValueLink(
 					valname = valname[ipos+1:]
 				}
 			}
-			lookupconst, ok := ConstFromListScope(listscope, pkgname, valname)
+			lookupconst, ok := ConstFromListScope(
+				listscope, pkgname, valname)
 			if ok {
 				output = NewValueFromConst(lookupconst)
 			} else {
-				lookuptype, ok := TypeFromListScope(listscope, pkgname, valname, subpath)
+				lookuptype, ok := TypeFromListScope(
+					listscope, pkgname, valname, subpath)
 				if ok {
 					output = NewValueFromType(lookuptype)
 				} else {
-					lookupfunc, ok := FuncFromListScope(listscope, pkgname, valname, emptysignature, subpath)
+					lookupfunc, ok := FuncFromListScope(
+						listscope, pkgname, valname, emptysignature, subpath)
 					if ok {
 						output = NewValueFromFuncRef(lookupfunc)
 					} else {
-						msg := NewMsgFromTextblock(textblock, subpath, "Value Not Found", value.code, pkgname, valname)
+						msg := NewMsgFromTextblock(
+							textblock, subpath, "Value Not Found", value.code, pkgname, valname)
 						msgblock = MsgblockAddError(msgblock, msg)
 					}
 				}
@@ -631,13 +641,13 @@ func ValueLink(
 				fnc.name = lookuptype.name
 			}
 		}
-
 		functype := fnc.vxtype
 		if functype.name == "" {
 			functype = expectedtype
 		}
 		if functype.name != "" {
-			lookuptype, ok := TypeOrFuncFromListScope(listscope, functype.pkgname, functype.name, subpath)
+			lookuptype, ok := TypeOrFuncFromListScope(
+				listscope, functype.pkgname, functype.name, subpath)
 			if ok {
 				fnc.vxtype = lookuptype
 				if lookuptype.isgeneric {
@@ -750,11 +760,13 @@ func ValueLink(
 							typearg := NewArgFromType(lookuptype)
 							origfunc.listarg = []vxarg{typearg}
 						} else {
-							msg := NewMsgFromTextblock(textblock, subpath, "Empty Function Not Found")
-							msgblock = MsgblockAddError(msgblock, msg)
+							msg := NewMsgFromTextblock(
+								textblock, subpath, "Empty Function Not Found")
+							msgblock = MsgblockAddError(
+								msgblock, msg)
 						}
 					} else {
-						// (type arg1 argn) -> (new type arg1 argn)
+						// (type arg1 argn) -> (new : type arg1 argn)
 						lookupfunc, ok := FuncFromListScope(
 							listscope, "", "new", emptysignature, subpath)
 						if ok {
@@ -762,23 +774,30 @@ func ValueLink(
 							fnc.textblock = origfunc.textblock
 							fnc.debug = origfunc.debug
 							fnc = FuncSetType(fnc, lookuptype)
-							typearg := NewArgFromType(lookuptype)
-							origfunc.listarg = append([]vxarg{typearg}, origfunc.listarg...)
+							//typearg := NewArgFromType(lookuptype)
+							//origfunc.listarg = append([]vxarg{typearg}, origfunc.listarg...)
 						} else {
-							msg := NewMsgFromTextblock(textblock, subpath, "New Function Not Found")
-							msgblock = MsgblockAddError(msgblock, msg)
+							msg := NewMsgFromTextblock(
+								textblock, subpath, "New Function Not Found")
+							msgblock = MsgblockAddError(
+								msgblock, msg)
 						}
 					}
 				} else {
-					msg := NewMsgFromTextblock(textblock, subpath, "Function Not Found", origfunc.name)
-					msgblock = MsgblockAddError(msgblock, msg)
+					msg := NewMsgFromTextblock(
+						textblock, subpath, "Function Not Found", origfunc.name)
+					msgblock = MsgblockAddError(
+						msgblock, msg)
 				}
 			}
 		}
-		chgargs, msgs = ListArgMergeValues(origfunc.listarg, fnc.listarg, textblock, subpath)
-		msgblock = MsgblockAddBlock(msgblock, msgs)
+		chgargs, msgs = ListArgMergeValues(
+			origfunc.listarg, fnc.listarg, textblock, subpath)
+		msgblock = MsgblockAddBlock(
+			msgblock, msgs)
 		fnc.listarg = chgargs
-		output = ValueSetFunc(output, fnc)
+		output = ValueSetFunc(
+			output, fnc)
 	}
 	return output, msgblock
 }

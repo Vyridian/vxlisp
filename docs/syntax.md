@@ -57,7 +57,7 @@
 
 ## New and Copy
 
-* (new {type} {args}) or ({type} {args})
+* (new : {type} {args}) or ({type} {args})
 
 * (copy {any} {args})
 

@@ -208,13 +208,13 @@ vxlisp handles the problem of multiple inheritence in a similar way to Scala tra
 
 ## Constructors
 
-All values are created through the (new {type} {args}) function or just ({type} {args}).
+All values are created through the (new : {type} {args}) function or just ({type} {args}).
 
-* "ab" is the same as (new string "ab") is the same as (string "ab")
+* "ab" is the same as (new : string "ab") is the same as (string "ab")
 * 4 is the same as (new int 4) or (int 4)
-* (new stringlist "a" "b") is the same as (stringlist "a" "b")
-* (new stringmap :foo "a" :bar "b") is the same as (stringmap :foo "a" :bar "b")
-* (new foobar :foo "a" :bar "b") is the same as (foolbar :foo "a" :bar "b")
+* (new : stringlist "a" "b") is the same as (stringlist "a" "b")
+* (new : stringmap :foo "a" :bar "b") is the same as (stringmap :foo "a" :bar "b")
+* (new : foobar :foo "a" :bar "b") is the same as (foolbar :foo "a" :bar "b")
 
 ## Empty Types
 

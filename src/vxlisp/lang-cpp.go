@@ -617,8 +617,7 @@ func CppBodyFromFunc(lang *vxlang, fnc *vxfunc) (string, string, string, *vxmsgb
 	genericdefinition := CppGenericDefinitionFromFunc(lang, fnc)
 	if fnc.isgeneric {
 		switch NameFromFunc(fnc) {
-		//		case "vx/core/copy", "vx/core/empty", "vx/core/new":
-		case "vx/core/new", "vx/core/empty",
+		case "vx/core/new<-type", "vx/core/empty",
 			"vx/core/boolean<-any":
 		case "vx/core/any<-any", "vx/core/any<-any-async",
 			"vx/core/any<-any-context", "vx/core/any<-any-context-async",
@@ -988,7 +987,7 @@ func CppBodyFromFunc(lang *vxlang, fnc *vxfunc) (string, string, string, *vxmsgb
 	}
 	defaultvalue := ""
 	switch NameFromFunc(fnc) {
-	case "vx/core/new", "vx/core/copy", "vx/core/empty":
+	case "vx/core/new<-type", "vx/core/copy", "vx/core/empty":
 	default:
 		if fnc.async {
 			defaultvalue = lineindent + "vx_core::vx_Type_async output = NULL;"
@@ -2481,7 +2480,7 @@ func CppFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc,
 			if !isskip {
 				if fnc.isgeneric {
 					switch funcname {
-					case "vx/core/new", "vx/core/copy", "vx/core/empty", "vx/core/fn":
+					case "vx/core/new<-type", "vx/core/copy", "vx/core/empty", "vx/core/fn":
 					default:
 						if fnc.generictype != nil {
 							genericarg := CppNameTFromTypeGeneric(lang, fnc.vxtype)
@@ -3523,8 +3522,7 @@ func CppHeaderFromFunc(lang *vxlang, fnc *vxfunc) (string, string) {
 	if fnc.generictype != nil {
 		returntype = CppPointerDefFromClassName(CppGenericFromType(lang, fnc.generictype))
 		switch NameFromFunc(fnc) {
-		case "vx/core/new", "vx/core/empty":
-			//		case "vx/core/new", "vx/core/copy", "vx/core/empty":
+		case "vx/core/new<-type", "vx/core/empty":
 		default:
 			listargtext = append(listargtext, returntype+" generic_any_1")
 		}
@@ -3843,8 +3841,7 @@ func CppReplFromFunc(lang *vxlang, fnc *vxfunc) string {
 	returnvalue = "output = "
 	if fnc.isgeneric {
 		switch NameFromFunc(fnc) {
-		case "vx/core/new", "vx/core/empty":
-			//		case "vx/core/copy", "vx/core/empty", "vx/core/new":
+		case "vx/core/new<-type", "vx/core/empty":
 		default:
 			if fnc.generictype != nil {
 				replparam := outputtype + " generic_" + LangFromName(fnc.generictype.name) + " = vx_core::vx_any_from_any(" + outputttype + ", arglist->vx_get_any(vx_core::vx_new_int(" + StringFromInt(argidx) + ")));"
@@ -4824,7 +4821,7 @@ namespace test_lib {
             vx_test::f_test(
  													context,
 	 												vx_core::vx_new_decimal_from_string("4.5"),
-              vx_core::f_new(
+              vx_core::f_new_from_type(
                 vx_core::t_float,
                 vx_core::vx_new(vx_core::t_anylist, {
                   vx_core::vx_new_decimal_from_string("4.5")

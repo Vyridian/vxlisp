@@ -13,14 +13,19 @@ func NewSignature() *vxsignature {
 	return new(vxsignature)
 }
 
-func NewTypeFromSignature(typ *vxtype) *vxsignature {
+func NewTypeFromSignature(
+	typ *vxtype) *vxsignature {
 	output := NewSignature()
 	output.name = NameFromType(typ)
 	output.vxtype = typ
 	return output
 }
 
-func IsSignatureMatch(template *vxsignature, actual *vxsignature, index int, path string) bool {
+func IsSignatureMatch(
+	template *vxsignature,
+	actual *vxsignature,
+	index int,
+	path string) bool {
 	var output = true
 	templatelen := len(template.listsignature)
 	actuallen := len(actual.listsignature)
@@ -35,7 +40,8 @@ func IsSignatureMatch(template *vxsignature, actual *vxsignature, index int, pat
 			} else {
 				templatesignature = template.listsignature[i]
 			}
-			output = IsSignatureMatch(templatesignature, actualsignature, i, path)
+			output = IsSignatureMatch(
+				templatesignature, actualsignature, i, path)
 		}
 	} else if actualtype.isfunc && NameFromType(templatetype) == "vx/core/any" {
 		output = true
@@ -49,7 +55,8 @@ func IsSignatureMatch(template *vxsignature, actual *vxsignature, index int, pat
 			//} else if len(template.listgeneric) > 0 {
 			//	_, output, _ = BooleanTypeGenericMatch(templatetype, actualtype, multi, index, path)
 		} else {
-			_, output, _ = BooleanMatchFromTypeType(templatetype, actualtype, multi, index, path)
+			_, output, _ = BooleanMatchFromTypeType(
+				templatetype, actualtype, multi, index, path)
 		}
 	} else if templatelen == 0 || actuallen == 0 {
 		output = false
@@ -68,7 +75,8 @@ func IsSignatureMatch(template *vxsignature, actual *vxsignature, index int, pat
 				} else {
 					templatesignature = template.listsignature[i]
 				}
-				ispass := IsSignatureMatch(templatesignature, actualsignature, i, path)
+				ispass := IsSignatureMatch(
+					templatesignature, actualsignature, i, path)
 				if !ispass {
 					output = false
 					break
@@ -79,7 +87,8 @@ func IsSignatureMatch(template *vxsignature, actual *vxsignature, index int, pat
 		output = true
 		for i, actualsignature := range actual.listsignature {
 			templatesignature := template.listsignature[i]
-			ispass := IsSignatureMatch(templatesignature, actualsignature, i, path)
+			ispass := IsSignatureMatch(
+				templatesignature, actualsignature, i, path)
 			if !ispass {
 				output = false
 			}
@@ -88,13 +97,16 @@ func IsSignatureMatch(template *vxsignature, actual *vxsignature, index int, pat
 	return output
 }
 
-func SignatureFromFunc(fnc *vxfunc, path string) *vxsignature {
+func SignatureFromFunc(
+	fnc *vxfunc,
+	path string) *vxsignature {
 	var output = NewSignature()
 	output.name = NameFromFunc(fnc)
 	output.idx = fnc.idx
 	output.vxtype = fnc.vxtype
 	var listsignature []*vxsignature
-	listsignature = append(listsignature, NewTypeFromSignature(fnc.vxtype))
+	listsignature = append(
+		listsignature, NewTypeFromSignature(fnc.vxtype))
 	switch NameFromFunc(fnc) {
 	case "vx/core/fn":
 		fnargs := FuncFnGetArgList(fnc)
@@ -104,7 +116,8 @@ func SignatureFromFunc(fnc *vxfunc, path string) *vxsignature {
 			if arg.multi {
 				argsignature.multi = true
 			}
-			listsignature = append(listsignature, argsignature)
+			listsignature = append(
+				listsignature, argsignature)
 		}
 	default:
 		for _, arg := range fnc.listarg {
@@ -118,12 +131,14 @@ func SignatureFromFunc(fnc *vxfunc, path string) *vxsignature {
 			if argtype.isfunc {
 				argfunc := argtype.vxfunc
 				subpath := path + "/" + argfunc.name
-				argsignature = SignatureFromFunc(argfunc, subpath)
+				argsignature = SignatureFromFunc(
+					argfunc, subpath)
 				argsignature.vxtype = argtype
 			} else if argvalue.code == ":func" && argvalue.name == "fn" {
 				argfunc := FuncFromValue(argvalue)
 				subpath := path + "/" + argfunc.name
-				argsignature = SignatureFromFunc(argfunc, subpath)
+				argsignature = SignatureFromFunc(
+					argfunc, subpath)
 				argsignature.vxtype = argtype
 			} else {
 				argsignature = NewTypeFromSignature(argtype)
@@ -132,7 +147,8 @@ func SignatureFromFunc(fnc *vxfunc, path string) *vxsignature {
 			if arg.multi {
 				argsignature.multi = true
 			}
-			listsignature = append(listsignature, argsignature)
+			listsignature = append(
+				listsignature, argsignature)
 		}
 	}
 	if len(listsignature) > 0 {

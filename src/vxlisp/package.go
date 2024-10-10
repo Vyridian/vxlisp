@@ -119,11 +119,14 @@ func ListPackageLink(
 		pkgname := pkg.name
 		path := pkgname
 		scopes := ListScopeFromPackage(pkg, pkgmap)
-		_, msgs := ListTypeLinkValues(pkg.listtype, scopes, path)
+		_, msgs := ListTypeLinkValues(
+			pkg.listtype, scopes, path)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
-		_, msgs = ListConstLinkValues(pkg.listconst, scopes, path)
+		_, msgs = ListConstLinkValues(
+			pkg.listconst, scopes, path)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
-		_, msgs = ListFuncLinkValues(pkg.listfunc, scopes, path)
+		_, msgs = ListFuncLinkValues(
+			pkg.listfunc, scopes, path)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 	}
 	return listpackage, msgblock
@@ -237,7 +240,8 @@ func ListPackageValidateLibraries(
 					lib.path = prjlib.path
 					lib.lang = prjlib.lang
 				} else {
-					msg := NewMsgFromTextblock(pkg.textblock, "Package Path Not Found in Project", StringFromLibrary(lib))
+					msg := NewMsgFromTextblock(
+						pkg.textblock, "Package Path Not Found in Project", StringFromLibrary(lib))
 					msgblock = MsgblockAddError(msgblock, msg)
 				}
 			}
