@@ -189,16 +189,20 @@
   }
 
   // vx_new(generic_any_1, args...)
-  public static <T extends Core.Type_any> T vx_new(final T generic_any_1, final Object... vals) {
-    Core.Type_any val = generic_any_1.vx_new(vals);
-    T output = Core.f_any_from_any(generic_any_1, val);
+  public static <T extends Core.Type_any> T vx_new(
+    final T generic_any_1,
+    final Object... values) {
+    Core.Type_any value = generic_any_1.vx_new(values);
+    T output = Core.f_any_from_any(generic_any_1, value);
     return output;
   }
 
   // vx_copy(generic_any_1, args...)
-  public static <T extends Core.Type_any> T vx_copy(final T copyval, final Object... vals) {
-    Core.Type_any val = copyval.vx_copy(vals);
-    T output = Core.f_any_from_any(copyval, val);
+  public static <T extends Core.Type_any> T vx_copy(
+    final T copyval,
+    final Object... values) {
+    Core.Type_any value = copyval.vx_copy(values);
+    T output = Core.f_any_from_any(copyval, value);
     return output;
   }
 

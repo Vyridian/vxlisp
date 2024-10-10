@@ -75,6 +75,6 @@
 
   static vx_stringlist_from_string_split(text, delim) {
     const liststring = text.split(delim)
-    const output = vx_core.f_new(vx_core.t_stringlist, ...liststring)
+    const output = vx_core.f_new_from_type(vx_core.t_stringlist, ...liststring)
     return output
   }

@@ -16,7 +16,7 @@
 (type delimlist : list
  :allowtypes [delim]
  :test (test
-        (new delimlist
+        (new : delimlist
          delimcomma
          delimwhitespace)
         (delimlist

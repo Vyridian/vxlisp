@@ -225,13 +225,14 @@
   }
 
   static vx_list_from_map_fn(
-    generic_list_1, valuemap, fn_any_from_key_value) {
+    generic_list_1,
+    valuemap,fn_any_from_key_value) {
     let output = vx_core.f_empty(generic_list_1)
     const fn = fn_any_from_key_value['vx_value']
     if (fn) {
       const entries = Object.entries(valuemap['vx_value'])
       const values = entries.map(fn)
-      output = vx_core.f_new(generic_list_1, ...values)
+      output = vx_core.f_new_from_type(generic_list_1, ...values)
     }
     return output
   }
@@ -259,7 +260,7 @@
           values.push(chgvalue)
         }
       }
-      output = vx_core.f_new(generic_map_1, ...values)
+      output = vx_core.f_new_from_type(generic_map_1, ...values)
     }
     return output
   }
@@ -629,7 +630,9 @@
                     value: vx_core.vx_string_from_any(value)
                   })
                 )
-                msgblock = vx_core.f_msgblock_from_msgblock_msg(msgblock, msg)
+                msgblock = vx_core.f_msgblock_from_msgblock_msg(
+                  msgblock, msg
+                )
                 break
               }
             }
@@ -666,13 +669,13 @@
         values.map(value => {
           const valuetype = vx_core.f_type_from_any(value)
           let isfound = false
-          if (vx_core.f_is_empty(value)) {
+          if (allowany) {
+            listvals.push(value)
+            isfound = true
+          } else if (vx_core.f_is_empty(value)) {
             isfound = true
           } else if (typedef == valuetype) {
             listvals.push(...value)
-            isfound = true
-          } else if (allowany) {
-            listvals.push(value)
             isfound = true
           } else if (allowtypes.includes(valuetype)) {
             listvals.push(value)
@@ -1007,6 +1010,12 @@
       }
       break
     }
+    return output
+  }
+
+  static vx_new_1(
+    generic_any_1, values) {
+    let output = vx_core.vx_new(generic_any_1, values)
     return output
   }
 

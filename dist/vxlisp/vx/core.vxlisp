@@ -251,6 +251,11 @@
 
 (type funclist : list
  :allowtypes [func]
+ :test (test
+        2
+        (length
+         (funclist
+          + -)))
  :doc "List of Func.")
 
 (type funcmap : map
@@ -550,6 +555,12 @@
 
 (type stringlist : list
  :allowtypes [string]
+ :test (test
+        (new : stringlist "a" "b" "c")
+        (stringlist
+         (anylist
+          "a"
+          (stringlist "b" "c"))))
  :doc "A list of string.")
 
 (type stringlistlist : list
@@ -1072,11 +1083,11 @@
        (test-true
         (=
          (stringlist "a" "b" "c")
-         (new stringlist "a" "b" "c")))
+         (new : stringlist "a" "b" "c")))
        (test-true
         (=
          (stringmap :a "1" :b "2")
-         (new stringmap :a "1" :b "2")))
+         (new : stringmap :a "1" :b "2")))
  :doc "Boolean equal/equivalent")
 
 (func = : boolean
@@ -1927,7 +1938,7 @@
     Object[] arrayobj = (Core.Type_any[])arrayany;
     T output = (T)(value.vx_copy(arrayobj));"
   :js
-   "vx_core.f_new(value, ...values)"
+   "vx_core.f_new_from_type(value, ...values)"
   :kotlin
    "val arrayany : Array<vx_core.Type_any> = vx_core.arrayany_from_anylist(
       values
@@ -2746,21 +2757,33 @@
   fn-any<-any : any<-any]
  (native
   :cpp
-   "vx_core::Type_any list = vx_core::vx_list_join_from_list_fn(generic_list_1, values, fn_any_from_any);
-    output = vx_core::vx_any_from_any(generic_list_1, list);"
+   "vx_core::Type_any list = vx_core::vx_list_join_from_list_fn(
+      generic_list_1,
+      values,
+      fn_any_from_any
+    );
+    output = vx_core::vx_any_from_any(
+      generic_list_1,
+      list
+    );"
   :csharp :auto
   :java
    "List<Core.Type_any> list_value = values.vx_list();
     List<Core.Type_any> list_result = new ArrayList<>();
     for (Core.Type_any val : list_value) {
-      Core.Type_any listoflist = fn_any_from_any.vx_any_from_any(generic_list_1, val);
+      Core.Type_any listoflist = fn_any_from_any.vx_any_from_any(
+        generic_list_1, val
+      );
       if (listoflist instanceof Core.Type_list) {
         Core.Type_list vallist = (Core.Type_list)listoflist;
         List<Core.Type_any> listval = vallist.vx_list();
         list_result.addAll(listval);
       }
     }
-    output = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(list_result));"
+    output = Core.f_any_from_any(
+      generic_list_1,
+      generic_list_1.vx_new(list_result)
+    );"
   :js
    "const fn = fn_any_from_any['vx_value']
     if (fn) {
@@ -3007,6 +3030,39 @@
   :doc "Returns native value of value object")
 
 (func new : any-1
+ [values : anylist :...]
+ (native
+  :cpp
+   "output = vx_core::vx_new(generic_any_1, values->vx_list());"
+  :csharp
+   "Vx.Core.Type_any[] arrayany = Vx.Core.arrayany_from_anylist(values);
+    object[] arrayobj = (Vx.Core.Type_any[])arrayany;
+    output = (T)(generic_any_1.vx_new(arrayobj));"
+  :java
+   "Core.Type_any[] arrayany = Core.arrayany_from_anylist(values);
+    Object[] arrayobj = (Core.Type_any[])arrayany;
+    output = (T)(generic_any_1.vx_new(arrayobj));"
+  :js
+   "vx_core.vx_new(generic_any_1, values)"
+  :kotlin
+   "val arrayany : Array<vx_core.Type_any> = vx_core.arrayany_from_anylist(
+      values
+    )
+    val anyvalue : vx_core.Type_any = generic_any_1.vx_new(*arrayany)
+    output = anyvalue as T")
+ :test (test true (new : boolean true))
+       (test 4 (new : int 4))
+       (test 5.4 (new : float 5.4))
+       (test "a" (new : string "a"))
+       (test
+        (stringlist "a" "b" "c")
+        (new : stringlist "a" "b" "c"))
+       (test
+        (stringmap :a "1" :b "2")
+        (new : stringmap :a "1" :b "2"))
+ :doc "Create a new Value of Type A")
+
+(func new<-type : any-1
  [type   : any-1
   values : anylist :...]
  (native
@@ -3028,17 +3084,17 @@
     )
     val anyvalue : vx_core.Type_any = type.vx_new(*arrayany)
     val output : T = anyvalue as T")
- :doc "Create a new Value of Type A"
- :test (test true (new boolean true))
-       (test 4 (new int 4))
-       (test 5.4 (new float 5.4))
-       (test "a" (new string "a"))
+ :test (test true (new<-type boolean true))
+       (test 4 (new<-type int 4))
+       (test 5.4 (new<-type float 5.4))
+       (test "a" (new<-type string "a"))
        (test
         (stringlist "a" "b" "c")
-        (new stringlist "a" "b" "c"))
+        (new<-type stringlist "a" "b" "c"))
        (test
         (stringmap :a "1" :b "2")
-        (new stringmap :a "1" :b "2")))
+        (new<-type stringmap :a "1" :b "2"))
+ :doc "Create a new Value of Type A")
 
 (func number<-func : number
  []

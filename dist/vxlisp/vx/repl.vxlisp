@@ -110,7 +110,7 @@
      repltype
      args))
    (else
-    (new repltype args))))
+    (new<-type repltype args))))
  :context
  :test (test
         "HelloWorld"
@@ -1029,7 +1029,7 @@
      repltype
      args))
    (else
-    (new repltype args))))
+    (new<-type repltype args))))
  :async
  :context
  :doc "Run an arbitrary program in the REPL.")

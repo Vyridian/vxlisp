@@ -123,7 +123,7 @@
         }
       })
       //const type = vx_core.f_type_from_any(output)
-      output = vx_core.f_new(generic_list_1, ...items)
+      output = vx_core.f_new_from_type(generic_list_1, ...items)
     }
     return output
   }
@@ -167,7 +167,7 @@
         values.push(key)
         values.push(value)
       }
-      output = vx_core.f_new(generic_map_1, ...values)
+      output = vx_core.f_new_from_type(generic_map_1, ...values)
     }
     return output
   }
