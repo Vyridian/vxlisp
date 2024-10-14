@@ -197,6 +197,16 @@
     return output;
   }
 
+  // vx_constdef<-any(any)
+  public static Core.Type_constdef vx_constdef_from_any(
+    final Core.Type_any value) {
+    Core.Type_constdef output = value.vx_constdef();
+    if (output == null) {
+      output = Core.e_constdef;
+    }
+    return output;
+  }
+
   // vx_copy(generic_any_1, args...)
   public static <T extends Core.Type_any> T vx_copy(
     final T copyval,

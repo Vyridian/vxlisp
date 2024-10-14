@@ -1,5 +1,6 @@
 (package vx/test
- :libs (lib file :path vx/data/file)
+ :libs (lib coll :path vx/collection)
+       (lib file :path vx/data/file)
        (lib html :path vx/web/html)
  :doc  "Test Suite builder")
 
@@ -698,7 +699,7 @@
 
 (func trlist<-testcaselist : trlist
  [testcaselist : testcaselist]
- (list-join<-list : trlist
+ (list<-list-join : trlist
   testcaselist
   trlist<-testcase)
  :doc "Returns a trlist from a testcaselist.")

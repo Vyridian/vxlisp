@@ -214,7 +214,7 @@ func JsFromConst(
 	case "vx/core/string":
 		startval = value
 	default:
-		startval = "{vx_type: " + LangTypeT(lang, cnsttype) + ", vx_constdef: {pkgname: '" + cnst.pkgname + "', name: '" + cnst.name + "'}}"
+		startval = "{vx_type: " + LangTypeT(lang, cnsttype) + ", vx_constdef: {pkgname: '" + cnst.pkgname + "', name: '" + cnst.name + "', type: " + LangTypeT(lang, cnsttype) + "}}"
 		switch cnst.vxtype.extends {
 		case ":list":
 			startval = "Object.assign([], " + startval + ")"

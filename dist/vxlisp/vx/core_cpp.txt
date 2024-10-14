@@ -202,10 +202,15 @@ let-async
     vx_core::Type_any val1,
     vx_core::Type_any val2);
 
+  // vx_constdef<-any(any)
+  vx_core::Type_constdef vx_constdef(
+    vx_core::Type_any value);
+
   // vx_constdefnew(string, string)
   vx_core::Type_constdef vx_constdef_new(
     std::string pkgname,
-    std::string name);
+    std::string name,
+    vx_core::Type_any typ);
 
   // vx_eqeq(any, any)
   bool vx_eqeq(
@@ -986,13 +991,17 @@ let-async
   }
 
   // vx_compare(any, any)
-  long vx_compare(vx_core::Type_any val1, vx_core::Type_any val2) {
+  long vx_compare(
+    vx_core::Type_any val1,
+    vx_core::Type_any val2) {
     long output = 0;
     vx_core::Type_boolean isnumber1 = vx_core::f_is_number(val1);
     vx_core::Type_boolean isnumber2 = vx_core::f_is_number(val2);
     if (isnumber1->vx_boolean() && isnumber2->vx_boolean()) {
-      vx_core::Type_number num1 = vx_core::vx_any_from_any(vx_core::t_number, val1);
-      vx_core::Type_number num2 = vx_core::vx_any_from_any(vx_core::t_number, val2);
+      vx_core::Type_number num1 = vx_core::vx_any_from_any(
+        vx_core::t_number, val1);
+      vx_core::Type_number num2 = vx_core::vx_any_from_any(
+        vx_core::t_number, val2);
       float float1 = vx_core::vx_float_from_number(num1);
       float float2 = vx_core::vx_float_from_number(num2);
       if (float1 < float2) {
@@ -1014,16 +1023,32 @@ let-async
     return output;
   }
 
+  // vx_constdef<-any(any)
+  vx_core::Type_constdef vx_constdef_from_any(
+    vx_core::Type_any value) {
+    vx_core::Type_constdef output = value->vx_constdef();
+    if (output == nullptr) {
+      output = vx_core::e_constdef;
+    }
+    return output;
+  }
+
   // vx_constdefnew(string, string)
-  vx_core::Type_constdef vx_constdef_new(std::string pkgname, std::string name) {
+  vx_core::Type_constdef vx_constdef_new(
+    std::string pkgname,
+    std::string name,
+    vx_core::Type_any typ) {
     vx_core::Type_constdef output = new vx_core::Class_constdef();
     output->vx_p_pkgname = vx_core::vx_new_string(pkgname);
     output->vx_p_name = vx_core::vx_new_string(name);
+    output->vx_p_type = typ;
     return output;
   }
 
   // vx_eqeq(any, any)
-  bool vx_eqeq(vx_core::Type_any val1, vx_core::Type_any val2) {
+  bool vx_eqeq(
+    vx_core::Type_any val1,
+    vx_core::Type_any val2) {
     bool output = false;
     if (val1 == val2) {
       output = true;
@@ -1063,7 +1088,8 @@ let-async
   }
 
   // vx_float_from_number(number)
-  float vx_float_from_number(vx_core::Type_number num) {
+  float vx_float_from_number(
+    vx_core::Type_number num) {
     float output = 0;
     vx_core::Type_any type = num->vx_type();
     if (type == vx_core::t_float) {
@@ -1080,7 +1106,8 @@ let-async
   }
 
   // vx_float_from_string(string)
-  float vx_float_from_string(std::string text) {
+  float vx_float_from_string(
+    std::string text) {
     float output = std::stof(text);
     return output;
   }
@@ -1179,7 +1206,8 @@ let-async
   }
 
   // vx_is_float(string)
-  bool vx_is_float(std::string value) {
+  bool vx_is_float(
+    std::string value) {
     bool output = true;
     bool isfirst = true;
     bool isdecimal = false;
@@ -1201,7 +1229,8 @@ let-async
   }
 
   // vx_is_float(any)
-  bool vx_is_float(vx_core::Type_any value) {
+  bool vx_is_float(
+    vx_core::Type_any value) {
     bool output = true;
     vx_core::Type_any typ = vx_core::f_type_from_any(value);
     if (typ == vx_core::t_int) {
@@ -1218,7 +1247,8 @@ let-async
   }
 
   // vx_is_int(string)
-  bool vx_is_int(std::string value) {
+  bool vx_is_int(
+    std::string value) {
     bool output = true;
     if (value == "notanumber") {
       output = true;
@@ -1241,7 +1271,8 @@ let-async
   }
 
   // vx_is_int(any)
-  bool vx_is_int(vx_core::Type_any value) {
+  bool vx_is_int(
+    vx_core::Type_any value) {
     bool output = false;
     if (value == vx_core::c_infinity) {
       output = true;
@@ -1273,14 +1304,18 @@ let-async
   }
 
   // vx_list_from_array(arrayval)
-  vx_core::vx_Type_listany vx_list_from_array(vx_core::vx_Type_listarg vals) {
+  vx_core::vx_Type_listany vx_list_from_array(
+    vx_core::vx_Type_listarg vals) {
     vx_core::vx_Type_listany output;
     output = vx_core::vx_Type_listany{vals};
     return output;
   }
 
   // vx_list_from_list_intany_helper(generic_list_1, list-2, any<-int-any)
-  vx_core::Type_list vx_list_from_list_intany_helper(vx_core::Type_list generic_list_1, vx_core::Type_list valuelist, vx_core::Func_any_from_int_any fn_any_from_int_any) {
+  vx_core::Type_list vx_list_from_list_intany_helper(
+    vx_core::Type_list generic_list_1,
+    vx_core::Type_list valuelist,
+    vx_core::Func_any_from_int_any fn_any_from_int_any) {
     vx_core::Type_list output = vx_core::vx_empty(generic_list_1);
     std::vector<vx_core::Type_any> listany = valuelist->vx_list();
     long size = vx_core::vx_int_from_sizet(listany.size());
@@ -1300,7 +1335,10 @@ let-async
   }
 
   // vx_list_from_map_1(generic_list_1, map, fn-any<-key-value)
-  vx_core::Type_any vx_list_from_map_1(vx_core::Type_any generic_list_1, vx_core::Type_map valuemap, vx_core::Func_any_from_key_value fn_any_from_key_value) {
+  vx_core::Type_any vx_list_from_map_1(
+    vx_core::Type_any generic_list_1,
+    vx_core::Type_map valuemap,
+    vx_core::Func_any_from_key_value fn_any_from_key_value) {
     std::vector<std::string> keys = valuemap->vx_p_keys;
     vx_core::vx_Type_mapany map_value = valuemap->vx_map();
     vx_core::vx_Type_listany list_result;
@@ -1318,17 +1356,23 @@ let-async
   }
 
   // vx_list_join_from_list_fn(generic_list_1, list, fn-any<-any)
-  vx_core::Type_any vx_list_join_from_list_fn(vx_core::Type_any generic_list_1, vx_core::Type_list values, vx_core::Func_any_from_any fn_any_from_any) {
+  vx_core::Type_any vx_list_join_from_list_fn(
+    vx_core::Type_any generic_list_1,
+    vx_core::Type_list values,
+    vx_core::Func_any_from_any fn_any_from_any) {
     vx_core::vx_Type_listany list_value = values->vx_list();
     vx_core::vx_Type_listany list_result;
     for (vx_core::Type_any val : list_value) {
-      vx_core::Type_any listoflist = fn_any_from_any->vx_any_from_any(val);
+      vx_core::Type_any listoflist = fn_any_from_any->vx_any_from_any(
+        val);
       vx_core::vx_reserve(listoflist);
-      vx_core::Type_string extends = vx_core::f_extends_from_any(listoflist);
+      vx_core::Type_string extends = vx_core::f_extends_from_any(
+        listoflist);
       std::string sextends = extends->vx_string();
       vx_core::vx_release(extends);
       if (sextends == ":list") {
-        vx_core::Type_list vallist = vx_core::vx_any_from_any(vx_core::t_list, listoflist);
+        vx_core::Type_list vallist = vx_core::vx_any_from_any(
+          vx_core::t_list, listoflist);
         vx_core::vx_Type_listany listval = vallist->vx_list();
         vx_core::vx_reserve(listval);
         for (vx_core::Type_any val : listval) {
@@ -1368,7 +1412,9 @@ let-async
   }
 
   // vx_liststring_from_arraystring(long, array<string>)
-  std::vector<std::string> vx_liststring_from_arraystring(long ilen, char* arraystring[]) {
+  std::vector<std::string> vx_liststring_from_arraystring(
+    long ilen,
+    char* arraystring[]) {
     std::vector<std::string> output;
     output.reserve(ilen);
     if (ilen > 0) {
@@ -1383,17 +1429,20 @@ let-async
   }
 
   // vx_log(int)
-  void vx_log(long ival) {
+  void vx_log(
+    long ival) {
     std::cout << ival << std::endl;
   }
 
   // vx_log(text)
-  void vx_log(std::string sval) {
+  void vx_log(
+    std::string sval) {
     std::cout << sval << std::endl;
   }
 
   // vx_log(any)
-  void vx_log(vx_core::Type_any val) {
+  void vx_log(
+    vx_core::Type_any val) {
     if (!val) {
       vx_core::vx_log("null");
     } else {
@@ -1403,7 +1452,8 @@ let-async
   }
 
   // vx_log(async)
-  void vx_log(vx_core::vx_Type_async async) {
+  void vx_log(
+    vx_core::vx_Type_async async) {
     if (!async) {
       vx_core::vx_log("null");
     } else {
@@ -1457,13 +1507,16 @@ let-async
     vx_core::Func_any_from_any fn_any_from_any) {
     vx_core::vx_Type_mapany output;
     for (vx_core::Type_any item : listany) {
-      vx_core::Type_any keyany = fn_any_from_any->vx_any_from_any(item);
+      vx_core::Type_any keyany = fn_any_from_any->vx_any_from_any(
+        item);
       std::string key = "";
       if (keyany->vx_type() == vx_core::t_string) {
-        vx_core::Type_string keystring = vx_core::vx_any_from_any(vx_core::t_string, keyany);
+        vx_core::Type_string keystring = vx_core::vx_any_from_any(
+          vx_core::t_string, keyany);
         key = keystring->vx_string();
       } else {
-        key = vx_core::vx_string_from_any(item);
+        key = vx_core::vx_string_from_any(
+          item);
       }
       vx_core::vx_release(keyany);
       if (key != "") {
@@ -1551,7 +1604,8 @@ let-async
   vx_core::Type_msg vx_msg_from_errortext(
     const std::string errortext) {
     vx_core::Type_msg output = new vx_core::Class_msg();
-    vx_core::Type_string string_error = vx_core::vx_new_string(errortext);
+    vx_core::Type_string string_error = vx_core::vx_new_string(
+      errortext);
     vx_core::vx_reserve(string_error);
     output->vx_p_text = string_error;
     output->vx_p_severity = vx_core::c_msg_severe;
@@ -1579,7 +1633,10 @@ let-async
       vx_core::Type_msgblock origmsgblock = msgblock->vx_msgblock();
       if (origmsgblock) {
         std::vector<vx_core::Type_msgblock> origlistmsgblock = origmsgblock->msgblocks()->vx_p_list;
-        listmsgblock.insert(listmsgblock.end(), origlistmsgblock.begin(), origlistmsgblock.end());
+        listmsgblock.insert(
+          listmsgblock.end(),
+          origlistmsgblock.begin(),
+          origlistmsgblock.end());
       }
     }
     for (vx_core::Type_any subval : vals) {
@@ -1622,7 +1679,8 @@ let-async
   }
 
   // vx_new_boolean(boolean)
-  vx_core::Type_boolean vx_new_boolean(bool isval) {
+  vx_core::Type_boolean vx_new_boolean(
+    bool isval) {
     vx_core::Type_boolean output = vx_core::c_false;
     if (isval) {
       output = vx_core::c_true;
@@ -1631,7 +1689,8 @@ let-async
   }
 
   // vx_new_decimal_from_float(float)
-  vx_core::Type_decimal vx_new_decimal_from_float(float fval) {
+  vx_core::Type_decimal vx_new_decimal_from_float(
+    float fval) {
     vx_core::Type_decimal output = vx_core::e_decimal;
     if (fval != 0) {
       output = new vx_core::Class_decimal();
@@ -1652,7 +1711,8 @@ let-async
   }
 
   // vx_new_float(float)
-  vx_core::Type_float vx_new_float(float fval) {
+  vx_core::Type_float vx_new_float(
+    float fval) {
     vx_core::Type_float output = vx_core::e_float;
     if (fval != 0) {
       output = new vx_core::Class_float();
@@ -1662,7 +1722,8 @@ let-async
   }
 
   // vx_new_int(long)
-  vx_core::Type_int vx_new_int(long ival) {
+  vx_core::Type_int vx_new_int(
+    long ival) {
     vx_core::Type_int output = vx_core::e_int;
     if (ival != 0) {
       output = new vx_core::Class_int();
@@ -1672,7 +1733,8 @@ let-async
   }
 
   // vx_new_string(string)
-  vx_core::Type_string vx_new_string(std::string text) {
+  vx_core::Type_string vx_new_string(
+    std::string text) {
     vx_core::Type_string output;
     if (text == "") {
       output = vx_core::e_string;
@@ -1684,7 +1746,8 @@ let-async
   }
 
   // vx_ref(any)
-  long vx_ref(vx_core::Type_any any) {
+  long vx_ref(
+    vx_core::Type_any any) {
     long output = 0;
     if (any) {
       output = any->vx_p_iref;
@@ -1693,7 +1756,8 @@ let-async
   }
 
   // vx_ref_minus(any)
-  long vx_ref_minus(vx_core::Type_any any) {
+  long vx_ref_minus(
+    vx_core::Type_any any) {
     long output = -1;
     if (any) {
       output = any->vx_p_iref;
@@ -1706,7 +1770,8 @@ let-async
   }
 
   // vx_ref_plus(any)
-  long vx_ref_plus(vx_core::Type_any any) {
+  long vx_ref_plus(
+    vx_core::Type_any any) {
     long output = -1;
     if (any) {
       output = any->vx_p_iref;
@@ -1719,7 +1784,8 @@ let-async
   }
 
   // vx_release(any)
-  void vx_release(vx_core::Type_any any) {
+  void vx_release(
+    vx_core::Type_any any) {
     if (!any) {
     } else if (any->vx_p_iref == 0) {
       delete any;
@@ -1727,14 +1793,16 @@ let-async
   }
 
   // vx_release(any...)
-  void vx_release(vx_core::vx_Type_listany listany) {
+  void vx_release(
+    vx_core::vx_Type_listany listany) {
     for (vx_core::Type_any any : listany) {
       vx_core::vx_release(any);
     }
   }
 
   // vx_release_async(async)
-  void vx_release_async(vx_core::vx_Type_async async) {
+  void vx_release_async(
+    vx_core::vx_Type_async async) {
     if (!async) {
     } else if (async->vx_p_iref == 0) {
       delete async;
@@ -1911,7 +1979,8 @@ let-async
   // vx_string_from_any(val)
   std::string vx_string_from_any(
     vx_core::Type_any value) {
-    return vx_core::vx_string_from_any_indent(value, 0, true, false);
+    return vx_core::vx_string_from_any_indent(
+      value, 0, true, false);
   }
 
   // vx_string_from_any_indent(val, indent, linefeed, refcount)
@@ -2361,13 +2430,15 @@ let-async
       std::string scode = code->vx_string();
       if (scode == ":case") {
         vx_core::Type_any value = thenelse->value();
-        vx_core::Type_boolean iseq = vx_core::f_eq(val, value);
+        vx_core::Type_boolean iseq = vx_core::f_eq(
+          val, value);
         if (iseq->vx_boolean()) {
           fn_any = thenelse->fn_any();
         }
       } else if (scode == ":casemany") {
         vx_core::Type_list values = thenelse->values();
-        vx_core::Type_boolean iscontain = vx_core::f_contains_1(values, val);
+        vx_core::Type_boolean iscontain = vx_core::f_contains_1(
+          values, val);
         if (iscontain->vx_boolean()) {
           fn_any = thenelse->fn_any();
         }
@@ -2403,7 +2474,8 @@ let-async
   //class Abstract_replfunc_async {
     vx_core::vx_Type_async Abstract_replfunc_async::vx_repl(
       vx_core::Type_anylist arglist) {
-      return vx_core::vx_async_new_from_value(vx_core::e_any);
+      return vx_core::vx_async_new_from_value(
+        vx_core::e_any);
     }
   //}
 
@@ -2417,7 +2489,8 @@ let-async
 
   //class Class_decimal {
     float Class_decimal::vx_float() const {
-      return vx_core::vx_float_from_string(vx_p_decimal);
+      return vx_core::vx_float_from_string(
+        vx_p_decimal);
     }
 
     std::string Class_decimal::vx_string() const {

@@ -455,6 +455,13 @@
     return output;
   }
 
+  // vx_constdef<-any(any)
+  public static Vx.Core.Type_constdef vx_constdef_from_any(
+    Vx.Core.Type_any value) {
+    Vx.Core.Type_constdef output = value.vx_constdef();
+    return output;
+  }
+
   // vx_contains(list-1, any)
   public static Vx.Core.Type_boolean vx_contains_1<T>(
     T values,
@@ -779,26 +786,6 @@
     };
     List<Vx.Core.Type_any> listresult = Vx.Core.arraylist_from_linkedhashmap_fn(map_value, fn_key_value);
     output = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(listresult));
-    return output;
-  }
-
-  public static X vx_list_join_from_list_1<X, Y>(
-    X generic_list_1,
-    Y values,
-    Vx.Core.Func_any_from_any fn_any_from_any)
-    where X : Vx.Core.Type_list
-    where Y : Vx.Core.Type_list {
-    X output = Vx.Core.f_empty(generic_list_1);
-    List<Vx.Core.Type_any> list_value = values.vx_list();
-    List<Vx.Core.Type_any> list_result = new List<Vx.Core.Type_any>();
-    foreach (Vx.Core.Type_any val in list_value) {
-      Vx.Core.Type_any listoflist = fn_any_from_any.vx_any_from_any(generic_list_1, val);
-      if (listoflist is Core.Type_list vallist) {
-        List<Vx.Core.Type_any> listval = vallist.vx_list();
-        list_result.AddRange(listval);
-      }
-    }
-    output = Vx.Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(list_result));
     return output;
   }
 

@@ -60,6 +60,44 @@
     return output
   }
 
+  // vx_constdef_new(pkgname, name, type)
+  static vx_constdef_new(
+    pkgname,
+    name,
+    type) {
+    let output = {
+      vx_type: vx_core.t_constdef,
+      vx_value: {
+        pkgname: pkgname,
+        name: name,
+        type: type
+      }
+    }
+    return output
+  }
+
+  // vx_constdef<-any(any)
+  static vx_constdef_from_any(
+    value) {
+    let output = vx_core.e_constdef
+    switch (value) {
+    case vx_core.c_false:
+      output = vx_core.vx_constdef_new(
+        "vx/core", "false", vx_core.t_boolean)
+      break
+    case vx_core.c_true:
+      output = vx_core.vx_constdef_new(
+        "vx/core", "true", vx_core.t_boolean)
+      break
+    default:
+      output = value['vx_constdef']
+      if (output == null) {
+        output = vx_core.e_constdef
+      }
+    }
+    return output
+  }
+
   static vx_empty(
     type) {
     const typedef = vx_core.f_typedef_from_type(type)

@@ -13,13 +13,16 @@
         val path : String = "vx/collection/any<-for-until-loop-max"
         val code : String = ":loopmaximumexceeded"
         val details : vx_core.Type_int = vx_core.vx_new_int(icount)
-        val msg : vx_core.Type_msg = vx_core.vx_msg_from_error(path, code, details)
+        val msg : vx_core.Type_msg = vx_core.vx_msg_from_error(
+          path, code, details)
         output = vx_core.vx_copy(output, msg)
         iscontinue = false
       } else {
         icount += 1
-        output = fn_loop.vx_any_from_any(generic_any_1, output)
-        val valcontinue : vx_core.Type_boolean = fn_until.vx_boolean_from_any(output)
+        output = fn_loop.vx_any_from_any(
+          generic_any_1, output)
+        val valcontinue : vx_core.Type_boolean = fn_until.vx_boolean_from_any(
+          output)
         iscontinue = !valcontinue.vx_boolean()
       }
     }
@@ -41,7 +44,8 @@
         val path : String = "vx/collection/any<-for-while-loop-max"
         val code : String = ":loopmaximumexceeded"
         val details : vx_core.Type_int = vx_core.vx_new_int(icount)
-        val msg : vx_core.Type_msg = vx_core.vx_msg_from_error(path, code, details)
+        val msg : vx_core.Type_msg = vx_core.vx_msg_from_error(
+          path, code, details)
         output = vx_core.vx_copy(output, msg)
         iscontinue = false
       } else {
@@ -49,7 +53,8 @@
         val valcontinue : vx_core.Type_boolean = fn_while.vx_boolean_from_any(output)
         iscontinue = valcontinue.vx_boolean()
         if (iscontinue) {
-          output = fn_loop.vx_any_from_any(generic_any_1, output)
+          output = fn_loop.vx_any_from_any(
+            generic_any_1, output)
         }
       }
     }
@@ -60,7 +65,8 @@
   fun vx_anymap_from_struct(
     structure : vx_core.Type_struct) : vx_core.Type_anymap {
     val map : Map<String, vx_core.Type_any> = structure.vx_map()
-    val output : vx_core.Type_anymap = vx_core.vx_new_map(vx_core.t_anymap, map)
+    val output : vx_core.Type_anymap = vx_core.vx_new_map(
+      vx_core.t_anymap, map)
     return output
   }
 
@@ -69,7 +75,8 @@
     start : vx_core.Type_int,
     end : vx_core.Type_int,
     fn_loop : vx_core.Func_any_from_int) : T {
-    var output : T = vx_core.f_empty(generic_list_1)
+    var output : T = vx_core.f_empty(
+      generic_list_1)
     val listvals : MutableList<vx_core.Type_any> = ArrayList<vx_core.Type_any>()
     val istart : Int = start.vx_int()
     val iend : Int = end.vx_int()
@@ -89,7 +96,8 @@
       }
     }
     if (listvals.size > 0) {
-      val anylist : vx_core.Type_anylist = vx_core.vx_new(vx_core.t_anylist, listvals)
+      val anylist : vx_core.Type_anylist = vx_core.vx_new(
+        vx_core.t_anylist, listvals)
       output = vx_core.f_new(generic_list_1, anylist)
     }
     return output
@@ -112,22 +120,28 @@
         val path : String = "vx/collection/list<-for-until-loop-max"
         val code : String = ":loopmaximumexceeded"
         val details : vx_core.Type_int = vx_core.vx_new_int(icount)
-        val msg : vx_core.Type_msg = vx_core.vx_msg_from_error(path, code, details)
-        output = vx_core.vx_copy(output, msg)
+        val msg : vx_core.Type_msg = vx_core.vx_msg_from_error(
+          path, code, details)
+        output = vx_core.vx_copy(
+          output, msg)
         iscontinue = false
       } else {
-        val valwhile : vx_core.Type_boolean = fn_while.vx_boolean_from_any(work)
+        val valwhile : vx_core.Type_boolean = fn_while.vx_boolean_from_any(
+          work)
         iscontinue = !valwhile.vx_boolean()
         if (iscontinue) {
           icount += 1
-          work = fn_loop.vx_any_from_any(vx_core.t_any, work)
+          work = fn_loop.vx_any_from_any(
+            vx_core.t_any, work)
           listvals.add(work)
         }
       }
     }
     if (listvals.size > 0) {
-      val anylist : vx_core.Type_anylist = vx_core.vx_new(vx_core.t_anylist, listvals)
-      output = vx_core.f_new(generic_list_1, anylist)
+      val anylist : vx_core.Type_anylist = vx_core.vx_new(
+        vx_core.t_anylist, listvals)
+      output = vx_core.f_new(
+        generic_list_1, anylist)
     }
     return output
   }
@@ -140,13 +154,38 @@
     val listval : List<vx_core.Type_any> = vallist.vx_list()
     val items : MutableList<vx_core.Type_any> = ArrayList<vx_core.Type_any>()
     for (value : vx_core.Type_any in listval) {
-      val newval : vx_core.Type_any = fn_filter.vx_any_from_any(vx_core.t_any, value)
-      val isempty : vx_core.Type_boolean = vx_core.f_is_empty_1(newval)
+      val newval : vx_core.Type_any = fn_filter.vx_any_from_any(
+        vx_core.t_any, value)
+      val isempty : vx_core.Type_boolean = vx_core.f_is_empty_1(
+        newval)
       if (!isempty.vx_boolean()) {
         items.add(newval)
       }
     }
     output = vx_core.vx_new(generic_list_1, items)
+    return output
+  }
+
+  fun <X : vx_core.Type_list, Y : vx_core.Type_list> vx_list_from_list_join_1(
+    generic_list_1 : X,
+    values : Y,
+    fn_any_from_any : vx_core.Func_any_from_any) : X {
+    val list_value : List<vx_core.Type_any> = values.vx_list()
+    val list_result : MutableList<vx_core.Type_any> = ArrayList<vx_core.Type_any>()
+    for (value : vx_core.Type_any in list_value) {
+      val listoflist : vx_core.Type_any = fn_any_from_any.vx_any_from_any(
+        generic_list_1, value
+      )
+      if (listoflist is vx_core.Type_list) {
+        val vallist : vx_core.Type_list = listoflist as vx_core.Type_list
+        val listval : List<vx_core.Type_any> = vallist.vx_list()
+        list_result.addAll(listval)
+      }
+    }
+    val output : X = vx_core.f_any_from_any(
+      generic_list_1,
+      generic_list_1.vx_new(list_result)
+    )
     return output
   }
 
@@ -170,12 +209,13 @@
       if (iend >= maxlen) {
         iend = maxlen
       }
-      val listsub : List<vx_core.Type_any> = listval.subList(istart - 1, iend)
+      val listsub : List<vx_core.Type_any> = listval.subList(
+        istart - 1, iend)
       output = vx_core.vx_new(generic_list_1, listsub)
     }
     return output
   }
-  
+
   fun <T : vx_core.Type_map> vx_map_from_map_keys(
     generic_map_1 : T,
     valuemap : vx_core.Type_map,
@@ -186,14 +226,17 @@
       val map : Map<String, vx_core.Type_any> = valuemap.vx_map()
       val values : MutableList<vx_core.Type_any> = ArrayList<vx_core.Type_any>()
       for (key : vx_core.Type_string in keylist) {
-        val value : vx_core.Type_any? = map.get(key.vx_string())
+        val value : vx_core.Type_any? = map.get(
+          key.vx_string())
         if (value != null) {
           values.add(key)
           values.add(value)
         }
       }
-      val anyvalues : vx_core.Type_anylist = vx_core.vx_new_anylist(values)
-      output = vx_core.f_new(generic_map_1, anyvalues)
+      val anyvalues : vx_core.Type_anylist = vx_core.vx_new_anylist(
+        values)
+      output = vx_core.f_new(
+        generic_map_1, anyvalues)
     }
     return output
   }

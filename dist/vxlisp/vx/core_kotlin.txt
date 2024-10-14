@@ -417,6 +417,13 @@
     return output
   }
 
+  // vx_constdef<-any(any)
+  fun vx_constdef_from_any(
+    value : vx_core.Type_any) : vx_core.Type_constdef {
+    val output : vx_core.Type_constdef = value.vx_constdef()
+    return output
+  }
+
   // vx_contains(list-1, any)
   fun <T : vx_core.Type_list> vx_contains_1(
     values : T,
@@ -947,29 +954,6 @@
     val output : X = vx_core.f_any_from_any(
       generic_list_1,
       anylist
-    )
-    return output
-  }
-
-  fun <X : vx_core.Type_list, Y : vx_core.Type_list> vx_list_join_from_list_1(
-    generic_list_1 : X,
-    values : Y,
-    fn_any_from_any : vx_core.Func_any_from_any) : X {
-    val list_value : List<vx_core.Type_any> = values.vx_list()
-    val list_result : MutableList<vx_core.Type_any> = ArrayList<vx_core.Type_any>()
-    for (value : vx_core.Type_any in list_value) {
-      val listoflist : vx_core.Type_any = fn_any_from_any.vx_any_from_any(
-        generic_list_1, value
-      )
-      if (listoflist is vx_core.Type_list) {
-        val vallist : vx_core.Type_list = listoflist as vx_core.Type_list
-        val listval : List<vx_core.Type_any> = vallist.vx_list()
-        list_result.addAll(listval)
-      }
-    }
-    val output : X = vx_core.f_any_from_any(
-      generic_list_1,
-      generic_list_1.vx_new(list_result)
     )
     return output
   }

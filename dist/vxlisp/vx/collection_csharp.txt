@@ -151,6 +151,28 @@
     return output;
   }
 
+  public static X vx_list_from_list_join_1<X, Y>(
+    X generic_list_1,
+    Y values,
+    Vx.Core.Func_any_from_any fn_any_from_any)
+    where X : Vx.Core.Type_list
+    where Y : Vx.Core.Type_list {
+    X output = Vx.Core.f_empty(generic_list_1);
+    List<Vx.Core.Type_any> list_value = values.vx_list();
+    List<Vx.Core.Type_any> list_result = new List<Vx.Core.Type_any>();
+    foreach (Vx.Core.Type_any val in list_value) {
+      Vx.Core.Type_any listoflist = fn_any_from_any.vx_any_from_any(
+        generic_list_1, val);
+      if (listoflist is Core.Type_list vallist) {
+        List<Vx.Core.Type_any> listval = vallist.vx_list();
+        list_result.AddRange(listval);
+      }
+    }
+    output = Vx.Core.f_any_from_any(
+      generic_list_1, generic_list_1.vx_new(list_result));
+    return output;
+  }
+
   public static T vx_list_from_list_start_end<T>(
     T generic_list_1,
     Vx.Core.Type_list values,
@@ -180,7 +202,7 @@
     }
     return output;
   }
-  
+
   public static T vx_map_from_map_keys<T>(
     T generic_map_1,
     Vx.Core.Type_map valuemap,

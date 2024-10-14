@@ -216,7 +216,7 @@ func LangConstVxConstdef(
 		LangPkgNameDot(lang, "vx/core") + "constdef_new(" +
 		"\n        \"" + cnst.pkgname + "\", // pkgname" +
 		"\n        \"" + cnst.name + "\", // name" +
-		"\n        " + LangTypeDef(lang, cnsttype, 4) +
+		"\n        " + LangTypeT(lang, cnsttype) +
 		"\n      )"
 	output := "" +
 		LangFuncHeaderStatic(lang, constname, fnc, 2, 0,
