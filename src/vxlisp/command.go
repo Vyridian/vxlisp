@@ -1,28 +1,31 @@
 package vxlisp
 
 type vxcommand struct {
-	name    string
-	code    string
-	doc     string
-	filter  string
-	lang    string
-	path    string
-	port    int
-	config  string
-	context string
-	main    string
+	name     string
+	code     string
+	doc      string
+	filter   string
+	langcode string
+	lang     *vxlang
+	path     string
+	port     int
+	config   string
+	context  string
+	main     string
 }
 
 func NewCommand() *vxcommand {
 	return new(vxcommand)
 }
 
-func NewCommandCopy(command *vxcommand) *vxcommand {
+func NewCommandCopy(
+	command *vxcommand) *vxcommand {
 	output := NewCommand()
 	output.code = command.code
 	output.context = command.context
 	output.doc = command.doc
 	output.filter = command.filter
+	output.langcode = command.langcode
 	output.lang = command.lang
 	output.main = command.main
 	output.name = command.name
@@ -31,7 +34,8 @@ func NewCommandCopy(command *vxcommand) *vxcommand {
 	return output
 }
 
-func CommandFromTextblock(textblock *vxtextblock) (*vxcommand, *vxmsgblock) {
+func CommandFromTextblock(
+	textblock *vxtextblock) (*vxcommand, *vxmsgblock) {
 	msgblock := NewMsgBlock("CmdTextblock")
 	command := NewCommand()
 	switch textblock.blocktype {
@@ -82,7 +86,8 @@ func CommandFromTextblock(textblock *vxtextblock) (*vxcommand, *vxmsgblock) {
 					case ":filter":
 						command.filter = prop
 					case ":lang":
-						command.lang = prop
+						command.langcode = prop
+						command.lang = maplang[prop]
 					case ":main":
 						command.main = prop
 					case ":path":

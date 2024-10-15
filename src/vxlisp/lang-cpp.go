@@ -4453,7 +4453,7 @@ func CppApp(
 	project *vxproject,
 	cmd *vxcommand) string {
 	imports := ""
-	imports += LangImport(
+	imports += LangSpecificImport(
 		lang,
 		PackageCoreFromProject(project),
 		imports)
@@ -4477,7 +4477,7 @@ func CppApp(
 		}
 		if contextfunc != emptyfunc {
 			if contextfunc.pkgname != mainfunc.pkgname {
-				imports += LangImport(
+				imports += LangSpecificImport(
 					lang,
 					PackageFromProjectFunc(project, contextfunc),
 					imports)
@@ -4494,7 +4494,7 @@ func CppApp(
 			}
 		}
 		if mainfunc != emptyfunc {
-			imports += LangImport(
+			imports += LangSpecificImport(
 				lang,
 				PackageFromProjectFunc(project, mainfunc),
 				imports)

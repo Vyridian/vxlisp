@@ -517,7 +517,7 @@ func LangFuncHeaderAll(
 	if isstatic {
 		funcdeclare = funcstatic
 	}
-	returntype := LangNameTypeFullFromTypeSimple(
+	returntype := LangSpecificTypeNameFullSimple(
 		lang, fnc.vxtype, false)
 	isreturngeneric := fnc.vxtype.isgeneric
 	var listargtext []string

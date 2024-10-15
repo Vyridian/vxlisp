@@ -163,7 +163,7 @@ func LangConstValFromConst(
 		cnstval = "\"src/test/resources\""
 		for _, cmd := range project.listcmd {
 			if cmd.code != ":test" {
-			} else if cmd.lang == (":" + lang.name) {
+			} else if cmd.lang == lang {
 				path := cmd.path
 				switch lang {
 				case langjava:

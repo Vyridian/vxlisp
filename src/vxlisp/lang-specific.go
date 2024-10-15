@@ -11,6 +11,16 @@ var langjs = NewLangJs()
 var langkotlin = NewLangKotlin()
 var langswift = NewLangSwift()
 
+var listlang = []*vxlang{
+	langcpp,
+	langcsharp,
+	langjava,
+	langjs,
+	langkotlin,
+	langswift}
+
+var maplang = NewMapLangFromList(listlang)
+
 func NewLangCpp() *vxlang {
 	output := new(vxlang)
 	output.name = "cpp"
@@ -103,6 +113,15 @@ func NewLangSwift() *vxlang {
 	output.indent = "  "
 	output.lineend = ""
 	output.typeref = "."
+	return output
+}
+
+func NewMapLangFromList(listlang []*vxlang) map[string]*vxlang {
+	output := make(map[string]*vxlang)
+	for _, lang := range listlang {
+		key := ":" + lang.name
+		output[key] = lang
+	}
 	return output
 }
 
@@ -308,6 +327,42 @@ func LangSpecificFuncClassHeader(
 	return output
 }
 
+func LangSpecificImport(
+	lang *vxlang,
+	pkg *vxpackage,
+	imports string) string {
+	output := ""
+	pkgname := pkg.name
+	project := pkg.project
+	importline := ""
+	switch lang {
+	case langcpp:
+		importline = "#include \"" + pkgname + ".hpp\""
+	case langcsharp:
+	case langjava:
+		ipos := IntFromStringFindLast(pkgname, "/")
+		path := StringSubstring(pkgname, 0, ipos)
+		path = StringFromStringFindReplace(path, "/", ".")
+		name := StringSubstring(pkgname, ipos+1, len(pkgname))
+		name = StringUCaseFirst(name)
+		importname := project.javadomain + "." + path + "." + name
+		importline = "import " + importname + lang.lineend
+	case langkotlin:
+		ipos := IntFromStringFindLast(pkgname, "/")
+		path := StringSubstring(pkgname, 0, ipos)
+		path = StringFromStringFindReplace(path, "/", ".")
+		importname := project.javadomain + "." + path + ".*"
+		importline = "import " + importname
+	default:
+		path := StringFromStringFindReplace(pkgname, "/", ".")
+		importline = "import " + path + lang.lineend
+	}
+	if !BooleanFromStringContains(imports, importline) {
+		output = importline + "\n"
+	}
+	return output
+}
+
 func LangSpecificNamespaceFromPackage(
 	lang *vxlang,
 	pkgname string) (string, string) {
@@ -336,6 +391,28 @@ func LangSpecificNamespaceFromPackage(
 		namespaceclose = "\n}\n"
 	}
 	return namespaceopen, namespaceclose
+}
+
+func LangSpecificOverride(
+	lang *vxlang,
+	indent int,
+	isinterface bool) (string, string, string) {
+	override1 := ""
+	override2 := ""
+	override3 := ""
+	switch lang {
+	case langcsharp:
+		if !isinterface {
+			override3 = "override "
+		}
+	case langjava:
+		override1 = "\n" + StringRepeat("  ", indent) + "@Override"
+	case langkotlin:
+		if !isinterface {
+			override2 = "override "
+		}
+	}
+	return override1, override2, override3
 }
 
 func LangSpecificPackageLine(
@@ -669,6 +746,163 @@ func LangSpecificTypeInterfaceHeader(
 	return output
 }
 
+func LangSpecificTypeNameFullSimple(
+	lang *vxlang,
+	typ *vxtype,
+	simple bool) string {
+	name := ""
+	switch typ {
+	case anylisttype:
+		name = lang.pkgname + lang.pkgref + "Type_anylist"
+	case contexttype:
+		name = lang.pkgname + lang.pkgref + "Type_context"
+	case nonetype:
+		switch lang {
+		case langkotlin:
+			name = "Unit"
+		default:
+			name = "void"
+		}
+	case stringtype:
+		name = lang.pkgname + lang.pkgref + "Type_string"
+	case rawbooltype:
+		switch lang {
+		case langcsharp:
+			name = "bool"
+		case langjava:
+			name = "boolean"
+		case langkotlin:
+			name = "Boolean"
+		}
+	case rawbooleantype:
+		switch lang {
+		case langcsharp:
+			name = "bool"
+		case langjava, langkotlin:
+			name = "Boolean"
+		}
+	case rawfloattype:
+		switch lang {
+		case langcsharp:
+			name = "float"
+		case langjava:
+			name = "Float"
+		case langkotlin:
+			name = "Float"
+		}
+	case rawifntype:
+		name = "IFn"
+	case rawinttype:
+		switch lang {
+		case langkotlin:
+			name = "Int"
+		default:
+			name = "int"
+		}
+	case rawintegertype:
+		switch lang {
+		case langcsharp:
+			name = "int"
+		case langjava:
+			name = "Integer"
+		case langkotlin:
+			name = "Int"
+		}
+	case rawlisttype:
+		switch lang {
+		case langcsharp:
+			name = "List<object>"
+		case langjava:
+			name = "List"
+		case langkotlin:
+			name = "List<Any>"
+		}
+	case rawlistanytype:
+		name = "List<" + LangSpecificTypeNameFullSimple(lang, anytype, true) + ">"
+	case rawmaptype:
+		switch lang {
+		case langcsharp:
+			name = "Vx.Core.Map"
+		case langjava, langkotlin:
+			name = "Map"
+		}
+	case rawlistunknowntype:
+		switch lang {
+		case langcsharp:
+			name = "List<object>"
+		case langjava:
+			name = "List<?>"
+		case langkotlin:
+			name = "List<*>"
+		}
+	case rawmapanytype:
+		switch lang {
+		case langcpp:
+			name = "std::Map<std::string, " + LangSpecificTypeNameFullSimple(lang, anytype, true) + ">"
+		case langcsharp:
+			name = "Vx.Core.Map<string, " + LangSpecificTypeNameFullSimple(lang, anytype, true) + ">"
+		default:
+			name = "Map<String, " + LangSpecificTypeNameFullSimple(lang, anytype, true) + ">"
+		}
+	case rawobjecttype:
+		switch lang {
+		case langcsharp:
+			name = "object"
+		case langkotlin:
+			name = "Any"
+		default:
+			name = "Object"
+		}
+	case rawstringtype:
+		switch lang {
+		case langcpp:
+			name = "std::string"
+		case langcsharp:
+			name = "string"
+		default:
+			name = "String"
+		}
+	case rawvoidtype:
+		switch lang {
+		case langkotlin:
+			name = "Unit"
+		default:
+			name = "void"
+		}
+	default:
+		switch typ.name {
+		case "rawlist":
+			subtype := typ.subtype
+			subtypename := LangTypeName(lang, subtype)
+			name = "List<" + subtypename + ">"
+		case "rawmap":
+			subtype := typ.subtype
+			subtypename := LangTypeName(lang, subtype)
+			switch lang {
+			case langcpp:
+				name = "std::Map<std::string, " + subtypename + ">"
+			case langcsharp:
+				name = "Vx.Core.Map<string, " + subtypename + ">"
+			default:
+				name = "Map<String, " + subtypename + ">"
+			}
+		default:
+			if typ.isgeneric && !simple {
+				name = LangSpecificTypeNameSimple(lang, typ, simple)
+			} else {
+				name = LangPkgName(lang, typ.pkgname)
+				if typ.isfunc {
+					name += lang.pkgref + "Func_"
+				} else {
+					name += lang.pkgref + "Type_"
+				}
+				name += LangSpecificTypeNameSimple(lang, typ, simple)
+			}
+		}
+	}
+	return name
+}
+
 func LangSpecificTypeNameSimple(
 	lang *vxlang,
 	typ *vxtype,
@@ -799,6 +1033,155 @@ func LangSpecificTypeNameSimple(
 		}
 	}
 	return name
+}
+
+func LangSpecificVarAll(
+	lang *vxlang,
+	varname string,
+	vartype *vxtype,
+	subtype *vxtype,
+	varvalue string,
+	indent int,
+	isconst bool,
+	isfuture bool,
+	isstatic bool,
+	isprop bool,
+	isgeneric bool,
+	isnullable bool) string {
+	output := LangIndent(lang, indent, true)
+	svalue := LangVarValue(lang, vartype, varvalue)
+	switch lang {
+	case langcsharp:
+		if isstatic {
+			output += "public static "
+		} else if isprop {
+			output += "public "
+		}
+		typetext := ""
+		switch vartype {
+		case rawlisttype:
+			typetext = "List<" + LangNameTypeFullFromType(lang, subtype) + ">"
+			if varvalue == ":new" {
+				svalue = "new List<" + LangNameTypeFullFromType(lang, subtype) + ">()"
+			}
+		case rawmaptype:
+			typetext = "Vx.Core.Map<string, " + LangNameTypeFullFromType(lang, subtype) + ">"
+			if varvalue == ":new" {
+				svalue = "new Vx.Core.LinkedHashMap<string, " + LangNameTypeFullFromType(lang, subtype) + ">()"
+			}
+		case rawlistunknowntype:
+			typetext = "List<object>"
+			if varvalue == ":new" {
+				svalue = "List<object>()"
+			}
+		default:
+			if isgeneric {
+				typetext = LangGenericFromType(lang, vartype)
+			} else {
+				typetext = LangNameTypeFullFromType(lang, vartype)
+			}
+		}
+		if isfuture {
+			typetext = "Task<" + typetext + ">"
+		}
+		if isnullable || varvalue == "null" {
+			output += typetext + "? " + varname + " = " + varvalue
+		} else if varvalue == "" {
+			output += typetext + " " + varname
+		} else {
+			output += typetext + " " + varname + " = " + svalue
+		}
+		output += lang.lineend
+	case langjava:
+		if isstatic {
+			output += "public static "
+		} else if isprop {
+			output += "public "
+		}
+		if isconst {
+			output += "final "
+		}
+		typetext := ""
+		switch vartype {
+		case rawlisttype:
+			typetext = "List<" + LangNameTypeFullFromType(lang, subtype) + ">"
+			if varvalue == ":new" {
+				svalue = "new ArrayList<" + LangNameTypeFullFromType(lang, subtype) + ">()"
+			}
+		case rawmaptype:
+			typetext = "Map<String, " + LangNameTypeFullFromType(lang, subtype) + ">"
+			if varvalue == ":new" {
+				svalue = "new LinkedHashMap<String, " + LangNameTypeFullFromType(lang, subtype) + ">()"
+			}
+		case rawlistunknowntype:
+			typetext = "List<?>"
+		default:
+			if isgeneric && vartype.isgeneric {
+				typetext = LangGenericFromType(lang, vartype)
+			} else {
+				typetext = LangNameTypeFullFromType(lang, vartype)
+			}
+		}
+		if isfuture {
+			typetext = lang.future + "<" + typetext + ">"
+		}
+		output += typetext + " " + varname
+		if svalue != "" {
+			output += " = " + svalue
+		}
+		output += lang.lineend
+	case langkotlin:
+		typetext := ""
+		switch vartype {
+		case rawlisttype:
+			typetext = "List<" + LangNameTypeFullFromType(lang, subtype) + ">"
+			if varvalue == ":new" {
+				typetext = "Mutable" + typetext
+				svalue = "ArrayList<" + LangNameTypeFullFromType(lang, subtype) + ">()"
+			} else if BooleanFromStringStarts(svalue, "ArrayList<") {
+				typetext = "Mutable" + typetext
+			}
+		case rawmaptype:
+			typetext = "Map<String, " + LangNameTypeFullFromType(lang, subtype) + ">"
+			if varvalue == ":new" {
+				typetext = "Mutable" + typetext
+				svalue = "LinkedHashMap<String, " + LangNameTypeFullFromType(lang, subtype) + ">()"
+			} else if BooleanFromStringStarts(svalue, "LinkedHashMap<") {
+				typetext = "Mutable" + typetext
+			}
+		case rawlistunknowntype:
+			typetext = "List<Any>"
+			if varvalue == ":new" {
+				typetext = "Mutable" + typetext
+				svalue = "ArrayList<Any>()"
+			} else if BooleanFromStringStarts(svalue, "ArrayList<") {
+				typetext = "Mutable" + typetext
+			}
+		default:
+			if isgeneric && vartype.isgeneric {
+				typetext = LangGenericFromType(lang, vartype)
+			} else {
+				typetext = LangNameTypeFullFromType(lang, vartype)
+			}
+		}
+		if isfuture {
+			typetext = "CompletableFuture<" + typetext + ">"
+		}
+		if isconst {
+			output += "val"
+		} else {
+			output += "var"
+		}
+		output += " " + varname
+		output += " : " + typetext
+		if isnullable || varvalue == "null" {
+			output += "?"
+		}
+		if varvalue != "" {
+			output += " = " + svalue
+		}
+	}
+	return output
 }
 
 func LangSpecificVarSet(

@@ -307,7 +307,7 @@ func HtmlFromProject(prj *vxproject) string {
 				lineindent + "                  <div class=\"td\">" + HtmlFromString(cmd.name) + "</div>" +
 				lineindent + "                  <div class=\"td\">" + HtmlFromString(cmd.code) + "</div>" +
 				lineindent + "                  <div class=\"td\">" + HtmlFromString(cmd.path) + "</div>" +
-				lineindent + "                  <div class=\"td\">" + HtmlFromString(cmd.lang) + "</div>" +
+				lineindent + "                  <div class=\"td\">" + HtmlFromString(cmd.langcode) + "</div>" +
 				lineindent + "                  <div class=\"td\">" + HtmlFromString(cmd.main) + "</div>" +
 				lineindent + "                  <div class=\"td\">" + HtmlFromString(cmd.context) + "</div>" +
 				lineindent + "                  <div class=\"td\">" + StringFromInt(cmd.port) + "</div>" +

@@ -73,28 +73,28 @@ func TestProjectFromTextblock(t *testing.T) {
 	cmd = NewCommand()
 	cmd.name = "srcjs"
 	cmd.code = ":source"
-	cmd.lang = ":js"
+	cmd.langcode = ":js"
 	cmd.path = "*projectpath*/build/js/src"
 	expectedprj.listcmd = append(expectedprj.listcmd, cmd)
 
 	cmd = NewCommand()
 	cmd.name = "testjs"
 	cmd.code = ":test"
-	cmd.lang = ":js"
+	cmd.langcode = ":js"
 	cmd.path = "*projectpath*/build/js/test"
 	expectedprj.listcmd = append(expectedprj.listcmd, cmd)
 
 	cmd = NewCommand()
 	cmd.name = "srcjava"
 	cmd.code = ":source"
-	cmd.lang = ":java"
+	cmd.langcode = ":java"
 	cmd.path = "*projectpath*/build/java/src"
 	expectedprj.listcmd = append(expectedprj.listcmd, cmd)
 
 	cmd = NewCommand()
 	cmd.name = "testjava"
 	cmd.code = ":test"
-	cmd.lang = ":java"
+	cmd.langcode = ":java"
 	cmd.path = "*projectpath*/build/java/test"
 	expectedprj.listcmd = append(expectedprj.listcmd, cmd)
 

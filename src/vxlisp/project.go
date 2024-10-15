@@ -54,23 +54,14 @@ func ExecuteProjectCommand(
 	case ":source", ":test":
 		if !issource {
 			switch command.lang {
-			case ":cpp":
-				msgs := CppWriteFromProjectCmd(langcpp, project, command)
+			case langcpp:
+				msgs := CppWriteFromProjectCmd(command.lang, project, command)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
-			case ":csharp":
-				msgs := LangWriteFromProjectCmd(langcsharp, project, command)
+			case langjs:
+				msgs := JsWriteFromProjectCmd(command.lang, project, command)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
-			case ":java":
-				msgs := LangWriteFromProjectCmd(langjava, project, command)
-				msgblock = MsgblockAddBlock(msgblock, msgs)
-			case ":js":
-				msgs := JsWriteFromProjectCmd(langjs, project, command)
-				msgblock = MsgblockAddBlock(msgblock, msgs)
-			case ":kotlin":
-				msgs := LangWriteFromProjectCmd(langkotlin, project, command)
-				msgblock = MsgblockAddBlock(msgblock, msgs)
-			case ":swift":
-				msgs := LangWriteFromProjectCmd(langswift, project, command)
+			default:
+				msgs := LangWriteFromProjectCmd(command.lang, project, command)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
 			}
 		}
@@ -498,7 +489,7 @@ func StringFromCmdIndent(
 		lineindent + "(cmd" +
 		lineindent + " :name " + cmd.name +
 		lineindent + " :code " + cmd.code +
-		lineindent + " :lang " + cmd.lang +
+		lineindent + " :lang " + cmd.langcode +
 		lineindent + " :path " + cmd.path +
 		lineindent + " :doc  " + cmd.doc + ")"
 	return output
@@ -642,16 +633,16 @@ func StringPathFromProjectCmd(
 			pathtext = "build/doc"
 		case ":source":
 			switch lang {
-			case ":java":
+			case langjava:
 				pathtext = "build/java/src"
-			case ":js":
+			case langjs:
 				pathtext = "build/js/test"
 			}
 		case ":test":
 			switch lang {
-			case ":java":
+			case langjava:
 				pathtext = "build/java/src"
-			case ":js":
+			case langjs:
 				pathtext = "build/js/test"
 			}
 		}

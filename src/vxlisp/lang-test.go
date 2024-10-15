@@ -8,7 +8,7 @@ func LangTestApp(
 	command *vxcommand,
 	pkgprefix string) string {
 	imports := ""
-	imports += LangImport(
+	imports += LangSpecificImport(
 		lang,
 		PackageCoreFromProject(project),
 		imports)
@@ -35,7 +35,7 @@ func LangTestApp(
 			packagecontext, ok := PackageFromProjectName(
 				project, contextfunc.pkgname)
 			if ok {
-				imports += LangImport(
+				imports += LangSpecificImport(
 					lang,
 					packagecontext,
 					imports)
