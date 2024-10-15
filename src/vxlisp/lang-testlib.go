@@ -391,7 +391,7 @@ func LangTestLib_test(lang *vxlang) string {
 			assertequals+
 				LangVar(lang, "output", rawbooltype, 2, "false")+
 				"\n    if ("+LangVxEqualsString(lang, "expected", "actual")+") {"+
-				LangVarSet(lang, "output", 3, "true")+
+				LangSpecificVarSet(lang, "output", 3, "true")+
 				"\n    } else {"+
 				"\n      "+println+"(testname)"+lang.lineend+
 				"\n      "+println+"(expected)"+lang.lineend+
@@ -500,41 +500,12 @@ func LangTestLib_test_helloworld(lang *vxlang) string {
 	return output
 }
 
-func LangTestLib_test_list_from_list_async(lang *vxlang) string {
+func LangTestLib_test_list_from_list_async(
+	lang *vxlang) string {
 	fnc := NewFunc()
 	fnc.name = "test_list_from_list_async"
 	fnc.vxtype = rawbooltype
-	fn_async := ""
-	switch lang {
-	case langcsharp:
-		fn_async = "" +
-			"\n    Vx.Core.Func_any_from_any_async fn_async = Vx.Core.t_any_from_any_async.vx_fn_new((anyval) => {" +
-			"\n      Vx.Core.Type_string stringval = (Vx.Core.Type_string)anyval;" +
-			"\n      string sout = stringval.vx_string() + \"!\";" +
-			"\n      Vx.Core.Type_any outval = Vx.Core.vx_new_string(sout);" +
-			"\n      Task<Vx.Core.Type_any> output = Vx.Core.vx_async_new_from_value(outval);" +
-			"\n      return output;" +
-			"\n    });"
-	case langjava:
-		fn_async = "" +
-			"\n    Core.Func_any_from_any_async fn_async = Core.t_any_from_any_async.vx_fn_new((anyval) -> {" +
-			"\n      Core.Type_string stringval = (Core.Type_string)anyval;" +
-			"\n      String sout = stringval.vx_string() + \"!\";" +
-			"\n      Core.Type_any outval = Core.vx_new_string(sout);" +
-			"\n      CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(outval);" +
-			"\n      return output;" +
-			"\n    });"
-	case langkotlin:
-		fn_async = "" +
-			"\n    val fn_async : vx_core.Func_any_from_any_async = vx_core.t_any_from_any_async.vx_fn_new({" +
-			"\n      anyval ->" +
-			"\n      val stringval : vx_core.Type_string = anyval as vx_core.Type_string" +
-			"\n      val sout : String = stringval.vx_string() + \"!\"" +
-			"\n      val outval : vx_core.Type_any = vx_core.vx_new_string(sout)" +
-			"\n      val output : CompletableFuture<vx_core.Type_any> = vx_core.vx_async_new_from_value(outval)" +
-			"\n      output" +
-			"\n    });"
-	}
+	fn_async := LangSpecificTestLibFnAsync(lang)
 	asynclist := LangPkgNameDot(lang, "vx/core") + "vx_list_from_list_async(" + LangTypeT(lang, stringlisttype) + ", slist, fn_async)"
 	output := "" +
 		LangFuncHeaderStatic(lang, "", fnc, 1, 0,
@@ -668,7 +639,7 @@ func LangTestLib_write_testpackagelist_async(lang *vxlang) string {
 				LangVar(lang, "valboolean", booleantype, 2,
 					LangPkgNameDot(lang, "vx/data/file")+
 						"f_boolean_write_from_file_any(context, filetest, testpackagelist_resolved)")+
-				LangVarSet(lang, "output", 2,
+				LangSpecificVarSet(lang, "output", 2,
 					"valboolean.vx_boolean()")+
 				LangVar(lang, "divtest", htmldivtype, 2,
 					LangPkgNameDot(lang, "vx/test")+"f_div_from_testpackagelist(testpackagelist_resolved)")+
@@ -676,15 +647,15 @@ func LangTestLib_write_testpackagelist_async(lang *vxlang) string {
 					LangPkgNameDot(lang, "vx/test")+"f_html_from_divtest(divtest)")+
 				LangVar(lang, "filenode", filetype, 2,
 					"file_test("+LangPkgNameDot(lang, "vx/test")+"f_file_testnode())")+
-				LangVarSet(lang, "valboolean", 2,
+				LangSpecificVarSet(lang, "valboolean", 2,
 					LangPkgNameDot(lang, "vx/data/file")+"f_boolean_write_from_file_any(context, filenode, htmlnode)")+
-				LangVarSet(lang, "output", 2,
+				LangSpecificVarSet(lang, "output", 2,
 					"output && valboolean.vx_boolean()")+
 				LangVar(lang, "filehtml", filetype, 2,
 					"file_test("+LangPkgNameDot(lang, "vx/test")+"f_file_testhtml())")+
 				LangVar(lang, "shtml", stringtype, 2, LangPkgNameDot(lang, "vx/web/html")+"f_string_from_html(htmlnode)")+
-				LangVarSet(lang, "valboolean", 2,
+				LangSpecificVarSet(lang, "valboolean", 2,
 					LangPkgNameDot(lang, "vx/data/file")+"f_boolean_write_from_file_string(context, filehtml, shtml)")+
-				LangVarSet(lang, "output", 2, "output && valboolean.vx_boolean()"))
+				LangSpecificVarSet(lang, "output", 2, "output && valboolean.vx_boolean()"))
 	return output
 }

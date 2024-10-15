@@ -106,6 +106,30 @@ func NewLangSwift() *vxlang {
 	return output
 }
 
+func LangSpecificAsClass(
+	lang *vxlang,
+	svar string,
+	typ *vxtype) string {
+	typetext := ""
+	// SomeClass obj2 = (SomeClass)Convert.ChangeType(t, typeof(SomeClass));
+	switch typ {
+	case rawlistunknowntype:
+		switch lang {
+		case langcsharp:
+			typetext = "List<object>"
+		case langjava:
+			typetext = "List<?>"
+		case langkotlin:
+			typetext = "List<Any>"
+		default:
+			typetext = LangTypeClassFull(lang, typ)
+		}
+	default:
+		typetext = LangTypeClassFull(lang, typ)
+	}
+	return LangSpecificAsTypeText(lang, svar, typetext)
+}
+
 func LangSpecificAsTypeText(
 	lang *vxlang,
 	svar string,
@@ -483,6 +507,42 @@ func LangSpecificTestLib(
 	return output
 }
 
+func LangSpecificTestLibFnAsync(
+	lang *vxlang) string {
+	output := ""
+	switch lang {
+	case langcsharp:
+		output = "" +
+			"\n    Vx.Core.Func_any_from_any_async fn_async = Vx.Core.t_any_from_any_async.vx_fn_new((anyval) => {" +
+			"\n      Vx.Core.Type_string stringval = (Vx.Core.Type_string)anyval;" +
+			"\n      string sout = stringval.vx_string() + \"!\";" +
+			"\n      Vx.Core.Type_any outval = Vx.Core.vx_new_string(sout);" +
+			"\n      Task<Vx.Core.Type_any> output = Vx.Core.vx_async_new_from_value(outval);" +
+			"\n      return output;" +
+			"\n    });"
+	case langjava:
+		output = "" +
+			"\n    Core.Func_any_from_any_async fn_async = Core.t_any_from_any_async.vx_fn_new((anyval) -> {" +
+			"\n      Core.Type_string stringval = (Core.Type_string)anyval;" +
+			"\n      String sout = stringval.vx_string() + \"!\";" +
+			"\n      Core.Type_any outval = Core.vx_new_string(sout);" +
+			"\n      CompletableFuture<Core.Type_any> output = Core.vx_async_new_from_value(outval);" +
+			"\n      return output;" +
+			"\n    });"
+	case langkotlin:
+		output = "" +
+			"\n    val fn_async : vx_core.Func_any_from_any_async = vx_core.t_any_from_any_async.vx_fn_new({" +
+			"\n      anyval ->" +
+			"\n      val stringval : vx_core.Type_string = anyval as vx_core.Type_string" +
+			"\n      val sout : String = stringval.vx_string() + \"!\"" +
+			"\n      val outval : vx_core.Type_any = vx_core.vx_new_string(sout)" +
+			"\n      val output : CompletableFuture<vx_core.Type_any> = vx_core.vx_async_new_from_value(outval)" +
+			"\n      output" +
+			"\n    });"
+	}
+	return output
+}
+
 func LangSpecificTestPackage(
 	lang *vxlang,
 	pkg *vxpackage,
@@ -739,6 +799,21 @@ func LangSpecificTypeNameSimple(
 		}
 	}
 	return name
+}
+
+func LangSpecificVarSet(
+	lang *vxlang,
+	varname string,
+	indent int,
+	varvalue string) string {
+	output := LangIndent(lang, indent, true)
+	output += varname
+	output += " = " + varvalue
+	switch lang {
+	case langcsharp, langjava:
+		output += lang.lineend
+	}
+	return output
 }
 
 func LangSpecificVxListAdd(

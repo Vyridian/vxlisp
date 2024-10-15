@@ -257,7 +257,7 @@ func LangFuncFFunc(
 					"vx_msg_from_error(\"vx/core/func\", \":permissiondenied\", "+
 					LangPkgNameDot(lang, "vx/core")+
 					"vx_new_string(\""+fnc.name+"\"))") +
-			LangVarSet(lang, "output", 3, LangPkgNameDot(lang, "vx/core")+"vx_copy(output, msg)") +
+			LangSpecificVarSet(lang, "output", 3, LangPkgNameDot(lang, "vx/core")+"vx_copy(output, msg)") +
 			lineindent + "}"
 		subindent += 1
 		ssubindent += "  "
@@ -282,7 +282,7 @@ func LangFuncFFunc(
 					"vx_msg_from_exception(\""+
 					fnc.pkgname+"/"+fnc.name+
 					"\", err)") +
-			LangVarSet(lang, "output", subindent+1,
+			LangSpecificVarSet(lang, "output", subindent+1,
 				LangPkgNameDot(lang, "vx/core")+"vx_copy(output, msg)") +
 			linesubindent + "}"
 		subindent += 1
@@ -1540,7 +1540,7 @@ func LangFuncVxFnNew(lang *vxlang, fnc *vxfunc, isinterface bool) string {
 									LangAsType(lang, "value", arg.vxtype))+
 								LangVar(lang, "outputval", anytype, 3,
 									LangFuncF(lang, fnc)+"("+arginputnames+")")+
-								LangVarSet(lang, "output", 3,
+								LangSpecificVarSet(lang, "output", 3,
 									LangFuncF(lang, funcanyfromany)+"(generic_any_1, "+argoutputnames+")"))
 				}
 			}
@@ -1708,7 +1708,7 @@ func LangFuncVxFunc(
 					LangVarFutureGeneric(lang, "output", returntype, 3, "") +
 					LangVarClassNullable(lang, "fnlocal", fntype, 3, "this.fn") +
 					"\n      if (fnlocal == null) {" +
-					LangVarSet(lang, "output", 4,
+					LangSpecificVarSet(lang, "output", 4,
 						LangPkgNameDot(lang, "vx/core")+
 							"vx_async_new_from_value("+
 							LangPkgNameDot(lang, "vx/core")+
@@ -1716,7 +1716,7 @@ func LangFuncVxFunc(
 					"\n      } else {" +
 					LangVarFuture(lang, "future", anytype, 4,
 						resolve) +
-					LangVarSet(lang, "output", 4,
+					LangSpecificVarSet(lang, "output", 4,
 						LangPkgNameDot(lang, "vx/core")+
 							"vx_async_from_async(generic_any_1, future)") +
 					"\n      }"
@@ -1728,7 +1728,7 @@ func LangFuncVxFunc(
 						LangVarClassNullable(lang, "fnlocal", fntype, 3, "this.fn") +
 						"\n      if (fnlocal != null) {" +
 						LangVar(lang, "anyoutput", anytype, 4, resolve) +
-						LangVarSet(lang, "output", 4,
+						LangSpecificVarSet(lang, "output", 4,
 							LangPkgNameDot(lang, "vx/core")+
 								"f_any_from_any("+
 								LangTypeT(lang, booleantype)+
@@ -1740,7 +1740,7 @@ func LangFuncVxFunc(
 						LangVarClassNullable(lang, "fnlocal", fntype, 3, "this.fn") +
 						"\n      if (fnlocal != null) {" +
 						LangVar(lang, "anyoutput", anytype, 4, resolve) +
-						LangVarSet(lang, "output", 4,
+						LangSpecificVarSet(lang, "output", 4,
 							LangPkgNameDot(lang, "vx/core")+
 								"f_any_from_any("+
 								LangTypeT(lang, inttype)+
@@ -1753,7 +1753,7 @@ func LangFuncVxFunc(
 						LangVarClassNullable(lang, "fnlocal", fntype, 3, "this.fn") +
 						"\n      if (fnlocal != null) {" +
 						LangVar(lang, "anyoutput", anytype, 4, resolve) +
-						LangVarSet(lang, "output", 4,
+						LangSpecificVarSet(lang, "output", 4,
 							LangPkgNameDot(lang, "vx/core")+
 								"f_any_from_any("+
 								LangTypeT(lang, stringtype)+
@@ -1766,7 +1766,7 @@ func LangFuncVxFunc(
 						LangVarClassNullable(lang, "fnlocal", fntype, 3, "this.fn") +
 						"\n      if (fnlocal != null) {" +
 						LangVar(lang, "anyoutput", anytype, 4, resolve) +
-						LangVarSet(lang, "output", 4,
+						LangSpecificVarSet(lang, "output", 4,
 							LangPkgNameDot(lang, "vx/core")+"f_any_from_any(generic_any_1, anyoutput)") +
 						"\n      }"
 				}
@@ -1927,7 +1927,7 @@ func LangFuncVxRepl(
 							pkgname+
 								".f_"+funcname+
 								"("+strings.Join(listargname, ", ")+")")+
-						LangVarSet(lang, "output", 3,
+						LangSpecificVarSet(lang, "output", 3,
 							LangPkgNameDot(lang, "vx/core")+
 								"vx_async_from_async("+
 								LangTypeT(lang, anytype)+
@@ -1938,7 +1938,7 @@ func LangFuncVxRepl(
 					LangVar(lang, "output", anytype, 3,
 						LangTypeE(lang, anytype))+
 						replparams+
-						LangVarSet(lang, "output", 3,
+						LangSpecificVarSet(lang, "output", 3,
 							pkgname+
 								".f_"+
 								funcname+

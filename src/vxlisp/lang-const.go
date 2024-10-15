@@ -23,7 +23,7 @@ func LangConst(
 	cnstclassname := "Const_" + cnstname
 	const_new := "" +
 		LangVarClass(lang, "outval", cnst.vxtype, 3,
-			LangAsClass(lang, "output", cnst.vxtype)) +
+			LangSpecificAsClass(lang, "output", cnst.vxtype)) +
 		"\n      outval.vx_p_constdef = constdef()" + lang.lineend
 	cnstval := LangConstValFromConst(lang, cnst, project)
 	switch NameFromType(cnsttype) {

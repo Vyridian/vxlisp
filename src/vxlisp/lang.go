@@ -23,30 +23,6 @@ type vxlang struct {
 
 var g_ifuncdepth = 0
 
-func LangAsClass(
-	lang *vxlang,
-	svar string,
-	typ *vxtype) string {
-	typetext := ""
-	// SomeClass obj2 = (SomeClass)Convert.ChangeType(t, typeof(SomeClass));
-	switch typ {
-	case rawlistunknowntype:
-		switch lang {
-		case langcsharp:
-			typetext = "List<object>"
-		case langjava:
-			typetext = "List<?>"
-		case langkotlin:
-			typetext = "List<Any>"
-		default:
-			typetext = LangTypeClassFull(lang, typ)
-		}
-	default:
-		typetext = LangTypeClassFull(lang, typ)
-	}
-	return LangSpecificAsTypeText(lang, svar, typetext)
-}
-
 func LangAsType(
 	lang *vxlang,
 	svar string,
@@ -1663,21 +1639,6 @@ func LangVarStaticFuture(
 	return LangVarAll(lang, varname, vartype, emptytype, varvalue, indent, false, true, true, false, false, false)
 }
 
-func LangVarSet(
-	lang *vxlang,
-	varname string,
-	indent int,
-	varvalue string) string {
-	output := LangIndent(lang, indent, true)
-	output += varname
-	output += " = " + varvalue
-	switch lang {
-	case langcsharp, langjava:
-		output += lang.lineend
-	}
-	return output
-}
-
 func LangVarValue(
 	lang *vxlang,
 	vartype *vxtype,
@@ -1710,7 +1671,7 @@ func LangVxArgFromArg(lang *vxlang, prefix string, arg vxarg) string {
 				LangTypeE(lang, arg.vxtype))+
 				LangVarNull(lang, "testnull", arg.vxtype, 3, "vx_p_"+argname)+
 				"\n      if (testnull != null) {"+
-				LangVarSet(lang, "output", 4, "testnull")+
+				LangSpecificVarSet(lang, "output", 4, "testnull")+
 				"\n      }")
 	return output
 }
@@ -1903,7 +1864,7 @@ func LangApp(
 	maintext := "" +
 		LangVar(lang, "mainval", stringtype, 3,
 			LangPkgNameDot(lang, "vx/core")+"f_main(arglist)") +
-		LangVarSet(lang, "output", 3,
+		LangSpecificVarSet(lang, "output", 3,
 			"mainval.vx_string()")
 	if cmd.context == "" && cmd.main == "" {
 	} else {
@@ -1974,7 +1935,7 @@ func LangApp(
 	outputprint := ""
 	arglistinit := ""
 	outputopen = LangVar(lang, "output", rawstringtype, 3, "\"\"")
-	outputclose = LangVarSet(lang, "output", 3,
+	outputclose = LangSpecificVarSet(lang, "output", 3,
 		"mainstring.vx_string()")
 	switch lang {
 	case langcsharp:
