@@ -533,7 +533,7 @@ func JsFromPackage(lang *vxlang, pkg *vxpackage, project *vxproject) (string, *v
 		allconsts += consttext
 		statics += statictext
 	}
-	namespaceopen, namespaceclose := LangNamespaceFromPackage(lang, pkgname)
+	namespaceopen, namespaceclose := LangSpecificNamespaceFromPackage(lang, pkgname)
 	output := "" +
 		"'strict mode'" +
 		"\n" + imports +
@@ -1275,7 +1275,7 @@ func JsTestFromPackage(
 	if len(testall) > 0 {
 		testcases = ",\n      " + strings.Join(testall, ",\n      ")
 	}
-	namespaceopen, namespaceclose := LangNamespaceFromPackage(lang, pkgname+"_test")
+	namespaceopen, namespaceclose := LangSpecificNamespaceFromPackage(lang, pkgname+"_test")
 	output := "" +
 		"'strict mode'" +
 		"\n" + imports +

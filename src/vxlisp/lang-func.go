@@ -16,7 +16,7 @@ func LangFunc(
 	output := "" +
 		LangFuncDoc(lang, fnc) +
 		LangFuncInterface(lang, fnc) +
-		LangFuncClassHeader(lang, fnc, 1) +
+		LangSpecificFuncClassHeader(lang, fnc, 1) +
 		"\n" +
 		LangFuncVxNew(lang, fnc, false) +
 		LangFuncVxCopy(lang, fnc, false) +
@@ -50,27 +50,6 @@ func LangFuncClassFull(
 		name = LangPkgName(lang, fnc.pkgname) + lang.pkgref + name
 	}
 	return name
-}
-
-func LangFuncClassHeader(
-	lang *vxlang,
-	fnc *vxfunc,
-	indent int) string {
-	output := ""
-	lineindent := LangIndent(lang, indent, true)
-	funcname := LangFuncName(fnc)
-	extends := LangPkgNameDot(lang, "vx/core") + "Class_base"
-	switch lang {
-	case langcsharp:
-		output = lineindent + "public class Class_" + funcname + " : " + extends + ", Func_" + funcname + " {"
-	case langjava:
-		output = lineindent + "public static class Class_" + funcname + " extends " + extends + " implements Func_" + funcname + " {"
-	case langkotlin:
-		output = "" +
-			lineindent + "class Class_" + funcname + " : " + extends + ", Func_" + funcname + " {" +
-			lineindent + "  constructor() {}"
-	}
-	return output
 }
 
 func LangFuncDebug(
@@ -583,34 +562,9 @@ func LangFuncHeaderAll(
 		listargtext, ", ")
 	genericdef1, genericdef2, genericdef3 := LangFuncGenericDefinition(
 		lang, fnc)
-	override1 := ""
-	override2 := ""
-	override3 := ""
 	sindent := "\n" + StringRepeat("  ", indent)
-	if fnc.isoverride {
-		switch lang {
-		case langcsharp:
-			override3 = "override "
-		case langjava:
-			override1 = sindent + "@Override"
-		case langkotlin:
-			override2 = "override "
-		}
-	}
-	if fnc.isimplement {
-		switch lang {
-		case langjava:
-			override1 = sindent + "@Override"
-		case langkotlin:
-			override2 = "override "
-		}
-	}
-	if fnc.isimplement2 {
-		switch lang {
-		case langcsharp:
-			override3 = sindent + "new "
-		}
-	}
+	override1, override2, override3 := LangSpecificFuncOverride(
+		lang, fnc, sindent)
 	sinterface := ""
 	sopen := ""
 	sclose := ""
@@ -632,13 +586,13 @@ func LangFuncHeaderAll(
 			sclose = sindent + "}\n"
 		}
 	}
+	if fnc.async {
+		returntype = lang.future + "<" + returntype + ">"
+	}
 	funcprefix := ""
 	switch lang {
 	case langcpp:
 		funcprefix = prefix + "::"
-	}
-	if fnc.async {
-		returntype = lang.future + "<" + returntype + ">"
 	}
 	returntype1 := ""
 	returntype2 := ""
@@ -736,11 +690,8 @@ func LangFuncInterfaceHeader(
 	fnc *vxfunc,
 	indent int,
 	body string) string {
-	lineindent := LangIndent(lang, indent, true)
-	output := ""
 	extends := ""
 	interfaces := body
-	funcname := LangFuncName(fnc)
 	switch NameFromFunc(fnc) {
 	case "vx/core/any<-any", "vx/core/any<-any-async",
 		"vx/core/any<-any-context", "vx/core/any<-any-context-async",
@@ -787,29 +738,8 @@ func LangFuncInterfaceHeader(
 			extends += ", " + LangPkgNameDot(lang, "vx/core") + "Type_replfunc"
 		}
 	}
-	switch lang {
-	case langcsharp:
-		if extends != "" {
-			extends = " : " + extends
-		}
-		output = lineindent + "public interface Func_" + funcname + extends + " {" +
-			interfaces +
-			lineindent + "}\n"
-	case langjava:
-		if extends != "" {
-			extends = " extends " + extends
-		}
-		output = lineindent + "public interface Func_" + funcname + extends + " {" +
-			interfaces +
-			lineindent + "}\n"
-	case langkotlin:
-		if extends != "" {
-			extends = " : " + extends
-		}
-		output = lineindent + "interface Func_" + funcname + extends + " {" +
-			interfaces +
-			lineindent + "}\n"
-	}
+	output := LangSpecificFuncInterface(
+		lang, fnc, extends, interfaces, indent)
 	return output
 }
 
@@ -2030,13 +1960,15 @@ func LangFuncVxTypedef(
 	output := ""
 	funcname := LangFuncFuncFull(lang, fnc)
 	if isinterface {
-		output = LangFuncHeaderInterface(lang, funcname, functypedef, 2)
+		output = LangFuncHeaderInterface(
+			lang, funcname, functypedef, 2)
 	} else {
 		functypedef.isoverride = true
 		output = "" +
 			LangFuncHeader(lang, funcname, functypedef, 2, 0,
 				LangVar(lang, "output", typedeftype, 3,
-					LangTypeT(lang, functype)+lang.typeref+"vx_typedef()"))
+					LangTypeT(
+						lang, functype)+lang.typeref+"vx_typedef()"))
 	}
 	return output
 }

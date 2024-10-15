@@ -23,109 +23,10 @@ type vxlang struct {
 
 var g_ifuncdepth = 0
 
-var langcpp = NewLangCpp()
-var langcsharp = NewLangCsharp()
-var langjava = NewLangJava()
-var langjs = NewLangJs()
-var langkotlin = NewLangKotlin()
-var langswift = NewLangSwift()
-
-func NewLangCpp() *vxlang {
-	output := new(vxlang)
-	output.name = "cpp"
-	output.sourcename = "core"
-	output.sourcefile = ".cpp"
-	output.headerfile = ".hpp"
-	output.pkgpath = "vx_core"
-	output.pkgname = "vx_core"
-	output.pkgref = "::"
-	output.future = "Async"
-	output.indent = "  "
-	output.lineend = ";"
-	output.typeref = "->"
-	output.memmanage = true
-	return output
-}
-
-func NewLangCsharp() *vxlang {
-	output := new(vxlang)
-	output.name = "csharp"
-	output.sourcename = "Core"
-	output.sourcefile = ".cs"
-	output.pkgpath = "Vx.Core"
-	output.pkgname = "Vx.Core"
-	output.pkgref = "."
-	output.future = "Task"
-	output.indent = "  "
-	output.lineend = ";"
-	output.itfext = ":"
-	output.classext = ":"
-	output.typeref = "."
-	return output
-}
-
-func NewLangJava() *vxlang {
-	output := new(vxlang)
-	output.name = "java"
-	output.sourcename = "Core"
-	output.sourcefile = ".java"
-	output.pkgpath = "vx_core"
-	output.pkgname = "Core"
-	output.pkgref = "."
-	output.future = "CompletableFuture"
-	output.indent = "  "
-	output.lineend = ";"
-	output.itfext = "extends"
-	output.classext = "extends"
-	output.typeref = "."
-	return output
-}
-
-func NewLangJs() *vxlang {
-	output := new(vxlang)
-	output.name = "js"
-	output.sourcename = "core"
-	output.sourcefile = ".js"
-	output.pkgpath = "vx_core"
-	output.pkgname = "vx_core"
-	output.pkgref = "."
-	output.indent = "  "
-	output.lineend = ""
-	output.typeref = "."
-	return output
-}
-
-func NewLangKotlin() *vxlang {
-	output := new(vxlang)
-	output.name = "kotlin"
-	output.sourcename = "Core"
-	output.sourcefile = ".kt"
-	output.pkgpath = "vx_core"
-	output.pkgname = "vx_core"
-	output.pkgref = "."
-	output.future = "CompletableFuture"
-	output.indent = "  "
-	output.lineend = ""
-	output.classext = ":"
-	output.typeref = "."
-	return output
-}
-
-func NewLangSwift() *vxlang {
-	output := new(vxlang)
-	output.name = "swift"
-	output.sourcename = "Core"
-	output.sourcefile = ".swift"
-	output.pkgpath = "vx_core"
-	output.pkgname = "vx_core"
-	output.pkgref = "."
-	output.indent = "  "
-	output.lineend = ""
-	output.typeref = "."
-	return output
-}
-
-func LangAsClass(lang *vxlang, svar string, typ *vxtype) string {
+func LangAsClass(
+	lang *vxlang,
+	svar string,
+	typ *vxtype) string {
 	typetext := ""
 	// SomeClass obj2 = (SomeClass)Convert.ChangeType(t, typeof(SomeClass));
 	switch typ {
@@ -143,10 +44,13 @@ func LangAsClass(lang *vxlang, svar string, typ *vxtype) string {
 	default:
 		typetext = LangTypeClassFull(lang, typ)
 	}
-	return LangAsTypeText(lang, svar, typetext)
+	return LangSpecificAsTypeText(lang, svar, typetext)
 }
 
-func LangAsType(lang *vxlang, svar string, typ *vxtype) string {
+func LangAsType(
+	lang *vxlang,
+	svar string,
+	typ *vxtype) string {
 	typetext := ""
 	// SomeClass obj2 = (SomeClass)Convert.ChangeType(t, typeof(SomeClass));
 	switch typ {
@@ -164,29 +68,7 @@ func LangAsType(lang *vxlang, svar string, typ *vxtype) string {
 	default:
 		typetext = LangNameTypeFullFromType(lang, typ)
 	}
-	return LangAsTypeText(lang, svar, typetext)
-}
-
-func LangAsTypeText(lang *vxlang, svar string, stype string) string {
-	output := ""
-	switch lang {
-	case langcsharp:
-		switch stype {
-		case "bool":
-			output = "(bool)" + svar
-		case "float":
-			output = "(float)" + svar
-		case "int":
-			output = "Convert.ToInt32(" + svar + ")"
-		default:
-			output = "(" + stype + ")" + svar
-		}
-	case langjava:
-		output = "(" + stype + ")" + svar
-	case langkotlin:
-		output = svar + " as " + stype
-	}
-	return output
+	return LangSpecificAsTypeText(lang, svar, typetext)
 }
 
 func LangFilesFromProjectCmd(
@@ -215,13 +97,15 @@ func LangFilesFromProjectCmd(
 		file := NewFile()
 		file.name = "App" + lang.sourcefile
 		file.path = apppath
-		file.text = LangApp(lang, project, command)
+		file.text = LangApp(
+			lang, project, command)
 		files = append(files, file)
 	case ":test":
 		file := NewFile()
 		file.name = "AppTest" + lang.sourcefile
 		file.path = testpath
-		file.text = LangTestApp(lang, project, command, pkgprefix)
+		file.text = LangTestApp(
+			lang, project, command, pkgprefix)
 		files = append(files, file)
 		file = NewFile()
 		file.name = "TestLib" + lang.sourcefile
@@ -255,11 +139,13 @@ func LangFilesFromProjectCmd(
 		pkgname = StringUCaseFirst(pkgname)
 		switch lang {
 		case langcsharp:
-			pkgpath = StringUCaseFirstFromStringDelim(pkgpath, "/")
+			pkgpath = StringUCaseFirstFromStringDelim(
+				pkgpath, "/")
 		}
 		switch command.code {
 		case ":source":
-			text, msgs := LangFromPackage(lang, pkg, project, subprefix)
+			text, msgs := LangFromPackage(
+				lang, pkg, project, subprefix)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			file := NewFile()
 			file.name = pkgname + lang.sourcefile
@@ -267,7 +153,8 @@ func LangFilesFromProjectCmd(
 			file.text = text
 			files = append(files, file)
 		case ":test":
-			text, msgs := LangTestFromPackage(lang, pkg, project, command, subprefix)
+			text, msgs := LangTestFromPackage(
+				lang, pkg, project, command, subprefix)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			file := NewFile()
 			file.name = pkgname + "Test" + lang.sourcefile
@@ -279,7 +166,8 @@ func LangFilesFromProjectCmd(
 	return files, msgblock
 }
 
-func LangFinalArg(lang *vxlang) string {
+func LangFinalArg(
+	lang *vxlang) string {
 	var output = ""
 	switch lang {
 	case langjava:
@@ -297,16 +185,9 @@ func LangFinalClass(lang *vxlang) string {
 	return output
 }
 
-func LangFinalVar(lang *vxlang) string {
-	var output = ""
-	switch lang {
-	case langjava:
-		output = "final "
-	}
-	return output
-}
-
-func LangFolderCopyTestdataFromProjectPath(project *vxproject, targetpath string) *vxmsgblock {
+func LangFolderCopyTestdataFromProjectPath(
+	project *vxproject,
+	targetpath string) *vxmsgblock {
 	msgblock := NewMsgBlock("LangFileCopyTestdataFromProjectPath")
 	sourcepath := PathFromProjectPath(project, "./testdata")
 	if BooleanExistsFromPath(sourcepath) {
@@ -328,7 +209,8 @@ func LangForList(
 	indent int,
 	body string) string {
 	sindent := "\n" + StringRepeat("  ", indent)
-	header := LangForListHeader(lang, forvar, typ, listvar, indent)
+	header := LangSpecificForListHeader(
+		lang, forvar, typ, listvar, indent)
 	footer := sindent + "}"
 	output := "" +
 		header +
@@ -337,26 +219,8 @@ func LangForList(
 	return output
 }
 
-func LangForListHeader(
-	lang *vxlang,
-	forvar string,
-	typ *vxtype,
-	listvar string,
-	indent int) string {
-	sindent := "\n" + StringRepeat("  ", indent)
-	output := ""
-	switch lang {
-	case langcsharp:
-		output = sindent + "foreach (" + LangNameTypeFullFromType(lang, typ) + " " + forvar + " in " + listvar + ") {"
-	case langjava:
-		output = sindent + "for (" + LangNameTypeFullFromType(lang, typ) + " " + forvar + " : " + listvar + ") {"
-	case langkotlin:
-		output = sindent + "for (" + forvar + " : " + LangNameTypeFullFromType(lang, typ) + " in " + listvar + ") {"
-	}
-	return output
-}
-
-func LangFromName(name string) string {
+func LangFromName(
+	name string) string {
 	output := name
 	if output == "extends" {
 		output = "extend"
@@ -377,22 +241,15 @@ func LangFromPackage(
 	project *vxproject,
 	pkgprefix string) (string, *vxmsgblock) {
 	msgblock := NewMsgBlock("LangFromPackage")
-	pkgpath, pkgname := LangPackagePathFromPrefixName(lang, pkgprefix, pkg.name)
+	pkgpath, pkgname := LangPackagePathFromPrefixName(
+		lang, pkgprefix, pkg.name)
 	specialcode := project.mapnative[pkg.name+"_"+lang.name+".txt"]
 	typkeys := ListKeyFromMapType(pkg.maptype)
 	typetexts := ""
-	packageline := ""
-	switch lang {
-	case langcsharp:
-		ipos := IntFromStringFindLast(pkg.name, "/")
-		csnamespace := StringSubstring(pkg.name, 0, ipos)
-		csnamespace = StringFromStringFindReplace(csnamespace, "/", ".")
-		csnamespace = StringUCaseFirstFromStringDelim(csnamespace, ".")
-		packageline = "namespace " + csnamespace + lang.lineend + "\n"
-	case langjava, langkotlin:
-		packageline = "package " + pkgpath + lang.lineend + "\n"
-	}
-	namespaceopen, namespaceclose := LangNamespaceFromPackage(lang, pkgname)
+	packageline := LangSpecificPackageLine(
+		lang, pkg.name, pkgpath)
+	namespaceopen, namespaceclose := LangSpecificNamespaceFromPackage(
+		lang, pkgname)
 	packagestatic := "" +
 		LangVarCollection(lang, "maptype", rawmaptype, anytype, 2, ":new") +
 		LangVarCollection(lang, "mapconst", rawmaptype, anytype, 2, ":new") +
@@ -464,7 +321,8 @@ func LangFromPackage(
 		statics +
 		afterstatics
 		//		emptytypes
-	imports := LangImportsFromPackage(lang, pkg, pkgprefix, body, false)
+	imports := LangImportsFromPackage(
+		lang, pkg, pkgprefix, body, false)
 	output := "" +
 		packageline +
 		imports +
@@ -472,18 +330,6 @@ func LangFromPackage(
 		body +
 		namespaceclose
 	return output, msgblock
-}
-
-func LangFromText(lang *vxlang, text string) string {
-	var output = text
-	output = strings.ReplaceAll(output, "\n", "\\n")
-	output = strings.ReplaceAll(output, "\\\"", "\\\\\"")
-	output = strings.ReplaceAll(output, "\"", "\\\"")
-	switch lang {
-	case langkotlin:
-		output = strings.ReplaceAll(output, "$", "\\$")
-	}
-	return output
 }
 
 func LangFromValue(
@@ -546,7 +392,7 @@ func LangFromValue(
 		} else if BooleanFromStringStartsEnds(valstr, "\"", "\"") {
 			valstr = valstr[1 : len(valstr)-1]
 			if encode {
-				output = LangFromText(lang, valstr)
+				output = LangSpecificFromText(lang, valstr)
 			} else {
 				output = valstr
 			}
@@ -1053,7 +899,7 @@ func LangNameFromArg(lang *vxlang, arg vxarg) string {
 }
 
 func LangNameFromType(lang *vxlang, typ *vxtype) string {
-	return LangTypeNameSimple(lang, typ, false)
+	return LangSpecificTypeNameSimple(lang, typ, false)
 }
 
 func LangNameTypeFromTypeSimple(lang *vxlang, typ *vxtype, simple bool) string {
@@ -1204,7 +1050,7 @@ func LangNameTypeFullFromTypeSimple(lang *vxlang, typ *vxtype, simple bool) stri
 			}
 		default:
 			if typ.isgeneric && !simple {
-				name = LangTypeNameSimple(lang, typ, simple)
+				name = LangSpecificTypeNameSimple(lang, typ, simple)
 			} else {
 				name = LangPkgName(lang, typ.pkgname)
 				if typ.isfunc {
@@ -1212,7 +1058,7 @@ func LangNameTypeFullFromTypeSimple(lang *vxlang, typ *vxtype, simple bool) stri
 				} else {
 					name += lang.pkgref + "Type_"
 				}
-				name += LangTypeNameSimple(lang, typ, simple)
+				name += LangSpecificTypeNameSimple(lang, typ, simple)
 			}
 		}
 	}
@@ -1237,35 +1083,9 @@ func LangNameTypeFromTypeSubtype(lang *vxlang, typ *vxtype, subtype *vxtype) str
 	return output
 }
 
-func LangNamespaceFromPackage(lang *vxlang, pkgname string) (string, string) {
-	namespaceopen := ""
-	namespaceclose := ""
-	switch lang {
-	case langcpp:
-		namespaceopen = "\nnamespace " + pkgname + " {\n\n"
-		namespaceclose = "\n}\n"
-	case langcsharp:
-		ipos := IntFromStringFindLast(pkgname, ".")
-		after := StringSubstring(pkgname, ipos+1, len(pkgname))
-		namespaceopen = "\npublic static class " + after + " {\n\n"
-		namespaceclose = "\n}\n"
-	case langjava:
-		namespaceopen = "\npublic final class " + pkgname + " {\n\n"
-		namespaceclose = "\n}\n"
-	case langjs:
-		namespaceopen = "\nexport default class " + pkgname + " {\n\n"
-		namespaceclose = "\n}\n"
-	case langkotlin:
-		namespaceopen = "" +
-			"\nobject " + pkgname + " {" +
-			"\n" +
-			"\n"
-		namespaceclose = "\n}\n"
-	}
-	return namespaceopen, namespaceclose
-}
-
-func LangNativeAutoFromFunc(lang *vxlang, fnc *vxfunc) string {
+func LangNativeAutoFromFunc(
+	lang *vxlang,
+	fnc *vxfunc) string {
 	output := ""
 	var listargname []string
 	if fnc.generictype != nil {
@@ -1939,22 +1759,6 @@ func LangVxIntFromString(lang *vxlang, text string) string {
 		output = "Integer.parseInt(" + text + ")"
 	case langkotlin:
 		output = text + ".toInt()"
-	}
-	return output
-}
-
-func LangVxListAdd(
-	lang *vxlang,
-	varname string,
-	indent int,
-	value string) string {
-	output := ""
-	sindent := "\n" + StringRepeat("  ", indent)
-	switch lang {
-	case langcsharp:
-		output = sindent + varname + ".Add(" + value + ")" + lang.lineend
-	default:
-		output = sindent + varname + ".add(" + value + ")" + lang.lineend
 	}
 	return output
 }

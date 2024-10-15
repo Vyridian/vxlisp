@@ -1464,7 +1464,7 @@ func CppFromPackage(
   inline vx_Class_package const vx_package;
 `
 	headerimports := CppImportsFromPackage(pkg, "", header, false)
-	namespaceopen, namespaceclose := LangNamespaceFromPackage(lang, pkgname)
+	namespaceopen, namespaceclose := LangSpecificNamespaceFromPackage(lang, pkgname)
 	headeroutput := "" +
 		"#ifndef " + StringUCase(pkgname+"_hpp") +
 		"\n#define " + StringUCase(pkgname+"_hpp") +
@@ -4294,7 +4294,7 @@ func CppTestFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, command *v
 	if ipos >= 0 {
 		simplename = simplename[ipos+1:]
 	}
-	namespaceopen, namespaceclose := LangNamespaceFromPackage(lang, pkgname+"_test")
+	namespaceopen, namespaceclose := LangSpecificNamespaceFromPackage(lang, pkgname+"_test")
 	headertext := "" +
 		"#ifndef " + StringUCase(pkgname+"_test_hpp") +
 		"\n#define " + StringUCase(pkgname+"_test_hpp") +

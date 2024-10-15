@@ -67,11 +67,7 @@ func LangTestApp(
 	}
 	tests := ""
 	listpackage := project.listpackage
-	testpackageprefix := ""
-	switch lang {
-	case langcsharp:
-		testpackageprefix = "Test"
-	}
+	testpackageprefix := LangSpecificTestPackagePrefix(lang)
 	var listtestpackage []string
 	for _, pkg := range listpackage {
 		iscontinue := true
@@ -81,45 +77,18 @@ func LangTestApp(
 		}
 		if iscontinue {
 			if pkg.name != "" {
-				imports += LangTestImport(lang, pkg, imports)
+				imports += LangSpecificTestImport(lang, pkg, imports)
 				testpackage := "\n      " + testpackageprefix + LangPkgName(lang, pkg.name) + "Test.test_package(context)"
-				listtestpackage = append(listtestpackage, testpackage)
-				switch lang {
-				case langcsharp:
-					tests += "" +
-						"\n  [Fact]" +
-						"\n  public void test_" + StringFromStringFindReplace(pkg.name, "/", "_") + "() {" +
-						LangVar(lang, "testpackage", testpackagetype, 2,
-							"Test"+
-								LangPkgName(lang, pkg.name)+
-								"Test.test_package(context)") +
-						"\n    TestLib.run_testpackage_async(testpackage)" + lang.lineend +
-						"\n  }" +
-						"\n"
-				case langjava:
-					tests += "" +
-						"\n  @Test" +
-						"\n  @DisplayName(\"" + pkg.name + "\")" +
-						"\n  void test_" + StringFromStringFindReplace(pkg.name, "/", "_") + "() {" +
-						"\n    com.vxlisp.vx.Test.Type_testpackage testpackage = " + LangPkgName(lang, pkg.name) + "Test.test_package(context)" + lang.lineend +
-						"\n    TestLib.run_testpackage_async(testpackage)" + lang.lineend +
-						"\n  }" +
-						"\n"
-				case langkotlin:
-					tests += "" +
-						"\n  @Test" +
-						"\n  @DisplayName(\"" + pkg.name + "\")" +
-						"\n  fun test_" + StringFromStringFindReplace(pkg.name, "/", "_") + "() : Unit {" +
-						"\n    val testpackage : vx_test.Type_testpackage = " + LangPkgName(lang, pkg.name) + "Test.test_package(context)" + lang.lineend +
-						"\n    TestLib.run_testpackage_async(testpackage)" + lang.lineend +
-						"\n  }" +
-						"\n"
-				}
+				listtestpackage = append(
+					listtestpackage, testpackage)
+				tests += LangSpecificTestPackage(lang, pkg, testpackagetype)
 			}
 		}
 	}
-	testpackages := StringFromListStringJoin(listtestpackage, ",")
-	namespaceopen, namespaceclose := LangNamespaceFromPackage(lang, "AppTest")
+	testpackages := StringFromListStringJoin(
+		listtestpackage, ",")
+	namespaceopen, namespaceclose := LangSpecificNamespaceFromPackage(
+		lang, "AppTest")
 	writetestsuite := ""
 	testbasics := ""
 	switch lang {
@@ -631,40 +600,6 @@ func LangTestFromValue(
 	lang *vxlang,
 	value vxvalue) string {
 	var output = ""
-	output = LangFromText(lang, value.textblock.text)
-	return output
-}
-
-func LangTestImport(
-	lang *vxlang,
-	pkg *vxpackage,
-	imports string) string {
-	project := pkg.project
-	pkgname := pkg.name
-	output := ""
-	importline := ""
-	switch lang {
-	case langcpp:
-		importline = "#include \"" + pkgname + "test.hpp\""
-	case langcsharp:
-		importline = "using Xunit" + lang.lineend
-	case langjava:
-		ipos := IntFromStringFindLast(pkgname, "/")
-		path := StringSubstring(pkgname, 0, ipos)
-		path = StringFromStringFindReplace(path, "/", ".")
-		name := StringSubstring(pkgname, ipos+1, len(pkgname))
-		name = StringUCaseFirst(name)
-		importname := project.javadomain + "." + path + "." + name + "Test"
-		importline = "import " + importname + lang.lineend
-	case langkotlin:
-		ipos := IntFromStringFindLast(pkgname, "/")
-		path := StringSubstring(pkgname, 0, ipos)
-		path = StringFromStringFindReplace(path, "/", ".")
-		importname := project.javadomain + "." + path + ".*"
-		importline = "import " + importname + lang.lineend
-	}
-	if !BooleanFromStringContains(imports, importline) {
-		output = importline + "\n"
-	}
+	output = LangSpecificFromText(lang, value.textblock.text)
 	return output
 }

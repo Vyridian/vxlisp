@@ -1,8 +1,6 @@
 package vxlisp
 
 func LangTestLib(lang *vxlang) string {
-	output := ""
-	namespaceopen, namespaceclose := LangNamespaceFromPackage(lang, "TestLib")
 	commontests := "" +
 		LangTestLib_file_test(lang) +
 		LangTestLib_read_test_file(lang) +
@@ -64,113 +62,10 @@ func LangTestLib(lang *vxlang) string {
 		LangTestLib_run_testresult(lang) +
 		LangTestLib_write_testpackagelist_async(lang)
 	spath := LangPkgNameDot(lang, "vx/core") + "c_path_test_resources.vx_string()"
-	switch lang {
-	case langcsharp:
-		output = "" +
-			"\nusing Xunit;" +
-			"\n" +
-			"\nnamespace AppTest;" +
-			"\n" +
-			namespaceopen +
-			"\n  public class TestOutputWriter : TextWriter {" +
-			"\n" +
-			"\n    private readonly Xunit.Abstractions.ITestOutputHelper _output;" +
-			"\n" +
-			"\n    public TestOutputWriter(Xunit.Abstractions.ITestOutputHelper output) {" +
-			"\n      _output = output;" +
-			"\n    }" +
-			"\n" +
-			"\n    public override System.Text.Encoding Encoding => System.Text.Encoding.UTF8;" +
-			"\n" +
-			"\n			 public override void WriteLine(int message) {" +
-			"\n				  _output.WriteLine(\"\" + message);" +
-			"\n  		}" +
-			"\n" +
-			"\n  		public override void WriteLine(string? message) {" +
-			"\n  				_output.WriteLine(message);" +
-			"\n  		}" +
-			"\n" +
-			"\n  }" +
-			"\n" +
-			"\n  public static bool EnableConsole(" +
-			"\n    Xunit.Abstractions.ITestOutputHelper output) {" +
-			"\n    TestOutputWriter converter = new TestOutputWriter(output);" +
-			"\n    System.Console.SetOut(converter);" +
-			"\n    return true;" +
-			"\n  }" +
-			"\n" +
-			"\n  public static string spath = " + spath + ";" +
-			"\n" +
-			commontests +
-			namespaceclose
-	case langjava:
-		output = `
-import java.util.*;
-import java.util.concurrent.CompletableFuture;
-import static org.junit.jupiter.api.Assertions.*;
-import com.vxlisp.vx.*;
-import com.vxlisp.vx.data.File;
-import com.vxlisp.vx.Test;
-import com.vxlisp.vx.web.Html;
-` +
-			namespaceopen +
-			"\n  public static String spath = " + spath + ";" +
-			"\n" +
-			commontests +
-			"\n" +
-			`
-  // Blocking
-  // Only use if running a single testdescribe
-  public static ` + LangTypeName(lang, rawbooltype) + ` run_testdescribe_async(final ` + LangTypeName(lang, rawstringtype) + ` testpkg, final ` + LangTypeName(lang, rawstringtype) + ` casename, final Test.Type_testdescribe testdescribe) {
-    ` + lang.future + `<Test.Type_testdescribe> async_testdescribe = Test.f_resolve_testdescribe(testdescribe);
-    Test.Type_testdescribe testdescribe_resolved = ` + LangPkgNameDot(lang, "vx/core") + `vx_sync_from_async(Test.t_testdescribe, async_testdescribe);
-    return run_testdescribe(testpkg, casename, testdescribe_resolved);
-  }
-
-  public static ` + LangTypeName(lang, rawbooltype) + ` run_testpackagelist(final Test.Type_testpackagelist testpackagelist) {
-    ` + LangTypeName(lang, rawbooltype) + ` output = true;
-    List<Test.Type_testpackage> listtestpackage = testpackagelist.vx_listtestpackage();
-    for (Test.Type_testpackage testpackage : listtestpackage) {
-      ` + LangTypeName(lang, rawbooltype) + ` testoutput = run_testpackage(testpackage);
-      if (!testoutput) {
-        output = false;
-      }
-    }
-    return output;
-  }
-
-  // Blocking
-  // This is the preferred way of calling testsuite (1 block per testsuite)
-  public static ` + LangTypeName(lang, rawbooltype) + ` run_testpackagelist_async(final Test.Type_testpackagelist testpackagelist) {
-    CompletableFuture<Test.Type_testpackagelist> async_testpackagelist = Test.f_resolve_testpackagelist(testpackagelist);
-    Test.Type_testpackagelist testpackagelist_resolved = ` + LangPkgNameDot(lang, "vx/core") + `vx_sync_from_async(Test.t_testpackagelist, async_testpackagelist);
-    return run_testpackagelist(testpackagelist_resolved);
-  }
-
-  // Blocking
-  public static ` + LangTypeName(lang, rawbooltype) + ` run_testresult_async(final ` + LangTypeName(lang, rawstringtype) + ` testpkg, final ` + LangTypeName(lang, rawstringtype) + ` testname, final ` + LangTypeName(lang, rawstringtype) + ` message, Test.Type_testresult testresult) {
-    ` + lang.future + `<Test.Type_testresult> async_testresult = Test.f_resolve_testresult(testresult);
-    Test.Type_testresult testresult_resolved = ` + LangPkgNameDot(lang, "vx/core") + `vx_sync_from_async(Test.t_testresult, async_testresult);
-    return run_testresult(testpkg, testname, message, testresult_resolved);
-  }
-` +
-			namespaceclose
-	case langkotlin:
-		output = `
-import java.util.*
-import java.util.concurrent.CompletableFuture
-import org.junit.jupiter.api.Assertions.*
-import com.vxlisp.vx.*
-import com.vxlisp.vx.data.*
-import com.vxlisp.vx.web.*
-` +
-			namespaceopen +
-			"\n  val spath : String = " + spath +
-			"\n" +
-			commontests +
-			namespaceclose
-
-	}
+	namespaceopen, namespaceclose := LangSpecificNamespaceFromPackage(
+		lang, "TestLib")
+	output := LangSpecificTestLib(
+		lang, namespaceopen, namespaceclose, commontests, spath)
 	return output
 }
 

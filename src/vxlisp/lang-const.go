@@ -55,7 +55,7 @@ func LangConst(
 	case "vx/core/string":
 		if BooleanFromStringStartsEnds(cnstval, "\"", "\"") {
 			cnstval = cnstval[1 : len(cnstval)-1]
-			cnstval = LangFromText(lang, cnstval)
+			cnstval = LangSpecificFromText(lang, cnstval)
 			cnstval = "\"" + cnstval + "\""
 		}
 		const_new += "\n      outval.vxstring = " + cnstval + lang.lineend
@@ -125,7 +125,7 @@ func LangConst(
 	funcconstnew.listarg = listarg
 	output += "" +
 		doc +
-		LangConstClassHeader(lang, cnst, 1) +
+		LangSpecificConstClassHeader(lang, cnst, 1) +
 		LangStaticOpen(lang) +
 		LangConstVxConstdef(lang, cnst) +
 		LangFuncHeaderStatic(lang, cnstname, funcconstnew, 2, 0, const_new) +
@@ -149,29 +149,14 @@ func LangConstC(lang *vxlang, cnst *vxconst) string {
 	return name
 }
 
-func LangConstClassHeader(lang *vxlang, cnst *vxconst, indent int) string {
-	output := ""
-	lineindent := LangIndent(lang, indent, true)
-	constname := "Const_" + LangFromName(cnst.alias)
-	//extends := LangNameClassFullFromType(lang, cnst.vxtype)
-	switch lang {
-	case langcsharp:
-		output = lineindent + "public class " + constname + " {"
-	case langjava:
-		output = lineindent + "public static class " + constname + " {"
-	case langkotlin:
-		output = "" +
-			lineindent + "class " + constname + " {" +
-			lineindent + "  constructor() {}"
-	}
-	return output
-}
-
 func LangConstName(cnst *vxconst) string {
 	return LangFromName(cnst.alias)
 }
 
-func LangConstValFromConst(lang *vxlang, cnst *vxconst, project *vxproject) string {
+func LangConstValFromConst(
+	lang *vxlang,
+	cnst *vxconst,
+	project *vxproject) string {
 	cnstval := StringValueFromValue(cnst.value)
 	switch NameFromConst(cnst) {
 	case "vx/core/path-test-resources":

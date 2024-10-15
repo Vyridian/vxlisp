@@ -80,7 +80,7 @@ func LangType(lang *vxlang, typ *vxtype) (string, *vxmsgblock) {
 			validkeys := LangVarCollection(lang, "validkeys", rawlisttype, rawstringtype, 3, ":new")
 			valnewswitch := ""
 			for _, arg := range props {
-				validkeys += LangVxListAdd(lang, "validkeys", 3, "\":"+arg.name+"\"")
+				validkeys += LangSpecificVxListAdd(lang, "validkeys", 3, "\":"+arg.name+"\"")
 				argname := LangFromName(arg.name)
 				valcopyend += "" +
 					"\n        work.vx_p_" + argname + " = vx_p_" + argname + lang.lineend
@@ -279,7 +279,7 @@ func LangType(lang *vxlang, typ *vxtype) (string, *vxmsgblock) {
 	output += "" +
 		doc +
 		LangTypeInterface(lang, typ) +
-		LangTypeClassHeader(lang, typ, 1) +
+		LangSpecificTypeClassHeader(lang, typ, 1) +
 		"\n" +
 		instancefuncs +
 		LangTypeVxNew(lang, typ, false) +
@@ -309,24 +309,10 @@ func LangTypeClassFull(lang *vxlang, typ *vxtype) string {
 	return name
 }
 
-func LangTypeClassHeader(lang *vxlang, typ *vxtype, indent int) string {
-	output := ""
-	lineindent := LangIndent(lang, indent, true)
-	typename := LangFromName(typ.alias)
-	switch lang {
-	case langcsharp:
-		output = lineindent + "public class Class_" + typename + " : " + LangPkgNameDot(lang, "vx/core") + "Class_base, Type_" + LangNameFromType(lang, typ) + " {"
-	case langjava:
-		output = lineindent + "public static class Class_" + typename + " extends " + LangPkgNameDot(lang, "vx/core") + "Class_base implements Type_" + LangNameFromType(lang, typ) + " {"
-	case langkotlin:
-		output = "" +
-			lineindent + "class Class_" + typename + " : " + LangPkgNameDot(lang, "vx/core") + "Class_base, Type_" + LangNameFromType(lang, typ) + " {" +
-			lineindent + "  constructor() {}"
-	}
-	return output
-}
-
-func LangTypeDef(lang *vxlang, typ *vxtype, indent int) string {
+func LangTypeDef(
+	lang *vxlang,
+	typ *vxtype,
+	indent int) string {
 	lineindent := LangIndent(lang, indent, true)
 	allowtypes := LangTypeListFromListType(lang, typ.allowtypes)
 	disallowtypes := LangTypeListFromListType(lang, typ.disallowtypes)
@@ -404,18 +390,12 @@ func LangTypeEmptyValue(lang *vxlang, typ *vxtype, indent string) string {
 	return output
 }
 
-func LangTypeInterface(lang *vxlang, typ *vxtype) string {
+func LangTypeInterface(
+	lang *vxlang,
+	typ *vxtype) string {
 	output := ""
 	typename := LangNameTypeFullFromType(lang, typ)
-	isbasics := true
-	switch lang {
-	case langcsharp, langjava, langkotlin:
-		switch NameFromType(typ) {
-		case "vx/core/any":
-		default:
-			isbasics = false
-		}
-	}
+	isbasics := LangSpecificTypeInterfaceBasics(lang, typ)
 	basics := ""
 	if isbasics {
 		basics = "" +
@@ -424,9 +404,11 @@ func LangTypeInterface(lang *vxlang, typ *vxtype) string {
 			LangTypeVxEmpty(lang, typ, true) +
 			LangTypeVxType(lang, typ, true)
 	}
-	createtext, _ := LangFromValue(lang, typ.createvalue, "", emptyfunc, 0, true, false, "")
+	createtext, _ := LangFromValue(
+		lang, typ.createvalue, "", emptyfunc, 0, true, false, "")
 	if createtext != "" {
-		createlines := ListStringFromStringSplit(createtext, "\n")
+		createlines := ListStringFromStringSplit(
+			createtext, "\n")
 		isoverride := false
 		for _, createline := range createlines {
 			if (createline == "@Override") || (createline == "// :implements") {
@@ -436,7 +418,8 @@ func LangTypeInterface(lang *vxlang, typ *vxtype) string {
 				if BooleanFromStringStarts(createline, "override ") {
 					ipos1 += 9
 				}
-				ipos2 := IntFromStringFindLast(createline, "{")
+				ipos2 := IntFromStringFindLast(
+					createline, "{")
 				createline = createline[ipos1:ipos2-1] + lang.lineend
 				basics += "\n    " + createline
 				isoverride = false
@@ -461,7 +444,7 @@ func LangTypeInterface(lang *vxlang, typ *vxtype) string {
 		funcvxreserve.name = "vx_reserve"
 		funcvxreserve.vxtype = nonetype
 		output = "" +
-			LangTypeInterfaceHeader(lang, anytype, emptylisttype, 1,
+			LangSpecificTypeInterfaceHeader(lang, anytype, emptylisttype, 1,
 				basics+
 					LangFuncHeaderOld(lang, typename, funcvxtypedef, true, false)+
 					LangFuncHeaderOld(lang, typename, funcvxconstdef, true, false)+
@@ -471,24 +454,24 @@ func LangTypeInterface(lang *vxlang, typ *vxtype) string {
 					LangFuncHeaderOld(lang, typename, funcvxreserve, true, false))
 	case "vx/core/boolean":
 		output = "" +
-			LangTypeInterfaceHeader(lang, booleantype, []*vxtype{anytype}, 1, basics)
+			LangSpecificTypeInterfaceHeader(lang, booleantype, []*vxtype{anytype}, 1, basics)
 	case "vx/core/decimal":
 		output = "" +
-			LangTypeInterfaceHeader(lang, decimaltype, []*vxtype{numbertype}, 1, basics)
+			LangSpecificTypeInterfaceHeader(lang, decimaltype, []*vxtype{numbertype}, 1, basics)
 	case "vx/core/float":
 		output = "" +
-			LangTypeInterfaceHeader(lang, floattype, []*vxtype{numbertype}, 1, basics)
+			LangSpecificTypeInterfaceHeader(lang, floattype, []*vxtype{numbertype}, 1, basics)
 	case "vx/core/func":
 		output = "" +
-			LangTypeInterfaceHeader(lang, functype, []*vxtype{anytype}, 1,
+			LangSpecificTypeInterfaceHeader(lang, functype, []*vxtype{anytype}, 1,
 				basics+
 					LangTypeVxFuncdef(lang, typ, true))
 	case "vx/core/int":
 		output = "" +
-			LangTypeInterfaceHeader(lang, inttype, []*vxtype{numbertype}, 1, basics)
+			LangSpecificTypeInterfaceHeader(lang, inttype, []*vxtype{numbertype}, 1, basics)
 	case "vx/core/string":
 		output = "" +
-			LangTypeInterfaceHeader(lang, stringtype, []*vxtype{anytype}, 1, basics)
+			LangSpecificTypeInterfaceHeader(lang, stringtype, []*vxtype{anytype}, 1, basics)
 	case "vx/core/list":
 		funcvxlist := NewFunc()
 		funcvxlist.name = "vx_list"
@@ -502,7 +485,7 @@ func LangTypeInterface(lang *vxlang, typ *vxtype) string {
 		funcvxany.vxtype = anytype
 		funcvxany.listarg = arglist
 		output = "" +
-			LangTypeInterfaceHeader(lang, listtype, []*vxtype{anytype}, 1,
+			LangSpecificTypeInterfaceHeader(lang, listtype, []*vxtype{anytype}, 1,
 				basics+
 					LangFuncHeaderInterface(lang, typename, funcvxlist, 2)+
 					LangFuncHeaderInterface(lang, typename, funcvxany, 2))
@@ -538,7 +521,7 @@ func LangTypeInterface(lang *vxlang, typ *vxtype) string {
 		funcvxset.vxtype = booleantype
 		funcvxset.listarg = arglist
 		output = "" +
-			LangTypeInterfaceHeader(lang, maptype, []*vxtype{anytype}, 1,
+			LangSpecificTypeInterfaceHeader(lang, maptype, []*vxtype{anytype}, 1,
 				basics+
 					LangFuncHeaderInterface(lang, typename, funcvxnewfrommap, 2)+
 					LangFuncHeaderInterface(lang, typename, funcvxany, 2)+
@@ -557,7 +540,7 @@ func LangTypeInterface(lang *vxlang, typ *vxtype) string {
 		funcvxmap.name = "vx_map"
 		funcvxmap.vxtype = rawmapanytype
 		output = "" +
-			LangTypeInterfaceHeader(lang, structtype, []*vxtype{anytype}, 1,
+			LangSpecificTypeInterfaceHeader(lang, structtype, []*vxtype{anytype}, 1,
 				basics+
 					LangFuncHeaderInterface(lang, typename, funcvxany, 2)+
 					LangFuncHeaderInterface(lang, typename, funcvxmap, 2))
@@ -644,50 +627,9 @@ func LangTypeInterface(lang *vxlang, typ *vxtype) string {
 			extends = append(extends, anytype)
 		}
 		output = "" +
-			LangTypeInterfaceHeader(lang, typ, extends, 1,
+			LangSpecificTypeInterfaceHeader(lang, typ, extends, 1,
 				basics+
 					extras)
-	}
-	return output
-}
-
-func LangTypeInterfaceHeader(
-	lang *vxlang,
-	typ *vxtype,
-	extendtypes []*vxtype,
-	indent int,
-	body string) string {
-	lineindent := LangIndent(lang, indent, true)
-	output := ""
-	extendtext := ""
-	var extendtexts []string
-	for _, extendtype := range extendtypes {
-		extendpart := LangTypeName(lang, extendtype)
-		extendtexts = append(extendtexts, extendpart)
-	}
-	extendtext = StringFromListStringJoin(extendtexts, ", ")
-	switch lang {
-	case langcsharp:
-		if extendtext != "" {
-			extendtext = " : " + extendtext
-		}
-		output = lineindent + "public interface Type_" + LangNameFromType(lang, typ) + extendtext + " {" +
-			body +
-			lineindent + "}\n"
-	case langjava:
-		if extendtext != "" {
-			extendtext = " extends " + extendtext
-		}
-		output = lineindent + "public interface Type_" + LangNameFromType(lang, typ) + extendtext + " {" +
-			body +
-			lineindent + "}\n"
-	case langkotlin:
-		if extendtext != "" {
-			extendtext = " : " + extendtext
-		}
-		output = lineindent + "interface Type_" + LangNameFromType(lang, typ) + extendtext + " {" +
-			body +
-			lineindent + "}\n"
 	}
 	return output
 }
@@ -696,7 +638,9 @@ func LangTypeIntValNew(lang *vxlang, val int) string {
 	return LangPkgNameDot(lang, "vx/core") + "vx_new_int(" + StringFromInt(val) + ")"
 }
 
-func LangTypeListFromListType(lang *vxlang, listtype []*vxtype) string {
+func LangTypeListFromListType(
+	lang *vxlang,
+	listtype []*vxtype) string {
 	output := LangPkgNameDot(lang, "vx/core") + "e_typelist"
 	if len(listtype) > 0 {
 		var listtext []string
@@ -710,145 +654,23 @@ func LangTypeListFromListType(lang *vxlang, listtype []*vxtype) string {
 	return output
 }
 
-func LangTypeName(lang *vxlang, typ *vxtype) string {
-	return LangNameTypeFromTypeSimple(lang, typ, false)
+func LangTypeName(
+	lang *vxlang,
+	typ *vxtype) string {
+	return LangNameTypeFromTypeSimple(
+		lang, typ, false)
 }
 
-func LangTypeNameSimple(lang *vxlang, typ *vxtype, simple bool) string {
-	name := ""
-	alias := typ.alias
-	switch typ {
-	case rawbooltype:
-		switch lang {
-		case langcsharp:
-			name = "bool"
-		case langjava:
-			name = "boolean"
-		case langkotlin:
-			name = "Boolean"
-		}
-	case rawbooleantype:
-		switch lang {
-		case langcsharp:
-			name = "bool"
-		case langjava:
-			name = "Boolean"
-		case langkotlin:
-			name = "Boolean"
-		}
-	case rawfloattype:
-		switch lang {
-		case langcsharp, langjava, langkotlin:
-			name = "Float"
-		}
-	case rawifntype:
-		switch lang {
-		case langcsharp, langjava, langkotlin:
-			name = "IFn"
-		}
-	case rawinttype:
-		switch lang {
-		case langcsharp, langjava:
-			name = "int"
-		case langkotlin:
-			name = "Int"
-		}
-	case rawintegertype:
-		switch lang {
-		case langcsharp, langjava:
-			name = "Integer"
-		case langkotlin:
-			name = "Int"
-		}
-	case rawlisttype:
-		switch lang {
-		case langcsharp, langjava, langkotlin:
-			name = "List"
-		}
-	case rawlistanytype:
-		switch lang {
-		case langcsharp, langjava, langkotlin:
-			name = "List<" + LangTypeNameSimple(lang, anytype, true) + ">"
-		}
-	case rawlistunknowntype:
-		switch lang {
-		case langcsharp:
-			name = "List<object>"
-		case langjava:
-			name = "List<?>"
-		case langkotlin:
-			name = "List<*>"
-		}
-	case rawmaptype:
-		switch lang {
-		case langcsharp:
-			name = "Vx.Core.Map"
-		case langjava, langkotlin:
-			name = "Map"
-		}
-	case rawmapanytype:
-		switch lang {
-		case langcpp:
-			name = "std::map<string, " + LangTypeNameSimple(lang, anytype, true) + ">"
-		case langcsharp:
-			name = "Vx.Core.Map<string, " + LangTypeNameSimple(lang, anytype, true) + ">"
-		case langjava, langkotlin:
-			name = "Map<String, " + LangTypeNameSimple(lang, anytype, true) + ">"
-		}
-	case rawstringtype:
-		switch lang {
-		case langcpp:
-			name = "std::string"
-		case langcsharp:
-			name = "string"
-		default:
-			name = "String"
-		}
-	case rawobjecttype:
-		switch lang {
-		case langcsharp:
-			name = "object"
-		case langjava:
-			name = "Object"
-		case langkotlin:
-			name = "Any"
-		}
-	case rawvoidtype:
-		switch lang {
-		case langkotlin:
-			name = "Unit"
-		default:
-			name = "void"
-		}
-	default:
-		if typ.isfunc {
-			name = LangFuncName(typ.vxfunc)
-		} else if alias == "" {
-			name = LangFromName(typ.name)
-		} else if typ.isgeneric {
-			if simple {
-				if BooleanFromStringStarts(alias, "generic-") {
-					alias = StringFromStringFindReplace(alias, "generic-", "")
-					ipos := IntFromStringFindLast(alias, "-")
-					alias = alias[0:ipos]
-				}
-			} else {
-				alias = LangGenericFromType(lang, typ)
-			}
-			name = LangFromName(alias)
-		} else {
-			name = LangFromName(alias)
-		}
-	}
-	return name
-}
-
-func LangTypeStringValNew(lang *vxlang, val string) string {
+func LangTypeStringValNew(
+	lang *vxlang,
+	val string) string {
 	valstr := StringFromStringFindReplace(val, "\n", "\\n")
 	return LangPkgNameDot(lang, "vx/core") + "vx_new_string(\"" + valstr + "\")"
 }
 
-func LangTypeT(lang *vxlang, typ *vxtype) string {
+func LangTypeT(
+	lang *vxlang,
+	typ *vxtype) string {
 	return LangTypeTSimple(lang, typ, false)
 }
 
@@ -865,7 +687,7 @@ func LangTypeTGeneric(
 }
 
 func LangTypeTSimple(lang *vxlang, typ *vxtype, simple bool) string {
-	name := "t_" + LangTypeNameSimple(lang, typ, simple)
+	name := "t_" + LangSpecificTypeNameSimple(lang, typ, simple)
 	if typ.pkgname != "" {
 		name = LangPkgName(lang, typ.pkgname) + lang.pkgref + name
 	}
@@ -1088,7 +910,7 @@ func LangTypeVxCopy(
 			valcopy += "" +
 				LangVar(lang, "sval", rawstringtype, 3, "value.vx_string()")
 			valnew = "" +
-				LangForListHeader(lang, "valsub", rawobjecttype, "vals", 3) +
+				LangSpecificForListHeader(lang, "valsub", rawobjecttype, "vals", 3) +
 				"\n        if (" + LangIsType(lang, "valsub", msgblocktype) + ") {" +
 				"\n          msgblock = " + LangPkgNameDot(lang, "vx/core") + "vx_copy(msgblock, valsub)" + lang.lineend +
 				"\n        } else if (" + LangIsType(lang, "valsub", msgtype) + ") {" +
@@ -1113,7 +935,7 @@ func LangTypeVxCopy(
 			valcopy += "" +
 				LangVar(lang, "floatval", rawfloattype, 3, "value.vx_float()")
 			valnew = "" +
-				LangForListHeader(lang, "valsub", rawobjecttype, "vals", 3) +
+				LangSpecificForListHeader(lang, "valsub", rawobjecttype, "vals", 3) +
 				"\n        if (" + LangIsType(lang, "valsub", msgblocktype) + ") {" +
 				"\n          msgblock = " + LangPkgNameDot(lang, "vx/core") + "vx_copy(msgblock, valsub)" + lang.lineend +
 				"\n        } else if (" + LangIsType(lang, "valsub", msgtype) + ") {" +
@@ -1268,7 +1090,7 @@ func LangTypeVxCopy(
 			case "msgblocklist":
 				valnew = "" +
 					LangVar(lang, "msg", msgtype, 3, "") +
-					LangForListHeader(lang, "valsub", rawobjecttype, "vals", 3) +
+					LangSpecificForListHeader(lang, "valsub", rawobjecttype, "vals", 3) +
 					LangIf(lang, 4,
 						LangIsType(lang, "valsub", msgtype),
 						LangVarSet(lang, "msgblock", 5,
@@ -1276,7 +1098,7 @@ func LangTypeVxCopy(
 			case "msglist":
 				valnew = "" +
 					LangVar(lang, "msg", msgtype, 3, "") +
-					LangForListHeader(lang, "valsub", rawobjecttype, "vals", 3) +
+					LangSpecificForListHeader(lang, "valsub", rawobjecttype, "vals", 3) +
 					LangIf(lang, 4,
 						LangIsType(lang, "valsub", msgblocktype),
 						LangVarSet(lang, "msgblock", 5,
@@ -1284,7 +1106,7 @@ func LangTypeVxCopy(
 			default:
 				valnew = "" +
 					LangVar(lang, "msg", msgtype, 3, "") +
-					LangForListHeader(lang, "valsub", rawobjecttype, "vals", 3) +
+					LangSpecificForListHeader(lang, "valsub", rawobjecttype, "vals", 3) +
 					LangIf(lang, 4,
 						LangIsType(lang, "valsub", msgblocktype),
 						LangVarSet(lang, "msgblock", 5,
@@ -1304,7 +1126,7 @@ func LangTypeVxCopy(
 				valnew += "" +
 					LangElseIfType(lang, allowtype, emptytype, "valsub", "allowsub", 4, false) +
 					LangVarSet(lang, "ischanged", 5, "true") +
-					LangVxListAdd(lang, "listval", 5, "allowsub")
+					LangSpecificVxListAdd(lang, "listval", 5, "allowsub")
 			}
 			for _, allowedtype := range typ.allowtypes {
 				allowedtypename := LangTypeName(lang, allowedtype)
@@ -1355,7 +1177,7 @@ func LangTypeVxCopy(
 					valnew += "" +
 						"\n        } else if (" + LangIsTypeText(lang, "valsub", allowedtypename) + ") {" +
 						LangVarSet(lang, "ischanged", 5, "true") +
-						LangVxListAdd(lang, "listval", 5, castval)
+						LangSpecificVxListAdd(lang, "listval", 5, castval)
 				}
 			}
 			elseiflistany := ""
@@ -1363,21 +1185,21 @@ func LangTypeVxCopy(
 			case langcsharp:
 				elseiflistany = "" +
 					LangElseIfType(lang, rawlistanytype, emptytype, "valsub", "listany", 4, false) +
-					LangForListHeader(lang, "item", anytype, "listany", 5) +
+					LangSpecificForListHeader(lang, "item", anytype, "listany", 5) +
 					LangIf(lang, 6, "false", "") +
 					LangElseIfType(lang, allowtype, emptytype, "item", "valitem", 6, false) +
 					LangVarSet(lang, "ischanged", 7, "true") +
-					LangVxListAdd(lang, "listval", 7, "valitem") +
+					LangSpecificVxListAdd(lang, "listval", 7, "valitem") +
 					"\n            }" +
 					"\n          }"
 			case langjava, langkotlin:
 				elseiflistany = "" +
 					LangElseIfType(lang, rawlistunknowntype, emptytype, "valsub", "listunknown", 4, false) +
-					LangForListHeader(lang, "item", rawobjecttype, "listunknown", 5) +
+					LangSpecificForListHeader(lang, "item", rawobjecttype, "listunknown", 5) +
 					LangIf(lang, 6, "false", "") +
 					LangElseIfType(lang, allowtype, emptytype, "item", "valitem", 6, false) +
 					LangVarSet(lang, "ischanged", 7, "true") +
-					LangVxListAdd(lang, "listval", 7, "valitem") +
+					LangSpecificVxListAdd(lang, "listval", 7, "valitem") +
 					"\n            }" +
 					"\n          }"
 			}
@@ -1439,7 +1261,7 @@ func LangTypeVxCopy(
 				LangVar(lang, "key", rawstringtype, 3, "\"\"") +
 				LangVar(lang, "msg", msgtype, 3, LangTypeE(lang, msgtype)) +
 				LangVar(lang, "msgval", anytype, 3, LangTypeE(lang, anytype)) +
-				LangForListHeader(lang, "valsub", rawobjecttype, "vals", 3) +
+				LangSpecificForListHeader(lang, "valsub", rawobjecttype, "vals", 3) +
 				"\n        if (" + LangIsType(lang, "valsub", msgblocktype) + ") {" +
 				LangVarSet(lang, "msgblock", 5,
 					LangPkgNameDot(lang, "vx/core")+"vx_copy(msgblock, valsub)") +
@@ -1580,7 +1402,7 @@ func LangTypeVxCopy(
 				validkeys := LangVarCollection(lang, "validkeys", rawlisttype, rawstringtype, 3, ":new")
 				valnewswitch := ""
 				for _, arg := range props {
-					validkeys += LangVxListAdd(lang, "validkeys", 3, "\":"+arg.name+"\"")
+					validkeys += LangSpecificVxListAdd(lang, "validkeys", 3, "\":"+arg.name+"\"")
 					argname := LangFromName(arg.name)
 					valcopy += "" +
 						LangVar(lang, "vx_p_"+argname, arg.vxtype, 3,
