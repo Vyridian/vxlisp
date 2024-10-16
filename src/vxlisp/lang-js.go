@@ -728,7 +728,7 @@ func JsFromValue(
 					}
 					argtext = StringRemoveQuotes(argtext)
 					if argtext == ":auto" {
-						argtext = LangNativeAutoFromFunc(lang, parentfn)
+						argtext = LangSpecificFuncNativeAuto(lang, parentfn)
 					}
 					argtexts = append(argtexts, argtext)
 				}
@@ -752,17 +752,17 @@ func JsFromValue(
 			case "vx/core/fn":
 			case "vx/core/let":
 				if fnc.async {
-					output += LangPkgName(lang, fnc.pkgname) + lang.pkgref + "f_let_async("
+					output += LangSpecificPkgName(lang, fnc.pkgname) + lang.pkgref + "f_let_async("
 				} else {
-					output += LangPkgName(lang, fnc.pkgname) + lang.pkgref + "f_let("
+					output += LangSpecificPkgName(lang, fnc.pkgname) + lang.pkgref + "f_let("
 				}
 			default:
 				if fnc.argname != "" {
-					output += LangPkgName(lang, "vx/core") + lang.pkgref + "vx_any_from_func("
+					output += LangSpecificPkgName(lang, "vx/core") + lang.pkgref + "vx_any_from_func("
 					argtexts = append(argtexts, LangTypeT(lang, fnc.vxtype))
 					argtexts = append(argtexts, LangFromName(fnc.argname))
 				} else {
-					output += LangPkgName(lang, fnc.pkgname) + lang.pkgref + "f_" + LangFuncName(fnc) + "("
+					output += LangSpecificPkgName(lang, fnc.pkgname) + lang.pkgref + "f_" + LangFuncName(fnc) + "("
 				}
 			}
 			switch funcname {

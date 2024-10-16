@@ -123,13 +123,14 @@ func LangConst(
 	funcconstnew.name = "const_new"
 	funcconstnew.vxtype = nonetype
 	funcconstnew.listarg = listarg
+	staticopen, staticclose := LangSpecificConstStaticOpenClose(lang)
 	output += "" +
 		doc +
 		LangSpecificConstClassHeader(lang, cnst, 1) +
-		LangStaticOpen(lang) +
+		staticopen +
 		LangConstVxConstdef(lang, cnst) +
 		LangFuncHeaderStatic(lang, cnstname, funcconstnew, 2, 0, const_new) +
-		LangStaticClose(lang) +
+		staticclose +
 		"\n  }" +
 		"\n" +
 		LangValStatic(lang, "c_"+cnstname, cnst.vxtype, 1, ":new") +
@@ -144,7 +145,7 @@ func LangConst(
 func LangConstC(lang *vxlang, cnst *vxconst) string {
 	name := "c_" + LangFromName(cnst.alias)
 	if cnst.pkgname != "" {
-		name = LangPkgName(lang, cnst.pkgname) + lang.pkgref + name
+		name = LangSpecificPkgName(lang, cnst.pkgname) + lang.pkgref + name
 	}
 	return name
 }

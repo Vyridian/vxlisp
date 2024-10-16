@@ -628,24 +628,7 @@ func StringPathFromProjectCmd(
 	case "":
 		code := cmd.code
 		lang := cmd.lang
-		switch code {
-		case ":doc":
-			pathtext = "build/doc"
-		case ":source":
-			switch lang {
-			case langjava:
-				pathtext = "build/java/src"
-			case langjs:
-				pathtext = "build/js/test"
-			}
-		case ":test":
-			switch lang {
-			case langjava:
-				pathtext = "build/java/src"
-			case langjs:
-				pathtext = "build/js/test"
-			}
-		}
+		pathtext = LangSpecificPathtext(lang, code)
 	default:
 		for _, path := range prj.listpath {
 			pathname := path.name

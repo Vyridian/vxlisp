@@ -24,7 +24,7 @@ func LangFunc(
 		LangFuncVxFuncdef(lang, fnc, false) +
 		LangFuncVxEmpty(lang, fnc, false) +
 		LangFuncVxType(lang, fnc, false) +
-		LangFuncInterfaceFn(lang, fnc) +
+		LangSpecificFuncInterfaceFn(lang, fnc) +
 		LangFuncVxFnNew(lang, fnc, false) +
 		LangFuncVxRepl(lang, fnc, false) +
 		LangFuncVxFunc(lang, fnc, false) +
@@ -47,7 +47,7 @@ func LangFuncClassFull(
 	fnc *vxfunc) string {
 	name := LangFuncClass(lang, fnc)
 	if fnc.pkgname != "" {
-		name = LangPkgName(lang, fnc.pkgname) + lang.pkgref + name
+		name = LangSpecificPkgName(lang, fnc.pkgname) + lang.pkgref + name
 	}
 	return name
 }
@@ -143,7 +143,7 @@ func LangFuncE(
 	fnc *vxfunc) string {
 	name := "e_" + LangFuncName(fnc)
 	if fnc.pkgname != "" {
-		name = LangPkgName(lang, fnc.pkgname) + lang.pkgref + name
+		name = LangSpecificPkgName(lang, fnc.pkgname) + lang.pkgref + name
 	}
 	return name
 }
@@ -153,7 +153,7 @@ func LangFuncF(
 	fnc *vxfunc) string {
 	name := "f_" + LangFuncName(fnc)
 	if fnc.pkgname != "" {
-		name = LangPkgName(lang, fnc.pkgname) + lang.pkgref + name
+		name = LangSpecificPkgName(lang, fnc.pkgname) + lang.pkgref + name
 	}
 	return name
 }
@@ -179,19 +179,19 @@ func LangFuncFFunc(
 			"vx/core/any<-reduce", "vx/core/any<-reduce-async",
 			"vx/core/any<-reduce-next", "vx/core/any<-reduce-next-async":
 			arggeneric := arggenericany1
-			argtext := LangArgHeader(lang, arggeneric, true)
+			argtext := LangSpecificArgHeader(lang, arggeneric, true)
 			listargtype = append(listargtype, argtext)
 		default:
 			if fnc.generictype != nil {
 				arggeneric := LangArgGenericFromType(lang, fnc.generictype)
-				argtext := LangArgHeader(lang, arggeneric, true)
+				argtext := LangSpecificArgHeader(lang, arggeneric, true)
 				listargtype = append(listargtype, argtext)
 				listargname = append(listargname, arggeneric.alias)
 			}
 		}
 	}
 	if fnc.context {
-		argtext := LangArgHeader(lang, argcontext, false)
+		argtext := LangSpecificArgHeader(lang, argcontext, false)
 		listargtype = append(listargtype, argtext)
 		listargname = append(listargname, "context")
 	}
@@ -210,7 +210,7 @@ func LangFuncFFunc(
 			isallowgeneric = true
 		}
 		for _, arg := range fnc.listarg {
-			argtext := LangArgHeader(lang, arg, isallowgeneric)
+			argtext := LangSpecificArgHeader(lang, arg, isallowgeneric)
 			listargname = append(listargname, LangFromName(arg.alias))
 			if arg.multi {
 				listargtype = append(listargtype, argtext)
@@ -402,7 +402,7 @@ func LangFuncFuncFull(
 	fnc *vxfunc) string {
 	name := LangFuncFunc(lang, fnc)
 	if fnc.pkgname != "" {
-		name = LangPkgName(lang, fnc.pkgname) + lang.pkgref + name
+		name = LangSpecificPkgName(lang, fnc.pkgname) + lang.pkgref + name
 	}
 	return name
 }
@@ -512,7 +512,7 @@ func LangFuncHeaderAll(
 	if funcname == "" {
 		funcname = LangFuncName(fnc)
 	}
-	funcinstance, funcstatic := LangFuncInstanceStatic(lang)
+	funcinstance, funcstatic := LangSpecificFuncInstanceStatic(lang)
 	funcdeclare := funcinstance
 	if isstatic {
 		funcdeclare = funcstatic
@@ -531,13 +531,13 @@ func LangFuncHeaderAll(
 			arggeneric := NewArg(
 				"generic-" + fnc.generictype.name)
 			arggeneric.vxtype = fnc.generictype
-			argtext := LangArgHeader(
+			argtext := LangSpecificArgHeader(
 				lang, arggeneric, isreturngeneric)
 			listargtext = append(listargtext, argtext)
 		}
 	}
 	if fnc.context {
-		argtext := LangArgHeader(
+		argtext := LangSpecificArgHeader(
 			lang, argcontext, isreturngeneric)
 		listargtext = append(listargtext, argtext)
 	}
@@ -553,7 +553,7 @@ func LangFuncHeaderAll(
 			}
 		}
 		if !isskip {
-			argtext := LangArgHeader(
+			argtext := LangSpecificArgHeader(
 				lang, arg, isreturngeneric)
 			listargtext = append(listargtext, argtext)
 		}
@@ -589,21 +589,8 @@ func LangFuncHeaderAll(
 	if fnc.async {
 		returntype = lang.future + "<" + returntype + ">"
 	}
-	funcprefix := ""
-	switch lang {
-	case langcpp:
-		funcprefix = prefix + "::"
-	}
-	returntype1 := ""
-	returntype2 := ""
-	switch lang {
-	case langcpp, langcsharp, langjava:
-		returntype1 = returntype + " "
-	case langkotlin:
-		returntype2 = " : " + returntype
-	case langswift:
-		returntype2 = " -> " + returntype
-	}
+	funcprefix, returntype1, returntype2 := LangSpecificFuncPrefixReturnTypes(
+		lang, prefix, returntype)
 	output = "" +
 		override1 +
 		sindent + override2 + funcdeclare + override3 + genericdef1 + returntype1 + funcprefix + funcname + genericdef2 + "(" + argtext + ")" + returntype2 + genericdef3 + sinterface + sopen +
@@ -656,24 +643,6 @@ func LangFuncIFnType(
 		output = NewType("vx/core/any<-func" + lang.typeref + "IFn")
 	}
 	return output
-}
-
-func LangFuncInstanceStatic(
-	lang *vxlang) (string, string) {
-	funcinstance := "function "
-	funcstatic := "function "
-	switch lang {
-	case langcpp, langcsharp, langjava:
-		funcinstance = "public "
-		funcstatic = "public static "
-	case langkotlin:
-		funcinstance = "fun "
-		funcstatic = "fun "
-	case langswift:
-		funcinstance = "func "
-		funcstatic = "func static "
-	}
-	return funcinstance, funcstatic
 }
 
 func LangFuncInterface(
@@ -751,7 +720,7 @@ func LangFuncLambda(
 	args string,
 	body string) string {
 	output := "" +
-		LangFuncLambdaHeader(lang, indent, outputnum, bindings, args) +
+		LangSpecificFuncLambdaHeader(lang, indent, outputnum, bindings, args) +
 		body +
 		LangFuncLambdaFooter(lang, indent, outputnum)
 	return output
@@ -786,26 +755,6 @@ func LangFuncLambdaFooter(
 	return output
 }
 
-func LangFuncLambdaHeader(
-	lang *vxlang,
-	indent int,
-	outputnum int,
-	bindings string,
-	args string) string {
-	output := ""
-	switch lang {
-	case langcpp:
-		output = "[" + bindings + "](" + args + ") -> {"
-	case langcsharp:
-		output = "(" + args + ") => {"
-	case langjava:
-		output = "(" + args + ") -> {"
-	case langkotlin:
-		output = "{" + args + " ->"
-	}
-	return output
-}
-
 func LangFuncName(fnc *vxfunc) string {
 	output := LangFromName(fnc.alias)
 	if output == "" {
@@ -818,7 +767,7 @@ func LangFuncName(fnc *vxfunc) string {
 func LangFuncT(lang *vxlang, fnc *vxfunc) string {
 	name := "t_" + LangFuncName(fnc)
 	if fnc.pkgname != "" {
-		name = LangPkgName(lang, fnc.pkgname) + lang.pkgref + name
+		name = LangSpecificPkgName(lang, fnc.pkgname) + lang.pkgref + name
 	}
 	return name
 }
@@ -946,9 +895,9 @@ func LangFuncValue(
 	logclose := ""
 	if fnc.debug {
 		logopen += "" +
-			LangPkgName(lang, "vx/core") + lang.pkgref + "f_log_1(" +
+			LangSpecificPkgName(lang, "vx/core") + lang.pkgref + "f_log_1(" +
 			LangTypeT(lang, fnc.vxtype) + ", " +
-			LangPkgName(lang, "vx/core") + lang.pkgref + "vx_new_string(\"" + funcname + "\")," +
+			LangSpecificPkgName(lang, "vx/core") + lang.pkgref + "vx_new_string(\"" + funcname + "\")," +
 			"\n"
 		logclose += "\n)"
 	}
@@ -994,9 +943,9 @@ func LangFuncValue(
 		case "vx/core/fn":
 		case "vx/core/let":
 			if fnc.async {
-				funcopen = LangPkgName(lang, fnc.pkgname) + lang.pkgref + "f_let_async("
+				funcopen = LangSpecificPkgName(lang, fnc.pkgname) + lang.pkgref + "f_let_async("
 			} else {
-				funcopen = LangPkgName(lang, fnc.pkgname) + lang.pkgref + "f_" + LangFuncName(fnc) + "("
+				funcopen = LangSpecificPkgName(lang, fnc.pkgname) + lang.pkgref + "f_" + LangFuncName(fnc) + "("
 			}
 			funcclose = ")"
 		default:
@@ -1170,10 +1119,10 @@ func LangFuncValueArgIndex(
 					default:
 						if len(arglist) == 1 {
 							output = "" +
-								LangPkgName(lang, "vx/core") + lang.pkgref + "t_any_from_any" + lang.typeref + "vx_fn_new(" + lambda + ")"
+								LangSpecificPkgName(lang, "vx/core") + lang.pkgref + "t_any_from_any" + lang.typeref + "vx_fn_new(" + lambda + ")"
 						} else {
 							output = "" +
-								LangPkgName(lang, "vx/core") + lang.pkgref + "t_any_from_func" + lang.typeref + "vx_fn_new(" + lambda + ")"
+								LangSpecificPkgName(lang, "vx/core") + lang.pkgref + "t_any_from_func" + lang.typeref + "vx_fn_new(" + lambda + ")"
 						}
 					}
 				}
@@ -1206,7 +1155,7 @@ func LangFuncValueArgIndex(
 						lambda := LangFuncLambda(lang, 0, ioutputnum, "", "",
 							LangVar(lang, outputname, anytype, 1, work))
 						output = "" +
-							LangPkgName(lang, "vx/core") + lang.pkgref + "t_" + argvaluefuncname + lang.typeref + "vx_fn_new(" + lambda + ")"
+							LangSpecificPkgName(lang, "vx/core") + lang.pkgref + "t_" + argvaluefuncname + lang.typeref + "vx_fn_new(" + lambda + ")"
 					}
 				case ":funcref":
 					switch arg.vxtype.name {
@@ -1328,7 +1277,7 @@ func LangFuncValueNative(
 				}
 				argtext = StringRemoveQuotes(argtext)
 				if argtext == ":auto" {
-					argtext = LangNativeAutoFromFunc(lang, parentfn)
+					argtext = LangSpecificFuncNativeAuto(lang, parentfn)
 				}
 			}
 			argtexts = append(argtexts, argtext)
@@ -1399,7 +1348,10 @@ func LangFuncVxEmpty(
 	return output
 }
 
-func LangFuncVxFnNew(lang *vxlang, fnc *vxfunc, isinterface bool) string {
+func LangFuncVxFnNew(
+	lang *vxlang,
+	fnc *vxfunc,
+	isinterface bool) string {
 	output := ""
 	vars := ""
 	body := ""
@@ -1537,7 +1489,7 @@ func LangFuncVxFnNew(lang *vxlang, fnc *vxfunc, isinterface bool) string {
 							LangVarGeneric(lang, "output", anytype1, 3,
 								LangPkgNameDot(lang, "vx/core")+"f_empty(generic_any_1)")+
 								LangVar(lang, "inputval", arg.vxtype, 3,
-									LangAsType(lang, "value", arg.vxtype))+
+									LangSpecificAsType(lang, "value", arg.vxtype))+
 								LangVar(lang, "outputval", anytype, 3,
 									LangFuncF(lang, fnc)+"("+arginputnames+")")+
 								LangSpecificVarSet(lang, "output", 3,
@@ -1635,19 +1587,19 @@ func LangFuncVxFunc(
 				"vx/core/any<-reduce", "vx/core/any<-reduce-async",
 				"vx/core/any<-reduce-next", "vx/core/any<-reduce-next-async":
 				arggeneric := arggenericany1
-				argtext := LangArgHeader(lang, arggeneric, true)
+				argtext := LangSpecificArgHeader(lang, arggeneric, true)
 				listargtype = append(listargtype, argtext)
 			default:
 				if fnc.generictype != nil {
 					arggeneric := LangArgGenericFromType(lang, fnc.generictype)
-					argtext := LangArgHeader(lang, arggeneric, true)
+					argtext := LangSpecificArgHeader(lang, arggeneric, true)
 					listargtype = append(listargtype, argtext)
 					listargname = append(listargname, arggeneric.alias)
 				}
 			}
 		}
 		if fnc.context {
-			argtext := LangArgHeader(lang, argcontext, false)
+			argtext := LangSpecificArgHeader(lang, argcontext, false)
 			listargtype = append(listargtype, argtext)
 			listargname = append(listargname, "context")
 		}
@@ -1666,7 +1618,7 @@ func LangFuncVxFunc(
 				isallowgeneric = true
 			}
 			for _, arg := range fnc.listarg {
-				argtext := LangArgHeader(lang, arg, isallowgeneric)
+				argtext := LangSpecificArgHeader(lang, arg, isallowgeneric)
 				listargname = append(listargname, LangFromName(arg.alias))
 				if arg.multi {
 					listargtype = append(listargtype, argtext)
@@ -1683,7 +1635,7 @@ func LangFuncVxFunc(
 		}
 		body := ""
 		funcname := LangFromName(fnc.alias) + LangIndexFromFunc(fnc)
-		interfacefn := LangFuncInterfaceFn(lang, fnc)
+		interfacefn := LangSpecificFuncInterfaceFn(lang, fnc)
 		if interfacefn == "" {
 			if fnc.async {
 				body = "" +
@@ -1863,7 +1815,7 @@ func LangFuncVxRepl(
 		replparams := ""
 		argidx := 0
 		var listargname []string
-		pkgname := LangPkgName(lang, fnc.pkgname)
+		pkgname := LangSpecificPkgName(lang, fnc.pkgname)
 		outputtype := fnc.vxtype
 		outputttype := LangTypeTSimple(lang, fnc.vxtype, true)
 		if fnc.isgeneric {

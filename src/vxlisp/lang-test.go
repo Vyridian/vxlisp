@@ -78,7 +78,7 @@ func LangTestApp(
 		if iscontinue {
 			if pkg.name != "" {
 				imports += LangSpecificTestImport(lang, pkg, imports)
-				testpackage := "\n      " + testpackageprefix + LangPkgName(lang, pkg.name) + "Test.test_package(context)"
+				testpackage := "\n      " + testpackageprefix + LangSpecificPkgName(lang, pkg.name) + "Test.test_package(context)"
 				listtestpackage = append(
 					listtestpackage, testpackage)
 				tests += LangSpecificTestPackage(lang, pkg, testpackagetype)
@@ -93,17 +93,6 @@ func LangTestApp(
 	testbasics := ""
 	switch lang {
 	case langcsharp:
-		namespaceopen = "" +
-			"\n" +
-			"\nnamespace AppTest" + lang.lineend +
-			"\n" +
-			"\npublic class AppTest(Xunit.Abstractions.ITestOutputHelper output) {" +
-			"\n" +
-			"\n  bool isconsole = TestLib.EnableConsole(output)" + lang.lineend +
-			"\n"
-		namespaceclose = "" +
-			"\n}" +
-			"\n"
 		testpackagedata := "" +
 			LangPkgNameDot(lang, "vx/core") + "vx_new(" +
 			"\n      " + LangTypeT(lang, testpackagelisttype) + "," +
@@ -299,7 +288,8 @@ func LangTestFromPackage(
 	command *vxcommand,
 	pkgprefix string) (string, *vxmsgblock) {
 	msgblock := NewMsgBlock("LangTestFromPackage")
-	pkgpath, pkgname := LangPackagePathFromPrefixName(lang, pkgprefix, pkg.name)
+	pkgpath, pkgname := LangSpecificPackagePathFromPrefixName(
+		lang, pkgprefix, pkg.name)
 	typkeys := ListKeyFromMapType(pkg.maptype)
 	var coverdoccnt = 0
 	var coverdoctotal = 0
@@ -313,7 +303,9 @@ func LangTestFromPackage(
 		typ := pkg.maptype[typid]
 		test, msgs := LangTestFromType(lang, typ)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
-		covertype = append(covertype, "\":"+typid+"\", "+StringFromInt(len(typ.testvalues)))
+		covertype = append(
+			covertype,
+			"\":"+typid+"\", "+StringFromInt(len(typ.testvalues)))
 		if command.filter == "" {
 		} else if NameFromType(typ) != command.filter {
 			test = ""
@@ -321,7 +313,9 @@ func LangTestFromPackage(
 		if test != "" {
 			covertypecnt += 1
 			typetexts += test
-			testall = append(testall, pkgname+"Test.t_"+LangFromName(typ.alias)+"(context)")
+			testall = append(
+				testall,
+				pkgname+"Test.t_"+LangFromName(typ.alias)+"(context)")
 		}
 		coverdoctotal += 1
 		if typ.doc != "" {
@@ -339,7 +333,9 @@ func LangTestFromPackage(
 		cnst := pkg.mapconst[cnstid]
 		test, msgs := LangTestFromConst(lang, cnst)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
-		coverconst = append(coverconst, "\":"+cnstid+"\", "+StringFromInt(len(cnst.listtestvalue)))
+		coverconst = append(
+			coverconst,
+			"\":"+cnstid+"\", "+StringFromInt(len(cnst.listtestvalue)))
 		if command.filter == "" {
 		} else if NameFromConst(cnst) != command.filter {
 			test = ""
@@ -347,7 +343,9 @@ func LangTestFromPackage(
 		if test != "" {
 			coverconstcnt += 1
 			consttexts += test
-			testall = append(testall, pkgname+"Test.c_"+LangFromName(cnst.alias)+"(context)")
+			testall = append(
+				testall,
+				pkgname+"Test.c_"+LangFromName(cnst.alias)+"(context)")
 		}
 		coverdoctotal += 1
 		if cnst.doc != "" {
@@ -368,7 +366,9 @@ func LangTestFromPackage(
 		for _, fnc := range fncs {
 			test, msgs := LangTestFromFunc(lang, fnc)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
-			coverfunc = append(coverfunc, "\":"+fncid+LangIndexFromFunc(fnc)+"\", "+StringFromInt(len(fnc.listtestvalue)))
+			coverfunc = append(
+				coverfunc,
+				"\":"+fncid+LangIndexFromFunc(fnc)+"\", "+StringFromInt(len(fnc.listtestvalue)))
 			if command.filter == "" {
 			} else if NameFromFunc(fnc) != command.filter {
 				test = ""
@@ -376,7 +376,9 @@ func LangTestFromPackage(
 			if test != "" {
 				coverfunccnt += 1
 				functexts += test
-				testall = append(testall, pkgname+"Test.f_"+LangFromName(fnc.alias)+LangIndexFromFunc(fnc)+"(context)")
+				testall = append(
+					testall,
+					pkgname+"Test.f_"+LangFromName(fnc.alias)+LangIndexFromFunc(fnc)+"(context)")
 			}
 			coverdoctotal += 1
 			if fnc.doc != "" {
@@ -472,7 +474,8 @@ func LangTestFromPackage(
 				"\n      " + strings.Join(testall, ",\n      ") +
 				"\n    )"
 			vartestcases = "" +
-				LangVarCollection(lang, "testcases", rawlisttype, anytype, 2, vararraylisttestcase)
+				LangVarCollection(
+					lang, "testcases", rawlisttype, anytype, 2, vararraylisttestcase)
 		}
 	}
 	argcontext := NewArgContext()
@@ -539,7 +542,7 @@ func LangTestFromPackage(
 		testcoveragesummary +
 		testcoveragedetail +
 		testpackage
-	imports := LangImportsFromPackage(lang, pkg, pkgprefix, body, true)
+	imports := LangSpecificPackageImports(lang, pkg, pkgprefix, body, true)
 	namespaceopen := ""
 	packageopen := ""
 	packageclose := ""
@@ -550,7 +553,7 @@ func LangTestFromPackage(
 			"\nnamespace " + pkgpath + lang.lineend +
 			"\n"
 		packageopen = "" +
-			"\npublic " + LangFinalClass(lang) + "class " + pkgname + "Test {" +
+			"\npublic " + LangSpecificFinalClass(lang) + "class " + pkgname + "Test {" +
 			"\n"
 		packageclose = "\n}\n"
 	case langjava:
@@ -558,7 +561,7 @@ func LangTestFromPackage(
 			"\npackage " + pkgpath + lang.lineend +
 			"\n"
 		packageopen = "" +
-			"\npublic " + LangFinalClass(lang) + "class " + pkgname + "Test {" +
+			"\npublic " + LangSpecificFinalClass(lang) + "class " + pkgname + "Test {" +
 			"\n"
 		packageclose = "\n}\n"
 	case langkotlin:

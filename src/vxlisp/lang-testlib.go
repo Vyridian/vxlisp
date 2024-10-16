@@ -309,23 +309,9 @@ func LangTestLib_run_testresult(lang *vxlang) string {
 	arg.vxtype = testresulttype
 	arg.isfinal = true
 	fnc.listarg = append(fnc.listarg, arg)
-	assertequals := ""
-	assertnotequals := ""
-	println := ""
-	switch lang {
-	case langcsharp:
-		assertequals = "\n  				Assert.Equal(expected, actual)" + lang.lineend
-		assertnotequals = "\n	  			Assert.NotEqual(expected, actual)" + lang.lineend
-		println = "System.Console.WriteLine"
-	case langjava:
-		assertequals = "\n  				assertEquals(expected, actual, msg)" + lang.lineend
-		assertnotequals = "\n	  			assertNotEquals(expected, actual, msg)" + lang.lineend
-		println = "System.out.println"
-	case langkotlin:
-		assertequals = "\n  				assertEquals(expected, actual, msg)" + lang.lineend
-		assertnotequals = "\n	  			assertNotEquals(expected, actual, msg)" + lang.lineend
-		println = "println"
-	}
+	assertequals := LangSpecificTestAssertEquals(lang)
+	assertnotequals := LangSpecificTestAssertNotEquals(lang)
+	println := LangSpecificPrintLine(lang)
 	output := "" +
 		LangFuncHeaderStatic(lang, "", fnc, 1, 0,
 			LangVar(lang, "valexpected", anytype, 2,
@@ -349,7 +335,7 @@ func LangTestLib_run_testresult(lang *vxlang) string {
 				"\n      "+LangPkgNameDot(lang, "vx/core")+"f_log(testresult)"+lang.lineend+
 				"\n		  }"+
 				LangIf(lang, 2,
-					LangIfClause(lang, rawstringtype, "==", "code", "\":ne\""),
+					LangSpecificIfClause(lang, rawstringtype, "==", "code", "\":ne\""),
 					assertnotequals)+
 				LangIfElse(lang, 2, assertequals)+
 				LangIfEnd(lang, 2)+
@@ -390,7 +376,7 @@ func LangTestLib_test(lang *vxlang) string {
 		LangFuncHeaderAll(lang, "", fnc, 1, false, true, 0,
 			assertequals+
 				LangVar(lang, "output", rawbooltype, 2, "false")+
-				"\n    if ("+LangVxEqualsString(lang, "expected", "actual")+") {"+
+				"\n    if ("+LangSpecificVxEqualsString(lang, "expected", "actual")+") {"+
 				LangSpecificVarSet(lang, "output", 3, "true")+
 				"\n    } else {"+
 				"\n      "+println+"(testname)"+lang.lineend+
@@ -400,7 +386,8 @@ func LangTestLib_test(lang *vxlang) string {
 	return output
 }
 
-func LangTestLib_test_async_from_async_fn(lang *vxlang) string {
+func LangTestLib_test_async_from_async_fn(
+	lang *vxlang) string {
 	fnc := NewFunc()
 	fnc.name = "test_async_from_async_fn"
 	fnc.vxtype = rawbooltype
