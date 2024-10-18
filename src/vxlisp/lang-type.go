@@ -338,12 +338,8 @@ func LangTypeE(lang *vxlang, typ *vxtype) string {
 	output := ""
 	if typ.isgeneric {
 		output = LangSpecificPkgName(lang, typ.pkgname) + lang.pkgref
-		switch lang {
-		case langcpp:
-			output += "vx_empty"
-		default:
-			output += "f_empty"
-		}
+		vxempty := LangSpecificTypeVxEmpty(lang)
+		output += vxempty
 		output += "(generic_" + LangFromName(typ.name) + ")"
 	} else {
 		output = "e_" + LangNameFromType(lang, typ)
@@ -604,19 +600,15 @@ func LangTypeInterface(
 			if len(typ.traits) > 0 {
 				extends = append(extends, typ.traits...)
 			}
-			var typeproperties []vxarg
-			switch lang {
-			case langcsharp, langkotlin, langswift:
-				typeproperties = typ.properties
-			default:
-				typeproperties = ListPropertyTraitFromType(typ)
-			}
+			typeproperties := LangSpecificTypeProperties(
+				lang, typ)
 			for _, arg := range typeproperties {
 				funcvxprop := NewFunc()
 				funcvxprop.name = LangFromName(arg.alias)
 				funcvxprop.vxtype = arg.vxtype
 				extras += "" +
-					LangFuncHeaderOld(lang, typename, funcvxprop, true, false)
+					LangFuncHeaderOld(
+						lang, typename, funcvxprop, true, false)
 			}
 		default:
 			extends = append(extends, anytype)
@@ -764,12 +756,8 @@ func LangTypeVxAllowMap(
 	if len(allowtypes) > 0 {
 		allowtype = allowtypes[0]
 		allowempty := LangTypeE(lang, allowtype)
-		switch lang {
-		case langcsharp:
-			getorelse = "mapval.getOrElse(skey, " + LangTypeE(lang, allowtype) + ")"
-		default:
-			getorelse = "mapval.getOrDefault(skey, " + LangTypeE(lang, allowtype) + ")"
-		}
+		getorelse = LangSpecificTypeMapGetOrElse(
+			lang, allowtype)
 		allowname = LangNameFromType(lang, allowtype)
 		argkey := NewArg("key")
 		argkey.vxtype = stringtype
@@ -1139,29 +1127,8 @@ func LangTypeVxCopy(
 						LangSpecificVxListAdd(lang, "listval", 5, castval)
 				}
 			}
-			elseiflistany := ""
-			switch lang {
-			case langcsharp:
-				elseiflistany = "" +
-					LangSpecificElseIfType(lang, rawlistanytype, emptytype, "valsub", "listany", 4, false) +
-					LangSpecificForListHeader(lang, "item", anytype, "listany", 5) +
-					LangIf(lang, 6, "false", "") +
-					LangSpecificElseIfType(lang, allowtype, emptytype, "item", "valitem", 6, false) +
-					LangSpecificVarSet(lang, "ischanged", 7, "true") +
-					LangSpecificVxListAdd(lang, "listval", 7, "valitem") +
-					"\n            }" +
-					"\n          }"
-			case langjava, langkotlin:
-				elseiflistany = "" +
-					LangSpecificElseIfType(lang, rawlistunknowntype, emptytype, "valsub", "listunknown", 4, false) +
-					LangSpecificForListHeader(lang, "item", rawobjecttype, "listunknown", 5) +
-					LangIf(lang, 6, "false", "") +
-					LangSpecificElseIfType(lang, allowtype, emptytype, "item", "valitem", 6, false) +
-					LangSpecificVarSet(lang, "ischanged", 7, "true") +
-					LangSpecificVxListAdd(lang, "listval", 7, "valitem") +
-					"\n            }" +
-					"\n          }"
-			}
+			elseiflistany := LangSpecificTypeElseIfListAny(
+				lang, allowtype)
 			valnew += "" +
 				elseiflistany +
 				LangSpecificElseIfType(lang, anytype, emptytype, "valsub", "anyinvalid", 4, false) +
@@ -1737,13 +1704,8 @@ func LangTypeVxList(
 	if isinterface {
 		output = LangFuncInterface(lang, funcvxlist)
 	} else {
-		castlist := ""
-		switch lang {
-		case langswift:
-			castlist = "self.vx_p_list"
-		default:
-			castlist = "this.vx_p_list"
-		}
+		vxthis := LangSpecificTypeThis(lang)
+		castlist := vxthis + lang.typeref + "vx_p_list"
 		output = "" +
 			LangFuncHeader(lang, typename, funcvxlist, 2, 0,
 				LangVarCollection(lang, "output", rawlisttype, anytype, 3,
@@ -1869,19 +1831,7 @@ func LangTypeVxNewMap(
 		allowname = ""
 	}
 	typepath := NameFromType(typ)
-	keyset := ""
-	mapget := ""
-	switch lang {
-	case langcsharp:
-		keyset = "\n      List<string> keys = mapval.keys()" + lang.lineend
-		mapget = "mapval.get(key)"
-	case langjava:
-		keyset = "\n      Set<String> keys = mapval.keySet()" + lang.lineend
-		mapget = "mapval.get(key)"
-	case langkotlin:
-		keyset = "\n      val keys : Set<String> = mapval.keys"
-		mapget = "mapval.getOrDefault(key, vx_core.e_any)"
-	}
+	keyset, mapget := LangSpecificTypeMapKeysetGet(lang)
 	argmapval := NewArg("mapval")
 	argmapval.vxtype = rawmapanytype
 	listarg := NewListArg()

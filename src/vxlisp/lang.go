@@ -19,6 +19,7 @@ type vxlang struct {
 	classext   string
 	typeref    string
 	memmanage  bool
+	forcemulti bool
 }
 
 var g_ifuncdepth = 0
@@ -30,20 +31,8 @@ func LangFilesFromProjectCmd(
 	msgblock := NewMsgBlock("LangFilesFromProjectCmd")
 	var files []*vxfile
 	cmdpath := PathFromProjectCmd(project, command)
-	pkgprefix := ""
-	apppath := cmdpath
-	testpath := cmdpath
-	switch lang {
-	case langcsharp:
-		apppath += "/App"
-		testpath += "/AppTest"
-		switch command.code {
-		case ":test":
-			pkgprefix = "AppTest.Test"
-		}
-	case langjava, langkotlin:
-		pkgprefix = project.javadomain + "."
-	}
+	pkgprefix, apppath, testpath := LangSpecificProjectPkgPrefixAppPathTestPath(
+		lang, project, command, cmdpath)
 	switch command.code {
 	case ":source":
 		file := NewFile()
@@ -67,20 +56,8 @@ func LangFilesFromProjectCmd(
 	}
 	pkgs := ListPackageFromProject(project)
 	for _, pkg := range pkgs {
-		subproject := pkg.project
-		subprefix := ""
-		subdomainpath := ""
-		switch lang {
-		case langcsharp:
-			switch command.code {
-			case ":test":
-				subprefix = "AppTest.Test"
-				subdomainpath = "Test"
-			}
-		case langjava, langkotlin:
-			subprefix = subproject.javadomain + "/"
-			subdomainpath = StringFromStringFindReplace(subprefix, ".", "/")
-		}
+		subprefix, subdomainpath := LangSpecificPackageSubPrefixSubDomainPath(
+			lang, command, pkg)
 		pkgname := pkg.name
 		pkgpath := ""
 		pos := strings.LastIndex(pkgname, "/")
@@ -453,37 +430,21 @@ func LangLambdaFromArgList(
 		lambdaargnames = append(lambdaargnames, lambdaargname)
 		switch NameFromType(argtype) {
 		case "vx/core/any", "vx/core/any-1":
-			argtypename := LangTypeName(lang, anytype)
-			lambdatypename := ""
-			switch lang {
-			case langkotlin:
-				lambdatypename = lambdaargname + " : " + argtypename
-			default:
-				lambdatypename = argtypename + " " + lambdaargname
-			}
-			lambdatypenames = append(lambdatypenames, lambdatypename)
+			lambdatypename := LangSpecificArgTypeName(
+				lang, lambdaargname, anytype)
+			lambdatypenames = append(
+				lambdatypenames, lambdatypename)
 		default:
 			switch lambdaarg.name {
 			case "key":
-				argtypename := LangTypeName(lang, argtype)
-				lambdatypename := ""
-				switch lang {
-				case langkotlin:
-					lambdatypename = lambdaargname + " : " + argtypename
-				default:
-					lambdatypename = argtypename + " " + lambdaargname
-				}
-				lambdatypenames = append(lambdatypenames, lambdatypename)
+				lambdatypename := LangSpecificArgTypeName(
+					lang, lambdaargname, argtype)
+				lambdatypenames = append(
+					lambdatypenames, lambdatypename)
 			default:
 				argvaltname := LangTypeT(lang, argtype)
-				argtypename := LangTypeName(lang, anytype)
-				lambdatypename := ""
-				switch lang {
-				case langkotlin:
-					lambdatypename = lambdaargname + "_any : " + argtypename
-				default:
-					lambdatypename = argtypename + " " + lambdaargname + "_any"
-				}
+				lambdatypename := LangSpecificArgTypeNameValue(
+					lang, lambdaargname, anytype)
 				lambdatypenames = append(lambdatypenames, lambdatypename)
 				corepkgname := LangSpecificPkgName(lang, "vx/core")
 				lambdavar := LangVal(lang, lambdaargname, argtype, 1,

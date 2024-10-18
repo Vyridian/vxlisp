@@ -76,13 +76,7 @@ func LangTestLib_file_test(lang *vxlang) string {
 	arg := NewArg("file")
 	arg.vxtype = filetype
 	fnc.listarg = append(fnc.listarg, arg)
-	paramsopen := ""
-	paramsclose := ""
-	switch lang {
-	case langcpp:
-		paramsopen = "{"
-		paramsclose = "}"
-	}
+	paramsopen, paramsclose := LangTestLibParamsOpenClose(lang)
 	fileparams := "" +
 		"\n      file," +
 		paramsopen +
@@ -107,13 +101,7 @@ func LangTestLib_read_test_file(lang *vxlang) string {
 	arg = NewArg("filename")
 	arg.vxtype = rawstringtype
 	fnc.listarg = append(fnc.listarg, arg)
-	paramsopen := ""
-	paramsclose := ""
-	switch lang {
-	case langcpp:
-		paramsopen = "{"
-		paramsclose = "}"
-	}
+	paramsopen, paramsclose := LangTestLibParamsOpenClose(lang)
 	fileparams := "" +
 		"\n      " + LangTypeT(lang, filetype) + "," +
 		paramsopen +
@@ -391,30 +379,7 @@ func LangTestLib_test_async_from_async_fn(
 	fnc := NewFunc()
 	fnc.name = "test_async_from_async_fn"
 	fnc.vxtype = rawbooltype
-	slambda := ""
-	switch lang {
-	case langcpp:
-		slambda = "" +
-			"{}," +
-			"\n[](vx_core::Type_any any) {" +
-			"\n 		return any;" +
-			"\n}"
-	case langcsharp:
-		slambda = "" +
-			"(any) => {" +
-			"\n     	return any;" +
-			"\n    }"
-	case langjava:
-		slambda = "" +
-			"(any) -> {" +
-			"\n     	return any;" +
-			"\n    }"
-	case langkotlin:
-		slambda = "" +
-			"{any ->" +
-			"\n     	any" +
-			"\n    }"
-	}
+	slambda := LangSpecificTestLibLambda(lang)
 	sasync1 := "" +
 		LangPkgNameDot(lang, "vx/core") + "vx_async_from_async_fn(async, " + slambda +
 		")"
@@ -522,13 +487,7 @@ func LangTestLib_test_pathfull_from_file(lang *vxlang) string {
 	fnc := NewFunc()
 	fnc.name = "test_pathfull_from_file"
 	fnc.vxtype = rawbooltype
-	paramsopen := ""
-	paramsclose := ""
-	switch lang {
-	case langcpp:
-		paramsopen = "{"
-		paramsclose = "}"
-	}
+	paramsopen, paramsclose := LangTestLibParamsOpenClose(lang)
 	fileparams := "" +
 		"\n      " + LangTypeT(lang, filetype) + "," +
 		paramsopen +

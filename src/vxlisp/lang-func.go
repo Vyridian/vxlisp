@@ -953,8 +953,7 @@ func LangFuncValue(
 				funcopen = LangPkgNameDot(lang, "vx/core") + "vx_any_from_func("
 				listargtext = append(listargtext, LangTypeT(lang, fnc.vxtype))
 				listargtext = append(listargtext, LangFromName(fnc.argname))
-				switch lang {
-				case langcpp:
+				if lang.forcemulti {
 					multiflag = true
 				}
 			} else {
@@ -1458,20 +1457,8 @@ func LangFuncVxFnNew(
 							LangVarFutureGeneric(lang, "output", anytype1, 3,
 								LangPkgNameDot(lang, "vx/core")+"f_async(generic_any_1, inputval)")
 					} else {
-						suppresswarnings := ""
-						switch lang {
-						case langjava:
-							suppresswarnings = "\n      @SuppressWarnings(\"unchecked\")"
-						}
-						vxasyncanyfromany := ""
-						switch lang {
-						case langcsharp:
-							vxasyncanyfromany = LangPkgNameDot(lang, "vx/core") + "vx_async_from_async(generic_any_1, future)"
-						case langjava:
-							vxasyncanyfromany = "(" + lang.future + "<T>)future"
-						case langkotlin:
-							vxasyncanyfromany = "future as (" + lang.future + "<T>)"
-						}
+						suppresswarnings := LangSpecificFuncSuppressWarnings(lang)
+						vxasyncanyfromany := LangSpecificFuncVxAsyncAnyFromAny(lang)
 						asyncbody += "" +
 							LangVar(lang, "inputval", arg.vxtype, 3,
 								LangPkgNameDot(lang, "vx/core")+"f_any_from_any("+LangTypeT(lang, arg.vxtype)+", value)") +
