@@ -23,7 +23,7 @@ func LangConst(
 	cnstclassname := "Const_" + cnstname
 	const_new := "" +
 		LangVarClass(lang, "outval", cnst.vxtype, 3,
-			LangSpecificAsClass(lang, "output", cnst.vxtype)) +
+			LangNativeAsClass(lang, "output", cnst.vxtype)) +
 		"\n      outval.vx_p_constdef = constdef()" + lang.lineend
 	cnstval := LangConstValFromConst(lang, cnst, project)
 	switch NameFromType(cnsttype) {
@@ -55,7 +55,7 @@ func LangConst(
 	case "vx/core/string":
 		if BooleanFromStringStartsEnds(cnstval, "\"", "\"") {
 			cnstval = cnstval[1 : len(cnstval)-1]
-			cnstval = LangSpecificFromText(lang, cnstval)
+			cnstval = LangNativeFromText(lang, cnstval)
 			cnstval = "\"" + cnstval + "\""
 		}
 		const_new += "\n      outval.vxstring = " + cnstval + lang.lineend
@@ -119,10 +119,10 @@ func LangConst(
 	funcconstnew.name = "const_new"
 	funcconstnew.vxtype = nonetype
 	funcconstnew.listarg = listarg
-	staticopen, staticclose := LangSpecificConstStaticOpenClose(lang)
+	staticopen, staticclose := LangNativeConstStaticOpenClose(lang)
 	output += "" +
 		doc +
-		LangSpecificConstClassHeader(lang, cnst, 1) +
+		LangNativeConstClassHeader(lang, cnst, 1) +
 		staticopen +
 		LangConstVxConstdef(lang, cnst) +
 		LangFuncHeaderStatic(lang, cnstname, funcconstnew, 2, 0, const_new) +
@@ -141,7 +141,7 @@ func LangConst(
 func LangConstC(lang *vxlang, cnst *vxconst) string {
 	name := "c_" + LangFromName(cnst.alias)
 	if cnst.pkgname != "" {
-		name = LangSpecificPkgName(lang, cnst.pkgname) + lang.pkgref + name
+		name = LangNativePkgName(lang, cnst.pkgname) + lang.pkgref + name
 	}
 	return name
 }
@@ -161,7 +161,7 @@ func LangConstValFromConst(
 		for _, cmd := range project.listcmd {
 			if cmd.code != ":test" {
 			} else if cmd.lang == lang {
-				path := LangSpecificTestResourcesPath(
+				path := LangNativeTestResourcesPath(
 					lang, cmd)
 				cnstval = "\"" + path + "/resources\""
 			}

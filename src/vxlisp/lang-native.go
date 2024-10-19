@@ -126,7 +126,7 @@ func NewMapLangFromList(listlang []*vxlang) map[string]*vxlang {
 	return output
 }
 
-func LangSpecificAppArgListInit(
+func LangNativeAppArgListInit(
 	lang *vxlang) string {
 	output := ""
 	switch lang {
@@ -143,7 +143,7 @@ func LangSpecificAppArgListInit(
 	return output
 }
 
-func LangSpecificAppClassOpenClose(
+func LangNativeAppClassOpenClose(
 	lang *vxlang) (string, string) {
 	classopen := ""
 	classclose := ""
@@ -160,7 +160,7 @@ func LangSpecificAppClassOpenClose(
 	return classopen, classclose
 }
 
-func LangSpecificAppMainOpenClose(
+func LangNativeAppMainOpenClose(
 	lang *vxlang) (string, string) {
 	mainopen := ""
 	mainclose := ""
@@ -179,15 +179,15 @@ func LangSpecificAppMainOpenClose(
 	return mainopen, mainclose
 }
 
-func LangSpecificAppOutputPrint(
+func LangNativeAppOutputPrint(
 	lang *vxlang) string {
 	indent3 := LangIndent(lang, 3, true)
-	printline := LangSpecificPrintLine(lang)
+	printline := LangNativePrintLine(lang)
 	output := indent3 + printline + "(output)" + lang.lineend
 	return output
 }
 
-func LangSpecificAppTryOpenClose(
+func LangNativeAppTryOpenClose(
 	lang *vxlang) (string, string) {
 	tryopen := ""
 	tryclose := ""
@@ -216,14 +216,14 @@ func LangSpecificAppTryOpenClose(
 	return tryopen, tryclose
 }
 
-func LangSpecificArgHeader(
+func LangNativeArgHeader(
 	lang *vxlang,
 	arg vxarg,
 	isallowgeneric bool) string {
 	output := ""
 	sfinal := ""
 	if arg.isfinal {
-		sfinal = LangSpecificFinalArg(lang)
+		sfinal = LangNativeFinalArg(lang)
 	}
 	sargname := LangFromName(arg.name)
 	typ := arg.vxtype
@@ -261,7 +261,7 @@ func LangSpecificArgHeader(
 	return output
 }
 
-func LangSpecificArgTypeName(
+func LangNativeArgTypeName(
 	lang *vxlang,
 	argname string,
 	argtype *vxtype) string {
@@ -276,7 +276,7 @@ func LangSpecificArgTypeName(
 	return output
 }
 
-func LangSpecificArgTypeNameValue(
+func LangNativeArgTypeNameValue(
 	lang *vxlang,
 	argname string,
 	typ *vxtype) string {
@@ -291,7 +291,7 @@ func LangSpecificArgTypeNameValue(
 	return output
 }
 
-func LangSpecificAsClass(
+func LangNativeAsClass(
 	lang *vxlang,
 	svar string,
 	typ *vxtype) string {
@@ -312,10 +312,10 @@ func LangSpecificAsClass(
 	default:
 		typetext = LangTypeClassFull(lang, typ)
 	}
-	return LangSpecificAsTypeText(lang, svar, typetext)
+	return LangNativeAsTypeText(lang, svar, typetext)
 }
 
-func LangSpecificAsType(
+func LangNativeAsType(
 	lang *vxlang,
 	svar string,
 	typ *vxtype) string {
@@ -336,10 +336,10 @@ func LangSpecificAsType(
 	default:
 		typetext = LangNameTypeFullFromType(lang, typ)
 	}
-	return LangSpecificAsTypeText(lang, svar, typetext)
+	return LangNativeAsTypeText(lang, svar, typetext)
 }
 
-func LangSpecificAsTypeText(
+func LangNativeAsTypeText(
 	lang *vxlang,
 	svar string,
 	stype string) string {
@@ -364,7 +364,7 @@ func LangSpecificAsTypeText(
 	return output
 }
 
-func LangSpecificConstClassHeader(
+func LangNativeConstClassHeader(
 	lang *vxlang,
 	cnst *vxconst,
 	indent int) string {
@@ -384,7 +384,7 @@ func LangSpecificConstClassHeader(
 	return output
 }
 
-func LangSpecificConstStaticOpenClose(
+func LangNativeConstStaticOpenClose(
 	lang *vxlang) (string, string) {
 	staticopen := ""
 	staticclose := ""
@@ -398,7 +398,7 @@ func LangSpecificConstStaticOpenClose(
 	return staticopen, staticclose
 }
 
-func LangSpecificElseIfType(
+func LangNativeElseIfType(
 	lang *vxlang,
 	typ *vxtype,
 	subtype *vxtype,
@@ -418,13 +418,13 @@ func LangSpecificElseIfType(
 	case langjava, langkotlin:
 		output = sindent + "} else if (" + LangIsType(lang, svar, typ) + ") {"
 		if scastvar != "" {
-			output += LangVarOld(lang, scastvar, typ, subtype, LangSpecificAsType(lang, svar, typ), indent+1, false, isfuture)
+			output += LangVarOld(lang, scastvar, typ, subtype, LangNativeAsType(lang, svar, typ), indent+1, false, isfuture)
 		}
 	}
 	return output
 }
 
-func LangSpecificFinalArg(
+func LangNativeFinalArg(
 	lang *vxlang) string {
 	var output = ""
 	switch lang {
@@ -434,7 +434,7 @@ func LangSpecificFinalArg(
 	return output
 }
 
-func LangSpecificFinalClass(
+func LangNativeFinalClass(
 	lang *vxlang) string {
 	var output = ""
 	switch lang {
@@ -444,7 +444,7 @@ func LangSpecificFinalClass(
 	return output
 }
 
-func LangSpecificFinalVar(
+func LangNativeFinalVar(
 	lang *vxlang) string {
 	var output = ""
 	switch lang {
@@ -454,7 +454,7 @@ func LangSpecificFinalVar(
 	return output
 }
 
-func LangSpecificForListHeader(
+func LangNativeForListHeader(
 	lang *vxlang,
 	forvar string,
 	typ *vxtype,
@@ -473,7 +473,7 @@ func LangSpecificForListHeader(
 	return output
 }
 
-func LangSpecificFromText(
+func LangNativeFromText(
 	lang *vxlang,
 	text string) string {
 	var output = text
@@ -487,7 +487,28 @@ func LangSpecificFromText(
 	return output
 }
 
-func LangSpecificFuncGenericDefinition(
+func LangNativeFuncClassHeader(
+	lang *vxlang,
+	fnc *vxfunc,
+	indent int) string {
+	output := ""
+	lineindent := LangIndent(lang, indent, true)
+	funcname := LangFuncName(fnc)
+	extends := LangPkgNameDot(lang, "vx/core") + "Class_base"
+	switch lang {
+	case langcsharp:
+		output = lineindent + "public class Class_" + funcname + " : " + extends + ", Func_" + funcname + " {"
+	case langjava:
+		output = lineindent + "public static class Class_" + funcname + " extends " + extends + " implements Func_" + funcname + " {"
+	case langkotlin:
+		output = "" +
+			lineindent + "class Class_" + funcname + " : " + extends + ", Func_" + funcname + " {" +
+			lineindent + "  constructor() {}"
+	}
+	return output
+}
+
+func LangNativeFuncGenericDefinition(
 	lang *vxlang,
 	mapgeneric map[string]string) (string, string, string) {
 	output1 := ""
@@ -516,7 +537,7 @@ func LangSpecificFuncGenericDefinition(
 	return output1, output2, output3
 }
 
-func LangSpecificFuncIFnHeader(
+func LangNativeFuncIFnHeader(
 	lang *vxlang,
 	ifn string,
 	vxreturntype string,
@@ -546,7 +567,7 @@ func LangSpecificFuncIFnHeader(
 	return header
 }
 
-func LangSpecificFuncIFnVars(
+func LangNativeFuncIFnVars(
 	lang *vxlang,
 	ifn string) string {
 	vars := ""
@@ -567,7 +588,7 @@ func LangSpecificFuncIFnVars(
 	return vars
 }
 
-func LangSpecificFuncInstanceStatic(
+func LangNativeFuncInstanceStatic(
 	lang *vxlang) (string, string) {
 	funcinstance := "function "
 	funcstatic := "function "
@@ -585,7 +606,7 @@ func LangSpecificFuncInstanceStatic(
 	return funcinstance, funcstatic
 }
 
-func LangSpecificFuncInterface(
+func LangNativeFuncInterface(
 	lang *vxlang,
 	fnc *vxfunc,
 	extends string,
@@ -620,147 +641,7 @@ func LangSpecificFuncInterface(
 	return output
 }
 
-func LangSpecificFuncLambdaHeader(
-	lang *vxlang,
-	indent int,
-	outputnum int,
-	bindings string,
-	args string) string {
-	output := ""
-	switch lang {
-	case langcpp:
-		output = "[" + bindings + "](" + args + ") -> {"
-	case langcsharp:
-		output = "(" + args + ") => {"
-	case langjava:
-		output = "(" + args + ") -> {"
-	case langkotlin:
-		output = "{" + args + " ->"
-	}
-	return output
-}
-
-func LangSpecificFuncNativeAuto(
-	lang *vxlang,
-	fnc *vxfunc) string {
-	output := ""
-	var listargname []string
-	if fnc.generictype != nil {
-		argname := LangTypeTGeneric(lang, fnc.generictype)
-		listargname = append(listargname, argname)
-	}
-	if fnc.context {
-		argname := "context"
-		listargname = append(listargname, argname)
-	}
-	for _, arg := range fnc.listarg {
-		argname := LangNameFromArg(lang, arg)
-		listargname = append(listargname, argname)
-	}
-	argnames := StringFromListStringJoin(listargname, ", ")
-	output = LangSpecificPkgName(lang, fnc.pkgname) + lang.pkgref + "vx_" + LangFuncName(fnc) + "(" + argnames + ")" + lang.lineend
-	switch lang {
-	case langcpp:
-		if fnc.generictype != nil {
-			argname := LangTypeTGeneric(lang, fnc.generictype)
-			output = "" +
-				"vx_core::Type_any result = " + output +
-				"\noutput = vx_core::vx_any_from_any(" + argname + ", result)" + lang.lineend
-		}
-	}
-	return output
-}
-
-func LangSpecificFuncNewSuppressWarnings(
-	lang *vxlang) string {
-	output := ""
-	switch lang {
-	case langjava:
-		output = "\n  @SuppressWarnings(\"unchecked\")"
-	}
-	return output
-}
-
-func LangSpecificFuncOverride(
-	lang *vxlang,
-	fnc *vxfunc,
-	sindent string) (string, string, string) {
-	override1 := ""
-	override2 := ""
-	override3 := ""
-	if fnc.isoverride {
-		switch lang {
-		case langcsharp:
-			override3 = "override "
-		case langjava:
-			override1 = sindent + "@Override"
-		case langkotlin:
-			override2 = "override "
-		}
-	}
-	if fnc.isimplement {
-		switch lang {
-		case langjava:
-			override1 = sindent + "@Override"
-		case langkotlin:
-			override2 = "override "
-		}
-	}
-	if fnc.isimplement2 {
-		switch lang {
-		case langcsharp:
-			override3 = sindent + "new "
-		}
-	}
-	return override1, override2, override3
-}
-
-func LangSpecificFuncClassHeader(
-	lang *vxlang,
-	fnc *vxfunc,
-	indent int) string {
-	output := ""
-	lineindent := LangIndent(lang, indent, true)
-	funcname := LangFuncName(fnc)
-	extends := LangPkgNameDot(lang, "vx/core") + "Class_base"
-	switch lang {
-	case langcsharp:
-		output = lineindent + "public class Class_" + funcname + " : " + extends + ", Func_" + funcname + " {"
-	case langjava:
-		output = lineindent + "public static class Class_" + funcname + " extends " + extends + " implements Func_" + funcname + " {"
-	case langkotlin:
-		output = "" +
-			lineindent + "class Class_" + funcname + " : " + extends + ", Func_" + funcname + " {" +
-			lineindent + "  constructor() {}"
-	}
-	return output
-}
-
-func LangSpecificIfClause(
-	lang *vxlang,
-	typ *vxtype,
-	op string,
-	left string,
-	right string) string {
-	sop := op
-	sleft := left
-	sright := right
-	switch lang {
-	case langjava:
-		switch op {
-		case "==":
-			switch typ {
-			case rawstringtype:
-				sop = ".equals(" + sright + ")"
-				sright = ""
-			}
-		}
-	}
-	output := "(" + sleft + sop + sright + ")"
-	return output
-}
-
-func LangSpecificFuncInterfaceFn(
+func LangNativeFuncInterfaceFn(
 	lang *vxlang,
 	fnc *vxfunc) string {
 	interfaces := ""
@@ -831,7 +712,7 @@ func LangSpecificFuncInterfaceFn(
 	return interfaces
 }
 
-func LangSpecificFuncLambdaArgName(
+func LangNativeFuncLambdaArgName(
 	lang *vxlang,
 	lambdaarg vxarg) string {
 	output := lambdaarg.name + "_any"
@@ -842,7 +723,7 @@ func LangSpecificFuncLambdaArgName(
 	return output
 }
 
-func LangSpecificFuncLambdaFooter(
+func LangNativeFuncLambdaFooter(
 	lang *vxlang,
 	indent int,
 	outputnum int) string {
@@ -871,7 +752,102 @@ func LangSpecificFuncLambdaFooter(
 	return output
 }
 
-func LangSpecificFuncPrefixReturnTypes(
+func LangNativeFuncLambdaHeader(
+	lang *vxlang,
+	indent int,
+	outputnum int,
+	bindings string,
+	args string) string {
+	output := ""
+	switch lang {
+	case langcpp:
+		output = "[" + bindings + "](" + args + ") -> {"
+	case langcsharp:
+		output = "(" + args + ") => {"
+	case langjava:
+		output = "(" + args + ") -> {"
+	case langkotlin:
+		output = "{" + args + " ->"
+	}
+	return output
+}
+
+func LangNativeFuncNativeAuto(
+	lang *vxlang,
+	fnc *vxfunc) string {
+	output := ""
+	var listargname []string
+	if fnc.generictype != nil {
+		argname := LangTypeTGeneric(lang, fnc.generictype)
+		listargname = append(listargname, argname)
+	}
+	if fnc.context {
+		argname := "context"
+		listargname = append(listargname, argname)
+	}
+	for _, arg := range fnc.listarg {
+		argname := LangNameFromArg(lang, arg)
+		listargname = append(listargname, argname)
+	}
+	argnames := StringFromListStringJoin(listargname, ", ")
+	output = LangNativePkgName(lang, fnc.pkgname) + lang.pkgref + "vx_" + LangFuncName(fnc) + "(" + argnames + ")" + lang.lineend
+	switch lang {
+	case langcpp:
+		if fnc.generictype != nil {
+			argname := LangTypeTGeneric(lang, fnc.generictype)
+			output = "" +
+				"vx_core::Type_any result = " + output +
+				"\noutput = vx_core::vx_any_from_any(" + argname + ", result)" + lang.lineend
+		}
+	}
+	return output
+}
+
+func LangNativeFuncNewSuppressWarnings(
+	lang *vxlang) string {
+	output := ""
+	switch lang {
+	case langjava:
+		output = "\n  @SuppressWarnings(\"unchecked\")"
+	}
+	return output
+}
+
+func LangNativeFuncOverride(
+	lang *vxlang,
+	fnc *vxfunc,
+	sindent string) (string, string, string) {
+	override1 := ""
+	override2 := ""
+	override3 := ""
+	if fnc.isoverride {
+		switch lang {
+		case langcsharp:
+			override3 = "override "
+		case langjava:
+			override1 = sindent + "@Override"
+		case langkotlin:
+			override2 = "override "
+		}
+	}
+	if fnc.isimplement {
+		switch lang {
+		case langjava:
+			override1 = sindent + "@Override"
+		case langkotlin:
+			override2 = "override "
+		}
+	}
+	if fnc.isimplement2 {
+		switch lang {
+		case langcsharp:
+			override3 = sindent + "new "
+		}
+	}
+	return override1, override2, override3
+}
+
+func LangNativeFuncPrefixReturnTypes(
 	lang *vxlang,
 	prefix string,
 	returntype string) (string, string, string) {
@@ -893,7 +869,7 @@ func LangSpecificFuncPrefixReturnTypes(
 	return funcprefix, returntype1, returntype2
 }
 
-func LangSpecificFuncSuppressWarnings(
+func LangNativeFuncSuppressWarnings(
 	lang *vxlang) string {
 	output := ""
 	switch lang {
@@ -903,7 +879,7 @@ func LangSpecificFuncSuppressWarnings(
 	return output
 }
 
-func LangSpecificFuncTryCatch(
+func LangNativeFuncTryCatch(
 	lang *vxlang,
 	linesubindent string) (string, string) {
 	try := ""
@@ -919,7 +895,7 @@ func LangSpecificFuncTryCatch(
 	return try, catch
 }
 
-func LangSpecificFuncVxAsyncAnyFromAny(
+func LangNativeFuncVxAsyncAnyFromAny(
 	lang *vxlang) string {
 	vxasyncanyfromany := ""
 	switch lang {
@@ -933,7 +909,7 @@ func LangSpecificFuncVxAsyncAnyFromAny(
 	return vxasyncanyfromany
 }
 
-func LangSpecificFuncVxFuncResolve(
+func LangNativeFuncVxFuncResolve(
 	lang *vxlang,
 	listargname []string) string {
 	output := ""
@@ -946,7 +922,31 @@ func LangSpecificFuncVxFuncResolve(
 	return output
 }
 
-func LangSpecificImport(
+func LangNativeIfClause(
+	lang *vxlang,
+	typ *vxtype,
+	op string,
+	left string,
+	right string) string {
+	sop := op
+	sleft := left
+	sright := right
+	switch lang {
+	case langjava:
+		switch op {
+		case "==":
+			switch typ {
+			case rawstringtype:
+				sop = ".equals(" + sright + ")"
+				sright = ""
+			}
+		}
+	}
+	output := "(" + sleft + sop + sright + ")"
+	return output
+}
+
+func LangNativeImport(
 	lang *vxlang,
 	pkg *vxpackage,
 	imports string) string {
@@ -982,7 +982,7 @@ func LangSpecificImport(
 	return output
 }
 
-func LangSpecificIsTypeText(
+func LangNativeIsTypeText(
 	lang *vxlang,
 	svar string,
 	stype string) string {
@@ -996,7 +996,7 @@ func LangSpecificIsTypeText(
 	return output
 }
 
-func LangSpecificNamespaceOpenClose(
+func LangNativeNamespaceOpenClose(
 	lang *vxlang,
 	pkgname string) (string, string) {
 	namespaceopen := ""
@@ -1038,7 +1038,7 @@ func LangSpecificNamespaceOpenClose(
 	return namespaceopen, namespaceclose
 }
 
-func LangSpecificOverride(
+func LangNativeOverride(
 	lang *vxlang,
 	indent int,
 	isinterface bool) (string, string, string) {
@@ -1060,7 +1060,7 @@ func LangSpecificOverride(
 	return override1, override2, override3
 }
 
-func LangSpecificPackageImports(
+func LangNativePackageImports(
 	lang *vxlang,
 	pkg *vxpackage,
 	pkgprefix string,
@@ -1154,7 +1154,7 @@ func LangSpecificPackageImports(
 	return output
 }
 
-func LangSpecificPackageLine(
+func LangNativePackageLine(
 	lang *vxlang,
 	pkgname string,
 	pkgpath string) string {
@@ -1172,7 +1172,7 @@ func LangSpecificPackageLine(
 	return output
 }
 
-func LangSpecificPackagePathFromPrefixName(
+func LangNativePackagePathFromPrefixName(
 	lang *vxlang,
 	pkgprefix string,
 	pkgname string) (string, string) {
@@ -1186,7 +1186,7 @@ func LangSpecificPackagePathFromPrefixName(
 		pkgpath = StringSubstring(pkgpath, 0, ipos)
 		pkgpath = StringFromStringFindReplace(pkgpath, "/", ".")
 		pkgpath = LangFromName(pkgpath)
-		name = LangSpecificPkgName(lang, name)
+		name = LangNativePkgName(lang, name)
 	case langkotlin:
 		pkgpath = pkgprefix + pkgname
 		ipos := IntFromStringFindLast(pkgpath, "/")
@@ -1194,7 +1194,7 @@ func LangSpecificPackagePathFromPrefixName(
 		pkgpath = StringFromStringFindReplace(pkgpath, "/", ".")
 		pkgpath = LangFromName(pkgpath)
 		name = StringFromStringFindReplace(pkgname, "/", "_")
-		name = LangSpecificPkgName(lang, name)
+		name = LangNativePkgName(lang, name)
 	default:
 		pkgpath = pkgprefix + pkgname
 		ipos := IntFromStringFindLast(pkgpath, "/")
@@ -1202,37 +1202,12 @@ func LangSpecificPackagePathFromPrefixName(
 		pkgpath = StringSubstring(pkgpath, 0, ipos)
 		pkgpath = StringFromStringFindReplace(pkgpath, "/", ".")
 		pkgpath = LangFromName(pkgpath)
-		name = LangSpecificPkgName(lang, name)
+		name = LangNativePkgName(lang, name)
 	}
 	return pkgpath, name
 }
 
-func LangSpecificPathtext(
-	lang *vxlang,
-	code string) string {
-	output := ""
-	switch code {
-	case ":doc":
-		output = "build/doc"
-	case ":source":
-		switch lang {
-		case langjava:
-			output = "build/java/src"
-		case langjs:
-			output = "build/js/test"
-		}
-	case ":test":
-		switch lang {
-		case langjava:
-			output = "build/java/src"
-		case langjs:
-			output = "build/js/test"
-		}
-	}
-	return output
-}
-
-func LangSpecificPackageStaticOpenClose(
+func LangNativePackageStaticOpenClose(
 	lang *vxlang) (string, string) {
 	staticopen := ""
 	staticclose := ""
@@ -1262,7 +1237,7 @@ func LangSpecificPackageStaticOpenClose(
 	return staticopen, staticclose
 }
 
-func LangSpecificPackageSubPrefixSubDomainPath(
+func LangNativePackageSubPrefixSubDomainPath(
 	lang *vxlang,
 	command *vxcommand,
 	pkg *vxpackage) (string, string) {
@@ -1283,7 +1258,32 @@ func LangSpecificPackageSubPrefixSubDomainPath(
 	return subprefix, subdomainpath
 }
 
-func LangSpecificPkgName(
+func LangNativePathtext(
+	lang *vxlang,
+	code string) string {
+	output := ""
+	switch code {
+	case ":doc":
+		output = "build/doc"
+	case ":source":
+		switch lang {
+		case langjava:
+			output = "build/java/src"
+		case langjs:
+			output = "build/js/test"
+		}
+	case ":test":
+		switch lang {
+		case langjava:
+			output = "build/java/src"
+		case langjs:
+			output = "build/js/test"
+		}
+	}
+	return output
+}
+
+func LangNativePkgName(
 	lang *vxlang,
 	pkgname string) string {
 	output := ""
@@ -1306,7 +1306,7 @@ func LangSpecificPkgName(
 	return output
 }
 
-func LangSpecificPkgpath(
+func LangNativePkgpath(
 	lang *vxlang,
 	pkgpath string) string {
 	output := pkgpath
@@ -1318,7 +1318,7 @@ func LangSpecificPkgpath(
 	return output
 }
 
-func LangSpecificPrintLine(
+func LangNativePrintLine(
 	lang *vxlang) string {
 	output := ""
 	switch lang {
@@ -1332,7 +1332,7 @@ func LangSpecificPrintLine(
 	return output
 }
 
-func LangSpecificProjectPkgPrefixAppPathTestPath(
+func LangNativeProjectPkgPrefixAppPathTestPath(
 	lang *vxlang,
 	project *vxproject,
 	command *vxcommand,
@@ -1354,7 +1354,7 @@ func LangSpecificProjectPkgPrefixAppPathTestPath(
 	return pkgprefix, apppath, testpath
 }
 
-func LangSpecificTestAppBasic(
+func LangNativeTestAppBasic(
 	lang *vxlang) string {
 	output := ""
 	switch lang {
@@ -1401,7 +1401,7 @@ func LangSpecificTestAppBasic(
 	return output
 }
 
-func LangSpecificTestAssertEquals(
+func LangNativeTestAssertEquals(
 	lang *vxlang,
 	ismsg bool,
 	indent int) string {
@@ -1423,7 +1423,7 @@ func LangSpecificTestAssertEquals(
 	return output
 }
 
-func LangSpecificTestAssertNotEquals(
+func LangNativeTestAssertNotEquals(
 	lang *vxlang,
 	ismsg bool,
 	indent int) string {
@@ -1445,7 +1445,7 @@ func LangSpecificTestAssertNotEquals(
 	return output
 }
 
-func LangSpecificTestImport(
+func LangNativeTestImport(
 	lang *vxlang,
 	pkg *vxpackage,
 	imports string) string {
@@ -1479,7 +1479,7 @@ func LangSpecificTestImport(
 	return output
 }
 
-func LangSpecificTestImportExtra(
+func LangNativeTestImportExtra(
 	lang *vxlang) string {
 	output := ""
 	switch lang {
@@ -1496,7 +1496,7 @@ func LangSpecificTestImportExtra(
 	return output
 }
 
-func LangSpecificTestLib(
+func LangNativeTestLib(
 	lang *vxlang,
 	namespaceopen string,
 	namespaceclose string,
@@ -1613,7 +1613,7 @@ func LangSpecificTestLib(
 	return output
 }
 
-func LangSpecificTestLibFnAsync(
+func LangNativeTestLibFnAsync(
 	lang *vxlang) string {
 	output := ""
 	switch lang {
@@ -1649,7 +1649,7 @@ func LangSpecificTestLibFnAsync(
 	return output
 }
 
-func LangSpecificTestLibLambda(
+func LangNativeTestLibLambda(
 	lang *vxlang) string {
 	output := ""
 	switch lang {
@@ -1678,7 +1678,7 @@ func LangSpecificTestLibLambda(
 	return output
 }
 
-func LangTestLibParamsOpenClose(
+func LangNativeTestLibParamsOpenClose(
 	lang *vxlang) (string, string) {
 	paramsopen := ""
 	paramsclose := ""
@@ -1690,7 +1690,7 @@ func LangTestLibParamsOpenClose(
 	return paramsopen, paramsclose
 }
 
-func LangSpecificTestNamespaceOpenClose(
+func LangNativeTestNamespaceOpenClose(
 	lang *vxlang,
 	pkgname string) (string, string) {
 	namespaceopen := ""
@@ -1712,7 +1712,7 @@ func LangSpecificTestNamespaceOpenClose(
 	return namespaceopen, namespaceclose
 }
 
-func LangSpecificTestPackage(
+func LangNativeTestPackage(
 	lang *vxlang,
 	pkg *vxpackage,
 	testpackagetype *vxtype) string {
@@ -1724,7 +1724,7 @@ func LangSpecificTestPackage(
 			"\n  public void test_" + StringFromStringFindReplace(pkg.name, "/", "_") + "() {" +
 			LangVar(lang, "testpackage", testpackagetype, 2,
 				"Test"+
-					LangSpecificPkgName(lang, pkg.name)+
+					LangNativePkgName(lang, pkg.name)+
 					"Test.test_package(context)") +
 			"\n    TestLib.run_testpackage_async(testpackage)" + lang.lineend +
 			"\n  }" +
@@ -1734,7 +1734,7 @@ func LangSpecificTestPackage(
 			"\n  @Test" +
 			"\n  @DisplayName(\"" + pkg.name + "\")" +
 			"\n  void test_" + StringFromStringFindReplace(pkg.name, "/", "_") + "() {" +
-			"\n    com.vxlisp.vx.Test.Type_testpackage testpackage = " + LangSpecificPkgName(lang, pkg.name) + "Test.test_package(context)" + lang.lineend +
+			"\n    com.vxlisp.vx.Test.Type_testpackage testpackage = " + LangNativePkgName(lang, pkg.name) + "Test.test_package(context)" + lang.lineend +
 			"\n    TestLib.run_testpackage_async(testpackage)" + lang.lineend +
 			"\n  }" +
 			"\n"
@@ -1743,7 +1743,7 @@ func LangSpecificTestPackage(
 			"\n  @Test" +
 			"\n  @DisplayName(\"" + pkg.name + "\")" +
 			"\n  fun test_" + StringFromStringFindReplace(pkg.name, "/", "_") + "() : Unit {" +
-			"\n    val testpackage : vx_test.Type_testpackage = " + LangSpecificPkgName(lang, pkg.name) + "Test.test_package(context)" + lang.lineend +
+			"\n    val testpackage : vx_test.Type_testpackage = " + LangNativePkgName(lang, pkg.name) + "Test.test_package(context)" + lang.lineend +
 			"\n    TestLib.run_testpackage_async(testpackage)" + lang.lineend +
 			"\n  }" +
 			"\n"
@@ -1751,7 +1751,7 @@ func LangSpecificTestPackage(
 	return output
 }
 
-func LangSpecificTestPackageOpenClose(
+func LangNativeTestPackageOpenClose(
 	lang *vxlang,
 	pkgname string) (string, string) {
 	packageopen := ""
@@ -1759,12 +1759,12 @@ func LangSpecificTestPackageOpenClose(
 	switch lang {
 	case langcsharp:
 		packageopen = "" +
-			"\npublic " + LangSpecificFinalClass(lang) + "class " + pkgname + "Test {" +
+			"\npublic " + LangNativeFinalClass(lang) + "class " + pkgname + "Test {" +
 			"\n"
 		packageclose = "\n}\n"
 	case langjava:
 		packageopen = "" +
-			"\npublic " + LangSpecificFinalClass(lang) + "class " + pkgname + "Test {" +
+			"\npublic " + LangNativeFinalClass(lang) + "class " + pkgname + "Test {" +
 			"\n"
 		packageclose = "\n}\n"
 	case langkotlin:
@@ -1776,7 +1776,7 @@ func LangSpecificTestPackageOpenClose(
 	return packageopen, packageclose
 }
 
-func LangSpecificTestPackagePrefix(
+func LangNativeTestPackagePrefix(
 	lang *vxlang) string {
 	output := ""
 	switch lang {
@@ -1786,7 +1786,7 @@ func LangSpecificTestPackagePrefix(
 	return output
 }
 
-func LangSpecificTestResourcesPath(
+func LangNativeTestResourcesPath(
 	lang *vxlang,
 	cmd *vxcommand) string {
 	path := cmd.path
@@ -1810,7 +1810,7 @@ func LangSpecificTestResourcesPath(
 	return path
 }
 
-func LangSpecificTestTargetPath(
+func LangNativeTestTargetPath(
 	lang *vxlang,
 	targetpath string) string {
 	output := targetpath
@@ -1823,7 +1823,7 @@ func LangSpecificTestTargetPath(
 	return output
 }
 
-func LangSpecificTestVarTestCases(
+func LangNativeTestVarTestCases(
 	lang *vxlang,
 	testall []string) string {
 	output := ""
@@ -1844,7 +1844,7 @@ func LangSpecificTestVarTestCases(
 	return output
 }
 
-func LangSpecificTestWriteTestSuite(
+func LangNativeTestWriteTestSuite(
 	lang *vxlang,
 	testpackages string) string {
 	output := ""
@@ -1888,7 +1888,7 @@ func LangSpecificTestWriteTestSuite(
 	return output
 }
 
-func LangSpecificTypeBoolean(
+func LangNativeTypeBoolean(
 	lang *vxlang) string {
 	output := ""
 	switch lang {
@@ -1900,7 +1900,7 @@ func LangSpecificTypeBoolean(
 	return output
 }
 
-func LangSpecificTypeClassHeader(
+func LangNativeTypeClassHeader(
 	lang *vxlang,
 	typ *vxtype,
 	indent int) string {
@@ -1921,40 +1921,40 @@ func LangSpecificTypeClassHeader(
 	return output
 }
 
-func LangSpecificTypeElseIfListAny(
+func LangNativeTypeElseIfListAny(
 	lang *vxlang,
 	allowtype *vxtype) string {
 	output := ""
 	switch lang {
 	case langcsharp:
 		output = "" +
-			LangSpecificElseIfType(
+			LangNativeElseIfType(
 				lang, rawlistanytype, emptytype, "valsub", "listany", 4, false) +
-			LangSpecificForListHeader(
+			LangNativeForListHeader(
 				lang, "item", anytype, "listany", 5) +
 			LangIf(
 				lang, 6, "false", "") +
-			LangSpecificElseIfType(
+			LangNativeElseIfType(
 				lang, allowtype, emptytype, "item", "valitem", 6, false) +
-			LangSpecificVarSet(
+			LangNativeVarSet(
 				lang, "ischanged", 7, "true") +
-			LangSpecificVxListAdd(
+			LangNativeVxListAdd(
 				lang, "listval", 7, "valitem") +
 			"\n            }" +
 			"\n          }"
 	case langjava, langkotlin:
 		output = "" +
-			LangSpecificElseIfType(
+			LangNativeElseIfType(
 				lang, rawlistunknowntype, emptytype, "valsub", "listunknown", 4, false) +
-			LangSpecificForListHeader(
+			LangNativeForListHeader(
 				lang, "item", rawobjecttype, "listunknown", 5) +
 			LangIf(
 				lang, 6, "false", "") +
-			LangSpecificElseIfType(
+			LangNativeElseIfType(
 				lang, allowtype, emptytype, "item", "valitem", 6, false) +
-			LangSpecificVarSet(
+			LangNativeVarSet(
 				lang, "ischanged", 7, "true") +
-			LangSpecificVxListAdd(
+			LangNativeVxListAdd(
 				lang, "listval", 7, "valitem") +
 			"\n            }" +
 			"\n          }"
@@ -1962,7 +1962,7 @@ func LangSpecificTypeElseIfListAny(
 	return output
 }
 
-func LangSpecificTypeFloat(
+func LangNativeTypeFloat(
 	lang *vxlang) string {
 	output := ""
 	switch lang {
@@ -1974,7 +1974,7 @@ func LangSpecificTypeFloat(
 	return output
 }
 
-func LangSpecificTypeInt(
+func LangNativeTypeInt(
 	lang *vxlang) string {
 	output := ""
 	switch lang {
@@ -1988,7 +1988,7 @@ func LangSpecificTypeInt(
 	return output
 }
 
-func LangSpecificTypeInterfaceBasics(
+func LangNativeTypeInterfaceBasics(
 	lang *vxlang,
 	typ *vxtype) bool {
 	output := true
@@ -2003,7 +2003,7 @@ func LangSpecificTypeInterfaceBasics(
 	return output
 }
 
-func LangSpecificTypeInterfaceHeader(
+func LangNativeTypeInterfaceHeader(
 	lang *vxlang,
 	typ *vxtype,
 	extendtypes []*vxtype,
@@ -2044,7 +2044,7 @@ func LangSpecificTypeInterfaceHeader(
 	return output
 }
 
-func LangSpecificTypeMapGetOrElse(
+func LangNativeTypeMapGetOrElse(
 	lang *vxlang,
 	typ *vxtype) string {
 	output := ""
@@ -2057,7 +2057,7 @@ func LangSpecificTypeMapGetOrElse(
 	return output
 }
 
-func LangSpecificTypeMapKeysetGet(
+func LangNativeTypeMapKeysetGet(
 	lang *vxlang) (string, string) {
 	keyset := ""
 	mapget := ""
@@ -2075,7 +2075,7 @@ func LangSpecificTypeMapKeysetGet(
 	return keyset, mapget
 }
 
-func LangSpecificTypeNameFullSimple(
+func LangNativeTypeNameFullSimple(
 	lang *vxlang,
 	typ *vxtype,
 	simple bool) string {
@@ -2147,7 +2147,7 @@ func LangSpecificTypeNameFullSimple(
 			name = "List<Any>"
 		}
 	case rawlistanytype:
-		name = "List<" + LangSpecificTypeNameFullSimple(lang, anytype, true) + ">"
+		name = "List<" + LangNativeTypeNameFullSimple(lang, anytype, true) + ">"
 	case rawmaptype:
 		switch lang {
 		case langcsharp:
@@ -2167,11 +2167,11 @@ func LangSpecificTypeNameFullSimple(
 	case rawmapanytype:
 		switch lang {
 		case langcpp:
-			name = "std::Map<std::string, " + LangSpecificTypeNameFullSimple(lang, anytype, true) + ">"
+			name = "std::Map<std::string, " + LangNativeTypeNameFullSimple(lang, anytype, true) + ">"
 		case langcsharp:
-			name = "Vx.Core.Map<string, " + LangSpecificTypeNameFullSimple(lang, anytype, true) + ">"
+			name = "Vx.Core.Map<string, " + LangNativeTypeNameFullSimple(lang, anytype, true) + ">"
 		default:
-			name = "Map<String, " + LangSpecificTypeNameFullSimple(lang, anytype, true) + ">"
+			name = "Map<String, " + LangNativeTypeNameFullSimple(lang, anytype, true) + ">"
 		}
 	case rawobjecttype:
 		switch lang {
@@ -2217,17 +2217,17 @@ func LangSpecificTypeNameFullSimple(
 			}
 		default:
 			if typ.isgeneric && !simple {
-				name = LangSpecificTypeNameSimple(
+				name = LangNativeTypeNameSimple(
 					lang, typ, simple)
 			} else {
-				name = LangSpecificPkgName(
+				name = LangNativePkgName(
 					lang, typ.pkgname)
 				if typ.isfunc {
 					name += lang.pkgref + "Func_"
 				} else {
 					name += lang.pkgref + "Type_"
 				}
-				name += LangSpecificTypeNameSimple(
+				name += LangNativeTypeNameSimple(
 					lang, typ, simple)
 			}
 		}
@@ -2235,7 +2235,7 @@ func LangSpecificTypeNameFullSimple(
 	return name
 }
 
-func LangSpecificTypeNameSimple(
+func LangNativeTypeNameSimple(
 	lang *vxlang,
 	typ *vxtype,
 	simple bool) string {
@@ -2292,7 +2292,7 @@ func LangSpecificTypeNameSimple(
 	case rawlistanytype:
 		switch lang {
 		case langcsharp, langjava, langkotlin:
-			name = "List<" + LangSpecificTypeNameSimple(lang, anytype, true) + ">"
+			name = "List<" + LangNativeTypeNameSimple(lang, anytype, true) + ">"
 		}
 	case rawlistunknowntype:
 		switch lang {
@@ -2313,11 +2313,11 @@ func LangSpecificTypeNameSimple(
 	case rawmapanytype:
 		switch lang {
 		case langcpp:
-			name = "std::map<string, " + LangSpecificTypeNameSimple(lang, anytype, true) + ">"
+			name = "std::map<string, " + LangNativeTypeNameSimple(lang, anytype, true) + ">"
 		case langcsharp:
-			name = "Vx.Core.Map<string, " + LangSpecificTypeNameSimple(lang, anytype, true) + ">"
+			name = "Vx.Core.Map<string, " + LangNativeTypeNameSimple(lang, anytype, true) + ">"
 		case langjava, langkotlin:
-			name = "Map<String, " + LangSpecificTypeNameSimple(lang, anytype, true) + ">"
+			name = "Map<String, " + LangNativeTypeNameSimple(lang, anytype, true) + ">"
 		}
 	case rawstringtype:
 		switch lang {
@@ -2367,7 +2367,7 @@ func LangSpecificTypeNameSimple(
 	return name
 }
 
-func LangSpecificTypeNameSubtype(
+func LangNativeTypeNameSubtype(
 	lang *vxlang,
 	typ *vxtype,
 	subtype *vxtype) string {
@@ -2389,7 +2389,7 @@ func LangSpecificTypeNameSubtype(
 	return output
 }
 
-func LangSpecificTypeProperties(
+func LangNativeTypeProperties(
 	lang *vxlang,
 	typ *vxtype) []vxarg {
 	var typeproperties []vxarg
@@ -2402,7 +2402,7 @@ func LangSpecificTypeProperties(
 	return typeproperties
 }
 
-func LangSpecificTypeString(
+func LangNativeTypeString(
 	lang *vxlang) string {
 	output := ""
 	switch lang {
@@ -2416,7 +2416,7 @@ func LangSpecificTypeString(
 	return output
 }
 
-func LangSpecificTypeStringbuilder(
+func LangNativeTypeStringbuilder(
 	lang *vxlang) string {
 	output := ""
 	switch lang {
@@ -2433,7 +2433,7 @@ func LangSpecificTypeStringbuilder(
 	return output
 }
 
-func LangSpecificTypeStringbuilderAppend(
+func LangNativeTypeStringbuilderAppend(
 	lang *vxlang) string {
 	output := ""
 	switch lang {
@@ -2445,7 +2445,7 @@ func LangSpecificTypeStringbuilderAppend(
 	return output
 }
 
-func LangSpecificTypeThis(
+func LangNativeTypeThis(
 	lang *vxlang) string {
 	output := ""
 	switch lang {
@@ -2457,7 +2457,7 @@ func LangSpecificTypeThis(
 	return output
 }
 
-func LangSpecificTypeVxEmpty(
+func LangNativeTypeVxEmpty(
 	lang *vxlang) string {
 	output := ""
 	switch lang {
@@ -2469,7 +2469,7 @@ func LangSpecificTypeVxEmpty(
 	return output
 }
 
-func LangSpecificTypeVxMap(
+func LangNativeTypeVxMap(
 	lang *vxlang,
 	typ *vxtype) string {
 	funcvxmap := NewFunc()
@@ -2491,7 +2491,7 @@ func LangSpecificTypeVxMap(
 	default:
 		copymap = "" +
 			LangVarCollection(lang, "map", rawmaptype, anytype, 3,
-				LangSpecificVxNewMap(lang, anytype, "this.vx_p_map"))
+				LangNativeVxNewMap(lang, anytype, "this.vx_p_map"))
 	}
 	prefix := LangTypeName(lang, typ)
 	output := "" +
@@ -2503,7 +2503,7 @@ func LangSpecificTypeVxMap(
 	return output
 }
 
-func LangSpecificTypeVxNewVals(
+func LangNativeTypeVxNewVals(
 	lang *vxlang) string {
 	output := "vals"
 	switch lang {
@@ -2513,7 +2513,7 @@ func LangSpecificTypeVxNewVals(
 	return output
 }
 
-func LangSpecificVarAll(
+func LangNativeVarAll(
 	lang *vxlang,
 	varname string,
 	vartype *vxtype,
@@ -2527,7 +2527,7 @@ func LangSpecificVarAll(
 	isgeneric bool,
 	isnullable bool) string {
 	output := LangIndent(lang, indent, true)
-	svalue := LangSpecificVarValue(lang, vartype, varvalue)
+	svalue := LangNativeVarValue(lang, vartype, varvalue)
 	switch lang {
 	case langcsharp:
 		if isstatic {
@@ -2662,7 +2662,7 @@ func LangSpecificVarAll(
 	return output
 }
 
-func LangSpecificVarClassAll(
+func LangNativeVarClassAll(
 	lang *vxlang,
 	varname string,
 	vartype *vxtype,
@@ -2672,7 +2672,7 @@ func LangSpecificVarClassAll(
 	varvalue string) string {
 	classname := LangTypeClassFull(lang, vartype)
 	sindent := "\n" + StringRepeat("  ", indent)
-	svalue := LangSpecificVarValue(lang, vartype, varvalue)
+	svalue := LangNativeVarValue(lang, vartype, varvalue)
 	output := sindent
 	switch lang {
 	case langcsharp:
@@ -2707,7 +2707,7 @@ func LangSpecificVarClassAll(
 	return output
 }
 
-func LangSpecificVarSet(
+func LangNativeVarSet(
 	lang *vxlang,
 	varname string,
 	indent int,
@@ -2722,7 +2722,7 @@ func LangSpecificVarSet(
 	return output
 }
 
-func LangSpecificVarValue(
+func LangNativeVarValue(
 	lang *vxlang,
 	vartype *vxtype,
 	varvalue string) string {
@@ -2742,7 +2742,7 @@ func LangSpecificVarValue(
 	return output
 }
 
-func LangSpecificVxContains(
+func LangNativeVxContains(
 	lang *vxlang,
 	text string,
 	contains string) string {
@@ -2756,7 +2756,7 @@ func LangSpecificVxContains(
 	return output
 }
 
-func LangSpecificVxEqualsString(
+func LangNativeVxEqualsString(
 	lang *vxlang,
 	text1 string,
 	text2 string) string {
@@ -2770,7 +2770,7 @@ func LangSpecificVxEqualsString(
 	return output
 }
 
-func LangSpecificVxFloatFromString(
+func LangNativeVxFloatFromString(
 	lang *vxlang,
 	text string) string {
 	output := ""
@@ -2785,7 +2785,7 @@ func LangSpecificVxFloatFromString(
 	return output
 }
 
-func LangSpecificVxIntFromString(
+func LangNativeVxIntFromString(
 	lang *vxlang,
 	text string) string {
 	output := ""
@@ -2800,7 +2800,7 @@ func LangSpecificVxIntFromString(
 	return output
 }
 
-func LangSpecificVxListAdd(
+func LangNativeVxListAdd(
 	lang *vxlang,
 	varname string,
 	indent int,
@@ -2816,7 +2816,7 @@ func LangSpecificVxListAdd(
 	return output
 }
 
-func LangSpecificVxListAddList(
+func LangNativeVxListAddList(
 	lang *vxlang,
 	varname string,
 	indent int,
@@ -2832,7 +2832,7 @@ func LangSpecificVxListAddList(
 	return output
 }
 
-func LangSpecificVxListGet(
+func LangNativeVxListGet(
 	lang *vxlang,
 	varname string,
 	value string) string {
@@ -2846,7 +2846,7 @@ func LangSpecificVxListGet(
 	return output
 }
 
-func LangSpecificVxListSize(
+func LangNativeVxListSize(
 	lang *vxlang,
 	varname string) string {
 	output := ""
@@ -2861,7 +2861,7 @@ func LangSpecificVxListSize(
 	return output
 }
 
-func LangSpecificVxNewList(
+func LangNativeVxNewList(
 	lang *vxlang,
 	typ *vxtype,
 	value string) string {
@@ -2877,7 +2877,7 @@ func LangSpecificVxNewList(
 	return output
 }
 
-func LangSpecificVxNewMap(
+func LangNativeVxNewMap(
 	lang *vxlang,
 	typ *vxtype,
 	value string) string {
@@ -2893,7 +2893,7 @@ func LangSpecificVxNewMap(
 	return output
 }
 
-func LangSpecificVxStartswith(
+func LangNativeVxStartswith(
 	lang *vxlang,
 	varname string,
 	starts string) string {
@@ -2907,7 +2907,7 @@ func LangSpecificVxStartswith(
 	return output
 }
 
-func LangSpecificVxSubstring(
+func LangNativeVxSubstring(
 	lang *vxlang,
 	varname string,
 	from string,
@@ -2930,7 +2930,7 @@ func LangSpecificVxSubstring(
 	return output
 }
 
-func LangSpecificVxToString(
+func LangNativeVxToString(
 	lang *vxlang,
 	varname string) string {
 	output := ""
@@ -2943,7 +2943,7 @@ func LangSpecificVxToString(
 	return output
 }
 
-func LangSpecificWriteFromProjectCmd(
+func LangNativeWriteFromProjectCmd(
 	lang *vxlang,
 	project *vxproject,
 	command *vxcommand) *vxmsgblock {

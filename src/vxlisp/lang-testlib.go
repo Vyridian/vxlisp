@@ -62,9 +62,9 @@ func LangTestLib(lang *vxlang) string {
 		LangTestLib_run_testresult(lang) +
 		LangTestLib_write_testpackagelist_async(lang)
 	spath := LangPkgNameDot(lang, "vx/core") + "c_path_test_resources.vx_string()"
-	namespaceopen, namespaceclose := LangSpecificNamespaceOpenClose(
+	namespaceopen, namespaceclose := LangNativeNamespaceOpenClose(
 		lang, "TestLib")
-	output := LangSpecificTestLib(
+	output := LangNativeTestLib(
 		lang, namespaceopen, namespaceclose, commontests, spath)
 	return output
 }
@@ -76,7 +76,7 @@ func LangTestLib_file_test(lang *vxlang) string {
 	arg := NewArg("file")
 	arg.vxtype = filetype
 	fnc.listarg = append(fnc.listarg, arg)
-	paramsopen, paramsclose := LangTestLibParamsOpenClose(lang)
+	paramsopen, paramsclose := LangNativeTestLibParamsOpenClose(lang)
 	fileparams := "" +
 		"\n      file," +
 		paramsopen +
@@ -101,7 +101,7 @@ func LangTestLib_read_test_file(lang *vxlang) string {
 	arg = NewArg("filename")
 	arg.vxtype = rawstringtype
 	fnc.listarg = append(fnc.listarg, arg)
-	paramsopen, paramsclose := LangTestLibParamsOpenClose(lang)
+	paramsopen, paramsclose := LangNativeTestLibParamsOpenClose(lang)
 	fileparams := "" +
 		"\n      " + LangTypeT(lang, filetype) + "," +
 		paramsopen +
@@ -297,9 +297,9 @@ func LangTestLib_run_testresult(lang *vxlang) string {
 	arg.vxtype = testresulttype
 	arg.isfinal = true
 	fnc.listarg = append(fnc.listarg, arg)
-	assertequals := LangSpecificTestAssertEquals(lang, true, 3)
-	assertnotequals := LangSpecificTestAssertNotEquals(lang, true, 3)
-	println := LangSpecificPrintLine(lang)
+	assertequals := LangNativeTestAssertEquals(lang, true, 3)
+	assertnotequals := LangNativeTestAssertNotEquals(lang, true, 3)
+	println := LangNativePrintLine(lang)
 	output := "" +
 		LangFuncHeaderStatic(lang, "", fnc, 1, 0,
 			LangVar(lang, "valexpected", anytype, 2,
@@ -323,7 +323,7 @@ func LangTestLib_run_testresult(lang *vxlang) string {
 				"\n      "+LangPkgNameDot(lang, "vx/core")+"f_log(testresult)"+lang.lineend+
 				"\n    }"+
 				LangIf(lang, 2,
-					LangSpecificIfClause(lang, rawstringtype, "==", "code", "\":ne\""),
+					LangNativeIfClause(lang, rawstringtype, "==", "code", "\":ne\""),
 					assertnotequals)+
 				LangIfElse(lang, 2, assertequals)+
 				LangIfEnd(lang, 2)+
@@ -347,14 +347,14 @@ func LangTestLib_test(lang *vxlang) string {
 	arg.vxtype = rawstringtype
 	arg.isfinal = true
 	fnc.listarg = append(fnc.listarg, arg)
-	assertequals := LangSpecificTestAssertEquals(lang, false, 2)
-	println := LangSpecificPrintLine(lang)
+	assertequals := LangNativeTestAssertEquals(lang, false, 2)
+	println := LangNativePrintLine(lang)
 	output := "" +
 		LangFuncHeaderAll(lang, "", fnc, 1, false, true, 0,
 			assertequals+
 				LangVar(lang, "output", rawbooltype, 2, "false")+
-				"\n    if ("+LangSpecificVxEqualsString(lang, "expected", "actual")+") {"+
-				LangSpecificVarSet(lang, "output", 3, "true")+
+				"\n    if ("+LangNativeVxEqualsString(lang, "expected", "actual")+") {"+
+				LangNativeVarSet(lang, "output", 3, "true")+
 				"\n    } else {"+
 				"\n      "+println+"(testname)"+lang.lineend+
 				"\n      "+println+"(expected)"+lang.lineend+
@@ -368,7 +368,7 @@ func LangTestLib_test_async_from_async_fn(
 	fnc := NewFunc()
 	fnc.name = "test_async_from_async_fn"
 	fnc.vxtype = rawbooltype
-	slambda := LangSpecificTestLibLambda(lang)
+	slambda := LangNativeTestLibLambda(lang)
 	sasync1 := "" +
 		LangPkgNameDot(lang, "vx/core") + "vx_async_from_async_fn(async, " + slambda +
 		")"
@@ -446,7 +446,7 @@ func LangTestLib_test_list_from_list_async(
 	fnc := NewFunc()
 	fnc.name = "test_list_from_list_async"
 	fnc.vxtype = rawbooltype
-	fn_async := LangSpecificTestLibFnAsync(lang)
+	fn_async := LangNativeTestLibFnAsync(lang)
 	asynclist := LangPkgNameDot(lang, "vx/core") + "vx_list_from_list_async(" + LangTypeT(lang, stringlisttype) + ", slist, fn_async)"
 	output := "" +
 		LangFuncHeaderStatic(lang, "", fnc, 1, 0,
@@ -476,7 +476,7 @@ func LangTestLib_test_pathfull_from_file(lang *vxlang) string {
 	fnc := NewFunc()
 	fnc.name = "test_pathfull_from_file"
 	fnc.vxtype = rawbooltype
-	paramsopen, paramsclose := LangTestLibParamsOpenClose(lang)
+	paramsopen, paramsclose := LangNativeTestLibParamsOpenClose(lang)
 	fileparams := "" +
 		"\n      " + LangTypeT(lang, filetype) + "," +
 		paramsopen +
@@ -574,7 +574,7 @@ func LangTestLib_write_testpackagelist_async(lang *vxlang) string {
 				LangVar(lang, "valboolean", booleantype, 2,
 					LangPkgNameDot(lang, "vx/data/file")+
 						"f_boolean_write_from_file_any(context, filetest, testpackagelist_resolved)")+
-				LangSpecificVarSet(lang, "output", 2,
+				LangNativeVarSet(lang, "output", 2,
 					"valboolean.vx_boolean()")+
 				LangVar(lang, "divtest", htmldivtype, 2,
 					LangPkgNameDot(lang, "vx/test")+"f_div_from_testpackagelist(testpackagelist_resolved)")+
@@ -582,15 +582,15 @@ func LangTestLib_write_testpackagelist_async(lang *vxlang) string {
 					LangPkgNameDot(lang, "vx/test")+"f_html_from_divtest(divtest)")+
 				LangVar(lang, "filenode", filetype, 2,
 					"file_test("+LangPkgNameDot(lang, "vx/test")+"f_file_testnode())")+
-				LangSpecificVarSet(lang, "valboolean", 2,
+				LangNativeVarSet(lang, "valboolean", 2,
 					LangPkgNameDot(lang, "vx/data/file")+"f_boolean_write_from_file_any(context, filenode, htmlnode)")+
-				LangSpecificVarSet(lang, "output", 2,
+				LangNativeVarSet(lang, "output", 2,
 					"output && valboolean.vx_boolean()")+
 				LangVar(lang, "filehtml", filetype, 2,
 					"file_test("+LangPkgNameDot(lang, "vx/test")+"f_file_testhtml())")+
 				LangVar(lang, "shtml", stringtype, 2, LangPkgNameDot(lang, "vx/web/html")+"f_string_from_html(htmlnode)")+
-				LangSpecificVarSet(lang, "valboolean", 2,
+				LangNativeVarSet(lang, "valboolean", 2,
 					LangPkgNameDot(lang, "vx/data/file")+"f_boolean_write_from_file_string(context, filehtml, shtml)")+
-				LangSpecificVarSet(lang, "output", 2, "output && valboolean.vx_boolean()"))
+				LangNativeVarSet(lang, "output", 2, "output && valboolean.vx_boolean()"))
 	return output
 }

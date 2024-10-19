@@ -8,7 +8,7 @@ func LangTestApp(
 	command *vxcommand,
 	pkgprefix string) string {
 	imports := ""
-	imports += LangSpecificImport(
+	imports += LangNativeImport(
 		lang,
 		PackageCoreFromProject(project),
 		imports)
@@ -35,7 +35,7 @@ func LangTestApp(
 			packagecontext, ok := PackageFromProjectName(
 				project, contextfunc.pkgname)
 			if ok {
-				imports += LangSpecificImport(
+				imports += LangNativeImport(
 					lang,
 					packagecontext,
 					imports)
@@ -67,7 +67,7 @@ func LangTestApp(
 	}
 	tests := ""
 	listpackage := project.listpackage
-	testpackageprefix := LangSpecificTestPackagePrefix(lang)
+	testpackageprefix := LangNativeTestPackagePrefix(lang)
 	var listtestpackage []string
 	for _, pkg := range listpackage {
 		iscontinue := true
@@ -77,21 +77,21 @@ func LangTestApp(
 		}
 		if iscontinue {
 			if pkg.name != "" {
-				imports += LangSpecificTestImport(lang, pkg, imports)
-				testpackage := "\n      " + testpackageprefix + LangSpecificPkgName(lang, pkg.name) + "Test.test_package(context)"
+				imports += LangNativeTestImport(lang, pkg, imports)
+				testpackage := "\n      " + testpackageprefix + LangNativePkgName(lang, pkg.name) + "Test.test_package(context)"
 				listtestpackage = append(
 					listtestpackage, testpackage)
-				tests += LangSpecificTestPackage(lang, pkg, testpackagetype)
+				tests += LangNativeTestPackage(lang, pkg, testpackagetype)
 			}
 		}
 	}
 	testpackages := StringFromListStringJoin(
 		listtestpackage, ",")
-	namespaceopen, namespaceclose := LangSpecificNamespaceOpenClose(
+	namespaceopen, namespaceclose := LangNativeNamespaceOpenClose(
 		lang, "AppTest")
-	imports += LangSpecificTestImportExtra(lang)
-	testbasics := LangSpecificTestAppBasic(lang)
-	writetestsuite := LangSpecificTestWriteTestSuite(
+	imports += LangNativeTestImportExtra(lang)
+	testbasics := LangNativeTestAppBasic(lang)
+	writetestsuite := LangNativeTestWriteTestSuite(
 		lang, testpackages)
 	output := "" +
 		"/**" +
@@ -211,7 +211,7 @@ func LangTestFromPackage(
 	command *vxcommand,
 	pkgprefix string) (string, *vxmsgblock) {
 	msgblock := NewMsgBlock("LangTestFromPackage")
-	pkgpath, pkgname := LangSpecificPackagePathFromPrefixName(
+	pkgpath, pkgname := LangNativePackagePathFromPrefixName(
 		lang, pkgprefix, pkg.name)
 	typkeys := ListKeyFromMapType(pkg.maptype)
 	var coverdoccnt = 0
@@ -386,7 +386,7 @@ func LangTestFromPackage(
 			"\n      " + LangTypeT(lang, testcaselisttype) + "," +
 			"\n      testcases" +
 			"\n    )"
-		vartestcases = LangSpecificTestVarTestCases(
+		vartestcases = LangNativeTestVarTestCases(
 			lang, testall)
 	}
 	argcontext := NewArgContext()
@@ -453,11 +453,11 @@ func LangTestFromPackage(
 		testcoveragesummary +
 		testcoveragedetail +
 		testpackage
-	imports := LangSpecificPackageImports(
+	imports := LangNativePackageImports(
 		lang, pkg, pkgprefix, body, true)
-	namespaceopen, namespaceclose := LangSpecificTestNamespaceOpenClose(
+	namespaceopen, namespaceclose := LangNativeTestNamespaceOpenClose(
 		lang, pkgpath)
-	packageopen, packageclose := LangSpecificTestPackageOpenClose(
+	packageopen, packageclose := LangNativeTestPackageOpenClose(
 		lang, pkgname)
 	output := "" +
 		namespaceopen +
@@ -489,6 +489,6 @@ func LangTestFromValue(
 	lang *vxlang,
 	value vxvalue) string {
 	var output = ""
-	output = LangSpecificFromText(lang, value.textblock.text)
+	output = LangNativeFromText(lang, value.textblock.text)
 	return output
 }

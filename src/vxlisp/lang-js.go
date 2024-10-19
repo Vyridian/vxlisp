@@ -536,7 +536,7 @@ func JsFromPackage(lang *vxlang, pkg *vxpackage, project *vxproject) (string, *v
 		allconsts += consttext
 		statics += statictext
 	}
-	namespaceopen, namespaceclose := LangSpecificNamespaceOpenClose(lang, pkgname)
+	namespaceopen, namespaceclose := LangNativeNamespaceOpenClose(lang, pkgname)
 	output := "" +
 		"'strict mode'" +
 		"\n" + imports +
@@ -731,7 +731,7 @@ func JsFromValue(
 					}
 					argtext = StringRemoveQuotes(argtext)
 					if argtext == ":auto" {
-						argtext = LangSpecificFuncNativeAuto(lang, parentfn)
+						argtext = LangNativeFuncNativeAuto(lang, parentfn)
 					}
 					argtexts = append(argtexts, argtext)
 				}
@@ -755,17 +755,17 @@ func JsFromValue(
 			case "vx/core/fn":
 			case "vx/core/let":
 				if fnc.async {
-					output += LangSpecificPkgName(lang, fnc.pkgname) + lang.pkgref + "f_let_async("
+					output += LangNativePkgName(lang, fnc.pkgname) + lang.pkgref + "f_let_async("
 				} else {
-					output += LangSpecificPkgName(lang, fnc.pkgname) + lang.pkgref + "f_let("
+					output += LangNativePkgName(lang, fnc.pkgname) + lang.pkgref + "f_let("
 				}
 			default:
 				if fnc.argname != "" {
-					output += LangSpecificPkgName(lang, "vx/core") + lang.pkgref + "vx_any_from_func("
+					output += LangNativePkgName(lang, "vx/core") + lang.pkgref + "vx_any_from_func("
 					argtexts = append(argtexts, LangTypeT(lang, fnc.vxtype))
 					argtexts = append(argtexts, LangFromName(fnc.argname))
 				} else {
-					output += LangSpecificPkgName(lang, fnc.pkgname) + lang.pkgref + "f_" + LangFuncName(fnc) + "("
+					output += LangNativePkgName(lang, fnc.pkgname) + lang.pkgref + "f_" + LangFuncName(fnc) + "("
 				}
 			}
 			switch funcname {
@@ -1278,7 +1278,7 @@ func JsTestFromPackage(
 	if len(testall) > 0 {
 		testcases = ",\n      " + strings.Join(testall, ",\n      ")
 	}
-	namespaceopen, namespaceclose := LangSpecificNamespaceOpenClose(lang, pkgname+"_test")
+	namespaceopen, namespaceclose := LangNativeNamespaceOpenClose(lang, pkgname+"_test")
 	output := "" +
 		"'strict mode'" +
 		"\n" + imports +
