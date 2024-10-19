@@ -110,10 +110,6 @@ func LangConst(
 		"\n  /**" +
 		"\n   * " + StringFromStringIndent(doc, "   * ") +
 		"\n   */"
-		/// FIXME
-	if lang == langkotlin {
-		doc = ""
-	}
 	argoutput := NewArg("output")
 	argoutput.vxtype = cnst.vxtype
 	argoutput.isfinal = false
@@ -165,24 +161,8 @@ func LangConstValFromConst(
 		for _, cmd := range project.listcmd {
 			if cmd.code != ":test" {
 			} else if cmd.lang == lang {
-				path := cmd.path
-				switch lang {
-				case langjava:
-					ipos := IntFromStringFindLast(path, "/test/")
-					if ipos >= 0 {
-						path = path[0 : ipos+5]
-					}
-				}
-				ipos := IntFromStringFind(path, "/"+lang.name+"/")
-				if ipos >= 0 {
-					path = path[ipos+len(lang.name)+2:]
-				}
-				switch lang {
-				case langkotlin:
-					if BooleanFromStringStarts(path, "app/") {
-						path = path[4:]
-					}
-				}
+				path := LangSpecificTestResourcesPath(
+					lang, cmd)
 				cnstval = "\"" + path + "/resources\""
 			}
 		}

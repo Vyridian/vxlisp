@@ -53,17 +53,10 @@ func ExecuteProjectCommand(
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 	case ":source", ":test":
 		if !issource {
-			switch command.lang {
-			case langcpp:
-				msgs := CppWriteFromProjectCmd(command.lang, project, command)
-				msgblock = MsgblockAddBlock(msgblock, msgs)
-			case langjs:
-				msgs := JsWriteFromProjectCmd(command.lang, project, command)
-				msgblock = MsgblockAddBlock(msgblock, msgs)
-			default:
-				msgs := LangWriteFromProjectCmd(command.lang, project, command)
-				msgblock = MsgblockAddBlock(msgblock, msgs)
-			}
+			msgs := LangSpecificWriteFromProjectCmd(
+				command.lang, project, command)
+			msgblock = MsgblockAddBlock(
+				msgblock, msgs)
 		}
 		issource = true
 	case ":webserver":

@@ -87,7 +87,10 @@ func JsEmptyValueFromTypeIndent(lang *vxlang, typ *vxtype, indent string) string
 	return output
 }
 
-func JsFilesFromProjectCmd(lang *vxlang, project *vxproject, command *vxcommand) ([]*vxfile, *vxmsgblock) {
+func JsFilesFromProjectCmd(
+	lang *vxlang,
+	project *vxproject,
+	command *vxcommand) ([]*vxfile, *vxmsgblock) {
 	msgblock := NewMsgBlock("JsFilesFromProjectCmd")
 	var files []*vxfile
 	cmdpath := PathFromProjectCmd(project, command)
@@ -533,7 +536,7 @@ func JsFromPackage(lang *vxlang, pkg *vxpackage, project *vxproject) (string, *v
 		allconsts += consttext
 		statics += statictext
 	}
-	namespaceopen, namespaceclose := LangSpecificNamespaceFromPackage(lang, pkgname)
+	namespaceopen, namespaceclose := LangSpecificNamespaceOpenClose(lang, pkgname)
 	output := "" +
 		"'strict mode'" +
 		"\n" + imports +
@@ -1275,7 +1278,7 @@ func JsTestFromPackage(
 	if len(testall) > 0 {
 		testcases = ",\n      " + strings.Join(testall, ",\n      ")
 	}
-	namespaceopen, namespaceclose := LangSpecificNamespaceFromPackage(lang, pkgname+"_test")
+	namespaceopen, namespaceclose := LangSpecificNamespaceOpenClose(lang, pkgname+"_test")
 	output := "" +
 		"'strict mode'" +
 		"\n" + imports +
@@ -1409,8 +1412,11 @@ func JsTypeCoverageNumsValNew(pct int, tests int, total int) string {
 	return output
 }
 
-func JsWriteFromProjectCmd(lang *vxlang, project *vxproject, command *vxcommand) *vxmsgblock {
-	msgblock := NewMsgBlock("WriteJsFromProjectCmd")
+func JsWriteFromProjectCmd(
+	lang *vxlang,
+	project *vxproject,
+	command *vxcommand) *vxmsgblock {
+	msgblock := NewMsgBlock("JsWriteFromProjectCmd")
 	files, msgs := JsFilesFromProjectCmd(lang, project, command)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	msgs = WriteListFile(files)

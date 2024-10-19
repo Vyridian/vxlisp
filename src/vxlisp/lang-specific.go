@@ -487,6 +487,86 @@ func LangSpecificFromText(
 	return output
 }
 
+func LangSpecificFuncGenericDefinition(
+	lang *vxlang,
+	mapgeneric map[string]string) (string, string, string) {
+	output1 := ""
+	output2 := ""
+	output3 := ""
+	generickeys := ListStringKeysFromStringMap(mapgeneric)
+	switch lang {
+	case langcsharp:
+		for _, generickey := range generickeys {
+			if output2 != "" {
+				output2 += ", "
+			}
+			output2 += generickey
+			output3 += " where " + mapgeneric[generickey]
+		}
+		output2 = "<" + output2 + ">"
+	default:
+		for _, generickey := range generickeys {
+			if output1 != "" {
+				output1 += ", "
+			}
+			output1 += mapgeneric[generickey]
+		}
+		output1 = "<" + output1 + "> "
+	}
+	return output1, output2, output3
+}
+
+func LangSpecificFuncIFnHeader(
+	lang *vxlang,
+	ifn string,
+	vxreturntype string,
+	isinterface bool) string {
+	header := ""
+	override := ""
+	if !isinterface {
+		switch lang {
+		case langkotlin:
+			override = "override "
+		case langjava:
+			override = "\n    @Override"
+		}
+	}
+	switch lang {
+	case langcsharp:
+		header = "\n    " + override + "public " + vxreturntype + " vx_fn_new(" + ifn + " fn)"
+	case langjava:
+		header = "" +
+			override +
+			"\n    public " + vxreturntype + " vx_fn_new(" + ifn + " fn)"
+	case langkotlin:
+		header = "\n    " + override + "fun vx_fn_new(fn : " + ifn + ") : " + vxreturntype
+	default:
+		header = "\n    public " + vxreturntype + " vx_fn_new(" + ifn + " fn)"
+	}
+	return header
+}
+
+func LangSpecificFuncIFnVars(
+	lang *vxlang,
+	ifn string) string {
+	vars := ""
+	switch lang {
+	case langcsharp:
+		vars += "" +
+			"\n    public " + ifn + "? fn = null" + lang.lineend +
+			"\n"
+	case langkotlin:
+		vars += "" +
+			"\n    var fn : " + ifn + "? = null" +
+			"\n"
+	default:
+		vars += "" +
+			"\n    public " + ifn + " fn = null" + lang.lineend +
+			"\n"
+	}
+	return vars
+}
+
 func LangSpecificFuncInstanceStatic(
 	lang *vxlang) (string, string) {
 	funcinstance := "function "
@@ -587,6 +667,16 @@ func LangSpecificFuncNativeAuto(
 				"vx_core::Type_any result = " + output +
 				"\noutput = vx_core::vx_any_from_any(" + argname + ", result)" + lang.lineend
 		}
+	}
+	return output
+}
+
+func LangSpecificFuncNewSuppressWarnings(
+	lang *vxlang) string {
+	output := ""
+	switch lang {
+	case langjava:
+		output = "\n  @SuppressWarnings(\"unchecked\")"
 	}
 	return output
 }
@@ -706,7 +796,8 @@ func LangSpecificFuncInterfaceFn(
 		for _, arg := range fnc.listarg {
 			argtype := arg.vxtype
 			argname := LangFromName(arg.alias)
-			argtypename := LangNameTypeFromTypeSimple(lang, argtype, true)
+			argtypename := LangNameTypeFromTypeSimple(
+				lang, argtype, true)
 			argtext := ""
 			switch lang {
 			case langkotlin:
@@ -738,6 +829,46 @@ func LangSpecificFuncInterfaceFn(
 		}
 	}
 	return interfaces
+}
+
+func LangSpecificFuncLambdaArgName(
+	lang *vxlang,
+	lambdaarg vxarg) string {
+	output := lambdaarg.name + "_any"
+	switch lang {
+	case langkotlin:
+		output += " : vx_core.Type_any"
+	}
+	return output
+}
+
+func LangSpecificFuncLambdaFooter(
+	lang *vxlang,
+	indent int,
+	outputnum int) string {
+	output := ""
+	lineindent := LangIndent(lang, indent, true)
+	sreturn := ""
+	lineend := lineindent + "}"
+	if outputnum >= 0 {
+		switch lang {
+		case langkotlin:
+			sreturn = lineindent + "  output"
+			if outputnum > 0 {
+				sreturn += "_" + StringFromInt(outputnum)
+			}
+		default:
+			sreturn = lineindent + "  return output"
+			if outputnum > 0 {
+				sreturn += "_" + StringFromInt(outputnum)
+			}
+			sreturn += lang.lineend
+		}
+	}
+	output = "" +
+		sreturn +
+		lineend
+	return output
 }
 
 func LangSpecificFuncPrefixReturnTypes(
@@ -772,6 +903,22 @@ func LangSpecificFuncSuppressWarnings(
 	return output
 }
 
+func LangSpecificFuncTryCatch(
+	lang *vxlang,
+	linesubindent string) (string, string) {
+	try := ""
+	catch := ""
+	switch lang {
+	case langkotlin:
+		try = linesubindent + "try {"
+		catch = linesubindent + "} catch (err : Exception) {"
+	default:
+		try = linesubindent + "try {"
+		catch = linesubindent + "} catch (Exception err) {"
+	}
+	return try, catch
+}
+
 func LangSpecificFuncVxAsyncAnyFromAny(
 	lang *vxlang) string {
 	vxasyncanyfromany := ""
@@ -784,6 +931,19 @@ func LangSpecificFuncVxAsyncAnyFromAny(
 		vxasyncanyfromany = "future as (" + lang.future + "<T>)"
 	}
 	return vxasyncanyfromany
+}
+
+func LangSpecificFuncVxFuncResolve(
+	lang *vxlang,
+	listargname []string) string {
+	output := ""
+	switch lang {
+	case langjava, langkotlin:
+		output = "fnlocal.resolve(" + strings.Join(listargname, ", ") + ")"
+	default:
+		output = "fnlocal(" + strings.Join(listargname, ", ") + ")"
+	}
+	return output
 }
 
 func LangSpecificImport(
@@ -836,7 +996,7 @@ func LangSpecificIsTypeText(
 	return output
 }
 
-func LangSpecificNamespaceFromPackage(
+func LangSpecificNamespaceOpenClose(
 	lang *vxlang,
 	pkgname string) (string, string) {
 	namespaceopen := ""
@@ -855,12 +1015,13 @@ func LangSpecificNamespaceFromPackage(
 				"\n" +
 				"\n  bool isconsole = TestLib.EnableConsole(output)" + lang.lineend +
 				"\n"
+			namespaceclose = "\n}\n"
 		} else {
 			ipos := IntFromStringFindLast(pkgname, ".")
 			after := StringSubstring(pkgname, ipos+1, len(pkgname))
 			namespaceopen = "\npublic static class " + after + " {\n\n"
+			namespaceclose = "\n}\n"
 		}
-		namespaceclose = "\n}\n"
 	case langjava:
 		namespaceopen = "\npublic final class " + pkgname + " {\n\n"
 		namespaceclose = "\n}\n"
@@ -1193,30 +1354,93 @@ func LangSpecificProjectPkgPrefixAppPathTestPath(
 	return pkgprefix, apppath, testpath
 }
 
-func LangSpecificTestAssertEquals(
+func LangSpecificTestAppBasic(
 	lang *vxlang) string {
 	output := ""
 	switch lang {
 	case langcsharp:
-		output = "\n  				Assert.Equal(expected, actual)" + lang.lineend
+		output = "" +
+			"\n  [Fact]" +
+			"\n  public void test_basics() {" +
+			"\n    TestLib.test_helloworld()" + lang.lineend +
+			"\n    TestLib.test_async_new_from_value()" + lang.lineend +
+			"\n    TestLib.test_async_from_async_fn()" + lang.lineend +
+			"\n    TestLib.test_list_from_list_async()" + lang.lineend +
+			"\n    TestLib.test_pathfull_from_file()" + lang.lineend +
+			"\n    TestLib.test_read_file()" + lang.lineend +
+			"\n    TestLib.test_write_file()" + lang.lineend +
+			"\n  }" +
+			"\n"
 	case langjava:
-		output = "\n  				assertEquals(expected, actual, msg)" + lang.lineend
+		output = "" +
+			"\n  @Test" +
+			"\n  void test_basics() {" +
+			"\n    TestLib.test_helloworld()" + lang.lineend +
+			"\n    TestLib.test_async_new_from_value()" + lang.lineend +
+			"\n    TestLib.test_async_from_async_fn()" + lang.lineend +
+			"\n    TestLib.test_list_from_list_async()" + lang.lineend +
+			"\n    TestLib.test_pathfull_from_file()" + lang.lineend +
+			"\n    TestLib.test_read_file()" + lang.lineend +
+			"\n    TestLib.test_write_file()" + lang.lineend +
+			"\n  }" +
+			"\n"
 	case langkotlin:
-		output = "\n  				assertEquals(expected, actual, msg)" + lang.lineend
+		output = "" +
+			"\n  @Test" +
+			"\n  fun test_basics() {" +
+			"\n    TestLib.test_helloworld()" +
+			"\n    TestLib.test_async_new_from_value()" +
+			"\n    TestLib.test_async_from_async_fn()" +
+			"\n    TestLib.test_list_from_list_async()" +
+			"\n    TestLib.test_pathfull_from_file()" +
+			"\n    TestLib.test_read_file()" +
+			"\n    TestLib.test_write_file()" +
+			"\n  }" +
+			"\n"
+	}
+	return output
+}
+
+func LangSpecificTestAssertEquals(
+	lang *vxlang,
+	ismsg bool,
+	indent int) string {
+	lineindent := LangIndent(
+		lang, indent, true)
+	smsg := ""
+	if ismsg {
+		smsg = ", msg"
+	}
+	output := ""
+	switch lang {
+	case langcsharp:
+		output = lineindent + "Assert.Equal(expected, actual)" + lang.lineend
+	case langjava:
+		output = lineindent + "assertEquals(expected, actual" + smsg + ")" + lang.lineend
+	case langkotlin:
+		output = lineindent + "assertEquals(expected, actual" + smsg + ")" + lang.lineend
 	}
 	return output
 }
 
 func LangSpecificTestAssertNotEquals(
-	lang *vxlang) string {
+	lang *vxlang,
+	ismsg bool,
+	indent int) string {
+	lineindent := LangIndent(
+		lang, indent, true)
+	smsg := ""
+	if ismsg {
+		smsg = ", msg"
+	}
 	output := ""
 	switch lang {
 	case langcsharp:
-		output = "\n	  			Assert.NotEqual(expected, actual)" + lang.lineend
+		output = lineindent + "Assert.NotEqual(expected, actual)" + lang.lineend
 	case langjava:
-		output = "\n	  			assertNotEquals(expected, actual, msg)" + lang.lineend
+		output = lineindent + "assertNotEquals(expected, actual" + smsg + ")" + lang.lineend
 	case langkotlin:
-		output = "\n	  			assertNotEquals(expected, actual, msg)" + lang.lineend
+		output = lineindent + "assertNotEquals(expected, actual" + smsg + ")" + lang.lineend
 	}
 	return output
 }
@@ -1251,6 +1475,23 @@ func LangSpecificTestImport(
 	}
 	if !BooleanFromStringContains(imports, importline) {
 		output = importline + "\n"
+	}
+	return output
+}
+
+func LangSpecificTestImportExtra(
+	lang *vxlang) string {
+	output := ""
+	switch lang {
+	case langcsharp:
+	case langjava:
+		output = "" +
+			"\nimport org.junit.jupiter.api.DisplayName" + lang.lineend +
+			"\nimport org.junit.jupiter.api.Test" + lang.lineend
+	case langkotlin:
+		output = "" +
+			"\nimport org.junit.jupiter.api.DisplayName" +
+			"\nimport org.junit.jupiter.api.Test"
 	}
 	return output
 }
@@ -1449,6 +1690,28 @@ func LangTestLibParamsOpenClose(
 	return paramsopen, paramsclose
 }
 
+func LangSpecificTestNamespaceOpenClose(
+	lang *vxlang,
+	pkgname string) (string, string) {
+	namespaceopen := ""
+	namespaceclose := ""
+	switch lang {
+	case langcsharp:
+		namespaceopen = "" +
+			"\nnamespace " + pkgname + lang.lineend +
+			"\n"
+	case langjava:
+		namespaceopen = "" +
+			"\npackage " + pkgname + lang.lineend +
+			"\n"
+	case langkotlin:
+		namespaceopen = "" +
+			"\npackage " + pkgname + lang.lineend +
+			"\n"
+	}
+	return namespaceopen, namespaceclose
+}
+
 func LangSpecificTestPackage(
 	lang *vxlang,
 	pkg *vxpackage,
@@ -1488,12 +1751,139 @@ func LangSpecificTestPackage(
 	return output
 }
 
+func LangSpecificTestPackageOpenClose(
+	lang *vxlang,
+	pkgname string) (string, string) {
+	packageopen := ""
+	packageclose := ""
+	switch lang {
+	case langcsharp:
+		packageopen = "" +
+			"\npublic " + LangSpecificFinalClass(lang) + "class " + pkgname + "Test {" +
+			"\n"
+		packageclose = "\n}\n"
+	case langjava:
+		packageopen = "" +
+			"\npublic " + LangSpecificFinalClass(lang) + "class " + pkgname + "Test {" +
+			"\n"
+		packageclose = "\n}\n"
+	case langkotlin:
+		packageopen = "" +
+			"\nobject " + pkgname + "Test {" +
+			"\n"
+		packageclose = "\n}\n"
+	}
+	return packageopen, packageclose
+}
+
 func LangSpecificTestPackagePrefix(
 	lang *vxlang) string {
 	output := ""
 	switch lang {
 	case langcsharp:
 		output = "Test"
+	}
+	return output
+}
+
+func LangSpecificTestResourcesPath(
+	lang *vxlang,
+	cmd *vxcommand) string {
+	path := cmd.path
+	switch lang {
+	case langjava:
+		ipos := IntFromStringFindLast(path, "/test/")
+		if ipos >= 0 {
+			path = path[0 : ipos+5]
+		}
+	}
+	ipos := IntFromStringFind(path, "/"+lang.name+"/")
+	if ipos >= 0 {
+		path = path[ipos+len(lang.name)+2:]
+	}
+	switch lang {
+	case langkotlin:
+		if BooleanFromStringStarts(path, "app/") {
+			path = path[4:]
+		}
+	}
+	return path
+}
+
+func LangSpecificTestTargetPath(
+	lang *vxlang,
+	targetpath string) string {
+	output := targetpath
+	switch lang {
+	case langjava:
+		if BooleanFromStringEnds(targetpath, "/java") {
+			output = targetpath[0 : len(targetpath)-5]
+		}
+	}
+	return output
+}
+
+func LangSpecificTestVarTestCases(
+	lang *vxlang,
+	testall []string) string {
+	output := ""
+	switch lang {
+	case langcsharp:
+		vararraylisttestcase := "[" +
+			"\n      " + strings.Join(testall, ",\n      ") +
+			"\n    ]"
+		output = "\n    object[] testcases = " + vararraylisttestcase + lang.lineend
+	default:
+		vararraylisttestcase := LangPkgNameDot(lang, "vx/core") + "arraylist_from_array(" +
+			"\n      " + strings.Join(testall, ",\n      ") +
+			"\n    )"
+		output = "" +
+			LangVarCollection(
+				lang, "testcases", rawlisttype, anytype, 2, vararraylisttestcase)
+	}
+	return output
+}
+
+func LangSpecificTestWriteTestSuite(
+	lang *vxlang,
+	testpackages string) string {
+	output := ""
+	switch lang {
+	case langcsharp:
+		testpackagedata := "" +
+			LangPkgNameDot(lang, "vx/core") + "vx_new(" +
+			"\n      " + LangTypeT(lang, testpackagelisttype) + "," +
+			testpackages +
+			"\n    )"
+		output = "" +
+			"\n  [Fact]" +
+			"\n  public void test_writetestsuite() {" +
+			LangVar(lang, "testpackagelist", testpackagelisttype, 2, testpackagedata) +
+			"\n    TestLib.write_testpackagelist_async(context, testpackagelist)" + lang.lineend +
+			"\n  }" +
+			"\n"
+	case langjava:
+		output = "" +
+			"\n  @Test" +
+			"\n  @DisplayName(\"writetestsuite\")" +
+			"\n  void test_writetestsuite() {" +
+			"\n    com.vxlisp.vx.Test.Type_testpackagelist testpackagelist = " + LangPkgNameDot(lang, "vx/core") + "vx_new(" +
+			"\n      com.vxlisp.vx.Test.t_testpackagelist," +
+			testpackages +
+			"\n    )" + lang.lineend +
+			"\n    TestLib.write_testpackagelist_async(context, testpackagelist)" + lang.lineend +
+			"\n  }"
+	case langkotlin:
+		output = "" +
+			"\n  @Test" +
+			"\n  @DisplayName(\"writetestsuite\")" +
+			"\n  fun test_writetestsuite() {" +
+			"\n    val testpackagelist : vx_test.Type_testpackagelist = " + LangPkgNameDot(lang, "vx/core") + "vx_new(" +
+			"\n      vx_test.t_testpackagelist," +
+			testpackages +
+			"\n    )" +
+			"\n    TestLib.write_testpackagelist_async(context, testpackagelist)" +
+			"\n  }"
 	}
 	return output
 }
@@ -2113,6 +2503,16 @@ func LangSpecificTypeVxMap(
 	return output
 }
 
+func LangSpecificTypeVxNewVals(
+	lang *vxlang) string {
+	output := "vals"
+	switch lang {
+	case langkotlin:
+		output = "*vals"
+	}
+	return output
+}
+
 func LangSpecificVarAll(
 	lang *vxlang,
 	varname string,
@@ -2541,4 +2941,20 @@ func LangSpecificVxToString(
 		output = varname + ".toString()"
 	}
 	return output
+}
+
+func LangSpecificWriteFromProjectCmd(
+	lang *vxlang,
+	project *vxproject,
+	command *vxcommand) *vxmsgblock {
+	var msgs *vxmsgblock
+	switch command.lang {
+	case langcpp:
+		msgs = CppWriteFromProjectCmd(command.lang, project, command)
+	case langjs:
+		msgs = JsWriteFromProjectCmd(command.lang, project, command)
+	default:
+		msgs = LangWriteFromProjectCmd(command.lang, project, command)
+	}
+	return msgs
 }

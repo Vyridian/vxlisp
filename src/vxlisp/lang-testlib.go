@@ -62,7 +62,7 @@ func LangTestLib(lang *vxlang) string {
 		LangTestLib_run_testresult(lang) +
 		LangTestLib_write_testpackagelist_async(lang)
 	spath := LangPkgNameDot(lang, "vx/core") + "c_path_test_resources.vx_string()"
-	namespaceopen, namespaceclose := LangSpecificNamespaceFromPackage(
+	namespaceopen, namespaceclose := LangSpecificNamespaceOpenClose(
 		lang, "TestLib")
 	output := LangSpecificTestLib(
 		lang, namespaceopen, namespaceclose, commontests, spath)
@@ -297,8 +297,8 @@ func LangTestLib_run_testresult(lang *vxlang) string {
 	arg.vxtype = testresulttype
 	arg.isfinal = true
 	fnc.listarg = append(fnc.listarg, arg)
-	assertequals := LangSpecificTestAssertEquals(lang)
-	assertnotequals := LangSpecificTestAssertNotEquals(lang)
+	assertequals := LangSpecificTestAssertEquals(lang, true, 3)
+	assertnotequals := LangSpecificTestAssertNotEquals(lang, true, 3)
 	println := LangSpecificPrintLine(lang)
 	output := "" +
 		LangFuncHeaderStatic(lang, "", fnc, 1, 0,
@@ -316,12 +316,12 @@ func LangTestLib_run_testresult(lang *vxlang) string {
 					LangPkgNameDot(lang, "vx/core")+"f_string_from_any(valactual).vx_string()")+
 				LangVar(lang, "msg", rawstringtype, 2,
 					"testpkg + \"/\" + testname + \" \" + message")+
-				"\n  		if (!passfail) {"+
-				"\n  				"+println+"(msg)"+lang.lineend+
-				"\n  				"+println+"(expected)"+lang.lineend+
-				"\n  				"+println+"(actual)"+lang.lineend+
+				"\n    if (!passfail) {"+
+				"\n      "+println+"(msg)"+lang.lineend+
+				"\n      "+println+"(expected)"+lang.lineend+
+				"\n      "+println+"(actual)"+lang.lineend+
 				"\n      "+LangPkgNameDot(lang, "vx/core")+"f_log(testresult)"+lang.lineend+
-				"\n		  }"+
+				"\n    }"+
 				LangIf(lang, 2,
 					LangSpecificIfClause(lang, rawstringtype, "==", "code", "\":ne\""),
 					assertnotequals)+
@@ -347,19 +347,8 @@ func LangTestLib_test(lang *vxlang) string {
 	arg.vxtype = rawstringtype
 	arg.isfinal = true
 	fnc.listarg = append(fnc.listarg, arg)
-	assertequals := ""
-	println := ""
-	switch lang {
-	case langcsharp:
-		assertequals = "\n    Assert.Equal(expected, actual)" + lang.lineend
-		println = "System.Console.WriteLine"
-	case langjava:
-		assertequals = "\n    assertEquals(expected, actual)" + lang.lineend
-		println = "System.out.println"
-	case langkotlin:
-		assertequals = "\n    assertEquals(expected, actual)" + lang.lineend
-		println = "println"
-	}
+	assertequals := LangSpecificTestAssertEquals(lang, false, 2)
+	println := LangSpecificPrintLine(lang)
 	output := "" +
 		LangFuncHeaderAll(lang, "", fnc, 1, false, true, 0,
 			assertequals+

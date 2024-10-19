@@ -130,11 +130,6 @@ func LangFuncDoc(
 		"\n   * " + StringFromStringIndent(doc, "   * ") +
 		"\n   * (func " + fnc.name + ")" +
 		"\n   */"
-	/// FIXME
-	switch lang {
-	case langkotlin:
-		output = ""
-	}
 	return output
 }
 
@@ -220,25 +215,11 @@ func LangFuncFFunc(
 		}
 	}
 	var returntype *vxtype
-	//	sreturntype := ""
 	if fnc.generictype == nil {
 		returntype = fnc.vxtype
-		//		sreturntype = LangGenericFromType(lang, fnc.vxtype)
 	} else {
 		returntype = fnc.generictype
-		//		sreturntype = LangGenericFromType(lang, fnc.generictype)
 	}
-	/*
-		functypetext := ""
-		if fnc.generictype != nil {
-			functypetext = LangGenericFromType(lang, fnc.generictype)
-		} else {
-			functypetext = sreturntype
-		}
-		if fnc.async {
-			functypetext = lang.future + "<" + functypetext + ">"
-		}
-	*/
 	indent := 2
 	subindent := indent
 	sindent := "    "
@@ -264,16 +245,8 @@ func LangFuncFFunc(
 	}
 	linesubindent := "\n" + ssubindent
 	if fnc.messages {
-		stry := ""
-		scatch := ""
-		switch lang {
-		case langkotlin:
-			stry = linesubindent + "try {"
-			scatch = linesubindent + "} catch (err : Exception) {"
-		default:
-			stry = linesubindent + "try {"
-			scatch = linesubindent + "} catch (Exception err) {"
-		}
+		stry, scatch := LangSpecificFuncTryCatch(
+			lang, linesubindent)
 		msgtop = stry
 		msgbottom = "" +
 			scatch +
@@ -308,10 +281,7 @@ func LangFuncFFunc(
 		}
 		switch NameFromFunc(fnc) {
 		case "vx/core/new", "vx/core/new<-type":
-			switch lang {
-			case langjava:
-				f_suppresswarnings = "\n  @SuppressWarnings(\"unchecked\")"
-			}
+			f_suppresswarnings = LangSpecificFuncNewSuppressWarnings(lang)
 		}
 		valuetext = StringFromListStringJoin(
 			chgvaluetexts, "\n")
@@ -453,26 +423,8 @@ func LangFuncGenericDefinition(
 				}
 			}
 		}
-		generickeys := ListStringKeysFromStringMap(mapgeneric)
-		switch lang {
-		case langcsharp:
-			for _, generickey := range generickeys {
-				if output2 != "" {
-					output2 += ", "
-				}
-				output2 += generickey
-				output3 += " where " + mapgeneric[generickey]
-			}
-			output2 = "<" + output2 + ">"
-		default:
-			for _, generickey := range generickeys {
-				if output1 != "" {
-					output1 += ", "
-				}
-				output1 += mapgeneric[generickey]
-			}
-			output1 = "<" + output1 + "> "
-		}
+		output1, output2, output3 = LangSpecificFuncGenericDefinition(
+			lang, mapgeneric)
 	}
 	return output1, output2, output3
 }
@@ -722,40 +674,12 @@ func LangFuncLambda(
 	output := "" +
 		LangSpecificFuncLambdaHeader(lang, indent, outputnum, bindings, args) +
 		body +
-		LangFuncLambdaFooter(lang, indent, outputnum)
+		LangSpecificFuncLambdaFooter(lang, indent, outputnum)
 	return output
 }
 
-func LangFuncLambdaFooter(
-	lang *vxlang,
-	indent int,
-	outputnum int) string {
-	output := ""
-	lineindent := LangIndent(lang, indent, true)
-	sreturn := ""
-	lineend := lineindent + "}"
-	if outputnum >= 0 {
-		switch lang {
-		case langkotlin:
-			sreturn = lineindent + "  output"
-			if outputnum > 0 {
-				sreturn += "_" + StringFromInt(outputnum)
-			}
-		default:
-			sreturn = lineindent + "  return output"
-			if outputnum > 0 {
-				sreturn += "_" + StringFromInt(outputnum)
-			}
-			sreturn += lang.lineend
-		}
-	}
-	output = "" +
-		sreturn +
-		lineend
-	return output
-}
-
-func LangFuncName(fnc *vxfunc) string {
+func LangFuncName(
+	fnc *vxfunc) string {
 	output := LangFromName(fnc.alias)
 	if output == "" {
 		output = LangFromName(fnc.name)
@@ -764,7 +688,8 @@ func LangFuncName(fnc *vxfunc) string {
 	return output
 }
 
-func LangFuncT(lang *vxlang, fnc *vxfunc) string {
+func LangFuncT(
+	lang *vxlang, fnc *vxfunc) string {
 	name := "t_" + LangFuncName(fnc)
 	if fnc.pkgname != "" {
 		name = LangSpecificPkgName(lang, fnc.pkgname) + lang.pkgref + name
@@ -1065,12 +990,10 @@ func LangFuncValueArgIndex(
 				var lambdavars []string
 				arglist := ListArgLocalFromFunc(argfunc)
 				for _, lambdaarg := range arglist {
-					lambdaargname := lambdaarg.name + "_any"
-					switch lang {
-					case langkotlin:
-						lambdaargname += " : vx_core.Type_any"
-					}
-					lambdaargs = append(lambdaargs, lambdaargname)
+					lambdaargname := LangSpecificFuncLambdaArgName(
+						lang, lambdaarg)
+					lambdaargs = append(
+						lambdaargs, lambdaargname)
 					argtype := lambdaarg.vxtype
 					lambdavar :=
 						LangVar(lang, lambdaarg.name, argtype, 1,
@@ -1370,20 +1293,8 @@ func LangFuncVxFnNew(
 	if ifntype != emptytype {
 		ifn = LangTypeClass(lang, ifntype)
 		if !isinterface {
-			switch lang {
-			case langcsharp:
-				vars += "" +
-					"\n    public " + ifn + "? fn = null" + lang.lineend +
-					"\n"
-			case langkotlin:
-				vars += "" +
-					"\n    var fn : " + ifn + "? = null" +
-					"\n"
-			default:
-				vars += "" +
-					"\n    public " + ifn + " fn = null" + lang.lineend +
-					"\n"
-			}
+			vars = LangSpecificFuncIFnVars(
+				lang, ifn)
 			body = "" +
 				LangValClass(lang, "output", typefunc, 3, ":new") +
 				"\n      output.fn = fn" + lang.lineend +
@@ -1486,28 +1397,8 @@ func LangFuncVxFnNew(
 		}
 	}
 	if ifn != "" {
-		header := ""
-		override := ""
-		if !isinterface {
-			switch lang {
-			case langkotlin:
-				override = "override "
-			case langjava:
-				override = "\n    @Override"
-			}
-		}
-		switch lang {
-		case langcsharp:
-			header = "\n    " + override + "public " + vxreturntype + " vx_fn_new(" + ifn + " fn)"
-		case langjava:
-			header = "" +
-				override +
-				"\n    public " + vxreturntype + " vx_fn_new(" + ifn + " fn)"
-		case langkotlin:
-			header = "\n    " + override + "fun vx_fn_new(fn : " + ifn + ") : " + vxreturntype
-		default:
-			header = "\n    public " + vxreturntype + " vx_fn_new(" + ifn + " fn)"
-		}
+		header := LangSpecificFuncIFnHeader(
+			lang, ifn, vxreturntype, isinterface)
 		if isinterface {
 			output += "" +
 				header + lang.lineend
@@ -1634,13 +1525,8 @@ func LangFuncVxFunc(
 						LangPkgNameDot(lang, fnc.pkgname)+"f_"+funcname+"("+strings.Join(listargname, ", ")+")")
 			}
 		} else {
-			resolve := ""
-			switch lang {
-			case langjava, langkotlin:
-				resolve = "fnlocal.resolve(" + strings.Join(listargname, ", ") + ")"
-			default:
-				resolve = "fnlocal(" + strings.Join(listargname, ", ") + ")"
-			}
+			resolve := LangSpecificFuncVxFuncResolve(
+				lang, listargname)
 			fntype := LangFuncIFnType(lang, fnc)
 			if fnc.async {
 				body = "" +

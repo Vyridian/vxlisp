@@ -1464,7 +1464,7 @@ func CppFromPackage(
   inline vx_Class_package const vx_package;
 `
 	headerimports := CppImportsFromPackage(pkg, "", header, false)
-	namespaceopen, namespaceclose := LangSpecificNamespaceFromPackage(lang, pkgname)
+	namespaceopen, namespaceclose := LangSpecificNamespaceOpenClose(lang, pkgname)
 	headeroutput := "" +
 		"#ifndef " + StringUCase(pkgname+"_hpp") +
 		"\n#define " + StringUCase(pkgname+"_hpp") +
@@ -4294,7 +4294,7 @@ func CppTestFromPackage(lang *vxlang, pkg *vxpackage, prj *vxproject, command *v
 	if ipos >= 0 {
 		simplename = simplename[ipos+1:]
 	}
-	namespaceopen, namespaceclose := LangSpecificNamespaceFromPackage(lang, pkgname+"_test")
+	namespaceopen, namespaceclose := LangSpecificNamespaceOpenClose(lang, pkgname+"_test")
 	headertext := "" +
 		"#ifndef " + StringUCase(pkgname+"_test_hpp") +
 		"\n#define " + StringUCase(pkgname+"_test_hpp") +
@@ -4428,21 +4428,25 @@ func CppTypeStringValNew(val string) string {
 	return "vx_core::vx_new_string(\"" + valstr + "\")"
 }
 
-func CppWriteFromProjectCmd(lang *vxlang, prj *vxproject, cmd *vxcommand) *vxmsgblock {
+func CppWriteFromProjectCmd(
+	lang *vxlang,
+	project *vxproject,
+	command *vxcommand) *vxmsgblock {
 	msgblock := NewMsgBlock("CppWriteFromProjectCmd")
-	files, msgs := CppFilesFromProjectCmd(lang, prj, cmd)
+	files, msgs := CppFilesFromProjectCmd(
+		lang, project, command)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	msgs = WriteListFile(files)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
-	switch cmd.code {
+	switch command.code {
 	case ":test":
-		targetpath := PathFromProjectCmd(prj, cmd)
+		targetpath := PathFromProjectCmd(project, command)
 		ipos := IntFromStringFindLast(targetpath, "/")
 		if ipos > 0 {
 			targetpath = targetpath[0:ipos]
 		}
 		targetpath += "/test/resources"
-		msgs := CppFolderCopyTestdataFromProjectPath(prj, targetpath)
+		msgs := CppFolderCopyTestdataFromProjectPath(project, targetpath)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 	}
 	return msgblock

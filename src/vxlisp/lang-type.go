@@ -1784,11 +1784,7 @@ func LangTypeVxNew(
 		output = LangFuncHeaderInterface(lang, typename, funcvxnew, 2)
 	} else {
 		funcvxnew.isoverride = true
-		vals := "vals"
-		switch lang {
-		case langkotlin:
-			vals = "*vals"
-		}
+		vals := LangSpecificTypeVxNewVals(lang)
 		output = "" +
 			LangFuncHeader(lang, typename, funcvxnew, 2, 0,
 				LangVar(lang, "output", typ, 3,

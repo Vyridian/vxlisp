@@ -87,89 +87,12 @@ func LangTestApp(
 	}
 	testpackages := StringFromListStringJoin(
 		listtestpackage, ",")
-	namespaceopen, namespaceclose := LangSpecificNamespaceFromPackage(
+	namespaceopen, namespaceclose := LangSpecificNamespaceOpenClose(
 		lang, "AppTest")
-	writetestsuite := ""
-	testbasics := ""
-	switch lang {
-	case langcsharp:
-		testpackagedata := "" +
-			LangPkgNameDot(lang, "vx/core") + "vx_new(" +
-			"\n      " + LangTypeT(lang, testpackagelisttype) + "," +
-			testpackages +
-			"\n    )"
-		testbasics = "" +
-			"\n  [Fact]" +
-			"\n  public void test_basics() {" +
-			"\n    TestLib.test_helloworld()" + lang.lineend +
-			"\n    TestLib.test_async_new_from_value()" + lang.lineend +
-			"\n    TestLib.test_async_from_async_fn()" + lang.lineend +
-			"\n    TestLib.test_list_from_list_async()" + lang.lineend +
-			"\n    TestLib.test_pathfull_from_file()" + lang.lineend +
-			"\n    TestLib.test_read_file()" + lang.lineend +
-			"\n    TestLib.test_write_file()" + lang.lineend +
-			"\n  }" +
-			"\n"
-		writetestsuite = "" +
-			"\n  [Fact]" +
-			"\n  public void test_writetestsuite() {" +
-			LangVar(lang, "testpackagelist", testpackagelisttype, 2, testpackagedata) +
-			"\n    TestLib.write_testpackagelist_async(context, testpackagelist)" + lang.lineend +
-			"\n  }" +
-			"\n"
-	case langjava:
-		imports += "" +
-			"\nimport org.junit.jupiter.api.DisplayName" + lang.lineend +
-			"\nimport org.junit.jupiter.api.Test" + lang.lineend
-		testbasics = "" +
-			"\n  @Test" +
-			"\n  void test_basics() {" +
-			"\n    TestLib.test_helloworld()" + lang.lineend +
-			"\n    TestLib.test_async_new_from_value()" + lang.lineend +
-			"\n    TestLib.test_async_from_async_fn()" + lang.lineend +
-			"\n    TestLib.test_list_from_list_async()" + lang.lineend +
-			"\n    TestLib.test_pathfull_from_file()" + lang.lineend +
-			"\n    TestLib.test_read_file()" + lang.lineend +
-			"\n    TestLib.test_write_file()" + lang.lineend +
-			"\n  }" +
-			"\n"
-		writetestsuite = "" +
-			"\n  @Test" +
-			"\n  @DisplayName(\"writetestsuite\")" +
-			"\n  void test_writetestsuite() {" +
-			"\n    com.vxlisp.vx.Test.Type_testpackagelist testpackagelist = " + LangPkgNameDot(lang, "vx/core") + "vx_new(" +
-			"\n      com.vxlisp.vx.Test.t_testpackagelist," +
-			testpackages +
-			"\n    )" + lang.lineend +
-			"\n    TestLib.write_testpackagelist_async(context, testpackagelist)" + lang.lineend +
-			"\n  }"
-	case langkotlin:
-		imports += "" +
-			"\nimport org.junit.jupiter.api.DisplayName" +
-			"\nimport org.junit.jupiter.api.Test"
-		testbasics = "" +
-			"\n  @Test" +
-			"\n  fun test_basics() {" +
-			"\n    TestLib.test_helloworld()" +
-			"\n    TestLib.test_async_new_from_value()" +
-			"\n    TestLib.test_async_from_async_fn()" +
-			"\n    TestLib.test_list_from_list_async()" +
-			"\n    TestLib.test_pathfull_from_file()" +
-			"\n    TestLib.test_read_file()" +
-			"\n    TestLib.test_write_file()" +
-			"\n  }" +
-			"\n"
-		writetestsuite = "" +
-			"\n  @Test" +
-			"\n  @DisplayName(\"writetestsuite\")" +
-			"\n  fun test_writetestsuite() {" +
-			"\n    val testpackagelist : vx_test.Type_testpackagelist = " + LangPkgNameDot(lang, "vx/core") + "vx_new(" +
-			"\n      vx_test.t_testpackagelist," +
-			testpackages +
-			"\n    )" +
-			"\n    TestLib.write_testpackagelist_async(context, testpackagelist)" +
-			"\n  }"
-	}
+	imports += LangSpecificTestImportExtra(lang)
+	testbasics := LangSpecificTestAppBasic(lang)
+	writetestsuite := LangSpecificTestWriteTestSuite(
+		lang, testpackages)
 	output := "" +
 		"/**" +
 		"\n * Unit test for whole App." +
@@ -463,20 +386,8 @@ func LangTestFromPackage(
 			"\n      " + LangTypeT(lang, testcaselisttype) + "," +
 			"\n      testcases" +
 			"\n    )"
-		switch lang {
-		case langcsharp:
-			vararraylisttestcase := "[" +
-				"\n      " + strings.Join(testall, ",\n      ") +
-				"\n    ]"
-			vartestcases = "\n    object[] testcases = " + vararraylisttestcase + lang.lineend
-		default:
-			vararraylisttestcase := LangPkgNameDot(lang, "vx/core") + "arraylist_from_array(" +
-				"\n      " + strings.Join(testall, ",\n      ") +
-				"\n    )"
-			vartestcases = "" +
-				LangVarCollection(
-					lang, "testcases", rawlisttype, anytype, 2, vararraylisttestcase)
-		}
+		vartestcases = LangSpecificTestVarTestCases(
+			lang, testall)
 	}
 	argcontext := NewArgContext()
 	listarg := NewListArg()
@@ -542,37 +453,12 @@ func LangTestFromPackage(
 		testcoveragesummary +
 		testcoveragedetail +
 		testpackage
-	imports := LangSpecificPackageImports(lang, pkg, pkgprefix, body, true)
-	namespaceopen := ""
-	packageopen := ""
-	packageclose := ""
-	namespaceclose := ""
-	switch lang {
-	case langcsharp:
-		namespaceopen = "" +
-			"\nnamespace " + pkgpath + lang.lineend +
-			"\n"
-		packageopen = "" +
-			"\npublic " + LangSpecificFinalClass(lang) + "class " + pkgname + "Test {" +
-			"\n"
-		packageclose = "\n}\n"
-	case langjava:
-		namespaceopen = "" +
-			"\npackage " + pkgpath + lang.lineend +
-			"\n"
-		packageopen = "" +
-			"\npublic " + LangSpecificFinalClass(lang) + "class " + pkgname + "Test {" +
-			"\n"
-		packageclose = "\n}\n"
-	case langkotlin:
-		namespaceopen =
-			"\npackage " + pkgpath + lang.lineend +
-				"\n"
-		packageopen = "" +
-			"\nobject " + pkgname + "Test {" +
-			"\n"
-		packageclose = "\n}\n"
-	}
+	imports := LangSpecificPackageImports(
+		lang, pkg, pkgprefix, body, true)
+	namespaceopen, namespaceclose := LangSpecificTestNamespaceOpenClose(
+		lang, pkgpath)
+	packageopen, packageclose := LangSpecificTestPackageOpenClose(
+		lang, pkgname)
 	output := "" +
 		namespaceopen +
 		imports +

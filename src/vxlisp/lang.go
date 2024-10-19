@@ -154,7 +154,7 @@ func LangFromPackage(
 	typetexts := ""
 	packageline := LangSpecificPackageLine(
 		lang, pkg.name, pkgpath)
-	namespaceopen, namespaceclose := LangSpecificNamespaceFromPackage(
+	namespaceopen, namespaceclose := LangSpecificNamespaceOpenClose(
 		lang, pkgname)
 	packagestatic := "" +
 		LangVarCollection(lang, "maptype", rawmaptype, anytype, 2, ":new") +
@@ -496,24 +496,21 @@ func LangTypeCoverageNumsValNew(lang *vxlang, pct int, tests int, total int) str
 
 func LangWriteFromProjectCmd(
 	lang *vxlang,
-	prj *vxproject,
-	cmd *vxcommand) *vxmsgblock {
+	project *vxproject,
+	command *vxcommand) *vxmsgblock {
 	msgblock := NewMsgBlock("LangWriteFromProjectCmd")
-	files, msgs := LangFilesFromProjectCmd(lang, prj, cmd)
+	files, msgs := LangFilesFromProjectCmd(
+		lang, project, command)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	msgs = WriteListFile(files)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
-	switch cmd.code {
+	switch command.code {
 	case ":test":
-		targetpath := PathFromProjectCmd(prj, cmd)
-		switch lang {
-		case langjava:
-			if BooleanFromStringEnds(targetpath, "/java") {
-				targetpath = targetpath[0 : len(targetpath)-5]
-			}
-		}
+		targetpath := PathFromProjectCmd(project, command)
+		targetpath = LangSpecificTestTargetPath(
+			lang, targetpath)
 		targetpath += "/resources"
-		msgs := LangFolderCopyTestdataFromProjectPath(prj, targetpath)
+		msgs := LangFolderCopyTestdataFromProjectPath(project, targetpath)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 	}
 	return msgblock
