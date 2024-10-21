@@ -678,7 +678,9 @@ func ListTypeFromMapType(typmap map[string]*vxtype) []*vxtype {
 	return output
 }
 
-func ListTypeFromTextblock(textblock *vxtextblock, pkg *vxpackage) ([]*vxtype, *vxmsgblock) {
+func ListTypeFromTextblock(
+	textblock *vxtextblock,
+	pkg *vxpackage) ([]*vxtype, *vxmsgblock) {
 	msgblock := NewMsgBlock("ListTypeFromTextblock")
 	var output []*vxtype
 	for _, wordtextblock := range textblock.listtextblock {
@@ -687,7 +689,8 @@ func ListTypeFromTextblock(textblock *vxtextblock, pkg *vxpackage) ([]*vxtype, *
 		case "/*", "//":
 		case "(":
 			if len(words) == 0 {
-				msg := NewMsgFromTextblock(textblock, "Empty Type")
+				msg := NewMsgFromTextblock(
+					textblock, 0, 0, "", "Empty Type")
 				msgblock = MsgblockAddError(msgblock, msg)
 			} else {
 				firstword := words[0]
@@ -699,7 +702,8 @@ func ListTypeFromTextblock(textblock *vxtextblock, pkg *vxpackage) ([]*vxtype, *
 				}
 			}
 		default:
-			msg := NewMsgFromTextblock(textblock, "Invalid Type Blocktype")
+			msg := NewMsgFromTextblock(
+				textblock, 0, 0, "", "Invalid Type Blocktype")
 			msgblock = MsgblockAddError(msgblock, msg)
 		}
 	}
@@ -720,7 +724,8 @@ func ListTypeLink(
 				if ok {
 					values = append(values, chgval)
 				} else {
-					msg := NewMsgFromTextblock(typ.textblock, subpath, "Trait Type Missing", val.name)
+					msg := NewMsgFromTextblock(
+						typ.textblock, 0, 0, subpath, "Trait Type Missing", val.name)
 					msgblock = MsgblockAddError(msgblock, msg)
 				}
 			}
@@ -738,7 +743,7 @@ func ListTypeLink(
 					values = append(values, chgval)
 				} else {
 					msg := NewMsgFromTextblock(
-						typ.textblock, subpath, "Allowed Type Missing", val.name)
+						typ.textblock, 0, 0, subpath, "Allowed Type Missing", val.name)
 					msgblock = MsgblockAddError(msgblock, msg)
 				}
 			}
@@ -753,7 +758,7 @@ func ListTypeLink(
 					values = append(values, chgval)
 				} else {
 					msg := NewMsgFromTextblock(
-						typ.textblock, subpath, "Disallow Type Missing", val.name)
+						typ.textblock, 0, 0, subpath, "Disallow Type Missing", val.name)
 					msgblock = MsgblockAddError(msgblock, msg)
 				}
 			}
@@ -767,7 +772,7 @@ func ListTypeLink(
 					values = append(values, chgval)
 				} else {
 					msg := NewMsgFromTextblock(
-						typ.textblock, subpath, "Allowed Value Missing", val.name)
+						typ.textblock, 0, 0, subpath, "Allowed Value Missing", val.name)
 					msgblock = MsgblockAddError(msgblock, msg)
 				}
 			}
@@ -782,7 +787,7 @@ func ListTypeLink(
 					values = append(values, chgval)
 				} else {
 					msg := NewMsgFromTextblock(
-						typ.textblock, subpath, "Disallow Value Missing", val.name)
+						typ.textblock, 0, 0, subpath, "Disallow Value Missing", val.name)
 					msgblock = MsgblockAddError(msgblock, msg)
 				}
 			}
@@ -797,7 +802,7 @@ func ListTypeLink(
 					fncs = append(fncs, updatedfnc)
 				} else {
 					msg := NewMsgFromTextblock(
-						typ.textblock, subpath, "Allowed Function Missing", fnc.name)
+						typ.textblock, 0, 0, subpath, "Allowed Function Missing", fnc.name)
 					msgblock = MsgblockAddError(msgblock, msg)
 				}
 			}
@@ -813,7 +818,7 @@ func ListTypeLink(
 						fncs, updatedfnc)
 				} else {
 					msg := NewMsgFromTextblock(
-						typ.textblock, subpath, "Disallow Function Missing", fnc.name)
+						typ.textblock, 0, 0, subpath, "Disallow Function Missing", fnc.name)
 					msgblock = MsgblockAddError(msgblock, msg)
 				}
 			}
@@ -827,7 +832,8 @@ func ListTypeLink(
 					property.vxtype = lookuptype
 					properties = append(properties, property)
 				} else {
-					msg := NewMsgFromTextblock(typ.textblock, subpath, "Property Type Missing", property.name, property.vxtype.name)
+					msg := NewMsgFromTextblock(
+						typ.textblock, 0, 0, subpath, "Property Type Missing", property.name, property.vxtype.name)
 					msgblock = MsgblockAddError(msgblock, msg)
 				}
 			}
@@ -1057,7 +1063,9 @@ func TypeFromMapType(maptype map[string]*vxtype, key string) (*vxtype, bool) {
 	return typ, ok
 }
 
-func TypeFromTextblock(textblock *vxtextblock, pkg *vxpackage) (*vxtype, *vxmsgblock) {
+func TypeFromTextblock(
+	textblock *vxtextblock,
+	pkg *vxpackage) (*vxtype, *vxmsgblock) {
 	msgblock := NewMsgBlock("TypeFromTextblock")
 	typ := NewType("")
 	typ.pkgname = pkg.name
@@ -1073,7 +1081,8 @@ func TypeFromTextblock(textblock *vxtextblock, pkg *vxpackage) (*vxtype, *vxmsgb
 			switch word {
 			case "type":
 			default:
-				msg := NewMsgFromTextblock(textblock, "Type Not Found: ", word)
+				msg := NewMsgFromTextblock(
+					textblock, 0, 0, "", "Type Not Found", word)
 				msgblock = MsgblockAddError(msgblock, msg)
 			}
 		case 1:
@@ -1110,7 +1119,8 @@ func TypeFromTextblock(textblock *vxtextblock, pkg *vxpackage) (*vxtype, *vxmsgb
 							typ.disallowfuncs = funcs
 						}
 					} else {
-						msg := NewMsgFromTextblock(textblock, "Invalid Allowed/Disallow Functions:", word)
+						msg := NewMsgFromTextblock(
+							textblock, 0, 0, "", "Invalid Allowed/Disallow Functions", word)
 						msgblock = MsgblockAddError(msgblock, msg)
 					}
 				case ":allowtypes", ":disallowtypes", ":traits":
@@ -1130,7 +1140,8 @@ func TypeFromTextblock(textblock *vxtextblock, pkg *vxpackage) (*vxtype, *vxmsgb
 							typ.traits = types
 						}
 					} else {
-						msg := NewMsgFromTextblock(textblock, "Invalid Allowed/Disallow Types:", word)
+						msg := NewMsgFromTextblock(
+							textblock, 0, 0, "", "Invalid Allowed/Disallow Types", word)
 						msgblock = MsgblockAddError(msgblock, msg)
 					}
 				case ":allowvalues", ":disallowvalues":
@@ -1167,7 +1178,8 @@ func TypeFromTextblock(textblock *vxtextblock, pkg *vxpackage) (*vxtype, *vxmsgb
 									arg.multi = true
 								default:
 									if BooleanFromStringStarts(property, ":") {
-										msg := NewMsgFromTextblock(textblock, "Invalid Property:", property, typ.properties)
+										msg := NewMsgFromTextblock(
+											textblock, 0, 0, "", "Invalid Property", property, typ.properties)
 										msgblock = MsgblockAddError(msgblock, msg)
 									} else {
 										if arg.name != "" {
@@ -1193,7 +1205,8 @@ func TypeFromTextblock(textblock *vxtextblock, pkg *vxpackage) (*vxtype, *vxmsgb
 							typ.properties = append(typ.properties, arg)
 						}
 					} else {
-						msg := NewMsgFromTextblock(textblock, "Invalid Properties:", word)
+						msg := NewMsgFromTextblock(
+							textblock, 0, 0, "", "Invalid Properties", word)
 						msgblock = MsgblockAddError(msgblock, msg)
 					}
 				case ":convert":
@@ -1211,11 +1224,13 @@ func TypeFromTextblock(textblock *vxtextblock, pkg *vxpackage) (*vxtype, *vxmsgb
 				case ":test":
 					testcls = true
 				default:
-					msg := NewMsgFromTextblock(textblock, "Invalid Keyword:", word)
+					msg := NewMsgFromTextblock(
+						textblock, 0, 0, "", "Invalid Keyword", word)
 					msgblock = MsgblockAddError(msgblock, msg)
 				}
 			} else if valuefound {
-				msg := NewMsgFromTextblock(textblock, "More Than 1 Value:", word)
+				msg := NewMsgFromTextblock(
+					textblock, 0, 0, "", "More Than 1 Value", word)
 				msgblock = MsgblockAddError(msgblock, msg)
 			} else {
 				valuefound = true

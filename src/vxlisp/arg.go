@@ -26,7 +26,8 @@ var argcontext = NewArgContext()
 
 var arggenericany1 = NewArgGenericAny1()
 
-func NewArg(name string) vxarg {
+func NewArg(
+	name string) vxarg {
 	output := *new(vxarg)
 	output.name = name
 	output.alias = name
@@ -36,7 +37,8 @@ func NewArg(name string) vxarg {
 	return output
 }
 
-func NewArgCopy(arg vxarg) vxarg {
+func NewArgCopy(
+	arg vxarg) vxarg {
 	output := *new(vxarg)
 	output.name = arg.name
 	output.alias = arg.name
@@ -60,7 +62,8 @@ func NewArgContext() vxarg {
 	return output
 }
 
-func NewArgFromType(typ *vxtype) vxarg {
+func NewArgFromType(
+	typ *vxtype) vxarg {
 	output := NewArg(typ.name)
 	output.value = NewValueFromType(typ)
 	return output
@@ -80,7 +83,8 @@ func NewListArg() []vxarg {
 	return output
 }
 
-func NewListArgCopy(arglist []vxarg) []vxarg {
+func NewListArgCopy(
+	arglist []vxarg) []vxarg {
 	var output []vxarg
 	for _, arg := range arglist {
 		chgarg := NewArgCopy(arg)
@@ -120,7 +124,11 @@ func ArgLink(
 	return arg, msgblock
 }
 
-func ArgLinkType(arg vxarg, listscope []vxscope, textblock *vxtextblock, path string) (vxarg, *vxmsgblock) {
+func ArgLinkType(
+	arg vxarg,
+	listscope []vxscope,
+	textblock *vxtextblock,
+	path string) (vxarg, *vxmsgblock) {
 	msgblock := NewMsgBlock("ArgLinkType")
 	subpath := path + "/:arg/" + arg.name
 	typ := arg.vxtype
@@ -130,30 +138,35 @@ func ArgLinkType(arg vxarg, listscope []vxscope, textblock *vxtextblock, path st
 		if ok {
 			arg.vxtype = lookuptype
 		} else {
-			msg := NewMsgFromTextblock(textblock, "Type Not Found", typ.pkgname, typ.name, "\n"+subpath)
+			msg := NewMsgFromTextblock(
+				textblock, 0, 0, "Type Not Found", typ.pkgname, typ.name, "\n"+subpath)
 			msgblock = MsgblockAddError(msgblock, msg)
 		}
 		if !ok {
 		} else if !arg.multi {
 		} else if arg.vxtype.extends != ":list" {
-			msg := NewMsgFromTextblock(textblock, "Argument is marked as multi but its type is not a list", NameFromType(arg.vxtype), "\n"+path)
+			msg := NewMsgFromTextblock(
+				textblock, 0, 0, "Argument is marked as multi but its type is not a list", NameFromType(arg.vxtype), "\n"+path)
 			msgblock = MsgblockAddError(msgblock, msg)
 		}
 	}
 	if arg.generictype != nil {
 		generictype := arg.generictype
-		lookuptype, ok := TypeOrFuncFromListScope(listscope, generictype.pkgname, generictype.name, subpath)
+		lookuptype, ok := TypeOrFuncFromListScope(
+			listscope, generictype.pkgname, generictype.name, subpath)
 		if ok {
 			arg.generictype = lookuptype
 		} else {
-			msg := NewMsgFromTextblock(textblock, "Generic Type Not Found", generictype.pkgname, generictype.name, "\n"+subpath)
+			msg := NewMsgFromTextblock(
+				textblock, 0, 0, "Generic Type Not Found", generictype.pkgname, generictype.name, "\n"+subpath)
 			msgblock = MsgblockAddError(msgblock, msg)
 		}
 	}
 	return arg, msgblock
 }
 
-func ArgMapFromArgList(listarg []vxarg) map[string]vxarg {
+func ArgMapFromArgList(
+	listarg []vxarg) map[string]vxarg {
 	maparg := make(map[string]vxarg)
 	for _, arg := range listarg {
 		maparg[arg.name] = arg
@@ -218,7 +231,8 @@ func ArgValidate(
 	return arg, mapgeneric, msgblock
 }
 
-func ListArgFromMapArg(maparg map[string]vxarg) []vxarg {
+func ListArgFromMapArg(
+	maparg map[string]vxarg) []vxarg {
 	var output []vxarg
 	for _, arg := range maparg {
 		output = append(output, arg)
@@ -226,7 +240,10 @@ func ListArgFromMapArg(maparg map[string]vxarg) []vxarg {
 	return output
 }
 
-func ListArgFromTextblock(textblock *vxtextblock, fnc *vxfunc, pkg *vxpackage) ([]vxarg, *vxmsgblock) {
+func ListArgFromTextblock(
+	textblock *vxtextblock,
+	fnc *vxfunc,
+	pkg *vxpackage) ([]vxarg, *vxmsgblock) {
 	msgblock := NewMsgBlock("ListArgFromTextblock")
 	//	typmap := prj.vxtype_map
 	var listarg []vxarg
@@ -245,7 +262,8 @@ func ListArgFromTextblock(textblock *vxtextblock, fnc *vxfunc, pkg *vxpackage) (
 					if pkgname != "" {
 						argtyp.pkgname = pkgname
 					} else {
-						msg := NewMsgFromTextblock(textblock, "Package Not Found:", argstr)
+						msg := NewMsgFromTextblock(
+							textblock, 0, 0, "Package Not Found", argstr)
 						msgblock = MsgblockAddError(msgblock, msg)
 					}
 				}
@@ -261,7 +279,8 @@ func ListArgFromTextblock(textblock *vxtextblock, fnc *vxfunc, pkg *vxpackage) (
 					if pkgname != "" {
 						argtyp.pkgname = pkgname
 					} else {
-						msg := NewMsgFromTextblock(textblock, "Package Not Found:", argstr)
+						msg := NewMsgFromTextblock(
+							textblock, 0, 0, "Package Not Found", argstr)
 						msgblock = MsgblockAddError(msgblock, msg)
 					}
 				}
@@ -271,7 +290,8 @@ func ListArgFromTextblock(textblock *vxtextblock, fnc *vxfunc, pkg *vxpackage) (
 			case ":doc":
 				arg.doc = argstr
 			case ":=":
-				value, msgs := ValueFromTextblock(argtextblock, fnc, pkg)
+				value, msgs := ValueFromTextblock(
+					argtextblock, fnc, pkg)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
 				arg.value = value
 			default:
@@ -283,7 +303,8 @@ func ListArgFromTextblock(textblock *vxtextblock, fnc *vxfunc, pkg *vxpackage) (
 					case ":...":
 						arg.multi = true
 					default:
-						msg := NewMsgFromTextblock(textblock, "Invalid Keyword:", argstr)
+						msg := NewMsgFromTextblock(
+							textblock, 0, 0, "Invalid Keyword", argstr)
 						msgblock = MsgblockAddError(msgblock, msg)
 					}
 				} else {
@@ -318,7 +339,11 @@ func ListArgLink(
 	return output, msgblock
 }
 
-func ListArgLinkType(listarg []vxarg, listscope []vxscope, textblock *vxtextblock, path string) ([]vxarg, *vxmsgblock) {
+func ListArgLinkType(
+	listarg []vxarg,
+	listscope []vxscope,
+	textblock *vxtextblock,
+	path string) ([]vxarg, *vxmsgblock) {
 	msgblock := NewMsgBlock("ListArgLinkType")
 	var output []vxarg
 	for _, arg := range listarg {
@@ -335,16 +360,19 @@ func ListArgMergeValues(listfromarg []vxarg, listtoarg []vxarg, textblock *vxtex
 	toargcnt := len(listtoarg)
 	fromargcnt := len(listfromarg)
 	if fromargcnt < toargcnt {
-		msg := NewMsgFromTextblock(textblock, path, "Too Few Arguments", StringFromListArg(listfromarg), StringFromListArg(listtoarg))
+		msg := NewMsgFromTextblock(
+			textblock, 0, 0, "Too Few Arguments", path, StringFromListArg(listfromarg), StringFromListArg(listtoarg))
 		msgblock = MsgblockAddError(msgblock, msg)
 	} else if fromargcnt == 0 && toargcnt == 0 {
 	} else if toargcnt == 0 && fromargcnt > 0 {
-		msg := NewMsgFromTextblock(textblock, path, "Too Many Arguments", fromargcnt, toargcnt)
+		msg := NewMsgFromTextblock(
+			textblock, 0, 0, "Too Many Arguments", path, fromargcnt, toargcnt)
 		msgblock = MsgblockAddError(msgblock, msg)
 	} else {
 		lastarg := listtoarg[toargcnt-1]
 		if fromargcnt > toargcnt && !lastarg.multi {
-			msg := NewMsgFromTextblock(textblock, path, "Too Many Arguments", fromargcnt, toargcnt)
+			msg := NewMsgFromTextblock(
+				textblock, 0, 0, "Too Many Arguments", path, fromargcnt, toargcnt)
 			msgblock = MsgblockAddError(msgblock, msg)
 		} else {
 			var chgargs []vxarg
@@ -365,13 +393,18 @@ func ListArgMergeValues(listfromarg []vxarg, listtoarg []vxarg, textblock *vxtex
 	return output, msgblock
 }
 
-func ListArgValidate(listarg []vxarg, mapgeneric map[string]*vxtype, textblock *vxtextblock, path string) ([]vxarg, map[string]*vxtype, *vxmsgblock) {
+func ListArgValidate(
+	listarg []vxarg,
+	mapgeneric map[string]*vxtype,
+	textblock *vxtextblock,
+	path string) ([]vxarg, map[string]*vxtype, *vxmsgblock) {
 	msgblock := NewMsgBlock("ListArgValidate")
 	var output []vxarg
 	for _, arg := range listarg {
 		var chgarg vxarg
 		var msgs *vxmsgblock
-		chgarg, mapgeneric, msgs = ArgValidate(arg, mapgeneric, textblock, path)
+		chgarg, mapgeneric, msgs = ArgValidate(
+			arg, mapgeneric, textblock, path)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		output = append(output, chgarg)
 	}

@@ -117,7 +117,7 @@ func FuncFromTextblock(
 		case 0:
 			if word != "func" {
 				msg := NewMsgFromTextblock(
-					textblock, "Invalid Function:", word, "package:", pkg.name)
+					textblock, 0, 0, "Invalid Function", word, "package:", pkg.name)
 				msgblock = MsgblockAddError(
 					msgblock, msg)
 			}
@@ -162,7 +162,8 @@ func FuncFromTextblock(
 							if pkgname != "" {
 								fnctyp.pkgname = pkgname
 							} else {
-								msg := NewMsgFromTextblock(textblock, "Package Not Found:", word)
+								msg := NewMsgFromTextblock(
+									textblock, 0, 0, "Package Not Found", word)
 								msgblock = MsgblockAddError(msgblock, msg)
 							}
 						}
@@ -175,7 +176,8 @@ func FuncFromTextblock(
 						case ":1", ":logn", ":n", ":nlogn", ":2n", ":n^2", ":2^n", ":n^n":
 							fnc.bigospace = word
 						default:
-							msg := NewMsgFromTextblock(textblock, "func:", fnc.name, "Invalid bigospace", word)
+							msg := NewMsgFromTextblock(
+								textblock, 0, 0, "func:", fnc.name, "Invalid bigospace", word)
 							msgblock = MsgblockAddError(msgblock, msg)
 						}
 					case ":bigotime":
@@ -183,7 +185,8 @@ func FuncFromTextblock(
 						case ":1", ":logn", ":n", ":nlogn", ":2n", ":n^2", ":2^n", ":n^n":
 							fnc.bigotime = word
 						default:
-							msg := NewMsgFromTextblock(textblock, "func", fnc.name, "Invalid bigotime", word)
+							msg := NewMsgFromTextblock(
+								textblock, 0, 0, "Invalid bigotime", word, "func", fnc.name)
 							msgblock = MsgblockAddError(msgblock, msg)
 						}
 					case ":clientserver":
@@ -191,7 +194,8 @@ func FuncFromTextblock(
 						case ":client", ":server":
 							fnc.clientserver = word
 						default:
-							msg := NewMsgFromTextblock(textblock, "func", fnc.name, "Invalid clientserver", word)
+							msg := NewMsgFromTextblock(
+								textblock, 0, 0, "Invalid clientserver", word, "func", fnc.name)
 							msgblock = MsgblockAddError(msgblock, msg)
 						}
 					case ":doc":
@@ -227,19 +231,24 @@ func FuncFromTextblock(
 					case ":test":
 						testcls = true
 					default:
-						msg := NewMsgFromTextblock(textblock, "Invalid Keyword:", word)
+						msg := NewMsgFromTextblock(
+							textblock, 0, 0, "Invalid Keyword", word)
 						msgblock = MsgblockAddError(msgblock, msg)
 					}
 				} else if !typefound {
-					msg := NewMsgFromTextblock(textblock, "Function Type Missing:", word)
+					msg := NewMsgFromTextblock(
+						textblock, 0, 0, "Function Type Missing", word)
 					msgblock = MsgblockAddError(msgblock, msg)
 				} else if valuefound {
-					msg := NewMsgFromTextblock(textblock, "Functions Cannot Have More than 1 Result. Perhaps you have missed a :test keyword or parentheses are arranged incorrectly:", word)
+					msg := NewMsgFromTextblock(
+						textblock, 0, 0, "Functions Cannot Have More than 1 Result. Perhaps you have missed a :test keyword or parentheses are arranged incorrectly:", word)
 					msgblock = MsgblockAddError(msgblock, msg)
 				} else {
 					valuefound = true
-					value, msgs := ValueFromTextblock(wordtextblock, fnc, pkg)
-					msgblock = MsgblockAddBlock(msgblock, msgs)
+					value, msgs := ValueFromTextblock(
+						wordtextblock, fnc, pkg)
+					msgblock = MsgblockAddBlock(
+						msgblock, msgs)
 					fnc.value = value
 				}
 			}
@@ -249,18 +258,23 @@ func FuncFromTextblock(
 	return fnc, msgblock
 }
 
-func FuncValidate(fnc *vxfunc, textblock *vxtextblock, path string) (*vxfunc, *vxmsgblock) {
+func FuncValidate(
+	fnc *vxfunc,
+	textblock *vxtextblock,
+	path string) (*vxfunc, *vxmsgblock) {
 	msgblock := NewMsgBlock("FuncValidate")
 	path = path + "/" + fnc.name + StringIndexFromFunc(fnc)
 	if fnc.isgeneric && fnc.generictype != nil {
 		// explict type added to function
 		genericname := fnc.generictype.name
 		if fnc.vxtype.name != "" {
-			fnc.mapgeneric = MapGenericSetType(fnc.mapgeneric, genericname, fnc.vxtype)
+			fnc.mapgeneric = MapGenericSetType(
+				fnc.mapgeneric, genericname, fnc.vxtype)
 		}
 	}
 	if len(fnc.listarg) > 0 {
-		listarg, mapgeneric, msgs := ListArgValidate(fnc.listarg, fnc.mapgeneric, textblock, path)
+		listarg, mapgeneric, msgs := ListArgValidate(
+			fnc.listarg, fnc.mapgeneric, textblock, path)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		fnc.listarg = listarg
 		fnc.mapgeneric = mapgeneric
@@ -278,7 +292,8 @@ func FuncValidate(fnc *vxfunc, textblock *vxtextblock, path string) (*vxfunc, *v
 			}
 		}
 	}
-	chgvalue, _, msgs := ValueValidate(fnc.value, fnc.vxtype, false, fnc.mapgeneric, textblock, path)
+	chgvalue, _, msgs := ValueValidate(
+		fnc.value, fnc.vxtype, false, fnc.mapgeneric, textblock, path)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	fnc.value = chgvalue
 	if NameFromType(fnc.vxtype) == "vx/core/unknown" {
@@ -291,7 +306,8 @@ func FuncValidate(fnc *vxfunc, textblock *vxtextblock, path string) (*vxfunc, *v
 		}
 	}
 	if len(fnc.listtestvalue) > 0 {
-		testvalues, msgs := ListValueValidateTestFuncs(fnc.listtestvalue, fnc.textblock, path)
+		testvalues, msgs := ListValueValidateTestFuncs(
+			fnc.listtestvalue, fnc.textblock, path)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		fnc.listtestvalue = testvalues
 	}
@@ -327,7 +343,7 @@ func ListFuncLink(
 		} else if fnc.name == "native" {
 		} else {
 			msg := NewMsgFromTextblock(
-				fnc.textblock, subpath, "Type Not Found:", typ.pkgname, typ.name)
+				fnc.textblock, 0, 0, "Type Not Found", typ.pkgname, "subpath", subpath, "type", typ.name)
 			msgblock = MsgblockAddError(msgblock, msg)
 		}
 		if len(fnc.listarg) > 0 || fnc.context {
@@ -361,7 +377,9 @@ func ListFuncLinkValues(
 	return listfunc, msgblock
 }
 
-func ListFuncParse(textblock *vxtextblock, pkg *vxpackage) ([]*vxfunc, *vxmsgblock) {
+func ListFuncParse(
+	textblock *vxtextblock,
+	pkg *vxpackage) ([]*vxfunc, *vxmsgblock) {
 	msgblock := NewMsgBlock("ListFuncParse")
 	var output []*vxfunc
 	for _, wordtextblock := range textblock.listtextblock {
@@ -370,7 +388,8 @@ func ListFuncParse(textblock *vxtextblock, pkg *vxpackage) ([]*vxfunc, *vxmsgblo
 		case "/*", "//":
 		case "(":
 			if len(words) == 0 {
-				msg := NewMsgFromTextblock(textblock, "Empty Func")
+				msg := NewMsgFromTextblock(
+					textblock, 0, 0, "", "Empty Func")
 				msgblock = MsgblockAddError(msgblock, msg)
 			} else {
 				firstword := words[0]
@@ -382,14 +401,16 @@ func ListFuncParse(textblock *vxtextblock, pkg *vxpackage) ([]*vxfunc, *vxmsgblo
 				}
 			}
 		default:
-			msg := NewMsgFromTextblock(textblock, "Invalid Func Blocktype")
+			msg := NewMsgFromTextblock(
+				textblock, 0, 0, "", "Invalid Func Blocktype")
 			msgblock = MsgblockAddError(msgblock, msg)
 		}
 	}
 	return output, msgblock
 }
 
-func ListFuncReverse(listfunc []*vxfunc) []*vxfunc {
+func ListFuncReverse(
+	listfunc []*vxfunc) []*vxfunc {
 	var output []*vxfunc
 	for i := len(listfunc) - 1; i >= 0; i-- {
 		output = append(output, listfunc[i])
@@ -397,7 +418,9 @@ func ListFuncReverse(listfunc []*vxfunc) []*vxfunc {
 	return output
 }
 
-func ListFuncValidate(listfunc []*vxfunc, path string) ([]*vxfunc, *vxmsgblock) {
+func ListFuncValidate(
+	listfunc []*vxfunc,
+	path string) ([]*vxfunc, *vxmsgblock) {
 	msgblock := NewMsgBlock("ListFuncValidate")
 	var output []*vxfunc
 	for _, fnc := range listfunc {
@@ -408,7 +431,8 @@ func ListFuncValidate(listfunc []*vxfunc, path string) ([]*vxfunc, *vxmsgblock) 
 	return output, msgblock
 }
 
-func ListKeyFromMapFunc(mapfunc map[string][]*vxfunc) []string {
+func ListKeyFromMapFunc(
+	mapfunc map[string][]*vxfunc) []string {
 	keys := make([]string, 0, len(mapfunc))
 	for id := range mapfunc {
 		keys = append(keys, id)
@@ -416,7 +440,8 @@ func ListKeyFromMapFunc(mapfunc map[string][]*vxfunc) []string {
 	return ListStringSort(keys)
 }
 
-func ListArgLocalFromFunc(fnc *vxfunc) []vxarg {
+func ListArgLocalFromFunc(
+	fnc *vxfunc) []vxarg {
 	var output []vxarg
 	for _, arg := range fnc.listarg {
 		if arg.value.code == ":arglist" {
@@ -426,7 +451,8 @@ func ListArgLocalFromFunc(fnc *vxfunc) []vxarg {
 	return output
 }
 
-func ListNameFromListFunc(listfunc []*vxfunc) []string {
+func ListNameFromListFunc(
+	listfunc []*vxfunc) []string {
 	var output []string
 	for _, fnc := range listfunc {
 		output = append(output, NameFromFunc(fnc))
@@ -434,7 +460,8 @@ func ListNameFromListFunc(listfunc []*vxfunc) []string {
 	return output
 }
 
-func MapFuncFromListFunc(listfunc []*vxfunc) map[string][]*vxfunc {
+func MapFuncFromListFunc(
+	listfunc []*vxfunc) map[string][]*vxfunc {
 	output := NewMapFuncMap()
 	for _, fnc := range listfunc {
 		existing := output[fnc.name]
@@ -445,7 +472,8 @@ func MapFuncFromListFunc(listfunc []*vxfunc) map[string][]*vxfunc {
 	return output
 }
 
-func NameFromFunc(fnc *vxfunc) string {
+func NameFromFunc(
+	fnc *vxfunc) string {
 	output := fnc.name
 	if fnc.pkgname != "" {
 		output = fnc.pkgname + "/" + fnc.name
@@ -456,7 +484,8 @@ func NameFromFunc(fnc *vxfunc) string {
 	return output
 }
 
-func ScopeFromFunc(fnc *vxfunc) vxscope {
+func ScopeFromFunc(
+	fnc *vxfunc) vxscope {
 	scope := ScopeNew()
 	maparg := ArgMapFromArgList(fnc.listarg)
 	if fnc.context {
@@ -466,7 +495,8 @@ func ScopeFromFunc(fnc *vxfunc) vxscope {
 	return scope
 }
 
-func ScopeFromListFuncArg(listarg []vxarg) vxscope {
+func ScopeFromListFuncArg(
+	listarg []vxarg) vxscope {
 	var scope = ScopeNew()
 	var listchgarg []vxarg
 	for _, arg := range listarg {
@@ -477,11 +507,14 @@ func ScopeFromListFuncArg(listarg []vxarg) vxscope {
 	return scope
 }
 
-func StringFromFunc(fnc *vxfunc) string {
+func StringFromFunc(
+	fnc *vxfunc) string {
 	return StringFromFuncIndent(fnc, 0)
 }
 
-func StringFromFuncIndent(fnc *vxfunc, indent int) string {
+func StringFromFuncIndent(
+	fnc *vxfunc,
+	indent int) string {
 	output := ""
 	if indent > 30 {
 		output += "..."
@@ -530,11 +563,14 @@ func StringFromFuncIndent(fnc *vxfunc, indent int) string {
 	return output
 }
 
-func StringFromListFunc(listfunc []*vxfunc) string {
+func StringFromListFunc(
+	listfunc []*vxfunc) string {
 	return StringFromListFuncIndent(listfunc, 0)
 }
 
-func StringFromListFuncIndent(listfunc []*vxfunc, indent int) string {
+func StringFromListFuncIndent(
+	listfunc []*vxfunc,
+	indent int) string {
 	output := ""
 	if len(listfunc) > 0 {
 		lineindent := ""
@@ -550,7 +586,9 @@ func StringFromListFuncIndent(listfunc []*vxfunc, indent int) string {
 	return output
 }
 
-func StringFromNativeFunc(fnc *vxfunc, lang string) string {
+func StringFromNativeFunc(
+	fnc *vxfunc,
+	lang string) string {
 	output := ""
 	if fnc.name == "native" {
 		isNative := false
@@ -577,7 +615,8 @@ func StringFromNativeFunc(fnc *vxfunc, lang string) string {
 	return output
 }
 
-func StringIndexFromFunc(fnc *vxfunc) string {
+func StringIndexFromFunc(
+	fnc *vxfunc) string {
 	output := ""
 	if fnc.idx > 0 {
 		output = "_" + StringFromInt(fnc.idx)

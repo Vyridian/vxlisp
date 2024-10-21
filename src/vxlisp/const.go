@@ -45,7 +45,8 @@ func ConstFromTextblock(textblock *vxtextblock, pkg *vxpackage) (*vxconst, *vxms
 		switch i {
 		case 0:
 			if word != "const" {
-				msg := NewMsgFromTextblock(textblock, "Invalid Const:", word)
+				msg := NewMsgFromTextblock(
+					textblock, 0, 0, "Invalid Const", word)
 				msgblock = MsgblockAddError(msgblock, msg)
 			}
 		case 1:
@@ -71,7 +72,8 @@ func ConstFromTextblock(textblock *vxtextblock, pkg *vxpackage) (*vxconst, *vxms
 						if pkgname != "" {
 							cnsttyp.pkgname = pkgname
 						} else {
-							msg := NewMsgFromTextblock(textblock, "Package Not Found:", word)
+							msg := NewMsgFromTextblock(
+								textblock, 0, 0, "Package Not Found", word)
 							msgblock = MsgblockAddError(msgblock, msg)
 						}
 					}
@@ -93,15 +95,18 @@ func ConstFromTextblock(textblock *vxtextblock, pkg *vxpackage) (*vxconst, *vxms
 				case ":test":
 					testcls = true
 				default:
-					msg := NewMsgFromTextblock(textblock, "Invalid Keyword:", word)
+					msg := NewMsgFromTextblock(
+						textblock, 0, 0, "Invalid Keyword", word)
 					msgblock = MsgblockAddError(msgblock, msg)
 				}
 			} else if valuefound {
-				msg := NewMsgFromTextblock(textblock, "More Than 1 Value:", word)
+				msg := NewMsgFromTextblock(
+					textblock, 0, 0, "More Than 1 Value", word)
 				msgblock = MsgblockAddError(msgblock, msg)
 			} else {
 				valuefound = true
-				value, msgs := ValueFromTextblock(wordtextblock, emptyfunc, pkg)
+				value, msgs := ValueFromTextblock(
+					wordtextblock, emptyfunc, pkg)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
 				cnst.value = value
 			}
@@ -121,11 +126,13 @@ func ListConstLink(listconst []*vxconst, listscope []vxscope, path string) ([]*v
 	for _, cnst := range listconst {
 		typ := cnst.vxtype
 		subpath := path + "/" + cnst.name
-		lookuptype, ok := TypeOrFuncFromListScope(listscope, typ.pkgname, typ.name, subpath)
+		lookuptype, ok := TypeOrFuncFromListScope(
+			listscope, typ.pkgname, typ.name, subpath)
 		if ok {
 			cnst.vxtype = lookuptype
 		} else {
-			msg := NewMsgFromTextblock(cnst.textblock, subpath, "Type Not Found", typ.pkgname, typ.name)
+			msg := NewMsgFromTextblock(
+				cnst.textblock, 0, 0, "Type Not Found", "subpath", subpath, "package", typ.pkgname, "type", typ.name)
 			msgblock = MsgblockAddError(msgblock, msg)
 		}
 	}
@@ -149,7 +156,9 @@ func ListConstLinkValues(
 	return listconst, msgblock
 }
 
-func ListConstFromTextblock(textblock *vxtextblock, pkg *vxpackage) ([]*vxconst, *vxmsgblock) {
+func ListConstFromTextblock(
+	textblock *vxtextblock,
+	pkg *vxpackage) ([]*vxconst, *vxmsgblock) {
 	msgblock := NewMsgBlock("ListConstFromTextblock")
 	var output []*vxconst
 	for _, wordtextblock := range textblock.listtextblock {
@@ -158,7 +167,8 @@ func ListConstFromTextblock(textblock *vxtextblock, pkg *vxpackage) ([]*vxconst,
 		case "/*", "//":
 		case "(":
 			if len(words) == 0 {
-				msg := NewMsgFromTextblock(textblock, "Empty Const")
+				msg := NewMsgFromTextblock(
+					textblock, 0, 0, "", "Empty Const")
 				msgblock = MsgblockAddError(msgblock, msg)
 			} else {
 				firstword := words[0]
@@ -170,14 +180,17 @@ func ListConstFromTextblock(textblock *vxtextblock, pkg *vxpackage) ([]*vxconst,
 				}
 			}
 		default:
-			msg := NewMsgFromTextblock(textblock, "Invalid Const Blocktype")
+			msg := NewMsgFromTextblock(
+				textblock, 0, 0, "", "Invalid Const Blocktype")
 			msgblock = MsgblockAddError(msgblock, msg)
 		}
 	}
 	return output, msgblock
 }
 
-func ListConstValidate(listconst []*vxconst, path string) ([]*vxconst, *vxmsgblock) {
+func ListConstValidate(
+	listconst []*vxconst,
+	path string) ([]*vxconst, *vxmsgblock) {
 	msgblock := NewMsgBlock("ConstValidate")
 	for _, cnst := range listconst {
 		subpath := path + "/" + cnst.name

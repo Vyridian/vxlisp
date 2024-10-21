@@ -30,7 +30,8 @@ type vxmsgblock struct {
 
 var emptymsg = NewMsg()
 
-func NewMsg(data ...interface{}) *vxmsg {
+func NewMsg(
+	data ...interface{}) *vxmsg {
 	output := new(vxmsg)
 	var listtext []string
 	for _, msg := range data {
@@ -40,31 +41,70 @@ func NewMsg(data ...interface{}) *vxmsg {
 	return output
 }
 
-func NewMsgBlock(name string) *vxmsgblock {
+func NewMsgBlock(
+	name string) *vxmsgblock {
 	output := new(vxmsgblock)
 	output.name = name
 	return output
 }
 
-func NewMsgFromTextblock(textblock *vxtextblock, data ...interface{}) *vxmsg {
+func NewMsgFromTextblock(
+	textblock *vxtextblock,
+	line int,
+	char int,
+	path string,
+	code string,
+	data ...interface{}) *vxmsg {
 	output := new(vxmsg)
-	var texts []string
+	var listsdata []string
 	for _, msg := range data {
-		texts = append(texts, fmt.Sprint(msg))
+		listsdata = append(
+			listsdata, fmt.Sprint(msg))
 	}
-	output.text = StringFromListStringJoin(texts, "\n")
-	output.text += "" +
-		"\n" + textblock.name + " Line:" + StringFromInt(textblock.linenum) + " Char:" + StringFromInt(textblock.charnum) +
-		"\n" + textblock.text +
+	header := path
+	if line > 0 {
+		header += " Line:" + StringFromInt(line)
+	}
+	if char > 0 {
+		header += " Char:" + StringFromInt(char)
+	}
+	header += "\n" + code
+	textblockdata := "" +
+		"\n" + textblock.name +
+		" Line:" + StringFromInt(textblock.linenum) +
+		" Char:" + StringFromInt(textblock.charnum)
+	sdata := StringFromListStringJoin(listsdata, "\n")
+	body := textblock.text
+	if line < 10 {
+	} else if textblock.linenum == 1 && textblock.charnum == 1 {
+		startline := line - 5
+		endline := line + 5
+		istartpos := IntFromStringFindNth(body, "\n", startline)
+		iendpos := IntFromStringFindNth(body, "\n", endline)
+		if istartpos > 0 && iendpos > 0 {
+			body = body[istartpos:iendpos]
+		}
+	}
+	output.text = "" +
+		header +
+		sdata +
+		textblockdata +
+		"\n" +
+		body +
+		"\n" +
+		header +
+		sdata +
 		"\n"
 	return output
 }
 
-func IsErrorFromMsgblock(msgblock *vxmsgblock) bool {
+func IsErrorFromMsgblock(
+	msgblock *vxmsgblock) bool {
 	return msgblock.iserror
 }
 
-func IsWarningFromMsgblock(msgblock *vxmsgblock) bool {
+func IsWarningFromMsgblock(
+	msgblock *vxmsgblock) bool {
 	return msgblock.iswarning
 }
 
@@ -79,7 +119,8 @@ func MsgLog(
 	}
 }
 
-func MsgPrint(output ...interface{}) {
+func MsgPrint(
+	output ...interface{}) {
 	fmt.Println(output...)
 }
 
@@ -102,7 +143,9 @@ func MsgStopLog() {
 	}
 }
 
-func MsgblockAddBlock(msgblock *vxmsgblock, addblock *vxmsgblock) *vxmsgblock {
+func MsgblockAddBlock(
+	msgblock *vxmsgblock,
+	addblock *vxmsgblock) *vxmsgblock {
 	var output = msgblock
 	if addblock.iserror {
 		output.iserror = true
@@ -114,7 +157,9 @@ func MsgblockAddBlock(msgblock *vxmsgblock, addblock *vxmsgblock) *vxmsgblock {
 	return output
 }
 
-func MsgblockAddError(msgblock *vxmsgblock, msg *vxmsg) *vxmsgblock {
+func MsgblockAddError(
+	msgblock *vxmsgblock,
+	msg *vxmsg) *vxmsgblock {
 	var output = msgblock
 	if msg != emptymsg {
 		msg.msgtype = MSGTYPE_ERROR
@@ -124,7 +169,9 @@ func MsgblockAddError(msgblock *vxmsgblock, msg *vxmsg) *vxmsgblock {
 	return output
 }
 
-func MsgblockAddException(msgblock *vxmsgblock, err error) *vxmsgblock {
+func MsgblockAddException(
+	msgblock *vxmsgblock,
+	err error) *vxmsgblock {
 	var output = msgblock
 	if err != nil {
 		msg := NewMsg(err.Error())
@@ -135,7 +182,9 @@ func MsgblockAddException(msgblock *vxmsgblock, err error) *vxmsgblock {
 	return output
 }
 
-func MsgblockAddInfo(msgblock *vxmsgblock, msg *vxmsg) *vxmsgblock {
+func MsgblockAddInfo(
+	msgblock *vxmsgblock,
+	msg *vxmsg) *vxmsgblock {
 	var output = msgblock
 	if msg != emptymsg {
 		msg.msgtype = MSGTYPE_INFO
@@ -144,7 +193,9 @@ func MsgblockAddInfo(msgblock *vxmsgblock, msg *vxmsg) *vxmsgblock {
 	return output
 }
 
-func MsgblockAddWarning(msgblock *vxmsgblock, msg *vxmsg) *vxmsgblock {
+func MsgblockAddWarning(
+	msgblock *vxmsgblock,
+	msg *vxmsg) *vxmsgblock {
 	var output = msgblock
 	if msg != emptymsg {
 		msg.msgtype = MSGTYPE_WARNING
@@ -154,7 +205,8 @@ func MsgblockAddWarning(msgblock *vxmsgblock, msg *vxmsg) *vxmsgblock {
 	return output
 }
 
-func MsgblockLog(msgblock *vxmsgblock) {
+func MsgblockLog(
+	msgblock *vxmsgblock) {
 	text := StringFromMsgblock(msgblock)
 	fmt.Println(text)
 	_, err := fmt.Fprintln(outputWriter, text)
@@ -163,7 +215,8 @@ func MsgblockLog(msgblock *vxmsgblock) {
 	}
 }
 
-func StringFromMsgblock(msgblock *vxmsgblock) string {
+func StringFromMsgblock(
+	msgblock *vxmsgblock) string {
 	var text string
 	if len(msgblock.listmsg) > 0 {
 		text += msgblock.name + "\n\n"
@@ -179,7 +232,8 @@ func StringFromMsgblock(msgblock *vxmsgblock) string {
 	return text
 }
 
-func StringFromListMsg(listmsg []*vxmsg) string {
+func StringFromListMsg(
+	listmsg []*vxmsg) string {
 	var text string
 	for _, msg := range listmsg {
 		text += msg.msgtype + " " + msg.text

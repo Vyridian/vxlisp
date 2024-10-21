@@ -1717,6 +1717,24 @@
   :kotlin
    "val value : vx_core.Type_any = vstruct.vx_any(key)
     output = vx_core.f_any_from_any(generic_any_1, value);")
+ :test (test
+        "sname"
+        (any<-struct : string
+         (translation
+          :name "sname")
+         :name))
+       (test
+        "sname"
+        (any<-struct : string
+         (translation
+          :name "sname")
+         "name"))
+       (test
+        "sname"
+        (any<-struct : string
+         (translation
+          :name "sname")
+         ":name"))
  :doc "Returns value from a struct")
 
 (func async : any-1 :async
@@ -2135,6 +2153,13 @@
  (string (:pkgname funcdef) "/" (:name funcdef))
  :doc "Get the name of a given funcdef")
 
+/*
+(func if : any-1
+ [clause  : boolean
+  fn-then : any<-func]
+ :doc "Logical lazy If function. Returns empty value if false.")
+*/
+
 (func if : any-1
  [clause : boolean
   then   : any-1]
@@ -2168,6 +2193,14 @@
          (= 1 2)
          "a"))
  :doc  "Logical If function")
+
+/*
+(func if : any-1
+ [clause  : boolean
+  fn-then : any<-func
+  fn-else : any<-func]
+ :doc "Logical lazy If function")
+*/
 
 (func if : any-1
  [clause  : boolean
@@ -2251,12 +2284,12 @@
       }
     }"
   :kotlin :auto)
- :doc  "Logical If function"
  :test (test-true
         (if
          (then (= 2 3) false)
          (then (!= 3 3) false)
-         (else (! false)))))
+         (else (! false))))
+ :doc "Logical lazy If function with (then) (else) clauses")
 
 (func int<-func : int
  []

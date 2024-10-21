@@ -855,11 +855,15 @@ func LangFuncValue(
 			switch propvalue.code {
 			case "string":
 				propname := StringValueFromValue(propvalue)
+				if BooleanFromStringStartsEnds(propname, "\"", "\"") {
+					propname = propname[1 : len(propname)-1]
+				}
 				if BooleanFromStringStarts(propname, ":") {
 					propname = propname[1:]
 				}
 				structvalue := funcargs[0].value
-				work, msgs := LangFromValue(lang, structvalue, pkgname, fnc, 0, true, test, subpath)
+				work, msgs := LangFromValue(
+					lang, structvalue, pkgname, fnc, 0, true, test, subpath)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
 				work = work + lang.typeref + LangFromName(propname) + "()"
 				listargtext = append(listargtext, work)

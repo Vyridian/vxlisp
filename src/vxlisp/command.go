@@ -48,7 +48,8 @@ func CommandFromTextblock(
 				switch prop {
 				case "cmd":
 				default:
-					msg := NewMsgFromTextblock(textblock, "Cmds may only contain (cmd):", prop)
+					msg := NewMsgFromTextblock(
+						textblock, 0, 0, "cmds may only contain (cmd)", prop)
 					msgblock = MsgblockAddError(msgblock, msg)
 				}
 			case 1:
@@ -65,11 +66,13 @@ func CommandFromTextblock(
 								":lang", ":main", ":name", ":path", ":port":
 								lastprop = prop
 							default:
-								msg := NewMsgFromTextblock(textblock, "Invalid Keyword:", prop)
+								msg := NewMsgFromTextblock(
+									textblock, 0, 0, "Invalid Keyword", prop)
 								msgblock = MsgblockAddError(msgblock, msg)
 							}
 						} else {
-							msg := NewMsgFromTextblock(textblock, "Invalid Cmd Property:", prop)
+							msg := NewMsgFromTextblock(
+								textblock, 0, 0, "Invalid Cmd Property", prop)
 							msgblock = MsgblockAddError(msgblock, msg)
 						}
 					}
@@ -100,7 +103,8 @@ func CommandFromTextblock(
 			}
 		}
 	default:
-		msg := NewMsgFromTextblock(textblock, "Cmd properties must be enclosed in (cmd)")
+		msg := NewMsgFromTextblock(
+			textblock, 0, 0, "", "Cmd properties must be enclosed in (cmd)")
 		msgblock = MsgblockAddError(msgblock, msg)
 	}
 	return command, msgblock

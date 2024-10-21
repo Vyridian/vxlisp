@@ -188,7 +188,8 @@ func ListValueValidateTestFuncs(
 				msgblock = MsgblockAddBlock(msgblock, msgs)
 				listtestvalue = append(listtestvalue, testvalue)
 			default:
-				msg := NewMsgFromTextblock(textblock, path, "Test:", testname, "Func Must Be a Test")
+				msg := NewMsgFromTextblock(
+					textblock, 0, 0, path, "Func Must Be a Test", "test", testname)
 				msgblock = MsgblockAddError(msgblock, msg)
 			}
 		}
@@ -496,7 +497,8 @@ func ValueFromTextblock(
 			case ":func":
 				fnc = FuncFromValue(currvalue)
 			default:
-				msg := NewMsgFromTextblock(textblock, "Last Argument in <- or <<- must be a Function", StringFromValue(currvalue))
+				msg := NewMsgFromTextblock(
+					textblock, 0, 0, "", "Last Argument in <- or <<- must be a Function", StringFromValue(currvalue))
 				msgblock = MsgblockAddError(msgblock, msg)
 			}
 		}
@@ -587,7 +589,7 @@ func ValueLink(
 					lookuparg.vxtype = lookuptype
 				} else {
 					msg := NewMsgFromTextblock(
-						textblock, subpath, "Arg Type Not Found", value.code, value.name, argtype.name)
+						textblock, 0, 0, subpath, "Arg Type Not Found", value.code, value.name, argtype.name)
 					msgblock = MsgblockAddError(msgblock, msg)
 				}
 			}
@@ -620,7 +622,7 @@ func ValueLink(
 						output = NewValueFromFuncRef(lookupfunc)
 					} else {
 						msg := NewMsgFromTextblock(
-							textblock, subpath, "Value Not Found", value.code, pkgname, valname)
+							textblock, 0, 0, subpath, "Value Not Found", value.code, pkgname, valname)
 						msgblock = MsgblockAddError(msgblock, msg)
 					}
 				}
@@ -722,6 +724,8 @@ func ValueLink(
 							} else {
 								msg := NewMsgFromTextblock(
 									textblock,
+									0,
+									0,
 									subpath,
 									"any<-struct does not contain property. (type "+typearg1.name+" "+keyarg2+")")
 								msgblock = MsgblockAddError(msgblock, msg)
@@ -761,7 +765,7 @@ func ValueLink(
 							origfunc.listarg = []vxarg{typearg}
 						} else {
 							msg := NewMsgFromTextblock(
-								textblock, subpath, "Empty Function Not Found")
+								textblock, 0, 0, subpath, "Empty Function Not Found")
 							msgblock = MsgblockAddError(
 								msgblock, msg)
 						}
@@ -778,14 +782,14 @@ func ValueLink(
 							//origfunc.listarg = append([]vxarg{typearg}, origfunc.listarg...)
 						} else {
 							msg := NewMsgFromTextblock(
-								textblock, subpath, "New Function Not Found")
+								textblock, 0, 0, subpath, "New Function Not Found")
 							msgblock = MsgblockAddError(
 								msgblock, msg)
 						}
 					}
 				} else {
 					msg := NewMsgFromTextblock(
-						textblock, subpath, "Function Not Found", origfunc.name)
+						textblock, 0, 0, subpath, "Function Not Found", origfunc.name)
 					msgblock = MsgblockAddError(
 						msgblock, msg)
 				}
@@ -835,7 +839,8 @@ func ValueValidate(
 				case "vx/core/fn":
 					actualargs := FuncFnGetArgList(actualfunc)
 					if len(expectedfuncref.listarg) != len(actualargs) {
-						msg := NewMsgFromTextblock(textblock, "Value with Lambda (fn) must have the same number of arguments", len(expectedfuncref.listarg), len(actualfunc.listarg), "\n"+subpath+"\n", StringFromValue(value))
+						msg := NewMsgFromTextblock(
+							textblock, 0, 0, subpath, "Value with Lambda (fn) must have the same number of arguments", len(expectedfuncref.listarg), len(actualfunc.listarg), "\n"+subpath+"\n", StringFromValue(value))
 						msgblock = MsgblockAddError(msgblock, msg)
 					} else {
 						var chgargs []vxarg
@@ -882,7 +887,18 @@ func ValueValidate(
 						"v/core/any<-key-value", "vx/core/any<-key-value-async":
 						actualargs := actualfunc.listarg
 						if len(expectedfuncref.listarg) != len(actualargs) {
-							msg := NewMsgFromTextblock(textblock, "Value with Function Type must have the same number of arguments", len(expectedfuncref.listarg), len(actualfunc.listarg), expectedfuncname, actualfuncname, "\n"+subpath+"\n", StringFromValue(value))
+							msg := NewMsgFromTextblock(
+								textblock,
+								0,
+								0,
+								subpath,
+								"Value with Function Type must have the same number of arguments",
+								len(expectedfuncref.listarg),
+								len(actualfunc.listarg),
+								expectedfuncname,
+								actualfuncname,
+								"\n"+subpath+"\n",
+								StringFromValue(value))
 							msgblock = MsgblockAddError(msgblock, msg)
 						} else {
 							var chgargs []vxarg
@@ -910,7 +926,16 @@ func ValueValidate(
 							msgblock = MsgblockAddBlock(msgblock, msgs)
 							pass = true
 						} else {
-							msg := NewMsgFromTextblock(textblock, "Value with Function Type can only be a lambda (fn) or refer to another function", NameFromFunc(expectedfuncref), NameFromFunc(actualfunc), "\n"+subpath+"\n", StringFromValue(value))
+							msg := NewMsgFromTextblock(
+								textblock,
+								0,
+								0,
+								subpath,
+								"Value with Function Type can only be a lambda (fn) or refer to another function",
+								NameFromFunc(expectedfuncref),
+								NameFromFunc(actualfunc),
+								"\n"+subpath+"\n",
+								StringFromValue(value))
 							msgblock = MsgblockAddError(msgblock, msg)
 						}
 					}
@@ -947,7 +972,16 @@ func ValueValidate(
 					value.vxtype = actualtype
 				}
 			} else {
-				msg := NewMsgFromTextblock(textblock, "Value Function Type does not match expected type", NameFromType(expectedtype), NameFromType(actualtype), "\n"+subpath+"\n", StringFromValue(value))
+				msg := NewMsgFromTextblock(
+					textblock,
+					0,
+					0,
+					subpath,
+					"Value Function Type does not match expected type",
+					NameFromType(expectedtype),
+					NameFromType(actualtype),
+					"\n"+subpath+"\n",
+					StringFromValue(value))
 				msgblock = MsgblockAddError(msgblock, msg)
 			}
 		default:
@@ -1031,6 +1065,8 @@ func ValueValidate(
 		} else if !pass {
 			msg := NewMsgFromTextblock(
 				textblock,
+				0,
+				0,
 				path,
 				value.code,
 				"Value Type does not match expected type",

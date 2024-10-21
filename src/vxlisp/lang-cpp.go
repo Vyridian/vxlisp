@@ -2562,11 +2562,15 @@ func CppFromValue(lang *vxlang, value vxvalue, pkgname string, parentfn *vxfunc,
 					switch propvalue.code {
 					case "string":
 						propname := StringValueFromValue(propvalue)
+						if BooleanFromStringStartsEnds(propname, "\"", "\"") {
+							propname = propname[1 : len(propname)-1]
+						}
 						if BooleanFromStringStarts(propname, ":") {
 							propname = propname[1:]
 						}
 						structvalue := funcargs[0].value
-						work, msgs := CppFromValue(lang, structvalue, pkgname, fnc, 0, true, test, subpath)
+						work, msgs := CppFromValue(
+							lang, structvalue, pkgname, fnc, 0, true, test, subpath)
 						msgblock = MsgblockAddBlock(msgblock, msgs)
 						work = work + "->" + LangFromName(propname) + "()"
 						argtexts = append(argtexts, work)

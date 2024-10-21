@@ -146,7 +146,8 @@ func TextblockParse(textblock *vxtextblock) (*vxtextblock, *vxmsgblock) {
 				if lastchar == "/" && char == "*" {
 					state = BLOCKTYPE_COMMENTBLOCK
 				} else {
-					msg := NewMsgFromTextblock(textblock, "Invalid Character", char, "line:", linenum, "char:", charnum)
+					msg := NewMsgFromTextblock(
+						textblock, linenum, charnum, "Invalid Character", char)
 					msgblock = MsgblockAddError(msgblock, msg)
 				}
 			}
@@ -260,7 +261,8 @@ func TextblockParse(textblock *vxtextblock) (*vxtextblock, *vxmsgblock) {
 				}
 			case "\"":
 				if len(word) > 0 {
-					msg := NewMsgFromTextblock(textblock, "New Quote started without Whitespace", linenum)
+					msg := NewMsgFromTextblock(
+						textblock, linenum, charnum, "", "New Quote started without Whitespace")
 					msgblock = MsgblockAddError(msgblock, msg)
 				}
 				startline = linenum
@@ -270,7 +272,8 @@ func TextblockParse(textblock *vxtextblock) (*vxtextblock, *vxmsgblock) {
 				state = BLOCKTYPE_QUOTE
 			case "`":
 				if len(word) > 0 {
-					msg := NewMsgFromTextblock(textblock, "New Block Quote started without Whitespace Line:", linenum)
+					msg := NewMsgFromTextblock(
+						textblock, linenum, charnum, "", "New Block Quote started without Whitespace Line")
 					msgblock = MsgblockAddError(msgblock, msg)
 				}
 				startline = linenum
@@ -279,11 +282,13 @@ func TextblockParse(textblock *vxtextblock) (*vxtextblock, *vxmsgblock) {
 				state = BLOCKTYPE_QUOTEBLOCK
 			case "(":
 				if lastchar == "\n" {
-					msg := NewMsgFromTextblock(textblock, "New Open Paren started without completed Close Paren Line:", linenum)
+					msg := NewMsgFromTextblock(
+						textblock, linenum, charnum, "", "New Open Paren started without completed Close Paren Line")
 					msgblock = MsgblockAddError(msgblock, msg)
 				}
 				if len(word) > 0 {
-					msg := NewMsgFromTextblock(textblock, "New Open Paren started without Whitespace Line:", linenum)
+					msg := NewMsgFromTextblock(
+						textblock, linenum, charnum, "", "New Open Paren started without Whitespace Line")
 					msgblock = MsgblockAddError(msgblock, msg)
 				}
 				blockstack = append(blockstack, phrase)
@@ -298,7 +303,8 @@ func TextblockParse(textblock *vxtextblock) (*vxtextblock, *vxmsgblock) {
 				state = BLOCKTYPE_PARENS
 			case "[":
 				if len(word) > 0 {
-					msg := NewMsgFromTextblock(textblock, "New [] started without Whitespace", linenum)
+					msg := NewMsgFromTextblock(
+						textblock, linenum, charnum, "", "New [] started without Whitespace")
 					msgblock = MsgblockAddError(msgblock, msg)
 				}
 				blockstack = append(blockstack, phrase)
@@ -313,7 +319,8 @@ func TextblockParse(textblock *vxtextblock) (*vxtextblock, *vxmsgblock) {
 				state = BLOCKTYPE_SQRBRACKETS
 			case "{":
 				if len(word) > 0 {
-					msg := NewMsgFromTextblock(textblock, "New {} started without Whitespace", linenum)
+					msg := NewMsgFromTextblock(
+						textblock, linenum, charnum, "", "New {} started without Whitespace")
 					msgblock = MsgblockAddError(msgblock, msg)
 				}
 				blockstack = append(blockstack, phrase)
@@ -348,14 +355,17 @@ func TextblockParse(textblock *vxtextblock) (*vxtextblock, *vxmsgblock) {
 					startchar = 0
 					state = phrase.blocktype
 				default:
-					msg := NewMsgFromTextblock(textblock, "Mismatched Delimiters: ", state, char, linenum, charnum)
-					msgblock = MsgblockAddError(msgblock, msg)
+					msg := NewMsgFromTextblock(
+						textblock, linenum, charnum, "Mismatched Delimiters", state, char)
+					msgblock = MsgblockAddError(
+						msgblock, msg)
 				}
 			default:
 				word += char
 				if lastchar == "/" && char == "*" {
 					if len(word) > 2 {
-						msg := NewMsgFromTextblock(textblock, "New Comment Block started without whitespace", linenum)
+						msg := NewMsgFromTextblock(
+							textblock, linenum, charnum, "", "New Comment Block started without whitespace")
 						msgblock = MsgblockAddError(msgblock, msg)
 					}
 					startline = linenum
@@ -387,7 +397,8 @@ func TextblockParse(textblock *vxtextblock) (*vxtextblock, *vxmsgblock) {
 			case BLOCKTYPE_SQRBRACKETS:
 				delim = "Square Brackets"
 			}
-			msg := NewMsgFromTextblock(textblock, "Mismatched Delimiter: ", delim)
+			msg := NewMsgFromTextblock(
+				textblock, linenum, charnum, "Mismatched Delimiter", delim)
 			msgblock = MsgblockAddError(msgblock, msg)
 		}
 	}

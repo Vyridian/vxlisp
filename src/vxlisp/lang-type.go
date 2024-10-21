@@ -621,7 +621,9 @@ func LangTypeInterface(
 	return output
 }
 
-func LangTypeIntValNew(lang *vxlang, val int) string {
+func LangTypeIntValNew(
+	lang *vxlang,
+	val int) string {
 	return LangPkgNameDot(lang, "vx/core") + "vx_new_int(" + StringFromInt(val) + ")"
 }
 

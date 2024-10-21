@@ -241,7 +241,7 @@ func ListPackageValidateLibraries(
 					lib.lang = prjlib.lang
 				} else {
 					msg := NewMsgFromTextblock(
-						pkg.textblock, "Package Path Not Found in Project", StringFromLibrary(lib))
+						pkg.textblock, 0, 0, "", "Package Path Not Found in Project", StringFromLibrary(lib))
 					msgblock = MsgblockAddError(msgblock, msg)
 				}
 			}
@@ -324,7 +324,8 @@ func PackageFromTextblock(
 		case "(":
 			listwordtextblock := subtextblock.listtextblock
 			if len(listwordtextblock) < 2 {
-				msg := NewMsgFromTextblock(subtextblock, "Empty Block Found")
+				msg := NewMsgFromTextblock(
+					subtextblock, 0, 0, "", "Empty Block Found")
 				msgblock = MsgblockAddError(msgblock, msg)
 			} else {
 				phrasetypeblock := listwordtextblock[0]
@@ -332,7 +333,8 @@ func PackageFromTextblock(
 				switch phrasetype {
 				case "package":
 					if pkgfound {
-						msg := NewMsgFromTextblock(subtextblock, "Invalid BlockType:", subtextblock.blocktype)
+						msg := NewMsgFromTextblock(
+							subtextblock, 0, 0, "", "Invalid BlockType", subtextblock.blocktype)
 						msgblock = MsgblockAddError(msgblock, msg)
 					} else {
 						pkgfound = true
@@ -348,7 +350,8 @@ func PackageFromTextblock(
 								switch prop {
 								case "package":
 								default:
-									msg := NewMsgFromTextblock(textblock, "Invalid Package:", prop)
+									msg := NewMsgFromTextblock(
+										textblock, 0, 0, "", "Invalid Package", prop)
 									msgblock = MsgblockAddError(msgblock, msg)
 								}
 							case 1:
@@ -372,7 +375,8 @@ func PackageFromTextblock(
 										case ":alias", ":doc", ":libs":
 											lastprop = prop
 										default:
-											msg := NewMsgFromTextblock(wordtextblock, "Invalid Keyword:", prop)
+											msg := NewMsgFromTextblock(
+												wordtextblock, 0, 0, "", "Invalid Keyword", prop)
 											msgblock = MsgblockAddError(msgblock, msg)
 										}
 									} else {
@@ -388,7 +392,8 @@ func PackageFromTextblock(
 											msgblock = MsgblockAddBlock(msgblock, msgs)
 											pkg.listlib = append(pkg.listlib, lib)
 										default:
-											msg := NewMsgFromTextblock(wordtextblock, "Invalid Keyword:", prop)
+											msg := NewMsgFromTextblock(
+												wordtextblock, 0, 0, "", "Invalid Keyword", prop)
 											msgblock = MsgblockAddError(msgblock, msg)
 										}
 									}
@@ -402,7 +407,8 @@ func PackageFromTextblock(
 					}
 				case "const":
 					if !pkgfound {
-						msg := NewMsgFromTextblock(subtextblock, "Const Found Before Package")
+						msg := NewMsgFromTextblock(
+							subtextblock, 0, 0, "", "Const Found Before Package")
 						msgblock = MsgblockAddError(msgblock, msg)
 					}
 					cnst, msgs := ConstFromTextblock(subtextblock, pkg)
@@ -410,7 +416,8 @@ func PackageFromTextblock(
 					pkg.listconst = append(pkg.listconst, cnst)
 				case "func":
 					if !pkgfound {
-						msg := NewMsgFromTextblock(subtextblock, "Func Found Before Package")
+						msg := NewMsgFromTextblock(
+							subtextblock, 0, 0, "", "Func Found Before Package")
 						msgblock = MsgblockAddError(msgblock, msg)
 					}
 					fnc, msgs := FuncFromTextblock(subtextblock, pkg)
@@ -418,19 +425,22 @@ func PackageFromTextblock(
 					pkg.listfunc = append(pkg.listfunc, fnc)
 				case "type":
 					if !pkgfound {
-						msg := NewMsgFromTextblock(subtextblock, "Type Found Before Package")
+						msg := NewMsgFromTextblock(
+							subtextblock, 0, 0, "", "Type Found Before Package")
 						msgblock = MsgblockAddError(msgblock, msg)
 					}
 					typ, msgs := TypeFromTextblock(subtextblock, pkg)
 					msgblock = MsgblockAddBlock(msgblock, msgs)
 					pkg.listtype = append(pkg.listtype, typ)
 				default:
-					msg := NewMsgFromTextblock(subtextblock, "Invalid Block Found", phrasetype)
+					msg := NewMsgFromTextblock(
+						subtextblock, 0, 0, "", "Invalid Block Found", phrasetype)
 					msgblock = MsgblockAddError(msgblock, msg)
 				}
 			}
 		default:
-			msg := NewMsgFromTextblock(subtextblock, "Invalid BlockType:", subtextblock.blocktype)
+			msg := NewMsgFromTextblock(
+				subtextblock, 0, 0, "", "Invalid BlockType:", subtextblock.blocktype)
 			msgblock = MsgblockAddError(msgblock, msg)
 		}
 	}

@@ -217,7 +217,8 @@ func PathFromTextblock(
 				switch prop {
 				case "path":
 				default:
-					msg := NewMsgFromTextblock(textblock, "paths may only contain (path):", prop)
+					msg := NewMsgFromTextblock(
+						textblock, 0, 0, "", "Paths may only contain (path)", prop)
 					msgblock = MsgblockAddError(msgblock, msg)
 				}
 			case 1:
@@ -236,14 +237,16 @@ func PathFromTextblock(
 					case ":doc", ":path":
 						lastprop = prop
 					default:
-						msg := NewMsgFromTextblock(textblock, "Invalid Path Keyword:", prop)
+						msg := NewMsgFromTextblock(
+							textblock, 0, 0, "", "Invalid Path Keyword", prop)
 						msgblock = MsgblockAddError(msgblock, msg)
 					}
 				}
 			}
 		}
 	default:
-		msg := NewMsgFromTextblock(textblock, "Invalid Paths definition:", textblock.blocktype)
+		msg := NewMsgFromTextblock(
+			textblock, 0, 0, "", "Invalid Paths definition", textblock.blocktype)
 		msgblock = MsgblockAddError(msgblock, msg)
 	}
 	return path, msgblock
@@ -393,7 +396,7 @@ func ProjectFromTextblock(
 		wordtextblocks := alltextblock.listtextblock
 		if alltextblock.blocktype != "(" {
 			msg := NewMsgFromTextblock(
-				textblock, "Invalid Project Blocktype")
+				textblock, 0, 0, "", "Invalid Project Blocktype")
 			msgblock = MsgblockAddError(msgblock, msg)
 		} else if len(wordtextblocks) > 0 {
 			firstwordtextblock := wordtextblocks[0]
@@ -401,7 +404,7 @@ func ProjectFromTextblock(
 			case "project":
 				if foundproject {
 					msg := NewMsgFromTextblock(
-						textblock, "Found more than 1 Project definition")
+						textblock, 0, 0, "", "Found more than 1 Project definition")
 					msgblock = MsgblockAddError(msgblock, msg)
 				} else {
 					foundproject = true
@@ -420,7 +423,8 @@ func ProjectFromTextblock(
 									case ":author", ":cmds", ":doc", ":javadomain", ":libs", ":paths", ":projects", ":version":
 										lastword = word
 									default:
-										msg := NewMsgFromTextblock(textblock, "Invalid Keyword:", word)
+										msg := NewMsgFromTextblock(
+											textblock, 0, 0, "", "Invalid Keyword", word)
 										msgblock = MsgblockAddError(msgblock, msg)
 									}
 								} else {
@@ -452,7 +456,7 @@ func ProjectFromTextblock(
 										prj.listpath = append(prj.listpath, path)
 									default:
 										msg := NewMsgFromTextblock(
-											textblock, "Invalid Project Property:", word)
+											textblock, 0, 0, "", "Invalid Project Property", word)
 										msgblock = MsgblockAddError(msgblock, msg)
 									}
 								}

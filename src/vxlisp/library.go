@@ -22,7 +22,8 @@ func NewMapLibrary() map[string]*vxlibrary {
 	return make(map[string]*vxlibrary)
 }
 
-func LibraryFromTextblock(textblock *vxtextblock) (*vxlibrary, *vxmsgblock) {
+func LibraryFromTextblock(
+	textblock *vxtextblock) (*vxlibrary, *vxmsgblock) {
 	msgblock := NewMsgBlock("LibraryFromTextblock")
 	library := NewLibrary()
 	switch textblock.blocktype {
@@ -35,7 +36,8 @@ func LibraryFromTextblock(textblock *vxtextblock) (*vxlibrary, *vxmsgblock) {
 				switch prop {
 				case "lib":
 				default:
-					msg := NewMsgFromTextblock(textblock, "Invalid Library definition:", textblock.blocktype)
+					msg := NewMsgFromTextblock(
+						textblock, 0, 0, "Invalid Library definition", textblock.blocktype)
 					msgblock = MsgblockAddError(msgblock, msg)
 				}
 			case 1:
@@ -47,7 +49,8 @@ func LibraryFromTextblock(textblock *vxtextblock) (*vxlibrary, *vxmsgblock) {
 					case ":lang", ":path", ":doc":
 						lastprop = prop
 					default:
-						msg := NewMsgFromTextblock(textblock, "Invalid Library definition:", textblock.blocktype)
+						msg := NewMsgFromTextblock(
+							textblock, 0, 0, "", "Invalid Library definition", textblock.blocktype)
 						msgblock = MsgblockAddError(msgblock, msg)
 					}
 				case ":doc":
@@ -63,13 +66,15 @@ func LibraryFromTextblock(textblock *vxtextblock) (*vxlibrary, *vxmsgblock) {
 			}
 		}
 	default:
-		msg := NewMsgFromTextblock(textblock, "Invalid Library definition:", textblock.blocktype)
+		msg := NewMsgFromTextblock(
+			textblock, 0, 0, "", "Invalid Library definition", textblock.blocktype)
 		msgblock = MsgblockAddError(msgblock, msg)
 	}
 	return library, msgblock
 }
 
-func ListLibraryFromMapLibrary(maplibrary map[string]*vxlibrary) []*vxlibrary {
+func ListLibraryFromMapLibrary(
+	maplibrary map[string]*vxlibrary) []*vxlibrary {
 	output := NewListLibrary()
 	for _, library := range maplibrary {
 		output = append(output, library)
