@@ -764,7 +764,7 @@ func LangNativeFuncLambdaHeader(
 		output = "[" + bindings + "](" + args + ") -> {"
 	case langcsharp:
 		output = "(" + args + ") => {"
-	case langjava:
+	case langjava, langjs:
 		output = "(" + args + ") -> {"
 	case langkotlin:
 		output = "{" + args + " ->"
@@ -941,6 +941,8 @@ func LangNativeIfClause(
 				sright = ""
 			}
 		}
+	default:
+		sop = " " + op + " "
 	}
 	output := "(" + sleft + sop + sright + ")"
 	return output
@@ -988,6 +990,8 @@ func LangNativeIsTypeText(
 	stype string) string {
 	output := ""
 	switch lang {
+	case langcpp:
+		output = "vx_core::vx_boolean_from_type_trait(" + svar + ", " + stype + ")"
 	case langcsharp, langkotlin:
 		output = svar + " is " + stype
 	case langjava:
@@ -1664,7 +1668,7 @@ func LangNativeTestLibLambda(
 			"(any) => {" +
 			"\n     	return any;" +
 			"\n    }"
-	case langjava:
+	case langjava, langjs:
 		output = "" +
 			"(any) -> {" +
 			"\n     	return any;" +
@@ -2096,7 +2100,7 @@ func LangNativeTypeNameFullSimple(
 		name = lang.pkgname + lang.pkgref + "Type_string"
 	case rawbooltype:
 		switch lang {
-		case langcsharp:
+		case langcpp, langcsharp:
 			name = "bool"
 		case langjava:
 			name = "boolean"
@@ -2105,14 +2109,14 @@ func LangNativeTypeNameFullSimple(
 		}
 	case rawbooleantype:
 		switch lang {
-		case langcsharp:
+		case langcpp, langcsharp:
 			name = "bool"
 		case langjava, langkotlin:
 			name = "Boolean"
 		}
 	case rawfloattype:
 		switch lang {
-		case langcsharp:
+		case langcpp, langcsharp:
 			name = "float"
 		case langjava:
 			name = "Float"
@@ -2130,7 +2134,7 @@ func LangNativeTypeNameFullSimple(
 		}
 	case rawintegertype:
 		switch lang {
-		case langcsharp:
+		case langcpp, langcsharp:
 			name = "int"
 		case langjava:
 			name = "Integer"
@@ -2139,6 +2143,8 @@ func LangNativeTypeNameFullSimple(
 		}
 	case rawlisttype:
 		switch lang {
+		case langcpp:
+			name = "std::vector<object>"
 		case langcsharp:
 			name = "List<object>"
 		case langjava:
@@ -2150,6 +2156,8 @@ func LangNativeTypeNameFullSimple(
 		name = "List<" + LangNativeTypeNameFullSimple(lang, anytype, true) + ">"
 	case rawmaptype:
 		switch lang {
+		case langcpp:
+			name = "std::map"
 		case langcsharp:
 			name = "Vx.Core.Map"
 		case langjava, langkotlin:
@@ -2157,6 +2165,8 @@ func LangNativeTypeNameFullSimple(
 		}
 	case rawlistunknowntype:
 		switch lang {
+		case langcpp:
+			name = "std::vector<object>"
 		case langcsharp:
 			name = "List<object>"
 		case langjava:
@@ -2167,7 +2177,7 @@ func LangNativeTypeNameFullSimple(
 	case rawmapanytype:
 		switch lang {
 		case langcpp:
-			name = "std::Map<std::string, " + LangNativeTypeNameFullSimple(lang, anytype, true) + ">"
+			name = "std::map<std::string, " + LangNativeTypeNameFullSimple(lang, anytype, true) + ">"
 		case langcsharp:
 			name = "Vx.Core.Map<string, " + LangNativeTypeNameFullSimple(lang, anytype, true) + ">"
 		default:
@@ -2175,6 +2185,8 @@ func LangNativeTypeNameFullSimple(
 		}
 	case rawobjecttype:
 		switch lang {
+		case langcpp:
+			name = "object"
 		case langcsharp:
 			name = "object"
 		case langkotlin:
@@ -2529,6 +2541,44 @@ func LangNativeVarAll(
 	output := LangIndent(lang, indent, true)
 	svalue := LangNativeVarValue(lang, vartype, varvalue)
 	switch lang {
+	case langcpp:
+		if isstatic {
+			output += "public static "
+		} else if isprop {
+			output += "public "
+		}
+		if isconst {
+			output += "final "
+		}
+		typetext := ""
+		switch vartype {
+		case rawlisttype:
+			typetext = "std::list<" + LangNameTypeFullFromType(lang, subtype) + ">"
+			if varvalue == ":new" {
+				svalue = "new std::list<" + LangNameTypeFullFromType(lang, subtype) + ">()"
+			}
+		case rawmaptype:
+			typetext = "std::map<std::string, " + LangNameTypeFullFromType(lang, subtype) + ">"
+			if varvalue == ":new" {
+				svalue = "new std::map<std::string, " + LangNameTypeFullFromType(lang, subtype) + ">()"
+			}
+		case rawlistunknowntype:
+			typetext = "std::list<?>"
+		default:
+			if isgeneric && vartype.isgeneric {
+				typetext = LangGenericFromType(lang, vartype)
+			} else {
+				typetext = LangNameTypeFullFromType(lang, vartype)
+			}
+		}
+		if isfuture {
+			typetext = lang.future + "<" + typetext + ">"
+		}
+		output += typetext + " " + varname
+		if svalue != "" {
+			output += " = " + svalue
+		}
+		output += lang.lineend
 	case langcsharp:
 		if isstatic {
 			output += "public static "
@@ -2716,7 +2766,7 @@ func LangNativeVarSet(
 	output += varname
 	output += " = " + varvalue
 	switch lang {
-	case langcsharp, langjava:
+	case langcpp, langcsharp, langjava:
 		output += lang.lineend
 	}
 	return output
@@ -2808,6 +2858,8 @@ func LangNativeVxListAdd(
 	output := ""
 	sindent := "\n" + StringRepeat("  ", indent)
 	switch lang {
+	case langcpp:
+		output = sindent + varname + ".push_back(" + value + ")" + lang.lineend
 	case langcsharp:
 		output = sindent + varname + ".Add(" + value + ")" + lang.lineend
 	default:
@@ -2828,6 +2880,22 @@ func LangNativeVxListAddList(
 		output = sindent + varname + ".AddRange(" + value + ")" + lang.lineend
 	default:
 		output = sindent + varname + ".addAll(" + value + ")" + lang.lineend
+	}
+	return output
+}
+
+func LangNativeVxListContains(
+	lang *vxlang,
+	varname string,
+	contains string) string {
+	output := ""
+	switch lang {
+	case langcpp:
+		output = "vx_core::vx_boolean_from_list_find(" + varname + ", " + contains + ")"
+	case langcsharp:
+		output = varname + ".Contains(" + contains + ")"
+	default:
+		output = varname + ".contains(" + contains + ")"
 	}
 	return output
 }

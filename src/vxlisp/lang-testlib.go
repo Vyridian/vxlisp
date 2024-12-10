@@ -370,7 +370,9 @@ func LangTestLib_test_async_from_async_fn(
 	fnc.vxtype = rawbooltype
 	slambda := LangNativeTestLibLambda(lang)
 	sasync1 := "" +
-		LangPkgNameDot(lang, "vx/core") + "vx_async_from_async_fn(async, " + slambda +
+		LangPkgNameDot(lang, "vx/core") +
+		"vx_async_from_async_fn(async, " +
+		slambda +
 		")"
 	output := "" +
 		LangFuncHeaderStatic(lang, "", fnc, 1, 0,

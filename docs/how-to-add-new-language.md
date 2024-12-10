@@ -152,6 +152,16 @@ The test/resources folder holder 3 important generated files, generated in order
 
 Use git (or other version control) to watch for changes to these files.
 
-12. Finishing Up vx/core - Once the test suite works, only debugging and maybe memory leaks remain.
+12. Test individual functions - Use the :filter tag to generate individual tests. The following :filter only creates test for (func is-error) in vx/core.
 
-13. Other projects - Now that you've finished vx/core, you may need native code in other projects as well.
+  (cmd testpython
+   :code    :test
+   :lang    :python
+   :path    ../build/python/src/test
+   :context vx/translation/en/context-test
+   :filter  vx/core/is-error
+   :doc     "Build Python Test Code")
+
+13. Finishing Up vx/core - Once the test suite works, only debugging and maybe memory leaks remain.
+
+14. Other projects - Now that you've finished vx/core, you may need native code in other projects as well.

@@ -672,9 +672,11 @@ func LangFuncLambda(
 	args string,
 	body string) string {
 	output := "" +
-		LangNativeFuncLambdaHeader(lang, indent, outputnum, bindings, args) +
+		LangNativeFuncLambdaHeader(
+			lang, indent, outputnum, bindings, args) +
 		body +
-		LangNativeFuncLambdaFooter(lang, indent, outputnum)
+		LangNativeFuncLambdaFooter(
+			lang, indent, outputnum)
 	return output
 }
 
@@ -729,7 +731,8 @@ func LangFuncLambdaArgIndex(
 				sanyfromfunc = LangPkgNameDot(lang, "vx/core") + "t_any_from_func_async" + lang.typeref
 			} else {
 				sanyfromfunc = LangPkgNameDot(lang, "vx/core") + "t_any_from_func" + lang.typeref
-				sfncvalue, msgs := LangFromValue(lang, lastarg.value, pkgname, fnc, indent+1, true, test, path)
+				sfncvalue, msgs := LangFromValue(
+					lang, lastarg.value, pkgname, fnc, indent+1, true, test, path)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
 				sreturnoutput = LangVar(lang, outputname, anytype, indent+1, sfncvalue)
 			}
@@ -739,19 +742,27 @@ func LangFuncLambdaArgIndex(
 			lastoutputname := "output_" + StringFromInt(lastoutputnum)
 			listarg := fnc.listarg
 			lastarg := listarg[len(listarg)-1]
-			sfncvalue, msgs := LangFromValue(lang, lastarg.value, pkgname, fnc, indent+2, true, test, path)
+			sfncvalue, msgs := LangFromValue(
+				lang, lastarg.value, pkgname, fnc, indent+2, true, test, path)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			g_ifuncdepth += 1
 			ioutputargnum := g_ifuncdepth
 			outputname := "output_" + StringFromInt(ioutputargnum)
-			lambdavaluetext, msgs := LangFromValue(lang, lambdaarg.value, pkgname, fnc, indent+1, true, test, argsubpath)
+			lambdavaluetext, msgs := LangFromValue(
+				lang, lambdaarg.value, pkgname, fnc, indent+1, true, test, argsubpath)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
-			svalueoutput := LangVar(lang, outputname, anytype, indent+2, sfncvalue)
+			svalueoutput := LangVar(
+				lang, outputname, anytype, indent+2, sfncvalue)
 			slambdarest := ""
-			work, msgs := LangFuncLambdaArgIndex(lang, listarglambda, indexarglambda+1, false, pkgname, fnc, argvalue, indent+1, test, path)
+			work, msgs := LangFuncLambdaArgIndex(
+				lang, listarglambda, indexarglambda+1, false, pkgname, fnc, argvalue, indent+1, test, path)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			slambdarest = work
-			sfuturevar := LangVarFuture(lang, "future_"+LangFromName(lambdaarg.name), lambdaarg.vxtype, indent+1,
+			sfuturevar := LangVarFuture(
+				lang,
+				"future_"+LangFromName(lambdaarg.name),
+				lambdaarg.vxtype,
+				indent+1,
 				lambdavaluetext)
 			lambdaargname := LangFromName(lambdaarg.name)
 			/*
@@ -776,13 +787,16 @@ func LangFuncLambdaArgIndex(
 				sfuturevar +
 				sfutureoutput
 		} else {
-			lambdavaluetext, msgs := LangFromValue(lang, lambdaarg.value, pkgname, fnc, indent+1, true, test, argsubpath)
+			lambdavaluetext, msgs := LangFromValue(
+				lang, lambdaarg.value, pkgname, fnc, indent+1, true, test, argsubpath)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			slambdarest := ""
-			work, msgs := LangFuncLambdaArgIndex(lang, listarglambda, indexarglambda+1, false, pkgname, fnc, argvalue, indent, test, path)
+			work, msgs := LangFuncLambdaArgIndex(
+				lang, listarglambda, indexarglambda+1, false, pkgname, fnc, argvalue, indent, test, path)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			slambdarest = work
-			slambdavar := LangVar(lang, LangFromName(lambdaarg.name), lambdaarg.vxtype, indent+1,
+			slambdavar := LangVar(
+				lang, LangFromName(lambdaarg.name), lambdaarg.vxtype, indent+1,
 				lambdavaluetext)
 			slambdavars +=
 				slambdavar +
@@ -1686,13 +1700,15 @@ func LangFuncVxRepl(
 	funcvxrepl.async = fnc.async
 	funcname := LangFromName(fnc.alias) + LangIndexFromFunc(fnc)
 	if isinterface {
-		output = LangFuncHeaderInterface(lang, funcname, funcvxrepl, 2)
+		output = LangFuncHeaderInterface(
+			lang, funcname, funcvxrepl, 2)
 	} else {
 		funcvxrepl.isimplement = true
 		replparams := ""
 		argidx := 0
 		var listargname []string
-		pkgname := LangNativePkgName(lang, fnc.pkgname)
+		pkgname := LangNativePkgName(
+			lang, fnc.pkgname)
 		outputtype := fnc.vxtype
 		outputttype := LangTypeTSimple(lang, fnc.vxtype, true)
 		if fnc.isgeneric {
@@ -1700,7 +1716,11 @@ func LangFuncVxRepl(
 			case "vx/core/copy", "vx/core/empty", "vx/core/new<-type":
 			default:
 				if fnc.generictype != nil {
-					replparam := LangVar(lang, "generic_"+LangFromName(fnc.generictype.name), fnc.vxtype, 3,
+					replparam := LangVar(
+						lang,
+						"generic_"+LangFromName(fnc.generictype.name),
+						fnc.vxtype,
+						3,
 						LangPkgNameDot(lang, "vx/core")+
 							"f_any_from_any("+
 							outputttype+
@@ -1709,13 +1729,19 @@ func LangFuncVxRepl(
 							StringFromInt(argidx)+
 							")))")
 					replparams += replparam
-					listargname = append(listargname, "generic_"+LangFromName(fnc.generictype.name))
+					listargname = append(
+						listargname, "generic_"+LangFromName(fnc.generictype.name))
 				}
 			}
 		}
 		if fnc.context {
-			listargname = append(listargname, "context")
-			replparam := LangVar(lang, "context", contexttype, 3,
+			listargname = append(
+				listargname, "context")
+			replparam := LangVar(
+				lang,
+				"context",
+				contexttype,
+				3,
 				LangPkgNameDot(lang, "vx/core")+
 					"f_any_from_any("+
 					LangTypeT(lang, contexttype)+

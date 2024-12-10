@@ -69,13 +69,25 @@ To improve the art. I find most languages to have ugly, confusing syntax, and po
     (type person : struct
      :properties
       [firstname : string
-       lastname  : string]
+       lastname  : string
+       nicknames : stringlist
+       childmap  : personmap]
      :doc "A type/template/class/structure representing a person.")
+
+    (type personmap : map
+     :allowtypes [person]
+     :doc "A map of person")
 
     (const johndoe : person
      (person
       :firstname "John"
-      :lastname  "Doe")
+      :lastname  "Doe"
+      :nicknames
+       (stringlist "JD" "J Doe")
+      :childmap
+       (personmap
+        :julie
+         (person :firstname "Julie" :lastname "Doe")))
      :doc "A constant representing a particular person.")
 
     (func fullname : string
