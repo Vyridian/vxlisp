@@ -98,9 +98,9 @@
     return output
   }
 
-  fun arrayany_from_anylist(
+  fun vx_arrayany_from_anylist(
     list : vx_core.Type_anylist) : Array<vx_core.Type_any> {
-    val listany : List<vx_core.Type_any> = list.vx_list()
+    var listany : List<vx_core.Type_any> = list.vx_list()
     val output : Array<vx_core.Type_any> = listany.toTypedArray()
     return output
   }
@@ -261,7 +261,7 @@
     var output : T = vx_core.f_empty(generic_any_1)
     var skey : String = key.vx_string()
     if (skey.startsWith(":")) {
-      skey = skey.substring(1);
+      skey = skey.substring(1)
     }
     val value : vx_core.Type_any = valuemap.vx_map().getOrDefault(
       skey, output
@@ -794,14 +794,42 @@
     return output
   }
 
+  // vx_msgblock_from_any(any)
+  fun vx_msgblock_from_any(
+    value : vx_core.Type_any) : vx_core.Type_msgblock {
+    val output : vx_core.Type_msgblock = value.vx_msgblock()
+    return output
+  }
+
   // vx_msgblock_from_copy_arrayval(msgblock, any...)
   fun vx_msgblock_from_copy_arrayval(
     copy : vx_core.Type_any,
-    vararg vals : Any) : vx_core.Type_msgblock {
+    values : Array<out Any>) : vx_core.Type_msgblock {
     var output : vx_core.Type_msgblock = vx_core.e_msgblock
-    val copymsgblock : vx_core.Type_msgblock = copy.vx_msgblock()
-    if (copymsgblock != vx_core.e_msgblock) {
-      output = copymsgblock
+    val listmsgblock : MutableList<vx_core.Type_msgblock> = mutableListOf()
+    val msgblock : vx_core.Type_msgblock = copy.vx_msgblock()
+    if (msgblock != vx_core.e_msgblock) {
+      listmsgblock.add(msgblock)
+    }
+    for (subobj : Any in values) {
+      if (subobj is vx_core.Type_any) {
+        val subval : vx_core.Type_any = subobj as vx_core.Type_any
+        val submsgblock : vx_core.Type_msgblock = subval.vx_msgblock()
+        if (submsgblock != vx_core.e_msgblock) {
+          listmsgblock.add(submsgblock)
+        }
+      }
+    }
+    val size : Int = listmsgblock.size
+    if (size == 0) {
+    } else if (size == 1) {
+      output = listmsgblock.get(0)
+    } else {
+      val msgblocks : vx_core.Class_msgblocklist = vx_core.Class_msgblocklist()
+      msgblocks.vx_p_list = listmsgblock.toList()
+      val outputclass : vx_core.Class_msgblock = vx_core.Class_msgblock()
+      outputclass.vx_p_msgblocks = msgblocks
+      output = outputclass
     }
     return output
   }
@@ -1033,7 +1061,7 @@
         generic_map_1, mapnew
       )
     }
-    return output;
+    return output
   }
 
   fun vx_new_boolean(
@@ -1103,14 +1131,16 @@
   }
 
   fun vx_string_from_any(
-    value : vx_core.Type_any) : String {
+    value : vx_core.Type_any
+  ) : String {
     return vx_string_from_any_indent(value, 0, false)
   }
 
   fun vx_string_from_any_indent(
     value : vx_core.Type_any,
     indent : Int,
-    linefeed : Boolean) : String {
+    linefeed : Boolean
+  ) : String {
     val indenttext : String = " ".repeat(indent)
     var output : String = ""
     if (indent > 50) {
@@ -1126,18 +1156,33 @@
         val typedef : vx_core.Type_typedef = value.vx_typedef()
         output = typedef.pkgname().vx_string() + "/" + typedef.name().vx_string()
       }
+    } else if (value.vx_constdef() != vx_core.e_constdef) {
+      val constdef : vx_core.Type_constdef = value.vx_constdef()
+      val constpkg : String = constdef.pkgname().vx_string()
+      val constname : String = constdef.name().vx_string()
+      if (constpkg.equals("vx/core")) {
+        output = constname
+      } else {
+        output = constpkg + "/" + constname
+      }
     } else if (value is vx_core.Type_boolean) {
-      val valbool : vx_core.Type_boolean = vx_core.f_any_from_any(vx_core.t_boolean, value)
+      val valbool : vx_core.Type_boolean = vx_core.f_any_from_any(
+        vx_core.t_boolean, value
+      )
       if (valbool.vx_boolean() == true) {
         output = "true"
       } else {
         output = "false"
       }
     } else if (value is vx_core.Type_decimal) {
-      val valdec : vx_core.Type_decimal = vx_core.f_any_from_any(vx_core.t_decimal, value)
+      val valdec : vx_core.Type_decimal = vx_core.f_any_from_any(
+        vx_core.t_decimal, value
+      )
       output = valdec.vx_string()
     } else if (value is vx_core.Type_float) {
-      val valfloat : vx_core.Type_float = vx_core.f_any_from_any(vx_core.t_float, value)
+      val valfloat : vx_core.Type_float = vx_core.f_any_from_any(
+        vx_core.t_float, value
+      )
       output = valfloat.vx_float().toString()
       if (output.endsWith(".0")) {
         output = output.substring(0, output.length - 2)
@@ -1150,11 +1195,15 @@
       } else if (value == vx_core.c_neginfinity) {
         output = "neginfinity"
       } else {
-        val valint : vx_core.Type_int = vx_core.f_any_from_any(vx_core.t_int, value)
+        val valint : vx_core.Type_int = vx_core.f_any_from_any(
+          vx_core.t_int, value
+        )
         output = Integer.toString(valint.vx_int())
       }
     } else if (value is vx_core.Type_string) {
-      val valstring : vx_core.Type_string = vx_core.f_any_from_any(vx_core.t_string, value)
+      val valstring : vx_core.Type_string = vx_core.f_any_from_any(
+        vx_core.t_string, value
+      )
       var sval : String = valstring.vx_string()
       if (sval.indexOf("\"") < 0) {
         sval = "\"" + sval + "\""
@@ -1171,37 +1220,35 @@
       } else {
         output = sval
       }
-    } else if (value.vx_constdef() != vx_core.e_constdef) {
-      val constdef : vx_core.Type_constdef = value.vx_constdef()
-      val constpkg : String = constdef.pkgname().vx_string()
-      val constname : String = constdef.name().vx_string()
-      if (constpkg.equals("vx/core")) {
-        output = constname
-      } else {
-        output = constpkg + "/" + constname
-      }
     } else if (value is vx_core.Type_list) {
-      val vallist : vx_core.Type_list = vx_core.f_any_from_any(vx_core.t_list, value)
+      val vallist : vx_core.Type_list = vx_core.f_any_from_any(
+        vx_core.t_list, value
+      )
       val typedef : vx_core.Type_typedef = vallist.vx_typedef()
       val typedefname : vx_core.Type_string = typedef.name()
-      var indentint : Int = indent
-      indentint += 1
+      val indentint : Int = indent + 1
       val listval : List<vx_core.Type_any> = vallist.vx_list()
       for (valsub : vx_core.Type_any in listval) {
-        val valtext : String = vx_core.vx_string_from_any_indent(valsub, indentint, linefeed)
+        val valtext : String = vx_core.vx_string_from_any_indent(
+          valsub, indentint, linefeed
+        )
         output += "\n " + indenttext + valtext
       }
       if (vallist.vx_msgblock() != vx_core.e_msgblock) {
-        val msgtext : String = vx_core.vx_string_from_any_indent(vallist.vx_msgblock(), indentint, linefeed)
+        val msgtext : String = vx_core.vx_string_from_any_indent(
+          vallist.vx_msgblock(), indentint + 1, linefeed
+        )
         output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext
       }
       output = "(" + typedefname.vx_string() + output + ")"
     } else if (value is vx_core.Type_map) {
-      val valmap : vx_core.Type_map = vx_core.f_any_from_any(vx_core.t_map, value)
+      val valmap : vx_core.Type_map = vx_core.f_any_from_any(
+        vx_core.t_map, value
+      )
       val typedef : vx_core.Type_typedef = valmap.vx_typedef()
       val typedefname : vx_core.Type_string = typedef.name()
-      var indentint : Int = indent
-      indentint += 2
+      val stypedefname : String = typedefname.vx_string()
+      val indentint : Int = indent + 2
       val mapval : Map<String, vx_core.Type_any> = valmap.vx_map()
       val keys : Set<String> = mapval.keys
       for (skey : String in keys) {
@@ -1222,7 +1269,9 @@
         }
         output += "\n" + indenttext + " " + key + strval
       }
-      if (valmap.vx_msgblock() != vx_core.e_msgblock) {
+      if (stypedefname == "msg") {
+      } else if (stypedefname == "msgblock") {
+      } else if (valmap.vx_msgblock() != vx_core.e_msgblock) {
         val msgtext : String = vx_core.vx_string_from_any_indent(
           valmap.vx_msgblock(), indentint, linefeed
         )
@@ -1289,7 +1338,8 @@
   fun vx_string_from_any_indent(
     value : vx_core.Type_any,
     indent : vx_core.Type_int,
-    linefeed : vx_core.Type_boolean) : vx_core.Type_string {
+    linefeed : vx_core.Type_boolean
+  ) : vx_core.Type_string {
     val soutput : String = vx_core.vx_string_from_any_indent(
       value,
       indent.vx_int(),
@@ -1302,7 +1352,8 @@
   fun vx_string_from_string_find_replace(
     text : String,
     find : String,
-    replace : String) : String {
+    replace : String
+  ) : String {
     val output : String = text.replace(find, replace)
     return output
   }
@@ -1311,7 +1362,8 @@
   fun vx_string_from_string_find_replace(
     text : vx_core.Type_string,
     find : vx_core.Type_string,
-    replace : vx_core.Type_string) : vx_core.Type_string {
+    replace : vx_core.Type_string
+  ) : vx_core.Type_string {
     val stext : String = vx_core.vx_string_from_string_find_replace(
       text.vx_string(), find.vx_string(), replace.vx_string()
     )

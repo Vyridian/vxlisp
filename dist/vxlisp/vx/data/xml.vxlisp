@@ -504,10 +504,12 @@
     tb))
   (else
    (let : xml
-    [children : tb/textblocklist := (:children tb)
-     xmlchg   : xml              := (xml
-                                     :tag    :notag
-                                     :parent xmlarg)]
+    [children : tb/textblocklist :=
+      (:children tb)
+     xmlchg : xml :=
+      (xml
+       :tag    :notag
+       :parent xmlarg)]
     (xml-properties<-xml-textblocklist
      xmlchg
      children))))
@@ -700,7 +702,7 @@
             :endpos 0
             :line 0
             :column 0)
-          :severity 2))
+          :severity msg-error))
         (xml-close<-xml-textblock
          (xml
           :tag "doc")

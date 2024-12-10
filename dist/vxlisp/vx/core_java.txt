@@ -93,21 +93,6 @@
     return output;
   }
 
-  public static Core.Type_any[] arrayany_from_anylist(
-    final Core.Type_anylist list
-  ) {
-    List<Core.Type_any> listany = list.vx_list();
-    Core.Type_msgblock msgblock = list.vx_msgblock();
-    if (msgblock == null) {
-    } else if (msgblock == Core.e_msgblock) {
-    } else {
-     listany = new ArrayList<>(listany);
-     listany.add(msgblock);
-    }
-    Core.Type_any[] output = listany.toArray(new Core.Type_any[0]);
-    return output;
-  }
-
   @SafeVarargs
   public static <T> List<T> arraylist_from_array(
     final T... items
@@ -210,6 +195,14 @@
         Core.vx_log("map<-map", ex);
       }
     }
+    return output;
+  }
+
+  public static Core.Type_any[] vx_arrayany_from_anylist(
+    final Core.Type_anylist list
+  ) {
+    List<Core.Type_any> listany = list.vx_list();
+    Core.Type_any[] output = listany.toArray(new Core.Type_any[0]);
     return output;
   }
 
@@ -799,15 +792,47 @@
     return output;
   }
 
+  // vx_msgblock_from_any(any)
+  public static Core.Type_msgblock vx_msgblock_from_any(
+    Core.Type_any value
+  ) {
+    Core.Type_msgblock output = value.vx_msgblock();
+    return output;
+  }
+
   // vx_msgblock_from_copy_arrayval(msgblock, any...)
   public static Core.Type_msgblock vx_msgblock_from_copy_arrayval(
     final Core.Type_any copy,
-    final Object... vals
+    final Object... values
   ) {
     Core.Type_msgblock output = Core.e_msgblock;
-    Core.Type_msgblock copymsgblock = copy.vx_msgblock();
-    if (copymsgblock != Core.e_msgblock) {
-      output = copymsgblock;
+    Core.Type_msgblock msgblock = copy.vx_msgblock();
+    List<Core.Type_msgblock> listmsgblock = new ArrayList<Core.Type_msgblock>();
+    if (msgblock != Core.e_msgblock) {
+      listmsgblock.add(msgblock);
+    }
+    for (Object subobj : values) {
+      if (subobj instanceof Core.Type_any) {
+        Core.Type_any subval = (Core.Type_any)subobj;
+        Core.Type_msgblock submsgblock = subval.vx_msgblock();
+        if (submsgblock != Core.e_msgblock) {
+          listmsgblock.add(submsgblock);
+        }
+      }
+    }
+    switch (listmsgblock.size()) {
+    case 0:
+      break;
+    case 1:
+      output = listmsgblock.get(0);
+      break;
+    default:
+      Core.Class_msgblocklist msgblocks = new Core.Class_msgblocklist();
+      msgblocks.vx_p_list = listmsgblock;
+      Core.Class_msgblock work = new Core.Class_msgblock();
+      work.vx_p_msgblocks = msgblocks;
+      output = work;
+      break;
     }
     return output;
   }
@@ -815,36 +840,36 @@
   // vx_msgblock_from_copy_listval(msgblock, List<any>)
   public static Core.Type_msgblock vx_msgblock_from_copy_listval(
     final Core.Type_msgblock msgblock,
-    final Core.Type_any... vals
+    final Core.Type_any... values
   ) {
     Core.Type_msgblock output = Core.e_msgblock;
     List<Core.Type_msgblock> listmsgblock = new ArrayList<>();
-    if (msgblock == null) {
-    } else if (msgblock == Core.e_msgblock) {
-    } else {
-      Core.Type_msgblock origmsgblock = msgblock.vx_msgblock();
-      if (origmsgblock != Core.e_msgblock) {
-        List<Core.Type_msgblock> origlistmsgblock = origmsgblock.msgblocks().vx_listmsgblock();
+    if (msgblock != Core.e_msgblock) {
+      Core.Type_msgblocklist msgblocks = msgblock.msgblocks();
+      if (msgblocks != Core.e_msgblocklist) {
+        List<Core.Type_msgblock> origlistmsgblock = msgblocks.vx_listmsgblock();
         listmsgblock.addAll(origlistmsgblock);
       }
     }
-    for (Core.Type_any subval : vals) {
+    for (Core.Type_any subval : values) {
       Core.Type_msgblock submsgblock = subval.vx_msgblock();
       if (submsgblock != Core.e_msgblock) {
         listmsgblock.add(submsgblock);
       }
     }
-    if (listmsgblock.size() > 0) {
-      Core.Class_msgblocklist msgblocks;
-      msgblocks = new Core.Class_msgblocklist();
+    switch (listmsgblock.size()) {
+    case 0:
+      break;
+    case 1:
+      output = listmsgblock.get(0);
+      break;
+    default:
+      Core.Class_msgblocklist msgblocks = new Core.Class_msgblocklist();
       msgblocks.vx_p_list = listmsgblock;
       Core.Class_msgblock outputclass = new Core.Class_msgblock();
       outputclass.vx_p_msgblocks = msgblocks;
       output = outputclass;
-    } else if (msgblock == null) {
-    } else if (msgblock == Core.e_msgblock) {
-    } else {
-      output = msgblock;
+      break;
     }
     return output;
   }
@@ -1099,8 +1124,8 @@
           output += "\n" + indenttext + " " + key + strval2;
         }
       }
-      if (stypedefname == "msg") {
-      } else if (stypedefname == "msgblock") {
+      if (stypedefname.equals("msg")) {
+      } else if (stypedefname.equals("msgblock")) {
       } else if (valstruct.vx_msgblock() != Core.e_msgblock) {
         String msgtext2 = Core.vx_string_from_any_indent(
           valstruct.vx_msgblock(), indent+1, linefeed

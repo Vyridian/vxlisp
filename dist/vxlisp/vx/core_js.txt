@@ -1,6 +1,9 @@
   // vx_any_from_func(generic_any_1, func, args...)
   static vx_any_from_func(
-    generic_any_1, func, ...args) {
+    generic_any_1,
+    func,
+    ...args
+  ) {
     let output = vx_core.vx_empty(generic_any_1)
     const funcdef = func['vx_value']
     if (funcdef) {
@@ -12,7 +15,11 @@
 
   // vx_any_from_map_start_reduce(any-1, map-2, any-1, any<-any-key-value)
   static vx_any_from_map_start_reduce(
-    generic_any_1, map, start, fn_reduce) {
+    generic_any_1,
+    map,
+    start,
+    fn_reduce
+  ) {
     let output = start
     const fn = fn_reduce['vx_value']
     if (fn) {
@@ -27,25 +34,34 @@
 
   // vx_boolean_from_string_ends(string, string)
   static vx_boolean_from_string_ends(
-    text, ends) {
+    text,
+    ends
+  ) {
     return text.endsWith(ends)
   }
 
   // vx_boolean_from_string_find(string, string)
   static vx_boolean_from_string_find(
-    text, find) {
+    text,
+    find
+  ) {
     return text.includes(find)
   }
 
   // vx_boolean_from_string_starts(string, string)
   static vx_boolean_from_string_starts(
-    text, starts) {
+    text,
+    starts
+  ) {
     return text.startsWith(starts);
   }
 
   // vx_boolean_write_from_map_name_value(map-1, string, any-1)
   static vx_boolean_write_from_map_name_value(
-    valuemap, name, value) {
+    valuemap,
+    name,
+    value
+  ) {
     let output = vx_core.c_true
     const mapany = valuemap['vx_value']
     let key = name
@@ -64,7 +80,8 @@
   static vx_constdef_new(
     pkgname,
     name,
-    type) {
+    type
+  ) {
     let output = {
       vx_type: vx_core.t_constdef,
       vx_value: {
@@ -78,7 +95,8 @@
 
   // vx_constdef<-any(any)
   static vx_constdef_from_any(
-    value) {
+    value
+  ) {
     let output = vx_core.e_constdef
     switch (value) {
     case vx_core.c_false:
@@ -99,7 +117,8 @@
   }
 
   static vx_empty(
-    type) {
+    type
+  ) {
     const typedef = vx_core.f_typedef_from_type(type)
     const pkgname = typedef['vx_value'].pkgname
     const typename = typedef['vx_value'].name
@@ -113,7 +132,10 @@
     return output
   }
 
-  static vx_eq(val1, val2) {
+  static vx_eq(
+    val1,
+    val2
+  ) {
     const native1 = vx_core.f_native_from_any(val1)
     const native2 = vx_core.f_native_from_any(val2)
     let output = true
@@ -154,14 +176,17 @@
     return output
   }
 
-  static vx_float_from_string(text) {
-   let output = 0
-   output = parseFloat(text)
-   return output
+  static vx_float_from_string(
+    text
+  ) {
+    const output = parseFloat(text)
+    return output
   }
 
   // vx_global_package_set(package)
-  static vx_global_package_set(pkg) {
+  static vx_global_package_set(
+    pkg
+  ) {
     const global = vx_core.c_global
     let globalvalue = global['vx_value']
     if (globalvalue == undefined) {
@@ -182,7 +207,9 @@
   }
 
   // vx_is_float(any)
-  static vx_is_float(value) {
+  static vx_is_float(
+    value
+  ) {
     let output = false
     const typename = vx_core.f_typename_from_any(value)
     switch (typename) {
@@ -205,7 +232,9 @@
   }
 
   // vx_is_int(any)
-  static vx_is_int(value) {
+  static vx_is_int(
+    value
+  ) {
     let output = false
     switch (value) {
     case vx_core.c_infinity:
@@ -247,7 +276,10 @@
   }
 
   static vx_list_from_list_intany(
-    generic_list_1, valuelist, fn_any_from_int_any) {
+    generic_list_1,
+    valuelist,
+    fn_any_from_int_any
+  ) {
     let output = vx_core.f_empty(generic_list_1)
     const fn = fn_any_from_int_any['vx_value']
     if (fn) {
@@ -264,7 +296,9 @@
 
   static vx_list_from_map_fn(
     generic_list_1,
-    valuemap,fn_any_from_key_value) {
+    valuemap,
+    fn_any_from_key_value
+  ) {
     let output = vx_core.f_empty(generic_list_1)
     const fn = fn_any_from_key_value['vx_value']
     if (fn) {
@@ -278,7 +312,8 @@
   static vx_map_from_map_fn(
     generic_map_1,
     valuemap,
-    fn_any_from_key_value) {
+    fn_any_from_key_value
+  ) {
     let output = vx_core.f_empty(generic_map_1)
     const fn = fn_any_from_key_value['vx_value']
     if (fn) {
@@ -298,13 +333,66 @@
           values.push(chgvalue)
         }
       }
-      output = vx_core.f_new_from_type(generic_map_1, ...values)
+      output = vx_core.f_new_from_type(
+        generic_map_1, ...values)
     }
     return output
   }
 
+  // vx_msgblock_from_any(any)
+  static vx_msgblock_from_any(
+    value
+  ) {
+    let output = vx_core.e_msgblock
+    if (typeof value == 'object') {
+      const msgblock = value['vx_msgblock']
+      if (msgblock) {
+        output = msgblock
+      }
+    }
+    return output
+  }
+
+  // vx_msgblock_from_copy_listval(any, listany)
+  static vx_msgblock_from_copy_listval(
+    copy,
+    values
+  ) {
+    let output = vx_core.e_msgblock
+    let msgblock = vx_core.vx_msgblock_from_any(copy)
+    const listmsgblock = []
+    if (msgblock != vx_core.e_msgblock) {
+      listmsgblock.push(msgblock)
+    }
+    for (const subobj of values) {
+      const submsgblock = vx_core.vx_msgblock_from_any(subobj)
+      if (submsgblock != vx_core.e_msgblock) {
+        listmsgblock.push(submsgblock)
+      }
+    }
+    switch (listmsgblock.length) {
+    case 0:
+      break
+    case 1:
+      output = listmsgblock[0]
+      break
+    default:
+      const msgblocks = listmsgblock
+      msgblocks['vx_type'] = vx_core.t_msgblocklist
+      const work = {}
+      work['vx_type'] = vx_core.t_msgblock
+      work['vx_value'] = {msgblocks: msgblocks}
+      output = work
+      break
+    }
+    return output
+  }
+
+  // vx_new(any, listany)
   static vx_new(
-    type, values) {
+    type,
+    values
+  ) {
     let output
     if (values.length == 1) {
       // check if anylist passed as the only value
@@ -317,7 +405,7 @@
     }
     const typedef = vx_core.f_typedef_from_any(type)
     const copy = type
-    let msgblock = vx_core.e_msgblock
+    let msgblock = vx_core.vx_msgblock_from_copy_listval(copy, values)
     let isfirst = true
     switch (typedef) {
     case vx_core.t_boolean:
@@ -558,6 +646,87 @@
         }
       }
       break
+    case vx_core.t_decimal:
+      let vxdecimal = "0.0"
+      if (type == vx_core.t_decimal) {
+      } else if ((typeof copy) == 'number') {
+        vxdecimal = "" + copy
+      } else if ((typeof copy) == 'string') {
+        vxdecimal = "" + copy
+      } else if ((typeof copy) == 'string') {
+        vxdecimal = "" + copy
+      } else {
+        const copytype = vx_core.f_type_from_any(copy)
+        switch (copytype) {
+        case vx_core.t_int:
+        case vx_core.t_float:
+          vxdecimal = "" + copy['vx_value']
+          break
+        case vx_core.t_decimal:
+          vxdecimal = copy['vx_value']
+          break
+        case vx_core.t_string:
+          vxdecimal = copy['vx_value']
+          break
+        }
+      }
+      values.map(value => {
+        switch (typeof value) {
+        case 'number':
+          if (isfirst) {
+            isfirst = false
+            vxdecimal = "" + value
+          } else {
+            vxdecimal = "" + value
+          }
+          break
+        case 'string':
+          value = parseFloat(value)
+          if (isfirst) {
+            isfirst = false
+            vxdecimal = "" + value
+          } else {
+            vxdecimal = "" + value
+          }
+          break
+        default:
+         const valuetype = vx_core.f_type_from_any(value)
+         switch (valuetype) {
+          case vx_core.t_int:
+          case vx_core.t_float:
+            vxdecimal = "" + value['vx_value']
+            break
+          case vx_core.t_string:
+            vxdecimal = "" + parseFloat(value['vx_value'])
+            break
+          case vx_core.t_msgblock:
+            msgblock = value
+            break
+          case vx_core.t_msg:
+            msgblock = vx_core.f_msgblock_from_msgblock_msg(msgblock, value)
+            break
+          default:
+            const typename = vx_core.f_typename_from_typedef(typedef)
+            const msg = vx_core.f_msg_from_error_2(
+              'vx/core/new',
+              'invalidvalue',
+              vx_core.vx_new_map(vx_core.t_anymap, {
+                type: type,
+                value: vx_core.vx_string_from_any(value)
+              })
+            )
+            msgblock = vx_core.f_msgblock_from_msgblock_msg(msgblock, msg)
+            break
+          }
+          break
+        }
+      })
+      output = {
+        vx_type: typedef,
+        vx_value: vxdecimal,
+        vx_msgblock: msgblock
+      }
+      break
     case vx_core.t_string:
       output = ''
       if (type == vx_core.t_string) {
@@ -609,7 +778,9 @@
                 value: vx_core.vx_string_from_any(value)
               })
             )
-            msgblock = vx_core.f_msgblock_from_msgblock_msg(msgblock, msg)
+            msgblock = vx_core.f_msgblock_from_msgblock_msg(
+              msgblock, msg
+            )
             break
           }
           break
@@ -716,8 +887,19 @@
             listvals.push(...value)
             isfound = true
           } else if (allowtypes.includes(valuetype)) {
-            listvals.push(value)
-            isfound = true
+            switch (type) {
+            case vx_core.t_msglist:
+            case vx_core.t_msgblocklist:
+              if (!listvals.includes(value)) {
+                listvals.push(value)
+              }
+              isfound = true
+              break
+            default:
+              listvals.push(value)
+              isfound = true
+              break
+            }
           } else {
             switch (valuetype) {
             case vx_core.t_msgblock:
@@ -1052,20 +1234,26 @@
   }
 
   static vx_new_1(
-    generic_any_1, values) {
+    generic_any_1,
+    values
+  ) {
     let output = vx_core.vx_new(generic_any_1, values)
     return output
   }
 
   static vx_new_list(
-    type, listvalue) {
+    type,
+    listvalue
+  ) {
     const output = listvalue.slice()
     output['vx_type'] = type
     return output
   }
 
   static vx_new_map(
-    type, mapvalue) {
+    type,
+    mapvalue
+  ) {
     const output = {
       vx_type: type,
       vx_value: mapvalue
@@ -1074,7 +1262,9 @@
   }
 
   static vx_new_struct(
-    type, mapvalue) {
+    type,
+    mapvalue
+  ) {
     const output = {
       vx_type: type,
       vx_value: mapvalue
@@ -1083,13 +1273,19 @@
   }
 
   static vx_string_from_any(
-    value) {
-    const output = vx_core.vx_string_from_any_indent(value, 0, false)
+    value
+  ) {
+    const output = vx_core.vx_string_from_any_indent(
+      value, 0, false
+    )
     return output
   }
 
   static vx_string_from_any_indent(
-    value, indent, linefeed) {
+    value,
+    indent,
+    linefeed
+  ) {
     let output = ''
     const indenttext = ' '.repeat(indent)
     let text = ''
@@ -1118,9 +1314,6 @@
           text = 'false'
         }
         break
-      case vx_core.t_decimal:
-        text = '' + value
-        break
       case vx_core.t_float:
         text = '' + value
         if (text.endsWith('.0')) {
@@ -1141,6 +1334,16 @@
       case vx_core.t_string:
         text = value.replaceAll("\"", "\\\"")
         text = '\"' + text + '\"'
+        break
+      case vx_core.t_decimal:
+        text = '' + value['vx_value']
+        if (value['vx_msgblock'] != null) {
+          const msgtext = vx_core.vx_string_from_any_indent(
+            value['vx_msgblock'], indent, linefeed
+          )
+          text += '\n ' + indenttext + msgtext
+        }
+        text = '(decimal ' + text + ')'
         break
       default:
         const typedefname = typedef['vx_value']['name']
@@ -1211,12 +1414,20 @@
 
   // vx_string_from_string_find_replace(string, string, string)
   static vx_string_from_string_find_replace(
-    text, find, replace) {
+    text,
+    find,
+    replace
+  ) {
     const output = text.replaceAll(find, replace);
     return output;
   }
 
-  static vx_string_from_string_start_end(text, start, end) {
+  // vx_string_from_string_start_end(string, int, int)
+  static vx_string_from_string_start_end(
+    text,
+    start,
+    end
+  ) {
     let output = ""
     const maxlen = text.length
     if (end < 0) {

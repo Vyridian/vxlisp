@@ -287,6 +287,10 @@ let-async
     vx_core::Type_list values,
     vx_core::Func_any_from_any fn_any_from_any);
 
+  // vx_listany_from_anylist(anylist)
+  vx_core::vx_Type_listany vx_listany_from_anylist(
+    vx_core::Type_anylist values);
+
   // vx_listany_from_listany_fn(List<any>, (Function (any) : any))
   vx_core::vx_Type_listany vx_listany_from_listany_fn(
     vx_core::vx_Type_listany list_any,
@@ -370,6 +374,10 @@ let-async
   vx_core::Type_msg vx_msg_from_exception(
     const std::string text,
     std::exception err);
+
+  // vx_msgblock_from_any(any)
+  vx_core::Type_msgblock vx_msgblock_from_any(
+    vx_core::Type_any value);
 
   // vx_msgblock_from_copy_listval(msgblock, List<any>)
   vx_core::Type_msgblock vx_msgblock_from_copy_listval(
@@ -1037,10 +1045,19 @@ let-async
   vx_core::Type_constdef vx_constdef_new(
     std::string pkgname,
     std::string name,
-    vx_core::Type_any typ) {
+    vx_core::Type_any typ
+  ) {
     vx_core::Type_constdef output = new vx_core::Class_constdef();
-    output->vx_p_pkgname = vx_core::vx_new_string(pkgname);
-    output->vx_p_name = vx_core::vx_new_string(name);
+    vx_core::Type_string valpkgname = vx_core::vx_new_string(
+      pkgname
+    );
+    vx_core::vx_reserve(valpkgname);
+    vx_core::Type_string valname = vx_core::vx_new_string(
+      name
+    );
+    vx_core::vx_reserve(valname);
+    output->vx_p_pkgname = valpkgname;
+    output->vx_p_name = valname;
     output->vx_p_type = typ;
     return output;
   }
@@ -1387,6 +1404,14 @@ let-async
     return output;
   }
 
+  // vx_listany_from_anylist(anylist)
+  vx_core::vx_Type_listany vx_listany_from_anylist(
+    vx_core::Type_anylist values
+  ) {
+    vx_core::vx_Type_listany output = values->vx_list();
+    return output;
+  }
+
   // vx_listany_from_listany_fn(List<any>, (Function (any) : any))
   vx_core::vx_Type_listany vx_listany_from_listany_fn(
     vx_core::vx_Type_listany list_any,
@@ -1602,7 +1627,8 @@ let-async
 
   // vx_msg_from_errortext(string)
   vx_core::Type_msg vx_msg_from_errortext(
-    const std::string errortext) {
+    const std::string errortext
+  ) {
     vx_core::Type_msg output = new vx_core::Class_msg();
     vx_core::Type_string string_error = vx_core::vx_new_string(
       errortext);
@@ -1615,7 +1641,8 @@ let-async
   // vx_msg_from_exception(string, exception)
   vx_core::Type_msg vx_msg_from_exception(
     const std::string text,
-    std::exception err) {
+    std::exception err
+  ) {
     vx_core::Type_msg output = new vx_core::Class_msg();
     output->vx_p_text = vx_core::vx_new_string(text);
     output->vx_p_severity = vx_core::c_msg_severe;
@@ -1623,40 +1650,46 @@ let-async
     return output;
   }
 
+  // vx_msgblock_from_any(any)
+  vx_core::Type_msgblock vx_msgblock_from_any(
+    vx_core::Type_any value
+  ) {
+    vx_core::Type_msgblock output = value->vx_msgblock();
+    return output;
+  }
+
   // vx_msgblock_from_copy_listval(msgblock, List<any>)
   vx_core::Type_msgblock vx_msgblock_from_copy_listval(
     vx_core::Type_msgblock msgblock,
-    vx_core::vx_Type_listany vals) {
+    vx_core::vx_Type_listany vals
+  ) {
     vx_core::Type_msgblock output = vx_core::e_msgblock;
     std::vector<vx_core::Type_msgblock> listmsgblock;
-    if (msgblock) {
-      vx_core::Type_msgblock origmsgblock = msgblock->vx_msgblock();
-      if (origmsgblock) {
-        std::vector<vx_core::Type_msgblock> origlistmsgblock = origmsgblock->msgblocks()->vx_p_list;
-        listmsgblock.insert(
-          listmsgblock.end(),
-          origlistmsgblock.begin(),
-          origlistmsgblock.end());
-      }
+    if (msgblock != vx_core::e_msgblock) {
+      listmsgblock.push_back(msgblock);
     }
     for (vx_core::Type_any subval : vals) {
-      vx_core::Type_msgblock submsgblock = subval->vx_p_msgblock;
-      if (submsgblock) {
+      vx_core::Type_msgblock submsgblock = subval->vx_msgblock();
+      if (submsgblock != vx_core::e_msgblock) {
         listmsgblock.push_back(submsgblock);
       }
     }
-    vx_core::Type_msgblocklist msgblocks;
-    if (listmsgblock.size() > 0) {
+    switch (listmsgblock.size()) {
+    case 0:
+      break;
+    case 1:
+      output = listmsgblock[0];
+      break;
+    default:
       for (vx_core::Type_any any : listmsgblock) {
         vx_core::vx_reserve(any);
       }
-      msgblocks = new vx_core::Class_msgblocklist();
+      vx_core::Type_msgblocklist msgblocks = new vx_core::Class_msgblocklist();
+      vx_core::vx_reserve(msgblocks);
       msgblocks->vx_p_list = listmsgblock;
       output = new vx_core::Class_msgblock();
       output->vx_p_msgblocks = msgblocks;
-    } else if (msgblock) {
-      vx_core::vx_reserve(msgblock);
-      output = msgblock;
+      break;
     }
     return output;
   }
@@ -1988,7 +2021,8 @@ let-async
     vx_core::Type_any value,
     long indent,
     bool linefeed,
-    bool refcount) {
+    bool refcount
+  ) {
     std::string output = "";
     std::string text = "";
     if (indent > 50) {
@@ -2021,6 +2055,19 @@ let-async
         } else {
           text = "false";
         }
+        if (refcount || valbool->vx_p_msgblock) {
+          text = "(boolean \"" + text + "\"";
+          if (refcount) {
+            text += "\n " + indenttext + ":refcount " + vx_core::vx_string_from_int(
+              vx_core::vx_ref(value));
+          }
+          if (valbool->vx_p_msgblock) {
+            std::string msgtext = vx_core::vx_string_from_any_indent(
+              valbool->vx_msgblock(), indent + 2, linefeed, refcount);
+            text += "\n " + indenttext + ":msgblock\n  " + indenttext + msgtext;
+          }
+          text += ")";
+        }
       } else if (type == vx_core::t_decimal) {
         vx_core::Type_decimal valdec = vx_core::vx_any_from_any(
           vx_core::t_decimal, value);
@@ -2028,13 +2075,13 @@ let-async
         if (refcount || valdec->vx_p_msgblock) {
           text = "(decimal \"" + text + "\"";
           if (refcount) {
-            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(
+            text += "\n " + indenttext + ":refcount " + vx_core::vx_string_from_int(
               vx_core::vx_ref(value));
           }
           if (valdec->vx_p_msgblock) {
             std::string msgtext = vx_core::vx_string_from_any_indent(
-              valdec->vx_msgblock(), indent + 1, linefeed, refcount);
-            text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
+              valdec->vx_msgblock(), indent + 2, linefeed, refcount);
+            text += "\n " + indenttext + ":msgblock\n  " + indenttext + msgtext;
           }
           text += ")";
         }
@@ -2050,13 +2097,13 @@ let-async
         if (refcount || valfloat->vx_p_msgblock) {
           text = "(float \"" + text + "\"";
           if (refcount) {
-            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(
+            text += "\n " + indenttext + ":refcount " + vx_core::vx_string_from_int(
               vx_core::vx_ref(value));
           }
           if (valfloat->vx_p_msgblock) {
             std::string msgtext = vx_core::vx_string_from_any_indent(
-              valfloat->vx_msgblock(), indent + 1, linefeed, refcount);
-            text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
+              valfloat->vx_msgblock(), indent + 2, linefeed, refcount);
+            text += "\n " + indenttext + ":msgblock\n  " + indenttext + msgtext;
           }
           text += ")";
         }
@@ -2074,13 +2121,13 @@ let-async
           if (refcount || valint->vx_p_msgblock) {
             text = "(int \"" + text + "\"";
             if (refcount) {
-              text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(
+              text += "\n " + indenttext + ":refcount " + vx_core::vx_string_from_int(
                 vx_core::vx_ref(value));
             }
             if (valint->vx_p_msgblock) {
               std::string msgtext = vx_core::vx_string_from_any_indent(
-                valint->vx_msgblock(), indent + 1, linefeed, refcount);
-              text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
+                valint->vx_msgblock(), indent + 2, linefeed, refcount);
+              text += "\n " + indenttext + ":msgblock\n  " + indenttext + msgtext;
             }
             text += ")";
           }
@@ -2094,13 +2141,13 @@ let-async
         if (refcount || valstring->vx_p_msgblock) {
           text = "(string \"" + sval + "\"";
           if (refcount) {
-            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(
+            text += "\n " + indenttext + ":refcount " + vx_core::vx_string_from_int(
               vx_core::vx_ref(value));
           }
           if (valstring->vx_p_msgblock) {
             std::string msgtext = vx_core::vx_string_from_any_indent(
-              valstring->vx_msgblock(), indent + 1, linefeed, refcount);
-            text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
+              valstring->vx_msgblock(), indent + 2, linefeed, refcount);
+            text += "\n " + indenttext + ":msgblock\n  " + indenttext + msgtext;
           }
           text += ")";
         } else {
@@ -2121,14 +2168,14 @@ let-async
               valsub, indentint, linefeed, refcount);
             text += "\n " + indenttext + ssub;
           }
+          if (refcount) {
+            text += "\n " + indenttext + ":refcount " + vx_core::vx_string_from_int(
+              vallist->vx_p_iref);
+          }
           if (vallist->vx_p_msgblock) {
             std::string msgtext = vx_core::vx_string_from_any_indent(
-              vallist->vx_msgblock(), indentint, linefeed, refcount);
-            text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
-          }
-          if (refcount) {
-            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(
-              vallist->vx_p_iref);
+              vallist->vx_msgblock(), indent + 2, linefeed, refcount);
+            text += "\n " + indenttext + ":msgblock\n  " + indenttext + msgtext;
           }
           text = "(" + typedefname + text + ")";
         } else if (extend == ":map") {
@@ -2149,16 +2196,16 @@ let-async
             } else {
               strval = " " + strval;
             }
-            text += "\n" + indenttext + " " + key + strval;
+            text += "\n " + indenttext + key + strval;
+          }
+          if (refcount) {
+            text += "\n " + indenttext + ":refcount " + vx_core::vx_string_from_int(
+              valmap->vx_p_iref);
           }
           if (valmap->vx_p_msgblock) {
             std::string msgtext = vx_core::vx_string_from_any_indent(
               valmap->vx_msgblock(), indentint, linefeed, refcount);
-            text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
-          }
-          if (refcount) {
-            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(
-              valmap->vx_p_iref);
+            text += "\n " + indenttext + ":msgblock\n  " + indenttext + msgtext;
           }
           text = "(" + typedefname + text + ")";
         } else if (extend == ":struct") {
@@ -2180,31 +2227,31 @@ let-async
               } else {
                 strval = " " + strval;
               }
-              text += "\n" + indenttext + " " + key + strval;
+              text += "\n " + indenttext + key + strval;
             }
+          }
+          if (refcount) {
+            text += "\n " + indenttext + ":refcount " + vx_core::vx_string_from_int(
+              valstruct->vx_p_iref);
           }
           if (valstruct->vx_p_msgblock) {
             std::string msgtext = vx_core::vx_string_from_any_indent(
               valstruct->vx_msgblock(), indentint, linefeed, refcount);
-            text += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
-          }
-          if (refcount) {
-            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(
-              valstruct->vx_p_iref);
+            text += "\n " + indenttext + ":msgblock\n  " + indenttext + msgtext;
           }
           text = "(" + typedefname + text + ")";
         } else if (extend == ":func") {
           vx_core::Type_func valfunc = vx_core::vx_any_from_any(
             vx_core::t_func, value);
           text = typedefname;
+          if (refcount) {
+            text += "\n " + indenttext + ":refcount " + vx_core::vx_string_from_int(
+              valfunc->vx_p_iref);
+          }
           if (valfunc->vx_p_msgblock) {
             text = vx_core::vx_string_from_any_indent(
               valfunc->vx_msgblock(), indent, linefeed, refcount);
-            text += "\n" + indenttext + " :msgblock\n  " + indenttext + text;
-          }
-          if (refcount) {
-            text += "\n" + indenttext + " :refcount " + vx_core::vx_string_from_int(
-              valfunc->vx_p_iref);
+            text += "\n " + indenttext + ":msgblock\n   " + indenttext + text;
           }
           text = "(" + text + ")";
         }

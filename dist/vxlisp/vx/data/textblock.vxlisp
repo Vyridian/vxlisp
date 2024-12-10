@@ -1529,22 +1529,13 @@
                :text "a"
                :startpos 2
                :endpos 2))
-            (msgblock
-             (msg
-              :code "closedelimmissing"
-              :detail
-               (delim
-                :name "delimclose"
-                :starttext ">")
-              :severity 2))))
-         (msgblock
-          (msg
-           :code "closedelimmissing"
-           :detail
-            (delim
-             :name "delimclose"
-             :starttext ">")
-           :severity 2)))
+            (msg
+             :code "closedelimmissing"
+             :detail
+              (delim
+               :name "delimclose"
+               :starttext ">")
+             :severity msg-error))))
         (textblock-delimnotfound
          (textblock
           :text "a"
@@ -2186,34 +2177,38 @@
 (func textblock-parse-one : textblock
  [textblockarg : textblock]
  (let : textblock
-  [delimarg     : delim     := (:delim    textblockarg)
-   close        : delim     := (:close    textblockarg)
-   startpos     : int       := (:startpos textblockarg)
-   textarg      : string    := (:text     textblockarg)
-   parent       : textblock := (:parent   textblockarg)
-   is-init      : boolean   := (and
-                                (is-empty parent)
-                                (= startpos 0))
+  [delimarg : delim     := (:delim    textblockarg)
+   close    : delim     := (:close    textblockarg)
+   startpos : int       := (:startpos textblockarg)
+   textarg  : string    := (:text     textblockarg)
+   parent   : textblock := (:parent   textblockarg)
+   is-init : boolean :=
+    (and
+     (is-empty parent)
+     (= startpos 0))
    starttext    : string    := (:starttext delimarg)
    endtext      : string    := (:endtext   delimarg)
    delimlistarg : delimlist := (:delimlist delimarg)
-   startposchg  : int       := (if : int
-                                (then
-                                 (= "" textarg)
-                                 startpos)
-                                (then
-                                 (= 0 startpos)
-                                 1)
-                                (else startpos))
-   delimlistcl  : delimlist := (if : delimlist
-                                (is-empty close)
-                                delimlistarg
-                                (copy
-                                 delimlistarg
-                                 close))
-   delimfirst   : delim     := (delim-first<-string-delimlist
-                                textarg
-                                delimlistcl)]
+   startposchg : int :=
+    (if : int
+     (then
+      (= "" textarg)
+      startpos)
+     (then
+      (= 0 startpos)
+      1)
+     (else startpos))
+   delimlistcl : delimlist :=
+    (if : delimlist
+     (is-empty close)
+     delimlistarg
+     (copy
+      delimlistarg
+      close))
+   delimfirst : delim :=
+    (delim-first<-string-delimlist
+     textarg
+     delimlistcl)]
   (if : textblock
    (then // init
     is-init
@@ -2260,22 +2255,13 @@
                :text "a"
                :startpos 2
                :endpos 2))
-            (msgblock
-             (msg
-              :code "closedelimmissing"
-              :detail
-               (delim
-                :name "delimclose"
-                :starttext ">")
-              :severity 2))))
-         (msgblock
-          (msg
-           :code "closedelimmissing"
-           :detail
-            (delim
-             :name "delimclose"
-             :starttext ">")
-           :severity 2)))
+            (msg
+             :code "closedelimmissing"
+             :detail
+              (delim
+               :name "delimclose"
+               :starttext ">")
+             :severity msg-error))))
         (textblock-parse-one
          (textblock
           :text "a"

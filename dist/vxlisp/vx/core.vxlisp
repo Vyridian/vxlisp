@@ -425,15 +425,60 @@
  :properties
   [msgs      : msglist
    msgblocks : msgblocklist]
- :doc "Block of Messages")
+ :test (test
+        (decimal
+         (msgblock
+          :msgs
+           (msglist
+            (msg
+             :text "Err"))))
+        (decimal
+         (msg
+          :text "Err")))
+       (test
+        (decimal
+         (msgblock
+          :msgs
+           (msglist
+            (msg :text "Err"))))
+        (let : decimal
+         [mymsgblock : msgblock :=
+          (msgblock
+           (msg
+            :text "Err"))]
+         (decimal
+          (copy
+           mymsgblock
+           mymsgblock))))
+ :doc "Block of Messages. Note: Identical msgblocks are suppressed.")
 
 (type msgblocklist : list
  :allowtypes [msgblock]
- :doc "List of Message Blocks")
+ :test (test
+        (msgblocklist
+         (msgblock
+          (msg :text "Err")))
+        (let : msgblocklist
+         [mymsgblock : msgblock :=
+          (msgblock
+           (msg :text "Err"))]
+         (msgblocklist
+          mymsgblock
+          mymsgblock)))
+ :doc "List of Message Blocks. Note: Identical msgblocks are suppressed.")
 
 (type msglist : list
  :allowtypes [msg]
- :doc "List of Messages")
+ :test (test
+        (msglist
+         (msg :text "Err"))
+        (let : msglist
+         [mymsg : msg :=
+          (msg :text "Err")]
+         (msglist
+          mymsg
+          mymsg)))
+ :doc "List of Messages. Note: Identical msgs are suppressed.")
 
 (type none
  :doc "No Type. No type is returned at all. e.g. Void")
@@ -1975,23 +2020,29 @@
   values : anylist :...]
  (native
   :cpp
-   "T* output = vx_core::vx_copy(generic_any_1, value, values->vx_list());"
+   "vx_core::vx_Type_listany listany = vx_core::vx_listany_from_anylist(
+      values);
+    T* output = vx_core::vx_copy(
+      generic_any_1, value, listany);"
   :csharp
-   "Vx.Core.Type_any[] arrayany = Vx.Core.arrayany_from_anylist(values);
+   "Vx.Core.Type_any[] arrayany = Vx.Core.vx_arrayany_from_anylist(
+      values
+    );
     object[] arrayobj = (Vx.Core.Type_any[])arrayany;
     T tvalue = (T)value;
     Vx.Core.Type_any anyvalue = tvalue.vx_copy(arrayobj);
     T output = (T)anyvalue;"
   :java
    "@SuppressWarnings(“unchecked”)
-    Core.Type_any[] arrayany = Core.arrayany_from_anylist(
-      values);
+    Core.Type_any[] arrayany = Core.vx_arrayany_from_anylist(
+      values
+    );
     Object[] arrayobj = (Core.Type_any[])arrayany;
     T output = (T)(value.vx_copy(arrayobj));"
   :js
    "vx_core.f_new_from_type(value, ...values)"
   :kotlin
-   "val arrayany : Array<vx_core.Type_any> = vx_core.arrayany_from_anylist(
+   "val arrayany : Array<vx_core.Type_any> = vx_core.vx_arrayany_from_anylist(
       values
     )
     val valuecopy : vx_core.Type_any = value.vx_copy(*arrayany)
@@ -2458,6 +2509,20 @@
     }")
  :doc "Returns true if text ends with find.")
 
+(func is-error : boolean
+ [value : any-1]
+ (let : any-1
+  [msgblock : msgblock := (msgblock<-any value)]
+  (if : boolean
+   (then 
+    (!-empty msgblock) true)))
+ :test (test-true
+        (is-error
+         (stringlist
+          (msg
+           :code "My Err"))))
+ :doc "Returns true if value has an error.")
+
 (func is-func : boolean
  [value : any]
  (native
@@ -2851,6 +2916,15 @@
     output = value")
  :doc "Writes a string and a value to the console.")
 
+(func log-error : any-1
+ [value : any-1]
+ (if : any-1
+  (then
+   (is-error value)
+   (log value))
+  (else value))
+ :doc "Write a value if it has an error.")
+
 (func main : string
  [args : anylist :...]
  (string args)
@@ -2982,6 +3056,16 @@
   :text warning)
  :doc "Returns a msg from a warning string")
 
+(func msgblock<-any : msgblock
+ [value : any]
+ (native
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto
+  :kotlin :auto)
+ :doc "Returns a msgblock from any")
+
 (func msgblock<-msgblock-msg : msgblock
  [origblock : msgblock
   addmsg    : msg]
@@ -3033,19 +3117,26 @@
  [values : anylist :...]
  (native
   :cpp
-   "output = vx_core::vx_new(generic_any_1, values->vx_list());"
+   "vx_core::vx_Type_listany listany = vx_core::vx_listany_from_anylist(
+      values);
+    output = vx_core::vx_new(
+      generic_any_1, listany);"
   :csharp
-   "Vx.Core.Type_any[] arrayany = Vx.Core.arrayany_from_anylist(values);
+   "Vx.Core.Type_any[] arrayany = Vx.Core.vx_arrayany_from_anylist(
+      values
+    );
     object[] arrayobj = (Vx.Core.Type_any[])arrayany;
     output = (T)(generic_any_1.vx_new(arrayobj));"
   :java
-   "Core.Type_any[] arrayany = Core.arrayany_from_anylist(values);
+   "Core.Type_any[] arrayany = Core.vx_arrayany_from_anylist(
+      values
+    );
     Object[] arrayobj = (Core.Type_any[])arrayany;
     output = (T)(generic_any_1.vx_new(arrayobj));"
   :js
    "vx_core.vx_new(generic_any_1, values)"
   :kotlin
-   "val arrayany : Array<vx_core.Type_any> = vx_core.arrayany_from_anylist(
+   "val arrayany : Array<vx_core.Type_any> = vx_core.vx_arrayany_from_anylist(
       values
     )
     val anyvalue : vx_core.Type_any = generic_any_1.vx_new(*arrayany)
@@ -3067,19 +3158,26 @@
   values : anylist :...]
  (native
   :cpp
-   "T* output = vx_core::vx_new(type, values->vx_list());"
+   "vx_core::vx_Type_listany listany = vx_core::vx_listany_from_anylist(
+      values);
+    T* output = vx_core::vx_new(
+      type, listany);"
   :csharp
-   "Vx.Core.Type_any[] arrayany = Vx.Core.arrayany_from_anylist(values);
+   "Vx.Core.Type_any[] arrayany = Vx.Core.vx_arrayany_from_anylist(
+      values
+    );
     object[] arrayobj = (Vx.Core.Type_any[])arrayany;
     T output = (T)(type.vx_new(arrayobj));"
   :java
-   "Core.Type_any[] arrayany = Core.arrayany_from_anylist(values);
+   "Core.Type_any[] arrayany = Core.vx_arrayany_from_anylist(
+      values
+    );
     Object[] arrayobj = (Core.Type_any[])arrayany;
     T output = (T)(type.vx_new(arrayobj));"
   :js
    "vx_core.vx_new(type, values)"
   :kotlin
-   "val arrayany : Array<vx_core.Type_any> = vx_core.arrayany_from_anylist(
+   "val arrayany : Array<vx_core.Type_any> = vx_core.vx_arrayany_from_anylist(
       values
     )
     val anyvalue : vx_core.Type_any = type.vx_new(*arrayany)

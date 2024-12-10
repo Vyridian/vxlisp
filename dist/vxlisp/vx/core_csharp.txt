@@ -161,9 +161,11 @@
     return output;
   }
 
-  public static Vx.Core.Type_any[] arrayany_from_anylist(
+  public static Vx.Core.Type_any[] vx_arrayany_from_anylist(
     Vx.Core.Type_anylist list) {
-    return list.vx_list().ToArray();
+    List<Vx.Core.Type_any> listany = list.vx_list();
+    Core.Type_any[] output = listany.ToArray();
+    return output;
   }
 
   public static List<Vx.Core.Type_any> arraylist_from_array(
@@ -915,14 +917,45 @@
     return output;
   }
 
+  // vx_msgblock_from_any(any)
+  public static Vx.Core.Type_msgblock vx_msgblock_from_any(
+    Vx.Core.Type_any value) {
+    Vx.Core.Type_msgblock output = value.vx_msgblock();
+    return output;
+  }
+
   // vx_msgblock_from_copy_arrayval(msgblock, any...)
   public static Vx.Core.Type_msgblock vx_msgblock_from_copy_arrayval(
     Vx.Core.Type_any copy,
-    params object[] vals) {
+    params object[] values
+  ) {
     Vx.Core.Type_msgblock output = Vx.Core.e_msgblock;
-    Vx.Core.Type_msgblock copymsgblock = copy.vx_msgblock();
-    if (copymsgblock != Vx.Core.e_msgblock) {
-      output = copymsgblock;
+    List<Vx.Core.Type_msgblock> listmsgblock = new List<Vx.Core.Type_msgblock>();
+    Vx.Core.Type_msgblock msgblock = copy.vx_msgblock();
+    if (msgblock != Vx.Core.e_msgblock) {
+      listmsgblock.Add(msgblock);
+    }
+    foreach (object subobj in values) {
+      if (subobj is Vx.Core.Type_any subval) {
+        Vx.Core.Type_msgblock submsgblock = subval.vx_msgblock();
+        if (submsgblock != Vx.Core.e_msgblock) {
+          listmsgblock.Add(submsgblock);
+        }
+      }
+    }
+    switch (listmsgblock.Count) {
+    case 0:
+      break;
+    case 1:
+      output = listmsgblock[0];
+      break;
+    default:
+      Vx.Core.Class_msgblocklist msgblocks = new Vx.Core.Class_msgblocklist();
+      msgblocks.vx_p_list = listmsgblock;
+      Vx.Core.Class_msgblock outputclass = new Vx.Core.Class_msgblock();
+      outputclass.vx_p_msgblocks = msgblocks;
+      output = outputclass;
+      break;
     }
     return output;
   }
@@ -1120,6 +1153,7 @@
     } else if (value is Vx.Core.Type_struct valstruct) {
       Vx.Core.Type_typedef typedef = valstruct.vx_typedef();
       Vx.Core.Type_string typedefname = typedef.name();
+      string stypedefname = typedefname.vx_string();
       int indentint2 = indent;
       indentint2 += 2;
       Map<string, Vx.Core.Type_any> mapval2 = valstruct.vx_map();
@@ -1140,7 +1174,9 @@
           output += "\n" + indenttext + " " + key + strval2;
         }
       }
-      if (valstruct.vx_msgblock() != Vx.Core.e_msgblock) {
+      if (stypedefname == "msg") {
+      } else if (stypedefname == "msgblock") {
+      } else if (valstruct.vx_msgblock() != Vx.Core.e_msgblock) {
         string msgtext2 = Vx.Core.vx_string_from_any_indent(valstruct.vx_msgblock(), indentint2, linefeed);
         output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext2;
       }
