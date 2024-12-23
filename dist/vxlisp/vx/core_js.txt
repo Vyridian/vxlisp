@@ -206,6 +206,26 @@
     }
   }
 
+  // vx_is_allowtype(allowtypes, typedef)
+  static vx_is_allowtype(
+    allowtypes,
+    typedef
+  ) {
+    let output = false
+    if (allowtypes.includes(typedef)) {
+      output = true
+    } else {
+      const traits = vx_core.f_traits_from_typedef(typedef)
+      const intersection = allowtypes.filter(function(n) {
+        return traits.indexOf(n) > -1
+      })
+      if (intersection.length > 0) {
+        output = true
+      }
+    }
+    return output
+  }
+
   // vx_is_float(any)
   static vx_is_float(
     value
@@ -309,6 +329,7 @@
     return output
   }
 
+  // vx_map_from_map_fn(map-1, anymap, (fn : any-1 [key : string value : any-2]))
   static vx_map_from_map_fn(
     generic_map_1,
     valuemap,
@@ -328,13 +349,14 @@
       for (const [key, value] of entries) {
         const chgvalue = fn([key, value])
         const chgtype = vx_core.f_typedef_from_any(chgvalue)
-        if (allowtypes.includes(chgtype)) {
+        if (vx_core.vx_is_allowtype(allowtypes, chgtype)) {
           values.push(key)
           values.push(chgvalue)
         }
       }
       output = vx_core.f_new_from_type(
-        generic_map_1, ...values)
+        generic_map_1, ...values
+      )
     }
     return output
   }
