@@ -44,11 +44,16 @@ func JsDocFromFunc(fnc *vxfunc) string {
 	return doc
 }
 
-func JsEmptyValueFromType(lang *vxlang, typ *vxtype) string {
+func JsEmptyValueFromType(
+	lang *vxlang,
+	typ *vxtype) string {
 	return JsEmptyValueFromTypeIndent(lang, typ, "  ")
 }
 
-func JsEmptyValueFromTypeIndent(lang *vxlang, typ *vxtype, indent string) string {
+func JsEmptyValueFromTypeIndent(
+	lang *vxlang,
+	typ *vxtype,
+	indent string) string {
 	output := "\"\""
 	if len(indent) < 10 {
 		output = typ.defaultvalue
@@ -139,7 +144,10 @@ func JsFilesFromProjectCmd(
 	return files, msgblock
 }
 
-func JsFromArg(lang *vxlang, arg vxarg, indent string) string {
+func JsFromArg(
+	lang *vxlang,
+	arg vxarg,
+	indent string) string {
 	output := "{}"
 	if arg.name != "" {
 		var props []string
@@ -156,7 +164,9 @@ func JsFromArg(lang *vxlang, arg vxarg, indent string) string {
 	return output
 }
 
-func JsFromArgs(lang *vxlang, args []vxarg, indent string) string {
+func JsFromArgs(
+	lang *vxlang,
+	args []vxarg, indent string) string {
 	var output = "{"
 	if len(args) > 0 {
 		var props []string
@@ -243,7 +253,9 @@ func JsFromConst(
 	return output, statics, msgblock
 }
 
-func JsFromFunc(lang *vxlang, fnc *vxfunc) (string, string, *vxmsgblock) {
+func JsFromFunc(
+	lang *vxlang,
+	fnc *vxfunc) (string, string, *vxmsgblock) {
 	msgblock := NewMsgBlock("JsFromFunc")
 	var args []string
 	funcname := NameFromFunc(fnc)
@@ -359,7 +371,14 @@ func JsFromFunc(lang *vxlang, fnc *vxfunc) (string, string, *vxmsgblock) {
 			lineindent + "}"
 		indent += 1
 	}
-	valuetext, msgs := JsFromValue(lang, fnc.value, fnc.pkgname, fnc, indent, true, false, path)
+	valuetext, msgs := JsFromValue(
+		lang,
+		fnc.value,
+		fnc.pkgname,
+		fnc, indent,
+		true,
+		false,
+		path)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	if strings.Index(valuetext, "output ") > 0 {
 	} else if strings.Index(valuetext, "output.") > 0 {
@@ -396,7 +415,10 @@ func JsFromFunc(lang *vxlang, fnc *vxfunc) (string, string, *vxmsgblock) {
 	return output, statics, msgblock
 }
 
-func JsFromPackage(lang *vxlang, pkg *vxpackage, project *vxproject) (string, *vxmsgblock) {
+func JsFromPackage(
+	lang *vxlang,
+	pkg *vxpackage,
+	project *vxproject) (string, *vxmsgblock) {
 	msgblock := NewMsgBlock("JsFromPackage")
 	imports := ""
 	if len(pkg.listlib) > 0 {
@@ -536,7 +558,8 @@ func JsFromPackage(lang *vxlang, pkg *vxpackage, project *vxproject) (string, *v
 		allconsts += consttext
 		statics += statictext
 	}
-	namespaceopen, namespaceclose := LangNativeNamespaceOpenClose(lang, pkgname)
+	namespaceopen, namespaceclose := LangNativeNamespaceOpenClose(
+		lang, pkgname)
 	output := "" +
 		"'strict mode'" +
 		"\n" + imports +
@@ -556,7 +579,8 @@ func JsFromPackage(lang *vxlang, pkg *vxpackage, project *vxproject) (string, *v
 	return output, msgblock
 }
 
-func JsFromPackageName(name string) string {
+func JsFromPackageName(
+	name string) string {
 	output := name
 	if strings.HasPrefix(name, "vx/") {
 		output = StringFromStringFindReplace(output, "vx/", "vx.")
@@ -571,7 +595,8 @@ func JsFromPackageName(name string) string {
 	return output
 }
 
-func JsFromText(text string) string {
+func JsFromText(
+	text string) string {
 	var output = text
 	output = strings.ReplaceAll(output, "\n", "\\n")
 	output = strings.ReplaceAll(output, "\\\"", "\\\\\"")
@@ -579,7 +604,9 @@ func JsFromText(text string) string {
 	return output
 }
 
-func JsFromType(lang *vxlang, typ *vxtype) (string, string, *vxmsgblock) {
+func JsFromType(
+	lang *vxlang,
+	typ *vxtype) (string, string, *vxmsgblock) {
 	msgblock := NewMsgBlock("JsFromType")
 	var doc = ""
 	doc += "type: " + typ.name
@@ -931,11 +958,13 @@ func JsFromValue(
 	return output, msgblock
 }
 
-func JsIndexFromFunc(fnc *vxfunc) string {
+func JsIndexFromFunc(
+	fnc *vxfunc) string {
 	return StringIndexFromFunc(fnc)
 }
 
-func JsNameEFromType(typ *vxtype) string {
+func JsNameEFromType(
+	typ *vxtype) string {
 	name := ""
 	name = "e_" + JsNameFromType(typ)
 	if typ.pkgname != "" {
@@ -944,7 +973,8 @@ func JsNameEFromType(typ *vxtype) string {
 	return name
 }
 
-func JsNameFFromFunc(fnc *vxfunc) string {
+func JsNameFFromFunc(
+	fnc *vxfunc) string {
 	name := ""
 	name = "f_" + LangFromName(fnc.name)
 	if fnc.pkgname != "" {
@@ -953,12 +983,14 @@ func JsNameFFromFunc(fnc *vxfunc) string {
 	return name
 }
 
-func JsNameFromPkgName(pkgname string) string {
+func JsNameFromPkgName(
+	pkgname string) string {
 	output := LangFromName(pkgname)
 	return output
 }
 
-func JsNameFromType(typ *vxtype) string {
+func JsNameFromType(
+	typ *vxtype) string {
 	name := ""
 	/*
 		switch typ.name {
@@ -979,7 +1011,8 @@ func JsNameFromType(typ *vxtype) string {
 	return name
 }
 
-func JsNamesFromListFunc(listfunc []*vxfunc) string {
+func JsNamesFromListFunc(
+	listfunc []*vxfunc) string {
 	var outputtypes []string
 	for _, fnc := range listfunc {
 		name := "f_" + LangFromName(fnc.alias)
@@ -991,7 +1024,9 @@ func JsNamesFromListFunc(listfunc []*vxfunc) string {
 	return "[" + StringFromListStringJoin(outputtypes, ", ") + "]"
 }
 
-func JsNamesTFromListType(lang *vxlang, listtype []*vxtype) string {
+func JsNamesTFromListType(
+	lang *vxlang,
+	listtype []*vxtype) string {
 	var outputtypes []string
 	for _, typ := range listtype {
 		name := LangTypeT(lang, typ)
@@ -1000,7 +1035,9 @@ func JsNamesTFromListType(lang *vxlang, listtype []*vxtype) string {
 	return "[" + strings.Join(outputtypes, ", ") + "]"
 }
 
-func JsNamesFromListValue(lang *vxlang, listvalue []*vxconst) string {
+func JsNamesFromListValue(
+	lang *vxlang,
+	listvalue []*vxconst) string {
 	var output []string
 	for _, val := range listvalue {
 		name := "c_" + LangFromName(val.alias)
@@ -1012,7 +1049,9 @@ func JsNamesFromListValue(lang *vxlang, listvalue []*vxconst) string {
 	return "[" + strings.Join(output, ", ") + "]"
 }
 
-func JsNamesTFromMapType(lang *vxlang, maptype map[string]*vxtype) string {
+func JsNamesTFromMapType(
+	lang *vxlang,
+	maptype map[string]*vxtype) string {
 	var outputtypes []string
 	listkey := make([]string, 0, len(maptype))
 	for id := range maptype {
@@ -1027,7 +1066,9 @@ func JsNamesTFromMapType(lang *vxlang, maptype map[string]*vxtype) string {
 	return "{" + strings.Join(outputtypes, ", ") + "}"
 }
 
-func JsTestFromConst(lang *vxlang, cnst *vxconst) (string, *vxmsgblock) {
+func JsTestFromConst(
+	lang *vxlang,
+	cnst *vxconst) (string, *vxmsgblock) {
 	msgblock := NewMsgBlock("JsTestFromConst")
 	output := ""
 	path := cnst.pkgname + "/" + cnst.name
@@ -1066,7 +1107,9 @@ func JsTestFromConst(lang *vxlang, cnst *vxconst) (string, *vxmsgblock) {
 	return output, msgblock
 }
 
-func JsTestFromFunc(lang *vxlang, fnc *vxfunc) (string, *vxmsgblock) {
+func JsTestFromFunc(
+	lang *vxlang,
+	fnc *vxfunc) (string, *vxmsgblock) {
 	msgblock := NewMsgBlock("JsTestFromFunc")
 	output := ""
 	path := fnc.pkgname + "/" + fnc.name + JsIndexFromFunc(fnc)
@@ -1346,7 +1389,8 @@ func JsTestFromPackage(
 }
 
 func JsTestFromType(
-	lang *vxlang, typ *vxtype) (string, *vxmsgblock) {
+	lang *vxlang,
+	typ *vxtype) (string, *vxmsgblock) {
 	msgblock := NewMsgBlock("JsTestFromType")
 	output := ""
 	path := typ.pkgname + "/" + typ.name
@@ -1387,13 +1431,17 @@ func JsTestFromType(
 	return output, msgblock
 }
 
-func JsTestFromValue(value vxvalue) string {
+func JsTestFromValue(
+	value vxvalue) string {
 	var output = ""
 	output = JsFromText(value.textblock.text)
 	return output
 }
 
-func JsTextFromProjectCmd(lang *vxlang, project *vxproject, command *vxcommand) (string, *vxmsgblock) {
+func JsTextFromProjectCmd(
+	lang *vxlang,
+	project *vxproject,
+	command *vxcommand) (string, *vxmsgblock) {
 	msgblock := NewMsgBlock("JsTextFromProjectCmd")
 	prjjs, msgs := JsFilesFromProjectCmd(lang, project, command)
 	msgblock = MsgblockAddBlock(msgblock, msgs)
@@ -1401,7 +1449,10 @@ func JsTextFromProjectCmd(lang *vxlang, project *vxproject, command *vxcommand) 
 	return text, msgblock
 }
 
-func JsTypeCoverageNumsValNew(pct int, tests int, total int) string {
+func JsTypeCoverageNumsValNew(
+	pct int,
+	tests int,
+	total int) string {
 	output := "" +
 		"vx_core.f_new_from_type(" +
 		"vx_test.t_testcoveragenums, " +
@@ -1435,7 +1486,9 @@ func JsWriteFromProjectCmd(
 	return msgblock
 }
 
-func JsApp(project *vxproject, cmd *vxcommand) string {
+func JsApp(
+	project *vxproject,
+	cmd *vxcommand) string {
 	includetext := ""
 	contexttext := `
     const context = vx_core.f_context_main(arglist)`
@@ -1523,13 +1576,16 @@ export default class app {
 	return output
 }
 
-func JsAppTest(project *vxproject, command *vxcommand) string {
+func JsAppTest(
+	project *vxproject,
+	command *vxcommand) string {
 	includetext := ""
 	contexttext := `
     const context = vx_core.f_context_main(arglist)`
 	if command.context == "" {
 	} else {
-		contextfunc := FuncFromProjectFuncname(project, command.context)
+		contextfunc := FuncFromProjectFuncname(
+			project, command.context)
 		if command.context != "" && contextfunc == emptyfunc {
 			MsgLog(
 				"Error! Context Not Found: (project (cmd :context " + command.context + "))")
@@ -1538,7 +1594,8 @@ func JsAppTest(project *vxproject, command *vxcommand) string {
 			switch contextfunc.pkgname {
 			case "", "vx/core":
 			default:
-				importname := StringFromStringFindReplace(contextfunc.pkgname, "/", "_")
+				importname := StringFromStringFindReplace(
+					contextfunc.pkgname, "/", "_")
 				includetext += "\nimport " + importname + " from \"../src/" + contextfunc.pkgname + ".js\"\n"
 			}
 		}
