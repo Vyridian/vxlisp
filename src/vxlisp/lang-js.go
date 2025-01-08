@@ -595,15 +595,6 @@ func JsFromPackageName(
 	return output
 }
 
-func JsFromText(
-	text string) string {
-	var output = text
-	output = strings.ReplaceAll(output, "\n", "\\n")
-	output = strings.ReplaceAll(output, "\\\"", "\\\\\"")
-	output = strings.ReplaceAll(output, "\"", "\\\"")
-	return output
-}
-
 func JsFromType(
 	lang *vxlang,
 	typ *vxtype) (string, string, *vxmsgblock) {
@@ -941,13 +932,13 @@ func JsFromValue(
 		} else if BooleanFromStringStartsEnds(valstr, "\"", "\"") {
 			output = valstr[1 : len(valstr)-1]
 			if encode {
-				output = JsFromText(output)
+				output = LangNativeFromText(lang, output)
 			}
 			output = "\"" + output + "\""
 		} else if BooleanIsNumberFromString(valstr) {
 			output = valstr
 		} else if encode {
-			output = JsFromText(output)
+			output = LangNativeFromText(lang, output)
 		} else {
 			output = valstr
 		}
@@ -1080,7 +1071,7 @@ func JsTestFromConst(
 			clstext := "" +
 				"\n          vx_core.f_new_from_type(" +
 				"\n            vx_test.t_testdescribe," +
-				"\n            \":describename\", \"" + JsTestFromValue(testvalue) + "\"," +
+				"\n            \":describename\", \"" + JsTestFromValue(lang, testvalue) + "\"," +
 				"\n            \":testresult\"," +
 				"\n            " + clstextjs +
 				"\n          )"
@@ -1121,7 +1112,7 @@ func JsTestFromFunc(
 			clstext := "" +
 				"\n          vx_core.f_new_from_type(" +
 				"\n            vx_test.t_testdescribe," +
-				"\n            \":describename\", \"" + JsTestFromValue(testvalue) + "\"," +
+				"\n            \":describename\", \"" + JsTestFromValue(lang, testvalue) + "\"," +
 				"\n            \":testresult\"," +
 				"\n            " + clstextjs +
 				"\n          )"
@@ -1403,7 +1394,7 @@ func JsTestFromType(
 			clstext := "" +
 				"\n          vx_core.f_new_from_type(" +
 				"\n            vx_test.t_testdescribe," +
-				"\n            \":describename\", \"" + JsTestFromValue(testvalue) + "\"," +
+				"\n            \":describename\", \"" + JsTestFromValue(lang, testvalue) + "\"," +
 				"\n            \":testresult\", " + clstextjs +
 				"\n          )"
 			listtestdescribe = append(
@@ -1432,9 +1423,10 @@ func JsTestFromType(
 }
 
 func JsTestFromValue(
+	lang *vxlang,
 	value vxvalue) string {
 	var output = ""
-	output = JsFromText(value.textblock.text)
+	output = LangNativeFromText(lang, value.textblock.text)
 	return output
 }
 

@@ -477,6 +477,7 @@ func LangNativeFromText(
 	lang *vxlang,
 	text string) string {
 	var output = text
+	output = strings.ReplaceAll(output, "\r", "")
 	output = strings.ReplaceAll(output, "\n", "\\n")
 	output = strings.ReplaceAll(output, "\\\"", "\\\\\"")
 	output = strings.ReplaceAll(output, "\"", "\\\"")
