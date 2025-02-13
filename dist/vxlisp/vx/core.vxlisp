@@ -14,37 +14,38 @@
 
 (type any-async<-func : func
  :allowfuncs [any<-func any<-func-async]
- :doc        "A sync or async function that returns one value.")
+ :doc "A sync or async function that returns one value.")
 
 (type any<-anylist : list
  :allowfuncs [any<-any]
- :doc        "List of any<-any")
+ :doc "List of any<-any")
 
 (type anylist : list
  :allowtypes [any]
- :doc        "A list of any")
+ :doc "A list of any")
 
 (type anymap : map
  :allowtypes [any]
- :doc        "A map of any")
+ :doc "A map of any")
 
 (type anytype : type
- :doc     "Any Type that allows any Type as a Value")
+ :doc "Any Type that allows any Type as a Value")
 
 (type arg : struct
- :properties [name    : string
-              argtype : any
-              fn-any  : any<-func
-              doc     : string]
- :doc        "A function argument")
+ :properties
+  [name    : string
+   argtype : any
+   fn-any  : any<-func
+   doc     : string]
+ :doc "A function argument")
 
 (type arglist : list
  :allowtypes [arg]
- :doc        "A list of arg")
+ :doc "A list of arg")
 
 (type argmap : map
  :allowtypes [arg]
- :doc        "A map of arg")
+ :doc "A map of arg")
 
 (type boolean
  :default     false

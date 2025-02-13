@@ -312,6 +312,18 @@
 
 (const point-rightbottom : point)
 
+(const point-rotate-90 : point
+ (point
+  :x 90))
+
+(const point-rotate-180 : point
+ (point
+  :x 180))
+
+(const point-rotate-270 : point
+ (point
+  :x 270))
+
 (const pointtype-absolute : pointtype)
 
 (const pointtype-relative : pointtype)
