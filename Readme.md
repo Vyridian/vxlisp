@@ -105,7 +105,7 @@ To improve the art. I find most languages to have ugly, confusing syntax, and po
 
 1. dist - The runtime version of vxlisp with core libraries.
 2. src - The vxcompiler development code written in golang.
-3. batches - Batch files for compiling the compiler.
+3. scripts - Scripts for compiling the compiler.
 4. docs -Markdown files of various instructions and notes.
 
 ## FAQ

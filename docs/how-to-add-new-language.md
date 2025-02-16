@@ -12,7 +12,7 @@ vxlisp should be able to transpile into any modern language. This is a guide to 
 * External Libraries - vxlisp is intended to have minimal dependencies (keep it simple). Avoid dependencies wherever possible.
 * folder requirements - Each language has particular source and test folder conventions.
 * Native Compiler - You will obviously need a native compiler configured to run the generated code. This includes dependency management.
-* Sample source and test files - Make a sample app, library, and test file and compile and run them. These will be your working models. For consistency create runcompile, runapp, and runtest batch files.
+* Sample source and test files - Make a sample app, library, and test file and compile and run them. These will be your working models. For consistency create runcompile, runapp, and runtest scripts.
 
 Steps:
 
@@ -55,9 +55,9 @@ func NewLangPython() *vxlang {
    :context vx/translation/en/context-test
    :doc     "Build Python Test Code")
 
-4. Create Batch Files - In vxlisp-vxcore, create new batch files to run and compile. Copy runbuildjava.bat and .sh and name them runbuildpython.bat and runbuildpython.sh. In those files, replace java with python.
+4. Create Scripts - In vxlisp-vxcore, create new script files to run and compile. Copy buildjava.bat and .sh and name them buildpython.bat and buildpython.sh. In those files, replace java with python.
 
-5. Generate Code - Run the batch. If everything went to plan, you will have new folders for source and test in their proper places.
+5. Generate Code - Run the script. If everything went to plan, you will have new folders for source and test in their proper places.
 
 6. Code Behind - Now you will need to add a code-behind to vxlisp files that need native code. Create a text file in src/vx folder named core_python.txt. The contents of this file will be injected into the generated code. Define any common routines here. See other languages for examples. Note: C++ has special syntax for header files and compile ordering.
 
