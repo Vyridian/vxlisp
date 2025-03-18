@@ -66,6 +66,7 @@ To improve the art. I find most languages to have ugly, confusing syntax, and po
 
 ## Sample
 
+```lisp
     (type person : struct
      :properties
       [firstname : string
@@ -100,6 +101,7 @@ To improve the art. I find most languages to have ugly, confusing syntax, and po
             "John Doe"          // expect "John Doe"
             (fullname johndoe)) // actual
      :doc  "Returns fullname from any person type.")
+```
 
 ## Folder Structure
 
@@ -157,18 +159,23 @@ Built in Webserver, Documentation builder, Test suite, Test coverage. BigO cover
 3. Overkill - vxlisp is focused on making complex cases easier. Conversely, it is possible that simple cases may seem overbuilt with features you don't need, e.g. Helloworld programs.
 
 * What does a function that returns Hello World look like?
+```lisp
      (func foo : string
       "Hello World")
+```
 
 * What does a function that adds 2 integers look like?
 
+```lisp
      (func foo : int
       [arg1 : int
        arg2 : int]
       (+ arg1 arg2))
+```
 
 * What does type declaration look like?
 
+```lisp
     (type personlist : list
      :allowtypes [person]
      :doc "This is a list of person")
@@ -183,9 +190,11 @@ Built in Webserver, Documentation builder, Test suite, Test coverage. BigO cover
                   kidlist : personlist :doc "List of kids"
                   kidmap  : personmap  :doc "Map of kids"]
      :doc "This is a person structure")
+```
 
 * How do I make new people?
 
+```lisp
     (const jack : person
      (person :name "Jack" :age 10))
 
@@ -206,19 +215,24 @@ Built in Webserver, Documentation builder, Test suite, Test coverage. BigO cover
       :age  "30"
       :kidlist kidlist
       :kidmap  kidmap))
+```
 
  Alternatively, you can use the longhand (new : person) instead of (person)
 
 * How do I access properties from types?
 
+```lisp
     (:1 kidlist)   // Get the first value of kidlist aka jack
     (:Jack kidmap) // Get jack from kidmap
     (:name mary)   // Get Mary's name
+```
 
  Alternatively, you can use the longhand versions:
+ ```lisp
     (any<-list   kidlist 1)
     (any<-map    kidmap "Jack")
     (any<-struct person "name")
+```
 
 * Why did you choose unusual naming conventions?
 
