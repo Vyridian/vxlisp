@@ -9,47 +9,58 @@ It's pretty simple.
 
 ## Easy, Concise, Consistent
 
-* Parenthesis - Lisps contains each idea in a list. A function foo(1, 2) would be written as (foo 1 2). Note: empty parentheses () are invalid in vxlisp.
+* Parenthesis - Lisps contains each idea in a list. A function `foo(1, 2)` would be written as `(foo 1 2)`. Note: empty parentheses `()` are invalid in vxlisp.
 
 Object-oriented code typically has two patterns:
 
-static calls: e.g. String.replace(mytext). vxlisp would be written as (replace mytext)
+static calls: e.g. `String.replace(mytext)`. vxlisp would be written as `(replace mytext)`
 
-method calls: e.g. myobject.foo(myval). vxlisp would be written as (foo myobject myval)
+method calls: e.g. `myobject.foo(myval)`. vxlisp would be written as `(foo myobject myval)`
 
 vxlisp (and all lisps) always put the verb first.
 
 * Delimiters - vxlisp uses any amount of whitespace as a single delimiter. No comma, no semi-colons. New lines and tabs don't matter. Focus on readability. In my experience, the vast majority of my compile errors in other languages are missing semi-colons and commas.
 
-* Square Brackets - Clojure used [] to separate function arguments from the rest of the function definition. vxlisp copies that behavior and adds type declarations and more. e.g.
+* Square Brackets - Clojure used `[]` to separate function arguments from the rest of the function definition. vxlisp copies that behavior and adds type declarations and more. e.g.
+```lisp
     (func myfunc : string
      [arg1 : string
       arg2 : string])
+```
 
-* Keywords : (colon) - Any word starting with : is considered a keyword.
+* Keywords `:` (colon) - Any word starting with `:` is considered a keyword.
 
-: - Colon by itself is a type declaration. e.g. (func foo : string)
+`:` - Colon by itself is a type declaration. e.g. `(func foo : string)`
 
-:= - Colon equal sign is a variable assignment. e.g. (let [a := "Hello"])
+`:=` - Colon equal sign is a variable assignment. e.g. `(let [a := "Hello"])`
 
-:{text} - Any other string is a keyword for a map or a constant. This is similar to JavaScript maps/objects.
+`:{text}` - Any other string is a keyword for a map or a constant. This is similar to JavaScript maps/objects.
 
-    vxlisp: (map :key1 value1 :key2 value2)
-    JavaScript: {key1: value1, key2: value2}
+    vxlisp: `(map :key1 value1 :key2 value2)`
+    JavaScript: `{key1: value1, key2: value2}`
 
-* Double Quote "" - Double quotes surround strings. The string maintains linefeeds, but the string matches the indentation to the opening quotation mark. e.g. The following text would have a linefeed but no spaces "line1\nline2".
+* Double Quote `""` - Double quotes surround strings. The string maintains linefeeds, but the string matches the indentation to the opening quotation mark. e.g. The following text would have a linefeed but no spaces "line1\nline2".
+```lisp
     "line1
      line2"
+```
 
-* Backtick Quote `` - When needed any string surrounded by backticks will be kept intact including indentation, double quotes and escape characters. e.g. The following text would have a linefeed and a number of spaces "line1\n     line2".
+* Backtick Quote `\`` - When needed any string surrounded by backticks will be kept intact including indentation, double quotes and escape characters. e.g. The following text would have a linefeed and a number of spaces `"line1\n     line2"`.
+```lisp
     `line1
      line2`
+```
 
-* 1 Based Indexing - Most languages start strings, arrays and lists at position 0. This is unintuitive and unnecessary. E.g. "ab" = "abcd".substring(0, 2) is unituitive compared with "ab" = (string<-string-start-end "abcd" 1 2).
+* 1 Based Indexing - Most languages start strings, arrays and lists at position 0. This is unintuitive and unnecessary. E.g. `"ab" = "abcd".substring(0, 2)` is unituitive compared with `"ab" = (string<-string-start-end "abcd" 1 2)`.
 
 ## Crash Resistant
 
-* Most languages throw an exception when attempting to retrieve and object that is out of range or passes an empty value. E.g. exception = ["a", "b"].get(4), exception = null.get(4) produce exceptions. vxlisp always maintains empty values that won't crash. "" = (:4 (stringlist "a" "b")), "" = (:4 (empty stringlist))
+* Most languages throw an exception when attempting to retrieve and object that is out of range or passes an empty value. E.g.
+```javascript
+exception = ["a", "b"].get(4);
+exception = null.get(4);
+```
+produce exceptions. vxlisp always maintains empty values that won't crash. `"" = (:4 (stringlist "a" "b")), "" = (:4 (empty stringlist))`
 
 ## Interoperable with native code
 
@@ -59,19 +70,23 @@ vxlisp generates native, readable code, so vxlisp functions can be directly call
 
 Choice of datastructure for a language is a key decision when dealing with data. Long ago it was csv files, then XML, now JSON. But JSON is only a subset of JavaScript and JavaScript itself has very vague and constantly changing standards. vxlisp chooses LISP as a standard because it is simple. XML is very similar to a LISP but has made many awkward design decisions that make fairly ugly and awkward as a programming language. vxlisp adds strong-typing and simple type constructors to produce a concise datastructure that is also elegant code:
 
+```lisp
     (person
      :firstname "Mary"
      :lastname  "Jane"
      :gender    :female
      :age       23)
+```
 
     In Java this would look like:
 
+```Java
     Person person = new Person();
     person.firstname = "Mary";
     person.lastname = "Jane";
     person.gender = "female";
     person.age = 23;
+```
 
 ## All-in-one: code, test, documentation
 
@@ -95,17 +110,23 @@ I have gone back and forth on the importance of type-safety. Type-safety should 
 
 Non-Typesafe Languages: For non-typesafe languages mixing types is easy, but there are no checks for type:
 
+```javascript
     ["a", 1, 2.5, bar]
+```
 
 Typesafe Languages: For typesafe languages a construct like this is not directly possible, so you have to defeat typesafety by using a non-typesafe generic:
 
+```C++
     new List<Object>["a", 1, 2.5, bar]
+```
 
 vxlisp: vxlisp enforces typesafety on such constructs by declaring type and allowing substypes.
 
+```lisp
     (type foo : list :allowtypes [string, int, float, bar])
 
     (foo "a", 1, 2.5, bar)
+```
 
 ### Complex Types
 
@@ -113,14 +134,19 @@ For this example, we want to create a complex structure: a map of lists of integ
 
 Non-Typesafe Languages: For non-typesafe languages, creating complex structures is error prone:
 
+```lua
     foo = {a: [{b: 4}]}
+```
 
 Typesafe Languages: For typesafe languages, you gain typesafety, but you some force you to redeclare types again and again. Very confusing and irritating.
 
+```c++
     Map<string, List<Map<string, int>>> foo = new Map<string, List<Map<string, int>>>{a: new List<Map<string, int>(new Map<string, int>){b: 4}()>}
+```
 
 vxlisp: Types are declared upfront and reused (like C++ typedef).
 
+```lisp
     (type type1 : map  :allowtypes [int])
 
     (type type2 : list :allowtypes [type1])
@@ -129,12 +155,14 @@ vxlisp: Types are declared upfront and reused (like C++ typedef).
 
     (let
      [foo := (type3 :a (type2 (type1 :b 4)))])
+```
 
 ## Generic Types
 
 Other languages usually define generics using captial letters like T and declares List, Map, etc. using that T. vxlisp uses a suffix number to distinquish and relate generic types. e.g. any-1 and list-1 refer to the same generic.
 
     Java:
+```java
     <T, U> List<U> convertList(List<T> mylist) {
       List<U> output = new List<T>();
       for (T myval : mylist) {
@@ -142,8 +170,10 @@ Other languages usually define generics using captial letters like T and declare
       }
       return output;
     }
+```
 
     vxlisp:
+```lisp
     (func convert-list : list-1
      [mylist : list-2]
      (list<-list : list-1
@@ -153,12 +183,13 @@ Other languages usually define generics using captial letters like T and declare
        (foo myval))
      )
     )
+```
 
 ## Immutability
 
-Everything in vxlisp is logically immutable. Once you have created an object, it cannot be changed. This is the same as String in most languages. e.g. a = "Hello"; b = a.substring(0, 2); // a is unchanged.
+Everything in vxlisp is logically immutable. Once you have created an object, it cannot be changed. This is the same as String in most languages. e.g. `a = "Hello"; b = a.substring(0, 2); // a is unchanged.`
 
-There are only 2 functions to make an object in vxlisp: (new) and (copy), so once you make an object it is safe to use and cannot change. All pointers to objects can be freely passed ByRef since subfunctions will not alter them.
+There are only 2 functions to make an object in vxlisp: `(new)` and `(copy)`, so once you make an object it is safe to use and cannot change. All pointers to objects can be freely passed ByRef since subfunctions will not alter them.
 
 Lists and Maps do shallow copies since their children are also immutable. This is obviously not the way Object-Oriented Programmers see the world, but it is simple and the rewards reaped from simplicity are worth the trade-offs. Note: when comparing the cost of shallow copies to other languages, remember that if you are passing a parameter ByVal (aka final in Java), the compiler is already making a copy, sometimes a large and deep one (Golang tends to do this a lot).
 
@@ -172,6 +203,7 @@ TRIGGER ALERT! In my opinion, try-catch exception handling is a design flaw. It 
 
 vxlisp attempts to address this by allowing EVERY object to contain any number of error messages IN ADDITION to their normal result. Some erros may be big, some may be trivial warnings. Each calling program can decide what to do with them (if anything). Erros will automatically be bubbled up to each further result.
 
+```lisp
     (func foo : string
      [value : string]
      (if
@@ -180,6 +212,7 @@ vxlisp attempts to address this by allowing EVERY object to contain any number o
         :msg (msg :severity msg-warning :text "Are you sure you want a dog?")))
       (else (string "echo " arg)))
      :doc "This function echos the original value and also produces a warning if the value is a Dog.")
+```
 
 vxlisp also tries to reduce the number of exceptions generated in the first place. There are a few possible sources of errors:
 
@@ -196,8 +229,9 @@ vxlisp also tries to reduce the number of exceptions generated in the first plac
 
 Typesafe languages have a problem with complex inheritence structures. The Deadly Diamond of Death occurs when 2 classes inherit from a common class and then another class inherits from both of them. e.g. Dog extends Animal, Cat extends Animal, Hybrid extends Dog, Cat. Java avoided this by leaning on interfaces, but this still requires a lot of planning and code.
 
-vxlisp handles the problem of multiple inheritence in a similar way to Scala traits and Java interfaces. Instead of defining a separate interface, you simply use the :traits tag to list the types you inherit. vxlisp does the heavy lifting for you.
+vxlisp handles the problem of multiple inheritence in a similar way to Scala traits and Java interfaces. Instead of defining a separate interface, you simply use the `:traits` tag to list the types you inherit. vxlisp does the heavy lifting for you.
 
+```lisp
     (type animal : struct)
 
     (type dog : struct :traits [animal])
@@ -205,33 +239,35 @@ vxlisp handles the problem of multiple inheritence in a similar way to Scala tra
     (type cat : struct :traits [animal])
 
     (type hybrid : struct :traits [dog, cat])
+```
 
 ## Constructors
 
-All values are created through the (new : {type} {args}) function or just ({type} {args}).
+All values are created through the `(new : {type} {args})` function or just `({type} {args})`.
 
-* "ab" is the same as (new : string "ab") is the same as (string "ab")
-* 4 is the same as (new int 4) or (int 4)
-* (new : stringlist "a" "b") is the same as (stringlist "a" "b")
-* (new : stringmap :foo "a" :bar "b") is the same as (stringmap :foo "a" :bar "b")
-* (new : foobar :foo "a" :bar "b") is the same as (foolbar :foo "a" :bar "b")
+* `"ab"` is the same as `(new : string "ab")` is the same as `(string "ab")`
+* `4` is the same as `(new int 4)` or `(int 4)`
+* `(new : stringlist "a" "b")` is the same as `(stringlist "a" "b")`
+* `(new : stringmap :foo "a" :bar "b")` is the same as `(stringmap :foo "a" :bar "b")`
+* `(new : foobar :foo "a" :bar "b")` is the same as `(foobar :foo "a" :bar "b")`
 
 ## Empty Types
 
-All types have an empty value written as (empty {type}) or just ({type}).
+All types have an empty value written as `(empty {type})` or just `({type})`.
 
-* "" is the same as (empty string) is the same as (string)
-* 0 is the same as (empty int) is the same as (int)
-* false is the same as (empty boolean) is the same as (boolean)
-* (empty stringlist) is the same as (stringlist)
-* (empty stringmap) is the same as (stringmap)
-* (empty foobar) is the same as (foobar)
-* (is-empty {value}) can be used to check for whether a given value is empty.
+* `""` is the same as `(empty string)` is the same as `(string)`
+* `0` is the same as `(empty int)` is the same as `(int)`
+* `false` is the same as `(empty boolean)` is the same as `(boolean)`
+* `(empty stringlist)` is the same as `(stringlist)`
+* `(empty stringmap)` is the same as `(stringmap)`
+* `(empty foobar)` is the same as `(foobar)`
+* `(is-empty {value})` can be used to check for whether a given value is empty.
 
 ## Type Metadata
 
-* All types have a metadata value that can be used for type comparisons and type definition information. This can be accessed by (type<-any {value}). The resulting type value can be used in any compare operation such as a switch statement.
+* All types have a metadata value that can be used for type comparisons and type definition information. This can be accessed by `(type<-any {value})`. The resulting type value can be used in any compare operation such as a switch statement.
 
+```lisp
     (func foobar : string
      [myval : any]
      (switch (type<-any myval)
@@ -240,13 +276,16 @@ All types have an empty value written as (empty {type}) or just ({type}).
       (case foo "I'm a foo")
       (else "What am I?"))
      :doc "Returns a string from any value")
+```
 
-* Free form type casting. Any value can be cast to any type by using (any<-any {value}). This function is guaranteed to return an object of the correct type without exception, but if the cast is unsuccessful the result will be the empty value.
+* Free form type casting. Any value can be cast to any type by using `(any<-any {value})`. This function is guaranteed to return an object of the correct type without exception, but if the cast is unsuccessful the result will be the empty value.
 
+```lisp
     (func foobar : foo
      [myval : bar]
      (any<-any bar)
      :doc "Returns a bar from a foo.")
+```
 
 ## Context management
 
@@ -256,6 +295,7 @@ Most applications require some form of context. vxlisp standardizes this by simp
 
 Asynchronous programming (futures/promises) is extremely common in modern programs using non-blocking http, io, or database traffic. However, most languages struggle with the concept and have multiple failed iterations and generally poor support for async (especially in test). The await command in JavaScript and Dart is the closest to a comfortable programming model. vxlisp seeks to take this a step further. A function simply needs the :async keyword and then operations within will transparently handle the async/sync process. Note: non-async functions cannot call async functions.
 
+```lisp
     (func httpget1 : string
      "Hello"
      :async
@@ -273,6 +313,7 @@ Asynchronous programming (futures/promises) is extremely common in modern progra
       (string myvar1 " " myvar2))
      :async
      :doc "Asynchronously manipulate the result of an async.")
+```
 
 The equivalent JavaScript or Dart code would be similar but you would have to add awaits. The C++ or Java code would boggle the mind with its complexity. Also, note that most JavaScript examples use old, ugly .then chaining which is also horrible.
 
@@ -284,10 +325,12 @@ Also, all tests in vxlisp transparently handle async functions which is extremel
 
 Some languages like Clojure have ugly function overloading methodologies, and most languages have many arbitrary limits to overloading. vxlisp takes a simpler approach to overloading: almost every function can be defined any number of times and even with the same parameters. The compiler will link the first function that matches the given return value and arguments. It searches within each package down the library list.
 
+```lisp
     (func + : foo
      [arg1 : foo
       arg2 : foo]
      :doc "Override + operator for foo.")
+```
 
 ## Webserver
 
@@ -305,7 +348,7 @@ Since test is written in the source, coverage reporting is trivial and requires 
 
 ## BigO coverage
 
-Since Big-O (Time/Space Complexity) is written in the source, Big-O coverage reporting is trivial and requires no outside libraries. A separate :bigo-space and :bigo-time are included in each function to document memory hungry and slow functions respectively. Big-O coverage is built into the test suite as well.
+Since Big-O (Time/Space Complexity) is written in the source, Big-O coverage reporting is trivial and requires no outside libraries. A separate `:bigo-space` and `:bigo-time` are included in each function to document memory hungry and slow functions respectively. Big-O coverage is built into the test suite as well.
 
 ## Functions are first class objects
 
@@ -313,11 +356,11 @@ Like JavaScript, functions are first class objects and can be passed around as p
 
 ## Simple access to type metadata
 
-Typedef and Funcdef information is available from any object, so you can call (typedef<-any myobject) or get the meta data (reflection) from any object at any time.
+Typedef and Funcdef information is available from any object, so you can call `(typedef<-any myobject)` or get the meta data (reflection) from any object at any time.
 
 ## Universal serialization/deserialization
 
-Every object in vxlisp (including user defined ones) have a direct serialization and deserialization path. This is especially useful for debugging, testing, state-management, and client-server transit. (string<-any myobject) will get the string result.
+Every object in vxlisp (including user defined ones) have a direct serialization and deserialization path. This is especially useful for debugging, testing, state-management, and client-server transit. `(string<-any myobject)` will get the string result.
 
 ## Memory Leak prevention
 
@@ -331,7 +374,7 @@ Javascript and Java obviously do their own garbage collection, but C++ does not.
 
 ## Repl
 
-A read–eval–print loop (REPL) is a sort of internal command line to stich together functions at runtime. All vxlisp functions support REPL execution by creating (type repl) objects and then running them. In the future, I will add the parsing logic so this can be executed using only text.
+A read–eval–print loop (REPL) is a sort of internal command line to stich together functions at runtime. All vxlisp functions support REPL execution by creating `(type repl)` objects and then running them. In the future, I will add the parsing logic so this can be executed using only text.
 
 ## Programmatic Html/Xml generation
 
@@ -339,9 +382,9 @@ vxlisp has a package for Html generation which allows programmatic and strongly-
 
 ## Few restricted characters
 
-Because of the simple lisp format, you have great freedom to name things as you please. Restricted characters are ()[]/"`.:
+Because of the simple lisp format, you have great freedom to name things as you please. Restricted characters are `()[]/"\`.:`
 
-Obviously, don't overload (package), (type), (const), or (func).
+Obviously, don't overload `(package)`, `(type)`, `(const)`, or `(func)`.
 
 ## Free use of whitespace
 
