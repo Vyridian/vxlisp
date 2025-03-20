@@ -1,5 +1,6 @@
 # Constants
 
+```lisp
 (const name : type
  clauses :...
  :alias      "internal name"
@@ -9,3 +10,4 @@
  :deprecated "Version"
  :doc        "value doc"
  :test       clauses :...)
+```

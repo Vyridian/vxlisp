@@ -13,11 +13,13 @@
 * Generics - vxlisp requires generic types to be declared (like clases), so generics are reusable, documentable, testable and uniform with structures. Generic objects use any-1, list-1 notation instead of the weird T extends List U notation.
 * Flexible Generics - vxlisp allows lists and maps to contain multiple diverse types or only particular values like enums. E.g.
 
+```lisp
   (type mylist : map
    :allowtypes [string, int, person])
 
   (type mylist : list
    :allowvalues ["a", 4, johndoe])
+```
 
 * No Type-erasure - vxlisp retains object definitions, so they can be polled and branched at runtime. This obviously creates a small memory overhead, but simpifies concepts like Reflection.
 * Empty Types - Functions always returns a valid datatype. This type may be empty or contain errors, but it is never NULL or invalid.

@@ -1,5 +1,6 @@
 # Types
 
+```lisp
 (type name
  constraints  ...
  :properties       [] // Allowed key values [name : type :default value :doc "" :alias ""]
@@ -16,3 +17,4 @@
  :convert          [[fromtype totype clause] ...]
  :test             clauses ...
  :doc              "Type doc")
+```

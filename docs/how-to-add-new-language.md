@@ -20,6 +20,7 @@ Steps:
 
 2. Lang Constructor - In vxlisp project, open LangNative.go and add a new var LangPython and a constructor. Copy the constructor from its most similar language.
 
+```go
 var langpython = NewLangPython()
 
 func NewLangPython() *vxlang {
@@ -38,9 +39,11 @@ func NewLangPython() *vxlang {
 	output.typeref = "."
 	return output
 }
+```
 
 3. New Commands - In vxlisp-vxcore, open the project.vxlisp file and create new commands for source and test.
 
+```lisp
   (cmd srcpython
    :code    :source
    :lang    :python
@@ -54,6 +57,7 @@ func NewLangPython() *vxlang {
    :path    ../build/python/src/test
    :context vx/translation/en/context-test
    :doc     "Build Python Test Code")
+```
 
 4. Create Scripts - In vxlisp-vxcore, create new script files to run and compile. Copy buildjava.bat and .sh and name them buildpython.bat and buildpython.sh. In those files, replace java with python.
 
@@ -63,23 +67,28 @@ func NewLangPython() *vxlang {
 
 7. External libararies - If you need external libraries, add them to the project.vxlisp.
 
+```lisp
 (project
  :libs
   (lib javaniofile
    :path "java.nio.file.*"
    :lang :java)
  ...)
+ ```
 
 You can then reference it in a package:
 
+```lisp
 (package vx/data/file
  :libs (lib tb  :path vx/data/textblock)
        (lib typ :path vx/type)
        (lib javaniofile)
  :doc "File handler")
+```
 
 8. Syntax differences - From here, you must add new switch statements to the different functions in LangNative.go to support your language.
 
+```go
 func LangNativeAppMainOpenClose(
 	lang *vxlang) (string, string) {
 	mainopen := ""
@@ -101,11 +110,13 @@ func LangNativeAppMainOpenClose(
 	}
 	return mainopen, mainclose
 }
+```
 
-9. :create and :destroy - Some objects need private variables to function. The :create and :destroy keywords contain code that will be injected for constructing and destructing objects.
+9. `:create` and `:destroy` - Some objects need private variables to function. The :create and :destroy keywords contain code that will be injected for constructing and destructing objects.
 
-10. Main Function - Once you can a compile to work, the next step is getting the main() function to work. Look at src/vx/core.vxlisp and find the (native) functions. You will need to add your language tag and either a string of native code or the keyword :auto.
+10. Main Function - Once you can a compile to work, the next step is getting the `main()` function to work. Look at src/vx/core.vxlisp and find the (native) functions. You will need to add your language tag and either a string of native code or the keyword :auto.
 
+```lisp
 (func string-repeat : string
  [text   : string
   repeat : int]
@@ -115,9 +126,11 @@ func LangNativeAppMainOpenClose(
     output = vx_core::vx_new_string(stringtext);"
   :csharp :auto
   ...))
+```
  
- The :auto tag will assume the existence of an identically named function in the code-behind file with a vx_ prefix.
+ The `:auto` tag will assume the existence of an identically named function in the code-behind file with a vx_ prefix.
 
+```c#
 // In src/vx/core_csharp.txt
   public static string vx_string_repeat(
     string text,
@@ -128,11 +141,13 @@ func LangNativeAppMainOpenClose(
     string output = sb.ToString();
     return output;
   }
+```
 
 11. Test Suite - Once the main function works, work on the testsuite. You can either work toward an integrated Test library like JUnit or just write another command line function to do test. I used existing libraries for Java, CSharp, and Kotlin. I used a command line function for C++. And I used an HTML page for JavaScript. There are 2 important things to pay attention to: The test_basics test and the resources folder.
 
 Test_basics are functions required for general tests to run.
 
+```java
   @Test
   void test_basics() {
     TestLib.test_helloworld();
@@ -143,6 +158,7 @@ Test_basics are functions required for general tests to run.
     TestLib.test_read_file();
     TestLib.test_write_file();
   }
+```
 
 The test/resources folder holder 3 important generated files, generated in order from each other:
 
@@ -154,6 +170,7 @@ Use git (or other version control) to watch for changes to these files.
 
 12. Test individual functions - Use the :filter tag to generate individual tests. The following :filter only creates test for (func is-error) in vx/core.
 
+```lisp
   (cmd testpython
    :code    :test
    :lang    :python
@@ -161,6 +178,7 @@ Use git (or other version control) to watch for changes to these files.
    :context vx/translation/en/context-test
    :filter  vx/core/is-error
    :doc     "Build Python Test Code")
+```
 
 13. Finishing Up vx/core - Once the test suite works, only debugging and maybe memory leaks remain.
 
