@@ -80,40 +80,48 @@ func ExecuteProjectFromArgs(
 	listarg []string) *vxmsgblock {
 	msgblock := NewMsgBlock("ExecuteProjectFromArgs")
 	MsgStartLog()
-	var cmdtexts []string
-	projectpath := ""
-	lastarg := ""
-	for argidx, arg := range listarg {
-		switch argidx {
-		case 0:
-		default:
-			switch lastarg {
-			case "--path", ":path":
-				projectpath = arg
+	var argcnt = len(listarg)
+	if argcnt < 2 || (argcnt == 2 && (listarg[1] == ":help" || (listarg[1] == "--help"))) {
+		MsgLog("vxlisp allowed arguments include:\n:help for this message.\n:path [relative or absolute path that holds project.vxlisp]\n[any number of commands from project.vxlisp (e.g. :buildjs)]")
+	} else {
+		var cmdtexts []string
+		projectpath := ""
+		lastarg := ""
+		for argidx, arg := range listarg {
+			switch argidx {
+			case 0:
 			default:
-				switch arg {
+				switch lastarg {
 				case "--path", ":path":
-					lastarg = arg
+					projectpath = arg
 				default:
-					cmdtexts = append(cmdtexts, arg)
+					switch arg {
+					case "--path", ":path":
+						lastarg = arg
+					default:
+						cmdtexts = append(cmdtexts, arg)
+					}
 				}
 			}
 		}
-	}
-	projectpath, _ = PathAbsoluteFromPath(projectpath)
-	projectpath = StringFromStringFindReplace(
-		projectpath, "\\", "/")
-	project, msgs := ProjectReadFromPath(projectpath)
-	msgblock = MsgblockAddBlock(msgblock, msgs)
-	if !IsErrorFromMsgblock(msgblock) {
-		cmds := ListCommandFromProject(project, cmdtexts)
-		msgs := ExecuteProjectCmds(project, cmds)
+		projectpath, _ = PathAbsoluteFromPath(projectpath)
+		projectpath = StringFromStringFindReplace(
+			projectpath, "\\", "/")
+		project, msgs := ProjectReadFromPath(projectpath)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
-	}
-	if IsErrorFromMsgblock(msgblock) {
-		MsgblockLog(msgblock)
-	} else if IsWarningFromMsgblock(msgblock) {
-		MsgblockLog(msgblock)
+		if !IsErrorFromMsgblock(msgblock) {
+			cmds, msgs := ListCommandFromProject(project, cmdtexts)
+			msgblock = MsgblockAddBlock(msgblock, msgs)
+			if !IsErrorFromMsgblock(msgblock) {
+				msgs = ExecuteProjectCmds(project, cmds)
+				msgblock = MsgblockAddBlock(msgblock, msgs)
+			}
+		}
+		if IsErrorFromMsgblock(msgblock) {
+			MsgblockLog(msgblock)
+		} else if IsWarningFromMsgblock(msgblock) {
+			MsgblockLog(msgblock)
+		}
 	}
 	MsgStopLog()
 	return msgblock

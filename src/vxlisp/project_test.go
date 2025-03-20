@@ -124,7 +124,7 @@ func TestProjectFromTextblock(t *testing.T) {
   :path *projectpath*/build/js/test
   :doc  ))`
 	cmdtexts := []string{"doc", "testjs"}
-	cmds := ListCommandFromProject(prj, cmdtexts)
+	cmds, _ := ListCommandFromProject(prj, cmdtexts)
 	actual = StringFromListCmd(cmds)
 	errortext = CompareText(expected, actual, 20, msgblock)
 	if errortext != "" {

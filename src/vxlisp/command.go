@@ -110,12 +110,24 @@ func CommandFromTextblock(
 	return command, msgblock
 }
 
-func ListCommandFromProject(prj *vxproject, cmdtexts []string) []*vxcommand {
+func ListCommandFromProject(
+	project *vxproject,
+	cmdtexts []string) ([]*vxcommand, *vxmsgblock) {
+	msgblock := NewMsgBlock("ListCommandFromProject")
 	var output []*vxcommand
-	for _, cmd := range prj.listcmd {
-		if BooleanFromListStringContains(cmdtexts, cmd.name) {
-			output = append(output, cmd)
+	for _, cmdtext := range cmdtexts {
+		var isfound = false
+		for _, command := range project.listcmd {
+			if cmdtext == command.name {
+				isfound = true
+				output = append(output, command)
+			}
+		}
+		if !isfound {
+			msg := NewMsg(
+				"Command Not Found in project.vxlisp: " + cmdtext)
+			msgblock = MsgblockAddError(msgblock, msg)
 		}
 	}
-	return output
+	return output, msgblock
 }

@@ -135,8 +135,6 @@ func MsgStartLog() {
 }
 
 func MsgStopLog() {
-	MsgLog(
-		"Build Complete")
 	if outputlog {
 		outputWriter.Flush()
 		outputFile.Close()
