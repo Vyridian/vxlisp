@@ -54,7 +54,7 @@ func NewMsgFromTextblock(
 	char int,
 	path string,
 	code string,
-	data ...interface{}) *vxmsg {
+	data ...any) *vxmsg {
 	output := new(vxmsg)
 	var listsdata []string
 	for _, msg := range data {
@@ -68,7 +68,7 @@ func NewMsgFromTextblock(
 	if char > 0 {
 		header += " Char:" + StringFromInt(char)
 	}
-	header += "\n" + code
+	header += "\n" + code + ":\n"
 	textblockdata := "" +
 		"\n" + textblock.name +
 		" Line:" + StringFromInt(textblock.linenum) +
