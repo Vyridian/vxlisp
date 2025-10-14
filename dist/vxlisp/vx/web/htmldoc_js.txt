@@ -208,3 +208,33 @@
     output = vx_ui_ui.f_ui_readstate_from_id(context, uid)
     return output
   }
+
+  static vx_write_image_from_uid_ext(uid, ext) {
+    // Get the div element you want to convert 
+    const divElement = document.getElementById(uid)
+    
+    // Create a canvas element 
+    const canvas = document.createElement('canvas')
+    const context = canvas.getContext('2d')
+    
+    // Set the canvas dimensions to match the div 
+    canvas.width = divElement.offsetWidth
+    canvas.height = divElement.offsetHeight
+    
+    // Render the div content to the canvas 
+    context.drawImage(divElement, 0, 0)
+    
+    // Convert the canvas to a data URL 
+    const imageDataURL = canvas.toDataURL('image/' + ext, 0.9)
+    // 0.9 is the quality (0-1) 
+    
+    // Create a link element to trigger the download 
+    const link = document.createElement('a')
+    link.download = 'my-image.jpg'
+    link.href = imageDataURL
+    
+    // Append the link to the document and click it 
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link);
+}

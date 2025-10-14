@@ -347,11 +347,13 @@
       const entries = Object.entries(valuemap['vx_value'])
       const values = []
       for (const [key, value] of entries) {
-        const chgvalue = fn([key, value])
-        const chgtype = vx_core.f_typedef_from_any(chgvalue)
-        if (vx_core.vx_is_allowtype(allowtypes, chgtype)) {
-          values.push(key)
-          values.push(chgvalue)
+        if (key != "") {
+          const chgvalue = fn([key, value])
+          const chgtype = vx_core.f_typedef_from_any(chgvalue)
+          if (vx_core.vx_is_allowtype(allowtypes, chgtype)) {
+            values.push(key)
+            values.push(chgvalue)
+          }
         }
       }
       output = vx_core.f_new_from_type(
