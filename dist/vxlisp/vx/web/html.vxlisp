@@ -657,7 +657,9 @@
        sindent
        key
        ": "
-       value ";")))]
+       (string<-string-find-replace
+        value quote "'")
+       ";")))]
   (string<-stringlist-join
    sprops
    ""))
