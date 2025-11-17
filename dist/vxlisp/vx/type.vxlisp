@@ -1,4 +1,5 @@
 (package vx/type
+ :libs (lib cpprandom)
  :doc "Type handling tools.")
 
 (func allowtypenames<-type : stringlist
@@ -409,3 +410,12 @@
  (traits<-typedef
   (typedef<-any value))
  :doc "Get the traits of a given value")
+
+(func uid : string
+ (native
+  :cpp    :auto
+  :csharp :auto
+  :java   :auto
+  :js     :auto
+  :kotlin :auto)
+ :doc "Generates a random uid")

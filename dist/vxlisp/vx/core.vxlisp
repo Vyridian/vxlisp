@@ -598,6 +598,7 @@
      }")
  :test (test "a" (string "a"))
        (test "ab" (string "a" "b"))
+       (test "a:b" (string "a" ":" "b"))
  :doc  "A simple string.")
 
 (type stringlist : list

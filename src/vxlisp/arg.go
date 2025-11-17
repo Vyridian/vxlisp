@@ -295,7 +295,7 @@ func ListArgFromTextblock(
 				msgblock = MsgblockAddBlock(msgblock, msgs)
 				arg.value = value
 			default:
-				if strings.HasPrefix(argstr, ":") {
+				if strings.HasPrefix(argstr, ":") && (textblock.blocktype != "\"") {
 					switch argstr {
 					case ":", "::", ":alias", ":doc", ":=":
 					case ":default":

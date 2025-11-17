@@ -178,3 +178,16 @@
     val output = vx_core.vx_new(vx_core.t_stringlist, *arraystring)
     return output
   }
+
+  // vx_uid
+  fun vx_uid() : vx_core.Type_string {
+    val b = ByteArray(16)
+    val rng = java.security.SecureRandom()
+    rng.nextBytes(b)
+    val text = java.util.Base64
+      .getUrlEncoder()
+      .withoutPadding()
+      .encodeToString(b)
+    val output = vx_core.vx_new_string(text)
+    return output
+  }

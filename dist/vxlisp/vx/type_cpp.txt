@@ -36,6 +36,9 @@
   // vx_stringlist_from_string_split(string, string)
   vx_core::Type_stringlist vx_stringlist_from_string_split(vx_core::Type_string text, vx_core::Type_string delim);
 
+  // vx_uid()
+  vx_core::Type_string vx_uid();
+
 // :body
 
   // vx_int_from_string_find(string, string)
@@ -169,5 +172,41 @@
     listany.push_back(token);
     vx_core::Type_stringlist output = vx_core::vx_new(vx_core::t_stringlist, listany);
     vx_core::vx_release({text, delim});
+    return output;
+  }
+
+  // vx_uid()
+  vx_core::Type_string vx_uid() {
+    // 1. Generate 16 cryptographically strong random bytes
+    std::random_device rd;
+    std::mt19937_64 gen(rd());
+    std::uniform_int_distribution<uint32_t> dist(0, 0xFFFFFFFF);
+    uint8_t bytes[16];
+    for (int i = 0; i < 16; i += 4) {
+      uint32_t r = dist(gen);
+      bytes[i]     = (r >> 24) & 0xFF;
+      bytes[i + 1] = (r >> 16) & 0xFF;
+      bytes[i + 2] = (r >> 8)  & 0xFF;
+      bytes[i + 3] = r & 0xFF;
+    }
+    // 2. Base64-URL encode (no padding)
+    static const char B64[] =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
+    std::string text;
+    text.reserve(22);
+    uint32_t val = 0;
+    int valBits = -6;
+    for (int i = 0; i < 16; i++) {
+      val = (val << 8) | bytes[i];
+      valBits += 8;
+      while (valBits >= 0) {
+        text.push_back(B64[(val >> valBits) & 63]);
+        valBits -= 6;
+      }
+    }
+    if (valBits > -6) {
+      text.push_back(B64[((val << 8) >> (valBits + 8)) & 63]);
+    }
+    vx_core::Type_string output = vx_core::vx_new_string(text);
     return output;
   }

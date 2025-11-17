@@ -173,3 +173,14 @@
     output = Vx.Core.vx_new(Vx.Core.t_stringlist, arraystring);
     return output;
   }
+
+  public static Vx.Core.Type_string vx_uid() {
+    byte[] b = new byte[16];
+    System.Security.Cryptography.RandomNumberGenerator.Fill(b);
+    String text = System.Convert.ToBase64String(b)
+      .Replace('+', '-')
+      .Replace('/', '_')
+      .TrimEnd('=');
+    Vx.Core.Type_string output = Vx.Core.vx_new_string(text);
+    return output;
+  }

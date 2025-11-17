@@ -4,6 +4,9 @@
  :doc        "The vx/core project"
  :javadomain "com.vxlisp"
  :libs
+  (lib cpprandom
+   :path "<random>"
+   :lang :cpp)
   (lib javaniofile
    :path "java.nio.file.*"
    :lang :java)

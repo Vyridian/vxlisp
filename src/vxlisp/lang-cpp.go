@@ -3321,7 +3321,13 @@ func CppImportsFromPackage(
 			} else if test {
 				libpath = "../main/" + libpath
 			}
-			if !isskip {
+			if isskip {
+			} else if BooleanFromStringStarts(libpath, "<") {
+				importline := "#include " + libpath + "\n"
+				if IntFromStringFind(output, importline) < 0 {
+					output += importline
+				}
+			} else {
 				importline := "#include \"" + slashprefix + libpath + ".hpp\"\n"
 				if IntFromStringFind(output, importline) < 0 {
 					output += importline

@@ -206,7 +206,7 @@ func FuncFromTextblock(
 						fnc.sideeffects = StringRemoveQuotes(word)
 					}
 					lastword = ""
-				} else if BooleanFromStringStarts(word, ":") {
+				} else if BooleanFromStringStarts(word, ":") && (textblock.blocktype != "\"") {
 					switch word {
 					case ":", ":alias", ":bigospace", ":bigotime", ":clientserver", ":doc", ":deprecated", ":sideeffects":
 						lastword = word

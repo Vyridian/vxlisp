@@ -86,7 +86,7 @@ func ConstFromTextblock(textblock *vxtextblock, pkg *vxpackage) (*vxconst, *vxms
 					cnst.doc = StringRemoveQuotes(word)
 				}
 				lastword = ""
-			} else if strings.HasPrefix(word, ":") {
+			} else if strings.HasPrefix(word, ":") && (textblock.blocktype != "\"") {
 				switch word {
 				case ":", ":alias", ":deprecated", ":doc":
 					lastword = word

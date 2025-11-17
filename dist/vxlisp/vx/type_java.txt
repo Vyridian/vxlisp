@@ -100,11 +100,25 @@
     return output;
   }
 
+  // vx_stringlist_from_string_split
   public static Core.Type_stringlist vx_stringlist_from_string_split(Core.Type_string text, Core.Type_string delim) {
     Core.Type_stringlist output = Core.e_stringlist;
     String stext = text.vx_string();
     String sdelim = delim.vx_string();
     Object[] arraystring = stext.split(java.util.regex.Pattern.quote(sdelim));
     output = Core.vx_new(Core.t_stringlist, arraystring);
+    return output;
+  }
+
+  // vx_uid
+  public static Core.Type_string vx_uid() {
+    java.security.SecureRandom rng = new java.security.SecureRandom();
+    byte[] b = new byte[16];
+    rng.nextBytes(b);
+    String text = java.util.Base64
+      .getUrlEncoder()
+      .withoutPadding()
+      .encodeToString(b);
+    Core.Type_string output = Core.vx_new_string(text);
     return output;
   }

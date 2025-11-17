@@ -407,7 +407,7 @@ func ValueFromTextblock(
 				switch idx {
 				case 0:
 					fncname := clausepart
-					if BooleanFromStringStarts(fncname, ":") {
+					if BooleanFromStringStarts(fncname, ":") && (clausetextblock.blocktype != "\"") {
 						keyname := StringSubstring(fncname, 1, len(fncname))
 						if BooleanIsIntFromString(keyname) {
 							fncname = "any<-list"
@@ -439,13 +439,20 @@ func ValueFromTextblock(
 						lastword = ""
 					default:
 						lastword = ""
-						switch clausepart {
-						case ":":
-							lastword = clausepart
-						case ":native":
-						case ":debug":
-							fnc.debug = true
-						default:
+						isused := false
+						if clausetextblock.blocktype != "\"" {
+							switch clausepart {
+							case ":":
+								lastword = clausepart
+								isused = true
+							case ":native":
+								isused = true
+							case ":debug":
+								fnc.debug = true
+								isused = true
+							}
+						}
+						if !isused {
 							if idx < (partslen-1) && (clausetextblocks[idx+1].text == ":native") {
 								nativeconst := NewConst()
 								nativeconst.name = clausepart
