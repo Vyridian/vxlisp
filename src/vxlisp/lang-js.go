@@ -5,45 +5,6 @@ import (
 	"strings"
 )
 
-func JsDocFromFunc(fnc *vxfunc) string {
-	var doc = ""
-	var argsdoc = ""
-	switch NameFromFunc(fnc) {
-	case "vx/core/copy", "vx/core/empty":
-	default:
-		if fnc.vxtype.isgeneric || fnc.generictype != nil {
-			argsdoc += "\n@param  {typemap} generic"
-		}
-	}
-	for _, arg := range fnc.listarg {
-		argsdoc += "\n@param "
-		if arg.vxtype.name != "" {
-			argsdoc += " {" + LangFromName(arg.vxtype.alias) + "}"
-		}
-		if arg.multi {
-			argsdoc += " ..."
-		}
-		argsdoc += " " + LangFromName(arg.alias)
-		if arg.doc != "" {
-			argsdoc += " " + arg.doc
-		}
-	}
-	if fnc.async {
-		doc += "\n@async "
-	}
-	doc += "@function " + LangFromName(fnc.alias)
-	if fnc.doc != "" {
-		doc += "\n" + fnc.doc
-	}
-	if fnc.deprecated != "" {
-		doc += "\n" + fnc.deprecated
-	}
-	doc += "" +
-		argsdoc +
-		"\n@return {" + fnc.vxtype.name + "}"
-	return doc
-}
-
 func JsEmptyValueFromType(
 	lang *vxlang,
 	typ *vxtype) string {
@@ -191,17 +152,8 @@ func JsFromConst(
 	pkg *vxpackage) (string, string, *vxmsgblock) {
 	msgblock := NewMsgBlock("JsFromConst")
 	path := cnst.pkgname + "/" + cnst.name
-	doc := ""
-	doc += "Constant: " + cnst.name + "\n"
-	if cnst.doc != "" {
-		doc += cnst.doc + "\n"
-	}
-	if cnst.deprecated != "" {
-		doc += cnst.deprecated + "\n"
-	}
 	cnsttype := cnst.vxtype
 	var properties []string
-	doc += "{" + cnsttype.name + "}"
 	pkgname := LangFromName(cnst.pkgname)
 	cnstname := LangFromName(cnst.alias)
 	startval := ""
@@ -236,10 +188,9 @@ func JsFromConst(
 			properties = append(properties, "Object.assign("+propertyprefix+", "+value+")")
 		}
 	}
+	doc := LangNativeConstDoc(lang, cnst)
 	output := "" +
-		"  /**" +
-		"\n   * " + StringFromStringIndent(doc, "   * ") +
-		"\n   */" +
+		doc +
 		"\n  static c_" + cnstname + " = " + startval +
 		"\n" +
 		"\n"
@@ -284,7 +235,7 @@ func JsFromFunc(
 			args = append(args, argname)
 		}
 	}
-	doc := JsDocFromFunc(fnc)
+	doc := LangNativeFuncDoc(lang, fnc)
 	indent := 2
 	footer := ""
 	jsfuncname := LangFromName(fnc.alias) + JsIndexFromFunc(fnc)
@@ -393,9 +344,7 @@ func JsFromFunc(
 			"\n" + sindent + valuetext
 	}
 	output := "" +
-		"  /**" +
-		"\n   * " + StringFromStringIndent(doc, "   * ") +
-		"\n   */" +
+		doc +
 		"\n  static t_" + jsfuncname + " = {" +
 		"\n    vx_type: vx_core.t_type" +
 		"\n  }" +
@@ -559,7 +508,7 @@ func JsFromPackage(
 		statics += statictext
 	}
 	namespaceopen, namespaceclose := LangNativeNamespaceOpenClose(
-		lang, pkgname)
+		lang, pkgname, "")
 	output := "" +
 		"'strict mode'" +
 		"\n" + imports +
@@ -773,17 +722,17 @@ func JsFromValue(
 			case "vx/core/fn":
 			case "vx/core/let":
 				if fnc.async {
-					output += LangNativePkgName(lang, fnc.pkgname) + lang.pkgref + "f_let_async("
+					output += LangPkgName(lang, fnc.pkgname) + lang.pkgref + "f_let_async("
 				} else {
-					output += LangNativePkgName(lang, fnc.pkgname) + lang.pkgref + "f_let("
+					output += LangPkgName(lang, fnc.pkgname) + lang.pkgref + "f_let("
 				}
 			default:
 				if fnc.argname != "" {
-					output += LangNativePkgName(lang, "vx/core") + lang.pkgref + "vx_any_from_func("
+					output += LangPkgName(lang, "vx/core") + lang.pkgref + "vx_any_from_func("
 					argtexts = append(argtexts, LangTypeT(lang, fnc.vxtype))
 					argtexts = append(argtexts, LangFromName(fnc.argname))
 				} else {
-					output += LangNativePkgName(lang, fnc.pkgname) + lang.pkgref + "f_" + LangFuncName(fnc) + "("
+					output += LangPkgName(lang, fnc.pkgname) + lang.pkgref + "f_" + LangFuncName(fnc) + "("
 				}
 			}
 			switch funcname {
@@ -1312,7 +1261,8 @@ func JsTestFromPackage(
 	if len(testall) > 0 {
 		testcases = ",\n      " + strings.Join(testall, ",\n      ")
 	}
-	namespaceopen, namespaceclose := LangNativeNamespaceOpenClose(lang, pkgname+"_test")
+	namespaceopen, namespaceclose := LangNativeNamespaceOpenClose(
+		lang, pkgname+"_test", "")
 	output := "" +
 		"'strict mode'" +
 		"\n" + imports +
@@ -1325,8 +1275,8 @@ func JsTestFromPackage(
 		"\n      \":caselist\", testcaselist," +
 		"\n      \":coveragesummary\", " + pkgname + "_test.test_coveragesummary()," +
 		"\n      \":coveragedetail\", " + pkgname + "_test.test_coveragedetail()" +
-		"\n    );" +
-		"\n    return output;" +
+		"\n    )" +
+		"\n    return output" +
 		"\n  }" +
 		"\n" +
 		"\n  static test_coveragesummary() {" +

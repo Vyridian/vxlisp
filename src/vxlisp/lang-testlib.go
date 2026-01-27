@@ -63,7 +63,7 @@ func LangTestLib(lang *vxlang) string {
 		LangTestLib_write_testpackagelist_async(lang)
 	spath := LangPkgNameDot(lang, "vx/core") + "c_path_test_resources.vx_string()"
 	namespaceopen, namespaceclose := LangNativeNamespaceOpenClose(
-		lang, "TestLib")
+		lang, "TestLib", "")
 	output := LangNativeTestLib(
 		lang, namespaceopen, namespaceclose, commontests, spath)
 	return output
@@ -83,9 +83,11 @@ func LangTestLib_file_test(lang *vxlang) string {
 		"\n      " + LangPkgNameDot(lang, "vx/core") + "vx_new_string(\":path\"), spath" +
 		paramsclose
 	output := "" +
-		LangFuncHeaderAll(lang, "", fnc, 1, false, true, 0,
+		LangFuncHeaderAll(lang, 1,
+			"", fnc, false, true, 0,
 			//	long irefcount = vx_core::refcount;
-			LangVar(lang, "output", filetype, 2,
+			LangVar(lang, 2, filetype,
+				"output",
 				LangPkgNameDot(lang, "vx/core")+"vx_copy("+fileparams+")"))
 		//vx_core::vx_release(string_file);
 	return output
@@ -109,13 +111,17 @@ func LangTestLib_read_test_file(lang *vxlang) string {
 		"\n      " + LangPkgNameDot(lang, "vx/core") + "vx_new_string(\":name\"), " + LangPkgNameDot(lang, "vx/core") + "vx_new_string(\"string_read_from_file.txt\")" +
 		paramsclose
 	output := "" +
-		LangFuncHeaderAll(lang, "", fnc, 1, false, true, 0,
+		LangFuncHeaderAll(lang, 1,
+			"", fnc, false, true, 0,
 			//	long irefcount = vx_core::refcount;
-			LangVar(lang, "file", filetype, 2,
+			LangVar(lang, 2, filetype,
+				"file",
 				LangPkgNameDot(lang, "vx/core")+"vx_new("+fileparams+")")+
-				LangVar(lang, "string_file", stringtype, 2,
+				LangVar(lang, 2, stringtype,
+					"string_file",
 					LangPkgNameDot(lang, "vx/data/file")+"vx_string_read_from_file(file)")+
-				LangVar(lang, "output", rawstringtype, 2,
+				LangVar(lang, 2, rawstringtype,
+					"output",
 					"string_file"+lang.typeref+"vx_string()"))
 		//vx_core::vx_release(string_file);
 	return output
@@ -130,14 +136,19 @@ func LangTestLib_run_testcase(lang *vxlang) string {
 	arg.isfinal = true
 	fnc.listarg = append(fnc.listarg, arg)
 	output := "" +
-		LangFuncHeaderAll(lang, "", fnc, 1, false, true, 0,
-			LangVar(lang, "testpkg", rawstringtype, 2,
+		LangFuncHeaderAll(lang, 1,
+			"", fnc, false, true, 0,
+			LangVar(lang, 2, rawstringtype,
+				"testpkg",
 				"testcase.testpkg().vx_string()")+
-				LangVar(lang, "casename", rawstringtype, 2,
+				LangVar(lang, 2, rawstringtype,
+					"casename",
 					"testcase.casename().vx_string()")+
-				LangVar(lang, "testdescribelist", testdescribelisttype, 2,
+				LangVar(lang, 2, testdescribelisttype,
+					"testdescribelist",
 					"testcase.describelist()")+
-				LangVar(lang, "output", rawbooleantype, 2,
+				LangVar(lang, 2, rawbooleantype,
+					"output",
 					"run_testdescribelist(testpkg, casename, testdescribelist)"))
 	return output
 }
@@ -153,12 +164,16 @@ func LangTestLib_run_testcase_async(lang *vxlang) string {
 	output := "" +
 		"\n  // Blocking" +
 		"\n  // Only use if running a single testcase" +
-		LangFuncHeaderAll(lang, "", fnc, 1, false, true, 0,
-			LangVarFuture(lang, "async_testcase", testcasetype, 2,
+		LangFuncHeaderAll(lang, 1,
+			"", fnc, false, true, 0,
+			LangVarFuture(lang, 2, testcasetype,
+				"async_testcase",
 				LangPkgNameDot(lang, "vx/test")+"f_resolve_testcase(testcase)")+
-				LangVar(lang, "testcase_resolved", testcasetype, 2,
+				LangVar(lang, 2, testcasetype,
+					"testcase_resolved",
 					LangPkgNameDot(lang, "vx/core")+"vx_sync_from_async("+LangTypeT(lang, testcasetype)+", async_testcase)")+
-				LangVar(lang, "output", rawbooltype, 2, "run_testcase(testcase_resolved)"))
+				LangVar(lang, 2, rawbooltype,
+					"output", "run_testcase(testcase_resolved)"))
 	return output
 }
 
@@ -171,12 +186,16 @@ func LangTestLib_run_testcaselist(lang *vxlang) string {
 	arg.isfinal = true
 	fnc.listarg = append(fnc.listarg, arg)
 	output := "" +
-		LangFuncHeaderAll(lang, "", fnc, 1, false, true, 0,
-			LangVarCollection(lang, "listtestcase", rawlisttype, testcasetype, 2,
+		LangFuncHeaderAll(lang, 1,
+			"", fnc, false, true, 0,
+			LangVarCollection(lang, 2, rawlisttype, testcasetype,
+				"listtestcase",
 				"testcaselist.vx_listtestcase()")+
-				LangForList(lang, "testcase", testcasetype, "listtestcase", 2,
+				LangForList(lang, 2,
+					"testcase", testcasetype, "listtestcase",
 					"\n      run_testcase(testcase)"+lang.lineend)+
-				LangVar(lang, "output", rawbooltype, 2, "true"))
+				LangVar(lang, 2, rawbooltype,
+					"output", "true"))
 	return output
 }
 
@@ -197,14 +216,16 @@ func LangTestLib_run_testdescribe(lang *vxlang) string {
 	arg.isfinal = true
 	fnc.listarg = append(fnc.listarg, arg)
 	output := "" +
-		LangFuncHeaderStatic(lang, "", fnc, 1, 0,
-			LangVar(lang, "testcode", stringtype, 2,
-				"describe.describename()")+
-				LangVar(lang, "message", rawstringtype, 2,
-					"testcode.vx_string()")+
-				LangVar(lang, "testresult", testresulttype, 2,
-					"describe.testresult()")+
-				LangVar(lang, "output", rawbooltype, 2,
+		LangFuncHeaderStatic(lang, 1,
+			"", fnc, 0,
+			LangVar(lang, 2, stringtype,
+				"testcode", "describe.describename()")+
+				LangVar(lang, 2, rawstringtype,
+					"message", "testcode.vx_string()")+
+				LangVar(lang, 2, testresulttype,
+					"testresult", "describe.testresult()")+
+				LangVar(lang, 2, rawbooltype,
+					"output",
 					"run_testresult(testpkg, casename, message, testresult)"))
 	return output
 }
@@ -226,12 +247,17 @@ func LangTestLib_run_testdescribelist(lang *vxlang) string {
 	arg.isfinal = true
 	fnc.listarg = append(fnc.listarg, arg)
 	output := "" +
-		LangFuncHeaderStatic(lang, "", fnc, 1, 0,
-			LangVar(lang, "output", rawbooltype, 2, "true")+
-				LangVarCollection(lang, "listtestdescribe", rawlisttype, testdescribetype, 2,
+		LangFuncHeaderStatic(lang, 1,
+			"", fnc, 0,
+			LangVar(lang, 2, rawbooltype,
+				"output", "true")+
+				LangVarCollection(lang, 2, rawlisttype, testdescribetype,
+					"listtestdescribe",
 					"testdescribelist.vx_listtestdescribe()")+
-				LangForList(lang, "testdescribe", testdescribetype, "listtestdescribe", 2,
-					LangVar(lang, "testoutput", rawbooltype, 3,
+				LangForList(lang, 2,
+					"testdescribe", testdescribetype, "listtestdescribe",
+					LangVar(lang, 3, rawbooltype,
+						"testoutput",
 						"run_testdescribe(testpkg, casename, testdescribe)")+
 						"\n 	    if (!testoutput) {"+
 						"\n   			  output = false"+lang.lineend+
@@ -248,10 +274,13 @@ func LangTestLib_run_testpackage(lang *vxlang) string {
 	arg.isfinal = true
 	fnc.listarg = append(fnc.listarg, arg)
 	output := "" +
-		LangFuncHeaderStatic(lang, "", fnc, 1, 0,
-			LangVar(lang, "testcaselist", testcaselisttype, 2,
+		LangFuncHeaderStatic(lang, 1,
+			"", fnc, 0,
+			LangVar(lang, 2, testcaselisttype,
+				"testcaselist",
 				"testpackage.caselist()")+
-				LangVar(lang, "output", rawbooltype, 2,
+				LangVar(lang, 2, rawbooltype,
+					"output",
 					"run_testcaselist(testcaselist)"))
 	return output
 }
@@ -267,12 +296,16 @@ func LangTestLib_run_testpackage_async(lang *vxlang) string {
 	output := "" +
 		"\n  // Blocking" +
 		"\n  // This is the preferred way of calling test (1 block per package)" +
-		LangFuncHeaderStatic(lang, "", fnc, 1, 0,
-			LangVarFuture(lang, "async_testpackage", testpackagetype, 2,
+		LangFuncHeaderStatic(lang, 1,
+			"", fnc, 0,
+			LangVarFuture(lang, 2, testpackagetype,
+				"async_testpackage",
 				LangPkgNameDot(lang, "vx/test")+"f_resolve_testpackage(testpackage)")+
-				LangVar(lang, "testpackage_resolved", testpackagetype, 2,
+				LangVar(lang, 2, testpackagetype,
+					"testpackage_resolved",
 					LangPkgNameDot(lang, "vx/core")+"vx_sync_from_async("+LangTypeT(lang, testpackagetype)+", async_testpackage)")+
-				LangVar(lang, "output", rawbooltype, 2,
+				LangVar(lang, 2, rawbooltype,
+					"output",
 					"run_testpackage(testpackage_resolved)"))
 	return output
 }
@@ -301,20 +334,28 @@ func LangTestLib_run_testresult(lang *vxlang) string {
 	assertnotequals := LangNativeTestAssertNotEquals(lang, true, 3)
 	println := LangNativePrintLine(lang)
 	output := "" +
-		LangFuncHeaderStatic(lang, "", fnc, 1, 0,
-			LangVar(lang, "valexpected", anytype, 2,
+		LangFuncHeaderStatic(lang, 1,
+			"", fnc, 0,
+			LangVar(lang, 2, anytype,
+				"valexpected",
 				"testresult.expected()")+
-				LangVar(lang, "valactual", anytype, 2,
+				LangVar(lang, 2, anytype,
+					"valactual",
 					"testresult.actual()")+
-				LangVar(lang, "passfail", rawbooltype, 2,
+				LangVar(lang, 2, rawbooltype,
+					"passfail",
 					"testresult.passfail().vx_boolean()")+
-				LangVar(lang, "code", rawstringtype, 2,
+				LangVar(lang, 2, rawstringtype,
+					"code",
 					"testresult.code().vx_string()")+
-				LangVar(lang, "expected", rawstringtype, 2,
+				LangVar(lang, 2, rawstringtype,
+					"expected",
 					LangPkgNameDot(lang, "vx/core")+"f_string_from_any(valexpected).vx_string()")+
-				LangVar(lang, "actual", rawstringtype, 2,
+				LangVar(lang, 2, rawstringtype,
+					"actual",
 					LangPkgNameDot(lang, "vx/core")+"f_string_from_any(valactual).vx_string()")+
-				LangVar(lang, "msg", rawstringtype, 2,
+				LangVar(lang, 2, rawstringtype,
+					"msg",
 					"testpkg + \"/\" + testname + \" \" + message")+
 				"\n    if (!passfail) {"+
 				"\n      "+println+"(msg)"+lang.lineend+
@@ -322,12 +363,13 @@ func LangTestLib_run_testresult(lang *vxlang) string {
 				"\n      "+println+"(actual)"+lang.lineend+
 				"\n      "+LangPkgNameDot(lang, "vx/core")+"f_log(testresult)"+lang.lineend+
 				"\n    }"+
-				LangIf(lang, 2,
-					LangNativeIfClause(lang, rawstringtype, "==", "code", "\":ne\""),
+				LangIfThen(lang, 2,
+					LangIfClause(lang, rawstringtype, "==", "code", "\":ne\""),
 					assertnotequals)+
 				LangIfElse(lang, 2, assertequals)+
 				LangIfEnd(lang, 2)+
-				LangVal(lang, "output", rawbooltype, 2, "true"))
+				LangVal(lang, 2, rawbooltype,
+					"output", "true"))
 	return output
 }
 
@@ -350,11 +392,13 @@ func LangTestLib_test(lang *vxlang) string {
 	assertequals := LangNativeTestAssertEquals(lang, false, 2)
 	println := LangNativePrintLine(lang)
 	output := "" +
-		LangFuncHeaderAll(lang, "", fnc, 1, false, true, 0,
+		LangFuncHeaderAll(lang, 1,
+			"", fnc, false, true, 0,
 			assertequals+
-				LangVar(lang, "output", rawbooltype, 2, "false")+
-				"\n    if ("+LangNativeVxEqualsString(lang, "expected", "actual")+") {"+
-				LangNativeVarSet(lang, "output", 3, "true")+
+				LangVar(lang, 2, rawbooltype,
+					"output", "false")+
+				"\n    if ("+LangVxEqualsString(lang, "expected", "actual")+") {"+
+				LangVarSet(lang, 3, "output", "true")+
 				"\n    } else {"+
 				"\n      "+println+"(testname)"+lang.lineend+
 				"\n      "+println+"(expected)"+lang.lineend+
@@ -375,21 +419,30 @@ func LangTestLib_test_async_from_async_fn(
 		slambda +
 		")"
 	output := "" +
-		LangFuncHeaderStatic(lang, "", fnc, 1, 0,
-			LangVar(lang, "testname", rawstringtype, 2, "\""+fnc.name+"\"")+
+		LangFuncHeaderStatic(lang, 1,
+			"", fnc, 0,
+			LangVar(lang, 2, rawstringtype,
+				"testname", "\""+fnc.name+"\"")+
 				//long irefcount = vx_core::refcount;
-				LangVar(lang, "helloworld", stringtype, 2,
+				LangVar(lang, 2, stringtype,
+					"helloworld",
 					LangPkgNameDot(lang, "vx/core")+"vx_new_string(\"Hello World\")")+
-				LangVarFuture(lang, "async", stringtype, 2,
+				LangVarFuture(lang, 2, stringtype,
+					"async",
 					LangPkgNameDot(lang, "vx/core")+"vx_async_new_from_value(helloworld)")+
-				LangVarFuture(lang, "async1", stringtype, 2, sasync1)+
-				LangVar(lang, "sync", stringtype, 2,
+				LangVarFuture(lang, 2, stringtype,
+					"async1", sasync1)+
+				LangVar(lang, 2, stringtype,
+					"sync",
 					LangPkgNameDot(lang, "vx/core")+"vx_sync_from_async("+LangTypeT(lang, stringtype)+", async1)")+
-				LangVar(lang, "expected", rawstringtype, 2,
+				LangVar(lang, 2, rawstringtype,
+					"expected",
 					"\"Hello World\"")+
-				LangVar(lang, "actual", rawstringtype, 2,
+				LangVar(lang, 2, rawstringtype,
+					"actual",
 					"sync"+lang.typeref+"vx_string()")+
-				LangVar(lang, "output", rawbooltype, 2, "TestLib"+lang.pkgref+"test(testname, expected, actual)"))
+				LangVar(lang, 2, rawbooltype,
+					"output", "TestLib"+lang.pkgref+"test(testname, expected, actual)"))
 		//vx_core::vx_release(helloworld);
 		//output = output && vx_core::vx_memory_leak_test(testname, irefcount);
 	return output
@@ -400,21 +453,27 @@ func LangTestLib_test_async_new_from_value(lang *vxlang) string {
 	fnc.name = "test_async_new_from_value"
 	fnc.vxtype = rawbooltype
 	output := "" +
-		LangFuncHeaderStatic(lang, "", fnc, 1, 0,
-			LangVar(lang, "testname", rawstringtype, 2,
+		LangFuncHeaderStatic(lang, 1, "", fnc, 0,
+			LangVar(lang, 2, rawstringtype,
+				"testname",
 				"\""+fnc.name+"\"")+
 				//long irefcount = vx_core::refcount;
-				LangVar(lang, "helloworld", stringtype, 2,
+				LangVar(lang, 2, stringtype,
+					"helloworld",
 					LangPkgNameDot(lang, "vx/core")+"vx_new_string(\"Hello World\")")+
-				LangVarFuture(lang, "async", stringtype, 2,
+				LangVarFuture(lang, 2, stringtype,
+					"async",
 					LangPkgNameDot(lang, "vx/core")+"vx_async_new_from_value(helloworld)")+
-				LangVar(lang, "sync", stringtype, 2,
+				LangVar(lang, 2, stringtype,
+					"sync",
 					LangPkgNameDot(lang, "vx/core")+"vx_sync_from_async("+LangTypeT(lang, stringtype)+", async)")+
-				LangVar(lang, "expected", rawstringtype, 2,
-					"\"Hello World\"")+
-				LangVar(lang, "actual", rawstringtype, 2,
+				LangVar(lang, 2, rawstringtype,
+					"expected", "\"Hello World\"")+
+				LangVar(lang, 2, rawstringtype,
+					"actual",
 					"sync"+lang.typeref+"vx_string()")+
-				LangVar(lang, "output", rawbooltype, 2,
+				LangVar(lang, 2, rawbooltype,
+					"output",
 					"TestLib"+lang.pkgref+"test(testname, expected, actual)"))
 		//vx_core::vx_release(helloworld);
 		//output = output && vx_core::vx_memory_leak_test(testname, irefcount);
@@ -426,17 +485,22 @@ func LangTestLib_test_helloworld(lang *vxlang) string {
 	fnc.name = "test_helloworld"
 	fnc.vxtype = rawbooltype
 	output := "" +
-		LangFuncHeaderStatic(lang, "", fnc, 1, 0,
-			LangVar(lang, "testname", rawstringtype, 2,
+		LangFuncHeaderStatic(lang, 1,
+			"", fnc, 0,
+			LangVar(lang, 2, rawstringtype,
+				"testname",
 				"\""+fnc.name+"\"")+
 				//long irefcount = vx_core::refcount;
-				LangVar(lang, "helloworld", stringtype, 2,
+				LangVar(lang, 2, stringtype,
+					"helloworld",
 					LangPkgNameDot(lang, "vx/core")+"vx_new_string(\"Hello World\")")+
-				LangVar(lang, "expected", rawstringtype, 2,
-					"\"Hello World\"")+
-				LangVar(lang, "actual", rawstringtype, 2,
+				LangVar(lang, 2, rawstringtype,
+					"expected", "\"Hello World\"")+
+				LangVar(lang, 2, rawstringtype,
+					"actual",
 					"helloworld"+lang.typeref+"vx_string()")+
-				LangVar(lang, "output", rawbooltype, 2,
+				LangVar(lang, 2, rawbooltype,
+					"output",
 					"TestLib"+lang.pkgref+"test(testname, expected, actual)"))
 		//vx_core::vx_release(helloworld);
 		//output = output && vx_core::vx_memory_leak_test(testname, irefcount);
@@ -451,23 +515,31 @@ func LangTestLib_test_list_from_list_async(
 	fn_async := LangNativeTestLibFnAsync(lang)
 	asynclist := LangPkgNameDot(lang, "vx/core") + "vx_list_from_list_async(" + LangTypeT(lang, stringlisttype) + ", slist, fn_async)"
 	output := "" +
-		LangFuncHeaderStatic(lang, "", fnc, 1, 0,
-			LangVar(lang, "testname", rawstringtype, 2,
-				"\""+fnc.name+"\"")+
+		LangFuncHeaderStatic(lang, 1,
+			"", fnc, 0,
+			LangVar(lang, 2, rawstringtype,
+				"testname", "\""+fnc.name+"\"")+
 				//long irefcount = vx_core::refcount;
-				LangVar(lang, "sparams", anylisttype, 2,
+				LangVar(lang, 2, anylisttype,
+					"sparams",
 					LangPkgNameDot(lang, "vx/core")+"vx_anylist_from_arraystring(\"hello\", \"world\")")+
-				LangVar(lang, "slist", stringlisttype, 2,
+				LangVar(lang, 2, stringlisttype,
+					"slist",
 					LangPkgNameDot(lang, "vx/core")+"f_new_from_type("+LangTypeT(lang, stringlisttype)+", sparams)")+
 				fn_async+
-				LangVarFuture(lang, "asynclist", stringlisttype, 2, asynclist)+
-				LangVar(lang, "sync", stringlisttype, 2,
+				LangVarFuture(lang, 2, stringlisttype,
+					"asynclist", asynclist)+
+				LangVar(lang, 2, stringlisttype,
+					"sync",
 					LangPkgNameDot(lang, "vx/core")+"vx_sync_from_async("+LangTypeT(lang, stringlisttype)+", asynclist)")+
-				LangVar(lang, "expected", rawstringtype, 2,
+				LangVar(lang, 2, rawstringtype,
+					"expected",
 					`"(stringlist\n \"hello!\"\n \"world!\")"`)+
-				LangVar(lang, "actual", rawstringtype, 2,
+				LangVar(lang, 2, rawstringtype,
+					"actual",
 					LangPkgNameDot(lang, "vx/core")+"vx_string_from_any(sync)")+
-				LangVar(lang, "output", rawbooltype, 2,
+				LangVar(lang, 2, rawbooltype,
+					"output",
 					"TestLib"+lang.pkgref+"test(testname, expected, actual)"))
 		//vx_core::vx_release(helloworld);
 		//output = output && vx_core::vx_memory_leak_test(testname, irefcount);
@@ -486,20 +558,27 @@ func LangTestLib_test_pathfull_from_file(lang *vxlang) string {
 		"\n      " + LangPkgNameDot(lang, "vx/core") + "vx_new_string(\":name\"), " + LangPkgNameDot(lang, "vx/core") + "vx_new_string(\"string_read_from_file.txt\")" +
 		paramsclose
 	output := "" +
-		LangFuncHeaderStatic(lang, "", fnc, 1, 0,
-			LangVar(lang, "testname", rawstringtype, 2,
+		LangFuncHeaderStatic(lang, 1,
+			"", fnc, 0,
+			LangVar(lang, 2, rawstringtype,
+				"testname",
 				"\""+fnc.name+"\"")+
 				//	long irefcount = vx_core::refcount;
-				LangVar(lang, "file", filetype, 2,
+				LangVar(lang, 2, filetype,
+					"file",
 					LangPkgNameDot(lang, "vx/core")+"vx_new("+fileparams+")")+
-				LangVar(lang, "string_path", stringtype, 2,
+				LangVar(lang, 2, stringtype,
+					"string_path",
 					LangPkgNameDot(lang, "vx/data/file")+"f_pathfull_from_file(file)")+
-				LangVar(lang, "expected", rawstringtype, 2,
+				LangVar(lang, 2, rawstringtype,
+					"expected",
 					`spath + "/vx/string_read_from_file.txt"`)+
-				LangVar(lang, "actual", rawstringtype, 2,
+				LangVar(lang, 2, rawstringtype,
+					"actual",
 					"string_path"+lang.typeref+"vx_string()")+
 				// vx_core::vx_release(string_path);
-				LangVar(lang, "output", rawbooltype, 2,
+				LangVar(lang, 2, rawbooltype,
+					"output",
 					"TestLib"+lang.pkgref+"test(testname, expected, actual)"))
 		//	output = output && vx_core::vx_memory_leak_test(testname, irefcount);
 	return output
@@ -510,14 +589,19 @@ func LangTestLib_test_read_file(lang *vxlang) string {
 	fnc.name = "test_read_file"
 	fnc.vxtype = rawbooltype
 	output := "" +
-		LangFuncHeaderStatic(lang, "", fnc, 1, 0,
-			LangVar(lang, "testname", rawstringtype, 2, "\""+fnc.name+"\"")+
+		LangFuncHeaderStatic(lang, 1,
+			"", fnc, 0,
+			LangVar(lang, 2, rawstringtype,
+				"testname", "\""+fnc.name+"\"")+
 				//	long irefcount = vx_core::refcount;
-				LangVar(lang, "expected", rawstringtype, 2, `"testdata"`)+
-				LangVar(lang, "actual", rawstringtype, 2,
+				LangVar(lang, 2, rawstringtype,
+					"expected", `"testdata"`)+
+				LangVar(lang, 2, rawstringtype,
+					"actual",
 					`read_test_file(spath + "/vx", "string_read_from_file.txt")`)+
 				// vx_core::vx_release(string_path);
-				LangVar(lang, "output", rawbooltype, 2,
+				LangVar(lang, 2, rawbooltype,
+					"output",
 					"TestLib"+lang.pkgref+"test(testname, expected, actual)"))
 		//	output = output && vx_core::vx_memory_leak_test(testname, irefcount);
 	return output
@@ -528,21 +612,29 @@ func LangTestLib_test_write_file(lang *vxlang) string {
 	fnc.name = "test_write_file"
 	fnc.vxtype = rawbooltype
 	output := "" +
-		LangFuncHeaderStatic(lang, "", fnc, 1, 0,
-			LangVar(lang, "testname", rawstringtype, 2, "\""+fnc.name+"\"")+
+		LangFuncHeaderStatic(lang, 1,
+			"", fnc, 0,
+			LangVar(lang, 2, rawstringtype,
+				"testname", "\""+fnc.name+"\"")+
 				//	long irefcount = vx_core::refcount;
-				LangVar(lang, "file", filetype, 2,
+				LangVar(lang, 2, filetype,
+					"file",
 					LangPkgNameDot(lang, "vx/core")+"vx_new("+
 						"\n      "+LangTypeT(lang, filetype)+", "+
 						"\n      "+LangPkgNameDot(lang, "vx/core")+"vx_new_string(\":path\"), "+LangPkgNameDot(lang, "vx/core")+"vx_new_string(spath + \"/vx\"),"+
 						"\n      "+LangPkgNameDot(lang, "vx/core")+"vx_new_string(\":name\"), "+LangPkgNameDot(lang, "vx/core")+"vx_new_string(\"string_read_from_file.txt\")"+
 						"\n    )")+
-				LangVar(lang, "string_path", stringtype, 2,
+				LangVar(lang, 2, stringtype,
+					"string_path",
 					LangPkgNameDot(lang, "vx/data/file")+"f_pathfull_from_file(file)")+
-				LangVar(lang, "expected", rawstringtype, 2, `spath + "/vx/string_read_from_file.txt"`)+
-				LangVar(lang, "actual", rawstringtype, 2, "string_path"+lang.typeref+"vx_string()")+
+				LangVar(lang, 2, rawstringtype,
+					"expected",
+					`spath + "/vx/string_read_from_file.txt"`)+
+				LangVar(lang, 2, rawstringtype,
+					"actual", "string_path"+lang.typeref+"vx_string()")+
 				// vx_core::vx_release(string_path);
-				LangVar(lang, "output", rawbooltype, 2, "TestLib"+lang.pkgref+"test(testname, expected, actual)"))
+				LangVar(lang, 2, rawbooltype,
+					"output", "TestLib"+lang.pkgref+"test(testname, expected, actual)"))
 		//	output = output && vx_core::vx_memory_leak_test(testname, irefcount);
 	return output
 }
@@ -562,37 +654,53 @@ func LangTestLib_write_testpackagelist_async(lang *vxlang) string {
 	output := "" +
 		"\n  // Blocking" +
 		"\n  // This is the preferred way of writing testsuite (1 block per testsuite)" +
-		LangFuncHeaderStatic(lang, "", fnc, 1, 0,
-			LangVar(lang, "output", rawbooltype, 2, "false")+
-				LangVarFuture(lang, "async_testpackagelist", testpackagelisttype, 2,
+		LangFuncHeaderStatic(lang, 1,
+			"", fnc, 0,
+			LangVar(lang, 2, rawbooltype,
+				"output", "false")+
+				LangVarFuture(lang, 2, testpackagelisttype,
+					"async_testpackagelist",
 					LangPkgNameDot(lang, "vx/test")+"f_resolve_testpackagelist(testpackagelist)")+
-				LangVar(lang, "testpackagelist_resolved", testpackagelisttype, 2,
+				LangVar(lang, 2, testpackagelisttype,
+					"testpackagelist_resolved",
 					LangPkgNameDot(lang, "vx/core")+
 						"vx_sync_from_async("+
 						LangTypeT(lang, testpackagelisttype)+
 						", async_testpackagelist)")+
-				LangVar(lang, "filetest", filetype, 2,
+				LangVar(lang, 2, filetype,
+					"filetest",
 					"file_test("+LangPkgNameDot(lang, "vx/test")+"f_file_test())")+
-				LangVar(lang, "valboolean", booleantype, 2,
+				LangVar(lang, 2, booleantype,
+					"valboolean",
 					LangPkgNameDot(lang, "vx/data/file")+
 						"f_boolean_write_from_file_any(context, filetest, testpackagelist_resolved)")+
-				LangNativeVarSet(lang, "output", 2,
-					"valboolean.vx_boolean()")+
-				LangVar(lang, "divtest", htmldivtype, 2,
+				LangVarSet(lang, 2,
+					"output", "valboolean.vx_boolean()")+
+				LangVar(lang, 2, htmldivtype,
+					"divtest",
 					LangPkgNameDot(lang, "vx/test")+"f_div_from_testpackagelist(testpackagelist_resolved)")+
-				LangVar(lang, "htmlnode", htmltype, 2,
+				LangVar(lang, 2, htmltype,
+					"htmlnode",
 					LangPkgNameDot(lang, "vx/test")+"f_html_from_divtest(divtest)")+
-				LangVar(lang, "filenode", filetype, 2,
+				LangVar(lang, 2, filetype,
+					"filenode",
 					"file_test("+LangPkgNameDot(lang, "vx/test")+"f_file_testnode())")+
-				LangNativeVarSet(lang, "valboolean", 2,
+				LangVarSet(lang, 2,
+					"valboolean",
 					LangPkgNameDot(lang, "vx/data/file")+"f_boolean_write_from_file_any(context, filenode, htmlnode)")+
-				LangNativeVarSet(lang, "output", 2,
+				LangVarSet(lang, 2,
+					"output",
 					"output && valboolean.vx_boolean()")+
-				LangVar(lang, "filehtml", filetype, 2,
+				LangVar(lang, 2, filetype,
+					"filehtml",
 					"file_test("+LangPkgNameDot(lang, "vx/test")+"f_file_testhtml())")+
-				LangVar(lang, "shtml", stringtype, 2, LangPkgNameDot(lang, "vx/web/html")+"f_string_from_html(htmlnode)")+
-				LangNativeVarSet(lang, "valboolean", 2,
+				LangVar(lang, 2, stringtype,
+					"shtml",
+					LangPkgNameDot(lang, "vx/web/html")+"f_string_from_html(htmlnode)")+
+				LangVarSet(lang, 2,
+					"valboolean",
 					LangPkgNameDot(lang, "vx/data/file")+"f_boolean_write_from_file_string(context, filehtml, shtml)")+
-				LangNativeVarSet(lang, "output", 2, "output && valboolean.vx_boolean()"))
+				LangVarSet(lang, 2,
+					"output", "output && valboolean.vx_boolean()"))
 	return output
 }

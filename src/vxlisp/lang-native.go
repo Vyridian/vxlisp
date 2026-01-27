@@ -131,14 +131,21 @@ func LangNativeAppArgListInit(
 	output := ""
 	switch lang {
 	case langcsharp:
-		output = LangVar(lang, "arglist", anylisttype, 3,
+		output = LangVar(lang, 3, anylisttype,
+			"arglist",
 			LangPkgNameDot(lang, "vx/core")+"vx_anylist_from_arraystring(args)")
 	case langjava:
-		output = LangVal(lang, "arglist", anylisttype, 3,
+		output = LangVal(lang, 3, anylisttype,
+			"arglist",
 			LangPkgNameDot(lang, "vx/core")+"vx_anylist_from_arraystring(args)")
 	case langkotlin:
-		output = LangVal(lang, "arglist", anylisttype, 3,
+		output = LangVal(lang, 3, anylisttype,
+			"arglist",
 			LangPkgNameDot(lang, "vx/core")+"vx_anylist_from_arraystring(*args)")
+	case langswift:
+		output = LangVar(lang, 3, anylisttype,
+			"arglist",
+			LangPkgNameDot(lang, "vx/core")+"vx_anylist_from_arraystring(args)")
 	}
 	return output
 }
@@ -156,6 +163,9 @@ func LangNativeAppClassOpenClose(
 		classopen = indent0 + "public final class App {\n"
 		classclose = indent0 + "}\n"
 	case langkotlin:
+	case langswift:
+		classopen = indent0 + "class App {\n"
+		classclose = indent0 + "}\n"
 	}
 	return classopen, classclose
 }
@@ -174,6 +184,9 @@ func LangNativeAppMainOpenClose(
 		mainclose = indent1 + "}\n"
 	case langkotlin:
 		mainopen = indent1 + "fun main(args : Array<String>) {"
+		mainclose = indent1 + "}\n"
+	case langswift:
+		mainopen = indent1 + "static void Main(string[] args) {"
 		mainclose = indent1 + "}\n"
 	}
 	return mainopen, mainclose
@@ -207,6 +220,12 @@ func LangNativeAppTryOpenClose(
 			indent3 + "System.out.println(\"Untrapped Error!\" + e.toString())" + lang.lineend +
 			indent2 + "}"
 	case langkotlin:
+		tryopen = indent2 + "try {"
+		tryclose = "" +
+			indent2 + "} catch (e : Exception) {" +
+			indent3 + "println(e.toString())" +
+			indent2 + "}"
+	case langswift:
 		tryopen = indent2 + "try {"
 		tryclose = "" +
 			indent2 + "} catch (e : Exception) {" +
@@ -253,8 +272,10 @@ func LangNativeArgHeader(
 		}
 	}
 	switch lang {
-	case langkotlin, langswift:
+	case langkotlin:
 		output = "" + sfinal + smulti1 + sargname + smulti2 + " : " + stypename
+	case langswift:
+		output = "" + sfinal + "_ " + sargname + " : " + stypename + smulti2
 	default:
 		output = "" + sfinal + smulti1 + stypename + smulti2 + " " + sargname
 	}
@@ -312,54 +333,30 @@ func LangNativeAsClass(
 	default:
 		typetext = LangTypeClassFull(lang, typ)
 	}
-	return LangNativeAsTypeText(lang, svar, typetext)
+	return LangVarAsTypeText(lang, svar, typetext)
 }
 
-func LangNativeAsType(
+func LangClause(
 	lang *vxlang,
-	svar string,
-	typ *vxtype) string {
-	typetext := ""
-	// SomeClass obj2 = (SomeClass)Convert.ChangeType(t, typeof(SomeClass));
-	switch typ {
-	case rawlistunknowntype:
-		switch lang {
-		case langcsharp:
-			typetext = "List<object>"
-		case langjava:
-			typetext = "List<?>"
-		case langkotlin:
-			typetext = "List<Any>"
-		default:
-			typetext = LangNameTypeFullFromType(lang, typ)
-		}
-	default:
-		typetext = LangNameTypeFullFromType(lang, typ)
-	}
-	return LangNativeAsTypeText(lang, svar, typetext)
-}
-
-func LangNativeAsTypeText(
-	lang *vxlang,
-	svar string,
-	stype string) string {
+	paren bool,
+	op string,
+	leftclause string,
+	rightclause string) string {
 	output := ""
 	switch lang {
-	case langcsharp:
-		switch stype {
-		case "bool":
-			output = "(bool)" + svar
-		case "float":
-			output = "(float)" + svar
-		case "int":
-			output = "Convert.ToInt32(" + svar + ")"
-		default:
-			output = "(" + stype + ")" + svar
+	case langswift:
+		switch op {
+		case "==", "!=":
+			leftclause = "OperatorIdentifier(" + leftclause + " as AnyObject)"
+			rightclause = "OperatorIdentifier(" + rightclause + " as AnyObject)"
 		}
-	case langjava:
-		output = "(" + stype + ")" + svar
-	case langkotlin:
-		output = svar + " as " + stype
+	}
+	if output == "" {
+		if paren {
+			output = "(" + leftclause + " " + op + " " + rightclause + ")"
+		} else {
+			output = leftclause + " " + op + " " + rightclause
+		}
 	}
 	return output
 }
@@ -380,6 +377,32 @@ func LangNativeConstClassHeader(
 		output = "" +
 			lineindent + "class " + constname + " {" +
 			lineindent + "  constructor() {}"
+	case langswift:
+		output = lineindent + "public class " + constname + " {"
+	}
+	return output
+}
+
+func LangNativeConstDoc(
+	lang *vxlang,
+	cnst *vxconst) string {
+	output := ""
+	doc := ""
+	switch lang {
+	case langswift:
+	default:
+		doc = "Constant: " + cnst.name + "\n"
+		if cnst.doc != "" {
+			doc += cnst.doc + "\n"
+		}
+		if cnst.deprecated != "" {
+			doc += cnst.deprecated + "\n"
+		}
+		doc += "{" + cnst.vxtype.name + "}"
+		output = "" +
+			"  /**" +
+			"\n   * " + StringFromStringIndent(doc, "   * ") +
+			"\n   */"
 	}
 	return output
 }
@@ -396,32 +419,6 @@ func LangNativeConstStaticOpenClose(
 		staticclose = "\n    }"
 	}
 	return staticopen, staticclose
-}
-
-func LangNativeElseIfType(
-	lang *vxlang,
-	typ *vxtype,
-	subtype *vxtype,
-	svar string,
-	scastvar string,
-	indent int,
-	isfuture bool) string {
-	sindent := "\n" + StringRepeat("  ", indent)
-	output := ""
-	switch lang {
-	case langcsharp:
-		if scastvar == "" {
-			output = sindent + "} else if (" + LangIsType(lang, svar, typ) + ") {"
-		} else {
-			output = sindent + "} else if (" + LangIsType(lang, svar, typ) + " " + scastvar + ") {"
-		}
-	case langjava, langkotlin:
-		output = sindent + "} else if (" + LangIsType(lang, svar, typ) + ") {"
-		if scastvar != "" {
-			output += LangVarOld(lang, scastvar, typ, subtype, LangNativeAsType(lang, svar, typ), indent+1, false, isfuture)
-		}
-	}
-	return output
 }
 
 func LangNativeFinalArg(
@@ -454,12 +451,29 @@ func LangNativeFinalVar(
 	return output
 }
 
-func LangNativeForListHeader(
+func LangFloatFromString(
 	lang *vxlang,
+	text string) string {
+	output := ""
+	switch lang {
+	case langcsharp:
+		output = "float.Parse(" + text + ")"
+	case langjava:
+		output = "Float.parseFloat(" + text + ")"
+	case langkotlin:
+		output = text + ".toFloat()"
+	case langswift:
+		output = text + ".toFloat()"
+	}
+	return output
+}
+
+func LangForListHeader(
+	lang *vxlang,
+	indent int,
 	forvar string,
 	typ *vxtype,
-	listvar string,
-	indent int) string {
+	listvar string) string {
 	sindent := "\n" + StringRepeat("  ", indent)
 	output := ""
 	switch lang {
@@ -469,6 +483,8 @@ func LangNativeForListHeader(
 		output = sindent + "for (" + LangNameTypeFullFromType(lang, typ) + " " + forvar + " : " + listvar + ") {"
 	case langkotlin:
 		output = sindent + "for (" + forvar + " : " + LangNameTypeFullFromType(lang, typ) + " in " + listvar + ") {"
+	case langswift:
+		output = sindent + "for " + forvar + " in " + listvar + " {"
 	}
 	return output
 }
@@ -505,6 +521,99 @@ func LangNativeFuncClassHeader(
 		output = "" +
 			lineindent + "class Class_" + funcname + " : " + extends + ", Func_" + funcname + " {" +
 			lineindent + "  constructor() {}"
+	case langswift:
+		output = lineindent + "public class Class_" + funcname + " : " + extends + ", Func_" + funcname + " {"
+	}
+	return output
+}
+
+func LangNativeFuncDoc(
+	lang *vxlang,
+	fnc *vxfunc) string {
+	var output = ""
+	var doc = ""
+	var argsdoc = ""
+	switch lang {
+	case langswift:
+	case langjs:
+		switch NameFromFunc(fnc) {
+		case "vx/core/copy", "vx/core/empty":
+		default:
+			if fnc.vxtype.isgeneric || fnc.generictype != nil {
+				argsdoc += "\n@param  {typemap} generic"
+			}
+		}
+		for _, arg := range fnc.listarg {
+			argsdoc += "\n@param "
+			if arg.vxtype.name != "" {
+				argsdoc += " {" + LangFromName(arg.vxtype.alias) + "}"
+			}
+			if arg.multi {
+				argsdoc += " ..."
+			}
+			argsdoc += " " + LangFromName(arg.alias)
+			if arg.doc != "" {
+				argsdoc += " " + arg.doc
+			}
+		}
+		if fnc.async {
+			doc += "\n@async "
+		}
+		doc += "@function " + LangFromName(fnc.alias)
+		if fnc.doc != "" {
+			doc += "\n" + fnc.doc
+		}
+		if fnc.deprecated != "" {
+			doc += "\n" + fnc.deprecated
+		}
+		doc += "" +
+			argsdoc +
+			"\n@return {" + fnc.vxtype.name + "}"
+		output = "" +
+			"  /**" +
+			"\n   * " + StringFromStringIndent(doc, "   * ") +
+			"\n   */"
+	default:
+		switch NameFromFunc(fnc) {
+		case "vx/core/copy", "vx/core/empty", "vx/core/new<-type":
+		default:
+			//if fnc.isgeneric {
+			//	argsdoc += "\n@param  {generic} generic_any_1"
+			//}
+		}
+		for _, arg := range fnc.listarg {
+			argsdoc += "\n@param "
+			if arg.vxtype.name != "" {
+				argsdoc += " {" + arg.vxtype.name + "}"
+			}
+			argsdoc += " " + arg.alias
+			if arg.doc != "" {
+				argsdoc += " " + arg.doc
+			}
+		}
+		if fnc.async {
+			doc += "" +
+				"\n@async" +
+				"\n"
+		}
+		doc += "@function " + LangFromName(fnc.alias)
+		if fnc.idx > 0 {
+			doc += " " + StringFromInt(fnc.idx)
+		}
+		if fnc.doc != "" {
+			doc += "\n" + fnc.doc
+		}
+		if fnc.deprecated != "" {
+			doc += "\n" + fnc.deprecated
+		}
+		doc += "" +
+			argsdoc +
+			"\n@return {" + fnc.vxtype.name + "}"
+		output = "" +
+			"  /**" +
+			"\n   * " + StringFromStringIndent(doc, "   * ") +
+			"\n   * (func " + fnc.name + ")" +
+			"\n   */"
 	}
 	return output
 }
@@ -638,6 +747,15 @@ func LangNativeFuncInterface(
 		output = lineindent + "interface Func_" + funcname + extends + " {" +
 			interfaces +
 			lineindent + "}\n"
+	case langswift:
+		if extends != "" {
+			extends += ", "
+		}
+		extends += "AnyObject"
+		extends = " : " + extends
+		output = lineindent + "public protocol Func_" + funcname + extends + " {" +
+			interfaces +
+			lineindent + "}\n"
 	}
 	return output
 }
@@ -691,7 +809,7 @@ func LangNativeFuncInterfaceFn(
 		}
 		argnames := StringFromListStringJoin(args, ", ")
 		switch lang {
-		case langcsharp:
+		case langcsharp, langswift:
 			interfaces = "" +
 				"\n    public delegate " + returntype + " IFn(" + argnames + ")" + lang.lineend +
 				"\n"
@@ -763,7 +881,7 @@ func LangNativeFuncLambdaHeader(
 	switch lang {
 	case langcpp:
 		output = "[" + bindings + "](" + args + ") -> {"
-	case langcsharp:
+	case langcsharp, langswift:
 		output = "(" + args + ") => {"
 	case langjava, langjs:
 		output = "(" + args + ") -> {"
@@ -791,7 +909,7 @@ func LangNativeFuncNativeAuto(
 		listargname = append(listargname, argname)
 	}
 	argnames := StringFromListStringJoin(listargname, ", ")
-	output = LangNativePkgName(lang, fnc.pkgname) + lang.pkgref + "vx_" + LangFuncName(fnc) + "(" + argnames + ")" + lang.lineend
+	output = LangPkgName(lang, fnc.pkgname) + lang.pkgref + "vx_" + LangFuncName(fnc) + "(" + argnames + ")" + lang.lineend
 	switch lang {
 	case langcpp:
 		if fnc.generictype != nil {
@@ -848,7 +966,7 @@ func LangNativeFuncOverride(
 	return override1, override2, override3
 }
 
-func LangNativeFuncPrefixReturnTypes(
+func LangFuncPrefixReturnTypes(
 	lang *vxlang,
 	prefix string,
 	returntype string) (string, string, string) {
@@ -865,6 +983,9 @@ func LangNativeFuncPrefixReturnTypes(
 	case langkotlin:
 		returntype2 = " : " + returntype
 	case langswift:
+		if BooleanFromStringContains(returntype, ".Type_") {
+			returntype = "any " + returntype
+		}
 		returntype2 = " -> " + returntype
 	}
 	return funcprefix, returntype1, returntype2
@@ -900,7 +1021,7 @@ func LangNativeFuncVxAsyncAnyFromAny(
 	lang *vxlang) string {
 	vxasyncanyfromany := ""
 	switch lang {
-	case langcsharp:
+	case langcsharp, langswift:
 		vxasyncanyfromany = LangPkgNameDot(lang, "vx/core") + "vx_async_from_async(generic_any_1, future)"
 	case langjava:
 		vxasyncanyfromany = "(" + lang.future + "<T>)future"
@@ -923,33 +1044,120 @@ func LangNativeFuncVxFuncResolve(
 	return output
 }
 
-func LangNativeIfClause(
+func LangIfThen(
+	lang *vxlang,
+	indent int,
+	ifclause string,
+	thenclause string) string {
+	sindent := "\n" + StringRepeat("  ", indent)
+	output := ""
+	switch lang {
+	case langswift:
+		output = sindent + "if " + ifclause + " {" + thenclause
+	default:
+		output = sindent + "if (" + ifclause + ") {" + thenclause
+	}
+	return output
+}
+
+func LangIfClause(
 	lang *vxlang,
 	typ *vxtype,
 	op string,
 	left string,
 	right string) string {
-	sop := op
-	sleft := left
-	sright := right
+	output := ""
 	switch lang {
 	case langjava:
 		switch op {
 		case "==":
 			switch typ {
 			case rawstringtype:
-				sop = ".equals(" + sright + ")"
-				sright = ""
+				sop := ".equals(" + right + ")"
+				output = "(" + left + sop + ")"
+			default:
+				output = "(" + left + " " + op + " " + right + ")"
 			}
+		default:
+			output = "(" + left + " " + op + " " + right + ")"
 		}
+	case langswift:
+		output = left + " " + op + " " + right
 	default:
-		sop = " " + op + " "
+		output = "(" + left + " " + op + " " + right + ")"
 	}
-	output := "(" + sleft + sop + sright + ")"
 	return output
 }
 
-func LangNativeImport(
+func LangIfElse(
+	lang *vxlang,
+	indent int,
+	elseclause string) string {
+	sindent := "\n" + StringRepeat("  ", indent)
+	output := sindent + "} else {" + elseclause
+	return output
+}
+
+func LangIfElseIf(
+	lang *vxlang,
+	indent int,
+	ifclause string,
+	thenclause string) string {
+	sindent := "\n" + StringRepeat("  ", indent)
+	output := ""
+	switch lang {
+	case langswift:
+		output = sindent + "} else if " + ifclause + " {" + thenclause
+	default:
+		output = sindent + "} else if (" + ifclause + ") {" + thenclause
+	}
+	return output
+}
+
+func LangIfElseType(
+	lang *vxlang,
+	indent int,
+	typ *vxtype,
+	subtype *vxtype,
+	svar string,
+	scastvar string,
+	isfuture bool,
+	thenclause string) string {
+	sindent := "\n" + StringRepeat("  ", indent)
+	output := ""
+	switch lang {
+	case langcsharp:
+		if scastvar == "" {
+			output = sindent + "} else if (" + LangIsType(lang, svar, typ) + ") {"
+		} else {
+			output = sindent + "} else if (" + LangIsType(lang, svar, typ) + " " + scastvar + ") {"
+		}
+	case langjava, langkotlin:
+		output = sindent + "} else if (" + LangIsType(lang, svar, typ) + ") {"
+		if scastvar != "" {
+			output += LangVarOld(lang, indent+1, typ, subtype,
+				scastvar, LangVarAsType(lang, svar, typ), false, isfuture)
+		}
+	case langswift:
+		if scastvar != "" {
+			output = sindent + "} else if let " + scastvar + " = as? any " + LangTypeName(lang, typ) + " {"
+		} else {
+			output = sindent + "} else if " + LangIsType(lang, svar, typ) + " {"
+		}
+	}
+	output += thenclause
+	return output
+}
+
+func LangIfEnd(
+	lang *vxlang,
+	indent int) string {
+	sindent := "\n" + StringRepeat("  ", indent)
+	output := sindent + "}"
+	return output
+}
+
+func LangImport(
 	lang *vxlang,
 	pkg *vxpackage,
 	imports string) string {
@@ -985,7 +1193,36 @@ func LangNativeImport(
 	return output
 }
 
-func LangNativeIsTypeText(
+func LangIndent(
+	lang *vxlang,
+	indent int,
+	line bool) string {
+	output := ""
+	if line {
+		output += "\n"
+	}
+	output += StringRepeat(lang.indent, indent)
+	return output
+}
+
+func LangIntFromString(
+	lang *vxlang,
+	text string) string {
+	output := ""
+	switch lang {
+	case langcsharp:
+		output = "Int32.Parse(" + text + ")"
+	case langjava:
+		output = "Integer.parseInt(" + text + ")"
+	case langkotlin:
+		output = text + ".toInt()"
+	case langswift:
+		output = text + ".toInt()"
+	}
+	return output
+}
+
+func LangIsTypeText(
 	lang *vxlang,
 	svar string,
 	stype string) string {
@@ -993,7 +1230,7 @@ func LangNativeIsTypeText(
 	switch lang {
 	case langcpp:
 		output = "vx_core::vx_boolean_from_type_trait(" + svar + ", " + stype + ")"
-	case langcsharp, langkotlin:
+	case langcsharp, langkotlin, langswift:
 		output = svar + " is " + stype
 	case langjava:
 		output = svar + " instanceof " + stype
@@ -1003,7 +1240,8 @@ func LangNativeIsTypeText(
 
 func LangNativeNamespaceOpenClose(
 	lang *vxlang,
-	pkgname string) (string, string) {
+	pkgname string,
+	pkgpath string) (string, string) {
 	namespaceopen := ""
 	namespaceclose := ""
 	switch lang {
@@ -1039,6 +1277,17 @@ func LangNativeNamespaceOpenClose(
 			"\n" +
 			"\n"
 		namespaceclose = "\n}\n"
+	case langswift:
+		paths := ListStringFromStringSplit(pkgpath, "/")
+		for _, pathpart := range paths {
+			namespaceopen += "\npublic enum " + StringUCaseFirst(pathpart) + " {"
+			namespaceclose += "\n}\n"
+		}
+		namespaceopen += "" +
+			"\npublic enum " + StringUCaseFirst(pkgname) + " {" +
+			"\n" +
+			"\n"
+		namespaceclose += "\n}\n"
 	}
 	return namespaceopen, namespaceclose
 }
@@ -1051,7 +1300,7 @@ func LangNativeOverride(
 	override2 := ""
 	override3 := ""
 	switch lang {
-	case langcsharp:
+	case langcsharp, langswift:
 		if !isinterface {
 			override3 = "override "
 		}
@@ -1111,6 +1360,9 @@ func LangNativePackageImports(
 		if BooleanFromStringContains(body, " CompletableFuture<") {
 			output += "\nimport java.util.concurrent.CompletableFuture" + lang.lineend
 		}
+	case langswift:
+		output += "\nimport Foundation" + lang.lineend
+		output += "\nimport Vx" + lang.lineend
 	}
 	pkgpath, _ := PackagePathNameFromName(pkg.name)
 	if len(pkg.listlib) > 0 {
@@ -1130,7 +1382,7 @@ func LangNativePackageImports(
 			} else {
 				if lib.pkg != nil {
 					switch lang {
-					case langcsharp:
+					case langcsharp, langswift:
 						libpath = StringUCaseFirstFromStringDelim(libpkgpath, "/")
 					case langjava, langkotlin:
 						libprefix := pkgpath
@@ -1143,7 +1395,7 @@ func LangNativePackageImports(
 			if !isskip {
 				importline := ""
 				switch lang {
-				case langcsharp:
+				case langcsharp, langswift:
 				case langjava, langkotlin:
 					importline = "\nimport " + libpath + lang.lineend
 				}
@@ -1173,11 +1425,12 @@ func LangNativePackageLine(
 		output = "namespace " + csnamespace + lang.lineend + "\n"
 	case langjava, langkotlin:
 		output = "package " + pkgpath + lang.lineend + "\n"
+	case langswift:
 	}
 	return output
 }
 
-func LangNativePackagePathFromPrefixName(
+func LangPackagePathFromPrefixName(
 	lang *vxlang,
 	pkgprefix string,
 	pkgname string) (string, string) {
@@ -1191,7 +1444,7 @@ func LangNativePackagePathFromPrefixName(
 		pkgpath = StringSubstring(pkgpath, 0, ipos)
 		pkgpath = StringFromStringFindReplace(pkgpath, "/", ".")
 		pkgpath = LangFromName(pkgpath)
-		name = LangNativePkgName(lang, name)
+		name = LangPkgName(lang, name)
 	case langkotlin:
 		pkgpath = pkgprefix + pkgname
 		ipos := IntFromStringFindLast(pkgpath, "/")
@@ -1199,7 +1452,7 @@ func LangNativePackagePathFromPrefixName(
 		pkgpath = StringFromStringFindReplace(pkgpath, "/", ".")
 		pkgpath = LangFromName(pkgpath)
 		name = StringFromStringFindReplace(pkgname, "/", "_")
-		name = LangNativePkgName(lang, name)
+		name = LangPkgName(lang, name)
 	default:
 		pkgpath = pkgprefix + pkgname
 		ipos := IntFromStringFindLast(pkgpath, "/")
@@ -1207,7 +1460,7 @@ func LangNativePackagePathFromPrefixName(
 		pkgpath = StringSubstring(pkgpath, 0, ipos)
 		pkgpath = StringFromStringFindReplace(pkgpath, "/", ".")
 		pkgpath = LangFromName(pkgpath)
-		name = LangNativePkgName(lang, name)
+		name = LangPkgName(lang, name)
 	}
 	return pkgpath, name
 }
@@ -1217,9 +1470,9 @@ func LangNativePackageStaticOpenClose(
 	staticopen := ""
 	staticclose := ""
 	switch lang {
-	case langcsharp:
+	case langcsharp, langswift:
 		staticopen = "" +
-			"\n  public static class PackageRunOnce {" +
+			"  public static class PackageRunOnce {" +
 			"\n    public static bool RunOnce() {"
 		staticclose = "" +
 			"\n      return true" + lang.lineend +
@@ -1229,12 +1482,12 @@ func LangNativePackageStaticOpenClose(
 			"\n  public static bool ranonce = PackageRunOnce.RunOnce()" + lang.lineend +
 			"\n"
 	case langjava:
-		staticopen = "\n  static {"
+		staticopen = "  static {"
 		staticclose += "" +
 			"\n  }" +
 			"\n"
 	case langkotlin:
-		staticopen = "\n  init {"
+		staticopen = "  init {"
 		staticclose += "" +
 			"\n  }" +
 			"\n"
@@ -1249,7 +1502,7 @@ func LangNativePackageSubPrefixSubDomainPath(
 	subprefix := ""
 	subdomainpath := ""
 	switch lang {
-	case langcsharp:
+	case langcsharp, langswift:
 		switch command.code {
 		case ":test":
 			subprefix = "AppTest.Test"
@@ -1288,12 +1541,12 @@ func LangNativePathtext(
 	return output
 }
 
-func LangNativePkgName(
+func LangPkgName(
 	lang *vxlang,
 	pkgname string) string {
 	output := ""
 	switch lang {
-	case langcsharp:
+	case langcsharp, langswift:
 		output = StringUCaseFirstFromStringDelim(pkgname, "/")
 		output = StringFromStringFindReplace(output, "/", ".")
 	case langjava:
@@ -1316,7 +1569,7 @@ func LangNativePkgpath(
 	pkgpath string) string {
 	output := pkgpath
 	switch lang {
-	case langcsharp:
+	case langcsharp, langswift:
 		output = StringUCaseFirstFromStringDelim(
 			pkgpath, "/")
 	}
@@ -1327,7 +1580,7 @@ func LangNativePrintLine(
 	lang *vxlang) string {
 	output := ""
 	switch lang {
-	case langcsharp:
+	case langcsharp, langswift:
 		output = "System.Console.WriteLine"
 	case langjava:
 		output = "System.out.println"
@@ -1346,7 +1599,7 @@ func LangNativeProjectPkgPrefixAppPathTestPath(
 	apppath := cmdpath
 	testpath := cmdpath
 	switch lang {
-	case langcsharp:
+	case langcsharp, langswift:
 		apppath += "/App"
 		testpath += "/AppTest"
 		switch command.code {
@@ -1359,11 +1612,31 @@ func LangNativeProjectPkgPrefixAppPathTestPath(
 	return pkgprefix, apppath, testpath
 }
 
+func LangSwitchCase(
+	lang *vxlang,
+	indent int,
+	value string,
+	clause string) string {
+	output := ""
+	sindent := LangIndent(
+		lang, indent, true)
+	sindent2 := LangIndent(
+		lang, indent+1, true)
+	switch lang {
+	default:
+		output += "" +
+			sindent + "case " + value + ":" + lang.lineend +
+			clause +
+			sindent2 + "break" + lang.lineend
+	}
+	return output
+}
+
 func LangNativeTestAppBasic(
 	lang *vxlang) string {
 	output := ""
 	switch lang {
-	case langcsharp:
+	case langcsharp, langswift:
 		output = "" +
 			"\n  [Fact]" +
 			"\n  public void test_basics() {" +
@@ -1418,7 +1691,7 @@ func LangNativeTestAssertEquals(
 	}
 	output := ""
 	switch lang {
-	case langcsharp:
+	case langcsharp, langswift:
 		output = lineindent + "Assert.Equal(expected, actual)" + lang.lineend
 	case langjava:
 		output = lineindent + "assertEquals(expected, actual" + smsg + ")" + lang.lineend
@@ -1440,7 +1713,7 @@ func LangNativeTestAssertNotEquals(
 	}
 	output := ""
 	switch lang {
-	case langcsharp:
+	case langcsharp, langswift:
 		output = lineindent + "Assert.NotEqual(expected, actual)" + lang.lineend
 	case langjava:
 		output = lineindent + "assertNotEquals(expected, actual" + smsg + ")" + lang.lineend
@@ -1488,7 +1761,7 @@ func LangNativeTestImportExtra(
 	lang *vxlang) string {
 	output := ""
 	switch lang {
-	case langcsharp:
+	case langcsharp, langswift:
 	case langjava:
 		output = "" +
 			"\nimport org.junit.jupiter.api.DisplayName" + lang.lineend +
@@ -1509,7 +1782,7 @@ func LangNativeTestLib(
 	spath string) string {
 	output := ""
 	switch lang {
-	case langcsharp:
+	case langcsharp, langswift:
 		output = "" +
 			"using Xunit;" +
 			"\n" +
@@ -1650,6 +1923,16 @@ func LangNativeTestLibFnAsync(
 			"\n      val output : CompletableFuture<vx_core.Type_any> = vx_core.vx_async_new_from_value(outval)" +
 			"\n      output" +
 			"\n    });"
+	case langswift:
+		output = "" +
+			"\n    val fn_async : vx_core.Func_any_from_any_async = vx_core.t_any_from_any_async.vx_fn_new({" +
+			"\n      anyval ->" +
+			"\n      val stringval : vx_core.Type_string = anyval as vx_core.Type_string" +
+			"\n      val sout : String = stringval.vx_string() + \"!\"" +
+			"\n      val outval : vx_core.Type_any = vx_core.vx_new_string(sout)" +
+			"\n      val output : CompletableFuture<vx_core.Type_any> = vx_core.vx_async_new_from_value(outval)" +
+			"\n      output" +
+			"\n    });"
 	}
 	return output
 }
@@ -1664,7 +1947,7 @@ func LangNativeTestLibLambda(
 			"\n[](vx_core::Type_any any) {" +
 			"\n 		return any;" +
 			"\n}"
-	case langcsharp:
+	case langcsharp, langswift:
 		output = "" +
 			"(any) => {" +
 			"\n     	return any;" +
@@ -1701,7 +1984,7 @@ func LangNativeTestNamespaceOpenClose(
 	namespaceopen := ""
 	namespaceclose := ""
 	switch lang {
-	case langcsharp:
+	case langcsharp, langswift:
 		namespaceopen = "" +
 			"\nnamespace " + pkgname + lang.lineend +
 			"\n"
@@ -1723,13 +2006,14 @@ func LangNativeTestPackage(
 	testpackagetype *vxtype) string {
 	output := ""
 	switch lang {
-	case langcsharp:
+	case langcsharp, langswift:
 		output = "" +
 			"\n  [Fact]" +
 			"\n  public void test_" + StringFromStringFindReplace(pkg.name, "/", "_") + "() {" +
-			LangVar(lang, "testpackage", testpackagetype, 2,
+			LangVar(lang, 2, testpackagetype,
+				"testpackage",
 				"Test"+
-					LangNativePkgName(lang, pkg.name)+
+					LangPkgName(lang, pkg.name)+
 					"Test.test_package(context)") +
 			"\n    TestLib.run_testpackage_async(testpackage)" + lang.lineend +
 			"\n  }" +
@@ -1739,7 +2023,7 @@ func LangNativeTestPackage(
 			"\n  @Test" +
 			"\n  @DisplayName(\"" + pkg.name + "\")" +
 			"\n  void test_" + StringFromStringFindReplace(pkg.name, "/", "_") + "() {" +
-			"\n    com.vxlisp.vx.Test.Type_testpackage testpackage = " + LangNativePkgName(lang, pkg.name) + "Test.test_package(context)" + lang.lineend +
+			"\n    com.vxlisp.vx.Test.Type_testpackage testpackage = " + LangPkgName(lang, pkg.name) + "Test.test_package(context)" + lang.lineend +
 			"\n    TestLib.run_testpackage_async(testpackage)" + lang.lineend +
 			"\n  }" +
 			"\n"
@@ -1748,7 +2032,7 @@ func LangNativeTestPackage(
 			"\n  @Test" +
 			"\n  @DisplayName(\"" + pkg.name + "\")" +
 			"\n  fun test_" + StringFromStringFindReplace(pkg.name, "/", "_") + "() : Unit {" +
-			"\n    val testpackage : vx_test.Type_testpackage = " + LangNativePkgName(lang, pkg.name) + "Test.test_package(context)" + lang.lineend +
+			"\n    val testpackage : vx_test.Type_testpackage = " + LangPkgName(lang, pkg.name) + "Test.test_package(context)" + lang.lineend +
 			"\n    TestLib.run_testpackage_async(testpackage)" + lang.lineend +
 			"\n  }" +
 			"\n"
@@ -1762,7 +2046,7 @@ func LangNativeTestPackageOpenClose(
 	packageopen := ""
 	packageclose := ""
 	switch lang {
-	case langcsharp:
+	case langcsharp, langswift:
 		packageopen = "" +
 			"\npublic " + LangNativeFinalClass(lang) + "class " + pkgname + "Test {" +
 			"\n"
@@ -1843,8 +2127,8 @@ func LangNativeTestVarTestCases(
 			"\n      " + strings.Join(testall, ",\n      ") +
 			"\n    )"
 		output = "" +
-			LangVarCollection(
-				lang, "testcases", rawlisttype, anytype, 2, vararraylisttestcase)
+			LangVarCollection(lang, 2, rawlisttype, anytype,
+				"testcases", vararraylisttestcase)
 	}
 	return output
 }
@@ -1854,7 +2138,7 @@ func LangNativeTestWriteTestSuite(
 	testpackages string) string {
 	output := ""
 	switch lang {
-	case langcsharp:
+	case langcsharp, langswift:
 		testpackagedata := "" +
 			LangPkgNameDot(lang, "vx/core") + "vx_new(" +
 			"\n      " + LangTypeT(lang, testpackagelisttype) + "," +
@@ -1863,7 +2147,9 @@ func LangNativeTestWriteTestSuite(
 		output = "" +
 			"\n  [Fact]" +
 			"\n  public void test_writetestsuite() {" +
-			LangVar(lang, "testpackagelist", testpackagelisttype, 2, testpackagedata) +
+			LangVar(lang, 2, testpackagelisttype,
+				"testpackagelist",
+				testpackagedata) +
 			"\n    TestLib.write_testpackagelist_async(context, testpackagelist)" + lang.lineend +
 			"\n  }" +
 			"\n"
@@ -1899,22 +2185,24 @@ func LangNativeTypeBoolean(
 	switch lang {
 	case langcsharp:
 		output = "bool"
+	case langswift:
+		output = "Bool"
 	default:
 		output = "Boolean"
 	}
 	return output
 }
 
-func LangNativeTypeClassHeader(
+func LangTypeClassHeader(
 	lang *vxlang,
-	typ *vxtype,
-	indent int) string {
+	indent int,
+	typ *vxtype) string {
 	output := ""
 	lineindent := LangIndent(
 		lang, indent, true)
 	typename := LangFromName(typ.alias)
 	switch lang {
-	case langcsharp:
+	case langcsharp, langswift:
 		output = lineindent + "public class Class_" + typename + " : " + LangPkgNameDot(lang, "vx/core") + "Class_base, Type_" + LangNameFromType(lang, typ) + " {"
 	case langjava:
 		output = lineindent + "public static class Class_" + typename + " extends " + LangPkgNameDot(lang, "vx/core") + "Class_base implements Type_" + LangNameFromType(lang, typ) + " {"
@@ -1926,43 +2214,67 @@ func LangNativeTypeClassHeader(
 	return output
 }
 
+func LangTypeDoc(
+	lang *vxlang,
+	typ *vxtype) string {
+	output := ""
+	switch lang {
+	case langswift:
+	default:
+		doc := ""
+		doc = "type: " + typ.name
+		if typ.doc != "" {
+			doc += "\n" + typ.doc
+		}
+		if typ.deprecated != "" {
+			doc += "\n" + typ.deprecated
+		}
+		output = "" +
+			"  /**" +
+			"\n   * " + StringFromStringIndent(doc, "   * ") +
+			"\n   * (type " + typ.name + ")" +
+			"\n   */"
+	}
+	return output
+}
+
 func LangNativeTypeElseIfListAny(
 	lang *vxlang,
 	allowtype *vxtype) string {
 	output := ""
 	switch lang {
-	case langcsharp:
+	case langcsharp, langswift:
 		output = "" +
-			LangNativeElseIfType(
-				lang, rawlistanytype, emptytype, "valsub", "listany", 4, false) +
-			LangNativeForListHeader(
-				lang, "item", anytype, "listany", 5) +
-			LangIf(
-				lang, 6, "false", "") +
-			LangNativeElseIfType(
-				lang, allowtype, emptytype, "item", "valitem", 6, false) +
-			LangNativeVarSet(
-				lang, "ischanged", 7, "true") +
-			LangNativeVxListAdd(
-				lang, "listval", 7, "valitem") +
-			"\n            }" +
-			"\n          }"
+			LangIfElseType(lang, 4,
+				rawlistanytype, emptytype, "valsub", "listany", false,
+				LangForListHeader(lang, 5,
+					"item", anytype, "listany")+
+					LangIfThen(lang, 6,
+						"false", "")+
+					LangIfElseType(lang, 6,
+						allowtype, emptytype, "item", "valitem", false,
+						LangVarSet(lang, 7,
+							"ischanged", "true")+
+							LangVarListAdd(lang, 7,
+								"listval", "valitem"))+
+					LangIfEnd(lang, 6)+
+					LangIfEnd(lang, 5))
 	case langjava, langkotlin:
 		output = "" +
-			LangNativeElseIfType(
-				lang, rawlistunknowntype, emptytype, "valsub", "listunknown", 4, false) +
-			LangNativeForListHeader(
-				lang, "item", rawobjecttype, "listunknown", 5) +
-			LangIf(
-				lang, 6, "false", "") +
-			LangNativeElseIfType(
-				lang, allowtype, emptytype, "item", "valitem", 6, false) +
-			LangNativeVarSet(
-				lang, "ischanged", 7, "true") +
-			LangNativeVxListAdd(
-				lang, "listval", 7, "valitem") +
-			"\n            }" +
-			"\n          }"
+			LangIfElseType(lang, 4,
+				rawlistunknowntype, emptytype, "valsub", "listunknown", false,
+				LangForListHeader(lang, 5,
+					"item", rawobjecttype, "listunknown")+
+					LangIfThen(lang, 6,
+						"false", "")+
+					LangIfElseType(lang, 6,
+						allowtype, emptytype, "item", "valitem", false,
+						LangVarSet(lang, 7,
+							"ischanged", "true")+
+							LangVarListAdd(lang, 7,
+								"listval", "valitem")+
+							LangIfEnd(lang, 6)+
+							LangIfEnd(lang, 5)))
 	}
 	return output
 }
@@ -1971,7 +2283,7 @@ func LangNativeTypeFloat(
 	lang *vxlang) string {
 	output := ""
 	switch lang {
-	case langcsharp:
+	case langcsharp, langswift:
 		output = "float"
 	default:
 		output = "Float"
@@ -1983,7 +2295,7 @@ func LangNativeTypeInt(
 	lang *vxlang) string {
 	output := ""
 	switch lang {
-	case langcsharp:
+	case langcsharp, langswift:
 		output = "int"
 	case langkotlin:
 		output = "Int"
@@ -1993,12 +2305,12 @@ func LangNativeTypeInt(
 	return output
 }
 
-func LangNativeTypeInterfaceBasics(
+func LangTypeInterfaceBasics(
 	lang *vxlang,
 	typ *vxtype) bool {
 	output := true
 	switch lang {
-	case langcsharp, langjava, langkotlin:
+	case langcsharp, langjava, langkotlin, langswift:
 		switch NameFromType(typ) {
 		case "vx/core/any":
 		default:
@@ -2008,7 +2320,7 @@ func LangNativeTypeInterfaceBasics(
 	return output
 }
 
-func LangNativeTypeInterfaceHeader(
+func LangTypeInterfaceHeader(
 	lang *vxlang,
 	typ *vxtype,
 	extendtypes []*vxtype,
@@ -2016,40 +2328,49 @@ func LangNativeTypeInterfaceHeader(
 	body string) string {
 	lineindent := LangIndent(lang, indent, true)
 	output := ""
-	extendtext := ""
+	extends := ""
 	var extendtexts []string
 	for _, extendtype := range extendtypes {
 		extendpart := LangTypeName(lang, extendtype)
 		extendtexts = append(extendtexts, extendpart)
 	}
-	extendtext = StringFromListStringJoin(extendtexts, ", ")
+	extends = StringFromListStringJoin(extendtexts, ", ")
 	switch lang {
 	case langcsharp:
-		if extendtext != "" {
-			extendtext = " : " + extendtext
+		if extends != "" {
+			extends = " : " + extends
 		}
-		output = lineindent + "public interface Type_" + LangNameFromType(lang, typ) + extendtext + " {" +
+		output = lineindent + "public interface Type_" + LangNameFromType(lang, typ) + extends + " {" +
 			body +
 			lineindent + "}\n"
 	case langjava:
-		if extendtext != "" {
-			extendtext = " extends " + extendtext
+		if extends != "" {
+			extends = " extends " + extends
 		}
-		output = lineindent + "public interface Type_" + LangNameFromType(lang, typ) + extendtext + " {" +
+		output = lineindent + "public interface Type_" + LangNameFromType(lang, typ) + extends + " {" +
 			body +
 			lineindent + "}\n"
 	case langkotlin:
-		if extendtext != "" {
-			extendtext = " : " + extendtext
+		if extends != "" {
+			extends = " : " + extends
 		}
-		output = lineindent + "interface Type_" + LangNameFromType(lang, typ) + extendtext + " {" +
+		output = lineindent + "interface Type_" + LangNameFromType(lang, typ) + extends + " {" +
+			body +
+			lineindent + "}\n"
+	case langswift:
+		if extends != "" {
+			extends += ", "
+		}
+		extends += "AnyObject"
+		extends = " : " + extends
+		output = lineindent + "public protocol Type_" + LangNameFromType(lang, typ) + extends + " {" +
 			body +
 			lineindent + "}\n"
 	}
 	return output
 }
 
-func LangNativeTypeMapGetOrElse(
+func LangTypeMapGetOrElse(
 	lang *vxlang,
 	typ *vxtype) string {
 	output := ""
@@ -2062,7 +2383,7 @@ func LangNativeTypeMapGetOrElse(
 	return output
 }
 
-func LangNativeTypeMapKeysetGet(
+func LangTypeMapKeysetGet(
 	lang *vxlang) (string, string) {
 	keyset := ""
 	mapget := ""
@@ -2076,6 +2397,9 @@ func LangNativeTypeMapKeysetGet(
 	case langkotlin:
 		keyset = "\n      val keys : Set<String> = mapval.keys"
 		mapget = "mapval.getOrDefault(key, vx_core.e_any)"
+	case langswift:
+		keyset = "\n      val keys : List<string> = mapval.keys()" + lang.lineend
+		mapget = "mapval.get(key)"
 	}
 	return keyset, mapget
 }
@@ -2094,6 +2418,8 @@ func LangNativeTypeNameFullSimple(
 		switch lang {
 		case langkotlin:
 			name = "Unit"
+		case langswift:
+			name = "()"
 		default:
 			name = "void"
 		}
@@ -2107,6 +2433,8 @@ func LangNativeTypeNameFullSimple(
 			name = "boolean"
 		case langkotlin:
 			name = "Boolean"
+		case langswift:
+			name = "Bool"
 		}
 	case rawbooleantype:
 		switch lang {
@@ -2114,10 +2442,12 @@ func LangNativeTypeNameFullSimple(
 			name = "bool"
 		case langjava, langkotlin:
 			name = "Boolean"
+		case langswift:
+			name = "Bool"
 		}
 	case rawfloattype:
 		switch lang {
-		case langcpp, langcsharp:
+		case langcpp, langcsharp, langswift:
 			name = "float"
 		case langjava:
 			name = "Float"
@@ -2135,7 +2465,7 @@ func LangNativeTypeNameFullSimple(
 		}
 	case rawintegertype:
 		switch lang {
-		case langcpp, langcsharp:
+		case langcpp, langcsharp, langswift:
 			name = "int"
 		case langjava:
 			name = "Integer"
@@ -2152,16 +2482,23 @@ func LangNativeTypeNameFullSimple(
 			name = "List"
 		case langkotlin:
 			name = "List<Any>"
+		case langswift:
+			name = "Array<Any>"
 		}
 	case rawlistanytype:
-		name = "List<" + LangNativeTypeNameFullSimple(lang, anytype, true) + ">"
+		switch lang {
+		case langswift:
+			name = "Array<" + LangNativeTypeNameFullSimple(lang, anytype, true) + ">"
+		default:
+			name = "List<" + LangNativeTypeNameFullSimple(lang, anytype, true) + ">"
+		}
 	case rawmaptype:
 		switch lang {
 		case langcpp:
 			name = "std::map"
 		case langcsharp:
 			name = "Vx.Core.Map"
-		case langjava, langkotlin:
+		case langjava, langkotlin, langswift:
 			name = "Map"
 		}
 	case rawlistunknowntype:
@@ -2174,6 +2511,8 @@ func LangNativeTypeNameFullSimple(
 			name = "List<?>"
 		case langkotlin:
 			name = "List<*>"
+		case langswift:
+			name = "Array<Any>"
 		}
 	case rawmapanytype:
 		switch lang {
@@ -2192,6 +2531,8 @@ func LangNativeTypeNameFullSimple(
 			name = "object"
 		case langkotlin:
 			name = "Any"
+		case langswift:
+			name = "Any"
 		default:
 			name = "Object"
 		}
@@ -2208,6 +2549,8 @@ func LangNativeTypeNameFullSimple(
 		switch lang {
 		case langkotlin:
 			name = "Unit"
+		case langswift:
+			name = "()"
 		default:
 			name = "void"
 		}
@@ -2216,7 +2559,12 @@ func LangNativeTypeNameFullSimple(
 		case "rawlist":
 			subtype := typ.subtype
 			subtypename := LangTypeName(lang, subtype)
-			name = "List<" + subtypename + ">"
+			switch lang {
+			case langswift:
+				name = "Array<" + subtypename + ">"
+			default:
+				name = "List<" + subtypename + ">"
+			}
 		case "rawmap":
 			subtype := typ.subtype
 			subtypename := LangTypeName(lang, subtype)
@@ -2230,17 +2578,17 @@ func LangNativeTypeNameFullSimple(
 			}
 		default:
 			if typ.isgeneric && !simple {
-				name = LangNativeTypeNameSimple(
+				name = LangTypeNameSimple(
 					lang, typ, simple)
 			} else {
-				name = LangNativePkgName(
+				name = LangPkgName(
 					lang, typ.pkgname)
 				if typ.isfunc {
 					name += lang.pkgref + "Func_"
 				} else {
 					name += lang.pkgref + "Type_"
 				}
-				name += LangNativeTypeNameSimple(
+				name += LangTypeNameSimple(
 					lang, typ, simple)
 			}
 		}
@@ -2248,7 +2596,7 @@ func LangNativeTypeNameFullSimple(
 	return name
 }
 
-func LangNativeTypeNameSimple(
+func LangTypeNameSimple(
 	lang *vxlang,
 	typ *vxtype,
 	simple bool) string {
@@ -2263,36 +2611,38 @@ func LangNativeTypeNameSimple(
 			name = "boolean"
 		case langkotlin:
 			name = "Boolean"
+		case langswift:
+			name = "Bool"
 		}
 	case rawbooleantype:
 		switch lang {
 		case langcsharp:
 			name = "bool"
-		case langjava:
+		case langjava, langkotlin:
 			name = "Boolean"
-		case langkotlin:
-			name = "Boolean"
+		case langswift:
+			name = "Bool"
 		}
 	case rawfloattype:
 		switch lang {
-		case langcsharp, langjava, langkotlin:
+		case langcsharp, langjava, langkotlin, langswift:
 			name = "Float"
 		}
 	case rawifntype:
 		switch lang {
-		case langcsharp, langjava, langkotlin:
+		case langcsharp, langjava, langkotlin, langswift:
 			name = "IFn"
 		}
 	case rawinttype:
 		switch lang {
-		case langcsharp, langjava:
+		case langcsharp, langjava, langswift:
 			name = "int"
 		case langkotlin:
 			name = "Int"
 		}
 	case rawintegertype:
 		switch lang {
-		case langcsharp, langjava:
+		case langcsharp, langjava, langswift:
 			name = "Integer"
 		case langkotlin:
 			name = "Int"
@@ -2301,24 +2651,30 @@ func LangNativeTypeNameSimple(
 		switch lang {
 		case langcsharp, langjava, langkotlin:
 			name = "List"
+		case langswift:
+			name = "Array"
 		}
 	case rawlistanytype:
 		switch lang {
 		case langcsharp, langjava, langkotlin:
-			name = "List<" + LangNativeTypeNameSimple(lang, anytype, true) + ">"
+			name = "List<" + LangTypeNameSimple(lang, anytype, true) + ">"
+		case langswift:
+			name = "Array<" + LangTypeNameSimple(lang, anytype, true) + ">"
 		}
 	case rawlistunknowntype:
 		switch lang {
-		case langcsharp:
+		case langcsharp, langswift:
 			name = "List<object>"
 		case langjava:
 			name = "List<?>"
 		case langkotlin:
 			name = "List<*>"
+		case langswift:
+			name = "Array<Any>"
 		}
 	case rawmaptype:
 		switch lang {
-		case langcsharp:
+		case langcsharp, langswift:
 			name = "Vx.Core.Map"
 		case langjava, langkotlin:
 			name = "Map"
@@ -2326,17 +2682,17 @@ func LangNativeTypeNameSimple(
 	case rawmapanytype:
 		switch lang {
 		case langcpp:
-			name = "std::map<string, " + LangNativeTypeNameSimple(lang, anytype, true) + ">"
-		case langcsharp:
-			name = "Vx.Core.Map<string, " + LangNativeTypeNameSimple(lang, anytype, true) + ">"
+			name = "std::map<string, " + LangTypeNameSimple(lang, anytype, true) + ">"
+		case langcsharp, langswift:
+			name = "Vx.Core.Map<string, " + LangTypeNameSimple(lang, anytype, true) + ">"
 		case langjava, langkotlin:
-			name = "Map<String, " + LangNativeTypeNameSimple(lang, anytype, true) + ">"
+			name = "Map<String, " + LangTypeNameSimple(lang, anytype, true) + ">"
 		}
 	case rawstringtype:
 		switch lang {
 		case langcpp:
 			name = "std::string"
-		case langcsharp:
+		case langcsharp, langswift:
 			name = "string"
 		default:
 			name = "String"
@@ -2349,11 +2705,15 @@ func LangNativeTypeNameSimple(
 			name = "Object"
 		case langkotlin:
 			name = "Any"
+		case langswift:
+			name = "Any"
 		}
 	case rawvoidtype:
 		switch lang {
 		case langkotlin:
 			name = "Unit"
+		case langswift:
+			name = "()"
 		default:
 			name = "void"
 		}
@@ -2388,7 +2748,12 @@ func LangNativeTypeNameSubtype(
 		lang, subtype, false)
 	switch typ {
 	case rawlisttype:
-		output = "List<" + output + ">"
+		switch lang {
+		case langswift:
+			output = "Array<" + output + ">"
+		default:
+			output = "List<" + output + ">"
+		}
 	case rawmaptype:
 		switch lang {
 		case langcpp:
@@ -2402,7 +2767,7 @@ func LangNativeTypeNameSubtype(
 	return output
 }
 
-func LangNativeTypeProperties(
+func LangTypeProperties(
 	lang *vxlang,
 	typ *vxtype) []vxarg {
 	var typeproperties []vxarg
@@ -2421,7 +2786,7 @@ func LangNativeTypeString(
 	switch lang {
 	case langcpp:
 		output = "std::string"
-	case langcsharp:
+	case langcsharp, langswift:
 		output = "string"
 	default:
 		output = "String"
@@ -2429,11 +2794,11 @@ func LangNativeTypeString(
 	return output
 }
 
-func LangNativeTypeStringbuilder(
+func LangTypeStringbuilder(
 	lang *vxlang) string {
 	output := ""
 	switch lang {
-	case langcsharp:
+	case langcsharp, langswift:
 		output = "" +
 			"\n      System.Text.StringBuilder sb = new System.Text.StringBuilder(value.vx_string())" + lang.lineend
 	case langjava:
@@ -2446,19 +2811,7 @@ func LangNativeTypeStringbuilder(
 	return output
 }
 
-func LangNativeTypeStringbuilderAppend(
-	lang *vxlang) string {
-	output := ""
-	switch lang {
-	case langcsharp:
-		output = ".Append"
-	case langjava, langkotlin:
-		output = ".append"
-	}
-	return output
-}
-
-func LangNativeTypeThis(
+func LangTypeThis(
 	lang *vxlang) string {
 	output := ""
 	switch lang {
@@ -2499,12 +2852,15 @@ func LangNativeTypeVxMap(
 			convertmap = LangPkgNameDot(lang, "vx/core") + "vx_map_from_map<" + LangTypeName(lang, anytype) + ", " + LangTypeName(lang, typ) + ">(this.vx_p_map)"
 		}
 		copymap = "" +
-			LangVarCollection(lang, "anymap", rawmaptype, anytype, 3, convertmap) +
-			LangVarCollection(lang, "map", rawmaptype, anytype, 3, "anymap.copy()")
+			LangVarCollection(lang, 3, rawmaptype, anytype,
+				"anymap", convertmap) +
+			LangVarCollection(lang, 3, rawmaptype, anytype,
+				"map", "anymap.copy()")
 	default:
 		copymap = "" +
-			LangVarCollection(lang, "map", rawmaptype, anytype, 3,
-				LangNativeVxNewMap(lang, anytype, "this.vx_p_map"))
+			LangVarCollection(lang, 3, rawmaptype, anytype,
+				"map",
+				LangVarMapNew(lang, anytype, "this.vx_p_map"))
 	}
 	prefix := LangTypeName(lang, typ)
 	output := "" +
@@ -2526,13 +2882,13 @@ func LangNativeTypeVxNewVals(
 	return output
 }
 
-func LangNativeVarAll(
+func LangVarAll(
 	lang *vxlang,
-	varname string,
+	indent int,
 	vartype *vxtype,
 	subtype *vxtype,
+	varname string,
 	varvalue string,
-	indent int,
 	isconst bool,
 	isfuture bool,
 	isstatic bool,
@@ -2540,7 +2896,7 @@ func LangNativeVarAll(
 	isgeneric bool,
 	isnullable bool) string {
 	output := LangIndent(lang, indent, true)
-	svalue := LangNativeVarValue(lang, vartype, varvalue)
+	svalue := LangVarValue(lang, vartype, varvalue)
 	switch lang {
 	case langcpp:
 		if isstatic {
@@ -2709,21 +3065,121 @@ func LangNativeVarAll(
 		if varvalue != "" {
 			output += " = " + svalue
 		}
+	case langswift:
+		if isstatic {
+			output += "public static "
+		} else if isprop {
+			output += "public "
+		}
+		typetext := ""
+		switch vartype {
+		case rawlisttype:
+			typetext = "Array<" + LangNameTypeFullFromType(lang, subtype) + ">"
+			if varvalue == ":new" {
+				svalue = "new Array<" + LangNameTypeFullFromType(lang, subtype) + ">()"
+			}
+		case rawmaptype:
+			typetext = "Map<string, " + LangNameTypeFullFromType(lang, subtype) + ">"
+			if varvalue == ":new" {
+				svalue = "new Vx.Core.LinkedHashMap<string, " + LangNameTypeFullFromType(lang, subtype) + ">()"
+			}
+		case rawlistunknowntype:
+			typetext = "Array<Any>"
+			if varvalue == ":new" {
+				svalue = "Array<Any>()"
+			}
+		default:
+			if isgeneric {
+				typetext = LangGenericFromType(lang, vartype)
+			} else {
+				typetext = LangNameTypeFullFromType(lang, vartype)
+			}
+		}
+		if isfuture {
+			typetext = "Task<" + typetext + ">"
+		} else if BooleanFromStringContains(typetext, ".Type_") {
+			typetext = "any " + typetext
+		}
+		prefix := "var"
+		if isstatic {
+			prefix = "let"
+		} else if isconst {
+			prefix = "val"
+		}
+		if isnullable || varvalue == "null" {
+			output += prefix + " " + varname + " : " + typetext + "? " + " = " + varvalue
+		} else if varvalue == "" {
+			output += prefix + " " + varname + " : " + typetext
+		} else {
+			output += prefix + " " + varname + " : " + typetext + " = " + svalue
+		}
+		output += lang.lineend
 	}
 	return output
 }
 
-func LangNativeVarClassAll(
+func LangVarAsType(
 	lang *vxlang,
+	svar string,
+	typ *vxtype) string {
+	typetext := ""
+	// SomeClass obj2 = (SomeClass)Convert.ChangeType(t, typeof(SomeClass));
+	switch typ {
+	case rawlistunknowntype:
+		switch lang {
+		case langcsharp:
+			typetext = "List<object>"
+		case langjava:
+			typetext = "List<?>"
+		case langkotlin:
+			typetext = "List<Any>"
+		default:
+			typetext = LangNameTypeFullFromType(lang, typ)
+		}
+	default:
+		typetext = LangNameTypeFullFromType(lang, typ)
+	}
+	return LangVarAsTypeText(lang, svar, typetext)
+}
+
+func LangVarAsTypeText(
+	lang *vxlang,
+	svar string,
+	stype string) string {
+	output := ""
+	switch lang {
+	case langcsharp:
+		switch stype {
+		case "bool":
+			output = "(bool)" + svar
+		case "float":
+			output = "(float)" + svar
+		case "int":
+			output = "Convert.ToInt32(" + svar + ")"
+		default:
+			output = "(" + stype + ")" + svar
+		}
+	case langjava:
+		output = "(" + stype + ")" + svar
+	case langkotlin:
+		output = svar + " as " + stype
+	case langswift:
+		output = svar + " as " + stype
+	}
+	return output
+}
+
+func LangVarClassAll(
+	lang *vxlang,
+	indent int,
 	varname string,
 	vartype *vxtype,
-	indent int,
 	isconst bool,
 	isnullable bool,
 	varvalue string) string {
 	classname := LangTypeClassFull(lang, vartype)
 	sindent := "\n" + StringRepeat("  ", indent)
-	svalue := LangNativeVarValue(lang, vartype, varvalue)
+	svalue := LangVarValue(lang, vartype, varvalue)
 	output := sindent
 	switch lang {
 	case langcsharp:
@@ -2758,22 +3214,7 @@ func LangNativeVarClassAll(
 	return output
 }
 
-func LangNativeVarSet(
-	lang *vxlang,
-	varname string,
-	indent int,
-	varvalue string) string {
-	output := LangIndent(lang, indent, true)
-	output += varname
-	output += " = " + varvalue
-	switch lang {
-	case langcpp, langcsharp, langjava:
-		output += lang.lineend
-	}
-	return output
-}
-
-func LangNativeVarValue(
+func LangVarValue(
 	lang *vxlang,
 	vartype *vxtype,
 	varvalue string) string {
@@ -2793,7 +3234,7 @@ func LangNativeVarValue(
 	return output
 }
 
-func LangNativeVxContains(
+func LangVxContains(
 	lang *vxlang,
 	text string,
 	contains string) string {
@@ -2807,7 +3248,7 @@ func LangNativeVxContains(
 	return output
 }
 
-func LangNativeVxEqualsString(
+func LangVxEqualsString(
 	lang *vxlang,
 	text1 string,
 	text2 string) string {
@@ -2821,40 +3262,51 @@ func LangNativeVxEqualsString(
 	return output
 }
 
-func LangNativeVxFloatFromString(
+func LangVarArg1(
 	lang *vxlang,
-	text string) string {
+	varname string) string {
 	output := ""
 	switch lang {
-	case langcsharp:
-		output = "float.Parse(" + text + ")"
-	case langjava:
-		output = "Float.parseFloat(" + text + ")"
-	case langkotlin:
-		output = text + ".toFloat()"
+	case langswift:
+		output = "[" + varname + "]..."
+	default:
+		output = varname
 	}
 	return output
 }
 
-func LangNativeVxIntFromString(
+func LangVarFloatPlus(
 	lang *vxlang,
-	text string) string {
-	output := ""
-	switch lang {
-	case langcsharp:
-		output = "Int32.Parse(" + text + ")"
-	case langjava:
-		output = "Integer.parseInt(" + text + ")"
-	case langkotlin:
-		output = text + ".toInt()"
-	}
-	return output
-}
-
-func LangNativeVxListAdd(
-	lang *vxlang,
-	varname string,
 	indent int,
+	varname string,
+	value string) string {
+	output := ""
+	sindent := "\n" + StringRepeat("  ", indent)
+	switch lang {
+	default:
+		output = sindent + varname + " += " + value + lang.lineend
+	}
+	return output
+}
+
+func LangVarIntPlus(
+	lang *vxlang,
+	indent int,
+	varname string,
+	value string) string {
+	output := ""
+	sindent := "\n" + StringRepeat("  ", indent)
+	switch lang {
+	default:
+		output = sindent + varname + " += " + value + lang.lineend
+	}
+	return output
+}
+
+func LangVarListAdd(
+	lang *vxlang,
+	indent int,
+	varname string,
 	value string) string {
 	output := ""
 	sindent := "\n" + StringRepeat("  ", indent)
@@ -2869,10 +3321,10 @@ func LangNativeVxListAdd(
 	return output
 }
 
-func LangNativeVxListAddList(
+func LangVarListAddList(
 	lang *vxlang,
-	varname string,
 	indent int,
+	varname string,
 	value string) string {
 	output := ""
 	sindent := "\n" + StringRepeat("  ", indent)
@@ -2885,7 +3337,7 @@ func LangNativeVxListAddList(
 	return output
 }
 
-func LangNativeVxListContains(
+func LangVarListContains(
 	lang *vxlang,
 	varname string,
 	contains string) string {
@@ -2901,7 +3353,7 @@ func LangNativeVxListContains(
 	return output
 }
 
-func LangNativeVxListGet(
+func LangVarListGet(
 	lang *vxlang,
 	varname string,
 	value string) string {
@@ -2915,7 +3367,7 @@ func LangNativeVxListGet(
 	return output
 }
 
-func LangNativeVxListSize(
+func LangVarListSize(
 	lang *vxlang,
 	varname string) string {
 	output := ""
@@ -2930,7 +3382,7 @@ func LangNativeVxListSize(
 	return output
 }
 
-func LangNativeVxNewList(
+func LangVarListNew(
 	lang *vxlang,
 	typ *vxtype,
 	value string) string {
@@ -2942,11 +3394,13 @@ func LangNativeVxNewList(
 		output = "new ArrayList<" + LangTypeName(lang, typ) + ">(" + value + ")"
 	case langkotlin:
 		output = "ArrayList<" + LangTypeName(lang, typ) + ">(" + value + ")"
+	case langswift:
+		output = "new Array<" + LangTypeName(lang, typ) + ">(" + value + ")"
 	}
 	return output
 }
 
-func LangNativeVxNewMap(
+func LangVarMapNew(
 	lang *vxlang,
 	typ *vxtype,
 	value string) string {
@@ -2958,11 +3412,71 @@ func LangNativeVxNewMap(
 		output = "new LinkedHashMap<String, " + LangTypeName(lang, typ) + ">(" + value + ")"
 	case langkotlin:
 		output = "LinkedHashMap<String, " + LangTypeName(lang, typ) + ">(" + value + ")"
+	case langswift:
+		output = "new Vx.Core.LinkedHashMap<string, " + LangTypeName(lang, typ) + ">(" + value + ")"
 	}
 	return output
 }
 
-func LangNativeVxStartswith(
+func LangVarMapRemove(
+	lang *vxlang,
+	indent int,
+	varname string,
+	key string) string {
+	output := ""
+	sindent := "\n" + StringRepeat("  ", indent)
+	switch lang {
+	default:
+		output = sindent + varname + ".remove(" + key + ")" + lang.lineend
+	}
+	return output
+}
+
+func LangVarMapSet(
+	lang *vxlang,
+	indent int,
+	varname string,
+	key string,
+	value string) string {
+	output := ""
+	sindent := "\n" + StringRepeat("  ", indent)
+	switch lang {
+	default:
+		output = sindent + varname + ".put(" + key + ", " + value + ")" + lang.lineend
+	}
+	return output
+}
+
+func LangVarSet(
+	lang *vxlang,
+	indent int,
+	varname string,
+	varvalue string) string {
+	output := LangIndent(lang, indent, true)
+	output += varname
+	output += " = " + varvalue
+	switch lang {
+	case langcpp, langcsharp, langjava, langswift:
+		output += lang.lineend
+	}
+	return output
+}
+
+func LangVarStringPlus(
+	lang *vxlang,
+	indent int,
+	varname string,
+	value string) string {
+	output := ""
+	sindent := "\n" + StringRepeat("  ", indent)
+	switch lang {
+	default:
+		output = sindent + varname + " += " + value + lang.lineend
+	}
+	return output
+}
+
+func LangVarStringStarts(
 	lang *vxlang,
 	varname string,
 	starts string) string {
@@ -2972,11 +3486,29 @@ func LangNativeVxStartswith(
 		output = varname + ".StartsWith(" + starts + ")"
 	case langjava, langkotlin:
 		output = varname + ".startsWith(" + starts + ")"
+	case langswift:
+		output = varname + ".StartsWith(" + starts + ")"
 	}
 	return output
 }
 
-func LangNativeVxSubstring(
+func LangVarStringBuilderPlus(
+	lang *vxlang,
+	indent int,
+	varname string,
+	value string) string {
+	output := ""
+	sindent := "\n" + StringRepeat("  ", indent)
+	switch lang {
+	case langcsharp, langswift:
+		output = sindent + varname + ".Append(" + value + ")" + lang.lineend
+	default:
+		output = sindent + varname + ".append(" + value + ")" + lang.lineend
+	}
+	return output
+}
+
+func LangVarSubstring(
 	lang *vxlang,
 	varname string,
 	from string,
@@ -2995,11 +3527,17 @@ func LangNativeVxSubstring(
 			output += ", " + to
 		}
 		output += ")"
+	case langswift:
+		output = varname + ".Substring(" + from
+		if to != "" {
+			output += ", " + to
+		}
+		output += ")"
 	}
 	return output
 }
 
-func LangNativeVxToString(
+func LangVarToString(
 	lang *vxlang,
 	varname string) string {
 	output := ""
@@ -3008,6 +3546,8 @@ func LangNativeVxToString(
 		output = "Vx.Core.vx_string_from_object(" + varname + ")"
 	case langjava, langkotlin:
 		output = varname + ".toString()"
+	case langswift:
+		output = "Vx.Core.vx_string_from_object(" + varname + ")"
 	}
 	return output
 }

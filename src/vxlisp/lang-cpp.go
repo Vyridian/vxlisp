@@ -329,7 +329,7 @@ func CppEmptyValueFromTypeIndent(
 		case "string":
 			output = "\"" + output + "\""
 		case ":list":
-			output = "vx_core::f_type_to_list(" + LangNativePkgName(lang, typ.pkgname) + lang.pkgref + "t_" + typ.name + ")"
+			output = "vx_core::f_type_to_list(" + LangPkgName(lang, typ.pkgname) + lang.pkgref + "t_" + typ.name + ")"
 		default:
 			if len(typ.properties) > 0 {
 				output = "{\n"
@@ -343,7 +343,7 @@ func CppEmptyValueFromTypeIndent(
 					output += "\n"
 				}
 				output += "" +
-					indent + "    vxtype: " + LangNativePkgName(lang, typ.pkgname) + lang.pkgref + "t_" + LangFromName(typ.name) +
+					indent + "    vxtype: " + LangPkgName(lang, typ.pkgname) + lang.pkgref + "t_" + LangFromName(typ.name) +
 					"\n" + indent + "  }"
 			} else if output == "" || strings.HasPrefix(output, ":") {
 				output = "\"" + output + "\""
@@ -468,24 +468,15 @@ func CppFromConst(
 	project *vxproject,
 	pkg *vxpackage) (string, string, string, string, *vxmsgblock) {
 	msgblock := NewMsgBlock("CppFromConst")
-	var doc = ""
 	path := cnst.pkgname + "/" + cnst.name
-	doc += "Constant: " + cnst.name + "\n"
-	if cnst.doc != "" {
-		doc += cnst.doc + "\n"
-	}
-	if cnst.deprecated != "" {
-		doc += cnst.deprecated + "\n"
-	}
 	cnsttype := cnst.vxtype
-	doc += "{" + cnsttype.name + "}"
 	cnstname := LangFromName(cnst.alias)
 	cnstclassname := "Class_" + cnstname
 	cnsttypename := LangNameFromType(
 		lang, cnst.vxtype)
 	cnsttypeclassname := LangNameTypeFullFromType(
 		lang, cnsttype)
-	pkgname := LangNativePkgName(
+	pkgname := LangPkgName(
 		lang, cnst.pkgname)
 	fullclassname := pkgname + lang.pkgref + "Class_" + cnstname
 	fullconstname := pkgname + lang.pkgref + "Const_" + cnstname
@@ -674,7 +665,7 @@ func CppBodyFromFunc(
 		returnetype = LangTypeE(
 			lang, fnc.generictype)
 	}
-	pkgname := LangNativePkgName(
+	pkgname := LangPkgName(
 		lang, fnc.pkgname)
 	instancevars := ""
 	//	constructor := ""
@@ -1135,7 +1126,7 @@ func CppBodyFromFunc(
 	} else {
 		staticfunction = fdefinition
 	}
-	doc := LangFuncDoc(lang, fnc)
+	doc := LangNativeFuncDoc(lang, fnc)
 	output += "" +
 		doc +
 		"\n  // (func " + fnc.name + ")" +
@@ -1485,7 +1476,7 @@ func CppFromPackage(
   inline vx_Class_package const vx_package;
 `
 	headerimports := CppImportsFromPackage(pkg, "", header, false)
-	namespaceopen, namespaceclose := LangNativeNamespaceOpenClose(lang, pkgname)
+	namespaceopen, namespaceclose := LangNativeNamespaceOpenClose(lang, pkgname, "")
 	headeroutput := "" +
 		"#ifndef " + StringUCase(pkgname+"_hpp") +
 		"\n#define " + StringUCase(pkgname+"_hpp") +
@@ -1528,7 +1519,7 @@ func CppBodyFromType(
 	if typ.deprecated != "" {
 		doc += "\n" + typ.deprecated
 	}
-	pkgname := LangNativePkgName(lang, typ.pkgname)
+	pkgname := LangPkgName(lang, typ.pkgname)
 	typename := LangFromName(typ.alias)
 	classname := "Class_" + typename
 	fullclassname := CppNameClassFullFromType(lang, typ)
@@ -1943,19 +1934,27 @@ func CppBodyFromType(
 			default:
 				subname := "subitem"
 				valnew += "" +
-					"\n        } else if (" + LangNativeIsTypeText(lang, "valsubtype", allowedtypename) + ") {" +
-					LangVar(lang, subname, allowedtype, 5, castval)
+					LangIfElseIf(lang, 4,
+						LangIsTypeText(lang, "valsubtype", allowedtypename),
+						LangVar(lang, 5, allowedtype,
+							subname,
+							castval))
 				switch NameFromType(typ) {
 				case "vx/core/msglist", "vx/core/msgblocklist":
 					valnew += "" +
-						"\n          if (!" + LangNativeVxListContains(lang, "listval", subname) + ") {" +
-						LangNativeVarSet(lang, "ischanged", 6, "true") +
-						LangNativeVxListAdd(lang, "listval", 6, subname) +
-						"\n          }"
+						LangIfThen(lang, 5,
+							"!"+LangVarListContains(lang, "listval", subname),
+							LangVarSet(lang, 6,
+								"ischanged", "true")+
+								LangVarListAdd(lang, 6,
+									"listval", subname)) +
+						LangIfEnd(lang, 5)
 				default:
 					valnew += "" +
-						LangNativeVarSet(lang, "ischanged", 5, "true") +
-						LangNativeVxListAdd(lang, "listval", 5, subname)
+						LangVarSet(lang, 5,
+							"ischanged", "true") +
+						LangVarListAdd(lang, 5,
+							"listval", subname)
 				}
 			}
 			/*
@@ -2390,9 +2389,14 @@ func CppBodyFromType(
 					"\n          key = \"\";" +
 					"\n        }" +
 					"\n      }" +
-					LangVar(lang, "ischangemsgs", rawbooleantype, 3, "vx_p_msgs != value->msgs()") +
-					LangVar(lang, "ischangemsgblocks", rawbooleantype, 3, "vx_p_msgblocks != value->msgblocks()") +
-					LangNativeVarSet(lang, "ischanged", 3, "ischangemsgs || ischangemsgblocks") +
+					LangVar(lang, 3, rawbooleantype,
+						"ischangemsgs",
+						"vx_p_msgs != value->msgs()") +
+					LangVar(lang, 3, rawbooleantype,
+						"ischangemsgblocks",
+						"vx_p_msgblocks != value->msgblocks()") +
+					LangVarSet(lang, 3,
+						"ischanged", "ischangemsgs || ischangemsgblocks") +
 					"\n      if (ischanged) {" +
 					"\n       	if ((vx_p_msgs == vx_core::e_msglist) && (vx_p_msgblocks->vx_list().size() == 1)) {" +
 					"\n       			output = vx_p_msgblocks->vx_listmsgblock()[0];" +
@@ -2603,7 +2607,7 @@ func CppFromValue(
 				valstr = LangFromName(value.name)
 			} else {
 				valconst := ConstFromValue(value)
-				valstr = LangNativePkgName(lang, valconst.pkgname) + lang.pkgref + "c_" + LangFromName(valconst.alias)
+				valstr = LangPkgName(lang, valconst.pkgname) + lang.pkgref + "c_" + LangFromName(valconst.alias)
 			}
 		}
 		output = valstr
@@ -2696,23 +2700,23 @@ func CppFromValue(
 						isskip = true
 					}
 				default:
-					output += LangNativePkgName(lang, fnc.pkgname) + lang.pkgref + "f_" + LangFuncName(fnc) + "("
+					output += LangPkgName(lang, fnc.pkgname) + lang.pkgref + "f_" + LangFuncName(fnc) + "("
 				}
 			case "vx/core/fn":
 			case "vx/core/let":
 				if fnc.async {
-					output += LangNativePkgName(lang, fnc.pkgname) + lang.pkgref + "f_let_async("
+					output += LangPkgName(lang, fnc.pkgname) + lang.pkgref + "f_let_async("
 				} else {
-					output += LangNativePkgName(lang, fnc.pkgname) + lang.pkgref + "f_" + LangFuncName(fnc) + "("
+					output += LangPkgName(lang, fnc.pkgname) + lang.pkgref + "f_" + LangFuncName(fnc) + "("
 				}
 			default:
 				if fnc.argname != "" {
 					output += "" +
-						LangNativePkgName(lang, "vx/core") + lang.pkgref + "vx_any_from_func(" +
+						LangPkgName(lang, "vx/core") + lang.pkgref + "vx_any_from_func(" +
 						LangTypeT(lang, fnc.vxtype) + ", " +
 						LangFromName(fnc.argname) + ", {"
 				} else {
-					output += LangNativePkgName(lang, fnc.pkgname) + lang.pkgref + "f_" + LangFuncName(fnc) + "("
+					output += LangPkgName(lang, fnc.pkgname) + lang.pkgref + "f_" + LangFuncName(fnc) + "("
 				}
 			}
 			if !isskip {
@@ -4018,7 +4022,7 @@ func CppLambdaFromArgList(
 func CppNameAbstractFullFromConst(
 	lang *vxlang,
 	cnst *vxconst) string {
-	name := LangNativePkgName(lang, cnst.pkgname)
+	name := LangPkgName(lang, cnst.pkgname)
 	name += lang.pkgref + "Abstract_"
 	name += LangConstName(cnst)
 	return name
@@ -4027,7 +4031,7 @@ func CppNameAbstractFullFromConst(
 func CppNameAbstractFullFromFunc(
 	lang *vxlang,
 	fnc *vxfunc) string {
-	name := LangNativePkgName(lang, fnc.pkgname)
+	name := LangPkgName(lang, fnc.pkgname)
 	name += lang.pkgref + "Abstract_"
 	name += LangFuncName(fnc)
 	return name
@@ -4036,7 +4040,7 @@ func CppNameAbstractFullFromFunc(
 func CppNameAbstractFullFromType(
 	lang *vxlang,
 	typ *vxtype) string {
-	name := LangNativePkgName(lang, typ.pkgname)
+	name := LangPkgName(lang, typ.pkgname)
 	name += lang.pkgref + "Abstract_"
 	name += LangNameFromType(lang, typ)
 	return name
@@ -4047,7 +4051,7 @@ func CppNameCFromConst(
 	cnst *vxconst) string {
 	name := "c_" + LangFromName(cnst.alias)
 	if cnst.pkgname != "" {
-		name = LangNativePkgName(lang, cnst.pkgname) + lang.pkgref + name
+		name = LangPkgName(lang, cnst.pkgname) + lang.pkgref + name
 	}
 	return name
 }
@@ -4055,7 +4059,7 @@ func CppNameCFromConst(
 func CppNameClassFullFromConst(
 	lang *vxlang,
 	cnst *vxconst) string {
-	name := LangNativePkgName(lang, cnst.pkgname)
+	name := LangPkgName(lang, cnst.pkgname)
 	name += lang.pkgref + "Class_"
 	name += LangConstName(cnst)
 	return name
@@ -4064,7 +4068,7 @@ func CppNameClassFullFromConst(
 func CppNameClassFullFromFunc(
 	lang *vxlang,
 	fnc *vxfunc) string {
-	name := LangNativePkgName(lang, fnc.pkgname)
+	name := LangPkgName(lang, fnc.pkgname)
 	name += lang.pkgref + "Class_"
 	name += LangFuncName(fnc)
 	return name
@@ -4073,7 +4077,7 @@ func CppNameClassFullFromFunc(
 func CppNameClassFullFromType(
 	lang *vxlang,
 	typ *vxtype) string {
-	name := LangNativePkgName(lang, typ.pkgname)
+	name := LangPkgName(lang, typ.pkgname)
 	name += lang.pkgref + "Class_"
 	name += LangNameFromType(lang, typ)
 	return name
@@ -4094,7 +4098,7 @@ func CppNameTFromTypeGeneric(
 func CppNameTypeFullFromConst(
 	lang *vxlang,
 	cnst *vxconst) string {
-	name := LangNativePkgName(lang, cnst.pkgname)
+	name := LangPkgName(lang, cnst.pkgname)
 	name += lang.pkgref + "Const_"
 	name += LangConstName(cnst)
 	return name
@@ -4103,7 +4107,7 @@ func CppNameTypeFullFromConst(
 func CppNameTypeFullFromFunc(
 	lang *vxlang,
 	fnc *vxfunc) string {
-	name := LangNativePkgName(lang, fnc.pkgname)
+	name := LangPkgName(lang, fnc.pkgname)
 	name += lang.pkgref + "Func_"
 	name += LangFuncName(fnc)
 	return name
@@ -4140,7 +4144,7 @@ func CppReplFromFunc(
 	replparams := ""
 	argidx := 0
 	var listargname []string
-	pkgname := LangNativePkgName(lang, fnc.pkgname)
+	pkgname := LangPkgName(lang, fnc.pkgname)
 	funcname := LangFromName(fnc.alias) + LangIndexFromFunc(fnc)
 	classname := "Class_" + funcname
 	outputtype := ""
@@ -4315,7 +4319,7 @@ func CppTestFromPackage(
 	prj *vxproject,
 	command *vxcommand) (string, string, *vxmsgblock) {
 	msgblock := NewMsgBlock("CppTestFromPackage")
-	pkgname := LangNativePkgName(lang, pkg.name)
+	pkgname := LangPkgName(lang, pkg.name)
 	typkeys := ListKeyFromMapType(pkg.maptype)
 	var coverdoccnt = 0
 	var coverdoctotal = 0
@@ -4522,7 +4526,8 @@ func CppTestFromPackage(
 	if ipos >= 0 {
 		simplename = simplename[ipos+1:]
 	}
-	namespaceopen, namespaceclose := LangNativeNamespaceOpenClose(lang, pkgname+"_test")
+	namespaceopen, namespaceclose := LangNativeNamespaceOpenClose(
+		lang, pkgname+"_test", "")
 	headertext := "" +
 		"#ifndef " + StringUCase(pkgname+"_test_hpp") +
 		"\n#define " + StringUCase(pkgname+"_test_hpp") +
@@ -4701,7 +4706,7 @@ func CppApp(
 	project *vxproject,
 	cmd *vxcommand) string {
 	imports := ""
-	imports += LangNativeImport(
+	imports += LangImport(
 		lang,
 		PackageCoreFromProject(project),
 		imports)
@@ -4725,7 +4730,7 @@ func CppApp(
 		}
 		if contextfunc != emptyfunc {
 			if contextfunc.pkgname != mainfunc.pkgname {
-				imports += LangNativeImport(
+				imports += LangImport(
 					lang,
 					PackageFromProjectFunc(project, contextfunc),
 					imports)
@@ -4742,7 +4747,7 @@ func CppApp(
 			}
 		}
 		if mainfunc != emptyfunc {
-			imports += LangNativeImport(
+			imports += LangImport(
 				lang,
 				PackageFromProjectFunc(project, mainfunc),
 				imports)

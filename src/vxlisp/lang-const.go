@@ -9,22 +9,16 @@ func LangConst(
 	output := ""
 	g_ifuncdepth = 0
 	path := cnst.pkgname + "/" + cnst.name
-	doc := ""
-	doc += "Constant: " + cnst.name + "\n"
-	if cnst.doc != "" {
-		doc += cnst.doc + "\n"
-	}
-	if cnst.deprecated != "" {
-		doc += cnst.deprecated + "\n"
-	}
 	cnsttype := cnst.vxtype
-	doc += "{" + cnsttype.name + "}"
 	cnstname := LangFromName(cnst.alias)
 	cnstclassname := "Const_" + cnstname
 	const_new := "" +
-		LangVarClass(lang, "outval", cnst.vxtype, 3,
+		LangVarClass(lang, 3, cnst.vxtype,
+			"outval",
 			LangNativeAsClass(lang, "output", cnst.vxtype)) +
-		"\n      outval.vx_p_constdef = constdef()" + lang.lineend
+		LangVarSet(lang, 3,
+			"outval.vx_p_constdef",
+			"constdef()")
 	cnstval := LangConstValFromConst(lang, cnst, project)
 	switch NameFromType(cnsttype) {
 	case "vx/core/boolean":
@@ -62,7 +56,7 @@ func LangConst(
 	default:
 		switch cnsttype.extends {
 		case ":list":
-			clstext, msgs := LangFromValue(lang, cnst.value, cnst.pkgname, emptyfunc, 3, true, false, path)
+			clstext, msgs := LangFromValue(lang, 3, cnst.value, cnst.pkgname, emptyfunc, true, false, path)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			if clstext != "" {
 				allowtype, _ := TypeAllowFromType(cnsttype)
@@ -71,11 +65,14 @@ func LangConst(
 					listtypename = ""
 				}
 				const_new += "" +
-					LangVar(lang, "value", cnsttype, 3, clstext) +
-					"\n      outval.vx_p_list = value.vx_list" + listtypename + "()" + lang.lineend
+					LangVar(lang, 3, cnsttype,
+						"value", clstext) +
+					LangVarSet(lang, 3,
+						"outval.vx_p_list",
+						"value.vx_list"+listtypename+"()")
 			}
 		case ":map":
-			clstext, msgs := LangFromValue(lang, cnst.value, cnst.pkgname, emptyfunc, 4, true, false, path)
+			clstext, msgs := LangFromValue(lang, 4, cnst.value, cnst.pkgname, emptyfunc, true, false, path)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			if clstext != "" {
 				allowtype, _ := TypeAllowFromType(cnsttype)
@@ -84,18 +81,24 @@ func LangConst(
 					maptypename = ""
 				}
 				const_new += "" +
-					LangVar(lang, "value", cnsttype, 3, clstext) +
-					"\n      outval.vx_p_map = val.vx_map" + maptypename + "()" + lang.lineend
+					LangVar(lang, 3, cnsttype,
+						"value", clstext) +
+					LangVarSet(lang, 3,
+						"outval.vx_p_map",
+						"val.vx_map"+maptypename+"()")
 			}
 		case ":struct":
-			clstext, msgs := LangFromValue(lang, cnst.value, cnst.pkgname, emptyfunc, 3, true, false, path)
+			clstext, msgs := LangFromValue(lang, 3, cnst.value, cnst.pkgname, emptyfunc, true, false, path)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			if clstext != "" {
 				const_new += "" +
-					LangVar(lang, "value", cnsttype, 3, clstext)
+					LangVar(lang, 3, cnsttype,
+						"value", clstext)
 				for _, prop := range ListPropertyTraitFromType(cnst.vxtype) {
 					const_new += "" +
-						"\n      outval.vx_p_" + LangFromName(prop.name) + " = value." + LangFromName(prop.name) + "()" + lang.lineend
+						LangVarSet(lang, 3,
+							"outval.vx_p_"+LangFromName(prop.name),
+							"value."+LangFromName(prop.name)+"()")
 				}
 			}
 		}
@@ -104,12 +107,10 @@ func LangConst(
 	//_, funcstatic := LangFuncInstanceStatic(lang)
 	switch NameFromConst(cnst) {
 	case "vx/core/false":
-		e_type = LangValStatic(lang, "e_boolean", booleantype, 1, LangPkgNameDot(lang, "vx/core")+"c_false")
+		e_type = LangValStatic(lang, 1, booleantype,
+			"e_boolean", LangPkgNameDot(lang, "vx/core")+"c_false") + "\n"
 	}
-	doc = "" +
-		"\n  /**" +
-		"\n   * " + StringFromStringIndent(doc, "   * ") +
-		"\n   */"
+	doc := LangNativeConstDoc(lang, cnst)
 	argoutput := NewArg("output")
 	argoutput.vxtype = cnst.vxtype
 	argoutput.isfinal = false
@@ -125,11 +126,13 @@ func LangConst(
 		LangNativeConstClassHeader(lang, cnst, 1) +
 		staticopen +
 		LangConstVxConstdef(lang, cnst) +
-		LangFuncHeaderStatic(lang, cnstname, funcconstnew, 2, 0, const_new) +
+		LangFuncHeaderStatic(lang, 2,
+			cnstname, funcconstnew, 0, const_new) +
 		staticclose +
 		"\n  }" +
 		"\n" +
-		LangValStatic(lang, "c_"+cnstname, cnst.vxtype, 1, ":new") +
+		LangValStatic(lang, 1, cnst.vxtype,
+			"c_"+cnstname, ":new") +
 		"\n" +
 		e_type +
 		"\n"
@@ -141,7 +144,7 @@ func LangConst(
 func LangConstC(lang *vxlang, cnst *vxconst) string {
 	name := "c_" + LangFromName(cnst.alias)
 	if cnst.pkgname != "" {
-		name = LangNativePkgName(lang, cnst.pkgname) + lang.pkgref + name
+		name = LangPkgName(lang, cnst.pkgname) + lang.pkgref + name
 	}
 	return name
 }
@@ -185,7 +188,9 @@ func LangConstVxConstdef(
 		"\n        " + LangTypeT(lang, cnsttype) +
 		"\n      )"
 	output := "" +
-		LangFuncHeaderStatic(lang, constname, fnc, 2, 0,
-			LangVar(lang, "output", constdeftype, 3, body))
+		LangFuncHeaderStatic(lang, 2,
+			constname, fnc, 0,
+			LangVar(lang, 3, constdeftype,
+				"output", body))
 	return output
 }

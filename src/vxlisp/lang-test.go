@@ -8,22 +8,16 @@ func LangTestApp(
 	command *vxcommand,
 	pkgprefix string) string {
 	imports := ""
-	imports += LangNativeImport(
+	imports += LangImport(
 		lang,
 		PackageCoreFromProject(project),
 		imports)
-	contexttext := LangVarStatic(
-		lang, "arglist",
-		anylisttype,
-		1,
-		LangTypeE(lang, anylisttype))
+	contexttext := LangVarStatic(lang, 1, anylisttype,
+		"arglist", LangTypeE(lang, anylisttype))
 	if command.context == "" {
 		contexttext += "" +
-			LangVarStatic(
-				lang,
+			LangVarStatic(lang, 2, contexttype,
 				"context",
-				contexttype,
-				2,
 				pkgprefix+LangPkgNameDot(lang, "vx/test")+"f_context_test(arglist)")
 	} else {
 		contextfunc := FuncFromProjectFuncname(project, command.context)
@@ -35,32 +29,23 @@ func LangTestApp(
 			packagecontext, ok := PackageFromProjectName(
 				project, contextfunc.pkgname)
 			if ok {
-				imports += LangNativeImport(
+				imports += LangImport(
 					lang,
 					packagecontext,
 					imports)
 			}
 			if contextfunc.async {
 				contexttext += "" +
-					LangVarStaticFuture(
-						lang,
+					LangVarStaticFuture(lang, 1, contexttype,
 						"asynccontext",
-						contexttype,
-						1,
 						LangFuncF(lang, contextfunc)+"(arglist)") +
-					LangVarStatic(
-						lang,
+					LangVarStatic(lang, 1, contexttype,
 						"context",
-						contexttype,
-						1,
 						LangPkgNameDot(lang, "vx/core")+"vx_sync_from_async("+LangTypeT(lang, contexttype)+", asynccontext)")
 			} else {
 				contexttext += "" +
-					LangVarStatic(
-						lang,
+					LangVarStatic(lang, 1, contexttype,
 						"context",
-						contexttype,
-						1,
 						LangFuncF(lang, contextfunc)+"(arglist)")
 			}
 		}
@@ -78,7 +63,7 @@ func LangTestApp(
 		if iscontinue {
 			if pkg.name != "" {
 				imports += LangNativeTestImport(lang, pkg, imports)
-				testpackage := "\n      " + testpackageprefix + LangNativePkgName(lang, pkg.name) + "Test.test_package(context)"
+				testpackage := "\n      " + testpackageprefix + LangPkgName(lang, pkg.name) + "Test.test_package(context)"
 				listtestpackage = append(
 					listtestpackage, testpackage)
 				tests += LangNativeTestPackage(lang, pkg, testpackagetype)
@@ -88,7 +73,7 @@ func LangTestApp(
 	testpackages := StringFromListStringJoin(
 		listtestpackage, ",")
 	namespaceopen, namespaceclose := LangNativeNamespaceOpenClose(
-		lang, "AppTest")
+		lang, "AppTest", "")
 	imports += LangNativeTestImportExtra(lang)
 	testbasics := LangNativeTestAppBasic(lang)
 	writetestsuite := LangNativeTestWriteTestSuite(
@@ -126,7 +111,7 @@ func LangTestCase(
 		var desctexts []string
 		for idx, testvalue := range testvalues {
 			subpath := path + "/tests" + StringFromInt(idx+1)
-			descvaluetext, msgs := LangFromValue(lang, testvalue, testpkg, fnc, 3, true, true, subpath)
+			descvaluetext, msgs := LangFromValue(lang, 3, testvalue, testpkg, fnc, true, true, subpath)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			testdescribename := testcasename + "_testdescribe_" + StringFromInt(idx+1)
 			desctext := "" +
@@ -143,8 +128,10 @@ func LangTestCase(
 			fnc.vxtype = testdescribetype
 			fnc.listarg = listarg
 			testdescribe := "" +
-				LangFuncHeaderStatic(lang, "", fnc, 1, 0,
-					LangVar(lang, "output", testdescribetype, 2, desctext))
+				LangFuncHeaderStatic(lang, 1,
+					"", fnc, 0,
+					LangVar(lang, 2, testdescribetype,
+						"output", desctext))
 			desctexts = append(desctexts, "\n        "+testdescribename+"(context)")
 			listtestdescribe = append(listtestdescribe, testdescribe)
 		}
@@ -168,8 +155,11 @@ func LangTestCase(
 		fnc.vxtype = testcasetype
 		fnc.listarg = listarg
 		output = "" +
-			LangFuncHeaderStatic(lang, "", fnc, 1, 0,
-				LangVar(lang, "output", testcasetype, 2, varoutput)) +
+			LangFuncHeaderStatic(lang, 1,
+				"", fnc, 0,
+				LangVar(lang, 2, testcasetype,
+					"output",
+					varoutput)) +
 			testdescribes
 	}
 	return output, msgblock
@@ -211,7 +201,7 @@ func LangTestFromPackage(
 	command *vxcommand,
 	pkgprefix string) (string, *vxmsgblock) {
 	msgblock := NewMsgBlock("LangTestFromPackage")
-	pkgpath, pkgname := LangNativePackagePathFromPrefixName(
+	pkgpath, pkgname := LangPackagePathFromPrefixName(
 		lang, pkgprefix, pkg.name)
 	typkeys := ListKeyFromMapType(pkg.maptype)
 	var coverdoccnt = 0
@@ -397,15 +387,19 @@ func LangTestFromPackage(
 	fnctestcases.vxtype = testcaselisttype
 	fnctestcases.listarg = listarg
 	testcases := "" +
-		LangFuncHeaderStatic(lang, "", fnctestcases, 1, 0,
+		LangFuncHeaderStatic(lang, 1,
+			"", fnctestcases, 0,
 			vartestcases+
-				LangVar(lang, "output", testcaselisttype, 2, varoutput))
+				LangVar(lang, 2, testcaselisttype,
+					"output", varoutput))
 	fnctestcoveragesummary := NewFunc()
 	fnctestcoveragesummary.name = "test_coveragesummary"
 	fnctestcoveragesummary.vxtype = testcoveragesummarytype
 	testcoveragesummary := "" +
-		LangFuncHeaderStatic(lang, "", fnctestcoveragesummary, 1, 0,
-			LangVar(lang, "output", testcoveragesummarytype, 2,
+		LangFuncHeaderStatic(lang, 1,
+			"", fnctestcoveragesummary, 0,
+			LangVar(lang, 2, testcoveragesummarytype,
+				"output",
 				LangPkgNameDot(lang, "vx/core")+"vx_new("+
 					"\n      "+LangTypeT(lang, testcoveragesummarytype)+","+
 					"\n      \":testpkg\", \""+pkg.name+"\", "+
@@ -421,8 +415,10 @@ func LangTestFromPackage(
 	fnctestcoveragedetail.name = "test_coveragedetail"
 	fnctestcoveragedetail.vxtype = testcoveragedetailtype
 	testcoveragedetail := "" +
-		LangFuncHeaderStatic(lang, "", fnctestcoveragedetail, 1, 0,
-			LangVar(lang, "output", testcoveragedetailtype, 2,
+		LangFuncHeaderStatic(lang, 1,
+			"", fnctestcoveragedetail, 0,
+			LangVar(lang, 2, testcoveragedetailtype,
+				"output",
 				LangPkgNameDot(lang, "vx/core")+"vx_new("+
 					"\n      "+LangTypeT(lang, testcoveragedetailtype)+","+
 					"\n      \":testpkg\", \""+pkg.name+"\","+
@@ -435,9 +431,13 @@ func LangTestFromPackage(
 	fnctestpackage.vxtype = testpackagetype
 	fnctestpackage.listarg = listarg
 	testpackage := "" +
-		LangFuncHeaderStatic(lang, "", fnctestpackage, 1, 0,
-			LangVar(lang, "testcaselist", testcaselisttype, 2, "test_cases(context)")+
-				LangVar(lang, "output", testpackagetype, 2,
+		LangFuncHeaderStatic(lang, 1,
+			"", fnctestpackage, 0,
+			LangVar(lang, 2, testcaselisttype,
+				"testcaselist",
+				"test_cases(context)")+
+				LangVar(lang, 2, testpackagetype,
+					"output",
 					LangPkgNameDot(lang, "vx/core")+"vx_new("+
 						"\n      "+LangTypeT(lang, testpackagetype)+","+
 						"\n      \":testpkg\", \""+pkg.name+"\", "+
