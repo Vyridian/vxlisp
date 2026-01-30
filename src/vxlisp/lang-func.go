@@ -14,7 +14,7 @@ func LangFunc(
 	msgblock = MsgblockAddBlock(msgblock, msgs)
 	typefnc := NewTypeFromFunc(fnc)
 	output := "" +
-		LangNativeFuncDoc(lang, fnc) +
+		LangFuncDoc(lang, fnc) +
 		LangFuncInterface(lang, fnc) +
 		LangNativeFuncClassHeader(lang, fnc, 1) +
 		"\n" +
@@ -24,7 +24,7 @@ func LangFunc(
 		LangFuncVxFuncdef(lang, fnc, false) +
 		LangFuncVxEmpty(lang, fnc, false) +
 		LangFuncVxType(lang, fnc, false) +
-		LangNativeFuncInterfaceFn(lang, fnc) +
+		LangFuncInterfaceFn(lang, fnc) +
 		LangFuncVxFnNew(lang, fnc, false) +
 		LangFuncVxRepl(lang, fnc, false) +
 		LangFuncVxFunc(lang, fnc, false) +
@@ -140,7 +140,8 @@ func LangFuncFFunc(
 		}
 	}
 	if fnc.context {
-		argtext := LangNativeArgHeader(lang, argcontext, false)
+		argtext := LangNativeArgHeader(
+			lang, argcontext, false)
 		listargtype = append(listargtype, argtext)
 		listargname = append(listargname, "context")
 	}
@@ -240,7 +241,7 @@ func LangFuncFFunc(
 		}
 		switch NameFromFunc(fnc) {
 		case "vx/core/new", "vx/core/new<-type":
-			f_suppresswarnings = LangNativeFuncNewSuppressWarnings(lang)
+			f_suppresswarnings = LangFuncNewSuppressWarnings(lang)
 		}
 		valuetext = StringFromListStringJoin(
 			chgvaluetexts, "\n")
@@ -430,7 +431,7 @@ func LangFuncHeaderAll(
 	if isstatic {
 		funcdeclare = funcstatic
 	}
-	returntype := LangNativeTypeNameFullSimple(
+	returntype := LangTypeNameFullSimple(
 		lang, fnc.vxtype, false)
 	isreturngeneric := fnc.vxtype.isgeneric
 	var listargtext []string
@@ -476,7 +477,7 @@ func LangFuncHeaderAll(
 	genericdef1, genericdef2, genericdef3 := LangFuncGenericDefinition(
 		lang, fnc)
 	sindent := "\n" + StringRepeat("  ", indent)
-	override1, override2, override3 := LangNativeFuncOverride(
+	override1, override2, override3 := LangFuncOverride(
 		lang, fnc, sindent)
 	sinterface := ""
 	sopen := ""
@@ -1420,7 +1421,7 @@ func LangFuncVxFnNew(
 		}
 	}
 	if ifn != "" {
-		header := LangNativeFuncIFnHeader(
+		header := LangFuncIFnHeader(
 			lang, ifn, vxreturntype, isinterface)
 		if isinterface {
 			output += "" +
@@ -1537,7 +1538,7 @@ func LangFuncVxFunc(
 		}
 		body := ""
 		funcname := LangFromName(fnc.alias) + LangIndexFromFunc(fnc)
-		interfacefn := LangNativeFuncInterfaceFn(lang, fnc)
+		interfacefn := LangFuncInterfaceFn(lang, fnc)
 		if interfacefn == "" {
 			if fnc.async {
 				body = "" +
@@ -1793,6 +1794,7 @@ func LangFuncVxRepl(
 					StringFromInt(argidx)+
 					")))")
 			replparams += replparam
+			argidx += 1
 		}
 		for _, arg := range fnc.listarg {
 			if (funcname == "let" || funcname == "let_async") && arg.name == "args" {

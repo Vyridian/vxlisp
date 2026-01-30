@@ -1126,7 +1126,7 @@ func CppBodyFromFunc(
 	} else {
 		staticfunction = fdefinition
 	}
-	doc := LangNativeFuncDoc(lang, fnc)
+	doc := LangFuncDoc(lang, fnc)
 	output += "" +
 		doc +
 		"\n  // (func " + fnc.name + ")" +

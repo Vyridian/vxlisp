@@ -56,7 +56,7 @@ func LangFilesFromProjectCmd(
 	}
 	pkgs := ListPackageFromProject(project)
 	for _, pkg := range pkgs {
-		subprefix, subdomainpath := LangNativePackageSubPrefixSubDomainPath(
+		subprefix, subdomainpath := LangPackageSubPrefixSubDomainPath(
 			lang, command, pkg)
 		pkgname := pkg.name
 		pkgpath := ""
@@ -454,7 +454,7 @@ func LangNameTypeFromTypeSimple(
 	lang *vxlang,
 	typ *vxtype,
 	simple bool) string {
-	output := LangNativeTypeNameFullSimple(
+	output := LangTypeNameFullSimple(
 		lang, typ, simple)
 	return output
 }
@@ -462,7 +462,7 @@ func LangNameTypeFromTypeSimple(
 func LangNameTypeFullFromType(
 	lang *vxlang,
 	typ *vxtype) string {
-	return LangNativeTypeNameFullSimple(
+	return LangTypeNameFullSimple(
 		lang, typ, true)
 }
 

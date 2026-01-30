@@ -76,7 +76,7 @@ func LangTestLib_file_test(lang *vxlang) string {
 	arg := NewArg("file")
 	arg.vxtype = filetype
 	fnc.listarg = append(fnc.listarg, arg)
-	paramsopen, paramsclose := LangNativeTestLibParamsOpenClose(lang)
+	paramsopen, paramsclose := LangTestLibParamsOpenClose(lang)
 	fileparams := "" +
 		"\n      file," +
 		paramsopen +
@@ -103,7 +103,7 @@ func LangTestLib_read_test_file(lang *vxlang) string {
 	arg = NewArg("filename")
 	arg.vxtype = rawstringtype
 	fnc.listarg = append(fnc.listarg, arg)
-	paramsopen, paramsclose := LangNativeTestLibParamsOpenClose(lang)
+	paramsopen, paramsclose := LangTestLibParamsOpenClose(lang)
 	fileparams := "" +
 		"\n      " + LangTypeT(lang, filetype) + "," +
 		paramsopen +
@@ -512,7 +512,7 @@ func LangTestLib_test_list_from_list_async(
 	fnc := NewFunc()
 	fnc.name = "test_list_from_list_async"
 	fnc.vxtype = rawbooltype
-	fn_async := LangNativeTestLibFnAsync(lang)
+	fn_async := LangTestLibFnAsync(lang)
 	asynclist := LangPkgNameDot(lang, "vx/core") + "vx_list_from_list_async(" + LangTypeT(lang, stringlisttype) + ", slist, fn_async)"
 	output := "" +
 		LangFuncHeaderStatic(lang, 1,
@@ -550,7 +550,7 @@ func LangTestLib_test_pathfull_from_file(lang *vxlang) string {
 	fnc := NewFunc()
 	fnc.name = "test_pathfull_from_file"
 	fnc.vxtype = rawbooltype
-	paramsopen, paramsclose := LangNativeTestLibParamsOpenClose(lang)
+	paramsopen, paramsclose := LangTestLibParamsOpenClose(lang)
 	fileparams := "" +
 		"\n      " + LangTypeT(lang, filetype) + "," +
 		paramsopen +

@@ -235,7 +235,7 @@ func JsFromFunc(
 			args = append(args, argname)
 		}
 	}
-	doc := LangNativeFuncDoc(lang, fnc)
+	doc := LangFuncDoc(lang, fnc)
 	indent := 2
 	footer := ""
 	jsfuncname := LangFromName(fnc.alias) + JsIndexFromFunc(fnc)

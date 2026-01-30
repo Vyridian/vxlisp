@@ -66,7 +66,7 @@ func LangTestApp(
 				testpackage := "\n      " + testpackageprefix + LangPkgName(lang, pkg.name) + "Test.test_package(context)"
 				listtestpackage = append(
 					listtestpackage, testpackage)
-				tests += LangNativeTestPackage(lang, pkg, testpackagetype)
+				tests += LangTestPackage(lang, pkg, testpackagetype)
 			}
 		}
 	}
@@ -74,7 +74,7 @@ func LangTestApp(
 		listtestpackage, ",")
 	namespaceopen, namespaceclose := LangNativeNamespaceOpenClose(
 		lang, "AppTest", "")
-	imports += LangNativeTestImportExtra(lang)
+	imports += LangTestImportExtra(lang)
 	testbasics := LangNativeTestAppBasic(lang)
 	writetestsuite := LangNativeTestWriteTestSuite(
 		lang, testpackages)
@@ -455,9 +455,9 @@ func LangTestFromPackage(
 		testpackage
 	imports := LangNativePackageImports(
 		lang, pkg, pkgprefix, body, true)
-	namespaceopen, namespaceclose := LangNativeTestNamespaceOpenClose(
+	namespaceopen, namespaceclose := LangTestNamespaceOpenClose(
 		lang, pkgpath)
-	packageopen, packageclose := LangNativeTestPackageOpenClose(
+	packageopen, packageclose := LangTestPackageOpenClose(
 		lang, pkgname)
 	output := "" +
 		namespaceopen +
