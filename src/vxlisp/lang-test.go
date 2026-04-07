@@ -7,11 +7,7 @@ func LangTestApp(
 	project *vxproject,
 	command *vxcommand,
 	pkgprefix string) string {
-	imports := ""
-	imports += LangImport(
-		lang,
-		PackageCoreFromProject(project),
-		imports)
+	imports, tests, testpackages := LangTestPackages(lang, project, command)
 	contexttext := LangVarStatic(lang, 1, anylisttype,
 		"arglist", LangTypeE(lang, anylisttype))
 	if command.context == "" {
@@ -50,33 +46,11 @@ func LangTestApp(
 			}
 		}
 	}
-	tests := ""
-	listpackage := project.listpackage
-	testpackageprefix := LangNativeTestPackagePrefix(lang)
-	var listtestpackage []string
-	for _, pkg := range listpackage {
-		iscontinue := true
-		if command.filter == "" {
-		} else if !BooleanFromStringStarts(command.filter, pkg.name) {
-			iscontinue = false
-		}
-		if iscontinue {
-			if pkg.name != "" {
-				imports += LangNativeTestImport(lang, pkg, imports)
-				testpackage := "\n      " + testpackageprefix + LangPkgName(lang, pkg.name) + "Test.test_package(context)"
-				listtestpackage = append(
-					listtestpackage, testpackage)
-				tests += LangTestPackage(lang, pkg, testpackagetype)
-			}
-		}
-	}
-	testpackages := StringFromListStringJoin(
-		listtestpackage, ",")
-	namespaceopen, namespaceclose := LangNativeNamespaceOpenClose(
+	namespaceopen, namespaceclose := LangNamespaceOpenClose(
 		lang, "AppTest", "")
 	imports += LangTestImportExtra(lang)
-	testbasics := LangNativeTestAppBasic(lang)
-	writetestsuite := LangNativeTestWriteTestSuite(
+	testbasics := LangTestAppBasic(lang)
+	writetestsuite := LangTestWriteTestSuite(
 		lang, testpackages)
 	output := "" +
 		"/**" +
@@ -130,7 +104,7 @@ func LangTestCase(
 			testdescribe := "" +
 				LangFuncHeaderStatic(lang, 1,
 					"", fnc, 0,
-					LangVar(lang, 2, testdescribetype,
+					LangVal(lang, 2, testdescribetype,
 						"output", desctext))
 			desctexts = append(desctexts, "\n        "+testdescribename+"(context)")
 			listtestdescribe = append(listtestdescribe, testdescribe)
@@ -157,7 +131,7 @@ func LangTestCase(
 		output = "" +
 			LangFuncHeaderStatic(lang, 1,
 				"", fnc, 0,
-				LangVar(lang, 2, testcasetype,
+				LangVal(lang, 2, testcasetype,
 					"output",
 					varoutput)) +
 			testdescribes
@@ -376,7 +350,7 @@ func LangTestFromPackage(
 			"\n      " + LangTypeT(lang, testcaselisttype) + "," +
 			"\n      testcases" +
 			"\n    )"
-		vartestcases = LangNativeTestVarTestCases(
+		vartestcases = LangTestVarTestCases(
 			lang, testall)
 	}
 	argcontext := NewArgContext()
@@ -390,7 +364,7 @@ func LangTestFromPackage(
 		LangFuncHeaderStatic(lang, 1,
 			"", fnctestcases, 0,
 			vartestcases+
-				LangVar(lang, 2, testcaselisttype,
+				LangVal(lang, 2, testcaselisttype,
 					"output", varoutput))
 	fnctestcoveragesummary := NewFunc()
 	fnctestcoveragesummary.name = "test_coveragesummary"
@@ -398,7 +372,7 @@ func LangTestFromPackage(
 	testcoveragesummary := "" +
 		LangFuncHeaderStatic(lang, 1,
 			"", fnctestcoveragesummary, 0,
-			LangVar(lang, 2, testcoveragesummarytype,
+			LangVal(lang, 2, testcoveragesummarytype,
 				"output",
 				LangPkgNameDot(lang, "vx/core")+"vx_new("+
 					"\n      "+LangTypeT(lang, testcoveragesummarytype)+","+
@@ -417,7 +391,7 @@ func LangTestFromPackage(
 	testcoveragedetail := "" +
 		LangFuncHeaderStatic(lang, 1,
 			"", fnctestcoveragedetail, 0,
-			LangVar(lang, 2, testcoveragedetailtype,
+			LangVal(lang, 2, testcoveragedetailtype,
 				"output",
 				LangPkgNameDot(lang, "vx/core")+"vx_new("+
 					"\n      "+LangTypeT(lang, testcoveragedetailtype)+","+
@@ -433,10 +407,10 @@ func LangTestFromPackage(
 	testpackage := "" +
 		LangFuncHeaderStatic(lang, 1,
 			"", fnctestpackage, 0,
-			LangVar(lang, 2, testcaselisttype,
+			LangVal(lang, 2, testcaselisttype,
 				"testcaselist",
 				"test_cases(context)")+
-				LangVar(lang, 2, testpackagetype,
+				LangVal(lang, 2, testpackagetype,
 					"output",
 					LangPkgNameDot(lang, "vx/core")+"vx_new("+
 						"\n      "+LangTypeT(lang, testpackagetype)+","+
@@ -453,7 +427,7 @@ func LangTestFromPackage(
 		testcoveragesummary +
 		testcoveragedetail +
 		testpackage
-	imports := LangNativePackageImports(
+	imports := LangPackageImports(
 		lang, pkg, pkgprefix, body, true)
 	namespaceopen, namespaceclose := LangTestNamespaceOpenClose(
 		lang, pkgpath)

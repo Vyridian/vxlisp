@@ -65,13 +65,13 @@ func JsFilesFromProjectCmd(
 		file := NewFile()
 		file.name = "app.js"
 		file.path = cmdpath
-		file.text = JsApp(project, command)
+		file.text = JsApp(lang, project, command)
 		files = append(files, file)
 	case ":test":
 		file := NewFile()
 		file.name = "app_test.js"
 		file.path = cmdpath
-		file.text = JsAppTest(project, command)
+		file.text = JsAppTest(lang, project, command)
 		files = append(files, file)
 	}
 	pkgs := project.listpackage
@@ -188,7 +188,7 @@ func JsFromConst(
 			properties = append(properties, "Object.assign("+propertyprefix+", "+value+")")
 		}
 	}
-	doc := LangNativeConstDoc(lang, cnst)
+	doc := LangConstDoc(lang, cnst)
 	output := "" +
 		doc +
 		"\n  static c_" + cnstname + " = " + startval +
@@ -238,7 +238,7 @@ func JsFromFunc(
 	doc := LangFuncDoc(lang, fnc)
 	indent := 2
 	footer := ""
-	jsfuncname := LangFromName(fnc.alias) + JsIndexFromFunc(fnc)
+	jsfuncname := LangFromName(fnc.alias) + StringIndexFromFunc(fnc)
 	var properties []string
 	properties = append(properties, "name          : \""+fnc.name+"\"")
 	properties = append(properties, "pkgname       : \""+fnc.pkgname+"\"")
@@ -299,7 +299,7 @@ func JsFromFunc(
 			if fnc.generictype != nil {
 				defaultvalue = "vx_core.f_empty(generic_" + LangFromName(fnc.generictype.name) + ")"
 			} else {
-				defaultvalue = JsNameEFromType(fnc.vxtype)
+				defaultvalue = LangTypeE(lang, fnc.vxtype)
 			}
 			if fnc.async {
 				defaultvalue = "Promise.resolve(" + defaultvalue + ")"
@@ -448,7 +448,7 @@ func JsFromPackage(
 	for _, fncid := range funckeys {
 		fncs := pkg.mapfunc[fncid]
 		for _, fnc := range fncs {
-			jsfuncname := LangFromName(fnc.alias) + JsIndexFromFunc(fnc)
+			jsfuncname := LangFromName(fnc.alias) + StringIndexFromFunc(fnc)
 			emptyvalue := "\"" + fnc.name + StringIndexFromFunc(fnc) + "\": " + pkgname + ".e_" + jsfuncname
 			emptyvalues = append(emptyvalues, emptyvalue)
 			funcvalue := "\"" + fnc.name + StringIndexFromFunc(fnc) + "\": " + pkgname + ".t_" + jsfuncname
@@ -477,16 +477,6 @@ func JsFromPackage(
 		"\n    })" +
 		"\n    vx_core.vx_global_package_set(pkg)" +
 		"\n"
-		/*
-			allempty += "" +
-				"  // empty types" +
-				emptytypes +
-				//		"\n" +
-				//		"\n  static c_empty = {" +
-				//		"\n    " + StringFromListStringJoin(emptyvalues, ",\n    ") +
-				//		"\n  }" +
-				"\n"
-		*/
 	allfuncs := ""
 	fnckeys := ListKeyFromMapFunc(pkg.mapfunc)
 	for _, fncid := range fnckeys {
@@ -507,7 +497,7 @@ func JsFromPackage(
 		allconsts += consttext
 		statics += statictext
 	}
-	namespaceopen, namespaceclose := LangNativeNamespaceOpenClose(
+	namespaceopen, namespaceclose := LangNamespaceOpenClose(
 		lang, pkgname, "")
 	output := "" +
 		"'strict mode'" +
@@ -529,6 +519,7 @@ func JsFromPackage(
 }
 
 func JsFromPackageName(
+	lang *vxlang,
 	name string) string {
 	output := name
 	if strings.HasPrefix(name, "vx/") {
@@ -653,63 +644,23 @@ func JsFromValue(
 		output = sindent + valstr
 	case ":func":
 		fnc := FuncFromValue(value)
-		subpath += "/" + fnc.name + JsIndexFromFunc(fnc)
+		subpath += "/" + fnc.name + StringIndexFromFunc(fnc)
 		funcname := NameFromFunc(fnc)
 		if fnc.debug {
 			output += "vx_core.f_log_1({\"any-1\": " + LangTypeT(lang, fnc.vxtype) + "}, \"" + subpath + "\", "
 		}
 		switch fnc.name {
 		case "native":
-			// (native :js)
-			isNative := false
-			var argtexts []string
-			multiline := false
-			argtext := ""
-			nativeindent := "undefined"
-			for _, arg := range fnc.listarg {
-				var argvalue = arg.value
-				valuetext := ""
-				if argvalue.code == "string" {
-					valuetext = StringValueFromValue(argvalue)
-				}
-				if valuetext == ":js" {
-					isNative = true
-				} else if valuetext != ":auto" && BooleanFromStringStarts(valuetext, ":") {
-					isNative = false
-				} else if isNative {
-					if argvalue.name == "newline" {
-						argtext = "\n"
-					} else {
-						clstextjs, msgs := JsFromValue(lang, argvalue, pkgname, parentfn, 0, false, test, subpath)
-						argtext = clstextjs
-						msgblock = MsgblockAddBlock(msgblock, msgs)
-						if nativeindent == "undefined" {
-							nativeindent = "\n" + StringRepeat(" ", argvalue.textblock.charnum)
-						} else if nativeindent != "" {
-							argtext = StringFromStringFindReplace(argtext, nativeindent, "\n")
-						}
-					}
-					if !multiline {
-						if BooleanFromStringContains(argtext, "\n") {
-							multiline = true
-						} else if argvalue.name != "" {
-							multiline = true
-						}
-					}
-					argtext = StringRemoveQuotes(argtext)
-					if argtext == ":auto" {
-						argtext = LangNativeFuncNativeAuto(lang, parentfn)
-					}
-					argtexts = append(argtexts, argtext)
-				}
-			}
-			if len(argtexts) > 0 {
-				if multiline {
-					output += StringFromStringIndent(StringFromListStringJoin(argtexts, ""), sindent)
-				} else {
-					output += StringFromListStringJoin(argtexts, "")
-				}
-			}
+			snative, msgs := LangFuncValueNative(
+				lang,
+				fnc,
+				pkgname,
+				parentfn,
+				indent,
+				test,
+				subpath)
+			msgblock = MsgblockAddBlock(msgblock, msgs)
+			output = snative
 		default:
 			var argtexts []string
 			funcargs := fnc.listarg
@@ -898,59 +849,6 @@ func JsFromValue(
 	return output, msgblock
 }
 
-func JsIndexFromFunc(
-	fnc *vxfunc) string {
-	return StringIndexFromFunc(fnc)
-}
-
-func JsNameEFromType(
-	typ *vxtype) string {
-	name := ""
-	name = "e_" + JsNameFromType(typ)
-	if typ.pkgname != "" {
-		name = JsNameFromPkgName(typ.pkgname) + "." + name
-	}
-	return name
-}
-
-func JsNameFFromFunc(
-	fnc *vxfunc) string {
-	name := ""
-	name = "f_" + LangFromName(fnc.name)
-	if fnc.pkgname != "" {
-		name = JsNameFromPkgName(fnc.pkgname) + "." + name
-	}
-	return name
-}
-
-func JsNameFromPkgName(
-	pkgname string) string {
-	output := LangFromName(pkgname)
-	return output
-}
-
-func JsNameFromType(
-	typ *vxtype) string {
-	name := ""
-	/*
-		switch typ.name {
-		case "generic-1":
-			name = "generics{\":1\"}"
-		case "generic-2":
-			name = "generics{\":2\"}"
-		case "generic-3":
-			name = "generics[2]"
-		default:
-	*/
-	if typ.alias == "" {
-		name += LangFromName(typ.name)
-	} else {
-		name += LangFromName(typ.alias)
-	}
-	//	}
-	return name
-}
-
 func JsNamesFromListFunc(
 	listfunc []*vxfunc) string {
 	var outputtypes []string
@@ -1052,7 +950,7 @@ func JsTestFromFunc(
 	fnc *vxfunc) (string, *vxmsgblock) {
 	msgblock := NewMsgBlock("JsTestFromFunc")
 	output := ""
-	path := fnc.pkgname + "/" + fnc.name + JsIndexFromFunc(fnc)
+	path := fnc.pkgname + "/" + fnc.name + StringIndexFromFunc(fnc)
 	if len(fnc.listtestvalue) > 0 {
 		var listtestdescribe []string
 		for _, testvalue := range fnc.listtestvalue {
@@ -1069,7 +967,7 @@ func JsTestFromFunc(
 		}
 		testdescribes := strings.Join(listtestdescribe, ",")
 		output = "" +
-			"\n  static f_" + LangFromName(fnc.alias) + JsIndexFromFunc(fnc) + "(context) {" +
+			"\n  static f_" + LangFromName(fnc.alias) + StringIndexFromFunc(fnc) + "(context) {" +
 			"\n    const output = vx_core.f_new_from_type(" +
 			"\n      vx_test.t_testcase," +
 			"\n      \":passfail\", false," +
@@ -1195,7 +1093,7 @@ func JsTestFromPackage(
 				test, msgs := JsTestFromFunc(lang, fnc)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
-				coverfunc = append(coverfunc, "\""+fncid+JsIndexFromFunc(fnc)+"\", "+StringFromInt(len(fnc.listtestvalue)))
+				coverfunc = append(coverfunc, "\""+fncid+StringIndexFromFunc(fnc)+"\", "+StringFromInt(len(fnc.listtestvalue)))
 				if command.filter == "" {
 				} else if NameFromFunc(fnc) != command.filter {
 					test = ""
@@ -1203,7 +1101,7 @@ func JsTestFromPackage(
 				if test != "" {
 					coverfunccnt += 1
 					testdescribes += test
-					testall = append(testall, pkgname+"_test.f_"+LangFromName(fnc.alias)+JsIndexFromFunc(fnc)+"(context)")
+					testall = append(testall, pkgname+"_test.f_"+LangFromName(fnc.alias)+StringIndexFromFunc(fnc)+"(context)")
 				}
 				coverdoctotal += 1
 				if fnc.doc != "" {
@@ -1261,7 +1159,7 @@ func JsTestFromPackage(
 	if len(testall) > 0 {
 		testcases = ",\n      " + strings.Join(testall, ",\n      ")
 	}
-	namespaceopen, namespaceclose := LangNativeNamespaceOpenClose(
+	namespaceopen, namespaceclose := LangNamespaceOpenClose(
 		lang, pkgname+"_test", "")
 	output := "" +
 		"'strict mode'" +
@@ -1283,13 +1181,13 @@ func JsTestFromPackage(
 		"\n    const output = vx_core.f_new_from_type(" +
 		"\n      vx_test.t_testcoveragesummary," +
 		"\n      \"testpkg\",   \"" + pkg.name + "\", " +
-		"\n      \"constnums\", " + JsTypeCoverageNumsValNew(coverconstpct, coverconstcnt, coverconsttotal) + ", " +
-		"\n      \"docnums\", " + JsTypeCoverageNumsValNew(coverdocpct, coverdoccnt, coverdoctotal) + ", " +
-		"\n      \"funcnums\", " + JsTypeCoverageNumsValNew(coverfuncpct, coverfunccnt, coverfunctotal) + ", " +
-		"\n      \"bigospacenums\", " + JsTypeCoverageNumsValNew(coverbigospacepct, coverbigospacecnt, coverbigospacetotal) + ", " +
-		"\n      \"bigotimenums\", " + JsTypeCoverageNumsValNew(coverbigotimepct, coverbigotimecnt, coverbigotimetotal) + ", " +
-		"\n      \"totalnums\", " + JsTypeCoverageNumsValNew(coverpct, covercnt, covertotal) + ", " +
-		"\n      \"typenums\", " + JsTypeCoverageNumsValNew(covertypepct, covertypecnt, covertypetotal) +
+		"\n      \"constnums\", " + JsTypeCoverageNumsValNew(lang, coverconstpct, coverconstcnt, coverconsttotal) + ", " +
+		"\n      \"docnums\", " + JsTypeCoverageNumsValNew(lang, coverdocpct, coverdoccnt, coverdoctotal) + ", " +
+		"\n      \"funcnums\", " + JsTypeCoverageNumsValNew(lang, coverfuncpct, coverfunccnt, coverfunctotal) + ", " +
+		"\n      \"bigospacenums\", " + JsTypeCoverageNumsValNew(lang, coverbigospacepct, coverbigospacecnt, coverbigospacetotal) + ", " +
+		"\n      \"bigotimenums\", " + JsTypeCoverageNumsValNew(lang, coverbigotimepct, coverbigotimecnt, coverbigotimetotal) + ", " +
+		"\n      \"totalnums\", " + JsTypeCoverageNumsValNew(lang, coverpct, covercnt, covertotal) + ", " +
+		"\n      \"typenums\", " + JsTypeCoverageNumsValNew(lang, covertypepct, covertypecnt, covertypetotal) +
 		"\n    )" +
 		"\n    return output" +
 		"\n  }" +
@@ -1392,6 +1290,7 @@ func JsTextFromProjectCmd(
 }
 
 func JsTypeCoverageNumsValNew(
+	lang *vxlang,
 	pct int,
 	tests int,
 	total int) string {
@@ -1429,6 +1328,7 @@ func JsWriteFromProjectCmd(
 }
 
 func JsApp(
+	lang *vxlang,
 	project *vxproject,
 	cmd *vxcommand) string {
 	includetext := ""
@@ -1459,10 +1359,10 @@ func JsApp(
 			}
 			if contextfunc.async {
 				contexttext = `
-    const context = await ` + JsNameFFromFunc(contextfunc) + `(...arglist)`
+    const context = await ` + LangFuncF(lang, contextfunc) + `(...arglist)`
 			} else {
 				contexttext = `
-    const context = ` + JsNameFFromFunc(contextfunc) + `(...arglist)`
+    const context = ` + LangFuncF(lang, contextfunc) + `(...arglist)`
 			}
 		}
 		if mainfunc != emptyfunc {
@@ -1477,7 +1377,7 @@ func JsApp(
 				params += "context, "
 			}
 			params += "...arglist"
-			mainfunctext := JsNameFFromFunc(mainfunc) + "(" + params + ")"
+			mainfunctext := LangFuncF(lang, mainfunc) + "(" + params + ")"
 			if mainfunc.async {
 				maintext = `
     const output = await ` + mainfunctext
@@ -1519,6 +1419,7 @@ export default class app {
 }
 
 func JsAppTest(
+	lang *vxlang,
 	project *vxproject,
 	command *vxcommand) string {
 	includetext := ""
@@ -1543,10 +1444,10 @@ func JsAppTest(
 		}
 		if contextfunc.async {
 			contexttext = `
-    const context = await ` + JsNameFFromFunc(contextfunc) + `(...arglist)`
+    const context = await ` + LangFuncF(lang, contextfunc) + `(...arglist)`
 		} else {
 			contexttext = `
-    const context = ` + JsNameFFromFunc(contextfunc) + `(...arglist)`
+    const context = ` + LangFuncF(lang, contextfunc) + `(...arglist)`
 		}
 	}
 	listpackage := project.listpackage

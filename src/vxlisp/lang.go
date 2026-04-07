@@ -5,21 +5,26 @@ import (
 )
 
 type vxlang struct {
-	name       string
-	sourcename string
-	sourcefile string
-	headerfile string
-	pkgpath    string
-	pkgname    string
-	pkgref     string
-	future     string
-	indent     string
-	lineend    string
-	itfext     string
-	classext   string
-	typeref    string
-	memmanage  bool
-	forcemulti bool
+	name          string
+	sourcename    string
+	sourcefile    string
+	headerfile    string
+	pkgpath       string
+	pkgname       string
+	pkgref        string
+	future        string
+	indent        string
+	lineend       string
+	itfext        string
+	classext      string
+	typeref       string
+	memmanage     bool
+	forcemulti    bool
+	argjoin       string
+	genericcount  int
+	serror        string
+	fileblacklist []string
+	filewhitelist []string
 }
 
 var g_ifuncdepth = 0
@@ -29,10 +34,10 @@ func LangFilesFromProjectCmd(
 	project *vxproject,
 	command *vxcommand) ([]*vxfile, *vxmsgblock) {
 	msgblock := NewMsgBlock("LangFilesFromProjectCmd")
-	var files []*vxfile
 	cmdpath := PathFromProjectCmd(project, command)
-	pkgprefix, apppath, testpath := LangNativeProjectPkgPrefixAppPathTestPath(
+	pkgprefix, apppath, testpath := LangProjectPkgPrefixAppPathTestPath(
 		lang, project, command, cmdpath)
+	var files []*vxfile = LangFilesCustom(lang, project, command, cmdpath)
 	switch command.code {
 	case ":source":
 		file := NewFile()
@@ -44,48 +49,57 @@ func LangFilesFromProjectCmd(
 	case ":test":
 		file := NewFile()
 		file.name = "AppTest" + lang.sourcefile
-		file.path = testpath
+		file.path = LangAppTestPath(lang, testpath)
 		file.text = LangTestApp(
 			lang, project, command, pkgprefix)
 		files = append(files, file)
 		file = NewFile()
 		file.name = "TestLib" + lang.sourcefile
-		file.path = testpath
+		file.path = LangTestLibPath(lang, testpath)
 		file.text = LangTestLib(lang)
 		files = append(files, file)
 	}
 	pkgs := ListPackageFromProject(project)
 	for _, pkg := range pkgs {
-		subprefix, subdomainpath := LangPackageSubPrefixSubDomainPath(
-			lang, command, pkg)
-		pkgname := pkg.name
-		pkgpath := ""
-		pos := strings.LastIndex(pkgname, "/")
-		if pos >= 0 {
-			pkgpath = pkgname[0:pos]
-			pkgname = pkgname[pos+1:]
+		iscontinue := true
+		if len(lang.filewhitelist) > 0 {
+			iscontinue = BooleanFromListStringContains(lang.filewhitelist, pkg.name)
 		}
-		pkgname = StringUCaseFirst(pkgname)
-		pkgpath = LangNativePkgpath(lang, pkgpath)
-		switch command.code {
-		case ":source":
-			text, msgs := LangFromPackage(
-				lang, pkg, project, subprefix)
-			msgblock = MsgblockAddBlock(msgblock, msgs)
-			file := NewFile()
-			file.name = pkgname + lang.sourcefile
-			file.path = cmdpath + "/" + subdomainpath + pkgpath
-			file.text = text
-			files = append(files, file)
-		case ":test":
-			text, msgs := LangTestFromPackage(
-				lang, pkg, project, command, subprefix)
-			msgblock = MsgblockAddBlock(msgblock, msgs)
-			file := NewFile()
-			file.name = pkgname + "Test" + lang.sourcefile
-			file.path = testpath + "/" + subdomainpath + pkgpath
-			file.text = text
-			files = append(files, file)
+		if len(lang.fileblacklist) > 0 {
+			iscontinue = !BooleanFromListStringContains(lang.fileblacklist, pkg.name)
+		}
+		if iscontinue {
+			subprefix, subdomainpath := LangPackageSubPrefixSubDomainPath(
+				lang, command, pkg)
+			pkgname := pkg.name
+			pkgpath := ""
+			pos := strings.LastIndex(pkgname, "/")
+			if pos >= 0 {
+				pkgpath = pkgname[0:pos]
+				pkgname = pkgname[pos+1:]
+			}
+			pkgname = StringUCaseFirst(pkgname)
+			pkgpath = LangNativePkgpath(lang, pkgpath)
+			switch command.code {
+			case ":source":
+				text, msgs := LangFromPackage(
+					lang, pkg, project, subprefix)
+				msgblock = MsgblockAddBlock(msgblock, msgs)
+				file := NewFile()
+				file.name = pkgname + lang.sourcefile
+				file.path = cmdpath + "/" + subdomainpath + pkgpath
+				file.text = text
+				files = append(files, file)
+			case ":test":
+				text, msgs := LangTestFromPackage(
+					lang, pkg, project, command, subprefix)
+				msgblock = MsgblockAddBlock(msgblock, msgs)
+				file := NewFile()
+				file.name = pkgname + "Test" + lang.sourcefile
+				file.path = testpath + "/" + subdomainpath + pkgpath
+				file.text = text
+				files = append(files, file)
+			}
 		}
 	}
 	return files, msgblock
@@ -157,7 +171,7 @@ func LangFromPackage(
 	typetexts := ""
 	packageline := LangNativePackageLine(
 		lang, pkg.name, pkgpath)
-	namespaceopen, namespaceclose := LangNativeNamespaceOpenClose(
+	namespaceopen, namespaceclose := LangNamespaceOpenClose(
 		lang, pkgname, pkgpath)
 	packagestatic := "" +
 		LangVarCollection(lang, 2, rawmaptype, anytype,
@@ -199,7 +213,12 @@ func LangFromPackage(
 		}
 	}
 	packagestatic += "" +
-		"\n    " + LangPkgNameDot(lang, "vx/core") + "vx_global_package_set(\"" + pkg.name + "\", maptype, mapconst, mapfunc)" + lang.lineend
+		"\n    " + LangPkgNameDot(lang, "vx/core") + "vx_global_package_set(" +
+		"\n      \"" + pkg.name + "\"," +
+		"\n      " + LangFuncCall(lang, 3, func_vx_mapimmutable, "maptype") + "," +
+		"\n      " + LangFuncCall(lang, 3, func_vx_mapimmutable, "mapconst") + "," +
+		"\n      " + LangFuncCall(lang, 3, func_vx_mapimmutable, "mapfunc") +
+		"\n    )" + lang.lineend
 	staticopen += packagestatic
 	body := "" +
 		specialcode +
@@ -209,7 +228,7 @@ func LangFromPackage(
 		staticopen +
 		staticclose
 		//		emptytypes
-	imports := LangNativePackageImports(
+	imports := LangPackageImports(
 		lang, pkg, pkgprefix, body, false)
 	output := "" +
 		packageline +
@@ -317,7 +336,6 @@ func LangFromValue(
 			valstr = StringValueFromValue(value)
 			output = valstr
 		}
-	default:
 	}
 	return output, msgblock
 }
@@ -330,47 +348,6 @@ func LangArgGenericFromType(
 	output := NewArg("generic_" + typename)
 	output.vxtype = typ
 	output.isgeneric = true
-	return output
-}
-
-func LangGenericFromType(
-	lang *vxlang,
-	typ *vxtype) string {
-	output := ""
-	if typ.isgeneric {
-		switch typ.name {
-		case "any-1":
-			output = "T"
-		case "any-2":
-			output = "U"
-		case "any-3":
-			output = "V"
-		case "list-1":
-			output = "X"
-		case "list-2":
-			output = "Y"
-		case "list-3":
-			output = "Z"
-		case "map-1":
-			output = "N"
-		case "map-2":
-			output = "O"
-		case "map-3":
-			output = "P"
-		case "rawlist-1":
-			output = "List<T>"
-		case "rawmap-1":
-			output = "Map<" + LangTypeName(lang, rawstringtype) + ", T>"
-		case "struct-1":
-			output = "Q"
-		case "struct-2":
-			output = "R"
-		case "struct-3":
-			output = "S"
-		}
-	} else {
-		output = LangTypeName(lang, typ)
-	}
 	return output
 }
 
@@ -404,20 +381,20 @@ func LangLambdaFromArgList(
 		lambdaargnames = append(lambdaargnames, lambdaargname)
 		switch NameFromType(argtype) {
 		case "vx/core/any", "vx/core/any-1":
-			lambdatypename := LangNativeArgTypeName(
+			lambdatypename := LangArgTypeName(
 				lang, lambdaargname, anytype)
 			lambdatypenames = append(
 				lambdatypenames, lambdatypename)
 		default:
 			switch lambdaarg.name {
 			case "key":
-				lambdatypename := LangNativeArgTypeName(
+				lambdatypename := LangArgTypeName(
 					lang, lambdaargname, argtype)
 				lambdatypenames = append(
 					lambdatypenames, lambdatypename)
 			default:
 				argvaltname := LangTypeT(lang, argtype)
-				lambdatypename := LangNativeArgTypeNameValue(
+				lambdatypename := LangArgTypeNameValue(
 					lang, lambdaargname, anytype)
 				lambdatypenames = append(lambdatypenames, lambdatypename)
 				corepkgname := LangPkgName(lang, "vx/core")
@@ -500,7 +477,7 @@ func LangWriteFromProjectCmd(
 	switch command.code {
 	case ":test":
 		targetpath := PathFromProjectCmd(project, command)
-		targetpath = LangNativeTestTargetPath(
+		targetpath = LangTestTargetPath(
 			lang, targetpath)
 		targetpath += "/resources"
 		msgs := LangFolderCopyTestdataFromProjectPath(project, targetpath)
@@ -539,6 +516,83 @@ func LangValClass(
 	varvalue string) string {
 	output := LangVarClassAll(lang, indent,
 		varname, vartype, true, false, varvalue)
+	return output
+}
+
+func LangValCollection(
+	lang *vxlang,
+	indent int,
+	vartype *vxtype,
+	subtype *vxtype,
+	varname string,
+	varvalue string) string {
+	return LangVarAll(
+		lang, indent, vartype, subtype, varname, varvalue, true, false, false, false, false, false)
+}
+
+func LangValFuture(
+	lang *vxlang,
+	indent int,
+	vartype *vxtype,
+	varname string,
+	varvalue string) string {
+	output := LangVarAll(
+		lang,
+		indent,
+		vartype,
+		emptytype,
+		varname,
+		varvalue,
+		true,
+		true,
+		false,
+		false,
+		false,
+		false)
+	return output
+}
+
+func LangValFutureGeneric(
+	lang *vxlang,
+	indent int,
+	vartype *vxtype,
+	varname string,
+	varvalue string) string {
+	output := LangVarAll(
+		lang,
+		indent,
+		vartype,
+		emptytype,
+		varname,
+		varvalue,
+		true,
+		true,
+		false,
+		false,
+		true,
+		false)
+	return output
+}
+
+func LangValGeneric(
+	lang *vxlang,
+	indent int,
+	vartype *vxtype,
+	varname string,
+	varvalue string) string {
+	output := LangVarAll(
+		lang,
+		indent,
+		vartype,
+		emptytype,
+		varname,
+		varvalue,
+		true,
+		false,
+		false,
+		false,
+		true,
+		false)
 	return output
 }
 
@@ -754,14 +808,8 @@ func LangVxArgFromArg(
 			LangVar(lang, 3, arg.vxtype,
 				"output",
 				LangTypeE(lang, arg.vxtype))+
-				LangVarNull(lang, 3, arg.vxtype,
-					"testnull",
-					"vx_p_"+argname)+
-				LangIfThen(lang, 3,
-					"testnull != null",
-					LangVarSet(lang, 4,
-						"output", "testnull"))+
-				LangIfEnd(lang, 3))
+				LangVarSetNotNull(lang, 3,
+					arg.vxtype, "output", "vx_p_"+argname))
 	return output
 }
 
@@ -773,11 +821,11 @@ func LangApp(
 		lang,
 		PackageCoreFromProject(project),
 		"")
-	contexttext := LangVar(lang, 3, contexttype,
+	contexttext := LangVal(lang, 3, contexttype,
 		"context",
 		LangPkgNameDot(lang, "vx/core")+"f_context_main(arglist)")
 	maintext := "" +
-		LangVar(lang, 3, stringtype,
+		LangVal(lang, 3, stringtype,
 			"mainval",
 			LangPkgNameDot(lang, "vx/core")+"f_main(arglist)") +
 		LangVarSet(lang, 3,
@@ -847,21 +895,23 @@ func LangApp(
 		}
 	}
 	packageopen := ""
-	classopen, classclose := LangNativeAppClassOpenClose(lang)
-	mainopen, mainclose := LangNativeAppMainOpenClose(lang)
-	tryopen, tryclose := LangNativeAppTryOpenClose(lang)
-	outputprint := LangNativeAppOutputPrint(lang)
-	arglistinit := LangNativeAppArgListInit(lang)
+	classopen, classclose := LangAppClassOpenClose(lang)
+	mainopen, mainclose := LangAppMainOpenClose(lang, project)
+	tryopen, tryclose := LangAppTryOpenClose(lang)
+	outputprint := LangAppOutputPrint(lang)
+	arglistinit := LangAppArgListInit(lang)
 	outputopen := LangVar(lang, 3, rawstringtype,
 		"output", "\"\"")
 	outputclose := LangVarSet(lang, 3,
 		"output",
 		"mainstring.vx_string()")
-	output := "" +
+	doc := "" +
 		"/**" +
 		"\n * App" +
 		"\n */" +
-		"\n" +
+		"\n"
+	output := "" +
+		doc +
 		imports +
 		packageopen +
 		classopen +

@@ -110,7 +110,7 @@ func LangConst(
 		e_type = LangValStatic(lang, 1, booleantype,
 			"e_boolean", LangPkgNameDot(lang, "vx/core")+"c_false") + "\n"
 	}
-	doc := LangNativeConstDoc(lang, cnst)
+	doc := LangConstDoc(lang, cnst)
 	argoutput := NewArg("output")
 	argoutput.vxtype = cnst.vxtype
 	argoutput.isfinal = false
@@ -120,10 +120,10 @@ func LangConst(
 	funcconstnew.name = "const_new"
 	funcconstnew.vxtype = nonetype
 	funcconstnew.listarg = listarg
-	staticopen, staticclose := LangNativeConstStaticOpenClose(lang)
+	staticopen, staticclose := LangConstStaticOpenClose(lang)
 	output += "" +
 		doc +
-		LangNativeConstClassHeader(lang, cnst, 1) +
+		LangConstClassHeader(lang, cnst, 1) +
 		staticopen +
 		LangConstVxConstdef(lang, cnst) +
 		LangFuncHeaderStatic(lang, 2,
@@ -164,7 +164,7 @@ func LangConstValFromConst(
 		for _, cmd := range project.listcmd {
 			if cmd.code != ":test" {
 			} else if cmd.lang == lang {
-				path := LangNativeTestResourcesPath(
+				path := LangTestResourcesPath(
 					lang, cmd)
 				cnstval = "\"" + path + "/resources\""
 			}
@@ -190,7 +190,7 @@ func LangConstVxConstdef(
 	output := "" +
 		LangFuncHeaderStatic(lang, 2,
 			constname, fnc, 0,
-			LangVar(lang, 3, constdeftype,
-				"output", body))
+			LangVal(lang, 3,
+				constdeftype, "output", body))
 	return output
 }

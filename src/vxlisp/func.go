@@ -40,10 +40,208 @@ var emptyfunc = NewFunc()
 
 var emptysignature = NewSignature()
 
+var func_f_boolean_permission_from_func = NewFuncFromPkgnameName(
+	"vx/core",
+	"f_boolean_permission_from_func")
+var func_f_copy = NewFuncFromPkgnameName("vx/core", "f_copy")
+var func_f_resolve_testcase = NewFuncFromPkgnameName(
+	"vx/test",
+	"f_resolve_testcase")
+var func_f_test_false = NewFuncFromPkgnameName(
+	"vx/test",
+	"f_test_false")
+var func_f_test_true = NewFuncFromPkgnameName(
+	"vx/test",
+	"f_test_true")
+var func_read_test_file = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"read_test_file",
+	rawstringtype,
+	NewArgFromNameTypeFinal("path", rawstringtype, true),
+	NewArgFromNameTypeFinal("filename", rawstringtype, true))
+var func_run_testcase = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"run_testcase",
+	testcasetype,
+	NewArgFromNameTypeFinal("testcase", testcasetype, true))
+var func_run_testcase_async = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"run_testcase_async",
+	testcasetype,
+	NewArgFromNameTypeFinal("testcase", testcasetype, true))
+var func_run_testcaselist = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"run_testcaselist",
+	testcaselisttype,
+	NewArgFromNameTypeFinal("testcaselist", testcaselisttype, true))
+var func_run_testdescribe = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"run_testdescribe",
+	testdescribetype,
+	NewArgFromNameTypeFinal("testpkg", rawstringtype, true),
+	NewArgFromNameTypeFinal("casename", rawstringtype, true),
+	NewArgFromNameTypeFinal("describe", testdescribetype, true))
+var func_run_testdescribelist = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"run_testdescribelist",
+	testdescribelisttype,
+	NewArgFromNameTypeFinal("testpkg", rawstringtype, true),
+	NewArgFromNameTypeFinal("casename", rawstringtype, true),
+	NewArgFromNameTypeFinal("testdescribelist", testdescribelisttype, true))
+var func_run_testpackage = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"run_testpackage",
+	testpackagetype,
+	NewArgFromNameTypeFinal("testpackage", testpackagetype, true))
+var func_run_testpackage_async = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"run_testpackage_async",
+	testpackagetype,
+	NewArgFromNameTypeFinal("testpackage", testpackagetype, true))
+var func_run_testresult = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"run_testresult",
+	testresulttype,
+	NewArgFromNameTypeFinal("testpkg", rawstringtype, true),
+	NewArgFromNameTypeFinal("testname", rawstringtype, true),
+	NewArgFromNameTypeFinal("message", rawstringtype, true),
+	NewArgFromNameTypeFinal("testresult", testresulttype, true))
+var func_sample_testdescribe1 = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"sample_testdescribe1",
+	testdescribetype,
+	argcontext)
+var func_sample_testdescribe2 = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"sample_testdescribe2",
+	testdescribetype,
+	argcontext)
+var func_sample_testdescribelist = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"sample_testdescribelist",
+	testdescribelisttype,
+	argcontext)
+var func_sample_testresult1 = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"sample_testresult1",
+	testresulttype,
+	argcontext)
+var func_sample_testresult2 = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"sample_testresult2",
+	testresulttype,
+	argcontext)
+var func_test = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"test",
+	rawbooltype,
+	NewArgFromNameTypeFinal("testname", rawstringtype, true),
+	NewArgFromNameTypeFinal("expected", rawstringtype, true),
+	NewArgFromNameTypeFinal("actual", rawstringtype, true))
+var func_test_async_from_async_fn = NewFuncFromPkgnameNameType("TestLib", "test_async_from_async_fn", rawbooltype)
+var func_test_async_new_from_value = NewFuncFromPkgnameNameType("TestLib", "test_async_new_from_value", rawbooltype)
+var func_test_helloworld = NewFuncFromPkgnameNameType(
+	"TestLib",
+	"test_helloworld",
+	rawbooltype)
+var func_test_list_from_list_async = NewFuncFromPkgnameNameType("TestLib", "test_list_from_list_async", rawbooltype)
+var func_test_run_testdescribe = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"test_run_testdescribe",
+	rawbooleantype,
+	argcontext)
+var func_test_run_testdescribelist = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"test_run_testdescribelist",
+	rawbooleantype,
+	argcontext)
+var func_test_run_testdescribelist_async = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"test_run_testdescribelist_async",
+	rawbooleantype,
+	argcontext)
+var func_test_run_testresult = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"test_run_testresult",
+	rawbooleantype,
+	argcontext)
+var func_test_run_testresult_async = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"test_run_testresult_async",
+	rawbooleantype,
+	argcontext)
+var func_vx_any_from_any = NewFuncFromPkgnameName("vx/core", "vx_any_from_any")
+var func_vx_async_from_async_fn = NewFuncFromPkgnameName("vx/core", "vx_async_from_async_fn")
+var func_vx_copy = NewFuncFromPkgnameName("vx/core", "vx_copy")
+var func_vx_listimmutable = NewFuncFromPkgnameName("vx/core", "vx_listimmutable")
+var func_vx_mapimmutable = NewFuncFromPkgnameName("vx/core", "vx_mapimmutable")
+var func_vx_mapmutable = NewFuncFromPkgnameName("vx/core", "vx_mapmutable")
+var func_vx_msg_from_exception = NewFuncFromPkgnameName("vx/core", "vx_msg_from_exception")
+var func_vx_msg_from_error = NewFuncFromPkgnameName("vx/core", "vx_msg_from_error")
+var func_vx_new = NewFuncFromPkgnameName("vx/core", "vx_new")
+var func_vx_new_boolean = NewFuncFromPkgnameName("vx/core", "vx_new_boolean")
+var func_vx_new_string = NewFuncFromPkgnameName("vx/core", "vx_new_string")
+var func_vx_string_from_any = NewFuncFromPkgnameName("vx/core", "vx_string_from_any")
+var func_vx_string_read_from_file = NewFuncFromPkgnameName("vx/data/file", "vx_string_read_from_file")
+var func_vx_sync_from_async = NewFuncFromPkgnameName(
+	"vx/core",
+	"vx_sync_from_async")
+
 func NewFunc() *vxfunc {
 	output := new(vxfunc)
 	output.vxtype = emptytype
 	output.textblock = emptytextblock
+	return output
+}
+
+func NewFuncFromPkgnameName(
+	pkgname string,
+	funcname string) *vxfunc {
+	output := NewFunc()
+	output.pkgname = pkgname
+	output.name = funcname
+	output.alias = funcname
+	return output
+}
+
+func NewFuncFromPkgnameNameType(
+	pkgname string,
+	funcname string,
+	typ *vxtype) *vxfunc {
+	output := NewFunc()
+	output.pkgname = pkgname
+	output.name = funcname
+	output.alias = funcname
+	output.vxtype = typ
+	return output
+}
+
+func NewFuncFromPkgnameNameTypeArgs(
+	pkgname string,
+	funcname string,
+	typ *vxtype,
+	args ...vxarg) *vxfunc {
+	output := NewFunc()
+	output.pkgname = pkgname
+	output.name = funcname
+	output.alias = funcname
+	output.vxtype = typ
+	output.listarg = args
+	return output
+}
+
+func NewFuncFromPkgnameNameTypeAsyncArgs(
+	pkgname string,
+	funcname string,
+	typ *vxtype,
+	args ...vxarg) *vxfunc {
+	output := NewFunc()
+	output.pkgname = pkgname
+	output.name = funcname
+	output.alias = funcname
+	output.vxtype = typ
+	output.async = true
+	output.listarg = args
 	return output
 }
 

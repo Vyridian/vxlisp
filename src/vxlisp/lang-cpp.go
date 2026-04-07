@@ -652,13 +652,13 @@ func CppBodyFromFunc(
 	returnttype := ""
 	returnetype := ""
 	if fnc.generictype == nil {
-		returntype = CppGenericFromType(
+		returntype = LangGenericFromType(
 			lang, fnc.vxtype)
 		returnttype = LangTypeT(lang, fnc.vxtype)
 		returnetype = LangTypeE(lang, fnc.vxtype)
 	} else {
 		returntype = CppPointerDefFromClassName(
-			CppGenericFromType(
+			LangGenericFromType(
 				lang, fnc.generictype))
 		returnttype = LangTypeT(
 			lang, fnc.generictype)
@@ -697,7 +697,7 @@ func CppBodyFromFunc(
 				genericargname := CppNameTFromTypeGeneric(
 					lang, fnc.generictype)
 				argtext := CppPointerDefFromClassName(
-					CppGenericFromType(lang, fnc.generictype)) + " " + genericargname
+					LangGenericFromType(lang, fnc.generictype)) + " " + genericargname
 				listargtype = append(listargtype, argtext)
 				listargname = append(listargname, genericargname)
 			}
@@ -735,7 +735,7 @@ func CppBodyFromFunc(
 			argtypename := ""
 			if fnc.generictype != nil && argtype.isgeneric {
 				argtypename = CppPointerDefFromClassName(
-					CppGenericFromType(
+					LangGenericFromType(
 						lang, argtype))
 			} else {
 				argtypename = LangNameTypeFromTypeSimple(
@@ -767,7 +767,7 @@ func CppBodyFromFunc(
 	functypetext := ""
 	if fnc.generictype != nil {
 		functypetext = CppPointerDefFromClassName(
-			CppGenericFromType(
+			LangGenericFromType(
 				lang, fnc.generictype))
 	} else {
 		functypetext = returntype
@@ -1476,7 +1476,7 @@ func CppFromPackage(
   inline vx_Class_package const vx_package;
 `
 	headerimports := CppImportsFromPackage(pkg, "", header, false)
-	namespaceopen, namespaceclose := LangNativeNamespaceOpenClose(lang, pkgname, "")
+	namespaceopen, namespaceclose := LangNamespaceOpenClose(lang, pkgname, "")
 	headeroutput := "" +
 		"#ifndef " + StringUCase(pkgname+"_hpp") +
 		"\n#define " + StringUCase(pkgname+"_hpp") +
@@ -2620,56 +2620,16 @@ func CppFromValue(
 		}
 		switch fnc.name {
 		case "native":
-			// (native :cpp)
-			isNative := false
-			var argtexts []string
-			multiline := false
-			argtext := ""
-			nativeindent := "undefined"
-			for _, arg := range fnc.listarg {
-				var argvalue = arg.value
-				valuetext := ""
-				if argvalue.code == "string" {
-					valuetext = StringValueFromValue(argvalue)
-				}
-				if valuetext == ":cpp" {
-					isNative = true
-				} else if valuetext != ":auto" && BooleanFromStringStarts(valuetext, ":") {
-					isNative = false
-				} else if isNative {
-					if argvalue.name == "newline" {
-						argtext = "\n"
-					} else {
-						clstext, msgs := CppFromValue(lang, argvalue, pkgname, parentfn, 0, false, test, subpath)
-						msgblock = MsgblockAddBlock(msgblock, msgs)
-						argtext = clstext
-						if nativeindent == "undefined" {
-							nativeindent = "\n" + StringRepeat(" ", argvalue.textblock.charnum)
-						} else if nativeindent != "" {
-							argtext = StringFromStringFindReplace(argtext, nativeindent, "\n")
-						}
-					}
-					if !multiline {
-						if BooleanFromStringContains(argtext, "\n") {
-							multiline = true
-						} else if argvalue.name != "" {
-							multiline = true
-						}
-					}
-					argtext = StringRemoveQuotes(argtext)
-					if argtext == ":auto" {
-						argtext = LangNativeFuncNativeAuto(lang, parentfn)
-					}
-					argtexts = append(argtexts, argtext)
-				}
-			}
-			if len(argtexts) > 0 {
-				if multiline {
-					output += StringFromStringIndent(StringFromListStringJoin(argtexts, ""), sindent)
-				} else {
-					output += StringFromListStringJoin(argtexts, "")
-				}
-			}
+			snative, msgs := LangFuncValueNative(
+				lang,
+				fnc,
+				pkgname,
+				parentfn,
+				indent,
+				test,
+				subpath)
+			msgblock = MsgblockAddBlock(msgblock, msgs)
+			output = snative
 		default:
 			var argtexts []string
 			funcargs := fnc.listarg
@@ -3173,7 +3133,7 @@ func CppGenericDefinitionFromFunc(
 	output := ""
 	var mapgeneric = make(map[string]string)
 	if fnc.generictype != nil {
-		returntype := CppGenericFromType(lang, fnc.generictype)
+		returntype := LangGenericFromType(lang, fnc.generictype)
 		mapgeneric[fnc.vxtype.name] = "class " + returntype
 		for _, arg := range fnc.listarg {
 			argtype := arg.vxtype
@@ -3181,7 +3141,7 @@ func CppGenericDefinitionFromFunc(
 				if argtype.isgeneric {
 					_, ok := mapgeneric[argtype.name]
 					if !ok {
-						argtypename := CppGenericFromType(lang, argtype)
+						argtypename := LangGenericFromType(lang, argtype)
 						worktext := "class " + argtypename
 						mapgeneric[argtype.name] = worktext
 					}
@@ -3196,44 +3156,6 @@ func CppGenericDefinitionFromFunc(
 			output += mapgeneric[generickey]
 		}
 		output = "template <" + output + "> "
-	}
-	return output
-}
-
-func CppGenericFromType(
-	lang *vxlang,
-	typ *vxtype) string {
-	output := ""
-	if typ.isgeneric {
-		switch typ.name {
-		case "any-1":
-			output = "T"
-		case "any-2":
-			output = "U"
-		case "any-3":
-			output = "V"
-		case "list-1":
-			output = "X"
-		case "list-2":
-			output = "Y"
-		case "list-3":
-			output = "Z"
-		case "map-1":
-			output = "N"
-		case "map-2":
-			output = "O"
-		case "map-3":
-			output = "P"
-		case "struct-1":
-			output = "Q"
-		case "struct-2":
-			output = "R"
-		case "struct-3":
-			output = "S"
-		}
-	} else {
-		output = LangTypeName(
-			lang, typ)
 	}
 	return output
 }
@@ -3793,7 +3715,7 @@ func CppHeaderFromFunc(
 	}
 	if fnc.generictype != nil {
 		returntype = CppPointerDefFromClassName(
-			CppGenericFromType(
+			LangGenericFromType(
 				lang, fnc.generictype))
 		switch NameFromFunc(fnc) {
 		case "vx/core/new<-type", "vx/core/empty":
@@ -3812,7 +3734,7 @@ func CppHeaderFromFunc(
 			argtypename := ""
 			if argtype.isgeneric {
 				argtypename = CppPointerDefFromClassName(
-					CppGenericFromType(lang, argtype))
+					LangGenericFromType(lang, argtype))
 			} else {
 				argtypename = LangNameTypeFromTypeSimple(
 					lang, argtype, true)
@@ -4526,7 +4448,7 @@ func CppTestFromPackage(
 	if ipos >= 0 {
 		simplename = simplename[ipos+1:]
 	}
-	namespaceopen, namespaceclose := LangNativeNamespaceOpenClose(
+	namespaceopen, namespaceclose := LangNamespaceOpenClose(
 		lang, pkgname+"_test", "")
 	headertext := "" +
 		"#ifndef " + StringUCase(pkgname+"_test_hpp") +

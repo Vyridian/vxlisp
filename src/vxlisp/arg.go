@@ -62,6 +62,16 @@ func NewArgContext() vxarg {
 	return output
 }
 
+func NewArgFromNameTypeFinal(
+	name string,
+	typ *vxtype,
+	isfinal bool) vxarg {
+	output := NewArg(name)
+	output.vxtype = typ
+	output.isfinal = isfinal
+	return output
+}
+
 func NewArgFromType(
 	typ *vxtype) vxarg {
 	output := NewArg(typ.name)

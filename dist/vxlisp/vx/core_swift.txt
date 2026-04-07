@@ -1,0 +1,98 @@
+  // MARK: - Map Protocol
+  protocol Map {
+    associatedtype Key: Hashable
+    associatedtype Value
+
+    func copy() -> Self
+    func get(_ key: Key) -> Value?
+    func getOrDefault(_ key: Key) -> Value?
+    func getOrElse(_ key: Key, elseValue: Value) -> Value
+    func keys() -> [Key]
+    mutating func put(_ key: Key, value: Value)
+    mutating func remove(_ key: Key)
+    func size() -> Int
+  }
+
+  // MARK: - LinkedHashMap Class
+  class LinkedHashMap<Key: Hashable, Value>: Map {
+    private var dict: [Key: Value] = [:]
+    private var listKey: [Key] = []
+
+    init() {}
+
+    init(copy: LinkedHashMap<Key, Value>) {
+      for key in copy.keys() {
+        if let value = copy.getOrDefault(key) {
+          self.put(key, value: value)
+        }
+      }
+    }
+
+    func copy() -> LinkedHashMap<Key, Value> {
+      return LinkedHashMap(copy: self)
+    }
+
+    func get(_ key: Key) -> Value? {
+      return dict[key]
+    }
+
+    func getOrDefault(_ key: Key) -> Value? {
+      return dict[key]
+    }
+
+    func getOrElse(_ key: Key, elseValue: Value) -> Value {
+      return dict[key] ?? elseValue
+    }
+
+    func keys() -> [Key] {
+      return listKey
+    }
+
+    func put(_ key: Key, value: Value) {
+      dict[key] = value
+      if !listKey.contains(key) {
+        listKey.append(key)
+      }
+    }
+
+    func remove(_ key: Key) {
+      dict.removeValue(forKey: key)
+      if let index = listKey.firstIndex(of: key) {
+        listKey.remove(at: index)
+      }
+    }
+
+    func size() -> Int {
+      return dict.count
+    }
+  }
+
+  // MARK: - KeyValue Class
+  class KeyValue<T> {
+    var key: String = ""
+    var value: T?
+
+    init(key: String = "", value: T? = nil) {
+      self.key = key
+      self.value = value
+    }
+  }
+
+  // MARK: - Utility Functions
+  func hashmapFromKeyValues<T>(_ keyValues: KeyValue<T>...) -> LinkedHashMap<String, T> {
+    let map = LinkedHashMap<String, T>()
+    for kv in keyValues {
+      if let value = kv.value {
+        map.put(kv.key, value: value)
+      }
+    }
+    return map
+  }
+
+  func keyValueFromKeyValue<T>(_ key: String, _ value: T) -> KeyValue<T> {
+    return KeyValue(key: key, value: value)
+  }
+
+  func vx_issame(_ val1 : Any, _ val1 : Any) -> Bool {
+    return ObjectIdentifier(val1) == ObjectIdentifier(val2)
+  }

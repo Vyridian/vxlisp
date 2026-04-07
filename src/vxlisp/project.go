@@ -53,7 +53,7 @@ func ExecuteProjectCommand(
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 	case ":source", ":test":
 		if !issource {
-			msgs := LangNativeWriteFromProjectCmd(
+			msgs := LangWriteFromProjectCmdNative(
 				command.lang, project, command)
 			msgblock = MsgblockAddBlock(
 				msgblock, msgs)
@@ -633,7 +633,7 @@ func StringPathFromProjectCmd(
 	case "":
 		code := cmd.code
 		lang := cmd.lang
-		pathtext = LangNativePathtext(lang, code)
+		pathtext = LangPathtext(lang, code)
 	default:
 		for _, path := range prj.listpath {
 			pathname := path.name
