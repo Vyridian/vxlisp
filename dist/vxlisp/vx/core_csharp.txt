@@ -242,12 +242,20 @@
     return output;
   }
 
-  public static List<T> immutablelist<T>(List<T> listval) {
+  public static List<T> vx_listimmutable<T>(List<T> listval) {
     return listval;
   }
 
-  public static Map<T, U> immutablemap<T, U>(Map<T, U> mapval) where T : notnull {
+  public static List<T> vx_listmutable<T>(List<T> listval) {
+    return new List<T>(listval);
+  }
+
+  public static Map<T, U> vx_mapimmutable<T, U>(Map<T, U> mapval) where T : notnull {
     return mapval;
+  }
+
+  public static Map<T, U> vx_mapmutable<T, U>(Map<T, U> mapval) where T : notnull {
+    return new LinkedHashMap<T, U>(mapval);
   }
 
   // vx_new(generic_any_1, args...)
@@ -292,6 +300,14 @@
         break;
       }
     }
+    return output;
+  }
+
+  public static T vx_any_from_any<T, U>(T generic_any_1, U value) where T : Vx.Core.Type_any where U : Vx.Core.Type_any {
+    T output = Vx.Core.f_empty(generic_any_1);
+    if (value is T tval) {
+      output = tval;
+    };
     return output;
   }
 
@@ -386,7 +402,7 @@
     return output;
   }
 
-  public static Task<T> vx_async_from_async_fn<T, U>(Task<U> future, Func<U, T> fn) {
+  public static Task<T> vx_async_from_async_fn<T, U>(T generic_any_1, Task<U> future, Func<U, T> fn) {
     Task<T> output = future.ContinueWith(tasku => {
       U uval = tasku.Result;
       T tval = fn(uval);
@@ -617,6 +633,29 @@
     return output;
   }
 
+  public static Vx.Core.Type_int vx_int_from_string(
+    Vx.Core.Type_string text
+  ) {
+    Vx.Core.Type_int output = Vx.Core.e_int;
+    string stext = text.vx_string();
+    if (stext == "notanumber") {
+      output = Vx.Core.c_notanumber;
+    } else if (stext == "infinity") {
+      output = Vx.Core.c_infinity;
+    } else if (stext == "neginfinity") {
+      output = Vx.Core.c_neginfinity;
+    } else {
+      try {
+        float floatresult = float.Parse(stext);
+        int iresult = (int)floatresult;
+        output = Vx.Core.vx_new_int(iresult);
+      } catch (Exception) {
+        output = Vx.Core.c_notanumber;
+      }
+    }
+    return output;
+  }
+
   // vx_int_from_string_find(string, string)
   public static int vx_int_from_string_find(string text, string find) {
     return text.IndexOf(find);
@@ -747,7 +786,7 @@
     );
     Task<List<Vx.Core.Type_any>> async_list_result = Vx.Core.vx_async_arraylist_from_arraylist_async(list_async_result);
     Task<X> output = Vx.Core.vx_async_from_async_fn(
-      async_list_result, fn_any_from_list
+      generic_list_1, async_list_result, fn_any_from_list
     );
     return output;
   }
@@ -967,7 +1006,7 @@
 
   public static Vx.Core.Type_anylist vx_new_anylist(List<Vx.Core.Type_any> listany) {
     Vx.Core.Class_anylist output = new Vx.Core.Class_anylist();
-    output.vx_p_list = immutablelist(listany);
+    output.vx_p_list = vx_listimmutable(listany);
     return output;
   }
 
@@ -1111,7 +1150,11 @@
       }
     } else if (value is Vx.Core.Type_list vallist) {
       Vx.Core.Type_typedef typedef = vallist.vx_typedef();
-      Vx.Core.Type_string typedefname = typedef.name();
+      string typedefname = typedef.name().vx_string();
+      string pkgname = typedef.pkgname().vx_string();
+      if (pkgname != "vx/core") {
+        typedefname = pkgname + "/" + typedefname;
+      }
       int indentint = indent;
       indentint += 1;
       List<Vx.Core.Type_any> listval = vallist.vx_list();
@@ -1123,10 +1166,14 @@
         string msgtext = Vx.Core.vx_string_from_any_indent(vallist.vx_msgblock(), indentint, linefeed);
         output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
       }
-      output = "(" + typedefname.vx_string() + output + ")";
+      output = "(" + typedefname + output + ")";
     } else if (value is Vx.Core.Type_map valmap) {
       Vx.Core.Type_typedef typedef = valmap.vx_typedef();
-      Vx.Core.Type_string typedefname = typedef.name();
+      string typedefname = typedef.name().vx_string();
+      string pkgname = typedef.pkgname().vx_string();
+      if (pkgname != "vx/core") {
+        typedefname = pkgname + "/" + typedefname;
+      }
       int indentint = indent;
       indentint += 2;
       Map<string, Vx.Core.Type_any> mapval = valmap.vx_map();
@@ -1149,11 +1196,14 @@
         string msgtext = Vx.Core.vx_string_from_any_indent(valmap.vx_msgblock(), indentint, linefeed);
         output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;
       }
-      output = "(" + typedefname.vx_string() + output + ")";
+      output = "(" + typedefname + output + ")";
     } else if (value is Vx.Core.Type_struct valstruct) {
       Vx.Core.Type_typedef typedef = valstruct.vx_typedef();
-      Vx.Core.Type_string typedefname = typedef.name();
-      string stypedefname = typedefname.vx_string();
+      string typedefname = typedef.name().vx_string();
+      string pkgname = typedef.pkgname().vx_string();
+      if (pkgname != "vx/core") {
+        typedefname = pkgname + "/" + typedefname;
+      }
       int indentint2 = indent;
       indentint2 += 2;
       Map<string, Vx.Core.Type_any> mapval2 = valstruct.vx_map();
@@ -1174,17 +1224,16 @@
           output += "\n" + indenttext + " " + key + strval2;
         }
       }
-      if (stypedefname == "msg") {
-      } else if (stypedefname == "msgblock") {
+      if (typedefname == "msg") {
+      } else if (typedefname == "msgblock") {
       } else if (valstruct.vx_msgblock() != Vx.Core.e_msgblock) {
         string msgtext2 = Vx.Core.vx_string_from_any_indent(valstruct.vx_msgblock(), indentint2, linefeed);
         output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext2;
       }
-      output = "(" + typedefname.vx_string() + output + ")";
+      output = "(" + typedefname + output + ")";
     } else if (value is Vx.Core.Type_func valfunc) {
       Vx.Core.Type_funcdef funcdef = valfunc.vx_funcdef();
-      Vx.Core.Type_string funcdefname = Vx.Core.f_funcname_from_funcdef(funcdef);
-      output = funcdefname.vx_string();
+      string funcdefname = Vx.Core.f_funcname_from_funcdef(funcdef).vx_string();
       if (valfunc.vx_msgblock() != Vx.Core.e_msgblock) {
         string msgtext = Vx.Core.vx_string_from_any_indent(valfunc.vx_msgblock(), indent, linefeed);
         output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext;

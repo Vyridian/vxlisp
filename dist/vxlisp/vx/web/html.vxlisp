@@ -169,7 +169,6 @@
     str = vx_core::vx_string_from_string_find_replace(str, “>”, “&gt;”);
     str = vx_core::vx_string_from_string_find_replace(str, “<”, “&lt;”);
     output = vx_core::vx_new_string(str);"
-  :csharp :auto
   :java
    "String str = text.vx_string();
     str = str
@@ -184,8 +183,7 @@
       .replace(/&/g, “&amp;”)
       .replace(/'/g, “\'”)
       .replace(/>/g, “&gt;”)   
-      .replace(/</g, “&lt;”)"
-  :kotlin :auto)
+      .replace(/</g, “&lt;”)")
  :doc "Convert text to HTML string")
 
 (func string-indent : string
@@ -776,7 +774,8 @@
 (func string<-uri : string
  [uri : string]
  (native
-  :js "decodeURI(uri)")
+  :js "decodeURI(uri)"
+  :else "")
  :doc "Decode a URI string")
 
 (func styles<-stylesheet : stylelist
@@ -818,5 +817,6 @@
 (func uri<-string : string
  [text : string]
  (native
-  :js "encodeURI(text)")
+  :js "encodeURI(text)"
+  :else "")
  :doc "Encode a URI string")

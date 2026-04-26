@@ -1,98 +1,2372 @@
-  // MARK: - Map Protocol
-  protocol Map {
-    associatedtype Key: Hashable
-    associatedtype Value
+  public final class Future {
 
-    func copy() -> Self
-    func get(_ key: Key) -> Value?
-    func getOrDefault(_ key: Key) -> Value?
-    func getOrElse(_ key: Key, elseValue: Value) -> Value
-    func keys() -> [Key]
-    mutating func put(_ key: Key, value: Value)
-    mutating func remove(_ key: Key)
-    func size() -> Int
+    private enum State {
+      case pending
+      case resolved(any Vx_Core.Type_any)
+    }
+
+    private var valtype : any Vx_Core.Type_any = Vx_Core.t_any
+    private var state : State = .pending
+    private var callbacks : [(any Vx_Core.Type_any) -> Void] = []
+
+    public init() {}
+
+    public init(
+      _ generic_any_1 : any Vx_Core.Type_any
+    ) {
+      self.valtype = generic_any_1
+    }
+
+    public func getValue(
+    ) -> any Vx_Core.Type_any {
+      let lock = NSLock()
+      lock.lock()
+      var output : any Vx_Core.Type_any
+      if case .resolved(let value) = state {
+        output = value
+      } else {
+        output = Vx_Core.vx_empty(self.valtype)
+      }
+      lock.unlock()
+      return output
+    }
+
+    public func getValueSync(
+    ) -> any Vx_Core.Type_any {
+      return getValueSync(timeout: DispatchTime.now() + .seconds(5))
+    }
+
+    public func getValueSync(
+      timeout : DispatchTime
+    ) -> any Vx_Core.Type_any {
+      var result : any Vx_Core.Type_any = Vx_Core.vx_empty(self.valtype)
+      let semaphore = DispatchSemaphore(value: 0)
+      onComplete { value in
+        let lock = NSLock()
+        lock.lock()
+        result = value
+        lock.unlock()
+        semaphore.signal()
+      }
+      if !isResolved() {
+        let status = semaphore.wait(timeout: timeout)
+        if status == .timedOut {
+          print("Warning: Future.getValueSync() timed out")
+        }
+      }
+      return result
+    }
+
+    public func isResolved() -> Bool {
+      let lock = NSLock()
+      lock.lock()
+      var output : Bool = false
+      if case .resolved = state {
+        output = true
+      }
+      lock.unlock()
+      return output
+    }
+
+    public func resolve(
+      _ value : any Vx_Core.Type_any
+    ) {
+      let lock = NSLock()
+      guard case .pending = state else {
+        lock.unlock()
+        return
+      }
+      state = .resolved(value)
+      let localCallbacks = callbacks
+      callbacks.removeAll()
+      lock.unlock()
+      for cb in localCallbacks {
+        cb(value)
+      }
+    }
+
+    public func onComplete(
+      _ fn : @escaping (any Vx_Core.Type_any) -> Void
+    ) {
+      let lock = NSLock()
+      lock.lock()
+      switch state {
+      case .resolved(let value):
+        lock.unlock()
+        fn(value)
+      case .pending:
+        callbacks.append(fn)
+        lock.unlock()
+      }
+    }
+
+    public func map(
+      _ generic_any_1 : any Vx_Core.Type_any,
+      _ fn : @escaping (any Vx_Core.Type_any) -> any Vx_Core.Type_any
+    ) -> Vx_Core.Future {
+      let output = Vx_Core.Future(generic_any_1)
+      onComplete { value in
+        let mappedValue = fn(value)
+        output.resolve(mappedValue)
+      }
+      return output
+    }
+
+    public func flatMap(
+      _ generic_any_1 : any Vx_Core.Type_any,
+      _ fn : @escaping (any Vx_Core.Type_any) -> Vx_Core.Future
+    ) -> Vx_Core.Future {
+      let output = Vx_Core.Future(generic_any_1)
+      onComplete { value in
+        let innerFuture = fn(value)
+        innerFuture.onComplete { result in
+          output.resolve(result)
+        }
+      }
+      return output
+    }
+
+    public static func resolved(
+      _ generic_any_1 : any Vx_Core.Type_any,
+      _ value : any Vx_Core.Type_any
+    ) -> Vx_Core.Future {
+      var output : Vx_Core.Future = Vx_Core.Future(generic_any_1)
+      output.resolve(value)
+      return output
+    }
+
+    public static func all(
+      _ generic_any_1 : any Vx_Core.Type_any,
+      _ futures : [Vx_Core.Future]
+    ) -> Vx_Core.Future {
+      let output = Vx_Core.Future(generic_any_1)
+      let count = futures.count
+      if count == 0 {
+        let emptyValue = generic_any_1.vx_empty()
+        output.resolve(emptyValue)
+      } else {
+        let empty = Vx_Core.e_any
+        var results = [any Vx_Core.Type_any](repeating: empty, count: count)
+        var remaining = count
+        let lock = NSLock()
+        for (index, future) in futures.enumerated() {
+          future.onComplete { value in
+            lock.lock()
+            results[index] = value
+            remaining = remaining - 1
+            let isDone = (remaining == 0)
+            lock.unlock()
+            if isDone {
+              let finalResult = generic_any_1.vx_new(results)
+              output.resolve(finalResult)
+            }
+          }
+        }
+        lock.lock()
+        let allCompleted = (remaining == 0)
+        lock.unlock()
+        if allCompleted {
+          let finalResult = generic_any_1.vx_new(results)
+          output.resolve(finalResult)
+        }
+      }
+      return output
+    }
+
   }
 
-  // MARK: - LinkedHashMap Class
-  class LinkedHashMap<Key: Hashable, Value>: Map {
-    private var dict: [Key: Value] = [:]
-    private var listKey: [Key] = []
+  public struct Map<V> {
 
-    init() {}
+    private var dict : [String : V]
+    private var keylist : [String]
 
-    init(copy: LinkedHashMap<Key, Value>) {
-      for key in copy.keys() {
-        if let value = copy.getOrDefault(key) {
-          self.put(key, value: value)
+    // Empty map
+    public init() {
+      self.dict = [:]
+      self.keylist = []
+    }
+
+    public init(
+      _ dict: [String : V],
+      _ keylist: [String]
+    ) {
+      self.dict = dict
+      self.keylist = keylist
+    }
+
+    public init(
+      _ other : Vx_Core.MapMutable<V>
+    ) {
+      self.dict = other.rawmap()
+      self.keylist = other.keys()
+    }
+
+    public init(
+      _ other : Vx_Core.MapMutable<any Vx_Core.Type_any>
+    ) {
+      let keys : [String] = other.keys()
+      var rawmap : [String : any Vx_Core.Type_any] = other.rawmap()
+      self.dict = [:]
+      self.keylist = keys
+      for key in keys {
+        if let value = rawmap as? V {
+          self.dict[key] = value
+          self.keylist.append(key)
         }
       }
     }
 
-    func copy() -> LinkedHashMap<Key, Value> {
-      return LinkedHashMap(copy: self)
+    // Copy (returns self because it's immutable)
+    public func copy() -> Vx_Core.Map<V> {
+      return self
     }
 
-    func get(_ key: Key) -> Value? {
+    // Accessors
+    public func get(
+      _ key : String
+    ) -> V {
+      return dict[key]!
+    }
+
+    public func getOrDefault(
+      _ key : String
+    ) -> V? {
       return dict[key]
     }
 
-    func getOrDefault(_ key: Key) -> Value? {
-      return dict[key]
+    public func getOrElse(
+      _ key : String,
+      _ elsevalue : V
+    ) -> V {
+      return dict[key] ?? elsevalue
     }
 
-    func getOrElse(_ key: Key, elseValue: Value) -> Value {
-      return dict[key] ?? elseValue
+    public func keys() -> [String] {
+      return keylist
     }
 
-    func keys() -> [Key] {
-      return listKey
+    public func rawmap() -> [String : V] {
+      return dict
     }
 
-    func put(_ key: Key, value: Value) {
-      dict[key] = value
-      if !listKey.contains(key) {
-        listKey.append(key)
-      }
-    }
-
-    func remove(_ key: Key) {
-      dict.removeValue(forKey: key)
-      if let index = listKey.firstIndex(of: key) {
-        listKey.remove(at: index)
-      }
-    }
-
-    func size() -> Int {
+    public func size() -> Int {
       return dict.count
     }
+
   }
 
-  // MARK: - KeyValue Class
-  class KeyValue<T> {
-    var key: String = ""
-    var value: T?
+  public struct MapMutable<V> {
 
-    init(key: String = "", value: T? = nil) {
-      self.key = key
-      self.value = value
+    private var dict : [String : V]
+    private var keylist : [String]
+
+    // Empty map
+    public init() {
+      self.dict = [:]
+      self.keylist = []
     }
-  }
 
-  // MARK: - Utility Functions
-  func hashmapFromKeyValues<T>(_ keyValues: KeyValue<T>...) -> LinkedHashMap<String, T> {
-    let map = LinkedHashMap<String, T>()
-    for kv in keyValues {
-      if let value = kv.value {
-        map.put(kv.key, value: value)
+    public init(
+      _ dict: [String : V],
+      _ keylist: [String]
+    ) {
+      self.dict = dict
+      self.keylist = keylist
+    }
+
+    public init(
+      _ other : Vx_Core.Map<V>
+    ) {
+      self.dict = other.rawmap()
+      self.keylist = other.keys()
+    }
+
+    public init(
+      _ other : Vx_Core.Map<any Vx_Core.Type_any>
+    ) {
+      self.dict = [:]
+      let keys : [String] = other.keys()
+      var rawmap : [String : any Vx_Core.Type_any] = other.rawmap()
+      self.keylist = keys
+      for key in keys {
+        if let value = rawmap[key] as? V {
+          self.dict[key] = value
+          self.keylist.append(key)
+        }
       }
     }
-    return map
+
+    public init(
+      _ other : Vx_Core.MapMutable<Vx_Core.Type_any>
+    ) {
+      self.dict = [:]
+      self.keylist = other.keys()
+      for key in other.keylist {
+        if let value = other.dict[key] as? V {
+          self.dict[key] = value
+          self.keylist.append(key)
+        }
+      }
+    }
+
+    // Copy
+    public func copy() -> Vx_Core.MapMutable<V> {
+      return Vx_Core.MapMutable<V>(self.dict, self.keylist)
+    }
+
+    // Accessors
+    public func get(
+      _ key : String
+    ) -> V {
+      return dict[key]!
+    }
+
+    public func getOrDefault(
+      _ key : String
+    ) -> V? {
+      return dict[key]
+    }
+
+    public func getOrElse(
+      _ key : String,
+      _ elsevalue : V
+    ) -> V {
+      return dict[key] ?? elsevalue
+    }
+
+    public func keys() -> [String] {
+      return keylist
+    }
+
+    public func rawmap() -> [String : V] {
+      return dict
+    }
+
+    public func size() -> Int {
+      return dict.count
+    }
+
+    public mutating func put(
+      _ key : String,
+      _ value : V
+    ) {
+      if dict[key] == nil {
+        keylist.append(key)
+      }
+      dict[key] = value
+    }
+
+    public mutating func remove(_ key : String) {
+      dict.removeValue(forKey : key)
+      keylist.removeAll { $0 == key }
+    }
+
   }
 
-  func keyValueFromKeyValue<T>(_ key: String, _ value: T) -> KeyValue<T> {
+  public protocol Type_replfunc {
+    func vx_repl(_ arglist : Vx_Core.Type_anylist) -> Vx_Core.Type_any
+  }
+
+  public protocol Type_replfunc_async {
+    func vx_repl(_ arglist : Vx_Core.Type_anylist) -> Vx_Core.Future
+  }
+
+  public static let emptylistany : [Vx_Core.Type_any] = []
+
+  public static let emptymapany : Vx_Core.Map<any Vx_Core.Type_any> = Vx_Core.Map<any Vx_Core.Type_any>()
+
+  open class Class_base {
+
+    internal var vx_iref : Int = 0
+    public var vx_p_constdef : Vx_Core.Type_constdef? = nil
+    internal var vxmsgblock : Vx_Core.Type_msgblock? = nil
+
+    open func vx_new(
+      _ vals : [Any]
+    ) -> any Vx_Core.Type_any {
+      return Vx_Core.e_any
+    }
+
+    open func vx_copy(
+      _ vals : [Any]
+    ) -> any Vx_Core.Type_any {
+      return Vx_Core.e_any
+    }
+
+    open func vx_empty() -> any Vx_Core.Type_any {
+      return Vx_Core.e_any
+    }
+
+    open func vx_type() -> any Vx_Core.Type_any {
+      return Vx_Core.t_any
+    }
+
+    open func vx_typedef() -> any Vx_Core.Type_typedef {
+      return Vx_Core.e_typedef
+    }
+
+    public func vx_constdef() -> any Vx_Core.Type_constdef {
+      return vx_p_constdef ?? Vx_Core.e_constdef
+    }
+
+    public func vx_dispose() -> [any Vx_Core.Type_any] {
+      vx_iref = 0
+      vx_p_constdef = nil
+      vxmsgblock = nil
+      return emptylistany
+    }
+
+    public func vx_msgblock() -> any Vx_Core.Type_msgblock {
+      return vxmsgblock ?? Vx_Core.e_msgblock
+    }
+
+    public func vx_release() -> Bool {
+      if vx_iref < 0 {
+        return false
+      } else if vx_iref == 0 {
+        vx_iref = -1
+        return true
+      } else {
+        vx_iref -= 1
+        return false
+      }
+    }
+
+    public func vx_reserve() {
+      vx_iref += 1
+    }
+  }
+
+  public struct KeyValue<T> {
+    public var key: String = ""
+    public var value: T? = nil
+  }
+
+  func keyValueFromKeyValue<T>(_ key : String, _ value : T) -> KeyValue<T> {
     return KeyValue(key: key, value: value)
   }
 
-  func vx_issame(_ val1 : Any, _ val1 : Any) -> Bool {
-    return ObjectIdentifier(val1) == ObjectIdentifier(val2)
+  public static func constdef_new(
+    _ pkgname: String,
+    _ name: String,
+    _ typ: Vx_Core.Type_any
+  ) -> Vx_Core.Type_constdef {
+    let output: Vx_Core.Class_constdef = Vx_Core.Class_constdef()
+    output.vx_p_pkgname = Vx_Core.vx_new_string(pkgname)
+    output.vx_p_name = Vx_Core.vx_new_string(name)
+    output.vx_p_type = typ
+    return output
+  }
+
+  public static func funcdef_new(
+    _ pkgname : String,
+    _ name : String,
+    _ idx : Int,
+    _ async : Bool,
+    _ typ : Vx_Core.Type_any
+  ) -> Vx_Core.Type_funcdef {
+    let output : Vx_Core.Class_funcdef = Vx_Core.Class_funcdef()
+    output.vx_p_pkgname = Vx_Core.vx_new_string(pkgname)
+    output.vx_p_name = Vx_Core.vx_new_string(name)
+    output.vx_p_idx = Vx_Core.vx_new_int(idx)
+    output.vx_p_async = Vx_Core.vx_new_boolean(async)
+    output.vx_p_type = typ
+    return output
+  }
+
+  public static func f_new<T : Vx_Core.Type_any>(
+    _ generic_any_1 : T,
+    _ values : [any Vx_Core.Type_any]
+  ) -> T {
+    let result : any Vx_Core.Type_any = generic_any_1.vx_new(values)
+    let output : T = Vx_Core.vx_any_from_any(generic_any_1, result)
+    return output
+  }
+
+  public static func arraylist_from_arraylist(
+    _ generic_any_1 : any Vx_Core.Type_any,
+    _ listval : [any Vx_Core.Type_any]
+  ) -> [any Vx_Core.Type_any] {
+    var output : [any Vx_Core.Type_any] = []
+    for value in listval {
+      let t_val : any Vx_Core.Type_any = Vx_Core.f_any_from_any(generic_any_1, value)
+      output.append(t_val)
+    }
+    return output
+  }
+
+  public static func arraylist_from_arraylist_fn(
+    _ listval : [any Vx_Core.Type_any],
+    _ fn_any_from_any: (any Vx_Core.Type_any) -> any Vx_Core.Type_any
+  ) -> [any Vx_Core.Type_any] {
+    var output: [any Vx_Core.Type_any] = []
+    for value_u : any Vx_Core.Type_any in listval {
+      let t_val : any Vx_Core.Type_any = fn_any_from_any(value_u)
+      output.append(t_val)
+    }
+    return output
+  }
+
+  public static func arraylist_from_linkedhashmap<
+    T : Vx_Core.Type_any,
+    U : Vx_Core.Type_any
+  >(
+    _ generic_any_1 : T,
+    _ mapval : Vx_Core.Map<U>
+  ) -> [T] {
+    var list : [T] = []
+    let keys : [String] = mapval.keys()
+    for key : String in keys {
+      let u_val : U = mapval.get(key)
+      let t_val : T = Vx_Core.f_any_from_any(generic_any_1, u_val)
+      list.append(t_val)
+    }
+    let output = list
+    return output
+  }
+
+  public static func arraylist_from_linkedhashmap_fn<T, U>(
+    _ mapval : Vx_Core.Map<U>,
+    _ fn_any_from_key_value : (String, U) -> T
+  ) -> [T] {
+    var list : [T] = []
+    let keys : [String] = mapval.keys()
+    for key : String in keys {
+      let u_val : U = mapval.get(key)
+      let t_val : T = fn_any_from_key_value(key, u_val)
+      list.append(t_val)
+    }
+    let output = list
+    return output
+  }
+
+  public static func typedef_new(
+    _ pkgname: String,
+    _ name: String,
+    _ extend: String,
+    _ traits: Vx_Core.Type_typelist,
+    _ allowtypes: Vx_Core.Type_typelist,
+    _ disallowtypes: Vx_Core.Type_typelist,
+    _ allowfuncs: Vx_Core.Type_funclist,
+    _ disallowfuncs: Vx_Core.Type_funclist,
+    _ allowvalues: Vx_Core.Type_anylist,
+    _ disallowvalues: Vx_Core.Type_anylist,
+    _ properties: Vx_Core.Type_argmap
+  ) -> Vx_Core.Type_typedef {
+    let output : Vx_Core.Class_typedef = Vx_Core.Class_typedef()
+    output.vx_p_pkgname = Vx_Core.vx_new_string(pkgname)
+    output.vx_p_name = Vx_Core.vx_new_string(name)
+    output.vx_p_extend = Vx_Core.vx_new_string(extend)
+    output.vx_p_traits = traits
+    output.vx_p_allowtypes = allowtypes
+    output.vx_p_disallowtypes = disallowtypes
+    output.vx_p_allowfuncs = allowfuncs
+    output.vx_p_disallowfuncs = disallowfuncs
+    output.vx_p_allowvalues = allowvalues
+    output.vx_p_disallowvalues = disallowvalues
+    output.vx_p_properties = properties
+    return output
+  }
+
+  public static func vx_listimmutable<T>(
+    _ listval : [T]
+  ) -> [T] {
+    return listval
+  }
+
+  public static func vx_map_from_map<T, U>(
+    _ generic_any_1 : T,
+    _ map : Vx_Core.Map<U>
+  ) -> Vx_Core.Map<T> {
+    let keys : [String] = map.keys()
+    var result : [String : T] = [:]
+    for key : String in map.keys() {
+      if let valueu : U = map.getOrDefault(key) {
+        if let valuet : T = valueu as? T {
+          result[key] = valuet
+        }
+      }
+    }
+    let output : Vx_Core.Map<T> = Vx_Core.Map<T>(result, keys)
+    return output
+  }
+
+  public static func vx_mapimmutable<T>(
+    _ mapval : Vx_Core.MapMutable<T>
+  ) -> Vx_Core.Map<T> {
+    let output : Vx_Core.Map<T> = Vx_Core.Map<T>(
+      mapval.rawmap(),
+      mapval.keys()
+    )
+    return output
+  }
+
+  public static func vx_mapmutable<T>(
+    _ mapval : Vx_Core.Map<T>
+  ) -> Vx_Core.MapMutable<T> {
+    let output : Vx_Core.MapMutable<T> = Vx_Core.MapMutable<T>(
+      mapval.rawmap(),
+      mapval.keys()
+    )
+    return output
+  }
+
+  // vx_new(generic_any_1, args...)
+  public static func vx_new<T : Vx_Core.Type_any>(
+    _ generic_any_1 : T,
+    _ values : any Vx_Core.Type_anylist
+  ) -> T {
+    let arrayany : [any Vx_Core.Type_any] = Vx_Core.vx_arrayany_from_anylist(
+      values
+    )
+    let val : any Vx_Core.Type_any = generic_any_1.vx_new(arrayany)
+    let output : T = Vx_Core.vx_any_from_any(generic_any_1, val)
+    return output
+  }
+
+  // vx_new(generic_any_1, args...)
+  public static func vx_new<T : Vx_Core.Type_any>(
+    _ generic_any_1 : T,
+    _ vals : [Any]
+  ) -> T {
+    let val : any Vx_Core.Type_any = generic_any_1.vx_new(vals)
+    let output : T = Vx_Core.vx_any_from_any(generic_any_1, val)
+    return output
+  }
+
+  // vx_copy(generic_any_1, args...)
+  public static func vx_copy<T : Vx_Core.Type_any>(
+    _ generic_any_1 : T,
+    _ value : any Vx_Core.Type_any,
+    _ values : [Any]
+  ) -> T {
+    let val : any Vx_Core.Type_any = value.vx_copy(values)
+    let output : T = Vx_Core.vx_any_from_any(generic_any_1, val)
+    return output
+  }
+
+  public static func vx_copy<T : Vx_Core.Type_any>(
+    _ generic_any_1 : T,
+    _ value : any Vx_Core.Type_any,
+    _ values : any Vx_Core.Type_anylist
+  ) -> T {
+    let anyoutput = Vx_Core.vx_copy(generic_any_1, value, [values])
+    let output = Vx_Core.vx_any_from_any(generic_any_1, anyoutput)
+    return output
+  }
+
+  // vx_empty(generic_any_1)
+  public static func vx_empty<T : Vx_Core.Type_any>(
+    _ type : T
+  ) -> T {
+    let val : any Vx_Core.Type_any = type.vx_empty()
+    let output : T = Vx_Core.vx_any_from_any(type, val)
+    return output
+  }
+
+  // vx_type(generic_any_1)
+  public static func vx_type<T : Vx_Core.Type_any>(
+    _ type : T
+  ) -> T {
+    let val : any Vx_Core.Type_any = type.vx_type()
+    let output : T = Vx_Core.vx_any_from_any(type, val)
+    return output
+  }
+
+  public static func vx_allowtypes_from_typedef(
+    _ vtypedef : any Vx_Core.Type_typedef
+  ) -> any Vx_Core.Type_typelist {
+    let output : any Vx_Core.Type_typelist = vtypedef.allowtypes()
+    return output
+  }
+
+  public static func vx_and(
+    _ val1 : any Vx_Core.Type_boolean,
+    _ val2 : any Vx_Core.Type_boolean
+  ) -> any Vx_Core.Type_boolean {
+    var output : any Vx_Core.Type_boolean = Vx_Core.c_false
+    if (val1.vx_boolean() && val2.vx_boolean()) {
+      output = Vx_Core.c_true
+    }    
+    return output
+  }
+
+  public static func vx_any_from_any<T : Vx_Core.Type_any>(
+    _ generic_any_1 : T,
+    _ value : any Vx_Core.Type_any
+  ) -> T {
+    guard let output = value as? T else {
+      print("Type mismatch: expected \(T.self), got \(type(of: value))")
+      return generic_any_1.vx_empty() as! T
+    }
+    return output
+  }
+
+  public static func vx_any_from_any_context<T : Vx_Core.Type_any>(
+    _ generic_any_1 : T,
+    _ context : any Vx_Core.Type_context,
+    _ value : any Vx_Core.Type_any
+  ) -> T {
+    guard let output = value as? T else {
+      print("Type mismatch: expected \(T.self), got \(type(of: value))")
+      return generic_any_1.vx_empty() as! T
+    }
+    return output
+  }
+
+  public static func vx_any_from_any_async<T : Vx_Core.Type_any>(
+    _ generic_any_1 : T,
+    _ future : Vx_Core.Future
+  ) -> Vx_Core.Future {
+    let output : Vx_Core.Future = future.map(generic_any_1, { value in
+      return Vx_Core.vx_any_from_any(generic_any_1, value)
+    })
+    return output
+  }
+
+  // vx_any_from_func(generic_any_1, func, args...)
+  public static func vx_any_from_func<T : Vx_Core.Type_any>(
+    _ generic_any_1 : T,
+    _ fnc : any Vx_Core.Type_replfunc,
+    _ anylist : any Vx_Core.Type_anylist
+  ) -> T {
+    let val : any Vx_Core.Type_any = fnc.vx_repl(anylist)
+    let output : T = Vx_Core.f_any_from_any(generic_any_1, val)
+    return output
+  }
+
+  public static func vx_any_from_list<T : Vx_Core.Type_any>(
+    _ generic_any_1 : T,
+    _ values : any Vx_Core.Type_list,
+    _ index : any Vx_Core.Type_int
+  ) -> T {
+    var output : T
+    let intindex : Int = index.vx_int()
+    let intsize : Int = values.vx_list().count
+    if (intindex <= intsize) {
+      let listvalue : [any Vx_Core.Type_any] = values.vx_list()
+      let value : any Vx_Core.Type_any = listvalue[intindex - 1]
+      output = Vx_Core.f_any_from_any(generic_any_1, value)
+    } else {
+      output = Vx_Core.f_empty(generic_any_1)
+    }
+    return output
+  }
+
+  // vx_any_from_list_start_reduce(any-1, list-2, any-1, any<-reduce)
+  public static func vx_any_from_list_start_reduce<
+    T : Vx_Core.Type_any
+  >(
+    _ generic_any_1 : T,
+    _ list : any Vx_Core.Type_list,
+    _ valstart : any Vx_Core.Type_any,
+    _ fn_reduce : any Vx_Core.Func_any_from_reduce
+  ) -> T {
+    var output : T = valstart as! T
+    let listval : [any Vx_Core.Type_any] = list.vx_list()
+    for item in listval {
+      let reduced : any Vx_Core.Type_any = fn_reduce.vx_any_from_reduce(
+        generic_any_1, output, item)
+      output = Vx_Core.vx_any_from_any(
+        generic_any_1, reduced)
+    }
+    return output
+  }
+
+  // vx_any_from_list_start_reduce_next(any-1, list-2, any-1, any<-reduce-next)
+  public static func vx_any_from_list_start_reduce_next<
+    T : Vx_Core.Type_any
+  >(
+    _ generic_any_1 : T,
+    _ list : any Vx_Core.Type_list,
+    _ valstart : any Vx_Core.Type_any,
+    _ fn_reduce_next : any Vx_Core.Func_any_from_reduce_next
+  ) -> T {
+    var output : T = valstart as! T
+    let listval : [any Vx_Core.Type_any] = list.vx_list()
+    var current : any Vx_Core.Type_any = Vx_Core.e_any
+    var first = true
+    for next : any Vx_Core.Type_any in listval {
+      if first {
+        first = false
+      } else {
+        let reduced : any Vx_Core.Type_any = fn_reduce_next.vx_any_from_reduce_next(
+          generic_any_1,
+          output,
+          current,
+          next
+        )
+        output = Vx_Core.vx_any_from_any(generic_any_1, reduced)
+      }
+      current = next
+    }
+    return output
+  }
+
+  // vx_any_from_map(generic_any_1, map, string)
+  public static func vx_any_from_map<
+    T : Vx_Core.Type_any
+  >(
+    _ generic_any_1 : T,
+    _ valuemap : any Vx_Core.Type_map,
+    _ key : any Vx_Core.Type_string
+  ) -> T {
+    var output : T = Vx_Core.vx_empty(generic_any_1)
+    var skey = key.vx_string()
+    if skey.hasPrefix(":") {
+      skey.removeFirst()
+    }
+    let val : any Vx_Core.Type_any = valuemap.vx_map().getOrElse(skey, output)
+    output = Vx_Core.vx_any_from_any(generic_any_1, val)
+    return output
+  }
+
+  // vx_any_from_map_start_reduce(any-1, map-2, any-1, any<-any-key-value)
+  public static func vx_any_from_map_start_reduce<
+    T : Vx_Core.Type_any
+  >(
+    _ generic_any_1 : T,
+    _ map : any Vx_Core.Type_map,
+    _ start : any Vx_Core.Type_any,
+    _ fn_reduce : Vx_Core.Func_any_from_any_key_value
+  ) -> T {
+    var output : T = start as! T
+    var mapval : Vx_Core.Map<any Vx_Core.Type_any> = map.vx_map()
+    for skey : String in mapval.keys() {
+      let key : any Vx_Core.Type_string = Vx_Core.vx_new_string(skey)
+      let value : any Vx_Core.Type_any = mapval.get(skey)
+      let reduced : any Vx_Core.Type_any = fn_reduce.vx_any_from_any_key_value(
+        generic_any_1, output, key, value)
+      output = Vx_Core.vx_any_from_any(
+        generic_any_1, reduced)
+    }
+    return output
+  }
+
+  public static func vx_any_from_struct<T : Vx_Core.Type_any>(
+    _ generic_any_1 : T,
+    _ vstruct : any Vx_Core.Type_struct,
+    _ key : any Vx_Core.Type_string
+  ) -> T {
+    let value : Vx_Core.Type_any = vstruct.vx_any(key)
+    let output : T = Vx_Core.f_any_from_any(generic_any_1, value)    
+    return output
+  }
+
+  // vx_any_first_from_list_fn(generic_any_1, list, fn_any)
+  public static func vx_any_first_from_list_fn(
+    _ generic_any_1 : any Vx_Core.Type_any,
+    _ list : any Vx_Core.Type_list,
+    _ fn_any : (any Vx_Core.Type_any) -> any Vx_Core.Type_any
+  ) -> any Vx_Core.Type_any {
+    let empty : any Vx_Core.Type_any = Vx_Core.f_empty(generic_any_1)
+    var output : any Vx_Core.Type_any = empty
+    let listany : [any Vx_Core.Type_any] = list.vx_list()
+    for any : any Vx_Core.Type_any in listany {
+      let value : any Vx_Core.Type_any = fn_any(any)
+      if !Vx_Core.vx_issame(value, empty) {
+        output = value
+        break
+      }
+    }
+    return output
+  }
+
+  // vx_any_first_from_list_fn(generic_any_1, list, fn_any)
+  public static func vx_any_first_from_list_fn<T : Vx_Core.Type_any>(
+    _ generic_any_1 : T,
+    _ list : any Vx_Core.Type_list,
+    _ fn_any : (any Vx_Core.Type_any) -> T
+  ) -> T {
+    let raw = Vx_Core.vx_any_first_from_list_fn(
+      generic_any_1 as any Vx_Core.Type_any,
+      list,
+      fn_any
+    )
+    return Vx_Core.f_any_from_any(generic_any_1, raw)
+  }
+
+  public static func vx_anylist_from_arraystring(
+    _ arraystring : [String]
+  ) -> any Vx_Core.Type_anylist {
+    var listany : [any Vx_Core.Type_any] = []
+    for svalue : String in arraystring {
+      let value : any Vx_Core.Type_string = Vx_Core.vx_new_string(svalue)
+      listany.append(value)
+    }
+    let output : any Vx_Core.Type_anylist = Vx_Core.vx_new_anylist(
+      listany
+    )
+    return output
+  }
+
+  public static func vx_arrayany_from_anylist(
+    _ list : any Vx_Core.Type_anylist
+  ) -> [any Vx_Core.Type_any] {
+    let listany : [any Vx_Core.Type_any] = list.vx_list()
+    let output : [any Vx_Core.Type_any] = listany
+    return output
+  }
+
+  public static func vx_arraylist_from_array(
+    _ items : [any Vx_Core.Type_any]
+  ) -> [any Vx_Core.Type_any] {
+    let output : [any Vx_Core.Type_any] = items
+    return output
+  }
+
+  public static func vx_async(
+    _ generic_any_1 : any Vx_Core.Type_any,
+    _ value : any Vx_Core.Type_any
+  ) -> Vx_Core.Future {
+    Vx_Core.Future.resolved(generic_any_1, value)
+  }
+
+  public static func vx_async_empty(
+    _ generic_any_1 : any Vx_Core.Type_any
+  ) -> Vx_Core.Future {
+    Vx_Core.Future.resolved(
+      generic_any_1,
+      generic_any_1.vx_empty()
+    )
+  }
+
+  public static func vx_async_from_async(
+    _ generic_any_1 : any Vx_Core.Type_any,
+    _ future : Vx_Core.Future
+  ) -> Vx_Core.Future {
+    future.map(generic_any_1, { value in
+      value
+    })
+  }
+
+  public static func vx_async_from_async_fn(
+    _ generic_any_1 : any Vx_Core.Type_any,
+    _ future : Vx_Core.Future,
+    _ fn : @escaping (any Vx_Core.Type_any) -> any Vx_Core.Type_any
+  ) -> Vx_Core.Future {
+    future.map(
+      generic_any_1,
+      { value in
+        fn(value)
+      }
+    )
+  }
+
+  public static func vx_async_new_from_value(
+    _ value : any Vx_Core.Type_any
+  ) -> Vx_Core.Future {
+    let generic_any_1 : any Vx_Core.Type_any = value.vx_type()
+    return Vx_Core.vx_async(generic_any_1, value)
+  }
+
+  public static func vx_async_arraylist_from_arraylist_async(
+    _ generic_any_1 : any Vx_Core.Type_any,
+    _ listFuture : [Vx_Core.Future]
+  ) -> Vx_Core.Future {
+    return Vx_Core.Future.all(generic_any_1, listFuture)
+  }
+
+  // vx_boolean_from_string_ends(string, string)
+  public static func vx_boolean_from_string_ends(
+    _ text: String,
+    _ ends: String
+  ) -> Bool {
+    return text.hasSuffix(ends)
+  }
+
+  // vx_boolean_from_string_find(string, string)
+  public static func vx_boolean_from_string_find(
+    _ text: String,
+    _ find: String
+  ) -> Bool {
+    return text.contains(find)
+  }
+
+  // vx_boolean_from_string_starts(string, string)
+  public static func vx_boolean_from_string_starts(
+    _ text: String,
+    _ starts: String
+  ) -> Bool {
+    return text.hasPrefix(starts)
+  }
+
+  // vx_boolean_write_from_map_name_value(map, string, any)
+  public static func vx_boolean_write_from_map_name_value(
+    _ valuemap : Vx_Core.Type_map,
+    _ name : Vx_Core.Type_string,
+    _ value : Vx_Core.Type_any
+  ) -> Vx_Core.Type_boolean {
+    return valuemap.vx_set(name, value)
+  }
+
+  // vx_compare(any, any)
+  public static func vx_compare(
+    _ val1 : Vx_Core.Type_any,
+    _ val2 : Vx_Core.Type_any
+  ) -> Vx_Core.Type_int {
+    var intResult = 0
+    if let num1 = val1 as? Vx_Core.Type_number,
+      let num2 = val2 as? Vx_Core.Type_number {
+      let float1 = Vx_Core.vx_new(Vx_Core.t_float, [num1]).vx_float()
+      let float2 = Vx_Core.vx_new(Vx_Core.t_float, [num2]).vx_float()
+      if float1 < float2 {
+        intResult = -1
+      } else if float1 > float2 {
+        intResult = 1
+      }
+    } else {
+      let string1 = Vx_Core.f_string_from_any(val1).vx_string()
+      let string2 = Vx_Core.f_string_from_any(val2).vx_string()
+      let compare = string1.compare(string2)
+      if compare == .orderedDescending {
+        intResult = 1
+      } else if compare == .orderedAscending {
+        intResult = -1
+      }
+    }
+    return Vx_Core.vx_new_int(intResult)
+  }
+
+  // vx_constdef<-any(any)
+  public static func vx_constdef_from_any(
+    _ value: Vx_Core.Type_any
+  ) -> Vx_Core.Type_constdef {
+    return value.vx_constdef()
+  }
+
+  public static func vx_contains(
+    _ text : any Vx_Core.Type_string,
+    _ find : any Vx_Core.Type_string
+  ) -> any Vx_Core.Type_boolean {
+    var output : any Vx_Core.Type_boolean = Vx_Core.e_boolean
+    let check : Bool = vx_boolean_from_string_find(
+      text.vx_string(),
+      find.vx_string())
+    output = Vx_Core.vx_new_boolean(check)
+    return output
+  }
+
+  // vx_contains(list-1, any)
+  public static func vx_contains_1<T: Vx_Core.Type_list>(
+    _ values: T,
+    _ find: Vx_Core.Type_any
+  ) -> Vx_Core.Type_boolean {
+    let listValues = values.vx_list()
+    var result = false
+    for item in listValues {
+      let isEq = Vx_Core.f_eq(item, find)
+      if isEq.vx_boolean() {
+        result = true
+        break
+      }
+    }
+    return Vx_Core.vx_new_boolean(result)
+  }
+
+  public static func vx_divide(
+    _ num1 : any Vx_Core.Type_number,
+    _ num2 : any Vx_Core.Type_number
+  ) -> any Vx_Core.Type_number {
+    var output : any Vx_Core.Type_number = Vx_Core.e_number
+    let float1 : Float = Vx_Core.vx_float_from_number(num1)
+    let float2 : Float = Vx_Core.vx_float_from_number(num2)
+    if (float1 == 0) {
+    } else if (float2 == 0) {
+      output = Vx_Core.c_notanumber
+    } else {
+      let result : Float = float1 / float2
+      output = Vx_Core.vx_new_float(result)
+    }
+    return output
+  }
+
+  public static func vx_eq(
+    _ val1 : any Vx_Core.Type_any,
+    _ val2 : any Vx_Core.Type_any
+  ) -> any Vx_Core.Type_boolean {
+    var output : any Vx_Core.Type_boolean = Vx_Core.e_boolean
+    var isequal : Bool = false
+    if Vx_Core.vx_issame(val1, val2) {
+      isequal = true
+    } else {
+      let strval1 : Vx_Core.Type_string = Vx_Core.f_string_from_any(val1)
+      let strval2 : Vx_Core.Type_string = Vx_Core.f_string_from_any(val2)
+      if strval1.vx_string() == strval2.vx_string() {
+        isequal = true
+      }
+    }
+    output = Vx_Core.vx_new_boolean(isequal)
+    return output
+  }
+
+  public static func vx_eqeq(
+    _ val1 : any Vx_Core.Type_any,
+    _ val2 : any Vx_Core.Type_any
+  ) -> any Vx_Core.Type_boolean {
+    var output : Vx_Core.Type_boolean = Vx_Core.c_false
+    if Vx_Core.vx_issame(val1, val2) {
+      output = Vx_Core.c_true
+    } else if !Vx_Core.vx_issame(val1.vx_msgblock(), Vx_Core.e_msgblock) {
+    } else if !Vx_Core.vx_issame(val2.vx_msgblock(), Vx_Core.e_msgblock) {
+    } else {
+      let type1 : any Vx_Core.Type_any = val1.vx_type()
+      let type2 : any Vx_Core.Type_any = val2.vx_type()
+      if !Vx_Core.vx_issame(type1, type2) {
+      } else if Vx_Core.vx_issame(type1, Vx_Core.t_int) {
+        let valint1 : any Vx_Core.Type_int = val1 as! Vx_Core.Type_int
+        let valint2 : any Vx_Core.Type_int = val1 as! Vx_Core.Type_int
+        if (valint1.vx_int() == valint2.vx_int()) {
+          output = Vx_Core.c_true
+        }
+      } else if Vx_Core.vx_issame(type1, Vx_Core.t_float) {
+        let valfloat1 : any Vx_Core.Type_float = val1 as! Vx_Core.Type_float
+        let valfloat2 : any Vx_Core.Type_float = val2 as! Vx_Core.Type_float
+        if (valfloat1.vx_float() == valfloat2.vx_float()) {
+          output = Vx_Core.c_true
+        }
+      } else if Vx_Core.vx_issame(type1, Vx_Core.t_decimal) {
+        let valdecimal1 : any Vx_Core.Type_decimal = val1 as! Vx_Core.Type_decimal
+        let valdecimal2 : any Vx_Core.Type_decimal = val2 as! Vx_Core.Type_decimal
+        if (valdecimal1.vx_string() == valdecimal2.vx_string()) {
+          output = Vx_Core.c_true
+        }
+      } else if Vx_Core.vx_issame(type1, Vx_Core.t_string) {
+        let valstring1 : any Vx_Core.Type_string = val1 as! Vx_Core.Type_string
+        let valstring2 : any Vx_Core.Type_string = val2 as! Vx_Core.Type_string
+        if (valstring1.vx_string() == valstring2.vx_string()) {
+          output = Vx_Core.c_true
+        }
+      }
+    }
+    return output
+  }
+
+  public static func vx_first_from_list_any_from_any<T : Vx_Core.Type_any>(
+    _ generic_any_1 : T,
+    _ values : any Vx_Core.Type_list,
+    _ fn_any_from_any : any Vx_Core.Func_any_from_any
+  ) -> T {
+    var output = Vx_Core.f_empty(generic_any_1)
+    let listvalue : [any Vx_Core.Type_any] = values.vx_list()
+    for value : any Vx_Core.Type_any in listvalue {
+      if !Vx_Core.vx_issame(value, Vx_Core.c_nothing) {
+        output = fn_any_from_any.vx_any_from_any(generic_any_1, value)
+        break
+      }
+    }
+    return output
+  }
+
+  public static func vx_float_from_int(
+    _ ival : Int
+  ) -> Float {
+    return Float(ival)
+  }
+
+  // vx_float_from_number(number)
+  public static func vx_float_from_number(
+    _ num: Vx_Core.Type_number
+  ) -> Float {
+    var output: Float = 0
+    let type: Vx_Core.Type_any = num.vx_type()
+    if Vx_Core.vx_issame(type, Vx_Core.t_float) {
+      let floatval : Vx_Core.Type_float =
+        Vx_Core.f_any_from_any(Vx_Core.t_float, num)
+      output = floatval.vx_float()
+    } else if Vx_Core.vx_issame(type, Vx_Core.t_int) {
+      let intval : Vx_Core.Type_int =
+        Vx_Core.f_any_from_any(Vx_Core.t_int, num)
+      output = Vx_Core.vx_float_from_int(intval.vx_int())
+    } else if Vx_Core.vx_issame(type, Vx_Core.t_decimal) {
+      let decval : Vx_Core.Type_decimal =
+        Vx_Core.f_any_from_any(Vx_Core.t_decimal, num)
+      output = decval.vx_float()
+    }
+    return output
+  }
+
+  public static func vx_float_from_string(
+    _ text : String
+  ) -> Float {
+    var output : Float = 0
+    if let f = Float(text) {
+      output = f
+    }
+    return output
+  }
+
+  public static func vx_float_from_string(
+    _ text : Vx_Core.Type_string
+  ) -> Vx_Core.Type_float {
+    var output : Vx_Core.Type_float = Vx_Core.e_float
+    let fval : Float = Vx_Core.vx_float_from_string(text.vx_string())
+    output = Vx_Core.vx_new_float(fval)
+    return output
+  }
+
+  public static func vx_funcdef_from_func(
+    _ value : any Vx_Core.Type_func
+  ) -> any Vx_Core.Type_funcdef {
+    return value.vx_funcdef()
+  }
+
+  // vx_global_package_set(string, map<any>, map<any>, map<func>)
+  public static func vx_global_package_set(
+    _ pkgname : String,
+    _ maptype : Vx_Core.Map<any Vx_Core.Type_any>,
+    _ mapconst : Vx_Core.Map<any Vx_Core.Type_any>,
+    _ mapfunc : Vx_Core.Map<any Vx_Core.Type_func>
+  ) {
+    let typemap = Vx_Core.Class_typemap()
+    typemap.vx_p_map = maptype
+    let constmap = Vx_Core.Class_constmap()
+    constmap.vx_p_map = mapconst
+    let funcmap = Vx_Core.Class_funcmap()
+    funcmap.vx_p_map = mapfunc
+    let global = Vx_Core.c_global as! Vx_Core.Class_project
+    var packagemap = global.packagemap() as! Vx_Core.Class_packagemap
+    if Vx_Core.vx_issame(packagemap, Vx_Core.e_packagemap) {
+      packagemap = Vx_Core.Class_packagemap()
+      global.vx_p_packagemap = packagemap
+    }
+    var mappackage = Vx_Core.MapMutable<Vx_Core.Type_package>(
+      packagemap.vx_p_map
+    )
+    let pkg = Vx_Core.Class_package()
+    pkg.vx_p_constmap = constmap
+    pkg.vx_p_typemap = typemap
+    pkg.vx_p_funcmap = funcmap
+    mappackage.put(pkgname, pkg)
+    packagemap.vx_p_map = Vx_Core.vx_mapimmutable(mappackage)
+  }
+
+  public static func vx_if<T : Vx_Core.Type_any>(
+    _ generic_any_1 : T,
+    _ clause : any Vx_Core.Type_boolean,
+    _ thenval : any Vx_Core.Type_any
+  ) -> T {
+    var output : T
+    if (clause.vx_boolean()) {
+      output = Vx_Core.vx_any_from_any(generic_any_1, thenval)
+    } else {
+      output = Vx_Core.f_empty(generic_any_1)
+    }
+    return output
+  }
+
+  public static func vx_if_1<T : Vx_Core.Type_any>(
+    _ generic_any_1 : T,
+    _ clause : any Vx_Core.Type_boolean,
+    _ thenval : any Vx_Core.Type_any,
+    _ elseval : any Vx_Core.Type_any
+  ) -> T {
+    var output : T
+    if (clause.vx_boolean()) {
+      output = Vx_Core.vx_any_from_any(generic_any_1, thenval)
+    } else {
+      output = Vx_Core.vx_any_from_any(generic_any_1, elseval)
+    }
+    return output
+  }
+
+  public static func vx_if_2<T : Vx_Core.Type_any>(
+    _ generic_any_1 : T,
+    _ thenelselist : any Vx_Core.Type_thenelselist
+  ) -> T {
+    var output : T
+    let fn_any : any Vx_Core.Type_any = Vx_Core.vx_any_first_from_list_fn(
+      Vx_Core.t_any_from_func,
+      thenelselist,
+      { (anyvalue : any Vx_Core.Type_any) -> any Vx_Core.Type_any in
+        var fnany : any Vx_Core.Func_any_from_func = Vx_Core.e_any_from_func
+        if let thenelse = anyvalue as? any Vx_Core.Type_thenelse {
+          let code : any Vx_Core.Type_string = thenelse.code()
+          let scode : String = code.vx_string()
+          if scode == ":then" {
+            let fn_cond : any Vx_Core.Func_boolean_from_func = thenelse.fn_cond()
+            let cond : any Vx_Core.Type_boolean = fn_cond.vx_boolean_from_func()
+            if cond.vx_boolean() == true {
+              fnany = thenelse.fn_any()
+            }
+          } else if scode == ":else" {
+            fnany = thenelse.fn_any()
+          }
+        }
+        return fnany
+      }
+    )
+    if Vx_Core.vx_issame(fn_any, Vx_Core.e_any_from_func) {
+      output = Vx_Core.f_empty(generic_any_1)      
+    } else if let fn = fn_any as? Vx_Core.Func_any_from_func {
+      output = fn.vx_any_from_func(generic_any_1)
+    } else {
+      output = Vx_Core.f_empty(generic_any_1)      
+    }
+    return output
+  }
+
+  public static func vx_int_from_float(
+    _ fval : Float
+  ) -> Int {
+    let output = Int(fval)
+    return output
+  }
+
+  public static func vx_int_from_string(
+    _ text : String
+  ) -> Int {
+    var output : Int = 0
+    if let i = Int(text) {
+      output = i
+    }
+    return output
+  }
+
+  public static func vx_int_from_string(
+    _ text : Vx_Core.Type_string
+  ) -> Vx_Core.Type_int {
+    var output : Vx_Core.Type_int = Vx_Core.e_int
+    let stext : String = text.vx_string()
+    switch stext {
+    case "notanumber":
+      output = Vx_Core.c_notanumber
+    case "infinity":
+      output = Vx_Core.c_infinity
+    case "neginfinity":
+      output = Vx_Core.c_neginfinity
+    default:
+      let ival : Int = Vx_Core.vx_int_from_string(text.vx_string())
+      output = Vx_Core.vx_new_int(ival)
+    }
+    return output
+  }
+
+  public static func vx_is_empty(
+    _ text : Vx_Core.Type_string
+  ) -> Vx_Core.Type_boolean {
+    var output : any Vx_Core.Type_boolean
+    if (text.vx_string().count == 0) {
+      output = Vx_Core.c_true
+    } else {
+      output = Vx_Core.c_false
+    }
+    return output
+  }
+
+  public static func vx_is_empty_1(
+    _ value : any Vx_Core.Type_any
+  ) -> Vx_Core.Type_boolean {
+    var output : any Vx_Core.Type_boolean
+    if (Vx_Core.vx_issame(value, value.vx_empty())) {
+      output = Vx_Core.c_true
+    } else {
+      output = Vx_Core.c_false
+    }
+    return output
+  }
+
+  public static func vx_is_endswith(
+    _ text : Vx_Core.Type_string,
+    _ find : Vx_Core.Type_string
+  ) -> Vx_Core.Type_boolean {
+    var output : any Vx_Core.Type_boolean
+    let stext : String = text.vx_string()
+    let sfind : String = find.vx_string()
+    if stext.hasSuffix(sfind) {
+      output = Vx_Core.c_true
+    } else {
+      output = Vx_Core.c_false
+    }
+    return output
+  }
+
+  // vx_is_float(string)
+  public static func vx_is_float(
+    _ text : String
+  ) -> Bool {
+    return Double(text) != nil
+  }
+
+  public static func vx_is_float(
+    _ value : any Vx_Core.Type_any
+  ) -> Vx_Core.Type_boolean {
+    var output : any Vx_Core.Type_boolean = Vx_Core.c_false
+    if value is Vx_Core.Type_number {
+      output = Vx_Core.c_true
+    } else if let valuestring = value as? any Vx_Core.Type_string {
+      let isfloat : Bool = Vx_Core.vx_is_float(valuestring.vx_string())
+      if isfloat {
+        output = Vx_Core.c_true
+      }
+    }
+    return output
+  }
+
+  public static func vx_is_func(
+    _ value : any Vx_Core.Type_any
+  ) -> Vx_Core.Type_boolean {
+    var output : any Vx_Core.Type_boolean
+    if value is Vx_Core.Type_func {
+      output = Vx_Core.c_true
+    } else {
+      output = Vx_Core.c_false
+    }
+    return output
+  }
+
+  // vx_is_int(string)
+  public static func vx_is_int(
+    _ text : String
+  ) -> Bool {
+    var output : Bool = false
+    if text == "notanumber" {
+      output = true
+    } else if text == "infinity" {
+      output = true
+    } else if text == "neginfinity" {
+      output = true
+    } else {
+      output = Int(text) != nil
+    }
+    return output
+  }
+
+  // vx_is_int(any)
+  public static func vx_is_int(
+    _ value : any Vx_Core.Type_any
+  ) -> Vx_Core.Type_boolean {
+    var result : Vx_Core.Type_boolean = Vx_Core.c_false
+    if Vx_Core.vx_issame(value, Vx_Core.c_infinity) {
+      result = Vx_Core.c_true
+    } else if Vx_Core.vx_issame(value, Vx_Core.c_neginfinity) {
+      result = Vx_Core.c_true
+    } else if Vx_Core.vx_issame(value, Vx_Core.c_notanumber) {
+      result = Vx_Core.c_true
+    } else if value is Vx_Core.Type_int {
+      result = Vx_Core.c_true
+    } else if let valfloat = value as? Vx_Core.Type_float {
+      let floatval : Float = valfloat.vx_float()
+      let intval : Int = Vx_Core.vx_int_from_float(floatval)
+      if floatval == Vx_Core.vx_float_from_int(intval) {
+        result = Vx_Core.c_true
+      }
+    } else if let valdec = value as? Vx_Core.Type_decimal {
+      let strval : String = valdec.vx_string()
+      let floatval : Float = Vx_Core.vx_float_from_string(strval)
+      let intval : Int = Vx_Core.vx_int_from_float(floatval)
+      if floatval == Vx_Core.vx_float_from_int(intval) {
+        result = Vx_Core.c_true
+      }
+    } else if let valstr = value as? Vx_Core.Type_string {
+      let strval : String = valstr.vx_string()
+      if Vx_Core.vx_is_int(strval) {
+        result = Vx_Core.c_true
+      }
+    }
+    return result
+  }
+
+  public static func vx_issame(
+    _ val1 : Any?,
+    _ val2 : Any?
+  ) -> Bool {
+    var output : Bool = false
+    if (val1 == nil) || (val2 == nil) {
+      output = (val1 == nil) && (val2 == nil)
+    } else if let oval1 = val1 as AnyObject?, let oval2 = val2 as AnyObject? {
+      output = (oval1 === oval2)
+    } else {
+      switch (val1, val2) {
+      case let (x as String, y as String):
+        output = (x == y)
+      case let (x as Int, y as Int):
+        output = (x == y)
+      case let (x as Float, y as Float):
+        output = (x == y)
+      case let (x as Double, y as Double):
+        output = (x == y)
+      case let (x as Bool, y as Bool):
+        output = (x == y)
+      default:
+        break
+      }
+    }
+    return output
+  }
+
+  public static func vx_length(
+    _ text : Vx_Core.Type_string
+  ) -> any Vx_Core.Type_int {
+    var output : any Vx_Core.Type_int = Vx_Core.e_int
+    let len : Int = text.vx_string().count
+    output = Vx_Core.vx_new_int(len)
+    return output
+  }
+
+  public static func vx_length_1(
+    _ values : any Vx_Core.Type_list
+  ) -> any Vx_Core.Type_int {
+    var output : any Vx_Core.Type_int = Vx_Core.e_int
+    let intresult : Int = values.vx_list().count
+    output = Vx_Core.vx_new_int(intresult)
+    return output
+  }
+
+  public static func vx_let<T : Vx_Core.Type_any>(
+    _ generic_any_1 : T,
+    _ fn_any : any Vx_Core.Func_any_from_func
+  ) -> T {
+    return fn_any.vx_any_from_func(generic_any_1)
+  }
+
+  public static func vx_let_async<T : Vx_Core.Type_any>(
+    _ generic_any_1 : T,
+    _ fn_any_async : any Vx_Core.Func_any_from_func_async
+  ) -> Vx_Core.Future {
+    return fn_any_async.vx_any_from_func_async(generic_any_1)
+  }
+
+  public static func vx_list_from_list_1<X : Vx_Core.Type_list>(
+    _ generic_list_1 : X,
+    _ values : any Vx_Core.Type_list,
+    _ fn_any_from_any : any Vx_Core.Func_any_from_any
+  ) -> X {
+    var output : X = Vx_Core.f_empty(generic_list_1)
+    let list_result = values.vx_list().map {
+      fn_any_from_any.vx_any_from_any(Vx_Core.t_any, $0)
+    }
+    output = Vx_Core.f_any_from_any(
+      generic_list_1,
+      generic_list_1.vx_new(list_result))
+    return output
+  }
+
+  public static func vx_list_from_list_async<X : Vx_Core.Type_list>(
+    _ generic_list_1 : X,
+    _ values : any Vx_Core.Type_list,
+    _ fn_any_from_any_async : any Vx_Core.Func_any_from_any_async
+  ) -> Vx_Core.Future {
+    let listany : [any Vx_Core.Type_any] = values.vx_list()
+    var futures : [Vx_Core.Future] = []
+    for value in listany {
+      let future = fn_any_from_any_async.vx_any_from_any_async(
+        Vx_Core.t_any, value)
+      futures.append(future)
+    }
+    let output : Vx_Core.Future = Vx_Core.vx_async_arraylist_from_arraylist_async(
+      generic_list_1, futures)
+    return output
+  }
+
+  // vx_list_from_list_intany(generic_list_1, list-2, any<-int-any)
+  public static func vx_list_from_list_intany<X : Vx_Core.Type_list>(
+    _ generic_list_1 : X,
+    _ valuelist : any Vx_Core.Type_list,
+    _ fn_any_from_int_any : any Vx_Core.Func_any_from_int_any
+  ) -> X {
+    var output : X
+    let listany : [any Vx_Core.Type_any] = valuelist.vx_list()
+    if listany.count == 0 {
+      output = Vx_Core.f_empty(generic_list_1)
+    } else {
+      var listout : [any Vx_Core.Type_any] = []
+      var i : Int = 0
+      for value in listany {
+        i += 1
+        let vali : any Vx_Core.Type_int = Vx_Core.vx_new_int(i)
+        let outval : any Vx_Core.Type_any = fn_any_from_int_any.vx_any_from_int_any(
+          Vx_Core.t_any, vali, value
+        )
+        listout.append(outval)
+      }
+      output = Vx_Core.vx_new_list(
+        generic_list_1,
+        listout
+      )
+    }
+    return output
+  }
+
+  public static func vx_list_from_map_1<X : Vx_Core.Type_list>(
+    _ generic_list_1 : X,
+    _ valuemap : any Vx_Core.Type_map,
+    _ fn_any_from_key_value : any Vx_Core.Func_any_from_key_value
+  ) -> X {
+    let map_value : Vx_Core.Map<any Vx_Core.Type_any> =
+      valuemap.vx_map()
+    let fn_key_value : (String, any Vx_Core.Type_any) -> any Vx_Core.Type_any = {
+      (key : String, value : any Vx_Core.Type_any) -> any Vx_Core.Type_any in
+      let valkey : Vx_Core.Type_string =
+        Vx_Core.vx_new_string(key)
+      let output_1 : any Vx_Core.Type_any =
+        fn_any_from_key_value.vx_any_from_key_value(
+          Vx_Core.t_any,
+          valkey,
+          value
+        )
+      return output_1
+    }
+    let listresult : [any Vx_Core.Type_any] =
+      Vx_Core.arraylist_from_linkedhashmap_fn(
+        map_value,
+        fn_key_value
+      )
+    let anylist : any Vx_Core.Type_any =
+      generic_list_1.vx_new(listresult)
+    let output : X =
+      Vx_Core.f_any_from_any(
+        generic_list_1,
+        anylist
+      )
+    return output
+  }
+
+  // vx_log(_ values : Any...)
+  public static func vx_log(
+    _ values : Any...
+  ) {
+    for value in values {
+      var text = ""
+      if let valstring = value as? Vx_Core.Type_string {
+        text = valstring.vx_string()
+      } else if let valany = value as? Vx_Core.Type_any {
+        let valstring2 = Vx_Core.f_string_from_any(valany)
+        text = valstring2.vx_string()
+      } else {
+        text = Vx_Core.vx_string_from_object(value)
+      }
+      print(text)
+    }
+  }
+
+  // vx_log(_ value : Vx_Core.Type_any)
+  public static func vx_log(
+    _ value : any Vx_Core.Type_any
+  ) -> any Vx_Core.Type_any {
+    let text : String = vx_string_from_any(value)
+    print(text)
+    return value
+  }
+
+  // vx_log_1(_ text : String, value : Vx_Core.Type_any)
+  public static func vx_log_1<T : Vx_Core.Type_any>(
+    _ generic_any_1 : T,
+    _ text : String,
+    _ value : any Vx_Core.Type_any
+  ) -> T {
+    let svalue : String = vx_string_from_any(value)
+    print(text)
+    print(svalue)
+    let output : T = Vx_Core.vx_any_from_any(generic_any_1, value)
+    return output
+  }
+
+  // vx_log_1(_ text : String, value : Vx_Core.Type_any)
+  public static func vx_log_1<T : Vx_Core.Type_any>(
+    _ generic_any_1 : T,
+    _ text : Vx_Core.Type_string,
+    _ value : any Vx_Core.Type_any
+  ) -> T {
+    let stext : String = text.vx_string()
+    let output : T = Vx_Core.vx_log_1(generic_any_1, stext, value)
+    return output
+  }
+
+  public static func vx_map_from_list<N : Vx_Core.Type_map>(
+    _ generic_map_1 : N,
+    _ vallist : any Vx_Core.Type_list,
+    _ fn_any_from_any : any Vx_Core.Func_any_from_any
+  ) -> N {
+    let listval : [any Vx_Core.Type_any] = vallist.vx_list()
+    let fn_string_from_any : (any Vx_Core.Type_any) -> Vx_Core.Type_string = {
+      (value : any Vx_Core.Type_any) -> Vx_Core.Type_string in
+      let output_string : Vx_Core.Type_string = fn_any_from_any.vx_any_from_any(
+        Vx_Core.t_string, value
+      )
+      return output_string
+    }
+    let mapresult : Vx_Core.Map<any Vx_Core.Type_any> = Vx_Core.vx_map_from_list_fn(
+      listval, fn_string_from_any
+    )
+    let mapval : any Vx_Core.Type_map = generic_map_1.vx_new_from_map(
+      mapresult
+    )
+    let output = Vx_Core.f_any_from_any(
+      generic_map_1,
+      mapval
+    )
+    return output
+  }
+
+  public static func vx_map_from_list_fn<T>(
+    _ listval : [T],
+    _ fn_any_from_any : (T) -> Vx_Core.Type_string
+  ) -> Vx_Core.Map<T> {
+    var map : Vx_Core.MapMutable<T> = Vx_Core.MapMutable<T>()
+    for value : T in listval {
+      let valkey : any Vx_Core.Type_string = fn_any_from_any(value)
+      let key : String = valkey.vx_string()
+      map.put(key, value)
+    }
+    let output = Vx_Core.vx_mapimmutable<T>(map)
+    return output
+  }
+
+  public static func vx_map_from_map_1<N : Vx_Core.Type_map>(
+    _ generic_map_1 : N,
+    _ valuemap : any Vx_Core.Type_map,
+    _ fn_any_from_key_value : any Vx_Core.Func_any_from_key_value
+  ) -> N {
+    let output : N = Vx_Core.vx_map_from_map_fn(
+      generic_map_1,
+      valuemap,
+      fn_any_from_key_value)
+    return output
+  }
+
+  // vx_map_from_map_fn(generic_map, map, fn_any_from_key_value)
+  public static func vx_map_from_map_fn<T : Vx_Core.Type_map>(
+    _ generic_map_1 : T,
+    _ valuemap : any Vx_Core.Type_map,
+    _ fn_any_from_key_value : any Vx_Core.Func_any_from_key_value
+  ) -> T {
+    var output : T = Vx_Core.f_empty(generic_map_1)
+    let mapvalue : Vx_Core.Map<any Vx_Core.Type_any> = valuemap.vx_map()
+    if (mapvalue.size() > 0) {
+      let typedef : Vx_Core.Type_typedef = Vx_Core.f_typedef_from_any(
+        generic_map_1
+      )
+      let allowtypes : Vx_Core.Type_typelist = Vx_Core.f_allowtypes_from_typedef(
+        typedef
+      )
+      let lallowtypes : [any Vx_Core.Type_any] = allowtypes.vx_list()
+      let keys : [String] = mapvalue.keys()
+      var mapmutable : Vx_Core.MapMutable<any Vx_Core.Type_any> =
+        Vx_Core.MapMutable<any Vx_Core.Type_any>()
+      for key : String in keys {
+        let valuemaybe : Vx_Core.Type_any? = mapvalue.get(key)
+        if let value : any Vx_Core.Type_any = valuemaybe {
+          let stringkey : Vx_Core.Type_string = Vx_Core.vx_new_string(key)
+          let chgvalue : Vx_Core.Type_any = fn_any_from_key_value.vx_any_from_key_value(
+            Vx_Core.t_any, stringkey, value
+          )
+          let chgtype : Vx_Core.Type_any = chgvalue.vx_type()
+          if lallowtypes.contains(where: { Vx_Core.vx_issame($0, chgtype) }) {
+            mapmutable.put(key, chgvalue)
+          }
+        }
+      }
+      let map = Vx_Core.vx_mapimmutable(mapmutable)
+      output = Vx_Core.vx_new_map(
+        generic_map_1, map
+      )
+    }
+    return output
+  }
+
+  public static func vx_minus_1(
+    _ num1 : any Vx_Core.Type_number,
+    _ num2 : any Vx_Core.Type_number
+  ) -> any Vx_Core.Type_number {
+    let result : Float = Vx_Core.vx_float_from_number(num1) - Vx_Core.vx_float_from_number(num2)
+    return Vx_Core.vx_new_float(result)    
+  }
+
+  public static func vx_minus(
+    _ num1 : any Vx_Core.Type_int,
+    _ num2 : any Vx_Core.Type_int
+  ) -> any Vx_Core.Type_int {
+    var output : any Vx_Core.Type_int = Vx_Core.e_int
+    let result : Int = num1.vx_int() - num2.vx_int()
+    output = Vx_Core.vx_new_int(result)
+    return output
+  }
+
+  public static func vx_multiply(
+    _ num1 : any Vx_Core.Type_int,
+    _ num2 : any Vx_Core.Type_int
+  ) -> any Vx_Core.Type_int {
+    var output : any Vx_Core.Type_int = Vx_Core.e_int
+    let result : Int = num1.vx_int() * num2.vx_int()
+    output = Vx_Core.vx_new_int(result)
+    return output
+  }
+
+  public static func vx_multiply_1(
+    _ num1 : any Vx_Core.Type_number,
+    _ num2 : any Vx_Core.Type_number
+  ) -> any Vx_Core.Type_number {
+    var output : any Vx_Core.Type_number = Vx_Core.e_number
+    let result : Float = Vx_Core.vx_float_from_number(num1) * Vx_Core.vx_float_from_number(num2)
+    output = Vx_Core.vx_new_float(result)
+    return output
+  }
+
+  // vx_msg_from_error(text: String)
+  public static func vx_msg_from_error(
+    _ text: String
+  ) -> Vx_Core.Type_msg {
+    let output = Vx_Core.Class_msg()
+    output.vx_p_text = Vx_Core.vx_new_string(text)
+    output.vx_p_severity = Vx_Core.c_msg_severe
+    return output
+  }
+
+  // vx_msg_from_error(path: String, code: String, detail: Type_any)
+  public static func vx_msg_from_error(
+    _ path : String,
+    _ code : String,
+    _ detail : any Vx_Core.Type_any
+  ) -> Vx_Core.Type_msg {
+    let output = Vx_Core.Class_msg()
+    output.vx_p_path = Vx_Core.vx_new_string(path)
+    output.vx_p_code = Vx_Core.vx_new_string(code)
+    output.vx_p_detail = detail
+    output.vx_p_severity = Vx_Core.c_msg_severe
+    return output
+  }
+
+  // vx_msg_from_exception(text : String, err : Error)
+  public static func vx_msg_from_exception(
+    _ text : String,
+    _ err : Error
+  ) -> Vx_Core.Type_msg {
+    let output = Vx_Core.Class_msg()
+    output.vx_p_text = Vx_Core.vx_new_string(text)
+    output.vx_p_severity = Vx_Core.c_msg_severe
+    output.err = err
+    Vx_Core.vx_log(output)
+    return output
+  }
+
+  // vx_msgblock_from_any(value : Type_any)
+  public static func vx_msgblock_from_any(
+    _ value: any Vx_Core.Type_any
+  ) -> Vx_Core.Type_msgblock {
+    return value.vx_msgblock()
+  }
+
+  // vx_msgblock_from_copy_arrayval(copy : Type_any, values : Type_any...)
+  public static func vx_msgblock_from_copy_arrayval(
+    _ copy : any Vx_Core.Type_any,
+    _ values : [Any]
+  ) -> Vx_Core.Type_msgblock {
+    var output : Vx_Core.Type_msgblock = Vx_Core.e_msgblock
+    var listmsgblock : [Vx_Core.Type_msgblock] = []
+    let msgblock = copy.vx_msgblock()
+    if !Vx_Core.vx_issame(msgblock, Vx_Core.e_msgblock) {
+       listmsgblock.append(msgblock)
+    }
+    for subobj in values {
+      if let subval = subobj as? any Vx_Core.Type_any {
+        let submsgblock = subval.vx_msgblock()
+        if !Vx_Core.vx_issame(submsgblock, Vx_Core.e_msgblock) {
+            listmsgblock.append(submsgblock)
+        }
+      }
+    }
+    switch listmsgblock.count {
+    case 0:
+      break
+    case 1:
+      output = listmsgblock[0]
+    default:
+      let msgblocks = Vx_Core.Class_msgblocklist()
+      msgblocks.vx_p_list = listmsgblock
+      let outputclass = Vx_Core.Class_msgblock()
+      outputclass.vx_p_msgblocks = msgblocks
+      output = outputclass
+    }
+    return output
+  }
+
+  public static func vx_new_anylist(
+    _ listany : [any Vx_Core.Type_any]
+  ) -> any Vx_Core.Type_anylist {
+    var output : any Vx_Core.Class_anylist = Vx_Core.Class_anylist()
+    output.vx_p_list = Vx_Core.vx_listimmutable(listany)
+    return output
+  }
+
+  public static func vx_new_boolean(
+    _ isval : Bool
+  ) -> any Vx_Core.Type_boolean {
+    return isval ? Vx_Core.c_true : Vx_Core.c_false
+  }
+
+  public static func vx_new_decimal(
+    _ text: String
+  ) -> any Vx_Core.Type_decimal {
+    var output : any Vx_Core.Type_decimal = Vx_Core.e_decimal
+    if text == "0" || text == "0.0" {
+    } else {
+      var work = Vx_Core.Class_decimal()
+      work.vxdecimal = text
+      output = work
+    }
+    return output
+  }
+
+  public static func vx_new_float(
+    _ fval: Float
+  ) -> any Vx_Core.Type_float {
+    var output : any Vx_Core.Type_float = Vx_Core.e_float
+    if fval != 0 {
+      var work = Vx_Core.Class_float()
+      work.vxfloat = fval
+      output = work
+    }
+    return output
+  }
+
+  public static func vx_new_from_type<T : Vx_Core.Type_any>(
+    _ type : T,
+    _ values : any Vx_Core.Type_anylist
+  ) -> T {
+    let arrayany : [any Vx_Core.Type_any] = Vx_Core.vx_arrayany_from_anylist(
+      values
+    )
+    let anyvalue : any Vx_Core.Type_any = type.vx_new(arrayany)
+    let output : T = Vx_Core.vx_any_from_any(type, anyvalue)
+    return output
+  }
+
+  public static func vx_new_int(
+    _ ival: Int
+  ) -> any Vx_Core.Type_int {
+    var output : any Vx_Core.Type_int = Vx_Core.e_int
+    if ival != 0 {
+      var work = Vx_Core.Class_int()
+      work.vxint = ival
+      output = work
+
+    }
+    return output
+  }
+
+  // vx_new_list(T, [any])
+  public static func vx_new_list<T : Vx_Core.Type_list>(
+    _ generic_list_1 : T,
+    _ listval : [any Vx_Core.Type_any]
+  ) -> T {
+    let anylist : Vx_Core.Type_any = generic_list_1.vx_new(listval)
+    return Vx_Core.f_any_from_any(generic_list_1, anylist)
+  }
+
+  // vx_new_map(T, [String: any])
+  public static func vx_new_map<T : Vx_Core.Type_map>(
+    _ generic_map_1 : T,
+    _ mapval : Vx_Core.Map<any Vx_Core.Type_any>
+  ) -> T {
+    let anymap : any Vx_Core.Type_any = generic_map_1.vx_new_from_map(mapval)
+    return Vx_Core.f_any_from_any(generic_map_1, anymap)
+  }
+
+  public static func vx_new_string(
+    _ text : String
+  ) -> any Vx_Core.Type_string {
+    var output : any Vx_Core.Type_string = Vx_Core.e_string
+    if !text.isEmpty {
+      var work = Vx_Core.Class_string()
+      work.vxstring = text
+      output = work
+    }
+    return output
+  }
+
+  public static func vx_not(
+    _ value : any Vx_Core.Type_boolean
+  ) -> any Vx_Core.Type_boolean {
+    var output : any Vx_Core.Type_boolean = Vx_Core.e_boolean
+    output = Vx_Core.vx_new_boolean(!value.vx_boolean())
+    return output
+  }
+
+  public static func vx_or(
+    _ val1 : Vx_Core.Type_boolean,
+    _ val2 : Vx_Core.Type_boolean
+  ) -> any Vx_Core.Type_boolean {
+    var output : Vx_Core.Type_boolean = Vx_Core.c_false
+    if (val1.vx_boolean() || val2.vx_boolean()) {
+      output = Vx_Core.c_true
+    }
+    return output
+  }
+
+  public static func vx_plus(
+    _ num1 : any Vx_Core.Type_int,
+    _ num2 : any Vx_Core.Type_int
+  ) -> any Vx_Core.Type_int {
+    var output : any Vx_Core.Type_int = Vx_Core.e_int
+    let result : Int = num1.vx_int() + num2.vx_int()
+    output = Vx_Core.vx_new_int(result)
+    return output
+  }
+
+  public static func vx_plus_1(
+    _ num1 : any Vx_Core.Type_number,
+    _ num2 : any Vx_Core.Type_number
+  ) -> any Vx_Core.Type_number {
+    let result : Float = Vx_Core.vx_float_from_number(num1) + Vx_Core.vx_float_from_number(num2)
+    let output : any Vx_Core.Type_number = Vx_Core.vx_new_float(result)    
+    return output
+  }
+
+  public static func vx_resolve<T : Vx_Core.Type_any>(
+    _ generic_any_1 : T,
+    _ fn_any : any Vx_Core.Func_any_from_func
+  ) -> T {
+    var output : T = Vx_Core.f_empty(generic_any_1)
+    if fn_any == nil {
+    } else if Vx_Core.vx_issame(fn_any, Vx_Core.e_any_from_func) {
+    } else {
+      let value : Vx_Core.Type_any = fn_any.vx_any_from_func(generic_any_1)
+      output = Vx_Core.vx_any_from_any(generic_any_1, value)
+    }
+    return output    
+  }
+
+  public static func vx_resolve_1<T : Vx_Core.Type_any>(
+    _ generic_any_1 : T,
+    _ fn_any : any Vx_Core.Func_any_from_func
+  ) -> T {
+    var output : T = Vx_Core.f_empty(generic_any_1)
+    if (fn_any == nil) {
+    } else if (Vx_Core.vx_issame(fn_any, Vx_Core.e_any_from_func)) {
+    } else {
+      output = fn_any.vx_any_from_func(generic_any_1)
+    }
+    return output
+  }
+
+  public static func vx_resolve_async<T : Vx_Core.Type_any>(
+    _ generic_any_1 : T,
+    _ fn_any : any Vx_Core.Func_any_from_func_async
+  ) -> Vx_Core.Future {
+    var output : Vx_Core.Future = Vx_Core.Future(
+      Vx_Core.vx_empty(generic_any_1))
+    if fn_any == nil {
+    } else if Vx_Core.vx_issame(fn_any, Vx_Core.e_any_from_func_async) {
+    } else {
+      output = fn_any.vx_any_from_func_async(generic_any_1)
+    }
+    return output    
+  }
+
+  public static func vx_string_from_any(
+    _ value : any Vx_Core.Type_any
+  ) -> String {
+    return Vx_Core.vx_string_from_any_indent(value, 0, false)
+  }
+
+  public static func vx_string_from_any_indent(
+    _ value : any Vx_Core.Type_any,
+    _ indent : Int,
+    _ linefeed : Bool
+  ) -> String {
+    let indenttext : String = Vx_Core.vx_string_repeat(" ", indent)
+    var output : String = ""
+    if indent > 50 {
+      output = "Error: Max Depth Exceeded"
+    } else if Vx_Core.vx_issame(value, value.vx_type()) {
+      if let valuefunc = value as? Vx_Core.Type_func {
+        let funcdef = valuefunc.vx_funcdef()
+        output =
+          funcdef.pkgname().vx_string() + "/" +
+          funcdef.name().vx_string()
+      } else {
+        let typedef = value.vx_typedef()
+        var typedefname : String = typedef.name().vx_string()
+        let pkgname = typedef.pkgname().vx_string()
+        if (pkgname != "vx/core") {
+          typedefname = pkgname + "/" + typedefname
+        }
+        output = typedefname
+      }
+    } else if let valbool = value as? Vx_Core.Type_boolean {
+      output = valbool.vx_boolean() ? "true" : "false"
+    } else if let valdec = value as? Vx_Core.Type_decimal {
+      output = valdec.vx_string()
+    } else if let valfloat = value as? Vx_Core.Type_float {
+      output = String(valfloat.vx_float())
+      if output.hasSuffix(".0") {
+        output.removeLast(2)
+      }
+    } else if let valint = value as? Vx_Core.Type_int {
+      if Vx_Core.vx_issame(value, Vx_Core.c_notanumber) {
+        output = "notanumber"
+      } else if Vx_Core.vx_issame(value, Vx_Core.c_infinity) {
+        output = "infinity"
+      } else if Vx_Core.vx_issame(value, Vx_Core.c_neginfinity) {
+        output = "neginfinity"
+      } else {
+        output = String(valint.vx_int())
+      }
+    } else if let valstring = value as? Vx_Core.Type_string {
+      var sval = valstring.vx_string()
+      if !sval.contains("\"") {
+        sval = "\"\(sval)\""
+      } else {
+        sval = "`\(sval)`"
+      }
+      if valstring.vx_msgblock() !== Vx_Core.e_msgblock {
+        let msgtext = Vx_Core.vx_string_from_any_indent(
+          valstring.vx_msgblock(), indent, linefeed)
+        output  = "\n\(indenttext)(string"
+        output += "\n\(indenttext) \(sval)"
+        output += "\n\(indenttext) \(msgtext))"
+      } else {
+        output = sval
+      }
+    } else if value.vx_constdef() !== Vx_Core.e_constdef {
+      let constdef = value.vx_constdef()
+      let pkg = constdef.pkgname().vx_string()
+      let name = constdef.name().vx_string()
+      output = (pkg == "vx/core") ? name : "\(pkg)/\(name)"
+    } else if let vallist = value as? Vx_Core.Type_list {
+      let typedef = value.vx_typedef()
+      var typedefname : String = typedef.name().vx_string()
+      let pkgname = typedef.pkgname().vx_string()
+      if (pkgname != "vx/core") {
+        typedefname = pkgname + "/" + typedefname
+      }
+      let indent2 = indent + 1
+      for valsub in vallist.vx_list() {
+        let valtext = Vx_Core.vx_string_from_any_indent(valsub, indent2, linefeed)
+        output += "\n \(indenttext)\(valtext)"
+      }
+      if vallist.vx_msgblock() !== Vx_Core.e_msgblock {
+        let msgtext = Vx_Core.vx_string_from_any_indent(
+          vallist.vx_msgblock(), indent2, linefeed)
+        output += "\n\(indenttext) :msgblock\n  \(indenttext)\(msgtext)"
+      }
+      output = "(\(typedefname)\(output))"
+    } else if let valmap = value as? Vx_Core.Type_map {
+      let typedef = value.vx_typedef()
+      var typedefname : String = typedef.name().vx_string()
+      let pkgname = typedef.pkgname().vx_string()
+      if (pkgname != "vx/core") {
+        typedefname = pkgname + "/" + typedefname
+      }
+      let indent2 = indent + 2
+      for skey in valmap.vx_map().keys() {
+        var key = skey
+        let valsub = valmap.vx_map().get(key)
+        if !key.hasPrefix(":") {
+          key = ":\(key)"
+        }
+        var strval = Vx_Core.vx_string_from_any_indent(valsub, indent2, linefeed)
+        if strval.contains("\n") {
+          strval = "\n  \(indenttext)\(strval)"
+        } else {
+          strval = " \(strval)"
+        }
+        output += "\n\(indenttext) \(key)\(strval)"
+      }
+      if valmap.vx_msgblock() !== Vx_Core.e_msgblock {
+        let msgtext = Vx_Core.vx_string_from_any_indent(
+          valmap.vx_msgblock(), indent2, linefeed)
+        output += "\n\(indenttext) :msgblock\n  \(indenttext)\(msgtext)"
+      }
+      output = "(\(typedefname)\(output))"
+    } else if let valstruct = value as? Vx_Core.Type_struct {
+      let typedef = value.vx_typedef()
+      var typedefname : String = typedef.name().vx_string()
+      let pkgname = typedef.pkgname().vx_string()
+      if (pkgname != "vx/core") {
+        typedefname = pkgname + "/" + typedefname
+      }
+      var indentint2 = indent
+      indentint2 += 2
+      let mapval2 = valstruct.vx_map()
+      let keys2 : [String] = mapval2.keys()
+      for skey in keys2 {
+        var key : String = skey
+        let valsub2 = mapval2.getOrElse(
+          key, Vx_Core.e_any
+        )
+        if !Vx_Core.f_is_empty_1(valsub2).vx_boolean() {
+          if !key.starts(with: ":") {
+            key = ":" + key
+          }
+          var strval2 : String = Vx_Core.vx_string_from_any_indent(
+            valsub2, indentint2, linefeed
+          )
+          if strval2.contains("\n") {
+            strval2 = "\n  " + indenttext + strval2
+          } else {
+            strval2 = " " + strval2
+          }
+          output += "\n" + indenttext + " " + key + strval2
+        }
+      }
+      if !Vx_Core.vx_issame(valstruct.vx_msgblock(), Vx_Core.e_msgblock) {
+        let msgtext2 : String = Vx_Core.vx_string_from_any_indent(
+          valstruct.vx_msgblock(), indentint2, linefeed
+        )
+        output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext2
+      }
+      output = "(" + typedefname + output + ")"
+    } else if let valfunc = value as? Vx_Core.Type_func {
+      let funcname = Vx_Core.f_funcname_from_funcdef(
+        valfunc.vx_funcdef()
+      ).vx_string()
+      output = funcname
+      if !Vx_Core.vx_issame(valfunc.vx_msgblock(), Vx_Core.e_msgblock) {
+        let msgtext = Vx_Core.vx_string_from_any_indent(
+          valfunc.vx_msgblock(), indent, linefeed
+        )
+        output += "\n\(indenttext) :msgblock\n  \(indenttext)\(msgtext)"
+      }
+      output = "(\(output))"
+    }
+    return output
+  }
+
+  public static func vx_string_from_any_indent(
+    _ value : any Vx_Core.Type_any,
+    _ indent : any Vx_Core.Type_int,
+    _ linefeed : any Vx_Core.Type_boolean
+  ) -> any Vx_Core.Type_string {
+    let soutput = Vx_Core.vx_string_from_any_indent(
+      value,
+      indent.vx_int(),
+      linefeed.vx_boolean()
+    )
+    return Vx_Core.vx_new_string(soutput)
+  }
+
+  public static func vx_string_from_float(
+    _ fval : Float
+  ) -> String {
+    return String(fval)
+  }
+
+  public static func vx_string_from_int(
+    _ ival : Int
+  ) -> String {
+    return String(ival)
+  }
+
+  public static func vx_string_from_object(
+    _ obj: Any
+  ) -> String {
+    return String(describing: obj)
+  }
+
+  public static func vx_string_from_string_find_replace(
+    _ text : String,
+    _ find : String,
+    _ replace : String
+  ) -> String {
+    guard !find.isEmpty else { return text }
+    return text.replacingOccurrences(of: find, with: replace)
+  }
+
+  public static func vx_string_from_string_find_replace(
+    _ text : Vx_Core.Type_string,
+    _ find : Vx_Core.Type_string,
+    _ replace : Vx_Core.Type_string
+  ) -> any Vx_Core.Type_string {
+    let stext = vx_string_from_string_find_replace(
+      text.vx_string(),
+      find.vx_string(),
+      replace.vx_string()
+    )
+    return Vx_Core.vx_new_string(stext)
+  }
+
+  public static func vx_string_from_string_start_end(
+    _ text : String,
+    _ start : Int,
+    _ end : Int
+  ) -> String {
+    let maxlen = text.count
+    var endval = end < 0 ? end + maxlen : end
+    guard start >= 1, start <= endval, start <= maxlen else {
+      return ""
+    }
+    endval = min(endval, maxlen)
+    let s = text.index(text.startIndex, offsetBy: start - 1)
+    let e = text.index(text.startIndex, offsetBy: endval)
+    return String(text[s..<e])
+  }
+
+  public static func vx_string_repeat(
+    _ text : String,
+    _ num : Int
+  ) -> String {
+    guard num > 0 else { return "" }
+    return String(repeating: text, count: num)
+  }
+
+  public static func vx_string_repeat(
+    _ text : Vx_Core.Type_string,
+    _ num : Vx_Core.Type_int
+  ) -> any Vx_Core.Type_string {
+    return Vx_Core.vx_new_string(
+      Vx_Core.vx_string_repeat(
+        text.vx_string(),
+        num.vx_int()
+      )
+    )
+  }
+
+  public static func vx_switch<
+    T : Vx_Core.Type_any,
+    U : Vx_Core.Type_any
+  >(
+    _ generic_any_1 : T,
+    _ value : U,
+    _ thenelselist : Vx_Core.Type_thenelselist
+  ) -> T {
+    var output : T = Vx_Core.f_empty(generic_any_1)
+    var fn_any : Vx_Core.Func_any_from_func = Vx_Core.e_any_from_func
+    for thenelse in thenelselist.vx_listthenelse() {
+      let code = thenelse.code().vx_string()
+      switch code {
+      case ":case":
+        if Vx_Core.f_eq(value, thenelse.value()).vx_boolean() {
+          fn_any = thenelse.fn_any()
+        }
+      case ":casemany":
+        if Vx_Core.f_contains_1(thenelse.values(), value).vx_boolean() {
+          fn_any = thenelse.fn_any()
+        }
+      case ":else":
+        fn_any = thenelse.fn_any()
+      default:
+        break
+      }
+      if !Vx_Core.vx_issame(fn_any, Vx_Core.e_any_from_func) {
+        break
+      }
+    }
+    if !Vx_Core.vx_issame(fn_any, Vx_Core.e_any_from_func) {
+      output = fn_any.vx_any_from_func(generic_any_1)
+    }
+    return output
+  }
+
+  // Warning!: Blocking
+  public static func vx_sync_from_async<T : Vx_Core.Type_any>(
+    _ generic_any_1 : T,
+    _ future : Vx_Core.Future
+  ) -> T {
+    let result : any Vx_Core.Type_any = future.getValueSync()
+    let output : T = Vx_Core.vx_any_from_any(generic_any_1, result)
+    return output
+  }
+
+  public static func vx_type_from_any(
+    _ value : any Vx_Core.Type_any
+  ) -> any Vx_Core.Type_any {
+    return value.vx_type()
+  }
+
+  public static func vx_typedef_from_type(
+    _ value : any Vx_Core.Type_any
+  ) -> any Vx_Core.Type_typedef {
+    return value.vx_typedef()
   }

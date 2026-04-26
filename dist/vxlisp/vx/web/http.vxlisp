@@ -37,7 +37,8 @@
       method: 'GET',
       headers: {
        'Content-Type': contenttype
-      }})")
+      }})"
+  :else "")
  :async
  :clientserver :client
  :doc "Returns a response from an httpget")
@@ -53,7 +54,9 @@
 
 (func text<-response : string
  [response : response]
- (native :js "response.text()")
+ (native
+  :js "response.text()"
+  :else "")
  :clientserver :client
  :doc "Returns a string from a response")
 

@@ -249,6 +249,10 @@ let-async
   int vx_int_from_string(
     std::string text);
 
+  // vx_int_from_string(string)
+  vx_core::Type_int vx_int_from_string(
+    vx_core::Type_string text);
+
   // vx_is_float(string)
   bool vx_is_float(
     std::string value);
@@ -1219,6 +1223,28 @@ let-async
   int vx_int_from_string(
     std::string text) {
     int output = std::stoi(text);
+    return output;
+  }
+
+  // vx_int_from_string(string)
+  vx_core::Type_int vx_int_from_string(
+    vx_core::Type_string text) {
+    vx_core::Type_int output = vx_core::e_int;
+    std::string stext = text->vx_string();
+    if (stext == "notanumber") {
+      output = vx_core::c_notanumber;
+    } else if (stext == "infinity") {
+      output = vx_core::c_infinity;
+    } else if (stext == "neginfinity") {
+      output = vx_core::c_neginfinity;
+    } else {
+      try {
+        long ival = std::stoll(stext);
+        output = vx_core::vx_new_int(ival);
+      } catch (std::exception ex) {
+        output = vx_core::c_notanumber;
+      }
+    }
     return output;
   }
 

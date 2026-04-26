@@ -1,0 +1,10 @@
+  public static func vx_htmlstring_from_string(
+    _ text : any Vx_Core.Type_string
+  ) -> any Vx_Core.Type_string {
+    var str : String = text.vx_string()
+    str = Vx_Core.vx_string_from_string_find_replace(str, "&", "&amp;")
+    str = Vx_Core.vx_string_from_string_find_replace(str, "'", "\\'")
+    str = Vx_Core.vx_string_from_string_find_replace(str, ">", "&gt;")
+    str = Vx_Core.vx_string_from_string_find_replace(str, "<", "&lt;")
+    return Vx_Core.vx_new_string(str)
+  }

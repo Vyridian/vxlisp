@@ -8,15 +8,25 @@
 
   val emptylistany : List<vx_core.Type_any> = ArrayList<vx_core.Type_any>()
 
-  val emptymapany : Map<String, vx_core.Type_any> = vx_core.immutablemap(LinkedHashMap<String, vx_core.Type_any>())
+  val emptymapany : Map<String, vx_core.Type_any> = vx_core.vx_mapimmutable(LinkedHashMap<String, vx_core.Type_any>())
 
-  fun <T> immutablelist(
+  fun <T> vx_listimmutable(
     listany : List<T>) : List<T> {
     return listany.toList()
   }
 
-  fun <T> immutablemap(
-    mapany : Map<String, T>) : Map<String, T> {
+  fun <T> vx_listmutable(
+    listany : List<T>) : List<T> {
+    return listany.toList()
+  }
+
+  fun <T> vx_mapimmutable(
+    mapany : MutableMap<String, T>) : Map<String, T> {
+    return mapany.toMap()
+  }
+
+  fun <T> vx_mapmutable(
+    mapany : Map<String, T>) : MutableMap<String, T> {
     return LinkedHashMap<String, T>(mapany)
   }
 
@@ -105,14 +115,6 @@
     return output
   }
 
-  //@SafeVarargs
-  fun <T> arraylist_from_array(
-    vararg items : T) : List<T> {
-    var output : List<T> = items.asList()
-    output = vx_core.immutablelist(output)
-    return output
-  }
-
   fun <T : vx_core.Type_any, U : vx_core.Type_any> arraylist_from_arraylist(
     generic_any_1 : T,
     listval : List<U>) : List<T> {
@@ -121,7 +123,7 @@
       val t_val : T = vx_core.f_any_from_any(generic_any_1, value)
       list.add(t_val)
     }
-    val output = vx_core.immutablelist(list)
+    val output = vx_core.vx_listimmutable(list)
     return output
   }
 
@@ -133,7 +135,7 @@
       val t_val : T = fn_any_from_any(value_u)
       list.add(t_val)
     }
-    val output = vx_core.immutablelist(list)
+    val output = vx_core.vx_listimmutable(list)
     return output
   }
 
@@ -149,7 +151,7 @@
         list.add(t_val)
       }
     }
-    val output = vx_core.immutablelist(list)
+    val output = vx_core.vx_listimmutable(list)
     return output
   }
 
@@ -165,7 +167,7 @@
         list.add(t_val)
       }
     }
-    val output = vx_core.immutablelist(list)
+    val output = vx_core.vx_listimmutable(list)
     return output
   }
 
@@ -201,7 +203,15 @@
       val key : String = valkey.vx_string()
       map.put(key, value)
     }
-    val output = vx_core.immutablemap<T>(map)
+    val output = vx_core.vx_mapimmutable<T>(map)
+    return output
+  }
+
+  // vx_any_from_any(generic_any_1, value)
+  fun <T : vx_core.Type_any, U : vx_core.Type_any> vx_any_from_any(generic_any_1 : T, value : U) : T {
+    var output : T = vx_core.f_empty(generic_any_1)
+    @Suppress("UNCHECKED_CAST")
+    output = value as T
     return output
   }
 
@@ -313,6 +323,14 @@
     return output
   }
 
+  //@SafeVarargs
+  fun <T> vx_arraylist_from_array(
+    vararg items : T) : List<T> {
+    var output : List<T> = items.asList()
+    output = vx_core.vx_listimmutable(output)
+    return output
+  }
+
   fun <T> vx_async_new_from_value(
     value : T) : CompletableFuture<T>  {
     val output : CompletableFuture<T> = CompletableFuture.completedFuture(
@@ -332,6 +350,7 @@
   }
 
   fun <T, U> vx_async_from_async_fn(
+    generic_any_1 : T,
     future : CompletableFuture<U>,
     fn : (U) -> T) : CompletableFuture<T> {
     val output : CompletableFuture<T> = future.thenApply(fn)
@@ -351,7 +370,7 @@
         val output_2 : T = future_t.get()
         output_2
       }
-      val output_1 : List<T> = vx_core.immutablelist<T>(list)
+      val output_1 : List<T> = vx_core.vx_listimmutable<T>(list)
       output_1
     }
     return output
@@ -540,11 +559,11 @@
     mapconst : Map<String, vx_core.Type_any>,
     mapfunc : Map<String, vx_core.Type_func>) : Unit {
     val typemap : vx_core.Class_typemap = vx_core.Class_typemap()
-    typemap.vx_p_map = vx_core.immutablemap(maptype)
+    typemap.vx_p_map = maptype
     val constmap : vx_core.Class_constmap = vx_core.Class_constmap()
-    constmap.vx_p_map = vx_core.immutablemap(mapconst)
+    constmap.vx_p_map = mapconst
     val funcmap : vx_core.Class_funcmap = vx_core.Class_funcmap()
-    funcmap.vx_p_map = vx_core.immutablemap(mapfunc)
+    funcmap.vx_p_map = mapfunc
     val global : vx_core.Class_project = vx_core.c_global as vx_core.Class_project
     var typepackagemap : vx_core.Type_packagemap? = global.vx_p_packagemap
     var packagemap : vx_core.Class_packagemap = vx_core.Class_packagemap()
@@ -561,7 +580,7 @@
     pkg.vx_p_typemap = typemap
     pkg.vx_p_funcmap = funcmap
     mappackage.put(pkgname, pkg)
-    packagemap.vx_p_map = vx_core.immutablemap<vx_core.Type_package>(mappackage)
+    packagemap.vx_p_map = vx_core.vx_mapimmutable<vx_core.Type_package>(mappackage)
   }
 
   fun <T : vx_core.Type_any> vx_if_2(
@@ -601,10 +620,33 @@
     text : String) : Int {
     var output : Int = 0
     try {
-      output = text.toInt()
+      val floatresult : Float = text.toFloat()
+      output = floatresult.toInt()
     } catch (ex : Exception) {
     }    
     return output
+  }
+
+  fun vx_int_from_string(
+    text : vx_core.Type_string) : vx_core.Type_int {
+    var output : vx_core.Type_int = vx_core.e_int
+    val stext : String = text.vx_string()
+    if (stext.equals("notanumber")) {
+      output = vx_core.c_notanumber
+    } else if (stext.equals("infinity")) {
+      output = vx_core.c_infinity
+    } else if (stext.equals("neginfinity")) {
+      output = vx_core.c_neginfinity
+    } else {
+      try {
+        val floatresult : Float = stext.toFloat()
+        val iresult : Int = floatresult.toInt()
+        output = vx_core.vx_new_int(iresult)
+      } catch (ex : Exception) {
+        output = vx_core.c_notanumber
+      }
+    }
+    return output;
   }
 
   // vx_int_from_string_find(string, string)
@@ -853,7 +895,7 @@
   fun vx_new_anylist(
     listany : List<vx_core.Type_any>) : vx_core.Type_anylist {
     val output : vx_core.Class_anylist = vx_core.Class_anylist()
-    output.vx_p_list = immutablelist(listany)
+    output.vx_p_list = vx_core.vx_listimmutable(listany)
     return output
   }
 
@@ -927,7 +969,7 @@
       list_async_result
     )
     val output : CompletableFuture<X> = vx_core.vx_async_from_async_fn(
-      async_list_result, fn_any_from_list
+      generic_list_1, async_list_result, fn_any_from_list
     )
     return output
   }
@@ -1023,7 +1065,7 @@
       val key : String = valkey.vx_string()
       map.put(key, value)
     }
-    val output : Map<String, T> = vx_core.immutablemap<T>(map)
+    val output : Map<String, T> = vx_core.vx_mapimmutable<T>(map)
     return output
   }
 
@@ -1225,7 +1267,11 @@
         vx_core.t_list, value
       )
       val typedef : vx_core.Type_typedef = vallist.vx_typedef()
-      val typedefname : vx_core.Type_string = typedef.name()
+      var typedefname : String = typedef.name().vx_string()
+      val pkgname : String = typedef.pkgname().vx_string()
+      if (pkgname != "vx/core") {
+        typedefname = pkgname + "/" + typedefname
+      }
       val indentint : Int = indent + 1
       val listval : List<vx_core.Type_any> = vallist.vx_list()
       for (valsub : vx_core.Type_any in listval) {
@@ -1240,14 +1286,17 @@
         )
         output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext
       }
-      output = "(" + typedefname.vx_string() + output + ")"
+      output = "(" + typedefname + output + ")"
     } else if (value is vx_core.Type_map) {
       val valmap : vx_core.Type_map = vx_core.f_any_from_any(
         vx_core.t_map, value
       )
       val typedef : vx_core.Type_typedef = valmap.vx_typedef()
-      val typedefname : vx_core.Type_string = typedef.name()
-      val stypedefname : String = typedefname.vx_string()
+      var typedefname : String = typedef.name().vx_string()
+      val pkgname : String = typedef.pkgname().vx_string()
+      if (pkgname != "vx/core") {
+        typedefname = pkgname + "/" + typedefname
+      }
       val indentint : Int = indent + 2
       val mapval : Map<String, vx_core.Type_any> = valmap.vx_map()
       val keys : Set<String> = mapval.keys
@@ -1269,21 +1318,25 @@
         }
         output += "\n" + indenttext + " " + key + strval
       }
-      if (stypedefname == "msg") {
-      } else if (stypedefname == "msgblock") {
+      if (typedefname == "msg") {
+      } else if (typedefname == "msgblock") {
       } else if (valmap.vx_msgblock() != vx_core.e_msgblock) {
         val msgtext : String = vx_core.vx_string_from_any_indent(
           valmap.vx_msgblock(), indentint, linefeed
         )
         output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext
       }
-      output = "(" + typedefname.vx_string() + output + ")"
+      output = "(" + typedefname + output + ")"
     } else if (value is vx_core.Type_struct) {
       val valstruct : vx_core.Type_struct = vx_core.f_any_from_any(
         vx_core.t_struct, value
       )
       val typedef : vx_core.Type_typedef = valstruct.vx_typedef()
-      val typedefname : vx_core.Type_string = typedef.name()
+      var typedefname : String = typedef.name().vx_string()
+      val pkgname : String = typedef.pkgname().vx_string()
+      if (pkgname != "vx/core") {
+        typedefname = pkgname + "/" + typedefname
+      }
       var indentint2 : Int = indent
       indentint2 += 2
       val mapval2 : Map<String, vx_core.Type_any> = valstruct.vx_map()
@@ -1314,7 +1367,7 @@
         )
         output += "\n" + indenttext + " :msgblock\n  " + indenttext + msgtext2
       }
-      output = "(" + typedefname.vx_string() + output + ")"
+      output = "(" + typedefname + output + ")"
     } else if (value is vx_core.Type_func) {
       val valfunc : vx_core.Type_func = vx_core.f_any_from_any(
         vx_core.t_func, value

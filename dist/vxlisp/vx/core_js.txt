@@ -206,6 +206,22 @@
     }
   }
 
+  static vx_int_from_string(
+    text
+  ) {
+    let output = vx_core.e_int
+    if (text == "notanumber") {
+      output = vx_core.c_notanumber
+    } else if (text == "infinity") {
+      output = vx_core.c_infinity
+    } else if (text == "neginfinity") {
+      output = vx_core.c_neginfinity
+    } else {
+      output = parseInt(text)
+    }
+    return output
+  }
+
   // vx_is_allowtype(allowtypes, typedef)
   static vx_is_allowtype(
     allowtypes,

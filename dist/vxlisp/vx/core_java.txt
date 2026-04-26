@@ -6,20 +6,32 @@
     public CompletableFuture<Core.Type_any> vx_repl(Core.Type_anylist arglist);
   }
 
-  public static List<Core.Type_any> emptylistany = Core.immutablelist(new ArrayList<Core.Type_any>());
+  public static List<Core.Type_any> emptylistany = Core.vx_listimmutable(new ArrayList<Core.Type_any>());
 
-  public static Map<String, Core.Type_any> emptymapany = Core.immutablemap(new LinkedHashMap<String, Core.Type_any>());
+  public static Map<String, Core.Type_any> emptymapany = Core.vx_mapimmutable(new LinkedHashMap<String, Core.Type_any>());
 
-  public static <T> List<T> immutablelist(
+  public static <T> List<T> vx_listimmutable(
     final List<T> listany
   ) {
     return Collections.unmodifiableList(listany);
   }
 
-  public static <T> Map<String, T> immutablemap(
+  public static <T> List<T> vx_listmutable(
+    final List<T> listany
+  ) {
+    return new ArrayList<T>(listany);
+  }
+
+  public static <T> Map<String, T> vx_mapimmutable(
     final Map<String, T> mapany
   ) {
     return Collections.unmodifiableMap(mapany);
+  }
+
+  public static <T> Map<String, T> vx_mapmutable(
+    final Map<String, T> mapany
+  ) {
+    return new LinkedHashMap<String, T>(mapany);
   }
 
   public static class Class_base {
@@ -93,15 +105,6 @@
     return output;
   }
 
-  @SafeVarargs
-  public static <T> List<T> arraylist_from_array(
-    final T... items
-  ) {
-    List<T> output = new ArrayList<T>(Arrays.asList(items));
-    output = Core.immutablelist(output);
-    return output;
-  }
-
   public static <T extends Core.Type_any, U extends Core.Type_any> List<T> arraylist_from_arraylist(
     final T generic_any_1,
     final List<U> listval
@@ -111,7 +114,7 @@
       T t_val = Core.f_any_from_any(generic_any_1, value);
       output.add(t_val);
     }
-    output = Core.immutablelist(output);
+    output = Core.vx_listimmutable(output);
     return output;
   }
 
@@ -124,7 +127,7 @@
       T t_val = fn_any_from_any.apply(value_u);
       output.add(t_val);
     }
-    output = Core.immutablelist(output);
+    output = Core.vx_listimmutable(output);
     return output;
   }
 
@@ -139,7 +142,7 @@
       T t_val = Core.f_any_from_any(generic_any_1, u_val);
       output.add(t_val);
     }
-    output = Core.immutablelist(output);
+    output = Core.vx_listimmutable(output);
     return output;
   }
 
@@ -198,11 +201,43 @@
     return output;
   }
 
+  public static Core.Type_boolean vx_and(
+    final Core.Type_boolean val1,
+    final Core.Type_boolean val2
+  ) {
+    Core.Type_boolean output = Core.e_boolean;
+    if (val1.vx_boolean() && val2.vx_boolean()) {
+      output = Core.c_true;
+    } else {
+      output = Core.c_false;
+    };
+    return output;
+  }
+
+  @SuppressWarnings("unchecked")
+  public static <T extends Core.Type_any, U extends Core.Type_any> T vx_any_from_any(
+    final T generic_any_1,
+    final U value
+  ) {
+    T output = Core.f_empty(generic_any_1);
+    output = (T)value;
+    return output;
+  }
+
   public static Core.Type_any[] vx_arrayany_from_anylist(
     final Core.Type_anylist list
   ) {
     List<Core.Type_any> listany = list.vx_list();
     Core.Type_any[] output = listany.toArray(new Core.Type_any[0]);
+    return output;
+  }
+
+  @SafeVarargs
+  public static <T> List<T> vx_arraylist_from_array(
+    final T... items
+  ) {
+    List<T> output = new ArrayList<T>(Arrays.asList(items));
+    output = Core.vx_listimmutable(output);
     return output;
   }
 
@@ -273,6 +308,7 @@
   }
 
   public static <T, U> CompletableFuture<T> vx_async_from_async_fn(
+    final T generic_any_1,
     final CompletableFuture<U> future,
     final Function<? super U, ? extends T> fn
   ) {
@@ -290,7 +326,7 @@
       List<T> list = list_future.stream()
         .map(future -> future.join())
         .collect(Collectors.toList());
-      return Core.immutablelist(list);
+      return Core.vx_listimmutable(list);
     });
     return output;
   }
@@ -492,11 +528,11 @@
     final Map<String, Core.Type_func> mapfunc
   ) {
     Core.Class_typemap typemap = new Core.Class_typemap();
-    typemap.vx_p_map = Core.immutablemap(maptype);
+    typemap.vx_p_map = Core.vx_mapimmutable(maptype);
     Core.Class_constmap constmap = new Core.Class_constmap();
-    constmap.vx_p_map = Core.immutablemap(mapconst);
+    constmap.vx_p_map = Core.vx_mapimmutable(mapconst);
     Core.Class_funcmap funcmap = new Core.Class_funcmap();
-    funcmap.vx_p_map = Core.immutablemap(mapfunc);
+    funcmap.vx_p_map = Core.vx_mapimmutable(mapfunc);
     Core.Class_project global = (Core.Class_project)Core.c_global;
     Core.Class_packagemap packagemap = (Core.Class_packagemap)global.vx_p_packagemap;
     if (packagemap == null) {
@@ -509,7 +545,7 @@
     pkg.vx_p_typemap = typemap;
     pkg.vx_p_funcmap = funcmap;
     mappackage.put(pkgname, pkg);
-    packagemap.vx_p_map = Core.immutablemap(mappackage);
+    packagemap.vx_p_map = Core.vx_mapimmutable(mappackage);
   }
 
   public static <T extends Core.Type_any> T vx_if_2(
@@ -554,9 +590,33 @@
   ) {
     int output = 0;
     try {
-      output = Integer.parseInt(text);
-    } catch (Exception e) {
-    }    
+      float floatresult = Float.parseFloat(text);
+      output = (int)floatresult;
+    } catch (Exception ex) {
+    }
+    return output;
+  }
+
+  public static Core.Type_int vx_int_from_string(
+    final Core.Type_string text
+  ) {
+    Core.Type_int output = Core.e_int;
+    String stext = text.vx_string();
+    if (stext.equals("notanumber")) {
+      output = Core.c_notanumber;
+    } else if (stext.equals("infinity")) {
+      output = Core.c_infinity;
+    } else if (stext.equals("neginfinity")) {
+      output = Core.c_neginfinity;
+    } else {
+      try {
+        float floatresult = Float.parseFloat(stext);
+        int iresult = (int)floatresult;
+        output = Core.vx_new_int(iresult);
+      } catch (Exception ex) {
+        output = Core.c_notanumber;
+      }
+    }
     return output;
   }
 
@@ -655,10 +715,14 @@
       return fn_any_from_any_async.vx_any_from_any_async(generic_list_1, val);
     });
     CompletableFuture<List<Core.Type_any>> async_list_result = Core.vx_async_arraylist_from_arraylist_async(list_async_result);
-    CompletableFuture<X> output = Core.vx_async_from_async_fn(async_list_result, (list_result) -> {
-      X work = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(list_result));
-      return work;
-    });
+    CompletableFuture<X> output = Core.vx_async_from_async_fn(
+      generic_list_1,
+      async_list_result,
+      (list_result) -> {
+        X work = Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(list_result));
+        return work;
+      }
+    );
     return output;
   }
 
@@ -885,7 +949,7 @@
     final List<Type_any> listany
   ) {
     Class_anylist output = new Class_anylist();
-    output.vx_p_list = immutablelist(listany);
+    output.vx_p_list = vx_listimmutable(listany);
     return output;
   }
 
@@ -963,7 +1027,7 @@
     if (text.equals("") && Core.e_string != null) {
       output = Core.e_string;
     } else {
-      Class_string work = new Core.Class_string();
+      Core.Class_string work = new Core.Class_string();
       work.vxstring = text;
       output = work;
     }
@@ -973,7 +1037,7 @@
   public static String vx_string_from_any(
     final Core.Type_any value
   ) {
-    return vx_string_from_any_indent(value, 0, false);
+    return Core.vx_string_from_any_indent(value, 0, false);
   }
 
   public static String vx_string_from_any_indent(
@@ -1051,8 +1115,11 @@
     } else if (value instanceof Core.Type_list) {
       Core.Type_list vallist = Core.f_any_from_any(Core.t_list, value);
       Core.Type_typedef typedef = vallist.vx_typedef();
-      Core.Type_string typedefname = typedef.name();
-      String stypedefname = typedefname.vx_string();
+      String typedefname = typedef.name().vx_string();
+      String pkgname = typedef.pkgname().vx_string();
+      if (pkgname != "vx/core") {
+        typedefname = pkgname + "/" + typedefname;
+      }
       int indentint = indent + 1;
       List<Core.Type_any> listval = vallist.vx_list();
       for (Core.Type_any valsub : listval) {
@@ -1063,12 +1130,15 @@
         String msgtext = Core.vx_string_from_any_indent(vallist.vx_msgblock(), indent, linefeed);
         output += "\n" + indenttext + msgtext;
       }
-      output = "(" + stypedefname + output + ")";
+      output = "(" + typedefname + output + ")";
     } else if (value instanceof Core.Type_map) {
       Core.Type_map valmap = Core.f_any_from_any(Core.t_map, value);
       Core.Type_typedef typedef = valmap.vx_typedef();
-      Core.Type_string typedefname = typedef.name();
-      String stypedefname = typedefname.vx_string();
+      String typedefname = typedef.name().vx_string();
+      String pkgname = typedef.pkgname().vx_string();
+      if (pkgname != "vx/core") {
+        typedefname = pkgname + "/" + typedefname;
+      }
       int indentint = indent + 2;
       Map<String, Core.Type_any> mapval = valmap.vx_map();
       Set<String> keys = mapval.keySet();
@@ -1095,14 +1165,17 @@
         );
         output += "\n " + indenttext + msgtext;
       }
-      output = "(" + stypedefname + output + ")";
+      output = "(" + typedefname + output + ")";
     } else if (value instanceof Core.Type_struct) {
       Core.Type_struct valstruct = Core.f_any_from_any(
         Core.t_struct, value
       );
       Core.Type_typedef typedef = valstruct.vx_typedef();
-      Core.Type_string typedefname = typedef.name();
-      String stypedefname = typedefname.vx_string();
+      String typedefname = typedef.name().vx_string();
+      String pkgname = typedef.pkgname().vx_string();
+      if (pkgname != "vx/core") {
+        typedefname = pkgname + "/" + typedefname;
+      }
       int indentint2 = indent;
       indentint2 += 2;
       Map<String, Core.Type_any> mapval2 = valstruct.vx_map();
@@ -1124,15 +1197,15 @@
           output += "\n" + indenttext + " " + key + strval2;
         }
       }
-      if (stypedefname.equals("msg")) {
-      } else if (stypedefname.equals("msgblock")) {
+      if (typedefname.equals("msg")) {
+      } else if (typedefname.equals("msgblock")) {
       } else if (valstruct.vx_msgblock() != Core.e_msgblock) {
         String msgtext2 = Core.vx_string_from_any_indent(
           valstruct.vx_msgblock(), indent+1, linefeed
         );
         output += "\n " + indenttext + msgtext2;
       }
-      output = "(" + stypedefname + output + ")";
+      output = "(" + typedefname + output + ")";
     } else if (value instanceof Core.Type_func) {
       Core.Type_func valfunc = Core.f_any_from_any(Core.t_func, value);
       Core.Type_funcdef funcdef = valfunc.vx_funcdef();

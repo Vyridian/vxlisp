@@ -1,0 +1,183 @@
+// vx_boolean_from_string_ends
+public static func vx_boolean_from_string_ends(
+  _ text : any Vx_Core.Type_string,
+  _ ends : any Vx_Core.Type_string
+) -> any Vx_Core.Type_boolean {
+  let check = Vx_Core.vx_boolean_from_string_ends(
+    text.vx_string(),
+    ends.vx_string()
+  )
+  return Vx_Core.vx_new_boolean(check)
+}
+
+// vx_boolean_from_string_starts
+public static func vx_boolean_from_string_starts(
+  _ text : any Vx_Core.Type_string,
+  _ starts : any Vx_Core.Type_string
+) -> any Vx_Core.Type_boolean {
+  let check = Vx_Core.vx_boolean_from_string_starts(
+    text.vx_string(),
+    starts.vx_string()
+  )
+  return Vx_Core.vx_new_boolean(check)
+}
+
+// vx_int_from_string_find (raw)
+public static func vx_int_from_string_find(
+  _ text : String,
+  _ find : String
+) -> Int {
+  guard let range = text.range(of: find) else {
+    return 0
+  }
+  return text.distance(from: text.startIndex, to: range.lowerBound) + 1
+}
+
+// vx_int_from_string_find (Vx wrapper)
+public static func vx_int_from_string_find(
+  _ text : any Vx_Core.Type_string,
+  _ find : any Vx_Core.Type_string
+) -> any Vx_Core.Type_int {
+  let ipos = vx_int_from_string_find(
+    text.vx_string(),
+    find.vx_string()
+  )
+  return Vx_Core.vx_new_int(ipos)
+}
+
+// vx_int_from_string_findkeyword (raw + keyword support)
+public static func vx_int_from_string_findkeyword(
+  _ text : String,
+  _ find : String
+) -> Int {
+  var output = -1
+  if text.isEmpty {
+    // do nothing, output remains -1
+  } else if find == ":nonwhitespace" {
+    let whitespace = " \n\r\t"
+    for (i, char) in text.enumerated() {
+      if !whitespace.contains(char) {
+        output = i
+        break
+      }
+    }
+  } else if find == ":whitespace" {
+    let whitespaceChars: [Character] = [" ", "\n", "\r", "\t"]
+    for char in whitespaceChars {
+      if let range = text.range(of: String(char)) {
+        let pos = text.distance(from: text.startIndex, to: range.lowerBound)
+        if output < 0 || pos < output {
+          output = pos
+        }
+      }
+    }
+  } else {
+    if let range = text.range(of: find) {
+      output = text.distance(from: text.startIndex, to: range.lowerBound)
+    }
+  }
+  return output + 1
+}
+
+// vx_int_from_string_findkeyword (Vx wrapper)
+public static func vx_int_from_string_findkeyword(
+  _ text : any Vx_Core.Type_string,
+  _ find : any Vx_Core.Type_string
+) -> any Vx_Core.Type_int {
+  let ipos = vx_int_from_string_findkeyword(
+    text.vx_string(),
+    find.vx_string()
+  )
+  return Vx_Core.vx_new_int(ipos)
+}
+
+// vx_int_from_string_findlast
+public static func vx_int_from_string_findlast(
+  _ text : String,
+  _ findlast : String
+) -> Int {
+  guard let range = text.range(of: findlast, options: .backwards) else {
+    return 0
+  }
+  return text.distance(from: text.startIndex, to: range.lowerBound) + 1
+}
+
+public static func vx_int_from_string_findlast(
+  _ text : any Vx_Core.Type_string,
+  _ findlast : any Vx_Core.Type_string
+) -> any Vx_Core.Type_int {
+  let ipos = vx_int_from_string_findlast(
+    text.vx_string(),
+    findlast.vx_string()
+  )
+  return Vx_Core.vx_new_int(ipos)
+}
+
+// vx_string_from_string_start_end
+public static func vx_string_from_string_start_end(
+  _ text : any Vx_Core.Type_string,
+  _ start : any Vx_Core.Type_int,
+  _ end : any Vx_Core.Type_int
+) -> any Vx_Core.Type_string {
+  let stext = Vx_Core.vx_string_from_string_start_end(
+    text.vx_string(),
+    start.vx_int(),
+    end.vx_int()
+  )
+  return Vx_Core.vx_new_string(stext)
+}
+
+// vx_string_from_stringlist_join
+public static func vx_string_from_stringlist_join(
+  _ vals : any Vx_Core.Type_stringlist,
+  _ delim : any Vx_Core.Type_string
+) -> any Vx_Core.Type_string {
+  let strings = vals.vx_list().map { item in
+    Vx_Core.f_any_from_any(Vx_Core.t_string, item).vx_string()
+  }
+  let joined = strings.joined(separator: delim.vx_string())
+  return Vx_Core.vx_new_string(joined)
+}
+
+// vx_string_lowercase
+public static func vx_string_lowercase(
+  _ text : any Vx_Core.Type_string
+) -> any Vx_Core.Type_string {
+  let stext : String = text.vx_string().lowercased()
+  return Vx_Core.vx_new_string(stext)
+}
+
+// vx_string_trim
+public static func vx_string_trim(
+  _ text : any Vx_Core.Type_string
+) -> any Vx_Core.Type_string {
+  let stext = text.vx_string().trimmingCharacters(in: .whitespacesAndNewlines)
+  return Vx_Core.vx_new_string(stext)
+}
+
+// vx_string_uppercase
+public static func vx_string_uppercase(
+  _ text : any Vx_Core.Type_string
+) -> any Vx_Core.Type_string {
+  let stext : String = text.vx_string().uppercased()
+  return Vx_Core.vx_new_string(stext)
+}
+
+// vx_stringlist_from_string_split
+public static func vx_stringlist_from_string_split(
+  _ text : any Vx_Core.Type_string,
+  _ delim : any Vx_Core.Type_string
+) -> any Vx_Core.Type_stringlist {
+  let stext : String = text.vx_string()
+  let sdelim : String = delim.vx_string()
+  let parts = stext.components(separatedBy: sdelim)
+  return Vx_Core.vx_new(Vx_Core.t_stringlist, parts)
+}
+
+// vx_uid (cryptographically secure random UID)
+public static func vx_uid() -> any Vx_Core.Type_string {
+  let uuid = UUID().uuidString
+    .replacingOccurrences(of: "-", with: "")
+    .lowercased()
+  return Vx_Core.vx_new_string(uuid)
+}

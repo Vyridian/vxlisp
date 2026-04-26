@@ -1,0 +1,224 @@
+  // vx_any_from_for_until_loop_max
+  public static func vx_any_from_for_until_loop_max<T>(
+    _ generic_any_1 : T,
+    _ start : T,
+    _ fn_until : Vx_Core.Func_boolean_from_any,
+    _ fn_loop : Vx_Core.Func_any_from_any,
+    _ max : Vx_Core.Type_int
+  ) -> T where T : Vx_Core.Type_any {
+    var output = start
+    var iscontinue = true
+    var icount = 0
+    let imax = max.vx_int()
+    while iscontinue {
+      if icount >= imax {
+        let path = "vx/collection/any<-for-until-loop-max"
+        let code = ":loopmaximumexceeded"
+        let details = Vx_Core.vx_new_int(icount)
+        let msg = Vx_Core.vx_msg_from_error(path, code, details)
+        output = Vx_Core.vx_copy(generic_any_1, output, [msg])
+        iscontinue = false
+      } else {
+        icount += 1
+        output = fn_loop.vx_any_from_any(generic_any_1, output)
+        let valcontinue = fn_until.vx_boolean_from_any(output)
+        iscontinue = !valcontinue.vx_boolean()
+      }
+    }
+    return output
+  }
+
+  // vx_any_from_for_while_loop_max
+  public static func vx_any_from_for_while_loop_max<T>(
+    _ generic_any_1 : T,
+    _ start : T,
+    _ fn_while : any Vx_Core.Func_boolean_from_any,
+    _ fn_loop : any Vx_Core.Func_any_from_any,
+    _ max : any Vx_Core.Type_int
+  ) -> T where T : Vx_Core.Type_any {
+    var output = start
+    var iscontinue = true
+    var icount = 0
+    let imax = max.vx_int()
+    while iscontinue {
+      if icount >= imax {
+        let path = "vx/collection/any<-for-while-loop-max"
+        let code = ":loopmaximumexceeded"
+        let details = Vx_Core.vx_new_int(icount)
+        let msg = Vx_Core.vx_msg_from_error(path, code, details)
+        output = Vx_Core.vx_copy(generic_any_1, output, [msg])
+        iscontinue = false
+      } else {
+        icount += 1
+        let valcontinue = fn_while.vx_boolean_from_any(output)
+        iscontinue = valcontinue.vx_boolean()
+        if iscontinue {
+          output = fn_loop.vx_any_from_any(generic_any_1, output)
+        }
+      }
+    }
+    return output
+  }
+
+  // vx_anymap_from_struct
+  public static func vx_anymap_from_struct(
+    _ structure : any Vx_Core.Type_struct
+  ) -> Vx_Core.Type_anymap {
+    let map = structure.vx_map()
+    return Vx_Core.vx_new_map(Vx_Core.t_anymap, map)
+  }
+
+  // vx_list_from_for_end_loop
+  public static func vx_list_from_for_end_loop<T>(
+    _ generic_list_1 : T,
+    _ start : any Vx_Core.Type_int,
+    _ end : any Vx_Core.Type_int,
+    _ fn_loop : any Vx_Core.Func_any_from_int
+  ) -> T where T : Vx_Core.Type_list {
+    var output = Vx_Core.f_empty(generic_list_1)
+    var listvals: [Vx_Core.Type_any] = []
+    let istart = start.vx_int()
+    let iend = end.vx_int()
+    if istart <= iend {
+      for i in istart...iend {
+        let val = fn_loop.vx_any_from_int(Vx_Core.t_any, Vx_Core.vx_new_int(i))
+        listvals.append(val)
+      }
+    } else {
+      for i in stride(from: istart, through: iend, by: -1) {
+        let val = fn_loop.vx_any_from_int(Vx_Core.t_any, Vx_Core.vx_new_int(i))
+        listvals.append(val)
+      }
+    }
+    if !listvals.isEmpty {
+      let anylist = Vx_Core.vx_new(Vx_Core.t_anylist, listvals)
+      output = Vx_Core.f_new(generic_list_1, anylist)
+    }
+    return output
+  }
+
+  // vx_list_from_for_while_loop_max
+  public static func vx_list_from_for_while_loop_max<T>(
+    _ generic_list_1 : T,
+    _ start : any Vx_Core.Type_any,
+    _ fn_while : any Vx_Core.Func_boolean_from_any,
+    _ fn_loop : any Vx_Core.Func_any_from_any,
+    _ max : any Vx_Core.Type_int
+  ) -> T where T : Vx_Core.Type_list {
+    var output = Vx_Core.f_empty(generic_list_1)
+    var listvals: [Vx_Core.Type_any] = []
+    var iscontinue = true
+    var icount = 0
+    let imax = max.vx_int()
+    var work = start
+    while iscontinue {
+      if icount >= imax {
+        let path = "vx/collection/list<-for-while-loop-max"
+        let code = ":loopmaximumexceeded"
+        let details = Vx_Core.vx_new_int(icount)
+        let msg = Vx_Core.vx_msg_from_error(path, code, details)
+        output = Vx_Core.vx_copy(generic_list_1, output, [msg])
+        iscontinue = false
+      } else {
+        let valwhile = fn_while.vx_boolean_from_any(work)
+        iscontinue = !valwhile.vx_boolean()
+        if iscontinue {
+          icount += 1
+          work = fn_loop.vx_any_from_any(Vx_Core.t_any, work)
+          listvals.append(work)
+        }
+      }
+    }
+    if !listvals.isEmpty {
+      let anylist = Vx_Core.vx_new(Vx_Core.t_anylist, listvals)
+      output = Vx_Core.f_new(generic_list_1, anylist)
+    }
+    return output
+  }
+
+  // vx_list_from_list_filter
+  public static func vx_list_from_list_filter<T>(
+    _ generic_list_1 : T,
+    _ vallist : any Vx_Core.Type_list,
+    _ fn_filter : any Vx_Core.Func_any_from_any
+  ) -> T where T : Vx_Core.Type_list {
+    var output = Vx_Core.f_empty(generic_list_1)
+    let listval = vallist.vx_list()
+    var items: [Vx_Core.Type_any] = []
+    for val in listval {
+      let newval = fn_filter.vx_any_from_any(Vx_Core.t_any, val)
+      let isempty = Vx_Core.f_is_empty_1(newval)
+      if !isempty.vx_boolean() {
+        items.append(newval)
+      }
+    }
+    output = Vx_Core.vx_new(generic_list_1, items)
+    return output
+  }
+
+  // vx_list_from_list_join_1
+  public static func vx_list_from_list_join_1<X, Y>(
+    _ generic_list_1 : X,
+    _ values : Y,
+    _ fn_any_from_any : any Vx_Core.Func_any_from_any
+  ) -> X where X : Vx_Core.Type_list, Y : Vx_Core.Type_list {
+    var output = Vx_Core.f_empty(generic_list_1)
+    let list_value = values.vx_list()
+    var list_result : [Vx_Core.Type_any] = []
+    for val in list_value {
+      let listoflist = fn_any_from_any.vx_any_from_any(generic_list_1, val)
+      if let vallist = listoflist as? Vx_Core.Type_list {
+        list_result.append(contentsOf: vallist.vx_list())
+      }
+    }
+    output = Vx_Core.f_any_from_any(generic_list_1, generic_list_1.vx_new(list_result))
+    return output
+  }
+
+  // vx_list_from_list_start_end
+  public static func vx_list_from_list_start_end<T>(
+    _ generic_list_1 : T,
+    _ values : any Vx_Core.Type_list,
+    _ start : any Vx_Core.Type_int,
+    _ end : any Vx_Core.Type_int
+  ) -> T where T : Vx_Core.Type_list {
+    var output = Vx_Core.f_empty(generic_list_1)
+    let listval = values.vx_list()
+    let istart = start.vx_int()
+    var iend = end.vx_int()
+    let maxlen = listval.count
+    if iend < 0 {
+      iend += maxlen
+    }
+    guard istart >= 1 && istart <= iend && istart <= maxlen else {
+      return output
+    }
+    if iend > maxlen {
+      iend = maxlen
+    }
+    let sublist = Array(listval[(istart-1)..<iend])
+    output = Vx_Core.vx_new(generic_list_1, sublist)
+    return output
+  }
+
+  // vx_map_from_map_keys
+  public static func vx_map_from_map_keys<T>(
+    _ generic_map_1 : T,
+    _ valuemap : any Vx_Core.Type_map,
+    _ keys : any Vx_Core.Type_stringlist
+  ) -> T where T : Vx_Core.Type_map {
+    var output = Vx_Core.f_empty(generic_map_1)
+    let keylist = keys.vx_liststring()
+    guard !keylist.isEmpty else {
+      return output
+    }
+    let map = valuemap.vx_map()
+    var values: [any Vx_Core.Type_any] = []
+    for key in keylist {
+      let value = map.getOrElse(key.vx_string(), Vx_Core.e_any)
+      values.append(key)
+      values.append(value)
+    }
+    output = Vx_Core.f_new(generic_map_1, values)
+    return output
+  }

@@ -8,14 +8,16 @@
  [id : string
   stylesheettext : string]
  (native
-  :js :auto)
+  :js :auto
+  :else "")
  :doc "Print the contents of the given id.")
 
 (func boolean-replace<-id-htmltext : boolean
  [id       : string
   htmltext : string]
  (native
-  :js :auto)
+  :js :auto
+  :else "")
  :sideeffects "Changes HTML display."
  :clientserver :client
  :doc "Replaces an html node with given id and text.")
@@ -25,7 +27,8 @@
   parent   : string
   htmltext : string]
  (native
-  :js :auto)
+  :js :auto
+  :else "")
  :sideeffects "Changes HTML display."
  :clientserver :client
  :doc "Replaces an html node with given id, parentid, and text.")
@@ -33,7 +36,8 @@
 (func boolean-remove<-id : boolean
  [id : string]
  (native
-  :js :auto)
+  :js :auto
+  :else "")
  :sideeffects "Changes HTML display."
  :clientserver :client
  :doc "Removes an html node with given id.")
@@ -43,7 +47,8 @@
   attribute : string
   value     : string]
  (native
-  :js :auto)
+  :js :auto
+  :else "")
  :sideeffects "Changes HTML element value."
  :clientserver :client
  :doc "Writes to an html node with given id and attribute name and value.")
@@ -52,7 +57,8 @@
  [id       : string
   htmltext : string]
  (native
-  :js :auto)
+  :js :auto
+  :else "")
  :sideeffects "Changes HTML display."
  :clientserver :client
  :doc "Writes to an html node with given id and text.")
@@ -61,7 +67,8 @@
  [id      : string
   visible : boolean]
  (native
-  :js :auto)
+  :js :auto
+  :else "")
  :sideeffects "Changes HTML display."
  :clientserver :client
  :doc "Writes to an html node changing its visibility.")
@@ -84,7 +91,8 @@
 (func boolean-write-stylesheet<-string : boolean
  [text : string]
  (native
-  :js :auto)
+  :js :auto
+  :else "")
  :async
  :sideeffects "Changes Stylesheet display."
  :clientserver :client
@@ -93,24 +101,28 @@
 (func boolean-writeevents<-ui : boolean
  [ui : ui/ui]
  (native
-  :js :auto)
+  :js :auto
+  :else "")
  :doc "Writes the eventmap from ui into dom.")
 
 (func context-read : context
  (native
-  :js :auto)
+  :js :auto
+  :else "")
  :doc "Reads context from document.data.context")
 
 (func context-write : context
  (native
-  :js :auto)
+  :js :auto
+  :else "")
  :context
  :doc "Writes context to document.data.context")
 
 (func string<-id : string
  [id   : string]
  (native
-  :js :auto)
+  :js :auto
+  :else "")
  :clientserver :client
  :doc "Reads the value of an html node by id.")
 
@@ -129,5 +141,6 @@
 (func ui-readstate<-uid : any
  [uid : string]
  (native
-  :js :auto)
+  :js :auto
+  :else "")
  :doc "Returns ui component from element.")

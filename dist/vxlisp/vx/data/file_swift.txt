@@ -1,0 +1,91 @@
+public static func vx_boolean_exists_from_file(
+  _ file : Vx_Data_File.Type_file
+) -> Vx_Core.Type_boolean {
+  let fullpath : Vx_Core.Type_string = Vx_Data_File.f_pathfull_from_file(file)
+  let sfullpath : String = fullpath.vx_string()
+  let normalized : String = Vx_Data_File.vx_path_normalize_from_path(sfullpath)
+  let exists : Bool = FileManager.default.fileExists(atPath: normalized)
+  return exists ? Vx_Core.c_true : Vx_Core.e_boolean
+}
+
+public static func vx_boolean_write_from_file_string(
+  _ context : Vx_Core.Type_context,
+  _ file : Vx_Data_File.Type_file,
+  _ text : Vx_Core.Type_string
+) -> Vx_Core.Type_boolean {
+  let fullpath : Vx_Core.Type_string = Vx_Data_File.f_pathfull_from_file(file)
+  let sfullpath : String = fullpath.vx_string()
+  let normalized : String = Vx_Data_File.vx_path_normalize_from_path(sfullpath)
+  let stext: String = text.vx_string()
+  do {
+    try stext.write(toFile: normalized, atomically: true, encoding: .utf8)
+    return Vx_Core.c_true
+  } catch {
+    let msg = Vx_Core.vx_msg_from_exception("boolean-write<-file", error)
+    return Vx_Core.vx_copy(
+      Vx_Core.t_boolean,
+      Vx_Core.c_false,
+      [msg]
+    )
+  }
+}
+
+public static func vx_path_normalize_from_path(
+  _ spath : String
+) -> String {
+  var output = spath
+  if !spath.contains(":") {
+    let pathcurrent = vx_spathcurrent_from_os()
+    output = pathcurrent + "/" + output
+  }
+  return output
+}
+
+public static func vx_pathcurrent_from_os(
+) -> Vx_Core.Type_string {
+  let stext = vx_spathcurrent_from_os()
+  return Vx_Core.vx_new_string(stext)
+}
+
+public static func vx_spathcurrent_from_os(
+) -> String {
+  return FileManager.default.currentDirectoryPath
+}
+
+public static func vx_string_read_from_file(
+  _ file : Vx_Data_File.Type_file
+) -> Vx_Core.Type_string {
+  let fullpath : Vx_Core.Type_string = Vx_Data_File.f_pathfull_from_file(file)
+  let sfullpath : String = fullpath.vx_string()
+  let normalized = Vx_Data_File.vx_path_normalize_from_path(sfullpath)
+  guard FileManager.default.fileExists(atPath: normalized) else {
+    let msg = Vx_Core.vx_msg_from_error(
+      "string-read<-file",
+      ":filenotfound",
+      file
+    )
+    return Vx_Core.vx_new(
+      Vx_Core.t_string,
+      [msg]
+    )
+  }
+  do {
+    let scontent = try String(contentsOfFile: normalized, encoding: .utf8)
+    return Vx_Core.vx_new_string(scontent)
+  } catch {
+    let msg = Vx_Core.vx_msg_from_exception(
+      "string-read<-file", error
+    )
+    return Vx_Core.vx_new(
+      Vx_Core.t_string,
+      [msg]
+    )
+  }
+}
+
+public static func vx_string_read_from_file(
+  _ context: Vx_Core.Type_context,
+  _ file: Vx_Data_File.Type_file
+) -> Vx_Core.Type_string {
+  return vx_string_read_from_file(file)
+}

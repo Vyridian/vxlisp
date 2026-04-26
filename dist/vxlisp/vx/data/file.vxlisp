@@ -26,7 +26,6 @@
  (native
   :cpp
    "output = vx_data_file::vx_boolean_exists_from_file(file);"
-  :csharp :auto
   :java
    "Core.Type_string fullpath = File.f_pathfull_from_file(file);
     String sfullpath = fullpath.vx_string();
@@ -34,7 +33,7 @@
     if (Files.exists(path)) {
       output = Core.c_true;
     }"
-  :kotlin :auto)
+  :js "")
  :test (test-true
         (boolean-exists<-file
          (file
@@ -70,16 +69,7 @@
  (native
   :cpp
    "output = vx_data_file::vx_boolean_write_from_file_string(file, text);"
-  :csharp :auto
-  :java
-   "Core.Type_string fullpath = File.f_pathfull_from_file(file);
-    String sfullpath = fullpath.vx_string();
-    Path path = Paths.get(sfullpath);
-    String stext = text.vx_string();
-    byte[] bytes = stext.getBytes();
-    java.nio.file.Files.write(path, bytes);
-    output = Core.c_true;"
-  :kotlin :auto)
+  :js "")
  :context
  :messages
  :permission
@@ -134,10 +124,9 @@
  (native
   :cpp
    "output = vx_data_file::vx_string_read_from_file(file);"
-  :csharp :auto
   :java
    "output = vx_string_read_from_file(file);"
-  :kotlin :auto)
+  :js "")
  :context
  :permission
  :messages
@@ -164,13 +153,12 @@
  (native
   :cpp
    "output = vx_data_file::vx_pathcurrent_from_os();"
-  :csharp :auto
   :java
    "Path path = Paths.get(“”);
     path = path.toAbsolutePath();
     String spath = path.toString();
     output = Core.vx_new_string(spath);"
-  :kotlin :auto)
+  :js "")
  :clientserver :server
  :doc  "Returns current system path.")
 

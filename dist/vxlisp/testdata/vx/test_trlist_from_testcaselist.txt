@@ -1,0 +1,85 @@
+(vx/web/html/trlist
+ (vx/web/html/tr
+  :nodes
+   (vx/web/html/tdlist
+    (vx/web/html/td
+     :nodes
+      (vx/web/html/divchildlist
+       (vx/web/html/p
+        :text "Pass")))
+    (vx/web/html/td
+     :nodes
+      (vx/web/html/divchildlist
+       (vx/web/html/p
+        :text "boolean")))
+    (vx/web/html/td
+     :nodes
+      (vx/web/html/divchildlist
+       (vx/web/html/p
+        :text "(test-true true)")))
+    (vx/web/html/td
+     :nodes
+      (vx/web/html/divchildlist
+       (vx/web/html/p
+        :text "true")))
+    (vx/web/html/td
+     :nodes
+      (vx/web/html/divchildlist
+       (vx/web/html/p
+        :text "true")))))
+ (vx/web/html/tr
+  :nodes
+   (vx/web/html/tdlist
+    (vx/web/html/td
+     :nodes
+      (vx/web/html/divchildlist
+       (vx/web/html/p
+        :text "Pass")))
+    (vx/web/html/td
+     :nodes
+      (vx/web/html/divchildlist
+       (vx/web/html/p
+        :text "boolean")))
+    (vx/web/html/td
+     :nodes
+      (vx/web/html/divchildlist
+       (vx/web/html/p
+        :text "(test-false false)")))
+    (vx/web/html/td
+     :nodes
+      (vx/web/html/divchildlist
+       (vx/web/html/p
+        :text "false")))
+    (vx/web/html/td
+     :nodes
+      (vx/web/html/divchildlist
+       (vx/web/html/p
+        :text "false")))))
+ (vx/web/html/tr
+  :nodes
+   (vx/web/html/tdlist
+    (vx/web/html/td
+     :nodes
+      (vx/web/html/divchildlist
+       (vx/web/html/p
+        :text "Pass")))
+    (vx/web/html/td
+     :nodes
+      (vx/web/html/divchildlist
+       (vx/web/html/p
+        :text "float")))
+    (vx/web/html/td
+     :nodes
+      (vx/web/html/divchildlist
+       (vx/web/html/p
+        :text "(test 4.5 (float 4.5))")))
+    (vx/web/html/td
+     :nodes
+      (vx/web/html/divchildlist
+       (vx/web/html/p
+        :text "4.5")))
+    (vx/web/html/td
+     :nodes
+      (vx/web/html/divchildlist
+       (vx/web/html/p
+        :text "4.5"))))))

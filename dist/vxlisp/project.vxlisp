@@ -97,14 +97,14 @@
   (cmd srcswift
    :code    :source
    :lang    :swift
-   :path    ../build/swift/src/main
+   :path    ../build/swift/Sources
    :main    vx/core/main
    :context vx/translation/en/context-en
    :doc     "Build Swift Source Code")
   (cmd testswift
    :code    :test
    :lang    :swift
-   :path    ../build/swift/src/test
+   :path    ../build/swift/TestSuite
    :context vx/translation/en/context-test
    :doc     "Build Swift Test Code")
 )
