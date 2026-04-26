@@ -250,18 +250,6 @@ func ListPackageValidateLibraries(
 	return listpackage, msgblock
 }
 
-func ListPackageValidateTypes(
-	listpackage []*vxpackage) ([]*vxpackage, *vxmsgblock) {
-	msgblock := NewMsgBlock("ListPackageValidateTypes")
-	for _, pkg := range listpackage {
-		pkgname := pkg.name
-		path := pkgname
-		_, msgs := ListTypeValidate(pkg.listtype, path)
-		msgblock = MsgblockAddBlock(msgblock, msgs)
-	}
-	return listpackage, msgblock
-}
-
 func ListScopeFromPackage(
 	pkg *vxpackage,
 	pkgmap map[string]*vxpackage) []vxscope {

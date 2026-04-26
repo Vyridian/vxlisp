@@ -173,6 +173,8 @@ var testresulttype = NewTypeStruct("vx/test/testresult")
 
 var typedeftype = NewType("vx/core/typedef")
 
+var typelisttype = NewTypeList("vx/core/typelist", anytype)
+
 var unknowntype = NewType("vx/core/unknown")
 
 func NewContextType() *vxtype {
@@ -864,16 +866,20 @@ func ListTypeLinkValues(
 	return listtype, msgblock
 }
 
-func ListTypeValidate(listtype []*vxtype, path string) ([]*vxtype, *vxmsgblock) {
+func ListTypeValidate(
+	listtype []*vxtype,
+	path string) ([]*vxtype, *vxmsgblock) {
 	msgblock := NewMsgBlock("TypesValidateTypes")
 	for _, typ := range listtype {
 		subpath := path + "/" + typ.name
 		if len(typ.properties) > 0 {
-			properties, _, msgs := ListArgValidate(typ.properties, emptygenerictypes, typ.textblock, subpath)
+			properties, _, msgs := ListArgValidate(
+				typ.properties, emptygenerictypes, typ.textblock, subpath)
 			msgblock = MsgblockAddBlock(msgblock, msgs)
 			typ.properties = properties
 		}
-		testvalues, msgs := ListValueValidateTestFuncs(typ.testvalues, typ.textblock, subpath)
+		testvalues, msgs := ListValueValidateTestFuncs(
+			typ.testvalues, typ.textblock, subpath)
 		msgblock = MsgblockAddBlock(msgblock, msgs)
 		typ.testvalues = testvalues
 	}

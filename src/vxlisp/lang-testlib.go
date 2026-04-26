@@ -5,9 +5,14 @@ func LangTestLib(
 	commontests := "" +
 		LangTestLib_file_test(lang) +
 		LangTestLib_read_test_file(lang) +
+		LangTestLib_sample_testcase1(lang) +
+		LangTestLib_sample_testcase2(lang) +
+		LangTestLib_sample_testcaselist(lang) +
 		LangTestLib_sample_testdescribe1(lang) +
 		LangTestLib_sample_testdescribe2(lang) +
 		LangTestLib_sample_testdescribelist(lang) +
+		LangTestLib_sample_testpackage(lang) +
+		LangTestLib_sample_testpackagelist(lang) +
 		LangTestLib_sample_testresult1(lang) +
 		LangTestLib_sample_testresult2(lang) +
 		LangTestLib_test(lang) +
@@ -18,27 +23,29 @@ func LangTestLib(
 		LangTestLib_test_run_testresult(lang) +
 		LangTestLib_test_run_testdescribe(lang) +
 		LangTestLib_test_run_testdescribelist(lang) +
+		LangTestLib_test_run_testcase(lang) +
+		LangTestLib_test_run_testcaselist(lang) +
+		LangTestLib_test_run_testpackage(lang) +
+		LangTestLib_test_run_testpackagelist(lang) +
 		/*
-			LangTestLib_test_run_testcase(lang) +
-			LangTestLib_test_run_testcaselist(lang) +
-			LangTestLib_test_run_testpackage(lang) +
-			LangTestLib_test_run_testpackagelist(lang) +
-				test_lib::test_resolve_testresult_anyfromfunc(context);
-				test_lib::test_resolve_testresult_then(context);
-				test_lib::test_resolve_testresult_thenelselist(context);
-				test_lib::test_resolve_testresult_if(context);
-				test_lib::test_resolve_testresult_f_resolve_testresult_async(context);
-				test_lib::test_resolve_testresult_f_resolve_testresult(context);*/
+			test_lib::test_resolve_testresult_anyfromfunc(context);
+			test_lib::test_resolve_testresult_then(context);
+			test_lib::test_resolve_testresult_thenelselist(context);
+			test_lib::test_resolve_testresult_if(context);
+			test_lib::test_resolve_testresult_f_resolve_testresult_async(context);
+			test_lib::test_resolve_testresult_f_resolve_testresult(context);*/
 		LangTestLib_test_run_testresult_async(lang) +
+		LangTestLib_test_run_testdescribe_async(lang) +
 		/*
-			test_lib::test_run_testdescribe_async(context);
 			test_lib::test_run_testdescribelist_async_f_list_from_list_async(context);
 		*/
 		LangTestLib_test_run_testdescribelist_async(lang) +
 		/*
 			test_lib::test_run_testcase_async_f_resolvetestcase(context);
 			test_lib::test_run_testcase_async_syncvalue(context);
-			test_lib::test_run_testcase_async(context);
+		*/
+		LangTestLib_test_run_testcase_async(lang) +
+		/*
 			test_lib::test_run_testcaselist_async(context);
 			test_lib::test_run_testpackage_async(context);
 			test_lib::test_run_testpackagelist_async(context);
@@ -59,7 +66,6 @@ func LangTestLib(
 			test_lib::test_write_testpackagelist(context);
 			test_lib::test_write_node(context);
 			test_lib::test_write_html(context);
-			test_lib::test_write_testpackagelist_async(context);
 		*/
 		LangTestLib_run_testcase(lang) +
 		LangTestLib_run_testcase_async(lang) +
@@ -68,9 +74,13 @@ func LangTestLib(
 		LangTestLib_run_testdescribelist(lang) +
 		LangTestLib_run_testpackage(lang) +
 		LangTestLib_run_testpackage_async(lang) +
+		LangTestLib_run_testpackagelist(lang) +
 		LangTestLib_run_testresult(lang) +
 		LangTestLib_write_testpackagelist_async(lang)
-	spath := LangPkgNameDot(lang, "vx/core") + "c_path_test_resources.vx_string()"
+	spath := "" +
+		LangFuncCallMethod(lang, 2,
+			LangPkgNameDot(lang, "vx/core")+"c_path_test_resources",
+			"vx_string")
 	namespaceopen, namespaceclose := LangNamespaceOpenClose(
 		lang, "TestLib", "")
 	output := LangTestLibNative(
@@ -91,16 +101,18 @@ func LangTestLib_file_test(
 			func_file_test,
 			LangVal(lang, 2, filetype,
 				"output",
-				LangFuncCall(lang, 2,
-					func_vx_copy,
-					LangTypeT(lang, filetype),
-					"file",
-					LangFuncCall(lang, 3,
-						func_vx_new_string,
-						"\":path\""),
-					LangFuncCall(lang, 3,
-						func_vx_new_string,
-						"spath")))+
+				LangFuncCallVariadicVx(lang, 2,
+					func_copy,
+					[]string{
+						LangTypeT(lang, filetype),
+						"file"},
+					[]string{
+						LangFuncCallVx(lang, 3,
+							func_new_string,
+							"\":path\""),
+						LangFuncCallVx(lang, 3,
+							func_new_string,
+							"spath")}))+
 				LangTestLib_release(lang, 2, "string_file"))
 	return output
 }
@@ -112,25 +124,27 @@ func LangTestLib_read_test_file(
 			func_read_test_file,
 			LangVar(lang, 2, filetype,
 				"file",
-				LangFuncCall(lang, 2,
-					func_vx_new,
-					LangTypeT(lang, filetype),
-					LangFuncCall(lang, 3,
-						func_vx_new_string,
-						"\":path\""),
-					LangFuncCall(lang, 3,
-						func_vx_new_string,
-						"path"),
-					LangFuncCall(lang, 3,
-						func_vx_new_string,
-						"\":name\""),
-					LangFuncCall(lang, 3,
-						func_vx_new_string,
-						"filename")))+
+				LangFuncCallVariadicVx(lang, 2,
+					func_new,
+					[]string{
+						LangTypeT(lang, filetype)},
+					[]string{
+						LangFuncCallVx(lang, 3,
+							func_new_string,
+							"\":path\""),
+						LangFuncCallVx(lang, 3,
+							func_new_string,
+							"path"),
+						LangFuncCallVx(lang, 3,
+							func_new_string,
+							"\":name\""),
+						LangFuncCallVx(lang, 3,
+							func_new_string,
+							"filename")}))+
 				LangVar(lang, 2, stringtype,
 					"string_file",
-					LangFuncCall(lang, 2,
-						func_vx_string_read_from_file,
+					LangFuncCallVx(lang, 2,
+						func_string_read_from_file,
 						"file"))+
 				LangVal(lang, 2, rawstringtype,
 					"output",
@@ -215,21 +229,23 @@ func LangTestLib_run_testcase(
 						"describelist"))+
 				LangVal(lang, 2, testdescribelisttype,
 					"testdescribelist_resolved",
-					LangFuncCall(lang, 2,
+					LangFuncCallRaw(lang, 2,
 						func_run_testdescribelist,
 						"stestpkg",
 						"scasename",
 						"testdescribelist"))+
 				LangVal(lang, 2, testcasetype,
 					"output",
-					LangFuncCall(lang, 2,
-						func_vx_copy,
-						LangTypeT(lang, testcasetype),
-						"testcase",
-						LangFuncCall(lang, 2,
-							func_vx_new_string,
-							"\":describelist\""),
-						"testdescribelist_resolved"))+
+					LangFuncCallVariadicVx(lang, 2,
+						func_copy,
+						[]string{
+							LangTypeT(lang, testcasetype),
+							"testcase"},
+						[]string{
+							LangFuncCallVx(lang, 4,
+								func_new_string,
+								"\":describelist\""),
+							"testdescribelist_resolved"}))+
 				LangTestLib_release_one_except(lang, 2,
 					"testcase", "output"))
 	return output
@@ -244,18 +260,18 @@ func LangTestLib_run_testcase_async(
 			func_run_testcase_async,
 			LangVarFuture(lang, 2, testcasetype,
 				"async_testcase",
-				LangFuncCall(lang, 2,
-					func_f_resolve_testcase,
+				LangFuncCallF(lang, 2,
+					func_resolve_testcase,
 					"testcase"))+
 				LangVar(lang, 2, testcasetype,
 					"testcase_resolved",
-					LangFuncCall(lang, 2,
-						func_vx_sync_from_async,
+					LangFuncCallVx(lang, 2,
+						func_sync_from_async,
 						LangTypeT(lang, testcasetype),
 						"async_testcase"))+
 				LangVal(lang, 2, testcasetype,
 					"output",
-					LangFuncCall(lang, 2,
+					LangFuncCallRaw(lang, 2,
 						func_run_testcase,
 						"testcase_resolved")))
 	return output
@@ -280,7 +296,7 @@ func LangTestLib_run_testcaselist(
 					"testcase", testcasetype, "listtestcase",
 					LangVal(lang, 3, testcasetype,
 						"testcase_resolved",
-						LangFuncCall(lang, 3,
+						LangFuncCallRaw(lang, 3,
 							func_run_testcase,
 							"testcase"))+
 						LangVarListAdd(lang, 3,
@@ -288,13 +304,16 @@ func LangTestLib_run_testcaselist(
 							"testcase_resolved"))+
 				LangVal(lang, 2, testcaselisttype,
 					"output",
-					LangFuncCall(lang, 2,
-						func_vx_any_from_any,
+					LangFuncCallVx(lang, 2,
+						func_any_from_any,
 						LangTypeT(lang, testcaselisttype),
-						LangFuncCallMethod(lang, 3,
-							"testcaselist",
-							"vx_new",
-							"listtestcase_resolved")))+
+						LangFuncCallVariadicVx(lang, 2,
+							func_new,
+							[]string{
+								LangTypeT(lang, testcaselisttype)},
+							[]string{
+								"testcaselist",
+								"listtestcase_resolved"})))+
 				LangTestLib_release_one_except(lang, 2,
 					"testcaselist", "output"))
 	return output
@@ -322,17 +341,19 @@ func LangTestLib_run_testdescribe(
 						"testresult"))+
 				LangVal(lang, 2, testdescribetype,
 					"output",
-					LangFuncCall(lang, 2,
-						func_vx_copy,
-						LangTypeT(lang, testdescribetype),
-						"describe",
-						"\":testresult\"",
-						LangFuncCall(lang, 3,
-							func_run_testresult,
-							"testpkg",
-							"casename",
-							"message",
-							"testresult"))))
+					LangFuncCallVariadicVx(lang, 2,
+						func_copy,
+						[]string{
+							LangTypeT(lang, testdescribetype),
+							"describe"},
+						[]string{
+							"\":testresult\"",
+							LangFuncCallRaw(lang, 3,
+								func_run_testresult,
+								"testpkg",
+								"casename",
+								"message",
+								"testresult")})))
 	return output
 }
 
@@ -348,14 +369,14 @@ func LangTestLib_run_testdescribelist(
 					LangFuncCallMethod(lang, 2,
 						"testdescribelist",
 						"vx_listtestdescribe"))+
-				LangVarCollection(lang, 2, rawlisttype, testdescribetype,
+				LangVarCollection(lang, 2, rawlisttype, anytype,
 					"listtestdescribe_resolved",
 					":new")+
 				LangForList(lang, 2,
 					"testdescribe", testdescribetype, "listtestdescribe",
 					LangVal(lang, 3, testdescribetype,
 						"testdescribe_resolved",
-						LangFuncCall(lang, 3,
+						LangFuncCallRaw(lang, 3,
 							func_run_testdescribe,
 							"testpkg",
 							"casename",
@@ -365,13 +386,15 @@ func LangTestLib_run_testdescribelist(
 							"testdescribe_resolved"))+
 				LangVal(lang, 2, testdescribelisttype,
 					"output",
-					LangFuncCall(lang, 2,
-						func_vx_any_from_any,
+					LangFuncCallVx(lang, 2,
+						func_any_from_any,
 						LangTypeT(lang, testdescribelisttype),
-						LangFuncCallMethod(lang, 3,
-							"testdescribelist",
-							"vx_new",
-							"listtestdescribe_resolved")))+
+						LangFuncCallVariadicVx(lang, 3,
+							func_new,
+							[]string{
+								LangTypeT(lang, testdescribelisttype)},
+							[]string{
+								"listtestdescribe_resolved"})))+
 				LangTestLib_release_one_except(lang, 2,
 					"testdescribelist", "output"))
 	return output
@@ -389,29 +412,32 @@ func LangTestLib_run_testpackage(
 					"caselist"))+
 				LangVal(lang, 2, testcaselisttype,
 					"testcaselist_resolved",
-					LangFuncCall(lang, 2,
+					LangFuncCallRaw(lang, 2,
 						func_run_testcaselist,
 						"testcaselist"))+
 				LangVal(lang, 2, testpackagetype,
 					"output",
-					LangFuncCall(lang, 2,
-						func_vx_copy,
-						LangTypeT(lang, testpackagetype),
-						"testpackage",
-						LangFuncCall(lang, 3,
-							func_vx_new_string,
-							"\":caselist\""),
-						"testcaselist_resolved"))+
+					LangFuncCallVariadicVx(lang, 2,
+						func_copy,
+						[]string{
+							LangTypeT(lang, testpackagetype),
+							"testpackage"},
+						[]string{
+							LangFuncCallVx(lang, 3,
+								func_new_string,
+								"\":caselist\""),
+							"testcaselist_resolved"}))+
 				LangTestLib_release_one_except(lang, 2, "testpackage", "output"))
 	return output
 }
 
 func LangTestLib_run_testpackage_async(
 	lang *vxlang) string {
+	path := "testlib/run-testpackage-async"
 	output := "" +
 		"\n  // Blocking" +
 		"\n  // This is the preferred way of calling test (1 block per package)" +
-		LangFuncHeaderStatic(lang, 1,
+		LangFuncHeaderStatic(lang, path, 1,
 			"", func_run_testpackage_async, 0,
 			LangVarFuture(lang, 2, testpackagetype,
 				"async_testpackage",
@@ -421,9 +447,51 @@ func LangTestLib_run_testpackage_async(
 					LangPkgNameDot(lang, "vx/core")+"vx_sync_from_async("+LangTypeT(lang, testpackagetype)+", async_testpackage)")+
 				LangVar(lang, 2, testpackagetype,
 					"output",
-					LangFuncCall(lang, 2,
+					LangFuncCallRaw(lang, 2,
 						func_run_testpackage,
 						"testpackage_resolved")))
+	return output
+}
+
+func LangTestLib_run_testpackagelist(
+	lang *vxlang) string {
+	output := "" +
+		LangTestLib_testfunc_helper(lang,
+			func_run_testpackagelist,
+			LangTestLib_reserve(lang, 2,
+				"testpackagelist")+
+				LangValCollection(lang, 2, rawlisttype, testpackagetype,
+					"listtestpackage",
+					LangFuncCallMethod(lang, 2,
+						"testpackagelist",
+						"vx_listtestpackage"))+
+				LangVarCollection(lang, 2, rawlisttype, testpackagetype,
+					"listtestpackage_resolved",
+					":new")+
+				LangForList(lang, 2,
+					"testpackage", testpackagetype, "listtestpackage",
+					LangVal(lang, 3, testpackagetype,
+						"testpackage_resolved",
+						LangFuncCallRaw(lang, 3,
+							func_run_testpackage,
+							"testpackage"))+
+						LangVarListAdd(lang, 3,
+							"listtestpackage_resolved",
+							"testpackage_resolved"))+
+				LangVal(lang, 2, testpackagelisttype,
+					"output",
+					LangFuncCallVx(lang, 2,
+						func_any_from_any,
+						LangTypeT(lang, testpackagelisttype),
+						LangFuncCallVariadicVx(lang, 2,
+							func_new,
+							[]string{
+								LangTypeT(lang, testpackagelisttype)},
+							[]string{
+								"testpackagelist",
+								"listtestpackage_resolved"})))+
+				LangTestLib_release_one_except(lang, 2,
+					"testpackagelist", "output"))
 	return output
 }
 
@@ -437,22 +505,38 @@ func LangTestLib_run_testresult(
 			func_run_testresult,
 			LangVar(lang, 2, anytype,
 				"valexpected",
-				"testresult.expected()")+
+				LangFuncCallMethod(lang, 2,
+					"testresult",
+					"expected"))+
 				LangVar(lang, 2, anytype,
 					"valactual",
-					"testresult.actual()")+
+					LangFuncCallMethod(lang, 2,
+						"testresult",
+						"actual"))+
 				LangVar(lang, 2, rawbooltype,
 					"passfail",
-					"testresult.passfail().vx_boolean()")+
+					LangFuncCallMethod(lang, 2,
+						LangFuncCallMethod(lang, 2,
+							"testresult",
+							"passfail"),
+						"vx_boolean"))+
 				LangVar(lang, 2, rawstringtype,
 					"code",
-					"testresult.code().vx_string()")+
+					LangFuncCallMethod(lang, 2,
+						LangFuncCallMethod(lang, 2,
+							"testresult",
+							"code"),
+						"vx_string"))+
 				LangVar(lang, 2, rawstringtype,
 					"expected",
-					LangPkgNameDot(lang, "vx/core")+"f_string_from_any(valexpected).vx_string()")+
+					LangFuncCallVx(lang, 2,
+						func_string_from_any,
+						"valexpected"))+
 				LangVar(lang, 2, rawstringtype,
 					"actual",
-					LangPkgNameDot(lang, "vx/core")+"f_string_from_any(valactual).vx_string()")+
+					LangFuncCallVx(lang, 2,
+						func_string_from_any,
+						"valactual"))+
 				LangVar(lang, 2, rawstringtype,
 					"msg",
 					"testpkg + \"/\" + testname + \" \" + message")+
@@ -462,15 +546,162 @@ func LangTestLib_run_testresult(
 					"\n      "+println+"(msg)"+lang.lineend+
 						"\n      "+println+"(expected)"+lang.lineend+
 						"\n      "+println+"(actual)"+lang.lineend+
-						"\n      "+LangPkgNameDot(lang, "vx/core")+"f_log(testresult)"+lang.lineend)+
+						"\n      "+
+						LangFuncCallF(lang, 3,
+							func_log,
+							"testresult")+lang.lineend)+
 				LangIfEnd(lang, 2)+
 				LangIfThen(lang, 2,
-					LangIfClause(lang, rawstringtype, "==", "code", "\":ne\""),
+					LangIfClause(lang, rawstringtype,
+						"==", "code", "\":ne\""),
 					assertnotequals)+
 				LangIfElse(lang, 2, assertequals)+
 				LangIfEnd(lang, 2)+
 				LangVal(lang, 2, testresulttype,
 					"output", "testresult"))
+	return output
+}
+
+func LangTestLib_sample_testcase1(
+	lang *vxlang) string {
+	output := "" +
+		LangTestLib_testfunc_helper(lang,
+			func_sample_testcase1,
+			LangVar(lang, 2, testcasetype,
+				"output",
+				LangFuncCallVariadicVx(lang, 2,
+					func_new,
+					[]string{
+						LangTypeT(lang, testcasetype)},
+					[]string{
+						LangFuncCallVx(lang, 3,
+							func_new_string,
+							"\":passfail\""),
+						LangTypeE(lang, booleantype),
+						LangFuncCallVx(lang, 3,
+							func_new_string,
+							"\":testpkg\""),
+						LangFuncCallVx(lang, 3,
+							func_new_string,
+							"\"vx/core\""),
+						LangFuncCallVx(lang, 3,
+							func_new_string,
+							"\":casename\""),
+						LangFuncCallVx(lang, 3,
+							func_new_string,
+							"\"boolean\""),
+						LangFuncCallVx(lang, 3,
+							func_new_string,
+							"\":describelist\""),
+						LangFuncCallRaw(lang, 3,
+							func_sample_testdescribelist,
+							"context")}))+
+				LangTestLib_memory_leak_test(lang, 2, 5))
+	return output
+}
+
+func LangTestLib_sample_testcase2(
+	lang *vxlang) string {
+	output := "" +
+		LangTestLib_testfunc_helper(lang,
+			func_sample_testcase2,
+			LangVar(lang, 2, testcasetype,
+				"output",
+				LangFuncCallVariadicVx(lang, 2,
+					func_new,
+					[]string{
+						LangTypeT(lang, testcasetype)},
+					[]string{
+						LangFuncCallVx(lang, 3,
+							func_new_string,
+							"\":passfail\""),
+						LangTypeE(lang, booleantype),
+						LangFuncCallVx(lang, 3,
+							func_new_string,
+							"\":testpkg\""),
+						LangFuncCallVx(lang, 3,
+							func_new_string,
+							"\"vx/core\""),
+						LangFuncCallVx(lang, 3,
+							func_new_string,
+							"\":casename\""),
+						LangFuncCallVx(lang, 3,
+							func_new_string,
+							"\"float\""),
+						LangFuncCallVx(lang, 3,
+							func_new_string,
+							"\":describelist\""),
+						LangFuncCallVx(lang, 4,
+							func_any_from_any,
+							LangTypeT(lang, testdescribelisttype),
+							LangFuncCallVariadicVx(lang, 5,
+								func_new,
+								[]string{
+									LangTypeT(lang, testdescribelisttype)},
+								[]string{
+									LangFuncCallVariadicVx(lang, 7,
+										func_new,
+										[]string{
+											LangTypeT(lang, testdescribetype)},
+										[]string{
+											LangFuncCallVx(lang, 9,
+												func_new_string,
+												"\":describename\""),
+											LangFuncCallVx(lang, 9,
+												func_new_string,
+												"\"(test 4.5 (float 4.5))\""),
+											LangFuncCallVx(lang, 9,
+												func_new_string,
+												"\":testpkg\""),
+											LangFuncCallVx(lang, 9,
+												func_new_string,
+												"\"vx/core\""),
+											LangFuncCallVx(lang, 9,
+												func_new_string,
+												"\":testresult\""),
+											LangFuncCallF(lang, 9,
+												func_test,
+												"context",
+												LangFuncCallVx(lang, 9,
+													func_new_decimal,
+													"\"4.5\""),
+												LangFuncCallF(lang, 10,
+													func_new_from_type,
+													LangTypeT(lang, floattype),
+													LangFuncCallVariadicVx(lang, 11,
+														func_new,
+														[]string{
+															LangTypeT(lang, anylisttype)},
+														[]string{
+															LangFuncCallVx(lang, 12,
+																func_new_decimal,
+																"\"4.5\"")})))})}))}))+
+				LangTestLib_memory_leak_test(lang, 2, 5))
+	return output
+}
+
+func LangTestLib_sample_testcaselist(
+	lang *vxlang) string {
+	output := "" +
+		LangTestLib_testfunc_helper(lang,
+			func_sample_testcaselist,
+			LangVar(lang, 2, testcaselisttype,
+				"output",
+				LangFuncCallVx(lang, 2,
+					func_any_from_any,
+					LangTypeT(lang, testcaselisttype),
+					LangFuncCallVariadicVx(lang, 3,
+						func_new,
+						[]string{
+							LangTypeT(lang, testcaselisttype)},
+						[]string{
+							LangFuncCallRaw(lang, 4,
+								func_sample_testcase1,
+								"context"),
+							LangFuncCallRaw(lang, 4,
+								func_sample_testcase2,
+								"context")})))+
+				LangTestLib_memory_leak_test(lang, 2, 5))
 	return output
 }
 
@@ -481,27 +712,29 @@ func LangTestLib_sample_testdescribe1(
 			func_sample_testdescribe1,
 			LangVar(lang, 2, testdescribetype,
 				"output",
-				LangFuncCall(lang, 2,
-					func_vx_new,
-					LangTypeT(lang, testdescribetype),
-					LangFuncCall(lang, 3,
-						func_vx_new_string,
-						"\":describename\""),
-					LangFuncCall(lang, 3,
-						func_vx_new_string,
-						"\"(test-true true)\""),
-					LangFuncCall(lang, 3,
-						func_vx_new_string,
-						"\":testpkg\""),
-					LangFuncCall(lang, 3,
-						func_vx_new_string,
-						"\"vx/core\""),
-					LangFuncCall(lang, 3,
-						func_vx_new_string,
-						"\":testresult\""),
-					LangFuncCall(lang, 3,
-						func_sample_testresult1,
-						"context")))+
+				LangFuncCallVariadicVx(lang, 2,
+					func_new,
+					[]string{
+						LangTypeT(lang, testdescribetype)},
+					[]string{
+						LangFuncCallVx(lang, 3,
+							func_new_string,
+							"\":describename\""),
+						LangFuncCallVx(lang, 3,
+							func_new_string,
+							"\"(test-true true)\""),
+						LangFuncCallVx(lang, 3,
+							func_new_string,
+							"\":testpkg\""),
+						LangFuncCallVx(lang, 3,
+							func_new_string,
+							"\"vx/core\""),
+						LangFuncCallVx(lang, 3,
+							func_new_string,
+							"\":testresult\""),
+						LangFuncCallRaw(lang, 3,
+							func_sample_testresult1,
+							"context")}))+
 				LangTestLib_memory_leak_test(lang, 2, 5))
 	return output
 }
@@ -513,27 +746,29 @@ func LangTestLib_sample_testdescribe2(
 			func_sample_testdescribe2,
 			LangVar(lang, 2, testdescribetype,
 				"output",
-				LangFuncCall(lang, 2,
-					func_vx_new,
-					LangTypeT(lang, testdescribetype),
-					LangFuncCall(lang, 3,
-						func_vx_new_string,
-						"\":describename\""),
-					LangFuncCall(lang, 3,
-						func_vx_new_string,
-						"\"(test-false false)\""),
-					LangFuncCall(lang, 3,
-						func_vx_new_string,
-						"\":testpkg\""),
-					LangFuncCall(lang, 3,
-						func_vx_new_string,
-						"\"vx/core\""),
-					LangFuncCall(lang, 3,
-						func_vx_new_string,
-						"\":testresult\""),
-					LangFuncCall(lang, 3,
-						func_sample_testresult2,
-						"context")))+
+				LangFuncCallVariadicVx(lang, 2,
+					func_new,
+					[]string{
+						LangTypeT(lang, testdescribetype)},
+					[]string{
+						LangFuncCallVx(lang, 3,
+							func_new_string,
+							"\":describename\""),
+						LangFuncCallVx(lang, 3,
+							func_new_string,
+							"\"(test-false false)\""),
+						LangFuncCallVx(lang, 3,
+							func_new_string,
+							"\":testpkg\""),
+						LangFuncCallVx(lang, 3,
+							func_new_string,
+							"\"vx/core\""),
+						LangFuncCallVx(lang, 3,
+							func_new_string,
+							"\":testresult\""),
+						LangFuncCallRaw(lang, 3,
+							func_sample_testresult2,
+							"context")}))+
 				LangTestLib_memory_leak_test(lang, 2, 5))
 	return output
 }
@@ -545,19 +780,64 @@ func LangTestLib_sample_testdescribelist(
 			func_sample_testdescribelist,
 			LangVar(lang, 2, testdescribelisttype,
 				"output",
-				LangFuncCall(lang, 2,
-					func_vx_any_from_any,
+				LangFuncCallVx(lang, 2,
+					func_any_from_any,
 					LangTypeT(lang, testdescribelisttype),
-					LangFuncCallMethod(lang, 3,
-						LangTypeT(lang, testdescribelisttype),
-						"vx_new",
-						LangFuncCall(lang, 4,
-							func_sample_testdescribe1,
-							"context"),
-						LangFuncCall(lang, 4,
-							func_sample_testdescribe2,
-							"context"))))+
+					LangFuncCallVariadicVx(lang, 3,
+						func_new,
+						[]string{
+							LangTypeT(lang, testdescribelisttype)},
+						[]string{
+							LangFuncCallRaw(lang, 4,
+								func_sample_testdescribe1,
+								"context"),
+							LangFuncCallRaw(lang, 4,
+								func_sample_testdescribe2,
+								"context")})))+
 				LangTestLib_memory_leak_test(lang, 2, 5))
+	return output
+}
+
+func LangTestLib_sample_testpackage(
+	lang *vxlang) string {
+	output := "" +
+		LangTestLib_testfunc_helper(lang,
+			func_sample_testpackage,
+			LangVar(lang, 2, testpackagetype,
+				"output",
+				LangFuncCallVariadicVx(lang, 2,
+					func_new,
+					[]string{
+						LangTypeT(lang, testpackagetype)},
+					[]string{
+						LangFuncCallVx(lang, 2,
+							func_new_string,
+							"\":testpkg\""),
+						LangFuncCallVx(lang, 2,
+							func_new_string,
+							"\"vx/core\""),
+						LangFuncCallVx(lang, 2,
+							func_new_string,
+							"\":caselist\""),
+						LangFuncCallRaw(lang, 2,
+							func_sample_testcaselist,
+							"context")})))
+	return output
+}
+
+func LangTestLib_sample_testpackagelist(
+	lang *vxlang) string {
+	output := "" +
+		LangTestLib_testfunc_helper(lang,
+			func_sample_testpackagelist,
+			LangVar(lang, 2, testpackagelisttype,
+				"output",
+				LangFuncCallVx(lang, 2,
+					func_any_from_any,
+					LangTypeT(lang, testpackagelisttype),
+					LangFuncCallRaw(lang, 2,
+						func_sample_testpackage,
+						"context"))))
 	return output
 }
 
@@ -568,11 +848,11 @@ func LangTestLib_sample_testresult1(
 			func_sample_testresult1,
 			LangVar(lang, 2, testresulttype,
 				"output",
-				LangFuncCall(lang, 2,
-					func_f_test_true,
+				LangFuncCallF(lang, 2,
+					func_test_true,
 					"context",
-					LangFuncCall(lang, 3,
-						func_vx_new_boolean,
+					LangFuncCallVx(lang, 3,
+						func_new_boolean,
 						"true")))+
 				LangTestLib_memory_leak_test(lang, 2, 2))
 	return output
@@ -585,11 +865,11 @@ func LangTestLib_sample_testresult2(
 			func_sample_testresult2,
 			LangVar(lang, 2, testresulttype,
 				"output",
-				LangFuncCall(lang, 2,
-					func_f_test_false,
+				LangFuncCallF(lang, 2,
+					func_test_false,
 					"context",
-					LangFuncCall(lang, 3,
-						func_vx_new_boolean,
+					LangFuncCallVx(lang, 3,
+						func_new_boolean,
 						"false")))+
 				LangTestLib_memory_leak_test(lang, 2, 2))
 	return output
@@ -605,12 +885,13 @@ func LangTestLib_test(
 	sactual := "\n      " + println + "(actual)" + lang.lineend
 	output := "" +
 		LangTestLib_testfunc_helper(lang,
-			func_test,
+			func_testlib_test,
 			assertequals+
 				LangVar(lang, 2, rawbooltype,
 					"output", "false")+
 				LangIfThen(lang, 2,
-					LangVxEqualsString(lang, "expected", "actual"),
+					LangVxEqualsString(lang,
+						"expected", "actual"),
 					spass+
 						LangVarSet(lang, 3, "output", "true"))+
 				LangIfElse(lang, 2,
@@ -628,16 +909,16 @@ func LangTestLib_test_async_from_async_fn(
 			func_test_async_from_async_fn,
 			LangVal(lang, 2, stringtype,
 				"helloworld",
-				LangFuncCall(lang, 2,
-					func_vx_new_string,
+				LangFuncCallVx(lang, 2,
+					func_new_string,
 					"\"Hello World\""))+
 				LangVarFuture(lang, 2, stringtype,
 					"async",
 					LangPkgNameDot(lang, "vx/core")+"vx_async_new_from_value(helloworld)")+
 				LangVarFuture(lang, 2, stringtype,
 					"async1",
-					LangFuncCall(lang, 2,
-						func_vx_async_from_async_fn,
+					LangFuncCallVx(lang, 2,
+						func_async_from_async_fn,
 						LangTypeT(lang, stringtype),
 						"async",
 						LangTestLibLambda(lang, 3)))+
@@ -659,10 +940,11 @@ func LangTestLib_test_async_new_from_value(
 	output := "" +
 		LangTestLib_testfunc(lang,
 			func_test_async_new_from_value,
-			//long irefcount = vx_core::refcount;
 			LangVal(lang, 2, stringtype,
 				"helloworld",
-				LangPkgNameDot(lang, "vx/core")+"vx_new_string(\"Hello World\")")+
+				LangFuncCallVx(lang, 2,
+					func_new_string,
+					"\"Hello World\""))+
 				LangValFuture(lang, 2, stringtype,
 					"async",
 					LangPkgNameDot(lang, "vx/core")+"vx_async_new_from_value(helloworld)")+
@@ -673,8 +955,8 @@ func LangTestLib_test_async_new_from_value(
 					"expected", "\"Hello World\"")+
 				LangVal(lang, 2, rawstringtype,
 					"actual",
-					"sync"+lang.typeref+"vx_string()")+
-				LangTestLib_release(lang, 2, "helloworld"))
+					"sync"+lang.typeref+"vx_string()")) +
+		LangTestLib_release(lang, 2, "helloworld")
 	return output
 }
 
@@ -685,7 +967,9 @@ func LangTestLib_test_helloworld(
 			func_test_helloworld,
 			LangVal(lang, 2, stringtype,
 				"helloworld",
-				LangPkgNameDot(lang, "vx/core")+"vx_new_string(\"Hello World\")")+
+				LangFuncCallVx(lang, 2,
+					func_new_string,
+					"\"Hello World\""))+
 				LangVal(lang, 2, rawstringtype,
 					"expected", "\"Hello World\"")+
 				LangVal(lang, 2, rawstringtype,
@@ -699,29 +983,44 @@ func LangTestLib_test_helloworld(
 func LangTestLib_test_list_from_list_async(
 	lang *vxlang) string {
 	fn_async := LangTestLibFnAsync(lang)
-	asynclist := LangPkgNameDot(lang, "vx/core") + "vx_list_from_list_async(" + LangTypeT(lang, stringlisttype) + ", slist, fn_async)"
 	output := "" +
 		LangTestLib_testfunc(lang,
 			func_test_list_from_list_async,
 			LangVal(lang, 2, anylisttype,
 				"sparams",
-				LangPkgNameDot(lang, "vx/core")+"vx_anylist_from_arraystring(\"hello\", \"world\")")+
+				LangFuncCallVariadicVx(lang, 2,
+					func_anylist_from_arraystring,
+					[]string{},
+					[]string{
+						"\"hello\"",
+						"\"world\""}))+
 				LangVal(lang, 2, stringlisttype,
 					"slist",
-					LangPkgNameDot(lang, "vx/core")+"f_new_from_type("+LangTypeT(lang, stringlisttype)+", sparams)")+
+					LangFuncCallF(lang, 2,
+						func_new_from_type,
+						LangTypeT(lang, stringlisttype),
+						"sparams"))+
 				fn_async+
 				LangValFuture(lang, 2, stringlisttype,
-					"asynclist", asynclist)+
+					"asynclist",
+					LangFuncCallVx(lang, 2,
+						func_list_from_list_async,
+						LangTypeT(lang, stringlisttype),
+						"slist",
+						"fn_async"))+
 				LangVal(lang, 2, stringlisttype,
 					"sync",
-					LangPkgNameDot(lang, "vx/core")+"vx_sync_from_async("+LangTypeT(lang, stringlisttype)+", asynclist)")+
+					LangFuncCallVx(lang, 2,
+						func_sync_from_async,
+						LangTypeT(lang, stringlisttype),
+						"asynclist"))+
 				LangVal(lang, 2, rawstringtype,
 					"expected",
 					`"(stringlist\n \"hello!\"\n \"world!\")"`)+
 				LangVal(lang, 2, rawstringtype,
 					"actual",
-					LangFuncCall(lang, 2,
-						func_vx_string_from_any,
+					LangFuncCallVx(lang, 2,
+						func_string_from_any,
 						"sync"))+
 				LangTestLib_release(lang, 2, "helloworld"))
 	return output
@@ -729,28 +1028,37 @@ func LangTestLib_test_list_from_list_async(
 
 func LangTestLib_test_pathfull_from_file(
 	lang *vxlang) string {
-	fnc := NewFunc()
-	fnc.name = "test_pathfull_from_file"
-	fnc.vxtype = rawbooltype
-	paramsopen, paramsclose := LangTestLibParamsOpenClose(lang)
-	fileparams := "" +
-		"\n      " + LangTypeT(lang, filetype) + "," +
-		paramsopen +
-		"\n      " + LangPkgNameDot(lang, "vx/core") + "vx_new_string(\":path\"), " + LangPkgNameDot(lang, "vx/core") + "vx_new_string(spath + \"/vx\")," +
-		"\n      " + LangPkgNameDot(lang, "vx/core") + "vx_new_string(\":name\"), " + LangPkgNameDot(lang, "vx/core") + "vx_new_string(\"string_read_from_file.txt\")" +
-		paramsclose
 	output := "" +
-		LangTestLib_testfunc(lang, fnc,
+		LangTestLib_testfunc(lang,
+			func_test_pathfull_from_file,
 			LangVar(lang, 2, filetype,
 				"file",
-				LangPkgNameDot(lang, "vx/core")+"vx_new("+fileparams+")")+
+				LangFuncCallVariadicVx(lang, 2,
+					func_new,
+					[]string{
+						LangTypeT(lang, filetype)},
+					[]string{
+						LangFuncCallVx(lang, 4,
+							func_new_string,
+							"\":path\""),
+						LangFuncCallVx(lang, 4,
+							func_new_string,
+							"spath + \"/vx\""),
+						LangFuncCallVx(lang, 4,
+							func_new_string,
+							"\":name\""),
+						LangFuncCallVx(lang, 4,
+							func_new_string,
+							"\"string_read_from_file.txt\"")}))+
 				LangVar(lang, 2, stringtype,
 					"string_path",
-					LangPkgNameDot(lang, "vx/data/file")+"f_pathfull_from_file(file)")+
+					LangFuncCallF(lang, 2,
+						func_pathfull_from_file,
+						"file"))+
 				LangTestLib_expected(lang, 2,
 					`spath + "/vx/string_read_from_file.txt"`)+
 				LangTestLib_actual(lang, 2,
-					LangFuncCallMethod(lang, 2,
+					LangFuncCallMethod(lang, 3,
 						"string_path",
 						"vx_string"))+
 				LangTestLib_release(lang, 2,
@@ -760,42 +1068,154 @@ func LangTestLib_test_pathfull_from_file(
 
 func LangTestLib_test_read_file(
 	lang *vxlang) string {
-	fnc := NewFunc()
-	fnc.name = "test_read_file"
-	fnc.vxtype = rawbooltype
 	output := "" +
-		LangTestLib_testfunc(lang, fnc,
+		LangTestLib_testfunc(lang, func_test_read_file,
 			LangTestLib_expected(lang, 2,
-				`"testdata"`)+
+				"\"testdata\"")+
 				LangTestLib_actual(lang, 2,
-					`read_test_file(spath + "/vx", "string_read_from_file.txt")`)+
+					LangFuncCallRaw(lang, 2,
+						func_read_test_file,
+						"context",
+						"spath + \"/vx\"",
+						"\"string_read_from_file.txt\""))+
 				LangTestLib_release(lang, 2,
 					"string_path"))
+	return output
+}
+
+func LangTestLib_test_run_testcase(
+	lang *vxlang) string {
+	output := "" +
+		LangTestLib_testfunc(lang,
+			func_test_run_testcase,
+			LangVal(lang, 2, testcasetype,
+				"testcase",
+				LangFuncCallRaw(lang, 2,
+					func_sample_testcase1,
+					"context"))+
+				LangVal(lang, 2, testcasetype,
+					"testcase_resolved",
+					LangFuncCallRaw(lang, 2,
+						func_run_testcase,
+						"testcase"))+
+				LangTestLib_expected(lang, 2,
+					LangTestLib_testfunc_read_test_file(lang, 2,
+						func_test_run_testcase))+
+				LangTestLib_actual(lang, 2,
+					LangFuncCallVx(lang, 2,
+						func_string_from_any,
+						"testcase_resolved"))+
+				LangTestLib_release(lang, 2,
+					"testcase_resolved"))
+	return output
+}
+
+func LangTestLib_test_run_testcase_async(
+	lang *vxlang) string {
+	output := "" +
+		LangTestLib_testfunc(lang,
+			func_test_run_testcase_async,
+			LangVar(lang, 2, testcasetype,
+				"testcase",
+				LangFuncCallRaw(lang, 2,
+					func_sample_testcase1,
+					"context"))+
+				LangVar(lang, 2, testcasetype,
+					"testcase_resolved",
+					LangFuncCallRaw(lang, 2,
+						func_run_testcase,
+						"testcase"))+
+				LangTestLib_expected(lang, 2,
+					LangTestLib_testfunc_read_test_file(lang, 2,
+						func_test_run_testcase_async))+
+				LangTestLib_actual(lang, 2,
+					LangFuncCallVx(lang, 2,
+						func_string_from_any,
+						"testcase_resolved"))+
+				LangTestLib_release(lang, 2,
+					"testcase_resolved"))
+	return output
+}
+
+func LangTestLib_test_run_testcaselist(
+	lang *vxlang) string {
+	output := "" +
+		LangTestLib_testfunc(lang,
+			func_test_run_testcaselist,
+			LangVal(lang, 2, testcasetype,
+				"testcase",
+				LangFuncCallRaw(lang, 2,
+					func_sample_testcase1,
+					"context"))+
+				LangVal(lang, 2, testcasetype,
+					"testcase_resolved",
+					LangFuncCallRaw(lang, 2,
+						func_run_testcase,
+						"testcase"))+
+				LangTestLib_expected(lang, 2,
+					LangTestLib_testfunc_read_test_file(lang, 2,
+						func_test_run_testcaselist))+
+				LangTestLib_actual(lang, 2,
+					LangFuncCallVx(lang, 2,
+						func_string_from_any,
+						"testcase_resolved"))+
+				LangTestLib_release(lang, 2,
+					"testcase_resolved"))
 	return output
 }
 
 func LangTestLib_test_run_testdescribe(
 	lang *vxlang) string {
 	output := "" +
-		LangTestLib_testfunc(lang, func_test_run_testdescribe,
+		LangTestLib_testfunc(lang,
+			func_test_run_testdescribe,
 			LangVal(lang, 2, testdescribetype,
 				"testdescribe",
-				LangFuncCall(lang, 2,
+				LangFuncCallRaw(lang, 2,
 					func_sample_testdescribe1,
 					"context"))+
 				LangVal(lang, 2, testdescribetype,
 					"testdescribe_resolved",
-					LangFuncCall(lang, 2,
+					LangFuncCallRaw(lang, 2,
 						func_run_testdescribe,
 						"\"vx/core\"",
 						"\"boolean\"",
 						"testdescribe"))+
 				LangTestLib_expected(lang, 2,
-					LangTestLib_testfunc_read_test_file(
-						lang, 2, func_test_run_testdescribe))+
+					LangTestLib_testfunc_read_test_file(lang, 2,
+						func_test_run_testdescribe))+
 				LangTestLib_actual(lang, 2,
-					LangFuncCall(lang, 2,
-						func_vx_string_from_any,
+					LangFuncCallVx(lang, 2,
+						func_string_from_any,
+						"testdescribe_resolved"))+
+				LangTestLib_release(lang, 2,
+					"testdescribe_resolved"))
+	return output
+}
+
+func LangTestLib_test_run_testdescribe_async(
+	lang *vxlang) string {
+	output := "" +
+		LangTestLib_testfunc(lang,
+			func_test_run_testdescribe_async,
+			LangVal(lang, 2, testdescribetype,
+				"testdescribe",
+				LangFuncCallRaw(lang, 2,
+					func_sample_testdescribe1,
+					"context"))+
+				LangVal(lang, 2, testdescribetype,
+					"testdescribe_resolved",
+					LangFuncCallRaw(lang, 2,
+						func_run_testdescribe,
+						"\"vx/core\"",
+						"\"boolean\"",
+						"testdescribe"))+
+				LangTestLib_expected(lang, 2,
+					LangTestLib_testfunc_read_test_file(lang, 2,
+						func_test_run_testdescribe_async))+
+				LangTestLib_actual(lang, 2,
+					LangFuncCallVx(lang, 2,
+						func_string_from_any,
 						"testdescribe_resolved"))+
 				LangTestLib_release(lang, 2,
 					"testdescribe_resolved"))
@@ -805,29 +1225,29 @@ func LangTestLib_test_run_testdescribe(
 func LangTestLib_test_run_testdescribelist(
 	lang *vxlang) string {
 	output := "" +
-		LangTestLib_testfunc(lang, func_test_run_testdescribelist,
-			LangVar(lang, 2, testresulttype,
-				"testresult",
-				LangFuncCall(lang, 2,
-					func_sample_testresult1,
+		LangTestLib_testfunc(lang,
+			func_test_run_testdescribelist,
+			LangVal(lang, 2, testdescribelisttype,
+				"testdescribelist",
+				LangFuncCallRaw(lang, 2,
+					func_sample_testdescribelist,
 					"context"))+
-				LangVar(lang, 2, testresulttype,
-					"testresult_resolved",
-					LangFuncCall(lang, 2,
-						func_run_testresult,
+				LangVal(lang, 2, testdescribelisttype,
+					"testdescribelist_resolved",
+					LangFuncCallRaw(lang, 2,
+						func_run_testdescribelist,
 						"\"vx/core\"",
 						"\"boolean\"",
-						"\"\"",
-						"testresult"))+
+						"testdescribelist"))+
 				LangTestLib_expected(lang, 2,
-					LangTestLib_testfunc_read_test_file(
-						lang, 2, func_test_run_testdescribelist))+
+					LangTestLib_testfunc_read_test_file(lang, 2,
+						func_test_run_testdescribelist))+
 				LangTestLib_actual(lang, 2,
-					LangFuncCall(lang, 2,
-						func_vx_string_from_any,
-						"testresult_resolved"))+
+					LangFuncCallVx(lang, 2,
+						func_string_from_any,
+						"testdescribelist_resolved"))+
 				LangTestLib_release(lang, 2,
-					"testresult_resolved"))
+					"testdescribelist_resolved"))
 	return output
 }
 
@@ -836,27 +1256,81 @@ func LangTestLib_test_run_testdescribelist_async(
 	output := "" +
 		LangTestLib_testfunc(lang,
 			func_test_run_testdescribelist_async,
-			LangVar(lang, 2, testdescribelisttype,
+			LangVal(lang, 2, testdescribelisttype,
 				"testdescribelist",
-				LangFuncCall(lang, 2,
+				LangFuncCallRaw(lang, 2,
 					func_sample_testdescribelist,
 					"context"))+
-				LangVar(lang, 2, testdescribelisttype,
+				LangVal(lang, 2, testdescribelisttype,
 					"testdescribelist_resolved",
-					LangFuncCall(lang, 2,
+					LangFuncCallRaw(lang, 2,
 						func_run_testdescribelist,
 						"\"vx/core\"",
 						"\"boolean\"",
 						"testdescribelist"))+
 				LangTestLib_expected(lang, 2,
-					LangTestLib_testfunc_read_test_file(
-						lang, 2, func_test_run_testdescribelist_async))+
+					LangTestLib_testfunc_read_test_file(lang, 2,
+						func_test_run_testdescribelist_async))+
 				LangTestLib_actual(lang, 2,
-					LangFuncCall(lang, 2,
-						func_vx_string_from_any,
+					LangFuncCallVx(lang, 2,
+						func_string_from_any,
 						"testdescribelist_resolved"))+
 				LangTestLib_release(lang, 2,
 					"testdescribe_resolved"))
+	return output
+}
+
+func LangTestLib_test_run_testpackage(
+	lang *vxlang) string {
+	output := "" +
+		LangTestLib_testfunc(lang,
+			func_test_run_testpackage,
+			LangVal(lang, 2, testpackagetype,
+				"testpackage",
+				LangFuncCallRaw(lang, 2,
+					func_sample_testpackage,
+					"context"))+
+				LangVal(lang, 2, testpackagetype,
+					"testpackage_resolved",
+					LangFuncCallRaw(lang, 2,
+						func_run_testpackage,
+						"testpackage"))+
+				LangTestLib_expected(lang, 2,
+					LangTestLib_testfunc_read_test_file(lang, 2,
+						func_test_run_testpackage))+
+				LangTestLib_actual(lang, 2,
+					LangFuncCallVx(lang, 2,
+						func_string_from_any,
+						"testpackage_resolved"))+
+				LangTestLib_release(lang, 2,
+					"testpackage_resolved"))
+	return output
+}
+
+func LangTestLib_test_run_testpackagelist(
+	lang *vxlang) string {
+	output := "" +
+		LangTestLib_testfunc(lang,
+			func_test_run_testpackagelist,
+			LangVal(lang, 2, testpackagelisttype,
+				"testpackagelist",
+				LangFuncCallRaw(lang, 2,
+					func_sample_testpackagelist,
+					"context"))+
+				LangVal(lang, 2, testpackagelisttype,
+					"testpackagelist_resolved",
+					LangFuncCallRaw(lang, 2,
+						func_run_testpackagelist,
+						"testpackagelist"))+
+				LangTestLib_expected(lang, 2,
+					LangTestLib_testfunc_read_test_file(
+						lang, 2, func_test_run_testpackagelist))+
+				LangTestLib_actual(lang, 2,
+					LangFuncCallVx(lang, 2,
+						func_string_from_any,
+						"testpackagelist_resolved"))+
+				LangTestLib_release(lang, 2,
+					"testpackagelist_resolved"))
 	return output
 }
 
@@ -865,14 +1339,14 @@ func LangTestLib_test_run_testresult(
 	output := "" +
 		LangTestLib_testfunc(lang,
 			func_test_run_testresult,
-			LangVar(lang, 2, testresulttype,
+			LangVal(lang, 2, testresulttype,
 				"testresult",
-				LangFuncCall(lang, 2,
+				LangFuncCallRaw(lang, 2,
 					func_sample_testresult1,
 					"context"))+
-				LangVar(lang, 2, testresulttype,
+				LangVal(lang, 2, testresulttype,
 					"testresult_resolved",
-					LangFuncCall(lang, 2,
+					LangFuncCallRaw(lang, 2,
 						func_run_testresult,
 						"\"vx/core\"",
 						"\"boolean\"",
@@ -882,8 +1356,8 @@ func LangTestLib_test_run_testresult(
 					LangTestLib_testfunc_read_test_file(
 						lang, 2, func_test_run_testresult))+
 				LangTestLib_actual(lang, 2,
-					LangFuncCall(lang, 2,
-						func_vx_string_from_any,
+					LangFuncCallVx(lang, 2,
+						func_string_from_any,
 						"testresult_resolved"))+
 				LangTestLib_release(lang, 2,
 					"testresult_resolved"))
@@ -895,25 +1369,25 @@ func LangTestLib_test_run_testresult_async(
 	output := "" +
 		LangTestLib_testfunc(lang,
 			func_test_run_testresult_async,
-			LangVar(lang, 2, testresulttype,
+			LangVal(lang, 2, testresulttype,
 				"testresult",
-				LangFuncCall(lang, 2,
+				LangFuncCallRaw(lang, 2,
 					func_sample_testresult1,
 					"context"))+
-				LangVar(lang, 2, testresulttype,
+				LangVal(lang, 2, testresulttype,
 					"testresult_resolved",
-					LangFuncCall(lang, 2,
+					LangFuncCallRaw(lang, 2,
 						func_run_testresult,
 						"\"vx/core\"",
 						"\"boolean\"",
 						"\"\"",
 						"testresult"))+
 				LangTestLib_expected(lang, 2,
-					LangTestLib_testfunc_read_test_file(
-						lang, 2, func_test_run_testresult_async))+
+					LangTestLib_testfunc_read_test_file(lang, 2,
+						func_test_run_testresult_async))+
 				LangTestLib_actual(lang, 2,
-					LangFuncCall(lang, 2,
-						func_vx_string_from_any,
+					LangFuncCallVx(lang, 2,
+						func_string_from_any,
 						"testresult_resolved"))+
 				LangTestLib_release(lang, 2,
 					"testresult_resolved"))
@@ -922,25 +1396,47 @@ func LangTestLib_test_run_testresult_async(
 
 func LangTestLib_test_write_file(
 	lang *vxlang) string {
-	fnc := NewFuncFromPkgnameName("TestLib", "test_write_file")
-	fnc.vxtype = rawbooltype
 	output := "" +
-		LangTestLib_testfunc(lang, fnc,
-			LangVar(lang, 2, filetype,
+		LangTestLib_testfunc(lang,
+			func_test_write_file,
+			LangVal(lang, 2, filetype,
 				"file",
-				LangPkgNameDot(lang, "vx/core")+"vx_new("+
-					"\n      "+LangTypeT(lang, filetype)+", "+
-					"\n      "+LangPkgNameDot(lang, "vx/core")+"vx_new_string(\":path\"), "+LangPkgNameDot(lang, "vx/core")+"vx_new_string(spath + \"/vx\"),"+
-					"\n      "+LangPkgNameDot(lang, "vx/core")+"vx_new_string(\":name\"), "+LangPkgNameDot(lang, "vx/core")+"vx_new_string(\"string_read_from_file.txt\")"+
-					"\n    )")+
+				LangFuncCallVariadicVx(lang, 2,
+					func_new,
+					[]string{
+						LangTypeT(lang, filetype)},
+					[]string{
+						LangFuncCallVx(lang, 3,
+							func_new_string,
+							"\":path\""),
+						LangFuncCallVx(lang, 3,
+							func_new_string,
+							"spath + \"/vx\""),
+						LangFuncCallVx(lang, 3,
+							func_new_string,
+							"\":name\""),
+						LangFuncCallVx(lang, 4,
+							func_new_string,
+							"\"boolean_write_from_file_string\"")}))+
 				LangVar(lang, 2, stringtype,
-					"string_path",
-					LangPkgNameDot(lang, "vx/data/file")+"f_pathfull_from_file(file)")+
+					"string_file",
+					LangFuncCallVx(lang, 2,
+						func_new_string,
+						"\"writetext\""))+
+				LangVar(lang, 2, booleantype,
+					"boolean_write",
+					LangFuncCallVx(lang, 2,
+						func_boolean_write_from_file_string,
+						"context",
+						"file",
+						"string_file"))+
 				LangTestLib_expected(lang, 2,
-					`spath + "/vx/string_read_from_file.txt"`)+
+					"\"true\"")+
 				LangTestLib_actual(lang, 2,
-					"string_path"+lang.typeref+"vx_string()")+
-				LangTestLib_release(lang, 2, "string_path"))
+					LangFuncCallVx(lang, 2,
+						func_string_from_any,
+						"boolean_write"))) +
+		LangTestLib_release(lang, 2, "boolean_write")
 	return output
 }
 
@@ -998,6 +1494,7 @@ func LangTestLib_testfunc(
 	lang *vxlang,
 	fnc *vxfunc,
 	body string) string {
+	path := "testlib/testfunc"
 	header := "" +
 		LangVal(lang, 2, rawstringtype,
 			"testname",
@@ -1006,14 +1503,14 @@ func LangTestLib_testfunc(
 	footer := "" +
 		LangVal(lang, 2, rawbooltype,
 			"output",
-			LangFuncCall(lang, 2,
-				func_test,
+			LangFuncCallRaw(lang, 2,
+				func_testlib_test,
 				"testname",
 				"expected",
 				"actual")) +
 		LangTestLib_memory_leak_test(lang, 2, 0)
 	output := "" +
-		LangFuncHeaderStatic(lang, 1,
+		LangFuncHeaderStatic(lang, path, 1,
 			"", fnc, 0,
 			header+
 				body+
@@ -1025,12 +1522,13 @@ func LangTestLib_testfunc_helper(
 	lang *vxlang,
 	fnc *vxfunc,
 	body string) string {
+	path := "testlib/testfunc-helper"
 	header := ""
 	LangTestLib_memory_refcount(lang, 2)
 	footer := "" +
 		LangTestLib_memory_leak_test(lang, 2, 0)
 	output := "" +
-		LangFuncHeaderStatic(lang, 1,
+		LangFuncHeaderStatic(lang, path, 1,
 			"", fnc, 0,
 			header+
 				body+
@@ -1043,8 +1541,9 @@ func LangTestLib_testfunc_read_test_file(
 	indent int,
 	fnc *vxfunc) string {
 	filename := fnc.alias + ".txt"
-	output := LangFuncCall(lang, indent,
+	output := LangFuncCallRaw(lang, indent,
 		func_read_test_file,
+		"context",
 		"spath + \"/vx\"",
 		"\""+filename+"\"")
 	return output
@@ -1052,6 +1551,7 @@ func LangTestLib_testfunc_read_test_file(
 
 func LangTestLib_write_testpackagelist_async(
 	lang *vxlang) string {
+	path := "testlib/write-testpackagelist-async"
 	fnc := NewFunc()
 	fnc.name = "write_testpackagelist_async"
 	fnc.vxtype = rawbooltype
@@ -1066,7 +1566,7 @@ func LangTestLib_write_testpackagelist_async(
 	output := "" +
 		"\n  // Blocking" +
 		"\n  // This is the preferred way of writing testsuite (1 block per testsuite)" +
-		LangFuncHeaderStatic(lang, 1,
+		LangFuncHeaderStatic(lang, path, 1,
 			"", fnc, 0,
 			LangVar(lang, 2, rawbooltype,
 				"output", "false")+

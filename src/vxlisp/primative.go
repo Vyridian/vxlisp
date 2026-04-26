@@ -27,6 +27,10 @@ func BooleanFromStringEnds(str string, ends string) bool {
 	return strings.HasSuffix(str, ends)
 }
 
+func BooleanFromStringEquals(str string, equals string) bool {
+	return str == equals
+}
+
 func BooleanFromStringStarts(str string, starts string) bool {
 	return strings.HasPrefix(str, starts)
 }

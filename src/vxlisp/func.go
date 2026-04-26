@@ -40,25 +40,64 @@ var emptyfunc = NewFunc()
 
 var emptysignature = NewSignature()
 
-var func_f_boolean_permission_from_func = NewFuncFromPkgnameName(
+var func_any_from_any = NewFuncFromPkgnameName(
+	"vx/core", "any_from_any")
+var func_any_from_any_async = NewFuncFromPkgnameName(
+	"vx/core", "any_from_any_async")
+var func_any_from_func = NewFuncFromPkgnameName(
+	"vx/core", "any_from_func")
+var func_any_from_func_async = NewFuncFromPkgnameName(
+	"vx/core", "any_from_func_async")
+var func_any_from_struct = NewFuncFromPkgnameName("vx/core", "any_from_struct")
+var func_anylist_from_arraystring = NewFuncFromPkgnameName(
+	"vx/core", "anylist_from_arraystring")
+var func_arraylist_from_array = NewFuncFromPkgnameName(
+	"vx/core", "arraylist_from_array")
+var func_async = NewFuncFromPkgnameName(
+	"vx/core", "async")
+var func_async_from_async = NewFuncFromPkgnameName(
+	"vx/core", "async_from_async")
+var func_async_from_async_fn = NewFuncFromPkgnameName(
+	"vx/core", "async_from_async_fn")
+var func_boolean_from_func = NewFuncFromPkgnameName(
+	"vx/core", "boolean_from_func")
+var func_boolean_permission_from_func = NewFuncFromPkgnameName(
 	"vx/core",
-	"f_boolean_permission_from_func")
-var func_f_copy = NewFuncFromPkgnameName("vx/core", "f_copy")
-var func_f_resolve_testcase = NewFuncFromPkgnameName(
-	"vx/test",
-	"f_resolve_testcase")
-var func_f_test_false = NewFuncFromPkgnameName(
-	"vx/test",
-	"f_test_false")
-var func_f_test_true = NewFuncFromPkgnameName(
-	"vx/test",
-	"f_test_true")
+	"boolean_permission_from_func")
+var func_boolean_write_from_file_string = NewFuncFromPkgnameName(
+	"vx/data/file", "boolean_write_from_file_string")
+var func_copy = NewFuncFromPkgnameName(
+	"vx/core", "copy")
+var func_empty = NewFuncFromPkgnameName("vx/core", "empty")
+var func_let_async = NewFuncFromPkgnameName("vx/core", "let_async")
+var func_log = NewFuncFromPkgnameName("vx/core", "log")
+var func_log_1 = NewFuncFromPkgnameName("vx/core", "log_1")
+var func_list_from_list_async = NewFuncFromPkgnameName(
+	"vx/core", "list_from_list_async")
+var func_listimmutable = NewFuncFromPkgnameName(
+	"vx/core", "listimmutable")
+var func_mapimmutable = NewFuncFromPkgnameName("vx/core", "mapimmutable")
+var func_mapmutable = NewFuncFromPkgnameName("vx/core", "mapmutable")
+var func_msg_from_error = NewFuncFromPkgnameName("vx/core", "msg_from_error")
+var func_msg_from_exception = NewFuncFromPkgnameName("vx/core", "msg_from_exception")
+var func_new = NewFuncFromPkgnameName("vx/core", "new")
+var func_new_anylist = NewFuncFromPkgnameName(
+	"vx/core", "new_anylist")
+var func_new_boolean = NewFuncFromPkgnameName("vx/core", "new_boolean")
+var func_new_decimal = NewFuncFromPkgnameName("vx/core", "new_decimal")
+var func_new_from_type = NewFuncFromPkgnameName("vx/core", "new_from_type")
+var func_new_int = NewFuncFromPkgnameName("vx/core", "new_int")
+var func_new_string = NewFuncFromPkgnameName("vx/core", "new_string")
+var func_pathfull_from_file = NewFuncFromPkgnameName(
+	"vx/data/file", "pathfull_from_file")
 var func_read_test_file = NewFuncFromPkgnameNameTypeArgs(
-	"TestLib",
-	"read_test_file",
+	"TestLib", "read_test_file",
 	rawstringtype,
+	argcontext,
 	NewArgFromNameTypeFinal("path", rawstringtype, true),
 	NewArgFromNameTypeFinal("filename", rawstringtype, true))
+var func_resolve_testcase = NewFuncFromPkgnameName(
+	"vx/test", "resolve_testcase")
 var func_run_testcase = NewFuncFromPkgnameNameTypeArgs(
 	"TestLib",
 	"run_testcase",
@@ -98,6 +137,11 @@ var func_run_testpackage_async = NewFuncFromPkgnameNameTypeArgs(
 	"run_testpackage_async",
 	testpackagetype,
 	NewArgFromNameTypeFinal("testpackage", testpackagetype, true))
+var func_run_testpackagelist = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"run_testpackagelist",
+	testpackagelisttype,
+	NewArgFromNameTypeFinal("testpackagelist", testpackagelisttype, true))
 var func_run_testresult = NewFuncFromPkgnameNameTypeArgs(
 	"TestLib",
 	"run_testresult",
@@ -106,6 +150,21 @@ var func_run_testresult = NewFuncFromPkgnameNameTypeArgs(
 	NewArgFromNameTypeFinal("testname", rawstringtype, true),
 	NewArgFromNameTypeFinal("message", rawstringtype, true),
 	NewArgFromNameTypeFinal("testresult", testresulttype, true))
+var func_sample_testcase1 = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"sample_testcase1",
+	testcasetype,
+	argcontext)
+var func_sample_testcase2 = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"sample_testcase2",
+	testcasetype,
+	argcontext)
+var func_sample_testcaselist = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"sample_testcaselist",
+	testcaselisttype,
+	argcontext)
 var func_sample_testdescribe1 = NewFuncFromPkgnameNameTypeArgs(
 	"TestLib",
 	"sample_testdescribe1",
@@ -121,6 +180,16 @@ var func_sample_testdescribelist = NewFuncFromPkgnameNameTypeArgs(
 	"sample_testdescribelist",
 	testdescribelisttype,
 	argcontext)
+var func_sample_testpackage = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"sample_testpackage",
+	testpackagetype,
+	argcontext)
+var func_sample_testpackagelist = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"sample_testpackagelist",
+	testpackagelisttype,
+	argcontext)
 var func_sample_testresult1 = NewFuncFromPkgnameNameTypeArgs(
 	"TestLib",
 	"sample_testresult1",
@@ -131,13 +200,14 @@ var func_sample_testresult2 = NewFuncFromPkgnameNameTypeArgs(
 	"sample_testresult2",
 	testresulttype,
 	argcontext)
-var func_test = NewFuncFromPkgnameNameTypeArgs(
-	"TestLib",
-	"test",
-	rawbooltype,
-	NewArgFromNameTypeFinal("testname", rawstringtype, true),
-	NewArgFromNameTypeFinal("expected", rawstringtype, true),
-	NewArgFromNameTypeFinal("actual", rawstringtype, true))
+var func_string_from_any = NewFuncFromPkgnameName("vx/core", "string_from_any")
+var func_string_read_from_file = NewFuncFromPkgnameName(
+	"vx/data/file", "string_read_from_file")
+var func_sync_from_async = NewFuncFromPkgnameName(
+	"vx/core", "sync_from_async")
+var func_test = NewFuncFromPkgnameName("vx/test", "test")
+var func_test_false = NewFuncFromPkgnameName("vx/test", "test_false")
+var func_test_true = NewFuncFromPkgnameName("vx/test", "test_true")
 var func_test_async_from_async_fn = NewFuncFromPkgnameNameType("TestLib", "test_async_from_async_fn", rawbooltype)
 var func_test_async_new_from_value = NewFuncFromPkgnameNameType("TestLib", "test_async_new_from_value", rawbooltype)
 var func_test_helloworld = NewFuncFromPkgnameNameType(
@@ -145,9 +215,35 @@ var func_test_helloworld = NewFuncFromPkgnameNameType(
 	"test_helloworld",
 	rawbooltype)
 var func_test_list_from_list_async = NewFuncFromPkgnameNameType("TestLib", "test_list_from_list_async", rawbooltype)
+var func_test_pathfull_from_file = NewFuncFromPkgnameNameType("TestLib", "test_pathfull_from_file", rawbooltype)
+var func_test_read_file = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"test_read_file",
+	rawbooltype,
+	argcontext)
+var func_test_run_testcase = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"test_run_testcase",
+	rawbooleantype,
+	argcontext)
+var func_test_run_testcase_async = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"test_run_testcase_async",
+	rawbooleantype,
+	argcontext)
+var func_test_run_testcaselist = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"test_run_testcaselist",
+	rawbooleantype,
+	argcontext)
 var func_test_run_testdescribe = NewFuncFromPkgnameNameTypeArgs(
 	"TestLib",
 	"test_run_testdescribe",
+	rawbooleantype,
+	argcontext)
+var func_test_run_testdescribe_async = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"test_run_testdescribe_async",
 	rawbooleantype,
 	argcontext)
 var func_test_run_testdescribelist = NewFuncFromPkgnameNameTypeArgs(
@@ -160,6 +256,16 @@ var func_test_run_testdescribelist_async = NewFuncFromPkgnameNameTypeArgs(
 	"test_run_testdescribelist_async",
 	rawbooleantype,
 	argcontext)
+var func_test_run_testpackage = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"test_run_testpackage",
+	rawbooleantype,
+	argcontext)
+var func_test_run_testpackagelist = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"test_run_testpackagelist",
+	rawbooleantype,
+	argcontext)
 var func_test_run_testresult = NewFuncFromPkgnameNameTypeArgs(
 	"TestLib",
 	"test_run_testresult",
@@ -170,22 +276,20 @@ var func_test_run_testresult_async = NewFuncFromPkgnameNameTypeArgs(
 	"test_run_testresult_async",
 	rawbooleantype,
 	argcontext)
-var func_vx_any_from_any = NewFuncFromPkgnameName("vx/core", "vx_any_from_any")
-var func_vx_async_from_async_fn = NewFuncFromPkgnameName("vx/core", "vx_async_from_async_fn")
-var func_vx_copy = NewFuncFromPkgnameName("vx/core", "vx_copy")
-var func_vx_listimmutable = NewFuncFromPkgnameName("vx/core", "vx_listimmutable")
-var func_vx_mapimmutable = NewFuncFromPkgnameName("vx/core", "vx_mapimmutable")
-var func_vx_mapmutable = NewFuncFromPkgnameName("vx/core", "vx_mapmutable")
-var func_vx_msg_from_exception = NewFuncFromPkgnameName("vx/core", "vx_msg_from_exception")
-var func_vx_msg_from_error = NewFuncFromPkgnameName("vx/core", "vx_msg_from_error")
-var func_vx_new = NewFuncFromPkgnameName("vx/core", "vx_new")
-var func_vx_new_boolean = NewFuncFromPkgnameName("vx/core", "vx_new_boolean")
-var func_vx_new_string = NewFuncFromPkgnameName("vx/core", "vx_new_string")
-var func_vx_string_from_any = NewFuncFromPkgnameName("vx/core", "vx_string_from_any")
-var func_vx_string_read_from_file = NewFuncFromPkgnameName("vx/data/file", "vx_string_read_from_file")
-var func_vx_sync_from_async = NewFuncFromPkgnameName(
-	"vx/core",
-	"vx_sync_from_async")
+var func_test_write_file = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"test_write_file",
+	rawbooltype,
+	argcontext)
+var func_testlib_test = NewFuncFromPkgnameNameTypeArgs(
+	"TestLib",
+	"test",
+	rawbooltype,
+	NewArgFromNameTypeFinal("testname", rawstringtype, true),
+	NewArgFromNameTypeFinal("expected", rawstringtype, true),
+	NewArgFromNameTypeFinal("actual", rawstringtype, true))
+var func_typedef_new = NewFuncFromPkgnameNameType("vx/core", "typedef_new", typedeftype)
+var func_write_testpackagelist_async = NewFuncFromPkgnameNameType("TestLib", "write_testpackagelist_async", rawbooltype)
 
 func NewFunc() *vxfunc {
 	output := new(vxfunc)

@@ -364,7 +364,11 @@ func ListArgLinkType(
 	return output, msgblock
 }
 
-func ListArgMergeValues(listfromarg []vxarg, listtoarg []vxarg, textblock *vxtextblock, path string) ([]vxarg, *vxmsgblock) {
+func ListArgMergeValues(
+	listfromarg []vxarg,
+	listtoarg []vxarg,
+	textblock *vxtextblock,
+	path string) ([]vxarg, *vxmsgblock) {
 	msgblock := NewMsgBlock("ListArgMergeValues")
 	output := listtoarg
 	toargcnt := len(listtoarg)

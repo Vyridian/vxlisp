@@ -157,15 +157,19 @@ func SignatureFromFunc(
 	return output
 }
 
-func StringFromSignature(signature *vxsignature) string {
+func StringFromSignature(
+	signature *vxsignature) string {
 	return StringIndentFromSignature(signature, "")
 }
 
-func StringFromListSignature(signatures []*vxsignature) string {
+func StringFromListSignature(
+	signatures []*vxsignature) string {
 	return StringIndentFromListSignature(signatures, "")
 }
 
-func StringIndentFromSignature(signature *vxsignature, indent string) string {
+func StringIndentFromSignature(
+	signature *vxsignature,
+	indent string) string {
 	lineindent := "\n" + indent
 	subsignatures := ""
 	if len(signature.listsignature) > 0 {
@@ -190,7 +194,9 @@ func StringIndentFromSignature(signature *vxsignature, indent string) string {
 	return output
 }
 
-func StringIndentFromListSignature(listsignature []*vxsignature, indent string) string {
+func StringIndentFromListSignature(
+	listsignature []*vxsignature,
+	indent string) string {
 	lineindent := "\n" + indent + " "
 	output := "(signaturelist"
 	for _, signature := range listsignature {

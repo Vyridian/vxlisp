@@ -82,7 +82,8 @@ func ExecuteProjectFromArgs(
 	MsgStartLog()
 	var argcnt = len(listarg)
 	if argcnt < 2 || (argcnt == 2 && (listarg[1] == ":help" || (listarg[1] == "--help"))) {
-		MsgLog("vxlisp allowed arguments include:\n:help for this message.\n:path [relative or absolute path that holds project.vxlisp]\n[any number of commands from project.vxlisp (e.g. :buildjs)]")
+		MsgLog(
+			"vxlisp allowed arguments include:\n:help for this message.\n:path [relative or absolute path that holds project.vxlisp]\n[any number of commands from project.vxlisp (e.g. :buildjs)]")
 	} else {
 		var cmdtexts []string
 		projectpath := ""

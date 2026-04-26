@@ -21,7 +21,8 @@ func LangType(
 	switch NameFromType(typ) {
 	case "vx/core/func":
 		instancefuncs += "" +
-			LangTypeVxFuncdef(lang, typ, false)
+			LangTypeVxFuncdef(lang, path,
+				typ, false)
 	}
 	switch typ.extends {
 	case ":list":
@@ -38,11 +39,13 @@ func LangType(
 		instancefuncs += "" +
 			LangVarProp(lang, 2, rawlisttype, allowtype,
 				"vx_p_list",
-				LangFuncCall(lang, 2,
-					func_vx_listimmutable, LangVarListNew(lang, allowtype, ""))) +
+				LangFuncCallVx(lang, 2,
+					func_listimmutable, LangVarListNew(lang, allowtype, ""))) +
 			"\n" +
-			LangTypeVxList(lang, typ, false) +
-			LangTypeVxAllowList(lang, typ, false)
+			LangTypeVxList(lang, path,
+				typ, false) +
+			LangTypeVxAllowList(lang, path,
+				typ, false)
 	case ":map":
 		allowtype := anytype
 		allowname := "any"
@@ -57,12 +60,17 @@ func LangType(
 		instancefuncs += "" +
 			LangVarProp(lang, 2, rawmaptype, allowtype,
 				"vx_p_map",
-				LangValMapNew(lang, allowtype, "")) +
+				LangValMapNew(lang, 2,
+					allowtype, "")) +
 			"\n" +
-			LangNativeTypeVxMap(lang, allowtype) +
-			LangTypeVxSet(lang, typ) +
-			LangTypeVxAllowMap(lang, typ, false) +
-			LangTypeVxNewMap(lang, typ, false)
+			LangNativeTypeVxMap(lang, path,
+				allowtype) +
+			LangTypeVxSet(lang, path,
+				typ) +
+			LangTypeVxAllowMap(lang, path,
+				typ, false) +
+			LangTypeVxNewMap(lang, path,
+				typ, false)
 	case ":struct":
 		vx_any := ""
 		valcopyend := ""
@@ -98,13 +106,12 @@ func LangType(
 								"ischanged", "true")+
 								LangVarSet(lang, 7,
 									"vx_p_"+argname,
-									LangPkgNameDot(lang,
-										"vx/core")+
-										"vx_new("+
-										LangTypeT(lang, booleantype)+
-										", "+
-										LangVarVarArg(lang, rawbooleantype, "valsub")+
-										")"))
+									LangFuncCallVariadicVx(lang, 7,
+										func_new,
+										[]string{
+											LangTypeT(lang, booleantype)},
+										[]string{
+											"valsub"})))
 				case "vx/core/int":
 					argalt = "" +
 						LangIfElseIf(lang, 6,
@@ -113,13 +120,12 @@ func LangType(
 								"ischanged", "true")+
 								LangVarSet(lang, 7,
 									"vx_p_"+argname,
-									LangPkgNameDot(lang,
-										"vx/core")+
-										"vx_new("+
-										LangTypeT(lang, inttype)+
-										", "+
-										LangVarVarArg(lang, rawintegertype, "valsub")+
-										")"))
+									LangFuncCallVariadicVx(lang, 7,
+										func_new,
+										[]string{
+											LangTypeT(lang, inttype)},
+										[]string{
+											"valsub"})))
 				case "vx/core/float":
 					argalt = "" +
 						LangIfElseIf(lang, 6,
@@ -128,13 +134,12 @@ func LangType(
 								"ischanged", "true")+
 								LangVarSet(lang, 7,
 									"vx_p_"+argname,
-									LangPkgNameDot(lang,
-										"vx/core")+
-										"vx_new("+
-										LangTypeT(lang, floattype)+
-										", "+
-										LangVarVarArg(lang, rawfloattype, "valsub")+
-										")"))
+									LangFuncCallVariadicVx(lang, 7,
+										func_new,
+										[]string{
+											LangTypeT(lang, floattype)},
+										[]string{
+											"valsub"})))
 				case "vx/core/string":
 					argalt = "" +
 						LangIfElseIf(lang, 6,
@@ -143,12 +148,12 @@ func LangType(
 								"ischanged", "true")+
 								LangVarSet(lang, 7,
 									"vx_p_"+argname,
-									LangPkgNameDot(lang, "vx/core")+
-										"vx_new("+
-										LangTypeT(lang, stringtype)+
-										", "+
-										LangVarVarArg(lang, rawstringtype, "valsub")+
-										")"))
+									LangFuncCallVariadicVx(lang, 7,
+										func_new,
+										[]string{
+											LangTypeT(lang, stringtype)},
+										[]string{
+											"valsub"})))
 				}
 				valnewswitcherr := ""
 				switch NameFromType(typ) {
@@ -165,8 +170,9 @@ func LangType(
 								LangIfElse(lang, 7,
 									LangVarSet(lang, 8,
 										"msgval",
-										LangFuncCall(lang, 8,
-											func_vx_new_string, LangVarToString(lang, "valsub"))))+
+										LangFuncCallVx(lang, 8,
+											func_new_string,
+											LangVarToString(lang, "valsub"))))+
 								LangIfEnd(lang, 7)+
 								LangVarCollection(lang, 7, rawmaptype, anytype,
 									"mapany",
@@ -174,27 +180,36 @@ func LangType(
 								LangVarMapSet(lang, 7,
 									"mapany",
 									"\"key\"",
-									LangFuncCall(lang, 8,
-										func_vx_new_string, "\""+arg.name+"\""))+
+									LangFuncCallVx(lang, 8,
+										func_new_string,
+										"\""+arg.name+"\""))+
 								LangVarMapSet(lang, 7,
-									"mapany", "\"value\"", "msgval")+
+									"mapany",
+									"\"value\"", "msgval")+
 								LangVal(lang, 7, maptype,
 									"msgmap",
-									LangTypeT(lang, anymaptype)+
-										".vx_new_from_map("+
-										LangFuncCall(lang, 8,
-											func_vx_mapimmutable,
-											"mapany")+
-										")")+
+									LangFuncCallMethod(lang, 7,
+										LangTypeT(lang, anymaptype),
+										"vx_new_from_map",
+										LangFuncCallVx(lang, 8,
+											func_mapimmutable,
+											"mapany")))+
 								LangVarSet(lang, 7,
 									"msg",
-									LangPkgNameDot(lang, "vx/core")+"vx_msg_from_error(\""+typepath+"\", \":invalidvalue\", msgmap)")+
+									LangFuncCallVx(lang, 7,
+										func_msg_from_error,
+										"\""+typepath+"\"",
+										"\":invalidvalue\"",
+										"msgmap"))+
 								LangVarSet(lang, 7,
 									"msgblock",
-									LangPkgNameDot(lang, "vx/core")+
-										"vx_copy(msgblock, "+
-										LangVarVarArg(lang, msgtype, "msg")+
-										")"))
+									LangFuncCallVariadicVx(lang, 7,
+										func_copy,
+										[]string{
+											LangTypeT(lang, msgblocktype),
+											"msgblock"},
+										[]string{
+											"msg"})))
 				}
 				valnewswitch += "" +
 					LangIfElseIf(lang, 5,
@@ -219,7 +234,8 @@ func LangType(
 					LangVarProp(lang, 2, arg.vxtype, emptytype,
 						"vx_p_"+argname, "null") +
 					"\n" +
-					LangVxArgFromArg(lang, LangNameFromType(lang, typ), arg)
+					LangVxArgFromArg(lang, path,
+						LangNameFromType(lang, typ), arg)
 			}
 			defaultkey := ""
 			defaultstring := ""
@@ -244,12 +260,12 @@ func LangType(
 								"ischanged", "true")+
 								LangVarSet(lang, 6,
 									"vx_p_"+lastargname,
-									LangPkgNameDot(lang, "vx/core")+
-										"vx_new("+
-										LangTypeT(lang, booleantype)+
-										", "+
-										LangVarVarArg(lang, rawbooleantype, "valsub")+
-										")"))
+									LangFuncCallVariadicVx(lang, 7,
+										func_new,
+										[]string{
+											LangTypeT(lang, booleantype)},
+										[]string{
+											"valsub"})))
 				case "vx/core/int":
 					defaultkey += "" +
 						LangIfElseIf(lang, 5,
@@ -258,12 +274,12 @@ func LangType(
 								"ischanged", "true")+
 								LangVarSet(lang, 6,
 									"vx_p_"+lastargname,
-									LangPkgNameDot(lang, "vx/core")+
-										"vx_new("+
-										LangTypeT(lang, inttype)+
-										", "+
-										LangVarVarArg(lang, rawintegertype, "valsub")+
-										")"))
+									LangFuncCallVariadicVx(lang, 7,
+										func_new,
+										[]string{
+											LangTypeT(lang, inttype)},
+										[]string{
+											"valsub"})))
 				case "vx/core/float":
 					defaultkey += "" +
 						LangIfElseIf(lang, 5,
@@ -272,12 +288,12 @@ func LangType(
 								"ischanged", "true")+
 								LangVarSet(lang, 6,
 									"vx_p_"+lastargname,
-									LangPkgNameDot(lang, "vx/core")+
-										"vx_new("+
-										LangTypeT(lang, floattype)+
-										", "+
-										LangVarVarArg(lang, rawfloattype, "valsub")+
-										")"))
+									LangFuncCallVariadicVx(lang, 7,
+										func_new,
+										[]string{
+											LangTypeT(lang, floattype)},
+										[]string{
+											"valsub"})))
 				case "vx/core/string":
 					defaultstring += "" +
 						LangIfElseType(lang, 6,
@@ -292,12 +308,12 @@ func LangType(
 								"ischanged", "true")+
 								LangVarSet(lang, 7,
 									"vx_p_"+lastargname,
-									LangPkgNameDot(lang, "vx/core")+
-										"vx_new("+
-										LangTypeT(lang, stringtype)+
-										", "+
-										LangVarVarArg(lang, rawstringtype, "valsub")+
-										")"))
+									LangFuncCallVariadicVx(lang, 7,
+										func_new,
+										[]string{
+											LangTypeT(lang, stringtype)},
+										[]string{
+											"valsub"})))
 				}
 				if lastarg.vxtype.extends == ":list" {
 					for _, allowtype := range lastarg.vxtype.allowtypes {
@@ -316,19 +332,22 @@ func LangType(
 											"==", "vallist", "null"),
 										LangVarSet(lang, 7,
 											"vallist",
-											LangPkgNameDot(lang, "vx/core")+
-												"vx_new("+
-												LangTypeT(lang, lastarg.vxtype)+
-												", "+
-												LangVarVarArg(lang, allowtype, "valdefault")+
-												")"))+
+											LangFuncCallVariadicVx(lang, 7,
+												func_new,
+												[]string{
+													LangTypeT(lang, lastarg.vxtype)},
+												[]string{
+													"valdefault"})))+
 									LangIfElse(lang, 6,
 										LangVarSet(lang, 7,
 											"vallist",
-											LangPkgNameDot(lang, "vx/core")+
-												"vx_copy(vallist, "+
-												LangVarVarArg(lang, allowtype, "valdefault")+
-												")"))+
+											LangFuncCallVariadicVx(lang, 7,
+												func_copy,
+												[]string{
+													LangTypeT(lang, lastarg.vxtype),
+													"vallist"},
+												[]string{
+													"valdefault"})))+
 									LangIfEnd(lang, 6)+
 									LangVarSet(lang, 6,
 										"ischanged", "true")+
@@ -359,13 +378,14 @@ func LangType(
 				LangIfEnd(lang, 3)
 		}
 		instancefuncs += "" +
-			LangFuncHeader(lang, 2,
+			LangFuncHeader(lang, path, 2,
 				prefix, funcvxany, 0,
 				LangVar(lang, 3, anytype,
 					"output",
 					LangTypeE(lang, anytype))+
 					skeyswitch) +
-			LangTypeVxMapStruct(lang, typ, false)
+			LangTypeVxMapStruct(lang, path,
+				typ, false)
 	}
 	e_type := ""
 	switch NameFromType(typ) {
@@ -379,16 +399,16 @@ func LangType(
 	doc := LangTypeDoc(lang, typ)
 	output = "" +
 		doc +
-		LangTypeInterface(lang, typ) +
+		LangTypeInterface(lang, path, typ) +
 		LangTypeClassHeader(lang, 1, typ) +
 		"\n" +
 		instancefuncs +
-		LangTypeVxNew(lang, typ, false) +
-		LangTypeVxCopy(lang, typ, false) +
-		LangTypeVxMsgblock(lang, typ, false) +
-		LangTypeVxEmpty(lang, typ, false) +
-		LangTypeVxType(lang, typ, false) +
-		LangTypeVxTypedef(lang, typ, false) +
+		LangTypeVxNew(lang, path, typ, false) +
+		LangTypeVxCopy(lang, path, typ, false) +
+		LangTypeVxMsgblock(lang, path, typ, false) +
+		LangTypeVxEmpty(lang, path, typ, false) +
+		LangTypeVxType(lang, path, typ, false) +
+		LangTypeVxTypedef(lang, path, typ, false) +
 		"\n  }" +
 		"\n" +
 		e_type +
@@ -415,29 +435,28 @@ func LangTypeDef(
 	lang *vxlang,
 	typ *vxtype,
 	indent int) string {
-	lineindent := LangIndent(lang, indent, true)
-	allowtypes := LangTypeListFromListType(lang, typ.allowtypes)
-	disallowtypes := LangTypeListFromListType(lang, typ.disallowtypes)
+	allowtypes := LangTypeListFromListType(lang, indent+1, typ.allowtypes)
+	disallowtypes := LangTypeListFromListType(lang, indent+1, typ.disallowtypes)
 	allowfuncs := LangPkgNameDot(lang, "vx/core") + "e_funclist"
 	disallowfuncs := LangPkgNameDot(lang, "vx/core") + "e_funclist"
-	allowvalues := LangPkgNameDot(lang, "vx/core") + "e_anylist"
-	disallowvalues := LangPkgNameDot(lang, "vx/core") + "e_anylist"
+	allowvalues := LangTypeE(lang, anylisttype)
+	disallowvalues := LangTypeE(lang, anylisttype)
 	properties := LangPkgNameDot(lang, "vx/core") + "e_argmap"
-	traits := LangTypeListFromListType(lang, typ.traits)
+	traits := LangTypeListFromListType(lang, indent+1, typ.traits)
 	output := "" +
-		LangPkgNameDot(lang, "vx/core") + "typedef_new(" +
-		lineindent + "  \"" + typ.pkgname + "\", // pkgname" +
-		lineindent + "  \"" + typ.name + "\", // name" +
-		lineindent + "  \"" + typ.extends + "\", // extends" +
-		lineindent + "  " + traits + ", // traits" +
-		lineindent + "  " + allowtypes + ", // allowtypes" +
-		lineindent + "  " + disallowtypes + ", // disallowtypes" +
-		lineindent + "  " + allowfuncs + ", // allowfuncs" +
-		lineindent + "  " + disallowfuncs + ", // disallowfuncs" +
-		lineindent + "  " + allowvalues + ", // allowvalues" +
-		lineindent + "  " + disallowvalues + ", // disallowvalues" +
-		lineindent + "  " + properties + " // properties" +
-		lineindent + ")"
+		LangFuncCallRaw(lang, indent,
+			func_typedef_new,
+			"\""+typ.pkgname+"\"",
+			"\""+typ.name+"\"",
+			"\""+typ.extends+"\"",
+			traits,
+			allowtypes,
+			disallowtypes,
+			allowfuncs,
+			disallowfuncs,
+			allowvalues,
+			disallowvalues,
+			properties)
 	return output
 }
 
@@ -510,10 +529,11 @@ func LangTypeEmptyValue(lang *vxlang, typ *vxtype, indent string) string {
 
 func LangTypeInterface(
 	lang *vxlang,
+	path string,
 	typ *vxtype) string {
 	output := ""
 	typename := LangNameTypeFullFromType(lang, typ)
-	basics := LangTypeInterfaceBasics(lang, typ)
+	basics := LangTypeInterfaceBasics(lang, path, typ)
 	createtext, _ := LangFromValue(lang, 0,
 		typ.createvalue, "", emptyfunc, true, false, "")
 	if createtext != "" {
@@ -552,12 +572,16 @@ func LangTypeInterface(
 		output = "" +
 			LangTypeInterfaceHeader(lang, anytype, emptylisttype, 1,
 				basics+
-					LangFuncHeaderInterface(lang, 2, typename, funcvxtypedef)+
-					LangFuncHeaderInterface(lang, 2, typename, funcvxconstdef)+
-					LangFuncHeaderInterface(lang, 2, typename, funcvxdispose)+
-					LangTypeVxMsgblock(lang, typ, true)+
-					LangFuncHeaderInterface(lang, 2, typename, funcvxrelease)+
-					LangFuncHeaderInterface(lang, 2, typename, funcvxreserve))
+					LangFuncHeaderInterface(lang, path, 2,
+						typename, funcvxtypedef)+
+					LangFuncHeaderInterface(lang, path, 2,
+						typename, funcvxconstdef)+
+					LangFuncHeaderInterface(lang, path, 2,
+						typename, funcvxdispose)+
+					LangTypeVxMsgblock(lang, path,
+						typ, true)+
+					LangFuncHeaderInterface(lang, path, 2, typename, funcvxrelease)+
+					LangFuncHeaderInterface(lang, path, 2, typename, funcvxreserve))
 	case "vx/core/boolean":
 		output = "" +
 			LangTypeInterfaceHeader(lang, booleantype, []*vxtype{anytype}, 1, basics)
@@ -571,7 +595,8 @@ func LangTypeInterface(
 		output = "" +
 			LangTypeInterfaceHeader(lang, functype, []*vxtype{anytype}, 1,
 				basics+
-					LangTypeVxFuncdef(lang, typ, true))
+					LangTypeVxFuncdef(lang, path,
+						typ, true))
 	case "vx/core/int":
 		output = "" +
 			LangTypeInterfaceHeader(lang, inttype, []*vxtype{numbertype}, 1, basics)
@@ -593,9 +618,9 @@ func LangTypeInterface(
 		output = "" +
 			LangTypeInterfaceHeader(lang, listtype, []*vxtype{anytype}, 1,
 				basics+
-					LangFuncHeaderInterface(lang, 2,
+					LangFuncHeaderInterface(lang, path, 2,
 						typename, funcvxlist)+
-					LangFuncHeaderInterface(lang, 2,
+					LangFuncHeaderInterface(lang, path, 2,
 						typename, funcvxany))
 	case "vx/core/map":
 		argindex := NewArg("key")
@@ -631,13 +656,13 @@ func LangTypeInterface(
 		output = "" +
 			LangTypeInterfaceHeader(lang, maptype, []*vxtype{anytype}, 1,
 				basics+
-					LangFuncHeaderInterface(lang, 2,
+					LangFuncHeaderInterface(lang, path, 2,
 						typename, funcvxnewfrommap)+
-					LangFuncHeaderInterface(lang, 2,
+					LangFuncHeaderInterface(lang, path, 2,
 						typename, funcvxany)+
-					LangFuncHeaderInterface(lang, 2,
+					LangFuncHeaderInterface(lang, path, 2,
 						typename, funcvxmap)+
-					LangFuncHeaderInterface(lang, 2,
+					LangFuncHeaderInterface(lang, path, 2,
 						typename, funcvxset))
 	case "vx/core/struct":
 		argindex := NewArg("key")
@@ -654,9 +679,9 @@ func LangTypeInterface(
 		output = "" +
 			LangTypeInterfaceHeader(lang, structtype, []*vxtype{anytype}, 1,
 				basics+
-					LangFuncHeaderInterface(lang, 2,
+					LangFuncHeaderInterface(lang, path, 2,
 						typename, funcvxany)+
-					LangFuncHeaderInterface(lang, 2,
+					LangFuncHeaderInterface(lang, path, 2,
 						typename, funcvxmap))
 	default:
 		extras := ""
@@ -691,9 +716,9 @@ func LangTypeInterface(
 					funcvxlistallow.name = LangFromName("vx_list" + allowname)
 					funcvxlistallow.vxtype = NewTypeSubtype(rawlisttype, allowtype)
 					extras += "" +
-						LangFuncHeaderInterface(lang, 2,
+						LangFuncHeaderInterface(lang, path, 2,
 							typename, funcvxlistallow) +
-						LangFuncHeaderInterface(lang, 2,
+						LangFuncHeaderInterface(lang, path, 2,
 							typename, funcvxallow)
 				}
 			}
@@ -716,9 +741,9 @@ func LangTypeInterface(
 					funcvxmapallow.name = LangFromName("vx_map" + allowname)
 					funcvxmapallow.vxtype = NewTypeSubtype(rawmaptype, allowtype)
 					extras += "" +
-						LangFuncHeaderInterface(lang, 2,
+						LangFuncHeaderInterface(lang, path, 2,
 							typename, funcvxmapallow) +
-						LangFuncHeaderInterface(lang, 2,
+						LangFuncHeaderInterface(lang, path, 2,
 							typename, funcvxallow)
 				}
 			}
@@ -734,7 +759,8 @@ func LangTypeInterface(
 				funcvxprop.name = LangFromName(arg.alias)
 				funcvxprop.vxtype = arg.vxtype
 				extras += "" +
-					LangFuncHeaderInterface(lang, 2, typename, funcvxprop)
+					LangFuncHeaderInterface(lang, path, 2,
+						typename, funcvxprop)
 			}
 		default:
 			extends = append(extends, anytype)
@@ -747,16 +773,11 @@ func LangTypeInterface(
 	return output
 }
 
-func LangTypeIntValNew(
-	lang *vxlang,
-	val int) string {
-	return LangPkgNameDot(lang, "vx/core") + "vx_new_int(" + StringFromInt(val) + ")"
-}
-
 func LangTypeListFromListType(
 	lang *vxlang,
+	indent int,
 	listtype []*vxtype) string {
-	output := LangPkgNameDot(lang, "vx/core") + "e_typelist"
+	output := LangTypeE(lang, typelisttype)
 	if len(listtype) > 0 {
 		var listtext []string
 		for _, typ := range listtype {
@@ -764,12 +785,11 @@ func LangTypeListFromListType(
 			listtext = append(listtext, typetext)
 		}
 		output = "" +
-			LangPkgNameDot(lang, "vx/core") +
-			"vx_new(" +
-			LangPkgNameDot(lang, "vx/core") +
-			"t_typelist, " +
-			StringFromListStringJoin(listtext, ", ") +
-			")"
+			LangFuncCallVariadicVx(lang, indent,
+				func_new,
+				[]string{
+					LangTypeT(lang, typelisttype)},
+				listtext)
 	}
 	return output
 }
@@ -829,6 +849,7 @@ func LangTypeTSimple(lang *vxlang, typ *vxtype, simple bool) string {
 
 func LangTypeVxAllowList(
 	lang *vxlang,
+	path string,
 	typ *vxtype,
 	isinterface bool) string {
 	output := ""
@@ -855,10 +876,10 @@ func LangTypeVxAllowList(
 		funcvxlistallow.vxtype = NewTypeSubtype(rawlisttype, allowtype)
 		funcvxany.listarg = listarg
 		if isinterface {
-			output = LangFuncHeaderInterface(lang, 2,
+			output = LangFuncHeaderInterface(lang, path, 2,
 				typename, funcvxallow)
 			if allowname != "any" {
-				output = LangFuncHeaderInterface(lang, 2,
+				output = LangFuncHeaderInterface(lang, path, 2,
 					typename, funcvxany)
 			}
 		} else {
@@ -866,7 +887,7 @@ func LangTypeVxAllowList(
 			funcvxany.isimplement = true
 			funcvxlistallow.isimplement = true
 			output = "" +
-				LangFuncHeader(lang, 2,
+				LangFuncHeader(lang, path, 2,
 					typename, funcvxallow, 0,
 					LangVar(lang, 3, allowtype,
 						"output",
@@ -889,11 +910,11 @@ func LangTypeVxAllowList(
 		}
 		if allowname != "any" {
 			output += "" +
-				LangFuncHeader(lang, 2,
+				LangFuncHeader(lang, path, 2,
 					typename, funcvxlistallow, 0,
 					LangVarCollection(lang, 3, rawlisttype, allowtype,
 						"output", LangTypeThis(lang)+".vx_p_list")) +
-				LangFuncHeader(lang, 2,
+				LangFuncHeader(lang, path, 2,
 					typename, funcvxany, 0,
 					LangVar(lang, 3, allowtype,
 						"output", LangTypeThis(lang)+".vx_"+allowname+"(index)"))
@@ -904,6 +925,7 @@ func LangTypeVxAllowList(
 
 func LangTypeVxAllowMap(
 	lang *vxlang,
+	path string,
 	typ *vxtype,
 	isinterface bool) string {
 	output := ""
@@ -927,11 +949,12 @@ func LangTypeVxAllowMap(
 		funcvxallow.vxtype = allowtype
 		funcvxallow.listarg = listarg
 		if isinterface {
-			output += LangFuncInterface(lang, funcvxallow)
+			output += LangFuncInterface(lang, path,
+				funcvxallow)
 		} else {
 			funcvxallow.isimplement = true
 			output += "" +
-				LangFuncHeader(lang, 2,
+				LangFuncHeader(lang, path, 2,
 					typename, funcvxallow, 0,
 					LangVar(lang, 3, allowtype,
 						"output", allowempty)+
@@ -966,19 +989,22 @@ func LangTypeVxAllowMap(
 		funcvxmapallow.vxtype = NewTypeSubtype(rawmaptype, allowtype)
 		if isinterface {
 			output += "" +
-				LangFuncHeaderInterface(lang, 2,
+				LangFuncHeaderInterface(lang, path, 2,
 					typename, funcvxany) +
-				LangFuncHeaderInterface(lang, 2,
+				LangFuncHeaderInterface(lang, path, 2,
 					typename, funcvxmapallow)
 		} else {
 			funcvxmapallow.isimplement = true
 			funcvxany.isimplement = true
 			output += "" +
-				LangFuncHeader(lang, 2,
+				LangFuncHeader(lang, path, 2,
 					typename, funcvxmapallow, 0,
-					LangValCollection(lang, 3, rawmaptype, allowtype,
-						"output", LangTypeThis(lang)+".vx_p_map")) +
-				LangFuncHeader(lang, 2,
+					LangValCollection(lang, 3,
+						rawmaptype,
+						allowtype,
+						"output",
+						LangTypeThis(lang)+".vx_p_map")) +
+				LangFuncHeader(lang, path, 2,
 					typename, funcvxany, 0,
 					LangVal(lang, 3, anytype,
 						"output", LangTypeThis(lang)+".vx_"+allowname+"(key)")) +
@@ -990,6 +1016,7 @@ func LangTypeVxAllowMap(
 
 func LangTypeVxCopy(
 	lang *vxlang,
+	path string,
 	typ *vxtype,
 	isinterface bool) string {
 	argvals := NewArg("vals")
@@ -1005,7 +1032,7 @@ func LangTypeVxCopy(
 	typename := LangNameFromType(lang, typ)
 	output := ""
 	if isinterface {
-		output = LangFuncHeaderInterface(lang, 2,
+		output = LangFuncHeaderInterface(lang, path, 2,
 			typename, funcvxcopy)
 	} else {
 		typepath := NameFromType(typ)
@@ -1036,18 +1063,24 @@ func LangTypeVxCopy(
 						LangIsType(lang, "valsub", msgblocktype),
 						LangVarSet(lang, 5,
 							"msgblock",
-							LangPkgNameDot(lang, "vx/core")+
-								"vx_copy(msgblock, "+
-								LangVarVarArg(lang, msgblocktype, "valsub")+
-								")"))+
+							LangFuncCallVariadicVx(lang, 5,
+								func_copy,
+								[]string{
+									LangTypeT(lang, msgblocktype),
+									"msgblock"},
+								[]string{
+									"valsub"})))+
 						LangIfElseIf(lang, 4,
 							LangIsType(lang, "valsub", msgtype),
 							LangVarSet(lang, 5,
 								"msgblock",
-								LangPkgNameDot(lang, "vx/core")+
-									"vx_copy(msgblock, "+
-									LangVarVarArg(lang, msgtype, "valsub")+
-									")"))+
+								LangFuncCallVariadicVx(lang, 5,
+									func_copy,
+									[]string{
+										LangTypeT(lang, msgblocktype),
+										"msgblock"},
+									[]string{
+										"valsub"})))+
 						LangIfEnd(lang, 4)) +
 				LangIfThen(lang, 3,
 					LangClause(lang, false,
@@ -1088,18 +1121,24 @@ func LangTypeVxCopy(
 						LangIsType(lang, "valsub", msgblocktype),
 						LangVarSet(lang, 5,
 							"msgblock",
-							LangPkgNameDot(lang, "vx/core")+
-								"vx_copy(msgblock, "+
-								LangVarVarArg(lang, msgblocktype, "valsub")+
-								")"))+
+							LangFuncCallVariadicVx(lang, 5,
+								func_copy,
+								[]string{
+									LangTypeT(lang, msgblocktype),
+									"msgblock"},
+								[]string{
+									"valsub"})))+
 						LangIfElseIf(lang, 4,
 							LangIsType(lang, "valsub", msgtype),
 							LangVarSet(lang, 5,
 								"msgblock",
-								LangPkgNameDot(lang, "vx/core")+
-									"vx_copy(msgblock, "+
-									LangVarVarArg(lang, msgtype, "valsub")+
-									")"))+
+								LangFuncCallVariadicVx(lang, 5,
+									func_copy,
+									[]string{
+										LangTypeT(lang, msgblocktype),
+										"msgblock"},
+									[]string{
+										"valsub"})))+
 						LangIfElseType(lang, 4,
 							booleantype, emptytype, "valsub", "valboolean", false,
 							LangVarSet(lang, 5,
@@ -1155,18 +1194,24 @@ func LangTypeVxCopy(
 					LangIsType(lang, "valsub", msgblocktype),
 					LangVarSet(lang, 5,
 						"msgblock",
-						LangPkgNameDot(lang, "vx/core")+
-							"vx_copy(msgblock, "+
-							LangVarVarArg(lang, msgblocktype, "valsub")+
-							")")) +
+						LangFuncCallVariadicVx(lang, 5,
+							func_copy,
+							[]string{
+								LangTypeT(lang, msgblocktype),
+								"msgblock"},
+							[]string{
+								"valsub"}))) +
 				LangIfElseIf(lang, 4,
 					LangIsType(lang, "valsub", msgtype),
 					LangVarSet(lang, 5,
 						"msgblock",
-						LangPkgNameDot(lang, "vx/core")+
-							"vx_copy(msgblock, "+
-							LangVarVarArg(lang, msgtype, "valsub")+
-							")")) +
+						LangFuncCallVariadicVx(lang, 5,
+							func_copy,
+							[]string{
+								LangTypeT(lang, msgblocktype),
+								"msgblock"},
+							[]string{
+								"valsub"}))) +
 				LangIfElseType(lang, 4,
 					stringtype, emptytype, "valsub", "valstring", false,
 					LangVarSet(lang, 5,
@@ -1216,18 +1261,24 @@ func LangTypeVxCopy(
 					LangIsType(lang, "valsub", msgblocktype),
 					LangVarSet(lang, 5,
 						"msgblock",
-						LangPkgNameDot(lang, "vx/core")+
-							"vx_copy(msgblock, "+
-							LangVarVarArg(lang, msgblocktype, "valsub")+
-							")")) +
+						LangFuncCallVariadicVx(lang, 5,
+							func_copy,
+							[]string{
+								LangTypeT(lang, msgblocktype),
+								"msgblock"},
+							[]string{
+								"valsub"}))) +
 				LangIfElseIf(lang, 4,
 					LangIsType(lang, "valsub", msgtype),
 					LangVarSet(lang, 5,
 						"msgblock",
-						LangPkgNameDot(lang, "vx/core")+
-							"vx_copy(msgblock, "+
-							LangVarVarArg(lang, msgtype, "valsub")+
-							")")) +
+						LangFuncCallVariadicVx(lang, 5,
+							func_copy,
+							[]string{
+								LangTypeT(lang, msgblocktype),
+								"msgblock"},
+							[]string{
+								"valsub"}))) +
 				LangIfElseType(lang, 4,
 					decimaltype, emptytype, "valsub", "valdecimal", false,
 					LangVarSet(lang, 5,
@@ -1298,7 +1349,10 @@ func LangTypeVxCopy(
 		case "vx/core/int":
 			valcopy += "" +
 				LangVar(lang, 3, rawinttype,
-					"intval", "value.vx_int()")
+					"intval",
+					LangFuncCallMethod(lang, 3,
+						"value",
+						"vx_int"))
 			valnew = "" +
 				LangForList(lang, 3,
 					"valsub", rawobjecttype, "vals",
@@ -1306,18 +1360,24 @@ func LangTypeVxCopy(
 						LangIsType(lang, "valsub", msgblocktype),
 						LangVarSet(lang, 5,
 							"msgblock",
-							LangPkgNameDot(lang, "vx/core")+
-								"vx_copy(msgblock, "+
-								LangVarVarArg(lang, msgblocktype, "valsub")+
-								")"))+
+							LangFuncCallVariadicVx(lang, 5,
+								func_copy,
+								[]string{
+									LangTypeT(lang, msgblocktype),
+									"msgblock"},
+								[]string{
+									"valsub"})))+
 						LangIfElseIf(lang, 4,
 							LangIsType(lang, "valsub", msgtype),
 							LangVarSet(lang, 5,
 								"msgblock",
-								LangPkgNameDot(lang, "vx/core")+
-									"vx_copy(msgblock, "+
-									LangVarVarArg(lang, msgtype, "valsub")+
-									")"))+
+								LangFuncCallVariadicVx(lang, 5,
+									func_copy,
+									[]string{
+										LangTypeT(lang, msgblocktype),
+										"msgblock"},
+									[]string{
+										"valsub"})))+
 						LangIfElseType(lang, 4,
 							inttype, emptytype, "valsub", "valint", false,
 							LangVarSet(lang, 5,
@@ -1374,18 +1434,24 @@ func LangTypeVxCopy(
 						LangIsType(lang, "valsub", msgblocktype),
 						LangVarSet(lang, 5,
 							"msgblock",
-							LangPkgNameDot(lang, "vx/core")+
-								"vx_copy(msgblock, "+
-								LangVarVarArg(lang, msgblocktype, "valsub")+
-								")"))+
+							LangFuncCallVariadicVx(lang, 5,
+								func_copy,
+								[]string{
+									LangTypeT(lang, msgblocktype),
+									"msgblock"},
+								[]string{
+									"valsub"})))+
 						LangIfElseIf(lang, 4,
 							LangIsType(lang, "valsub", msgtype),
 							LangVarSet(lang, 5,
 								"msgblock",
-								LangPkgNameDot(lang, "vx/core")+
-									"vx_copy(msgblock, "+
-									LangVarVarArg(lang, msgtype, "valsub")+
-									")"))+
+								LangFuncCallVariadicVx(lang, 5,
+									func_copy,
+									[]string{
+										LangTypeT(lang, msgblocktype),
+										"msgblock"},
+									[]string{
+										"valsub"})))+
 						LangIfElseType(lang, 4,
 							stringtype, emptytype, "valsub", "valstring", false,
 							LangVar(lang, 5, rawstringtype,
@@ -1447,32 +1513,39 @@ func LangTypeVxCopy(
 							anytype, emptytype, "valsub", "anysub", false,
 							LangVarSet(lang, 5,
 								"msg",
-								LangPkgNameDot(lang, "vx/core")+
-									"vx_msg_from_error(\""+
-									typepath+
-									"\", \":invalidtype\", anysub)")+
+								LangFuncCallVx(lang, 5,
+									func_msg_from_error,
+									"\""+typepath+"\"",
+									"\":invalidtype\"",
+									"anysub"))+
 								LangVarSet(lang, 5,
 									"msgblock",
-									LangPkgNameDot(lang, "vx/core")+
-										"vx_copy(msgblock, "+
-										LangVarVarArg(lang, msgtype, "msg")+
-										")"))+
+									LangFuncCallVariadicVx(lang, 5,
+										func_copy,
+										[]string{
+											LangTypeT(lang, msgblocktype),
+											"msgblock"},
+										[]string{
+											"msg"})))+
 						LangIfElse(lang, 4,
 							LangVarSet(lang, 5,
 								"msg",
-								LangPkgNameDot(lang, "vx/core")+
-									"vx_msg_from_error(\""+
-									typepath+
-									"\", \":invalidtype\", "+
-									LangPkgNameDot(lang, "vx/core")+
-									"vx_new_string("+LangVarToString(lang, "valsub")+
-									"))")+
+								LangFuncCallVx(lang, 5,
+									func_msg_from_error,
+									"\""+typepath+"\"",
+									"\":invalidtype\"",
+									LangFuncCallVx(lang, 5,
+										func_new_string,
+										LangVarToString(lang, "valsub"))))+
 								LangVarSet(lang, 5,
 									"msgblock",
-									LangPkgNameDot(lang, "vx/core")+
-										"vx_copy(msgblock, "+
-										LangVarVarArg(lang, msgtype, "msg")+
-										")"))+
+									LangFuncCallVariadicVx(lang, 5,
+										func_copy,
+										[]string{
+											LangTypeT(lang, msgblocktype),
+											"msgblock"},
+										[]string{
+											"msg"})))+
 						LangIfEnd(lang, 4)) +
 				LangIfThen(lang, 3,
 					LangClause(lang, false,
@@ -1539,10 +1612,13 @@ func LangTypeVxCopy(
 						LangIsType(lang, "valsub", msgtype),
 						LangVarSet(lang, 5,
 							"msgblock",
-							LangPkgNameDot(lang, "vx/core")+
-								"vx_copy(msgblock, "+
-								LangVarVarArg(lang, msgtype, "valsub")+
-								")"))
+							LangFuncCallVariadicVx(lang, 5,
+								func_copy,
+								[]string{
+									LangTypeT(lang, msgblocktype),
+									"msgblock"},
+								[]string{
+									"valsub"})))
 			case "vx/core/msglist":
 				valnew = "" +
 					LangVar(lang, 3, msgtype,
@@ -1553,10 +1629,13 @@ func LangTypeVxCopy(
 						LangIsType(lang, "valsub", msgblocktype),
 						LangVarSet(lang, 5,
 							"msgblock",
-							LangPkgNameDot(lang, "vx/core")+
-								"vx_copy(msgblock, "+
-								LangVarVarArg(lang, msgblocktype, "valsub")+
-								")"))
+							LangFuncCallVariadicVx(lang, 5,
+								func_copy,
+								[]string{
+									LangTypeT(lang, msgblocktype),
+									"msgblock"},
+								[]string{
+									"valsub"})))
 			default:
 				valnew = "" +
 					LangVar(lang, 3, msgtype,
@@ -1567,18 +1646,24 @@ func LangTypeVxCopy(
 						LangIsType(lang, "valsub", msgblocktype),
 						LangVarSet(lang, 5,
 							"msgblock",
-							LangPkgNameDot(lang, "vx/core")+
-								"vx_copy(msgblock, "+
-								LangVarVarArg(lang, msgblocktype, "valsub")+
-								")")) +
+							LangFuncCallVariadicVx(lang, 5,
+								func_copy,
+								[]string{
+									LangTypeT(lang, msgblocktype),
+									"msgblock"},
+								[]string{
+									"valsub"}))) +
 					LangIfElseIf(lang, 4,
 						LangIsType(lang, "valsub", msgtype),
 						LangVarSet(lang, 5,
 							"msgblock",
-							LangPkgNameDot(lang, "vx/core")+
-								"vx_copy(msgblock, "+
-								LangVarVarArg(lang, msgtype, "valsub")+
-								")"))
+							LangFuncCallVariadicVx(lang, 5,
+								func_copy,
+								[]string{
+									LangTypeT(lang, msgblocktype),
+									"msgblock"},
+								[]string{
+									"valsub"})))
 			}
 			valnew += "" +
 				LangIfElseType(lang, 4,
@@ -1606,36 +1691,36 @@ func LangTypeVxCopy(
 					switch NameFromType(allowedtype) {
 					case "vx/core/boolean":
 						allowedtypename = LangTypeBoolean(lang)
-						castval = LangPkgNameDot(lang, "vx/core") +
-							"vx_new(" +
-							LangTypeT(lang, booleantype) +
-							", " +
-							LangVarVarArg(lang, allowtype, "valsub") +
-							")"
+						castval = LangFuncCallVariadicVx(lang, 5,
+							func_new,
+							[]string{
+								LangTypeT(lang, booleantype)},
+							[]string{
+								"valsub"})
 					case "vx/core/int":
 						allowedtypename = LangTypeInt(lang)
-						castval = LangPkgNameDot(lang, "vx/core") +
-							"vx_new(" +
-							LangTypeT(lang, inttype) +
-							", " +
-							LangVarVarArg(lang, inttype, "valsub") +
-							")"
+						castval = LangFuncCallVariadicVx(lang, 5,
+							func_new,
+							[]string{
+								LangTypeT(lang, inttype)},
+							[]string{
+								"valsub"})
 					case "vx/core/float":
 						allowedtypename = LangTypeFloat(lang)
-						castval = LangPkgNameDot(lang, "vx/core") +
-							"vx_new(" +
-							LangTypeT(lang, floattype) +
-							", " +
-							LangVarVarArg(lang, floattype, "valsub") +
-							")"
+						castval = LangFuncCallVariadicVx(lang, 5,
+							func_new,
+							[]string{
+								LangTypeT(lang, floattype)},
+							[]string{
+								"valsub"})
 					case "vx/core/string":
 						allowedtypename = LangTypeString(lang)
-						castval = LangPkgNameDot(lang, "vx/core") +
-							"vx_new(" +
-							LangTypeT(lang, stringtype) +
-							", " +
-							LangVarVarArg(lang, stringtype, "valsub") +
-							")"
+						castval = LangFuncCallVariadicVx(lang, 5,
+							func_new,
+							[]string{
+								LangTypeT(lang, stringtype)},
+							[]string{
+								"valsub"})
 					}
 				}
 				switch NameFromType(allowedtype) {
@@ -1677,16 +1762,21 @@ func LangTypeVxCopy(
 						anytype, emptytype, "valsub", "anyinvalid", false,
 						LangVarSet(lang, 5,
 							"msg",
-							LangPkgNameDot(lang, "vx/core")+
-								"vx_msg_from_error(\""+
-								typepath+
-								"\", \":invalidtype\", anyinvalid)")+
+							LangFuncCall(lang, 5,
+								"vx",
+								func_msg_from_error,
+								"\""+typepath+"\"",
+								"\":invalidtype\"",
+								"anyinvalid"))+
 							LangVarSet(lang, 5,
 								"msgblock",
-								LangPkgNameDot(lang, "vx/core")+
-									"vx_copy(msgblock, "+
-									LangVarVarArg(lang, msgtype, "msg")+
-									")"))
+								LangFuncCallVariadicVx(lang, 5,
+									func_copy,
+									[]string{
+										LangTypeT(lang, msgblocktype),
+										"msgblock"},
+									[]string{
+										"msg"})))
 			}
 			valnew += "" +
 				elseiflistany +
@@ -1694,20 +1784,22 @@ func LangTypeVxCopy(
 				LangIfElse(lang, 4,
 					LangVarSet(lang, 5,
 						"msg",
-						LangPkgNameDot(lang, "vx/core")+
-							"vx_msg_from_error(\""+
-							typepath+
-							"\", \":invalidtype\", "+
-							LangPkgNameDot(lang, "vx/core")+
-							"vx_new_string("+
-							LangVarToString(lang, "valsub")+
-							"))")+
+						LangFuncCallVx(lang, 5,
+							func_msg_from_error,
+							"\""+typepath+"\"",
+							"\":invalidtype\"",
+							LangFuncCallVx(lang, 6,
+								func_new_string,
+								LangVarToString(lang, "valsub"))))+
 						LangVarSet(lang, 5,
 							"msgblock",
-							LangPkgNameDot(lang, "vx/core")+
-								"vx_copy(msgblock, "+
-								LangVarVarArg(lang, msgtype, "msg")+
-								")")) +
+							LangFuncCallVariadicVx(lang, 5,
+								func_copy,
+								[]string{
+									LangTypeT(lang, msgblocktype),
+									"msgblock"},
+								[]string{
+									"msg"}))) +
 				LangIfEnd(lang, 4) +
 				LangIfEnd(lang, 3) +
 				LangIfThen(lang, 3,
@@ -1722,8 +1814,8 @@ func LangTypeVxCopy(
 						"work", ":new")+
 						LangVarSet(lang, 4,
 							"work.vx_p_list",
-							LangFuncCall(lang, 4,
-								func_vx_listimmutable, "listval"))+
+							LangFuncCallVx(lang, 4,
+								func_listimmutable, "listval"))+
 						LangIfThen(lang, 4,
 							LangClause(lang, false,
 								"!=",
@@ -1755,9 +1847,11 @@ func LangTypeVxCopy(
 			valcopy += "" +
 				LangVarCollection(lang, 3, rawmaptype, allowtype,
 					"mapval",
-					LangFuncCall(lang, 3,
-						func_vx_mapmutable,
-						"value.vx_map"+allowname+"()"))
+					LangFuncCallVx(lang, 3,
+						func_mapmutable,
+						LangFuncCallMethod(lang, 4,
+							"value",
+							"vx_map"+allowname)))
 			valnew = "" +
 				LangVar(lang, 3, rawstringtype,
 					"key", "\"\"") +
@@ -1771,18 +1865,24 @@ func LangTypeVxCopy(
 					LangIsType(lang, "valsub", msgblocktype),
 					LangVarSet(lang, 5,
 						"msgblock",
-						LangPkgNameDot(lang, "vx/core")+
-							"vx_copy(msgblock, "+
-							LangVarVarArg(lang, msgblocktype, "valsub")+
-							")")) +
+						LangFuncCallVariadicVx(lang, 5,
+							func_copy,
+							[]string{
+								LangTypeT(lang, msgblocktype),
+								"msgblock"},
+							[]string{
+								"valsub"}))) +
 				LangIfElseIf(lang, 4,
 					LangIsType(lang, "valsub", msgtype),
 					LangVarSet(lang, 5,
 						"msgblock",
-						LangPkgNameDot(lang, "vx/core")+
-							"vx_copy(msgblock, "+
-							LangVarVarArg(lang, msgtype, "valsub")+
-							")")) +
+						LangFuncCallVariadicVx(lang, 5,
+							func_copy,
+							[]string{
+								LangTypeT(lang, msgblocktype),
+								"msgblock"},
+							[]string{
+								"valsub"}))) +
 				LangIfElseIf(lang, 4,
 					LangVxEqualsString(lang, "key", "\"\""),
 					LangIfThen(lang, 5,
@@ -1805,20 +1905,26 @@ func LangTypeVxCopy(
 								LangIfElse(lang, 6,
 									LangVarSet(lang, 7,
 										"msgval",
-										LangPkgNameDot(lang, "vx/core")+"vx_new_string("+LangVarToString(lang, "valsub")+")"))+
+										LangFuncCallVx(lang, 7,
+											func_new_string,
+											LangVarToString(lang, "valsub"))))+
 								LangIfEnd(lang, 6)+
 								LangVarSet(lang, 6,
 									"msg",
-									LangPkgNameDot(lang, "vx/core")+
-										"vx_msg_from_error(\""+
-										typepath+
-										"\", \":keyexpected\", msgval)")+
+									LangFuncCallVx(lang, 6,
+										func_msg_from_error,
+										"\""+typepath+"\"",
+										"\":keyexpected\"",
+										"msgval"))+
 								LangVarSet(lang, 6,
 									"msgblock",
-									LangPkgNameDot(lang, "vx/core")+
-										"vx_copy(msgblock, "+
-										LangVarVarArg(lang, msgtype, "msg")+
-										")")+
+									LangFuncCallVariadicVx(lang, 6,
+										func_copy,
+										[]string{
+											LangTypeT(lang, msgblocktype),
+											"msgblock"},
+										[]string{
+											"msg"}))+
 								LangIfEnd(lang, 5))) +
 				LangIfElse(lang, 4,
 					LangVar(lang, 5, allowtype,
@@ -1836,36 +1942,36 @@ func LangTypeVxCopy(
 					switch NameFromType(allowedtype) {
 					case "vx/core/boolean":
 						allowedtype = rawbooltype
-						castval = LangPkgNameDot(lang, "vx/core") +
-							"vx_new(" +
-							LangTypeT(lang, booleantype) +
-							", " +
-							LangVarVarArg(lang, rawbooltype, "valsub") +
-							")"
+						castval = LangFuncCallVariadicVx(lang, 6,
+							func_new,
+							[]string{
+								LangTypeT(lang, booleantype)},
+							[]string{
+								"valsub"})
 					case "vx/core/int":
 						allowedtype = rawintegertype
-						castval = LangPkgNameDot(lang, "vx/core") +
-							"vx_new(" +
-							LangTypeT(lang, inttype) +
-							", " +
-							LangVarVarArg(lang, rawintegertype, "valsub") +
-							")"
+						castval = LangFuncCallVariadicVx(lang, 6,
+							func_new,
+							[]string{
+								LangTypeT(lang, inttype)},
+							[]string{
+								"valsub"})
 					case "vx/core/float":
 						allowedtype = rawfloattype
-						castval = LangPkgNameDot(lang, "vx/core") +
-							"vx_new(" +
-							LangTypeT(lang, floattype) +
-							", " +
-							LangVarVarArg(lang, rawfloattype, "valsub") +
-							")"
+						castval = LangFuncCallVariadicVx(lang, 6,
+							func_new,
+							[]string{
+								LangTypeT(lang, floattype)},
+							[]string{
+								"valsub"})
 					case "vx/core/string":
 						allowedtype = rawstringtype
-						castval = LangPkgNameDot(lang, "vx/core") +
-							"vx_new(" +
-							LangTypeT(lang, stringtype) +
-							", " +
-							LangVarVarArg(lang, rawstringtype, "valsub") +
-							")"
+						castval = LangFuncCallVariadicVx(lang, 6,
+							func_new,
+							[]string{
+								LangTypeT(lang, stringtype)},
+							[]string{
+								"valsub"})
 					}
 				}
 				if allowedtypename != "" {
@@ -1887,7 +1993,10 @@ func LangTypeVxCopy(
 								"msgval", "valinvalid"))+
 						LangIfElse(lang, 6,
 							LangVarSet(lang, 7,
-								"msgval", LangPkgNameDot(lang, "vx/core")+"vx_new_string("+LangVarToString(lang, "valsub")+")"))+
+								"msgval",
+								LangFuncCallVx(lang, 8,
+									func_new_string,
+									LangVarToString(lang, "valsub"))))+
 						LangIfEnd(lang, 6)+
 						LangVarCollection(lang, 6, rawmaptype, anytype,
 							"mapany", LangVarMapNew(lang, anytype, ""))+
@@ -1901,23 +2010,28 @@ func LangTypeVxCopy(
 							"msgval")+
 						LangVal(lang, 6, maptype,
 							"msgmap",
-							LangTypeT(lang, anymaptype)+
-								".vx_new_from_map("+
-								LangFuncCall(lang, 7,
-									func_vx_mapimmutable,
-									"mapany")+
-								")")+
+							LangFuncCallMethod(lang, 6,
+								LangTypeT(lang, anymaptype),
+								"vx_new_from_map",
+								LangFuncCallVx(lang, 7,
+									func_mapimmutable,
+									"mapany")))+
 						LangVarSet(lang, 6,
 							"msg",
-							LangPkgNameDot(lang, "vx/core")+
-								"vx_msg_from_error(\""+
-								typepath+"\", \":invalidkeyvalue\", msgmap)")+
+							LangFuncCallVx(lang, 6,
+								func_msg_from_error,
+								"\""+typepath+"\"",
+								"\":invalidkeyvalue\"",
+								"msgmap"))+
 						LangVarSet(lang, 6,
 							"msgblock",
-							LangPkgNameDot(lang, "vx/core")+
-								"vx_copy(msgblock, "+
-								LangVarVarArg(lang, msgtype, "msg")+
-								")")+
+							LangFuncCallVariadicVx(lang, 6,
+								func_copy,
+								[]string{
+									LangTypeT(lang, msgblocktype),
+									"msgblock"},
+								[]string{
+									"msg"}))+
 						LangIfEnd(lang, 5)+
 						LangIfThen(lang, 5,
 							LangClause(lang, false,
@@ -1951,8 +2065,8 @@ func LangTypeVxCopy(
 								"work", ":new")+
 								LangVarSet(lang, 4,
 									"work.vx_p_map",
-									LangFuncCall(lang, 4,
-										func_vx_mapimmutable,
+									LangFuncCallVx(lang, 4,
+										func_mapimmutable,
 										"mapval"))+
 								LangIfThen(lang, 4,
 									LangClause(lang, false,
@@ -2059,12 +2173,12 @@ func LangTypeVxCopy(
 									"ischanged", "true")+
 									LangVarSet(lang, 7,
 										"vx_p_"+argname,
-										LangPkgNameDot(lang, "vx/core")+
-											"vx_new("+
-											LangPkgNameDot(lang, "vx/core")+
-											"t_boolean, "+
-											LangVarVarArg(lang, rawbooleantype, "valsub")+
-											")"))
+										LangFuncCallVariadicVx(lang, 7,
+											func_new,
+											[]string{
+												LangTypeT(lang, booleantype)},
+											[]string{
+												"valsub"})))
 					case "vx/core/int":
 						argalt = "" +
 							LangIfElseIf(lang, 6,
@@ -2073,12 +2187,12 @@ func LangTypeVxCopy(
 									"ischanged", "true")+
 									LangVarSet(lang, 7,
 										"vx_p_"+argname,
-										LangPkgNameDot(lang, "vx/core")+
-											"vx_new("+
-											LangPkgNameDot(lang, "vx/core")+
-											"t_int, "+
-											LangVarVarArg(lang, rawintegertype, "valsub")+
-											")"))
+										LangFuncCallVariadicVx(lang, 7,
+											func_new,
+											[]string{
+												LangTypeT(lang, inttype)},
+											[]string{
+												"valsub"})))
 					case "vx/core/float":
 						argalt = "" +
 							LangIfElseIf(lang, 6,
@@ -2087,12 +2201,12 @@ func LangTypeVxCopy(
 									"ischanged", "true")+
 									LangVarSet(lang, 7,
 										"vx_p_"+argname,
-										LangPkgNameDot(lang, "vx/core")+
-											"vx_new("+
-											LangPkgNameDot(lang, "vx/core")+
-											"t_float, "+
-											LangVarVarArg(lang, rawfloattype, "valsub")+
-											")"))
+										LangFuncCallVariadicVx(lang, 7,
+											func_new,
+											[]string{
+												LangTypeT(lang, floattype)},
+											[]string{
+												"valsub"})))
 					case "vx/core/string":
 						argalt = "" +
 							LangIfElseIf(lang, 6,
@@ -2101,12 +2215,12 @@ func LangTypeVxCopy(
 									"ischanged", "true")+
 									LangVarSet(lang, 7,
 										"vx_p_"+argname,
-										LangPkgNameDot(lang, "vx/core")+
-											"vx_new("+
-											LangPkgNameDot(lang, "vx/core")+
-											"t_string, "+
-											LangVarVarArg(lang, rawstringtype, "valsub")+
-											")"))
+										LangFuncCallVariadicVx(lang, 7,
+											func_new,
+											[]string{
+												LangTypeT(lang, stringtype)},
+											[]string{
+												"valsub"})))
 					}
 					valnewswitcherr := ""
 					switch NameFromType(typ) {
@@ -2137,21 +2251,28 @@ func LangTypeVxCopy(
 										"mapany", "\"value\"", "msgval")+
 									LangVal(lang, 7, maptype,
 										"msgmap",
-										LangTypeT(lang, anymaptype)+
-											".vx_new_from_map("+
-											LangFuncCall(lang, 8,
-												func_vx_mapimmutable,
-												"mapany")+
-											")")+
+										LangFuncCallMethod(lang, 7,
+											LangTypeT(lang, anymaptype),
+											"vx_new_from_map",
+											LangFuncCallVx(lang, 8,
+												func_mapimmutable,
+												"mapany")))+
 									LangVarSet(lang, 7,
 										"msg",
-										LangPkgNameDot(lang, "vx/core")+"vx_msg_from_error(\""+typepath+"\", \":invalidvalue\", msgmap)")+
+										LangFuncCallVx(lang, 7,
+											func_msg_from_error,
+											"\""+typepath+"\"",
+											"\":invalidvalue\"",
+											"msgmap"))+
 									LangVarSet(lang, 7,
 										"msgblock",
-										LangPkgNameDot(lang, "vx/core")+
-											"vx_copy(msgblock, "+
-											LangVarVarArg(lang, msgtype, "msg")+
-											")"))
+										LangFuncCallVariadicVx(lang, 7,
+											func_copy,
+											[]string{
+												LangTypeT(lang, msgblocktype),
+												"msgblock"},
+											[]string{
+												"msg"})))
 					}
 					valnewswitch += "" +
 						LangIfElseIf(lang, 5,
@@ -2197,12 +2318,12 @@ func LangTypeVxCopy(
 									"ischanged", "true")+
 									LangVarSet(lang, 6,
 										"vx_p_"+lastargname,
-										LangPkgNameDot(lang, "vx/core")+
-											"vx_new("+
-											LangTypeT(lang, booleantype)+
-											", "+
-											LangVarVarArg(lang, rawbooleantype, "valsub")+
-											")"))
+										LangFuncCallVariadicVx(lang, 7,
+											func_new,
+											[]string{
+												LangTypeT(lang, booleantype)},
+											[]string{
+												"valsub"})))
 					case "vx/core/int":
 						defaultkey += "" +
 							LangIfElseIf(lang, 5,
@@ -2211,11 +2332,12 @@ func LangTypeVxCopy(
 									"ischanged", "true")+
 									LangVarSet(lang, 6,
 										"vx_p_"+lastargname,
-										LangPkgNameDot(lang, "vx/core")+
-											"vx_new("+LangTypeT(lang, inttype)+
-											", "+
-											LangVarVarArg(lang, rawintegertype, "valsub")+
-											")"))
+										LangFuncCallVariadicVx(lang, 7,
+											func_new,
+											[]string{
+												LangTypeT(lang, inttype)},
+											[]string{
+												"valsub"})))
 					case "vx/core/float":
 						defaultkey += "" +
 							LangIfElseIf(lang, 5,
@@ -2224,12 +2346,12 @@ func LangTypeVxCopy(
 									"ischanged", "true")+
 									LangVarSet(lang, 6,
 										"vx_p_"+lastargname,
-										LangPkgNameDot(lang, "vx/core")+
-											"vx_new("+
-											LangTypeT(lang, floattype)+
-											", "+
-											LangVarVarArg(lang, rawfloattype, "valsub")+
-											")"))
+										LangFuncCallVariadicVx(lang, 7,
+											func_new,
+											[]string{
+												LangTypeT(lang, floattype)},
+											[]string{
+												"valsub"})))
 					case "vx/core/string":
 						defaultstring += "" +
 							LangIfElseType(lang, 6,
@@ -2244,12 +2366,12 @@ func LangTypeVxCopy(
 									"ischanged", "true")+
 									LangVarSet(lang, 7,
 										"vx_p_"+lastargname,
-										LangPkgNameDot(lang, "vx/core")+
-											"vx_new("+
-											LangTypeT(lang, stringtype)+
-											", "+
-											LangVarVarArg(lang, rawstringtype, "valsub")+
-											")"))
+										LangFuncCallVariadicVx(lang, 7,
+											func_new,
+											[]string{
+												LangTypeT(lang, stringtype)},
+											[]string{
+												"valsub"})))
 					}
 					if lastarg.vxtype.extends == ":list" {
 						lastargtype := lastarg.vxtype
@@ -2269,19 +2391,22 @@ func LangTypeVxCopy(
 												"==", "vallist", "null"),
 											LangVarSet(lang, 7,
 												"vallist",
-												LangPkgNameDot(lang, "vx/core")+
-													"vx_new("+
-													LangTypeT(lang, lastarg.vxtype)+
-													", "+
-													LangVarVarArg(lang, allowtype, "valdefault")+
-													")"))+
+												LangFuncCallVariadicVx(lang, 7,
+													func_new,
+													[]string{
+														LangTypeT(lang, lastarg.vxtype)},
+													[]string{
+														"valdefault"})))+
 										LangIfElse(lang, 6,
 											LangVarSet(lang, 7,
 												"vallist",
-												LangPkgNameDot(lang, "vx/core")+
-													"vx_copy(vallist, "+
-													LangVarVarArg(lang, allowtype, "valdefault")+
-													")"))+
+												LangFuncCallVariadicVx(lang, 5,
+													func_copy,
+													[]string{
+														LangTypeT(lang, lastarg.vxtype),
+														"vallist"},
+													[]string{
+														"valdefault"})))+
 										LangIfEnd(lang, 6)+
 										LangVarSet(lang, 6,
 											"ischanged", "true")+
@@ -2350,22 +2475,30 @@ func LangTypeVxCopy(
 									LangIfElse(lang, 5,
 										LangVarSet(lang, 6,
 											"vx_p_msgblocks",
-											LangPkgNameDot(lang, "vx/core")+
-												"vx_copy(vx_p_msgblocks, "+
-												LangVarVarArg(lang, msgblocktype, "valsub")+
-												")"))+
+											LangFuncCallVariadicVx(lang, 6,
+												func_copy,
+												[]string{
+													LangTypeT(lang, msgblocklisttype),
+													"vx_p_msgblocks"},
+												[]string{
+													"valsub"})))+
 									LangIfEnd(lang, 5))+
 								LangIfElseIf(lang, 4,
 									LangIsType(lang, "valsub", msgblocklisttype),
 									LangIfThen(lang, 5,
 										LangClause(lang, false,
-											"!=", "valsub", LangTypeE(lang, msgblocklisttype)),
+											"!=",
+											"valsub",
+											LangTypeE(lang, msgblocklisttype)),
 										LangVarSet(lang, 6,
 											"vx_p_msgblocks",
-											LangPkgNameDot(lang, "vx/core")+
-												"vx_copy(vx_p_msgblocks, "+
-												LangVarVarArg(lang, msgblocklisttype, "valsub")+
-												")"))+
+											LangFuncCallVariadicVx(lang, 6,
+												func_copy,
+												[]string{
+													LangTypeT(lang, msgblocklisttype),
+													"vx_p_msgblocks"},
+												[]string{
+													"valsub"})))+
 										LangIfEnd(lang, 5))+
 								LangIfElseIf(lang, 4,
 									LangIsType(lang, "valsub", msgtype),
@@ -2374,10 +2507,13 @@ func LangTypeVxCopy(
 											"!=", "valsub", LangTypeE(lang, msgtype)),
 										LangVarSet(lang, 6,
 											"vx_p_msgs",
-											LangPkgNameDot(lang, "vx/core")+
-												"vx_copy(vx_p_msgs, "+
-												LangVarVarArg(lang, msgtype, "valsub")+
-												")"))+
+											LangFuncCallVariadicVx(lang, 6,
+												func_copy,
+												[]string{
+													LangTypeT(lang, msglisttype),
+													"vx_p_msgs"},
+												[]string{
+													"valsub"})))+
 										LangIfEnd(lang, 5))+
 								LangIfElseIf(lang, 4,
 									LangIsType(lang, "valsub", msglisttype),
@@ -2386,10 +2522,13 @@ func LangTypeVxCopy(
 											"!=", "valsub", LangTypeE(lang, msglisttype)),
 										LangVarSet(lang, 6,
 											"vx_p_msgs",
-											LangPkgNameDot(lang, "vx/core")+
-												"vx_copy(vx_p_msgs, "+
-												LangVarVarArg(lang, msglisttype, "valsub")+
-												")"))+
+											LangFuncCallVariadicVx(lang, 6,
+												func_copy,
+												[]string{
+													LangTypeT(lang, msglisttype),
+													"vx_p_msgs"},
+												[]string{
+													"valsub"})))+
 										LangIfEnd(lang, 5))+
 								LangIfElseIf(lang, 4,
 									LangVxEqualsString(lang, "key", "\"\""),
@@ -2471,18 +2610,24 @@ func LangTypeVxCopy(
 								LangIsType(lang, "valsub", msgblocktype),
 								LangVarSet(lang, 5,
 									"msgblock",
-									LangPkgNameDot(lang, "vx/core")+
-										"vx_copy(msgblock, "+
-										LangVarVarArg(lang, msgblocktype, "valsub")+
-										")"))+
+									LangFuncCallVariadicVx(lang, 5,
+										func_copy,
+										[]string{
+											LangTypeT(lang, msgblocktype),
+											"msgblock"},
+										[]string{
+											"valsub"})))+
 								LangIfElseIf(lang, 4,
 									LangIsType(lang, "valsub", msgtype),
 									LangVarSet(lang, 5,
 										"msgblock",
-										LangPkgNameDot(lang, "vx/core")+
-											"vx_copy(msgblock, "+
-											LangVarVarArg(lang, msgtype, "valsub")+
-											")"))+
+										LangFuncCallVariadicVx(lang, 5,
+											func_copy,
+											[]string{
+												LangTypeT(lang, msgblocktype),
+												"msgblock"},
+											[]string{
+												"valsub"})))+
 								LangIfElseIf(lang, 4,
 									LangVxEqualsString(lang, "key", "\"\""),
 									LangVar(lang, 5, rawbooltype,
@@ -2514,71 +2659,95 @@ func LangTypeVxCopy(
 												LangIfElse(lang, 6,
 													LangVarSet(lang, 7,
 														"msgval",
-														LangPkgNameDot(lang, "vx/core")+"vx_new_string("+LangVarToString(lang, "valsub")+")"))+
+														LangFuncCallVx(lang, 7,
+															func_new_string,
+															LangVarToString(lang, "valsub"))))+
 												LangIfEnd(lang, 6)+
 												LangVarSet(lang, 6,
 													"msg",
-													LangPkgNameDot(lang, "vx/core")+"vx_msg_from_error(\""+typepath+"\", \":invalidkeytype\", msgval)")+
+													LangFuncCallVx(lang, 6,
+														func_msg_from_error,
+														"\""+typepath+"\"",
+														"\":invalidkeytype\"",
+														"msgval"))+
 												LangVarSet(lang, 6,
 													"msgblock",
-													LangPkgNameDot(lang, "vx/core")+
-														"vx_copy(msgblock, "+
-														LangVarVarArg(lang, msgtype, "msg")+
-														")"))+
-										LangIfEnd(lang, 5)+
-										LangIfThen(lang, 5,
-											"istestkey",
-											LangIfThen(lang, 6,
-												"!"+LangVarStringStarts(lang, "testkey", "\":\""),
-												LangVarSet(lang, 7,
-													"testkey", "\":\" + testkey"))+
-												LangIfEnd(lang, 6)+
-												LangVar(lang, 6, rawbooltype,
-													"isvalidkey",
-													LangStringContains(lang, "validkeys", "testkey"))+
-												LangIfThen(lang, 6,
-													"isvalidkey",
-													LangVarSet(lang, 7,
-														"key", "testkey")+
-														defaultstring)+
-												LangIfElse(lang, 6,
-													LangVarSet(lang, 7,
-														"msgval",
-														LangPkgNameDot(lang, "vx/core")+"vx_new_string(testkey)")+
-														LangVarSet(lang, 7,
-															"msg",
-															LangPkgNameDot(lang, "vx/core")+"vx_msg_from_error(\""+typepath+"\", \":invalidkey\", msgval)")+
-														LangVarSet(lang, 7,
-															"msgblock",
-															LangPkgNameDot(lang, "vx/core")+
-																"vx_copy(msgblock, "+
-																LangVarVarArg(lang, msgtype, "msg")+
-																")"))+
-												LangIfEnd(lang, 6)+
-												LangIfEnd(lang, 5))+
-										LangIfElse(lang, 4,
-											LangIfThen(lang, 5, "false", "")+
-												valnewswitch+
-												LangIfElse(lang, 5,
-													LangVarSet(lang, 6,
-														"msgval",
-														LangPkgNameDot(lang, "vx/core")+"vx_new_string(key)")+
-														LangVarSet(lang, 6,
-															"msg",
-															LangPkgNameDot(lang, "vx/core")+
-																"vx_msg_from_error(\""+
-																typepath+
-																"\", \":invalidkey\", msgval)")+
-														LangVarSet(lang, 6,
-															"msgblock",
-															LangPkgNameDot(lang, "vx/core")+
-																"vx_copy(msgblock, "+
-																LangVarVarArg(lang, msgtype, "msg")+
-																")"))+
+													LangFuncCallVariadicVx(lang, 6,
+														func_copy,
+														[]string{
+															LangTypeT(lang, msgblocktype),
+															"msgblock"},
+														[]string{
+															"msg"}))+
 												LangIfEnd(lang, 5)+
-												LangVarSet(lang, 5,
-													"key", "\"\""))+
-										LangIfEnd(lang, 4))) +
+												LangIfThen(lang, 5,
+													"istestkey",
+													LangIfThen(lang, 6,
+														"!"+LangVarStringStarts(lang, "testkey", "\":\""),
+														LangVarSet(lang, 7,
+															"testkey", "\":\" + testkey"))+
+														LangIfEnd(lang, 6)+
+														LangVar(lang, 6, rawbooltype,
+															"isvalidkey",
+															LangStringContains(lang, "validkeys", "testkey"))+
+														LangIfThen(lang, 6,
+															"isvalidkey",
+															LangVarSet(lang, 7,
+																"key", "testkey")+
+																defaultstring)+
+														LangIfElse(lang, 6,
+															LangVarSet(lang, 7,
+																"msgval",
+																LangFuncCallVx(lang, 7,
+																	func_new_string,
+																	"testkey"))+
+																LangVarSet(lang, 7,
+																	"msg",
+																	LangFuncCallVx(lang, 7,
+																		func_msg_from_error,
+																		"\""+typepath+"\"",
+																		"\":invalidkey\"",
+																		"msgval"))+
+																LangVarSet(lang, 7,
+																	"msgblock",
+																	LangFuncCallVariadicVx(lang, 7,
+																		func_copy,
+																		[]string{
+																			LangTypeT(lang, msgblocktype),
+																			"msgblock"},
+																		[]string{
+																			"msg"})))+
+														LangIfEnd(lang, 6)+
+														LangIfEnd(lang, 5))+
+												LangIfElse(lang, 4,
+													LangIfThen(lang, 5, "false", "")+
+														valnewswitch+
+														LangIfElse(lang, 5,
+															LangVarSet(lang, 6,
+																"msgval",
+																LangFuncCallVx(lang, 6,
+																	func_new_string,
+																	"key"))+
+																LangVarSet(lang, 6,
+																	"msg",
+																	LangFuncCallVx(lang, 6,
+																		func_msg_from_error,
+																		"\""+typepath+"\"",
+																		"\":invalidkey\"",
+																		"msgval"))+
+																LangVarSet(lang, 6,
+																	"msgblock",
+																	LangFuncCallVariadicVx(lang, 6,
+																		func_copy,
+																		[]string{
+																			LangTypeT(lang, msgblocktype),
+																			"msgblock"},
+																		[]string{
+																			"msg"})))+
+														LangIfEnd(lang, 5)+
+														LangVarSet(lang, 5,
+															"key", "\"\""))+
+												LangIfEnd(lang, 4)))) +
 						LangIfThen(lang, 3,
 							LangClause(lang, false,
 								"||",
@@ -2631,7 +2800,7 @@ func LangTypeVxCopy(
 		}
 		funcvxcopy.isoverride = true
 		output = "" +
-			LangFuncHeader(lang, 2,
+			LangFuncHeader(lang, path, 2,
 				typename, funcvxcopy, 0,
 				LangVar(lang, 3, typ,
 					"output", LangTypeThis(lang))+
@@ -2643,6 +2812,7 @@ func LangTypeVxCopy(
 
 func LangTypeVxEmpty(
 	lang *vxlang,
+	path string,
 	typ *vxtype,
 	isinterface bool) string {
 	funcvxempty := NewFunc()
@@ -2651,12 +2821,12 @@ func LangTypeVxEmpty(
 	typename := LangTypeName(lang, typ)
 	output := ""
 	if isinterface {
-		output = LangFuncHeaderInterface(lang, 2,
+		output = LangFuncHeaderInterface(lang, path, 2,
 			typename, funcvxempty)
 	} else {
 		funcvxempty.isoverride = true
 		output = "" +
-			LangFuncHeader(lang, 2,
+			LangFuncHeader(lang, path, 2,
 				typename, funcvxempty, 0,
 				LangVar(lang, 3, anytype,
 					"output",
@@ -2667,6 +2837,7 @@ func LangTypeVxEmpty(
 
 func LangTypeVxFuncdef(
 	lang *vxlang,
+	path string,
 	typ *vxtype,
 	isinterface bool) string {
 	funcvxfuncdef := NewFunc()
@@ -2675,12 +2846,12 @@ func LangTypeVxFuncdef(
 	prefix := LangNameFromType(lang, typ)
 	output := ""
 	if isinterface {
-		output = LangFuncHeaderInterface(lang, 2,
+		output = LangFuncHeaderInterface(lang, path, 2,
 			prefix, funcvxfuncdef)
 	} else {
 		funcvxfuncdef.isimplement = true
 		output = "" +
-			LangFuncHeader(lang, 2,
+			LangFuncHeader(lang, path, 2,
 				prefix, funcvxfuncdef, 0,
 				LangVar(lang, 3, funcdeftype,
 					"output",
@@ -2691,6 +2862,7 @@ func LangTypeVxFuncdef(
 
 func LangTypeVxList(
 	lang *vxlang,
+	path string,
 	typ *vxtype,
 	isinterface bool) string {
 	funcvxlist := NewFunc()
@@ -2700,16 +2872,17 @@ func LangTypeVxList(
 	typename := LangTypeName(lang, typ)
 	output := ""
 	if isinterface {
-		output = LangFuncInterface(lang, funcvxlist)
+		output = LangFuncInterface(lang, path,
+			funcvxlist)
 	} else {
 		castlist := LangTypeThis(lang) + lang.typeref + "vx_p_list"
 		output = "" +
-			LangFuncHeader(lang, 2,
+			LangFuncHeader(lang, path, 2,
 				typename, funcvxlist, 0,
 				LangVarCollection(lang, 3, rawlisttype, anytype,
 					"output",
-					LangFuncCall(lang, 3,
-						func_vx_listimmutable,
+					LangFuncCallVx(lang, 3,
+						func_listimmutable,
 						LangVarListNew(lang, anytype, castlist))))
 	}
 	return output
@@ -2717,6 +2890,7 @@ func LangTypeVxList(
 
 func LangTypeVxMapStruct(
 	lang *vxlang,
+	path string,
 	typ *vxtype,
 	isinterface bool) string {
 	output := ""
@@ -2725,7 +2899,8 @@ func LangTypeVxMapStruct(
 	funcvxmap.name = "vx_map"
 	funcvxmap.vxtype = NewTypeSubtype(rawmaptype, anytype)
 	if isinterface {
-		output = LangFuncInterface(lang, funcvxmap)
+		output = LangFuncInterface(lang, path,
+			funcvxmap)
 	} else {
 		vx_map := ""
 		props := ListPropertyTraitFromType(typ)
@@ -2738,7 +2913,7 @@ func LangTypeVxMapStruct(
 		}
 		funcvxmap.isimplement = true
 		output += "" +
-			LangFuncHeader(lang, 2,
+			LangFuncHeader(lang, path, 2,
 				typename, funcvxmap, 0,
 				LangVarCollection(lang, 3, rawmaptype, anytype,
 					"map",
@@ -2746,8 +2921,8 @@ func LangTypeVxMapStruct(
 					vx_map+
 					LangValCollection(lang, 3, rawmaptype, anytype,
 						"output",
-						LangFuncCall(lang, 3,
-							func_vx_mapimmutable,
+						LangFuncCallVx(lang, 3,
+							func_mapimmutable,
 							"map")))
 	}
 	return output
@@ -2755,6 +2930,7 @@ func LangTypeVxMapStruct(
 
 func LangTypeVxMsgblock(
 	lang *vxlang,
+	path string,
 	typ *vxtype,
 	isinterface bool) string {
 	output := ""
@@ -2763,7 +2939,7 @@ func LangTypeVxMsgblock(
 	funcvxmsgblock.vxtype = msgblocktype
 	typename := LangNameFromType(lang, typ)
 	if isinterface {
-		output = LangFuncHeaderInterface(lang, 2,
+		output = LangFuncHeaderInterface(lang, path, 2,
 			typename, funcvxmsgblock)
 		/*
 			} else {
@@ -2782,28 +2958,28 @@ func LangTypeVxMsgblock(
 
 func LangTypeVxNew(
 	lang *vxlang,
+	path string,
 	typ *vxtype,
 	isinterface bool) string {
 	funcvxnew := LangTypeVxNewModel(typ)
 	typename := LangNameFromType(lang, typ)
 	output := ""
 	if isinterface {
-		output = LangFuncHeaderInterface(lang, 2,
+		output = LangFuncHeaderInterface(lang, path, 2,
 			typename, funcvxnew)
 	} else {
 		funcvxnew.isoverride = true
 		vals := LangTypeVxNewVals(lang)
 		output = "" +
-			LangFuncHeader(lang, 2,
+			LangFuncHeader(lang, path, 2,
 				typename, funcvxnew, 0,
 				LangVar(lang, 3, typ,
 					"output",
-					LangPkgNameDot(lang, "vx/core")+
-						"vx_copy("+
-						LangTypeE(lang, typ)+
-						", "+
-						vals+
-						")"))
+					LangFuncCallVx(lang, 3,
+						func_copy,
+						LangTypeT(lang, typ),
+						LangTypeE(lang, typ),
+						vals)))
 	}
 	return output
 }
@@ -2825,6 +3001,7 @@ func LangTypeVxNewModel(
 
 func LangTypeVxNewMap(
 	lang *vxlang,
+	path string,
 	typ *vxtype,
 	isinterface bool) string {
 	output := ""
@@ -2851,12 +3028,12 @@ func LangTypeVxNewMap(
 	typename := LangTypeName(lang, typ)
 	if isinterface {
 		output += "" +
-			LangFuncHeaderInterface(lang, 2,
+			LangFuncHeaderInterface(lang, path, 2,
 				typename, funcvxnewmap)
 	} else {
 		funcvxnewmap.isimplement = true
 		output += "" +
-			LangFuncHeader(lang, 2,
+			LangFuncHeader(lang, path, 2,
 				typename, funcvxnewmap, 0,
 				LangVarClass(lang, 3, typ,
 					"output", ":new")+
@@ -2879,18 +3056,25 @@ func LangTypeVxNewMap(
 							LangIfElse(lang, 4,
 								LangVar(lang, 5, msgtype,
 									"msg",
-									LangPkgNameDot(lang, "vx/core")+"vx_msg_from_error(\""+typepath+"\", \":invalidvalue\", value)")+
+									LangFuncCallVx(lang, 5,
+										func_msg_from_error,
+										"\""+typepath+"\"",
+										"\":invalidvalue\"",
+										"value"))+
 									LangVarSet(lang, 5,
 										"msgblock",
-										LangPkgNameDot(lang, "vx/core")+
-											"vx_copy(msgblock, "+
-											LangVarVarArg(lang, msgtype, "msg")+
-											")"))+
+										LangFuncCallVariadicVx(lang, 5,
+											func_copy,
+											[]string{
+												LangTypeT(lang, msgblocktype),
+												"msgblock"},
+											[]string{
+												"msg"})))+
 							LangIfEnd(lang, 4))+
 					LangVarSet(lang, 3,
 						"output.vx_p_map",
-						LangFuncCall(lang, 3,
-							func_vx_mapimmutable,
+						LangFuncCallVx(lang, 3,
+							func_mapimmutable,
 							"map"))+
 					LangIfThen(lang, 3,
 						LangClause(lang, false,
@@ -2906,6 +3090,7 @@ func LangTypeVxNewMap(
 
 func LangTypeVxSet(
 	lang *vxlang,
+	path string,
 	typ *vxtype) string {
 	argname := NewArg("name")
 	argname.vxtype = stringtype
@@ -2943,12 +3128,13 @@ func LangTypeVxSet(
 				LangIfThen(lang, 4,
 					LangVarStringStarts(lang, "key", "\":\""),
 					LangVarSet(lang, 5,
-						"key", LangVarSubstring(lang, "key", "1", "")))+
+						"key",
+						LangVarSubstring(lang, "key", "1", "")))+
 				LangIfEnd(lang, 4)+
 				LangVarCollection(lang, 4, rawmaptype, allowtype,
 					"map",
-					LangFuncCall(lang, 4,
-						func_vx_mapmutable,
+					LangFuncCallVx(lang, 4,
+						func_mapmutable,
 						LangTypeThis(lang)+".vx_p_map"))+
 				LangIfThen(lang, 4,
 					LangClause(lang, false,
@@ -2961,20 +3147,22 @@ func LangTypeVxSet(
 						LangIfEnd(lang, 4)+
 						LangVarSet(lang, 4,
 							LangTypeThis(lang)+".vx_p_map",
-							LangFuncCall(lang, 4,
-								func_vx_mapimmutable,
+							LangFuncCallVx(lang, 4,
+								func_mapimmutable,
 								"map"))+
 						LangVarSet(lang, 4,
-							"output", LangPkgNameDot(lang, "vx/core")+"c_true"))) +
+							"output",
+							LangPkgNameDot(lang, "vx/core")+"c_true"))) +
 		LangIfEnd(lang, 3)
 	output := "" +
-		LangFuncHeader(lang, 2,
+		LangFuncHeader(lang, path, 2,
 			prefix, funcvxmap, 0, body)
 	return output
 }
 
 func LangTypeVxType(
 	lang *vxlang,
+	path string,
 	typ *vxtype,
 	isinterface bool) string {
 	funcvxtype := NewFunc()
@@ -2983,12 +3171,12 @@ func LangTypeVxType(
 	output := ""
 	typename := LangNameFromType(lang, typ)
 	if isinterface {
-		output = LangFuncHeaderInterface(lang, 2,
+		output = LangFuncHeaderInterface(lang, path, 2,
 			typename, funcvxtype)
 	} else {
 		funcvxtype.isoverride = true
 		output = "" +
-			LangFuncHeader(lang, 2,
+			LangFuncHeader(lang, path, 2,
 				typename, funcvxtype, 0,
 				LangVar(lang, 3, anytype,
 					"output",
@@ -2999,6 +3187,7 @@ func LangTypeVxType(
 
 func LangTypeVxTypedef(
 	lang *vxlang,
+	path string,
 	typ *vxtype,
 	isinterface bool) string {
 	funcvxtypedef := NewFunc()
@@ -3007,12 +3196,13 @@ func LangTypeVxTypedef(
 	output := ""
 	if isinterface {
 		typename := LangNameTypeFullFromType(lang, typ)
-		output = LangFuncHeaderInterface(lang, 2, typename, funcvxtypedef)
+		output = LangFuncHeaderInterface(lang, path, 2,
+			typename, funcvxtypedef)
 	} else {
 		funcvxtypedef.isoverride = true
 		prefix := LangNameFromType(lang, typ)
 		output = "" +
-			LangFuncHeader(lang, 2,
+			LangFuncHeader(lang, path, 2,
 				prefix, funcvxtypedef, 0,
 				LangVar(lang, 3, typedeftype,
 					"output",

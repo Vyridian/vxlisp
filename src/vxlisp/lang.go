@@ -215,9 +215,9 @@ func LangFromPackage(
 	packagestatic += "" +
 		"\n    " + LangPkgNameDot(lang, "vx/core") + "vx_global_package_set(" +
 		"\n      \"" + pkg.name + "\"," +
-		"\n      " + LangFuncCall(lang, 3, func_vx_mapimmutable, "maptype") + "," +
-		"\n      " + LangFuncCall(lang, 3, func_vx_mapimmutable, "mapconst") + "," +
-		"\n      " + LangFuncCall(lang, 3, func_vx_mapimmutable, "mapfunc") +
+		"\n      " + LangFuncCallVx(lang, 3, func_mapimmutable, "maptype") + "," +
+		"\n      " + LangFuncCallVx(lang, 3, func_mapimmutable, "mapconst") + "," +
+		"\n      " + LangFuncCallVx(lang, 3, func_mapimmutable, "mapfunc") +
 		"\n    )" + lang.lineend
 	staticopen += packagestatic
 	body := "" +
@@ -251,7 +251,6 @@ func LangFromValue(
 	msgblock := NewMsgBlock("LangFromValue")
 	output := ""
 	valstr := ""
-	sindent := StringRepeat("  ", indent)
 	switch value.code {
 	case ":arg":
 		valarg := ArgFromValue(value)
@@ -260,7 +259,9 @@ func LangFromValue(
 	case ":const":
 		switch value.name {
 		case "false", "true":
-			valstr = LangPkgName(lang, "vx/core") + lang.pkgref + "vx_new_boolean(" + value.name + ")"
+			valstr = LangFuncCallVx(lang, 0,
+				func_new_boolean,
+				value.name)
 		default:
 			if value.pkg == ":native" {
 				valstr = LangFromName(value.name)
@@ -287,7 +288,7 @@ func LangFromValue(
 		valfunc := FuncFromValue(value)
 		valstr = ""
 		valstr += LangPkgName(lang, valfunc.pkgname) + lang.typeref + "t_" + LangFromName(valfunc.alias)
-		output = sindent + valstr
+		output = valstr
 	case ":type":
 		valtype := TypeFromValue(value)
 		output = LangPkgName(lang, valtype.pkgname) + lang.typeref + "t_" + LangFromName(valtype.alias)
@@ -397,10 +398,12 @@ func LangLambdaFromArgList(
 				lambdatypename := LangArgTypeNameValue(
 					lang, lambdaargname, anytype)
 				lambdatypenames = append(lambdatypenames, lambdatypename)
-				corepkgname := LangPkgName(lang, "vx/core")
 				lambdavar := LangVal(lang, 1, argtype,
 					lambdaargname,
-					corepkgname+lang.pkgref+"f_any_from_any("+argvaltname+", "+lambdaargname+"_any)")
+					LangFuncCallF(lang, 1,
+						func_any_from_any,
+						argvaltname,
+						lambdaargname+"_any"))
 				lambdavars = append(lambdavars, lambdavar)
 			}
 		}
@@ -452,16 +455,22 @@ func LangPkgNameDot(
 
 func LangTypeCoverageNumsValNew(
 	lang *vxlang,
+	indent int,
 	pct int,
 	tests int,
 	total int) string {
 	return "" +
-		LangPkgNameDot(lang, "vx/core") + "vx_new(" +
-		LangTypeT(lang, testcoveragenumstype) + ", " +
-		"\":pct\", " + StringFromInt(pct) + ", " +
-		"\":tests\", " + StringFromInt(tests) + ", " +
-		"\":total\", " + StringFromInt(total) +
-		")"
+		LangFuncCallVariadicVx(lang, indent,
+			func_new,
+			[]string{
+				LangTypeT(lang, testcoveragenumstype)},
+			[]string{
+				"\":pct\"",
+				StringFromInt(pct),
+				"\":tests\"",
+				StringFromInt(tests),
+				"\":total\"",
+				StringFromInt(total)})
 }
 
 func LangWriteFromProjectCmd(
@@ -795,6 +804,7 @@ func LangVarStaticFuture(
 
 func LangVxArgFromArg(
 	lang *vxlang,
+	path string,
 	prefix string,
 	arg vxarg) string {
 	argname := LangNameFromArg(lang, arg)
@@ -803,7 +813,7 @@ func LangVxArgFromArg(
 	funcvxargname.vxtype = arg.vxtype
 	funcvxargname.isimplement = true
 	output := "" +
-		LangFuncHeader(lang, 2,
+		LangFuncHeader(lang, path, 2,
 			prefix, funcvxargname, 0,
 			LangVar(lang, 3, arg.vxtype,
 				"output",

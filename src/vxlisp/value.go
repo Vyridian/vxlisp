@@ -175,6 +175,7 @@ func ListValueValidateTestFuncs(
 	textblock *vxtextblock,
 	path string) ([]vxvalue, *vxmsgblock) {
 	msgblock := NewMsgBlock("ListValueValidateTestFuncs")
+
 	var listtestvalue []vxvalue
 	for idx, value := range listvalue {
 		subpath := path + "/test" + StringFromInt(idx+1)
@@ -184,7 +185,8 @@ func ListValueValidateTestFuncs(
 			testname := fnc.name
 			switch testname {
 			case "test", "test-false", "test-ne", "test-string", "test-true":
-				testvalue, _, msgs := ValueValidate(value, testresulttype, false, emptygenerictypes, textblock, subpath)
+				testvalue, _, msgs := ValueValidate(
+					value, testresulttype, false, emptygenerictypes, textblock, subpath)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
 				listtestvalue = append(listtestvalue, testvalue)
 			default:
@@ -1017,13 +1019,27 @@ func ValueValidate(
 				msgblock = MsgblockAddBlock(msgblock, msgs)
 			case ":func":
 				fnc := FuncFromValue(value)
-				if fnc.isgeneric && fnc.generictype != nil {
-					if expectedtype.name == "" {
-					} else if fnc.vxtype.isgeneric {
-						fnc.vxtype = expectedtype
+				if fnc.vxtype.isgeneric {
+					switch NameFromFunc(fnc) {
+					case "vx/core/copy":
+						arg := fnc.listarg[0]
+						fnc.vxtype = arg.vxtype
+					default:
+						if fnc.vxtype.isgeneric && expectedtype.name != "" {
+							fnc.vxtype = expectedtype
+						}
 					}
 				}
-				fnc, msgs = FuncValidate(fnc, textblock, subpath)
+				/*
+					if fnc.isgeneric && fnc.generictype != nil {
+						if expectedtype.name == "" {
+						} else if fnc.vxtype.isgeneric {
+							fnc.vxtype = expectedtype
+						}
+					}
+				*/
+				fnc, msgs = FuncValidate(
+					fnc, textblock, subpath)
 				msgblock = MsgblockAddBlock(msgblock, msgs)
 				actualtype = fnc.vxtype
 				switch NameFromFunc(fnc) {

@@ -121,6 +121,7 @@ func NewLangSwift() *vxlang {
 	output.lineend = ""
 	output.classext = ":"
 	output.typeref = "."
+	output.forcemulti = true
 	output.genericcount = 1
 	output.argjoin = ",\n"
 	output.serror = "error"
@@ -651,23 +652,39 @@ func LangNativeFromText(
 func LangFuncCall(
 	lang *vxlang,
 	indent int,
+	prefix string,
 	fnc *vxfunc,
 	params ...string) string {
 	output := ""
-	funcname := fnc.alias
+	funcname := LangFuncName(fnc)
+	if prefix != "" {
+		funcname = prefix + "_" + funcname
+	}
 	switch fnc {
-	case func_f_copy, func_vx_copy:
+	case func_copy:
 		if lang.genericcount != 1 {
 			params = params[1:]
 		}
 	}
+	soutdent := ""
 	sparams := StringFromListStringJoin(params, ", ")
-	if indent > 0 && len(sparams) > 20 {
+	if len(sparams) > 20 {
 		lineindent1 := LangIndent(lang, indent, true)
 		lineindent2 := LangIndent(lang, indent+1, true)
-		sparams = lineindent2 + StringFromListStringJoin(params, ","+lineindent2) + lineindent1
+		sparams = lineindent2 + StringFromListStringJoin(params, ","+lineindent2)
+		soutdent = lineindent1
 	}
-	output += LangPkgNameDot(lang, fnc.pkgname) + funcname + "(" + sparams + ")"
+	output += LangPkgNameDot(lang, fnc.pkgname) + funcname + "(" + sparams + soutdent + ")"
+	return output
+}
+
+func LangFuncCallF(
+	lang *vxlang,
+	indent int,
+	fnc *vxfunc,
+	params ...string) string {
+	output := LangFuncCall(lang, indent,
+		"f", fnc, params...)
 	return output
 }
 
@@ -685,6 +702,109 @@ func LangFuncCallMethod(
 		sparams = lineindent2 + StringFromListStringJoin(params, ","+lineindent2) + lineindent1
 	}
 	output += varname + lang.typeref + funcname + "(" + sparams + ")"
+	return output
+}
+
+func LangFuncCallRaw(
+	lang *vxlang,
+	indent int,
+	fnc *vxfunc,
+	params ...string) string {
+	output := LangFuncCall(lang, indent,
+		"", fnc, params...)
+	return output
+}
+
+func LangFuncCallVariadic(
+	lang *vxlang,
+	indent int,
+	prefix string,
+	fnc *vxfunc,
+	lead []string,
+	rest []string) string {
+	output := ""
+	funcname := fnc.alias
+	if prefix != "" {
+		funcname = prefix + "_" + funcname
+	}
+	switch fnc {
+	case func_copy:
+		if lang.genericcount != 1 {
+			lead = lead[1:]
+		}
+	}
+	lineindent1 := LangIndent(lang, indent, true)
+	lineindent2 := LangIndent(lang, indent+1, true)
+	lineindent3 := LangIndent(lang, indent+2, true)
+	left := ""
+	right := ""
+	switch lang {
+	case langcpp:
+		left = lineindent2 + "{"
+		right = lineindent2 + "}" + lineindent1
+	case langswift:
+		left = lineindent2 + "["
+		right = lineindent2 + "]" + lineindent1
+	default:
+		left = lineindent2 + "// ["
+		right = lineindent2 + "// ]" + lineindent1
+	}
+	if left == "" {
+		lineindent3 = lineindent2
+	}
+	//	soutdent := lineindent1
+	slead := ""
+	srest := ""
+	if len(lead) > 0 {
+		slead = lineindent2 + StringFromListStringJoin(lead, ","+lineindent2)
+	}
+	if len(rest) > 0 {
+		srest = lineindent3 + StringFromListStringJoin(rest, ","+lineindent3)
+	}
+	if len(lead) > 0 && len(rest) > 0 {
+		slead += ","
+	}
+	output += LangPkgNameDot(lang, fnc.pkgname) + funcname + "(" + slead + left + srest + right + ")"
+	return output
+}
+
+func LangFuncCallVariadicF(
+	lang *vxlang,
+	indent int,
+	fnc *vxfunc,
+	lead []string,
+	rest []string) string {
+	return LangFuncCallVariadic(lang, indent,
+		"f", fnc, lead, rest)
+}
+
+func LangFuncCallVariadicRaw(
+	lang *vxlang,
+	indent int,
+	fnc *vxfunc,
+	lead []string,
+	rest []string) string {
+	return LangFuncCallVariadic(lang, indent,
+		"", fnc, lead, rest)
+}
+
+func LangFuncCallVariadicVx(
+	lang *vxlang,
+	indent int,
+	fnc *vxfunc,
+	lead []string,
+	rest []string) string {
+	return LangFuncCallVariadic(lang, indent,
+		"vx", fnc, lead, rest)
+}
+
+func LangFuncCallVx(
+	lang *vxlang,
+	indent int,
+	fnc *vxfunc,
+	params ...string) string {
+	output := LangFuncCall(lang, indent,
+		"vx", fnc, params...)
 	return output
 }
 
@@ -936,7 +1056,6 @@ func LangFuncGenericVars(
 	isinterface bool) string {
 	output := ""
 	if !isinterface {
-		lineindent := LangIndent(lang, indent, true)
 		if !fnc.isgeneric {
 		} else if fnc.generictype != nil {
 			returntype := LangFromName(fnc.generictype.alias)
@@ -957,6 +1076,7 @@ func LangFuncGenericVars(
 					} else if !arg.isgeneric {
 					} else if arg.generictype == nil {
 					} else if returntype == LangFromName(arg.generictype.alias) {
+						lineindent := LangIndent(lang, indent, true)
 						genericname := returntype
 						output += lineindent + "let " + arg.alias + " = Vx_Core.vx_any_from_any(" + genericname + ", " + arg.alias + "_generic)"
 					}
@@ -1193,8 +1313,8 @@ func LangFuncLambdaArgAny(
 		lambdaconvert =
 			LangVal(lang, indent, lambdaarg.vxtype,
 				lambdaargname,
-				LangFuncCall(lang, indent,
-					func_vx_any_from_any,
+				LangFuncCallVx(lang, indent,
+					func_any_from_any,
 					LangTypeT(lang, lambdaarg.vxtype),
 					lambdaargname+"_any"))
 		lambdaargname += "_any"
@@ -1218,8 +1338,8 @@ func LangFuncLambdaFooter(
 	indent int,
 	outputnum int) string {
 	output := ""
-	lineindent1 := LangIndent(lang, indent, true)
-	lineindent2 := LangIndent(lang, indent+1, true)
+	lineindent1 := LangIndent(lang, indent+1, true)
+	lineindent2 := LangIndent(lang, indent+2, true)
 	sreturn := ""
 	lineend := lineindent1 + "}"
 	if outputnum >= 0 {
@@ -1519,7 +1639,10 @@ func LangFuncVxFuncResolve(
 				resolve) +
 			LangVarSet(lang, 4,
 				"output",
-				LangPkgNameDot(lang, "vx/core")+"f_any_from_any("+generictype+", anyoutput)") +
+				LangFuncCallF(lang, 4,
+					func_any_from_any,
+					generictype,
+					"anyoutput")) +
 			LangIfEnd(lang, 3)
 		resolveasync = "" +
 			sindent + "if let fnlocal = self.fn {" +
@@ -1549,7 +1672,10 @@ func LangFuncVxFuncResolve(
 					resolve)+
 					LangVarSet(lang, 4,
 						"output",
-						LangPkgNameDot(lang, "vx/core")+"f_any_from_any("+generictype+", anyoutput)")) +
+						LangFuncCallF(lang, 4,
+							func_any_from_any,
+							generictype,
+							"anyoutput"))) +
 			LangIfEnd(lang, 3)
 	}
 	if resolveasync == "" {
@@ -1571,8 +1697,10 @@ func LangFuncVxFuncResolve(
 					"future", resolve)+
 					LangVarSet(lang, 4,
 						"output",
-						LangPkgNameDot(lang, "vx/core")+
-							"vx_async_from_async(generic_any_1, future)")) +
+						LangFuncCallVx(lang, 4,
+							func_async_from_async,
+							"generic_any_1",
+							"future"))) +
 			LangIfEnd(lang, 3)
 	}
 	if fnc.async {
@@ -2341,58 +2469,66 @@ func LangTestAppBasic(
 	lang *vxlang) string {
 	output := ""
 	sindent := LangIndent(lang, 2, true)
-	test_helloworld := sindent + LangFuncCall(lang, 2,
+	test_async_from_async_fn := sindent + LangFuncCallRaw(lang, 2,
+		func_test_async_from_async_fn) + lang.lineend
+	test_async_new_from_value := sindent + LangFuncCallRaw(lang, 2,
+		func_test_async_new_from_value) + lang.lineend
+	test_helloworld := sindent + LangFuncCallRaw(lang, 2,
 		func_test_helloworld) + lang.lineend
-	test_run_testdescribe := sindent + LangFuncCall(lang, 2,
+	test_list_from_list_async := sindent + LangFuncCallRaw(lang, 2,
+		func_test_list_from_list_async) + lang.lineend
+	test_pathfull_from_file := sindent + LangFuncCallRaw(lang, 2,
+		func_test_pathfull_from_file) + lang.lineend
+	test_read_file := sindent + LangFuncCallRaw(lang, 2,
+		func_test_read_file,
+		"context") + lang.lineend
+	test_run_testdescribe := sindent + LangFuncCallRaw(lang, 2,
 		func_test_run_testdescribe,
 		"context") + lang.lineend
-	test_run_testdescribelist := sindent + LangFuncCall(lang, 2,
+	test_run_testdescribelist := sindent + LangFuncCallRaw(lang, 2,
 		func_test_run_testdescribelist,
 		"context") + lang.lineend
-	test_run_testresult := sindent + LangFuncCall(lang, 2,
+	test_run_testresult := sindent + LangFuncCallRaw(lang, 2,
 		func_test_run_testresult,
 		"context") + lang.lineend
-	test_run_testresult_async := sindent + LangFuncCall(lang, 2,
+	test_run_testresult_async := sindent + LangFuncCallRaw(lang, 2,
 		func_test_run_testresult_async,
 		"context") + lang.lineend
+	test_write_file := sindent + LangFuncCallRaw(lang, 2,
+		func_test_write_file,
+		"context") + lang.lineend
+	test_basics := "" +
+		test_helloworld +
+		test_async_new_from_value +
+		test_async_from_async_fn +
+		test_list_from_list_async +
+		test_pathfull_from_file +
+		test_read_file +
+		test_write_file +
+		test_run_testresult +
+		test_run_testdescribe +
+		test_run_testdescribelist +
+		test_run_testresult_async
 	switch lang {
 	case langcsharp:
 		output = "" +
 			"\n  [Fact]" +
 			"\n  public void test_basics() {" +
-			test_helloworld +
-			"\n    TestLib.test_async_new_from_value()" + lang.lineend +
-			"\n    TestLib.test_async_from_async_fn()" + lang.lineend +
-			"\n    TestLib.test_list_from_list_async()" + lang.lineend +
-			"\n    TestLib.test_pathfull_from_file()" + lang.lineend +
-			"\n    TestLib.test_read_file()" + lang.lineend +
-			"\n    TestLib.test_write_file()" + lang.lineend +
+			test_basics +
 			"\n  }" +
 			"\n"
 	case langjava:
 		output = "" +
 			"\n  @Test" +
 			"\n  void test_basics() {" +
-			test_helloworld +
-			"\n    TestLib.test_async_new_from_value()" + lang.lineend +
-			"\n    TestLib.test_async_from_async_fn()" + lang.lineend +
-			"\n    TestLib.test_list_from_list_async()" + lang.lineend +
-			"\n    TestLib.test_pathfull_from_file()" + lang.lineend +
-			"\n    TestLib.test_read_file()" + lang.lineend +
-			"\n    TestLib.test_write_file()" + lang.lineend +
+			test_basics +
 			"\n  }" +
 			"\n"
 	case langkotlin:
 		output = "" +
 			"\n  @Test" +
 			"\n  fun test_basics() {" +
-			test_helloworld +
-			"\n    TestLib.test_async_new_from_value()" +
-			"\n    TestLib.test_async_from_async_fn()" +
-			"\n    TestLib.test_list_from_list_async()" +
-			"\n    TestLib.test_pathfull_from_file()" +
-			"\n    TestLib.test_read_file()" +
-			"\n    TestLib.test_write_file()" +
+			test_basics +
 			"\n  }" +
 			"\n"
 	case langswift:
@@ -2400,17 +2536,7 @@ func LangTestAppBasic(
 			"\n  public static func test_basics(" +
 			"\n    _ context : Vx_Core.Type_context" +
 			"\n  ) {" +
-			test_helloworld +
-			"\n    TestLib.test_async_new_from_value()" +
-			"\n    TestLib.test_async_from_async_fn()" +
-			"\n    TestLib.test_list_from_list_async()" +
-			"\n    TestLib.test_pathfull_from_file()" +
-			"\n    TestLib.test_read_file()" +
-			"\n    TestLib.test_write_file()" +
-			test_run_testresult +
-			test_run_testdescribe +
-			test_run_testdescribelist +
-			test_run_testresult_async +
+			test_basics +
 			"\n  }" +
 			"\n"
 	}
@@ -2728,18 +2854,6 @@ func LangTestLibLambda(
 	return output
 }
 
-func LangTestLibParamsOpenClose(
-	lang *vxlang) (string, string) {
-	paramsopen := ""
-	paramsclose := ""
-	switch lang {
-	case langcpp:
-		paramsopen = "{"
-		paramsclose = "}"
-	}
-	return paramsopen, paramsclose
-}
-
 func LangTestLibPath(
 	lang *vxlang,
 	spath string) string {
@@ -2788,10 +2902,15 @@ func LangTestPackage(
 			"\n  public void test_" + StringFromStringFindReplace(pkg.name, "/", "_") + "() {" +
 			LangVar(lang, 2, testpackagetype,
 				"testpackage",
-				"Test"+
-					LangPkgName(lang, pkg.name)+
-					"Test.test_package(context)") +
-			"\n    TestLib.run_testpackage_async(testpackage)" + lang.lineend +
+				LangFuncCallMethod(lang, 2,
+					LangTestPackagePrefix(lang, pkg.name),
+					"test_package",
+					"context")) + lang.lineend +
+			"\n    " +
+			LangFuncCallMethod(lang, 2,
+				"TestLib",
+				"run_testpackage_async",
+				"testpackage") + lang.lineend +
 			"\n  }" +
 			"\n"
 	case langjava:
@@ -2857,19 +2976,21 @@ func LangTestPackageOpenClose(
 }
 
 func LangTestPackagePrefix(
-	lang *vxlang) string {
-	output := ""
+	lang *vxlang,
+	pkgname string) string {
+	prefix := ""
 	switch lang {
 	case langcsharp:
-		output = "Test"
+		prefix = "Test"
 	}
+	output := prefix + LangPkgName(lang, pkgname) + "Test"
 	return output
 }
 
 func LangTestPackages(
 	lang *vxlang,
 	project *vxproject,
-	command *vxcommand) (string, string, string) {
+	command *vxcommand) (string, string, []string) {
 	tests := ""
 	imports := ""
 	imports += LangImport(
@@ -2877,7 +2998,6 @@ func LangTestPackages(
 		PackageCoreFromProject(project),
 		imports)
 	listpackage := project.listpackage
-	testpackageprefix := LangTestPackagePrefix(lang)
 	var listtestpackage []string
 	for _, pkg := range listpackage {
 		iscontinue := true
@@ -2894,7 +3014,10 @@ func LangTestPackages(
 		if iscontinue {
 			if pkg.name != "" {
 				imports += LangTestImport(lang, pkg, imports)
-				testpackage := "\n      " + testpackageprefix + LangPkgName(lang, pkg.name) + "Test.test_package(context)"
+				testpackage := LangFuncCallMethod(lang, 0,
+					LangTestPackagePrefix(lang, pkg.name),
+					"test_package",
+					"context")
 				listtestpackage = append(
 					listtestpackage, testpackage)
 				switch lang {
@@ -2905,9 +3028,7 @@ func LangTestPackages(
 			}
 		}
 	}
-	testpackages := StringFromListStringJoin(
-		listtestpackage, ",")
-	return imports, tests, testpackages
+	return imports, tests, listtestpackage
 }
 
 func LangTestResourcesPath(
@@ -2958,9 +3079,11 @@ func LangTestVarTestCases(
 			"\n    ]"
 		output = "\n    object[] testcases = " + vararraylisttestcase + lang.lineend
 	default:
-		vararraylisttestcase := LangPkgNameDot(lang, "vx/core") + "arraylist_from_array(" +
-			"\n      " + strings.Join(testall, ",\n      ") +
-			"\n    )"
+		vararraylisttestcase := "" +
+			LangFuncCallVariadicVx(lang, 2,
+				func_arraylist_from_array,
+				[]string{},
+				testall)
 		output = "" +
 			LangVarCollection(lang, 2, rawlisttype, anytype,
 				"testcases", vararraylisttestcase)
@@ -2970,60 +3093,51 @@ func LangTestVarTestCases(
 
 func LangTestWriteTestSuite(
 	lang *vxlang,
-	testpackages string) string {
+	testpackages []string) string {
 	output := ""
+	body := "" +
+		LangVar(lang, 2, testpackagelisttype,
+			"testpackagelist",
+			LangFuncCallVariadicVx(lang, 2,
+				func_new,
+				[]string{
+					LangTypeT(lang, testpackagelisttype)},
+				testpackages)) +
+		"\n    " +
+		LangFuncCallRaw(lang, 2,
+			func_write_testpackagelist_async,
+			"context",
+			"testpackagelist") + lang.lineend
 	switch lang {
 	case langcsharp:
-		testpackagedata := "" +
-			LangPkgNameDot(lang, "vx/core") + "vx_new(" +
-			"\n      " + LangTypeT(lang, testpackagelisttype) + "," +
-			testpackages +
-			"\n    )"
 		output = "" +
 			"\n  [Fact]" +
 			"\n  public void test_writetestsuite() {" +
-			LangVar(lang, 2, testpackagelisttype,
-				"testpackagelist",
-				testpackagedata) +
-			"\n    TestLib.write_testpackagelist_async(context, testpackagelist)" + lang.lineend +
+			body +
 			"\n  }" +
 			"\n"
 	case langjava:
+		body = StringFromStringFindReplace(body, " Core.", " com.vxlisp.vx.Core.")
+		body = StringFromStringFindReplace(body, " Test.", " com.vxlisp.vx.Test.")
 		output = "" +
 			"\n  @Test" +
 			"\n  @DisplayName(\"writetestsuite\")" +
 			"\n  void test_writetestsuite() {" +
-			"\n    com.vxlisp.vx.Test.Type_testpackagelist testpackagelist = " + LangPkgNameDot(lang, "vx/core") + "vx_new(" +
-			"\n      com.vxlisp.vx.Test.t_testpackagelist," +
-			testpackages +
-			"\n    )" + lang.lineend +
-			"\n    TestLib.write_testpackagelist_async(context, testpackagelist)" + lang.lineend +
+			body +
 			"\n  }"
 	case langkotlin:
 		output = "" +
 			"\n  @Test" +
 			"\n  @DisplayName(\"writetestsuite\")" +
 			"\n  fun test_writetestsuite() {" +
-			"\n    val testpackagelist : vx_test.Type_testpackagelist = " + LangPkgNameDot(lang, "vx/core") + "vx_new(" +
-			"\n      vx_test.t_testpackagelist," +
-			testpackages +
-			"\n    )" +
-			"\n    TestLib.write_testpackagelist_async(context, testpackagelist)" +
+			body +
 			"\n  }"
 	case langswift:
-		testpackagedata := "" +
-			LangPkgNameDot(lang, "vx/core") + "vx_new(" +
-			"\n      " + LangTypeT(lang, testpackagelisttype) + "," +
-			testpackages +
-			"\n    )"
 		output = "" +
 			"\n  public static func test_writetestsuite(" +
 			"\n    _ context : Vx_Core.Type_context" +
 			"\n  ) {" +
-			LangVar(lang, 2, testpackagelisttype,
-				"testpackagelist",
-				testpackagedata) +
-			"\n    TestLib.write_testpackagelist_async(context, testpackagelist)" + lang.lineend +
+			body +
 			"\n  }" +
 			"\n"
 	}
@@ -3185,6 +3299,7 @@ func LangTypeInt(
 
 func LangTypeInterfaceBasics(
 	lang *vxlang,
+	path string,
 	typ *vxtype) string {
 	output := ""
 	isbasics := false
@@ -3199,10 +3314,10 @@ func LangTypeInterfaceBasics(
 	}
 	if isbasics {
 		output += "" +
-			LangTypeVxNew(lang, typ, true) +
-			LangTypeVxCopy(lang, typ, true) +
-			LangTypeVxEmpty(lang, typ, true) +
-			LangTypeVxType(lang, typ, true)
+			LangTypeVxNew(lang, path, typ, true) +
+			LangTypeVxCopy(lang, path, typ, true) +
+			LangTypeVxEmpty(lang, path, typ, true) +
+			LangTypeVxType(lang, path, typ, true)
 	}
 	return output
 }
@@ -3736,14 +3851,15 @@ func LangNativeTypeVxEmpty(
 
 func LangNativeTypeVxMap(
 	lang *vxlang,
+	path string,
 	typ *vxtype) string {
 	funcvxmap := NewFunc()
 	funcvxmap.name = "vx_map"
 	funcvxmap.vxtype = rawmapanytype
 	funcvxmap.isimplement = true
 	copymap := ""
-	outval := LangFuncCall(lang, 4,
-		func_vx_mapimmutable, "map")
+	outval := LangFuncCallVx(lang, 4,
+		func_mapimmutable, "map")
 	switch lang {
 	case langcsharp:
 		convertmap := ""
@@ -3784,7 +3900,7 @@ func LangNativeTypeVxMap(
 	}
 	prefix := LangTypeName(lang, typ)
 	output := "" +
-		LangFuncHeader(lang, 2,
+		LangFuncHeader(lang, path, 2,
 			prefix, funcvxmap, 0,
 			copymap+
 				LangVal(lang, 3,
@@ -3806,35 +3922,36 @@ func LangTypeVxNewVals(
 
 func LangValMapNew(
 	lang *vxlang,
+	indent int,
 	typ *vxtype,
 	value string) string {
 	output := ""
 	switch lang {
 	case langcsharp:
-		output = LangFuncCall(lang, 0,
-			func_vx_mapimmutable,
+		output = LangFuncCallVx(lang, indent,
+			func_mapimmutable,
 			"new Vx.Core.LinkedHashMap<string, "+
 				LangTypeName(lang, typ)+
 				">("+
 				value+
 				")")
 	case langkotlin:
-		output = LangFuncCall(lang, 0,
-			func_vx_mapimmutable,
+		output = LangFuncCallVx(lang, indent,
+			func_mapimmutable,
 			"LinkedHashMap<String, "+
 				LangTypeName(lang, typ)+
 				">("+
 				value+
 				")")
 	case langswift:
-		output = "Vx_Core.Map<" +
-			LangTypeName(lang, typ) +
-			">(" +
-			value +
-			")"
+		output = LangFuncCallMethod(lang, indent,
+			"Vx_Core.Map<"+
+				LangTypeName(lang, typ)+
+				">",
+			value)
 	default:
-		output = LangFuncCall(lang, 0,
-			func_vx_mapimmutable,
+		output = LangFuncCallVx(lang, indent,
+			func_mapimmutable,
 			"new LinkedHashMap<String, "+LangTypeName(lang, typ)+">("+value+")")
 	}
 	return output
@@ -4603,24 +4720,6 @@ func LangVarToString(
 		output = varname + ".toString()"
 	case langswift:
 		output = "Vx_Core.vx_string_from_object(" + varname + ")"
-	}
-	return output
-}
-
-func LangVarVarArg(
-	lang *vxlang,
-	typ *vxtype,
-	varname string) string {
-	output := ""
-	switch lang {
-	case langswift:
-		if typ == rawlisttype || typ.extends == ":list" {
-			output = "[" + varname + "]..."
-		} else {
-			output = varname
-		}
-	default:
-		output = varname
 	}
 	return output
 }

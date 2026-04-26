@@ -125,8 +125,8 @@ func LangConst(
 		doc +
 		LangConstClassHeader(lang, cnst, 1) +
 		staticopen +
-		LangConstVxConstdef(lang, cnst) +
-		LangFuncHeaderStatic(lang, 2,
+		LangConstVxConstdef(lang, path, cnst) +
+		LangFuncHeaderStatic(lang, path, 2,
 			cnstname, funcconstnew, 0, const_new) +
 		staticclose +
 		"\n  }" +
@@ -175,6 +175,7 @@ func LangConstValFromConst(
 
 func LangConstVxConstdef(
 	lang *vxlang,
+	path string,
 	cnst *vxconst) string {
 	cnsttype := cnst.vxtype
 	fnc := NewFunc()
@@ -188,7 +189,7 @@ func LangConstVxConstdef(
 		"\n        " + LangTypeT(lang, cnsttype) +
 		"\n      )"
 	output := "" +
-		LangFuncHeaderStatic(lang, 2,
+		LangFuncHeaderStatic(lang, path, 2,
 			constname, fnc, 0,
 			LangVal(lang, 3,
 				constdeftype, "output", body))
